@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0272ca81-e727-4f4b-b06e-072d70bb5558	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0272ca81-e727-4f4b-b06e-072d70bb5558	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0272ca81-e727-4f4b-b06e-072d70bb5558	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0272ca81-e727-4f4b-b06e-072d70bb5558	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0272ca81-e727-4f4b-b06e-072d70bb5558	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 027484b8-0df5-48b6-b69b-bb4e39c5ba81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0274f286-46a1-4028-878a-88c2146a895c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0274f286-46a1-4028-878a-88c2146a895c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sultai-emissary:f0t0:s1,f:xs:XP:sultai-emissary:f0t0:s1	-	-	-	d864b561c9cb	-	a3a6b92ba45c	-	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0296d57e-e5b9-456f-bb21-eb584adefb4c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gollum, Silent Slinker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 029d08cb-da4d-4f4e-b667-62712af63260	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02a506bd-203f-421c-b72e-e2ba77e922aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02a506bd-203f-421c-b72e-e2ba77e922aa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02a506bd-203f-421c-b72e-e2ba77e922aa	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 02a7d95a-0a45-4aa3-b5b8-01c0b36462d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02a7d95a-0a45-4aa3-b5b8-01c0b36462d8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02a8b849-e708-427c-92fe-9a41bb0ec7fe	cast	cast-resolve	agreed	-	FX	scen	2	0	Friendly Teddy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -181,7 +181,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02d69413-e040-46b1-8f58-69bde666329d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02d69413-e040-46b1-8f58-69bde666329d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 02d6b7f6-1fe0-4a93-8385-69ab160ab732	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02d6b7f6-1fe0-4a93-8385-69ab160ab732	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02d6b7f6-1fe0-4a93-8385-69ab160ab732	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:midnight-entourage:f0t0:s1,f:xs:XP:midnight-entourage:f0t0:s1	-	-	-	d864b561c9cb	-	517adbce14e8	-	-	2026-11-24	xproof
 02d78e76-8151-4851-bb4e-e0a1fa98756f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02d998a6-0afd-4be1-a209-05618fcc43ea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02da2145-0edb-44be-8622-360182a8c25a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -9,8 +9,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 760ede92-a826-4144-9de8-84ba9b8743d1	cast	cast-resolve	agreed	-	X	scen	1	0	Sothera, the Supervoid/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 760ede92-a826-4144-9de8-84ba9b8743d1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sothera, the Supervoid/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 760ede92-a826-4144-9de8-84ba9b8743d1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sothera, the Supervoid/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-761021ce-4559-464e-aa03-85c2fe78e267	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-761021ce-4559-464e-aa03-85c2fe78e267	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+761021ce-4559-464e-aa03-85c2fe78e267	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rishkar-peema-renegade:cast:s1,f:xs:XP:rishkar-peema-renegade:cast:s1	-	-	-	d864b561c9cb	-	f83049ecd5ee	-	-	2026-11-24	xproof
+761021ce-4559-464e-aa03-85c2fe78e267	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rishkar-peema-renegade:cast:s1,f:xs:XP:rishkar-peema-renegade:cast:s1	-	-	-	d864b561c9cb	-	f83049ecd5ee	-	-	2026-11-24	xproof
 7613c50b-4568-4340-b64a-ab427aaffd51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7613c50b-4568-4340-b64a-ab427aaffd51	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7613c50b-4568-4340-b64a-ab427aaffd51	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:rhys-the-exiled:f0t0:s1,f:xs:XP:rhys-the-exiled:f0t0:s1	-	-	-	d864b561c9cb	-	9946f52cd9d6	-	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76f1cc7a-084e-410d-92cb-b8f6ab8da4e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76f1cc7a-084e-410d-92cb-b8f6ab8da4e9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76f1cc7a-084e-410d-92cb-b8f6ab8da4e9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76f22670-6806-4124-8bbb-822ed33d2bda	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76f22670-6806-4124-8bbb-822ed33d2bda	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bitterbow-sharpshooters:cast:s1,f:xs:XP:bitterbow-sharpshooters:cast:s1	-	-	-	d864b561c9cb	-	281340aaaf44	-	-	2026-11-24	xproof
 76f335d0-7f71-4b1a-b60d-73de954cbe2c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76f335d0-7f71-4b1a-b60d-73de954cbe2c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76f405a1-242a-47e6-9aa6-261e49a85b45	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

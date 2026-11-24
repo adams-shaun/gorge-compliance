@@ -58,7 +58,7 @@ c14739b0-5c19-4873-b027-314225a10f7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c14739b0-5c19-4873-b027-314225a10f7b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c14ac951-329d-452b-be75-5c72166cd9c7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c14bd133-ff17-48b3-a1c8-56c93d8c6e43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c14bd133-ff17-48b3-a1c8-56c93d8c6e43	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c14bd133-ff17-48b3-a1c8-56c93d8c6e43	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c14e422b-6412-45ce-8e82-d47ba61557a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c14f973e-b2b0-4d22-87f6-c37f7eb92864	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c14f973e-b2b0-4d22-87f6-c37f7eb92864	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:lowland-oaf:f0a0:s1,f:xs:XP:lowland-oaf:f0a0:s1	-	-	-	d864b561c9cb	-	9f796651921f	-	-	2026-11-24	xproof
@@ -110,7 +110,7 @@ c17d4818-5825-4bff-8fc5-5fd740cc0c70	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	
 c17d5153-cc74-4fbb-9d75-f7ee7b557b0a	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c17d799f-adc9-4c41-87cf-b243b5ea3be1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c17d799f-adc9-4c41-87cf-b243b5ea3be1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c17d799f-adc9-4c41-87cf-b243b5ea3be1	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c17d799f-adc9-4c41-87cf-b243b5ea3be1	f0/a2	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c17d799f-adc9-4c41-87cf-b243b5ea3be1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c17f0e65-e5a3-4113-b782-0b192ab52046	cast	cast-resolve	agreed	-	X	scen	1	0	Killian's Confidence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c17f0e65-e5a3-4113-b782-0b192ab52046	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Killian's Confidence/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -130,17 +130,17 @@ c1994d6a-984d-4b75-9198-1f1822eab6eb	cast	cast-resolve	agreed	-	X	scen	1	0	Wrath
 c1994d6a-984d-4b75-9198-1f1822eab6eb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wrath of the Bloodmane/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c19aaf86-b098-4e7d-af50-9e02ae3cda55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c19aaf86-b098-4e7d-af50-9e02ae3cda55	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c19d2f54-2c3a-4cbe-8328-061d4b51f574	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c19d2f54-2c3a-4cbe-8328-061d4b51f574	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:metalspinner-s-puzzleknot:f0t0:s1,f:xs:XP:metalspinner-s-puzzleknot:f0t0:s1	-	-	-	d864b561c9cb	-	671811c6df10	-	-	2026-11-24	xproof
 c19d2f54-2c3a-4cbe-8328-061d4b51f574	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c19d2f54-2c3a-4cbe-8328-061d4b51f574	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c19d2f54-2c3a-4cbe-8328-061d4b51f574	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:metalspinner-s-puzzleknot:f0t0:s1,f:xs:XP:metalspinner-s-puzzleknot:f0t0:s1	-	-	-	d864b561c9cb	-	671811c6df10	-	-	2026-11-24	xproof
 c19e3560-d304-4d91-aa2a-463d7dbb35bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stupor:cast:s1,f:xs:XP:stupor:cast:s1	-	-	-	25696bf19d5b	-	cb45aeb731c2	-	-	2026-11-24	xproof
 c19f3f00-2c7b-4e85-a034-e65760d9cc13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c19f3f00-2c7b-4e85-a034-e65760d9cc13	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c19f3f00-2c7b-4e85-a034-e65760d9cc13	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c19f79bb-a608-4455-98ef-aac129cea8c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1a3eeef-7ea5-4d58-9e6f-91bbf1c2cc8c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1a3eeef-7ea5-4d58-9e6f-91bbf1c2cc8c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1a3eeef-7ea5-4d58-9e6f-91bbf1c2cc8c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c1a3eeef-7ea5-4d58-9e6f-91bbf1c2cc8c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:consul-s-shieldguard:cast:s1,f:xs:XP:consul-s-shieldguard:cast:s1	-	-	-	d864b561c9cb	-	fa2e1cd1517a	-	-	2026-11-24	xproof
+c1a3eeef-7ea5-4d58-9e6f-91bbf1c2cc8c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:consul-s-shieldguard:cast:s1,f:xs:XP:consul-s-shieldguard:cast:s1	-	-	-	d864b561c9cb	-	fa2e1cd1517a	-	-	2026-11-24	xproof
+c1a3eeef-7ea5-4d58-9e6f-91bbf1c2cc8c	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:consul-s-shieldguard:f0t1:s1,f:xs:XP:consul-s-shieldguard:f0t1:s1	-	-	-	d864b561c9cb	-	fa2e1cd1517a	-	-	2026-11-24	xproof
 c1a9d60f-a469-48f9-8f1c-3ca5ae86bd64	cast	cast-resolve	agreed	-	X	scen	1	0	Campus Crier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c1a9d60f-a469-48f9-8f1c-3ca5ae86bd64	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Campus Crier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c1ad6624-ec54-48ce-b874-528a62e593a9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,8 +186,8 @@ c1e456b6-5d2b-4c42-9464-54a8f9f8f3ba	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c1eb530c-dd36-40ae-8617-6bb6969565e1	cast	cast-resolve	agreed	-	X	scen	1	0	Cultivator's Caravan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c1eb530c-dd36-40ae-8617-6bb6969565e1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cultivator's Caravan/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c1eb530c-dd36-40ae-8617-6bb6969565e1	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Cultivator's Caravan/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c1ebbe89-8976-4ed7-a68a-8b08aac4616c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1ebbe89-8976-4ed7-a68a-8b08aac4616c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c1ebbe89-8976-4ed7-a68a-8b08aac4616c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drownyard-explorers:f0t0:s1,f:xs:XP:drownyard-explorers:f0t0:s1	-	-	-	d864b561c9cb	-	0b6f92314257	-	-	2026-11-24	xproof
+c1ebbe89-8976-4ed7-a68a-8b08aac4616c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:drownyard-explorers:f0t0:s1,f:xs:XP:drownyard-explorers:f0t0:s1	-	-	-	d864b561c9cb	-	0b6f92314257	-	-	2026-11-24	xproof
 c1ebe189-db71-47cd-a763-8cb8c305383a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1ebe189-db71-47cd-a763-8cb8c305383a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1ebe189-db71-47cd-a763-8cb8c305383a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 180286e4-67fa-44d5-9e90-4a4e99c016a7	f1/t1	trigger#1.1	agreed	-	X	scen	1	0	Grub, Storied Matriarch/trigger#1.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1803850e-9499-4bf7-a4d9-6bf655cbe87d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1803850e-9499-4bf7-a4d9-6bf655cbe87d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1803850e-9499-4bf7-a4d9-6bf655cbe87d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1803850e-9499-4bf7-a4d9-6bf655cbe87d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 180919a5-67b2-473a-9b90-a828bdc2477c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180919a5-67b2-473a-9b90-a828bdc2477c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180ba940-2b11-4953-b7ce-74847e1aebfd	cast	cast-resolve	agreed	-	X	scen	1	0	Assemble the Players/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 180d9c48-6d6c-4d20-965a-0ee2ad57f99b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180d9c48-6d6c-4d20-965a-0ee2ad57f99b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 180e1a7e-890d-477c-80a5-da8a5f2857b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-180e1a7e-890d-477c-80a5-da8a5f2857b3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+180e1a7e-890d-477c-80a5-da8a5f2857b3	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 180eda7c-fca2-403b-85cd-8ffebaf9f408	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180eda7c-fca2-403b-85cd-8ffebaf9f408	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180eda7c-fca2-403b-85cd-8ffebaf9f408	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

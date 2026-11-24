@@ -63,16 +63,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 983f4fde-ab04-44f0-a294-c3b472de0b19	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 98423a34-f044-4811-b288-56981d604b6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 984336a7-85bd-4549-9771-03a0c2367db0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98441834-7da0-4d9f-88a4-a342a9b2a4c3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98441834-7da0-4d9f-88a4-a342a9b2a4c3	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98441834-7da0-4d9f-88a4-a342a9b2a4c3	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+98441834-7da0-4d9f-88a4-a342a9b2a4c3	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+98441834-7da0-4d9f-88a4-a342a9b2a4c3	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+98441834-7da0-4d9f-88a4-a342a9b2a4c3	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9845fb27-3a1e-4cad-b30b-2c7a9dbb6209	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9845fb27-3a1e-4cad-b30b-2c7a9dbb6209	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9845fb27-3a1e-4cad-b30b-2c7a9dbb6209	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9849c743-9492-4a1b-83bf-1be54614b85f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9849c743-9492-4a1b-83bf-1be54614b85f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9849c743-9492-4a1b-83bf-1be54614b85f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9849c743-9492-4a1b-83bf-1be54614b85f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9849c743-9492-4a1b-83bf-1be54614b85f	cast	cast	agreed	-	F	start	4	0	f:xs:XP:multiform-wonder:cast:s1	-	-	-	d864b561c9cb	-	253f966a7bea	-	-	2026-11-24	xproof
+9849c743-9492-4a1b-83bf-1be54614b85f	f0/a0	Pump	agreed	-	F	start	4	0	f:xs:XP:multiform-wonder:cast:s1	-	-	-	d864b561c9cb	-	253f966a7bea	-	-	2026-11-24	xproof
+9849c743-9492-4a1b-83bf-1be54614b85f	f0/a1	GenericChoice	agreed	-	F	start	4	0	f:xs:XP:multiform-wonder:cast:s1	-	-	-	d864b561c9cb	-	253f966a7bea	-	-	2026-11-24	xproof
+9849c743-9492-4a1b-83bf-1be54614b85f	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:multiform-wonder:cast:s1	-	-	-	d864b561c9cb	-	253f966a7bea	-	-	2026-11-24	xproof
 984e0426-10ba-4c17-b26e-ce21100ec398	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 984e763c-5a83-4231-8ec4-1be76846479a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:karametra-god-of-harvests:cast:s1,f:xs:XP:karametra-god-of-harvests:cast:s1	-	-	-	d864b561c9cb	-	7343f491308b	-	-	2026-11-24	xproof
 984e763c-5a83-4231-8ec4-1be76846479a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

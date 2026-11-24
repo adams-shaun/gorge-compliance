@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-93491d5c-8579-42ed-a700-e5c6f4238dea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+93491d5c-8579-42ed-a700-e5c6f4238dea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barricade-breaker:cast:s1,f:xs:XP:barricade-breaker:cast:s1	-	-	-	d864b561c9cb	-	707f82d447af	-	-	2026-11-24	xproof
 934c50aa-7d2e-4c9e-b91b-1e8c4055e1c6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 934d42b2-5dca-4a29-82d3-6778796178d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 934e2634-4b1c-4d92-b4d6-9241620f3770	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:splitskin-doll:f0t0:s2,f:xs:XP:splitskin-doll:f0t0:s2	-	-	-	e07cf3a05ba5	-	be76c4a2b3cd	-	-	2026-11-24	xproof
@@ -86,9 +86,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9370f6bf-d6a0-4c5b-828f-7229f563cc07	cast	cast-resolve	agreed	-	X	scen	1	0	Jenova, Ancient Calamity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9370f6bf-d6a0-4c5b-828f-7229f563cc07	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jenova, Ancient Calamity/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9370f6bf-d6a0-4c5b-828f-7229f563cc07	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Jenova, Ancient Calamity/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9373a176-a5e9-4fdc-906b-bc6aef657e5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9373a176-a5e9-4fdc-906b-bc6aef657e5b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9373a176-a5e9-4fdc-906b-bc6aef657e5b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9373a176-a5e9-4fdc-906b-bc6aef657e5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-inspector:f0t0:s1,f:xs:XP:aether-inspector:f0t0:s1	-	-	-	d864b561c9cb	-	84560cfc83ba	-	-	2026-11-24	xproof
+9373a176-a5e9-4fdc-906b-bc6aef657e5b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aether-inspector:f0t0:s1,f:xs:XP:aether-inspector:f0t0:s1	-	-	-	d864b561c9cb	-	84560cfc83ba	-	-	2026-11-24	xproof
+9373a176-a5e9-4fdc-906b-bc6aef657e5b	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:aether-inspector:f0t1:s1,f:xs:XP:aether-inspector:f0t1:s1	-	-	-	d864b561c9cb	-	84560cfc83ba	-	-	2026-11-24	xproof
 9376ccf6-1b18-44e9-8f9d-c5ad38927e2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9376ccf6-1b18-44e9-8f9d-c5ad38927e2f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 937a04c2-41be-4ff3-8992-6628a9ee9792	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93d7f6e7-b6b0-48f3-891a-73970826af3b	land	play-land	agreed	-	X	scen	1	0	Bajor/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 93da4a35-d2d8-476c-ad03-318101c0118b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93dd5f2e-aa13-4616-bfe6-466524b274ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-93dd5f2e-aa13-4616-bfe6-466524b274ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+93dd5f2e-aa13-4616-bfe6-466524b274ff	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:gilded-cerodon:f0t0:s1,f:xs:XP:gilded-cerodon:f0t0:s1	-	-	-	d864b561c9cb	-	4624c4888283	-	-	2026-11-24	xproof
 93df61b5-6abe-4603-9a6e-cba90a834173	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93e0fd89-8a0d-4d97-aa22-aafe83d53515	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93e1d3a6-e12f-4a0a-be0f-fbf568d89f1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -200,8 +200,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93ef3098-d1c0-4b05-9d28-1afa133bfc4f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93f37df7-e1c4-457b-bc22-00c49b0c4f79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necrogen-scudder:f0t0:s1,f:xs:XP:necrogen-scudder:f0t0:s1	-	-	-	d864b561c9cb	-	caac11e97b37	-	-	2026-11-24	xproof
 93f37df7-e1c4-457b-bc22-00c49b0c4f79	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:necrogen-scudder:f0t0:s1,f:xs:XP:necrogen-scudder:f0t0:s1	-	-	-	d864b561c9cb	-	caac11e97b37	-	-	2026-11-24	xproof
-93f817c7-2a3d-4346-94c1-3ba8bafb485d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-93f817c7-2a3d-4346-94c1-3ba8bafb485d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+93f817c7-2a3d-4346-94c1-3ba8bafb485d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kujar-seedsculptor:f0t0:s1,f:xs:XP:kujar-seedsculptor:f0t0:s1	-	-	-	d864b561c9cb	-	2f7136aa8aa2	-	-	2026-11-24	xproof
+93f817c7-2a3d-4346-94c1-3ba8bafb485d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kujar-seedsculptor:f0t0:s1,f:xs:XP:kujar-seedsculptor:f0t0:s1	-	-	-	d864b561c9cb	-	2f7136aa8aa2	-	-	2026-11-24	xproof
 93fbf4a7-4283-4eec-afde-6780149b56df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93fbf4a7-4283-4eec-afde-6780149b56df	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93fbf4a7-4283-4eec-afde-6780149b56df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

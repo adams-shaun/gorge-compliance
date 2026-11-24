@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 870185fc-7b05-47d3-95ff-97fbf12796d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 870185fc-7b05-47d3-95ff-97fbf12796d4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-870185fc-7b05-47d3-95ff-97fbf12796d4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+870185fc-7b05-47d3-95ff-97fbf12796d4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 87038d1b-0fa9-4604-b119-1de56db30144	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyromancer-s-assault:cast:s1,f:xs:XP:pyromancer-s-assault:cast:s1	-	-	-	d864b561c9cb	-	09493a05f7ce	-	-	2026-11-24	xproof
 87038d1b-0fa9-4604-b119-1de56db30144	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 87050537-99c9-4993-a770-4329b2e749e4	cast	cast-resolve	agreed	-	X	scen	1	0	Cid, Timeless Artificer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -10,9 +10,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87050537-99c9-4993-a770-4329b2e749e4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cid, Timeless Artificer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8709b5b1-ef9e-45b2-bf4f-ef4c4d613dcd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8709b5b1-ef9e-45b2-bf4f-ef4c4d613dcd	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-870ca989-0e72-4e74-9570-57e129298f2e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-870ca989-0e72-4e74-9570-57e129298f2e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-870ca989-0e72-4e74-9570-57e129298f2e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+870ca989-0e72-4e74-9570-57e129298f2e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:drunau-corpse-trawler:cast:s1,f:xs:XP:drunau-corpse-trawler:cast:s1	-	-	-	d864b561c9cb	-	b2ddb9b459fe	-	-	2026-11-24	xproof
+870ca989-0e72-4e74-9570-57e129298f2e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:drunau-corpse-trawler:f0a0:s1,f:xs:XP:drunau-corpse-trawler:f0a0:s1	-	-	-	d864b561c9cb	-	b2ddb9b459fe	-	-	2026-11-24	xproof
+870ca989-0e72-4e74-9570-57e129298f2e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:drunau-corpse-trawler:cast:s1,f:xs:XP:drunau-corpse-trawler:cast:s1	-	-	-	d864b561c9cb	-	b2ddb9b459fe	-	-	2026-11-24	xproof
 870deab4-8570-40e9-aeda-ac3726cebb84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 870deab4-8570-40e9-aeda-ac3726cebb84	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 870e199e-1d54-44ec-8e24-f24af93ae9c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malakir-bloodwitch:f0t0:s1,f:xs:XP:malakir-bloodwitch:f0t0:s1	-	-	-	8a1b1a193ec0	-	7bf5feb708ef	-	-	2026-11-24	xproof
@@ -152,8 +152,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87a44a87-a2a5-4193-a163-e4846e5b8387	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 87a4caa4-cb08-4a0c-b57a-d6d8474b1f5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87a4caa4-cb08-4a0c-b57a-d6d8474b1f5e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-87a72c3d-e787-4dd8-b934-4fff4573af6c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87a72c3d-e787-4dd8-b934-4fff4573af6c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+87a72c3d-e787-4dd8-b934-4fff4573af6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:freejam-regent:cast:s1,f:xs:XP:freejam-regent:cast:s1	-	-	-	d864b561c9cb	-	f743a9981394	-	-	2026-11-24	xproof
+87a72c3d-e787-4dd8-b934-4fff4573af6c	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:freejam-regent:f0a0:s1,f:xs:XP:freejam-regent:f0a0:s1	-	-	-	d864b561c9cb	-	f743a9981394	-	-	2026-11-24	xproof
 87a77482-f286-4fb1-b179-85b2095bb768	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87a77482-f286-4fb1-b179-85b2095bb768	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87a82441-9dfb-49bd-8b9e-eaab2c552843	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -76,9 +76,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f4e300a-ec5c-42f3-a97b-d58e62abe22b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f4e300a-ec5c-42f3-a97b-d58e62abe22b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f4e300a-ec5c-42f3-a97b-d58e62abe22b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f523026-beda-4549-96c0-e92108170261	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f523026-beda-4549-96c0-e92108170261	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f523026-beda-4549-96c0-e92108170261	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f523026-beda-4549-96c0-e92108170261	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thriving-ibex:f0t0:s1,f:xs:XP:thriving-ibex:f0t0:s1	-	-	-	d864b561c9cb	-	c20a8d27cffe	-	-	2026-11-24	xproof
+3f523026-beda-4549-96c0-e92108170261	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thriving-ibex:f0t0:s1,f:xs:XP:thriving-ibex:f0t0:s1	-	-	-	d864b561c9cb	-	c20a8d27cffe	-	-	2026-11-24	xproof
+3f523026-beda-4549-96c0-e92108170261	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:thriving-ibex:f0t1:s1,f:xs:XP:thriving-ibex:f0t1:s1	-	-	-	d864b561c9cb	-	c20a8d27cffe	-	-	2026-11-24	xproof
 3f53fd3e-9116-4599-81df-a9390461b549	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f53fd3e-9116-4599-81df-a9390461b549	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f599e15-cbc5-4170-b6b4-efd16aa222ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -102,14 +102,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f6df152-a0b9-441a-a8aa-8bb77f70d491	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jedit-s-dragoons:f0t0:s1,f:xs:XP:jedit-s-dragoons:f0t0:s1	-	-	-	64a08ba7d913	-	56452d810244	-	-	2026-11-24	xproof
 3f6f4c98-ed7e-4fb1-8bfe-4210a39f77f2	cast	cast-resolve	agreed	-	X	scen	1	0	Unstoppable Plan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f6f4c98-ed7e-4fb1-8bfe-4210a39f77f2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Unstoppable Plan/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3f79603a-3173-404e-8c69-b2254c1270dc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f79603a-3173-404e-8c69-b2254c1270dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dune-beetle:cast:s1,f:xs:XP:dune-beetle:cast:s1	-	-	-	d864b561c9cb	-	02d3a1051307	-	-	2026-11-24	xproof
 3f79780a-accd-4782-94a8-a6e71fb3ada7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:evil-eye-of-orms-by-gore:cast:s1,f:xs:XP:evil-eye-of-orms-by-gore:cast:s1	-	-	-	25696bf19d5b	-	dbe0ad4a1078	-	-	2026-11-24	xproof
 3f806353-592e-431c-a7dd-a4c64034f94d	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 3f806353-592e-431c-a7dd-a4c64034f94d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 3f85b92d-7212-4fc7-a5e8-6350e1acfdd3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:vedalken-plotter:cast:s1,f:xs:XP:vedalken-plotter:cast:s1	-	-	-	77494c1ce129	-	4e9f29cea3aa	-	-	2026-11-24	xproof
 3f85b92d-7212-4fc7-a5e8-6350e1acfdd3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:vedalken-plotter:cast:s1,f:xs:XP:vedalken-plotter:cast:s1	-	-	-	77494c1ce129	-	4e9f29cea3aa	-	-	2026-11-24	xproof
 3f86e6c6-fca5-43e9-88cc-4546cdd5f0ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f86e6c6-fca5-43e9-88cc-4546cdd5f0ec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f86e6c6-fca5-43e9-88cc-4546cdd5f0ec	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3f8a8650-0e38-4926-8f48-526351e6a863	cast	cast-resolve	agreed	-	X	scen	1	0	Zaffai and the Tempests/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f8a8650-0e38-4926-8f48-526351e6a863	static#0.0	static#0.0	agreed	-	X	scen	1	0	Zaffai and the Tempests/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f8b189e-775c-41ad-839a-153a3200c708	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

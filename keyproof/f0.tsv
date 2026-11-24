@@ -5,8 +5,8 @@ f00dc657-4695-497d-aad3-af7b6a3ccf94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f00dc657-4695-497d-aad3-af7b6a3ccf94	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f00dd41d-4b11-491a-9e7b-12245092ab77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f00dd41d-4b11-491a-9e7b-12245092ab77	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f0140f00-5414-493b-962d-33312d49f6ea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f0140f00-5414-493b-962d-33312d49f6ea	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f0140f00-5414-493b-962d-33312d49f6ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haze-of-pollen:cast:s1,f:xs:XP:haze-of-pollen:cast:s1	-	-	-	d864b561c9cb	-	768de572e7ac	-	-	2026-11-24	xproof
+f0140f00-5414-493b-962d-33312d49f6ea	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f014b1a1-20ef-475c-bf83-f1a82e68ab97	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:fiery-fall:cast:s1,f:xs:XP:fiery-fall:cast:s1	-	-	-	8a1b1a193ec0	-	88466860137f	-	-	2026-11-24	xproof
 f014b1a1-20ef-475c-bf83-f1a82e68ab97	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:fiery-fall:cast:s2,f:xs:XP:fiery-fall:cast:s2	-	-	-	8a1b1a193ec0	-	88466860137f	-	-	2026-11-24	xproof
 f0163420-2f91-493c-bad4-2cd33e9856bf	cast	cast-resolve	agreed	-	X	scen	1	0	Tome Blast/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -20,8 +20,8 @@ f02557b0-f422-48cb-875e-2c814c39967d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f02557b0-f422-48cb-875e-2c814c39967d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:hellrider:f0t0:s1,f:xs:XP:hellrider:f0t0:s1	-	-	-	d864b561c9cb	-	e088034bcb0b	-	-	2026-11-24	xproof
 f025c1da-734e-4cbb-99d8-9d700d6edbde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f02682f0-26c0-4032-9df3-273b6a45d0a8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f02a4cbf-f0bb-4bc7-99c2-6afa1b41ebb8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f02a4cbf-f0bb-4bc7-99c2-6afa1b41ebb8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f02a4cbf-f0bb-4bc7-99c2-6afa1b41ebb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hazoret-s-monument:cast:s1,f:xs:XP:hazoret-s-monument:cast:s1	-	-	-	d864b561c9cb	-	b94b62edb962	-	-	2026-11-24	xproof
+f02a4cbf-f0bb-4bc7-99c2-6afa1b41ebb8	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f02ad6fa-7a82-471a-979e-0bb9ba866ef6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f02ad6fa-7a82-471a-979e-0bb9ba866ef6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f034137e-c19f-48af-a2f2-f767bf87a275	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -89,7 +89,7 @@ f086a63c-0c62-4674-bd27-82e7aed12b1a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07
 f086a63c-0c62-4674-bd27-82e7aed12b1a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f086a82d-8dbe-4d02-a076-03789704e9d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f086a82d-8dbe-4d02-a076-03789704e9d4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f086a82d-8dbe-4d02-a076-03789704e9d4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f086a82d-8dbe-4d02-a076-03789704e9d4	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f0881756-de74-43b1-a9fe-c2fde93faf5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f088817a-570d-4480-bc59-f2ad6675a71b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f088817a-570d-4480-bc59-f2ad6675a71b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,8 +150,8 @@ f0d1636e-6f80-44fe-869a-1749ab249815	cast	cast-resolve	agreed	-	X	scen	1	0	Molte
 f0e7d147-379e-45b7-bfc4-d926637e060d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f0e7d147-379e-45b7-bfc4-d926637e060d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f0e85b74-12fb-4d63-853e-7a3f41f731b4	cast	cast-resolve	agreed	-	FX	scen	2	0	Maximum Overdrive/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f0ea953a-10c3-4ec7-8f03-f7aed75dbb94	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f0ea953a-10c3-4ec7-8f03-f7aed75dbb94	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f0ea953a-10c3-4ec7-8f03-f7aed75dbb94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:murderer-s-axe:cast:s1,f:xs:XP:murderer-s-axe:cast:s1	-	-	-	d864b561c9cb	-	025abd1daedd	-	-	2026-11-24	xproof
+f0ea953a-10c3-4ec7-8f03-f7aed75dbb94	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f0ead7f5-5c82-40fd-8e89-3e3c5d31fbad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f0ead7f5-5c82-40fd-8e89-3e3c5d31fbad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f0ead7f5-5c82-40fd-8e89-3e3c5d31fbad	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

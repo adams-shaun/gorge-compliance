@@ -37,9 +37,9 @@ ed2ef95e-8851-4226-9c63-4c19ea323b82	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lead
 ed2ef95e-8851-4226-9c63-4c19ea323b82	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Lead Pipe/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ed2ef95e-8851-4226-9c63-4c19ea323b82	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lead Pipe/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ed2ef95e-8851-4226-9c63-4c19ea323b82	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lead Pipe/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ed2f3339-5c3e-473f-b08e-58288c4ad9c2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ed2f3339-5c3e-473f-b08e-58288c4ad9c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ed2f3339-5c3e-473f-b08e-58288c4ad9c2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ed2f3339-5c3e-473f-b08e-58288c4ad9c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:niblis-of-frost:cast:s1,f:xs:XP:niblis-of-frost:cast:s1	-	-	-	d864b561c9cb	-	d70be8148fd6	-	-	2026-11-24	xproof
+ed2f3339-5c3e-473f-b08e-58288c4ad9c2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ed2f3339-5c3e-473f-b08e-58288c4ad9c2	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ed347609-15f9-4d57-9523-63a33a9dccbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed347609-15f9-4d57-9523-63a33a9dccbc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed3652da-0127-4c9e-9913-f20becdd0ba9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -49,7 +49,7 @@ ed36b1f6-2922-46a9-b48d-b9ebedb9a142	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 ed37ce4e-d84e-442a-ac4e-0512f358c138	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed3990cd-fa67-427b-bbe4-a2b1942e9be2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed3990cd-fa67-427b-bbe4-a2b1942e9be2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ed3990cd-fa67-427b-bbe4-a2b1942e9be2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ed3990cd-fa67-427b-bbe4-a2b1942e9be2	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ed3b80eb-8915-4428-89b8-90f4278f2733	cast	cast-resolve	agreed	-	X	scen	1	0	La'An Noonien-Singh, Security/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ed3b80eb-8915-4428-89b8-90f4278f2733	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 ed416ae3-9291-4e1e-ad83-2f14138e9e47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ edc961bd-5ec9-47ed-9d34-e26a48c13702	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 edc961bd-5ec9-47ed-9d34-e26a48c13702	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 edcb0248-e7c9-4df9-8dba-982048654fd2	cast	cast-resolve	agreed	-	FX	scen	2	0	Archenemy's Charm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 edce515d-828e-49ae-8651-6d14f7470a62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-edce515d-828e-49ae-8651-6d14f7470a62	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+edce515d-828e-49ae-8651-6d14f7470a62	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 edcf36b4-dea4-4314-94da-e0ee5e30cd37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 edd3a3ea-6bde-408c-8b16-85ed3cc312b2	cast	cast-resolve	agreed	-	X	scen	1	0	Iguana Parrot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 edd3a3ea-6bde-408c-8b16-85ed3cc312b2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Iguana Parrot/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

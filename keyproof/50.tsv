@@ -150,9 +150,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50ace222-57f1-477f-9e06-155d7b403512	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Realm-Scorcher Hellkite/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Realm-Scorcher Hellkite/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50b14338-9318-4327-a1dd-c0ef38903cc4	cast	cast-resolve	agreed	-	FX	scen	2	0	Skysovereign, Consul Flagship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+50b14338-9318-4327-a1dd-c0ef38903cc4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skysovereign-consul-flagship:f0t0:s1,f:xs:XP:skysovereign-consul-flagship:f0t0:s1	-	-	-	d864b561c9cb	-	5f3513b6f706	-	-	2026-11-24	xproof
 50b14338-9318-4327-a1dd-c0ef38903cc4	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Skysovereign, Consul Flagship/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-50b14338-9318-4327-a1dd-c0ef38903cc4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+50b14338-9318-4327-a1dd-c0ef38903cc4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skysovereign-consul-flagship:f0t0:s1,f:xs:XP:skysovereign-consul-flagship:f0t0:s1	-	-	-	d864b561c9cb	-	5f3513b6f706	-	-	2026-11-24	xproof
 50b14338-9318-4327-a1dd-c0ef38903cc4	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Skysovereign, Consul Flagship/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 50b931f9-f843-4129-a4c8-2bb7a051c063	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50bbbb39-4709-478f-bb51-716c7e4f8323	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50bf5af6-50d7-4dea-936e-508e24db0a03	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50c038a4-6546-4a15-a117-176849edaa3d	cast	cast-resolve	agreed	-	X	scen	1	0	Raccoon Rallier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50c038a4-6546-4a15-a117-176849edaa3d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Raccoon Rallier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-50c13b38-9865-4c60-b2df-3fd6e3a9c6a2	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50c13b38-9865-4c60-b2df-3fd6e3a9c6a2	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+50c13b38-9865-4c60-b2df-3fd6e3a9c6a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inferno-jet:cast:s1,f:xs:XP:inferno-jet:cast:s1	-	-	-	d864b561c9cb	-	3a621f16a1ff	-	-	2026-11-24	xproof
+50c13b38-9865-4c60-b2df-3fd6e3a9c6a2	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 50c477c1-8457-40f6-bba9-1a4ba0862178	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50c477c1-8457-40f6-bba9-1a4ba0862178	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50c52320-9f84-4655-a91a-e09b71f9025c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 245934d9-c7b7-4a97-9c56-7760d934ef27	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245aa786-d607-414f-ab55-b003b2b9faf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245aa786-d607-414f-ab55-b003b2b9faf4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-245aa786-d607-414f-ab55-b003b2b9faf4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+245aa786-d607-414f-ab55-b003b2b9faf4	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 245b62a8-b606-4106-87c3-a60ce3e16906	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245b62a8-b606-4106-87c3-a60ce3e16906	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245c3681-fc47-47fe-b6e5-34c96315c135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -122,8 +122,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24982bfe-5276-44a8-99a5-43b497ebf51f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24982bfe-5276-44a8-99a5-43b497ebf51f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 249b722e-2f4c-4884-bebb-e967f4fd3238	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-249e18a4-12c5-4836-a172-cb4e9b9cb7d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-249e18a4-12c5-4836-a172-cb4e9b9cb7d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+249e18a4-12c5-4836-a172-cb4e9b9cb7d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:naga-oracle:f0t0:s1,f:xs:XP:naga-oracle:f0t0:s1	-	-	-	d864b561c9cb	-	e10a45b221d7	-	-	2026-11-24	xproof
+249e18a4-12c5-4836-a172-cb4e9b9cb7d7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:naga-oracle:f0t0:s1,f:xs:XP:naga-oracle:f0t0:s1	-	-	-	d864b561c9cb	-	e10a45b221d7	-	-	2026-11-24	xproof
 249fdd3e-376c-4ec2-a612-4353e0e61ee2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 249fdd3e-376c-4ec2-a612-4353e0e61ee2	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 249fdd3e-376c-4ec2-a612-4353e0e61ee2	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

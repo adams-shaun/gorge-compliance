@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 177b7fe4-8565-4631-b4d9-8b2b4282f3ac	land	play-land	agreed	-	X	scen	1	0	Oakhollow Village/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 177c1f2d-abb9-40ea-afe4-141b08fdeabb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 177c1f2d-abb9-40ea-afe4-141b08fdeabb	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:visionary-augmenter:cast:s1,f:xs:XP:visionary-augmenter:cast:s1	-	-	-	d864b561c9cb	-	5a348390c833	-	-	2026-11-24	xproof
 1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17841133-c526-42a3-a1d2-a874e9bb7138	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17841133-c526-42a3-a1d2-a874e9bb7138	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -174,8 +174,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17c7878f-891f-40a6-80a7-47fcc7b8e29b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17c934a7-3480-4309-a217-ca2550538ae7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17c934a7-3480-4309-a217-ca2550538ae7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17cbeec4-b180-48e9-9156-42271f918a9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17cbeec4-b180-48e9-9156-42271f918a9d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17cbeec4-b180-48e9-9156-42271f918a9d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stromkirk-mentor:f0t0:s1,f:xs:XP:stromkirk-mentor:f0t0:s1	-	-	-	d864b561c9cb	-	e61cf98770c0	-	-	2026-11-24	xproof
+17cbeec4-b180-48e9-9156-42271f918a9d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stromkirk-mentor:f0t0:s1,f:xs:XP:stromkirk-mentor:f0t0:s1	-	-	-	d864b561c9cb	-	e61cf98770c0	-	-	2026-11-24	xproof
 17ce2c17-b69b-4ebf-9c3c-c64e771af101	cast	cast-resolve	agreed	-	X	scen	1	0	Alesha, Who Laughs at Fate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17ce2c17-b69b-4ebf-9c3c-c64e771af101	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Alesha, Who Laughs at Fate/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17ce2c17-b69b-4ebf-9c3c-c64e771af101	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Alesha, Who Laughs at Fate/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

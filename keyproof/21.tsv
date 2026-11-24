@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2121bcb4-f5fe-447f-9112-c7e5b5c45baf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2121bcb4-f5fe-447f-9112-c7e5b5c45baf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21254bdb-7b1f-4ac6-8fdd-f0ac2c35f47d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-21254bdb-7b1f-4ac6-8fdd-f0ac2c35f47d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+21254bdb-7b1f-4ac6-8fdd-f0ac2c35f47d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2127a245-d664-45cb-8ed1-0024de1a10df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2127a245-d664-45cb-8ed1-0024de1a10df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 212d058b-69c6-4dc2-8c93-bdfe26dc2ffe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hammer-of-purphoros:cast:s1,f:xs:XP:hammer-of-purphoros:cast:s1	-	-	-	d864b561c9cb	-	68a39b111114	-	-	2026-11-24	xproof
@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 21aaecc7-b9ec-4068-8e47-4dffaa12f102	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Broadcast Rambler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 21aaecc7-b9ec-4068-8e47-4dffaa12f102	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21ad3d41-54e9-48f9-b150-be65f52ae464	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-21ad3d41-54e9-48f9-b150-be65f52ae464	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+21ad3d41-54e9-48f9-b150-be65f52ae464	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 21ad7067-3210-42d6-9009-0784b2834227	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21ad7067-3210-42d6-9009-0784b2834227	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21af6b08-1dd1-4e7f-be7b-cc8e70c578c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -69,7 +69,7 @@ af4684cf-f109-44be-adfb-7c551a36635e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 af4684cf-f109-44be-adfb-7c551a36635e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af4b5853-ae60-48c9-9be1-bf121fa2e03d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af4b67c5-53dc-4e4d-9ec4-fa51cc3cd49a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af4d3489-6bba-4538-928c-50c9a7073813	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af4d3489-6bba-4538-928c-50c9a7073813	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hazoret-s-undying-fury:cast:s1,f:xs:XP:hazoret-s-undying-fury:cast:s1	-	-	-	d864b561c9cb	-	d4a43b473957	-	-	2026-11-24	xproof
 af5302d3-782b-4d92-bc97-dccbfc76ac95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af55096c-af6b-479f-8257-144e596e89d8	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:vindictive-mob:cast:s1,f:xs:XP:vindictive-mob:cast:s1	-	-	-	77494c1ce129	-	3dfb8caa641f	-	-	2026-11-24	xproof
 af55096c-af6b-479f-8257-144e596e89d8	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:vindictive-mob:cast:s1,f:xs:XP:vindictive-mob:cast:s1	-	-	-	77494c1ce129	-	3dfb8caa641f	-	-	2026-11-24	xproof
@@ -86,8 +86,8 @@ af6438b9-3fde-45c9-af69-dff686c1e0de	cast	cast-resolve	agreed	-	X	scen	1	0	Virtu
 af6438b9-3fde-45c9-af69-dff686c1e0de	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Virtue of Courage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af698bd5-5f56-4d2a-9f02-8c3e781210cd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af698bd5-5f56-4d2a-9f02-8c3e781210cd	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af698bd5-5f56-4d2a-9f02-8c3e781210cd	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af698bd5-5f56-4d2a-9f02-8c3e781210cd	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af698bd5-5f56-4d2a-9f02-8c3e781210cd	f0/a2	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+af698bd5-5f56-4d2a-9f02-8c3e781210cd	land	land	agreed	-	FX	start	2	0	x:xs:XP:ifnir-deadlands:land:s1,f:xs:XP:ifnir-deadlands:land:s1	-	-	-	d864b561c9cb	-	34fbc6c74a52	-	-	2026-11-24	xproof
 af6cfc23-b64b-4c8a-94b4-69d2b01cb3b9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af6cfc23-b64b-4c8a-94b4-69d2b01cb3b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af6d6844-c612-4731-86da-59a8fa02956b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ afacc200-16ff-40f3-9d43-268438131d24	cast	cast-resolve	agreed	-	X	scen	1	0	Kella
 afacc200-16ff-40f3-9d43-268438131d24	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kellan, the Kid/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 afacc200-16ff-40f3-9d43-268438131d24	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kellan, the Kid/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 afacc200-16ff-40f3-9d43-268438131d24	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kellan, the Kid/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-afacd2b1-1733-4b28-b834-71a31149fa00	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afacd2b1-1733-4b28-b834-71a31149fa00	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+afacd2b1-1733-4b28-b834-71a31149fa00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spire-patrol:f0t0:s1,f:xs:XP:spire-patrol:f0t0:s1	-	-	-	d864b561c9cb	-	e2dc31fe6b49	-	-	2026-11-24	xproof
+afacd2b1-1733-4b28-b834-71a31149fa00	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spire-patrol:f0t0:s1,f:xs:XP:spire-patrol:f0t0:s1	-	-	-	d864b561c9cb	-	e2dc31fe6b49	-	-	2026-11-24	xproof
 afaef788-34d1-460b-b884-9d7ae6ddeb18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toxic-deluge:cast:s1,f:xs:XP:toxic-deluge:cast:s1	-	-	-	d864b561c9cb	-	bad3021bf2b7	-	-	2026-11-24	xproof
 afb0c14c-41ac-4536-bfce-f1c36066b278	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chained-to-the-rocks:f0t0:s1,f:xs:XP:chained-to-the-rocks:f0t0:s1	-	-	-	d864b561c9cb	-	a290929b1abf	-	-	2026-11-24	xproof
 afb0c14c-41ac-4536-bfce-f1c36066b278	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chained-to-the-rocks:f0t0:s1,f:xs:XP:chained-to-the-rocks:f0t0:s1	-	-	-	d864b561c9cb	-	a290929b1abf	-	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ afc59d95-d85c-4ab8-b6c5-c78b608b53b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 afc59d95-d85c-4ab8-b6c5-c78b608b53b7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 afc8df6d-7291-400e-b768-0c0c3e3fdc32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afc8df6d-7291-400e-b768-0c0c3e3fdc32	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afc8df6d-7291-400e-b768-0c0c3e3fdc32	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+afc8df6d-7291-400e-b768-0c0c3e3fdc32	f0/a1	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:crook-of-condemnation:f0a0:s1,f:xs:XP:crook-of-condemnation:f0a0:s1	-	-	-	d864b561c9cb	-	cfdb38768892	-	-	2026-11-24	xproof
 afc9436b-8cad-4916-929d-ff33a37b42d5	cast	cast-resolve	agreed	-	FX	scen	2	0	Dawnsire, Sunstar Dreadnought/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 afc9436b-8cad-4916-929d-ff33a37b42d5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dawnsire, Sunstar Dreadnought/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 afc9436b-8cad-4916-929d-ff33a37b42d5	static#0.1	static#0.1	agreed	-	X	scen	1	0	Dawnsire, Sunstar Dreadnought/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -175,10 +175,10 @@ aff20717-265d-4214-a8f5-f520bb243cb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 aff21bd1-87b0-409c-bfad-08f3690ef220	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aff21bd1-87b0-409c-bfad-08f3690ef220	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aff21bd1-87b0-409c-bfad-08f3690ef220	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aff223d4-6338-460d-a4d5-d45f522864dc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+aff223d4-6338-460d-a4d5-d45f522864dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-scorpion-god:cast:s1,f:xs:XP:the-scorpion-god:cast:s1	-	-	-	d864b561c9cb	-	461375f66179	-	-	2026-11-24	xproof
 aff223d4-6338-460d-a4d5-d45f522864dc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aff223d4-6338-460d-a4d5-d45f522864dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aff223d4-6338-460d-a4d5-d45f522864dc	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+aff223d4-6338-460d-a4d5-d45f522864dc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-scorpion-god:f0t1:s1,f:xs:XP:the-scorpion-god:f0t1:s1	-	-	-	d864b561c9cb	-	461375f66179	-	-	2026-11-24	xproof
+aff223d4-6338-460d-a4d5-d45f522864dc	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-scorpion-god:f0t1:s1,f:xs:XP:the-scorpion-god:f0t1:s1	-	-	-	d864b561c9cb	-	461375f66179	-	-	2026-11-24	xproof
 aff34f28-f707-4458-8af3-1bd5b13a6b10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aff4e43d-cafa-47de-8e39-011f9254a26a	cast	cast-resolve	agreed	-	X	scen	1	0	Marwyn, the Clearcutter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 aff4e43d-cafa-47de-8e39-011f9254a26a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Marwyn, the Clearcutter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

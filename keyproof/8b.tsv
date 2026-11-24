@@ -116,8 +116,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b84fec5-617c-4088-8250-2ba1f1f9479a	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Balamb Garden, SeeD Academy/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b84fec5-617c-4088-8250-2ba1f1f9479a	land	play-land	agreed	-	X	scen	1	0	Balamb Garden, SeeD Academy/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b85a5d4-1cc3-412d-99e7-778af68d79a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b85a5d4-1cc3-412d-99e7-778af68d79a5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b85a5d4-1cc3-412d-99e7-778af68d79a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b85a5d4-1cc3-412d-99e7-778af68d79a5	f0/a0	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:durable-handicraft:f0a0:s1,f:xs:XP:durable-handicraft:f0a0:s1	-	-	-	d864b561c9cb	-	857dabc2f96e	-	-	2026-11-24	xproof
+8b85a5d4-1cc3-412d-99e7-778af68d79a5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8b89c6f1-8c9e-43ef-ad6b-11424de090e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tajuru-warcaller:f0t0:s1,f:xs:XP:tajuru-warcaller:f0t0:s1	-	-	-	d864b561c9cb	-	a2b55157f000	-	-	2026-11-24	xproof
 8b89c6f1-8c9e-43ef-ad6b-11424de090e4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tajuru-warcaller:f0t0:s1,f:xs:XP:tajuru-warcaller:f0t0:s1	-	-	-	d864b561c9cb	-	a2b55157f000	-	-	2026-11-24	xproof
 8b8c0285-424f-4a82-bfb6-17752cfa71dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:izzet-keyrune:cast:s1,f:xs:XP:izzet-keyrune:cast:s1	-	-	-	d864b561c9cb	-	340a4c26f5ac	-	-	2026-11-24	xproof

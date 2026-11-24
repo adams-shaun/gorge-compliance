@@ -89,10 +89,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a70bde5-c514-4dcf-919a-48bdd1c17768	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a70bde5-c514-4dcf-919a-48bdd1c17768	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a70bde5-c514-4dcf-919a-48bdd1c17768	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a70ddc5-bb51-45eb-96f2-8ecaecac0cc2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a70ddc5-bb51-45eb-96f2-8ecaecac0cc2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a70ddc5-bb51-45eb-96f2-8ecaecac0cc2	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a70ddc5-bb51-45eb-96f2-8ecaecac0cc2	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a70ddc5-bb51-45eb-96f2-8ecaecac0cc2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-unyielding:cast:s1,f:xs:XP:ajani-unyielding:cast:s1	-	-	-	d864b561c9cb	-	62fbb28b69a7	-	-	2026-11-24	xproof
+8a70ddc5-bb51-45eb-96f2-8ecaecac0cc2	f0/a0	Dig	agreed	-	FX	start	1	0	x:xs:XP:ajani-unyielding:cast:s2,f:xs:XP:ajani-unyielding:cast:s2	-	-	-	d864b561c9cb	-	62fbb28b69a7	-	-	2026-11-24	xproof
+8a70ddc5-bb51-45eb-96f2-8ecaecac0cc2	f0/a1	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:ajani-unyielding:cast:s1,f:xs:XP:ajani-unyielding:cast:s1	-	-	-	d864b561c9cb	-	62fbb28b69a7	-	-	2026-11-24	xproof
+8a70ddc5-bb51-45eb-96f2-8ecaecac0cc2	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a7183cc-161c-444d-a889-a17519c8061b	cast	cast-resolve	agreed	-	X	scen	1	0	Arcanis the Omnipotent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a7183cc-161c-444d-a889-a17519c8061b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Arcanis the Omnipotent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a7183cc-161c-444d-a889-a17519c8061b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Arcanis the Omnipotent/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -107,8 +107,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a7c6391-020a-4d7a-8abb-702631bbee56	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a7d68ae-ac43-46a6-9dc8-d6b07cc0333c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a7d68ae-ac43-46a6-9dc8-d6b07cc0333c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-8a7f446b-557a-41cc-b9ef-369e220a0eeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a7f446b-557a-41cc-b9ef-369e220a0eeb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a7f446b-557a-41cc-b9ef-369e220a0eeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stensia-innkeeper:f0t0:s1,f:xs:XP:stensia-innkeeper:f0t0:s1	-	-	-	d864b561c9cb	-	d70310eb0e01	-	-	2026-11-24	xproof
+8a7f446b-557a-41cc-b9ef-369e220a0eeb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stensia-innkeeper:f0t0:s1,f:xs:XP:stensia-innkeeper:f0t0:s1	-	-	-	d864b561c9cb	-	d70310eb0e01	-	-	2026-11-24	xproof
 8a802eae-abfb-47fd-8458-1689055531ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a810017-06ac-4824-bc2f-a7d303d58ad7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a825e4c-4a87-4b8d-84f7-3e50b896d7cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,8 +118,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a8bc537-b69f-441d-a10e-d7f17f2f75bb	cast	cast-resolve	agreed	-	X	scen	1	0	Pothole Mole/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a8bc537-b69f-441d-a10e-d7f17f2f75bb	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a8e225b-14e4-464f-bebe-89b4c9be7fe1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a8fe94f-81aa-4725-ace6-ed56a1e1ed91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a922366-ee2a-4ddb-a904-683dcf4f191a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a9525f4-74a6-44f0-a1b1-d57937d7783b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,9 +141,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8aa1bbc9-b047-4d68-93f4-728e40dafc5e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8aa1bbc9-b047-4d68-93f4-728e40dafc5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8aaa2217-012e-4e34-ba44-4986d7ee9ece	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8aab0b55-2779-43c7-a3ee-151b8e5c72f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8aab0b55-2779-43c7-a3ee-151b8e5c72f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8aab0b55-2779-43c7-a3ee-151b8e5c72f3	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8aab0b55-2779-43c7-a3ee-151b8e5c72f3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-chaser:f0t0:s1,f:xs:XP:aether-chaser:f0t0:s1	-	-	-	d864b561c9cb	-	d591c0673c05	-	-	2026-11-24	xproof
+8aab0b55-2779-43c7-a3ee-151b8e5c72f3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aether-chaser:f0t0:s1,f:xs:XP:aether-chaser:f0t0:s1	-	-	-	d864b561c9cb	-	d591c0673c05	-	-	2026-11-24	xproof
+8aab0b55-2779-43c7-a3ee-151b8e5c72f3	f0/t1	Attacks	agreed	-	X	start	2	0	x:xs:XP:aether-chaser:f0t1:s1	-	-	-	d864b561c9cb	-	d591c0673c05	-	-	2026-11-24	xproof
 8aab9181-c306-471a-8061-9a7a7654dab5	cast	cast-resolve	agreed	-	X	scen	1	0	Thopter Fabricator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8aab9181-c306-471a-8061-9a7a7654dab5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thopter Fabricator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8aab9181-c306-471a-8061-9a7a7654dab5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thopter Fabricator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8abeaa77-d455-47e7-bf60-aefb94ab83fb	cast	cast-resolve	agreed	-	X	scen	1	0	Howler's Heavy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8abeaa77-d455-47e7-bf60-aefb94ab83fb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Howler's Heavy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8abeaa77-d455-47e7-bf60-aefb94ab83fb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Howler's Heavy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8abef87a-4a5c-412e-8137-827cee50bb8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8abef87a-4a5c-412e-8137-827cee50bb8b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8abef87a-4a5c-412e-8137-827cee50bb8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ornery-kudu:f0t0:s1,f:xs:XP:ornery-kudu:f0t0:s1	-	-	-	d864b561c9cb	-	e18cc0627f0f	-	-	2026-11-24	xproof
+8abef87a-4a5c-412e-8137-827cee50bb8b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ornery-kudu:f0t0:s1,f:xs:XP:ornery-kudu:f0t0:s1	-	-	-	d864b561c9cb	-	e18cc0627f0f	-	-	2026-11-24	xproof
 8abff7b5-fe27-46bd-b951-b5d9f93f3a14	cast	cast-resolve	agreed	-	FX	scen	2	0	Slash, Reptile Rampager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8abff7b5-fe27-46bd-b951-b5d9f93f3a14	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Slash, Reptile Rampager/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8abff7b5-fe27-46bd-b951-b5d9f93f3a14	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Slash, Reptile Rampager/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

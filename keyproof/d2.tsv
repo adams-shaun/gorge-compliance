@@ -29,8 +29,8 @@ d22196b5-b111-45ce-ae51-a06ca02533b6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 d22196b5-b111-45ce-ae51-a06ca02533b6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2240ce8-0bd6-4c4f-a73e-fb0a2af5bfac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d22b7d4a-0ac7-4221-80fd-a47edad03b84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d22b7d4a-0ac7-4221-80fd-a47edad03b84	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d22b7d4a-0ac7-4221-80fd-a47edad03b84	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d22b7d4a-0ac7-4221-80fd-a47edad03b84	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+d22b7d4a-0ac7-4221-80fd-a47edad03b84	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d22d3934-8437-4a18-81c1-4e9c501846ca	cast	cast-resolve	agreed	-	X	scen	1	0	Tomb Trawler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d22d3934-8437-4a18-81c1-4e9c501846ca	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tomb Trawler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d22ff377-d282-4a28-9dce-96f25913dc96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -100,8 +100,8 @@ d2824464-963b-48db-a482-cc08a0a97332	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tend
 d2853bad-a751-45ee-8269-24b0cdbc5c6b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d287c11e-0684-42ed-abdb-758852ed0502	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d287c11e-0684-42ed-abdb-758852ed0502	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d28b7c07-ef65-4187-a15e-2180bdc593d1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d28b7c07-ef65-4187-a15e-2180bdc593d1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d28b7c07-ef65-4187-a15e-2180bdc593d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spectral-shepherd:cast:s1,f:xs:XP:spectral-shepherd:cast:s1	-	-	-	d864b561c9cb	-	90d9a890fe16	-	-	2026-11-24	xproof
+d28b7c07-ef65-4187-a15e-2180bdc593d1	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:spectral-shepherd:f0a0:s1,f:xs:XP:spectral-shepherd:f0a0:s1	-	-	-	d864b561c9cb	-	90d9a890fe16	-	-	2026-11-24	xproof
 d28eac97-f38a-4d2a-aeae-e758bd3ecf4e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d28eac97-f38a-4d2a-aeae-e758bd3ecf4e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d29078c0-1fb8-437a-81d1-bb319f646941	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,9 +190,9 @@ d2e7198a-0eb5-4d30-973f-4b2d9617436f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d2e7198a-0eb5-4d30-973f-4b2d9617436f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2e78392-096a-4bd0-be19-9c54dfb8451f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2e78392-096a-4bd0-be19-9c54dfb8451f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2e78392-096a-4bd0-be19-9c54dfb8451f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2ef475d-6043-4da8-83f0-dffa76052707	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2ef475d-6043-4da8-83f0-dffa76052707	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d2e78392-096a-4bd0-be19-9c54dfb8451f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+d2ef475d-6043-4da8-83f0-dffa76052707	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:manic-scribe:f0t0:s1,f:xs:XP:manic-scribe:f0t0:s1	-	-	-	d864b561c9cb	-	d6c848ecaf29	-	-	2026-11-24	xproof
+d2ef475d-6043-4da8-83f0-dffa76052707	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:manic-scribe:f0t0:s1,f:xs:XP:manic-scribe:f0t0:s1	-	-	-	d864b561c9cb	-	d6c848ecaf29	-	-	2026-11-24	xproof
 d2ef475d-6043-4da8-83f0-dffa76052707	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2f0a918-4435-4d43-811d-2da659086ef5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2f0a918-4435-4d43-811d-2da659086ef5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -200,6 +200,6 @@ d2f33d3a-afc6-4d15-9049-ecd33f85eb94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d2f59fa6-8e61-4a70-8044-196d7b26ec9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hagra-sharpshooter:cast:s1,f:xs:XP:hagra-sharpshooter:cast:s1	-	-	-	d864b561c9cb	-	1fcb328e5b88	-	-	2026-11-24	xproof
 d2f59fa6-8e61-4a70-8044-196d7b26ec9e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:hagra-sharpshooter:f0a0:s1,f:xs:XP:hagra-sharpshooter:f0a0:s1	-	-	-	d864b561c9cb	-	1fcb328e5b88	-	-	2026-11-24	xproof
 d2f693d9-f338-41d6-b7e2-ddaa5f4bcc3b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2f98983-f395-4166-aa5a-309b4769baab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2f98983-f395-4166-aa5a-309b4769baab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d2f98983-f395-4166-aa5a-309b4769baab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malfunction:f0t0:s1,f:xs:XP:malfunction:f0t0:s1	-	-	-	d864b561c9cb	-	a1d9d3b42c56	-	-	2026-11-24	xproof
+d2f98983-f395-4166-aa5a-309b4769baab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:malfunction:f0t0:s1,f:xs:XP:malfunction:f0t0:s1	-	-	-	d864b561c9cb	-	a1d9d3b42c56	-	-	2026-11-24	xproof
 d2fbad7d-d05a-4321-9aff-a93bd102a3f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

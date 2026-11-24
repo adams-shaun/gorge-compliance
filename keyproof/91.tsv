@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 910488bf-66ab-415e-973b-1262b2ab7454	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9107ece7-a263-4203-ab09-069193cc4902	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9107ece7-a263-4203-ab09-069193cc4902	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9107ece7-a263-4203-ab09-069193cc4902	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9107ece7-a263-4203-ab09-069193cc4902	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 91081181-aec6-47de-b8ef-241a2f4fe880	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mad-prophet:cast:s1,f:xs:XP:mad-prophet:cast:s1	-	-	-	d864b561c9cb	-	0dd110f603c6	-	-	2026-11-24	xproof
 91081181-aec6-47de-b8ef-241a2f4fe880	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 910860ce-d617-48c1-b44d-b1d95cdd006f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:neurok-prodigy:cast:s1,f:xs:XP:neurok-prodigy:cast:s1	-	-	-	25696bf19d5b	-	c969dff50a1c	-	-	2026-11-24	xproof
@@ -64,16 +64,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91415d12-b13d-4b5c-bb60-6ec6f4fdde6e	f0/a0	Attach/Equip	agreed	-	F	start	2	0	f:xs:XP:gold-pan:cast:s2	-	-	-	5437c1394672	-	43376f23bc47	-	-	2026-11-24	xproof
 91415d12-b13d-4b5c-bb60-6ec6f4fdde6e	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:gold-pan:cast:s2	-	-	-	5437c1394672	-	43376f23bc47	-	-	2026-11-24	xproof
 91415d12-b13d-4b5c-bb60-6ec6f4fdde6e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gold Pan/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-91486e70-94e4-431f-8899-fef019bb206e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91486e70-94e4-431f-8899-fef019bb206e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tezzeret-s-ambition:cast:s1,f:xs:XP:tezzeret-s-ambition:cast:s1	-	-	-	d864b561c9cb	-	48e28dd10a53	-	-	2026-11-24	xproof
 9148f2cb-5594-463c-a21b-a67706ec46d1	cast	cast-resolve	agreed	-	X	scen	1	0	Flitterwing Nuisance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9148f2cb-5594-463c-a21b-a67706ec46d1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Flitterwing Nuisance/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9148f2cb-5594-463c-a21b-a67706ec46d1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Flitterwing Nuisance/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9148f2cb-5594-463c-a21b-a67706ec46d1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Flitterwing Nuisance/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 914ce8f6-5e92-436d-8541-1c72da8577dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 914ce8f6-5e92-436d-8541-1c72da8577dc	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91508175-fa1d-4c51-99d4-036a2de6abb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91508175-fa1d-4c51-99d4-036a2de6abb0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thalia-s-lieutenant:f0t0:s1,f:xs:XP:thalia-s-lieutenant:f0t0:s1	-	-	-	d864b561c9cb	-	09aabf68fbd5	-	-	2026-11-24	xproof
+91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thalia-s-lieutenant:f0t0:s1,f:xs:XP:thalia-s-lieutenant:f0t0:s1	-	-	-	d864b561c9cb	-	09aabf68fbd5	-	-	2026-11-24	xproof
+91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 915091d5-3f58-4429-8f3a-0fd7aef87afe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 915091d5-3f58-4429-8f3a-0fd7aef87afe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91585b64-f10d-47c6-a563-384ceb944710	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91b2520e-85b6-4e1f-88cf-a585feeb8e65	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Krenko, Baron of Tin Street/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91b2520e-85b6-4e1f-88cf-a585feeb8e65	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Krenko, Baron of Tin Street/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91b46b22-8062-434b-8432-5ed1062ccaf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91b46b22-8062-434b-8432-5ed1062ccaf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91b46b22-8062-434b-8432-5ed1062ccaf9	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 91b5688d-4dd6-477b-998f-bdc7612de37a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91b5688d-4dd6-477b-998f-bdc7612de37a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91b5688d-4dd6-477b-998f-bdc7612de37a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

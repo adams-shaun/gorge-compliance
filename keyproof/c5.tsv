@@ -15,7 +15,7 @@ c5173332-68ad-456e-ad85-dd7475464d94	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c51a0ccb-220d-46f6-9813-62f2d36356a5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c51a0ccb-220d-46f6-9813-62f2d36356a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c51b0667-a24e-44c0-bc95-bf61b393f3cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c51b0667-a24e-44c0-bc95-bf61b393f3cf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c51b0667-a24e-44c0-bc95-bf61b393f3cf	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c51c429d-d8d7-40d6-9760-72c26acaed42	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c51c429d-d8d7-40d6-9760-72c26acaed42	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c51c429d-d8d7-40d6-9760-72c26acaed42	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -104,9 +104,9 @@ c567fed8-df00-4579-901e-8754079105bf	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 c567fed8-df00-4579-901e-8754079105bf	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c56cd2ec-5907-4282-9162-d93b7dfd63b5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lakeside Shack/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c56cd2ec-5907-4282-9162-d93b7dfd63b5	land	play-land	agreed	-	X	scen	1	0	Lakeside Shack/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c56e6715-80bc-4f9d-86ef-7c31b1ef0a17	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c56e6715-80bc-4f9d-86ef-7c31b1ef0a17	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c56e6715-80bc-4f9d-86ef-7c31b1ef0a17	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c56e6715-80bc-4f9d-86ef-7c31b1ef0a17	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:decimator-beetle:cast:s1,f:xs:XP:decimator-beetle:cast:s1	-	-	-	d864b561c9cb	-	53a96fda6659	-	-	2026-11-24	xproof
+c56e6715-80bc-4f9d-86ef-7c31b1ef0a17	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:decimator-beetle:cast:s1,f:xs:XP:decimator-beetle:cast:s1	-	-	-	d864b561c9cb	-	53a96fda6659	-	-	2026-11-24	xproof
+c56e6715-80bc-4f9d-86ef-7c31b1ef0a17	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:decimator-beetle:f0t1:s1,f:xs:XP:decimator-beetle:f0t1:s1	-	-	-	d864b561c9cb	-	53a96fda6659	-	-	2026-11-24	xproof
 c56ea5ce-c8de-46c2-a8dd-bdd41467a28c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c56f0f4c-c85a-4931-b22a-42dc5d1dc7dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c56f0f4c-c85a-4931-b22a-42dc5d1dc7dd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,8 +128,8 @@ c584bdf2-b328-4e50-81e3-45ca6c2aff7a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 c586312d-d04a-4bfb-bbb2-b41186ca178e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c590c1bd-430c-4515-9343-ba818c02bc5f	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 c596b847-4e05-4279-8675-b4e39cb3dc91	cast	cast-resolve	agreed	-	X	scen	1	0	Manhole Missile/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c597cfae-3f92-4d31-8bc1-5a2da995f1bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c597cfae-3f92-4d31-8bc1-5a2da995f1bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c597cfae-3f92-4d31-8bc1-5a2da995f1bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fogwalker:f0t0:s1,f:xs:XP:fogwalker:f0t0:s1	-	-	-	d864b561c9cb	-	f410de8a2943	-	-	2026-11-24	xproof
+c597cfae-3f92-4d31-8bc1-5a2da995f1bf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fogwalker:f0t0:s1,f:xs:XP:fogwalker:f0t0:s1	-	-	-	d864b561c9cb	-	f410de8a2943	-	-	2026-11-24	xproof
 c5a1516a-5e01-48c5-88c7-2178f4b2ad24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5a1516a-5e01-48c5-88c7-2178f4b2ad24	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5a1516a-5e01-48c5-88c7-2178f4b2ad24	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ c5b4bc25-0f32-4e1d-b6fe-f122140f2207	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c5ba0f0f-65c5-4ffa-987a-f320b401ec8f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5bfc1b9-a55d-4608-a6f7-bb62cb8dc3c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5c1fb0f-b9cf-48a0-a4ea-e995e222e4b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c5c221e6-dafe-4661-b920-3faed9551802	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c5c221e6-dafe-4661-b920-3faed9551802	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thornhide-wolves:cast:s1,f:xs:XP:thornhide-wolves:cast:s1	-	-	-	d864b561c9cb	-	2e9bb9c02148	-	-	2026-11-24	xproof
 c5c225a6-6a5e-4905-9412-dad15ba645b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skinrender:f0t0:s1,f:xs:XP:skinrender:f0t0:s1	-	-	-	77494c1ce129	-	74125de3177b	-	-	2026-11-24	xproof
 c5c225a6-6a5e-4905-9412-dad15ba645b4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skinrender:f0t0:s1,f:xs:XP:skinrender:f0t0:s1	-	-	-	77494c1ce129	-	74125de3177b	-	-	2026-11-24	xproof
 c5c2d209-e3ef-4b0d-85f5-e7402dcf09eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

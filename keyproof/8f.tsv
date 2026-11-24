@@ -24,10 +24,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f2c8498-5b10-4ec7-8678-598c90987556	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:disciple-of-bolas:f0t0:s1,f:xs:XP:disciple-of-bolas:f0t0:s1	-	-	-	d864b561c9cb	-	75a198daa16a	-	-	2026-11-24	xproof
 8f31d870-872d-4671-80d1-8d2ecd2c38d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gather-the-pack:cast:s1,f:xs:XP:gather-the-pack:cast:s1	-	-	-	d864b561c9cb	-	1271ca194f11	-	-	2026-11-24	xproof
 8f32ceb2-92c2-4dde-bf73-40bb79c3fcef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inspiration:cast:s1,f:xs:XP:inspiration:cast:s1	-	-	-	25696bf19d5b	-	150073d9d160	-	-	2026-11-24	xproof
-8f36e058-e5fa-48f9-9996-09b77fc193b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f36e058-e5fa-48f9-9996-09b77fc193b3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8f36e058-e5fa-48f9-9996-09b77fc193b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:self-assembler:f0t0:s1,f:xs:XP:self-assembler:f0t0:s1	-	-	-	d864b561c9cb	-	462ec13f2c36	-	-	2026-11-24	xproof
+8f36e058-e5fa-48f9-9996-09b77fc193b3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:self-assembler:f0t0:s1,f:xs:XP:self-assembler:f0t0:s1	-	-	-	d864b561c9cb	-	462ec13f2c36	-	-	2026-11-24	xproof
 8f3cba20-e7a4-47f4-8bce-90168ce9cc5c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f3cba20-e7a4-47f4-8bce-90168ce9cc5c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8f3cba20-e7a4-47f4-8bce-90168ce9cc5c	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:accursed-horde:f0a0:s1,f:xs:XP:accursed-horde:f0a0:s1	-	-	-	d864b561c9cb	-	8fd4107ca919	-	-	2026-11-24	xproof
 8f40d73b-9106-448e-8649-5d62939f0d38	cast	cast-resolve	agreed	-	FX	scen	2	0	Voyager Glidecar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8f40d73b-9106-448e-8649-5d62939f0d38	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Voyager Glidecar/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8f40d73b-9106-448e-8649-5d62939f0d38	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Voyager Glidecar/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -182,7 +182,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8fda6c20-04dc-4b60-9313-896a032ee5cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:havengul-skaab:cast:s1,f:xs:XP:havengul-skaab:cast:s1	-	-	-	d864b561c9cb	-	7b7b2fcc3266	-	-	2026-11-24	xproof
 8fda6c20-04dc-4b60-9313-896a032ee5cb	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:havengul-skaab:f0t0:s1,f:xs:XP:havengul-skaab:f0t0:s1	-	-	-	d864b561c9cb	-	7b7b2fcc3266	-	-	2026-11-24	xproof
 8fe1e619-f827-43f5-acaf-3b79aa671d1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8fe1e619-f827-43f5-acaf-3b79aa671d1d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8fe1e619-f827-43f5-acaf-3b79aa671d1d	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8fe257e5-b54a-4e56-8040-d2eaa0bb0a6a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enlightened-ascetic:f0t0:s1,f:xs:XP:enlightened-ascetic:f0t0:s1	-	-	-	d864b561c9cb	-	44cefb78d62c	-	-	2026-11-24	xproof
 8fe257e5-b54a-4e56-8040-d2eaa0bb0a6a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enlightened-ascetic:f0t0:s1,f:xs:XP:enlightened-ascetic:f0t0:s1	-	-	-	d864b561c9cb	-	44cefb78d62c	-	-	2026-11-24	xproof
 8fe6e954-f19b-4d11-83d3-74c634d51bad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

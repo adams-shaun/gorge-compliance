@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2825ff5a-5340-4494-bfde-80f6f5bce5a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2825ff5a-5340-4494-bfde-80f6f5bce5a2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28274c39-19e2-4b4c-bd53-d31d6063c2ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28274c39-19e2-4b4c-bd53-d31d6063c2ba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+28274c39-19e2-4b4c-bd53-d31d6063c2ba	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2829ae08-9964-4679-80e8-46d5d33d10b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 282b4dbf-ec00-48ba-8010-73bee489fa7a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 282b4dbf-ec00-48ba-8010-73bee489fa7a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -100,8 +100,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2886f95e-c4e8-4770-b7de-40985f336cfb	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Crescent Island Temple/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 288afdb9-708d-4a52-991a-e1b07f62ee99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 288afdb9-708d-4a52-991a-e1b07f62ee99	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-288d5415-ef44-400f-ab88-7c8a4deaaf4b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-288d5415-ef44-400f-ab88-7c8a4deaaf4b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+288d5415-ef44-400f-ab88-7c8a4deaaf4b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:call-for-unity:cast:s1,f:xs:XP:call-for-unity:cast:s1	-	-	-	d864b561c9cb	-	71319bcd7967	-	-	2026-11-24	xproof
+288d5415-ef44-400f-ab88-7c8a4deaaf4b	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 288da486-393c-4995-ad02-c5093a71970d	cast	cast-resolve	agreed	-	X	scen	1	0	Beorn, Reluctant Host/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 288da486-393c-4995-ad02-c5093a71970d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Beorn, Reluctant Host/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 288da486-393c-4995-ad02-c5093a71970d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Beorn, Reluctant Host/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28c44f88-1d47-4894-86ce-4089bd761360	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:harvester-troll:cast:s1,f:xs:XP:harvester-troll:cast:s1	-	-	-	d864b561c9cb	-	6b218ebadf06	-	-	2026-11-24	xproof
 28c7c816-07e7-42fb-923c-bf149ba28b38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28c7c816-07e7-42fb-923c-bf149ba28b38	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28c7f2b6-ba67-4ccf-9e1b-99c89a9d1f72	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+28c7f2b6-ba67-4ccf-9e1b-99c89a9d1f72	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:angel-of-invention:cast:s1,f:xs:XP:angel-of-invention:cast:s1	-	-	-	d864b561c9cb	-	63b344477850	-	-	2026-11-24	xproof
 28c7f2b6-ba67-4ccf-9e1b-99c89a9d1f72	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28caeed4-c175-469f-8d8e-f45bc0a51a1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28caeed4-c175-469f-8d8e-f45bc0a51a1c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

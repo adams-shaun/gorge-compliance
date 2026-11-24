@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-4a00f56e-e558-4239-bc75-fb0af7639042	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a00f56e-e558-4239-bc75-fb0af7639042	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a00f56e-e558-4239-bc75-fb0af7639042	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a00f56e-e558-4239-bc75-fb0af7639042	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:peema-aether-seer:f0t0:s1,f:xs:XP:peema-aether-seer:f0t0:s1	-	-	-	d864b561c9cb	-	d6ec368d327e	-	-	2026-11-24	xproof
+4a00f56e-e558-4239-bc75-fb0af7639042	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:peema-aether-seer:f0t0:s1,f:xs:XP:peema-aether-seer:f0t0:s1	-	-	-	d864b561c9cb	-	d6ec368d327e	-	-	2026-11-24	xproof
+4a00f56e-e558-4239-bc75-fb0af7639042	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:peema-aether-seer:f0t0:s1,f:xs:XP:peema-aether-seer:f0t0:s1	-	-	-	d864b561c9cb	-	d6ec368d327e	-	-	2026-11-24	xproof
 4a01db2e-cd43-4b1a-a480-169018f82501	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a01db2e-cd43-4b1a-a480-169018f82501	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a080242-412d-4968-ad57-2667dab977f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -28,8 +28,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a221518-c850-4e8a-a697-765c0a0e76e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a261c42-825d-4965-8ea7-80d50c43474e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:filigree-angel:f0t0:s1,f:xs:XP:filigree-angel:f0t0:s1	-	-	-	8a1b1a193ec0	-	6e7a456ea5a1	-	-	2026-11-24	xproof
 4a261c42-825d-4965-8ea7-80d50c43474e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:filigree-angel:f0t0:s1,f:xs:XP:filigree-angel:f0t0:s1	-	-	-	8a1b1a193ec0	-	6e7a456ea5a1	-	-	2026-11-24	xproof
-4a294001-645b-4691-bb32-c240ba5b5320	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a294001-645b-4691-bb32-c240ba5b5320	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a294001-645b-4691-bb32-c240ba5b5320	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inspiring-captain:f0t0:s1,f:xs:XP:inspiring-captain:f0t0:s1	-	-	-	d864b561c9cb	-	a29ad66ee8fc	-	-	2026-11-24	xproof
+4a294001-645b-4691-bb32-c240ba5b5320	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:inspiring-captain:f0t0:s1,f:xs:XP:inspiring-captain:f0t0:s1	-	-	-	d864b561c9cb	-	a29ad66ee8fc	-	-	2026-11-24	xproof
 4a2a7eca-3477-4858-9dab-ba80d4d704cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a2fea39-99d6-4766-9f2c-0a63925349cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a2fea39-99d6-4766-9f2c-0a63925349cb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -89,8 +89,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Garruk, Veiled Butcher/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Garruk, Veiled Butcher/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Garruk, Veiled Butcher/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4a71f404-e48d-4c86-882e-4e21c8210dea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a71f404-e48d-4c86-882e-4e21c8210dea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a71f404-e48d-4c86-882e-4e21c8210dea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:topplegeist:f0t0:s1,f:xs:XP:topplegeist:f0t0:s1	-	-	-	d864b561c9cb	-	436c4ccfa59e	-	-	2026-11-24	xproof
+4a71f404-e48d-4c86-882e-4e21c8210dea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:topplegeist:f0t0:s1,f:xs:XP:topplegeist:f0t0:s1	-	-	-	d864b561c9cb	-	436c4ccfa59e	-	-	2026-11-24	xproof
 4a71f404-e48d-4c86-882e-4e21c8210dea	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a74cccb-5d75-4362-9c9e-2622096544fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a75ef46-c5ae-4b1a-a681-d439b01f6731	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

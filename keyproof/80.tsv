@@ -65,8 +65,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8068f80f-88ee-4c0b-a0fb-3a6337f83f22	static#0.1	static#0.1	agreed	-	X	scen	1	0	Johann, Apprentice Sorcerer/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 806b4f0c-f577-4d7f-b826-09e4479c314e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 806fc324-a17a-4e65-a9b6-d739c471c7f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-806fc324-a17a-4e65-a9b6-d739c471c7f8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-806fc324-a17a-4e65-a9b6-d739c471c7f8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+806fc324-a17a-4e65-a9b6-d739c471c7f8	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+806fc324-a17a-4e65-a9b6-d739c471c7f8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8074afbf-190b-4a24-b939-cc559bdffe38	cast	cast	agreed	-	F	start	2	0	f:xs:XP:izoni-center-of-the-web:cast:s2	-	-	-	5437c1394672	-	37e2be2455bc	-	-	2026-11-24	xproof
 8074afbf-190b-4a24-b939-cc559bdffe38	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Izoni, Center of the Web/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8074afbf-190b-4a24-b939-cc559bdffe38	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Izoni, Center of the Web/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

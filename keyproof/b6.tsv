@@ -19,7 +19,7 @@ b628150b-08a1-4ea3-978d-60255dfb0b7e	f0/a0	NULL	owed	refused:scen failed: xengin
 b628a39b-c923-473d-900a-1617f47ecb76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b628a39b-c923-473d-900a-1617f47ecb76	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6294891-79e6-4f2a-a82d-6cffce968356	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6294891-79e6-4f2a-a82d-6cffce968356	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b6294891-79e6-4f2a-a82d-6cffce968356	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b638407b-4749-41fa-8054-f9db57b849ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ondu-champion:f0t0:s1,f:xs:XP:ondu-champion:f0t0:s1	-	-	-	d864b561c9cb	-	f5fab4d1edfb	-	-	2026-11-24	xproof
 b638407b-4749-41fa-8054-f9db57b849ea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ondu-champion:f0t0:s1,f:xs:XP:ondu-champion:f0t0:s1	-	-	-	d864b561c9cb	-	f5fab4d1edfb	-	-	2026-11-24	xproof
 b638c475-778c-4251-8dac-6a18c3394ae5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -31,7 +31,7 @@ b63e5518-61f3-4cde-a799-5f3ee6aba70b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mudbu
 b63e5518-61f3-4cde-a799-5f3ee6aba70b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mudbutton Cursetosser/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b64051c0-e791-4fcb-b79f-4287e1b06468	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:compass-gnome:f0t0:s2,f:xs:XP:compass-gnome:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed947238ad33	-	-	2026-11-24	xproof
 b64051c0-e791-4fcb-b79f-4287e1b06468	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:compass-gnome:f0t0:s2,f:xs:XP:compass-gnome:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed947238ad33	-	-	2026-11-24	xproof
-b6492082-d0ef-4f7c-a4b1-f8ecf6eb0890	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b6492082-d0ef-4f7c-a4b1-f8ecf6eb0890	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liliana-s-elite:cast:s1,f:xs:XP:liliana-s-elite:cast:s1	-	-	-	d864b561c9cb	-	58a487d3ac56	-	-	2026-11-24	xproof
 b653db44-ddae-44e8-8fa6-6af3232cd586	cast	cast-resolve	agreed	-	X	scen	1	0	Railway Brawler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b653db44-ddae-44e8-8fa6-6af3232cd586	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Railway Brawler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b653db44-ddae-44e8-8fa6-6af3232cd586	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Railway Brawler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -60,8 +60,8 @@ b66deeb5-7371-4f06-b10e-d65165bc07b2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b677a73c-f179-46bf-83ee-c2b05f9fca67	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:the-spirit-oasis:f0t0:s2,f:xs:XP:the-spirit-oasis:f0t0:s2	-	-	-	267e485f6204	-	e8d954a9efe8	-	-	2026-11-24	xproof
 b677a73c-f179-46bf-83ee-c2b05f9fca67	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:the-spirit-oasis:f0t0:s2,f:xs:XP:the-spirit-oasis:f0t0:s2	-	-	-	267e485f6204	-	e8d954a9efe8	-	-	2026-11-24	xproof
 b677a73c-f179-46bf-83ee-c2b05f9fca67	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Spirit Oasis/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b67db32b-30a9-49d2-b4c2-90a9f80c36eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b67db32b-30a9-49d2-b4c2-90a9f80c36eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b67db32b-30a9-49d2-b4c2-90a9f80c36eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:manglehorn:f0t0:s1,f:xs:XP:manglehorn:f0t0:s1	-	-	-	d864b561c9cb	-	fc80aed6a4fd	-	-	2026-11-24	xproof
+b67db32b-30a9-49d2-b4c2-90a9f80c36eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:manglehorn:f0t0:s1,f:xs:XP:manglehorn:f0t0:s1	-	-	-	d864b561c9cb	-	fc80aed6a4fd	-	-	2026-11-24	xproof
 b6801429-3995-4571-92f9-ef211675c5d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6801429-3995-4571-92f9-ef211675c5d5	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:preeminent-captain:f0t0:s1,f:xs:XP:preeminent-captain:f0t0:s1	-	-	-	d864b561c9cb	-	467ad48d513d	-	-	2026-11-24	xproof
 b6811c31-fcd3-4d00-89d5-cf974575a87c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

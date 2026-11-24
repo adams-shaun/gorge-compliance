@@ -92,8 +92,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5268f772-5b42-4b5b-9e57-c32c662a42f3	cast	cast-resolve	agreed	-	FX	scen	2	0	Warden of the Inner Sky/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5268f772-5b42-4b5b-9e57-c32c662a42f3	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Warden of the Inner Sky/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5268f772-5b42-4b5b-9e57-c32c662a42f3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Warden of the Inner Sky/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-526cd570-046e-402a-986c-f6ece68eec47	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-526cd570-046e-402a-986c-f6ece68eec47	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+526cd570-046e-402a-986c-f6ece68eec47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sweltering-suns:cast:s1,f:xs:XP:sweltering-suns:cast:s1	-	-	-	d864b561c9cb	-	a0c1f49b85ed	-	-	2026-11-24	xproof
+526cd570-046e-402a-986c-f6ece68eec47	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 526db754-abb6-450c-bead-81dd1e1c347c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 526f520e-b4bb-4215-9c6b-afc298744f06	cast	cast-resolve	agreed	-	FX	scen	2	0	Plunder the Trollshaws/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52714c3c-6821-44dd-88ba-813554df9914	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -212,9 +212,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52f1b5a4-62ff-44de-80da-503d4e52d312	cast	cast-resolve	agreed	-	FX	scen	2	0	Cat Collector/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52f1b5a4-62ff-44de-80da-503d4e52d312	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52f1b5a4-62ff-44de-80da-503d4e52d312	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Cat Collector/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-52fa7e9b-36d9-409c-8981-6f8dfd8bb031	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52fa7e9b-36d9-409c-8981-6f8dfd8bb031	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stir-the-sands:cast:s1,f:xs:XP:stir-the-sands:cast:s1	-	-	-	d864b561c9cb	-	65b50e199a2a	-	-	2026-11-24	xproof
 52fa7e9b-36d9-409c-8981-6f8dfd8bb031	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-52fa7e9b-36d9-409c-8981-6f8dfd8bb031	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52fa7e9b-36d9-409c-8981-6f8dfd8bb031	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 52fcc5b6-6ada-457f-be76-fa674c74b4fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52fcc5b6-6ada-457f-be76-fa674c74b4fd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52fd9309-b849-419a-8d19-5882c00a72b4	cast	cast-resolve	agreed	-	X	scen	1	0	Beluna's Gatekeeper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

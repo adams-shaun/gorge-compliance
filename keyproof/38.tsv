@@ -30,8 +30,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 381fdb36-2467-421c-8b89-419d14955175	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 381fdb36-2467-421c-8b89-419d14955175	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 382097b3-f753-493c-bde4-101c0538feb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frost-breath:cast:s1,f:xs:XP:frost-breath:cast:s1	-	-	-	d864b561c9cb	-	3507ec61c664	-	-	2026-11-24	xproof
-382109c5-fd08-4e82-b898-2a387181b470	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-382109c5-fd08-4e82-b898-2a387181b470	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+382109c5-fd08-4e82-b898-2a387181b470	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ironclad-revolutionary:f0t0:s1,f:xs:XP:ironclad-revolutionary:f0t0:s1	-	-	-	d864b561c9cb	-	9d0c69e58ed2	-	-	2026-11-24	xproof
+382109c5-fd08-4e82-b898-2a387181b470	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ironclad-revolutionary:f0t0:s1,f:xs:XP:ironclad-revolutionary:f0t0:s1	-	-	-	d864b561c9cb	-	9d0c69e58ed2	-	-	2026-11-24	xproof
 38212d24-40fd-404f-a8bb-24ed0d023fe8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38212d24-40fd-404f-a8bb-24ed0d023fe8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 382267da-c63c-432e-8a11-f803cf0e3a3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 383f6020-c26d-43e8-bb07-566886626d74	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38405a37-921a-49ab-a95b-28eb8c26474a	cast	cast-resolve	agreed	-	X	scen	1	0	Crash and Burn/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 384611fb-aca2-4e2d-9125-44ea034de08b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38462d26-f252-4055-9f1a-59bc3ab2c75e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38462d26-f252-4055-9f1a-59bc3ab2c75e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:engineered-might:cast:s1,f:xs:XP:engineered-might:cast:s1	-	-	-	d864b561c9cb	-	9e94009c0f15	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -110,8 +110,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38872730-0fd1-414e-8015-29d1bc649913	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38872730-0fd1-414e-8015-29d1bc649913	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 38877c68-b69b-4ee1-8e8f-5137a184a8f7	cast	counter-spell	agreed	-	FX	scen	2	0	Spell Snare/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-388b7b0f-b26d-4de9-bfa6-8c3cbcc2e284	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-388b7b0f-b26d-4de9-bfa6-8c3cbcc2e284	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+388b7b0f-b26d-4de9-bfa6-8c3cbcc2e284	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:fairgrounds-warden:cast:s1,f:xs:XP:fairgrounds-warden:cast:s1	-	-	-	d864b561c9cb	-	553bf342af3e	-	-	2026-11-24	xproof
+388b7b0f-b26d-4de9-bfa6-8c3cbcc2e284	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:fairgrounds-warden:cast:s1,f:xs:XP:fairgrounds-warden:cast:s1	-	-	-	d864b561c9cb	-	553bf342af3e	-	-	2026-11-24	xproof
 3891a914-e597-4126-846f-39bf8534eb92	cast	cast-resolve	agreed	-	X	scen	1	0	Museum Nightwatch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3891a914-e597-4126-846f-39bf8534eb92	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Museum Nightwatch/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 389a9d46-d3fb-47f0-91cd-f6d487636916	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

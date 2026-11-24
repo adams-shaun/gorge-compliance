@@ -10,8 +10,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4e0b647a-6e1a-421b-bca9-8d5e346bda80	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e0b647a-6e1a-421b-bca9-8d5e346bda80	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4e0b9273-6614-41a8-9738-959349c0717b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4e0b9273-6614-41a8-9738-959349c0717b	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4e0b9273-6614-41a8-9738-959349c0717b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4e0b9273-6614-41a8-9738-959349c0717b	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+4e0b9273-6614-41a8-9738-959349c0717b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4e0ba9d5-4bd6-49a0-ae00-70818738d0ba	cast	cast-resolve	agreed	-	FX	scen	2	0	Gallant Fowlknight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 4e0ba9d5-4bd6-49a0-ae00-70818738d0ba	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e0de4d9-7a30-4a2b-94ba-8239baad2a0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ea488b2-5ba0-4565-b928-570c8e03b926	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ea488b2-5ba0-4565-b928-570c8e03b926	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:heliod-god-of-the-sun:f0a0:s1,f:xs:XP:heliod-god-of-the-sun:f0a0:s1	-	-	-	d864b561c9cb	-	a1c3935953c3	-	-	2026-11-24	xproof
 4ea5409e-9b39-434c-bdb8-8c798128f199	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ea5409e-9b39-434c-bdb8-8c798128f199	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4ea5409e-9b39-434c-bdb8-8c798128f199	f0/t0	NULL	owed	refused:no-generator:trigger:Transformed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4eaa100c-f1ef-4a2b-9370-5dad7f3a95f2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4eafe158-abff-43e9-aeae-596430c5ce21	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4eb24ae3-da1a-4565-934f-e25f56036d71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,8 +128,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4edbaac4-dcb3-40b4-abd7-ff2683bd366d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4eedf21c-0ad1-48da-a9fe-2ffdbf8371e9	cast	cast-resolve	agreed	-	X	scen	1	0	Pain for All/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4eedf21c-0ad1-48da-a9fe-2ffdbf8371e9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Pain for All/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4eef2f24-6a5c-4bc7-b316-dd818dc2741a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4eef2f24-6a5c-4bc7-b316-dd818dc2741a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4eef2f24-6a5c-4bc7-b316-dd818dc2741a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ridgescale-tusker:f0t0:s1,f:xs:XP:ridgescale-tusker:f0t0:s1	-	-	-	d864b561c9cb	-	32c913adaa32	-	-	2026-11-24	xproof
+4eef2f24-6a5c-4bc7-b316-dd818dc2741a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ridgescale-tusker:f0t0:s1,f:xs:XP:ridgescale-tusker:f0t0:s1	-	-	-	d864b561c9cb	-	32c913adaa32	-	-	2026-11-24	xproof
 4ef07e5a-3dc3-41dd-a3a9-e8812b4d40d3	cast	cast-resolve	agreed	-	X	scen	1	0	Trial of Agony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ef4b4f9-47cd-4862-8cbb-b6e624d6e6fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ef4b4f9-47cd-4862-8cbb-b6e624d6e6fc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

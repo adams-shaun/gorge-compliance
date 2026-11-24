@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 221240c5-3c97-438c-b906-2508eacf190f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22134489-efce-4903-9f14-37a2248e8546	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22188333-69b6-4685-b96b-b8a102ad5531	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-22188333-69b6-4685-b96b-b8a102ad5531	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+22188333-69b6-4685-b96b-b8a102ad5531	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 22196948-9f30-4fcd-b43b-c7f81a0f4f36	cast	cast-resolve	agreed	-	X	scen	1	0	Pedal to the Metal/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2219e636-74d0-4f82-8704-e6d66c5f7f09	cast	cast-resolve	agreed	-	X	scen	1	0	Rocketeer Boostbuggy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2219e636-74d0-4f82-8704-e6d66c5f7f09	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rocketeer Boostbuggy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2249001c-08d5-4c0a-86f8-d97519a39f37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 224f5f1a-4f31-4935-bf5a-910fd0a666a1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 224f5f1a-4f31-4935-bf5a-910fd0a666a1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-22504fd0-0353-4ef0-baf4-4b7be28d1a66	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+22504fd0-0353-4ef0-baf4-4b7be28d1a66	cast	cast	agreed	-	F	start	2	0	f:xs:XP:spark-of-creativity:cast:s1	-	-	-	d864b561c9cb	-	19361d74099d	-	-	2026-11-24	xproof
 2251e34e-4ce8-4452-9dc6-d8cce8583996	cast	cast-resolve	agreed	-	X	scen	1	0	Stock Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 22534fab-2c62-4113-bcea-f305ae9f664f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22534fab-2c62-4113-bcea-f305ae9f664f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:safehold-sentry:f0a0:s1,f:xs:XP:safehold-sentry:f0a0:s1	-	-	-	8a1b1a193ec0	-	5a709abbde99	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 228f0afa-146b-4564-a380-71595cdf1ef4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 228fbae1-423e-461d-b8c3-55786938a3cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 228fbae1-423e-461d-b8c3-55786938a3cb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-228fbae1-423e-461d-b8c3-55786938a3cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+228fbae1-423e-461d-b8c3-55786938a3cb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 228fe7f0-54ad-411b-bedb-65a1bc2a099b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22936eb4-8712-4ba7-94da-e124487acda8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2298eb28-425d-4e87-990b-6bc0ef9bcfda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

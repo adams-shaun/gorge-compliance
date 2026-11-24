@@ -23,8 +23,8 @@ f60d0b8c-3086-425f-a53a-769c5badab45	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 f60e831b-1404-437a-a587-ed4f4b596084	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f60e831b-1404-437a-a587-ed4f4b596084	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f60e831b-1404-437a-a587-ed4f4b596084	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f60fb81a-969a-476c-a227-5231bbed4ad4	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f60fb81a-969a-476c-a227-5231bbed4ad4	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f60fb81a-969a-476c-a227-5231bbed4ad4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forsake-the-worldly:cast:s1,f:xs:XP:forsake-the-worldly:cast:s1	-	-	-	d864b561c9cb	-	68e405021d47	-	-	2026-11-24	xproof
+f60fb81a-969a-476c-a227-5231bbed4ad4	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f610748a-8b2c-4c7d-b495-b4677ff4c423	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f610748a-8b2c-4c7d-b495-b4677ff4c423	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f61591d5-0f2a-48cd-a091-863d2e93e019	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -122,8 +122,8 @@ f687a746-4807-41d5-848d-4053ddef6a76	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 f688863f-b8eb-4143-8ea5-0b234cc91bd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6889f57-2965-4a82-8556-fd91c6227058	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6889f57-2965-4a82-8556-fd91c6227058	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	77494c1ce129	-	-	-	-	2026-11-24	xproof
-f6894486-0bac-4b72-92b7-5ce99fa426e6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f6894486-0bac-4b72-92b7-5ce99fa426e6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f6894486-0bac-4b72-92b7-5ce99fa426e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vessel-of-paramnesia:cast:s1,f:xs:XP:vessel-of-paramnesia:cast:s1	-	-	-	d864b561c9cb	-	c96c01337262	-	-	2026-11-24	xproof
+f6894486-0bac-4b72-92b7-5ce99fa426e6	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:vessel-of-paramnesia:f0a0:s1,f:xs:XP:vessel-of-paramnesia:f0a0:s1	-	-	-	d864b561c9cb	-	c96c01337262	-	-	2026-11-24	xproof
 f693cf76-0919-4b89-92de-e619be006abb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f693cf76-0919-4b89-92de-e619be006abb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 f69574dd-097f-4908-9cab-344b0eb39c62	cast	cast-resolve	agreed	-	FX	scen	2	0	Leyline of Resonance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ f696b727-083e-4825-80d9-4bac35289958	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f696b727-083e-4825-80d9-4bac35289958	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f69d65e0-4d8a-4e27-b4dd-dd8c50acb8eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6a07af3-e54b-4dcb-ae2a-3dfdac386bab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f6a07af3-e54b-4dcb-ae2a-3dfdac386bab	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f6a07af3-e54b-4dcb-ae2a-3dfdac386bab	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:wild-field-scarecrow:f0a0:s1,f:xs:XP:wild-field-scarecrow:f0a0:s1	-	-	-	d864b561c9cb	-	1092b45bd316	-	-	2026-11-24	xproof
 f6a2092a-093e-4cd6-9eb0-d8ed32da896c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6a2092a-093e-4cd6-9eb0-d8ed32da896c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6a4298c-3d9d-43e1-b32c-b168c02ad503	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6469f61d-1b4c-4813-bb4a-99f6e6388d7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 646a2371-54c0-4492-ac2f-20f109d6108c	cast	cast-resolve	agreed	-	X	scen	1	0	Monstrous Rage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 646e68c8-cc42-4d6c-8363-a18b10a10eae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-646e68c8-cc42-4d6c-8363-a18b10a10eae	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+646e68c8-cc42-4d6c-8363-a18b10a10eae	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:oketra-the-true:f0a0:s1,f:xs:XP:oketra-the-true:f0a0:s1	-	-	-	d864b561c9cb	-	ffbe0a8c9a0e	-	-	2026-11-24	xproof
 646f9ad8-9d18-4b42-954a-e21a62e9f0e8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:aang-s-iceberg:f0t0:s2,f:xs:XP:aang-s-iceberg:f0t0:s2	-	-	-	267e485f6204	-	110e1e091c86	-	-	2026-11-24	xproof
 646f9ad8-9d18-4b42-954a-e21a62e9f0e8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Aang's Iceberg/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 646f9ad8-9d18-4b42-954a-e21a62e9f0e8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:aang-s-iceberg:f0t0:s2,f:xs:XP:aang-s-iceberg:f0t0:s2	-	-	-	267e485f6204	-	110e1e091c86	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64a9a6b4-26b5-4d23-be86-85c54e9c4727	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64a9a6b4-26b5-4d23-be86-85c54e9c4727	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64a9a6b4-26b5-4d23-be86-85c54e9c4727	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64a9a6b4-26b5-4d23-be86-85c54e9c4727	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+64a9a6b4-26b5-4d23-be86-85c54e9c4727	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 64aa732c-d939-48c7-b1d6-c73fa1eedb40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64aa732c-d939-48c7-b1d6-c73fa1eedb40	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64ab6dfe-ed87-47ec-afd5-a7f2e7e6bbd2	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof

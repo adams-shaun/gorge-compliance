@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 e10065ba-fe24-4974-a500-d4151397a4d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e10065ba-fe24-4974-a500-d4151397a4d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e10065ba-fe24-4974-a500-d4151397a4d9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e100f9fc-b6fb-42ab-b9b3-796bede6804d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e100f9fc-b6fb-42ab-b9b3-796bede6804d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e101b744-9175-4aa5-bf80-d6944359e538	cast	cast-resolve	agreed	-	FX	scen	2	0	Airbending Lesson/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -104,20 +104,20 @@ e1733392-1402-458b-bbc7-673d733c731c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e1733392-1402-458b-bbc7-673d733c731c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1733392-1402-458b-bbc7-673d733c731c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e175a3c1-df6c-4aa7-a4c9-893b466ad9e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e17db9d8-14b0-4f72-aacc-f51fae4597e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e17db9d8-14b0-4f72-aacc-f51fae4597e2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e17db9d8-14b0-4f72-aacc-f51fae4597e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawnfeather-eagle:f0t0:s1,f:xs:XP:dawnfeather-eagle:f0t0:s1	-	-	-	d864b561c9cb	-	e7d3b40bb848	-	-	2026-11-24	xproof
+e17db9d8-14b0-4f72-aacc-f51fae4597e2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dawnfeather-eagle:f0t0:s1,f:xs:XP:dawnfeather-eagle:f0t0:s1	-	-	-	d864b561c9cb	-	e7d3b40bb848	-	-	2026-11-24	xproof
 e17e3bda-75cb-47a1-9f60-f50705a46a1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e17e3bda-75cb-47a1-9f60-f50705a46a1e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e17ea7eb-362e-4c61-97cd-537f3921bced	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1865bec-1744-40c2-9031-7d6363be5333	cast	cast-resolve	agreed	-	FX	scen	2	0	The Last Ronin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e186cc6f-8c11-4475-a704-0b4c3a9eade9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e186cc6f-8c11-4475-a704-0b4c3a9eade9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e186cc6f-8c11-4475-a704-0b4c3a9eade9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:byway-courier:cast:s1,f:xs:XP:byway-courier:cast:s1	-	-	-	d864b561c9cb	-	3c3fd50499de	-	-	2026-11-24	xproof
+e186cc6f-8c11-4475-a704-0b4c3a9eade9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:byway-courier:f0t0:s1,f:xs:XP:byway-courier:f0t0:s1	-	-	-	d864b561c9cb	-	3c3fd50499de	-	-	2026-11-24	xproof
 e1890cbc-b15b-44bc-b1c0-ca3d9fd6028a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1894a57-0faa-4e0d-8ab9-e4785f0457a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1899133-635d-46ff-b90d-6f8d46a1ffe1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vital-splicer:f0t0:s1,f:xs:XP:vital-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	fa64409262d6	-	-	2026-11-24	xproof
 e1899133-635d-46ff-b90d-6f8d46a1ffe1	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:vital-splicer:f0a0:s1,f:xs:XP:vital-splicer:f0a0:s1	-	-	-	d864b561c9cb	-	fa64409262d6	-	-	2026-11-24	xproof
 e1899133-635d-46ff-b90d-6f8d46a1ffe1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vital-splicer:f0t0:s1,f:xs:XP:vital-splicer:f0t0:s1	-	-	-	d864b561c9cb	-	fa64409262d6	-	-	2026-11-24	xproof
-e18c93bc-2073-4bb6-83b4-c5c70f2d8a82	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e18c93bc-2073-4bb6-83b4-c5c70f2d8a82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winged-shepherd:cast:s1,f:xs:XP:winged-shepherd:cast:s1	-	-	-	d864b561c9cb	-	8cafbc90b49b	-	-	2026-11-24	xproof
 e18c93bc-2073-4bb6-83b4-c5c70f2d8a82	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e18d8326-c3c3-43c2-ac13-6861c0ef3888	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1905321-180b-41d2-b7ef-0974ab90f188	cast	cast-resolve	agreed	-	X	scen	1	0	Felonious Rage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -158,10 +158,10 @@ e1afaef7-9fa3-4662-a95f-adfb0da9fd11	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:
 e1afaef7-9fa3-4662-a95f-adfb0da9fd11	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e1b577ad-1488-43b5-83d9-e40bd60c74be	cast	cast-resolve	agreed	-	X	scen	1	0	Super Strength/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e1b577ad-1488-43b5-83d9-e40bd60c74be	static#0.0	static#0.0	agreed	-	X	scen	1	0	Super Strength/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liliana-death-wielder:cast:s1,f:xs:XP:liliana-death-wielder:cast:s1	-	-	-	d864b561c9cb	-	34e71085cc03	-	-	2026-11-24	xproof
+e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	f0/a0	PutCounter	agreed	-	FX	start	1	0	x:xs:XP:liliana-death-wielder:cast:s2,f:xs:XP:liliana-death-wielder:cast:s2	-	-	-	d864b561c9cb	-	34e71085cc03	-	-	2026-11-24	xproof
+e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	f0/a1	Destroy	agreed	-	FX	start	1	0	x:xs:XP:liliana-death-wielder:cast:s1,f:xs:XP:liliana-death-wielder:cast:s1	-	-	-	d864b561c9cb	-	34e71085cc03	-	-	2026-11-24	xproof
+e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e1b74ef7-ab6b-4d40-8087-3f3a448b7e0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1b74ef7-ab6b-4d40-8087-3f3a448b7e0a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1b74ef7-ab6b-4d40-8087-3f3a448b7e0a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

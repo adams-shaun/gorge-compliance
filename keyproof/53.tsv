@@ -78,9 +78,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53599f89-1598-4d3d-8aa7-75b397b258eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 535c0280-fdb5-4ff8-8608-c2f98b8a7ffc	cast	cast-resolve	agreed	-	X	scen	1	0	Anthropological Mission/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 535c0280-fdb5-4ff8-8608-c2f98b8a7ffc	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-535e2af0-7b08-4026-b1bf-87626407dd42	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+535e2af0-7b08-4026-b1bf-87626407dd42	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archfiend-of-ifnir:cast:s1,f:xs:XP:archfiend-of-ifnir:cast:s1	-	-	-	d864b561c9cb	-	cecf08843bd3	-	-	2026-11-24	xproof
 535e2af0-7b08-4026-b1bf-87626407dd42	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-535e2af0-7b08-4026-b1bf-87626407dd42	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+535e2af0-7b08-4026-b1bf-87626407dd42	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 535f405d-94df-4f45-aedc-b331103720b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 535f405d-94df-4f45-aedc-b331103720b7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 535f9bc6-9a07-4850-91eb-c00d06633e7e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:coati-scavenger:f0t0:s2,f:xs:XP:coati-scavenger:f0t0:s2	-	-	-	e07cf3a05ba5	-	4b45b9ef0c3d	-	-	2026-11-24	xproof
@@ -156,9 +156,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53b121df-3040-4ad0-a25d-587a299b4f8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53b17c51-a216-484f-80df-3904284df0ea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53b17c51-a216-484f-80df-3904284df0ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53b2c8f2-db9a-4ab0-a4e8-17385b2fa3bd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53b2c8f2-db9a-4ab0-a4e8-17385b2fa3bd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53b2c8f2-db9a-4ab0-a4e8-17385b2fa3bd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+53b2c8f2-db9a-4ab0-a4e8-17385b2fa3bd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:aethertide-whale:cast:s1,f:xs:XP:aethertide-whale:cast:s1	-	-	-	d864b561c9cb	-	2ca98c0e1733	-	-	2026-11-24	xproof
+53b2c8f2-db9a-4ab0-a4e8-17385b2fa3bd	f0/a0	ChangeZone	agreed	-	FX	start	4	0	x:xs:XP:aethertide-whale:cast:s1,f:xs:XP:aethertide-whale:cast:s1	-	-	-	d864b561c9cb	-	2ca98c0e1733	-	-	2026-11-24	xproof
+53b2c8f2-db9a-4ab0-a4e8-17385b2fa3bd	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:aethertide-whale:cast:s1,f:xs:XP:aethertide-whale:cast:s1	-	-	-	d864b561c9cb	-	2ca98c0e1733	-	-	2026-11-24	xproof
 53b86704-4f16-498e-8c2c-e661cb85eb9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53b86704-4f16-498e-8c2c-e661cb85eb9c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53b99846-3f80-4e9d-ad3c-52a4906b8823	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gilt-leaf-winnower:f0t0:s1,f:xs:XP:gilt-leaf-winnower:f0t0:s1	-	-	-	d864b561c9cb	-	88d0adae462b	-	-	2026-11-24	xproof

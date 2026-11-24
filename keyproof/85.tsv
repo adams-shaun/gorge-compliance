@@ -21,9 +21,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8514f20a-50c7-4319-84cb-2bf263548234	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Breeches, the Blastmaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8514f20a-50c7-4319-84cb-2bf263548234	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Breeches, the Blastmaker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8516d8ba-b3f9-4c45-8d70-5dab476e478f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8517e5f4-89c5-4879-9b4f-b35e268798df	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8517e5f4-89c5-4879-9b4f-b35e268798df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8517e5f4-89c5-4879-9b4f-b35e268798df	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8517e5f4-89c5-4879-9b4f-b35e268798df	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:aetherstream-leopard:cast:s1,f:xs:XP:aetherstream-leopard:cast:s1	-	-	-	d864b561c9cb	-	308ea4644dde	-	-	2026-11-24	xproof
+8517e5f4-89c5-4879-9b4f-b35e268798df	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:aetherstream-leopard:cast:s1,f:xs:XP:aetherstream-leopard:cast:s1	-	-	-	d864b561c9cb	-	308ea4644dde	-	-	2026-11-24	xproof
+8517e5f4-89c5-4879-9b4f-b35e268798df	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:aetherstream-leopard:f0t1:s1,f:xs:XP:aetherstream-leopard:f0t1:s1	-	-	-	d864b561c9cb	-	308ea4644dde	-	-	2026-11-24	xproof
 851be993-35d7-4566-96a0-3fe84d17979e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8520ee67-439b-4f15-838b-420bacbb8b13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8520ee67-439b-4f15-838b-420bacbb8b13	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 852c6520-d148-4923-a312-05a9af821f24	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Eroded Canyon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 852c6520-d148-4923-a312-05a9af821f24	land	play-land	agreed	-	X	scen	1	0	Eroded Canyon/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 852d4dc3-404d-4565-99e9-1eac8f6eca5e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-852d4dc3-404d-4565-99e9-1eac8f6eca5e	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+852d4dc3-404d-4565-99e9-1eac8f6eca5e	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 852d4dc3-404d-4565-99e9-1eac8f6eca5e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 852e3d89-64a0-4b32-be2b-b1d6cd7c2f64	cast	cast-resolve	agreed	-	X	scen	1	0	Omenport Vigilante/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 852e3d89-64a0-4b32-be2b-b1d6cd7c2f64	static#0.0	static#0.0	agreed	-	X	scen	1	0	Omenport Vigilante/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -158,9 +158,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85d87087-48ee-4dc8-a1c0-9c9ccb885adc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Eshki Dragonclaw/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 85d87087-48ee-4dc8-a1c0-9c9ccb885adc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Eshki Dragonclaw/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 85d87087-48ee-4dc8-a1c0-9c9ccb885adc	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Eshki Dragonclaw/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-85dda096-48b2-414e-8c4d-4ffa6e5dac11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85dda096-48b2-414e-8c4d-4ffa6e5dac11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85dda096-48b2-414e-8c4d-4ffa6e5dac11	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+85dda096-48b2-414e-8c4d-4ffa6e5dac11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thriving-turtle:f0t0:s1,f:xs:XP:thriving-turtle:f0t0:s1	-	-	-	d864b561c9cb	-	39358cff08e3	-	-	2026-11-24	xproof
+85dda096-48b2-414e-8c4d-4ffa6e5dac11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thriving-turtle:f0t0:s1,f:xs:XP:thriving-turtle:f0t0:s1	-	-	-	d864b561c9cb	-	39358cff08e3	-	-	2026-11-24	xproof
+85dda096-48b2-414e-8c4d-4ffa6e5dac11	f0/t1	Attacks	agreed	-	X	start	2	0	x:xs:XP:thriving-turtle:f0t1:s1	-	-	-	d864b561c9cb	-	39358cff08e3	-	-	2026-11-24	xproof
 85dec6cf-6f27-4eb0-834b-5f6fbbe25fc8	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Man, To the Rescue/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 85dec6cf-6f27-4eb0-834b-5f6fbbe25fc8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spider-Man, To the Rescue/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 85dec6cf-6f27-4eb0-834b-5f6fbbe25fc8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spider-Man, To the Rescue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -174,8 +174,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85e18895-d1d2-46c7-afd0-31da410c0438	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85e2b073-e953-46f9-a1d4-0dfe030b3751	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85e797de-da27-4cd5-8fa4-4aef948988b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85e797de-da27-4cd5-8fa4-4aef948988b2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85e797de-da27-4cd5-8fa4-4aef948988b2	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+85e797de-da27-4cd5-8fa4-4aef948988b2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+85e797de-da27-4cd5-8fa4-4aef948988b2	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 85eafa00-51df-4070-9b2d-247457ba3364	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85eafa00-51df-4070-9b2d-247457ba3364	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85eb890e-a5e1-48f8-b813-e8424d18b28a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

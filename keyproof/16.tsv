@@ -61,8 +61,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 164b064e-de50-468a-b874-b054897a5be9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 164b064e-de50-468a-b874-b054897a5be9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 164f3f85-21fc-40b7-9871-4f303ba98428	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-164f3f85-21fc-40b7-9871-4f303ba98428	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-164f3f85-21fc-40b7-9871-4f303ba98428	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+164f3f85-21fc-40b7-9871-4f303ba98428	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scrap-trawler:f0t0:s1,f:xs:XP:scrap-trawler:f0t0:s1	-	-	-	d864b561c9cb	-	c0ca4035e034	-	-	2026-11-24	xproof
+164f3f85-21fc-40b7-9871-4f303ba98428	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1650d85f-4c65-429d-8952-f68b62935a55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1650d85f-4c65-429d-8952-f68b62935a55	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1654cab1-0697-4547-b1fe-2d0a61385199	cast	cast-resolve	agreed	-	X	scen	1	0	Boulderborn Dragon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -77,8 +77,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 165c1b17-2bde-4c96-892d-4a8fdc7a57b7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16604fee-cd8d-41e4-8269-3c7ff756613d	cast	cast-resolve	agreed	-	X	scen	1	0	Tomik, Izzet Sparkmage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16604fee-cd8d-41e4-8269-3c7ff756613d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tomik, Izzet Sparkmage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-16616aa2-5490-4fab-9de4-f37ca8c8be08	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16616aa2-5490-4fab-9de4-f37ca8c8be08	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16616aa2-5490-4fab-9de4-f37ca8c8be08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghoulcaller-s-accomplice:cast:s1,f:xs:XP:ghoulcaller-s-accomplice:cast:s1	-	-	-	d864b561c9cb	-	d43f450b53fd	-	-	2026-11-24	xproof
+16616aa2-5490-4fab-9de4-f37ca8c8be08	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 16629f59-bae8-4c19-bf50-443eb0ed6856	cast	cast-resolve	agreed	-	X	scen	1	0	Felidar Retreat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16629f59-bae8-4c19-bf50-443eb0ed6856	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Felidar Retreat/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1663d54f-4f39-4a03-aac2-e2923cbb7de8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 169429d8-aa98-46a8-8681-521c65dafbb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:needlepeak-spider:cast:s1,f:xs:XP:needlepeak-spider:cast:s1	-	-	-	9ee19e8250ce	-	08113fcadd97	-	-	2026-11-24	xproof
 169705c3-32c1-4628-b108-c37ca5f27e24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169705c3-32c1-4628-b108-c37ca5f27e24	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:ruin-ghost:f0a0:s1,f:xs:XP:ruin-ghost:f0a0:s1	-	-	-	8a1b1a193ec0	-	d6f87ad06fa3	-	-	2026-11-24	xproof
-169728d6-7820-4a6d-a815-70714ad3e887	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+169728d6-7820-4a6d-a815-70714ad3e887	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:perilous-predicament:cast:s1,f:xs:XP:perilous-predicament:cast:s1	-	-	-	d864b561c9cb	-	35da4e78d57e	-	-	2026-11-24	xproof
 16977ebd-6384-4c28-b9c3-448563a07807	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169a4a77-12ff-4997-9550-bdcd456aa2f7	cast	cast-resolve	agreed	-	X	scen	1	0	The Eagles Are Coming!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 169c468e-0e17-450b-8954-df47d78ad8f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

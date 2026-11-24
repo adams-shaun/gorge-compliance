@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a1d817d-dce8-4e83-a380-909f7c9eee46	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a2075b5-9609-433d-bcd2-e0a637456cf8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a2075b5-9609-433d-bcd2-e0a637456cf8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a25a72e-5603-4b50-ac20-36b286cc1a2b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0a25a72e-5603-4b50-ac20-36b286cc1a2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wildest-dreams:cast:s1,f:xs:XP:wildest-dreams:cast:s1	-	-	-	d864b561c9cb	-	312a23f1b43b	-	-	2026-11-24	xproof
 0a27bd77-ec13-4e8d-acad-9aa9c66b3b73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a27bd77-ec13-4e8d-acad-9aa9c66b3b73	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a28dff0-2bd6-4105-b73a-b6c4735833fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -90,7 +90,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a66ce8b-af99-411f-8ecb-52a5d2f6af3d	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a66ce8b-af99-411f-8ecb-52a5d2f6af3d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ertha Jo, Frontier Mentor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a6f45e9-5c7a-4e2c-bf8a-fc5fe0ae0793	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a6f45e9-5c7a-4e2c-bf8a-fc5fe0ae0793	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0a6f45e9-5c7a-4e2c-bf8a-fc5fe0ae0793	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0a72d6cd-b4a7-4c42-90ba-a14f1733d00e	cast	cast-resolve	agreed	-	FX	scen	2	0	Jadelight Spelunker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a72d6cd-b4a7-4c42-90ba-a14f1733d00e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a73b4da-9b5c-480e-b58b-6a82a52ea71e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ab5fde8-e7db-4265-81c6-2a6488ba56c4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ab9539d-3461-4936-95cd-4c229308c4a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ab9539d-3461-4936-95cd-4c229308c4a4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0abc993b-18c7-4bb8-aa58-0d06a41cb48f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0abc993b-18c7-4bb8-aa58-0d06a41cb48f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gisa-s-bidding:cast:s1,f:xs:XP:gisa-s-bidding:cast:s1	-	-	-	d864b561c9cb	-	fe56eb7ca31b	-	-	2026-11-24	xproof
 0abcf934-2552-4885-bbe7-38d93ce0e642	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0abcf934-2552-4885-bbe7-38d93ce0e642	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ac5c149-f6af-46b6-974e-14689e9a583d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -30,8 +30,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c264f6e-caa7-44cb-8719-86212292679c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c264f6e-caa7-44cb-8719-86212292679c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c2829b7-f73f-4023-95f3-9cd40b4125d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c29ae09-cc93-4a2a-b432-3c78ae01c1ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c29ae09-cc93-4a2a-b432-3c78ae01c1ed	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c29ae09-cc93-4a2a-b432-3c78ae01c1ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:midnight-scavengers:f0t0:s1,f:xs:XP:midnight-scavengers:f0t0:s1	-	-	-	d864b561c9cb	-	09cea8157721	-	-	2026-11-24	xproof
+1c29ae09-cc93-4a2a-b432-3c78ae01c1ed	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:midnight-scavengers:f0t0:s1,f:xs:XP:midnight-scavengers:f0t0:s1	-	-	-	d864b561c9cb	-	09cea8157721	-	-	2026-11-24	xproof
 1c2cc166-dc59-44ce-86d5-ed6013b0bf67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c2cc166-dc59-44ce-86d5-ed6013b0bf67	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c2cc166-dc59-44ce-86d5-ed6013b0bf67	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c329131-bef2-41c6-823a-136c110ff0ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c329131-bef2-41c6-823a-136c110ff0ad	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:vithian-stinger:f0a1:s1,f:xs:XP:vithian-stinger:f0a1:s1	-	-	-	d864b561c9cb	-	c9135f38f002	-	-	2026-11-24	xproof
 1c329131-bef2-41c6-823a-136c110ff0ad	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c34b2e4-e600-4688-86cb-8a1c11fdc770	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1c34b2e4-e600-4688-86cb-8a1c11fdc770	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawn-gryff:cast:s1,f:xs:XP:dawn-gryff:cast:s1	-	-	-	d864b561c9cb	-	8720c078ac6d	-	-	2026-11-24	xproof
 1c350891-8810-4c14-b8ea-84486864637b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c350891-8810-4c14-b8ea-84486864637b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c371003-e4f0-4d7c-b021-273176772f97	cast	cast-resolve	agreed	-	X	scen	1	0	April, Reporter of the Weird/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -174,8 +174,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1cf51f50-24e4-48d0-95b3-1dad3ffa4bf5	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cf7e5a0-cc8f-4bf7-9767-2f3bcae26339	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cf7e5a0-cc8f-4bf7-9767-2f3bcae26339	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1cfa9f7d-ef1f-4907-aeb1-15c0df33fccc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1cfa9f7d-ef1f-4907-aeb1-15c0df33fccc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1cfa9f7d-ef1f-4907-aeb1-15c0df33fccc	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:baleful-ammit:cast:s1,f:xs:XP:baleful-ammit:cast:s1	-	-	-	d864b561c9cb	-	f24b9cbbf70c	-	-	2026-11-24	xproof
+1cfa9f7d-ef1f-4907-aeb1-15c0df33fccc	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:baleful-ammit:cast:s1,f:xs:XP:baleful-ammit:cast:s1	-	-	-	d864b561c9cb	-	f24b9cbbf70c	-	-	2026-11-24	xproof
 1cfc7b12-a595-492d-81ee-bd100ba7de6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cfc7b12-a595-492d-81ee-bd100ba7de6a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1cfe6e3a-f8c9-4105-ad03-0faf1fcc4626	cast	cast-resolve	agreed	-	X	scen	1	0	Riku of Many Paths/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

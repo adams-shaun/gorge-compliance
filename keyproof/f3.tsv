@@ -26,7 +26,7 @@ f3229980-994e-4492-be98-267b781614c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f3229980-994e-4492-be98-267b781614c1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f325fd7a-dcae-4892-adf5-de9893a23ac5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:learn-from-the-past:cast:s1,f:xs:XP:learn-from-the-past:cast:s1	-	-	-	d864b561c9cb	-	36ce452f8ae9	-	-	2026-11-24	xproof
 f3264224-43a4-4c6b-b363-2d147687dfc1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f3264224-43a4-4c6b-b363-2d147687dfc1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f3264224-43a4-4c6b-b363-2d147687dfc1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f328012f-4696-47bb-ab43-247bdcb13f03	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dragoon-s-wyvern:f0t0:s2,f:xs:XP:dragoon-s-wyvern:f0t0:s2	-	-	-	267e485f6204	-	dac0bbfa4c61	-	-	2026-11-24	xproof
 f328012f-4696-47bb-ab43-247bdcb13f03	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dragoon's Wyvern/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f328012f-4696-47bb-ab43-247bdcb13f03	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dragoon's Wyvern/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ f343b6f9-41c3-419b-a57c-a7b08603ef5c	f0/t2	NULL	owed	refused:no-generator:trigge
 f343b6f9-41c3-419b-a57c-a7b08603ef5c	f0/t3	trigger#0.3	agreed	-	X	scen	1	0	Shadow of the Goblin/trigger#0.3/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f34b9bc4-7bfe-47fd-ba23-4eeeb46026eb	cast	cast-resolve	agreed	-	FX	scen	2	0	Lightning Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f34ba913-cf9a-48fe-b5fe-68bf504693b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f34ba913-cf9a-48fe-b5fe-68bf504693b2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f34ba913-cf9a-48fe-b5fe-68bf504693b2	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:universal-solvent:f0a0:s1,f:xs:XP:universal-solvent:f0a0:s1	-	-	-	d864b561c9cb	-	cf1ce60f3150	-	-	2026-11-24	xproof
 f34be3cc-ff47-4415-a6a8-ed142891dc0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f34be3cc-ff47-4415-a6a8-ed142891dc0c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f34be4b8-126d-4b5c-8ebb-23b5e5370012	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ f3baef8c-f8d7-4cb2-b5cc-b889a991e4e8	cast	cast-resolve	agreed	-	FX	scen	2	0	Roof
 f3baef8c-f8d7-4cb2-b5cc-b889a991e4e8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rooftop Assassin/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f3baef8c-f8d7-4cb2-b5cc-b889a991e4e8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rooftop Assassin/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f3baef8c-f8d7-4cb2-b5cc-b889a991e4e8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f3bd5ca1-9854-4bc0-b108-b555808e1d5f	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f3bd5ca1-9854-4bc0-b108-b555808e1d5f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shimmerscale-drake:cast:s1,f:xs:XP:shimmerscale-drake:cast:s1	-	-	-	d864b561c9cb	-	1fe9b3919962	-	-	2026-11-24	xproof
 f3bd5ca1-9854-4bc0-b108-b555808e1d5f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3bd9bfe-847f-4ed1-88aa-6aa6b3fa7199	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3bd9bfe-847f-4ed1-88aa-6aa6b3fa7199	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

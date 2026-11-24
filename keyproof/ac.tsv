@@ -67,7 +67,7 @@ ac5487ba-6d6e-47ee-ae29-776e186789cc	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 ac5a13b1-0725-4978-8c93-cebd76be58ba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cursebreak:cast:s1,f:xs:XP:cursebreak:cast:s1	-	-	-	d864b561c9cb	-	74d824ea69e2	-	-	2026-11-24	xproof
 ac5c2069-0706-4b85-a811-a522db016e3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac5c2069-0706-4b85-a811-a522db016e3e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac5c2069-0706-4b85-a811-a522db016e3e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ac5c2069-0706-4b85-a811-a522db016e3e	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ac5c2975-6a56-42c7-97c5-6a0e75c000bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac5d5133-6f5c-43b7-82da-24802246e5a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac641490-ca14-48d7-8cc4-b69ce984befa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:preordain:cast:s1,f:xs:XP:preordain:cast:s1	-	-	-	d864b561c9cb	-	581996aaaf6e	-	-	2026-11-24	xproof
@@ -94,9 +94,9 @@ ac830812-2f33-4f9e-ba3a-ea665989011c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ac856e91-1b88-464b-9420-dc311ce814ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac856e91-1b88-464b-9420-dc311ce814ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac87cc33-4a71-471b-917d-6a92721ea0b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac88975c-fb2c-441a-bdd4-e7de6ba865e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac88975c-fb2c-441a-bdd4-e7de6ba865e7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac88975c-fb2c-441a-bdd4-e7de6ba865e7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ac88975c-fb2c-441a-bdd4-e7de6ba865e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wharf-infiltrator:cast:s1,f:xs:XP:wharf-infiltrator:cast:s1	-	-	-	d864b561c9cb	-	ea2f999b2d8c	-	-	2026-11-24	xproof
+ac88975c-fb2c-441a-bdd4-e7de6ba865e7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ac88975c-fb2c-441a-bdd4-e7de6ba865e7	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ac8952c9-bd30-48cd-b964-7e6271f9cbc8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac8cae63-270c-4f73-b29b-50f8f2395fd9	cast	cast-resolve	agreed	-	X	scen	1	0	City Pigeon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac8cae63-270c-4f73-b29b-50f8f2395fd9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	City Pigeon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -105,9 +105,9 @@ ac8cae63-270c-4f73-b29b-50f8f2395fd9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	City 
 ac8cf699-f67b-44da-bb79-eb95cfc0026d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac8cf699-f67b-44da-bb79-eb95cfc0026d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac8fba34-512c-4f24-999a-ab72f1ce4acb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac905661-37c4-495a-ac76-96032c23a144	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac905661-37c4-495a-ac76-96032c23a144	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac905661-37c4-495a-ac76-96032c23a144	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ac905661-37c4-495a-ac76-96032c23a144	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nissa-genesis-mage:cast:s1,f:xs:XP:nissa-genesis-mage:cast:s1	-	-	-	d864b561c9cb	-	faa254fb6348	-	-	2026-11-24	xproof
+ac905661-37c4-495a-ac76-96032c23a144	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:nissa-genesis-mage:cast:s1,f:xs:XP:nissa-genesis-mage:cast:s1	-	-	-	d864b561c9cb	-	faa254fb6348	-	-	2026-11-24	xproof
+ac905661-37c4-495a-ac76-96032c23a144	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ac905661-37c4-495a-ac76-96032c23a144	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac914d98-221e-426c-8a50-342896b15f9e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac935639-ba30-4b04-86f6-363527e85a8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

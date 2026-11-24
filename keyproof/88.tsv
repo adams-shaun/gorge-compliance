@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88b076a4-46ff-4a41-95a5-2821f4d8944d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:twin-blades:f0t0:s2,f:xs:XP:twin-blades:f0t0:s2	-	-	-	267e485f6204	-	a524a4314d06	-	-	2026-11-24	xproof
 88b076a4-46ff-4a41-95a5-2821f4d8944d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Twin Blades/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88b0bd3b-d832-4059-b0d9-04630917ae94	cast	cast-resolve	agreed	-	FX	scen	2	0	Ice Magic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88b1e06c-5899-4e83-8204-e2c32c0c6aff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-88b1e06c-5899-4e83-8204-e2c32c0c6aff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+88b1e06c-5899-4e83-8204-e2c32c0c6aff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:subjugator-angel:f0t0:s1,f:xs:XP:subjugator-angel:f0t0:s1	-	-	-	d864b561c9cb	-	fc4ecc2b6237	-	-	2026-11-24	xproof
+88b1e06c-5899-4e83-8204-e2c32c0c6aff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:subjugator-angel:f0t0:s1,f:xs:XP:subjugator-angel:f0t0:s1	-	-	-	d864b561c9cb	-	fc4ecc2b6237	-	-	2026-11-24	xproof
 88b50194-bc39-47a6-968b-983553d89cf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88b51e15-6630-4e14-a6b8-db0aa12e34ef	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88ba283d-2d03-4455-a4a3-a2a5622209bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88f34d15-c338-40a7-b56c-c5b650847430	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ghost, Spectral Saboteur/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88f34d15-c338-40a7-b56c-c5b650847430	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ghost, Spectral Saboteur/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88f5d146-420b-417c-bcf1-fe0e78312a74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-88f5d146-420b-417c-bcf1-fe0e78312a74	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+88f5d146-420b-417c-bcf1-fe0e78312a74	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 88f8f683-738e-48f3-afff-c8f73f1033a2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Botanical Sanctum/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88f8f683-738e-48f3-afff-c8f73f1033a2	land	play-land	agreed	-	X	scen	1	0	Botanical Sanctum/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88f9a7e3-0b35-43e4-b16a-19c54a1e4e2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

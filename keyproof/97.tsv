@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9738f9b7-f281-44f6-a746-9c83380b35b7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:leonin-armorguard:f0t0:s1,f:xs:XP:leonin-armorguard:f0t0:s1	-	-	-	8a1b1a193ec0	-	32540b2b206e	-	-	2026-11-24	xproof
 973fb1e3-83d5-4763-bea8-799b426a8848	cast	cast-resolve	agreed	-	X	scen	1	0	Extended Absence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 973fd4d4-9255-4825-85b7-503606c4e932	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97407cd0-2bd2-4074-94d3-4ec3d243fa78	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97407cd0-2bd2-4074-94d3-4ec3d243fa78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rishkar-s-expertise:cast:s1,f:xs:XP:rishkar-s-expertise:cast:s1	-	-	-	d864b561c9cb	-	77fbb2097429	-	-	2026-11-24	xproof
 9740ce6d-ef6b-4d70-839a-8bd5e0e1e0a1	cast	cast-resolve	agreed	-	X	scen	1	0	Druid of the Spade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9740ce6d-ef6b-4d70-839a-8bd5e0e1e0a1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Druid of the Spade/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97428d25-d850-4a98-8852-9440e06a9091	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,9 +126,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97b386da-4bc0-4c39-a5cc-17e441c45127	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97b477d8-2e05-475e-8ed6-7d680cb21cd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97b477d8-2e05-475e-8ed6-7d680cb21cd9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97b559fe-b09d-4883-9509-c45ace2d8487	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97b559fe-b09d-4883-9509-c45ace2d8487	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97b559fe-b09d-4883-9509-c45ace2d8487	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97b559fe-b09d-4883-9509-c45ace2d8487	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herald-of-anguish:cast:s1,f:xs:XP:herald-of-anguish:cast:s1	-	-	-	d864b561c9cb	-	f15eb852b762	-	-	2026-11-24	xproof
+97b559fe-b09d-4883-9509-c45ace2d8487	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+97b559fe-b09d-4883-9509-c45ace2d8487	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:herald-of-anguish:cast:s1,f:xs:XP:herald-of-anguish:cast:s1	-	-	-	d864b561c9cb	-	f15eb852b762	-	-	2026-11-24	xproof
 97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	cast	cast-resolve	agreed	-	X	scen	1	0	Territorial Witchstalker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Territorial Witchstalker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Territorial Witchstalker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

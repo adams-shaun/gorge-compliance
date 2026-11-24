@@ -54,9 +54,9 @@ b53f216d-1592-4eee-b204-502a805fbc8c	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 b53f216d-1592-4eee-b204-502a805fbc8c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b543bfa2-0174-4dd8-9ee6-09b92fb44934	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b543bfa2-0174-4dd8-9ee6-09b92fb44934	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b544f690-e4bf-4a5b-984d-9256518fd574	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b544f690-e4bf-4a5b-984d-9256518fd574	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b544f690-e4bf-4a5b-984d-9256518fd574	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b544f690-e4bf-4a5b-984d-9256518fd574	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:filigree-familiar:f0t0:s1,f:xs:XP:filigree-familiar:f0t0:s1	-	-	-	d864b561c9cb	-	482d349d2d89	-	-	2026-11-24	xproof
+b544f690-e4bf-4a5b-984d-9256518fd574	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:filigree-familiar:f0t0:s1,f:xs:XP:filigree-familiar:f0t0:s1	-	-	-	d864b561c9cb	-	482d349d2d89	-	-	2026-11-24	xproof
+b544f690-e4bf-4a5b-984d-9256518fd574	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:filigree-familiar:f0t1:s1,f:xs:XP:filigree-familiar:f0t1:s1	-	-	-	d864b561c9cb	-	482d349d2d89	-	-	2026-11-24	xproof
 b545e26f-2034-409c-80cc-51b72e75e6e4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b546c78c-5180-46c3-8594-b9d5ad9c3988	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b546c78c-5180-46c3-8594-b9d5ad9c3988	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ b56bb8cb-457e-4b85-9bf9-5e891e79f1dd	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Fog
 b56bb8cb-457e-4b85-9bf9-5e891e79f1dd	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Foggy Bottom Swamp/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b56bb8cb-457e-4b85-9bf9-5e891e79f1dd	land	play-land	agreed	-	FX	scen	2	0	Foggy Bottom Swamp/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b56c0846-e465-4251-93ea-2e3e7be8dffc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b56c0846-e465-4251-93ea-2e3e7be8dffc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b56c0846-e465-4251-93ea-2e3e7be8dffc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:aerial-guide:f0t0:s1,f:xs:XP:aerial-guide:f0t0:s1	-	-	-	d864b561c9cb	-	eb37873305ce	-	-	2026-11-24	xproof
 b56c5b39-2465-4a25-b806-bb84866e576f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b56f375f-35b3-4d96-9749-c059c2d29c8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b56f375f-35b3-4d96-9749-c059c2d29c8b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ b59c7c62-ce2f-4062-9790-566191aded69	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 b59da333-e658-447e-a8bd-8c0124d8b905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b59da333-e658-447e-a8bd-8c0124d8b905	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5a146e6-053f-43ce-8b01-24505a398976	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b5a146e6-053f-43ce-8b01-24505a398976	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b5a146e6-053f-43ce-8b01-24505a398976	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b5a26a1b-d2be-406e-a6a9-1993045313b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5a3c09d-e822-4e26-b569-7f5830a39e6a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5a40cd8-e1f9-4294-99ef-26fb455d4f95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,8 +150,8 @@ b5aae42b-3fde-4f10-b85e-882c528badef	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf
 b5ae8016-92ed-4ae8-83a8-65068defc616	cast	cast-resolve	agreed	-	FX	scen	2	0	Tannuk, Steadfast Second/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5ae8016-92ed-4ae8-83a8-65068defc616	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tannuk, Steadfast Second/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5ae8016-92ed-4ae8-83a8-65068defc616	static#0.1	static#0.1	agreed	-	X	scen	1	0	Tannuk, Steadfast Second/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b5b049d4-242a-48ec-85d1-1ef66c8cfa4c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b5b049d4-242a-48ec-85d1-1ef66c8cfa4c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b5b049d4-242a-48ec-85d1-1ef66c8cfa4c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:miasmic-mummy:cast:s1,f:xs:XP:miasmic-mummy:cast:s1	-	-	-	d864b561c9cb	-	f950d51a49f9	-	-	2026-11-24	xproof
+b5b049d4-242a-48ec-85d1-1ef66c8cfa4c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:miasmic-mummy:cast:s1,f:xs:XP:miasmic-mummy:cast:s1	-	-	-	d864b561c9cb	-	f950d51a49f9	-	-	2026-11-24	xproof
 b5b0e85f-6651-4667-829c-2253ff8b130d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:madame-masque:f0t0:s2,f:xs:XP:madame-masque:f0t0:s2	-	-	-	5437c1394672	-	4ce9b8547d36	-	-	2026-11-24	xproof
 b5b0e85f-6651-4667-829c-2253ff8b130d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:madame-masque:f0t0:s2,f:xs:XP:madame-masque:f0t0:s2	-	-	-	5437c1394672	-	4ce9b8547d36	-	-	2026-11-24	xproof
 b5b0e85f-6651-4667-829c-2253ff8b130d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Madame Masque/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ b5f20a6d-8c3e-452f-9d98-4886f0fa052a	cast	cast-resolve	agreed	-	FX	scen	2	0	Vivi
 b5f20a6d-8c3e-452f-9d98-4886f0fa052a	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Vivien Reid/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5f20a6d-8c3e-452f-9d98-4886f0fa052a	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Vivien Reid/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5f20a6d-8c3e-452f-9d98-4886f0fa052a	f0/a2	activate#0.2	agreed	-	FX	scen	2	0	Vivien Reid/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b5f35577-3d94-4835-bfca-3090cb0c63ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b5f35577-3d94-4835-bfca-3090cb0c63ff	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:glint-sleeve-artisan:cast:s1,f:xs:XP:glint-sleeve-artisan:cast:s1	-	-	-	d864b561c9cb	-	00264252ce62	-	-	2026-11-24	xproof
 b5f35577-3d94-4835-bfca-3090cb0c63ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5f5d6e3-e72e-40a5-a5c7-410617b6f933	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5f5d6e3-e72e-40a5-a5c7-410617b6f933	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

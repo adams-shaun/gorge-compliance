@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bbfceba-9f3a-4988-a009-13c9472138b1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bc0479f-0f45-4b36-9963-f8eb5973cf47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bc0bd36-70be-4180-9fb3-b10ce054107b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bc12623-3852-42f0-b458-5c67fe1b7a07	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3bc12623-3852-42f0-b458-5c67fe1b7a07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fork-in-the-road:cast:s1,f:xs:XP:fork-in-the-road:cast:s1	-	-	-	d864b561c9cb	-	3b640f6e8294	-	-	2026-11-24	xproof
 3bc13640-03f8-4b19-b0a4-7e7cb5271c0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bc46467-323f-4cbf-9d0a-f3d2ae3c3a34	cast	cast-resolve	agreed	-	X	scen	1	0	Bender's Waterskin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bc46467-323f-4cbf-9d0a-f3d2ae3c3a34	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bender's Waterskin/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -215,8 +215,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bdc9211-8eff-4b30-8d6f-d26f4087f77f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bdc96d9-7272-4e38-b81a-ec928dd49eaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bdc96d9-7272-4e38-b81a-ec928dd49eaa	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bdd140b-1406-4d07-8f35-78f2ba92de64	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bdd140b-1406-4d07-8f35-78f2ba92de64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3bdd140b-1406-4d07-8f35-78f2ba92de64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stromkirk-occultist:cast:s1,f:xs:XP:stromkirk-occultist:cast:s1	-	-	-	d864b561c9cb	-	e05a3c597c03	-	-	2026-11-24	xproof
+3bdd140b-1406-4d07-8f35-78f2ba92de64	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3bdd3090-4503-4382-9a11-3e1cfcdffd71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3be3d7e6-7860-438a-b8c8-ef154c18c163	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Arid Archway/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3be3d7e6-7860-438a-b8c8-ef154c18c163	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Arid Archway/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

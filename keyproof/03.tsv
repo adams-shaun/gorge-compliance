@@ -29,9 +29,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0324941f-484c-4656-8d1c-66e919c2bc7c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03253076-9add-4efb-9227-b0a062c86534	cast	cast-resolve	agreed	-	X	scen	1	0	Nori, Teller of Tales/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03253076-9add-4efb-9227-b0a062c86534	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nori, Teller of Tales/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-03259490-a789-4f96-8c5b-b410425bdd02	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03259490-a789-4f96-8c5b-b410425bdd02	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03259490-a789-4f96-8c5b-b410425bdd02	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+03259490-a789-4f96-8c5b-b410425bdd02	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:haunted-dead:cast:s1,f:xs:XP:haunted-dead:cast:s1	-	-	-	d864b561c9cb	-	4a51732eb2b3	-	-	2026-11-24	xproof
+03259490-a789-4f96-8c5b-b410425bdd02	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+03259490-a789-4f96-8c5b-b410425bdd02	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:haunted-dead:cast:s1,f:xs:XP:haunted-dead:cast:s1	-	-	-	d864b561c9cb	-	4a51732eb2b3	-	-	2026-11-24	xproof
 03259ab0-caa8-4620-b070-127e2c712252	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wedgelight-rammer:f0t0:s1,f:xs:XP:wedgelight-rammer:f0t0:s1	-	-	-	25696bf19d5b	-	813adbb794fe	-	-	2026-11-24	xproof
 03259ab0-caa8-4620-b070-127e2c712252	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wedgelight-rammer:f0t0:s1,f:xs:XP:wedgelight-rammer:f0t0:s1	-	-	-	25696bf19d5b	-	813adbb794fe	-	-	2026-11-24	xproof
 03259ab0-caa8-4620-b070-127e2c712252	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wedgelight Rammer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 036b7b89-e49a-4560-9de9-1d4d71f3f666	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sparring Dummy/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 036b7b89-e49a-4560-9de9-1d4d71f3f666	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sparring Dummy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0370afa0-07d3-4787-8a5b-10272cb3a486	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0370afa0-07d3-4787-8a5b-10272cb3a486	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0370afa0-07d3-4787-8a5b-10272cb3a486	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 037355be-71e7-4866-80a6-80352c304970	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 037355be-71e7-4866-80a6-80352c304970	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 037eccdb-21c3-4048-af4f-b25dcbe99134	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

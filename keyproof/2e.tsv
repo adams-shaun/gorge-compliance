@@ -48,8 +48,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e358f7e-c282-4b92-8255-1436c99cda49	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e35bcef-505a-4559-a1fe-f42f4543197f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e35bcef-505a-4559-a1fe-f42f4543197f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e3cc9b6-7849-4385-a487-c8f5364174e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e3cc9b6-7849-4385-a487-c8f5364174e7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2e3cc9b6-7849-4385-a487-c8f5364174e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cruel-reality:cast:s1,f:xs:XP:cruel-reality:cast:s1	-	-	-	d864b561c9cb	-	ed1ee95dc376	-	-	2026-11-24	xproof
+2e3cc9b6-7849-4385-a487-c8f5364174e7	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:cruel-reality:cast:s1,f:xs:XP:cruel-reality:cast:s1	-	-	-	d864b561c9cb	-	ed1ee95dc376	-	-	2026-11-24	xproof
 2e3ec514-fc9e-4964-a493-2a6cc9e63630	cast	cast-resolve	agreed	-	FX	scen	2	0	The Mindskinner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2e3ec514-fc9e-4964-a493-2a6cc9e63630	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Mindskinner/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2e3ec514-fc9e-4964-a493-2a6cc9e63630	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Mindskinner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e44fd5c-5c7f-4ca8-90cd-34015047eb26	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-priest-of-thune:f0t0:s1,f:xs:XP:war-priest-of-thune:f0t0:s1	-	-	-	d864b561c9cb	-	18b26fc0be62	-	-	2026-11-24	xproof
 2e44fd5c-5c7f-4ca8-90cd-34015047eb26	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:war-priest-of-thune:f0t0:s1,f:xs:XP:war-priest-of-thune:f0t0:s1	-	-	-	d864b561c9cb	-	18b26fc0be62	-	-	2026-11-24	xproof
 2e467fab-e808-44d3-99bf-e3621baeb7cb	cast	cast-resolve	agreed	-	X	scen	1	0	Erode/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2e4865c5-a590-4820-81ec-926014ddb8c4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e4865c5-a590-4820-81ec-926014ddb8c4	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2e4865c5-a590-4820-81ec-926014ddb8c4	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	4f541b21a2c0	-	-	2026-11-24	xproof
+2e4865c5-a590-4820-81ec-926014ddb8c4	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	4f541b21a2c0	-	-	2026-11-24	xproof
 2e4f08c2-1bad-4a85-8aad-9bb34a5579b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e55fc03-779c-4a71-beb7-aa0ade738c24	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e55fc03-779c-4a71-beb7-aa0ade738c24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2eb4da30-2600-4a7f-8e6c-6a090faa9a8d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2eb4da30-2600-4a7f-8e6c-6a090faa9a8d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2eb8397a-ba8b-497d-b1f5-a1b09c686597	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2eb8397a-ba8b-497d-b1f5-a1b09c686597	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2eb8397a-ba8b-497d-b1f5-a1b09c686597	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2ebe4c68-87eb-474d-a4c4-0468835b4900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ec1860b-89cc-4529-8b8c-fb47f79f2b4b	cast	cast-resolve	agreed	-	X	scen	1	0	Sower of Chaos/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ec1860b-89cc-4529-8b8c-fb47f79f2b4b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sower of Chaos/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -177,9 +177,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ee46c98-aee7-459a-80fa-4ed9d8a3acda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ee4f7ba-7238-44b5-8315-9f50502ed796	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ee5f5ad-2f16-40d9-831a-2aefece31b36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2eed5eb1-ab67-4f23-885d-922131364aba	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2eed5eb1-ab67-4f23-885d-922131364aba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2eed5eb1-ab67-4f23-885d-922131364aba	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2eed5eb1-ab67-4f23-885d-922131364aba	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:bloodhall-priest:cast:s1,f:xs:XP:bloodhall-priest:cast:s1	-	-	-	d864b561c9cb	-	bf7567e1fae4	-	-	2026-11-24	xproof
+2eed5eb1-ab67-4f23-885d-922131364aba	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:bloodhall-priest:cast:s1,f:xs:XP:bloodhall-priest:cast:s1	-	-	-	d864b561c9cb	-	bf7567e1fae4	-	-	2026-11-24	xproof
+2eed5eb1-ab67-4f23-885d-922131364aba	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bloodhall-priest:f0t1:s1,f:xs:XP:bloodhall-priest:f0t1:s1	-	-	-	d864b561c9cb	-	bf7567e1fae4	-	-	2026-11-24	xproof
 2ef063d2-8702-43a3-a7d0-fc255f8512d3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ef0961a-0543-4371-8c2a-333881b735e5	cast	cast-resolve	agreed	-	X	scen	1	0	Tomik, Wielder of Law/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ef0961a-0543-4371-8c2a-333881b735e5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tomik, Wielder of Law/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

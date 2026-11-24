@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 273ad15c-366a-4691-978b-d6028b57005a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Morlun, Devourer of Spiders/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 273ad15c-366a-4691-978b-d6028b57005a	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:morlun-devourer-of-spiders:cast:s2	-	-	-	5437c1394672	-	bf66a55bd5e3	-	-	2026-11-24	xproof
 273b339c-964b-4a18-8eb5-ceb8abcdfd9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:divination:cast:s1,f:xs:XP:divination:cast:s1	-	-	-	8a1b1a193ec0	-	e3940c01361a	-	-	2026-11-24	xproof
-273bf1a8-42a9-4db5-bd83-06db4cb5e5df	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+273bf1a8-42a9-4db5-bd83-06db4cb5e5df	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:vengeful-rebel:cast:s1,f:xs:XP:vengeful-rebel:cast:s1	-	-	-	d864b561c9cb	-	1e3e25f6aba6	-	-	2026-11-24	xproof
 273bf1a8-42a9-4db5-bd83-06db4cb5e5df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 273f0353-4936-491b-82da-6d4d7f3259a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 273f0353-4936-491b-82da-6d4d7f3259a6	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27521e70-3a1f-4819-a111-c38216ffe7c3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27521e70-3a1f-4819-a111-c38216ffe7c3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 275257ea-3c72-4ca9-b2fc-e50efa071bdb	cast	cast-resolve	agreed	-	X	scen	1	0	Energize/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-27547519-9474-49fa-80e7-e604d61cb3ca	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27547519-9474-49fa-80e7-e604d61cb3ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beneath-the-sands:cast:s1,f:xs:XP:beneath-the-sands:cast:s1	-	-	-	d864b561c9cb	-	e416d3c12c27	-	-	2026-11-24	xproof
 27547519-9474-49fa-80e7-e604d61cb3ca	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27599eff-19df-48e2-9a1e-0c087f42a075	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:firemantle-mage:cast:s1,f:xs:XP:firemantle-mage:cast:s1	-	-	-	d864b561c9cb	-	e41418657a70	-	-	2026-11-24	xproof
 27599eff-19df-48e2-9a1e-0c087f42a075	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:firemantle-mage:cast:s1,f:xs:XP:firemantle-mage:cast:s1	-	-	-	d864b561c9cb	-	e41418657a70	-	-	2026-11-24	xproof
@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27692079-a517-4d38-b452-7409980b5912	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27692079-a517-4d38-b452-7409980b5912	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	HYDRA Infiltration/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2769751d-ca67-4d6e-93c9-9587367ae8ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2769751d-ca67-4d6e-93c9-9587367ae8ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2769751d-ca67-4d6e-93c9-9587367ae8ab	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 276b1bd8-8918-4226-bab3-100cf5aa3c24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lingering-tormentor:cast:s1,f:xs:XP:lingering-tormentor:cast:s1	-	-	-	8a1b1a193ec0	-	464c71dd0676	-	-	2026-11-24	xproof
 276b1bd8-8918-4226-bab3-100cf5aa3c24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 276cece9-f9f2-46e6-ae76-daddaa2fb9ab	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

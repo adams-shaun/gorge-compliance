@@ -26,13 +26,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f143d87-35fb-40e3-94ae-f85cfff9adb5	f1/t1	trigger#1.1	agreed	-	X	scen	1	0	Gwen Stacy/trigger#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f15125e-ae89-471e-b055-226a783bc7c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f15125e-ae89-471e-b055-226a783bc7c1	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f15125e-ae89-471e-b055-226a783bc7c1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f15125e-ae89-471e-b055-226a783bc7c1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5f1e8aa2-6b85-4e2e-92e4-876470447d6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f1f49dd-b7ce-494a-9b4b-ac702d3664c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f2628e3-e29a-4d77-bc27-6e1ce240d192	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghoultree:cast:s1,f:xs:XP:ghoultree:cast:s1	-	-	-	d864b561c9cb	-	f275edea24b9	-	-	2026-11-24	xproof
-5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lifecrafter-s-bestiary:cast:s1,f:xs:XP:lifecrafter-s-bestiary:cast:s1	-	-	-	d864b561c9cb	-	5bf5227d3e6b	-	-	2026-11-24	xproof
 5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	land	play-land	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f2be3c2-060a-43e1-b63b-9cd3c78ffcb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -47,10 +47,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f3f68b5-8c6a-4181-bb8a-9c73967d198a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glen-elendra-archmage:cast:s1,f:xs:XP:glen-elendra-archmage:cast:s1	-	-	-	8a1b1a193ec0	-	3cd3891d53c9	-	-	2026-11-24	xproof
 5f3f68b5-8c6a-4181-bb8a-9c73967d198a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f3f68b5-8c6a-4181-bb8a-9c73967d198a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f3fe679-aff1-41b3-8d75-c78c2c0636f0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f3fe679-aff1-41b3-8d75-c78c2c0636f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saheeli-rai:cast:s1,f:xs:XP:saheeli-rai:cast:s1	-	-	-	d864b561c9cb	-	caf09e6172b6	-	-	2026-11-24	xproof
+5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:saheeli-rai:cast:s1,f:xs:XP:saheeli-rai:cast:s1	-	-	-	d864b561c9cb	-	caf09e6172b6	-	-	2026-11-24	xproof
+5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5f4138e9-5471-467f-a15e-89e9e7929f0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-pioneer:f0t0:s1,f:xs:XP:elvish-pioneer:f0t0:s1	-	-	-	25696bf19d5b	-	fe8d46d7e284	-	-	2026-11-24	xproof
 5f4138e9-5471-467f-a15e-89e9e7929f0c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-pioneer:f0t0:s1,f:xs:XP:elvish-pioneer:f0t0:s1	-	-	-	25696bf19d5b	-	fe8d46d7e284	-	-	2026-11-24	xproof
 5f42b67f-87fd-4f98-a0e8-0c8313f4bbc8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Shipwreck Marsh/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -76,7 +76,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f55d41a-ef93-4d4f-ab55-13ea887e7af2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f56a303-b3da-41df-a959-7823a87ee60c	cast	cast-resolve	agreed	-	X	scen	1	0	Mathemagics/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f5c5f59-1cc0-4a72-863c-c26db411f114	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f5c5f59-1cc0-4a72-863c-c26db411f114	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f5c5f59-1cc0-4a72-863c-c26db411f114	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	cast	cast-resolve	agreed	-	X	scen	1	0	Pacifism/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	static#0.0	static#0.0	agreed	-	X	scen	1	0	Pacifism/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	static#0.1	static#0.1	agreed	-	X	scen	1	0	Pacifism/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

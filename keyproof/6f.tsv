@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f34d70e-7a3a-43f7-b2c9-f89519804d3c	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f377da9-7d7b-4407-8846-75a12b4dd72d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a1	NULL	owed	refused:steps-needed:cost:Exert	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6f3ed8a1-ff5f-411b-9d87-0cce52f42344	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f477e2e-220e-48d9-9236-9564478e796a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f477e2e-220e-48d9-9236-9564478e796a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f9bc0c6-1792-4771-a839-95a22d9c699a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Meltstrider's Resolve/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f9bc0c6-1792-4771-a839-95a22d9c699a	static#0.1	static#0.1	agreed	-	X	scen	1	0	Meltstrider's Resolve/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f9bce77-f7f0-453b-86cd-1e6bd71980a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6fa07b6c-f01a-4416-b0fc-986b0fc4e412	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6fa07b6c-f01a-4416-b0fc-986b0fc4e412	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:renegade-rallier:cast:s1,f:xs:XP:renegade-rallier:cast:s1	-	-	-	d864b561c9cb	-	26af999ddbd1	-	-	2026-11-24	xproof
 6fa07b6c-f01a-4416-b0fc-986b0fc4e412	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fa27f8a-bade-460f-853a-abc1c05c946a	cast	cast-resolve	agreed	-	X	scen	1	0	Behold the Sinister Six!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6fa7229d-18b6-43d8-aa57-a56cdb815767	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
