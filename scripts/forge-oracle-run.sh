@@ -16,8 +16,12 @@
 #                 Name: line is in no cardsfolder card file; a split card
 #                 name ("Fire // Ice") whose every face's Name: line is in
 #                 none either (Forge's card files hold one Name: line per
-#                 face, so the joined name is never a Name line). One grep
-#                 pass over the pinned cardsfolder; no javac, no JVM, no lock.
+#                 face, so the joined name is never a Name line); and a name
+#                 whose card file exists but which Forge's card DB filters
+#                 (named in a Type=Funny or Border=Silver edition outside
+#                 [eternal], as Gobland is: driver "Couldn't find a card").
+#                 One grep pass over the pinned cardsfolder and one awk pass
+#                 over its editions; no javac, no JVM, no lock.
 #
 # Overrides:
 #   FORGE_ORACLE_SRC      the forge-oracle project dir to compile and replay (a
@@ -125,9 +129,49 @@ if [ "$mode" = preflight ]; then
       esac
     done
   }
+  # The cardsfolder is not the card DB: the driver's StaticData is built with
+  # loadNonLegalCards=false, which drops (StaticData's funnyCards/filtered) every
+  # card NAMED in a Type=Funny or Border=Silver edition's card sections other
+  # than [eternal] (the legal reprints), basic lands excepted. Such a card has
+  # its cardsfolder file and still fails SetupBuilder.create's getCard with
+  # "Couldn't find a card" (Gobland, Indicate and Mox Poison: Mystery Booster 2
+  # playtest rows). Mirror that filter here: one awk pass over the editions,
+  # the names it prints are the unresolvable ones. A name is filtered by its
+  # card's first face name (CardRules.getPreInitName), so a split/adventure
+  # name is refused when its first face is.
+  funny=
+  if [ -d "$top/forge-gui/res/editions" ]; then
+    funny=$(find "$top/forge-gui/res/editions" -maxdepth 1 -name '*.txt' -print0 | sort -z | xargs -r0 awk '
+      FNR == 1 { if (n) flush(); n = 0; sec = ""; funny = 0 }
+      function flush(  i) { if (funny) for (i = 1; i <= n; i++) print names[i] }
+      /^\[/ { sec = $0; gsub(/^\[|\][ \t\r]*$/, "", sec); next }
+      sec == "metadata" {
+        k = $0; sub(/=.*/, "", k); v = $0; sub(/^[^=]*=/, "", v); sub(/\r$/, "", v)
+        k = tolower(k); v = tolower(v)
+        if ((k == "type" && v == "funny") || (k == "border" && v == "silver")) funny = 1
+        next
+      }
+      sec ~ /^(cards|special slot|precon product|borderless|etched|showcase|full art|extended art|alternate art|retro frame|buy a box|promo|prerelease promo|bundle|box topper|jumpstart|rebalanced|conjured|scheme|printsheets)$/ {
+        line = $0; sub(/\r$/, "", line); sub(/ @.*$/, "", line); sub(/ \$\{.*$/, "", line)
+        if (line == "") next
+        m = split(line, w, " ")
+        if (m >= 3 && w[1] ~ /^.?[0-9A-Z-]+[^ ]*$/ && w[2] ~ /^[SCURML]$/) sub(/^[^ ]+ [SCURML] /, "", line)
+        else if (m >= 2 && w[1] ~ /^[SCURML]$/) sub(/^[SCURML] /, "", line)
+        if (line ~ /^(Snow-Covered )?(Plains|Island|Swamp|Mountain|Forest|Wastes)$/) next
+        names[++n] = line
+      }
+      END { flush() }
+    ' | sort -u)
+  fi
   while IFS= read -r n; do
     [ -n "$n" ] || continue
-    if grep -qxF "Name:$n" <<<"$hits"; then continue; fi
+    if grep -qxF "Name:$n" <<<"$hits"; then
+      first=${n%%" // "*}
+      if [ -n "$funny" ] && grep -qxF -e "$first" <<<"$funny"; then
+        printf '%s\t%s\n' "$n" "in the pinned cardsfolder but filtered from Forge's card DB (Funny/Silver-border edition card)"
+      fi
+      continue
+    fi
     case "$n" in
     *" // "*)
       if every_face_in_hits "$n"; then continue; fi ;;

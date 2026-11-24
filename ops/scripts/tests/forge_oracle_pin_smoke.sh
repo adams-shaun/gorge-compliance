@@ -152,22 +152,43 @@ reached; check "  ...before javac, java or scope" $((! $? ))
 # refused here; Grizzly Bears is resolved; so are the split names "Fire //
 # Ice" (a split card) and "Bonecrusher Giant // Stomp" (an adventure), whose
 # card files hold one Name: line per face — the joined name is never a Name
-# line, and a split with a missing face ("Fire // Gobland") is refused.
+# line, and a split with a missing face ("Fire // Nonesuch") is refused.
 mkdir -p "$TMP/clone/forge-gui/res/cardsfolder/g" "$TMP/clone/forge-gui/res/cardsfolder/f" "$TMP/clone/forge-gui/res/cardsfolder/b"
 printf 'Name:Grizzly Bears\nOracle:Grizzly Bears is a bear.\n' > "$TMP/clone/forge-gui/res/cardsfolder/g/grizzly_bears.txt"
 printf 'Name:Fire\nName:Ice\nOracle:Fire deals 2 damage.\n' > "$TMP/clone/forge-gui/res/cardsfolder/f/fire_ice.txt"
 printf 'Name:Bonecrusher Giant\nName:Stomp\nOracle:Bonecrusher Giant deals 4 damage.\n' > "$TMP/clone/forge-gui/res/cardsfolder/b/bonecrusher_giant.txt"
+# The cardsfolder is not the card DB: Forge's StaticData drops every card named
+# in a Funny or silver-border edition outside its [eternal] section, and the
+# driver then fails "Couldn't find a card" though the card file exists. Gobland
+# and Mox Poison have a card file and only a Mystery Booster 2 playtest row;
+# Indicate is in a silver-border set; Mardu Outrider has a file and an MB2
+# [eternal] row (a legal reprint, kept); Plains is a basic land in a Funny set
+# (kept). Lines carry the real file's shapes: collector number, rarity, @artist.
+mkdir -p "$TMP/clone/forge-gui/res/editions" "$TMP/clone/forge-gui/res/cardsfolder/m" "$TMP/clone/forge-gui/res/cardsfolder/i" "$TMP/clone/forge-gui/res/cardsfolder/p"
+printf 'Name:Gobland\nOracle:Gobland.\n' > "$TMP/clone/forge-gui/res/cardsfolder/g/gobland.txt"
+printf 'Name:Mox Poison\nOracle:Mox.\n' > "$TMP/clone/forge-gui/res/cardsfolder/m/mox_poison.txt"
+printf 'Name:Indicate\nOracle:Indicate.\n' > "$TMP/clone/forge-gui/res/cardsfolder/i/indicate.txt"
+printf 'Name:Mardu Outrider\nOracle:Outrider.\n' > "$TMP/clone/forge-gui/res/cardsfolder/m/mardu_outrider.txt"
+printf 'Name:Plains\nOracle:Plains.\n' > "$TMP/clone/forge-gui/res/cardsfolder/p/plains.txt"
+printf '[metadata]\nCode=MB2\nName=Mystery Booster 2\nType=Funny\n\n[eternal]\n1 R Mardu Outrider @Evan Shipard\n\n[cards]\nF563 R Gobland @Anik Sikder\nF608 R Mox Poison @Dan Frazier\n300 L Plains @Someone\n\n[tokens]\n1 Goblin\n' > "$TMP/clone/forge-gui/res/editions/Mystery Booster 2.txt"
+printf '[metadata]\nCode=UNH\nName=Unhinged\nType=Expansion\nBorder=Silver\n\n[cards]\n1 C Indicate @Artist\n' > "$TMP/clone/forge-gui/res/editions/Unhinged.txt"
+printf '[metadata]\nCode=M10\nName=Magic 2010\nType=Core\n\n[cards]\n1 C Grizzly Bears @Artist\n' > "$TMP/clone/forge-gui/res/editions/Magic 2010.txt"
 : > "$LOG"
-printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\nFire // Ice\nBonecrusher Giant // Stomp\nFire // Gobland\n' > "$TMP/names.txt"
+printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\nFire // Ice\nBonecrusher Giant // Stomp\nFire // Nonesuch\nMardu Outrider\nPlains\nNo Such Card\n' > "$TMP/names.txt"
 out=$("$RUN" --preflight "$TMP/names.txt" 2>"$TMP/pf.err"); rc=$?
 tab=$'\t'
 check "preflight exits 0 on a good pin" $((rc == 0 ? 0 : 1)) "rc=$rc $(cat "$TMP/pf.err")"
-check "  ...refusing Gobland, Indicate and Mox Poison" \
-	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Gobland${tab}not in the pinned cardsfolder" &&
-		printf '%s\n' "$out" | /usr/bin/grep -qxF "Indicate${tab}not in the pinned cardsfolder" &&
-		printf '%s\n' "$out" | /usr/bin/grep -qxF "Mox Poison${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
-check "  ...refusing a split whose face the pin lacks (Fire // Gobland)" \
-	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Fire // Gobland${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
+filt="in the pinned cardsfolder but filtered from Forge's card DB (Funny/Silver-border edition card)"
+check "  ...refusing Gobland, Indicate and Mox Poison (a card file the DB filters)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Gobland${tab}${filt}" &&
+		printf '%s\n' "$out" | /usr/bin/grep -qxF "Indicate${tab}${filt}" &&
+		printf '%s\n' "$out" | /usr/bin/grep -qxF "Mox Poison${tab}${filt}" && echo 0 || echo 1) "$out"
+check "  ...refusing a name with no card file" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "No Such Card${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
+check "  ...keeping an [eternal] reprint and a basic land of a Funny set" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -q -e "Mardu Outrider" -e "^Plains" && echo 1 || echo 0) "$out"
+check "  ...refusing a split whose face the pin lacks (Fire // Nonesuch)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Fire // Nonesuch${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
 check "  ...and keeping the card the pin resolves" $(printf '%s\n' "$out" | /usr/bin/grep -q "Grizzly Bears" && echo 1 || echo 0) "$out"
 check "  ...and the split names the pin's per-face Name lines resolve" \
 	$(printf '%s\n' "$out" | /usr/bin/grep -q "Fire // Ice" && echo 1 || echo 0) "$out"
