@@ -338,6 +338,17 @@ func digExileComplement(d rules.OracleDecision) string {
 type digSource struct {
 	second string
 	known  bool
+	// dynamic is true when every Dig in the set sizes its look by a variable
+	// (DigNum$ X, "look at that many cards"), not a printed number. It marks
+	// the looks whose look-and-pick chooseTarget dialog has been measured on
+	// XMage for sizes above two (Symbiote Spider-Man).
+	dynamic bool
+}
+
+// digFact is one Dig's second destination and whether its look is variable.
+type digFact struct {
+	second  string
+	dynamic bool
 }
 
 // digSourceForStep resolves the card (and, when an index is available, the
@@ -447,7 +458,7 @@ func digSourceAtAbility(reg *cards.Registry, ref string, idx int) (digSource, bo
 	if !ok {
 		return digSource{}, false
 	}
-	var dests []string
+	var dests []digFact
 	for _, f := range digFaces(c, ref) {
 		if f == nil || idx < 0 || idx >= len(f.Abilities) {
 			continue
@@ -464,7 +475,7 @@ func digSourceAtTrigger(reg *cards.Registry, ref string, idx int) (digSource, bo
 	if !ok {
 		return digSource{}, false
 	}
-	var dests []string
+	var dests []digFact
 	for _, f := range digFaces(c, ref) {
 		if f == nil || idx < 0 || idx >= len(f.Triggers) {
 			continue
@@ -484,7 +495,7 @@ func digSourceOnCard(reg *cards.Registry, ref string) (digSource, bool) {
 	if !ok {
 		return digSource{}, false
 	}
-	var dests []string
+	var dests []digFact
 	seen := map[*cards.SA]bool{}
 	for _, f := range c.Faces {
 		if f == nil {
@@ -501,8 +512,8 @@ func digSourceOnCard(reg *cards.Registry, ref string) (digSource, bool) {
 }
 
 // digSecondsInSA reports every Dig second destination in one ability chain.
-func digSecondsInSA(sa *cards.SA) []string {
-	var dests []string
+func digSecondsInSA(sa *cards.SA) []digFact {
+	var dests []digFact
 	collectDigSeconds(sa, map[*cards.SA]bool{}, &dests)
 	return dests
 }
@@ -510,23 +521,31 @@ func digSecondsInSA(sa *cards.SA) []string {
 // digSourceFromSeconds derives a resolved Dig source from every second
 // destination it collected. There is no source without a Dig; several
 // destinations that disagree are known false.
-func digSourceFromSeconds(dests []string) (digSource, bool) {
+func digSourceFromSeconds(dests []digFact) (digSource, bool) {
 	if len(dests) == 0 {
 		return digSource{}, false
 	}
-	dest, known := agreeDigSecond(dests)
-	return digSource{dest, known}, true
+	seconds := make([]string, len(dests))
+	dynamic := true
+	for i, f := range dests {
+		seconds[i] = f.second
+		dynamic = dynamic && f.dynamic
+	}
+	dest, known := agreeDigSecond(seconds)
+	return digSource{second: dest, known: known, dynamic: dynamic}, true
 }
 
 // collectDigSeconds walks an ability's SubAbility$ chain, recording every
 // Dig's DestinationZone2 once.
-func collectDigSeconds(sa *cards.SA, seen map[*cards.SA]bool, dests *[]string) {
+func collectDigSeconds(sa *cards.SA, seen map[*cards.SA]bool, dests *[]digFact) {
 	if sa == nil || seen[sa] {
 		return
 	}
 	seen[sa] = true
 	if sa.API == "Dig" {
-		*dests = append(*dests, strings.TrimSpace(sa.Params["DestinationZone2"]))
+		num := strings.TrimSpace(sa.Params["DigNum"])
+		_, err := strconv.Atoi(num)
+		*dests = append(*dests, digFact{strings.TrimSpace(sa.Params["DestinationZone2"]), num != "" && err != nil})
 	}
 	collectDigSeconds(sa.Sub, seen, dests)
 }
@@ -541,30 +560,59 @@ func agreeDigSecond(dests []string) (string, bool) {
 	return dests[0], true
 }
 
+// digTakeShape is a one-card Dig take: the decision is a Dig resumption that
+// picks exactly one offered card by name, whatever the look's size. (The
+// bottom-label form is a different dialog, owned by its own case.)
+func digTakeShape(d rules.OracleDecision) bool {
+	return d.Resume == "dig" && d.Min == 1 && d.Max == 1 && len(d.Picks) == 1 &&
+		d.Options >= 1 && digBottomName(d.Picks[0]) == ""
+}
+
 // digTargetAnswer is the target-queue answer for a Dig take, or "" when the
-// decision is not that shape. XMage's dialog selects the FIRST destination:
-// for the exile-second-destination family (Ashiok, Wicked Manipulator; Karn,
-// Scion of Urza) that is the card to exile, the complement of gorge's pick (the
-// card to hand), while for every other family (Hit It!'s battlefield-tapped
-// first destination, graveyard second) it is exactly gorge's pick. The source
-// card's IR decides; a step with no resolved source keeps the historical
-// shape-only complement so the unthreaded callers (XAnswers) are unchanged.
+// decision is not that shape. XMage's look-and-pick dialog
+// (LookLibraryAndPickControllerEffect's chooseTarget over a TargetCard, the
+// TARGET queue) selects the FIRST destination: for the exile-second-destination
+// family (Ashiok, Wicked Manipulator; Karn, Scion of Urza) that is the card to
+// exile, the complement of gorge's pick (the card to hand), while for every
+// other family (Hit It!'s battlefield-tapped first destination, graveyard
+// second; Symbiote Spider-Man's "that many" look, hand first) it is exactly
+// gorge's pick. The complement is defined only for the two-card look
+// (digExileComplement); a look of any other size has no single complement.
+//
+// The target queue is claimed beyond the two-card look only where the card's IR
+// PROVES the dialog is that chooseTarget and it has been measured: a resolved
+// source whose Dig abilities agree on their second destination and size their
+// look by a variable ("look at that many cards", digSource.dynamic; Symbiote
+// Spider-Man, probed on the ScenarioReplay driver). Every other many-card look
+// keeps its choice-queue answer. In particular a card chaining Digs that
+// disagree (Memories Returning: Library, none, Library, Hand) is XMage's own
+// multi-step effect whose picks read the CHOICE queue, so a target answer there
+// is the wrong command ("wrong choice command", HARNESS); a step with no
+// resolved source is unknown, and a fixed-size look of three or more is not yet
+// re-measured. Those keep only the historical two-card complement (the
+// shape-only fallback the unthreaded XAnswers callers rely on).
 func (r *answerRouting) digTargetAnswer(i int) string {
 	d := r.ds[i]
-	complement := digExileComplement(d)
-	if complement == "" {
+	if !digTakeShape(d) {
 		return ""
 	}
+	complement := digExileComplement(d)
 	src, ok := r.digSources[d.Step]
 	switch {
 	case !ok:
 		return complement
 	case !src.known:
 		// Several Dig abilities disagree and no index narrowed them down.
-		// Keep gorge's own pick: the exile family is the exception.
+		// Keep gorge's own pick for the two-card shape (the exile family is
+		// the exception); a look of any other size stays on the choice queue.
+		if complement == "" {
+			return ""
+		}
 		return d.Picks[0]
 	case strings.EqualFold(src.second, "Exile"):
 		return complement
+	case complement == "" && !src.dynamic:
+		return ""
 	default:
 		return d.Picks[0]
 	}
