@@ -1,11 +1,16 @@
 package lower
 
 import (
+	"encoding/json"
 	"reflect"
+	"slices"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
+	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
 // TestLowerDieRollResult: a die roll recorded on a tape entry lowers into the
@@ -166,5 +171,72 @@ func TestLowerDieRollOnResolvingPass(t *testing.T) {
 	want := []oraclegen.DieRoll{{Step: pass1, Seat: 0, Sides: 20, Natural: 7, Result: 7}}
 	if !reflect.DeepEqual(l.Item.DieRolls, want) {
 		t.Fatalf("die rolls %+v, want %+v on the resolving pass (steps %v)", l.Item.DieRolls, want, ops(l))
+	}
+}
+
+// TestSelfCheckForcesDieRolls: Herald of Hadar's {5}{B} rolls a d20 (CR 706.2).
+// The self-check must replay the roll the live game made, not draw its own:
+// a 10-19 roll gains the controller 2 life and a 1-9 roll does not. The test
+// plays the ability at game seeds until the live game rolls 17, and requires
+// the runner's own unforced roll to land in a different row, so the check
+// fails when Item.Raw() leaves die_rolls out.
+func TestSelfCheckForcesDieRolls(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	pair := []decks.Deck{
+		{Name: "start-p0", Colours: "B", Cards: slices.Concat([]string{"Herald of Hadar"}, repeatCard(39, "Swamp"))},
+		{Name: "start-p1", Colours: "W", Cards: repeatCard(40, "Plains")},
+	}
+	start := &rules.StartSpec{Seats: []rules.StartSeat{
+		{Battlefield: []int{0, 1, 2, 3, 4, 5, 6}},
+		{},
+	}}
+	// natural-17 seeds only: the runner's seeded d20 is then in another row
+	// when its own life differs from the forced run's.
+	var l Lowered
+	found := false
+	for n := 1; n <= 40 && !found; n++ {
+		cand, why, _, err := Span(reg, pair, startGameSeed(0, n), game.Options{
+			Set: "XP", MaxTurns: 2, Start: start,
+			Focus: &game.Focus{Seat: 0, Card: "Herald of Hadar", Kind: "ability"},
+		}, false, "xs:XP:herald-of-hadar:ability", "xproof start Herald of Hadar ability")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(why) > 0 {
+			t.Fatalf("span refused: %v", why)
+		}
+		for _, r := range cand.Item.DieRolls {
+			if r.Sides == 20 && r.Natural == 17 {
+				l, found = cand, true
+			}
+		}
+	}
+	if !found {
+		t.Skip("no game seed in 1..40 rolls a natural 17")
+	}
+	// The runner's own roll (Seed 42) without the tape.
+	unforced, err := json.Marshal(l.Item.Scenario)
+	if err != nil {
+		t.Fatal(err)
+	}
+	own, err := rules.RunOracleScenarioJSON(reg, unforced)
+	if err != nil {
+		t.Fatal(err)
+	}
+	forced, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
+	if err != nil {
+		t.Fatal(err)
+	}
+	last := func(r rules.OracleResult) int32 {
+		return r.Snapshots[len(r.Snapshots)-1].Players[0].Life
+	}
+	if last(forced) != 22 {
+		t.Fatalf("forced run p0 life %d, want 22 (natural 17 is the 10-19 row)", last(forced))
+	}
+	if last(own) == 22 {
+		t.Skipf("the runner's own d20 also lands in the 10-19 row; the case does not discriminate")
+	}
+	if c := CheckWindow(reg, l); c.Status != StatusOK {
+		t.Fatalf("%s at step %d, %s: gorge %s, tape %s %v", c.Status, c.Step, c.Field, c.Gorge, c.Tape, c.Fails)
 	}
 }

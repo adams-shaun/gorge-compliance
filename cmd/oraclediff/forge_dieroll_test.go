@@ -41,8 +41,8 @@ func TestForgeRolledDie(t *testing.T) {
 	if len(rq.GorgeDecisions) != 0 {
 		t.Fatalf("die roll exported as a gorge decision: %+v", rq.GorgeDecisions)
 	}
-	if raw := string(rq.Item.Raw()); bytes.Contains([]byte(raw), []byte("die_rolls")) {
-		t.Fatalf("Raw sends the Forge side field to gorge's runner: %s", raw)
+	if raw := string(rq.Item.Raw()); !bytes.Contains([]byte(raw), []byte(`"die_rolls":[{"step":1,"seat":0,"sides":6,"natural":3,"result":3}]`)) {
+		t.Fatalf("Raw does not force the recorded roll on gorge's runner: %s", raw)
 	}
 	b, err := json.Marshal(rq)
 	if err != nil {
