@@ -83,8 +83,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64687880-03f9-4f38-985b-1027c797e33f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6469c7fd-6c0f-4233-8c38-4742ddcf3c3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6469c7fd-6c0f-4233-8c38-4742ddcf3c3f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6469c7fd-6c0f-4233-8c38-4742ddcf3c3f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6469c7fd-6c0f-4233-8c38-4742ddcf3c3f	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6469c7fd-6c0f-4233-8c38-4742ddcf3c3f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+6469c7fd-6c0f-4233-8c38-4742ddcf3c3f	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6469f61d-1b4c-4813-bb4a-99f6e6388d7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 646a2371-54c0-4492-ac2f-20f109d6108c	cast	cast-resolve	agreed	-	X	scen	1	0	Monstrous Rage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 646e68c8-cc42-4d6c-8363-a18b10a10eae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,9 +151,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64bd0722-7123-43cf-b22d-0b4a385974e0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64bd0722-7123-43cf-b22d-0b4a385974e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64c54c9f-0550-41e2-a44a-5892a199f670	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64c7e03d-ba38-4979-8889-9bf0e7b8c66e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64c7e03d-ba38-4979-8889-9bf0e7b8c66e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64c7e03d-ba38-4979-8889-9bf0e7b8c66e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+64c7e03d-ba38-4979-8889-9bf0e7b8c66e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:citizen-s-crowbar:f0t0:s1,f:xs:XP:citizen-s-crowbar:f0t0:s1	-	-	-	d864b561c9cb	-	6debc06ca582	-	-	2026-11-24	xproof
+64c7e03d-ba38-4979-8889-9bf0e7b8c66e	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:citizen-s-crowbar:f0a0:s1,f:xs:XP:citizen-s-crowbar:f0a0:s1	-	-	-	d864b561c9cb	-	6debc06ca582	-	-	2026-11-24	xproof
+64c7e03d-ba38-4979-8889-9bf0e7b8c66e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:citizen-s-crowbar:f0t0:s1,f:xs:XP:citizen-s-crowbar:f0t0:s1	-	-	-	d864b561c9cb	-	6debc06ca582	-	-	2026-11-24	xproof
 64c88c94-3a9d-4fd4-b58c-4d2167c2b8d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64c88c94-3a9d-4fd4-b58c-4d2167c2b8d5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64ca59b8-6e90-46c8-8047-6172b9c84226	cast	cast-resolve	agreed	-	X	scen	1	0	Hylderblade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

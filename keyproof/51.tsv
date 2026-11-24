@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5120bfdc-7201-420d-85a1-eeb4aba6632b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 512477f0-1083-423b-9675-a8bc852f7d88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 513034fc-873a-4877-afb2-39ece1ea6a7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-513034fc-873a-4877-afb2-39ece1ea6a7c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+513034fc-873a-4877-afb2-39ece1ea6a7c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:wingshield-agent:f0t0:s1,f:xs:XP:wingshield-agent:f0t0:s1	-	-	-	d864b561c9cb	-	7955f0de2339	-	-	2026-11-24	xproof
 51310af7-796d-4cf0-871e-5055765ffcdd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51329e73-aebe-4f42-a4db-e092b1984a4b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51329e73-aebe-4f42-a4db-e092b1984a4b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,8 +177,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51e0a61d-69f0-475d-b40b-50d69252800d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51e0a61d-69f0-475d-b40b-50d69252800d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51e7405e-a714-4c76-8913-10d626d2361e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51e76d8f-95c6-428f-9030-3f8718139f93	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51e76d8f-95c6-428f-9030-3f8718139f93	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+51e76d8f-95c6-428f-9030-3f8718139f93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bearer-of-memory:cast:s1,f:xs:XP:bearer-of-memory:cast:s1	-	-	-	d864b561c9cb	-	51d674201c24	-	-	2026-11-24	xproof
+51e76d8f-95c6-428f-9030-3f8718139f93	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:bearer-of-memory:f0a0:s1,f:xs:XP:bearer-of-memory:f0a0:s1	-	-	-	d864b561c9cb	-	51d674201c24	-	-	2026-11-24	xproof
 51e9af95-745b-45b9-b870-7f768578fa4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51e9af95-745b-45b9-b870-7f768578fa4f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51f091a7-9b0b-4362-8e9c-c174752f369b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

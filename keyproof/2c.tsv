@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c02c8e3-943a-4c20-9dad-1408793a825e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c02c8e3-943a-4c20-9dad-1408793a825e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c04371a-af69-4e42-8cda-096cf8312b5e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c04371a-af69-4e42-8cda-096cf8312b5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c04371a-af69-4e42-8cda-096cf8312b5e	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c09ca09-8e62-4fe3-9b3d-61573dd2ffbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,8 +141,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cb95721-56c8-4008-8055-579a5a97fc8b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cb96408-9195-4e41-ad9a-f8c74fbad083	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cb96408-9195-4e41-ad9a-f8c74fbad083	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2cb96408-9195-4e41-ad9a-f8c74fbad083	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:torens-fist-of-the-angels:cast:s1,f:xs:XP:torens-fist-of-the-angels:cast:s1	-	-	-	d864b561c9cb	-	71137bf2c991	-	-	2026-11-24	xproof
+2cb96408-9195-4e41-ad9a-f8c74fbad083	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2cb96408-9195-4e41-ad9a-f8c74fbad083	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cb968c4-5b50-4242-8db7-dd1fa9ce4948	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ominous-sphinx:cast:s1,f:xs:XP:ominous-sphinx:cast:s1	-	-	-	d864b561c9cb	-	c4f323a4cd11	-	-	2026-11-24	xproof
 2cb968c4-5b50-4242-8db7-dd1fa9ce4948	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

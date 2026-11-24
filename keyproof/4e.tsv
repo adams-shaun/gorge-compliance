@@ -5,8 +5,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4e07a0b3-f340-4ed1-a8a9-c25fe6f37fb3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e07a0b3-f340-4ed1-a8a9-c25fe6f37fb3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e07d30a-d29a-49bc-ab49-41ea4116a18c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4e08e07f-ca30-4e34-b207-d8fe62c03777	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4e08e07f-ca30-4e34-b207-d8fe62c03777	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4e08e07f-ca30-4e34-b207-d8fe62c03777	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:speakeasy-server:f0t0:s1,f:xs:XP:speakeasy-server:f0t0:s1	-	-	-	d864b561c9cb	-	f873cc5277c0	-	-	2026-11-24	xproof
+4e08e07f-ca30-4e34-b207-d8fe62c03777	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:speakeasy-server:f0t0:s1,f:xs:XP:speakeasy-server:f0t0:s1	-	-	-	d864b561c9cb	-	f873cc5277c0	-	-	2026-11-24	xproof
 4e0b647a-6e1a-421b-bca9-8d5e346bda80	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e0b647a-6e1a-421b-bca9-8d5e346bda80	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4e0b9273-6614-41a8-9738-959349c0717b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -33,9 +33,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4e473298-0b67-42b8-90a8-3bcdd73da473	cast	cast-resolve	agreed	-	FX	scen	2	0	Bigfin Bouncer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4e473298-0b67-42b8-90a8-3bcdd73da473	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e48e76c-8756-4378-a722-2e2929feb74f	cast	cast	agreed	-	F	start	2	0	f:xs:XP:winding-way:cast:s1	-	-	-	d864b561c9cb	-	f799bbf91f8c	-	-	2026-11-24	xproof
-4e4a21a8-9332-4aeb-8519-949feb211294	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4e4a21a8-9332-4aeb-8519-949feb211294	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4e4a21a8-9332-4aeb-8519-949feb211294	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4e4a21a8-9332-4aeb-8519-949feb211294	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:frostfist-strider:cast:s1,f:xs:XP:frostfist-strider:cast:s1	-	-	-	d864b561c9cb	-	d2bdc06fe2ea	-	-	2026-11-24	xproof
+4e4a21a8-9332-4aeb-8519-949feb211294	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:frostfist-strider:cast:s1,f:xs:XP:frostfist-strider:cast:s1	-	-	-	d864b561c9cb	-	d2bdc06fe2ea	-	-	2026-11-24	xproof
+4e4a21a8-9332-4aeb-8519-949feb211294	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4e4e96aa-2f05-4f1d-96f8-6c42cd3be589	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e552be1-0702-4e18-822f-98611f8a8e70	cast	cast-resolve	agreed	-	FX	scen	2	0	Enter the Avatar State/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4e58ad76-37c7-4531-b207-6890b39a2679	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

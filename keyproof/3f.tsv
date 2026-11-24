@@ -9,8 +9,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f01c327-ba50-4fc3-a930-fa1fb02e34b9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tangled Colony/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f01c327-ba50-4fc3-a930-fa1fb02e34b9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tangled Colony/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f01c327-ba50-4fc3-a930-fa1fb02e34b9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tangled Colony/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3f03c834-2cb3-4c54-bee6-c64f3a5fce47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f03c834-2cb3-4c54-bee6-c64f3a5fce47	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f03c834-2cb3-4c54-bee6-c64f3a5fce47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nurturing-presence:f0t0:s1,f:xs:XP:nurturing-presence:f0t0:s1	-	-	-	d864b561c9cb	-	d95e34880761	-	-	2026-11-24	xproof
+3f03c834-2cb3-4c54-bee6-c64f3a5fce47	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nurturing-presence:f0t0:s1,f:xs:XP:nurturing-presence:f0t0:s1	-	-	-	d864b561c9cb	-	d95e34880761	-	-	2026-11-24	xproof
 3f04c38b-d6bd-405f-b69c-009df87801dd	cast	cast-resolve	agreed	-	FX	scen	2	0	Malfunctioning Holodeck/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f04c38b-d6bd-405f-b69c-009df87801dd	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f04c38b-d6bd-405f-b69c-009df87801dd	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

@@ -70,8 +70,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9a6d8d37-fcf9-4974-89f5-3500e9da3518	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9a6e5834-a89c-44af-b297-1b8ccbfbc907	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9a6ff511-3c8f-446e-8cad-b8997a753958	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9a708f82-a4a1-47f9-8ff3-65608269eebd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9a708f82-a4a1-47f9-8ff3-65608269eebd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9a708f82-a4a1-47f9-8ff3-65608269eebd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:elvish-hydromancer:cast:s1,f:xs:XP:elvish-hydromancer:cast:s1	-	-	-	d864b561c9cb	-	717623292100	-	-	2026-11-24	xproof
+9a708f82-a4a1-47f9-8ff3-65608269eebd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-hydromancer:f0t0:s1,f:xs:XP:elvish-hydromancer:f0t0:s1	-	-	-	d864b561c9cb	-	717623292100	-	-	2026-11-24	xproof
 9a71aa6c-2d5f-468d-b588-252fae37ccbb	cast	cast-resolve	agreed	-	X	scen	1	0	Captain Michael Burnham/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9a71aa6c-2d5f-468d-b588-252fae37ccbb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 9a74a1dd-c36f-4900-b835-fc39dd725bde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,8 +145,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ad956c8-71d3-436f-961e-e2dfc1d2ca70	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rust Harvester/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ad956c8-71d3-436f-961e-e2dfc1d2ca70	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Rust Harvester/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ad999fe-889a-426a-86b3-c0c311b82041	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ad999fe-889a-426a-86b3-c0c311b82041	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ad999fe-889a-426a-86b3-c0c311b82041	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ad999fe-889a-426a-86b3-c0c311b82041	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+9ad999fe-889a-426a-86b3-c0c311b82041	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9adc1435-3094-427d-88f8-91d55c5a924d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9adc3750-0ddb-4f2c-a0e7-131e59d4cba5	cast	cast-resolve	agreed	-	X	scen	1	0	Cursed Recording/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9adc3750-0ddb-4f2c-a0e7-131e59d4cba5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cursed Recording/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

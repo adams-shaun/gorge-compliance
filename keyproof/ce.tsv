@@ -85,9 +85,9 @@ ce6f3c67-8806-416d-9156-6f5bb63d5f4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ce723db6-2a80-42a5-a176-cd322b4e1e27	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce7582a2-e014-41fb-8753-00d29cffc81a	cast	cast-resolve	agreed	-	X	scen	1	0	Lys Alana Dignitary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ce7582a2-e014-41fb-8753-00d29cffc81a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lys Alana Dignitary/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-ce76d17e-d536-46f0-98e2-3e1b1b4f61a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce76d17e-d536-46f0-98e2-3e1b1b4f61a4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce76d17e-d536-46f0-98e2-3e1b1b4f61a4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ce76d17e-d536-46f0-98e2-3e1b1b4f61a4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:stimulus-package:cast:s1,f:xs:XP:stimulus-package:cast:s1	-	-	-	d864b561c9cb	-	2d367e291674	-	-	2026-11-24	xproof
+ce76d17e-d536-46f0-98e2-3e1b1b4f61a4	f0/a0	Token	agreed	-	FX	start	4	0	x:xs:XP:stimulus-package:cast:s1,f:xs:XP:stimulus-package:cast:s1	-	-	-	d864b561c9cb	-	2d367e291674	-	-	2026-11-24	xproof
+ce76d17e-d536-46f0-98e2-3e1b1b4f61a4	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:stimulus-package:cast:s1,f:xs:XP:stimulus-package:cast:s1	-	-	-	d864b561c9cb	-	2d367e291674	-	-	2026-11-24	xproof
 ce77fff1-32f8-4a55-9124-b1dafe95840d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:bookwurm:cast:s1,f:xs:XP:bookwurm:cast:s1	-	-	-	d864b561c9cb	-	19254128dcb2	-	-	2026-11-24	xproof
 ce77fff1-32f8-4a55-9124-b1dafe95840d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce77fff1-32f8-4a55-9124-b1dafe95840d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:bookwurm:cast:s1,f:xs:XP:bookwurm:cast:s1	-	-	-	d864b561c9cb	-	19254128dcb2	-	-	2026-11-24	xproof
@@ -164,8 +164,8 @@ ceddea59-de47-4ddd-b424-6e1dcb13ab79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ceddea59-de47-4ddd-b424-6e1dcb13ab79	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cede233b-4e27-4738-8099-c8e46862ba96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cede233b-4e27-4738-8099-c8e46862ba96	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cede233b-4e27-4738-8099-c8e46862ba96	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cede233b-4e27-4738-8099-c8e46862ba96	f1/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cede233b-4e27-4738-8099-c8e46862ba96	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+cede233b-4e27-4738-8099-c8e46862ba96	f1/t1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cedeea30-b580-4ea7-bbc3-7358fed8ae61	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gretchen-titchwillow:cast:s1,f:xs:XP:gretchen-titchwillow:cast:s1	-	-	-	d864b561c9cb	-	c455caeb07f7	-	-	2026-11-24	xproof
 cedeea30-b580-4ea7-bbc3-7358fed8ae61	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:gretchen-titchwillow:f0a0:s1,f:xs:XP:gretchen-titchwillow:f0a0:s1	-	-	-	d864b561c9cb	-	c455caeb07f7	-	-	2026-11-24	xproof
 cee06ea6-8bad-4858-b78e-04879a825bbe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,10 +177,10 @@ cee583b7-7cc3-40ea-a227-b760839ec291	combat#0.attack	combat#0.attack	agreed	-	X	
 cee583b7-7cc3-40ea-a227-b760839ec291	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dwalin, Weaponmaster/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cee583b7-7cc3-40ea-a227-b760839ec291	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 cee583b7-7cc3-40ea-a227-b760839ec291	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Dwalin, Weaponmaster/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cee836f1-87a4-43db-a6ea-55575a4ce781	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cee836f1-87a4-43db-a6ea-55575a4ce781	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cee836f1-87a4-43db-a6ea-55575a4ce781	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cee836f1-87a4-43db-a6ea-55575a4ce781	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cee836f1-87a4-43db-a6ea-55575a4ce781	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+cee836f1-87a4-43db-a6ea-55575a4ce781	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+cee836f1-87a4-43db-a6ea-55575a4ce781	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+cee836f1-87a4-43db-a6ea-55575a4ce781	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cee8ad22-12a7-4da6-a7d9-e205ada16489	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cee8ec5f-e36d-4bca-9b19-cb33113835b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ceeeacbc-01b0-4421-aaca-2ce6cdbe45d7	cast	cast-resolve	agreed	-	X	scen	1	0	Tetsuko Umezawa, Fugitive/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -37,9 +37,9 @@ c7371040-160c-4502-b7f9-77b7f54cc020	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c737d27b-db14-4bd4-8f16-bcbd4401c47b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c737d27b-db14-4bd4-8f16-bcbd4401c47b	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c737d27b-db14-4bd4-8f16-bcbd4401c47b	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c73839bf-7500-4fd4-aa2b-e2e2e157784d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c73839bf-7500-4fd4-aa2b-e2e2e157784d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c73839bf-7500-4fd4-aa2b-e2e2e157784d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c73839bf-7500-4fd4-aa2b-e2e2e157784d	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+c73839bf-7500-4fd4-aa2b-e2e2e157784d	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+c73839bf-7500-4fd4-aa2b-e2e2e157784d	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c739e180-2f14-41ed-8e7e-50b7df985f35	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c739e180-2f14-41ed-8e7e-50b7df985f35	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:rabbit-battery:f0a1:s1	-	-	-	d864b561c9cb	-	2734be67fd0c	-	-	2026-11-24	xproof
 c739e180-2f14-41ed-8e7e-50b7df985f35	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -89,7 +89,7 @@ c7686204-0433-48cf-bbfb-5d32b6a25cc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c7686204-0433-48cf-bbfb-5d32b6a25cc3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c7748659-0206-448f-8567-83565cb0b51a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c7748659-0206-448f-8567-83565cb0b51a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c777002d-dcd4-4d75-8175-5440a8bb118e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c777002d-dcd4-4d75-8175-5440a8bb118e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:daring-escape:cast:s1,f:xs:XP:daring-escape:cast:s1	-	-	-	d864b561c9cb	-	6c4badf9dcc8	-	-	2026-11-24	xproof
 c77afbeb-cc9b-4770-9a48-e7460562895f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c77afbeb-cc9b-4770-9a48-e7460562895f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c77b89ec-4514-4e62-a508-2012f38a3e15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

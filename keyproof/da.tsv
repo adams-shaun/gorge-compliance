@@ -63,8 +63,8 @@ da3e7d3d-2ca0-40c3-9602-fca37c92f507	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 da3e7d3d-2ca0-40c3-9602-fca37c92f507	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 da404c9c-3fb0-418c-947f-f42d6aff6899	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 da412474-1da8-409b-bd7b-87cbfc239fb0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-da412474-1da8-409b-bd7b-87cbfc239fb0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-da412474-1da8-409b-bd7b-87cbfc239fb0	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+da412474-1da8-409b-bd7b-87cbfc239fb0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+da412474-1da8-409b-bd7b-87cbfc239fb0	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 da422b3e-1092-47ad-97d6-a7a3ef060a53	cast	cast-resolve	agreed	-	FX	scen	2	0	Scour for Scrap/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 da46786e-28df-4638-ab3d-121011d2f150	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 da46786e-28df-4638-ab3d-121011d2f150	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ dab520d0-20b4-4273-ba6b-eb07f85ea433	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Mar
 dab520d0-20b4-4273-ba6b-eb07f85ea433	land	play-land	agreed	-	FX	scen	2	0	Marsh Flats/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 dab9e40f-b73a-4c55-8bb3-63b32c23f07b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dab9e40f-b73a-4c55-8bb3-63b32c23f07b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:palace-familiar:f0t0:s1,f:xs:XP:palace-familiar:f0t0:s1	-	-	-	d864b561c9cb	-	c0449a5f817c	-	-	2026-11-24	xproof
-dabbf796-3b88-499e-8839-06fa36fe01ac	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:marionette-master:cast:s1,f:xs:XP:marionette-master:cast:s1	-	-	-	d864b561c9cb	-	8f29093d852e	-	-	2026-11-24	xproof
+dabbf796-3b88-499e-8839-06fa36fe01ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marionette-master:f0t1:s1,f:xs:XP:marionette-master:f0t1:s1	-	-	-	d864b561c9cb	-	8f29093d852e	-	-	2026-11-24	xproof
 dabbf796-3b88-499e-8839-06fa36fe01ac	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 dabbf796-3b88-499e-8839-06fa36fe01ac	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dabc4ba1-3f90-4cea-a737-d41537cce729	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

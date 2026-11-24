@@ -108,11 +108,11 @@ ba7f1b09-5727-484d-a502-3dcf4d618c56	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 ba8156cd-2e78-4763-b61d-8bc85b2f3657	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mimic:cast:s1,f:xs:XP:mimic:cast:s1	-	-	-	d864b561c9cb	-	34951b9ecc31	-	-	2026-11-24	xproof
 ba8156cd-2e78-4763-b61d-8bc85b2f3657	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba8156cd-2e78-4763-b61d-8bc85b2f3657	f0/a1	Animate	agreed	-	F	start	2	0	f:xs:XP:mimic:f0a1:s1	-	-	-	d864b561c9cb	-	34951b9ecc31	-	-	2026-11-24	xproof
-ba858b68-ae93-4e1c-8a3a-3e4ac97282e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba858b68-ae93-4e1c-8a3a-3e4ac97282e8	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba858b68-ae93-4e1c-8a3a-3e4ac97282e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ba858b68-ae93-4e1c-8a3a-3e4ac97282e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moonsnare-specialist:f0t0:s1,f:xs:XP:moonsnare-specialist:f0t0:s1	-	-	-	d864b561c9cb	-	ca72d30a17a6	-	-	2026-11-24	xproof
+ba858b68-ae93-4e1c-8a3a-3e4ac97282e8	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ba858b68-ae93-4e1c-8a3a-3e4ac97282e8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:moonsnare-specialist:f0t0:s1,f:xs:XP:moonsnare-specialist:f0t0:s1	-	-	-	d864b561c9cb	-	ca72d30a17a6	-	-	2026-11-24	xproof
 ba8883fc-db24-4c3d-ae36-05085089c9cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba8883fc-db24-4c3d-ae36-05085089c9cc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ba8883fc-db24-4c3d-ae36-05085089c9cc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ba961e01-315a-4195-a6d5-694a97a70b5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba961e01-315a-4195-a6d5-694a97a70b5a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ba968a1e-c946-4cbe-9727-160c73cde3f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -174,7 +174,7 @@ bad84deb-3f2c-46fd-9dcb-4e3ba9732769	static#0.0	static#0.0	agreed	-	X	scen	1	0	R
 baddf7ee-f6b9-41e3-b930-57129952cc1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 badf0669-9f65-44e3-bf91-6c57ac2fecff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bae41d41-9dbe-4d6b-bf5d-8a7d7041462c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bae41d41-9dbe-4d6b-bf5d-8a7d7041462c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bae41d41-9dbe-4d6b-bf5d-8a7d7041462c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bae49475-fe01-400b-8959-f0dde959577c	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:shimmering-grotto:f0a1:s1,f:xs:XP:shimmering-grotto:f0a1:s1	-	-	-	d864b561c9cb	-	0a5b9656c6c0	-	-	2026-11-24	xproof
 bae49475-fe01-400b-8959-f0dde959577c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bae49475-fe01-400b-8959-f0dde959577c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -194,6 +194,6 @@ baf93873-35e6-4bf2-bdcc-78a5206422fb	static#0.0	static#0.0	agreed	-	X	scen	1	0	P
 bafad165-c2aa-45d1-8f99-05e752450dfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bafad165-c2aa-45d1-8f99-05e752450dfd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bafc2e11-5f1c-46f1-a852-2330e099b8e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bafeab74-918b-4fcd-8057-55922dbc1784	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:iron-league-steed:cast:s1,f:xs:XP:iron-league-steed:cast:s1	-	-	-	d864b561c9cb	-	a3c8ec5d5949	-	-	2026-11-24	xproof
+bafeab74-918b-4fcd-8057-55922dbc1784	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iron-league-steed:f0t0:s1,f:xs:XP:iron-league-steed:f0t0:s1	-	-	-	d864b561c9cb	-	a3c8ec5d5949	-	-	2026-11-24	xproof
 bafeab74-918b-4fcd-8057-55922dbc1784	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 baff00b8-b109-4e31-942b-38aeb1e45ab2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

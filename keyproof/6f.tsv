@@ -67,8 +67,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f4cfd69-c739-4398-93a5-e6238b7cd83b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f525ccd-4776-492c-a1f9-8bce5740fb28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-opportunist:cast:s1,f:xs:XP:vampire-opportunist:cast:s1	-	-	-	d864b561c9cb	-	54731af21770	-	-	2026-11-24	xproof
 6f525ccd-4776-492c-a1f9-8bce5740fb28	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:vampire-opportunist:f0a0:s1,f:xs:XP:vampire-opportunist:f0a0:s1	-	-	-	d864b561c9cb	-	54731af21770	-	-	2026-11-24	xproof
-6f554418-9ee6-4a03-b81e-f93d5c70873e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f554418-9ee6-4a03-b81e-f93d5c70873e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6f554418-9ee6-4a03-b81e-f93d5c70873e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:citizen-s-arrest:f0t0:s1,f:xs:XP:citizen-s-arrest:f0t0:s1	-	-	-	d864b561c9cb	-	44ce30592675	-	-	2026-11-24	xproof
+6f554418-9ee6-4a03-b81e-f93d5c70873e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:citizen-s-arrest:f0t0:s1,f:xs:XP:citizen-s-arrest:f0t0:s1	-	-	-	d864b561c9cb	-	44ce30592675	-	-	2026-11-24	xproof
 6f571092-7244-4223-aa14-f5133cc000d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f571092-7244-4223-aa14-f5133cc000d8	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 6f571092-7244-4223-aa14-f5133cc000d8	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f9bc0c6-1792-4771-a839-95a22d9c699a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Meltstrider's Resolve/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f9bc0c6-1792-4771-a839-95a22d9c699a	static#0.1	static#0.1	agreed	-	X	scen	1	0	Meltstrider's Resolve/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f9bce77-f7f0-453b-86cd-1e6bd71980a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6fa07b6c-f01a-4416-b0fc-986b0fc4e412	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:renegade-rallier:cast:s1,f:xs:XP:renegade-rallier:cast:s1	-	-	-	d864b561c9cb	-	26af999ddbd1	-	-	2026-11-24	xproof
+6fa07b6c-f01a-4416-b0fc-986b0fc4e412	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:renegade-rallier:f0t0:s1,f:xs:XP:renegade-rallier:f0t0:s1	-	-	-	d864b561c9cb	-	26af999ddbd1	-	-	2026-11-24	xproof
 6fa07b6c-f01a-4416-b0fc-986b0fc4e412	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fa27f8a-bade-460f-853a-abc1c05c946a	cast	cast-resolve	agreed	-	X	scen	1	0	Behold the Sinister Six!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6fa7229d-18b6-43d8-aa57-a56cdb815767	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

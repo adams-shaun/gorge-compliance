@@ -188,10 +188,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8bd2af55-5a48-4300-a893-ae6cd548db24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bd2af55-5a48-4300-a893-ae6cd548db24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bd301ea-32f0-4c3a-a215-c04b31fbdc7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8bd41805-5903-4f3f-927e-2391f0ab9478	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8bd41805-5903-4f3f-927e-2391f0ab9478	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8bd41805-5903-4f3f-927e-2391f0ab9478	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:graf-reaver:cast:s1,f:xs:XP:graf-reaver:cast:s1	-	-	-	d864b561c9cb	-	23e294f65245	-	-	2026-11-24	xproof
+8bd41805-5903-4f3f-927e-2391f0ab9478	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8bd41805-5903-4f3f-927e-2391f0ab9478	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8bd41805-5903-4f3f-927e-2391f0ab9478	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8bd41805-5903-4f3f-927e-2391f0ab9478	f0/t2	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:graf-reaver:cast:s1,f:xs:XP:graf-reaver:cast:s1	-	-	-	d864b561c9cb	-	23e294f65245	-	-	2026-11-24	xproof
 8bd6dea2-2fdd-482f-9fe8-6f3eeed13872	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bd6dea2-2fdd-482f-9fe8-6f3eeed13872	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8be11473-6edf-4f45-b541-11858655fb5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -206,8 +206,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8bed095d-1538-4c80-b147-3ec308a8acb1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bed095d-1538-4c80-b147-3ec308a8acb1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bed1349-4d0a-4544-ba66-c38e72cd2863	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8bed92cc-b3f8-4201-bcbc-44535ff1bd96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8bed92cc-b3f8-4201-bcbc-44535ff1bd96	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8bed92cc-b3f8-4201-bcbc-44535ff1bd96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tainted-adversary:f0t0:s1,f:xs:XP:tainted-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	d311a549804e	-	-	2026-11-24	xproof
+8bed92cc-b3f8-4201-bcbc-44535ff1bd96	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tainted-adversary:f0t0:s1,f:xs:XP:tainted-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	d311a549804e	-	-	2026-11-24	xproof
 8bef3511-ceeb-4d57-972a-ab363ecacd5b	cast	cast-resolve	agreed	-	X	scen	1	0	Timid Shieldbearer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8bef3511-ceeb-4d57-972a-ab363ecacd5b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Timid Shieldbearer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8bf8e846-9d10-4dbc-a379-df37bb9fb6d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

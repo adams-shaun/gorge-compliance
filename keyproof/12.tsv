@@ -50,10 +50,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1232c461-643c-40a3-901e-09b665f817da	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Noxious Newt/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1232c461-643c-40a3-901e-09b665f817da	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Noxious Newt/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 123337af-f976-4956-949f-c650da812113	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12367806-5924-485c-814a-5b67dd79235e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12367806-5924-485c-814a-5b67dd79235e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12367806-5924-485c-814a-5b67dd79235e	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12367806-5924-485c-814a-5b67dd79235e	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12367806-5924-485c-814a-5b67dd79235e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:evolved-sleeper:cast:s1,f:xs:XP:evolved-sleeper:cast:s1	-	-	-	d864b561c9cb	-	59e6e24bf487	-	-	2026-11-24	xproof
+12367806-5924-485c-814a-5b67dd79235e	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:evolved-sleeper:f0a0:s1,f:xs:XP:evolved-sleeper:f0a0:s1	-	-	-	d864b561c9cb	-	59e6e24bf487	-	-	2026-11-24	xproof
+12367806-5924-485c-814a-5b67dd79235e	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:evolved-sleeper:f0a1:s1,f:xs:XP:evolved-sleeper:f0a1:s1	-	-	-	d864b561c9cb	-	59e6e24bf487	-	-	2026-11-24	xproof
+12367806-5924-485c-814a-5b67dd79235e	f0/a2	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:evolved-sleeper:f0a2:s1,f:xs:XP:evolved-sleeper:f0a2:s1	-	-	-	d864b561c9cb	-	59e6e24bf487	-	-	2026-11-24	xproof
 123880ad-7b54-4ab0-82eb-c78b12ab89a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12397dbf-99a9-40c3-aa7c-76d09baad008	cast	cast-resolve	agreed	-	X	scen	1	0	Teacher's Pest/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12397dbf-99a9-40c3-aa7c-76d09baad008	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Teacher's Pest/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -196,9 +196,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12c71296-1243-49e6-a196-8b016a7b635c	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Scalding Viper/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12c7289f-da53-403a-a607-227f43c7e171	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trusty-packbeast:f0t0:s1,f:xs:XP:trusty-packbeast:f0t0:s1	-	-	-	d864b561c9cb	-	bbf4518e2d9c	-	-	2026-11-24	xproof
 12c7289f-da53-403a-a607-227f43c7e171	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:trusty-packbeast:f0t0:s1,f:xs:XP:trusty-packbeast:f0t0:s1	-	-	-	d864b561c9cb	-	bbf4518e2d9c	-	-	2026-11-24	xproof
-12c98c1e-7e02-473d-b494-ad8a0731fe82	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12c98c1e-7e02-473d-b494-ad8a0731fe82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lagomos-hand-of-hatred:cast:s1,f:xs:XP:lagomos-hand-of-hatred:cast:s1	-	-	-	d864b561c9cb	-	0c40495b75c7	-	-	2026-11-24	xproof
 12c98c1e-7e02-473d-b494-ad8a0731fe82	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12c98c1e-7e02-473d-b494-ad8a0731fe82	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12c98c1e-7e02-473d-b494-ad8a0731fe82	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:lagomos-hand-of-hatred:cast:s1,f:xs:XP:lagomos-hand-of-hatred:cast:s1	-	-	-	d864b561c9cb	-	0c40495b75c7	-	-	2026-11-24	xproof
 12cc800c-c7be-4811-8207-fd01a99cc892	cast	cast-resolve	agreed	-	X	scen	1	0	Chandra, Torch of Defiance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12cc800c-c7be-4811-8207-fd01a99cc892	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Chandra, Torch of Defiance/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12cc800c-c7be-4811-8207-fd01a99cc892	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Chandra, Torch of Defiance/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -223,7 +223,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12da8ba3-ca60-44c8-8627-1b4af2a2c4a3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12db6263-75c2-442f-a1a5-7af7915f8f9f	cast	cast-resolve	agreed	-	X	scen	1	0	Umbral Collar Zealot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12db6263-75c2-442f-a1a5-7af7915f8f9f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Umbral Collar Zealot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12e0321b-1cd7-4519-8929-3261cf11a1a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12e0321b-1cd7-4519-8929-3261cf11a1a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cleanup-crew:f0t0:s1,f:xs:XP:cleanup-crew:f0t0:s1	-	-	-	d864b561c9cb	-	d24cf4644c26	-	-	2026-11-24	xproof
 12e0321b-1cd7-4519-8929-3261cf11a1a9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12e091d0-3fd0-4058-84a9-529023b74c74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jorubai-murk-lurker:cast:s1,f:xs:XP:jorubai-murk-lurker:cast:s1	-	-	-	d864b561c9cb	-	707d453a628d	-	-	2026-11-24	xproof
 12e091d0-3fd0-4058-84a9-529023b74c74	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:jorubai-murk-lurker:f0a0:s1,f:xs:XP:jorubai-murk-lurker:f0a0:s1	-	-	-	d864b561c9cb	-	707d453a628d	-	-	2026-11-24	xproof

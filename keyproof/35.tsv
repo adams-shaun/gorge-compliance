@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35506b6b-6476-4830-9baa-4051c18322f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3552eea9-aee9-4555-b3cb-8e4fc5b728cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35553c2a-0150-49e4-81da-f356c6a17253	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35553c2a-0150-49e4-81da-f356c6a17253	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35553c2a-0150-49e4-81da-f356c6a17253	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35553c2a-0150-49e4-81da-f356c6a17253	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+35553c2a-0150-49e4-81da-f356c6a17253	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 355603d1-f62d-407a-8fa9-74e7dca8ecf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:era-of-innovation:cast:s1,f:xs:XP:era-of-innovation:cast:s1	-	-	-	d864b561c9cb	-	83fb970077de	-	-	2026-11-24	xproof
 355603d1-f62d-407a-8fa9-74e7dca8ecf9	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 355603d1-f62d-407a-8fa9-74e7dca8ecf9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

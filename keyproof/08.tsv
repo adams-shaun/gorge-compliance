@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0828d891-f7c3-4e51-b42e-6ce88d48ac8b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Icewrought Sentry/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0828d891-f7c3-4e51-b42e-6ce88d48ac8b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Icewrought Sentry/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0828d891-f7c3-4e51-b42e-6ce88d48ac8b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Icewrought Sentry/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-08377424-619e-48ae-bc3c-fb199cd77cf9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+08377424-619e-48ae-bc3c-fb199cd77cf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-loamspeaker:cast:s1,f:xs:XP:llanowar-loamspeaker:cast:s1	-	-	-	d864b561c9cb	-	c95aae7d2bb4	-	-	2026-11-24	xproof
 08377424-619e-48ae-bc3c-fb199cd77cf9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08377424-619e-48ae-bc3c-fb199cd77cf9	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 083dcc19-3357-48e4-94e8-8da5bbfba210	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -85,8 +85,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 087d2e42-c69f-4cd2-b2e3-e0b64ac2893b	cast	cast-resolve	agreed	-	FX	scen	2	0	Momentum Breaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 087d2e42-c69f-4cd2-b2e3-e0b64ac2893b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Momentum Breaker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 087d2e42-c69f-4cd2-b2e3-e0b64ac2893b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-087d6330-c9de-42b7-a804-1202bc6aa682	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-087d6330-c9de-42b7-a804-1202bc6aa682	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+087d6330-c9de-42b7-a804-1202bc6aa682	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primal-adversary:f0t0:s1,f:xs:XP:primal-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	ade98f952a95	-	-	2026-11-24	xproof
+087d6330-c9de-42b7-a804-1202bc6aa682	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:primal-adversary:f0t0:s1,f:xs:XP:primal-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	ade98f952a95	-	-	2026-11-24	xproof
 087f9ad7-e74f-40e2-8102-1ed2925d0418	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rest-in-peace:f0t0:s2,f:xs:XP:rest-in-peace:f0t0:s2	-	-	-	e07cf3a05ba5	-	7b2c4c5c44a4	-	-	2026-11-24	xproof
 087f9ad7-e74f-40e2-8102-1ed2925d0418	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rest-in-peace:f0t0:s2,f:xs:XP:rest-in-peace:f0t0:s2	-	-	-	e07cf3a05ba5	-	7b2c4c5c44a4	-	-	2026-11-24	xproof
 0880461e-8943-443b-90e7-ff84eef46550	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,15 +125,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 08a0e845-9ef9-4de1-b9fe-4530357346ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:biblioplex-tomekeeper:f0t0:s1,f:xs:XP:biblioplex-tomekeeper:f0t0:s1	-	-	-	9ee19e8250ce	-	27d0c7b930fe	-	-	2026-11-24	xproof
 08a0e845-9ef9-4de1-b9fe-4530357346ca	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 08a40717-c272-42e6-adb1-0148614b1202	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-08a40717-c272-42e6-adb1-0148614b1202	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+08a40717-c272-42e6-adb1-0148614b1202	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 08a40717-c272-42e6-adb1-0148614b1202	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08adacab-96c3-4532-8ab3-0c8064fa4150	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08ae9f91-48c8-4721-a82d-063defc1b727	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08af6751-5848-47fb-95f5-57215e899460	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:weftwalking:f0t0:s1,f:xs:XP:weftwalking:f0t0:s1	-	-	-	64a08ba7d913	-	10b43f75933e	-	-	2026-11-24	xproof
 08af6751-5848-47fb-95f5-57215e899460	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:weftwalking:f0t0:s1,f:xs:XP:weftwalking:f0t0:s1	-	-	-	64a08ba7d913	-	10b43f75933e	-	-	2026-11-24	xproof
 08af6751-5848-47fb-95f5-57215e899460	static#0.0	static#0.0	agreed	-	X	scen	1	0	Weftwalking/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-08af6fdc-4068-4652-b1fc-cda5309c7b71	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-08af6fdc-4068-4652-b1fc-cda5309c7b71	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+08af6fdc-4068-4652-b1fc-cda5309c7b71	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:favor-of-jukai:cast:s1,f:xs:XP:favor-of-jukai:cast:s1	-	-	-	d864b561c9cb	-	79d4f8ea613a	-	-	2026-11-24	xproof
+08af6fdc-4068-4652-b1fc-cda5309c7b71	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:favor-of-jukai:cast:s2,f:xs:XP:favor-of-jukai:cast:s2	-	-	-	d864b561c9cb	-	79d4f8ea613a	-	-	2026-11-24	xproof
 08afc0d7-192f-4ab6-b6a0-c4265cf5e225	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trophy-mage:f0t0:s1,f:xs:XP:trophy-mage:f0t0:s1	-	-	-	d864b561c9cb	-	cdec9c95541a	-	-	2026-11-24	xproof
 08afc0d7-192f-4ab6-b6a0-c4265cf5e225	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:trophy-mage:f0t0:s1,f:xs:XP:trophy-mage:f0t0:s1	-	-	-	d864b561c9cb	-	cdec9c95541a	-	-	2026-11-24	xproof
 08b13e1f-27ca-40a8-b5ed-88ac933d24bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

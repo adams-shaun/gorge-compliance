@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 fa04f161-4141-491b-ad6f-a16f69c862f3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dark-inquiry:cast:s1,f:xs:XP:dark-inquiry:cast:s1	-	-	-	d864b561c9cb	-	e628f312a383	-	-	2026-11-24	xproof
 fa0a4765-5799-4464-88b6-6d1b15889eb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa0a4765-5799-4464-88b6-6d1b15889eb5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa0bff4f-af97-4733-b9d3-a0bc9ef1e2ca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa0bff4f-af97-4733-b9d3-a0bc9ef1e2ca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fa0bff4f-af97-4733-b9d3-a0bc9ef1e2ca	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+fa0bff4f-af97-4733-b9d3-a0bc9ef1e2ca	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 fa10cacb-ab14-447a-b411-9d74bc3772fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa110e05-6759-4eeb-96eb-9b7a8e4a94c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa123b21-518a-4f1d-9629-c44576d45f21	cast	cast-resolve	agreed	-	X	scen	1	0	Veloheart Bike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -63,7 +63,7 @@ fa43d688-99de-4774-ac2d-2d01866eef58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fa4417e5-229a-4465-9bc5-0b3d6209b4a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-war-party:cast:s1,f:xs:XP:goblin-war-party:cast:s1	-	-	-	d864b561c9cb	-	f43701d6649a	-	-	2026-11-24	xproof
 fa44fa48-d270-4f0f-b672-d63e1c1942ce	cast	cast-resolve	agreed	-	X	scen	1	0	Glimpse the Core/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa46ced5-b701-4aa3-b4a1-36fb15b80696	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa4755c2-e573-45c3-bd6a-61b2b35fbd24	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fa4755c2-e573-45c3-bd6a-61b2b35fbd24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flame-discharge:cast:s1,f:xs:XP:flame-discharge:cast:s1	-	-	-	d864b561c9cb	-	08d554682354	-	-	2026-11-24	xproof
 fa47c190-d66a-41b0-aa08-21036cda4223	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa482ded-b24c-4f9e-948e-d0620e907b8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:surreal-memoir:cast:s1,f:xs:XP:surreal-memoir:cast:s1	-	-	-	d864b561c9cb	-	fa3c0ed3d818	-	-	2026-11-24	xproof
 fa4ad622-5021-44fe-92af-0de115059eb6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -122,7 +122,7 @@ fa76ee16-ff48-418b-819a-69f1139b36f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fa76ee16-ff48-418b-819a-69f1139b36f3	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa7b7db2-c830-405c-a5e6-e5431d573ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa7c13c0-350b-4ed6-8c16-590d2b988184	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa7c13c0-350b-4ed6-8c16-590d2b988184	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fa7c13c0-350b-4ed6-8c16-590d2b988184	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spore-crawler:f0t0:s1,f:xs:XP:spore-crawler:f0t0:s1	-	-	-	d864b561c9cb	-	aa1d910895c1	-	-	2026-11-24	xproof
 fa7c8092-94da-4147-aa90-0a951d2a8be8	cast	cast-resolve	agreed	-	FX	scen	2	0	Impossible Inferno/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa7d09aa-2ebc-4571-81da-836cd80cf554	cast	cast-resolve	agreed	-	FX	scen	2	0	Wardens of the Cycle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa7d09aa-2ebc-4571-81da-836cd80cf554	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wardens of the Cycle/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

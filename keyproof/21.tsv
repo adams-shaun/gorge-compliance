@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 215c287d-56a5-46da-b49e-8524b6d320a4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 215dfa88-b130-44df-9cfc-f1f0e4a36f4d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 215dfa88-b130-44df-9cfc-f1f0e4a36f4d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-215dfa88-b130-44df-9cfc-f1f0e4a36f4d	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+215dfa88-b130-44df-9cfc-f1f0e4a36f4d	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2160aed4-5a7a-4eca-96b5-707204fa73bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21613fac-d959-44ba-9bcb-0a30b5e6545e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-god-s-oracle:cast:s1,f:xs:XP:storm-god-s-oracle:cast:s1	-	-	-	d864b561c9cb	-	440d61aeb822	-	-	2026-11-24	xproof
 21613fac-d959-44ba-9bcb-0a30b5e6545e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:storm-god-s-oracle:f0a0:s1,f:xs:XP:storm-god-s-oracle:f0a0:s1	-	-	-	d864b561c9cb	-	440d61aeb822	-	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 218f835b-4195-4ee8-a4ef-e5ba58fa5374	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21989fad-9672-46d4-b7d5-101906e7aed2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 219cf182-0942-4569-91e9-9bc9bb1d06d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-219cf182-0942-4569-91e9-9bc9bb1d06d0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+219cf182-0942-4569-91e9-9bc9bb1d06d0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blood-petal-celebrant:f0t0:s1,f:xs:XP:blood-petal-celebrant:f0t0:s1	-	-	-	d864b561c9cb	-	ebcb4ed08ef9	-	-	2026-11-24	xproof
 21a094d6-de3d-48d4-a35d-b99617da55db	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sneering-shadewriter:f0t0:s2,f:xs:XP:sneering-shadewriter:f0t0:s2	-	-	-	e07cf3a05ba5	-	269d297ed50a	-	-	2026-11-24	xproof
 21a094d6-de3d-48d4-a35d-b99617da55db	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sneering Shadewriter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 21a094d6-de3d-48d4-a35d-b99617da55db	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sneering Shadewriter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

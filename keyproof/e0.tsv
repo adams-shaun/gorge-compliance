@@ -65,12 +65,12 @@ e04560ea-f2bd-4cb7-8f65-3aa0dd58fbdf	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Like
 e04560ea-f2bd-4cb7-8f65-3aa0dd58fbdf	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Likeness Looter/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e0462a2c-fb88-495f-813b-6476ee3e62bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e049eb22-a01a-463e-8de9-705d6eaf84e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e049eb22-a01a-463e-8de9-705d6eaf84e2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e049eb22-a01a-463e-8de9-705d6eaf84e2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e04ca2dc-873e-4d80-b1d7-4873ffdb3af5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e04f151a-66bb-4bc3-a625-91cd23cb1b18	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 e04fa58e-be7a-4c9c-98d0-48241742a41b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e04fa58e-be7a-4c9c-98d0-48241742a41b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e05029b4-552d-4691-a5c4-885284fb1636	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e05029b4-552d-4691-a5c4-885284fb1636	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cartographer-s-survey:cast:s1,f:xs:XP:cartographer-s-survey:cast:s1	-	-	-	d864b561c9cb	-	746c5589c5cd	-	-	2026-11-24	xproof
 e050a0a3-f48e-4cba-9cd4-692a92261c9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0548f0d-4aec-4c39-8c34-52bfa2bf7c60	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forked-bolt:cast:s1,f:xs:XP:forked-bolt:cast:s1	-	-	-	d864b561c9cb	-	5a9ff6ddd6a1	-	-	2026-11-24	xproof
 e055bc6d-d395-4f85-8e15-3bce65b7fcca	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:redcap-thief:f0t0:s2,f:xs:XP:redcap-thief:f0t0:s2	-	-	-	e07cf3a05ba5	-	9ee8696af8b3	-	-	2026-11-24	xproof
@@ -189,16 +189,16 @@ e0eaa43f-1c46-4299-9ecd-5f4a32d292cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e0edb2fc-2533-407c-85e5-4337f4233f05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0edb2fc-2533-407c-85e5-4337f4233f05	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0edb2fc-2533-407c-85e5-4337f4233f05	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e0edb2fc-2533-407c-85e5-4337f4233f05	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e0edb2fc-2533-407c-85e5-4337f4233f05	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e0f05979-daba-43eb-b356-24284e7ca99c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blur-sliver:cast:s1,f:xs:XP:blur-sliver:cast:s1	-	-	-	d864b561c9cb	-	2bfb0d3e6f13	-	-	2026-11-24	xproof
 e0f18302-5ccf-47d2-a8a1-bb7aeaca9a53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0f23e7e-2858-4f5e-9dd5-8a0ba934a048	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0f23e7e-2858-4f5e-9dd5-8a0ba934a048	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0f44bb8-f07b-416c-b767-87b9fe6461aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0f44bb8-f07b-416c-b767-87b9fe6461aa	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:chasm-drake:f0t0:s1,f:xs:XP:chasm-drake:f0t0:s1	-	-	-	d864b561c9cb	-	1693b4eff8a8	-	-	2026-11-24	xproof
-e0f47fe2-9e97-400e-98c1-a80ca8be66f3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e0f47fe2-9e97-400e-98c1-a80ca8be66f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e0f47fe2-9e97-400e-98c1-a80ca8be66f3	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e0f47fe2-9e97-400e-98c1-a80ca8be66f3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:mindleech-ghoul:cast:s1,f:xs:XP:mindleech-ghoul:cast:s1	-	-	-	d864b561c9cb	-	984cb4ca5ac6	-	-	2026-11-24	xproof
+e0f47fe2-9e97-400e-98c1-a80ca8be66f3	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:mindleech-ghoul:cast:s1,f:xs:XP:mindleech-ghoul:cast:s1	-	-	-	d864b561c9cb	-	984cb4ca5ac6	-	-	2026-11-24	xproof
+e0f47fe2-9e97-400e-98c1-a80ca8be66f3	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:mindleech-ghoul:cast:s1,f:xs:XP:mindleech-ghoul:cast:s1	-	-	-	d864b561c9cb	-	984cb4ca5ac6	-	-	2026-11-24	xproof
 e0f676ab-f859-4d4f-abe0-d033ffd3c396	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0f676ab-f859-4d4f-abe0-d033ffd3c396	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:steadfast-sentry:f0t0:s1,f:xs:XP:steadfast-sentry:f0t0:s1	-	-	-	d864b561c9cb	-	dbf4475b9325	-	-	2026-11-24	xproof
 e0fa6d08-1808-4a29-b1e4-5cec9d31d798	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

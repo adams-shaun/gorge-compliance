@@ -7,8 +7,8 @@ a80ea391-54d1-4b61-95a3-f8deb4cbe842	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a80ea391-54d1-4b61-95a3-f8deb4cbe842	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a8135179-51ef-454e-98ff-69137440339f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:annoyed-altisaur:cast:s1,f:xs:XP:annoyed-altisaur:cast:s1	-	-	-	d864b561c9cb	-	e535145dc025	-	-	2026-11-24	xproof
 a814d4c7-2ec0-4278-8704-23b39dcead4e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a814d4c7-2ec0-4278-8704-23b39dcead4e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a814d4c7-2ec0-4278-8704-23b39dcead4e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a814d4c7-2ec0-4278-8704-23b39dcead4e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+a814d4c7-2ec0-4278-8704-23b39dcead4e	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a81b7629-9db9-4351-8d0e-c45a7a6167d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ral-s-dispersal:cast:s1,f:xs:XP:ral-s-dispersal:cast:s1	-	-	-	d864b561c9cb	-	bde33060a9b5	-	-	2026-11-24	xproof
 a81fcdf8-59e7-471d-96ce-f87e656572b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8211eb1-332d-41c0-8086-4a18cd7a5832	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,8 +82,8 @@ a8730922-3f47-4c07-bdd5-4a0f557a3d3d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 a8730922-3f47-4c07-bdd5-4a0f557a3d3d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a877820f-8999-4dfe-a50d-09f63c885ce3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a877820f-8999-4dfe-a50d-09f63c885ce3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a881bf6e-6247-4adb-9f9c-e4b928692573	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a881bf6e-6247-4adb-9f9c-e4b928692573	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a881bf6e-6247-4adb-9f9c-e4b928692573	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stensia-uprising:cast:s1,f:xs:XP:stensia-uprising:cast:s1	-	-	-	d864b561c9cb	-	094cb39ca3e7	-	-	2026-11-24	xproof
+a881bf6e-6247-4adb-9f9c-e4b928692573	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:stensia-uprising:cast:s1,f:xs:XP:stensia-uprising:cast:s1	-	-	-	d864b561c9cb	-	094cb39ca3e7	-	-	2026-11-24	xproof
 a8828c17-190b-4e64-a0f2-8d14c013d692	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8828c17-190b-4e64-a0f2-8d14c013d692	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a887def5-c9e1-4cbb-8b08-79b7bd808deb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,9 +132,9 @@ a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Hunte
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Hunter's Talent/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8abc5db-4e0b-488d-898a-8109690d5099	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8abd966-de7b-46a3-8ac7-8747ab35653a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8acb0b0-7265-42f6-8143-62d0c02d5a28	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8acb0b0-7265-42f6-8143-62d0c02d5a28	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8acb0b0-7265-42f6-8143-62d0c02d5a28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a8acb0b0-7265-42f6-8143-62d0c02d5a28	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dragonspark-reactor:cast:s1,f:xs:XP:dragonspark-reactor:cast:s1	-	-	-	d864b561c9cb	-	f0cbe9ed5b6b	-	-	2026-11-24	xproof
+a8acb0b0-7265-42f6-8143-62d0c02d5a28	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:dragonspark-reactor:f0a0:s1,f:xs:XP:dragonspark-reactor:f0a0:s1	-	-	-	d864b561c9cb	-	f0cbe9ed5b6b	-	-	2026-11-24	xproof
+a8acb0b0-7265-42f6-8143-62d0c02d5a28	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dragonspark-reactor:cast:s1,f:xs:XP:dragonspark-reactor:cast:s1	-	-	-	d864b561c9cb	-	f0cbe9ed5b6b	-	-	2026-11-24	xproof
 a8af4d61-1aed-415d-8d8e-7384194ee3e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8af4d61-1aed-415d-8d8e-7384194ee3e2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8af4d61-1aed-415d-8d8e-7384194ee3e2	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:brackwater-elemental:f0t0:s1,f:xs:XP:brackwater-elemental:f0t0:s1	-	-	-	8a1b1a193ec0	-	7ed4e34f48c1	-	-	2026-11-24	xproof
@@ -169,9 +169,9 @@ a8c70dab-1e27-4a9c-bd2d-910d5720d02d	land	play-land	agreed	-	X	scen	1	0	Great Ha
 a8c9f91a-b1e7-451d-b6db-ae865e2b853c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8cd3a52-1056-4664-ae55-eb0ba3a43a15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fiery-intervention:cast:s1,f:xs:XP:fiery-intervention:cast:s1	-	-	-	d864b561c9cb	-	ff7f61325d21	-	-	2026-11-24	xproof
 a8cdcaa0-8e25-4c17-b5ce-16f72b535123	cast	cast-resolve	agreed	-	X	scen	1	0	Thoughtweft Charge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-a8ce90be-f0ab-4f8d-896a-cde8aaf24579	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8ce90be-f0ab-4f8d-896a-cde8aaf24579	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8ce90be-f0ab-4f8d-896a-cde8aaf24579	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a8ce90be-f0ab-4f8d-896a-cde8aaf24579	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jukai-preserver:cast:s1,f:xs:XP:jukai-preserver:cast:s1	-	-	-	d864b561c9cb	-	8547ebd95cff	-	-	2026-11-24	xproof
+a8ce90be-f0ab-4f8d-896a-cde8aaf24579	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:jukai-preserver:cast:s2,f:xs:XP:jukai-preserver:cast:s2	-	-	-	d864b561c9cb	-	8547ebd95cff	-	-	2026-11-24	xproof
+a8ce90be-f0ab-4f8d-896a-cde8aaf24579	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jukai-preserver:cast:s1,f:xs:XP:jukai-preserver:cast:s1	-	-	-	d864b561c9cb	-	8547ebd95cff	-	-	2026-11-24	xproof
 a8d31e2f-7b2e-4135-8074-9e6ef778bd80	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8da7c57-c60f-42b1-b611-64a0a43295f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8dba58b-2956-492e-ae30-49db2ae68e53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

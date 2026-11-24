@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e150025-51c2-4b92-970c-a89e83210e68	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:riot-gear:cast:s1,f:xs:XP:riot-gear:cast:s1	-	-	-	d864b561c9cb	-	09a00bbcb202	-	-	2026-11-24	xproof
 3e150025-51c2-4b92-970c-a89e83210e68	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:riot-gear:f0a0:s1,f:xs:XP:riot-gear:f0a0:s1	-	-	-	d864b561c9cb	-	09a00bbcb202	-	-	2026-11-24	xproof
 3e159175-78e5-40df-8fe9-e694938e7222	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e159175-78e5-40df-8fe9-e694938e7222	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3e159175-78e5-40df-8fe9-e694938e7222	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3e211792-2656-4bee-80ac-60eac0c45c2d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e211792-2656-4bee-80ac-60eac0c45c2d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e254cae-6e14-4a40-bc02-7ca23750bb26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,8 +161,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ee65210-547f-4375-8f9a-3484d963339f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:scourge-devil:cast:s1,f:xs:XP:scourge-devil:cast:s1	-	-	-	8a1b1a193ec0	-	dbb61d289875	-	-	2026-11-24	xproof
 3ee65210-547f-4375-8f9a-3484d963339f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ee65210-547f-4375-8f9a-3484d963339f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:scourge-devil:cast:s1,f:xs:XP:scourge-devil:cast:s1	-	-	-	8a1b1a193ec0	-	dbb61d289875	-	-	2026-11-24	xproof
-3ee68758-9431-4446-8539-f42f545f3bd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ee68758-9431-4446-8539-f42f545f3bd0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ee68758-9431-4446-8539-f42f545f3bd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:celestial-regulator:f0t0:s1,f:xs:XP:celestial-regulator:f0t0:s1	-	-	-	d864b561c9cb	-	55caeb630a70	-	-	2026-11-24	xproof
+3ee68758-9431-4446-8539-f42f545f3bd0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:celestial-regulator:f0t0:s1,f:xs:XP:celestial-regulator:f0t0:s1	-	-	-	d864b561c9cb	-	55caeb630a70	-	-	2026-11-24	xproof
 3ee78cfc-0e9e-4737-a7e2-b42f94228040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ee78cfc-0e9e-4737-a7e2-b42f94228040	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cruel-celebrant:f0t0:s1,f:xs:XP:cruel-celebrant:f0t0:s1	-	-	-	d864b561c9cb	-	d32cfffcd12e	-	-	2026-11-24	xproof
 3eec0ca6-e461-4583-9989-e4f6b15a53f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

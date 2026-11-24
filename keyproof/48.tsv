@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 485233bf-dc4b-4f31-8dfb-5054aee70c08	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Molten-Core Maestro/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 485233bf-dc4b-4f31-8dfb-5054aee70c08	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Molten-Core Maestro/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 485233bf-dc4b-4f31-8dfb-5054aee70c08	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Molten-Core Maestro/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-48533a2d-1bdb-40a6-939e-9c8337e0dc5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48533a2d-1bdb-40a6-939e-9c8337e0dc5a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48533a2d-1bdb-40a6-939e-9c8337e0dc5a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sleep-with-the-fishes:f0t0:s1,f:xs:XP:sleep-with-the-fishes:f0t0:s1	-	-	-	d864b561c9cb	-	43ac9f6e6001	-	-	2026-11-24	xproof
+48533a2d-1bdb-40a6-939e-9c8337e0dc5a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sleep-with-the-fishes:f0t0:s1,f:xs:XP:sleep-with-the-fishes:f0t0:s1	-	-	-	d864b561c9cb	-	43ac9f6e6001	-	-	2026-11-24	xproof
 4854a41e-db49-462f-ae57-0ba4005bae75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4854a41e-db49-462f-ae57-0ba4005bae75	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4854a41e-db49-462f-ae57-0ba4005bae75	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -192,8 +192,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48e6d3d8-2f27-4017-acdd-40bce8cdbc02	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Giada, Font of Hope/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 48e6d3d8-2f27-4017-acdd-40bce8cdbc02	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Giada, Font of Hope/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 48e6d3d8-2f27-4017-acdd-40bce8cdbc02	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Giada, Font of Hope/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-48edac92-0dd8-4274-bf1b-122243770540	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48edac92-0dd8-4274-bf1b-122243770540	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48edac92-0dd8-4274-bf1b-122243770540	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moldgraf-millipede:f0t0:s1,f:xs:XP:moldgraf-millipede:f0t0:s1	-	-	-	d864b561c9cb	-	74aa7eb91684	-	-	2026-11-24	xproof
+48edac92-0dd8-4274-bf1b-122243770540	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:moldgraf-millipede:f0t0:s1,f:xs:XP:moldgraf-millipede:f0t0:s1	-	-	-	d864b561c9cb	-	74aa7eb91684	-	-	2026-11-24	xproof
 48edc348-93f6-4dce-9cc4-7244d76b6f4a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48edc348-93f6-4dce-9cc4-7244d76b6f4a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48edc348-93f6-4dce-9cc4-7244d76b6f4a	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

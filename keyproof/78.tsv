@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 781cee5f-f9cb-42ed-b408-543d297bf96d	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:draconic-disciple:f0a1:s1,f:xs:XP:draconic-disciple:f0a1:s1	-	-	-	d864b561c9cb	-	f7e3b6badbf1	-	-	2026-11-24	xproof
 781d6981-d389-4677-9eaf-9c46c9192ed6	cast	cast-resolve	agreed	-	X	scen	1	0	Dreadmaw's Ire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 78260893-c443-44c8-ab45-ce86ef347d98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thunderous-wrath:cast:s1,f:xs:XP:thunderous-wrath:cast:s1	-	-	-	d864b561c9cb	-	49f3186e1a81	-	-	2026-11-24	xproof
-7826f3f5-c8f2-43f5-a837-ff016da625e6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7826f3f5-c8f2-43f5-a837-ff016da625e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:webspinner-cuff:cast:s1,f:xs:XP:webspinner-cuff:cast:s1	-	-	-	d864b561c9cb	-	7c016df776d7	-	-	2026-11-24	xproof
 7826f3f5-c8f2-43f5-a837-ff016da625e6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7826f3f5-c8f2-43f5-a837-ff016da625e6	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 782c47c5-b108-415c-9b70-a033ac52956f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78d74d6a-e1aa-4d70-92c3-b5338959d2fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78d74d6a-e1aa-4d70-92c3-b5338959d2fb	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78d9faff-2ad9-4cf9-a239-27c50435d007	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78d9faff-2ad9-4cf9-a239-27c50435d007	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+78d9faff-2ad9-4cf9-a239-27c50435d007	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 78db3190-59bc-4033-95bc-32d8ed872b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78db3190-59bc-4033-95bc-32d8ed872b6a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78dbbc15-9304-4178-b9b2-1db6c64ca11a	cast	cast-resolve	agreed	-	X	scen	1	0	Wishing Well/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

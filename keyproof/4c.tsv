@@ -80,8 +80,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c55ca3b-1254-4d44-96ac-1e1cadaf49f5	cast	cast-resolve	agreed	-	FX	scen	2	0	Corroding Dragonstorm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c55ca3b-1254-4d44-96ac-1e1cadaf49f5	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c55ca3b-1254-4d44-96ac-1e1cadaf49f5	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Corroding Dragonstorm/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c591977-f2af-4a6e-a0be-3dfb45a3598b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c591977-f2af-4a6e-a0be-3dfb45a3598b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c591977-f2af-4a6e-a0be-3dfb45a3598b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nebelgast-intruder:f0t0:s1,f:xs:XP:nebelgast-intruder:f0t0:s1	-	-	-	d864b561c9cb	-	d21200b6e07a	-	-	2026-11-24	xproof
+4c591977-f2af-4a6e-a0be-3dfb45a3598b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nebelgast-intruder:f0t0:s1,f:xs:XP:nebelgast-intruder:f0t0:s1	-	-	-	d864b561c9cb	-	d21200b6e07a	-	-	2026-11-24	xproof
 4c5e38ca-39d7-4e27-8bb7-687d86fd67c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c62dce6-dc1f-4d2d-95dd-295810ada6a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c62dce6-dc1f-4d2d-95dd-295810ada6a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:messenger-drake:f0t0:s1,f:xs:XP:messenger-drake:f0t0:s1	-	-	-	d864b561c9cb	-	d38c3e4777e5	-	-	2026-11-24	xproof
@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c90ca5c-551c-4da5-9482-62521b1ae17c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:matsu-tribe-birdstalker:cast:s1,f:xs:XP:matsu-tribe-birdstalker:cast:s1	-	-	-	64a08ba7d913	-	18de18603ab7	-	-	2026-11-24	xproof
 4c90ca5c-551c-4da5-9482-62521b1ae17c	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 4c90ca5c-551c-4da5-9482-62521b1ae17c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-4c912e9a-21f9-4058-b28c-43f319e35d09	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c912e9a-21f9-4058-b28c-43f319e35d09	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c912e9a-21f9-4058-b28c-43f319e35d09	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frenzied-devils:cast:s1,f:xs:XP:frenzied-devils:cast:s1	-	-	-	d864b561c9cb	-	40e3e7d8c94a	-	-	2026-11-24	xproof
+4c912e9a-21f9-4058-b28c-43f319e35d09	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4c92b862-34c7-4195-bee3-bcc0cafad140	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c92b862-34c7-4195-bee3-bcc0cafad140	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4c9a38f8-8fcb-45f9-8b70-e54298c7b485	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4caa8e68-e599-416f-b839-3d009569ff29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4caa97df-1f6c-4806-bf14-e589cc1badb5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4cab6ea8-4a80-4b34-b758-7f2aa4d540e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4cab6ea8-4a80-4b34-b758-7f2aa4d540e4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4cab6ea8-4a80-4b34-b758-7f2aa4d540e4	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4cb63198-29b5-4607-bd4a-f449807fb764	cast	cast-resolve	agreed	-	X	scen	1	0	Overzealous Muscle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4cb63198-29b5-4607-bd4a-f449807fb764	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Overzealous Muscle/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4cb86fb6-3e06-4c67-aee0-d5952178f664	cast	cast-resolve	agreed	-	X	scen	1	0	Nicanzil, Current Conductor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

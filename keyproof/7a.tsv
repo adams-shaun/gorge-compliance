@@ -79,9 +79,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a6ce270-c261-422f-845f-11c22602a274	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a6db509-7ef4-483c-b8a0-62a4f3e16ef9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a6db509-7ef4-483c-b8a0-62a4f3e16ef9	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-7a7096a7-ef1b-4015-b1eb-5c2174d7ec9a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a7096a7-ef1b-4015-b1eb-5c2174d7ec9a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a7096a7-ef1b-4015-b1eb-5c2174d7ec9a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7a7096a7-ef1b-4015-b1eb-5c2174d7ec9a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:willow-geist:cast:s1,f:xs:XP:willow-geist:cast:s1	-	-	-	d864b561c9cb	-	07f252ea9f08	-	-	2026-11-24	xproof
+7a7096a7-ef1b-4015-b1eb-5c2174d7ec9a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7a7096a7-ef1b-4015-b1eb-5c2174d7ec9a	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:willow-geist:f0t1:s1,f:xs:XP:willow-geist:f0t1:s1	-	-	-	d864b561c9cb	-	07f252ea9f08	-	-	2026-11-24	xproof
 7a70faf5-cc04-402b-92e3-67746788f510	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sunshower-druid:f0t0:s2,f:xs:XP:sunshower-druid:f0t0:s2	-	-	-	e07cf3a05ba5	-	6a0fc14ad86c	-	-	2026-11-24	xproof
 7a70faf5-cc04-402b-92e3-67746788f510	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sunshower-druid:f0t0:s2,f:xs:XP:sunshower-druid:f0t0:s2	-	-	-	e07cf3a05ba5	-	6a0fc14ad86c	-	-	2026-11-24	xproof
 7a7425ba-4478-4bc4-855f-abf947ea4fa2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a8baaf9-e21f-41a0-9f15-80764f6e5e68	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a8baaf9-e21f-41a0-9f15-80764f6e5e68	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7a8fa68b-8c87-4ecd-ac29-50fd90c62159	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a8fa68b-8c87-4ecd-ac29-50fd90c62159	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7a8fa68b-8c87-4ecd-ac29-50fd90c62159	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ollenbock-escort:f0a0:s1,f:xs:XP:ollenbock-escort:f0a0:s1	-	-	-	d864b561c9cb	-	34ae4f28afc2	-	-	2026-11-24	xproof
 7a951bd7-4f7d-44ea-9c2f-fe2f6b2f5289	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a951bd7-4f7d-44ea-9c2f-fe2f6b2f5289	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a951bd7-4f7d-44ea-9c2f-fe2f6b2f5289	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -154,8 +154,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7aefe7a9-d696-4e2e-b1a5-d041d9e4e213	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7af3876e-5297-46e6-936e-6c8344f4b6ac	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7af3876e-5297-46e6-936e-6c8344f4b6ac	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7af3876e-5297-46e6-936e-6c8344f4b6ac	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7af3876e-5297-46e6-936e-6c8344f4b6ac	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7af3876e-5297-46e6-936e-6c8344f4b6ac	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7af3876e-5297-46e6-936e-6c8344f4b6ac	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7af493e3-15a1-42d6-a66c-82aacabe816f	cast	cast-resolve	agreed	-	X	scen	1	0	Saber-Tooth Moose-Lion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7af493e3-15a1-42d6-a66c-82aacabe816f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Saber-Tooth Moose-Lion/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7af493e3-15a1-42d6-a66c-82aacabe816f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Saber-Tooth Moose-Lion/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

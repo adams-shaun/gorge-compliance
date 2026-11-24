@@ -98,9 +98,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a7183cc-161c-444d-a889-a17519c8061b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Arcanis the Omnipotent/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a7643e4-b824-441a-bbe6-349fc7a3e11e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a7643e4-b824-441a-bbe6-349fc7a3e11e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a7c3718-74a1-4f26-8e06-0e17db4b0077	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a7c3718-74a1-4f26-8e06-0e17db4b0077	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gilded-pinions:f0t0:s1,f:xs:XP:gilded-pinions:f0t0:s1	-	-	-	d864b561c9cb	-	04cd80b5c079	-	-	2026-11-24	xproof
 8a7c3718-74a1-4f26-8e06-0e17db4b0077	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a7c3718-74a1-4f26-8e06-0e17db4b0077	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a7c3718-74a1-4f26-8e06-0e17db4b0077	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gilded-pinions:f0t0:s1,f:xs:XP:gilded-pinions:f0t0:s1	-	-	-	d864b561c9cb	-	04cd80b5c079	-	-	2026-11-24	xproof
 8a7c6391-020a-4d7a-8abb-702631bbee56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a7c6391-020a-4d7a-8abb-702631bbee56	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a7c6391-020a-4d7a-8abb-702631bbee56	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -216,4 +216,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8afc00d4-a1c6-4329-af2c-a7f58a0c33e7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 8afc6147-80b4-4296-a5aa-ce892cefb1a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orchard-warden:cast:s1,f:xs:XP:orchard-warden:cast:s1	-	-	-	d864b561c9cb	-	e2c75338ff88	-	-	2026-11-24	xproof
 8afc6147-80b4-4296-a5aa-ce892cefb1a7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-8afe3d28-be3e-416c-9457-8a2af85b2eec	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8afe3d28-be3e-416c-9457-8a2af85b2eec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ritual-of-hope:cast:s1,f:xs:XP:ritual-of-hope:cast:s1	-	-	-	d864b561c9cb	-	d62a9bd196d3	-	-	2026-11-24	xproof

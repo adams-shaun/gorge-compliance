@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 181da74b-53fb-4e46-afc0-e7c990fda128	cast	cast-resolve	agreed	-	FX	scen	2	0	Efflorescence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 181e6b3e-c33e-49e7-acb8-67473289a856	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18202185-f9d4-446a-b34e-fae9800240f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18207fe8-41e4-418d-b5f9-e1239c527e67	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18207fe8-41e4-418d-b5f9-e1239c527e67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:extract-the-truth:cast:s1,f:xs:XP:extract-the-truth:cast:s1	-	-	-	d864b561c9cb	-	0cd90e61b40d	-	-	2026-11-24	xproof
 1820af5c-9cc2-4b77-b4ca-86084442f087	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1820af5c-9cc2-4b77-b4ca-86084442f087	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1820af5c-9cc2-4b77-b4ca-86084442f087	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18290c4b-cff6-4ee5-a487-fe0d5706d3de	land	play-land	agreed	-	X	scen	1	0	Urban Retreat/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1829f1dc-1fa9-4361-b318-d4dee280e6fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1829f1dc-1fa9-4361-b318-d4dee280e6fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1829f1dc-1fa9-4361-b318-d4dee280e6fd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1829f1dc-1fa9-4361-b318-d4dee280e6fd	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 182c9af9-d867-4848-ab36-ac7b1914f41a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-emissary:cast:s1,f:xs:XP:heliod-s-emissary:cast:s1	-	-	-	d864b561c9cb	-	458c52057b4e	-	-	2026-11-24	xproof
 182c9af9-d867-4848-ab36-ac7b1914f41a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-emissary:f0t0:s1,f:xs:XP:heliod-s-emissary:f0t0:s1	-	-	-	d864b561c9cb	-	458c52057b4e	-	-	2026-11-24	xproof
 182d38b4-48bb-4050-a19a-c0a6bb241bbd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -72,11 +72,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 183954d2-7b40-4c7e-adfa-d80191ab5ad6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:god-pharaoh-s-statue:cast:s1,f:xs:XP:god-pharaoh-s-statue:cast:s1	-	-	-	d864b561c9cb	-	6dfcfd9c2d4f	-	-	2026-11-24	xproof
 183954d2-7b40-4c7e-adfa-d80191ab5ad6	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:god-pharaoh-s-statue:cast:s1,f:xs:XP:god-pharaoh-s-statue:cast:s1	-	-	-	d864b561c9cb	-	6dfcfd9c2d4f	-	-	2026-11-24	xproof
 183cfd35-c18a-4838-94e5-1ad66e6bd325	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-183cfd35-c18a-4838-94e5-1ad66e6bd325	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+183cfd35-c18a-4838-94e5-1ad66e6bd325	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 183e2796-2fc1-4f0e-b1be-95285d2ea046	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 183e2796-2fc1-4f0e-b1be-95285d2ea046	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ixalli-s-keeper:f0a0:s1,f:xs:XP:ixalli-s-keeper:f0a0:s1	-	-	-	d864b561c9cb	-	f9d83b1d3c29	-	-	2026-11-24	xproof
-184c763c-b52a-471c-bd87-d01729ebe5e4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-184c763c-b52a-471c-bd87-d01729ebe5e4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+184c763c-b52a-471c-bd87-d01729ebe5e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glittermonger:cast:s1,f:xs:XP:glittermonger:cast:s1	-	-	-	d864b561c9cb	-	f1add686c693	-	-	2026-11-24	xproof
+184c763c-b52a-471c-bd87-d01729ebe5e4	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:glittermonger:f0a0:s1,f:xs:XP:glittermonger:f0a0:s1	-	-	-	d864b561c9cb	-	f1add686c693	-	-	2026-11-24	xproof
 184d4672-05a9-4182-8b3f-3561fb33ed62	cast	cast-resolve	agreed	-	X	scen	1	0	Garruk, Curse Breaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 184d4672-05a9-4182-8b3f-3561fb33ed62	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Garruk, Curse Breaker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 184d4672-05a9-4182-8b3f-3561fb33ed62	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Garruk, Curse Breaker/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -175,9 +175,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18aee20d-ab73-4fdb-a65c-101beae5fcf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18b09c2d-20cb-40e9-8209-8a1ec2edde97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viashino-racketeer:f0t0:s1,f:xs:XP:viashino-racketeer:f0t0:s1	-	-	-	d864b561c9cb	-	be0427be2c2e	-	-	2026-11-24	xproof
 18b09c2d-20cb-40e9-8209-8a1ec2edde97	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:viashino-racketeer:f0t0:s1,f:xs:XP:viashino-racketeer:f0t0:s1	-	-	-	d864b561c9cb	-	be0427be2c2e	-	-	2026-11-24	xproof
-18b0b583-d17b-4c67-bc67-c4d9aad155c7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18b0b583-d17b-4c67-bc67-c4d9aad155c7	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18b0b583-d17b-4c67-bc67-c4d9aad155c7	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18b0b583-d17b-4c67-bc67-c4d9aad155c7	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:waterfront-district:f0a0:s1,f:xs:XP:waterfront-district:f0a0:s1	-	-	-	d864b561c9cb	-	9646a0e31a15	-	-	2026-11-24	xproof
+18b0b583-d17b-4c67-bc67-c4d9aad155c7	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:waterfront-district:f0a1:s1,f:xs:XP:waterfront-district:f0a1:s1	-	-	-	d864b561c9cb	-	9646a0e31a15	-	-	2026-11-24	xproof
+18b0b583-d17b-4c67-bc67-c4d9aad155c7	land	land	agreed	-	FX	start	2	0	x:xs:XP:waterfront-district:land:s1,f:xs:XP:waterfront-district:land:s1	-	-	-	d864b561c9cb	-	9646a0e31a15	-	-	2026-11-24	xproof
 18ba355d-a25f-4a5d-b734-11739b0b86af	cast	cast-resolve	agreed	-	FX	scen	2	0	Guardian of the Great Door/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18ba355d-a25f-4a5d-b734-11739b0b86af	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Guardian of the Great Door/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18ba355d-a25f-4a5d-b734-11739b0b86af	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Guardian of the Great Door/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b4dd121-b477-42ff-9dd1-5d0f957a509d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b51bbb3-1514-4a79-861f-b9cec9f0ec1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b51d6e5-a4cd-4f2f-9762-6ad2cfd8b084	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b51d6e5-a4cd-4f2f-9762-6ad2cfd8b084	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2b51d6e5-a4cd-4f2f-9762-6ad2cfd8b084	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2b548f9a-c160-427d-9bb4-1fe940f8ab28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b548f9a-c160-427d-9bb4-1fe940f8ab28	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b565791-1b94-4dad-a48d-be7fc2198e19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b6fa8b6-4865-4eb6-974b-00f6b16b6f0f	cast	cast-resolve	agreed	-	X	scen	1	0	U.S.Agent, John Walker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2b6fa8b6-4865-4eb6-974b-00f6b16b6f0f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 2b719057-1bc0-4c3a-97c3-8377844570dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b719057-1bc0-4c3a-97c3-8377844570dd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2b719057-1bc0-4c3a-97c3-8377844570dd	f0/t0	NULL	owed	refused:no-generator:trigger:DiscardedAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2b732c6a-f09c-4ac0-ae3a-1d8820b69aba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b732c6a-f09c-4ac0-ae3a-1d8820b69aba	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2b7362a9-3518-4071-ab1b-40689a50e12a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:old-growth-educator:f0t0:s2,f:xs:XP:old-growth-educator:f0t0:s2	-	-	-	5437c1394672	-	6c6ad3194691	-	-	2026-11-24	xproof

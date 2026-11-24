@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 c4020178-71d9-4363-a0bd-b9a7eecd5d02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4020178-71d9-4363-a0bd-b9a7eecd5d02	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4023e1f-26e3-4225-98d0-3d33f6654616	cast	cast-resolve	agreed	-	X	scen	1	0	Caustic Exhale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c4033d97-769f-4811-8b11-f85b8817b7a2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c4033d97-769f-4811-8b11-f85b8817b7a2	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:endless-sands:f0a1:s1,f:xs:XP:endless-sands:f0a1:s1	-	-	-	d864b561c9cb	-	574ad14b4b74	-	-	2026-11-24	xproof
 c4033d97-769f-4811-8b11-f85b8817b7a2	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4033d97-769f-4811-8b11-f85b8817b7a2	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4033d97-769f-4811-8b11-f85b8817b7a2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -56,8 +56,8 @@ c44f40da-867e-4237-b4b1-ed6feb1f37b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dar
 c44f40da-867e-4237-b4b1-ed6feb1f37b7	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:dark-heart-of-the-wood:cast:s1,f:xs:XP:dark-heart-of-the-wood:cast:s1	-	-	-	25696bf19d5b	-	513b3e5b51d0	-	-	2026-11-24	xproof
 c450f6b7-bb2a-4b8c-aec7-d27555137b63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c450f6b7-bb2a-4b8c-aec7-d27555137b63	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-c4525b1c-5c3d-494e-b660-ba5a5a28f621	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c4525b1c-5c3d-494e-b660-ba5a5a28f621	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c4525b1c-5c3d-494e-b660-ba5a5a28f621	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:grafted-growth:cast:s1,f:xs:XP:grafted-growth:cast:s1	-	-	-	d864b561c9cb	-	2494741d6925	-	-	2026-11-24	xproof
+c4525b1c-5c3d-494e-b660-ba5a5a28f621	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grafted-growth:cast:s1,f:xs:XP:grafted-growth:cast:s1	-	-	-	d864b561c9cb	-	2494741d6925	-	-	2026-11-24	xproof
 c452e748-8a2a-4f68-8869-e294925a8b0b	cast	cast-resolve	agreed	-	FX	scen	2	0	Unexpected Assistance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 c45423ad-1920-46f7-bcc1-ecade5880821	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c45423ad-1920-46f7-bcc1-ecade5880821	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -158,7 +158,7 @@ c4d36522-3ace-4bfb-bf2d-1a366f458698	f0/t0	NULL	owed	refused:no-generator:trigge
 c4d36522-3ace-4bfb-bf2d-1a366f458698	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c4d384d7-f294-4b2d-9971-a4689c150255	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4d384d7-f294-4b2d-9971-a4689c150255	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c4d7a200-7401-4c9a-a7cf-6c98fa8eb61a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c4d7a200-7401-4c9a-a7cf-6c98fa8eb61a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drag-to-the-bottom:cast:s1,f:xs:XP:drag-to-the-bottom:cast:s1	-	-	-	d864b561c9cb	-	d73d8edc256b	-	-	2026-11-24	xproof
 c4dee5fe-36f0-4155-9437-2c0504feba2c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4dee5fe-36f0-4155-9437-2c0504feba2c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4df259a-cdd4-420a-8e3d-7b69da5c9f6f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

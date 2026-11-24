@@ -71,8 +71,8 @@ ea5e8920-1343-4335-b516-6db43c3bfeb0	cast	NULL	owed	refused:scen failed: xengine
 ea5e8920-1343-4335-b516-6db43c3bfeb0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 ea5e8920-1343-4335-b516-6db43c3bfeb0	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 ea5fd21a-c23a-49ee-aab8-0a9618d65c11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ea5fd21a-c23a-49ee-aab8-0a9618d65c11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ea5fd21a-c23a-49ee-aab8-0a9618d65c11	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ea5fd21a-c23a-49ee-aab8-0a9618d65c11	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ea5fd21a-c23a-49ee-aab8-0a9618d65c11	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ea658352-abef-4201-b20c-f5c5809d1d3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ea658352-abef-4201-b20c-f5c5809d1d3e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ea6616e4-db8d-4905-80f8-cb0162906850	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -197,8 +197,8 @@ eac8c196-8477-4b79-9875-21afa1e61708	f0/t0	NULL	owed	refused:no-generator:trigge
 eac94269-4baa-4b8e-a0fd-d6b227d1cde3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eac94269-4baa-4b8e-a0fd-d6b227d1cde3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 eaca2576-020b-4af4-b348-6d1b56116c41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eaca2576-020b-4af4-b348-6d1b56116c41	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eaca2576-020b-4af4-b348-6d1b56116c41	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eaca2576-020b-4af4-b348-6d1b56116c41	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+eaca2576-020b-4af4-b348-6d1b56116c41	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 eacfe895-5106-437c-b8c1-2ff03c107744	cast	cast-resolve	agreed	-	FX	scen	2	0	Medic's Kitesail/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eacfe895-5106-437c-b8c1-2ff03c107744	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Medic's Kitesail/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eacfe895-5106-437c-b8c1-2ff03c107744	static#0.0	static#0.0	agreed	-	X	scen	1	0	Medic's Kitesail/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

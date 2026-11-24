@@ -6,9 +6,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2802069f-201e-43a7-b5d3-43a95951a2ec	cast	cast-resolve	agreed	-	X	scen	1	0	Glamdring, Foe-hammer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2802069f-201e-43a7-b5d3-43a95951a2ec	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Glamdring, Foe-hammer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2802069f-201e-43a7-b5d3-43a95951a2ec	static#0.0	static#0.0	agreed	-	X	scen	1	0	Glamdring, Foe-hammer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2802fc92-49a0-43c8-bc10-24882eeee3f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2802fc92-49a0-43c8-bc10-24882eeee3f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2802fc92-49a0-43c8-bc10-24882eeee3f1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2802fc92-49a0-43c8-bc10-24882eeee3f1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sludge-monster:f0t0:s1,f:xs:XP:sludge-monster:f0t0:s1	-	-	-	d864b561c9cb	-	f802be258ebf	-	-	2026-11-24	xproof
+2802fc92-49a0-43c8-bc10-24882eeee3f1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sludge-monster:f0t0:s1,f:xs:XP:sludge-monster:f0t0:s1	-	-	-	d864b561c9cb	-	f802be258ebf	-	-	2026-11-24	xproof
+2802fc92-49a0-43c8-bc10-24882eeee3f1	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sludge-monster:f0t1:s1,f:xs:XP:sludge-monster:f0t1:s1	-	-	-	d864b561c9cb	-	f802be258ebf	-	-	2026-11-24	xproof
 28045b32-4c1a-40e5-a15d-524d0f8fe6ec	cast	cast-resolve	agreed	-	X	scen	1	0	Archmage of Runes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 28045b32-4c1a-40e5-a15d-524d0f8fe6ec	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Archmage of Runes/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 28045b32-4c1a-40e5-a15d-524d0f8fe6ec	static#0.0	static#0.0	agreed	-	X	scen	1	0	Archmage of Runes/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -137,9 +137,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28b46183-c62f-47b1-9fee-3ba148202cab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28b64167-b7ea-4b4f-8434-061298050366	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28b64167-b7ea-4b4f-8434-061298050366	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-28bb9a58-f45a-4452-a1f4-c7609373085f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28bb9a58-f45a-4452-a1f4-c7609373085f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28bb9a58-f45a-4452-a1f4-c7609373085f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+28bb9a58-f45a-4452-a1f4-c7609373085f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:towashi-guide-bot:cast:s1,f:xs:XP:towashi-guide-bot:cast:s1	-	-	-	d864b561c9cb	-	0b35fb17600b	-	-	2026-11-24	xproof
+28bb9a58-f45a-4452-a1f4-c7609373085f	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:towashi-guide-bot:f0a0:s1,f:xs:XP:towashi-guide-bot:f0a0:s1	-	-	-	d864b561c9cb	-	0b35fb17600b	-	-	2026-11-24	xproof
+28bb9a58-f45a-4452-a1f4-c7609373085f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:towashi-guide-bot:cast:s1,f:xs:XP:towashi-guide-bot:cast:s1	-	-	-	d864b561c9cb	-	0b35fb17600b	-	-	2026-11-24	xproof
 28c1a4a0-f58c-4d07-a918-51ff8a74f050	cast	cast-resolve	agreed	-	X	scen	1	0	High Fae Trickster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 28c1a4a0-f58c-4d07-a918-51ff8a74f050	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	High Fae Trickster/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 28c1a4a0-f58c-4d07-a918-51ff8a74f050	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	High Fae Trickster/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28c44f88-1d47-4894-86ce-4089bd761360	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:harvester-troll:cast:s1,f:xs:XP:harvester-troll:cast:s1	-	-	-	d864b561c9cb	-	6b218ebadf06	-	-	2026-11-24	xproof
 28c7c816-07e7-42fb-923c-bf149ba28b38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28c7c816-07e7-42fb-923c-bf149ba28b38	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28c7f2b6-ba67-4ccf-9e1b-99c89a9d1f72	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:angel-of-invention:cast:s1,f:xs:XP:angel-of-invention:cast:s1	-	-	-	d864b561c9cb	-	63b344477850	-	-	2026-11-24	xproof
+28c7f2b6-ba67-4ccf-9e1b-99c89a9d1f72	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angel-of-invention:f0t0:s1,f:xs:XP:angel-of-invention:f0t0:s1	-	-	-	d864b561c9cb	-	63b344477850	-	-	2026-11-24	xproof
 28c7f2b6-ba67-4ccf-9e1b-99c89a9d1f72	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28caeed4-c175-469f-8d8e-f45bc0a51a1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28caeed4-c175-469f-8d8e-f45bc0a51a1c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 321c4586-d27e-45ae-ba1f-3efea334a697	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancestral-vengeance:f0t0:s1,f:xs:XP:ancestral-vengeance:f0t0:s1	-	-	-	d864b561c9cb	-	a6465c9914b8	-	-	2026-11-24	xproof
 321c4586-d27e-45ae-ba1f-3efea334a697	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ancestral-vengeance:f0t0:s1,f:xs:XP:ancestral-vengeance:f0t0:s1	-	-	-	d864b561c9cb	-	a6465c9914b8	-	-	2026-11-24	xproof
 321e101c-a426-4d18-be0b-c26c5348b70d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-321e101c-a426-4d18-be0b-c26c5348b70d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+321e101c-a426-4d18-be0b-c26c5348b70d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 321fd970-a259-448d-bd98-e85e386174f9	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 32249228-e300-4865-b977-5e1f285d02f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32263baa-d3f0-463f-92b3-4e9938476add	cast	cast-resolve	agreed	-	X	scen	1	0	Hedron Archive/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3284010f-aeb2-493e-9252-3b953a192a94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3284010f-aeb2-493e-9252-3b953a192a94	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32845ed6-2328-462e-be3a-579589748588	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32845ed6-2328-462e-be3a-579589748588	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32845ed6-2328-462e-be3a-579589748588	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3289539e-51eb-4915-bd77-3ac362136f2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hidden-herbalists:f0t0:s1,f:xs:XP:hidden-herbalists:f0t0:s1	-	-	-	d864b561c9cb	-	911aae6337db	-	-	2026-11-24	xproof
 3289539e-51eb-4915-bd77-3ac362136f2a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 328a0691-9453-4f2d-a9c3-5c69da252d20	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dragon-trainer:f0t0:s2,f:xs:XP:dragon-trainer:f0t0:s2	-	-	-	e07cf3a05ba5	-	ecd6bf9b712a	-	-	2026-11-24	xproof
@@ -181,7 +181,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32e66ea0-5f35-4df8-8d00-580403c51bb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e66ea0-5f35-4df8-8d00-580403c51bb5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e66ea0-5f35-4df8-8d00-580403c51bb5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32e7385e-525e-4925-8cfd-bfea21fcd1bf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32e7385e-525e-4925-8cfd-bfea21fcd1bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:asari-captain:cast:s1,f:xs:XP:asari-captain:cast:s1	-	-	-	d864b561c9cb	-	d9131db61ed1	-	-	2026-11-24	xproof
 32e7385e-525e-4925-8cfd-bfea21fcd1bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e7befb-c083-4e17-aaeb-7247f317bbcf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e915fb-3836-4bed-93b1-61c9c3951ad1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -7,8 +7,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c061a1b-206a-4fcc-92e5-30c8ed9d65c1	cast	cast-resolve	agreed	-	FX	scen	2	0	Artistic Process/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c07d09e-e127-4573-b827-6c50246f7a31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c0845c3-f4b5-444e-8f42-da0c7dbf2841	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c0845c3-f4b5-444e-8f42-da0c7dbf2841	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c0845c3-f4b5-444e-8f42-da0c7dbf2841	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c0845c3-f4b5-444e-8f42-da0c7dbf2841	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0c0845c3-f4b5-444e-8f42-da0c7dbf2841	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0c0940c6-8126-4d58-809e-871cf8588ef9	cast	cast-resolve	agreed	-	X	scen	1	0	Starlit Soothsayer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c0940c6-8126-4d58-809e-871cf8588ef9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Starlit Soothsayer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c0940c6-8126-4d58-809e-871cf8588ef9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Starlit Soothsayer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -176,10 +176,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0cc89c15-5a48-4998-b6df-21791b6ed9a3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Roughshod Duo/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ccc75a0-1bc2-461f-ab6f-0f182328a863	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ccc75a0-1bc2-461f-ab6f-0f182328a863	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-0ccd1084-64bb-41ee-81c0-666af434b8df	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ccd1084-64bb-41ee-81c0-666af434b8df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ccd1084-64bb-41ee-81c0-666af434b8df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-skreelix:cast:s1,f:xs:XP:storm-skreelix:cast:s1	-	-	-	d864b561c9cb	-	0edd3245ad3a	-	-	2026-11-24	xproof
+0ccd1084-64bb-41ee-81c0-666af434b8df	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0cd77ee1-408c-4c51-ac87-24f4fc50083d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0cd77ee1-408c-4c51-ac87-24f4fc50083d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0cd77ee1-408c-4c51-ac87-24f4fc50083d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0cdbd9e7-4941-46ac-99d8-ea227181bdf8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0cdc86c4-8c68-4ba6-8165-511f32156a4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0cdc86c4-8c68-4ba6-8165-511f32156a4c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

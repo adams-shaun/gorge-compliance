@@ -98,8 +98,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19788405-7141-475e-94ee-d0c89488f50f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19788405-7141-475e-94ee-d0c89488f50f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19797dd6-6f48-47bc-a9ac-84d4acad3fa5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19797dd6-6f48-47bc-a9ac-84d4acad3fa5	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19797dd6-6f48-47bc-a9ac-84d4acad3fa5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19797dd6-6f48-47bc-a9ac-84d4acad3fa5	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+19797dd6-6f48-47bc-a9ac-84d4acad3fa5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 197fd850-0a08-4e82-9249-a8d719436f77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1980ca2e-a415-4de1-ac30-7055507e82a2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1983478a-cedb-4053-adab-ac5f1a163296	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:glint-nest-crane:cast:s1,f:xs:XP:glint-nest-crane:cast:s1	-	-	-	d864b561c9cb	-	a12d13fc1b3b	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19e60344-57a8-41e0-8eca-87dbedf5a81a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19e60344-57a8-41e0-8eca-87dbedf5a81a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19e6ebaf-7148-428f-8c79-1e9e57a4e659	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19e6ebaf-7148-428f-8c79-1e9e57a4e659	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19e6ebaf-7148-428f-8c79-1e9e57a4e659	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:botanical-plaza:f0a1:s1,f:xs:XP:botanical-plaza:f0a1:s1	-	-	-	d864b561c9cb	-	10319dd948c8	-	-	2026-11-24	xproof
 19e6ebaf-7148-428f-8c79-1e9e57a4e659	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19ea326f-45ff-4bc0-a957-7d3f22dd8c6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19ea37cc-e715-4a3c-87f3-5ed9d44f42d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

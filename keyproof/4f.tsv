@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fb00dbe-1f82-4ba6-b18c-97e816d10d3a	cast	cast-resolve	agreed	-	X	scen	1	0	Patchwork Banner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fb00dbe-1f82-4ba6-b18c-97e816d10d3a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Patchwork Banner/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fb00dbe-1f82-4ba6-b18c-97e816d10d3a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Patchwork Banner/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4fb0ff70-eba1-4485-b68d-444eb512a2a7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4fb0ff70-eba1-4485-b68d-444eb512a2a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:furious-bellow:cast:s1,f:xs:XP:furious-bellow:cast:s1	-	-	-	d864b561c9cb	-	cf5d162d7680	-	-	2026-11-24	xproof
 4fb1d33f-a87d-46cf-a73e-882c3dbcb26f	cast	cast-resolve	agreed	-	X	scen	1	0	Furious Forebear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fb1d33f-a87d-46cf-a73e-882c3dbcb26f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Furious Forebear/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fb7aeb6-2fc3-459e-bad8-1c7ea92f7ae7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -212,7 +212,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4feeb493-8db5-41d3-bd27-486052e61f28	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4feeb493-8db5-41d3-bd27-486052e61f28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ff8c359-430f-434e-ac1e-822abdc28360	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ff8c359-430f-434e-ac1e-822abdc28360	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ff8c359-430f-434e-ac1e-822abdc28360	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4ff8c359-430f-434e-ac1e-822abdc28360	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+4ff8c359-430f-434e-ac1e-822abdc28360	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4ffa7cc8-4774-430d-b898-5bd26366e124	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shoulder-to-shoulder:cast:s1,f:xs:XP:shoulder-to-shoulder:cast:s1	-	-	-	d864b561c9cb	-	0e124ad664b3	-	-	2026-11-24	xproof
 4ffc16e0-1778-4aba-ade3-58146c800f5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

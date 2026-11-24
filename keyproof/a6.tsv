@@ -44,8 +44,8 @@ a6365f98-f652-492b-81de-5f8cd6fe0a1c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 a6365f98-f652-492b-81de-5f8cd6fe0a1c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dwarven-hammer:f0t0:s1,f:xs:XP:dwarven-hammer:f0t0:s1	-	-	-	d864b561c9cb	-	59c266a852c1	-	-	2026-11-24	xproof
 a636b62a-340b-444d-9161-f6d3367b745c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6375c5b-ec78-4ee8-b681-8d92797a5b43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a6375c5b-ec78-4ee8-b681-8d92797a5b43	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a6375c5b-ec78-4ee8-b681-8d92797a5b43	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a6375c5b-ec78-4ee8-b681-8d92797a5b43	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+a6375c5b-ec78-4ee8-b681-8d92797a5b43	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a6395447-677d-4c39-8eda-2d57e527c94e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:torrential-gearhulk:f0t0:s1,f:xs:XP:torrential-gearhulk:f0t0:s1	-	-	-	d864b561c9cb	-	e2961eeb6bde	-	-	2026-11-24	xproof
 a6395447-677d-4c39-8eda-2d57e527c94e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:torrential-gearhulk:f0t0:s1,f:xs:XP:torrential-gearhulk:f0t0:s1	-	-	-	d864b561c9cb	-	e2961eeb6bde	-	-	2026-11-24	xproof
 a63e0c27-cea8-408a-8e57-2f077826c50f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:citywatch-sphinx:cast:s1,f:xs:XP:citywatch-sphinx:cast:s1	-	-	-	d864b561c9cb	-	839f2a3cfae4	-	-	2026-11-24	xproof
@@ -60,7 +60,7 @@ a64684bc-61b2-4261-8749-fc8cae9e2fd5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 a648b9ed-810a-41db-af40-3b5b4658db90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a64ecae7-0b09-48e1-8108-89442547ffda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a64ecae7-0b09-48e1-8108-89442547ffda	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a64ecae7-0b09-48e1-8108-89442547ffda	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a64ecae7-0b09-48e1-8108-89442547ffda	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a653ac26-e9c9-4319-88f6-c83cc64d3bdb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:festergloom:cast:s1,f:xs:XP:festergloom:cast:s1	-	-	-	d864b561c9cb	-	0b9d827d3eaf	-	-	2026-11-24	xproof
 a6543f71-0326-4e1f-b58f-9ce325d5d036	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6543f71-0326-4e1f-b58f-9ce325d5d036	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gateway-plaza:f0t0:s1,f:xs:XP:gateway-plaza:f0t0:s1	-	-	-	d864b561c9cb	-	df05a40e9cef	-	-	2026-11-24	xproof
@@ -193,8 +193,8 @@ a6e7cbfc-6d5a-4a67-9dad-d512d3c97bda	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 a6e7cbfc-6d5a-4a67-9dad-d512d3c97bda	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6eb06dc-a62d-4fdb-b336-e304d8d68c92	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6eb06dc-a62d-4fdb-b336-e304d8d68c92	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-a6f0dcbc-ca45-4ae8-961e-e42ef8d8a975	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a6f0dcbc-ca45-4ae8-961e-e42ef8d8a975	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a6f0dcbc-ca45-4ae8-961e-e42ef8d8a975	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:organ-hoarder:cast:s1,f:xs:XP:organ-hoarder:cast:s1	-	-	-	d864b561c9cb	-	729695040781	-	-	2026-11-24	xproof
+a6f0dcbc-ca45-4ae8-961e-e42ef8d8a975	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:organ-hoarder:cast:s1,f:xs:XP:organ-hoarder:cast:s1	-	-	-	d864b561c9cb	-	729695040781	-	-	2026-11-24	xproof
 a6f14387-4dfd-4d6b-a6b1-2ae658a70de6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devout-lightcaster:f0t0:s1,f:xs:XP:devout-lightcaster:f0t0:s1	-	-	-	8a1b1a193ec0	-	5767bf0556ab	-	-	2026-11-24	xproof
 a6f14387-4dfd-4d6b-a6b1-2ae658a70de6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:devout-lightcaster:f0t0:s1,f:xs:XP:devout-lightcaster:f0t0:s1	-	-	-	8a1b1a193ec0	-	5767bf0556ab	-	-	2026-11-24	xproof
 a6f38908-aa4f-4f99-a28e-85d11dab52e4	cast	cast-resolve	agreed	-	X	scen	1	0	Ruinous Ultimatum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

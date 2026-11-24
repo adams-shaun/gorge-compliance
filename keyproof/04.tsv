@@ -158,9 +158,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04ac8b2c-95e9-40e9-8cc0-af9b075a94c0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fang, Fearless l'Cie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04b1fb9e-4aef-46d9-b163-f9beff198bad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04b1fb9e-4aef-46d9-b163-f9beff198bad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04b33a43-57f1-46e9-b2c2-1dd3f8a4935c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04b33a43-57f1-46e9-b2c2-1dd3f8a4935c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ecologist-s-terrarium:f0t0:s1,f:xs:XP:ecologist-s-terrarium:f0t0:s1	-	-	-	d864b561c9cb	-	040cab11f097	-	-	2026-11-24	xproof
 04b33a43-57f1-46e9-b2c2-1dd3f8a4935c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04b33a43-57f1-46e9-b2c2-1dd3f8a4935c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04b33a43-57f1-46e9-b2c2-1dd3f8a4935c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ecologist-s-terrarium:f0t0:s1,f:xs:XP:ecologist-s-terrarium:f0t0:s1	-	-	-	d864b561c9cb	-	040cab11f097	-	-	2026-11-24	xproof
 04b7362d-0490-4cb0-b5d7-2a7732f659ce	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:bojuka-bog:f0a0:s1,f:xs:XP:bojuka-bog:f0a0:s1	-	-	-	8a1b1a193ec0	-	45c4d72e1076	-	-	2026-11-24	xproof
 04b7362d-0490-4cb0-b5d7-2a7732f659ce	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:bojuka-bog:f0t0:s1,f:xs:XP:bojuka-bog:f0t0:s1	-	-	-	8a1b1a193ec0	-	45c4d72e1076	-	-	2026-11-24	xproof
 04b7362d-0490-4cb0-b5d7-2a7732f659ce	land	land	agreed	-	FX	start	4	0	x:xs:XP:bojuka-bog:f0t0:s1,f:xs:XP:bojuka-bog:f0t0:s1	-	-	-	8a1b1a193ec0	-	45c4d72e1076	-	-	2026-11-24	xproof
@@ -200,7 +200,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04dce348-be42-443a-a88d-c47436ba2ec4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04dd449f-ff3a-4ed7-8241-244d58b371dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04dd449f-ff3a-4ed7-8241-244d58b371dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04dd9395-847b-46f7-a669-9b0df89d01ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04dd9395-847b-46f7-a669-9b0df89d01ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ready-to-rumble:cast:s1,f:xs:XP:ready-to-rumble:cast:s1	-	-	-	d864b561c9cb	-	ed4dc79d252a	-	-	2026-11-24	xproof
 04e2afbe-0c08-42bc-93e6-662066a958bf	cast	cast-resolve	agreed	-	X	scen	1	0	Deadly Cover-Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04e2afbe-0c08-42bc-93e6-662066a958bf	static#0.0	static#0.0	agreed	-	X	scen	1	0	Deadly Cover-Up/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04e3d36f-5dec-422c-a371-15e135fdface	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

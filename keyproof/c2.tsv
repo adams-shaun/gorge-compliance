@@ -49,8 +49,8 @@ c231698b-c584-4047-9668-5322e4b0065b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c232d974-9c65-4bce-b045-e5a7cc0c62e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c232d974-9c65-4bce-b045-e5a7cc0c62e0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c232d974-9c65-4bce-b045-e5a7cc0c62e0	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c234d2ab-21d5-41a9-9ab8-47a8bd53a686	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c234d2ab-21d5-41a9-9ab8-47a8bd53a686	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c234d2ab-21d5-41a9-9ab8-47a8bd53a686	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forge-boss:cast:s1,f:xs:XP:forge-boss:cast:s1	-	-	-	d864b561c9cb	-	81d6ec6a8e20	-	-	2026-11-24	xproof
+c234d2ab-21d5-41a9-9ab8-47a8bd53a686	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c235015e-a7a9-4f8d-bf4a-cf68b3847f83	cast	cast-resolve	agreed	-	X	scen	1	0	Scapeshift/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 c23543b7-f637-4a7c-9b72-ec411cd5488e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c23543b7-f637-4a7c-9b72-ec411cd5488e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ c270c770-91ed-4540-b281-c4b60b943b34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c270c770-91ed-4540-b281-c4b60b943b34	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 c27b771d-b5ec-459a-a101-f078cb8d0184	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c27b771d-b5ec-459a-a101-f078cb8d0184	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c27b771d-b5ec-459a-a101-f078cb8d0184	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c27b771d-b5ec-459a-a101-f078cb8d0184	land	land	agreed	-	FX	start	2	0	x:xs:XP:contaminated-aquifer:land:s1,f:xs:XP:contaminated-aquifer:land:s1	-	-	-	d864b561c9cb	-	97e5505dc526	-	-	2026-11-24	xproof
 c27c9514-7b5a-461a-a109-f8abafd83523	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c27c9514-7b5a-461a-a109-f8abafd83523	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c27c9514-7b5a-461a-a109-f8abafd83523	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ c293f1c0-93de-4a73-aaf6-4e9f01e557ec	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Innoc
 c29a04ab-4e14-45d8-a993-3fffd0e2f6eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c29a04ab-4e14-45d8-a993-3fffd0e2f6eb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c29b592c-7115-4464-beba-e79f62691593	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c29b592c-7115-4464-beba-e79f62691593	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c29b592c-7115-4464-beba-e79f62691593	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c29b997a-5be6-4d51-a81b-d00677ef401d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:essence-feed:cast:s1,f:xs:XP:essence-feed:cast:s1	-	-	-	d864b561c9cb	-	a273bf24ecdf	-	-	2026-11-24	xproof
 c2a4066a-f911-4622-beb2-683e7e10822f	cast	cast-resolve	agreed	-	X	scen	1	0	Pests of Honor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c2a4066a-f911-4622-beb2-683e7e10822f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pests of Honor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

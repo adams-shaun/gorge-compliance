@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 537a7af1-2b7e-4828-b645-7e34e86058d5	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 537ebea5-f805-4f78-9151-58eb43c4a62d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 537ebea5-f805-4f78-9151-58eb43c4a62d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53807ded-5bbb-44a1-9c22-ffdd4b8523e0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+53807ded-5bbb-44a1-9c22-ffdd4b8523e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warm-welcome:cast:s1,f:xs:XP:warm-welcome:cast:s1	-	-	-	d864b561c9cb	-	db364f9f3130	-	-	2026-11-24	xproof
 538fa2e0-d225-4232-b243-38868b695e26	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alpha-authority:cast:s1,f:xs:XP:alpha-authority:cast:s1	-	-	-	d864b561c9cb	-	cfc6fb739afa	-	-	2026-11-24	xproof
 5390bb44-985e-473b-883e-c9562c06f210	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53929852-6359-4e7a-8f2c-a5954c76ffcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blossom-dryad:cast:s1,f:xs:XP:blossom-dryad:cast:s1	-	-	-	d864b561c9cb	-	7c345f620b16	-	-	2026-11-24	xproof
@@ -164,14 +164,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53b99846-3f80-4e9d-ad3c-52a4906b8823	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gilt-leaf-winnower:f0t0:s1,f:xs:XP:gilt-leaf-winnower:f0t0:s1	-	-	-	d864b561c9cb	-	88d0adae462b	-	-	2026-11-24	xproof
 53b99846-3f80-4e9d-ad3c-52a4906b8823	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gilt-leaf-winnower:f0t0:s1,f:xs:XP:gilt-leaf-winnower:f0t0:s1	-	-	-	d864b561c9cb	-	88d0adae462b	-	-	2026-11-24	xproof
 53b9a2cf-2e6e-4ce0-bb9f-f33fb27b7b5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53b9a2cf-2e6e-4ce0-bb9f-f33fb27b7b5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+53b9a2cf-2e6e-4ce0-bb9f-f33fb27b7b5e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 53bab610-1d27-4897-a4ad-cfecca82b811	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53bab610-1d27-4897-a4ad-cfecca82b811	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53bfe54e-9b97-4113-97d9-3c5dbc85e7cf	cast	cast-resolve	agreed	-	X	scen	1	0	Akal Pakal, First Among Equals/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53bfe54e-9b97-4113-97d9-3c5dbc85e7cf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Akal Pakal, First Among Equals/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-53bfffae-b99e-44bd-8954-6cf236f93f26	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53bfffae-b99e-44bd-8954-6cf236f93f26	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53bfffae-b99e-44bd-8954-6cf236f93f26	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+53bfffae-b99e-44bd-8954-6cf236f93f26	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mnemonic-sphere:cast:s1,f:xs:XP:mnemonic-sphere:cast:s1	-	-	-	d864b561c9cb	-	e74d6db4e141	-	-	2026-11-24	xproof
+53bfffae-b99e-44bd-8954-6cf236f93f26	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:mnemonic-sphere:f0a0:s1,f:xs:XP:mnemonic-sphere:f0a0:s1	-	-	-	d864b561c9cb	-	e74d6db4e141	-	-	2026-11-24	xproof
+53bfffae-b99e-44bd-8954-6cf236f93f26	f0/a1	Draw	agreed	-	FX	start	1	0	x:xs:XP:mnemonic-sphere:cast:s2,f:xs:XP:mnemonic-sphere:cast:s2	-	-	-	d864b561c9cb	-	e74d6db4e141	-	-	2026-11-24	xproof
 53c6c6bf-0256-424d-b937-1cc7d9e2d574	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:little-bear:f0t0:s1,f:xs:XP:little-bear:f0t0:s1	-	-	-	25696bf19d5b	-	7e4259b909e4	-	-	2026-11-24	xproof
 53c6c6bf-0256-424d-b937-1cc7d9e2d574	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:little-bear:f0t0:s1,f:xs:XP:little-bear:f0t0:s1	-	-	-	25696bf19d5b	-	7e4259b909e4	-	-	2026-11-24	xproof
 53c730c6-2f8c-4af8-b400-b9d573a71e60	cast	cast-resolve	agreed	-	X	scen	1	0	Adaptive Automaton/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

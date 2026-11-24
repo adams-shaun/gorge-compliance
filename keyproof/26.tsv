@@ -65,8 +65,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 266561cc-d014-48cc-ba5d-fa72f3a91736	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stay-hidden-stay-silent:f0t0:s2,f:xs:XP:stay-hidden-stay-silent:f0t0:s2	-	-	-	5437c1394672	-	b013ec3314c7	-	-	2026-11-24	xproof
 266561cc-d014-48cc-ba5d-fa72f3a91736	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stay Hidden, Stay Silent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 266561cc-d014-48cc-ba5d-fa72f3a91736	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stay-hidden-stay-silent:f0t0:s2,f:xs:XP:stay-hidden-stay-silent:f0t0:s2	-	-	-	5437c1394672	-	b013ec3314c7	-	-	2026-11-24	xproof
-26685121-ab1f-4366-840b-c5a80508cde6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26685121-ab1f-4366-840b-c5a80508cde6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+26685121-ab1f-4366-840b-c5a80508cde6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:floriferous-vinewall:f0t0:s1,f:xs:XP:floriferous-vinewall:f0t0:s1	-	-	-	d864b561c9cb	-	913ddc985e1a	-	-	2026-11-24	xproof
+26685121-ab1f-4366-840b-c5a80508cde6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:floriferous-vinewall:f0t0:s1,f:xs:XP:floriferous-vinewall:f0t0:s1	-	-	-	d864b561c9cb	-	913ddc985e1a	-	-	2026-11-24	xproof
 266c2f49-82eb-48e9-a7ea-e0da787fa40e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 266c2f49-82eb-48e9-a7ea-e0da787fa40e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 266c2f49-82eb-48e9-a7ea-e0da787fa40e	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -107,8 +107,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26ae37ab-91f8-4113-beb0-1154f9b62d28	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26ae37ab-91f8-4113-beb0-1154f9b62d28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26ae37ab-91f8-4113-beb0-1154f9b62d28	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26afc8c1-c23f-4212-a2aa-386c71c4a7f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26afc8c1-c23f-4212-a2aa-386c71c4a7f9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+26afc8c1-c23f-4212-a2aa-386c71c4a7f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mossbeard-ancient:f0t0:s1,f:xs:XP:mossbeard-ancient:f0t0:s1	-	-	-	d864b561c9cb	-	4a20e2c17272	-	-	2026-11-24	xproof
+26afc8c1-c23f-4212-a2aa-386c71c4a7f9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mossbeard-ancient:f0t0:s1,f:xs:XP:mossbeard-ancient:f0t0:s1	-	-	-	d864b561c9cb	-	4a20e2c17272	-	-	2026-11-24	xproof
 26b077df-7a05-459a-b5ff-bf27767bb519	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26b077df-7a05-459a-b5ff-bf27767bb519	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:vicious-conquistador:f0t0:s1,f:xs:XP:vicious-conquistador:f0t0:s1	-	-	-	d864b561c9cb	-	0360a8677c51	-	-	2026-11-24	xproof
 26b441b9-fdfb-43e2-bc02-b358653eadf4	cast	cast-resolve	agreed	-	FX	scen	2	0	Over the Edge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

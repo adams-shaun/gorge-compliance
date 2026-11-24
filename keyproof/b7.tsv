@@ -24,8 +24,8 @@ b713e49f-1b13-42d1-91f2-cc7a579e7614	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf
 b713e49f-1b13-42d1-91f2-cc7a579e7614	f0/a0	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:nihil-spellbomb:f0t0:s1,f:xs:XP:nihil-spellbomb:f0t0:s1	-	-	-	d864b561c9cb	-	94fa8e8565f7	-	-	2026-11-24	xproof
 b713e49f-1b13-42d1-91f2-cc7a579e7614	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nihil-spellbomb:f0t0:s1,f:xs:XP:nihil-spellbomb:f0t0:s1	-	-	-	d864b561c9cb	-	94fa8e8565f7	-	-	2026-11-24	xproof
 b713ee3a-b6cd-4cd7-b403-f0bbc683ea99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b713ee3a-b6cd-4cd7-b403-f0bbc683ea99	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b713ee3a-b6cd-4cd7-b403-f0bbc683ea99	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b713ee3a-b6cd-4cd7-b403-f0bbc683ea99	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b713ee3a-b6cd-4cd7-b403-f0bbc683ea99	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b7140f72-91b6-4be4-8d71-c019e64c2351	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Insomnia, Crown City/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b7140f72-91b6-4be4-8d71-c019e64c2351	land	play-land	agreed	-	X	scen	1	0	Insomnia, Crown City/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b7163800-41fc-410a-9650-50ae90842170	cast	cast-resolve	agreed	-	X	scen	1	0	Gristle Glutton/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -36,9 +36,9 @@ b727b99b-7d33-4c94-9897-f35aa0ed58fe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 b72cedc2-73b3-4e7f-8b58-8db532a69f6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b72cedc2-73b3-4e7f-8b58-8db532a69f6e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 b72efd67-a234-44af-8296-3e182292c7e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b72fd535-0051-4f59-9d99-75895f751006	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b72fd535-0051-4f59-9d99-75895f751006	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b72fd535-0051-4f59-9d99-75895f751006	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b72fd535-0051-4f59-9d99-75895f751006	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:twinshot-sniper:f0t0:s1,f:xs:XP:twinshot-sniper:f0t0:s1	-	-	-	d864b561c9cb	-	53a609047078	-	-	2026-11-24	xproof
+b72fd535-0051-4f59-9d99-75895f751006	f0/a0	DealDamage	agreed	-	FX	start	1	0	x:xs:XP:twinshot-sniper:f0t0:s2,f:xs:XP:twinshot-sniper:f0t0:s2	-	-	-	d864b561c9cb	-	53a609047078	-	-	2026-11-24	xproof
+b72fd535-0051-4f59-9d99-75895f751006	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:twinshot-sniper:f0t0:s1,f:xs:XP:twinshot-sniper:f0t0:s1	-	-	-	d864b561c9cb	-	53a609047078	-	-	2026-11-24	xproof
 b72fde5e-862a-45e8-9880-f2c16975a9ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:intrepid-adversary:f0t0:s1,f:xs:XP:intrepid-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	180af43770f6	-	-	2026-11-24	xproof
 b72fde5e-862a-45e8-9880-f2c16975a9ac	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:intrepid-adversary:f0t0:s1,f:xs:XP:intrepid-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	180af43770f6	-	-	2026-11-24	xproof
 b7326fd9-7648-4db3-b506-61a7de8a4094	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -89,8 +89,8 @@ b7618312-6835-4851-9651-b5402001b3b0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 b7639d86-4c7c-423f-8b13-fde3086d3cbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b7639d86-4c7c-423f-8b13-fde3086d3cbb	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b76566a9-f998-4a20-b073-4b60862843c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dismiss-into-dream:cast:s1,f:xs:XP:dismiss-into-dream:cast:s1	-	-	-	d864b561c9cb	-	789bcf546d14	-	-	2026-11-24	xproof
-b767bd0a-a8fe-49d7-a3e7-4f9ac6a3280f	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b767bd0a-a8fe-49d7-a3e7-4f9ac6a3280f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b767bd0a-a8fe-49d7-a3e7-4f9ac6a3280f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sunblade-samurai:cast:s1,f:xs:XP:sunblade-samurai:cast:s1	-	-	-	d864b561c9cb	-	d1b626a8accc	-	-	2026-11-24	xproof
+b767bd0a-a8fe-49d7-a3e7-4f9ac6a3280f	f0/a0	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:sunblade-samurai:cast:s2,f:xs:XP:sunblade-samurai:cast:s2	-	-	-	d864b561c9cb	-	d1b626a8accc	-	-	2026-11-24	xproof
 b76ce131-e51a-445e-8216-00df5904ab93	cast	cast-resolve	agreed	-	FX	scen	2	0	Quicksilver, Brash Blur/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b76ce131-e51a-445e-8216-00df5904ab93	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Quicksilver, Brash Blur/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b76d1ae6-ad1d-4bac-b4c3-2e03e0e84d9b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

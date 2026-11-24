@@ -55,9 +55,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6b348051-3ba8-4aa0-b337-b42d8ef8cbba	cast	cast-resolve	agreed	-	X	scen	1	0	Hand That Feeds/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6b348051-3ba8-4aa0-b337-b42d8ef8cbba	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hand That Feeds/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6b37b0ef-7e89-447f-a189-b3ea7b42143f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b384c3c-0d6b-4bba-b4c7-5af8b32bdf1c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b384c3c-0d6b-4bba-b4c7-5af8b32bdf1c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b384c3c-0d6b-4bba-b4c7-5af8b32bdf1c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6b384c3c-0d6b-4bba-b4c7-5af8b32bdf1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:olivia-s-attendants:cast:s1,f:xs:XP:olivia-s-attendants:cast:s1	-	-	-	d864b561c9cb	-	01cd3a070649	-	-	2026-11-24	xproof
+6b384c3c-0d6b-4bba-b4c7-5af8b32bdf1c	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:olivia-s-attendants:f0a0:s1,f:xs:XP:olivia-s-attendants:f0a0:s1	-	-	-	d864b561c9cb	-	01cd3a070649	-	-	2026-11-24	xproof
+6b384c3c-0d6b-4bba-b4c7-5af8b32bdf1c	f0/t0	DamageDealtOnce	agreed	-	FX	start	2	0	x:xs:XP:olivia-s-attendants:f0a0:s1,f:xs:XP:olivia-s-attendants:f0a0:s1	-	-	-	d864b561c9cb	-	01cd3a070649	-	-	2026-11-24	xproof
 6b3cc59a-7ea5-4eb5-9bf9-5a9c07f80e2b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b3cc59a-7ea5-4eb5-9bf9-5a9c07f80e2b	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b3cc59a-7ea5-4eb5-9bf9-5a9c07f80e2b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6bc8fd7e-7616-484a-ac23-04d37c93733b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bc8fd7e-7616-484a-ac23-04d37c93733b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:piranha-marsh:f0t0:s1,f:xs:XP:piranha-marsh:f0t0:s1	-	-	-	8a1b1a193ec0	-	2a825293de89	-	-	2026-11-24	xproof
 6bc8fd7e-7616-484a-ac23-04d37c93733b	land	land	agreed	-	FX	start	2	0	x:xs:XP:piranha-marsh:f0t0:s1,f:xs:XP:piranha-marsh:f0t0:s1	-	-	-	8a1b1a193ec0	-	2a825293de89	-	-	2026-11-24	xproof
-6bcdbded-46f0-44b9-86ad-edd6414e7ef6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6bcdbded-46f0-44b9-86ad-edd6414e7ef6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heir-of-the-ancient-fang:cast:s1,f:xs:XP:heir-of-the-ancient-fang:cast:s1	-	-	-	d864b561c9cb	-	b7f53d5ead99	-	-	2026-11-24	xproof
 6bcf21ef-6641-4752-a0da-937a9277c812	cast	cast-resolve	agreed	-	FX	scen	2	0	Orazca Puzzle-Door/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6bcf21ef-6641-4752-a0da-937a9277c812	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Orazca Puzzle-Door/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6bcfe240-c165-49f2-a90a-be05c05498a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
