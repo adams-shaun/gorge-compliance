@@ -1238,3 +1238,77 @@ func TestPrefixesRefusesUnresolvedUnlabelledGrant(t *testing.T) {
 		t.Fatalf("prefixes did not refuse an ambiguous unlabelled grant: %+v", ref)
 	}
 }
+
+// TestArrangeTokenTopLook: Vanish from Sight puts a token on top of its owner's
+// library and surveils 1. Gorge looks at the token (CR 111.8: it cannot leave
+// the library again, so the card under it stays put), and whether it bins or
+// keeps the token the Plains stays in the library. The followers' look need not
+// be the token, so a bin that names it is unmatched there and falls through to
+// the follower's own choice, which bins the Plains (xe:RAND:4:16:w8). Both
+// token answers must lower to the keep-all skip; a look at the Plains (token on
+// the bottom) must still lower gorge's own bin.
+func TestArrangeTokenTopLook(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	window := func(where string, arrange []string) (oraclegen.Item, *Refusal) {
+		t.Helper()
+		sc := oraclegen.Scenario{
+			Name: "vanish from sight " + where, Why: "a one-card surveil's look is a token put on top",
+			Setup: map[string]oraclegen.Seat{
+				"p0": {Hand: []string{"Vanish from Sight", "Raise the Alarm"}, LibraryTop: []string{"Plains", "Mountain"}},
+			},
+			Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Raise the Alarm", Mana: "CW"},
+				{Op: "resolve"},
+				{Op: "cast", Seat: 0, Card: "p0:Vanish from Sight", Mana: "CCCU", Targets: []string{"p0:token:Soldier"}},
+				{Op: "resolve", Answers: []oraclegen.Answer{{Kind: "any", Pick: []string{where}}, {Kind: "arrange", Pick: arrange}}},
+			},
+		}
+		l := lower.Lowered{Item: oraclegen.Item{ID: "xe:test:token-top-look", Scenario: sc}}
+		res, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(res.Fails) > 0 {
+			t.Fatalf("gorge rejects the window: %v", res.Fails)
+		}
+		return Prepare(reg, sp, l, res)
+	}
+	tail := func(it oraclegen.Item) []oraclegen.XAnswer {
+		return it.XAnswers[len(it.XAnswers)-1]
+	}
+	skip := oraclegen.XAnswer{Seat: 0, Kind: "target", Value: "[target_skip]"}
+	t.Run("token on top, binned", func(t *testing.T) {
+		it, ref := window("top", []string{})
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		as := tail(it)
+		if len(as) != 2 || as[1] != skip {
+			t.Fatalf("answers = %+v, want the top choice then a keep-all skip (a bin naming the token is unmatched when the follower drops it)", as)
+		}
+	})
+	t.Run("token on top, kept", func(t *testing.T) {
+		it, ref := window("top", []string{"Soldier"})
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		as := tail(it)
+		if len(as) != 2 || as[1] != skip {
+			t.Fatalf("answers = %+v, want the top choice then a keep-all skip", as)
+		}
+	})
+	t.Run("token on the bottom, Plains binned", func(t *testing.T) {
+		it, ref := window("bottom", []string{})
+		if ref != nil {
+			t.Fatalf("refused: %+v", ref)
+		}
+		want := oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: "Plains"}
+		if as := tail(it); len(as) != 2 || as[1] != want {
+			t.Fatalf("answers = %+v, want the bottom choice then gorge's bin of the Plains", as)
+		}
+	})
+}

@@ -291,7 +291,7 @@ var wrapperActions = map[string]bool{
 	"PlayerAction": true, "EachPlayerAction": true, "ActionNumberTimes": true,
 	"ActionForEachPlayer": true, "MayCost": true, "MustCost": true, "PlayerMayCost": true,
 	"AnyPlayerMayCost": true, "EachPlayerMayCostOrFallback": true,
-	"ChooseAPermanent": true, "ChooseAnExiledCard": true, "ChooseAColor": true,
+	"ChooseAPermanent": true, "ChooseAnExiledCard": true, "ChooseAColor": true, "ChooseARandomColor": true,
 	"ChooseACardtypeFromList": true, "ChooseAnAbility": true,
 	"ChooseAPermanentOfEachPermanentTypeAvailable": true, "CreateValueX": true,
 	"PlayerActions": true, "PlayerMayAction": true, "EachPlayerMayAction": true,

@@ -33,6 +33,8 @@ type pipAsk struct {
 type xanswersExtra struct {
 	digs map[int]digSource
 	pips map[int][]pipAsk
+	// ownBounce marks the steps that pose an own-bounce hidden pick.
+	ownBounce map[int]bool
 }
 
 // isPipDecision reports whether d is one of gorge's ManaAsk pip decisions
