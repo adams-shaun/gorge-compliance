@@ -35,8 +35,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57296ea3-3c0d-49b7-bc08-0d0d8414e9ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nightscape-familiar:cast:s1,f:xs:XP:nightscape-familiar:cast:s1	-	-	-	fc71ca68c5ac	-	6af4f0665862	-	-	2026-11-24	xproof
 57296ea3-3c0d-49b7-bc08-0d0d8414e9ad	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:nightscape-familiar:f0a0:s1,f:xs:XP:nightscape-familiar:f0a0:s1	-	-	-	fc71ca68c5ac	-	6af4f0665862	-	-	2026-11-24	xproof
 572afa0f-9e82-4899-b622-a7554625b9f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-572afa0f-9e82-4899-b622-a7554625b9f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-572afa0f-9e82-4899-b622-a7554625b9f4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+572afa0f-9e82-4899-b622-a7554625b9f4	f0/t0	NULL	owed	refused:no-generator:trigger:Evolved	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+572afa0f-9e82-4899-b622-a7554625b9f4	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 572b1aeb-d2a0-433d-b167-86e683c2127d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 572b1aeb-d2a0-433d-b167-86e683c2127d	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 57303267-7e69-4bd3-8e1f-a528d41121a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,10 +163,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57de8fe7-3d1b-41cd-8354-38aff3d2d052	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vine-trellis:cast:s1,f:xs:XP:vine-trellis:cast:s1	-	-	-	25696bf19d5b	-	7ded36462d33	-	-	2026-11-24	xproof
 57de8fe7-3d1b-41cd-8354-38aff3d2d052	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:vine-trellis:f0a0:s1,f:xs:XP:vine-trellis:f0a0:s1	-	-	-	d864b561c9cb	-	7ded36462d33	-	-	2026-11-24	xproof
 57dfe4aa-1e9a-4891-851b-201edd1fc79c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57e4a1c0-4218-4a07-88e7-d6083884c2b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57e4a1c0-4218-4a07-88e7-d6083884c2b6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57e4a1c0-4218-4a07-88e7-d6083884c2b6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57e4a1c0-4218-4a07-88e7-d6083884c2b6	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57e4a1c0-4218-4a07-88e7-d6083884c2b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:champions-from-beyond:f0t0:s1,f:xs:XP:champions-from-beyond:f0t0:s1	-	-	-	8c0bd19283bb	-	61aa93552384	-	-	2026-11-24	xproof
+57e4a1c0-4218-4a07-88e7-d6083884c2b6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:champions-from-beyond:f0t0:s1,f:xs:XP:champions-from-beyond:f0t0:s1	-	-	-	8c0bd19283bb	-	61aa93552384	-	-	2026-11-24	xproof
+57e4a1c0-4218-4a07-88e7-d6083884c2b6	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+57e4a1c0-4218-4a07-88e7-d6083884c2b6	f0/t2	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 57ea9f63-8267-4303-a3dd-9ded220294dc	cast	cast-resolve	agreed	-	X	scen	1	0	Rise of the Deathbringer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57eba48e-87bd-4b54-8635-7348020f2ba4	cast	cast-resolve	agreed	-	X	scen	1	0	Alley Assailant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57eba48e-87bd-4b54-8635-7348020f2ba4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Alley Assailant/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

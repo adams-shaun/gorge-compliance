@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 722ab6e4-a2e0-4aaa-a050-7b6436e22b40	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sp-dr-piloted-by-peni:f0t0:s2,f:xs:XP:sp-dr-piloted-by-peni:f0t0:s2	-	-	-	267e485f6204	-	caf1053077b1	-	-	2026-11-24	xproof
 722ab6e4-a2e0-4aaa-a050-7b6436e22b40	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	SP//dr, Piloted by Peni/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 722e23d5-4f2a-43cd-bbd5-baf56b76e68d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-722e23d5-4f2a-43cd-bbd5-baf56b76e68d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+722e23d5-4f2a-43cd-bbd5-baf56b76e68d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 722ee05f-6815-41b7-9813-5ec3902c1e9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 722ee05f-6815-41b7-9813-5ec3902c1e9f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 722f2965-a1ec-4b97-a4bd-b99364f58b1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 728045bf-0959-44ff-8de9-16ec35fd248f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 728045bf-0959-44ff-8de9-16ec35fd248f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:seed-guardian:f0t0:s1,f:xs:XP:seed-guardian:f0t0:s1	-	-	-	d864b561c9cb	-	569edc7e74a2	-	-	2026-11-24	xproof
 7280b7c5-e4d0-4a20-8634-5e240e6b3ca0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-728157a3-fcd4-4295-85ff-1162dbb64f8a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+728157a3-fcd4-4295-85ff-1162dbb64f8a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tale-of-momo:cast:s1,f:xs:XP:tale-of-momo:cast:s1	-	-	-	8c0bd19283bb	-	78f2a8aca7df	-	-	2026-11-24	xproof
 7282f643-191b-41be-9f6f-82360c915d6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:abyssal-persecutor:cast:s1,f:xs:XP:abyssal-persecutor:cast:s1	-	-	-	8a1b1a193ec0	-	84aa06397898	-	-	2026-11-24	xproof
 728464a2-9cb6-409a-a6c4-94e796a27995	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 728464a2-9cb6-409a-a6c4-94e796a27995	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -133,8 +133,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7292272d-6511-466b-aadd-c4fe7ed8df09	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 72949d87-76cd-472c-86b3-2b7d5fce3159	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72949d87-76cd-472c-86b3-2b7d5fce3159	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:treetop-ambusher:f0t0:s1,f:xs:XP:treetop-ambusher:f0t0:s1	-	-	-	d864b561c9cb	-	22850a4e6059	-	-	2026-11-24	xproof
-72994a7a-7c0d-4f28-8cc0-28161d098d7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72994a7a-7c0d-4f28-8cc0-28161d098d7f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+72994a7a-7c0d-4f28-8cc0-28161d098d7f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:appa-the-vigilant:f0t0:s1,f:xs:XP:appa-the-vigilant:f0t0:s1	-	-	-	8c0bd19283bb	-	c8206484abee	-	-	2026-11-24	xproof
+72994a7a-7c0d-4f28-8cc0-28161d098d7f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:appa-the-vigilant:f0t0:s1,f:xs:XP:appa-the-vigilant:f0t0:s1	-	-	-	8c0bd19283bb	-	c8206484abee	-	-	2026-11-24	xproof
 729b7ce8-7e7f-4db9-b3ce-67aba46a7b0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fateful-showdown:cast:s1,f:xs:XP:fateful-showdown:cast:s1	-	-	-	d864b561c9cb	-	0386d4ddc2d6	-	-	2026-11-24	xproof
 72a0e0f1-e8be-441a-bcaf-029fb1bd1fd2	cast	cast-resolve	agreed	-	X	scen	1	0	Airship Crash/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 72a0e0f1-e8be-441a-bcaf-029fb1bd1fd2	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Airship Crash/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

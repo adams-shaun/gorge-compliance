@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 4900c157-8d9f-4f92-aaca-5246b6e2832e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4900c157-8d9f-4f92-aaca-5246b6e2832e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4900c157-8d9f-4f92-aaca-5246b6e2832e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 49039519-62db-4605-b600-cef6f34c893f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rampage-of-the-valkyries:cast:s1,f:xs:XP:rampage-of-the-valkyries:cast:s1	-	-	-	d864b561c9cb	-	e7b5017cbf3c	-	-	2026-11-24	xproof
 49039519-62db-4605-b600-cef6f34c893f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rampage-of-the-valkyries:cast:s1,f:xs:XP:rampage-of-the-valkyries:cast:s1	-	-	-	d864b561c9cb	-	e7b5017cbf3c	-	-	2026-11-24	xproof
 49039519-62db-4605-b600-cef6f34c893f	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4976f08c-6f8e-42e4-9584-f04793518ddb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shield-wall-sentinel:f0t0:s1,f:xs:XP:shield-wall-sentinel:f0t0:s1	-	-	-	ae86f6029288	-	01db2a39587d	-	-	2026-11-24	xproof
 497cb281-e057-42fc-937d-512855b74159	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 497e9c7c-a16d-43e5-a7ec-04153aa2566a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-497e9c7c-a16d-43e5-a7ec-04153aa2566a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+497e9c7c-a16d-43e5-a7ec-04153aa2566a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 498707db-258f-423a-9ff6-9e294fce84d6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4987c458-604a-4727-b360-170616e91e67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kambal-consul-of-allocation:cast:s1,f:xs:XP:kambal-consul-of-allocation:cast:s1	-	-	-	d864b561c9cb	-	a87f3424d262	-	-	2026-11-24	xproof
 4987c458-604a-4727-b360-170616e91e67	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

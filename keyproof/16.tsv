@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 169c468e-0e17-450b-8954-df47d78ad8f8	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 169cf74a-07bf-4841-83f3-904df8a0a39b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169d24f3-a308-4a2e-ae25-85dae448994e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-169d24f3-a308-4a2e-ae25-85dae448994e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+169d24f3-a308-4a2e-ae25-85dae448994e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 169e415a-9ff6-43bb-bb68-fc49e69f95a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vaporkin:cast:s1,f:xs:XP:vaporkin:cast:s1	-	-	-	d864b561c9cb	-	fd570a8ead52	-	-	2026-11-24	xproof
 16a44586-ea1d-45f1-b9de-da1c11f729df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	8c0bd19283bb	-	67f5e9a6bb1a	-	-	2026-11-24	xproof
 16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	8c0bd19283bb	-	67f5e9a6bb1a	-	-	2026-11-24	xproof
@@ -189,8 +189,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16f75a65-d067-4f79-81b9-833c373cf4d2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f75a65-d067-4f79-81b9-833c373cf4d2	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f9368a-5da5-4397-a127-c96cdd115b7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16f9368a-5da5-4397-a127-c96cdd115b7b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16f9368a-5da5-4397-a127-c96cdd115b7b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16f9368a-5da5-4397-a127-c96cdd115b7b	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+16f9368a-5da5-4397-a127-c96cdd115b7b	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 16f93781-6740-40c7-a727-7911beac4e74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16fb84e1-0bc7-469c-bd73-40747be56d9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-handservant:cast:s1,f:xs:XP:elvish-handservant:cast:s1	-	-	-	d864b561c9cb	-	1c9be972253b	-	-	2026-11-24	xproof
 16fb84e1-0bc7-469c-bd73-40747be56d9e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

@@ -19,9 +19,9 @@ d41987b0-2ea0-4cc7-8608-70c486db76eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pat
 d41a54ec-7bf0-4053-8d59-9bce9e6dbbb5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d41a54ec-7bf0-4053-8d59-9bce9e6dbbb5	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d41a54ec-7bf0-4053-8d59-9bce9e6dbbb5	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d41eec6c-de14-4809-abae-b94355674a33	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d41eec6c-de14-4809-abae-b94355674a33	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wooden-cane:cast:s1,f:xs:XP:wooden-cane:cast:s1	-	-	-	8c0bd19283bb	-	781c27346f58	-	-	2026-11-24	xproof
 d41eec6c-de14-4809-abae-b94355674a33	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d41eec6c-de14-4809-abae-b94355674a33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d41eec6c-de14-4809-abae-b94355674a33	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wooden-cane:cast:s1,f:xs:XP:wooden-cane:cast:s1	-	-	-	8c0bd19283bb	-	781c27346f58	-	-	2026-11-24	xproof
 d41ff489-7d74-4b06-b3a1-638f3e3303d1	cast	cast-resolve	agreed	-	X	scen	1	0	Starfleet Spanner Jockey/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d4212d44-d6a0-4c5b-9c54-bc90f36828dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4212d44-d6a0-4c5b-9c54-bc90f36828dd	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -58,7 +58,7 @@ d4453b3e-733e-4038-81da-135a6a03079c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Summ
 d4453b3e-733e-4038-81da-135a6a03079c	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:summoner-s-grimoire:f0t0:s2,f:xs:XP:summoner-s-grimoire:f0t0:s2	-	-	-	267e485f6204	-	830d3ae5030a	-	-	2026-11-24	xproof
 d4453b3e-733e-4038-81da-135a6a03079c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Summoner's Grimoire/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d445a584-98e7-4501-bb20-e76c9cafa757	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d445a584-98e7-4501-bb20-e76c9cafa757	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d445a584-98e7-4501-bb20-e76c9cafa757	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d44627c0-1617-4706-bbeb-0169745364c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wasteful-harvest:cast:s1,f:xs:XP:wasteful-harvest:cast:s1	-	-	-	ae86f6029288	-	5d1f5cf67524	-	-	2026-11-24	xproof
 d44a8f89-b9c0-4e8a-9179-baa0c448a3c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d44a8f89-b9c0-4e8a-9179-baa0c448a3c9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ d4c22b68-c4cb-447a-97df-431e2f1e31f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d4c4c7d7-744a-4548-adad-a5fc4fb3f586	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4ccc319-db23-4ef4-8129-317426f3a794	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4cde3d5-eb13-4ad5-8178-08780dc85d39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d4cde3d5-eb13-4ad5-8178-08780dc85d39	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d4cde3d5-eb13-4ad5-8178-08780dc85d39	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d4d3cba8-562d-4208-ab0a-c82b4dd8e959	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:githzerai-monk:f0t0:s1,f:xs:XP:githzerai-monk:f0t0:s1	-	-	-	8c0bd19283bb	-	28250572fab4	-	-	2026-11-24	xproof
 d4d3cba8-562d-4208-ab0a-c82b4dd8e959	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:githzerai-monk:f0t0:s1,f:xs:XP:githzerai-monk:f0t0:s1	-	-	-	8c0bd19283bb	-	28250572fab4	-	-	2026-11-24	xproof
 d4d44264-b276-4bd7-8fbe-6af292b08773	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aboshan-cephalid-emperor:cast:s1,f:xs:XP:aboshan-cephalid-emperor:cast:s1	-	-	-	fc71ca68c5ac	-	505b4b6c295e	-	-	2026-11-24	xproof

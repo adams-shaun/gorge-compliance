@@ -84,8 +84,8 @@ a6605c50-558e-417c-8c75-6c45b06d6e13	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 a660e7a0-0750-475d-a4bd-de5b37d53e97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tezzeret-s-betrayal:cast:s1,f:xs:XP:tezzeret-s-betrayal:cast:s1	-	-	-	d864b561c9cb	-	a1c151d9f03a	-	-	2026-11-24	xproof
 a6649a99-c9cd-474e-91f2-cc8e75496864	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vizzerdrix:cast:s1,f:xs:XP:vizzerdrix:cast:s1	-	-	-	25696bf19d5b	-	5bbfc30ab952	-	-	2026-11-24	xproof
 a6657fcf-f08c-4b03-8ec8-cb0b194eb553	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a6657fcf-f08c-4b03-8ec8-cb0b194eb553	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a6657fcf-f08c-4b03-8ec8-cb0b194eb553	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a6657fcf-f08c-4b03-8ec8-cb0b194eb553	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+a6657fcf-f08c-4b03-8ec8-cb0b194eb553	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 a66c35fc-d5db-4cfd-9b85-d70b001d83d3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dragoon-s-lance:f0t0:s2,f:xs:XP:dragoon-s-lance:f0t0:s2	-	-	-	267e485f6204	-	09461175b9a9	-	-	2026-11-24	xproof
 a66c35fc-d5db-4cfd-9b85-d70b001d83d3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dragoon's Lance/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a66c35fc-d5db-4cfd-9b85-d70b001d83d3	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:dragoon-s-lance:f0t0:s2,f:xs:XP:dragoon-s-lance:f0t0:s2	-	-	-	267e485f6204	-	09461175b9a9	-	-	2026-11-24	xproof
@@ -164,8 +164,8 @@ a6c28bde-10d9-471b-acd0-32a1c6195805	cast	cast-resolve	agreed	-	FX	scen	2	0	Swar
 a6c28bde-10d9-471b-acd0-32a1c6195805	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Swarm Culler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a6c28bde-10d9-471b-acd0-32a1c6195805	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Swarm Culler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a6c28bde-10d9-471b-acd0-32a1c6195805	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Swarm Culler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a6c3aa17-8338-4daa-889e-d36dc715e546	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a6c3aa17-8338-4daa-889e-d36dc715e546	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a6c3aa17-8338-4daa-889e-d36dc715e546	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rolling-hamsphere:cast:s1,f:xs:XP:rolling-hamsphere:cast:s1	-	-	-	8c0bd19283bb	-	60e0adb1e5b5	-	-	2026-11-24	xproof
+a6c3aa17-8338-4daa-889e-d36dc715e546	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 a6c3aa17-8338-4daa-889e-d36dc715e546	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6c5c5ea-0bd0-4d5a-bd3f-6217f14c9939	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6c5c5ea-0bd0-4d5a-bd3f-6217f14c9939	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

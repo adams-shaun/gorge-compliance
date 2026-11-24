@@ -72,10 +72,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b51a979-47e0-4b98-8ec5-8064c83422e1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Knight of Grace/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b51a979-47e0-4b98-8ec5-8064c83422e1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Knight of Grace/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b51a979-47e0-4b98-8ec5-8064c83422e1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Knight of Grace/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7b587921-00d3-42c0-b295-b62310173390	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b587921-00d3-42c0-b295-b62310173390	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b587921-00d3-42c0-b295-b62310173390	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b587921-00d3-42c0-b295-b62310173390	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b587921-00d3-42c0-b295-b62310173390	f0/a0	Animate	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	ad7470968a13	-	-	2026-11-24	xproof
+7b587921-00d3-42c0-b295-b62310173390	f0/a1	Token	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	ad7470968a13	-	-	2026-11-24	xproof
+7b587921-00d3-42c0-b295-b62310173390	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+7b587921-00d3-42c0-b295-b62310173390	land	land	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	ad7470968a13	-	-	2026-11-24	xproof
 7b58920e-3e90-44ed-a0e9-4cb1b7359a5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b58e277-a969-4c7f-8143-ee4f6bd1e3ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b599b4d-95bc-4ed2-a167-84a697944747	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pieces-of-the-puzzle:cast:s1,f:xs:XP:pieces-of-the-puzzle:cast:s1	-	-	-	d864b561c9cb	-	59e3eb11e4a6	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ba580c9-f933-43d9-b03d-a349faa6c641	land	land	agreed	-	F	start	2	0	f:xs:XP:fertile-thicket:f0t0:s1	-	-	-	d864b561c9cb	-	540512014f3a	-	-	2026-11-24	xproof
 7ba593fd-93db-452f-ad80-7f0f37afb09d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ba593fd-93db-452f-ad80-7f0f37afb09d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ba593fd-93db-452f-ad80-7f0f37afb09d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ba593fd-93db-452f-ad80-7f0f37afb09d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 7ba8ae5b-8025-40eb-969d-38a85eefe7d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ba8ae5b-8025-40eb-969d-38a85eefe7d6	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 7baff5c8-5919-4cbf-961e-962e740ebd8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -94,7 +94,7 @@ b067aa04-5977-4371-85d1-78d2884df03f	f0/a0	Pump	agreed	-	X	start	2	0	x:xs:XP:eme
 b0695221-a61a-41e4-8195-3eeaaab2d969	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b0695221-a61a-41e4-8195-3eeaaab2d969	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b06c9a4b-f309-45b3-ae5b-0ce3f067a5cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b06c9a4b-f309-45b3-ae5b-0ce3f067a5cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b06c9a4b-f309-45b3-ae5b-0ce3f067a5cb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 b06ebf74-4042-4c8f-a70b-98ba9e74e6ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b06ebf74-4042-4c8f-a70b-98ba9e74e6ed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b06ebf74-4042-4c8f-a70b-98ba9e74e6ed	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -135,9 +135,9 @@ b09206a4-8b73-4125-8b79-53f6fd511b16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wou
 b09206a4-8b73-4125-8b79-53f6fd511b16	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:wound-reflection:cast:s1,f:xs:XP:wound-reflection:cast:s1	-	-	-	8a1b1a193ec0	-	8df413c9f57f	-	-	2026-11-24	xproof
 b093916c-cc0a-4b3b-9de6-8a2db53cdfe0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dominion-assault-force:f0t0:s1,f:xs:XP:dominion-assault-force:f0t0:s1	-	-	-	25696bf19d5b	-	2949bc364dae	-	-	2026-11-24	xproof
 b093916c-cc0a-4b3b-9de6-8a2db53cdfe0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-b0941bc2-f482-4821-a96b-720b08c7334a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b0941bc2-f482-4821-a96b-720b08c7334a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:big-wheel:f0t0:s1,f:xs:XP:big-wheel:f0t0:s1	-	-	-	8c0bd19283bb	-	8171547947c2	-	-	2026-11-24	xproof
 b0941bc2-f482-4821-a96b-720b08c7334a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0941bc2-f482-4821-a96b-720b08c7334a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b0941bc2-f482-4821-a96b-720b08c7334a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:big-wheel:f0t0:s1,f:xs:XP:big-wheel:f0t0:s1	-	-	-	8c0bd19283bb	-	8171547947c2	-	-	2026-11-24	xproof
 b095526e-94a4-416b-83de-d6271804ccf3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sundering-archaic:f0t0:s2,f:xs:XP:sundering-archaic:f0t0:s2	-	-	-	5437c1394672	-	e6a3aace115f	-	-	2026-11-24	xproof
 b095526e-94a4-416b-83de-d6271804ccf3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sundering Archaic/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b095526e-94a4-416b-83de-d6271804ccf3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sundering-archaic:f0t0:s2,f:xs:XP:sundering-archaic:f0t0:s2	-	-	-	5437c1394672	-	e6a3aace115f	-	-	2026-11-24	xproof
@@ -210,10 +210,10 @@ b0ea4975-a944-4585-8711-60f203cffa4a	land	land	agreed	-	FX	start	2	0	x:xs:XP:the
 b0ed9fbe-324d-467a-a326-c6f85a4c688a	cast	cast-resolve	agreed	-	X	scen	1	0	Ant-Man, Colony Commander/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b0ed9fbe-324d-467a-a326-c6f85a4c688a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ant-Man, Colony Commander/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b0ed9fbe-324d-467a-a326-c6f85a4c688a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ant-Man, Colony Commander/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b0edba6f-8f54-4dc4-b952-20b57a797d60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0edba6f-8f54-4dc4-b952-20b57a797d60	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0edba6f-8f54-4dc4-b952-20b57a797d60	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0edba6f-8f54-4dc4-b952-20b57a797d60	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b0edba6f-8f54-4dc4-b952-20b57a797d60	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rampart-architect:f0t0:s1,f:xs:XP:rampart-architect:f0t0:s1	-	-	-	8c0bd19283bb	-	b9b1eb36668f	-	-	2026-11-24	xproof
+b0edba6f-8f54-4dc4-b952-20b57a797d60	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rampart-architect:f0t0:s1,f:xs:XP:rampart-architect:f0t0:s1	-	-	-	8c0bd19283bb	-	b9b1eb36668f	-	-	2026-11-24	xproof
+b0edba6f-8f54-4dc4-b952-20b57a797d60	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:rampart-architect:f0t1:s1,f:xs:XP:rampart-architect:f0t1:s1	-	-	-	8c0bd19283bb	-	b9b1eb36668f	-	-	2026-11-24	xproof
+b0edba6f-8f54-4dc4-b952-20b57a797d60	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 b0f36bf7-bdde-4576-9eca-ec02d41326ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nissa-voice-of-zendikar:cast:s1,f:xs:XP:nissa-voice-of-zendikar:cast:s1	-	-	-	d864b561c9cb	-	1817eeeaf583	-	-	2026-11-24	xproof
 b0f36bf7-bdde-4576-9eca-ec02d41326ab	f0/a0	Token	agreed	-	FX	start	1	0	x:xs:XP:nissa-voice-of-zendikar:cast:s2,f:xs:XP:nissa-voice-of-zendikar:cast:s2	-	-	-	d864b561c9cb	-	1817eeeaf583	-	-	2026-11-24	xproof
 b0f36bf7-bdde-4576-9eca-ec02d41326ab	f0/a1	PutCounterAll	agreed	-	FX	start	1	0	x:xs:XP:nissa-voice-of-zendikar:cast:s1,f:xs:XP:nissa-voice-of-zendikar:cast:s1	-	-	-	d864b561c9cb	-	1817eeeaf583	-	-	2026-11-24	xproof

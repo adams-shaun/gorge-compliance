@@ -149,9 +149,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ec58835-de2d-4064-89a9-f92db80bc276	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ec5a688-a884-410c-adee-ab784789d6e8	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:green-slime:cast:s1,f:xs:XP:green-slime:cast:s1	-	-	-	8c0bd19283bb	-	69dd7d0874e8	-	-	2026-11-24	xproof
 0ec5a688-a884-410c-adee-ab784789d6e8	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:green-slime:cast:s1,f:xs:XP:green-slime:cast:s1	-	-	-	8c0bd19283bb	-	69dd7d0874e8	-	-	2026-11-24	xproof
-0ec88e35-191b-411b-9eb0-2dfef7ae4174	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ec88e35-191b-411b-9eb0-2dfef7ae4174	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ec88e35-191b-411b-9eb0-2dfef7ae4174	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ec88e35-191b-411b-9eb0-2dfef7ae4174	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:belonging:f0t0:s1,f:xs:XP:belonging:f0t0:s1	-	-	-	8c0bd19283bb	-	ed1bd2f3916d	-	-	2026-11-24	xproof
+0ec88e35-191b-411b-9eb0-2dfef7ae4174	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+0ec88e35-191b-411b-9eb0-2dfef7ae4174	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:belonging:f0t0:s1,f:xs:XP:belonging:f0t0:s1	-	-	-	8c0bd19283bb	-	ed1bd2f3916d	-	-	2026-11-24	xproof
 0ecb35b3-5bd1-4467-a4a3-ce468023ced2	cast	cast-resolve	agreed	-	X	scen	1	0	Blossombind/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 0ecb35b3-5bd1-4467-a4a3-ce468023ced2	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 0ecb35b3-5bd1-4467-a4a3-ce468023ced2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Blossombind/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -176,13 +176,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ee042ce-7cb2-47a8-9a48-6ffc07ba07b3	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 0ee088dc-c7c7-4f7f-9d1f-be3d79550d95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ee0b090-3f1e-49d6-bcad-91e0cf1d12ae	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ee0b090-3f1e-49d6-bcad-91e0cf1d12ae	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:madblind-mountain:f0a0:s1,f:xs:XP:madblind-mountain:f0a0:s1	-	-	-	8c0bd19283bb	-	5bd13c3d4de3	-	-	2026-11-24	xproof
+0ee0b090-3f1e-49d6-bcad-91e0cf1d12ae	f0/a1	Mana	agreed	-	FX	start	1	0	x:xs:XP:madblind-mountain:f0a0:s2,f:xs:XP:madblind-mountain:f0a0:s2	-	-	-	8c0bd19283bb	-	5bd13c3d4de3	-	-	2026-11-24	xproof
 0ee0b090-3f1e-49d6-bcad-91e0cf1d12ae	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ee14128-3bec-4b65-8ee4-619337d4ed45	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leatherback-baloth:cast:s1,f:xs:XP:leatherback-baloth:cast:s1	-	-	-	77494c1ce129	-	0a23c3e3b67f	-	-	2026-11-24	xproof
 0ee28549-5909-4372-8376-34010b7b6654	cast	cast-resolve	agreed	-	X	scen	1	0	Fear of Isolation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ee28549-5909-4372-8376-34010b7b6654	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fear of Isolation/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ee28549-5909-4372-8376-34010b7b6654	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fear of Isolation/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ee41ef9-0b39-4d00-a68e-7914839a7175	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ee41ef9-0b39-4d00-a68e-7914839a7175	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bone-devourer:cast:s1,f:xs:XP:bone-devourer:cast:s1	-	-	-	8c0bd19283bb	-	7d06056786f8	-	-	2026-11-24	xproof
 0ee41ef9-0b39-4d00-a68e-7914839a7175	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0eeab568-9186-4813-87e7-9c1e6a7c76e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fated-return:cast:s1,f:xs:XP:fated-return:cast:s1	-	-	-	d864b561c9cb	-	7585306642bd	-	-	2026-11-24	xproof
 0eec9984-cd11-4a52-9234-469c6a5fb9aa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Abandoned Campground/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

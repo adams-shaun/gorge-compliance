@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9f4093a6-83f1-4c1d-8b03-8fe15647fb11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9f4093a6-83f1-4c1d-8b03-8fe15647fb11	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9f4093a6-83f1-4c1d-8b03-8fe15647fb11	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9f4093a6-83f1-4c1d-8b03-8fe15647fb11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9f4093a6-83f1-4c1d-8b03-8fe15647fb11	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9f40ad89-3767-4837-a078-f2dcfaf368df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9f4719f2-0eab-464b-9ae5-2b96717ae08d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9f4719f2-0eab-464b-9ae5-2b96717ae08d	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -103,8 +103,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9fa0c9d1-2a63-41a8-8733-39bfaee4eb0a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Explorer's Cache/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9fa3286b-ee10-4f68-bfc3-974cdc39d986	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fa3286b-ee10-4f68-bfc3-974cdc39d986	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9fa38462-57b6-4f2f-a73c-f14a66f56946	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9fa38462-57b6-4f2f-a73c-f14a66f56946	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9fa38462-57b6-4f2f-a73c-f14a66f56946	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mona-lisa-ever-adaptable:cast:s1,f:xs:XP:mona-lisa-ever-adaptable:cast:s1	-	-	-	8c0bd19283bb	-	bd93859dc389	-	-	2026-11-24	xproof
+9fa38462-57b6-4f2f-a73c-f14a66f56946	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9fb4aa2d-6414-4176-9070-e5230e100c6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fb5ea12-5b87-462b-b9c0-904cd0f55a9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fb5ea12-5b87-462b-b9c0-904cd0f55a9c	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

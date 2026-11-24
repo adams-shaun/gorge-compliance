@@ -31,10 +31,10 @@ f61591d5-0f2a-48cd-a091-863d2e93e019	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f61591d5-0f2a-48cd-a091-863d2e93e019	f0/a0	Reveal	agreed	-	FX	start	2	0	x:xs:XP:ivy-seer:f0a0:s1,f:xs:XP:ivy-seer:f0a0:s1	-	-	-	5f2128bf97e4	-	9e65808bf070	-	-	2026-11-24	xproof
 f61680da-606e-4d16-b0a0-361aa5210901	cast	cast-resolve	agreed	-	X	scen	1	0	Chandra's Ignition/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 f61c0fc0-7241-455e-bbf5-f1f3862d46e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f61c0fc0-7241-455e-bbf5-f1f3862d46e3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f61c1dc4-2f09-4b50-957f-ee656c659072	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f61c1dc4-2f09-4b50-957f-ee656c659072	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f61c1dc4-2f09-4b50-957f-ee656c659072	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f61c0fc0-7241-455e-bbf5-f1f3862d46e3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+f61c1dc4-2f09-4b50-957f-ee656c659072	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dina-essence-brewer:cast:s1,f:xs:XP:dina-essence-brewer:cast:s1	-	-	-	8c0bd19283bb	-	8532809c1159	-	-	2026-11-24	xproof
+f61c1dc4-2f09-4b50-957f-ee656c659072	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+f61c1dc4-2f09-4b50-957f-ee656c659072	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f61f4307-4eec-476a-97e5-d4d3da2b54c3	cast	cast-resolve	agreed	-	X	scen	1	0	Virtue of Loyalty/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f61f4307-4eec-476a-97e5-d4d3da2b54c3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Virtue of Loyalty/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f621dcaa-c500-4a17-a65a-60d9b5516a3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -200,9 +200,9 @@ f6e75db5-b119-4401-942c-bbaeeb694761	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emb
 f6e75db5-b119-4401-942c-bbaeeb694761	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:embermage-goblin:f0a0:s1,f:xs:XP:embermage-goblin:f0a0:s1	-	-	-	fc71ca68c5ac	-	19896468229f	-	-	2026-11-24	xproof
 f6e75db5-b119-4401-942c-bbaeeb694761	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:embermage-goblin:f0t0:s1,f:xs:XP:embermage-goblin:f0t0:s1	-	-	-	fc71ca68c5ac	-	19896468229f	-	-	2026-11-24	xproof
 f6ea2b1b-1403-4ccd-a23c-48e0e81ceb91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f6ea8085-5ba9-43b6-994d-04be35c5793b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f6ea8085-5ba9-43b6-994d-04be35c5793b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f6ea8085-5ba9-43b6-994d-04be35c5793b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f6ea8085-5ba9-43b6-994d-04be35c5793b	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+f6ea8085-5ba9-43b6-994d-04be35c5793b	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+f6ea8085-5ba9-43b6-994d-04be35c5793b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f6ed46e2-08f9-4e89-aae3-e5dd7f30f007	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6ef6ac6-bf1f-41ed-bd3f-a3806a76a336	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6f1b8da-5e7c-4121-9b0f-fd6678b04991	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -85,9 +85,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 687abe1c-b2fc-49e0-bd36-3db3dc3a5039	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lightning-reaver:cast:s1,f:xs:XP:lightning-reaver:cast:s1	-	-	-	8a1b1a193ec0	-	6dc87cb330b9	-	-	2026-11-24	xproof
 687abe1c-b2fc-49e0-bd36-3db3dc3a5039	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:lightning-reaver:cast:s1,f:xs:XP:lightning-reaver:cast:s1	-	-	-	8a1b1a193ec0	-	6dc87cb330b9	-	-	2026-11-24	xproof
 687abe1c-b2fc-49e0-bd36-3db3dc3a5039	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:lightning-reaver:cast:s1,f:xs:XP:lightning-reaver:cast:s1	-	-	-	8a1b1a193ec0	-	6dc87cb330b9	-	-	2026-11-24	xproof
-687cfdf7-8f35-464a-8d6e-9f2d769ed6b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+687cfdf7-8f35-464a-8d6e-9f2d769ed6b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:subterfuge:f0t0:s1,f:xs:XP:subterfuge:f0t0:s1	-	-	-	8c0bd19283bb	-	09d77465e0d6	-	-	2026-11-24	xproof
 687cfdf7-8f35-464a-8d6e-9f2d769ed6b4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-687cfdf7-8f35-464a-8d6e-9f2d769ed6b4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+687cfdf7-8f35-464a-8d6e-9f2d769ed6b4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:subterfuge:f0t0:s1,f:xs:XP:subterfuge:f0t0:s1	-	-	-	8c0bd19283bb	-	09d77465e0d6	-	-	2026-11-24	xproof
 6881e3ac-9e3d-49d2-b2ac-63feb6f0f2ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6881e3ac-9e3d-49d2-b2ac-63feb6f0f2ff	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:relentless-hunter:f0a0:s1,f:xs:XP:relentless-hunter:f0a0:s1	-	-	-	d864b561c9cb	-	ea93bc0ed67a	-	-	2026-11-24	xproof
 6883e79e-0b4f-4fb8-aee3-a3905246a408	cast	cast-resolve	agreed	-	X	scen	1	0	Spinner of Souls/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68979160-b5ce-4787-8a1e-1f40e614c3b0	static#0.0	static#0.0	agreed	-	X	scen	1	0	Spirit Water Revival/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6897f9e0-f654-4c0a-9fda-2ad4e264bf9a	cast	cast-resolve	agreed	-	FX	scen	2	0	Cruel Alliance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 689c41e9-800a-4998-bb04-74bf90141035	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-689c41e9-800a-4998-bb04-74bf90141035	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+689c41e9-800a-4998-bb04-74bf90141035	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 689c5a47-24ec-4cbf-bc93-ebb492732cad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 689cd6a8-8be0-49a6-9758-a81cc9f55cc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haunted-one:cast:s1,f:xs:XP:haunted-one:cast:s1	-	-	-	8c0bd19283bb	-	80ff929e7074	-	-	2026-11-24	xproof
 68a1a67e-9d40-47dd-b282-6c1b15465f62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

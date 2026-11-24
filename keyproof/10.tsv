@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10064a1d-66f4-4018-94c2-c727e7838850	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:demonic-rising:cast:s1,f:xs:XP:demonic-rising:cast:s1	-	-	-	d864b561c9cb	-	d92ea5debbe2	-	-	2026-11-24	xproof
 10064a1d-66f4-4018-94c2-c727e7838850	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 100771fd-07db-47be-ada3-935dc918fa33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-100771fd-07db-47be-ada3-935dc918fa33	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+100771fd-07db-47be-ada3-935dc918fa33	f0/a0	NULL	owed	refused:steps-needed:cost:Waterbend	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1009d2a2-a145-46e1-ba14-7a42735062fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 100c877d-4cce-4b96-8f21-a4f8a43e7d84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skinwing:f0t0:s1,f:xs:XP:skinwing:f0t0:s1	-	-	-	d864b561c9cb	-	b4d1c672dcf5	-	-	2026-11-24	xproof
 100c877d-4cce-4b96-8f21-a4f8a43e7d84	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1033a0cb-1a00-46c4-83d5-68a6eac85feb	cast	cast-resolve	agreed	-	X	scen	1	0	Beckett Mariner, Impetuous Ensign/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1033a0cb-1a00-46c4-83d5-68a6eac85feb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 10389ff7-2ea4-4413-90cc-0e3ca268c64d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10389ff7-2ea4-4413-90cc-0e3ca268c64d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+10389ff7-2ea4-4413-90cc-0e3ca268c64d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 10391bcb-0932-49a0-8d47-e06e3c10dd68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10391bcb-0932-49a0-8d47-e06e3c10dd68	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 103c6037-18ff-44d8-84a1-fd6bdb3040c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

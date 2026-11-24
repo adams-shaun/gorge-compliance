@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 264fafb7-3bd3-4bf1-81b2-2e436c9ca8d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 264fafb7-3bd3-4bf1-81b2-2e436c9ca8d0	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:stone-haven-pilgrim:f0t0:s1,f:xs:XP:stone-haven-pilgrim:f0t0:s1	-	-	-	8c0bd19283bb	-	6bea2c0c66c2	-	-	2026-11-24	xproof
 2650d2d5-576e-4b9a-95ac-0f5307f1580f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2650d2d5-576e-4b9a-95ac-0f5307f1580f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2650d2d5-576e-4b9a-95ac-0f5307f1580f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:triceraton-regenta:f0t0:s1,f:xs:XP:triceraton-regenta:f0t0:s1	-	-	-	8c0bd19283bb	-	2ebda0447129	-	-	2026-11-24	xproof
 26516566-c837-428d-bc81-582c74da2c28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 265204a9-0ce2-4a0a-a9ea-8537cd94b079	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pentagram-of-the-ages:cast:s1,f:xs:XP:pentagram-of-the-ages:cast:s1	-	-	-	8c0bd19283bb	-	60a6acc0f9b2	-	-	2026-11-24	xproof
 265204a9-0ce2-4a0a-a9ea-8537cd94b079	f0/a0	ChooseSource	agreed	-	FX	start	2	0	x:xs:XP:pentagram-of-the-ages:f0a0:s1,f:xs:XP:pentagram-of-the-ages:f0a0:s1	-	-	-	8c0bd19283bb	-	60a6acc0f9b2	-	-	2026-11-24	xproof
@@ -140,9 +140,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26e555f1-e0ed-4b84-8783-1c0c968f462d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26e75f0b-3a02-4989-8429-b6276e98ac33	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26e86be4-52e1-47cb-b548-c434482bd3ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26e92eb8-7a23-4e7e-be83-244bb6078606	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26e92eb8-7a23-4e7e-be83-244bb6078606	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26e92eb8-7a23-4e7e-be83-244bb6078606	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+26e92eb8-7a23-4e7e-be83-244bb6078606	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-america-liberator:f0t0:s1,f:xs:XP:captain-america-liberator:f0t0:s1	-	-	-	8c0bd19283bb	-	bdc5b72c0201	-	-	2026-11-24	xproof
+26e92eb8-7a23-4e7e-be83-244bb6078606	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:captain-america-liberator:f0t0:s1,f:xs:XP:captain-america-liberator:f0t0:s1	-	-	-	8c0bd19283bb	-	bdc5b72c0201	-	-	2026-11-24	xproof
+26e92eb8-7a23-4e7e-be83-244bb6078606	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:captain-america-liberator:f0t1:s1,f:xs:XP:captain-america-liberator:f0t1:s1	-	-	-	8c0bd19283bb	-	bdc5b72c0201	-	-	2026-11-24	xproof
 26e988da-52cf-4382-8646-a27c5ad1b92d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dino-dna:cast:s1,f:xs:XP:dino-dna:cast:s1	-	-	-	8c0bd19283bb	-	950cda8d056e	-	-	2026-11-24	xproof
 26e988da-52cf-4382-8646-a27c5ad1b92d	f0/a0	ChangeZone	agreed	-	FX	start	4	0	x:xs:XP:dino-dna:f0a0:s1,f:xs:XP:dino-dna:f0a0:s1	-	-	-	8c0bd19283bb	-	950cda8d056e	-	-	2026-11-24	xproof
 26e988da-52cf-4382-8646-a27c5ad1b92d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

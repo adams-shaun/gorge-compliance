@@ -61,8 +61,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 774e474a-f2a1-4b62-8cfe-40ad509f9062	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 774e53b2-5aec-43e1-b4fe-8812b8430401	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 775617cd-7264-4365-94c4-ffae4eb9ec8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-775617cd-7264-4365-94c4-ffae4eb9ec8b	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-775617cd-7264-4365-94c4-ffae4eb9ec8b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+775617cd-7264-4365-94c4-ffae4eb9ec8b	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+775617cd-7264-4365-94c4-ffae4eb9ec8b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 7756d2b9-7b10-4d05-8ad3-8d8f39c1eb23	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77572e70-4b8b-46ae-8c8d-f71b7dd456e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77572e70-4b8b-46ae-8c8d-f71b7dd456e0	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:gwaihir-greatest-of-the-eagles:f0t0:s1,f:xs:XP:gwaihir-greatest-of-the-eagles:f0t0:s1	-	-	-	8c0bd19283bb	-	117987bd1c83	-	-	2026-11-24	xproof
@@ -181,7 +181,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77d5d435-d794-46c0-b630-a460973cf75a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 77d5f298-06b4-49d1-9b33-f1f176665ba2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77db8db4-9fe4-478e-b919-5348b0b87b0d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77dd6ce0-91fc-4e71-99ff-47cdf3359067	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77dd6ce0-91fc-4e71-99ff-47cdf3359067	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yuna-s-decision:cast:s1,f:xs:XP:yuna-s-decision:cast:s1	-	-	-	8c0bd19283bb	-	cef15f8f9741	-	-	2026-11-24	xproof
 77dfca02-3ca3-4a9c-b3e1-479a951cbfaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77dfca02-3ca3-4a9c-b3e1-479a951cbfaa	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:skyline-scout:f0t0:s1,f:xs:XP:skyline-scout:f0t0:s1	-	-	-	d864b561c9cb	-	ab31d515921d	-	-	2026-11-24	xproof
 77e0c121-724c-43a0-84e3-1800e2d94a34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:furnace-skullbomb:cast:s1,f:xs:XP:furnace-skullbomb:cast:s1	-	-	-	ae86f6029288	-	9658e171df18	-	-	2026-11-24	xproof

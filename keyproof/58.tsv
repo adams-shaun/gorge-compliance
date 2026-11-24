@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58616e15-531f-4680-8294-35ab7e962c96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58616e15-531f-4680-8294-35ab7e962c96	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5863c67b-a47c-4466-8bd1-210ab26e0d3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5863c67b-a47c-4466-8bd1-210ab26e0d3f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5863c67b-a47c-4466-8bd1-210ab26e0d3f	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:inspired-insurgent:f0a0:s1,f:xs:XP:inspired-insurgent:f0a0:s1	-	-	-	8c0bd19283bb	-	e884e4423f80	-	-	2026-11-24	xproof
 586601dd-ac73-4451-848d-f21e64feb6a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 586601dd-ac73-4451-848d-f21e64feb6a9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 58678469-77e5-4c1b-88d6-5e6642b0c8ca	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-mana-rig:cast:s1	-	-	-	8c0bd19283bb	-	f5b15d203b5c	-	-	2026-11-24	xproof
@@ -212,8 +212,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58d87cfe-7402-43c3-81ce-13de8cd04005	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Piranha Fly/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58d87cfe-7402-43c3-81ce-13de8cd04005	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Piranha Fly/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58dde1b0-bb01-4f72-9408-21c0404c1cfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-58dee718-6820-495a-8c03-5cc130b84167	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-58dee718-6820-495a-8c03-5cc130b84167	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+58dee718-6820-495a-8c03-5cc130b84167	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twisted-spider-clone:f0t0:s1,f:xs:XP:twisted-spider-clone:f0t0:s1	-	-	-	8c0bd19283bb	-	f32882edc9f6	-	-	2026-11-24	xproof
+58dee718-6820-495a-8c03-5cc130b84167	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:twisted-spider-clone:f0t0:s1,f:xs:XP:twisted-spider-clone:f0t0:s1	-	-	-	8c0bd19283bb	-	f32882edc9f6	-	-	2026-11-24	xproof
 58e0cc31-7f7c-4cea-9453-d377a039da36	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 58e0cc31-7f7c-4cea-9453-d377a039da36	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 58e0cc31-7f7c-4cea-9453-d377a039da36	f0/t1	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof

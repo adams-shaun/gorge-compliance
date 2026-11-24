@@ -9,7 +9,7 @@ eb014442-5935-4333-8078-ee4896dce653	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 eb014442-5935-4333-8078-ee4896dce653	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 eb036e02-f43e-46a2-90f1-931579467c9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eb036e02-f43e-46a2-90f1-931579467c9b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eb036e02-f43e-46a2-90f1-931579467c9b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eb036e02-f43e-46a2-90f1-931579467c9b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 eb03f6c1-c94f-4f09-b2e9-a55ce5533653	cast	cast-resolve	agreed	-	X	scen	1	0	Marwyn, the Preserver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eb03f6c1-c94f-4f09-b2e9-a55ce5533653	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Marwyn, the Preserver/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eb03f6c1-c94f-4f09-b2e9-a55ce5533653	static#0.0	static#0.0	agreed	-	X	scen	1	0	Marwyn, the Preserver/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -122,8 +122,8 @@ eba01ee1-55c4-48db-843b-fd6d48c32eda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 eba01ee1-55c4-48db-843b-fd6d48c32eda	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 eba73313-5ec5-4004-8040-658861b71a8f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brinebarrow-intruder:f0t0:s1,f:xs:XP:brinebarrow-intruder:f0t0:s1	-	-	-	d864b561c9cb	-	3a5bbe8f9897	-	-	2026-11-24	xproof
 eba73313-5ec5-4004-8040-658861b71a8f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:brinebarrow-intruder:f0t0:s1,f:xs:XP:brinebarrow-intruder:f0t0:s1	-	-	-	d864b561c9cb	-	3a5bbe8f9897	-	-	2026-11-24	xproof
-ebae61bf-6e8c-4cc9-8071-b63e781f6530	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ebae61bf-6e8c-4cc9-8071-b63e781f6530	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ebae61bf-6e8c-4cc9-8071-b63e781f6530	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scholar-of-combustion:f0t0:s1,f:xs:XP:scholar-of-combustion:f0t0:s1	-	-	-	8c0bd19283bb	-	4b24311f7ae8	-	-	2026-11-24	xproof
+ebae61bf-6e8c-4cc9-8071-b63e781f6530	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scholar-of-combustion:f0t0:s1,f:xs:XP:scholar-of-combustion:f0t0:s1	-	-	-	8c0bd19283bb	-	4b24311f7ae8	-	-	2026-11-24	xproof
 ebb24fc7-dc71-4712-8c2a-b5920f78e55d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:outpost-siege:cast:s1,f:xs:XP:outpost-siege:cast:s1	-	-	-	d864b561c9cb	-	f51b2ee76c0b	-	-	2026-11-24	xproof
 ebb3e2ff-2214-4e11-88fb-e0fa84288cf1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Forlorn Flats/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ebb3e2ff-2214-4e11-88fb-e0fa84288cf1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Forlorn Flats/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ ebbcbaa4-9dc2-4098-b6a2-393375d86f16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ebbcbaa4-9dc2-4098-b6a2-393375d86f16	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ebbd5b9c-07ff-4b42-81c2-ba09539f3a42	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:breach-the-multiverse:cast:s1,f:xs:XP:breach-the-multiverse:cast:s1	-	-	-	ae86f6029288	-	949c95edc6ab	-	-	2026-11-24	xproof
 ebbea7a7-c990-43fa-8f67-a5da17fbbb10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ebbea7a7-c990-43fa-8f67-a5da17fbbb10	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ebbea7a7-c990-43fa-8f67-a5da17fbbb10	f0/t0	NULL	owed	refused:history:kicked:no-kicker	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ebbf84f7-d142-4de5-bfc1-ea86f082d733	cast	cast	agreed	-	X	start	1	0	x:xs:XP:possibility-technician:f0t0:s2	-	-	-	267e485f6204	-	c0dcc633d7d2	-	-	2026-11-24	xproof
 ebbf84f7-d142-4de5-bfc1-ea86f082d733	f0/t0	ChangesZone	agreed	-	X	start	1	0	x:xs:XP:possibility-technician:f0t0:s2	-	-	-	267e485f6204	-	c0dcc633d7d2	-	-	2026-11-24	xproof
 ebc3ca0f-35eb-4606-90ab-eb64556f81fe	cast	cast-resolve	agreed	-	X	scen	1	0	Volatile Wanderglyph/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -167,7 +167,7 @@ ebdd2ac6-5159-4e71-9a12-3005c843686b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haz
 ebdf26a4-77ee-4635-8d52-926bdca623f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ebdf26a4-77ee-4635-8d52-926bdca623f7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ebdf26a4-77ee-4635-8d52-926bdca623f7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ebe1448e-21c5-4b73-8296-03d3e5097c50	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ebe1448e-21c5-4b73-8296-03d3e5097c50	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:will-of-the-temur:cast:s1,f:xs:XP:will-of-the-temur:cast:s1	-	-	-	8c0bd19283bb	-	e8b9911f39f3	-	-	2026-11-24	xproof
 ebe43cc6-42fe-44f6-b198-ef0212bf82cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warlord-s-axe:cast:s1,f:xs:XP:warlord-s-axe:cast:s1	-	-	-	d864b561c9cb	-	525452020970	-	-	2026-11-24	xproof
 ebe43cc6-42fe-44f6-b198-ef0212bf82cb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ebe988c1-96e0-4a99-86b5-d948837545de	cast	cast-resolve	agreed	-	FX	scen	2	0	Lieutenant Commander Data/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

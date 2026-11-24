@@ -127,8 +127,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 999ece12-0f1f-4b20-a600-b7f1a584bbb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:huatli-s-raptor:f0t0:s1,f:xs:XP:huatli-s-raptor:f0t0:s1	-	-	-	d864b561c9cb	-	e1b92a6223b3	-	-	2026-11-24	xproof
 999ece12-0f1f-4b20-a600-b7f1a584bbb4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:huatli-s-raptor:f0t0:s1,f:xs:XP:huatli-s-raptor:f0t0:s1	-	-	-	d864b561c9cb	-	e1b92a6223b3	-	-	2026-11-24	xproof
 99a3cea9-f4ab-4da3-a085-c09dc93fc8cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99a3cea9-f4ab-4da3-a085-c09dc93fc8cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99a3cea9-f4ab-4da3-a085-c09dc93fc8cb	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+99a3cea9-f4ab-4da3-a085-c09dc93fc8cb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+99a3cea9-f4ab-4da3-a085-c09dc93fc8cb	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 99af5247-06cf-40b2-9a7c-65ad59b1ddf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99af5247-06cf-40b2-9a7c-65ad59b1ddf6	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 99ba0d4f-b2bf-48ea-95d6-b6b85ee077ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99c13f8d-7f18-48ce-86da-c74ddb6c1205	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99c13f8d-7f18-48ce-86da-c74ddb6c1205	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 99c3a315-db53-4292-9d31-1efd791d3a13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99c3a315-db53-4292-9d31-1efd791d3a13	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+99c3a315-db53-4292-9d31-1efd791d3a13	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 99c5630e-cc04-4203-9006-3bc6a6807762	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:malamet-scythe:f0t0:s2,f:xs:XP:malamet-scythe:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed8bcac0f0a4	-	-	2026-11-24	xproof
 99c5630e-cc04-4203-9006-3bc6a6807762	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Malamet Scythe/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99c5630e-cc04-4203-9006-3bc6a6807762	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:malamet-scythe:f0t0:s2,f:xs:XP:malamet-scythe:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed8bcac0f0a4	-	-	2026-11-24	xproof

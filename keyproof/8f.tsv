@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f1016c7-0551-4813-987d-36abf3b2ffeb	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:anje-s-ravager:f0t0:s1,f:xs:XP:anje-s-ravager:f0t0:s1	-	-	-	8c0bd19283bb	-	681ae0b3cb05	-	-	2026-11-24	xproof
 8f1a39bf-7597-4655-b7af-4b1332edf529	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f1c21d6-bf85-4e31-a978-6423c40650d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f1c21d6-bf85-4e31-a978-6423c40650d2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8f1c21d6-bf85-4e31-a978-6423c40650d2	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:atlantean-skirmisher:f0t0:s1,f:xs:XP:atlantean-skirmisher:f0t0:s1	-	-	-	8c0bd19283bb	-	5b44b2ac33ad	-	-	2026-11-24	xproof
 8f1d5c8d-98e1-47b7-8347-38887253e34a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f1d65ae-7ce5-4bb6-8c00-eace25ff837c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f1d65ae-7ce5-4bb6-8c00-eace25ff837c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f88b0bf-81bd-4223-9dad-d8c49ff4b87a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f8dfc24-f466-4607-8991-acbcbb415db3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f8ebf49-37c5-4da0-9cee-84ad22ab5d37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f8fd2ba-df0e-49bd-a916-cc4f50b9fa24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f8fd2ba-df0e-49bd-a916-cc4f50b9fa24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8f8fd2ba-df0e-49bd-a916-cc4f50b9fa24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:earthbending-student:f0t0:s1,f:xs:XP:earthbending-student:f0t0:s1	-	-	-	8c0bd19283bb	-	ea277a6b2e47	-	-	2026-11-24	xproof
+8f8fd2ba-df0e-49bd-a916-cc4f50b9fa24	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:earthbending-student:f0t0:s1,f:xs:XP:earthbending-student:f0t0:s1	-	-	-	8c0bd19283bb	-	ea277a6b2e47	-	-	2026-11-24	xproof
 8f91e7aa-a2d4-42ed-a959-3acd621679a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hologram-stalker:f0t0:s1,f:xs:XP:hologram-stalker:f0t0:s1	-	-	-	25696bf19d5b	-	e8042bfdf598	-	-	2026-11-24	xproof
 8f91e7aa-a2d4-42ed-a959-3acd621679a5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hologram-stalker:f0t0:s1,f:xs:XP:hologram-stalker:f0t0:s1	-	-	-	25696bf19d5b	-	e8042bfdf598	-	-	2026-11-24	xproof
 8f91e7aa-a2d4-42ed-a959-3acd621679a5	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hologram-stalker:f0t0:s1,f:xs:XP:hologram-stalker:f0t0:s1	-	-	-	25696bf19d5b	-	e8042bfdf598	-	-	2026-11-24	xproof
@@ -148,9 +148,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8fb9ff2d-1e90-4a26-8397-bb981fda2f7b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:breya-s-apprentice:f0t0:s1,f:xs:XP:breya-s-apprentice:f0t0:s1	-	-	-	d864b561c9cb	-	a30a6983f35b	-	-	2026-11-24	xproof
 8fb9ff2d-1e90-4a26-8397-bb981fda2f7b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fb9ff2d-1e90-4a26-8397-bb981fda2f7b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:breya-s-apprentice:f0t0:s1,f:xs:XP:breya-s-apprentice:f0t0:s1	-	-	-	d864b561c9cb	-	a30a6983f35b	-	-	2026-11-24	xproof
-8fba247e-9849-4a06-84ff-242894b0503a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8fba247e-9849-4a06-84ff-242894b0503a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8fba247e-9849-4a06-84ff-242894b0503a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8fba247e-9849-4a06-84ff-242894b0503a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:recon-craft-theta:f0t0:s1,f:xs:XP:recon-craft-theta:f0t0:s1	-	-	-	8c0bd19283bb	-	f5f7b1c944e1	-	-	2026-11-24	xproof
+8fba247e-9849-4a06-84ff-242894b0503a	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:recon-craft-theta:f0t0:s1,f:xs:XP:recon-craft-theta:f0t0:s1	-	-	-	8c0bd19283bb	-	f5f7b1c944e1	-	-	2026-11-24	xproof
+8fba247e-9849-4a06-84ff-242894b0503a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:recon-craft-theta:f0t0:s1,f:xs:XP:recon-craft-theta:f0t0:s1	-	-	-	8c0bd19283bb	-	f5f7b1c944e1	-	-	2026-11-24	xproof
 8fba247e-9849-4a06-84ff-242894b0503a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fbca9ba-8b83-40ca-9f7e-5c483ba76675	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fbdca3a-7aa3-4b5a-98d7-9168856045ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

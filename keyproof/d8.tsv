@@ -28,7 +28,7 @@ d81d5749-ab4d-42c5-8903-0b400f10fe33	cast	cast-resolve	agreed	-	X	scen	1	0	Rauba
 d81d5749-ab4d-42c5-8903-0b400f10fe33	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Raubahn, Bull of Ala Mhigo/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d81d5749-ab4d-42c5-8903-0b400f10fe33	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Raubahn, Bull of Ala Mhigo/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d81fc181-ecb0-43a5-88e8-c61aca3428d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d81fc181-ecb0-43a5-88e8-c61aca3428d8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d81fc181-ecb0-43a5-88e8-c61aca3428d8	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d820b920-191c-43e3-ba6a-4cdceab1c06d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d820b920-191c-43e3-ba6a-4cdceab1c06d	f0/a0	PumpAll	agreed	-	X	start	2	0	x:xs:XP:soul-of-theros:f0a0:s1	-	-	-	d864b561c9cb	-	2faed06f2a01	-	-	2026-11-24	xproof
 d820b920-191c-43e3-ba6a-4cdceab1c06d	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -51,14 +51,14 @@ d83bf132-e67e-4af0-b236-4f7a32fa3dec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d83bf132-e67e-4af0-b236-4f7a32fa3dec	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d83bf132-e67e-4af0-b236-4f7a32fa3dec	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d83c86c1-126d-49e9-9b13-9e55784c49c5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d83c86c1-126d-49e9-9b13-9e55784c49c5	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:leechridden-swamp:f0a0:s1,f:xs:XP:leechridden-swamp:f0a0:s1	-	-	-	8c0bd19283bb	-	73fddfe9e030	-	-	2026-11-24	xproof
+d83c86c1-126d-49e9-9b13-9e55784c49c5	f0/a1	Mana	agreed	-	FX	start	1	0	x:xs:XP:leechridden-swamp:f0a0:s2,f:xs:XP:leechridden-swamp:f0a0:s2	-	-	-	8c0bd19283bb	-	73fddfe9e030	-	-	2026-11-24	xproof
 d83c86c1-126d-49e9-9b13-9e55784c49c5	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d83d784e-e95b-48a1-9b4a-362f4fccc529	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d83e1a42-11d1-412a-b66c-850c7a528777	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d847542b-7522-43ec-91b0-f0aba5d7dddd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d847542b-7522-43ec-91b0-f0aba5d7dddd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d847542b-7522-43ec-91b0-f0aba5d7dddd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d847542b-7522-43ec-91b0-f0aba5d7dddd	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d847542b-7522-43ec-91b0-f0aba5d7dddd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ivora-insatiable-heir:cast:s1,f:xs:XP:ivora-insatiable-heir:cast:s1	-	-	-	8c0bd19283bb	-	9ba6e207fdd7	-	-	2026-11-24	xproof
+d847542b-7522-43ec-91b0-f0aba5d7dddd	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ivora-insatiable-heir:cast:s1,f:xs:XP:ivora-insatiable-heir:cast:s1	-	-	-	8c0bd19283bb	-	9ba6e207fdd7	-	-	2026-11-24	xproof
+d847542b-7522-43ec-91b0-f0aba5d7dddd	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+d847542b-7522-43ec-91b0-f0aba5d7dddd	f0/t2	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d849be9d-0447-4f0b-a382-3f4ceb98f9a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d849be9d-0447-4f0b-a382-3f4ceb98f9a5	f0/a0	NULL	owed	refused:steps-needed:cost:WP	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d849be9d-0447-4f0b-a382-3f4ceb98f9a5	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ d8dd601f-3615-4cef-b837-52329cb361f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d8dd601f-3615-4cef-b837-52329cb361f8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d8dd601f-3615-4cef-b837-52329cb361f8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d8dd7e7f-0053-44bb-bac0-1a08843d4c49	cast	cast	agreed	-	X	start	2	0	x:xs:XP:harnessed-lightning:cast:s1	-	-	-	d864b561c9cb	-	37e4a4455a51	-	-	2026-11-24	xproof
-d8df9813-0376-4d30-8cdc-30451fb67726	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d8df9813-0376-4d30-8cdc-30451fb67726	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:will-of-the-mardu:cast:s1,f:xs:XP:will-of-the-mardu:cast:s1	-	-	-	8c0bd19283bb	-	735133586b32	-	-	2026-11-24	xproof
 d8e1e9ba-708c-4f54-abc3-817004a2f2ac	cast	cast-resolve	agreed	-	FX	scen	2	0	Basri, Tomorrow's Champion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8e1e9ba-708c-4f54-abc3-817004a2f2ac	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Basri, Tomorrow's Champion/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8e1e9ba-708c-4f54-abc3-817004a2f2ac	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Basri, Tomorrow's Champion/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

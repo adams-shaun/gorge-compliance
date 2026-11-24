@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 92017087-18f4-46ee-8808-5959d31d0011	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92017087-18f4-46ee-8808-5959d31d0011	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:sigil-of-the-nayan-gods:cast:s1,f:xs:XP:sigil-of-the-nayan-gods:cast:s1	-	-	-	8c0bd19283bb	-	4c60bf1726ae	-	-	2026-11-24	xproof
+92017087-18f4-46ee-8808-5959d31d0011	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:sigil-of-the-nayan-gods:cast:s2,f:xs:XP:sigil-of-the-nayan-gods:cast:s2	-	-	-	8c0bd19283bb	-	4c60bf1726ae	-	-	2026-11-24	xproof
 92019547-f6db-4ea6-8356-d0a90ace5662	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92019547-f6db-4ea6-8356-d0a90ace5662	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92019547-f6db-4ea6-8356-d0a90ace5662	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9290f549-3e5d-4e39-a20e-8be6b674abc7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jadecraft-artisan:f0t0:s1,f:xs:XP:jadecraft-artisan:f0t0:s1	-	-	-	d864b561c9cb	-	599ec3581a88	-	-	2026-11-24	xproof
 9290f549-3e5d-4e39-a20e-8be6b674abc7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jadecraft-artisan:f0t0:s1,f:xs:XP:jadecraft-artisan:f0t0:s1	-	-	-	d864b561c9cb	-	599ec3581a88	-	-	2026-11-24	xproof
 929117cd-caa6-402b-9d7b-1f684d75695c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-929117cd-caa6-402b-9d7b-1f684d75695c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+929117cd-caa6-402b-9d7b-1f684d75695c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9291f31d-6953-4fe1-9a88-b8dd09fde89c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9294d4d3-0df0-4070-9261-06f15b758a0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stolen-goods:cast:s1,f:xs:XP:stolen-goods:cast:s1	-	-	-	d864b561c9cb	-	e8e2bc023ced	-	-	2026-11-24	xproof
 9297e50f-f8a5-4793-b64d-a119404f94ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elite-cat-warrior:cast:s1,f:xs:XP:elite-cat-warrior:cast:s1	-	-	-	8c0bd19283bb	-	8e790806d2b1	-	-	2026-11-24	xproof

@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 411b9158-e427-4099-bd30-3fbb22edb553	static#0.0	static#0.0	agreed	-	X	scen	1	0	Geyser Drake/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 411ba1a2-30bb-4618-b874-6be0d996f07d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 411c3636-a5b3-42fa-8020-ceacf581a4f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-411c3636-a5b3-42fa-8020-ceacf581a4f3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+411c3636-a5b3-42fa-8020-ceacf581a4f3	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 411c3636-a5b3-42fa-8020-ceacf581a4f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 411cf990-972c-4ee3-9ae4-98602f269407	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 411cf990-972c-4ee3-9ae4-98602f269407	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:carefree-swinemaster:f0t0:s1,f:xs:XP:carefree-swinemaster:f0t0:s1	-	-	-	8c0bd19283bb	-	331372c27b55	-	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41f3acbf-6092-435f-a5af-4d80dd6e1aef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raff-weatherlight-stalwart:cast:s1,f:xs:XP:raff-weatherlight-stalwart:cast:s1	-	-	-	d864b561c9cb	-	6c4d422a4654	-	-	2026-11-24	xproof
 41f3acbf-6092-435f-a5af-4d80dd6e1aef	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:raff-weatherlight-stalwart:f0a0:s1,f:xs:XP:raff-weatherlight-stalwart:f0a0:s1	-	-	-	d864b561c9cb	-	6c4d422a4654	-	-	2026-11-24	xproof
 41f3acbf-6092-435f-a5af-4d80dd6e1aef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-41f53bb5-8a62-4e6b-b9c3-5aa530a036bc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+41f53bb5-8a62-4e6b-b9c3-5aa530a036bc	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 41f58e06-5ce0-4b2d-a280-5bb3b6c56dfe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fog-of-gnats:cast:s1,f:xs:XP:fog-of-gnats:cast:s1	-	-	-	5f2128bf97e4	-	baeac97f9a52	-	-	2026-11-24	xproof
 41f58e06-5ce0-4b2d-a280-5bb3b6c56dfe	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:fog-of-gnats:f0a0:s1,f:xs:XP:fog-of-gnats:f0a0:s1	-	-	-	5f2128bf97e4	-	baeac97f9a52	-	-	2026-11-24	xproof
 41f6d6d9-3fe5-44b0-904d-1cb90d36f2b6	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rampaging-spiketail:f0t0:s1,f:xs:XP:rampaging-spiketail:f0t0:s1	-	-	-	e07cf3a05ba5	-	f8fe86e5d5a1	-	-	2026-11-24	xproof

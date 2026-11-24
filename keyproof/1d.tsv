@@ -119,8 +119,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d8e0d40-ab2c-46e2-80c2-69dfdd47aefc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d8e39c9-e04d-4328-af66-db6e1241ac06	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d95ad32-768f-40a1-a461-e0562326b2b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d95b5c0-d193-4a03-9954-23861ac1c762	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d95b5c0-d193-4a03-9954-23861ac1c762	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d95b5c0-d193-4a03-9954-23861ac1c762	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-spider-gwen-stacy:cast:s1,f:xs:XP:ghost-spider-gwen-stacy:cast:s1	-	-	-	8c0bd19283bb	-	2cd9d5a6e235	-	-	2026-11-24	xproof
+1d95b5c0-d193-4a03-9954-23861ac1c762	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ghost-spider-gwen-stacy:f0t0:s1,f:xs:XP:ghost-spider-gwen-stacy:f0t0:s1	-	-	-	8c0bd19283bb	-	2cd9d5a6e235	-	-	2026-11-24	xproof
 1d9aeaaa-66f6-41cb-9bac-162d6fd8662c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:talisman-of-indulgence:cast:s1,f:xs:XP:talisman-of-indulgence:cast:s1	-	-	-	25696bf19d5b	-	a79f88f524db	-	-	2026-11-24	xproof
 1d9aeaaa-66f6-41cb-9bac-162d6fd8662c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d9aeaaa-66f6-41cb-9bac-162d6fd8662c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,7 +128,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d9bd0a5-3ba0-44e5-9cb3-966f6b9dc14a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ravenous-baboons:cast:s1,f:xs:XP:ravenous-baboons:cast:s1	-	-	-	5f2128bf97e4	-	2b1f688ebb24	-	-	2026-11-24	xproof
 1d9bd0a5-3ba0-44e5-9cb3-966f6b9dc14a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ravenous-baboons:cast:s1,f:xs:XP:ravenous-baboons:cast:s1	-	-	-	5f2128bf97e4	-	2b1f688ebb24	-	-	2026-11-24	xproof
 1d9d8028-d946-4245-ae0c-7508023f619a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d9d8028-d946-4245-ae0c-7508023f619a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d9d8028-d946-4245-ae0c-7508023f619a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1da10d5c-36a8-473f-a5d4-782ad61d8057	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1da10d5c-36a8-473f-a5d4-782ad61d8057	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 1da10d5c-36a8-473f-a5d4-782ad61d8057	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

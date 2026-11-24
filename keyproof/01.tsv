@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0114f97f-b196-4af1-90aa-eba164cb8f22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0114f97f-b196-4af1-90aa-eba164cb8f22	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 011558f3-3c23-430e-a08b-8f91238e7971	cast	cast-resolve	agreed	-	FX	scen	2	0	Unfortunate Accident/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-01160cb5-6d83-4317-9522-74083b3a83bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+01160cb5-6d83-4317-9522-74083b3a83bb	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	e74fa41d0243	-	-	2026-11-24	xproof
 01197456-62f1-4bc0-9f2f-127f97f9b05d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01197456-62f1-4bc0-9f2f-127f97f9b05d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01197456-62f1-4bc0-9f2f-127f97f9b05d	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -98,10 +98,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01799149-4bca-417b-9e89-14493fd46c79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summit-apes:cast:s1,f:xs:XP:summit-apes:cast:s1	-	-	-	8a1b1a193ec0	-	832800ec9f3a	-	-	2026-11-24	xproof
 0179bc62-823e-46b9-b536-342904fedafc	cast	cast-resolve	agreed	-	X	scen	1	0	Memory Vessel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 0179bc62-823e-46b9-b536-342904fedafc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Memory Vessel/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-017aa9b3-a8ea-4588-9c50-e914a7d8e4ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-017aa9b3-a8ea-4588-9c50-e914a7d8e4ee	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+017aa9b3-a8ea-4588-9c50-e914a7d8e4ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:metamorphosis-fanatic:f0t0:s1,f:xs:XP:metamorphosis-fanatic:f0t0:s1	-	-	-	8c0bd19283bb	-	4d82c6aacd25	-	-	2026-11-24	xproof
+017aa9b3-a8ea-4588-9c50-e914a7d8e4ee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:metamorphosis-fanatic:f0t0:s1,f:xs:XP:metamorphosis-fanatic:f0t0:s1	-	-	-	8c0bd19283bb	-	4d82c6aacd25	-	-	2026-11-24	xproof
 017cadd8-55ee-497a-84d4-6535173bc1eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-017cadd8-55ee-497a-84d4-6535173bc1eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+017cadd8-55ee-497a-84d4-6535173bc1eb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 017f1f83-18a8-4523-917d-98f6ca7838b7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 017f4471-db5a-4ad0-97b3-b1f12b52578a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 017f4471-db5a-4ad0-97b3-b1f12b52578a	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

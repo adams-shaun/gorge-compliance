@@ -48,7 +48,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8333c82f-aae6-470f-a9db-63ab24f9bb46	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:headsplitter:cast:s1,f:xs:XP:headsplitter:cast:s1	-	-	-	ae86f6029288	-	96820fb6367d	-	-	2026-11-24	xproof
 833fe5f4-cfab-46ce-a4fe-250673896350	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:epiphany-storm:cast:s1,f:xs:XP:epiphany-storm:cast:s1	-	-	-	d864b561c9cb	-	14f2316a313c	-	-	2026-11-24	xproof
 83409a22-10de-4d51-90a3-e0579ca8cbea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83409a22-10de-4d51-90a3-e0579ca8cbea	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83409a22-10de-4d51-90a3-e0579ca8cbea	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:insight-engine:f0a0:s1,f:xs:XP:insight-engine:f0a0:s1	-	-	-	8c0bd19283bb	-	01afb8c17f21	-	-	2026-11-24	xproof
 83419229-c266-4022-8297-d1b05ec5ee20	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 83419229-c266-4022-8297-d1b05ec5ee20	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	77494c1ce129	-	-	-	-	2026-11-24	xproof
 83447e57-06f7-4e7b-91d4-7b8f71ea0676	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83cb9ab7-6a8f-40b5-b076-6fa669ff15f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83cb9ab7-6a8f-40b5-b076-6fa669ff15f2	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 83cb9ab7-6a8f-40b5-b076-6fa669ff15f2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-83ccbcb1-7cf0-41a0-8abd-18f4bc647b5f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83ccbcb1-7cf0-41a0-8abd-18f4bc647b5f	cast	cast	agreed	-	F	start	1	0	f:xs:XP:katara-s-reversal:cast:s2	-	-	-	8c0bd19283bb	-	4241a968ba81	-	-	2026-11-24	xproof
 83cdff93-531d-4148-bff7-5312b3b53bf0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83ce0859-cb88-45dd-8485-3317792235de	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tenth-district-guard:cast:s1,f:xs:XP:tenth-district-guard:cast:s1	-	-	-	d864b561c9cb	-	3c30d0271cf7	-	-	2026-11-24	xproof
 83ce0859-cb88-45dd-8485-3317792235de	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tenth-district-guard:cast:s1,f:xs:XP:tenth-district-guard:cast:s1	-	-	-	d864b561c9cb	-	3c30d0271cf7	-	-	2026-11-24	xproof
@@ -215,7 +215,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83f35293-39e9-4c78-9c9f-25a1fc905676	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83f426db-3b25-4407-afd0-0465e3900c24	cast	cast-resolve	agreed	-	X	scen	1	0	Year of Hell/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83f776d9-f3b6-40c2-8008-1ace4d110825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83f776d9-f3b6-40c2-8008-1ace4d110825	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83f776d9-f3b6-40c2-8008-1ace4d110825	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83f776d9-f3b6-40c2-8008-1ace4d110825	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+83f776d9-f3b6-40c2-8008-1ace4d110825	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 83f7e8e5-d485-4571-9fa6-47b5e962d221	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83f7e8e5-d485-4571-9fa6-47b5e962d221	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3577c47e-76d3-4659-b922-31c4b74be3a0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Enduring Vitality/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3577c47e-76d3-4659-b922-31c4b74be3a0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Enduring Vitality/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3577c47e-76d3-4659-b922-31c4b74be3a0	static#0.0	static#0.0	agreed	-	X	scen	1	0	Enduring Vitality/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3579e40c-6ec5-4927-8252-5a188db400ab	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rhoda-geist-avenger:cast:s1,f:xs:XP:rhoda-geist-avenger:cast:s1	-	-	-	8c0bd19283bb	-	5db6d560fb94	-	-	2026-11-24	xproof
+3579e40c-6ec5-4927-8252-5a188db400ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rhoda-geist-avenger:f0t1:s1,f:xs:XP:rhoda-geist-avenger:f0t1:s1	-	-	-	8c0bd19283bb	-	5db6d560fb94	-	-	2026-11-24	xproof
 3579e40c-6ec5-4927-8252-5a188db400ab	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3579e40c-6ec5-4927-8252-5a188db400ab	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 357ed28b-899f-404b-94ff-6fb2ef81d87b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:alchemist-s-refuge:f0a0:s2,f:xs:XP:alchemist-s-refuge:f0a0:s2	-	-	-	d864b561c9cb	-	f73ba1d13442	-	-	2026-11-24	xproof
@@ -104,8 +104,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35826db0-b6ff-47b5-be16-c5b878d9e842	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35826db0-b6ff-47b5-be16-c5b878d9e842	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 358297cd-4a9f-48e2-aaa5-131b0849f8dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-358297cd-4a9f-48e2-aaa5-131b0849f8dc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-358297cd-4a9f-48e2-aaa5-131b0849f8dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+358297cd-4a9f-48e2-aaa5-131b0849f8dc	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+358297cd-4a9f-48e2-aaa5-131b0849f8dc	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3583ec24-4f26-45ea-8fb4-a45bdd7bfc79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravenous-lindwurm:f0t0:s1,f:xs:XP:ravenous-lindwurm:f0t0:s1	-	-	-	d864b561c9cb	-	2c55fe4146b0	-	-	2026-11-24	xproof
 3583ec24-4f26-45ea-8fb4-a45bdd7bfc79	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ravenous-lindwurm:f0t0:s1,f:xs:XP:ravenous-lindwurm:f0t0:s1	-	-	-	d864b561c9cb	-	2c55fe4146b0	-	-	2026-11-24	xproof
 358789f9-7d87-411d-919e-d597da665cbd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stoneforge-mystic:f0t0:s1,f:xs:XP:stoneforge-mystic:f0t0:s1	-	-	-	d864b561c9cb	-	72134bfd7b41	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 358cfcf3-8ad0-4877-a59a-76ee269169fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35906166-71d1-4089-bbe4-4055edb81fb0	cast	cast-resolve	agreed	-	X	scen	1	0	Conquest Mission/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 35906166-71d1-4089-bbe4-4055edb81fb0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-35922a30-6b84-44dd-a2f0-306554a1ae90	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:smelt-ward-gatekeepers:f0t0:s1,f:xs:XP:smelt-ward-gatekeepers:f0t0:s1	-	-	-	8c0bd19283bb	-	c8f2fb5e5fc3	-	-	2026-11-24	xproof
+35922a30-6b84-44dd-a2f0-306554a1ae90	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:heap-gate:f0a1:s2,f:xs:XP:heap-gate:f0a1:s2	-	-	-	8c0bd19283bb	-	c8f2fb5e5fc3	-	-	2026-11-24	xproof
 35922a30-6b84-44dd-a2f0-306554a1ae90	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35922a30-6b84-44dd-a2f0-306554a1ae90	f0/a2	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 35922a30-6b84-44dd-a2f0-306554a1ae90	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,8 +131,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 359c6272-fcb5-4d3f-a4b5-4209e354a044	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 359ceca4-7063-4089-8088-ba54bc6fb7cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35a03b0f-9dac-476a-97e9-67767c1e453e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35a03b0f-9dac-476a-97e9-67767c1e453e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35a03b0f-9dac-476a-97e9-67767c1e453e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35a03b0f-9dac-476a-97e9-67767c1e453e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:pyreswipe-hawk:f0t0:s1,f:xs:XP:pyreswipe-hawk:f0t0:s1	-	-	-	8c0bd19283bb	-	ac9bfda4646a	-	-	2026-11-24	xproof
+35a03b0f-9dac-476a-97e9-67767c1e453e	f0/t1	NULL	owed	refused:no-generator:trigger:ManaExpend	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 35a05836-38d7-45c7-ac9a-996a682c2129	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35ad9e15-3e00-4bd2-96cf-36a6ef49059f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:red-mage-s-rapier:f0t0:s2,f:xs:XP:red-mage-s-rapier:f0t0:s2	-	-	-	267e485f6204	-	aff319edb213	-	-	2026-11-24	xproof
 35ad9e15-3e00-4bd2-96cf-36a6ef49059f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Red Mage's Rapier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

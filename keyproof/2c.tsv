@@ -189,15 +189,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ce20f43-9357-448f-bb40-7315feb08433	static#0.0	static#0.0	agreed	-	X	scen	1	0	Toph, the Blind Bandit/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ce2a091-95b6-45e5-9097-77fea411162e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ce2a091-95b6-45e5-9097-77fea411162e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ce2a091-95b6-45e5-9097-77fea411162e	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ce2a091-95b6-45e5-9097-77fea411162e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ce2a091-95b6-45e5-9097-77fea411162e	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+2ce2a091-95b6-45e5-9097-77fea411162e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2ceac1be-32ab-4a04-ade3-852926a5ca45	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ceb76e2-1692-48fc-ab20-9587d1374172	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archweaver:cast:s1,f:xs:XP:archweaver:cast:s1	-	-	-	d864b561c9cb	-	3769eeccf5c6	-	-	2026-11-24	xproof
 2cee861f-d28c-47e6-baee-2da9b7fa89d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cee861f-d28c-47e6-baee-2da9b7fa89d8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cf04076-adc4-4831-a3b8-9120d516f204	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cf04076-adc4-4831-a3b8-9120d516f204	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cf04076-adc4-4831-a3b8-9120d516f204	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2cf04076-adc4-4831-a3b8-9120d516f204	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jubilation:f0t0:s1,f:xs:XP:jubilation:f0t0:s1	-	-	-	8c0bd19283bb	-	d2d4ad167d5c	-	-	2026-11-24	xproof
+2cf04076-adc4-4831-a3b8-9120d516f204	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+2cf04076-adc4-4831-a3b8-9120d516f204	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jubilation:f0t0:s1,f:xs:XP:jubilation:f0t0:s1	-	-	-	8c0bd19283bb	-	d2d4ad167d5c	-	-	2026-11-24	xproof
 2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:infernal-medusa:cast:s1,f:xs:XP:infernal-medusa:cast:s1	-	-	-	fc71ca68c5ac	-	d8779b806975	-	-	2026-11-24	xproof
 2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof

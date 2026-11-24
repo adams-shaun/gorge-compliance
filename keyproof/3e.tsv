@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e070d7a-6a1e-4cce-b196-73f4052c049c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e070d7a-6a1e-4cce-b196-73f4052c049c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e0738af-00ec-4707-a56d-85b5a5ce4529	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e0738af-00ec-4707-a56d-85b5a5ce4529	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3e0738af-00ec-4707-a56d-85b5a5ce4529	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3e0a0276-b640-41c7-95bd-ba3067f5c911	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e0be003-4f42-4917-b85d-46baf2afd734	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aethersnipe:f0t0:s1,f:xs:XP:aethersnipe:f0t0:s1	-	-	-	d864b561c9cb	-	0e1c5ccc8627	-	-	2026-11-24	xproof
 3e0be003-4f42-4917-b85d-46baf2afd734	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aethersnipe:f0t0:s1,f:xs:XP:aethersnipe:f0t0:s1	-	-	-	d864b561c9cb	-	0e1c5ccc8627	-	-	2026-11-24	xproof
@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3eb49097-42f8-4388-907d-32a738749d8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3eb49097-42f8-4388-907d-32a738749d8a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3eb5ae68-7f76-4874-80a4-80058b10fc7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3eb5ae68-7f76-4874-80a4-80058b10fc7a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3eb5ae68-7f76-4874-80a4-80058b10fc7a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3ebaa91f-5cbf-4a82-9759-9bd4d93a3e87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ebb8542-5d1d-4f0b-92a9-5a98425860fd	cast	cast-resolve	agreed	-	X	scen	1	0	Kavaron Turbodrone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ebb8542-5d1d-4f0b-92a9-5a98425860fd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kavaron Turbodrone/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

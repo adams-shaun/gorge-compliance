@@ -41,14 +41,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d2e9712-d546-40ac-a5ea-2dd7b7d9e0c1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3d2ea1a3-72af-48bc-a8f1-98facc2eebd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d2ea1a3-72af-48bc-a8f1-98facc2eebd0	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:copperhorn-scout:f0t0:s1,f:xs:XP:copperhorn-scout:f0t0:s1	-	-	-	d864b561c9cb	-	e01a62c1d454	-	-	2026-11-24	xproof
-3d3553df-0036-47d9-b0e3-4a3261a0f73c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d3553df-0036-47d9-b0e3-4a3261a0f73c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:synth-infiltrator:cast:s1,f:xs:XP:synth-infiltrator:cast:s1	-	-	-	8c0bd19283bb	-	152af9479dac	-	-	2026-11-24	xproof
 3d39db09-67b7-4a4e-9667-4e1b806f51a5	cast	cast-resolve	agreed	-	FX	scen	2	0	Moment of Glory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d3c5dd5-ad4e-48ca-92b1-91e1f4ad5c3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fungus-elemental:cast:s1,f:xs:XP:fungus-elemental:cast:s1	-	-	-	8c0bd19283bb	-	6a91b2cca8e6	-	-	2026-11-24	xproof
 3d3c5dd5-ad4e-48ca-92b1-91e1f4ad5c3b	f0/a0	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3d3e6dc0-2aed-4afa-bfa9-59d04ade9bee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ethereal-whiskergill:cast:s1,f:xs:XP:ethereal-whiskergill:cast:s1	-	-	-	d864b561c9cb	-	f66413e20f8f	-	-	2026-11-24	xproof
-3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:taeko-the-patient-avalanche:cast:s1,f:xs:XP:taeko-the-patient-avalanche:cast:s1	-	-	-	8c0bd19283bb	-	7679566751a4	-	-	2026-11-24	xproof
+3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:taeko-the-patient-avalanche:f0t1:s1,f:xs:XP:taeko-the-patient-avalanche:f0t1:s1	-	-	-	8c0bd19283bb	-	7679566751a4	-	-	2026-11-24	xproof
 3d416f83-32b8-4dad-8e4d-3acd182bbe44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d416f83-32b8-4dad-8e4d-3acd182bbe44	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 3d416f83-32b8-4dad-8e4d-3acd182bbe44	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 3d8ac41c-0566-48b2-a744-39db2f72272c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d8dfd57-7d26-4a3b-a9c3-33077c85b3db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d8dfd57-7d26-4a3b-a9c3-33077c85b3db	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d8dfd57-7d26-4a3b-a9c3-33077c85b3db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:definitely-not-a-turtle:f0t0:s1,f:xs:XP:definitely-not-a-turtle:f0t0:s1	-	-	-	8c0bd19283bb	-	1190a1391735	-	-	2026-11-24	xproof
 3d917331-9f49-4d0c-bb2d-4853e3ff6ca1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d917331-9f49-4d0c-bb2d-4853e3ff6ca1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d92f2e6-27df-4329-b552-cf905f7616ba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flood-of-tears:cast:s1,f:xs:XP:flood-of-tears:cast:s1	-	-	-	d864b561c9cb	-	0c7e6cc7af5f	-	-	2026-11-24	xproof

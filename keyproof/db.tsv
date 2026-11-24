@@ -55,7 +55,7 @@ db444262-c40f-4c80-9d14-265c32f77cf1	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	
 db444262-c40f-4c80-9d14-265c32f77cf1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db444f9d-4dde-4308-b0f2-7acfe6de871a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db444f9d-4dde-4308-b0f2-7acfe6de871a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-db444f9d-4dde-4308-b0f2-7acfe6de871a	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+db444f9d-4dde-4308-b0f2-7acfe6de871a	land	land	agreed	-	FX	start	2	0	x:xs:XP:turbulent-steppe:land:s1,f:xs:XP:turbulent-steppe:land:s1	-	-	-	8c0bd19283bb	-	7b2c77c8ab42	-	-	2026-11-24	xproof
 db46b8f4-22bb-4042-abe8-dd83b2426142	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db4907f3-4071-47c4-9329-96b4813435be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db4907f3-4071-47c4-9329-96b4813435be	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ dba1d231-6b03-44ad-ab8c-be0c8fe1b6db	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lake-
 dba35ac5-7ad3-488a-a006-6b9a1d54eea5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dba35ac5-7ad3-488a-a006-6b9a1d54eea5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dba3dcc1-2177-4a8c-8cf3-7d4fb83c7a16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dba3dcc1-2177-4a8c-8cf3-7d4fb83c7a16	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dba3dcc1-2177-4a8c-8cf3-7d4fb83c7a16	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dba3dcc1-2177-4a8c-8cf3-7d4fb83c7a16	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+dba3dcc1-2177-4a8c-8cf3-7d4fb83c7a16	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 dba4fd31-8931-42dd-bd86-45479c2abf74	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dba4fd31-8931-42dd-bd86-45479c2abf74	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dba55309-cb21-42db-8968-8da07227a1be	cast	cast-resolve	agreed	-	X	scen	1	0	Stable Wormhole/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ dbb6b7f0-33fd-4530-a621-114148fb3929	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rip
 dbb6b7f0-33fd-4530-a621-114148fb3929	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:riparian-tiger:f0t0:s1,f:xs:XP:riparian-tiger:f0t0:s1	-	-	-	d864b561c9cb	-	f9f801e1c4fc	-	-	2026-11-24	xproof
 dbb6b7f0-33fd-4530-a621-114148fb3929	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:riparian-tiger:f0t1:s1,f:xs:XP:riparian-tiger:f0t1:s1	-	-	-	d864b561c9cb	-	f9f801e1c4fc	-	-	2026-11-24	xproof
 dbb8a3d9-6b1b-4ad1-b8b9-f92ead03d1d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dbb8a3d9-6b1b-4ad1-b8b9-f92ead03d1d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dbb8a3d9-6b1b-4ad1-b8b9-f92ead03d1d9	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 dbba75f5-2404-4bd5-982b-f6c4effa5316	cast	cast-resolve	agreed	-	FX	scen	2	0	Ethereal Armor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dbba75f5-2404-4bd5-982b-f6c4effa5316	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ethereal Armor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dbbf6379-01b4-400d-a277-5887e6be1d0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

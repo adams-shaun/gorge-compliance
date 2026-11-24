@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e95c273-7fec-4f8d-8be9-e21ad4b93717	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e95c273-7fec-4f8d-8be9-e21ad4b93717	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Encroaching Dragonstorm/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1e9679e8-bef1-495c-8251-0d87d971e32a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e9679e8-bef1-495c-8251-0d87d971e32a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1e9679e8-bef1-495c-8251-0d87d971e32a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:leatherhead-iron-gator:f0t0:s1,f:xs:XP:leatherhead-iron-gator:f0t0:s1	-	-	-	8c0bd19283bb	-	17b6cda00e67	-	-	2026-11-24	xproof
 1e9b0fd6-5aae-401a-8df5-d94ce6442696	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e9b0fd6-5aae-401a-8df5-d94ce6442696	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1e9b0fd6-5aae-401a-8df5-d94ce6442696	f0/t1	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -118,13 +118,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ea7b298-be87-4032-9f45-37f9b39ce3fa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ea9517a-c2ed-4aec-8fd3-e603b0e7dec9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kin-tree-warden:cast:s1,f:xs:XP:kin-tree-warden:cast:s1	-	-	-	d864b561c9cb	-	65fa3dabeab6	-	-	2026-11-24	xproof
 1ea9517a-c2ed-4aec-8fd3-e603b0e7dec9	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:kin-tree-warden:f0a0:s1,f:xs:XP:kin-tree-warden:f0a0:s1	-	-	-	d864b561c9cb	-	65fa3dabeab6	-	-	2026-11-24	xproof
-1eaa37a3-8769-4213-bcd5-39bcf4771273	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1eaa37a3-8769-4213-bcd5-39bcf4771273	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1eaa37a3-8769-4213-bcd5-39bcf4771273	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:casey-jones-asphalt-hooligan:cast:s1,f:xs:XP:casey-jones-asphalt-hooligan:cast:s1	-	-	-	8c0bd19283bb	-	306ebb3ea787	-	-	2026-11-24	xproof
+1eaa37a3-8769-4213-bcd5-39bcf4771273	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:casey-jones-asphalt-hooligan:f0a0:s1,f:xs:XP:casey-jones-asphalt-hooligan:f0a0:s1	-	-	-	8c0bd19283bb	-	306ebb3ea787	-	-	2026-11-24	xproof
 1ead750f-14a6-4f25-9eb8-9472c2fdac35	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ead750f-14a6-4f25-9eb8-9472c2fdac35	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ead750f-14a6-4f25-9eb8-9472c2fdac35	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1eae48aa-f01d-4398-a68e-3b5af0542ab1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1eb22223-edd4-42bf-a127-e16191cbd1c1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1eb22223-edd4-42bf-a127-e16191cbd1c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vault-87-forced-evolution:cast:s1,f:xs:XP:vault-87-forced-evolution:cast:s1	-	-	-	8c0bd19283bb	-	f8856975432b	-	-	2026-11-24	xproof
 1eb4c001-1115-4b99-bbbf-703eb551a381	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:district-guide:f0t0:s1,f:xs:XP:district-guide:f0t0:s1	-	-	-	d864b561c9cb	-	fbec7033ee1b	-	-	2026-11-24	xproof
 1eb4c001-1115-4b99-bbbf-703eb551a381	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:district-guide:f0t0:s1,f:xs:XP:district-guide:f0t0:s1	-	-	-	d864b561c9cb	-	fbec7033ee1b	-	-	2026-11-24	xproof
 1eb64899-8865-48cc-bd58-529b1294ec99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -152,8 +152,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fbed9e4-86f6-4115-8468-8593e340701f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:krosan-druid:f0t0:s1,f:xs:XP:krosan-druid:f0t0:s1	-	-	-	d864b561c9cb	-	6e3a3d4d4b06	-	-	2026-11-24	xproof
 1fc1b0d7-7f15-4d00-bc8f-e06489afd425	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fc1b0d7-7f15-4d00-bc8f-e06489afd425	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1fc1b0d7-7f15-4d00-bc8f-e06489afd425	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1fc1b0d7-7f15-4d00-bc8f-e06489afd425	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1fc1b0d7-7f15-4d00-bc8f-e06489afd425	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:qala-ajani-s-pridemate:f0t0:s1,f:xs:XP:qala-ajani-s-pridemate:f0t0:s1	-	-	-	8c0bd19283bb	-	b6eac5244e0a	-	-	2026-11-24	xproof
+1fc1b0d7-7f15-4d00-bc8f-e06489afd425	f0/t1	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1fc31651-70fe-4a58-9b7e-7359510bba51	cast	cast-resolve	agreed	-	X	scen	1	0	Riling Dawnbreaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fc31651-70fe-4a58-9b7e-7359510bba51	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Riling Dawnbreaker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fc31651-70fe-4a58-9b7e-7359510bba51	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Riling Dawnbreaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -201,5 +201,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ff62220-be95-4901-b8d8-812b9a1a1b0a	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1ff91cc1-2233-4ceb-91ba-6a49c7147f32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-wedding-of-river-song:cast:s1,f:xs:XP:the-wedding-of-river-song:cast:s1	-	-	-	8c0bd19283bb	-	a5ba466f532d	-	-	2026-11-24	xproof
 1ff9598a-0dac-4437-9450-fc8134fa3740	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ff9598a-0dac-4437-9450-fc8134fa3740	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ff9598a-0dac-4437-9450-fc8134fa3740	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ff9598a-0dac-4437-9450-fc8134fa3740	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+1ff9598a-0dac-4437-9450-fc8134fa3740	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

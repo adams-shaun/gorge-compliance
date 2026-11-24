@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 853ef032-a2f7-4e6b-a210-03e96855d062	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hoverguard-sweepers:f0t0:s1,f:xs:XP:hoverguard-sweepers:f0t0:s1	-	-	-	25696bf19d5b	-	9984fa54dd66	-	-	2026-11-24	xproof
 853ef032-a2f7-4e6b-a210-03e96855d062	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hoverguard-sweepers:f0t0:s1,f:xs:XP:hoverguard-sweepers:f0t0:s1	-	-	-	25696bf19d5b	-	9984fa54dd66	-	-	2026-11-24	xproof
 854278bc-2bcf-45dd-abd5-6aca7a1e5fc9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-854278bc-2bcf-45dd-abd5-6aca7a1e5fc9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+854278bc-2bcf-45dd-abd5-6aca7a1e5fc9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 85488433-3c23-4a29-b063-53dba71f26c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85488433-3c23-4a29-b063-53dba71f26c4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 854cac11-9a22-4dea-8c1b-c49a4858a754	cast	cast-resolve	agreed	-	X	scen	1	0	Raiding Schemes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 856d8eb4-3834-49f8-9696-579948590fd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roaring-slagwurm:cast:s1,f:xs:XP:roaring-slagwurm:cast:s1	-	-	-	25696bf19d5b	-	edd7d12c6654	-	-	2026-11-24	xproof
 856d8eb4-3834-49f8-9696-579948590fd0	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:roaring-slagwurm:f0t0:s1,f:xs:XP:roaring-slagwurm:f0t0:s1	-	-	-	d864b561c9cb	-	edd7d12c6654	-	-	2026-11-24	xproof
 8571bd94-66c0-4cca-b10f-2c34062d008e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8571bd94-66c0-4cca-b10f-2c34062d008e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8571bd94-66c0-4cca-b10f-2c34062d008e	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 857392fe-1ce6-4d53-b039-98339d292ebb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 857392fe-1ce6-4d53-b039-98339d292ebb	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 857524d5-9b5c-42ac-a6cf-2d9bfebd7015	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

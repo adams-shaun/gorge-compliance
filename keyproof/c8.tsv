@@ -13,7 +13,7 @@ c80a7d22-076a-4fd7-bcf4-4769143647f0	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ku
 c80a7d22-076a-4fd7-bcf4-4769143647f0	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/MIR.json:	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 c8110200-209e-423a-96b7-81a3ac32447c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8110200-209e-423a-96b7-81a3ac32447c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c8110200-209e-423a-96b7-81a3ac32447c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c8110200-209e-423a-96b7-81a3ac32447c	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 c81195d4-19c6-4cac-b312-7f5c33dff962	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c81195d4-19c6-4cac-b312-7f5c33dff962	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c81195d4-19c6-4cac-b312-7f5c33dff962	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -86,7 +86,7 @@ c86bac69-96d6-4b9f-87e4-2d7faecaa112	static#0.0	static#0.0	agreed	-	X	scen	1	0	C
 c86bac69-96d6-4b9f-87e4-2d7faecaa112	static#0.1	static#0.1	agreed	-	X	scen	1	0	Cloudspire Captain/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c86ed70b-ab09-402e-8aaf-6332b4749453	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c86ff0e3-5d6e-4981-a2da-8da70b9daeb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c8714939-aaf9-4ede-a04f-61f0df5ea4d4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c8714939-aaf9-4ede-a04f-61f0df5ea4d4	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Bolshack Dragon"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 c872012d-b598-4076-8385-2e3771c0306f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c872012d-b598-4076-8385-2e3771c0306f	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c87440aa-4616-49ff-a211-ebdc37767f62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lorescale-coatl:cast:s1,f:xs:XP:lorescale-coatl:cast:s1	-	-	-	8a1b1a193ec0	-	891d9e91202b	-	-	2026-11-24	xproof

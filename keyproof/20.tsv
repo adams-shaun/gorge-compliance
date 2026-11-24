@@ -87,8 +87,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2068185c-1b50-47d0-aa3f-bf505d199428	cast	cast-resolve	agreed	-	X	scen	1	0	Dark Confidant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2068185c-1b50-47d0-aa3f-bf505d199428	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dark Confidant/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 206913aa-4d73-4465-8311-8054a22c0743	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-206913aa-4d73-4465-8311-8054a22c0743	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-206913aa-4d73-4465-8311-8054a22c0743	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+206913aa-4d73-4465-8311-8054a22c0743	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+206913aa-4d73-4465-8311-8054a22c0743	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 206f7eaf-1e0b-48ea-9c40-38902e109e4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:living-twister:cast:s1,f:xs:XP:living-twister:cast:s1	-	-	-	d864b561c9cb	-	8476643b54f5	-	-	2026-11-24	xproof
 206f7eaf-1e0b-48ea-9c40-38902e109e4f	f0/a0	DealDamage	agreed	-	F	start	2	0	f:xs:XP:living-twister:f0a1:s1	-	-	-	d864b561c9cb	-	8476643b54f5	-	-	2026-11-24	xproof
 206f7eaf-1e0b-48ea-9c40-38902e109e4f	f0/a1	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:living-twister:f0a1:s1	-	-	-	d864b561c9cb	-	8476643b54f5	-	-	2026-11-24	xproof

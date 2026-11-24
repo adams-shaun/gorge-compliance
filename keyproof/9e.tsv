@@ -103,9 +103,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e737a22-a352-411d-8412-96770c7f6cce	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:simic-keyrune:f0a1:s1,f:xs:XP:simic-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	8da3a83e02f0	-	-	2026-11-24	xproof
 9e767d44-feff-449a-bed9-0866c7bce846	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e767d44-feff-449a-bed9-0866c7bce846	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e76d56a-67b6-4bd9-8f2d-3328d18a2880	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e76d56a-67b6-4bd9-8f2d-3328d18a2880	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e76d56a-67b6-4bd9-8f2d-3328d18a2880	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9e76d56a-67b6-4bd9-8f2d-3328d18a2880	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-salvagers:f0t0:s1,f:xs:XP:fire-nation-salvagers:f0t0:s1	-	-	-	8c0bd19283bb	-	dc6f52283699	-	-	2026-11-24	xproof
+9e76d56a-67b6-4bd9-8f2d-3328d18a2880	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-salvagers:f0t0:s1,f:xs:XP:fire-nation-salvagers:f0t0:s1	-	-	-	8c0bd19283bb	-	dc6f52283699	-	-	2026-11-24	xproof
+9e76d56a-67b6-4bd9-8f2d-3328d18a2880	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9e774188-caa1-4b62-b9cc-547f8e444b7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e7a240d-dc33-47ac-9f17-77fab4c1c340	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e7a240d-dc33-47ac-9f17-77fab4c1c340	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -127,8 +127,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e9189d9-3b25-476b-b096-bb540398c1d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e9189d9-3b25-476b-b096-bb540398c1d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e96d12b-8381-4706-8089-3521aa2b5422	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e96d12b-8381-4706-8089-3521aa2b5422	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e96d12b-8381-4706-8089-3521aa2b5422	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9e96d12b-8381-4706-8089-3521aa2b5422	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:gau-feral-youth:f0t0:s1,f:xs:XP:gau-feral-youth:f0t0:s1	-	-	-	8c0bd19283bb	-	da4f84eda8ef	-	-	2026-11-24	xproof
+9e96d12b-8381-4706-8089-3521aa2b5422	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9e9aea99-1eee-4bb6-9043-a1ac2884d071	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e9d5242-424d-4f61-b625-806295dbb0c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ea58a77-9b2e-4ae2-8a31-a51804900a3b	cast	cast-resolve	agreed	-	X	scen	1	0	Gravestone Strider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ecd98d5-8d66-4cb0-bada-23dfa0faacc0	f0/a1	NULL	owed	refused:steps-needed:cost:GW	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9ece4b78-9554-4e4e-8491-68a6091f9c6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ecf56b9-1f36-4030-8333-1675ccc663d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nightmare-s-thirst:cast:s1,f:xs:XP:nightmare-s-thirst:cast:s1	-	-	-	d864b561c9cb	-	a12c8aaaf72c	-	-	2026-11-24	xproof
-9ed4e48f-91bd-45f9-9f31-a2705b330713	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ed4e48f-91bd-45f9-9f31-a2705b330713	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-art-of-tea:cast:s1,f:xs:XP:the-art-of-tea:cast:s1	-	-	-	8c0bd19283bb	-	5c011d3903bd	-	-	2026-11-24	xproof
 9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	cast	cast-resolve	agreed	-	X	scen	1	0	Hundred-Battle Veteran/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hundred-Battle Veteran/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hundred-Battle Veteran/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9edcf49b-2767-48bd-8fbe-968527cbddf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9edcf49b-2767-48bd-8fbe-968527cbddf4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ee0d4a0-fd8d-43c4-a2aa-c4e6af5beecc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ee0d4a0-fd8d-43c4-a2aa-c4e6af5beecc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ee0d4a0-fd8d-43c4-a2aa-c4e6af5beecc	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9ee50bae-47c4-4ae7-a82b-f2a0b366df35	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ee50bae-47c4-4ae7-a82b-f2a0b366df35	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9ee64b00-6619-451e-bb48-10af107dcb2f	cast	cast-resolve	agreed	-	X	scen	1	0	Seasoned Consultant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

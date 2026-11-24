@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
 2f1019df-3e76-446c-ba33-f9dfe56b10bf	cast	cast-resolve	agreed	-	X	scen	1	0	Merfolk Cave-Diver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f1019df-3e76-446c-ba33-f9dfe56b10bf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Merfolk Cave-Diver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f109125-b743-4ecf-84da-690d8e8ddf9c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f109125-b743-4ecf-84da-690d8e8ddf9c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ceaseless-conflict:cast:s1,f:xs:XP:ceaseless-conflict:cast:s1	-	-	-	8c0bd19283bb	-	bf9b394b9b5e	-	-	2026-11-24	xproof
 2f14e92d-307f-4854-b7ec-a2f6ce03dced	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f14e92d-307f-4854-b7ec-a2f6ce03dced	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f14e92d-307f-4854-b7ec-a2f6ce03dced	f0/a1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -29,8 +29,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f18bb2d-249f-4d7a-a0f7-8a285d365777	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f1e2742-d7df-4893-abc8-cb927c500569	cast	cast	agreed	-	X	start	1	0	x:xs:XP:macetail-hystrodon:cast:s2	-	-	-	fc71ca68c5ac	-	09937826e1ef	-	-	2026-11-24	xproof
 2f1e2742-d7df-4893-abc8-cb927c500569	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:macetail-hystrodon:cast:s1,f:xs:XP:macetail-hystrodon:cast:s1	-	-	-	fc71ca68c5ac	-	09937826e1ef	-	-	2026-11-24	xproof
-2f200a14-7e5b-4b7c-a283-5cf9abb1f95d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f200a14-7e5b-4b7c-a283-5cf9abb1f95d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f200a14-7e5b-4b7c-a283-5cf9abb1f95d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pol-jamaar-illusionist:f0t0:s1,f:xs:XP:pol-jamaar-illusionist:f0t0:s1	-	-	-	8c0bd19283bb	-	6d1c4f7ed3fb	-	-	2026-11-24	xproof
+2f200a14-7e5b-4b7c-a283-5cf9abb1f95d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pol-jamaar-illusionist:f0t0:s1,f:xs:XP:pol-jamaar-illusionist:f0t0:s1	-	-	-	8c0bd19283bb	-	6d1c4f7ed3fb	-	-	2026-11-24	xproof
 2f214dcf-9601-4ccb-bdac-2f9b9f6dff99	cast	cast-resolve	agreed	-	FX	scen	2	0	Convenient Target/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f214dcf-9601-4ccb-bdac-2f9b9f6dff99	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Convenient Target/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f214dcf-9601-4ccb-bdac-2f9b9f6dff99	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -8,9 +8,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39050823-ccda-43c0-818d-d5db15d82b99	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kjeldoran-frostbeast:cast:s1,f:xs:XP:kjeldoran-frostbeast:cast:s1	-	-	-	8c0bd19283bb	-	bb5a3c94696a	-	-	2026-11-24	xproof
 39050823-ccda-43c0-818d-d5db15d82b99	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:kjeldoran-frostbeast:cast:s1,f:xs:XP:kjeldoran-frostbeast:cast:s1	-	-	-	8c0bd19283bb	-	bb5a3c94696a	-	-	2026-11-24	xproof
 39068bf1-cae4-4ac9-82ef-4e81bf59446e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3909ff79-2103-407c-a812-a5a5a996fce2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3909ff79-2103-407c-a812-a5a5a996fce2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3909ff79-2103-407c-a812-a5a5a996fce2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3909ff79-2103-407c-a812-a5a5a996fce2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fandaniel-telophoroi-ascian:cast:s1,f:xs:XP:fandaniel-telophoroi-ascian:cast:s1	-	-	-	8c0bd19283bb	-	2125befec451	-	-	2026-11-24	xproof
+3909ff79-2103-407c-a812-a5a5a996fce2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3909ff79-2103-407c-a812-a5a5a996fce2	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:fandaniel-telophoroi-ascian:cast:s1,f:xs:XP:fandaniel-telophoroi-ascian:cast:s1	-	-	-	8c0bd19283bb	-	2125befec451	-	-	2026-11-24	xproof
 390b862a-2a85-44bd-832c-f5bbd3eb4ea0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 390f1b56-264e-4336-83be-dc1fe79bfdcf	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 390f1b56-264e-4336-83be-dc1fe79bfdcf	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -27,9 +27,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39145960-a212-46b4-addb-4b187f6bf6fd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Knight of Wundagore/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 39145960-a212-46b4-addb-4b187f6bf6fd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Knight of Wundagore/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 39145960-a212-46b4-addb-4b187f6bf6fd	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Knight of Wundagore/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3918eaa7-5a34-4d6a-be93-a95e733d041b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3918eaa7-5a34-4d6a-be93-a95e733d041b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3918eaa7-5a34-4d6a-be93-a95e733d041b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3918eaa7-5a34-4d6a-be93-a95e733d041b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:merchant-of-venom:cast:s1,f:xs:XP:merchant-of-venom:cast:s1	-	-	-	8c0bd19283bb	-	e254fc0e3868	-	-	2026-11-24	xproof
+3918eaa7-5a34-4d6a-be93-a95e733d041b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:merchant-of-venom:cast:s1,f:xs:XP:merchant-of-venom:cast:s1	-	-	-	8c0bd19283bb	-	e254fc0e3868	-	-	2026-11-24	xproof
+3918eaa7-5a34-4d6a-be93-a95e733d041b	f0/t1	Sacrificed	agreed	-	FX	start	4	0	x:xs:XP:merchant-of-venom:cast:s1,f:xs:XP:merchant-of-venom:cast:s1	-	-	-	8c0bd19283bb	-	e254fc0e3868	-	-	2026-11-24	xproof
 391978f6-0bbc-41e8-9246-f7d0e21c7900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 391978f6-0bbc-41e8-9246-f7d0e21c7900	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 391f1331-7577-4bf4-a9ed-2f55ded4cbd8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanguine-glorifier:f0t0:s1,f:xs:XP:sanguine-glorifier:f0t0:s1	-	-	-	d864b561c9cb	-	9430a385d1d9	-	-	2026-11-24	xproof
@@ -183,8 +183,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39c813e1-0e26-440a-b9bd-e781f7576b8b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bebop, Warthog Warrior/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 39cae244-96e1-4ea3-899a-3aa871cca31c	cast	cast-resolve	agreed	-	X	scen	1	0	Slumbering Cerberus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 39cae244-96e1-4ea3-899a-3aa871cca31c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Slumbering Cerberus/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-39d283e0-9d9b-4c04-aa6a-66a9883af9a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39d283e0-9d9b-4c04-aa6a-66a9883af9a2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+39d283e0-9d9b-4c04-aa6a-66a9883af9a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toucan-puffin:f0t0:s1,f:xs:XP:toucan-puffin:f0t0:s1	-	-	-	8c0bd19283bb	-	854d1004e576	-	-	2026-11-24	xproof
+39d283e0-9d9b-4c04-aa6a-66a9883af9a2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:toucan-puffin:f0t0:s1,f:xs:XP:toucan-puffin:f0t0:s1	-	-	-	8c0bd19283bb	-	854d1004e576	-	-	2026-11-24	xproof
 39d4373b-35b4-4ceb-b4d5-9ca474365eb0	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	240c2bc7596e	-	-	2026-11-24	xproof
 39d60cd8-bebc-407d-b361-8e49e70e339a	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39d60cd8-bebc-407d-b361-8e49e70e339a	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -162,8 +162,8 @@ a7c96442-706b-4fd8-9b38-052872dafe58	combat#1.block	combat#1.block	agreed	-	X	sc
 a7c96442-706b-4fd8-9b38-052872dafe58	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Throne of the Grim Captain/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7c96442-706b-4fd8-9b38-052872dafe58	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Throne of the Grim Captain/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7c96442-706b-4fd8-9b38-052872dafe58	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Throne of the Grim Captain/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a7cac6c3-cbb1-41f4-905d-2eb581e8e2e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7cac6c3-cbb1-41f4-905d-2eb581e8e2e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7cac6c3-cbb1-41f4-905d-2eb581e8e2e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:siegfried-famed-swordsman:f0t0:s1,f:xs:XP:siegfried-famed-swordsman:f0t0:s1	-	-	-	8c0bd19283bb	-	58535954e90b	-	-	2026-11-24	xproof
+a7cac6c3-cbb1-41f4-905d-2eb581e8e2e0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:siegfried-famed-swordsman:f0t0:s1,f:xs:XP:siegfried-famed-swordsman:f0t0:s1	-	-	-	8c0bd19283bb	-	58535954e90b	-	-	2026-11-24	xproof
 a7cb1da6-e56a-42b6-8087-cf822783373f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7cb1da6-e56a-42b6-8087-cf822783373f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 a7cc0f6b-6b17-4e76-b2a6-6a6ee2519b61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -21,8 +21,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 541adb13-1277-4c9e-ae1e-976f7aac1c72	cast	cast-resolve	agreed	-	X	scen	1	0	Return from the Wilds/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 541b7b2f-7bb0-4858-8dc5-6e50de443c33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541b7b2f-7bb0-4858-8dc5-6e50de443c33	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-541ba65b-9b4e-45bb-9055-4f7560563425	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-541ba65b-9b4e-45bb-9055-4f7560563425	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+541ba65b-9b4e-45bb-9055-4f7560563425	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:scourge-of-the-undercity:cast:s1,f:xs:XP:scourge-of-the-undercity:cast:s1	-	-	-	8c0bd19283bb	-	16117075ec4a	-	-	2026-11-24	xproof
+541ba65b-9b4e-45bb-9055-4f7560563425	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:scourge-of-the-undercity:cast:s1,f:xs:XP:scourge-of-the-undercity:cast:s1	-	-	-	8c0bd19283bb	-	16117075ec4a	-	-	2026-11-24	xproof
 541c6564-ec39-4b14-8c02-dd6a5d122ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541f13aa-a1ed-453a-b719-82daef1be607	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:manipulate-fate:cast:s1,f:xs:XP:manipulate-fate:cast:s1	-	-	-	5f2128bf97e4	-	c5cc29567650	-	-	2026-11-24	xproof
 54216953-c575-4e08-9bee-384721c0bc4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Temur Monument/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:temur-monument:f0t0:s2,f:xs:XP:temur-monument:f0t0:s2	-	-	-	267e485f6204	-	1e8a1ad31d3a	-	-	2026-11-24	xproof
 546a217a-ac24-4fc0-97a8-424cfe1aafc0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-546a217a-ac24-4fc0-97a8-424cfe1aafc0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+546a217a-ac24-4fc0-97a8-424cfe1aafc0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 546f037b-aea8-4c7a-9b66-373f1be0bac6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 546f037b-aea8-4c7a-9b66-373f1be0bac6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54702a84-3125-41a7-a875-fe2ec870836d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:war-squeak:f0t0:s2,f:xs:XP:war-squeak:f0t0:s2	-	-	-	e07cf3a05ba5	-	79cd5b91fdff	-	-	2026-11-24	xproof
@@ -144,9 +144,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54af9e23-459e-470d-9b0e-e91a0fa45c98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wandering-champion:cast:s1,f:xs:XP:wandering-champion:cast:s1	-	-	-	d864b561c9cb	-	c358f7a4053e	-	-	2026-11-24	xproof
 54af9e23-459e-470d-9b0e-e91a0fa45c98	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 54b3ccdc-e5b0-44d9-bc81-a296fc5dc005	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rosemane-centaur:cast:s1,f:xs:XP:rosemane-centaur:cast:s1	-	-	-	d864b561c9cb	-	dc6cda715c1f	-	-	2026-11-24	xproof
-54b44499-398b-47ad-b790-bd5b5994d1a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54b44499-398b-47ad-b790-bd5b5994d1a6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54b44499-398b-47ad-b790-bd5b5994d1a6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+54b44499-398b-47ad-b790-bd5b5994d1a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:village-pillagers:f0t0:s1,f:xs:XP:village-pillagers:f0t0:s1	-	-	-	8c0bd19283bb	-	f0d2ae46caae	-	-	2026-11-24	xproof
+54b44499-398b-47ad-b790-bd5b5994d1a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:village-pillagers:f0t0:s1,f:xs:XP:village-pillagers:f0t0:s1	-	-	-	8c0bd19283bb	-	f0d2ae46caae	-	-	2026-11-24	xproof
+54b44499-398b-47ad-b790-bd5b5994d1a6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 54b5e429-7a44-480d-bea4-4f8eeb7449b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54b5e429-7a44-480d-bea4-4f8eeb7449b5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54bd7b7c-4052-437d-b2e4-311339e8e16e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

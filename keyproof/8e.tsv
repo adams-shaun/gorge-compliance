@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e025cda-71c5-4d06-8436-decd408667af	cast	cast-resolve	agreed	-	X	scen	1	0	Mightform Harmonizer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8e025cda-71c5-4d06-8436-decd408667af	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mightform Harmonizer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8e03797d-dd61-439f-b4ce-996cd71bdcf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e03797d-dd61-439f-b4ce-996cd71bdcf5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8e03797d-dd61-439f-b4ce-996cd71bdcf5	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:iroh-firebending-instructor:f0t0:s1,f:xs:XP:iroh-firebending-instructor:f0t0:s1	-	-	-	8c0bd19283bb	-	6dae773a9eff	-	-	2026-11-24	xproof
 8e04a5e0-e22c-430b-a39a-c9f38e16ea86	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-faith:f0t0:s1,f:xs:XP:guardian-of-faith:f0t0:s1	-	-	-	d864b561c9cb	-	0bcd591c19ad	-	-	2026-11-24	xproof
 8e04a5e0-e22c-430b-a39a-c9f38e16ea86	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-faith:f0t0:s1,f:xs:XP:guardian-of-faith:f0t0:s1	-	-	-	d864b561c9cb	-	0bcd591c19ad	-	-	2026-11-24	xproof
 8e0b605f-2095-4189-8c71-9d1ac93db42e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sudden-insight:cast:s1,f:xs:XP:sudden-insight:cast:s1	-	-	-	d864b561c9cb	-	d7a3b583db5d	-	-	2026-11-24	xproof
@@ -63,8 +63,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e5026da-4859-4f30-824c-a49ac308e91a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e5057ae-165c-4fe4-b712-a638b7eea038	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 8e514bc9-7c8c-4257-9dbc-19a78f61df05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e514bc9-7c8c-4257-9dbc-19a78f61df05	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e514bc9-7c8c-4257-9dbc-19a78f61df05	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8e514bc9-7c8c-4257-9dbc-19a78f61df05	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:phantasmal-shieldback:f0t1:s1,f:xs:XP:phantasmal-shieldback:f0t1:s1	-	-	-	8c0bd19283bb	-	cf5e36ff1723	-	-	2026-11-24	xproof
+8e514bc9-7c8c-4257-9dbc-19a78f61df05	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phantasmal-shieldback:f0t1:s1,f:xs:XP:phantasmal-shieldback:f0t1:s1	-	-	-	8c0bd19283bb	-	cf5e36ff1723	-	-	2026-11-24	xproof
 8e51a07d-8618-4908-8798-bd28bc9b5bbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e51fdb8-4f83-4e94-b36c-40a501075ecb	cast	cast-resolve	agreed	-	X	scen	1	0	Lady Octopus, Inspired Inventor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8e51fdb8-4f83-4e94-b36c-40a501075ecb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lady Octopus, Inspired Inventor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nurturing Pixie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Nurturing Pixie/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:nurturing-pixie:f0t0:s2,f:xs:XP:nurturing-pixie:f0t0:s2	-	-	-	267e485f6204	-	f1a203d4f380	-	-	2026-11-24	xproof
-8ed27504-f86b-4ce5-9395-7029825176ab	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ed27504-f86b-4ce5-9395-7029825176ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-ambushers:cast:s1,f:xs:XP:fire-nation-ambushers:cast:s1	-	-	-	8c0bd19283bb	-	250a29d673fe	-	-	2026-11-24	xproof
 8ed57194-7508-4aef-9373-64f7e80612d8	cast	cast	agreed	-	F	start	4	0	f:xs:XP:treachery:cast:s1	-	-	-	5f2128bf97e4	-	90b567b0ac8f	-	-	2026-11-24	xproof
 8ed57194-7508-4aef-9373-64f7e80612d8	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:treachery:cast:s1	-	-	-	5f2128bf97e4	-	90b567b0ac8f	-	-	2026-11-24	xproof
 8ed7791d-6d75-4cd7-9428-c731f623b241	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dreamcaller-siren:cast:s1,f:xs:XP:dreamcaller-siren:cast:s1	-	-	-	d864b561c9cb	-	163d476a773c	-	-	2026-11-24	xproof
