@@ -74,6 +74,33 @@ func TestForgeExportCarriesDividedSplit(t *testing.T) {
 	}
 }
 
+// TestForgeExportLoneTargetDivisionNoSplit: a DividedAsYouChoose$ spell cast
+// at one target has one legal division (CR 601.2d), so gorge asks nothing and
+// Forge poses no division either. The Forge contract must not synthesize the
+// forced lone-target "damage_split" its driver can never consume. Both shapes
+// that carry a cast's targets are covered: an xproof item's step answers and
+// the generator's target list.
+func TestForgeExportLoneTargetDivisionNoSplit(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	reqs, _ := exportInline(t, reg,
+		`{"id":"lone-answer","card":"Flames of the Firebrand","template":"cast-resolve","name":"x","cr":["601.2d"],"why":"lone divided target from answers","setup":{"p0":{"hand":["Flames of the Firebrand"]},"p1":{}},"steps":[{"op":"cast","seat":0,"card":"p0:Flames of the Firebrand","mana":"CCR","answers":[{"kind":"target","pick":["p1"]}]},{"op":"resolve","seat":0}]}`,
+		`{"id":"lone-target","card":"Forked Bolt","template":"cast-resolve","name":"y","cr":["601.2d"],"why":"lone divided target from a generator step","setup":{"p0":{"hand":["Forked Bolt"]},"p1":{}},"steps":[{"op":"cast","seat":0,"card":"p0:Forked Bolt","mana":"R","targets":["p1"]},{"op":"resolve","seat":0}]}`)
+	for _, rq := range reqs {
+		var lone bool
+		for _, d := range rq.GorgeDecisions {
+			if d.Resume == "damage_split" {
+				t.Errorf("%s: a lone-target divided cast exported a damage_split Forge never asks for: %+v", rq.ID, d)
+			}
+			if d.Kind == "target" && len(d.PickRefs) == 1 {
+				lone = true
+			}
+		}
+		if !lone {
+			t.Fatalf("%s: precondition: no lone root target ask in gorge_decisions: %+v", rq.ID, rq.GorgeDecisions)
+		}
+	}
+}
+
 // echoed adds a request_sha field to a Forge row, as the driver now does.
 func echoed(t *testing.T, row []byte, sha string) []byte {
 	t.Helper()

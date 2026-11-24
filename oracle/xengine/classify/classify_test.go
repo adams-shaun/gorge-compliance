@@ -1030,8 +1030,9 @@ func TestClassifyShuffledTopExile(t *testing.T) {
 // graveyard together may sit in either order (CR 601.2h, 404.3), so a swap at a
 // cast or activate step agrees, and stays agreed at the later steps where the
 // cards hold their place; a real difference after the swap is still reported.
-// The same swap at a pass step (an SBA batch) is a harness order finding, and a
-// one-card arrival, a reorder of cards already there or a different multiset
+// The same swap at a pass step with nothing resolving (an SBA batch) is a
+// harness order finding, while a resolving spell's pile agrees (CR 404.3) and an
+// SBA batch behind a resolution does not, and a one-card arrival, a reorder of cards already there or a different multiset
 // stays a divergence.
 func TestClassifyGraveyardOrderSimultaneous(t *testing.T) {
 	item, _, g := fixture(0)
@@ -1067,6 +1068,99 @@ func TestClassifyGraveyardOrderSimultaneous(t *testing.T) {
 		if c.mill {
 			g.Snapshots[2].Players[1].LibraryCount--
 		}
+		x := follower(g, func(x *oraclediff.XResult) { set(&x.Snapshots[2], c.follow...) })
+		for _, engine := range []string{"xmage", "forge"} {
+			if f := Classify(item, nil, g, x, engine); f.Class != c.want {
+				t.Errorf("%s (%s): class %q, want %q (%+v)", c.name, engine, f.Class, c.want, f)
+			}
+		}
+	}
+
+	// A pass step that resolves a spell: the cards the effect put there together
+	// (a pile from the library) may sit in either order, the spell's own card is
+	// on top in both and outside the tie -- also with a setup ref's "#k" ordinal
+	// and with an alternate cast face named on the stack -- and a state-based
+	// batch (named, face-down or renamed permanents), a pass with nothing
+	// resolving, or a real difference is still reported.
+	spell := []rules.OracleSnapStack{{Kind: "spell", Source: "p1:Steam Augury"}}
+	perm := func(owner int, names ...string) []rules.OracleSnapPerm {
+		var ps []rules.OracleSnapPerm
+		for _, n := range names {
+			ps = append(ps, rules.OracleSnapPerm{Ref: "p1:" + n, Name: n, Owner: owner, Controller: owner})
+		}
+		return ps
+	}
+	// A face-down permanent has no battlefield name (CR 708.2a) but keeps its
+	// card's ref and name in the graveyard.
+	faceDown := func(names ...string) []rules.OracleSnapPerm {
+		var ps []rules.OracleSnapPerm
+		for _, n := range names {
+			ps = append(ps, rules.OracleSnapPerm{Ref: "p1:" + n, Owner: 1, Controller: 1, FaceDown: true})
+		}
+		return ps
+	}
+	resolve := []struct {
+		name          string
+		stack         []rules.OracleSnapStack
+		stackAfter    []rules.OracleSnapStack
+		bfBefore      []rules.OracleSnapPerm
+		bfAfter       []rules.OracleSnapPerm
+		before        []string
+		gorge, follow []string
+		want          string
+	}{
+		{"pile swapped, the spell on top in both", spell, nil, nil, nil, nil,
+			[]string{"Island", "Island", "Mountain", "Island", "Steam Augury"},
+			[]string{"Island", "Island", "Island", "Mountain", "Steam Augury"}, ClassAgree},
+		{"pile swapped with a land of the same name on the battlefield", spell, nil, perm(1, "Island"), perm(1, "Island"), []string{"Z"},
+			[]string{"Z", "Island", "Mountain", "Steam Augury"}, []string{"Z", "Mountain", "Island", "Steam Augury"}, ClassAgree},
+		{"mill by an ability, no spell card", []rules.OracleSnapStack{{Kind: "ability", Source: "p1:Mill Rig"}}, nil, nil, nil, nil,
+			[]string{"A", "B", "C"}, []string{"C", "A", "B"}, ClassAgree},
+		{"the spell below the pile in one engine", spell, nil, nil, nil, nil,
+			[]string{"A", "B", "Steam Augury"}, []string{"Steam Augury", "A", "B"}, ClassHarness},
+		{"duplicate-named spell ref with an ordinal, pile swapped", []rules.OracleSnapStack{{Kind: "spell", Source: "p1:Steam Augury#2"}}, nil, nil, nil, nil,
+			[]string{"A", "B", "Steam Augury"}, []string{"B", "A", "Steam Augury"}, ClassAgree},
+		{"duplicate-named spell ref with an ordinal, the spell below", []rules.OracleSnapStack{{Kind: "spell", Source: "p1:Steam Augury#2"}}, nil, nil, nil, nil,
+			[]string{"A", "B", "Steam Augury"}, []string{"Steam Augury", "A", "B"}, ClassHarness},
+		{"alternate-face spell ref, the spell below the pile", []rules.OracleSnapStack{{Kind: "spell", Source: "p1:Stomp#2"}}, nil, nil, nil, nil,
+			[]string{"A", "B", "Bonecrusher Giant"}, []string{"Bonecrusher Giant", "A", "B"}, ClassHarness},
+		{"permanent spell's effect mills, the card is not in the graveyard", []rules.OracleSnapStack{{Kind: "spell", Source: "p1:Mire Triton"}}, nil, nil, perm(1, "Mire Triton"), nil,
+			[]string{"A", "B"}, []string{"B", "A"}, ClassAgree},
+		{"pile cards differ", spell, nil, nil, nil, nil,
+			[]string{"A", "B", "Steam Augury"}, []string{"A", "C", "Steam Augury"}, ClassDiverge},
+		{"state-based batch behind the spell's card", spell, nil, perm(1, "Bear", "Wolf"), nil, nil,
+			[]string{"Steam Augury", "Bear", "Wolf"}, []string{"Steam Augury", "Wolf", "Bear"}, ClassHarness},
+		{"state-based batch of face-down permanents", spell, nil, faceDown("Bear", "Wolf"), nil, nil,
+			[]string{"Bear", "Wolf", "Steam Augury"}, []string{"Wolf", "Bear", "Steam Augury"}, ClassHarness},
+		{"state-based batch of renamed permanents", spell, nil,
+			[]rules.OracleSnapPerm{
+				{Ref: "p1:Grizzly Bears", Name: "Bear", Owner: 1, Controller: 1},
+				{Ref: "p1:Silvercoat Lion", Name: "Wolf", Owner: 1, Controller: 1},
+			}, nil, nil,
+			[]string{"Grizzly Bears", "Silvercoat Lion", "Steam Augury"},
+			[]string{"Silvercoat Lion", "Grizzly Bears", "Steam Augury"}, ClassHarness},
+		{"nothing on the stack", nil, nil, nil, nil, nil,
+			[]string{"A", "B", "Steam Augury"}, []string{"B", "A", "Steam Augury"}, ClassHarness},
+		{"a pass with the same object still on the stack resolves nothing", spell, spell, nil, nil, nil,
+			[]string{"A", "B"}, []string{"B", "A"}, ClassHarness},
+		{"a countered spell's card is a move, not a choice", []rules.OracleSnapStack{
+			{Kind: "spell", Source: "p1:Counterspell"},
+			{Kind: "spell", Source: "p1:Target Spell"},
+		}, nil, nil, nil, nil,
+			[]string{"Target Spell", "Counterspell"}, []string{"Counterspell", "Target Spell"}, ClassHarness},
+		{"one card from the effect", spell, nil, nil, nil, []string{"Z", "A"},
+			[]string{"Z", "A", "B", "Steam Augury"}, []string{"A", "Z", "B", "Steam Augury"}, ClassDiverge},
+	}
+	for _, c := range resolve {
+		g := rules.OracleResult{Snapshots: append([]rules.OracleSnapshot(nil), g.Snapshots...)}
+		for i := 1; i <= 2; i++ {
+			g.Snapshots[i].Players = append([]rules.OracleSnapPlayer(nil), g.Snapshots[i].Players...)
+		}
+		g.Snapshots[1].Stack, g.Snapshots[1].Permanents = c.stack, c.bfBefore
+		g.Snapshots[2].Stack, g.Snapshots[2].Permanents = c.stackAfter, c.bfAfter
+		g.Snapshots[2].Checkpoint = "step 1 (pass)"
+		set(&g.Snapshots[1], c.before...)
+		set(&g.Snapshots[2], c.gorge...)
 		x := follower(g, func(x *oraclediff.XResult) { set(&x.Snapshots[2], c.follow...) })
 		for _, engine := range []string{"xmage", "forge"} {
 			if f := Classify(item, nil, g, x, engine); f.Class != c.want {

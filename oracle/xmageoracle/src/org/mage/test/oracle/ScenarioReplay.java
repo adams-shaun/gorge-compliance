@@ -1281,6 +1281,38 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return true;
         }
 
+        /**
+         * RevealAndSeparatePilesEffect (Steam Augury, Fact or Fiction) asks the
+         * chooser Player.choosePile, not chooseUse, and TestPlayer.choosePile
+         * hands that to the AI without reading the choice queue, so the
+         * generator's scripted pile answer was left over. A leading Yes/No is
+         * the answer: Yes puts pile1 (the separator's chosen cards) in hand.
+         * With nothing scripted the AI still chooses.
+         */
+        @Override
+        public boolean choosePile(Outcome outcome, String message, List<? extends Card> pile1,
+                List<? extends Card> pile2, Game game) {
+            Boolean scripted = scriptedPileAnswer(getChoices());
+            if (scripted != null) {
+                return scripted;
+            }
+            return super.choosePile(outcome, message, pile1, pile2, game);
+        }
+
+        /** Consumes a leading Yes/No from the choice queue as a pile pick;
+         * null (queue untouched) when the head is anything else. */
+        static Boolean scriptedPileAnswer(List<String> choices) {
+            if (choices.isEmpty()) {
+                return null;
+            }
+            String head = choices.get(0);
+            if (!head.equals("Yes") && !head.equals("No")) {
+                return null;
+            }
+            choices.remove(0);
+            return head.equals("Yes");
+        }
+
         @Override
         public ScriptedChoicePlayer copy() {
             return new ScriptedChoicePlayer(this);
@@ -1561,8 +1593,34 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * and every other candidate is matched by name or setup alias. Shared
          * by the choose and chooseTarget forced-pick paths so a player
          * candidate cannot be missed by one of them. */
+        /** The picks of one queued answer: TestPlayer's "^" join splits into
+         * its segments, in order; any other answer is its own one segment. */
+        static List<String> answerSegments(String answer) {
+            List<String> parts = new ArrayList<>();
+            for (String part : answer.split("\\^")) {
+                if (!part.isEmpty()) {
+                    parts.add(part);
+                }
+            }
+            return parts;
+        }
+
         private boolean answerNamesCandidate(Game game, UUID id, String answer) {
             if (answer == null) {
+                return false;
+            }
+            if (answer.contains("^")) {
+                // A multi-pick answer ("Ornithopter^Sol Ring", TestPlayer's
+                // "^" join) names a candidate when any segment does. Missing
+                // it made a forced ask take every candidate in XMage's
+                // possibleTargets (HashSet) order, so Rottenmouth Viper's two
+                // sacrificed permanents reached the graveyard in a random
+                // order and the scripted pick was left unused.
+                for (String part : answerSegments(answer)) {
+                    if (answerNamesCandidate(game, id, part)) {
+                        return true;
+                    }
+                }
                 return false;
             }
             if (answer.startsWith("targetPlayer=")) {
@@ -2465,11 +2523,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
 
         private boolean chooseTargetInSegment(Outcome outcome, mage.target.Target target, Ability source, Game game) {
-            // An adjusted spell's open slot is closed only when XMage asks
-            // again after the scenario's answers: a slot whose candidates are
-            // exhausted never asks, so a skip queued up front would be left
-            // unused and fail assertAllCommandsUsed.
-            closeAskedAgain(getTargets(), owner.isAdjustedSpellAsk(source, game));
+            // An adjusted spell's target objects are rebuilt after cast setup,
+            // so close an open slot before the ordinary automatic choices: a
+            // slot whose candidates are exhausted never asks, so a skip
+            // queued up front would be left unused and fail
+            // assertAllCommandsUsed.
+            boolean adjustedAsk = owner.isAdjustedSpellAsk(source, game);
+            if (adjustedAsk) {
+                closeCastAskedAgain(getTargets(), source,
+                        target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(), target.getSize());
+            }
             mage.target.Target orig = target.getOriginalTarget();
             if (isAttachmentChoice(target)) {
                 UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
@@ -2527,6 +2590,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                 }
                 return chosen;
+            }
+            if (!adjustedAsk) {
+                // No automatic choice above claimed this ask, and the scenario
+                // has no answer left: close an "up to" slot XMage actually
+                // posed (max > min, minimum already selected), but only when
+                // the ask is a cast ask. An unscripted ordinary resolution or
+                // activation ask stays a strict miss, so a divergence is not
+                // silently turned into a skip. This is the only skip the cast
+                // step gets, since it queues just the recorded targets
+                // (Hunters' Feast, Rabid Bite).
+                closeCastAskedAgain(getTargets(), source,
+                        target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(), target.getSize());
             }
             if (target.getSize() < target.getMaxNumberOfTargets()) {
                 // A lone legal candidate is not a choice: gorge settles it
@@ -3881,12 +3956,35 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return object != null && adjustedCasts.contains(object.getName());
     }
 
-    /** An ask for an adjusted spell's target with no scenario answer left skips
-     * the slot (an "up to" slot with candidates remaining). */
-    static void closeAskedAgain(List<String> queue, boolean adjustedSpellAsk) {
-        if (adjustedSpellAsk && queue.isEmpty()) {
-            queue.add(TestPlayer.TARGET_SKIP);
+    /** Whether an ask belongs to a cast: the spell ability itself (including
+     * an adjusted spell's rebuilt target objects) or the Zone.STACK triggered
+     * ability XMage uses for "when you cast this spell" (Ulamog, the
+     * Ceaseless Hunger). A resolution or activation ask is not a cast, so an
+     * unscripted "up to" slot there must stay a strict miss rather than be
+     * silently skipped. */
+    static boolean isCastTargetAsk(Ability source) {
+        if (source == null) {
+            return false;
         }
+        return source.getAbilityType() == mage.constants.AbilityType.SPELL
+                || (source instanceof mage.abilities.TriggeredAbility && source.getZone() == Zone.STACK);
+    }
+
+    /** An ask XMage actually poses with no scenario answer left closes the
+     * slot when it is a cast ask's "up to" target (max > min) whose minimum is
+     * already selected. A required slot still short of its minimum is a
+     * scenario error and gets no skip, and neither does a completed fixed
+     * slot (max <= min): TestPlayer rejects a skip on one ("Wrong skip
+     * command found - it can be used with up to targets"), and XMage does not
+     * ask a completed slot anyway. A non-cast ask is left unanswered so the
+     * strict run reports it. */
+    static void closeCastAskedAgain(List<String> queue, Ability source,
+            int minTargets, int maxTargets, int selected) {
+        if (!isCastTargetAsk(source) || !queue.isEmpty() || selected < minTargets
+                || maxTargets <= minTargets) {
+            return;
+        }
+        queue.add(TestPlayer.TARGET_SKIP);
     }
 
     /** An adjusted spell must receive targets through the cast-time chooser. */
@@ -4107,33 +4205,33 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return targetsDivided(spellAbility(name));
     }
 
-    /** Whether n answers already reach the combined maximum of the card's
-     * spell-ability target objects, so no slot is left to skip. */
-    private static boolean targetSlotsFilled(String name, int n) {
+    /** Whether a cast's recorded targets live on a cast trigger: the spell
+     * ability declares no target, but a Zone.STACK triggered ability of the
+     * card does (Ulamog, the Ceaseless Hunger's "When you cast this spell,
+     * exile two target permanents"). Those targets belong to the trigger's
+     * own chooser after the cast, not to the spell, so they are queued and
+     * the spell has no slot of its own to fill or skip. */
+    private static boolean spellTargetsOnCastTrigger(String name) {
         CardInfo info = CardRepository.instance.findCard(name);
         Card c = info == null ? null : info.createCard();
-        if (c == null) {
-            return false;
-        }
-        return !targetSlotNeedsSkip(c.getSpellAbility().getAllSelectedTargets(), n);
+        return c != null && spellTargetsOnCastTrigger(c.getSpellAbility(), c.getAbilities());
     }
 
-    /** An unfilled or open target slot needs an explicit skip to finish casting.
-     * XMage poses each slot in order and a slot closes at its maximum, so the
-     * supplied answers leave an ask open only when they total less than every
-     * slot's maximum (Rabid Bite's two required slots, both filled, ask nothing
-     * more: a trailing skip there is left unused). A spell with no declared
-     * slot gets its targets from an adjuster after cast setup, so it keeps the
-     * skip. */
-    static boolean targetSlotNeedsSkip(List<mage.target.Target> targets, int supplied) {
-        if (targets.isEmpty()) {
-            return true;
+    /** As above, from the card's spell ability and abilities (so the test can
+     * drive it without the card repository). An adjuster's targets are
+     * handled before this predicate is consulted. */
+    static boolean spellTargetsOnCastTrigger(Ability spell, List<? extends Ability> abilities) {
+        if (spell == null || !spell.getAllSelectedTargets().isEmpty()) {
+            return false;
         }
-        long capacity = 0;
-        for (mage.target.Target t : targets) {
-            capacity += t.getMaxNumberOfTargets();
+        for (Ability a : abilities) {
+            if (a instanceof mage.abilities.TriggeredAbility
+                    && a.getZone() == Zone.STACK
+                    && !a.getAllSelectedTargets().isEmpty()) {
+                return true;
+            }
         }
-        return supplied < capacity;
+        return false;
     }
 
     /** Normalises a cost label so gorge's pick ("Sacrifice artifact or
@@ -5015,6 +5113,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
     }
 
+    /** Queue a cast step's recorded targets, then cast, and nothing else.
+     * Both the ordinary two-or-more-target arm and the Zone.STACK
+     * cast-trigger arm call this one method; neither appends a speculative
+     * trailing skip. XMage stops asking once a slot's candidates are
+     * exhausted (Hunters' Feast with every player chosen), so a skip
+     * computed from the card's target maximums is left unused ("Targets ...
+     * Count are not equal (found [[target_skip]])"). A slot XMage really
+     * poses again with no scripted answer is closed at ask time by
+     * closeCastAskedAgain. The cast is a callback so the unit test drives
+     * the whole arm (queue and cast) without a game. */
+    void castWithQueuedTargets(TestPlayer p, List<String> tg, Runnable cast) {
+        for (String t : tg) {
+            queueCastTarget(p, t);
+        }
+        cast.run();
+    }
+
     /** Queue the cast's targets with one "[target_skip]" before each offset. */
     private void queueCastTargetsWithSkips(TestPlayer p, List<String> tg, List<Integer> skips) {
         int next = 0;
@@ -5655,6 +5770,124 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return pos.has(key) && pos.get(key).getAsBoolean();
     }
 
+    /** The number of seats the scenario's steps name, at least two. */
+    static int seatCount(JsonArray steps) {
+        int seats = 2;
+        for (int i = 0; i < steps.size(); i++) {
+            seats = Math.max(seats, seatOfStep(steps, i) + 1);
+        }
+        return seats;
+    }
+
+    /** Whether the pass at {@code index} completes a round of passes since
+     * the last action, step entry or resolution (CR 117.4): every player
+     * passed with no action in between. The round restarts at a step entry (a
+     * different step name, or a full round ending a same-named step such as an
+     * additional end step) and at a resolution, which hands priority back to
+     * the active seat. The round's last pass is not assumed to be the
+     * non-active seat's: an action can leave it with the active seat. */
+    static boolean passesInSuccession(JsonArray steps, int index, int seats) {
+        if (index < 0 || !isOp(steps, index, "pass")) {
+            return false;
+        }
+        int round = 0;
+        int prev = -1;
+        for (int i = 0; i <= index; i++) {
+            if (!isOp(steps, i, "pass")) {
+                // An action breaks the round; the last position still names
+                // the step the action was taken in.
+                round = 0;
+                continue;
+            }
+            if (!isPassRun(steps, i)) {
+                // A pass with no position cannot be placed; legacy passes have
+                // no recorded run at all. Count it and keep the last position.
+                round++;
+                continue;
+            }
+            JsonObject pos = steps.get(i).getAsJsonObject().getAsJsonObject("xpos");
+            boolean entry = prev < 0
+                    ? posFlag(pos, "moved")
+                    : !sameStep(steps.get(prev).getAsJsonObject().getAsJsonObject("xpos"), pos);
+            if (entry) {
+                // The pass entered a new step instance: it closed the previous
+                // step's round and is not part of the new step's round.
+                round = 0;
+                prev = i;
+                if (i == index) {
+                    return false;
+                }
+                continue;
+            }
+            round++;
+            boolean closes = !posFlag(pos, "resolves") && round >= Math.max(seats, 2);
+            if (i == index) {
+                return closes;
+            }
+            if (closes || posFlag(pos, "resolves")) {
+                // The next pass is either in a fresh step instance (a closing
+                // pass) or after a resolution handed priority back.
+                round = 0;
+            }
+            prev = i;
+        }
+        return false;
+    }
+
+    /** passesInSuccession for a caller with no game seat count to hand. */
+    static boolean passesInSuccession(JsonArray steps, int index) {
+        return passesInSuccession(steps, index, seatCount(steps));
+    }
+
+    /** Whether two positions name the same turn and step. */
+    private static boolean sameStep(JsonObject a, JsonObject b) {
+        return a.has("turn") && b.has("turn")
+                && a.get("turn").getAsInt() == b.get("turn").getAsInt()
+                && a.has("step") && b.has("step")
+                && a.get("step").getAsString().equals(b.get("step").getAsString());
+    }
+
+    /** The last positioned pass before {@code index}, or -1. */
+    private static int previousPassPosition(JsonArray steps, int index) {
+        for (int i = index - 1; i >= 0; i--) {
+            if (isPassRun(steps, i)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /** Whether the recorded pass at {@code index} enters a new step instance:
+     * a different turn or step name, or a pass that completes a full round of
+     * passes for a same-named step (an additional end step, CR 500.9). The
+     * round is re-derived from the step sequence rather than from the recorded
+     * {@code moved} bit: a pass that follows an action is not in the round
+     * that ends a step (CR 117.4), even when a stale item records a move
+     * there, and the closing pass of a round can be the active seat's, even
+     * when a stale item does not record the move. */
+    static boolean passEntersNewStep(JsonArray steps, int index, int seats) {
+        if (!isPassRun(steps, index)) {
+            return false;
+        }
+        JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+        int prev = previousPassPosition(steps, index);
+        if (prev < 0) {
+            // The first position of the run: only an explicit move can enter a
+            // second occurrence of the setup step (typically main 1).
+            return posFlag(pos, "moved");
+        }
+        JsonObject before = steps.get(prev).getAsJsonObject().getAsJsonObject("xpos");
+        if (!sameStep(before, pos)) {
+            return true;
+        }
+        return passesInSuccession(steps, index, seats);
+    }
+
+    /** passEntersNewStep for a caller with no game seat count to hand. */
+    static boolean passEntersNewStep(JsonArray steps, int index) {
+        return passEntersNewStep(steps, index, seatCount(steps));
+    }
+
     /** Copy the item's xmage_pos entries (parallel to the steps, null for a
      * step that is no pass) onto their steps as "xpos". They ride beside the
      * steps because gorge's runner rejects unknown per-step fields. */
@@ -5679,11 +5912,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * of the step's first priority, so a checkpoint taken in that step already
      * shows the creatures attacking (blocking). Null for any other pass. */
     static PhaseStep declarationAhead(JsonArray steps, int index) {
-        if (!isPassRun(steps, index)) {
+        return declarationAhead(steps, index, seatCount(steps));
+    }
+
+    static PhaseStep declarationAhead(JsonArray steps, int index, int seats) {
+        if (!passEntersNewStep(steps, index, seats)) {
             return null;
         }
         JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
-        if (!posFlag(pos, "moved") || !pos.has("step")) {
+        if (!pos.has("step")) {
             return null;
         }
         String at = pos.get("step").getAsString();
@@ -5749,13 +5986,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * made in the same step, if it is an action of the other seat, starts by
      * yielding priority to that seat (the lone-handoff recipe). */
     static List<String> passRunCommands(JsonArray steps, int index, int activeSeat) {
+        return passRunCommands(steps, index, activeSeat, seatCount(steps));
+    }
+
+    static List<String> passRunCommands(JsonArray steps, int index, int activeSeat, int seats) {
         List<String> cmds = new ArrayList<>();
         if (isPassRun(steps, index - 1) && !isOp(steps, index, "pass")) {
             JsonObject prev = steps.get(index - 1).getAsJsonObject();
             JsonObject pos = prev.getAsJsonObject("xpos");
             String op = str(steps.get(index).getAsJsonObject(), "op");
             boolean acts = op.equals("cast") || op.equals("activate") || op.equals("play");
-            if (acts && !posFlag(pos, "moved") && !posFlag(pos, "resolves")
+            if (acts && !passEntersNewStep(steps, index - 1, seats) && !posFlag(pos, "resolves")
                     && seatOfStep(steps, index - 1) == activeSeat && seatOfStep(steps, index) != activeSeat) {
                 cmds.add(CMD_YIELD_PRIORITY);
             }
@@ -5798,12 +6039,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** Move the replay's turn, step and active seat to where gorge stood after
-     * a pass of a recorded game: the steps that follow are queued there. */
-    private void followPassPosition(JsonObject pos) {
+     * a pass of a recorded game: the steps that follow are queued there. The
+     * occurrence advances only when the pass really entered a new step
+     * instance (passEntersNewStep): counting a handoff pass as one hides its
+     * checkpoint at an occurrence XMage never starts. */
+    private void followPassPosition(JsonArray steps, int index) {
+        JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
         turn = pos.get("turn").getAsInt();
         phase = phaseOfGorgeStep(pos.get("step").getAsString());
         activeSeat = pos.get("active").getAsInt();
-        enterQueuedStep(turn, phase, posFlag(pos, "moved"));
+        enterQueuedStep(turn, phase, passEntersNewStep(steps, index, seats));
         attackAdvancedTurn = false;
         followedPassPosition = true;
     }
@@ -5899,9 +6144,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * step's checkpoint. Pairs and handoffs need the active player to be
      * seat 0; the active seat 1's own lone pass queues nothing. */
     static List<String> passCommands(JsonArray steps, int index, int activeSeat) {
+        return passCommands(steps, index, activeSeat, seatCount(steps));
+    }
+
+    static List<String> passCommands(JsonArray steps, int index, int activeSeat, int seats) {
         List<String> cmds = new ArrayList<>();
         if (isPassRun(steps, index) || isPassRun(steps, index - 1)) {
-            return passRunCommands(steps, index, activeSeat);
+            return passRunCommands(steps, index, activeSeat, seats);
         }
         if (isActiveOwnPass(steps, index, activeSeat)) {
             return cmds;
@@ -6042,7 +6291,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         // CMD_PASS_OWN_PRIORITY is the exception: it runs on the passing
         // non-active seat, not the active seat that carries the checkpoints.
         TestPlayer active = seat(activeSeat);
-        for (String cmd : passCommands(steps(sc0), stepIdx, activeSeat)) {
+        for (String cmd : passCommands(steps(sc0), stepIdx, activeSeat, seats)) {
             switch (cmd) {
                 case CMD_REQUIRE_STACK:
                     if (!requireStackIsStrict(steps(sc0), stepIdx)) {
@@ -6520,6 +6769,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     castObjectSpell(turn, phase, p, castObject);
                 } else if (!tg.isEmpty() && castQueuedTargets(turn, phase, p, cardName, castObject, tg, castAbility)) {
                     // Cast with its targets queued: see castQueuedTargets.
+                } else if (!tg.isEmpty() && spellTargetsOnCastTrigger(cardName)) {
+                    // The spell declares no target: its recorded targets
+                    // belong to a cast trigger (Zone.STACK), whose own chooser
+                    // runs after the cast. Queue them for that ask; any "up
+                    // to" slot it leaves open is closed at ask time. One
+                    // target takes this path too, so it is never set inline
+                    // on a spell ability that has no targets ("Ability has no
+                    // targets").
+                    castWithQueuedTargets(p, tg, () -> castObjectSpell(turn, phase, p, castObject));
                 } else if (tg.size() == 1 && isSeatRef(tg.get(0)) && !hasGift(cardName)) {
                     castObjectSpell(turn, phase, p, castObject, seat(seatOf(tg.get(0))));
                 } else if (tg.size() == 1 && isSeatRef(tg.get(0))) {
@@ -6577,16 +6835,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         cast.add(cardName);
                         return;
                     }
-                    for (String t : tg) {
-                        queueCastTarget(p, t);
-                    }
-                    if (!targetSlotsFilled(cardName, tg.size())) {
-                        // Close an "up to N" slot the scenario left short.
-                        // A skip once every slot is filled is rejected (Pull
-                        // Through the Weft, Rabid Bite).
-                        addTarget(p, TestPlayer.TARGET_SKIP);
-                    }
-                    castObjectSpell(turn, phase, p, castObject);
+                    // No speculative trailing skip: XMage itself stops asking
+                    // once a slot's candidates are exhausted (Hunters'
+                    // Feast's "any number of target players" with every
+                    // player chosen), so a skip queued from the card's
+                    // target maximums is left unused ("Targets ... Count are
+                    // not equal (found [[target_skip]])"). A slot XMage does
+                    // pose again with no scripted answer is closed at ask
+                    // time by closeCastAskedAgain.
+                    castWithQueuedTargets(p, tg, () -> castObjectSpell(turn, phase, p, castObject));
                 }
                 cast.add(cardName);
                 return;
@@ -6663,8 +6920,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // Validated here; its XMage commands are queued around the
                 // checkpoint by queuePassCommands, which the replay loop runs before this step.
                 if (passAction(steps(sc0), stepIdx, activeSeat) == PASS_RUN) {
-                    followPassPosition(st.getAsJsonObject("xpos"));
-                    PhaseStep declaration = declarationAhead(steps(sc0), stepIdx);
+                    followPassPosition(steps(sc0), stepIdx);
+                    PhaseStep declaration = declarationAhead(steps(sc0), stepIdx, seats);
                     if (declaration != null) {
                         // The checkpoint is taken at the last priority before the
                         // declaration and reports the declaration step; the

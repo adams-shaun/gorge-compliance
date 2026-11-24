@@ -489,6 +489,21 @@ func (w *walker) live(typ, name string, v reflect.Value, o *state.Object) bool {
 		// attackedYouTheirLastTurn player property (O-Kagachi, Avenge,
 		// Weathered Sentinels), so it is history no other card can see.
 		return v.Uint() != 0 && w.gameMentions("attackedYouTheirLastTurn")
+	case typ == "Object" && name == "AttackedPlayersThisTurn":
+		// Set for each player a creature was declared attacking this turn
+		// (CR 508.1b) and cleared at TurnChange and on leaving the battlefield;
+		// setup cannot restate the history. Its one reader is the
+		// attackedBySourceThisTurn player property (Port Razer), so a game with
+		// no card naming it does not depend on the record.
+		return v.Uint() != 0 && w.gameMentions("attackedBySourceThisTurn")
+	case typ == "Object" && name == "DealtDamageToPlayersThisTurnHere":
+		// The per-seat damage record (CR 120.1) is set by the DamageProvenance
+		// fold and cleared at TurnChange and on leaving the battlefield; setup
+		// cannot restate which player the object damaged. Its only reader is
+		// Forge's dealtDamageToOppThisTurn filter word (corpus carriers
+		// Dunerider Outlaw and Whirling Dervish), so a game with no card naming
+		// that word does not depend on the record.
+		return v.Uint() != 0 && w.gameMentions("dealtDamageToOppThisTurn")
 	case typ == "Object" && name == "ExiledCards":
 		if selfExile(o) {
 			w.why[reasonSelfExile] = true

@@ -324,6 +324,17 @@ func (r *recorder) setup(e *rules.Engine) {
 					break
 				}
 			}
+			// A triggered mana ability (CR 605.1b) hands the hook its trigger's
+			// effect body, which is no entry of Face().Abilities: mark it, so
+			// the lowering can tell it from a gained or granted activation.
+			if rec.Ability < 0 {
+				for _, tr := range o.Face().Triggers {
+					if tr.Effect == sa {
+						rec.Triggered = true
+						break
+					}
+				}
+			}
 		}
 		rec.Ref = r.refs.refOf(e, source)
 		rec.Card, rec.Face = backFace(e.G.Obj(source))

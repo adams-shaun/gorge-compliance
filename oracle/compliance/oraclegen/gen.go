@@ -1319,6 +1319,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var forage map[int][]string
 	var ownBounce map[int]bool
 	var tapThenUntap map[int]bool
+	var bolster map[int]bool
 	var snaps []rules.OracleSnapshot
 	var orderAsks map[int]bool
 	for _, ex := range extras {
@@ -1327,6 +1328,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if tapThenUntap == nil {
 			tapThenUntap = ex.tapThenUntap
+		}
+		if bolster == nil {
+			bolster = ex.bolster
 		}
 		if forage == nil {
 			forage = ex.forage
@@ -1575,38 +1579,20 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			if d.Resume == "unless_pay" || d.Resume == "unless_decline" {
 				// An unless-pay (UnlessCost$) is XMage's boolean chooseUse,
-				// not a mode ask; the engine models it as a one-option mode
-				// decision whose label is the decline ("Don't pay"). The
-				// driver routes only the literals "yes"/"no" to setChoice
-				// (boolean), so the raw label reaches setChoice(String) and
-				// never answers the ask (std3: Dispelling Exhale, Spectral
-				// Denial).
-				if unlessPolarity(d) == "no" {
-					as = append(as, XAnswer{d.Seat, "choice", "no"})
-					break
-				}
-				if unlessPaidObjects(ds, i) {
-					// A paid unless cost whose components are OBJECT picks
-					// (Sac<, Discard<, Exile<, tapXType<, ...) is two asks in
-					// XMage: the boolean chooseUse "Pay the cost?", then the
-					// cost's own target group, which XMage poses as a
-					// Player.choose -> makeChoose over the CHOICE queue (not
-					// the target queue: SacrificeTargetCost.pay ->
-					// TargetImpl.choose). The engine records the boolean as
-					// the mode here and the picks as the following
-					// "unless_cost" choose_n, which the ordinary choose_n
-					// route below already joins into one aliased choice.
-					// Answer the boolean yes here so chooseUse consumes
-					// it; leaving the paid pick as the mode answer queued the
-					// alias choice at chooseUse's head, which
-					// assertAliasSupportInChoices rejects (Primeval Force,
-					// Rathi Dragon).
-					as = append(as, XAnswer{d.Seat, "choice", "yes"})
-					break
-				}
-				// A paid mana/life unless cost (Lithobraking, Rottenmouth
-				// Viper, Meathook Massacre II) has no component pick and agrees
-				// with XMage only as the ordinary mode pick below.
+				// not a mode ask; the engine models it as a mode decision
+				// whose picked label is the cost paid or the decline ("Don't
+				// pay"). Every XMage unless-pays effect -- sacrifice, exile
+				// or tap the source, counter the spell, do the effect unless
+				// a player pays -- asks chooseUse for ANY payable cost, mana,
+				// life, energy or object components (the cost classes only
+				// differ in cost.canPay/pay). Answer the boolean from the
+				// pick: yes when gorge paid, no when it declined. An object
+				// cost's picks remain the following "unless_cost" choose_n,
+				// which the ordinary choose_n route below already joins into
+				// one aliased choice; leaving the paid pick as a numeric mode
+				// answer sends chooseUse to TestPlayer's AI instead.
+				as = append(as, XAnswer{d.Seat, "choice", unlessPolarity(d)})
+				break
 			}
 			if pickKind(d, 0) == "discard" || d.Resume == "discard" {
 				// Gorge's discard card picker is KModes; XMage uses
@@ -1639,6 +1625,23 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// LABEL ("Abzan", "Khans") -- never a numeric mode. The
 					// label is what gorge's mode decision already carries.
 					as = append(as, XAnswer{d.Seat, "choice", d.Picks[k]})
+					continue
+				}
+				if m, ok := modeNumberFor(d, k, modes); ok && m == ModeKWChoiceQueue {
+					// A Pump KWChoice$ ("gains your choice of ..."): XMage's
+					// GainsChoiceOfAbilitiesEffect asks ONE ChoiceImpl over the
+					// candidate keyword abilities' rule texts, read from the
+					// CHOICE queue by label, never the numeric mode queue
+					// (Lunar Avenger measured: "Missing CHOICE def ... Choose an
+					// ability to gain", mode 1 left unused). The rule text is
+					// the keyword name in lower case.
+					as = append(as, XAnswer{d.Seat, "choice", xmageKeywordRuleText(d.Picks[k])})
+					continue
+				}
+				if m, ok := modeNumberFor(d, k, modes); ok && m == ModeKWBespokeChoiceQueue {
+					// A Pump KWChoice$ on a bespoke-dialog face (Angelic
+					// Skirmisher): the CHOICE queue by XMage's own label.
+					as = append(as, XAnswer{d.Seat, "choice", xmageBespokeChoiceLabel(d.Picks[k])})
 					continue
 				}
 				if m, ok := modeNumberFor(d, k, modes); ok && (m == ModeYesQueue || m == ModeNoQueue) {
@@ -1710,7 +1713,10 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			if d.Resume == "twopiles_pick" && len(d.Picks) == 1 {
 				// The pile pick (Curator of Destinies, Fact or Fiction) is
 				// XMage's opponent.chooseUse("Face-down", "Face-up"), a
-				// boolean choice, never gorge's "First pile"/"Second pile"
+				// boolean choice (RevealAndSeparatePilesEffect's Steam
+				// Augury asks Player.choosePile instead; the driver's
+				// ScriptedChoicePlayer.choosePile reads the same Yes/No),
+				// never gorge's "First pile"/"Second pile"
 				// label (measured 2026-10-14: the label is "Found wrong
 				// choice command"). Taking pile A -- the separator's pile,
 				// the face-down pile XMage's TargetCard selected -- is the
@@ -1857,7 +1863,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", JoinedChoice(d)})
 			} else {
 				for k, label := range d.Picks {
-					switch pickQueue(d, k, label) {
+					switch pickQueue(d, k, label, bolster[i]) {
 					case "skip":
 						// XMage resolves this pick inside its computer player (a
 						// library search) or pays it from the pool (a mana-tapping
@@ -2313,24 +2319,6 @@ func unlessPolarity(d rules.OracleDecision) string {
 	return "yes"
 }
 
-// unlessPaidObjects reports whether the paid unless-pay decision ds[i] opens
-// an object-pick component, the decision gorge's unless walk asks right after
-// the boolean (ResumeKind "unless_cost"). It is a structural lookahead, not a
-// cost-kind list: askUnlessPicks is the only producer of that resume kind, so
-// every Sac/Discard/Exile/tap/return/... unless cost is covered without the
-// caller enumerating them.
-func unlessPaidObjects(ds []rules.OracleDecision, i int) bool {
-	d := ds[i]
-	for j := i + 1; j < len(ds); j++ {
-		n := ds[j]
-		if n.Step != d.Step || n.Seat != d.Seat {
-			continue
-		}
-		return n.Resume == "unless_cost" && len(n.Picks) > 0
-	}
-	return false
-}
-
 // modeNumberFor resolves the k-th pick's 1-based XMage mode number from its
 // label. ok is false when the pick's label names no charm mode -- a
 // non-charm modal or a discard-style picker sharing the "mode" kind; the
@@ -2681,14 +2669,31 @@ const (
 	ModeNoQueue  = -2
 )
 
+// ModeKWChoiceQueue is the sentinel for a Pump KWChoice$ pick ("gains your
+// choice of X, Y or Z"). XMage's GainsChoiceOfAbilitiesEffect builds one
+// ChoiceImpl over the candidate abilities' RULE TEXTS and reads it from the
+// CHOICE queue by label; the numeric mode queue never consumes that answer
+// (measured on Lunar Avenger: "Missing CHOICE def ... Choose an ability to
+// gain", with the scripted mode 1 left unused). Negative like the other queue
+// sentinels, so it never collides with a real 1-based charm position.
+const ModeKWChoiceQueue = -3
+
+// ModeKWBespokeChoiceQueue is the sentinel for a Pump KWChoice$ pick on a face
+// whose XMage class builds its own Choice dialog with its own labels
+// (xmageKWChoiceBespokeFaces: Angelic Skirmisher's "Choose ability for your
+// creatures" over "First strike", "Vigilance", "Lifelink"). Still the CHOICE
+// queue, but the answer is the XMage label, not the keyword rule text.
+const ModeKWBespokeChoiceQueue = -4
+
 // modeNumbers maps each charm mode's label (as gorge's mode decision
 // shows it) to its 1-based position in its Choices$ list, for every Charm
 // on the face -- the spell's own and any modal trigger's. It ALSO carries
-// every DB$ GenericChoice | SetChosenMode$ True label, mapped to the
-// ModeChoiceQueue sentinel: those picks are the same "mode" decision kind
-// to gorge but a different XMage queue, and no in-band discriminator on the
-// decision separates them (a mid-resolution Charm shares Resume "modes"),
-// so the face shape is the authority.
+// every DB$ GenericChoice | SetChosenMode$ True label and every source-proven
+// Pump KWChoice$ label, mapped to the ModeChoiceQueue / ModeKWChoiceQueue
+// sentinels: those picks are the same "mode" decision kind to gorge but a
+// different XMage queue, and no in-band discriminator on the decision
+// separates them (a mid-resolution Charm shares Resume "modes"), so the face
+// shape is the authority.
 // printedMaxPrefix marks the ModeNumbers entries that carry a charm's PRINTED
 // maximum rather than a mode number (see printedMaxKey).
 const printedMaxPrefix = "\x00printed_max\x00"
@@ -2844,6 +2849,23 @@ func modeNumbers(f *cards.Face) map[string]int {
 	for _, label := range choiceDialogLabels(f) {
 		if _, taken := out[label]; !taken {
 			out[label] = ModeChoiceQueue
+		}
+	}
+	// A Pump KWChoice$ ("gains your choice of X, Y or Z") is XMage's
+	// GainsChoiceOfAbilitiesEffect: one ChoiceImpl over the candidate
+	// abilities' RULE TEXTS, read from the CHOICE queue by label
+	// (choice_dialog.go). The answer is the keyword's lower-case rule text,
+	// not gorge's KWChoice$ spelling ("Flying" -> "flying", "Rampage:3" ->
+	// "rampage 3"), so it gets its own sentinel.
+	for _, label := range kwChoiceDialogLabels(f) {
+		if _, taken := out[label]; !taken {
+			out[label] = ModeKWChoiceQueue
+		}
+	}
+	// The bespoke-dialog KWChoice$ faces: same queue, XMage's own labels.
+	for _, label := range kwChoiceBespokeLabels(f) {
+		if _, taken := out[label]; !taken {
+			out[label] = ModeKWBespokeChoiceQueue
 		}
 	}
 	for _, sa := range f.Abilities {
@@ -3830,8 +3852,13 @@ func twoPilesPileAnswer(d rules.OracleDecision) string {
 // pickQueue is xmQueue for the k-th pick, except that a search of ANOTHER
 // player's library (Ancient Vendetta's "search target opponent's ... library")
 // reaches XMage's choice queue: only a search of your own library is the
-// TargetCardInLibrary target ask (measured on the std pass).
-func pickQueue(d rules.OracleDecision, k int, label string) string {
+// TargetCardInLibrary target ask (measured on the std pass). bolster marks
+// the decision as a Bolster tie election, whose counter_pick XMage asks
+// through chooseTarget (bolster_pick.go).
+func pickQueue(d rules.OracleDecision, k int, label string, bolster bool) string {
+	if bolster && pickKind(d, k) == "counter_pick" {
+		return "target"
+	}
 	if d.Retarget {
 		// A ChangeTargets redirect (Bolt Bend) is XMage's chooseTarget:
 		// the new target rides the target queue even though gorge poses it

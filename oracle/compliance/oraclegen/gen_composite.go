@@ -142,7 +142,17 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 		}
 	}
 	searchZones := searchZoneAsks(reg, sc, res.Snapshots, ds)
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, tapThenUntap: tapFirst, snaps: res.Snapshots, orderAsks: orderAsks})
+	// A Bolster tie election is a counter_pick in gorge but XMage's
+	// BolsterEffect asks it through chooseTarget: mark the decisions whose
+	// resolving source carries PutCounter's Bolster$ parameter, so pickQueue
+	// scripts their picks on the TARGET queue (bolster_pick.go).
+	bolsters := map[int]bool{}
+	for i, d := range ds {
+		if bolsterTiePick(reg, sc, res.Snapshots, d) {
+			bolsters[i] = true
+		}
+	}
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, tapThenUntap: tapFirst, bolster: bolsters, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that
@@ -448,7 +458,8 @@ func activationXAnnounces(reg *cards.Registry, sc Scenario, g rules.OracleResult
 // counter-removal family reuses the mana announce (XMage's
 // TalonOfPainRemoveVariableCountersSourceCost overrides announceXValue), so it
 // is not counted again; XMin<N> is the VariableManaCost bound marker, not a
-// cost of its own.
+// cost of its own. A token forgeCostSymbols itself renders as a {X}
+// (Waterbend<X>) is the mana announce above, not a second one beside it.
 func activationXAnnounceCount(cost string) int {
 	n := 0
 	for _, sym := range forgeCostSymbols(cost) {
@@ -472,8 +483,10 @@ func activationXAnnounceCount(cost string) int {
 		if len(parts) == 0 || !strings.EqualFold(strings.TrimSpace(parts[0]), "X") {
 			continue
 		}
-		if strings.HasPrefix(strings.ToLower(head), "subcounter") {
-			// Source-counter removal reuses the mana X.
+		if strings.HasPrefix(strings.ToLower(head), "subcounter") || tokenRendersManaX(tok) {
+			// Source-counter removal and Waterbend<X> both reuse the mana X:
+			// the former overrides XMage's announceXValue, the latter is the
+			// {X} forgeCostSymbols rendered for the rule text above.
 			continue
 		}
 		if strings.EqualFold(head, "Waterbend") {
@@ -484,6 +497,19 @@ func activationXAnnounceCount(cost string) int {
 		n++
 	}
 	return n
+}
+
+// tokenRendersManaX reports whether forgeCostSymbols turns tok itself into a
+// {X}, so the mana count that renders the rule text already counted its
+// announce. Asking the renderer (rather than naming the token) keeps every
+// future token it maps to {X} from being counted a second time.
+func tokenRendersManaX(tok string) bool {
+	for _, sym := range forgeCostSymbols(tok) {
+		if sym == "{X}" {
+			return true
+		}
+	}
+	return false
 }
 
 // castXSizesCost reports a spell whose X also sizes a non-mana part of its
