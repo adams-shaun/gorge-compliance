@@ -1259,7 +1259,35 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 getChoices().add(0, convokeColour);
                 convokeColour = null;
             }
+            numberChoiceAnswer(choice, getChoices());
             return super.choose(outcome, choice, game);
+        }
+
+        /** A "choose a number" pick is queued as "X=<n>", the answer XMage's
+         * getAmount reads. Some cards ask the number through a Choice dialog
+         * instead (Shapeshifter's ShapeshifterEffect: a ChoiceImpl keyed or
+         * labelled "0".."7"), where "X=<n>" names no entry. Rewrite the head
+         * answer to "<n>" only when the dialog offers exactly "<n>" (as a
+         * key, a key's text, or a plain choice) and does not offer "X=<n>".
+         * Returns whether it rewrote the answer. */
+        static boolean numberChoiceAnswer(mage.choices.Choice choice, List<String> choices) {
+            if (choices.isEmpty() || !choices.get(0).matches("X=-?[0-9]+")) {
+                return false;
+            }
+            String head = choices.get(0);
+            String number = head.substring(2);
+            java.util.Collection<String> offered = new ArrayList<>();
+            if (choice.isKeyChoice()) {
+                offered.addAll(choice.getKeyChoices().keySet());
+                offered.addAll(choice.getKeyChoices().values());
+            } else if (choice.getChoices() != null) {
+                offered.addAll(choice.getChoices());
+            }
+            if (offered.contains(head) || !offered.contains(number)) {
+                return false;
+            }
+            choices.set(0, number);
+            return true;
         }
 
         /** Elects the first alternative cost (gorge's AltCostIndex-1 choice)
