@@ -200,7 +200,7 @@ def run_search(conn, args, out):
     where, params = ["card_fts MATCH ?"], [args.query]
     if args.legal:
         where.append("EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id "
-                     "AND l.format=? AND l.status='legal')")
+                     "AND l.format=? AND " + _legal_in_format_sql() + ")")
         params.append(args.legal)
     for spec in args.status or ():
         if "=" not in spec:
@@ -252,6 +252,30 @@ def _eligible_sql():
             "HAVING SUM(CASE WHEN lower(COALESCE(s.set_type,'')) IN (%s) THEN 1 ELSE 0 END)=COUNT(*))" % marks)
 
 
+# A legality row makes a card playable when it says legal or restricted. MTGJSON reports
+# `restricted` for Vintage / Old School cards that are tournament-legal with a copy limit
+# (Black Lotus is `vintage restricted`, not `legal`), and catalogue._legalities keeps those rows.
+# Every legality predicate reads the status through _legal_in_format_sql so no caller can quietly
+# drop restricted again.
+LEGAL_STATUSES_SQL = "('legal', 'restricted')"
+
+
+def _legal_in_format_sql(alias="l"):
+    """SQL: the legality row in `alias` has a playable status (legal or restricted)."""
+    return "%s.status IN %s" % (alias, LEGAL_STATUSES_SQL)
+
+
+def _legal_somewhere_sql():
+    """The card has at least one legality row that makes it playable somewhere.
+
+    `restricted` counts as playable: it is a tournament-legal status with a copy limit, so a card
+    whose only rows are Vintage / Old School restricted is not "legal nowhere". A promo printing
+    of an Un-set card keeps it out of the all-non-tournament tier-5 rule even though no format
+    lists it as legal; the need tier reads this, not the printing set types."""
+    return ("EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id AND %s)"
+            % _legal_in_format_sql())
+
+
 def _level_at_least(level):
     if level not in LEVEL_ORDER:
         raise QueryError("proven: level must be one of %s, got %r" % (", ".join(LEVEL_ORDER), level))
@@ -269,7 +293,7 @@ def run_blockers(conn, args, out):
     where, params = [], []
     if args.format not in ("all", "*", "paper"):
         where.append("EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id "
-                     "AND l.format=? AND l.status='legal')")
+                     "AND l.format=? AND " + _legal_in_format_sql() + ")")
         params.append(args.format)
     where.append(_eligible_sql())
     params.extend(NON_TOURNAMENT_SET_TYPES)
@@ -333,7 +357,7 @@ def run_proven(conn, args, out):
     sql, params = _proven_sql(args.level)
     if args.format:
         sql += (" AND EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id "
-                "AND l.format=? AND l.status='legal')")
+                "AND l.format=? AND " + _legal_in_format_sql() + ")")
         params.append(args.format)
     sql += " ORDER BY c.name, c.oracle_id"
     rows = _rows(conn, sql, params)
@@ -353,7 +377,7 @@ def run_proven_keys(conn, args, out):
     params = []
     if args.format:
         sql += (" AND EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id "
-                "AND l.format=? AND l.status='legal')")
+                "AND l.format=? AND " + _legal_in_format_sql() + ")")
         params.append(args.format)
     sql += " ORDER BY c.name, c.oracle_id"
     _emit(out, ("oracle_id", "name", "type_line", "mana_value", "keys", "agreed", "diagnosed"),
@@ -366,12 +390,21 @@ def _tier_sql(conn, fmt=None, only=None):
     """(sql, params): one row per card with keyproof rows and not curated-excluded,
     columns oracle_id, tier (1 best .. 5 last) and rank (edhrec_rank inside tier 3, else 0).
     `only` is a list of oracle ids to restrict to; `fmt` keeps cards legal in that format."""
-    legal = ("EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id AND l.status='legal' "
-             "AND l.format IN (%s))")
-    whens = ["WHEN (%s) OR substr(c.name,1,2)='A-' THEN 5" % ("NOT " + _eligible_sql()),
-             "WHEN " + legal % "'standard'" + " THEN 1",
-             "WHEN " + legal % "'pioneer','modern'" + " THEN 2"]
+    legal = ("EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id AND " +
+             _legal_in_format_sql() + " AND l.format IN (%s))")
+    whens = ["WHEN (%s) OR substr(c.name,1,2)='A-' THEN 5" % ("NOT " + _eligible_sql())]
     params = list(NON_TOURNAMENT_SET_TYPES)
+    if _has_table(conn, "legality"):
+        # Tiers 1-4 are only for cards playable in at least one format. A promo reprint of an
+        # Un-set card is not made legal by a printing outside NON_TOURNAMENT_SET_TYPES when no
+        # legality row says legal/restricted. The EXISTS guard keeps a legal-nowhere card tier 4
+        # in a partial build whose legality table has no rows (no legality shard), instead of
+        # demoting every card to tier 5. All legality references live inside this guard so a
+        # build without the table still falls back to the edhrec/set-type tiers.
+        whens.append("WHEN EXISTS (SELECT 1 FROM legality) AND NOT %s THEN 5"
+                     % _legal_somewhere_sql())
+        whens.extend(["WHEN " + legal % "'standard'" + " THEN 1",
+                      "WHEN " + legal % "'pioneer','modern'" + " THEN 2"])
     rank = "0"
     if _has_table(conn, "edhrec"):
         whens.append("WHEN EXISTS (SELECT 1 FROM edhrec e WHERE e.oracle_id=c.oracle_id) THEN 3")
@@ -385,7 +418,7 @@ def _tier_sql(conn, fmt=None, only=None):
                rank.replace("c.oracle_id", "t0.oracle_id"), " ".join(whens)))
     if fmt:
         sql += (" AND EXISTS (SELECT 1 FROM legality l WHERE l.oracle_id=c.oracle_id "
-                "AND l.format=? AND l.status='legal')")
+                "AND l.format=? AND " + _legal_in_format_sql() + ")")
         params.append(fmt)
     if only is not None:
         sql += " AND c.oracle_id IN (SELECT value FROM json_each(?))"
