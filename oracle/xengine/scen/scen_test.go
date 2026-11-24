@@ -97,10 +97,15 @@ func TestScenFixtures(t *testing.T) {
 			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, []string{"Shifting Wall"})
 			focusIs(t, f, 0, "Crypt Feaster", "attack", 0)
 		}}},
+		// an upkeep trigger is the card cast on turn 1 and the game run to its
+		// controller's next upkeep (turn 3): placed on the battlefield, the
+		// lowering refuses it at the cut (trigger:upkeep_or_draw)
 		{"Phyrexian Arena", "f0/t0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
-			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Phyrexian Arena"})
-			if f.Active != 1 || f.MaxTurns != 2 {
-				t.Errorf("active %d max_turns %d, want 1 and 2", f.Active, f.MaxTurns)
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Phyrexian Arena"})
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, rep("Swamp", 3))
+			focusIs(t, f, 0, "Phyrexian Arena", "cast", 0)
+			if f.Active != 0 || f.MaxTurns != 3 {
+				t.Errorf("active %d max_turns %d, want 0 and 3", f.Active, f.MaxTurns)
 			}
 		}}},
 		{"Gleaming Barrier", "f0/t0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
@@ -414,4 +419,81 @@ func TestScenUnlistedByXMageIsGenerated(t *testing.T) {
 	if res.Path == "refused" {
 		t.Errorf("%s cast refused %q, want a steps or start scenario", card, res.Reason)
 	}
+}
+
+// startRow is one forced-line start: the placements it must make and the
+// focus that makes the key's event happen.
+type startRow struct {
+	card, key, reason    string
+	active, maxTurns     int
+	p0Hand, p0BF, p1Hand []string
+	p1BF                 []string
+	focusSeat            int
+	focusCard, focusKind string
+	focusAbility         int
+}
+
+func checkStartRows(t *testing.T, rows []startRow) {
+	t.Helper()
+	reg, b := testBuilder(t)
+	for _, r := range rows {
+		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if r.reason != "" {
+				if res.Path != PathRefused || res.Reason != r.reason {
+					t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, r.reason)
+				}
+				return
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Active != r.active || f.MaxTurns != r.maxTurns {
+				t.Errorf("active %d max_turns %d, want %d and %d", f.Active, f.MaxTurns, r.active, r.maxTurns)
+			}
+			listIs(t, "p0 hand", f.Setup.P0.Hand, r.p0Hand)
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.p0BF)
+			listIs(t, "p1 hand", f.Setup.P1.Hand, r.p1Hand)
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, r.p1BF)
+			if r.focusKind == "" {
+				if f.Focus != nil {
+					t.Errorf("focus %+v, want none", f.Focus)
+				}
+				return
+			}
+			focusIs(t, f, r.focusSeat, r.focusCard, r.focusKind, r.focusAbility)
+			raw, err := f.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := DecodeStartFile(raw); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+}
+
+// TestStartPhaseTriggers: a beginning-of-step trigger later in turn 1 than
+// the span's cut (beginning of combat, the end step) is the card on the
+// battlefield; "if it's tapped" (the DSK Survivors' second main phase) is the
+// card attacking; a step before the cut (draw, the first main phase) is the
+// card cast on turn 1 and the game run to that step's next turn for the
+// player ValidPlayer names (turn 3 for you, turn 2 for any player). A
+// descended or Class-level trigger stays refused by name. Carriers: the
+// cards are from the DSK/BLB/LCI refusal tail of the 11-24 census.
+func TestStartPhaseTriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Sinister Monolith", key: "f0/t0", maxTurns: 1, p0BF: []string{"Sinister Monolith"}},
+		{card: "Cautious Survivor", key: "f0/t0", maxTurns: 1, p0BF: []string{"Cautious Survivor"},
+			focusCard: "Cautious Survivor", focusKind: "attack"},
+		{card: "Hulking Raptor", key: "f0/t0", maxTurns: 3, p0Hand: []string{"Hulking Raptor"}, p0BF: rep("Forest", 4),
+			focusCard: "Hulking Raptor", focusKind: "cast"},
+		{card: "Dictate of Kruphix", key: "f0/t0", maxTurns: 2, p0Hand: []string{"Dictate of Kruphix"}, p0BF: rep("Island", 3),
+			focusCard: "Dictate of Kruphix", focusKind: "cast"},
+		{card: "Bandit's Talent", key: "f0/t2", reason: "steps-needed:class-level"},
+	})
 }

@@ -216,6 +216,10 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx}
 			break
 		}
+		if band := trig.Params["ClassBand"]; band != "" && band != "1" {
+			// a Class level's trigger: the start places the Class at level 1
+			return refuse("steps-needed:class-level")
+		}
 		switch trig.Mode {
 		case "ChangesZone":
 			switch {
@@ -242,11 +246,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			p0.Battlefield = []string{card}
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "attack"}
 		case "Phase":
-			if trig.Params["Phase"] != "Upkeep" {
-				return refuse("no-generator:trigger:Phase")
+			if why := phaseStart(reg, b, face, card, generic, trig, f); why != "" {
+				return refuse(why)
 			}
-			p0.Battlefield = []string{card}
-			f.Active, f.MaxTurns = 1, 2
 		default:
 			return refuse("no-generator:trigger:" + trig.Mode)
 		}
