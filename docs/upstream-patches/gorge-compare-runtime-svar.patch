@@ -30,10 +30,10 @@ index 00000000..ecc03602
 +	"github.com/adams-shaun/gorge/testkit/testutil"
 +)
 +
-+// TestFarmRhysticLightning pins the SUP farm windows whose first differing
-+// field is p1.life and whose only cause is Rhystic Lightning: the targeted
-+// player declines the {2}, so the spell's false branch must deal 4, not the
-+// printed SVar default's 2.
++// TestFarmRhysticLightning is a constructed scenario (three Mountains, the
++// spell cast at p1, p1 declines the {2}) for the cause behind the SUP farm
++// windows whose first differing field is p1.life; it is not a replay of them.
++// A declined {2} must take the false branch: deal 4, not the printed default's 2.
 +//
 +// CR 118.12: "Some spells, activated abilities, and triggered abilities read,
 +// '[Do something]. If [a player] [does, doesn't, or can't], [effect].' ... The
@@ -42,7 +42,7 @@ index 00000000..ecc03602
 +// of what events actually occurred." The cost is paid when the spell
 +// resolves; CR 608.2c then has the resolving spell follow its instructions in
 +// the order written, so the StoreSVar's 0 is written before DBDmg reads X.
-+// Forge (and XMage on the shared windows) deal 4; at GORGE_PIN 5437c13946
++// Forge (the only follower on these windows) deals 4; at GORGE_PIN 5437c13946
 +// gorge deals 2 because resolveCountOperand reads the printed
 +// SVar:RhysticPaid default (SVar:RhysticPaid:Number$1) before the runtime
 +// write.
@@ -53,7 +53,7 @@ index 00000000..ecc03602
 +	  "name": "farm-rhystic-lightning-sup-s370",
 +	  "turn": 1,
 +	  "cr": ["118.12", "608.2c"],
-+	  "why": "Rhystic Lightning: declining {2} writes RhysticPaid 0 before DBDmg reads X, so the Compare's false branch deals 4 (Forge/XMage agree)",
++	  "why": "Rhystic Lightning: declining {2} writes RhysticPaid 0 before DBDmg reads X, so the Compare's false branch deals 4 (Forge agrees)",
 +	  "setup": {
 +	    "p0": {"battlefield": ["Mountain", "Mountain", "Mountain"], "hand": ["Rhystic Lightning"], "life": 20},
 +	    "p1": {"life": 20}
