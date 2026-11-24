@@ -118,6 +118,92 @@ func loadXMagePortFiles(t *testing.T) map[string][]xmagePortScenario {
 	return out
 }
 
+// TestXMagePortKnownBugLedger keeps known_bugs.tsv and the committed
+// known_bug scenarios one set. The tsv is read only by cmd/xmageport, so a row
+// left behind after its scenario starts passing (or after it is hand-ported
+// without a known_bug) is otherwise invisible: TestXMagePortScenarios sees
+// only the JSON field, and the generator ignores the tsv row on a pass. Both
+// directions are checked, so a new known_bug scenario without its triaged
+// reason is caught too.
+func TestXMagePortKnownBugLedger(t *testing.T) {
+	t.Parallel()
+	files := loadXMagePortFiles(t)
+	paths := make([]string, 0, len(files))
+	for p := range files {
+		paths = append(paths, p)
+	}
+	sort.Strings(paths)
+	committed := map[string]string{}
+	for _, p := range paths {
+		for _, sc := range files[p] {
+			if sc.KnownBug == "" {
+				continue
+			}
+			if prev, dup := committed[sc.XMage]; dup {
+				t.Errorf("%s: %s carries known_bug more than once (also %s)", p, sc.XMage, prev)
+				continue
+			}
+			committed[sc.XMage] = sc.KnownBug
+		}
+	}
+	ledger := loadKnownBugLedger(t)
+	for _, key := range sortedKnownBugKeys(ledger) {
+		reason, ok := committed[key]
+		switch {
+		case !ok:
+			t.Errorf("known_bugs.tsv row %q names no committed known_bug scenario (delete the stale row)", key)
+		case reason != ledger[key]:
+			t.Errorf("known_bugs.tsv row %q reason differs from the committed scenario:\n  tsv:      %s\n  scenario: %s", key, ledger[key], reason)
+		}
+	}
+	for _, key := range sortedKnownBugKeys(committed) {
+		if _, ok := ledger[key]; !ok {
+			t.Errorf("committed known_bug scenario %q has no known_bugs.tsv row", key)
+		}
+	}
+}
+
+// loadKnownBugLedger reads cmd/xmageport/known_bugs.tsv (Class#method TAB
+// reason), rejecting the malformed or duplicate rows loadKnownBugs silently
+// drops.
+func loadKnownBugLedger(t *testing.T) map[string]string {
+	t.Helper()
+	path := filepath.Join("..", "cmd", "xmageport", "known_bugs.tsv")
+	raw, err := os.ReadFile(path)
+	if err != nil {
+		t.Fatalf("read %s: %v", path, err)
+	}
+	out := map[string]string{}
+	for i, line := range strings.Split(string(raw), "\n") {
+		if line == "" || strings.HasPrefix(line, "#") {
+			continue
+		}
+		key, reason, ok := strings.Cut(line, "\t")
+		if !ok || key == "" || reason == "" {
+			t.Errorf("%s:%d: want one Class#method TAB reason row", path, i+1)
+			continue
+		}
+		if _, dup := out[key]; dup {
+			t.Errorf("%s:%d: duplicate row for %s", path, i+1, key)
+			continue
+		}
+		out[key] = reason
+	}
+	if len(out) == 0 {
+		t.Fatalf("%s has no known_bug rows", path)
+	}
+	return out
+}
+
+func sortedKnownBugKeys(m map[string]string) []string {
+	keys := make([]string, 0, len(m))
+	for k := range m {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	return keys
+}
+
 // TestXMagePortScenarios runs every ported scenario in the runner's XMage
 // fixture mode: XMage's addCard places setup permanents before the game with
 // no zone-change triggers, and cmd/xmageport validates through
