@@ -481,6 +481,39 @@ func TestPassPositionsFirstStrikeDamage(t *testing.T) {
 			{"end-combat", true},
 		},
 	}, {
+		// The non-active seat's mana ability splits the round: the active
+		// seat's first pass only hands priority over, the activation is an
+		// action between the passes, and the active seat's following pass is
+		// still the round's last (CR 117.4), so it ends the first damage step
+		// even though the active seat takes it.
+		name:  "first striker, round split by the opponent's mana ability",
+		steps: []oraclegen.Step{pass(0), pass(1), pass(0), {Op: "activate", Seat: 1}, pass(1), pass(0), pass(0), pass(1), pass(0), pass(1)},
+		snaps: []rules.OracleSnapshot{
+			at("declare-blockers", striker, nil),
+			at("combat-damage", striker, trigger),
+			at("combat-damage", striker, trigger),
+			at("combat-damage", striker, nil),
+			{Turn: 1, Step: "combat-damage", Active: 0, Priority: 1, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Active: 0, Priority: 0, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Active: 0, Priority: 0, Permanents: striker},
+			{Turn: 1, Step: "combat-damage", Active: 0, Priority: 1, Permanents: striker},
+			{Turn: 1, Step: "end-combat", Active: 0, Priority: 0, Permanents: striker},
+			{Turn: 1, Step: "end-combat", Active: 0, Priority: 1, Permanents: striker},
+			{Turn: 2, Step: "upkeep", Active: 1, Priority: 1, Permanents: striker},
+		},
+		want: []want{
+			{oraclegen.StepFirstStrikeDamage, true},
+			{oraclegen.StepFirstStrikeDamage, false},
+			{oraclegen.StepFirstStrikeDamage, false},
+			{"", false},
+			{oraclegen.StepFirstStrikeDamage, false},
+			{"combat-damage", true},
+			{"combat-damage", false},
+			{"end-combat", true},
+			{"end-combat", false},
+			{"upkeep", true},
+		},
+	}, {
 		// The regular damage step pauses on an ask (damage division, an
 		// as-unblocked election) before priority is given, so the checkpoint
 		// after the ending pass still shows the non-active passer holding it.
@@ -510,6 +543,16 @@ func TestPassPositionsFirstStrikeDamage(t *testing.T) {
 			t.Fatalf("%s: %d positions, want %d", c.name, len(got), len(c.want))
 		}
 		for i, w := range c.want {
+			if w.step == "" {
+				if got[i] != nil {
+					t.Errorf("%s: step %d: position %+v, want none", c.name, i, *got[i])
+				}
+				continue
+			}
+			if got[i] == nil {
+				t.Errorf("%s: pass %d: no position, want %s moved=%v", c.name, i, w.step, w.moved)
+				continue
+			}
 			if got[i].Step != w.step || got[i].Moved != w.moved {
 				t.Errorf("%s: pass %d: %s moved=%v, want %s moved=%v", c.name, i, got[i].Step, got[i].Moved, w.step, w.moved)
 			}
@@ -591,6 +634,113 @@ func TestPassPositionsExtraStepSameName(t *testing.T) {
 	for i, w := range want {
 		if got[i].Moved != w.moved || got[i].Resolves != w.resolves {
 			t.Errorf("pass %d: moved=%v resolves=%v, want %v", i, got[i].Moved, got[i].Resolves, w)
+		}
+	}
+}
+
+// TestPassPositionsExtraStepSplitByManaAbility: the active seat's pass of an
+// additional end step, split from the non-active seat's by the non-active
+// seat's mana ability, is the round's last pass and begins the next end step
+// (CR 500.9), even though it is the active seat that takes it. The split pass
+// only hands priority back, so it does not begin an instance.
+func TestPassPositionsExtraStepSplitByManaAbility(t *testing.T) {
+	at := func(prio int) rules.OracleSnapshot {
+		return rules.OracleSnapshot{
+			Turn: 1, Step: "end", Active: 0, Priority: prio,
+			Players: make([]rules.OracleSnapPlayer, 2),
+		}
+	}
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
+	steps := []oraclegen.Step{pass(0), {Op: "activate", Seat: 1}, pass(1), pass(0)}
+	snaps := []rules.OracleSnapshot{at(0), at(1), at(1), at(0), at(0)}
+	got := passPositions(steps, snaps)
+	want := []struct {
+		step  string
+		moved bool
+	}{
+		{"end", false},
+		{"", false},
+		{"end", false},
+		{"end", true},
+	}
+	if len(got) != len(steps) {
+		t.Fatalf("%d positions, want %d", len(got), len(steps))
+	}
+	for i, w := range want {
+		if w.step == "" {
+			if got[i] != nil {
+				t.Errorf("step %d (%s): position %+v, want none", i, steps[i].Op, *got[i])
+			}
+			continue
+		}
+		if got[i] == nil {
+			t.Errorf("step %d (%s): no position, want %s moved=%v", i, steps[i].Op, w.step, w.moved)
+			continue
+		}
+		if got[i].Step != w.step || got[i].Moved != w.moved {
+			t.Errorf("step %d (%s): %s moved=%v, want %s moved=%v",
+				i, steps[i].Op, got[i].Step, got[i].Moved, w.step, w.moved)
+		}
+	}
+}
+
+// TestPreparePassPositionsManaSplitPair: the Rebuff the Wicked s2 shape, where
+// the active seat passes, the other seat taps a land for mana and passes, and
+// the active seat passes again. The mana ability is an action between the two
+// passes, so they are not in succession (CR 117.4): the other seat's pass only
+// hands priority back to the active seat and the game is still in main1. The
+// active seat's next pass is the one that ends main1 and begins combat. The
+// split pass must therefore stay at main1 and not claim a new step instance,
+// or the driver hides its checkpoint at an occurrence XMage never starts; the
+// pass that closes the pair names begin-combat.
+func TestPreparePassPositionsManaSplitPair(t *testing.T) {
+	at := func(step string, prio int) rules.OracleSnapshot {
+		return rules.OracleSnapshot{
+			Turn: 1, Step: step, Active: 0, Priority: prio,
+			Players: make([]rules.OracleSnapPlayer, 2),
+		}
+	}
+	pass := func(seat int) oraclegen.Step { return oraclegen.Step{Op: "pass", Seat: seat} }
+	steps := []oraclegen.Step{
+		pass(0),
+		{Op: "activate", Seat: 1},
+		pass(1),
+		pass(0),
+	}
+	snaps := []rules.OracleSnapshot{
+		at("main1", 0),        // setup
+		at("main1", 1),        // p0 passes, p1 has priority
+		at("main1", 1),        // p1 taps a Plains for mana, keeping priority
+		at("main1", 0),        // p1 passes: p0 gets priority back, still main1
+		at("begin-combat", 0), // p0 passes: the pair ends main1
+	}
+	got := passPositions(steps, snaps)
+	want := []struct {
+		step  string
+		moved bool
+	}{
+		{"main1", false},
+		{"", false},
+		{"main1", false},
+		{"begin-combat", true},
+	}
+	if len(got) != len(want) {
+		t.Fatalf("%d positions, want %d", len(got), len(want))
+	}
+	for i, w := range want {
+		if w.step == "" {
+			if got[i] != nil {
+				t.Errorf("step %d (%s): position %+v, want none", i, steps[i].Op, *got[i])
+			}
+			continue
+		}
+		if got[i] == nil {
+			t.Errorf("step %d (%s): no position, want %s moved=%v", i, steps[i].Op, w.step, w.moved)
+			continue
+		}
+		if got[i].Step != w.step || got[i].Moved != w.moved {
+			t.Errorf("step %d (%s): %s moved=%v, want %s moved=%v",
+				i, steps[i].Op, got[i].Step, got[i].Moved, w.step, w.moved)
 		}
 	}
 }
