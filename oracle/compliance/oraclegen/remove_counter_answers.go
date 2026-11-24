@@ -30,6 +30,17 @@ import (
 // decision first, then the nearest preceding target decision, then the
 // permanent/player whose counters the step actually changed.
 //
+// "counter_kind" is the engine's resume role, not a card identity: PutCounter
+// poses "choose a kind to put" with the same ResumeKind, and a fixed-count
+// RemoveCounter Any poses it whenever the carrier has more than one kind.
+// XMage turns only the RemoveCounter Any/All UP-TO ask into a multi-amount
+// (RemoveUpToAmountCountersEffect); the other two are plain Choice dialogs.
+// The fold therefore also requires the ask shape (one option per present
+// counter kind plus the trailing Done option) and accepts only a carrier
+// whose counters did not grow across the step. An ask that matches neither is
+// left untouched on the generic choice route, so the next sibling sharing the
+// resume kind is safe by default instead of needing a card list.
+//
 // Message order: XMage builds the list as new ArrayList<>(counterMap.keySet())
 // over a java.util.HashMap, so it is bucket order of the Java String hash, not
 // the engine's counter-slice order. counterKindMessageOrder reproduces that
@@ -40,10 +51,29 @@ import (
 // same-bucket ties; a run that stops early with unconstrained kinds falls back
 // to a sorted order, still deterministic.
 
-// removeCounterKindDecision reports one RemoveCounter Any/All counter-kind
-// election pick.
+// removeCounterKindDecision reports one counter-kind election pick. The
+// engine reuses the "counter_kind" ResumeKind for RemoveCounter's per-counter
+// election AND for PutCounter's "choose a kind to put" asks
+// (effects/counters_put.go and counters_put_existing.go), so this predicate
+// is only a candidate filter: foldRemoveCounterKindAnswers additionally
+// requires the remove-up-to shape before it scripts amounts.
 func removeCounterKindDecision(d rules.OracleDecision) bool {
 	return d.Kind == "choose_n" && d.Resume == "counter_kind"
+}
+
+// removeCounterDonePicked reports a pick of the remove-up-to "Done" option.
+// Its presence is a positive RemoveCounter signal (PutCounter has no Done
+// option), and it terminates the engine's election loop.
+func removeCounterDonePicked(d rules.OracleDecision) bool {
+	for k, kind := range d.PickKinds {
+		if kind == "remove_counter_done" {
+			return true
+		}
+		if k < len(d.Picks) && strings.EqualFold(strings.TrimSpace(d.Picks[k]), "done") {
+			return true
+		}
+	}
+	return false
 }
 
 // foldRemoveCounterKindAnswers returns the amount answers keyed by the first
@@ -59,6 +89,12 @@ func foldRemoveCounterKindAnswers(ds []rules.OracleDecision, snaps []rules.Oracl
 		j := i + 1
 		for j < len(ds) && removeCounterKindDecision(ds[j]) &&
 			ds[j].Step == ds[i].Step && ds[j].Seat == ds[i].Seat {
+			// A Done pick ends the engine's election loop, so the next
+			// counter_kind decision (if any) is a new ask, not a pick of
+			// this one.
+			if removeCounterDonePicked(ds[j-1]) {
+				break
+			}
 			j++
 		}
 		run := ds[i:j]
@@ -82,13 +118,20 @@ func foldRemoveCounterKindAnswers(ds []rules.OracleDecision, snaps []rules.Oracl
 				counts[kind]++
 			}
 		}
-		var kinds []string
-		if before, after, ok := removeCounterTarget(ds, i, snaps, counts); ok {
-			kinds = append(kinds, before...)
-			for _, kind := range after {
-				if !containsCounterKind(kinds, kind) {
-					kinds = append(kinds, kind)
-				}
+		// Only the RemoveCounter Any/All up-to ask becomes an XMage
+		// multi-amount; a PutCounter kind pick and a fixed-count RemoveCounter
+		// ask stay on the generic choice route. Require the carrier and the
+		// up-to option shape before folding, so an unrecognised counter_kind
+		// ask is scripted exactly as it was before this routing existed.
+		before, after, ok := removeCounterTarget(ds, ds[i:j], snaps, ds[i], counts)
+		if !ok {
+			i = j
+			continue
+		}
+		kinds := append([]string(nil), before...)
+		for _, kind := range after {
+			if !containsCounterKind(kinds, kind) {
+				kinds = append(kinds, kind)
 			}
 		}
 		for _, kind := range picked {
@@ -169,11 +212,20 @@ func displayCounterName(kind string) string {
 // removes from, and returns that carrier's counter kinds before and after the
 // step (canonicalized, positive counts only). counts is the removals per kind
 // observed in the run, used to choose among candidate refs.
-func removeCounterTarget(ds []rules.OracleDecision, i int, snaps []rules.OracleSnapshot, counts map[string]int) (before, after []string, ok bool) {
+//
+// A candidate is only accepted when the run has the RemoveCounter Any/All
+// up-to shape (see removeCounterUpToShape) and its counters do not increase
+// across the step. Together those reject the two other asks that share the
+// engine's "counter_kind" ResumeKind: PutCounter's "choose a kind to put"
+// (its options come from the card's kind list, not from the carrier's
+// counters, and the carrier gains counters) and fixed-count RemoveCounter Any
+// on a multi-kind carrier (options are the present kinds with no Done, and
+// XMage asks RemoveCounterTargetEffect's Choice instead of a multi-amount).
+func removeCounterTarget(all []rules.OracleDecision, run []rules.OracleDecision, snaps []rules.OracleSnapshot, anchor rules.OracleDecision, counts map[string]int) (before, after []string, ok bool) {
 	if len(snaps) == 0 {
 		return nil, nil, false
 	}
-	step := ds[i].Step
+	step := anchor.Step
 	if step < 0 || step >= len(snaps) {
 		return nil, nil, false
 	}
@@ -193,8 +245,8 @@ func removeCounterTarget(ds []rules.OracleDecision, i int, snaps []rules.OracleS
 		candidates = append(candidates, ref)
 	}
 	// Same-step target decisions are the ordinary case (a trigger's target).
-	for _, d := range ds {
-		if d.Step == step && d.Seat == ds[i].Seat && d.Kind == "target" {
+	for _, d := range all {
+		if d.Step == step && d.Seat == anchor.Seat && d.Kind == "target" {
 			for _, ref := range d.PickRefs {
 				add(ref)
 			}
@@ -203,8 +255,8 @@ func removeCounterTarget(ds []rules.OracleDecision, i int, snaps []rules.OracleS
 	// A spell's target is chosen on its cast step, so take the nearest
 	// preceding target decision of the same seat too.
 	prev := -1
-	for _, d := range ds {
-		if d.Seat != ds[i].Seat || d.Kind != "target" || d.Step >= step || d.Step < 0 {
+	for _, d := range all {
+		if d.Seat != anchor.Seat || d.Kind != "target" || d.Step >= step || d.Step < 0 {
 			continue
 		}
 		if d.Step > prev {
@@ -212,8 +264,8 @@ func removeCounterTarget(ds []rules.OracleDecision, i int, snaps []rules.OracleS
 		}
 	}
 	if prev >= 0 {
-		for _, d := range ds {
-			if d.Seat == ds[i].Seat && d.Kind == "target" && d.Step == prev {
+		for _, d := range all {
+			if d.Seat == anchor.Seat && d.Kind == "target" && d.Step == prev {
 				for _, ref := range d.PickRefs {
 					add(ref)
 				}
@@ -252,7 +304,8 @@ func removeCounterTarget(ds []rules.OracleDecision, i int, snaps []rules.OracleS
 				exact = false
 			}
 		}
-		if !fits {
+		if !fits || !counterCountsNonIncreasing(bCounts, aCounts) ||
+			!removeCounterUpToShape(run, bCounts) {
 			continue
 		}
 		if exact {
@@ -267,6 +320,57 @@ func removeCounterTarget(ds []rules.OracleDecision, i int, snaps []rules.OracleS
 		return fallbackBefore, fallbackAfter, true
 	}
 	return nil, nil, false
+}
+
+// counterCountsNonIncreasing reports whether no counter kind on the carrier
+// grew across the step. A RemoveCounter never adds, so a carrier that gained
+// any counters cannot be this run's target (a PutCounter ask picked it).
+func counterCountsNonIncreasing(before, after map[string]int32) bool {
+	for kind, n := range after {
+		if n > before[kind] {
+			return false
+		}
+	}
+	return true
+}
+
+// removeCounterUpToShape reports whether every decision in run is one step of
+// the engine's RemoveCounter Any/All up-to election. That ask offers exactly
+// the carrier's still-present counter kinds (one option each) plus a trailing
+// "Done" option, so its option count is present+1 and each pick is one of
+// those present kinds. Fixed-count RemoveCounter Any offers present kinds
+// only, and a PutCounter kind pick offers the card's kind list, so neither
+// matches.
+func removeCounterUpToShape(run []rules.OracleDecision, before map[string]int32) bool {
+	remaining := make(map[string]int32, len(before))
+	for kind, n := range before {
+		remaining[kind] = n
+	}
+	for _, d := range run {
+		present := 0
+		for _, n := range remaining {
+			if n > 0 {
+				present++
+			}
+		}
+		if d.Options != present+1 {
+			return false
+		}
+		for k, label := range d.Picks {
+			if k < len(d.PickKinds) && d.PickKinds[k] == "remove_counter_done" {
+				continue
+			}
+			if strings.EqualFold(strings.TrimSpace(label), "done") {
+				continue
+			}
+			kind := canonicalCounterKind(label)
+			if kind == "" || remaining[kind] <= 0 {
+				return false
+			}
+			remaining[kind]--
+		}
+	}
+	return true
 }
 
 // counterSnapshotKinds returns a carrier's counter kinds and counts at a

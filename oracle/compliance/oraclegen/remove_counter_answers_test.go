@@ -72,7 +72,7 @@ func TestXAnswersRemoveCounterMultiAmountZeros(t *testing.T) {
 	run := []rules.OracleDecision{
 		{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "counter_kind", Options: 3, Min: 1, Max: 1,
 			Picks: []string{"P1P1"}, PickIdx: []int{0}, PickRefs: []string{"P1P1"}, PickKinds: []string{"counter"}},
-		{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "counter_kind", Options: 2, Min: 1, Max: 1,
+		{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "counter_kind", Options: 3, Min: 1, Max: 1,
 			Picks: []string{"P1P1"}, PickIdx: []int{0}, PickRefs: []string{"P1P1"}, PickKinds: []string{"counter"}},
 	}
 	snaps := []rules.OracleSnapshot{
@@ -89,6 +89,35 @@ func TestXAnswersRemoveCounterMultiAmountZeros(t *testing.T) {
 	want := []XAnswer{{0, "amount", "0"}, {0, "amount", "2"}}
 	if len(out) != 1 || !reflect.DeepEqual(out[0], want) {
 		t.Fatalf("multi-kind answers = %+v, want %+v", out, want)
+	}
+}
+
+// TestXAnswersRemoveCounterMultiAmountDoneOnly pins the early-Done shape: the
+// controller removes nothing, but XMage still asks the multi-amount, so every
+// kind message needs an explicit X=0 (the target decision still identifies
+// the carrier even though the checkpoint delta is empty).
+func TestXAnswersRemoveCounterMultiAmountDoneOnly(t *testing.T) {
+	run := []rules.OracleDecision{
+		{Step: 0, Seat: 0, Kind: "target", GorgeKind: "target",
+			Picks: []string{"p1:Ajani Resolute"}, PickRefs: []string{"p1:Ajani Resolute"}, PickKinds: []string{"card"}},
+		{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "counter_kind", Options: 2, Min: 1, Max: 1,
+			Picks: []string{"Done"}, PickIdx: []int{1}, PickRefs: []string{"Done"}, PickKinds: []string{"remove_counter_done"}},
+	}
+	snaps := []rules.OracleSnapshot{
+		{Permanents: []rules.OracleSnapPerm{{Ref: "p1:Ajani Resolute", Name: "Ajani Resolute",
+			Counters: map[string]int32{"LOYALTY": 2}}}},
+		{Permanents: []rules.OracleSnapPerm{{Ref: "p1:Ajani Resolute", Name: "Ajani Resolute",
+			Counters: map[string]int32{"LOYALTY": 2}}}},
+	}
+	out := XAnswersWithSnapshots(run, 1, nil, snaps)
+	var amounts []XAnswer
+	for _, a := range out[0] {
+		if a.Kind == "amount" {
+			amounts = append(amounts, a)
+		}
+	}
+	if want := []XAnswer{{0, "amount", "0"}}; !reflect.DeepEqual(amounts, want) {
+		t.Fatalf("amount answers = %+v, want %+v (step answers %+v)", amounts, want, out[0])
 	}
 }
 
@@ -133,4 +162,105 @@ func TestXAnswersRemoveCounterMessageOrder(t *testing.T) {
 	if !reflect.DeepEqual(got, want) {
 		t.Fatalf("counter message order = %v, want %v (XMage's GwenStacyTest order)", got, want)
 	}
+}
+
+// TestXAnswersMultiAmountPutCounterKindStaysChoice pins that a PutCounter
+// "choose a kind to put" pick is not folded into a multi-amount: it shares the
+// engine's "counter_kind" ResumeKind but XMage asks a Choice, so the recorded
+// kind must stay on the generic choice route. Both a kind the carrier lacks
+// (the up-to lift cannot offer it) and an existing kind (shape-coincident, but
+// the carrier gains a counter) are covered.
+func TestXAnswersMultiAmountPutCounterKindStaysChoice(t *testing.T) {
+	for _, tc := range []struct {
+		name   string
+		pick   string
+		idx    int
+		before map[string]int32
+		after  map[string]int32
+	}{
+		{"new kind", "FLYING", 1, map[string]int32{"P1P1": 1}, map[string]int32{"P1P1": 1, "FLYING": 1}},
+		{"existing kind", "P1P1", 0, map[string]int32{"P1P1": 1}, map[string]int32{"P1P1": 2}},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			run := []rules.OracleDecision{
+				{Step: 0, Seat: 0, Kind: "target", GorgeKind: "target",
+					Picks: []string{"p1:Grizzly Bears"}, PickRefs: []string{"p1:Grizzly Bears"}, PickKinds: []string{"card"}},
+				{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "counter_kind", Options: 2, Min: 1, Max: 1,
+					Picks: []string{tc.pick}, PickIdx: []int{tc.idx}, PickRefs: []string{tc.pick}, PickKinds: []string{"counter"}},
+			}
+			snaps := []rules.OracleSnapshot{
+				{Permanents: []rules.OracleSnapPerm{{Ref: "p1:Grizzly Bears", Name: "Grizzly Bears", Counters: tc.before}}},
+				{Permanents: []rules.OracleSnapPerm{{Ref: "p1:Grizzly Bears", Name: "Grizzly Bears", Counters: tc.after}}},
+			}
+			out := XAnswersWithSnapshots(run, 1, nil, snaps)
+			assertNoCounterAmount(t, out)
+			assertChoice(t, out, tc.pick)
+		})
+	}
+}
+
+// TestXAnswersMultiAmountExistingCounterKindStaysChoice pins the ExistingCounter arm
+// ("choose a kind of counter" over the kinds the recipient already carries):
+// the carrier gains counters, so it is not a RemoveCounter run even when the
+// option count could be read as an up-to ask.
+func TestXAnswersMultiAmountExistingCounterKindStaysChoice(t *testing.T) {
+	run := []rules.OracleDecision{
+		{Step: 0, Seat: 0, Kind: "target", GorgeKind: "target",
+			Picks: []string{"p1:Grizzly Bears"}, PickRefs: []string{"p1:Grizzly Bears"}, PickKinds: []string{"card"}},
+		{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "counter_kind", Options: 2, Min: 1, Max: 1,
+			Picks: []string{"CHARGE"}, PickIdx: []int{0}, PickRefs: []string{"CHARGE"}, PickKinds: []string{"counter"}},
+	}
+	snaps := []rules.OracleSnapshot{
+		{Permanents: []rules.OracleSnapPerm{{Ref: "p1:Grizzly Bears", Name: "Grizzly Bears",
+			Counters: map[string]int32{"P1P1": 1, "CHARGE": 1}}}},
+		{Permanents: []rules.OracleSnapPerm{{Ref: "p1:Grizzly Bears", Name: "Grizzly Bears",
+			Counters: map[string]int32{"P1P1": 1, "CHARGE": 2}}}},
+	}
+	out := XAnswersWithSnapshots(run, 1, nil, snaps)
+	assertNoCounterAmount(t, out)
+	assertChoice(t, out, "CHARGE")
+}
+
+// TestXAnswersFixedRemoveCounterKindStaysChoice pins fixed-count RemoveCounter
+// Any on a multi-kind carrier: the engine asks (len(kinds) > 1) but XMage's
+// RemoveCounterTargetEffect asks a Choice, so only the up-to form folds.
+func TestXAnswersFixedRemoveCounterKindStaysChoice(t *testing.T) {
+	run := []rules.OracleDecision{
+		{Step: 0, Seat: 0, Kind: "target", GorgeKind: "target",
+			Picks: []string{"p1:Grizzly Bears"}, PickRefs: []string{"p1:Grizzly Bears"}, PickKinds: []string{"card"}},
+		{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "counter_kind", Options: 2, Min: 1, Max: 1,
+			Picks: []string{"CHARGE"}, PickIdx: []int{0}, PickRefs: []string{"CHARGE"}, PickKinds: []string{"counter"}},
+	}
+	snaps := []rules.OracleSnapshot{
+		{Permanents: []rules.OracleSnapPerm{{Ref: "p1:Grizzly Bears", Name: "Grizzly Bears",
+			Counters: map[string]int32{"P1P1": 1, "CHARGE": 1}}}},
+		{Permanents: []rules.OracleSnapPerm{{Ref: "p1:Grizzly Bears", Name: "Grizzly Bears",
+			Counters: map[string]int32{"P1P1": 1}}}},
+	}
+	out := XAnswersWithSnapshots(run, 1, nil, snaps)
+	assertNoCounterAmount(t, out)
+	assertChoice(t, out, "CHARGE")
+}
+
+func assertNoCounterAmount(t *testing.T, out [][]XAnswer) {
+	t.Helper()
+	for _, step := range out {
+		for _, a := range step {
+			if a.Kind == "amount" {
+				t.Fatalf("counter_kind ask folded into an amount answer: %+v", step)
+			}
+		}
+	}
+}
+
+func assertChoice(t *testing.T, out [][]XAnswer, want string) {
+	t.Helper()
+	for _, step := range out {
+		for _, a := range step {
+			if a.Kind == "choice" && a.Value == want {
+				return
+			}
+		}
+	}
+	t.Fatalf("no %q choice answer in %+v", want, out)
 }
