@@ -35,6 +35,11 @@ the simple `PayCost` kinds, `ChooseLegend`, `ChooseFromZoneChoice`, `MultiTarget
 `BeholdChoice`, `EmpowerJaceChoice`, `SpellCopyOrderChoice`, `WardDiscardChoice`,
 `WardSacrificeChoice`, `UnlessBounceChoice`).
 
+A target candidate is probed on a state copy before it is offered: a `ChooseTarget` phase rejects
+(a ward cost paid from a short pool is the known case, CR 702.21a) is left out rather than posed.
+If no target survives, a pending cast offers `CancelCast` (CR 601.2i) instead of halting, so a
+target-time refusal never reaches the census as `submit_rejected`.
+
 `AssignCombatDamage` is host-answered, not posed (`combat_damage_assignment: "engine_order"`): lethal to each
 blocker in phase's order, the rest to the last blocker, or to the defender under trample. Damage modes other
 than `Normal` and trample over a planeswalker halt as `unsupported_damage_mode`.
