@@ -179,6 +179,113 @@ Type=Online
 	}
 }
 
+// Names compare exactly, as Forge and the preflight's grep -qxF do: a Funny
+// row "Lava, Axe" does not filter the paper card "Lava Axe", nor a split row
+// "Bind // Liberate" the single-face "Bind".
+func TestForgeEditionsExactNames(t *testing.T) {
+	dir := t.TempDir()
+	writeEdition(t, dir, "Unknown Fixture.txt", `[metadata]
+Code=UNK
+Name=Unknown Fixture
+Type=Funny
+
+[cards]
+F1 R Lava, Axe @A
+F2 R Gather, the Townsfolk @A
+F3 R Rampant, Growth @A
+F4 R Ransack, the Lab @A
+F5 R Glimpse, the Unthinkable @A
+F6 R Smelt // Herd // Saw @A
+F7 R Bind // Liberate @A
+`)
+	writeEdition(t, dir, "Paper Fixture.txt", `[metadata]
+Code=PAP
+Name=Paper Fixture
+Type=Core
+
+[cards]
+1 C Lava Axe @A
+2 C Gather the Townsfolk @A
+3 C Rampant Growth @A
+4 C Ransack the Lab @A
+5 C Glimpse the Unthinkable @A
+6 C Smelt @A
+7 C Bind @A
+`)
+	ed, err := loadForgeEditions(dir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, n := range []string{"Lava, Axe", "Gather, the Townsfolk", "Rampant, Growth", "Ransack, the Lab",
+		"Glimpse, the Unthinkable", "Smelt // Herd // Saw", "Bind // Liberate"} {
+		if !ed.excluded(n) {
+			t.Errorf("excluded(%q) = false, want true: a Funny row", n)
+		}
+	}
+	for _, n := range []string{"Lava Axe", "Gather the Townsfolk", "Rampant Growth", "Ransack the Lab",
+		"Glimpse the Unthinkable", "Smelt", "Bind"} {
+		if ed.excluded(n) {
+			t.Errorf("excluded(%q) = true, want false: a paper card that only normalises to a Funny row", n)
+		}
+	}
+}
+
+// The fixture names the three repro cards directly, so the pin does not
+// depend on a corpus card being otherwise unplayable (Gobland is: CantBlock).
+func TestForgeEditionsFixtureNamesRepros(t *testing.T) {
+	ed, err := loadForgeEditions("testdata/editions")
+	if err != nil {
+		t.Fatal(err)
+	}
+	for _, n := range []string{"Indicate", "Mox Poison", "Gobland"} {
+		if !ed.excluded(n) {
+			t.Errorf("excluded(%q) = false, want true", n)
+		}
+	}
+	for _, n := range []string{"Vindicate", "Mox Amber", "Dryad Arbor", "Grizzly Bears"} {
+		if ed.excluded(n) {
+			t.Errorf("excluded(%q) = true, want false", n)
+		}
+	}
+}
+
+// A Playable answer cached before UseForgeEditions must not outlive it.
+func TestUseForgeEditionsClearsCache(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings("../../compliance/manifests")
+	if err != nil {
+		t.Fatal(err)
+	}
+	b := NewBuilder(reg, sp)
+	c := lookupCard(t, reg, "Indicate")
+	if !b.Playable(c) {
+		t.Skip("Indicate is not playable unfiltered in this corpus")
+	}
+	if err := b.UseForgeEditions("testdata/editions"); err != nil {
+		t.Fatal(err)
+	}
+	if b.Playable(c) {
+		t.Error("Indicate is playable after UseForgeEditions, want the stale cached answer dropped")
+	}
+}
+
+// FORGE_ORACLE_CLONE, which the Forge scripts honour, locates the editions.
+func TestFindForgeEditionsClone(t *testing.T) {
+	for _, k := range []string{"FORGE_ORACLE_EDITIONS", "FORGE_ORACLE_SRC", "FORGE_ORACLE_DIR"} {
+		t.Setenv(k, "")
+	}
+	clone := t.TempDir()
+	ed := filepath.Join(clone, "forge-gui", "res", "editions")
+	if err := os.MkdirAll(ed, 0o755); err != nil {
+		t.Fatal(err)
+	}
+	writeEdition(t, ed, "X.txt", "[metadata]\nCode=X\n")
+	t.Setenv("FORGE_ORACLE_CLONE", clone)
+	if got := FindForgeEditions(); got != ed {
+		t.Errorf("FindForgeEditions() = %q, want %q", got, ed)
+	}
+}
+
 // The pinned repro cards are not playable as enablers while tournament-legal
 // cards of the same shape are; the focus card itself is untouched.
 func TestPlayableExcludesForgeFiltered(t *testing.T) {

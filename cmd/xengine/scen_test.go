@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/testkit/testutil"
@@ -144,5 +145,20 @@ func TestScenForgeFilteredStarts(t *testing.T) {
 				}
 			}
 		}
+	}
+}
+
+// With no editions given or found the command fails rather than building an
+// unfiltered pool; "none" opts out explicitly.
+func TestUseForgeEditionsRequiresEditions(t *testing.T) {
+	for _, k := range []string{"FORGE_ORACLE_EDITIONS", "FORGE_ORACLE_SRC", "FORGE_ORACLE_CLONE", "FORGE_ORACLE_DIR"} {
+		t.Setenv(k, t.TempDir())
+	}
+	t.Chdir(t.TempDir())
+	if err := useForgeEditions(&certdeck.Builder{}, ""); err == nil {
+		t.Error("useForgeEditions(\"\") with no editions anywhere = nil, want an error")
+	}
+	if err := useForgeEditions(&certdeck.Builder{}, "none"); err != nil {
+		t.Errorf("useForgeEditions(none) = %v, want nil", err)
 	}
 }

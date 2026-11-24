@@ -29,7 +29,11 @@ import (
 )
 
 // forgeEditions is the exclusion set read from one pinned Forge clone's
-// forge-gui/res/editions. Names are cards.NormalizeName keys.
+// forge-gui/res/editions. Names are the raw edition-row names, compared
+// exactly: Forge puts the raw EditionEntry.name in its filter set and compares
+// the raw card name (StaticData.java), and the preflight's funny_has is an
+// exact grep -qxF. Normalising would conflate the Unknown Event row "Lava,
+// Axe" with the paper card "Lava Axe", or "Bind // Liberate" with "Bind".
 type forgeEditions struct {
 	filtered map[string]bool // named in a Funny/Silver edition outside [eternal]
 	printed  map[string]bool // named in any edition's card section
@@ -58,9 +62,9 @@ var (
 	// scheme cards).
 	forgeNonPaperSections = map[string]bool{"rebalanced": true, "conjured": true, "scheme": true}
 	forgeBasicLands       = map[string]bool{
-		"plains": true, "island": true, "swamp": true, "mountain": true, "forest": true, "wastes": true,
-		"snowcovered plains": true, "snowcovered island": true, "snowcovered swamp": true,
-		"snowcovered mountain": true, "snowcovered forest": true,
+		"Plains": true, "Island": true, "Swamp": true, "Mountain": true, "Forest": true, "Wastes": true,
+		"Snow-Covered Plains": true, "Snow-Covered Island": true, "Snow-Covered Swamp": true,
+		"Snow-Covered Mountain": true, "Snow-Covered Forest": true,
 	}
 )
 
@@ -146,10 +150,7 @@ func (e *forgeEditions) read(path string) error {
 		return fmt.Errorf("certdeck: Forge edition %s: %v", path, err)
 	}
 	for _, r := range rows {
-		name := cards.NormalizeName(r.name)
-		if name == "" {
-			continue
-		}
+		name := r.name
 		e.printed[name] = true
 		if r.section == "eternal" || forgeBasicLands[name] {
 			e.paper[name] = true
@@ -194,8 +195,7 @@ func forgeEditionName(line string) (string, bool) {
 // excluded reports whether name is out of the pool: Forge's card DB filters it,
 // or it has no tournament-legal paper printing.
 func (e *forgeEditions) excluded(name string) bool {
-	n := cards.NormalizeName(name)
-	return e.filtered[n] || (e.printed[n] && !e.paper[n])
+	return e.filtered[name] || (e.printed[name] && !e.paper[name])
 }
 
 // UseForgeEditions applies the pinned Forge editions under dir to the builder's
@@ -208,13 +208,16 @@ func (b *Builder) UseForgeEditions(dir string) error {
 		return err
 	}
 	b.forge = e
+	// A Playable answer cached before the filter was installed is unfiltered.
+	b.ok = map[*cards.Card]bool{}
 	return nil
 }
 
 // FindForgeEditions returns the pinned Forge editions directory, or "" when
 // none is found. FORGE_ORACLE_EDITIONS wins; then FORGE_ORACLE_SRC (a
 // forge-oracle worktree, whose parent holds forge-gui/res/editions);
-// then FORGE_ORACLE_DIR and the gitignored .oracle-build/forge layout that
+// then FORGE_ORACLE_CLONE (the clone path the Forge scripts honour), then
+// FORGE_ORACLE_DIR and the gitignored .oracle-build/forge layout that
 // scripts/forge-oracle-setup.sh writes. It only reads the directory, so it
 // works before the Java build exists.
 func FindForgeEditions() string {
@@ -232,6 +235,9 @@ func FindForgeEditions() string {
 	}
 	if d := os.Getenv("FORGE_ORACLE_SRC"); d != "" {
 		add(filepath.Dir(d))
+		add(d)
+	}
+	if d := os.Getenv("FORGE_ORACLE_CLONE"); d != "" {
 		add(d)
 	}
 	if d := os.Getenv("FORGE_ORACLE_DIR"); d != "" {
