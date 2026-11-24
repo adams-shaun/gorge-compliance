@@ -33,7 +33,10 @@ GO_TEST_FLAGS ?= -p=2
 # its blueprint target, CR 601.2b/601.2c: Death Denied with no creature card in its controller's graveyard, X = 0;
 # the same gap covered every TargetsCountAdjuster user with a min-1 blueprint). Fork branch fix/xtargets-x-zero,
 # DeathDeniedTest.
-XMAGE_REF  ?= 7aeb547a86c8f783684b6565d7e60172f828d941
+# 228d8a4bd9 = 7aeb547a86 + fork branch fix/champion-sacx-zero ("Sacrifice X other creatures": the cost's maximum X counted the
+# source itself, so Champion of Stray Souls alone could announce X = 1 and an unscripted announce then failed the activation
+# for want of a graveyard target; CR 601.2b/602.2b), ChampionOfStraySoulsTest.
+XMAGE_REF  ?= 228d8a4bd9b6df6771fa49a8d2e7782b102d8178
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
