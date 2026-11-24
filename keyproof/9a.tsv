@@ -27,11 +27,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9a1fbe72-4a17-42be-8e23-d7d30a5e59c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:norn-s-annex:cast:s1,f:xs:XP:norn-s-annex:cast:s1	-	-	-	d864b561c9cb	-	b70587394c2d	-	-	2026-11-24	xproof
 9a293c87-ad40-4c6c-9fa4-9a8b5f081ac9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9a294cbd-df18-4ee0-acaa-e31390a7f508	cast	cast-resolve	agreed	-	X	scen	1	0	Tweeze/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-9a2bc266-4076-4923-b201-5898b18cbad9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9a2bc266-4076-4923-b201-5898b18cbad9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9a2fdc0e-e0de-47fc-95e4-04e725ddf060	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9a2fdc0e-e0de-47fc-95e4-04e725ddf060	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9a2fdc0e-e0de-47fc-95e4-04e725ddf060	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9a2bc266-4076-4923-b201-5898b18cbad9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:passwall-adept:cast:s1,f:xs:XP:passwall-adept:cast:s1	-	-	-	d864b561c9cb	-	26a51e65b34a	-	-	2026-11-24	xproof
+9a2bc266-4076-4923-b201-5898b18cbad9	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:passwall-adept:f0a0:s1,f:xs:XP:passwall-adept:f0a0:s1	-	-	-	d864b561c9cb	-	26a51e65b34a	-	-	2026-11-24	xproof
+9a2fdc0e-e0de-47fc-95e4-04e725ddf060	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:trostani-discordant:cast:s1,f:xs:XP:trostani-discordant:cast:s1	-	-	-	d864b561c9cb	-	0142b733366b	-	-	2026-11-24	xproof
+9a2fdc0e-e0de-47fc-95e4-04e725ddf060	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:trostani-discordant:cast:s1,f:xs:XP:trostani-discordant:cast:s1	-	-	-	d864b561c9cb	-	0142b733366b	-	-	2026-11-24	xproof
+9a2fdc0e-e0de-47fc-95e4-04e725ddf060	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:trostani-discordant:cast:s1,f:xs:XP:trostani-discordant:cast:s1	-	-	-	d864b561c9cb	-	0142b733366b	-	-	2026-11-24	xproof
 9a334434-072a-4486-810a-63efb29dea6d	cast	cast-resolve	agreed	-	FX	scen	2	0	Grounded for Life/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9a334434-072a-4486-810a-63efb29dea6d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Grounded for Life/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9a345a67-0c6c-4f6f-b3c9-d525199cdbfa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -84,8 +84,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9a9c221d-9bb4-4ec4-b5db-cb26db6065df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9a9c221d-9bb4-4ec4-b5db-cb26db6065df	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9aa2f27b-4c00-44c1-8bc4-014350f05b6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9aa9c7ca-e160-4bfa-8ba5-87114222fd86	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9aa9c7ca-e160-4bfa-8ba5-87114222fd86	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9aa9c7ca-e160-4bfa-8ba5-87114222fd86	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:headless-specter:cast:s1,f:xs:XP:headless-specter:cast:s1	-	-	-	d864b561c9cb	-	e260a61c5d5f	-	-	2026-11-24	xproof
+9aa9c7ca-e160-4bfa-8ba5-87114222fd86	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9aaa0a28-e342-48bd-8f59-0cd289491f98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9aab386c-d48c-4611-b757-aa69b26cc1b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9aab4b32-c5b3-4707-b359-9b5e3b63cd11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

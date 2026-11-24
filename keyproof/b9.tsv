@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 b9000917-4f09-42f4-ae85-fc1ac7571d93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9000917-4f09-42f4-ae85-fc1ac7571d93	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b9000917-4f09-42f4-ae85-fc1ac7571d93	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b9000917-4f09-42f4-ae85-fc1ac7571d93	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b9019332-2f02-48d9-be0a-a2b41b79e136	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9043dcd-234f-4144-80db-1cb903c009ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myr-turbine:cast:s1,f:xs:XP:myr-turbine:cast:s1	-	-	-	d864b561c9cb	-	73c9f0463431	-	-	2026-11-24	xproof
 b9043dcd-234f-4144-80db-1cb903c009ea	f0/a0	Token	agreed	-	FX	start	4	0	x:xs:XP:myr-turbine:cast:s1,f:xs:XP:myr-turbine:cast:s1	-	-	-	d864b561c9cb	-	73c9f0463431	-	-	2026-11-24	xproof
@@ -119,8 +119,8 @@ b96b1341-0c15-4816-be2d-5cc98b2afb63	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 b96b1341-0c15-4816-be2d-5cc98b2afb63	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b96ccc2f-88e5-4522-924e-76fc76dc3b39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b96ccc2f-88e5-4522-924e-76fc76dc3b39	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b97341a7-fc96-4281-b875-fb81065e0157	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b97341a7-fc96-4281-b875-fb81065e0157	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b97341a7-fc96-4281-b875-fb81065e0157	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-one-thousand-cuts:cast:s1,f:xs:XP:wall-of-one-thousand-cuts:cast:s1	-	-	-	d864b561c9cb	-	d11696c0e9a2	-	-	2026-11-24	xproof
+b97341a7-fc96-4281-b875-fb81065e0157	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:wall-of-one-thousand-cuts:f0a0:s1,f:xs:XP:wall-of-one-thousand-cuts:f0a0:s1	-	-	-	d864b561c9cb	-	d11696c0e9a2	-	-	2026-11-24	xproof
 b97648b7-ae98-45c9-8f0f-a52d6faf2d2d	cast	cast-resolve	agreed	-	X	scen	1	0	Surveillance Phantasm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b97648b7-ae98-45c9-8f0f-a52d6faf2d2d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Surveillance Phantasm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b97648b7-ae98-45c9-8f0f-a52d6faf2d2d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Surveillance Phantasm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

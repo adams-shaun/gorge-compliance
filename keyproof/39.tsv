@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3981970f-b332-49b7-9698-3296830ac399	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3981970f-b332-49b7-9698-3296830ac399	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3984478b-debb-4a65-ab5b-4bc134e03d82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3984478b-debb-4a65-ab5b-4bc134e03d82	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3984478b-debb-4a65-ab5b-4bc134e03d82	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3984e5f6-8643-4104-aa9c-18d474e07801	cast	cast-resolve	agreed	-	X	scen	1	0	Bone Miser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3984e5f6-8643-4104-aa9c-18d474e07801	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bone Miser/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3984e5f6-8643-4104-aa9c-18d474e07801	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 398afdf2-4a12-430e-85c9-c68847230939	cast	cast-resolve	agreed	-	FX	scen	2	0	Sylvan Scavenging/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 398afdf2-4a12-430e-85c9-c68847230939	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sylvan Scavenging/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 398d57bb-4653-4652-aa42-7cea4317be0a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:lash-out:cast:s1	-	-	-	d864b561c9cb	-	499316d54503	-	-	2026-11-24	xproof
-3992209a-0a28-449d-8ba5-f75e861a79b4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3992209a-0a28-449d-8ba5-f75e861a79b4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3992209a-0a28-449d-8ba5-f75e861a79b4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:domri-s-nodorog:cast:s1,f:xs:XP:domri-s-nodorog:cast:s1	-	-	-	d864b561c9cb	-	422622932ed4	-	-	2026-11-24	xproof
+3992209a-0a28-449d-8ba5-f75e861a79b4	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:domri-s-nodorog:cast:s1,f:xs:XP:domri-s-nodorog:cast:s1	-	-	-	d864b561c9cb	-	422622932ed4	-	-	2026-11-24	xproof
 3992369a-2158-4cf8-b7e5-be517b91c1f5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:deadshot-minotaur:cast:s1,f:xs:XP:deadshot-minotaur:cast:s1	-	-	-	8a1b1a193ec0	-	c23129ea904c	-	-	2026-11-24	xproof
 3992369a-2158-4cf8-b7e5-be517b91c1f5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3992369a-2158-4cf8-b7e5-be517b91c1f5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:deadshot-minotaur:cast:s1,f:xs:XP:deadshot-minotaur:cast:s1	-	-	-	8a1b1a193ec0	-	c23129ea904c	-	-	2026-11-24	xproof

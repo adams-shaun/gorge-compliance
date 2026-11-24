@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 520b2799-66bd-40bf-9bc0-9cd3aed321f5	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Watery Grasp/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 520b6637-0a9f-4dc4-846e-f1cd2b868263	cast	cast	diverged	-	-	start	0	2	-	0a520ded0ebd	-	-	d864b561c9cb	-	d94a1debef0d	-	-	2026-11-24	xproof
 52124954-b0b6-492c-8d03-fe54c220facc	cast	cast-resolve	agreed	-	FX	scen	2	0	Stress Dream/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5212e707-b487-46b6-aa51-cea3be8cbe00	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5212e707-b487-46b6-aa51-cea3be8cbe00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flight-of-equenauts:cast:s1,f:xs:XP:flight-of-equenauts:cast:s1	-	-	-	d864b561c9cb	-	7f85c2f9d3e5	-	-	2026-11-24	xproof
 5212f0a8-7341-4960-835b-2f4600ca1b2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anointed-deacon:cast:s1,f:xs:XP:anointed-deacon:cast:s1	-	-	-	d864b561c9cb	-	6e6d458102ae	-	-	2026-11-24	xproof
 5212f0a8-7341-4960-835b-2f4600ca1b2d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:anointed-deacon:cast:s1,f:xs:XP:anointed-deacon:cast:s1	-	-	-	d864b561c9cb	-	6e6d458102ae	-	-	2026-11-24	xproof
 521a63cf-5e83-4649-9800-c62b2fc474d6	cast	cast-resolve	agreed	-	X	scen	1	0	The Legend of Yangchen/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5261ba70-b641-461d-9d9f-fce17764ad67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5261ba70-b641-461d-9d9f-fce17764ad67	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5261ba70-b641-461d-9d9f-fce17764ad67	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-52630eaf-995e-4d08-be99-888a38b598b2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52630eaf-995e-4d08-be99-888a38b598b2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fireblade-artist:cast:s1,f:xs:XP:fireblade-artist:cast:s1	-	-	-	d864b561c9cb	-	15622d6909dd	-	-	2026-11-24	xproof
 52630eaf-995e-4d08-be99-888a38b598b2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52680471-a407-418b-9e74-c32308322772	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52680471-a407-418b-9e74-c32308322772	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5268f772-5b42-4b5b-9e57-c32c662a42f3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Warden of the Inner Sky/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 526cd570-046e-402a-986c-f6ece68eec47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sweltering-suns:cast:s1,f:xs:XP:sweltering-suns:cast:s1	-	-	-	d864b561c9cb	-	a0c1f49b85ed	-	-	2026-11-24	xproof
 526cd570-046e-402a-986c-f6ece68eec47	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-526db754-abb6-450c-bead-81dd1e1c347c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+526db754-abb6-450c-bead-81dd1e1c347c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:street-riot:cast:s1,f:xs:XP:street-riot:cast:s1	-	-	-	d864b561c9cb	-	09bc1ac93580	-	-	2026-11-24	xproof
 526f520e-b4bb-4215-9c6b-afc298744f06	cast	cast-resolve	agreed	-	FX	scen	2	0	Plunder the Trollshaws/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52714c3c-6821-44dd-88ba-813554df9914	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52714c3c-6821-44dd-88ba-813554df9914	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -165,9 +165,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52c6afc6-aff1-46a8-b1ea-b183facec1ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:atmospheric-greenhouse:f0t0:s1,f:xs:XP:atmospheric-greenhouse:f0t0:s1	-	-	-	25696bf19d5b	-	b8b25d5c1f9c	-	-	2026-11-24	xproof
 52c6afc6-aff1-46a8-b1ea-b183facec1ae	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:atmospheric-greenhouse:f0t0:s1,f:xs:XP:atmospheric-greenhouse:f0t0:s1	-	-	-	25696bf19d5b	-	b8b25d5c1f9c	-	-	2026-11-24	xproof
 52c6afc6-aff1-46a8-b1ea-b183facec1ae	static#0.0	static#0.0	agreed	-	X	scen	1	0	Atmospheric Greenhouse/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-52c73c88-3b87-4184-b8e1-cd2b5688800d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52c73c88-3b87-4184-b8e1-cd2b5688800d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rank-officer:f0t0:s1,f:xs:XP:rank-officer:f0t0:s1	-	-	-	d864b561c9cb	-	4320f1c84cfc	-	-	2026-11-24	xproof
 52c73c88-3b87-4184-b8e1-cd2b5688800d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-52c73c88-3b87-4184-b8e1-cd2b5688800d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52c73c88-3b87-4184-b8e1-cd2b5688800d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rank-officer:f0t0:s1,f:xs:XP:rank-officer:f0t0:s1	-	-	-	d864b561c9cb	-	4320f1c84cfc	-	-	2026-11-24	xproof
 52c96b5a-ce47-4bde-b530-0033b9bfd808	cast	cast-resolve	agreed	-	FX	scen	2	0	Cosmium Blast/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52d04c36-9d38-42b2-9e47-905ab06cb708	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52d04c36-9d38-42b2-9e47-905ab06cb708	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

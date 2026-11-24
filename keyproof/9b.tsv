@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b7634bf-067b-4b5c-be72-ff1b80247969	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b7634bf-067b-4b5c-be72-ff1b80247969	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b7870df-6bca-499f-bc6e-e57f2ddfe640	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b7870df-6bca-499f-bc6e-e57f2ddfe640	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b7870df-6bca-499f-bc6e-e57f2ddfe640	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9b7d037f-3269-4e3b-9744-a977acb69c67	cast	cast-resolve	agreed	-	X	scen	1	0	Incinerator of the Guilty/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b7d037f-3269-4e3b-9744-a977acb69c67	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Incinerator of the Guilty/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b7d037f-3269-4e3b-9744-a977acb69c67	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Incinerator of the Guilty/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9bbee1a5-2eb0-4fad-9524-4ad9cc5ca998	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bbee1a5-2eb0-4fad-9524-4ad9cc5ca998	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9bc0ca04-26ab-4743-bc65-0b5f4115c8f7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9bc0ca04-26ab-4743-bc65-0b5f4115c8f7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9bc0ca04-26ab-4743-bc65-0b5f4115c8f7	f0/a0	NULL	owed	refused:steps-needed:cost:GU	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9bc458ac-5566-4978-aeaa-73b600d4ec29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bc5ed59-ae13-40df-94b9-c56c32673857	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bc6d4ac-6fca-4574-9cd8-10a5528575b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

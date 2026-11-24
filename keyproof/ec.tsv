@@ -46,7 +46,7 @@ ec47cf67-2580-464f-8118-7eabea5be11c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ec47cf67-2580-464f-8118-7eabea5be11c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec484fd1-aa9a-4056-becf-1d8c710272fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec484fd1-aa9a-4056-becf-1d8c710272fd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ec484fd1-aa9a-4056-becf-1d8c710272fd	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ec484fd1-aa9a-4056-becf-1d8c710272fd	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:syndicate-guildmage:f0a1:s1,f:xs:XP:syndicate-guildmage:f0a1:s1	-	-	-	d864b561c9cb	-	7d75ddd5146a	-	-	2026-11-24	xproof
 ec49dfcf-d16d-4621-af4b-4a6f09043221	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:runeclaw-bear:cast:s1,f:xs:XP:runeclaw-bear:cast:s1	-	-	-	8a1b1a193ec0	-	a95ea501edde	-	-	2026-11-24	xproof
 ec528198-a38a-4ef7-9804-78a25c94ecc1	cast	cast-resolve	agreed	-	X	scen	1	0	Web-Shooters/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ec528198-a38a-4ef7-9804-78a25c94ecc1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Web-Shooters/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -94,8 +94,8 @@ ec86a45f-046c-4aab-9b82-422c6f39142e	cast	cast-resolve	agreed	-	X	scen	1	0	Ghost
 ec86a45f-046c-4aab-9b82-422c6f39142e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ghostly Keybearer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ec86a45f-046c-4aab-9b82-422c6f39142e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ghostly Keybearer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ec86a45f-046c-4aab-9b82-422c6f39142e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ghostly Keybearer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ec8a14d4-6ca0-43b1-abf6-0c129daf8350	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ec8a14d4-6ca0-43b1-abf6-0c129daf8350	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ec8a14d4-6ca0-43b1-abf6-0c129daf8350	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:grasping-thrull:cast:s1,f:xs:XP:grasping-thrull:cast:s1	-	-	-	d864b561c9cb	-	893b580e33f1	-	-	2026-11-24	xproof
+ec8a14d4-6ca0-43b1-abf6-0c129daf8350	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grasping-thrull:cast:s1,f:xs:XP:grasping-thrull:cast:s1	-	-	-	d864b561c9cb	-	893b580e33f1	-	-	2026-11-24	xproof
 ec8bf245-4b2c-432b-9b2a-8d7b9224258c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:staunch-defenders:f0t0:s1,f:xs:XP:staunch-defenders:f0t0:s1	-	-	-	25696bf19d5b	-	9218990fdea1	-	-	2026-11-24	xproof
 ec8bf245-4b2c-432b-9b2a-8d7b9224258c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:staunch-defenders:f0t0:s1,f:xs:XP:staunch-defenders:f0t0:s1	-	-	-	25696bf19d5b	-	9218990fdea1	-	-	2026-11-24	xproof
 ec8c2927-d857-426e-b81b-c3b1aa81045a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,8 +178,8 @@ ece9d3e5-79e5-4c56-9e8d-8abcd819c041	f0/t0	NULL	owed	refused:no-generator:trigge
 ecef9e3d-dce8-405f-bba3-14732444258f	cast	cast-resolve	agreed	-	X	scen	1	0	Lightshield Parry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ecef9e3d-dce8-405f-bba3-14732444258f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Lightshield Parry/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ecf09f2d-a886-4ec8-8ff6-fe15d87b1375	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ecf09f2d-a886-4ec8-8ff6-fe15d87b1375	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ecf09f2d-a886-4ec8-8ff6-fe15d87b1375	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ecf09f2d-a886-4ec8-8ff6-fe15d87b1375	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:scrapyard-recombiner:f0t0:s1,f:xs:XP:scrapyard-recombiner:f0t0:s1	-	-	-	d864b561c9cb	-	f672eb5f7f97	-	-	2026-11-24	xproof
+ecf09f2d-a886-4ec8-8ff6-fe15d87b1375	f0/t0	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:scrapyard-recombiner:f0t0:s1,f:xs:XP:scrapyard-recombiner:f0t0:s1	-	-	-	d864b561c9cb	-	f672eb5f7f97	-	-	2026-11-24	xproof
 ecf28b5d-a719-47d4-8ad9-d24b6297ebde	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 ecf574a5-6410-466d-a726-732134f904b2	cast	cast-resolve	agreed	-	X	scen	1	0	Assert Perfection/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ecf808fd-4828-497e-b84b-1cb018a9924b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

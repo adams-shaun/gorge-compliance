@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c7bafe9-80cd-48d0-bcae-e7910c9fb83b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anti-venom-horrifying-healer:f0t0:s1,f:xs:XP:anti-venom-horrifying-healer:f0t0:s1	-	-	-	25696bf19d5b	-	97e1d2c3a346	-	-	2026-11-24	xproof
 3c7dd86d-25eb-4b24-9358-98b951248e04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c7dd86d-25eb-4b24-9358-98b951248e04	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c7dd86d-25eb-4b24-9358-98b951248e04	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c7dd86d-25eb-4b24-9358-98b951248e04	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3c7ea603-c985-4107-806b-a467b5fcca36	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c7ea603-c985-4107-806b-a467b5fcca36	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c7ea8d0-d866-4c02-bdfc-13bbc87c094a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -210,9 +210,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ceca713-38de-4428-a4f1-2146f6e98393	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ceca713-38de-4428-a4f1-2146f6e98393	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ceda405-8175-416a-beda-9a95f5acc60c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3cef501b-5ce1-4699-89a5-3949f7e65bf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3cef501b-5ce1-4699-89a5-3949f7e65bf1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3cef501b-5ce1-4699-89a5-3949f7e65bf1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3cef501b-5ce1-4699-89a5-3949f7e65bf1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-friend-to-wolves:f0t0:s1,f:xs:XP:tolsimir-friend-to-wolves:f0t0:s1	-	-	-	d864b561c9cb	-	171d73e083cf	-	-	2026-11-24	xproof
+3cef501b-5ce1-4699-89a5-3949f7e65bf1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-friend-to-wolves:f0t0:s1,f:xs:XP:tolsimir-friend-to-wolves:f0t0:s1	-	-	-	d864b561c9cb	-	171d73e083cf	-	-	2026-11-24	xproof
+3cef501b-5ce1-4699-89a5-3949f7e65bf1	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-friend-to-wolves:f0t0:s1,f:xs:XP:tolsimir-friend-to-wolves:f0t0:s1	-	-	-	d864b561c9cb	-	171d73e083cf	-	-	2026-11-24	xproof
 3cfb4977-5b6d-4220-9c54-70920b3087ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cfea32e-6b52-441b-90aa-d8a137997297	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cfea32e-6b52-441b-90aa-d8a137997297	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

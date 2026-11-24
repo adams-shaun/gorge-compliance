@@ -62,8 +62,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 724b4a59-9c69-4f2b-a436-72183c62f1ff	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nebula Dragon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 724b4a59-9c69-4f2b-a436-72183c62f1ff	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Nebula Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 724b4a59-9c69-4f2b-a436-72183c62f1ff	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-724bc69c-cd09-4ff8-91e7-70500b9474e1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-724bc69c-cd09-4ff8-91e7-70500b9474e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+724bc69c-cd09-4ff8-91e7-70500b9474e1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:frilled-mystic:cast:s1,f:xs:XP:frilled-mystic:cast:s1	-	-	-	d864b561c9cb	-	b331cbdf7fbb	-	-	2026-11-24	xproof
+724bc69c-cd09-4ff8-91e7-70500b9474e1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:frilled-mystic:cast:s1,f:xs:XP:frilled-mystic:cast:s1	-	-	-	d864b561c9cb	-	b331cbdf7fbb	-	-	2026-11-24	xproof
 724c29a2-1783-401e-887c-2189afd5a944	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meditation-puzzle:cast:s1,f:xs:XP:meditation-puzzle:cast:s1	-	-	-	d864b561c9cb	-	14e0a3e59678	-	-	2026-11-24	xproof
 724c8a20-bfb3-4c63-8cfa-5ad4c72ebe2f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 724d8247-33b1-42bf-a827-7b66e45504c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7292272d-6511-466b-aadd-c4fe7ed8df09	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7292272d-6511-466b-aadd-c4fe7ed8df09	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72949d87-76cd-472c-86b3-2b7d5fce3159	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72949d87-76cd-472c-86b3-2b7d5fce3159	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+72949d87-76cd-472c-86b3-2b7d5fce3159	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:treetop-ambusher:f0t0:s1,f:xs:XP:treetop-ambusher:f0t0:s1	-	-	-	d864b561c9cb	-	22850a4e6059	-	-	2026-11-24	xproof
 72994a7a-7c0d-4f28-8cc0-28161d098d7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72994a7a-7c0d-4f28-8cc0-28161d098d7f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 729b7ce8-7e7f-4db9-b3ce-67aba46a7b0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fateful-showdown:cast:s1,f:xs:XP:fateful-showdown:cast:s1	-	-	-	d864b561c9cb	-	0386d4ddc2d6	-	-	2026-11-24	xproof
@@ -201,5 +201,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 72f5095f-b4ba-45ba-82e5-9a22bddd544b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72f5095f-b4ba-45ba-82e5-9a22bddd544b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 72f89173-2998-45e6-94da-5b5bb9738a6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72f89173-2998-45e6-94da-5b5bb9738a6b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+72f89173-2998-45e6-94da-5b5bb9738a6b	f0/t0	ChangesZone/Afterlife	agreed	-	FX	start	2	0	x:xs:XP:debtors-transport:f0t0:s1,f:xs:XP:debtors-transport:f0t0:s1	-	-	-	d864b561c9cb	-	8a378cb978e3	-	-	2026-11-24	xproof
 72f9a6f7-ea26-438d-aafa-758239fd3681	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

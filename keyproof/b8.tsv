@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 b800c3e5-4ed9-4603-a987-d830e90cf25e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b801a701-15ce-4792-a3d7-d632e7bd9f72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b801a701-15ce-4792-a3d7-d632e7bd9f72	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b801a701-15ce-4792-a3d7-d632e7bd9f72	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b8020a8b-557b-465d-865d-b59fecd7abc1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:threefold-thunderhulk:f0t0:s2,f:xs:XP:threefold-thunderhulk:f0t0:s2	-	-	-	e07cf3a05ba5	-	96e93b8038db	-	-	2026-11-24	xproof
 b8020a8b-557b-465d-865d-b59fecd7abc1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Threefold Thunderhulk/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b8020a8b-557b-465d-865d-b59fecd7abc1	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:threefold-thunderhulk:f0t0:s2,f:xs:XP:threefold-thunderhulk:f0t0:s2	-	-	-	e07cf3a05ba5	-	96e93b8038db	-	-	2026-11-24	xproof
@@ -21,8 +21,8 @@ b80d2841-03b0-42d3-ac9b-51e793b1dc24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wor
 b80df711-af51-4f9a-9a3f-f7a4cddc9c2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b80df711-af51-4f9a-9a3f-f7a4cddc9c2c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b80df711-af51-4f9a-9a3f-f7a4cddc9c2c	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b815cbbd-d79f-4180-8204-504a15df7152	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b815cbbd-d79f-4180-8204-504a15df7152	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b815cbbd-d79f-4180-8204-504a15df7152	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rubblebelt-boar:cast:s1,f:xs:XP:rubblebelt-boar:cast:s1	-	-	-	d864b561c9cb	-	f16bd3ea846b	-	-	2026-11-24	xproof
+b815cbbd-d79f-4180-8204-504a15df7152	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rubblebelt-boar:cast:s1,f:xs:XP:rubblebelt-boar:cast:s1	-	-	-	d864b561c9cb	-	f16bd3ea846b	-	-	2026-11-24	xproof
 b816b3cc-ae4b-4fb7-8b1a-e01ab83459a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b816b3cc-ae4b-4fb7-8b1a-e01ab83459a3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b8181d53-1954-4f46-8670-8696440208e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

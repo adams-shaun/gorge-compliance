@@ -11,8 +11,8 @@ c612ba0a-5134-45fa-a762-f4621bda4f83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pro
 c612ba0a-5134-45fa-a762-f4621bda4f83	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Proctor of Potential/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c612ba0a-5134-45fa-a762-f4621bda4f83	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:proctor-of-potential:f0t0:s1,f:xs:XP:proctor-of-potential:f0t0:s1	-	-	-	25696bf19d5b	-	e95aba50a389	-	-	2026-11-24	xproof
 c61374e5-a7f6-455e-a40b-a481751b536b	cast	cast-resolve	agreed	-	X	scen	1	0	Bushwhack/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c616242a-95f0-4cd8-99a1-9237cfea0e57	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c616242a-95f0-4cd8-99a1-9237cfea0e57	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c616242a-95f0-4cd8-99a1-9237cfea0e57	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:howling-giant:cast:s1,f:xs:XP:howling-giant:cast:s1	-	-	-	d864b561c9cb	-	d28711b13a8b	-	-	2026-11-24	xproof
+c616242a-95f0-4cd8-99a1-9237cfea0e57	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:howling-giant:cast:s1,f:xs:XP:howling-giant:cast:s1	-	-	-	d864b561c9cb	-	d28711b13a8b	-	-	2026-11-24	xproof
 c61b05b8-00f1-4371-9856-c65852b4ca02	cast	cast-resolve	agreed	-	X	scen	1	0	Feather of Flight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c61b05b8-00f1-4371-9856-c65852b4ca02	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 c61b05b8-00f1-4371-9856-c65852b4ca02	static#0.0	static#0.0	agreed	-	X	scen	1	0	Feather of Flight/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -68,7 +68,7 @@ c657626f-7444-4c26-842c-dda9b9656fa3	cast	cast-resolve	agreed	-	X	scen	1	0	Mabel
 c657e110-c204-48df-a396-9822ac48798d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c657e110-c204-48df-a396-9822ac48798d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c65ba242-3369-48a9-864f-1b1f85238f67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c65ba242-3369-48a9-864f-1b1f85238f67	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c65ba242-3369-48a9-864f-1b1f85238f67	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c65c4d01-29da-47e6-993c-a265cf1f198c	cast	cast-resolve	agreed	-	FX	scen	2	0	Long River Lurker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c65c4d01-29da-47e6-993c-a265cf1f198c	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c65c4d01-29da-47e6-993c-a265cf1f198c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Long River Lurker/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -76,7 +76,7 @@ c65c4d01-29da-47e6-993c-a265cf1f198c	static#0.0	static#0.0	agreed	-	X	scen	1	0	L
 c65dc9cb-3aad-4d15-a8c0-c0c142058d45	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temporal-cascade:cast:s1,f:xs:XP:temporal-cascade:cast:s1	-	-	-	25696bf19d5b	-	0a0d28aaf2da	-	-	2026-11-24	xproof
 c65e804b-9222-4fa8-88d1-df06a3279f22	cast	cast-resolve	agreed	-	X	scen	1	0	Flame Lash/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c65f8949-5e37-4929-994a-ec037814bf63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c65f8949-5e37-4929-994a-ec037814bf63	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c65f8949-5e37-4929-994a-ec037814bf63	f0/a0	Discard	agreed	-	FX	start	2	0	x:xs:XP:cult-guildmage:f0a0:s1,f:xs:XP:cult-guildmage:f0a0:s1	-	-	-	d864b561c9cb	-	6f512d8b1d80	-	-	2026-11-24	xproof
 c65f8949-5e37-4929-994a-ec037814bf63	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c66342bb-bbc1-4aaf-8d99-0af68292081e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kranioceros:cast:s1,f:xs:XP:kranioceros:cast:s1	-	-	-	8a1b1a193ec0	-	45bcf833bc90	-	-	2026-11-24	xproof
 c66342bb-bbc1-4aaf-8d99-0af68292081e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:kranioceros:f0a0:s1,f:xs:XP:kranioceros:f0a0:s1	-	-	-	8a1b1a193ec0	-	45bcf833bc90	-	-	2026-11-24	xproof
@@ -94,13 +94,13 @@ c66dc0d3-b98c-40a2-be35-e455b4658828	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	
 c6736bac-314b-48af-8722-c16a0d66affa	cast	cast	agreed	-	F	start	4	0	f:xs:XP:bounding-krasis:cast:s1	-	-	-	d864b561c9cb	-	ec3d7734cf11	-	-	2026-11-24	xproof
 c6736bac-314b-48af-8722-c16a0d66affa	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:bounding-krasis:cast:s1	-	-	-	d864b561c9cb	-	ec3d7734cf11	-	-	2026-11-24	xproof
 c6815bbb-24a5-4c9f-bf30-6190bc766d05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:recurring-insight:cast:s1,f:xs:XP:recurring-insight:cast:s1	-	-	-	d864b561c9cb	-	9b6096f92d50	-	-	2026-11-24	xproof
-c6836d78-ca71-4413-aced-d4de19976221	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c6836d78-ca71-4413-aced-d4de19976221	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c6836d78-ca71-4413-aced-d4de19976221	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:birthing-boughs:cast:s1,f:xs:XP:birthing-boughs:cast:s1	-	-	-	d864b561c9cb	-	03377d0ebfb3	-	-	2026-11-24	xproof
+c6836d78-ca71-4413-aced-d4de19976221	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:birthing-boughs:f0a0:s1,f:xs:XP:birthing-boughs:f0a0:s1	-	-	-	d864b561c9cb	-	03377d0ebfb3	-	-	2026-11-24	xproof
 c68627b1-025c-48c9-9646-98eb2d268e71	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6867301-296c-4840-aad4-1ad8345c091c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6867301-296c-4840-aad4-1ad8345c091c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c687af9b-2159-4965-a068-ce4db1ce801c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c687af9b-2159-4965-a068-ce4db1ce801c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c687af9b-2159-4965-a068-ce4db1ce801c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blizzard-strix:f0t0:s1,f:xs:XP:blizzard-strix:f0t0:s1	-	-	-	d864b561c9cb	-	b1a3ca65070d	-	-	2026-11-24	xproof
+c687af9b-2159-4965-a068-ce4db1ce801c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blizzard-strix:f0t0:s1,f:xs:XP:blizzard-strix:f0t0:s1	-	-	-	d864b561c9cb	-	b1a3ca65070d	-	-	2026-11-24	xproof
 c68964df-51ae-43b0-abea-74735016c13f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c68c2a98-9a6d-4199-af3a-78eb92beda48	cast	cast-resolve	agreed	-	X	scen	1	0	Luxurious Locomotive/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c68c2a98-9a6d-4199-af3a-78eb92beda48	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Luxurious Locomotive/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ c6d39445-dfc2-42c3-afd2-016fdf008f0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sla
 c6d39445-dfc2-42c3-afd2-016fdf008f0e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 c6d89c4a-351f-4d63-ba57-b978a695191e	cast	cast-resolve	agreed	-	X	scen	1	0	Seedship Impact/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c6dc70de-4fa5-466b-af28-0ced885d4e12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c6dc70de-4fa5-466b-af28-0ced885d4e12	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c6dc70de-4fa5-466b-af28-0ced885d4e12	f0/a0	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c6de0ee9-785d-4cd8-8a7f-5bb715763131	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6de0ee9-785d-4cd8-8a7f-5bb715763131	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6de0ee9-785d-4cd8-8a7f-5bb715763131	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

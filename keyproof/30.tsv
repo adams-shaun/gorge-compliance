@@ -84,8 +84,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3075dadd-240f-4455-9286-9f1d48f53a3f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 307be184-176a-40a8-944c-48aa00cfdd29	cast	cast-resolve	agreed	-	X	scen	1	0	Radiant Lotus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 307be184-176a-40a8-944c-48aa00cfdd29	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Radiant Lotus/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-307d20fd-a9c9-4da9-b990-26c653054640	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-307d20fd-a9c9-4da9-b990-26c653054640	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+307d20fd-a9c9-4da9-b990-26c653054640	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savage-gorger:cast:s1,f:xs:XP:savage-gorger:cast:s1	-	-	-	d864b561c9cb	-	9867bf08d3c5	-	-	2026-11-24	xproof
+307d20fd-a9c9-4da9-b990-26c653054640	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 30812870-87c0-469c-95a5-811d5a181e72	cast	cast-resolve	agreed	-	X	scen	1	0	Biogenic Upgrade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 30820f71-9fd4-453c-b377-c2e0b01c07a7	cast	cast-resolve	agreed	-	X	scen	1	0	Waterlogged Hulk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 30820f71-9fd4-453c-b377-c2e0b01c07a7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Waterlogged Hulk/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 30c3f88f-11d3-4b5f-8936-bab1c65bd693	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30c3f88f-11d3-4b5f-8936-bab1c65bd693	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30c3f88f-11d3-4b5f-8936-bab1c65bd693	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-30c4914e-4d9f-453d-bf5b-48ab8e0f2ba3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+30c4914e-4d9f-453d-bf5b-48ab8e0f2ba3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mausoleum-secrets:cast:s1,f:xs:XP:mausoleum-secrets:cast:s1	-	-	-	d864b561c9cb	-	80de3e5311b0	-	-	2026-11-24	xproof
 30c7e304-ecfe-44c1-88d1-f507df63c080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30c7e304-ecfe-44c1-88d1-f507df63c080	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 30ca8e92-5955-46a1-86c1-094a873f518f	cast	cast-resolve	agreed	-	FX	scen	2	0	Beorn the Fierce/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

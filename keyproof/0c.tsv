@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c25f6b1-8fb3-4406-9605-0282d2dbbcec	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c25f6b1-8fb3-4406-9605-0282d2dbbcec	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c25f6b1-8fb3-4406-9605-0282d2dbbcec	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c26ab0d-80f6-4e5b-9d0e-af17c1519583	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c26ab0d-80f6-4e5b-9d0e-af17c1519583	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:march-of-the-multitudes:cast:s1,f:xs:XP:march-of-the-multitudes:cast:s1	-	-	-	d864b561c9cb	-	5f99ea933c49	-	-	2026-11-24	xproof
 0c2841bb-038c-4fbf-8360-bc0a1522b58d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chandra-flamecaller:cast:s1,f:xs:XP:chandra-flamecaller:cast:s1	-	-	-	d864b561c9cb	-	54002e7e65a5	-	-	2026-11-24	xproof
 0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c766a86-9c70-465e-874b-9d9f3b4eb090	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c766a86-9c70-465e-874b-9d9f3b4eb090	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c77b805-728d-4ae4-88a9-223f4b7b52e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c77b805-728d-4ae4-88a9-223f4b7b52e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c77b805-728d-4ae4-88a9-223f4b7b52e0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0c7e261f-45d5-4c86-8cba-9b6edce8ef49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c7e261f-45d5-4c86-8cba-9b6edce8ef49	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0c7f9701-c39e-4f14-844a-15f2e3c41ca9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ce678fa-6495-4857-b178-231c283b4514	cast	cast-resolve	agreed	-	X	scen	1	0	Basking Capybara/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ce678fa-6495-4857-b178-231c283b4514	static#0.0	static#0.0	agreed	-	X	scen	1	0	Basking Capybara/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0cee5539-d10b-4de2-aee8-e02f0e24ac26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0cee5539-d10b-4de2-aee8-e02f0e24ac26	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0cee5539-d10b-4de2-aee8-e02f0e24ac26	f0/t0	ChangesZone/Afterlife	agreed	-	FX	start	2	0	x:xs:XP:ministrant-of-obligation:f0t0:s1,f:xs:XP:ministrant-of-obligation:f0t0:s1	-	-	-	d864b561c9cb	-	344fe66035c8	-	-	2026-11-24	xproof
 0cf18002-1bbe-40b3-ae15-fa51e61e9391	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:icefall-regent:cast:s1,f:xs:XP:icefall-regent:cast:s1	-	-	-	d864b561c9cb	-	e4f07c8fad83	-	-	2026-11-24	xproof
 0cf18002-1bbe-40b3-ae15-fa51e61e9391	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:icefall-regent:cast:s1,f:xs:XP:icefall-regent:cast:s1	-	-	-	d864b561c9cb	-	e4f07c8fad83	-	-	2026-11-24	xproof
 0cf742c1-feb5-4108-9976-37fa58528212	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slum-reaper:f0t0:s1,f:xs:XP:slum-reaper:f0t0:s1	-	-	-	d864b561c9cb	-	bbcd3d3a3d38	-	-	2026-11-24	xproof

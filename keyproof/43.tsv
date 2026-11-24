@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 431e85e3-15e6-471b-ba71-6058394c9a96	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Captain Storm, Cosmium Raider/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43257a85-2cbe-4931-9755-106808ab124a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43257a85-2cbe-4931-9755-106808ab124a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43257a85-2cbe-4931-9755-106808ab124a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43257a85-2cbe-4931-9755-106808ab124a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4325ae73-af43-4a7d-a552-9909f0dc77db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4325d4d2-5892-4c20-a994-7396b715e94f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4325d4d2-5892-4c20-a994-7396b715e94f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43ccc568-2509-49b6-99d7-c56900d1565a	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43cee9b6-9853-4337-869a-45540c9db10f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43d44a7f-829a-4f4d-9f71-2f4384ddd803	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43d44a7f-829a-4f4d-9f71-2f4384ddd803	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43d44a7f-829a-4f4d-9f71-2f4384ddd803	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spinal-centipede:f0t0:s1,f:xs:XP:spinal-centipede:f0t0:s1	-	-	-	d864b561c9cb	-	f09a74163379	-	-	2026-11-24	xproof
 43d69e13-27df-43a9-b610-6628dc02e3b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43d79ee6-8ba1-4ec9-9bb2-907ed8401a2f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43d79ee6-8ba1-4ec9-9bb2-907ed8401a2f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

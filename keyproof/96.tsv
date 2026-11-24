@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96262c15-9130-409c-8242-71f84be719b7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96262c15-9130-409c-8242-71f84be719b7	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96264dde-c0b6-4912-afc4-18757f938a4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96264dde-c0b6-4912-afc4-18757f938a4d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96264dde-c0b6-4912-afc4-18757f938a4d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grim-initiate:f0t0:s1,f:xs:XP:grim-initiate:f0t0:s1	-	-	-	d864b561c9cb	-	ac85683c00cf	-	-	2026-11-24	xproof
 9627ed9a-5ade-412d-bf8d-f0705b1c9405	cast	cast-resolve	agreed	-	X	scen	1	0	Moogles' Valor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9629ab26-f231-481d-8392-e2450ca02b67	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9629ab26-f231-481d-8392-e2450ca02b67	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,9 +128,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96b3c4ff-b5f7-4315-9b39-2e2146ef10d1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96b611e9-38cc-4326-bb38-73084e99e6f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96b87445-6362-4a17-91b2-cbf203fd03fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96b909ab-55f1-4cde-a675-2504de3da772	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96b909ab-55f1-4cde-a675-2504de3da772	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96b909ab-55f1-4cde-a675-2504de3da772	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96b909ab-55f1-4cde-a675-2504de3da772	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cavalier-of-thorns:cast:s1,f:xs:XP:cavalier-of-thorns:cast:s1	-	-	-	d864b561c9cb	-	f5cb6973a316	-	-	2026-11-24	xproof
+96b909ab-55f1-4cde-a675-2504de3da772	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cavalier-of-thorns:cast:s1,f:xs:XP:cavalier-of-thorns:cast:s1	-	-	-	d864b561c9cb	-	f5cb6973a316	-	-	2026-11-24	xproof
+96b909ab-55f1-4cde-a675-2504de3da772	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-thorns:f0t1:s1,f:xs:XP:cavalier-of-thorns:f0t1:s1	-	-	-	d864b561c9cb	-	f5cb6973a316	-	-	2026-11-24	xproof
 96c12c12-140a-462d-bff0-0554d192b1f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96c12c12-140a-462d-bff0-0554d192b1f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96c2d71e-0fc9-42aa-bc6b-6d0ae3f66f8b	cast	cast-resolve	agreed	-	X	scen	1	0	Hexing Squelcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -183,7 +183,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96e6d220-87db-4dab-abaa-e80c9577d89a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gossip's Talent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e6d220-87db-4dab-abaa-e80c9577d89a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gossip's Talent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e6d220-87db-4dab-abaa-e80c9577d89a	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Gossip's Talent/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-96e7e4c8-f66d-4327-aee6-85da648418f5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96e7e4c8-f66d-4327-aee6-85da648418f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maximize-velocity:cast:s1,f:xs:XP:maximize-velocity:cast:s1	-	-	-	d864b561c9cb	-	88b9bacb4e2a	-	-	2026-11-24	xproof
 96e8210a-a547-431d-8146-7399ec20c591	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96ebcd8b-ae3c-47b0-b895-bfc9848713e5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96ebcd8b-ae3c-47b0-b895-bfc9848713e5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

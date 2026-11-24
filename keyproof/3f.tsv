@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f244320-3e74-4eff-ba4e-a345700c40c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f244320-3e74-4eff-ba4e-a345700c40c9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f244320-3e74-4eff-ba4e-a345700c40c9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f278970-201d-4a93-b038-cc7218f2ac57	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f278970-201d-4a93-b038-cc7218f2ac57	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f278970-201d-4a93-b038-cc7218f2ac57	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:pondering-mage:cast:s1,f:xs:XP:pondering-mage:cast:s1	-	-	-	d864b561c9cb	-	e58629d16b91	-	-	2026-11-24	xproof
+3f278970-201d-4a93-b038-cc7218f2ac57	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:pondering-mage:cast:s1,f:xs:XP:pondering-mage:cast:s1	-	-	-	d864b561c9cb	-	e58629d16b91	-	-	2026-11-24	xproof
 3f27988b-0863-4cc1-8eb9-83bd0cd8561c	cast	cast-resolve	agreed	-	FX	scen	2	0	Mage Tower Referee/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f27988b-0863-4cc1-8eb9-83bd0cd8561c	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Mage Tower Referee/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f285781-ee03-4a58-a85e-a33f5efffc9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -74,8 +74,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f4dd9e2-6460-413e-a3b8-96b20bf57f8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f4dd9e2-6460-413e-a3b8-96b20bf57f8b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f4e300a-ec5c-42f3-a97b-d58e62abe22b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f4e300a-ec5c-42f3-a97b-d58e62abe22b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f4e300a-ec5c-42f3-a97b-d58e62abe22b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f4e300a-ec5c-42f3-a97b-d58e62abe22b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3f4e300a-ec5c-42f3-a97b-d58e62abe22b	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3f523026-beda-4549-96c0-e92108170261	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thriving-ibex:f0t0:s1,f:xs:XP:thriving-ibex:f0t0:s1	-	-	-	d864b561c9cb	-	c20a8d27cffe	-	-	2026-11-24	xproof
 3f523026-beda-4549-96c0-e92108170261	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thriving-ibex:f0t0:s1,f:xs:XP:thriving-ibex:f0t0:s1	-	-	-	d864b561c9cb	-	c20a8d27cffe	-	-	2026-11-24	xproof
 3f523026-beda-4549-96c0-e92108170261	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:thriving-ibex:f0t1:s1,f:xs:XP:thriving-ibex:f0t1:s1	-	-	-	d864b561c9cb	-	c20a8d27cffe	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3fb3d4b3-1034-449c-864b-633e7f39d73f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fb83218-e18d-405d-91c8-46b5e4e672a9	cast	cast-resolve	agreed	-	X	scen	1	0	Garna, Bloodfist of Keld/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3fb83218-e18d-405d-91c8-46b5e4e672a9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Garna, Bloodfist of Keld/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3fb9f0d9-6514-4005-b65a-7929f7c4df06	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3fb9f0d9-6514-4005-b65a-7929f7c4df06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scour-all-possibilities:cast:s1,f:xs:XP:scour-all-possibilities:cast:s1	-	-	-	d864b561c9cb	-	757a5d41f28a	-	-	2026-11-24	xproof
 3fbe46fa-88da-439a-994e-c8f1791332a8	cast	cast-resolve	agreed	-	X	scen	1	0	Undergrowth Recon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3fbe46fa-88da-439a-994e-c8f1791332a8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Undergrowth Recon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3fc4bdf1-7da3-4f9f-806f-f82cd18ea65f	cast	cast-resolve	agreed	-	X	scen	1	0	Razorkin Hordecaller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

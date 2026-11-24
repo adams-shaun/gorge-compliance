@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 632f1034-d2ad-432a-a79a-4bd1307be24a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63324e72-e580-456a-91be-766c9f07b7b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6332d6d3-1d77-486c-b040-02fc7225f245	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6332d6d3-1d77-486c-b040-02fc7225f245	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6332d6d3-1d77-486c-b040-02fc7225f245	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6336401f-4e2d-4ebe-8c5b-24aa6f516abf	cast	cast-resolve	agreed	-	FX	scen	2	0	Fleeting Flight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 633849f6-fad7-49d7-8bf5-2a3a4510965f	cast	cast	agreed	-	X	start	2	0	x:xs:XP:highland-berserker:f0t0:s1	-	-	-	8a1b1a193ec0	-	11aa07aa210f	-	-	2026-11-24	xproof
 633849f6-fad7-49d7-8bf5-2a3a4510965f	f0/t0	ChangesZone	agreed	-	X	start	2	0	x:xs:XP:highland-berserker:f0t0:s1	-	-	-	8a1b1a193ec0	-	11aa07aa210f	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 635cc10e-ca25-49a2-af44-3b064263a254	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 635cc10e-ca25-49a2-af44-3b064263a254	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 635dda8c-3761-4c87-8723-8cd09878516b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-635dda8c-3761-4c87-8723-8cd09878516b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+635dda8c-3761-4c87-8723-8cd09878516b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 635fe908-6f58-4c9e-ac55-0775a7c6f278	cast	cast-resolve	agreed	-	FX	scen	2	0	Angel of Vitality/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 635fe908-6f58-4c9e-ac55-0775a7c6f278	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Angel of Vitality/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 635fe908-6f58-4c9e-ac55-0775a7c6f278	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Angel of Vitality/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 636e9863-29ac-476a-86db-d8f73b4adbf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 636ed3e3-c31d-403a-a3e7-03e01350ce4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mardu-woe-reaper:f0t0:s1,f:xs:XP:mardu-woe-reaper:f0t0:s1	-	-	-	d864b561c9cb	-	71242f06444b	-	-	2026-11-24	xproof
 636ed3e3-c31d-403a-a3e7-03e01350ce4f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mardu-woe-reaper:f0t0:s1,f:xs:XP:mardu-woe-reaper:f0t0:s1	-	-	-	d864b561c9cb	-	71242f06444b	-	-	2026-11-24	xproof
-63701aa6-d3b8-4af2-96a4-2dec27d6a661	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63701aa6-d3b8-4af2-96a4-2dec27d6a661	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:frilled-mystic:cast:s1,f:xs:XP:frilled-mystic:cast:s1	-	-	-	d864b561c9cb	-	c4a3dacdb39a	-	-	2026-11-24	xproof
 6373c66d-edfc-44cb-af2a-2273e0ba53e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6373c66d-edfc-44cb-af2a-2273e0ba53e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63765157-e2ba-4cec-9501-8a405259de5b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,8 +105,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 637ddd65-112d-40f7-9bab-a61724d9165c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 637ddd65-112d-40f7-9bab-a61724d9165c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6385fd0d-256d-4400-9319-afa8170024db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-638ecc20-a275-4810-9669-89a0730c5362	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-638ecc20-a275-4810-9669-89a0730c5362	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+638ecc20-a275-4810-9669-89a0730c5362	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cyclops-electromancer:cast:s1,f:xs:XP:cyclops-electromancer:cast:s1	-	-	-	d864b561c9cb	-	4d9aed68438f	-	-	2026-11-24	xproof
+638ecc20-a275-4810-9669-89a0730c5362	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cyclops-electromancer:cast:s1,f:xs:XP:cyclops-electromancer:cast:s1	-	-	-	d864b561c9cb	-	4d9aed68438f	-	-	2026-11-24	xproof
 638ff242-63d5-457d-a7a6-40ad51052e2e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Paradox Gardens/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 638ff242-63d5-457d-a7a6-40ad51052e2e	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Paradox Gardens/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 638ff242-63d5-457d-a7a6-40ad51052e2e	land	play-land	agreed	-	X	scen	1	0	Paradox Gardens/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -135,8 +135,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63bfb9ca-d9d5-4c17-be39-82eb115bc20c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lavaspur Boots/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63c04040-e109-494e-baa6-c639a6c9a996	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63c04040-e109-494e-baa6-c639a6c9a996	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63c04040-e109-494e-baa6-c639a6c9a996	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63c04040-e109-494e-baa6-c639a6c9a996	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63c04040-e109-494e-baa6-c639a6c9a996	f0/a1	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:bag-of-holding:f0a1:s1,f:xs:XP:bag-of-holding:f0a1:s1	-	-	-	d864b561c9cb	-	5fc14577ff5f	-	-	2026-11-24	xproof
+63c04040-e109-494e-baa6-c639a6c9a996	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 63c1ac21-e3d8-40c2-8c09-3f31c52992ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vindicate:cast:s1,f:xs:XP:vindicate:cast:s1	-	-	-	25696bf19d5b	-	c90e83392a30	-	-	2026-11-24	xproof
 63c1dfcc-9d47-4dee-b4e6-1f50e716cf9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63c1dfcc-9d47-4dee-b4e6-1f50e716cf9e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63c8f510-eba8-4f00-9f80-fbbc74801a4a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:scampering-surveyor:f0t0:s1,f:xs:XP:scampering-surveyor:f0t0:s1	-	-	-	e07cf3a05ba5	-	d4e27677232f	-	-	2026-11-24	xproof
 63d50d5e-56de-44c4-b906-b2a21a56e3f3	cast	cast-resolve	agreed	-	X	scen	1	0	Alania, Divergent Storm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63d50d5e-56de-44c4-b906-b2a21a56e3f3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Alania, Divergent Storm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-63d846e2-4bef-4911-9508-273c75a4a040	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63d846e2-4bef-4911-9508-273c75a4a040	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:banehound:cast:s1,f:xs:XP:banehound:cast:s1	-	-	-	d864b561c9cb	-	44e57f77c921	-	-	2026-11-24	xproof
 63d92a82-d77d-4c47-a49b-bde6a8c9dd8d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63d92a82-d77d-4c47-a49b-bde6a8c9dd8d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63d92baf-0007-4519-a5bc-d189448ea126	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

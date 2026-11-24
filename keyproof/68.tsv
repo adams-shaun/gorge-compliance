@@ -68,7 +68,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6860cde7-ee8e-4a4d-baed-9dc4a1220e36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glaze-fiend:cast:s1,f:xs:XP:glaze-fiend:cast:s1	-	-	-	8a1b1a193ec0	-	a87f364b9c56	-	-	2026-11-24	xproof
 6860cde7-ee8e-4a4d-baed-9dc4a1220e36	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 68639a3d-2192-4921-8298-c76bb0cd6b02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68639a3d-2192-4921-8298-c76bb0cd6b02	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68639a3d-2192-4921-8298-c76bb0cd6b02	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6866f0a4-5fe6-40d9-bbfc-6f116f4e415d	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6866f0a4-5fe6-40d9-bbfc-6f116f4e415d	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 686b44ec-3446-4e1f-a15f-9d8557db6d70	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -191,7 +191,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68e0b691-f332-4b0a-8173-bb8a48b463a1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68e1f7e0-a9b3-437f-8086-0c0cb85f2880	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68e1f7e0-a9b3-437f-8086-0c0cb85f2880	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68e87559-7cae-4dcf-b7cd-a61f19bcd840	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68e87559-7cae-4dcf-b7cd-a61f19bcd840	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mass-manipulation:cast:s1,f:xs:XP:mass-manipulation:cast:s1	-	-	-	d864b561c9cb	-	53e9932f07a1	-	-	2026-11-24	xproof
 68eb3566-c74d-42a6-89a6-b468677fc485	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:benthicore:cast:s1,f:xs:XP:benthicore:cast:s1	-	-	-	d864b561c9cb	-	04f75492b829	-	-	2026-11-24	xproof
 68eb3566-c74d-42a6-89a6-b468677fc485	f0/a0	Untap	agreed	-	FX	start	4	0	x:xs:XP:benthicore:cast:s1,f:xs:XP:benthicore:cast:s1	-	-	-	d864b561c9cb	-	04f75492b829	-	-	2026-11-24	xproof
 68eb3566-c74d-42a6-89a6-b468677fc485	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:benthicore:cast:s1,f:xs:XP:benthicore:cast:s1	-	-	-	d864b561c9cb	-	04f75492b829	-	-	2026-11-24	xproof
@@ -216,7 +216,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68fb8f21-4403-4829-8826-f2418664197e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68fb8f21-4403-4829-8826-f2418664197e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68fbc13c-00b3-49bb-b343-4f2f1e8f5a7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68fbc13c-00b3-49bb-b343-4f2f1e8f5a7c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68fbc13c-00b3-49bb-b343-4f2f1e8f5a7c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 68fc3611-8d82-4f87-ab50-603790a27455	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gruul-nodorog:cast:s1,f:xs:XP:gruul-nodorog:cast:s1	-	-	-	64a08ba7d913	-	9b93a58ae2ec	-	-	2026-11-24	xproof
 68fc3611-8d82-4f87-ab50-603790a27455	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 68fc55b9-55cc-4caf-a052-b44ddc0b346f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

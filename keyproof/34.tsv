@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 340de307-982a-4b26-9dc0-99113dc766cd	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 340de307-982a-4b26-9dc0-99113dc766cd	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 340de754-9d64-4824-936f-643be4a939db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-340de754-9d64-4824-936f-643be4a939db	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+340de754-9d64-4824-936f-643be4a939db	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 340e1078-5158-4199-ab43-976741780b2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 340e1078-5158-4199-ab43-976741780b2b	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 340ec369-1761-4134-a96d-5537b4e08703	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34b90d3e-f48c-41ff-b3e4-5cab7a9cd597	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34b93a66-de1e-4133-a479-e0d90ba94a3a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mutable-explorer:f0t0:s2,f:xs:XP:mutable-explorer:f0t0:s2	-	-	-	267e485f6204	-	4bba1846012a	-	-	2026-11-24	xproof
 34b93a66-de1e-4133-a479-e0d90ba94a3a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mutable-explorer:f0t0:s2,f:xs:XP:mutable-explorer:f0t0:s2	-	-	-	267e485f6204	-	4bba1846012a	-	-	2026-11-24	xproof
-34bcc217-dd91-45a0-90d7-a94d02f1f317	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34bcc217-dd91-45a0-90d7-a94d02f1f317	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:growth-spiral:cast:s1,f:xs:XP:growth-spiral:cast:s1	-	-	-	d864b561c9cb	-	f15466778b08	-	-	2026-11-24	xproof
 34bccfc0-453d-4d1a-8046-70f9c3065e88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34bccfc0-453d-4d1a-8046-70f9c3065e88	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34bd39ed-4058-4c65-ba5f-9ac5cf7c166a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rhox-bodyguard:cast:s1,f:xs:XP:rhox-bodyguard:cast:s1	-	-	-	8a1b1a193ec0	-	69625e674911	-	-	2026-11-24	xproof

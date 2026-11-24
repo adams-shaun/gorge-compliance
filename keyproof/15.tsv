@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 153292f9-e0d1-43a7-a083-275c49d0554a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 153292f9-e0d1-43a7-a083-275c49d0554a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 153376c9-dffd-458c-8ce3-a4c8269bc4e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-153376c9-dffd-458c-8ce3-a4c8269bc4e9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+153376c9-dffd-458c-8ce3-a4c8269bc4e9	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 15353e27-96ca-48c7-83d7-efd57c094643	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:overcome:cast:s1,f:xs:XP:overcome:cast:s1	-	-	-	d864b561c9cb	-	0475630c27d4	-	-	2026-11-24	xproof
 15361770-c6dc-4db7-b745-aa03e4b866ea	cast	cast-resolve	agreed	-	X	scen	1	0	Breeches, Eager Pillager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 15361770-c6dc-4db7-b745-aa03e4b866ea	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Breeches, Eager Pillager/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -51,10 +51,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 153cd93c-7bba-4482-893c-55a602c4439b	f0/a0	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 154104b7-4125-4276-8bc7-9a6edfe48cb9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 154104b7-4125-4276-8bc7-9a6edfe48cb9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-15474e82-94b4-47e1-b91c-3deaf4dbffd6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-15474e82-94b4-47e1-b91c-3deaf4dbffd6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-15474e82-94b4-47e1-b91c-3deaf4dbffd6	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-15474e82-94b4-47e1-b91c-3deaf4dbffd6	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+15474e82-94b4-47e1-b91c-3deaf4dbffd6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-inspiring-leader:cast:s1,f:xs:XP:ajani-inspiring-leader:cast:s1	-	-	-	d864b561c9cb	-	fa12f6fc4aad	-	-	2026-11-24	xproof
+15474e82-94b4-47e1-b91c-3deaf4dbffd6	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:ajani-inspiring-leader:cast:s1,f:xs:XP:ajani-inspiring-leader:cast:s1	-	-	-	d864b561c9cb	-	fa12f6fc4aad	-	-	2026-11-24	xproof
+15474e82-94b4-47e1-b91c-3deaf4dbffd6	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+15474e82-94b4-47e1-b91c-3deaf4dbffd6	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 154e865f-1aab-4d72-9e84-44e5316bbf3c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1551cd95-1e68-404f-be1d-cc9c7f447210	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1552c6d1-f20a-4303-acf2-2fdd432a98e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

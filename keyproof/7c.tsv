@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c0e4731-d384-4f63-a36c-b571d8f79922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c0e4731-d384-4f63-a36c-b571d8f79922	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c0e4731-d384-4f63-a36c-b571d8f79922	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-7c0ef3b7-b368-4a5b-8cbe-bf1f47610f74	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7c0ef3b7-b368-4a5b-8cbe-bf1f47610f74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:daggersail-aeronaut:cast:s1,f:xs:XP:daggersail-aeronaut:cast:s1	-	-	-	d864b561c9cb	-	6b9150ecd52f	-	-	2026-11-24	xproof
 7c158405-d3ef-4c10-a504-7b061ef71a74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c158405-d3ef-4c10-a504-7b061ef71a74	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c179e54-3beb-4761-bddf-41fa98b082db	cast	cast-resolve	agreed	-	X	scen	1	0	Driver of the Dead/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -45,8 +45,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c3a8766-e440-48c5-a561-197490efdba5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c3dcfea-f42c-4515-9b7d-6e9d8cb4d7f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c3f2b3d-1517-4818-9675-189949175623	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7c3f2b3d-1517-4818-9675-189949175623	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7c3f2b3d-1517-4818-9675-189949175623	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7c3f2b3d-1517-4818-9675-189949175623	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7c3f2b3d-1517-4818-9675-189949175623	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7c3ff360-461a-44f3-a8f2-eb061b149cf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c3ff360-461a-44f3-a8f2-eb061b149cf5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c415180-c179-474b-8c58-e7096bd2c763	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -74,10 +74,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c5183be-cddf-48fb-a4b5-dc5f6faf26de	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cloudsculpt Technician/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7c5183be-cddf-48fb-a4b5-dc5f6faf26de	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cloudsculpt Technician/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7c5183be-cddf-48fb-a4b5-dc5f6faf26de	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cloudsculpt Technician/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7c520355-1ab8-4d6d-9a29-0f63d6b60024	cast	cast-resolve	agreed	-	FX	scen	2	0	Cavalier of Dawn/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+7c520355-1ab8-4d6d-9a29-0f63d6b60024	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-dawn:f0t0:s1,f:xs:XP:cavalier-of-dawn:f0t0:s1	-	-	-	d864b561c9cb	-	a98ee44935ae	-	-	2026-11-24	xproof
 7c520355-1ab8-4d6d-9a29-0f63d6b60024	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cavalier of Dawn/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7c520355-1ab8-4d6d-9a29-0f63d6b60024	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cavalier of Dawn/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-7c520355-1ab8-4d6d-9a29-0f63d6b60024	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7c520355-1ab8-4d6d-9a29-0f63d6b60024	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-dawn:f0t0:s1,f:xs:XP:cavalier-of-dawn:f0t0:s1	-	-	-	d864b561c9cb	-	a98ee44935ae	-	-	2026-11-24	xproof
 7c520355-1ab8-4d6d-9a29-0f63d6b60024	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Cavalier of Dawn/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7c565975-aebc-4599-ac32-5594c718e2cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c57d4aa-d221-4b36-a544-9fa89d63ffbe	cast	cast-resolve	agreed	-	FX	scen	2	0	Dance of the Tumbleweeds/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

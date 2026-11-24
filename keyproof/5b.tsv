@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 5b034e04-70e5-4783-8ac8-04d8e5a9f961	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b034e04-70e5-4783-8ac8-04d8e5a9f961	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-5b04a337-3152-481e-973f-a11dbd615f93	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b04a337-3152-481e-973f-a11dbd615f93	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5b04a337-3152-481e-973f-a11dbd615f93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nullhide-ferox:cast:s1,f:xs:XP:nullhide-ferox:cast:s1	-	-	-	d864b561c9cb	-	b280b0781e5e	-	-	2026-11-24	xproof
+5b04a337-3152-481e-973f-a11dbd615f93	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:nullhide-ferox:f0a0:s1,f:xs:XP:nullhide-ferox:f0a0:s1	-	-	-	d864b561c9cb	-	b280b0781e5e	-	-	2026-11-24	xproof
 5b079914-1302-40b5-8060-7c3e5b6e9eae	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b079914-1302-40b5-8060-7c3e5b6e9eae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b090ba3-0ecb-4585-b5b7-9d6028c32487	cast	cast-resolve	agreed	-	X	scen	1	0	Misty Knight, Hero for Hire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b79b68a-db71-4638-824e-ab89b1716c86	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dáin, Lord of the Iron Hills/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b79b68a-db71-4638-824e-ab89b1716c86	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dáin, Lord of the Iron Hills/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b7abe71-0be3-4dd4-880e-88b65b47ea4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b7b1839-2b44-4446-80b4-ddb59e4e835e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5b7b1839-2b44-4446-80b4-ddb59e4e835e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undercity-s-embrace:cast:s1,f:xs:XP:undercity-s-embrace:cast:s1	-	-	-	d864b561c9cb	-	9dd91595b201	-	-	2026-11-24	xproof
 5b7bbc76-22cc-482e-8d65-34cff34c93c8	cast	cast-resolve	agreed	-	X	scen	1	0	Unstable Experiment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b7f6cc3-8d4e-42e5-a908-7ebe3bccaf1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b7f6cc3-8d4e-42e5-a908-7ebe3bccaf1e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ba6a472-b2f3-4d8e-838c-269aaa5eb2e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ba73182-30a7-4bad-9cb6-c0feecc2db33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ba7abbc-f6e8-40c2-800b-11efd10cca5b	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-5badc2e8-a7d6-48c7-b594-65db953d9d57	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wingmate-roc:cast:s1,f:xs:XP:wingmate-roc:cast:s1	-	-	-	d864b561c9cb	-	31b96ff88df6	-	-	2026-11-24	xproof
+5badc2e8-a7d6-48c7-b594-65db953d9d57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wingmate-roc:f0t0:s1,f:xs:XP:wingmate-roc:f0t0:s1	-	-	-	d864b561c9cb	-	31b96ff88df6	-	-	2026-11-24	xproof
 5badc2e8-a7d6-48c7-b594-65db953d9d57	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5badc2e8-a7d6-48c7-b594-65db953d9d57	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:wingmate-roc:f0t1:s1,f:xs:XP:wingmate-roc:f0t1:s1	-	-	-	d864b561c9cb	-	31b96ff88df6	-	-	2026-11-24	xproof
 5bafd0e0-8bf8-4e06-a54a-81cc6cc4bdb7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

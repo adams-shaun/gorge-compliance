@@ -121,10 +121,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10889b44-d031-413c-a8c4-d6c13c400e01	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10891656-070f-49f4-80e0-78061b773f17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10891656-070f-49f4-80e0-78061b773f17	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-108ae90a-50fa-4cfd-b751-d630e41425fe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+108ae90a-50fa-4cfd-b751-d630e41425fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wrenn-and-six:cast:s1,f:xs:XP:wrenn-and-six:cast:s1	-	-	-	d864b561c9cb	-	53ea956d1032	-	-	2026-11-24	xproof
+108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:wrenn-and-six:cast:s1,f:xs:XP:wrenn-and-six:cast:s1	-	-	-	d864b561c9cb	-	53ea956d1032	-	-	2026-11-24	xproof
+108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 10916f33-aaa6-43a1-9835-b60fd061161f	cast	cast-resolve	agreed	-	X	scen	1	0	A.I.M. Synthoids/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10916f33-aaa6-43a1-9835-b60fd061161f	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1091c83a-a4b9-457f-a69a-9a44a7e10759	cast	cast-resolve	agreed	-	FX	scen	2	0	Echo, Perceptive Prodigy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -144,8 +144,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 109cdefd-e8cc-4ac7-b6ba-2cfdef8d780f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Icetill Explorer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 109cdefd-e8cc-4ac7-b6ba-2cfdef8d780f	static#0.1	static#0.1	agreed	-	X	scen	1	0	Icetill Explorer/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10a66403-606d-4814-9583-50cdcd6976e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10a87c58-2d8b-4658-b7d6-8dcbb44a2d2f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10a87c58-2d8b-4658-b7d6-8dcbb44a2d2f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+10a87c58-2d8b-4658-b7d6-8dcbb44a2d2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jaya-venerated-firemage:cast:s1,f:xs:XP:jaya-venerated-firemage:cast:s1	-	-	-	d864b561c9cb	-	553cf1b34fee	-	-	2026-11-24	xproof
+10a87c58-2d8b-4658-b7d6-8dcbb44a2d2f	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:jaya-venerated-firemage:cast:s1,f:xs:XP:jaya-venerated-firemage:cast:s1	-	-	-	d864b561c9cb	-	553cf1b34fee	-	-	2026-11-24	xproof
 10aab5bc-5758-443b-ba4c-49f6c6d91262	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10aab5bc-5758-443b-ba4c-49f6c6d91262	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10ab3102-43a3-4c60-8641-2c5a7c1e29c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

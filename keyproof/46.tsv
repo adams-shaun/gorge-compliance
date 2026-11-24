@@ -16,8 +16,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 460c0f0b-bbf4-4307-9b44-350175d83bfe	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cartographer-s-companion:f0t0:s2,f:xs:XP:cartographer-s-companion:f0t0:s2	-	-	-	e07cf3a05ba5	-	8248cf7f8405	-	-	2026-11-24	xproof
 460c0f0b-bbf4-4307-9b44-350175d83bfe	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cartographer-s-companion:f0t0:s2,f:xs:XP:cartographer-s-companion:f0t0:s2	-	-	-	e07cf3a05ba5	-	8248cf7f8405	-	-	2026-11-24	xproof
 46137f00-f7f5-430a-857c-ff2dbf2d2579	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4617739e-4e3e-4d06-b074-8f836261a870	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4617739e-4e3e-4d06-b074-8f836261a870	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4617739e-4e3e-4d06-b074-8f836261a870	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-screecher:cast:s1,f:xs:XP:war-screecher:cast:s1	-	-	-	d864b561c9cb	-	1432b3834f9e	-	-	2026-11-24	xproof
+4617739e-4e3e-4d06-b074-8f836261a870	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:war-screecher:f0a0:s1,f:xs:XP:war-screecher:f0a0:s1	-	-	-	d864b561c9cb	-	1432b3834f9e	-	-	2026-11-24	xproof
 4619de7e-3d6e-4c6b-8e6e-e24db324839d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Nomad Outpost/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4619de7e-3d6e-4c6b-8e6e-e24db324839d	land	play-land	agreed	-	FX	scen	2	0	Nomad Outpost/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 461b3f2f-fcee-4160-abfa-061f8b6a784f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -204,7 +204,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46eefc72-2d9e-4389-8ae1-26d9ee472b5c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46eefc72-2d9e-4389-8ae1-26d9ee472b5c	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 46eefc72-2d9e-4389-8ae1-26d9ee472b5c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46f01d1c-7ab6-4a58-97ce-57a4eb99843c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46f01d1c-7ab6-4a58-97ce-57a4eb99843c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wary-okapi:cast:s1,f:xs:XP:wary-okapi:cast:s1	-	-	-	d864b561c9cb	-	28d33c1612be	-	-	2026-11-24	xproof
 46f1618d-9c95-4a4b-9a20-7c378b811849	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46f46bdd-52b8-436f-9a39-f5360a84b2cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46f46bdd-52b8-436f-9a39-f5360a84b2cd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

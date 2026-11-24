@@ -57,8 +57,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 513fd896-ab78-44fb-b136-f7c93288dc63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5140cd2f-af30-4405-b5e4-996ef6349f59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5140cd2f-af30-4405-b5e4-996ef6349f59	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5146ae31-9578-46e3-be78-eb90e4ba48cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5146ae31-9578-46e3-be78-eb90e4ba48cd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5146ae31-9578-46e3-be78-eb90e4ba48cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undercity-scavenger:f0t0:s1,f:xs:XP:undercity-scavenger:f0t0:s1	-	-	-	d864b561c9cb	-	c7d804d34f22	-	-	2026-11-24	xproof
+5146ae31-9578-46e3-be78-eb90e4ba48cd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undercity-scavenger:f0t0:s1,f:xs:XP:undercity-scavenger:f0t0:s1	-	-	-	d864b561c9cb	-	c7d804d34f22	-	-	2026-11-24	xproof
 5146b291-1170-481f-a4b9-709dd5c4b09c	cast	cast-resolve	agreed	-	X	scen	1	0	Overgrown Zealot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5146b291-1170-481f-a4b9-709dd5c4b09c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Overgrown Zealot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5146b291-1170-481f-a4b9-709dd5c4b09c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Overgrown Zealot/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -163,8 +163,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51d6d164-6e5f-4be3-8f09-433e0b8d4c6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51d6d164-6e5f-4be3-8f09-433e0b8d4c6b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51d733e3-bcbd-4c67-98bc-d51ffaf45523	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51d7b287-90d5-4e3b-a82c-6b98996154e1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51d7b287-90d5-4e3b-a82c-6b98996154e1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+51d7b287-90d5-4e3b-a82c-6b98996154e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trustworthy-scout:cast:s1,f:xs:XP:trustworthy-scout:cast:s1	-	-	-	d864b561c9cb	-	f9340618517c	-	-	2026-11-24	xproof
+51d7b287-90d5-4e3b-a82c-6b98996154e1	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 51d7bd70-0874-41d4-94bc-c3e14c968668	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51d7bd70-0874-41d4-94bc-c3e14c968668	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51d9564b-44fc-4de1-9119-09d7b4089378	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -43,9 +43,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a3a25ae-61f5-4bcd-ae3d-4b31feaa83d8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a3a25ae-61f5-4bcd-ae3d-4b31feaa83d8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a3acbf7-0699-4d7c-b4fa-aa15c7cde189	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a3acbf7-0699-4d7c-b4fa-aa15c7cde189	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a3acbf7-0699-4d7c-b4fa-aa15c7cde189	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:seraph-of-the-scales:f0a0:s1,f:xs:XP:seraph-of-the-scales:f0a0:s1	-	-	-	d864b561c9cb	-	762587b0e416	-	-	2026-11-24	xproof
 4a3acbf7-0699-4d7c-b4fa-aa15c7cde189	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a3acbf7-0699-4d7c-b4fa-aa15c7cde189	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a3acbf7-0699-4d7c-b4fa-aa15c7cde189	f0/t0	ChangesZone/Afterlife	agreed	-	FX	start	2	0	x:xs:XP:seraph-of-the-scales:f0t0:s1,f:xs:XP:seraph-of-the-scales:f0t0:s1	-	-	-	d864b561c9cb	-	762587b0e416	-	-	2026-11-24	xproof
 4a3c6d0e-6d77-4434-95f4-737879de026f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a3cc4f6-037f-461d-a3b7-9f9e24c4b8cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a3fba0c-50b1-4139-834e-c8fc8e1315bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a574140-0657-4f49-b497-331447f17b29	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a58954a-1d20-48b8-847c-3615de67e122	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a58954a-1d20-48b8-847c-3615de67e122	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a59d86e-405d-4c70-b2a5-c64f5cecfd9e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a59d86e-405d-4c70-b2a5-c64f5cecfd9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:electrodominance:cast:s1,f:xs:XP:electrodominance:cast:s1	-	-	-	d864b561c9cb	-	b163af19ddb6	-	-	2026-11-24	xproof
 4a5f76e7-40be-4b06-9935-4a3b2672e1c2	cast	cast-resolve	agreed	-	FX	scen	2	0	Thranduil, the Elvenking/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a5f76e7-40be-4b06-9935-4a3b2672e1c2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thranduil, the Elvenking/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a5f76e7-40be-4b06-9935-4a3b2672e1c2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thranduil, the Elvenking/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99915b5a-5092-4900-8824-6de2aab1b2c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99957aa7-b654-41b5-9b96-7bce47545d25	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 999a9310-d145-4c1a-8518-9d96602ca672	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-999ece12-0f1f-4b20-a600-b7f1a584bbb4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-999ece12-0f1f-4b20-a600-b7f1a584bbb4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+999ece12-0f1f-4b20-a600-b7f1a584bbb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:huatli-s-raptor:f0t0:s1,f:xs:XP:huatli-s-raptor:f0t0:s1	-	-	-	d864b561c9cb	-	e1b92a6223b3	-	-	2026-11-24	xproof
+999ece12-0f1f-4b20-a600-b7f1a584bbb4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:huatli-s-raptor:f0t0:s1,f:xs:XP:huatli-s-raptor:f0t0:s1	-	-	-	d864b561c9cb	-	e1b92a6223b3	-	-	2026-11-24	xproof
 99a3cea9-f4ab-4da3-a085-c09dc93fc8cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99a3cea9-f4ab-4da3-a085-c09dc93fc8cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99a3cea9-f4ab-4da3-a085-c09dc93fc8cb	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99e3b8ee-29e3-41de-af31-a4e8800c4619	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99e3b8ee-29e3-41de-af31-a4e8800c4619	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99e96711-90ea-4f6b-a92d-d8ddd06e8750	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99e96711-90ea-4f6b-a92d-d8ddd06e8750	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+99e96711-90ea-4f6b-a92d-d8ddd06e8750	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 99eaac39-28d4-4af7-984b-f75fd37902ed	cast	cast-resolve	agreed	-	X	scen	1	0	Break Out/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99eb5cda-684d-4f6c-bc34-1f03c8797150	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99ed6e18-7f14-4ea8-baee-ad6c081388ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

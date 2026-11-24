@@ -11,8 +11,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64132f93-66ac-4794-8c07-a88f9ed0e22b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cloak and Dagger, Entwined/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64132f93-66ac-4794-8c07-a88f9ed0e22b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cloak and Dagger, Entwined/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64132f93-66ac-4794-8c07-a88f9ed0e22b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	1fdf77ba74cf	-	-	2026-11-24	xproof
-6416dae0-0d40-4d88-b30b-e1a0c8380e78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6416dae0-0d40-4d88-b30b-e1a0c8380e78	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6416dae0-0d40-4d88-b30b-e1a0c8380e78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spire-mangler:f0t0:s1,f:xs:XP:spire-mangler:f0t0:s1	-	-	-	d864b561c9cb	-	d952edd8b1c9	-	-	2026-11-24	xproof
+6416dae0-0d40-4d88-b30b-e1a0c8380e78	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spire-mangler:f0t0:s1,f:xs:XP:spire-mangler:f0t0:s1	-	-	-	d864b561c9cb	-	d952edd8b1c9	-	-	2026-11-24	xproof
 641db975-cf94-44c6-a391-f540a952e0d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savra-queen-of-the-golgari:cast:s1,f:xs:XP:savra-queen-of-the-golgari:cast:s1	-	-	-	77494c1ce129	-	4a670f36fb3e	-	-	2026-11-24	xproof
 641db975-cf94-44c6-a391-f540a952e0d8	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	77494c1ce129	-	-	-	-	2026-11-24	xproof
 641db975-cf94-44c6-a391-f540a952e0d8	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 644379e7-782e-48e1-9b47-c4dc62e62d85	cast	cast-resolve	agreed	-	X	scen	1	0	Fractal Anomaly/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64446130-46d0-4129-a718-ed6a04218100	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 644a8946-4890-4c2b-978f-02eedc95b5ad	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-644eeefd-e684-4ca8-8aef-a892ca130c07	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+644eeefd-e684-4ca8-8aef-a892ca130c07	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 645005dd-3438-4b88-bb19-561f9679a022	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 645005dd-3438-4b88-bb19-561f9679a022	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6454c457-a278-431a-9e8d-bfd1a966bdde	cast	cast-resolve	agreed	-	X	scen	1	0	Vnwxt, Verbose Host/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -120,8 +120,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 649300e2-c491-435d-92d5-f1b88f0e2e2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 649300e2-c491-435d-92d5-f1b88f0e2e2e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 6493960b-4bbb-4ef0-8efb-abb122b1697d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6494e3c4-5489-44a5-94b6-4ee2d7830896	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6494e3c4-5489-44a5-94b6-4ee2d7830896	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6494e3c4-5489-44a5-94b6-4ee2d7830896	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boneclad-necromancer:f0t0:s1,f:xs:XP:boneclad-necromancer:f0t0:s1	-	-	-	d864b561c9cb	-	7542e9fc61b7	-	-	2026-11-24	xproof
+6494e3c4-5489-44a5-94b6-4ee2d7830896	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:boneclad-necromancer:f0t0:s1,f:xs:XP:boneclad-necromancer:f0t0:s1	-	-	-	d864b561c9cb	-	7542e9fc61b7	-	-	2026-11-24	xproof
 649512ed-4908-450a-9652-b2c80df5e24d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6496eea7-38f5-4428-a379-b08b0eeb5239	cast	cast-resolve	agreed	-	FX	scen	2	0	Leonardo, Big Brother/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6496eea7-38f5-4428-a379-b08b0eeb5239	static#0.0	static#0.0	agreed	-	X	scen	1	0	Leonardo, Big Brother/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -138,9 +138,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64ab6dfe-ed87-47ec-afd5-a7f2e7e6bbd2	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 64acb083-a0a3-46ec-9c93-b2ac36878703	cast	cast-resolve	agreed	-	FX	scen	2	0	Water Tribe Rallier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64acb083-a0a3-46ec-9c93-b2ac36878703	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Water Tribe Rallier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-64ad5657-78e9-4f34-8877-18c4f51fff9a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64ad5657-78e9-4f34-8877-18c4f51fff9a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64ad5657-78e9-4f34-8877-18c4f51fff9a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+64ad5657-78e9-4f34-8877-18c4f51fff9a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glint-horn-buccaneer:cast:s1,f:xs:XP:glint-horn-buccaneer:cast:s1	-	-	-	d864b561c9cb	-	0470d914624b	-	-	2026-11-24	xproof
+64ad5657-78e9-4f34-8877-18c4f51fff9a	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+64ad5657-78e9-4f34-8877-18c4f51fff9a	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 64b1a2a2-d3ff-41c6-8d92-987ef29bb776	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64b41b54-ca22-41df-8bd3-dc4f7832fbb7	cast	cast-resolve	agreed	-	X	scen	1	0	Curse of the Werefox/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64b4e91f-83a4-4b3f-87d4-8c48907e628d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -189,8 +189,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64f3af46-f8ab-4ba4-9dff-7412cefb4eea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mausoleum-guard:f0t0:s1,f:xs:XP:mausoleum-guard:f0t0:s1	-	-	-	d864b561c9cb	-	f9e1ede4bb13	-	-	2026-11-24	xproof
 64f56228-7874-4465-ba58-1049083ea02f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64f56228-7874-4465-ba58-1049083ea02f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64f5689d-504d-40e9-bdb5-36dcefd257e2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:linvala-the-preserver:f0t0:s1,f:xs:XP:linvala-the-preserver:f0t0:s1	-	-	-	d864b561c9cb	-	c3352f625e69	-	-	2026-11-24	xproof
-64f5689d-504d-40e9-bdb5-36dcefd257e2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:linvala-the-preserver:f0t0:s1,f:xs:XP:linvala-the-preserver:f0t0:s1	-	-	-	d864b561c9cb	-	c3352f625e69	-	-	2026-11-24	xproof
+64f5689d-504d-40e9-bdb5-36dcefd257e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:linvala-the-preserver:f0t1:s1,f:xs:XP:linvala-the-preserver:f0t1:s1	-	-	-	d864b561c9cb	-	c3352f625e69	-	-	2026-11-24	xproof
+64f5689d-504d-40e9-bdb5-36dcefd257e2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:linvala-the-preserver:f0t1:s1,f:xs:XP:linvala-the-preserver:f0t1:s1	-	-	-	d864b561c9cb	-	c3352f625e69	-	-	2026-11-24	xproof
 64f5689d-504d-40e9-bdb5-36dcefd257e2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64fa0416-16b7-4128-ac6c-f30373074a1e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64fa0416-16b7-4128-ac6c-f30373074a1e	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

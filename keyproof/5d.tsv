@@ -37,9 +37,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d2a9859-1353-4431-9343-f5999450acd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d2acd3e-4782-42e3-bcd5-80f8b439cc28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d2acd3e-4782-42e3-bcd5-80f8b439cc28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d2ccaa4-4815-4987-889f-d08c4d1e7a8e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d2ccaa4-4815-4987-889f-d08c4d1e7a8e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d2ccaa4-4815-4987-889f-d08c4d1e7a8e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d2ccaa4-4815-4987-889f-d08c4d1e7a8e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:merfolk-skydiver:cast:s1,f:xs:XP:merfolk-skydiver:cast:s1	-	-	-	d864b561c9cb	-	2dabab33d997	-	-	2026-11-24	xproof
+5d2ccaa4-4815-4987-889f-d08c4d1e7a8e	f0/a0	Proliferate	agreed	-	FX	start	2	0	x:xs:XP:merfolk-skydiver:f0a0:s1,f:xs:XP:merfolk-skydiver:f0a0:s1	-	-	-	d864b561c9cb	-	2dabab33d997	-	-	2026-11-24	xproof
+5d2ccaa4-4815-4987-889f-d08c4d1e7a8e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:merfolk-skydiver:cast:s1,f:xs:XP:merfolk-skydiver:cast:s1	-	-	-	d864b561c9cb	-	2dabab33d997	-	-	2026-11-24	xproof
 5d307515-6ea1-4b1f-8e4b-49bfebfbdfcc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d32dbf3-c157-4543-8813-da88f463de0e	cast	cast-resolve	agreed	-	X	scen	1	0	Mind Roots/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d3563dd-a2c1-463c-a0ed-5ac22388bdbe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,8 +190,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5dee663f-9e2e-4503-8086-fc51664fdf29	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thieving Otter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5def9f38-0a0b-4e8d-9f9d-29dcb46520b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5def9f38-0a0b-4e8d-9f9d-29dcb46520b4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5df16529-6f1d-4978-b364-97d91abac441	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5df16529-6f1d-4978-b364-97d91abac441	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5df16529-6f1d-4978-b364-97d91abac441	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:vraska-s-finisher:cast:s1,f:xs:XP:vraska-s-finisher:cast:s1	-	-	-	d864b561c9cb	-	10b764405e3d	-	-	2026-11-24	xproof
+5df16529-6f1d-4978-b364-97d91abac441	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:vraska-s-finisher:cast:s1,f:xs:XP:vraska-s-finisher:cast:s1	-	-	-	d864b561c9cb	-	10b764405e3d	-	-	2026-11-24	xproof
 5df44b8d-b337-49d8-8427-34253f52cb47	cast	cast-resolve	agreed	-	X	scen	1	0	Decadent Dragon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5df44b8d-b337-49d8-8427-34253f52cb47	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Decadent Dragon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5df44b8d-b337-49d8-8427-34253f52cb47	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Decadent Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

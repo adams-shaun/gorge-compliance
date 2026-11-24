@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9f800ebc-d6e4-4bfc-bebe-8baad51efa19	cast	cast-resolve	agreed	-	FX	scen	2	0	Emil, Vastlands Roamer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9f800ebc-d6e4-4bfc-bebe-8baad51efa19	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Emil, Vastlands Roamer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9f800ebc-d6e4-4bfc-bebe-8baad51efa19	static#0.0	static#0.0	agreed	-	X	scen	1	0	Emil, Vastlands Roamer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9f84fc91-8647-4cc8-9b57-d23a83f85ab1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9f84fc91-8647-4cc8-9b57-d23a83f85ab1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chandra-s-flame-wave:cast:s1,f:xs:XP:chandra-s-flame-wave:cast:s1	-	-	-	d864b561c9cb	-	6a9b7642616f	-	-	2026-11-24	xproof
 9f8fe514-77ed-41b4-a6f3-c6f095bb97be	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9f8fe514-77ed-41b4-a6f3-c6f095bb97be	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9f8fe514-77ed-41b4-a6f3-c6f095bb97be	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -109,9 +109,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9fb5ea12-5b87-462b-b9c0-904cd0f55a9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9fb5ea12-5b87-462b-b9c0-904cd0f55a9c	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9fb80575-9c8e-4745-9a8f-d48cdcbbb868	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9fb8cd81-403a-4988-8f1c-b8eccf8abd9c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9fb8cd81-403a-4988-8f1c-b8eccf8abd9c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9fb8cd81-403a-4988-8f1c-b8eccf8abd9c	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9fb8cd81-403a-4988-8f1c-b8eccf8abd9c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:karn-s-bastion:f0a0:s2,f:xs:XP:karn-s-bastion:f0a0:s2	-	-	-	d864b561c9cb	-	bd403ffd4529	-	-	2026-11-24	xproof
+9fb8cd81-403a-4988-8f1c-b8eccf8abd9c	f0/a1	Proliferate	agreed	-	FX	start	2	0	x:xs:XP:karn-s-bastion:f0a1:s1,f:xs:XP:karn-s-bastion:f0a1:s1	-	-	-	d864b561c9cb	-	bd403ffd4529	-	-	2026-11-24	xproof
+9fb8cd81-403a-4988-8f1c-b8eccf8abd9c	land	land	agreed	-	FX	start	2	0	x:xs:XP:karn-s-bastion:land:s1,f:xs:XP:karn-s-bastion:land:s1	-	-	-	d864b561c9cb	-	bd403ffd4529	-	-	2026-11-24	xproof
 9fb95813-05e5-4aa0-bab9-53d8a071fe6a	cast	cast-resolve	agreed	-	X	scen	1	0	Appendage Amalgam/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9fb95813-05e5-4aa0-bab9-53d8a071fe6a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Appendage Amalgam/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9fbab5bc-c651-46dc-89b6-0bcfeadb3891	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

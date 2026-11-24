@@ -10,14 +10,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b02dfca-bcaa-4e22-b143-401ed250d016	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:titan-forge:f0a0:s1,f:xs:XP:titan-forge:f0a0:s1	-	-	-	d864b561c9cb	-	e9441810f0ee	-	-	2026-11-24	xproof
 3b02dfca-bcaa-4e22-b143-401ed250d016	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3b03358d-f87e-4939-afc9-5ee3f044146a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3b03358d-f87e-4939-afc9-5ee3f044146a	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3b04f5b9-40d9-49aa-a38d-0f946401263c	cast	cast-resolve	agreed	-	FX	scen	2	0	The Doctor, EMH/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b04f5b9-40d9-49aa-a38d-0f946401263c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3b0694ff-aa92-4a2e-a366-69fdf5a57c4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b0694ff-aa92-4a2e-a366-69fdf5a57c4b	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b06b242-caed-4c8f-b5ab-30e86061286e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b0a97e2-e125-4f91-8581-307e3fa6b048	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b0a97e2-e125-4f91-8581-307e3fa6b048	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gatebreaker-ram:cast:s1,f:xs:XP:gatebreaker-ram:cast:s1	-	-	-	d864b561c9cb	-	732ed7ba1e59	-	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	cast	cast-resolve	agreed	-	FX	scen	2	0	Emet-Selch, Unsundered/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

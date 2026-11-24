@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 694afc0a-bb32-4f24-9347-66665117ac9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 694cb93a-bcc5-44b0-a76c-19ae4a4e5e0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 694f7e51-7b8b-4f00-bd77-a52eded4aaa1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69501650-ed48-4ebf-9287-b0338c5bc5d5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+69501650-ed48-4ebf-9287-b0338c5bc5d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trumpeting-herd:cast:s1,f:xs:XP:trumpeting-herd:cast:s1	-	-	-	d864b561c9cb	-	40500a3e6a1c	-	-	2026-11-24	xproof
 69556f6c-c05b-4902-bac7-012f0ed81b75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69826a0d-3ec9-47e7-b129-2fc13b41a07e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69826a0d-3ec9-47e7-b129-2fc13b41a07e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69858691-1190-4454-af0a-87c2ac4ab6ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69872a9a-fe54-4e58-940c-89395af71acd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+69872a9a-fe54-4e58-940c-89395af71acd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:finale-of-devastation:cast:s1,f:xs:XP:finale-of-devastation:cast:s1	-	-	-	d864b561c9cb	-	b20b42e4fb69	-	-	2026-11-24	xproof
 6987d5d4-0ef6-4326-a590-678ac160fe56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69892dc7-4087-447c-a41c-99cf3d5c0c12	cast	cast-resolve	agreed	-	FX	scen	2	0	Dawnstrike Vanguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69892dc7-4087-447c-a41c-99cf3d5c0c12	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dawnstrike Vanguard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -155,8 +155,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69af7bff-fb8c-4f59-88a1-6bfa87ba400a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69b1b0ec-9db0-48d1-a7b5-71281aca16fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69b409b3-fa16-4c79-8b46-215a7036ed46	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69b52907-8aff-4f2a-a391-7d1ab2669b5c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69b52907-8aff-4f2a-a391-7d1ab2669b5c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+69b52907-8aff-4f2a-a391-7d1ab2669b5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:end-raze-forerunners:f0t0:s1,f:xs:XP:end-raze-forerunners:f0t0:s1	-	-	-	d864b561c9cb	-	b8fe0b438674	-	-	2026-11-24	xproof
+69b52907-8aff-4f2a-a391-7d1ab2669b5c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:end-raze-forerunners:f0t0:s1,f:xs:XP:end-raze-forerunners:f0t0:s1	-	-	-	d864b561c9cb	-	b8fe0b438674	-	-	2026-11-24	xproof
 69b5af09-b3e6-4abf-b62e-9199c4f43ba7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69b96fe5-9733-4b43-bd66-075742e142d9	cast	cast-resolve	agreed	-	X	scen	1	0	Cruel Calculations/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69b9fa68-b409-4de1-9a40-5262386a0180	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:healer-of-the-pride:cast:s1,f:xs:XP:healer-of-the-pride:cast:s1	-	-	-	d864b561c9cb	-	84fa2690a45a	-	-	2026-11-24	xproof

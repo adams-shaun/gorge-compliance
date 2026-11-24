@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-1102524d-7287-496f-a18a-5fdae6d4c271	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1102524d-7287-496f-a18a-5fdae6d4c271	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:join-shields:cast:s1,f:xs:XP:join-shields:cast:s1	-	-	-	d864b561c9cb	-	e6247dd1c37c	-	-	2026-11-24	xproof
 1104a746-169c-450a-80ad-bea0493c0576	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1104a746-169c-450a-80ad-bea0493c0576	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 110e5695-a9df-4201-9230-99f6abe9978f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:nissa-revane:cast:s1,f:xs:XP:nissa-revane:cast:s1	-	-	-	8a1b1a193ec0	-	7cf95a8161a4	-	-	2026-11-24	xproof
 113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-1141a12a-2ebd-4e7b-8c8c-c7a1f160244c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1141a12a-2ebd-4e7b-8c8c-c7a1f160244c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1141a12a-2ebd-4e7b-8c8c-c7a1f160244c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rime-tender:cast:s1,f:xs:XP:rime-tender:cast:s1	-	-	-	d864b561c9cb	-	c5cceae63a69	-	-	2026-11-24	xproof
+1141a12a-2ebd-4e7b-8c8c-c7a1f160244c	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:rime-tender:f0a0:s1,f:xs:XP:rime-tender:f0a0:s1	-	-	-	d864b561c9cb	-	c5cceae63a69	-	-	2026-11-24	xproof
 114725ef-ac81-4d13-9153-0a303c3ce9c4	cast	cast-resolve	agreed	-	X	scen	1	0	Innocuous Rat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 114725ef-ac81-4d13-9153-0a303c3ce9c4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Innocuous Rat/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1149e5ac-554a-41b1-84ae-bac42579c1aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrun-the-last-troll:cast:s1,f:xs:XP:thrun-the-last-troll:cast:s1	-	-	-	d864b561c9cb	-	7bc048569bbd	-	-	2026-11-24	xproof
@@ -104,8 +104,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11932191-4b19-49b1-bfe4-abb7b83b2e59	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1195de01-f0ee-42c1-8e9e-a4bb90dd4932	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1197a595-3afc-4f18-b868-bbb096771922	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1197a595-3afc-4f18-b868-bbb096771922	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1197a595-3afc-4f18-b868-bbb096771922	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1197a595-3afc-4f18-b868-bbb096771922	f0/a0	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:leyline-of-abundance:f0a0:s1,f:xs:XP:leyline-of-abundance:f0a0:s1	-	-	-	d864b561c9cb	-	1e2941dab5c7	-	-	2026-11-24	xproof
+1197a595-3afc-4f18-b868-bbb096771922	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1198d47a-4235-4678-bd2e-20f2a97b5924	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1199a252-3c7c-4ae4-b063-dc132bfbea2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tattered-drake:cast:s1,f:xs:XP:tattered-drake:cast:s1	-	-	-	77494c1ce129	-	5eab01dab6fc	-	-	2026-11-24	xproof
 1199a252-3c7c-4ae4-b063-dc132bfbea2f	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11a28f60-2456-4ed5-b1cc-03c395f55e59	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	77494c1ce129	-	-	-	-	2026-11-24	xproof
 11a46cb6-ab01-4630-9541-782db2ef3b91	cast	cast-resolve	agreed	-	FX	scen	2	0	Map the Frontier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11ad664e-36d3-4d5b-8a87-59ea715877e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11ad664e-36d3-4d5b-8a87-59ea715877e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11ad664e-36d3-4d5b-8a87-59ea715877e0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 11ad6e75-9bbd-40ea-b04a-e6a61db3bcda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11b12954-dd1b-4c50-8433-15d8c1a15e29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11b12954-dd1b-4c50-8433-15d8c1a15e29	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:somberwald-alpha:f0a0:s1,f:xs:XP:somberwald-alpha:f0a0:s1	-	-	-	d864b561c9cb	-	f747e36474b4	-	-	2026-11-24	xproof

@@ -55,8 +55,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2043fbde-48c4-4a77-8911-8991d77de1eb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Foot Mystic/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2043fbde-48c4-4a77-8911-8991d77de1eb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Foot Mystic/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2043fbde-48c4-4a77-8911-8991d77de1eb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-2047a613-809d-4a47-9c78-f58a380ba18d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2047a613-809d-4a47-9c78-f58a380ba18d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2047a613-809d-4a47-9c78-f58a380ba18d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-trumpeter:cast:s1,f:xs:XP:rakdos-trumpeter:cast:s1	-	-	-	d864b561c9cb	-	e5e5d643e7e5	-	-	2026-11-24	xproof
+2047a613-809d-4a47-9c78-f58a380ba18d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:rakdos-trumpeter:f0a0:s1,f:xs:XP:rakdos-trumpeter:f0a0:s1	-	-	-	d864b561c9cb	-	e5e5d643e7e5	-	-	2026-11-24	xproof
 204b71fc-4d5f-40dd-903d-56c733171d84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 204b71fc-4d5f-40dd-903d-56c733171d84	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 204f9afe-c20b-4933-b5cd-aa572784762a	cast	cast-resolve	agreed	-	X	scen	1	0	Overrun/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -89,9 +89,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 206913aa-4d73-4465-8311-8054a22c0743	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 206913aa-4d73-4465-8311-8054a22c0743	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 206913aa-4d73-4465-8311-8054a22c0743	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-206f7eaf-1e0b-48ea-9c40-38902e109e4f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-206f7eaf-1e0b-48ea-9c40-38902e109e4f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-206f7eaf-1e0b-48ea-9c40-38902e109e4f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+206f7eaf-1e0b-48ea-9c40-38902e109e4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:living-twister:cast:s1,f:xs:XP:living-twister:cast:s1	-	-	-	d864b561c9cb	-	8476643b54f5	-	-	2026-11-24	xproof
+206f7eaf-1e0b-48ea-9c40-38902e109e4f	f0/a0	DealDamage	agreed	-	F	start	2	0	f:xs:XP:living-twister:f0a1:s1	-	-	-	d864b561c9cb	-	8476643b54f5	-	-	2026-11-24	xproof
+206f7eaf-1e0b-48ea-9c40-38902e109e4f	f0/a1	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:living-twister:f0a1:s1	-	-	-	d864b561c9cb	-	8476643b54f5	-	-	2026-11-24	xproof
 2071b712-2539-4797-8359-f9adb31889ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hazoret-s-favor:cast:s1,f:xs:XP:hazoret-s-favor:cast:s1	-	-	-	d864b561c9cb	-	aa00a3291c12	-	-	2026-11-24	xproof
 2071b712-2539-4797-8359-f9adb31889ae	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:hazoret-s-favor:cast:s1,f:xs:XP:hazoret-s-favor:cast:s1	-	-	-	d864b561c9cb	-	aa00a3291c12	-	-	2026-11-24	xproof
 2071f278-77ba-46f8-85a0-ccd761199f29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

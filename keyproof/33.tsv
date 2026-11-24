@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 330f2e60-810d-4fe0-9a35-b3f2b29e3e2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:true-faith-censer:cast:s1,f:xs:XP:true-faith-censer:cast:s1	-	-	-	d864b561c9cb	-	b136b3d284d1	-	-	2026-11-24	xproof
 330f2e60-810d-4fe0-9a35-b3f2b29e3e2a	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:true-faith-censer:f0a0:s1	-	-	-	d864b561c9cb	-	b136b3d284d1	-	-	2026-11-24	xproof
 330f97ee-6bb2-4a4b-a8bc-411659dc4260	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-330f97ee-6bb2-4a4b-a8bc-411659dc4260	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+330f97ee-6bb2-4a4b-a8bc-411659dc4260	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 33117d34-ea70-4566-92a3-5dec9bfe529a	cast	cast-resolve	agreed	-	X	scen	1	0	Krotiq Nestguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33117d34-ea70-4566-92a3-5dec9bfe529a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Krotiq Nestguard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33117d34-ea70-4566-92a3-5dec9bfe529a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Krotiq Nestguard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -55,8 +55,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3348df85-e61c-47b5-857d-c79befb38a8a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 334a98c0-9a16-4145-8f5b-bdf017afe73f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:windgrace-acolyte:cast:s1,f:xs:XP:windgrace-acolyte:cast:s1	-	-	-	d864b561c9cb	-	73f555339b90	-	-	2026-11-24	xproof
 334a98c0-9a16-4145-8f5b-bdf017afe73f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:windgrace-acolyte:cast:s1,f:xs:XP:windgrace-acolyte:cast:s1	-	-	-	d864b561c9cb	-	73f555339b90	-	-	2026-11-24	xproof
-334c0913-0ce0-4934-979d-64dbc1ec4aa2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-334c0913-0ce0-4934-979d-64dbc1ec4aa2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+334c0913-0ce0-4934-979d-64dbc1ec4aa2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:erratic-visionary:cast:s1,f:xs:XP:erratic-visionary:cast:s1	-	-	-	d864b561c9cb	-	cd00a5bf854a	-	-	2026-11-24	xproof
+334c0913-0ce0-4934-979d-64dbc1ec4aa2	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:erratic-visionary:f0a0:s1,f:xs:XP:erratic-visionary:f0a0:s1	-	-	-	d864b561c9cb	-	cd00a5bf854a	-	-	2026-11-24	xproof
 334e2147-5944-4558-b2bc-2f2bfb96dfa5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 334f673e-7cfa-432c-93aa-41adfbb99113	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 334fba11-e500-40fd-a142-41ff553642b5	cast	cast-resolve	agreed	-	FX	scen	2	0	Picnic Ruiner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -75,8 +75,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3364bad6-6d0a-4141-b410-86e3d9e1916e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3364bad6-6d0a-4141-b410-86e3d9e1916e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33666a98-812f-4892-9f8d-33e0cbecc340	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33666a98-812f-4892-9f8d-33e0cbecc340	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33666a98-812f-4892-9f8d-33e0cbecc340	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+33666a98-812f-4892-9f8d-33e0cbecc340	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+33666a98-812f-4892-9f8d-33e0cbecc340	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 336cc3ab-c1c7-4bf1-b1d7-dfc9f3c556ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 336d51cf-dcb3-4257-bd6c-926820a2f9de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dross-golem:cast:s1,f:xs:XP:dross-golem:cast:s1	-	-	-	25696bf19d5b	-	0d853fcf4e8a	-	-	2026-11-24	xproof
 3372b994-47de-4e89-9bfc-76e1cb3f1cfa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Temple of Deceit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Deceit/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33b9b3bd-33ca-46f3-b8bb-a978bc3d1085	land	play-land	agreed	-	X	scen	1	0	Temple of Deceit/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-33bb4aff-6476-4787-b3fe-028b1b1bd1bc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+33bb4aff-6476-4787-b3fe-028b1b1bd1bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geomancer-s-gambit:cast:s1,f:xs:XP:geomancer-s-gambit:cast:s1	-	-	-	d864b561c9cb	-	5dba6f149777	-	-	2026-11-24	xproof
 33be346b-a232-4680-9b1b-a5eee57d2e75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33bea2f0-c5aa-44b5-8714-5f50f7f2bb05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33bea2f0-c5aa-44b5-8714-5f50f7f2bb05	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

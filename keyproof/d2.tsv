@@ -56,9 +56,9 @@ d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	cast	cast	diverged	-	-	start	0	2	-	be444558
 d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Craftwork Crusher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Craftwork Crusher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d25284b9-50e4-4dcb-9aaf-6f6478c4a90a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-d254514b-0688-4f05-9473-3090a2ce7ced	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d254514b-0688-4f05-9473-3090a2ce7ced	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d254514b-0688-4f05-9473-3090a2ce7ced	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d254514b-0688-4f05-9473-3090a2ce7ced	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dreadhorde-butcher:cast:s1,f:xs:XP:dreadhorde-butcher:cast:s1	-	-	-	d864b561c9cb	-	b2d6dec96051	-	-	2026-11-24	xproof
+d254514b-0688-4f05-9473-3090a2ce7ced	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:dreadhorde-butcher:cast:s1,f:xs:XP:dreadhorde-butcher:cast:s1	-	-	-	d864b561c9cb	-	b2d6dec96051	-	-	2026-11-24	xproof
+d254514b-0688-4f05-9473-3090a2ce7ced	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dreadhorde-butcher:f0t1:s1,f:xs:XP:dreadhorde-butcher:f0t1:s1	-	-	-	d864b561c9cb	-	b2d6dec96051	-	-	2026-11-24	xproof
 d2546d25-07cd-4830-ba66-34bdbf8a245c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2575513-72fa-49c7-be6b-9f6f85950f88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2575513-72fa-49c7-be6b-9f6f85950f88	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -174,7 +174,7 @@ d2d5f9b8-7caf-42c8-934b-3f4b81468914	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d2d9ecea-7925-420e-98b9-2f87f41f387c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2d9ecea-7925-420e-98b9-2f87f41f387c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2da26d6-b0f7-4af0-9ce8-fb8d82fe2d85	cast	cast-resolve	agreed	-	X	scen	1	0	Sunfire Torch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

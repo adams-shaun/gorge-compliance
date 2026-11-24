@@ -27,7 +27,7 @@ c010d833-1873-4132-b4ff-8d78b3d7c2d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c01411e0-77b2-4e65-a369-5dbe13745769	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kheru-spellsnatcher:cast:s1,f:xs:XP:kheru-spellsnatcher:cast:s1	-	-	-	d864b561c9cb	-	002a8812666e	-	-	2026-11-24	xproof
 c01411e0-77b2-4e65-a369-5dbe13745769	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c01516e0-eec3-4370-b935-7674982e8850	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c01516e0-eec3-4370-b935-7674982e8850	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c01516e0-eec3-4370-b935-7674982e8850	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c0162a6c-12d9-4b84-811a-ee6e39401863	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c017f8ae-9103-4965-a07a-f259f44a157d	cast	cast-resolve	agreed	-	X	scen	1	0	The Dominion Bracelet/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c017f8ae-9103-4965-a07a-f259f44a157d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Dominion Bracelet/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -92,8 +92,8 @@ c0602911-7d44-4a7a-a04c-837036ed3b82	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:sp
 c0602911-7d44-4a7a-a04c-837036ed3b82	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:spontaneous-artist:cast:s1,f:xs:XP:spontaneous-artist:cast:s1	-	-	-	d864b561c9cb	-	791ac112006e	-	-	2026-11-24	xproof
 c0604afb-eae2-41c8-b390-dbc0f7e025ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ethereal-ambush:cast:s1,f:xs:XP:ethereal-ambush:cast:s1	-	-	-	d864b561c9cb	-	7cee5762fa14	-	-	2026-11-24	xproof
 c062bd12-34cf-4177-92d4-8ce91206989d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c0636d16-671c-4e80-af8c-67d80d2cd979	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c0636d16-671c-4e80-af8c-67d80d2cd979	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c0636d16-671c-4e80-af8c-67d80d2cd979	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:irregular-cohort:f0t0:s1,f:xs:XP:irregular-cohort:f0t0:s1	-	-	-	d864b561c9cb	-	c3d37e59255b	-	-	2026-11-24	xproof
+c0636d16-671c-4e80-af8c-67d80d2cd979	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:irregular-cohort:f0t0:s1,f:xs:XP:irregular-cohort:f0t0:s1	-	-	-	d864b561c9cb	-	c3d37e59255b	-	-	2026-11-24	xproof
 c065a7c0-272b-4b7e-a41c-7164352cd189	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c065a7c0-272b-4b7e-a41c-7164352cd189	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 c065a7c0-272b-4b7e-a41c-7164352cd189	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof

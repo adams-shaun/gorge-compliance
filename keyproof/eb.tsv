@@ -41,9 +41,9 @@ eb1ab332-5549-4ff4-8afa-b385a236fb9b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 eb1baf72-4ef6-4967-8a22-2022c633f3d3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eb1baf72-4ef6-4967-8a22-2022c633f3d3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eb1dfa29-7371-4cb6-bfa2-16f7820b69be	cast	counter-spell	agreed	-	X	scen	1	0	Refute/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-eb2094cf-b4be-4f52-8615-e179ef7c741d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eb2094cf-b4be-4f52-8615-e179ef7c741d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eb2094cf-b4be-4f52-8615-e179ef7c741d	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eb2094cf-b4be-4f52-8615-e179ef7c741d	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:mobilized-district:f0a0:s2,f:xs:XP:mobilized-district:f0a0:s2	-	-	-	d864b561c9cb	-	38d6d5c2796c	-	-	2026-11-24	xproof
+eb2094cf-b4be-4f52-8615-e179ef7c741d	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:mobilized-district:f0a1:s1,f:xs:XP:mobilized-district:f0a1:s1	-	-	-	d864b561c9cb	-	38d6d5c2796c	-	-	2026-11-24	xproof
+eb2094cf-b4be-4f52-8615-e179ef7c741d	land	land	agreed	-	FX	start	2	0	x:xs:XP:mobilized-district:land:s1,f:xs:XP:mobilized-district:land:s1	-	-	-	d864b561c9cb	-	38d6d5c2796c	-	-	2026-11-24	xproof
 eb228a6c-bceb-45c3-a258-3f209682e1c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eb228a6c-bceb-45c3-a258-3f209682e1c6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eb25920a-3162-4838-b092-09cbd43332fd	cast	cast-resolve	agreed	-	X	scen	1	0	Brambleback Brute/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -189,8 +189,8 @@ ebedff30-ae43-4861-aab2-afe1fc88337e	static#0.0	static#0.0	agreed	-	X	scen	1	0	M
 ebeee06e-3345-4f02-896f-cb0b2cfa5548	cast	cast-resolve	agreed	-	FX	scen	2	0	Kindled Fury/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ebf2816b-e042-43e9-8734-d3a896334c69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ebf2974a-963e-425a-8f8c-55f0a36984c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ebf3fd80-9574-489b-9428-f4251834bdc4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ebf3fd80-9574-489b-9428-f4251834bdc4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ebf3fd80-9574-489b-9428-f4251834bdc4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nikya-of-the-old-ways:cast:s1,f:xs:XP:nikya-of-the-old-ways:cast:s1	-	-	-	d864b561c9cb	-	1ffaab949e8b	-	-	2026-11-24	xproof
+ebf3fd80-9574-489b-9428-f4251834bdc4	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ebf6ef9f-97b2-48cf-855e-d68dc7b11de4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ebf6ef9f-97b2-48cf-855e-d68dc7b11de4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ebf8d006-2997-431b-b4cb-9692741b45ca	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-UK/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

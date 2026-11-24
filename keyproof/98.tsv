@@ -139,10 +139,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98a61659-9882-417c-9c16-16ebb26f9037	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Carrion Cruiser/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98a61659-9882-417c-9c16-16ebb26f9037	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98a752ff-f041-4032-9f3f-c6c4007f10f1	cast	cast-resolve	agreed	-	X	scen	1	0	Amok Time/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98b19afc-7696-46b9-96f0-7f7c60003e1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+98b19afc-7696-46b9-96f0-7f7c60003e1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-flame:f0t0:s1,f:xs:XP:cavalier-of-flame:f0t0:s1	-	-	-	d864b561c9cb	-	89fcf5226c7d	-	-	2026-11-24	xproof
 98b19afc-7696-46b9-96f0-7f7c60003e1c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98b19afc-7696-46b9-96f0-7f7c60003e1c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98b19afc-7696-46b9-96f0-7f7c60003e1c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+98b19afc-7696-46b9-96f0-7f7c60003e1c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-flame:f0t0:s1,f:xs:XP:cavalier-of-flame:f0t0:s1	-	-	-	d864b561c9cb	-	89fcf5226c7d	-	-	2026-11-24	xproof
+98b19afc-7696-46b9-96f0-7f7c60003e1c	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-flame:f0t1:s1,f:xs:XP:cavalier-of-flame:f0t1:s1	-	-	-	d864b561c9cb	-	89fcf5226c7d	-	-	2026-11-24	xproof
 98b283dc-96a6-45a3-8a3f-11458497f358	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:teysa-envoy-of-ghosts:cast:s1,f:xs:XP:teysa-envoy-of-ghosts:cast:s1	-	-	-	d864b561c9cb	-	8cefe8e8a2de	-	-	2026-11-24	xproof
 98b283dc-96a6-45a3-8a3f-11458497f358	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 98b43c61-4563-4a29-8cf0-fb8b34f337ce	cast	cast-resolve	agreed	-	X	scen	1	0	Diary of Dreams/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

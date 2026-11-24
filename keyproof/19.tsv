@@ -128,7 +128,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19a0d191-64c0-4e8a-8cb0-bf680cc681bb	cast	cast-resolve	agreed	-	FX	scen	2	0	Beastrider Vanguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a0d191-64c0-4e8a-8cb0-bf680cc681bb	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Beastrider Vanguard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a11c33-269a-45d3-86c7-827965053f26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19a11c33-269a-45d3-86c7-827965053f26	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19a11c33-269a-45d3-86c7-827965053f26	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 19a2f0a0-9e68-4982-a5f5-b77d805befd7	cast	cast-resolve	agreed	-	X	scen	1	0	Demonic Pact/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a2f0a0-9e68-4982-a5f5-b77d805befd7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Demonic Pact/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a32e29-45ec-433e-9cb4-b2c32cac8f80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beastbond-outcaster:f0t0:s1,f:xs:XP:beastbond-outcaster:f0t0:s1	-	-	-	d864b561c9cb	-	a829239b252e	-	-	2026-11-24	xproof

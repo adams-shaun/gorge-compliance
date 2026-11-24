@@ -34,8 +34,8 @@ a02f9f42-4c3a-4a97-8667-68ba4617f193	f0/t0	NULL	owed	refused:scen failed: xengin
 a03059dd-f499-407a-9346-6710b0468202	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a03059dd-f499-407a-9346-6710b0468202	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a03059dd-f499-407a-9346-6710b0468202	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a0324f33-3f25-4374-affa-c7b5b54bc8d7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a0324f33-3f25-4374-affa-c7b5b54bc8d7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a0324f33-3f25-4374-affa-c7b5b54bc8d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chainwhip-cyclops:cast:s1,f:xs:XP:chainwhip-cyclops:cast:s1	-	-	-	d864b561c9cb	-	150fa77833f6	-	-	2026-11-24	xproof
+a0324f33-3f25-4374-affa-c7b5b54bc8d7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:chainwhip-cyclops:f0a0:s1,f:xs:XP:chainwhip-cyclops:f0a0:s1	-	-	-	d864b561c9cb	-	150fa77833f6	-	-	2026-11-24	xproof
 a0335224-9523-47d5-8944-486f2d4a6b8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0335224-9523-47d5-8944-486f2d4a6b8f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a035f865-b4db-4b9f-bccc-8572acd2033c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magus-of-the-moat:cast:s1,f:xs:XP:magus-of-the-moat:cast:s1	-	-	-	d864b561c9cb	-	1cc598b399b7	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	combat#0.block	combat#0.block	agreed	-	X	sc
 a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:fecund-greenshell:cast:s2	-	-	-	5437c1394672	-	f80c13209d86	-	-	2026-11-24	xproof
 a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fecund Greenshell/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a0956c3d-d382-486a-81f1-9aa5cf49b2ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a0956c3d-d382-486a-81f1-9aa5cf49b2ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a0956c3d-d382-486a-81f1-9aa5cf49b2ab	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a09a4556-8913-495c-8768-e05413c48f0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a09a4556-8913-495c-8768-e05413c48f0b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a09a4556-8913-495c-8768-e05413c48f0b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ a0a706b2-b237-4183-82fa-2140a23b89e3	f0/t0	NULL	owed	refused:no-generator:trigge
 a0a7319d-9441-4aed-a351-9ff3fb3b1d9e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hulldrifter:f0t0:s2,f:xs:XP:hulldrifter:f0t0:s2	-	-	-	267e485f6204	-	2162cf7c19dc	-	-	2026-11-24	xproof
 a0a7319d-9441-4aed-a351-9ff3fb3b1d9e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hulldrifter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a0a7319d-9441-4aed-a351-9ff3fb3b1d9e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hulldrifter:f0t0:s2,f:xs:XP:hulldrifter:f0t0:s2	-	-	-	267e485f6204	-	2162cf7c19dc	-	-	2026-11-24	xproof
-a0a79e9e-38cb-45d8-a7ec-7cf10ef7e5fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a0a79e9e-38cb-45d8-a7ec-7cf10ef7e5fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:collected-conjuring:cast:s1,f:xs:XP:collected-conjuring:cast:s1	-	-	-	d864b561c9cb	-	99c18856db28	-	-	2026-11-24	xproof
 a0a8c04e-3ce7-4945-a6af-7e40a990c82c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0a8c04e-3ce7-4945-a6af-7e40a990c82c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0aa1aa1-f011-4c65-9886-95521947beef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

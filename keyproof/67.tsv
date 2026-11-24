@@ -25,8 +25,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6731d861-cc52-4a2e-8c33-154681fd50e4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Venom, Evil Unleashed/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6731d861-cc52-4a2e-8c33-154681fd50e4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Venom, Evil Unleashed/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6731d861-cc52-4a2e-8c33-154681fd50e4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Venom, Evil Unleashed/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-67330f45-d08c-4fe2-8ae3-8d18939c512a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67330f45-d08c-4fe2-8ae3-8d18939c512a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67330f45-d08c-4fe2-8ae3-8d18939c512a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gorging-vulture:f0t0:s1,f:xs:XP:gorging-vulture:f0t0:s1	-	-	-	d864b561c9cb	-	7561ae11469f	-	-	2026-11-24	xproof
+67330f45-d08c-4fe2-8ae3-8d18939c512a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gorging-vulture:f0t0:s1,f:xs:XP:gorging-vulture:f0t0:s1	-	-	-	d864b561c9cb	-	7561ae11469f	-	-	2026-11-24	xproof
 6734497c-16f0-4c4b-ba24-337333511fc6	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6734497c-16f0-4c4b-ba24-337333511fc6	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6734497c-16f0-4c4b-ba24-337333511fc6	f0/a1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -37,8 +37,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 67389ccc-dacc-4ce3-a9a2-f551a0d6e9d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67391f99-739a-490a-ba16-7fa1d758ec34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drana-kalastria-bloodchief:cast:s1,f:xs:XP:drana-kalastria-bloodchief:cast:s1	-	-	-	d864b561c9cb	-	b8288ff226ff	-	-	2026-11-24	xproof
 67391f99-739a-490a-ba16-7fa1d758ec34	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:drana-kalastria-bloodchief:f0a0:s2,f:xs:XP:drana-kalastria-bloodchief:f0a0:s2	-	-	-	d864b561c9cb	-	b8288ff226ff	-	-	2026-11-24	xproof
-673ddb72-d800-49c3-9ea9-ff74a0e20a97	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-673ddb72-d800-49c3-9ea9-ff74a0e20a97	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+673ddb72-d800-49c3-9ea9-ff74a0e20a97	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:knight-of-old-benalia:cast:s1,f:xs:XP:knight-of-old-benalia:cast:s1	-	-	-	d864b561c9cb	-	8fc19405d996	-	-	2026-11-24	xproof
+673ddb72-d800-49c3-9ea9-ff74a0e20a97	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:knight-of-old-benalia:cast:s1,f:xs:XP:knight-of-old-benalia:cast:s1	-	-	-	d864b561c9cb	-	8fc19405d996	-	-	2026-11-24	xproof
 67419470-3418-466f-b3c1-4ded1d0ee34b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 674202f0-6832-4392-a118-d513162bcd03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67457ecb-5ff2-4f5d-9039-b9e80f54bba8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -79,10 +79,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 676c4cfa-f929-43aa-95cc-df81a596c2a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6774c0ce-103e-471b-8de0-f325805674ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:insatiable-harpy:cast:s1,f:xs:XP:insatiable-harpy:cast:s1	-	-	-	d864b561c9cb	-	7e54039bc921	-	-	2026-11-24	xproof
 67789c0c-3f05-4b0b-a56d-0757ac801d22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67789c0c-3f05-4b0b-a56d-0757ac801d22	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67789c0c-3f05-4b0b-a56d-0757ac801d22	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:roc-charger:f0t0:s1,f:xs:XP:roc-charger:f0t0:s1	-	-	-	d864b561c9cb	-	3d45e7f71d14	-	-	2026-11-24	xproof
 67791323-bf21-4c72-bf57-32197d3d5775	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67791323-bf21-4c72-bf57-32197d3d5775	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67791323-bf21-4c72-bf57-32197d3d5775	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67791323-bf21-4c72-bf57-32197d3d5775	f0/t0	ChangesZone/Afterlife	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-last-breath:f0t0:s1,f:xs:XP:knight-of-the-last-breath:f0t0:s1	-	-	-	d864b561c9cb	-	087cf614f9e5	-	-	2026-11-24	xproof
 677b8ce7-f922-4ee3-b311-f199da9b352b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 677b8ce7-f922-4ee3-b311-f199da9b352b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 677b9c19-4886-4e06-88f8-9afa94e58aa8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dramatic-accusation:f0t0:s2,f:xs:XP:dramatic-accusation:f0t0:s2	-	-	-	5437c1394672	-	36bbfbf839a2	-	-	2026-11-24	xproof
@@ -92,8 +92,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 677c3616-295f-493a-8b60-1e22b0224cfa	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 678095cc-ec8f-471a-b675-e59905d65c33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 678095cc-ec8f-471a-b675-e59905d65c33	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-6781166b-f6ab-4076-8e97-0cd9342f1b41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6781166b-f6ab-4076-8e97-0cd9342f1b41	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6781166b-f6ab-4076-8e97-0cd9342f1b41	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:charmed-stray:f0t0:s1,f:xs:XP:charmed-stray:f0t0:s1	-	-	-	d864b561c9cb	-	b142a4c1506e	-	-	2026-11-24	xproof
+6781166b-f6ab-4076-8e97-0cd9342f1b41	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:charmed-stray:f0t0:s1,f:xs:XP:charmed-stray:f0t0:s1	-	-	-	d864b561c9cb	-	b142a4c1506e	-	-	2026-11-24	xproof
 6781f8ae-2a86-4e3d-bc43-48809c9d6c26	cast	cast	agreed	-	F	start	2	0	f:xs:XP:gatekeeper-of-malakir:f0t0:s1	-	-	-	25696bf19d5b	-	a8f2c5c8d1c3	-	-	2026-11-24	xproof
 6781f8ae-2a86-4e3d-bc43-48809c9d6c26	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:gatekeeper-of-malakir:f0t0:s1	-	-	-	25696bf19d5b	-	a8f2c5c8d1c3	-	-	2026-11-24	xproof
 67821712-e58f-4fee-81af-021059ac72ea	cast	cast-resolve	agreed	-	FX	scen	2	0	Gravblade Heavy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -122,17 +122,17 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 67a10da3-76f2-4f4a-90d1-e77abb5842fe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67a3541c-8408-40c8-b44f-90035b860f57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:man-o-war:f0t0:s1,f:xs:XP:man-o-war:f0t0:s1	-	-	-	25696bf19d5b	-	9c71424023aa	-	-	2026-11-24	xproof
 67a3541c-8408-40c8-b44f-90035b860f57	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:man-o-war:f0t0:s1,f:xs:XP:man-o-war:f0t0:s1	-	-	-	25696bf19d5b	-	9c71424023aa	-	-	2026-11-24	xproof
-67a494dc-deac-43ee-9e47-20fae9788a9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67a494dc-deac-43ee-9e47-20fae9788a9f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67a494dc-deac-43ee-9e47-20fae9788a9f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sylvan-brushstrider:f0t0:s1,f:xs:XP:sylvan-brushstrider:f0t0:s1	-	-	-	d864b561c9cb	-	6f3b44d9b98c	-	-	2026-11-24	xproof
+67a494dc-deac-43ee-9e47-20fae9788a9f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sylvan-brushstrider:f0t0:s1,f:xs:XP:sylvan-brushstrider:f0t0:s1	-	-	-	d864b561c9cb	-	6f3b44d9b98c	-	-	2026-11-24	xproof
 67a52a74-9474-4f4e-8785-6ff54078a8ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67a52a74-9474-4f4e-8785-6ff54078a8ca	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67a7bfa4-5004-4838-874d-03fa11f051d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67a7bfa4-5004-4838-874d-03fa11f051d0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67a9357c-4713-4e01-a60d-532bf0dd80b6	cast	cast-resolve	agreed	-	X	scen	1	0	Codie, Vociferous Codex/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 67a9357c-4713-4e01-a60d-532bf0dd80b6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Codie, Vociferous Codex/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-67a98359-6f02-4556-ad47-c01b643686d6	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67a98359-6f02-4556-ad47-c01b643686d6	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:decree-of-justice:cast:s1,f:xs:XP:decree-of-justice:cast:s1	-	-	-	d864b561c9cb	-	41667b2359fb	-	-	2026-11-24	xproof
-67a98359-6f02-4556-ad47-c01b643686d6	f0/t0	Cycled	agreed	-	FX	start	2	0	x:xs:XP:decree-of-justice:cast:s1,f:xs:XP:decree-of-justice:cast:s1	-	-	-	d864b561c9cb	-	41667b2359fb	-	-	2026-11-24	xproof
+67a98359-6f02-4556-ad47-c01b643686d6	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:decree-of-justice:cast:s1,f:xs:XP:decree-of-justice:cast:s1	-	-	-	d864b561c9cb	-	41667b2359fb	-	-	2026-11-24	xproof
+67a98359-6f02-4556-ad47-c01b643686d6	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:decree-of-justice:cast:s2,f:xs:XP:decree-of-justice:cast:s2	-	-	-	d864b561c9cb	-	41667b2359fb	-	-	2026-11-24	xproof
+67a98359-6f02-4556-ad47-c01b643686d6	f0/t0	Cycled	agreed	-	FX	start	1	0	x:xs:XP:decree-of-justice:cast:s2,f:xs:XP:decree-of-justice:cast:s2	-	-	-	d864b561c9cb	-	41667b2359fb	-	-	2026-11-24	xproof
 67aa946d-e694-494e-ba0c-44880d5bc03e	cast	cast-resolve	agreed	-	FX	scen	2	0	Captain America, Living Legend/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67aa946d-e694-494e-ba0c-44880d5bc03e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Captain America, Living Legend/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67aa946d-e694-494e-ba0c-44880d5bc03e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Captain America, Living Legend/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

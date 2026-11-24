@@ -93,8 +93,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e64b1dc-a238-4bff-98ff-2bea44340568	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Overlord of the Mistmoors/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e6cfec7-3b54-43db-853a-27c164776a5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e6cfec7-3b54-43db-853a-27c164776a5f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7e6cfec7-3b54-43db-853a-27c164776a5f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savannah-sage:f0t0:s1,f:xs:XP:savannah-sage:f0t0:s1	-	-	-	d864b561c9cb	-	c63ad8ffe7f4	-	-	2026-11-24	xproof
+7e6cfec7-3b54-43db-853a-27c164776a5f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:savannah-sage:f0t0:s1,f:xs:XP:savannah-sage:f0t0:s1	-	-	-	d864b561c9cb	-	c63ad8ffe7f4	-	-	2026-11-24	xproof
 7e6e2c37-3a06-456a-ae0f-37b7dc1a3e2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e6e2c37-3a06-456a-ae0f-37b7dc1a3e2b	f0/t0	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-stinger:f0t0:s1,f:xs:XP:arcbound-stinger:f0t0:s1	-	-	-	d864b561c9cb	-	7f2afc2f3e3a	-	-	2026-11-24	xproof
 7e6fcbc0-691a-4bd7-b063-debc86f4506a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hold-the-gates:cast:s1,f:xs:XP:hold-the-gates:cast:s1	-	-	-	d864b561c9cb	-	7db2fd36b7d9	-	-	2026-11-24	xproof
@@ -168,9 +168,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7edb3d15-4f70-4ebe-8c5e-caf6a225076d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7edb3d15-4f70-4ebe-8c5e-caf6a225076d	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7edb3d15-4f70-4ebe-8c5e-caf6a225076d	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ee07546-2c2e-4679-b671-7ea509b1d3ea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ee07546-2c2e-4679-b671-7ea509b1d3ea	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ee07546-2c2e-4679-b671-7ea509b1d3ea	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ee07546-2c2e-4679-b671-7ea509b1d3ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:izzet-locket:cast:s1,f:xs:XP:izzet-locket:cast:s1	-	-	-	d864b561c9cb	-	755301878f9a	-	-	2026-11-24	xproof
+7ee07546-2c2e-4679-b671-7ea509b1d3ea	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:izzet-locket:cast:s2,f:xs:XP:izzet-locket:cast:s2	-	-	-	d864b561c9cb	-	755301878f9a	-	-	2026-11-24	xproof
+7ee07546-2c2e-4679-b671-7ea509b1d3ea	f0/a1	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7ee394a2-84de-42e8-834e-6c1030be0aef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ee394a2-84de-42e8-834e-6c1030be0aef	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ee394a2-84de-42e8-834e-6c1030be0aef	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

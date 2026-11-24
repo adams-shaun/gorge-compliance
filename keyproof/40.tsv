@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 4000e119-3372-431c-bc3a-0db0639311ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4000e119-3372-431c-bc3a-0db0639311ce	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4000e119-3372-431c-bc3a-0db0639311ce	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4001b868-ada1-43f4-92e2-27ab0e80c913	land	land	agreed	-	F	start	2	0	f:xs:XP:vesuva:land:s1	-	-	-	9ee19e8250ce	-	e3df6ddc564b	-	-	2026-11-24	xproof
 40057917-4a88-4316-bc5b-efc0ada1ddff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 400adeec-11b4-4a9c-9466-dcab524d87ea	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -77,9 +77,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 406f1982-5d0c-4dba-9010-28b1c6a3602c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 406f1982-5d0c-4dba-9010-28b1c6a3602c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 406f1982-5d0c-4dba-9010-28b1c6a3602c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-406fad02-e1a6-4c24-b46d-976c548e1c78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-406fad02-e1a6-4c24-b46d-976c548e1c78	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-406fad02-e1a6-4c24-b46d-976c548e1c78	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+406fad02-e1a6-4c24-b46d-976c548e1c78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aria-of-flame:f0t0:s1,f:xs:XP:aria-of-flame:f0t0:s1	-	-	-	d864b561c9cb	-	28a8f09b6d11	-	-	2026-11-24	xproof
+406fad02-e1a6-4c24-b46d-976c548e1c78	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aria-of-flame:f0t0:s1,f:xs:XP:aria-of-flame:f0t0:s1	-	-	-	d864b561c9cb	-	28a8f09b6d11	-	-	2026-11-24	xproof
+406fad02-e1a6-4c24-b46d-976c548e1c78	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 407021e2-4072-4961-95be-f9309c341677	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4074e897-82a4-4f57-86c2-4aab3f29ef9b	cast	cast-resolve	agreed	-	X	scen	1	0	Ezekiel Sims, Spider-Totem/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4074e897-82a4-4f57-86c2-4aab3f29ef9b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ezekiel Sims, Spider-Totem/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -100,10 +100,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4080f7e3-06d3-4d3d-9929-4e826cb66713	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Herald of Eternal Dawn/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 40832734-fa83-4c02-9fbf-4614ce2919b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 408512c7-5016-4df4-b708-b7467bcdf0ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-408966d2-08c0-4531-a3b4-e666840ee95c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-408966d2-08c0-4531-a3b4-e666840ee95c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-408966d2-08c0-4531-a3b4-e666840ee95c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-408966d2-08c0-4531-a3b4-e666840ee95c	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+408966d2-08c0-4531-a3b4-e666840ee95c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chandra-flame-s-fury:cast:s1,f:xs:XP:chandra-flame-s-fury:cast:s1	-	-	-	d864b561c9cb	-	c3859f6455b0	-	-	2026-11-24	xproof
+408966d2-08c0-4531-a3b4-e666840ee95c	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:chandra-flame-s-fury:cast:s1,f:xs:XP:chandra-flame-s-fury:cast:s1	-	-	-	d864b561c9cb	-	c3859f6455b0	-	-	2026-11-24	xproof
+408966d2-08c0-4531-a3b4-e666840ee95c	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+408966d2-08c0-4531-a3b4-e666840ee95c	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 409305b3-5373-4376-8096-c04a73184cef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rona-disciple-of-gix:f0t0:s1,f:xs:XP:rona-disciple-of-gix:f0t0:s1	-	-	-	d864b561c9cb	-	801d5ed60a50	-	-	2026-11-24	xproof
 409305b3-5373-4376-8096-c04a73184cef	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:rona-disciple-of-gix:f0a0:s1,f:xs:XP:rona-disciple-of-gix:f0a0:s1	-	-	-	d864b561c9cb	-	801d5ed60a50	-	-	2026-11-24	xproof
 409305b3-5373-4376-8096-c04a73184cef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rona-disciple-of-gix:f0t0:s1,f:xs:XP:rona-disciple-of-gix:f0t0:s1	-	-	-	d864b561c9cb	-	801d5ed60a50	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40bb7b6b-a75d-4b59-ba45-a5801dcd59a1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40be0923-5d57-46fd-84ef-7f1a1fd5da42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40c1375b-1d15-4525-894a-16b7a0ac02b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40c1375b-1d15-4525-894a-16b7a0ac02b4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+40c1375b-1d15-4525-894a-16b7a0ac02b4	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:renowned-weaponsmith:f0a0:s2,f:xs:XP:renowned-weaponsmith:f0a0:s2	-	-	-	d864b561c9cb	-	290c2317f8fd	-	-	2026-11-24	xproof
 40c1375b-1d15-4525-894a-16b7a0ac02b4	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40c5d6fe-854a-436d-9f80-13eb5f1f8f68	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40c5d6fe-854a-436d-9f80-13eb5f1f8f68	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

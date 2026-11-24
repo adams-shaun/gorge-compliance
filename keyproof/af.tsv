@@ -65,8 +65,8 @@ af384946-e22a-45cd-ba07-1a5fbd4a3f0c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 af38d683-77a3-4599-ad2a-1c293ae01d45	cast	cast-resolve	agreed	-	X	scen	1	0	Scuzzback Scrounger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 af38d683-77a3-4599-ad2a-1c293ae01d45	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scuzzback Scrounger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 af4684cf-f109-44be-adfb-7c551a36635e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af4684cf-f109-44be-adfb-7c551a36635e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af4684cf-f109-44be-adfb-7c551a36635e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af4684cf-f109-44be-adfb-7c551a36635e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+af4684cf-f109-44be-adfb-7c551a36635e	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 af4b5853-ae60-48c9-9be1-bf121fa2e03d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af4b67c5-53dc-4e4d-9ec4-fa51cc3cd49a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af4d3489-6bba-4538-928c-50c9a7073813	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hazoret-s-undying-fury:cast:s1,f:xs:XP:hazoret-s-undying-fury:cast:s1	-	-	-	d864b561c9cb	-	d4a43b473957	-	-	2026-11-24	xproof
@@ -88,8 +88,8 @@ af698bd5-5f56-4d2a-9f02-8c3e781210cd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 af698bd5-5f56-4d2a-9f02-8c3e781210cd	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af698bd5-5f56-4d2a-9f02-8c3e781210cd	f0/a2	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 af698bd5-5f56-4d2a-9f02-8c3e781210cd	land	land	agreed	-	FX	start	2	0	x:xs:XP:ifnir-deadlands:land:s1,f:xs:XP:ifnir-deadlands:land:s1	-	-	-	d864b561c9cb	-	34fbc6c74a52	-	-	2026-11-24	xproof
-af6cfc23-b64b-4c8a-94b4-69d2b01cb3b9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af6cfc23-b64b-4c8a-94b4-69d2b01cb3b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af6cfc23-b64b-4c8a-94b4-69d2b01cb3b9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:octoprophet:cast:s1,f:xs:XP:octoprophet:cast:s1	-	-	-	d864b561c9cb	-	f49a2e76b47f	-	-	2026-11-24	xproof
+af6cfc23-b64b-4c8a-94b4-69d2b01cb3b9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:octoprophet:cast:s1,f:xs:XP:octoprophet:cast:s1	-	-	-	d864b561c9cb	-	f49a2e76b47f	-	-	2026-11-24	xproof
 af6d6844-c612-4731-86da-59a8fa02956b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af6d6844-c612-4731-86da-59a8fa02956b	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 af6e4c3e-0276-4f72-9a70-25868fe8bba5	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,12 +131,12 @@ afacd2b1-1733-4b28-b834-71a31149fa00	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 afaef788-34d1-460b-b884-9d7ae6ddeb18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toxic-deluge:cast:s1,f:xs:XP:toxic-deluge:cast:s1	-	-	-	d864b561c9cb	-	bad3021bf2b7	-	-	2026-11-24	xproof
 afb0c14c-41ac-4536-bfce-f1c36066b278	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chained-to-the-rocks:f0t0:s1,f:xs:XP:chained-to-the-rocks:f0t0:s1	-	-	-	d864b561c9cb	-	a290929b1abf	-	-	2026-11-24	xproof
 afb0c14c-41ac-4536-bfce-f1c36066b278	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chained-to-the-rocks:f0t0:s1,f:xs:XP:chained-to-the-rocks:f0t0:s1	-	-	-	d864b561c9cb	-	a290929b1abf	-	-	2026-11-24	xproof
-afb278f1-0e21-4f6d-96bb-c34aa3ef96b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+afb278f1-0e21-4f6d-96bb-c34aa3ef96b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tyrant-s-scorn:cast:s1,f:xs:XP:tyrant-s-scorn:cast:s1	-	-	-	d864b561c9cb	-	6ed8e66c9321	-	-	2026-11-24	xproof
 afb71560-0fc9-4ea5-9d52-d93c17d72519	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afb71560-0fc9-4ea5-9d52-d93c17d72519	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sanctum-seeker:f0t0:s1,f:xs:XP:sanctum-seeker:f0t0:s1	-	-	-	d864b561c9cb	-	99675a4b247f	-	-	2026-11-24	xproof
-afc2269c-d3b5-487d-9445-800c7a8e526b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afc2269c-d3b5-487d-9445-800c7a8e526b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afc2269c-d3b5-487d-9445-800c7a8e526b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+afc2269c-d3b5-487d-9445-800c7a8e526b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:domri-anarch-of-bolas:cast:s1	-	-	-	d864b561c9cb	-	c361257ab032	-	-	2026-11-24	xproof
+afc2269c-d3b5-487d-9445-800c7a8e526b	f0/a0	Mana	agreed	-	F	start	2	0	f:xs:XP:domri-anarch-of-bolas:cast:s1	-	-	-	d864b561c9cb	-	c361257ab032	-	-	2026-11-24	xproof
+afc2269c-d3b5-487d-9445-800c7a8e526b	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 afc2a3a7-eb69-4fcb-b3a3-444dccb735d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toxic-nim:cast:s1,f:xs:XP:toxic-nim:cast:s1	-	-	-	d864b561c9cb	-	7f424dcc2817	-	-	2026-11-24	xproof
 afc2a3a7-eb69-4fcb-b3a3-444dccb735d7	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:toxic-nim:f0a0:s1,f:xs:XP:toxic-nim:f0a0:s1	-	-	-	d864b561c9cb	-	7f424dcc2817	-	-	2026-11-24	xproof
 afc3a65e-7a7a-4bd9-bca4-aa762b9bbbcb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -13,9 +13,9 @@ ca130ba1-a4a8-4225-9799-75d56bac6fb3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ca130ba1-a4a8-4225-9799-75d56bac6fb3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca13dda2-fbb0-4b6b-9126-3c8df04dee2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca13dda2-fbb0-4b6b-9126-3c8df04dee2b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ca13dda2-fbb0-4b6b-9126-3c8df04dee2b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ca13dda2-fbb0-4b6b-9126-3c8df04dee2b	f0/a1	NULL	owed	refused:steps-needed:cost:WU	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ca14f1b6-e8c2-4ea5-9375-5ed63f355052	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ca14f1b6-e8c2-4ea5-9375-5ed63f355052	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ca14f1b6-e8c2-4ea5-9375-5ed63f355052	f0/t0	NULL	owed	refused:no-generator:trigger:Surveil	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ca16b735-26c7-4d0b-959b-b031f6cb376e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca16b735-26c7-4d0b-959b-b031f6cb376e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca16b735-26c7-4d0b-959b-b031f6cb376e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -36,9 +36,9 @@ ca349ba9-b5ea-48e6-a617-c9b7f2708853	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 ca39af65-985d-4ab1-874b-9e8d3455c349	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca39af65-985d-4ab1-874b-9e8d3455c349	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca3cda24-0ecd-4edf-b1b3-54311ad58a51	cast	cast-resolve	agreed	-	FX	scen	2	0	Helicarrier Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ca4936cf-48d4-4469-9243-8dbf8ec4cdca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ca4936cf-48d4-4469-9243-8dbf8ec4cdca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ca4936cf-48d4-4469-9243-8dbf8ec4cdca	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ca4936cf-48d4-4469-9243-8dbf8ec4cdca	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:roalesk-apex-hybrid:cast:s1,f:xs:XP:roalesk-apex-hybrid:cast:s1	-	-	-	d864b561c9cb	-	267e16600120	-	-	2026-11-24	xproof
+ca4936cf-48d4-4469-9243-8dbf8ec4cdca	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:roalesk-apex-hybrid:cast:s1,f:xs:XP:roalesk-apex-hybrid:cast:s1	-	-	-	d864b561c9cb	-	267e16600120	-	-	2026-11-24	xproof
+ca4936cf-48d4-4469-9243-8dbf8ec4cdca	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roalesk-apex-hybrid:f0t1:s1,f:xs:XP:roalesk-apex-hybrid:f0t1:s1	-	-	-	d864b561c9cb	-	267e16600120	-	-	2026-11-24	xproof
 ca4b4bf2-ed34-444c-9088-dd1ea488ec4e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca4b4bf2-ed34-444c-9088-dd1ea488ec4e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca4b4bf2-ed34-444c-9088-dd1ea488ec4e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ cab2bc93-f38b-4301-ac42-05765615586b	cast	cast-resolve	agreed	-	FX	scen	2	0	Edga
 cab2bc93-f38b-4301-ac42-05765615586b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Edgar, Ancient Bloodlord/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cab2bc93-f38b-4301-ac42-05765615586b	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Edgar, Ancient Bloodlord/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cab305d9-27fb-4a41-adf1-892e15167cb9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cab305d9-27fb-4a41-adf1-892e15167cb9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cab305d9-27fb-4a41-adf1-892e15167cb9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cab67380-4e1a-4210-a98b-d2a21022b4b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cab67380-4e1a-4210-a98b-d2a21022b4b7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cab718af-8e6f-4766-856e-3a61ba98f94d	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -155,9 +155,9 @@ cada2a1c-5db2-4702-9a57-cbe7da1bf208	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cada2a1c-5db2-4702-9a57-cbe7da1bf208	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cada2a1c-5db2-4702-9a57-cbe7da1bf208	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cada2a1c-5db2-4702-9a57-cbe7da1bf208	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cada3481-cc2b-4412-b9b5-0436af53aad2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cada3481-cc2b-4412-b9b5-0436af53aad2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cada3481-cc2b-4412-b9b5-0436af53aad2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cada3481-cc2b-4412-b9b5-0436af53aad2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ranger-captain-of-eos:f0t0:s1,f:xs:XP:ranger-captain-of-eos:f0t0:s1	-	-	-	d864b561c9cb	-	88ae659f4296	-	-	2026-11-24	xproof
+cada3481-cc2b-4412-b9b5-0436af53aad2	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:ranger-captain-of-eos:f0t0:s1,f:xs:XP:ranger-captain-of-eos:f0t0:s1	-	-	-	d864b561c9cb	-	88ae659f4296	-	-	2026-11-24	xproof
+cada3481-cc2b-4412-b9b5-0436af53aad2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ranger-captain-of-eos:f0t0:s1,f:xs:XP:ranger-captain-of-eos:f0t0:s1	-	-	-	d864b561c9cb	-	88ae659f4296	-	-	2026-11-24	xproof
 cade8b94-2998-4d23-87bb-9fbdddd19dea	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cade8b94-2998-4d23-87bb-9fbdddd19dea	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cadf7be1-4a74-4163-bb2f-6bfbbb557973	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

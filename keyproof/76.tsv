@@ -20,10 +20,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76168d1b-266d-4d27-9e97-248b0c2c7e8f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 76168d1b-266d-4d27-9e97-248b0c2c7e8f	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7616dacf-44e2-4b03-b120-875cc2e50ea5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7616e834-4852-40c8-9de6-d89f96119f12	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7616e834-4852-40c8-9de6-d89f96119f12	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7616e834-4852-40c8-9de6-d89f96119f12	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7616e834-4852-40c8-9de6-d89f96119f12	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7616e834-4852-40c8-9de6-d89f96119f12	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-regal-gorgon:cast:s1,f:xs:XP:vraska-regal-gorgon:cast:s1	-	-	-	d864b561c9cb	-	3335a89245ae	-	-	2026-11-24	xproof
+7616e834-4852-40c8-9de6-d89f96119f12	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:vraska-regal-gorgon:cast:s1,f:xs:XP:vraska-regal-gorgon:cast:s1	-	-	-	d864b561c9cb	-	3335a89245ae	-	-	2026-11-24	xproof
+7616e834-4852-40c8-9de6-d89f96119f12	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7616e834-4852-40c8-9de6-d89f96119f12	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 761bb894-d3f9-4248-af76-1559c502e342	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 761bb894-d3f9-4248-af76-1559c502e342	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 761bb894-d3f9-4248-af76-1559c502e342	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76f0f39a-ce1b-4935-a6b8-5c4e1a27ab24	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76f0f39a-ce1b-4935-a6b8-5c4e1a27ab24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76f1cc7a-084e-410d-92cb-b8f6ab8da4e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76f1cc7a-084e-410d-92cb-b8f6ab8da4e9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76f1cc7a-084e-410d-92cb-b8f6ab8da4e9	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:senate-guildmage:f0a0:s1,f:xs:XP:senate-guildmage:f0a0:s1	-	-	-	d864b561c9cb	-	8de1d85c34f5	-	-	2026-11-24	xproof
 76f1cc7a-084e-410d-92cb-b8f6ab8da4e9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76f22670-6806-4124-8bbb-822ed33d2bda	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bitterbow-sharpshooters:cast:s1,f:xs:XP:bitterbow-sharpshooters:cast:s1	-	-	-	d864b561c9cb	-	281340aaaf44	-	-	2026-11-24	xproof
 76f335d0-7f71-4b1a-b60d-73de954cbe2c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -106,8 +106,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 257cc8e9-55b4-4510-9d1f-5df8c1ae2061	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-257cc8e9-55b4-4510-9d1f-5df8c1ae2061	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-257cc8e9-55b4-4510-9d1f-5df8c1ae2061	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+257cc8e9-55b4-4510-9d1f-5df8c1ae2061	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:house-guildmage:f0a0:s1,f:xs:XP:house-guildmage:f0a0:s1	-	-	-	d864b561c9cb	-	f124f974d8e6	-	-	2026-11-24	xproof
+257cc8e9-55b4-4510-9d1f-5df8c1ae2061	f0/a1	Surveil	agreed	-	FX	start	2	0	x:xs:XP:house-guildmage:f0a1:s1,f:xs:XP:house-guildmage:f0a1:s1	-	-	-	d864b561c9cb	-	f124f974d8e6	-	-	2026-11-24	xproof
 257ee9a0-5ee0-49c4-8619-e75e1134d7ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 257ee9a0-5ee0-49c4-8619-e75e1134d7ac	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 257f7c29-8857-429e-a421-9262982804e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -194,8 +194,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25c983e0-a8c9-4784-91a4-8fe04c6df882	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25cb5c86-83cd-4a06-b0d1-a0f6fc9158a6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25d35e3e-ece8-4c94-9dbc-d076a52fca0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25d955e3-2b98-4a75-bb51-6072000111be	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25d955e3-2b98-4a75-bb51-6072000111be	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+25d955e3-2b98-4a75-bb51-6072000111be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ayula-s-influence:cast:s1,f:xs:XP:ayula-s-influence:cast:s1	-	-	-	d864b561c9cb	-	e2e0f6fd6586	-	-	2026-11-24	xproof
+25d955e3-2b98-4a75-bb51-6072000111be	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 25dce517-ac0a-4577-89ed-04296c7c4069	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25dce517-ac0a-4577-89ed-04296c7c4069	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25dce517-ac0a-4577-89ed-04296c7c4069	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

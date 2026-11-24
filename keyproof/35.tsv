@@ -4,8 +4,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3501ed98-473c-4a17-8b5f-1e0c00ee75da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-35023c04-ae62-47bf-80a0-faa2d7a67788	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35023c04-ae62-47bf-80a0-faa2d7a67788	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35023c04-ae62-47bf-80a0-faa2d7a67788	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haazda-officer:f0t0:s1,f:xs:XP:haazda-officer:f0t0:s1	-	-	-	d864b561c9cb	-	d1779b887a80	-	-	2026-11-24	xproof
+35023c04-ae62-47bf-80a0-faa2d7a67788	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:haazda-officer:f0t0:s1,f:xs:XP:haazda-officer:f0t0:s1	-	-	-	d864b561c9cb	-	d1779b887a80	-	-	2026-11-24	xproof
 35044f8a-c8e0-41ae-ba61-43109e51f7e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35044f8a-c8e0-41ae-ba61-43109e51f7e8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 35064a72-c052-496f-8f1a-6dbc5e617d3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 354affb3-1be7-4a9e-91da-2989eb54f62d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 354defd2-f63f-4a48-9fd4-2526b3878a84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 354defd2-f63f-4a48-9fd4-2526b3878a84	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-354defd2-f63f-4a48-9fd4-2526b3878a84	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+354defd2-f63f-4a48-9fd4-2526b3878a84	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 354fecd1-2371-49e3-81c6-7e47728dbb1f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:akoum-refuge:f0a0:s1,f:xs:XP:akoum-refuge:f0a0:s1	-	-	-	8a1b1a193ec0	-	af8817235be6	-	-	2026-11-24	xproof
 354fecd1-2371-49e3-81c6-7e47728dbb1f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:akoum-refuge:f0t0:s1,f:xs:XP:akoum-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	af8817235be6	-	-	2026-11-24	xproof
 354fecd1-2371-49e3-81c6-7e47728dbb1f	land	land	agreed	-	FX	start	4	0	x:xs:XP:akoum-refuge:f0t0:s1,f:xs:XP:akoum-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	af8817235be6	-	-	2026-11-24	xproof
@@ -175,8 +175,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35df179a-c0e6-4ac1-a861-e6e9b4d1614d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35df179a-c0e6-4ac1-a861-e6e9b4d1614d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35df2d01-2f9f-49a7-8fa1-cfaa52e5c7b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35dfe1c7-48ab-436f-9a6e-44835ea01cf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35dfe1c7-48ab-436f-9a6e-44835ea01cf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35dfe1c7-48ab-436f-9a6e-44835ea01cf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-runes:f0t0:s1,f:xs:XP:wall-of-runes:f0t0:s1	-	-	-	d864b561c9cb	-	d8745fc05b6c	-	-	2026-11-24	xproof
+35dfe1c7-48ab-436f-9a6e-44835ea01cf9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wall-of-runes:f0t0:s1,f:xs:XP:wall-of-runes:f0t0:s1	-	-	-	d864b561c9cb	-	d8745fc05b6c	-	-	2026-11-24	xproof
 35e2f82e-7ca3-4a92-9134-b7999eef5337	cast	counter-spell	agreed	-	X	scen	1	0	Mana Sculpt/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 35e684fd-69e3-4137-bf15-94f705191f5e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:murmuring-phantasm:cast:s1,f:xs:XP:murmuring-phantasm:cast:s1	-	-	-	d864b561c9cb	-	f26de2e2727d	-	-	2026-11-24	xproof
 35efb1e6-6be2-4a38-969a-199524d48e02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 fc011947-b496-400e-99b8-b368068ba79b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc011947-b496-400e-99b8-b368068ba79b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fc011947-b496-400e-99b8-b368068ba79b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:silverback-shaman:f0t0:s1,f:xs:XP:silverback-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	2cb4697f2e54	-	-	2026-11-24	xproof
 fc04bfa9-a8f9-478d-8164-34b1e6c85417	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc04bfa9-a8f9-478d-8164-34b1e6c85417	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 fc05e582-e760-4fe2-ba43-e9d8e63f3f85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -20,7 +20,7 @@ fc148e1e-dff0-448e-9f16-625341754356	cast	cast	agreed	-	F	start	2	0	f:xs:XP:aeth
 fc148e1e-dff0-448e-9f16-625341754356	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:aether-vial:cast:s1	-	-	-	25696bf19d5b	-	0ae7e716c293	-	-	2026-11-24	xproof
 fc148e1e-dff0-448e-9f16-625341754356	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc16a2ce-a570-454f-8498-f9c604c0d68b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc16a2ce-a570-454f-8498-f9c604c0d68b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fc16a2ce-a570-454f-8498-f9c604c0d68b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:swathcutter-giant:f0t0:s1,f:xs:XP:swathcutter-giant:f0t0:s1	-	-	-	d864b561c9cb	-	c9426b638edb	-	-	2026-11-24	xproof
 fc17b7a3-7711-4449-80bd-692e8ed9087d	cast	cast-resolve	agreed	-	X	scen	1	0	Wiccan, Rising Magician/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fc17b7a3-7711-4449-80bd-692e8ed9087d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wiccan, Rising Magician/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fc17b7a3-7711-4449-80bd-692e8ed9087d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wiccan, Rising Magician/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -48,9 +48,9 @@ fc467fe5-85ab-4c95-8d21-49096778b107	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fc467fe5-85ab-4c95-8d21-49096778b107	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc467fe5-85ab-4c95-8d21-49096778b107	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fc4c969d-408c-46d1-8dba-fabecc2c30ce	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc4f2cdb-966c-4576-8b37-b3d138f5710e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc4f2cdb-966c-4576-8b37-b3d138f5710e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fc4f2cdb-966c-4576-8b37-b3d138f5710e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fc4f2cdb-966c-4576-8b37-b3d138f5710e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:god-eternal-rhonas:f0t0:s1,f:xs:XP:god-eternal-rhonas:f0t0:s1	-	-	-	d864b561c9cb	-	455cd5fd04c5	-	-	2026-11-24	xproof
+fc4f2cdb-966c-4576-8b37-b3d138f5710e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:god-eternal-rhonas:f0t0:s1,f:xs:XP:god-eternal-rhonas:f0t0:s1	-	-	-	d864b561c9cb	-	455cd5fd04c5	-	-	2026-11-24	xproof
+fc4f2cdb-966c-4576-8b37-b3d138f5710e	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 fc532d1d-6cf5-4b59-afb3-325d0bc0db77	cast	cast-resolve	agreed	-	X	scen	1	0	Swampsnare Trap/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fc532d1d-6cf5-4b59-afb3-325d0bc0db77	static#0.0	static#0.0	agreed	-	X	scen	1	0	Swampsnare Trap/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fc532d1d-6cf5-4b59-afb3-325d0bc0db77	static#0.1	static#0.1	agreed	-	X	scen	1	0	Swampsnare Trap/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

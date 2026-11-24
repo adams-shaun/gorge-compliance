@@ -125,7 +125,7 @@ a7955f10-f502-4893-88ad-f36e7ff0af4f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 a7955f10-f502-4893-88ad-f36e7ff0af4f	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7955f10-f502-4893-88ad-f36e7ff0af4f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a79d2fc8-467f-464d-9e73-2dae4b059628	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a79d2fc8-467f-464d-9e73-2dae4b059628	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a79d2fc8-467f-464d-9e73-2dae4b059628	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a79e21fc-89bd-4547-8bef-5510554e1431	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7a0e473-77c1-4a85-b6d7-b0dfdadb696f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7a6cdfd-10ac-49d0-a0a6-8ad37e326511	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,11 +142,11 @@ a7ba88c6-81e7-4ab7-9c9b-308831e56833	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a7ba88c6-81e7-4ab7-9c9b-308831e56833	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7ba88c6-81e7-4ab7-9c9b-308831e56833	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 a7c000a8-1864-4bb2-80fa-a61d74dbd966	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7c000a8-1864-4bb2-80fa-a61d74dbd966	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7c000a8-1864-4bb2-80fa-a61d74dbd966	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:eternal-taskmaster:f0t0:s1,f:xs:XP:eternal-taskmaster:f0t0:s1	-	-	-	d864b561c9cb	-	d1f709fe73c2	-	-	2026-11-24	xproof
 a7c36b66-4f58-41af-b1c5-704ff0d9eac8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7c36b66-4f58-41af-b1c5-704ff0d9eac8	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a7c5318f-e579-447e-9109-7d2e4b3d2c17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7c5318f-e579-447e-9109-7d2e4b3d2c17	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7c5318f-e579-447e-9109-7d2e4b3d2c17	f0/a0	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a7c55495-6aca-4d17-b61a-cab8fa38b9f4	cast	cast-resolve	agreed	-	X	scen	1	0	Risky Shortcut/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7c69802-99c4-4778-934e-cc09ba58c267	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7c69802-99c4-4778-934e-cc09ba58c267	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,8 +180,8 @@ a7d20fb0-005b-4bcc-9592-cdbd3fbdd43a	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	
 a7d4f5aa-26d4-4363-aa5a-a26d6f791b82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deathmist-raptor:cast:s1,f:xs:XP:deathmist-raptor:cast:s1	-	-	-	d864b561c9cb	-	a630af286d26	-	-	2026-11-24	xproof
 a7d4f5aa-26d4-4363-aa5a-a26d6f791b82	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a7d5a9ca-27ec-4843-a9fd-0de0d67def39	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-vitu-ghazi:cast:s1,f:xs:XP:guardian-of-vitu-ghazi:cast:s1	-	-	-	64a08ba7d913	-	9dd767436a9e	-	-	2026-11-24	xproof
-a7d88510-d2ce-4dd6-938c-964cc74ff7d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7d88510-d2ce-4dd6-938c-964cc74ff7d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7d88510-d2ce-4dd6-938c-964cc74ff7d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawning-angel:f0t0:s1,f:xs:XP:dawning-angel:f0t0:s1	-	-	-	d864b561c9cb	-	e8f8d9025e73	-	-	2026-11-24	xproof
+a7d88510-d2ce-4dd6-938c-964cc74ff7d7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dawning-angel:f0t0:s1,f:xs:XP:dawning-angel:f0t0:s1	-	-	-	d864b561c9cb	-	e8f8d9025e73	-	-	2026-11-24	xproof
 a7d8c99c-cd44-4bad-82e6-7c7cff9bd89f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7dad8fe-b0b8-4c6d-ad11-76b402952799	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7df9a4e-d556-4345-9884-0724a3f9d5f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

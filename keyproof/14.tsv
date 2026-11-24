@@ -78,9 +78,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14693689-d087-43b6-9c3f-63ab0648fc20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 146de263-fece-4a00-ab67-35dc934165d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 146de263-fece-4a00-ab67-35dc934165d8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-146eb8c8-93d5-4dd5-af7a-46d5acd4a89d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-146eb8c8-93d5-4dd5-af7a-46d5acd4a89d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-146eb8c8-93d5-4dd5-af7a-46d5acd4a89d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+146eb8c8-93d5-4dd5-af7a-46d5acd4a89d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vivien-champion-of-the-wilds:cast:s1,f:xs:XP:vivien-champion-of-the-wilds:cast:s1	-	-	-	d864b561c9cb	-	75532e9f240a	-	-	2026-11-24	xproof
+146eb8c8-93d5-4dd5-af7a-46d5acd4a89d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:vivien-champion-of-the-wilds:cast:s1,f:xs:XP:vivien-champion-of-the-wilds:cast:s1	-	-	-	d864b561c9cb	-	75532e9f240a	-	-	2026-11-24	xproof
+146eb8c8-93d5-4dd5-af7a-46d5acd4a89d	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1470f614-88eb-4d3c-bc4f-270dfb512b6c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1470f614-88eb-4d3c-bc4f-270dfb512b6c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1473580d-7cb2-48f5-a77d-08f49244c5e8	cast	cast-resolve	agreed	-	FX	scen	2	0	Essence Channeler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -122,10 +122,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14b180d2-5701-452d-8deb-cf0845c95df5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14b180d2-5701-452d-8deb-cf0845c95df5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14b8b35e-57b6-4577-97a8-9d9c513db0b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14b8b35e-57b6-4577-97a8-9d9c513db0b8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+14b8b35e-57b6-4577-97a8-9d9c513db0b8	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:swarm-guildmage:f0a0:s1,f:xs:XP:swarm-guildmage:f0a0:s1	-	-	-	d864b561c9cb	-	641ec90480df	-	-	2026-11-24	xproof
 14b8b35e-57b6-4577-97a8-9d9c513db0b8	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14bc29ee-4f84-4e62-8ede-5741b99414c9	cast	cast-resolve	agreed	-	FX	scen	2	0	Reach the Horizon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-14bc2a2e-a445-4785-9c88-b9ad169c39bc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+14bc2a2e-a445-4785-9c88-b9ad169c39bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:regenesis:cast:s1,f:xs:XP:regenesis:cast:s1	-	-	-	d864b561c9cb	-	2c9f48b92e80	-	-	2026-11-24	xproof
 14bc9e20-a6ad-4eca-8c5c-5459ce078d9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14bc9e20-a6ad-4eca-8c5c-5459ce078d9a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14bee98b-6dd8-48f3-8043-06f03cc93aa7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	94857cfacb2a	-	-	2026-11-24	xproof

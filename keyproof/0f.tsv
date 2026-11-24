@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f26be86-eab1-45fd-8b69-5ecff2565c60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f26be86-eab1-45fd-8b69-5ecff2565c60	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f26c04a-9bf7-4cbd-a95f-73ee4a3b1af1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f2d038e-6dab-4352-9ba7-ed9e063bb304	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f2d038e-6dab-4352-9ba7-ed9e063bb304	cast	cast	agreed	-	F	start	2	0	f:xs:XP:force-of-despair:cast:s1	-	-	-	d864b561c9cb	-	e8aa12f66944	-	-	2026-11-24	xproof
 0f30f32f-3c4c-4f73-8b2a-82045a40bda9	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f30f32f-3c4c-4f73-8b2a-82045a40bda9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f30f32f-3c4c-4f73-8b2a-82045a40bda9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f5f6f3e-1b3c-43e2-b11d-bd454366845c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f5f6f3e-1b3c-43e2-b11d-bd454366845c	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f623e23-81ae-4c35-b68b-e0a2f431cbad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f63de7b-03f2-49ad-b217-88fe9c50d68a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f63de7b-03f2-49ad-b217-88fe9c50d68a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f63de7b-03f2-49ad-b217-88fe9c50d68a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:snarespinner:cast:s1,f:xs:XP:snarespinner:cast:s1	-	-	-	d864b561c9cb	-	2f61faeaeaad	-	-	2026-11-24	xproof
+0f63de7b-03f2-49ad-b217-88fe9c50d68a	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0f68ae67-1671-4281-8b6b-3e52fdd4915f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:salvation-swan:f0t0:s2,f:xs:XP:salvation-swan:f0t0:s2	-	-	-	e07cf3a05ba5	-	9d7d8f15f616	-	-	2026-11-24	xproof
 0f68ae67-1671-4281-8b6b-3e52fdd4915f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Salvation Swan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f68ae67-1671-4281-8b6b-3e52fdd4915f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Salvation Swan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
