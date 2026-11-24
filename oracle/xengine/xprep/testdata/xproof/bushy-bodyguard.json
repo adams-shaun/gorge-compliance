@@ -1,0 +1,147 @@
+{
+ "name": "xproof start Bushy Bodyguard f0/t0 seed 2",
+ "turn": 1,
+ "setup": {
+  "p0": {
+   "battlefield": [
+    "Forest",
+    "Forest"
+   ],
+   "hand": [
+    "Bushy Bodyguard"
+   ],
+   "graveyard": [
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest"
+   ],
+   "library_top": [
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest"
+   ],
+   "life": 20
+  },
+  "p1": {
+   "library_top": [
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains"
+   ],
+   "life": 20
+  }
+ },
+ "steps": [
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest#2",
+   "ability_index": 0
+  },
+  {
+   "op": "cast",
+   "seat": 0,
+   "card": "p0:Bushy Bodyguard"
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0,
+   "answers": [
+    {
+     "kind": "choose",
+     "pick": [
+      "trigger_cost_pay"
+     ]
+    }
+   ]
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  }
+ ]
+}
