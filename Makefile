@@ -15,7 +15,9 @@ GO_TEST_FLAGS ?= -p=2
 
 # The XMage commit the compliance oracle (manifests, out-of-tree driver)
 # is pinned to. XMage is MIT; nothing from it is a build dependency.
-XMAGE_REF  ?= 4142596fb72b9dc03a0eae0ec34f4544cfd6d59e
+# 7a68b79c92 = 4142596fb7 + fork PRs #11 (enters-tapped sets tapped without a TappedEvent: Attentive Sunscribe) and #12 (a
+# static ability's conditional Custom/WhileControlled effect is not discarded on a false condition, CR 611.3a: Undercover Skrull).
+XMAGE_REF  ?= 7a68b79c9284918baacc0622e13843afdf2632b7
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -79,7 +81,9 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # commit of 2aff202bc9, which it carries as a cherry-pick) merged with the fork's gorge branch
 # (ff076d4432 = Card-Forge/forge master 9db1009ef8 plus the card-script fixes). A descendant of
 # FORGE_REF ff076d4432 with identical cardsfolder and tokenscripts trees.
-FORGE_ORACLE_REF ?= 95020b95d46da3de728abf02e6d7c07a3860ac5c
+# becb01adc6 = 95020b95d4 + setup tokens' keyword counters grant their keyword (Card.setCounters(Multiset) once;
+# keyword counters resolve before custom ones: Zombie Druid LIFELINK, Alesha's Legacy). Same trees as FORGE_REF ff076d4432.
+FORGE_ORACLE_REF ?= becb01adc693ea955cbb19cf9217c04d18d1a947
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
