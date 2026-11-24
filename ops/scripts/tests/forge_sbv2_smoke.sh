@@ -56,6 +56,7 @@ STUB
 cat > "$TMP/jdk/bin/javac" <<'STUB'
 #!/usr/bin/env bash
 echo "javac $*" >> "$STUB_LOG"
+[ -z "${STUB_JAVAC_SLEEP:-}" ] || sleep "$STUB_JAVAC_SLEEP"
 while [ $# -gt 0 ]; do [ "$1" = -d ] && out=$2; shift; done
 mkdir -p "$out/forge/oracle/sbv2" && : > "$out/forge/oracle/sbv2/Sbv2Engine.class"
 STUB
@@ -136,6 +137,18 @@ check "  ...and the earlier class dir is kept for a running engine" $([ "$old" =
 check "javac scope honours XENGINE_SCOPE=none" $(
 	XENGINE_SCOPE=none FORGE_ORACLE_CLASSES=$TMP/c2 "$SBV2" --compile >/dev/null 2>&1
 	/usr/bin/grep -c '^systemd-run ' "$LOG" | { read -r n; [ "$n" = 2 ] && echo 0 || echo 1; }) "systemd-run calls changed"
+
+# two launches racing on one fresh source sha (xclient -workers) compile once:
+# the flock serialises them and the second finds the finished directory.
+: > "$LOG"
+export FORGE_ORACLE_CLASSES=$TMP/race
+STUB_JAVAC_SLEEP=1 "$SBV2" --compile >/dev/null 2>&1 &
+p1=$!
+STUB_JAVAC_SLEEP=1 "$SBV2" --compile >/dev/null 2>&1 &
+p2=$!
+wait "$p1"; r1=$?; wait "$p2"; r2=$?
+unset FORGE_ORACLE_CLASSES
+check "two concurrent launches on one sha both succeed with a single javac" $([ "$r1" = 0 ] && [ "$r2" = 0 ] && [ "$(count javac)" = 1 ] && echo 0 || echo 1) "rc=$r1,$r2 javac calls: $(count javac)"
 
 # 4. serve: stdio passes through the scope to the engine, pinned env, own main class.
 : > "$LOG"
