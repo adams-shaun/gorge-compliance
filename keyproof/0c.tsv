@@ -118,8 +118,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c7f9701-c39e-4f14-844a-15f2e3c41ca9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c828f10-4775-492f-9224-1e2814ad2cad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c828f10-4775-492f-9224-1e2814ad2cad	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c85b8f7-0bd0-4680-9ec5-d4b110460a54	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fabled Passage/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0c85b8f7-0bd0-4680-9ec5-d4b110460a54	land	play-land	agreed	-	X	scen	1	0	Fabled Passage/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0c85b8f7-0bd0-4680-9ec5-d4b110460a54	f0/a0	ChangeZone	agreed	-	FX	start	4	0	x:xs:XP:fabled-passage:f0a0:s1,f:xs:XP:fabled-passage:f0a0:s1	-	-	-	23b491658465	-	17542dac67e9	-	-	2026-11-24	xproof
+0c85b8f7-0bd0-4680-9ec5-d4b110460a54	land	land	agreed	-	FX	start	2	0	x:xs:XP:fabled-passage:land:s1,f:xs:XP:fabled-passage:land:s1	-	-	-	23b491658465	-	17542dac67e9	-	-	2026-11-24	xproof
 0c8ab7bf-7b6a-4a34-b988-9f3f4d84a9ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c8cb2ec-5b58-497c-a6e7-2d25512d5a44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c936582-d4c0-4da8-bc7e-49da5a433939	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ca1f76d-ae77-490a-8b32-d30ad33afc2d	cast	cast-resolve	agreed	-	X	scen	1	0	Apocalypse Runner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ca1f76d-ae77-490a-8b32-d30ad33afc2d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Apocalypse Runner/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ca1f76d-ae77-490a-8b32-d30ad33afc2d	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Apocalypse Runner/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Restless Spire/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:restless-spire:f0a0:s1,f:xs:XP:restless-spire:f0a0:s1	-	-	-	23b491658465	-	975fa5c07bd0	-	-	2026-11-24	xproof
 0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	f0/a1	Animate	agreed	-	X	start	2	0	x:xs:XP:restless-spire:f0a1:s1	-	-	-	23b491658465	-	975fa5c07bd0	-	-	2026-11-24	xproof
 0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:restless-spire:f0a1:s1	-	-	-	23b491658465	-	975fa5c07bd0	-	-	2026-11-24	xproof
 0ca4e80e-c19c-4b74-b531-c5a4dc5a8ba9	land	land	agreed	-	FX	start	2	0	x:xs:XP:restless-spire:land:s1,f:xs:XP:restless-spire:land:s1	-	-	-	23b491658465	-	975fa5c07bd0	-	-	2026-11-24	xproof

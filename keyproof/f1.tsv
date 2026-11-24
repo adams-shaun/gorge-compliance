@@ -68,10 +68,10 @@ f15bd5c0-99ff-42c6-8eed-48de6df81b61	cast	cast-resolve	agreed	-	X	scen	1	0	Radio
 f15bd5c0-99ff-42c6-8eed-48de6df81b61	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Radioactive Spider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f15bd5c0-99ff-42c6-8eed-48de6df81b61	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Radioactive Spider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f15bd5c0-99ff-42c6-8eed-48de6df81b61	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Radioactive Spider/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f15fb0cc-8e96-4f03-94d0-b51410415afd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Crystal Grotto/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f15fb0cc-8e96-4f03-94d0-b51410415afd	f0/a0	Mana	agreed	-	FX	start	7	0	x:xs:XP:crystal-grotto:f0a0:s1,f:xs:XP:crystal-grotto:f0a0:s1	-	-	-	23b491658465	-	2add04f07ea8	-	-	2026-11-24	xproof
 f15fb0cc-8e96-4f03-94d0-b51410415afd	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Crystal Grotto/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f15fb0cc-8e96-4f03-94d0-b51410415afd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Crystal Grotto/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f15fb0cc-8e96-4f03-94d0-b51410415afd	land	play-land	agreed	-	X	scen	1	0	Crystal Grotto/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f15fb0cc-8e96-4f03-94d0-b51410415afd	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:crystal-grotto:f0t0:s1,f:xs:XP:crystal-grotto:f0t0:s1	-	-	-	23b491658465	-	2add04f07ea8	-	-	2026-11-24	xproof
+f15fb0cc-8e96-4f03-94d0-b51410415afd	land	land	agreed	-	FX	start	4	0	x:xs:XP:crystal-grotto:f0t0:s1,f:xs:XP:crystal-grotto:f0t0:s1	-	-	-	23b491658465	-	2add04f07ea8	-	-	2026-11-24	xproof
 f1603384-4361-49c9-98aa-7785fc3504c4	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:cascade-bluffs:f0a0:s1,f:xs:XP:cascade-bluffs:f0a0:s1	-	-	-	8a1b1a193ec0	-	72f83b4e455d	-	-	2026-11-24	xproof
 f1603384-4361-49c9-98aa-7785fc3504c4	f0/a1	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 f1603384-4361-49c9-98aa-7785fc3504c4	land	land	agreed	-	FX	start	2	0	x:xs:XP:cascade-bluffs:land:s1,f:xs:XP:cascade-bluffs:land:s1	-	-	-	8a1b1a193ec0	-	72f83b4e455d	-	-	2026-11-24	xproof
@@ -175,7 +175,8 @@ f1ecb3d7-5ea0-45b2-b1b0-d7ae304db2a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arc
 f1ecb3d7-5ea0-45b2-b1b0-d7ae304db2a1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f1ecb3d7-5ea0-45b2-b1b0-d7ae304db2a1	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f1ef5698-14bd-42bf-aae5-2870699e4186	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f1f0eab3-681b-4c2d-b590-555951920880	cast	cast-resolve	agreed	-	X	scen	1	0	Buried in the Garden/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f1f0eab3-681b-4c2d-b590-555951920880	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:buried-in-the-garden:cast:s1,f:xs:XP:buried-in-the-garden:cast:s1	-	-	-	23b491658465	-	0268789d1f4d	-	-	2026-11-24	xproof
+f1f0eab3-681b-4c2d-b590-555951920880	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:buried-in-the-garden:cast:s1,f:xs:XP:buried-in-the-garden:cast:s1	-	-	-	23b491658465	-	0268789d1f4d	-	-	2026-11-24	xproof
 f1f0eab3-681b-4c2d-b590-555951920880	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Buried in the Garden/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f1f3df1c-5c51-445a-b66d-eee4aab23691	cast	cast-resolve	agreed	-	X	scen	1	0	Desperate Measures/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f1f45310-d665-400d-934f-e48e7858ce8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

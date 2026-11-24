@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e4146d2-cfa0-4f5e-9761-3c83519b90c3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e4146d2-cfa0-4f5e-9761-3c83519b90c3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e4146d2-cfa0-4f5e-9761-3c83519b90c3	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e414a4f-6e76-4cbe-9c69-d52852cd5bc0	cast	cast-resolve	agreed	-	X	scen	1	0	Heartfire Immolator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1e414a4f-6e76-4cbe-9c69-d52852cd5bc0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Heartfire Immolator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1e414a4f-6e76-4cbe-9c69-d52852cd5bc0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heartfire-immolator:cast:s1,f:xs:XP:heartfire-immolator:cast:s1	-	-	-	23b491658465	-	14322a380f80	-	-	2026-11-24	xproof
+1e414a4f-6e76-4cbe-9c69-d52852cd5bc0	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:heartfire-immolator:f0a0:s1,f:xs:XP:heartfire-immolator:f0a0:s1	-	-	-	23b491658465	-	14322a380f80	-	-	2026-11-24	xproof
 1e414a4f-6e76-4cbe-9c69-d52852cd5bc0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Heartfire Immolator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1e462ce2-15d3-473c-8f48-9c9363fc65eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burning-prophet:cast:s1,f:xs:XP:burning-prophet:cast:s1	-	-	-	d864b561c9cb	-	1ff0de355189	-	-	2026-11-24	xproof
 1e462ce2-15d3-473c-8f48-9c9363fc65eb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

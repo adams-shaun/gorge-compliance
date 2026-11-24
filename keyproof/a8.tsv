@@ -125,7 +125,7 @@ a8a8407c-d0e3-4311-82ed-1ab1f75159d9	cast	NULL	owed	refused:steps-needed:token	-
 a8a8407c-d0e3-4311-82ed-1ab1f75159d9	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a8a8407c-d0e3-4311-82ed-1ab1f75159d9	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hunter-s-talent:f0t0:s2,f:xs:XP:hunter-s-talent:f0t0:s2	-	-	-	e07cf3a05ba5	-	80ea1df0c26f	-	-	2026-11-24	xproof
-a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	4	0	x:xs:XP:hunter-s-talent:f0a0:s1,f:xs:XP:hunter-s-talent:f0a0:s1	-	-	-	23b491658465	-	80ea1df0c26f	-	-	2026-11-24	xproof
+a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:hunter-s-talent:f0a1:s1,f:xs:XP:hunter-s-talent:f0a1:s1	-	-	-	23b491658465	-	80ea1df0c26f	-	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hunter's Talent/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hunter-s-talent:f0t0:s2,f:xs:XP:hunter-s-talent:f0t0:s2	-	-	-	e07cf3a05ba5	-	80ea1df0c26f	-	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Hunter's Talent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -198,10 +198,10 @@ a8f5440e-5d4b-420a-8cfd-27a3c72be0d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a8f5440e-5d4b-420a-8cfd-27a3c72be0d2	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-clancaller:f0a0:s1,f:xs:XP:elvish-clancaller:f0a0:s1	-	-	-	d864b561c9cb	-	0e71f3fd56ca	-	-	2026-11-24	xproof
 a8f5a11f-3291-4ee9-a96d-4fa38af14932	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8f5cfa7-4956-4182-8e44-acf3493239f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	cast	cast-resolve	agreed	-	X	scen	1	0	Spectral Sailor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spectral-sailor:cast:s1,f:xs:XP:spectral-sailor:cast:s1	-	-	-	23b491658465	-	ed8fa1598289	-	-	2026-11-24	xproof
 a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spectral Sailor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spectral Sailor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spectral Sailor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:spectral-sailor:f0a0:s1,f:xs:XP:spectral-sailor:f0a0:s1	-	-	-	23b491658465	-	ed8fa1598289	-	-	2026-11-24	xproof
 a8fe6204-9f55-45e5-99b3-43f2761ce8a3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8ffbf6d-44e9-44e4-846c-4f894078130e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8ffbf6d-44e9-44e4-846c-4f894078130e	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

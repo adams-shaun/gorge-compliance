@@ -19,10 +19,10 @@ d317e3f1-553f-44f6-8543-d6d4c42534ad	combat#0.attack	combat#0.attack	agreed	-	X	
 d317e3f1-553f-44f6-8543-d6d4c42534ad	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sonic Shrieker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d317e3f1-553f-44f6-8543-d6d4c42534ad	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sonic-shrieker:f0t0:s2,f:xs:XP:sonic-shrieker:f0t0:s2	-	-	-	267e485f6204	-	6f865cb845ec	-	-	2026-11-24	xproof
 d31c6043-e005-4efe-9aa7-d82cb122eebe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d31fd12f-b4dd-4bc3-ace4-703dabd0f607	cast	cast	agreed	-	X	start	1	0	x:xs:XP:aven-interrupter:f0t0:s2	-	-	-	e07cf3a05ba5	-	1dc5c5321d97	-	-	2026-11-24	xproof
+d31fd12f-b4dd-4bc3-ace4-703dabd0f607	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:aven-interrupter:cast:s1,f:xs:XP:aven-interrupter:cast:s1	-	-	-	23b491658465	-	1dc5c5321d97	-	-	2026-11-24	xproof
 d31fd12f-b4dd-4bc3-ace4-703dabd0f607	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aven Interrupter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d31fd12f-b4dd-4bc3-ace4-703dabd0f607	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aven Interrupter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d31fd12f-b4dd-4bc3-ace4-703dabd0f607	f0/t0	ChangesZone	agreed	-	X	start	1	0	x:xs:XP:aven-interrupter:f0t0:s2	-	-	-	e07cf3a05ba5	-	1dc5c5321d97	-	-	2026-11-24	xproof
+d31fd12f-b4dd-4bc3-ace4-703dabd0f607	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:aven-interrupter:cast:s1,f:xs:XP:aven-interrupter:cast:s1	-	-	-	23b491658465	-	1dc5c5321d97	-	-	2026-11-24	xproof
 d31fd12f-b4dd-4bc3-ace4-703dabd0f607	static#0.0	static#0.0	agreed	-	X	scen	1	0	Aven Interrupter/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d3264482-2a5a-45e8-987f-593b8aceac12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d32a32d2-203d-4be1-8a33-e037747053c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -158,8 +158,8 @@ d3af1c69-42ae-4d29-a9f1-72f862d26303	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ver
 d3af1c69-42ae-4d29-a9f1-72f862d26303	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:verdant-automaton:f0a0:s1,f:xs:XP:verdant-automaton:f0a0:s1	-	-	-	d864b561c9cb	-	ad54309a8a0e	-	-	2026-11-24	xproof
 d3b259e9-f9c7-4830-91fa-6e3d9f4cc1e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:one-thousand-lashes:cast:s1,f:xs:XP:one-thousand-lashes:cast:s1	-	-	-	d864b561c9cb	-	ba76e4ea2ac3	-	-	2026-11-24	xproof
 d3b259e9-f9c7-4830-91fa-6e3d9f4cc1e3	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:one-thousand-lashes:cast:s1,f:xs:XP:one-thousand-lashes:cast:s1	-	-	-	d864b561c9cb	-	ba76e4ea2ac3	-	-	2026-11-24	xproof
-d3b2d8a2-d3bc-448c-9cf6-6bead6010c28	cast	cast-resolve	agreed	-	X	scen	1	0	Bristly Bill, Spine Sower/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d3b2d8a2-d3bc-448c-9cf6-6bead6010c28	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bristly Bill, Spine Sower/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d3b2d8a2-d3bc-448c-9cf6-6bead6010c28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bristly-bill-spine-sower:cast:s1,f:xs:XP:bristly-bill-spine-sower:cast:s1	-	-	-	23b491658465	-	be300f498ae1	-	-	2026-11-24	xproof
+d3b2d8a2-d3bc-448c-9cf6-6bead6010c28	f0/a0	MultiplyCounter	agreed	-	FX	start	2	0	x:xs:XP:bristly-bill-spine-sower:f0a0:s1,f:xs:XP:bristly-bill-spine-sower:f0a0:s1	-	-	-	23b491658465	-	be300f498ae1	-	-	2026-11-24	xproof
 d3b2d8a2-d3bc-448c-9cf6-6bead6010c28	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bristly Bill, Spine Sower/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d3b408e7-4d39-47a3-b00c-846903f8ae77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trumpet-blast:cast:s1,f:xs:XP:trumpet-blast:cast:s1	-	-	-	25696bf19d5b	-	f32f778874c2	-	-	2026-11-24	xproof
 d3b49970-46b7-441b-bff8-8403d982b8a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
