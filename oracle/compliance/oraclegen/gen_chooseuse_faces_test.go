@@ -47,6 +47,7 @@ func TestTerrapactIntimidatorChoiceAnswersOnTheYesNoQueue(t *testing.T) {
 // independently of xmageChooseUseFaces' polarity values, so the census below
 // compares the map against something other than itself.
 var xmageChooseUseTrueLabel = map[string]string{
+	"abundant harvest":          "Land",
 	"bane, lord of darkness":    "CARDNAME's controller draws a card.",
 	"combustible gearhulk":      "CARDNAME's controller draws three cards.",
 	"covenant of minds":         "You may choose to put those cards into that player's hand.",
@@ -94,7 +95,7 @@ func TestDecoyGambitDrawIsYesReturnIsNo(t *testing.T) {
 // XMage-source proof (see choice_dialog.go).
 func TestChooseUseFacesModeNumbersCensus(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
-	if len(xmageChooseUseFaces) != 11 || len(xmageChooseUseTrueLabel) != 11 {
+	if len(xmageChooseUseFaces) != 12 || len(xmageChooseUseTrueLabel) != 12 {
 		t.Fatalf("xmageChooseUseFaces has %d entries, true-label table %d; adding one needs an XMage-source proof (see its comment)",
 			len(xmageChooseUseFaces), len(xmageChooseUseTrueLabel))
 	}

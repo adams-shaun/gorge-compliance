@@ -71,6 +71,11 @@ func TestChoiceDialogFacesCensus(t *testing.T) {
 	if len(seen) != len(xmageChoiceDialogFaces) {
 		t.Errorf("listed faces found in the corpus: %v of %d", seen, len(xmageChoiceDialogFaces))
 	}
+	// The two-face dialogs XMage poses as a chooseUse (Unleash, clash
+	// placement, Odd or even, Creature or land, land or nonland, the Domri
+	// colour) are censused beside the Choice dialogs.
+	checkBooleanDialogCensus(t)
+	TestXMageBooleanDialogFacesAgainstCorpus(t)
 }
 
 // A gift PROMISE is chooseUse yes whatever option index lists it (Jolly

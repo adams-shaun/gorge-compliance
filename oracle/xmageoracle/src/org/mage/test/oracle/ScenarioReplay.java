@@ -1709,6 +1709,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         headNamesCandidate = true;
                         break;
                     }
+                    // A player candidate is no MageObject: a TargetOpponent's
+                    // lone opponent (ClashEffect's "an opponent to clash
+                    // with") is named by the player's own name, the answer
+                    // the generator scripted for the controller's pick.
+                    Player candidate = game.getPlayer(id);
+                    if (candidate != null && candidate.getName().equals(head)) {
+                        headNamesCandidate = true;
+                        break;
+                    }
                 }
             }
             if (!forcedPick(target.getMinNumberOfTargets() - target.getSize(), candidates.size(), head, headNamesCandidate)) {

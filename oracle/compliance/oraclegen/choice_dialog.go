@@ -74,6 +74,7 @@ func choiceDialogLabels(f *cards.Face) []string {
 // WaterbendTest.java, no card class), one chooseUse per entry (true branch in
 // the last column's first parenthesis side unless noted):
 //
+//	AbundantHarvest          chooseUse("Choose land or nonland", "Land", "Nonland")   (DigLand / DigNonland) -- added at XMAGE_REF 7aeb547a86
 //	BaneLordOfDarkness       "Have <controller> draw a card or put a creature into play?" ("Draw card"/"Play creature")
 //	CombustibleGearhulk      "Have <controller> draw three cards?"                    (draw three / mill and damage)
 //	CovenantOfMinds          "Put the revealed cards into <controller>'s hand?"       (to hand / graveyard and draw five)
@@ -96,6 +97,7 @@ func choiceDialogLabels(f *cards.Face) []string {
 // against an independently written true-branch label, so a new entry or a
 // polarity change is a deliberate, source-proven edit.
 var xmageChooseUseFaces = map[string]bool{
+	"abundant harvest":          true,
 	"bane, lord of darkness":    true,
 	"combustible gearhulk":      true,
 	"covenant of minds":         true,

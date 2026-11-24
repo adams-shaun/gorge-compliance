@@ -139,7 +139,13 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			bolsters[i] = true
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, bolster: bolsters, snaps: res.Snapshots, orderAsks: orderAsks})
+	sources := map[int][]string{}
+	for _, d := range ds {
+		if _, done := sources[d.Step]; !done {
+			sources[d.Step] = stepSourceNames(sc, res.Snapshots, d.Step)
+		}
+	}
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, bolster: bolsters, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that

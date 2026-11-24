@@ -68,6 +68,26 @@ func TestXProofChoiceDefs(t *testing.T) {
 			{Seat: 0, Kind: "choice", Value: "yes"},
 			{Seat: 0, Kind: "choice", Value: "@p0:Forest^@p0:Forest#2^@p0:Forest#3"},
 		}},
+		// xp-xmage-choice-def-residual2: XMage's chooseUse dialogs. Unleash's
+		// election and the two-face choices (land or nonland, odd or even,
+		// creature or land, Domri's colour) are yes/no, not the gorge label.
+		{"carnival-hellsteed", 8, []oraclegen.XAnswer{{Seat: 0, Kind: "choice", Value: "yes"}}},
+		{"abundant-harvest", 3, []oraclegen.XAnswer{{Seat: 0, Kind: "choice", Value: "yes"}}},
+		{"extinction-event", 6, []oraclegen.XAnswer{{Seat: 0, Kind: "choice", Value: "yes"}}},
+		{"winding-way", 4, []oraclegen.XAnswer{{Seat: 0, Kind: "choice", Value: "yes"}}},
+		{"domri-anarch-of-bolas", 8, []oraclegen.XAnswer{{Seat: 0, Kind: "choice", Value: "yes"}}},
+		// A "you may" look-and-pick Dig: chooseUse yes, the TARGET-queue pick,
+		// then the n-1 bottom-order picks (Adventurous Impulse) or none (the
+		// graveyard rest: Grisly Salvage).
+		{"adventurous-impulse", 3, []oraclegen.XAnswer{
+			{Seat: 0, Kind: "choice", Value: "yes"},
+			{Seat: 0, Kind: "target", Value: "Forest"},
+			{Seat: 0, Kind: "choice", Value: "Forest"},
+		}},
+		{"grisly-salvage", 4, []oraclegen.XAnswer{
+			{Seat: 0, Kind: "choice", Value: "yes"},
+			{Seat: 0, Kind: "target", Value: "Forest"},
+		}},
 		{"rathi-dragon", 8, []oraclegen.XAnswer{
 			{Seat: 0, Kind: "choice", Value: "yes"},
 			{Seat: 0, Kind: "choice", Value: "@p0:Mountain^@p0:Mountain#2"},
