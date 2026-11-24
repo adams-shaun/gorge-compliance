@@ -558,3 +558,91 @@ func TestStartSpellCastTriggers(t *testing.T) {
 		t.Errorf("Case of the Ransacked Lab (Instant,Sorcery): %+v %v", res.Start, err)
 	}
 }
+
+// TestStartCosts: an activated ability's non-mana cost is met by start
+// state (planCost), never by a play: Memnite to sacrifice for "another
+// creature" (Agency Coroner), a basic placed tapped for a land (Ripchain
+// Razorkin, so it adds no mana), a basic in hand to discard (Possessed Goat),
+// the card in hand for "discard this card" (Bedhead Beastie) and in the
+// graveyard for "exile this card from your graveyard" (Faerie Dreamthief), a
+// vanilla creature with power 3 or more to crew 3 (Apocalypse Runner), and
+// the loyalty a planeswalker's ultimate takes beyond its printed loyalty
+// (Liliana, Dreadhorde General: 9 of 6). A token cost (Baylen taps tokens)
+// stays refused.
+func TestStartCosts(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Agency Coroner", key: "f0/a0", maxTurns: 1, p0BF: cat([]string{"Agency Coroner"}, rep("Swamp", 3), []string{"Memnite"}),
+			focusCard: "Agency Coroner", focusKind: "ability"},
+		{card: "Possessed Goat", key: "f0/a0", maxTurns: 1, p0Hand: []string{"Plains"}, p0BF: cat([]string{"Possessed Goat"}, rep("Plains", 3)),
+			focusCard: "Possessed Goat", focusKind: "ability"},
+		{card: "Bedhead Beastie", key: "f0/a0", maxTurns: 1, p0Hand: []string{"Bedhead Beastie"}, p0BF: rep("Mountain", 3),
+			focusCard: "Bedhead Beastie", focusKind: "ability"},
+		{card: "Baylen, the Haymaker", key: "f0/a0", reason: "steps-needed:cost:tapXType"},
+	})
+	reg, b := testBuilder(t)
+	gen := func(card, key string) *StartFile {
+		t.Helper()
+		res, err := Generate(reg, b, card, key, Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s %s: %+v %v", card, key, res, err)
+		}
+		return res.Start
+	}
+	if f := gen("Ripchain Razorkin", "f0/a0"); !slices.Equal(f.Setup.P0.Battlefield, cat([]string{"Ripchain Razorkin"}, rep("Mountain", 4))) ||
+		!slices.Equal(f.Setup.P0.Tapped, []string{"Mountain"}) {
+		t.Errorf("Ripchain Razorkin: battlefield %v tapped %v, want three Mountains for {2}{R} and one tapped to sacrifice",
+			f.Setup.P0.Battlefield, f.Setup.P0.Tapped)
+	}
+	if f := gen("Faerie Dreamthief", "f0/a0"); len(f.Setup.P0.Graveyard) == 0 || f.Setup.P0.Graveyard[0] != "Faerie Dreamthief" ||
+		slices.Contains(f.Setup.P0.Battlefield, "Faerie Dreamthief") {
+		t.Errorf("Faerie Dreamthief: graveyard %v battlefield %v, want the card in the graveyard", f.Setup.P0.Graveyard, f.Setup.P0.Battlefield)
+	}
+	f := gen("Apocalypse Runner", "f0/a1")
+	if len(f.Setup.P0.Battlefield) != 2 || f.Setup.P0.Battlefield[0] != "Apocalypse Runner" {
+		t.Fatalf("Apocalypse Runner: battlefield %v, want the Vehicle and one crew", f.Setup.P0.Battlefield)
+	}
+	crew, _ := reg.Lookup(f.Setup.P0.Battlefield[1])
+	if cf := crew.Faces[0]; !cf.IsCreature() || cf.Power() < 3 || len(cf.Abilities)+len(cf.Triggers) > 0 {
+		t.Errorf("Apocalypse Runner crew %s: want a vanilla creature with power 3 or more", cf.Name)
+	}
+	f = gen("Liliana, Dreadhorde General", "f0/a2")
+	if want := []StartCounter{{Card: "Liliana, Dreadhorde General", Kind: "LOYALTY", N: 3}}; !reflect.DeepEqual(f.Setup.P0.Counters, want) {
+		t.Errorf("Liliana: counters %+v, want %+v", f.Setup.P0.Counters, want)
+	}
+}
+
+// TestStartCombat: an attack trigger is the card (or Memnite, for a
+// noncreature card such as a Vehicle) attacking, on the battlefield since
+// the turn began; a combat-damage start drops the opp-blockers need, so the
+// attack connects.
+func TestStartCombat(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Dragon Mage", key: "f0/t0", maxTurns: 1, p0BF: []string{"Dragon Mage"}, focusCard: "Dragon Mage", focusKind: "attack"},
+		// the opp-blockers need places a wall: "whenever you attack" fires blocked or not
+		{card: "Boosted Sloop", key: "f0/t0", maxTurns: 1, p0BF: []string{"Boosted Sloop", "Memnite"}, p1BF: []string{"Shield Sphere"},
+			focusCard: "Memnite", focusKind: "attack"},
+	})
+}
+
+// TestStartBecomesTarget: ward is the opponent casting Murder at the card on
+// its turn, valiant the card's controller casting Ranger's Guile (target
+// creature you control, so an opposing creature a need placed is never the
+// target).
+func TestStartBecomesTarget(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Heartfire Hero", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"}, p0BF: []string{"Heartfire Hero", "Forest"},
+			focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Armored Armadillo", key: "f0/t0", active: 1, maxTurns: 1, p0BF: []string{"Armored Armadillo"},
+			p1Hand: []string{"Murder"}, p1BF: rep("Swamp", 3), focusSeat: 1, focusCard: "Murder", focusKind: "cast"},
+	})
+}
+
+// TestStartLifeGained: "whenever you gain life" is Chaplain's Blessing ({W}
+// sorcery, gain 5 life) cast, and the life:gain need's enabler (Zuran Orb)
+// is dropped: the carrier is the lifegain.
+func TestStartLifeGained(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Drogskol Reaver", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Chaplain's Blessing"}, p0BF: []string{"Drogskol Reaver", "Plains"},
+			focusCard: "Chaplain's Blessing", focusKind: "cast"},
+	})
+}

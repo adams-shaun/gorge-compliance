@@ -409,3 +409,135 @@ func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 	}
 	return ""
 }
+
+// attackCarrier is the creature that attacks for the card: the card itself
+// when it is a creature the filter takes (an empty filter takes any), else
+// a carrier creature (carrierPool) the filter takes, placed on seat 0's
+// battlefield beside it.
+func attackCarrier(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, filter string, f *StartFile) string {
+	if face.IsCreature() {
+		if filter == "" {
+			return card
+		}
+		for _, a := range parseFilter(filter) {
+			if a.known && !a.other && a.ctrl != ctrlOpp && a.test(face) {
+				return card
+			}
+		}
+	}
+	if filter == "" {
+		filter = "Creature.YouCtrl"
+	}
+	name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsCreature)
+	if name == "" || s != 0 {
+		return ""
+	}
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, name)
+	return name
+}
+
+// combatStart is a trigger an attack fires: "whenever this deals combat
+// damage to a player" (DamageDone, CombatDamage) and "whenever you attack"
+// (AttackersDeclared). The card is on the battlefield since the turn began
+// (no summoning sickness) and the attacker (attackCarrier) attacks a seat
+// with no creatures, so the damage is dealt.
+func combatStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:" + trig.Mode
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return none
+	}
+	var filter string
+	switch trig.Mode {
+	case "DamageDone":
+		vt := trig.Params["ValidTarget"]
+		if trig.Params["CombatDamage"] != "True" || vt != "Player" && vt != "Opponent" {
+			return none
+		}
+		filter = trig.Params["ValidSource"]
+		if selfCard(trig) || filter == "Card.Self" {
+			if !face.IsCreature() {
+				return none + ":noncreature"
+			}
+			filter = ""
+		}
+	case "AttackersDeclared":
+		if ap := trig.Params["AttackingPlayer"]; ap != "" && ap != "You" {
+			return none
+		}
+		if trig.Params["ValidAttackersAmount"] != "" {
+			return none + ":amount"
+		}
+		filter = trig.Params["ValidAttackers"]
+	}
+	f.Setup.P0.Battlefield = []string{card}
+	attacker := attackCarrier(reg, b, face, card, filter, f)
+	if attacker == "" {
+		return none + ":filter"
+	}
+	f.Focus = &StartFocus{Seat: seatPtr(0), Card: attacker, Kind: "attack"}
+	return ""
+}
+
+// Targeting carriers: Murder ({1}{B}{B} instant, destroy target creature) is
+// the opponent's spell that targets the card, and the first of ownTargeters
+// the corpus plays its controller's: "target creature you control", so a
+// creature a need placed for the opponent is never the target.
+const oppTargeter = "Murder"
+
+var ownTargeters = []string{"Ranger's Guile", "Blossoming Defense"}
+
+// targetStart is "whenever this becomes the target of a spell or ability"
+// (BecomesTarget on Card.Self): ward (Ward True) and an OppCtrl source are
+// the opponent casting Murder at the card on its turn, valiant and a YouCtrl
+// source the card's controller casting Ranger's Guile (target creature you
+// control) at it. The card is a creature on the battlefield, its seat's only
+// one unless a need places another.
+func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:BecomesTarget"
+	if trig.Params["ValidTarget"] != "Card.Self" || !face.IsCreature() {
+		return none
+	}
+	caster, spells := 1, []string{oppTargeter}
+	switch src := trig.Params["ValidSource"]; {
+	case trig.Params["Ward"] == "True" || src == "SpellAbility.OppCtrl" || src == "Card.OppCtrl":
+	case src == "SpellAbility.YouCtrl" || src == "Card.YouCtrl":
+		caster, spells = 0, ownTargeters
+	default:
+		return none + ":source"
+	}
+	spell := ""
+	for _, n := range spells {
+		if c, ok := reg.Lookup(n); ok && b.Playable(c) {
+			spell = n
+			break
+		}
+	}
+	if spell == "" {
+		return none + ":source"
+	}
+	f.Setup.P0.Battlefield = []string{card}
+	seats := [2]*StartSeat{&f.Setup.P0, &f.Setup.P1}
+	castCarrier(reg, seats[caster], spell)
+	f.Active = caster
+	f.Focus = &StartFocus{Seat: seatPtr(caster), Card: spell, Kind: "cast"}
+	return ""
+}
+
+// lifeStart is "whenever you gain life" (LifeGained, ValidPlayer You): the
+// card on the battlefield and Chaplain's Blessing ({W} sorcery, you gain 5
+// life) cast on its controller's turn.
+func lifeStart(reg *cards.Registry, b *certdeck.Builder, card string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:LifeGained"
+	if vp := trig.Params["ValidPlayer"]; vp != "You" || trig.Params["TriggerZones"] != "Battlefield" || trig.Params["OpponentTurn"] != "" {
+		return none
+	}
+	const spell = "Chaplain's Blessing"
+	c, ok := reg.Lookup(spell)
+	if !ok || !b.Playable(c) {
+		return none
+	}
+	f.Setup.P0.Battlefield = []string{card}
+	castCarrier(reg, &f.Setup.P0, spell)
+	f.Focus = &StartFocus{Seat: seatPtr(0), Card: spell, Kind: "cast"}
+	return ""
+}

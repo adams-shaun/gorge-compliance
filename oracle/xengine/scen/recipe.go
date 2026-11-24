@@ -208,11 +208,11 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 		idx, _ := strconv.Atoi(m[3])
 		if fam == "activate" {
-			mana, why := costTokens(sa.Params["Cost"])
+			plan, why := planCost(reg, b, face, card, sa.Params["Cost"], generic)
 			if why != "" {
 				return refuse(why)
 			}
-			p0.Battlefield = append([]string{card}, landsFor(mana, generic)...)
+			applyCost(plan, card, generic, f)
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx}
 			break
 		}
@@ -253,6 +253,18 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why := spellStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)
 			}
+		case "DamageDone", "AttackersDeclared":
+			if why := combatStart(reg, b, face, card, trig, f); why != "" {
+				return refuse(why)
+			}
+		case "BecomesTarget":
+			if why := targetStart(reg, b, face, card, trig, f); why != "" {
+				return refuse(why)
+			}
+		case "LifeGained":
+			if why := lifeStart(reg, b, card, trig, f); why != "" {
+				return refuse(why)
+			}
 		case "Attacks":
 			p0.Battlefield = []string{card}
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "attack"}
@@ -281,7 +293,21 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			}
 		}
 	}
-	if why, err := placeNeeds(reg, b, c, card, generic, f); err != nil || why != "" {
+	// Needs the start's own line already meets, or must not: a combat-damage
+	// start's attack must connect (no blocker), and a lifegain start's carrier
+	// is the lifegain.
+	skip := func(n certdeck.Need) bool {
+		switch {
+		case trig == nil:
+			return false
+		case trig.Mode == "DamageDone" || trig.Mode == "DamageDoneOnce":
+			return n.Class == certdeck.OppBlockers
+		case trig.Mode == "LifeGained":
+			return n.Class == certdeck.Life && n.Arg == "gain"
+		}
+		return false
+	}
+	if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
 		if err != nil {
 			return Result{}, err
 		}
@@ -340,8 +366,9 @@ const reasonPlayerCounters = "steps-needed:counters:player"
 // every other need, one of certdeck's picks (pickEnabler). A need StartSpec
 // cannot place is a refusal: tokens (rules.StartSeat has no tokens yet) and
 // counters a removal reads from a player, not a permanent (reasonPlayerCounters).
-func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, generic string, f *StartFile) (string, error) {
-	needs := certdeck.Derive(c, b.Types())
+// skip drops the needs the start's own line meets or must not have.
+func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, generic string, skip func(certdeck.Need) bool, f *StartFile) (string, error) {
+	needs := slices.DeleteFunc(certdeck.Derive(c, b.Types()), skip)
 	if len(needs) == 0 {
 		return "", nil
 	}
@@ -435,7 +462,16 @@ func placeCounters(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card
 	}
 	s := &f.Setup.P0
 	on := card
-	if !slices.Contains(s.Battlefield, on) {
+	bound := false
+	for _, c := range s.Counters {
+		if c.Card == card && c.Kind == kind {
+			return nil // a cost's counters (planCost) already meet the need
+		}
+		bound = bound || c.Card == card
+	}
+	// A start binds one counters entry to each battlefield copy, so a card
+	// already carrying a cost's counters takes the need's on a bearer.
+	if !slices.Contains(s.Battlefield, on) || bound {
 		var err error
 		on, err = inertCounterBearer(reg, b)
 		if err != nil {
