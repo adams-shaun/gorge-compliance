@@ -625,6 +625,13 @@ func costAction(c any) []string {
 		return []string{"gaincontrol"}
 	case v == "ShufflePermanentIntoLibrary":
 		return []string{"move:battlefield>library"}
+	case v == "Exile":
+		// "That player exiles that spell": each operand's zone to exile.
+		var out []string
+		for _, x := range list(argN(c, 0)) {
+			out = append(out, "move:"+exilableZone(x)+">exile")
+		}
+		return out
 	case strings.HasPrefix(v, "Reveal"), strings.HasPrefix(v, "Choose"), v == "PayMana":
 		return nil
 	}

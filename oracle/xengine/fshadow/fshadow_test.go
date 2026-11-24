@@ -1288,3 +1288,38 @@ func TestKindDivergenceCarriesPlacement(t *testing.T) {
 		t.Errorf("msg %q drops the detail", got)
 	}
 }
+
+// TestCombatSnapCarryingTheAttackPrecedesTheAsk is the farm pod-14800 repro
+// (Vampire Hexmage, BIG/DFT/WOE-s148-cmdr4): Forge's recorder writes the
+// declare-attackers snapshot after the attacking flag is set but before the
+// tap, then the attack ask. gorge is still at its pending KAttackers, so
+// comparing stopped on "attacking". Such a snapshot is skipped; a
+// pre-declaration one, or one for another step, still compares.
+func TestCombatSnapCarryingTheAttackPrecedesTheAsk(t *testing.T) {
+	snap := func(step string, attacking, blocking bool) Entry {
+		return Entry{Line: 446, T: TSnap, Snap: &Snap{T: TSnap, Snapshot: rules.OracleSnapshot{Turn: 10, Step: step,
+			Permanents: []rules.OracleSnapPerm{{Attacking: attacking, Blocking: blocking}}}}}
+	}
+	ask := func(kind, step string) Entry {
+		return Entry{Line: 447, T: TAsk, Ask: &Ask{Kind: kind, Turn: 10, Step: step}}
+	}
+	atk, blk := &decision.Decision{Kind: decision.KAttackers}, &decision.Decision{Kind: decision.KBlockers}
+	for _, c := range []struct {
+		name string
+		e, n Entry
+		at   int
+		d    *decision.Decision
+		want bool
+	}{
+		{"attack carried, attack ask next", snap("declare-attackers", true, false), ask(KindAttack, "declare-attackers"), at(10, "declare-attackers"), atk, true},
+		{"block carried, block ask next", snap("declare-blockers", false, true), ask(KindBlock, "declare-blockers"), at(10, "declare-blockers"), blk, true},
+		{"pre-declaration snapshot compares", snap("declare-attackers", false, false), ask(KindAttack, "declare-attackers"), at(10, "declare-attackers"), atk, false},
+		{"next ask is a priority pass", snap("declare-attackers", true, false), ask(KindPriority, "declare-attackers"), at(10, "declare-attackers"), atk, false},
+		{"gorge not at the declaration", snap("declare-attackers", true, false), ask(KindAttack, "declare-attackers"), at(10, "declare-attackers"), &decision.Decision{Kind: decision.KPriority}, false},
+		{"another turn", snap("declare-attackers", true, false), ask(KindAttack, "declare-attackers"), at(9, "declare-attackers"), atk, false},
+	} {
+		if got := snapPrecedesOwnDeclaration(c.e, c.n, c.at, c.d); got != c.want {
+			t.Errorf("%s: got %v, want %v", c.name, got, c.want)
+		}
+	}
+}
