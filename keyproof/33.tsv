@@ -9,9 +9,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33042d12-f08b-4b3e-b106-c424ef868c13	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 330e109c-1885-4946-9edc-895408519b3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 330e109c-1885-4946-9edc-895408519b3d	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-330e8a18-d224-4416-b59d-02b749c3a674	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-330e8a18-d224-4416-b59d-02b749c3a674	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-330e8a18-d224-4416-b59d-02b749c3a674	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+330e8a18-d224-4416-b59d-02b749c3a674	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:christine-chapel-combat-medic:f0t0:s1,f:xs:XP:christine-chapel-combat-medic:f0t0:s1	-	-	-	8c0bd19283bb	-	e61a3274a41d	-	-	2026-11-24	xproof
+330e8a18-d224-4416-b59d-02b749c3a674	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:christine-chapel-combat-medic:f0t0:s1,f:xs:XP:christine-chapel-combat-medic:f0t0:s1	-	-	-	8c0bd19283bb	-	e61a3274a41d	-	-	2026-11-24	xproof
+330e8a18-d224-4416-b59d-02b749c3a674	f0/t1	LifeGained	agreed	-	FX	start	1	0	x:xs:XP:christine-chapel-combat-medic:f0t0:s1,f:xs:XP:christine-chapel-combat-medic:f0t0:s1	-	-	-	8c0bd19283bb	-	e61a3274a41d	-	-	2026-11-24	xproof
 330f2e60-810d-4fe0-9a35-b3f2b29e3e2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:true-faith-censer:cast:s1,f:xs:XP:true-faith-censer:cast:s1	-	-	-	d864b561c9cb	-	b136b3d284d1	-	-	2026-11-24	xproof
 330f2e60-810d-4fe0-9a35-b3f2b29e3e2a	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:true-faith-censer:f0a0:s1	-	-	-	d864b561c9cb	-	b136b3d284d1	-	-	2026-11-24	xproof
 330f97ee-6bb2-4a4b-a8bc-411659dc4260	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -88,8 +88,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33826f91-7680-4a4c-be39-db6c2c0bd465	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33826f91-7680-4a4c-be39-db6c2c0bd465	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3384606b-7724-4584-89fa-fbe006d5de1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-338619f2-bb33-4988-bafe-7460f86acef8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-338619f2-bb33-4988-bafe-7460f86acef8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+338619f2-bb33-4988-bafe-7460f86acef8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:la-forge-perceptive-engineer:cast:s1,f:xs:XP:la-forge-perceptive-engineer:cast:s1	-	-	-	8c0bd19283bb	-	c136ecd60748	-	-	2026-11-24	xproof
+338619f2-bb33-4988-bafe-7460f86acef8	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:la-forge-perceptive-engineer:f0a0:s1,f:xs:XP:la-forge-perceptive-engineer:f0a0:s1	-	-	-	8c0bd19283bb	-	c136ecd60748	-	-	2026-11-24	xproof
 3386414c-32fa-40ae-9b30-dab976a158c1	cast	cast-resolve	agreed	-	X	scen	1	0	Vampire Gourmand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3386414c-32fa-40ae-9b30-dab976a158c1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vampire Gourmand/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33869ba6-13e5-4e48-8963-92f7965648fb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:felidar-guardian:f0t0:s1,f:xs:XP:felidar-guardian:f0t0:s1	-	-	-	d864b561c9cb	-	b6c494c52151	-	-	2026-11-24	xproof
@@ -203,10 +203,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33f29fcb-c9ea-4d81-afa2-5c9575b4d58e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33f29fcb-c9ea-4d81-afa2-5c9575b4d58e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 33f2c6cb-f864-4bee-b365-aedf33fbedf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33f2c6cb-f864-4bee-b365-aedf33fbedf5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33f2c6cb-f864-4bee-b365-aedf33fbedf5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33f2c6cb-f864-4bee-b365-aedf33fbedf5	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-33f2c6cb-f864-4bee-b365-aedf33fbedf5	f0/t3	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+33f2c6cb-f864-4bee-b365-aedf33fbedf5	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+33f2c6cb-f864-4bee-b365-aedf33fbedf5	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+33f2c6cb-f864-4bee-b365-aedf33fbedf5	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+33f2c6cb-f864-4bee-b365-aedf33fbedf5	f0/t3	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 33f4fcd5-4eea-4146-a564-da5511a8ee0a	cast	cast-resolve	agreed	-	X	scen	1	0	Thought Shucker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33f4fcd5-4eea-4146-a564-da5511a8ee0a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thought Shucker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33f52df8-4b44-4422-8b0a-37fead9c894b	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:vineglimmer-snarl:f0a0:s1,f:xs:XP:vineglimmer-snarl:f0a0:s1	-	-	-	d864b561c9cb	-	38b6efdd0898	-	-	2026-11-24	xproof

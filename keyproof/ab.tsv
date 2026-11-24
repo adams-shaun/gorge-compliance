@@ -19,7 +19,7 @@ ab1d04ef-5f39-4a95-969e-b0872e6db0d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ab23a9e4-2d62-4b01-9d52-593de40811b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab23a9e4-2d62-4b01-9d52-593de40811b0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab23a9e4-2d62-4b01-9d52-593de40811b0	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ab23a9e4-2d62-4b01-9d52-593de40811b0	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ab23a9e4-2d62-4b01-9d52-593de40811b0	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ab23cca2-b59e-4d34-80de-98bd08985275	cast	cast-resolve	agreed	-	FX	scen	2	0	Sterling Supplier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ab23cca2-b59e-4d34-80de-98bd08985275	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sterling Supplier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ab23cca2-b59e-4d34-80de-98bd08985275	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sterling Supplier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -151,8 +151,8 @@ abc04775-171d-41f3-83ea-4b4eb72723d5	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	
 abc04775-171d-41f3-83ea-4b4eb72723d5	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 abc37d6c-6300-47b5-a679-9db5b83eb54f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 abc3f55e-5fc6-44b3-a2f5-b8f49d93249f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-abc3f55e-5fc6-44b3-a2f5-b8f49d93249f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-abc3f55e-5fc6-44b3-a2f5-b8f49d93249f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+abc3f55e-5fc6-44b3-a2f5-b8f49d93249f	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:hulkbuster-armor:f0a0:s1,f:xs:XP:hulkbuster-armor:f0a0:s1	-	-	-	8c0bd19283bb	-	db737a42340b	-	-	2026-11-24	xproof
+abc3f55e-5fc6-44b3-a2f5-b8f49d93249f	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:hulkbuster-armor:f0a1:s1,f:xs:XP:hulkbuster-armor:f0a1:s1	-	-	-	8c0bd19283bb	-	db737a42340b	-	-	2026-11-24	xproof
 abc49dc3-03b3-48a4-afe1-5fc435b65d0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ironroot-warlord:cast:s1,f:xs:XP:ironroot-warlord:cast:s1	-	-	-	d864b561c9cb	-	8dc8d9e4ae69	-	-	2026-11-24	xproof
 abc49dc3-03b3-48a4-afe1-5fc435b65d0f	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:ironroot-warlord:f0a0:s1,f:xs:XP:ironroot-warlord:f0a0:s1	-	-	-	d864b561c9cb	-	8dc8d9e4ae69	-	-	2026-11-24	xproof
 abc519b8-82de-4559-be03-ddb1ddaab993	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

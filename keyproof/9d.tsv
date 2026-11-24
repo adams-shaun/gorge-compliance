@@ -4,8 +4,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d061ec5-1edf-46e7-9e6a-4ddc9ced4114	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d061ec5-1edf-46e7-9e6a-4ddc9ced4114	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9d08af23-9f4a-4097-9abc-3b17475ab744	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d08cc9b-2b26-49de-80aa-962a358bfc1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d08cc9b-2b26-49de-80aa-962a358bfc1a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d08cc9b-2b26-49de-80aa-962a358bfc1a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-sport-champion:f0t0:s1,f:xs:XP:blood-sport-champion:f0t0:s1	-	-	-	8c0bd19283bb	-	8825cc3bd705	-	-	2026-11-24	xproof
+9d08cc9b-2b26-49de-80aa-962a358bfc1a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blood-sport-champion:f0t0:s1,f:xs:XP:blood-sport-champion:f0t0:s1	-	-	-	8c0bd19283bb	-	8825cc3bd705	-	-	2026-11-24	xproof
 9d09697f-8c5c-4bf9-811f-2f847ee374f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swarmborn-giant:cast:s1,f:xs:XP:swarmborn-giant:cast:s1	-	-	-	d864b561c9cb	-	271c08cdae04	-	-	2026-11-24	xproof
 9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:swarmborn-giant:f0a0:s1,f:xs:XP:swarmborn-giant:f0a0:s1	-	-	-	d864b561c9cb	-	271c08cdae04	-	-	2026-11-24	xproof
 9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -18,8 +18,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d14c7bd-7802-401c-b02b-c7f3c51b007f	cast	cast-resolve	agreed	-	FX	scen	2	0	Wandertale Mentor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d14c7bd-7802-401c-b02b-c7f3c51b007f	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Wandertale Mentor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d14c7bd-7802-401c-b02b-c7f3c51b007f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wandertale Mentor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9d18253d-a38e-48a4-80bf-aa8fe5283584	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d18253d-a38e-48a4-80bf-aa8fe5283584	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d18253d-a38e-48a4-80bf-aa8fe5283584	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:indelicate-healer:f0t0:s1,f:xs:XP:indelicate-healer:f0t0:s1	-	-	-	8c0bd19283bb	-	ed33aa9a1d2f	-	-	2026-11-24	xproof
+9d18253d-a38e-48a4-80bf-aa8fe5283584	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:indelicate-healer:f0t0:s1,f:xs:XP:indelicate-healer:f0t0:s1	-	-	-	8c0bd19283bb	-	ed33aa9a1d2f	-	-	2026-11-24	xproof
 9d1c3ec1-00a4-4890-93a3-e3cf137ca7e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d1c3ec1-00a4-4890-93a3-e3cf137ca7e4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hobbling-zombie:f0t0:s1,f:xs:XP:hobbling-zombie:f0t0:s1	-	-	-	d864b561c9cb	-	b7e1fd60cf12	-	-	2026-11-24	xproof
 9d1f232c-e904-46f6-a4b7-24ca2ede711c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loran-disciple-of-history:f0t0:s1,f:xs:XP:loran-disciple-of-history:f0t0:s1	-	-	-	ae86f6029288	-	3e7a3fab24ad	-	-	2026-11-24	xproof

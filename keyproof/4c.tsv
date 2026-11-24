@@ -20,8 +20,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c0a8eed-f2e2-4821-8011-6e6ad2081936	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:solitary-sanctuary:f0t0:s2,f:xs:XP:solitary-sanctuary:f0t0:s2	-	-	-	e07cf3a05ba5	-	ae160073b4f1	-	-	2026-11-24	xproof
 4c0a8eed-f2e2-4821-8011-6e6ad2081936	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:solitary-sanctuary:f0t0:s2,f:xs:XP:solitary-sanctuary:f0t0:s2	-	-	-	e07cf3a05ba5	-	ae160073b4f1	-	-	2026-11-24	xproof
 4c0a8eed-f2e2-4821-8011-6e6ad2081936	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Solitary Sanctuary/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c0be0d0-766b-4c50-b1ca-cce527196666	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c0be0d0-766b-4c50-b1ca-cce527196666	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c0be0d0-766b-4c50-b1ca-cce527196666	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:pelia-immortal-innovator:cast:s1,f:xs:XP:pelia-immortal-innovator:cast:s1	-	-	-	8c0bd19283bb	-	f304b09c8bff	-	-	2026-11-24	xproof
+4c0be0d0-766b-4c50-b1ca-cce527196666	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:pelia-immortal-innovator:cast:s1,f:xs:XP:pelia-immortal-innovator:cast:s1	-	-	-	8c0bd19283bb	-	f304b09c8bff	-	-	2026-11-24	xproof
 4c0f4a63-586a-4dde-9621-b0dd9118b2e5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Restless Ridgeline/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c0f4a63-586a-4dde-9621-b0dd9118b2e5	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Restless Ridgeline/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c0f4a63-586a-4dde-9621-b0dd9118b2e5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Restless Ridgeline/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c2c5f3b-61f3-4772-9ade-f5be80719e9f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:catacomb-sifter:f0t0:s1,f:xs:XP:catacomb-sifter:f0t0:s1	-	-	-	d864b561c9cb	-	db0351d7ec57	-	-	2026-11-24	xproof
 4c2c5f3b-61f3-4772-9ade-f5be80719e9f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:catacomb-sifter:f0t0:s1,f:xs:XP:catacomb-sifter:f0t0:s1	-	-	-	d864b561c9cb	-	db0351d7ec57	-	-	2026-11-24	xproof
 4c2c5f3b-61f3-4772-9ade-f5be80719e9f	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-4c2c8cc6-bb90-468a-867b-db56f4eb7e59	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c2c8cc6-bb90-468a-867b-db56f4eb7e59	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c2c8cc6-bb90-468a-867b-db56f4eb7e59	cast	cast	agreed	-	F	start	2	0	f:xs:XP:planet-killer:cast:s1	-	-	-	8c0bd19283bb	-	24ccc816ef10	-	-	2026-11-24	xproof
+4c2c8cc6-bb90-468a-867b-db56f4eb7e59	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4c2e84dc-b4f5-4eca-af07-1c53a1caae7c	cast	cast-resolve	agreed	-	X	scen	1	0	Ravine Raider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c2e84dc-b4f5-4eca-af07-1c53a1caae7c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ravine Raider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c2e84dc-b4f5-4eca-af07-1c53a1caae7c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ravine Raider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -182,6 +182,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ceb49f3-a997-468d-9653-8ca5ceb2bcfb	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:firebrand-ranger:f0a0:s1,f:xs:XP:firebrand-ranger:f0a0:s1	-	-	-	5f2128bf97e4	-	032be7ecbd71	-	-	2026-11-24	xproof
 4cf10cb6-b082-4c0d-89e9-43cd39716201	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4cf10cb6-b082-4c0d-89e9-43cd39716201	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-4cfb6f06-137c-4b41-97ef-6710e899473b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4cfb6f06-137c-4b41-97ef-6710e899473b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4cfb6f06-137c-4b41-97ef-6710e899473b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:borg-scout-sphere:cast:s1,f:xs:XP:borg-scout-sphere:cast:s1	-	-	-	8c0bd19283bb	-	6d5e744bdadd	-	-	2026-11-24	xproof
+4cfb6f06-137c-4b41-97ef-6710e899473b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:borg-scout-sphere:cast:s1,f:xs:XP:borg-scout-sphere:cast:s1	-	-	-	8c0bd19283bb	-	6d5e744bdadd	-	-	2026-11-24	xproof
 4cfd04b3-57bd-4860-8b47-57a0fd0a23fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

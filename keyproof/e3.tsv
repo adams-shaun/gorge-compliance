@@ -83,9 +83,9 @@ e35d7886-8c03-471c-b598-118d7eceddb4	cast	cast-resolve	agreed	-	X	scen	1	0	Enrag
 e35d7886-8c03-471c-b598-118d7eceddb4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Enraged Flamecaster/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e35d7886-8c03-471c-b598-118d7eceddb4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Enraged Flamecaster/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e35d7886-8c03-471c-b598-118d7eceddb4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Enraged Flamecaster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-e36100d6-d9ae-454a-bba1-b50a69d5a28f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e36100d6-d9ae-454a-bba1-b50a69d5a28f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swordsman-s-steel:f0t0:s1,f:xs:XP:swordsman-s-steel:f0t0:s1	-	-	-	8c0bd19283bb	-	abe8d458f950	-	-	2026-11-24	xproof
 e36100d6-d9ae-454a-bba1-b50a69d5a28f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e36100d6-d9ae-454a-bba1-b50a69d5a28f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e36100d6-d9ae-454a-bba1-b50a69d5a28f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:swordsman-s-steel:f0t0:s1,f:xs:XP:swordsman-s-steel:f0t0:s1	-	-	-	8c0bd19283bb	-	abe8d458f950	-	-	2026-11-24	xproof
 e3614df6-ce84-4180-ade1-a1751e8e3c9a	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Asgardian Citadel/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e3614df6-ce84-4180-ade1-a1751e8e3c9a	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Asgardian Citadel/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e3614df6-ce84-4180-ade1-a1751e8e3c9a	land	play-land	agreed	-	FX	scen	2	0	Asgardian Citadel/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -177,8 +177,8 @@ e3eb6f90-ccfc-41e7-bff6-0b378226bc7e	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07
 e3eb6f90-ccfc-41e7-bff6-0b378226bc7e	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3eb6f90-ccfc-41e7-bff6-0b378226bc7e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3ee8b0e-9bdc-4b9a-b4f9-59189dd6a80d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e3f0a2a6-7a42-46bc-9736-d0f6a0ce0b37	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e3f0a2a6-7a42-46bc-9736-d0f6a0ce0b37	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e3f0a2a6-7a42-46bc-9736-d0f6a0ce0b37	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:molly-hayes-runaway:cast:s1,f:xs:XP:molly-hayes-runaway:cast:s1	-	-	-	8c0bd19283bb	-	608ef591a951	-	-	2026-11-24	xproof
+e3f0a2a6-7a42-46bc-9736-d0f6a0ce0b37	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:molly-hayes-runaway:f0a0:s1,f:xs:XP:molly-hayes-runaway:f0a0:s1	-	-	-	8c0bd19283bb	-	608ef591a951	-	-	2026-11-24	xproof
 e3f4bc4c-e747-4bc1-bfba-4ecfa0a5d17f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3fc10d2-2733-4265-8275-112c285fd11a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:topiary-stomper:f0t0:s1,f:xs:XP:topiary-stomper:f0t0:s1	-	-	-	d864b561c9cb	-	636fffe16a25	-	-	2026-11-24	xproof
 e3fc10d2-2733-4265-8275-112c285fd11a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:topiary-stomper:f0t0:s1,f:xs:XP:topiary-stomper:f0t0:s1	-	-	-	d864b561c9cb	-	636fffe16a25	-	-	2026-11-24	xproof

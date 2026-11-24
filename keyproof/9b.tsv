@@ -12,8 +12,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b0a14b9-977d-4e25-a519-eaddb0f94b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b0a14b9-977d-4e25-a519-eaddb0f94b6a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b0abb58-4e2c-45dc-99b1-61a4cb79354b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b0abb58-4e2c-45dc-99b1-61a4cb79354b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b0abb58-4e2c-45dc-99b1-61a4cb79354b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b0abb58-4e2c-45dc-99b1-61a4cb79354b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+9b0abb58-4e2c-45dc-99b1-61a4cb79354b	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9b0af3ad-1b4d-4480-af91-fe9baee5d1c5	cast	cast-resolve	agreed	-	FX	scen	2	0	Haliya, Guided by Light/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b0af3ad-1b4d-4480-af91-fe9baee5d1c5	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b0af3ad-1b4d-4480-af91-fe9baee5d1c5	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Haliya, Guided by Light/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b157b9a-92da-4054-8441-04fb4e415d77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stumpsquall-hydra:f0t0:s1,f:xs:XP:stumpsquall-hydra:f0t0:s1	-	-	-	8c0bd19283bb	-	330ad9d2fe77	-	-	2026-11-24	xproof
 9b157b9a-92da-4054-8441-04fb4e415d77	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stumpsquall-hydra:f0t0:s1,f:xs:XP:stumpsquall-hydra:f0t0:s1	-	-	-	8c0bd19283bb	-	330ad9d2fe77	-	-	2026-11-24	xproof
 9b183d76-1dee-4ecf-9226-e1aa600b1247	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b1ae6d8-0cf3-4a67-9241-37f4bc5ddbdd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b1ae6d8-0cf3-4a67-9241-37f4bc5ddbdd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:venser-fervent-forger:cast:s1,f:xs:XP:venser-fervent-forger:cast:s1	-	-	-	8c0bd19283bb	-	c6e848f5d57e	-	-	2026-11-24	xproof
 9b1ae6d8-0cf3-4a67-9241-37f4bc5ddbdd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b1d79b7-a812-4f48-9be0-789294da3b56	cast	cast-resolve	agreed	-	X	scen	1	0	Daring Mechanic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b1d79b7-a812-4f48-9be0-789294da3b56	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Daring Mechanic/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b5cf592-8385-4115-b27a-98f42bdf6329	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b5cf592-8385-4115-b27a-98f42bdf6329	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b627fa4-af4c-482b-b1cf-2ad15938602c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b627fa4-af4c-482b-b1cf-2ad15938602c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b627fa4-af4c-482b-b1cf-2ad15938602c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9b64c0f4-b917-4a0d-b033-30ab71aab807	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:shivan-oasis:f0a0:s1,f:xs:XP:shivan-oasis:f0a0:s1	-	-	-	d864b561c9cb	-	2c7a0e94408c	-	-	2026-11-24	xproof
 9b64c0f4-b917-4a0d-b033-30ab71aab807	land	land	agreed	-	FX	start	2	0	x:xs:XP:shivan-oasis:land:s1,f:xs:XP:shivan-oasis:land:s1	-	-	-	25696bf19d5b	-	2c7a0e94408c	-	-	2026-11-24	xproof
 9b6a74fb-c48f-4d85-b4b3-96eb80b9efc7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

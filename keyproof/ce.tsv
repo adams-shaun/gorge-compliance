@@ -38,7 +38,7 @@ ce29f71a-6662-4be4-9915-5a4be87288e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ce2c420b-e569-4715-b65b-4a097700799d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:whip-silk:cast:s1,f:xs:XP:whip-silk:cast:s1	-	-	-	fc71ca68c5ac	-	9b22cb6067dc	-	-	2026-11-24	xproof
 ce2c420b-e569-4715-b65b-4a097700799d	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 ce2fc562-7a71-4846-bfef-0a7c5f6c1ff3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce2fc562-7a71-4846-bfef-0a7c5f6c1ff3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ce2fc562-7a71-4846-bfef-0a7c5f6c1ff3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ce31cfc4-a109-4cf5-b8f9-210267a98114	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce35f262-b93f-4409-8b33-26a7ed7abac8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce35f262-b93f-4409-8b33-26a7ed7abac8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -68,8 +68,8 @@ ce60402c-34cd-44fe-ae1d-4a5404298f5b	cast	cast-resolve	agreed	-	FX	scen	2	0	Reap
 ce60402c-34cd-44fe-ae1d-4a5404298f5b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Reaping Willow/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ce60402c-34cd-44fe-ae1d-4a5404298f5b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Reaping Willow/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ce60402c-34cd-44fe-ae1d-4a5404298f5b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Reaping Willow/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-ce60a1a4-1e53-4985-a54f-3627dd35c5f2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce60a1a4-1e53-4985-a54f-3627dd35c5f2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ce60a1a4-1e53-4985-a54f-3627dd35c5f2	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ambassador-k-ehleyr:cast:s1	-	-	-	8c0bd19283bb	-	eb6d1610e699	-	-	2026-11-24	xproof
+ce60a1a4-1e53-4985-a54f-3627dd35c5f2	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:ambassador-k-ehleyr:cast:s1	-	-	-	8c0bd19283bb	-	eb6d1610e699	-	-	2026-11-24	xproof
 ce657a2e-461b-45fd-ab98-35b5c8512777	cast	cast-resolve	agreed	-	X	scen	1	0	Walk with the Ancestors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ce690421-db1d-4177-a2db-338f29aab623	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce690a21-8117-420e-be00-cd6d9923a812	cast	cast-resolve	agreed	-	X	scen	1	0	Anzrag's Rampage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -118,8 +118,8 @@ ce924285-f4c5-44e6-909b-f5f7d302ebaf	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs
 ce924285-f4c5-44e6-909b-f5f7d302ebaf	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Way of the Mentor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ce936736-915f-44bb-a709-b3bdcf90a3be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce936736-915f-44bb-a709-b3bdcf90a3be	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-ce95e51d-4ef3-44a8-ae47-cf1bf71ebd3f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce95e51d-4ef3-44a8-ae47-cf1bf71ebd3f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ce95e51d-4ef3-44a8-ae47-cf1bf71ebd3f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:secure-detention:cast:s1,f:xs:XP:secure-detention:cast:s1	-	-	-	8c0bd19283bb	-	5e8470bdf67d	-	-	2026-11-24	xproof
+ce95e51d-4ef3-44a8-ae47-cf1bf71ebd3f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:secure-detention:cast:s1,f:xs:XP:secure-detention:cast:s1	-	-	-	8c0bd19283bb	-	5e8470bdf67d	-	-	2026-11-24	xproof
 ce969713-fdaa-4c31-b164-76a9b0b9ff81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce969713-fdaa-4c31-b164-76a9b0b9ff81	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce976cb2-2b69-4d00-918c-d4900244ac86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

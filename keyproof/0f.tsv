@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f2504b0-bd5a-4b61-b8bb-c8b20aa1e26e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f264e5b-264e-4e97-9a8d-8ae1d6a286ce	cast	cast-resolve	agreed	-	X	scen	1	0	Drown in the Loch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 0f26be86-eab1-45fd-8b69-5ecff2565c60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f26be86-eab1-45fd-8b69-5ecff2565c60	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f26be86-eab1-45fd-8b69-5ecff2565c60	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0f26c04a-9bf7-4cbd-a95f-73ee4a3b1af1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f2d038e-6dab-4352-9ba7-ed9e063bb304	cast	cast	agreed	-	F	start	2	0	f:xs:XP:force-of-despair:cast:s1	-	-	-	d864b561c9cb	-	e8aa12f66944	-	-	2026-11-24	xproof
 0f30f32f-3c4c-4f73-8b2a-82045a40bda9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:killer-service:cast:s1,f:xs:XP:killer-service:cast:s1	-	-	-	8c0bd19283bb	-	646eadf7d89f	-	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f786c99-d245-4b11-bcce-6e13fb1255cc	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	b4cc5002948c	-	-	2026-11-24	xproof
 0f7a7348-3081-4fbb-9386-719a4ae7fa57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f7c7035-e395-4da5-8536-9f192d03e3ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f7c7035-e395-4da5-8536-9f192d03e3ba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f7c7035-e395-4da5-8536-9f192d03e3ba	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0f7c70c4-9795-4c76-8b27-043942a963c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f7f841a-1913-4396-9c94-bbd49dfdb9d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f7f841a-1913-4396-9c94-bbd49dfdb9d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f99e921-61e7-4fc8-8115-4162712b4737	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:malanthrope:cast:s1,f:xs:XP:malanthrope:cast:s1	-	-	-	8c0bd19283bb	-	c57e2f766d54	-	-	2026-11-24	xproof
 0f9b78ca-1556-4157-a91c-55276fd78127	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f9b78ca-1556-4157-a91c-55276fd78127	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-0fa01155-638d-44ed-8963-46b202b0e720	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fa01155-638d-44ed-8963-46b202b0e720	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0fa01155-638d-44ed-8963-46b202b0e720	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:white-tiger-amulet-keeper:cast:s1,f:xs:XP:white-tiger-amulet-keeper:cast:s1	-	-	-	8c0bd19283bb	-	9e83988544c7	-	-	2026-11-24	xproof
+0fa01155-638d-44ed-8963-46b202b0e720	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0fa0f562-e66f-4630-890a-9a4ae24fd6c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fa886c2-9b58-4368-b2d0-e619c62a554f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wandering-mind:cast:s1,f:xs:XP:wandering-mind:cast:s1	-	-	-	d864b561c9cb	-	59d57fa50fef	-	-	2026-11-24	xproof
 0fa886c2-9b58-4368-b2d0-e619c62a554f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wandering-mind:cast:s1,f:xs:XP:wandering-mind:cast:s1	-	-	-	d864b561c9cb	-	59d57fa50fef	-	-	2026-11-24	xproof

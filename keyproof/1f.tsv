@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f097c91-6c2e-410f-8c8f-c021f39491af	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f0f068a-fd4e-4a6f-9439-0e694e34a945	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f0f068a-fd4e-4a6f-9439-0e694e34a945	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f14d336-71ef-4e3f-b8e0-42585af8db40	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f14d336-71ef-4e3f-b8e0-42585af8db40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hulk-bruce-banner:cast:s1,f:xs:XP:hulk-bruce-banner:cast:s1	-	-	-	8c0bd19283bb	-	d429df22c403	-	-	2026-11-24	xproof
 1f1ad44c-1811-40e3-976b-03f19866abd5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f1ad44c-1811-40e3-976b-03f19866abd5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f1b6130-3f18-4989-922b-438e41d683da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sleeper-dart:f0t0:s1,f:xs:XP:sleeper-dart:f0t0:s1	-	-	-	ae86f6029288	-	961b96604326	-	-	2026-11-24	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fc31651-70fe-4a58-9b7e-7359510bba51	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Riling Dawnbreaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fc31651-70fe-4a58-9b7e-7359510bba51	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Riling Dawnbreaker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fc59e37-0dc0-4e24-af71-6bab4a2b56ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1fc59e37-0dc0-4e24-af71-6bab4a2b56ca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1fc59e37-0dc0-4e24-af71-6bab4a2b56ca	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1fc8b186-bb74-4fe1-a2da-e8ce3074f988	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:grovetender-druids:cast:s1,f:xs:XP:grovetender-druids:cast:s1	-	-	-	d864b561c9cb	-	768c0fa36f00	-	-	2026-11-24	xproof
 1fc8b186-bb74-4fe1-a2da-e8ce3074f988	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grovetender-druids:cast:s1,f:xs:XP:grovetender-druids:cast:s1	-	-	-	d864b561c9cb	-	768c0fa36f00	-	-	2026-11-24	xproof
 1fcec3b2-47ba-4c56-9ce1-a4807e8ad262	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

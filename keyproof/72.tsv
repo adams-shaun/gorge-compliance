@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 723669e0-4a04-45ec-8c76-b1a369aa6892	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Budding Insurgent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 723669e0-4a04-45ec-8c76-b1a369aa6892	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Budding Insurgent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 723669e0-4a04-45ec-8c76-b1a369aa6892	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Budding Insurgent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-723959e1-8356-4fdb-99e2-818df317dc72	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+723959e1-8356-4fdb-99e2-818df317dc72	cast	cast	agreed	-	F	start	2	0	f:xs:XP:jabs-mistress-of-mockery:cast:s1	-	-	-	8c0bd19283bb	-	248dfc1edc12	-	-	2026-11-24	xproof
 7244d04a-bb9c-4fbe-a346-4a3f45709da7	cast	cast-resolve	agreed	-	X	scen	1	0	Stirring Hopesinger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7244d04a-bb9c-4fbe-a346-4a3f45709da7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stirring Hopesinger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7244d04a-bb9c-4fbe-a346-4a3f45709da7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stirring Hopesinger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -90,7 +90,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 726cd041-5d0b-436c-bced-9335f56c0b0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 726cd041-5d0b-436c-bced-9335f56c0b0d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 726cd303-f034-4dbe-8139-550feb59f8f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-726cd303-f034-4dbe-8139-550feb59f8f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+726cd303-f034-4dbe-8139-550feb59f8f3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stratagem-emulator:f0t0:s1,f:xs:XP:stratagem-emulator:f0t0:s1	-	-	-	8c0bd19283bb	-	08796c6d498f	-	-	2026-11-24	xproof
 726d9d2c-736a-4852-9938-a0f50d8fd89f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marionette-apprentice:f0t1:s1,f:xs:XP:marionette-apprentice:f0t1:s1	-	-	-	8c0bd19283bb	-	2d0dcd47e98b	-	-	2026-11-24	xproof
 726d9d2c-736a-4852-9938-a0f50d8fd89f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 726d9d2c-736a-4852-9938-a0f50d8fd89f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -100,9 +100,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7270b5b6-a571-4e6d-91de-03f7cc035b3c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:eye-of-malcator:cast:s1,f:xs:XP:eye-of-malcator:cast:s1	-	-	-	ae86f6029288	-	9c4435ca975c	-	-	2026-11-24	xproof
 7270b5b6-a571-4e6d-91de-03f7cc035b3c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:eye-of-malcator:cast:s1,f:xs:XP:eye-of-malcator:cast:s1	-	-	-	ae86f6029288	-	9c4435ca975c	-	-	2026-11-24	xproof
 7270b5b6-a571-4e6d-91de-03f7cc035b3c	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-7274f6ed-310d-4b65-8083-eedb8e885a33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7274f6ed-310d-4b65-8083-eedb8e885a33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7274f6ed-310d-4b65-8083-eedb8e885a33	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7274f6ed-310d-4b65-8083-eedb8e885a33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:madame-hydra-reanimated:f0t0:s1,f:xs:XP:madame-hydra-reanimated:f0t0:s1	-	-	-	8c0bd19283bb	-	0c2c218d58a1	-	-	2026-11-24	xproof
+7274f6ed-310d-4b65-8083-eedb8e885a33	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:madame-hydra-reanimated:f0t0:s1,f:xs:XP:madame-hydra-reanimated:f0t0:s1	-	-	-	8c0bd19283bb	-	0c2c218d58a1	-	-	2026-11-24	xproof
+7274f6ed-310d-4b65-8083-eedb8e885a33	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:madame-hydra-reanimated:f0t1:s1,f:xs:XP:madame-hydra-reanimated:f0t1:s1	-	-	-	8c0bd19283bb	-	0c2c218d58a1	-	-	2026-11-24	xproof
 7275fb8c-571a-4c4c-889a-829419332e51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirror-image:cast:s1,f:xs:XP:mirror-image:cast:s1	-	-	-	d864b561c9cb	-	8dbd4042b9b9	-	-	2026-11-24	xproof
 7278f382-8249-4981-9d87-47cef7dc13dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7278f382-8249-4981-9d87-47cef7dc13dd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -196,8 +196,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 72e8c978-f66d-42e1-ac5f-d1c307d7b93c	cast	cast-resolve	agreed	-	FX	scen	2	0	Oreplate Pangolin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 72e8c978-f66d-42e1-ac5f-d1c307d7b93c	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Oreplate Pangolin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 72e9a207-dad9-4c51-8040-e90a36bd35e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72eabfcc-61b6-4a07-9a9c-b40a9c05cf66	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72eabfcc-61b6-4a07-9a9c-b40a9c05cf66	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+72eabfcc-61b6-4a07-9a9c-b40a9c05cf66	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Whirlwind, Killer Cyclone"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+72eabfcc-61b6-4a07-9a9c-b40a9c05cf66	f0/t0	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 72f5095f-b4ba-45ba-82e5-9a22bddd544b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72f5095f-b4ba-45ba-82e5-9a22bddd544b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 72f89173-2998-45e6-94da-5b5bb9738a6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -25,7 +25,7 @@ b51a852c-ccde-4d23-a3f3-a002f7eacdab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ecc
 b51a852c-ccde-4d23-a3f3-a002f7eacdab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eccentric-farmer:f0t0:s1,f:xs:XP:eccentric-farmer:f0t0:s1	-	-	-	d864b561c9cb	-	fcb9d2e775b2	-	-	2026-11-24	xproof
 b51c8659-ec4f-4213-beb1-49a7acd7366c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b51c8659-ec4f-4213-beb1-49a7acd7366c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b51c8659-ec4f-4213-beb1-49a7acd7366c	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b51c8659-ec4f-4213-beb1-49a7acd7366c	land	land	agreed	-	FX	start	2	0	x:xs:XP:turbulent-wetlands:land:s1,f:xs:XP:turbulent-wetlands:land:s1	-	-	-	8c0bd19283bb	-	1bbdf94a9601	-	-	2026-11-24	xproof
 b51d2c70-204b-4321-a589-f00a3e49fab4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b51d2c70-204b-4321-a589-f00a3e49fab4	f0/a0	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 b51e0ae3-126b-4b7e-9dd1-818a5b8e512a	cast	cast-resolve	agreed	-	X	scen	1	0	Dwarven Castle Guard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -90,7 +90,7 @@ b5661289-a03c-40fc-a1e4-f602adb56f81	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eld
 b5661289-a03c-40fc-a1e4-f602adb56f81	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eldrazi-skyspawner:f0t0:s1,f:xs:XP:eldrazi-skyspawner:f0t0:s1	-	-	-	d864b561c9cb	-	bd107a91d0f3	-	-	2026-11-24	xproof
 b5666c68-059d-4e32-9b04-548b3058430d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5697e53-eb2f-482b-8b4a-1dad165ac16f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b5697e53-eb2f-482b-8b4a-1dad165ac16f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b5697e53-eb2f-482b-8b4a-1dad165ac16f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 b56bb8cb-457e-4b85-9bf9-5e891e79f1dd	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Foggy Bottom Swamp/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b56bb8cb-457e-4b85-9bf9-5e891e79f1dd	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Foggy Bottom Swamp/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b56bb8cb-457e-4b85-9bf9-5e891e79f1dd	land	play-land	agreed	-	FX	scen	2	0	Foggy Bottom Swamp/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ b582b696-17fa-4eea-8124-293f9bd3a208	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b582b696-17fa-4eea-8124-293f9bd3a208	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:mad-auntie:f0a0:s1,f:xs:XP:mad-auntie:f0a0:s1	-	-	-	d864b561c9cb	-	1941421427bd	-	-	2026-11-24	xproof
 b582e485-c024-47f0-ad6f-b918d32288ba	cast	cast	agreed	-	F	start	4	0	f:xs:XP:vexing-devil:cast:s1	-	-	-	d864b561c9cb	-	7605e18c30cc	-	-	2026-11-24	xproof
 b582e485-c024-47f0-ad6f-b918d32288ba	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:vexing-devil:cast:s1	-	-	-	d864b561c9cb	-	7605e18c30cc	-	-	2026-11-24	xproof
-b585c218-1793-49a0-8a16-cb23b6efcc3c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b585c218-1793-49a0-8a16-cb23b6efcc3c	cast	cast	agreed	-	X	start	2	0	x:xs:XP:indrik-umbra:cast:s1	-	-	-	8c0bd19283bb	-	c151c189572a	-	-	2026-11-24	xproof
 b5867796-5898-4a75-a75a-c802407ab338	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5867796-5898-4a75-a75a-c802407ab338	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5868383-a0fb-40fc-b718-f1b5441c5ce3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

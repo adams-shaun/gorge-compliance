@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d772c44-a756-406d-a83f-f671a81513b0	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 3d772c44-a756-406d-a83f-f671a81513b0	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 3d776a25-c341-4058-9b5f-84e70edb25a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d776a25-c341-4058-9b5f-84e70edb25a4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d776a25-c341-4058-9b5f-84e70edb25a4	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3d783beb-9ca6-4681-9276-fc3ad13b993f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d783beb-9ca6-4681-9276-fc3ad13b993f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3d794629-9014-460a-8d3b-785eadc1cdb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d8dfd57-7d26-4a3b-a9c3-33077c85b3db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d8dfd57-7d26-4a3b-a9c3-33077c85b3db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:definitely-not-a-turtle:f0t0:s1,f:xs:XP:definitely-not-a-turtle:f0t0:s1	-	-	-	8c0bd19283bb	-	1190a1391735	-	-	2026-11-24	xproof
 3d917331-9f49-4d0c-bb2d-4853e3ff6ca1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d917331-9f49-4d0c-bb2d-4853e3ff6ca1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d917331-9f49-4d0c-bb2d-4853e3ff6ca1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:firebird-blazing-ranger:f0t0:s1,f:xs:XP:firebird-blazing-ranger:f0t0:s1	-	-	-	8c0bd19283bb	-	6b6e0c58f30a	-	-	2026-11-24	xproof
 3d92f2e6-27df-4329-b552-cf905f7616ba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flood-of-tears:cast:s1,f:xs:XP:flood-of-tears:cast:s1	-	-	-	d864b561c9cb	-	0c7e6cc7af5f	-	-	2026-11-24	xproof
 3d937cd9-b1e1-406d-9e29-3b9d3ceea3be	cast	cast	agreed	-	F	start	2	0	f:xs:XP:kayla-s-command:cast:s1	-	-	-	ae86f6029288	-	e4f6723ca240	-	-	2026-11-24	xproof
 3d95e8b1-0ddb-4bd3-b4cc-de55b6f8c403	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primal-visitation:cast:s1,f:xs:XP:primal-visitation:cast:s1	-	-	-	d864b561c9cb	-	7949bf0b3a12	-	-	2026-11-24	xproof

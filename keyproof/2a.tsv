@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a014ef1-0450-4485-8a8c-8210a985be4c	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:wormwood-treefolk:f0a1:s1,f:xs:XP:wormwood-treefolk:f0a1:s1	-	-	-	fc71ca68c5ac	-	c68e7a96b9f6	-	-	2026-11-24	xproof
 2a073f00-0d03-43d0-a0a8-f5bcee0855fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a078705-4afe-4887-94cc-f12f4690fb01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2a078705-4afe-4887-94cc-f12f4690fb01	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2a078705-4afe-4887-94cc-f12f4690fb01	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kurn-son-of-mogh:f0t0:s1,f:xs:XP:kurn-son-of-mogh:f0t0:s1	-	-	-	8c0bd19283bb	-	12d7156826f1	-	-	2026-11-24	xproof
 2a08d878-7816-4d0a-9532-4f2d3c8eee90	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sarkhan-s-dragonfire:cast:s1	-	-	-	d864b561c9cb	-	13ee4ef4657c	-	-	2026-11-24	xproof
 2a098296-6a64-48ba-af40-5b68bae06bec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a098296-6a64-48ba-af40-5b68bae06bec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,8 +142,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2acb15bd-6c89-4ff3-ab32-beac67e9c88a	cast	cast-resolve	agreed	-	X	scen	1	0	Quina, Qu Gourmet/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2acb15bd-6c89-4ff3-ab32-beac67e9c88a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Quina, Qu Gourmet/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2acc1657-d716-41d7-aedf-9b080a58ec83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ad77eb7-9466-432f-87b4-e80e4b66e143	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ad77eb7-9466-432f-87b4-e80e4b66e143	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ad77eb7-9466-432f-87b4-e80e4b66e143	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:victor-timely-wily-tycoon:cast:s1,f:xs:XP:victor-timely-wily-tycoon:cast:s1	-	-	-	8c0bd19283bb	-	74917fafae27	-	-	2026-11-24	xproof
+2ad77eb7-9466-432f-87b4-e80e4b66e143	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:victor-timely-wily-tycoon:cast:s1,f:xs:XP:victor-timely-wily-tycoon:cast:s1	-	-	-	8c0bd19283bb	-	74917fafae27	-	-	2026-11-24	xproof
 2ad8ff62-d090-4835-9274-3b755ba0f8e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ad8ff62-d090-4835-9274-3b755ba0f8e6	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2ad9f28c-94a9-4884-9e3b-42341adfaa5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

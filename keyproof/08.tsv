@@ -4,9 +4,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 080c0557-59ee-4c46-afd9-5baabf0dc3d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 080df9eb-c26b-494a-96b4-d7e47e501866	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 080df9eb-c26b-494a-96b4-d7e47e501866	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-080f504f-20c8-4975-837c-d704e879d7f5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-080f504f-20c8-4975-837c-d704e879d7f5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-080f504f-20c8-4975-837c-d704e879d7f5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+080f504f-20c8-4975-837c-d704e879d7f5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:great-goblin-foul-hearted:cast:s1,f:xs:XP:great-goblin-foul-hearted:cast:s1	-	-	-	8c0bd19283bb	-	e626e6ab55d5	-	-	2026-11-24	xproof
+080f504f-20c8-4975-837c-d704e879d7f5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:great-goblin-foul-hearted:cast:s1,f:xs:XP:great-goblin-foul-hearted:cast:s1	-	-	-	8c0bd19283bb	-	e626e6ab55d5	-	-	2026-11-24	xproof
+080f504f-20c8-4975-837c-d704e879d7f5	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:great-goblin-foul-hearted:f0t1:s1,f:xs:XP:great-goblin-foul-hearted:f0t1:s1	-	-	-	8c0bd19283bb	-	e626e6ab55d5	-	-	2026-11-24	xproof
 08109241-690f-4d09-ad2f-1cddab9b3c64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08109241-690f-4d09-ad2f-1cddab9b3c64	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 08109241-690f-4d09-ad2f-1cddab9b3c64	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 08c595da-9305-42a9-b72f-5ccc546edc01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08c595da-9305-42a9-b72f-5ccc546edc01	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:junk-diver:f0t0:s1,f:xs:XP:junk-diver:f0t0:s1	-	-	-	d864b561c9cb	-	0fcccb08fca0	-	-	2026-11-24	xproof
 08c6ca45-09ff-4fe4-bc9b-45876e94f430	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-08c6ca45-09ff-4fe4-bc9b-45876e94f430	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+08c6ca45-09ff-4fe4-bc9b-45876e94f430	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 08c6d2fd-d9ae-4f95-bb9d-7e16b1039814	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08c7a6f5-7e25-4f8d-9e4a-aec7248e45fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08c7db90-c0cf-4482-b7ee-bb033e5996d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

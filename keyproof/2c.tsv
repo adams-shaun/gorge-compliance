@@ -6,8 +6,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c029419-3601-4158-b10f-45a19de7faa3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c029419-3601-4158-b10f-45a19de7faa3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c02c8e3-943a-4c20-9dad-1408793a825e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c02c8e3-943a-4c20-9dad-1408793a825e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c02c8e3-943a-4c20-9dad-1408793a825e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c02c8e3-943a-4c20-9dad-1408793a825e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+2c02c8e3-943a-4c20-9dad-1408793a825e	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2c04371a-af69-4e42-8cda-096cf8312b5e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c04371a-af69-4e42-8cda-096cf8312b5e	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:threnody-singer:f0t0:s1,f:xs:XP:threnody-singer:f0t0:s1	-	-	-	ae86f6029288	-	44a3c69ad9d4	-	-	2026-11-24	xproof
@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c99d52d-f909-4494-aeee-937ae779fd4a	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2c9bf40b-ddcb-4f46-a81e-56b91dfc784f	cast	cast-resolve	agreed	-	X	scen	1	0	Poison the Waters/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ca270f1-a8a2-438f-9321-2c653165f3e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ca270f1-a8a2-438f-9321-2c653165f3e4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ca270f1-a8a2-438f-9321-2c653165f3e4	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:jefferies-tube:f0a1:s1,f:xs:XP:jefferies-tube:f0a1:s1	-	-	-	8c0bd19283bb	-	8ea3ec0beff3	-	-	2026-11-24	xproof
 2ca270f1-a8a2-438f-9321-2c653165f3e4	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ca270f1-a8a2-438f-9321-2c653165f3e4	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ca85872-9436-4515-af50-c13e59605627	cast	cast-resolve	agreed	-	FX	scen	2	0	Spider-Man, Brooklyn Visionary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t1	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	a9e1ff31a01f	-	-	2026-11-24	xproof
 2cb1c213-b3f2-4433-8f89-6a3b4c3d2795	f0/t2	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kroxa-titan-of-death-s-hunger:f0t2:s1,f:xs:XP:kroxa-titan-of-death-s-hunger:f0t2:s1	-	-	-	ae86f6029288	-	a9e1ff31a01f	-	-	2026-11-24	xproof
 2cb37c66-bba4-4f90-9134-6b738462457e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	161171aae5a6	-	-	2026-11-24	xproof
+2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2cb95721-56c8-4008-8055-579a5a97fc8b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cb96408-9195-4e41-ad9a-f8c74fbad083	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:torens-fist-of-the-angels:cast:s1,f:xs:XP:torens-fist-of-the-angels:cast:s1	-	-	-	d864b561c9cb	-	71137bf2c991	-	-	2026-11-24	xproof
 2cb96408-9195-4e41-ad9a-f8c74fbad083	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

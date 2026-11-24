@@ -74,12 +74,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4771f50c-0844-4d3a-90ea-406d65ebccfa	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cloudchaser-kestrel:cast:s1,f:xs:XP:cloudchaser-kestrel:cast:s1	-	-	-	0984227a67dd	-	a1f33dd65fa5	-	-	2026-11-24	xproof
 47735ef2-fc4c-4634-83ab-715b1e86da0c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4777fa96-12a5-42d5-840f-ddd85f4a4b68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4777fa96-12a5-42d5-840f-ddd85f4a4b68	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4777fa96-12a5-42d5-840f-ddd85f4a4b68	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4777fa96-12a5-42d5-840f-ddd85f4a4b68	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+4777fa96-12a5-42d5-840f-ddd85f4a4b68	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAdded	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 47795817-73e5-4af6-bd1e-d69b193e8e9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47795817-73e5-4af6-bd1e-d69b193e8e9e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 47860e92-e86a-49f2-80e3-fd144de08b4d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4789357c-3ab7-4327-b5ee-b1110ddb876f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:madame-vastra:cast:s1,f:xs:XP:madame-vastra:cast:s1	-	-	-	8c0bd19283bb	-	6f9b95493a56	-	-	2026-11-24	xproof
+4789357c-3ab7-4327-b5ee-b1110ddb876f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:madame-vastra:f0t1:s1,f:xs:XP:madame-vastra:f0t1:s1	-	-	-	8c0bd19283bb	-	6f9b95493a56	-	-	2026-11-24	xproof
 4789357c-3ab7-4327-b5ee-b1110ddb876f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4789357c-3ab7-4327-b5ee-b1110ddb876f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 478cc55b-dd71-4adc-909d-c39d435587ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

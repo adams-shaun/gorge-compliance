@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d5b63a4-c9d9-4971-9d4e-2eab86f251e2	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:minister-of-pain:cast:s1,f:xs:XP:minister-of-pain:cast:s1	-	-	-	d864b561c9cb	-	ef320d0fe75e	-	-	2026-11-24	xproof
 5d5b63a4-c9d9-4971-9d4e-2eab86f251e2	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:minister-of-pain:cast:s1,f:xs:XP:minister-of-pain:cast:s1	-	-	-	d864b561c9cb	-	ef320d0fe75e	-	-	2026-11-24	xproof
 5d5c4a17-fa04-4889-819e-408fc2ff112e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d5c4a17-fa04-4889-819e-408fc2ff112e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d5c4a17-fa04-4889-819e-408fc2ff112e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5d604aff-ba60-4064-b025-b1f3d1c0254e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d604aff-ba60-4064-b025-b1f3d1c0254e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d641bf6-0f93-4189-8dc1-ec7ea446dade	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Tranquil Cove/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -112,8 +112,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d8acafe-c13e-43ca-a89e-0cfd12d95662	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d8c4172-eb14-47a4-993a-6d68906a26c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:simic-ragworm:cast:s1,f:xs:XP:simic-ragworm:cast:s1	-	-	-	16ec2936189a	-	1233a2539de4	-	-	2026-11-24	xproof
 5d8c4172-eb14-47a4-993a-6d68906a26c5	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-5d936655-8e46-4e30-8f9c-4fa1a4d34a17	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d936655-8e46-4e30-8f9c-4fa1a4d34a17	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d936655-8e46-4e30-8f9c-4fa1a4d34a17	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:storm-shaker-of-skies:cast:s1,f:xs:XP:storm-shaker-of-skies:cast:s1	-	-	-	8c0bd19283bb	-	a188fdd42ae3	-	-	2026-11-24	xproof
+5d936655-8e46-4e30-8f9c-4fa1a4d34a17	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:storm-shaker-of-skies:cast:s1,f:xs:XP:storm-shaker-of-skies:cast:s1	-	-	-	8c0bd19283bb	-	a188fdd42ae3	-	-	2026-11-24	xproof
 5d9431de-7cf0-43d4-9b86-e0ef4a7756f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d9431de-7cf0-43d4-9b86-e0ef4a7756f9	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 5d950fd4-8956-4b1a-ab0f-ab31bcffce4e	cast	cast-resolve	agreed	-	X	scen	1	0	Callous Inspector/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5de63529-7dea-4018-bf46-afb4bc8b69fd	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 5dec1b09-4df0-4e9b-9dca-b80134be3343	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5dec1b09-4df0-4e9b-9dca-b80134be3343	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5dec1b09-4df0-4e9b-9dca-b80134be3343	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5dec1b09-4df0-4e9b-9dca-b80134be3343	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5ded56df-c7d5-4043-85df-410f47219faa	cast	cast-resolve	agreed	-	X	scen	1	0	Corpseberry Cultivator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ded56df-c7d5-4043-85df-410f47219faa	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Corpseberry Cultivator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ded56df-c7d5-4043-85df-410f47219faa	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Corpseberry Cultivator/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

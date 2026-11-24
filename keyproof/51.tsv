@@ -113,8 +113,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5193172c-9024-409e-bd9e-0387971d65fe	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Boiling Rock Rioter/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51991d28-137e-4690-a674-d852b904bd1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51a0d1c2-ff29-4ac9-84a2-ad4f566fee8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51a2671b-677e-434c-9f1a-d768fe1190c9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51a2671b-677e-434c-9f1a-d768fe1190c9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+51a2671b-677e-434c-9f1a-d768fe1190c9	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Lt. Arex, Ever-Adapting"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+51a2671b-677e-434c-9f1a-d768fe1190c9	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Lt. Arex, Ever-Adapting"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 51a6819d-c8fb-4f52-ab0c-4ae845728ed2	cast	cast-resolve	agreed	-	X	scen	1	0	Redrock Sentinel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51a6819d-c8fb-4f52-ab0c-4ae845728ed2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Redrock Sentinel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51a6819d-c8fb-4f52-ab0c-4ae845728ed2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Redrock Sentinel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -153,9 +153,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51cc270d-55c8-4b6b-a6d7-f98d7b8e5185	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dreadmobile:cast:s1,f:xs:XP:dreadmobile:cast:s1	-	-	-	ae86f6029288	-	9e3e87eb3180	-	-	2026-11-24	xproof
 51cc270d-55c8-4b6b-a6d7-f98d7b8e5185	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 51cc270d-55c8-4b6b-a6d7-f98d7b8e5185	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-51ccd23c-cd34-4a68-8212-0bb427920031	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51ccd23c-cd34-4a68-8212-0bb427920031	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51ccd23c-cd34-4a68-8212-0bb427920031	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+51ccd23c-cd34-4a68-8212-0bb427920031	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Robot Chicken"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+51ccd23c-cd34-4a68-8212-0bb427920031	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+51ccd23c-cd34-4a68-8212-0bb427920031	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 51ce0158-c9a5-4fa5-9704-46ab02f01b86	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-vines:cast:s1,f:xs:XP:wall-of-vines:cast:s1	-	-	-	d864b561c9cb	-	43daf4fee340	-	-	2026-11-24	xproof
 51d4f95e-aad2-4e5f-9f15-a68bbdf9ab3e	cast	cast-resolve	agreed	-	X	scen	1	0	World Map/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51d4f95e-aad2-4e5f-9f15-a68bbdf9ab3e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	World Map/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

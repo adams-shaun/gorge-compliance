@@ -90,9 +90,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 487de0df-0496-4b5d-8050-27b8e617582b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:firehoof-cavalry:f0a0:s1,f:xs:XP:firehoof-cavalry:f0a0:s1	-	-	-	d864b561c9cb	-	f37f89d6ea24	-	-	2026-11-24	xproof
 4880c976-b417-48e4-98a2-9e5a8da0d758	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sibsig-icebreakers:cast:s1,f:xs:XP:sibsig-icebreakers:cast:s1	-	-	-	d864b561c9cb	-	44fdcf229ad3	-	-	2026-11-24	xproof
 4880c976-b417-48e4-98a2-9e5a8da0d758	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sibsig-icebreakers:cast:s1,f:xs:XP:sibsig-icebreakers:cast:s1	-	-	-	d864b561c9cb	-	44fdcf229ad3	-	-	2026-11-24	xproof
-48848570-00c4-4a89-a84c-e3df47a8b0d2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48848570-00c4-4a89-a84c-e3df47a8b0d2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48848570-00c4-4a89-a84c-e3df47a8b0d2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48848570-00c4-4a89-a84c-e3df47a8b0d2	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Assimilation Assessor"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+48848570-00c4-4a89-a84c-e3df47a8b0d2	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Assimilation Assessor"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+48848570-00c4-4a89-a84c-e3df47a8b0d2	f0/t1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Assimilation Assessor"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4885354f-0b77-47b6-b8f7-00753804436f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4885354f-0b77-47b6-b8f7-00753804436f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 488591d4-3dfb-4e1e-b0c4-1950ff92b848	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,8 +153,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48bda7dd-d023-41e8-8c28-e0cfda0d07ca	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aven-cloudchaser:f0t0:s1,f:xs:XP:aven-cloudchaser:f0t0:s1	-	-	-	25696bf19d5b	-	22d846f6e63b	-	-	2026-11-24	xproof
 48c0cd06-465d-4901-bf23-948a003afc0b	cast	cast-resolve	agreed	-	X	scen	1	0	Honor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 48c127f0-2857-4c36-97bc-1291b6fe4a82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48c2dc82-7bed-4730-8b8b-1970b743414f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48c2dc82-7bed-4730-8b8b-1970b743414f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48c2dc82-7bed-4730-8b8b-1970b743414f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tenacious-tosk:cast:s1,f:xs:XP:tenacious-tosk:cast:s1	-	-	-	8c0bd19283bb	-	ffce3b65314e	-	-	2026-11-24	xproof
+48c2dc82-7bed-4730-8b8b-1970b743414f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 48c641df-d511-4e35-b623-9d1fdb5240da	cast	cast-resolve	agreed	-	X	scen	1	0	Eclipsed Flamekin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 48c641df-d511-4e35-b623-9d1fdb5240da	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 48c97aeb-6591-4175-a24b-d3488bf3ab0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

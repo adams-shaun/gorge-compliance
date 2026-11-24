@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c04aeda-ae09-4162-ab51-983e29d21225	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c067370-1e3d-4262-b7d6-f2bb2656b1d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c067370-1e3d-4262-b7d6-f2bb2656b1d8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c067370-1e3d-4262-b7d6-f2bb2656b1d8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3c067dbb-934b-4ebb-a656-8541349a4b2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c067dbb-934b-4ebb-a656-8541349a4b2a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3c075bb6-1831-4521-bd8d-4ed2825ae796	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -73,8 +73,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c4d5392-27cf-492e-9ae1-dee330b82223	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c4d5392-27cf-492e-9ae1-dee330b82223	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:moldgraf-monstrosity:f0t0:s1,f:xs:XP:moldgraf-monstrosity:f0t0:s1	-	-	-	d864b561c9cb	-	b43e41d4e2c1	-	-	2026-11-24	xproof
 3c4da169-1e50-4790-abdc-214e7b8a2ad5	cast	cast-resolve	agreed	-	X	scen	1	0	Thorin's Last Stand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3c516327-00a3-4d03-87a3-73b4a90719d3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c516327-00a3-4d03-87a3-73b4a90719d3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c516327-00a3-4d03-87a3-73b4a90719d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trelane-squire-of-gothos:cast:s1,f:xs:XP:trelane-squire-of-gothos:cast:s1	-	-	-	8c0bd19283bb	-	872f2f635514	-	-	2026-11-24	xproof
+3c516327-00a3-4d03-87a3-73b4a90719d3	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3c59ab03-8744-4148-be06-eb1b0147f2cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c59ab03-8744-4148-be06-eb1b0147f2cc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3c5c227a-335b-4995-9821-d4269a0a233a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hugs-grisly-guardian:cast:s2	-	-	-	5437c1394672	-	f2728a82599e	-	-	2026-11-24	xproof

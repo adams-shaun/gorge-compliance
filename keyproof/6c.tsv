@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Deathcap Marionette/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:deathcap-marionette:f0t0:s2,f:xs:XP:deathcap-marionette:f0t0:s2	-	-	-	e07cf3a05ba5	-	4d838754766c	-	-	2026-11-24	xproof
 6c44d62f-52de-446c-9824-6b474534a612	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6c44d62f-52de-446c-9824-6b474534a612	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6c44d62f-52de-446c-9824-6b474534a612	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6c4514be-fda7-45e8-83fe-04d49e2b932c	cast	cast-resolve	agreed	-	FX	scen	2	0	Focus Fire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c4a0e3d-c63c-4acf-8386-b51f1ec37463	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grafted-butcher:f0t0:s1,f:xs:XP:grafted-butcher:f0t0:s1	-	-	-	ae86f6029288	-	ede65adf7c42	-	-	2026-11-24	xproof
 6c4a0e3d-c63c-4acf-8386-b51f1ec37463	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

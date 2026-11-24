@@ -33,8 +33,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d330c40-3d72-4528-a254-d036683958d3	f0/a0	DealDamage	owed	harness	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	bc2784bb5a73	-	-	2026-11-24	xproof
 4d330c40-3d72-4528-a254-d036683958d3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d330c40-3d72-4528-a254-d036683958d3	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-4d338db9-e968-49ec-8959-141480b17b8f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4d338db9-e968-49ec-8959-141480b17b8f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4d338db9-e968-49ec-8959-141480b17b8f	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+4d338db9-e968-49ec-8959-141480b17b8f	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4d36ea21-e8cb-442d-ba3f-c399289ac208	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:patron-of-the-valiant:f0t0:s1,f:xs:XP:patron-of-the-valiant:f0t0:s1	-	-	-	d864b561c9cb	-	35eaef59f729	-	-	2026-11-24	xproof
 4d36ea21-e8cb-442d-ba3f-c399289ac208	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:patron-of-the-valiant:f0t0:s1,f:xs:XP:patron-of-the-valiant:f0t0:s1	-	-	-	d864b561c9cb	-	35eaef59f729	-	-	2026-11-24	xproof
 4d3ac460-79ac-4eef-9446-1b9fe0261556	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4dbf8c43-d7c5-4037-875e-6accd87aaf6f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Identity Echo/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4dc0831a-0eb1-4f7d-9591-6e670e180116	cast	cast-resolve	agreed	-	FX	scen	2	0	Lie in Wait/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4dc4c8a3-17d6-4c2d-bcbf-9cebf261eda6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4dc4c8a3-17d6-4c2d-bcbf-9cebf261eda6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4dc4c8a3-17d6-4c2d-bcbf-9cebf261eda6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4dc5726e-2f7e-4c2b-9616-c3301d212f78	cast	cast-resolve	agreed	-	FX	scen	2	0	Thousand-Year Elixir/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 4dc5726e-2f7e-4c2b-9616-c3301d212f78	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Thousand-Year Elixir/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 4dc5726e-2f7e-4c2b-9616-c3301d212f78	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thousand-Year Elixir/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

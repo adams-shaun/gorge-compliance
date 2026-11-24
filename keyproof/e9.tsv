@@ -7,9 +7,9 @@ e900f211-dc8b-40f7-a217-1b1462b15c26	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e90a1381-c9c1-4f57-928c-5d19dc065274	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e90a1381-c9c1-4f57-928c-5d19dc065274	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e90a1381-c9c1-4f57-928c-5d19dc065274	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e90d6903-5415-4ddf-88c0-15ddd8614bde	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e90d6903-5415-4ddf-88c0-15ddd8614bde	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e90d6903-5415-4ddf-88c0-15ddd8614bde	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e90d6903-5415-4ddf-88c0-15ddd8614bde	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hawkeye-avenging-archer:cast:s1	-	-	-	8c0bd19283bb	-	464d36e7515b	-	-	2026-11-24	xproof
+e90d6903-5415-4ddf-88c0-15ddd8614bde	f0/a0	DealDamage	agreed	-	F	start	2	0	f:xs:XP:hawkeye-avenging-archer:f0a0:s1	-	-	-	8c0bd19283bb	-	464d36e7515b	-	-	2026-11-24	xproof
+e90d6903-5415-4ddf-88c0-15ddd8614bde	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e90e3f58-1197-41c1-81c5-008e946eb539	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fathom-fleet-cutthroat:f0t0:s1,f:xs:XP:fathom-fleet-cutthroat:f0t0:s1	-	-	-	d864b561c9cb	-	128cbb16f058	-	-	2026-11-24	xproof
 e90e3f58-1197-41c1-81c5-008e946eb539	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fathom-fleet-cutthroat:f0t0:s1,f:xs:XP:fathom-fleet-cutthroat:f0t0:s1	-	-	-	d864b561c9cb	-	128cbb16f058	-	-	2026-11-24	xproof
 e90e519d-023e-4d19-85ad-9972a76df3ba	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:tramway-station:f0a0:s1,f:xs:XP:tramway-station:f0a0:s1	-	-	-	d864b561c9cb	-	eee0ffb51174	-	-	2026-11-24	xproof
@@ -96,7 +96,7 @@ e95f22dd-b89a-4836-86ad-5a9a1627af38	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 e9612e4c-1527-4255-9f2f-b8d8cee65cc6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9612e4c-1527-4255-9f2f-b8d8cee65cc6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9638ad1-4e1d-4721-91f5-8cf13d0d0d0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e9638ad1-4e1d-4721-91f5-8cf13d0d0d0d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e9638ad1-4e1d-4721-91f5-8cf13d0d0d0d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e96542ed-1931-4da1-9d9e-d10878c4ae6b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-snake:cast:s1,f:xs:XP:fire-snake:cast:s1	-	-	-	ea3140b6974b	-	3d531786da76	-	-	2026-11-24	xproof
 e96542ed-1931-4da1-9d9e-d10878c4ae6b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fire-snake:f0t0:s1,f:xs:XP:fire-snake:f0t0:s1	-	-	-	ea3140b6974b	-	3d531786da76	-	-	2026-11-24	xproof
 e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	cast	cast-resolve	agreed	-	X	scen	1	0	Quintessential Katana/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

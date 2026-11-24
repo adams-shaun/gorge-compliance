@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 594132ac-32a7-41d5-b7f0-3692bbed7f6f	cast	cast-resolve	agreed	-	X	scen	1	0	Prowcatcher Specialist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 594132ac-32a7-41d5-b7f0-3692bbed7f6f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Prowcatcher Specialist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 59442ef7-5276-4f38-83c8-9a849388a711	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59442ef7-5276-4f38-83c8-9a849388a711	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59442ef7-5276-4f38-83c8-9a849388a711	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5944d5c7-65ab-425f-a453-ed5871ca3d73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59483597-4d8c-4cdc-8bb5-226b1eef10f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grayscaled-gharial:cast:s1,f:xs:XP:grayscaled-gharial:cast:s1	-	-	-	64a08ba7d913	-	9e801e60e1d0	-	-	2026-11-24	xproof
 5948381a-419d-4b8b-8ea2-ea623cb0d606	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,9 +115,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 598f948b-bdd3-490f-b3e9-f0f9dc470522	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 598f948b-bdd3-490f-b3e9-f0f9dc470522	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:onulet:f0t0:s1,f:xs:XP:onulet:f0t0:s1	-	-	-	ae86f6029288	-	7886ee4fc203	-	-	2026-11-24	xproof
 59925461-99f5-4217-8343-49c9b1ce24c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-599402d9-2ea6-4709-b010-b35636be8c8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+599402d9-2ea6-4709-b010-b35636be8c8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sky-cycle:f0t0:s1,f:xs:XP:sky-cycle:f0t0:s1	-	-	-	8c0bd19283bb	-	8f9f8f02d396	-	-	2026-11-24	xproof
 599402d9-2ea6-4709-b010-b35636be8c8c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-599402d9-2ea6-4709-b010-b35636be8c8c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+599402d9-2ea6-4709-b010-b35636be8c8c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sky-cycle:f0t0:s1,f:xs:XP:sky-cycle:f0t0:s1	-	-	-	8c0bd19283bb	-	8f9f8f02d396	-	-	2026-11-24	xproof
 5996b1d0-7fe3-4fec-8730-9db901d887b1	cast	cast-resolve	agreed	-	X	scen	1	0	Crime Novelist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5996b1d0-7fe3-4fec-8730-9db901d887b1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Crime Novelist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5998f07e-01f9-4d02-94dd-867c7166463f	cast	cast-resolve	agreed	-	X	scen	1	0	Jackal, Genius Geneticist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59f56dd9-cc82-4f0d-a522-0d8ed274fa40	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 59f57c25-ebb7-49df-8cdd-c6f069d1358d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59f75a19-95cd-4ac8-94f1-27c1f915c34a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59f75a19-95cd-4ac8-94f1-27c1f915c34a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59f75a19-95cd-4ac8-94f1-27c1f915c34a	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 59f8f2c4-d30d-411c-9fac-a5a3219bb124	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59fa8323-bba9-4c51-833d-2ab966599b62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59fb1640-d8ed-476a-a78d-91d60b6faac5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-war-buggy:cast:s1,f:xs:XP:goblin-war-buggy:cast:s1	-	-	-	5f2128bf97e4	-	7d66df86440c	-	-	2026-11-24	xproof

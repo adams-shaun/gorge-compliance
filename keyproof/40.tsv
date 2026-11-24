@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40601061-1b25-4db8-8b99-33324ce945cf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4061572b-b7ff-4d06-9f71-9e66e064593d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4061572b-b7ff-4d06-9f71-9e66e064593d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4061572b-b7ff-4d06-9f71-9e66e064593d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4061572b-b7ff-4d06-9f71-9e66e064593d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 40616029-e1a8-4e7c-bc7b-e381779c57cc	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 40616029-e1a8-4e7c-bc7b-e381779c57cc	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 40616029-e1a8-4e7c-bc7b-e381779c57cc	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -74,8 +74,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 406eabe2-df62-49e2-bb39-c0227509d875	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 406eabe2-df62-49e2-bb39-c0227509d875	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 406eabe2-df62-49e2-bb39-c0227509d875	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-406f1982-5d0c-4dba-9010-28b1c6a3602c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-406f1982-5d0c-4dba-9010-28b1c6a3602c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+406f1982-5d0c-4dba-9010-28b1c6a3602c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dora-milaje-elite:f0t0:s1,f:xs:XP:dora-milaje-elite:f0t0:s1	-	-	-	8c0bd19283bb	-	5e1f54aa2853	-	-	2026-11-24	xproof
+406f1982-5d0c-4dba-9010-28b1c6a3602c	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:dora-milaje-elite:f0t0:s1,f:xs:XP:dora-milaje-elite:f0t0:s1	-	-	-	8c0bd19283bb	-	5e1f54aa2853	-	-	2026-11-24	xproof
 406f1982-5d0c-4dba-9010-28b1c6a3602c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 406fad02-e1a6-4c24-b46d-976c548e1c78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aria-of-flame:f0t0:s1,f:xs:XP:aria-of-flame:f0t0:s1	-	-	-	d864b561c9cb	-	28a8f09b6d11	-	-	2026-11-24	xproof
 406fad02-e1a6-4c24-b46d-976c548e1c78	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aria-of-flame:f0t0:s1,f:xs:XP:aria-of-flame:f0t0:s1	-	-	-	d864b561c9cb	-	28a8f09b6d11	-	-	2026-11-24	xproof

@@ -68,8 +68,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a42558c-7432-4c05-9599-95343eb09be1	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a42558c-7432-4c05-9599-95343eb09be1	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:censor:cast:s1,f:xs:XP:censor:cast:s1	-	-	-	8c0bd19283bb	-	153ca889c491	-	-	2026-11-24	xproof
 3a429a1e-62c0-4f01-b09e-2bbf63e56a98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a429a1e-62c0-4f01-b09e-2bbf63e56a98	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a429a1e-62c0-4f01-b09e-2bbf63e56a98	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a429a1e-62c0-4f01-b09e-2bbf63e56a98	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3a429a1e-62c0-4f01-b09e-2bbf63e56a98	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3a46d85b-ce1a-4842-a342-92a5bddb1053	cast	cast-resolve	agreed	-	X	scen	1	0	Scrounging Skyray/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a46d85b-ce1a-4842-a342-92a5bddb1053	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scrounging Skyray/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a46d85b-ce1a-4842-a342-92a5bddb1053	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scrounging Skyray/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -79,9 +79,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a48541a-240b-4406-945c-1d0d032eca25	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a487f20-6b1d-4be3-b51f-0c8f0a611601	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sisay-s-ingenuity:f0t0:s1,f:xs:XP:sisay-s-ingenuity:f0t0:s1	-	-	-	fc71ca68c5ac	-	ff6d0df7b017	-	-	2026-11-24	xproof
 3a487f20-6b1d-4be3-b51f-0c8f0a611601	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sisay-s-ingenuity:f0t0:s1,f:xs:XP:sisay-s-ingenuity:f0t0:s1	-	-	-	fc71ca68c5ac	-	ff6d0df7b017	-	-	2026-11-24	xproof
-3a49b518-61c8-4dea-8008-c5edf8384581	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a49b518-61c8-4dea-8008-c5edf8384581	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a49b518-61c8-4dea-8008-c5edf8384581	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a49b518-61c8-4dea-8008-c5edf8384581	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ob-nixilis-the-ascended:f0t0:s1,f:xs:XP:ob-nixilis-the-ascended:f0t0:s1	-	-	-	8c0bd19283bb	-	88b61cd38814	-	-	2026-11-24	xproof
+3a49b518-61c8-4dea-8008-c5edf8384581	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ob-nixilis-the-ascended:f0t0:s1,f:xs:XP:ob-nixilis-the-ascended:f0t0:s1	-	-	-	8c0bd19283bb	-	88b61cd38814	-	-	2026-11-24	xproof
+3a49b518-61c8-4dea-8008-c5edf8384581	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3a51485b-31b2-4fa5-824a-a919f9d28ca8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a532c2b-a08c-46ab-86f7-c6dee0d6985f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scent-of-jasmine:cast:s1,f:xs:XP:scent-of-jasmine:cast:s1	-	-	-	5f2128bf97e4	-	1a3d5d749db8	-	-	2026-11-24	xproof
 3a536065-d62a-44c9-886b-84209b6bce57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -121,8 +121,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a7c2e32-8585-4f7f-8635-199e3c6cd8a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a7cca31-ccca-459b-9ac6-c8f384136ba5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kird-chieftain:cast:s1,f:xs:XP:kird-chieftain:cast:s1	-	-	-	d864b561c9cb	-	49cba5a384f6	-	-	2026-11-24	xproof
 3a7cca31-ccca-459b-9ac6-c8f384136ba5	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:kird-chieftain:f0a0:s1,f:xs:XP:kird-chieftain:f0a0:s1	-	-	-	d864b561c9cb	-	49cba5a384f6	-	-	2026-11-24	xproof
-3a7e3423-4df3-4e10-9861-ac2f403bc49d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a7e3423-4df3-4e10-9861-ac2f403bc49d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a7e3423-4df3-4e10-9861-ac2f403bc49d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flatman:cast:s1,f:xs:XP:flatman:cast:s1	-	-	-	8c0bd19283bb	-	8783eaad286f	-	-	2026-11-24	xproof
+3a7e3423-4df3-4e10-9861-ac2f403bc49d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flatman:f0a0:s1,f:xs:XP:flatman:f0a0:s1	-	-	-	8c0bd19283bb	-	8783eaad286f	-	-	2026-11-24	xproof
 3a81a3a6-4940-4d69-94c1-d431023b275c	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	3ed08d21d3be	-	-	2026-11-24	xproof
 3a81a3a6-4940-4d69-94c1-d431023b275c	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	3ed08d21d3be	-	-	2026-11-24	xproof
 3a82e724-28f6-430f-a474-ab4276197963	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampires-vengeance:cast:s1,f:xs:XP:vampires-vengeance:cast:s1	-	-	-	d864b561c9cb	-	46e59b26cdd4	-	-	2026-11-24	xproof

@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 002a9cea-8cf7-48ba-83eb-e1c87a7024e5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:disposal-mummy:f0t0:s1,f:xs:XP:disposal-mummy:f0t0:s1	-	-	-	d864b561c9cb	-	5a0270e43f52	-	-	2026-11-24	xproof
 002ad5fa-a20c-4d30-beef-401d89868d67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 002cd9b4-efce-429f-82cd-d37352d2e932	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-002cd9b4-efce-429f-82cd-d37352d2e932	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+002cd9b4-efce-429f-82cd-d37352d2e932	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:wasp-shrinking-savior:f0t0:s1,f:xs:XP:wasp-shrinking-savior:f0t0:s1	-	-	-	8c0bd19283bb	-	b52ce1b82a20	-	-	2026-11-24	xproof
 002e767c-0b30-4ad1-a924-88da400a4cff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0030578c-afaf-4072-a62b-2510bdceb64a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lattice-library:f0t0:s1,f:xs:XP:lattice-library:f0t0:s1	-	-	-	8c0bd19283bb	-	f1bfd344f371	-	-	2026-11-24	xproof
 0030578c-afaf-4072-a62b-2510bdceb64a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lattice-library:f0t0:s1,f:xs:XP:lattice-library:f0t0:s1	-	-	-	8c0bd19283bb	-	f1bfd344f371	-	-	2026-11-24	xproof
@@ -77,8 +77,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00605b83-faf6-4779-be9d-6a2c8f0ea722	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00605b83-faf6-4779-be9d-6a2c8f0ea722	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 00606d5e-a134-4363-9ee6-05e03d58f234	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0068f8c1-d1a2-4f7b-b39f-963acb2c023b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0068f8c1-d1a2-4f7b-b39f-963acb2c023b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0068f8c1-d1a2-4f7b-b39f-963acb2c023b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vault-guardsman:f0t0:s1,f:xs:XP:vault-guardsman:f0t0:s1	-	-	-	8c0bd19283bb	-	1513851fb633	-	-	2026-11-24	xproof
+0068f8c1-d1a2-4f7b-b39f-963acb2c023b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vault-guardsman:f0t0:s1,f:xs:XP:vault-guardsman:f0t0:s1	-	-	-	8c0bd19283bb	-	1513851fb633	-	-	2026-11-24	xproof
 006bbd8b-2007-419d-8b84-9ff73f2f95b7	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 006f4a62-8590-4ca0-9f51-3aea26cd1a54	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:one-with-the-kami:cast:s1,f:xs:XP:one-with-the-kami:cast:s1	-	-	-	8c0bd19283bb	-	ad817b30e852	-	-	2026-11-24	xproof
 006f4a62-8590-4ca0-9f51-3aea26cd1a54	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

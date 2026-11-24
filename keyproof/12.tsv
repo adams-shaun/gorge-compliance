@@ -131,9 +131,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undercellar-myconid:f0t0:s1,f:xs:XP:undercellar-myconid:f0t0:s1	-	-	-	8c0bd19283bb	-	c3dc62873597	-	-	2026-11-24	xproof
 127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undercellar-myconid:f0t1:s1,f:xs:XP:undercellar-myconid:f0t1:s1	-	-	-	8c0bd19283bb	-	c3dc62873597	-	-	2026-11-24	xproof
-127f6985-c1f4-487f-b5ee-c84524cd6c55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+127f6985-c1f4-487f-b5ee-c84524cd6c55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shuri-s-fabricator:f0t0:s1,f:xs:XP:shuri-s-fabricator:f0t0:s1	-	-	-	8c0bd19283bb	-	918b6649d773	-	-	2026-11-24	xproof
 127f6985-c1f4-487f-b5ee-c84524cd6c55	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-127f6985-c1f4-487f-b5ee-c84524cd6c55	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+127f6985-c1f4-487f-b5ee-c84524cd6c55	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shuri-s-fabricator:f0t0:s1,f:xs:XP:shuri-s-fabricator:f0t0:s1	-	-	-	8c0bd19283bb	-	918b6649d773	-	-	2026-11-24	xproof
 128170ed-c86a-4f02-9244-28197be90c10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frost-bite:cast:s1,f:xs:XP:frost-bite:cast:s1	-	-	-	d864b561c9cb	-	a29ebd85ce9b	-	-	2026-11-24	xproof
 12827076-450d-42b1-98ca-9f9279a539fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 128304af-4555-4276-bf26-638017beb3ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -230,7 +230,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12e4d2bd-83e9-4120-a2e8-0645c0ed2387	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ebon-dragon:f0t0:s1,f:xs:XP:ebon-dragon:f0t0:s1	-	-	-	ea3140b6974b	-	c26d259e79ad	-	-	2026-11-24	xproof
 12e4d2bd-83e9-4120-a2e8-0645c0ed2387	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ebon-dragon:f0t0:s1,f:xs:XP:ebon-dragon:f0t0:s1	-	-	-	ea3140b6974b	-	c26d259e79ad	-	-	2026-11-24	xproof
 12e4e6b6-e684-49df-9373-d1e057664272	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12e4e6b6-e684-49df-9373-d1e057664272	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12e4e6b6-e684-49df-9373-d1e057664272	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 12eeabe1-a02c-42a3-aa87-6774c4de7093	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12eeabe1-a02c-42a3-aa87-6774c4de7093	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 12ef651c-5a86-49c4-a512-292e9d135a76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -32,8 +32,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43257a85-2cbe-4931-9755-106808ab124a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43257a85-2cbe-4931-9755-106808ab124a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4325ae73-af43-4a7d-a552-9909f0dc77db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4325d4d2-5892-4c20-a994-7396b715e94f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4325d4d2-5892-4c20-a994-7396b715e94f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4325d4d2-5892-4c20-a994-7396b715e94f	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Transwarp Hub"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+4325d4d2-5892-4c20-a994-7396b715e94f	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Transwarp Hub"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4327225e-140f-45a4-a56f-dcf472f6c062	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4327225e-140f-45a4-a56f-dcf472f6c062	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43296f8b-58d9-446e-a538-1c4921552c41	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43b8456a-3333-4936-a09c-324327619c36	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fiend Artisan/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 43bae4b3-57e8-4d9a-9d1b-9805b0e0fff5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-reconstruction:cast:s1,f:xs:XP:kayla-s-reconstruction:cast:s1	-	-	-	ae86f6029288	-	12dfafbb4edc	-	-	2026-11-24	xproof
 43c31a03-2bbd-49a6-8b78-c5f3cab04a07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43c31a03-2bbd-49a6-8b78-c5f3cab04a07	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43c31a03-2bbd-49a6-8b78-c5f3cab04a07	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 43c449d1-51a9-45e0-8102-823a6811ff54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43c69d19-c06c-470a-bdba-a0335ff2d655	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:floodpits-drowner:f0t0:s1,f:xs:XP:floodpits-drowner:f0t0:s1	-	-	-	25696bf19d5b	-	4303171e3130	-	-	2026-11-24	xproof
 43c69d19-c06c-470a-bdba-a0335ff2d655	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Floodpits Drowner/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -179,9 +179,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43d44a7f-829a-4f4d-9f71-2f4384ddd803	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43d44a7f-829a-4f4d-9f71-2f4384ddd803	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spinal-centipede:f0t0:s1,f:xs:XP:spinal-centipede:f0t0:s1	-	-	-	d864b561c9cb	-	f09a74163379	-	-	2026-11-24	xproof
 43d69e13-27df-43a9-b610-6628dc02e3b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43d79ee6-8ba1-4ec9-9bb2-907ed8401a2f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43d79ee6-8ba1-4ec9-9bb2-907ed8401a2f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43d79ee6-8ba1-4ec9-9bb2-907ed8401a2f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43d79ee6-8ba1-4ec9-9bb2-907ed8401a2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ultimo-civilization-s-end:cast:s1,f:xs:XP:ultimo-civilization-s-end:cast:s1	-	-	-	8c0bd19283bb	-	56fc5c314bdf	-	-	2026-11-24	xproof
+43d79ee6-8ba1-4ec9-9bb2-907ed8401a2f	f0/a0	Sacrifice	agreed	-	FX	start	2	0	x:xs:XP:ultimo-civilization-s-end:cast:s2,f:xs:XP:ultimo-civilization-s-end:cast:s2	-	-	-	8c0bd19283bb	-	56fc5c314bdf	-	-	2026-11-24	xproof
+43d79ee6-8ba1-4ec9-9bb2-907ed8401a2f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ultimo-civilization-s-end:cast:s1,f:xs:XP:ultimo-civilization-s-end:cast:s1	-	-	-	8c0bd19283bb	-	56fc5c314bdf	-	-	2026-11-24	xproof
 43d7fcf3-acc2-4e9b-a466-c73b1b6c58af	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:omenspeaker:cast:s1,f:xs:XP:omenspeaker:cast:s1	-	-	-	d864b561c9cb	-	f24f9afb709f	-	-	2026-11-24	xproof
 43d7fcf3-acc2-4e9b-a466-c73b1b6c58af	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:omenspeaker:cast:s1,f:xs:XP:omenspeaker:cast:s1	-	-	-	d864b561c9cb	-	f24f9afb709f	-	-	2026-11-24	xproof
 43daed96-2216-4f17-82ce-3eccd5d69936	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:elven-bow:cast:s1,f:xs:XP:elven-bow:cast:s1	-	-	-	d864b561c9cb	-	d59776e5e0fc	-	-	2026-11-24	xproof

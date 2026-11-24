@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 873694c0-c100-4d24-a74f-1ab26442dd18	cast	counter-spell	agreed	-	FX	scen	2	0	Brush Off/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 873694c0-c100-4d24-a74f-1ab26442dd18	static#0.0	static#0.0	agreed	-	X	scen	1	0	Brush Off/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 873abbf4-c9b5-4b8f-8cd0-613cf3b9b1d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-873e739c-edf4-46a7-9024-5caaf87f507e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-873e739c-edf4-46a7-9024-5caaf87f507e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+873e739c-edf4-46a7-9024-5caaf87f507e	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Pick Up the Pace"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+873e739c-edf4-46a7-9024-5caaf87f507e	f0/t0	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 873fa095-5662-407a-bd24-9a1c4712a428	cast	cast-resolve	agreed	-	X	scen	1	0	Ruric Thar, Biomagus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 873fa095-5662-407a-bd24-9a1c4712a428	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ruric Thar, Biomagus/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 873fa095-5662-407a-bd24-9a1c4712a428	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ruric Thar, Biomagus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

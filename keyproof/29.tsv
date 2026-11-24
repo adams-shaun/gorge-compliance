@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 295f8b8d-102a-47af-93c2-f8182c5f11ca	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 295f8b8d-102a-47af-93c2-f8182c5f11ca	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Ascendant Dustspeaker/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2962cfc6-6557-4aee-a95a-8ca3bb06eb29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2962cfc6-6557-4aee-a95a-8ca3bb06eb29	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2962cfc6-6557-4aee-a95a-8ca3bb06eb29	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2962fe4c-bf48-454b-8a6b-0f8253352ae8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:spelunking:cast:s2	-	-	-	5437c1394672	-	ec04eafbc0c4	-	-	2026-11-24	xproof
 2962fe4c-bf48-454b-8a6b-0f8253352ae8	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:spelunking:cast:s2	-	-	-	5437c1394672	-	ec04eafbc0c4	-	-	2026-11-24	xproof
 29646827-7b69-48c5-8273-4e66076e2384	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -84,8 +84,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 296de325-cc1a-4cfa-a72d-80a2a5e18d10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 296de325-cc1a-4cfa-a72d-80a2a5e18d10	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 296dee6b-6ec1-4ea4-8dc3-23080dd37646	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-296e79f9-57cb-4af7-9e18-48d2d655b537	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-296e79f9-57cb-4af7-9e18-48d2d655b537	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+296e79f9-57cb-4af7-9e18-48d2d655b537	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doom-s-servo-guards:f0t0:s1,f:xs:XP:doom-s-servo-guards:f0t0:s1	-	-	-	8c0bd19283bb	-	bde0ad370fba	-	-	2026-11-24	xproof
+296e79f9-57cb-4af7-9e18-48d2d655b537	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:doom-s-servo-guards:f0t0:s1,f:xs:XP:doom-s-servo-guards:f0t0:s1	-	-	-	8c0bd19283bb	-	bde0ad370fba	-	-	2026-11-24	xproof
 2970d09b-4bef-468e-8de5-f994c820ccc0	cast	cast-resolve	agreed	-	X	scen	1	0	Pestbrood Sloth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2970d09b-4bef-468e-8de5-f994c820ccc0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pestbrood Sloth/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2970d09b-4bef-468e-8de5-f994c820ccc0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pestbrood Sloth/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

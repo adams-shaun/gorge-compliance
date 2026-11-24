@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e2736e6-b812-43a4-bd79-6f6095344fe1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saruli-caretaker:cast:s1,f:xs:XP:saruli-caretaker:cast:s1	-	-	-	d864b561c9cb	-	0184cde04f11	-	-	2026-11-24	xproof
 5e2736e6-b812-43a4-bd79-6f6095344fe1	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5e277de5-793a-4364-923a-a55b53c0fa85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5e277de5-793a-4364-923a-a55b53c0fa85	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5e277de5-793a-4364-923a-a55b53c0fa85	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5e2958fd-ede6-4563-babc-4924d3e95754	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:u-s-s-enterprise-a-free-spirit:f0t0:s1,f:xs:XP:u-s-s-enterprise-a-free-spirit:f0t0:s1	-	-	-	25696bf19d5b	-	cd7fa51a4a5e	-	-	2026-11-24	xproof
 5e2958fd-ede6-4563-babc-4924d3e95754	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:u-s-s-enterprise-a-free-spirit:f0t0:s1,f:xs:XP:u-s-s-enterprise-a-free-spirit:f0t0:s1	-	-	-	25696bf19d5b	-	cd7fa51a4a5e	-	-	2026-11-24	xproof
 5e2958fd-ede6-4563-babc-4924d3e95754	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ebfa3f5-f80a-4845-bba7-75c4ddb88682	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fire Nation Cadets/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ec0e58c-99b5-4ebf-8053-f59c30b86ef7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ec0e58c-99b5-4ebf-8053-f59c30b86ef7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ec4f81e-ede4-4d45-b768-16583f6f5b8d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5ec4f81e-ede4-4d45-b768-16583f6f5b8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:count-nefaria:cast:s1,f:xs:XP:count-nefaria:cast:s1	-	-	-	8c0bd19283bb	-	20e1c78d0d8c	-	-	2026-11-24	xproof
 5ec9f317-887a-4e08-a165-e7cf15eb071d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ec9f317-887a-4e08-a165-e7cf15eb071d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ece1778-fb19-40d5-8bcc-f23033e1d5c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,8 +186,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ed93d71-3f62-49d4-a9ca-5728c44b0633	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ed93d71-3f62-49d4-a9ca-5728c44b0633	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5edfe083-391b-41ae-ac4d-d648042cfa5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ee9940a-0569-45b6-b28c-0ef3914013a9	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ee9940a-0569-45b6-b28c-0ef3914013a9	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5ee9940a-0569-45b6-b28c-0ef3914013a9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:marvelous-melee:cast:s1,f:xs:XP:marvelous-melee:cast:s1	-	-	-	8c0bd19283bb	-	fe7d8bdf9618	-	-	2026-11-24	xproof
+5ee9940a-0569-45b6-b28c-0ef3914013a9	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:marvelous-melee:cast:s2,f:xs:XP:marvelous-melee:cast:s2	-	-	-	8c0bd19283bb	-	fe7d8bdf9618	-	-	2026-11-24	xproof
 5eeb1495-4f0c-4920-8cd6-9c9257327e33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ef498fa-31d5-4eca-873d-6b2b1f7f9a3c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tajuru-archer:f0t0:s1,f:xs:XP:tajuru-archer:f0t0:s1	-	-	-	8a1b1a193ec0	-	d0f973efd8b7	-	-	2026-11-24	xproof
 5ef498fa-31d5-4eca-873d-6b2b1f7f9a3c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tajuru-archer:f0t0:s1,f:xs:XP:tajuru-archer:f0t0:s1	-	-	-	8a1b1a193ec0	-	d0f973efd8b7	-	-	2026-11-24	xproof

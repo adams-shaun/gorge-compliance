@@ -110,9 +110,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 997d2f38-5a50-451e-bd48-e36dcb24d967	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 997f5a5a-9ee1-4b66-9ffc-d1a2e996e615	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 998484cc-fefc-4da5-9987-5d6e89599c34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9984d950-29dc-4d6b-8750-8d1bf86ea98f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9984d950-29dc-4d6b-8750-8d1bf86ea98f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9984d950-29dc-4d6b-8750-8d1bf86ea98f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9984d950-29dc-4d6b-8750-8d1bf86ea98f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:red-ghost-intangible-genius:cast:s1,f:xs:XP:red-ghost-intangible-genius:cast:s1	-	-	-	8c0bd19283bb	-	d90dd877806a	-	-	2026-11-24	xproof
+9984d950-29dc-4d6b-8750-8d1bf86ea98f	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+9984d950-29dc-4d6b-8750-8d1bf86ea98f	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 99853d2e-2223-4c05-bbd7-0a746f8f810d	cast	cast-resolve	agreed	-	X	scen	1	0	Ingenious Leonin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99853d2e-2223-4c05-bbd7-0a746f8f810d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ingenious Leonin/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99894900-771f-4fca-bebf-9f23ec4654c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:minister-of-inquiries:f0t0:s1,f:xs:XP:minister-of-inquiries:f0t0:s1	-	-	-	d864b561c9cb	-	98970fa2a21f	-	-	2026-11-24	xproof
@@ -181,7 +181,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99eb5cda-684d-4f6c-bc34-1f03c8797150	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99ed6e18-7f14-4ea8-baee-ad6c081388ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:predatory-wurm:cast:s1,f:xs:XP:predatory-wurm:cast:s1	-	-	-	ae86f6029288	-	687322b619ae	-	-	2026-11-24	xproof
 99eff6e9-5911-4f89-bad1-0888067a7783	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99eff6e9-5911-4f89-bad1-0888067a7783	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+99eff6e9-5911-4f89-bad1-0888067a7783	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	2	0	x:xs:XP:dismissive-denial:cast:s1,f:xs:XP:dismissive-denial:cast:s1	-	-	-	8c0bd19283bb	-	a9e4beda8de8	-	-	2026-11-24	xproof
 99f2e195-5da5-4239-87e0-ed552643e7b5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:benalish-emissary:cast:s1,f:xs:XP:benalish-emissary:cast:s1	-	-	-	5f2128bf97e4	-	f394cd651900	-	-	2026-11-24	xproof
 99f2e195-5da5-4239-87e0-ed552643e7b5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:benalish-emissary:f0t0:s1,f:xs:XP:benalish-emissary:f0t0:s1	-	-	-	5f2128bf97e4	-	f394cd651900	-	-	2026-11-24	xproof
 99f4a22a-ba33-43f0-bc58-9df8388706cd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
