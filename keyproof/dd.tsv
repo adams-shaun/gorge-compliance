@@ -7,13 +7,13 @@ dd0412ee-6c14-4cfc-95d8-942a2392111a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 dd0412ee-6c14-4cfc-95d8-942a2392111a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd05fd8e-f25e-4b9e-b162-afea1b248282	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd05fd8e-f25e-4b9e-b162-afea1b248282	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dd0bbf91-1826-42c7-82af-6820646fa003	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dd0bbf91-1826-42c7-82af-6820646fa003	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dd0bbf91-1826-42c7-82af-6820646fa003	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spiderwig-boggart:f0t0:s1,f:xs:XP:spiderwig-boggart:f0t0:s1	-	-	-	d864b561c9cb	-	acd5722d58a9	-	-	2026-11-24	xproof
+dd0bbf91-1826-42c7-82af-6820646fa003	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spiderwig-boggart:f0t0:s1,f:xs:XP:spiderwig-boggart:f0t0:s1	-	-	-	d864b561c9cb	-	acd5722d58a9	-	-	2026-11-24	xproof
 dd0da475-55d0-462e-bfac-6eeb5d39a099	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd106f2d-5ede-43f0-928a-1ab392b90854	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moldervine-cloak:cast:s1,f:xs:XP:moldervine-cloak:cast:s1	-	-	-	64a08ba7d913	-	c4eac8f1f590	-	-	2026-11-24	xproof
 dd1a4219-437b-494f-ae0e-1d3181ffcd63	cast	counter-spell	agreed	-	X	scen	1	0	Wild Unraveling/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 dd1b4235-f053-4c46-8993-ae8d7860a0f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dd1b4235-f053-4c46-8993-ae8d7860a0f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dd1b4235-f053-4c46-8993-ae8d7860a0f3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 dd1d21f5-f5cd-43e4-8155-3cca85da80a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd1d21f5-f5cd-43e4-8155-3cca85da80a9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd21cbaa-7537-414b-b720-3c7d6fc7c93d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ dd7df06c-9434-46ce-893c-80081fbc2df7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:und
 dd7df06c-9434-46ce-893c-80081fbc2df7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:undead-leotau:f0a0:s1,f:xs:XP:undead-leotau:f0a0:s1	-	-	-	8a1b1a193ec0	-	60ba5f76a2bc	-	-	2026-11-24	xproof
 dd7df06c-9434-46ce-893c-80081fbc2df7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd840d84-bc4a-4420-b8ac-99093a5aa253	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dd840d84-bc4a-4420-b8ac-99093a5aa253	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dd840d84-bc4a-4420-b8ac-99093a5aa253	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 dd840d84-bc4a-4420-b8ac-99093a5aa253	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd84d291-cb7a-4f44-81cd-9f1181bb5ae5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd8538e6-cd5f-4a88-aff5-eb5e76ce8ddb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dreamroot Cascade/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

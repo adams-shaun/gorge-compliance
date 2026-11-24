@@ -116,8 +116,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 799664fc-279c-40c1-8e40-44a68c38801b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hazard of the Dunes/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 799664fc-279c-40c1-8e40-44a68c38801b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hazard of the Dunes/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 799f31fc-3b6f-419a-8e70-b41c8e97f000	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-799f31fc-3b6f-419a-8e70-b41c8e97f000	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-799f31fc-3b6f-419a-8e70-b41c8e97f000	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+799f31fc-3b6f-419a-8e70-b41c8e97f000	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:quicksilver-behemoth:f0t0:s1,f:xs:XP:quicksilver-behemoth:f0t0:s1	-	-	-	d864b561c9cb	-	ad39b0b0f03c	-	-	2026-11-24	xproof
+799f31fc-3b6f-419a-8e70-b41c8e97f000	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 79a1783f-ea7e-4cdf-95f5-53b383d38c66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79a1783f-ea7e-4cdf-95f5-53b383d38c66	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79a1783f-ea7e-4cdf-95f5-53b383d38c66	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,8 +165,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79d2efb2-145d-4377-a4e2-832ff2cb5677	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Exit Specialist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79d2efb2-145d-4377-a4e2-832ff2cb5677	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Exit Specialist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79d2efb2-145d-4377-a4e2-832ff2cb5677	static#0.0	static#0.0	agreed	-	X	scen	1	0	Exit Specialist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-79d34537-4633-4728-a1b3-5822119f0c84	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79d34537-4633-4728-a1b3-5822119f0c84	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+79d34537-4633-4728-a1b3-5822119f0c84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bonded-fetch:cast:s1,f:xs:XP:bonded-fetch:cast:s1	-	-	-	d864b561c9cb	-	0d02409f3633	-	-	2026-11-24	xproof
+79d34537-4633-4728-a1b3-5822119f0c84	f0/a0	Draw	agreed	-	FX	start	4	0	x:xs:XP:bonded-fetch:cast:s1,f:xs:XP:bonded-fetch:cast:s1	-	-	-	d864b561c9cb	-	0d02409f3633	-	-	2026-11-24	xproof
 79d46e09-2548-440f-9c02-3c3dc39a0cd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79d46e09-2548-440f-9c02-3c3dc39a0cd1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79d577a8-53c0-4220-bc0e-70764d72d5fd	cast	cast-resolve	agreed	-	FX	scen	2	0	A Killer Among Us/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -188,8 +188,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79f575b3-ebd7-4d6a-acb9-27c16bcc7a39	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 79f575b3-ebd7-4d6a-acb9-27c16bcc7a39	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 79f575b3-ebd7-4d6a-acb9-27c16bcc7a39	f0/t2	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-79f8378a-fb50-4178-be53-b6926bc1cba5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79f8378a-fb50-4178-be53-b6926bc1cba5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+79f8378a-fb50-4178-be53-b6926bc1cba5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merrow-witsniper:f0t0:s1,f:xs:XP:merrow-witsniper:f0t0:s1	-	-	-	d864b561c9cb	-	535550e84dc1	-	-	2026-11-24	xproof
+79f8378a-fb50-4178-be53-b6926bc1cba5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:merrow-witsniper:f0t0:s1,f:xs:XP:merrow-witsniper:f0t0:s1	-	-	-	d864b561c9cb	-	535550e84dc1	-	-	2026-11-24	xproof
 79f94050-d850-41ca-b1db-5ae0cf743f0a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Temple of Epiphany/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79f94050-d850-41ca-b1db-5ae0cf743f0a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Epiphany/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79f94050-d850-41ca-b1db-5ae0cf743f0a	land	play-land	agreed	-	X	scen	1	0	Temple of Epiphany/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

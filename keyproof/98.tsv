@@ -161,8 +161,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98bdb1e1-7550-47e8-aa06-f81802b257a0	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:gruul-keyrune:f0a1:s1,f:xs:XP:gruul-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	4dd700384049	-	-	2026-11-24	xproof
 98bf6311-bc9b-4bf8-ac83-c041973b86d0	cast	cast-resolve	agreed	-	X	scen	1	0	Self-Destruct/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98c059ed-d749-4f66-bda1-6352976198f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98c387bd-c9ba-464a-8380-839a5604a37f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98c387bd-c9ba-464a-8380-839a5604a37f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+98c387bd-c9ba-464a-8380-839a5604a37f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treefolk-harbinger:f0t0:s1,f:xs:XP:treefolk-harbinger:f0t0:s1	-	-	-	d864b561c9cb	-	5ecbd07a8fbc	-	-	2026-11-24	xproof
+98c387bd-c9ba-464a-8380-839a5604a37f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:treefolk-harbinger:f0t0:s1,f:xs:XP:treefolk-harbinger:f0t0:s1	-	-	-	d864b561c9cb	-	5ecbd07a8fbc	-	-	2026-11-24	xproof
 98c389ed-b960-42e2-9c76-a062f77c9a78	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98c389ed-b960-42e2-9c76-a062f77c9a78	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98c389ed-b960-42e2-9c76-a062f77c9a78	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -182,8 +182,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98d20908-6d68-4d31-b719-207f93c9b402	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Goblin-town/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98d20908-6d68-4d31-b719-207f93c9b402	land	play-land	agreed	-	X	scen	1	0	Goblin-town/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98d3d1f1-ac72-4b1e-87da-b4c1e4f03d08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98d3d1f1-ac72-4b1e-87da-b4c1e4f03d08	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98d3d1f1-ac72-4b1e-87da-b4c1e4f03d08	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+98d3d1f1-ac72-4b1e-87da-b4c1e4f03d08	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+98d3d1f1-ac72-4b1e-87da-b4c1e4f03d08	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 98d68954-bffe-460e-ab83-6a4bbb59cc13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kiku-night-s-flower:cast:s1,f:xs:XP:kiku-night-s-flower:cast:s1	-	-	-	25696bf19d5b	-	15335c28c181	-	-	2026-11-24	xproof
 98d68954-bffe-460e-ab83-6a4bbb59cc13	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/MIR.json:	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 98dd8231-5679-404a-b976-0bbfa6a8493c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

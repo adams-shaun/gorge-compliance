@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f0dc347-adac-428b-8f04-858799e91243	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f0dc347-adac-428b-8f04-858799e91243	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f15349a-6ac6-4091-95a3-ae9f593e4650	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f15349a-6ac6-4091-95a3-ae9f593e4650	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f15349a-6ac6-4091-95a3-ae9f593e4650	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3f166376-2739-411c-8f42-96f2ef28ef86	cast	cast-resolve	agreed	-	FX	scen	2	0	April O'Neil, Kunoichi Trainee/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f166376-2739-411c-8f42-96f2ef28ef86	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	April O'Neil, Kunoichi Trainee/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f166376-2739-411c-8f42-96f2ef28ef86	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	April O'Neil, Kunoichi Trainee/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f285781-ee03-4a58-a85e-a33f5efffc9d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f336198-2425-447a-88b4-9be21ef7e90a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f3439e1-75ce-482d-881f-836492dca6e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f3439e1-75ce-482d-881f-836492dca6e9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f3439e1-75ce-482d-881f-836492dca6e9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3f347ebf-e0d2-4ae0-ad84-df7a460404e0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f347ebf-e0d2-4ae0-ad84-df7a460404e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f347ebf-e0d2-4ae0-ad84-df7a460404e0	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f3b2c10-21f8-4e13-be83-4ef3fa36e123	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f404fe4-4335-4dcc-ba90-78246c4b880b	cast	cast-resolve	agreed	-	FX	scen	2	0	Elspeth's Smite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f4521b4-1efd-4592-a50d-5ee9918df177	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f4521b4-1efd-4592-a50d-5ee9918df177	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f4521b4-1efd-4592-a50d-5ee9918df177	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3f453aca-e14f-4460-9334-f0c3f4256a0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f487c8e-a923-4031-b0a7-04f778544fe0	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f487c8e-a923-4031-b0a7-04f778544fe0	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -129,7 +129,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f9a797b-85e7-474e-aefe-7e2ec08fc5b7	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f9ab49b-81fc-487e-8613-e30afcae164d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f9cf871-7df6-49d5-aab3-ad945571b707	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-3f9cf871-7df6-49d5-aab3-ad945571b707	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f9cf871-7df6-49d5-aab3-ad945571b707	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3f9e3b79-6ecb-4741-a9f4-fd7d3545d5cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fa11a6a-a760-45db-8341-f83a0f69c17f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	cast	cast-resolve	agreed	-	X	scen	1	0	Alacrian Armory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3fce53fb-6914-4f43-b46b-18ca32ab21b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fd23519-ef40-4c84-9407-2626d0c0d792	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fd23519-ef40-4c84-9407-2626d0c0d792	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3fd23519-ef40-4c84-9407-2626d0c0d792	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3fd23519-ef40-4c84-9407-2626d0c0d792	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3fd25479-b65c-48f7-bb74-95d49af65ac1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fd2651d-89fb-4bd1-af4a-f7eae7ef9fd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fdba8ee-6dfe-480d-b84a-43922229d9b4	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

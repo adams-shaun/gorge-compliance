@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4e694613-e2e1-4ae3-baa8-f372259e91cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e694613-e2e1-4ae3-baa8-f372259e91cf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e698713-6203-44f2-b438-1b26b951536d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4e6c71e8-aeaf-404e-84c2-c79f2a1cbe4b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4e6c71e8-aeaf-404e-84c2-c79f2a1cbe4b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-of-meadowgrain:cast:s1,f:xs:XP:knight-of-meadowgrain:cast:s1	-	-	-	d864b561c9cb	-	850eca073c7a	-	-	2026-11-24	xproof
 4e6e28f1-111b-4bac-b814-487f6c206485	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e6e28f1-111b-4bac-b814-487f6c206485	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e734493-9cb8-4409-8a30-cc15d519a27e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,4 +139,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ef6ec4a-bbd2-487f-98c2-c0e78aebb550	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ef6ec4a-bbd2-487f-98c2-c0e78aebb550	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4efa1654-c822-4477-ad24-f379ed7ecb11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emissary-of-despair:cast:s1,f:xs:XP:emissary-of-despair:cast:s1	-	-	-	25696bf19d5b	-	a9542a05e04b	-	-	2026-11-24	xproof
-4efa1654-c822-4477-ad24-f379ed7ecb11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4efa1654-c822-4477-ad24-f379ed7ecb11	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

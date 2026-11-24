@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1000d26e-7a29-48df-806f-9eb7d4e1082d	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 1000d26e-7a29-48df-806f-9eb7d4e1082d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bat-leth:f0t0:s1,f:xs:XP:bat-leth:f0t0:s1	-	-	-	25696bf19d5b	-	0f966a7814e0	-	-	2026-11-24	xproof
 10026343-a8cd-4a99-b4d9-ff7611f52052	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yukora-the-prisoner:cast:s1,f:xs:XP:yukora-the-prisoner:cast:s1	-	-	-	64a08ba7d913	-	24d11dff5144	-	-	2026-11-24	xproof
-10026343-a8cd-4a99-b4d9-ff7611f52052	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+10026343-a8cd-4a99-b4d9-ff7611f52052	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 10039992-d51a-47e7-9a70-02fe2227c163	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mysidian-elder:f0t0:s2,f:xs:XP:mysidian-elder:f0t0:s2	-	-	-	267e485f6204	-	68ae5972a58d	-	-	2026-11-24	xproof
 10039992-d51a-47e7-9a70-02fe2227c163	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mysidian-elder:f0t0:s2,f:xs:XP:mysidian-elder:f0t0:s2	-	-	-	267e485f6204	-	68ae5972a58d	-	-	2026-11-24	xproof
 1005bc16-8a6a-476a-a647-4ed40d2e96de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -26,8 +26,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 101a5c2d-b0b4-45a7-b236-df474ac47356	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 101b2387-58a1-4ef9-8395-0024713e217b	cast	cast-resolve	agreed	-	FX	scen	2	0	Test of Courage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 102356a9-0de5-4034-b121-034da5deb4f2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10277cc5-f53b-4b33-bd68-edb0534a2040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10277cc5-f53b-4b33-bd68-edb0534a2040	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+10277cc5-f53b-4b33-bd68-edb0534a2040	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mournwhelk:f0t0:s1,f:xs:XP:mournwhelk:f0t0:s1	-	-	-	d864b561c9cb	-	389e8a32c5ff	-	-	2026-11-24	xproof
+10277cc5-f53b-4b33-bd68-edb0534a2040	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mournwhelk:f0t0:s1,f:xs:XP:mournwhelk:f0t0:s1	-	-	-	d864b561c9cb	-	389e8a32c5ff	-	-	2026-11-24	xproof
 102b0a65-f2e0-4ef3-a9dc-4a85557b852e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 102b0a65-f2e0-4ef3-a9dc-4a85557b852e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 102bbedf-9f84-433a-bd01-e1a4c05fbedb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

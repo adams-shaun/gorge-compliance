@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b7ac3e8-0a7d-4b8a-a6a6-4cacc9b4f9de	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 2b7c4dab-e432-4b34-b058-3cec5c0d72df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b80faaf-92fd-4fa0-a3f6-8bb263e7ff1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akroma-angel-of-fury:cast:s1,f:xs:XP:akroma-angel-of-fury:cast:s1	-	-	-	9ee19e8250ce	-	2942aa8564df	-	-	2026-11-24	xproof
-2b80faaf-92fd-4fa0-a3f6-8bb263e7ff1d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2b80faaf-92fd-4fa0-a3f6-8bb263e7ff1d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:akroma-angel-of-fury:f0a0:s1,f:xs:XP:akroma-angel-of-fury:f0a0:s1	-	-	-	d864b561c9cb	-	2942aa8564df	-	-	2026-11-24	xproof
 2b8144a0-08d2-4c28-9fd7-5d90f90105e4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bleachbone Verge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2b8144a0-08d2-4c28-9fd7-5d90f90105e4	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Bleachbone Verge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2b8144a0-08d2-4c28-9fd7-5d90f90105e4	land	play-land	agreed	-	X	scen	1	0	Bleachbone Verge/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2baf2ee6-e290-4a2b-89a0-0e725edde06d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2bb0a5e3-ccb0-4f87-b021-e60ebfa35b2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:courier-griffin:f0t0:s1,f:xs:XP:courier-griffin:f0t0:s1	-	-	-	d864b561c9cb	-	97bd0caa12c8	-	-	2026-11-24	xproof
 2bb0a5e3-ccb0-4f87-b021-e60ebfa35b2b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:courier-griffin:f0t0:s1,f:xs:XP:courier-griffin:f0t0:s1	-	-	-	d864b561c9cb	-	97bd0caa12c8	-	-	2026-11-24	xproof
-2bb2eda7-3b38-4c56-870f-c3218a1056f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2bb2eda7-3b38-4c56-870f-c3218a1056f5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2bb2eda7-3b38-4c56-870f-c3218a1056f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:snapcaster-mage:f0t0:s1,f:xs:XP:snapcaster-mage:f0t0:s1	-	-	-	d864b561c9cb	-	baeaa65d543e	-	-	2026-11-24	xproof
+2bb2eda7-3b38-4c56-870f-c3218a1056f5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:snapcaster-mage:f0t0:s1,f:xs:XP:snapcaster-mage:f0t0:s1	-	-	-	d864b561c9cb	-	baeaa65d543e	-	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	cast	cast-resolve	agreed	-	X	scen	1	0	Koh, the Face Stealer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Koh, the Face Stealer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

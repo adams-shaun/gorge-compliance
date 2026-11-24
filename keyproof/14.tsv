@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 149887fa-6b2d-495e-b3e0-b2ac7d3dc838	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 149887fa-6b2d-495e-b3e0-b2ac7d3dc838	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14a21d8a-2097-4150-8af5-8c155049477a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14a21d8a-2097-4150-8af5-8c155049477a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+14a21d8a-2097-4150-8af5-8c155049477a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 14a555eb-9720-45b4-9eb5-77b739e1045c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14a555eb-9720-45b4-9eb5-77b739e1045c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14aefe99-fb60-4f1c-a71f-7ffbe94c8b13	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rune-scarred-demon:f0t0:s2,f:xs:XP:rune-scarred-demon:f0t0:s2	-	-	-	e07cf3a05ba5	-	d45b3c4c7e99	-	-	2026-11-24	xproof
@@ -128,8 +128,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14bc2a2e-a445-4785-9c88-b9ad169c39bc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14bc9e20-a6ad-4eca-8c5c-5459ce078d9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14bc9e20-a6ad-4eca-8c5c-5459ce078d9a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14bee98b-6dd8-48f3-8043-06f03cc93aa7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14bee98b-6dd8-48f3-8043-06f03cc93aa7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+14bee98b-6dd8-48f3-8043-06f03cc93aa7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	94857cfacb2a	-	-	2026-11-24	xproof
+14bee98b-6dd8-48f3-8043-06f03cc93aa7	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	94857cfacb2a	-	-	2026-11-24	xproof
 14bf3049-faa3-4c1f-a613-603e977a50a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stitcher-s-apprentice:cast:s1,f:xs:XP:stitcher-s-apprentice:cast:s1	-	-	-	d864b561c9cb	-	3013b74030cf	-	-	2026-11-24	xproof
 14bf3049-faa3-4c1f-a613-603e977a50a4	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:stitcher-s-apprentice:f0a0:s1,f:xs:XP:stitcher-s-apprentice:f0a0:s1	-	-	-	d864b561c9cb	-	3013b74030cf	-	-	2026-11-24	xproof
 14c1adf8-950b-4f64-9c84-956a623448f4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

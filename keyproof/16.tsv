@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stomping Ground/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Stomping Ground/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	land	play-land	agreed	-	X	scen	1	0	Stomping Ground/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-16069935-4aeb-481f-98f2-46387775540f	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:noggle-hedge-mage:cast:s1,f:xs:XP:noggle-hedge-mage:cast:s1	-	-	-	8a1b1a193ec0	-	f34be77cea62	-	-	2026-11-24	xproof
+16069935-4aeb-481f-98f2-46387775540f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:noggle-hedge-mage:f0t0:s1,f:xs:XP:noggle-hedge-mage:f0t0:s1	-	-	-	d864b561c9cb	-	f34be77cea62	-	-	2026-11-24	xproof
 16069935-4aeb-481f-98f2-46387775540f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16069935-4aeb-481f-98f2-46387775540f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16128b90-9b81-476e-8999-3ef498728c39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 161b6d06-e6a7-488e-9f9c-d266c1402a3a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mystic-snake:f0t0:s1,f:xs:XP:mystic-snake:f0t0:s1	-	-	-	25696bf19d5b	-	593961bd03e6	-	-	2026-11-24	xproof
 161b6d06-e6a7-488e-9f9c-d266c1402a3a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mystic-snake:f0t0:s1,f:xs:XP:mystic-snake:f0t0:s1	-	-	-	25696bf19d5b	-	593961bd03e6	-	-	2026-11-24	xproof
 161ebbc8-b8f9-4ac4-80f3-e290070a1e30	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grimclaw-bats:cast:s1,f:xs:XP:grimclaw-bats:cast:s1	-	-	-	25696bf19d5b	-	c634db870e77	-	-	2026-11-24	xproof
-161ebbc8-b8f9-4ac4-80f3-e290070a1e30	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+161ebbc8-b8f9-4ac4-80f3-e290070a1e30	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:grimclaw-bats:f0a0:s1,f:xs:XP:grimclaw-bats:f0a0:s1	-	-	-	d864b561c9cb	-	c634db870e77	-	-	2026-11-24	xproof
 161ff063-b784-43c7-b608-f78be3daa5b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 161ff063-b784-43c7-b608-f78be3daa5b2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16201410-86e9-40a7-88a6-c6c2fb2ea6bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -41,8 +41,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16345f75-f33e-4a31-adb1-d3563358fcec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16345f75-f33e-4a31-adb1-d3563358fcec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1636c4d2-f699-4af7-8508-dbce2f0b7b52	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1636c4d2-f699-4af7-8508-dbce2f0b7b52	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1636c4d2-f699-4af7-8508-dbce2f0b7b52	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1636c4d2-f699-4af7-8508-dbce2f0b7b52	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1636c4d2-f699-4af7-8508-dbce2f0b7b52	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 163baf58-b35d-4f2b-aa53-8384b8b5800a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 163baf58-b35d-4f2b-aa53-8384b8b5800a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 163e5482-700c-4d91-b70c-9170cc8f1ad2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -192,8 +192,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16f9368a-5da5-4397-a127-c96cdd115b7b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f9368a-5da5-4397-a127-c96cdd115b7b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f93781-6740-40c7-a727-7911beac4e74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16fb84e1-0bc7-469c-bd73-40747be56d9e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16fb84e1-0bc7-469c-bd73-40747be56d9e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16fb84e1-0bc7-469c-bd73-40747be56d9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-handservant:cast:s1,f:xs:XP:elvish-handservant:cast:s1	-	-	-	d864b561c9cb	-	1c9be972253b	-	-	2026-11-24	xproof
+16fb84e1-0bc7-469c-bd73-40747be56d9e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 16fe0abe-04fa-4023-8ee0-043a076e78bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16fe1f04-9bbf-43a3-ab14-395fdf4a3a43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16fe1f04-9bbf-43a3-ab14-395fdf4a3a43	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof

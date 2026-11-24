@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d09b136-525f-49dd-a3a2-dfaca4e8e9a8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d09b136-525f-49dd-a3a2-dfaca4e8e9a8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:looming-spires:f0t0:s1,f:xs:XP:looming-spires:f0t0:s1	-	-	-	d864b561c9cb	-	66583ab7439f	-	-	2026-11-24	xproof
 7d09b136-525f-49dd-a3a2-dfaca4e8e9a8	land	land	agreed	-	FX	start	2	0	x:xs:XP:looming-spires:f0t0:s1,f:xs:XP:looming-spires:f0t0:s1	-	-	-	d864b561c9cb	-	66583ab7439f	-	-	2026-11-24	xproof
-7d0efc64-151f-45b4-8c0b-c32609f9d862	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-white-orchid:f0t0:s1,f:xs:XP:knight-of-the-white-orchid:f0t0:s1	-	-	-	8a1b1a193ec0	-	14489267d810	-	-	2026-11-24	xproof
+7d0efc64-151f-45b4-8c0b-c32609f9d862	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-white-orchid:f0t0:s1,f:xs:XP:knight-of-the-white-orchid:f0t0:s1	-	-	-	d864b561c9cb	-	14489267d810	-	-	2026-11-24	xproof
 7d0efc64-151f-45b4-8c0b-c32609f9d862	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d10ad59-e90d-4726-bd55-5680d7c21638	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d178f1c-faf7-4efd-87a6-201a40c55ec8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d5e734f-3efc-4124-b1d8-4fe3e9d3db28	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d5e734f-3efc-4124-b1d8-4fe3e9d3db28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d61dd63-7c39-4d43-ba8e-a4e1b98c2192	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7d61dd63-7c39-4d43-ba8e-a4e1b98c2192	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7d61dd63-7c39-4d43-ba8e-a4e1b98c2192	f0/a0	FlipCoin	agreed	-	FX	start	1	0	x:xs:XP:goblin-archaeologist:f0a0:s1,f:xs:XP:goblin-archaeologist:f0a0:s1	-	-	-	d864b561c9cb	-	31bd6d106556	-	-	2026-11-24	xproof
 7d6641e7-4d14-4a06-b588-0c752af529bd	cast	cast-resolve	agreed	-	X	scen	1	0	Shatterwing Pegasus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d6641e7-4d14-4a06-b588-0c752af529bd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shatterwing Pegasus/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d6641e7-4d14-4a06-b588-0c752af529bd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shatterwing Pegasus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ddf9c12-8f75-481c-a218-d42f925c6503	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7de034a4-a42a-4e60-9ec9-5e9bb9987cfa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7de04284-dcaa-4b63-a734-fcfe2698f83c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7de04284-dcaa-4b63-a734-fcfe2698f83c	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7de04284-dcaa-4b63-a734-fcfe2698f83c	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7de464e3-fae3-44cc-8233-776fc727c00a	cast	cast-resolve	agreed	-	FX	scen	2	0	Dazzling Angel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7de464e3-fae3-44cc-8233-776fc727c00a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dazzling Angel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7de464e3-fae3-44cc-8233-776fc727c00a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dazzling Angel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

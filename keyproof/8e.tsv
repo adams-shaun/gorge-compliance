@@ -30,8 +30,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e22495d-a921-4c91-ada3-79098851e5d4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e22bf51-1b1b-459b-af78-91188b6e3f09	cast	cast-resolve	agreed	-	X	scen	1	0	Jolly Gerbils/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8e22bf51-1b1b-459b-af78-91188b6e3f09	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jolly Gerbils/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8e25e4f5-5676-480f-a52b-43ebb6f31537	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e25e4f5-5676-480f-a52b-43ebb6f31537	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8e25e4f5-5676-480f-a52b-43ebb6f31537	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:timbermare:f0t0:s1,f:xs:XP:timbermare:f0t0:s1	-	-	-	d864b561c9cb	-	2b7d4d5966fd	-	-	2026-11-24	xproof
+8e25e4f5-5676-480f-a52b-43ebb6f31537	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:timbermare:f0t0:s1,f:xs:XP:timbermare:f0t0:s1	-	-	-	d864b561c9cb	-	2b7d4d5966fd	-	-	2026-11-24	xproof
 8e25e4f5-5676-480f-a52b-43ebb6f31537	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e2b5f90-e405-4b24-a71a-0988c37cf67a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e2b5f90-e405-4b24-a71a-0988c37cf67a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e2fbc26-5373-4fd7-8e9e-41af5bb9ff18	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8e34f487-aa75-4afb-af75-3349de456c79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e353b5f-0692-430e-9558-59818275b13b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e353b5f-0692-430e-9558-59818275b13b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8e353b5f-0692-430e-9558-59818275b13b	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:ringskipper:f0t0:s1	-	-	-	d864b561c9cb	-	318d86cd0bb0	-	-	2026-11-24	xproof
 8e3c2f44-c4ca-4555-80c6-316e62c338dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cinderbones:cast:s1,f:xs:XP:cinderbones:cast:s1	-	-	-	8a1b1a193ec0	-	3f1349936ffd	-	-	2026-11-24	xproof
 8e3c2f44-c4ca-4555-80c6-316e62c338dd	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:cinderbones:f0a0:s1,f:xs:XP:cinderbones:f0a0:s1	-	-	-	8a1b1a193ec0	-	3f1349936ffd	-	-	2026-11-24	xproof
 8e3e5264-d472-41ce-ad65-a53f8b24fc40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,8 +161,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8eca999e-f7f8-4354-b419-2df4249c4361	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ecbbf14-68c3-4378-9fce-383f9d901bfa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ecbc87e-a63e-4afc-b5eb-2fc3dcd685f5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:grozoth:cast:s1,f:xs:XP:grozoth:cast:s1	-	-	-	64a08ba7d913	-	b2dfb44024f5	-	-	2026-11-24	xproof
-8ecbc87e-a63e-4afc-b5eb-2fc3dcd685f5	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ecbc87e-a63e-4afc-b5eb-2fc3dcd685f5	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ecbc87e-a63e-4afc-b5eb-2fc3dcd685f5	f0/a0	Debuff	agreed	-	FX	start	2	0	x:xs:XP:grozoth:f0a0:s1,f:xs:XP:grozoth:f0a0:s1	-	-	-	d864b561c9cb	-	b2dfb44024f5	-	-	2026-11-24	xproof
+8ecbc87e-a63e-4afc-b5eb-2fc3dcd685f5	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8ecbc87e-a63e-4afc-b5eb-2fc3dcd685f5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grozoth:cast:s1,f:xs:XP:grozoth:cast:s1	-	-	-	64a08ba7d913	-	b2dfb44024f5	-	-	2026-11-24	xproof
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:nurturing-pixie:f0t0:s2,f:xs:XP:nurturing-pixie:f0t0:s2	-	-	-	267e485f6204	-	f1a203d4f380	-	-	2026-11-24	xproof
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nurturing Pixie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

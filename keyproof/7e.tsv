@@ -67,9 +67,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e497f6b-69e1-4fab-bb04-f687c99a8310	static#0.0	static#0.0	agreed	-	X	scen	1	0	Skyknight Squire/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e4d1ce3-92f0-4acc-962b-8073d41d3673	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e4d1ce3-92f0-4acc-962b-8073d41d3673	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e523d42-c7d8-47d1-8874-230920f03345	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e523d42-c7d8-47d1-8874-230920f03345	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e523d42-c7d8-47d1-8874-230920f03345	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7e523d42-c7d8-47d1-8874-230920f03345	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:hearthcage-giant:cast:s1,f:xs:XP:hearthcage-giant:cast:s1	-	-	-	d864b561c9cb	-	ebc47e6a0458	-	-	2026-11-24	xproof
+7e523d42-c7d8-47d1-8874-230920f03345	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:hearthcage-giant:cast:s1,f:xs:XP:hearthcage-giant:cast:s1	-	-	-	d864b561c9cb	-	ebc47e6a0458	-	-	2026-11-24	xproof
+7e523d42-c7d8-47d1-8874-230920f03345	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:hearthcage-giant:cast:s1,f:xs:XP:hearthcage-giant:cast:s1	-	-	-	d864b561c9cb	-	ebc47e6a0458	-	-	2026-11-24	xproof
 7e52e91b-70e6-4f26-a5d4-b8e33d1debbf	cast	cast-resolve	agreed	-	FX	scen	2	0	Pathbreaker Ibex/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7e52e91b-70e6-4f26-a5d4-b8e33d1debbf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pathbreaker Ibex/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7e52f151-d1f6-4fcb-9b21-1baecae27da6	cast	cast-resolve	agreed	-	FX	scen	2	0	Loyal Tutor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -96,7 +96,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e6cfec7-3b54-43db-853a-27c164776a5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e6cfec7-3b54-43db-853a-27c164776a5f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e6e2c37-3a06-456a-ae0f-37b7dc1a3e2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e6e2c37-3a06-456a-ae0f-37b7dc1a3e2b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7e6e2c37-3a06-456a-ae0f-37b7dc1a3e2b	f0/t0	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-stinger:f0t0:s1,f:xs:XP:arcbound-stinger:f0t0:s1	-	-	-	d864b561c9cb	-	7f2afc2f3e3a	-	-	2026-11-24	xproof
 7e6fcbc0-691a-4bd7-b063-debc86f4506a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hold-the-gates:cast:s1,f:xs:XP:hold-the-gates:cast:s1	-	-	-	d864b561c9cb	-	7db2fd36b7d9	-	-	2026-11-24	xproof
 7e6fd429-f925-4ff7-9c6e-34c2c9d15d04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e6fd429-f925-4ff7-9c6e-34c2c9d15d04	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ef5c812-ad7d-4d6c-8ee5-68561e7e4bd7	cast	cast-resolve	agreed	-	X	scen	1	0	Saved by the Shell/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ef5c812-ad7d-4d6c-8ee5-68561e7e4bd7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Saved by the Shell/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ef67bae-4af3-47b9-95d2-08f3c5a0b39d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ef67bae-4af3-47b9-95d2-08f3c5a0b39d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ef67bae-4af3-47b9-95d2-08f3c5a0b39d	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7ef6ca6e-a8b8-4ea6-b13d-a08eb847c12d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ef7d902-1f05-40b3-8997-dec197b0b678	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Verse/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ef7d902-1f05-40b3-8997-dec197b0b678	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spider-Verse/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

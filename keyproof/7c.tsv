@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c07970d-063a-44a1-9761-b80aafa90dac	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stark Industries Executive/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7c0e4731-d384-4f63-a36c-b571d8f79922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c0e4731-d384-4f63-a36c-b571d8f79922	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7c0e4731-d384-4f63-a36c-b571d8f79922	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7c0e4731-d384-4f63-a36c-b571d8f79922	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7c0ef3b7-b368-4a5b-8cbe-bf1f47610f74	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c158405-d3ef-4c10-a504-7b061ef71a74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c158405-d3ef-4c10-a504-7b061ef71a74	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -136,10 +136,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7cb29569-48e1-4782-9906-fad155ebfafe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7cb29569-48e1-4782-9906-fad155ebfafe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7cb47a7e-fe60-45a2-9c07-bd5c6ddca82d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7cb9e29f-835f-4155-a2a5-4b778866c773	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7cb9e29f-835f-4155-a2a5-4b778866c773	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7cb9e29f-835f-4155-a2a5-4b778866c773	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7cb9e29f-835f-4155-a2a5-4b778866c773	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7cb9e29f-835f-4155-a2a5-4b778866c773	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:mosswort-bridge:f0a0:s1,f:xs:XP:mosswort-bridge:f0a0:s1	-	-	-	d864b561c9cb	-	7795ff6b1d7a	-	-	2026-11-24	xproof
+7cb9e29f-835f-4155-a2a5-4b778866c773	f0/a1	Play	agreed	-	FX	start	2	0	x:xs:XP:mosswort-bridge:f0a1:s1,f:xs:XP:mosswort-bridge:f0a1:s1	-	-	-	d864b561c9cb	-	7795ff6b1d7a	-	-	2026-11-24	xproof
+7cb9e29f-835f-4155-a2a5-4b778866c773	f0/t0	ChangesZone/Hideaway	agreed	-	FX	start	2	0	x:xs:XP:mosswort-bridge:f0t0:s1,f:xs:XP:mosswort-bridge:f0t0:s1	-	-	-	d864b561c9cb	-	7795ff6b1d7a	-	-	2026-11-24	xproof
+7cb9e29f-835f-4155-a2a5-4b778866c773	land	land	agreed	-	FX	start	2	0	x:xs:XP:mosswort-bridge:f0t0:s1,f:xs:XP:mosswort-bridge:f0t0:s1	-	-	-	d864b561c9cb	-	7795ff6b1d7a	-	-	2026-11-24	xproof
 7cbe863a-6654-4f54-b4ec-e1040e830174	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7cc4a635-8730-4018-a8fd-b29fb5479928	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7cc4a635-8730-4018-a8fd-b29fb5479928	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

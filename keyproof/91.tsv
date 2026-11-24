@@ -105,13 +105,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 917652c7-ac12-4cd7-ab2d-f2260a620d02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91770dc7-3de3-458f-a240-6540455fe05f	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91770dc7-3de3-458f-a240-6540455fe05f	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:d-avenant-healer:f0a0:s1,f:xs:XP:d-avenant-healer:f0a0:s1	-	-	-	d864b561c9cb	-	9ad6fedef5b2	-	-	2026-11-24	xproof
 9178253e-0d89-450d-a93b-ed4765e945db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 917aef2b-0e6d-460e-8745-8da8423d1592	cast	cast-resolve	agreed	-	X	scen	1	0	Riverwheel Sweep/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9180f77f-c288-4a24-a35d-a16270b3d737	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9180f77f-c288-4a24-a35d-a16270b3d737	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91818ad0-b22a-423c-bed6-a285f2f8c9d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91818ad0-b22a-423c-bed6-a285f2f8c9d4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91818ad0-b22a-423c-bed6-a285f2f8c9d4	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9188031e-1c24-4981-a3d2-461a2bf917b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9188031e-1c24-4981-a3d2-461a2bf917b6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9188031e-1c24-4981-a3d2-461a2bf917b6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91e6fb47-59e4-4616-b8dd-3a7e30070074	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e71279-c9d2-4873-916a-59da03a65741	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e71279-c9d2-4873-916a-59da03a65741	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91ebedb5-cb5f-4c58-ad30-6c6b0a106aa0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91ebedb5-cb5f-4c58-ad30-6c6b0a106aa0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frogtosser-banneret:cast:s1,f:xs:XP:frogtosser-banneret:cast:s1	-	-	-	d864b561c9cb	-	26cac847c7d9	-	-	2026-11-24	xproof
 91edef61-2487-405c-a3ec-67a814dfeff2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91edef61-2487-405c-a3ec-67a814dfeff2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91f36a03-6031-4834-98ee-20b36cdf5569	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

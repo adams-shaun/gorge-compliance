@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 b6021700-992a-4faa-8f83-a9af03dc7296	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6021700-992a-4faa-8f83-a9af03dc7296	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6021700-992a-4faa-8f83-a9af03dc7296	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b6021700-992a-4faa-8f83-a9af03dc7296	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b6021700-992a-4faa-8f83-a9af03dc7296	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b608288e-1755-4738-b828-9df6998bae8d	cast	cast-resolve	agreed	-	X	scen	1	0	Illusion Spinners/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b608288e-1755-4738-b828-9df6998bae8d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Illusion Spinners/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b608288e-1755-4738-b828-9df6998bae8d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Illusion Spinners/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -63,7 +63,7 @@ b677a73c-f179-46bf-83ee-c2b05f9fca67	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The S
 b67db32b-30a9-49d2-b4c2-90a9f80c36eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b67db32b-30a9-49d2-b4c2-90a9f80c36eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6801429-3995-4571-92f9-ef211675c5d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6801429-3995-4571-92f9-ef211675c5d5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b6801429-3995-4571-92f9-ef211675c5d5	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:preeminent-captain:f0t0:s1,f:xs:XP:preeminent-captain:f0t0:s1	-	-	-	d864b561c9cb	-	467ad48d513d	-	-	2026-11-24	xproof
 b6811c31-fcd3-4d00-89d5-cf974575a87c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6811c31-fcd3-4d00-89d5-cf974575a87c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6811c31-fcd3-4d00-89d5-cf974575a87c	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -174,8 +174,8 @@ b6ea0c70-022a-43e4-aa40-3dc6a8b3b21e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 b6eb56a7-4dfe-4d51-a1df-55f892c1b014	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6ec5a5c-144d-4ac3-bd05-2dc360c670fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6ec5a5c-144d-4ac3-bd05-2dc360c670fd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6f2bec3-cbff-40a5-a2ed-ec078f9fabf5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6f2bec3-cbff-40a5-a2ed-ec078f9fabf5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b6f2bec3-cbff-40a5-a2ed-ec078f9fabf5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flamekin-spitfire:cast:s1,f:xs:XP:flamekin-spitfire:cast:s1	-	-	-	d864b561c9cb	-	d4d71b359c18	-	-	2026-11-24	xproof
+b6f2bec3-cbff-40a5-a2ed-ec078f9fabf5	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:flamekin-spitfire:f0a0:s1,f:xs:XP:flamekin-spitfire:f0a0:s1	-	-	-	d864b561c9cb	-	d4d71b359c18	-	-	2026-11-24	xproof
 b6f4b524-1081-4263-b7e4-9aee93131b31	cast	cast-resolve	agreed	-	X	scen	1	0	Ultros, Obnoxious Octopus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6f4b524-1081-4263-b7e4-9aee93131b31	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ultros, Obnoxious Octopus/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6f4b524-1081-4263-b7e4-9aee93131b31	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ultros, Obnoxious Octopus/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

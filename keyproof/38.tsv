@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 384611fb-aca2-4e2d-9125-44ea034de08b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38462d26-f252-4055-9f1a-59bc3ab2c75e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38503d34-f4f9-4eeb-9b1e-4fec1df921b3	cast	cast-resolve	agreed	-	X	scen	1	0	An Unexpected Party/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 386c5895-9713-4c28-9ba8-8ca0caa06c13	static#0.1	static#0.1	agreed	-	X	scen	1	0	Gate Colossus/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 386faeef-f5cc-4ef9-b8cb-6ef06b33cbd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:righteous-authority:cast:s1,f:xs:XP:righteous-authority:cast:s1	-	-	-	d864b561c9cb	-	73b012cf8628	-	-	2026-11-24	xproof
 386faeef-f5cc-4ef9-b8cb-6ef06b33cbd0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-3871cad2-e793-4c41-ac79-f84cbc2634a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nantuko-shaman:f0t0:s1,f:xs:XP:nantuko-shaman:f0t0:s1	-	-	-	9ee19e8250ce	-	d4d8f32180b2	-	-	2026-11-24	xproof
+3871cad2-e793-4c41-ac79-f84cbc2634a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nantuko-shaman:f0t0:s1,f:xs:XP:nantuko-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	d4d8f32180b2	-	-	2026-11-24	xproof
 3871cad2-e793-4c41-ac79-f84cbc2634a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3875aef0-3102-4fbf-be90-e4139f7a2348	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 387b12b1-d8f5-487b-972f-5303b23eed5a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	553f18ed81ec	-	-	2026-11-24	xproof
@@ -127,7 +127,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38a2ded4-77c5-4d2b-b411-7dca8108aa02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:razorfin-abolisher:cast:s1,f:xs:XP:razorfin-abolisher:cast:s1	-	-	-	8a1b1a193ec0	-	01db09b10a27	-	-	2026-11-24	xproof
 38a2ded4-77c5-4d2b-b411-7dca8108aa02	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:razorfin-abolisher:f0a0:s1,f:xs:XP:razorfin-abolisher:f0a0:s1	-	-	-	8a1b1a193ec0	-	01db09b10a27	-	-	2026-11-24	xproof
 38a2ef3e-3311-4e0a-807d-e5ccdd05af49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38a2ef3e-3311-4e0a-807d-e5ccdd05af49	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38a2ef3e-3311-4e0a-807d-e5ccdd05af49	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 38a55562-1e2d-4240-9454-219a4a25d38d	cast	cast-resolve	agreed	-	X	scen	1	0	Lord Windgrace/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 38a55562-1e2d-4240-9454-219a4a25d38d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lord Windgrace/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 38a55562-1e2d-4240-9454-219a4a25d38d	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Lord Windgrace/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

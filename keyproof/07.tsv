@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0715e860-3b3b-4331-9718-207973e94fee	cast	cast-resolve	agreed	-	X	scen	1	0	Tatyova, Benthic Druid/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0715e860-3b3b-4331-9718-207973e94fee	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tatyova, Benthic Druid/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 071733a2-6dc6-4b6e-8ed6-a130d14657fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-071e15b5-6d21-4695-9ad0-69f40eb8f4ef	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+071e15b5-6d21-4695-9ad0-69f40eb8f4ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sporoloth-ancient:cast:s1,f:xs:XP:sporoloth-ancient:cast:s1	-	-	-	d864b561c9cb	-	7f7591dc71c7	-	-	2026-11-24	xproof
 071e15b5-6d21-4695-9ad0-69f40eb8f4ef	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 072288da-5ba0-4176-b0e6-b3e43ecab2ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 07237694-b5d5-4c92-a429-55e343b8dd1c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:yoked-plowbeast:cast:s1,f:xs:XP:yoked-plowbeast:cast:s1	-	-	-	8a1b1a193ec0	-	62169948593e	-	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0790c8bd-a094-49b5-8843-e8b02cba145b	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 07947d01-ebb1-46b7-9bdd-ea00e034805b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-elemental:f0t0:s1,f:xs:XP:war-elemental:f0t0:s1	-	-	-	25696bf19d5b	-	04d069420c7d	-	-	2026-11-24	xproof
 07947d01-ebb1-46b7-9bdd-ea00e034805b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:war-elemental:f0t0:s1,f:xs:XP:war-elemental:f0t0:s1	-	-	-	25696bf19d5b	-	04d069420c7d	-	-	2026-11-24	xproof
-07947d01-ebb1-46b7-9bdd-ea00e034805b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+07947d01-ebb1-46b7-9bdd-ea00e034805b	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0798eb13-83f1-4b7c-b537-83a9da2915a6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0798eb13-83f1-4b7c-b537-83a9da2915a6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0798eb13-83f1-4b7c-b537-83a9da2915a6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

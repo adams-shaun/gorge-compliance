@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 021d654e-b731-40d0-a18e-eaff43f9fdb9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 021d8596-782a-4cfd-8b70-ac5bb8a5aff1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:saltcrusted-steppe:land:s1,f:xs:XP:saltcrusted-steppe:land:s1	-	-	-	9ee19e8250ce	-	6fd57b586dd6	-	-	2026-11-24	xproof
-021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:saltcrusted-steppe:f0a1:s1,f:xs:XP:saltcrusted-steppe:f0a1:s1	-	-	-	d864b561c9cb	-	6fd57b586dd6	-	-	2026-11-24	xproof
 021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	land	land	agreed	-	FX	start	2	0	x:xs:XP:saltcrusted-steppe:land:s1,f:xs:XP:saltcrusted-steppe:land:s1	-	-	-	9ee19e8250ce	-	6fd57b586dd6	-	-	2026-11-24	xproof
 0222414f-98b5-458a-a0fd-831a66cd8b07	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02a8b849-e708-427c-92fe-9a41bb0ec7fe	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Friendly Teddy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 02a95ea7-cfb9-497c-a004-3e783856d79c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02abe85a-c603-4963-aba4-524cc80847ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02abe85a-c603-4963-aba4-524cc80847ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02abe85a-c603-4963-aba4-524cc80847ea	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:order-of-the-golden-cricket:f0t0:s1,f:xs:XP:order-of-the-golden-cricket:f0t0:s1	-	-	-	d864b561c9cb	-	58a80fdc1b2b	-	-	2026-11-24	xproof
 02af53c1-83e6-447f-908b-2757c8aa445c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02b41d0e-82e7-4307-8cc4-8175ff78ea1f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-fire-and-ashes:f0t0:s1,f:xs:XP:kiora-of-fire-and-ashes:f0t0:s1	-	-	-	25696bf19d5b	-	44efad077510	-	-	2026-11-24	xproof
 02b41d0e-82e7-4307-8cc4-8175ff78ea1f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kiora of Fire and Ashes/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02f062f5-8012-4440-ac12-49fc49822106	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02f16726-f2f6-4943-b71a-93f8e26251d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02f16726-f2f6-4943-b71a-93f8e26251d3	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02f35851-c1be-4162-a6f8-7897325555a7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02f35851-c1be-4162-a6f8-7897325555a7	cast	cast	agreed	-	F	start	2	0	f:xs:XP:research-the-deep:cast:s1	-	-	-	d864b561c9cb	-	4c2b68904e54	-	-	2026-11-24	xproof
 02f3b9c3-f611-4f05-ab3e-b296916efdad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02f3b9c3-f611-4f05-ab3e-b296916efdad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02f3b9c3-f611-4f05-ab3e-b296916efdad	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -204,9 +204,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02f46271-c90d-4318-9004-74e7bee64a89	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02f46271-c90d-4318-9004-74e7bee64a89	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02f5ceb4-8b9c-4107-972b-6eec365c4a6c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02f8ec49-f490-408b-a76e-58e160a5a5a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02f8ec49-f490-408b-a76e-58e160a5a5a7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02f8ec49-f490-408b-a76e-58e160a5a5a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02f8ec49-f490-408b-a76e-58e160a5a5a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marsh-flitter:f0t0:s1,f:xs:XP:marsh-flitter:f0t0:s1	-	-	-	d864b561c9cb	-	575f09ccf7c6	-	-	2026-11-24	xproof
+02f8ec49-f490-408b-a76e-58e160a5a5a7	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:marsh-flitter:f0t0:s1,f:xs:XP:marsh-flitter:f0t0:s1	-	-	-	d864b561c9cb	-	575f09ccf7c6	-	-	2026-11-24	xproof
+02f8ec49-f490-408b-a76e-58e160a5a5a7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:marsh-flitter:f0t0:s1,f:xs:XP:marsh-flitter:f0t0:s1	-	-	-	d864b561c9cb	-	575f09ccf7c6	-	-	2026-11-24	xproof
 02fde433-955d-49df-bd72-270b6feac9e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02ffacbf-8d1d-4e87-b11a-0e2a46c0cba6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02ffacbf-8d1d-4e87-b11a-0e2a46c0cba6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

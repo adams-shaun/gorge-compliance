@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52934f16-eb9b-4d0a-b372-155461660f6e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52934f16-eb9b-4d0a-b372-155461660f6e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5297c493-59ec-43e9-9980-8ae03e3264d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5297c493-59ec-43e9-9980-8ae03e3264d8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5297c493-59ec-43e9-9980-8ae03e3264d8	f0/t0	NULL	owed	refused:no-generator:trigger:CounterRemoved	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5297f646-8235-47da-a290-a6883b374977	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5297f646-8235-47da-a290-a6883b374977	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52989a30-773d-4daf-aea3-8dbee2a947fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,8 +183,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52d8e492-b7b7-4ad4-8f1f-5c50993e55e0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52d8e492-b7b7-4ad4-8f1f-5c50993e55e0	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52d8e70b-7e94-4e17-811f-70afe39ff9bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:memnarch:cast:s1,f:xs:XP:memnarch:cast:s1	-	-	-	25696bf19d5b	-	b3109ccf2661	-	-	2026-11-24	xproof
-52d8e70b-7e94-4e17-811f-70afe39ff9bd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-52d8e70b-7e94-4e17-811f-70afe39ff9bd	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52d8e70b-7e94-4e17-811f-70afe39ff9bd	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:memnarch:f0a0:s1,f:xs:XP:memnarch:f0a0:s1	-	-	-	d864b561c9cb	-	b3109ccf2661	-	-	2026-11-24	xproof
+52d8e70b-7e94-4e17-811f-70afe39ff9bd	f0/a1	GainControl	agreed	-	FX	start	2	0	x:xs:XP:memnarch:f0a1:s1,f:xs:XP:memnarch:f0a1:s1	-	-	-	d864b561c9cb	-	b3109ccf2661	-	-	2026-11-24	xproof
 52def237-0374-4ab0-8c01-d0d00aaa324f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52e1546a-63eb-48d7-acc4-81b912aabc90	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:malfegor:cast:s1,f:xs:XP:malfegor:cast:s1	-	-	-	8a1b1a193ec0	-	ceb5c270fbd3	-	-	2026-11-24	xproof
 52e1546a-63eb-48d7-acc4-81b912aabc90	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:malfegor:cast:s1,f:xs:XP:malfegor:cast:s1	-	-	-	8a1b1a193ec0	-	ceb5c270fbd3	-	-	2026-11-24	xproof

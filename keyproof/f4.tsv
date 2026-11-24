@@ -73,7 +73,7 @@ f4437cb3-85f7-49b5-bb41-6a948549d987	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 f4437cb3-85f7-49b5-bb41-6a948549d987	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Along the Crooked Way/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f4497af5-8b81-46b3-bb52-eaed1999809b	cast	cast-resolve	agreed	-	X	scen	1	0	Unexpected Request/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f44a8a72-2c51-429e-8447-7bd8155b6f72	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ordruun-commando:cast:s1,f:xs:XP:ordruun-commando:cast:s1	-	-	-	64a08ba7d913	-	49d74667d5bd	-	-	2026-11-24	xproof
-f44a8a72-2c51-429e-8447-7bd8155b6f72	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f44a8a72-2c51-429e-8447-7bd8155b6f72	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:ordruun-commando:f0a0:s1,f:xs:XP:ordruun-commando:f0a0:s1	-	-	-	d864b561c9cb	-	49d74667d5bd	-	-	2026-11-24	xproof
 f44bde8b-43e9-4719-ac60-b8f0cee8df9b	cast	cast-resolve	agreed	-	X	scen	1	0	Training Regimen/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f44bde8b-43e9-4719-ac60-b8f0cee8df9b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Training Regimen/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f44bde8b-43e9-4719-ac60-b8f0cee8df9b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Training Regimen/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -91,7 +91,7 @@ f451b8f0-1ff5-4e8d-9f30-9352d83ed687	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f4542dff-1ba1-4b15-beaf-51a7a42782cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f45542a0-0d49-4b56-9c3e-663ff8d0529a	cast	cast-resolve	agreed	-	X	scen	1	0	The Apprentice's Folly/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f45716dc-c613-4b14-865d-419395fb02f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f45716dc-c613-4b14-865d-419395fb02f6	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:scarecrone:f0a1:s1,f:xs:XP:scarecrone:f0a1:s1	-	-	-	8a1b1a193ec0	-	78edd22011a1	-	-	2026-11-24	xproof
+f45716dc-c613-4b14-865d-419395fb02f6	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:scarecrone:f0a1:s1,f:xs:XP:scarecrone:f0a1:s1	-	-	-	d864b561c9cb	-	78edd22011a1	-	-	2026-11-24	xproof
 f45716dc-c613-4b14-865d-419395fb02f6	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f457f182-69d0-468d-9bf0-7170363bac26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f45fdef0-15b1-472b-9485-465c49a48a85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warped-physique:cast:s1,f:xs:XP:warped-physique:cast:s1	-	-	-	d864b561c9cb	-	90a3f63facd7	-	-	2026-11-24	xproof
@@ -195,9 +195,9 @@ f4d17f41-efd6-4173-ab6e-28b6fbcee10d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 f4d54a89-8409-4fbc-b01f-3b03f352820f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f4d54a89-8409-4fbc-b01f-3b03f352820f	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 f4da7a43-e9d5-47ea-b2f0-3cf55a156f4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f4da7a43-e9d5-47ea-b2f0-3cf55a156f4a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f4da7a43-e9d5-47ea-b2f0-3cf55a156f4a	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f4da7a43-e9d5-47ea-b2f0-3cf55a156f4a	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f4da7a43-e9d5-47ea-b2f0-3cf55a156f4a	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f4da7a43-e9d5-47ea-b2f0-3cf55a156f4a	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f4e0e2e0-8d64-40a3-92da-3951a696b5f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f4e0e2e0-8d64-40a3-92da-3951a696b5f3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f4e32fc1-1b8d-441e-8e76-71f19f98e925	cast	cast-resolve	agreed	-	FX	scen	2	0	Leyline of the Void/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

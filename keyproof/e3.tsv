@@ -4,7 +4,7 @@ e3016295-00f7-4daf-91b0-57653733b103	cast	cast-resolve	agreed	-	X	scen	1	0	Adven
 e3016295-00f7-4daf-91b0-57653733b103	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Adventurer's Airship/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e3016295-00f7-4daf-91b0-57653733b103	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Adventurer's Airship/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e3056f28-868b-401a-a528-7528d639bdeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e3056f28-868b-401a-a528-7528d639bdeb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e3056f28-868b-401a-a528-7528d639bdeb	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:prismatic-lens:f0a1:s1,f:xs:XP:prismatic-lens:f0a1:s1	-	-	-	d864b561c9cb	-	1019e7e672ec	-	-	2026-11-24	xproof
 e3056f28-868b-401a-a528-7528d639bdeb	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e30b4eb8-6393-486a-9f8e-970ad2351d8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e30b4eb8-6393-486a-9f8e-970ad2351d8a	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -143,8 +143,8 @@ e3b9c9e3-5a35-4dd2-ab17-d1b6a140b185	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e3b9c9e3-5a35-4dd2-ab17-d1b6a140b185	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e3bad2e2-1024-4261-b3d7-82a6998416fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3bad2e2-1024-4261-b3d7-82a6998416fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e3bd74f3-1f38-4162-a0be-c76ad63e2d9b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e3bd74f3-1f38-4162-a0be-c76ad63e2d9b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e3bd74f3-1f38-4162-a0be-c76ad63e2d9b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kithkin-healer:cast:s1,f:xs:XP:kithkin-healer:cast:s1	-	-	-	d864b561c9cb	-	83d12b377d8b	-	-	2026-11-24	xproof
+e3bd74f3-1f38-4162-a0be-c76ad63e2d9b	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:kithkin-healer:f0a0:s1,f:xs:XP:kithkin-healer:f0a0:s1	-	-	-	d864b561c9cb	-	83d12b377d8b	-	-	2026-11-24	xproof
 e3bf1a95-4363-4915-8f43-b423714861ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3c0b11e-7340-4e0a-98b7-91b38439d4f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3c4c27d-f263-4c69-a4fe-2928136ff68b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -157,7 +157,7 @@ e3c8e552-d315-486d-a176-813b3a300174	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e3ca6b70-01d2-44e9-937a-a2d50bbf9d10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3d08582-85ba-48c4-a453-4a5a385a0c3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sadistic-sacrament:cast:s1,f:xs:XP:sadistic-sacrament:cast:s1	-	-	-	8a1b1a193ec0	-	fb34ad7b466e	-	-	2026-11-24	xproof
 e3d4dd61-d646-449c-84f4-0ff927ca6b0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e3d4dd61-d646-449c-84f4-0ff927ca6b0a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e3d4dd61-d646-449c-84f4-0ff927ca6b0a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e3d6d146-47f4-46f9-9a15-2ea649093668	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3d6d146-47f4-46f9-9a15-2ea649093668	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3d7cea4-0d4c-4320-966d-17ef69b5e433	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

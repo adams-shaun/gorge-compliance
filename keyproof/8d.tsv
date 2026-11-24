@@ -7,7 +7,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d02b297-97c4-4379-9862-0a462400f66f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d035688-089f-4d5c-bcad-9140a6c1681b	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d038c81-b43f-4721-abda-5dacfc194ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d038c81-b43f-4721-abda-5dacfc194ed3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d038c81-b43f-4721-abda-5dacfc194ed3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:burrenton-shield-bearers:f0t0:s1,f:xs:XP:burrenton-shield-bearers:f0t0:s1	-	-	-	d864b561c9cb	-	3de554de70f3	-	-	2026-11-24	xproof
 8d03d050-391c-4311-8c42-4ee632d40fdc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d03d050-391c-4311-8c42-4ee632d40fdc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d0bf685-e521-4d72-acc6-86794f685ce2	cast	cast-resolve	agreed	-	X	scen	1	0	Tunnel Tipster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d38194e-b607-4ff4-9c19-0e8636d463bf	land	land	agreed	-	FX	start	2	0	x:xs:XP:raging-ravine:land:s1,f:xs:XP:raging-ravine:land:s1	-	-	-	8a1b1a193ec0	-	b91e54c4f695	-	-	2026-11-24	xproof
 8d3a0b81-1895-47a8-87a3-3e4093cbd951	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winterflame:cast:s1,f:xs:XP:winterflame:cast:s1	-	-	-	d864b561c9cb	-	569ce1075334	-	-	2026-11-24	xproof
 8d47b78b-11cc-4351-91d6-c891eb63dd98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d47b78b-11cc-4351-91d6-c891eb63dd98	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d47b78b-11cc-4351-91d6-c891eb63dd98	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8d4dcab0-86e5-4ff8-a90f-78a062664e16	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d4dcab0-86e5-4ff8-a90f-78a062664e16	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d4dcab0-86e5-4ff8-a90f-78a062664e16	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

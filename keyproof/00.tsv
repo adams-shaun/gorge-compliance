@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 008f2698-1721-45a3-8353-10f2f400dc8f	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 008f2698-1721-45a3-8353-10f2f400dc8f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00909d51-3da8-41eb-a535-0c325fedc59f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00909d51-3da8-41eb-a535-0c325fedc59f	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+00909d51-3da8-41eb-a535-0c325fedc59f	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 00915480-ffa8-4930-a158-b1c1f75b7876	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00915480-ffa8-4930-a158-b1c1f75b7876	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 009a399b-c78e-475b-8bc3-7db2afc9d676	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -198,7 +198,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00e9957a-5684-4a07-954e-8161925fefe4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00ed7aca-b3c1-4d48-acd5-b1596daeb4c3	cast	cast-resolve	agreed	-	X	scen	1	0	Whiplash, Vengeful Engineer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00ed7aca-b3c1-4d48-acd5-b1596daeb4c3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Whiplash, Vengeful Engineer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-00ef1c55-dea1-4564-bd57-66de86cba4df	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+00ef1c55-dea1-4564-bd57-66de86cba4df	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:selesnya-sanctuary:f0a0:s1,f:xs:XP:selesnya-sanctuary:f0a0:s1	-	-	-	d864b561c9cb	-	f426547c41a4	-	-	2026-11-24	xproof
 00ef1c55-dea1-4564-bd57-66de86cba4df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:selesnya-sanctuary:land:s1,f:xs:XP:selesnya-sanctuary:land:s1	-	-	-	64a08ba7d913	-	f426547c41a4	-	-	2026-11-24	xproof
 00ef1c55-dea1-4564-bd57-66de86cba4df	land	land	agreed	-	FX	start	2	0	x:xs:XP:selesnya-sanctuary:land:s1,f:xs:XP:selesnya-sanctuary:land:s1	-	-	-	64a08ba7d913	-	f426547c41a4	-	-	2026-11-24	xproof
 00efb113-ba5a-4749-b42b-5693b980f26f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

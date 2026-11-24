@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0953772c-9374-4616-9c04-5838aaf626c9	cast	cast-resolve	agreed	-	X	scen	1	0	Tenth District Hero/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0953772c-9374-4616-9c04-5838aaf626c9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tenth District Hero/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0953772c-9374-4616-9c04-5838aaf626c9	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Tenth District Hero/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-09537e9f-6c8e-4849-9d35-d4f3950a64d7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09537e9f-6c8e-4849-9d35-d4f3950a64d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kavu-primarch:cast:s1,f:xs:XP:kavu-primarch:cast:s1	-	-	-	d864b561c9cb	-	f8c4f40157a0	-	-	2026-11-24	xproof
 0956bc16-ff04-4e96-8059-ef62afa2405f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09de1136-8a8f-4539-92a2-611dcdd0790b	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 09e588c2-0fb8-4c30-aff3-433db7a07b6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09e588c2-0fb8-4c30-aff3-433db7a07b6e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09e84398-7782-48d0-8411-9055d253395c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09e84398-7782-48d0-8411-9055d253395c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:woodland-guidance:cast:s1	-	-	-	d864b561c9cb	-	90405c810b9d	-	-	2026-11-24	xproof
 09eb988a-e2eb-42e1-a786-01be63d2263f	cast	cast-resolve	agreed	-	X	scen	1	0	Kree Commandos/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 09eb988a-e2eb-42e1-a786-01be63d2263f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kree Commandos/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 09eb988a-e2eb-42e1-a786-01be63d2263f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kree Commandos/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -206,9 +206,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09f52275-99e6-45e0-b2db-cafe26d5fb91	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09f73f77-a9bc-4718-be7d-ba6e08576e3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09f75f28-09b9-4a6e-a1b0-671208d274d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunder-from-within:cast:s1,f:xs:XP:sunder-from-within:cast:s1	-	-	-	64a08ba7d913	-	bf0dc4ce4403	-	-	2026-11-24	xproof
-09f99b5a-66cf-4178-ae64-29f2004fe899	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09f99b5a-66cf-4178-ae64-29f2004fe899	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09f99b5a-66cf-4178-ae64-29f2004fe899	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09f99b5a-66cf-4178-ae64-29f2004fe899	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:korlash-heir-to-blackblade:cast:s1,f:xs:XP:korlash-heir-to-blackblade:cast:s1	-	-	-	d864b561c9cb	-	5e3d0bdd2f55	-	-	2026-11-24	xproof
+09f99b5a-66cf-4178-ae64-29f2004fe899	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:korlash-heir-to-blackblade:f0a0:s1,f:xs:XP:korlash-heir-to-blackblade:f0a0:s1	-	-	-	d864b561c9cb	-	5e3d0bdd2f55	-	-	2026-11-24	xproof
+09f99b5a-66cf-4178-ae64-29f2004fe899	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 09fe624f-c66a-46e4-a9af-7e3c3ca1a4e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09fe624f-c66a-46e4-a9af-7e3c3ca1a4e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09ff28b1-b6c9-48e6-b12e-2f0e644f709f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

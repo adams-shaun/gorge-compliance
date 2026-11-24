@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c3847b6-9bfb-49b5-8f1a-bdb40e6900f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c3847b6-9bfb-49b5-8f1a-bdb40e6900f1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c3847b6-9bfb-49b5-8f1a-bdb40e6900f1	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6c3b9136-5e4b-4bb5-bef5-17887d7211dd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6c3b9136-5e4b-4bb5-bef5-17887d7211dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-entity:cast:s1,f:xs:XP:storm-entity:cast:s1	-	-	-	d864b561c9cb	-	eab688ee603f	-	-	2026-11-24	xproof
 6c3be36d-2461-4e38-9ab4-4394cd4996e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c3be36d-2461-4e38-9ab4-4394cd4996e7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c3faf4f-83c1-4098-98b8-bae15d59b0de	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ca0078f-d6b5-4643-b801-e7a98706f21c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ca1d5ca-cc97-4783-9c0a-f47097f35ba8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ca2a89e-7032-4864-b4e9-66f3178f90ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6ca2a89e-7032-4864-b4e9-66f3178f90ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6ca2a89e-7032-4864-b4e9-66f3178f90ab	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6ca90451-861d-4aa8-93e7-3f3e02385530	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ca999d7-48c9-4517-8e63-82ddccdb430e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6caabc45-4644-4941-a2f3-f04ee7b50a89	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Boiling Rock Prison/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

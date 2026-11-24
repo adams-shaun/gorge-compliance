@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f3c3e5f-6af3-4af2-8703-4ccc8ed8f675	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f3fff7a-cc46-4c72-9edc-fdbddd3b51b5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f3fff7a-cc46-4c72-9edc-fdbddd3b51b5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f41cefc-d6ff-4db7-ba35-502b7e081de1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f41cefc-d6ff-4db7-ba35-502b7e081de1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f41cefc-d6ff-4db7-ba35-502b7e081de1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venser-shaper-savant:f0t0:s1,f:xs:XP:venser-shaper-savant:f0t0:s1	-	-	-	d864b561c9cb	-	fb07358dc673	-	-	2026-11-24	xproof
+0f41cefc-d6ff-4db7-ba35-502b7e081de1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venser-shaper-savant:f0t0:s1,f:xs:XP:venser-shaper-savant:f0t0:s1	-	-	-	d864b561c9cb	-	fb07358dc673	-	-	2026-11-24	xproof
 0f485ea1-af00-4f6c-8e70-103ba172aa18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f485ea1-af00-4f6c-8e70-103ba172aa18	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f513242-b175-4b4d-a05f-78b1b457a020	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f5b0c77-1e3d-46a1-ae0e-03ed79196cd9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f5b79ca-9f80-420b-a6c5-bb2a9a95c7e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f5da28f-b97c-45d5-87d4-b8ba8638ca8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f5da28f-b97c-45d5-87d4-b8ba8638ca8f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f5da28f-b97c-45d5-87d4-b8ba8638ca8f	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0f5f6f3e-1b3c-43e2-b11d-bd454366845c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f5f6f3e-1b3c-43e2-b11d-bd454366845c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f5f6f3e-1b3c-43e2-b11d-bd454366845c	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -73,8 +73,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f68ae67-1671-4281-8b6b-3e52fdd4915f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Salvation Swan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f68ae67-1671-4281-8b6b-3e52fdd4915f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:salvation-swan:f0t0:s2,f:xs:XP:salvation-swan:f0t0:s2	-	-	-	e07cf3a05ba5	-	9d7d8f15f616	-	-	2026-11-24	xproof
 0f6e66d5-4f27-485b-999d-ee55c1e218b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f71416c-e244-48b4-acbe-2a8ef540db0f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f71416c-e244-48b4-acbe-2a8ef540db0f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f71416c-e244-48b4-acbe-2a8ef540db0f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:llanowar-empath:cast:s1,f:xs:XP:llanowar-empath:cast:s1	-	-	-	d864b561c9cb	-	fdec1f02adfb	-	-	2026-11-24	xproof
+0f71416c-e244-48b4-acbe-2a8ef540db0f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:llanowar-empath:cast:s1,f:xs:XP:llanowar-empath:cast:s1	-	-	-	d864b561c9cb	-	fdec1f02adfb	-	-	2026-11-24	xproof
 0f730bd9-2060-46b1-9208-0ac6562e8b2a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f772f35-6d98-4ac8-88e5-02539737078b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f772f35-6d98-4ac8-88e5-02539737078b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

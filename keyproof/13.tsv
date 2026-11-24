@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 135cc078-1c45-465e-b0b9-7168c89f56f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 135cc078-1c45-465e-b0b9-7168c89f56f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 135e6545-4ec5-4136-9019-3fda92052b7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-135e6545-4ec5-4136-9019-3fda92052b7a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+135e6545-4ec5-4136-9019-3fda92052b7a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 135eb851-3f2d-45c5-bfb9-49d1e6c98344	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13613f6e-a6e4-4493-b029-8ec11610c29f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136596a0-b179-40be-b42d-c0b992621c95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13cfc92c-142a-4016-b86f-ace6bda1a69c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13cfc92c-142a-4016-b86f-ace6bda1a69c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13d301d1-c1e1-4656-8700-3f1c1c7c4485	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13d301d1-c1e1-4656-8700-3f1c1c7c4485	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13d301d1-c1e1-4656-8700-3f1c1c7c4485	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:sabertooth-alley-cat:f0a0:s1,f:xs:XP:sabertooth-alley-cat:f0a0:s1	-	-	-	d864b561c9cb	-	dea4699ee918	-	-	2026-11-24	xproof
 13d34f21-f0ce-4e59-ac3e-6635bf7292d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skybind:f0t0:s1,f:xs:XP:skybind:f0t0:s1	-	-	-	d864b561c9cb	-	749397f7ed99	-	-	2026-11-24	xproof
 13d34f21-f0ce-4e59-ac3e-6635bf7292d3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skybind:f0t0:s1,f:xs:XP:skybind:f0t0:s1	-	-	-	d864b561c9cb	-	749397f7ed99	-	-	2026-11-24	xproof
 13d4a70f-c48c-4739-8f3e-5f0302c5484c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

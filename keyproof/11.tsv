@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 112aaaf0-3301-4f79-9640-d36c75a0fb30	cast	cast-resolve	agreed	-	FX	scen	2	0	Rescue Skiff/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 112aaaf0-3301-4f79-9640-d36c75a0fb30	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 112aaaf0-3301-4f79-9640-d36c75a0fb30	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rescue Skiff/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-112df1e4-01aa-4e01-b56f-b5ae519c87fd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+112df1e4-01aa-4e01-b56f-b5ae519c87fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:take-possession:cast:s1,f:xs:XP:take-possession:cast:s1	-	-	-	d864b561c9cb	-	a007c7160b30	-	-	2026-11-24	xproof
 112f2b3f-32e7-40b1-b80e-0b99184a840c	cast	cast-resolve	agreed	-	FX	scen	2	0	Electroduplicate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11323af4-b8b8-4ca9-932f-377c7fd77dea	cast	cast-resolve	agreed	-	X	scen	1	0	The Eternity Elevator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11323af4-b8b8-4ca9-932f-377c7fd77dea	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Eternity Elevator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 119d9671-61ba-4629-89b1-f94bdec5cb74	cast	cast-resolve	agreed	-	FX	scen	2	0	Chimil, the Inner Sun/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 119d9671-61ba-4629-89b1-f94bdec5cb74	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Chimil, the Inner Sun/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11a163cc-ade3-4b55-b50e-3b3bf7e1962c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11a163cc-ade3-4b55-b50e-3b3bf7e1962c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11a163cc-ade3-4b55-b50e-3b3bf7e1962c	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 11a20648-fdb6-4f52-8fda-c66985e0c044	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11a28f60-2456-4ed5-b1cc-03c395f55e59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11a28f60-2456-4ed5-b1cc-03c395f55e59	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	77494c1ce129	-	-	-	-	2026-11-24	xproof

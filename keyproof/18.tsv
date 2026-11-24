@@ -122,9 +122,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 186b2256-4af3-48cb-96b0-b0e80a7ee6dc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 186b2256-4af3-48cb-96b0-b0e80a7ee6dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+186b4def-4fff-4a2b-bcbf-5318b0ac5fa9	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 186bfdac-ce9c-476f-89b6-ef467487fca5	cast	cast-resolve	agreed	-	FX	scen	2	0	Pitiless Carnage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 186efd85-83d4-40cc-b617-76f32dbe99ce	cast	cast-resolve	agreed	-	FX	scen	2	0	Radiant Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18710b5e-5403-48cd-9541-8154ba0a0b30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,8 +153,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 189fc8f4-17ac-4f1d-82c8-8401445bdaf4	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18a22d9f-81bc-4ed5-bd83-e3f8ec5e38c8	cast	cast-resolve	agreed	-	X	scen	1	0	Air Response Unit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18a22d9f-81bc-4ed5-bd83-e3f8ec5e38c8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Air Response Unit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-18a45b81-1946-4be6-8f2c-8c21d11c86f8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18a45b81-1946-4be6-8f2c-8c21d11c86f8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18a45b81-1946-4be6-8f2c-8c21d11c86f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flowstone-embrace:cast:s1,f:xs:XP:flowstone-embrace:cast:s1	-	-	-	d864b561c9cb	-	bd8c65cf7632	-	-	2026-11-24	xproof
+18a45b81-1946-4be6-8f2c-8c21d11c86f8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flowstone-embrace:cast:s1,f:xs:XP:flowstone-embrace:cast:s1	-	-	-	d864b561c9cb	-	bd8c65cf7632	-	-	2026-11-24	xproof
 18a5e71e-eb75-4ac7-bedd-2220aaa24f78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18a5e71e-eb75-4ac7-bedd-2220aaa24f78	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18a5fe34-0c97-486c-b09a-80535a99e982	cast	cast-resolve	agreed	-	X	scen	1	0	Cactarantula/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18c65823-01ae-4314-a254-d89a1a362633	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18c65823-01ae-4314-a254-d89a1a362633	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:harbor-bandit:f0a0:s1,f:xs:XP:harbor-bandit:f0a0:s1	-	-	-	d864b561c9cb	-	b92b793b5765	-	-	2026-11-24	xproof
 18ca77c9-e7d2-4afc-a72b-98772578fad7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18ca77c9-e7d2-4afc-a72b-98772578fad7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18ca77c9-e7d2-4afc-a72b-98772578fad7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 18cced8b-9836-4e11-bb4e-69a971a33a50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18cced8b-9836-4e11-bb4e-69a971a33a50	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18cced8b-9836-4e11-bb4e-69a971a33a50	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

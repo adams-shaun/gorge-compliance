@@ -20,7 +20,7 @@ e90f298f-c54b-4fe8-82db-5b9153a57712	combat#0.attack	combat#0.attack	agreed	-	X	
 e90f298f-c54b-4fe8-82db-5b9153a57712	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Zoyowa Lava-Tongue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e90f298f-c54b-4fe8-82db-5b9153a57712	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Zoyowa Lava-Tongue/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e91053ae-682a-4bbe-8394-fd65e626bacc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e91053ae-682a-4bbe-8394-fd65e626bacc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e91053ae-682a-4bbe-8394-fd65e626bacc	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e9117015-1050-44dd-a46b-e7ffe2085fae	cast	cast-resolve	agreed	-	X	scen	1	0	Ledger Shredder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e9117015-1050-44dd-a46b-e7ffe2085fae	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ledger Shredder/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e9117015-1050-44dd-a46b-e7ffe2085fae	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ledger Shredder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ e958b3c5-0666-4a99-a933-e5cb8b0da9da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e958b3c5-0666-4a99-a933-e5cb8b0da9da	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e958b3c5-0666-4a99-a933-e5cb8b0da9da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e958f7bf-3011-4175-b467-ca225a9b7ad2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:triskelavus:cast:s1,f:xs:XP:triskelavus:cast:s1	-	-	-	9ee19e8250ce	-	76b7fefe16ca	-	-	2026-11-24	xproof
-e958f7bf-3011-4175-b467-ca225a9b7ad2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e958f7bf-3011-4175-b467-ca225a9b7ad2	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e95a9488-3f86-4598-9c6e-6b1b959f8570	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e95a9488-3f86-4598-9c6e-6b1b959f8570	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e95e100e-4886-4bde-825c-017e878ac825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ e9a24ed8-e844-4c50-b386-bc28da9989b1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bitte
 e9a2cb10-6526-4a5c-bda7-e2f328b377dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9a2cb10-6526-4a5c-bda7-e2f328b377dc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9a3a466-df78-49a0-add3-975b94c5cd09	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mire-boa:cast:s1,f:xs:XP:mire-boa:cast:s1	-	-	-	9ee19e8250ce	-	b9ef37728205	-	-	2026-11-24	xproof
-e9a3a466-df78-49a0-add3-975b94c5cd09	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e9a3a466-df78-49a0-add3-975b94c5cd09	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:mire-boa:f0a0:s1,f:xs:XP:mire-boa:f0a0:s1	-	-	-	d864b561c9cb	-	b9ef37728205	-	-	2026-11-24	xproof
 e9a420d4-a834-4a14-b874-1db96624d8ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9a420d4-a834-4a14-b874-1db96624d8ef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rotcrown-ghoul:f0t0:s1,f:xs:XP:rotcrown-ghoul:f0t0:s1	-	-	-	d864b561c9cb	-	60434aaa24e4	-	-	2026-11-24	xproof
 e9aac98a-6fad-463e-89fa-3ad3a7c7f53a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

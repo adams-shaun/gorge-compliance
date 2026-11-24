@@ -84,8 +84,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e737c52-cbe0-493f-ae46-7bf068e04882	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e737c52-cbe0-493f-ae46-7bf068e04882	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e743fbf-b5b6-4176-a4f2-6933f521f2fe	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e743fbf-b5b6-4176-a4f2-6933f521f2fe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e743fbf-b5b6-4176-a4f2-6933f521f2fe	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6e743fbf-b5b6-4176-a4f2-6933f521f2fe	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:new-benalia:f0t0:s1,f:xs:XP:new-benalia:f0t0:s1	-	-	-	d864b561c9cb	-	2abb8e748d8c	-	-	2026-11-24	xproof
+6e743fbf-b5b6-4176-a4f2-6933f521f2fe	land	land	agreed	-	FX	start	2	0	x:xs:XP:new-benalia:f0t0:s1,f:xs:XP:new-benalia:f0t0:s1	-	-	-	d864b561c9cb	-	2abb8e748d8c	-	-	2026-11-24	xproof
 6e760cfe-45b9-4a3f-b2e2-4ca6ec2bd13a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e786f0b-e2cb-40ee-96bc-81945a0b35a3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e7bb687-8243-4377-80b5-67ce6b65f9b7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -146,11 +146,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ed13a89-4284-4c01-8099-75e2d68c8c63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruric-thar-the-unbowed:cast:s1,f:xs:XP:ruric-thar-the-unbowed:cast:s1	-	-	-	d864b561c9cb	-	ce79835183b9	-	-	2026-11-24	xproof
 6ed13a89-4284-4c01-8099-75e2d68c8c63	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6edacc06-9523-4ccf-a4c2-2ac4af386b8a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6edd2a36-3d65-4bf9-bd82-b6d03a7e8fea	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:white-orchid-phantom:cast:s1,f:xs:XP:white-orchid-phantom:cast:s1	-	-	-	8a1b1a193ec0	-	b917bb98dcad	-	-	2026-11-24	xproof
+6edd2a36-3d65-4bf9-bd82-b6d03a7e8fea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:white-orchid-phantom:f0t0:s1,f:xs:XP:white-orchid-phantom:f0t0:s1	-	-	-	d864b561c9cb	-	b917bb98dcad	-	-	2026-11-24	xproof
 6edd2a36-3d65-4bf9-bd82-b6d03a7e8fea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6edf5767-10d3-40b0-bfce-daa8633888f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6edf5767-10d3-40b0-bfce-daa8633888f6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6edf5767-10d3-40b0-bfce-daa8633888f6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6edf5767-10d3-40b0-bfce-daa8633888f6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+6edf5767-10d3-40b0-bfce-daa8633888f6	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6ee2a7ba-a676-4d05-b214-7db52e41afe7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ee2a7ba-a676-4d05-b214-7db52e41afe7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ee32b5e-3b29-47ff-87f8-913ec05f6b2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

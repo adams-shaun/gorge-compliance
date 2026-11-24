@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a091f7b-efc9-4aaa-9da8-157ef8099a36	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a09c951-9861-4e95-acf1-5ce1a3778493	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a09c951-9861-4e95-acf1-5ce1a3778493	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a09c951-9861-4e95-acf1-5ce1a3778493	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a09c951-9861-4e95-acf1-5ce1a3778493	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:disciple-of-tevesh-szat:f0a1:s1,f:xs:XP:disciple-of-tevesh-szat:f0a1:s1	-	-	-	d864b561c9cb	-	5eaf2db4c02d	-	-	2026-11-24	xproof
 3a0dd318-9523-4740-b0aa-a911032e3851	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a0ea41e-b4f5-4aa1-9f7a-158485313c64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a124fe5-f525-43e5-9746-501c68a98330	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a272fa9-5f28-43a4-95de-10cb511f1b43	cast	cast-resolve	agreed	-	FX	scen	2	0	Kirol, Attentive First-Year/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3a272fa9-5f28-43a4-95de-10cb511f1b43	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Kirol, Attentive First-Year/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3a2a6904-219a-4d16-b11a-1e0e2826814e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a2a6904-219a-4d16-b11a-1e0e2826814e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a2a6904-219a-4d16-b11a-1e0e2826814e	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3a2a6904-219a-4d16-b11a-1e0e2826814e	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 3a2a6904-219a-4d16-b11a-1e0e2826814e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a2bb47d-228d-499e-a34b-9e10d99e9b2c	cast	cast-resolve	agreed	-	X	scen	1	0	Fog Bank/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a536065-d62a-44c9-886b-84209b6bce57	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a5937de-5957-47a9-9bd4-0dc7f8b833ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a59c882-8bb8-49ba-862f-125020dd5bec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a59c882-8bb8-49ba-862f-125020dd5bec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a59c882-8bb8-49ba-862f-125020dd5bec	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3a5b3405-a1e3-4aad-ab4e-1b8db2d1f3a8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Strangled Cemetery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a5b3405-a1e3-4aad-ab4e-1b8db2d1f3a8	land	play-land	agreed	-	X	scen	1	0	Strangled Cemetery/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a620d92-ec92-4733-8c05-7fa1b956bab6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -199,7 +199,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ad69bfb-2e51-4fe9-8d2f-7d071a4f1c69	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 3ad69bfb-2e51-4fe9-8d2f-7d071a4f1c69	land	land	agreed	-	FX	start	2	0	x:xs:XP:okina-temple-to-the-grandfathers:land:s1,f:xs:XP:okina-temple-to-the-grandfathers:land:s1	-	-	-	64a08ba7d913	-	5a4c729fc18b	-	-	2026-11-24	xproof
 3ad6e495-d0e6-4b07-8f91-fe057e173975	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ethereal-usher:cast:s1,f:xs:XP:ethereal-usher:cast:s1	-	-	-	64a08ba7d913	-	474444d0b8bc	-	-	2026-11-24	xproof
-3ad6e495-d0e6-4b07-8f91-fe057e173975	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ad6e495-d0e6-4b07-8f91-fe057e173975	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:ethereal-usher:f0a0:s1,f:xs:XP:ethereal-usher:f0a0:s1	-	-	-	d864b561c9cb	-	474444d0b8bc	-	-	2026-11-24	xproof
 3ad6e495-d0e6-4b07-8f91-fe057e173975	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ad9d55d-02f7-412e-8756-6a026f8e68d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ad9d55d-02f7-412e-8756-6a026f8e68d7	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

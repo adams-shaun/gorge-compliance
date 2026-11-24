@@ -127,7 +127,7 @@ bd8bc927-e50a-4fab-9803-0602a841c7c2	f0/t1	NULL	owed	refused:no-generator:trigge
 bd8c633c-ba99-47ac-a1d1-9e15aa948933	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd8d0498-53f9-484c-a59a-78daca468859	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd8d707d-1201-42c6-bce6-fbda12ce5ea8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd8d707d-1201-42c6-bce6-fbda12ce5ea8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd8d707d-1201-42c6-bce6-fbda12ce5ea8	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bd912666-f37f-4767-af6f-9e6d0fcccacf	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 bd912666-f37f-4767-af6f-9e6d0fcccacf	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 bd912666-f37f-4767-af6f-9e6d0fcccacf	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,9 +140,9 @@ bd95c832-9ae9-404a-a2bc-0760a5b9ff56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bd9ab645-d8ed-4cdd-8d8e-53383b5501ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd9b3009-f389-4831-b250-80c4bb8f25e5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd9b3009-f389-4831-b250-80c4bb8f25e5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:oblivion-ring:cast:s1,f:xs:XP:oblivion-ring:cast:s1	-	-	-	d864b561c9cb	-	10edb9ae1050	-	-	2026-11-24	xproof
+bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:oblivion-ring:cast:s1,f:xs:XP:oblivion-ring:cast:s1	-	-	-	d864b561c9cb	-	10edb9ae1050	-	-	2026-11-24	xproof
+bd9b9772-f5f9-4c6b-913e-7193bea5d0a7	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bd9c5b53-9666-45ee-8f9d-ee1ae74111b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd9d3a70-faed-4bc6-97d8-1601b36cdb21	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 bd9d3a70-faed-4bc6-97d8-1601b36cdb21	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Quill-Blade Laureate/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -231,8 +231,8 @@ bdeb440d-a714-40e8-9038-f651e6ae45fb	cast	cast-resolve	agreed	-	X	scen	1	0	Sprin
 bdeb440d-a714-40e8-9038-f651e6ae45fb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Springleaf Drum/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 bdec14d1-1b38-4223-869e-a0ffc76b2b0c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:brutalizer-exarch:cast:s1,f:xs:XP:brutalizer-exarch:cast:s1	-	-	-	d864b561c9cb	-	ee63d6619f2b	-	-	2026-11-24	xproof
 bdec14d1-1b38-4223-869e-a0ffc76b2b0c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bdec1d22-2f89-424b-b48f-46c9158943af	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bdec1d22-2f89-424b-b48f-46c9158943af	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bdec1d22-2f89-424b-b48f-46c9158943af	cast	cast	agreed	-	F	start	4	0	f:xs:XP:paperfin-rascal:cast:s1	-	-	-	d864b561c9cb	-	fa15a34ce58d	-	-	2026-11-24	xproof
+bdec1d22-2f89-424b-b48f-46c9158943af	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:paperfin-rascal:cast:s1	-	-	-	d864b561c9cb	-	fa15a34ce58d	-	-	2026-11-24	xproof
 bdecf59c-f8bd-4003-9058-685b70c08837	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bdecf59c-f8bd-4003-9058-685b70c08837	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bdf28770-0962-4317-822f-c187bc6706d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

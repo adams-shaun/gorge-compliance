@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d0fa514-87fc-46ff-bf49-4cd332396978	cast	cast	agreed	-	F	start	4	0	f:xs:XP:scythe-tiger:cast:s1	-	-	-	8a1b1a193ec0	-	3a8491078a99	-	-	2026-11-24	xproof
 4d0fa514-87fc-46ff-bf49-4cd332396978	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:scythe-tiger:cast:s1	-	-	-	8a1b1a193ec0	-	3a8491078a99	-	-	2026-11-24	xproof
 4d165c0f-3e40-45ad-92a1-53b13c07b34d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4d165c0f-3e40-45ad-92a1-53b13c07b34d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4d165c0f-3e40-45ad-92a1-53b13c07b34d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4d1885d1-212e-47ae-865f-e6dc4148ddf2	cast	cast-resolve	agreed	-	X	scen	1	0	Repeat Offender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4d1885d1-212e-47ae-865f-e6dc4148ddf2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Repeat Offender/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4d18bcba-a346-445e-a182-6cc30b7e066d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -22,8 +22,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d211447-9f18-4d23-8f19-cdf6ad3c68ba	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d2377fb-ac3b-453b-b632-abe918d72529	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d244787-66d2-4a32-914d-a3e97d393370	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4d244787-66d2-4a32-914d-a3e97d393370	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4d244787-66d2-4a32-914d-a3e97d393370	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4d244787-66d2-4a32-914d-a3e97d393370	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:ursine-fylgja:f0a1:s1,f:xs:XP:ursine-fylgja:f0a1:s1	-	-	-	d864b561c9cb	-	cf50bab7d57b	-	-	2026-11-24	xproof
+4d244787-66d2-4a32-914d-a3e97d393370	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:ursine-fylgja:f0a1:s1,f:xs:XP:ursine-fylgja:f0a1:s1	-	-	-	d864b561c9cb	-	cf50bab7d57b	-	-	2026-11-24	xproof
 4d27a90b-dae4-48a0-9eb2-e199ff548867	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d27a90b-dae4-48a0-9eb2-e199ff548867	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:starlight-invoker:f0a0:s1,f:xs:XP:starlight-invoker:f0a0:s1	-	-	-	d864b561c9cb	-	c26f81633422	-	-	2026-11-24	xproof
 4d2e233c-0173-417f-82a0-1e692a400ae1	cast	cast-resolve	agreed	-	X	scen	1	0	Oscorp Research Team/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

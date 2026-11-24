@@ -113,8 +113,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a810017-06ac-4824-bc2f-a7d303d58ad7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a825e4c-4a87-4b8d-84f7-3e50b896d7cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a825e4c-4a87-4b8d-84f7-3e50b896d7cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a83d284-75a0-4901-b7d9-c4b7586ee327	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a83d284-75a0-4901-b7d9-c4b7586ee327	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a83d284-75a0-4901-b7d9-c4b7586ee327	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:river-of-tears:f0a0:s1,f:xs:XP:river-of-tears:f0a0:s1	-	-	-	d864b561c9cb	-	8cc0509c5f85	-	-	2026-11-24	xproof
+8a83d284-75a0-4901-b7d9-c4b7586ee327	land	land	agreed	-	FX	start	2	0	x:xs:XP:river-of-tears:land:s1,f:xs:XP:river-of-tears:land:s1	-	-	-	d864b561c9cb	-	8cc0509c5f85	-	-	2026-11-24	xproof
 8a8bc537-b69f-441d-a10e-d7f17f2f75bb	cast	cast-resolve	agreed	-	X	scen	1	0	Pothole Mole/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a8bc537-b69f-441d-a10e-d7f17f2f75bb	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a8e225b-14e4-464f-bebe-89b4c9be7fe1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ad91015-db7f-43ea-97c9-bf2bf5656858	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad91015-db7f-43ea-97c9-bf2bf5656858	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad91f64-ccab-4edc-bd54-b2ee9267d614	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ad91f64-ccab-4edc-bd54-b2ee9267d614	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ad91f64-ccab-4edc-bd54-b2ee9267d614	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8ada7388-fd8b-434c-a17a-bce19cf3e615	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ada7388-fd8b-434c-a17a-bce19cf3e615	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ada7388-fd8b-434c-a17a-bce19cf3e615	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -214,6 +214,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8af9d623-efa3-4cbc-a903-aaec32d78b0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8afc00d4-a1c6-4329-af2c-a7f58a0c33e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruin-crab:cast:s1,f:xs:XP:ruin-crab:cast:s1	-	-	-	25696bf19d5b	-	035948a252f3	-	-	2026-11-24	xproof
 8afc00d4-a1c6-4329-af2c-a7f58a0c33e7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-8afc6147-80b4-4296-a5aa-ce892cefb1a7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8afc6147-80b4-4296-a5aa-ce892cefb1a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8afc6147-80b4-4296-a5aa-ce892cefb1a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orchard-warden:cast:s1,f:xs:XP:orchard-warden:cast:s1	-	-	-	d864b561c9cb	-	e2c75338ff88	-	-	2026-11-24	xproof
+8afc6147-80b4-4296-a5aa-ce892cefb1a7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8afe3d28-be3e-416c-9457-8a2af85b2eec	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

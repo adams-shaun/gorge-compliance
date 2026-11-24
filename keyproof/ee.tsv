@@ -50,7 +50,7 @@ ee35ed62-d5a2-4e65-a7eb-fcdcb3665532	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ee35ed62-d5a2-4e65-a7eb-fcdcb3665532	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 ee35ed62-d5a2-4e65-a7eb-fcdcb3665532	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 ee38377f-8d3a-402e-a5d7-a01cfe3a5322	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee38377f-8d3a-402e-a5d7-a01cfe3a5322	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee38377f-8d3a-402e-a5d7-a01cfe3a5322	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ee397a87-6933-4d2d-aac6-8dc4e96d524b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee397a87-6933-4d2d-aac6-8dc4e96d524b	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 ee397a87-6933-4d2d-aac6-8dc4e96d524b	f0/t1	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -60,15 +60,15 @@ ee3d21b9-58b4-480c-bae3-26de50f1a5c6	cast	cast-resolve	agreed	-	X	scen	1	0	Back 
 ee3fd92c-48e0-4651-aeda-7eb2c75acbb0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee3fd92c-48e0-4651-aeda-7eb2c75acbb0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee414d20-b18e-4bed-97fc-3c7535089ec1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:benevolent-ancestor:cast:s1,f:xs:XP:benevolent-ancestor:cast:s1	-	-	-	64a08ba7d913	-	423353965fd9	-	-	2026-11-24	xproof
-ee414d20-b18e-4bed-97fc-3c7535089ec1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee414d20-b18e-4bed-97fc-3c7535089ec1	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:benevolent-ancestor:f0a0:s1,f:xs:XP:benevolent-ancestor:f0a0:s1	-	-	-	d864b561c9cb	-	423353965fd9	-	-	2026-11-24	xproof
 ee45b588-b424-49d3-9e37-270f2ae9490d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee45b588-b424-49d3-9e37-270f2ae9490d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 ee45b588-b424-49d3-9e37-270f2ae9490d	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 ee45c80c-699c-4e37-97e6-1859c6601c99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee45c80c-699c-4e37-97e6-1859c6601c99	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 ee496b34-d8e0-482a-a2c2-3122ea376da0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee496b34-d8e0-482a-a2c2-3122ea376da0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee496b34-d8e0-482a-a2c2-3122ea376da0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee496b34-d8e0-482a-a2c2-3122ea376da0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ee496b34-d8e0-482a-a2c2-3122ea376da0	f0/t1	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-crusher:f0t1:s1,f:xs:XP:arcbound-crusher:f0t1:s1	-	-	-	d864b561c9cb	-	d9a30f0f1bb8	-	-	2026-11-24	xproof
 ee4b7aca-31dd-4369-8e85-b300892b9b41	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee4b7aca-31dd-4369-8e85-b300892b9b41	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee4c29c3-f790-4e5e-a0d1-d47af7b62753	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

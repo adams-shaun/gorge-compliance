@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-7b002cae-ee7d-400d-af9c-445eb10f1f0c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b002cae-ee7d-400d-af9c-445eb10f1f0c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:fathom-trawl:cast:s1	-	-	-	d864b561c9cb	-	8b00f91c1f4d	-	-	2026-11-24	xproof
 7b07356f-9c3f-4875-939e-aa64eb6b5ce2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0767b8-b504-456e-93bd-218502f73b3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0767b8-b504-456e-93bd-218502f73b3d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b1519b1-665c-47b8-8f96-0027410ed81c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b1519b1-665c-47b8-8f96-0027410ed81c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b175a33-a05c-49fa-802a-36f7013c892a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	64a08ba7d913	-	da27cbfd70de	-	-	2026-11-24	xproof
-7b175a33-a05c-49fa-802a-36f7013c892a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b175a33-a05c-49fa-802a-36f7013c892a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7b18cfad-a1cf-46c2-bcdd-7762c13d50e5	cast	cast-resolve	agreed	-	FX	scen	2	0	Thornvault Forager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b18cfad-a1cf-46c2-bcdd-7762c13d50e5	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Thornvault Forager/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b18cfad-a1cf-46c2-bcdd-7762c13d50e5	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Thornvault Forager/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -99,12 +99,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b82045f-5a2b-4e6e-976c-986c80ecd8b2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kessig-wolf:cast:s1,f:xs:XP:kessig-wolf:cast:s1	-	-	-	d864b561c9cb	-	5a1522997e59	-	-	2026-11-24	xproof
 7b82045f-5a2b-4e6e-976c-986c80ecd8b2	f0/a0	Pump	agreed	-	X	start	2	0	x:xs:XP:kessig-wolf:f0a0:s1	-	-	-	d864b561c9cb	-	5a1522997e59	-	-	2026-11-24	xproof
 7b8559a7-e11f-430d-8a7a-785a7005c4c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kjeldoran-outrider:cast:s1,f:xs:XP:kjeldoran-outrider:cast:s1	-	-	-	0984227a67dd	-	b948e2aa2868	-	-	2026-11-24	xproof
-7b8559a7-e11f-430d-8a7a-785a7005c4c4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b8559a7-e11f-430d-8a7a-785a7005c4c4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:kjeldoran-outrider:f0a0:s1,f:xs:XP:kjeldoran-outrider:f0a0:s1	-	-	-	d864b561c9cb	-	b948e2aa2868	-	-	2026-11-24	xproof
 7b860806-0118-40f8-861b-225a7c1cf151	cast	cast-resolve	agreed	-	X	scen	1	0	Stampeding Scurryfoot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b860806-0118-40f8-861b-225a7c1cf151	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stampeding Scurryfoot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b89b7d2-c724-4d5d-9f0b-7d3302ad1168	cast	cast-resolve	agreed	-	X	scen	1	0	Agate Assault/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b8f1458-c638-4907-9363-f7cc22d04605	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b8f1458-c638-4907-9363-f7cc22d04605	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b8f1458-c638-4907-9363-f7cc22d04605	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:chameleon-colossus:f0a0:s1,f:xs:XP:chameleon-colossus:f0a0:s1	-	-	-	d864b561c9cb	-	46a055dfbf4f	-	-	2026-11-24	xproof
 7b8f4879-578e-40e4-863a-41d0c32c6bdd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mogg-war-marshal:f0t0:s1,f:xs:XP:mogg-war-marshal:f0t0:s1	-	-	-	9ee19e8250ce	-	1003c33b3578	-	-	2026-11-24	xproof
 7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mogg-war-marshal:f0t0:s1,f:xs:XP:mogg-war-marshal:f0t0:s1	-	-	-	9ee19e8250ce	-	1003c33b3578	-	-	2026-11-24	xproof
 7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ba8ae5b-8025-40eb-969d-38a85eefe7d6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7baff5c8-5919-4cbf-961e-962e740ebd8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7baff5c8-5919-4cbf-961e-962e740ebd8f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7baff5c8-5919-4cbf-961e-962e740ebd8f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7baff5c8-5919-4cbf-961e-962e740ebd8f	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:unyaro-bees:f0a1:s1,f:xs:XP:unyaro-bees:f0a1:s1	-	-	-	d864b561c9cb	-	fa2c13540dee	-	-	2026-11-24	xproof
 7baffe00-78a4-4675-9c74-29eb3882bd01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7baffe00-78a4-4675-9c74-29eb3882bd01	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7baffe00-78a4-4675-9c74-29eb3882bd01	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

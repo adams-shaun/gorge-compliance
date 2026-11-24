@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a8d41fe-e04d-484b-a7d1-19be311e6ca7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8d41fe-e04d-484b-a7d1-19be311e6ca7	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:herbal-poultice:f0a0:s1,f:xs:XP:herbal-poultice:f0a0:s1	-	-	-	d864b561c9cb	-	9f33c905e38a	-	-	2026-11-24	xproof
 4a8f2104-57ec-4b23-9857-f26afa5cbcfe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8f2104-57ec-4b23-9857-f26afa5cbcfe	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a9437a6-4e61-48b6-8194-1c6ba6432250	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -127,8 +127,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a9e0294-c967-4e90-b776-6d3195034a23	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Wrecking Gecko/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a9e0294-c967-4e90-b776-6d3195034a23	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Wrecking Gecko/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a9e73b7-8c8b-4489-b670-ce49c2c8a46a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4aa34391-d532-48e5-a125-2619d04f27ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4aa34391-d532-48e5-a125-2619d04f27ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4aa34391-d532-48e5-a125-2619d04f27ff	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:faultgrinder:cast:s1,f:xs:XP:faultgrinder:cast:s1	-	-	-	d864b561c9cb	-	be5b61fc34fd	-	-	2026-11-24	xproof
+4aa34391-d532-48e5-a125-2619d04f27ff	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:faultgrinder:cast:s1,f:xs:XP:faultgrinder:cast:s1	-	-	-	d864b561c9cb	-	be5b61fc34fd	-	-	2026-11-24	xproof
 4aa9764a-39ab-4d55-bc71-45f83035fb4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aa9764a-39ab-4d55-bc71-45f83035fb4c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aab6794-506f-413c-91e0-d886e0019dce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4aceb786-960d-4719-9de8-79dffd491a51	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:bard-s-bow:f0t0:s2,f:xs:XP:bard-s-bow:f0t0:s2	-	-	-	267e485f6204	-	aa9903b69980	-	-	2026-11-24	xproof
 4aceb786-960d-4719-9de8-79dffd491a51	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bard's Bow/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ad09b75-6d7a-46c7-95a2-d7f90995fdd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ad09b75-6d7a-46c7-95a2-d7f90995fdd1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4ad09b75-6d7a-46c7-95a2-d7f90995fdd1	f0/a0	Dig	agreed	-	F	start	2	0	f:xs:XP:lurking-informant:f0a0:s1	-	-	-	d864b561c9cb	-	6ef667714a62	-	-	2026-11-24	xproof
 4ad34f85-a185-458a-a7a1-eb60f7efce5b	cast	cast-resolve	agreed	-	X	scen	1	0	Brackish Blunder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ad870b2-133c-4229-84a8-f91e4c62fcd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ad870b2-133c-4229-84a8-f91e4c62fcd0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

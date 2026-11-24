@@ -39,7 +39,7 @@ c531801c-acf0-45ae-a112-054cc5ccb6ed	combat#0.attack	combat#0.attack	agreed	-	X	
 c531801c-acf0-45ae-a112-054cc5ccb6ed	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Burrog Banemaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c531801c-acf0-45ae-a112-054cc5ccb6ed	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Burrog Banemaker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c5323a43-82de-4340-8578-b3ffcc66f8fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c5323a43-82de-4340-8578-b3ffcc66f8fa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c5323a43-82de-4340-8578-b3ffcc66f8fa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c5355c5e-d07d-48ca-90c5-98edcab1a3c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5373026-8b43-42a7-aa69-a1b0f1619795	cast	cast-resolve	agreed	-	X	scen	1	0	Pull from the Grave/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c53b7602-5e36-4900-896c-844bf6eac22e	cast	cast-resolve	agreed	-	X	scen	1	0	Smaug the Magnificent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ c5782f70-05c6-4df9-812d-7ecbe2dbaaff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c5782f70-05c6-4df9-812d-7ecbe2dbaaff	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5782f70-05c6-4df9-812d-7ecbe2dbaaff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c57907d1-c5a1-45c7-80a8-38fedf86dd19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c57edca9-b71e-4ec1-84d5-4b178969ccb7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c57edca9-b71e-4ec1-84d5-4b178969ccb7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nightshade-stinger:cast:s1,f:xs:XP:nightshade-stinger:cast:s1	-	-	-	d864b561c9cb	-	c87b0ce3d7ea	-	-	2026-11-24	xproof
 c57ee68e-6832-4d4c-b710-fc03a2c10a9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5829bff-9687-42b2-8bba-1f036e592cdd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5829bff-9687-42b2-8bba-1f036e592cdd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,8 +145,8 @@ c5a7a82e-3c13-4fa1-8bf5-bb85b2890f75	cast	cast-resolve	agreed	-	X	scen	1	0	Astut
 c5a7a82e-3c13-4fa1-8bf5-bb85b2890f75	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 c5acf2a5-40f4-433d-a74d-1cb56c521464	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Arid Mesa/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 c5acf2a5-40f4-433d-a74d-1cb56c521464	land	play-land	agreed	-	FX	scen	2	0	Arid Mesa/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-c5b0cd1c-6f9b-4b48-9430-af78731e1a45	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c5b0cd1c-6f9b-4b48-9430-af78731e1a45	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c5b0cd1c-6f9b-4b48-9430-af78731e1a45	cast	cast	agreed	-	F	start	2	0	f:xs:XP:whetwheel:cast:s1	-	-	-	d864b561c9cb	-	602a161f7f34	-	-	2026-11-24	xproof
+c5b0cd1c-6f9b-4b48-9430-af78731e1a45	f0/a0	Mill	agreed	-	F	start	4	0	f:xs:XP:whetwheel:cast:s1	-	-	-	d864b561c9cb	-	602a161f7f34	-	-	2026-11-24	xproof
 c5b4bc25-0f32-4e1d-b6fe-f122140f2207	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5b4bc25-0f32-4e1d-b6fe-f122140f2207	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5ba0f0f-65c5-4ffa-987a-f320b401ec8f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

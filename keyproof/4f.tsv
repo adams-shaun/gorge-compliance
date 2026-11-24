@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f754f11-3b6d-4a4e-86d7-7495e475ef74	cast	cast-resolve	agreed	-	FX	scen	2	0	Susurian Voidborn/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f754f11-3b6d-4a4e-86d7-7495e475ef74	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Susurian Voidborn/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f7d2774-2aec-4992-b35b-e03265e517af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f7d2774-2aec-4992-b35b-e03265e517af	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f7d2774-2aec-4992-b35b-e03265e517af	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:darksteel-brute:f0a0:s1,f:xs:XP:darksteel-brute:f0a0:s1	-	-	-	d864b561c9cb	-	dc2fa3e4e860	-	-	2026-11-24	xproof
 4f7e4aff-ef68-44fe-a0dc-b9ab0ecd7146	cast	cast-resolve	agreed	-	X	scen	1	0	Expose the Culprit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f7e7c59-e0a9-4b32-96b9-b1abf52f5ef7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f7e7c59-e0a9-4b32-96b9-b1abf52f5ef7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -130,8 +130,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f945baa-40a9-4494-b2f9-f1926f3fec84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f9c66f9-f5d4-499d-9325-e779e6612bca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fa113da-44aa-4c84-8f63-b1cad63da926	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fa113da-44aa-4c84-8f63-b1cad63da926	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fa113da-44aa-4c84-8f63-b1cad63da926	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4fa113da-44aa-4c84-8f63-b1cad63da926	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+4fa113da-44aa-4c84-8f63-b1cad63da926	f0/t1	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-slith:f0t1:s1,f:xs:XP:arcbound-slith:f0t1:s1	-	-	-	d864b561c9cb	-	2364dedadd7e	-	-	2026-11-24	xproof
 4fa23be3-a192-45ab-bdf6-646d4be305e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fa23be3-a192-45ab-bdf6-646d4be305e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fa2c9cb-106c-482c-9ba7-5bba2ea9e4a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fe6f784-0290-4d4a-85ae-0b66522d31e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fe6f784-0290-4d4a-85ae-0b66522d31e9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fe8316a-9cff-43e9-a1d5-993a0c9daf3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fe8af73-c84a-44bd-9739-ee5c8b027874	f0/a0	Mana	agreed	-	FX	start	3	0	x:xs:XP:crypt-of-agadeem:f0a0:s1,f:xs:XP:crypt-of-agadeem:f0a0:s1	-	-	-	8a1b1a193ec0	-	ac2fbba83d4e	-	-	2026-11-24	xproof
+4fe8af73-c84a-44bd-9739-ee5c8b027874	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:crypt-of-agadeem:f0a1:s1,f:xs:XP:crypt-of-agadeem:f0a1:s1	-	-	-	d864b561c9cb	-	ac2fbba83d4e	-	-	2026-11-24	xproof
 4fe8af73-c84a-44bd-9739-ee5c8b027874	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fe8af73-c84a-44bd-9739-ee5c8b027874	land	land	agreed	-	FX	start	2	0	x:xs:XP:crypt-of-agadeem:land:s1,f:xs:XP:crypt-of-agadeem:land:s1	-	-	-	8a1b1a193ec0	-	ac2fbba83d4e	-	-	2026-11-24	xproof
 4fee183e-973e-4be7-bb68-3e1c0c6bfb5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

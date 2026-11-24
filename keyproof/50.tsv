@@ -5,14 +5,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5001bf21-9dbb-4229-aeef-25805e71b832	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Icewind Elemental/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5001bf21-9dbb-4229-aeef-25805e71b832	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:icewind-elemental:f0t0:s2,f:xs:XP:icewind-elemental:f0t0:s2	-	-	-	e07cf3a05ba5	-	ef6e869938d4	-	-	2026-11-24	xproof
 5004b84a-33b7-4f6f-b2c2-7086b9087535	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5004b84a-33b7-4f6f-b2c2-7086b9087535	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5004b84a-33b7-4f6f-b2c2-7086b9087535	f0/a1	NULL	owed	refused:steps-needed:cost:BR	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5004b84a-33b7-4f6f-b2c2-7086b9087535	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5005df36-a100-492d-89b9-e221793cfb56	cast	cast-resolve	agreed	-	FX	scen	2	0	Tempest Hart/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5005df36-a100-492d-89b9-e221793cfb56	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tempest Hart/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5005df36-a100-492d-89b9-e221793cfb56	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tempest Hart/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5005df36-a100-492d-89b9-e221793cfb56	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tempest Hart/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-500663c1-390c-4598-b614-4168c4f7debe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-500663c1-390c-4598-b614-4168c4f7debe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+500663c1-390c-4598-b614-4168c4f7debe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hedge-troll:cast:s1,f:xs:XP:hedge-troll:cast:s1	-	-	-	d864b561c9cb	-	d62bd7f1d5d1	-	-	2026-11-24	xproof
+500663c1-390c-4598-b614-4168c4f7debe	f0/a0	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:hedge-troll:cast:s1,f:xs:XP:hedge-troll:cast:s1	-	-	-	d864b561c9cb	-	d62bd7f1d5d1	-	-	2026-11-24	xproof
 50090188-651d-4402-968f-3f6bf9276029	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50090188-651d-4402-968f-3f6bf9276029	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

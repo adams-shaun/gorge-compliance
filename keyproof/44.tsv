@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 441cdd7d-6c4c-4a91-a118-7eaa35276660	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:priest-of-the-blood-rite:f0t0:s1,f:xs:XP:priest-of-the-blood-rite:f0t0:s1	-	-	-	d864b561c9cb	-	29e8737155c4	-	-	2026-11-24	xproof
 441cdd7d-6c4c-4a91-a118-7eaa35276660	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:priest-of-the-blood-rite:f0t0:s1,f:xs:XP:priest-of-the-blood-rite:f0t0:s1	-	-	-	d864b561c9cb	-	29e8737155c4	-	-	2026-11-24	xproof
 441cdd7d-6c4c-4a91-a118-7eaa35276660	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-441de890-7b9f-42f7-859a-a154b8ed74ac	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+441de890-7b9f-42f7-859a-a154b8ed74ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foresee:cast:s1,f:xs:XP:foresee:cast:s1	-	-	-	d864b561c9cb	-	e87183987130	-	-	2026-11-24	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	cast	cast-resolve	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -101,7 +101,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4477eeab-a51a-4dc2-9c97-83f2551d8b54	cast	cast-resolve	agreed	-	FX	scen	2	0	Cornered Crook/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4477eeab-a51a-4dc2-9c97-83f2551d8b54	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4478e843-fd25-4ad1-93f8-2dee605386fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trolls-of-tel-jilad:cast:s1,f:xs:XP:trolls-of-tel-jilad:cast:s1	-	-	-	25696bf19d5b	-	87bda6e1e492	-	-	2026-11-24	xproof
-4478e843-fd25-4ad1-93f8-2dee605386fc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4478e843-fd25-4ad1-93f8-2dee605386fc	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:trolls-of-tel-jilad:f0a0:s1,f:xs:XP:trolls-of-tel-jilad:f0a0:s1	-	-	-	d864b561c9cb	-	87bda6e1e492	-	-	2026-11-24	xproof
 447b9412-2649-4548-8e9b-eed5e92ad92a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 447c7fe0-6ec7-4163-9d9c-f08f0a4c7109	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 447c7fe0-6ec7-4163-9d9c-f08f0a4c7109	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -114,8 +114,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4489a526-0e07-4d37-9e83-628f7eb256c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4489a526-0e07-4d37-9e83-628f7eb256c6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4489a526-0e07-4d37-9e83-628f7eb256c6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-448b27a5-7c0c-4ab6-bddf-bd62b920aacc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-448b27a5-7c0c-4ab6-bddf-bd62b920aacc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+448b27a5-7c0c-4ab6-bddf-bd62b920aacc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forced-fruition:cast:s1,f:xs:XP:forced-fruition:cast:s1	-	-	-	d864b561c9cb	-	bf4b040db294	-	-	2026-11-24	xproof
+448b27a5-7c0c-4ab6-bddf-bd62b920aacc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 448c84f9-712b-4970-8719-2ab9c2a59d20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 448cc829-1596-4aec-b180-c0c1e0566f6b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:wary-thespian:f0t0:s2,f:xs:XP:wary-thespian:f0t0:s2	-	-	-	e07cf3a05ba5	-	d5b5c512f56b	-	-	2026-11-24	xproof
 448cc829-1596-4aec-b180-c0c1e0566f6b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:wary-thespian:f0t0:s2,f:xs:XP:wary-thespian:f0t0:s2	-	-	-	e07cf3a05ba5	-	d5b5c512f56b	-	-	2026-11-24	xproof

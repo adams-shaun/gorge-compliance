@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 08122109-6287-4d78-9242-2da8a25022b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 081764b4-ef96-44aa-836c-05353efd215c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0817d902-08c8-4ec3-9a84-2de65bc70e6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0817d902-08c8-4ec3-9a84-2de65bc70e6a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0817d902-08c8-4ec3-9a84-2de65bc70e6a	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 081ad4e3-cda3-41cc-890f-412611dc9ea0	cast	cast-resolve	agreed	-	FX	scen	2	0	Ty Lee, Chi Blocker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 081ad4e3-cda3-41cc-890f-412611dc9ea0	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 081ad4e3-cda3-41cc-890f-412611dc9ea0	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ty Lee, Chi Blocker/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 088d63ec-bd5e-4e80-acf9-2af270a9b395	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:incubator-drone:f0t0:s1,f:xs:XP:incubator-drone:f0t0:s1	-	-	-	d864b561c9cb	-	a13883ea73ed	-	-	2026-11-24	xproof
 088d63ec-bd5e-4e80-acf9-2af270a9b395	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:incubator-drone:f0t0:s1,f:xs:XP:incubator-drone:f0t0:s1	-	-	-	d864b561c9cb	-	a13883ea73ed	-	-	2026-11-24	xproof
 088dfd02-c0e0-41d1-9923-efe023fb2ad1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-088dfd02-c0e0-41d1-9923-efe023fb2ad1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+088dfd02-c0e0-41d1-9923-efe023fb2ad1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 088fb5dc-65eb-42bf-8a32-76fa6b79b79f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 088fb5dc-65eb-42bf-8a32-76fa6b79b79f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 088fb5dc-65eb-42bf-8a32-76fa6b79b79f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

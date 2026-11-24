@@ -39,7 +39,7 @@ be1fc2cf-00b8-424f-b683-3743fba285c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fes
 be22faba-07e0-4036-b700-82769989250b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be291913-dd50-4443-ad06-7cfd04a643eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:faceless-devourer:f0t0:s1,f:xs:XP:faceless-devourer:f0t0:s1	-	-	-	9ee19e8250ce	-	3bd9c8017038	-	-	2026-11-24	xproof
 be291913-dd50-4443-ad06-7cfd04a643eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:faceless-devourer:f0t0:s1,f:xs:XP:faceless-devourer:f0t0:s1	-	-	-	9ee19e8250ce	-	3bd9c8017038	-	-	2026-11-24	xproof
-be291913-dd50-4443-ad06-7cfd04a643eb	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be291913-dd50-4443-ad06-7cfd04a643eb	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 be2a4595-4378-4af8-8368-e3b2bb3cb5bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be2ab552-df82-49a0-8f0b-ee66de34e1a7	cast	cast-resolve	agreed	-	X	scen	1	0	Sanitation Automaton/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be2ab552-df82-49a0-8f0b-ee66de34e1a7	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ beb02f49-95a6-49bf-b176-4e4b2ab5b651	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Heart
 beb39342-5272-41a4-a470-9f2bf0cd0f92	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 beb3f812-da58-4f03-915b-dc473cd01554	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 beb9c5c9-d4ab-423f-8937-91d308e09770	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-beb9c5c9-d4ab-423f-8937-91d308e09770	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+beb9c5c9-d4ab-423f-8937-91d308e09770	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:infectious-host:f0t0:s1,f:xs:XP:infectious-host:f0t0:s1	-	-	-	d864b561c9cb	-	a93c78bbd1da	-	-	2026-11-24	xproof
 bec0127a-ab3c-4923-93c2-c43ba8998091	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bec03edc-261a-4b02-be37-2006f657e905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bec04768-c573-4886-9ca1-2511abc05a14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ beea5db2-1771-417f-9a31-028b3d31aa66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 beebed34-3a9b-4b51-aacb-1e85d76cf326	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 beebed34-3a9b-4b51-aacb-1e85d76cf326	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bef15918-c0e7-4f6d-a589-f91f3fa11ef1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tolarian-sentinel:cast:s1,f:xs:XP:tolarian-sentinel:cast:s1	-	-	-	9ee19e8250ce	-	37fe85b49e73	-	-	2026-11-24	xproof
-bef15918-c0e7-4f6d-a589-f91f3fa11ef1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bef15918-c0e7-4f6d-a589-f91f3fa11ef1	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bef3f0a9-4d5c-4469-81df-adbeedeed768	cast	cast-resolve	agreed	-	X	scen	1	0	Horrid Vigor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 befb211f-37ca-4083-98d4-9ff1f28be3f2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 befb211f-37ca-4083-98d4-9ff1f28be3f2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

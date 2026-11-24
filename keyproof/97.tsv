@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97560adc-814e-450c-9ca7-f9364e910a0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97560adc-814e-450c-9ca7-f9364e910a0b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97589fbb-3bd9-49c9-b8d8-bdc895a7f1e6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-975b4e0f-1133-4ffa-a6b1-d319d248dcde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:parasitic-strix:f0t0:s1,f:xs:XP:parasitic-strix:f0t0:s1	-	-	-	8a1b1a193ec0	-	dc6ea7e89ed5	-	-	2026-11-24	xproof
+975b4e0f-1133-4ffa-a6b1-d319d248dcde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:parasitic-strix:f0t0:s1,f:xs:XP:parasitic-strix:f0t0:s1	-	-	-	d864b561c9cb	-	dc6ea7e89ed5	-	-	2026-11-24	xproof
 975b4e0f-1133-4ffa-a6b1-d319d248dcde	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 975ec9a3-6f20-4177-8211-82526e092538	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Overgrown Tomb/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 975ec9a3-6f20-4177-8211-82526e092538	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Overgrown Tomb/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97b2fb8b-0c69-4ed2-b2d0-8a780f9b5b97	cast	cast-resolve	agreed	-	X	scen	1	0	Dauntless Veteran/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97b2fb8b-0c69-4ed2-b2d0-8a780f9b5b97	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dauntless Veteran/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97b37822-b030-4792-bcd7-c84499f51b18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97b37822-b030-4792-bcd7-c84499f51b18	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97b37822-b030-4792-bcd7-c84499f51b18	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 97b386da-4bc0-4c39-a5cc-17e441c45127	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97b386da-4bc0-4c39-a5cc-17e441c45127	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97b477d8-2e05-475e-8ed6-7d680cb21cd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

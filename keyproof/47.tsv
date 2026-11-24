@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4766f232-8275-4256-b756-8dd5c5e825a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4766f232-8275-4256-b756-8dd5c5e825a3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47678f44-b595-492e-af00-4e73f941e24e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47678f44-b595-492e-af00-4e73f941e24e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+47678f44-b595-492e-af00-4e73f941e24e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:penumbra-spider:f0t0:s1,f:xs:XP:penumbra-spider:f0t0:s1	-	-	-	d864b561c9cb	-	2087fc9bae44	-	-	2026-11-24	xproof
 4770ad4a-a346-4108-8f61-a077155d4bd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4770ad4a-a346-4108-8f61-a077155d4bd1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4770ec88-bc7b-457e-8f67-ae46e2cf4caa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -70,7 +70,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4771a871-576e-4a14-92f0-b5b41c63d615	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pirate Peddlers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4771a871-576e-4a14-92f0-b5b41c63d615	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pirate Peddlers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4771f50c-0844-4d3a-90ea-406d65ebccfa	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cloudchaser-kestrel:cast:s1,f:xs:XP:cloudchaser-kestrel:cast:s1	-	-	-	0984227a67dd	-	a1f33dd65fa5	-	-	2026-11-24	xproof
-4771f50c-0844-4d3a-90ea-406d65ebccfa	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4771f50c-0844-4d3a-90ea-406d65ebccfa	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:cloudchaser-kestrel:f0a0:s1,f:xs:XP:cloudchaser-kestrel:f0a0:s1	-	-	-	d864b561c9cb	-	a1f33dd65fa5	-	-	2026-11-24	xproof
 4771f50c-0844-4d3a-90ea-406d65ebccfa	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cloudchaser-kestrel:cast:s1,f:xs:XP:cloudchaser-kestrel:cast:s1	-	-	-	0984227a67dd	-	a1f33dd65fa5	-	-	2026-11-24	xproof
 47735ef2-fc4c-4634-83ab-715b1e86da0c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4777fa96-12a5-42d5-840f-ddd85f4a4b68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 479dd04b-0048-446a-9202-a4dc9472e5c3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 479dd04b-0048-446a-9202-a4dc9472e5c3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47a0079f-3544-45bc-a32a-bd93844c8c43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47a0079f-3544-45bc-a32a-bd93844c8c43	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+47a0079f-3544-45bc-a32a-bd93844c8c43	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 47a0079f-3544-45bc-a32a-bd93844c8c43	f0/t1	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 47a66451-8a4e-4fc6-8685-96e1feb8f997	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47a66451-8a4e-4fc6-8685-96e1feb8f997	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

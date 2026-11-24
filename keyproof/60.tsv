@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60043b87-6008-4cfa-9d8f-6ee6e3f70766	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	26bb340d37cf	-	-	2026-11-24	xproof
 600a8c9e-e158-4fff-8c4d-c3a1bfd006e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 600b9ab8-36dc-4f02-b48c-091348d132ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-600b9ab8-36dc-4f02-b48c-091348d132ac	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+600b9ab8-36dc-4f02-b48c-091348d132ac	f0/t0	NULL	owed	refused:no-generator:trigger:LifeLost	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 600e1093-5619-49b3-b193-bd263e4fde33	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 600e1093-5619-49b3-b193-bd263e4fde33	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60105eb8-bdca-44b9-a970-68a7615526e8	cast	cast-resolve	agreed	-	X	scen	1	0	Dependable Quinjet/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -37,9 +37,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6024cb2d-a6e7-4adc-8b34-7f4e0cac16ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6024cb2d-a6e7-4adc-8b34-7f4e0cac16ce	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6025ce2f-d527-457c-866c-cb5c119d0bf4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:karstoderm:cast:s1,f:xs:XP:karstoderm:cast:s1	-	-	-	25696bf19d5b	-	1074693d50a1	-	-	2026-11-24	xproof
-6025ce2f-d527-457c-866c-cb5c119d0bf4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-602b30a0-ecf3-4639-a512-ee020675e432	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-602b30a0-ecf3-4639-a512-ee020675e432	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6025ce2f-d527-457c-866c-cb5c119d0bf4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+602b30a0-ecf3-4639-a512-ee020675e432	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:facevaulter:cast:s1,f:xs:XP:facevaulter:cast:s1	-	-	-	d864b561c9cb	-	aaab807a8014	-	-	2026-11-24	xproof
+602b30a0-ecf3-4639-a512-ee020675e432	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 602cce3e-7033-47d6-aec1-d755f234f270	cast	cast-resolve	agreed	-	X	scen	1	0	Adept Watershaper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 602cce3e-7033-47d6-aec1-d755f234f270	static#0.0	static#0.0	agreed	-	X	scen	1	0	Adept Watershaper/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 602e421e-afab-4488-8a52-af66b4fdce4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

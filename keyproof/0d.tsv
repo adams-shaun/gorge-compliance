@@ -12,15 +12,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d07eb9f-46f4-466d-acb6-609437c34f13	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:burner-rocket:f0t0:s2,f:xs:XP:burner-rocket:f0t0:s2	-	-	-	e07cf3a05ba5	-	e5f82c404073	-	-	2026-11-24	xproof
 0d07eb9f-46f4-466d-acb6-609437c34f13	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Burner Rocket/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d07eb9f-46f4-466d-acb6-609437c34f13	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:burner-rocket:f0t0:s2,f:xs:XP:burner-rocket:f0t0:s2	-	-	-	e07cf3a05ba5	-	e5f82c404073	-	-	2026-11-24	xproof
-0d09049a-6786-4b69-b448-35efaa926a71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d09049a-6786-4b69-b448-35efaa926a71	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d09049a-6786-4b69-b448-35efaa926a71	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d09049a-6786-4b69-b448-35efaa926a71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:soaring-hope:f0t0:s1,f:xs:XP:soaring-hope:f0t0:s1	-	-	-	d864b561c9cb	-	cc9ddf729c34	-	-	2026-11-24	xproof
+0d09049a-6786-4b69-b448-35efaa926a71	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0d09049a-6786-4b69-b448-35efaa926a71	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:soaring-hope:f0t0:s1,f:xs:XP:soaring-hope:f0t0:s1	-	-	-	d864b561c9cb	-	cc9ddf729c34	-	-	2026-11-24	xproof
 0d0c4c91-683a-4563-a0b0-39f3c04f6307	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:splash-lasher:f0t1:s1,f:xs:XP:splash-lasher:f0t1:s1	-	-	-	9ee19e8250ce	-	6a912e6c904e	-	-	2026-11-24	xproof
 0d0c4c91-683a-4563-a0b0-39f3c04f6307	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:splash-lasher:f0t1:s1,f:xs:XP:splash-lasher:f0t1:s1	-	-	-	9ee19e8250ce	-	6a912e6c904e	-	-	2026-11-24	xproof
 0d0c4c91-683a-4563-a0b0-39f3c04f6307	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-0d16e52a-a7d0-4850-b49d-99f7978133e4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d16e52a-a7d0-4850-b49d-99f7978133e4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d16e52a-a7d0-4850-b49d-99f7978133e4	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d16e52a-a7d0-4850-b49d-99f7978133e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blightspeaker:cast:s1,f:xs:XP:blightspeaker:cast:s1	-	-	-	d864b561c9cb	-	c223e3e6667b	-	-	2026-11-24	xproof
+0d16e52a-a7d0-4850-b49d-99f7978133e4	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:blightspeaker:f0a0:s1,f:xs:XP:blightspeaker:f0a0:s1	-	-	-	d864b561c9cb	-	c223e3e6667b	-	-	2026-11-24	xproof
+0d16e52a-a7d0-4850-b49d-99f7978133e4	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:blightspeaker:f0a1:s1,f:xs:XP:blightspeaker:f0a1:s1	-	-	-	d864b561c9cb	-	c223e3e6667b	-	-	2026-11-24	xproof
 0d1c6a82-943a-46bd-97ed-6055226ef2ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d1c6a82-943a-46bd-97ed-6055226ef2ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d1c6a82-943a-46bd-97ed-6055226ef2ab	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,7 +183,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0dc78b1e-581e-4f28-bf35-e2082553d6a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0dc78b1e-581e-4f28-bf35-e2082553d6a9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0dc8bdbb-996b-47d7-a5e5-7bdb6d9280fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0dc9acfb-3f8b-4a34-b44c-5cc62689904b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0dc9acfb-3f8b-4a34-b44c-5cc62689904b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:patrician-s-scorn:cast:s1	-	-	-	d864b561c9cb	-	8fac6e275a38	-	-	2026-11-24	xproof
 0dcd13ab-37f9-4d66-8227-1e72d920f297	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0dcd13ab-37f9-4d66-8227-1e72d920f297	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0dcee3a3-6cb1-45ce-958c-1f57ced80be4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
