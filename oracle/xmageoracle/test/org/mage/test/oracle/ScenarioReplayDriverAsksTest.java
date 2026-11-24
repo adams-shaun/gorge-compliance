@@ -114,7 +114,23 @@ public final class ScenarioReplayDriverAsksTest {
                 "a queued yes is the generator's answer");
         check(!(Boolean) adapter("unanswerableWishAsk", types, coax, true, new ArrayList<String>()),
                 "the alsoFromExile wording can still have an exile candidate and must ask");
+        String filtered = "Reveal a multicolored card you own from outside the game and put it into your hand?";
+        check((Boolean) adapter("unanswerableWishAsk", types, filtered, true, new ArrayList<String>()),
+                "an empty sideboard's filtered wish (Glittering Wish) must be declined");
+        check(!(Boolean) adapter("unanswerableWishAsk", types, filtered, false, new ArrayList<String>()),
+                "a filtered wish over a non-empty sideboard still asks");
         check(!(Boolean) adapter("unanswerableWishAsk", types, "Draw a card?", true, new ArrayList<String>()),
+                "another chooseUse is untouched");
+        // Elvish Piper and its siblings: the same candidate-free ask over an
+        // empty hand.
+        String piper = "Put a creature card from your hand onto the battlefield?";
+        check((Boolean) adapter("unanswerableHandPutAsk", types, piper, true, new ArrayList<String>()),
+                "an empty hand's unscripted put-from-hand ask must be declined");
+        check(!(Boolean) adapter("unanswerableHandPutAsk", types, piper, false, new ArrayList<String>()),
+                "a non-empty hand still asks");
+        check(!(Boolean) adapter("unanswerableHandPutAsk", types, piper, true, new ArrayList<>(Arrays.asList("No"))),
+                "a queued no is the generator's answer");
+        check(!(Boolean) adapter("unanswerableHandPutAsk", types, "Draw a card?", true, new ArrayList<String>()),
                 "another chooseUse is untouched");
         // The helper alone is not the fix: pin that the chooseUse override
         // actually calls it. Dropping the call would leave every check above

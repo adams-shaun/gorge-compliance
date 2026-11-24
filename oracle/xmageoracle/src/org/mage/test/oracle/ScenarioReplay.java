@@ -1230,8 +1230,36 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * own answer and stays for TestPlayer; a non-empty sideboard still asks
          * because the card may be chosen. */
         static boolean unanswerableWishAsk(String message, boolean sideboardEmpty, List<String> choices) {
+            // The plain wish ("Put a card you own from outside the game ...")
+            // and the filtered one (Burning, Cunning, Glittering, Golden and
+            // Living Wish: "Reveal a <filter> card you own from outside the
+            // game and put it into your hand?") are the same candidate-free
+            // ask over an empty sideboard.
             if (message == null || !sideboardEmpty
-                    || !message.startsWith("Put a card you own from outside the game")) {
+                    || !(message.startsWith("Put a card you own from outside the game")
+                    || message.startsWith("Reveal ")
+                    && message.endsWith(" card you own from outside the game and put it into your hand?"))) {
+                return false;
+            }
+            if (!choices.isEmpty()) {
+                String head = choices.get(0);
+                if (head.equals("Yes") || head.equals("No")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /** An unscripted "Put a <kind> card from your hand onto the battlefield?"
+         * chooseUse (Elvish Piper, Terrain Generator, Dragon Arch, Metathran
+         * Aerostat) over an EMPTY hand has no candidate and gorge records no
+         * decision for it, yet XMage asks the may before it looks at the hand.
+         * Decline it rather than strict-miss. A queued Yes/No is the
+         * generator's own answer and stays for TestPlayer; a non-empty hand
+         * still asks because the filter may admit one of its cards. */
+        static boolean unanswerableHandPutAsk(String message, boolean handEmpty, List<String> choices) {
+            if (message == null || !handEmpty || !message.startsWith("Put ")
+                    || !message.endsWith(" from your hand onto the battlefield?")) {
                 return false;
             }
             if (!choices.isEmpty()) {
@@ -1267,6 +1295,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // own from outside the game into your hand") the prompt has no
                 // candidate and gorge records no decision, so decline it rather
                 // than let strict mode stop at "Missing CHOICE def".
+                return false;
+            }
+            if (unanswerableHandPutAsk(message, getHand().isEmpty(), getChoices())) {
                 return false;
             }
             if (phyrexianStarved(message, getChoices())) {
@@ -1743,6 +1774,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
             choiceGame = game;
             boolean declined = declinePairToChoiceSkip(target.getMinNumberOfTargets(), getChoices(), getTargets());
             try {
+                if (forcedChooseCards(cards, target, source, game)) {
+                    return true;
+                }
                 return super.choose(outcome, cards, target, source, game);
             } finally {
                 if (declined && !getChoices().isEmpty() && TestPlayer.CHOICE_SKIP.equals(getChoices().get(0))) {
@@ -1753,6 +1787,40 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 choiceGame = previous;
             }
+        }
+
+        /** The choose(Cards, TargetCard) twin of forcedChoose: a look-and-pick
+         * whose every remaining card is needed (Moment of Truth's last card of
+         * three, Skyclave Plunder's three of three, Expressive Iteration's
+         * last exile) is no decision gorge records, yet XMage asks it, so
+         * the cards are taken here unless the choice queue's head is a name
+         * for one of them or a skip. */
+        private boolean forcedChooseCards(Cards cards, mage.target.TargetCard target, Ability source, Game game) {
+            UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+            List<UUID> candidates = new ArrayList<>();
+            for (UUID id : target.possibleTargets(abilityControllerId, source, game, cards)) {
+                if (!target.contains(id)) {
+                    candidates.add(id);
+                }
+            }
+            String head = getChoices().isEmpty() ? null : getChoices().get(0);
+            boolean headNamesCandidate = false;
+            if (head != null) {
+                for (UUID id : candidates) {
+                    mage.MageObject o = game.getObject(id);
+                    if (o != null && hasObjectTargetNameOrAlias(o, head)) {
+                        headNamesCandidate = true;
+                        break;
+                    }
+                }
+            }
+            if (!forcedPick(target.getMinNumberOfTargets() - target.getSize(), candidates.size(), head, headNamesCandidate)) {
+                return false;
+            }
+            for (UUID id : candidates) {
+                target.add(id, game);
+            }
+            return true;
         }
 
         /** The generator scripts a declined pick as a pair -- "No" on the

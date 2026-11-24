@@ -123,8 +123,21 @@ func TestXMageBooleanDialogFacesAgainstCorpus(t *testing.T) {
 			t.Errorf("xmageDigMayAskFaces lists %q, absent from the corpus", name)
 		}
 	}
-	if len(xmageBooleanDialogFaces) != 3 || len(xmageDigMayAskFaces) != 8 {
-		t.Errorf("tables hold %d and %d entries; a new entry needs an XMage-source proof", len(xmageBooleanDialogFaces), len(xmageDigMayAskFaces))
+	for _, m := range []map[string]string{xmageDigMayOnlyFaces} {
+		for name := range m {
+			if _, ok := reg.Lookup(name); !ok {
+				t.Errorf("a dig table lists %q, absent from the corpus", name)
+			}
+		}
+	}
+	for name := range xmageDigChoiceFaces {
+		if _, ok := reg.Lookup(name); !ok {
+			t.Errorf("xmageDigChoiceFaces lists %q, absent from the corpus", name)
+		}
+	}
+	if len(xmageBooleanDialogFaces) != 3 || len(xmageDigMayAskFaces) != 8 || len(xmageDigMayOnlyFaces) != 2 || len(xmageDigChoiceFaces) != 3 {
+		t.Errorf("tables hold %d, %d, %d and %d entries; a new entry needs an XMage-source proof",
+			len(xmageBooleanDialogFaces), len(xmageDigMayAskFaces), len(xmageDigMayOnlyFaces), len(xmageDigChoiceFaces))
 	}
 }
 
@@ -146,5 +159,72 @@ func TestDigMayAskScriptsYesThenTargetPick(t *testing.T) {
 	// Sage of Days' Optional$ Dig is XMage's up-to target with no chooseUse.
 	if got := answersWithSources([]rules.OracleDecision{take}, "sage of days"); len(got) > 0 && got[0].Value == "yes" {
 		t.Fatalf("an unlisted card's take scripted a chooseUse: %#v", got)
+	}
+}
+
+// Lurking Informant and Eye Spy: the one-card look is a lone chooseUse.
+func TestDigMayOnlyScriptsTheLoneChooseUse(t *testing.T) {
+	take := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "dig",
+		Options: 1, Min: 0, Max: 1, Picks: []string{"Plains"}, PickIdx: []int{0}, PickRefs: []string{"p1:Plains"},
+		PickKinds: []string{"dig"}}
+	if got := answersWithSources([]rules.OracleDecision{take}, "lurking informant"); !reflect.DeepEqual(got, []XAnswer{{0, "choice", "yes"}}) {
+		t.Fatalf("take = %#v, want a lone yes", got)
+	}
+	declined := take
+	declined.Picks, declined.PickIdx, declined.PickRefs, declined.PickKinds = nil, nil, nil, nil
+	if got := answersWithSources([]rules.OracleDecision{declined}, "eye spy"); !reflect.DeepEqual(got, []XAnswer{{0, "choice", "no"}}) {
+		t.Fatalf("declined = %#v, want a lone no", got)
+	}
+}
+
+// Chrome Courier, Moment of Truth and Expressive Iteration ask their picks
+// through player.choose: the CHOICE queue, never the target queue the
+// two-card complement route would use.
+func TestDigChoiceFacesScriptTheChoiceQueue(t *testing.T) {
+	two := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "dig",
+		Options: 2, Min: 1, Max: 1, Picks: []string{"Plains"}, PickIdx: []int{0}, PickRefs: []string{"p0:Plains"},
+		OptionRefs: []string{"p0:Plains", "p0:Island"}, PickKinds: []string{"dig"}}
+	want := []XAnswer{{0, "choice", "Plains"}}
+	for _, face := range []string{"chrome courier", "moment of truth", "expressive iteration"} {
+		if got := answersWithSources([]rules.OracleDecision{two}, face); !reflect.DeepEqual(got, want) {
+			t.Errorf("%s: %#v, want %#v", face, got, want)
+		}
+	}
+	if got := answersWithSources([]rules.OracleDecision{two}, "ashiok, wicked manipulator"); len(got) != 1 || got[0].Kind != "target" {
+		t.Errorf("an unlisted card keeps the two-card target route: %#v", got)
+	}
+}
+
+// Dredge (Grave-Shell Scarab): the replacement election is chooseUse.
+func TestDredgeElectionIsChooseUse(t *testing.T) {
+	d := rules.OracleDecision{Step: 0, Seat: 0, Kind: "mode", GorgeKind: "modes", Resume: "dredge", Options: 2, Min: 1, Max: 1,
+		Picks: []string{"Dredge 1 (mill, then return Grave-Shell Scarab to hand)"}, PickIdx: []int{0},
+		PickRefs: []string{"p0:Grave-Shell Scarab"}, PickKinds: []string{"dredge"}}
+	if got := answersWithSources([]rules.OracleDecision{d}); !reflect.DeepEqual(got, []XAnswer{{0, "choice", "yes"}}) {
+		t.Fatalf("dredge = %#v, want yes", got)
+	}
+	d.Picks, d.PickKinds = []string{"Draw a card"}, []string{"draw"}
+	if got := answersWithSources([]rules.OracleDecision{d}); !reflect.DeepEqual(got, []XAnswer{{0, "choice", "no"}}) {
+		t.Fatalf("plain draw = %#v, want no", got)
+	}
+}
+
+// Tazeem Raptor: an own-bounce pick behind its trigger's own "you may" is the
+// CHOICE queue; Kor Skyfisher's mandatory form (no confirmation) stays a target.
+func TestOptionalOwnBouncePickIsChoice(t *testing.T) {
+	confirm := rules.OracleDecision{Step: 0, Seat: 0, Kind: "yesno", GorgeKind: "trigger_optional", Resume: "optional",
+		Options: 2, Min: 1, Max: 1, Picks: []string{"Yes — Tazeem Raptor"}, PickKinds: []string{"yes"}}
+	pick := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "hidden_pick",
+		Options: 5, Min: 1, Max: 1, Picks: []string{"Plains"}, PickIdx: []int{0}, PickRefs: []string{"p0:Plains"},
+		PickKinds: []string{"hidden_pick"}}
+	bounce := map[int]bool{0: true}
+	got := xanswersSetup([]rules.OracleDecision{confirm, pick}, 1, nil, nil, nil, nil, xanswersExtra{ownBounce: bounce})
+	want := []XAnswer{{0, "choice", "yes"}, {0, "choice", "Plains"}}
+	if !reflect.DeepEqual(got[0], want) {
+		t.Fatalf("optional bounce = %#v, want %#v", got[0], want)
+	}
+	got = xanswersSetup([]rules.OracleDecision{pick}, 1, nil, nil, nil, nil, xanswersExtra{ownBounce: bounce})
+	if len(got[0]) != 1 || got[0][0].Kind != "target" {
+		t.Fatalf("mandatory own bounce = %#v, want the target answer", got[0])
 	}
 }

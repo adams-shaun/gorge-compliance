@@ -138,6 +138,16 @@ var xmageDigMayAskFaces = map[string]string{
 	"malevolent rumble":      "Put a permanent card from among them into your hand?",
 }
 
+// xmageDigMayOnlyFaces names the faces whose one-card look XMage poses as a
+// lone chooseUse "Put that card into its owner's graveyard?" (the card is
+// the only candidate, so no pick follows): yes when gorge's optional take
+// picked it, no when it declined. Lurking Informant and Eye Spy at XMAGE_REF
+// 7aeb547a86.
+var xmageDigMayOnlyFaces = map[string]string{
+	"lurking informant": "Put that card into its owner's graveyard?",
+	"eye spy":           "Put that card into its owner's graveyard?",
+}
+
 // digMayAnswers is the may-ask + pick of an optional Dig take on a
 // xmageDigMayAskFaces face resolving at the decision's step.
 func (r *answerRouting) digMayAnswers(i int) ([]XAnswer, bool) {
@@ -145,10 +155,14 @@ func (r *answerRouting) digMayAnswers(i int) ([]XAnswer, bool) {
 	if d.Resume != "dig" || d.Min != 0 || d.Max < 1 || d.Kind != "choose_n" {
 		return nil, false
 	}
-	listed := false
+	listed, only := false, false
 	for _, name := range r.sources[d.Step] {
 		if _, ok := xmageDigMayAskFaces[name]; ok {
 			listed = true
+			break
+		}
+		if _, ok := xmageDigMayOnlyFaces[name]; ok {
+			listed, only = true, true
 			break
 		}
 	}
@@ -163,10 +177,75 @@ func (r *answerRouting) digMayAnswers(i int) ([]XAnswer, bool) {
 	if len(d.Picks) == 0 {
 		return []XAnswer{{d.Seat, "choice", "no"}}, true
 	}
+	if only {
+		return []XAnswer{{d.Seat, "choice", "yes"}}, true
+	}
 	return []XAnswer{{d.Seat, "choice", "yes"}, {d.Seat, "target", strings.Join(d.Picks, "^")}}, true
 }
 
 func (r *answerRouting) digMayOwned(i int) bool {
 	_, ok := r.digMayAnswers(i)
 	return ok
+}
+
+// xmageDigChoiceFaces names the faces whose look-and-pick Dig XMage poses as
+// player.choose over a TargetCardInLibrary (TestPlayer.makeChoose: the CHOICE
+// queue), not as LookLibraryAndPickControllerEffect's chooseTarget. The
+// two-card complement and the many-card graveyard routes (digTargetAnswer)
+// would script such a pick on the TARGET queue, which these asks never read
+// ("Missing CHOICE def ... TargetCardInLibrary", the target answer left
+// over). Measured on the xproof finds at XMAGE_REF 7aeb547a86:
+//
+//	ChromeCourier       "Select a card (to hand)" over the two revealed cards
+//	MomentOfTruth       one ask per card: hand, graveyard, bottom
+//	ExpressiveIteration one ask per card: hand, bottom, exile
+//
+// The asks no gorge decision covers (the last card of a chain) are the
+// driver's forced choose over a look-and-pick (forcedChooseCards).
+var xmageDigChoiceFaces = map[string]bool{
+	"chrome courier":       true,
+	"moment of truth":      true,
+	"expressive iteration": true,
+}
+
+// digChoiceAnswers is the CHOICE-queue pick of a Dig take on a
+// xmageDigChoiceFaces face.
+func (r *answerRouting) digChoiceAnswers(i int) ([]XAnswer, bool) {
+	d := r.ds[i]
+	if d.Resume != "dig" || len(d.Picks) == 0 || d.Min < 1 {
+		return nil, false
+	}
+	listed := false
+	for _, name := range r.sources[d.Step] {
+		listed = listed || xmageDigChoiceFaces[name]
+	}
+	if !listed {
+		return nil, false
+	}
+	for k, p := range d.Picks {
+		if pickKind(d, k) != "dig" || digBottomName(p) != "" {
+			return nil, false
+		}
+	}
+	return []XAnswer{{d.Seat, "choice", strings.Join(d.Picks, "^")}}, true
+}
+
+func (r *answerRouting) digChoiceOwned(i int) bool {
+	_, ok := r.digChoiceAnswers(i)
+	return ok
+}
+
+// dredgeDecision is gorge's draw-replacement election of a dredge card
+// (CR 702.52a). XMage's DredgeAbility asks chooseUse "Dredge <card>? (n cards
+// are milled)": the dredge pick is yes, the plain draw no. The numeric mode
+// the positional route scripted was never read there (Grave-Shell Scarab).
+func dredgeDecision(d rules.OracleDecision) bool {
+	return d.Resume == "dredge" && len(d.Picks) == 1 && d.Kind == "mode"
+}
+
+func dredgeAnswer(d rules.OracleDecision) string {
+	if pickKind(d, 0) == "dredge" {
+		return "yes"
+	}
+	return "no"
 }
