@@ -28,8 +28,8 @@ pub enum Family {
     /// `ChooseXValue`: the value of X.
     ChooseX,
     /// A pick of `min..=max` cards from a pool, one `select_object` per pick: `DiscardToHandSize`,
-    /// `DiscardChoice`, `RevealChoice`, `SearchChoice`, `EffectZoneChoice`, the simple `PayCost` kinds
-    /// and `ChooseLegend`.
+    /// `DiscardChoice`, `RevealChoice`, `SearchChoice`, `EffectZoneChoice`, `DigChoice`, the simple
+    /// `PayCost` kinds and `ChooseLegend`.
     Pool,
     /// `ModeChoice`: `choose_spell_mode` picks.
     Modes,
@@ -39,6 +39,10 @@ pub enum Family {
     Arrange,
     /// `TopOrBottomChoice`: `choose_option` top or bottom.
     TopOrBottom,
+    /// `AssignCombatDamage`: the host divides it (`combat_damage_assignment: "engine_order"`): lethal to
+    /// each blocker in phase's order, the rest to the last blocker (or to the defender with trample). No
+    /// decision is posed.
+    CombatDamage,
     /// `ManaPayment`: finish a payment the pool covers, else `activate_mana_ability` per source or cancel.
     ManaPayment,
     /// `ManaSourceSelection`: `activate_mana_ability` per source, or back to the payment.
@@ -65,6 +69,8 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::MeldAttackTargetChoice { .. } => ("MeldAttackTargetChoice", Pose::Unposed),
         WaitingFor::EntryAttackTargetChoice { .. } => ("EntryAttackTargetChoice", Pose::Unposed),
         WaitingFor::MulliganDecision { .. } => ("MulliganDecision", Pose::Posed(Family::Mulligan)),
+        // Tiny Leaders' forced first mulligan only (TL:R 906.6, phase types/game_state.rs at the pin).
+        // The London bottom of a two-player game arrives as `MulliganDecision` with phase `BottomCards`.
         WaitingFor::OpeningHandBottomCards { .. } => ("OpeningHandBottomCards", Pose::Unposed),
         WaitingFor::ManaPayment { .. } => ("ManaPayment", Pose::Posed(Family::ManaPayment)),
         WaitingFor::ManaSourceSelection { .. } => ("ManaSourceSelection", Pose::Posed(Family::ManaSource)),
@@ -99,7 +105,7 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::RedistributeLifeTotals { .. } => ("RedistributeLifeTotals", Pose::Unposed),
         WaitingFor::CoinFlipKeepChoice { .. } => ("CoinFlipKeepChoice", Pose::Unposed),
         WaitingFor::DieKeepChoice { .. } => ("DieKeepChoice", Pose::Unposed),
-        WaitingFor::DigChoice { .. } => ("DigChoice", Pose::Unposed),
+        WaitingFor::DigChoice { .. } => ("DigChoice", Pose::Posed(Family::Pool)),
         WaitingFor::DigRestSplitChoice { .. } => ("DigRestSplitChoice", Pose::Unposed),
         WaitingFor::SurveilChoice { .. } => ("SurveilChoice", Pose::Posed(Family::Arrange)),
         WaitingFor::RevealChoice { .. } => ("RevealChoice", Pose::Posed(Family::Pool)),
@@ -196,7 +202,7 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::KeepWithinTotalPowerChoice { .. } => ("KeepWithinTotalPowerChoice", Pose::Unposed),
         WaitingFor::KeepExactPermanentsChoice { .. } => ("KeepExactPermanentsChoice", Pose::Unposed),
         WaitingFor::CopyRetarget { .. } => ("CopyRetarget", Pose::Unposed),
-        WaitingFor::AssignCombatDamage { .. } => ("AssignCombatDamage", Pose::Unposed),
+        WaitingFor::AssignCombatDamage { .. } => ("AssignCombatDamage", Pose::Posed(Family::CombatDamage)),
         WaitingFor::AssignBlockerDamage { .. } => ("AssignBlockerDamage", Pose::Unposed),
         WaitingFor::DistributeAmong { .. } => ("DistributeAmong", Pose::Unposed),
         WaitingFor::MoveCountersDistribution { .. } => ("MoveCountersDistribution", Pose::Unposed),
@@ -226,7 +232,7 @@ mod tests {
         let src = include_str!("waiting.rs");
         let body = src.split("pub fn classify").nth(1).unwrap().split("#[cfg(test)]").next().unwrap();
         let posed = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Posed(")).count();
-        assert_eq!(posed, 25);
+        assert_eq!(posed, 27);
         let terminal = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Terminal")).count();
         assert_eq!(terminal, 1);
     }

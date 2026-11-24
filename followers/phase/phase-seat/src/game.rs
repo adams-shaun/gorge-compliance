@@ -540,6 +540,28 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 });
             }
         }
+        (WaitingFor::AssignCombatDamage { player, total_damage, blockers, assignment_modes, trample, pw_loyalty, pw_controller, .. }, Family::CombatDamage) => {
+            // The host divides combat damage (`combat_damage_assignment: "engine_order"`): lethal to each
+            // blocker in phase's order and the rest to the last (to the defender with trample).
+            use engine::types::game_state::CombatDamageAssignmentMode as Mode;
+            if !assignment_modes.is_empty() && !assignment_modes.contains(&Mode::Normal) {
+                return Err(Stop::Halt("unsupported_damage_mode", format!("{assignment_modes:?}")));
+            }
+            if pw_loyalty.is_some() || pw_controller.is_some() {
+                return Err(Stop::Halt("unsupported_damage_mode", "trample over a planeswalker".into()));
+            }
+            let mut left = *total_damage;
+            let mut assignments = Vec::new();
+            for (i, b) in blockers.iter().enumerate() {
+                let give = if i + 1 == blockers.len() && trample.is_none() { left } else { b.lethal_minimum.min(left) };
+                assignments.push((b.blocker_id, give));
+                left -= give;
+            }
+            let trample_damage = if trample.is_some() { left } else { 0 };
+            let a = GameAction::AssignCombatDamage { mode: Mode::Normal, assignments, trample_damage, controller_damage: 0 };
+            apply_now(live, *player, a)?;
+            return Ok(Built::Applied);
+        }
         (WaitingFor::ChooseXValue { player, min, max, pending_cast, .. }, Family::ChooseX) => {
             live.acting = *player;
             let src = viewer(live, *player, pending_cast.object_id);
@@ -558,6 +580,7 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
             | WaitingFor::RevealChoice { .. }
             | WaitingFor::SearchChoice { .. }
             | WaitingFor::EffectZoneChoice { .. }
+            | WaitingFor::DigChoice { .. }
             | WaitingFor::PayCost { .. }
             | WaitingFor::ChooseLegend { .. },
             Family::Pool,
@@ -799,6 +822,12 @@ fn pool_spec(w: &WaitingFor) -> Result<PoolSpec, Stop> {
                 PayCostKind::ExileFromZone { .. } => cards(player, choices, *min_count, *count, "exile", None),
                 other => Err(Stop::Halt("unsupported_pay_cost", format!("{other:?}").split([' ', '{', '(']).next().unwrap_or("?").to_string())),
             }
+        }
+        WaitingFor::DigChoice { player, cards: looked, keep_count, up_to, selectable_cards, source_id, .. } => {
+            // The dig keeps as many as it can when fewer cards pass the filter than `keep_count`.
+            let max = (*keep_count).min(selectable_cards.len());
+            let _ = looked;
+            cards(player, selectable_cards, if *up_to { 0 } else { max }, max, "other", *source_id)
         }
         WaitingFor::ChooseLegend { player, candidates, .. } => Ok(PoolSpec::cards(*player, candidates.clone(), 1, 1, SelKind::Legend, None)),
         other => Err(Stop::Halt("followup_mismatch", format!("{} is not a pool", classify(other).0))),

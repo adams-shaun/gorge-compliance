@@ -20,9 +20,22 @@ The protocol is gorge's `docs/site/api/spellbench-v2.md`; the phase-server WebSo
 
 ## What is posed
 
-Eleven families: priority (pass, play land, cast, activate), mulligan (keep / mulligan, and the London
-bottom as `order_pick` `mulligan_bottom`), attackers and blockers (one substep per creature), targets
-(`TargetSelection`, `TriggerTargetSelection`), optional effect, optional cost, X, and the cleanup discard.
+Sixteen families over 27 `WaitingFor` variants (and `GameOver` as the terminal), one `Family` each in
+`waiting.rs`: priority (pass, play land, cast, activate); mulligan (keep / mulligan, and the London bottom
+as `order_pick` `mulligan_bottom`); attackers and blockers (one substep per creature); targets
+(`TargetSelection`, `TriggerTargetSelection`); optional effect (`OptionalEffectChoice`,
+`OpponentMayChoice`); optional cost; X; mana payment (`ManaPayment`, `ManaSourceSelection`: finish a
+payment the pool covers, else `activate_mana_ability` per source, or cancel); modes (`ModeChoice`,
+`AbilityModeChoice`); trigger order (`OrderTriggers`); scry and surveil (`arrange_card` then
+`order_pick`); top or bottom; and pool picks of `min..=max` cards (`DiscardToHandSize`, `DiscardChoice`,
+`RevealChoice`, `SearchChoice`, `EffectZoneChoice`, `DigChoice`, the simple `PayCost` kinds, `ChooseLegend`).
+
+`AssignCombatDamage` is host-answered, not posed (`combat_damage_assignment: "engine_order"`): lethal to each
+blocker in phase's order, the rest to the last blocker, or to the defender under trample. Damage modes other
+than `Normal` and trample over a planeswalker halt as `unsupported_damage_mode`.
+
+`OpeningHandBottomCards` is Tiny Leaders' forced first mulligan (TL:R 906.6), not the London bottom: a
+two-player game never raises it, so it stays unposed.
 
 Everything else is `Pose::Unposed`: the game halts with `engine_contract_failure:unmapped_decision`, the
 variant name goes to stderr, and the census (stderr at the end of the run) counts it as an `engine_error`
