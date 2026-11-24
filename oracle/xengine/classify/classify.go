@@ -782,7 +782,9 @@ func costStep(checkpoint string) bool {
 // inside each tie, the same cards, the follower's graveyard takes gorge's order.
 // Anything else (a card of a tie replaced, an older card moved, a pass-step SBA
 // batch such as CR 704.5m, which the rules order, see graveyardOrderOnly) is
-// left as the follower has it.
+// left as the follower has it. A pass checkpoint with an object on the stack
+// before it opens a tie for the cards that effect put there together
+// (resolutionArrivals).
 func AlignCostGraveyardOrder(g rules.OracleResult, x oraclediff.XResult) oraclediff.XResult {
 	n := min(len(g.Snapshots), len(x.Snapshots))
 	var snaps []rules.OracleSnapshot
@@ -822,6 +824,10 @@ func AlignCostGraveyardOrder(g rules.OracleResult, x oraclediff.XResult) oracled
 				if fresh := freshArrivals(kept, len(gNow)); len(fresh) >= 2 {
 					ties = append(ties, fresh)
 				}
+			} else if resolutionStep(g.Snapshots[j].Checkpoint) {
+				if fresh := resolutionArrivals(g.Snapshots[j-1], g.Snapshots[j], seat, kept); len(fresh) >= 2 {
+					ties = append(ties, fresh)
+				}
 			}
 			if len(ties) == 0 || slices.Equal(gNow, xNow) || !tiedOnly(gNow, xNow, ties) {
 				continue
@@ -838,6 +844,65 @@ func AlignCostGraveyardOrder(g rules.OracleResult, x oraclediff.XResult) oracled
 		x.Snapshots = snaps
 	}
 	return x
+}
+
+// resolutionStep reports a checkpoint taken after a pass, the step where the top
+// of the stack resolves.
+func resolutionStep(checkpoint string) bool {
+	return strings.HasSuffix(checkpoint, " (pass)")
+}
+
+// resolutionArrivals returns the positions in seat's graveyard (gorge's, after)
+// of the cards one resolving spell or ability put there together, or nil. CR 404.3
+// lets the owner arrange cards one effect puts into a graveyard at the same time
+// in any order, a pile or a mill from a library included (Steam Augury), and no
+// engine is wrong in choosing differently. The tie opens only when the stack held
+// an object before the step (something resolved) and the cards that arrived on
+// top of the graveyard are all that effect's: a resolving spell's own card goes
+// there last (CR 608.2n) and is left out of the tie, and no arrival is a card
+// that left the battlefield at the step, the mark of a state-based batch
+// (CR 704), which the rules order, so a destroy or a lethal-damage death is not
+// tied here and stays as graveyardOrderOnly reports it.
+func resolutionArrivals(before, after rules.OracleSnapshot, seat int, kept []int) []int {
+	if len(before.Stack) == 0 || seat >= len(after.Players) {
+		return nil
+	}
+	gy := after.Players[seat].Graveyard
+	fresh := freshArrivals(kept, len(gy))
+	if len(fresh) == 0 {
+		return nil
+	}
+	if last := gy[fresh[len(fresh)-1]]; resolvedSpell(before.Stack, last) {
+		fresh = fresh[:len(fresh)-1]
+	}
+	for _, p := range fresh {
+		if battlefieldCount(before, seat, gy[p]) > battlefieldCount(after, seat, gy[p]) {
+			return nil
+		}
+	}
+	return fresh
+}
+
+// resolvedSpell reports that stack held a spell whose card is named name. A
+// stack ref is "pN:Name".
+func resolvedSpell(stack []rules.OracleSnapStack, name string) bool {
+	for _, o := range stack {
+		if _, n, ok := strings.Cut(o.Source, ":"); ok && o.Kind == "spell" && n == name {
+			return true
+		}
+	}
+	return false
+}
+
+// battlefieldCount is how many permanents named name seat owns in s.
+func battlefieldCount(s rules.OracleSnapshot, seat int, name string) int {
+	n := 0
+	for _, p := range s.Permanents {
+		if p.Owner == seat && p.Name == name {
+			n++
+		}
+	}
+	return n
 }
 
 // keptPositions maps each position of the graveyard before to its position in the
