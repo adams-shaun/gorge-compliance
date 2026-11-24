@@ -82,7 +82,10 @@ func TestForgeRolledDie(t *testing.T) {
 // d1b608ce5d = 9e368ca172 plus the Join Forces number announce, LeftOrRight binary and Optional Attach confirm
 // (ScriptedController/StepMachine only), die-roll code unchanged, the full driver suite (177 tests, including
 // ForcedDieRollTest) re-run green on it.
-const forgeOracleDieRollRef = "d1b608ce5db3e73ea9c4a0cd98aa2e8514d2625f"
+// 0c4ca7afb3d = d1b608ce5d plus repeated Confluence modes, the NICKNAME trigger-order label and the zero-option
+// card ask (ScriptedController/StepMachine/DecisionQueue only), die-roll code unchanged, the full driver suite
+// (181 tests, including ForcedDieRollTest) re-run green on it.
+const forgeOracleDieRollRef = "0c4ca7afb3db5fcffbe8cc855724a9135d3f1c40"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

@@ -343,7 +343,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # form's entity pick (the lone Equipment the lone-forced shortcut consumes) is remembered as that attachment's yes. Test
 # UnmappedAsksJoinDirectionAttachTest (5 tests, five fixtures/unmapped requests); full driver suite 177 tests. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-number-direction-attach.
-FORGE_ORACLE_REF ?= d1b608ce5db3e73ea9c4a0cd98aa2e8514d2625f
+# 0c4ca7afb3d = d1b608ce5d plus three matching gaps from xproof clusters xpt-7553d8f4, xpt-7852725e, xpt-b0865a52 and
+# xpt-a3ee64aa. CR 700.2d: ScriptedController.chooseModeForAbility passes allowRepeat to StepMachine.chooseModes, which
+# binds a mode already in the answer again (Verdant Confluence [Return, Search, Return], Wretched Confluence [draw x3]).
+# CR 603.3b: StepMachine.norm folds the raw NICKNAME token and the host's short name (before the first comma) to one
+# placeholder, so Uro's sacrifice and draw ETB triggers bind in gorge's order. CR 608.2c/700.2: pickObjects with zero
+# options consumes only an explicit empty answer that is next, leaving Dawnbreak Reclaimer's p1 ChoosePlayer pick queued;
+# the following Optional ChangeZoneAll with nothing remembered answers no like the zero-candidate ChangeZone gate.
+# Test RepeatModesNicknameZeroPickTest (4 tests, four fixtures/repeat-modes-nickname-zeropick requests), run by
+# scripts/forge-oracle-test-repeat-modes-nickname-zeropick.sh; full driver suite (181 tests) green on it. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick.
+FORGE_ORACLE_REF ?= 0c4ca7afb3db5fcffbe8cc855724a9135d3f1c40
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
