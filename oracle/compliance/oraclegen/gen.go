@@ -2015,8 +2015,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// offer every card with one shared Kind, but they ask opposite
 				// orders. gorge's ResumeKind plus the after-step library top
 				// (topPlacement) is what tells them apart.
-				fullTopReorder := d.Resume == "arrange" && d.ArrangeKind == "bottom" &&
-					len(d.Picks) == d.Options ||
+				fullTopReorder := FullTopReorder(d) ||
 					d.ArrangeKind == "library_placement" && topPlacement[i] &&
 						len(d.Picks) == d.Options
 				if forcedOrder && fullTopReorder {

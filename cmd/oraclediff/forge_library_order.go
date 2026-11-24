@@ -50,7 +50,7 @@ func forgeLibraryTopOrder(ds []rules.OracleDecision, snaps []rules.OracleSnapsho
 	cloned := false
 	tops := oraclegen.LibraryTopPlacements(ds, snaps)
 	for i := range ds {
-		if !tops[i] {
+		if !tops[i] && !oraclegen.FullTopReorder(ds[i]) {
 			continue
 		}
 		if !cloned {
