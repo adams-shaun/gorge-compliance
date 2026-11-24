@@ -44,8 +44,12 @@ the candidates and counted as `unmapped_action`. Nothing is answered on an agent
 
 The next variants to pose are the ones the census names most often over real games.
 
+A spell phase is resolving (its card in the stack zone, its entry already off the list) is listed as the top
+`stack` record, so a reflexive trigger ("When you do, ...") can name it as its source.
+
 ## Testing
 
 * `cargo test -p phase-seat --no-default-features` is the protocol layer alone: it does not compile the engine (cargo still needs the engine's git source to resolve the lockfile).
 * `make phase-seat-test` is the whole crate at the repo's 8G scope; the engine's codegen needs more than 4G.
+* `tests/replay.rs` plays six seeded games twice with a fixed random policy and compares the transcripts byte for byte. It needs `PHASE_SEAT_DECKS=<deck dir>` (gorge deck JSON) and skips without it; `PHASE_SEAT_SEEDS=3,5` narrows and `PHASE_SEAT_ONCE=1` plays once. About 12 minutes for all six twice.
 * `make smoke` runs `ops/scripts/tests/phase_sbv2_smoke.sh` over `scripts/phase-sbv2.sh` with stubs.

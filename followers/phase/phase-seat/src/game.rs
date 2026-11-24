@@ -839,8 +839,8 @@ fn shown_ref(state: &GameState, ids: &Ids, viewer: PlayerId, id: ObjectId) -> Op
     let r = object_ref(state, ids, viewer, id)?;
     let listed = match r["zone"].as_str()? {
         "battlefield" | "graveyard" | "exile" | "command" => true,
-        // The stack lists the spells on it; a spell phase is resolving is off it.
-        "stack" => spell_entry(state, id).is_some(),
+        // The stack lists the spells on it, and the spell phase is resolving (see `view::observation`).
+        "stack" => true,
         "hand" => r["owner_seat"] == seat(viewer),
         _ => false,
     };
@@ -969,7 +969,10 @@ fn targets(
     let slot = selection.current_slot;
     let Some(s) = slots.get(slot) else { return Err(Stop::Halt("dead_end", "target slot out of range".into())) };
     let Some(src) = source.and_then(|id| shown_ref(&live.state, &live.ids, who, id)) else {
-        return Err(Stop::Halt("unresolvable_source", "target source".into()));
+        let what = source.map_or("no source".to_string(), |id| {
+            live.state.objects.get(&id).map_or(format!("{} gone", id.0), |o| format!("{} {} {:?} owner {} controller {} on stack {}", id.0, o.name, o.zone, o.owner.0, o.controller.0, spell_entry(&live.state, id).is_some()))
+        });
+        return Err(Stop::Halt("unresolvable_source", format!("target source: {what} in {}", classify(&live.state.waiting_for).0)));
     };
     let legal = if selection.current_legal_targets.is_empty() { &s.legal_targets } else { &selection.current_legal_targets };
     // Every slot takes one target: the count within the slot (V1: below `maximum`) is 0.

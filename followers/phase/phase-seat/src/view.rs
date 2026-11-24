@@ -321,6 +321,25 @@ fn stack_entry(state: &GameState, ids: &Ids, viewer: PlayerId, e: &engine::types
     })
 }
 
+/// A spell phase is resolving: its card is in the stack zone but its entry is already off the list
+/// (a reflexive trigger, "when you do", names it as its source). It is the top of the stack for the
+/// observation, so every ref to it is a record.
+fn resolving_spells(state: &GameState) -> Vec<ObjectId> {
+    let mut v: Vec<ObjectId> = state.objects.values().filter(|o| o.zone == Zone::Stack && spell_entry(state, o.id).is_none()).map(|o| o.id).collect();
+    v.sort();
+    v
+}
+
+fn resolving_entry(state: &GameState, ids: &Ids, viewer: PlayerId, id: ObjectId) -> Option<Value> {
+    let r = object_ref(state, ids, viewer, id)?;
+    Some(json!({
+        "object_id": r["object_id"], "card_name": r["card_name"], "owner_seat": r["owner_seat"],
+        "controller_seat": r["controller_seat"], "zone": "stack", "stack_kind": "spell",
+        "source": Value::Null, "face_down": false, "copy": false, "characteristics": characteristics(state, viewer, id),
+        "targets": [], "divided": Value::Null, "modes": [], "x_value": Value::Null, "text": Value::Null,
+    }))
+}
+
 /// The observation `viewer` is allowed to see of `state`.
 pub fn observation(state: &GameState, viewer: PlayerId, ids: &Ids, looks: &[(ObjectId, &'static str)]) -> Value {
     let known = known(state, ids, viewer, looks);
@@ -344,7 +363,8 @@ pub fn observation(state: &GameState, viewer: PlayerId, ids: &Ids, looks: &[(Obj
         "passed_seats": Value::Null,
         "day_night": match state.day_night { None => "none", Some(DayNight::Day) => "day", Some(DayNight::Night) => "night" },
         "players": state.players.iter().map(|p| player(state, ids, viewer, p, &atk, &blk)).collect::<Vec<_>>(),
-        "stack": state.stack.iter().rev().map(|e| stack_entry(state, ids, viewer, e)).collect::<Vec<_>>(),
+        "stack": resolving_spells(state).into_iter().filter_map(|id| resolving_entry(state, ids, viewer, id))
+            .chain(state.stack.iter().rev().map(|e| stack_entry(state, ids, viewer, e))).collect::<Vec<_>>(),
         "pending_triggers": pending_triggers(state, ids, viewer), "known": known,
     });
     let obs = scrub_refs(obs);
