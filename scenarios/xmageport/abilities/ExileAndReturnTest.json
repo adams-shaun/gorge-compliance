@@ -96,7 +96,8 @@
      "eq": 1
     }
    ],
-   "xmage": "ExileAndReturnTest#testExileAndReturn"
+   "xmage": "ExileAndReturnTest#testExileAndReturn",
+   "known_bug": "XP[tawnos-coffin-return-not-fired]: since gorge b1ccf82b29 Tawnos's Coffin's {3},{T} activation exiles the target (CR 701.13a) but the Effect-carried return triggers (Mode$ ChangesZone Origin$ Battlefield ValidCard$ Card.EffectSource, and Mode$ Untaps, both Execute$ TrigReturn ChangeZone Defined$ Imprinted Exile>Battlefield) never return it when the Coffin untaps or leaves the battlefield (p1 Silvercoat Lion battlefield 0, want 1), CR 603.7 and 610.3, verified at gorge 23b726edbb. These scenarios passed at fc71ca68c5 only because the exile was a no-op."
   },
   {
    "name": "test-exile-and-return-with-counters",
@@ -230,7 +231,8 @@
      "pt": "3/3"
     }
    ],
-   "xmage": "ExileAndReturnTest#testExileAndReturnWithCounters"
+   "xmage": "ExileAndReturnTest#testExileAndReturnWithCounters",
+   "known_bug": "XP[tawnos-coffin-return-not-fired]: since gorge b1ccf82b29 Tawnos's Coffin's {3},{T} activation exiles the target (CR 701.13a) but the Effect-carried return triggers (Mode$ ChangesZone Origin$ Battlefield ValidCard$ Card.EffectSource, and Mode$ Untaps, both Execute$ TrigReturn ChangeZone Defined$ Imprinted Exile>Battlefield) never return it when the Coffin untaps or leaves the battlefield (p1 Silvercoat Lion battlefield 0, want 1), CR 603.7 and 610.3, verified at gorge 23b726edbb. These scenarios passed at fc71ca68c5 only because the exile was a no-op."
   },
   {
    "name": "test-exile-and-return-if-tawnos-left-battlefield",
@@ -351,7 +353,8 @@
      "eq": 1
     }
    ],
-   "xmage": "ExileAndReturnTest#testExileAndReturnIfTawnosLeftBattlefield"
+   "xmage": "ExileAndReturnTest#testExileAndReturnIfTawnosLeftBattlefield",
+   "known_bug": "XP[tawnos-coffin-return-not-fired]: since gorge b1ccf82b29 Tawnos's Coffin's {3},{T} activation exiles the target (CR 701.13a) but the Effect-carried return triggers (Mode$ ChangesZone Origin$ Battlefield ValidCard$ Card.EffectSource, and Mode$ Untaps, both Execute$ TrigReturn ChangeZone Defined$ Imprinted Exile>Battlefield) never return it when the Coffin untaps or leaves the battlefield (p1 Silvercoat Lion battlefield 0, want 1), CR 603.7 and 610.3, verified at gorge 23b726edbb. These scenarios passed at fc71ca68c5 only because the exile was a no-op."
   }
  ]
 }
