@@ -87,10 +87,11 @@ func TestPlayStartFlagsExclusive(t *testing.T) {
 	}
 }
 
-// TestPlayStartBezaSetup plays the Beza start (scen's output since
-// xp-setup-extra-hand-card: Path to Exile and Taste of Blood in hand) and
-// holds the lowered setup to the start file: each seat's hand as listed and
-// 40 cards in all, and the lowering agrees with gorge's own runner.
+// TestPlayStartBezaSetup plays the Beza start as scen writes it (the forced
+// start: opp-burn as p0's life, two tapped Plains for the lands need,
+// xp-setup-extra-hand-card) and holds the lowered setup to the start file:
+// each seat's hand as listed, 40 cards in all, and the lowering agrees with
+// gorge's own runner.
 func TestPlayStartBezaSetup(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	out := t.TempDir()
@@ -105,17 +106,17 @@ func TestPlayStartBezaSetup(t *testing.T) {
 		}
 		n++
 		p0, p1 := it.Setup["p0"], it.Setup["p1"]
-		if want := []string{"Beza, the Bounding Spring", "Path to Exile"}; !slices.Equal(p0.Hand, want) {
+		if want := []string{"Beza, the Bounding Spring"}; !slices.Equal(p0.Hand, want) {
 			t.Errorf("%s: p0 hand %v, want %v", it.ID, p0.Hand, want)
 		}
-		if want := []string{"Taste of Blood"}; !slices.Equal(p1.Hand, want) {
-			t.Errorf("%s: p1 hand %v, want %v", it.ID, p1.Hand, want)
+		if len(p1.Hand) != 0 {
+			t.Errorf("%s: p1 hand %v, want none", it.ID, p1.Hand)
 		}
-		if len(p0.Battlefield) != 5 || len(p0.LibraryTop) != 33 {
-			t.Errorf("%s: p0 battlefield %d library %d, want 5 and 33", it.ID, len(p0.Battlefield), len(p0.LibraryTop))
+		if len(p0.Battlefield) != 7 || len(p0.LibraryTop) != 32 || p0.Life == nil || *p0.Life != 17 {
+			t.Errorf("%s: p0 battlefield %d library %d life %v, want 7, 32 and 17", it.ID, len(p0.Battlefield), len(p0.LibraryTop), p0.Life)
 		}
-		if len(p1.Battlefield) != 0 || len(p1.LibraryTop) != 39 {
-			t.Errorf("%s: p1 battlefield %v library %d, want none and 39", it.ID, p1.Battlefield, len(p1.LibraryTop))
+		if len(p1.Battlefield) != 0 || len(p1.LibraryTop) != 40 {
+			t.Errorf("%s: p1 battlefield %v library %d, want none and 40", it.ID, p1.Battlefield, len(p1.LibraryTop))
 		}
 		return nil
 	}); err != nil {
