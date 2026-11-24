@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2306386d-5913-429e-8d8b-ba780841bf6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2306386d-5913-429e-8d8b-ba780841bf6e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 230811bf-52e7-451e-96ec-9d57c864ac5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-230be0f8-03a4-4452-84c1-ea14cfe49737	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+230be0f8-03a4-4452-84c1-ea14cfe49737	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nantuko-disciple:cast:s1,f:xs:XP:nantuko-disciple:cast:s1	-	-	-	25696bf19d5b	-	775c75a4e7ac	-	-	2026-11-24	xproof
 230be0f8-03a4-4452-84c1-ea14cfe49737	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 230bf3a4-68a8-4553-b8d7-ad340cbd7371	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 230e0bf3-3f17-4968-8723-3fb6a0909816	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2321b4fc-6b73-4d1a-84cc-13524adb0899	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Yathan Tombguard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2321b4fc-6b73-4d1a-84cc-13524adb0899	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Yathan Tombguard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2321b4fc-6b73-4d1a-84cc-13524adb0899	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Yathan Tombguard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-232284f7-c623-4895-9ab9-8b1a39926830	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+232284f7-c623-4895-9ab9-8b1a39926830	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wonder:cast:s1,f:xs:XP:wonder:cast:s1	-	-	-	25696bf19d5b	-	356e65768a69	-	-	2026-11-24	xproof
 232bd88c-ecdb-43dd-b34a-d381cb3bedf2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Adventurer's Inn/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 232bd88c-ecdb-43dd-b34a-d381cb3bedf2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Adventurer's Inn/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 232bd88c-ecdb-43dd-b34a-d381cb3bedf2	land	play-land	agreed	-	X	scen	1	0	Adventurer's Inn/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23878990-dcbd-4a2a-b4f7-ee7edb396c71	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rust-Shield Rampager/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2388a064-ae84-4eac-b1d9-819a40052d12	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 238b270c-152a-48e5-a955-65f5cb80c174	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-238b270c-152a-48e5-a955-65f5cb80c174	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+238b270c-152a-48e5-a955-65f5cb80c174	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 238f2c86-4376-48f2-ae71-c10d3d785163	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 238f2c86-4376-48f2-ae71-c10d3d785163	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2392a41a-59d3-4749-be94-4d9df0af9c4c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

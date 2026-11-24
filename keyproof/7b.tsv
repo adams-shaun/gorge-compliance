@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b07356f-9c3f-4875-939e-aa64eb6b5ce2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0767b8-b504-456e-93bd-218502f73b3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0767b8-b504-456e-93bd-218502f73b3d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b094a2b-2b69-4a9b-9829-c1aabc53f75e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b094a2b-2b69-4a9b-9829-c1aabc53f75e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:solidarity:cast:s1,f:xs:XP:solidarity:cast:s1	-	-	-	25696bf19d5b	-	72beaf0db38a	-	-	2026-11-24	xproof
 7b0b05a0-0be4-498f-be54-8d68b818f90a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0d7e62-0287-454a-8702-b0bfa7b41245	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0d7e62-0287-454a-8702-b0bfa7b41245	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b740cd6-e07d-4273-8a7f-e084bdaf0f1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b77fb85-a6d8-4f3e-8493-99ec5b5a6d67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b7b3a34-13ff-45d4-ad0d-ac4bad9d0581	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b7b3a34-13ff-45d4-ad0d-ac4bad9d0581	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b7b3a34-13ff-45d4-ad0d-ac4bad9d0581	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 7b7e622c-815a-44a0-88ff-62bbe8dd5582	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b7e622c-815a-44a0-88ff-62bbe8dd5582	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b7e622c-815a-44a0-88ff-62bbe8dd5582	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

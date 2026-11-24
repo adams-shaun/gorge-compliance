@@ -26,8 +26,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 692babfa-9b74-415e-a560-abae4ccb006b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6933a7bf-10ed-46c8-a49c-ce200bce3eea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6933a7bf-10ed-46c8-a49c-ce200bce3eea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-693ca077-2b91-4de1-8136-8fe45f8ea5a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-693ca077-2b91-4de1-8136-8fe45f8ea5a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+693ca077-2b91-4de1-8136-8fe45f8ea5a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ironshell-beetle:f0t0:s1,f:xs:XP:ironshell-beetle:f0t0:s1	-	-	-	25696bf19d5b	-	2544aa0ec282	-	-	2026-11-24	xproof
+693ca077-2b91-4de1-8136-8fe45f8ea5a7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ironshell-beetle:f0t0:s1,f:xs:XP:ironshell-beetle:f0t0:s1	-	-	-	25696bf19d5b	-	2544aa0ec282	-	-	2026-11-24	xproof
 693d20e9-ad92-44ad-9190-d247c94660eb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 693d20e9-ad92-44ad-9190-d247c94660eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 693d20e9-ad92-44ad-9190-d247c94660eb	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -112,8 +112,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69892dc7-4087-447c-a41c-99cf3d5c0c12	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dawnstrike Vanguard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69892dc7-4087-447c-a41c-99cf3d5c0c12	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dawnstrike Vanguard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69892dc7-4087-447c-a41c-99cf3d5c0c12	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dawnstrike Vanguard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-698c9882-4117-4919-8a19-b1cbffc16692	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-698c9882-4117-4919-8a19-b1cbffc16692	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+698c9882-4117-4919-8a19-b1cbffc16692	cast	cast	agreed	-	F	start	4	0	f:xs:XP:hunted-wumpus:cast:s1	-	-	-	25696bf19d5b	-	2eb63dfe1c95	-	-	2026-11-24	xproof
+698c9882-4117-4919-8a19-b1cbffc16692	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:hunted-wumpus:cast:s1	-	-	-	25696bf19d5b	-	2eb63dfe1c95	-	-	2026-11-24	xproof
 698e79ec-c2bc-4973-a095-f3c57b50e39c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69909846-94f9-4b2c-918f-274ba2aa4279	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6990ac82-49d4-412d-9c3d-1e7fb5479313	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69a68dec-4b01-4528-81fc-a3c5f5097f72	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Insatiable Skittermaw/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69a68dec-4b01-4528-81fc-a3c5f5097f72	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Insatiable Skittermaw/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69a68dec-4b01-4528-81fc-a3c5f5097f72	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Insatiable Skittermaw/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-69a72414-d02f-4a5c-b5c9-8941bb181f61	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+69a72414-d02f-4a5c-b5c9-8941bb181f61	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-fisher:cast:s1,f:xs:XP:aven-fisher:cast:s1	-	-	-	25696bf19d5b	-	065e1fee0a84	-	-	2026-11-24	xproof
 69a72414-d02f-4a5c-b5c9-8941bb181f61	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69aa1ac7-17da-4fc9-a3dc-df8a52841f4a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bone-shredder:f0t0:s1,f:xs:XP:bone-shredder:f0t0:s1	-	-	-	25696bf19d5b	-	94b557bf8582	-	-	2026-11-24	xproof
 69aa1ac7-17da-4fc9-a3dc-df8a52841f4a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bone-shredder:f0t0:s1,f:xs:XP:bone-shredder:f0t0:s1	-	-	-	25696bf19d5b	-	94b557bf8582	-	-	2026-11-24	xproof

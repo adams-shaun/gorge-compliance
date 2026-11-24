@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 268d0056-0d3e-438a-ab17-625a6f5ec68a	cast	cast-resolve	agreed	-	X	scen	1	0	How to Start a Riot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 269208e1-353c-4334-941a-2177f6665fba	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2692dd66-c200-4d0b-9427-30deaa2342ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2692dd66-c200-4d0b-9427-30deaa2342ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2692dd66-c200-4d0b-9427-30deaa2342ab	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 26957a44-6155-4688-a850-a3b49b011a9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26957a44-6155-4688-a850-a3b49b011a9f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26957a44-6155-4688-a850-a3b49b011a9f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -146,8 +146,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26e988da-52cf-4382-8646-a27c5ad1b92d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26e988da-52cf-4382-8646-a27c5ad1b92d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26e988da-52cf-4382-8646-a27c5ad1b92d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26eb7ee3-c0b6-4be0-bc80-92952f55a6f9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26eb7ee3-c0b6-4be0-bc80-92952f55a6f9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+26eb7ee3-c0b6-4be0-bc80-92952f55a6f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emperor-crocodile:cast:s1,f:xs:XP:emperor-crocodile:cast:s1	-	-	-	25696bf19d5b	-	d5bdb9053f53	-	-	2026-11-24	xproof
+26eb7ee3-c0b6-4be0-bc80-92952f55a6f9	f0/t0	Always	agreed	-	FX	start	2	0	x:xs:XP:emperor-crocodile:cast:s1,f:xs:XP:emperor-crocodile:cast:s1	-	-	-	25696bf19d5b	-	d5bdb9053f53	-	-	2026-11-24	xproof
 26f034b1-9a96-4371-a28e-be00b02d9d60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26f6cc1e-d85e-45a3-a1ed-7f09d7cfc7df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26f7e903-2a00-4878-b8b7-d5abe35c9526	cast	cast-resolve	agreed	-	X	scen	1	0	Final Frontier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

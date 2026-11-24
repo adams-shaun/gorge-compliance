@@ -3,9 +3,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 470028cf-0b99-4dd1-bb9d-aba91c52ee28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 470028cf-0b99-4dd1-bb9d-aba91c52ee28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4704ce78-b287-4038-abdd-ddb20116874d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47068c31-d07d-473c-aa89-6de8625f74df	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47068c31-d07d-473c-aa89-6de8625f74df	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47068c31-d07d-473c-aa89-6de8625f74df	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+47068c31-d07d-473c-aa89-6de8625f74df	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	7583f549da6e	-	-	2026-11-24	xproof
+47068c31-d07d-473c-aa89-6de8625f74df	f0/a0	CopyPermanent	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	7583f549da6e	-	-	2026-11-24	xproof
+47068c31-d07d-473c-aa89-6de8625f74df	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	7583f549da6e	-	-	2026-11-24	xproof
 4709f11c-aef8-45ac-b2bf-e640c568dfac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4709f11c-aef8-45ac-b2bf-e640c568dfac	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 470a8ee9-1870-44d8-8ade-64ec8084b9f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47e3aa22-8806-408f-b93e-0d0b800866f6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47e3aa22-8806-408f-b93e-0d0b800866f6	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47e3aa22-8806-408f-b93e-0d0b800866f6	land	play-land	agreed	-	X	scen	1	0	Orion/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-47e79913-322e-4ba6-9bf8-3b4c1c82a6c4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+47e79913-322e-4ba6-9bf8-3b4c1c82a6c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-slash:cast:s1,f:xs:XP:mind-slash:cast:s1	-	-	-	25696bf19d5b	-	e308e5f96160	-	-	2026-11-24	xproof
 47e79913-322e-4ba6-9bf8-3b4c1c82a6c4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47ecedec-7bf7-4a3b-ac33-2bf203fa50d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47ecedec-7bf7-4a3b-ac33-2bf203fa50d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

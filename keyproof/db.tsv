@@ -27,8 +27,8 @@ db1ea6e0-4076-49dd-92f7-7e6d7eb65a27	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07
 db1ea6e0-4076-49dd-92f7-7e6d7eb65a27	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db221948-fcb9-4ef9-ae69-70266235dd04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db221948-fcb9-4ef9-ae69-70266235dd04	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-db25d48e-e5eb-4364-9d7a-f9757ee4ccbe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-db25d48e-e5eb-4364-9d7a-f9757ee4ccbe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+db25d48e-e5eb-4364-9d7a-f9757ee4ccbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necrogen-mists:cast:s1,f:xs:XP:necrogen-mists:cast:s1	-	-	-	25696bf19d5b	-	7ee31ac3006c	-	-	2026-11-24	xproof
+db25d48e-e5eb-4364-9d7a-f9757ee4ccbe	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:necrogen-mists:cast:s1,f:xs:XP:necrogen-mists:cast:s1	-	-	-	25696bf19d5b	-	7ee31ac3006c	-	-	2026-11-24	xproof
 db27c686-e202-4b60-9a10-0a0fef25576c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db27e3f0-5750-4c4b-9da9-70c3ab627f9c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cogwork-wrestler:f0t0:s2,f:xs:XP:cogwork-wrestler:f0t0:s2	-	-	-	e07cf3a05ba5	-	49c9bf7d55e9	-	-	2026-11-24	xproof
 db27e3f0-5750-4c4b-9da9-70c3ab627f9c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cogwork-wrestler:f0t0:s2,f:xs:XP:cogwork-wrestler:f0t0:s2	-	-	-	e07cf3a05ba5	-	49c9bf7d55e9	-	-	2026-11-24	xproof
@@ -66,7 +66,7 @@ db5380ed-ba28-4ea2-abc3-4998e2022903	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 db557d5e-eecd-4891-90fa-c5bcb8532015	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db5a4c25-5ae5-4a04-be79-bdee39b9152c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db5a4c25-5ae5-4a04-be79-bdee39b9152c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-db5a4c25-5ae5-4a04-be79-bdee39b9152c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+db5a4c25-5ae5-4a04-be79-bdee39b9152c	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 db6174d7-211d-4817-b8e4-8384594c83f9	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db623754-e078-4030-ba07-818803c348a8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db623754-e078-4030-ba07-818803c348a8	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,8 +163,8 @@ dbcbdf37-c40f-4068-b4a7-a849cab1056c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 dbcceed6-51a9-4ab4-b9a8-d65140661195	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbcceed6-51a9-4ab4-b9a8-d65140661195	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbcf2a79-b455-43ac-9cf0-9e63708800f4	cast	counter-spell	agreed	-	X	scen	1	0	Sound the Trumpets/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dbd1fc9c-6316-4c89-a971-f2e08ca291a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dbd1fc9c-6316-4c89-a971-f2e08ca291a4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dbd1fc9c-6316-4c89-a971-f2e08ca291a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampiric-spirit:f0t0:s1,f:xs:XP:vampiric-spirit:f0t0:s1	-	-	-	25696bf19d5b	-	9e2e8d89cb3e	-	-	2026-11-24	xproof
+dbd1fc9c-6316-4c89-a971-f2e08ca291a4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vampiric-spirit:f0t0:s1,f:xs:XP:vampiric-spirit:f0t0:s1	-	-	-	25696bf19d5b	-	9e2e8d89cb3e	-	-	2026-11-24	xproof
 dbd22a65-4ccb-4435-ae27-03a47a86d630	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbd22a65-4ccb-4435-ae27-03a47a86d630	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbd22a65-4ccb-4435-ae27-03a47a86d630	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0fa785-37ab-46a8-9ec0-6f8b29576d93	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f12134c-d626-4a5e-8653-700681a491fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f12134c-d626-4a5e-8653-700681a491fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancient-silverback:cast:s1,f:xs:XP:ancient-silverback:cast:s1	-	-	-	25696bf19d5b	-	8c4b896fd387	-	-	2026-11-24	xproof
 5f12134c-d626-4a5e-8653-700681a491fc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f12f665-f083-48ae-b61a-541051c996ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f143d87-35fb-40e3-94ae-f85cfff9adb5	cast	cast-resolve	agreed	-	FX	scen	2	0	Gwen Stacy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f4138e9-5471-467f-a15e-89e9e7929f0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f4138e9-5471-467f-a15e-89e9e7929f0c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f4138e9-5471-467f-a15e-89e9e7929f0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-pioneer:f0t0:s1,f:xs:XP:elvish-pioneer:f0t0:s1	-	-	-	25696bf19d5b	-	fe8d46d7e284	-	-	2026-11-24	xproof
+5f4138e9-5471-467f-a15e-89e9e7929f0c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-pioneer:f0t0:s1,f:xs:XP:elvish-pioneer:f0t0:s1	-	-	-	25696bf19d5b	-	fe8d46d7e284	-	-	2026-11-24	xproof
 5f42b67f-87fd-4f98-a0e8-0c8313f4bbc8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Shipwreck Marsh/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f42b67f-87fd-4f98-a0e8-0c8313f4bbc8	land	play-land	agreed	-	X	scen	1	0	Shipwreck Marsh/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f444efc-3bc2-4ca8-986c-f804f9e1a95e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -44,8 +44,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 762d864b-69bc-43ac-af2f-e18186010169	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Sliver Overlord/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 762e01d8-c16a-44b8-8ba0-052d1a2f312f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76347258-71d5-4874-adde-ff7aa932b808	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7635fb35-7ac8-4e61-8a52-6b0c14cd88b8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7635fb35-7ac8-4e61-8a52-6b0c14cd88b8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7635fb35-7ac8-4e61-8a52-6b0c14cd88b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lodestone-myr:cast:s1,f:xs:XP:lodestone-myr:cast:s1	-	-	-	25696bf19d5b	-	c5a054d09d0c	-	-	2026-11-24	xproof
+7635fb35-7ac8-4e61-8a52-6b0c14cd88b8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:lodestone-myr:cast:s1,f:xs:XP:lodestone-myr:cast:s1	-	-	-	25696bf19d5b	-	c5a054d09d0c	-	-	2026-11-24	xproof
 76372327-41ec-4516-abff-3b612e073629	cast	cast-resolve	agreed	-	X	scen	1	0	Kona, Rescue Beastie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76372327-41ec-4516-abff-3b612e073629	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kona, Rescue Beastie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 763882f9-a7ad-4fb1-bdf4-c9a158d4b68e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76558381-c4ae-4bc3-8c7b-fa0b717f0282	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 765863c8-1be0-4bb1-9e9c-db7701cffde3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 765863c8-1be0-4bb1-9e9c-db7701cffde3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-765863c8-1be0-4bb1-9e9c-db7701cffde3	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+765863c8-1be0-4bb1-9e9c-db7701cffde3	land	land	agreed	-	FX	start	2	0	x:xs:XP:lonely-sandbar:land:s1,f:xs:XP:lonely-sandbar:land:s1	-	-	-	25696bf19d5b	-	84fc937d1c19	-	-	2026-11-24	xproof
 76587fa5-29eb-480f-a865-480cd39b1da7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 765a12fc-9b66-4bb7-88f6-6e7bd2d2f8c7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 765a12fc-9b66-4bb7-88f6-6e7bd2d2f8c7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7694887a-2f3b-4ef1-b598-f3323f018ef4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7694887a-2f3b-4ef1-b598-f3323f018ef4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7694887a-2f3b-4ef1-b598-f3323f018ef4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7695b61a-8d44-44b1-9783-ea3114111c3e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7695b61a-8d44-44b1-9783-ea3114111c3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-healer:cast:s1,f:xs:XP:master-healer:cast:s1	-	-	-	25696bf19d5b	-	d7c4c9868427	-	-	2026-11-24	xproof
 7695b61a-8d44-44b1-9783-ea3114111c3e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7695ef41-fa58-4890-b3fe-de5751831d8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7695ef41-fa58-4890-b3fe-de5751831d8e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76d93d50-4fc1-4ed4-a6dc-5fb193286b54	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	House Cartographer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76d9c310-9d06-43e8-87a9-fb03318a6cb8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76e6c0e7-593a-4b4a-9eb6-a912f9c3f26f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76ec76b9-da0f-4b9d-ad0a-d734052a5f2b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76ec76b9-da0f-4b9d-ad0a-d734052a5f2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heat-ray:cast:s1,f:xs:XP:heat-ray:cast:s1	-	-	-	25696bf19d5b	-	1db7af104c95	-	-	2026-11-24	xproof
 76ed34d2-e09e-4b53-98bd-d96b367fd315	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76ed34d2-e09e-4b53-98bd-d96b367fd315	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76ee013d-5293-4432-b425-649a2e82bd74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
