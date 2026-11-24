@@ -52,7 +52,7 @@ func TestScenCLI(t *testing.T) {
 	}
 
 	ref := t.TempDir()
-	if err := runScen(scenArgs("-card", "Aggressive Mammoth", "-key", "static#0.0", "-prefer", "start", "-out", ref)); err != nil {
+	if err := runScen(scenArgs("-card", "Karn, Argent Defender", "-key", "static#0.0", "-prefer", "start", "-out", ref)); err != nil {
 		t.Fatal(err)
 	}
 	if ents, _ := os.ReadDir(ref); len(ents) != 0 {
