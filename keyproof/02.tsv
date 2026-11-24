@@ -22,14 +22,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 020d0c91-da68-40da-8561-5522377f3d07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 020d561b-2e5d-439e-9e6a-318d23e73542	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 020d561b-2e5d-439e-9e6a-318d23e73542	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-020de6d7-f5a2-4036-ad25-451e5977b4d4	cast	cast	diverged	-	-	start	0	2	-	46b3b9f05cf2	-	-	267e485f6204	-	ca79c25e5206	-	-	2026-11-24	xproof
+020de6d7-f5a2-4036-ad25-451e5977b4d4	cast	cast	diverged	-	-	start	0	2	-	46b3b9f05cf2	-	-	5437c1394672	-	ca79c25e5206	-	-	2026-11-24	xproof
 020de6d7-f5a2-4036-ad25-451e5977b4d4	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02125db4-4507-467a-ac0c-406de2c7d533	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 021428b1-005c-40ed-9d47-fb5aa970598b	cast	cast-resolve	agreed	-	FX	scen	2	0	River Herald Scout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 021428b1-005c-40ed-9d47-fb5aa970598b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0214805d-d207-42da-a25f-2a8e1990904e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0217da8e-e74f-4f5c-ab75-f17600f94405	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rock-soldiers:f0t0:s2,f:xs:XP:rock-soldiers:f0t0:s2	-	-	-	267e485f6204	-	43d8e0c2ad95	-	-	2026-11-24	xproof
-0217da8e-e74f-4f5c-ab75-f17600f94405	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rock-soldiers:f0t0:s2,f:xs:XP:rock-soldiers:f0t0:s2	-	-	-	267e485f6204	-	43d8e0c2ad95	-	-	2026-11-24	xproof
+0217da8e-e74f-4f5c-ab75-f17600f94405	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rock-soldiers:f0t0:s2,f:xs:XP:rock-soldiers:f0t0:s2	-	-	-	5437c1394672	-	43d8e0c2ad95	-	-	2026-11-24	xproof
+0217da8e-e74f-4f5c-ab75-f17600f94405	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rock-soldiers:f0t0:s2,f:xs:XP:rock-soldiers:f0t0:s2	-	-	-	5437c1394672	-	43d8e0c2ad95	-	-	2026-11-24	xproof
 02197d14-8d9f-4b1f-9ee0-ce8ef690843c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02197d14-8d9f-4b1f-9ee0-ce8ef690843c	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 021b495d-236f-4274-988d-2dfd7103c9ef	cast	cast-resolve	agreed	-	X	scen	1	0	War Balloon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02765930-e15e-4cc1-ac0d-040334a9c5bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02765930-e15e-4cc1-ac0d-040334a9c5bc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 027989e7-20c4-4773-b6b4-20337cc5fe8c	cast	cast-resolve	agreed	-	X	scen	1	0	Eluge, the Shoreless Sea/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-027989e7-20c4-4773-b6b4-20337cc5fe8c	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
+027989e7-20c4-4773-b6b4-20337cc5fe8c	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 027989e7-20c4-4773-b6b4-20337cc5fe8c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Eluge, the Shoreless Sea/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 027989e7-20c4-4773-b6b4-20337cc5fe8c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Eluge, the Shoreless Sea/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 027989e7-20c4-4773-b6b4-20337cc5fe8c	static#0.1	static#0.1	agreed	-	X	scen	1	0	Eluge, the Shoreless Sea/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
