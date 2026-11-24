@@ -273,6 +273,67 @@ func TestForgeSoulbondPairSource(t *testing.T) {
 		}
 	})
 
+	// An unrelated ability resolving on the stack (here Nephalia Smuggler's
+	// blink) must not be taken for the Soulbond trigger: the re-entering
+	// Silverblade Paladin asks the #self partner, and Nephalia Smuggler, which
+	// entered before the answered partner, is itself an offered partner. The
+	// export must leave gorge's partner answer, never rename it to Nephalia.
+	t.Run("blink replay", func(t *testing.T) {
+		zero := 0
+		item := oraclegen.Item{ID: "xe:test:soulbond-blink", Scenario: oraclegen.Scenario{
+			Name: "soulbond blink", Why: "an unrelated ability is on the stack",
+			Setup: map[string]oraclegen.Seat{"p0": {
+				Battlefield: []string{"Nephalia Smuggler", "Silverblade Paladin", "Island", "Island", "Island", "Island", "Forest", "Forest"},
+				Hand:        []string{"Grizzly Bears"},
+				LibraryTop:  []string{"Island", "Island"},
+			}},
+			Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Grizzly Bears", Mana: "GG"},
+				{Op: "resolve", Seat: 0, Answers: []oraclegen.Answer{{Kind: "choose", Pick: []string{}}}},
+				{Op: "activate", Seat: 0, Card: "p0:Nephalia Smuggler", AbilityIndex: &zero, Mana: "UUUU", Targets: []string{"p0:Silverblade Paladin"}},
+				{Op: "resolve", Seat: 0, Answers: []oraclegen.Answer{{Kind: "choose", Pick: []string{"Grizzly Bears"}}}},
+			},
+		}}
+		rq, g := forgeExportItem(reg, item, true)
+		if len(g.Fails) > 0 {
+			t.Fatalf("gorge rejects the window: %v", g.Fails)
+		}
+		var ask []rules.OracleDecision
+		for _, d := range rq.GorgeDecisions {
+			if isSoulbondPairAsk(d) {
+				ask = append(ask, d)
+			}
+		}
+		if len(ask) != 1 {
+			t.Fatalf("want one answered soulbond pair ask, got %+v", rq.GorgeDecisions)
+		}
+		if want := []string{"p0:Grizzly Bears"}; !reflect.DeepEqual(ask[0].PickRefs, want) {
+			t.Errorf("blink replay pick_refs = %q, want %q (an unrelated ability is not the Soulbond source)", ask[0].PickRefs, want)
+		}
+	})
+
+	// A token copy of a Soulbond creature carries the copied face's printed
+	// trigger slot; its ref's "token:" marker must not defeat the card lookup.
+	// Its #self ask, whose partner entered after the token, stays unrewritten.
+	t.Run("token copy self ask", func(t *testing.T) {
+		self := soulbondAsk(3, "p0:Aven Interrupter")
+		tok := rules.OracleSnapPerm{Ref: "p0:token:Silverblade Paladin#2", Name: "Silverblade Paladin", Controller: 0, Token: true, Keywords: []string{"Soulbond"}}
+		snaps := make([]rules.OracleSnapshot, 4)
+		for i := range snaps {
+			if i >= 1 {
+				snaps[i].Permanents = append(snaps[i].Permanents, tok)
+			}
+			if i >= 2 {
+				snaps[i].Permanents = append(snaps[i].Permanents, aven)
+			}
+		}
+		snaps[3].Stack = []rules.OracleSnapStack{{Kind: "ability", Source: tok.Ref, Trigger: selfSlot}}
+		got := forgeSoulbondPairSource(reg, rules.OracleResult{Snapshots: snaps}, []rules.OracleDecision{self})
+		if !reflect.DeepEqual(got, []rules.OracleDecision{self}) {
+			t.Errorf("token-copy #self decision changed: %+v", got)
+		}
+	})
+
 	// A list with nothing to rewrite is returned as is, and a rewrite never
 	// mutates its input.
 	other := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", Resume: "explore",

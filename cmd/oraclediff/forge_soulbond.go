@@ -57,6 +57,12 @@ func forgeSoulbondPairSource(reg *cards.Registry, g rules.OracleResult, ds []rul
 			if !trig.other {
 				continue
 			}
+		case slices.Contains(d.OptionRefs, trig.source):
+			// The source is itself an offered partner: this is the
+			// "this creature enters" ask (or an unrelated ability's source),
+			// and Forge offers that creature as a partner too. Rewriting to it
+			// could pair the wrong creature, so leave the answer alone.
+			continue
 		case !forgeSoulbondSourceIsForgeAnswer(g, trig.source, d):
 			continue
 		}
@@ -134,9 +140,21 @@ func forgeSoulbondTrigger(reg *cards.Registry, g rules.OracleResult, ds []rules.
 						return soulbondTrigger{source: top.Source, other: other, known: true}
 					}
 					// The trigger slot names no printed Soulbond half (a
-					// granted or token trigger): keep its source and let the
-					// entry-order fallback decide the half.
-					return soulbondTrigger{source: top.Source}
+					// granted or token trigger, or an unrelated ability that
+					// happens to be resolving, such as a blink). Keep its
+					// source for the entry-order fallback only when it is a
+					// Soulbond permanent; any other ability says nothing about
+					// the pair ask.
+					if forgeHasSoulbond(s, top.Source) {
+						return soulbondTrigger{source: top.Source}
+					}
+					// An ability that is not a Soulbond trigger is on top,
+					// so the checkpoint cannot place the pair ask's trigger
+					// (a blinked Soulbond creature re-enters after this
+					// snapshot). Guessing a source from the battlefield could
+					// pair the wrong creature; leave the answer as gorge made
+					// it.
+					return soulbondTrigger{}
 				}
 			case "spell":
 				// A resolving creature spell is the entrant. For Soulbond#self
@@ -186,7 +204,7 @@ func forgeSoulbondHalf(reg *cards.Registry, src, slot string) (other, ok bool) {
 	if err != nil || idx < 0 {
 		return false, false
 	}
-	c, found := reg.Lookup(refCardName(src))
+	c, found := reg.Lookup(soulbondPickLabel(src))
 	if !found || c == nil {
 		return false, false
 	}
@@ -233,6 +251,16 @@ func soulbondHalfOfTrigger(t cards.Trigger) (other, ok bool) {
 		return true, true
 	}
 	return false, false
+}
+
+// forgeHasSoulbond reports whether ref is a Soulbond permanent in s.
+func forgeHasSoulbond(s rules.OracleSnapshot, ref string) bool {
+	for _, p := range s.Permanents {
+		if p.Ref == ref {
+			return slices.Contains(p.Keywords, "Soulbond")
+		}
+	}
+	return false
 }
 
 // forgeLoneSoulbondPermanent returns the only Soulbond permanent of seat in s,
