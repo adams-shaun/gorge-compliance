@@ -439,6 +439,7 @@ help:
 	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: corpus report + the corpus ledger ratchet"
 	@echo "  make follower-proto-test [RUN=name] — cargo test for the engine-neutral follower crate (followers/proto; output under FOLLOWERS_CACHE)"
 	@echo "  make xmage-driver-tests — the Java driver's unit tests (needs xmage-oracle-setup)"
+	@echo "  make forge-driver-tests — the Forge replay/unit driver tests (needs forge-oracle-setup)"
 
 .PHONY: cards test boundary oracle-audit smoke follower-proto-test phase-oracle-setup phase-follower-test phase-seat-test phase-preflight
 cards:
@@ -570,6 +571,16 @@ xmage-driver-tests:
 	fi
 	@test -s "$(XMAGE_ORACLE_DIR)/tests.cp" || { echo "no XMage build at $(XMAGE_ORACLE_DIR): run make xmage-oracle-setup, or set XMAGE_ORACLE_DIR" >&2; exit 1; }
 	for t in scripts/xmage-oracle-test-*.sh scripts/forge-oracle-test-*.sh; do echo "== $$t"; XMAGE_ORACLE_DIR=$(XMAGE_ORACLE_DIR) bash "$$t" "$(XMAGE_DRIVER_OUT)/$$(basename $$t .sh)" || exit 1; done
+
+# forge-driver-tests is the Forge-only half of xmage-driver-tests: the exporter
+# regression (testdata/forge/mdfc-spell-ability.jsonl through forge-export)
+# plus the replay/unit wrappers scripts/forge-oracle-test-*.sh at
+# FORGE_ORACLE_REF. Needs the out-of-tree build from make forge-oracle-setup.
+.PHONY: forge-driver-tests
+forge-driver-tests:
+	@test -s "$(FORGE_ORACLE_DIR)/cp.txt" || { echo "no Forge build at $(FORGE_ORACLE_DIR): run make forge-oracle-setup, or set FORGE_ORACLE_DIR" >&2; exit 1; }
+	PKG=./cmd/oraclediff RUN='^TestForgeAbilityLinesUseSnapshotFaceForShatterskull' bash scripts/test-targets.sh one
+	for t in scripts/forge-oracle-test-*.sh; do echo "== $$t"; FORGE_ORACLE_DIR=$(FORGE_ORACLE_DIR) XMAGE_ORACLE_DIR=$(XMAGE_ORACLE_DIR) bash "$$t" "$(XMAGE_DRIVER_OUT)/$$(basename $$t .sh)" || exit 1; done
 
 .PHONY: compliance-manifests
 compliance-manifests:
