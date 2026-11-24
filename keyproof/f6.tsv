@@ -104,8 +104,8 @@ f6771d32-395e-4832-b33d-cbc12dff1516	cast	cast-resolve	agreed	-	X	scen	1	0	Thran
 f6771d32-395e-4832-b33d-cbc12dff1516	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thranduil, Sindarin Liege/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f6771d32-395e-4832-b33d-cbc12dff1516	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thranduil, Sindarin Liege/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f6777aee-c39b-49d8-9049-5d2b1e888dd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f6777aee-c39b-49d8-9049-5d2b1e888dd0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f6777aee-c39b-49d8-9049-5d2b1e888dd0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f6777aee-c39b-49d8-9049-5d2b1e888dd0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+f6777aee-c39b-49d8-9049-5d2b1e888dd0	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 f6791df0-a37b-44dc-8bf3-40ac2304d188	cast	cast-resolve	agreed	-	X	scen	1	0	Dragonologist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f6791df0-a37b-44dc-8bf3-40ac2304d188	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 f6791df0-a37b-44dc-8bf3-40ac2304d188	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dragonologist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -125,11 +125,11 @@ f6889f57-2965-4a82-8556-fd91c6227058	f0/t0	NULL	owed	refused:no-generator:trigge
 f6894486-0bac-4b72-92b7-5ce99fa426e6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6894486-0bac-4b72-92b7-5ce99fa426e6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f693cf76-0919-4b89-92de-e619be006abb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f693cf76-0919-4b89-92de-e619be006abb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f693cf76-0919-4b89-92de-e619be006abb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 f69574dd-097f-4908-9cab-344b0eb39c62	cast	cast-resolve	agreed	-	FX	scen	2	0	Leyline of Resonance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f69574dd-097f-4908-9cab-344b0eb39c62	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Leyline of Resonance/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f695a073-7235-45c8-bc42-f1e29bb086ee	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f695a073-7235-45c8-bc42-f1e29bb086ee	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f695a073-7235-45c8-bc42-f1e29bb086ee	f0/a0	NULL	owed	refused:steps-needed:cost:GU	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 f696b727-083e-4825-80d9-4bac35289958	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f696b727-083e-4825-80d9-4bac35289958	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f69d65e0-4d8a-4e27-b4dd-dd8c50acb8eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -157,8 +157,8 @@ f6b0adcb-4676-4d9f-83ae-a2ff3cdfd84b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 f6b499d5-0e39-46ce-9de9-f64a2cc2cb32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6b499d5-0e39-46ce-9de9-f64a2cc2cb32	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6bd2902-7f8b-419e-bbc7-bcab0c1b7e01	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	28e2d7b7c38d	-	-	2026-11-24	xproof
-f6c325e8-b9bd-44ab-9370-196a40c71e1f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f6c325e8-b9bd-44ab-9370-196a40c71e1f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f6c325e8-b9bd-44ab-9370-196a40c71e1f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merrow-wavebreakers:cast:s1,f:xs:XP:merrow-wavebreakers:cast:s1	-	-	-	8a1b1a193ec0	-	9d7f24a7407f	-	-	2026-11-24	xproof
+f6c325e8-b9bd-44ab-9370-196a40c71e1f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:merrow-wavebreakers:f0a0:s1,f:xs:XP:merrow-wavebreakers:f0a0:s1	-	-	-	8a1b1a193ec0	-	9d7f24a7407f	-	-	2026-11-24	xproof
 f6c3b420-9aca-4fab-b7bb-1814bd2d93f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6c3b420-9aca-4fab-b7bb-1814bd2d93f6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6c3b420-9aca-4fab-b7bb-1814bd2d93f6	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

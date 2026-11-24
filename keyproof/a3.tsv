@@ -6,9 +6,9 @@ a3023de2-61e7-4f46-aa4a-09d08ee7d939	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Val
 a3023de2-61e7-4f46-aa4a-09d08ee7d939	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Valor's Flagship/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a3023de2-61e7-4f46-aa4a-09d08ee7d939	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Valor's Flagship/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a30241b4-5e92-44cd-b19b-7d6d59e95ada	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a30241b4-5e92-44cd-b19b-7d6d59e95ada	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a30241b4-5e92-44cd-b19b-7d6d59e95ada	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 a30724f0-d174-408e-8baf-4bba3cbc45b5	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a30724f0-d174-408e-8baf-4bba3cbc45b5	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a30724f0-d174-408e-8baf-4bba3cbc45b5	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	2	0	x:xs:XP:traumatic-visions:cast:s1,f:xs:XP:traumatic-visions:cast:s1	-	-	-	8a1b1a193ec0	-	28bce9b67855	-	-	2026-11-24	xproof
 a30907c0-fbde-4fd3-a8c7-f304305fcea7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a30907c0-fbde-4fd3-a8c7-f304305fcea7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a3090daf-26d9-4ba5-9fa3-42bd128e229d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -127,8 +127,8 @@ a37314cf-bbbd-4003-b94d-0e6e60edfc15	static#0.0	static#0.0	agreed	-	X	scen	1	0	S
 a37314cf-bbbd-4003-b94d-0e6e60edfc15	static#0.1	static#0.1	agreed	-	X	scen	1	0	Synthesizer Labship/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a37387f0-9d57-49ff-aa38-2c6b359e8916	cast	cast-resolve	agreed	-	FX	scen	2	0	Grab the Prize/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a37544b6-0048-4213-8e40-76ba8a0b6d1b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a37544b6-0048-4213-8e40-76ba8a0b6d1b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a37544b6-0048-4213-8e40-76ba8a0b6d1b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a37544b6-0048-4213-8e40-76ba8a0b6d1b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:soaring-seacliff:f0t0:s1,f:xs:XP:soaring-seacliff:f0t0:s1	-	-	-	8a1b1a193ec0	-	4764c251e36b	-	-	2026-11-24	xproof
+a37544b6-0048-4213-8e40-76ba8a0b6d1b	land	land	agreed	-	FX	start	2	0	x:xs:XP:soaring-seacliff:f0t0:s1,f:xs:XP:soaring-seacliff:f0t0:s1	-	-	-	8a1b1a193ec0	-	4764c251e36b	-	-	2026-11-24	xproof
 a375b739-6a6c-4e07-9b1c-a304f84ea2cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a375b739-6a6c-4e07-9b1c-a304f84ea2cc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a37624f9-8763-444b-95f2-f3a8dc63152b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ a3a00b62-f07e-44ef-8d97-22a3e7a06f72	f0/t0	NULL	owed	refused:scen failed: xengin
 a3a6c024-43de-4f5c-a1d6-c48a0c96a43b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a3a6c024-43de-4f5c-a1d6-c48a0c96a43b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a3a6c024-43de-4f5c-a1d6-c48a0c96a43b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a3a8a044-283d-443e-bc40-c2f826d70c22	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a3a8a044-283d-443e-bc40-c2f826d70c22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mana-reflection:cast:s1,f:xs:XP:mana-reflection:cast:s1	-	-	-	8a1b1a193ec0	-	41361546aef7	-	-	2026-11-24	xproof
 a3a98bc9-caa0-49b7-951c-fe4e4f54e4ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a3acb58d-3fb1-4602-8575-d78b716b0ea5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a3add0d7-2610-4b4e-9d43-3f04a5cd8259	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

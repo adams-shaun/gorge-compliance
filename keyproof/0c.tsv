@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c4e2c90-c17b-42cc-b4d7-cf75970fbe90	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c4e2c90-c17b-42cc-b4d7-cf75970fbe90	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c4e64d1-cdcf-4e96-8bf4-ed1414f6ad62	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c572396-4e53-4c86-9b04-f41341dcea05	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c572396-4e53-4c86-9b04-f41341dcea05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crucible-of-fire:cast:s1,f:xs:XP:crucible-of-fire:cast:s1	-	-	-	8a1b1a193ec0	-	47cba6731798	-	-	2026-11-24	xproof
 0c595dc4-3692-424e-8699-9e8e663b32cc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c595dc4-3692-424e-8699-9e8e663b32cc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c5a7772-8358-4549-a583-f54246869e20	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-replica:cast:s1,f:xs:XP:goblin-replica:cast:s1	-	-	-	25696bf19d5b	-	f45aa971012f	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c6ce7c9-316b-4171-a8fa-ca26af1eecb7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c6ce7c9-316b-4171-a8fa-ca26af1eecb7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c6f343a-0088-477a-a6b5-256783ad0c27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c6f343a-0088-477a-a6b5-256783ad0c27	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c6f343a-0088-477a-a6b5-256783ad0c27	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 0c7019a7-3cca-481a-9af0-abedb89c15ad	cast	cast-resolve	agreed	-	FX	scen	2	0	Brightglass Gearhulk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c7019a7-3cca-481a-9af0-abedb89c15ad	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Brightglass Gearhulk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c7019a7-3cca-481a-9af0-abedb89c15ad	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Brightglass Gearhulk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -187,8 +187,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0cde6a29-d597-4feb-8b2b-528d2d57a1f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0cdece2a-0bdf-4e6d-9ddc-4a8d58b2ec29	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0cdece2a-0bdf-4e6d-9ddc-4a8d58b2ec29	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ce31ff1-6cfe-4b34-bd02-7d727934e754	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ce31ff1-6cfe-4b34-bd02-7d727934e754	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ce31ff1-6cfe-4b34-bd02-7d727934e754	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:welkin-guide:f0t0:s1,f:xs:XP:welkin-guide:f0t0:s1	-	-	-	8a1b1a193ec0	-	a04401794bfb	-	-	2026-11-24	xproof
+0ce31ff1-6cfe-4b34-bd02-7d727934e754	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:welkin-guide:f0t0:s1,f:xs:XP:welkin-guide:f0t0:s1	-	-	-	8a1b1a193ec0	-	a04401794bfb	-	-	2026-11-24	xproof
 0ce47c8b-1e1f-463f-94f0-35ca00be89e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ce47c8b-1e1f-463f-94f0-35ca00be89e6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ce47c8b-1e1f-463f-94f0-35ca00be89e6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

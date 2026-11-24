@@ -96,7 +96,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 376cbc85-2941-4d97-b031-bffff86550e7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Congregation Gryff/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 376cbc85-2941-4d97-b031-bffff86550e7	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Congregation Gryff/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 376cbc85-2941-4d97-b031-bffff86550e7	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Congregation Gryff/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-376d90f6-2ceb-4d9e-a04d-3dd5bafd1e8b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+376d90f6-2ceb-4d9e-a04d-3dd5bafd1e8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jagwasp-swarm:cast:s1,f:xs:XP:jagwasp-swarm:cast:s1	-	-	-	8a1b1a193ec0	-	a47a25d0b15c	-	-	2026-11-24	xproof
 376ee366-e082-402f-b4db-6592fcfcacd2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 376ee366-e082-402f-b4db-6592fcfcacd2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 376fa374-ead1-4728-ab8b-aca230b72031	cast	cast-resolve	agreed	-	X	scen	1	0	Hide on the Ceiling/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -137,8 +137,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3792763c-7aa0-4055-b8a1-3257e0443ef1	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:skeleton-archer:f0t0:s2,f:xs:XP:skeleton-archer:f0t0:s2	-	-	-	e07cf3a05ba5	-	a04060402cb0	-	-	2026-11-24	xproof
 3795fc31-2369-47d0-b9c9-120f44b8f114	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3795fc31-2369-47d0-b9c9-120f44b8f114	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37985fef-696e-4c6b-9a60-29c5051b5a25	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37985fef-696e-4c6b-9a60-29c5051b5a25	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+37985fef-696e-4c6b-9a60-29c5051b5a25	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:volcanic-submersion:cast:s1,f:xs:XP:volcanic-submersion:cast:s1	-	-	-	8a1b1a193ec0	-	76e6ebc0304d	-	-	2026-11-24	xproof
+37985fef-696e-4c6b-9a60-29c5051b5a25	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:volcanic-submersion:cast:s2,f:xs:XP:volcanic-submersion:cast:s2	-	-	-	8a1b1a193ec0	-	76e6ebc0304d	-	-	2026-11-24	xproof
 379ed4ec-8f2e-448b-9ed2-a3181e2f877e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 379ef166-a29f-4715-8ce4-9d7d567e4e91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37a04d5a-9272-42bd-b448-c658375bbbc3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,10 +153,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37aae6d1-1de0-47d1-85dd-d4a6d9635c05	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37aae6d1-1de0-47d1-85dd-d4a6d9635c05	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37ad9318-6690-4a8d-bcea-9fcbca58769d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37b7f044-f57b-4d13-82be-46fd01f1dba6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+37b7f044-f57b-4d13-82be-46fd01f1dba6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:witherscale-wurm:cast:s1,f:xs:XP:witherscale-wurm:cast:s1	-	-	-	8a1b1a193ec0	-	f68efd647c02	-	-	2026-11-24	xproof
+37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t2	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 37bd9e54-c93e-4fec-9b21-6940da75ab7a	cast	cast-resolve	agreed	-	FX	scen	2	0	Pull Through the Weft/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37c06f89-db36-4937-9404-2b07cd22e1a6	cast	cast-resolve	agreed	-	X	scen	1	0	Dawn's Truce/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37c49483-bef6-47c6-9354-ead8560d48da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

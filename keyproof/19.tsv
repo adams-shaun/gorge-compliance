@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19047c4b-0106-455d-ab71-68cabfae7404	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19055292-1a79-413e-8056-7d4aec9839ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19055292-1a79-413e-8056-7d4aec9839ed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19055292-1a79-413e-8056-7d4aec9839ed	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19055292-1a79-413e-8056-7d4aec9839ed	f0/t0	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:dawnray-archer:f0t0:s1,f:xs:XP:dawnray-archer:f0t0:s1	-	-	-	8a1b1a193ec0	-	52956f233d91	-	-	2026-11-24	xproof
 19066c43-eccd-461b-9695-c3fad95dc1da	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19066c43-eccd-461b-9695-c3fad95dc1da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 190cdc23-fa05-475f-b853-471ca0f21b71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19a39cc5-2134-4dee-932c-81389806c57b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a3c505-b180-47cc-bef3-9e807a8a4a3d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a4010f-f5bf-48be-a1d7-eacc3bbeeb59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19a4010f-f5bf-48be-a1d7-eacc3bbeeb59	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19a4010f-f5bf-48be-a1d7-eacc3bbeeb59	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 19ad338a-c89f-406d-ad1a-222c22044e1b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19afaf35-b420-49e0-bddf-3180bf1dc30f	cast	cast-resolve	agreed	-	FX	scen	2	0	Sunshot Militia/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19afaf35-b420-49e0-bddf-3180bf1dc30f	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sunshot Militia/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

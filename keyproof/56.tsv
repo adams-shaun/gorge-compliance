@@ -33,8 +33,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 562684ca-6e3c-47df-9e94-8ff772c25a96	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56277f60-67b0-41fa-a363-c64e2d794d01	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56277f60-67b0-41fa-a363-c64e2d794d01	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-562aaf81-e70a-401d-a638-bb7ce4f40626	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-562aaf81-e70a-401d-a638-bb7ce4f40626	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+562aaf81-e70a-401d-a638-bb7ce4f40626	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:ridge-rannet:cast:s1,f:xs:XP:ridge-rannet:cast:s1	-	-	-	8a1b1a193ec0	-	a3e23238bff4	-	-	2026-11-24	xproof
+562aaf81-e70a-401d-a638-bb7ce4f40626	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:ridge-rannet:cast:s2,f:xs:XP:ridge-rannet:cast:s2	-	-	-	8a1b1a193ec0	-	a3e23238bff4	-	-	2026-11-24	xproof
 562af5da-1080-46d2-8a38-71f06b7e8457	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 562c9c68-e5a7-45ab-b098-5b649d165ff5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 562c9c68-e5a7-45ab-b098-5b649d165ff5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56551cba-3871-4746-a11f-7ab8aaf46cf6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 56551cba-3871-4746-a11f-7ab8aaf46cf6	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 56568fc4-7133-40e2-833c-29ecc1f953d6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-565922d6-8152-411f-8d4d-dc7c8523a49b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+565922d6-8152-411f-8d4d-dc7c8523a49b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nature-s-spiral:cast:s1,f:xs:XP:nature-s-spiral:cast:s1	-	-	-	8a1b1a193ec0	-	533ddf1e210a	-	-	2026-11-24	xproof
 565ba85c-bad8-4cbd-a2ff-b4384b886308	cast	cast-resolve	agreed	-	FX	scen	2	0	Sudden Setback/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 565cfa73-8c6b-4296-bcb8-388de8c960ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 565cfa73-8c6b-4296-bcb8-388de8c960ff	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56edd306-8676-49c4-b3c3-5ff840536c3a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56f1a16a-9f41-41fb-b580-c200bca27cd6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56f1a16a-9f41-41fb-b580-c200bca27cd6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56f3f1b4-c36a-41f3-95a1-45e9d7e74cf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+56f3f1b4-c36a-41f3-95a1-45e9d7e74cf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sedraxis-alchemist:f0t0:s1,f:xs:XP:sedraxis-alchemist:f0t0:s1	-	-	-	8a1b1a193ec0	-	25f9505706c5	-	-	2026-11-24	xproof
 56f3f1b4-c36a-41f3-95a1-45e9d7e74cf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56f5ed8d-ef53-4766-9ef3-1e24a10e267b	cast	cast-resolve	agreed	-	X	scen	1	0	Buried Treasure/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 56f5ed8d-ef53-4766-9ef3-1e24a10e267b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Buried Treasure/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

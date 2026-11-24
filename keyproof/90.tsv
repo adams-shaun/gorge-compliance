@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 90076bf5-aa9a-4a6e-9035-9aa97fd5561e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90076bf5-aa9a-4a6e-9035-9aa97fd5561e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90076bf5-aa9a-4a6e-9035-9aa97fd5561e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90076bf5-aa9a-4a6e-9035-9aa97fd5561e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 900ae045-0160-4e85-b283-e35399c2acec	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 900b9409-9c16-414d-8674-2ea42c2415a1	cast	cast-resolve	agreed	-	X	scen	1	0	Magmakin Artillerist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 900b9409-9c16-414d-8674-2ea42c2415a1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Magmakin Artillerist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 905e4bd1-f5f2-4691-b13f-ce2628d26a38	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 905e4bd1-f5f2-4691-b13f-ce2628d26a38	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9061e2ae-7385-494a-a511-0b6531d1fe0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9061e2ae-7385-494a-a511-0b6531d1fe0e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9061e2ae-7385-494a-a511-0b6531d1fe0e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 906cba93-3dac-4720-a482-987cf1b4e786	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90767f52-fa6d-4ef3-ae54-d8e3881971c1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90767f52-fa6d-4ef3-ae54-d8e3881971c1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -90,9 +90,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9082d364-9fe4-47bd-9097-8888ae75b2e1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90865918-2f9a-4ab6-a881-e86f61a527cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9086d8ff-e375-4149-996d-2a88a7596c1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9087928a-4732-4661-b3ed-d0b1ea06edf6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9087928a-4732-4661-b3ed-d0b1ea06edf6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grixis-slavedriver:cast:s1,f:xs:XP:grixis-slavedriver:cast:s1	-	-	-	8a1b1a193ec0	-	1ae31893fe8d	-	-	2026-11-24	xproof
 9087928a-4732-4661-b3ed-d0b1ea06edf6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9087928a-4732-4661-b3ed-d0b1ea06edf6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9087928a-4732-4661-b3ed-d0b1ea06edf6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 90898c76-21f9-4597-88fe-dc9179911cde	cast	cast-resolve	agreed	-	X	scen	1	0	Vicious Rivalry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 909201e5-5599-442a-9e4f-ff61f187e957	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 909201e5-5599-442a-9e4f-ff61f187e957	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

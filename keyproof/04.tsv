@@ -52,8 +52,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 043ded41-2506-4dab-91c4-142d9287e7d7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 043ded41-2506-4dab-91c4-142d9287e7d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 043f869d-b11c-4c0d-9591-2bf0df7bde55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-043fa53c-8a46-4fbd-836f-2403c62e0121	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-043fa53c-8a46-4fbd-836f-2403c62e0121	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+043fa53c-8a46-4fbd-836f-2403c62e0121	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oran-rief-recluse:f0t0:s1,f:xs:XP:oran-rief-recluse:f0t0:s1	-	-	-	8a1b1a193ec0	-	2dc7816d24db	-	-	2026-11-24	xproof
+043fa53c-8a46-4fbd-836f-2403c62e0121	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oran-rief-recluse:f0t0:s1,f:xs:XP:oran-rief-recluse:f0t0:s1	-	-	-	8a1b1a193ec0	-	2dc7816d24db	-	-	2026-11-24	xproof
 0441a901-31ce-419f-a898-e9a9ad4ab351	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04472c4f-0df3-4de8-9cc2-882d95b822be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04472c4f-0df3-4de8-9cc2-882d95b822be	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,8 +135,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 049777d0-910d-46d2-9ca1-10277b2fb845	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 049777d0-910d-46d2-9ca1-10277b2fb845	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 049777d0-910d-46d2-9ca1-10277b2fb845	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04979f18-1ba8-47a3-a078-ab6b84bfac72	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04979f18-1ba8-47a3-a078-ab6b84bfac72	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04979f18-1ba8-47a3-a078-ab6b84bfac72	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spidersilk-net:cast:s1,f:xs:XP:spidersilk-net:cast:s1	-	-	-	8a1b1a193ec0	-	4f80c9ed17db	-	-	2026-11-24	xproof
+04979f18-1ba8-47a3-a078-ab6b84bfac72	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:spidersilk-net:f0a0:s1,f:xs:XP:spidersilk-net:f0a0:s1	-	-	-	8a1b1a193ec0	-	4f80c9ed17db	-	-	2026-11-24	xproof
 0498ea14-53d9-4655-a616-0ff3cf73de4e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0498ea14-53d9-4655-a616-0ff3cf73de4e	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0498ea14-53d9-4655-a616-0ff3cf73de4e	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,9 +161,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04b33a43-57f1-46e9-b2c2-1dd3f8a4935c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04b33a43-57f1-46e9-b2c2-1dd3f8a4935c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04b33a43-57f1-46e9-b2c2-1dd3f8a4935c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04b7362d-0490-4cb0-b5d7-2a7732f659ce	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04b7362d-0490-4cb0-b5d7-2a7732f659ce	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04b7362d-0490-4cb0-b5d7-2a7732f659ce	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04b7362d-0490-4cb0-b5d7-2a7732f659ce	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:bojuka-bog:f0a0:s1,f:xs:XP:bojuka-bog:f0a0:s1	-	-	-	8a1b1a193ec0	-	45c4d72e1076	-	-	2026-11-24	xproof
+04b7362d-0490-4cb0-b5d7-2a7732f659ce	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:bojuka-bog:f0t0:s1,f:xs:XP:bojuka-bog:f0t0:s1	-	-	-	8a1b1a193ec0	-	45c4d72e1076	-	-	2026-11-24	xproof
+04b7362d-0490-4cb0-b5d7-2a7732f659ce	land	land	agreed	-	FX	start	4	0	x:xs:XP:bojuka-bog:f0t0:s1,f:xs:XP:bojuka-bog:f0t0:s1	-	-	-	8a1b1a193ec0	-	45c4d72e1076	-	-	2026-11-24	xproof
 04bb6731-5662-48d5-9e48-99d378c4adaf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04bb6731-5662-48d5-9e48-99d378c4adaf	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04be1e69-2d5c-4931-8906-a6807b5b08ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -223,8 +223,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04ea21b3-084b-4746-9b49-99b6ef4f0885	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thrumming Hivepool/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04ea21b3-084b-4746-9b49-99b6ef4f0885	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thrumming Hivepool/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04ea21b3-084b-4746-9b49-99b6ef4f0885	static#0.1	static#0.1	agreed	-	X	scen	1	0	Thrumming Hivepool/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-04ea7e88-7ea5-4b4c-9a7c-2a6ac0bc0682	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04ea7e88-7ea5-4b4c-9a7c-2a6ac0bc0682	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04ea7e88-7ea5-4b4c-9a7c-2a6ac0bc0682	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:absorb-vis:cast:s1,f:xs:XP:absorb-vis:cast:s1	-	-	-	8a1b1a193ec0	-	61e67ba3b538	-	-	2026-11-24	xproof
+04ea7e88-7ea5-4b4c-9a7c-2a6ac0bc0682	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:absorb-vis:cast:s2,f:xs:XP:absorb-vis:cast:s2	-	-	-	8a1b1a193ec0	-	61e67ba3b538	-	-	2026-11-24	xproof
 04eb4fc0-0cc5-44f1-af5a-44579125d5c2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04eeb9ad-5c59-411b-8809-db8349838588	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04eeb9ad-5c59-411b-8809-db8349838588	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

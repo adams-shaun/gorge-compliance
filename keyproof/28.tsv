@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28778958-a1f9-4fea-b551-c193d1257f18	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 287aae84-b098-456e-b9cb-8eac51c36360	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 287cb63c-d52d-4871-83d1-792a41ae7adc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-287cb63c-d52d-4871-83d1-792a41ae7adc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-287cb63c-d52d-4871-83d1-792a41ae7adc	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+287cb63c-d52d-4871-83d1-792a41ae7adc	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+287cb63c-d52d-4871-83d1-792a41ae7adc	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 287f60a6-e83b-487b-add9-2048a06dcca1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2884e332-707c-4a97-adc1-e1317a513ff4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2884e332-707c-4a97-adc1-e1317a513ff4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -167,14 +167,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28df85d6-e13a-4178-a361-7015afd316ca	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28e1a613-30ad-4013-be0b-b0365f627201	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28e99c5f-a78a-4323-b5e9-1b43303acaf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28e99c5f-a78a-4323-b5e9-1b43303acaf6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+28e99c5f-a78a-4323-b5e9-1b43303acaf6	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 28ea1f58-3310-4cf1-a834-40f2cc3b6898	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28ea78dc-7ad6-4006-aaf8-4b25057ec019	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28ea78dc-7ad6-4006-aaf8-4b25057ec019	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28eb696f-a42c-4444-8139-dfd62029e020	cast	cast-resolve	agreed	-	X	scen	1	0	Cautious Survivor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 28eb696f-a42c-4444-8139-dfd62029e020	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cautious Survivor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-28ebe75a-cddd-469b-be8a-286776b83388	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28ebe75a-cddd-469b-be8a-286776b83388	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+28ebe75a-cddd-469b-be8a-286776b83388	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormcaller-s-boon:cast:s1,f:xs:XP:stormcaller-s-boon:cast:s1	-	-	-	8a1b1a193ec0	-	2f16556b2c1d	-	-	2026-11-24	xproof
+28ebe75a-cddd-469b-be8a-286776b83388	f0/a0	PumpAll	agreed	-	FX	start	4	0	x:xs:XP:stormcaller-s-boon:cast:s1,f:xs:XP:stormcaller-s-boon:cast:s1	-	-	-	8a1b1a193ec0	-	2f16556b2c1d	-	-	2026-11-24	xproof
 28ecc209-d78b-4b37-8411-fb8079f6e088	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tyrranax:cast:s1,f:xs:XP:tyrranax:cast:s1	-	-	-	25696bf19d5b	-	a407fc29419f	-	-	2026-11-24	xproof
 28ecc209-d78b-4b37-8411-fb8079f6e088	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 28f0765a-de09-4be3-b952-aee75b9ede03	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7215ca87-bbff-4c14-a1f5-de5ddd97c875	cast	cast-resolve	agreed	-	X	scen	1	0	Spitfire Lagac/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7215ca87-bbff-4c14-a1f5-de5ddd97c875	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spitfire Lagac/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7216f974-3c84-40ef-b904-82019900c204	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7216f974-3c84-40ef-b904-82019900c204	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7216f974-3c84-40ef-b904-82019900c204	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 72177c93-ed1f-47bd-99a6-ad229a292d46	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 721aeedc-1de5-40d0-a04c-a2ebc056d06a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 721c3255-953c-49cd-a5dd-852c3d09eae4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 728045bf-0959-44ff-8de9-16ec35fd248f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7280b7c5-e4d0-4a20-8634-5e240e6b3ca0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 728157a3-fcd4-4295-85ff-1162dbb64f8a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7282f643-191b-41be-9f6f-82360c915d6d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7282f643-191b-41be-9f6f-82360c915d6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:abyssal-persecutor:cast:s1,f:xs:XP:abyssal-persecutor:cast:s1	-	-	-	8a1b1a193ec0	-	84aa06397898	-	-	2026-11-24	xproof
 728464a2-9cb6-409a-a6c4-94e796a27995	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 728464a2-9cb6-409a-a6c4-94e796a27995	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 72897780-094d-4a21-8b1c-419a9defd2fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

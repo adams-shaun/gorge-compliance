@@ -11,8 +11,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 400da7e6-43f8-4539-8959-ec60a3cc431b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40155cfb-078a-4359-9551-9c71266d8a1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40216d09-ae4d-4a41-b3f6-1a8035093045	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40216d09-ae4d-4a41-b3f6-1a8035093045	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40216d09-ae4d-4a41-b3f6-1a8035093045	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+40216d09-ae4d-4a41-b3f6-1a8035093045	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:battlegrace-angel:f0t0:s1,f:xs:XP:battlegrace-angel:f0t0:s1	-	-	-	8a1b1a193ec0	-	8457f8a1776c	-	-	2026-11-24	xproof
+40216d09-ae4d-4a41-b3f6-1a8035093045	f0/t1	Attacks/Exalted	agreed	-	FX	start	4	0	x:xs:XP:battlegrace-angel:f0t0:s1,f:xs:XP:battlegrace-angel:f0t0:s1	-	-	-	8a1b1a193ec0	-	8457f8a1776c	-	-	2026-11-24	xproof
 4021b6b4-9b87-4dd5-a5df-79540bedbe87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4021b6b4-9b87-4dd5-a5df-79540bedbe87	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4021b6b4-9b87-4dd5-a5df-79540bedbe87	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40cabb8b-d9bd-40ba-9624-c4526bf0f888	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40cabb8b-d9bd-40ba-9624-c4526bf0f888	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40cabb8b-d9bd-40ba-9624-c4526bf0f888	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40cc8ac6-114f-439d-816d-f65cd52bbbd2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40cc8ac6-114f-439d-816d-f65cd52bbbd2	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+40cc8ac6-114f-439d-816d-f65cd52bbbd2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:jhessian-zombies:cast:s1,f:xs:XP:jhessian-zombies:cast:s1	-	-	-	8a1b1a193ec0	-	8948e04afe81	-	-	2026-11-24	xproof
+40cc8ac6-114f-439d-816d-f65cd52bbbd2	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:jhessian-zombies:cast:s2,f:xs:XP:jhessian-zombies:cast:s2	-	-	-	8a1b1a193ec0	-	8948e04afe81	-	-	2026-11-24	xproof
 40cc8ac6-114f-439d-816d-f65cd52bbbd2	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40d02b8c-fb0e-4607-855f-49fbcec2e209	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40d02b8c-fb0e-4607-855f-49fbcec2e209	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

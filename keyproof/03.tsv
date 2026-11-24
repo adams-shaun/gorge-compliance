@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03008c7d-c738-473d-a968-1922b2899d1a	cast	cast-resolve	agreed	-	X	scen	1	0	Roadside Blowout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03008c7d-c738-473d-a968-1922b2899d1a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Roadside Blowout/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0300d8a1-ff4e-4e05-a097-4822f80c47e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0300d8a1-ff4e-4e05-a097-4822f80c47e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0300d8a1-ff4e-4e05-a097-4822f80c47e1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 03025ec0-75fe-439d-b0c1-9bdb0f0ff336	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03048844-32bb-45a2-a754-73f75eaa4566	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03048844-32bb-45a2-a754-73f75eaa4566	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 031cfc7d-8bda-454b-b88a-15d3f5fe47e2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hired Claw/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 031ddf1e-afcf-4b09-8859-4df0f0ab5dcf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 031ddf1e-afcf-4b09-8859-4df0f0ab5dcf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-031ddf1e-afcf-4b09-8859-4df0f0ab5dcf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+031ddf1e-afcf-4b09-8859-4df0f0ab5dcf	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 031f629f-7a9a-4143-9f5d-434ed1c23b7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 031f629f-7a9a-4143-9f5d-434ed1c23b7f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 032367fd-e869-463e-aa0f-65e3c6567e60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -49,9 +49,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 032fdd08-2ea7-442e-8162-0a8e5a585253	cast	cast-resolve	agreed	-	X	scen	1	0	Close Encounter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 032fdd08-2ea7-442e-8162-0a8e5a585253	static#0.0	static#0.0	agreed	-	X	scen	1	0	Close Encounter/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0332f7b5-dad3-4fd0-b86c-78bd8301f59d	cast	cast-resolve	agreed	-	FX	scen	2	0	Gnawing Crescendo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-03332772-18b0-446a-a7e2-a4bdf38c4f0c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03332772-18b0-446a-a7e2-a4bdf38c4f0c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03332772-18b0-446a-a7e2-a4bdf38c4f0c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+03332772-18b0-446a-a7e2-a4bdf38c4f0c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:kazandu-refuge:f0a0:s1,f:xs:XP:kazandu-refuge:f0a0:s1	-	-	-	8a1b1a193ec0	-	71a7bb711c70	-	-	2026-11-24	xproof
+03332772-18b0-446a-a7e2-a4bdf38c4f0c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kazandu-refuge:f0t0:s1,f:xs:XP:kazandu-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	71a7bb711c70	-	-	2026-11-24	xproof
+03332772-18b0-446a-a7e2-a4bdf38c4f0c	land	land	agreed	-	FX	start	2	0	x:xs:XP:kazandu-refuge:f0t0:s1,f:xs:XP:kazandu-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	71a7bb711c70	-	-	2026-11-24	xproof
 0333cb81-5f44-4f31-9ee7-725e4f6af7b3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0333cb81-5f44-4f31-9ee7-725e4f6af7b3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0334a2f8-a74a-44c9-ba64-d9b7fabe160c	cast	cast-resolve	agreed	-	X	scen	1	0	Cosmic Spider-Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

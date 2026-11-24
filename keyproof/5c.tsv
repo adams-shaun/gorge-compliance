@@ -27,8 +27,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c2e0762-4994-4c34-b33f-909c2b3f0f43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c30a92b-2e88-4e66-b0a5-fa05304136e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c326102-005d-463c-b9f7-14b034b66baa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5c367b7d-3cb4-45db-b836-dad953efce15	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5c367b7d-3cb4-45db-b836-dad953efce15	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5c367b7d-3cb4-45db-b836-dad953efce15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nettle-sentinel:cast:s1,f:xs:XP:nettle-sentinel:cast:s1	-	-	-	8a1b1a193ec0	-	9fc29f5da161	-	-	2026-11-24	xproof
+5c367b7d-3cb4-45db-b836-dad953efce15	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:nissa-revane:cast:s1,f:xs:XP:nissa-revane:cast:s1	-	-	-	8a1b1a193ec0	-	9fc29f5da161	-	-	2026-11-24	xproof
 5c3cbb08-cbe1-42f5-9ac7-e558b85648bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wesley-crusher-starfleet-cadet:f0t0:s1,f:xs:XP:wesley-crusher-starfleet-cadet:f0t0:s1	-	-	-	25696bf19d5b	-	5c002898d7a9	-	-	2026-11-24	xproof
 5c3cbb08-cbe1-42f5-9ac7-e558b85648bb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 5c3f45cb-d2f0-4dac-b124-18e8f6d7e2dc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -68,8 +68,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c615c99-77b7-4bea-9286-1e8d257153fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c63a244-75d7-4372-baf4-7a3526f240c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c68853e-4fb8-465e-b262-e6dbaf972533	cast	cast-resolve	agreed	-	FX	scen	2	0	Self-Reflection/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5c6956ad-8031-4708-82ed-75491755d2a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5c6956ad-8031-4708-82ed-75491755d2a4	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5c6956ad-8031-4708-82ed-75491755d2a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rune-cervin-rider:cast:s1,f:xs:XP:rune-cervin-rider:cast:s1	-	-	-	8a1b1a193ec0	-	5e5a2d3d57f8	-	-	2026-11-24	xproof
+5c6956ad-8031-4708-82ed-75491755d2a4	f0/a0	NULL	owed	refused:steps-needed:cost:GW	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -133,7 +133,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cca974b-1a6c-485f-adc0-81d2b7dca286	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cca974b-1a6c-485f-adc0-81d2b7dca286	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ccb57e1-ca94-4b5a-8e5f-b8b5e692cfb9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cd064b9-1277-4edc-bf2c-82eb5e62f9d7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5cd064b9-1277-4edc-bf2c-82eb5e62f9d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primal-bellow:cast:s1,f:xs:XP:primal-bellow:cast:s1	-	-	-	8a1b1a193ec0	-	ad49c63083c5	-	-	2026-11-24	xproof
 5cd17347-5558-46f9-b8bb-ae5deeb1f229	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cd35d18-115b-4d7c-8d05-3d4c8303f46e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cd35d18-115b-4d7c-8d05-3d4c8303f46e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

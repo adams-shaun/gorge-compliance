@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22504fd0-0353-4ef0-baf4-4b7be28d1a66	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2251e34e-4ce8-4452-9dc6-d8cce8583996	cast	cast-resolve	agreed	-	X	scen	1	0	Stock Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 22534fab-2c62-4113-bcea-f305ae9f664f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-22534fab-2c62-4113-bcea-f305ae9f664f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+22534fab-2c62-4113-bcea-f305ae9f664f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:safehold-sentry:f0a0:s1,f:xs:XP:safehold-sentry:f0a0:s1	-	-	-	8a1b1a193ec0	-	5a709abbde99	-	-	2026-11-24	xproof
 225f53ef-da42-47a0-b773-d2aad3338c72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 225f53ef-da42-47a0-b773-d2aad3338c72	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22600e35-cd8b-4e63-9de1-e96ad66cf719	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 227ed0b7-7a9a-41f1-a190-1d1b85a44720	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 227ed0b7-7a9a-41f1-a190-1d1b85a44720	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 227f95ba-65b1-4399-8b12-39f8b1327d62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-227f95ba-65b1-4399-8b12-39f8b1327d62	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+227f95ba-65b1-4399-8b12-39f8b1327d62	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 227fb13b-0a07-4937-9048-7cf02efbc8e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 227fb13b-0a07-4937-9048-7cf02efbc8e3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2281ab3f-fad7-4b42-9621-5c35fec4c0f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

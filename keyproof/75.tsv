@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75458175-eeb1-4a6b-93d9-c744c93b3759	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75458175-eeb1-4a6b-93d9-c744c93b3759	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7545adab-b6f8-496d-8c25-416c7ec85fa2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7545adab-b6f8-496d-8c25-416c7ec85fa2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7545adab-b6f8-496d-8c25-416c7ec85fa2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7545adab-b6f8-496d-8c25-416c7ec85fa2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+7545adab-b6f8-496d-8c25-416c7ec85fa2	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7549206e-22a9-4d56-b3bc-f6f2f5e87e8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7549656b-359f-467e-90ab-6b21d93c26b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7549656b-359f-467e-90ab-6b21d93c26b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75564721-e4e9-463a-b49e-f0c7cd6f53a7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75564721-e4e9-463a-b49e-f0c7cd6f53a7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 755ab107-0f65-4536-aa4b-8e9d35a9e524	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-755ab107-0f65-4536-aa4b-8e9d35a9e524	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+755ab107-0f65-4536-aa4b-8e9d35a9e524	f0/a0	Pump	agreed	-	X	start	2	0	x:xs:XP:pestilent-kathari:f0a0:s1	-	-	-	8a1b1a193ec0	-	e3c3cb3802f9	-	-	2026-11-24	xproof
 755bd5d8-67f1-4f24-a4e8-d98edf2f2e03	cast	cast-resolve	agreed	-	X	scen	1	0	Finale of Revelation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 755dbf29-7484-444f-b5df-29ec4b4bbc82	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 756042c5-e444-45d7-8dc6-ae7c83c98438	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,11 +183,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75eb30cc-688d-400a-abe3-5319b79fcbae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75effdde-0427-4e5a-bd6d-c3118f301520	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75efff64-ea9b-4e3e-a729-fc003ee3db1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75efff64-ea9b-4e3e-a729-fc003ee3db1e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75efff64-ea9b-4e3e-a729-fc003ee3db1e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:knotvine-paladin:f0t0:s1,f:xs:XP:knotvine-paladin:f0t0:s1	-	-	-	8a1b1a193ec0	-	e0d54e5baa0c	-	-	2026-11-24	xproof
 75f269df-ee49-44db-b256-4d005e3022fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75f269df-ee49-44db-b256-4d005e3022fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75f28e54-17ce-49f9-85b2-9f9a04e1d86f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75f381a6-49f9-4caf-a96a-91c75640b9b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75f381a6-49f9-4caf-a96a-91c75640b9b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raking-canopy:cast:s1,f:xs:XP:raking-canopy:cast:s1	-	-	-	8a1b1a193ec0	-	b49991363625	-	-	2026-11-24	xproof
 75f381a6-49f9-4caf-a96a-91c75640b9b0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75f5d372-4ff9-430c-8302-72472439e0d2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75f7d9c7-5d52-4bfe-a730-62fef187b8b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hoarder-s-overflow:f0t0:s1,f:xs:XP:hoarder-s-overflow:f0t0:s1	-	-	-	25696bf19d5b	-	83fc86ac1290	-	-	2026-11-24	xproof

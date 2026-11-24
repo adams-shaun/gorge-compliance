@@ -10,10 +10,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1313da2f-92bb-4862-9153-373972cc1520	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 131a7475-0b9e-46eb-9ade-fef1b9820184	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 131d55d1-7429-4940-b7d2-d759aabff47b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-131dc114-cd48-43d9-93b3-88df85640e09	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+131dc114-cd48-43d9-93b3-88df85640e09	cast	cast	agreed	-	F	start	2	0	f:xs:XP:arrow-volley-trap:cast:s1	-	-	-	8a1b1a193ec0	-	57ae13b2d23b	-	-	2026-11-24	xproof
 1322734c-3c3e-4885-a6d2-d6460a16fca2	cast	cast-resolve	agreed	-	FX	scen	2	0	Stonesplitter Bolt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13228a22-d63a-4952-a482-4f84da696e88	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-132401fb-6754-4190-9c85-1e57e7f63ed6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+132401fb-6754-4190-9c85-1e57e7f63ed6	cast	cast	agreed	-	F	start	2	0	f:xs:XP:strength-of-the-tajuru:cast:s1	-	-	-	8a1b1a193ec0	-	fe93f30828fe	-	-	2026-11-24	xproof
 132786bb-157c-4e2c-8f82-13df6a667448	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132786bb-157c-4e2c-8f82-13df6a667448	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13279222-422d-4447-9451-2463b0c714c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -36,8 +36,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1337d89e-a883-4568-a14f-9ca3305cc3df	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hell's Kitchen/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1337d89e-a883-4568-a14f-9ca3305cc3df	land	play-land	agreed	-	X	scen	1	0	Hell's Kitchen/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 133c99c0-3652-410f-8100-68015a47af9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-133f5d30-d883-493e-93a1-cf9583db460b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-133f5d30-d883-493e-93a1-cf9583db460b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+133f5d30-d883-493e-93a1-cf9583db460b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kazandu-blademaster:f0t0:s1,f:xs:XP:kazandu-blademaster:f0t0:s1	-	-	-	8a1b1a193ec0	-	f4f629c15c89	-	-	2026-11-24	xproof
+133f5d30-d883-493e-93a1-cf9583db460b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kazandu-blademaster:f0t0:s1,f:xs:XP:kazandu-blademaster:f0t0:s1	-	-	-	8a1b1a193ec0	-	f4f629c15c89	-	-	2026-11-24	xproof
 1342bd59-91d3-4a5b-b853-542a52d7da6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 134430b7-d566-485a-bd5c-7db8a285f4ca	cast	cast-resolve	agreed	-	X	scen	1	0	Leader's Talent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 134430b7-d566-485a-bd5c-7db8a285f4ca	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Leader's Talent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -87,9 +87,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 137594f7-2422-461b-a3ae-7ce3c135e0c7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hill Gigas/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 137594f7-2422-461b-a3ae-7ce3c135e0c7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hill Gigas/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 137594f7-2422-461b-a3ae-7ce3c135e0c7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hill Gigas/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-137b5708-50a9-4f4c-84e6-9043be9f1989	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+137b5708-50a9-4f4c-84e6-9043be9f1989	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anathemancer:f0t0:s1,f:xs:XP:anathemancer:f0t0:s1	-	-	-	8a1b1a193ec0	-	dfdd649d0d34	-	-	2026-11-24	xproof
 137b5708-50a9-4f4c-84e6-9043be9f1989	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-137b5708-50a9-4f4c-84e6-9043be9f1989	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+137b5708-50a9-4f4c-84e6-9043be9f1989	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anathemancer:f0t0:s1,f:xs:XP:anathemancer:f0t0:s1	-	-	-	8a1b1a193ec0	-	dfdd649d0d34	-	-	2026-11-24	xproof
 137e0ad2-e10a-4327-86a3-5ac7bc7fc469	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 137e0ad2-e10a-4327-86a3-5ac7bc7fc469	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 137e3974-74e1-4941-8597-10aeba6cac37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -133,8 +133,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13aeccd5-cca2-4249-904d-d5516f977440	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13b0a3f3-04a5-465f-898b-13a28f795a16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13b0a3f3-04a5-465f-898b-13a28f795a16	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13b33a41-c22b-4e7a-8323-abadf7f80961	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13b33a41-c22b-4e7a-8323-abadf7f80961	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13b33a41-c22b-4e7a-8323-abadf7f80961	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:polluted-bonds:cast:s1,f:xs:XP:polluted-bonds:cast:s1	-	-	-	8a1b1a193ec0	-	70eb53285ad2	-	-	2026-11-24	xproof
+13b33a41-c22b-4e7a-8323-abadf7f80961	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 13b4aeac-4530-4e09-a547-548b4884bb2f	cast	cast-resolve	agreed	-	X	scen	1	0	The Lunar Whale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13b4aeac-4530-4e09-a547-548b4884bb2f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Lunar Whale/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13b4aeac-4530-4e09-a547-548b4884bb2f	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Lunar Whale/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

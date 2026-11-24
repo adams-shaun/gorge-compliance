@@ -72,9 +72,9 @@ f15fb0cc-8e96-4f03-94d0-b51410415afd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Crys
 f15fb0cc-8e96-4f03-94d0-b51410415afd	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Crystal Grotto/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f15fb0cc-8e96-4f03-94d0-b51410415afd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Crystal Grotto/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f15fb0cc-8e96-4f03-94d0-b51410415afd	land	play-land	agreed	-	X	scen	1	0	Crystal Grotto/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f1603384-4361-49c9-98aa-7785fc3504c4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f1603384-4361-49c9-98aa-7785fc3504c4	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f1603384-4361-49c9-98aa-7785fc3504c4	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f1603384-4361-49c9-98aa-7785fc3504c4	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:cascade-bluffs:f0a0:s1,f:xs:XP:cascade-bluffs:f0a0:s1	-	-	-	8a1b1a193ec0	-	72f83b4e455d	-	-	2026-11-24	xproof
+f1603384-4361-49c9-98aa-7785fc3504c4	f0/a1	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+f1603384-4361-49c9-98aa-7785fc3504c4	land	land	agreed	-	FX	start	2	0	x:xs:XP:cascade-bluffs:land:s1,f:xs:XP:cascade-bluffs:land:s1	-	-	-	8a1b1a193ec0	-	72f83b4e455d	-	-	2026-11-24	xproof
 f161111d-9747-47b3-bb10-3c8bded32e21	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f161111d-9747-47b3-bb10-3c8bded32e21	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f161111d-9747-47b3-bb10-3c8bded32e21	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,8 +110,8 @@ f19d06af-6caf-41d8-8d0a-d5d50bd67900	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 f19e7c5c-67fa-4ae4-89b8-afa0e08a6c48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f19e7c5c-67fa-4ae4-89b8-afa0e08a6c48	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f19e7c5c-67fa-4ae4-89b8-afa0e08a6c48	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f19f28e5-9cad-4398-b2d4-9e7fefb23cb4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f19f28e5-9cad-4398-b2d4-9e7fefb23cb4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f19f28e5-9cad-4398-b2d4-9e7fefb23cb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grazing-gladehart:cast:s1,f:xs:XP:grazing-gladehart:cast:s1	-	-	-	8a1b1a193ec0	-	86dd70d0cb50	-	-	2026-11-24	xproof
+f19f28e5-9cad-4398-b2d4-9e7fefb23cb4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 f1a2a78c-2794-4bc9-9b06-49306378ef69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1a2a78c-2794-4bc9-9b06-49306378ef69	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1a3153c-0200-4ff2-b7d5-48d23920bb3c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ f1b1cf99-b44c-4bcc-b0ed-98f69e66c54a	cast	NULL	owed	refused:scen failed: xengine
 f1b1cf99-b44c-4bcc-b0ed-98f69e66c54a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 f1b1cf99-b44c-4bcc-b0ed-98f69e66c54a	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 f1b26eb1-6337-42d6-a475-53ad6427f00f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f1b26eb1-6337-42d6-a475-53ad6427f00f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f1b26eb1-6337-42d6-a475-53ad6427f00f	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAdded	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 f1b36dde-9cde-46c8-8d5a-9ad93feba41f	cast	cast-resolve	agreed	-	X	scen	1	0	Mirkwood Pathmaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f1b36dde-9cde-46c8-8d5a-9ad93feba41f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mirkwood Pathmaker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f1b3e0fc-1dc3-4eba-bd54-557f036f5ea9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

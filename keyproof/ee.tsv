@@ -47,8 +47,8 @@ ee35de1c-aef1-4bd4-85fd-fe77bc927790	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 ee35de1c-aef1-4bd4-85fd-fe77bc927790	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee35de1c-aef1-4bd4-85fd-fe77bc927790	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee35ed62-d5a2-4e65-a7eb-fcdcb3665532	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee35ed62-d5a2-4e65-a7eb-fcdcb3665532	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee35ed62-d5a2-4e65-a7eb-fcdcb3665532	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee35ed62-d5a2-4e65-a7eb-fcdcb3665532	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+ee35ed62-d5a2-4e65-a7eb-fcdcb3665532	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 ee38377f-8d3a-402e-a5d7-a01cfe3a5322	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee38377f-8d3a-402e-a5d7-a01cfe3a5322	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee397a87-6933-4d2d-aac6-8dc4e96d524b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -96,8 +96,8 @@ ee6d6f2f-68d5-466a-86c6-20fdb360e629	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tib
 ee6d6f2f-68d5-466a-86c6-20fdb360e629	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 ee6d6f2f-68d5-466a-86c6-20fdb360e629	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 ee6e0279-9606-4877-a3a0-5d9dd557ff15	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee6f1ddb-6749-4394-b2b0-4d293376f1af	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee6f1ddb-6749-4394-b2b0-4d293376f1af	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee6f1ddb-6749-4394-b2b0-4d293376f1af	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:igneous-pouncer:cast:s1,f:xs:XP:igneous-pouncer:cast:s1	-	-	-	8a1b1a193ec0	-	77390bcff491	-	-	2026-11-24	xproof
+ee6f1ddb-6749-4394-b2b0-4d293376f1af	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:igneous-pouncer:cast:s2,f:xs:XP:igneous-pouncer:cast:s2	-	-	-	8a1b1a193ec0	-	77390bcff491	-	-	2026-11-24	xproof
 ee6f1ddb-6749-4394-b2b0-4d293376f1af	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee712451-01de-4486-9048-fafb5aa5a584	cast	cast-resolve	agreed	-	FX	scen	2	0	Lore, Positronic Provocateur/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee712451-01de-4486-9048-fafb5aa5a584	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -145,8 +145,8 @@ ee90b4c5-f646-47a9-8aa8-393c86e35536	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ee9208e7-2075-45b9-9ed7-b18e1a280d79	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee9208e7-2075-45b9-9ed7-b18e1a280d79	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee969637-a20e-4163-97c0-9fd5cb17b741	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee988017-fc7e-4d8a-8f5c-0a7e57a8d050	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee988017-fc7e-4d8a-8f5c-0a7e57a8d050	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee988017-fc7e-4d8a-8f5c-0a7e57a8d050	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ethersworn-shieldmage:cast:s1,f:xs:XP:ethersworn-shieldmage:cast:s1	-	-	-	8a1b1a193ec0	-	687ca3031c31	-	-	2026-11-24	xproof
+ee988017-fc7e-4d8a-8f5c-0a7e57a8d050	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ethersworn-shieldmage:cast:s1,f:xs:XP:ethersworn-shieldmage:cast:s1	-	-	-	8a1b1a193ec0	-	687ca3031c31	-	-	2026-11-24	xproof
 ee9b606a-a1fe-43c8-84d0-9bf7b012cc75	cast	cast-resolve	agreed	-	X	scen	1	0	Leatherhead, Swamp Stalker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee9b606a-a1fe-43c8-84d0-9bf7b012cc75	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Leatherhead, Swamp Stalker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee9b606a-a1fe-43c8-84d0-9bf7b012cc75	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Leatherhead, Swamp Stalker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stomping Ground/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Stomping Ground/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	land	play-land	agreed	-	X	scen	1	0	Stomping Ground/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-16069935-4aeb-481f-98f2-46387775540f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16069935-4aeb-481f-98f2-46387775540f	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:noggle-hedge-mage:cast:s1,f:xs:XP:noggle-hedge-mage:cast:s1	-	-	-	8a1b1a193ec0	-	f34be77cea62	-	-	2026-11-24	xproof
 16069935-4aeb-481f-98f2-46387775540f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16069935-4aeb-481f-98f2-46387775540f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16128b90-9b81-476e-8999-3ef498728c39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16923d37-bac0-4e6a-bd02-f3aa9360deeb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169429d8-aa98-46a8-8681-521c65dafbb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:needlepeak-spider:cast:s1,f:xs:XP:needlepeak-spider:cast:s1	-	-	-	9ee19e8250ce	-	08113fcadd97	-	-	2026-11-24	xproof
 169705c3-32c1-4628-b108-c37ca5f27e24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-169705c3-32c1-4628-b108-c37ca5f27e24	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+169705c3-32c1-4628-b108-c37ca5f27e24	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:ruin-ghost:f0a0:s1,f:xs:XP:ruin-ghost:f0a0:s1	-	-	-	8a1b1a193ec0	-	d6f87ad06fa3	-	-	2026-11-24	xproof
 169728d6-7820-4a6d-a815-70714ad3e887	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16977ebd-6384-4c28-b9c3-448563a07807	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169a4a77-12ff-4997-9550-bdcd456aa2f7	cast	cast-resolve	agreed	-	X	scen	1	0	The Eagles Are Coming!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -129,8 +129,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16aa2e9e-bfe8-4b40-a1db-bb1da2ede849	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16ab9451-f3da-4f61-8e2b-d9c84e0e5428	cast	cast-resolve	agreed	-	X	scen	1	0	Crackling Cyclops/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16ab9451-f3da-4f61-8e2b-d9c84e0e5428	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Crackling Cyclops/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-16aba9af-7a12-4c3d-87eb-06278921cb7c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16aba9af-7a12-4c3d-87eb-06278921cb7c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16aba9af-7a12-4c3d-87eb-06278921cb7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merfolk-sovereign:cast:s1,f:xs:XP:merfolk-sovereign:cast:s1	-	-	-	8a1b1a193ec0	-	7baecb3c4476	-	-	2026-11-24	xproof
+16aba9af-7a12-4c3d-87eb-06278921cb7c	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:merfolk-sovereign:f0a0:s1,f:xs:XP:merfolk-sovereign:f0a0:s1	-	-	-	8a1b1a193ec0	-	7baecb3c4476	-	-	2026-11-24	xproof
 16acd858-dba6-401e-bbfb-cabdd6d0120e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16acd858-dba6-401e-bbfb-cabdd6d0120e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16aea5b3-9f43-4852-b8b8-80e87909b794	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16af0a22-833e-47c6-ac27-002702194595	cast	cast-resolve	agreed	-	X	scen	1	0	Foggy Swamp Visions/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16af0a22-833e-47c6-ac27-002702194595	static#0.0	static#0.0	agreed	-	X	scen	1	0	Foggy Swamp Visions/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16b4a48a-fec2-433c-948d-e0b16c961172	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16b723bc-aab9-40f2-8e1b-b9c2bd2af3bc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16b723bc-aab9-40f2-8e1b-b9c2bd2af3bc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16b723bc-aab9-40f2-8e1b-b9c2bd2af3bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:putrid-leech:cast:s1,f:xs:XP:putrid-leech:cast:s1	-	-	-	8a1b1a193ec0	-	39dce854bda3	-	-	2026-11-24	xproof
+16b723bc-aab9-40f2-8e1b-b9c2bd2af3bc	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:putrid-leech:cast:s1,f:xs:XP:putrid-leech:cast:s1	-	-	-	8a1b1a193ec0	-	39dce854bda3	-	-	2026-11-24	xproof
 16c293c8-bd1d-4db9-b197-da14f2f37cb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16c39265-72d9-4c86-a961-8dd38ff9adcd	cast	counter-spell	diverged	-	-	scen	0	1	-	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 16c46eaf-7a31-4957-ab7c-ff07fbbd9ddc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -167,7 +167,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16e015b2-f8a3-4b1a-80be-58a8f5fb5e8c	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16e48b95-f030-400c-a2b7-c3f3111cc165	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16e48b95-f030-400c-a2b7-c3f3111cc165	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16e555f2-5aa8-4100-a036-eed48db0e84a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16e555f2-5aa8-4100-a036-eed48db0e84a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bone-saw:cast:s1,f:xs:XP:bone-saw:cast:s1	-	-	-	8a1b1a193ec0	-	51513655ff43	-	-	2026-11-24	xproof
 16e555f2-5aa8-4100-a036-eed48db0e84a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16e6bd4b-fbf1-4bbe-9271-a74f59320e0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16e6bd4b-fbf1-4bbe-9271-a74f59320e0d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

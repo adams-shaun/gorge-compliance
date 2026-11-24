@@ -4,8 +4,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73016220-2436-4072-96dd-65c0cb05fff4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 730809d7-cb8c-495c-8972-7e85b967358e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 730809d7-cb8c-495c-8972-7e85b967358e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73089a39-a2f6-4aa2-a058-e6551475153d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73089a39-a2f6-4aa2-a058-e6551475153d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+73089a39-a2f6-4aa2-a058-e6551475153d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sanguine-bond:cast:s1,f:xs:XP:sanguine-bond:cast:s1	-	-	-	8a1b1a193ec0	-	4ee12bdc202e	-	-	2026-11-24	xproof
+73089a39-a2f6-4aa2-a058-e6551475153d	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 73094bde-5466-41a4-88f9-a98e67f5ed2e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 730be0d6-2612-44d6-9d36-e1fc6510c6bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 730be0d6-2612-44d6-9d36-e1fc6510c6bd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -42,8 +42,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7336a541-3ae9-4ab2-acb8-f574c0a5b3a9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7338f964-b7d8-4491-b933-7d8b7d1b56ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 733c6e30-3c0c-41f0-b1e9-4c2eb76f7b82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-733cfc16-9a16-41e2-b36e-3d7a546c67f0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-733cfc16-9a16-41e2-b36e-3d7a546c67f0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+733cfc16-9a16-41e2-b36e-3d7a546c67f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guul-draz-specter:cast:s1,f:xs:XP:guul-draz-specter:cast:s1	-	-	-	8a1b1a193ec0	-	7e971d330a5f	-	-	2026-11-24	xproof
+733cfc16-9a16-41e2-b36e-3d7a546c67f0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7340199d-60c7-4c27-9a0f-047790273db0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73413bd5-8c40-4d45-8f05-c20c39ee4017	cast	cast-resolve	agreed	-	FX	scen	2	0	Madame Null, Power Broker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73413bd5-8c40-4d45-8f05-c20c39ee4017	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Madame Null, Power Broker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73520b5a-3d55-40c9-af60-90fdd811934f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73520b5a-3d55-40c9-af60-90fdd811934f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73535033-2875-4a82-98d5-84548e349f13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7356319d-1485-426b-80a7-9700d6684ac9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7356319d-1485-426b-80a7-9700d6684ac9	cast	cast	agreed	-	F	start	2	0	f:xs:XP:lethargy-trap:cast:s1	-	-	-	8a1b1a193ec0	-	bc1cfdaf12ed	-	-	2026-11-24	xproof
 7358e164-5704-4e78-9b21-6a9bf2a968ce	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7358e164-5704-4e78-9b21-6a9bf2a968ce	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7359e82b-db79-488d-a1d4-75a00f12a4cf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73b3682f-396a-4ebe-aaac-6ce3ee36283a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73b3682f-396a-4ebe-aaac-6ce3ee36283a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73b3e242-075d-4c4d-9b09-6fef1633c348	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73b3e242-075d-4c4d-9b09-6fef1633c348	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73b3e242-075d-4c4d-9b09-6fef1633c348	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+73b3e242-075d-4c4d-9b09-6fef1633c348	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sejiri-refuge:f0t0:s1,f:xs:XP:sejiri-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	13e78377f08d	-	-	2026-11-24	xproof
+73b3e242-075d-4c4d-9b09-6fef1633c348	land	land	agreed	-	FX	start	2	0	x:xs:XP:sejiri-refuge:f0t0:s1,f:xs:XP:sejiri-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	13e78377f08d	-	-	2026-11-24	xproof
 73b60c2c-7c74-4554-8861-daa0d6fc22b4	cast	cast-resolve	agreed	-	FX	scen	2	0	Burrog Befuddler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73b60c2c-7c74-4554-8861-daa0d6fc22b4	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73b6694a-47d4-417a-af9b-470da14b5b0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

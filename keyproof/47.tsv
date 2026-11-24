@@ -122,9 +122,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47bbb630-2bf7-47a2-93bb-266e491803c3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47bce63e-8edb-43c1-b273-4b86da5c616b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47bce63e-8edb-43c1-b273-4b86da5c616b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cinder-pyromancer:cast:s1,f:xs:XP:cinder-pyromancer:cast:s1	-	-	-	8a1b1a193ec0	-	5bb66f26b436	-	-	2026-11-24	xproof
+47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:cinder-pyromancer:f0a0:s1,f:xs:XP:cinder-pyromancer:f0a0:s1	-	-	-	8a1b1a193ec0	-	5bb66f26b436	-	-	2026-11-24	xproof
+47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 47c12d2f-b458-4848-9a01-0fc37ef3d942	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47c67df1-52f5-459f-b83e-6b971be9b294	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47c67df1-52f5-459f-b83e-6b971be9b294	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,8 +163,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47f71408-5509-4651-9121-fd0867adae00	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47f71408-5509-4651-9121-fd0867adae00	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47f71408-5509-4651-9121-fd0867adae00	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47f75e25-8a52-4452-a3a8-bf1bd00942d1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47f75e25-8a52-4452-a3a8-bf1bd00942d1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+47f75e25-8a52-4452-a3a8-bf1bd00942d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warren-instigator:cast:s1,f:xs:XP:warren-instigator:cast:s1	-	-	-	8a1b1a193ec0	-	4918eb63bed9	-	-	2026-11-24	xproof
+47f75e25-8a52-4452-a3a8-bf1bd00942d1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 47f8df80-abc9-4d46-8078-8fbc23430259	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47f8df80-abc9-4d46-8078-8fbc23430259	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47f8df80-abc9-4d46-8078-8fbc23430259	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

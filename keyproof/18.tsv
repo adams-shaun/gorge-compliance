@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 180ba940-2b11-4953-b7ce-74847e1aebfd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Assemble the Players/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 180ba940-2b11-4953-b7ce-74847e1aebfd	static#0.1	static#0.1	agreed	-	X	scen	1	0	Assemble the Players/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 180d9c48-6d6c-4d20-965a-0ee2ad57f99b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-180d9c48-6d6c-4d20-965a-0ee2ad57f99b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+180d9c48-6d6c-4d20-965a-0ee2ad57f99b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 180e1a7e-890d-477c-80a5-da8a5f2857b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180e1a7e-890d-477c-80a5-da8a5f2857b3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180eda7c-fca2-403b-85cd-8ffebaf9f408	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,8 +183,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18ba355d-a25f-4a5d-b734-11739b0b86af	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Guardian of the Great Door/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18bb35a8-01ac-414f-9a45-e550060ff905	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18bb35a8-01ac-414f-9a45-e550060ff905	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18bcf4c5-7abc-4ca5-b805-4bbebf4e433c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18bcf4c5-7abc-4ca5-b805-4bbebf4e433c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18bcf4c5-7abc-4ca5-b805-4bbebf4e433c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crypt-ripper:cast:s1,f:xs:XP:crypt-ripper:cast:s1	-	-	-	8a1b1a193ec0	-	971d92cd78da	-	-	2026-11-24	xproof
+18bcf4c5-7abc-4ca5-b805-4bbebf4e433c	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:crypt-ripper:f0a0:s1,f:xs:XP:crypt-ripper:f0a0:s1	-	-	-	8a1b1a193ec0	-	971d92cd78da	-	-	2026-11-24	xproof
 18c5e7a0-4397-48bb-b993-1c3e3b08be2c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18c5e7a0-4397-48bb-b993-1c3e3b08be2c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18c65823-01ae-4314-a254-d89a1a362633	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -105,8 +105,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2373e035-25f7-473a-9386-2093f77d3f94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2373e035-25f7-473a-9386-2093f77d3f94	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23745133-e5e2-4ce3-b94a-73d0d3d8a013	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phantom-warrior:cast:s1,f:xs:XP:phantom-warrior:cast:s1	-	-	-	25696bf19d5b	-	dd03a84c464f	-	-	2026-11-24	xproof
-2375a9c6-28ef-4c8f-909c-0aa7e5fc085c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2375a9c6-28ef-4c8f-909c-0aa7e5fc085c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2375a9c6-28ef-4c8f-909c-0aa7e5fc085c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twinblade-slasher:cast:s1,f:xs:XP:twinblade-slasher:cast:s1	-	-	-	8a1b1a193ec0	-	217df9548fad	-	-	2026-11-24	xproof
+2375a9c6-28ef-4c8f-909c-0aa7e5fc085c	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:twinblade-slasher:f0a0:s1,f:xs:XP:twinblade-slasher:f0a0:s1	-	-	-	8a1b1a193ec0	-	217df9548fad	-	-	2026-11-24	xproof
 2375e6e4-bea2-4fa2-b0d5-467e3076962c	cast	cast-resolve	agreed	-	X	scen	1	0	Cantankerous Captain/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2375e6e4-bea2-4fa2-b0d5-467e3076962c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 237758f3-84b2-4e5b-a2c7-b28c893e2790	cast	cast-resolve	agreed	-	X	scen	1	0	Goblin Surveyor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23c2cdc9-2b16-423a-b932-2daadeb1021b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23c3de07-8aa2-48e9-848c-50b5a40bd133	cast	cast-resolve	agreed	-	FX	scen	2	0	Goblin Glasswright/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23c52252-1e65-4e04-98d3-0ac06a565016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23c52252-1e65-4e04-98d3-0ac06a565016	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23c52252-1e65-4e04-98d3-0ac06a565016	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 23c74c42-11bd-4fba-b1cb-93b96f5a11fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23c74c42-11bd-4fba-b1cb-93b96f5a11fb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23c75386-8011-4ee4-97e2-eaafeb20b788	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:armament-dragon:f0t0:s2,f:xs:XP:armament-dragon:f0t0:s2	-	-	-	267e485f6204	-	ed0700c1a118	-	-	2026-11-24	xproof

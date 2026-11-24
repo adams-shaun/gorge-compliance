@@ -75,7 +75,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 486bb9a5-73f1-4cec-b097-fb07ac80b72e	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Ojer Taq, Deepest Foundation/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 486bb9a5-73f1-4cec-b097-fb07ac80b72e	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Ojer Taq, Deepest Foundation/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4870ec65-8067-45fb-b7ec-a6eca87c7e77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48712d36-5c13-4ded-87a4-68106da4a5cd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48712d36-5c13-4ded-87a4-68106da4a5cd	cast	cast	agreed	-	F	start	2	0	f:xs:XP:mindbreak-trap:cast:s1	-	-	-	8a1b1a193ec0	-	a9da3ff94fdc	-	-	2026-11-24	xproof
 487382ea-0050-4a3f-bcf6-0ce41d6f4ebf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 487485a6-cf79-48c0-bea9-0ec6b3ee253c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -100,9 +100,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 488696c2-b0c7-49be-a5a1-e833b6fd8751	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4887b9e1-ea84-4543-b272-c106a13a33dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4887b9e1-ea84-4543-b272-c106a13a33dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-488ca652-653b-4bb3-891c-874efdd418ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-488ca652-653b-4bb3-891c-874efdd418ff	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-488ca652-653b-4bb3-891c-874efdd418ff	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+488ca652-653b-4bb3-891c-874efdd418ff	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:pale-recluse:cast:s1,f:xs:XP:pale-recluse:cast:s1	-	-	-	8a1b1a193ec0	-	de62d566c2c6	-	-	2026-11-24	xproof
+488ca652-653b-4bb3-891c-874efdd418ff	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:pale-recluse:cast:s2,f:xs:XP:pale-recluse:cast:s2	-	-	-	8a1b1a193ec0	-	de62d566c2c6	-	-	2026-11-24	xproof
+488ca652-653b-4bb3-891c-874efdd418ff	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 4891923b-9c8c-4816-9623-d9362e4eb503	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48925016-8a55-4efb-84c7-dc5001baa58e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48925016-8a55-4efb-84c7-dc5001baa58e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b3d364d-6581-43de-a80a-d5b07f5d21ed	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Venus, Torn Between Worlds/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b3e05e1-31b4-46af-b3d0-f2467f8551e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b3e05e1-31b4-46af-b3d0-f2467f8551e9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b3e05e1-31b4-46af-b3d0-f2467f8551e9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b3e05e1-31b4-46af-b3d0-f2467f8551e9	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7b3e354e-0fa3-4ae1-93b5-9ebc29e8b59e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b3e74ad-0179-480b-871c-9e3bc30a43ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b3e74ad-0179-480b-871c-9e3bc30a43ff	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b9fafe7-d26a-4ed5-b4c4-ce13763770b5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b9fafe7-d26a-4ed5-b4c4-ce13763770b5	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b9fafe7-d26a-4ed5-b4c4-ce13763770b5	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ba31f45-c178-4bac-ab7b-5ba4d050133c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ba31f45-c178-4bac-ab7b-5ba4d050133c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gwafa-hazid-profiteer:cast:s1,f:xs:XP:gwafa-hazid-profiteer:cast:s1	-	-	-	8a1b1a193ec0	-	78f5b09f7421	-	-	2026-11-24	xproof
 7ba31f45-c178-4bac-ab7b-5ba4d050133c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ba550a5-81fc-42c2-8df8-ad455d938605	cast	cast-resolve	agreed	-	X	scen	1	0	Bonehoard Dracosaur/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ba550a5-81fc-42c2-8df8-ad455d938605	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bonehoard Dracosaur/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -172,8 +172,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7bd36106-04fe-481f-b16e-e076dcbb183b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7bd36106-04fe-481f-b16e-e076dcbb183b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7bd4e504-541e-4b2c-9f1d-3c67957aef2e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7bd4e504-541e-4b2c-9f1d-3c67957aef2e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7bd4e504-541e-4b2c-9f1d-3c67957aef2e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7bd4e504-541e-4b2c-9f1d-3c67957aef2e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+7bd4e504-541e-4b2c-9f1d-3c67957aef2e	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7bdfe368-353c-4f8d-851f-05b7ea9f905d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7be2bc4e-3986-4f4f-bd5b-0a9f59b2f865	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7be47440-b627-411e-a28f-d5a92e5e2fb7	cast	cast-resolve	agreed	-	X	scen	1	0	Impostor Syndrome/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

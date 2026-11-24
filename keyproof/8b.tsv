@@ -132,8 +132,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b9119b0-9948-497f-aa92-2879d07bed1c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b96c334-82c7-4511-805e-f04c27514d7c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b96f837-7c32-473a-b5ae-1d66527eaf7b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b96f837-7c32-473a-b5ae-1d66527eaf7b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b96f837-7c32-473a-b5ae-1d66527eaf7b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b96f837-7c32-473a-b5ae-1d66527eaf7b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jwar-isle-refuge:f0t0:s1,f:xs:XP:jwar-isle-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	a3b5399bc0dd	-	-	2026-11-24	xproof
+8b96f837-7c32-473a-b5ae-1d66527eaf7b	land	land	agreed	-	FX	start	2	0	x:xs:XP:jwar-isle-refuge:f0t0:s1,f:xs:XP:jwar-isle-refuge:f0t0:s1	-	-	-	8a1b1a193ec0	-	a3b5399bc0dd	-	-	2026-11-24	xproof
 8b972819-507a-40a9-ab1f-1a674ea56083	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b972819-507a-40a9-ab1f-1a674ea56083	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b9734c1-7185-40f6-8582-9f87109e3a09	cast	cast-resolve	agreed	-	X	scen	1	0	Far Fortune, End Boss/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8bc30bd5-554e-4fcf-9dec-c7634921858a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bc7c769-33e0-4482-95fc-b344b772e174	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bca3213-d8e1-4915-bd9a-9a291cdec1cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8bca3213-d8e1-4915-bd9a-9a291cdec1cd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8bca3213-d8e1-4915-bd9a-9a291cdec1cd	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 8bca5627-27c2-4d10-85c5-2451daa94c5d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bca5627-27c2-4d10-85c5-2451daa94c5d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bcb0f45-902d-41d6-a10c-60bc27befd30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7121b877-d262-4627-acd8-a159f8a779b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71220cc2-5f3d-4c97-ae66-05b1b79adef1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71220cc2-5f3d-4c97-ae66-05b1b79adef1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-71220cc2-5f3d-4c97-ae66-05b1b79adef1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+71220cc2-5f3d-4c97-ae66-05b1b79adef1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7126772a-d586-4859-81ec-46bbe9d1a678	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7126772a-d586-4859-81ec-46bbe9d1a678	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7127fc35-600c-4397-8c01-5327d3c4944b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 717c6beb-81c6-43ed-aab0-aedfc1cbac33	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Lake-town/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 717c6beb-81c6-43ed-aab0-aedfc1cbac33	land	play-land	agreed	-	FX	scen	2	0	Lake-town/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7182e6f4-6caf-474a-8759-13c56f391bef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7182e6f4-6caf-474a-8759-13c56f391bef	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7182e6f4-6caf-474a-8759-13c56f391bef	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7185e345-d8a1-4dd3-a071-f90f265634b4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7185e345-d8a1-4dd3-a071-f90f265634b4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7185e345-d8a1-4dd3-a071-f90f265634b4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7192ff07-9a84-49ad-a40c-ce255ce21544	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7192ff07-9a84-49ad-a40c-ce255ce21544	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7194a262-5e7a-4c12-b271-2bc5e0799477	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7194a262-5e7a-4c12-b271-2bc5e0799477	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7194a262-5e7a-4c12-b271-2bc5e0799477	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7194cf15-69fc-46f0-987a-2cea8b498f50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71982b17-1d9a-4f98-b8b5-d232e3a8cf1d	cast	cast-resolve	agreed	-	X	scen	1	0	Scrounge for Eternity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 719aeb50-c8cf-4cd8-b74c-d2cef408b52e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -174,8 +174,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71d785a9-ddc8-472e-a778-a551b444a4bd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71d83fca-e40e-4d0e-956d-d0d6da9cc472	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71e28800-c42c-48c0-95e5-0296be54a4e8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-71e28800-c42c-48c0-95e5-0296be54a4e8	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-71e28800-c42c-48c0-95e5-0296be54a4e8	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+71e28800-c42c-48c0-95e5-0296be54a4e8	f0/a1	ChangeZone	agreed	-	FX	start	6	0	x:xs:XP:naya-panorama:f0a0:s1,f:xs:XP:naya-panorama:f0a0:s1	-	-	-	8a1b1a193ec0	-	71af53d67d5a	-	-	2026-11-24	xproof
+71e28800-c42c-48c0-95e5-0296be54a4e8	land	land	agreed	-	FX	start	2	0	x:xs:XP:naya-panorama:land:s1,f:xs:XP:naya-panorama:land:s1	-	-	-	8a1b1a193ec0	-	71af53d67d5a	-	-	2026-11-24	xproof
 71ecb454-3598-4860-bba1-b3932f906171	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71ecb454-3598-4860-bba1-b3932f906171	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71f3d3d3-3f82-43f6-b2a9-d21afbdd7739	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

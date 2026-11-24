@@ -35,7 +35,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b26a54f-6c27-4940-b77e-2a66175c5eff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b27303b-756e-45b9-956f-6bbbd83d31ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b2826ea-a3d5-4b8a-b362-0b0880d1cc48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b2826ea-a3d5-4b8a-b362-0b0880d1cc48	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b2826ea-a3d5-4b8a-b362-0b0880d1cc48	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 1b2993fa-b212-4eaa-b3e8-f79c2f2e4cbe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b2993fa-b212-4eaa-b3e8-f79c2f2e4cbe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b2e0a60-844e-4db7-91fd-323497ab3cbf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1bc42024-52da-4d93-8b47-544f0a4a72a1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1bc42024-52da-4d93-8b47-544f0a4a72a1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1bc44216-4e06-4f66-89b7-5c327004604e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1bc44216-4e06-4f66-89b7-5c327004604e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1bc44216-4e06-4f66-89b7-5c327004604e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 1bc44216-4e06-4f66-89b7-5c327004604e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1bc701e2-913a-45d5-bc3f-16f87e7e2653	cast	cast-resolve	agreed	-	FX	scen	2	0	Ash, Party Crasher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1bc701e2-913a-45d5-bc3f-16f87e7e2653	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ash, Party Crasher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

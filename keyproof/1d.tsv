@@ -16,14 +16,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d25b831-c1de-4f79-bbb3-1582eda96452	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d25b831-c1de-4f79-bbb3-1582eda96452	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d25b831-c1de-4f79-bbb3-1582eda96452	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d28ed9a-cc4e-48d9-a1a6-7504fc6cc56d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d28ed9a-cc4e-48d9-a1a6-7504fc6cc56d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quag-vampires:cast:s1,f:xs:XP:quag-vampires:cast:s1	-	-	-	8a1b1a193ec0	-	687d42cf52b8	-	-	2026-11-24	xproof
 1d33d49f-ba12-4bf6-878b-04cee5d5b48d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d33d49f-ba12-4bf6-878b-04cee5d5b48d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d33d49f-ba12-4bf6-878b-04cee5d5b48d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d34e78e-4fe9-44e1-88d3-a98fd64555a9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d34e78e-4fe9-44e1-88d3-a98fd64555a9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d3cfdd3-e16f-4955-9b81-0d6fc981c168	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d3cfdd3-e16f-4955-9b81-0d6fc981c168	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d3cfdd3-e16f-4955-9b81-0d6fc981c168	f0/t0	NULL	owed	refused:history:kicked:no-kicker	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 1d4163d9-ca02-4f25-9f53-01f6d7cc4b70	cast	cast-resolve	agreed	-	X	scen	1	0	Sickbay/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d4163d9-ca02-4f25-9f53-01f6d7cc4b70	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d4163d9-ca02-4f25-9f53-01f6d7cc4b70	f0/t1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d6742a3-592b-4e67-8cc6-56e2962ad7c7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Meltstrider's Gear/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d6796ce-9316-430a-8126-8b0414cf181c	cast	cast-resolve	agreed	-	X	scen	1	0	Uncharted Voyage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d67f5ff-1fce-45e5-b6a1-416c569351e2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d6925f3-d132-4fa1-bde0-82d0128c319f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d6925f3-d132-4fa1-bde0-82d0128c319f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d6925f3-d132-4fa1-bde0-82d0128c319f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:murasa-pyromancer:cast:s1,f:xs:XP:murasa-pyromancer:cast:s1	-	-	-	8a1b1a193ec0	-	e1622c0107b9	-	-	2026-11-24	xproof
+1d6925f3-d132-4fa1-bde0-82d0128c319f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:murasa-pyromancer:cast:s1,f:xs:XP:murasa-pyromancer:cast:s1	-	-	-	8a1b1a193ec0	-	e1622c0107b9	-	-	2026-11-24	xproof
 1d6aa6ab-7cfc-463f-a8ba-007058933ebf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d6d0348-46ad-46ed-ae7b-d7510f0ebe70	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:genghis-frog:f0t0:s2,f:xs:XP:genghis-frog:f0t0:s2	-	-	-	267e485f6204	-	09aa3d173216	-	-	2026-11-24	xproof
 1d6d0348-46ad-46ed-ae7b-d7510f0ebe70	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Genghis Frog/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

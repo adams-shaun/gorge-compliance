@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f39accf-62fd-407a-a147-781210569d33	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f39accf-62fd-407a-a147-781210569d33	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f3ef680-90f4-487f-b44b-db25e29e57ce	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f3f68b5-8c6a-4181-bb8a-9c73967d198a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f3f68b5-8c6a-4181-bb8a-9c73967d198a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glen-elendra-archmage:cast:s1,f:xs:XP:glen-elendra-archmage:cast:s1	-	-	-	8a1b1a193ec0	-	3cd3891d53c9	-	-	2026-11-24	xproof
 5f3f68b5-8c6a-4181-bb8a-9c73967d198a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f3f68b5-8c6a-4181-bb8a-9c73967d198a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f3fe679-aff1-41b3-8d75-c78c2c0636f0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -92,8 +92,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f662383-1684-4bd3-be05-e696d301e26c	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Mardu Monument/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f662383-1684-4bd3-be05-e696d301e26c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mardu-monument:f0t0:s2,f:xs:XP:mardu-monument:f0t0:s2	-	-	-	267e485f6204	-	78a89c4499ec	-	-	2026-11-24	xproof
 5f67698a-28db-43cd-aaf1-52371b0b47eb	cast	cast-resolve	agreed	-	FX	scen	2	0	Temporal Cleansing/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-5f685846-60dc-45f9-b118-02e74a443e6a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f685846-60dc-45f9-b118-02e74a443e6a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f685846-60dc-45f9-b118-02e74a443e6a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frontier-guide:cast:s1,f:xs:XP:frontier-guide:cast:s1	-	-	-	8a1b1a193ec0	-	631955a01500	-	-	2026-11-24	xproof
+5f685846-60dc-45f9-b118-02e74a443e6a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:frontier-guide:f0a0:s1,f:xs:XP:frontier-guide:f0a0:s1	-	-	-	8a1b1a193ec0	-	631955a01500	-	-	2026-11-24	xproof
 5f694917-f434-4459-bc86-caf9ac1c80e7	cast	cast-resolve	agreed	-	FX	scen	2	0	Awaken the Honored Dead/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f694f2d-9349-4988-b2b4-788136d4293e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f694f2d-9349-4988-b2b4-788136d4293e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f71c09a-47fb-4bb2-9329-78f5bb195e5d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f71f205-9551-416a-bba6-55bc65d11c85	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f73fd4e-0d24-4daa-8d82-73c0cf7f801d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f7a4ffb-83f7-46e5-b0a7-c8b068af6969	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f7a4ffb-83f7-46e5-b0a7-c8b068af6969	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blazethorn-scarecrow:cast:s1,f:xs:XP:blazethorn-scarecrow:cast:s1	-	-	-	8a1b1a193ec0	-	ec8023386322	-	-	2026-11-24	xproof
 5f7c6fa9-4208-4dc8-a75b-9586200d8e19	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f7c6fa9-4208-4dc8-a75b-9586200d8e19	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f7f0a38-fb7e-4ee8-a712-9aa911f17dae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f9ef763-22aa-4d43-b084-ef02465b489c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dynamite Diver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f9ef763-22aa-4d43-b084-ef02465b489c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dynamite Diver/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5fa1b2f0-3ba4-49db-9cb5-b6130e4c255e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5fa3cc1a-09ee-4152-8c50-ea719510fc20	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5fa3cc1a-09ee-4152-8c50-ea719510fc20	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gnarled-effigy:cast:s1,f:xs:XP:gnarled-effigy:cast:s1	-	-	-	8a1b1a193ec0	-	5ad307ebe5a1	-	-	2026-11-24	xproof
 5fa3cc1a-09ee-4152-8c50-ea719510fc20	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fa4607a-6731-4599-80f3-19d6097b4b28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fa4607a-6731-4599-80f3-19d6097b4b28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

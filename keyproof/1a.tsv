@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a82be68-3b74-4dfc-9068-3abea61db709	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a82be68-3b74-4dfc-9068-3abea61db709	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fell Gravship/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a840210-204d-41cd-afc0-46abf7ea5f87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1a840210-204d-41cd-afc0-46abf7ea5f87	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1a840210-204d-41cd-afc0-46abf7ea5f87	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 1a846ad6-15c9-4bf9-9127-612018a557b9	cast	cast-resolve	agreed	-	X	scen	1	0	Judge Magister Gabranth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a846ad6-15c9-4bf9-9127-612018a557b9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Judge Magister Gabranth/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a846ad6-15c9-4bf9-9127-612018a557b9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Judge Magister Gabranth/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1acb289f-fb7f-4d83-aaef-4e7b9462c593	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Pacesetter Paragon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ad39f85-799a-42ae-852c-9117d689fe65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ad39f85-799a-42ae-852c-9117d689fe65	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ad39f85-799a-42ae-852c-9117d689fe65	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ad39f85-799a-42ae-852c-9117d689fe65	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 1ad3be51-f68b-46d6-b58e-400b50e384f1	cast	cast-resolve	agreed	-	X	scen	1	0	Firebending Student/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ad3be51-f68b-46d6-b58e-400b50e384f1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Firebending Student/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ad3be51-f68b-46d6-b58e-400b50e384f1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Firebending Student/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -164,8 +164,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ad6339d-6206-49bf-bf97-05e6d3bcaab7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ad78038-44f9-4599-84db-fc1a87d9ed45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ad83cac-2c85-477b-ab00-1369f9683db5	cast	cast-resolve	agreed	-	X	scen	1	0	Armor Wars/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1adb733c-d18a-4019-9229-0ad701a15b1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1adb733c-d18a-4019-9229-0ad701a15b1a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1adb733c-d18a-4019-9229-0ad701a15b1a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kor-aeronaut:f0t0:s1,f:xs:XP:kor-aeronaut:f0t0:s1	-	-	-	8a1b1a193ec0	-	67a2736ae4ae	-	-	2026-11-24	xproof
+1adb733c-d18a-4019-9229-0ad701a15b1a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kor-aeronaut:f0t0:s1,f:xs:XP:kor-aeronaut:f0t0:s1	-	-	-	8a1b1a193ec0	-	67a2736ae4ae	-	-	2026-11-24	xproof
 1adc4691-20cf-4f55-af85-3132fe1ff2a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1adcc4a8-b2dd-4d9a-bded-188b81c84a10	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1adcc4a8-b2dd-4d9a-bded-188b81c84a10	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

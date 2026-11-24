@@ -17,8 +17,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dion, Bahamut's Dominant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a1126a3-f8ce-4790-aa51-1e3f4b63eb18	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a1b8db2-8814-45b3-ab8a-a1c8522d7fa1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a1b8db2-8814-45b3-ab8a-a1c8522d7fa1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a1b8db2-8814-45b3-ab8a-a1c8522d7fa1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavern-thoctar:cast:s1,f:xs:XP:cavern-thoctar:cast:s1	-	-	-	8a1b1a193ec0	-	dfd061446cb2	-	-	2026-11-24	xproof
+4a1b8db2-8814-45b3-ab8a-a1c8522d7fa1	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:cavern-thoctar:f0a0:s1,f:xs:XP:cavern-thoctar:f0a0:s1	-	-	-	8a1b1a193ec0	-	dfd061446cb2	-	-	2026-11-24	xproof
 4a1cbac1-ee22-44cf-a37f-a58055f5c9bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a1db129-cc7c-410a-a41e-d633e30cfdad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a220e0c-e463-4264-9a96-658cf842b82e	cast	cast-resolve	agreed	-	X	scen	1	0	Champion of the Clachan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -26,8 +26,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a220e0c-e463-4264-9a96-658cf842b82e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Champion of the Clachan/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 4a220e0c-e463-4264-9a96-658cf842b82e	static#0.1	static#0.1	agreed	-	X	scen	1	0	Champion of the Clachan/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 4a221518-c850-4e8a-a697-765c0a0e76e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a261c42-825d-4965-8ea7-80d50c43474e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a261c42-825d-4965-8ea7-80d50c43474e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a261c42-825d-4965-8ea7-80d50c43474e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:filigree-angel:f0t0:s1,f:xs:XP:filigree-angel:f0t0:s1	-	-	-	8a1b1a193ec0	-	6e7a456ea5a1	-	-	2026-11-24	xproof
+4a261c42-825d-4965-8ea7-80d50c43474e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:filigree-angel:f0t0:s1,f:xs:XP:filigree-angel:f0t0:s1	-	-	-	8a1b1a193ec0	-	6e7a456ea5a1	-	-	2026-11-24	xproof
 4a294001-645b-4691-bb32-c240ba5b5320	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a294001-645b-4691-bb32-c240ba5b5320	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a2a7eca-3477-4858-9dab-ba80d4d704cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a8f2104-57ec-4b23-9857-f26afa5cbcfe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8f2104-57ec-4b23-9857-f26afa5cbcfe	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a9437a6-4e61-48b6-8194-1c6ba6432250	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a9437a6-4e61-48b6-8194-1c6ba6432250	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a9437a6-4e61-48b6-8194-1c6ba6432250	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a9437a6-4e61-48b6-8194-1c6ba6432250	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:teetering-peaks:f0t0:s1,f:xs:XP:teetering-peaks:f0t0:s1	-	-	-	8a1b1a193ec0	-	f121269c7373	-	-	2026-11-24	xproof
+4a9437a6-4e61-48b6-8194-1c6ba6432250	land	land	agreed	-	FX	start	2	0	x:xs:XP:teetering-peaks:f0t0:s1,f:xs:XP:teetering-peaks:f0t0:s1	-	-	-	8a1b1a193ec0	-	f121269c7373	-	-	2026-11-24	xproof
 4a9ae0d9-5ee7-4289-9333-ef0bcc3079ca	cast	cast-resolve	agreed	-	FX	scen	2	0	Stormsplitter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a9ae0d9-5ee7-4289-9333-ef0bcc3079ca	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Stormsplitter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a9d36eb-db72-459a-8de9-6d04a1d7563c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4aeaf1cd-7346-4492-847d-1c4dad14fafd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aeafdf3-7828-4114-8c74-3bd46357caec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aebea34-a05b-4626-97bc-f15fa177ef05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aec7624-e406-45a4-b2b6-2e8d29f6268a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

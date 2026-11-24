@@ -41,8 +41,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2932baae-bdf1-455a-9ac4-23ba1f83e7e1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2934233a-b90c-45df-b604-ce462480bbb7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2934233a-b90c-45df-b604-ce462480bbb7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-293560ec-accf-49c6-9bf4-6d37f56a4eb7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-293560ec-accf-49c6-9bf4-6d37f56a4eb7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+293560ec-accf-49c6-9bf4-6d37f56a4eb7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:halo-hunter:cast:s1,f:xs:XP:halo-hunter:cast:s1	-	-	-	8a1b1a193ec0	-	f109693c67ac	-	-	2026-11-24	xproof
+293560ec-accf-49c6-9bf4-6d37f56a4eb7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:halo-hunter:cast:s1,f:xs:XP:halo-hunter:cast:s1	-	-	-	8a1b1a193ec0	-	f109693c67ac	-	-	2026-11-24	xproof
 29358dcd-b26a-4720-9daa-7baa648e3540	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2935b603-d459-4f50-b244-0746febaaacd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2935b603-d459-4f50-b244-0746febaaacd	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -108,8 +108,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2978ba77-c0ce-4411-99c7-ef05dd602c8d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 297c2ddf-6d2d-4ed4-ab37-716514d5e3b6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 297c2ddf-6d2d-4ed4-ab37-716514d5e3b6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29863706-fa4e-49ed-9f40-69ae503abba3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29863706-fa4e-49ed-9f40-69ae503abba3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+29863706-fa4e-49ed-9f40-69ae503abba3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-shortcutter:f0t0:s1,f:xs:XP:goblin-shortcutter:f0t0:s1	-	-	-	8a1b1a193ec0	-	0dd92650d5bb	-	-	2026-11-24	xproof
+29863706-fa4e-49ed-9f40-69ae503abba3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-shortcutter:f0t0:s1,f:xs:XP:goblin-shortcutter:f0t0:s1	-	-	-	8a1b1a193ec0	-	0dd92650d5bb	-	-	2026-11-24	xproof
 2987c385-011a-4032-a516-a46d1e9dc9e8	cast	cast-resolve	agreed	-	FX	scen	2	0	Crib Swap/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 298a71d4-6dc1-444e-9057-0d25aef7fb64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 298a71d4-6dc1-444e-9057-0d25aef7fb64	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29ae4471-c28f-4e43-8afb-fee5023e4d08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29ae4471-c28f-4e43-8afb-fee5023e4d08	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29ae5540-5fdf-48be-86ba-b4db0fe19f6c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29ae5540-5fdf-48be-86ba-b4db0fe19f6c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+29ae5540-5fdf-48be-86ba-b4db0fe19f6c	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 29b3cb3e-aeb1-43eb-8095-9f7881aa34bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29b3cb3e-aeb1-43eb-8095-9f7881aa34bd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29b537f5-4d9f-40ed-b38b-e8faa2b5af7d	cast	cast-resolve	agreed	-	X	scen	1	0	Splash Portal/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

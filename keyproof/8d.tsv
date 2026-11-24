@@ -31,9 +31,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d36d80e-9934-4b56-bf3c-2b18a6da3d2d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:voracious-vermin:f0t0:s2,f:xs:XP:voracious-vermin:f0t0:s2	-	-	-	e07cf3a05ba5	-	d58c4b1703c8	-	-	2026-11-24	xproof
 8d36d80e-9934-4b56-bf3c-2b18a6da3d2d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:voracious-vermin:f0t0:s2,f:xs:XP:voracious-vermin:f0t0:s2	-	-	-	e07cf3a05ba5	-	d58c4b1703c8	-	-	2026-11-24	xproof
 8d36d80e-9934-4b56-bf3c-2b18a6da3d2d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Voracious Vermin/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8d38194e-b607-4ff4-9c19-0e8636d463bf	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d38194e-b607-4ff4-9c19-0e8636d463bf	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d38194e-b607-4ff4-9c19-0e8636d463bf	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d38194e-b607-4ff4-9c19-0e8636d463bf	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:raging-ravine:f0a0:s1,f:xs:XP:raging-ravine:f0a0:s1	-	-	-	8a1b1a193ec0	-	b91e54c4f695	-	-	2026-11-24	xproof
+8d38194e-b607-4ff4-9c19-0e8636d463bf	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:raging-ravine:f0a1:s1,f:xs:XP:raging-ravine:f0a1:s1	-	-	-	8a1b1a193ec0	-	b91e54c4f695	-	-	2026-11-24	xproof
+8d38194e-b607-4ff4-9c19-0e8636d463bf	land	land	agreed	-	FX	start	2	0	x:xs:XP:raging-ravine:land:s1,f:xs:XP:raging-ravine:land:s1	-	-	-	8a1b1a193ec0	-	b91e54c4f695	-	-	2026-11-24	xproof
 8d3a0b81-1895-47a8-87a3-3e4093cbd951	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d47b78b-11cc-4351-91d6-c891eb63dd98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d47b78b-11cc-4351-91d6-c891eb63dd98	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -53,8 +53,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d708573-10b8-44fb-b61b-9ad65e3eb465	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d708573-10b8-44fb-b61b-9ad65e3eb465	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d708573-10b8-44fb-b61b-9ad65e3eb465	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d7194f7-1525-4f6e-b974-b947a254f437	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d7194f7-1525-4f6e-b974-b947a254f437	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d7194f7-1525-4f6e-b974-b947a254f437	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:etherium-astrolabe:cast:s1,f:xs:XP:etherium-astrolabe:cast:s1	-	-	-	8a1b1a193ec0	-	f6706cc775a7	-	-	2026-11-24	xproof
+8d7194f7-1525-4f6e-b974-b947a254f437	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:starscape-cleric:f0t1:s1,f:xs:XP:starscape-cleric:f0t1:s1	-	-	-	9ee19e8250ce	-	6d972901167e	-	-	2026-11-24	xproof
 8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Starscape Cleric/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Starscape Cleric/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8dcba63c-4701-4dc9-81f5-ca8e8933a3ba	land	play-land	agreed	-	X	scen	1	0	Vector, Imperial Capital/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8dcf15fd-f000-4424-b74c-22fc2642b8c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8dcfa697-5350-43b9-896f-c5eefcc3893a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8dcfa697-5350-43b9-896f-c5eefcc3893a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8dcfa697-5350-43b9-896f-c5eefcc3893a	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 8dd0f86d-6f9e-47e3-97dd-3a3fc075ea93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wurmcalling:cast:s1,f:xs:XP:wurmcalling:cast:s1	-	-	-	9ee19e8250ce	-	0f85be438f48	-	-	2026-11-24	xproof
 8dd23c50-cc84-4064-89cd-8d52fbfbd4ab	cast	cast-resolve	agreed	-	X	scen	1	0	Break Under Pressure/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8dd2e73a-d1b4-4d26-857f-9eb8e384c8ff	cast	cast-resolve	agreed	-	X	scen	1	0	Iroh's Demonstration/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

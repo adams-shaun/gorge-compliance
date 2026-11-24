@@ -48,9 +48,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f2d6cf4-b8f4-440f-ac08-ca47ada868ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slobad-goblin-tinkerer:cast:s1,f:xs:XP:slobad-goblin-tinkerer:cast:s1	-	-	-	25696bf19d5b	-	30ecb73cfdf0	-	-	2026-11-24	xproof
 1f2d6cf4-b8f4-440f-ac08-ca47ada868ac	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f300320-ad98-4812-b34b-54885a86aee9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f361ae9-98a2-40ff-a579-fa5b9f510df4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f361ae9-98a2-40ff-a579-fa5b9f510df4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rotting-rats:cast:s1,f:xs:XP:rotting-rats:cast:s1	-	-	-	8a1b1a193ec0	-	1f5dbcacec17	-	-	2026-11-24	xproof
 1f361ae9-98a2-40ff-a579-fa5b9f510df4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f361ae9-98a2-40ff-a579-fa5b9f510df4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f361ae9-98a2-40ff-a579-fa5b9f510df4	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rotting-rats:cast:s1,f:xs:XP:rotting-rats:cast:s1	-	-	-	8a1b1a193ec0	-	1f5dbcacec17	-	-	2026-11-24	xproof
 1f37e3a6-ce3a-472f-ac45-0d9b23a31a11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f37e3a6-ce3a-472f-ac45-0d9b23a31a11	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f384f19-7fb4-4120-8001-5b401b4debbd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fb1afc0-a3bf-4368-9ca0-47dd8c4c3c60	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:maga-traitor-to-mortals:f0t0:s1,f:xs:XP:maga-traitor-to-mortals:f0t0:s1	-	-	-	64a08ba7d913	-	0f2c72c5743c	-	-	2026-11-24	xproof
 1fb5c014-9366-4f9e-9728-303ff766002b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fb5c014-9366-4f9e-9728-303ff766002b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1fb5c014-9366-4f9e-9728-303ff766002b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1fb5c014-9366-4f9e-9728-303ff766002b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 1fb736bf-c9bd-45ab-86ce-7f138f1724b2	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1fb736bf-c9bd-45ab-86ce-7f138f1724b2	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1fb736bf-c9bd-45ab-86ce-7f138f1724b2	land	play-land	agreed	-	X	scen	1	0	Gaseous Anomaly/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

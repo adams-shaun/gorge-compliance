@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42bc33dd-3bba-462d-b272-2e8bd58c649e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42bc33dd-3bba-462d-b272-2e8bd58c649e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42bf259d-4bb9-49c3-b4ec-223dca62f4d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42bf259d-4bb9-49c3-b4ec-223dca62f4d6	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42bf259d-4bb9-49c3-b4ec-223dca62f4d6	f0/a1	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 42bf259d-4bb9-49c3-b4ec-223dca62f4d6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42bf9435-02e6-428f-a93c-fe4652deb4fc	cast	cast-resolve	agreed	-	FX	scen	2	0	Equilibrium Adept/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 42bf9435-02e6-428f-a93c-fe4652deb4fc	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,8 +156,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42ca56c5-a9c4-4a2c-ae05-bce47aa6e16c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42ca56c5-a9c4-4a2c-ae05-bce47aa6e16c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42d121a2-5266-483a-ab16-e0a8073cd6a3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42d121a2-5266-483a-ab16-e0a8073cd6a3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42d121a2-5266-483a-ab16-e0a8073cd6a3	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42d121a2-5266-483a-ab16-e0a8073cd6a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:halimar-depths:f0t0:s1,f:xs:XP:halimar-depths:f0t0:s1	-	-	-	8a1b1a193ec0	-	62fe9f20a42f	-	-	2026-11-24	xproof
+42d121a2-5266-483a-ab16-e0a8073cd6a3	land	land	agreed	-	FX	start	2	0	x:xs:XP:halimar-depths:f0t0:s1,f:xs:XP:halimar-depths:f0t0:s1	-	-	-	8a1b1a193ec0	-	62fe9f20a42f	-	-	2026-11-24	xproof
 42d7ec93-0943-43e2-9b65-b7edc3349410	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42d7ec93-0943-43e2-9b65-b7edc3349410	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42d86827-6459-42fc-86b6-6eb055604c36	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -6,7 +6,7 @@ af03149b-9307-443c-aefa-69bda52607ba	cast	NULL	owed	refused:not-sent	-	start	0	0
 af05cc39-725b-4535-919a-ddbcb89c2210	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af06a811-7a57-4f68-9d87-7903e043f36d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af08dae2-ba32-4a34-b8c1-b49d45ce0b6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af08dae2-ba32-4a34-b8c1-b49d45ce0b6b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af08dae2-ba32-4a34-b8c1-b49d45ce0b6b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 af0bf083-0624-4ccd-b282-a35937e925fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mycologist:cast:s1,f:xs:XP:mycologist:cast:s1	-	-	-	9ee19e8250ce	-	7820ddf8335d	-	-	2026-11-24	xproof
 af0bf083-0624-4ccd-b282-a35937e925fe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af0bf083-0624-4ccd-b282-a35937e925fe	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -52,7 +52,7 @@ af2b36ee-2945-41d3-a186-8fd28f3cde16	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fugit
 af2b36ee-2945-41d3-a186-8fd28f3cde16	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Fugitive Codebreaker/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af31febb-af53-4b48-b930-9e1f9e5d8f26	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af31febb-af53-4b48-b930-9e1f9e5d8f26	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af32757c-9d3c-4f6c-a6fa-d5729a440382	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af32757c-9d3c-4f6c-a6fa-d5729a440382	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spreading-seas:f0t0:s1,f:xs:XP:spreading-seas:f0t0:s1	-	-	-	8a1b1a193ec0	-	b2f3503a0fa2	-	-	2026-11-24	xproof
 af32757c-9d3c-4f6c-a6fa-d5729a440382	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af32ce11-c026-4135-b1e3-10c6aa15c72c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af335eb3-f60a-44b3-a1ed-1e165f3e3605	cast	cast-resolve	agreed	-	X	scen	1	0	Chalk Outline/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ afc2a3a7-eb69-4fcb-b3a3-444dccb735d7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 afc3a65e-7a7a-4bd9-bca4-aa762b9bbbcb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afc3a65e-7a7a-4bd9-bca4-aa762b9bbbcb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afc59d95-d85c-4ab8-b6c5-c78b608b53b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afc59d95-d85c-4ab8-b6c5-c78b608b53b7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+afc59d95-d85c-4ab8-b6c5-c78b608b53b7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 afc8df6d-7291-400e-b768-0c0c3e3fdc32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afc8df6d-7291-400e-b768-0c0c3e3fdc32	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afc8df6d-7291-400e-b768-0c0c3e3fdc32	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

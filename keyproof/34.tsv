@@ -108,8 +108,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3483946d-8645-4c22-b0ba-a65a44456324	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34841228-31ac-48ac-b6d6-486b5e1e07dd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3485109b-251f-4bef-a069-308031f47912	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34894b92-7ebd-49be-9a67-7dc6428aaab9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34894b92-7ebd-49be-9a67-7dc6428aaab9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34894b92-7ebd-49be-9a67-7dc6428aaab9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defiler-of-souls:cast:s1,f:xs:XP:defiler-of-souls:cast:s1	-	-	-	8a1b1a193ec0	-	8baa059816a6	-	-	2026-11-24	xproof
+34894b92-7ebd-49be-9a67-7dc6428aaab9	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:defiler-of-souls:cast:s1,f:xs:XP:defiler-of-souls:cast:s1	-	-	-	8a1b1a193ec0	-	8baa059816a6	-	-	2026-11-24	xproof
 348a345e-4639-41ca-b015-a5d43459eb64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 348a345e-4639-41ca-b015-a5d43459eb64	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 348c7e22-2179-41b8-a5d2-8dd488e7e66d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leonardo-leader-in-blue:f0t0:s1,f:xs:XP:leonardo-leader-in-blue:f0t0:s1	-	-	-	9ee19e8250ce	-	0906ab90b1c2	-	-	2026-11-24	xproof
@@ -158,9 +158,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34bcc217-dd91-45a0-90d7-a94d02f1f317	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34bccfc0-453d-4d1a-8046-70f9c3065e88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34bccfc0-453d-4d1a-8046-70f9c3065e88	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34bd39ed-4058-4c65-ba5f-9ac5cf7c166a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34bd39ed-4058-4c65-ba5f-9ac5cf7c166a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34bd39ed-4058-4c65-ba5f-9ac5cf7c166a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34bd39ed-4058-4c65-ba5f-9ac5cf7c166a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rhox-bodyguard:cast:s1,f:xs:XP:rhox-bodyguard:cast:s1	-	-	-	8a1b1a193ec0	-	69625e674911	-	-	2026-11-24	xproof
+34bd39ed-4058-4c65-ba5f-9ac5cf7c166a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rhox-bodyguard:cast:s1,f:xs:XP:rhox-bodyguard:cast:s1	-	-	-	8a1b1a193ec0	-	69625e674911	-	-	2026-11-24	xproof
+34bd39ed-4058-4c65-ba5f-9ac5cf7c166a	f0/t1	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:rhox-bodyguard:f0t1:s1,f:xs:XP:rhox-bodyguard:f0t1:s1	-	-	-	8a1b1a193ec0	-	69625e674911	-	-	2026-11-24	xproof
 34bdeca4-b1e0-4fa3-afe4-bec743a080b8	cast	cast-resolve	agreed	-	X	scen	1	0	Gaelicat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34bdeca4-b1e0-4fa3-afe4-bec743a080b8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gaelicat/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34bdeca4-b1e0-4fa3-afe4-bec743a080b8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gaelicat/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

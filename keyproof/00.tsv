@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 001c233f-2959-479b-a82a-64a25ac60830	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 001c233f-2959-479b-a82a-64a25ac60830	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 001c6369-df13-427d-89df-718d5c09f382	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-001c6369-df13-427d-89df-718d5c09f382	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+001c6369-df13-427d-89df-718d5c09f382	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 002100cd-1ab1-44da-93a0-1269d47a712a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 002100cd-1ab1-44da-93a0-1269d47a712a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00225c40-27ff-410f-a591-5c788c6a2bd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0036d062-10dc-4267-98b4-1d2f6b190a61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0036d062-10dc-4267-98b4-1d2f6b190a61	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0038e74a-b950-47ff-8853-dba6a3b31091	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-003c48d4-0303-4970-8637-47ae060385aa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+003c48d4-0303-4970-8637-47ae060385aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:safewright-quest:cast:s1,f:xs:XP:safewright-quest:cast:s1	-	-	-	8a1b1a193ec0	-	ddeb114bf0c1	-	-	2026-11-24	xproof
 003d9c17-5d5c-469f-ad87-d78faf55e025	cast	cast-resolve	agreed	-	X	scen	1	0	Seedship Agrarian/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 003d9c17-5d5c-469f-ad87-d78faf55e025	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Seedship Agrarian/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 003d9c17-5d5c-469f-ad87-d78faf55e025	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Seedship Agrarian/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -181,8 +181,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00d8efa6-a2d9-4249-8da7-b45173675329	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 00de57d2-7cb6-4337-9bc6-f6711e4dfabf	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00de57d2-7cb6-4337-9bc6-f6711e4dfabf	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00e0b103-892c-49b3-836d-867fff197bbd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00e0b103-892c-49b3-836d-867fff197bbd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+00e0b103-892c-49b3-836d-867fff197bbd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:puppeteer-clique:f0t0:s1,f:xs:XP:puppeteer-clique:f0t0:s1	-	-	-	8a1b1a193ec0	-	0fe9d19e11c0	-	-	2026-11-24	xproof
+00e0b103-892c-49b3-836d-867fff197bbd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:puppeteer-clique:f0t0:s1,f:xs:XP:puppeteer-clique:f0t0:s1	-	-	-	8a1b1a193ec0	-	0fe9d19e11c0	-	-	2026-11-24	xproof
 00e0b103-892c-49b3-836d-867fff197bbd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00e25126-b807-4753-ba63-9a533755e5ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00e25126-b807-4753-ba63-9a533755e5ce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

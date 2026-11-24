@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e0b9e67-3103-4299-934b-46d8fe96f553	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e0b9e67-3103-4299-934b-46d8fe96f553	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e0d2965-bbcd-4214-b1b6-c0d2601ce078	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e0d2965-bbcd-4214-b1b6-c0d2601ce078	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7e0d2965-bbcd-4214-b1b6-c0d2601ce078	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 7e0d60d7-cb27-4e45-80d4-c29aef5d56b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e103748-3f76-42ce-a063-d0256b2dce2b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rockface Village/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e103748-3f76-42ce-a063-d0256b2dce2b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Rockface Village/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -121,8 +121,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e8c2a18-e404-40ff-a9e0-ec3eeb6d576e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e8d40fd-c324-4ec2-897d-b46368b050e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e8d40fd-c324-4ec2-897d-b46368b050e6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e8f5b34-fd16-4307-9104-17b584b25b14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e8f5b34-fd16-4307-9104-17b584b25b14	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7e8f5b34-fd16-4307-9104-17b584b25b14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:awakener-druid:f0t0:s1,f:xs:XP:awakener-druid:f0t0:s1	-	-	-	8a1b1a193ec0	-	aee5c724293f	-	-	2026-11-24	xproof
+7e8f5b34-fd16-4307-9104-17b584b25b14	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:awakener-druid:f0t0:s1,f:xs:XP:awakener-druid:f0t0:s1	-	-	-	8a1b1a193ec0	-	aee5c724293f	-	-	2026-11-24	xproof
 7e92be29-ccd1-4556-bb2a-ac7902bc77c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e92be29-ccd1-4556-bb2a-ac7902bc77c2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e97a242-0bac-4f18-9228-e98ecca36254	cast	cast-resolve	agreed	-	X	scen	1	0	Scavenger Regent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7eadffcb-1e15-44c1-b1db-78c71b8ec1ce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7eadffcb-1e15-44c1-b1db-78c71b8ec1ce	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7eadffcb-1e15-44c1-b1db-78c71b8ec1ce	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7eadffcb-1e15-44c1-b1db-78c71b8ec1ce	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rupture-spire:f0t0:s1,f:xs:XP:rupture-spire:f0t0:s1	-	-	-	8a1b1a193ec0	-	09f7a4a97e48	-	-	2026-11-24	xproof
+7eadffcb-1e15-44c1-b1db-78c71b8ec1ce	land	land	agreed	-	FX	start	2	0	x:xs:XP:rupture-spire:f0t0:s1,f:xs:XP:rupture-spire:f0t0:s1	-	-	-	8a1b1a193ec0	-	09f7a4a97e48	-	-	2026-11-24	xproof
 7eaf3fd0-e141-42c2-874d-b471f4a94ad2	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ebaeef0-4e4c-4bf0-85dd-07c6b6be0741	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ebec169-d941-460e-9e3c-ba54b5066b05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,8 +176,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ee394a2-84de-42e8-834e-6c1030be0aef	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ee66c03-3684-404f-8f2c-dc91e99249bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ee66c03-3684-404f-8f2c-dc91e99249bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ef3f240-05a5-4fc9-a977-a729010a53c2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ef3f240-05a5-4fc9-a977-a729010a53c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ef3f240-05a5-4fc9-a977-a729010a53c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blitz-hellion:cast:s1,f:xs:XP:blitz-hellion:cast:s1	-	-	-	8a1b1a193ec0	-	28de511453de	-	-	2026-11-24	xproof
+7ef3f240-05a5-4fc9-a977-a729010a53c2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:blitz-hellion:cast:s1,f:xs:XP:blitz-hellion:cast:s1	-	-	-	8a1b1a193ec0	-	28de511453de	-	-	2026-11-24	xproof
 7ef45067-74bd-4df8-9f95-621761a0b4a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38561191-ecd1-4028-a0fd-4bca6a7eab58	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38561191-ecd1-4028-a0fd-4bca6a7eab58	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3859873f-2a0f-463b-8ed9-7f2ab5ed393a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3859873f-2a0f-463b-8ed9-7f2ab5ed393a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3859873f-2a0f-463b-8ed9-7f2ab5ed393a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 385c1208-bfea-44e2-b236-4f38bc90db9f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 385d70ed-07ab-4e01-a473-4408f4bcf6d0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 385d70ed-07ab-4e01-a473-4408f4bcf6d0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 389d459d-446a-4b84-82b2-a30fe6ced11f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38a12bd7-4394-44a8-91a0-6a4ff7fa4f71	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38a12bd7-4394-44a8-91a0-6a4ff7fa4f71	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38a2ded4-77c5-4d2b-b411-7dca8108aa02	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38a2ded4-77c5-4d2b-b411-7dca8108aa02	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38a2ded4-77c5-4d2b-b411-7dca8108aa02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:razorfin-abolisher:cast:s1,f:xs:XP:razorfin-abolisher:cast:s1	-	-	-	8a1b1a193ec0	-	01db09b10a27	-	-	2026-11-24	xproof
+38a2ded4-77c5-4d2b-b411-7dca8108aa02	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:razorfin-abolisher:f0a0:s1,f:xs:XP:razorfin-abolisher:f0a0:s1	-	-	-	8a1b1a193ec0	-	01db09b10a27	-	-	2026-11-24	xproof
 38a2ef3e-3311-4e0a-807d-e5ccdd05af49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38a2ef3e-3311-4e0a-807d-e5ccdd05af49	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38a55562-1e2d-4240-9454-219a4a25d38d	cast	cast-resolve	agreed	-	X	scen	1	0	Lord Windgrace/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

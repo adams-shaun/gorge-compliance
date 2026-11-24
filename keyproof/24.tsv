@@ -54,8 +54,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2452be47-cc23-47f7-a3a1-fec900bb0119	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Kitesail Larcenist/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 245469ff-72b6-4846-8a82-a1d29f4d09bb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245469ff-72b6-4846-8a82-a1d29f4d09bb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-24547885-2e2c-4118-9d5e-4058471f289b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-24547885-2e2c-4118-9d5e-4058471f289b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+24547885-2e2c-4118-9d5e-4058471f289b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:predatory-advantage:cast:s1,f:xs:XP:predatory-advantage:cast:s1	-	-	-	8a1b1a193ec0	-	979c4260d7c1	-	-	2026-11-24	xproof
+24547885-2e2c-4118-9d5e-4058471f289b	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 2457a9f7-8a46-4c7a-b35e-bcbf4a79c365	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245934d9-c7b7-4a97-9c56-7760d934ef27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245934d9-c7b7-4a97-9c56-7760d934ef27	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,9 +149,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24aebda0-315f-4d2f-8bd9-00bbaf5bd76a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24b056cf-e4f0-4fca-bbde-6e452ebd2036	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24b056cf-e4f0-4fca-bbde-6e452ebd2036	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-24b11ede-26c8-40ed-b874-c0f6b21572c3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-24b11ede-26c8-40ed-b874-c0f6b21572c3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-24b11ede-26c8-40ed-b874-c0f6b21572c3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+24b11ede-26c8-40ed-b874-c0f6b21572c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:soul-stair-expedition:cast:s1,f:xs:XP:soul-stair-expedition:cast:s1	-	-	-	8a1b1a193ec0	-	8a6bd83e60cd	-	-	2026-11-24	xproof
+24b11ede-26c8-40ed-b874-c0f6b21572c3	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+24b11ede-26c8-40ed-b874-c0f6b21572c3	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 24b44a35-496a-48e9-91ee-98b327d867e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24b44a35-496a-48e9-91ee-98b327d867e4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24b44a35-496a-48e9-91ee-98b327d867e4	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -203,5 +203,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24fd1f47-bb15-45c6-a7b1-ba8eb3bb8b1d	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Vaan, Street Thief/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 24fd1f47-bb15-45c6-a7b1-ba8eb3bb8b1d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Vaan, Street Thief/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 24fe8bc3-7e3a-435b-a232-7f80787aba1f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-24fe8bc3-7e3a-435b-a232-7f80787aba1f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-24fe8bc3-7e3a-435b-a232-7f80787aba1f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+24fe8bc3-7e3a-435b-a232-7f80787aba1f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+24fe8bc3-7e3a-435b-a232-7f80787aba1f	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof

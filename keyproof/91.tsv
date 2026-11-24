@@ -119,8 +119,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 918991a6-7321-419d-8f3d-150fe32d02d2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 918991a6-7321-419d-8f3d-150fe32d02d2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 918b3860-e96c-45b5-b0e6-e82cad9f304d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-918d6cd4-76d5-4e21-b92b-1ecf35eb6cff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-918d6cd4-76d5-4e21-b92b-1ecf35eb6cff	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+918d6cd4-76d5-4e21-b92b-1ecf35eb6cff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-faith:cast:s1,f:xs:XP:wall-of-faith:cast:s1	-	-	-	8a1b1a193ec0	-	3bc3a70a2c21	-	-	2026-11-24	xproof
+918d6cd4-76d5-4e21-b92b-1ecf35eb6cff	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:wall-of-faith:f0a0:s1,f:xs:XP:wall-of-faith:f0a0:s1	-	-	-	8a1b1a193ec0	-	3bc3a70a2c21	-	-	2026-11-24	xproof
 91924536-7a2b-44ec-9835-2efa402c83f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91924536-7a2b-44ec-9835-2efa402c83f9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91933f1a-4aad-4f67-8151-a47ab6d0e42c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Generous Plunderer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Generous Plunderer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91d01119-9b3e-4629-8cf0-bbca2c19a7cc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rampaging Ceratops/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91d01119-9b3e-4629-8cf0-bbca2c19a7cc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rampaging Ceratops/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91d0a557-7a80-46d5-b823-392a84a6be44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91d0a557-7a80-46d5-b823-392a84a6be44	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91d0a557-7a80-46d5-b823-392a84a6be44	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 91dab3e2-039e-4db9-94e3-1146bced18ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91dab3e2-039e-4db9-94e3-1146bced18ed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91ddd2bd-2dec-4670-8edb-e89c009b2187	cast	cast-resolve	agreed	-	X	scen	1	0	Pearl of Wisdom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

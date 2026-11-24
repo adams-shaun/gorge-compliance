@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9376ccf6-1b18-44e9-8f9d-c5ad38927e2f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 937a04c2-41be-4ff3-8992-6628a9ee9792	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 937a04c2-41be-4ff3-8992-6628a9ee9792	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-937cb494-7dcb-4a40-b1e0-6e6b31f5c8a6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+937cb494-7dcb-4a40-b1e0-6e6b31f5c8a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captured-sunlight:cast:s1,f:xs:XP:captured-sunlight:cast:s1	-	-	-	8a1b1a193ec0	-	55d0414c5522	-	-	2026-11-24	xproof
 937d663d-c9a7-4312-a4cc-fcb54faa92bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 937de7f3-7f7f-4fd4-8531-0b90a11815c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 937de7f3-7f7f-4fd4-8531-0b90a11815c8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -182,7 +182,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93df61b5-6abe-4603-9a6e-cba90a834173	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93e0fd89-8a0d-4d97-aa22-aafe83d53515	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93e1d3a6-e12f-4a0a-be0f-fbf568d89f1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-93e1d3a6-e12f-4a0a-be0f-fbf568d89f1a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+93e1d3a6-e12f-4a0a-be0f-fbf568d89f1a	f0/t0	NULL	owed	refused:history:kicked:no-kicker	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 93e336e3-2be7-4581-8ab3-9bea422d81c3	cast	cast-resolve	agreed	-	X	scen	1	0	Cargo Ship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 93e336e3-2be7-4581-8ab3-9bea422d81c3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cargo Ship/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 93e336e3-2be7-4581-8ab3-9bea422d81c3	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Cargo Ship/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

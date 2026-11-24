@@ -36,8 +36,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96230edf-568a-47dd-b877-9d92aa58fac8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96230edf-568a-47dd-b877-9d92aa58fac8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96232342-3ec7-4740-a114-969537b8f2fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96232342-3ec7-4740-a114-969537b8f2fc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96232342-3ec7-4740-a114-969537b8f2fc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96232342-3ec7-4740-a114-969537b8f2fc	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:ballynock-trapper:f0a0:s1,f:xs:XP:ballynock-trapper:f0a0:s1	-	-	-	8a1b1a193ec0	-	b89753129652	-	-	2026-11-24	xproof
+96232342-3ec7-4740-a114-969537b8f2fc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 9625773b-1976-49b3-88d2-93a4befb595c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9625773b-1976-49b3-88d2-93a4befb595c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96262c15-9130-409c-8242-71f84be719b7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 963de959-848d-48df-90fa-88a6d988b9fe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 963e36de-b803-417f-8166-4d328d358203	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 963f2848-15bd-441b-a55c-635f53b7b63f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-963f2848-15bd-441b-a55c-635f53b7b63f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+963f2848-15bd-441b-a55c-635f53b7b63f	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:gargoyle-castle:f0a1:s1,f:xs:XP:gargoyle-castle:f0a1:s1	-	-	-	8a1b1a193ec0	-	c8f9c8ece2c0	-	-	2026-11-24	xproof
 963f2848-15bd-441b-a55c-635f53b7b63f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96415c51-2d44-4a96-9caa-9c4fbde59fca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9645c1cb-2305-4bc0-89d0-a50815e91573	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

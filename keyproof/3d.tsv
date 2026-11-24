@@ -122,8 +122,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d9f854e-1ee5-4aa1-a33b-d3ae08f15dd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3da1412e-a72c-4da1-8848-37145ca6614a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3da1412e-a72c-4da1-8848-37145ca6614a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3da5977a-36d4-4f32-ab9b-8b93809d818d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3da5977a-36d4-4f32-ab9b-8b93809d818d	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3da5977a-36d4-4f32-ab9b-8b93809d818d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:time-sieve:cast:s1,f:xs:XP:time-sieve:cast:s1	-	-	-	8a1b1a193ec0	-	96a5b198ae51	-	-	2026-11-24	xproof
+3da5977a-36d4-4f32-ab9b-8b93809d818d	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 3da5fbe2-e47b-4a1d-9e73-393f37314fa3	cast	cast-resolve	agreed	-	X	scen	1	0	Beastie Beatdown/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3da6d24b-ecbd-4a41-a37e-84a19b243414	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3da6d24b-ecbd-4a41-a37e-84a19b243414	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -212,5 +212,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3df4eb80-e8dd-4a9e-bd8a-b4b23fb9de6c	cast	cast-resolve	agreed	-	X	scen	1	0	Psychic Whorl/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3df676fe-c4f8-41c0-9743-781090bdc547	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 3dfbf95e-a91b-429c-96e2-95ac777e7027	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3dfbf95e-a91b-429c-96e2-95ac777e7027	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3dfbf95e-a91b-429c-96e2-95ac777e7027	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3dfbf95e-a91b-429c-96e2-95ac777e7027	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sejiri-steppe:f0t0:s1,f:xs:XP:sejiri-steppe:f0t0:s1	-	-	-	8a1b1a193ec0	-	bca79aac94f0	-	-	2026-11-24	xproof
+3dfbf95e-a91b-429c-96e2-95ac777e7027	land	land	agreed	-	FX	start	2	0	x:xs:XP:sejiri-steppe:f0t0:s1,f:xs:XP:sejiri-steppe:f0t0:s1	-	-	-	8a1b1a193ec0	-	bca79aac94f0	-	-	2026-11-24	xproof

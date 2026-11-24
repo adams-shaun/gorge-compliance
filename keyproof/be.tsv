@@ -22,8 +22,8 @@ be0dcad2-8e84-4e9f-b69c-837b40b8fb83	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Bitte
 be0fc708-b205-4307-85f3-f8fd1efd4cf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be0fc708-b205-4307-85f3-f8fd1efd4cf6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be0fc708-b205-4307-85f3-f8fd1efd4cf6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be109ed5-9e3e-40b3-9bf0-7caf7cdbb958	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be109ed5-9e3e-40b3-9bf0-7caf7cdbb958	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be109ed5-9e3e-40b3-9bf0-7caf7cdbb958	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marshdrinker-giant:f0t0:s1,f:xs:XP:marshdrinker-giant:f0t0:s1	-	-	-	8a1b1a193ec0	-	177a68bca8b7	-	-	2026-11-24	xproof
+be109ed5-9e3e-40b3-9bf0-7caf7cdbb958	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:marshdrinker-giant:f0t0:s1,f:xs:XP:marshdrinker-giant:f0t0:s1	-	-	-	8a1b1a193ec0	-	177a68bca8b7	-	-	2026-11-24	xproof
 be14b10a-7cac-47fc-a954-685091990291	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be14b10a-7cac-47fc-a954-685091990291	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be14d3be-295e-431c-b891-590164b730dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -77,7 +77,7 @@ be4f47e9-1bd2-4aa9-bc85-3f203ad21639	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 be5138fd-3e92-42b9-93c5-311e66bd443f	cast	cast-resolve	agreed	-	FX	scen	2	0	Perennation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be56dfea-1ece-4f06-b1cc-d7425b5018b4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be5a65fd-0d06-4771-bee7-0e42cc9871da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be5a65fd-0d06-4771-bee7-0e42cc9871da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be5a65fd-0d06-4771-bee7-0e42cc9871da	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 be5c87d3-492c-4b73-9d79-067bd3c3e738	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be5c87d3-492c-4b73-9d79-067bd3c3e738	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be5c87d3-492c-4b73-9d79-067bd3c3e738	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -88,14 +88,14 @@ be5f788a-8a2e-447c-9e65-f9fc197ddfc9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ent
 be5f788a-8a2e-447c-9e65-f9fc197ddfc9	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 be5f788a-8a2e-447c-9e65-f9fc197ddfc9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 be6155de-c5b2-415c-ad83-142f9926462a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be6155de-c5b2-415c-ad83-142f9926462a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be6155de-c5b2-415c-ad83-142f9926462a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be6155de-c5b2-415c-ad83-142f9926462a	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+be6155de-c5b2-415c-ad83-142f9926462a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 be662217-41c2-4caa-89da-ae7f6f817c34	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be668c2d-71ea-4346-8980-1fbf5e4cbed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be6cab52-b3ae-46a2-a581-2468a49bff25	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be6cab52-b3ae-46a2-a581-2468a49bff25	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be6cab52-b3ae-46a2-a581-2468a49bff25	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be6cb3e6-7492-4e30-83a9-9bc413e50cdc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be6cb3e6-7492-4e30-83a9-9bc413e50cdc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chaotic-backlash:cast:s1,f:xs:XP:chaotic-backlash:cast:s1	-	-	-	8a1b1a193ec0	-	91a82df20d39	-	-	2026-11-24	xproof
 be6e835c-822e-45ff-a992-249d4d9781dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be700da5-123e-461e-8192-88f9d86925b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be700da5-123e-461e-8192-88f9d86925b9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ be74a4c1-d569-4203-b28a-3e2ac6a82990	cast	cast-resolve	agreed	-	X	scen	1	0	Dicta
 be74a4c1-d569-4203-b28a-3e2ac6a82990	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dictate of Kruphix/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be77e3f8-76a3-4d03-a8be-ad4b0b72f929	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be78a76c-e126-4f09-9e8e-b773a437cfeb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be78d7ca-b904-452f-b9eb-34792e588986	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be78d7ca-b904-452f-b9eb-34792e588986	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grim-discovery:cast:s1,f:xs:XP:grim-discovery:cast:s1	-	-	-	8a1b1a193ec0	-	815dc6aa150c	-	-	2026-11-24	xproof
 be7a38a3-c27f-4917-a59c-763d0b36e427	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be7a38a3-c27f-4917-a59c-763d0b36e427	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be7b16ef-32aa-40d5-b287-c5e79d52d6b9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,12 +142,12 @@ be922360-ee9f-4cfb-bf10-d481c5de5cb1	cast	cast-resolve	agreed	-	X	scen	1	0	The U
 be922360-ee9f-4cfb-bf10-d481c5de5cb1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Unagi of Kyoshi Island/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be922360-ee9f-4cfb-bf10-d481c5de5cb1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Unagi of Kyoshi Island/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be951382-5173-4fb6-9dda-2c5f7fddc863	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be951382-5173-4fb6-9dda-2c5f7fddc863	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be951382-5173-4fb6-9dda-2c5f7fddc863	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 be96b9e1-10ef-4955-8d23-c39384def86d	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be96b9e1-10ef-4955-8d23-c39384def86d	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be9bee08-ac04-42bc-93be-5a77482a7690	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be9bee08-ac04-42bc-93be-5a77482a7690	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be9d1346-4416-4ade-ae84-7a4121e0bd12	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be9d1346-4416-4ade-ae84-7a4121e0bd12	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dregscape-zombie:cast:s1,f:xs:XP:dregscape-zombie:cast:s1	-	-	-	8a1b1a193ec0	-	d107769286d4	-	-	2026-11-24	xproof
 be9d1346-4416-4ade-ae84-7a4121e0bd12	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bea3ff6e-7649-4e51-b2ad-763f9ac2d4b8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bea3ff6e-7649-4e51-b2ad-763f9ac2d4b8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

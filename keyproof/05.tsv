@@ -57,8 +57,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0544b707-ec67-43e3-a25d-fd7005ab673d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0547e426-e23e-4c60-ba6b-cfd4b5ff8485	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0547e426-e23e-4c60-ba6b-cfd4b5ff8485	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-054a0193-861e-4644-ab0a-8aa33407abc8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-054a0193-861e-4644-ab0a-8aa33407abc8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+054a0193-861e-4644-ab0a-8aa33407abc8	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:kor-skyfisher:cast:s1,f:xs:XP:kor-skyfisher:cast:s1	-	-	-	8a1b1a193ec0	-	7c03277840de	-	-	2026-11-24	xproof
+054a0193-861e-4644-ab0a-8aa33407abc8	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:kor-skyfisher:cast:s1,f:xs:XP:kor-skyfisher:cast:s1	-	-	-	8a1b1a193ec0	-	7c03277840de	-	-	2026-11-24	xproof
 054c6250-ac96-42f6-931d-925761ab7764	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 054c6250-ac96-42f6-931d-925761ab7764	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 054fedbb-062e-491e-9a94-594fda33094f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05551d91-50c6-46d1-86a4-cd3d177d0923	cast	cast-resolve	agreed	-	X	scen	1	0	Anim Pakal, Thousandth Moon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 05551d91-50c6-46d1-86a4-cd3d177d0923	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Anim Pakal, Thousandth Moon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 05608055-d97a-4c8f-833d-47b3dd1ea255	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05608055-d97a-4c8f-833d-47b3dd1ea255	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05608055-d97a-4c8f-833d-47b3dd1ea255	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

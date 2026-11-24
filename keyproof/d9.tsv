@@ -1,9 +1,9 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-d902074a-2a2b-42b7-a1e5-750862c64fbe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d902074a-2a2b-42b7-a1e5-750862c64fbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sarkhan-vol:cast:s1,f:xs:XP:sarkhan-vol:cast:s1	-	-	-	8a1b1a193ec0	-	c707684b644d	-	-	2026-11-24	xproof
+d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:sarkhan-vol:cast:s1,f:xs:XP:sarkhan-vol:cast:s1	-	-	-	8a1b1a193ec0	-	c707684b644d	-	-	2026-11-24	xproof
+d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+d902074a-2a2b-42b7-a1e5-750862c64fbe	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 d9060fff-0b65-4b3d-930d-6e36315b802c	cast	cast-resolve	agreed	-	FX	scen	2	0	Lyra, Tolarian Archangel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9060fff-0b65-4b3d-930d-6e36315b802c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lyra, Tolarian Archangel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9060fff-0b65-4b3d-930d-6e36315b802c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lyra, Tolarian Archangel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ d98edd47-c9de-46e9-a184-ba3bc0be42c4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 d99197b9-143a-462f-ace4-f35228ba082e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d99197b9-143a-462f-ace4-f35228ba082e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d99a1d9a-7721-4331-bf22-1c6ee0bd825a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d99a1d9a-7721-4331-bf22-1c6ee0bd825a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d99a1d9a-7721-4331-bf22-1c6ee0bd825a	f0/a1	NULL	owed	refused:steps-needed:cost:RG	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 d99a1d9a-7721-4331-bf22-1c6ee0bd825a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d99cd2d0-32b8-4edc-8089-557c48dd4be0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d99cd2d0-32b8-4edc-8089-557c48dd4be0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ d99e8f94-4a8a-42a1-b5d0-2b08cacb8676	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d99e8f94-4a8a-42a1-b5d0-2b08cacb8676	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d99efecd-1419-434b-9de6-5fbb04f57dda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d99efecd-1419-434b-9de6-5fbb04f57dda	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d99fa026-6347-450a-9011-1fd79070a55c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d99fa026-6347-450a-9011-1fd79070a55c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d99fa026-6347-450a-9011-1fd79070a55c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:goblin-ruinblaster:cast:s1,f:xs:XP:goblin-ruinblaster:cast:s1	-	-	-	8a1b1a193ec0	-	b27de6d10f10	-	-	2026-11-24	xproof
+d99fa026-6347-450a-9011-1fd79070a55c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-ruinblaster:f0t0:s1,f:xs:XP:goblin-ruinblaster:f0t0:s1	-	-	-	8a1b1a193ec0	-	b27de6d10f10	-	-	2026-11-24	xproof
 d9a09e7f-6bef-4e75-b5c7-cea20a69cf02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d9a09e7f-6bef-4e75-b5c7-cea20a69cf02	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d9a10971-f32b-4978-952d-fed0a5bc9e36	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -220,5 +220,5 @@ d9f4af37-c85e-44ab-9fea-3c67e2f3cf27	f0/t0	NULL	owed	refused:scen failed: xengin
 d9f5fc77-40df-4872-b633-6bf5a22a8831	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d9fabfa8-b930-428d-af4e-640fb310a5b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d9fabfa8-b930-428d-af4e-640fb310a5b2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d9fd4ff3-5ada-40f4-b949-6fe65624a0c4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d9fd4ff3-5ada-40f4-b949-6fe65624a0c4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d9fd4ff3-5ada-40f4-b949-6fe65624a0c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lorthos-the-tidemaker:cast:s1,f:xs:XP:lorthos-the-tidemaker:cast:s1	-	-	-	8a1b1a193ec0	-	d40db16d1c62	-	-	2026-11-24	xproof
+d9fd4ff3-5ada-40f4-b949-6fe65624a0c4	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:lorthos-the-tidemaker:f0t0:s1,f:xs:XP:lorthos-the-tidemaker:f0t0:s1	-	-	-	8a1b1a193ec0	-	d40db16d1c62	-	-	2026-11-24	xproof

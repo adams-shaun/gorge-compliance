@@ -18,8 +18,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 660ff9fa-1e9b-4697-a3f5-b12238703161	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66107cfd-4bdb-4266-a650-940743555ea4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6614dbe5-d7c7-4a51-91db-912764050269	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66155010-cc2c-449a-85d5-92c95aade514	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66155010-cc2c-449a-85d5-92c95aade514	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+66155010-cc2c-449a-85d5-92c95aade514	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pilgrim-s-eye:f0t0:s1,f:xs:XP:pilgrim-s-eye:f0t0:s1	-	-	-	8a1b1a193ec0	-	f3eb24e3c4fb	-	-	2026-11-24	xproof
+66155010-cc2c-449a-85d5-92c95aade514	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pilgrim-s-eye:f0t0:s1,f:xs:XP:pilgrim-s-eye:f0t0:s1	-	-	-	8a1b1a193ec0	-	f3eb24e3c4fb	-	-	2026-11-24	xproof
 6615f881-960c-4216-a32a-63856bc3afd0	cast	cast-resolve	agreed	-	FX	scen	2	0	The Ancient One/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6615f881-960c-4216-a32a-63856bc3afd0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Ancient One/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6615f881-960c-4216-a32a-63856bc3afd0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Ancient One/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 661618a2-54c7-4136-beff-fff5ff7d84cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 661736eb-97d7-4b3c-ab18-708479a5fb29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 661a99ef-8d5b-4aac-98f6-52b17a8ecf52	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-661a99ef-8d5b-4aac-98f6-52b17a8ecf52	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+661a99ef-8d5b-4aac-98f6-52b17a8ecf52	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 661b2159-4040-4a44-b182-46085416ebd9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 661b2159-4040-4a44-b182-46085416ebd9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 661b2159-4040-4a44-b182-46085416ebd9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -63,7 +63,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66418c65-a15f-489e-8a2d-6cee1b5d977c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6643fc8e-548e-48db-9f67-ffbca9e57016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a1	Mill	agreed	-	FX	start	2	0	x:xs:XP:lich-lord-of-unx:f0a1:s1,f:xs:XP:lich-lord-of-unx:f0a1:s1	-	-	-	8a1b1a193ec0	-	3158ff43a8d4	-	-	2026-11-24	xproof
 66442396-f804-47f3-8daa-0d43d8cfb482	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66465bc1-4a34-4951-be53-57f90002976a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66499407-3ad2-464b-bbfe-95d860f53616	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

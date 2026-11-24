@@ -58,7 +58,7 @@ a74494ef-aa35-4830-9b4c-47bff5270efc	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 a74494ef-aa35-4830-9b4c-47bff5270efc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a744c5d7-c903-446a-bb30-30788058d9db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a74d80ec-9f42-418d-ab98-897acc23c319	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a74d80ec-9f42-418d-ab98-897acc23c319	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a74d80ec-9f42-418d-ab98-897acc23c319	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 a74e41b4-6284-453c-a586-d575735dca65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a74e41b4-6284-453c-a586-d575735dca65	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a74e41b4-6284-453c-a586-d575735dca65	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -197,8 +197,8 @@ a7e97fa9-4b72-4548-b854-5be5f18a6f1a	cast	cast-resolve	agreed	-	FX	scen	2	0	Dise
 a7ec13c6-7ade-433a-b5a2-047854eef486	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:corsair-captain:f0t0:s2,f:xs:XP:corsair-captain:f0t0:s2	-	-	-	e07cf3a05ba5	-	f9f8bd146301	-	-	2026-11-24	xproof
 a7ec13c6-7ade-433a-b5a2-047854eef486	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:corsair-captain:f0t0:s2,f:xs:XP:corsair-captain:f0t0:s2	-	-	-	e07cf3a05ba5	-	f9f8bd146301	-	-	2026-11-24	xproof
 a7ec13c6-7ade-433a-b5a2-047854eef486	static#0.0	static#0.0	agreed	-	X	scen	1	0	Corsair Captain/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a7eef84a-0b56-41d5-a298-dc3cf199e125	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7eef84a-0b56-41d5-a298-dc3cf199e125	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7eef84a-0b56-41d5-a298-dc3cf199e125	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:joraga-bard:f0t0:s1,f:xs:XP:joraga-bard:f0t0:s1	-	-	-	8a1b1a193ec0	-	ddc45dffd3e6	-	-	2026-11-24	xproof
+a7eef84a-0b56-41d5-a298-dc3cf199e125	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:joraga-bard:f0t0:s1,f:xs:XP:joraga-bard:f0t0:s1	-	-	-	8a1b1a193ec0	-	ddc45dffd3e6	-	-	2026-11-24	xproof
 a7f266b5-7258-4eaa-b447-66460ec38505	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7f682ce-3d1f-425c-b65a-11a15791aa9e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7fe5473-fae5-490e-8600-b7e497b9989e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

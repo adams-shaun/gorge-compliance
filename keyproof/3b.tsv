@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b97794a-3aaa-45a6-9cad-f1b768615b6d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b97bf8e-d5c4-4eae-a453-73456e0461a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b9b5b22-5a7d-4e37-a870-ca0f0efa4f36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b9b5b22-5a7d-4e37-a870-ca0f0efa4f36	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b9b5b22-5a7d-4e37-a870-ca0f0efa4f36	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 3b9bc41a-a43f-4be7-9452-f61f5ad5b482	cast	cast-resolve	agreed	-	X	scen	1	0	Sita Varma, Masked Racer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b9bc41a-a43f-4be7-9452-f61f5ad5b482	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sita Varma, Masked Racer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ba19659-461f-482c-b882-b4fca7d5d1f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ba809ce-3556-415c-9fcc-291cb10a43cd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ajani, Outland Chaperone/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3ba809ce-3556-415c-9fcc-291cb10a43cd	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ajani, Outland Chaperone/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3ba809ce-3556-415c-9fcc-291cb10a43cd	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Ajani, Outland Chaperone/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-3ba81fbe-2c53-495b-9a2b-f124475bd71b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ba81fbe-2c53-495b-9a2b-f124475bd71b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drove-of-elves:cast:s1,f:xs:XP:drove-of-elves:cast:s1	-	-	-	8a1b1a193ec0	-	0c0dde70cc3c	-	-	2026-11-24	xproof
 3baa8e38-ef93-435d-b63e-f781d5bfcc68	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Temple of Abandon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3baa8e38-ef93-435d-b63e-f781d5bfcc68	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Abandon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3baa8e38-ef93-435d-b63e-f781d5bfcc68	land	play-land	agreed	-	X	scen	1	0	Temple of Abandon/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -185,8 +185,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bc51b45-1f96-4277-8b80-bb0a528c6ac2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bc7d3a7-ddb4-4eaa-882e-404d8f2926fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bc7d3a7-ddb4-4eaa-882e-404d8f2926fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bc82914-1524-4d57-8b38-9788867a4046	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bc82914-1524-4d57-8b38-9788867a4046	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3bc82914-1524-4d57-8b38-9788867a4046	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rockcaster-platoon:cast:s1,f:xs:XP:rockcaster-platoon:cast:s1	-	-	-	8a1b1a193ec0	-	5e13154d6ccc	-	-	2026-11-24	xproof
+3bc82914-1524-4d57-8b38-9788867a4046	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:rockcaster-platoon:f0a0:s1,f:xs:XP:rockcaster-platoon:f0a0:s1	-	-	-	8a1b1a193ec0	-	5e13154d6ccc	-	-	2026-11-24	xproof
 3bc8a406-3ae7-4f56-a33c-b4a2c115b917	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bc9649c-4350-4c6a-8441-dc76a5f833af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bcb5ad4-818e-4f10-aaff-188d713b160b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bcf090c-e890-4a9f-a8aa-6079e4ec9947	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bcf54f8-fcd7-4ec0-b011-92b367411cdb	cast	cast-resolve	agreed	-	X	scen	1	0	Stirring Honormancer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bcf54f8-fcd7-4ec0-b011-92b367411cdb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-3bcfc82c-3523-40e3-b236-78ece8a8d69f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3bcfc82c-3523-40e3-b236-78ece8a8d69f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elemental-appeal:cast:s1,f:xs:XP:elemental-appeal:cast:s1	-	-	-	8a1b1a193ec0	-	187d6c37a53f	-	-	2026-11-24	xproof
 3bd066d3-5b07-4986-9e6c-39d1ae6212ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bd066d3-5b07-4986-9e6c-39d1ae6212ff	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bd3156f-dbc7-48f7-9e50-1f2b8b227f97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

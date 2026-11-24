@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1135ebc3-9537-4341-956b-6e22d8be5f20	cast	cast-resolve	agreed	-	FX	scen	2	0	Troyan, Gutsy Explorer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1135ebc3-9537-4341-956b-6e22d8be5f20	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Troyan, Gutsy Explorer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1135ebc3-9537-4341-956b-6e22d8be5f20	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Troyan, Gutsy Explorer/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-11369d8b-6443-43c3-a60f-dd920a4e8c08	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11369d8b-6443-43c3-a60f-dd920a4e8c08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winged-coatl:cast:s1,f:xs:XP:winged-coatl:cast:s1	-	-	-	8a1b1a193ec0	-	ac3cdac5e29b	-	-	2026-11-24	xproof
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lotusguard-disciple:f0t0:s2,f:xs:XP:lotusguard-disciple:f0t0:s2	-	-	-	267e485f6204	-	cefc2a332b63	-	-	2026-11-24	xproof
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lotusguard Disciple/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lotusguard Disciple/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -34,10 +34,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 113c3024-c3bd-4c3a-8c08-3828646d9ca2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-113fc13a-6df9-4eed-b9d4-002a85a036a1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+113fc13a-6df9-4eed-b9d4-002a85a036a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nissa-revane:cast:s1,f:xs:XP:nissa-revane:cast:s1	-	-	-	8a1b1a193ec0	-	7cf95a8161a4	-	-	2026-11-24	xproof
+113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:nissa-revane:cast:s1,f:xs:XP:nissa-revane:cast:s1	-	-	-	8a1b1a193ec0	-	7cf95a8161a4	-	-	2026-11-24	xproof
+113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 1141a12a-2ebd-4e7b-8c8c-c7a1f160244c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1141a12a-2ebd-4e7b-8c8c-c7a1f160244c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 114725ef-ac81-4d13-9153-0a303c3ce9c4	cast	cast-resolve	agreed	-	X	scen	1	0	Innocuous Rat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11b21086-0779-4d16-8a56-252c6bee9bed	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11b529f0-e365-4500-b54a-44e2ac6e709f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11b529f0-e365-4500-b54a-44e2ac6e709f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11b5308d-5bc0-4782-875f-a28be36e665d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11b5308d-5bc0-4782-875f-a28be36e665d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beastmaster-ascension:cast:s1,f:xs:XP:beastmaster-ascension:cast:s1	-	-	-	8a1b1a193ec0	-	46d86e35364a	-	-	2026-11-24	xproof
 11b5308d-5bc0-4782-875f-a28be36e665d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11b7ee78-fca6-4b34-93e4-e60492583d50	cast	cast-resolve	agreed	-	FX	scen	2	0	Agrus Kos, Spirit of Justice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11b7ee78-fca6-4b34-93e4-e60492583d50	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Agrus Kos, Spirit of Justice/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

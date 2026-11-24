@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 313d7b2f-05fb-49f3-8d8a-361be4412d3c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31426e08-bfd1-44f1-8473-5e982cb8e841	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 314748a6-4e7f-4afb-b77e-5ef366e02b90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-314748a6-4e7f-4afb-b77e-5ef366e02b90	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+314748a6-4e7f-4afb-b77e-5ef366e02b90	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 314f0a96-5e91-42a3-9d75-3f641f22a9ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31505942-52c4-4485-9241-c9592e6839e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31505942-52c4-4485-9241-c9592e6839e4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31ca9e12-8ad0-472e-8b2a-b7df26370d8c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Minwu, White Mage/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31ca9e12-8ad0-472e-8b2a-b7df26370d8c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Minwu, White Mage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31caa417-12f7-468b-9f3a-ccfb80e5bc2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31caa417-12f7-468b-9f3a-ccfb80e5bc2f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+31caa417-12f7-468b-9f3a-ccfb80e5bc2f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 31cae00a-3a74-4a59-80b0-a656f524e878	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:heroic-feast:f0t0:s2,f:xs:XP:heroic-feast:f0t0:s2	-	-	-	5437c1394672	-	a35adbd00145	-	-	2026-11-24	xproof
 31cae00a-3a74-4a59-80b0-a656f524e878	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:heroic-feast:f0t0:s2,f:xs:XP:heroic-feast:f0t0:s2	-	-	-	5437c1394672	-	a35adbd00145	-	-	2026-11-24	xproof
 31cae00a-3a74-4a59-80b0-a656f524e878	f0/t1	LifeGained	agreed	-	FX	start	1	0	x:xs:XP:heroic-feast:f0t0:s2,f:xs:XP:heroic-feast:f0t0:s2	-	-	-	5437c1394672	-	a35adbd00145	-	-	2026-11-24	xproof
