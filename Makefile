@@ -120,6 +120,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # counter_upto regression fixture/test covers it, and the params chooseBinary comment now states the miss it
 # really records. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
 # fix/xp-forge-driver-counter-blight-piles.
+# 19b0c2902c5 = c92f40d4f49 + the scripted controller pays a Phyrexian pip with 2 life (CR 107.4f, 118.3b) when gorge
+# recorded a pay_life pick: applyManaToCost takes the step's pay_life picks first (payPhyrexian + payLife(2)), then the
+# recorded spend and the pool; a pip with no pay_life pick stays a mana pip. Before, Vault Skirge's {B/P} stayed unpaid and the
+# cast was refused. PhyrexianLifePaymentTest covers Vault Skirge and Immolating Souleater. Driver-only change; same trees as
+# FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-phyrexian-life.
 # 8b2a5e3141f = c92f40d4f49 + two logged gorge decisions the driver never consumed: a forced GenericChoice mode
 # (ChooseGenericEffect drops every choice whose UnlessCost the chooser cannot pay and still calls
 # chooseSpellAbilitiesForEffect with the survivors, so Forge asks nothing while gorge logs the one-option mode)
@@ -127,7 +132,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # non-graveyard order instead of answering it from the card-order picks, with the graveyard pin kept separate).
 # Both shapes have a forge-export fixture replayed by LoneModeLibraryOrderTest. Driver-only change; same trees
 # as FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-lone-mode-library-order.
-FORGE_ORACLE_REF ?= 8b2a5e3141f5baea2defa751cdbd3f45ca9af872
+# f789f1e46fb = the merge of 8b2a5e3141f (this lone-mode/library-order fix) and 19b0c2902c5 (the Phyrexian life
+# payment fix), both children of c92f40d4f49; the merge is clean and the full driver suite (126 tests, including
+# PhyrexianLifePaymentTest and LoneModeLibraryOrderTest) is green on it. Fork branch fix/xp-forge-driver-lone-mode-library-order.
+FORGE_ORACLE_REF ?= f789f1e46fb61b039a82d0a7ad89920da676cf97
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
