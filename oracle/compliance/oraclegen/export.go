@@ -135,6 +135,17 @@ func XAnswers(ds []rules.OracleDecision, steps int, modes map[string]int) [][]XA
 	return xanswers(ds, steps, modes, nil)
 }
 
+// XAnswersWithSnapshots is XAnswers plus the gorge result's checkpoints. A
+// library_placement/hand_move destination is re-derived from the after-step
+// library top instead of guessed from the decision shape: a bottom placement
+// has the same shape as a top one. snaps must be indexed by scenario step (the
+// setup checkpoint at 0, the checkpoint after step n at n+1), the same layout
+// XAnswersForScenario receives; a decision whose step is rewritten for answer
+// routing must be given a snapshot slice rewritten the same way.
+func XAnswersWithSnapshots(ds []rules.OracleDecision, steps int, modes map[string]int, snaps []rules.OracleSnapshot) [][]XAnswer {
+	return xanswersSetup(ds, steps, modes, nil, nil, nil, xanswersExtra{snaps: snaps})
+}
+
 // ArrangeEmptyGraveyard reports whether an arrange decision sent every
 // looked-at card to the graveyard; XAnswers scripts one choice answer per
 // looked-at card for it, not one per decision.

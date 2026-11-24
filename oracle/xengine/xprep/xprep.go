@@ -354,7 +354,16 @@ func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.
 	for j := range span {
 		span[j].Step = last
 	}
-	add := oraclegen.XAnswers(span, len(sc.Steps), pm)[last]
+	// The span's decisions are retimed onto the window's last step so their
+	// answers lead it, but the checkpoint that proves a top library placement
+	// still belongs to the continuation step (len(sc.Steps)). Reindex that
+	// one snapshot onto the retimed step; without it the router would have no
+	// destination evidence and would not reverse a top arrange.
+	spanSnaps := make([]rules.OracleSnapshot, len(sc.Steps)+1)
+	if after := len(sc.Steps) + 1; after < len(res.Snapshots) {
+		spanSnaps[last+1] = res.Snapshots[after]
+	}
+	add := oraclegen.XAnswersWithSnapshots(span, len(sc.Steps), pm, spanSnaps)[last]
 	if len(add) == 0 || add[0].Kind != "mode" {
 		return refuse(it.ID, ReasonModalTrigger, "%s: gorge's continuation decided no mode for the trigger", p.card)
 	}

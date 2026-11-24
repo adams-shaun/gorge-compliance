@@ -1,8 +1,6 @@
 package main
 
 import (
-	"strings"
-
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
@@ -27,7 +25,7 @@ import (
 // leave the first pick above the second, which is gorge's bottom order.
 //
 // The destination is re-derived from the checkpoint after the decision (see
-// oraclegen.LibraryTopPlacement), because the decision alone does not say
+// oraclegen.LibraryTopPlacements), because the decision alone does not say
 // whether a hand_move/library_placement went to the top or the bottom. A
 // hand_move batch can instead be paired with the spell's following
 // "changezone_alternative" ask (its single pick is "top" or "bottom"; it is
@@ -35,8 +33,10 @@ import (
 // both alternatives). The batch and the alternative can belong to different
 // seats, so they are paired by step and order of the runner log, not by seat.
 // Each alternative is paired at most once, so two hand_move batches in one step
-// take successive alternatives. The alternative is a fallback: a real
-// after-step library top is the stronger signal.
+// take successive alternatives. The alternative overrides the checkpoint: a
+// bottom placement into an empty library (or onto a top already holding the
+// same names) leaves the same after-step top as a top placement, and only the
+// explicit ask can tell them apart.
 //
 // Only the parallel pick arrays reverse, and only the ones as long as Picks
 // (every one is parallel by contract, but a rewrite must not corrupt a
@@ -48,20 +48,9 @@ import (
 func forgeLibraryTopOrder(ds []rules.OracleDecision, snaps []rules.OracleSnapshot) []rules.OracleDecision {
 	out := ds
 	cloned := false
-	paired := make([]bool, len(ds))
+	tops := oraclegen.LibraryTopPlacements(ds, snaps)
 	for i := range ds {
-		top := oraclegen.LibraryTopPlacement(ds[i], snaps)
-		if oraclegen.HandMoveBatch(ds[i]) {
-			if j := forgeAlternativeAfter(ds, i, paired); j >= 0 {
-				paired[j] = true
-				if strings.EqualFold(ds[j].Picks[0], "top") {
-					top = true
-				}
-			}
-		} else if !oraclegen.LibraryPlacementOrder(ds[i]) {
-			continue
-		}
-		if !top {
+		if !tops[i] {
 			continue
 		}
 		if !cloned {
@@ -71,22 +60,6 @@ func forgeLibraryTopOrder(ds []rules.OracleDecision, snaps []rules.OracleSnapsho
 		out[i] = forgeReversedHandMove(ds[i])
 	}
 	return out
-}
-
-// forgeAlternativeAfter returns the index of the first unpaired
-// "changezone_alternative" decision after i that shares i's step, or -1. The
-// scan stops at the step boundary: an alternative in a later step is another
-// move.
-func forgeAlternativeAfter(ds []rules.OracleDecision, i int, paired []bool) int {
-	step := ds[i].Step
-	for j := i + 1; j < len(ds) && ds[j].Step == step; j++ {
-		d := ds[j]
-		if paired[j] || d.Kind != "choose_n" || d.Resume != "changezone_alternative" || len(d.Picks) != 1 {
-			continue
-		}
-		return j
-	}
-	return -1
 }
 
 // forgeReversedHandMove returns a copy of d whose parallel pick arrays are in

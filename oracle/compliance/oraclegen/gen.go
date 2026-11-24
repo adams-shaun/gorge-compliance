@@ -1315,6 +1315,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var pipPlans map[int][]pipAsk
 	var ownBounce map[int]bool
 	var snaps []rules.OracleSnapshot
+	var orderAsks map[int]bool
 	for _, ex := range extras {
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
@@ -1328,14 +1329,16 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		if snaps == nil {
 			snaps = ex.snaps
 		}
+		if orderAsks == nil {
+			orderAsks = ex.orderAsks
+		}
 	}
 	// A hand_move/library_placement goes top-first (reverse the answers for
 	// XMage's successive top asks) or bottom-first (keep them) by where the
-	// after-step checkpoint shows the picks, not by a list of cards.
-	topPlacement := make([]bool, len(ds))
-	for i := range ds {
-		topPlacement[i] = LibraryTopPlacement(ds[i], snaps)
-	}
+	// after-step checkpoint shows the picks, not by a list of cards. An
+	// explicit changezone_alternative "bottom" overrides a checkpoint that
+	// cannot tell a bottom-into-empty-library placement from a top one.
+	topPlacement := LibraryTopPlacements(ds, snaps)
 	out := make([][]XAnswer, steps)
 	any := false
 	// The plan's pip decisions: the ordinal of each pip decision among its
@@ -1956,12 +1959,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		default:
 			continue
 		}
-		if topPlacement[i] && HandMoveBatch(d) {
+		if topPlacement[i] && HandMoveBatch(d) && orderAsks[i] {
 			// XMage asks the hand selection first, then its "card ORDER to
 			// put … from the TOP" dialog N-1 times and auto-tops the card
 			// never named. The selection answer above already names all
 			// picks; the order answers follow it, last N-1 picks reversed,
-			// so picks[0] stays the unnamed topmost card.
+			// so picks[0] stays the unnamed topmost card. Only a verified
+			// order-dialog effect gets these answers: a self put-back
+			// (Brainstorm, Dream Cache) has no such ask, and an extra
+			// choice would derail the next dialog.
 			for k := len(d.Picks) - 1; k >= 1; k-- {
 				as = append(as, XAnswer{d.Seat, "choice", d.Picks[k]})
 			}

@@ -138,8 +138,9 @@ func TestForgeLibraryTopOrder(t *testing.T) {
 
 	t.Run("library_placement top reversed", func(t *testing.T) {
 		ds := []rules.OracleDecision{libraryPlacement()}
+		top := libraryTopSnapshot([]string{"Island", "Forest", "Mountain"})
 
-		got := forgeLibraryTopOrder(ds, nil)
+		got := forgeLibraryTopOrder(ds, top)
 		d := got[0]
 		if want := []string{"Mountain", "Forest", "Island"}; !reflect.DeepEqual(d.Picks, want) {
 			t.Errorf("picks = %v, want %v", d.Picks, want)
@@ -165,6 +166,17 @@ func TestForgeLibraryTopOrder(t *testing.T) {
 		}
 	})
 
+	t.Run("library_placement bottom unchanged", func(t *testing.T) {
+		// A bottom arrange leaves the picks below the old top. The explicit
+		// bottom ask is not represented on a library_placement arrange, so
+		// the after-step checkpoint is the evidence: it must not match.
+		ds := []rules.OracleDecision{libraryPlacement()}
+		bottom := libraryTopSnapshot([]string{"Mountain", "Island", "Forest"})
+		if got := forgeLibraryTopOrder(ds, bottom); !reflect.DeepEqual(got, ds) {
+			t.Errorf("bottom library_placement changed: %+v", got)
+		}
+	})
+
 	t.Run("top placement from the after-step library", func(t *testing.T) {
 		// Stunted Growth's hand_move batch has no changezone_alternative; the
 		// checkpoint after its step shows the three picks at the library top
@@ -180,6 +192,19 @@ func TestForgeLibraryTopOrder(t *testing.T) {
 		bottom := libraryTopSnapshot([]string{"Mountain", "Island", "Forest"})
 		if got := forgeLibraryTopOrder(ds, bottom); !reflect.DeepEqual(got, ds) {
 			t.Errorf("bottom hand_move changed: %+v", got)
+		}
+	})
+
+	t.Run("bottom pair into an empty library unchanged", func(t *testing.T) {
+		// The probe that broke the checkpoint-only reading: a bottom
+		// placement into an empty library leaves the picks as the new top in
+		// pick order, indistinguishable from a top placement. The explicit
+		// "bottom" alternative is the evidence that must win.
+		ds := []rules.OracleDecision{libraryHandMove(), libraryAlternative("bottom", 1, "bottom")}
+		empty := libraryTopSnapshot([]string{"Island", "Forest"})
+		got := forgeLibraryTopOrder(ds, empty)
+		if !reflect.DeepEqual(got[0], ds[0]) {
+			t.Errorf("bottom-into-empty hand_move was reversed: %+v", got[0])
 		}
 	})
 
@@ -286,6 +311,30 @@ func TestForgeLibraryTopOrder(t *testing.T) {
 		forge := forgeBuildRequest(nil, it, g, ds, true).GorgeDecisions
 		if want := []string{"p0:Forest", "p0:Island#4"}; !reflect.DeepEqual(forge[0].PickRefs, want) {
 			t.Errorf("forge path did not reverse the after-step top hand_move: %+v", forge)
+		}
+	})
+
+	t.Run("gate: after-step top reaches the request for a library_placement", func(t *testing.T) {
+		// The snapshot must reach the export for the arrange shape too, not
+		// only for a hand_move batch: the request builder is the only place
+		// that passes g.Snapshots through.
+		it := oraclegen.Item{
+			ID: "harmonic-convergence/top", Card: "Harmonic Convergence", Template: "cast-resolve",
+			Scenario: oraclegen.Scenario{Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Harmonic Convergence"},
+				{Op: "resolve", Seat: 0},
+			}},
+		}
+		ds := []rules.OracleDecision{libraryPlacement()}
+		top := rules.OracleResult{Snapshots: libraryTopSnapshot([]string{"Island", "Forest", "Mountain"})}
+		forge := forgeBuildRequest(nil, it, top, ds, true).GorgeDecisions
+		if want := []string{"p0:Mountain", "p0:Forest", "p0:Island"}; !reflect.DeepEqual(forge[0].PickRefs, want) {
+			t.Errorf("forge path did not reverse the after-step top library_placement: %+v", forge)
+		}
+		bottom := rules.OracleResult{Snapshots: libraryTopSnapshot([]string{"Mountain", "Island", "Forest"})}
+		forge = forgeBuildRequest(nil, it, bottom, ds, true).GorgeDecisions
+		if want := []string{"p0:Island", "p0:Forest", "p0:Mountain"}; !reflect.DeepEqual(forge[0].PickRefs, want) {
+			t.Errorf("forge path reversed a bottom library_placement: %+v", forge)
 		}
 	})
 

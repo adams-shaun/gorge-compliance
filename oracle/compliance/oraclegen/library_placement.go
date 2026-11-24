@@ -2,7 +2,10 @@ package oraclegen
 
 import (
 	"slices"
+	"strconv"
+	"strings"
 
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -47,21 +50,22 @@ func HandMoveBatch(d rules.OracleDecision) bool {
 // followers share one predicate: the next multi-card library mover is covered
 // without another per-card list.
 //
-// snaps == nil is the shape-only case (a caller with no scenario, e.g. the
-// XAnswers unit surface). A library_placement arrange is then the measured top
-// arrangement; a hand_move has no destination evidence and is left alone.
+// snaps == nil, or a decision whose after-step checkpoint is missing, is no
+// evidence at all: both a top and a bottom placement have the same shape and
+// the same resulting library top when the library was empty (or already
+// topped by the same names), so the predicate refuses to guess and reports
+// false. A caller that has the decision list should use LibraryTopPlacements,
+// which lets an explicit changezone_alternative override the checkpoint.
 func LibraryTopPlacement(d rules.OracleDecision, snaps []rules.OracleSnapshot) bool {
 	arrange := LibraryPlacementOrder(d)
 	if !arrange && !HandMoveBatch(d) {
 		return false
 	}
 	if snaps == nil {
-		return arrange
+		return false
 	}
 	if d.Step < 0 || d.Step+1 >= len(snaps) {
-		// No after-step checkpoint: keep the shape-only reading that the
-		// measured library_placement is a top arrangement.
-		return arrange
+		return false
 	}
 	names := pickedNames(d)
 	if len(names) < 2 {
@@ -92,7 +96,8 @@ func LibraryTopPlacement(d rules.OracleDecision, snaps []rules.OracleSnapshot) b
 	// A picked card still in another zone after the step did not move to the
 	// library at all (a hand -> battlefield/graveyard/exile move). A
 	// same-named sibling in the zone keeps the check conservative: it can
-	// only make a real top placement undetected, never invent one.
+	// make a real top placement undetected, but it cannot mistake one for a
+	// move that never happened.
 	if containsAllNames(p.Hand, names) || containsAllNames(p.Graveyard, names) ||
 		containsAllNames(p.Exile, names) {
 		return false
@@ -102,6 +107,58 @@ func LibraryTopPlacement(d rules.OracleDecision, snaps []rules.OracleSnapshot) b
 		permanents[i] = perm.Name
 	}
 	return !containsAllNames(permanents, names)
+}
+
+// LibraryTopPlacements derives LibraryTopPlacement for every decision and lets
+// the move's own changezone_alternative override the checkpoint. The
+// alternative is the spell's explicit "top"/"bottom" ask: a bottom placement
+// into an empty library, or onto a top already holding the same names, leaves
+// exactly the same after-step top as a top placement, so the checkpoint alone
+// cannot tell them apart. The decision list (and its runner-log order) is what
+// pairs a hand_move batch with its alternative; a bottom ask therefore clears
+// the checkpoint's false positive instead of reversing the pile.
+//
+// Alternatives pair by step and order of the runner log, not by seat: the
+// spell controller's position ask can belong to a different seat than the
+// batch. Each alternative is consumed at most once, so two batches in one step
+// take successive alternatives. Only a hand_move batch has an alternative
+// (changeZone's DestinationAlternative); a library_placement arrange has no
+// corresponding ask and keeps the checkpoint's reading.
+func LibraryTopPlacements(ds []rules.OracleDecision, snaps []rules.OracleSnapshot) []bool {
+	tops := make([]bool, len(ds))
+	paired := make([]bool, len(ds))
+	for i := range ds {
+		top := LibraryTopPlacement(ds[i], snaps)
+		if HandMoveBatch(ds[i]) {
+			if j := changezoneAlternativeAfter(ds, i, paired); j >= 0 {
+				paired[j] = true
+				switch {
+				case strings.EqualFold(strings.TrimSpace(ds[j].Picks[0]), "top"):
+					top = true
+				case strings.EqualFold(strings.TrimSpace(ds[j].Picks[0]), "bottom"):
+					top = false
+				}
+			}
+		}
+		tops[i] = top
+	}
+	return tops
+}
+
+// changezoneAlternativeAfter returns the index of the first unpaired
+// "changezone_alternative" decision after i that shares i's step, or -1. The
+// scan stops at the step boundary: an alternative in a later step is another
+// move.
+func changezoneAlternativeAfter(ds []rules.OracleDecision, i int, paired []bool) int {
+	step := ds[i].Step
+	for j := i + 1; j < len(ds) && ds[j].Step == step; j++ {
+		d := ds[j]
+		if paired[j] || d.Kind != "choose_n" || d.Resume != "changezone_alternative" || len(d.Picks) != 1 {
+			continue
+		}
+		return j
+	}
+	return -1
 }
 
 // pickedNames returns the card names of d's picks, using the exact object ref
@@ -136,4 +193,99 @@ func containsAllNames(zone, names []string) bool {
 		}
 	}
 	return true
+}
+
+// HandMoveOrderAsk reports whether XMage asks the "card ORDER to put … from
+// the TOP" dialog for d's top hand_move batch. Only an effect whose chooser is
+// the TARGETED player is implemented with putCardsOnTopOfLibrary(...,
+// anyOrder=true) and so asks it (Stunted Growth, Phyrexian Chimney Imp); a
+// self put-back (Brainstorm, Dream Cache) moves the cards without an order
+// dialog, and scripting the order answers there leaves a choice queued for the
+// next ask. The source is resolved from the step's stack checkpoint, falling
+// back to the scenario's own cast/activate step, and the card IR must carry a
+// hand -> library top ChangeZone with Chooser$ Targeted. No verified source
+// means no order answers: never guess.
+func HandMoveOrderAsk(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapshot, d rules.OracleDecision) bool {
+	if reg == nil || !HandMoveBatch(d) || d.Step < 0 {
+		return false
+	}
+	src := handMoveSource(sc, snaps, d.Step)
+	if src == "" {
+		return false
+	}
+	c, ok := reg.Lookup(oraclediffRefName(src))
+	if !ok {
+		return false
+	}
+	for _, f := range digFaces(c, src) {
+		if f == nil {
+			continue
+		}
+		for _, sa := range f.Abilities {
+			if targetedHandToTop(sa) {
+				return true
+			}
+		}
+		for _, tr := range f.Triggers {
+			if targetedHandToTop(tr.Effect) {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// handMoveSource is the card/stack ref that posed the decision at step: the
+// resolving object in that step's stack checkpoint, or the most recent
+// cast/play/activate step naming a card.
+func handMoveSource(sc Scenario, snaps []rules.OracleSnapshot, step int) string {
+	if step >= 0 && step < len(snaps) {
+		for _, o := range snaps[step].Stack {
+			if o.Source != "" {
+				return o.Source
+			}
+		}
+	}
+	for i := step; i >= 0; i-- {
+		if i >= len(sc.Steps) {
+			continue
+		}
+		st := sc.Steps[i]
+		if st.Card != "" && (st.Op == "cast" || st.Op == "play" || st.Op == "activate") {
+			return st.Card
+		}
+	}
+	return ""
+}
+
+// targetedHandToTop walks one ability chain and reports whether it puts two or
+// more cards from a hand on top of a library for a TARGETED chooser. The
+// ChangeNum is the number the XMage order dialog moves; a variable or
+// single-card count does not ask the multi-card order prompt.
+func targetedHandToTop(sa *cards.SA) bool {
+	seen := make(map[*cards.SA]bool)
+	for sa != nil && !seen[sa] {
+		seen[sa] = true
+		if strings.EqualFold(strings.TrimSpace(sa.Params["Chooser"]), "Targeted") &&
+			strings.EqualFold(strings.TrimSpace(sa.Params["Destination"]), "Library") &&
+			strings.Contains(strings.ToLower(sa.Params["Origin"]), "hand") &&
+			topLibraryPosition(sa.Params["LibraryPosition"]) {
+			if n, err := strconv.Atoi(strings.TrimSpace(sa.Params["ChangeNum"])); err == nil && n >= 2 {
+				return true
+			}
+		}
+		sa = sa.Sub
+	}
+	return false
+}
+
+// topLibraryPosition reports whether a LibraryPosition$ value places at the
+// top: "0" and Forge's absent default.
+func topLibraryPosition(raw string) bool {
+	switch strings.TrimSpace(raw) {
+	case "", "0":
+		return true
+	default:
+		return false
+	}
 }
