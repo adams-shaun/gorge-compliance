@@ -1,8 +1,6 @@
 package templates
 
 import (
-	"strings"
-
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge/engine/rules"
 	costvocab "github.com/adams-shaun/gorge/engine/rules/cost"
@@ -97,39 +95,6 @@ func groupExilePaid(cost string, step int, decisions []rules.OracleDecision) boo
 		}
 	}
 	return false
-}
-
-// dropGroupExileTargets removes the target-queue answers the generic routing
-// records for a group exile cost's observed picks (xmQueue routes an
-// exilecost pick to the target queue): XMage's group exile costs elect with
-// target.choose, which TestPlayer serves from the CHOICE queue, and the
-// catalogue choice answers addActivationCostAnswers scripts are that
-// election. A leftover target answer is consumed by a later dialog instead
-// (measured: Baron Helmut Zemo's copies were cast from the stale target
-// queue).
-func dropGroupExileTargets(answers [][]oraclegen.XAnswer, step int, cost string, decisions []rules.OracleDecision) {
-	if step < 0 || step >= len(answers) || !costHasGroupExile(cost) {
-		return
-	}
-	picked := map[string]bool{}
-	for _, d := range decisions {
-		if d.Step != step || d.Seat != 0 {
-			continue
-		}
-		for i, k := range d.PickKinds {
-			if k == "exilecost" && i < len(d.Picks) {
-				picked[strings.ToLower(d.Picks[i])] = true
-			}
-		}
-	}
-	kept := answers[step][:0]
-	for _, a := range answers[step] {
-		if a.Seat == 0 && a.Kind == "target" && picked[strings.ToLower(a.Value)] {
-			continue
-		}
-		kept = append(kept, a)
-	}
-	answers[step] = kept
 }
 
 // costHasGroupExile reports whether cost carries a served group exile token.
