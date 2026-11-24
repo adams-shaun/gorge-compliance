@@ -199,9 +199,33 @@ FDN and BLB, the sets the dirac kernel plays, get tables of their own. The data 
 |---|---|---|---|
 | XMage | `make xmage-oracle-setup` | `.oracle-build/xmage` | 1.1 GB for the source and JDK, plus Maven's downloads |
 | Forge | `make forge-oracle-setup` | `.oracle-build/forge` | 850 MB for the source and its Maven cache |
+| XMage seat engine | `make xmage-sbv2-setup` | `.oracle-build/xmage-sbv2` | about 550 MB source (deleted after the build), 86 MB `lib/`, 260 MB card database, plus Maven's downloads; the build takes about 10 minutes |
 
 The setup scripts download a JDK and Maven and need `curl`, `git`, `python3`, `flock`, `/usr/bin/time`
 and systemd user scopes (`systemd-run --user`), which also cap the JVMs when they run. Set
 `XMAGE_ORACLE_DIR` and `FORGE_ORACLE_DIR` to share one build across clones. Forge's driver uses
 XMage's JDK, so build XMage first. Passes start a JVM per batch; on a shared machine, set
 `HEAVY_LOCK` to whatever serialises heavy jobs there (`scripts/heavy-lock.sh` has the interface).
+
+### The XMage seat engine (`scripts/xmage-sbv2.sh`)
+
+Not an oracle: SpellBench upstream's XMage engine, which poses every seat decision over the v2 protocol so a
+bot can sit at an XMage table (design: [2026-11-24-xmage-seat-route.md](design/2026-11-24-xmage-seat-route.md)).
+It is a separate build from the oracle's: `XMAGE_SBV2_REF` (spellbench revision) and `XMAGE_SBV2_XMAGE_REF`
+(the XMage commit it builds) in the Makefile, against `XMAGE_REF` for the oracle. A verdict is never
+measured on one and cited on the other. Needs a full JDK 21 (downloaded as Temurin 21 into the cache when
+`XMAGE_SBV2_JDK` names none; a JRE-only `java-21` fails XMage's `--release 8`), `git`, `curl`, `python3`, `flock`.
+
+    make xmage-sbv2-setup          # run alone: fetch both pins, build, scan the card db, verify
+    scripts/xmage-sbv2.sh --verify # re-check the cache against the pins (rehashes jars)
+    scripts/xmage-sbv2.sh --selftest
+    go run ./cmd/xclient -engine sbv2 -engine-cmd "$PWD/scripts/xmage-sbv2.sh" -policy heuristic \
+        -format standard-2022-25-bo1 -deck Standard16-RG,Standard16-UB -games N     # four-yay
+
+The launcher serves on stdio, so it is the `-engine-cmd`. On first use it builds (output on stderr, stdout
+stays protocol-only; concurrent launches wait on one build); after that every launch verifies
+`BUILD-MANIFEST.json` (XMage and spellbench commits, CABT pin, patch-series digests recomputed from the pinned
+patches, JDK 21, the db template stamped with the build's `lib_digest`) and refuses a stale or stock build
+rather than trusting it. A pin bump needs `make xmage-sbv2-setup`. Set `XMAGE_SBV2_DIR` to share the cache.
+The engine takes one active game per process and copies its own 260 MB database, so a parallel run is N
+processes. `-Dspellbench.priorityMana=true` is left at the engine default (off).
