@@ -75,7 +75,12 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 		}
 		// A TargetCardInLibrary(0, MAX) choice is not completed by the
 		// first pick: makeChoose needs an explicit stop after the subset.
-		if zone == "battlefield" {
+		// A DigUntil found move (gorge's diguntil_move) is all or nothing,
+		// so its yes picks every found card: XMage's choose over the
+		// revealed cards then has no target left (isChoiceCompleted) and
+		// would never read the stop (Aurora Awakener, measured "(Choices
+		// of PlayerA) Count are not equal (found [[choice_skip]])").
+		if zone == "battlefield" && d.Resume != "diguntil_move" {
 			d.Max = len(names) + 1
 		} else {
 			d.Max = len(names)
