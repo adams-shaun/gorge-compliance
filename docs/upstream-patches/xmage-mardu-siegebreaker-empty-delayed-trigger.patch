@@ -1,0 +1,125 @@
+diff --git a/Mage.Sets/src/mage/cards/m/MarduSiegebreaker.java b/Mage.Sets/src/mage/cards/m/MarduSiegebreaker.java
+index 4acf492..3dd57e1 100644
+--- a/Mage.Sets/src/mage/cards/m/MarduSiegebreaker.java
++++ b/Mage.Sets/src/mage/cards/m/MarduSiegebreaker.java
+@@ -101,37 +101,38 @@ class MarduSiegebreakerEffect extends OneShotEffect {
+ 
+     @Override
+     public boolean apply(Game game, Ability source) {
++        // CR 603.7a: the delayed sacrifice ability is created whenever this effect resolves,
++        // even when there is no exiled card to copy (the ETB target is "up to one"); it then
++        // sacrifices nothing.
+         Cards cards = game.getState().getExile().getExileZone(CardUtil.getExileZoneId(game, source));
+-        if (cards == null) {
+-            return false;
+-        }
+-        Card card;
+-        switch (cards.size()) {
+-            case 0:
+-                return false;
+-            case 1:
+-                card = cards.getRandom(game);
+-                break;
+-            default:
+-                card = Optional.ofNullable(game.getPlayer(source.getControllerId())).map(player -> {
+-                    TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
+-                    target.withNotTarget(true);
+-                    target.withChooseHint("to copy");
+-                    player.choose(Outcome.Neutral, cards, target, source, game);
+-                    return game.getCard(target.getFirstTarget());
+-                }).orElse(null);
+-        }
+-        if (card == null) {
+-            return false;
++        Card card = null;
++        if (cards != null) {
++            switch (cards.size()) {
++                case 0:
++                    break;
++                case 1:
++                    card = cards.getRandom(game);
++                    break;
++                default:
++                    card = Optional.ofNullable(game.getPlayer(source.getControllerId())).map(player -> {
++                        TargetCard target = new TargetCardInExile(StaticFilters.FILTER_CARD);
++                        target.withNotTarget(true);
++                        target.withChooseHint("to copy");
++                        player.choose(Outcome.Neutral, cards, target, source, game);
++                        return game.getCard(target.getFirstTarget());
++                    }).orElse(null);
++            }
+         }
+         Set<MageObjectReference> addedTokens = new HashSet<>();
+-        Token token = CopyTokenFunction.createTokenCopy(card, game);
+-        for (UUID opponentId : game.getOpponents(source.getControllerId())) {
+-            token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true, Collections.singleton(opponentId));
+-            token.getLastAddedTokenIds()
+-                    .stream()
+-                    .map(uuid -> new MageObjectReference(uuid, game))
+-                    .forEach(addedTokens::add);
++        if (card != null) {
++            Token token = CopyTokenFunction.createTokenCopy(card, game);
++            for (UUID opponentId : game.getOpponents(source.getControllerId())) {
++                token.putOntoBattlefield(1, game, source, source.getControllerId(), true, true, Collections.singleton(opponentId));
++                token.getLastAddedTokenIds()
++                        .stream()
++                        .map(uuid -> new MageObjectReference(uuid, game))
++                        .forEach(addedTokens::add);
++            }
+         }
+         game.addDelayedTriggeredAbility(new AtTheBeginOfNextEndStepDelayedTriggeredAbility(
+                 new SacrificeTargetEffect().setTargetPointer(new FixedTargets(addedTokens)), TargetController.YOU
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/MarduSiegebreakerTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/MarduSiegebreakerTest.java
+new file mode 100644
+index 0000000..8b02db1
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/MarduSiegebreakerTest.java
+@@ -0,0 +1,48 @@
++package org.mage.test.cards.single;
++
++import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.player.TestPlayer;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * CR 603.7a: the attack trigger's resolution creates the delayed "sacrifice those
++ * tokens" ability whether or not a token was made. With no exiled card to copy,
++ * the ability still triggers at the beginning of the end step (and sacrifices nothing).
++ */
++public class MarduSiegebreakerTest extends CardTestPlayerBase {
++
++    private static final String siegebreaker = "Mardu Siegebreaker";
++
++    @Test
++    public void test_DelayedSacrificeTriggerWithNothingExiled() {
++        setStrictChooseMode(true);
++
++        addCard(Zone.HAND, playerA, siegebreaker);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains");
++        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
++        addCard(Zone.BATTLEFIELD, playerA, "Swamp");
++        addCard(Zone.BATTLEFIELD, playerA, "Wastes");
++
++        // "up to one other target creature you control": choose none.
++        addTarget(playerA, TestPlayer.TARGET_SKIP);
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, siegebreaker);
++        attack(1, playerA, siegebreaker); // haste
++
++        runCode("delayed sacrifice trigger at the beginning of the end step", 1, PhaseStep.END_TURN, playerA,
++                (info, player, game) -> {
++                    Assert.assertEquals("one delayed ability on the stack", 1, game.getStack().size());
++                    Assert.assertTrue("the delayed sacrifice ability is on the stack",
++                            game.getStack().getFirstOrNull().getStackAbility() instanceof AtTheBeginOfNextEndStepDelayedTriggeredAbility);
++                });
++
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        // No token was made, so the trigger sacrifices nothing.
++        assertPermanentCount(playerA, siegebreaker, 1);
++    }
++}
