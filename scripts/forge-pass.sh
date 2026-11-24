@@ -155,8 +155,21 @@ for s in "$@"; do
 	if ! "$od" gen ${gen_printed[@]+"${gen_printed[@]}"} -manifest "oracle/compliance/manifests/$s.json" -level "$lvl" -out "$d/scen.jsonl" >"$d/gen.log" 2>&1; then
 		echo "$s: gen FAILED"; tail -3 "$d/gen.log"; rc=1; continue
 	fi
-	if ! "$od" forge-export -scenarios "$d/scen.jsonl" -out "$d/forge-req.jsonl" >"$d/export.log" 2>&1; then
+	# -runner pins the preflight to the runner this pass replays with: the
+	# registry default only resolves from the repository root, which a
+	# FORGE_PASS_RUNNER override must not bypass.
+	if ! "$od" forge-export -scenarios "$d/scen.jsonl" -out "$d/forge-req.jsonl" -runner "$runner" >"$d/export.log" 2>&1; then
 		echo "$s: forge-export FAILED"; tail -3 "$d/export.log"; rc=1; continue
+	fi
+	# Refused items (cards the pinned Forge cannot resolve) are not in the
+	# request file, so they would silently leave the three-way ledger; name
+	# them here. forge-diff has no row for them and adjudicate skips them as
+	# "no forge-diff row for this scenario".
+	refused=$(/usr/bin/grep -c . "$d/forge-prep.jsonl" 2>/dev/null || true)
+	[ -n "$refused" ] || refused=0
+	if [ "$refused" -gt 0 ]; then
+		echo "$s: forge-export refused $refused item(s) (forge_lacks_card, not compared):"
+		sed 's/^/    /' "$d/forge-prep.jsonl"
 	fi
 	# Incremental replay: keep only the request lines whose sha the Forge
 	# cache does not hold. The cache path mirrors oraclediff.Cache.path.
