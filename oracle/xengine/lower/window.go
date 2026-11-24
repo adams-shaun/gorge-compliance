@@ -367,9 +367,7 @@ func (l *Lowered) firstUnlowered(at int) int {
 // Goblin-town's chapter I discarding the active seat's hand). A probe that
 // cannot run is left to the self-check's own harness verdict.
 func setupAnswerReasons(reg *cards.Registry, it oraclegen.Item) []string {
-	probe := it
-	probe.Steps = nil
-	res, err := rules.RunOracleScenarioJSON(reg, probe.Raw())
+	res, err := rules.RunOracleScenarioJSON(reg, setupProbeRaw(it))
 	if err != nil {
 		return nil
 	}
@@ -386,6 +384,18 @@ func setupAnswerReasons(reg *cards.Registry, it oraclegen.Item) []string {
 		why[reasonSetupAnswer+d.Kind] = true
 	}
 	return sortedKeys(why)
+}
+
+// setupProbeRaw is the runner JSON of the setup-only probe: the item's
+// scenario with no gameplay steps. The recorded die rolls are gameplay rolls
+// on gameplay steps (markDieRolls never records a setup roll), so the probe
+// leaves them out: gorge's runner rejects a roll whose step is outside the
+// probe's zero-step range, and the guard would then be silently skipped.
+func setupProbeRaw(it oraclegen.Item) []byte {
+	probe := it
+	probe.Steps = nil
+	probe.DieRolls = nil
+	return probe.Raw()
 }
 
 // CheckWindow is SelfCheck for a window, against its own tape.

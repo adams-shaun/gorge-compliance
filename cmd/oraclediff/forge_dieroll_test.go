@@ -19,7 +19,8 @@ import (
 // natural roll instead of rolling its own. The roll is not a gorge decision
 // (Forge poses no decision for a die), so it must not be exported as one: a
 // decision the driver never consumes would be an unconsumed leftover. The
-// side field is also absent from Raw(), which is all gorge's runner reads.
+// side field is also in Raw(), which is all gorge's runner reads, so the runner
+// forces the same roll instead of drawing its own.
 // The driver-side half of the behaviour -- that MyRandom.setRandom's wrapper
 // forwards the bounded draw to the installed generator -- is pinned by
 // forge-oracle's ForcedDieRollTest.productionSetRandomForwardsTheBound.
@@ -41,8 +42,8 @@ func TestForgeRolledDie(t *testing.T) {
 	if len(rq.GorgeDecisions) != 0 {
 		t.Fatalf("die roll exported as a gorge decision: %+v", rq.GorgeDecisions)
 	}
-	if raw := string(rq.Item.Raw()); bytes.Contains([]byte(raw), []byte("die_rolls")) {
-		t.Fatalf("Raw sends the Forge side field to gorge's runner: %s", raw)
+	if raw := string(rq.Item.Raw()); !bytes.Contains([]byte(raw), []byte(`"die_rolls":[{"step":1,"seat":0,"sides":6,"natural":3,"result":3}]`)) {
+		t.Fatalf("Raw does not force the recorded roll on gorge's runner: %s", raw)
 	}
 	b, err := json.Marshal(rq)
 	if err != nil {

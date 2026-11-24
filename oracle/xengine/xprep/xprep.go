@@ -11,7 +11,6 @@
 package xprep
 
 import (
-	"encoding/json"
 	"fmt"
 	"reflect"
 	"regexp"
@@ -131,12 +130,12 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 		return it, refuse(it.ID, ReasonNoXMageCard, "%s", strings.Join(bad, "; "))
 	}
 	sc, castSteps := oraclegen.ChooseTargets(it.Scenario, g.Decisions)
-	if why := sameOutcome(reg, sc, g); why != "" {
+	if why := sameOutcome(reg, it, sc, g); why != "" {
 		return it, refuse(it.ID, ReasonRetarget, "%s", why)
 	}
 	it.Scenario = sc
 	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, keepTokenLooks(playStepUnlessPays(sc.Steps, g.Decisions)))
-	g.Decisions = append(g.Decisions, pendingResolutionDecisions(reg, sc, g)...)
+	g.Decisions = append(g.Decisions, pendingResolutionDecisions(reg, it, sc, g)...)
 	it.XAnswers = oraclegen.XAnswersForScenario(reg, g, sc, modes, castSteps)
 	if len(it.XAnswers) == 0 {
 		// Nothing to script: still one (empty) entry per step, as the
@@ -237,7 +236,7 @@ func addDieRollAnswers(answers [][]oraclegen.XAnswer, rolls []oraclegen.DieRoll,
 // still holds its queue. Nothing is guessed: an unwindowed resolution that
 // asks nothing adds nothing, and a continuation that fails leaves the old
 // strict miss in place rather than inventing an answer.
-func pendingResolutionDecisions(reg *cards.Registry, sc oraclegen.Scenario, g rules.OracleResult) []rules.OracleDecision {
+func pendingResolutionDecisions(reg *cards.Registry, it oraclegen.Item, sc oraclegen.Scenario, g rules.OracleResult) []rules.OracleDecision {
 	if len(sc.Steps) == 0 || len(g.Snapshots) != len(sc.Steps)+1 {
 		return nil
 	}
@@ -256,11 +255,7 @@ func pendingResolutionDecisions(reg *cards.Registry, sc oraclegen.Scenario, g ru
 		steps = append(steps, oraclegen.Step{Op: "pass", Seat: seat})
 		probe := sc
 		probe.Steps = steps
-		raw, err := json.Marshal(probe)
-		if err != nil {
-			return nil
-		}
-		res, err := rules.RunOracleScenarioJSON(reg, raw)
+		res, err := rules.RunOracleScenarioJSON(reg, it.RawScenario(probe))
 		if err != nil || len(res.Fails) > 0 || len(res.Snapshots) != len(steps)+1 {
 			return nil
 		}
@@ -375,11 +370,7 @@ func completeModalTrigger(reg *cards.Registry, it *oraclegen.Item, sc oraclegen.
 	probe.Steps = append(slices.Clone(sc.Steps), oraclegen.Step{
 		Op: "pass_to", Step: next, Active: fmt.Sprintf("p%d", g.Snapshots[len(g.Snapshots)-1].Active),
 	})
-	raw, err := json.Marshal(probe)
-	if err != nil {
-		return refuse(it.ID, ReasonModalTrigger, "%s: %v", p.card, err)
-	}
-	res, err := rules.RunOracleScenarioJSON(reg, raw)
+	res, err := rules.RunOracleScenarioJSON(reg, it.RawScenario(probe))
 	if err != nil {
 		return refuse(it.ID, ReasonModalTrigger, "%s: gorge could not continue the window: %v", p.card, err)
 	}
@@ -861,14 +852,10 @@ func stackLost(before, after []rules.OracleSnapStack) bool {
 	return false
 }
 
-// sameOutcome is "" when gorge's runner, given sc, ends in the snapshots g
-// holds, else what differs.
-func sameOutcome(reg *cards.Registry, sc oraclegen.Scenario, g rules.OracleResult) string {
-	b, err := json.Marshal(sc)
-	if err != nil {
-		return err.Error()
-	}
-	res, err := rules.RunOracleScenarioJSON(reg, b)
+// sameOutcome is "" when gorge's runner, given sc and the item's recorded die
+// rolls, ends in the snapshots g holds, else what differs.
+func sameOutcome(reg *cards.Registry, it oraclegen.Item, sc oraclegen.Scenario, g rules.OracleResult) string {
+	res, err := rules.RunOracleScenarioJSON(reg, it.RawScenario(sc))
 	switch {
 	case err != nil:
 		return "rerun: " + err.Error()
