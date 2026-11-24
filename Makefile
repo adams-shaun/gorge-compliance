@@ -18,7 +18,9 @@ GO_TEST_FLAGS ?= -p=2
 # 7a68b79c92 = 4142596fb7 + fork PRs #11 (enters-tapped sets tapped without a TappedEvent: Attentive Sunscribe) and #12 (a
 # static ability's conditional Custom/WhileControlled effect is not discarded on a false condition, CR 611.3a: Undercover Skrull).
 # 33704ee4fe = 7a68b79c92 + fork PR #13 (Hellfire deals 3 when no creature died, X = 0, CR 608.2c).
-XMAGE_REF  ?= 33704ee4fef60b9d2729fe24975832b9eee66a10
+# fdde07931f = b34a6018 (fork gorge) + fork PR #18 (the imprinted mana value X cost adjuster reads X = 0, not
+# Integer.MAX_VALUE, when nothing is imprinted, CR 107.3c: Soul Foundry, Elite Arcanist, Prototype Portal).
+XMAGE_REF  ?= fdde07931f5255721711a9f1ccfd991edcc269b8
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
