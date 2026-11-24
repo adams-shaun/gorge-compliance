@@ -234,20 +234,6 @@ public final class OptionalTargetSkipsTest {
         check(hand.invoke(null, new ArrayList<String>(), choices, Arrays.asList(bears, shock), 1, byName) == null
                 && choices.equals(Arrays.asList("Island")), "a non-candidate choice was consumed");
 
-        Method search = adapter.getDeclaredMethod("noCandidateOptionalAsk", List.class, int.class,
-                java.util.Collection.class);
-        search.setAccessible(true);
-        check(Boolean.TRUE.equals(search.invoke(null, new ArrayList<String>(), 0, new ArrayList<java.util.UUID>())),
-                "an empty optional search was not declined");
-        check(Boolean.FALSE.equals(search.invoke(null, new ArrayList<String>(), 0, Arrays.asList(bears))),
-                "a search with a legal card was declined");
-        check(Boolean.TRUE.equals(search.invoke(null, new ArrayList<String>(Arrays.asList("Forest")), 0,
-                new ArrayList<java.util.UUID>())), "an empty search with a later ask's answer queued was not declined");
-        check(Boolean.FALSE.equals(search.invoke(null, new ArrayList<String>(Arrays.asList(SKIP, "Forest")), 0,
-                new ArrayList<java.util.UUID>())), "a front skip was not left to the base");
-        check(Boolean.FALSE.equals(search.invoke(null, new ArrayList<String>(), 1, new ArrayList<java.util.UUID>())),
-                "a mandatory search was declined");
-
         Method scripted = adapter.getDeclaredMethod("nothingScripted", List.class, List.class);
         scripted.setAccessible(true);
         check(Boolean.TRUE.equals(scripted.invoke(null, new ArrayList<String>(), new ArrayList<String>())),
@@ -255,7 +241,7 @@ public final class OptionalTargetSkipsTest {
         check(Boolean.FALSE.equals(scripted.invoke(null, new ArrayList<String>(Arrays.asList("No")), new ArrayList<String>()))
                 && Boolean.FALSE.equals(scripted.invoke(null, new ArrayList<String>(), new ArrayList<String>(Arrays.asList(SKIP)))),
                 "a scripted queue counted as empty");
-        System.out.println("PASS driver-answered asks gorge records no decision for (hand pick, empty search, unscripted scry)");
+        System.out.println("PASS driver-answered asks gorge records no decision for (hand pick, unscripted scry)");
     }
 
     public static void main(String[] args) throws Exception {

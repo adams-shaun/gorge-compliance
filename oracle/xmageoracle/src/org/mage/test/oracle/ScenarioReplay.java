@@ -1743,6 +1743,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return hasObjectTargetNameOrAlias(game.getObject(id), answer);
         }
 
+        /** Whether a front skip can close this ask: only an "up to" ask whose
+         * minimum is already met can stop early. A skip can never close a
+         * mandatory ask (max == min); there it belongs to a later ask in the
+         * same step and must stay queued (TestPlayer.tryToSkipSelection fails
+         * "Wrong skip command found" on a max == min target). */
+        static boolean skipCanCloseAsk(mage.target.Target target) {
+            return target.getMaxNumberOfTargets() > target.getMinNumberOfTargets()
+                    && target.getSize() >= target.getMinNumberOfTargets();
+        }
+
         /** The candidate an unscripted target ask should take when the rules
          * leave no choice, or null when the base player must answer. gorge
          * settles a lone legal candidate without recording a decision, so no
@@ -1751,22 +1761,58 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * countering the only ability on the stack). This matches by role --
          * one legal candidate and no queued answer of this ask's own -- not by
          * a list of TargetXxx classes, so the next single-candidate ask class
-         * is covered without another branch. A front skip or a head naming
-         * the candidate is this ask's own answer and is left to the base;
-         * a head naming no candidate belongs to a later ask and stays queued. */
+         * is covered without another branch. A head naming the candidate is
+         * this ask's own answer and is left to the base. A front skip is this
+         * ask's own only when {@link #skipCanCloseAsk} says it can close the
+         * ask (an "up to" ask whose minimum is met); otherwise it is a later
+         * ask's skip and stays queued while the lone candidate is taken. */
         static UUID loneTargetChoice(List<String> targetQueue, List<UUID> candidates,
-                BiPredicate<UUID, String> matches) {
+                boolean skipCanCloseAsk, BiPredicate<UUID, String> matches) {
             if (candidates.size() != 1) {
                 return null;
             }
             UUID only = candidates.get(0);
             if (!targetQueue.isEmpty()) {
                 String head = targetQueue.get(0);
-                if (TestPlayer.TARGET_SKIP.equals(head) || matches.test(only, head)) {
+                if (matches.test(only, head)
+                        || TestPlayer.TARGET_SKIP.equals(head) && skipCanCloseAsk) {
                     return null;
                 }
             }
             return only;
+        }
+
+        /** The candidates of a target ask that it has not already chosen. */
+        static List<UUID> unchosenCandidates(mage.target.Target target, java.util.Collection<UUID> possible) {
+            List<UUID> candidates = new ArrayList<>();
+            for (UUID id : possible) {
+                if (!target.contains(id)) {
+                    candidates.add(id);
+                }
+            }
+            return candidates;
+        }
+
+        /** The lone candidate an unscripted target ask should take, or null:
+         * the one rule every target-ask entry point applies (the plain Target
+         * funnel, the Cards/TargetCard funnel and TargetAmount). */
+        UUID unscriptedLoneTarget(mage.target.Target target, java.util.Collection<UUID> possible, Game game) {
+            return loneTargetChoice(getTargets(), unchosenCandidates(target, possible),
+                    skipCanCloseAsk(target), (id, answer) -> answerNamesCandidate(game, id, answer));
+        }
+
+        /** As unscriptedLoneTarget, but for a divided target whose queue
+         * spells an answer "name^X=n": match the name part. */
+        UUID unscriptedLoneAmountTarget(mage.target.TargetAmount target,
+                java.util.Collection<UUID> possible, Game game) {
+            return loneTargetChoice(getTargets(), unchosenCandidates(target, possible),
+                    skipCanCloseAsk(target), (id, answer) -> {
+                        if (answer == null) {
+                            return false;
+                        }
+                        int amount = answer.indexOf("^X=");
+                        return answerNamesCandidate(game, id, amount >= 0 ? answer.substring(0, amount) : answer);
+                    });
         }
 
         @Override
@@ -2144,15 +2190,27 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
 
         /** The cards-list overload TargetCardInLibrary.choose (every library
-         * search) reaches. A search whose filter matches no library card is
-         * declined here rather than failing "Missing TARGET def"
-         * ({@link #noCandidateOptionalAsk}); every other ask is the base's. */
+         * search) reaches. The same two unscripted-ask rules as the plain
+         * Target funnel apply here: an ask with no legal candidate is
+         * declined at any minimum rather than failing "Missing TARGET def",
+         * and a lone legal candidate is taken because gorge settles it without
+         * a decision. Every other ask is the base's. */
         @Override
         public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game) {
-            if (target instanceof mage.target.common.TargetCardInLibrary
-                    && noCandidateOptionalAsk(getTargets(), target.getMinNumberOfTargets() - target.getSize(),
-                            target.possibleTargets(target.getAffectedAbilityControllerId(this.getId()), source, game, cards))) {
-                return false;
+            if (target instanceof mage.target.common.TargetCardInLibrary) {
+                java.util.Collection<UUID> possible = target.possibleTargets(
+                        target.getAffectedAbilityControllerId(this.getId()), source, game, cards);
+                if (unscriptableEmptyAsk(target.getMinNumberOfTargets() - target.getSize(), possible.size(),
+                        !getTargets().isEmpty() && TestPlayer.TARGET_SKIP.equals(getTargets().get(0)))) {
+                    return false;
+                }
+                if (target.getSize() < target.getMaxNumberOfTargets()) {
+                    UUID lone = unscriptedLoneTarget(target, possible, game);
+                    if (lone != null) {
+                        target.addTarget(lone, source, game);
+                        return true;
+                    }
+                }
             }
             if (target instanceof mage.target.common.TargetCardInLibrary
                     && shortSearchStop(getTargets(), target.isRequired(),
@@ -2266,13 +2324,33 @@ public class ScenarioReplay extends CardTestPlayerBase {
         /** A divided target is chosen by TestPlayer.chooseTargetAmount, outside
          * choose and chooseTarget, and reads the queue through the same name/
          * alias matcher. Make that a choice too, so a token ref's live,
-         * creation-order resolution reaches the TargetAmount path. */
+         * creation-order resolution reaches the TargetAmount path. The same
+         * unscripted-ask rules as the plain Target funnel apply: no candidate
+         * at any minimum is declined, and a lone candidate takes the whole
+         * remaining amount (the only distribution the rules leave). */
         @Override
         public boolean chooseTargetAmount(Outcome outcome, mage.target.TargetAmount target,
                 Ability source, Game game) {
             Game previous = choiceGame;
             choiceGame = game;
             try {
+                target.prepareAmount(source, game);
+                if (target.getAmountRemaining() > 0
+                        && (target.getMaxNumberOfTargets() != 0 || target.getMinNumberOfTargets() != 0)) {
+                    java.util.Collection<UUID> possible = target.possibleTargets(
+                            target.getAffectedAbilityControllerId(this.getId()), source, game);
+                    if (unscriptableEmptyAsk(target.getMinNumberOfTargets() - target.getSize(), possible.size(),
+                            !getTargets().isEmpty() && TestPlayer.TARGET_SKIP.equals(getTargets().get(0)))) {
+                        return false;
+                    }
+                    if (target.getSize() < target.getMaxNumberOfTargets()) {
+                        UUID lone = unscriptedLoneAmountTarget(target, possible, game);
+                        if (lone != null) {
+                            target.addTarget(lone, target.getAmountRemaining(), source, game);
+                            return true;
+                        }
+                    }
+                }
                 return super.chooseTargetAmount(outcome, target, source, game);
             } finally {
                 choiceGame = previous;
@@ -2370,22 +2448,6 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return target.getChooseHint() != null && target.getChooseHint().startsWith("to attach ")
                     || target instanceof mage.target.TargetPermanent && target.isNotTarget()
                     && target.getTargetName().contains("can be attached to");
-        }
-
-        /** Whether an optional ask has nothing to answer: it needs no more
-         * picks and no candidate is legal. XMage poses a "you may search your
-         * library for a Food card" TargetCardInLibrary (Courier of
-         * Comestibles' ETB) even when the library holds no Food, and gorge,
-         * which asks nothing of an empty candidate set, records only the
-         * accepted confirm -- so no target answer exists to script. Declining
-         * is then the only legal outcome. The queue is deliberately ignored
-         * (every answer is queued up front, so a later ask's answer sits in
-         * it and no answer can match zero candidates), except a skip at the
-         * front, which belongs to this ask and is the base's to honour (same
-         * rule as {@link #unscriptableEmptyAsk}). */
-        static boolean noCandidateOptionalAsk(List<String> targetQueue, int needed, java.util.Collection<UUID> candidates) {
-            return needed <= 0 && candidates.isEmpty()
-                    && !(!targetQueue.isEmpty() && TestPlayer.TARGET_SKIP.equals(targetQueue.get(0)));
         }
 
         /** The hand card a TargetCardInHand ask reached through chooseTarget
@@ -2652,17 +2714,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // A lone legal candidate is not a choice: gorge settles it
                 // without a decision, so no answer is scripted and strict mode
                 // would stop at "Missing TARGET def" (see loneTargetChoice).
-                // Every target class reaches this one place, so the next
-                // single-candidate ask is answered without a new branch.
                 UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
-                List<UUID> candidates = new ArrayList<>();
-                for (UUID id : target.possibleTargets(abilityControllerId, source, game)) {
-                    if (!target.contains(id)) {
-                        candidates.add(id);
-                    }
-                }
-                UUID lone = loneTargetChoice(getTargets(), candidates,
-                        (id, answer) -> answerNamesCandidate(game, id, answer));
+                java.util.Collection<UUID> possible = target.possibleTargets(abilityControllerId, source, game);
+                UUID lone = unscriptedLoneTarget(target, possible, game);
                 if (lone != null) {
                     target.addTarget(lone, source, game);
                     return true;
