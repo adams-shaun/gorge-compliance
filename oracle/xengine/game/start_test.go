@@ -1,0 +1,197 @@
+package game
+
+import (
+	"errors"
+	"slices"
+	"testing"
+
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
+	"github.com/adams-shaun/gorge/engine/decision"
+	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/engine/state"
+	"github.com/adams-shaun/gorge/testkit/testutil"
+)
+
+// thornvaultPair is the xproof fixture: p0 has Thornvault Forager and four
+// Forests on the battlefield (deck indices 0..4) and Bakersbane Duo on top of
+// the library (5), p1 plays Plains.
+func thornvaultPair() ([2]decks.Deck, *rules.StartSpec) {
+	d0 := decks.Deck{Name: "p0", Colours: "G", Cards: []string{"Thornvault Forager", "Forest", "Forest", "Forest", "Forest", "Bakersbane Duo"}}
+	for len(d0.Cards) < 40 {
+		d0.Cards = append(d0.Cards, "Forest")
+	}
+	d1 := decks.Deck{Name: "p1", Colours: "W"}
+	for len(d1.Cards) < 40 {
+		d1.Cards = append(d1.Cards, "Plains")
+	}
+	return [2]decks.Deck{d0, d1}, &rules.StartSpec{Seats: []rules.StartSeat{{Battlefield: []int{0, 1, 2, 3, 4}, Library: []int{5}}, {}}}
+}
+
+func liveZone(e *rules.Engine, z state.Zone, p state.PlayerID) []string {
+	var out []string
+	for _, id := range e.G.Zone(z, p) {
+		out = append(out, e.G.Obj(id).Face().Name)
+	}
+	return out
+}
+
+func TestPlayStartPlaces(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	pair, start := thornvaultPair()
+	var bf, lib []string
+	seen := false
+	opt := Options{Set: "BLB", MaxTurns: 2, Start: start, OnCut: func(e *rules.Engine, entry int) {
+		if e.G.Turn != 1 || seen {
+			return
+		}
+		seen = true
+		bf = liveZone(e, state.ZBattlefield, 0)
+		lib = liveZone(e, state.ZLibrary, 0)
+	}}
+	play(t, reg, pair, rules.SeedForStarter(1, 2, 0), opt)
+	if !seen {
+		t.Fatal("no cut at turn 1")
+	}
+	forests, forager := 0, 0
+	for _, n := range bf {
+		switch n {
+		case "Forest":
+			forests++
+		case "Thornvault Forager":
+			forager++
+		}
+	}
+	if forager != 1 || forests != 4 || len(bf) != 5 {
+		t.Errorf("p0 battlefield %v, want Thornvault Forager and 4 Forest", bf)
+	}
+	if len(lib) == 0 || lib[0] != "Bakersbane Duo" {
+		t.Errorf("p0 library top %v, want Bakersbane Duo", lib[:min(3, len(lib))])
+	}
+}
+
+// foragerActs lists the turns of the seat-0 activations of Thornvault Forager's
+// ability 2 on tp.
+func foragerActs(tp *Tape) []int32 {
+	var turns []int32
+	for _, e := range tp.Entries {
+		for _, p := range e.Picks {
+			if e.Seat == 0 && p.Kind == "ability" && p.Ability == 2 && p.Ref == "p0:Thornvault Forager" {
+				turns = append(turns, e.Turn)
+			}
+		}
+	}
+	return turns
+}
+
+// The focus seat activates ability 2 of Forager once, in turn 1's main phase.
+// The explore bot activates Forager on its own in this fixture (every seed),
+// so the tape alone cannot tell the focus from the bot: focusSeen reads the
+// focus state instead. It must have found exactly the Forager in the Setup
+// hook, and its bot must have taken the action (done) by the end of turn 1.
+func TestFocusActsOnce(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	pair, start := thornvaultPair()
+	var fst *focusState
+	focusSeen = func(s *focusState) { fst = s }
+	defer func() { focusSeen = nil }()
+	opt := Options{Set: "BLB", MaxTurns: 3, Start: start, Focus: &Focus{Seat: 0, Card: "Thornvault Forager", Kind: "ability", Ability: 2}}
+	tp := play(t, reg, pair, rules.SeedForStarter(1, 2, 0), opt)
+	if fst == nil {
+		t.Fatal("Play never built the focus state")
+	}
+	if len(fst.objs) != 1 {
+		t.Errorf("Setup hook found %d focus objects, want exactly the Forager", len(fst.objs))
+	}
+	if !fst.done {
+		t.Error("the focus seat never took its action: focusBot is not wired into Play's seat")
+	}
+	var turns []int32
+	for _, e := range tp.Entries {
+		for _, p := range e.Picks {
+			if e.Seat == 0 && p.Kind == "ability" && p.Ability == 2 && p.Ref == "p0:Thornvault Forager" {
+				turns = append(turns, e.Turn)
+			}
+		}
+	}
+	if len(turns) == 0 || turns[0] != 1 {
+		t.Errorf("Forager's ability 2 was activated on turns %v, want turn 1 first", turns)
+	}
+}
+
+type stubOpt = decision.Option
+
+func focusDecision(kind decision.Kind, opts ...decision.Option) decision.Decision {
+	return decision.Decision{Kind: kind, Options: opts}
+}
+
+func openState(f Focus, objs ...state.ObjID) *focusState {
+	st := &focusState{f: f, objs: map[state.ObjID]bool{}}
+	for _, o := range objs {
+		st.objs[o] = true
+	}
+	st.e = &rules.Engine{G: &state.Game{Turn: 1, Step: state.StepMain1}}
+	return st
+}
+
+// focusBot.act replaces the bot's answer with the matching option exactly
+// once, defers when nothing matches (staying armed), and defers before turn 1's
+// first main phase.
+func TestFocusActUnit(t *testing.T) {
+	ab := func(obj state.ObjID, i int) stubOpt { return stubOpt{Kind: "ability", Obj: obj, Ability: i} }
+	pass := decision.Intent{Choices: []int{0}}
+
+	st := openState(Focus{Seat: 0, Card: "X", Kind: "ability", Ability: 2}, 7)
+	b := focusBot{st: st}
+	d := focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, ab(9, 2), ab(7, 1), ab(7, 2), ab(7, 2))
+	in, _ := b.act(d, pass, nil)
+	if !slices.Equal(in.Choices, []int{3}) || !st.done {
+		t.Fatalf("first offer: choices %v done %v, want [3] and done (lowest matching index)", in.Choices, st.done)
+	}
+	in, _ = b.act(d, pass, nil)
+	if !slices.Equal(in.Choices, []int{0}) {
+		t.Errorf("second offer: choices %v, want the bot's [0]", in.Choices)
+	}
+
+	// no matching option: defer and stay armed
+	st = openState(Focus{Seat: 0, Card: "X", Kind: "ability", Ability: 2}, 7)
+	b = focusBot{st: st}
+	in, _ = b.act(focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, ab(7, 1)), pass, nil)
+	if !slices.Equal(in.Choices, []int{0}) || st.done {
+		t.Errorf("no match: choices %v done %v, want the bot's answer and still armed", in.Choices, st.done)
+	}
+
+	// before turn 1's first main phase the focus defers
+	st = openState(Focus{Seat: 0, Card: "X", Kind: "ability", Ability: 2}, 7)
+	st.e.G.Step = state.StepUpkeep
+	b = focusBot{st: st}
+	in, _ = b.act(focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, ab(7, 2)), pass, nil)
+	if !slices.Equal(in.Choices, []int{0}) || st.done {
+		t.Errorf("upkeep: choices %v done %v, want deferred", in.Choices, st.done)
+	}
+
+	// a bot error is returned untouched
+	st = openState(Focus{Seat: 0, Card: "X", Kind: "land"}, 7)
+	b = focusBot{st: st}
+	if _, err := b.act(focusDecision(decision.KPriority, stubOpt{Kind: "play_land", Obj: 7}), pass, errors.New("boom")); err == nil || st.done {
+		t.Errorf("bot error: err %v done %v, want the error and still armed", err, st.done)
+	}
+
+	// attack: the first focus attacker joins the bot's attackers, sorted
+	st = openState(Focus{Seat: 0, Card: "X", Kind: "attack"}, 7)
+	b = focusBot{st: st}
+	d = focusDecision(decision.KAttackers, stubOpt{Obj: 4}, stubOpt{Obj: 7}, stubOpt{Obj: 8})
+	in, _ = b.act(d, decision.Intent{Choices: []int{2}}, nil)
+	if !slices.Equal(in.Choices, []int{1, 2}) || !st.done {
+		t.Errorf("attack: choices %v done %v, want [1 2] and done", in.Choices, st.done)
+	}
+
+	// cast and land match their own option kinds
+	for _, c := range []struct{ kind, opt string }{{"cast", "cast"}, {"land", "play_land"}} {
+		st = openState(Focus{Seat: 0, Card: "X", Kind: c.kind}, 7)
+		b = focusBot{st: st}
+		in, _ = b.act(focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, stubOpt{Kind: "ability", Obj: 7}, stubOpt{Kind: c.opt, Obj: 7}), pass, nil)
+		if !slices.Equal(in.Choices, []int{2}) || !st.done {
+			t.Errorf("%s: choices %v done %v, want [2] and done", c.kind, in.Choices, st.done)
+		}
+	}
+}

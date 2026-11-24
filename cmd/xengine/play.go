@@ -95,8 +95,22 @@ func runPlay(args []string) error {
 	pool := fs.String("pool", "", "a file of card names, one per line (# comments): draw the decks from these cards alone, through the same gorge-supported filter and against the ledger as -set; -set only names the run. Not with -random, -forge-only or -dirac")
 	poolFilter := fs.String("pool-filter", "", "with -pool, a file of card names to leave out of the pool (cards a follower refuses)")
 	decksDir := fs.String("decks", "", "a directory of gorge deck files (*.json, engine/deck's format): every game plays two different fixed decks of it, main deck only, instead of building 40-card decks; -set only names the run. A deck gorge does not fully support (or, with -xmage, naming a card XMage spells otherwise) is skipped; DIR/decks.json records each. Not with -pool, -random, -forge-only or -dirac")
+	start := fs.String("start", "", "an xproof start file, or a directory of them (*.json, sorted): play each from its scripted position, one focus seat taking the action the file's key names, and lower the whole game from turn 1's first main phase to the end of the tape (items ...:xs:<set>:<card>:<key>:s<seed>). -set names the ids and is required; not with -random, -pool, -decks, -dirac, -windows, -tape-turns, -format or -forge-only")
 	out := fs.String("out", "", "output dir (default under "+DefaultRoot+")")
 	fs.Parse(args)
+	if *start != "" {
+		if err := startFlagErr(*set, *random, *pool, *decksDir, *dirac, *windows, *tapeTurns, *format, *forgeOnly); err != nil {
+			return err
+		}
+		if *out == "" {
+			*out = filepath.Join(DefaultRoot, *set+"-start")
+		}
+		reg, err := loadReg(*dir)
+		if err != nil {
+			return err
+		}
+		return playStart(reg, []string{*start}, *set, *out, *xmage)
+	}
 	if *set == "" {
 		return fmt.Errorf("play needs -set")
 	}
@@ -639,48 +653,59 @@ func tapePrefix(l lower.Lowered, t *game.Tape, n int) (p lower.Lowered, tf *game
 	return p, &cut, true
 }
 
+// emitter is the rows of one run's items.jsonl, gorge.jsonl and lower.jsonl.
+type emitter struct {
+	out                    string
+	items, gorge, lowerLog *bytes.Buffer
+	hist                   map[string]int
+}
+
+// emit writes the tape file tf of the lowered item l and its rows, given its
+// self-check c: the one place a tape, a window and a start item take their row
+// shape.
+func (e *emitter) emit(l lower.Lowered, tf *game.Tape, c lower.Check) error {
+	row := lowerRow{ID: l.Item.ID, Tape: filepath.Join("tapes", classify.Sanitise(l.Item.ID)+".json")}
+	tb, err := tf.Bytes()
+	if err != nil {
+		return err
+	}
+	if err := writeAtomic(filepath.Join(e.out, row.Tape), tb); err != nil {
+		return err
+	}
+	row.Status, row.Step, row.Field, row.Gorge, row.TapeValue = c.Status, c.Step, c.Field, c.Gorge, c.Tape
+	row.Truncated, row.TruncatedAt, row.FirstEntry, row.Swap = l.Truncated, l.TruncatedAt, l.FirstEntry, l.Swap
+	row.Prelude, row.HasRNG, row.RNGStep = l.Prelude, l.HasRNG, l.RNGStep
+	row.StepEntry, row.Steps = l.StepEntry, len(l.Item.Steps)
+	if c.Status == lower.StatusOK {
+		b, err := jsonl(l.Item)
+		if err != nil {
+			return err
+		}
+		e.items.Write(b)
+		if b, err = jsonl(gorgeRow{ID: row.ID, Result: c.Result}); err != nil {
+			return err
+		}
+		e.gorge.Write(b)
+	} else {
+		it := l.Item
+		row.Item = &it
+	}
+	b, err := jsonl(row)
+	if err != nil {
+		return err
+	}
+	e.lowerLog.Write(b)
+	e.hist[row.Status]++
+	return nil
+}
+
 func play(reg *cards.Registry, deal dealer, tables *dside.Tables, led *cov.Ledger, set string, chunk, games int, seed uint64, out string, windows, xmage bool, tapeTurns []int) error {
 	var items, gorge, lowerLog, diracLog bytes.Buffer
 	exercised := cov.New()
 	exercised.Merge(led)
 	hist := map[string]int{}
-	// emit writes the tape file tf of the lowered item l and its rows, given
-	// its self-check c: the one place a tape and a window take their row shape.
-	emit := func(l lower.Lowered, tf *game.Tape, c lower.Check) error {
-		row := lowerRow{ID: l.Item.ID, Tape: filepath.Join("tapes", classify.Sanitise(l.Item.ID)+".json")}
-		tb, err := tf.Bytes()
-		if err != nil {
-			return err
-		}
-		if err := writeAtomic(filepath.Join(out, row.Tape), tb); err != nil {
-			return err
-		}
-		row.Status, row.Step, row.Field, row.Gorge, row.TapeValue = c.Status, c.Step, c.Field, c.Gorge, c.Tape
-		row.Truncated, row.TruncatedAt, row.FirstEntry, row.Swap = l.Truncated, l.TruncatedAt, l.FirstEntry, l.Swap
-		row.Prelude, row.HasRNG, row.RNGStep = l.Prelude, l.HasRNG, l.RNGStep
-		row.StepEntry, row.Steps = l.StepEntry, len(l.Item.Steps)
-		if c.Status == lower.StatusOK {
-			b, err := jsonl(l.Item)
-			if err != nil {
-				return err
-			}
-			items.Write(b)
-			if b, err = jsonl(gorgeRow{ID: row.ID, Result: c.Result}); err != nil {
-				return err
-			}
-			gorge.Write(b)
-		} else {
-			it := l.Item
-			row.Item = &it
-		}
-		b, err := jsonl(row)
-		if err != nil {
-			return err
-		}
-		lowerLog.Write(b)
-		hist[row.Status]++
-		return nil
-	}
+	em := &emitter{out: out, items: &items, gorge: &gorge, lowerLog: &lowerLog, hist: hist}
+	emit := em.emit
 	// The pairs are drawn against the ledger as it stood at chunk start.
 	for g := 0; g < games; g++ {
 		pair, table := deal(g)

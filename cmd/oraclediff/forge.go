@@ -275,7 +275,7 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 //     completes inside the callback, which then declares the next step. The
 //     pass it replaces passes the same priority first.
 func forgeDeclarations(it oraclegen.Item) oraclegen.Item {
-	if it.Template != lower.Template && it.Template != lower.WindowTemplate {
+	if !lower.IsRecorded(it.Template) {
 		return it
 	}
 	var steps []oraclegen.Step
@@ -327,7 +327,7 @@ func forgeDeclaration(st oraclegen.Step) (decision string, empty, ok bool) {
 // step indexes. The input slice is not modified; a list with nothing to drop
 // is returned as is.
 func forgeDropDeclarationDecisions(it oraclegen.Item, decisions []rules.OracleDecision) []rules.OracleDecision {
-	if it.Template != lower.Template && it.Template != lower.WindowTemplate {
+	if !lower.IsRecorded(it.Template) {
 		return decisions
 	}
 	declared := map[int]string{}
@@ -595,7 +595,7 @@ func filterUntapPicks(d rules.OracleDecision, keep []bool, refs []string) rules.
 // decisions carry the unrewritten step indexes. The input slice is not
 // modified; a list with nothing to drop is returned as is.
 func forgeDropNamedManaAbilityDecisions(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision) []rules.OracleDecision {
-	if it.Template != lower.Template && it.Template != lower.WindowTemplate {
+	if !lower.IsRecorded(it.Template) {
 		return decisions
 	}
 	named := map[int]namedManaAbility{}

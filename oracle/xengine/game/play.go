@@ -44,6 +44,12 @@ type Options struct {
 	// earlier game of the same decks and seed. The explore bots play on from
 	// where it ends.
 	Script []decision.Intent
+	// Start, when non-nil, is a scripted start: gorge's rules.Config.Start,
+	// which genesis applies before turn 1 (indices into the seat's deck).
+	Start *rules.StartSpec
+	// Focus, when non-nil, makes one seat take the focus action once, on its
+	// first chance (focus.go).
+	Focus *Focus
 	// plainSeats seats the bare explore bot where Play seats a bandBot (a test
 	// compares the two on a game with no band).
 	plainSeats bool
@@ -161,6 +167,13 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 	names := make([]string, len(pair))
 	seats := make([]seat.Seat, len(pair))
 	script := opt.Script
+	var fst *focusState
+	if opt.Focus != nil {
+		fst = &focusState{f: *opt.Focus, objs: map[state.ObjID]bool{}}
+		if focusSeen != nil {
+			focusSeen(fst)
+		}
+	}
 	for i, d := range pair {
 		cs := make([]*cards.Card, 0, len(d.Cards))
 		for _, n := range d.Cards {
@@ -178,12 +191,15 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 		if opt.plainSeats {
 			bot = hb
 		}
+		if fst != nil && opt.Focus.Seat == i {
+			bot = focusBot{bot: bot, st: fst}
+		}
 		seats[i] = bot
 		if len(script) > 0 {
 			seats[i] = scripted{bot: bot, script: &script}
 		}
 	}
-	cfg := rules.Config{Names: names, Decks: dk, Tokens: reg.Tokens, Seed: seed, NameUniverse: reg.Universe()}
+	cfg := rules.Config{Names: names, Decks: dk, Tokens: reg.Tokens, Seed: seed, NameUniverse: reg.Universe(), Start: opt.Start}
 	anyCmdr, allCmdr := false, true
 	for _, d := range pair {
 		anyCmdr = anyCmdr || d.Commander != ""
@@ -230,7 +246,12 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 			}
 		}()
 		o, e, err = bench.PlayGame(cfg, seats, maxTurns, maxIntents, bench.Hooks{
-			Setup:  r.setup,
+			Setup: func(e *rules.Engine) {
+				r.setup(e)
+				if fst != nil {
+					fst.read(e)
+				}
+			},
 			Submit: r.submit,
 		})
 	}()
