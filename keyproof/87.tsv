@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8785f42f-87b9-4a0a-89ce-ea423649ba9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8785f9b4-eea2-4b45-9ae4-194b9a715702	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87864421-505c-4bdb-b1e3-3e44e05f2beb	cast	cast-resolve	agreed	-	FX	scen	2	0	From Father to Son/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8788f555-8c18-4842-9716-385afae2b9a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blinkmoth-infusion:cast:s1,f:xs:XP:blinkmoth-infusion:cast:s1	-	-	-	25696bf19d5b	-	c21d7dcb90f7	-	-	2026-11-24	xproof
+8788f555-8c18-4842-9716-385afae2b9a4	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 87890f04-b831-4869-a7de-72789a466c71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87890f04-b831-4869-a7de-72789a466c71	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 878b6808-48af-4047-ac35-bfc58bf92e7d	cast	cast-resolve	agreed	-	FX	scen	2	0	Goblin Bushwhacker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -217,8 +217,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87f39199-3e4b-44fa-8406-62019eb43c10	cast	cast-resolve	agreed	-	X	scen	1	0	Gallia, the Merrymaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87f39199-3e4b-44fa-8406-62019eb43c10	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gallia, the Merrymaker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87f39199-3e4b-44fa-8406-62019eb43c10	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gallia, the Merrymaker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-87f746a3-ca6b-404e-99cc-290a0b23f9c4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87f746a3-ca6b-404e-99cc-290a0b23f9c4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+87f746a3-ca6b-404e-99cc-290a0b23f9c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myojin-of-seeing-winds:cast:s1,f:xs:XP:myojin-of-seeing-winds:cast:s1	-	-	-	25696bf19d5b	-	ae5b0d8a62f8	-	-	2026-11-24	xproof
+87f746a3-ca6b-404e-99cc-290a0b23f9c4	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:myojin-of-seeing-winds:cast:s1,f:xs:XP:myojin-of-seeing-winds:cast:s1	-	-	-	25696bf19d5b	-	ae5b0d8a62f8	-	-	2026-11-24	xproof
 87f82d15-5b6b-400f-8a15-d45a2a735f7d	cast	cast-resolve	agreed	-	X	scen	1	0	Experimental Confectioner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87f82d15-5b6b-400f-8a15-d45a2a735f7d	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 87f82d15-5b6b-400f-8a15-d45a2a735f7d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Experimental Confectioner/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

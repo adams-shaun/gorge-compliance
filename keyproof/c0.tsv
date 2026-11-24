@@ -60,10 +60,10 @@ c02ed1b7-1f8d-4196-a9b6-65e1b5a763d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c02ed1b7-1f8d-4196-a9b6-65e1b5a763d7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c02ed1b7-1f8d-4196-a9b6-65e1b5a763d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c0307f8d-b39a-4180-8a45-ddc019ee39f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c0406e70-8131-4e13-b1d5-4e943ad296b8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c040882e-48ba-469e-9fc6-02e8b68dd58c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c040882e-48ba-469e-9fc6-02e8b68dd58c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c040882e-48ba-469e-9fc6-02e8b68dd58c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c0406e70-8131-4e13-b1d5-4e943ad296b8	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+c040882e-48ba-469e-9fc6-02e8b68dd58c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:genju-of-the-spires:cast:s1,f:xs:XP:genju-of-the-spires:cast:s1	-	-	-	25696bf19d5b	-	6c1d70557f5b	-	-	2026-11-24	xproof
+c040882e-48ba-469e-9fc6-02e8b68dd58c	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+c040882e-48ba-469e-9fc6-02e8b68dd58c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 c04197ad-d2f3-499f-b863-bed0c869519c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-echoverse-fulcrum:f0t0:s1,f:xs:XP:the-echoverse-fulcrum:f0t0:s1	-	-	-	25696bf19d5b	-	ed46f331d8e2	-	-	2026-11-24	xproof
 c04197ad-d2f3-499f-b863-bed0c869519c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Echoverse Fulcrum/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c04197ad-d2f3-499f-b863-bed0c869519c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-echoverse-fulcrum:f0t0:s1,f:xs:XP:the-echoverse-fulcrum:f0t0:s1	-	-	-	25696bf19d5b	-	ed46f331d8e2	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ c0856fea-cbdc-427b-ae00-bfd9311f284f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c0864adb-e9aa-40b6-91ff-a0646193e887	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:helpful-hunter:f0t0:s2,f:xs:XP:helpful-hunter:f0t0:s2	-	-	-	e07cf3a05ba5	-	bf755c5d7141	-	-	2026-11-24	xproof
 c0864adb-e9aa-40b6-91ff-a0646193e887	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:helpful-hunter:f0t0:s2,f:xs:XP:helpful-hunter:f0t0:s2	-	-	-	e07cf3a05ba5	-	bf755c5d7141	-	-	2026-11-24	xproof
 c0880a44-27d5-4e21-915c-678ee46fa3d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c0880a44-27d5-4e21-915c-678ee46fa3d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c0880a44-27d5-4e21-915c-678ee46fa3d9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 c0891157-f3dd-4866-866f-fd13e9be9633	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c0899c12-5462-4ff1-a9e5-d99cffa7c6cc	cast	cast-resolve	agreed	-	FX	scen	2	0	Bombard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c08b444b-6617-4199-b9da-5d4e81cd7597	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

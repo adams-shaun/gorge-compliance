@@ -47,8 +47,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f3ed8a1-ff5f-411b-9d87-0cce52f42344	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f477e2e-220e-48d9-9236-9564478e796a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f477e2e-220e-48d9-9236-9564478e796a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f47a67e-1fcd-4f3f-81d0-1a6868606390	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f47a67e-1fcd-4f3f-81d0-1a6868606390	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6f47a67e-1fcd-4f3f-81d0-1a6868606390	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:teardrop-kami:cast:s1,f:xs:XP:teardrop-kami:cast:s1	-	-	-	25696bf19d5b	-	e28e7e29d8fb	-	-	2026-11-24	xproof
+6f47a67e-1fcd-4f3f-81d0-1a6868606390	f0/a0	TapOrUntap	agreed	-	FX	start	2	0	x:xs:XP:teardrop-kami:cast:s1,f:xs:XP:teardrop-kami:cast:s1	-	-	-	25696bf19d5b	-	e28e7e29d8fb	-	-	2026-11-24	xproof
 6f4848d4-a5dc-4c71-955c-ad2b1cbb7ede	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f4861f4-1b3b-4dbc-b55b-196075d0a693	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f4861f4-1b3b-4dbc-b55b-196075d0a693	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f571092-7244-4223-aa14-f5133cc000d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f571092-7244-4223-aa14-f5133cc000d8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f571092-7244-4223-aa14-f5133cc000d8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f571092-7244-4223-aa14-f5133cc000d8	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6f571092-7244-4223-aa14-f5133cc000d8	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6f5a86bf-caa7-48c9-a59f-b13fb483a9d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f5a86bf-caa7-48c9-a59f-b13fb483a9d4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f5b6cba-3b57-4e6a-afa7-0cb62e5cc7d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6fa90258-3c9f-4723-880f-31871c0772e0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fa9debf-c60e-432d-86c8-aed16556c532	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6faa29c4-582a-42d5-b80c-4dc0bd738493	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6faa6b62-d516-415c-8029-223c3f18f8af	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6faa6b62-d516-415c-8029-223c3f18f8af	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	719da189575a	-	-	2026-11-24	xproof
 6fab0fa0-d082-414e-9bcf-edc0fc1f6211	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fab0fa0-d082-414e-9bcf-edc0fc1f6211	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6facb0f6-fa49-4ce6-9f95-15bb3ce4bcf2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

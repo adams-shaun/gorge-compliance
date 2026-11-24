@@ -23,7 +23,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c22447b-7a7f-4a27-8d3b-1bb664ea94c3	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c22447b-7a7f-4a27-8d3b-1bb664ea94c3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c2dbe90-5784-4bc4-a715-76a61c1ecfbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5c2dbe90-5784-4bc4-a715-76a61c1ecfbc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5c2dbe90-5784-4bc4-a715-76a61c1ecfbc	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 5c2e0762-4994-4c34-b33f-909c2b3f0f43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c30a92b-2e88-4e66-b0a5-fa05304136e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c326102-005d-463c-b9f7-14b034b66baa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cd17347-5558-46f9-b8bb-ae5deeb1f229	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cd35d18-115b-4d7c-8d05-3d4c8303f46e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cd35d18-115b-4d7c-8d05-3d4c8303f46e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cd35d18-115b-4d7c-8d05-3d4c8303f46e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5cd35d18-115b-4d7c-8d05-3d4c8303f46e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 5cdb69e5-9395-4ef6-be18-71e3dd70df66	cast	cast-resolve	agreed	-	X	scen	1	0	Swashbuckler's Whip/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5cdb69e5-9395-4ef6-be18-71e3dd70df66	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Swashbuckler's Whip/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5cdb69e5-9395-4ef6-be18-71e3dd70df66	static#0.0	static#0.0	agreed	-	X	scen	1	0	Swashbuckler's Whip/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

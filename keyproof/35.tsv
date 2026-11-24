@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 3501a839-eef5-44e4-8637-b5754780454e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3501ed98-473c-4a17-8b5f-1e0c00ee75da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 35023c04-ae62-47bf-80a0-faa2d7a67788	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35023c04-ae62-47bf-80a0-faa2d7a67788	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35044f8a-c8e0-41ae-ba61-43109e51f7e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -18,8 +18,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Hulk, Gamma Goliath/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hulk, Gamma Goliath/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3509171e-8d7d-4e9e-97a1-58e6c7d225ed	cast	cast-resolve	agreed	-	X	scen	1	0	Summon: Fenrir/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-350b3c1c-b37e-4279-9b49-0fb93c5e7e33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eyes-of-the-watcher:cast:s1,f:xs:XP:eyes-of-the-watcher:cast:s1	-	-	-	25696bf19d5b	-	6087ca15ca8c	-	-	2026-11-24	xproof
-350b3c1c-b37e-4279-9b49-0fb93c5e7e33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+350b3c1c-b37e-4279-9b49-0fb93c5e7e33	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+350b3c1c-b37e-4279-9b49-0fb93c5e7e33	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 350f5c0a-563f-41c5-8f7b-10f409bb4d3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35101c6c-0bcc-4b1f-9cb5-a82e4d2f8220	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35101c6c-0bcc-4b1f-9cb5-a82e4d2f8220	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,8 +82,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 356a85d9-2570-448c-a455-f4ce915a604f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lady of Laughter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 356e2df2-2b41-4d9d-8723-3e6a17a090e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 356edd68-7dd5-4ab6-a738-6cb0eb2d4e56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35734003-0c94-4a0c-9441-ab989e73bb11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35734003-0c94-4a0c-9441-ab989e73bb11	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35734003-0c94-4a0c-9441-ab989e73bb11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iwamori-of-the-open-fist:f0t0:s1,f:xs:XP:iwamori-of-the-open-fist:f0t0:s1	-	-	-	25696bf19d5b	-	bec6690d2488	-	-	2026-11-24	xproof
+35734003-0c94-4a0c-9441-ab989e73bb11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:iwamori-of-the-open-fist:f0t0:s1,f:xs:XP:iwamori-of-the-open-fist:f0t0:s1	-	-	-	25696bf19d5b	-	bec6690d2488	-	-	2026-11-24	xproof
 35754a21-9fba-4370-a254-292918a777ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35754a21-9fba-4370-a254-292918a777ba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35754a21-9fba-4370-a254-292918a777ba	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

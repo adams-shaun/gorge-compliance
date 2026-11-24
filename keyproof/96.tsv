@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96cf2810-35b8-437e-b609-f9765604b8cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96cf3320-c730-4618-8768-28a179f4d9c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96cf3320-c730-4618-8768-28a179f4d9c0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96cf3c10-733d-4110-9dab-43d0cd4e6629	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96cf3c10-733d-4110-9dab-43d0cd4e6629	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 96d0e4dd-6cc2-4349-ac44-785b50f8dd90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96d1bfc1-b80f-466f-b07d-df1ab361e8e0	cast	cast-resolve	agreed	-	FX	scen	2	0	Summon: G.F. Ifrit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96d508a6-ecd2-4a97-8802-df099a372084	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -158,7 +158,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96d6a400-f1bc-40f8-91ef-1d3cb96926f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96d7b761-b0b2-4ba3-98bd-3a9191ba544e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96de29a1-3178-4c8b-a67b-ab0262442cb6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96de29a1-3178-4c8b-a67b-ab0262442cb6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96de29a1-3178-4c8b-a67b-ab0262442cb6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 96e1d890-4ebb-4c79-8df9-24e3adaf4d9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96e1d890-4ebb-4c79-8df9-24e3adaf4d9b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96e244ef-21b9-4795-a881-c3db23b60cc9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Aang, at the Crossroads/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	static#1.0	static#1.0	agreed	-	X	scen	1	0	Aang, at the Crossroads/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e68c7a-f187-4aa6-998c-238e7c833809	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96e68c7a-f187-4aa6-998c-238e7c833809	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96e68c7a-f187-4aa6-998c-238e7c833809	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 96e6d220-87db-4dab-abaa-e80c9577d89a	cast	cast-resolve	agreed	-	X	scen	1	0	Gossip's Talent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e6d220-87db-4dab-abaa-e80c9577d89a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gossip's Talent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e6d220-87db-4dab-abaa-e80c9577d89a	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gossip's Talent/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

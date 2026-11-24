@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9740ce6d-ef6b-4d70-839a-8bd5e0e1e0a1	cast	cast-resolve	agreed	-	X	scen	1	0	Druid of the Spade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9740ce6d-ef6b-4d70-839a-8bd5e0e1e0a1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Druid of the Spade/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97428d25-d850-4a98-8852-9440e06a9091	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97428d25-d850-4a98-8852-9440e06a9091	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97428d25-d850-4a98-8852-9440e06a9091	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 97435e03-2fff-4fe0-8fa9-69ab0a046a33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9745fc92-4955-48e3-a6c8-1300891cf078	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97489ef7-98c3-4700-bbe6-185215d41b25	cast	cast-resolve	agreed	-	X	scen	1	0	Aloe Alchemist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -78,8 +78,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9777a54b-1c60-4d6b-bb83-c57cb3a1d7e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9777a54b-1c60-4d6b-bb83-c57cb3a1d7e6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9778dd66-6770-4230-9ee1-9b9419e322e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9778dd66-6770-4230-9ee1-9b9419e322e6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9778dd66-6770-4230-9ee1-9b9419e322e6	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9778dd66-6770-4230-9ee1-9b9419e322e6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+9778dd66-6770-4230-9ee1-9b9419e322e6	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 9779f32c-b1a2-42a3-8e78-14c28c3ad254	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sting-bilbo-s-sword:f0t0:s1,f:xs:XP:sting-bilbo-s-sword:f0t0:s1	-	-	-	25696bf19d5b	-	2ca837a8b30f	-	-	2026-11-24	xproof
 9779f32c-b1a2-42a3-8e78-14c28c3ad254	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sting, Bilbo's Sword/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9779f32c-b1a2-42a3-8e78-14c28c3ad254	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sting-bilbo-s-sword:f0t0:s1,f:xs:XP:sting-bilbo-s-sword:f0t0:s1	-	-	-	25696bf19d5b	-	2ca837a8b30f	-	-	2026-11-24	xproof

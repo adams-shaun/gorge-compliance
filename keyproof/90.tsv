@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 900b9409-9c16-414d-8674-2ea42c2415a1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Magmakin Artillerist/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 90109cb4-1e16-4d54-9332-b5fb1e71042c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90109cb4-1e16-4d54-9332-b5fb1e71042c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9013214f-c066-4a09-871f-e9f8396f38a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9013214f-c066-4a09-871f-e9f8396f38a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stream-of-consciousness:cast:s1,f:xs:XP:stream-of-consciousness:cast:s1	-	-	-	25696bf19d5b	-	be380f2fb7cd	-	-	2026-11-24	xproof
 9017da9a-2cd5-42fe-a82d-63c34e952344	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9017da9a-2cd5-42fe-a82d-63c34e952344	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9017da9a-2cd5-42fe-a82d-63c34e952344	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9056eba4-612b-4e82-8689-fe098241b007	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9056eba4-612b-4e82-8689-fe098241b007	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9056eba4-612b-4e82-8689-fe098241b007	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-905889fb-a123-4f7a-afc6-b4c6ccac9105	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:feast-of-worms:cast:s1,f:xs:XP:feast-of-worms:cast:s1	-	-	-	25696bf19d5b	-	7b0c48a5371e	-	-	2026-11-24	xproof
+905889fb-a123-4f7a-afc6-b4c6ccac9105	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 905925ed-2faa-4423-a273-e59edcd98b92	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 905925ed-2faa-4423-a273-e59edcd98b92	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 905e4bd1-f5f2-4691-b13f-ce2628d26a38	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 90d375fa-0487-4990-9a98-260f9ee28d2a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90d8020c-a3e4-4dee-9abf-25d80406b8ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90d8020c-a3e4-4dee-9abf-25d80406b8ab	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90d8020c-a3e4-4dee-9abf-25d80406b8ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90d8020c-a3e4-4dee-9abf-25d80406b8ab	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 90d936b9-6da8-4c99-9133-f7b27839ee24	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90d936b9-6da8-4c99-9133-f7b27839ee24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90e1bcef-53af-4c08-b713-bf10dfcbd577	cast	cast-resolve	agreed	-	X	scen	1	0	Clay-Fired Bricks/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a38bf69-511f-4851-870f-8a65641d832e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Severance Priest/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a38d2d1-c4ff-4088-b1df-5feb9602ee2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a38d2d1-c4ff-4088-b1df-5feb9602ee2e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a38d2d1-c4ff-4088-b1df-5feb9602ee2e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a38d2d1-c4ff-4088-b1df-5feb9602ee2e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3a3a1b35-ae4d-49d5-ae09-5a1693ad53ce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a3a1b35-ae4d-49d5-ae09-5a1693ad53ce	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a3a1b35-ae4d-49d5-ae09-5a1693ad53ce	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -195,9 +195,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ace4689-c822-4434-bb6f-64e56b167a44	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ad5af12-1741-427d-92c4-6a730cd4faa2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ad5af12-1741-427d-92c4-6a730cd4faa2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ad69bfb-2e51-4fe9-8d2f-7d071a4f1c69	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ad69bfb-2e51-4fe9-8d2f-7d071a4f1c69	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:okina-temple-to-the-grandfathers:land:s1,f:xs:XP:okina-temple-to-the-grandfathers:land:s1	-	-	-	25696bf19d5b	-	5a4c729fc18b	-	-	2026-11-24	xproof
 3ad69bfb-2e51-4fe9-8d2f-7d071a4f1c69	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ad69bfb-2e51-4fe9-8d2f-7d071a4f1c69	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ad69bfb-2e51-4fe9-8d2f-7d071a4f1c69	land	land	agreed	-	FX	start	2	0	x:xs:XP:okina-temple-to-the-grandfathers:land:s1,f:xs:XP:okina-temple-to-the-grandfathers:land:s1	-	-	-	25696bf19d5b	-	5a4c729fc18b	-	-	2026-11-24	xproof
 3ad6e495-d0e6-4b07-8f91-fe057e173975	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ad6e495-d0e6-4b07-8f91-fe057e173975	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ad6e495-d0e6-4b07-8f91-fe057e173975	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d4ea910-3b16-4f98-89be-c1b2cfff4bf0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Figure of Fable/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5d4ea910-3b16-4f98-89be-c1b2cfff4bf0	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Figure of Fable/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5d4ed768-0a37-4604-8121-43920ed9fb4a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d520476-740a-4005-801e-472b24fa6497	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d520476-740a-4005-801e-472b24fa6497	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ink-eyes-servant-of-oni:cast:s1,f:xs:XP:ink-eyes-servant-of-oni:cast:s1	-	-	-	25696bf19d5b	-	56a0b293e6a6	-	-	2026-11-24	xproof
 5d520476-740a-4005-801e-472b24fa6497	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d520476-740a-4005-801e-472b24fa6497	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d520476-740a-4005-801e-472b24fa6497	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5de32ec7-3085-4b6b-a52e-5a1b3fdf07d3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5de50aa5-3b30-4d7d-9203-bc8fc0f8fb34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5de63529-7dea-4018-bf46-afb4bc8b69fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5de63529-7dea-4018-bf46-afb4bc8b69fd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5de63529-7dea-4018-bf46-afb4bc8b69fd	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 5dec1b09-4df0-4e9b-9dca-b80134be3343	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5dec1b09-4df0-4e9b-9dca-b80134be3343	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5dec1b09-4df0-4e9b-9dca-b80134be3343	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
