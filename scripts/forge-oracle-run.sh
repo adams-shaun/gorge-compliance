@@ -170,7 +170,20 @@ if [ "$mode" = preflight ]; then
   # the filter drops. A scenario may name a split card by its bare first face
   # (Knowing, for Knowing // Half the Battle); the editions list only the
   # joined name, so funny_has alone never sees it.
-  funny_face() { [ -n "$funny" ] && awk -v p="$1 // " 'index($0, p) == 1 { f = 1 } END { exit !f }' <<<"$funny"; }
+  # Forge's filter is exact on the joined name, so a bare name that is ALSO a
+  # standalone cardsfolder card (Bind, Smelt: Mystery Booster Playtest's
+  # "Bind // Liberate" and "Smelt // Herd // Saw" rows) still loads; only a
+  # bare name defined solely as a face of a multi-face file (an AlternateMode:
+  # line) is refused.
+  funny_face() {
+    [ -n "$funny" ] || return 1
+    awk -v p="$1 // " 'index($0, p) == 1 { f = 1 } END { exit !f }' <<<"$funny" || return 1
+    local f
+    while IFS= read -r f; do
+      grep -q '^AlternateMode:' "$f" || return 1
+    done < <(grep -rlxF -e "Name:$1" "$cardsfolder" 2>/dev/null)
+    return 0
+  }
   while IFS= read -r n; do
     [ -n "$n" ] || continue
     # A name resolves when its own Name: line is in the cardsfolder, or (a
