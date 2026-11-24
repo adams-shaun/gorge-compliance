@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 473da1b6-232b-4428-a66d-30262246b47a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4741d842-12e6-4a8c-96b1-9e68c7074874	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4741d842-12e6-4a8c-96b1-9e68c7074874	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47437865-0032-4f47-b0ab-034cc841bb84	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+47437865-0032-4f47-b0ab-034cc841bb84	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 47496941-8007-45a0-a981-76c683cbddc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 474db5db-914e-474d-b0c2-7987d5986dc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 474db5db-914e-474d-b0c2-7987d5986dc3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -143,8 +143,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47e33aa1-2f54-471c-a484-de13bcd2dceb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Screeching Soulbreaker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 47e33aa1-2f54-471c-a484-de13bcd2dceb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Screeching Soulbreaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 47e33aa1-2f54-471c-a484-de13bcd2dceb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Screeching Soulbreaker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-47e3aa22-8806-408f-b93e-0d0b800866f6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47e3aa22-8806-408f-b93e-0d0b800866f6	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+47e3aa22-8806-408f-b93e-0d0b800866f6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+47e3aa22-8806-408f-b93e-0d0b800866f6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 47e3aa22-8806-408f-b93e-0d0b800866f6	land	play-land	agreed	-	X	scen	1	0	Orion/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 47e79913-322e-4ba6-9bf8-3b4c1c82a6c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-slash:cast:s1,f:xs:XP:mind-slash:cast:s1	-	-	-	25696bf19d5b	-	e308e5f96160	-	-	2026-11-24	xproof
 47e79913-322e-4ba6-9bf8-3b4c1c82a6c4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

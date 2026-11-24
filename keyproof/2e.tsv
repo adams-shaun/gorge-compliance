@@ -11,8 +11,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e03e44a-9fff-4490-859f-b42e89e8563a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e03e44a-9fff-4490-859f-b42e89e8563a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e056743-78ff-45b6-80df-7486d52d5df6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e0753ad-7f76-4d26-8e87-6f201378f333	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e0753ad-7f76-4d26-8e87-6f201378f333	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2e0753ad-7f76-4d26-8e87-6f201378f333	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+2e0753ad-7f76-4d26-8e87-6f201378f333	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 2e0753ad-7f76-4d26-8e87-6f201378f333	land	play-land	agreed	-	X	scen	1	0	Ferenginar/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2e0b225a-d4b4-4f53-8fea-8c6c37102920	cast	cast-resolve	agreed	-	FX	scen	2	0	Illvoi Operative/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2e0b225a-d4b4-4f53-8fea-8c6c37102920	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Illvoi Operative/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e41ae94-db31-4060-881b-a2f6d834c1ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e44a02f-af94-4696-b979-cdf68285c87a	cast	cast-resolve	agreed	-	FX	scen	2	0	Daniels, Temporal Agent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2e44a02f-af94-4696-b979-cdf68285c87a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e44a02f-af94-4696-b979-cdf68285c87a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2e44a02f-af94-4696-b979-cdf68285c87a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 2e44fd5c-5c7f-4ca8-90cd-34015047eb26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e44fd5c-5c7f-4ca8-90cd-34015047eb26	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e467fab-e808-44d3-99bf-e3621baeb7cb	cast	cast-resolve	agreed	-	X	scen	1	0	Erode/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -164,8 +164,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ec8c540-73bf-4412-a53a-499e9b9fd213	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ec8c540-73bf-4412-a53a-499e9b9fd213	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ecda53d-ac24-4b28-aed8-2a5fb1449f85	cast	cast-resolve	agreed	-	X	scen	1	0	Worf, Honor-Bound Warrior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2ecda53d-ac24-4b28-aed8-2a5fb1449f85	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ecda53d-ac24-4b28-aed8-2a5fb1449f85	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ecda53d-ac24-4b28-aed8-2a5fb1449f85	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+2ecda53d-ac24-4b28-aed8-2a5fb1449f85	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 2ecda58d-9aa9-4857-bdc5-b6b7b70a79c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ecf7771-8061-4710-ad2e-80b092ae0b4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ed1879a-83b8-48df-a6d2-fe28e912b4c5	cast	cast-resolve	agreed	-	X	scen	1	0	Slagstorm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

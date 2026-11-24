@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d60c80d-9a95-4051-bbf7-02ca51ee1be2	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Scrawling Crawler/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d614b37-d578-4f35-8fd8-3c7800d5f742	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d61f3a7-5861-479b-8312-f2d308c35b68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d61f3a7-5861-479b-8312-f2d308c35b68	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d61f3a7-5861-479b-8312-f2d308c35b68	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1d6742a3-592b-4e67-8cc6-56e2962ad7c7	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:meltstrider-s-gear:f0t0:s2,f:xs:XP:meltstrider-s-gear:f0t0:s2	-	-	-	267e485f6204	-	59ed9c2f006b	-	-	2026-11-24	xproof
 1d6742a3-592b-4e67-8cc6-56e2962ad7c7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Meltstrider's Gear/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d6742a3-592b-4e67-8cc6-56e2962ad7c7	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:meltstrider-s-gear:f0t0:s2,f:xs:XP:meltstrider-s-gear:f0t0:s2	-	-	-	267e485f6204	-	59ed9c2f006b	-	-	2026-11-24	xproof

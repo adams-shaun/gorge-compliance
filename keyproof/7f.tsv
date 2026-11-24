@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f31aa43-cf75-4488-b47f-e16e923a2d01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f31aa43-cf75-4488-b47f-e16e923a2d01	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f32c581-4d4a-4873-8e4b-b95e13790481	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phantasmal-dragon:cast:s1,f:xs:XP:phantasmal-dragon:cast:s1	-	-	-	25696bf19d5b	-	a41217d86ab8	-	-	2026-11-24	xproof
-7f32c581-4d4a-4873-8e4b-b95e13790481	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7f32c581-4d4a-4873-8e4b-b95e13790481	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 7f34f6b4-18ef-40d7-a599-5c29ba468b89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f34f6b4-18ef-40d7-a599-5c29ba468b89	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f3f7fb0-da18-467b-bf57-2ded458fda4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fb837d7-e2c9-40f8-8a7d-156b3aa86830	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fba522b-a292-4d1f-9999-f787ba2d5fd1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:neelix-moral-support:f0t0:s1,f:xs:XP:neelix-moral-support:f0t0:s1	-	-	-	25696bf19d5b	-	97c8c081cb04	-	-	2026-11-24	xproof
 7fba522b-a292-4d1f-9999-f787ba2d5fd1	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:neelix-moral-support:f0t0:s1,f:xs:XP:neelix-moral-support:f0t0:s1	-	-	-	25696bf19d5b	-	97c8c081cb04	-	-	2026-11-24	xproof
-7fba522b-a292-4d1f-9999-f787ba2d5fd1	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fba522b-a292-4d1f-9999-f787ba2d5fd1	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 7fbb9547-a805-4768-8574-e283e64600a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fbb9547-a805-4768-8574-e283e64600a4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fbb98cc-585c-4184-97f5-9b3d3ebdb1e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

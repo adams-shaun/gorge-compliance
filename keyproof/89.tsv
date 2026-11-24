@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 895f23a2-55b7-4cc0-8939-2efaaf097e6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 895f23a2-55b7-4cc0-8939-2efaaf097e6f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 896077f9-b26e-4964-9279-03ee284a3e89	cast	cast-resolve	agreed	-	X	scen	1	0	Starfleet Security/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-896077f9-b26e-4964-9279-03ee284a3e89	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+896077f9-b26e-4964-9279-03ee284a3e89	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 89661ef9-cb42-401a-ae45-b57bb8dac033	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 896ea218-3019-47e4-b0a0-2487335872bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 896fc91a-1f57-45e2-b135-37bc9c2c80a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 89b88a6c-92be-43eb-9de4-f79cc75c6d90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 89b88a6c-92be-43eb-9de4-f79cc75c6d90	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 89b9efc8-d1cd-4b2a-acf3-4f0dd1629167	cast	cast-resolve	agreed	-	X	scen	1	0	Moopsy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-89b9efc8-d1cd-4b2a-acf3-4f0dd1629167	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+89b9efc8-d1cd-4b2a-acf3-4f0dd1629167	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 89bd056d-8f5b-4d0e-b80a-58a984e21100	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 89c3c81b-8960-4f79-b2ec-f13560058071	cast	cast-resolve	agreed	-	FX	scen	2	0	The Master of Lake-town/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89c3c81b-8960-4f79-b2ec-f13560058071	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Master of Lake-town/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

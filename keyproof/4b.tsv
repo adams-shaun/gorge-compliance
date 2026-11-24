@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b35b928-1088-457d-bd0d-3b14dc4ab230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b35b928-1088-457d-bd0d-3b14dc4ab230	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b36f8e2-ba7d-4bc7-890f-dd6ab73eef17	cast	cast-resolve	agreed	-	X	scen	1	0	Picard, Leading by Example/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4b36f8e2-ba7d-4bc7-890f-dd6ab73eef17	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b36f8e2-ba7d-4bc7-890f-dd6ab73eef17	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 4b3dd7e5-e0b5-4773-bb16-37b757ae74d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b3dd7e5-e0b5-4773-bb16-37b757ae74d8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b3dd7e5-e0b5-4773-bb16-37b757ae74d8	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b51edb1-37cc-4993-a8a5-2eb5f79fa191	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b51edb1-37cc-4993-a8a5-2eb5f79fa191	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b5b0864-7ddd-497d-a7d6-a31c49bb9c7b	cast	cast-resolve	agreed	-	X	scen	1	0	Shuttle Ace/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4b5b0864-7ddd-497d-a7d6-a31c49bb9c7b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b5b0864-7ddd-497d-a7d6-a31c49bb9c7b	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 4b5c7f11-75f2-4bad-86cd-f0232861f569	cast	cast-resolve	agreed	-	X	scen	1	0	Danitha, Spear of Agony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b5c7f11-75f2-4bad-86cd-f0232861f569	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Danitha, Spear of Agony/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b5c7f11-75f2-4bad-86cd-f0232861f569	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Danitha, Spear of Agony/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

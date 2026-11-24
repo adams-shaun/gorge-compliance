@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 746d4445-f28d-41af-827a-2b613b9b84ee	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 746dc1d8-f245-47be-abd5-50ca6ac0d1af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 746e494e-fdc4-415e-8a82-d35e11ebeccb	cast	cast-resolve	agreed	-	X	scen	1	0	Zero, Incorporeal Sensate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-746e494e-fdc4-415e-8a82-d35e11ebeccb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+746e494e-fdc4-415e-8a82-d35e11ebeccb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 7471e445-4655-4336-9769-3debd197b77c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7472af8e-2e93-43b2-bc32-a3741f6d7502	cast	cast-resolve	agreed	-	X	scen	1	0	Ozai, the Phoenix King/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7472af8e-2e93-43b2-bc32-a3741f6d7502	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ozai, the Phoenix King/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74adb283-9bef-4a6f-9489-bcfcba53e8d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74adb283-9bef-4a6f-9489-bcfcba53e8d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74b58f31-7634-4b51-a900-6fbfccfb3cd2	cast	cast-resolve	agreed	-	FX	scen	2	0	Constable Odo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-74b58f31-7634-4b51-a900-6fbfccfb3cd2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+74b58f31-7634-4b51-a900-6fbfccfb3cd2	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 74b631c5-9420-496e-8845-3b050d3d5340	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74b631c5-9420-496e-8845-3b050d3d5340	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74b7fe23-5d3a-4092-8d78-7c0eba8f6f73	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

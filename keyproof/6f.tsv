@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f2ba142-5e7c-4709-ae03-e028cb2a9872	static#0.0	static#0.0	agreed	-	X	scen	1	0	Super-Soldier Serum/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f2e4607-bece-42ba-a2a3-5dc50f246793	cast	cast-resolve	agreed	-	FX	scen	2	0	Mammoth Bellow/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f2e8083-29af-4cdb-a2cb-216b2f3f5616	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tea-earl-grey-hot:f0t0:s1,f:xs:XP:tea-earl-grey-hot:f0t0:s1	-	-	-	25696bf19d5b	-	a7eb629e4cda	-	-	2026-11-24	xproof
-6f2e8083-29af-4cdb-a2cb-216b2f3f5616	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6f2e8083-29af-4cdb-a2cb-216b2f3f5616	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6f2e8083-29af-4cdb-a2cb-216b2f3f5616	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tea-earl-grey-hot:f0t0:s1,f:xs:XP:tea-earl-grey-hot:f0t0:s1	-	-	-	25696bf19d5b	-	a7eb629e4cda	-	-	2026-11-24	xproof
 6f2f4c31-74dc-4a52-96ad-94c3d51398d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f34d70e-7a3a-43f7-b2c9-f89519804d3c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6fbade4d-502d-45d7-a79e-3fd9e3e7ccdf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fc26faa-94a8-433f-8863-126c2d2e73b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fc7401f-66fe-4d17-be2f-afcf892be740	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:federation-probe:f0t0:s1,f:xs:XP:federation-probe:f0t0:s1	-	-	-	25696bf19d5b	-	f7ae74a85959	-	-	2026-11-24	xproof
-6fc7401f-66fe-4d17-be2f-afcf892be740	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6fc7401f-66fe-4d17-be2f-afcf892be740	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6fcdb870-a1b6-49fe-8b5c-cdde074a7f7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fd44fb9-3433-4cb0-95a4-4ac8170b2166	cast	cast-resolve	agreed	-	X	scen	1	0	S.H.I.E.L.D. Spy Kit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6fd44fb9-3433-4cb0-95a4-4ac8170b2166	f0/a0	activate#0.0	agreed	-	X	scen	1	0	S.H.I.E.L.D. Spy Kit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
