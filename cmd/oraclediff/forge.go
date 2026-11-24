@@ -102,8 +102,15 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     Sight puts a token on top, then surveils 1) is exported with picks naming
 //     the cards now on top of the seat's library, so Forge keeps what it looks
 //     at (see forgeTokenLooks).
-//   - Except for the untap, top hand_move and token-look rewrites above,
-//     decisions are exported verbatim.
+//   - A Soulbond pairing answer (resume "soulbond", the one pick kind "pair")
+//     names the creature Forge's BondEffect asks for by trigger half: the
+//     "another unpaired creature enters" half asks which SOURCE creature to
+//     pair with (ValidCards$ Creature.Self+!Paired) while gorge answered the
+//     entering partner it offered, so the pick is rewritten to the source;
+//     the "this creature enters" half already asks the partner and is left
+//     alone (see forgeSoulbondPairSource).
+//   - Except for the untap, top hand_move, token-look and Soulbond pair
+//     rewrites above, decisions are exported verbatim.
 //     pay_<C>, pay_generic and pay_life are
 //     pick kinds of gorge's hybrid/Phyrexian pip ask, and a mana-ability
 //     "activate" pick is a payment-window choice; Forge asks neither, so the
@@ -303,6 +310,7 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 	if forgeDriver {
 		decisions = forgeLibraryTopOrder(decisions, g.Snapshots)
 		decisions = forgeTokenLooks(g, decisions)
+		decisions = forgeSoulbondPairSource(reg, g, decisions)
 		decisions = forgeGraveyardOrderDecisions(it, g, decisions)
 	} else {
 		decisions = forgeDropGraveyardOrderDecisions(decisions)

@@ -1,0 +1,80 @@
+diff --git a/engine/effects/count_operand.go b/engine/effects/count_operand.go
+index a1561f09..d3025bc2 100644
+--- a/engine/effects/count_operand.go
++++ b/engine/effects/count_operand.go
+@@ -328,6 +328,13 @@ func resolveCountOperand(h Host, c *Ctx, tok string, depth int) (int32, bool) {
+ 	if n, err := strconv.Atoi(tok); err == nil {
+ 		return int32(n), true
+ 	}
++	// A runtime StoreSVar write shadows the printed body of the same name
++	// (the NumResolved read's precedence): the unless gate's RhysticPaid 0
++	// must beat Rhystic Lightning's printed Number$1, or the declined {2}
++	// reads as paid and the Compare deals 2 instead of 4.
++	if v, ok := runtimeSVar(c, tok); ok {
++		return v, true
++	}
+ 	if c.SVars != nil {
+ 		if body, ok := c.SVars[tok]; ok {
+ 			return evalCountExprOK(h, c, body, depth+1)
+diff --git a/engine/rules/farm_rhystic_lightning_test.go b/engine/rules/farm_rhystic_lightning_test.go
+new file mode 100644
+index 00000000..ecc03602
+--- /dev/null
++++ b/engine/rules/farm_rhystic_lightning_test.go
+@@ -0,0 +1,56 @@
++package rules
++
++import (
++	"testing"
++
++	"github.com/adams-shaun/gorge/testkit/testutil"
++)
++
++// TestFarmRhysticLightning is a constructed scenario (three Mountains, the
++// spell cast at p1, p1 declines the {2}) for the cause behind the SUP farm
++// windows whose first differing field is p1.life; it is not a replay of them.
++// A declined {2} must take the false branch: deal 4, not the printed default's 2.
++//
++// CR 118.12: "Some spells, activated abilities, and triggered abilities read,
++// '[Do something]. If [a player] [does, doesn't, or can't], [effect].' ... The
++// 'If [a player] [does, doesn't, or can't]' clause checks whether the player
++// chose to pay an optional cost or started to pay a mandatory cost, regardless
++// of what events actually occurred." The cost is paid when the spell
++// resolves; CR 608.2c then has the resolving spell follow its instructions in
++// the order written, so the StoreSVar's 0 is written before DBDmg reads X.
++// Forge (the only follower on these windows) deals 4; at GORGE_PIN 5437c13946
++// gorge deals 2 because resolveCountOperand reads the printed
++// SVar:RhysticPaid default (SVar:RhysticPaid:Number$1) before the runtime
++// write.
++func TestFarmRhysticLightning(t *testing.T) {
++	t.Parallel()
++	reg := testutil.CorpusRegistry(t)
++	scenario := `{
++	  "name": "farm-rhystic-lightning-sup-s370",
++	  "turn": 1,
++	  "cr": ["118.12", "608.2c"],
++	  "why": "Rhystic Lightning: declining {2} writes RhysticPaid 0 before DBDmg reads X, so the Compare's false branch deals 4 (Forge agrees)",
++	  "setup": {
++	    "p0": {"battlefield": ["Mountain", "Mountain", "Mountain"], "hand": ["Rhystic Lightning"], "life": 20},
++	    "p1": {"life": 20}
++	  },
++	  "steps": [
++	    {"op": "cast", "seat": 0, "card": "p0:Rhystic Lightning", "mana": "RRR", "targets": ["p1"]},
++	    {"op": "pass", "seat": 0},
++	    {"op": "pass", "seat": 1, "answers": [{"kind": "modes", "pick": ["Don't pay"]}]},
++	    {"op": "pass", "seat": 0},
++	    {"op": "pass", "seat": 1}
++	  ]
++	}`
++	res, err := RunOracleScenarioJSON(reg, []byte(scenario))
++	if err != nil {
++		t.Fatalf("scenario JSON: %v", err)
++	}
++	if len(res.Fails) != 0 {
++		t.Fatalf("scenario failed: %v", res.Fails)
++	}
++	last := res.Snapshots[len(res.Snapshots)-1]
++	if got := last.Players[1].Life; got != 16 {
++		t.Fatalf("p1 life at %s = %d, want 16 (Rhystic Lightning deals 4 when {2} is declined; the printed SVar default would deal 2)", last.Checkpoint, got)
++	}
++}

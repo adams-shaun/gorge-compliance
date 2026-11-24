@@ -1,0 +1,141 @@
+{
+ "name": "xproof start The Goose Mother f0/t0 seed 2",
+ "turn": 1,
+ "setup": {
+  "p0": {
+   "battlefield": [
+    "Forest",
+    "Island"
+   ],
+   "hand": [
+    "The Goose Mother"
+   ],
+   "library_top": [
+    "Forest",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Island",
+    "Forest",
+    "Island",
+    "Island",
+    "Island",
+    "Island",
+    "Island",
+    "Forest"
+   ],
+   "life": 20
+  },
+  "p1": {
+   "battlefield": [
+    "Phyrexian Walker"
+   ],
+   "library_top": [
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains"
+   ],
+   "life": 20
+  }
+ },
+ "steps": [
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Island",
+   "ability_index": 0
+  },
+  {
+   "op": "cast",
+   "seat": 0,
+   "card": "p0:The Goose Mother",
+   "answers": [
+    {
+     "kind": "choose",
+     "pick": [
+      "X = 0"
+     ]
+    }
+   ]
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  }
+ ]
+}

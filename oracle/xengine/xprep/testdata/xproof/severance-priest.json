@@ -1,0 +1,143 @@
+{
+ "name": "xproof start Severance Priest f0/t0 seed 2",
+ "turn": 1,
+ "setup": {
+  "p0": {
+   "battlefield": [
+    "Plains",
+    "Swamp",
+    "Forest"
+   ],
+   "hand": [
+    "Severance Priest"
+   ],
+   "library_top": [
+    "Forest",
+    "Swamp",
+    "Forest",
+    "Swamp",
+    "Swamp",
+    "Forest",
+    "Forest",
+    "Forest",
+    "Plains",
+    "Swamp",
+    "Swamp",
+    "Swamp"
+   ],
+   "life": 20
+  },
+  "p1": {
+   "library_top": [
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains",
+    "Plains"
+   ],
+   "life": 20
+  }
+ },
+ "steps": [
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Plains",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Swamp",
+   "ability_index": 0
+  },
+  {
+   "op": "activate",
+   "seat": 0,
+   "card": "p0:Forest",
+   "ability_index": 0
+  },
+  {
+   "op": "cast",
+   "seat": 0,
+   "card": "p0:Severance Priest"
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "resolve",
+   "seat": 0,
+   "answers": [
+    {
+     "kind": "target",
+     "pick": [
+      "p1"
+     ]
+    },
+    {
+     "kind": "choose",
+     "pick": [
+      "yes"
+     ]
+    }
+   ]
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  },
+  {
+   "op": "pass",
+   "seat": 0
+  },
+  {
+   "op": "pass",
+   "seat": 1
+  }
+ ]
+}
