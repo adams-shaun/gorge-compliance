@@ -1316,6 +1316,8 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var casts map[int]bool
 	var forage map[int][]string
 	var ownBounce map[int]bool
+	var snaps []rules.OracleSnapshot
+	var orderAsks map[int]bool
 	for _, ex := range extras {
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
@@ -1329,10 +1331,22 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		if pipPlans == nil {
 			pipPlans = ex.pips
 		}
+		if snaps == nil {
+			snaps = ex.snaps
+		}
+		if orderAsks == nil {
+			orderAsks = ex.orderAsks
+		}
 		if casts == nil {
 			casts = ex.casts
 		}
 	}
+	// A hand_move/library_placement goes top-first (reverse the answers for
+	// XMage's successive top asks) or bottom-first (keep them) by where the
+	// after-step checkpoint shows the picks, not by a list of cards. An
+	// explicit changezone_alternative "bottom" overrides a checkpoint that
+	// cannot tell a bottom-into-empty-library placement from a top one.
+	topPlacement := LibraryTopPlacements(ds, snaps)
 	out := make([][]XAnswer, steps)
 	any := false
 	// The plan's pip decisions: the ordinal of each pip decision among its
@@ -1904,13 +1918,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				forcedOrder := d.Min == d.Max && d.Max == d.Options
 				// The producer, not the option Kind, decides which question the
 				// forced order answers: a full top reorder
-				// (effRearrangeTopOfLibrary) and a Dig all-to-bottom remainder
-				// both offer every card with Kind "bottom" (the reorder's pile
-				// B is empty), but they ask opposite orders. gorge's
-				// ResumeKind is what tells them apart: "arrange" is the top
-				// reorder, "dig_arrange" the bottom remainder.
+				// (effRearrangeTopOfLibrary), a CR 401.4 library_placement
+				// arrangement on top, and a Dig all-to-bottom remainder all
+				// offer every card with one shared Kind, but they ask opposite
+				// orders. gorge's ResumeKind plus the after-step library top
+				// (topPlacement) is what tells them apart.
 				fullTopReorder := d.Resume == "arrange" && d.ArrangeKind == "bottom" &&
-					len(d.Picks) == d.Options
+					len(d.Picks) == d.Options ||
+					d.ArrangeKind == "library_placement" && topPlacement[i] &&
+						len(d.Picks) == d.Options
 				if forcedOrder && fullTopReorder {
 					// gorge's picks are the final top-first order, but XMage's
 					// putCardsOnTopOfLibrary asks only while more than one card
@@ -1970,6 +1986,19 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 		default:
 			continue
+		}
+		if topPlacement[i] && HandMoveBatch(d) && orderAsks[i] {
+			// XMage asks the hand selection first, then its "card ORDER to
+			// put … from the TOP" dialog N-1 times and auto-tops the card
+			// never named. The selection answer above already names all
+			// picks; the order answers follow it, last N-1 picks reversed,
+			// so picks[0] stays the unnamed topmost card. Only a verified
+			// order-dialog effect gets these answers: a self put-back
+			// (Brainstorm, Dream Cache) has no such ask, and an extra
+			// choice would derail the next dialog.
+			for k := len(d.Picks) - 1; k >= 1; k-- {
+				as = append(as, XAnswer{d.Seat, "choice", d.Picks[k]})
+			}
 		}
 		if len(as) > 0 {
 			if pendingTrig != nil {

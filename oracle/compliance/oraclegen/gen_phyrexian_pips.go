@@ -41,6 +41,15 @@ type xanswersExtra struct {
 	forage map[int][]string
 	// ownBounce marks the steps that pose an own-bounce hidden pick.
 	ownBounce map[int]bool
+	// snaps is the gorge result's checkpoints: the destination of a
+	// hand_move/library_placement decision is not a field, so the answer
+	// router re-derives a top placement from the after-step library top.
+	snaps []rules.OracleSnapshot
+	// orderAsks marks the hand_move decisions whose effect XMage implements
+	// with an explicit "card ORDER to put … from the TOP" dialog. A self
+	// put-back (Brainstorm, Dream Cache) auto-tops without that ask, so its
+	// order answers would be left queued for the next dialog.
+	orderAsks map[int]bool
 }
 
 // isPipDecision reports whether d is one of gorge's ManaAsk pip decisions
