@@ -1,0 +1,122 @@
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/mm2/DeathDeniedTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/mm2/DeathDeniedTest.java
+new file mode 100644
+index 00000000000..96c2fcabf5e
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/mm2/DeathDeniedTest.java
+@@ -0,0 +1,56 @@
++package org.mage.test.cards.single.mm2;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * Death Denied {X}{B}{B}
++ * Return X target creature cards from your graveyard to your hand.
++ * <p>
++ * X is announced before targets are chosen (CR 601.2b, 601.2c), so with X = 0 the spell has
++ * no targets and is castable with no creature card in the graveyard.
++ */
++public class DeathDeniedTest extends CardTestPlayerBase {
++
++    @Test
++    public void testNoCreatureCardCastsForZero() {
++        setStrictChooseMode(true);
++        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 2);
++        addCard(Zone.HAND, playerA, "Death Denied");
++        addCard(Zone.GRAVEYARD, playerA, "Swamp", 3); // no creature card
++        addCard(Zone.GRAVEYARD, playerB, "Grizzly Bears"); // not "your graveyard"
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Death Denied");
++        setChoice(playerA, "X=0");
++
++        setStopAt(1, PhaseStep.BEGIN_COMBAT);
++        execute();
++
++        assertGraveyardCount(playerA, "Death Denied", 1);
++        assertGraveyardCount(playerA, "Swamp", 3);
++        assertGraveyardCount(playerB, "Grizzly Bears", 1);
++        assertHandCount(playerA, 0);
++        assertHandCount(playerB, 0);
++    }
++
++    @Test
++    public void testOneCreatureCardStillTargetsForOne() {
++        setStrictChooseMode(true);
++        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
++        addCard(Zone.HAND, playerA, "Death Denied");
++        addCard(Zone.GRAVEYARD, playerA, "Grizzly Bears");
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Death Denied");
++        setChoice(playerA, "X=1");
++        addTarget(playerA, "Grizzly Bears");
++
++        setStopAt(1, PhaseStep.BEGIN_COMBAT);
++        execute();
++
++        assertGraveyardCount(playerA, "Death Denied", 1);
++        assertGraveyardCount(playerA, "Grizzly Bears", 0);
++        assertHandCount(playerA, "Grizzly Bears", 1);
++    }
++}
+diff --git a/Mage/src/main/java/mage/abilities/AbilityImpl.java b/Mage/src/main/java/mage/abilities/AbilityImpl.java
+index c8f722c6cb4..5baee053b74 100644
+--- a/Mage/src/main/java/mage/abilities/AbilityImpl.java
++++ b/Mage/src/main/java/mage/abilities/AbilityImpl.java
+@@ -46,6 +46,7 @@ import mage.target.common.TargetCardInLibrary;
+ import mage.target.common.TargetControlledPermanent;
+ import mage.target.targetadjustment.GenericTargetAdjuster;
+ import mage.target.targetadjustment.TargetAdjuster;
++import mage.target.targetadjustment.TargetsCountAdjuster;
+ import mage.util.CardUtil;
+ import mage.util.GameLog;
+ import mage.util.ThreadLocalStringBuilder;
+@@ -1283,9 +1284,18 @@ public abstract class AbilityImpl implements Ability {
+ 
+     protected static boolean canChooseTargetAbility(Ability ability, Modes modes, Game game, UUID controllerId) {
+         int found = 0;
++        // "X target ..." with X = 0 has no targets (CR 601.2b, 601.2c): the blueprint target the adjuster
++        // later resizes needs no candidate while the adjusted count can be 0 (X is not announced yet)
++        boolean blueprintNeedsNoTarget = ability.getTargetAdjuster() instanceof TargetsCountAdjuster
++                && ((TargetsCountAdjuster) ability.getTargetAdjuster()).needsNoTargets(ability, game);
+         for (Mode mode : modes.values()) {
+             boolean validTargets = true;
++            boolean blueprint = blueprintNeedsNoTarget && mode.getTargets() == ability.getTargets();
+             for (Target target : mode.getTargets()) {
++                if (blueprint) {
++                    blueprint = false; // the adjuster's blueprint is the mode's first target
++                    continue;
++                }
+                 UUID abilityControllerId = target.getAffectedAbilityControllerId(controllerId);
+                 if (!target.canChooseOrAlreadyChosen(abilityControllerId, ability, game)) {
+                     validTargets = false;
+diff --git a/Mage/src/main/java/mage/target/targetadjustment/TargetsCountAdjuster.java b/Mage/src/main/java/mage/target/targetadjustment/TargetsCountAdjuster.java
+index c8ffbea7271..03a6beacf3e 100644
+--- a/Mage/src/main/java/mage/target/targetadjustment/TargetsCountAdjuster.java
++++ b/Mage/src/main/java/mage/target/targetadjustment/TargetsCountAdjuster.java
+@@ -23,9 +23,23 @@ public class TargetsCountAdjuster extends GenericTargetAdjuster {
+         this.dynamicValue = value;
+     }
+ 
++    /**
++     * True when the adjusted number of targets is zero ("X target ..." with X = 0), so the
++     * ability needs no target at all. X is announced before targets are chosen (CR 601.2b,
++     * 601.2c), and until then an {X} value reads 0: a playability check made before the
++     * adjustment therefore must not require a candidate for the blueprint target.
++     */
++    public boolean needsNoTargets(Ability ability, Game game) {
++        return targetCount(ability, game) <= 0;
++    }
++
++    private int targetCount(Ability ability, Game game) {
++        return dynamicValue.calculate(game, ability, ability.getEffects().get(0));
++    }
++
+     @Override
+     public void adjustTargets(Ability ability, Game game) {
+-        int count = dynamicValue.calculate(game, ability, ability.getEffects().get(0));
++        int count = targetCount(ability, game);
+         ability.getTargets().clear();
+         if (count <= 0) {
+             return;
