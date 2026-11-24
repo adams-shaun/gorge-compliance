@@ -101,9 +101,9 @@ public final class ScenarioReplayManaAbilityScopedToCardTest {
                     rows.add(JsonParser.parseString(line).getAsJsonObject());
                 }
             }
-            equal(5, n);
+            equal(6, n);
         }
-        equal(5, rows.size());
+        equal(6, rows.size());
         for (JsonObject row : rows) {
             check(!row.has("harness"), row.get("id").getAsString() + " failed its replay: " + row.get("harness"));
         }
@@ -193,10 +193,31 @@ public final class ScenarioReplayManaAbilityScopedToCardTest {
         equal(0, strings(player(bothAfter, 0).getAsJsonArray("hand")).size());
         equal("R", player(bothAfter, 0).get("pool").getAsString());
 
+        // A land drawn mid-window (Coil and Catch) and played has no setup
+        // alias that names it: the ref "Island#8" must bind to the permanent
+        // the play created. Steps 18-20 tap Island#8, #6 and #5; without the
+        // binding the by-name fallback took setup Island#5 for the first tap
+        // and step 20 found it already tapped (harness row), leaving the
+        // drawn Island untapped.
+        JsonObject drawnRow = rows.get(5);
+        equal("manascope-drawn-island-played", drawnRow.get("id").getAsString());
+        JsonArray drawnSnaps = drawnRow.getAsJsonArray("snapshots");
+        JsonObject drawnPlayed = snapshot(drawnRow, 8);
+        equal("step 7 (play)", drawnPlayed.get("checkpoint").getAsString());
+        equal(7, permanents(drawnPlayed, "Island").size());
+        equal(4, tappedCount(drawnPlayed));
+        JsonObject drawnEnd = snapshot(drawnRow, 21);
+        equal("step 20 (activate)", drawnEnd.get("checkpoint").getAsString());
+        equal(7, permanents(drawnEnd, "Island").size());
+        equal(7, tappedCount(drawnEnd));
+        equal("UUU", player(drawnEnd, 0).get("pool").getAsString());
+        check(drawnSnaps.size() > 21, "the drawn-Island window stopped before step 20");
+
         System.out.println("PASS mana ability is scoped to the named source "
                 + "(Hidden Grotto not Island, pool C; Swamp#2 not Swamp#1, pool B; "
                 + "a played Plains#2 is still the named permanent; "
                 + "Simian Spirit Guide is exiled from hand for R, "
-                + "even with a same-named battlefield copy)");
+                + "even with a same-named battlefield copy; "
+                + "a drawn, played Island#8 is tapped, not a setup Island)");
     }
 }
