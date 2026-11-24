@@ -147,6 +147,19 @@ func TestGateRefusesSetupTapTrigger(t *testing.T) {
 	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:taps") {
 		t.Fatalf("reasons %v, want setup_trigger:taps", r)
 	}
+
+	// The same trigger granted by a static (Dionus, Elvish Archdruid's
+	// AddTrigger$): the body is an SVar on the granting permanent, not a
+	// printed trigger of the permanent that becomes tapped, so the gate must
+	// follow the grant to the Elf it affects.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	dionus := plantBattlefieldCard(t, reg, e, "Dionus, Elvish Archdruid", func(o *state.Object) bool {
+		return o.Owner != e.G.Active && o.Owner == o.Controller
+	})
+	dionus.Tapped = true
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:taps") {
+		t.Fatalf("static-granted tap trigger: reasons %v, want setup_trigger:taps", r)
+	}
 }
 
 // TestGateRefusesSetupCounterTrigger: the counters field is placed as a
@@ -154,6 +167,8 @@ func TestGateRefusesSetupTapTrigger(t *testing.T) {
 // trigger would resolve it.
 func TestGateRefusesSetupCounterTrigger(t *testing.T) {
 	reg, pairs := fdnPairs(t, 1)
+
+	// A printed "whenever counters are put on" trigger.
 	e, at := expressibleCut(t, reg, pairs[0], 100)
 	sta := plantBattlefieldCard(t, reg, e, "Stalwart Successor", func(*state.Object) bool { return true })
 	var counters bool
@@ -175,6 +190,20 @@ func TestGateRefusesSetupCounterTrigger(t *testing.T) {
 	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:counter_added") {
 		t.Fatalf("reasons %v, want setup_trigger:counter_added", r)
 	}
+
+	// A trigger the static grants (Cursed Wombat's AddTrigger$): its counter
+	// trigger is an SVar on the Wombat, not a printed trigger on the permanent
+	// that receives the setup counter, so the gate must follow the
+	// Affected$ grant to that permanent.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	wombat := plantBattlefieldCard(t, reg, e, "Cursed Wombat", func(*state.Object) bool { return true })
+	wombat.Counters = []state.Counter{{Kind: "P1P1", N: 1}}
+	if net, ok := setupCounters(wombat); !ok || net["P1P1"] != 1 {
+		t.Fatalf("setup counters on Cursed Wombat = %v (restatable %v), want P1P1=1", net, ok)
+	}
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:counter_added") {
+		t.Fatalf("static-granted counter trigger: reasons %v, want setup_trigger:counter_added", r)
+	}
 }
 
 // TestGateRefusesSetupLifeTrigger: the setup life field is a LifeChange, so a
@@ -186,6 +215,22 @@ func TestGateRefusesSetupLifeTrigger(t *testing.T) {
 	e.G.Players[0].Life = 22
 	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:life_gained") {
 		t.Fatalf("reasons %v, want setup_trigger:life_gained", r)
+	}
+
+	// A trigger the static grants (Field-Tested Frying Pan's AddTrigger$):
+	// the body lives on the Equipment, granted to the creature its
+	// Affected$ names, so the gate must follow the grant to that creature.
+	e, at = expressibleCut(t, reg, pairs[0], 100)
+	bearer := plantBattlefieldCard(t, reg, e, "Hemosymbic Mite", func(o *state.Object) bool {
+		return o.Owner == e.G.Active && o.Owner == o.Controller
+	})
+	pan := plantBattlefieldCard(t, reg, e, "Field-Tested Frying Pan", func(o *state.Object) bool {
+		return o.ID != bearer.ID && o.Owner == e.G.Active && o.Owner == o.Controller
+	})
+	pan.AttachedTo = bearer.ID
+	e.G.Players[0].Life = 22
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, "setup_trigger:life_gained") {
+		t.Fatalf("static-granted life trigger: reasons %v, want setup_trigger:life_gained", r)
 	}
 }
 
