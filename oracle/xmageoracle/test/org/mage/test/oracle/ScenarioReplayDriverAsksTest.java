@@ -58,9 +58,10 @@ public final class ScenarioReplayDriverAsksTest {
         multiCandidateSearch();
         phyrexianLife();
         wishDeclined();
+        optionalMultiCandidateTarget();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
-                + " lone forced target, multi-candidate search, phyrexian life, wish decline");
+                + " lone forced target, multi-candidate search, phyrexian life, wish decline, optional multi-candidate target");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -95,6 +96,37 @@ public final class ScenarioReplayDriverAsksTest {
                 "a head naming an effect's text is a scripted order");
         check((Boolean) adapter("replacementScripted", types, new ArrayList<>(Arrays.asList("Edgewall Inn*choose a color")), texts),
                 "TestPlayer's object*ability form is a scripted order");
+    }
+
+    /** Disruptive Stormbrood: an optional "up to one target artifact or
+     * enchantment" with two legal candidates. The generator scripts the
+     * decision gorge's own replay made (a decline's [target_skip] or a pick's
+     * name); the driver must not guess between them. An explicit skip and an
+     * explicit pick are both this ask's own answer and stay at the queue front
+     * for TestPlayer, an unscripted ask is not declared unscriptable (it stays
+     * the base's strict miss), and a skip queued for a LATER target object is
+     * hidden from this ask. */
+    private static void optionalMultiCandidateTarget() throws Exception {
+        Class<?>[] empty = {int.class, int.class, boolean.class};
+        check(!(Boolean) adapter("unscriptableEmptyAsk", empty, 0, 2, false),
+                "an optional ask with two candidates and no answer must not be auto-declined");
+        check(!(Boolean) adapter("unscriptableEmptyAsk", empty, 0, 2, true),
+                "an optional ask with two candidates and its own skip is the base's");
+        Class<?>[] hide = {List.class};
+        List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
+        check(((List<?>) adapter("hideAfterNextSkip", hide, skip)).isEmpty()
+                        && skip.equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "an explicit skip stays at the front for this ask");
+        List<String> pick = new ArrayList<>(Collections.singletonList("Seal of Removal"));
+        check(((List<?>) adapter("hideAfterNextSkip", hide, pick)).isEmpty()
+                        && pick.equals(Collections.singletonList("Seal of Removal")),
+                "an explicit pick stays at the front for this ask");
+        List<String> laterSkip = new ArrayList<>(Arrays.asList("Seal of Removal", TestPlayer.TARGET_SKIP));
+        check(((List<?>) adapter("hideAfterNextSkip", hide, laterSkip))
+                        .equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "a skip queued for a later target object is hidden from this ask");
+        check(laterSkip.equals(Collections.singletonList("Seal of Removal")),
+                "the explicit pick remains this ask's head answer");
     }
 
     /** North Wind Avatar: WishEffect asks "Put a card you own from outside the

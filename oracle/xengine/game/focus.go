@@ -25,6 +25,9 @@ type Focus struct {
 	// Mode, for "cast", is the cast option's payment kind (decision.Option.Mode,
 	// e.g. "kicked"); "" takes any cast option of the card.
 	Mode string
+	// Times is how many times the seat takes the action (0: once), each at its
+	// first chance after the last.
+	Times int
 }
 
 // focusState is what every seat's focusBot shares with the Setup hook: the
@@ -35,6 +38,15 @@ type focusState struct {
 	e    *rules.Engine
 	objs map[state.ObjID]bool
 	done bool
+	n    int // actions taken
+}
+
+// took records one focus action, done once the seat has taken Times of them.
+func (s *focusState) took() {
+	s.n++
+	if s.n >= max(s.f.Times, 1) {
+		s.done = true
+	}
 }
 
 // focusSeen, when set (by a test), is handed each Play's focusState as it is
@@ -159,7 +171,7 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 				ok = o.Kind == "play_land"
 			}
 			if ok {
-				st.done = true
+				st.took()
 				in.Choices = []int{i}
 				in.Payment = nil
 				return in, nil
@@ -177,7 +189,7 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 			if !st.objs[o.Obj] {
 				continue
 			}
-			st.done = true
+			st.took()
 			if !slices.Contains(in.Choices, i) {
 				in.Choices = append(in.Choices, i)
 				slices.Sort(in.Choices)

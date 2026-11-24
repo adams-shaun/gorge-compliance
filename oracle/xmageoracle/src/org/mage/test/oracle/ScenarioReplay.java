@@ -482,6 +482,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
             int occurrence = currentOccurrence(game);
             List<PlayerAction> hidden = hideOtherOccurrences(occurrence);
             try {
+                if (game.getStep() != null && game.getStep().getType() == PhaseStep.DECLARE_ATTACKERS) {
+                    // Every attacker was forced, so selectAttackers never
+                    // ran: the declaration satisfied the queued commands.
+                    dropAutoDeclaredAttacks(game);
+                }
                 return super.priority(game);
             } finally {
                 getActions().addAll(hidden);
@@ -1425,7 +1430,35 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 getChoices().add(0, convokeColour);
                 convokeColour = null;
             }
+            numberChoiceAnswer(choice, getChoices());
             return super.choose(outcome, choice, game);
+        }
+
+        /** A "choose a number" pick is queued as "X=<n>", the answer XMage's
+         * getAmount reads. Some cards ask the number through a Choice dialog
+         * instead (Shapeshifter's ShapeshifterEffect: a ChoiceImpl keyed or
+         * labelled "0".."7"), where "X=<n>" names no entry. Rewrite the head
+         * answer to "<n>" only when the dialog offers exactly "<n>" (as a
+         * key, a key's text, or a plain choice) and does not offer "X=<n>".
+         * Returns whether it rewrote the answer. */
+        static boolean numberChoiceAnswer(mage.choices.Choice choice, List<String> choices) {
+            if (choices.isEmpty() || !choices.get(0).matches("X=-?[0-9]+")) {
+                return false;
+            }
+            String head = choices.get(0);
+            String number = head.substring(2);
+            java.util.Collection<String> offered = new ArrayList<>();
+            if (choice.isKeyChoice()) {
+                offered.addAll(choice.getKeyChoices().keySet());
+                offered.addAll(choice.getKeyChoices().values());
+            } else if (choice.getChoices() != null) {
+                offered.addAll(choice.getChoices());
+            }
+            if (offered.contains(head) || !offered.contains(number)) {
+                return false;
+            }
+            choices.set(0, number);
+            return true;
         }
 
         /** Elects the first alternative cost (gorge's AltCostIndex-1 choice)
@@ -1503,6 +1536,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             List<PlayerAction> hidden = hideOtherOccurrences(occurrence);
             try {
                 owner.applyExactAttackers(this, game);
+                dropAutoDeclaredAttacks(game);
                 super.selectAttackers(game, attackingPlayerId);
             } finally {
                 getActions().addAll(hidden);
@@ -1519,6 +1553,48 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 super.selectBlockers(source, game, defendingPlayerId);
             } finally {
                 getActions().addAll(hidden);
+            }
+        }
+
+        /** The attacker twin of dropAutoDeclaredBlocks. XMage's
+         * Combat.selectAttackers runs checkAttackRequirements before it asks
+         * this player (CR 508.1d), so a creature forced to attack -- by its
+         * own static or by another permanent's, such as Goblin Rabblemaster's
+         * "Other Goblin creatures you control attack each combat if able" --
+         * is already declared and tapped, and TestPlayer cannot consume its
+         * queued attack command. gorge records the same attacker, so drop, per
+         * name, as many of this turn's queued attack commands as this player
+         * has attacking permanents of that name. When every attacker is
+         * forced, getAvailableAttackers is empty and selectAttackers never
+         * runs; priority in the declare-attackers step calls this then. A
+         * command for a creature XMage did not declare stays queued. */
+        private void dropAutoDeclaredAttacks(Game game) {
+            if (!getId().equals(game.getCombat().getAttackingPlayerId())
+                    || game.getCombat().getAttackers().isEmpty()) {
+                return;
+            }
+            Map<String, Integer> attacking = new HashMap<>();
+            for (UUID id : game.getCombat().getAttackers()) {
+                Permanent p = game.getBattlefield().getPermanent(id);
+                if (p != null && getId().equals(p.getControllerId())) {
+                    attacking.merge(p.getName(), 1, Integer::sum);
+                }
+            }
+            for (PlayerAction action : new ArrayList<>(getActions())) {
+                if (action.getTurnNum() != game.getTurnNum() || !action.getAction().startsWith("attack:")) {
+                    continue;
+                }
+                String command = action.getAction().substring("attack:".length());
+                if (command.startsWith(TestPlayer.ATTACK_SKIP)) {
+                    continue;
+                }
+                String name = combatBaseName(command.split("\\$")[0]);
+                Integer left = attacking.get(name);
+                if (left == null || left == 0) {
+                    continue;
+                }
+                attacking.put(name, left - 1);
+                getActions().remove(action);
             }
         }
 
@@ -1778,8 +1854,34 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * and every other candidate is matched by name or setup alias. Shared
          * by the choose and chooseTarget forced-pick paths so a player
          * candidate cannot be missed by one of them. */
+        /** The picks of one queued answer: TestPlayer's "^" join splits into
+         * its segments, in order; any other answer is its own one segment. */
+        static List<String> answerSegments(String answer) {
+            List<String> parts = new ArrayList<>();
+            for (String part : answer.split("\\^")) {
+                if (!part.isEmpty()) {
+                    parts.add(part);
+                }
+            }
+            return parts;
+        }
+
         private boolean answerNamesCandidate(Game game, UUID id, String answer) {
             if (answer == null) {
+                return false;
+            }
+            if (answer.contains("^")) {
+                // A multi-pick answer ("Ornithopter^Sol Ring", TestPlayer's
+                // "^" join) names a candidate when any segment does. Missing
+                // it made a forced ask take every candidate in XMage's
+                // possibleTargets (HashSet) order, so Rottenmouth Viper's two
+                // sacrificed permanents reached the graveyard in a random
+                // order and the scripted pick was left unused.
+                for (String part : answerSegments(answer)) {
+                    if (answerNamesCandidate(game, id, part)) {
+                        return true;
+                    }
+                }
                 return false;
             }
             if (answer.startsWith("targetPlayer=")) {

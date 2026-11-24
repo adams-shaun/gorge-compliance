@@ -1318,7 +1318,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var searchZones map[int]searchZoneAsk
 	var forage map[int][]string
 	var ownBounce map[int]bool
+	var tapThenUntap map[int]bool
 	var bolster map[int]bool
+	var supports map[int]supportAnswers
 	var snaps []rules.OracleSnapshot
 	var orderAsks map[int]bool
 	var sources map[int][]string
@@ -1329,8 +1331,14 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
 		}
+		if tapThenUntap == nil {
+			tapThenUntap = ex.tapThenUntap
+		}
 		if bolster == nil {
 			bolster = ex.bolster
+		}
+		if supports == nil {
+			supports = ex.supports
 		}
 		if forage == nil {
 			forage = ex.forage
@@ -1389,15 +1397,8 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			pipPlanned[i] = true
 		}
 	}
-	// A step whose card name is then searched for (Ancient Vendetta's "choose
-	// a card name. Search ... for cards with that name"): XMage poses the name
-	// dialog however narrowly gorge offered it, and the search must find it.
-	namedSearch := map[int]bool{}
 	modal := map[int]bool{}
 	for _, d := range ds {
-		if pickKind(d, 0) == "search" {
-			namedSearch[d.Step] = true
-		}
 		if d.Kind == "mode" && d.Step >= 0 {
 			modal[d.Step] = true
 		}
@@ -1406,6 +1407,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
 	}
+	routing.tapThenUntap = tapThenUntap
 	if searchZones != nil {
 		routing.searchZones = searchZones
 	}
@@ -1454,6 +1456,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	// flip resolves before the step's scripted dialogs re-read the queue;
 	// the measured rows script nothing else on the flip's step).
 	stepFlips := make([][]XAnswer, steps)
+	// Support target answers are collected apart because their step precedes
+	// the decision that poses them: the support target is the source's FIRST
+	// target, so it must lead its announcement step's target queue even when
+	// that step also scripts another target's answer (a support spell's
+	// sub-ability target). Prepending them after demoteTriggerOrderSpans keeps
+	// the trigger-order span indices valid.
+	supportLead := make([][]XAnswer, steps)
 	for _, f := range flips {
 		v := map[bool]string{true: "win", false: "lose"}[f.Win]
 		if f.Step < 0 {
@@ -1506,6 +1515,16 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			// search choices into its own library chooseUse.
 			continue
 		}
+		if sa, ok := supports[i]; ok {
+			// XMage asks a Support pick as a target when the source is
+			// announced, not at the resolution step gorge recorded it on
+			// (support_pick.go). The answers lead the announcement step.
+			if sa.step >= 0 && sa.step < steps && len(sa.answers) > 0 {
+				supportLead[sa.step] = append(supportLead[sa.step], sa.answers...)
+				any = true
+			}
+			continue
+		}
 		folded := d.Via == "target" || (d.Kind == "target" && modal[d.Step])
 		if d.Step >= steps || (folded && d.Resume != "copy_targets" && castSteps[d.Step]) {
 			// A cast step's own targets reach XMage through castSpell; a
@@ -1545,7 +1564,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			continue
 		}
-		if pickKind(d, 0) == "name" && namedSearch[d.Step] && len(d.Picks) == 1 {
+		if len(d.Picks) == 1 && hasNamePick(d) {
+			// XMage's "choose a card name" dialog always ranges over every
+			// card name in its pool (CR 201.3), so it is posed even when
+			// gorge's deck-scoped name universe offered a single option
+			// (Cabal Therapy, Phyrexian Revoker, Silverquill Silencer). The
+			// pick is that dialog's choice answer whether or not a named
+			// search follows (the Ancient Vendetta case), and it is never a
+			// forced one-option ask. Setup-time name choices keep their
+			// setup_choice queue above.
 			out[d.Step] = append(out[d.Step], XAnswer{d.Seat, "choice", d.Picks[0]})
 			any = true
 			continue
@@ -1994,8 +2021,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// offer every card with one shared Kind, but they ask opposite
 				// orders. gorge's ResumeKind plus the after-step library top
 				// (topPlacement) is what tells them apart.
-				fullTopReorder := d.Resume == "arrange" && d.ArrangeKind == "bottom" &&
-					len(d.Picks) == d.Options ||
+				fullTopReorder := FullTopReorder(d) ||
 					d.ArrangeKind == "library_placement" && topPlacement[i] &&
 						len(d.Picks) == d.Options
 				if forcedOrder && fullTopReorder {
@@ -2092,6 +2118,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	// the inert text over them (dropping the scripted answers). Demoting on
 	// the unshifted list keeps the flips leading either way.
 	demoteTriggerOrderSpans(out, trigSpans)
+	for st := range supportLead {
+		if len(supportLead[st]) > 0 {
+			out[st] = append(supportLead[st], out[st]...)
+		}
+	}
 	for st, fs := range stepFlips {
 		if len(fs) > 0 {
 			out[st] = append(fs, out[st]...)
@@ -2113,6 +2144,21 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	return out
 }
 
+// hasNamePick reports whether any pick of d is the engine's card-name option
+// kind. XMage poses its card-name dialog over every name in its card pool
+// whatever universe the engine scoped the ask to (CR 201.3), so such an ask
+// always reaches the choice queue and is never a forced one-option fold. It
+// matches the pick KIND, not pick 0, so a name pick that moves position or
+// shares a decision with another pick cannot slip past.
+func hasNamePick(d rules.OracleDecision) bool {
+	for k := range d.Picks {
+		if pickKind(d, k) == "name" {
+			return true
+		}
+	}
+	return false
+}
+
 // forcedSingleOption reports a one-option ask XMage never poses: exactly one
 // legal answer (Min==Max==Options==1) that is not a target, order or mode ask.
 // A target pick is still a chooseTarget XMage asks for even with one legal
@@ -2125,6 +2171,13 @@ func forcedSingleOption(d rules.OracleDecision) bool {
 		// "you lose 4 life unless ..."): XMage does not pose it; the unless
 		// choice that follows is the real decision.
 		return true
+	}
+	if hasNamePick(d) {
+		// A card-name dialog is always posed over XMage's whole card pool
+		// (CR 201.3), however narrowly gorge's deck-scoped name universe
+		// scoped the ask (Cabal Therapy, Phyrexian Revoker, Silverquill
+		// Silencer). It is a real choice-queue ask, never a forced fold.
+		return false
 	}
 	if d.Kind == "target" || d.Kind == "order" || d.Kind == "mode" {
 		return false

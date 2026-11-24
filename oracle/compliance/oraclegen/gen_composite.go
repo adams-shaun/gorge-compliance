@@ -75,7 +75,12 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 		}
 		// A TargetCardInLibrary(0, MAX) choice is not completed by the
 		// first pick: makeChoose needs an explicit stop after the subset.
-		if zone == "battlefield" {
+		// A DigUntil found move (gorge's diguntil_move) is all or nothing,
+		// so its yes picks every found card: XMage's choose over the
+		// revealed cards then has no target left (isChoiceCompleted) and
+		// would never read the stop (Aurora Awakener, measured "(Choices
+		// of PlayerA) Count are not equal (found [[choice_skip]])").
+		if zone == "battlefield" && d.Resume != "diguntil_move" {
 			d.Max = len(names) + 1
 		} else {
 			d.Max = len(names)
@@ -83,6 +88,31 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 	}
 	collapseRoomLock(ds)
 	unposeCollectEvidenceDeclines(reg, ds)
+	// A Support pick is a counter_pick in gorge but a TARGET on XMage's spell
+	// or triggered ability: SupportEffect/SupportAbility declare it when the
+	// object is announced, so its answers belong on the cast/announcement step
+	// rather than the resolution step (support_pick.go). On a cast step the
+	// support target is the spell ability's FIRST target, so an inline
+	// Step.Targets preset would fill that slot and make XMage skip its own "up
+	// to" ask entirely; clear the preset and let every target of the cast or
+	// activation come from the answer queue, support answers first. The
+	// Scenario value shares its Steps slice with the caller, so the cleared
+	// preset is what the item serializes.
+	supports := map[int]supportAnswers{}
+	for i, d := range ds {
+		sa, ok := supportPick(reg, sc, res, d)
+		if !ok {
+			continue
+		}
+		supports[i] = sa
+		if sa.step >= 0 && sa.step < len(sc.Steps) &&
+			(sc.Steps[sa.step].Op == "cast" || sc.Steps[sa.step].Op == "activate") {
+			sc.Steps[sa.step].Targets = nil
+			if castSteps != nil {
+				delete(castSteps, sa.step)
+			}
+		}
+	}
 	if castSteps == nil {
 		castSteps = stepsWithOwnTargets(sc)
 	}
@@ -118,6 +148,14 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			}
 		}
 	}
+	tapFirst := map[int]bool{}
+	for _, d := range ds {
+		if d.Resume == "taporuntap" {
+			if _, done := tapFirst[d.Step]; !done {
+				tapFirst[d.Step] = tapThenUntapStep(sc, res.Snapshots, d.Step)
+			}
+		}
+	}
 	// XMage asks the "card ORDER to put … from the TOP" dialog only for a
 	// hand_move whose effect is implemented with anyOrder=true. Verify that
 	// per resolving source instead of scripting the answers for every top
@@ -145,7 +183,7 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			sources[d.Step] = stepSourceNames(sc, res.Snapshots, d.Step)
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, bolster: bolsters, snaps: res.Snapshots, orderAsks: orderAsks})
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, tapThenUntap: tapFirst, bolster: bolsters, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that
@@ -480,6 +518,11 @@ func activationXAnnounceCount(cost string) int {
 			// Source-counter removal and Waterbend<X> both reuse the mana X:
 			// the former overrides XMage's announceXValue, the latter is the
 			// {X} forgeCostSymbols rendered for the rule text above.
+			continue
+		}
+		if strings.EqualFold(head, "Waterbend") {
+			// Waterbend<X> is itself the {X} forgeCostSymbols counted: XMage
+			// asks it once, through getAmount (Katara, Water Tribe's Hope).
 			continue
 		}
 		n++

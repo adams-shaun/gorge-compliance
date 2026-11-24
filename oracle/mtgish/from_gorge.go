@@ -315,6 +315,13 @@ func (g *gorgeNorm) keyword(k string) {
 		// A cost keyword printed without a cost (a land's Mayhem).
 		g.kw(keywordWord(head))
 		return
+	case head == "Kicker" && strings.Contains(param, ":"):
+		// "Kicker:{2}{U}:{1}{B}": two kicker costs, one keyword each (mtgish
+		// spells each as its own Kicker rule).
+		for _, c := range strings.Split(param, ":") {
+			g.kw("kicker:" + gorgeCost(c))
+		}
+		return
 	case gorgeCostKeywords[head]:
 		g.kw(keywordWord(head) + ":" + gorgeCost(param))
 		return
