@@ -112,6 +112,7 @@ To add a scenario, see [scenarios/README.md](scenarios/README.md).
 | `make compliance-sets` | Both levels over every set with a printed list, in `.coverage/compliance-sets.md` | corpus |
 | `make mtgish-fetch`, `make mtgish-xc` | Fetch the pinned mtgish data; run the definition cross-check | corpus |
 | `make xmage-oracle-setup`, `make forge-oracle-setup` | Build XMage or Forge out of tree | [docs/oracles.md](docs/oracles.md#what-the-xmage-and-forge-oracles-need) |
+| `make xmage-sbv2-setup` | Build the XMage seat engine (SpellBench upstream) out of tree; `scripts/xmage-sbv2.sh` is its `-engine-cmd` launcher | [docs/oracles.md](docs/oracles.md#the-xmage-seat-engine-scriptsxmage-sbv2sh) |
 | `make xmage-driver-tests` | The Java driver's unit tests | XMage build |
 | `make compliance-pass SETS='FRA BLB'` | Replay stale scenarios in XMage, update verdicts | XMage build |
 | `make xengine-sweep SETS=FDN CHUNKS=1 GAMES=2` | Full-game differential sweep | both builds |
