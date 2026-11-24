@@ -434,8 +434,9 @@ type XAnswer struct {
 }
 
 // Raw is the scenario plus the item's recorded die rolls, as gorge's runner
-// decodes it. It is the one place an item becomes runner JSON, so every caller
-// forces the same rolls. The runner fails a roll whose sides or seat disagree
+// decodes it. It is the one helper for runner JSON that includes the tape, so a
+// caller that replays the item's steps forces the same rolls; a caller that
+// changes the step list must keep the tape's steps in range (or drop the tape). The runner fails a roll whose sides or seat disagree
 // with the engine's and one a step leaves unconsumed.
 func (it Item) Raw() []byte { return it.RawScenario(it.Scenario) }
 

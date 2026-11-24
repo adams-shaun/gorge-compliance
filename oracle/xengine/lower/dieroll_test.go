@@ -253,3 +253,46 @@ func TestSelfCheckForcesDieRolls(t *testing.T) {
 		t.Fatalf("%s at step %d, %s: gorge %s, tape %s %v", c.Status, c.Step, c.Field, c.Gorge, c.Tape, c.Fails)
 	}
 }
+
+// TestSetupProbeKeepsRunnableWithDieRolls: the setup-only probe has no steps,
+// so a gameplay die roll's step is out of range for it. The probe must still
+// run (gorge rejects an out-of-range roll), or setupAnswerReasons returns nil
+// and the setup-refusal guard is silently off for every d20 item.
+func TestSetupProbeKeepsRunnableWithDieRolls(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	pair := []decks.Deck{
+		{Name: "start-p0", Colours: "B", Cards: slices.Concat([]string{"Herald of Hadar"}, repeatCard(39, "Swamp"))},
+		{Name: "start-p1", Colours: "W", Cards: repeatCard(40, "Plains")},
+	}
+	start := &rules.StartSpec{Seats: []rules.StartSeat{
+		{Battlefield: []int{0, 1, 2, 3, 4, 5, 6}},
+		{},
+	}}
+	for n := 1; n <= 80; n++ {
+		cand, why, _, err := Span(reg, pair, startGameSeed(0, n), game.Options{
+			Set: "XP", MaxTurns: 2, Start: start,
+			Focus: &game.Focus{Seat: 0, Card: "Herald of Hadar", Kind: "ability"},
+		}, false, "xs:XP:herald-of-hadar:ability", "xproof start Herald of Hadar ability")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(why) > 0 || len(cand.Item.DieRolls) == 0 {
+			continue
+		}
+		// gorge reports a rejected tape as a harness fail on the result, not
+		// as an error, so the guard would see no decisions and pass silently.
+		ok, err := rules.RunOracleScenarioJSON(reg, setupProbeRaw(cand.Item))
+		if err != nil || len(ok.Fails) != 0 {
+			t.Fatalf("seed %d: the setup probe of a die-roll item does not run: err=%v fails=%v", n, err, ok.Fails)
+		}
+		// The unfixed probe (steps cleared, tape kept) must be what fails.
+		bad := cand.Item
+		bad.Steps = nil
+		rr, err := rules.RunOracleScenarioJSON(reg, bad.Raw())
+		if err != nil || len(rr.Fails) == 0 {
+			t.Fatalf("seed %d: a zero-step probe with the tape was accepted (err=%v); the test no longer exercises the guard", n, err)
+		}
+		return
+	}
+	t.Fatal("no game seed in 1..80 produced a die-roll item")
+}
