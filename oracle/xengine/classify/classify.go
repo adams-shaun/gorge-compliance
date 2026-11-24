@@ -782,7 +782,9 @@ func costStep(checkpoint string) bool {
 // inside each tie, the same cards, the follower's graveyard takes gorge's order.
 // Anything else (a card of a tie replaced, an older card moved, a pass-step SBA
 // batch such as CR 704.5m, which the rules order, see graveyardOrderOnly) is
-// left as the follower has it.
+// left as the follower has it. A pass checkpoint with an object on the stack
+// before it opens a tie for the cards that effect put there together
+// (resolutionArrivals).
 func AlignCostGraveyardOrder(g rules.OracleResult, x oraclediff.XResult) oraclediff.XResult {
 	n := min(len(g.Snapshots), len(x.Snapshots))
 	var snaps []rules.OracleSnapshot
@@ -822,6 +824,10 @@ func AlignCostGraveyardOrder(g rules.OracleResult, x oraclediff.XResult) oracled
 				if fresh := freshArrivals(kept, len(gNow)); len(fresh) >= 2 {
 					ties = append(ties, fresh)
 				}
+			} else if resolutionStep(g.Snapshots[j].Checkpoint) {
+				if fresh := resolutionArrivals(g.Snapshots[j-1], g.Snapshots[j], seat, kept); len(fresh) >= 2 {
+					ties = append(ties, fresh)
+				}
 			}
 			if len(ties) == 0 || slices.Equal(gNow, xNow) || !tiedOnly(gNow, xNow, ties) {
 				continue
@@ -838,6 +844,177 @@ func AlignCostGraveyardOrder(g rules.OracleResult, x oraclediff.XResult) oracled
 		x.Snapshots = snaps
 	}
 	return x
+}
+
+// resolutionStep reports a checkpoint taken after a pass, the step where the top
+// of the stack resolves.
+func resolutionStep(checkpoint string) bool {
+	return strings.HasSuffix(checkpoint, " (pass)")
+}
+
+// resolutionArrivals returns the positions in seat's graveyard (gorge's, after)
+// of the cards one resolving spell or ability put there together, or nil. CR 404.3
+// lets the owner arrange cards one effect puts into a graveyard at the same time
+// in any order, a pile or a mill from a library included (Steam Augury), and no
+// engine is wrong in choosing differently. The tie opens only when the top of the
+// stack resolved at the step (a pass with the same object still on the stack
+// resolves nothing, and a step that also takes a lower stack object with it has a
+// countered spell's card in the arrivals, a move the rules order) and the cards
+// that arrived on top of the graveyard are all that one effect's: a resolving
+// spell's own card goes there last (CR 608.2n) and is left out of the tie, and no
+// permanent left a battlefield, the mark of a state-based batch (CR 704) or of a
+// move the rules order, which stays as graveyardOrderOnly reports it.
+func resolutionArrivals(before, after rules.OracleSnapshot, seat int, kept []int) []int {
+	if seat >= len(after.Players) {
+		return nil
+	}
+	top, resolved := resolvedTop(before.Stack, after.Stack)
+	if !resolved || stackDepartures(before.Stack, after.Stack) > 1 {
+		return nil
+	}
+	gy := after.Players[seat].Graveyard
+	fresh := freshArrivals(kept, len(gy))
+	if len(fresh) == 0 {
+		return nil
+	}
+	if last := gy[fresh[len(fresh)-1]]; spellCardArrived(after, seat, top, last) {
+		fresh = fresh[:len(fresh)-1]
+	}
+	if len(fresh) == 0 || leftBattlefield(before, after, seat) {
+		return nil
+	}
+	return fresh
+}
+
+// resolvedTop returns the object at the top of the stack before the step (a stack
+// lists its top first) and whether it left the stack: a pass with the same object
+// still on the stack resolved nothing.
+func resolvedTop(before, after []rules.OracleSnapStack) (rules.OracleSnapStack, bool) {
+	if len(before) == 0 {
+		return rules.OracleSnapStack{}, false
+	}
+	top := before[0]
+	return top, countStack(after, top) < countStack(before, top)
+}
+
+// stackDepartures is how many objects left the stack between before and after.
+// More than one means something besides the resolving top object left -- a
+// countered spell, whose card's place in the graveyard the rules order -- so the
+// step's arrivals are not one effect's simultaneous chooseable group.
+func stackDepartures(before, after []rules.OracleSnapStack) int {
+	gone := 0
+	for i, o := range before {
+		if slices.Contains(before[:i], o) {
+			continue
+		}
+		if d := countStack(before, o) - countStack(after, o); d > 0 {
+			gone += d
+		}
+	}
+	return gone
+}
+
+// countStack is how many times o stands on stack.
+func countStack(stack []rules.OracleSnapStack, o rules.OracleSnapStack) int {
+	n := 0
+	for _, s := range stack {
+		if s == o {
+			n++
+		}
+	}
+	return n
+}
+
+// spellCardArrived reports that the resolved top object is a spell whose card is
+// last, the card at the top of seat's graveyard after the step. CR 608.2n puts an
+// instant or sorcery's card there as the final part of its resolution; a
+// permanent spell's card becomes a permanent instead (CR 608.3a) and a
+// replacement can send it to another zone, so the card is this step's last
+// arrival only when it stands in no other zone. A modal, adventure, omen or Room
+// spell is named on the stack by the cast face and in the graveyard by the
+// printed face, so the name alone cannot decide it; the seat prefix of the stack
+// ref is the card's owner (objRef's seat), so only that seat's graveyard takes it.
+func spellCardArrived(after rules.OracleSnapshot, seat int, top rules.OracleSnapStack, last string) bool {
+	if top.Kind != "spell" || refSeat(top.Source) != seat {
+		return false
+	}
+	name := refName(top.Source)
+	if name == last {
+		return true
+	}
+	return !cardElsewhere(after, seat, top.Source, name)
+}
+
+// cardElsewhere reports that the card a stack spell's ref names stands in a zone
+// other than the graveyard after the step: a permanent (the ref is kept by a
+// bound permanent, the name by a face-down or renamed one), or the owner's hand,
+// exile, command or library top (a replacement effect that sends it elsewhere,
+// CR 614.1). The graveyard is not consulted: the card is there only as the last
+// arrival spellCardArrived has already decided.
+func cardElsewhere(s rules.OracleSnapshot, seat int, ref, name string) bool {
+	if seat < len(s.Players) {
+		p := s.Players[seat]
+		if slices.Contains(p.Hand, name) || slices.Contains(p.Exile, name) ||
+			slices.Contains(p.Command, name) || slices.Contains(p.LibraryTop, name) {
+			return true
+		}
+	}
+	for _, perm := range s.Permanents {
+		if perm.Ref == ref || (perm.Owner == seat && perm.Name == name) {
+			return true
+		}
+	}
+	return false
+}
+
+// leftBattlefield reports that a permanent seat owns in before is no longer on
+// the battlefield in after, by ref rather than name: a face-down battlefield
+// permanent reports no name (CR 708.2a) and a layer-3 SetName$ or copy permanent
+// reports a derived one, while each keeps its ref. Any such departure makes the
+// step's graveyard arrivals a batch the rules order (a state-based action,
+// CR 704, or a move), not one effect's simultaneous chooseable group, so a tie
+// must not open: a missed tie is a harness order finding, never a false agree.
+func leftBattlefield(before, after rules.OracleSnapshot, seat int) bool {
+	live := make(map[string]bool, len(after.Permanents))
+	for _, p := range after.Permanents {
+		live[p.Ref] = true
+	}
+	for _, p := range before.Permanents {
+		if p.Owner == seat && !live[p.Ref] {
+			return true
+		}
+	}
+	return false
+}
+
+// refSeat is the seat a snapshot ref names: "pN:..." gives N, anything else -1.
+func refSeat(ref string) int {
+	s, _, ok := strings.Cut(ref, ":")
+	if !ok || len(s) < 2 || s[0] != 'p' {
+		return -1
+	}
+	n, err := strconv.Atoi(s[1:])
+	if err != nil {
+		return -1
+	}
+	return n
+}
+
+// refName is the card name a snapshot ref carries: "pN:Name[#k]" gives Name, the
+// "#k" an ordinal a setup ref for a duplicate name adds. A token ref
+// ("pN:token:Name") gives Name as well, its card name when it is a token copy.
+func refName(ref string) string {
+	_, n, ok := strings.Cut(ref, ":")
+	if !ok {
+		return ref
+	}
+	n = strings.TrimPrefix(n, "token:")
+	if i := strings.LastIndexByte(n, '#'); i >= 0 {
+		if _, err := strconv.Atoi(n[i+1:]); err == nil {
+			n = n[:i]
+		}
+	}
+	return n
 }
 
 // keptPositions maps each position of the graveyard before to its position in the

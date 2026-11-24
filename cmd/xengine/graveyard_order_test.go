@@ -80,7 +80,8 @@ func graveyardOrderClass(t *testing.T, op string, before, gorgeGY, otherGY []str
 
 // TestDiffGraveyardOrderSimultaneous: two cards one cost payment moved to a
 // graveyard swap places and compare equal (CR 601.2h, 404.3); the same swap at a
-// pass step is a harness order finding, and cards that entered in different
+// pass step with nothing resolving is a harness order finding (the classify
+// tests cover a resolving spell's pile, which agrees), and cards that entered in different
 // steps and swap places still differ.
 func TestDiffGraveyardOrderSimultaneous(t *testing.T) {
 	a, b := "Akal Pakal, First Among Equals", "Poison Dart Frog"
