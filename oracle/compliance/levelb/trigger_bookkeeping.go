@@ -200,7 +200,10 @@ func bookkeepingEffect(f *cards.Face, execute string) (writes, clears []string, 
 					return nil, nil, false
 				}
 			}
-		case p["DB"] == "Pump":
+		case p["DB"] == "Pump" || p["DB"] == "Bookkeeping":
+			// Forge's corpus spelled Oblivious Bookworm's imprint line as a
+			// Pump until FORGE_REF ff076d4, where it became DB$ Bookkeeping
+			// with the same ImprintCards$ parameter.
 			for k := range p {
 				switch k {
 				case "DB", "SubAbility", "Defined":
