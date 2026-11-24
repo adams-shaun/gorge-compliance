@@ -152,7 +152,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # The merge changes no file of its own; cardsfolder/tokenscripts are unchanged (same as FORGE_REF ff076d4432).
 # The full driver suite (129 tests, including ForcedAskTest, PhyrexianLifePaymentTest and LoneModeLibraryOrderTest)
 # is green on it. Fork branch fix/xp-forge-driver-lone-mode-library-order.
-FORGE_ORACLE_REF ?= f822c4bfccddc6d41ce163a4131878aeb8386d17
+# 11936833e46 = f822c4bfccdd + cast_mode "suspend" (CR 702.62a, 116.2f): Suspend from hand is a special action that
+# uses no stack. StepMachine.spellForMode picks the card's Suspend ability (the non-spell ability built for
+# K:Suspend:N:cost) and checkActed accepts it when the card is in exile with a time counter, noting the count, instead
+# of insisting the card be on the stack ("was not put on the stack"). SuspendFromHandTest replays Lotus Bloom's xproof
+# request in strict mode; the full driver suite (130 tests) is green on it. Driver-only change; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-suspend-cast-mode.
+FORGE_ORACLE_REF ?= 11936833e46d6d3a6c7a70c5cfd48dea076ad0ed
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

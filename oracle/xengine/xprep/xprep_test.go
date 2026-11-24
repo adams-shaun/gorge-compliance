@@ -253,6 +253,12 @@ func TestPrepareAbilityPrefixes(t *testing.T) {
 					}
 					continue
 				}
+				if st.Op == "cast" && strings.EqualFold(st.CastMode, "suspend") {
+					if len(it.XAbility) != len(it.Steps) || !strings.HasPrefix(got, "Suspend") {
+						t.Errorf("%s step %d suspends %s with xmage_ability %q", it.ID, i, st.Card, got)
+					}
+					continue
+				}
 				if got != "" {
 					t.Errorf("%s step %d (%s) has prefix %q", it.ID, i, st.Op, got)
 				}
@@ -325,6 +331,37 @@ func TestPrefixesPlotCast(t *testing.T) {
 	}
 	if got[2] != "" {
 		t.Errorf("ordinary cast step prefix = %q, want empty", got[2])
+	}
+}
+
+// TestPrefixesSuspendCast: a cast step whose cast_mode is "suspend" is XMage's
+// SuspendAbility special action (CR 702.62a, 116.2f), so it carries the
+// "Suspend N" rule-text prefix the driver activates it by; Lotus Bloom prints
+// K:Suspend:3:0.
+func TestPrefixesSuspendCast(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	it := oraclegen.Item{
+		ID: "xe:test:suspend-cast",
+		Scenario: oraclegen.Scenario{
+			Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Lotus Bloom", CastMode: "suspend"},
+				{Op: "pass", Seat: 0},
+				{Op: "cast", Seat: 0, Card: "p0:Lotus Bloom"},
+			},
+		},
+	}
+	got, ref := prefixes(reg, it, rules.OracleResult{})
+	if ref != nil {
+		t.Fatalf("prefixes refused: %+v", ref)
+	}
+	if len(got) != len(it.Steps) {
+		t.Fatalf("prefixes = %q, want %d entries (one per step)", got, len(it.Steps))
+	}
+	if want := "Suspend 3"; got[0] != want {
+		t.Fatalf("suspend step prefix = %q, want %q", got[0], want)
+	}
+	if got[1] != "" || got[2] != "" {
+		t.Errorf("pass/ordinary cast prefixes = %q, %q, want empty", got[1], got[2])
 	}
 }
 

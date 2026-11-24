@@ -277,7 +277,34 @@ public final class ScenarioReplayCastModeTest {
         System.out.println("PASS a mayplay cast of the exiled copy leaves the same-name hand copy in hand");
     }
 
+    /** CR 702.62a / 116.2f: Suspend from hand is a special action, not a cast.
+     * gorge records it as a cast step with cast_mode "suspend"; XMage's
+     * SuspendAbility pays the suspend cost ({0} for Lotus Bloom) and exiles the
+     * card with three time counters, with nothing on the stack. */
+    private static void suspendFromHandExilesWithTimeCounters() throws Exception {
+        equal("true", castModeSupported("suspend"), "suspend cast_mode");
+        JsonObject sc = JsonParser.parseString("{name:'Lotus Bloom',card:'Lotus Bloom',"
+                + "setup:{p0:{hand:['Lotus Bloom']}},"
+                + "steps:[{op:'cast',seat:0,card:'p0:Lotus Bloom',cast_mode:'suspend'},{op:'pass',seat:0}],"
+                + "xmage_ability:['Suspend 3',''],xmage_answers:[[],[]],"
+                + "xmage_pos:[null,{turn:1,step:'main1',active:0}]}").getAsJsonObject();
+        ScenarioReplay replay = new ScenarioReplay();
+        JsonObject res = replay.replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("suspend replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        JsonObject p0 = last.getAsJsonArray("players").get(0).getAsJsonObject();
+        equal(1, count(p0, "exile", "Lotus Bloom"), "Lotus Bloom is in exile: " + last);
+        equal(0, count(p0, "hand", "Lotus Bloom"), "Lotus Bloom left the hand: " + last);
+        equal(0, last.getAsJsonArray("stack").size(), "suspend does not use the stack: " + last);
+        equal(3, replay.exileCounters("Lotus Bloom", "time"), "time counters on the suspended card");
+        System.out.println("PASS suspendFromHandExilesWithTimeCounters: Lotus Bloom is in exile with 3 time counters, stack empty");
+    }
+
     public static void main(String[] args) throws Exception {
+        suspendFromHandExilesWithTimeCounters();
         warpedCast();
         mayplayPicksTheNamedCopy();
         // Regression: the driver rejected "mayplay" by name before the replay

@@ -95,14 +95,14 @@ type Follower struct {
 }
 
 // forgeCastModes are the cast_mode values the Forge driver can act on:
-// StepMachine.spellForMode picks the plot special action, an Adventure or Omen
+// StepMachine.spellForMode picks the plot or suspend special action, an Adventure or Omen
 // half, a modal back face or a warp cast out of Card.getAllPossibleAbilities,
 // and the optional-cost modes pay the kicker, buyback, entwine, offspring or
 // replicate they name. Any other mode (flashback, foretell, escape, ...) is
 // still cast the ordinary way, so the driver takes the card's first spell
 // ability and the difference after it is the driver's gap.
 var forgeCastModes = []string{"", "optionalcost",
-	"plot", "adventure_alt", "omen_alt", "modal_spell", "warped",
+	"plot", "suspend", "adventure_alt", "omen_alt", "modal_spell", "warped",
 	"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined",
 	"offspring", "replicated", "multikicked"}
 

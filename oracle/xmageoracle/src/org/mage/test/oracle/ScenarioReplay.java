@@ -2532,6 +2532,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
         throw new IllegalArgumentException("invalid scenario turn " + value + " (want integer 1..100)");
     }
 
+    /** Test hook: the count of counters of the given type on the named card
+     * in exile in the game the last replayOnce ran (-1 when no such card).
+     * The snapshot carries exile names only, so the Suspend test reads the
+     * time counters here. */
+    int exileCounters(String cardName, String counterType) {
+        for (Card c : currentGame.getExile().getAllCards(currentGame)) {
+            if (cardName.equals(c.getName())) {
+                return c.getCounters(currentGame).getCount(counterType);
+            }
+        }
+        return -1;
+    }
+
     JsonObject replayOnce(JsonObject sc, boolean strict) {
         JsonObject res = new JsonObject();
         res.addProperty("strict", strict);
@@ -3996,8 +4009,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
 
     /** Whether a cast step's cast_mode is one this driver elects: Bargain,
      * "optionalcost", "kicked" (the single Kicker ask; kicked1/kicked2/kickedboth/
-     * multikicked pose per-kicker asks in order and stay rejected), the face-down Disguise/Morph/Megamorph casts, the "plot" special
-     * action, a graveyard "flashback" cast, and a "mayplay" cast of a card a
+     * multikicked pose per-kicker asks in order and stay rejected), the face-down Disguise/Morph/Megamorph casts, the "plot" and
+     * "suspend" special actions, a graveyard "flashback" cast, and a "mayplay" cast of a card a
      * play-from-exile permission (Reckless Impulse) reaches are wired
      * ("plot_cast", the later cast of a plotted card, is not); so are the
      * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half, whose
@@ -4010,6 +4023,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 || mode.equals("bargained") || mode.equals("optionalcost") || mode.equals("kicked")
                 || mode.equals("disguised") || mode.equals("morphed") || mode.equals("megamorphed")
                 || mode.equals("plot") || mode.equals("flashback")
+                // "suspend": Suspend from hand (CR 702.62a) is a special action
+                // (CR 116.2f), XMage's SuspendAbility, activated like Plot.
+                || mode.equals("suspend")
                 // "mayplay": the card is in exile (or wherever a play-from-exile
                 // permission reaches) rather than hand, but the cast itself is
                 // the card's ordinary SpellAbility, played by name. TestPlayer's
@@ -6173,6 +6189,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // 702.170a). boundActivationText binds the card's id as
                     // an alias, like an ordinary activation.
                     activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), plotText, stepIdx));
+                    return;
+                }
+                // "suspend" is XMage's Suspend special action from the hand
+                // (SuspendAbility is a SpecialAction with usesStack false,
+                // CR 116.2f): it pays the suspend cost and exiles the card
+                // with its time counters, no cast and no stack. Activated by
+                // its rule-text prefix "Suspend N" like XMage's SuspendTest,
+                // scoped to the step's card so another suspend card in hand
+                // cannot be picked.
+                if ("suspend".equals(castMode)) {
+                    String suspendText = xabilityAt(stepIdx);
+                    if (suspendText.isEmpty()) {
+                        throw new IllegalArgumentException("suspend step " + stepIdx + " has no xmage_ability");
+                    }
+                    activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), suspendText, stepIdx));
                     return;
                 }
                 // "flashback" is the cast of a graveyard card for its
