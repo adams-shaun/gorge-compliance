@@ -44,8 +44,14 @@ read -r sha hash16 sha256 extra < "$follower/PHASE_PIN" || true
 tag=${sha:0:12}+$hash16
 
 # Pin consistency: Cargo.toml's rev and Cargo.lock's source both name PHASE_PIN's engine sha.
-toml_rev=$(sed -n 's/^engine *=.*[ {,]rev *= *"\([^"]*\)".*/\1/p' "$follower/phase-follower/Cargo.toml")
-[ "$toml_rev" = "$sha" ] || die "pin mismatch: phase-follower/Cargo.toml rev '$toml_rev' != PHASE_PIN engine sha '$sha'"
+# Every crate of the workspace that names the engine (the follower and the v2 seat) must carry the one rev.
+[ -r "$follower/phase-follower/Cargo.toml" ] || die "no $follower/phase-follower/Cargo.toml"
+for manifest in "$follower"/*/Cargo.toml; do
+	toml_rev=$(sed -n 's/^engine *=.*[ {,]rev *= *"\([^"]*\)".*/\1/p' "$manifest")
+	crate=$(basename "$(dirname "$manifest")")
+	[ -z "$toml_rev" ] && [ "$crate" != phase-follower ] && continue
+	[ "$toml_rev" = "$sha" ] || die "pin mismatch: $crate/Cargo.toml rev '$toml_rev' != PHASE_PIN engine sha '$sha'"
+done
 want_src="source = \"git+https://github.com/phase-rs/phase?rev=$sha#$sha\""
 lock_src=$(awk '/^name = "phase-engine"$/ {f=1; next} f && /^source = / {print; exit} /^\[\[package\]\]/ {f=0}' "$follower/Cargo.lock" 2>/dev/null || true)
 [ "$lock_src" = "$want_src" ] || die "pin mismatch: Cargo.lock phase-engine ${lock_src:-has no source line}, want $want_src (PHASE_PIN engine sha $sha)"

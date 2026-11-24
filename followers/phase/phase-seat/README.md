@@ -1,0 +1,38 @@
+# phase-seat
+
+phase.rs (MIT OR Apache-2.0, pinned by `../PHASE_PIN`, never vendored) as a SpellBench v2 **engine**:
+an NDJSON server on stdin/stdout that hosts a two-player game and poses each acting seat's `WaitingFor` as
+a v2 seat decision. four-yay's `cmd/xclient -engine sbv2 -engine-cmd scripts/phase-sbv2.sh` plays it.
+The protocol is gorge's `docs/site/api/spellbench-v2.md`; the phase-server WebSocket is not used.
+
+| Module | What | Needs the engine |
+|---|---|---|
+| `json` | strict-JSON line rules, canonical JSON, `deck_id` / `domain_id`, HMAC-SHA-256 | no |
+| `server` | framing, exact request field sets, request-id cache, `hello` / `validate_deck` / `reset` / `step`, error codes; the game sits behind `Backend` | no |
+| `semantic` | the kind table and one builder per posed kind (a drifted builder panics in its test) | no |
+| `observe` | the thirteen observation flags this engine declares | no |
+| `waiting` | `classify`: one arm per `WaitingFor` variant (147 at the pin), no `_` arm | yes |
+| `view` | `GameState` -> the seat's observation (phase's own `filter_state_for_viewer`, then projected) | yes |
+| `game` | `PhaseBackend`: decks, reset, candidates per family, substep groups, apply, terminal | yes |
+
+`phase-follower`'s `names.rs` and `support.rs` are compiled in by `#[path]` (card lookup and the
+"which cards phase replays" rule), so there is one copy of each.
+
+## What is posed
+
+Eleven families: priority (pass, play land, cast, activate), mulligan (keep / mulligan, and the London
+bottom as `order_pick` `mulligan_bottom`), attackers and blockers (one substep per creature), targets
+(`TargetSelection`, `TriggerTargetSelection`), optional effect, optional cost, X, and the cleanup discard.
+
+Everything else is `Pose::Unposed`: the game halts with `engine_contract_failure:unmapped_decision`, the
+variant name goes to stderr, and the census (stderr at the end of the run) counts it as an `engine_error`
+by name. A legal priority action with no `semantic` yet (equip, crew, mana abilities, ...) is left out of
+the candidates and counted as `unmapped_action`. Nothing is answered on an agent's behalf.
+
+The next variants to pose are the ones the census names most often over real games.
+
+## Testing
+
+* `cargo test -p phase-seat --no-default-features` is the protocol layer alone: it does not compile the engine (cargo still needs the engine's git source to resolve the lockfile).
+* `make phase-seat-test` is the whole crate at the repo's 8G scope; the engine's codegen needs more than 4G.
+* `make smoke` runs `ops/scripts/tests/phase_sbv2_smoke.sh` over `scripts/phase-sbv2.sh` with stubs.
