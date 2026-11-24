@@ -55,7 +55,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	9ee19e8250ce	-	4da4cfd16ff3	-	-	2026-11-24	xproof
 5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 5437f560-7f61-4326-be8e-15d74bf4e6ec	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5437f560-7f61-4326-be8e-15d74bf4e6ec	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5437f560-7f61-4326-be8e-15d74bf4e6ec	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	4	0	x:xs:XP:gloomfang-mauler:cast:s1,f:xs:XP:gloomfang-mauler:cast:s1	-	-	-	d864b561c9cb	-	3024cb56266f	-	-	2026-11-24	xproof
 5437f560-7f61-4326-be8e-15d74bf4e6ec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 543e6bb3-a867-43bf-a737-2f5d6d8dc631	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:warped-landscape:land:s1,f:xs:XP:warped-landscape:land:s1	-	-	-	d864b561c9cb	-	d2e0ea90931d	-	-	2026-11-24	xproof
 543e6bb3-a867-43bf-a737-2f5d6d8dc631	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:warped-landscape:f0a1:s1,f:xs:XP:warped-landscape:f0a1:s1	-	-	-	d864b561c9cb	-	d2e0ea90931d	-	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54775625-bf44-4035-969e-7e70578c8b98	cast	cast	agreed	-	F	start	2	0	f:xs:XP:way-of-the-deathbringer:f0t0:s1	-	-	-	25696bf19d5b	-	862eaaef080b	-	-	2026-11-24	xproof
 54775625-bf44-4035-969e-7e70578c8b98	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:way-of-the-deathbringer:f0t0:s1	-	-	-	25696bf19d5b	-	862eaaef080b	-	-	2026-11-24	xproof
 54775625-bf44-4035-969e-7e70578c8b98	static#0.0	static#0.0	agreed	-	X	scen	1	0	Way of the Deathbringer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-547ab16c-b8d1-4357-9219-7cabde80f5ba	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+547ab16c-b8d1-4357-9219-7cabde80f5ba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:basic-conjuration:cast:s1,f:xs:XP:basic-conjuration:cast:s1	-	-	-	d864b561c9cb	-	d9b33add4ad8	-	-	2026-11-24	xproof
 547da0ef-f1e1-4b04-ba83-4845552b0dc4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 547da0ef-f1e1-4b04-ba83-4845552b0dc4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5482ddb1-7f7d-492a-aa3d-67c037062cc3	cast	cast-resolve	agreed	-	X	scen	1	0	Slick Imitator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -167,7 +167,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54d32245-c796-4e8e-b61e-c218e3902565	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54d32245-c796-4e8e-b61e-c218e3902565	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54d48e54-be4a-4a78-a778-b28e74ef7134	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54d48e54-be4a-4a78-a778-b28e74ef7134	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+54d48e54-be4a-4a78-a778-b28e74ef7134	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 54d65915-3833-4e4d-a066-37ae9507846f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54db986e-cf8a-4d2c-8ce9-13da11b11464	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kemuri-onna:f0t0:s1,f:xs:XP:kemuri-onna:f0t0:s1	-	-	-	64a08ba7d913	-	80d07134f2c4	-	-	2026-11-24	xproof
 54db986e-cf8a-4d2c-8ce9-13da11b11464	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kemuri-onna:f0t0:s1,f:xs:XP:kemuri-onna:f0t0:s1	-	-	-	64a08ba7d913	-	80d07134f2c4	-	-	2026-11-24	xproof
@@ -185,6 +185,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54ea46ea-7c83-44a9-85b0-eff9745c6ffa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54f8acb1-58f3-49d1-bff8-c1b578245936	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54f8acb1-58f3-49d1-bff8-c1b578245936	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54f8acb1-58f3-49d1-bff8-c1b578245936	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+54f8acb1-58f3-49d1-bff8-c1b578245936	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 54fc373e-157f-4157-b7dd-74d689f4c0f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54fc373e-157f-4157-b7dd-74d689f4c0f9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof

@@ -13,9 +13,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f207f0d-0834-45fc-aec3-534ec73cdc58	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:fendeep-summoner:f0a0:s1,f:xs:XP:fendeep-summoner:f0a0:s1	-	-	-	d864b561c9cb	-	04d778b468ac	-	-	2026-11-24	xproof
 7f221ad6-7ec4-483d-a6b5-1456c95c1cad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f240b1f-fb7b-49a3-bcaf-6348956d2a38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f24c0b7-1d39-48b6-969f-ee97fdf99305	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f24c0b7-1d39-48b6-969f-ee97fdf99305	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f24c0b7-1d39-48b6-969f-ee97fdf99305	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7f24c0b7-1d39-48b6-969f-ee97fdf99305	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	0808690d1aaa	-	-	2026-11-24	xproof
+7f24c0b7-1d39-48b6-969f-ee97fdf99305	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:displacer-beast:f0a0:s1,f:xs:XP:displacer-beast:f0a0:s1	-	-	-	d864b561c9cb	-	0808690d1aaa	-	-	2026-11-24	xproof
+7f24c0b7-1d39-48b6-969f-ee97fdf99305	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	0808690d1aaa	-	-	2026-11-24	xproof
 7f2579ef-0422-4cb1-a0f8-6ad0d942515b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f2579ef-0422-4cb1-a0f8-6ad0d942515b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f2ba562-8d5e-4915-967e-54916c3c5876	cast	cast-resolve	agreed	-	X	scen	1	0	Eager Trufflesnout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -161,9 +161,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fdd471f-ec95-4aa7-8f8a-ad8946de5ab4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Meticulous Commons/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7fdd471f-ec95-4aa7-8f8a-ad8946de5ab4	land	play-land	agreed	-	X	scen	1	0	Meticulous Commons/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7fe21ade-01f1-45ff-9b70-bc6302c3d284	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fe361ef-a168-4847-92a2-21c1661aac06	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fe361ef-a168-4847-92a2-21c1661aac06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thieves-tools:f0t0:s1,f:xs:XP:thieves-tools:f0t0:s1	-	-	-	d864b561c9cb	-	5a96b0113dee	-	-	2026-11-24	xproof
 7fe361ef-a168-4847-92a2-21c1661aac06	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fe361ef-a168-4847-92a2-21c1661aac06	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fe361ef-a168-4847-92a2-21c1661aac06	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thieves-tools:f0t0:s1,f:xs:XP:thieves-tools:f0t0:s1	-	-	-	d864b561c9cb	-	5a96b0113dee	-	-	2026-11-24	xproof
 7fe39c74-cb7c-4eee-a657-8a99a4ab383a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:territorial-allosaurus:f0t0:s1,f:xs:XP:territorial-allosaurus:f0t0:s1	-	-	-	d864b561c9cb	-	e2827a4bd00a	-	-	2026-11-24	xproof
 7fe39c74-cb7c-4eee-a657-8a99a4ab383a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:territorial-allosaurus:f0t0:s1,f:xs:XP:territorial-allosaurus:f0t0:s1	-	-	-	d864b561c9cb	-	e2827a4bd00a	-	-	2026-11-24	xproof
 7fe5baab-b182-4cd9-bea5-912ce9b1464a	cast	cast-resolve	agreed	-	X	scen	1	0	Sygg's Command/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

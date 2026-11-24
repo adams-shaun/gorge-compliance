@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-bd002797-a545-4bee-88bf-b878436e7cca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd002797-a545-4bee-88bf-b878436e7cca	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd002797-a545-4bee-88bf-b878436e7cca	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:brokers-hideout:f0t0:s1,f:xs:XP:brokers-hideout:f0t0:s1	-	-	-	d864b561c9cb	-	07333af0c248	-	-	2026-11-24	xproof
+bd002797-a545-4bee-88bf-b878436e7cca	land	land	agreed	-	FX	start	2	0	x:xs:XP:brokers-hideout:f0t0:s1,f:xs:XP:brokers-hideout:f0t0:s1	-	-	-	d864b561c9cb	-	07333af0c248	-	-	2026-11-24	xproof
 bd0031c3-ff88-4bc5-82a0-2187c60a7d33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd004c9d-771e-4e63-a97d-a2259c096af8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd004c9d-771e-4e63-a97d-a2259c096af8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ bd4151cc-743a-40f0-9e51-1f67555d9ab3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 bd4151cc-743a-40f0-9e51-1f67555d9ab3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lion Heart/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd416426-d037-45e3-9647-816bf982cbea	cast	cast-resolve	agreed	-	FX	scen	2	0	Vigorbloom Vanguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd416426-d037-45e3-9647-816bf982cbea	static#0.0	static#0.0	agreed	-	X	scen	1	0	Vigorbloom Vanguard/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bd433a27-1f3f-4d69-8b7e-97239fdf165b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd433a27-1f3f-4d69-8b7e-97239fdf165b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	95b5c6477d4d	-	-	2026-11-24	xproof
 bd47398d-da35-4a09-8754-771af91b14f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd49a05c-ed51-4d69-ab9b-11192442ec17	cast	cast-resolve	agreed	-	X	scen	1	0	Stature, Size Shifter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd49a05c-ed51-4d69-ab9b-11192442ec17	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stature, Size Shifter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ bd6af7b3-b30f-4a65-a18f-8655f778e76a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bd6af7b3-b30f-4a65-a18f-8655f778e76a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd6bc87d-fc75-43bc-a7d7-49d89dabcd3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd6ce147-c991-40ac-b276-65b630fad8b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd716715-15a4-4356-ad7e-c642fafbfd18	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd716715-15a4-4356-ad7e-c642fafbfd18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lucid-dreams:cast:s1,f:xs:XP:lucid-dreams:cast:s1	-	-	-	d864b561c9cb	-	a4045005fa0c	-	-	2026-11-24	xproof
 bd73581c-c4bd-46cb-8004-75aeafa24288	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd73ab86-0ac9-4ce0-be41-f4ad257e74f6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bd73ab86-0ac9-4ce0-be41-f4ad257e74f6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ bda5d0aa-3ed0-4f8c-80ae-f9cb8ed0ac82	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 bda5d0aa-3ed0-4f8c-80ae-f9cb8ed0ac82	static#0.0	static#0.0	agreed	-	X	scen	1	0	Shredder's Armor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bda83ef4-e345-495d-878c-4da171f997ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bda83ef4-e345-495d-878c-4da171f997ba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bda83ef4-e345-495d-878c-4da171f997ba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bda83ef4-e345-495d-878c-4da171f997ba	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bda87ca2-91d0-48fa-bb82-a3396f0438ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bda87ca2-91d0-48fa-bb82-a3396f0438ac	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bda87ca2-91d0-48fa-bb82-a3396f0438ac	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof

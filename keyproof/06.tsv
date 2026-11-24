@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 0604ed6c-a85f-41da-a163-0c414e57d133	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0604ed6c-a85f-41da-a163-0c414e57d133	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0604ed6c-a85f-41da-a163-0c414e57d133	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0607b289-74a6-4f3a-b15c-a639244873b6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0607b289-74a6-4f3a-b15c-a639244873b6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 060a7d77-61a8-4964-8fb6-35bd9a999517	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06355d3f-a82d-4f12-a399-016a12824795	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shefet Archfiend/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 06355d3f-a82d-4f12-a399-016a12824795	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:shefet-archfiend:f0t0:s2,f:xs:XP:shefet-archfiend:f0t0:s2	-	-	-	267e485f6204	-	59316c177192	-	-	2026-11-24	xproof
 06355d3f-a82d-4f12-a399-016a12824795	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:shefet-archfiend:f0t0:s1,f:xs:XP:shefet-archfiend:f0t0:s1	-	-	-	267e485f6204	-	59316c177192	-	-	2026-11-24	xproof
-0635ab65-fc1a-4e43-9e11-3a1ad3093830	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0635ab65-fc1a-4e43-9e11-3a1ad3093830	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ecological-appreciation:cast:s1,f:xs:XP:ecological-appreciation:cast:s1	-	-	-	d864b561c9cb	-	43fb014dcc92	-	-	2026-11-24	xproof
 0636b6c3-0662-420a-b30d-f0a14e7c512d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0636b6c3-0662-420a-b30d-f0a14e7c512d	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0636b6c3-0662-420a-b30d-f0a14e7c512d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06c1f8a4-4948-435b-ae98-b1276b57e958	cast	cast-resolve	agreed	-	X	scen	1	0	Traumatic Critique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 06c39c1c-0e34-4ef0-bd06-23245cb9cc59	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06c39c1c-0e34-4ef0-bd06-23245cb9cc59	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06c3e85c-17d8-44e1-a0f8-07ef3f1624cb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+06c3e85c-17d8-44e1-a0f8-07ef3f1624cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heated-debate:cast:s1,f:xs:XP:heated-debate:cast:s1	-	-	-	d864b561c9cb	-	a84e98285fa6	-	-	2026-11-24	xproof
 06c47664-2b4b-468e-a38d-04b62e6edd67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06c47664-2b4b-468e-a38d-04b62e6edd67	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06ccec61-27d2-4079-80b5-29ebd3a980ee	cast	cast-resolve	agreed	-	X	scen	1	0	Cache Grab/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

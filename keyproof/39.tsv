@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3918eaa7-5a34-4d6a-be93-a95e733d041b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3918eaa7-5a34-4d6a-be93-a95e733d041b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 391978f6-0bbc-41e8-9246-f7d0e21c7900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-391978f6-0bbc-41e8-9246-f7d0e21c7900	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+391978f6-0bbc-41e8-9246-f7d0e21c7900	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 391f1331-7577-4bf4-a9ed-2f55ded4cbd8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanguine-glorifier:f0t0:s1,f:xs:XP:sanguine-glorifier:f0t0:s1	-	-	-	d864b561c9cb	-	9430a385d1d9	-	-	2026-11-24	xproof
 391f1331-7577-4bf4-a9ed-2f55ded4cbd8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sanguine-glorifier:f0t0:s1,f:xs:XP:sanguine-glorifier:f0t0:s1	-	-	-	d864b561c9cb	-	9430a385d1d9	-	-	2026-11-24	xproof
 391fdf1e-e489-410e-9f33-b674fd98d0fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:turntimber-ranger:f0t0:s1,f:xs:XP:turntimber-ranger:f0t0:s1	-	-	-	8a1b1a193ec0	-	9274b61cbffc	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39e01990-9928-440c-a5c3-82aea29e2cd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39e01990-9928-440c-a5c3-82aea29e2cd0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39e20898-cf01-48dc-8972-7ac500c3fa79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39e20898-cf01-48dc-8972-7ac500c3fa79	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+39e20898-cf01-48dc-8972-7ac500c3fa79	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 39e21a5a-b278-478a-854c-17695c0f6246	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39e32fdf-93bf-4390-8275-0d7d10ad7360	cast	cast-resolve	agreed	-	X	scen	1	0	Xu-Ifit, Osteoharmonist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 39e32fdf-93bf-4390-8275-0d7d10ad7360	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Xu-Ifit, Osteoharmonist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7476a14a-611e-4f81-b603-fd600e88568f	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:thornado:cast:s2,f:xs:XP:thornado:cast:s2	-	-	-	d864b561c9cb	-	e732fdb139e9	-	-	2026-11-24	xproof
 74776491-29c3-46e6-989b-cf9a00bbfcef	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 74788d52-dad7-4c10-8567-a2c86ed90a67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74788d52-dad7-4c10-8567-a2c86ed90a67	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+74788d52-dad7-4c10-8567-a2c86ed90a67	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 747a1b36-eb4f-44e6-9e5a-bb1a0259a471	cast	cast-resolve	agreed	-	FX	scen	2	0	Ferocity of the Hunt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 747a1b36-eb4f-44e6-9e5a-bb1a0259a471	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ferocity of the Hunt/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 747a1b36-eb4f-44e6-9e5a-bb1a0259a471	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ferocity of the Hunt/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 749c2c8e-9588-4e83-b07f-3c37eb63338b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 749d2994-44e7-40d3-8630-7bebed239e9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 749d2994-44e7-40d3-8630-7bebed239e9e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-749d2994-44e7-40d3-8630-7bebed239e9e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+749d2994-44e7-40d3-8630-7bebed239e9e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:haywire-mite:f0t0:s2,f:xs:XP:haywire-mite:f0t0:s2	-	-	-	d864b561c9cb	-	2034667905a5	-	-	2026-11-24	xproof
 74a1a484-7c35-466a-b097-9aaf6fc2073b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74a1a484-7c35-466a-b097-9aaf6fc2073b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74a62c7b-4753-4af2-b7a1-9a4ae8988801	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,8 +165,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74adb283-9bef-4a6f-9489-bcfcba53e8d7	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 74b58f31-7634-4b51-a900-6fbfccfb3cd2	cast	cast-resolve	agreed	-	FX	scen	2	0	Constable Odo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 74b58f31-7634-4b51-a900-6fbfccfb3cd2	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-74b631c5-9420-496e-8845-3b050d3d5340	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74b631c5-9420-496e-8845-3b050d3d5340	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+74b631c5-9420-496e-8845-3b050d3d5340	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:streetwise-negotiator:cast:s1,f:xs:XP:streetwise-negotiator:cast:s1	-	-	-	d864b561c9cb	-	a6157cb557eb	-	-	2026-11-24	xproof
+74b631c5-9420-496e-8845-3b050d3d5340	f0/t0	ChangesZone/Backup	agreed	-	FX	start	4	0	x:xs:XP:streetwise-negotiator:cast:s1,f:xs:XP:streetwise-negotiator:cast:s1	-	-	-	d864b561c9cb	-	a6157cb557eb	-	-	2026-11-24	xproof
 74b7fe23-5d3a-4092-8d78-7c0eba8f6f73	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74b7fe23-5d3a-4092-8d78-7c0eba8f6f73	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74b7fe23-5d3a-4092-8d78-7c0eba8f6f73	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

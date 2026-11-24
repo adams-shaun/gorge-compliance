@@ -98,8 +98,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70787d8b-0a40-43ea-837a-9617dc13e7e5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7085d5c6-da96-465e-90cf-8469fcacb474	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7085d5c6-da96-465e-90cf-8469fcacb474	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70868667-a843-4954-863f-990854188c53	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70868667-a843-4954-863f-990854188c53	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+70868667-a843-4954-863f-990854188c53	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:biomathematician:cast:s1,f:xs:XP:biomathematician:cast:s1	-	-	-	d864b561c9cb	-	7bc6e741cec0	-	-	2026-11-24	xproof
+70868667-a843-4954-863f-990854188c53	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:biomathematician:cast:s1,f:xs:XP:biomathematician:cast:s1	-	-	-	d864b561c9cb	-	7bc6e741cec0	-	-	2026-11-24	xproof
 7088a901-0489-41c3-9f2f-633939514de8	cast	cast-resolve	agreed	-	X	scen	1	0	Seifer Almasy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7088a901-0489-41c3-9f2f-633939514de8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Seifer Almasy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7088a901-0489-41c3-9f2f-633939514de8	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Seifer Almasy/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 708df587-3b13-42cb-8341-f476ab4cbe45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 708df587-3b13-42cb-8341-f476ab4cbe45	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70965b80-c8ad-4718-ae20-12a4d8228898	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70965b80-c8ad-4718-ae20-12a4d8228898	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+70965b80-c8ad-4718-ae20-12a4d8228898	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:skemfar-elderhall:f0a1:s1,f:xs:XP:skemfar-elderhall:f0a1:s1	-	-	-	d864b561c9cb	-	b0a858cf7901	-	-	2026-11-24	xproof
 70965b80-c8ad-4718-ae20-12a4d8228898	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70973a2d-66e6-4662-ab10-99678775dda1	cast	cast	agreed	-	F	start	2	0	f:xs:XP:dauntless-bodyguard:cast:s1	-	-	-	d864b561c9cb	-	9e2d807217d6	-	-	2026-11-24	xproof
 70973a2d-66e6-4662-ab10-99678775dda1	f0/a0	Pump	agreed	-	F	start	2	0	f:xs:XP:dauntless-bodyguard:cast:s1	-	-	-	d864b561c9cb	-	9e2d807217d6	-	-	2026-11-24	xproof

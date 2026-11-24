@@ -22,8 +22,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a124fe5-f525-43e5-9746-501c68a98330	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a124fe5-f525-43e5-9746-501c68a98330	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a128587-c751-4b27-b608-d4e47646b80e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a16bdda-8499-47e4-b870-b9576f4c1a83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a16bdda-8499-47e4-b870-b9576f4c1a83	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a16bdda-8499-47e4-b870-b9576f4c1a83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-of-death:f0t0:s1,f:xs:XP:master-of-death:f0t0:s1	-	-	-	d864b561c9cb	-	8f84fc18c172	-	-	2026-11-24	xproof
+3a16bdda-8499-47e4-b870-b9576f4c1a83	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:master-of-death:f0t0:s1,f:xs:XP:master-of-death:f0t0:s1	-	-	-	d864b561c9cb	-	8f84fc18c172	-	-	2026-11-24	xproof
 3a16bdda-8499-47e4-b870-b9576f4c1a83	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a198a16-17b9-481e-b516-5bc945c7e247	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:priest-of-titania:cast:s1,f:xs:XP:priest-of-titania:cast:s1	-	-	-	25696bf19d5b	-	4f638fb3a60d	-	-	2026-11-24	xproof
 3a198a16-17b9-481e-b516-5bc945c7e247	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:priest-of-titania:f0a0:s2,f:xs:XP:priest-of-titania:f0a0:s2	-	-	-	d864b561c9cb	-	4f638fb3a60d	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a7e3423-4df3-4e10-9861-ac2f403bc49d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a81a3a6-4940-4d69-94c1-d431023b275c	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	3ed08d21d3be	-	-	2026-11-24	xproof
 3a81a3a6-4940-4d69-94c1-d431023b275c	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	3ed08d21d3be	-	-	2026-11-24	xproof
-3a82e724-28f6-430f-a474-ab4276197963	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a82e724-28f6-430f-a474-ab4276197963	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampires-vengeance:cast:s1,f:xs:XP:vampires-vengeance:cast:s1	-	-	-	d864b561c9cb	-	46e59b26cdd4	-	-	2026-11-24	xproof
 3a8306ae-3162-4105-95f4-dacd10c7c051	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a8306ae-3162-4105-95f4-dacd10c7c051	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a869ec0-c3ea-49a8-8586-d7e54e62a734	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

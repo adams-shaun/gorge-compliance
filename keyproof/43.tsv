@@ -109,8 +109,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4384996f-aeaa-41ac-aa0e-12d72c887731	cast	cast-resolve	agreed	-	X	scen	1	0	Pursue the Past/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 438546b8-0b67-4bec-a43b-f2fc7449c90e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 438546b8-0b67-4bec-a43b-f2fc7449c90e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-438a0a7a-00bc-4d93-8e69-a8a6084523c5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-438a0a7a-00bc-4d93-8e69-a8a6084523c5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+438a0a7a-00bc-4d93-8e69-a8a6084523c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:littjara-glade-warden:cast:s1,f:xs:XP:littjara-glade-warden:cast:s1	-	-	-	d864b561c9cb	-	99cf8db969fa	-	-	2026-11-24	xproof
+438a0a7a-00bc-4d93-8e69-a8a6084523c5	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 438be2fa-5f8d-42ff-894a-671ba4221196	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 438be2fa-5f8d-42ff-894a-671ba4221196	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 438ee544-78a2-4e32-9343-70838b60ac16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,9 +184,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43d79ee6-8ba1-4ec9-9bb2-907ed8401a2f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43d7fcf3-acc2-4e9b-a466-c73b1b6c58af	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:omenspeaker:cast:s1,f:xs:XP:omenspeaker:cast:s1	-	-	-	d864b561c9cb	-	f24f9afb709f	-	-	2026-11-24	xproof
 43d7fcf3-acc2-4e9b-a466-c73b1b6c58af	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:omenspeaker:cast:s1,f:xs:XP:omenspeaker:cast:s1	-	-	-	d864b561c9cb	-	f24f9afb709f	-	-	2026-11-24	xproof
-43daed96-2216-4f17-82ce-3eccd5d69936	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43daed96-2216-4f17-82ce-3eccd5d69936	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:elven-bow:cast:s1,f:xs:XP:elven-bow:cast:s1	-	-	-	d864b561c9cb	-	d59776e5e0fc	-	-	2026-11-24	xproof
 43daed96-2216-4f17-82ce-3eccd5d69936	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43daed96-2216-4f17-82ce-3eccd5d69936	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43daed96-2216-4f17-82ce-3eccd5d69936	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:elven-bow:cast:s1,f:xs:XP:elven-bow:cast:s1	-	-	-	d864b561c9cb	-	d59776e5e0fc	-	-	2026-11-24	xproof
 43dc0473-4b80-4844-9ce5-dc29754756a3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43ddc3e8-936b-4be0-9e64-484bbbd69016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:collective-defiance:cast:s1,f:xs:XP:collective-defiance:cast:s1	-	-	-	d864b561c9cb	-	e2b7cc2c45a0	-	-	2026-11-24	xproof
 43de944b-e630-45f0-bce4-c66803e8b5c1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

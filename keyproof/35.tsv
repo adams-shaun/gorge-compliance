@@ -53,9 +53,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35453c9e-e1ae-4fe9-926d-75724deb0555	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35453c9e-e1ae-4fe9-926d-75724deb0555	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3548489b-053e-4f81-a0be-07422cbe357d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-354a7376-fb4b-424d-8964-93727302dccb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-354a7376-fb4b-424d-8964-93727302dccb	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-354a7376-fb4b-424d-8964-93727302dccb	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+354a7376-fb4b-424d-8964-93727302dccb	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:immersturm-skullcairn:f0a0:s1,f:xs:XP:immersturm-skullcairn:f0a0:s1	-	-	-	d864b561c9cb	-	0f4310e2a56f	-	-	2026-11-24	xproof
+354a7376-fb4b-424d-8964-93727302dccb	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:immersturm-skullcairn:f0a1:s1,f:xs:XP:immersturm-skullcairn:f0a1:s1	-	-	-	d864b561c9cb	-	0f4310e2a56f	-	-	2026-11-24	xproof
+354a7376-fb4b-424d-8964-93727302dccb	land	land	agreed	-	FX	start	2	0	x:xs:XP:immersturm-skullcairn:land:s1,f:xs:XP:immersturm-skullcairn:land:s1	-	-	-	d864b561c9cb	-	0f4310e2a56f	-	-	2026-11-24	xproof
 354affb3-1be7-4a9e-91da-2989eb54f62d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 354defd2-f63f-4a48-9fd4-2526b3878a84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 354defd2-f63f-4a48-9fd4-2526b3878a84	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -106,8 +106,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 358297cd-4a9f-48e2-aaa5-131b0849f8dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 358297cd-4a9f-48e2-aaa5-131b0849f8dc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 358297cd-4a9f-48e2-aaa5-131b0849f8dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3583ec24-4f26-45ea-8fb4-a45bdd7bfc79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3583ec24-4f26-45ea-8fb4-a45bdd7bfc79	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3583ec24-4f26-45ea-8fb4-a45bdd7bfc79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravenous-lindwurm:f0t0:s1,f:xs:XP:ravenous-lindwurm:f0t0:s1	-	-	-	d864b561c9cb	-	2c55fe4146b0	-	-	2026-11-24	xproof
+3583ec24-4f26-45ea-8fb4-a45bdd7bfc79	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ravenous-lindwurm:f0t0:s1,f:xs:XP:ravenous-lindwurm:f0t0:s1	-	-	-	d864b561c9cb	-	2c55fe4146b0	-	-	2026-11-24	xproof
 358789f9-7d87-411d-919e-d597da665cbd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stoneforge-mystic:f0t0:s1,f:xs:XP:stoneforge-mystic:f0t0:s1	-	-	-	d864b561c9cb	-	72134bfd7b41	-	-	2026-11-24	xproof
 358789f9-7d87-411d-919e-d597da665cbd	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Stoneforge Mystic/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 358789f9-7d87-411d-919e-d597da665cbd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stoneforge-mystic:f0t0:s1,f:xs:XP:stoneforge-mystic:f0t0:s1	-	-	-	d864b561c9cb	-	72134bfd7b41	-	-	2026-11-24	xproof

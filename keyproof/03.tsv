@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 031ddf1e-afcf-4b09-8859-4df0f0ab5dcf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 031ddf1e-afcf-4b09-8859-4df0f0ab5dcf	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 031f629f-7a9a-4143-9f5d-434ed1c23b7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-031f629f-7a9a-4143-9f5d-434ed1c23b7f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+031f629f-7a9a-4143-9f5d-434ed1c23b7f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 032367fd-e869-463e-aa0f-65e3c6567e60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0324941f-484c-4656-8d1c-66e919c2bc7c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03253076-9add-4efb-9227-b0a062c86534	cast	cast-resolve	agreed	-	X	scen	1	0	Nori, Teller of Tales/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -81,8 +81,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 035d61a9-5ca2-4275-b8df-fcfa9f5c1b31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 035ee753-232f-4ba2-afbf-8d1eb162e6f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merrow-harbinger:f0t0:s1,f:xs:XP:merrow-harbinger:f0t0:s1	-	-	-	d864b561c9cb	-	2d36a2959522	-	-	2026-11-24	xproof
 035ee753-232f-4ba2-afbf-8d1eb162e6f8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:merrow-harbinger:f0t0:s1,f:xs:XP:merrow-harbinger:f0t0:s1	-	-	-	d864b561c9cb	-	2d36a2959522	-	-	2026-11-24	xproof
-035f0aae-9c23-4b22-8c87-0d66b84b7962	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-035f0aae-9c23-4b22-8c87-0d66b84b7962	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+035f0aae-9c23-4b22-8c87-0d66b84b7962	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:locked-in-the-cemetery:cast:s1,f:xs:XP:locked-in-the-cemetery:cast:s1	-	-	-	d864b561c9cb	-	d4e3d76cdb06	-	-	2026-11-24	xproof
+035f0aae-9c23-4b22-8c87-0d66b84b7962	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:locked-in-the-cemetery:cast:s1,f:xs:XP:locked-in-the-cemetery:cast:s1	-	-	-	d864b561c9cb	-	d4e3d76cdb06	-	-	2026-11-24	xproof
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	cast	cast-resolve	agreed	-	X	scen	1	0	Pompous Gadabout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pompous Gadabout/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pompous Gadabout/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 038519b9-bca8-4b27-b5ac-2409595469d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0385be55-8e8e-4e7d-b6b7-51adc6eb98fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03873314-6e64-43ab-95c0-3d8692a57a03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03873314-6e64-43ab-95c0-3d8692a57a03	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+03873314-6e64-43ab-95c0-3d8692a57a03	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0389b48a-e64c-44fb-8a41-fd571cba237c	cast	cast-resolve	agreed	-	X	scen	1	0	Strength of Will/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 038c0165-32b6-4e81-8180-604b49905207	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0390a3dc-386c-402f-a89c-b94867bfb0a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,8 +128,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0399b932-2a59-471c-828e-2b16614e0dae	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0399b932-2a59-471c-828e-2b16614e0dae	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03a0f7ac-de8a-43cf-be15-07d31e9d6188	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03a3f54e-9289-4d99-beab-bfa0988a050e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03a3f54e-9289-4d99-beab-bfa0988a050e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+03a3f54e-9289-4d99-beab-bfa0988a050e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guardian-gladewalker:f0t0:s1,f:xs:XP:guardian-gladewalker:f0t0:s1	-	-	-	d864b561c9cb	-	70ac72c1edba	-	-	2026-11-24	xproof
+03a3f54e-9289-4d99-beab-bfa0988a050e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:guardian-gladewalker:f0t0:s1,f:xs:XP:guardian-gladewalker:f0t0:s1	-	-	-	d864b561c9cb	-	70ac72c1edba	-	-	2026-11-24	xproof
 03a9ac3f-f6e4-4ade-9770-cf723434b7e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03ad624e-71f6-4f72-8ce0-7700e83458d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03af4b10-900e-4013-bd5d-dd8d132d50fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -17,8 +17,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05079cee-b190-42d7-b59f-130cb545cab7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 050dac46-9ba0-4b8a-b61b-1c7ec6f3723a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 050dac46-9ba0-4b8a-b61b-1c7ec6f3723a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-050f5733-7c0b-4991-9a6c-7ea12ccf0ca9	cast	cast-resolve	agreed	-	X	scen	1	0	Up the Beanstalk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-050f5733-7c0b-4991-9a6c-7ea12ccf0ca9	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+050f5733-7c0b-4991-9a6c-7ea12ccf0ca9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:up-the-beanstalk:f0t0:s1,f:xs:XP:up-the-beanstalk:f0t0:s1	-	-	-	d864b561c9cb	-	a83a3f15677b	-	-	2026-11-24	xproof
+050f5733-7c0b-4991-9a6c-7ea12ccf0ca9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:up-the-beanstalk:f0t0:s1,f:xs:XP:up-the-beanstalk:f0t0:s1	-	-	-	d864b561c9cb	-	a83a3f15677b	-	-	2026-11-24	xproof
 050f5733-7c0b-4991-9a6c-7ea12ccf0ca9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Up the Beanstalk/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 051333e4-a826-46e8-a46e-1571078112fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 051333e4-a826-46e8-a46e-1571078112fc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,8 +150,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05c2dec2-d2f7-4036-b91f-4fccba10a8bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05c42b13-5125-477c-991f-692c4e22bc53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05c42b13-5125-477c-991f-692c4e22bc53	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05c5752a-6ccb-45ff-bb85-5f89efd5944b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05c5752a-6ccb-45ff-bb85-5f89efd5944b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05c5752a-6ccb-45ff-bb85-5f89efd5944b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hill-giant-herdgorger:f0t0:s1,f:xs:XP:hill-giant-herdgorger:f0t0:s1	-	-	-	d864b561c9cb	-	e6775ca5b7d2	-	-	2026-11-24	xproof
+05c5752a-6ccb-45ff-bb85-5f89efd5944b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hill-giant-herdgorger:f0t0:s1,f:xs:XP:hill-giant-herdgorger:f0t0:s1	-	-	-	d864b561c9cb	-	e6775ca5b7d2	-	-	2026-11-24	xproof
 05c5ee65-651b-4bfb-b57f-305026507135	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:colossification:f0t0:s2,f:xs:XP:colossification:f0t0:s2	-	-	-	e07cf3a05ba5	-	76424a63274c	-	-	2026-11-24	xproof
 05c5ee65-651b-4bfb-b57f-305026507135	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:colossification:f0t0:s2,f:xs:XP:colossification:f0t0:s2	-	-	-	e07cf3a05ba5	-	76424a63274c	-	-	2026-11-24	xproof
 05c5ee65-651b-4bfb-b57f-305026507135	static#0.0	static#0.0	agreed	-	X	scen	1	0	Colossification/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

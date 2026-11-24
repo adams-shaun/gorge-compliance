@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d37c437-0d5c-400d-88ce-10d173b28eda	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d37c437-0d5c-400d-88ce-10d173b28eda	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d3998fc-a68a-4923-a456-b3e43ab6decb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2d3998fc-a68a-4923-a456-b3e43ab6decb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2d3998fc-a68a-4923-a456-b3e43ab6decb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2d3e6549-6cc6-434f-a189-ba3b55e64c34	cast	cast-resolve	agreed	-	FX	scen	2	0	Rampaging Baloths/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2d3e6549-6cc6-434f-a189-ba3b55e64c34	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rampaging Baloths/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2d3e6549-6cc6-434f-a189-ba3b55e64c34	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rampaging Baloths/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -149,9 +149,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ded4b02-7aa4-46a1-b10f-8480eb942cd4	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Tundra Tank/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ded4b02-7aa4-46a1-b10f-8480eb942cd4	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ded4b02-7aa4-46a1-b10f-8480eb942cd4	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Tundra Tank/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2df30a75-4957-4eab-8b0b-4c973f00642d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2df30a75-4957-4eab-8b0b-4c973f00642d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2df30a75-4957-4eab-8b0b-4c973f00642d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2df30a75-4957-4eab-8b0b-4c973f00642d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:westgate-regent:cast:s1,f:xs:XP:westgate-regent:cast:s1	-	-	-	d864b561c9cb	-	51805f1a0fdb	-	-	2026-11-24	xproof
+2df30a75-4957-4eab-8b0b-4c973f00642d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+2df30a75-4957-4eab-8b0b-4c973f00642d	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2df3187b-4b91-4de9-9b26-d48a30700cec	cast	cast-resolve	agreed	-	FX	scen	2	0	Splinter Twin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 2df3187b-4b91-4de9-9b26-d48a30700cec	static#0.0	static#0.0	agreed	-	X	scen	1	0	Splinter Twin/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 2df8f253-1d3c-4b1f-8549-93fb90623474	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

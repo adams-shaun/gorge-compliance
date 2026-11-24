@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01443d75-3f86-45c0-81fa-fbf1b3175d4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01443d75-3f86-45c0-81fa-fbf1b3175d4f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0146de73-29bf-415a-b450-11074553f715	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0146f430-da82-48d3-a576-c2b05101797f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0146f430-da82-48d3-a576-c2b05101797f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawnbringer-cleric:f0t0:s1,f:xs:XP:dawnbringer-cleric:f0t0:s1	-	-	-	d864b561c9cb	-	480f3b440f03	-	-	2026-11-24	xproof
 0146f430-da82-48d3-a576-c2b05101797f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01499544-6850-49f0-a66e-113df19c4340	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01499544-6850-49f0-a66e-113df19c4340	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -205,7 +205,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01deabbb-af6a-4998-99a7-35b7cfa9ef77	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 01deabbb-af6a-4998-99a7-35b7cfa9ef77	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 01e742ed-660c-43c6-b393-e589a54cbe1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-01e742ed-660c-43c6-b393-e589a54cbe1b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+01e742ed-660c-43c6-b393-e589a54cbe1b	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 01e81249-6c45-4fae-86ee-9ef5fbec99ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01e81249-6c45-4fae-86ee-9ef5fbec99ec	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01ed9139-293d-4477-a145-3c6fe59266c7	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Airship Engine Room/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

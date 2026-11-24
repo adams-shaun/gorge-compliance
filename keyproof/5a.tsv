@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a775f50-20f8-4a8f-868c-8907305bfad6	f0/t0	Attacks	agreed	-	F	start	2	0	f:xs:XP:zoraline-cosmos-caller:cast:s2	-	-	-	5437c1394672	-	381cfa7b02c8	-	-	2026-11-24	xproof
 5a775f50-20f8-4a8f-868c-8907305bfad6	f0/t1	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:zoraline-cosmos-caller:cast:s2	-	-	-	5437c1394672	-	381cfa7b02c8	-	-	2026-11-24	xproof
 5a775f50-20f8-4a8f-868c-8907305bfad6	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Zoraline, Cosmos Caller/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5a7b89a6-d42d-4fd4-8754-d9c3e3df2118	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a7b89a6-d42d-4fd4-8754-d9c3e3df2118	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:battle-of-frost-and-fire:cast:s1,f:xs:XP:battle-of-frost-and-fire:cast:s1	-	-	-	d864b561c9cb	-	0a25ca7a3bd7	-	-	2026-11-24	xproof
 5a7cd356-c07b-47dd-b089-8ecdd0e15581	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a7ecb5c-9b22-4d2c-b851-db92c1d3c745	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a81755f-bc44-47ac-8039-8847a5e37922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -168,9 +168,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ab5b82a-83e1-44d7-b8c3-9cd7accc1ca4	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5ab5b82a-83e1-44d7-b8c3-9cd7accc1ca4	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5ab5eefd-47bf-4cdf-bc29-b517e4f6adc0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ab5eefd-47bf-4cdf-bc29-b517e4f6adc0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5ab5eefd-47bf-4cdf-bc29-b517e4f6adc0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5ab91144-5eb3-491b-a8be-7e1139d0d6c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ab91144-5eb3-491b-a8be-7e1139d0d6c8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5ab91144-5eb3-491b-a8be-7e1139d0d6c8	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5abcc262-fbe1-4e81-897c-da5a8fb1f1f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5abcc262-fbe1-4e81-897c-da5a8fb1f1f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ac44e0a-782f-49ee-b263-2fb65359faaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ac65688-0a74-4dc4-b6cb-12bdf8aed01e	cast	cast-resolve	agreed	-	X	scen	1	0	Myojin of Night's Reach/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ac65688-0a74-4dc4-b6cb-12bdf8aed01e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Myojin of Night's Reach/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ac65688-0a74-4dc4-b6cb-12bdf8aed01e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Myojin of Night's Reach/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5ac8c234-030d-4ba1-bc2f-d05761045278	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5ac8c234-030d-4ba1-bc2f-d05761045278	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mordenkainen-s-polymorph:cast:s1,f:xs:XP:mordenkainen-s-polymorph:cast:s1	-	-	-	d864b561c9cb	-	8ab988775654	-	-	2026-11-24	xproof
 5ac8e01c-b0a7-4855-a122-1cd26b07c4a5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ac8e01c-b0a7-4855-a122-1cd26b07c4a5	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5acc8b39-3c3e-4012-8cfd-ac3c2c4ca982	cast	cast	agreed	-	F	start	2	0	f:xs:XP:arc-lightning:cast:s1	-	-	-	25696bf19d5b	-	a4fbb70cd990	-	-	2026-11-24	xproof

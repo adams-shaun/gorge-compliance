@@ -92,7 +92,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9376ccf6-1b18-44e9-8f9d-c5ad38927e2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9376ccf6-1b18-44e9-8f9d-c5ad38927e2f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 937a04c2-41be-4ff3-8992-6628a9ee9792	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-937a04c2-41be-4ff3-8992-6628a9ee9792	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+937a04c2-41be-4ff3-8992-6628a9ee9792	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:hall-monitor:f0a0:s1,f:xs:XP:hall-monitor:f0a0:s1	-	-	-	d864b561c9cb	-	25a5316147c1	-	-	2026-11-24	xproof
 937cb494-7dcb-4a40-b1e0-6e6b31f5c8a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captured-sunlight:cast:s1,f:xs:XP:captured-sunlight:cast:s1	-	-	-	8a1b1a193ec0	-	55d0414c5522	-	-	2026-11-24	xproof
 937d663d-c9a7-4312-a4cc-fcb54faa92bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 937de7f3-7f7f-4fd4-8531-0b90a11815c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9396546c-d067-4ce3-9c3d-b62cca970b4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:asceticism:cast:s1,f:xs:XP:asceticism:cast:s1	-	-	-	d864b561c9cb	-	ae37e1c89622	-	-	2026-11-24	xproof
 9396546c-d067-4ce3-9c3d-b62cca970b4f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9397a23b-770a-43fc-8bc2-2c3abb0683c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-93989dd7-2d3e-46e2-8e92-8d0479796087	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+93989dd7-2d3e-46e2-8e92-8d0479796087	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twinferno:cast:s1,f:xs:XP:twinferno:cast:s1	-	-	-	d864b561c9cb	-	de8f9bf22b0d	-	-	2026-11-24	xproof
 9398fbb4-a2b9-4ae4-9e0f-2553eb570501	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9398fbb4-a2b9-4ae4-9e0f-2553eb570501	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9399ed27-31c7-4d6a-99eb-644b74e67344	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,8 +132,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93a04ce0-9b8e-4d69-82bf-d4c89a9856a9	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93a04ce0-9b8e-4d69-82bf-d4c89a9856a9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Killer's Mask/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 93a0e938-b916-47ec-9803-369e885e253c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-93ab7462-ceef-4bc7-a9fe-8af8ceb78e1c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-93ab7462-ceef-4bc7-a9fe-8af8ceb78e1c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+93ab7462-ceef-4bc7-a9fe-8af8ceb78e1c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:skeletal-swarming:cast:s1	-	-	-	d864b561c9cb	-	d40f8cce7753	-	-	2026-11-24	xproof
+93ab7462-ceef-4bc7-a9fe-8af8ceb78e1c	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:skeletal-swarming:cast:s1	-	-	-	d864b561c9cb	-	d40f8cce7753	-	-	2026-11-24	xproof
 93af8f9d-6877-4cb8-a744-c89186db22e1	cast	cast-resolve	agreed	-	FX	scen	2	0	Vayne's Treachery/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 93b0185c-b86f-4137-bc6d-96212eee1708	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93b0185c-b86f-4137-bc6d-96212eee1708	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,9 +147,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93b91d18-6acf-42e5-9a31-bc6e01f90c1f	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 93bfb762-e69e-4d8e-a5b7-e13dd12cd42a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93bfb762-e69e-4d8e-a5b7-e13dd12cd42a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-93c2b91d-7d4e-483c-a11f-4a525f881503	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+93c2b91d-7d4e-483c-a11f-4a525f881503	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barbed-batterfist:f0t0:s1,f:xs:XP:barbed-batterfist:f0t0:s1	-	-	-	d864b561c9cb	-	8ca94fcfd770	-	-	2026-11-24	xproof
 93c2b91d-7d4e-483c-a11f-4a525f881503	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-93c2b91d-7d4e-483c-a11f-4a525f881503	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+93c2b91d-7d4e-483c-a11f-4a525f881503	f0/t0	ChangesZone/For Mirrodin	agreed	-	FX	start	2	0	x:xs:XP:barbed-batterfist:f0t0:s1,f:xs:XP:barbed-batterfist:f0t0:s1	-	-	-	d864b561c9cb	-	8ca94fcfd770	-	-	2026-11-24	xproof
 93c35f9e-3346-4269-b1af-df9f216bfd7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93c6554f-096d-4556-81ca-e87e29265887	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93c97e1a-bd7e-4307-8ada-58f53a887cf8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

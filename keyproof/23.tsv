@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+234ff22f-2ff1-4a73-a7c5-e9c53557c4c6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2351a9fa-17b5-41fc-93d0-34731d54f915	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2351a9fa-17b5-41fc-93d0-34731d54f915	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2359db1c-6029-4748-9f09-d57bb0ae92e9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -84,9 +84,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23669721-fe9e-49d7-9504-ae6164de723a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23669721-fe9e-49d7-9504-ae6164de723a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23674648-d1a0-437d-8a0b-4173c75b4507	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coursers-accord:cast:s1,f:xs:XP:coursers-accord:cast:s1	-	-	-	d864b561c9cb	-	0c93a87cb14e	-	-	2026-11-24	xproof
-236c4ff1-8c3f-4763-8df9-925021e65726	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+236c4ff1-8c3f-4763-8df9-925021e65726	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valkyrie-s-sword:f0t0:s1,f:xs:XP:valkyrie-s-sword:f0t0:s1	-	-	-	d864b561c9cb	-	c7142e454382	-	-	2026-11-24	xproof
 236c4ff1-8c3f-4763-8df9-925021e65726	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-236c4ff1-8c3f-4763-8df9-925021e65726	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+236c4ff1-8c3f-4763-8df9-925021e65726	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:valkyrie-s-sword:f0t0:s1,f:xs:XP:valkyrie-s-sword:f0t0:s1	-	-	-	d864b561c9cb	-	c7142e454382	-	-	2026-11-24	xproof
 236ce592-1321-4a7c-b695-fd84496f8924	cast	cast-resolve	agreed	-	FX	scen	2	0	Fear of Missing Out/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 236ce592-1321-4a7c-b695-fd84496f8924	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 236ce592-1321-4a7c-b695-fd84496f8924	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Fear of Missing Out/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -113,9 +113,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 237758f3-84b2-4e5b-a2c7-b28c893e2790	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Goblin Surveyor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 237758f3-84b2-4e5b-a2c7-b28c893e2790	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Goblin Surveyor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 237758f3-84b2-4e5b-a2c7-b28c893e2790	static#0.0	static#0.0	agreed	-	X	scen	1	0	Goblin Surveyor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2378d6fc-b6ba-4a44-b951-5698ed507e4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2378d6fc-b6ba-4a44-b951-5698ed507e4c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2378d6fc-b6ba-4a44-b951-5698ed507e4c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2378d6fc-b6ba-4a44-b951-5698ed507e4c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drownyard-amalgam:f0t0:s1,f:xs:XP:drownyard-amalgam:f0t0:s1	-	-	-	d864b561c9cb	-	e2b05e15b0d1	-	-	2026-11-24	xproof
+2378d6fc-b6ba-4a44-b951-5698ed507e4c	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:drownyard-amalgam:f0a0:s1,f:xs:XP:drownyard-amalgam:f0a0:s1	-	-	-	d864b561c9cb	-	e2b05e15b0d1	-	-	2026-11-24	xproof
+2378d6fc-b6ba-4a44-b951-5698ed507e4c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:drownyard-amalgam:f0t0:s1,f:xs:XP:drownyard-amalgam:f0t0:s1	-	-	-	d864b561c9cb	-	e2b05e15b0d1	-	-	2026-11-24	xproof
 237b8528-a199-45f4-8efc-96d67119f738	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 237b87f4-783b-40ac-9fcf-4ae76a33229d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2380fd04-6d19-4f5a-8a9e-c17d9ae09fb6	cast	cast-resolve	agreed	-	X	scen	1	0	Case of the Locked Hothouse/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

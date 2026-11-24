@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95b20721-1af9-4f3f-a39b-7cd1d4ce0b20	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Selvala, Eager Trailblazer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95b337ae-e15c-457d-bcc2-0c738cb94b1e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95be5f72-1f81-4ec6-9bd9-f0b07bfc874b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-95be5f72-1f81-4ec6-9bd9-f0b07bfc874b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+95be5f72-1f81-4ec6-9bd9-f0b07bfc874b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 95bedd11-ed01-4cb1-bcdb-c5f9fdba8c79	cast	cast	agreed	-	F	start	2	0	f:xs:XP:spreading-flames:cast:s1	-	-	-	d864b561c9cb	-	abe542197e1e	-	-	2026-11-24	xproof
 95c3976c-33f3-490b-bfd3-7f1af2fe0416	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95c3976c-33f3-490b-bfd3-7f1af2fe0416	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,8 +160,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95e1c368-b58a-4e69-9583-587560ad558d	cast	cast-resolve	agreed	-	X	scen	1	0	Eagle's Rescue/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95e1c368-b58a-4e69-9583-587560ad558d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Eagle's Rescue/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95e1c368-b58a-4e69-9583-587560ad558d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Eagle's Rescue/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-95e66851-7aff-4559-91b4-6b8a95c6e1f8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-95e66851-7aff-4559-91b4-6b8a95c6e1f8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+95e66851-7aff-4559-91b4-6b8a95c6e1f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vega-the-watcher:cast:s1,f:xs:XP:vega-the-watcher:cast:s1	-	-	-	d864b561c9cb	-	2346a00ce205	-	-	2026-11-24	xproof
+95e66851-7aff-4559-91b4-6b8a95c6e1f8	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 95e8e6bb-d83b-46fd-bfdf-fc042d8edd4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95e94dea-5ac0-4d6f-adec-ca147aee861f	cast	cast-resolve	agreed	-	X	scen	1	0	Ajani's Pridemate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95e94dea-5ac0-4d6f-adec-ca147aee861f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ajani's Pridemate/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -177,13 +177,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95f20067-4471-4bfa-952d-dbbfbb2c2178	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rearing Embermare/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95f20067-4471-4bfa-952d-dbbfbb2c2178	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rearing Embermare/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95f47e9b-0290-4ec4-a1ba-bc5a432ffab2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-95f47e9b-0290-4ec4-a1ba-bc5a432ffab2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+95f47e9b-0290-4ec4-a1ba-bc5a432ffab2	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 95f5c0ac-8835-4b31-863b-84f5273aac50	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lifesmith:cast:s1,f:xs:XP:lifesmith:cast:s1	-	-	-	d864b561c9cb	-	621b2c00db42	-	-	2026-11-24	xproof
 95f5c0ac-8835-4b31-863b-84f5273aac50	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 95f5ddb6-e3e5-4b35-88ac-eae192783eda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95f5ddb6-e3e5-4b35-88ac-eae192783eda	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-95f74c0d-3f89-4944-997e-1bdc408bae71	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-95f74c0d-3f89-4944-997e-1bdc408bae71	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+95f74c0d-3f89-4944-997e-1bdc408bae71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spectral-steel:cast:s1,f:xs:XP:spectral-steel:cast:s1	-	-	-	d864b561c9cb	-	ce1c7ca95856	-	-	2026-11-24	xproof
+95f74c0d-3f89-4944-997e-1bdc408bae71	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 95fd897e-9086-42c4-8e0d-61bb02333c5f	cast	cast-resolve	agreed	-	X	scen	1	0	Engineered Explosives/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95fd897e-9086-42c4-8e0d-61bb02333c5f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95ff3ba5-cbd2-4723-9498-3fc6df5be973	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reap-the-seagraf:cast:s1,f:xs:XP:reap-the-seagraf:cast:s1	-	-	-	d864b561c9cb	-	76eb78b71950	-	-	2026-11-24	xproof

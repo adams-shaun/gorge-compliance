@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9837287b-d821-4655-8f01-93fc6c7f0ecc	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 983739cd-0b36-40d9-9a03-7b6aa7ffd0df	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 983739cd-0b36-40d9-9a03-7b6aa7ffd0df	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-983739cd-0b36-40d9-9a03-7b6aa7ffd0df	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+983739cd-0b36-40d9-9a03-7b6aa7ffd0df	land	land	agreed	-	FX	start	2	0	x:xs:XP:rimewood-falls:land:s1,f:xs:XP:rimewood-falls:land:s1	-	-	-	d864b561c9cb	-	806923dcc530	-	-	2026-11-24	xproof
 98388eba-31ab-4302-be9e-ea67ea2b8c1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98388eba-31ab-4302-be9e-ea67ea2b8c1a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98388eba-31ab-4302-be9e-ea67ea2b8c1a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -85,8 +85,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9851f207-9f75-4ceb-8024-8f9bf21f90ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9851f207-9f75-4ceb-8024-8f9bf21f90ad	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9853d789-b048-4cba-a64d-db2694ca9173	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-985f9dd7-e693-48ff-9dd6-a1a3cbaa236b	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-985f9dd7-e693-48ff-9dd6-a1a3cbaa236b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+985f9dd7-e693-48ff-9dd6-a1a3cbaa236b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	876f6ffd83dc	-	-	2026-11-24	xproof
+985f9dd7-e693-48ff-9dd6-a1a3cbaa236b	f0/a1	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9863a7da-6f51-4d3e-9ace-e8ff201faf13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9863a7da-6f51-4d3e-9ace-e8ff201faf13	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98641070-93bd-4088-90cb-956c2b21979e	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 987c1144-69f6-4441-b0a4-d23f931df81f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:southern-air-temple:f0t0:s2,f:xs:XP:southern-air-temple:f0t0:s2	-	-	-	267e485f6204	-	dce695866752	-	-	2026-11-24	xproof
 987c1144-69f6-4441-b0a4-d23f931df81f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Southern Air Temple/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 987f8c13-0164-4536-b505-d9fa799222fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-987f8c13-0164-4536-b505-d9fa799222fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+987f8c13-0164-4536-b505-d9fa799222fb	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9880ba09-d5b8-4675-bfb4-2161d86d2d41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9881b8b6-2e0a-492e-a1d1-40a087158784	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9888d67d-fcad-427f-8ba7-b6d421b3d88e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

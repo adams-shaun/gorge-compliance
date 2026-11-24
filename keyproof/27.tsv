@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2701b912-b672-4764-97f7-51c444f754f2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:healer-of-the-glade:cast:s1,f:xs:XP:healer-of-the-glade:cast:s1	-	-	-	d864b561c9cb	-	e556f92fc7e3	-	-	2026-11-24	xproof
 2701b912-b672-4764-97f7-51c444f754f2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:healer-of-the-glade:cast:s1,f:xs:XP:healer-of-the-glade:cast:s1	-	-	-	d864b561c9cb	-	e556f92fc7e3	-	-	2026-11-24	xproof
 270508aa-b2e7-4066-be2f-4308cffe2b94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:consecrated-by-blood:cast:s1,f:xs:XP:consecrated-by-blood:cast:s1	-	-	-	d864b561c9cb	-	58569efc05f4	-	-	2026-11-24	xproof
-27083627-a5d0-4fc6-9e66-fa44803ef080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27083627-a5d0-4fc6-9e66-fa44803ef080	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27083627-a5d0-4fc6-9e66-fa44803ef080	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elturgard-ranger:f0t0:s1,f:xs:XP:elturgard-ranger:f0t0:s1	-	-	-	d864b561c9cb	-	9f78f10223d8	-	-	2026-11-24	xproof
+27083627-a5d0-4fc6-9e66-fa44803ef080	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elturgard-ranger:f0t0:s1,f:xs:XP:elturgard-ranger:f0t0:s1	-	-	-	d864b561c9cb	-	9f78f10223d8	-	-	2026-11-24	xproof
 270a21c1-4c44-46ef-8c4f-e08484f360e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 270a21c1-4c44-46ef-8c4f-e08484f360e1	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 270d14b2-07bc-46bc-918f-658102265ccf	cast	cast-resolve	agreed	-	FX	scen	2	0	Empyrean Eagle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27ca27f0-95a5-4292-b30b-1db3e9d639f8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:commune-with-dinosaurs:cast:s1	-	-	-	d864b561c9cb	-	cd8dca623114	-	-	2026-11-24	xproof
 27ca3201-a374-4a9d-b0ba-93b391f36844	cast	cast-resolve	agreed	-	X	scen	1	0	Eriette's Whisper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 27cfa916-282d-476c-8ee9-ca7f0d84f551	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27cfa916-282d-476c-8ee9-ca7f0d84f551	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27cfa916-282d-476c-8ee9-ca7f0d84f551	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 27d138af-7c5d-4c7e-a310-63d5b03f039d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27d5b2eb-94fe-45fb-806c-354044de7ba5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Room of Refuge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 27d5b2eb-94fe-45fb-806c-354044de7ba5	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Room of Refuge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

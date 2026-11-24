@@ -53,7 +53,7 @@ cc5370e0-a0e6-4958-a6f2-093a3868b575	combat#0.attack	combat#0.attack	agreed	-	X	
 cc5370e0-a0e6-4958-a6f2-093a3868b575	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Curious Cadaver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc5370e0-a0e6-4958-a6f2-093a3868b575	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Curious Cadaver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc545c68-829f-4c57-94d2-cd1edf2667a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cc545c68-829f-4c57-94d2-cd1edf2667a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cc545c68-829f-4c57-94d2-cd1edf2667a7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cc59e28a-eda3-468c-a31b-73e4b615f953	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodfire-colossus:cast:s1,f:xs:XP:bloodfire-colossus:cast:s1	-	-	-	25696bf19d5b	-	0439a28ac57c	-	-	2026-11-24	xproof
 cc59e28a-eda3-468c-a31b-73e4b615f953	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:bloodfire-colossus:f0a0:s1,f:xs:XP:bloodfire-colossus:f0a0:s1	-	-	-	d864b561c9cb	-	0439a28ac57c	-	-	2026-11-24	xproof
 cc5b1276-d13e-4392-988d-1315bc90a9b1	cast	cast-resolve	agreed	-	X	scen	1	0	Veteran Survivor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -71,7 +71,7 @@ cc65821a-1893-4087-b461-35cf9fd26c71	static#0.0	static#0.0	agreed	-	X	scen	1	0	O
 cc65a99f-ac7f-4ded-bb00-a5daf51e4bcd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc65ac73-5bef-4ecb-ad8e-39199084c027	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc65ac73-5bef-4ecb-ad8e-39199084c027	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-cc6a83c7-e645-4a53-9550-be79b42cd851	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cc6a83c7-e645-4a53-9550-be79b42cd851	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loyal-warhound:f0t0:s1,f:xs:XP:loyal-warhound:f0t0:s1	-	-	-	d864b561c9cb	-	471dfca05ba2	-	-	2026-11-24	xproof
 cc6a83c7-e645-4a53-9550-be79b42cd851	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc6f2b79-8fcd-4542-904b-943c7493b8ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc710da0-5a2e-4bc4-8fdd-d90e7bc1f224	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Baron, Airship Kingdom/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -101,8 +101,8 @@ cc999cf2-c99b-4911-8c52-6cc4a99fcc7b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 cc999cf2-c99b-4911-8c52-6cc4a99fcc7b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc9cbbbc-8b02-42ef-a4d8-e2837e742c88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc9cbbbc-8b02-42ef-a4d8-e2837e742c88	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cc9d3868-9814-4506-80b3-660bc462ff98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cc9d3868-9814-4506-80b3-660bc462ff98	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cc9d3868-9814-4506-80b3-660bc462ff98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:argothian-opportunist:f0t0:s1,f:xs:XP:argothian-opportunist:f0t0:s1	-	-	-	d864b561c9cb	-	493a07202893	-	-	2026-11-24	xproof
+cc9d3868-9814-4506-80b3-660bc462ff98	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:argothian-opportunist:f0t0:s1,f:xs:XP:argothian-opportunist:f0t0:s1	-	-	-	d864b561c9cb	-	493a07202893	-	-	2026-11-24	xproof
 cca03b76-dd3c-4228-b97a-f7fa20819b2e	cast	cast	agreed	-	F	start	2	0	f:xs:XP:pterafractyl:cast:s2	-	-	-	5437c1394672	-	b6d834d5eddf	-	-	2026-11-24	xproof
 cca03b76-dd3c-4228-b97a-f7fa20819b2e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pterafractyl/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cca03b76-dd3c-4228-b97a-f7fa20819b2e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pterafractyl/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

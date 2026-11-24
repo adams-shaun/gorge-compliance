@@ -88,8 +88,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d60c095-4c6c-4618-8ef3-508f3d454efa	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ajani Resolute/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d60cfb1-dd77-4013-b862-41e95fdb53ae	cast	cast-resolve	agreed	-	X	scen	1	0	MACO Strike Team/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d60cfb1-dd77-4013-b862-41e95fdb53ae	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-0d60ffba-9904-442e-8d4a-a6b1b50a38eb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d60ffba-9904-442e-8d4a-a6b1b50a38eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d60ffba-9904-442e-8d4a-a6b1b50a38eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prismari-apprentice:cast:s1,f:xs:XP:prismari-apprentice:cast:s1	-	-	-	d864b561c9cb	-	35472fccf812	-	-	2026-11-24	xproof
+0d60ffba-9904-442e-8d4a-a6b1b50a38eb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0d61239f-28e4-4adb-8f6e-b56e9c8699af	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d61239f-28e4-4adb-8f6e-b56e9c8699af	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d6202c7-b19c-429a-85c4-332024381dd7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d9ac5e0-2b4e-4e7b-937e-9e9bfce7e96b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d9ac5e0-2b4e-4e7b-937e-9e9bfce7e96b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d9d7f04-6319-4596-8b74-de5a794936e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d9df234-520c-40aa-a37d-070181cf695c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d9df234-520c-40aa-a37d-070181cf695c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:graven-lore:cast:s1,f:xs:XP:graven-lore:cast:s1	-	-	-	d864b561c9cb	-	ee25077bf0f3	-	-	2026-11-24	xproof
 0da104ae-c46c-4106-919f-d975721d42d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0da19cd4-7b3f-47bb-bb35-cbcc88ab53cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0da19cd4-7b3f-47bb-bb35-cbcc88ab53cd	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-corruption:f0a0:s1,f:xs:XP:trigon-of-corruption:f0a0:s1	-	-	-	d864b561c9cb	-	c4d14f57b237	-	-	2026-11-24	xproof

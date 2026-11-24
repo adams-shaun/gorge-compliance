@@ -32,9 +32,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a1fd464-760c-43d9-829a-424945d91eb9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a206c6f-4f6f-4c31-9dab-d73a57db989c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a206c6f-4f6f-4c31-9dab-d73a57db989c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-8a20707f-9764-4236-9aa9-858a2419f012	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a20707f-9764-4236-9aa9-858a2419f012	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a20707f-9764-4236-9aa9-858a2419f012	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a20707f-9764-4236-9aa9-858a2419f012	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:loathsome-curator:cast:s1,f:xs:XP:loathsome-curator:cast:s1	-	-	-	d864b561c9cb	-	27262c105d43	-	-	2026-11-24	xproof
+8a20707f-9764-4236-9aa9-858a2419f012	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:loathsome-curator:cast:s1,f:xs:XP:loathsome-curator:cast:s1	-	-	-	d864b561c9cb	-	27262c105d43	-	-	2026-11-24	xproof
+8a20707f-9764-4236-9aa9-858a2419f012	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:loathsome-curator:cast:s1,f:xs:XP:loathsome-curator:cast:s1	-	-	-	d864b561c9cb	-	27262c105d43	-	-	2026-11-24	xproof
 8a265910-2e10-4e97-88ab-c0cb1a712eb8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cursed-windbreaker:f0t0:s2,f:xs:XP:cursed-windbreaker:f0t0:s2	-	-	-	e07cf3a05ba5	-	84eca2b6ce51	-	-	2026-11-24	xproof
 8a265910-2e10-4e97-88ab-c0cb1a712eb8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cursed Windbreaker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a265910-2e10-4e97-88ab-c0cb1a712eb8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cursed-windbreaker:f0t0:s2,f:xs:XP:cursed-windbreaker:f0t0:s2	-	-	-	e07cf3a05ba5	-	84eca2b6ce51	-	-	2026-11-24	xproof
@@ -55,7 +55,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a397a64-542f-43fb-bf54-27ac651e1819	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a397a64-542f-43fb-bf54-27ac651e1819	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a39809e-219e-4f59-a233-ea28d05c30ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a39809e-219e-4f59-a233-ea28d05c30ef	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a39809e-219e-4f59-a233-ea28d05c30ef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a398777-2fa5-4cac-adee-4582e59d410d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a398777-2fa5-4cac-adee-4582e59d410d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a4028cd-6004-4fb0-a044-0bee662a78e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a802eae-abfb-47fd-8458-1689055531ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a810017-06ac-4824-bc2f-a7d303d58ad7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a825e4c-4a87-4b8d-84f7-3e50b896d7cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a825e4c-4a87-4b8d-84f7-3e50b896d7cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a825e4c-4a87-4b8d-84f7-3e50b896d7cb	f0/t0	Attacks	agreed	-	FX	start	1	0	x:xs:XP:lightfoot-rogue:f0t0:s1,f:xs:XP:lightfoot-rogue:f0t0:s1	-	-	-	d864b561c9cb	-	fff16d7f3fc4	-	-	2026-11-24	xproof
 8a83d284-75a0-4901-b7d9-c4b7586ee327	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:river-of-tears:f0a0:s1,f:xs:XP:river-of-tears:f0a0:s1	-	-	-	d864b561c9cb	-	8cc0509c5f85	-	-	2026-11-24	xproof
 8a83d284-75a0-4901-b7d9-c4b7586ee327	land	land	agreed	-	FX	start	2	0	x:xs:XP:river-of-tears:land:s1,f:xs:XP:river-of-tears:land:s1	-	-	-	d864b561c9cb	-	8cc0509c5f85	-	-	2026-11-24	xproof
 8a8bc537-b69f-441d-a10e-d7f17f2f75bb	cast	cast-resolve	agreed	-	X	scen	1	0	Pothole Mole/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

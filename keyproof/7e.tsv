@@ -92,7 +92,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e64b1dc-a238-4bff-98ff-2bea44340568	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-mistmoors:f0t0:s2,f:xs:XP:overlord-of-the-mistmoors:f0t0:s2	-	-	-	e07cf3a05ba5	-	6796ce2ff7a9	-	-	2026-11-24	xproof
 7e64b1dc-a238-4bff-98ff-2bea44340568	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Overlord of the Mistmoors/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7e6cfec7-3b54-43db-853a-27c164776a5f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savannah-sage:f0t0:s1,f:xs:XP:savannah-sage:f0t0:s1	-	-	-	d864b561c9cb	-	c63ad8ffe7f4	-	-	2026-11-24	xproof
 7e6cfec7-3b54-43db-853a-27c164776a5f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:savannah-sage:f0t0:s1,f:xs:XP:savannah-sage:f0t0:s1	-	-	-	d864b561c9cb	-	c63ad8ffe7f4	-	-	2026-11-24	xproof
 7e6e2c37-3a06-456a-ae0f-37b7dc1a3e2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7eaf3fd0-e141-42c2-874d-b471f4a94ad2	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ebaeef0-4e4c-4bf0-85dd-07c6b6be0741	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ebec169-d941-460e-9e3c-ba54b5066b05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7eccd10d-f224-4467-af25-f2b768993f9f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7eccd10d-f224-4467-af25-f2b768993f9f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thraben-charm:cast:s1,f:xs:XP:thraben-charm:cast:s1	-	-	-	d864b561c9cb	-	ebfaa28a075c	-	-	2026-11-24	xproof
 7ece47b1-0b4b-40ac-a90f-4573a8e3b8bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ece47b1-0b4b-40ac-a90f-4573a8e3b8bd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ece47b1-0b4b-40ac-a90f-4573a8e3b8bd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

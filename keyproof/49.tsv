@@ -2,12 +2,12 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 4900c157-8d9f-4f92-aaca-5246b6e2832e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4900c157-8d9f-4f92-aaca-5246b6e2832e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49039519-62db-4605-b600-cef6f34c893f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49039519-62db-4605-b600-cef6f34c893f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49039519-62db-4605-b600-cef6f34c893f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+49039519-62db-4605-b600-cef6f34c893f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rampage-of-the-valkyries:cast:s1,f:xs:XP:rampage-of-the-valkyries:cast:s1	-	-	-	d864b561c9cb	-	e7b5017cbf3c	-	-	2026-11-24	xproof
+49039519-62db-4605-b600-cef6f34c893f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rampage-of-the-valkyries:cast:s1,f:xs:XP:rampage-of-the-valkyries:cast:s1	-	-	-	d864b561c9cb	-	e7b5017cbf3c	-	-	2026-11-24	xproof
+49039519-62db-4605-b600-cef6f34c893f	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 490ac985-79b5-438d-a2e7-f47683b29683	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 490ac985-79b5-438d-a2e7-f47683b29683	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-490ac985-79b5-438d-a2e7-f47683b29683	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+490ac985-79b5-438d-a2e7-f47683b29683	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 490df3b5-ece2-45bb-af38-fcd7f83e37b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 490df8a0-182a-40b8-a36e-f2666fa7c7fa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:titan-of-eternal-fire:cast:s1,f:xs:XP:titan-of-eternal-fire:cast:s1	-	-	-	d864b561c9cb	-	05f0452c99b6	-	-	2026-11-24	xproof
 49136bdc-bc50-49a2-999a-1ef9c16ea130	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -204,8 +204,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49e9fba7-8465-4bbb-95db-73a7e149f494	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Maelstrom of the Spirit Dragon/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49e9fba7-8465-4bbb-95db-73a7e149f494	land	play-land	agreed	-	X	scen	1	0	Maelstrom of the Spirit Dragon/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49f01296-7b30-4d84-bfa3-6ed58cd23a33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49f0b317-6b06-482e-ab64-e02713e6c7e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49f0b317-6b06-482e-ab64-e02713e6c7e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+49f0b317-6b06-482e-ab64-e02713e6c7e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:battlewing-mystic:f0t0:s1,f:xs:XP:battlewing-mystic:f0t0:s1	-	-	-	d864b561c9cb	-	b156700ed060	-	-	2026-11-24	xproof
+49f0b317-6b06-482e-ab64-e02713e6c7e8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:battlewing-mystic:f0t0:s1,f:xs:XP:battlewing-mystic:f0t0:s1	-	-	-	d864b561c9cb	-	b156700ed060	-	-	2026-11-24	xproof
 49f0da4a-e046-4220-b90e-e105a5f2ef00	cast	cast-resolve	agreed	-	FX	scen	2	0	Incinerating Blast/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49f2cbc3-bd03-48e6-b1c4-d7f315b8579d	cast	cast-resolve	agreed	-	X	scen	1	0	Taigam, Master Opportunist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49f2cbc3-bd03-48e6-b1c4-d7f315b8579d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Taigam, Master Opportunist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

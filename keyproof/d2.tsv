@@ -76,7 +76,7 @@ d262f3e1-b5bc-4dab-86c2-cd89c2419e54	cast	cast-resolve	agreed	-	X	scen	1	0	Caugh
 d264903b-d23e-48c8-95f1-cb1606a705a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2653823-04f4-4a6e-86f9-e2cb16ebe587	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2664f28-49e1-46f8-a863-b217e961a57c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2664f28-49e1-46f8-a863-b217e961a57c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d2664f28-49e1-46f8-a863-b217e961a57c	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d268143f-27f0-4f14-8cd3-481923aaff6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d268143f-27f0-4f14-8cd3-481923aaff6d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d268143f-27f0-4f14-8cd3-481923aaff6d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -90,9 +90,9 @@ d2766fd7-5cf9-4037-9f34-9ae3982c613a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d2766fd7-5cf9-4037-9f34-9ae3982c613a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2783a37-b6de-4184-b094-e1a23f185a94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2783a37-b6de-4184-b094-e1a23f185a94	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d27bebc9-348d-4b8e-816a-a4da66fb5618	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d27bebc9-348d-4b8e-816a-a4da66fb5618	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d27bebc9-348d-4b8e-816a-a4da66fb5618	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d27bebc9-348d-4b8e-816a-a4da66fb5618	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:writhing-chrysalis:cast:s1,f:xs:XP:writhing-chrysalis:cast:s1	-	-	-	d864b561c9cb	-	31ceb345ad98	-	-	2026-11-24	xproof
+d27bebc9-348d-4b8e-816a-a4da66fb5618	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:writhing-chrysalis:cast:s1,f:xs:XP:writhing-chrysalis:cast:s1	-	-	-	d864b561c9cb	-	31ceb345ad98	-	-	2026-11-24	xproof
+d27bebc9-348d-4b8e-816a-a4da66fb5618	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d27ffb4c-3a34-41aa-b464-6b897132c4ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wily-goblin:f0t0:s1,f:xs:XP:wily-goblin:f0t0:s1	-	-	-	d864b561c9cb	-	4dafb871016f	-	-	2026-11-24	xproof
 d27ffb4c-3a34-41aa-b464-6b897132c4ea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wily-goblin:f0t0:s1,f:xs:XP:wily-goblin:f0t0:s1	-	-	-	d864b561c9cb	-	4dafb871016f	-	-	2026-11-24	xproof
 d2824464-963b-48db-a482-cc08a0a97332	cast	cast-resolve	agreed	-	X	scen	1	0	Tendril of the Mycotyrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

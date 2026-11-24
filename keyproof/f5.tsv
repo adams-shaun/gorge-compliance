@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-f500a8a4-6135-448c-9116-bd2695a72229	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f500a8a4-6135-448c-9116-bd2695a72229	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f500a8a4-6135-448c-9116-bd2695a72229	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f500a8a4-6135-448c-9116-bd2695a72229	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:port-of-karfell:f0a0:s1,f:xs:XP:port-of-karfell:f0a0:s1	-	-	-	d864b561c9cb	-	4457cfce677e	-	-	2026-11-24	xproof
+f500a8a4-6135-448c-9116-bd2695a72229	f0/a1	Mill	agreed	-	FX	start	2	0	x:xs:XP:port-of-karfell:f0a1:s1,f:xs:XP:port-of-karfell:f0a1:s1	-	-	-	d864b561c9cb	-	4457cfce677e	-	-	2026-11-24	xproof
+f500a8a4-6135-448c-9116-bd2695a72229	land	land	agreed	-	FX	start	2	0	x:xs:XP:port-of-karfell:land:s1,f:xs:XP:port-of-karfell:land:s1	-	-	-	d864b561c9cb	-	4457cfce677e	-	-	2026-11-24	xproof
 f500f4cc-d5ee-4995-b7b5-96a5f63dfb47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f5068b54-b1f8-4751-9a09-fc1b554e8115	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moodmark-painter:f0t0:s1,f:xs:XP:moodmark-painter:f0t0:s1	-	-	-	d864b561c9cb	-	31f64e0b5750	-	-	2026-11-24	xproof
 f5068b54-b1f8-4751-9a09-fc1b554e8115	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:moodmark-painter:f0t0:s1,f:xs:XP:moodmark-painter:f0t0:s1	-	-	-	d864b561c9cb	-	31f64e0b5750	-	-	2026-11-24	xproof
@@ -116,8 +116,8 @@ f5bece93-afb3-4fa4-83a8-d7eaac032522	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Most 
 f5bed085-bb7a-4250-9599-b2a8a95e6b6f	cast	cast-resolve	agreed	-	X	scen	1	0	Lord Skitter, Sewer King/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f5bed085-bb7a-4250-9599-b2a8a95e6b6f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lord Skitter, Sewer King/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f5bed085-bb7a-4250-9599-b2a8a95e6b6f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Lord Skitter, Sewer King/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f5c07218-c8bf-4990-a366-f3c065d0b30c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f5c07218-c8bf-4990-a366-f3c065d0b30c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f5c07218-c8bf-4990-a366-f3c065d0b30c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loyal-gryff:f0t0:s1,f:xs:XP:loyal-gryff:f0t0:s1	-	-	-	d864b561c9cb	-	255ad2c429ab	-	-	2026-11-24	xproof
+f5c07218-c8bf-4990-a366-f3c065d0b30c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loyal-gryff:f0t0:s1,f:xs:XP:loyal-gryff:f0t0:s1	-	-	-	d864b561c9cb	-	255ad2c429ab	-	-	2026-11-24	xproof
 f5c2b700-da52-4436-b234-e32ba7759e17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f5c30dec-072c-4f02-b5d8-5eccfd1cffcf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f5c38c01-4a40-469f-91a0-7479daf4e8e7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

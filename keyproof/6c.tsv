@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c5ed756-b999-49f7-9a52-fb8196202f0f	cast	cast-resolve	agreed	-	X	scen	1	0	Theoretical Necromancer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c5ed756-b999-49f7-9a52-fb8196202f0f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Theoretical Necromancer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c728edd-ab67-44ce-b19d-aa98dfce68bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6c728edd-ab67-44ce-b19d-aa98dfce68bb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6c728edd-ab67-44ce-b19d-aa98dfce68bb	f0/a0	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:katilda-dawnhart-prime:f0a0:s1,f:xs:XP:katilda-dawnhart-prime:f0a0:s1	-	-	-	d864b561c9cb	-	d618dda9875a	-	-	2026-11-24	xproof
 6c73e533-9ed1-4df0-af12-c0174c0b52b9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:whitewater-naiads:cast:s1,f:xs:XP:whitewater-naiads:cast:s1	-	-	-	d864b561c9cb	-	a3228106b257	-	-	2026-11-24	xproof
 6c73e533-9ed1-4df0-af12-c0174c0b52b9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:whitewater-naiads:cast:s1,f:xs:XP:whitewater-naiads:cast:s1	-	-	-	d864b561c9cb	-	a3228106b257	-	-	2026-11-24	xproof
 6c754808-86a6-43d3-8aeb-96ec19f7396c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:renet-temporal-apprentice:f0t0:s2,f:xs:XP:renet-temporal-apprentice:f0t0:s2	-	-	-	5437c1394672	-	c50fd15d05c3	-	-	2026-11-24	xproof
@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c9a9071-8159-4607-9465-de796f1dc2cc	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c9d3ad0-1ede-41de-a1b4-15de9c728216	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ca0078f-d6b5-4643-b801-e7a98706f21c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6ca1d5ca-cc97-4783-9c0a-f47097f35ba8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6ca1d5ca-cc97-4783-9c0a-f47097f35ba8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:kardur-s-vicious-return:cast:s1	-	-	-	d864b561c9cb	-	f1deaca260af	-	-	2026-11-24	xproof
 6ca2a89e-7032-4864-b4e9-66f3178f90ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ca2a89e-7032-4864-b4e9-66f3178f90ab	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6ca90451-861d-4aa8-93e7-3f3e02385530	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,10 +147,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ccf72ee-a86a-4b13-9e76-e308d0d28523	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rainveil Rejuvenator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6ccf72ee-a86a-4b13-9e76-e308d0d28523	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cd58a88-6434-4c55-bf93-a739b5ed9bc1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6cd58a88-6434-4c55-bf93-a739b5ed9bc1	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6cd58a88-6434-4c55-bf93-a739b5ed9bc1	f0/a1	Scry	agreed	-	FX	start	2	0	x:xs:XP:witherbloom-campus:f0a1:s1,f:xs:XP:witherbloom-campus:f0a1:s1	-	-	-	d864b561c9cb	-	89523968751e	-	-	2026-11-24	xproof
 6cd58a88-6434-4c55-bf93-a739b5ed9bc1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cd6b56d-d69e-4144-a6c7-8c066629435b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6cd6b56d-d69e-4144-a6c7-8c066629435b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6cd6b56d-d69e-4144-a6c7-8c066629435b	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6cd8cf2a-972f-41b7-ab0c-b4953accc2fe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cd8cf2a-972f-41b7-ab0c-b4953accc2fe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cdc6548-cb32-437f-850a-9002542ad3d5	cast	cast-resolve	agreed	-	X	scen	1	0	Memories Returning/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

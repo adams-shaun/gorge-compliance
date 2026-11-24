@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7714af0e-41d9-4609-967f-27233b46055f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lord of the Undead/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7714af0e-41d9-4609-967f-27233b46055f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lord of the Undead/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7716ad72-9e96-4915-bc1e-e12b4d0f6f9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7716ad72-9e96-4915-bc1e-e12b4d0f6f9c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7716ad72-9e96-4915-bc1e-e12b4d0f6f9c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:thunderous-orator:f0t0:s1,f:xs:XP:thunderous-orator:f0t0:s1	-	-	-	d864b561c9cb	-	325d4b8c9e1e	-	-	2026-11-24	xproof
 7719fd5d-c9dc-49b8-87b4-24f7d42af62f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vedalken-anatomist:cast:s1,f:xs:XP:vedalken-anatomist:cast:s1	-	-	-	d864b561c9cb	-	d6d664afdf25	-	-	2026-11-24	xproof
 7719fd5d-c9dc-49b8-87b4-24f7d42af62f	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:vedalken-anatomist:f0a0:s1,f:xs:XP:vedalken-anatomist:f0a0:s1	-	-	-	d864b561c9cb	-	d6d664afdf25	-	-	2026-11-24	xproof
 771be8ad-5ab5-40b1-ad9b-e5e834949d32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -44,9 +44,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7739311a-682b-48a6-8db2-c07f44141751	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Gitrog, Ravenous Ride/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7739311a-682b-48a6-8db2-c07f44141751	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Gitrog, Ravenous Ride/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7739311a-682b-48a6-8db2-c07f44141751	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Gitrog, Ravenous Ride/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-77398866-eebb-4091-b566-7726f8194a59	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77398866-eebb-4091-b566-7726f8194a59	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77398866-eebb-4091-b566-7726f8194a59	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77398866-eebb-4091-b566-7726f8194a59	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:realmbreaker-the-invasion-tree:cast:s1,f:xs:XP:realmbreaker-the-invasion-tree:cast:s1	-	-	-	d864b561c9cb	-	4933aa2150ca	-	-	2026-11-24	xproof
+77398866-eebb-4091-b566-7726f8194a59	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:realmbreaker-the-invasion-tree:f0a0:s1,f:xs:XP:realmbreaker-the-invasion-tree:f0a0:s1	-	-	-	d864b561c9cb	-	4933aa2150ca	-	-	2026-11-24	xproof
+77398866-eebb-4091-b566-7726f8194a59	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:realmbreaker-the-invasion-tree:f0a1:s1,f:xs:XP:realmbreaker-the-invasion-tree:f0a1:s1	-	-	-	d864b561c9cb	-	4933aa2150ca	-	-	2026-11-24	xproof
 773ad2ef-5acc-49ea-8d85-056330e87039	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 773b40b1-72f0-48a0-b210-2afa5df5485e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 773b40b1-72f0-48a0-b210-2afa5df5485e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77a000de-76d9-44f8-9789-875aa9f576e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77a000de-76d9-44f8-9789-875aa9f576e7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77a000de-76d9-44f8-9789-875aa9f576e7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77a1958e-ee24-4305-9dad-da8372803be8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77a1958e-ee24-4305-9dad-da8372803be8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crushing-disappointment:cast:s1,f:xs:XP:crushing-disappointment:cast:s1	-	-	-	d864b561c9cb	-	23b3c217063b	-	-	2026-11-24	xproof
 77a5305a-2611-4a64-adb4-da131dcea233	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77a5305a-2611-4a64-adb4-da131dcea233	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:footlight-fiend:f0t0:s1,f:xs:XP:footlight-fiend:f0t0:s1	-	-	-	d864b561c9cb	-	fadb18d59584	-	-	2026-11-24	xproof
 77a77622-dc5b-4ff2-a98b-732d44c8856e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

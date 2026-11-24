@@ -79,9 +79,9 @@ ae6d1aa3-4ceb-4fc1-a3a6-033afd4b3bce	cast	cast-resolve	agreed	-	X	scen	1	0	War M
 ae6d1aa3-4ceb-4fc1-a3a6-033afd4b3bce	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	War Machine, Legacy of Iron/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ae6d1aa3-4ceb-4fc1-a3a6-033afd4b3bce	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	War Machine, Legacy of Iron/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ae6d1aa3-4ceb-4fc1-a3a6-033afd4b3bce	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	War Machine, Legacy of Iron/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ae6dc45c-b8c9-4cbf-892f-8c00f4199aaf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ae6dc45c-b8c9-4cbf-892f-8c00f4199aaf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ae6dc45c-b8c9-4cbf-892f-8c00f4199aaf	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ae6dc45c-b8c9-4cbf-892f-8c00f4199aaf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:laid-to-rest:cast:s1,f:xs:XP:laid-to-rest:cast:s1	-	-	-	d864b561c9cb	-	6131f3348423	-	-	2026-11-24	xproof
+ae6dc45c-b8c9-4cbf-892f-8c00f4199aaf	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ae6dc45c-b8c9-4cbf-892f-8c00f4199aaf	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ae6ef097-bd52-4bf8-81a8-2e6c643fc805	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae6ef097-bd52-4bf8-81a8-2e6c643fc805	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae74efc6-4649-4783-a3a5-7a34d4667f64	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -89,7 +89,7 @@ ae74efc6-4649-4783-a3a5-7a34d4667f64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 ae7604bb-4818-45a3-960c-cf3d83f15964	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae7604bb-4818-45a3-960c-cf3d83f15964	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae7604bb-4818-45a3-960c-cf3d83f15964	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ae7643ea-ef1c-43a3-9605-4e8585239ea3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ae7643ea-ef1c-43a3-9605-4e8585239ea3	cast	cast	agreed	-	F	start	2	0	f:xs:XP:storm-the-seedcore:cast:s1	-	-	-	d864b561c9cb	-	d3baa275f766	-	-	2026-11-24	xproof
 ae771e78-1d29-4b8c-8511-9da196a78dcf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae78b6f9-8334-479e-8111-8e3acb2b7ca7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae78b6f9-8334-479e-8111-8e3acb2b7ca7	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -120,7 +120,7 @@ ae9a398e-f3a7-4878-a14d-0f6c2dac3d83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ae9ca82c-e07e-4a41-a387-0ef7d6df14b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae9ca82c-e07e-4a41-a387-0ef7d6df14b6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ae9f4b85-46ed-4a1a-ada4-54ce56f41815	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ae9f4b85-46ed-4a1a-ada4-54ce56f41815	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ae9f4b85-46ed-4a1a-ada4-54ce56f41815	f0/t0	Attacks	agreed	-	FX	start	1	0	x:xs:XP:sylvan-shepherd:f0t0:s1,f:xs:XP:sylvan-shepherd:f0t0:s1	-	-	-	d864b561c9cb	-	de879db9d1f9	-	-	2026-11-24	xproof
 aea98950-536e-451d-bd25-ae6e3e459ffb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aeaae9cc-f30f-4d7e-86f3-3132ef47e987	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:molten-birth:cast:s1,f:xs:XP:molten-birth:cast:s1	-	-	-	d864b561c9cb	-	8dfcc6b8fad1	-	-	2026-11-24	xproof
 aead53ef-ffcf-4ae2-ab81-40aa9627adc9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ aebeaf0b-4df1-4c34-919b-740bfab19e56	f0/t0	NULL	owed	refused:scen failed: xengin
 aebeaf0b-4df1-4c34-919b-740bfab19e56	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sidequest: Raise a Chocobo/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 aebeaf0b-4df1-4c34-919b-740bfab19e56	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Sidequest: Raise a Chocobo/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 aebeaf0b-4df1-4c34-919b-740bfab19e56	f1/t1	trigger#1.1	agreed	-	X	scen	1	0	Sidequest: Raise a Chocobo/trigger#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-aebfdcc0-c5b9-4737-8498-764a5021b087	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+aebfdcc0-c5b9-4737-8498-764a5021b087	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:graaz-unstoppable-juggernaut:cast:s1,f:xs:XP:graaz-unstoppable-juggernaut:cast:s1	-	-	-	d864b561c9cb	-	7b0671123532	-	-	2026-11-24	xproof
 aeca0661-8b71-4085-81e9-bb0884fc9831	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aecc621f-67da-41a7-9d47-05ded302ae35	cast	cast-resolve	agreed	-	X	scen	1	0	Karn, Argent Defender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 aecc621f-67da-41a7-9d47-05ded302ae35	static#0.0	static#0.0	agreed	-	X	scen	1	0	Karn, Argent Defender/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

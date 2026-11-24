@@ -25,9 +25,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7220769a-9d63-4211-9365-9feaf4d9a518	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72217c2e-4f6b-41da-8de1-bb6892d3c452	cast	cast-resolve	agreed	-	FX	scen	2	0	General Chang, Cold Warrior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 72217c2e-4f6b-41da-8de1-bb6892d3c452	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7223ef44-0bfb-4108-810d-134174ff26b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7223ef44-0bfb-4108-810d-134174ff26b0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7223ef44-0bfb-4108-810d-134174ff26b0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7223ef44-0bfb-4108-810d-134174ff26b0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:drey-keeper:cast:s1,f:xs:XP:drey-keeper:cast:s1	-	-	-	d864b561c9cb	-	dbe8cce31c29	-	-	2026-11-24	xproof
+7223ef44-0bfb-4108-810d-134174ff26b0	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:drey-keeper:f0a0:s1,f:xs:XP:drey-keeper:f0a0:s1	-	-	-	d864b561c9cb	-	dbe8cce31c29	-	-	2026-11-24	xproof
+7223ef44-0bfb-4108-810d-134174ff26b0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:drey-keeper:cast:s1,f:xs:XP:drey-keeper:cast:s1	-	-	-	d864b561c9cb	-	dbe8cce31c29	-	-	2026-11-24	xproof
 722ab6e4-a2e0-4aaa-a050-7b6436e22b40	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sp-dr-piloted-by-peni:f0t0:s2,f:xs:XP:sp-dr-piloted-by-peni:f0t0:s2	-	-	-	267e485f6204	-	caf1053077b1	-	-	2026-11-24	xproof
 722ab6e4-a2e0-4aaa-a050-7b6436e22b40	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	SP//dr, Piloted by Peni/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 722ab6e4-a2e0-4aaa-a050-7b6436e22b40	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	SP//dr, Piloted by Peni/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7246d45b-2185-4cdd-981b-5419b7d52bce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7246e3a0-f8b7-4c1b-ae75-a1eb8990a728	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7246e3a0-f8b7-4c1b-ae75-a1eb8990a728	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-724700ad-1e4e-4cbc-af7f-0b3b87ed4bc8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+724700ad-1e4e-4cbc-af7f-0b3b87ed4bc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golden-ratio:cast:s1,f:xs:XP:golden-ratio:cast:s1	-	-	-	d864b561c9cb	-	a35976cf027d	-	-	2026-11-24	xproof
 724b4a59-9c69-4f2b-a436-72183c62f1ff	cast	cast-resolve	agreed	-	FX	scen	2	0	Nebula Dragon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 724b4a59-9c69-4f2b-a436-72183c62f1ff	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nebula Dragon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 724b4a59-9c69-4f2b-a436-72183c62f1ff	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Nebula Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -91,8 +91,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 726cd041-5d0b-436c-bced-9335f56c0b0d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 726cd303-f034-4dbe-8139-550feb59f8f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 726cd303-f034-4dbe-8139-550feb59f8f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-726d9d2c-736a-4852-9938-a0f50d8fd89f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-726d9d2c-736a-4852-9938-a0f50d8fd89f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+726d9d2c-736a-4852-9938-a0f50d8fd89f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:marionette-apprentice:cast:s1,f:xs:XP:marionette-apprentice:cast:s1	-	-	-	d864b561c9cb	-	2d0dcd47e98b	-	-	2026-11-24	xproof
+726d9d2c-736a-4852-9938-a0f50d8fd89f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 726d9d2c-736a-4852-9938-a0f50d8fd89f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 726fe7a4-49b3-4b67-9d8c-6b334d0fd915	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 726fe7a4-49b3-4b67-9d8c-6b334d0fd915	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

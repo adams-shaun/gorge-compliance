@@ -17,7 +17,7 @@ f7139c70-dfcc-41ae-9d0d-b6e8c07a063d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f7139c70-dfcc-41ae-9d0d-b6e8c07a063d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f713a6b4-bd9c-4bc3-9e00-26ecf16e4a92	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7156897-2b02-4ecd-868d-d4d59244e9ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f7156897-2b02-4ecd-868d-d4d59244e9ed	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f7156897-2b02-4ecd-868d-d4d59244e9ed	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f715f701-a735-42ab-b31a-8e1bd04ac5ff	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Serpent's Pass/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f715f701-a735-42ab-b31a-8e1bd04ac5ff	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Serpent's Pass/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f715f701-a735-42ab-b31a-8e1bd04ac5ff	land	play-land	agreed	-	FX	scen	2	0	Serpent's Pass/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -202,7 +202,7 @@ f7db3bd9-ef67-4d64-a503-08a3c03404b2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 f7dda04a-c9c6-4952-9bbc-87e3c7480347	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7dda04a-c9c6-4952-9bbc-87e3c7480347	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7dda04a-c9c6-4952-9bbc-87e3c7480347	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f7e55117-69fb-412e-b16e-d92e0f95f629	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f7e55117-69fb-412e-b16e-d92e0f95f629	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cathartic-pyre:cast:s1,f:xs:XP:cathartic-pyre:cast:s1	-	-	-	d864b561c9cb	-	114e4aae9254	-	-	2026-11-24	xproof
 f7ea8725-db0e-4ce5-ac77-7dfc2a4e9286	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7ea8725-db0e-4ce5-ac77-7dfc2a4e9286	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7ed301a-dce7-49d0-a68a-d3a099201f65	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-swooper:f0t0:s1,f:xs:XP:aether-swooper:f0t0:s1	-	-	-	d864b561c9cb	-	867192475790	-	-	2026-11-24	xproof
@@ -218,8 +218,8 @@ f7f435bc-1716-4412-9505-a1f2f2d83d08	combat#0.attack	combat#0.attack	agreed	-	X	
 f7f435bc-1716-4412-9505-a1f2f2d83d08	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dragonhawk, Fate's Tempest/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f7f435bc-1716-4412-9505-a1f2f2d83d08	f0/t0	ChangesZone	agreed	-	X	start	1	0	x:xs:XP:dragonhawk-fate-s-tempest:f0t0:s2	-	-	-	e07cf3a05ba5	-	fd2e7c6ca0d2	-	-	2026-11-24	xproof
 f7f435bc-1716-4412-9505-a1f2f2d83d08	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Dragonhawk, Fate's Tempest/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f7f4ddc9-cea0-42f9-bbca-2ad87a24bfc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f7f4ddc9-cea0-42f9-bbca-2ad87a24bfc8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f7f4ddc9-cea0-42f9-bbca-2ad87a24bfc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:underworld-hermit:f0t0:s1,f:xs:XP:underworld-hermit:f0t0:s1	-	-	-	d864b561c9cb	-	78a400e53757	-	-	2026-11-24	xproof
+f7f4ddc9-cea0-42f9-bbca-2ad87a24bfc8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:underworld-hermit:f0t0:s1,f:xs:XP:underworld-hermit:f0t0:s1	-	-	-	d864b561c9cb	-	78a400e53757	-	-	2026-11-24	xproof
 f7f76abc-8656-4e97-9b7f-7f89ca3e6d93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angelic-page:cast:s1,f:xs:XP:angelic-page:cast:s1	-	-	-	25696bf19d5b	-	4e2c978a379d	-	-	2026-11-24	xproof
 f7f76abc-8656-4e97-9b7f-7f89ca3e6d93	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 f7f78825-10d6-441a-ae26-51b77cc271cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

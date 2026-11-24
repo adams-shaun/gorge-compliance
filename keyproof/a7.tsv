@@ -49,8 +49,8 @@ a73d9109-36e0-40ea-ab06-5c5f7eb4ac54	combat#0.attack	combat#0.attack	agreed	-	X	
 a73d9109-36e0-40ea-ab06-5c5f7eb4ac54	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bilbo, Luckwearer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a73d9109-36e0-40ea-ab06-5c5f7eb4ac54	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bilbo, Luckwearer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a73d9109-36e0-40ea-ab06-5c5f7eb4ac54	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bilbo, Luckwearer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a73e1f0a-8895-4eb2-9780-94951a8f227b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a73e1f0a-8895-4eb2-9780-94951a8f227b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a73e1f0a-8895-4eb2-9780-94951a8f227b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scion-of-stygia:f0t0:s1,f:xs:XP:scion-of-stygia:f0t0:s1	-	-	-	d864b561c9cb	-	1ad58d101d69	-	-	2026-11-24	xproof
+a73e1f0a-8895-4eb2-9780-94951a8f227b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scion-of-stygia:f0t0:s1,f:xs:XP:scion-of-stygia:f0t0:s1	-	-	-	d864b561c9cb	-	1ad58d101d69	-	-	2026-11-24	xproof
 a742308c-4047-487f-b95b-0fa5bec2f09a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a742308c-4047-487f-b95b-0fa5bec2f09a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a74494ef-aa35-4830-9b4c-47bff5270efc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ a7c5318f-e579-447e-9109-7d2e4b3d2c17	f0/a0	NULL	owed	refused:steps-needed:cost:R
 a7c55495-6aca-4d17-b61a-cab8fa38b9f4	cast	cast-resolve	agreed	-	X	scen	1	0	Risky Shortcut/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7c69802-99c4-4778-934e-cc09ba58c267	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7c69802-99c4-4778-934e-cc09ba58c267	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a7c69802-99c4-4778-934e-cc09ba58c267	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7c69802-99c4-4778-934e-cc09ba58c267	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a7c6c9b3-91f2-4ecf-b2b0-b0edd96974d9	cast	cast-resolve	agreed	-	X	scen	1	0	Zul Ashur, Lich Lord/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7c6c9b3-91f2-4ecf-b2b0-b0edd96974d9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Zul Ashur, Lich Lord/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7c6c9b3-91f2-4ecf-b2b0-b0edd96974d9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Zul Ashur, Lich Lord/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -182,7 +182,7 @@ a7d4f5aa-26d4-4363-aa5a-a26d6f791b82	f0/t0	NULL	owed	refused:no-generator:trigge
 a7d5a9ca-27ec-4843-a9fd-0de0d67def39	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-vitu-ghazi:cast:s1,f:xs:XP:guardian-of-vitu-ghazi:cast:s1	-	-	-	64a08ba7d913	-	9dd767436a9e	-	-	2026-11-24	xproof
 a7d88510-d2ce-4dd6-938c-964cc74ff7d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawning-angel:f0t0:s1,f:xs:XP:dawning-angel:f0t0:s1	-	-	-	d864b561c9cb	-	e8f8d9025e73	-	-	2026-11-24	xproof
 a7d88510-d2ce-4dd6-938c-964cc74ff7d7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dawning-angel:f0t0:s1,f:xs:XP:dawning-angel:f0t0:s1	-	-	-	d864b561c9cb	-	e8f8d9025e73	-	-	2026-11-24	xproof
-a7d8c99c-cd44-4bad-82e6-7c7cff9bd89f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7d8c99c-cd44-4bad-82e6-7c7cff9bd89f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wrenn-s-resolve:cast:s1,f:xs:XP:wrenn-s-resolve:cast:s1	-	-	-	d864b561c9cb	-	b09c6d38384a	-	-	2026-11-24	xproof
 a7dad8fe-b0b8-4c6d-ad11-76b402952799	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7df9a4e-d556-4345-9884-0724a3f9d5f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7dff624-1f6b-4e00-b13b-0b0d69a48ec2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

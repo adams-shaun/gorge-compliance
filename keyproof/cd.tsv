@@ -9,7 +9,7 @@ cd0c8db0-67ee-483b-8298-455cce35fef7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 cd0d7141-46d2-4aa3-bc77-6b3b4513803e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd0e6cdb-9b7f-47d6-9478-fb50003165af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd10ebc9-9f6c-4da2-9a86-263902002ebc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cd10ebc9-9f6c-4da2-9a86-263902002ebc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cd10ebc9-9f6c-4da2-9a86-263902002ebc	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cd1677e4-c356-43cd-9766-5fb8a1e64249	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd170b1c-879b-414e-9f0e-5e7fb099e7bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd170b1c-879b-414e-9f0e-5e7fb099e7bb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -91,9 +91,9 @@ cd68cc31-12fd-48ff-b37b-bccfe4172974	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07
 cd68cc31-12fd-48ff-b37b-bccfe4172974	f0/a3	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd69b2c7-2be7-4915-9d17-4fd400ace6b8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd69b2c7-2be7-4915-9d17-4fd400ace6b8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cd727e02-5064-4b89-9398-e3cc4463ba56	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cd727e02-5064-4b89-9398-e3cc4463ba56	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cd727e02-5064-4b89-9398-e3cc4463ba56	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cd727e02-5064-4b89-9398-e3cc4463ba56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirrorshell-crab:cast:s1,f:xs:XP:mirrorshell-crab:cast:s1	-	-	-	d864b561c9cb	-	b1227c0d909f	-	-	2026-11-24	xproof
+cd727e02-5064-4b89-9398-e3cc4463ba56	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+cd727e02-5064-4b89-9398-e3cc4463ba56	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cd76e1a4-d6ff-419a-a881-1b77eb6ae581	cast	cast	agreed	-	F	start	2	0	f:xs:XP:charge-across-the-araba:cast:s1	-	-	-	64a08ba7d913	-	6ce39d15173b	-	-	2026-11-24	xproof
 cd796e12-c422-4869-8d59-794600425381	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd796e12-c422-4869-8d59-794600425381	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,8 +180,8 @@ cddccc2a-a76e-48b3-b4dd-dfeab89e1619	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 cde26d69-f3e7-4dd0-a53b-cd0ec812d717	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cde26d69-f3e7-4dd0-a53b-cd0ec812d717	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cde3e29c-31fd-4dce-a008-283bbe90bfc6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cdea4344-24b6-4659-a830-c51d4b348af5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cdea4344-24b6-4659-a830-c51d4b348af5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cdea4344-24b6-4659-a830-c51d4b348af5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:radiant-epicure:f0t0:s1,f:xs:XP:radiant-epicure:f0t0:s1	-	-	-	d864b561c9cb	-	88c5c703f0f9	-	-	2026-11-24	xproof
+cdea4344-24b6-4659-a830-c51d4b348af5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:radiant-epicure:f0t0:s1,f:xs:XP:radiant-epicure:f0t0:s1	-	-	-	d864b561c9cb	-	88c5c703f0f9	-	-	2026-11-24	xproof
 cdef800d-033e-4095-964d-9b6066f9fd36	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cdef800d-033e-4095-964d-9b6066f9fd36	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cdf34da6-d952-43ca-855d-fcd9d49efae6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

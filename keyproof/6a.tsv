@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 6a003988-f126-4309-9166-50f3fbf0f30c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a038dec-2d9c-4422-a0f3-94bf70e55217	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a038dec-2d9c-4422-a0f3-94bf70e55217	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6a038dec-2d9c-4422-a0f3-94bf70e55217	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swarming-goblins:cast:s1,f:xs:XP:swarming-goblins:cast:s1	-	-	-	d864b561c9cb	-	44ba09c5f0cd	-	-	2026-11-24	xproof
+6a038dec-2d9c-4422-a0f3-94bf70e55217	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:swarming-goblins:cast:s1,f:xs:XP:swarming-goblins:cast:s1	-	-	-	d864b561c9cb	-	44ba09c5f0cd	-	-	2026-11-24	xproof
 6a0419c3-4bfa-46c1-932b-fe10f2fa2ad7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a06d281-3ca2-498f-91d0-e13e7b0869f9	cast	cast-resolve	agreed	-	FX	scen	2	0	Jeong Jeong's Deserters/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a06d281-3ca2-498f-91d0-e13e7b0869f9	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -57,8 +57,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a40823f-130c-4416-a987-75e205d3e1dd	land	land	agreed	-	FX	start	2	0	x:xs:XP:salt-marsh:land:s1,f:xs:XP:salt-marsh:land:s1	-	-	-	25696bf19d5b	-	b46c16b40ae8	-	-	2026-11-24	xproof
 6a448862-e8d8-4a08-8e3d-5460afa29b4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a448862-e8d8-4a08-8e3d-5460afa29b4d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a45d09a-6af3-45fb-8f7c-cf630cb37f24	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a45d09a-6af3-45fb-8f7c-cf630cb37f24	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6a45d09a-6af3-45fb-8f7c-cf630cb37f24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inkrise-infiltrator:cast:s1,f:xs:XP:inkrise-infiltrator:cast:s1	-	-	-	d864b561c9cb	-	4b40c629f54e	-	-	2026-11-24	xproof
+6a45d09a-6af3-45fb-8f7c-cf630cb37f24	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:inkrise-infiltrator:f0a0:s1,f:xs:XP:inkrise-infiltrator:f0a0:s1	-	-	-	d864b561c9cb	-	4b40c629f54e	-	-	2026-11-24	xproof
 6a462a69-3e42-41de-a3aa-a488d9f38d69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a47865c-8fa2-4cb2-aebf-8009c065395f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rakdos-joins-up:f0t0:s2,f:xs:XP:rakdos-joins-up:f0t0:s2	-	-	-	267e485f6204	-	63af6ea7ac08	-	-	2026-11-24	xproof
 6a47865c-8fa2-4cb2-aebf-8009c065395f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rakdos-joins-up:f0t0:s2,f:xs:XP:rakdos-joins-up:f0t0:s2	-	-	-	267e485f6204	-	63af6ea7ac08	-	-	2026-11-24	xproof
@@ -153,8 +153,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6adff11d-5126-4a4b-b182-e2700d406995	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:highspire-mantis:cast:s1,f:xs:XP:highspire-mantis:cast:s1	-	-	-	d864b561c9cb	-	b2474d84d79c	-	-	2026-11-24	xproof
 6ae3a901-9f9a-4a99-94db-22c38fda7aef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ae3c3a2-bd17-4fea-ae27-9d2d1eaf8cc0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6ae9aa10-38f5-4b10-8b44-1164b85acd7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6ae9aa10-38f5-4b10-8b44-1164b85acd7f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6ae9aa10-38f5-4b10-8b44-1164b85acd7f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meria-s-outrider:f0t0:s1,f:xs:XP:meria-s-outrider:f0t0:s1	-	-	-	d864b561c9cb	-	90f3bd6473cc	-	-	2026-11-24	xproof
+6ae9aa10-38f5-4b10-8b44-1164b85acd7f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:meria-s-outrider:f0t0:s1,f:xs:XP:meria-s-outrider:f0t0:s1	-	-	-	d864b561c9cb	-	90f3bd6473cc	-	-	2026-11-24	xproof
 6aea681e-88d2-48df-a717-3ce0bc95205b	cast	cast-resolve	agreed	-	X	scen	1	0	Silent Hallcreeper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6aea681e-88d2-48df-a717-3ce0bc95205b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Silent Hallcreeper/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6aea681e-88d2-48df-a717-3ce0bc95205b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Silent Hallcreeper/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6af2b898-7ba0-4641-8234-5171397cf602	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-infestation:f0a0:s1,f:xs:XP:trigon-of-infestation:f0a0:s1	-	-	-	d864b561c9cb	-	9f0300410ecd	-	-	2026-11-24	xproof
 6af2b898-7ba0-4641-8234-5171397cf602	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6af53351-ad10-4774-9b5c-7b58bea65bbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6af53351-ad10-4774-9b5c-7b58bea65bbc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6af53351-ad10-4774-9b5c-7b58bea65bbc	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6af71c5a-2c1b-4120-b3c9-c3c70d94a5c9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sephiroth-planet-s-heir:f0t0:s2,f:xs:XP:sephiroth-planet-s-heir:f0t0:s2	-	-	-	e07cf3a05ba5	-	f254e6a58883	-	-	2026-11-24	xproof
 6af71c5a-2c1b-4120-b3c9-c3c70d94a5c9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sephiroth, Planet's Heir/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6af71c5a-2c1b-4120-b3c9-c3c70d94a5c9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sephiroth, Planet's Heir/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

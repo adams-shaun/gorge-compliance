@@ -128,8 +128,8 @@ b3a84b75-a6a2-4521-a9f1-92596796c703	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b3aa5889-0d98-4a8c-a8b1-ada1e9b169e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silverclad-ferocidons:cast:s1,f:xs:XP:silverclad-ferocidons:cast:s1	-	-	-	d864b561c9cb	-	aa6882e5a6a9	-	-	2026-11-24	xproof
 b3aa5889-0d98-4a8c-a8b1-ada1e9b169e1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b3ab43f2-4f2b-4439-9254-0110ce443fdb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b3ab43f2-4f2b-4439-9254-0110ce443fdb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b3ab43f2-4f2b-4439-9254-0110ce443fdb	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b3ab43f2-4f2b-4439-9254-0110ce443fdb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b3ab43f2-4f2b-4439-9254-0110ce443fdb	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b3ac27d6-7e18-404d-9af2-b03897a5f1d9	cast	cast-resolve	agreed	-	X	scen	1	0	Wylie Duke, Atiin Hero/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b3ac27d6-7e18-404d-9af2-b03897a5f1d9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wylie Duke, Atiin Hero/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b3ac27d6-7e18-404d-9af2-b03897a5f1d9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wylie Duke, Atiin Hero/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -178,8 +178,8 @@ b3e0b8a6-5de4-4988-b042-2641b1ed3e32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:car
 b3e0b8a6-5de4-4988-b042-2641b1ed3e32	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:carrier-thrall:f0t0:s1,f:xs:XP:carrier-thrall:f0t0:s1	-	-	-	d864b561c9cb	-	07572da076ae	-	-	2026-11-24	xproof
 b3e1674f-dba1-4570-9990-e5dc643e237d	cast	cast-resolve	agreed	-	FX	scen	2	0	Twinblade Blessing/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b3e1674f-dba1-4570-9990-e5dc643e237d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Twinblade Blessing/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b3e3d037-992b-4718-913d-7ab509d2047e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b3e3d037-992b-4718-913d-7ab509d2047e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b3e3d037-992b-4718-913d-7ab509d2047e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quicksilver-fisher:f0t0:s1,f:xs:XP:quicksilver-fisher:f0t0:s1	-	-	-	d864b561c9cb	-	c785d4783651	-	-	2026-11-24	xproof
+b3e3d037-992b-4718-913d-7ab509d2047e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:quicksilver-fisher:f0t0:s1,f:xs:XP:quicksilver-fisher:f0t0:s1	-	-	-	d864b561c9cb	-	c785d4783651	-	-	2026-11-24	xproof
 b3e5b559-660c-4e14-9209-29efc07d3563	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shadowstorm-vizier:cast:s1,f:xs:XP:shadowstorm-vizier:cast:s1	-	-	-	d864b561c9cb	-	646f87f16d04	-	-	2026-11-24	xproof
 b3e5b559-660c-4e14-9209-29efc07d3563	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b3e9917e-1bcf-4e8e-9550-7f5897dcb433	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -40,9 +40,9 @@ a939f01b-afce-4d92-a897-1a6dc3d788c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a93a8edf-2879-4cae-b3b9-b46298270823	cast	cast-resolve	agreed	-	X	scen	1	0	Hydro-Man, Fluid Felon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a93a8edf-2879-4cae-b3b9-b46298270823	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hydro-Man, Fluid Felon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a93a8edf-2879-4cae-b3b9-b46298270823	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Hydro-Man, Fluid Felon/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a93b5956-c11e-434e-bed5-94af9de55382	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a93b5956-c11e-434e-bed5-94af9de55382	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a93b5956-c11e-434e-bed5-94af9de55382	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a93b5956-c11e-434e-bed5-94af9de55382	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nezumi-prowler:f0t0:s1,f:xs:XP:nezumi-prowler:f0t0:s1	-	-	-	d864b561c9cb	-	06bbb3fe81d8	-	-	2026-11-24	xproof
+a93b5956-c11e-434e-bed5-94af9de55382	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+a93b5956-c11e-434e-bed5-94af9de55382	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nezumi-prowler:f0t0:s1,f:xs:XP:nezumi-prowler:f0t0:s1	-	-	-	d864b561c9cb	-	06bbb3fe81d8	-	-	2026-11-24	xproof
 a93f0735-9854-487d-b646-d55e2bee00c0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a945710e-fab6-4b54-ba40-586f2e54baf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a945710e-fab6-4b54-ba40-586f2e54baf4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -95,8 +95,8 @@ a98c2d81-4add-4292-bbdd-e1b69ff936d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pla
 a98df6bd-e806-4ee1-a418-ad318d5d0425	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a98df6bd-e806-4ee1-a418-ad318d5d0425	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a990e744-bfc4-435d-aef6-6256ac10f5a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a994de7b-0128-4f03-922f-c8cd80cb5852	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a994de7b-0128-4f03-922f-c8cd80cb5852	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a994de7b-0128-4f03-922f-c8cd80cb5852	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:funeral-longboat:cast:s1,f:xs:XP:funeral-longboat:cast:s1	-	-	-	d864b561c9cb	-	c320b261e39f	-	-	2026-11-24	xproof
+a994de7b-0128-4f03-922f-c8cd80cb5852	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a99ce9db-9b7d-45a0-bee7-0875fc62ca48	cast	cast-resolve	agreed	-	X	scen	1	0	Loot, the Nexus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a99ce9db-9b7d-45a0-bee7-0875fc62ca48	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Loot, the Nexus/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a9a0088a-3c86-4baf-9754-79006f733ce1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -110,8 +110,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2085642e-29be-4e13-81dc-1f2ff6c095eb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Slickshot Vault-Buster/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2085642e-29be-4e13-81dc-1f2ff6c095eb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Slickshot Vault-Buster/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2085642e-29be-4e13-81dc-1f2ff6c095eb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Slickshot Vault-Buster/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2088e791-9ce5-4e97-a4ce-f51adaa3f42b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2088e791-9ce5-4e97-a4ce-f51adaa3f42b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2088e791-9ce5-4e97-a4ce-f51adaa3f42b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cyclone-summoner:cast:s1,f:xs:XP:cyclone-summoner:cast:s1	-	-	-	d864b561c9cb	-	b52448cc4b4f	-	-	2026-11-24	xproof
+2088e791-9ce5-4e97-a4ce-f51adaa3f42b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cyclone-summoner:cast:s1,f:xs:XP:cyclone-summoner:cast:s1	-	-	-	d864b561c9cb	-	b52448cc4b4f	-	-	2026-11-24	xproof
 2091eb7e-2357-4ef8-b15e-1e6f82176340	cast	cast-resolve	agreed	-	X	scen	1	0	Mold Adder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2091eb7e-2357-4ef8-b15e-1e6f82176340	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mold Adder/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20932bca-52be-4288-9c7d-4154650c5ec9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -123,10 +123,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 209de43d-0cdd-4075-9f41-88e3d2ff90df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 209de43d-0cdd-4075-9f41-88e3d2ff90df	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 209de43d-0cdd-4075-9f41-88e3d2ff90df	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	459629e846f7	-	-	2026-11-24	xproof
+20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a1	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a2	RepeatEach	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	459629e846f7	-	-	2026-11-24	xproof
 20acb8df-2ea0-48b0-8dcf-54dd0e1f8db8	cast	cast-resolve	agreed	-	X	scen	1	0	Huatli's Final Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20ae75a7-14ca-4366-af0a-3f3f02159f3f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20ae75a7-14ca-4366-af0a-3f3f02159f3f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,9 +163,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 20e65887-c68c-4dc0-b74b-9ce093f40b06	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20e94d0f-6887-45f8-a137-877011d786c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gisa-and-geralf:f0t0:s1,f:xs:XP:gisa-and-geralf:f0t0:s1	-	-	-	d864b561c9cb	-	76cde6e9a0a0	-	-	2026-11-24	xproof
 20e94d0f-6887-45f8-a137-877011d786c6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gisa-and-geralf:f0t0:s1,f:xs:XP:gisa-and-geralf:f0t0:s1	-	-	-	d864b561c9cb	-	76cde6e9a0a0	-	-	2026-11-24	xproof
-20f1bba5-d398-4d6e-a76a-75e29df42aec	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20f1bba5-d398-4d6e-a76a-75e29df42aec	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20f1bba5-d398-4d6e-a76a-75e29df42aec	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+20f1bba5-d398-4d6e-a76a-75e29df42aec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dungeon-map:cast:s1,f:xs:XP:dungeon-map:cast:s1	-	-	-	d864b561c9cb	-	5c6bb4c627cd	-	-	2026-11-24	xproof
+20f1bba5-d398-4d6e-a76a-75e29df42aec	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:dungeon-map:cast:s1,f:xs:XP:dungeon-map:cast:s1	-	-	-	d864b561c9cb	-	5c6bb4c627cd	-	-	2026-11-24	xproof
+20f1bba5-d398-4d6e-a76a-75e29df42aec	f0/a1	Venture	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	5c6bb4c627cd	-	-	2026-11-24	xproof
 20f2fc0e-b1d4-4f80-9c7a-a9fb25fef7b8	cast	cast-resolve	agreed	-	FX	scen	2	0	Trapped in the Screen/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20f2fc0e-b1d4-4f80-9c7a-a9fb25fef7b8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20f2fc0e-b1d4-4f80-9c7a-a9fb25fef7b8	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Trapped in the Screen/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

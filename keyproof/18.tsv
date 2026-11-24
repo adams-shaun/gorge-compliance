@@ -94,9 +94,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1854a99d-f8c7-45b3-83a2-98ae1c5b5b09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18563bc9-6090-4629-b304-89a67d93f635	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18563bc9-6090-4629-b304-89a67d93f635	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18563bc9-6090-4629-b304-89a67d93f635	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18563bc9-6090-4629-b304-89a67d93f635	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18563bc9-6090-4629-b304-89a67d93f635	f1/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18563bc9-6090-4629-b304-89a67d93f635	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+18563bc9-6090-4629-b304-89a67d93f635	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+18563bc9-6090-4629-b304-89a67d93f635	f1/t1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 185b3b9f-f798-4ca4-af99-b17a24fcc1c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 185b3b9f-f798-4ca4-af99-b17a24fcc1c6	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 185c70c1-8403-4ae5-b45d-3679d4ee092a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rockfall Vale/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -204,9 +204,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18d6b89a-3588-43d9-a247-4747a7d784fc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18da85d4-2a51-45c0-a18c-bce9bc39fa64	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18da85d4-2a51-45c0-a18c-bce9bc39fa64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18dd694f-e239-4603-85fd-b34b028ff6a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18dd694f-e239-4603-85fd-b34b028ff6a4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18dd694f-e239-4603-85fd-b34b028ff6a4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18dd694f-e239-4603-85fd-b34b028ff6a4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:fell-stinger:cast:s1,f:xs:XP:fell-stinger:cast:s1	-	-	-	d864b561c9cb	-	29653c9e8589	-	-	2026-11-24	xproof
+18dd694f-e239-4603-85fd-b34b028ff6a4	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+18dd694f-e239-4603-85fd-b34b028ff6a4	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:fell-stinger:cast:s1,f:xs:XP:fell-stinger:cast:s1	-	-	-	d864b561c9cb	-	29653c9e8589	-	-	2026-11-24	xproof
 18e7ba0d-88a5-466b-9228-d3f5aae8f83e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:basal-sliver:cast:s1,f:xs:XP:basal-sliver:cast:s1	-	-	-	0984227a67dd	-	7bd313183b0c	-	-	2026-11-24	xproof
 18e96674-6fd8-4046-a3fe-7ba80138d85d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ec721f-c1ac-4581-a61d-2f0b09d6bf92	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plague-wind:cast:s1,f:xs:XP:plague-wind:cast:s1	-	-	-	25696bf19d5b	-	b2656da432f1	-	-	2026-11-24	xproof

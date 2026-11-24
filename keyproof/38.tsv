@@ -68,7 +68,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38513660-260f-4663-b199-6473fa004a3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38513660-260f-4663-b199-6473fa004a3b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38515f89-348b-4cf3-b7bd-1f6fe4ce2fba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38515f89-348b-4cf3-b7bd-1f6fe4ce2fba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38515f89-348b-4cf3-b7bd-1f6fe4ce2fba	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 38517711-e570-4337-b269-addcf8bfdd74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38530399-d2c9-4445-92ba-14c5cd438055	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38530399-d2c9-4445-92ba-14c5cd438055	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -119,9 +119,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 389ad507-8a14-4856-8d19-c90e3104aca8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:midnight-ritual:cast:s1	-	-	-	25696bf19d5b	-	14e1dc3bff63	-	-	2026-11-24	xproof
 389b6d77-47ab-43a3-99d1-dcc762939cc4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 389b6d77-47ab-43a3-99d1-dcc762939cc4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-389d459d-446a-4b84-82b2-a30fe6ced11f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+389d459d-446a-4b84-82b2-a30fe6ced11f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:batterbone:f0t0:s1,f:xs:XP:batterbone:f0t0:s1	-	-	-	d864b561c9cb	-	908a4caad4c1	-	-	2026-11-24	xproof
 389d459d-446a-4b84-82b2-a30fe6ced11f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-389d459d-446a-4b84-82b2-a30fe6ced11f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+389d459d-446a-4b84-82b2-a30fe6ced11f	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:batterbone:f0t0:s1,f:xs:XP:batterbone:f0t0:s1	-	-	-	d864b561c9cb	-	908a4caad4c1	-	-	2026-11-24	xproof
 38a12bd7-4394-44a8-91a0-6a4ff7fa4f71	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38a12bd7-4394-44a8-91a0-6a4ff7fa4f71	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38a2ded4-77c5-4d2b-b411-7dca8108aa02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:razorfin-abolisher:cast:s1,f:xs:XP:razorfin-abolisher:cast:s1	-	-	-	8a1b1a193ec0	-	01db09b10a27	-	-	2026-11-24	xproof
@@ -146,10 +146,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38bdb4f8-012e-460c-ad20-e51bec1e6745	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38c43f30-0e01-4dcd-88fc-f1de318a5e29	cast	counter-spell	agreed	-	X	scen	1	0	Highly Illogical/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 38c588ae-7254-4fae-aa9a-03e2a5524492	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38c83332-2d21-450c-ae97-34109b565f59	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38c83332-2d21-450c-ae97-34109b565f59	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38c83332-2d21-450c-ae97-34109b565f59	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38c83332-2d21-450c-ae97-34109b565f59	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38c83332-2d21-450c-ae97-34109b565f59	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:tyrite-sanctum:f0a0:s1,f:xs:XP:tyrite-sanctum:f0a0:s1	-	-	-	d864b561c9cb	-	d68ad3271123	-	-	2026-11-24	xproof
+38c83332-2d21-450c-ae97-34109b565f59	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:tyrite-sanctum:f0a1:s1,f:xs:XP:tyrite-sanctum:f0a1:s1	-	-	-	d864b561c9cb	-	d68ad3271123	-	-	2026-11-24	xproof
+38c83332-2d21-450c-ae97-34109b565f59	f0/a2	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:tyrite-sanctum:f0a2:s1,f:xs:XP:tyrite-sanctum:f0a2:s1	-	-	-	d864b561c9cb	-	d68ad3271123	-	-	2026-11-24	xproof
+38c83332-2d21-450c-ae97-34109b565f59	land	land	agreed	-	FX	start	2	0	x:xs:XP:tyrite-sanctum:land:s1,f:xs:XP:tyrite-sanctum:land:s1	-	-	-	d864b561c9cb	-	d68ad3271123	-	-	2026-11-24	xproof
 38cfe4a0-6ead-435b-9f86-928205c0a52c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38cfe4a0-6ead-435b-9f86-928205c0a52c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 38d2176c-1a1e-4030-9c63-e28ba4a69b6d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

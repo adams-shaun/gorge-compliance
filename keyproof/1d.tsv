@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 1d001145-5d14-43a9-bf3b-3ce5c20b2a46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d00e54a-5897-43dc-9c38-a0e2ce6a7433	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d00e54a-5897-43dc-9c38-a0e2ce6a7433	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d00e54a-5897-43dc-9c38-a0e2ce6a7433	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blue-dragon:f0t0:s1,f:xs:XP:blue-dragon:f0t0:s1	-	-	-	d864b561c9cb	-	df07d1d253fc	-	-	2026-11-24	xproof
+1d00e54a-5897-43dc-9c38-a0e2ce6a7433	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blue-dragon:f0t0:s1,f:xs:XP:blue-dragon:f0t0:s1	-	-	-	d864b561c9cb	-	df07d1d253fc	-	-	2026-11-24	xproof
 1d078108-f88c-4a32-a28f-bae5182b2f53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d078108-f88c-4a32-a28f-bae5182b2f53	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d07856b-d9ef-418c-bd06-3888dbcaddf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d704c2f-cd24-4a04-a51a-da7984dcd358	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d704c2f-cd24-4a04-a51a-da7984dcd358	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d705d77-4b1a-4a17-b3b7-e502f2f6f6e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d705d77-4b1a-4a17-b3b7-e502f2f6f6e6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d705d77-4b1a-4a17-b3b7-e502f2f6f6e6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:koma-s-faithful:f0t0:s1,f:xs:XP:koma-s-faithful:f0t0:s1	-	-	-	d864b561c9cb	-	77d0628f7d74	-	-	2026-11-24	xproof
 1d764f70-985e-4cf0-9482-f30f73b9baf1	cast	cast-resolve	agreed	-	FX	scen	2	0	Kraum, Violent Cacophony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d764f70-985e-4cf0-9482-f30f73b9baf1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kraum, Violent Cacophony/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d764f70-985e-4cf0-9482-f30f73b9baf1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kraum, Violent Cacophony/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1db6a042-303e-4b76-bb6c-63df846fd6c9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1db6a042-303e-4b76-bb6c-63df846fd6c9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1db76752-31ed-4a16-986a-d0852ba7d812	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1db76752-31ed-4a16-986a-d0852ba7d812	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1db76752-31ed-4a16-986a-d0852ba7d812	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1dbadf75-28cd-4525-8f51-9c53049b9b54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dbadf75-28cd-4525-8f51-9c53049b9b54	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dbe4eb4-8313-459a-89ce-982442cd0cd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

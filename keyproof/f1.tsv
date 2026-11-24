@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 f10039ae-2695-4b0a-82b2-82ee79a992c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f10039ae-2695-4b0a-82b2-82ee79a992c7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f10039ae-2695-4b0a-82b2-82ee79a992c7	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f104b361-8000-4eda-b530-1502528e09f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f104b361-8000-4eda-b530-1502528e09f9	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:leeching-sliver:f0t0:s1,f:xs:XP:leeching-sliver:f0t0:s1	-	-	-	d864b561c9cb	-	9b12414485de	-	-	2026-11-24	xproof
 f1052b21-ba96-499f-b9e6-9dba4ed82e1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -41,7 +41,7 @@ f13a8621-4d88-4c1f-8b6e-80f8ef383cd2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 f13baf38-27fc-4c5d-8fee-459eefdb32da	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f13f5705-e3e0-4e1e-a5b3-61e04e23a374	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	9d4ae01173a3	-	-	2026-11-24	xproof
 f1409c9e-f0d9-49e1-b02e-d0f04a658331	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f1409c9e-f0d9-49e1-b02e-d0f04a658331	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f1409c9e-f0d9-49e1-b02e-d0f04a658331	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f1416577-97d0-4d6c-afd2-455798556d4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1482ca4-610b-48fe-ac23-4526637bb72a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1482ca4-610b-48fe-ac23-4526637bb72a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -117,8 +117,8 @@ f1a2a78c-2794-4bc9-9b06-49306378ef69	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 f1a3153c-0200-4ff2-b7d5-48d23920bb3c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1a76cca-829a-4576-a560-f1af34b80b87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1a76cca-829a-4576-a560-f1af34b80b87	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f1ac4e0e-5633-46e4-9a21-d3924e481d13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f1ac4e0e-5633-46e4-9a21-d3924e481d13	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f1ac4e0e-5633-46e4-9a21-d3924e481d13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:borrowed-time:f0t0:s1,f:xs:XP:borrowed-time:f0t0:s1	-	-	-	d864b561c9cb	-	3b27aebddc9e	-	-	2026-11-24	xproof
+f1ac4e0e-5633-46e4-9a21-d3924e481d13	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:borrowed-time:f0t0:s1,f:xs:XP:borrowed-time:f0t0:s1	-	-	-	d864b561c9cb	-	3b27aebddc9e	-	-	2026-11-24	xproof
 f1acb469-9d02-44e6-8c09-8b4157551b2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1acb469-9d02-44e6-8c09-8b4157551b2c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1acb469-9d02-44e6-8c09-8b4157551b2c	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

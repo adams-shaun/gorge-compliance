@@ -7,7 +7,7 @@ ac0f161a-e5ec-4a95-9f37-305bdf1ac900	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hap
 ac0f161a-e5ec-4a95-9f37-305bdf1ac900	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Hapatra, the Desert Frost/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac0f161a-e5ec-4a95-9f37-305bdf1ac900	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hapatra-the-desert-frost:f0t0:s1,f:xs:XP:hapatra-the-desert-frost:f0t0:s1	-	-	-	25696bf19d5b	-	061ab927c718	-	-	2026-11-24	xproof
 ac1003b4-1f7c-4801-9dd3-5cb7d9881af8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac1003b4-1f7c-4801-9dd3-5cb7d9881af8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ac1003b4-1f7c-4801-9dd3-5cb7d9881af8	f0/t0	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-prototype:f0t0:s1,f:xs:XP:arcbound-prototype:f0t0:s1	-	-	-	d864b561c9cb	-	3528cec331b9	-	-	2026-11-24	xproof
 ac10d218-f9a6-4058-9cda-a15ca1b0b7b5	cast	cast-resolve	agreed	-	X	scen	1	0	Assassin's Trophy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac141679-6ada-49a8-b225-d1a20c3838db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac141679-6ada-49a8-b225-d1a20c3838db	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,8 +145,8 @@ acb0fa6a-89c8-4957-881e-c61659e86f97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 acb57162-7093-4a3c-9818-d3b61ce757c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acb58839-2b26-4724-9e9b-b49b8217b13f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flinthoof-boar:cast:s1,f:xs:XP:flinthoof-boar:cast:s1	-	-	-	d864b561c9cb	-	263d5cca7639	-	-	2026-11-24	xproof
 acb58839-2b26-4724-9e9b-b49b8217b13f	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:flinthoof-boar:cast:s1,f:xs:XP:flinthoof-boar:cast:s1	-	-	-	d864b561c9cb	-	263d5cca7639	-	-	2026-11-24	xproof
-acb8d6a0-4bbd-4a42-bcac-3656367cc051	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-acb8d6a0-4bbd-4a42-bcac-3656367cc051	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+acb8d6a0-4bbd-4a42-bcac-3656367cc051	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:arcbound-shikari:f0t0:s2,f:xs:XP:arcbound-shikari:f0t0:s2	-	-	-	d864b561c9cb	-	61ed5f15ca3c	-	-	2026-11-24	xproof
+acb8d6a0-4bbd-4a42-bcac-3656367cc051	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:arcbound-shikari:f0t0:s2,f:xs:XP:arcbound-shikari:f0t0:s2	-	-	-	d864b561c9cb	-	61ed5f15ca3c	-	-	2026-11-24	xproof
 acb8d6a0-4bbd-4a42-bcac-3656367cc051	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acba24c1-168c-473b-96bb-1ba836c69f22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acba24c1-168c-473b-96bb-1ba836c69f22	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -198,9 +198,9 @@ acf4abde-4034-4fcf-b531-78c935aecd8c	combat#0.block	combat#0.block	agreed	-	X	sc
 acf4abde-4034-4fcf-b531-78c935aecd8c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Traxos, Scourge Eternal/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 acf4d685-a718-42f7-9a7a-dee069ae8db2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acfc3e07-757f-4ccf-a65e-bee07ce87f40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-acfc3e07-757f-4ccf-a65e-bee07ce87f40	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-acfc3e07-757f-4ccf-a65e-bee07ce87f40	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-acfc3e07-757f-4ccf-a65e-bee07ce87f40	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+acfc3e07-757f-4ccf-a65e-bee07ce87f40	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+acfc3e07-757f-4ccf-a65e-bee07ce87f40	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+acfc3e07-757f-4ccf-a65e-bee07ce87f40	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 acfe54b3-10e3-4fdb-b874-d39fde96c40a	cast	cast-resolve	agreed	-	X	scen	1	0	Through the Forest Gate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 acfe7ec0-0606-4d5e-b1fa-25f0c7aeec47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acfe7ec0-0606-4d5e-b1fa-25f0c7aeec47	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

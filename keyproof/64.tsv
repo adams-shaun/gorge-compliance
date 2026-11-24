@@ -55,8 +55,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64446130-46d0-4129-a718-ed6a04218100	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 644a8946-4890-4c2b-978f-02eedc95b5ad	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 644eeefd-e684-4ca8-8aef-a892ca130c07	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-645005dd-3438-4b88-bb19-561f9679a022	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-645005dd-3438-4b88-bb19-561f9679a022	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+645005dd-3438-4b88-bb19-561f9679a022	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oggyar-battle-seer:cast:s1,f:xs:XP:oggyar-battle-seer:cast:s1	-	-	-	d864b561c9cb	-	ccc456f2030c	-	-	2026-11-24	xproof
+645005dd-3438-4b88-bb19-561f9679a022	f0/a0	Scry	agreed	-	FX	start	4	0	x:xs:XP:oggyar-battle-seer:cast:s1,f:xs:XP:oggyar-battle-seer:cast:s1	-	-	-	d864b561c9cb	-	ccc456f2030c	-	-	2026-11-24	xproof
 6454c457-a278-431a-9e8d-bfd1a966bdde	cast	cast-resolve	agreed	-	X	scen	1	0	Vnwxt, Verbose Host/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6454c457-a278-431a-9e8d-bfd1a966bdde	static#0.0	static#0.0	agreed	-	X	scen	1	0	Vnwxt, Verbose Host/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6454c457-a278-431a-9e8d-bfd1a966bdde	static#0.1	static#0.1	agreed	-	X	scen	1	0	Vnwxt, Verbose Host/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -75,8 +75,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 645fb11b-d684-4bec-8532-8fa97e8f7b28	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64611260-c9f7-4375-b67a-f88fee6d3bff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64611260-c9f7-4375-b67a-f88fee6d3bff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6465f93d-e6bf-4a7b-86f3-5a2376f8b127	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6465f93d-e6bf-4a7b-86f3-5a2376f8b127	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6465f93d-e6bf-4a7b-86f3-5a2376f8b127	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keldon-strike-team:f0t0:s1,f:xs:XP:keldon-strike-team:f0t0:s1	-	-	-	d864b561c9cb	-	f26ec7c1a0a8	-	-	2026-11-24	xproof
+6465f93d-e6bf-4a7b-86f3-5a2376f8b127	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keldon-strike-team:f0t0:s1,f:xs:XP:keldon-strike-team:f0t0:s1	-	-	-	d864b561c9cb	-	f26ec7c1a0a8	-	-	2026-11-24	xproof
 64687880-03f9-4f38-985b-1027c797e33f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64687880-03f9-4f38-985b-1027c797e33f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64687880-03f9-4f38-985b-1027c797e33f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -179,9 +179,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64e413c9-96e5-43c3-a182-84d53fef4327	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 64e7ef06-ba30-4b19-9d44-ca77944cc930	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rank-rat:f0t0:s1,f:xs:XP:rank-rat:f0t0:s1	-	-	-	25696bf19d5b	-	0e75fc0dd124	-	-	2026-11-24	xproof
 64e7ef06-ba30-4b19-9d44-ca77944cc930	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rank-rat:f0t0:s1,f:xs:XP:rank-rat:f0t0:s1	-	-	-	25696bf19d5b	-	0e75fc0dd124	-	-	2026-11-24	xproof
-64ed5c35-8185-4e68-8028-b7b632ef5828	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+64ed5c35-8185-4e68-8028-b7b632ef5828	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skullport-merchant:f0t0:s1,f:xs:XP:skullport-merchant:f0t0:s1	-	-	-	d864b561c9cb	-	5802db00e194	-	-	2026-11-24	xproof
 64ed5c35-8185-4e68-8028-b7b632ef5828	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64ed5c35-8185-4e68-8028-b7b632ef5828	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+64ed5c35-8185-4e68-8028-b7b632ef5828	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skullport-merchant:f0t0:s1,f:xs:XP:skullport-merchant:f0t0:s1	-	-	-	d864b561c9cb	-	5802db00e194	-	-	2026-11-24	xproof
 64ee02f1-afdb-474b-a893-31538ad7219a	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Jagged Barrens/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64ee02f1-afdb-474b-a893-31538ad7219a	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Jagged Barrens/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64ee02f1-afdb-474b-a893-31538ad7219a	land	play-land	agreed	-	FX	scen	2	0	Jagged Barrens/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

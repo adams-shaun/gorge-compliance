@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8916b3d4-6a9a-420a-8ee7-be67b2f47201	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 891c6ca5-d238-4ac2-8df4-c6dc9a807562	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 891d2690-7144-4f87-b6ef-96f2469780a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-891d2690-7144-4f87-b6ef-96f2469780a9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+891d2690-7144-4f87-b6ef-96f2469780a9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 891d5c5e-3d4d-4183-b9fd-ab694639d1c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:uproot:cast:s1,f:xs:XP:uproot:cast:s1	-	-	-	64a08ba7d913	-	bd63bcce4fb8	-	-	2026-11-24	xproof
 8922a91e-3d15-4351-8d77-e0d6bc4de82e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8922a91e-3d15-4351-8d77-e0d6bc4de82e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,8 +180,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 89eb4c39-35ae-405b-8af4-779880cb11c9	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Masamune/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89eb4c39-35ae-405b-8af4-779880cb11c9	static#0.1	static#0.1	agreed	-	X	scen	1	0	The Masamune/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89ec0f03-47d0-4657-8987-95e680404f24	cast	cast-resolve	agreed	-	X	scen	1	0	Dual-Sun Technique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-89ed0598-a3ee-4d14-9a35-25e0dd80d9fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-89ed0598-a3ee-4d14-9a35-25e0dd80d9fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+89ed0598-a3ee-4d14-9a35-25e0dd80d9fb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moon-blessed-cleric:f0t0:s1,f:xs:XP:moon-blessed-cleric:f0t0:s1	-	-	-	d864b561c9cb	-	cd9bfb5350b2	-	-	2026-11-24	xproof
+89ed0598-a3ee-4d14-9a35-25e0dd80d9fb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:moon-blessed-cleric:f0t0:s1,f:xs:XP:moon-blessed-cleric:f0t0:s1	-	-	-	d864b561c9cb	-	cd9bfb5350b2	-	-	2026-11-24	xproof
 89f43e27-790b-4ca1-8ba7-0882b31e0783	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Temple of Enlightenment/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89f43e27-790b-4ca1-8ba7-0882b31e0783	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Enlightenment/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89f43e27-790b-4ca1-8ba7-0882b31e0783	land	play-land	agreed	-	X	scen	1	0	Temple of Enlightenment/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

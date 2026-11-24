@@ -29,9 +29,9 @@ ee2ab1ab-be1e-4e56-99f2-7784f7350b41	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 ee2c8714-6e85-4eb5-9bd6-057b6abfb136	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee2ca311-7639-436d-8ecb-d2aad075f25f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rattlechains:f0t0:s1,f:xs:XP:rattlechains:f0t0:s1	-	-	-	d864b561c9cb	-	9782c53d6621	-	-	2026-11-24	xproof
 ee2ca311-7639-436d-8ecb-d2aad075f25f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rattlechains:f0t0:s1,f:xs:XP:rattlechains:f0t0:s1	-	-	-	d864b561c9cb	-	9782c53d6621	-	-	2026-11-24	xproof
-ee2ef1e0-6803-4eb5-8664-605438c67505	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee2ef1e0-6803-4eb5-8664-605438c67505	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee2ef1e0-6803-4eb5-8664-605438c67505	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ee2ef1e0-6803-4eb5-8664-605438c67505	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zimone-quandrix-prodigy:cast:s1,f:xs:XP:zimone-quandrix-prodigy:cast:s1	-	-	-	d864b561c9cb	-	4f69179e740d	-	-	2026-11-24	xproof
+ee2ef1e0-6803-4eb5-8664-605438c67505	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:zimone-quandrix-prodigy:f0a0:s1,f:xs:XP:zimone-quandrix-prodigy:f0a0:s1	-	-	-	d864b561c9cb	-	4f69179e740d	-	-	2026-11-24	xproof
+ee2ef1e0-6803-4eb5-8664-605438c67505	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:zimone-quandrix-prodigy:f0a1:s1,f:xs:XP:zimone-quandrix-prodigy:f0a1:s1	-	-	-	d864b561c9cb	-	4f69179e740d	-	-	2026-11-24	xproof
 ee302659-59ed-4eef-babe-451b9ccf7f14	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee302659-59ed-4eef-babe-451b9ccf7f14	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee302659-59ed-4eef-babe-451b9ccf7f14	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -216,8 +216,8 @@ eedbc164-032c-420f-ac59-bd2675ff1b69	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	
 eedd5a17-d0fe-4a13-8f2c-f343bfa43f92	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eedd5a17-d0fe-4a13-8f2c-f343bfa43f92	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eee6c02b-7d6a-4445-ad27-8b03176147d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eee6c02b-7d6a-4445-ad27-8b03176147d4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eee6c02b-7d6a-4445-ad27-8b03176147d4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eee6c02b-7d6a-4445-ad27-8b03176147d4	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+eee6c02b-7d6a-4445-ad27-8b03176147d4	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 eee801ea-e2dc-4b03-a9f9-e87566cb2ae8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eee801ea-e2dc-4b03-a9f9-e87566cb2ae8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eef40ab2-9e17-4e8d-9e58-1a82ab871b5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -232,4 +232,4 @@ eef931d8-4048-4c33-bd8c-0f67d1083ee6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 eef931d8-4048-4c33-bd8c-0f67d1083ee6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eefa9a94-9915-4dcd-b5dc-7f8e9aa621a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eefeeab1-b9f2-451a-9250-eb7b54d00fc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eefeeab1-b9f2-451a-9250-eb7b54d00fc1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eefeeab1-b9f2-451a-9250-eb7b54d00fc1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
