@@ -407,12 +407,15 @@ public final class ScenarioReplayDriverAsksTest {
      * offered card is a Plains (gorge's decision moves two same-named objects,
      * so any subset is the same named game state): the driver takes the first
      * two the dialog offers. The shape gates keep it from becoming a default
-     * pick: distinct names, an open count, a non-library zone and a
-     * non-required ask all decline. The same shape reaches the
-     * chooseTarget(Cards) funnel (Dimir Charm's "put one back"), so both
-     * funnels must call the helper. */
+     * pick: distinct names, an open count, a non-library zone, a non-required
+     * ask and an ask inside the compared window (before the last checkpoint)
+     * all decline. A caret-joined multi-pick choice answer ("Plains^Plains")
+     * names its candidates through its segments and stays for the base player,
+     * never the fall-through. The same shape reaches the chooseTarget(Cards)
+     * funnel (Dimir Charm's "put one back"), so both funnels must call the
+     * helper. */
     private static void blackCatLookExileChoice() throws Exception {
-        Class<?>[] types = {boolean.class, int.class, int.class, Zone.class, int.class, List.class,
+        Class<?>[] types = {boolean.class, boolean.class, int.class, int.class, Zone.class, int.class, List.class,
                 List.class, java.util.function.Function.class};
         java.util.UUID a = java.util.UUID.randomUUID();
         java.util.UUID b = java.util.UUID.randomUUID();
@@ -422,37 +425,52 @@ public final class ScenarioReplayDriverAsksTest {
         List<java.util.UUID> candidates = Arrays.asList(a, b, c);
         java.util.function.Function<java.util.UUID, String> plains = id -> "Plains";
         List<?> picked = (List<?>) adapter("interchangeableLibraryPick", types,
-                true, 2, 2, Zone.LIBRARY, 2, offer, candidates, plains);
+                true, true, 2, 2, Zone.LIBRARY, 2, offer, candidates, plains);
         check(picked != null && picked.equals(Arrays.asList(a, b)),
                 "two of nine same-named looked-at cards are the first two offered: " + picked);
-        // The dialog order, not the candidate order, decides which ids are
+        // The offered order, not the candidate order, decides which ids are
         // taken: the same library window listed another way picks those ids.
         check(((List<?>) adapter("interchangeableLibraryPick", types,
-                true, 2, 2, Zone.LIBRARY, 2, Arrays.asList(later, b, a), candidates, plains))
-                .equals(Arrays.asList(b, a)), "the dialog's own order names the taken cards");
+                true, true, 2, 2, Zone.LIBRARY, 2, Arrays.asList(later, b, a), candidates, plains))
+                .equals(Arrays.asList(b, a)), "the offered order names the taken cards");
         java.util.Map<java.util.UUID, String> mixed = new java.util.HashMap<>();
         mixed.put(a, "Plains");
         mixed.put(b, "Plains");
         mixed.put(c, "Island");
         java.util.function.Function<java.util.UUID, String> nameOf = mixed::get;
         check(adapter("interchangeableLibraryPick", types,
-                true, 2, 2, Zone.LIBRARY, 2, offer, candidates, nameOf) == null,
+                true, true, 2, 2, Zone.LIBRARY, 2, offer, candidates, nameOf) == null,
                 "a distinct card is gorge's real choice and stays unscripted");
         check(adapter("interchangeableLibraryPick", types,
-                true, 0, 2, Zone.LIBRARY, 1, offer, candidates, plains) == null,
+                true, true, 0, 2, Zone.LIBRARY, 1, offer, candidates, plains) == null,
                 "an open count is never a default pick");
         check(adapter("interchangeableLibraryPick", types,
-                true, 2, 2, Zone.BATTLEFIELD, 2, offer, candidates, plains) == null,
+                true, true, 2, 2, Zone.BATTLEFIELD, 2, offer, candidates, plains) == null,
                 "a same-named permanent can differ by attached state, so only a library window is safe");
         check(adapter("interchangeableLibraryPick", types,
-                true, 2, 2, Zone.LIBRARY, 2, offer, Arrays.asList(a, b), plains) == null,
+                true, true, 2, 2, Zone.LIBRARY, 2, offer, Arrays.asList(a, b), plains) == null,
                 "every candidate needed is the forced-pick path, not this rule");
         check(adapter("interchangeableLibraryPick", types,
-                true, 2, 2, Zone.LIBRARY, 2, Collections.singletonList(a), candidates, plains) == null,
+                true, true, 2, 2, Zone.LIBRARY, 2, Collections.singletonList(a), candidates, plains) == null,
                 "the offer must actually hold the picks");
         check(adapter("interchangeableLibraryPick", types,
-                false, 2, 2, Zone.LIBRARY, 2, offer, candidates, plains) == null,
+                true, false, 2, 2, Zone.LIBRARY, 2, offer, candidates, plains) == null,
                 "a non-required ask may take none, so it stays a decision");
+        check(adapter("interchangeableLibraryPick", types,
+                false, true, 2, 2, Zone.LIBRARY, 2, offer, candidates, plains) == null,
+                "a pick inside the compared window is gorge's real decision, not a substitute");
+        // A caret-joined multi-pick choice answer ("Plains^Plains", the
+        // generator's spelling for a multi-card pick) names its candidates
+        // through its segments. The whole-string check missed it in
+        // forcedChooseCards, left the scripted answer at the queue front and
+        // took the cards, so the replay ended with a leftover choice.
+        Class<?>[] headTypes = {String.class, java.util.UUID.class, java.util.function.BiPredicate.class};
+        java.util.function.BiPredicate<java.util.UUID, String> names =
+                (id, part) -> id.equals(a) ? "Plains".equals(part) : "Island".equals(part);
+        check((Boolean) adapter("answerNamesCandidate", headTypes, "Plains^Plains", a, names),
+                "a caret-joined answer naming a candidate is this ask's own and stays for the base");
+        check(!(Boolean) adapter("answerNamesCandidate", headTypes, "Island^Island", a, names),
+                "a caret-joined answer naming no candidate is not this ask's own");
         // The helper alone is not the fix: pin that BOTH Cards funnels call
         // it. Dropping either call would leave the checks above passing while
         // the strict replay fails again on that card's effect API.
@@ -464,6 +482,14 @@ public final class ScenarioReplayDriverAsksTest {
         int forced = text.indexOf("forcedChooseCards(cards, target, source, game)", choiceFunnel);
         check(forced >= 0 && forced < choiceFunnel + 500,
                 "choose(Cards) must call forcedChooseCards");
+        // The head check must split a multi-pick answer. A whole-string
+        // comparison leaves the scripted caret answer queued (leftover).
+        int headCheck = text.indexOf("boolean headNamesCandidate", forced);
+        int headMatch = text.indexOf("answerNamesCandidate(game, id, head)", headCheck);
+        check(headCheck >= 0 && headMatch >= 0 && headMatch < headCheck + 800,
+                "forcedChooseCards head detection must use the segment-aware answerNamesCandidate");
+        check(text.indexOf("hasObjectTargetNameOrAlias(o, head)", choiceFunnel) < 0,
+                "forcedChooseCards must not compare the whole caret-joined choice head string");
         int choiceCall = text.indexOf("interchangeableLibraryPick(", forced);
         check(choiceCall >= 0 && choiceCall < forced + 4000,
                 "forcedChooseCards must call interchangeableLibraryPick");

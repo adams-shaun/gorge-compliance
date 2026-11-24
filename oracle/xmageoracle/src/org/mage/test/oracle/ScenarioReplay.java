@@ -1906,6 +1906,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return parts;
         }
 
+        /** Whether any "^" segment of a multi-pick answer names {@code id} by
+         * {@code namesSegment}. TestPlayer reads the choice queue as its
+         * segments ("Plains^Plains", "@p1:Plains#1^@p1:Plains#2"); comparing
+         * the whole string missed the ask's own scripted answer and left it
+         * queued while the forced fall-through took the cards. */
+        static boolean answerNamesCandidate(String answer, UUID id, BiPredicate<UUID, String> namesSegment) {
+            if (answer == null) {
+                return false;
+            }
+            for (String part : answerSegments(answer)) {
+                if (namesSegment.test(id, part)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private boolean answerNamesCandidate(Game game, UUID id, String answer) {
             if (answer == null) {
                 return false;
@@ -1917,12 +1934,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // possibleTargets (HashSet) order, so Rottenmouth Viper's two
                 // sacrificed permanents reached the graveyard in a random
                 // order and the scripted pick was left unused.
-                for (String part : answerSegments(answer)) {
-                    if (answerNamesCandidate(game, id, part)) {
-                        return true;
-                    }
-                }
-                return false;
+                return answerNamesCandidate(answer, id,
+                        (candidate, part) -> answerNamesCandidate(game, candidate, part));
             }
             if (answer.startsWith("targetPlayer=")) {
                 Player player = game.getPlayer(id);
@@ -2148,8 +2161,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
             boolean headNamesCandidate = false;
             if (head != null) {
                 for (UUID id : candidates) {
-                    mage.MageObject o = game.getObject(id);
-                    if (o != null && hasObjectTargetNameOrAlias(o, head)) {
+                    // TestPlayer reads the choice queue as "^" segments, so a
+                    // multi-pick answer ("Plains^Plains") is this ask's own
+                    // even though the whole string names no object. Comparing
+                    // the whole string left the scripted answer at the queue
+                    // front while the fall-through below took the cards, and
+                    // the replay ended with a leftover choice.
+                    if (answerNamesCandidate(game, id, head)) {
                         headNamesCandidate = true;
                         break;
                     }
@@ -2171,9 +2189,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
             for (Card card : cards.getCards(game)) {
                 offer.add(card.getId());
             }
-            List<UUID> picks = interchangeableLibraryPick(target.isRequired(),
-                    target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(), target.getZone(),
-                    needed, offer, candidates, id -> {
+            List<UUID> picks = interchangeableLibraryPick(owner.pastLastCheckpoint(),
+                    target.isRequired(), target.getMinNumberOfTargets(),
+                    target.getMaxNumberOfTargets(), target.getZone(), needed, offer, candidates,
+                    id -> {
                         Card card = game.getCard(id);
                         return card == null ? null : card.getName();
                     });
@@ -2201,12 +2220,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * state), more candidates than picks (a forced pick owns the rest),
          * and ONE name across every candidate. Distinct names are gorge's real
          * choice and stay unscripted until the generator scripts it.
-         * {@code offerOrder} is the dialog's own order; {@code candidates} the
-         * legal ones among it. */
-        static List<UUID> interchangeableLibraryPick(boolean required, int minTargets, int maxTargets,
+         *
+         * Only an ask in the trailing play -- after every scenario checkpoint
+         * was captured ({@link ScenarioReplay#pastLastCheckpoint}) -- is
+         * answered, the same rule as {@link #searchPickChoice}. Inside the
+         * compared window the pick is gorge's real decision: a same-name
+         * substitute would compare equal but hide a cut/generator gap and
+         * cost the strict-miss signal. {@code offerOrder} is the order the
+         * ask offered the cards in (from the engine's Cards; a Set, so it
+         * promises no library order -- every candidate here has the same
+         * name, so which ids are taken never reaches the compared state);
+         * {@code candidates} the legal ones among it. */
+        static List<UUID> interchangeableLibraryPick(boolean trailingPlay, boolean required,
+                int minTargets, int maxTargets,
                 Zone zone, int needed, List<UUID> offerOrder, List<UUID> candidates,
                 java.util.function.Function<UUID, String> nameOf) {
-            if (!required || needed <= 0 || minTargets != maxTargets || zone != Zone.LIBRARY
+            if (!trailingPlay || !required || needed <= 0 || minTargets != maxTargets || zone != Zone.LIBRARY
                     || candidates.size() <= needed) {
                 return null;
             }
@@ -2671,9 +2700,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     for (Card card : cards.getCards(game)) {
                         offer.add(card.getId());
                     }
-                    List<UUID> picks = interchangeableLibraryPick(target.isRequired(),
-                            target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(),
-                            target.getZone(), target.getMinNumberOfTargets() - target.getSize(),
+                    List<UUID> picks = interchangeableLibraryPick(owner.pastLastCheckpoint(),
+                            target.isRequired(), target.getMinNumberOfTargets(),
+                            target.getMaxNumberOfTargets(), target.getZone(),
+                            target.getMinNumberOfTargets() - target.getSize(),
                             offer, candidates, id -> {
                                 Card card = game.getCard(id);
                                 return card == null ? null : card.getName();
