@@ -93,7 +93,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # consumes gorge's waterbend_generic tap picks (Forge asks for waterbend taps through chooseCardsForConvokeOrImprovise, which took
 # only convoke*/improvise* kinds: Katara's Waterbend {X} paid from an empty pool and was refused). Driver-only change; same trees
 # as FORGE_REF ff076d4432. Fork branch fix/waterbend-tap-pick-driver.
-FORGE_ORACLE_REF ?= 963576e5d296e846bb74d1f3a0b32bee3a1f2c93
+# ff2049dc97 = 963576e5d2 + landFor plays a land from outside the hand through the copy a MayPlay static grants (Ka-Zar's
+# library top, the card Irascible Wolverine / Kulrath Zealot / Crimson Operative exile, Tablet of Discovery's milled card):
+# the card's own land ability plays only from the hand, so the play did nothing ("step N (play) p0:<land> was not played").
+# Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch fix/land-play-mayplay.
+FORGE_ORACLE_REF ?= ff2049dc97257e77f5787395b84d2231e963619a
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

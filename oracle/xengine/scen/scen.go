@@ -29,9 +29,8 @@ const (
 
 // Options tunes Generate.
 type Options struct {
-	Prefer     string          // "auto" (default) or "start"
-	Set        string          // names ids; default "SCEN"
-	PhaseLacks map[string]bool // cards phase.rs refuses; nil = unknown (treated as lacking)
+	Prefer string // "auto" (default) or "start"
+	Set    string // names ids; default "SCEN"
 }
 
 // Result is what Generate built: exactly one of Steps, Start or a Reason.
@@ -116,11 +115,10 @@ func Generate(reg *cards.Registry, b *certdeck.Builder, card, key string, opt Op
 	if !known {
 		return Result{}, fmt.Errorf("scen: %q has no key %q", card, key)
 	}
-	// Not sent: Forge alone is weak evidence for gorge, which shares Forge's
-	// scripts, so a card XMage does not list needs phase.rs to vouch for it.
-	if !b.Sp.Lists(reg, card) && (opt.PhaseLacks == nil || opt.PhaseLacks[card]) {
-		return refuse("not-sent")
-	}
+	// A card XMage does not list is still generated: Forge is the reference
+	// oracle (operator 11-24), the XMage leg marks the item not_sent, and
+	// keyproof credits a Forge agreement with XMage silent (refs F). Refusing
+	// it here owed about a fifth of every xproof cycle's keys.
 	fam := Family(key)
 	m := keyRE.FindStringSubmatch(key)
 	var face *cards.Face

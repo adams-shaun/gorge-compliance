@@ -396,3 +396,22 @@ func TestStartPlayerCounters(t *testing.T) {
 		})
 	}
 }
+
+// TestScenUnlistedByXMageIsGenerated: a card no XMage manifest lists is still
+// generated, not refused not-sent. Forge is the reference oracle (operator
+// 11-24): the XMage leg marks the item not_sent and keyproof credits a Forge
+// agreement refs F. The refusal owed about a fifth of each xproof cycle.
+func TestScenUnlistedByXMageIsGenerated(t *testing.T) {
+	reg, b := testBuilder(t)
+	const card = "Croakid Amphibonaut"
+	if b.Sp.Lists(reg, card) {
+		t.Fatalf("%s is listed by an XMage manifest now: pick another unlisted card", card)
+	}
+	res, err := Generate(reg, b, card, "cast", Options{Set: "SCEN"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path == "refused" {
+		t.Errorf("%s cast refused %q, want a steps or start scenario", card, res.Reason)
+	}
+}
