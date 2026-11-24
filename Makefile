@@ -179,7 +179,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # choosePermanentsToSacrifice. OptionalAskTest (6 tests) and FoldedOptionalConfirmTest (4) pin them; the full driver
 # suite (140 tests, including ForcedDieRollTest) is green on the merge. Driver-only change; cardsfolder/tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-optional-asks.
-FORGE_ORACLE_REF ?= 7d2c3206368cb7aca59a1c2789839c953f986667
+# ed6016bfebb6 = 7d2c3206368c plus the clash placement ask (xproof decision_shape: Adder-Staff Boggart, Release the
+# Ants, Titan's Revenge, Gilt-Leaf Ambush, Recross the Paths, Woodland Guidance). CR 701.30a: gorge asks each clashing
+# player once, a 1-of-2 pick (resume clash_placement, option kinds top/bottom); Forge's ClashEffect asks
+# willPutCardOnTop (true means top), which the scripted controller now answers from that pick instead of missing.
+# ClashPlacementTest (2 tests: bottom/bottom, and top for one seat with bottom for the other) pins it; the full driver
+# suite (142 tests, including ForcedDieRollTest) is green. Driver-only change; cardsfolder/tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-clash-placement.
+FORGE_ORACLE_REF ?= ed6016bfebb61254701707134c1416901a2ba7af
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
