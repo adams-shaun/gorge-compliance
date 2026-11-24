@@ -40,7 +40,15 @@ GO_TEST_FLAGS ?= -p=2
 # declared as an attacker or put onto the battlefield attacking; a declared attacker that later leaves combat does not
 # un-declare the attack, CR 508.8: Daemogoth Titan's own attack trigger sacrifices it, Duergar Assailant sacrifices
 # itself to its damage ability). Fork branch fix/attacker-removed-combat-steps, AttackerRemovedCombatStepsTest.
-XMAGE_REF  ?= ec270409d072a1432533559a250cee7cf4977a3c
+# f07513ff8f = ec270409d0 + fork PR #22 (re-stacked on the #21 pin so both are carried): TRK's Play Booster
+# collation (the set still carried the spoiler-period `// this.enablePlayBooster(276)` waiver, so
+# VerifyCardDataTest failed the set check "wrong booster settings (set must have boosters, but it does not)"),
+# HML 56 Sengir Autocrat as Rare (mtgjson, Scryfall and upstream master agree; the same Verify run reported the
+# stale Uncommon once the mtgjson snapshot updated), and surefire failIfNoSpecifiedTests=false so a targeted
+# `mvn -pl Mage.Verify -am test -Dtest=VerifyCardDataTest` reaches Mage.Verify instead of failing in a dependency
+# module with no matching test. Set metadata and test-runner config only: no card behaviour, so the manifests are
+# unchanged.
+XMAGE_REF  ?= f07513ff8f240a6765eee368cc7452c421a5eafb
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
