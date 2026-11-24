@@ -187,6 +187,17 @@ Adopt route (a). Consequences:
 5. Determinism: the engine's seeded streams mean our xclient runs are replayable; ec-11 should
    assert digest equality on a held-out seed, matching the upstream X4 replay methodology.
 
+## ec-11 status
+
+- **ec-11a (gorge-compliance, landed):** `scripts/xmage-sbv2.sh` + `make xmage-sbv2-setup` + pins
+  `XMAGE_SBV2_REF` / `XMAGE_SBV2_XMAGE_REF` / `XMAGE_SBV2_DIR` in the Makefile, with a stub smoke
+  (`ops/scripts/tests/xmage_sbv2_smoke.sh`, in `make smoke`). See docs/oracles.md. The launcher's identity
+  check recomputes both patch digests from the pinned patches; the formulas reproduce upstream's committed
+  `xpat-6f8a902b...` and sets `xpat-94cbe27a...` at the pinned revision.
+- **Open (other repos / operator):** gorge `minihost.Host.Format`; four-yay `cmd/xclient -format`, hello
+  format check and the `Dialer` format; the real build and the 100-game / 20-record / replay-digest runs. The
+  launcher was exercised against stubs only (no Maven build was run in the seat).
+
 ## ec-11 brief (ready to queue; replaces the parked placeholder)
 
 > Kind: feature. Complexity: medium. Priority: P2. Depends-On: ec-10, plus the gorge ticket for
