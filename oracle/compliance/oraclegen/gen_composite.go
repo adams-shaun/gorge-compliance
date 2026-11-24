@@ -111,7 +111,7 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			}
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), ownBounce: bounces})
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), ownBounce: bounces, snaps: res.Snapshots})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that

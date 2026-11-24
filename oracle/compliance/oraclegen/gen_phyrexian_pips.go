@@ -35,6 +35,10 @@ type xanswersExtra struct {
 	pips map[int][]pipAsk
 	// ownBounce marks the steps that pose an own-bounce hidden pick.
 	ownBounce map[int]bool
+	// snaps is the gorge result's checkpoints: the destination of a
+	// hand_move/library_placement decision is not a field, so the answer
+	// router re-derives a top placement from the after-step library top.
+	snaps []rules.OracleSnapshot
 }
 
 // isPipDecision reports whether d is one of gorge's ManaAsk pip decisions
