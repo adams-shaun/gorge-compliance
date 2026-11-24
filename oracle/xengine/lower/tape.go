@@ -796,13 +796,17 @@ func (l *Lowered) stepOfEntry(i int) int {
 // attach puts a step's asks on it. A cast or activation whose every target
 // ask took its full Max goes through the step's targets (the runner hands them
 // to the target decisions in order); anything else is an answer, which the
-// runner matches to a decision by kind.
+// runner matches to a decision by kind. A target ask posed after a triggered
+// ability went on the stack is that trigger's own target (CR 603.3d), not the
+// step's: the cast step has no such target to name, so the ask stays an answer
+// and never joins the step's targets, which the drivers hand to the spell.
 func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) {
 	asks := group[1:]
+	own := ownAsks(group)
 	useTargets := isPaidStep(st.Op) && len(asks) == len(answers)
 	n := 0
-	for _, a := range asks {
-		if a.Kind != "target" {
+	for k, a := range asks {
+		if a.Kind != "target" || k >= own {
 			continue
 		}
 		n++
@@ -815,12 +819,27 @@ func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) 
 		return
 	}
 	for k, a := range answers {
-		if a.Kind == "target" {
+		if a.Kind == "target" && k < own {
 			st.Targets = append(st.Targets, a.Pick...)
 		} else {
 			st.Answers = append(st.Answers, answers[k])
 		}
 	}
+}
+
+// ownAsks is how many of a group's asks (group[1:]) belong to the group's own
+// decision: the ones posed before any entry's commit put a triggered ability
+// on the stack. The recorder hands a trigger to the entry committed before
+// its ask is posed, so every ask after the first entry with Triggers belongs
+// to a trigger (a cast trigger's target, CR 603.3d), never to the spell or
+// ability being put on the stack.
+func ownAsks(group []game.Entry) int {
+	for k, e := range group {
+		if len(e.Triggers) > 0 {
+			return k
+		}
+	}
+	return len(group) - 1
 }
 
 // recordedDraws is the number of engine draws an entry's recorded outcomes
