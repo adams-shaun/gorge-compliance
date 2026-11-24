@@ -146,6 +146,24 @@ out=$(STUB_UNTRACKED=forge-gui/res/tokenscripts/extra.txt "$RUN" --compile 2>&1)
 check "run refuses untracked runtime scripts" $([ "$rc" = 2 ] && has "$out" "untracked scripts" && echo 0 || echo 1) "rc=$rc $out"
 reached; check "  ...before javac, java or scope" $((! $? ))
 
+# 4b. --preflight: on a good pin, the names the pinned cardsfolder cannot
+# resolve, one grep pass, before any javac, java or scope. The three names
+# the xengine farm caught as Forge harness "Couldn't find a card" stay
+# refused here; Grizzly Bears is resolved.
+mkdir -p "$TMP/clone/forge-gui/res/cardsfolder/g"
+printf 'Name:Grizzly Bears\nOracle:Grizzly Bears is a bear.\n' > "$TMP/clone/forge-gui/res/cardsfolder/g/grizzly_bears.txt"
+: > "$LOG"
+printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\n' > "$TMP/names.txt"
+out=$("$RUN" --preflight "$TMP/names.txt" 2>"$TMP/pf.err"); rc=$?
+tab=$'\t'
+check "preflight exits 0 on a good pin" $((rc == 0 ? 0 : 1)) "rc=$rc $(cat "$TMP/pf.err")"
+check "  ...refusing Gobland, Indicate and Mox Poison" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Gobland${tab}not in the pinned cardsfolder" &&
+		printf '%s\n' "$out" | /usr/bin/grep -qxF "Indicate${tab}not in the pinned cardsfolder" &&
+		printf '%s\n' "$out" | /usr/bin/grep -qxF "Mox Poison${tab}not in the pinned cardsfolder" && echo 0 || echo 1) "$out"
+check "  ...and keeping the card the pin resolves" $(printf '%s\n' "$out" | /usr/bin/grep -q "Grizzly Bears" && echo 1 || echo 0) "$out"
+reached; check "  ...before javac, java or scope" $((! $? ))
+
 # 5. run with a good pin: javac once per source sha, java with the pinned env.
 : > "$LOG"
 out=$("$RUN" --compile 2>&1); rc=$?

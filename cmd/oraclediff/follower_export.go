@@ -229,18 +229,11 @@ func followerPrepPath(fl follower.Follower, out string) string {
 	return filepath.Join(filepath.Dir(out), fl.Name+"-prep.jsonl")
 }
 
-// followerExport writes fl's requests for the items in scen to out and its
-// refusals beside it, asking runner's --preflight which cards fl lacks. The
-// follower and runner are parameters so a test can drive a follower the
-// registry does not hold.
-func followerExport(reg *cards.Registry, fl follower.Follower, runner, scen, out string) (followerExportStats, error) {
-	st := followerExportStats{Census: census{}}
-	prepPath := followerPrepPath(fl, out)
-	for _, p := range []string{out, prepPath} {
-		if err := refuseRepoPath(p); err != nil {
-			return st, err
-		}
-	}
+// preflightNames reads scen's items and asks runner's --preflight which cards
+// fl lacks (the protocol in the file comment). It returns the items, each
+// item's card names, the lacking cards' reasons by name, and st with Items,
+// Asked and Lacking filled.
+func preflightNames(reg *cards.Registry, fl follower.Follower, runner, scen, dir string) ([]oraclegen.Item, [][]string, map[string]string, followerExportStats, error) {
 	var items []oraclegen.Item
 	if err := readLines(scen, func(b []byte) error {
 		var it oraclegen.Item
@@ -250,9 +243,9 @@ func followerExport(reg *cards.Registry, fl follower.Follower, runner, scen, out
 		items = append(items, it)
 		return nil
 	}); err != nil {
-		return st, err
+		return nil, nil, nil, followerExportStats{}, err
 	}
-	st.Items = len(items)
+	st := followerExportStats{Items: len(items)}
 	itemNames := make([][]string, len(items))
 	union := map[string]bool{}
 	for i, it := range items {
@@ -267,11 +260,43 @@ func followerExport(reg *cards.Registry, fl follower.Follower, runner, scen, out
 	}
 	sort.Strings(names)
 	st.Asked = len(names)
-	lacks, err := runPreflight(runner, names, filepath.Dir(out))
+	lacks, err := runPreflight(runner, names, dir)
 	if err != nil {
-		return st, fmt.Errorf("%s preflight: %w", fl.Display, err)
+		return nil, nil, nil, st, fmt.Errorf("%s preflight: %w", fl.Display, err)
 	}
 	st.Lacking = len(lacks)
+	return items, itemNames, lacks, st, nil
+}
+
+// refuseReasons is a refused item's detail: every name it references that the
+// preflight refused, as "name: reason", joined.
+func refuseReasons(itemNames []string, lacks map[string]string) []string {
+	var why []string
+	for _, n := range itemNames {
+		if r, ok := lacks[n]; ok {
+			why = append(why, n+": "+r)
+		}
+	}
+	return why
+}
+
+// followerExport writes fl's requests for the items in scen to out and its
+// refusals beside it, asking runner's --preflight which cards fl lacks. The
+// follower and runner are parameters so a test can drive a follower the
+// registry does not hold.
+func followerExport(reg *cards.Registry, fl follower.Follower, runner, scen, out string) (followerExportStats, error) {
+	st := followerExportStats{Census: census{}}
+	prepPath := followerPrepPath(fl, out)
+	for _, p := range []string{out, prepPath} {
+		if err := refuseRepoPath(p); err != nil {
+			return st, err
+		}
+	}
+	items, itemNames, lacks, asked, err := preflightNames(reg, fl, runner, scen, filepath.Dir(out))
+	if err != nil {
+		return st, err
+	}
+	st.Items, st.Asked, st.Lacking = asked.Items, asked.Asked, asked.Lacking
 
 	of, err := os.Create(out)
 	if err != nil {
@@ -285,12 +310,7 @@ func followerExport(reg *cards.Registry, fl follower.Follower, runner, scen, out
 	defer pf.Close()
 	w, pw := bufio.NewWriter(of), bufio.NewWriter(pf)
 	for i, it := range items {
-		var why []string
-		for _, n := range itemNames[i] {
-			if r, ok := lacks[n]; ok {
-				why = append(why, n+": "+r)
-			}
-		}
+		why := refuseReasons(itemNames[i], lacks)
 		var line []byte
 		if len(why) > 0 {
 			st.Refused++

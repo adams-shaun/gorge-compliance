@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # forge-oracle-run.sh IN.jsonl OUT.jsonl
+# forge-oracle-run.sh --preflight NAMES.txt
 # forge-oracle-run.sh --compile
 #
 # Replays Forge-oracle requests (one JSON object per line) in
@@ -8,6 +9,12 @@
 # compiled with javac against $FORGE_ORACLE_DIR/cp.txt on first use and
 # whenever its source (or the classpath) changes. The pass wrapper, not this
 # script, takes the heavy lock.
+#
+#   --preflight   print NAME<TAB>REASON on stdout for each name in NAMES.txt
+#                 the pinned Forge cannot resolve as a card (the protocol
+#                 cmd/oraclediff/follower_export.go drives): a name whose
+#                 Name: line is in no cardsfolder card file. One grep pass
+#                 over the pinned cardsfolder; no javac, no JVM, no lock.
 #
 # Overrides:
 #   FORGE_ORACLE_SRC      the forge-oracle project dir to compile and replay (a
@@ -29,9 +36,12 @@ die() { echo "forge-oracle-run: $*" >&2; exit 2; }
 
 if [ "${1:-}" = --compile ]; then
   mode=compile
+elif [ "${1:-}" = --preflight ]; then
+  mode=preflight
+  names=${2:?usage: forge-oracle-run.sh IN.jsonl OUT.jsonl | --preflight NAMES.txt | --compile}
 else
-  in=${1:?usage: forge-oracle-run.sh IN.jsonl OUT.jsonl | --compile}
-  out=${2:?usage: forge-oracle-run.sh IN.jsonl OUT.jsonl | --compile}
+  in=${1:?usage: forge-oracle-run.sh IN.jsonl OUT.jsonl | --preflight NAMES.txt | --compile}
+  out=${2:?usage: forge-oracle-run.sh IN.jsonl OUT.jsonl | --preflight NAMES.txt | --compile}
   mode=run
 fi
 root=${FORGE_ORACLE_DIR:-$here/$(mk FORGE_ORACLE_DIR)}
@@ -63,6 +73,34 @@ git -C "$top" diff --quiet HEAD -- forge-gui/res/cardsfolder forge-gui/res/token
 # Untracked (even ignored) scripts are loaded too, but git diff cannot see them.
 [ -z "$(git -C "$top" ls-files --others -- forge-gui/res/cardsfolder forge-gui/res/tokenscripts)" ] || die "$top has untracked scripts under forge-gui/res/{cardsfolder,tokenscripts}"
 [ -d "$top/forge-gui/res" ] || die "no $top/forge-gui/res"
+
+# The preflight protocol owns stdout (the pin check printed its verdict on
+# stderr): a name the pinned Forge cannot resolve as a card is one whose
+# Name: line is in no cardsfolder card file — exactly the setup the driver
+# fails with "Couldn't find a card" for, before it replays a step. The
+# pinned cardsfolder lags the corpus, so forge-export refuses such an item
+# instead of replaying it into a harness row.
+if [ "$mode" = preflight ]; then
+  [ -r "$names" ] || die "cannot read $names"
+  cardsfolder=$top/forge-gui/res/cardsfolder
+  pats=$(mktemp) || die "no temp file for the preflight patterns"
+  trap 'rm -f "$pats"' EXIT
+  : > "$pats"
+  while IFS= read -r n; do
+    [ -n "$n" ] || continue
+    printf 'Name:%s\n' "$n" >> "$pats"
+  done < "$names"
+  # One fixed-string whole-line pass over the cardsfolder; the matched Name
+  # lines, sorted, are the asked names the pin resolves (both faces of a
+  # double-faced card are Name lines of one file).
+  hits=$(grep -rhx -F -f "$pats" "$cardsfolder" 2>/dev/null | sort -u || true)
+  while IFS= read -r n; do
+    [ -n "$n" ] || continue
+    grep -qxF "Name:$n" <<<"$hits" || printf '%s\t%s\n' "$n" "not in the pinned cardsfolder"
+  done < "$names"
+  exit 0
+fi
+
 [ -d "$src/src/main/java" ] || die "no driver source at $src/src/main/java"
 
 # item.die_rolls is only honoured when the driver has the step-scoped force
