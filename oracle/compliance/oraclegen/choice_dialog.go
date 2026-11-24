@@ -70,8 +70,9 @@ func choiceDialogLabels(f *cards.Face) []string {
 // card's own election.
 //
 // Membership and polarity are proven against the XMage source at XMAGE_REF
-// fdde07931f, one chooseUse per entry (true branch in the last column's first
-// parenthesis side unless noted):
+// fdde07931f (the current pin b964ce92f0 differs only in PlayerImpl.java and
+// WaterbendTest.java, no card class), one chooseUse per entry (true branch in
+// the last column's first parenthesis side unless noted):
 //
 //	BaneLordOfDarkness       "Have <controller> draw a card or put a creature into play?" ("Draw card"/"Play creature")
 //	CombustibleGearhulk      "Have <controller> draw three cards?"                    (draw three / mill and damage)
@@ -173,7 +174,10 @@ func chooseUseLabels(f *cards.Face) (pairs [][2]string, ok bool) {
 // Membership is proven against the XMage source, not guessed: at XMAGE_REF
 // fdde07931f exactly these 26 Mage.Sets card classes pass keyword abilities to
 // GainsChoiceOfAbilitiesEffect, and each class's ability list is the same
-// keyword set as the face's Forge KWChoice$ line (one Pump per face):
+// keyword set as the face's Forge KWChoice$ line (one Pump per face). The
+// current pin b964ce92f0 adds only PlayerImpl.java (the Waterbend playable
+// check) and WaterbendTest.java over fdde07931f and touches no Mage.Sets
+// class, so the 26-class set cannot move:
 //
 //	AlchemistsGift, ArgivianAvenger, AssassinInitiate, AtraxasSkitterfang,
 //	BallroomBrawlers, ButcherOfTheHorde, EzrimAgencyChief, GabrielAngelfire,
