@@ -136,6 +136,7 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	}
 	it.Scenario = sc
 	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, keepTokenLooks(playStepUnlessPays(sc.Steps, g.Decisions)))
+	g.Decisions = append(g.Decisions, pendingResolutionDecisions(reg, sc, g)...)
 	it.XAnswers = oraclegen.XAnswersForScenario(reg, g, sc, modes, castSteps)
 	if len(it.XAnswers) == 0 {
 		// Nothing to script: still one (empty) entry per step, as the
@@ -222,6 +223,80 @@ func addDieRollAnswers(answers [][]oraclegen.XAnswer, rolls []oraclegen.DieRoll,
 		}
 	}
 	return answers
+}
+
+// pendingResolutionDecisions returns the decisions a stack object poses when
+// it resolves only after the window's last checkpoint. A lowered window cut
+// after the pass that hands priority away leaves a spell (or an ability) on
+// the stack, so gorge's own result holds no decision for the enters trigger
+// that resolution puts on the stack; XMage runs on to the stop boundary and
+// asks it with nothing scripted ("Missing TARGET def", Disruptive Stormbrood's
+// "destroy up to one target artifact or enchantment"). The completion replays
+// the same scenario one priority round further through gorge's own runner and
+// retimes the asks it poses onto the window's last step, where the driver
+// still holds its queue. Nothing is guessed: an unwindowed resolution that
+// asks nothing adds nothing, and a continuation that fails leaves the old
+// strict miss in place rather than inventing an answer.
+func pendingResolutionDecisions(reg *cards.Registry, sc oraclegen.Scenario, g rules.OracleResult) []rules.OracleDecision {
+	if len(sc.Steps) == 0 || len(g.Snapshots) != len(sc.Steps)+1 {
+		return nil
+	}
+	last := len(sc.Steps) - 1
+	if sc.Steps[last].Op != "pass" || len(g.Snapshots[last+1].Stack) == 0 {
+		return nil
+	}
+	players := len(g.Snapshots[last+1].Players)
+	if players < 2 {
+		players = 2
+	}
+	steps := slices.Clone(sc.Steps)
+	seat := sc.Steps[last].Seat
+	for pass := 0; pass < players; pass++ {
+		seat = (seat + 1) % players
+		steps = append(steps, oraclegen.Step{Op: "pass", Seat: seat})
+		probe := sc
+		probe.Steps = steps
+		raw, err := json.Marshal(probe)
+		if err != nil {
+			return nil
+		}
+		res, err := rules.RunOracleScenarioJSON(reg, raw)
+		if err != nil || len(res.Fails) > 0 || len(res.Snapshots) != len(steps)+1 {
+			return nil
+		}
+		// The pass moved the game on instead of resolving an object at the
+		// cut's own step: the driver's stop boundary is already past it, so a
+		// later step's trigger is not this window's ask.
+		after := res.Snapshots[len(res.Snapshots)-1]
+		if after.Turn != g.Snapshots[last+1].Turn || after.Step != g.Snapshots[last+1].Step {
+			return nil
+		}
+		var span []rules.OracleDecision
+		for _, d := range res.Decisions {
+			if d.Step >= len(sc.Steps) {
+				span = append(span, d)
+			}
+		}
+		if len(span) > 0 {
+			for _, d := range span {
+				if d.Kind == "mode" {
+					// A modal enters trigger's CR 603.3c mode choice is
+					// completeModalTrigger's: it also corrects a surveil look's
+					// queue, and its span carries the targets that follow. Leave
+					// that path alone instead of racing it with a mode answer.
+					return nil
+				}
+			}
+			for i := range span {
+				span[i].Step = last
+			}
+			return span
+		}
+		if len(after.Stack) == 0 {
+			return nil
+		}
+	}
+	return nil
 }
 
 // completeModalTrigger scripts the CR 603.3c mode choice of a modal enters
