@@ -347,7 +347,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # form's entity pick (the lone Equipment the lone-forced shortcut consumes) is remembered as that attachment's yes. Test
 # UnmappedAsksJoinDirectionAttachTest (5 tests, five fixtures/unmapped requests); full driver suite 177 tests. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-number-direction-attach.
-FORGE_ORACLE_REF ?= d1b608ce5db3e73ea9c4a0cd98aa2e8514d2625f
+# a445a858b2 = d1b608ce5d (the 177-test driver) plus the Myriad-only AtEOT empty-set guard: the fork's Myriad fix (f30d448731) made
+# SpellAbilityEffect.registerDelayedTrigger return on an empty card set for every AtEOT caller, which dropped the delayed
+# trigger CR 603.7a creates for an unconditional "exile it at the beginning of the next end step" (Mordor on the March with
+# no creature card to exile; the Devastating Onslaught X=0 / Foggy Swamp Visions class). The guard now needs AtEOTNeedsCard$ True,
+# which only CardFactoryUtil's Myriad trigger carries (CR 702.116a). xproof cluster xpt-0eb9c20e. MordorOnTheMarchNothingExiledTest
+# fails on d1b608ce5d and passes after; MyriadNoTokensCreatesNoDelayedTriggerTest still passes; the driver suite (177 tests) passes on
+# the patched forge-game. cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-mordor-empty-delayed-trigger-on-d1b6
+# (the 8653216df2 commit cherry-picked onto d1b608ce5d, so the Join Forces / LeftOrRight / Attach mappings stay).
+FORGE_ORACLE_REF ?= a445a858b22f5cc4939359f471d712eb497178c1
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
