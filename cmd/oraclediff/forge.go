@@ -803,12 +803,25 @@ func forgeAbilityLines(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 // forgeAbilityFace is the face whose Abilities[ability_index] step i names,
 // resolved as forgeAbilityLines documents, or nil when the step names no
 // ability or none resolves.
+//
+// A multi-face card can change face during the window without a setup
+// back_face entry: a modal DFC played as its land back face (CR 712.12) has
+// its front spell at the same printed index as the back land's mana ability.
+// The printed face would then resolve, but to the wrong ability, so for a
+// multi-face card the snapshot entering the step is consulted first: it names
+// the face that is actually up. A single-face card keeps the setup path, so an
+// already-emitted line never changes and the Forge result cache stays valid.
 func forgeAbilityFace(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step, g rules.OracleResult, i int) *cards.Face {
 	if st.AbilityIndex == nil || st.Card == "" {
 		return nil
 	}
 	k := *st.AbilityIndex
 	c, ok := reg.Lookup(refCardName(st.Card))
+	if ok && len(c.Faces) > 1 {
+		if f := forgeSnapshotAbilityFace(reg, it, st, g, i); f != nil {
+			return f
+		}
+	}
 	if ok && len(c.Faces) > 0 {
 		face := 0
 		if seat, _, hasSeat := strings.Cut(st.Card, ":"); hasSeat {
