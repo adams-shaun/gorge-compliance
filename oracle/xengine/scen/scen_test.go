@@ -222,24 +222,48 @@ func TestScenDeterministic(t *testing.T) {
 	}
 }
 
-// TestStartEnablersOffBattlefield: an enabler that cannot be a permanent on
-// the battlefield (an instant, a sorcery, an unattached Aura) is listed in its
-// side's hand. Listed on the battlefield, gorge left Path to Exile there and
-// dropped Strange Augmentation from the library, while Forge put both in hand,
-// so every such start diverged at setup (xp-setup-extra-hand-card).
-func TestStartEnablersOffBattlefield(t *testing.T) {
+// TestStartForcedPlacements: a start meets each need with placed state where
+// it can, so the only plays it offers are the ones that exercise the key
+// (the forced start, recipe.go). An instant, sorcery or Aura enabler never
+// sits on the battlefield: listed there, gorge left Path to Exile on the
+// battlefield and dropped Strange Augmentation from the library while Forge
+// put both in hand (xp-setup-extra-hand-card). Beza: opp-burn is p0's life
+// lowered, not Taste of Blood that p1 cannot cast; lands are two tapped
+// Plains; life:total is Lunarch Veteran, the pick with nothing to activate
+// (Fountain of Youth would compete for Beza's mana). Lord Skitter's Blessing:
+// the Aura is cast from hand with its Swamp and an inert bearer. Coliseum
+// Behemoth: Vampiric Rites, a placeable pick, over the Aura Kaya's Ghostform.
+// Aven Interrupter: p1's spell to exile is the first instant pick (Howl from
+// Beyond, not the sorcery Indicate p1 cannot cast on p0's turn), with its
+// Swamp.
+func TestStartForcedPlacements(t *testing.T) {
 	reg, b := testBuilder(t)
+	life := func(f *StartFile) int32 {
+		if f.Setup.P0.Life == nil {
+			return 20
+		}
+		return *f.Setup.P0.Life
+	}
 	rows := []struct {
-		card, key            string
-		p0Hand, p0BF, p1Hand []string
+		card, key              string
+		p0Hand, p0BF, p0Tapped []string
+		p0Life                 int32
+		p1Hand, p1BF           []string
 	}{
 		{"Beza, the Bounding Spring", "cast",
-			[]string{"Beza, the Bounding Spring", "Path to Exile"},
-			cat(rep("Plains", 4), []string{"Fountain of Youth"}),
-			[]string{"Taste of Blood"}},
+			[]string{"Beza, the Bounding Spring"},
+			cat(rep("Plains", 4), []string{"Lunarch Veteran"}, rep("Plains", 2)), rep("Plains", 2), 17,
+			nil, nil},
 		{"Lord Skitter's Blessing", "f0/t0",
 			[]string{"Lord Skitter's Blessing", "Strange Augmentation"},
-			rep("Swamp", 2), nil},
+			cat(rep("Swamp", 3), []string{"Wall of Stone"}), nil, 20,
+			nil, nil},
+		{"Coliseum Behemoth", "f0/t0",
+			[]string{"Coliseum Behemoth"}, rep("Forest", 7), nil, 20,
+			nil, []string{"Fountain of Youth", "Vampiric Rites"}},
+		{"Aven Interrupter", "f0/t0",
+			[]string{"Aven Interrupter"}, rep("Plains", 3), nil, 20,
+			[]string{"Howl from Beyond"}, []string{"Swamp"}},
 	}
 	for _, r := range rows {
 		t.Run(r.card, func(t *testing.T) {
@@ -253,8 +277,12 @@ func TestStartEnablersOffBattlefield(t *testing.T) {
 			f := res.Start
 			listIs(t, "p0 hand", f.Setup.P0.Hand, r.p0Hand)
 			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.p0BF)
+			listIs(t, "p0 tapped", f.Setup.P0.Tapped, r.p0Tapped)
+			if got := life(f); got != r.p0Life {
+				t.Errorf("p0 life %d, want %d", got, r.p0Life)
+			}
 			listIs(t, "p1 hand", f.Setup.P1.Hand, r.p1Hand)
-			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, nil)
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, r.p1BF)
 			for _, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
 				for _, n := range bf {
 					c, _ := reg.Lookup(n)
