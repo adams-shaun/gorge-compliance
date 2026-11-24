@@ -75,6 +75,9 @@ type answerRouting struct {
 	// answers (search_zone_source.go). An absent index is an unknown effect
 	// shape and stays unscripted rather than answering the wrong prompt.
 	searchZones map[int]searchZoneAsk
+	// tapThenUntap marks the steps whose TapOrUntap election comes from a
+	// face XMage asks "Tap X?" then "Untap X?" (tap_then_untap.go).
+	tapThenUntap map[int]bool
 }
 
 func newAnswerRouting(ds []rules.OracleDecision, digSources ...map[int]digSource) *answerRouting {
@@ -802,6 +805,14 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// the pick's option index maps to the boolean (option 0, the
 		// state-changing choice, is yes). The label would be left unused and
 		// the AI would answer instead.
+		// A tap-then-untap face (Toils of Night and Day) asks two
+		// chooseUses instead (tapThenUntapChoices).
+		if r.tapThenUntap[d.Step] {
+			for _, v := range tapThenUntapChoices(d) {
+				as = append(as, XAnswer{d.Seat, "choice", v})
+			}
+			return as, true
+		}
 		return append(as, XAnswer{d.Seat, "choice", tapOrUntapChoice(d)}), true
 	case perPlayerTargetAsk(d) && len(d.Picks) == 0:
 		// A declined mid-resolution per-player target ask: XMage asks one
