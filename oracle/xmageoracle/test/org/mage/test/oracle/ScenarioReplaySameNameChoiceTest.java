@@ -402,6 +402,50 @@ public final class ScenarioReplaySameNameChoiceTest {
         System.out.println("PASS exact attack/block batches declare token:/card refs and consume their commands");
     }
 
+    /** Sisters of Stone Death forces a block: XMage declares it before asking
+     * the defender, so the scripted block of the same pair must not reach
+     * TestPlayer (which throws "already blocking the maximum amount"). A pair
+     * XMage did not declare stays queued. */
+    private static void autoDeclaredBlock() throws Exception {
+        ScenarioReplay owner = newOwner();
+        RecordingComputerPlayer computer = new RecordingComputerPlayer("PlayerA");
+        org.mage.test.player.TestPlayer player = scripted(owner, computer);
+        seat(owner, "playerA", player);
+        seat(owner, "playerB", player);
+        UUID own = player.getId();
+        UUID opponent = UUID.randomUUID();
+        Permanent kobolds = object(own, false, 30, "Kobolds of Kher Keep");
+        Permanent bears = object(own, false, 31, "Grizzly Bears");
+        Permanent sisters = object(opponent, false, 32, "Sisters of Stone Death");
+        mage.game.permanent.Battlefield board = new mage.game.permanent.Battlefield();
+        board.addPermanent(kobolds);
+        board.addPermanent(bears);
+        board.addPermanent(sisters);
+        RecordingCombat combat = new RecordingCombat(opponent);
+        combat.attackers.add(sisters.getId());
+        combat.group().getBlockers().add(kobolds.getId()); // declared by the requirement
+        Game game = game(board, combat, 1);
+
+        PlayerAction forced = action("block:Kobolds of Kher Keep$Sisters of Stone Death");
+        player.addAction(forced);
+        player.selectBlockers(null, game, own);
+        check(player.getActions().isEmpty(), "the scripted block of the auto-declared pair was dropped");
+        check(computer.blockers.isEmpty(), "no second declaration was made for the auto-declared pair");
+        check(combat.group().getBlockers().equals(List.of(kobolds.getId())),
+                "the blocker blocks once, got " + combat.group().getBlockers());
+
+        PlayerAction other = action("block:Grizzly Bears$Sisters of Stone Death");
+        player.addAction(forced);
+        player.addAction(other);
+        java.lang.reflect.Method drop = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer")
+                .getDeclaredMethod("dropAutoDeclaredBlocks", Game.class);
+        drop.setAccessible(true);
+        drop.invoke(player, game);
+        check(player.getActions().equals(List.of(other)),
+                "a block XMage did not declare stays queued, got " + player.getActions());
+        System.out.println("PASS a scripted block XMage already auto-declared is dropped, others stay queued");
+    }
+
     /** Exercise the production name matcher, including a pre-bound STALE
      * alias. Only the choice path may override that alias by live position. */
     private static void liveMatcher() throws Exception {
@@ -768,6 +812,7 @@ public final class ScenarioReplaySameNameChoiceTest {
         attackBatchOrdering();
         combatRefs();
         exactCombatBatches();
+        autoDeclaredBlock();
         liveMatcher();
         tokenTargetName();
         targetEntryPointsResolveLive();
