@@ -19,7 +19,11 @@ import (
 // ChangeZoneEffect asks for one card at a time and puts each successive pick on
 // top, so the last pick ends topmost: feeding either shape in gorge's order
 // reverses it (CR 401.4 allows either order, so both engines are rules-correct;
-// only the export convention differs). Reversing the picks makes the successive
+// only the export convention differs). A third shape, gorge's
+// effRearrangeTopOfLibrary (Sensei's Divining Top, Ponder, Index, Portent: a
+// forced "arrange", resume "arrange", every option Kind "bottom"), is the same
+// case: Forge's RearrangeTopOfLibraryEffect moves each scripted card to index
+// 0, so the last ends topmost (oraclegen.FullTopReorder). Reversing the picks makes the successive
 // placements reproduce gorge's order, with the first card topmost again. A
 // bottom placement needs no reversal: successive "put on the bottom" appends
 // leave the first pick above the second, which is gorge's bottom order.
