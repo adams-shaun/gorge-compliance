@@ -54,11 +54,12 @@ public final class ScenarioReplayDriverAsksTest {
         alternativeCast();
         promisedGift();
         replacementOrder();
+        loneForcedTarget();
         phyrexianLife();
         wishDeclined();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
-                + " phyrexian life, wish decline");
+                + " lone forced target, phyrexian life, wish decline");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -331,6 +332,46 @@ public final class ScenarioReplayDriverAsksTest {
                 "not a gift ask");
         check(adapter("giftOpponentChoice", types, true, Arrays.asList("PlayerB", "PlayerC"), new ArrayList<String>()) == null,
                 "two opponents is a real choice");
+    }
+
+    /** (k) Black Cat, Cunning Thief and Tishana's Tidebinder: a target ask
+     * whose only legal candidate gorge settled without a decision. Nothing is
+     * scripted for that ask, so the driver takes the lone candidate; a skip,
+     * a queued answer naming the candidate, or two candidates keeps the
+     * base's strict reading. The override declaration is pinned too, so a
+     * merge that drops the call site cannot leave every helper check green. */
+    private static void loneForcedTarget() throws Exception {
+        Class<?> scripted = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
+        boolean declares = false;
+        for (Method method : scripted.getDeclaredMethods()) {
+            if (method.getName().equals("chooseTarget") && method.getParameterCount() == 4
+                    && method.getParameterTypes()[1].getName().equals("mage.target.Target")) {
+                declares = true;
+            }
+        }
+        check(declares, "ScriptedChoicePlayer must override chooseTarget to take a lone candidate"
+                + " (Black Cat, Cunning Thief's only opponent; Tishana's Tidebinder's only ability)");
+        java.util.UUID bears = java.util.UUID.randomUUID();
+        java.util.UUID shock = java.util.UUID.randomUUID();
+        java.util.function.BiPredicate<java.util.UUID, String> byName =
+                (id, name) -> name.equals(id.equals(bears) ? "Grizzly Bears" : "Shock");
+        Class<?>[] types = {List.class, List.class, java.util.function.BiPredicate.class};
+        List<java.util.UUID> one = new ArrayList<>(Collections.singletonList(bears));
+        check(bears.equals(adapter("loneTargetChoice", types, new ArrayList<String>(), one, byName)),
+                "a lone candidate with nothing scripted was not taken");
+        check(bears.equals(adapter("loneTargetChoice", types,
+                        new ArrayList<>(Collections.singletonList("Island")), one, byName)),
+                "a lone candidate was lost to a later ask's queued answer");
+        check(adapter("loneTargetChoice", types,
+                        new ArrayList<>(Collections.singletonList("Grizzly Bears")), one, byName) == null,
+                "a queued answer naming the candidate was overridden");
+        check(adapter("loneTargetChoice", types,
+                        new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP)), one, byName) == null,
+                "a front skip was overridden");
+        check(adapter("loneTargetChoice", types, new ArrayList<String>(),
+                        Arrays.asList(bears, shock), byName) == null, "a two-candidate ask was guessed");
+        check(adapter("loneTargetChoice", types, new ArrayList<String>(),
+                        new ArrayList<java.util.UUID>(), byName) == null, "an empty candidate set produced a pick");
     }
 
     /** (j) NPH Blinding Souleater's {W/P} activation: XMage asks "Pay 2 life

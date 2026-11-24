@@ -88,19 +88,24 @@ public final class OptionalTargetSkipsTest {
         System.out.println("PASS optional target plan validation (0..1 objects, multi-pick closing skips and malformed plans)");
     }
 
-    /** An optional ask with no legal candidate is unscriptable: gorge's
-     * engine never poses an ask without a legal option, so the only legal
-     * answer is none, and the queue (a later ask's answers) must stay
-     * untouched. A queued skip of its own is honoured by the ordinary path. */
+    /** A target ask with no legal candidate is unscriptable at any minimum:
+     * gorge's engine never poses an ask without a legal option, so the only
+     * legal answer is none, and the queue (a later ask's answers) must stay
+     * untouched. A queued skip is a skip of its own only for an optional ask,
+     * where the ordinary path honours it; a mandatory ask still has none. */
     private static void unscriptableAsk() throws Exception {
         Class<?> adapter = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
         Method method = adapter.getDeclaredMethod("unscriptableEmptyAsk", int.class, int.class, boolean.class);
         method.setAccessible(true);
         check((boolean) method.invoke(null, 0, 0, false), "an empty optional ask was not declined");
-        check(!(boolean) method.invoke(null, 1, 0, false), "a required ask was declined");
+        check((boolean) method.invoke(null, 1, 0, false), "an empty mandatory ask was not declined");
+        check((boolean) method.invoke(null, 2, 0, false), "an empty mandatory multi-pick ask was not declined");
+        check((boolean) method.invoke(null, 1, 0, true),
+                "an empty mandatory ask was declined only because a later ask's skip was queued");
         check(!(boolean) method.invoke(null, 0, 2, false), "an optional ask with candidates was declined");
+        check(!(boolean) method.invoke(null, 1, 2, false), "a required ask with candidates was declined");
         check(!(boolean) method.invoke(null, 0, 0, true), "a skipped optional ask was declined");
-        System.out.println("PASS unscriptable empty ask (min-0 no-candidate declined, required/candidates/skip not)");
+        System.out.println("PASS unscriptable empty ask (any minimum no-candidate declined; optional skip and candidates not)");
     }
 
     @SuppressWarnings("unchecked")
