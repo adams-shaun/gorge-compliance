@@ -2,8 +2,10 @@ package main
 
 import (
 	"slices"
+	"strconv"
 	"strings"
 
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -20,40 +22,49 @@ import (
 // one "pair" pick, resume "soulbond" -- so the export has to recover the
 // trigger's role, not the card.
 //
-// The resolving trigger's source comes from the stack checkpoint entering the
-// decision's step (an ability's Source), then from the path that put a
-// creature on the battlefield (a resolving creature spell: the entrant is the
-// source for Soulbond#self, and for Soulbond#other it is the option while the
-// source is the Soulbond permanent already on the battlefield), then from the
-// preceding trigger_order decision, then from a lone Soulbond permanent on the
-// battlefield. When the source is the answer Forge wants, the single pick is
-// rewritten to it; the Soulbond#self ask already names the partner and is left
-// alone. Which half fired is decided by which of the two creatures entered
-// most recently: #other's source is the existing one, #self's source is the
-// entering one. An ask whose source the snapshots cannot place, or one whose
-// two candidates entered together, is left as gorge answered it.
+// The role comes from the trigger itself. The stack checkpoint entering the
+// decision's step records the resolving ability's source and its printed
+// trigger slot (OracleSnapStack.Trigger), which names Soulbond#self or
+// Soulbond#other on the source card. When the checkpoint still shows the
+// creature spell being resolved, the entrant is the source for #self (it is
+// not among the offered partners) and is the offered partner for #other (the
+// lone Soulbond permanent already on the battlefield is the source). Only when
+// neither relation can place the trigger half does the export fall back to the
+// source named by the preceding trigger_order decision and the two creatures'
+// entry order, read only through the checkpoint entering the decision so a
+// later blink or return cannot retroactively change an earlier ask. An ask
+// whose half cannot be established is left as gorge answered it rather than
+// guessed.
 //
-// The input slice is not modified; a list with no Soulbond#other ask is
-// returned as is.
-func forgeSoulbondPairSource(g rules.OracleResult, ds []rules.OracleDecision) []rules.OracleDecision {
+// The input slice is not modified; a list with no Soulbond ask is returned as
+// is.
+func forgeSoulbondPairSource(reg *cards.Registry, g rules.OracleResult, ds []rules.OracleDecision) []rules.OracleDecision {
 	out := ds
 	cloned := false
 	for i, d := range ds {
 		if !isSoulbondPairAsk(d) {
 			continue
 		}
-		src := forgeSoulbondTriggerSource(g, ds, i, d)
-		if src == "" || soulbondPickLabel(src) == "" || slices.Contains(d.OptionRefs, src) {
+		trig := forgeSoulbondTrigger(reg, g, ds, i, d)
+		if trig.source == "" || soulbondPickLabel(trig.source) == "" {
 			continue
 		}
-		if !forgeSoulbondSourceIsForgeAnswer(g, src, d) {
+		switch {
+		case trig.known:
+			// Soulbond#self already asks the partner, exactly as gorge
+			// answered; only the "another creature enters" half asks for the
+			// source.
+			if !trig.other {
+				continue
+			}
+		case !forgeSoulbondSourceIsForgeAnswer(g, trig.source, d):
 			continue
 		}
 		if !cloned {
 			out = append([]rules.OracleDecision(nil), ds...)
 			cloned = true
 		}
-		out[i] = forgeSoulbondPairAnswer(d, src)
+		out[i] = forgeSoulbondPairAnswer(d, trig.source)
 	}
 	return out
 }
@@ -94,12 +105,24 @@ func soulbondPickLabel(ref string) string {
 	return strings.TrimPrefix(refCardName(ref), "token:")
 }
 
-// forgeSoulbondTriggerSource names the permanent whose Soulbond trigger posed
-// d. The stack checkpoint first (the ability's source, or the creature spell
-// being resolved when it is not the offered partner, i.e. Soulbond#self),
-// then the trigger_order decision that preceded d, then the lone Soulbond
-// permanent on the battlefield. "" means the snapshot could not place it.
-func forgeSoulbondTriggerSource(g rules.OracleResult, ds []rules.OracleDecision, at int, d rules.OracleDecision) string {
+// soulbondTrigger is the Soulbond trigger that posed a pair ask: the ref of
+// its source permanent and, when the checkpoint named the printed half, which
+// half it was. known is false when only a source could be recovered (a granted
+// or token trigger the snapshot's Trigger slot cannot name, or the
+// trigger_order fallback); the caller then falls back to the entry-order
+// relation.
+type soulbondTrigger struct {
+	source string
+	other  bool
+	known  bool
+}
+
+// forgeSoulbondTrigger identifies the Soulbond trigger that posed d: the stack
+// checkpoint entering d.Step first (an ability's source and printed trigger
+// slot, or the creature spell being resolved), then the trigger_order decision
+// that preceded d, then the lone Soulbond permanent on the battlefield. A zero
+// trigger means the snapshot could not place it.
+func forgeSoulbondTrigger(reg *cards.Registry, g rules.OracleResult, ds []rules.OracleDecision, at int, d rules.OracleDecision) soulbondTrigger {
 	if d.Step >= 0 && d.Step < len(g.Snapshots) {
 		s := g.Snapshots[d.Step]
 		if len(s.Stack) > 0 {
@@ -107,19 +130,31 @@ func forgeSoulbondTriggerSource(g rules.OracleResult, ds []rules.OracleDecision,
 			switch top.Kind {
 			case "ability":
 				if top.Source != "" {
-					return top.Source
+					if other, ok := forgeSoulbondHalf(reg, top.Source, top.Trigger); ok {
+						return soulbondTrigger{source: top.Source, other: other, known: true}
+					}
+					// The trigger slot names no printed Soulbond half (a
+					// granted or token trigger): keep its source and let the
+					// entry-order fallback decide the half.
+					return soulbondTrigger{source: top.Source}
 				}
 			case "spell":
 				// A resolving creature spell is the entrant. For Soulbond#self
 				// the entrant is the Soulbond source; for Soulbond#other it is
-				// the offered partner, and the source is the permanent below.
-				if top.Source != "" && !slices.Contains(d.OptionRefs, top.Source) {
-					return top.Source
+				// the offered partner and the source is the lone Soulbond
+				// permanent already on the battlefield.
+				if top.Source != "" {
+					if !slices.Contains(d.OptionRefs, top.Source) {
+						return soulbondTrigger{source: top.Source, known: true}
+					}
+					if src := forgeLoneSoulbondPermanent(s, d.Seat); src != "" {
+						return soulbondTrigger{source: src, other: true, known: true}
+					}
 				}
 			}
 		}
 		if src := forgeLoneSoulbondPermanent(s, d.Seat); src != "" {
-			return src
+			return soulbondTrigger{source: src}
 		}
 	}
 	for j := at - 1; j >= 0; j-- {
@@ -135,10 +170,69 @@ func forgeSoulbondTriggerSource(g rules.OracleResult, ds []rules.OracleDecision,
 			found = append(found, e.PickRefs[k])
 		}
 		if len(found) == 1 {
-			return found[0]
+			return soulbondTrigger{source: found[0]}
 		}
 	}
-	return ""
+	return soulbondTrigger{}
+}
+
+// forgeSoulbondHalf reports which Soulbond half the printed trigger at slot is,
+// read off the source card's face: true means Soulbond#other, the half whose
+// Forge BondEffect asks for the source. ok is false when the slot is empty, out
+// of range, ambiguous across a double-faced card's faces, or not a Soulbond
+// trigger at all.
+func forgeSoulbondHalf(reg *cards.Registry, src, slot string) (other, ok bool) {
+	idx, err := strconv.Atoi(slot)
+	if err != nil || idx < 0 {
+		return false, false
+	}
+	c, found := reg.Lookup(refCardName(src))
+	if !found || c == nil {
+		return false, false
+	}
+	half, found := false, false
+	for _, f := range c.Faces {
+		if idx >= len(f.Triggers) {
+			continue
+		}
+		o, isSoulbond := soulbondHalfOfTrigger(f.Triggers[idx])
+		if !isSoulbond {
+			continue
+		}
+		if found {
+			// Both faces carry a Soulbond trigger at this slot, so the slot
+			// alone cannot say which face was up. Decline rather than guess.
+			return false, false
+		}
+		half, found = o, true
+	}
+	return half, found
+}
+
+// soulbondHalfOfTrigger classifies one printed trigger as a Soulbond half. It
+// reads the keyword expansion's own tag first, then falls back to the trigger's
+// shape (a ChangesZone-to-battlefield trigger whose effect is the Pair body)
+// for a printed or alternate expansion that carries no KeywordLine.
+func soulbondHalfOfTrigger(t cards.Trigger) (other, ok bool) {
+	switch t.Params["KeywordLine"] {
+	case "Soulbond#self":
+		return false, true
+	case "Soulbond#other":
+		return true, true
+	}
+	if t.Mode != "ChangesZone" || t.Params["Destination"] != "Battlefield" {
+		return false, false
+	}
+	if t.Effect == nil || !strings.EqualFold(t.Effect.API, "Pair") {
+		return false, false
+	}
+	switch t.Params["ValidCard"] {
+	case "Creature.Self":
+		return false, true
+	case "Creature.YouCtrl+Other":
+		return true, true
+	}
+	return false, false
 }
 
 // forgeLoneSoulbondPermanent returns the only Soulbond permanent of seat in s,
@@ -158,27 +252,34 @@ func forgeLoneSoulbondPermanent(s rules.OracleSnapshot, seat int) string {
 	return src
 }
 
-// forgeSoulbondSourceIsForgeAnswer reports whether the Soulbond#other half
-// posed d: its trigger source is the creature that was already on the
-// battlefield, while the answered pick is the entrant. Soulbond#self's source
-// is the entrant itself, so it is left for gorge's own partner answer. The
-// two candidates' latest entries decide (latest, not first, so a creature
-// that left and re-entered counts as the newer entrant); an equal or
+// forgeSoulbondSourceIsForgeAnswer is the fallback role test for a trigger the
+// checkpoint could not name: Soulbond#other's source was already on the
+// battlefield when the answered partner entered. The two creatures' entry
+// order is read only through the checkpoint entering the decision, so a blink
+// or return after the ask cannot retroactively change it; an equal or
 // unplaceable pair is left alone rather than guessed.
 func forgeSoulbondSourceIsForgeAnswer(g rules.OracleResult, src string, d rules.OracleDecision) bool {
-	sourceAt := forgeLastArrival(g, src)
-	pickAt := forgeLastArrival(g, d.PickRefs[0])
+	sourceAt := forgeArrivalThrough(g, src, d.Step)
+	pickAt := forgeArrivalThrough(g, d.PickRefs[0], d.Step)
 	return sourceAt >= 0 && pickAt >= 0 && sourceAt < pickAt
 }
 
-// forgeLastArrival is the latest checkpoint in which ref became present on the
-// battlefield (a permanent, or the source of a spell on the stack, counting a
-// spell that then resolves as one continuous entry), and -1 when no checkpoint
-// shows it.
-func forgeLastArrival(g rules.OracleResult, ref string) int {
+// forgeArrivalThrough is the latest checkpoint at or before step in which ref
+// became present on the battlefield (a permanent, or the source of a spell on
+// the stack, counting a spell that then resolves as one continuous entry), and
+// -1 when those checkpoints do not show it. Scanning stops at step, the
+// checkpoint entering the decision's step.
+func forgeArrivalThrough(g rules.OracleResult, ref string, step int) int {
+	if step >= len(g.Snapshots) {
+		step = len(g.Snapshots) - 1
+	}
+	if step < 0 {
+		return -1
+	}
 	arrival := -1
 	present := false
-	for i, s := range g.Snapshots {
+	for i := 0; i <= step; i++ {
+		s := g.Snapshots[i]
 		now := false
 		for _, p := range s.Permanents {
 			if p.Ref == ref {

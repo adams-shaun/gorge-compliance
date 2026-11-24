@@ -303,7 +303,7 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 	if forgeDriver {
 		decisions = forgeLibraryTopOrder(decisions)
 		decisions = forgeTokenLooks(g, decisions)
-		decisions = forgeSoulbondPairSource(g, decisions)
+		decisions = forgeSoulbondPairSource(reg, g, decisions)
 		decisions = forgeGraveyardOrderDecisions(it, g, decisions)
 	} else {
 		decisions = forgeDropGraveyardOrderDecisions(decisions)
