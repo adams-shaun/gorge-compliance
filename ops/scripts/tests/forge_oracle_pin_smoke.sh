@@ -183,11 +183,18 @@ printf 'Name:Mox Poison\nOracle:Mox.\n' > "$TMP/clone/forge-gui/res/cardsfolder/
 printf 'Name:Indicate\nOracle:Indicate.\n' > "$TMP/clone/forge-gui/res/cardsfolder/i/indicate.txt"
 printf 'Name:Mardu Outrider\nOracle:Outrider.\n' > "$TMP/clone/forge-gui/res/cardsfolder/m/mardu_outrider.txt"
 printf 'Name:Plains\nOracle:Plains.\n' > "$TMP/clone/forge-gui/res/cardsfolder/p/plains.txt"
-printf '[metadata]\nCode=MB2\nName=Mystery Booster 2\nType=Funny\n\n[eternal]\n1 R Mardu Outrider @Evan Shipard\n\n[cards]\nF563 R Gobland @Anik Sikder\nF608 R Mox Poison @Dan Frazier\n300 L Plains @Someone\nRZ15 R Knowing // Half the Battle @\n1 C Curious Pair @Artist\n\n[tokens]\n1 Goblin\n' > "$TMP/clone/forge-gui/res/editions/Mystery Booster 2.txt"
+printf 'Name:Bind\nOracle:Bind.\n' > "$TMP/clone/forge-gui/res/cardsfolder/b/bind.txt"
+printf '[metadata]\nCode=MB2\nName=Mystery Booster 2\nType=Funny\n\n[eternal]\n1 R Mardu Outrider @Evan Shipard\n\n[cards]\nF563 R Gobland @Anik Sikder\nF608 R Mox Poison @Dan Frazier\n300 L Plains @Someone\nRZ15 R Knowing // Half the Battle @\n88 R Bind // Liberate @\n1 C Curious Pair @Artist\n\n[tokens]\n1 Goblin\n' > "$TMP/clone/forge-gui/res/editions/Mystery Booster 2.txt"
+# Start is the first face of a Funny "Start // Fire" (Mystery Booster Playtest,
+# no card file) AND of the legal Amonkhet split "Start // Finish": the bare name
+# still loads through the legal file, so it must not be refused.
+mkdir -p "$TMP/clone/forge-gui/res/cardsfolder/s"
+printf 'AlternateMode:Split\nName:Start\nOracle:Start.\n\nALTERNATE\n\nName:Finish\nOracle:Finish.\n' > "$TMP/clone/forge-gui/res/cardsfolder/s/start_finish.txt"
+printf '[metadata]\nCode=MB1P\nName=Mystery Booster Playtest Cards\nType=Funny\n\n[cards]\n101 R Start // Fire @\n' > "$TMP/clone/forge-gui/res/editions/Mystery Booster Playtest Cards.txt"
 printf '[metadata]\nCode=UNH\nName=Unhinged\nType=Expansion\nBorder=Silver\n\n[cards]\n1 C Indicate @Artist\n' > "$TMP/clone/forge-gui/res/editions/Unhinged.txt"
 printf '[metadata]\nCode=M10\nName=Magic 2010\nType=Core\n\n[cards]\n1 C Grizzly Bears @Artist\n' > "$TMP/clone/forge-gui/res/editions/Magic 2010.txt"
 : > "$LOG"
-printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\nFire // Ice\nBonecrusher Giant // Stomp\nKnowing // Half the Battle\nCurious Pair // Treats to Share\nFire // Nonesuch\nMardu Outrider\nPlains\nNo Such Card\n' > "$TMP/names.txt"
+printf 'Grizzly Bears\nGobland\nIndicate\nMox Poison\nFire // Ice\nBonecrusher Giant // Stomp\nKnowing // Half the Battle\nKnowing\nBind\nStart\nCurious Pair // Treats to Share\nFire // Nonesuch\nMardu Outrider\nPlains\nNo Such Card\n' > "$TMP/names.txt"
 out=$("$RUN" --preflight "$TMP/names.txt" 2>"$TMP/pf.err"); rc=$?
 tab=$'\t'
 check "preflight exits 0 on a good pin" $((rc == 0 ? 0 : 1)) "rc=$rc $(cat "$TMP/pf.err")"
@@ -209,6 +216,12 @@ check "     ...including the adventure" \
 	$(printf '%s\n' "$out" | /usr/bin/grep -q "Bonecrusher Giant // Stomp" && echo 1 || echo 0) "$out"
 check "  ...refusing a split a Funny edition names joined (Knowing // Half the Battle)" \
 	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Knowing // Half the Battle${tab}${filt}" && echo 0 || echo 1) "$out"
+check "  ...refusing a split named by its bare first face (Knowing)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Knowing${tab}${filt}" && echo 0 || echo 1) "$out"
+check "  ...accepting a bare name that is also a standalone card (Bind beside a Funny Bind // Liberate)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -q '^Bind	' && echo 1 || echo 0) "$out"
+check "  ...accepting a bare name that is the first face of a legal split too (Start beside a Funny Start // Fire)" \
+	$(printf '%s\n' "$out" | /usr/bin/grep -q '^Start	' && echo 1 || echo 0) "$out"
 check "  ...refusing an adventure whose main face a Funny edition names (Curious Pair)" \
 	$(printf '%s\n' "$out" | /usr/bin/grep -qxF "Curious Pair // Treats to Share${tab}${filt}" && echo 0 || echo 1) "$out"
 reached; check "  ...before javac, java or scope" $((! $? ))
