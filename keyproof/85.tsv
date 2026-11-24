@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85573a3d-2993-491a-8f8d-bbdb844fa84e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85573a3d-2993-491a-8f8d-bbdb844fa84e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 855a2579-8f78-46ce-a3a8-eddc808bd7b4	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:outcaster-greenblade:f0t0:s2,f:xs:XP:outcaster-greenblade:f0t0:s2	-	-	-	e07cf3a05ba5	-	170b6008f921	-	-	2026-11-24	xproof
-855a2579-8f78-46ce-a3a8-eddc808bd7b4	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:outcaster-greenblade:f0t0:s2,f:xs:XP:outcaster-greenblade:f0t0:s2	-	-	-	e07cf3a05ba5	-	170b6008f921	-	-	2026-11-24	xproof
+855a2579-8f78-46ce-a3a8-eddc808bd7b4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 855a2579-8f78-46ce-a3a8-eddc808bd7b4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Outcaster Greenblade/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 855a4837-7fc8-4b97-afbd-daa88e322c89	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 855a4837-7fc8-4b97-afbd-daa88e322c89	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 857febd9-cdd7-4f8e-a852-d88084b0cfbc	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 857febd9-cdd7-4f8e-a852-d88084b0cfbc	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 858067f9-eb1f-4569-9831-30441cba5f90	cast	cast-resolve	agreed	-	FX	scen	2	0	Annie Flash, the Veteran/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-858067f9-eb1f-4569-9831-30441cba5f90	f0/t0	NULL	owed	refused:history:wascast	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+858067f9-eb1f-4569-9831-30441cba5f90	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 858067f9-eb1f-4569-9831-30441cba5f90	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Annie Flash, the Veteran/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8584e96f-a3e7-475c-bfd1-2c9a72bee774	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 858e12e9-3eaa-40cf-9e22-f9ccdfe485b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
