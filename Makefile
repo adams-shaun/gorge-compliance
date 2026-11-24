@@ -48,13 +48,18 @@ GO_TEST_FLAGS ?= -p=2
 # `mvn -pl Mage.Verify -am test -Dtest=VerifyCardDataTest` reaches Mage.Verify instead of failing in a dependency
 # module with no matching test. Set metadata and test-runner config only: no card behaviour, so the manifests are
 # unchanged.
-# 9bb2f33757 = f07513ff8f + fork PR #25 (re-stacked on the #22 pin so it is carried: "if a card is exiled with it" is an
-# intervening-if, CR 603.4. Redemptor Dreadnought's attack trigger and Evercoat Ursine's combat-damage trigger went on
-# the stack with nothing exiled with the permanent and read the exile zone only at resolution; both now use
-# .withInterveningIf with a condition reading the source's exile zone). Fork branch pin/redemptor-iif; the card fix
-# itself is fix/redemptor-dreadnought-intervening-if, RedemptorDreadnoughtTest and EvercoatUrsineTest. Card behaviour
-# change only for those two cards, so the manifests are unchanged.
-XMAGE_REF  ?= 9bb2f3375798753494802357b464df5e22da05e1
+# 464e1a6b23 = f07513ff8f merged with fork gorge c259b72036 (which carries #22's three commits, so the merge adds only):
+# fork #23 (Volatile Arsonist's attack trigger damages each chosen target, not only the creature slot, CR 601.2c:
+# EachTargetPointer, VolatileArsonistTest) and fork #24 (Artifact Ward is its three Oracle abilities, not protection
+# from artifacts, so artifact Equipment stays attached, CR 702.16d: ArtifactWardTest). Fork branch pin/xmage-ref-arsonist-ward.
+# 791c9c554a = 464e1a6b23 + fork PR #25 (re-stacked on the #23/#24 pin so it is carried: "if a card is exiled with it"
+# is an intervening-if, CR 603.4. Redemptor Dreadnought's attack trigger and Evercoat Ursine's combat-damage trigger
+# went on the stack with nothing exiled with the permanent and read the exile zone only at resolution; both now use
+# .withInterveningIf with a condition reading the source's exile zone). Fork branch pin/redemptor-iif-464, the same
+# five-file change as 9bb2f33757; the card fix itself is fix/redemptor-dreadnought-intervening-if,
+# RedemptorDreadnoughtTest and EvercoatUrsineTest. Card behaviour change only for those two cards, so the manifests
+# are unchanged.
+XMAGE_REF  ?= 791c9c554a9db844bb91f6c52b4c2e0e7685a20d
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -349,7 +354,41 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # form's entity pick (the lone Equipment the lone-forced shortcut consumes) is remembered as that attachment's yes. Test
 # UnmappedAsksJoinDirectionAttachTest (5 tests, five fixtures/unmapped requests); full driver suite 177 tests. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-number-direction-attach.
-FORGE_ORACLE_REF ?= d1b608ce5db3e73ea9c4a0cd98aa2e8514d2625f
+# d0f16bee2e0 = the merge of a4fa8d45a56 and fef74c5308f, carrying all three fixes (the OddsOrEvens binary,
+# the repeated-mode/NICKNAME/zero-option driver work and the Myriad-only AtEOT guard).
+# a4fa8d45a56 = the merge of 65c6664d90 and a445a858b2, carrying both fixes.
+# 65c6664d90 = d1b608ce5d plus the ChooseEvenOddEffect binary: chooseBinary(OddsOrEvens), true = Odd, now takes gorge's
+# choose_n whose pick kind is odd/even/evenodd -- Extinction Event's resolution ask `choose_n[odd] [odd]` and Gollum, Riddle
+# Master's as-enters ask `choose_n[evenodd] [Odd]` (resume "etb", so the role is the pick kind, not a resume). binaryPick
+# and binaryAnswer also hold LeftOrRight (same behaviour and note), so the tap/untap default is TapOrUntap's alone and an
+# unmapped binary kind still misses loudly. OddsOrEvensBinaryTest replays both exported requests; the full driver suite is
+# 179 tests. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-odd-even-binary.
+# 0c4ca7afb3d = d1b608ce5d plus three matching gaps from xproof clusters xpt-7553d8f4, xpt-7852725e, xpt-b0865a52 and
+# xpt-a3ee64aa. CR 700.2d: ScriptedController.chooseModeForAbility passes allowRepeat to StepMachine.chooseModes, which
+# binds a mode already in the answer again (Verdant Confluence [Return, Search, Return], Wretched Confluence [draw x3]).
+# CR 603.3b: StepMachine.norm folds the raw NICKNAME token and the host's short name (before the first comma) to one
+# placeholder, so Uro's sacrifice and draw ETB triggers bind in gorge's order. CR 608.2c/700.2: pickObjects with zero
+# options consumes only an explicit empty answer that is next, leaving Dawnbreak Reclaimer's p1 ChoosePlayer pick queued;
+# the following Optional ChangeZoneAll with nothing remembered answers no like the zero-candidate ChangeZone gate.
+# Test RepeatModesNicknameZeroPickTest (4 tests, four fixtures/repeat-modes-nickname-zeropick requests), run by
+# scripts/forge-oracle-test-repeat-modes-nickname-zeropick.sh; full driver suite (181 tests) green on it. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick.
+# a445a858b2 = d1b608ce5d (the 177-test driver) plus the Myriad-only AtEOT empty-set guard: the fork's Myriad fix (f30d448731) made
+# SpellAbilityEffect.registerDelayedTrigger return on an empty card set for every AtEOT caller, which dropped the delayed
+# trigger CR 603.7a creates for an unconditional "exile it at the beginning of the next end step" (Mordor on the March with
+# no creature card to exile; the Devastating Onslaught X=0 / Foggy Swamp Visions class). The guard now needs AtEOTNeedsCard$ True,
+# which only CardFactoryUtil's Myriad trigger carries (CR 702.116a). xproof cluster xpt-0eb9c20e. MordorOnTheMarchNothingExiledTest
+# fails on d1b608ce5d and passes after; MyriadNoTokensCreatesNoDelayedTriggerTest still passes; the driver suite (177 tests) passes on
+# the patched forge-game. cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-mordor-empty-delayed-trigger-on-d1b6
+# (the 8653216df2 commit cherry-picked onto d1b608ce5d, so the Join Forces / LeftOrRight / Attach mappings stay).
+# d0f16bee2e0 = the clean merge of a4fa8d45a56 and fef74c5308f: they touch disjoint files (the OddsOrEvens and
+# repeat-mode driver work vs the forge-game guard), so the pin keeps all three fixes; die-roll code is unchanged.
+# fef74c5308f = the clean merge of 0c4ca7afb3d and a445a858b2: the repeated-mode/NICKNAME/zero-option driver work and the
+# forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
+# 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
+# Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
+FORGE_ORACLE_REF ?= d0f16bee2e018d35874a0a8838491c1af1b02b82
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

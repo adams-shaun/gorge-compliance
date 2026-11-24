@@ -1,0 +1,237 @@
+diff --git a/Mage.Sets/src/mage/cards/a/ArtifactWard.java b/Mage.Sets/src/mage/cards/a/ArtifactWard.java
+index 8f4bdfae93..511d561af2 100644
+--- a/Mage.Sets/src/mage/cards/a/ArtifactWard.java
++++ b/Mage.Sets/src/mage/cards/a/ArtifactWard.java
+@@ -1,18 +1,26 @@
+-
+ package mage.cards.a;
+ 
++import mage.MageObject;
++import mage.abilities.Ability;
+ import mage.abilities.common.SimpleStaticAbility;
++import mage.abilities.effects.ContinuousRuleModifyingEffectImpl;
++import mage.abilities.effects.PreventionEffectImpl;
+ import mage.abilities.effects.common.AttachEffect;
+-import mage.abilities.effects.common.continuous.GainAbilityAttachedEffect;
++import mage.abilities.effects.common.combat.CantBeBlockedByCreaturesAttachedEffect;
+ import mage.abilities.keyword.EnchantAbility;
+-import mage.abilities.keyword.ProtectionAbility;
+ import mage.cards.CardImpl;
+ import mage.cards.CardSetInfo;
+ import mage.constants.AttachmentType;
+ import mage.constants.CardType;
++import mage.constants.Duration;
+ import mage.constants.Outcome;
+ import mage.constants.SubType;
+-import mage.filter.common.FilterArtifactCard;
++import mage.filter.common.FilterCreaturePermanent;
++import mage.game.Game;
++import mage.game.events.GameEvent;
++import mage.game.permanent.Permanent;
++import mage.game.stack.Spell;
++import mage.game.stack.StackAbility;
+ import mage.target.TargetPermanent;
+ import mage.target.common.TargetCreaturePermanent;
+ 
+@@ -24,6 +32,12 @@ import java.util.UUID;
+  */
+ public final class ArtifactWard extends CardImpl {
+ 
++    private static final FilterCreaturePermanent filter = new FilterCreaturePermanent("artifact creatures");
++
++    static {
++        filter.add(CardType.ARTIFACT.getPredicate());
++    }
++
+     public ArtifactWard(UUID ownerId, CardSetInfo setInfo) {
+         super(ownerId, setInfo, new CardType[]{CardType.ENCHANTMENT}, "{W}");
+         this.subtype.add(SubType.AURA);
+@@ -35,10 +49,14 @@ public final class ArtifactWard extends CardImpl {
+         this.addAbility(new EnchantAbility(auraTarget));
+ 
+         // Enchanted creature can't be blocked by artifact creatures.
++        this.addAbility(new SimpleStaticAbility(new CantBeBlockedByCreaturesAttachedEffect(
++                Duration.WhileOnBattlefield, filter, AttachmentType.AURA)));
++
+         // Prevent all damage that would be dealt to enchanted creature by artifact sources.
++        this.addAbility(new SimpleStaticAbility(new ArtifactWardPreventDamageEffect()));
++
+         // Enchanted creature can't be the target of abilities from artifact sources.
+-        this.addAbility(new SimpleStaticAbility( // TODO: Implement as separate abilities, this isn't quite the same as "Enchanted creature gains protection from artifacts"
+-                new GainAbilityAttachedEffect(new ProtectionAbility(new FilterArtifactCard("artifacts")), AttachmentType.AURA)));
++        this.addAbility(new SimpleStaticAbility(new ArtifactWardCantBeTargetedEffect()));
+     }
+ 
+     private ArtifactWard(final ArtifactWard card) {
+@@ -50,3 +68,77 @@ public final class ArtifactWard extends CardImpl {
+         return new ArtifactWard(this);
+     }
+ }
++
++class ArtifactWardPreventDamageEffect extends PreventionEffectImpl {
++
++    ArtifactWardPreventDamageEffect() {
++        super(Duration.WhileOnBattlefield, Integer.MAX_VALUE, false);
++        staticText = "Prevent all damage that would be dealt to enchanted creature by artifact sources";
++    }
++
++    private ArtifactWardPreventDamageEffect(final ArtifactWardPreventDamageEffect effect) {
++        super(effect);
++    }
++
++    @Override
++    public ArtifactWardPreventDamageEffect copy() {
++        return new ArtifactWardPreventDamageEffect(this);
++    }
++
++    @Override
++    public boolean applies(GameEvent event, Ability source, Game game) {
++        if (!super.applies(event, source, game)) {
++            return false;
++        }
++        Permanent attachment = game.getPermanent(source.getSourceId());
++        if (attachment == null || attachment.getAttachedTo() == null
++                || !event.getTargetId().equals(attachment.getAttachedTo())) {
++            return false;
++        }
++        MageObject damageSource = game.getObject(event.getSourceId());
++        return damageSource != null && damageSource.isArtifact(game);
++    }
++}
++
++/**
++ * Abilities only: a spell is not an ability, so an artifact spell may still
++ * target the enchanted creature (unlike protection from artifacts).
++ */
++class ArtifactWardCantBeTargetedEffect extends ContinuousRuleModifyingEffectImpl {
++
++    ArtifactWardCantBeTargetedEffect() {
++        super(Duration.WhileOnBattlefield, Outcome.Benefit);
++        staticText = "Enchanted creature can't be the target of abilities from artifact sources";
++    }
++
++    private ArtifactWardCantBeTargetedEffect(final ArtifactWardCantBeTargetedEffect effect) {
++        super(effect);
++    }
++
++    @Override
++    public ArtifactWardCantBeTargetedEffect copy() {
++        return new ArtifactWardCantBeTargetedEffect(this);
++    }
++
++    @Override
++    public boolean checksEventType(GameEvent event, Game game) {
++        return event.getType() == GameEvent.EventType.TARGET;
++    }
++
++    @Override
++    public boolean applies(GameEvent event, Ability source, Game game) {
++        Permanent attachment = game.getPermanent(source.getSourceId());
++        if (attachment == null || attachment.getAttachedTo() == null
++                || !event.getTargetId().equals(attachment.getAttachedTo())) {
++            return false;
++        }
++        MageObject object = game.getObject(event.getSourceId());
++        if (object == null || object instanceof Spell) {
++            return false;
++        }
++        MageObject abilitySource = object instanceof StackAbility
++                ? ((StackAbility) object).getSourceObject(game)
++                : object;
++        return abilitySource != null && abilitySource.isArtifact(game);
++    }
++}
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/lea/ArtifactWardTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/lea/ArtifactWardTest.java
+new file mode 100644
+index 0000000000..f5041c7ded
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/lea/ArtifactWardTest.java
+@@ -0,0 +1,88 @@
++package org.mage.test.cards.single.lea;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import mage.game.permanent.Permanent;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * {@link mage.cards.a.ArtifactWard Artifact Ward} {W}
++ * Enchantment - Aura
++ * Enchant creature
++ * Enchanted creature can't be blocked by artifact creatures.
++ * Prevent all damage that would be dealt to enchanted creature by artifact sources.
++ * Enchanted creature can't be the target of abilities from artifact sources.
++ * <p>
++ * The Oracle text grants no protection, so artifact Equipment stays attached
++ * (protection from artifacts would make it fall off, CR 702.16c, 704.5n).
++ */
++public class ArtifactWardTest extends CardTestPlayerBase {
++
++    private static final String ward = "Artifact Ward";
++    private static final String bears = "Grizzly Bears";
++
++    @Test
++    public void test_EquipmentStaysAttached() {
++        addCard(Zone.BATTLEFIELD, playerA, bears);
++        addCard(Zone.BATTLEFIELD, playerA, "Paradise Mantle");
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 2);
++        addCard(Zone.HAND, playerA, ward);
++
++        activateAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Equip {1}", bears);
++        waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ward, bears);
++
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
++        execute();
++
++        assertAttachedTo(playerA, ward, bears, true);
++        assertAttachedTo(playerA, "Paradise Mantle", bears, true);
++    }
++
++    @Test
++    public void test_ArtifactDamagePrevented() {
++        addCard(Zone.BATTLEFIELD, playerA, bears);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
++        addCard(Zone.HAND, playerA, ward);
++        addCard(Zone.BATTLEFIELD, playerB, "Juggernaut"); // 5/3 artifact creature, attacks each combat
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ward, bears);
++
++        // Juggernaut attacks by itself (it attacks each combat if able)
++        block(2, playerA, bears, "Juggernaut");
++
++        setStrictChooseMode(true);
++        setStopAt(2, PhaseStep.POSTCOMBAT_MAIN);
++        execute();
++
++        assertPermanentCount(playerA, bears, 1);
++        assertDamageReceived(playerA, bears, 0);
++        assertDamageReceived(playerB, "Juggernaut", 2);
++    }
++
++    @Test
++    public void test_OnlyArtifactAbilitiesCantTarget() {
++        addCard(Zone.BATTLEFIELD, playerA, bears);
++        addCard(Zone.BATTLEFIELD, playerA, "Plains", 1);
++        addCard(Zone.HAND, playerA, ward);
++        addCard(Zone.BATTLEFIELD, playerB, "Rod of Ruin"); // artifact: {3}, {T}: 1 damage to any target
++        addCard(Zone.BATTLEFIELD, playerB, "Prodigal Sorcerer"); // creature: {T}: 1 damage to any target
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, ward, bears);
++
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.POSTCOMBAT_MAIN);
++        execute();
++
++        Permanent warded = getPermanent(bears, playerA);
++        Permanent rod = getPermanent("Rod of Ruin", playerB);
++        Permanent sorcerer = getPermanent("Prodigal Sorcerer", playerB);
++        Assert.assertFalse("an artifact source's ability can't target the enchanted creature",
++                warded.canBeTargetedBy(rod, playerB.getId(), null, currentGame));
++        Assert.assertTrue("a nonartifact source's ability can target the enchanted creature",
++                warded.canBeTargetedBy(sorcerer, playerB.getId(), null, currentGame));
++    }
++}
