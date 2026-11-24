@@ -120,6 +120,31 @@ All filed after an independent recheck; texts in the operator's triage store, no
 
 Lifecraft Engine after an animation is the same shape: Forge's older Card-Forge/forge#7128 and XMage's magefree/mage#16484 (our comment on #13565). The rows above now carry the source trace.
 
+### Draft: Ursine Champion's "Beserker" animation (not posted)
+
+Fork fix: adams-shaun/forge PR #11, branch `fix/ursine-champion-berserker`, commit `944db21` (merged to `gorge` as `e439c37`). The two script changes are one word each and are not committed here (`.cards/` is GPL); the register row is `oracle/xengine/diagnosed.tsv` (`diverge M19 Ursine Champion permanents F 205.3m`).
+
+Upstream Card-Forge/forge PR body, reviewed before posting (do not post from this seat):
+
+> **Ursine Champion: "Beserker" is not a creature type**
+>
+> `forge-gui/res/cardsfolder/u/ursine_champion.txt` line 6 animates Ursine Champion with `Types$ Bear,Beserker`. CR 205.3m defines the creature types: Berserker is one, "Beserker" is not. Forge's `CardType.sanisfySubtypes` (`forge-core/src/main/java/forge/card/CardType.java:663-685`) filters a creature's or kindred's subtypes through `isACreatureType` (`:972-973`, `Constant.CREATURE_TYPES`), so it drops the misspelt subtype and the animated Champion is only a Bear. The Oracle text is "becomes a Bear Berserker until end of turn."
+>
+> Reproduction: xproof cluster `gorge-suspect:ursine-champion:f0a0:permanents` (2 cycles, 8 items; triage `xpt-841c1b40`), example `xs:XP:ursine-champion:f0a0:s1` (cycle 11241907 b01, diff-forge). At step 8 (pass), after p0 activates `{5}{G}`, gorge reports `Ursine Champion [bear beserker creature] {G} 5/5` and Forge `[bear creature] {G} 5/5`. With the script corrected both engines report `[bear berserker creature]`.
+>
+> Fix:
+>
+> ```diff
+> -SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Bear,Beserker | RemoveCreatureTypes$ True
+> +SVar:DBAnimate:DB$ Animate | Defined$ Self | Types$ Bear,Berserker | RemoveCreatureTypes$ True
+> ```
+>
+> Bladehold Cleaver's AI deck hint has the same typo (`bladehold_cleaver.txt:8`, `DeckHas:Ability$Token & Type$...|Goblin|Beserker`); it is not a rules line, but fix it in the same PR.
+>
+> Census: `git grep -n Beserker` over `forge-gui/res/cardsfolder` and `forge-gui/res/tokenscripts` at `gorge` before this fix (`ab83cfb`) returns exactly those two lines, so no other card script carries the misspelling. No engine, driver or card-data change is needed.
+>
+> Rule: CR 205.3m ("Creatures and kindreds share their lists of subtypes; these subtypes are called creature types. One creature type is two words long: Time Lord. All other creature types are one word long").
+
 ### Reading the rules and not traced in the source
 
 - Unwilling Vessel and Erratic Apparition: the "enchantment enters" trigger fires in Forge and XMage when the entering Aura strips the ability (CR 603.6a, 603.10; gorge doesn't fire). Erratic Apparition with Unable to Scream enchanting itself is harness row xe:RAND:426:11:w10. Neither engine's trigger collection was read line by line (Forge: ChangesZone trigger before the static re-layer; XMage: `ErraticApparition.java` via the EntersBattlefield event), so this stays a suspect.
