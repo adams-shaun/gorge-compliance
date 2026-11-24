@@ -415,7 +415,6 @@ func activateWithFixture(reg *cards.Registry, f *cards.Face, name string, req le
 	// choice must still lead the step, or XMage's dialog eats the cost answer.
 	oraclegen.HoistSetupChoices(it.XAnswers, activateStep)
 	dropCostCompound(it.XAnswers, activateStep, res.Decisions)
-	dropGroupExileTargets(it.XAnswers, activateStep, cost, res.Decisions)
 	dropUnproducedManaColours(it.XAnswers, activateStep, res)
 	it.XAnswers = scriptPreludeSacrifice(it.XAnswers, prelude, len(sc.Steps))
 	// A craft prelude's activation asks its own {N} and material-exile cost
@@ -773,11 +772,29 @@ func addActivationCostAnswers(answers [][]oraclegen.XAnswer, step int, cost, nam
 						}
 						observed = true
 						if i < len(d.Picks) {
-							picks = append(picks, observedCostPick(d, i))
+							// The routing emits this as a TARGET answer, so use
+							// its spelling: an exact-ref pick dedupes against the
+							// routed one instead of queueing an @alias twin.
+							picks = append(picks, oraclegen.TargetPickValue(d, i))
 						}
 					}
 				}
 				if observed {
+					break
+				}
+			}
+			// A fixed-size grave/battlefield exile cost (Bearscape's "exile
+			// two cards") is ONE TargetImpl.choose dialog over the whole
+			// selection: makeChoose reads one '^'-joined record and adds every
+			// card in it. The generic routing already scripts that record, so
+			// one catalogue answer per card beside it is the leftover
+			// ("Choices of PlayerA ... found [Colossal Dreadmaw^Sol Ring]").
+			// Use the observed selection, joined exactly as the routing spells
+			// it. An open-ended group exile (min < max) keeps its per-card
+			// catalogue answers below.
+			if head == "ExileFromGrave" || head == "ExileCtrlOrGrave" {
+				if joins := observedFixedExileJoins(decisions, step); len(joins) > 0 {
+					picks = joins
 					break
 				}
 			}
@@ -896,6 +913,38 @@ func addActivationCostAnswers(answers [][]oraclegen.XAnswer, step int, cost, nam
 		answers[step] = append(answers[step], oraclegen.XAnswer{Seat: 0, Kind: "choice", Value: "X=" + strconv.Itoa(n)})
 	}
 	addTapXTypeAnswers(answers, step, cost, decisions)
+}
+
+// observedFixedExileJoins returns the '^'-joined choice answers the generic
+// routing scripts for a step's fixed-size (min == max) exilecost decisions. A
+// fixed ExileFromGraveCost/ExileTargetCost/ExileFromHandCost pays ONE
+// TargetImpl.choose dialog for the whole selection, so makeChoose consumes one
+// joined record and adds every card it names; the template must script that
+// same record rather than one catalogue answer per card. A group exile
+// (min < max) is not joined: its selection settles card by card and keeps the
+// per-card catalogue answers.
+func observedFixedExileJoins(decisions []rules.OracleDecision, step int) []string {
+	var out []string
+	for _, d := range decisions {
+		if d.Step != step || d.Seat != 0 || d.Min <= 0 || d.Min != d.Max || !hasPickKind(d, "exilecost") {
+			continue
+		}
+		// A decision whose every pick is the exile selection is the one
+		// fixed dialog this cost pays; a mixed decision belongs to something
+		// else in the step.
+		all := true
+		for _, kind := range d.PickKinds {
+			if kind != "exilecost" {
+				all = false
+				break
+			}
+		}
+		if !all {
+			continue
+		}
+		out = append(out, oraclegen.JoinedChoice(d))
+	}
+	return out
 }
 
 // dropChoiceForCostTarget removes the choice answer the generic routing emits
