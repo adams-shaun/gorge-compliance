@@ -1,9 +1,13 @@
 //! `phase-seat`: phase.rs as a SpellBench v2 engine on stdin/stdout.
 //!
 //! ```text
-//! phase-seat --card-data FILE [--decks DIR] [--source-revision REV]
+//! phase-seat --card-data FILE [--decks DIR] [--source-revision REV] [--house-seat p0|p1 [--house-difficulty NAME]]
 //! phase-seat --version
 //! ```
+//!
+//! `--house-seat` (a build with the `house-ai` feature) answers that seat in-process with phase-ai at
+//! `--house-difficulty` (veryeasy, easy, medium, hard, veryhard, cedh; default medium); `hello_ok`'s
+//! `engine.version` ends `/house-<seat>-<difficulty>`. The client is then asked the other seat only.
 //!
 //! `PHASE_REF` (`<sha12>+<hash16>`, as `phaseoracle/run.sh` exports it) names the build in `hello_ok`.
 //! Exit: 0 on a clean end of input, 1 when the stream fails or ends mid-line, 2 on bad usage or setup.
@@ -15,10 +19,13 @@ use std::process::ExitCode;
 
 use engine::database::card_db::CardDatabase;
 use phase_seat::game::{load_decks, PhaseBackend};
+use phase_seat::house::parse_house;
 use phase_seat::server::Server;
 
 fn usage() -> ExitCode {
-    eprintln!("usage: phase-seat --card-data FILE [--decks DIR] [--source-revision REV] | --version");
+    eprintln!(
+        "usage: phase-seat --card-data FILE [--decks DIR] [--source-revision REV] [--house-seat p0|p1 [--house-difficulty veryeasy|easy|medium|hard|veryhard|cedh]] | --version"
+    );
     ExitCode::from(2)
 }
 
@@ -29,10 +36,20 @@ fn run() -> ExitCode {
         println!("phase-seat {pin}");
         return ExitCode::SUCCESS;
     }
+    let house = match parse_house(&args) {
+        Ok(h) => h,
+        Err(e) => {
+            eprintln!("phase-seat: {e}");
+            return usage();
+        }
+    };
     let (mut data, mut decks, mut rev) = (None, None, None);
+    let mut house_value = None;
     let mut it = args.iter();
     while let Some(a) = it.next() {
         let slot = match a.as_str() {
+            // Read by `parse_house` above; here only skipped (with their values).
+            "--house-seat" | "--house-difficulty" => &mut house_value,
             "--card-data" => &mut data,
             "--decks" => &mut decks,
             "--source-revision" => &mut rev,
@@ -59,7 +76,18 @@ fn run() -> ExitCode {
             return ExitCode::from(2);
         }
     };
-    let mut server = Server::new(PhaseBackend::new(db, catalog, &pin, rev.as_deref()));
+    let backend = PhaseBackend::new(db, catalog, &pin, rev.as_deref());
+    #[cfg(feature = "house-ai")]
+    let backend = match &house {
+        Some((seat, difficulty)) => backend.with_house(*seat, difficulty),
+        None => backend,
+    };
+    #[cfg(not(feature = "house-ai"))]
+    if house.is_some() {
+        eprintln!("phase-seat: --house-seat needs a build with the house-ai feature (cargo build -p phase-seat --features house-ai)");
+        return ExitCode::from(2);
+    }
+    let mut server = Server::new(backend);
     let stdin = std::io::stdin();
     let mut input = BufReader::new(stdin.lock());
     let stdout = std::io::stdout();
