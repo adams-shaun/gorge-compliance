@@ -1313,16 +1313,24 @@ func arrangeEmpty(d rules.OracleDecision) bool {
 func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, castSteps map[int]bool, setup map[string]Seat, flips []rules.OracleFlip, extras ...xanswersExtra) [][]XAnswer {
 	var digSources map[int]digSource
 	var pipPlans map[int][]pipAsk
+	var casts map[int]bool
+	var forage map[int][]string
 	var ownBounce map[int]bool
 	for _, ex := range extras {
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
+		}
+		if forage == nil {
+			forage = ex.forage
 		}
 		if digSources == nil {
 			digSources = ex.digs
 		}
 		if pipPlans == nil {
 			pipPlans = ex.pips
+		}
+		if casts == nil {
+			casts = ex.casts
 		}
 	}
 	out := make([][]XAnswer, steps)
@@ -1486,7 +1494,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			any = true
 			continue
 		}
-		if forcedSingleOption(d) && !pipPlanned[i] && !forcedChoicePosed(ds, i) && !announcesSacrificeX(ds, i) {
+		if forcedSingleOption(d) && !pipPlanned[i] && !forcedChoicePosed(ds, i) && !announcesSacrificeX(ds, i) && !castAnnouncesX(d, casts) {
 			// A forced one-option ask: XMage does not pose it. A forced
 			// target-kind pick is the exception -- one legal opponent is still
 			// a chooseTarget XMage asks for -- and so is a mode ask, which
@@ -1681,6 +1689,14 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// (TriggerCostMana), and a blight/raw-mana label is excluded
 				// by nonManaTriggerCostPay, so each keeps its own route.
 				as = append(as, XAnswer{d.Seat, "choice", "yes"})
+				if names := forage[i]; len(names) > 0 {
+					// The exile arm's three graveyard cards: XMage's
+					// ForageCost asks them through a TargetCardInYourGraveyard
+					// makeChoose once the chooseUse is accepted; gorge exiles
+					// them without an ask (forageSettle), so they come from
+					// the checkpoint.
+					as = append(as, XAnswer{d.Seat, "choice", strings.Join(names, "^")})
+				}
 				break
 			}
 			if pipPlanned[i] {
@@ -1867,7 +1883,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					as = append(as, XAnswer{d.Seat, "choice", triggerOrderChoice(d, k)})
 				}
 				if len(as) > 0 {
-					pendingTrig = &trigSpan{step: d.Step, count: len(as), old: triggerOrderTextAnswers(d), textBlind: triggerOrderTextBlind(d)}
+					pendingTrig = &trigSpan{step: d.Step, count: len(as), old: demotedTriggerOrderAnswers(d), textBlind: triggerOrderTextBlind(d)}
 				}
 				break
 			}
@@ -1903,6 +1919,18 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// picks[0] is the topmost card and stays unnamed.
 					for k := len(d.Picks) - 1; k >= 1; k-- {
 						as = append(as, XAnswer{d.Seat, "choice", d.Picks[k]})
+					}
+				} else if forcedOrder && d.ArrangeKind == "dig_bottom" && len(d.Picks) > 0 {
+					// A Dig's all-to-bottom remainder: gorge's answer order is
+					// the bottom order, picks[0] highest. XMage's
+					// putCardsOnBottomOfLibrary asks "card ORDER to put on the
+					// BOTTOM" only while more than one card is left (last one
+					// chosen is bottommost) and places the final card unasked,
+					// so script the first N-1 picks: a scripted last pick was
+					// left over ("(Choices of PlayerA) Count are not equal
+					// (found [Forest])", Growing Rites of Itlimoc's four).
+					for _, label := range d.Picks[:len(d.Picks)-1] {
+						as = append(as, XAnswer{d.Seat, "choice", label})
 					}
 				} else if forcedOrder {
 					// A forced bottom order (Min == Max == Options) has no
@@ -2076,6 +2104,21 @@ func announcesX(d rules.OracleDecision) bool {
 	}
 	n, err := strconv.Atoi(strings.TrimPrefix(d.Picks[0], "X = "))
 	return err == nil && n > 0 && strings.HasPrefix(d.Picks[0], "X = ")
+}
+
+// castAnnouncesX reports a forced "X = <n>" announcement made while casting a
+// spell (a cast step of the scenario). XMage announces a spell's X over 0..any
+// (VariableManaCost's max is unbounded; TestPlayer.announceX shows "(any
+// value)"), so it poses the ask however few values gorge's pool allowed: a
+// forced X = 0 cast with no spare mana (The Goose Mother, Lost in the Maze,
+// Meathook Massacre II's {X}{X}) strict-misses "Announce the value for {X}"
+// when it is left unscripted. An ability's or a cost's X is not covered: its
+// forced announce stays with announcesX/announcesSacrificeX; nor is a spell
+// whose X also sizes a non-mana cost part (castXSizesCost: the step is left
+// out of casts).
+func castAnnouncesX(d rules.OracleDecision, casts map[int]bool) bool {
+	return casts[d.Step] && d.Kind == "choose_n" && len(d.Picks) == 1 && pickKind(d, 0) == "x" &&
+		strings.HasPrefix(d.Picks[0], "X = ")
 }
 
 // announcesSacrificeX reports a forced positive "X = <n>" announcement that
@@ -2647,6 +2690,16 @@ func yesNo(d rules.OracleDecision) (string, bool) {
 		return "yes", true
 	case "gift_decline":
 		return "no", true
+	case "endure_counters":
+		// Endure is XMage's chooseUse "Put N +1/+1 counters on
+		// <it> or create a N/N Spirit token?" (EndureSourceEffect.doEndure,
+		// true text "Add counters"); TestPlayer reads only Yes/No for a
+		// text-choice chooseUse ("Use Yes/No in unit tests for text
+		// choices"), so the label strict-missed (Dusyut Earthcarver,
+		// Inspirited Vanguard).
+		return "yes", true
+	case "endure_spirit":
+		return "no", true
 	case "altaddcost", "primary":
 		// An optional additional cost, a gift promise and a two-way
 		// primary/secondary pick are chooseUse asks in XMage too
@@ -2899,6 +2952,27 @@ func triggerOrderTextAnswers(d rules.OracleDecision) []XAnswer {
 		out = append(out, XAnswer{d.Seat, "choice", triggerRule(label)})
 	}
 	return out
+}
+
+// demotedTriggerOrderAnswers is what a distinct-source trigger order demotes
+// to on a step that scripts other asks too: XMage's rule-text keys
+// (xmageTriggerOrderKeys) when the picks key apart, else the inert text form.
+// A key is consumed only by the trigger ask it steers (TestPlayer's
+// chooseTriggeredAbility matches getRule() by prefix) and names no object, so
+// no other makeChoose takes it, which is the reason names are demoted at all.
+// The verbatim text form is not inert in strict mode: the order ask finds no
+// match and stops the replay at "Missing CHOICE def ... Triggered list"
+// (Clement, the Worrywort beside Valley Mightcaller, whose step also scripts
+// Clement's target; Harvestrite Host beside Hinterland Sanctifier).
+func demotedTriggerOrderAnswers(d rules.OracleDecision) []XAnswer {
+	if keys, ok := xmageTriggerOrderKeys(d); ok {
+		out := make([]XAnswer, 0, len(keys))
+		for _, key := range keys {
+			out = append(out, XAnswer{d.Seat, "choice", key})
+		}
+		return out
+	}
+	return triggerOrderTextAnswers(d)
 }
 
 // demoteTriggerOrderSpans rewrites a step's trigger-order name answers back to
