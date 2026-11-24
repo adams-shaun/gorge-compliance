@@ -316,6 +316,8 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # Chapel; Turntimber, Serpentine Wood paying 3 life), which fails on 2bf0a1cb36 with "has no land play"; the merge keeps the
 # SBA and modal tests (full driver suite 170 tests, 168 + SbaGraveyardOrderTest's 2). Driver-only change;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-mdfc-land-face.
+# Its ancestry also carries cd13258c4b7 (the folded optional-trigger confirm: a non-Mandatory Cost$ body answers yes from
+# gorge's unconsumed X/object pick, else no; FoldedOptionalConfirmTest), so the pinned driver keeps that fix too.
 FORGE_ORACLE_REF ?= 147dd2f00fc5dd087d88490bb6afde5b34bc8cb1
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
