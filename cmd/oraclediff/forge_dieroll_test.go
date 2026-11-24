@@ -61,11 +61,11 @@ func TestForgeRolledDie(t *testing.T) {
 // ForcedDieRollTest re-run green beside the new ForcedCoinFlipTest; 963576e5d2 = 96acdef442 plus the waterbend_generic tap pick consumed by the scripted controller, die-roll code unchanged,
 // ForcedDieRollTest and ForcedCoinFlipTest re-run green on it; ff2049dc97 = 963576e5d2 plus the MayPlay land play outside the hand,
 // die-roll code unchanged, the driver's unit tests re-run green on it; cda262a7ef = ff2049dc97 plus the OriginAlternative$/endure/same-name-order mapping, die-roll code unchanged,
-// ForcedDieRollTest and the full driver suite (including LandPlayMayPlayTest, DecisionQueueTest and the AltSourceAnswer/OrderCards behavior tests) re-run green on it; f01192ae90 = cda262a7ef plus the remove-counter amount, Blight cost, lone-Chooser and pile-pick mapping, die-roll code unchanged, the full driver suite (including ForcedDieRollTest and ForcedCoinFlipTest) re-run green on it; c92f40d4f49 = f01192ae90 plus the counter-amount ask routing fix (only RemoveCounter takes the per-counter picks; CountersPutEffect counter_upto stays numeric) and its regression test, die-roll code unchanged, the full driver suite (121 tests) re-run green on it) contains both. TestForgeRolledDie only sees the Go request and stays green if the pin
+// ForcedDieRollTest and the full driver suite (including LandPlayMayPlayTest, DecisionQueueTest and the AltSourceAnswer/OrderCards behavior tests) re-run green on it; f01192ae90 = cda262a7ef plus the remove-counter amount, Blight cost, lone-Chooser and pile-pick mapping, die-roll code unchanged, the full driver suite (including ForcedDieRollTest and ForcedCoinFlipTest) re-run green on it; c92f40d4f49 = f01192ae90 plus the counter-amount ask routing fix (only RemoveCounter takes the per-counter picks; CountersPutEffect counter_upto stays numeric) and its regression test, die-roll code unchanged, the full driver suite (121 tests) re-run green on it; 19b0c2902c5 = c92f40d4f49 plus the Phyrexian life payment in applyManaToCost, die-roll code unchanged, the full driver suite (123 tests) re-run green on it) contains both. TestForgeRolledDie only sees the Go request and stays green if the pin
 // is reverted to 0958a1aca2, where Forge rolls its own d6 again; this pin check
 // is the repo-side half. A bump must re-run the pinned driver's
 // ForcedDieRollTest and update the constant deliberately.
-const forgeOracleDieRollRef = "c92f40d4f4920abbf59ddb0f8dbebb971283f3e3"
+const forgeOracleDieRollRef = "19b0c2902c5deaf698f85b6bf59dc2084c736cc9"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

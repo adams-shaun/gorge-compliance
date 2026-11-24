@@ -120,7 +120,12 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # counter_upto regression fixture/test covers it, and the params chooseBinary comment now states the miss it
 # really records. Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch
 # fix/xp-forge-driver-counter-blight-piles.
-FORGE_ORACLE_REF ?= c92f40d4f4920abbf59ddb0f8dbebb971283f3e3
+# 19b0c2902c5 = c92f40d4f49 + the scripted controller pays a Phyrexian pip with 2 life (CR 107.4f, 118.3b) when gorge
+# recorded a pay_life pick: applyManaToCost takes the step's pay_life picks first (payPhyrexian + payLife(2)), then the
+# recorded spend and the pool; a pip with no pay_life pick stays a mana pip. Before, Vault Skirge's {B/P} stayed unpaid and the
+# cast was refused. PhyrexianLifePaymentTest covers Vault Skirge and Immolating Souleater. Driver-only change; same trees as
+# FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-phyrexian-life.
+FORGE_ORACLE_REF ?= 19b0c2902c5deaf698f85b6bf59dc2084c736cc9
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
