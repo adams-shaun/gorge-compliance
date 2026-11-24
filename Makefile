@@ -247,7 +247,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # of copies and the venture dungeon pick), so the pinned driver keeps both answers. The merge adds no file of its own and
 # leaves cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-primal-surge-empty-dig.
-FORGE_ORACLE_REF ?= 051f555862737c69c8e0e05cd7a8130a3da0124f
+# c12c06bcef = 051f555862 plus the energy confirm inside a scripted unless-pay (xproof harness cluster "AI is not
+# supposed to reach this code": Die Young, Harnessed Lightning, Lathnu Hellion). gorge logs one unless_pay answer, which is
+# the payer's whole choice (CR 118.12); payCostToPreventEffect pays it through payCostDuringAbilityResolve, whose
+# non-mandatory CostPayEnergy part asks confirmPayment. ScriptedController.confirmPayment now answers yes while that
+# payment runs (every per-part confirm: energy, counters, discard, exile, shards) instead of missing and falling to
+# AiController.confirmPayment, which throws; a confirmPayment outside a scripted unless-pay still misses.
+# UnlessEnergyConfirmTest pins it (driver suite 158 tests green). Driver-only change; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-unless-energy-confirm.
+FORGE_ORACLE_REF ?= c12c06bcef632f4bd2e9546313e2f4129ec0e947
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
