@@ -329,6 +329,43 @@ class Query(Base):
         self.assertEqual([(x[0], x[2]) for x in rows],
                          [("2", "Dáin Ironfoot"), ("4", "Fire // Ice"), ("5", "Mise")], r.stdout)
 
+    def test_need_restricted_only_is_legal_somewhere(self):
+        # Vintage and Old School report "restricted" for tournament-legal cards with a copy limit
+        # (the real catalogue has Black Lotus as vintage/oldschool restricted, no legal row), so a
+        # restricted-only card must stay tier 4, not join the legal-nowhere tier 5.
+        db = os.path.join(self.tmp, "need-restricted.sqlite")
+        shutil.copy(self.priv, db)
+        conn = sqlite3.connect(db)
+        conn.execute("DELETE FROM legality WHERE oracle_id=?", (OID_B,))
+        conn.execute("INSERT INTO legality (oracle_id, format, status) VALUES (?,?,?)",
+                     (OID_B, "vintage", "restricted"))
+        conn.commit()
+        conn.close()
+        r = self.cli(self.home, "need", "--db", db, "--private")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = [l.split("\t") for l in r.stdout.splitlines()[1:]]
+        self.assertEqual([(x[0], x[2]) for x in rows],
+                         [("2", "Dáin Ironfoot"), ("4", "Fire // Ice")], r.stdout)
+        # The same shared predicate drives the format filters: a restricted card is selectable.
+        r = self.cli(self.home, "need", "--db", db, "--private", "--format", "vintage")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = [l.split("\t") for l in r.stdout.splitlines()[1:]]
+        self.assertEqual([(x[0], x[2]) for x in rows], [("4", "Fire // Ice")], r.stdout)
+
+    def test_need_empty_legality_table_does_not_demote(self):
+        # A partial build with no legality shard still creates the table, but with no rows. That
+        # must not make every card "legal nowhere": without rows there is nothing proving it.
+        db = os.path.join(self.tmp, "need-empty-legality.sqlite")
+        shutil.copy(self.priv, db)
+        conn = sqlite3.connect(db)
+        conn.execute("DELETE FROM legality")
+        conn.commit()
+        conn.close()
+        r = self.cli(self.home, "need", "--db", db, "--private")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        rows = {x[2]: x[0] for x in (l.split("\t") for l in r.stdout.splitlines()[1:])}
+        self.assertEqual(rows, {"Dáin Ironfoot": "4", "Fire // Ice": "4"}, r.stdout)
+
     def test_proven_by_keys_rejects_output_formats(self):
         for fmt in ("tsv", "json", "count"):
             r = self.run_cli("proven", "--by", "keys", "--format", fmt)
