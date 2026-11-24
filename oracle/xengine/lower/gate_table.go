@@ -198,6 +198,7 @@ var objectTable = map[string]entry{
 	"EnlistedCombat":               isIgnored("combat half of EnlistedTurn"),
 	"AttackedTurn":                 isRefused("turn stamp: live only when it names the cut's turn"),
 	"AttackedCombat":               isIgnored("combat half of AttackedTurn"),
+	"AttackedPlayersThisTurn":      isRefused("per-source attacked-player history of this turn (CR 508.1b; Forge's attackedBySourceThisTurn, Port Razer); setup cannot restate which player a creature attacked; live only when a card in the game names attackedBySourceThisTurn, its one reader"),
 	"TextChanges":                  isRefused("a text-changing effect is not placeable"),
 	"HadToAttack":                  isRefused("combat requirement record"),
 	"Harnessed":                    isRefused("harnessed state is not placeable"),
