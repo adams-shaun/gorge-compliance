@@ -169,7 +169,7 @@ fn a_mascot_game_reaches_a_natural_terminal() {
                 }
             }
         }
-        eprintln!("replay: Mascot game ended after {} lines (ability offered: {activated}): {last}", last.len());
+        eprintln!("replay: Mascot game ended (ability offered: {activated}): {last}");
         assert!(last.contains("\"outcome\""), "no terminal outcome: {last}");
         assert!(!last.contains("\"outcome\":\"truncated\"") && !last.contains("max_decisions"), "the Mascot game hit the cap: {last}");
         assert!(!last.contains("unmapped_decision"), "the game halted on an unposed mana follow-up: {last}");

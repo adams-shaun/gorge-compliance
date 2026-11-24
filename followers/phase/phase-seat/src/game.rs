@@ -220,7 +220,7 @@ impl PhaseBackend {
         let (sha, data) = pin.split_once('+').unwrap_or((pin, "unknown"));
         let identity = json!({
             "name": "phase",
-            "version": format!("phase-{pin}/phase-seat-0.1.0/manual"),
+            "version": format!("phase-{pin}/phase-seat-0.1.0/seat-autopay"),
             "rules_snapshot_id": format!("phase/{sha}"),
             "card_pool_identity": format!("phase-card-data/{data}"),
             "source_revision": source_revision,
@@ -238,6 +238,9 @@ impl PhaseBackend {
 
     /// Pose whatever the game waits on now.
     fn pose(&mut self) -> Outcome {
+        // Settled prompts (`Built::Applied`) move neither `steps` nor `decisions`, so a cycle of them
+        // (activate, cancel back to the root payment, activate the same source) would never end.
+        let mut applied = 0u64;
         loop {
             let live = self.live.as_mut().expect("a live game");
             if live.state.turn_number != live.failed_cast_turn {
@@ -269,7 +272,13 @@ impl PhaseBackend {
                     self.census.decisions += 1;
                     return self.decision(family);
                 }
-                Ok(Built::Applied) => continue,
+                Ok(Built::Applied) => {
+                    applied += 1;
+                    if applied > MAX_APPLIED_PER_POSE {
+                        return self.halt("applied_loop", name);
+                    }
+                    continue;
+                }
                 Err(Stop::Halt(cause, detail)) => return self.halt(cause, &detail),
             }
         }
@@ -414,6 +423,10 @@ fn rewrite_ids(v: &mut Value, alias: &std::collections::BTreeMap<String, String>
     }
 }
 
+/// Most prompts the seat may settle itself between two host decisions. A real payment is a few dozen
+/// taps; a cycle that never reaches the host is a bug, ended as a halt instead of a hang.
+const MAX_APPLIED_PER_POSE: u64 = 10_000;
+
 fn truncated(reason: &str, decisions: u64) -> Outcome {
     Outcome::Terminal(json!({"outcome": "truncated", "classification": "truncated", "winner": null,
         "reason": reason, "decision_count": decisions}))
@@ -472,6 +485,27 @@ fn wanted_colors(state: &GameState) -> Vec<ManaType> {
         }
     }
     out
+}
+
+/// The seat's answer to a mana ability's colour prompt: a wanted colour of the pending cost when one is
+/// offered, else the first option. Deterministic: options keep the engine's order.
+fn answer_mana_choice(prompt: &ManaChoicePrompt, wanted: &[ManaType]) -> Result<ManaChoice, Stop> {
+    let pick = |options: &[ManaType]| -> Result<ManaType, Stop> {
+        options
+            .iter()
+            .find(|t| wanted.contains(t))
+            .or_else(|| options.first())
+            .copied()
+            .ok_or_else(|| Stop::Halt("dead_end", "ChooseManaColor offers no option".into()))
+    };
+    Ok(match prompt {
+        ManaChoicePrompt::SingleColor { options } => ManaChoice::SingleColor(pick(options)?),
+        ManaChoicePrompt::Combination { options } => {
+            let c = options.first().ok_or_else(|| Stop::Halt("dead_end", "ChooseManaColor offers no combination".into()))?;
+            ManaChoice::Combination(c.clone())
+        }
+        ManaChoicePrompt::AnyCombination { count, options } => ManaChoice::Combination(vec![pick(options)?; *count]),
+    })
 }
 
 /// The best source to activate for the current payment, by a deterministic key: a land tap of a wanted
@@ -550,7 +584,15 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 let sem = match &c.action {
                     GameAction::PassPriority => Some(sem::pass()),
                     GameAction::PlayLand { object_id, .. } => viewer(live, who, *object_id).map(|r| sem::play_land(r, 0)),
-                    GameAction::CastSpell { object_id, card_id, .. } if !live.failed_cards.contains(card_id) => {
+                    // A cast the seat cancelled this turn (the payer found nothing to pay with) stays hidden
+                    // from the host until the turn ends: phase's own contract keeps offering it, and
+                    // re-casting it would loop. The trade-off is a cast that is still legal with other
+                    // targets or a changed cost is hidden too. Counted on its own, not as a mapper gap.
+                    GameAction::CastSpell { card_id, .. } if live.failed_cards.contains(card_id) => {
+                        *census.unmapped_actions.entry("suppressed_failed_cast".to_string()).or_insert(0) += 1;
+                        None
+                    }
+                    GameAction::CastSpell { object_id, .. } => {
                         viewer(live, who, *object_id).map(|r| sem::cast_spell(r, Some("normal")))
                     }
                     GameAction::ActivateAbility { source_id, ability_index, .. } => {
@@ -883,23 +925,7 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
         }
         (WaitingFor::ChooseManaColor { player, choice, .. }, Family::ManaChoice) => {
             live.acting = *player;
-            let wanted = wanted_colors(&live.state);
-            let pick = |options: &[ManaType]| -> Result<ManaType, Stop> {
-                options
-                    .iter()
-                    .find(|t| wanted.contains(t))
-                    .or_else(|| options.first())
-                    .copied()
-                    .ok_or_else(|| Stop::Halt("dead_end", "ChooseManaColor offers no option".into()))
-            };
-            let choice = match choice {
-                ManaChoicePrompt::SingleColor { options } => ManaChoice::SingleColor(pick(options)?),
-                ManaChoicePrompt::Combination { options } => {
-                    let c = options.first().ok_or_else(|| Stop::Halt("dead_end", "ChooseManaColor offers no combination".into()))?;
-                    ManaChoice::Combination(c.clone())
-                }
-                ManaChoicePrompt::AnyCombination { count, options } => ManaChoice::Combination(vec![pick(options)?; *count]),
-            };
+            let choice = answer_mana_choice(choice, &wanted_colors(&live.state))?;
             apply_now(live, *player, GameAction::ChooseManaColor { choice, count: 1 })?;
             return Ok(Built::Applied);
         }
@@ -1361,6 +1387,28 @@ mod tests {
             "stack": [{"object_id": "s"}], "known": []});
         let ids: Vec<String> = observed_ids(&obs).into_keys().collect();
         assert_eq!(ids, vec!["a".to_string(), "s".to_string()]);
+    }
+
+    /// The colour prompt is answered from the prompt's own options (one `ChooseManaColor { count: 1 }`),
+    /// preferring a colour the pending cost wants, and an empty option list is a halt, not a guess.
+    #[test]
+    fn mana_colour_prompts_are_answered_from_their_options() {
+        use ManaType::{Black, Green, Red};
+        let single = ManaChoicePrompt::SingleColor { options: vec![Red, Green] };
+        assert_eq!(answer_mana_choice(&single, &[]).ok(), Some(ManaChoice::SingleColor(Red)));
+        assert_eq!(answer_mana_choice(&single, &[Green]).ok(), Some(ManaChoice::SingleColor(Green)));
+        assert_eq!(answer_mana_choice(&single, &[Black]).ok(), Some(ManaChoice::SingleColor(Red)));
+        let any = ManaChoicePrompt::AnyCombination { count: 2, options: vec![Red, Green] };
+        assert_eq!(answer_mana_choice(&any, &[Green]).ok(), Some(ManaChoice::Combination(vec![Green, Green])));
+        let combo = ManaChoicePrompt::Combination { options: vec![vec![Red, Green], vec![Green, Green]] };
+        assert_eq!(answer_mana_choice(&combo, &[Green]).ok(), Some(ManaChoice::Combination(vec![Red, Green])));
+        for empty in [
+            ManaChoicePrompt::SingleColor { options: vec![] },
+            ManaChoicePrompt::Combination { options: vec![] },
+            ManaChoicePrompt::AnyCombination { count: 1, options: vec![] },
+        ] {
+            assert!(matches!(answer_mana_choice(&empty, &[]), Err(Stop::Halt("dead_end", _))));
+        }
     }
 
     /// The manual rewrite is exactly the cast/activation opt-in: a land tap keeps its own action, so the
