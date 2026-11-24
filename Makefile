@@ -210,7 +210,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (2 tests: both answers) pins it; the full driver suite (148 tests, including ForcedDieRollTest) is green. Driver-only
 # change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-unleash-replacement.
-FORGE_ORACLE_REF ?= c873c2c939970b0c06542b197ef8e06383729c01
+# 14070cbbac4 = c873c2c9399 plus the zero-candidate Optional$ hidden ChangeZone decline (xproof decision_shape: Bruna, Light of
+# Alabaster, 4 items). ZoneAuras ("any number of Aura cards that could enchant it from your hand and/or graveyard", ChangeNum$
+# CountAuras) asks "Search your hand and graveyard?" with no Aura card there; gorge, a choice of zero cards, logs no ask, so the
+# confirm was an unanswered strict miss. ScriptedController.confirmAction now answers no when no yes/no is queued for the seat and
+# ChangeNum$ is 0 or no card in any player's Origin$ zones matches ChangeType$; a candidate anywhere keeps the strict miss.
+# ZeroCandidateConfirmTest (2 tests: the empty hand, and a Pacifism in the hand that stays a miss) pins it; the full driver
+# suite (150 tests, including ForcedDieRollTest) is green. Driver-only change; cardsfolder/tokenscripts unchanged (same as
+# FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-zero-candidate-confirm.
+FORGE_ORACLE_REF ?= 14070cbbac414ca38e759a41e7925598069c5835
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
