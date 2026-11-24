@@ -107,3 +107,64 @@ func TestRNGDrawsAccounted(t *testing.T) {
 		t.Error("resolve span with only a forced roll is not lowerable")
 	}
 }
+
+// TestLowerDieRollOnResolvingPass: Herald of Hadar's "{5}{B}: Roll a d20" is
+// an activation funded by six mana-ability taps, and the d20 is made when the
+// ability resolves, on the pass that lets it. The roll sits on that later pass
+// entry, so the item's die_rolls must name the pass step (the first step whose
+// entry reaches the roll), not the activation and not a tap: the follower
+// forces the natural roll on the step it resolves in. A roll that lands on the
+// wrong step (or none) leaves the followers rolling their own d20, which is
+// the +2 life both of them showed against gorge on the Herald window.
+func TestLowerDieRollOnResolvingPass(t *testing.T) {
+	const ref = "p0:Herald of Hadar"
+	obj := stateID(42)
+	d := game.Digest{Turn: 1, Step: "main1", Active: 0, Priority: 0}
+	var taps []game.ManaRec
+	for i := 0; i < 6; i++ {
+		taps = append(taps, game.ManaRec{Obj: stateID(uint32(10 + i)), Name: "Swamp", Ability: 0, Ref: "p0:Swamp"})
+	}
+	// A distinct digest after the activation so the cast is not dropped as a
+	// no-op: the stack top is the ability.
+	d2 := d
+	d2.Priority = 1
+	tp := &game.Tape{
+		Format: game.TapeFormat, Starter: 0,
+		Entries: []game.Entry{
+			{Kind: "priority", Seat: 0, Turn: 1, Step: "main1", Digest: d,
+				Picks: []game.Pick{{Kind: "pass", Player: 0}}},
+			{Kind: "priority", Seat: 0, Turn: 1, Step: "main1", Digest: d,
+				Picks: []game.Pick{{Kind: "ability", Player: 0, Obj: obj, Ref: ref, Ability: 0,
+					Label: "Herald of Hadar: Roll a d20."}},
+				Mana: taps, Spent: "BBBBBB"},
+			{Kind: "priority", Seat: 0, Turn: 1, Step: "main1", Digest: d2, StackTop: stateID(77),
+				Picks: []game.Pick{{Kind: "pass", Player: 0}}},
+			{Kind: "priority", Seat: 1, Turn: 1, Step: "main1", Digest: d2, StackTop: stateID(77),
+				Picks: []game.Pick{{Kind: "pass", Player: 1}},
+				RNG:   1, Rolls: []game.Roll{{Seat: 0, Sides: 20, Natural: 7, Result: 7}}},
+			{Kind: "priority", Seat: 0, Turn: 1, Step: "main1", Digest: d,
+				Picks: []game.Pick{{Kind: "pass", Player: 0}}},
+		},
+	}
+	l, err := Tape(nil, tp)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if l.Truncated != "" {
+		t.Fatalf("truncated %q at %d", l.Truncated, l.TruncatedAt)
+	}
+	// Steps: pass, six taps, activate, pass (p0), pass (p1, the roll), pass.
+	var pass1 int
+	for k, st := range l.Item.Steps {
+		if k > 7 && st.Op == "pass" && st.Seat == 1 {
+			pass1 = k
+		}
+	}
+	if len(l.Item.Steps) < 10 || l.Item.Steps[7].Op != "activate" || pass1 == 0 {
+		t.Fatalf("steps %v, want pass, six taps, the activation, then the passes", ops(l))
+	}
+	want := []oraclegen.DieRoll{{Step: pass1, Seat: 0, Sides: 20, Natural: 7, Result: 7}}
+	if !reflect.DeepEqual(l.Item.DieRolls, want) {
+		t.Fatalf("die rolls %+v, want %+v on the resolving pass (steps %v)", l.Item.DieRolls, want, ops(l))
+	}
+}
