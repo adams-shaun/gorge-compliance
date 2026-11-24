@@ -435,10 +435,8 @@ func activationXAnnounces(reg *cards.Registry, sc Scenario, g rules.OracleResult
 // counter-removal family reuses the mana announce (XMage's
 // TalonOfPainRemoveVariableCountersSourceCost overrides announceXValue), so it
 // is not counted again; XMin<N> is the VariableManaCost bound marker, not a
-// cost of its own. Waterbend<X> is the same kind of reuse from the other
-// direction: forgeCostSymbols renders it as a {X} for the rule text, and
-// XMage's WaterbendCost announces that X once, so the token is not a second
-// announce beside the symbol it produced.
+// cost of its own. A token forgeCostSymbols itself renders as a {X}
+// (Waterbend<X>) is the mana announce above, not a second one beside it.
 func activationXAnnounceCount(cost string) int {
 	n := 0
 	for _, sym := range forgeCostSymbols(cost) {
@@ -462,17 +460,28 @@ func activationXAnnounceCount(cost string) int {
 		if len(parts) == 0 || !strings.EqualFold(strings.TrimSpace(parts[0]), "X") {
 			continue
 		}
-		if strings.HasPrefix(strings.ToLower(head), "subcounter") {
-			// Source-counter removal reuses the mana X.
-			continue
-		}
-		if strings.HasPrefix(strings.ToLower(head), "waterbend") {
-			// forgeCostSymbols already rendered this token as {X} above.
+		if strings.HasPrefix(strings.ToLower(head), "subcounter") || tokenRendersManaX(tok) {
+			// Source-counter removal and Waterbend<X> both reuse the mana X:
+			// the former overrides XMage's announceXValue, the latter is the
+			// {X} forgeCostSymbols rendered for the rule text above.
 			continue
 		}
 		n++
 	}
 	return n
+}
+
+// tokenRendersManaX reports whether forgeCostSymbols turns tok itself into a
+// {X}, so the mana count that renders the rule text already counted its
+// announce. Asking the renderer (rather than naming the token) keeps every
+// future token it maps to {X} from being counted a second time.
+func tokenRendersManaX(tok string) bool {
+	for _, sym := range forgeCostSymbols(tok) {
+		if sym == "{X}" {
+			return true
+		}
+	}
+	return false
 }
 
 // castXSizesCost reports a spell whose X also sizes a non-mana part of its
