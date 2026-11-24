@@ -9,6 +9,10 @@ publish = false
 [dependencies]
 # Same pin as phase-follower (nothing vendored). Never enable the engine's `test-support` feature.
 engine = { optional = true, package = "phase-engine", git = "https://github.com/phase-rs/phase", rev = "b14f974787d86b6b6ade67aaaed67d32d68d7fd8" }
+# The in-process house seat (`--house-seat`), behind the `house-ai` feature: phase-ai is a larger build, so the
+# default build and `--no-default-features` stay as small as before. Same pin as `engine`.
+phase-ai = { optional = true, git = "https://github.com/phase-rs/phase", rev = "b14f974787d86b6b6ade67aaaed67d32d68d7fd8" }
+rand_chacha = { version = "0.9", optional = true }
 serde_json = "1"
 sha2 = "0.10"
 unicode-normalization = "0.1"
@@ -19,6 +23,8 @@ unicode-normalization = "0.1"
 # peaks above 4 GB to type-check).
 default = ["phase"]
 phase = ["dep:engine"]
+# `--house-seat p0|p1`: that seat is answered in-process by phase-ai (measurement mode, no wall clock).
+house-ai = ["phase", "dep:phase-ai", "dep:rand_chacha"]
 
 [[bin]]
 name = "phase-seat"

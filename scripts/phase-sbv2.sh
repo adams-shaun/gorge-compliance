@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# phase-sbv2.sh [--compile | --selftest] [-decks DIR] [-source-revision REV]
+# phase-sbv2.sh [--compile | --selftest] [-decks DIR] [-source-revision REV] [--house-seat p0|p1 [--house-difficulty NAME]]
 #
 # Runs phase.rs as a SpellBench v2 *engine*: an NDJSON server on this process's stdin and stdout
 # (docs/site/api/spellbench-v2.md, "Engine role", in gorge), so four-yay's
@@ -19,6 +19,11 @@
 # the hello lists no catalog deck; PHASE_SBV2_DECKS is the default. With neither the catalog is
 # empty. -source-revision REV is reported as engine.source_revision.
 #
+# --house-seat p0|p1 has phase-ai answer that seat in-process (difficulty --house-difficulty, default
+# medium; veryeasy, easy, medium, hard, veryhard, cedh), so the client is posed only the other seat.
+# It builds phase-seat with its `house-ai` feature (a larger build, kept apart from the default one);
+# hello_ok's engine.version ends /house-<seat>-<difficulty>.
+#
 # Environment (defaults as in scripts/phase-oracle-run.sh; these override):
 #   FOLLOWERS_CACHE, PHASE_ORACLE_DIR, PHASE_FOLLOWER_DIR, CARGO
 #   PHASE_SBV2_MEM    serving scope MemoryMax (default 8G); the build's is 12G
@@ -30,17 +35,19 @@ set -euo pipefail
 
 here=$(cd "$(dirname "$0")/.." && pwd)
 die() { echo "phase-sbv2: $*" >&2; exit 2; }
-usage="usage: phase-sbv2.sh [--compile | --selftest] [-decks DIR] [-source-revision REV]"
+usage="usage: phase-sbv2.sh [--compile | --selftest] [-decks DIR] [-source-revision REV] [--house-seat p0|p1 [--house-difficulty NAME]]"
 
 mode=serve
 decks=${PHASE_SBV2_DECKS:-}
 rev=
+house=()
 while [ $# -gt 0 ]; do
 	case "$1" in
 		--compile) mode=compile ;;
 		--selftest) mode=selftest ;;
 		-decks | --decks) [ $# -ge 2 ] || die "$usage"; decks=$2; shift ;;
 		-source-revision | --source-revision) [ $# -ge 2 ] || die "$usage"; rev=$2; shift ;;
+		--house-seat | --house-difficulty) [ $# -ge 2 ] || die "$usage"; house+=("$1" "$2"); shift ;;
 		*) die "$usage" ;;
 	esac
 	shift
@@ -61,6 +68,8 @@ ref=${sha:0:12}+$hash16
 
 echo "phase-sbv2: bringing the phase-seat build up to date (a no-op when fresh; a stale build is minutes)" >&2
 build=(env CARGO_HOME="$fcache/cargo-home" CARGO_TARGET_DIR="$root/target" RUSTC="$(dirname "$cargo")/rustc" "$cargo" build --locked --profile follower -p phase-seat)
+# The house seat is phase-ai in the same binary: only a house run pays for (and rebuilds with) that feature.
+[ ${#house[@]} -eq 0 ] || build+=(--features house-ai)
 bscope=()
 [ "${XENGINE_SCOPE:-systemd}" = none ] || bscope=(systemd-run --user --scope -q -p MemoryMax=12G -p CPUQuota=400%)
 (cd "$follower" && "${bscope[@]}" "${build[@]}") >&2 || die "cargo build failed"
@@ -76,6 +85,7 @@ export PHASE_REF=$ref
 args=(--card-data "$data")
 [ -z "$decks" ] || args+=(--decks "$decks")
 [ -z "$rev" ] || args+=(--source-revision "$rev")
+[ ${#house[@]} -eq 0 ] || args+=("${house[@]}")
 scope=()
 [ "${XENGINE_SCOPE:-systemd}" = none ] || scope=(systemd-run --user --scope -q -p MemoryMax="${PHASE_SBV2_MEM:-8G}" -p CPUQuota=400%)
 

@@ -2,9 +2,13 @@
 //! game from two catalog decks, poses each acting seat's `WaitingFor` as a seat decision, and applies
 //! the picked candidate with phase's `apply`.
 //!
-//! Both seats are agent seats: the host (four-yay's `cmd/xclient -engine sbv2`) answers each, with
-//! its own policy on either seat. phase-ai is not linked (it is a separate, larger build; see the
-//! ticket's report), so there is no in-process house seat.
+//! By default both seats are agent seats: the host (four-yay's `cmd/xclient -engine sbv2`) answers
+//! each, with its own policy on either seat. With the `house-ai` feature, [`PhaseBackend::with_house`]
+//! names one seat that phase-ai answers in-process instead (`--house-seat`): that seat is answered in
+//! [`PhaseBackend::pose`] before its prompt is classified, so the client is only ever asked the other
+//! seat, whatever phase-ai or the mapper does with the house seat's prompts. The search runs in phase-ai's
+//! measurement mode (a node-count bound, no wall clock), seeded from the `reset` `game_secret`, so a
+//! replay is still one `game_secret` and the client's answers.
 //!
 //! Every `WaitingFor` goes through [`classify`](crate::waiting::classify). A variant it does not pose
 //! halts the game with `engine_contract_failure:unmapped_decision` and is counted in
@@ -25,6 +29,8 @@ use engine::types::actions::{GameAction, MulliganChoice};
 use engine::types::game_state::{GameState, MulliganDecisionPhase, WaitingFor};
 use engine::types::identifiers::ObjectId;
 use engine::types::player::PlayerId;
+#[cfg(feature = "house-ai")]
+use rand_chacha::{rand_core::SeedableRng, ChaCha8Rng};
 use serde_json::{json, Value};
 
 use crate::json::canonical;
@@ -44,11 +50,16 @@ pub struct Census {
     pub halts: BTreeMap<String, u64>,
     pub decisions: u64,
     pub games: u64,
+    /// Actions the house seat took (never counted in `decisions`, never in `engine_errors`).
+    pub house_actions: u64,
 }
 
 impl Census {
     pub fn report(&self) -> String {
         let mut s = format!("phase-seat census: games={} decisions={}\n", self.games, self.decisions);
+        if self.house_actions > 0 {
+            s.push_str(&format!("  house_actions {}\n", self.house_actions));
+        }
         for (title, m) in [("engine_error", &self.engine_errors), ("unmapped_action", &self.unmapped_actions), ("halt", &self.halts)] {
             for (k, n) in m {
                 s.push_str(&format!("  {title} {k} {n}\n"));
@@ -178,7 +189,23 @@ pub struct PhaseBackend {
     identity: Value,
     live: Option<Live>,
     pub census: Census,
+    #[cfg(feature = "house-ai")]
+    house: Option<House>,
 }
+
+/// The seat phase-ai answers in-process, and what it answers with.
+#[cfg(feature = "house-ai")]
+struct House {
+    seat: PlayerId,
+    difficulty: phase_ai::AiDifficulty,
+    /// Measurement mode and its seed, rebuilt in `reset` from the game's seed.
+    config: phase_ai::AiConfig,
+    rng: ChaCha8Rng,
+}
+
+/// Decorrelates the house search's rng from the engine's own, which is seeded from the same `game_secret`.
+#[cfg(feature = "house-ai")]
+const HOUSE_RNG_SALT: u64 = 0x486f_7573_6553_6561;
 
 /// A gorge deck JSON (`{"name": .., "cards": [{"name": .., "count": ..}]}`) as a catalog deck whose id
 /// is the file stem: the same `-decks DIR` convention `sbv2dirac` documents and `xclient` writes.
@@ -217,7 +244,31 @@ impl PhaseBackend {
             "card_pool_identity": format!("phase-card-data/{data}"),
             "source_revision": source_revision,
         });
-        PhaseBackend { db, decks, identity, live: None, census: Census::default() }
+        PhaseBackend {
+            db,
+            decks,
+            identity,
+            live: None,
+            census: Census::default(),
+            #[cfg(feature = "house-ai")]
+            house: None,
+        }
+    }
+
+    /// Answer `seat` (0 or 1) in-process with phase-ai at `difficulty` (a name `crate::house::parse_house`
+    /// accepts); the other seat is posed as before. `hello_ok.engine.version` names both.
+    #[cfg(feature = "house-ai")]
+    pub fn with_house(mut self, seat: u8, difficulty: &str) -> Self {
+        assert!(seat < 2, "house seat {seat}: want 0 or 1");
+        let name = difficulty.trim().to_lowercase();
+        assert!(crate::house::DIFFICULTIES.contains(&name.as_str()), "house difficulty {difficulty}: unknown");
+        let difficulty = phase_ai::AiDifficulty::from_label(&name);
+        let version = format!("{}/house-p{seat}-{name}", self.identity["version"].as_str().expect("version"));
+        self.identity["version"] = json!(version);
+        // Replaced in `reset`, which knows the game's seed.
+        let config = phase_ai::create_config(difficulty, phase_ai::Platform::Native).into_measurement(0);
+        self.house = Some(House { seat: PlayerId(seat), difficulty, config, rng: ChaCha8Rng::seed_from_u64(0) });
+        self
     }
 
     fn halt(&mut self, cause: &str, detail: &str) -> Outcome {
@@ -238,6 +289,20 @@ impl PhaseBackend {
                 }
                 if live.steps >= live.max_steps {
                     return truncated("max_steps", live.decisions);
+                }
+            }
+            // The house seat is answered before anything is classified: a prompt the mapper does not pose
+            // (`Pose::Unposed`) is the client's problem only when the client is the one asked.
+            #[cfg(feature = "house-ai")]
+            if let Some(h) = self.house.as_mut() {
+                if live.group.is_none() && live.state.waiting_for.acting_players().contains(&h.seat) {
+                    match house_answer(live, h) {
+                        Ok(()) => {
+                            self.census.house_actions += 1;
+                            continue;
+                        }
+                        Err(Stop::Halt(cause, detail)) => return self.halt(cause, &detail),
+                    }
                 }
             }
             let (name, pose) = classify(&live.state.waiting_for);
@@ -416,6 +481,19 @@ enum Built {
 
 enum Stop {
     Halt(&'static str, String),
+}
+
+/// One house action: phase-ai picks it from the live state, and it is submitted as the contract's
+/// authorized actor (a controlled seat is acted for by someone else, CR 722). Counts toward `max_steps`
+/// (not `max_decisions`), so a house priority-pass loop ends in `truncated`.
+#[cfg(feature = "house-ai")]
+fn house_answer(live: &mut Live, h: &mut House) -> Result<(), Stop> {
+    let Some(action) = phase_ai::search::choose_action(&live.state, h.seat, &h.config, &mut h.rng) else {
+        return Err(Stop::Halt("house_no_action", format!("{:?}", live.state.waiting_for)));
+    };
+    let actor = AiDecisionContract::issue(&live.state, h.seat).authorized_actor;
+    live.steps += 1;
+    apply(&mut live.state, actor, action).map(|_| ()).map_err(|e| Stop::Halt("house_rejected", format!("{e:?}")))
 }
 
 fn apply_now(live: &mut Live, actor: PlayerId, action: GameAction) -> Result<(), Stop> {
@@ -1105,6 +1183,11 @@ impl Backend for PhaseBackend {
             start_game_with_starting_player(&mut state, PlayerId(r.starting_seat));
         }
         self.census.games += 1;
+        #[cfg(feature = "house-ai")]
+        if let Some(h) = self.house.as_mut() {
+            h.config = phase_ai::create_config(h.difficulty, phase_ai::Platform::Native).into_measurement(seed);
+            h.rng = ChaCha8Rng::seed_from_u64(seed ^ HOUSE_RNG_SALT);
+        }
         self.live = Some(Live {
             state,
             ids: Ids::new(&r.game_secret),
