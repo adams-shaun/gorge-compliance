@@ -1054,8 +1054,8 @@ func modeNumbers(reg *cards.Registry, it oraclegen.Item, ds []rules.OracleDecisi
 }
 
 // prefixes is Item.XAbility: parallel to the steps, the XMage rule-text prefix
-// of every activate step's ability and of a cast step that is the Plot or
-// Suspend special action, and "" elsewhere (nil when no step carries one). An activate step
+// of every activate step's ability and of a cast step that is the Plot,
+// Suspend or Foretell special action, and "" elsewhere (nil when no step carries one). An activate step
 // whose prefix is unknown is a Refusal.
 //
 // A granted/gained/keyword-granted step is resolved through the same
@@ -1107,6 +1107,24 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 					if n, _, _ := strings.Cut(param, ":"); strings.TrimSpace(n) != "" {
 						out[i] = "Suspend " + strings.TrimSpace(n)
 					}
+				}
+			}
+			continue
+		}
+		// Foretell from hand is the same shape (CR 702.143a, 116.2h): a cast
+		// step with cast_mode "foretell", replayed as XMage's ForetellAbility
+		// special action, whose rule text leads "Foretell {cost}" (the Forge
+		// K:Foretell:<cost> keyword gives the cost). A face without one falls
+		// back to the bare "Foretell" prefix, which the driver scopes to the
+		// step's card.
+		if st.Op == "cast" && strings.EqualFold(st.CastMode, "foretell") {
+			if out == nil {
+				out = make([]string, len(it.Steps))
+			}
+			out[i] = "Foretell"
+			if c, face, ok := stepCard(reg, it, st); ok {
+				if cost, ok := c.Faces[face].KeywordCostParam("Foretell"); ok && cost != "" {
+					out[i] = "Foretell " + xmageManaText(cost)
 				}
 			}
 			continue

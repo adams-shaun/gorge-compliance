@@ -4297,7 +4297,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** Whether a cast step's cast_mode is one this driver elects: Bargain,
      * "optionalcost", "kicked" (the single Kicker ask; kicked1/kicked2/kickedboth/
      * multikicked pose per-kicker asks in order and stay rejected), the face-down Disguise/Morph/Megamorph casts, the "plot" and
-     * "suspend" special actions, a graveyard "flashback" cast, and a "mayplay" cast of a card a
+     * "suspend" and "foretell" special actions, a graveyard "flashback" cast, and a "mayplay" cast of a card a
      * play-from-exile permission (Reckless Impulse) reaches are wired
      * ("plot_cast", the later cast of a plotted card, is not); so are the
      * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half, whose
@@ -4313,6 +4313,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // "suspend": Suspend from hand (CR 702.62a) is a special action
                 // (CR 116.2f), XMage's SuspendAbility, activated like Plot.
                 || mode.equals("suspend")
+                // "foretell": Foretell from hand (CR 702.143a) is a special
+                // action (CR 116.2h), XMage's ForetellAbility, activated like Plot.
+                || mode.equals("foretell")
                 // "mayplay": the card is in exile (or wherever a play-from-exile
                 // permission reaches) rather than hand, but the cast itself is
                 // the card's ordinary SpellAbility, played by name. TestPlayer's
@@ -6642,6 +6645,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         throw new IllegalArgumentException("suspend step " + stepIdx + " has no xmage_ability");
                     }
                     activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), suspendText, stepIdx));
+                    return;
+                }
+                // "foretell" is XMage's Foretell special action from the hand
+                // (ForetellAbility is a SpecialAction with usesStack false,
+                // CR 116.2h): it pays {2} and exiles the card face down, no
+                // cast and no stack. Activated by its rule-text prefix
+                // "Foretell {cost}" like XMage's own foretell tests, scoped to
+                // the step's card so another foretell card in hand cannot be
+                // picked.
+                if ("foretell".equals(castMode)) {
+                    String foretellText = xabilityAt(stepIdx);
+                    if (foretellText.isEmpty()) {
+                        throw new IllegalArgumentException("foretell step " + stepIdx + " has no xmage_ability");
+                    }
+                    activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), foretellText, stepIdx));
                     return;
                 }
                 // "flashback" is the cast of a graveyard card for its
