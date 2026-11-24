@@ -22,13 +22,14 @@ func LibraryPlacementOrder(d rules.OracleDecision) bool {
 
 // FullTopReorder reports whether d is gorge's effRearrangeTopOfLibrary answer
 // (CR 401.4): a forced KArrange resumed as "arrange" whose every option has
-// the shared Kind "bottom" (pile B is empty), with two or more picks that name
-// every offered card. The picks are the final top-first order. A Dig's
-// "dig_arrange"/"dig_bottom" remainder and a one-card order carry other kinds
-// or fewer picks and are not this shape.
+// the shared Kind "bottom" (pile B is empty), with picks that name every
+// offered card. The picks are the final top-first order. A Dig's
+// "dig_arrange"/"dig_bottom" remainder carries another kind and is not this
+// shape. A one-card order matches too (gorge posts it when the look holds one
+// card); callers that must skip it check len(d.Picks) >= 2 themselves.
 func FullTopReorder(d rules.OracleDecision) bool {
 	return d.GorgeKind == "arrange" && d.Resume == "arrange" && d.ArrangeKind == "bottom" &&
-		len(d.Picks) >= 2 && d.Min == d.Max && d.Max == d.Options && len(d.Picks) == d.Options
+		d.Min == d.Max && d.Max == d.Options && len(d.Picks) == d.Options
 }
 
 // HandMoveBatch reports whether d is a multi-card hand move: a choose_n
