@@ -27,8 +27,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c1e5b25-ee5a-4ea9-a715-08dd1a4f51c4	cast	cast-resolve	agreed	-	FX	scen	2	0	Raphael, the Nightwatcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c1e5b25-ee5a-4ea9-a715-08dd1a4f51c4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Raphael, the Nightwatcher/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c1ea1a5-5966-4d14-8361-ffc6a8d1bd79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plaxcaster-frogling:cast:s1,f:xs:XP:plaxcaster-frogling:cast:s1	-	-	-	16ec2936189a	-	32a741ecbf54	-	-	2026-11-24	xproof
-8c1ea1a5-5966-4d14-8361-ffc6a8d1bd79	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c1ea1a5-5966-4d14-8361-ffc6a8d1bd79	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8c1ea1a5-5966-4d14-8361-ffc6a8d1bd79	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+8c1ea1a5-5966-4d14-8361-ffc6a8d1bd79	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 8c1fe337-375a-4add-93b6-0ac39ed72b4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c220dbd-6572-4715-aae6-dd09a4252d68	cast	cast-resolve	agreed	-	FX	scen	2	0	Banner of Kinship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c220dbd-6572-4715-aae6-dd09a4252d68	static#0.0	static#0.0	agreed	-	X	scen	1	0	Banner of Kinship/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -157,8 +157,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8cdda36f-5e82-4c2f-8eaa-75b9bbc93a02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cdfd9df-4783-4138-a286-828a97f516aa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ce63f60-0211-46c7-8fb6-c5484ebfa029	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ce7f05c-6352-49e8-95b3-8ab87106b75e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ce7f05c-6352-49e8-95b3-8ab87106b75e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ce7f05c-6352-49e8-95b3-8ab87106b75e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:draining-whelk:cast:s1,f:xs:XP:draining-whelk:cast:s1	-	-	-	0984227a67dd	-	acc53a31f190	-	-	2026-11-24	xproof
+8ce7f05c-6352-49e8-95b3-8ab87106b75e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:draining-whelk:cast:s1,f:xs:XP:draining-whelk:cast:s1	-	-	-	0984227a67dd	-	acc53a31f190	-	-	2026-11-24	xproof
 8ceb1acf-5ff3-4f1a-af04-9f07ad454526	cast	cast-resolve	agreed	-	X	scen	1	0	Ronin, Shadow Stalker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ceb1acf-5ff3-4f1a-af04-9f07ad454526	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ronin, Shadow Stalker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ceb1acf-5ff3-4f1a-af04-9f07ad454526	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ronin, Shadow Stalker/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -29,7 +29,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3318c391-7aa1-4550-88a0-b29d8dca28b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3318c391-7aa1-4550-88a0-b29d8dca28b7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 331b44e4-cf08-44f4-8afd-a7374e5dc5ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tidespout-tyrant:cast:s1,f:xs:XP:tidespout-tyrant:cast:s1	-	-	-	16ec2936189a	-	fe9b7d5e8a0c	-	-	2026-11-24	xproof
-331b44e4-cf08-44f4-8afd-a7374e5dc5ed	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+331b44e4-cf08-44f4-8afd-a7374e5dc5ed	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 331b6834-6bb4-40fa-b80b-22d67b34734f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 331b6834-6bb4-40fa-b80b-22d67b34734f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 332ccaac-e3f2-4c49-824b-ebbef8a81447	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -104,8 +104,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 339a7418-9a29-4eae-a3c2-ea590d175936	cast	cast-resolve	agreed	-	X	scen	1	0	Imprisoned in the Moon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 339a7418-9a29-4eae-a3c2-ea590d175936	static#0.0	static#0.0	agreed	-	X	scen	1	0	Imprisoned in the Moon/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 339bddf5-a8fb-46d3-877e-b0441ca8a597	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sporeback-troll:cast:s1,f:xs:XP:sporeback-troll:cast:s1	-	-	-	16ec2936189a	-	b72a7dd7d001	-	-	2026-11-24	xproof
-339bddf5-a8fb-46d3-877e-b0441ca8a597	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-339bddf5-a8fb-46d3-877e-b0441ca8a597	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+339bddf5-a8fb-46d3-877e-b0441ca8a597	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+339bddf5-a8fb-46d3-877e-b0441ca8a597	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 339c39d9-7e10-458e-b602-4f0550840436	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 339c39d9-7e10-458e-b602-4f0550840436	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 339c39d9-7e10-458e-b602-4f0550840436	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

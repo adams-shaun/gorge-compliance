@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c2059d5-9a2e-4b89-a617-9125eb0cd570	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c209165-a159-4cd7-8e99-1e533d3a22a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c209165-a159-4cd7-8e99-1e533d3a22a6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c209165-a159-4cd7-8e99-1e533d3a22a6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c209165-a159-4cd7-8e99-1e533d3a22a6	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 4c2196e5-6ed7-4cd2-b8e7-f01aff236569	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c2196e5-6ed7-4cd2-b8e7-f01aff236569	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c22257e-8a00-40b7-a29b-55fcec7ddbd4	cast	cast-resolve	agreed	-	FX	scen	2	0	Crypt Feaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c71074b-b8bf-47f4-87e4-67c275abdbc5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c71074b-b8bf-47f4-87e4-67c275abdbc5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c76db22-1992-448d-be4a-a9095420b8cc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silkwing-scout:cast:s1,f:xs:XP:silkwing-scout:cast:s1	-	-	-	16ec2936189a	-	231d428185fa	-	-	2026-11-24	xproof
-4c76db22-1992-448d-be4a-a9095420b8cc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c76db22-1992-448d-be4a-a9095420b8cc	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 4c77767a-8133-43bc-b7a5-09a73259d354	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Captivating Cave/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c77767a-8133-43bc-b7a5-09a73259d354	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Captivating Cave/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c77767a-8133-43bc-b7a5-09a73259d354	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Captivating Cave/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
