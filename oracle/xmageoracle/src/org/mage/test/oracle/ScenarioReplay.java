@@ -35,6 +35,7 @@ import mage.cards.CardWithSpellOption;
 import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.DoubleFacedCard;
+import mage.cards.ModalDoubleFacedCard;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -6895,7 +6896,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             case "play": {
                 String playRef = str(st, "card");
-                String landName = xmageSpelling(refName(playRef));
+                // A land play of a modal DFC with a nonland front enters its
+                // land back (CR 712.12, 305.1), and XMage's PlayLandAbility
+                // reads "Play <back face>"; naming the front finds nothing.
+                String landName = playLandName(xmageSpelling(refName(playRef)));
                 String playAlias = refAlias.get(playRef);
                 if (playAlias == null) {
                     playUnaliasedLand(p, playRef, landName);
@@ -7382,6 +7386,35 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         });
         return "@" + key + " " + text;
+    }
+
+    /**
+     * The name XMage's land-play command must carry for a card: a modal
+     * double-faced card whose left half is not a land and whose right half
+     * is enters that right half on a land play (CR 712.12, 305.1), and the
+     * PlayLandAbility reads "Play <right half>". A land-front modal DFC (a
+     * Pathway) and every plain land keep the name the ref spells.
+     *
+     * Card-based and package-private so a contract test can pin the rule
+     * without the card repository (which needs H2); the name-based overload
+     * resolves the ref's card through CardRepository at queue time.
+     */
+    static String playLandName(Card card, String fallback) {
+        if (card instanceof ModalDoubleFacedCard) {
+            ModalDoubleFacedCard mdfc = (ModalDoubleFacedCard) card;
+            if (!mdfc.getLeftHalfCard().isLand() && mdfc.getRightHalfCard().isLand()) {
+                return mdfc.getRightHalfCard().getName();
+            }
+        }
+        return fallback;
+    }
+
+    /** The XMage land-play name for the named card, or the name unchanged
+     * when the card repository cannot resolve it. */
+    private static String playLandName(String name) {
+        CardInfo info = CardRepository.instance.findCard(name);
+        Card card = info == null ? null : info.createCard();
+        return playLandName(card, name);
     }
 
     /**
