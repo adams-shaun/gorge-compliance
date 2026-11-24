@@ -160,6 +160,7 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		stopped = x.Harness
 		g, x = pg, px
 	}
+	x = AlignCostGraveyardOrder(g, x)
 	v := oraclediff.CompareOpts(g, nil, x, item.Item.Compare, item.Item.Ignore...)
 	f.Checkpoint, f.Field, f.Gorge, f.Other = v.Checkpoint, v.Field, v.Gorge, v.XMage
 	f.Step = stepOf(v.Checkpoint)
@@ -757,6 +758,83 @@ func rngField(field string) bool {
 	return false
 }
 
+// costStep reports a checkpoint taken after a cast or an activation, a step
+// whose cost payment can move two or more cards to a graveyard.
+func costStep(checkpoint string) bool {
+	return strings.HasSuffix(checkpoint, " (cast)") || strings.HasSuffix(checkpoint, " (activate)")
+}
+
+// AlignCostGraveyardOrder returns x with its graveyards put into gorge's order
+// where the only difference is the order of cards one cost payment moved there.
+// CR 601.2h (602.2b for an ability) lets the player pay a cost's parts in any
+// order, and CR 404.3 lets the owner stack simultaneous arrivals in any order,
+// so "Sacrifice a land, discard this card" (Edge of Autumn's cycling) is legal
+// either way and no engine is wrong. At a cast or activate checkpoint whose seat
+// gained two or more cards over gorge's graveyard of the step before, with the
+// same cards in the follower and all older cards still in place, the follower's
+// arrivals take gorge's order. At every later checkpoint where those cards hold
+// the same relative place (gorge's older cards untouched below, the follower's
+// own prefix unchanged), the same rewrite is carried up, so the swap is not
+// reported again at the next step while the comparison goes on. A checkpoint
+// where anything else moved, or a pass step (an SBA batch such as CR 704.5m is
+// ordered by the rules, see graveyardOrderOnly), is left as the follower has it.
+func AlignCostGraveyardOrder(g rules.OracleResult, x oraclediff.XResult) oraclediff.XResult {
+	n := min(len(g.Snapshots), len(x.Snapshots))
+	var snaps []rules.OracleSnapshot
+	for seat := 0; ; seat++ {
+		seen := false
+		raw := make([][]string, n) // the follower's own graveyard per checkpoint
+		for j := 0; j < n; j++ {
+			if seat < len(x.Snapshots[j].Players) && seat < len(g.Snapshots[j].Players) {
+				raw[j] = x.Snapshots[j].Players[seat].Graveyard
+				seen = true
+			}
+		}
+		if !seen {
+			break
+		}
+		cur := raw[0] // the follower's graveyard as aligned so far
+		for j := 1; j < n; j++ {
+			if seat >= len(x.Snapshots[j].Players) || seat >= len(g.Snapshots[j].Players) ||
+				seat >= len(x.Snapshots[j-1].Players) || seat >= len(g.Snapshots[j-1].Players) {
+				break
+			}
+			prevG, gNow, xNow := g.Snapshots[j-1].Players[seat].Graveyard, g.Snapshots[j].Players[seat].Graveyard, raw[j]
+			aligned := xNow
+			m := len(prevG)
+			if slices.Equal(cur, prevG) && len(raw[j-1]) == m && len(xNow) == len(gNow) && len(gNow) >= m &&
+				slices.Equal(gNow[:m], prevG) && slices.Equal(xNow[:m], raw[j-1]) {
+				rest := xNow[m:]
+				if costStep(g.Snapshots[j].Checkpoint) && len(rest) >= 2 && sameCards(rest, gNow[m:]) {
+					rest = gNow[m:]
+				}
+				aligned = append(append([]string(nil), prevG...), rest...)
+			}
+			cur = aligned
+			if !slices.Equal(aligned, xNow) {
+				if snaps == nil {
+					snaps = append([]rules.OracleSnapshot(nil), x.Snapshots...)
+				}
+				ps := append([]rules.OracleSnapPlayer(nil), snaps[j].Players...)
+				ps[seat].Graveyard = aligned
+				snaps[j].Players = ps
+			}
+		}
+	}
+	if snaps != nil {
+		x.Snapshots = snaps
+	}
+	return x
+}
+
+// sameCards reports that a and b hold the same cards in any order.
+func sameCards(a, b []string) bool {
+	a, b = append([]string(nil), a...), append([]string(nil), b...)
+	sort.Strings(a)
+	sort.Strings(b)
+	return slices.Equal(a, b)
+}
+
 // graveyardOrderOnly reports a pN.graveyard divergence at checkpoint step d
 // that is only the order of two or more cards that entered that graveyard at
 // that step. CR 404.3 lets the owner arrange simultaneous arrivals in any
@@ -786,11 +864,7 @@ func graveyardOrderOnly(g rules.OracleResult, x oraclediff.XResult, v oraclediff
 		!slices.Equal(gNow[:n], before) || !slices.Equal(xNow[:n], before) {
 		return false
 	}
-	a := append([]string(nil), gNow[n:]...)
-	b := append([]string(nil), xNow[n:]...)
-	sort.Strings(a)
-	sort.Strings(b)
-	return slices.Equal(a, b)
+	return sameCards(gNow[n:], xNow[n:])
 }
 
 // shuffledTopExile reports a pN.exile difference after a shuffle (CR 701.24a)

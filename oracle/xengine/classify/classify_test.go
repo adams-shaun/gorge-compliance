@@ -1026,31 +1026,39 @@ func TestClassifyShuffledTopExile(t *testing.T) {
 	}
 }
 
-// TestClassifyGraveyardOrderSimultaneous: cards that entered a graveyard in the
-// same step may be ordered either way (CR 404.3); a one-card arrival, a
-// reorder of cards already there, or a different multiset stays a divergence.
+// TestClassifyGraveyardOrderSimultaneous: cards one cost payment moved to a
+// graveyard together may sit in either order (CR 601.2h, 404.3), so a swap at a
+// cast or activate step agrees, and stays agreed at the later steps where the
+// cards hold their place; a real difference after the swap is still reported.
+// The same swap at a pass step (an SBA batch) is a harness order finding, and a
+// one-card arrival, a reorder of cards already there or a different multiset
+// stays a divergence.
 func TestClassifyGraveyardOrderSimultaneous(t *testing.T) {
 	item, _, g := fixture(0)
 	item.Item.ID = "xe:T:0:0:w1"
 	set := func(s *rules.OracleSnapshot, gy ...string) { s.Players[1].Graveyard = gy }
 	cases := []struct {
 		name          string
+		op            string
 		before        []string
 		gorge, follow []string
 		want          string
 	}{
-		{"swap of two simultaneous arrivals", nil, []string{"A", "B"}, []string{"B", "A"}, ClassHarness},
-		{"swap of three, older card below", []string{"Z"}, []string{"Z", "A", "B", "C"}, []string{"Z", "C", "A", "B"}, ClassHarness},
-		{"one card arrives alone", []string{"A"}, []string{"A", "B"}, []string{"B", "A"}, ClassDiverge},
-		{"older cards swap places", []string{"A", "B"}, []string{"A", "B", "C", "D"}, []string{"B", "A", "C", "D"}, ClassDiverge},
-		{"older card moves above arrivals", []string{"A"}, []string{"A", "B", "C"}, []string{"B", "A", "C"}, ClassDiverge},
-		{"different cards", nil, []string{"A", "B"}, []string{"B", "C"}, ClassDiverge},
+		{"swap of two arrivals of one cost payment", "activate", nil, []string{"A", "B"}, []string{"B", "A"}, ClassAgree},
+		{"swap of three at a cast, older card below", "cast", []string{"Z"}, []string{"Z", "A", "B", "C"}, []string{"Z", "C", "A", "B"}, ClassAgree},
+		{"swap of two arrivals at a pass step", "pass", nil, []string{"A", "B"}, []string{"B", "A"}, ClassHarness},
+		{"swap of three at a pass step", "pass", []string{"Z"}, []string{"Z", "A", "B", "C"}, []string{"Z", "C", "A", "B"}, ClassHarness},
+		{"one card arrives alone", "activate", []string{"A"}, []string{"A", "B"}, []string{"B", "A"}, ClassDiverge},
+		{"older cards swap places", "activate", []string{"A", "B"}, []string{"A", "B", "C", "D"}, []string{"B", "A", "C", "D"}, ClassDiverge},
+		{"older card moves above arrivals", "activate", []string{"A"}, []string{"A", "B", "C"}, []string{"B", "A", "C"}, ClassDiverge},
+		{"different cards", "activate", nil, []string{"A", "B"}, []string{"B", "C"}, ClassDiverge},
 	}
 	for _, c := range cases {
 		g := rules.OracleResult{Snapshots: append([]rules.OracleSnapshot(nil), g.Snapshots...)}
 		for i := 1; i <= 2; i++ {
 			g.Snapshots[i].Players = append([]rules.OracleSnapPlayer(nil), g.Snapshots[i].Players...)
 		}
+		g.Snapshots[2].Checkpoint = "step 1 (" + c.op + ")"
 		set(&g.Snapshots[1], c.before...)
 		set(&g.Snapshots[2], c.gorge...)
 		x := follower(g, func(x *oraclediff.XResult) { set(&x.Snapshots[2], c.follow...) })
@@ -1058,6 +1066,47 @@ func TestClassifyGraveyardOrderSimultaneous(t *testing.T) {
 			if f := Classify(item, nil, g, x, engine); f.Class != c.want {
 				t.Errorf("%s (%s): class %q, want %q (%+v)", c.name, engine, f.Class, c.want, f)
 			}
+		}
+	}
+
+	// A swap at the activate of step 0 carries to step 1 while the cards hold
+	// their place, and a later real difference is the first one reported.
+	carry := []struct {
+		name  string
+		edit  func(*oraclediff.XResult)
+		want  string
+		field string
+	}{
+		{"swap kept at the next step", nil, ClassAgree, ""},
+		{"swap kept, a newcomer in the same order", func(x *oraclediff.XResult) {
+			x.Snapshots[2].Players[1].Graveyard = []string{"B", "A", "C"}
+		}, ClassAgree, ""},
+		{"swap kept, then life differs", func(x *oraclediff.XResult) {
+			x.Snapshots[2].Players[0].Life = 19
+		}, ClassDiverge, "p0.life"},
+		{"swap kept, then the older cards reorder", func(x *oraclediff.XResult) {
+			x.Snapshots[2].Players[1].Graveyard = []string{"C", "B", "A"}
+		}, ClassDiverge, "p1.graveyard"},
+	}
+	for _, c := range carry {
+		g := rules.OracleResult{Snapshots: append([]rules.OracleSnapshot(nil), g.Snapshots...)}
+		for i := 1; i <= 2; i++ {
+			g.Snapshots[i].Players = append([]rules.OracleSnapPlayer(nil), g.Snapshots[i].Players...)
+		}
+		g.Snapshots[1].Checkpoint = "step 0 (activate)"
+		set(&g.Snapshots[1], "A", "B")
+		set(&g.Snapshots[2], "A", "B", "C")
+		x := follower(g, func(x *oraclediff.XResult) {
+			set(&x.Snapshots[1], "B", "A")
+			set(&x.Snapshots[2], "B", "A", "C")
+			x.Snapshots[2].Players = append([]rules.OracleSnapPlayer(nil), x.Snapshots[2].Players...)
+			if c.edit != nil {
+				c.edit(x)
+			}
+		})
+		f := Classify(item, nil, g, x, "xmage")
+		if f.Class != c.want || f.Field != c.field {
+			t.Errorf("%s: class %q field %q, want %q %q (%+v)", c.name, f.Class, f.Field, c.want, c.field, f)
 		}
 	}
 }
