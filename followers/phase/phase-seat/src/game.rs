@@ -547,7 +547,8 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
             if !assignment_modes.is_empty() && !assignment_modes.contains(&Mode::Normal) {
                 return Err(Stop::Halt("unsupported_damage_mode", format!("{assignment_modes:?}")));
             }
-            if pw_loyalty.is_some() || pw_controller.is_some() {
+            // Spillover past a planeswalker (CR 702.19c) is only asked of a trampler.
+            if trample.is_some() && (pw_loyalty.is_some() || pw_controller.is_some()) {
                 return Err(Stop::Halt("unsupported_damage_mode", "trample over a planeswalker".into()));
             }
             let mut left = *total_damage;

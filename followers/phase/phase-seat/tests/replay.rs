@@ -45,7 +45,9 @@ fn play(b: &mut PhaseBackend, r: &Reset, policy: u64, cap: usize) -> Vec<String>
 }
 
 fn run() {
-    let (Ok(data), Ok(decks)) = (std::env::var("PHASE_CARD_DATA"), std::env::var("PHASE_SEAT_DECKS")) else {
+    // An empty value is "unset" (the Makefile passes `PHASE_SEAT_DECKS=` when it finds no catalog).
+    let set = |k: &str| std::env::var(k).ok().filter(|v| !v.is_empty());
+    let (Some(data), Some(decks)) = (set("PHASE_CARD_DATA"), set("PHASE_SEAT_DECKS")) else {
         eprintln!("replay: PHASE_CARD_DATA or PHASE_SEAT_DECKS unset: skipped");
         return;
     };
@@ -55,7 +57,7 @@ fn run() {
     let mut backend = PhaseBackend::new(db, catalog.clone(), "test+test", None);
     let (mut longest, mut terminal, mut played) = (0, 0, 0);
     // PHASE_SEAT_SEEDS="2,3" narrows the seeds; PHASE_SEAT_ONCE=1 plays each once (no comparison).
-    let only: Option<Vec<u8>> = std::env::var("PHASE_SEAT_SEEDS").ok().map(|v| v.split(',').filter_map(|x| x.trim().parse().ok()).collect());
+    let only: Option<Vec<u8>> = std::env::var("PHASE_SEAT_SEEDS").ok().filter(|v| !v.is_empty()).map(|v| v.split(',').filter_map(|x| x.trim().parse().ok()).collect());
     let once = std::env::var("PHASE_SEAT_ONCE").is_ok_and(|v| v == "1");
     for seed in 0u8..6 {
         if only.as_ref().is_some_and(|o| !o.contains(&seed)) {
@@ -77,6 +79,13 @@ fn run() {
         };
         let a = play(&mut backend, &r, 0x9e37_79b9_7f4a_7c15 ^ u64::from(seed), 4000);
         eprintln!("replay: seed {seed}: {} lines, last: {}", a.len(), a.last().map_or(String::new(), |l| l.chars().take(160).collect()));
+        if !a.last().is_some_and(|l| l.contains("\"outcome\"")) {
+            // A game that did not end: show how it was going (is it a priority-pass loop?).
+            for l in &a[a.len().saturating_sub(3)..] {
+                let from = l.find("\"stack\"").unwrap_or(0);
+                eprintln!("replay: seed {seed} tail: seat {} {}", &l[..60.min(l.len())], l[from..].chars().take(1800).collect::<String>());
+            }
+        }
         let b = if once { a.clone() } else { play(&mut backend, &r, 0x9e37_79b9_7f4a_7c15 ^ u64::from(seed), 4000) };
         played += 1;
         longest = longest.max(a.len());
