@@ -2359,7 +2359,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // assertAllCommandsUsed.
             boolean adjustedAsk = owner.isAdjustedSpellAsk(source, game);
             if (adjustedAsk) {
-                closeAskedAgain(getTargets(), true,
+                closeCastAskedAgain(getTargets(), source,
                         target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(), target.getSize());
             }
             mage.target.Target orig = target.getOriginalTarget();
@@ -2423,11 +2423,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (!adjustedAsk) {
                 // No automatic choice above claimed this ask, and the scenario
                 // has no answer left: close an "up to" slot XMage actually
-                // posed (max > min, minimum already selected). This is the
-                // only skip the ordinary multi-target cast path gets, since
-                // its cast step queues just the recorded targets (Hunters'
-                // Feast, Rabid Bite).
-                closeAskedAgain(getTargets(), false,
+                // posed (max > min, minimum already selected), but only when
+                // the ask is a cast ask. An unscripted ordinary resolution or
+                // activation ask stays a strict miss, so a divergence is not
+                // silently turned into a skip. This is the only skip the cast
+                // step gets, since it queues just the recorded targets
+                // (Hunters' Feast, Rabid Bite).
+                closeCastAskedAgain(getTargets(), source,
                         target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(), target.getSize());
             }
             return super.chooseTarget(outcome, target, source, game);
@@ -3771,18 +3773,32 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return object != null && adjustedCasts.contains(object.getName());
     }
 
-    /** An ask XMage actually poses with no scenario answer left closes the
-     * slot when it is an "up to" target (max > min) whose minimum is already
-     * selected. A required slot still short of its minimum is a scenario
-     * error and gets no skip. An adjusted spell's target objects are rebuilt
-     * after cast setup, so the ask itself is authoritative there: a skip is
-     * always legal once its minimum is met. */
-    static void closeAskedAgain(List<String> queue, boolean adjustedSpellAsk,
-            int minTargets, int maxTargets, int selected) {
-        if (!queue.isEmpty() || selected < minTargets) {
-            return;
+    /** Whether an ask belongs to a cast: the spell ability itself (including
+     * an adjusted spell's rebuilt target objects) or the Zone.STACK triggered
+     * ability XMage uses for "when you cast this spell" (Ulamog, the
+     * Ceaseless Hunger). A resolution or activation ask is not a cast, so an
+     * unscripted "up to" slot there must stay a strict miss rather than be
+     * silently skipped. */
+    static boolean isCastTargetAsk(Ability source) {
+        if (source == null) {
+            return false;
         }
-        if (!adjustedSpellAsk && maxTargets <= minTargets) {
+        return source.getAbilityType() == mage.constants.AbilityType.SPELL
+                || (source instanceof mage.abilities.TriggeredAbility && source.getZone() == Zone.STACK);
+    }
+
+    /** An ask XMage actually poses with no scenario answer left closes the
+     * slot when it is a cast ask's "up to" target (max > min) whose minimum is
+     * already selected. A required slot still short of its minimum is a
+     * scenario error and gets no skip, and neither does a completed fixed
+     * slot (max <= min): TestPlayer rejects a skip on one ("Wrong skip
+     * command found - it can be used with up to targets"), and XMage does not
+     * ask a completed slot anyway. A non-cast ask is left unanswered so the
+     * strict run reports it. */
+    static void closeCastAskedAgain(List<String> queue, Ability source,
+            int minTargets, int maxTargets, int selected) {
+        if (!isCastTargetAsk(source) || !queue.isEmpty() || selected < minTargets
+                || maxTargets <= minTargets) {
             return;
         }
         queue.add(TestPlayer.TARGET_SKIP);
@@ -4914,15 +4930,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
     }
 
-    /** Queue a cast's recorded targets in order, and nothing else. Shared by
-     * the ordinary multi-target cast and a cast whose targets live on a cast
-     * trigger. No trailing skip is appended: an "up to" slot is closed only
-     * when XMage actually asks for it again with no answer left
-     * (closeAskedAgain). */
-    void queueCastTargets(TestPlayer p, List<String> tg) {
+    /** Queue a cast step's recorded targets, then cast, and nothing else.
+     * Both the ordinary two-or-more-target arm and the Zone.STACK
+     * cast-trigger arm call this one method; neither appends a speculative
+     * trailing skip. XMage stops asking once a slot's candidates are
+     * exhausted (Hunters' Feast with every player chosen), so a skip
+     * computed from the card's target maximums is left unused ("Targets ...
+     * Count are not equal (found [[target_skip]])"). A slot XMage really
+     * poses again with no scripted answer is closed at ask time by
+     * closeCastAskedAgain. The cast is a callback so the unit test drives
+     * the whole arm (queue and cast) without a game. */
+    void castWithQueuedTargets(TestPlayer p, List<String> tg, Runnable cast) {
         for (String t : tg) {
             queueCastTarget(p, t);
         }
+        cast.run();
     }
 
     /** Queue the cast's targets with one "[target_skip]" before each offset. */
@@ -6438,8 +6460,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // target takes this path too, so it is never set inline
                     // on a spell ability that has no targets ("Ability has no
                     // targets").
-                    queueCastTargets(p, tg);
-                    castObjectSpell(turn, phase, p, castObject);
+                    castWithQueuedTargets(p, tg, () -> castObjectSpell(turn, phase, p, castObject));
                 } else if (tg.size() == 1 && isSeatRef(tg.get(0)) && !hasGift(cardName)) {
                     castObjectSpell(turn, phase, p, castObject, seat(seatOf(tg.get(0))));
                 } else if (tg.size() == 1 && isSeatRef(tg.get(0))) {
@@ -6504,9 +6525,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // target maximums is left unused ("Targets ... Count are
                     // not equal (found [[target_skip]])"). A slot XMage does
                     // pose again with no scripted answer is closed at ask
-                    // time by closeAskedAgain.
-                    queueCastTargets(p, tg);
-                    castObjectSpell(turn, phase, p, castObject);
+                    // time by closeCastAskedAgain.
+                    castWithQueuedTargets(p, tg, () -> castObjectSpell(turn, phase, p, castObject));
                 }
                 cast.add(cardName);
                 return;

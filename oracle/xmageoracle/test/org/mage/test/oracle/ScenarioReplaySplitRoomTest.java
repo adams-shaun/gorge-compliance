@@ -302,8 +302,8 @@ public final class ScenarioReplaySplitRoomTest {
         // A cast step queues only the recorded targets: a speculative
         // trailing skip computed from the card's target maximums is exactly
         // the leftover strict mode reports. XMage stops asking once a slot's
-        // candidates are exhausted, and closeAskedAgain closes an "up to"
-        // slot only when XMage actually poses that ask again.
+        // candidates are exhausted, and closeCastAskedAgain closes an "up to"
+        // slot only when XMage actually poses that ask again in a cast.
         mage.cards.h.HuntersFeast hunters = new mage.cards.h.HuntersFeast(UUID.randomUUID(),
                 new CardSetInfo("Hunters' Feast", "M11", "1", Rarity.COMMON));
         // Precondition of the old failure: one "any number of target players"
@@ -315,15 +315,20 @@ public final class ScenarioReplaySplitRoomTest {
                 hunters.getSpellAbility().getAllSelectedTargets().get(0).getMaxNumberOfTargets());
         equal(false, ScenarioReplay.spellTargetsOnCastTrigger(hunters.getSpellAbility(),
                 hunters.getAbilities()));
+        equal(true, ScenarioReplay.isCastTargetAsk(hunters.getSpellAbility()));
         RecordingDriver hunt = routeDriver();
         TestPlayer huntA = new TestPlayer(new TestComputerPlayer("PlayerA", RangeOfInfluence.ALL));
         TestPlayer huntB = new TestPlayer(new TestComputerPlayer("PlayerB", RangeOfInfluence.ALL));
         setInherited(hunt, "playerA", huntA);
         setInherited(hunt, "playerB", huntB);
-        call(hunt, "queueCastTargets", new Class<?>[]{TestPlayer.class, java.util.List.class},
-                huntA, java.util.List.of("p1", "p0"));
-        // Every player in the 2-seat game, and no skip after them.
+        java.util.List<String> huntCasts = new java.util.ArrayList<>();
+        call(hunt, "castWithQueuedTargets",
+                new Class<?>[]{TestPlayer.class, java.util.List.class, Runnable.class},
+                huntA, java.util.List.of("p1", "p0"), (Runnable) () -> huntCasts.add("cast"));
+        // Every player in the 2-seat game, and no skip after them; the cast
+        // runs only after the targets are queued.
         equal(java.util.List.of("PlayerB", "PlayerA"), hunt.queued);
+        equal(java.util.List.of("cast"), huntCasts);
 
         // Ulamog's spell ability declares no target; the two targets belong to
         // its Zone.STACK cast trigger. They are queued for the trigger's own
@@ -333,37 +338,69 @@ public final class ScenarioReplaySplitRoomTest {
         equal(true, ulamog.getSpellAbility().getAllSelectedTargets().isEmpty());
         equal(true, ScenarioReplay.spellTargetsOnCastTrigger(ulamog.getSpellAbility(),
                 ulamog.getAbilities()));
+        mage.abilities.Ability ulamogCastTrigger = null;
+        for (mage.abilities.Ability a : ulamog.getAbilities()) {
+            if (a instanceof mage.abilities.TriggeredAbility && a.getZone() == Zone.STACK) {
+                ulamogCastTrigger = a;
+            }
+        }
+        equal(true, ulamogCastTrigger != null);
+        equal(true, ScenarioReplay.isCastTargetAsk(ulamogCastTrigger));
         RecordingDriver ul = routeDriver();
         TestPlayer ulA = new TestPlayer(new TestComputerPlayer("PlayerA", RangeOfInfluence.ALL));
         TestPlayer ulB = new TestPlayer(new TestComputerPlayer("PlayerB", RangeOfInfluence.ALL));
         setInherited(ul, "playerA", ulA);
         setInherited(ul, "playerB", ulB);
-        call(ul, "queueCastTargets", new Class<?>[]{TestPlayer.class, java.util.List.class},
-                ulA, java.util.List.of("p1:Phyrexian Walker", "p0:Plains"));
+        java.util.List<String> ulCasts = new java.util.ArrayList<>();
+        call(ul, "castWithQueuedTargets",
+                new Class<?>[]{TestPlayer.class, java.util.List.class, Runnable.class},
+                ulA, java.util.List.of("p1:Phyrexian Walker", "p0:Plains"),
+                (Runnable) () -> ulCasts.add("cast"));
         equal(java.util.List.of("Phyrexian Walker", "Plains"), ul.queued);
+        equal(java.util.List.of("cast"), ulCasts);
+
+        // A resolution ask is not a cast context: Skyclave Apparition's
+        // "exile up to one target" ETB trigger is Zone.BATTLEFIELD, so an
+        // unscripted ask there stays a strict miss instead of becoming a skip.
+        mage.cards.s.SkyclaveApparition skyclave = new mage.cards.s.SkyclaveApparition(
+                UUID.randomUUID(), new CardSetInfo("Skyclave Apparition", "ZNR", "1", Rarity.RARE));
+        mage.abilities.Ability skyclaveEtb = null;
+        for (mage.abilities.Ability a : skyclave.getAbilities()) {
+            if (a instanceof mage.abilities.TriggeredAbility && a.getZone() == Zone.BATTLEFIELD) {
+                skyclaveEtb = a;
+                break;
+            }
+        }
+        equal(true, skyclaveEtb != null);
+        equal(false, ScenarioReplay.isCastTargetAsk(skyclaveEtb));
 
         // The skip is added only when XMage asks again with no answer left and
-        // the target is an "up to" slot whose minimum is already met: a slot
-        // whose candidates are exhausted never asks, so no skip is left
-        // behind. A required slot still short is a scenario error, and a skip
-        // on a filled fixed-count slot would be illegal.
+        // the target is a cast ask's "up to" slot whose minimum is already met:
+        // a slot whose candidates are exhausted never asks, so no skip is left
+        // behind. A required slot still short is a scenario error, a skip on a
+        // filled fixed-count slot would be illegal, and a non-cast ask is left
+        // loud for the strict run.
         java.util.List<String> askedAgain = new java.util.ArrayList<>();
-        ScenarioReplay.closeAskedAgain(askedAgain, false, 0, Integer.MAX_VALUE, 2);
+        ScenarioReplay.closeCastAskedAgain(askedAgain, hunters.getSpellAbility(), 0, Integer.MAX_VALUE, 2);
         equal(java.util.List.of(TestPlayer.TARGET_SKIP), askedAgain);
         java.util.List<String> answered = new java.util.ArrayList<>(java.util.List.of("Grizzly Bears"));
-        ScenarioReplay.closeAskedAgain(answered, false, 0, Integer.MAX_VALUE, 2);
+        ScenarioReplay.closeCastAskedAgain(answered, hunters.getSpellAbility(), 0, Integer.MAX_VALUE, 2);
         equal(java.util.List.of("Grizzly Bears"), answered);
         java.util.List<String> requiredShort = new java.util.ArrayList<>();
-        ScenarioReplay.closeAskedAgain(requiredShort, false, 2, 2, 1);
+        ScenarioReplay.closeCastAskedAgain(requiredShort, hunters.getSpellAbility(), 2, 2, 1);
         equal(java.util.List.of(), requiredShort);
         java.util.List<String> filledRequired = new java.util.ArrayList<>();
-        ScenarioReplay.closeAskedAgain(filledRequired, false, 2, 2, 2);
+        ScenarioReplay.closeCastAskedAgain(filledRequired, hunters.getSpellAbility(), 2, 2, 2);
         equal(java.util.List.of(), filledRequired);
         java.util.List<String> adjustedOpen = new java.util.ArrayList<>();
-        ScenarioReplay.closeAskedAgain(adjustedOpen, true, 1, 1, 1);
+        ScenarioReplay.closeCastAskedAgain(adjustedOpen, hunters.getSpellAbility(), 0, 1, 0);
         equal(java.util.List.of(TestPlayer.TARGET_SKIP), adjustedOpen);
+        java.util.List<String> nonCastUpTo = new java.util.ArrayList<>();
+        ScenarioReplay.closeCastAskedAgain(nonCastUpTo, skyclaveEtb, 0, 1, 0);
+        equal(java.util.List.of(), nonCastUpTo);
         System.out.println("PASS target-adjuster detection and closing an unfilled adjusted target slot");
         System.out.println("PASS Hunters' Feast and Ulamog queue their targets without a speculative trailing skip");
+        System.out.println("PASS an unscripted non-cast up-to ask stays a strict miss, not a skip");
         System.out.println("PASS adjusted spell targets are queued without changing divided, ordinary, or targetless casts");
         System.out.println("PASS ordinary alias and unchanged spelling");
         checkFrontHalfAliasBinding();
