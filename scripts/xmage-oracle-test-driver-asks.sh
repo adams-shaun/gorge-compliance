@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Check the driver asks (active p1 pass pair, battlefield move, game over,
-# mixed must-attack, face-down attacker, declined dig, alternative cast, promised gift).
+# mixed must-attack, face-down attacker, declined dig, alternative cast,
+# promised gift, multi-candidate library search).
 # Requires the read-only XMage build, like the driver's javac checks.
 set -euo pipefail
 root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
@@ -15,6 +16,12 @@ lone_calls=$(/usr/bin/grep -c '= unscriptedLoneTarget(\|= unscriptedLoneAmountTa
 empty_calls=$(/usr/bin/grep -c 'if (unscriptableEmptyAsk(' "$src" || true)
 if [ "${lone_calls:-0}" -lt 3 ] || [ "${empty_calls:-0}" -lt 3 ]; then
   echo "FAIL driver asks: target-ask funnels are not wired ($lone_calls lone/empty-amount call sites, $empty_calls empty-ask call sites; want 3 each)" >&2
+  exit 1
+fi
+# The one search funnel TargetCardInLibrary.choose reaches.
+search_calls=$(/usr/bin/grep -c '= searchPickChoice(' "$src" || true)
+if [ "${search_calls:-0}" -lt 1 ]; then
+  echo "FAIL driver asks: the TargetCardInLibrary funnel is not wired to searchPickChoice ($search_calls call sites, want 1)" >&2
   exit 1
 fi
 export JAVA_HOME="$root/jdk"
