@@ -563,12 +563,60 @@ public final class ScenarioReplayPaymentTest {
         System.out.println("PASS a delve action takes one recorded pick per activation");
     }
 
+    /** oraclegen joins a multi-pick choose into ONE makeChoose answer
+     * ("Island^Island^Island"). The hook must split that answer before it
+     * matches a graveyard card, take one pick per manual payment activation
+     * (the Delve cost target's max is one while the pool is manual), and
+     * leave the picks it could not take as separate queue entries for the
+     * next payment cycle, never as a "^" entry no target ask consumes. */
+    private static void testDelveJoinedPicksAreSplit() throws Exception {
+        Game game = game();
+        ScriptedPayment sp = newPlayer(game, new ScenarioReplay());
+        TestPlayer p = sp.player;
+        p.updateRange(game);
+        List<UUID> picked = new java.util.ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            picked.add(addToGraveyard(game, p, "Island"));
+        }
+        Method queue = p.getClass().getDeclaredMethod("queueTapPaymentAction", Game.class);
+        queue.setAccessible(true);
+        sp.begin("");
+        p.addChoice("Island^Island^Island");
+        p.addChoice(TestPlayer.CHOICE_SKIP);
+        int cycles = 0;
+        while (!p.getChoices().isEmpty()) {
+            // The next payment cycle's Delve action, generic one so the cost
+            // target takes exactly one card per activation in manual mode.
+            game.getState().getSpecialActions().clear();
+            mage.abilities.SpecialAction action = delveAction(game, p, "{1}{B}");
+            equal(true, queue.invoke(p, game));
+            for (String choice : p.getChoices()) {
+                if (choice.indexOf('^') >= 0) {
+                    throw new AssertionError("joined choice left on queue: " + choice);
+                }
+            }
+            equal(action.getRule(true), p.getChoices().get(0));
+            p.getChoices().remove(0);
+            action.setControllerId(p.getId());
+            equal(true, action.activate(game, false));
+            cycles++;
+        }
+        equal(3, cycles);
+        for (UUID id : picked) {
+            equal(false, p.getGraveyard().contains(id));
+        }
+        equal("[]", p.getChoices().toString());
+        sp.end();
+        System.out.println("PASS a joined delve answer is split one pick per payment cycle");
+    }
+
     public static void main(String[] args) throws Exception {
         testTapPaymentPickParsing();
         testWaterbendXInference();
         testImproviseTapIsTakenAsSpecialAction();
         testDelveExilePickIsTakenAsSpecialAction();
         testDelveTwoPicksTakeOnePerActivation();
+        testDelveJoinedPicksAreSplit();
         testRecordedSplit();
         testGorgeSplit();
         testRunCodeRecordedPayment();
