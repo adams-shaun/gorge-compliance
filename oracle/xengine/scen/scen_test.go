@@ -97,10 +97,15 @@ func TestScenFixtures(t *testing.T) {
 			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, []string{"Shifting Wall"})
 			focusIs(t, f, 0, "Crypt Feaster", "attack", 0)
 		}}},
+		// an upkeep trigger is the card cast on turn 1 and the game run to its
+		// controller's next upkeep (turn 3): placed on the battlefield, the
+		// lowering refuses it at the cut (trigger:upkeep_or_draw)
 		{"Phyrexian Arena", "f0/t0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
-			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Phyrexian Arena"})
-			if f.Active != 1 || f.MaxTurns != 2 {
-				t.Errorf("active %d max_turns %d, want 1 and 2", f.Active, f.MaxTurns)
+			listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Phyrexian Arena"})
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, rep("Swamp", 3))
+			focusIs(t, f, 0, "Phyrexian Arena", "cast", 0)
+			if f.Active != 0 || f.MaxTurns != 3 {
+				t.Errorf("active %d max_turns %d, want 0 and 3", f.Active, f.MaxTurns)
 			}
 		}}},
 		{"Gleaming Barrier", "f0/t0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
@@ -414,4 +419,230 @@ func TestScenUnlistedByXMageIsGenerated(t *testing.T) {
 	if res.Path == "refused" {
 		t.Errorf("%s cast refused %q, want a steps or start scenario", card, res.Reason)
 	}
+}
+
+// startRow is one forced-line start: the placements it must make and the
+// focus that makes the key's event happen.
+type startRow struct {
+	card, key, reason       string
+	active, maxTurns        int
+	p0Hand, p0BF, p1Hand    []string
+	p1BF                    []string
+	focusSeat               int
+	focusCard, focusKind    string
+	focusAbility, focusTime int
+}
+
+func checkStartRows(t *testing.T, rows []startRow) {
+	t.Helper()
+	reg, b := testBuilder(t)
+	for _, r := range rows {
+		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if r.reason != "" {
+				if res.Path != PathRefused || res.Reason != r.reason {
+					t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, r.reason)
+				}
+				return
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Active != r.active || f.MaxTurns != r.maxTurns {
+				t.Errorf("active %d max_turns %d, want %d and %d", f.Active, f.MaxTurns, r.active, r.maxTurns)
+			}
+			listIs(t, "p0 hand", f.Setup.P0.Hand, r.p0Hand)
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.p0BF)
+			listIs(t, "p1 hand", f.Setup.P1.Hand, r.p1Hand)
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, r.p1BF)
+			if r.focusKind == "" {
+				if f.Focus != nil {
+					t.Errorf("focus %+v, want none", f.Focus)
+				}
+				return
+			}
+			focusIs(t, f, r.focusSeat, r.focusCard, r.focusKind, r.focusAbility)
+			if f.Focus.Times != r.focusTime {
+				t.Errorf("focus times %d, want %d", f.Focus.Times, r.focusTime)
+			}
+			raw, err := f.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := DecodeStartFile(raw); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+}
+
+// TestStartPhaseTriggers: a beginning-of-step trigger later in turn 1 than
+// the span's cut (beginning of combat, the end step) is the card on the
+// battlefield; "if it's tapped" (the DSK Survivors' second main phase) is the
+// card attacking; a step before the cut (draw, the first main phase) is the
+// card cast on turn 1 and the game run to that step's next turn for the
+// player ValidPlayer names (turn 3 for you, turn 2 for any player). A
+// descended or Class-level trigger stays refused by name. Carriers: the
+// cards are from the DSK/BLB/LCI refusal tail of the 11-24 census.
+func TestStartPhaseTriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Sinister Monolith", key: "f0/t0", maxTurns: 1, p0BF: []string{"Sinister Monolith"}},
+		{card: "Cautious Survivor", key: "f0/t0", maxTurns: 1, p0BF: []string{"Cautious Survivor"},
+			focusCard: "Cautious Survivor", focusKind: "attack"},
+		{card: "Hulking Raptor", key: "f0/t0", maxTurns: 3, p0Hand: []string{"Hulking Raptor"}, p0BF: rep("Forest", 4),
+			focusCard: "Hulking Raptor", focusKind: "cast"},
+		{card: "Dictate of Kruphix", key: "f0/t0", maxTurns: 2, p0Hand: []string{"Dictate of Kruphix"}, p0BF: rep("Island", 3),
+			focusCard: "Dictate of Kruphix", focusKind: "cast"},
+		{card: "Bandit's Talent", key: "f0/t2", reason: "steps-needed:class-level"},
+	})
+}
+
+// TestStartZoneTriggers: a ChangesZone trigger on another card. An enters
+// trigger is the carrier entering: a basic played for landfall (Icetill
+// Explorer; the lands need adds two tapped Forests), Memnite ({0} vanilla
+// artifact creature) cast for a creature, Nyxborn Courser (vanilla
+// enchantment creature) for an enchantment, and on the opponent's turn for
+// an OppCtrl filter (Authority of the Consuls). A dies trigger is Kami of
+// False Hope sacrificing itself (Garna). An unplaceable filter is refused.
+func TestStartZoneTriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Dazzling Angel", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Memnite"}, p0BF: []string{"Dazzling Angel"},
+			focusCard: "Memnite", focusKind: "cast"},
+		{card: "Icetill Explorer", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Forest"},
+			p0BF:      cat([]string{"Icetill Explorer"}, rep("Forest", 2)),
+			focusCard: "Forest", focusKind: "land"},
+		{card: "Authority of the Consuls", key: "f0/t0", active: 1, maxTurns: 1, p0BF: []string{"Authority of the Consuls"},
+			p1Hand: []string{"Memnite"}, focusSeat: 1, focusCard: "Memnite", focusKind: "cast"},
+		{card: "Garna, Bloodfist of Keld", key: "f0/t0", maxTurns: 1, p0BF: []string{"Garna, Bloodfist of Keld", "Kami of False Hope"},
+			focusCard: "Kami of False Hope", focusKind: "ability"},
+		{card: "Cryptid Inspector", key: "f0/t0", reason: "no-generator:trigger:ChangesZone:filter"},
+	})
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Entity Tracker", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Entity Tracker: %+v %v", res, err)
+	}
+	if f := res.Start; !slices.Equal(f.Setup.P0.Hand, []string{"Nyxborn Courser"}) || f.Focus.Card != "Nyxborn Courser" ||
+		!slices.Equal(f.Setup.P0.Battlefield[:4], cat([]string{"Entity Tracker"}, rep("Plains", 3))) {
+		t.Errorf("Entity Tracker: hand %v battlefield %v focus %+v, want Nyxborn Courser and its three Plains",
+			f.Setup.P0.Hand, f.Setup.P0.Battlefield, f.Focus)
+	}
+}
+
+// TestStartSpellCastTriggers: a cast trigger is a carrier spell the filter
+// takes, cast by the seat ValidActivatingPlayer names: Reach Through Mists
+// ({U} instant, draw a card) for a noncreature spell, on the opponent's turn
+// for "whenever you cast a spell during an opponent's turn" (Brineborn
+// Cutthroat); "your second spell each turn" is two casts of Memnite (focus
+// times 2).
+func TestStartSpellCastTriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Brineborn Cutthroat", key: "f0/t0", active: 1, maxTurns: 1, p0Hand: []string{"Reach Through Mists"},
+			p0BF: []string{"Brineborn Cutthroat", "Island"}, focusCard: "Reach Through Mists", focusKind: "cast"},
+	})
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Cori-Steel Cutter", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Cori-Steel Cutter: %+v %v", res, err)
+	}
+	f := res.Start
+	if !slices.Equal(f.Setup.P0.Hand, rep("Memnite", 2)) || f.Focus.Card != "Memnite" || f.Focus.Times != 2 || f.Setup.P0.Battlefield[0] != "Cori-Steel Cutter" {
+		t.Errorf("Cori-Steel Cutter: hand %v battlefield %v focus %+v, want two Memnite cast twice", f.Setup.P0.Hand, f.Setup.P0.Battlefield, f.Focus)
+	}
+	res, err = Generate(reg, b, "Case of the Ransacked Lab", "f0/t1", Options{Prefer: "start"})
+	if err != nil || res.Start == nil || !slices.Equal(res.Start.Setup.P0.Hand, []string{"Reach Through Mists"}) {
+		t.Errorf("Case of the Ransacked Lab (Instant,Sorcery): %+v %v", res.Start, err)
+	}
+}
+
+// TestStartCosts: an activated ability's non-mana cost is met by start
+// state (planCost), never by a play: Memnite to sacrifice for "another
+// creature" (Agency Coroner), a basic placed tapped for a land (Ripchain
+// Razorkin, so it adds no mana), a basic in hand to discard (Possessed Goat),
+// the card in hand for "discard this card" (Bedhead Beastie) and in the
+// graveyard for "exile this card from your graveyard" (Faerie Dreamthief), a
+// vanilla creature with power 3 or more to crew 3 (Apocalypse Runner), and
+// the loyalty a planeswalker's ultimate takes beyond its printed loyalty
+// (Liliana, Dreadhorde General: 9 of 6). A token cost (Baylen taps tokens)
+// stays refused.
+func TestStartCosts(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Agency Coroner", key: "f0/a0", maxTurns: 1, p0BF: cat([]string{"Agency Coroner"}, rep("Swamp", 3), []string{"Memnite"}),
+			focusCard: "Agency Coroner", focusKind: "ability"},
+		{card: "Possessed Goat", key: "f0/a0", maxTurns: 1, p0Hand: []string{"Plains"}, p0BF: cat([]string{"Possessed Goat"}, rep("Plains", 3)),
+			focusCard: "Possessed Goat", focusKind: "ability"},
+		{card: "Bedhead Beastie", key: "f0/a0", maxTurns: 1, p0Hand: []string{"Bedhead Beastie"}, p0BF: rep("Mountain", 3),
+			focusCard: "Bedhead Beastie", focusKind: "ability"},
+		{card: "Baylen, the Haymaker", key: "f0/a0", reason: "steps-needed:cost:tapXType"},
+	})
+	reg, b := testBuilder(t)
+	gen := func(card, key string) *StartFile {
+		t.Helper()
+		res, err := Generate(reg, b, card, key, Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s %s: %+v %v", card, key, res, err)
+		}
+		return res.Start
+	}
+	if f := gen("Ripchain Razorkin", "f0/a0"); !slices.Equal(f.Setup.P0.Battlefield, cat([]string{"Ripchain Razorkin"}, rep("Mountain", 4))) ||
+		!slices.Equal(f.Setup.P0.Tapped, []string{"Mountain"}) {
+		t.Errorf("Ripchain Razorkin: battlefield %v tapped %v, want three Mountains for {2}{R} and one tapped to sacrifice",
+			f.Setup.P0.Battlefield, f.Setup.P0.Tapped)
+	}
+	if f := gen("Faerie Dreamthief", "f0/a0"); len(f.Setup.P0.Graveyard) == 0 || f.Setup.P0.Graveyard[0] != "Faerie Dreamthief" ||
+		slices.Contains(f.Setup.P0.Battlefield, "Faerie Dreamthief") {
+		t.Errorf("Faerie Dreamthief: graveyard %v battlefield %v, want the card in the graveyard", f.Setup.P0.Graveyard, f.Setup.P0.Battlefield)
+	}
+	f := gen("Apocalypse Runner", "f0/a1")
+	if len(f.Setup.P0.Battlefield) != 2 || f.Setup.P0.Battlefield[0] != "Apocalypse Runner" {
+		t.Fatalf("Apocalypse Runner: battlefield %v, want the Vehicle and one crew", f.Setup.P0.Battlefield)
+	}
+	crew, _ := reg.Lookup(f.Setup.P0.Battlefield[1])
+	if cf := crew.Faces[0]; !cf.IsCreature() || cf.Power() < 3 || len(cf.Abilities)+len(cf.Triggers) > 0 {
+		t.Errorf("Apocalypse Runner crew %s: want a vanilla creature with power 3 or more", cf.Name)
+	}
+	f = gen("Liliana, Dreadhorde General", "f0/a2")
+	if want := []StartCounter{{Card: "Liliana, Dreadhorde General", Kind: "LOYALTY", N: 3}}; !reflect.DeepEqual(f.Setup.P0.Counters, want) {
+		t.Errorf("Liliana: counters %+v, want %+v", f.Setup.P0.Counters, want)
+	}
+}
+
+// TestStartCombat: an attack trigger is the card (or Memnite, for a
+// noncreature card such as a Vehicle) attacking, on the battlefield since
+// the turn began; a combat-damage start drops the opp-blockers need, so the
+// attack connects.
+func TestStartCombat(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Dragon Mage", key: "f0/t0", maxTurns: 1, p0BF: []string{"Dragon Mage"}, focusCard: "Dragon Mage", focusKind: "attack"},
+		// the opp-blockers need places a wall: "whenever you attack" fires blocked or not
+		{card: "Boosted Sloop", key: "f0/t0", maxTurns: 1, p0BF: []string{"Boosted Sloop", "Memnite"}, p1BF: []string{"Shield Sphere"},
+			focusCard: "Memnite", focusKind: "attack"},
+	})
+}
+
+// TestStartBecomesTarget: ward is the opponent casting Murder at the card on
+// its turn, valiant the card's controller casting Ranger's Guile (target
+// creature you control, so an opposing creature a need placed is never the
+// target).
+func TestStartBecomesTarget(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Heartfire Hero", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"}, p0BF: []string{"Heartfire Hero", "Forest"},
+			focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Armored Armadillo", key: "f0/t0", active: 1, maxTurns: 1, p0BF: []string{"Armored Armadillo"},
+			p1Hand: []string{"Murder"}, p1BF: rep("Swamp", 3), focusSeat: 1, focusCard: "Murder", focusKind: "cast"},
+	})
+}
+
+// TestStartLifeGained: "whenever you gain life" is Chaplain's Blessing ({W}
+// sorcery, gain 5 life) cast, and the life:gain need's enabler (Zuran Orb)
+// is dropped: the carrier is the lifegain.
+func TestStartLifeGained(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Drogskol Reaver", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Chaplain's Blessing"}, p0BF: []string{"Drogskol Reaver", "Plains"},
+			focusCard: "Chaplain's Blessing", focusKind: "cast"},
+	})
 }

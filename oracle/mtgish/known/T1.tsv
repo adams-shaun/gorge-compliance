@@ -17,6 +17,7 @@ Artist's Talent	T1	keywords	class:2:{2}{R}	class:2:{1}{R}	mtgish-bug	level costs
 Aven Liberator	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Awestruck Cygnet	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 Bandit's Talent	T1	keywords	class:2:{B} class:3:{3}{B}	class:2:{1}{B} class:3:{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
+Banescale Serpent	T1	keywords	-	protection:instant	equivalent	protection from the noted creature types: mtgish a second Protection keyword (protection:*, which matches the script K:Protection:Instant), the script a self Continuous AddKeyword static (T2 static, T4 grant:protection)
 Barbarian Class	T1	keywords	class:2:{1}{R} class:3:{2}{R}	class:2:{R} class:3:{1}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Bard Class	T1	keywords	class:3:{3}{R}{G}	class:3:{R}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Belltoll Dragon	T1	keywords	-	flying hexproof	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
@@ -29,12 +30,12 @@ Cosima, God of the Voyage [The Omenkeel]	T1	mana_cost	{1}{U}	{2}{U}	mtgish-bug	M
 Cosima, God of the Voyage [The Omenkeel]	T1	pt	3/3	2/4	mtgish-bug	MDFC back face takes the front face's CardPT[0] (i5jb/mtgish#1)
 Dawnsire, Sunstar Dreadnought	T1	keywords	station:20+	station:10+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
 Dermoplasm	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
+Doctor Strange, Master of Magic	T1	mana_cost	{2}{U}{U}	{2}{W}{U}	forge-bug	printed {2}{W}{U} (Scryfall SLC); the Forge script has {2}{U}{U}
 Does Machines	T1	keywords	class:3:{4}{U}	class:3:{1}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Drix Interlacer	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 Druid Class	T1	keywords	class:2:{2}{G} class:3:{4}{G}	class:2:{1}{G} class:3:{2}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Entropic Battlecruiser	T1	keywords	station:8+	station:1+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
 Esika, God of the Tree [The Prismatic Bridge]	T1	mana_cost	{W}{U}{B}{R}{G}	{1}{G}{G}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
-Esper Origins	T1	keywords	flashback:{3}{G}	-	mtgish-bug	Flashback {3}{G} dropped
 Exploration Broodship	T1	keywords	station:8+	station:3+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
 Extus, Oriq Overlord [Awaken the Blood Avatar]	T1	mana_cost	{6}{B}{R}	{1}{W}{B}{B}	mtgish-bug	MDFC back face takes the front face's ManaCost[0]; script matches the printed back-face cost (i5jb/mtgish#1)
 Fearsome Whelp	T1	keywords	-	haste	digital-variant	Arena-only card; mtgish adds haste absent from current Arena text
@@ -47,12 +48,12 @@ Gossip's Talent	T1	keywords	class:3:{3}{U}	class:3:{1}{U}	mtgish-bug	level costs
 Gourmand's Talent	T1	keywords	class:2:{2}{G} class:3:{3}{G}	class:2:{G} class:3:{2}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Great Train Heist	T1	keywords	spree:{R}	spree:{2}	mtgish-bug	mode costs: a later SpreeAction repeats an earlier ManaCost capture; script ModeCost$ matches the printed costs (i5jb/mtgish#1)
 Hearthhull, the Worldseed	T1	keywords	station:8+	station:2+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
+Hela, Mistress of Darkness [Dark Tutor]	T1	face	face	-	mtgish-bug	mtgish has no Dark Tutor adventure face
 Herdchaser Dragon	T1	keywords	-	flying trample	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Hidden Dragonslayer	T1	keywords	-	lifelink	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Hotel of Fears	T1	types	spacecraft	spaceship	mtgish-bug	mtgish#4 stale plane subtype Spaceship
 Hunter's Talent	T1	keywords	class:3:{3}{G}	class:3:{1}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Icefeather Aven	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
-Idris, Soul of the TARDIS	T1	keywords	vanishing	-	mtgish-bug	mtgish#2 Vanishing 3 dropped
 Imperial Hellkite	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Innkeeper's Talent	T1	keywords	class:2:{G} class:3:{3}{G}	class:2:{1}{G} class:3:{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Inspirit, Flagship Vessel	T1	keywords	station:8+	station:1+	mtgish-bug	second STATION threshold repeats RawDigits[0]; script counters_GE<N> matches the printed threshold (i5jb/mtgish#1)
@@ -72,7 +73,6 @@ Minthara, Merciless Soul	T1	keywords	-	ward:*	equivalent	ward {X}: Forge self st
 Mistfire Weaver	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Mondassian Colony Ship	T1	types	spacecraft	spaceship	mtgish-bug	mtgish#4 stale plane subtype Spaceship
 Monk Class	T1	keywords	class:3:{1}{W}{U}	class:3:{W}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Nashi, Illusion Gadgeteer	T1	keywords	-	flash	mtgish-bug	Forge dropped K:Flash and the printed Oracle text has no Flash (Scryfall); the mtgish data still lists it
 Nettling Host	T1	types	rat	horror	digital-variant	Arena-only card; script differs from current Arena text
 Ninja Teen	T1	keywords	class:2:{1}{B} class:3:{B}	class:2:{2}{B} class:3:{1}{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Outfitted Jouster	T1	types	-	human	digital-variant	Arena-only card; script differs from current Arena text

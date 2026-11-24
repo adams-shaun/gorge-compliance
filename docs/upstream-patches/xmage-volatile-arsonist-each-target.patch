@@ -1,0 +1,106 @@
+diff --git a/Mage.Sets/src/mage/cards/v/VolatileArsonist.java b/Mage.Sets/src/mage/cards/v/VolatileArsonist.java
+index ef71160..7934a80 100644
+--- a/Mage.Sets/src/mage/cards/v/VolatileArsonist.java
++++ b/Mage.Sets/src/mage/cards/v/VolatileArsonist.java
+@@ -14,6 +14,7 @@ import mage.constants.SubType;
+ import mage.target.TargetPlayer;
+ import mage.target.common.TargetCreaturePermanent;
+ import mage.target.common.TargetPlaneswalkerPermanent;
++import mage.target.targetpointer.EachTargetPointer;
+ 
+ import java.util.UUID;
+ 
+@@ -40,6 +41,7 @@ public final class VolatileArsonist extends TransformingDoubleFacedCard {
+ 
+         // Whenever Volatile Arsonist attacks, it deals 1 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker.
+         Ability ability = new AttacksTriggeredAbility(new DamageTargetEffect(1)
++                .setTargetPointer(new EachTargetPointer())
+                 .setText("it deals 1 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker"));
+         ability.addTarget(new TargetCreaturePermanent(0, 1));
+         ability.addTarget(new TargetPlayer(0, 1, false));
+@@ -59,7 +61,9 @@ public final class VolatileArsonist extends TransformingDoubleFacedCard {
+         this.getRightHalfCard().addAbility(HasteAbility.getInstance());
+ 
+         // Whenever Dire-Strain Anarchist attacks, it deals 2 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker.
+-        Ability ability2 = new AttacksTriggeredAbility(new DamageTargetEffect(2).setText("it deals 2 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker"));
++        Ability ability2 = new AttacksTriggeredAbility(new DamageTargetEffect(2)
++                .setTargetPointer(new EachTargetPointer())
++                .setText("it deals 2 damage to each of up to one target creature, up to one target player, and/or up to one target planeswalker"));
+         ability2.addTarget(new TargetCreaturePermanent(0, 1));
+         ability2.addTarget(new TargetPlayer(0, 1, false));
+         ability2.addTarget(new TargetPlaneswalkerPermanent(0, 1));
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/mid/VolatileArsonistTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/mid/VolatileArsonistTest.java
+new file mode 100644
+index 0000000..d934e00
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/mid/VolatileArsonistTest.java
+@@ -0,0 +1,69 @@
++package org.mage.test.cards.single.mid;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import mage.counters.CounterType;
++import org.junit.Test;
++import org.mage.test.player.TestPlayer;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * {@link mage.cards.v.VolatileArsonist Volatile Arsonist}
++ * {3}{R}{R}
++ * Creature - Human Werewolf 4/4
++ * Menace, haste
++ * Whenever Volatile Arsonist attacks, it deals 1 damage to each of up to one target creature,
++ * up to one target player, and/or up to one target planeswalker.
++ * Daybound
++ */
++public class VolatileArsonistTest extends CardTestPlayerBase {
++
++    private static final String arsonist = "Volatile Arsonist";
++    private static final String bears = "Grizzly Bears"; // 2/2
++    private static final String jace = "Jace Beleren"; // loyalty 3
++
++    /**
++     * Each of the three targets is dealt 1 damage, not only the creature
++     * (the effect's default first-target pointer reached only the first target).
++     */
++    @Test
++    public void testDamagesEachTarget() {
++        addCard(Zone.BATTLEFIELD, playerA, arsonist);
++        addCard(Zone.BATTLEFIELD, playerB, bears);
++        addCard(Zone.BATTLEFIELD, playerB, jace);
++
++        attack(1, playerA, arsonist, playerB);
++        addTarget(playerA, bears);
++        addTarget(playerA, playerB);
++        addTarget(playerA, jace);
++
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
++        execute();
++
++        assertDamageReceived(playerB, bears, 1);
++        assertLife(playerB, 20 - 1);
++        assertCounterCount(playerB, jace, CounterType.LOYALTY, 3 - 1);
++    }
++
++    /**
++     * Only the player is targeted: the player still takes the damage.
++     */
++    @Test
++    public void testOnlyPlayerTargeted() {
++        addCard(Zone.BATTLEFIELD, playerA, arsonist);
++        addCard(Zone.BATTLEFIELD, playerB, bears);
++
++        attack(1, playerA, arsonist, playerB);
++        addTarget(playerA, TestPlayer.TARGET_SKIP);
++        addTarget(playerA, playerB);
++        addTarget(playerA, TestPlayer.TARGET_SKIP);
++
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.DECLARE_BLOCKERS);
++        execute();
++
++        assertDamageReceived(playerB, bears, 0);
++        assertLife(playerB, 20 - 1);
++    }
++}

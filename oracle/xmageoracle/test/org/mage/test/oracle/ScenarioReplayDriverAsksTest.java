@@ -54,12 +54,13 @@ public final class ScenarioReplayDriverAsksTest {
         alternativeCast();
         promisedGift();
         replacementOrder();
+        loneForcedTarget();
         phyrexianLife();
         wishDeclined();
         optionalMultiCandidateTarget();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
-                + " phyrexian life, wish decline, optional multi-candidate target");
+                + " lone forced target, phyrexian life, wish decline, optional multi-candidate target");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -379,6 +380,61 @@ public final class ScenarioReplayDriverAsksTest {
                 "not a gift ask");
         check(adapter("giftOpponentChoice", types, true, Arrays.asList("PlayerB", "PlayerC"), new ArrayList<String>()) == null,
                 "two opponents is a real choice");
+    }
+
+    /** (k) Black Cat, Cunning Thief and Tishana's Tidebinder: a target ask
+     * whose only legal candidate gorge settled without a decision. Nothing is
+     * scripted for that ask, so the driver takes the lone candidate; a queued
+     * answer naming the candidate, or two candidates, keeps the base's strict
+     * reading. A front skip closes only an "up to" ask whose minimum is met:
+     * on a mandatory ask it belongs to a later ask and must stay queued while
+     * the lone candidate is taken. The override declarations are pinned here;
+     * scripts/xmage-oracle-test-driver-asks.sh additionally guards the funnel
+     * call sites, which reflection over a declared method cannot see. */
+    private static void loneForcedTarget() throws Exception {
+        Class<?> scripted = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer");
+        boolean declares = false;
+        for (Method method : scripted.getDeclaredMethods()) {
+            if (method.getName().equals("chooseTarget") && method.getParameterCount() == 4
+                    && method.getParameterTypes()[1].getName().equals("mage.target.Target")) {
+                declares = true;
+            }
+        }
+        check(declares, "ScriptedChoicePlayer must override chooseTarget to take a lone candidate"
+                + " (Black Cat, Cunning Thief's only opponent; Tishana's Tidebinder's only ability)");
+        Class<?>[] targetTypes = {mage.target.Target.class};
+        check(!(Boolean) adapter("skipCanCloseAsk", targetTypes, new mage.target.TargetPlayer(1, 1, false)),
+                "a mandatory 1/1 ask cannot be closed by a skip");
+        check((Boolean) adapter("skipCanCloseAsk", targetTypes, new mage.target.TargetPlayer(0, 1, false)),
+                "an optional 0/1 ask can be closed by a skip");
+        java.util.UUID bears = java.util.UUID.randomUUID();
+        java.util.UUID shock = java.util.UUID.randomUUID();
+        java.util.function.BiPredicate<java.util.UUID, String> byName =
+                (id, name) -> name.equals(id.equals(bears) ? "Grizzly Bears" : "Shock");
+        Class<?>[] types = {List.class, List.class, boolean.class, java.util.function.BiPredicate.class};
+        List<java.util.UUID> one = new ArrayList<>(Collections.singletonList(bears));
+        check(bears.equals(adapter("loneTargetChoice", types, new ArrayList<String>(), one, true, byName)),
+                "a lone candidate with nothing scripted was not taken");
+        check(bears.equals(adapter("loneTargetChoice", types,
+                        new ArrayList<>(Collections.singletonList("Island")), one, true, byName)),
+                "a lone candidate was lost to a later ask's queued answer");
+        check(adapter("loneTargetChoice", types,
+                        new ArrayList<>(Collections.singletonList("Grizzly Bears")), one, true, byName) == null,
+                "a queued answer naming the candidate was overridden");
+        check(adapter("loneTargetChoice", types,
+                        new ArrayList<>(Arrays.asList("Island", "Grizzly Bears")), one, true, byName) == null,
+                "a queued answer naming the candidate behind another ask's answer (index 1) was left"
+                        + " unconsumed: TestPlayer scans the whole queue, so the base must answer");
+        List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
+        check(adapter("loneTargetChoice", types, skip, one, true, byName) == null,
+                "a front skip was overridden on an ask it can close");
+        check(bears.equals(adapter("loneTargetChoice", types, skip, one, false, byName))
+                        && skip.equals(Collections.singletonList(TestPlayer.TARGET_SKIP)),
+                "a mandatory ask did not take its lone candidate and leave the later ask's skip queued");
+        check(adapter("loneTargetChoice", types, new ArrayList<String>(),
+                        Arrays.asList(bears, shock), true, byName) == null, "a two-candidate ask was guessed");
+        check(adapter("loneTargetChoice", types, new ArrayList<String>(),
+                        new ArrayList<java.util.UUID>(), true, byName) == null, "an empty candidate set produced a pick");
     }
 
     /** (j) NPH Blinding Souleater's {W/P} activation: XMage asks "Pay 2 life
