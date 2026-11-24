@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a00f56e-e558-4239-bc75-fb0af7639042	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:peema-aether-seer:f0t0:s1,f:xs:XP:peema-aether-seer:f0t0:s1	-	-	-	d864b561c9cb	-	d6ec368d327e	-	-	2026-11-24	xproof
 4a00f56e-e558-4239-bc75-fb0af7639042	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:peema-aether-seer:f0t0:s1,f:xs:XP:peema-aether-seer:f0t0:s1	-	-	-	d864b561c9cb	-	d6ec368d327e	-	-	2026-11-24	xproof
 4a00f56e-e558-4239-bc75-fb0af7639042	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:peema-aether-seer:f0t0:s1,f:xs:XP:peema-aether-seer:f0t0:s1	-	-	-	d864b561c9cb	-	d6ec368d327e	-	-	2026-11-24	xproof
-4a01db2e-cd43-4b1a-a480-169018f82501	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a01db2e-cd43-4b1a-a480-169018f82501	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a01db2e-cd43-4b1a-a480-169018f82501	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doom-whisperer:cast:s1,f:xs:XP:doom-whisperer:cast:s1	-	-	-	d864b561c9cb	-	8c89c9134cad	-	-	2026-11-24	xproof
+4a01db2e-cd43-4b1a-a480-169018f82501	f0/a0	Surveil	agreed	-	FX	start	4	0	x:xs:XP:doom-whisperer:cast:s1,f:xs:XP:doom-whisperer:cast:s1	-	-	-	d864b561c9cb	-	8c89c9134cad	-	-	2026-11-24	xproof
 4a080242-412d-4968-ad57-2667dab977f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a09536e-dfc1-4b15-adc1-07ef866ebda0	cast	cast-resolve	agreed	-	X	scen	1	0	Wall Crawl/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a09536e-dfc1-4b15-adc1-07ef866ebda0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
@@ -95,11 +95,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a74cccb-5d75-4362-9c9e-2622096544fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a75ef46-c5ae-4b1a-a681-d439b01f6731	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a782bf9-4051-4613-8852-33b0d85a0edd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a782bf9-4051-4613-8852-33b0d85a0edd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a782bf9-4051-4613-8852-33b0d85a0edd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:famished-paladin:cast:s1,f:xs:XP:famished-paladin:cast:s1	-	-	-	d864b561c9cb	-	1cb1c1fd8b1f	-	-	2026-11-24	xproof
 4a7a55a3-568c-4c31-9460-5b94dc0121d8	cast	cast-resolve	agreed	-	X	scen	1	0	Hungry Ghoul/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a7a55a3-568c-4c31-9460-5b94dc0121d8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hungry Ghoul/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4a7a5ea9-b633-459f-bcd4-40de53afce0e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a7a5ea9-b633-459f-bcd4-40de53afce0e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a7a5ea9-b633-459f-bcd4-40de53afce0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swarm-intelligence:cast:s1,f:xs:XP:swarm-intelligence:cast:s1	-	-	-	d864b561c9cb	-	1eca4fc545a5	-	-	2026-11-24	xproof
+4a7a5ea9-b633-459f-bcd4-40de53afce0e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4a7c7ecc-df72-4da0-af35-dd0af58ec02c	cast	cast-resolve	agreed	-	X	scen	1	0	Mister Hyde, Monster Within/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a7c7ecc-df72-4da0-af35-dd0af58ec02c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mister Hyde, Monster Within/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a7fef1e-3f11-4350-86da-6f1315fedc53	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a8b3316-a01a-4206-bbed-d7aac6c834bd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4a8d41fe-e04d-484b-a7d1-19be311e6ca7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8d41fe-e04d-484b-a7d1-19be311e6ca7	f1/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	cast	cast	agreed	-	X	start	2	0	x:xs:XP:hostage-taker:f0t0:s1	-	-	-	d864b561c9cb	-	9f33c905e38a	-	-	2026-11-24	xproof
 4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:herbal-poultice:f0a0:s1,f:xs:XP:herbal-poultice:f0a0:s1	-	-	-	d864b561c9cb	-	9f33c905e38a	-	-	2026-11-24	xproof
 4a8f2104-57ec-4b23-9857-f26afa5cbcfe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8f2104-57ec-4b23-9857-f26afa5cbcfe	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f019387-4684-493f-80c4-de6023096306	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f0282c6-aceb-4879-8ec8-482d0501204a	cast	cast-resolve	agreed	-	X	scen	1	0	The Clone Saga/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f052d9f-5a40-4eb9-9d8a-e01dec1db191	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f052d9f-5a40-4eb9-9d8a-e01dec1db191	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f052d9f-5a40-4eb9-9d8a-e01dec1db191	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0f0959ff-4464-4738-9d79-5b06f368f144	cast	cast-resolve	agreed	-	X	scen	1	0	Inkling Mascot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f0959ff-4464-4738-9d79-5b06f368f144	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Inkling Mascot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f12aec9-5898-4261-bebd-1b545e0aea68	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-unbound:cast:s1,f:xs:XP:mind-unbound:cast:s1	-	-	-	d864b561c9cb	-	d845d5d7e50a	-	-	2026-11-24	xproof
@@ -44,8 +44,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f41cefc-d6ff-4db7-ba35-502b7e081de1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venser-shaper-savant:f0t0:s1,f:xs:XP:venser-shaper-savant:f0t0:s1	-	-	-	d864b561c9cb	-	fb07358dc673	-	-	2026-11-24	xproof
 0f485ea1-af00-4f6c-8e70-103ba172aa18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f485ea1-af00-4f6c-8e70-103ba172aa18	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f513242-b175-4b4d-a05f-78b1b457a020	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f513242-b175-4b4d-a05f-78b1b457a020	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f513242-b175-4b4d-a05f-78b1b457a020	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firefist-adept:f0t0:s1,f:xs:XP:firefist-adept:f0t0:s1	-	-	-	d864b561c9cb	-	63081def661c	-	-	2026-11-24	xproof
+0f513242-b175-4b4d-a05f-78b1b457a020	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:firefist-adept:f0t0:s1,f:xs:XP:firefist-adept:f0t0:s1	-	-	-	d864b561c9cb	-	63081def661c	-	-	2026-11-24	xproof
 0f51ab3d-aae9-4d8d-a881-e8835dcd7866	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f539127-535f-4e0d-abaa-e884521098d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gatecreeper-vine:f0t0:s1,f:xs:XP:gatecreeper-vine:f0t0:s1	-	-	-	d864b561c9cb	-	49855b376e46	-	-	2026-11-24	xproof
 0f539127-535f-4e0d-abaa-e884521098d2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gatecreeper-vine:f0t0:s1,f:xs:XP:gatecreeper-vine:f0t0:s1	-	-	-	d864b561c9cb	-	49855b376e46	-	-	2026-11-24	xproof
@@ -130,8 +130,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fb26acd-891d-471d-98d8-73c6f940052b	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 0fb2c61a-9e74-4ee2-810a-b77a3b45f446	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fb2c61a-9e74-4ee2-810a-b77a3b45f446	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fb90df6-a62b-4a9f-ae79-db71d40466ce	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fb90df6-a62b-4a9f-ae79-db71d40466ce	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0fb90df6-a62b-4a9f-ae79-db71d40466ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grand-warlord-radha:cast:s1,f:xs:XP:grand-warlord-radha:cast:s1	-	-	-	d864b561c9cb	-	7fc5faa30b1c	-	-	2026-11-24	xproof
+0fb90df6-a62b-4a9f-ae79-db71d40466ce	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:grand-warlord-radha:cast:s1,f:xs:XP:grand-warlord-radha:cast:s1	-	-	-	d864b561c9cb	-	7fc5faa30b1c	-	-	2026-11-24	xproof
 0fb94fa4-2aff-4636-ac1b-ed39dc9451a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fb94fa4-2aff-4636-ac1b-ed39dc9451a6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fb9a8a2-4331-4259-9460-a37397554962	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bringer-of-the-last-gift:f0t0:s1,f:xs:XP:bringer-of-the-last-gift:f0t0:s1	-	-	-	25696bf19d5b	-	ed0782736afa	-	-	2026-11-24	xproof

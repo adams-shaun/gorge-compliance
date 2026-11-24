@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d641bf6-0f93-4189-8dc1-ec7ea446dade	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Tranquil Cove/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d641bf6-0f93-4189-8dc1-ec7ea446dade	land	play-land	agreed	-	FX	scen	2	0	Tranquil Cove/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d66c2b9-6011-4168-b468-0bde50bac37e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warden-of-the-wall:cast:s1,f:xs:XP:warden-of-the-wall:cast:s1	-	-	-	d864b561c9cb	-	8027aa905d68	-	-	2026-11-24	xproof
-5d66c2b9-6011-4168-b468-0bde50bac37e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d66c2b9-6011-4168-b468-0bde50bac37e	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:warden-of-the-wall:f0a0:s2,f:xs:XP:warden-of-the-wall:f0a0:s2	-	-	-	d864b561c9cb	-	8027aa905d68	-	-	2026-11-24	xproof
 5d6f75f1-dd9c-4d94-aea8-3bdec41eaa29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d748bce-dff8-46fa-a3d1-633863b7bbff	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:kiora-the-rising-tide:f0t0:s2,f:xs:XP:kiora-the-rising-tide:f0t0:s2	-	-	-	e07cf3a05ba5	-	bb6aa76d83aa	-	-	2026-11-24	xproof
 5d748bce-dff8-46fa-a3d1-633863b7bbff	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:kiora-the-rising-tide:f0t0:s2,f:xs:XP:kiora-the-rising-tide:f0t0:s2	-	-	-	e07cf3a05ba5	-	bb6aa76d83aa	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5da2e5c7-ec04-4f1f-bb2f-7572f877393c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5da2e5c7-ec04-4f1f-bb2f-7572f877393c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:benalish-veteran:f0t0:s1,f:xs:XP:benalish-veteran:f0t0:s1	-	-	-	d864b561c9cb	-	0855d3c81a2d	-	-	2026-11-24	xproof
 5da7eea8-bb9e-47ce-a554-8a1ee058bd7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5da7eea8-bb9e-47ce-a554-8a1ee058bd7a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5da7eea8-bb9e-47ce-a554-8a1ee058bd7a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5da8b86a-a7be-4fb5-9a45-a47d5cb4b372	cast	cast-resolve	agreed	-	X	scen	1	0	Skyserpent Seeker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5da8b86a-a7be-4fb5-9a45-a47d5cb4b372	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Skyserpent Seeker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5da8b86a-a7be-4fb5-9a45-a47d5cb4b372	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Skyserpent Seeker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

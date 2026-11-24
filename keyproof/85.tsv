@@ -9,8 +9,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 850bb6f7-48d3-4d65-9220-b0bec5ee6b64	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 850e2dbd-b904-41b9-8ffe-0aa562837bde	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 850e2dbd-b904-41b9-8ffe-0aa562837bde	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-850eb3c3-029b-49b0-91a9-6daeb1b3a9e8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-850eb3c3-029b-49b0-91a9-6daeb1b3a9e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+850eb3c3-029b-49b0-91a9-6daeb1b3a9e8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:adeliz-the-cinder-wind:cast:s1	-	-	-	d864b561c9cb	-	a68a78fd8835	-	-	2026-11-24	xproof
+850eb3c3-029b-49b0-91a9-6daeb1b3a9e8	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 850fe8ad-f6b8-4d01-a94b-2b69adc3d8f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8512bd08-ecba-4e0e-b65c-8209764a65e5	cast	cast-resolve	agreed	-	FX	scen	2	0	Cloud, Planet's Champion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8512bd08-ecba-4e0e-b65c-8209764a65e5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cloud, Planet's Champion/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8517e5f4-89c5-4879-9b4f-b35e268798df	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:aetherstream-leopard:cast:s1,f:xs:XP:aetherstream-leopard:cast:s1	-	-	-	d864b561c9cb	-	308ea4644dde	-	-	2026-11-24	xproof
 8517e5f4-89c5-4879-9b4f-b35e268798df	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:aetherstream-leopard:cast:s1,f:xs:XP:aetherstream-leopard:cast:s1	-	-	-	d864b561c9cb	-	308ea4644dde	-	-	2026-11-24	xproof
 8517e5f4-89c5-4879-9b4f-b35e268798df	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:aetherstream-leopard:f0t1:s1,f:xs:XP:aetherstream-leopard:f0t1:s1	-	-	-	d864b561c9cb	-	308ea4644dde	-	-	2026-11-24	xproof
-851be993-35d7-4566-96a0-3fe84d17979e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+851be993-35d7-4566-96a0-3fe84d17979e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanguine-sacrament:cast:s1,f:xs:XP:sanguine-sacrament:cast:s1	-	-	-	d864b561c9cb	-	30c59a8279ac	-	-	2026-11-24	xproof
 8520ee67-439b-4f15-838b-420bacbb8b13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8520ee67-439b-4f15-838b-420bacbb8b13	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8520ee67-439b-4f15-838b-420bacbb8b13	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85308fb8-e5a1-4ff1-8606-283cf2056895	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 853587be-9709-43a4-81c9-5b6dabe523cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 853587be-9709-43a4-81c9-5b6dabe523cf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85364398-923c-4ee9-8519-576fce1c26f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85364398-923c-4ee9-8519-576fce1c26f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+85364398-923c-4ee9-8519-576fce1c26f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skittering-surveyor:f0t0:s1,f:xs:XP:skittering-surveyor:f0t0:s1	-	-	-	d864b561c9cb	-	250af314ce8b	-	-	2026-11-24	xproof
+85364398-923c-4ee9-8519-576fce1c26f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skittering-surveyor:f0t0:s1,f:xs:XP:skittering-surveyor:f0t0:s1	-	-	-	d864b561c9cb	-	250af314ce8b	-	-	2026-11-24	xproof
 8537fc2c-c027-4440-bff4-d046fc198428	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8537fc2c-c027-4440-bff4-d046fc198428	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8537fc2c-c027-4440-bff4-d046fc198428	f0/a1	Pump	agreed	-	F	start	2	0	f:xs:XP:golem-artisan:f0a1:s1	-	-	-	d864b561c9cb	-	6c3de9e02ad3	-	-	2026-11-24	xproof

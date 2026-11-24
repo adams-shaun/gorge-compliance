@@ -110,8 +110,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a836332-5905-4afa-a442-47d0bcf8acea	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a8511b9-ed7d-4e33-9c2f-96b9a4c535e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a85402a-e3be-4ebb-8001-9d9a20dde7e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a85402a-e3be-4ebb-8001-9d9a20dde7e8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a85402a-e3be-4ebb-8001-9d9a20dde7e8	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0a85402a-e3be-4ebb-8001-9d9a20dde7e8	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0a85402a-e3be-4ebb-8001-9d9a20dde7e8	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0a88d1b1-ac3c-41da-b3f5-b689af0e45d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a8c1002-e237-42d8-b152-aefecab283d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a8c1002-e237-42d8-b152-aefecab283d0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0aaefa00-86f4-4e12-87ae-3a362d862fa4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ab090db-f8fc-42ff-95db-e9370796db97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ab0be8e-d6be-411b-827f-584bb5d03766	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ab0be8e-d6be-411b-827f-584bb5d03766	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ab0be8e-d6be-411b-827f-584bb5d03766	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:razaketh-s-rite:cast:s1,f:xs:XP:razaketh-s-rite:cast:s1	-	-	-	d864b561c9cb	-	3d41cb5018bd	-	-	2026-11-24	xproof
 0ab43fc3-53ec-4686-873d-8dbeee2634f4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ab56978-7add-4427-b10d-4f59ab4b2c5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ab5fde8-e7db-4265-81c6-2a6488ba56c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

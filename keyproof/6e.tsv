@@ -53,8 +53,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e48981b-8971-4b7c-ae05-29c7e4091a05	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e4bf4ee-317e-4c31-b121-6efbc6ae4fcf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e4bf4ee-317e-4c31-b121-6efbc6ae4fcf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e51a0b2-e07f-4c9d-b055-dd1dcd2e29d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e51a0b2-e07f-4c9d-b055-dd1dcd2e29d4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6e51a0b2-e07f-4c9d-b055-dd1dcd2e29d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skilled-animator:f0t0:s1,f:xs:XP:skilled-animator:f0t0:s1	-	-	-	d864b561c9cb	-	f354c9fd0087	-	-	2026-11-24	xproof
+6e51a0b2-e07f-4c9d-b055-dd1dcd2e29d4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skilled-animator:f0t0:s1,f:xs:XP:skilled-animator:f0t0:s1	-	-	-	d864b561c9cb	-	f354c9fd0087	-	-	2026-11-24	xproof
 6e52e48f-b7a0-4195-8fff-8baed7b7d3fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e52e48f-b7a0-4195-8fff-8baed7b7d3fc	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6e52e48f-b7a0-4195-8fff-8baed7b7d3fc	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -159,8 +159,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ee431f3-64ec-4015-8f5a-9c2ac6004ebd	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6ee51134-c4ad-4101-8ce2-23dde9359cd4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ee51134-c4ad-4101-8ce2-23dde9359cd4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6ee71432-a44d-495e-86ea-d495d891c331	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6ee71432-a44d-495e-86ea-d495d891c331	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6ee71432-a44d-495e-86ea-d495d891c331	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:verdant-sun-s-avatar:f0t0:s1,f:xs:XP:verdant-sun-s-avatar:f0t0:s1	-	-	-	d864b561c9cb	-	69ec9d5e61c6	-	-	2026-11-24	xproof
+6ee71432-a44d-495e-86ea-d495d891c331	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:verdant-sun-s-avatar:f0t0:s1,f:xs:XP:verdant-sun-s-avatar:f0t0:s1	-	-	-	d864b561c9cb	-	69ec9d5e61c6	-	-	2026-11-24	xproof
 6ee7b00b-b875-48e2-92f2-889c154b0f82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ee9802a-7a44-49c7-93d9-f75c4d42e71e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanctum-gargoyle:f0t0:s1,f:xs:XP:sanctum-gargoyle:f0t0:s1	-	-	-	8a1b1a193ec0	-	e77f415089d8	-	-	2026-11-24	xproof
 6ee9802a-7a44-49c7-93d9-f75c4d42e71e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sanctum-gargoyle:f0t0:s1,f:xs:XP:sanctum-gargoyle:f0t0:s1	-	-	-	8a1b1a193ec0	-	e77f415089d8	-	-	2026-11-24	xproof

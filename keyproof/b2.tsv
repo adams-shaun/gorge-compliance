@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 b20302d9-eb45-4895-9597-cf3af1abce56	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b20671e6-d740-4ef6-b408-bf8a0465c0da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b20671e6-d740-4ef6-b408-bf8a0465c0da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b20671e6-d740-4ef6-b408-bf8a0465c0da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:legion-conquistador:f0t0:s1,f:xs:XP:legion-conquistador:f0t0:s1	-	-	-	d864b561c9cb	-	f0b5b7791222	-	-	2026-11-24	xproof
+b20671e6-d740-4ef6-b408-bf8a0465c0da	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:legion-conquistador:f0t0:s1,f:xs:XP:legion-conquistador:f0t0:s1	-	-	-	d864b561c9cb	-	f0b5b7791222	-	-	2026-11-24	xproof
 b206d3bc-1203-4f00-997e-5da706346a24	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hand-of-emrakul:cast:s1	-	-	-	d864b561c9cb	-	73a4432c2149	-	-	2026-11-24	xproof
 b206d3bc-1203-4f00-997e-5da706346a24	f0/t0	Attacks/Annihilator	agreed	-	FX	start	2	0	x:xs:XP:hand-of-emrakul:f0t0:s1,f:xs:XP:hand-of-emrakul:f0t0:s1	-	-	-	d864b561c9cb	-	73a4432c2149	-	-	2026-11-24	xproof
 b20860da-2e71-414a-a512-1cce7ba64079	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -63,10 +63,10 @@ b255e13d-01b2-4348-80bd-8d9a8f29be91	cast	cast-resolve	agreed	-	X	scen	1	0	Livin
 b255e13d-01b2-4348-80bd-8d9a8f29be91	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Living Brain, Mechanical Marvel/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b25962ab-21b5-47f9-bdef-35b911b45671	cast	cast	agreed	-	F	start	2	0	f:xs:XP:grave-birthing:cast:s1	-	-	-	d864b561c9cb	-	d6ac9d72106f	-	-	2026-11-24	xproof
 b259f4e4-04a9-40e0-85e9-34b4b74ee388	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b25bea73-7444-4ee2-8022-611461506117	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b25bea73-7444-4ee2-8022-611461506117	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b25bea73-7444-4ee2-8022-611461506117	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b25bea73-7444-4ee2-8022-611461506117	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b25bea73-7444-4ee2-8022-611461506117	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-adversary-of-tyrants:cast:s1,f:xs:XP:ajani-adversary-of-tyrants:cast:s1	-	-	-	d864b561c9cb	-	19d473acb901	-	-	2026-11-24	xproof
+b25bea73-7444-4ee2-8022-611461506117	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:ajani-adversary-of-tyrants:cast:s1,f:xs:XP:ajani-adversary-of-tyrants:cast:s1	-	-	-	d864b561c9cb	-	19d473acb901	-	-	2026-11-24	xproof
+b25bea73-7444-4ee2-8022-611461506117	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b25bea73-7444-4ee2-8022-611461506117	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b25ccb64-e114-4d54-a07a-c8cd4560b511	cast	cast-resolve	agreed	-	X	scen	1	0	Snowmelt Stag/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b25ccb64-e114-4d54-a07a-c8cd4560b511	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Snowmelt Stag/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b25ccb64-e114-4d54-a07a-c8cd4560b511	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Snowmelt Stag/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ b2c6aa39-2d2a-459c-a555-fb48ba993373	f0/a0	Mana	agreed	-	FX	start	7	0	x:xs:XP:de
 b2c6aa39-2d2a-459c-a555-fb48ba993373	land	land	agreed	-	FX	start	4	0	x:xs:XP:marang-river-regent-coil-and-catch:f0t0:s2,f:xs:XP:marang-river-regent-coil-and-catch:f0t0:s2	-	-	-	267e485f6204	-	e590434de75a	-	-	2026-11-24	xproof
 b2c840a7-24b4-4ae3-a13f-ed524e18d488	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b2c9f074-57ca-4709-976d-f432f632483f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b2ca8824-6bd8-4aa3-b156-618118eb98a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b2ca8824-6bd8-4aa3-b156-618118eb98a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-mist:cast:s1,f:xs:XP:wall-of-mist:cast:s1	-	-	-	d864b561c9cb	-	d55ff6b7a2df	-	-	2026-11-24	xproof
 b2cede1a-3a76-4658-bd12-e9df464d61e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b2d19232-9a80-4ea2-9aa7-c47b4719106c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b2d19232-9a80-4ea2-9aa7-c47b4719106c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

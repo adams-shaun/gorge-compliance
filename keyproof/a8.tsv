@@ -4,7 +4,7 @@ a80519c4-f778-4b8e-9920-64013e98c95b	cast	cast-resolve	agreed	-	X	scen	1	0	Get a
 a8052556-8962-4130-86a8-6fb7b6a324f7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8052556-8962-4130-86a8-6fb7b6a324f7	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a80ea391-54d1-4b61-95a3-f8deb4cbe842	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a80ea391-54d1-4b61-95a3-f8deb4cbe842	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a80ea391-54d1-4b61-95a3-f8deb4cbe842	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a8135179-51ef-454e-98ff-69137440339f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a814d4c7-2ec0-4278-8704-23b39dcead4e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a814d4c7-2ec0-4278-8704-23b39dcead4e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -108,7 +108,7 @@ a89994d0-2110-4ca0-abfc-5dd232981acf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a89994d0-2110-4ca0-abfc-5dd232981acf	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:mortis-dogs:f0t0:s1,f:xs:XP:mortis-dogs:f0t0:s1	-	-	-	d864b561c9cb	-	99e4a7959832	-	-	2026-11-24	xproof
 a89994d0-2110-4ca0-abfc-5dd232981acf	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mortis-dogs:f0t1:s1,f:xs:XP:mortis-dogs:f0t1:s1	-	-	-	d864b561c9cb	-	99e4a7959832	-	-	2026-11-24	xproof
 a89ad91e-2bc2-45f4-b32c-fb2b67a2019e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a89ad91e-2bc2-45f4-b32c-fb2b67a2019e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a89ad91e-2bc2-45f4-b32c-fb2b67a2019e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a89b0fd5-84b2-487c-8b03-e78d97276fd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a89b0fd5-84b2-487c-8b03-e78d97276fd3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a89ebf63-63c9-42cd-98b4-ec852cd9b0a8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:grisly-salvage:cast:s1	-	-	-	d864b561c9cb	-	219876c3f667	-	-	2026-11-24	xproof
@@ -121,9 +121,9 @@ a8a7a3b7-015c-4fbd-8b90-e0ddf71663e4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Serah
 a8a7a3b7-015c-4fbd-8b90-e0ddf71663e4	static#0.0	static#0.0	diagnosed	-	-	scen	0	0	-	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8a7a3b7-015c-4fbd-8b90-e0ddf71663e4	static#1.0	static#1.0	diagnosed	-	-	scen	0	0	-	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8a7a3b7-015c-4fbd-8b90-e0ddf71663e4	static#1.1	static#1.1	agreed	-	X	scen	1	0	Serah Farron/static#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a8a8407c-d0e3-4311-82ed-1ab1f75159d9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8a8407c-d0e3-4311-82ed-1ab1f75159d9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8a8407c-d0e3-4311-82ed-1ab1f75159d9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a8a8407c-d0e3-4311-82ed-1ab1f75159d9	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+a8a8407c-d0e3-4311-82ed-1ab1f75159d9	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+a8a8407c-d0e3-4311-82ed-1ab1f75159d9	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hunter-s-talent:f0t0:s2,f:xs:XP:hunter-s-talent:f0t0:s2	-	-	-	e07cf3a05ba5	-	80ea1df0c26f	-	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hunter's Talent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8a9b103-0cb8-4810-a2d7-42f6a10f80bd	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hunter's Talent/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -167,7 +167,7 @@ a8c70dab-1e27-4a9c-bd2d-910d5720d02d	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Grea
 a8c70dab-1e27-4a9c-bd2d-910d5720d02d	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Great Hall of the Biblioplex/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8c70dab-1e27-4a9c-bd2d-910d5720d02d	land	play-land	agreed	-	X	scen	1	0	Great Hall of the Biblioplex/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8c9f91a-b1e7-451d-b6db-ae865e2b853c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8cd3a52-1056-4664-ae55-eb0ba3a43a15	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a8cd3a52-1056-4664-ae55-eb0ba3a43a15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fiery-intervention:cast:s1,f:xs:XP:fiery-intervention:cast:s1	-	-	-	d864b561c9cb	-	ff7f61325d21	-	-	2026-11-24	xproof
 a8cdcaa0-8e25-4c17-b5ce-16f72b535123	cast	cast-resolve	agreed	-	X	scen	1	0	Thoughtweft Charge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 a8ce90be-f0ab-4f8d-896a-cde8aaf24579	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8ce90be-f0ab-4f8d-896a-cde8aaf24579	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -195,7 +195,7 @@ a8f25e67-2112-4355-9298-363ed04a5cb8	cast	cast-resolve	agreed	-	X	scen	1	0	Ultro
 a8f25e67-2112-4355-9298-363ed04a5cb8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ultron, Artificial Malevolence/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a8f53018-c496-41f3-bc3f-3c4703b9e4e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8f5440e-5d4b-420a-8cfd-27a3c72be0d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8f5440e-5d4b-420a-8cfd-27a3c72be0d2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a8f5440e-5d4b-420a-8cfd-27a3c72be0d2	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-clancaller:f0a0:s1,f:xs:XP:elvish-clancaller:f0a0:s1	-	-	-	d864b561c9cb	-	0e71f3fd56ca	-	-	2026-11-24	xproof
 a8f5a11f-3291-4ee9-a96d-4fa38af14932	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8f5cfa7-4956-4182-8e44-acf3493239f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	cast	cast-resolve	agreed	-	X	scen	1	0	Spectral Sailor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

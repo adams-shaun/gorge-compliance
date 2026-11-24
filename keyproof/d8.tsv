@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 d804b0e5-785a-4e6e-9fe7-38b8add826fa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d8053319-b2a0-4df3-9787-3591d12cf1b9	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d80562c2-cf90-43a4-9721-28da40fdfeed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d80562c2-cf90-43a4-9721-28da40fdfeed	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d80562c2-cf90-43a4-9721-28da40fdfeed	f0/t0	NULL	owed	refused:no-generator:trigger:Explores	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d8067f42-68c0-42da-a1d6-859953939555	cast	cast-resolve	agreed	-	X	scen	1	0	Moonrise Cleric/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8067f42-68c0-42da-a1d6-859953939555	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Moonrise Cleric/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8067f42-68c0-42da-a1d6-859953939555	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Moonrise Cleric/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ d895df97-e7e7-4f15-a79b-0ce8f1a252d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d895df97-e7e7-4f15-a79b-0ce8f1a252d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d89aa87a-d59a-41e2-b92f-15c9bc6d3d13	cast	cast-resolve	agreed	-	X	scen	1	0	Project Deathlok Soldier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d89aa87a-d59a-41e2-b92f-15c9bc6d3d13	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Project Deathlok Soldier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d89bbfe7-e7ef-4f1c-a6b5-6d8ef4079daa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d89bbfe7-e7ef-4f1c-a6b5-6d8ef4079daa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d89bbfe7-e7ef-4f1c-a6b5-6d8ef4079daa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavalry-drillmaster:f0t0:s1,f:xs:XP:cavalry-drillmaster:f0t0:s1	-	-	-	d864b561c9cb	-	8b70709f3d59	-	-	2026-11-24	xproof
+d89bbfe7-e7ef-4f1c-a6b5-6d8ef4079daa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cavalry-drillmaster:f0t0:s1,f:xs:XP:cavalry-drillmaster:f0t0:s1	-	-	-	d864b561c9cb	-	8b70709f3d59	-	-	2026-11-24	xproof
 d89f34e4-8628-4faf-89e6-c9c16023ae8b	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 d89f34e4-8628-4faf-89e6-c9c16023ae8b	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 d8a04142-1d28-4c2e-b2d5-da88b2199678	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

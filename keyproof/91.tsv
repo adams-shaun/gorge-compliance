@@ -30,8 +30,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 912164c2-b4d4-42e3-a10e-903b8c7b2e6d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9123086e-ae67-46c5-aed5-6366e2fe5a8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9123086e-ae67-46c5-aed5-6366e2fe5a8c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9128b952-bd36-4a3a-9566-34d999305991	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9128b952-bd36-4a3a-9566-34d999305991	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9128b952-bd36-4a3a-9566-34d999305991	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jade-guardian:f0t0:s1,f:xs:XP:jade-guardian:f0t0:s1	-	-	-	d864b561c9cb	-	6e39b5469626	-	-	2026-11-24	xproof
+9128b952-bd36-4a3a-9566-34d999305991	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jade-guardian:f0t0:s1,f:xs:XP:jade-guardian:f0t0:s1	-	-	-	d864b561c9cb	-	6e39b5469626	-	-	2026-11-24	xproof
 912bc348-9ba3-4001-90a8-104d2bb17527	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 912bc348-9ba3-4001-90a8-104d2bb17527	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91320afd-1d42-4cb5-ae40-4eed2fa91dfe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kavu-climber:f0t0:s1,f:xs:XP:kavu-climber:f0t0:s1	-	-	-	25696bf19d5b	-	890583936839	-	-	2026-11-24	xproof
@@ -90,7 +90,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 915d70ac-46ce-41d0-a137-f17e7aaea87d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Wanderbrine Trapper/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91617de2-4aab-4efc-94a1-053dfaac3ae5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91638137-06ba-4b21-b088-28d2b4d1d8da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91638137-06ba-4b21-b088-28d2b4d1d8da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91638137-06ba-4b21-b088-28d2b4d1d8da	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9167998d-5cac-47d7-99f2-f38122f7b8e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91693cad-3233-440a-b2f0-fe4d8b17ed42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 916bd025-c44f-49c9-8d76-4b7b2f9a8ba3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:night-of-souls-betrayal:cast:s1,f:xs:XP:night-of-souls-betrayal:cast:s1	-	-	-	64a08ba7d913	-	e0a7554306ad	-	-	2026-11-24	xproof
@@ -151,8 +151,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91babc5f-ebeb-4894-8c35-b0f60249cb80	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Quintorius Kand/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91c0a76e-3992-437f-b85a-97b0b4adbb84	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91c2f488-2b49-4499-8d5d-c1aff73a4b57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shattered-dreams:cast:s1,f:xs:XP:shattered-dreams:cast:s1	-	-	-	25696bf19d5b	-	19023dc926aa	-	-	2026-11-24	xproof
-91c380f6-2c41-48b7-9f07-104e8659e397	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91c380f6-2c41-48b7-9f07-104e8659e397	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91c380f6-2c41-48b7-9f07-104e8659e397	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:adanto-vanguard:cast:s1,f:xs:XP:adanto-vanguard:cast:s1	-	-	-	d864b561c9cb	-	de8d487a0b9d	-	-	2026-11-24	xproof
+91c380f6-2c41-48b7-9f07-104e8659e397	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:adanto-vanguard:cast:s1,f:xs:XP:adanto-vanguard:cast:s1	-	-	-	d864b561c9cb	-	de8d487a0b9d	-	-	2026-11-24	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	cast	cast-resolve	agreed	-	X	scen	1	0	Generous Plunderer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Generous Plunderer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Generous Plunderer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 821e8648-222c-4b33-a8bd-e8bfff7dcd9e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:quistis-trepe:f0t0:s2,f:xs:XP:quistis-trepe:f0t0:s2	-	-	-	267e485f6204	-	9f9f5d67205f	-	-	2026-11-24	xproof
 821f4ff3-ebc7-4f47-ac35-d00093b6d35b	cast	cast-resolve	agreed	-	X	scen	1	0	Possessed Goat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 821f4ff3-ebc7-4f47-ac35-d00093b6d35b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Possessed Goat/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8220c5fa-28dc-40d0-a38a-d8eefc2795d6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8220c5fa-28dc-40d0-a38a-d8eefc2795d6	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:stensia-bloodhall:f0a0:s2,f:xs:XP:stensia-bloodhall:f0a0:s2	-	-	-	d864b561c9cb	-	46a59d644329	-	-	2026-11-24	xproof
 8220c5fa-28dc-40d0-a38a-d8eefc2795d6	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:stensia-bloodhall:f0a1:s1,f:xs:XP:stensia-bloodhall:f0a1:s1	-	-	-	d864b561c9cb	-	46a59d644329	-	-	2026-11-24	xproof
 8220c5fa-28dc-40d0-a38a-d8eefc2795d6	land	land	agreed	-	FX	start	2	0	x:xs:XP:stensia-bloodhall:land:s1,f:xs:XP:stensia-bloodhall:land:s1	-	-	-	d864b561c9cb	-	46a59d644329	-	-	2026-11-24	xproof
 82246ef2-4267-4daf-9463-908c2e142e7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82bdf9cb-61fe-4eaf-8762-c32002403d96	static#0.0	static#0.0	agreed	-	X	scen	1	0	Magnificent End/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82c583ab-8158-4074-a3ff-b7a05ecc8ab1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82c583ab-8158-4074-a3ff-b7a05ecc8ab1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82c5ec8e-27be-475a-9921-ad61209fd022	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:unknown-shores:f0a1:s1,f:xs:XP:unknown-shores:f0a1:s1	-	-	-	d864b561c9cb	-	43c6ada91fbe	-	-	2026-11-24	xproof
+82c5ec8e-27be-475a-9921-ad61209fd022	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:unknown-shores:f0a1:s2,f:xs:XP:unknown-shores:f0a1:s2	-	-	-	d864b561c9cb	-	43c6ada91fbe	-	-	2026-11-24	xproof
 82c5ec8e-27be-475a-9921-ad61209fd022	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82c5ec8e-27be-475a-9921-ad61209fd022	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82c8f5dd-563d-4fd0-bd43-7ee2001d3777	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -203,4 +203,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82fefb82-a436-488d-8ecd-594686117e34	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Foggy Swamp Vinebender/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82fefb82-a436-488d-8ecd-594686117e34	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Foggy Swamp Vinebender/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82fefb82-a436-488d-8ecd-594686117e34	static#0.0	static#0.0	agreed	-	X	scen	1	0	Foggy Swamp Vinebender/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-82ff4500-b118-4ce7-9f7c-92661328b242	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+82ff4500-b118-4ce7-9f7c-92661328b242	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pardic-wanderer:cast:s1,f:xs:XP:pardic-wanderer:cast:s1	-	-	-	d864b561c9cb	-	c965a9a85574	-	-	2026-11-24	xproof

@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f0c055f-f614-44b0-9374-c53541f89185	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 4f0ec90b-e5a0-49bd-8fa0-9be6ba259a62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f10b164-6d36-4935-92e7-53be73ac4c8a	cast	cast-resolve	agreed	-	X	scen	1	0	Orbital Plunge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4f142d99-8146-4b16-a2cc-ac03da19b960	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f142d99-8146-4b16-a2cc-ac03da19b960	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ursine-champion:cast:s1,f:xs:XP:ursine-champion:cast:s1	-	-	-	d864b561c9cb	-	b446e6aa811c	-	-	2026-11-24	xproof
 4f142d99-8146-4b16-a2cc-ac03da19b960	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f14bf38-13ec-461d-8a1b-340843b5d95d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f14bf38-13ec-461d-8a1b-340843b5d95d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -20,8 +20,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f1b68d7-7d16-4bb1-af5f-f1708b23ca73	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f1b68d7-7d16-4bb1-af5f-f1708b23ca73	static#0.0	static#0.0	agreed	-	X	scen	1	0	Celestial Armor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f21a664-96e3-49be-ba9f-4af4b6bd7475	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f25b125-1ded-4a34-9ed1-e6ce087ec48d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f25b125-1ded-4a34-9ed1-e6ce087ec48d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f25b125-1ded-4a34-9ed1-e6ce087ec48d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:barrier-of-bones:cast:s1,f:xs:XP:barrier-of-bones:cast:s1	-	-	-	d864b561c9cb	-	e936c1a843d3	-	-	2026-11-24	xproof
+4f25b125-1ded-4a34-9ed1-e6ce087ec48d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:barrier-of-bones:cast:s1,f:xs:XP:barrier-of-bones:cast:s1	-	-	-	d864b561c9cb	-	e936c1a843d3	-	-	2026-11-24	xproof
 4f27abe8-3e98-4bb8-afdb-e4b718d83032	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f27abe8-3e98-4bb8-afdb-e4b718d83032	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f27abe8-3e98-4bb8-afdb-e4b718d83032	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -84,9 +84,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f63d306-cc14-405c-8424-d8990c670c74	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f65e6a9-0d90-44b9-9b76-00814db2dbd8	cast	cast-resolve	agreed	-	FX	scen	2	0	Laughing Mad/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f66489c-5a19-40ad-9126-461fa8231f1b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4f66d82a-492f-4638-9f77-190d4a33ad7f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f69d2f9-c16a-4752-9026-794a29d73af8	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

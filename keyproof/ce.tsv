@@ -41,8 +41,8 @@ ce2fc562-7a71-4846-bfef-0a7c5f6c1ff3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ce2fc562-7a71-4846-bfef-0a7c5f6c1ff3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce31cfc4-a109-4cf5-b8f9-210267a98114	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce35f262-b93f-4409-8b33-26a7ed7abac8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce35f262-b93f-4409-8b33-26a7ed7abac8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce35f262-b93f-4409-8b33-26a7ed7abac8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ce35f262-b93f-4409-8b33-26a7ed7abac8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ce35f262-b93f-4409-8b33-26a7ed7abac8	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elenda-the-dusk-rose:f0t1:s1,f:xs:XP:elenda-the-dusk-rose:f0t1:s1	-	-	-	d864b561c9cb	-	6f3d48394f40	-	-	2026-11-24	xproof
 ce36a450-68a6-4519-a9f0-0e3b772054eb	cast	cast-resolve	agreed	-	X	scen	1	0	Alania's Pathmaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ce36a450-68a6-4519-a9f0-0e3b772054eb	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce4570eb-f637-45d1-afbc-f11357c09bf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ ce82aa79-bb50-47bc-84f5-eae30249c7a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ce855b35-4a31-4e42-9dbc-fea8d244fbe0	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce855b35-4a31-4e42-9dbc-fea8d244fbe0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grief-tyrant:f0t0:s1,f:xs:XP:grief-tyrant:f0t0:s1	-	-	-	8a1b1a193ec0	-	da1de4804e98	-	-	2026-11-24	xproof
 ce873790-de4d-4ba3-8023-c44306ba3ff8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce873790-de4d-4ba3-8023-c44306ba3ff8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ce873790-de4d-4ba3-8023-c44306ba3ff8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:deathbloom-thallid:f0t0:s1,f:xs:XP:deathbloom-thallid:f0t0:s1	-	-	-	d864b561c9cb	-	5ec81563a5ab	-	-	2026-11-24	xproof
 ce8750d4-1b74-4b02-afd8-6b639c1a9a78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carrion-wall:cast:s1,f:xs:XP:carrion-wall:cast:s1	-	-	-	25696bf19d5b	-	57f2a316acec	-	-	2026-11-24	xproof
 ce8750d4-1b74-4b02-afd8-6b639c1a9a78	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:carrion-wall:f0a0:s1,f:xs:XP:carrion-wall:f0a0:s1	-	-	-	d864b561c9cb	-	57f2a316acec	-	-	2026-11-24	xproof
 ce87e5ed-2562-4563-9a5b-bd53c04ec4a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,7 +128,7 @@ ce979f36-84f2-4419-b400-971263494cc6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ce995d3f-be7c-4d2a-8ec4-c7f7f831f0bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce995d3f-be7c-4d2a-8ec4-c7f7f831f0bf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce9d3382-23ca-4d35-ad30-5e2b75517012	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce9d3382-23ca-4d35-ad30-5e2b75517012	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ce9d3382-23ca-4d35-ad30-5e2b75517012	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cea09261-41a2-43e5-bf43-c4097e6615c6	cast	cast-resolve	agreed	-	FX	scen	2	0	Appeal to Eirdu/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 cea73a4b-e10a-4517-a92b-24a08321009f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cea79fa0-2a76-41f3-846f-4d1a6ff5f629	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

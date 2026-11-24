@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 ff0086e0-706f-4474-9b5e-a1591235bf9b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff01b408-6d17-40a3-9efd-a1b341ec1307	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ff03a063-9634-4746-a208-9dbcde5c6bdb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ff03a063-9634-4746-a208-9dbcde5c6bdb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:overflowing-insight:cast:s1,f:xs:XP:overflowing-insight:cast:s1	-	-	-	d864b561c9cb	-	af6d025377f6	-	-	2026-11-24	xproof
 ff052137-2ffd-4399-8fdd-906f8e2041f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff052137-2ffd-4399-8fdd-906f8e2041f8	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff0647bc-87d1-45f0-ad5c-63c29174f404	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,8 +164,8 @@ ffe25048-0bd4-49b5-aecb-2b1b57fb8d8b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 ffecd3e8-aa28-41a1-8154-a54ae3ce8016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ffecd3e8-aa28-41a1-8154-a54ae3ce8016	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 fff28b30-9903-4a0a-a723-31216abd457d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fff66029-24bb-4354-a650-99a205fd168f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fff66029-24bb-4354-a650-99a205fd168f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fff66029-24bb-4354-a650-99a205fd168f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quarry-beetle:f0t0:s1,f:xs:XP:quarry-beetle:f0t0:s1	-	-	-	d864b561c9cb	-	31990ad62d34	-	-	2026-11-24	xproof
+fff66029-24bb-4354-a650-99a205fd168f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:quarry-beetle:f0t0:s1,f:xs:XP:quarry-beetle:f0t0:s1	-	-	-	d864b561c9cb	-	31990ad62d34	-	-	2026-11-24	xproof
 fff6f2d0-22b5-41d0-99dc-bc817c3bd166	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fff728a1-56f5-4e97-91e2-19aba5772909	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:the-lion-turtle:f0t0:s2,f:xs:XP:the-lion-turtle:f0t0:s2	-	-	-	267e485f6204	-	edb2311baab2	-	-	2026-11-24	xproof
 fff728a1-56f5-4e97-91e2-19aba5772909	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Lion-Turtle/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -175,9 +175,9 @@ fff728a1-56f5-4e97-91e2-19aba5772909	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 fff728a1-56f5-4e97-91e2-19aba5772909	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Lion-Turtle/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fff728a1-56f5-4e97-91e2-19aba5772909	static#0.1	static#0.1	agreed	-	X	scen	1	0	The Lion-Turtle/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fffa9334-3576-4f70-9605-2ad062cdbc69	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fffa9334-3576-4f70-9605-2ad062cdbc69	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fffdc2ac-bde4-4e4c-a5bd-0e6c6e49ad91	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fffdc2ac-bde4-4e4c-a5bd-0e6c6e49ad91	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fffdc2ac-bde4-4e4c-a5bd-0e6c6e49ad91	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fffdc2ac-bde4-4e4c-a5bd-0e6c6e49ad91	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fffa9334-3576-4f70-9605-2ad062cdbc69	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:without-weakness:cast:s1,f:xs:XP:without-weakness:cast:s1	-	-	-	d864b561c9cb	-	754a6488aa36	-	-	2026-11-24	xproof
+fffdc2ac-bde4-4e4c-a5bd-0e6c6e49ad91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:samut-the-tested:cast:s1,f:xs:XP:samut-the-tested:cast:s1	-	-	-	d864b561c9cb	-	62a8c979a3ba	-	-	2026-11-24	xproof
+fffdc2ac-bde4-4e4c-a5bd-0e6c6e49ad91	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:samut-the-tested:cast:s2,f:xs:XP:samut-the-tested:cast:s2	-	-	-	d864b561c9cb	-	62a8c979a3ba	-	-	2026-11-24	xproof
+fffdc2ac-bde4-4e4c-a5bd-0e6c6e49ad91	f0/a1	DealDamage	agreed	-	FX	start	1	0	x:xs:XP:samut-the-tested:cast:s1,f:xs:XP:samut-the-tested:cast:s1	-	-	-	d864b561c9cb	-	62a8c979a3ba	-	-	2026-11-24	xproof
+fffdc2ac-bde4-4e4c-a5bd-0e6c6e49ad91	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ffff90c3-63c4-4dee-a21d-6b2b113f4f80	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

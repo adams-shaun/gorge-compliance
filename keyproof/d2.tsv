@@ -61,7 +61,7 @@ d254514b-0688-4f05-9473-3090a2ce7ced	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 d254514b-0688-4f05-9473-3090a2ce7ced	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2546d25-07cd-4830-ba66-34bdbf8a245c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2575513-72fa-49c7-be6b-9f6f85950f88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2575513-72fa-49c7-be6b-9f6f85950f88	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d2575513-72fa-49c7-be6b-9f6f85950f88	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d2593334-ce0b-43e1-97ad-b00950bfae2b	cast	cast-resolve	agreed	-	X	scen	1	0	Unwilling Vessel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d2593334-ce0b-43e1-97ad-b00950bfae2b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Unwilling Vessel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d2593334-ce0b-43e1-97ad-b00950bfae2b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Unwilling Vessel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -82,8 +82,8 @@ d268143f-27f0-4f14-8cd3-481923aaff6d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 d268143f-27f0-4f14-8cd3-481923aaff6d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d26b27db-a567-4631-b4b6-7294222fbdd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d26b27db-a567-4631-b4b6-7294222fbdd1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-d26d1cce-3bcf-48d4-abce-8b12ca7b7432	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d26d1cce-3bcf-48d4-abce-8b12ca7b7432	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d26d1cce-3bcf-48d4-abce-8b12ca7b7432	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rhox-oracle:f0t0:s1,f:xs:XP:rhox-oracle:f0t0:s1	-	-	-	d864b561c9cb	-	b751e3f533b3	-	-	2026-11-24	xproof
+d26d1cce-3bcf-48d4-abce-8b12ca7b7432	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rhox-oracle:f0t0:s1,f:xs:XP:rhox-oracle:f0t0:s1	-	-	-	d864b561c9cb	-	b751e3f533b3	-	-	2026-11-24	xproof
 d273033b-3b8b-4ce9-afe8-208d82dd20f1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d273033b-3b8b-4ce9-afe8-208d82dd20f1	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2766fd7-5cf9-4037-9f34-9ae3982c613a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -93,8 +93,8 @@ d2783a37-b6de-4184-b094-e1a23f185a94	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d27bebc9-348d-4b8e-816a-a4da66fb5618	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d27bebc9-348d-4b8e-816a-a4da66fb5618	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d27bebc9-348d-4b8e-816a-a4da66fb5618	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d27ffb4c-3a34-41aa-b464-6b897132c4ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d27ffb4c-3a34-41aa-b464-6b897132c4ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d27ffb4c-3a34-41aa-b464-6b897132c4ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wily-goblin:f0t0:s1,f:xs:XP:wily-goblin:f0t0:s1	-	-	-	d864b561c9cb	-	4dafb871016f	-	-	2026-11-24	xproof
+d27ffb4c-3a34-41aa-b464-6b897132c4ea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wily-goblin:f0t0:s1,f:xs:XP:wily-goblin:f0t0:s1	-	-	-	d864b561c9cb	-	4dafb871016f	-	-	2026-11-24	xproof
 d2824464-963b-48db-a482-cc08a0a97332	cast	cast-resolve	agreed	-	X	scen	1	0	Tendril of the Mycotyrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d2824464-963b-48db-a482-cc08a0a97332	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tendril of the Mycotyrant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d2853bad-a751-45ee-8269-24b0cdbc5c6b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ d2a3e219-08f3-4c05-b239-abf80a1c1c6b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 d2a3f735-9523-4ddd-96a9-b0a5ecd39284	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2a3f735-9523-4ddd-96a9-b0a5ecd39284	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2a49109-6db8-4f08-828c-da7a456a78a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2a49109-6db8-4f08-828c-da7a456a78a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d2a49109-6db8-4f08-828c-da7a456a78a7	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d2a65ff4-ab82-42f7-9d90-feb29132121e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2a65ff4-ab82-42f7-9d90-feb29132121e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2a86d0c-a4fe-434c-a45c-812cdec9169f	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

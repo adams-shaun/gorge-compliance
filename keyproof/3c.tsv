@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3c037865-d38c-48da-aee9-308975e12638	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -18,8 +18,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c067dbb-934b-4ebb-a656-8541349a4b2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c067dbb-934b-4ebb-a656-8541349a4b2a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c075bb6-1831-4521-bd8d-4ed2825ae796	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c075bb6-1831-4521-bd8d-4ed2825ae796	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c075bb6-1831-4521-bd8d-4ed2825ae796	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c075bb6-1831-4521-bd8d-4ed2825ae796	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:world-shaper:f0t0:s1,f:xs:XP:world-shaper:f0t0:s1	-	-	-	d864b561c9cb	-	e5820567d430	-	-	2026-11-24	xproof
+3c075bb6-1831-4521-bd8d-4ed2825ae796	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:world-shaper:f0t1:s1,f:xs:XP:world-shaper:f0t1:s1	-	-	-	d864b561c9cb	-	e5820567d430	-	-	2026-11-24	xproof
 3c0be888-0d66-4bad-84f4-90c3934915d7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c0be888-0d66-4bad-84f4-90c3934915d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c0f99b8-0222-4fac-932a-eb5d77826564	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Soulstone Sanctuary/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -35,7 +35,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c1fe86a-3696-4634-bc26-cd45846529ec	land	land	agreed	-	FX	start	2	0	x:xs:XP:crumbling-vestige:f0t0:s1,f:xs:XP:crumbling-vestige:f0t0:s1	-	-	-	d864b561c9cb	-	588deb17ed58	-	-	2026-11-24	xproof
 3c22e031-4804-4c31-bd3c-c3f29d456b34	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c2aec69-ffd9-4a34-888c-58adbbb99bb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c2aec69-ffd9-4a34-888c-58adbbb99bb5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c2aec69-ffd9-4a34-888c-58adbbb99bb5	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3c2b9bb2-8201-47e8-84d5-f3518cac03cb	cast	cast-resolve	agreed	-	X	scen	1	0	Kree Sentinel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3c2b9bb2-8201-47e8-84d5-f3518cac03cb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kree Sentinel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3c2b9bb2-8201-47e8-84d5-f3518cac03cb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kree Sentinel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c9d217e-d7f8-43df-9bb6-58d29f93e2c4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c9d217e-d7f8-43df-9bb6-58d29f93e2c4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c9faba7-f2d3-4978-be94-020dc8003dc0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c9fcda6-3ebc-4f9d-9f73-2bb4252d9420	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c9fcda6-3ebc-4f9d-9f73-2bb4252d9420	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:amaranthine-wall:cast:s1,f:xs:XP:amaranthine-wall:cast:s1	-	-	-	d864b561c9cb	-	ce3827eaf72a	-	-	2026-11-24	xproof
 3c9fcda6-3ebc-4f9d-9f73-2bb4252d9420	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ca07da2-29a1-40ce-a7f3-4838e95ca1d9	cast	cast-resolve	agreed	-	FX	scen	2	0	Heartflame Duelist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ca07da2-29a1-40ce-a7f3-4838e95ca1d9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Heartflame Duelist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

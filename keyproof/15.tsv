@@ -29,7 +29,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 152b91c9-cc07-4ca8-944f-9bc2242a2283	cast	cast-resolve	agreed	-	FX	scen	2	0	Whir of Invention/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 152bbb62-195b-4de1-90c6-10dd953f8c4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 152e7e91-4eda-4e72-a9fb-bd5cb2e68239	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:shefet-monitor:cast:s1,f:xs:XP:shefet-monitor:cast:s1	-	-	-	d864b561c9cb	-	afb4015e9f8e	-	-	2026-11-24	xproof
-152e7e91-4eda-4e72-a9fb-bd5cb2e68239	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+152e7e91-4eda-4e72-a9fb-bd5cb2e68239	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 152e7e91-4eda-4e72-a9fb-bd5cb2e68239	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15323e45-8260-43dc-b72b-efd661a58d75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15323e45-8260-43dc-b72b-efd661a58d75	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 153292f9-e0d1-43a7-a083-275c49d0554a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 153376c9-dffd-458c-8ce3-a4c8269bc4e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 153376c9-dffd-458c-8ce3-a4c8269bc4e9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-15353e27-96ca-48c7-83d7-efd57c094643	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+15353e27-96ca-48c7-83d7-efd57c094643	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:overcome:cast:s1,f:xs:XP:overcome:cast:s1	-	-	-	d864b561c9cb	-	0475630c27d4	-	-	2026-11-24	xproof
 15361770-c6dc-4db7-b745-aa03e4b866ea	cast	cast-resolve	agreed	-	X	scen	1	0	Breeches, Eager Pillager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 15361770-c6dc-4db7-b745-aa03e4b866ea	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Breeches, Eager Pillager/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 15361770-c6dc-4db7-b745-aa03e4b866ea	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Breeches, Eager Pillager/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15b86440-2040-47ae-ab4e-8445b3e24462	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15b86440-2040-47ae-ab4e-8445b3e24462	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 15bd8fa1-0858-4029-9973-e24c86e45af3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-15bd8fa1-0858-4029-9973-e24c86e45af3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+15bd8fa1-0858-4029-9973-e24c86e45af3	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 15c6837c-775b-4b4a-a2f7-9fd79215fa05	cast	cast-resolve	agreed	-	FX	scen	2	0	Gravkill/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 15c994b9-901a-46d6-804b-24560a14a481	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:seedship-broodtender:f0t0:s2,f:xs:XP:seedship-broodtender:f0t0:s2	-	-	-	267e485f6204	-	5d320cd0a66f	-	-	2026-11-24	xproof
 15c994b9-901a-46d6-804b-24560a14a481	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Seedship Broodtender/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

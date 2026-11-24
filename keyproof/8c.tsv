@@ -163,16 +163,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ceb1acf-5ff3-4f1a-af04-9f07ad454526	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ronin, Shadow Stalker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ceb1acf-5ff3-4f1a-af04-9f07ad454526	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ronin, Shadow Stalker/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cf38025-5821-45a0-9483-266353b7e82d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8cf38025-5821-45a0-9483-266353b7e82d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8cf38025-5821-45a0-9483-266353b7e82d	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8cf4ddb0-2a83-4d8f-b636-7ba3c81ea4ca	cast	cast-resolve	agreed	-	FX	scen	2	0	Loxodon Battle Priest/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cf4ddb0-2a83-4d8f-b636-7ba3c81ea4ca	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Loxodon Battle Priest/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cf57287-21b0-4194-8da3-62d00160234f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cf57287-21b0-4194-8da3-62d00160234f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cf57287-21b0-4194-8da3-62d00160234f	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cf77dc4-763b-41b7-a5da-0ef2734f08e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8cf77dc4-763b-41b7-a5da-0ef2734f08e6	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8cf77dc4-763b-41b7-a5da-0ef2734f08e6	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8cf77dc4-763b-41b7-a5da-0ef2734f08e6	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8cf77dc4-763b-41b7-a5da-0ef2734f08e6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8cf77dc4-763b-41b7-a5da-0ef2734f08e6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8cf88fa8-2f47-4125-a59d-9c2b2d4765a7	cast	cast-resolve	agreed	-	X	scen	1	0	Flexible Waterbender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cf88fa8-2f47-4125-a59d-9c2b2d4765a7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Flexible Waterbender/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cf88fa8-2f47-4125-a59d-9c2b2d4765a7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Flexible Waterbender/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

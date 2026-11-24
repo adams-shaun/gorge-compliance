@@ -114,9 +114,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 438be2fa-5f8d-42ff-894a-671ba4221196	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 438be2fa-5f8d-42ff-894a-671ba4221196	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 438ee544-78a2-4e32-9343-70838b60ac16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-439537ca-53c1-47cb-9174-5872c3c46288	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-439537ca-53c1-47cb-9174-5872c3c46288	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-439537ca-53c1-47cb-9174-5872c3c46288	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+439537ca-53c1-47cb-9174-5872c3c46288	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forerunner-of-the-legion:f0t0:s1,f:xs:XP:forerunner-of-the-legion:f0t0:s1	-	-	-	d864b561c9cb	-	34a940e9786a	-	-	2026-11-24	xproof
+439537ca-53c1-47cb-9174-5872c3c46288	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:forerunner-of-the-legion:f0t0:s1,f:xs:XP:forerunner-of-the-legion:f0t0:s1	-	-	-	d864b561c9cb	-	34a940e9786a	-	-	2026-11-24	xproof
+439537ca-53c1-47cb-9174-5872c3c46288	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 43975c07-103c-4664-b7e6-55bb29d85183	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43985bbc-a0f6-4812-984e-392bc8562633	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Blood Crypt/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 43985bbc-a0f6-4812-984e-392bc8562633	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Blood Crypt/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -194,7 +194,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43e0dbaf-3c81-47e2-b0c2-364f7ac7295f	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 43e2e1ed-5c6a-49b4-8ab8-57861c02fc3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43e7b834-d3a9-4297-bf79-2dab5507bebe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43e7b834-d3a9-4297-bf79-2dab5507bebe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+43e7b834-d3a9-4297-bf79-2dab5507bebe	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 43f135b5-d33e-4873-bc5a-8c939582d624	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43f135b5-d33e-4873-bc5a-8c939582d624	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43f2d81e-aa01-4fa9-9046-6a27a05dbd2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:contagion-clasp:f0t0:s1,f:xs:XP:contagion-clasp:f0t0:s1	-	-	-	d864b561c9cb	-	4a06eeb979ad	-	-	2026-11-24	xproof

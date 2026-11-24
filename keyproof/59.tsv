@@ -10,8 +10,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 590c2455-90f7-4ff6-a6cf-5d0d25575cda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 590d524f-278d-4cf4-ae3f-efcced4517b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merfolk-mesmerist:cast:s1,f:xs:XP:merfolk-mesmerist:cast:s1	-	-	-	8a1b1a193ec0	-	81cd7d7ed570	-	-	2026-11-24	xproof
 590d524f-278d-4cf4-ae3f-efcced4517b1	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:merfolk-mesmerist:f0a0:s1,f:xs:XP:merfolk-mesmerist:f0a0:s1	-	-	-	8a1b1a193ec0	-	81cd7d7ed570	-	-	2026-11-24	xproof
-59104038-28c0-4ebd-9201-d7ae60d79c1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59104038-28c0-4ebd-9201-d7ae60d79c1c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59104038-28c0-4ebd-9201-d7ae60d79c1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:queen-s-agent:f0t0:s1,f:xs:XP:queen-s-agent:f0t0:s1	-	-	-	d864b561c9cb	-	b9af3b078393	-	-	2026-11-24	xproof
+59104038-28c0-4ebd-9201-d7ae60d79c1c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:queen-s-agent:f0t0:s1,f:xs:XP:queen-s-agent:f0t0:s1	-	-	-	d864b561c9cb	-	b9af3b078393	-	-	2026-11-24	xproof
 59119143-c0fa-49dd-adf0-e2fd3029c48b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59119143-c0fa-49dd-adf0-e2fd3029c48b	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59119143-c0fa-49dd-adf0-e2fd3029c48b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5967c3d3-2ef1-4496-b51c-23478fa77f09	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59681998-c395-4d37-a419-2a78cf894506	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5972f426-4a51-4130-baf5-25407c1499f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5972f426-4a51-4130-baf5-25407c1499f1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5972f426-4a51-4130-baf5-25407c1499f1	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5972f426-4a51-4130-baf5-25407c1499f1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 597afe7c-a4ba-48d0-9c37-d9affe5ba195	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 597afe7c-a4ba-48d0-9c37-d9affe5ba195	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

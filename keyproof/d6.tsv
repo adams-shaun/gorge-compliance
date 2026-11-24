@@ -53,9 +53,9 @@ d63adbed-07d3-44e4-83f8-1cbdfc186df4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d63f4eeb-3fa5-4e65-8414-e3fd3c03c128	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d63f4eeb-3fa5-4e65-8414-e3fd3c03c128	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d63f4eeb-3fa5-4e65-8414-e3fd3c03c128	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6458cf6-eb1f-448b-8205-1b5d887ff2bf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6458cf6-eb1f-448b-8205-1b5d887ff2bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6458cf6-eb1f-448b-8205-1b5d887ff2bf	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d6458cf6-eb1f-448b-8205-1b5d887ff2bf	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:forerunner-of-the-coalition:cast:s1,f:xs:XP:forerunner-of-the-coalition:cast:s1	-	-	-	d864b561c9cb	-	dea30d49aa76	-	-	2026-11-24	xproof
+d6458cf6-eb1f-448b-8205-1b5d887ff2bf	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:forerunner-of-the-coalition:cast:s1,f:xs:XP:forerunner-of-the-coalition:cast:s1	-	-	-	d864b561c9cb	-	dea30d49aa76	-	-	2026-11-24	xproof
+d6458cf6-eb1f-448b-8205-1b5d887ff2bf	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d6464ee4-23fc-4d68-bbda-3b53772015d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d64687e4-ec37-4db2-9e60-4626c7a3b011	cast	cast-resolve	agreed	-	FX	scen	2	0	Winternight Stories/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d646e42b-5635-4798-b633-29c093b66a55	cast	cast-resolve	agreed	-	FX	scen	2	0	Inspiring Overseer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -75,12 +75,12 @@ d64e9152-ef24-4394-aeb0-9c3befc56549	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alt
 d64e9152-ef24-4394-aeb0-9c3befc56549	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 d64e96bf-6815-462c-93b4-c9c22dc43eda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d64feb23-8259-4445-9b40-efc8b4466679	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d655a1c9-b84d-4069-a2ca-3aa0dacab3e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d655a1c9-b84d-4069-a2ca-3aa0dacab3e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d655a1c9-b84d-4069-a2ca-3aa0dacab3e1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d655a1c9-b84d-4069-a2ca-3aa0dacab3e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fell-specter:f0t0:s1,f:xs:XP:fell-specter:f0t0:s1	-	-	-	d864b561c9cb	-	17255dae524f	-	-	2026-11-24	xproof
+d655a1c9-b84d-4069-a2ca-3aa0dacab3e1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fell-specter:f0t0:s1,f:xs:XP:fell-specter:f0t0:s1	-	-	-	d864b561c9cb	-	17255dae524f	-	-	2026-11-24	xproof
+d655a1c9-b84d-4069-a2ca-3aa0dacab3e1	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d6585e30-4ca0-4701-b274-b24f3508dd97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flamekin-harbinger:f0t0:s1,f:xs:XP:flamekin-harbinger:f0t0:s1	-	-	-	d864b561c9cb	-	8eefada5c420	-	-	2026-11-24	xproof
 d6585e30-4ca0-4701-b274-b24f3508dd97	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:flamekin-harbinger:f0t0:s1,f:xs:XP:flamekin-harbinger:f0t0:s1	-	-	-	d864b561c9cb	-	8eefada5c420	-	-	2026-11-24	xproof
-d6596336-8177-4475-95b9-a21858563276	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d6596336-8177-4475-95b9-a21858563276	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:uncomfortable-chill:cast:s1,f:xs:XP:uncomfortable-chill:cast:s1	-	-	-	d864b561c9cb	-	ece78fb48500	-	-	2026-11-24	xproof
 d65f701d-31a1-4275-a580-3e1799ebf8b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6608efe-b014-4b4d-a995-0be5047567c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6608efe-b014-4b4d-a995-0be5047567c5	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -127,8 +127,8 @@ d6a03a52-7e85-46de-920c-93a3f6479c4c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d6a03a52-7e85-46de-920c-93a3f6479c4c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6a767c2-8bc8-4686-899a-0ba3a525977a	cast	cast-resolve	agreed	-	X	scen	1	0	Tanglespan Lookout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6a767c2-8bc8-4686-899a-0ba3a525977a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tanglespan Lookout/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d6a837d0-d4f9-45ed-bbd7-5e37a9ca3b56	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6a837d0-d4f9-45ed-bbd7-5e37a9ca3b56	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d6a837d0-d4f9-45ed-bbd7-5e37a9ca3b56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruin-raider:cast:s1,f:xs:XP:ruin-raider:cast:s1	-	-	-	d864b561c9cb	-	47dd9e2054f8	-	-	2026-11-24	xproof
+d6a837d0-d4f9-45ed-bbd7-5e37a9ca3b56	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d6a9746c-eba5-4735-aec1-e70edba2c686	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6accaed-ff35-4324-b31b-35e6837bc079	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6accaed-ff35-4324-b31b-35e6837bc079	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Encouraging Aviator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

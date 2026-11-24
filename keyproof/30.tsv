@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3047ad53-1fbd-4b01-bf75-a3e633c863fe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3047ad53-1fbd-4b01-bf75-a3e633c863fe	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 304da0e0-9852-4ba5-a896-3c6bd703a64c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-30536d1f-8b1a-474f-a508-d3426480a532	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+30536d1f-8b1a-474f-a508-d3426480a532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:call-to-the-feast:cast:s1,f:xs:XP:call-to-the-feast:cast:s1	-	-	-	d864b561c9cb	-	6200e92e0909	-	-	2026-11-24	xproof
 3055381a-fb6b-47a3-8e77-a44768808e27	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3055381a-fb6b-47a3-8e77-a44768808e27	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3055381a-fb6b-47a3-8e77-a44768808e27	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -73,9 +73,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 306593b0-6ea8-476f-a3f2-e17876c1bab4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 306652a8-9a9c-4b33-96d7-b59234d148e9	cast	cast-resolve	agreed	-	X	scen	1	0	Foot Ninjas/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 306652a8-9a9c-4b33-96d7-b59234d148e9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-3067c653-ac29-4f1d-822f-7e2e5bb38a62	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3067c653-ac29-4f1d-822f-7e2e5bb38a62	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3067c653-ac29-4f1d-822f-7e2e5bb38a62	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3067c653-ac29-4f1d-822f-7e2e5bb38a62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kazarov-sengir-pureblood:cast:s1,f:xs:XP:kazarov-sengir-pureblood:cast:s1	-	-	-	d864b561c9cb	-	7d612bd04b8f	-	-	2026-11-24	xproof
+3067c653-ac29-4f1d-822f-7e2e5bb38a62	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:kazarov-sengir-pureblood:f0a0:s1,f:xs:XP:kazarov-sengir-pureblood:f0a0:s1	-	-	-	d864b561c9cb	-	7d612bd04b8f	-	-	2026-11-24	xproof
+3067c653-ac29-4f1d-822f-7e2e5bb38a62	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 306fd9d2-5ded-4857-90f4-e62d73c6aed2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3070f997-24f2-471d-af96-a2f3b588198e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 307421ed-aa59-4518-a0eb-689c60d7b709	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

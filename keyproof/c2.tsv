@@ -59,7 +59,7 @@ c235fda2-1a8d-4ac7-9a23-784529a520f0	f0/t0	NULL	owed	refused:no-generator:trigge
 c23617c9-53f9-4063-8241-b504e9b80cbe	cast	cast-resolve	agreed	-	X	scen	1	0	Bolrac-Clan Basher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c23617c9-53f9-4063-8241-b504e9b80cbe	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bolrac-Clan Basher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c23617c9-53f9-4063-8241-b504e9b80cbe	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bolrac-Clan Basher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c238ef51-4b46-43d5-a70b-40270a96a1fd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c238ef51-4b46-43d5-a70b-40270a96a1fd	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:hellion-crucible:f0a0:s2,f:xs:XP:hellion-crucible:f0a0:s2	-	-	-	d864b561c9cb	-	449dda90e9de	-	-	2026-11-24	xproof
 c238ef51-4b46-43d5-a70b-40270a96a1fd	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:hellion-crucible:f0a1:s1,f:xs:XP:hellion-crucible:f0a1:s1	-	-	-	d864b561c9cb	-	449dda90e9de	-	-	2026-11-24	xproof
 c238ef51-4b46-43d5-a70b-40270a96a1fd	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c238ef51-4b46-43d5-a70b-40270a96a1fd	land	land	agreed	-	FX	start	2	0	x:xs:XP:hellion-crucible:land:s1,f:xs:XP:hellion-crucible:land:s1	-	-	-	d864b561c9cb	-	449dda90e9de	-	-	2026-11-24	xproof
@@ -109,8 +109,8 @@ c27b771d-b5ec-459a-a101-f078cb8d0184	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 c27b771d-b5ec-459a-a101-f078cb8d0184	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c27b771d-b5ec-459a-a101-f078cb8d0184	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c27c9514-7b5a-461a-a109-f8abafd83523	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c27c9514-7b5a-461a-a109-f8abafd83523	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c27c9514-7b5a-461a-a109-f8abafd83523	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c27c9514-7b5a-461a-a109-f8abafd83523	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+c27c9514-7b5a-461a-a109-f8abafd83523	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c27e2d6f-498c-42d8-aa1a-ac6402bf3f9a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c2816923-9daf-4277-adf7-20427d14ba4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c281f436-8c77-48f7-b31c-d40cd7f9ed6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,9 +162,9 @@ c2bfb230-6949-4d5e-8cac-9d7dafdc5e9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c2c09308-988b-4d71-83c8-e2a2dc19a0d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tivadar-of-thorn:f0t0:s1,f:xs:XP:tivadar-of-thorn:f0t0:s1	-	-	-	9ee19e8250ce	-	aeb1da49c386	-	-	2026-11-24	xproof
 c2c09308-988b-4d71-83c8-e2a2dc19a0d9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tivadar-of-thorn:f0t0:s1,f:xs:XP:tivadar-of-thorn:f0t0:s1	-	-	-	9ee19e8250ce	-	aeb1da49c386	-	-	2026-11-24	xproof
 c2c1e44c-2a19-466f-a6d5-4cb71a940b86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c2c1e44c-2a19-466f-a6d5-4cb71a940b86	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c2c1e44c-2a19-466f-a6d5-4cb71a940b86	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c2c1e44c-2a19-466f-a6d5-4cb71a940b86	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c2c1e44c-2a19-466f-a6d5-4cb71a940b86	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c2c1e44c-2a19-466f-a6d5-4cb71a940b86	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c2c25406-e84a-47b0-8a46-fe60f9b0cffa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c2c47e13-b581-41a8-a4af-542557a6249a	cast	cast-resolve	agreed	-	X	scen	1	0	Il Mheg Pixie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c2c47e13-b581-41a8-a4af-542557a6249a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Il Mheg Pixie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

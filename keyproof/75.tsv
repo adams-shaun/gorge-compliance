@@ -25,14 +25,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75237b2c-232b-479a-ab3a-e1566c8a9fe7	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Steampath Charger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 75237b2c-232b-479a-ab3a-e1566c8a9fe7	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 75269a31-3819-4410-8bb7-10de16810a5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75269a31-3819-4410-8bb7-10de16810a5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75269a31-3819-4410-8bb7-10de16810a5e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75269a31-3819-4410-8bb7-10de16810a5e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:howling-golem:f0t0:s1,f:xs:XP:howling-golem:f0t0:s1	-	-	-	d864b561c9cb	-	f849ec06e0f8	-	-	2026-11-24	xproof
+75269a31-3819-4410-8bb7-10de16810a5e	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7528f47d-c758-42bc-bdfe-5aca805c4126	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 752b5a97-e2f7-43c0-b8c8-2c1efbbfbd2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 752b5a97-e2f7-43c0-b8c8-2c1efbbfbd2a	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 752ebcba-97fb-43a3-8811-d244164b3e16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 752ebcba-97fb-43a3-8811-d244164b3e16	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-75325029-e6f1-44af-88b2-53cc2b7233c0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75325029-e6f1-44af-88b2-53cc2b7233c0	cast	cast	agreed	-	F	start	2	0	f:xs:XP:supreme-will:cast:s1	-	-	-	d864b561c9cb	-	824cd21f10e0	-	-	2026-11-24	xproof
 7532f0ea-9d13-43ca-9b7d-2d22f2a66017	cast	cast-resolve	agreed	-	X	scen	1	0	Item Shopkeep/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7532f0ea-9d13-43ca-9b7d-2d22f2a66017	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Item Shopkeep/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7534d0b3-4211-4add-8e8d-370c033518d3	cast	cast-resolve	agreed	-	FX	scen	2	0	Goldfury Strider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -46,8 +46,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 753b4258-bc1d-47f4-b994-356507b0816a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bala-ged-scorpion:f0t0:s1,f:xs:XP:bala-ged-scorpion:f0t0:s1	-	-	-	d864b561c9cb	-	5c9ba983041e	-	-	2026-11-24	xproof
 753b4258-bc1d-47f4-b994-356507b0816a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bala-ged-scorpion:f0t0:s1,f:xs:XP:bala-ged-scorpion:f0t0:s1	-	-	-	d864b561c9cb	-	5c9ba983041e	-	-	2026-11-24	xproof
 753cb2b2-24ce-484f-a2d0-be6fd2c67ebd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grafdigger-s-cage:cast:s1,f:xs:XP:grafdigger-s-cage:cast:s1	-	-	-	d864b561c9cb	-	8177cb67ab31	-	-	2026-11-24	xproof
-753d98d3-d534-42c1-b728-a4f14c7f29ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-753d98d3-d534-42c1-b728-a4f14c7f29ec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+753d98d3-d534-42c1-b728-a4f14c7f29ec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slinn-voda-the-rising-deep:f0t0:s1,f:xs:XP:slinn-voda-the-rising-deep:f0t0:s1	-	-	-	d864b561c9cb	-	adecf176bba8	-	-	2026-11-24	xproof
+753d98d3-d534-42c1-b728-a4f14c7f29ec	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:slinn-voda-the-rising-deep:f0t0:s1,f:xs:XP:slinn-voda-the-rising-deep:f0t0:s1	-	-	-	d864b561c9cb	-	adecf176bba8	-	-	2026-11-24	xproof
 75458175-eeb1-4a6b-93d9-c744c93b3759	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75458175-eeb1-4a6b-93d9-c744c93b3759	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7545adab-b6f8-496d-8c25-416c7ec85fa2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

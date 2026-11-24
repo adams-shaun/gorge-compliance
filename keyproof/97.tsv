@@ -43,10 +43,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97489ef7-98c3-4700-bbe6-185215d41b25	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aloe Alchemist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97489ef7-98c3-4700-bbe6-185215d41b25	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aloe Alchemist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97489ef7-98c3-4700-bbe6-185215d41b25	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aloe Alchemist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-974a46f9-aa84-4b34-bee5-c635166e5841	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-974a46f9-aa84-4b34-bee5-c635166e5841	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-974f788a-039f-4310-a2fe-16b14a1e2d35	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-974f788a-039f-4310-a2fe-16b14a1e2d35	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+974a46f9-aa84-4b34-bee5-c635166e5841	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:josu-vess-lich-knight:f0t0:s1,f:xs:XP:josu-vess-lich-knight:f0t0:s1	-	-	-	d864b561c9cb	-	061f8e350ecd	-	-	2026-11-24	xproof
+974a46f9-aa84-4b34-bee5-c635166e5841	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:josu-vess-lich-knight:f0t0:s1,f:xs:XP:josu-vess-lich-knight:f0t0:s1	-	-	-	d864b561c9cb	-	061f8e350ecd	-	-	2026-11-24	xproof
+974f788a-039f-4310-a2fe-16b14a1e2d35	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:skyscanner:cast:s1,f:xs:XP:skyscanner:cast:s1	-	-	-	d864b561c9cb	-	1ccb13e4c714	-	-	2026-11-24	xproof
+974f788a-039f-4310-a2fe-16b14a1e2d35	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:skyscanner:cast:s1,f:xs:XP:skyscanner:cast:s1	-	-	-	d864b561c9cb	-	1ccb13e4c714	-	-	2026-11-24	xproof
 974fbeb0-77d6-4a29-aa91-226cb5b32233	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 974fbeb0-77d6-4a29-aa91-226cb5b32233	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 975226a4-2d03-4993-9337-cfd6595011bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,8 +147,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97c8f5e1-9fc1-4a62-a757-1c0454754cd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97c8f5e1-9fc1-4a62-a757-1c0454754cd3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97cabeda-9fe3-490d-99b4-4c8d87c17157	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97cb993c-90ae-49ff-8ccb-b4fe317a43ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97cb993c-90ae-49ff-8ccb-b4fe317a43ef	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97cb993c-90ae-49ff-8ccb-b4fe317a43ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garna-the-bloodflame:f0t0:s1,f:xs:XP:garna-the-bloodflame:f0t0:s1	-	-	-	d864b561c9cb	-	f3cd8602a1f3	-	-	2026-11-24	xproof
+97cb993c-90ae-49ff-8ccb-b4fe317a43ef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:garna-the-bloodflame:f0t0:s1,f:xs:XP:garna-the-bloodflame:f0t0:s1	-	-	-	d864b561c9cb	-	f3cd8602a1f3	-	-	2026-11-24	xproof
 97cf544e-ffbf-4730-8cd2-4f1d5be933f2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97db6c39-e690-49b6-93a6-e51b8dfad10b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97db6c39-e690-49b6-93a6-e51b8dfad10b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

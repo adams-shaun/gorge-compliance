@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7253e7d1-b1df-4637-bf64-850be7fa5188	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7255705c-b788-4bb1-824a-9262f4a0864e	cast	cast-resolve	agreed	-	X	scen	1	0	Elemental Teachings/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 725972de-4816-44cf-a2a5-4326c3bc1b4b	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-725972de-4816-44cf-a2a5-4326c3bc1b4b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+725972de-4816-44cf-a2a5-4326c3bc1b4b	f0/a0	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:striped-riverwinder:cast:s1,f:xs:XP:striped-riverwinder:cast:s1	-	-	-	d864b561c9cb	-	4f0ab4f3f4fa	-	-	2026-11-24	xproof
 725d7374-4ea8-4aef-ac09-8dcb5d8dcad1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 725d7374-4ea8-4aef-ac09-8dcb5d8dcad1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 725dc451-cae4-4345-9741-6c58e5a1a1dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:faithbearer-paladin:cast:s1,f:xs:XP:faithbearer-paladin:cast:s1	-	-	-	d864b561c9cb	-	12733347f872	-	-	2026-11-24	xproof
@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7274f6ed-310d-4b65-8083-eedb8e885a33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7274f6ed-310d-4b65-8083-eedb8e885a33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7274f6ed-310d-4b65-8083-eedb8e885a33	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7275fb8c-571a-4c4c-889a-829419332e51	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7275fb8c-571a-4c4c-889a-829419332e51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirror-image:cast:s1,f:xs:XP:mirror-image:cast:s1	-	-	-	d864b561c9cb	-	8dbd4042b9b9	-	-	2026-11-24	xproof
 7278f382-8249-4981-9d87-47cef7dc13dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7278f382-8249-4981-9d87-47cef7dc13dd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 727a6474-d5b5-42ab-ace3-352d28f499eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,8 +175,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 72d793e8-1d19-4ca1-894c-8851a2ebecde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72dc807b-35fb-4d69-ae4c-04eed0646170	cast	cast-resolve	agreed	-	FX	scen	2	0	Battle-Rattle Shaman/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 72dc807b-35fb-4d69-ae4c-04eed0646170	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Battle-Rattle Shaman/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-72ddbc9b-f584-433f-9d2d-6e4c374129c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72ddbc9b-f584-433f-9d2d-6e4c374129c4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+72ddbc9b-f584-433f-9d2d-6e4c374129c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jade-bearer:f0t0:s1,f:xs:XP:jade-bearer:f0t0:s1	-	-	-	d864b561c9cb	-	e38116865a91	-	-	2026-11-24	xproof
+72ddbc9b-f584-433f-9d2d-6e4c374129c4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jade-bearer:f0t0:s1,f:xs:XP:jade-bearer:f0t0:s1	-	-	-	d864b561c9cb	-	e38116865a91	-	-	2026-11-24	xproof
 72deedab-7c17-4505-aeca-4bc8596d80a5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72deedab-7c17-4505-aeca-4bc8596d80a5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72df0b70-5c9f-44f3-96d5-81c95abc0065	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

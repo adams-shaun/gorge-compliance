@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6736bb96-6718-48bb-9385-789d3349dc20	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67389ccc-dacc-4ce3-a9a2-f551a0d6e9d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67391f99-739a-490a-ba16-7fa1d758ec34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drana-kalastria-bloodchief:cast:s1,f:xs:XP:drana-kalastria-bloodchief:cast:s1	-	-	-	d864b561c9cb	-	b8288ff226ff	-	-	2026-11-24	xproof
-67391f99-739a-490a-ba16-7fa1d758ec34	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67391f99-739a-490a-ba16-7fa1d758ec34	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:drana-kalastria-bloodchief:f0a0:s2,f:xs:XP:drana-kalastria-bloodchief:f0a0:s2	-	-	-	d864b561c9cb	-	b8288ff226ff	-	-	2026-11-24	xproof
 673ddb72-d800-49c3-9ea9-ff74a0e20a97	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 673ddb72-d800-49c3-9ea9-ff74a0e20a97	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67419470-3418-466f-b3c1-4ded1d0ee34b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 677c3616-295f-493a-8b60-1e22b0224cfa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 677c3616-295f-493a-8b60-1e22b0224cfa	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 678095cc-ec8f-471a-b675-e59905d65c33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-678095cc-ec8f-471a-b675-e59905d65c33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+678095cc-ec8f-471a-b675-e59905d65c33	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6781166b-f6ab-4076-8e97-0cd9342f1b41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6781166b-f6ab-4076-8e97-0cd9342f1b41	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6781f8ae-2a86-4e3d-bc43-48809c9d6c26	cast	cast	agreed	-	F	start	2	0	f:xs:XP:gatekeeper-of-malakir:f0t0:s1	-	-	-	25696bf19d5b	-	a8f2c5c8d1c3	-	-	2026-11-24	xproof

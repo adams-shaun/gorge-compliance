@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 1102524d-7287-496f-a18a-5fdae6d4c271	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1104a746-169c-450a-80ad-bea0493c0576	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1104a746-169c-450a-80ad-bea0493c0576	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1104a746-169c-450a-80ad-bea0493c0576	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 110e5695-a9df-4201-9230-99f6abe9978f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11173ad3-c007-478f-bce0-d756eac07ccb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 111f3f1c-4387-4e61-8bff-6ebe3b7b9d9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -31,9 +31,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lotusguard Disciple/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lotusguard Disciple/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lotusguard-disciple:f0t0:s2,f:xs:XP:lotusguard-disciple:f0t0:s2	-	-	-	267e485f6204	-	cefc2a332b63	-	-	2026-11-24	xproof
-113c3024-c3bd-4c3a-8c08-3828646d9ca2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+113c3024-c3bd-4c3a-8c08-3828646d9ca2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:forerunner-of-the-empire:cast:s1,f:xs:XP:forerunner-of-the-empire:cast:s1	-	-	-	d864b561c9cb	-	9d5b3cc5c8a6	-	-	2026-11-24	xproof
+113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:forerunner-of-the-empire:cast:s1,f:xs:XP:forerunner-of-the-empire:cast:s1	-	-	-	d864b561c9cb	-	9d5b3cc5c8a6	-	-	2026-11-24	xproof
+113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 113fc13a-6df9-4eed-b9d4-002a85a036a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nissa-revane:cast:s1,f:xs:XP:nissa-revane:cast:s1	-	-	-	8a1b1a193ec0	-	7cf95a8161a4	-	-	2026-11-24	xproof
 113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:nissa-revane:cast:s1,f:xs:XP:nissa-revane:cast:s1	-	-	-	8a1b1a193ec0	-	7cf95a8161a4	-	-	2026-11-24	xproof

@@ -74,8 +74,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0452be2a-e97a-4269-a9e3-b616265ecb2e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vivi Ornitier/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 045488b3-0206-4dcd-91ab-59ec542f06c0	cast	cast-resolve	agreed	-	X	scen	1	0	Guidelight Optimizer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 045488b3-0206-4dcd-91ab-59ec542f06c0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Guidelight Optimizer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-04559759-1afd-4785-badc-c3416041f016	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04559759-1afd-4785-badc-c3416041f016	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04559759-1afd-4785-badc-c3416041f016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hallar-the-firefletcher:cast:s1,f:xs:XP:hallar-the-firefletcher:cast:s1	-	-	-	d864b561c9cb	-	3e845bb19eb0	-	-	2026-11-24	xproof
+04559759-1afd-4785-badc-c3416041f016	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0456ec64-2c81-4763-a352-8ff64a4c3d6b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04576b4d-2977-4cdf-b4a5-b0b47995e962	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 045a9d3d-c20d-427f-a77b-0bffc6f55526	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,11 +149,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04a0382f-7e4e-4450-ae70-18999379d875	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Nutrient Block/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04a0382f-7e4e-4450-ae70-18999379d875	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nutrient Block/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04a3bb42-0464-4638-a6ac-d5f412c222cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04a8858e-9033-403e-9346-5a2ad1bdf680	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04aa210a-235f-4e07-87d1-0d28cdf6888b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04aa210a-235f-4e07-87d1-0d28cdf6888b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04aa210a-235f-4e07-87d1-0d28cdf6888b	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04aa210a-235f-4e07-87d1-0d28cdf6888b	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04a8858e-9033-403e-9346-5a2ad1bdf680	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fungal-infection:cast:s1,f:xs:XP:fungal-infection:cast:s1	-	-	-	d864b561c9cb	-	a72bdf4d4055	-	-	2026-11-24	xproof
+04aa210a-235f-4e07-87d1-0d28cdf6888b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:huatli-dinosaur-knight:cast:s1,f:xs:XP:huatli-dinosaur-knight:cast:s1	-	-	-	d864b561c9cb	-	2fdd10fd8207	-	-	2026-11-24	xproof
+04aa210a-235f-4e07-87d1-0d28cdf6888b	f0/a0	PutCounter	agreed	-	FX	start	1	0	x:xs:XP:huatli-dinosaur-knight:cast:s2,f:xs:XP:huatli-dinosaur-knight:cast:s2	-	-	-	d864b561c9cb	-	2fdd10fd8207	-	-	2026-11-24	xproof
+04aa210a-235f-4e07-87d1-0d28cdf6888b	f0/a1	Pump	agreed	-	FX	start	1	0	x:xs:XP:huatli-dinosaur-knight:cast:s1,f:xs:XP:huatli-dinosaur-knight:cast:s1	-	-	-	d864b561c9cb	-	2fdd10fd8207	-	-	2026-11-24	xproof
+04aa210a-235f-4e07-87d1-0d28cdf6888b	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 04ac8b2c-95e9-40e9-8cc0-af9b075a94c0	cast	cast-resolve	agreed	-	X	scen	1	0	Fang, Fearless l'Cie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04ac8b2c-95e9-40e9-8cc0-af9b075a94c0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fang, Fearless l'Cie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04b1fb9e-4aef-46d9-b163-f9beff198bad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -37,8 +37,8 @@ c4272676-a38a-4b23-988e-9cdb2feb46c1	cast	cast-resolve	agreed	-	FX	scen	2	0	Inte
 c4272676-a38a-4b23-988e-9cdb2feb46c1	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Interface Ace/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c4272676-a38a-4b23-988e-9cdb2feb46c1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Interface Ace/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c42833e6-3e42-4bd6-acbc-d8e284e9833e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c429716b-bd3a-4060-b8a3-82e3d6aecd88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c429716b-bd3a-4060-b8a3-82e3d6aecd88	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c429716b-bd3a-4060-b8a3-82e3d6aecd88	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sand-strangler:f0t0:s1,f:xs:XP:sand-strangler:f0t0:s1	-	-	-	d864b561c9cb	-	ebacecd9f7e1	-	-	2026-11-24	xproof
+c429716b-bd3a-4060-b8a3-82e3d6aecd88	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sand-strangler:f0t0:s1,f:xs:XP:sand-strangler:f0t0:s1	-	-	-	d864b561c9cb	-	ebacecd9f7e1	-	-	2026-11-24	xproof
 c42e3df9-b9e1-4b36-bc9d-05351f87d707	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kami-of-the-waning-moon:cast:s1,f:xs:XP:kami-of-the-waning-moon:cast:s1	-	-	-	25696bf19d5b	-	2df70bbc0a7d	-	-	2026-11-24	xproof
 c42e3df9-b9e1-4b36-bc9d-05351f87d707	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 c43425c1-ad01-4088-a061-f691fa2f6c20	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thassa-s-bounty:cast:s1,f:xs:XP:thassa-s-bounty:cast:s1	-	-	-	d864b561c9cb	-	aa433143671a	-	-	2026-11-24	xproof
@@ -68,7 +68,7 @@ c45d1df1-92a7-4b36-8e27-1f88c3737bf9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c45d1df1-92a7-4b36-8e27-1f88c3737bf9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c45e96cb-2539-4e00-9fff-782a182c2f4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c45e96cb-2539-4e00-9fff-782a182c2f4b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c45e96cb-2539-4e00-9fff-782a182c2f4b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c45e96cb-2539-4e00-9fff-782a182c2f4b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c4614b6c-5e77-465f-996f-504121ea8eff	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4614b6c-5e77-465f-996f-504121ea8eff	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4614b6c-5e77-465f-996f-504121ea8eff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -168,8 +168,8 @@ c4e51cba-e5f7-4f44-9ae9-9223a2efd004	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 c4e51cba-e5f7-4f44-9ae9-9223a2efd004	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4ec45e9-1a4d-42a0-beca-e4dcdfc88fa3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c4ecfc13-a335-42bb-92db-133998b2af5d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c4efae03-99de-4439-925b-504602623bfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c4efae03-99de-4439-925b-504602623bfd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c4efae03-99de-4439-925b-504602623bfd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sailor-of-means:f0t0:s1,f:xs:XP:sailor-of-means:f0t0:s1	-	-	-	d864b561c9cb	-	80f6b3ab0797	-	-	2026-11-24	xproof
+c4efae03-99de-4439-925b-504602623bfd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sailor-of-means:f0t0:s1,f:xs:XP:sailor-of-means:f0t0:s1	-	-	-	d864b561c9cb	-	80f6b3ab0797	-	-	2026-11-24	xproof
 c4efdbab-711d-4269-9b24-b05d36f7e5c7	cast	cast	agreed	-	F	start	4	0	f:xs:XP:oath-of-nissa:cast:s1	-	-	-	d864b561c9cb	-	893fd8c40c34	-	-	2026-11-24	xproof
 c4efdbab-711d-4269-9b24-b05d36f7e5c7	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:oath-of-nissa:cast:s1	-	-	-	d864b561c9cb	-	893fd8c40c34	-	-	2026-11-24	xproof
 c4f1d8c8-29e5-43fe-8281-7d42d0173dc5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

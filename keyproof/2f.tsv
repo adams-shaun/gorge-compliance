@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f26f270-26d9-46d3-957f-19f52d51eb03	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	The Legend of Roku/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f292253-64d3-4cf2-881f-a3eea4fda388	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magma-jet:cast:s1,f:xs:XP:magma-jet:cast:s1	-	-	-	25696bf19d5b	-	b30e050483e5	-	-	2026-11-24	xproof
 2f299e69-d82b-48c9-b7f5-cf07cd9dced2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f299e69-d82b-48c9-b7f5-cf07cd9dced2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f299e69-d82b-48c9-b7f5-cf07cd9dced2	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:jungle-delver:f0a0:s1,f:xs:XP:jungle-delver:f0a0:s1	-	-	-	d864b561c9cb	-	4dfeb21eb98c	-	-	2026-11-24	xproof
 2f2a3588-b9a6-4c1a-89f8-b11339851b8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f2a3588-b9a6-4c1a-89f8-b11339851b8f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f2d75a0-d751-4c74-b357-8f92a992447f	cast	cast-resolve	agreed	-	FX	scen	2	0	Kellan, Inquisitive Prodigy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f70f1bb-29fa-4abb-afc2-653acd0a08b9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f72f111-450a-4da2-81fd-cbc4f9c1ef9d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necromancer-s-assistant:f0t0:s1,f:xs:XP:necromancer-s-assistant:f0t0:s1	-	-	-	d864b561c9cb	-	ffbaea16b21f	-	-	2026-11-24	xproof
 2f72f111-450a-4da2-81fd-cbc4f9c1ef9d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:necromancer-s-assistant:f0t0:s1,f:xs:XP:necromancer-s-assistant:f0t0:s1	-	-	-	d864b561c9cb	-	ffbaea16b21f	-	-	2026-11-24	xproof
-2f7305c1-51d2-4698-89d5-c64a57ecff80	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f7305c1-51d2-4698-89d5-c64a57ecff80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-revenant:cast:s1,f:xs:XP:vampire-revenant:cast:s1	-	-	-	d864b561c9cb	-	917acf3a12d4	-	-	2026-11-24	xproof
 2f796869-7350-4886-b210-cb5b9cb3e78a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:provisions-merchant:f0t0:s2,f:xs:XP:provisions-merchant:f0t0:s2	-	-	-	e07cf3a05ba5	-	759fb9ad13ac	-	-	2026-11-24	xproof
 2f796869-7350-4886-b210-cb5b9cb3e78a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:provisions-merchant:f0t0:s2,f:xs:XP:provisions-merchant:f0t0:s2	-	-	-	e07cf3a05ba5	-	759fb9ad13ac	-	-	2026-11-24	xproof
 2f796869-7350-4886-b210-cb5b9cb3e78a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Provisions Merchant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f83ca86-e23d-40f7-8085-6928d8cfef9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f857ef6-c1e5-4b85-b3fb-8163be4895b5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f865ae9-9328-4f6f-924f-d5e0a65aaa96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f872417-3dbe-40ec-ac91-e3132c0b7514	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f872417-3dbe-40ec-ac91-e3132c0b7514	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dark-bargain:cast:s1,f:xs:XP:dark-bargain:cast:s1	-	-	-	d864b561c9cb	-	69287a86f349	-	-	2026-11-24	xproof
 2f87ebc6-68b0-4121-bfaf-b412b077d75b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f8872fe-84dc-4cda-a253-e7503a5c96a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f8872fe-84dc-4cda-a253-e7503a5c96a3	f0/t0	NULL	owed	refused:history:kicked:no-kicker	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -248,7 +248,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fecfbef-e521-4025-94ea-451c9abde3de	static#0.0	static#0.0	agreed	-	X	scen	1	0	Doctor Octopus, Master Planner/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	static#0.1	static#0.1	agreed	-	X	scen	1	0	Doctor Octopus, Master Planner/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ff309e3-90e0-40e7-a277-3df057f8f198	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ff309e3-90e0-40e7-a277-3df057f8f198	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ff309e3-90e0-40e7-a277-3df057f8f198	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2ff5a5ed-d6db-4dfa-b1fd-38ad872ad30a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ff5a5ed-d6db-4dfa-b1fd-38ad872ad30a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ff92886-5c17-47a4-a02b-a97432d9203e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

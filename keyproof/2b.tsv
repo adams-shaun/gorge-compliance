@@ -91,8 +91,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b757d32-09a3-49cd-ada4-84b5335178ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b757d32-09a3-49cd-ada4-84b5335178ce	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b761ce6-4fb1-4f22-b51c-d9f25f62b39a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b761ce6-4fb1-4f22-b51c-d9f25f62b39a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b761ce6-4fb1-4f22-b51c-d9f25f62b39a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2b761ce6-4fb1-4f22-b51c-d9f25f62b39a	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:thorn-lieutenant:f0a0:s1,f:xs:XP:thorn-lieutenant:f0a0:s1	-	-	-	d864b561c9cb	-	c9de4f43b56f	-	-	2026-11-24	xproof
+2b761ce6-4fb1-4f22-b51c-d9f25f62b39a	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2b76f9e9-cd28-4eaf-8674-215c34263f96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b7ac3e8-0a7d-4b8a-a6a6-4cacc9b4f9de	cast	cast-resolve	agreed	-	X	scen	1	0	Kobayashi Maru Scenario/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2b7ac3e8-0a7d-4b8a-a6a6-4cacc9b4f9de	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -133,9 +133,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Koh, the Face Stealer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Koh, the Face Stealer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2bc38f14-0314-4351-8138-e2b8bf041404	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2bc38f14-0314-4351-8138-e2b8bf041404	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:memorial-to-folly:f0a0:s2,f:xs:XP:memorial-to-folly:f0a0:s2	-	-	-	d864b561c9cb	-	1b996de290a5	-	-	2026-11-24	xproof
 2bc38f14-0314-4351-8138-e2b8bf041404	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2bc38f14-0314-4351-8138-e2b8bf041404	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2bc38f14-0314-4351-8138-e2b8bf041404	land	land	agreed	-	FX	start	2	0	x:xs:XP:memorial-to-folly:land:s1,f:xs:XP:memorial-to-folly:land:s1	-	-	-	d864b561c9cb	-	1b996de290a5	-	-	2026-11-24	xproof
 2bc3d5b2-076f-4e01-87be-28d7eb70a2db	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2bc92c16-cd1e-4c32-9102-4593d77a9a9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2bc92c16-cd1e-4c32-9102-4593d77a9a9f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

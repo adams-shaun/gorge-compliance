@@ -63,8 +63,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0339bd11-ad71-4998-9b5d-a32790f0e5e3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Barkform Harvester/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0339bd11-ad71-4998-9b5d-a32790f0e5e3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Barkform Harvester/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0339d25b-9591-49c0-bf31-4ba749ebd0b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0342b085-be20-475a-bc38-59b9cb6012e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0342b085-be20-475a-bc38-59b9cb6012e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0342b085-be20-475a-bc38-59b9cb6012e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-chainwhirler:f0t0:s1,f:xs:XP:goblin-chainwhirler:f0t0:s1	-	-	-	d864b561c9cb	-	2eb293a48240	-	-	2026-11-24	xproof
+0342b085-be20-475a-bc38-59b9cb6012e8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-chainwhirler:f0t0:s1,f:xs:XP:goblin-chainwhirler:f0t0:s1	-	-	-	d864b561c9cb	-	2eb293a48240	-	-	2026-11-24	xproof
 03436524-197a-4941-a2a1-c7c4b71c4709	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03436524-197a-4941-a2a1-c7c4b71c4709	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 0347b8b7-0553-4a1f-9677-ad730470c345	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,9 +147,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03c141ca-11e4-4927-a6bd-980ee1203c73	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03c141ca-11e4-4927-a6bd-980ee1203c73	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Appa, Steadfast Guardian/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03c1e376-1410-4321-90fe-a6997e8db85a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03c35670-84ac-4825-b395-cefb76ceb89a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03c35670-84ac-4825-b395-cefb76ceb89a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-03c35670-84ac-4825-b395-cefb76ceb89a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+03c35670-84ac-4825-b395-cefb76ceb89a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:baffling-end:cast:s1,f:xs:XP:baffling-end:cast:s1	-	-	-	d864b561c9cb	-	b316189d3f20	-	-	2026-11-24	xproof
+03c35670-84ac-4825-b395-cefb76ceb89a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:baffling-end:cast:s1,f:xs:XP:baffling-end:cast:s1	-	-	-	d864b561c9cb	-	b316189d3f20	-	-	2026-11-24	xproof
+03c35670-84ac-4825-b395-cefb76ceb89a	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 03c934a6-be57-480d-8c84-4e46d9ccb406	cast	cast-resolve	agreed	-	FX	scen	2	0	Hulkling, Burgeoning Bruiser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03c934a6-be57-480d-8c84-4e46d9ccb406	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hulkling, Burgeoning Bruiser/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03c934a6-be57-480d-8c84-4e46d9ccb406	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hulkling, Burgeoning Bruiser/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

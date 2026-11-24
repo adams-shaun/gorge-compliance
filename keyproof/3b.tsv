@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 3b000071-3768-44cf-8957-180d0e94c988	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b000071-3768-44cf-8957-180d0e94c988	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b00068d-ad07-417c-bbb3-5f980615fb06	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b00068d-ad07-417c-bbb3-5f980615fb06	cast	cast	agreed	-	F	start	2	0	f:xs:XP:fraying-omnipotence:cast:s1	-	-	-	d864b561c9cb	-	31331414ae9e	-	-	2026-11-24	xproof
 3b008c71-e2a0-4f56-83d3-655c5dd58e0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b008c71-e2a0-4f56-83d3-655c5dd58e0e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b00f415-2496-4333-be89-601fd837fe7c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bb518ff-399b-4ce7-b9ad-a1d563dd7792	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bb518ff-399b-4ce7-b9ad-a1d563dd7792	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bb7041c-4f3e-4123-9181-3442ea0c98e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bb7041c-4f3e-4123-9181-3442ea0c98e8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3bb7041c-4f3e-4123-9181-3442ea0c98e8	f0/t0	NULL	owed	refused:no-generator:trigger:Surveil	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3bba3b36-f8d7-4fd6-892a-797226210b6e	cast	cast-resolve	agreed	-	X	scen	1	0	Malcolm, Alluring Scoundrel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bba3b36-f8d7-4fd6-892a-797226210b6e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Malcolm, Alluring Scoundrel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bba3b36-f8d7-4fd6-892a-797226210b6e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Malcolm, Alluring Scoundrel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -211,8 +211,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bd553db-2c7d-42cd-8ded-ab2c955b8f4e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bd57758-00a6-4d49-b1fc-b14f8203da0b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bd8ea71-cbcc-4659-b9a8-88cf27ee12d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dromoka-s-command:cast:s1,f:xs:XP:dromoka-s-command:cast:s1	-	-	-	d864b561c9cb	-	7ac6d1087bad	-	-	2026-11-24	xproof
-3bdc9211-8eff-4b30-8d6f-d26f4087f77f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3bdc9211-8eff-4b30-8d6f-d26f4087f77f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3bdc9211-8eff-4b30-8d6f-d26f4087f77f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-scout:cast:s1,f:xs:XP:llanowar-scout:cast:s1	-	-	-	d864b561c9cb	-	638629076f9c	-	-	2026-11-24	xproof
+3bdc9211-8eff-4b30-8d6f-d26f4087f77f	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:llanowar-scout:f0a0:s1,f:xs:XP:llanowar-scout:f0a0:s1	-	-	-	d864b561c9cb	-	638629076f9c	-	-	2026-11-24	xproof
 3bdc96d9-7272-4e38-b81a-ec928dd49eaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bdc96d9-7272-4e38-b81a-ec928dd49eaa	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bdd140b-1406-4d07-8f35-78f2ba92de64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stromkirk-occultist:cast:s1,f:xs:XP:stromkirk-occultist:cast:s1	-	-	-	d864b561c9cb	-	e05a3c597c03	-	-	2026-11-24	xproof

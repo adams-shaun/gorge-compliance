@@ -70,9 +70,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2351a9fa-17b5-41fc-93d0-34731d54f915	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2351a9fa-17b5-41fc-93d0-34731d54f915	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2359db1c-6029-4748-9f09-d57bb0ae92e9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-235bf0ba-658c-463f-b112-7478ba27bd7b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-235bf0ba-658c-463f-b112-7478ba27bd7b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-235bf0ba-658c-463f-b112-7478ba27bd7b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+235bf0ba-658c-463f-b112-7478ba27bd7b	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+235bf0ba-658c-463f-b112-7478ba27bd7b	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+235bf0ba-658c-463f-b112-7478ba27bd7b	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 235e3231-c5e5-4696-a867-705b2c4158fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scrapshooter:f0t0:s1,f:xs:XP:scrapshooter:f0t0:s1	-	-	-	9ee19e8250ce	-	2bc37731cbf6	-	-	2026-11-24	xproof
 235e3231-c5e5-4696-a867-705b2c4158fe	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scrapshooter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 235e3231-c5e5-4696-a867-705b2c4158fe	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scrapshooter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -53,8 +53,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65385311-1158-4e94-892a-683997706ca8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sabotender/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 65385311-1158-4e94-892a-683997706ca8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sabotender/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 65385311-1158-4e94-892a-683997706ca8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sabotender/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-653de668-beb0-4be7-bb05-30de5f52a3f1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-653de668-beb0-4be7-bb05-30de5f52a3f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+653de668-beb0-4be7-bb05-30de5f52a3f1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:conclave-cavalier:cast:s1,f:xs:XP:conclave-cavalier:cast:s1	-	-	-	d864b561c9cb	-	e0b229f8bef6	-	-	2026-11-24	xproof
+653de668-beb0-4be7-bb05-30de5f52a3f1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:conclave-cavalier:f0t0:s1,f:xs:XP:conclave-cavalier:f0t0:s1	-	-	-	d864b561c9cb	-	e0b229f8bef6	-	-	2026-11-24	xproof
 653e4b68-3184-4352-ac91-127f7e6d7c12	cast	cast-resolve	agreed	-	X	scen	1	0	Port Razer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 653e4b68-3184-4352-ac91-127f7e6d7c12	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Port Razer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 653e4b68-3184-4352-ac91-127f7e6d7c12	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Port Razer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -193,8 +193,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65e07c0f-4eff-4b38-9785-63684d67c0d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65e07c0f-4eff-4b38-9785-63684d67c0d8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65e1558c-6b09-4ddc-b520-f19f4fb972af	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65e19aec-e8ea-412f-a239-bd8d1b78249c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65e19aec-e8ea-412f-a239-bd8d1b78249c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+65e19aec-e8ea-412f-a239-bd8d1b78249c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inspiring-cleric:f0t0:s1,f:xs:XP:inspiring-cleric:f0t0:s1	-	-	-	d864b561c9cb	-	0f941f742169	-	-	2026-11-24	xproof
+65e19aec-e8ea-412f-a239-bd8d1b78249c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:inspiring-cleric:f0t0:s1,f:xs:XP:inspiring-cleric:f0t0:s1	-	-	-	d864b561c9cb	-	0f941f742169	-	-	2026-11-24	xproof
 65e4fbd1-4935-495e-9897-bad5a0cfd935	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65e4fbd1-4935-495e-9897-bad5a0cfd935	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65e4fbd1-4935-495e-9897-bad5a0cfd935	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
