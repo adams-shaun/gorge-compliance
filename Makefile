@@ -19,6 +19,12 @@ XMAGE_REF  ?= 4142596fb72b9dc03a0eae0ec34f4544cfd6d59e
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
+# The XMage *seat* engine (scripts/xmage-sbv2.sh, docs/design/2026-11-24-xmage-seat-route.md): SpellBench
+# upstream's engines/xmage (MIT) at this revision, building the XMage commit below (its pins.env must agree).
+# Not the oracle's XMAGE_REF: the two builds coexist and a verdict is never measured on one and cited on the other.
+XMAGE_SBV2_REF ?= 1945abdae4c22c2a3a95cc8acaabcf49bd777bdf
+XMAGE_SBV2_XMAGE_REF ?= fd40ad5c29a92cef824cf12ba6d0e4daa25db975
+XMAGE_SBV2_DIR ?= .oracle-build/xmage-sbv2
 # The mtgish commit the card-definition cross-check reads its data at
 # (oracle/mtgish/MTGISH.lock holds the same ref and the files' sha256).
 # mtgish is MIT; its data carries Oracle text and is never committed.
@@ -102,6 +108,7 @@ help:
 	@echo "  make compliance-sets — both levels over every printed set -> .coverage/compliance-sets.md"
 	@echo "  make compliance-manifests — regenerate oracle/compliance/manifests from XMage set classes at XMAGE_REF"
 	@echo "  make xmage-oracle-setup — build XMage at XMAGE_REF out of tree (heavy; run alone)"
+	@echo "  make xmage-sbv2-setup — build the XMage seat engine (SpellBench upstream) out of tree (heavy; run alone)"
 	@echo "  make forge-oracle-setup — build the Forge oracle driver at FORGE_ORACLE_REF out of tree (heavy)"
 	@echo "  make manabrew-oracle-setup — build Manabrew at MANABREW_ORACLE_REF and its card archive from gorge's FORGE_REF scripts, out of tree (heavy)"
 	@echo "  make manabrew-engine-test [RUN=filter] — run the Manabrew engine's lib tests in the MANABREW_ORACLE_REF build tree, capped (heavy)"
@@ -181,6 +188,8 @@ smoke:
 	bash ops/scripts/tests/make_cards_smoke.sh
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
+	bash ops/scripts/tests/forge_sbv2_smoke.sh
+	bash ops/scripts/tests/xmage_sbv2_smoke.sh
 	bash ops/scripts/tests/phase_oracle_pin_smoke.sh
 	bash ops/scripts/tests/manabrew_oracle_pin_smoke.sh
 	bash ops/scripts/tests/manabrew_oracle_run_smoke.sh
@@ -236,6 +245,11 @@ xmage-driver-tests:
 .PHONY: compliance-manifests
 compliance-manifests:
 	go run ./cmd/compliance manifest -xmage $(XMAGE_ORACLE_DIR)/sets-only -ref $(XMAGE_REF) -out oracle/compliance/manifests
+
+.PHONY: xmage-sbv2-setup
+# Heavy (about 10 minutes, ~1 GB of downloads and builds, 260 MB card database): run alone, like xmage-oracle-setup.
+xmage-sbv2-setup:
+	XMAGE_SBV2_REF=$(XMAGE_SBV2_REF) XMAGE_SBV2_XMAGE_REF=$(XMAGE_SBV2_XMAGE_REF) XMAGE_SBV2_DIR=$(XMAGE_SBV2_DIR) scripts/xmage-sbv2.sh --setup
 
 .PHONY: xmage-oracle-setup forge-oracle-setup manabrew-oracle-setup manabrew-engine-test manabrew-oracle-test manabrew-preflight
 xmage-oracle-setup:
