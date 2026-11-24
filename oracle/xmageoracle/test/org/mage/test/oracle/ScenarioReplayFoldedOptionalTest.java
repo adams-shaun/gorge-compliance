@@ -108,6 +108,15 @@ public final class ScenarioReplayFoldedOptionalTest {
         check(folded(true, c, q()) == null && c.size() == 1, "a scripted No is TestPlayer's");
         c = q("Midnight Duelist");
         check(folded(false, c, q()) == null && c.size() == 1, "not a resolving trigger's ask: untouched");
+        // Documented limit: the rule reads the head of the queue and cannot tell whose pick it
+        // is. A pick queued for a LATER ask in the same step (here a second trigger's target)
+        // is read as this trigger's yes when gorge folded this trigger's own may to nothing.
+        // That ask strict-missed before this rule, so no replay that passed changes; the pick
+        // stays queued for the ask it belongs to.
+        c = q();
+        t = q("p1:Phyrexian Walker");
+        check(Boolean.TRUE.equals(folded(true, c, t)) && t.equals(q("p1:Phyrexian Walker")),
+                "a later ask's pick at the head is read as yes and stays queued (documented limit)");
 
         // The replays, strict: a "Missing CHOICE def" would be a strict_miss.
         replay(dir.resolve("folded-optional-captain-empty-hand.jsonl"));
