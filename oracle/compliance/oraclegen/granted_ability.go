@@ -312,6 +312,18 @@ func stepLabelName(reg *cards.Registry, it Item, i int, st Step, g rules.OracleR
 	return oraclediffRefName(st.Card)
 }
 
+// TokenStepFace is the face an activate step on a token ref
+// ("pN:token:<name>[#k]") names: the compiled token script the seat's setup
+// or the registry's token table gives that face name, narrowed by the step's
+// snapshot permanent when several scripts share it. ok is false when no
+// script resolves or the face has no ability at the step's index.
+func TokenStepFace(reg *cards.Registry, it Item, i int, st Step, g rules.OracleResult) (*cards.Face, bool) {
+	if _, isToken := strings.CutPrefix(oraclediffRefNameUnmarked(st.Card), "token:"); !isToken {
+		return nil, false
+	}
+	return printedStepFace(reg, it, i, st, g)
+}
+
 // printedStepFace is the face Face.Abilities[*st.AbilityIndex] resolves
 // against when the setup or the entering snapshot names the recipient, or nil
 // for a step with no index or a card that does not resolve.

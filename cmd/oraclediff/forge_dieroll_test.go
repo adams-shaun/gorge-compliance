@@ -82,6 +82,11 @@ func TestForgeRolledDie(t *testing.T) {
 // d1b608ce5d = 9e368ca172 plus the Join Forces number announce, LeftOrRight binary and Optional Attach confirm
 // (ScriptedController/StepMachine only), die-roll code unchanged, the full driver suite (177 tests, including
 // ForcedDieRollTest) re-run green on it.
+// d0f16bee2e0 = the merge of a4fa8d45a56 and fef74c5308f, carrying all three fixes; die-roll code unchanged throughout.
+// a4fa8d45a56 = the merge of 65c6664d90 and a445a858b2, carrying both fixes.
+// 65c6664d90 = d1b608ce5d plus the ChooseEvenOddEffect binary (OddsOrEvens, true = Odd: Extinction Event's
+// choose_n[odd] and Gollum, Riddle Master's choose_n[evenodd]), ScriptedController only, die-roll code unchanged,
+// the full driver suite (179 tests, including ForcedDieRollTest) re-run green on it.
 // 0c4ca7afb3d = d1b608ce5d plus repeated Confluence modes, the NICKNAME trigger-order label and the zero-option
 // card ask (ScriptedController/StepMachine/DecisionQueue only), die-roll code unchanged, the full driver suite
 // (181 tests, including ForcedDieRollTest) re-run green on it.
@@ -89,7 +94,7 @@ func TestForgeRolledDie(t *testing.T) {
 // die-roll code unchanged), the full driver suite (177 tests, including ForcedDieRollTest) re-run green on it.
 // fef74c5308f = the clean merge of 0c4ca7afb3d and a445a858b2: the two fixes touch disjoint files (forge-oracle driver vs
 // forge-game), so the pin keeps both; die-roll and driver code are unchanged from 0c4ca7afb3d.
-const forgeOracleDieRollRef = "fef74c5308f45d65a91207186c2a06ef3e976294"
+const forgeOracleDieRollRef = "d0f16bee2e018d35874a0a8838491c1af1b02b82"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
