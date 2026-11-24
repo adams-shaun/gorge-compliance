@@ -1361,6 +1361,7 @@ fn targets(
     // Every slot takes one target: the count within the slot (V1: below `maximum`) is 0.
     let chosen = 0u32;
     let min = u32::from(!s.optional);
+    let mut rejected = 0usize;
     for t in legal {
         let target = match t {
             TargetRef::Player(p) => sem::target_player(seat(*p)),
@@ -1369,16 +1370,42 @@ fn targets(
                 None => continue,
             },
         };
+        let action = GameAction::ChooseTarget { target: Some(t.clone()) };
+        // A target phase rejects must never be offered: the seat answers a rejected action by
+        // halting. A ward cost paid from a short pool is the known case (CR 702.21a); probing
+        // covers every other target-time refusal without naming one.
+        if !applies(&live.state, who, action.clone()) {
+            rejected += 1;
+            continue;
+        }
         cands.push(Cand {
             semantic: sem::choose_target(src.clone(), slot as u32, target, chosen, min, 1),
-            effect: Effect::Act(GameAction::ChooseTarget { target: Some(t.clone()) }),
+            effect: Effect::Act(action),
         });
     }
     if s.optional {
-        cands.push(Cand {
-            semantic: sem::finish_target_selection(src, slot as u32, chosen),
-            effect: Effect::Act(GameAction::ChooseTarget { target: None }),
-        });
+        let action = GameAction::ChooseTarget { target: None };
+        if applies(&live.state, who, action.clone()) {
+            cands.push(Cand {
+                semantic: sem::finish_target_selection(src.clone(), slot as u32, chosen),
+                effect: Effect::Act(action),
+            });
+        }
+    }
+    // CR 601.2i: with no target phase accepts, a cast is withdrawn rather than left on a prompt
+    // no candidate can answer. An activated ability cancels through the same action.
+    if cands.is_empty() {
+        let cancel = matches!(live.state.waiting_for, WaitingFor::TargetSelection { .. })
+            && applies(&live.state, who, GameAction::CancelCast);
+        if cancel {
+            cands.push(Cand {
+                semantic: sem::optional_cost(src, "other", false),
+                effect: Effect::Act(GameAction::CancelCast),
+            });
+        } else {
+            let waiting = classify(&live.state.waiting_for).0;
+            return Err(Stop::Halt("dead_end", format!("no target phase accepts: {} legal, {rejected} rejected in {waiting}", legal.len())));
+        }
     }
     cands.sort_by_key(|c| canonical(&c.semantic));
     Ok(())
