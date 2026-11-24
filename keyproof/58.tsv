@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 586601dd-ac73-4451-848d-f21e64feb6a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 586601dd-ac73-4451-848d-f21e64feb6a9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 58678469-77e5-4c1b-88d6-5e6642b0c8ca	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-mana-rig:cast:s1	-	-	-	8c0bd19283bb	-	f5b15d203b5c	-	-	2026-11-24	xproof
-58678469-77e5-4c1b-88d6-5e6642b0c8ca	f0/a0	Dig	agreed	-	F	start	4	0	f:xs:XP:the-mana-rig:cast:s1	-	-	-	8c0bd19283bb	-	f5b15d203b5c	-	-	2026-11-24	xproof
+58678469-77e5-4c1b-88d6-5e6642b0c8ca	f0/a0	Dig	agreed	-	F	start	2	0	f:xs:XP:the-mana-rig:f0a0:s1	-	-	-	8c0bd19283bb	-	f5b15d203b5c	-	-	2026-11-24	xproof
 58678469-77e5-4c1b-88d6-5e6642b0c8ca	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 586aebf2-4653-49fa-8425-13bd1f511bf0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 586d64c7-6aa9-42a0-9d8a-9dece52bc5d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58bbd316-e22c-4c23-8024-364122d1e9a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:screeching-harpy:cast:s1,f:xs:XP:screeching-harpy:cast:s1	-	-	-	8c0bd19283bb	-	1b30e1a8625b	-	-	2026-11-24	xproof
 58bbd316-e22c-4c23-8024-364122d1e9a2	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:screeching-harpy:f0a0:s1,f:xs:XP:screeching-harpy:f0a0:s1	-	-	-	8c0bd19283bb	-	1b30e1a8625b	-	-	2026-11-24	xproof
 58bd02ae-2676-4c9c-b24e-2bd51be8bde7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-58bd67a8-1833-4827-aa33-1c141568f481	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:mystifying-maze:f0a1:s1,f:xs:XP:mystifying-maze:f0a1:s1	-	-	-	8c0bd19283bb	-	1a33040e1b26	-	-	2026-11-24	xproof
+58bd67a8-1833-4827-aa33-1c141568f481	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:mystifying-maze:f0a1:s2,f:xs:XP:mystifying-maze:f0a1:s2	-	-	-	8c0bd19283bb	-	1a33040e1b26	-	-	2026-11-24	xproof
 58bd67a8-1833-4827-aa33-1c141568f481	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58bd67a8-1833-4827-aa33-1c141568f481	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58bfd9a1-67ce-41d0-be38-f05addd1dd9e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

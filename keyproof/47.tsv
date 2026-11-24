@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47a8f3a8-253b-4df9-9cfc-ff7df65d850c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forging-the-tyrite-sword:cast:s1,f:xs:XP:forging-the-tyrite-sword:cast:s1	-	-	-	d864b561c9cb	-	ea2b075a3716	-	-	2026-11-24	xproof
 47a9df32-7588-4430-a40e-56a9041e0360	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:demonic-lore:cast:s1,f:xs:XP:demonic-lore:cast:s1	-	-	-	8c0bd19283bb	-	ec76fcec8220	-	-	2026-11-24	xproof
 47a9df32-7588-4430-a40e-56a9041e0360	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:demonic-lore:cast:s1,f:xs:XP:demonic-lore:cast:s1	-	-	-	8c0bd19283bb	-	ec76fcec8220	-	-	2026-11-24	xproof
-47a9df32-7588-4430-a40e-56a9041e0360	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:demonic-lore:cast:s1,f:xs:XP:demonic-lore:cast:s1	-	-	-	8c0bd19283bb	-	ec76fcec8220	-	-	2026-11-24	xproof
+47a9df32-7588-4430-a40e-56a9041e0360	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 47aabd9d-0f68-490a-a2ae-5cd9ef689be6	cast	cast	agreed	-	F	start	4	0	f:xs:XP:raven-familiar:cast:s1	-	-	-	5f2128bf97e4	-	f2c148efb401	-	-	2026-11-24	xproof
 47aabd9d-0f68-490a-a2ae-5cd9ef689be6	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:raven-familiar:cast:s1	-	-	-	5f2128bf97e4	-	f2c148efb401	-	-	2026-11-24	xproof
 47aabd9d-0f68-490a-a2ae-5cd9ef689be6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47c685b1-6e1e-4e08-8a52-9da6902df113	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 47c685b1-6e1e-4e08-8a52-9da6902df113	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47c9ef8c-7ba7-4702-bd8c-5fedc59c8166	cast	cast-resolve	agreed	-	X	scen	1	0	The City on the Edge of Forever/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-47d16c11-3033-44f3-9a12-2daf3453cc5b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:grasping-dunes:f0a1:s1,f:xs:XP:grasping-dunes:f0a1:s1	-	-	-	ea3140b6974b	-	c21f94428e3f	-	-	2026-11-24	xproof
+47d16c11-3033-44f3-9a12-2daf3453cc5b	f0/a0	Mana	agreed	-	FX	start	3	0	x:xs:XP:grasping-dunes:f0a1:s2,f:xs:XP:grasping-dunes:f0a1:s2	-	-	-	8c0bd19283bb	-	c21f94428e3f	-	-	2026-11-24	xproof
 47d16c11-3033-44f3-9a12-2daf3453cc5b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47d16c11-3033-44f3-9a12-2daf3453cc5b	land	land	agreed	-	FX	start	2	0	x:xs:XP:grasping-dunes:land:s1,f:xs:XP:grasping-dunes:land:s1	-	-	-	d864b561c9cb	-	c21f94428e3f	-	-	2026-11-24	xproof
 47d4da1e-b1a2-4a23-9b96-c85d5d20e3ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flameborn-hellion:cast:s1,f:xs:XP:flameborn-hellion:cast:s1	-	-	-	d864b561c9cb	-	145589488a8b	-	-	2026-11-24	xproof
