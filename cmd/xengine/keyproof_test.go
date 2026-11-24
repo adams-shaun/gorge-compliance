@@ -75,7 +75,19 @@ type kpFixture struct {
 	step       int // the second item's diverging step
 }
 
-func newKpFixture(t *testing.T) *kpFixture {
+func newKpFixture(t *testing.T) *kpFixture { return newKpFixtureMode(t, kpBoth) }
+
+// How the followers' rows treat the fixture's second item.
+type kpMode int
+
+const (
+	kpBoth       kpMode = iota // both followers differ from gorge identically: FX|G
+	kpXMageOnly                // XMage differs, Forge agrees: GF|X
+	kpForgeOnly                // Forge differs, XMage agrees: GX|F
+	kpXMageQuiet               // XMage has no answer (a harness row), Forge agrees: no finding
+)
+
+func newKpFixtureMode(t *testing.T, mode kpMode) *kpFixture {
 	t.Helper()
 	reg, play := playTwo(t)
 	xprepPlayDir(t, reg, play)
@@ -120,16 +132,32 @@ func newKpFixture(t *testing.T) *kpFixture {
 	if fx.step < 0 {
 		t.Skip("no lowered step of the second item exercised a key the first did not")
 	}
-	edit := func(i int, x *oraclediff.XResult) {
+	differ := func(i int, x *oraclediff.XResult) {
 		if i == 1 {
 			x.Snapshots[fx.step+1].Players[0].Life++
 		}
 	}
-	goldenRows(t, play, raw, edit)
+	quiet := func(i int, x *oraclediff.XResult) {
+		if i == 1 {
+			x.Snapshots, x.Harness = nil, "driver: no answer"
+		}
+	}
+	xEdit, fEdit := differ, differ
+	switch mode {
+	case kpXMageOnly:
+		fEdit = nil
+	case kpForgeOnly:
+		xEdit = nil
+	case kpXMageQuiet:
+		xEdit, fEdit = quiet, nil
+	}
+	rawX, rawF := filepath.Join(tmp, "rawx.jsonl"), filepath.Join(tmp, "rawf.jsonl")
+	goldenRows(t, play, rawX, xEdit)
+	goldenRows(t, play, rawF, fEdit)
 	fx.xrows = filepath.Join(tmp, "xrows.jsonl")
 	fx.frows = filepath.Join(tmp, "frows.jsonl")
-	stampRows(t, raw, fx.xrows, "xmage")
-	stampRows(t, raw, fx.frows, "forge")
+	stampRows(t, rawX, fx.xrows, "xmage")
+	stampRows(t, rawF, fx.frows, "forge")
 	fx.xd, fx.fd, fx.ad = filepath.Join(tmp, "xd"), filepath.Join(tmp, "fd"), filepath.Join(tmp, "ad")
 	if err := diff(reg, play, "xmage", fx.xrows, fx.xd, ""); err != nil {
 		t.Fatal(err)
@@ -142,8 +170,13 @@ func newKpFixture(t *testing.T) *kpFixture {
 		t.Fatal(err)
 	}
 	res := adjudicate.Run(in)
-	if len(res.Rows) != 1 || res.Rows[0].ID != ids[1] || res.Rows[0].Pattern != string(oraclediff.ForgeXMageG) {
-		t.Fatalf("adjudication rows %+v, want one FX|G row for %s", res.Rows, ids[1])
+	want := map[kpMode]oraclediff.Pattern{kpBoth: oraclediff.ForgeXMageG, kpXMageOnly: oraclediff.GorgeForgeX, kpForgeOnly: oraclediff.GorgeXMageF}
+	if p, ok := want[mode]; !ok {
+		if len(res.Rows) != 0 {
+			t.Fatalf("adjudication rows %+v, want none", res.Rows)
+		}
+	} else if len(res.Rows) != 1 || res.Rows[0].ID != ids[1] || res.Rows[0].Pattern != string(p) {
+		t.Fatalf("adjudication rows %+v, want one %s row for %s", res.Rows, p, ids[1])
 	}
 	if err := adjudicate.Write(fx.ad, res); err != nil {
 		t.Fatal(err)
@@ -394,5 +427,127 @@ func TestAdjudicateDiagnoses(t *testing.T) {
 	}
 	if res.Rows[0].Diagnosed != "0123456789ab" || res.Findings[0].Diagnosed != "0123456789ab" {
 		t.Errorf("not diagnosed: %+v", res.Rows[0])
+	}
+}
+
+// keyRows runs keyproof on fx into out and returns its rows by key and the
+// handoff rows.
+func (fx *kpFixture) keyRows(t *testing.T, out string) (map[classify.Use]map[string]string, []map[string]string) {
+	t.Helper()
+	if err := keyproof(fx.reg, fx.args(out, "")); err != nil {
+		t.Fatal(err)
+	}
+	_, rows := readTSV(t, filepath.Join(out, "keyproof.tsv"))
+	byKey := map[classify.Use]map[string]string{}
+	for _, r := range rows {
+		byKey[classify.Use{Card: r["card"], Key: r["key"]}] = r
+	}
+	_, hand := readTSV(t, filepath.Join(out, "handoff.tsv"))
+	return byKey, hand
+}
+
+// onlySecond is the keys of the second item's diverging step no other item
+// exercised: the keys whose state the second item alone decides.
+func (fx *kpFixture) onlySecond(t *testing.T) []classify.Use {
+	t.Helper()
+	var out []classify.Use
+	for u := range fx.stepUses(t) {
+		shared := false
+		for _, id := range fx.ids {
+			if _, ok := fx.full(t, id)[u]; ok && id != fx.ids[1] {
+				shared = true
+			}
+		}
+		if !shared {
+			out = append(out, u)
+		}
+	}
+	if len(out) == 0 {
+		t.Fatal("no key of the diverging step is the second item's alone")
+	}
+	return out
+}
+
+// Forge leads (operator 11-24): XMage alone differing leaves the key agreed with
+// refs F, and its signature is still handed off as a follower-only (GF|X, P2) row.
+func TestKeyproofXMageOnlyDiffersCreditsForge(t *testing.T) {
+	fx := newKpFixtureMode(t, kpXMageOnly)
+	byKey, hand := fx.keyRows(t, filepath.Join(fx.tmp, "out"))
+	for _, u := range fx.onlySecond(t) {
+		r := byKey[u]
+		if r["state"] != "agreed" || r["refs"] != "F" || r["witness"] != "f:"+fx.ids[1] {
+			t.Errorf("%v: %v, want agreed F witnessed by %s", u, r, fx.ids[1])
+		}
+	}
+	for u, r := range byKey {
+		if r["state"] != "agreed" {
+			t.Errorf("%v: state %s, want every key agreed", u, r["state"])
+		}
+	}
+	if len(hand) != 1 || hand[0]["pattern"] != "GF|X" || hand[0]["prio"] != "P2" || !hex12.MatchString(hand[0]["sig"]) {
+		t.Fatalf("handoff.tsv rows %v, want one GF|X P2 row", hand)
+	}
+}
+
+// Forge differing is a gorge-suspect divergence even when XMage agrees with
+// gorge: never credited, handed off at P1.
+func TestKeyproofForgeOnlyDiffersDiverges(t *testing.T) {
+	fx := newKpFixtureMode(t, kpForgeOnly)
+	byKey, hand := fx.keyRows(t, filepath.Join(fx.tmp, "out"))
+	for u := range fx.stepUses(t) {
+		if r := byKey[u]; r["state"] != "diverged" || !hex12.MatchString(r["sig"]) {
+			t.Errorf("%v: %v, want diverged", u, r)
+		}
+	}
+	if len(hand) != 1 || hand[0]["pattern"] != "GX|F" || hand[0]["prio"] != "P1" {
+		t.Fatalf("handoff.tsv rows %v, want one GX|F P1 row", hand)
+	}
+
+	// The same Forge difference on an item adjudicate did not take (XMage
+	// could not answer it) is still a divergence: keyproof rebuilds it as G|F|–.
+	if err := os.WriteFile(filepath.Join(fx.ad, "findings.jsonl"), nil, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	byKey, hand = fx.keyRows(t, filepath.Join(fx.tmp, "out2"))
+	for u := range fx.stepUses(t) {
+		if r := byKey[u]; r["state"] != "diverged" {
+			t.Errorf("no finding: %v: %v, want diverged", u, r)
+		}
+	}
+	if len(hand) != 1 || hand[0]["pattern"] != "G|F|–" || hand[0]["prio"] != "P1" {
+		t.Fatalf("no finding: handoff.tsv rows %v, want one G|F|– P1 row", hand)
+	}
+}
+
+// XMage with no answer (harness, not_sent, decision_shape ...) and Forge
+// agreeing credits the key with refs F; both agreeing stays FX.
+func TestKeyproofXMageQuietCreditsForge(t *testing.T) {
+	fx := newKpFixtureMode(t, kpXMageQuiet)
+	byKey, hand := fx.keyRows(t, filepath.Join(fx.tmp, "out"))
+	second := fx.full(t, fx.ids[1])
+	first := fx.full(t, fx.ids[0])
+	nF := 0
+	for u := range second {
+		r := byKey[u]
+		_, shared := first[u]
+		switch {
+		case r["state"] != "agreed":
+			t.Errorf("%v: %v, want agreed", u, r)
+		case !shared && r["refs"] != "F":
+			t.Errorf("%v: refs %s, want F (only the XMage-quiet item exercised it)", u, r["refs"])
+		case !shared:
+			nF++
+		}
+	}
+	for u := range first {
+		if r := byKey[u]; r["refs"] != "FX" {
+			t.Errorf("%v: refs %s, want FX (both agreed on the first item)", u, r["refs"])
+		}
+	}
+	if nF == 0 {
+		t.Error("no key credited F alone")
+	}
+	if len(hand) != 0 {
+		t.Errorf("handoff.tsv rows %v, want none", hand)
 	}
 }

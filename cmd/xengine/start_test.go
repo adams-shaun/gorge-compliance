@@ -2,12 +2,14 @@ package main
 
 import (
 	"encoding/json"
+	"os"
 	"path/filepath"
 	"slices"
 	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
@@ -87,10 +89,11 @@ func TestPlayStartFlagsExclusive(t *testing.T) {
 	}
 }
 
-// TestPlayStartBezaSetup plays the Beza start (scen's output since
-// xp-setup-extra-hand-card: Path to Exile and Taste of Blood in hand) and
-// holds the lowered setup to the start file: each seat's hand as listed and
-// 40 cards in all, and the lowering agrees with gorge's own runner.
+// TestPlayStartBezaSetup plays the Beza start as scen writes it (the forced
+// start: opp-burn as p0's life, two tapped Plains for the lands need,
+// xp-setup-extra-hand-card) and holds the lowered setup to the start file:
+// each seat's hand as listed, 40 cards in all, and the lowering agrees with
+// gorge's own runner.
 func TestPlayStartBezaSetup(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
 	out := t.TempDir()
@@ -105,17 +108,17 @@ func TestPlayStartBezaSetup(t *testing.T) {
 		}
 		n++
 		p0, p1 := it.Setup["p0"], it.Setup["p1"]
-		if want := []string{"Beza, the Bounding Spring", "Path to Exile"}; !slices.Equal(p0.Hand, want) {
+		if want := []string{"Beza, the Bounding Spring"}; !slices.Equal(p0.Hand, want) {
 			t.Errorf("%s: p0 hand %v, want %v", it.ID, p0.Hand, want)
 		}
-		if want := []string{"Taste of Blood"}; !slices.Equal(p1.Hand, want) {
-			t.Errorf("%s: p1 hand %v, want %v", it.ID, p1.Hand, want)
+		if len(p1.Hand) != 0 {
+			t.Errorf("%s: p1 hand %v, want none", it.ID, p1.Hand)
 		}
-		if len(p0.Battlefield) != 5 || len(p0.LibraryTop) != 33 {
-			t.Errorf("%s: p0 battlefield %d library %d, want 5 and 33", it.ID, len(p0.Battlefield), len(p0.LibraryTop))
+		if len(p0.Battlefield) != 7 || len(p0.LibraryTop) != 32 || p0.Life == nil || *p0.Life != 17 {
+			t.Errorf("%s: p0 battlefield %d library %d life %v, want 7, 32 and 17", it.ID, len(p0.Battlefield), len(p0.LibraryTop), p0.Life)
 		}
-		if len(p1.Battlefield) != 0 || len(p1.LibraryTop) != 39 {
-			t.Errorf("%s: p1 battlefield %v library %d, want none and 39", it.ID, p1.Battlefield, len(p1.LibraryTop))
+		if len(p1.Battlefield) != 0 || len(p1.LibraryTop) != 40 {
+			t.Errorf("%s: p1 battlefield %v library %d, want none and 40", it.ID, p1.Battlefield, len(p1.LibraryTop))
 		}
 		return nil
 	}); err != nil {
@@ -150,6 +153,43 @@ func TestStartDeckRefusesFieldBlocked(t *testing.T) {
 		}
 		if _, _, err := startDeck(reg, "start-p0", startSeat{Hand: []string{n}}); err != nil {
 			t.Errorf("%s in hand: %v", n, err)
+		}
+	}
+}
+
+// TestStartSeedBase: seed_base moves where a start file's seed search
+// starts, so a retried key plays new games; absent, the games are those of
+// seed_base 1, as before the field.
+func TestStartSeedBase(t *testing.T) {
+	dir := t.TempDir()
+	write := func(name, extra string) *startFile {
+		t.Helper()
+		p := filepath.Join(dir, name)
+		body := `{"format":"xproof-start-1","card":"Llanowar Elves","key":"f0/a0","players":2,"active":0,` +
+			`"max_turns":1,"setup":{"p0":{"battlefield":["Llanowar Elves"]},"p1":{}},"filler":"basics","seeds":3` + extra + `}`
+		if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+			t.Fatal(err)
+		}
+		f, err := readStartFile(p)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return f
+	}
+	def, one, later := write("a.json", ""), write("b.json", `,"seed_base":1`), write("c.json", `,"seed_base":1000`)
+	d, o, l := def.gameSeeds(), one.gameSeeds(), later.gameSeeds()
+	if !slices.Equal(d, o) {
+		t.Errorf("absent seed_base seeds %v, seed_base 1 seeds %v: want equal", d, o)
+	}
+	if len(d) != 3 || len(l) != 3 {
+		t.Fatalf("seeds %v / %v, want 3 each", d, l)
+	}
+	for i, s := range l {
+		if s < 1000 || (i > 0 && s <= l[i-1]) || rules.SeedForStarter(s, 2, 0) != s {
+			t.Errorf("seed_base 1000 seeds %v: want increasing, >= 1000, each starting seat 0", l)
+		}
+		if slices.Contains(d, s) {
+			t.Errorf("seed_base 1000 replays seed %d of the default %v", s, d)
 		}
 	}
 }
