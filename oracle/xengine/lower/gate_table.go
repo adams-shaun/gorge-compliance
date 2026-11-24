@@ -191,6 +191,7 @@ var objectTable = map[string]entry{
 	"ActivatedThisTurn":            isRefused("activation count of this turn; only the ActivationLimit gates read it, so live only on a face that has one"),
 	"RegeneratedThisTurn":          isRefused("regeneration count of this turn (CR 701.19, Count$RegeneratedThisTurn); setup cannot restate it; live only when some card in the game mentions RegeneratedThisTurn"),
 	"AttacksThisTurn":              isRefused("attack count of this turn"),
+	"AttackedPlayersThisTurn":      isRefused("per-source attacked-player ledger of this turn (DeclareAttackers folds it, TurnChange and a zone change clear it); setup cannot restate the attack declaration history"),
 	"ExertedThisTurn":              isRefused("exert of this turn"),
 	"ExertSkipUntap":               isRefused("exert state that skips an untap"),
 	"CantUntapNextStep":            isRefused("a pending untap skip"),
