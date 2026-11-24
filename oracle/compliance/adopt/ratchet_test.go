@@ -125,7 +125,7 @@ func TestCertificationRatchet(t *testing.T) {
 	// replay's to clear, not a defect to fix. Emitted on every run (go test
 	// prints it only for a failing test), so a non-stale problem leaves no
 	// stale-only verdict and the gate fails closed.
-	t.Logf("GORGE-CERT-RESULT %s %s", t.Name(), ratchetVerdict(measured, fails))
+	logCertResult(t, measured, fails)
 	for _, f := range fails {
 		t.Error(f)
 	}
@@ -149,6 +149,13 @@ func TestCertificationRatchet(t *testing.T) {
 // level-A and level-B ratchet chunks call it, so it accepts either growth
 // wording; a structural ratchet fail must never read as stale-only just
 // because the measured sets happen to be stale.
+// logCertResult emits the one GORGE-CERT-RESULT line a merge gate's stale-only
+// classifier reads; the level-A and level-B ratchet tests both go through it.
+func logCertResult(t testing.TB, measured []SetStatus, fails []string) {
+	t.Helper()
+	t.Logf("GORGE-CERT-RESULT %s %s", t.Name(), ratchetVerdict(measured, fails))
+}
+
 func ratchetVerdict(measured []SetStatus, fails []string) string {
 	if len(fails) == 0 {
 		return "clean"

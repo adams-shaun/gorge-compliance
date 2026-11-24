@@ -78,7 +78,7 @@ func runLevelBChunk(t *testing.T, i int) {
 	// problems is a host XMage replay's to clear, not a defect to fix. Emitted
 	// on every run, so a non-stale problem leaves no stale-only verdict and the
 	// gate fails closed.
-	t.Logf("GORGE-CERT-RESULT %s %s", t.Name(), ratchetVerdict(measured, fails))
+	logCertResult(t, measured, fails)
 	for _, f := range fails {
 		t.Error(f)
 	}
