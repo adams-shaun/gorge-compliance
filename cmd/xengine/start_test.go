@@ -265,3 +265,32 @@ func TestStartCounterKindRefused(t *testing.T) {
 		t.Errorf("real counter kind refused: %v", err)
 	}
 }
+
+// TestStartFocusTimes: a start file's focus times reaches the game's focus
+// ("your second spell each turn": two casts), and absent it is zero (once).
+func TestStartFocusTimes(t *testing.T) {
+	dir := t.TempDir()
+	for _, tc := range []struct {
+		extra string
+		want  int
+	}{{"", 0}, {`,"times":2`, 2}} {
+		p := filepath.Join(dir, "f.json")
+		body := `{"format":"xproof-start-1","card":"Cori-Steel Cutter","key":"f0/t0","players":2,"active":0,"max_turns":1,` +
+			`"setup":{"p0":{"hand":["Memnite","Memnite"],"battlefield":["Cori-Steel Cutter"]},"p1":{}},"filler":"basics","seeds":1,` +
+			`"focus":{"seat":0,"card":"Memnite","kind":"cast","ability":0` + tc.extra + `}}`
+		if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+			t.Fatal(err)
+		}
+		f, err := readStartFile(p)
+		if err != nil {
+			t.Fatal(err)
+		}
+		fo, err := f.focusOf()
+		if err != nil {
+			t.Fatal(err)
+		}
+		if fo.Times != tc.want || fo.Card != "Memnite" || fo.Kind != "cast" {
+			t.Errorf("focus %+v, want Memnite cast times %d", fo, tc.want)
+		}
+	}
+}

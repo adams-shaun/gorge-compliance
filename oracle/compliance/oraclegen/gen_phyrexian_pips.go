@@ -50,6 +50,9 @@ type xanswersExtra struct {
 	forage map[int][]string
 	// ownBounce marks the steps that pose an own-bounce hidden pick.
 	ownBounce map[int]bool
+	// tapThenUntap marks the steps whose TapOrUntap election is a
+	// tap-then-untap face's (tapThenUntapStep).
+	tapThenUntap map[int]bool
 	// bolster marks the decisions whose counter_pick is a Bolster tie
 	// election, which XMage's BolsterEffect asks through chooseTarget
 	// (bolster_pick.go).

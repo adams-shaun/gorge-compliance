@@ -65,6 +65,9 @@ type StartFocus struct {
 	// Mode, for a cast focus, is the cast option's payment kind ("kicked"):
 	// a key reading "if it was kicked" is reached by the kicked cast itself.
 	Mode string `json:"mode,omitempty"`
+	// Times is how many times the focus takes its action (0 or absent: once):
+	// "whenever you cast your second spell each turn" is two casts.
+	Times int `json:"times,omitempty"`
 }
 
 // Marshal is the file's bytes: indented JSON and a final newline.
