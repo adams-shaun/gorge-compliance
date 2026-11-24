@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b20e187-c200-40a0-8db2-481f0bf90168	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b2206ed-55e9-4735-b969-59d9e089bb10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tempting-licid:cast:s1,f:xs:XP:tempting-licid:cast:s1	-	-	-	5f2128bf97e4	-	783c238aa652	-	-	2026-11-24	xproof
 3b2206ed-55e9-4735-b969-59d9e089bb10	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:tempting-licid:f0a0:s1,f:xs:XP:tempting-licid:f0a0:s1	-	-	-	5f2128bf97e4	-	783c238aa652	-	-	2026-11-24	xproof
-3b22d21f-e19a-40df-840b-a2b7f11f79c2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b22d21f-e19a-40df-840b-a2b7f11f79c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:galadhrim-ambush:cast:s1,f:xs:XP:galadhrim-ambush:cast:s1	-	-	-	8c0bd19283bb	-	778f946cfff6	-	-	2026-11-24	xproof
 3b23e4f8-882d-4cce-9b61-171ae2cc3a18	cast	cast-resolve	agreed	-	FX	scen	2	0	Web-Warriors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b23e4f8-882d-4cce-9b61-171ae2cc3a18	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 3b2ce431-7101-4256-827d-a14de9f867fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b31a9a7-6c97-4e82-bf72-de83034f81a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b31a9a7-6c97-4e82-bf72-de83034f81a9	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 3b36df26-6a41-4714-95a8-fd02e2fc845f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b36df26-6a41-4714-95a8-fd02e2fc845f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b36df26-6a41-4714-95a8-fd02e2fc845f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3b38f314-d997-4c2a-b4c9-40dbe780993d	cast	cast-resolve	agreed	-	X	scen	1	0	The Lord of the Eagles/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b38f314-d997-4c2a-b4c9-40dbe780993d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Lord of the Eagles/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b38f314-d997-4c2a-b4c9-40dbe780993d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Lord of the Eagles/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b46800b-711b-4cbb-b296-26115b4f6839	static#0.0	static#0.0	agreed	-	X	scen	1	0	Visions of Villainy/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b4b6af2-f929-4082-a5ae-61a4e074bf14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silhana-starfletcher:cast:s1,f:xs:XP:silhana-starfletcher:cast:s1	-	-	-	77494c1ce129	-	03bc2fc0924b	-	-	2026-11-24	xproof
 3b4b6af2-f929-4082-a5ae-61a4e074bf14	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:littjara-mirrorlake:f0a1:s2,f:xs:XP:littjara-mirrorlake:f0a1:s2	-	-	-	8c0bd19283bb	-	327b80782d82	-	-	2026-11-24	xproof
+3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:littjara-mirrorlake:f0a1:s1,f:xs:XP:littjara-mirrorlake:f0a1:s1	-	-	-	8c0bd19283bb	-	327b80782d82	-	-	2026-11-24	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	land	land	agreed	-	FX	start	2	0	x:xs:XP:littjara-mirrorlake:land:s1,f:xs:XP:littjara-mirrorlake:land:s1	-	-	-	d864b561c9cb	-	327b80782d82	-	-	2026-11-24	xproof
 3b583358-d0d5-4f53-b06c-c6439156e684	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

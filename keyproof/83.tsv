@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 831487cf-a377-4c9b-920d-c5bc68f17f24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 831487cf-a377-4c9b-920d-c5bc68f17f24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83157972-3a0b-40e2-a80a-7bfb2a8627ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:raving-visionary:f0a1:s1,f:xs:XP:raving-visionary:f0a1:s1	-	-	-	ea3140b6974b	-	e55bcefe3305	-	-	2026-11-24	xproof
+83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:raving-visionary:f0a1:s1,f:xs:XP:raving-visionary:f0a1:s1	-	-	-	8c0bd19283bb	-	e55bcefe3305	-	-	2026-11-24	xproof
 83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8315aa34-08b8-403e-a2e6-796a2d6978ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stern-lesson:cast:s1,f:xs:XP:stern-lesson:cast:s1	-	-	-	ae86f6029288	-	ec208267fe06	-	-	2026-11-24	xproof
 83161d59-2520-4741-9328-e2a4a8b5d5bc	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Evendo, Waking Haven/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -108,10 +108,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83856c3a-652e-4afc-9dc0-0072324ac36f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sanctuary Wall/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83856c3a-652e-4afc-9dc0-0072324ac36f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sanctuary Wall/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83856c3a-652e-4afc-9dc0-0072324ac36f	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sanctuary Wall/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83860749-1603-46e9-9065-e98001244193	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83860749-1603-46e9-9065-e98001244193	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83860749-1603-46e9-9065-e98001244193	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83860749-1603-46e9-9065-e98001244193	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83860749-1603-46e9-9065-e98001244193	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treebeard-gracious-host:f0t0:s1,f:xs:XP:treebeard-gracious-host:f0t0:s1	-	-	-	8c0bd19283bb	-	4506cda89091	-	-	2026-11-24	xproof
+83860749-1603-46e9-9065-e98001244193	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:treebeard-gracious-host:f0t0:s1,f:xs:XP:treebeard-gracious-host:f0t0:s1	-	-	-	8c0bd19283bb	-	4506cda89091	-	-	2026-11-24	xproof
+83860749-1603-46e9-9065-e98001244193	f0/t1	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+83860749-1603-46e9-9065-e98001244193	f0/t2	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 83865eee-709a-4a34-94f1-9b818f31323f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:springmantle-cleric:cast:s1,f:xs:XP:springmantle-cleric:cast:s1	-	-	-	ae86f6029288	-	a5911e94a12a	-	-	2026-11-24	xproof
 8386f43f-8106-415c-a9a6-7fd3f5b060f3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unnerve:cast:s1,f:xs:XP:unnerve:cast:s1	-	-	-	5f2128bf97e4	-	55c6174577a3	-	-	2026-11-24	xproof
 83874e60-291b-47a7-ba9f-69437fa7e3c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -174,8 +174,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83c8f1ca-194e-4cb6-9d5f-029133c1edbc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lotuslight Dancers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83c8f1ca-194e-4cb6-9d5f-029133c1edbc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lotuslight-dancers:f0t0:s2,f:xs:XP:lotuslight-dancers:f0t0:s2	-	-	-	267e485f6204	-	c07cf1af0919	-	-	2026-11-24	xproof
 83cb9ab7-6a8f-40b5-b076-6fa669ff15f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83cb9ab7-6a8f-40b5-b076-6fa669ff15f2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83cb9ab7-6a8f-40b5-b076-6fa669ff15f2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83cb9ab7-6a8f-40b5-b076-6fa669ff15f2	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+83cb9ab7-6a8f-40b5-b076-6fa669ff15f2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 83ccbcb1-7cf0-41a0-8abd-18f4bc647b5f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83cdff93-531d-4148-bff7-5312b3b53bf0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83ce0859-cb88-45dd-8485-3317792235de	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tenth-district-guard:cast:s1,f:xs:XP:tenth-district-guard:cast:s1	-	-	-	d864b561c9cb	-	3c30d0271cf7	-	-	2026-11-24	xproof

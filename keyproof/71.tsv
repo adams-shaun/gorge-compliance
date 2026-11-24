@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 715b4a12-a392-411b-935b-7bd64a270421	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 715cb547-726f-4bc8-ad46-297d4dccb881	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 715cb547-726f-4bc8-ad46-297d4dccb881	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-715cb547-726f-4bc8-ad46-297d4dccb881	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+715cb547-726f-4bc8-ad46-297d4dccb881	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 715d0777-4d36-463b-9102-6bb6bb00b7e9	cast	cast	agreed	-	F	start	2	0	f:xs:XP:turnabout:cast:s1	-	-	-	5f2128bf97e4	-	a3d5fdf5d748	-	-	2026-11-24	xproof
 715f0832-696c-4111-b418-d9b6da403159	cast	cast-resolve	agreed	-	X	scen	1	0	Berta, Wise Extrapolator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 715f0832-696c-4111-b418-d9b6da403159	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Berta, Wise Extrapolator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -183,4 +183,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71f3d3d3-3f82-43f6-b2a9-d21afbdd7739	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 71fc2393-f55c-4b06-897c-fb7d4199b5f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71fc2393-f55c-4b06-897c-fb7d4199b5f5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-71ff4603-9f7a-459e-b5b3-9b39583f1dc7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+71ff4603-9f7a-459e-b5b3-9b39583f1dc7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:genesis-of-the-daleks:cast:s1,f:xs:XP:genesis-of-the-daleks:cast:s1	-	-	-	8c0bd19283bb	-	385f705be94e	-	-	2026-11-24	xproof

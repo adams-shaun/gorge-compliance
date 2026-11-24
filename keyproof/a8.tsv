@@ -23,8 +23,8 @@ a825bdea-3ea2-46b2-93b9-21586643aab0	combat#0.attack	combat#0.attack	agreed	-	X	
 a825bdea-3ea2-46b2-93b9-21586643aab0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Intrepid Stablemaster/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a825bdea-3ea2-46b2-93b9-21586643aab0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Intrepid Stablemaster/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a825bdea-3ea2-46b2-93b9-21586643aab0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Intrepid Stablemaster/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a82842b8-cc2e-44fa-b869-7bccc16ca74f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a82842b8-cc2e-44fa-b869-7bccc16ca74f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a82842b8-cc2e-44fa-b869-7bccc16ca74f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tervigon:f0t1:s1,f:xs:XP:tervigon:f0t1:s1	-	-	-	8c0bd19283bb	-	e95b9942c849	-	-	2026-11-24	xproof
+a82842b8-cc2e-44fa-b869-7bccc16ca74f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 a82842b8-cc2e-44fa-b869-7bccc16ca74f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8287efd-23ca-498b-90f1-c76099919fa4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8291d04-240e-456b-8c86-1fb4eb460476	cast	cast-resolve	agreed	-	X	scen	1	0	Hylda's Crown of Winter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ a864b032-6e1a-4211-ad6e-54a5a5c7321b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Byway
 a866cc05-69b0-45f2-8829-b6ef08193ed1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a866fb67-6614-45e6-928e-b4b59d95335f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a867be6f-46ce-4a12-a827-9429bd94243f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a867be6f-46ce-4a12-a827-9429bd94243f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a867be6f-46ce-4a12-a827-9429bd94243f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 a86f9b53-ff44-4b08-a8e9-beef73595de1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a871b03e-0218-4c15-8ad8-c8284b5be45f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a871dfbf-1fb9-4d1c-81bb-e4f0b131a11b	cast	cast-resolve	agreed	-	X	scen	1	0	Valgavoth's Faithful/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

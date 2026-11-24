@@ -91,9 +91,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1973f1e9-aa14-49dc-bafe-be17b30ba288	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1973f1e9-aa14-49dc-bafe-be17b30ba288	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 197582b9-4c86-41a3-ad0c-789a0db8e087	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-197809b7-1ddb-4329-8d82-7651696538a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-197809b7-1ddb-4329-8d82-7651696538a8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-197809b7-1ddb-4329-8d82-7651696538a8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+197809b7-1ddb-4329-8d82-7651696538a8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:frenzied-gorespawn:f0t0:s1	-	-	-	8c0bd19283bb	-	c9f19e6a29e0	-	-	2026-11-24	xproof
+197809b7-1ddb-4329-8d82-7651696538a8	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:frenzied-gorespawn:f0t0:s1	-	-	-	8c0bd19283bb	-	c9f19e6a29e0	-	-	2026-11-24	xproof
+197809b7-1ddb-4329-8d82-7651696538a8	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 19788405-7141-475e-94ee-d0c89488f50f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19788405-7141-475e-94ee-d0c89488f50f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19788405-7141-475e-94ee-d0c89488f50f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -197,9 +197,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a4	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f23d9e-0c05-4028-9c64-60b9a20020f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gleam-of-battle:cast:s1,f:xs:XP:gleam-of-battle:cast:s1	-	-	-	d864b561c9cb	-	5b7d0401b4da	-	-	2026-11-24	xproof
 19f23d9e-0c05-4028-9c64-60b9a20020f9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19f2c2c1-cd29-4e66-b5d9-e85e1979d843	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19f2c2c1-cd29-4e66-b5d9-e85e1979d843	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19f2c2c1-cd29-4e66-b5d9-e85e1979d843	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19f2c2c1-cd29-4e66-b5d9-e85e1979d843	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t0:s1,f:xs:XP:spitting-dilophosaurus:f0t0:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof
+19f2c2c1-cd29-4e66-b5d9-e85e1979d843	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t0:s1,f:xs:XP:spitting-dilophosaurus:f0t0:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof
+19f2c2c1-cd29-4e66-b5d9-e85e1979d843	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t1:s1,f:xs:XP:spitting-dilophosaurus:f0t1:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof
 19f344ee-031d-4346-9553-c5d32b02df43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f3ec61-f334-4708-ad93-04ebe15c1798	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f66bfa-bdfc-430a-ae39-4535f0b28324	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:subterranean-scout:f0t0:s1,f:xs:XP:subterranean-scout:f0t0:s1	-	-	-	d864b561c9cb	-	9eeed003844a	-	-	2026-11-24	xproof

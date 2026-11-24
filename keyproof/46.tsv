@@ -11,8 +11,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4604c8fb-d38f-42aa-935a-eada20f6aafa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4604c8fb-d38f-42aa-935a-eada20f6aafa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4605d8b3-b714-4717-8ff3-155fabfc1999	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4605d8b3-b714-4717-8ff3-155fabfc1999	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4605d8b3-b714-4717-8ff3-155fabfc1999	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4605d8b3-b714-4717-8ff3-155fabfc1999	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:mastermind-plum:f0t0:s1,f:xs:XP:mastermind-plum:f0t0:s1	-	-	-	8c0bd19283bb	-	07b27886250b	-	-	2026-11-24	xproof
+4605d8b3-b714-4717-8ff3-155fabfc1999	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 460c0f0b-bbf4-4307-9b44-350175d83bfe	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cartographer-s-companion:f0t0:s2,f:xs:XP:cartographer-s-companion:f0t0:s2	-	-	-	e07cf3a05ba5	-	8248cf7f8405	-	-	2026-11-24	xproof
 460c0f0b-bbf4-4307-9b44-350175d83bfe	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cartographer-s-companion:f0t0:s2,f:xs:XP:cartographer-s-companion:f0t0:s2	-	-	-	e07cf3a05ba5	-	8248cf7f8405	-	-	2026-11-24	xproof
 46137f00-f7f5-430a-857c-ff2dbf2d2579	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 461b3f2f-fcee-4160-abfa-061f8b6a784f	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 461b3f2f-fcee-4160-abfa-061f8b6a784f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 461c0c37-7213-4ece-91f7-934e6a1a8d64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-461c0c37-7213-4ece-91f7-934e6a1a8d64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+461c0c37-7213-4ece-91f7-934e6a1a8d64	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4620bfa8-7198-44ae-a162-51a19ca0f555	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ray-of-revelation:cast:s1,f:xs:XP:ray-of-revelation:cast:s1	-	-	-	25696bf19d5b	-	a32ecca76fa5	-	-	2026-11-24	xproof
 462269c7-ca16-4aa7-bf52-f7fcda25a05b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 462269c7-ca16-4aa7-bf52-f7fcda25a05b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -60,9 +60,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 464968a8-865e-4ac8-927e-7c931e3dabb3	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 464968a8-865e-4ac8-927e-7c931e3dabb3	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4649991c-4f2c-49c8-9e18-d0ae36328553	cast	cast	owed	harness	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	648e53218247	-	-	2026-11-24	xproof
-464a930a-79d5-4436-864d-3ce9f29475ae	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-464a930a-79d5-4436-864d-3ce9f29475ae	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-464a930a-79d5-4436-864d-3ce9f29475ae	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+464a930a-79d5-4436-864d-3ce9f29475ae	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:champions-of-minas-tirith:cast:s1,f:xs:XP:champions-of-minas-tirith:cast:s1	-	-	-	8c0bd19283bb	-	5710795f8023	-	-	2026-11-24	xproof
+464a930a-79d5-4436-864d-3ce9f29475ae	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:champions-of-minas-tirith:cast:s1,f:xs:XP:champions-of-minas-tirith:cast:s1	-	-	-	8c0bd19283bb	-	5710795f8023	-	-	2026-11-24	xproof
+464a930a-79d5-4436-864d-3ce9f29475ae	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 464bfcdb-a82b-4573-92a4-c5e463724fbe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 464bfcdb-a82b-4573-92a4-c5e463724fbe	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 464c0150-3dbc-403b-9ada-fef25ab1f29d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4669e8c7-fc37-4b97-9cb7-8d29b43d9176	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-hauntwoods:f0t0:s2,f:xs:XP:overlord-of-the-hauntwoods:f0t0:s2	-	-	-	e07cf3a05ba5	-	9d175506557e	-	-	2026-11-24	xproof
 4669e8c7-fc37-4b97-9cb7-8d29b43d9176	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Overlord of the Hauntwoods/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 466af6da-52e8-4ac5-b659-7492e3594ff8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-466af6da-52e8-4ac5-b659-7492e3594ff8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-466af6da-52e8-4ac5-b659-7492e3594ff8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+466af6da-52e8-4ac5-b659-7492e3594ff8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+466af6da-52e8-4ac5-b659-7492e3594ff8	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 466cf331-2d9c-4ebc-84f6-30c890e1b637	cast	cast-resolve	agreed	-	FX	scen	2	0	Frontier Seeker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 466cf331-2d9c-4ebc-84f6-30c890e1b637	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 466d5226-f4c7-4d69-9f56-4f893010127f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46ba09a7-42e4-42cd-911c-71d0ade01180	cast	cast-resolve	agreed	-	X	scen	1	0	Locutus, the One Who Speaks/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46ba09a7-42e4-42cd-911c-71d0ade01180	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 46c3a69a-4984-40b0-905f-4b0762c7ad72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46c3a69a-4984-40b0-905f-4b0762c7ad72	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46c3a69a-4984-40b0-905f-4b0762c7ad72	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46c3a69a-4984-40b0-905f-4b0762c7ad72	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+46c3a69a-4984-40b0-905f-4b0762c7ad72	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 46c404c3-636a-4945-a61c-62f013a9c50f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46c404c3-636a-4945-a61c-62f013a9c50f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:towering-viewpoint:f0a0:s1,f:xs:XP:towering-viewpoint:f0a0:s1	-	-	-	ae86f6029288	-	85e2343f83ae	-	-	2026-11-24	xproof
 46c727cb-1f47-4775-8af4-0230ef53966b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:brainsurge:cast:s1	-	-	-	ae86f6029288	-	a17defc7e310	-	-	2026-11-24	xproof

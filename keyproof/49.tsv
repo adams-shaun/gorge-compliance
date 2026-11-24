@@ -68,8 +68,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 494b642c-b2b5-40a0-b741-dca1aa9bdb59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 494b642c-b2b5-40a0-b741-dca1aa9bdb59	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 494c819d-7d73-432b-8c96-4cb9dcd31094	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-494dc919-e429-491b-b19b-5037499e2dd6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-494dc919-e429-491b-b19b-5037499e2dd6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+494dc919-e429-491b-b19b-5037499e2dd6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bygone-marvels:cast:s1,f:xs:XP:bygone-marvels:cast:s1	-	-	-	8c0bd19283bb	-	a1beb91b69ef	-	-	2026-11-24	xproof
+494dc919-e429-491b-b19b-5037499e2dd6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 494f8c29-7626-43ed-b0b8-fb9afd4cd5d3	cast	cast-resolve	agreed	-	FX	scen	2	0	Dust Animus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 494f8c29-7626-43ed-b0b8-fb9afd4cd5d3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dust Animus/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 494f8c29-7626-43ed-b0b8-fb9afd4cd5d3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dust Animus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -78,9 +78,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 495214b5-2eab-4fe4-8879-a30a57a67163	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 495214b5-2eab-4fe4-8879-a30a57a67163	f0/a1	ChooseType	agreed	-	FX	start	2	0	x:xs:XP:unstable-frontier:f0a0:s1,f:xs:XP:unstable-frontier:f0a0:s1	-	-	-	8c0bd19283bb	-	d2b8f41d8251	-	-	2026-11-24	xproof
 495214b5-2eab-4fe4-8879-a30a57a67163	land	land	agreed	-	FX	start	2	0	x:xs:XP:unstable-frontier:land:s1,f:xs:XP:unstable-frontier:land:s1	-	-	-	8a1b1a193ec0	-	d2b8f41d8251	-	-	2026-11-24	xproof
-495348d7-bc11-4209-8b0f-72db2e6c6993	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-495348d7-bc11-4209-8b0f-72db2e6c6993	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-495348d7-bc11-4209-8b0f-72db2e6c6993	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+495348d7-bc11-4209-8b0f-72db2e6c6993	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primeval-herald:f0t0:s1,f:xs:XP:primeval-herald:f0t0:s1	-	-	-	8c0bd19283bb	-	12fe7c7ce419	-	-	2026-11-24	xproof
+495348d7-bc11-4209-8b0f-72db2e6c6993	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:primeval-herald:f0t0:s1,f:xs:XP:primeval-herald:f0t0:s1	-	-	-	8c0bd19283bb	-	12fe7c7ce419	-	-	2026-11-24	xproof
+495348d7-bc11-4209-8b0f-72db2e6c6993	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:primeval-herald:f0t1:s1,f:xs:XP:primeval-herald:f0t1:s1	-	-	-	8c0bd19283bb	-	12fe7c7ce419	-	-	2026-11-24	xproof
 4954181c-cb46-4cac-adc3-2c8b7693a211	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4954181c-cb46-4cac-adc3-2c8b7693a211	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:abyssal-gatekeeper:f0t0:s1,f:xs:XP:abyssal-gatekeeper:f0t0:s1	-	-	-	ea3140b6974b	-	6a2bd8fc9426	-	-	2026-11-24	xproof
 49554441-bb48-4829-b8d6-55e687a6c2e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:declaration-in-stone:cast:s1,f:xs:XP:declaration-in-stone:cast:s1	-	-	-	d864b561c9cb	-	db991ef382ad	-	-	2026-11-24	xproof
@@ -161,9 +161,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49bfecc3-6258-454e-a8fd-fc49098a0898	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pit Automaton/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Pit Automaton/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Pit Automaton/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-49c0aac5-d650-4ada-a194-3bf77f104bc1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49c0aac5-d650-4ada-a194-3bf77f104bc1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49c0aac5-d650-4ada-a194-3bf77f104bc1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+49c0aac5-d650-4ada-a194-3bf77f104bc1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ransom-note:cast:s1,f:xs:XP:ransom-note:cast:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof
+49c0aac5-d650-4ada-a194-3bf77f104bc1	f0/a0	Charm	agreed	-	FX	start	2	0	x:xs:XP:ransom-note:f0a0:s1,f:xs:XP:ransom-note:f0a0:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof
+49c0aac5-d650-4ada-a194-3bf77f104bc1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ransom-note:cast:s1,f:xs:XP:ransom-note:cast:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof
 49c47768-fcc7-4091-b06d-d8a2bd7d1cc9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crooked-scales:cast:s1,f:xs:XP:crooked-scales:cast:s1	-	-	-	5f2128bf97e4	-	f78cc44a563e	-	-	2026-11-24	xproof
 49c47768-fcc7-4091-b06d-d8a2bd7d1cc9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49c7b7c6-c8dc-4871-9103-b057d2034c3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-sovereign:f0t0:s1,f:xs:XP:vampire-sovereign:f0t0:s1	-	-	-	d864b561c9cb	-	89a273c1f9be	-	-	2026-11-24	xproof

@@ -48,7 +48,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b4925d7-e2bb-4b74-a538-80fe759799ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b4925d7-e2bb-4b74-a538-80fe759799ad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b4925d7-e2bb-4b74-a538-80fe759799ad	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-0b49924b-cf83-46d9-b665-9c718a40e16c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0b49924b-cf83-46d9-b665-9c718a40e16c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:monumental-corruption:cast:s1,f:xs:XP:monumental-corruption:cast:s1	-	-	-	8c0bd19283bb	-	531ff7820238	-	-	2026-11-24	xproof
 0b49dbdc-4f1d-4895-b263-a48c7b7e6b44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b49dbdc-4f1d-4895-b263-a48c7b7e6b44	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b4cb111-ecf7-4ff7-a9e3-c944054f3370	cast	cast-resolve	agreed	-	X	scen	1	0	Monoist Sentry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0bb8500a-bc29-43f1-ab22-2b8adeb9c99d	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:thriving-rats:f0t1:s1,f:xs:XP:thriving-rats:f0t1:s1	-	-	-	d864b561c9cb	-	79a1588b9104	-	-	2026-11-24	xproof
 0bb860c5-41af-494e-9b0f-d05d6fa8255c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-pathcutter:cast:s1,f:xs:XP:elvish-pathcutter:cast:s1	-	-	-	fc71ca68c5ac	-	4cd74349f791	-	-	2026-11-24	xproof
 0bb860c5-41af-494e-9b0f-d05d6fa8255c	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:elvish-pathcutter:f0a0:s1,f:xs:XP:elvish-pathcutter:f0a0:s1	-	-	-	fc71ca68c5ac	-	4cd74349f791	-	-	2026-11-24	xproof
-0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:hall-of-oracles:f0a1:s1,f:xs:XP:hall-of-oracles:f0a1:s1	-	-	-	ea3140b6974b	-	cfb15ca03292	-	-	2026-11-24	xproof
+0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:hall-of-oracles:f0a1:s1,f:xs:XP:hall-of-oracles:f0a1:s1	-	-	-	8c0bd19283bb	-	cfb15ca03292	-	-	2026-11-24	xproof
 0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bb896ba-e15e-43a9-9120-e674d7ba003c	land	land	agreed	-	FX	start	2	0	x:xs:XP:hall-of-oracles:land:s1,f:xs:XP:hall-of-oracles:land:s1	-	-	-	d864b561c9cb	-	cfb15ca03292	-	-	2026-11-24	xproof

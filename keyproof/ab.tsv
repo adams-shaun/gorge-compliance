@@ -36,7 +36,7 @@ ab32c671-7686-435b-a987-14a08f6790eb	combat#0.attack	combat#0.attack	agreed	-	X	
 ab32c671-7686-435b-a987-14a08f6790eb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Boldwyr Aggressor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ab32c671-7686-435b-a987-14a08f6790eb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Boldwyr Aggressor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ab3360e5-6a60-4806-bbc2-b7b26c119856	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ab3360e5-6a60-4806-bbc2-b7b26c119856	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ab3360e5-6a60-4806-bbc2-b7b26c119856	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ab3b72e3-9a49-4c95-8016-22fa02ad7663	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab3f4455-7329-4145-b9c4-93eef38bf327	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab41243d-b178-4ebe-a7ac-bea37427be99	cast	cast-resolve	agreed	-	FX	scen	2	0	Wojek Investigator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -184,5 +184,5 @@ abfb7234-c5cc-4e0b-9a67-d66473f918fc	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 abfdfae5-61aa-42d6-9c8e-83fda59de233	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 abfdfae5-61aa-42d6-9c8e-83fda59de233	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 abfdfae5-61aa-42d6-9c8e-83fda59de233	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-abfe31f1-7c6d-4a7a-9f44-7f3e4166d9f1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-abfe31f1-7c6d-4a7a-9f44-7f3e4166d9f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+abfe31f1-7c6d-4a7a-9f44-7f3e4166d9f1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:giant-ladybug:cast:s1,f:xs:XP:giant-ladybug:cast:s1	-	-	-	8c0bd19283bb	-	9ce8f26f242b	-	-	2026-11-24	xproof
+abfe31f1-7c6d-4a7a-9f44-7f3e4166d9f1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:giant-ladybug:cast:s1,f:xs:XP:giant-ladybug:cast:s1	-	-	-	8c0bd19283bb	-	9ce8f26f242b	-	-	2026-11-24	xproof

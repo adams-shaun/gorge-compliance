@@ -87,14 +87,14 @@ ef75be00-1a88-47a1-a1ae-fe2c9881a798	combat#0.attack	combat#0.attack	agreed	-	X	
 ef75be00-1a88-47a1-a1ae-fe2c9881a798	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Desecration Demon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ef75be00-1a88-47a1-a1ae-fe2c9881a798	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Desecration Demon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ef764497-800e-4cbd-805e-7635919a983c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ef764497-800e-4cbd-805e-7635919a983c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ef764497-800e-4cbd-805e-7635919a983c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ef764497-800e-4cbd-805e-7635919a983c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:innocuous-researcher:f0t0:s1,f:xs:XP:innocuous-researcher:f0t0:s1	-	-	-	8c0bd19283bb	-	27c9bb73e863	-	-	2026-11-24	xproof
+ef764497-800e-4cbd-805e-7635919a983c	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:innocuous-researcher:f0t0:s1,f:xs:XP:innocuous-researcher:f0t0:s1	-	-	-	8c0bd19283bb	-	27c9bb73e863	-	-	2026-11-24	xproof
 ef7788af-8edc-46df-a5b6-895c734ea423	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef7b11ab-24e7-4e7c-91a7-920bade6e60b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef7b11ab-24e7-4e7c-91a7-920bade6e60b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef7b11ab-24e7-4e7c-91a7-920bade6e60b	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:codex-shredder:f0a1:s1,f:xs:XP:codex-shredder:f0a1:s1	-	-	-	d864b561c9cb	-	3edef308e56d	-	-	2026-11-24	xproof
 ef7f6766-e878-40c6-aa9a-da7415cc757a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ef7fce1b-0d95-4f92-a8ad-09d9756fa0e4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ef7fce1b-0d95-4f92-a8ad-09d9756fa0e4	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ef809e99-34a2-4471-8269-f56bf8037686	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ef809e99-34a2-4471-8269-f56bf8037686	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ef80e174-78e8-412d-a6fe-89c7af746669	cast	cast-resolve	agreed	-	X	scen	1	0	Hama, the Bloodbender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ efd31076-2bbe-4c65-9166-19ec0e832b57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:har
 efd5f51f-931d-46a9-9773-f74cfc318c23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 efd5f51f-931d-46a9-9773-f74cfc318c23	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 efd5f51f-931d-46a9-9773-f74cfc318c23	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-efd70846-2226-43c6-80fe-6acdd15d4246	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+efd70846-2226-43c6-80fe-6acdd15d4246	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venomthrope:cast:s1,f:xs:XP:venomthrope:cast:s1	-	-	-	8c0bd19283bb	-	d08564e77083	-	-	2026-11-24	xproof
 efd73b8a-1caa-4fc8-855a-cad33ea54097	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 efd93428-88a5-4f7b-95f3-1d6eec069a4c	cast	cast-resolve	agreed	-	X	scen	1	0	Regal Bunnicorn/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 efd93428-88a5-4f7b-95f3-1d6eec069a4c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Regal Bunnicorn/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

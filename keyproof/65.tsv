@@ -178,8 +178,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65d8b481-ebe9-4029-98a8-dd4693340bff	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cloudspire Coordinator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 65d8b481-ebe9-4029-98a8-dd4693340bff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cloudspire-coordinator:cast:s2,f:xs:XP:cloudspire-coordinator:cast:s2	-	-	-	5437c1394672	-	349ef080b9b5	-	-	2026-11-24	xproof
 65d9b8b6-5215-4037-8e50-e0ca80c5dc9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65db1ec4-70b9-45f9-a2c2-01f6c8e8fd89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65db1ec4-70b9-45f9-a2c2-01f6c8e8fd89	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+65db1ec4-70b9-45f9-a2c2-01f6c8e8fd89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sicarian-infiltrator:f0t1:s1,f:xs:XP:sicarian-infiltrator:f0t1:s1	-	-	-	8c0bd19283bb	-	b6e13894aa55	-	-	2026-11-24	xproof
+65db1ec4-70b9-45f9-a2c2-01f6c8e8fd89	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sicarian-infiltrator:f0t1:s1,f:xs:XP:sicarian-infiltrator:f0t1:s1	-	-	-	8c0bd19283bb	-	b6e13894aa55	-	-	2026-11-24	xproof
 65db1ec4-70b9-45f9-a2c2-01f6c8e8fd89	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65dc05d0-f885-4fe5-9a23-d6b75185c179	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65dc3191-0eb2-4c10-bf2c-ee0e24888870	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -202,8 +202,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65e65eab-bc3f-4eae-8361-7f0a65fc1673	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 65e65eab-bc3f-4eae-8361-7f0a65fc1673	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 65e65eab-bc3f-4eae-8361-7f0a65fc1673	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-65ea3638-1766-4096-88a8-662a0d6faf0c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65ea3638-1766-4096-88a8-662a0d6faf0c	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+65ea3638-1766-4096-88a8-662a0d6faf0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jo-grant:cast:s1,f:xs:XP:jo-grant:cast:s1	-	-	-	8c0bd19283bb	-	883001043404	-	-	2026-11-24	xproof
+65ea3638-1766-4096-88a8-662a0d6faf0c	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 65f1bebb-6441-4189-b6de-993ec9d24a59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65f1bebb-6441-4189-b6de-993ec9d24a59	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 65f1dd09-0640-47f8-8bfd-7aceaa5646a6	cast	cast	agreed	-	F	start	2	0	f:xs:XP:restless-dreams:cast:s1	-	-	-	fc71ca68c5ac	-	5c62c458361c	-	-	2026-11-24	xproof

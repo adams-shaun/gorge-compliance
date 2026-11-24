@@ -40,9 +40,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2836c144-7268-411a-b651-351cc4ef8fe9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2836c144-7268-411a-b651-351cc4ef8fe9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2837888c-bfa8-4955-9334-0605ad409f7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2837be10-23ad-49d2-943e-b1e00edbbbd9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2837be10-23ad-49d2-943e-b1e00edbbbd9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2837be10-23ad-49d2-943e-b1e00edbbbd9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2837be10-23ad-49d2-943e-b1e00edbbbd9	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+2837be10-23ad-49d2-943e-b1e00edbbbd9	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+2837be10-23ad-49d2-943e-b1e00edbbbd9	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 283f743f-6e79-49de-b7ed-08e6ffb64cc6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Clive's Hideaway/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 283f743f-6e79-49de-b7ed-08e6ffb64cc6	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Clive's Hideaway/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 283f743f-6e79-49de-b7ed-08e6ffb64cc6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Clive's Hideaway/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -59,8 +59,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28479aa8-d1cd-421a-8bbb-0594bb4dd410	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 284b0605-4b33-499e-aff3-e8b9edcce39b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 284db94d-e583-4355-89fd-6c0906f9d17e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-284db94d-e583-4355-89fd-6c0906f9d17e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-284db94d-e583-4355-89fd-6c0906f9d17e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+284db94d-e583-4355-89fd-6c0906f9d17e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+284db94d-e583-4355-89fd-6c0906f9d17e	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:feral-ghoul:f0t1:s1,f:xs:XP:feral-ghoul:f0t1:s1	-	-	-	8c0bd19283bb	-	08468bbb580b	-	-	2026-11-24	xproof
 28537019-3061-4efc-8e87-9bb805bf520f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancient-spider:cast:s1,f:xs:XP:ancient-spider:cast:s1	-	-	-	fc71ca68c5ac	-	90e2f1a28878	-	-	2026-11-24	xproof
 28564d10-bfc5-4beb-b0e2-b9aa5c03f740	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dundoolin-weaver:f0t0:s1,f:xs:XP:dundoolin-weaver:f0t0:s1	-	-	-	9ee19e8250ce	-	adcdb93f085e	-	-	2026-11-24	xproof
 28564d10-bfc5-4beb-b0e2-b9aa5c03f740	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof

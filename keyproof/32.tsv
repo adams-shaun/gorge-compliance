@@ -116,10 +116,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 328d5ef0-b25e-4f2a-80fe-35c6ae419e8a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32902854-2c64-431e-9d9c-9a23e52afb1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormchaser-mage:cast:s1,f:xs:XP:stormchaser-mage:cast:s1	-	-	-	d864b561c9cb	-	421ec3d5df0c	-	-	2026-11-24	xproof
 32902854-2c64-431e-9d9c-9a23e52afb1b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-3292d795-4fdc-4e42-959a-dd5e8591c5cc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3292d795-4fdc-4e42-959a-dd5e8591c5cc	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 32972d7a-c7c6-437c-8e7c-6c7d56b130e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-nel-toth:cast:s1,f:xs:XP:scourge-of-nel-toth:cast:s1	-	-	-	8c0bd19283bb	-	ec5547f39962	-	-	2026-11-24	xproof
 329f6434-8f1b-4a10-8feb-2a9dc5f2712b	cast	cast-resolve	agreed	-	X	scen	1	0	Heated Argument/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 329f6e2e-6c37-4e98-bd45-bd252f1a2bd9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-ickspitter:cast:s1,f:xs:XP:rakdos-ickspitter:cast:s1	-	-	-	16ec2936189a	-	f404b88708ed	-	-	2026-11-24	xproof

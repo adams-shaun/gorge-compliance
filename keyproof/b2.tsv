@@ -36,9 +36,9 @@ b22f4797-c74f-4d95-9528-c16c2bc4c05b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b22f4797-c74f-4d95-9528-c16c2bc4c05b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b233473d-d22b-45e4-9fe7-55d1170a788b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b2347910-d6c6-4681-8316-7ef27056485c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b2354092-7a4c-4e69-9c0a-0a2e146dc00c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b2354092-7a4c-4e69-9c0a-0a2e146dc00c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b2354092-7a4c-4e69-9c0a-0a2e146dc00c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b2354092-7a4c-4e69-9c0a-0a2e146dc00c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:watcher-of-hours:cast:s1,f:xs:XP:watcher-of-hours:cast:s1	-	-	-	8c0bd19283bb	-	79d0d5667aca	-	-	2026-11-24	xproof
+b2354092-7a4c-4e69-9c0a-0a2e146dc00c	f0/t0	NULL	owed	refused:no-generator:trigger:CounterRemoved	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+b2354092-7a4c-4e69-9c0a-0a2e146dc00c	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 b23a3d30-6b8e-4aad-890f-db0c3af43ace	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flickerwisp:f0t0:s1,f:xs:XP:flickerwisp:f0t0:s1	-	-	-	8a1b1a193ec0	-	64fbda43bf71	-	-	2026-11-24	xproof
 b23a3d30-6b8e-4aad-890f-db0c3af43ace	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:flickerwisp:f0t0:s1,f:xs:XP:flickerwisp:f0t0:s1	-	-	-	8a1b1a193ec0	-	64fbda43bf71	-	-	2026-11-24	xproof
 b23cba46-6ed2-442d-bc39-7c4933f6b083	cast	cast-resolve	agreed	-	X	scen	1	0	Unholy Heat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -186,9 +186,9 @@ b2f2645f-5f74-456a-bd02-83169d8b8a7e	f0/t0	NULL	owed	refused:no-generator:trigge
 b2f3c27e-b646-4449-901a-8b809cdfa84e	cast	cast-resolve	agreed	-	X	scen	1	0	Get Out/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b2f83483-24a4-45db-a04e-42ff732ca98a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b2f92310-3725-44c2-8953-8b280437217e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b2f9e07b-64b7-40b3-9a5e-5f1d59b35af7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b2f9e07b-64b7-40b3-9a5e-5f1d59b35af7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b2f9e07b-64b7-40b3-9a5e-5f1d59b35af7	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b2f9e07b-64b7-40b3-9a5e-5f1d59b35af7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thopter-shop:cast:s1,f:xs:XP:thopter-shop:cast:s1	-	-	-	8c0bd19283bb	-	f49b6e9b52a7	-	-	2026-11-24	xproof
+b2f9e07b-64b7-40b3-9a5e-5f1d59b35af7	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:thopter-shop:f0a0:s1,f:xs:XP:thopter-shop:f0a0:s1	-	-	-	8c0bd19283bb	-	f49b6e9b52a7	-	-	2026-11-24	xproof
+b2f9e07b-64b7-40b3-9a5e-5f1d59b35af7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 b2ff15b8-1be4-4f94-b4cc-aa959a50288e	cast	cast-resolve	agreed	-	X	scen	1	0	Bespoke Battlegarb/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b2ff15b8-1be4-4f94-b4cc-aa959a50288e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bespoke Battlegarb/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b2ff15b8-1be4-4f94-b4cc-aa959a50288e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bespoke Battlegarb/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

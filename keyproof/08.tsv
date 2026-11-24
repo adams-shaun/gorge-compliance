@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 080c0557-59ee-4c46-afd9-5baabf0dc3d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 080c0557-59ee-4c46-afd9-5baabf0dc3d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 080df9eb-c26b-494a-96b4-d7e47e501866	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-080df9eb-c26b-494a-96b4-d7e47e501866	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+080df9eb-c26b-494a-96b4-d7e47e501866	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 080f504f-20c8-4975-837c-d704e879d7f5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 080f504f-20c8-4975-837c-d704e879d7f5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 080f504f-20c8-4975-837c-d704e879d7f5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0828d891-f7c3-4e51-b42e-6ce88d48ac8b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Icewrought Sentry/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0828d891-f7c3-4e51-b42e-6ce88d48ac8b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Icewrought Sentry/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 08377424-619e-48ae-bc3c-fb199cd77cf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-loamspeaker:cast:s1,f:xs:XP:llanowar-loamspeaker:cast:s1	-	-	-	d864b561c9cb	-	c95aae7d2bb4	-	-	2026-11-24	xproof
-08377424-619e-48ae-bc3c-fb199cd77cf9	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:llanowar-loamspeaker:f0a1:s1,f:xs:XP:llanowar-loamspeaker:f0a1:s1	-	-	-	8c0bd19283bb	-	c95aae7d2bb4	-	-	2026-11-24	xproof
+08377424-619e-48ae-bc3c-fb199cd77cf9	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:llanowar-loamspeaker:f0a0:s1,f:xs:XP:llanowar-loamspeaker:f0a0:s1	-	-	-	8c0bd19283bb	-	c95aae7d2bb4	-	-	2026-11-24	xproof
 08377424-619e-48ae-bc3c-fb199cd77cf9	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 083dcc19-3357-48e4-94e8-8da5bbfba210	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 083dcc19-3357-48e4-94e8-8da5bbfba210	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 08d80efc-9542-4ba2-824c-c8615d8d07f2	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Undercity Sewers/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 08d80efc-9542-4ba2-824c-c8615d8d07f2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Undercity Sewers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 08d80efc-9542-4ba2-824c-c8615d8d07f2	land	play-land	agreed	-	X	scen	1	0	Undercity Sewers/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-08dcda8e-704d-444e-a7ca-34586a7f42a7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-08dcda8e-704d-444e-a7ca-34586a7f42a7	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+08dcda8e-704d-444e-a7ca-34586a7f42a7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wreck-hunter:cast:s1,f:xs:XP:wreck-hunter:cast:s1	-	-	-	8c0bd19283bb	-	7c31372ebeee	-	-	2026-11-24	xproof
+08dcda8e-704d-444e-a7ca-34586a7f42a7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wreck-hunter:cast:s1,f:xs:XP:wreck-hunter:cast:s1	-	-	-	8c0bd19283bb	-	7c31372ebeee	-	-	2026-11-24	xproof
 08de884f-1930-43d6-8c23-04353a136b4e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08dfe42e-35c0-4be0-abba-57269792ff3d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chittering-rats:f0t0:s1,f:xs:XP:chittering-rats:f0t0:s1	-	-	-	25696bf19d5b	-	740f2a5c9403	-	-	2026-11-24	xproof
 08dfe42e-35c0-4be0-abba-57269792ff3d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chittering-rats:f0t0:s1,f:xs:XP:chittering-rats:f0t0:s1	-	-	-	25696bf19d5b	-	740f2a5c9403	-	-	2026-11-24	xproof

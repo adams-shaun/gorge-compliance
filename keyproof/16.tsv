@@ -58,8 +58,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16414460-11ce-481d-ab54-6f0e0ea7d83d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kitsa, Otterball Elite/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16437a83-be52-44cd-a768-a767c9347eb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 164b064e-de50-468a-b874-b054897a5be9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-164b064e-de50-468a-b874-b054897a5be9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-164b064e-de50-468a-b874-b054897a5be9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+164b064e-de50-468a-b874-b054897a5be9	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+164b064e-de50-468a-b874-b054897a5be9	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:faerie-bladecrafter:f0t1:s1,f:xs:XP:faerie-bladecrafter:f0t1:s1	-	-	-	8c0bd19283bb	-	f0458872db8b	-	-	2026-11-24	xproof
 164f3f85-21fc-40b7-9871-4f303ba98428	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 164f3f85-21fc-40b7-9871-4f303ba98428	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scrap-trawler:f0t0:s1,f:xs:XP:scrap-trawler:f0t0:s1	-	-	-	d864b561c9cb	-	c0ca4035e034	-	-	2026-11-24	xproof
 164f3f85-21fc-40b7-9871-4f303ba98428	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -114,8 +114,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 169d24f3-a308-4a2e-ae25-85dae448994e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169d24f3-a308-4a2e-ae25-85dae448994e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169e415a-9ff6-43bb-bb68-fc49e69f95a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vaporkin:cast:s1,f:xs:XP:vaporkin:cast:s1	-	-	-	d864b561c9cb	-	fd570a8ead52	-	-	2026-11-24	xproof
-16a44586-ea1d-45f1-b9de-da1c11f729df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16a44586-ea1d-45f1-b9de-da1c11f729df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	8c0bd19283bb	-	67f5e9a6bb1a	-	-	2026-11-24	xproof
+16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	8c0bd19283bb	-	67f5e9a6bb1a	-	-	2026-11-24	xproof
 16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16a5ed42-ee86-4dcb-b8ea-239ac2b13d67	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 16a5ed42-ee86-4dcb-b8ea-239ac2b13d67	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

@@ -93,9 +93,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f5ac983-a7a5-4b9d-a25c-727a7de6c465	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f5b7f4c-a3d2-4472-80f5-8504562fc7fd	cast	cast-resolve	agreed	-	X	scen	1	0	Brave-Kin Duo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f5b7f4c-a3d2-4472-80f5-8504562fc7fd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Brave-Kin Duo/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1f6056be-67c8-40a9-86ef-1606961644eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f6056be-67c8-40a9-86ef-1606961644eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f6056be-67c8-40a9-86ef-1606961644eb	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f6056be-67c8-40a9-86ef-1606961644eb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cacophony-unleashed:f0t0:s1,f:xs:XP:cacophony-unleashed:f0t0:s1	-	-	-	8c0bd19283bb	-	69c60112a3b5	-	-	2026-11-24	xproof
+1f6056be-67c8-40a9-86ef-1606961644eb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cacophony-unleashed:f0t0:s1,f:xs:XP:cacophony-unleashed:f0t0:s1	-	-	-	8c0bd19283bb	-	69c60112a3b5	-	-	2026-11-24	xproof
+1f6056be-67c8-40a9-86ef-1606961644eb	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cacophony-unleashed:f0t0:s1,f:xs:XP:cacophony-unleashed:f0t0:s1	-	-	-	8c0bd19283bb	-	69c60112a3b5	-	-	2026-11-24	xproof
 1f612df3-53b6-4317-9d63-1f903ee3f0c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f612df3-53b6-4317-9d63-1f903ee3f0c4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f64d70d-ea38-4419-be91-8b68aab3401e	cast	cast	agreed	-	F	start	2	0	f:xs:XP:pollen-lullaby:cast:s1	-	-	-	d864b561c9cb	-	f70bd2007962	-	-	2026-11-24	xproof
@@ -199,7 +199,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ff55bbd-cde2-4fe9-a129-16790831d665	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hold-the-line:cast:s1,f:xs:XP:hold-the-line:cast:s1	-	-	-	25696bf19d5b	-	b14a09e24684	-	-	2026-11-24	xproof
 1ff62220-be95-4901-b8d8-812b9a1a1b0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ff62220-be95-4901-b8d8-812b9a1a1b0a	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-1ff91cc1-2233-4ceb-91ba-6a49c7147f32	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ff91cc1-2233-4ceb-91ba-6a49c7147f32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-wedding-of-river-song:cast:s1,f:xs:XP:the-wedding-of-river-song:cast:s1	-	-	-	8c0bd19283bb	-	a5ba466f532d	-	-	2026-11-24	xproof
 1ff9598a-0dac-4437-9450-fc8134fa3740	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ff9598a-0dac-4437-9450-fc8134fa3740	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ff9598a-0dac-4437-9450-fc8134fa3740	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

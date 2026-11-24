@@ -37,8 +37,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	land	play-land	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f2be3c2-060a-43e1-b63b-9cd3c78ffcb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f2be3c2-060a-43e1-b63b-9cd3c78ffcb0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f31a2d6-649a-40f4-89ce-95c635340e9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f31a2d6-649a-40f4-89ce-95c635340e9e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f31a2d6-649a-40f4-89ce-95c635340e9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:atraxi-warden:f0t0:s1,f:xs:XP:atraxi-warden:f0t0:s1	-	-	-	8c0bd19283bb	-	7f9fa94ecb9d	-	-	2026-11-24	xproof
+5f31a2d6-649a-40f4-89ce-95c635340e9e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:atraxi-warden:f0t0:s1,f:xs:XP:atraxi-warden:f0t0:s1	-	-	-	8c0bd19283bb	-	7f9fa94ecb9d	-	-	2026-11-24	xproof
 5f39accf-62fd-407a-a147-781210569d33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling-celestial-wind:cast:s1,f:xs:XP:mu-yanling-celestial-wind:cast:s1	-	-	-	d864b561c9cb	-	9983e653a5a9	-	-	2026-11-24	xproof
 5f39accf-62fd-407a-a147-781210569d33	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling-celestial-wind:cast:s1,f:xs:XP:mu-yanling-celestial-wind:cast:s1	-	-	-	d864b561c9cb	-	9983e653a5a9	-	-	2026-11-24	xproof
 5f39accf-62fd-407a-a147-781210569d33	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

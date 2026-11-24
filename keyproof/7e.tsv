@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e103748-3f76-42ce-a063-d0256b2dce2b	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Rockface Village/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e103748-3f76-42ce-a063-d0256b2dce2b	land	play-land	agreed	-	X	scen	1	0	Rockface Village/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e108b31-2ea3-4129-b324-a2d31c78bbe6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e10c141-dfb0-409b-b8c9-cdfe93b42a06	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7e10c141-dfb0-409b-b8c9-cdfe93b42a06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wreck-and-rebuild:cast:s1,f:xs:XP:wreck-and-rebuild:cast:s1	-	-	-	8c0bd19283bb	-	c5e57ae05344	-	-	2026-11-24	xproof
 7e162cc1-9482-4812-8897-209ec2927ec0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e162cc1-9482-4812-8897-209ec2927ec0	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:lesser-gargadon:f0t0:s1,f:xs:XP:lesser-gargadon:f0t0:s1	-	-	-	d864b561c9cb	-	a8153ac352a8	-	-	2026-11-24	xproof
 7e162cc1-9482-4812-8897-209ec2927ec0	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -133,10 +133,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ea0012b-b90b-43d6-bb5b-e4e92452bea7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Forum Familiar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ea71a36-8fa8-4ba3-9cb1-7fc6917c3ddd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ea71a36-8fa8-4ba3-9cb1-7fc6917c3ddd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7eade76f-92e4-4d26-9eb8-d3d954845c04	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7eade76f-92e4-4d26-9eb8-d3d954845c04	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/a0	NULL	owed	refused:steps-needed:cost:ExiledMoveToGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/a1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+7eade76f-92e4-4d26-9eb8-d3d954845c04	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 7eadffcb-1e15-44c1-b1db-78c71b8ec1ce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7eadffcb-1e15-44c1-b1db-78c71b8ec1ce	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rupture-spire:f0t0:s1,f:xs:XP:rupture-spire:f0t0:s1	-	-	-	8a1b1a193ec0	-	09f7a4a97e48	-	-	2026-11-24	xproof
 7eadffcb-1e15-44c1-b1db-78c71b8ec1ce	land	land	agreed	-	FX	start	2	0	x:xs:XP:rupture-spire:f0t0:s1,f:xs:XP:rupture-spire:f0t0:s1	-	-	-	8a1b1a193ec0	-	09f7a4a97e48	-	-	2026-11-24	xproof

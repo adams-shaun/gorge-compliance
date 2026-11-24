@@ -73,8 +73,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4355507e-e3a4-4c49-a1f7-344150213a2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4355507e-e3a4-4c49-a1f7-344150213a2f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 435df16b-3dd4-446e-a643-f9478aaa47c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-435df16b-3dd4-446e-a643-f9478aaa47c0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-435df16b-3dd4-446e-a643-f9478aaa47c0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+435df16b-3dd4-446e-a643-f9478aaa47c0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+435df16b-3dd4-446e-a643-f9478aaa47c0	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4364bef8-f7ec-487c-9b64-b55c4afb864e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-behemoth:cast:s1,f:xs:XP:llanowar-behemoth:cast:s1	-	-	-	25696bf19d5b	-	080414b1139b	-	-	2026-11-24	xproof
 4364bef8-f7ec-487c-9b64-b55c4afb864e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:llanowar-behemoth:cast:s1,f:xs:XP:llanowar-behemoth:cast:s1	-	-	-	25696bf19d5b	-	080414b1139b	-	-	2026-11-24	xproof
 43654381-c55c-4d6d-abfd-12932ceb5a4a	cast	cast-resolve	agreed	-	X	scen	1	0	Silence the Echo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

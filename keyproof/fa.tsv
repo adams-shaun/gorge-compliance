@@ -27,8 +27,8 @@ fa1ed9fa-5f77-4f7d-bab0-47c719cdc5bc	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Spri
 fa1ed9fa-5f77-4f7d-bab0-47c719cdc5bc	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Spring-Loaded Sawblades/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa2154fb-6756-4cf8-85a6-68264fb7a0b2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:weaponize-the-monsters:cast:s1,f:xs:XP:weaponize-the-monsters:cast:s1	-	-	-	ae86f6029288	-	269c98859a20	-	-	2026-11-24	xproof
 fa2154fb-6756-4cf8-85a6-68264fb7a0b2	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-fa25d142-e6ba-4fc9-81e2-114c32afc030	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa25d142-e6ba-4fc9-81e2-114c32afc030	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fa25d142-e6ba-4fc9-81e2-114c32afc030	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:space-marine-devastator:cast:s1,f:xs:XP:space-marine-devastator:cast:s1	-	-	-	8c0bd19283bb	-	a90156c6d984	-	-	2026-11-24	xproof
+fa25d142-e6ba-4fc9-81e2-114c32afc030	f0/t0	ChangesZone	agreed	-	FX	start	6	0	x:xs:XP:space-marine-devastator:cast:s1,f:xs:XP:space-marine-devastator:cast:s1	-	-	-	8c0bd19283bb	-	a90156c6d984	-	-	2026-11-24	xproof
 fa25d142-e6ba-4fc9-81e2-114c32afc030	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa2a275a-a28b-45cd-b8ca-a93247ff59bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:illicit-masquerade:f0t0:s1,f:xs:XP:illicit-masquerade:f0t0:s1	-	-	-	25696bf19d5b	-	00314aa6db8f	-	-	2026-11-24	xproof
 fa2a275a-a28b-45cd-b8ca-a93247ff59bc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:illicit-masquerade:f0t0:s1,f:xs:XP:illicit-masquerade:f0t0:s1	-	-	-	25696bf19d5b	-	00314aa6db8f	-	-	2026-11-24	xproof
@@ -74,14 +74,14 @@ fa4dffda-6f04-4d0b-829d-28a1a5794dee	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 fa4ed027-6e18-4a87-9845-e13f274d9994	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa4ed027-6e18-4a87-9845-e13f274d9994	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa4f22b2-7fe4-4f7f-8afd-32add76d740d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa4f22b2-7fe4-4f7f-8afd-32add76d740d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fa4f22b2-7fe4-4f7f-8afd-32add76d740d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 fa519a46-11ab-4ab8-9286-904ce2746c03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa519a46-11ab-4ab8-9286-904ce2746c03	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 fa519a46-11ab-4ab8-9286-904ce2746c03	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:forgehammer-centurion:f0t1:s1,f:xs:XP:forgehammer-centurion:f0t1:s1	-	-	-	ae86f6029288	-	b53ba6bcaa2e	-	-	2026-11-24	xproof
 fa55177c-ba65-4113-9c05-2d63318cf7c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa55177c-ba65-4113-9c05-2d63318cf7c5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa55177c-ba65-4113-9c05-2d63318cf7c5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa55177c-ba65-4113-9c05-2d63318cf7c5	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fa55177c-ba65-4113-9c05-2d63318cf7c5	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+fa55177c-ba65-4113-9c05-2d63318cf7c5	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+fa55177c-ba65-4113-9c05-2d63318cf7c5	f0/t2	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 fa56a5fa-ef96-404c-8fb6-d1f5fcebb52e	cast	cast-resolve	agreed	-	X	scen	1	0	Surrak, the Hunt Caller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa56a5fa-ef96-404c-8fb6-d1f5fcebb52e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Surrak, the Hunt Caller/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa58591b-240f-4527-8308-7b87263e784f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:enthralling-victor:cast:s1,f:xs:XP:enthralling-victor:cast:s1	-	-	-	d864b561c9cb	-	4861fd1997cc	-	-	2026-11-24	xproof

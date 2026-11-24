@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 d001febc-d511-4e65-a631-91dc9415056b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:pyrokinesis:cast:s1	-	-	-	8c0bd19283bb	-	a108a5394dcf	-	-	2026-11-24	xproof
 d002391f-1dad-4966-ac36-56cc3ec015b2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d002391f-1dad-4966-ac36-56cc3ec015b2	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d002391f-1dad-4966-ac36-56cc3ec015b2	f0/a1	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d002391f-1dad-4966-ac36-56cc3ec015b2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d0025d29-d652-4af8-b367-13142d5532df	cast	cast-resolve	agreed	-	X	scen	1	0	Mechan Shieldmate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d0025d29-d652-4af8-b367-13142d5532df	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mechan Shieldmate/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -51,8 +51,8 @@ d04b6c2c-50fc-464d-9991-230efec70d2b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d04bce9a-822b-4a52-8826-b503ef5f5b2e	cast	cast-resolve	agreed	-	FX	scen	2	0	Slumbering Trudge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d04c6375-25dd-4882-b8b3-a3b0d3081f32	cast	cast-resolve	agreed	-	X	scen	1	0	Doppelgang/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d04d2434-121e-4420-abfc-fa21ad5577c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d04d2434-121e-4420-abfc-fa21ad5577c3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d04d2434-121e-4420-abfc-fa21ad5577c3	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d04d2434-121e-4420-abfc-fa21ad5577c3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:shard-of-the-void-dragon:f0t0:s1,f:xs:XP:shard-of-the-void-dragon:f0t0:s1	-	-	-	8c0bd19283bb	-	25e6da4ac634	-	-	2026-11-24	xproof
+d04d2434-121e-4420-abfc-fa21ad5577c3	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shard-of-the-void-dragon:f0t0:s1,f:xs:XP:shard-of-the-void-dragon:f0t0:s1	-	-	-	8c0bd19283bb	-	25e6da4ac634	-	-	2026-11-24	xproof
 d04e0975-f401-41b8-a9db-9bcf9cbbce66	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Starting Town/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d04e0975-f401-41b8-a9db-9bcf9cbbce66	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Starting Town/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d04e0975-f401-41b8-a9db-9bcf9cbbce66	land	play-land	agreed	-	X	scen	1	0	Starting Town/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

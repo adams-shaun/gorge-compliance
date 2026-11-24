@@ -53,9 +53,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5546d127-a961-4e33-bbc9-06ee14b0cb04	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5548ff43-e5f6-4a63-8562-a2b1de06d6f5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:riveteers-overlook:f0t0:s1,f:xs:XP:riveteers-overlook:f0t0:s1	-	-	-	d864b561c9cb	-	7be2495ffaec	-	-	2026-11-24	xproof
 5548ff43-e5f6-4a63-8562-a2b1de06d6f5	land	land	agreed	-	FX	start	2	0	x:xs:XP:riveteers-overlook:f0t0:s1,f:xs:XP:riveteers-overlook:f0t0:s1	-	-	-	d864b561c9cb	-	7be2495ffaec	-	-	2026-11-24	xproof
-554ac5df-b49c-4041-963d-408160f59fc1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+554ac5df-b49c-4041-963d-408160f59fc1	cast	cast	agreed	-	F	start	2	0	f:xs:XP:doctor-strange-master-of-magic:cast:s1	-	-	-	8c0bd19283bb	-	f5b3c3d6f1e1	-	-	2026-11-24	xproof
 554ac5df-b49c-4041-963d-408160f59fc1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-554ac5df-b49c-4041-963d-408160f59fc1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+554ac5df-b49c-4041-963d-408160f59fc1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 554de904-086c-428c-9f32-b0b2498a6fd5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 554de904-086c-428c-9f32-b0b2498a6fd5	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-debaser:f0a0:s1,f:xs:XP:phyrexian-debaser:f0a0:s1	-	-	-	5f2128bf97e4	-	bf2715a3f817	-	-	2026-11-24	xproof
 5554db95-9676-4c24-b82a-8173513d7927	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Fisk Tower/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -123,8 +123,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 55adde23-c818-40fe-9bba-123de93568a5	cast	cast-resolve	agreed	-	FX	scen	2	0	Katara, Bending Prodigy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55adde23-c818-40fe-9bba-123de93568a5	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Katara, Bending Prodigy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55adde23-c818-40fe-9bba-123de93568a5	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Katara, Bending Prodigy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-55adf2f0-f023-4f41-ae9d-3c002e9e6e8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-55adf2f0-f023-4f41-ae9d-3c002e9e6e8d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+55adf2f0-f023-4f41-ae9d-3c002e9e6e8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knickknack-ouphe:f0t0:s1,f:xs:XP:knickknack-ouphe:f0t0:s1	-	-	-	8c0bd19283bb	-	f3e9f7dec573	-	-	2026-11-24	xproof
+55adf2f0-f023-4f41-ae9d-3c002e9e6e8d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:knickknack-ouphe:f0t0:s1,f:xs:XP:knickknack-ouphe:f0t0:s1	-	-	-	8c0bd19283bb	-	f3e9f7dec573	-	-	2026-11-24	xproof
 55b0518e-9c87-4f0e-81c2-9c984f760be1	cast	cast-resolve	agreed	-	FX	scen	2	0	Twist Reality/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55b12241-2495-45e6-b618-3746d5521291	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alpine-guide:f0t0:s1,f:xs:XP:alpine-guide:f0t0:s1	-	-	-	d864b561c9cb	-	38ba7b37ec80	-	-	2026-11-24	xproof
 55b12241-2495-45e6-b618-3746d5521291	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:alpine-guide:f0t0:s1,f:xs:XP:alpine-guide:f0t0:s1	-	-	-	d864b561c9cb	-	38ba7b37ec80	-	-	2026-11-24	xproof

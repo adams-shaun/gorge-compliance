@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d4e7422-2e26-49ce-beef-08f61583089a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Armasaur Guide/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d4e7422-2e26-49ce-beef-08f61583089a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Armasaur Guide/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d55a1c5-fd0b-44d2-9e7c-550052fef262	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d55a1c5-fd0b-44d2-9e7c-550052fef262	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d55a1c5-fd0b-44d2-9e7c-550052fef262	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1d569df1-23cf-4e01-8ef9-a1a8b815f11e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d569df1-23cf-4e01-8ef9-a1a8b815f11e	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:fervent-paincaster:f0a0:s1,f:xs:XP:fervent-paincaster:f0a0:s1	-	-	-	d864b561c9cb	-	d9733be8fa6a	-	-	2026-11-24	xproof
 1d569df1-23cf-4e01-8ef9-a1a8b815f11e	f0/a1	NULL	owed	refused:steps-needed:cost:Exert	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -94,10 +94,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d7a4e9c-b3c9-421e-b5f4-82d51d7d5125	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temporal-spring:cast:s1,f:xs:XP:temporal-spring:cast:s1	-	-	-	fc71ca68c5ac	-	fb6588866116	-	-	2026-11-24	xproof
 1d7d340d-fe6f-4314-97ba-e0bf36a4ef6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greenhilt-trainee:cast:s1,f:xs:XP:greenhilt-trainee:cast:s1	-	-	-	d864b561c9cb	-	ec513a284500	-	-	2026-11-24	xproof
 1d7d340d-fe6f-4314-97ba-e0bf36a4ef6c	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1d7ee372-3a3d-4e23-a1ce-b8b8cdd4bdae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d7ee372-3a3d-4e23-a1ce-b8b8cdd4bdae	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1d82f01a-29be-4756-8745-e2c04bf77c61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,13 +147,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1dafc03b-6c45-4f28-8a1f-b4f1044adc97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1db6a042-303e-4b76-bb6c-63df846fd6c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1db6a042-303e-4b76-bb6c-63df846fd6c9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1db6a042-303e-4b76-bb6c-63df846fd6c9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1db6a042-303e-4b76-bb6c-63df846fd6c9	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1db76752-31ed-4a16-986a-d0852ba7d812	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1db76752-31ed-4a16-986a-d0852ba7d812	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1dbadf75-28cd-4525-8f51-9c53049b9b54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dbadf75-28cd-4525-8f51-9c53049b9b54	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dbe4eb4-8313-459a-89ce-982442cd0cd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1dbe4eb4-8313-459a-89ce-982442cd0cd0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1dbe4eb4-8313-459a-89ce-982442cd0cd0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1dc2c213-72f6-4112-96a8-bf6ad553c707	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dc2c213-72f6-4112-96a8-bf6ad553c707	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:icingdeath-frost-tyrant:f0t0:s1,f:xs:XP:icingdeath-frost-tyrant:f0t0:s1	-	-	-	ae86f6029288	-	18b418f83a64	-	-	2026-11-24	xproof
 1dc73412-c91c-48c9-bde6-b169add79b37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

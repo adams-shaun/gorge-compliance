@@ -49,8 +49,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 894bc28a-6627-43dd-9650-86300b6fe5e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 894d96b1-c82a-4141-a2f3-76da505bd5e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rubble-reading:cast:s1,f:xs:XP:rubble-reading:cast:s1	-	-	-	d864b561c9cb	-	6678d577be9b	-	-	2026-11-24	xproof
 89505f24-6c96-4062-8171-1851f7e7395b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-89505f24-6c96-4062-8171-1851f7e7395b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-89505f24-6c96-4062-8171-1851f7e7395b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+89505f24-6c96-4062-8171-1851f7e7395b	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+89505f24-6c96-4062-8171-1851f7e7395b	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:flaming-tyrannosaurus:f0t1:s1,f:xs:XP:flaming-tyrannosaurus:f0t1:s1	-	-	-	8c0bd19283bb	-	9606ec426938	-	-	2026-11-24	xproof
 8951d797-6356-4f27-a6de-e013216274d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8951d797-6356-4f27-a6de-e013216274d6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 895527a6-e3b2-454d-a3be-c0036630ec73	cast	cast	agreed	-	F	start	2	0	f:xs:XP:body-double:cast:s1	-	-	-	9ee19e8250ce	-	e343e5147de3	-	-	2026-11-24	xproof
@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 897eef47-3e99-4a5f-8a3e-ddb06bc95e9a	cast	cast-resolve	agreed	-	X	scen	1	0	Meat Locker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 897eef47-3e99-4a5f-8a3e-ddb06bc95e9a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Meat Locker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 897eef47-3e99-4a5f-8a3e-ddb06bc95e9a	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Meat Locker/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-897f666e-0dda-4577-a3d7-792e3ac2f460	cast	cast	diverged	-	-	start	0	2	-	9aa9c72f22c5	-	-	ea3140b6974b	-	7f3eb666a5fd	-	-	2026-11-24	xproof
+897f666e-0dda-4577-a3d7-792e3ac2f460	cast	cast	diverged	-	-	start	0	2	-	9aa9c72f22c5	-	-	8c0bd19283bb	-	7f3eb666a5fd	-	-	2026-11-24	xproof
 897f666e-0dda-4577-a3d7-792e3ac2f460	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8981d1d1-e102-4a3d-96ad-3904c83d1611	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8981d1d1-e102-4a3d-96ad-3904c83d1611	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof

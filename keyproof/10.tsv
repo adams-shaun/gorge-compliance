@@ -133,8 +133,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1091c83a-a4b9-457f-a69a-9a44a7e10759	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Echo, Perceptive Prodigy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1093fdb6-bd4f-46a8-92e3-5aa46b52bb4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1093fdb6-bd4f-46a8-92e3-5aa46b52bb4f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1095fcd9-8127-4345-9052-fccb350296d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1095fcd9-8127-4345-9052-fccb350296d3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1095fcd9-8127-4345-9052-fccb350296d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hold-for-questioning:f0t0:s1,f:xs:XP:hold-for-questioning:f0t0:s1	-	-	-	8c0bd19283bb	-	12a1c081aa22	-	-	2026-11-24	xproof
+1095fcd9-8127-4345-9052-fccb350296d3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hold-for-questioning:f0t0:s1,f:xs:XP:hold-for-questioning:f0t0:s1	-	-	-	8c0bd19283bb	-	12a1c081aa22	-	-	2026-11-24	xproof
 109899e1-abd7-4582-8b67-b0852755bf75	cast	cast	agreed	-	F	start	2	0	f:xs:XP:quickling:f0t0:s1	-	-	-	d864b561c9cb	-	728f1a5dda31	-	-	2026-11-24	xproof
 109899e1-abd7-4582-8b67-b0852755bf75	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:quickling:f0t0:s1	-	-	-	d864b561c9cb	-	728f1a5dda31	-	-	2026-11-24	xproof
 1098ff82-8cad-4283-8493-5492f12ea200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,7 +187,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10d13ff6-c4d0-4753-8939-a8a90f0e92bb	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Eye of Ugin/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 10d13ff6-c4d0-4753-8939-a8a90f0e92bb	land	play-land	agreed	-	FX	scen	2	0	Eye of Ugin/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 10d1d6ca-95f8-48da-8798-37c8aadb1f1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10d1d6ca-95f8-48da-8798-37c8aadb1f1f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+10d1d6ca-95f8-48da-8798-37c8aadb1f1f	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 10d24900-cd40-4c98-bb1e-b9e66113f703	cast	cast-resolve	agreed	-	FX	scen	2	0	Dog Walker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10d24900-cd40-4c98-bb1e-b9e66113f703	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dog Walker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10d24900-cd40-4c98-bb1e-b9e66113f703	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dog Walker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10d366cb-b92f-401c-a88e-60b267bd8ae5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10d366cb-b92f-401c-a88e-60b267bd8ae5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10d8f29a-d483-4f06-bc13-d41d62847ffe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-10d8f29a-d483-4f06-bc13-d41d62847ffe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+10d8f29a-d483-4f06-bc13-d41d62847ffe	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 10db57b4-f895-4514-b610-2252ba676353	cast	cast-resolve	agreed	-	X	scen	1	0	Bullseye, Death Dealer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10db57b4-f895-4514-b610-2252ba676353	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bullseye, Death Dealer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10db57b4-f895-4514-b610-2252ba676353	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof

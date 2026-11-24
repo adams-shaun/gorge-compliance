@@ -32,9 +32,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25328cab-c7c0-4c55-99bb-a4149f6c511a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:bramble-armor:cast:s1,f:xs:XP:bramble-armor:cast:s1	-	-	-	d864b561c9cb	-	383042c55eec	-	-	2026-11-24	xproof
 25328cab-c7c0-4c55-99bb-a4149f6c511a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25328cab-c7c0-4c55-99bb-a4149f6c511a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:bramble-armor:cast:s1,f:xs:XP:bramble-armor:cast:s1	-	-	-	d864b561c9cb	-	383042c55eec	-	-	2026-11-24	xproof
-2536750c-3c4f-4e00-b517-680ad4fd2ecc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2536750c-3c4f-4e00-b517-680ad4fd2ecc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:skeleton-crew:cast:s1,f:xs:XP:skeleton-crew:cast:s1	-	-	-	8c0bd19283bb	-	42a5dc1c8d87	-	-	2026-11-24	xproof
 2536750c-3c4f-4e00-b517-680ad4fd2ecc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2536750c-3c4f-4e00-b517-680ad4fd2ecc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2536750c-3c4f-4e00-b517-680ad4fd2ecc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 253bec96-108c-4880-9c04-8bc99ceafa64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heart-piercer-manticore:f0t0:s1,f:xs:XP:heart-piercer-manticore:f0t0:s1	-	-	-	d864b561c9cb	-	f9cd44fd56ec	-	-	2026-11-24	xproof
 253bec96-108c-4880-9c04-8bc99ceafa64	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 253bec96-108c-4880-9c04-8bc99ceafa64	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:heart-piercer-manticore:f0t0:s1,f:xs:XP:heart-piercer-manticore:f0t0:s1	-	-	-	d864b561c9cb	-	f9cd44fd56ec	-	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25977c02-e2d4-4afd-b12d-37ce4d58f453	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25977c02-e2d4-4afd-b12d-37ce4d58f453	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:golden-egg:f0a1:s1,f:xs:XP:golden-egg:f0a1:s1	-	-	-	ae86f6029288	-	9d0fe5f340e9	-	-	2026-11-24	xproof
 25977c02-e2d4-4afd-b12d-37ce4d58f453	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:golden-egg:cast:s1,f:xs:XP:golden-egg:cast:s1	-	-	-	ae86f6029288	-	9d0fe5f340e9	-	-	2026-11-24	xproof
-2598294c-a9a7-4bef-a562-23f297a80536	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2598294c-a9a7-4bef-a562-23f297a80536	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2598294c-a9a7-4bef-a562-23f297a80536	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:songbirds-blessing:cast:s1,f:xs:XP:songbirds-blessing:cast:s1	-	-	-	8c0bd19283bb	-	13c2b17ccfc6	-	-	2026-11-24	xproof
+2598294c-a9a7-4bef-a562-23f297a80536	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 259a023a-de55-4bab-9e24-01aebcf716eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ranger-s-path:cast:s1,f:xs:XP:ranger-s-path:cast:s1	-	-	-	d864b561c9cb	-	4fd577bbdf7b	-	-	2026-11-24	xproof
 259ac30c-cc05-4c04-9b23-71283f84b808	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 259ac30c-cc05-4c04-9b23-71283f84b808	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

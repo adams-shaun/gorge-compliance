@@ -120,8 +120,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ed55e9c-84ea-42a3-a32f-469da56b3eb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ed9bccf-c655-426e-8192-65beab830fcd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ed9bccf-c655-426e-8192-65beab830fcd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:owen-grady-raptor-trainer:cast:s1,f:xs:XP:owen-grady-raptor-trainer:cast:s1	-	-	-	8c0bd19283bb	-	ffc167bd7326	-	-	2026-11-24	xproof
+4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:owen-grady-raptor-trainer:f0a0:s1,f:xs:XP:owen-grady-raptor-trainer:f0a0:s1	-	-	-	8c0bd19283bb	-	ffc167bd7326	-	-	2026-11-24	xproof
 4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4edbaac4-dcb3-40b4-abd7-ff2683bd366d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:champion-of-stray-souls:cast:s1,f:xs:XP:champion-of-stray-souls:cast:s1	-	-	-	d864b561c9cb	-	e2513d0ae5d9	-	-	2026-11-24	xproof
 4edbaac4-dcb3-40b4-abd7-ff2683bd366d	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:champion-of-stray-souls:f0a1:s1	-	-	-	8c0bd19283bb	-	e2513d0ae5d9	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4eef2f24-6a5c-4bc7-b316-dd818dc2741a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ridgescale-tusker:f0t0:s1,f:xs:XP:ridgescale-tusker:f0t0:s1	-	-	-	d864b561c9cb	-	32c913adaa32	-	-	2026-11-24	xproof
 4ef07e5a-3dc3-41dd-a3a9-e8812b4d40d3	cast	cast-resolve	agreed	-	X	scen	1	0	Trial of Agony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ef4b4f9-47cd-4862-8cbb-b6e624d6e6fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ef4b4f9-47cd-4862-8cbb-b6e624d6e6fc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4ef4b4f9-47cd-4862-8cbb-b6e624d6e6fc	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4ef583ab-e0a0-4e4b-bd65-af766038b1fd	cast	cast-resolve	agreed	-	X	scen	1	0	Ghost Vacuum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ef583ab-e0a0-4e4b-bd65-af766038b1fd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ghost Vacuum/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ef583ab-e0a0-4e4b-bd65-af766038b1fd	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ghost Vacuum/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

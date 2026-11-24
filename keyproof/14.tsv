@@ -91,8 +91,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 147d1e5c-fcfd-4115-a2f9-bea9b7ad7bb6	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Intrepid Trufflesnout/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 147e0e74-f76b-4f0a-951f-d39afdd72c02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rishadan-cutpurse:f0t0:s1,f:xs:XP:rishadan-cutpurse:f0t0:s1	-	-	-	5f2128bf97e4	-	322e59ba5621	-	-	2026-11-24	xproof
 147e0e74-f76b-4f0a-951f-d39afdd72c02	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rishadan-cutpurse:f0t0:s1,f:xs:XP:rishadan-cutpurse:f0t0:s1	-	-	-	5f2128bf97e4	-	322e59ba5621	-	-	2026-11-24	xproof
-148145ef-a368-4caf-921d-e3809adf03de	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-148145ef-a368-4caf-921d-e3809adf03de	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+148145ef-a368-4caf-921d-e3809adf03de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vodalian-wave-knight:cast:s1,f:xs:XP:vodalian-wave-knight:cast:s1	-	-	-	8c0bd19283bb	-	a0711af69c0b	-	-	2026-11-24	xproof
+148145ef-a368-4caf-921d-e3809adf03de	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 14817050-9f2d-453f-b36b-e6429fa29165	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:horned-kavu:cast:s1,f:xs:XP:horned-kavu:cast:s1	-	-	-	fc71ca68c5ac	-	2f9f0f4dc174	-	-	2026-11-24	xproof
 14817050-9f2d-453f-b36b-e6429fa29165	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:horned-kavu:cast:s1,f:xs:XP:horned-kavu:cast:s1	-	-	-	fc71ca68c5ac	-	2f9f0f4dc174	-	-	2026-11-24	xproof
 148331cc-24de-481f-9131-c3089d1ff7ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,5 +187,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14f36157-f55f-495d-9ffe-f38135a59750	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:shire-shirriff:cast:s1,f:xs:XP:shire-shirriff:cast:s1	-	-	-	ae86f6029288	-	1939c658e81c	-	-	2026-11-24	xproof
 14f55fc9-ec19-4b4a-b3de-d75898c19edf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14f55fc9-ec19-4b4a-b3de-d75898c19edf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14f55fc9-ec19-4b4a-b3de-d75898c19edf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+14f55fc9-ec19-4b4a-b3de-d75898c19edf	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 14fa0771-cf2b-4563-98b2-ff4ee24bce21	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

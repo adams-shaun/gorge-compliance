@@ -19,7 +19,7 @@ cd1a9d87-4c91-4456-8d88-19e0d6e0b200	combat#0.attack	combat#0.attack	agreed	-	X	
 cd1a9d87-4c91-4456-8d88-19e0d6e0b200	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gandalf, Spark Starter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cd1a9d87-4c91-4456-8d88-19e0d6e0b200	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gandalf-spark-starter:f0t0:s1,f:xs:XP:gandalf-spark-starter:f0t0:s1	-	-	-	25696bf19d5b	-	bc7deac70cd0	-	-	2026-11-24	xproof
 cd1b3ef3-73ac-4f06-8cfb-5f2388481379	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cd1b3ef3-73ac-4f06-8cfb-5f2388481379	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cd1b3ef3-73ac-4f06-8cfb-5f2388481379	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:tribune-of-rot:f0t0:s1,f:xs:XP:tribune-of-rot:f0t0:s1	-	-	-	8c0bd19283bb	-	040768bc3adb	-	-	2026-11-24	xproof
 cd1ca3c8-1f03-4c03-a93a-0419ac205c18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-of-dusk:cast:s1,f:xs:XP:knight-of-dusk:cast:s1	-	-	-	25696bf19d5b	-	f1c8e161c8b7	-	-	2026-11-24	xproof
 cd1ca3c8-1f03-4c03-a93a-0419ac205c18	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 cd1e6225-31b7-4a70-81ab-681abe860328	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tinker-s-tote:f0t0:s2,f:xs:XP:tinker-s-tote:f0t0:s2	-	-	-	e07cf3a05ba5	-	b898b470ba46	-	-	2026-11-24	xproof
@@ -190,9 +190,9 @@ cdf34da6-d952-43ca-855d-fcd9d49efae6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	
 cdf41cf4-4e77-453d-be5b-0abbbd358934	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cdf41cf4-4e77-453d-be5b-0abbbd358934	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cdf41cf4-4e77-453d-be5b-0abbbd358934	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cdf5c31c-c324-471f-b6d7-06a06e91daa3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cdf5c31c-c324-471f-b6d7-06a06e91daa3	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cdf5c31c-c324-471f-b6d7-06a06e91daa3	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cdf5c31c-c324-471f-b6d7-06a06e91daa3	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	9daa85daf123	-	-	2026-11-24	xproof
+cdf5c31c-c324-471f-b6d7-06a06e91daa3	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	9daa85daf123	-	-	2026-11-24	xproof
+cdf5c31c-c324-471f-b6d7-06a06e91daa3	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 cdf8b698-57d6-4d17-8168-87680060c0d6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garrison-sergeant:cast:s1,f:xs:XP:garrison-sergeant:cast:s1	-	-	-	d864b561c9cb	-	0f97cd18462b	-	-	2026-11-24	xproof
 cdf9fab2-bfdb-4bf3-a06a-b21e07600e23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cdfcfd2b-966a-4e03-8ed5-4fa7fab423d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

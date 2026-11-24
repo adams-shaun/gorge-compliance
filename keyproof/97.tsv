@@ -134,8 +134,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Territorial Witchstalker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Territorial Witchstalker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97bb1589-2941-4a75-a5f6-916871e51e9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97bb1589-2941-4a75-a5f6-916871e51e9e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97bb1589-2941-4a75-a5f6-916871e51e9e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97bb1589-2941-4a75-a5f6-916871e51e9e	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+97bb1589-2941-4a75-a5f6-916871e51e9e	f0/t1	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 97bb382b-16b2-44db-a2bd-de09ca90bfcc	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:myr-kinsmith:cast:s1,f:xs:XP:myr-kinsmith:cast:s1	-	-	-	ae86f6029288	-	303dd6874636	-	-	2026-11-24	xproof
 97bb382b-16b2-44db-a2bd-de09ca90bfcc	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:myr-kinsmith:cast:s1,f:xs:XP:myr-kinsmith:cast:s1	-	-	-	ae86f6029288	-	303dd6874636	-	-	2026-11-24	xproof
 97bdfbe0-7048-4157-8a58-5b17410750ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -172,11 +172,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97f548b1-6398-4dc7-b5eb-da5a3f24ddb7	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:king-suleiman:f0a0:s1,f:xs:XP:king-suleiman:f0a0:s1	-	-	-	ae86f6029288	-	4a376c7d1503	-	-	2026-11-24	xproof
 97f929ce-3eb3-4040-972f-0b21d5f2f61f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:volcanic-rambler:cast:s1,f:xs:XP:volcanic-rambler:cast:s1	-	-	-	d864b561c9cb	-	aafa74b9809b	-	-	2026-11-24	xproof
 97f929ce-3eb3-4040-972f-0b21d5f2f61f	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:volcanic-rambler:f0a0:s1,f:xs:XP:volcanic-rambler:f0a0:s1	-	-	-	d864b561c9cb	-	aafa74b9809b	-	-	2026-11-24	xproof
-97f9aa5e-e34d-4029-9213-b32ebaf9859c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97f9b82f-b3cf-44ff-9abc-2d92d7cbaa27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97f9b82f-b3cf-44ff-9abc-2d92d7cbaa27	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97f9b82f-b3cf-44ff-9abc-2d92d7cbaa27	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97f9b82f-b3cf-44ff-9abc-2d92d7cbaa27	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97f9aa5e-e34d-4029-9213-b32ebaf9859c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:their-name-is-death:cast:s1,f:xs:XP:their-name-is-death:cast:s1	-	-	-	8c0bd19283bb	-	40f079a3f555	-	-	2026-11-24	xproof
+97f9b82f-b3cf-44ff-9abc-2d92d7cbaa27	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ellivere-of-the-wild-court:f0t0:s1,f:xs:XP:ellivere-of-the-wild-court:f0t0:s1	-	-	-	8c0bd19283bb	-	ff28a7c607cd	-	-	2026-11-24	xproof
+97f9b82f-b3cf-44ff-9abc-2d92d7cbaa27	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ellivere-of-the-wild-court:f0t0:s1,f:xs:XP:ellivere-of-the-wild-court:f0t0:s1	-	-	-	8c0bd19283bb	-	ff28a7c607cd	-	-	2026-11-24	xproof
+97f9b82f-b3cf-44ff-9abc-2d92d7cbaa27	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ellivere-of-the-wild-court:f0t1:s1,f:xs:XP:ellivere-of-the-wild-court:f0t1:s1	-	-	-	8c0bd19283bb	-	ff28a7c607cd	-	-	2026-11-24	xproof
+97f9b82f-b3cf-44ff-9abc-2d92d7cbaa27	f0/t2	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 97fad58a-8ee4-4f01-a47a-5ddc9ed845af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97febf6b-302c-4c41-8838-eef7c7353bdc	cast	cast-resolve	agreed	-	X	scen	1	0	Glen Elendra Guardian/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 97febf6b-302c-4c41-8838-eef7c7353bdc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Glen Elendra Guardian/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

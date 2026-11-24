@@ -11,9 +11,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 810a6cf5-e9f4-48e1-8e06-3e0af85633ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:day-s-undoing:cast:s1,f:xs:XP:day-s-undoing:cast:s1	-	-	-	d864b561c9cb	-	6f879e815042	-	-	2026-11-24	xproof
 8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-8110f15d-82db-4299-a959-09c22475daec	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8110f15d-82db-4299-a959-09c22475daec	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8110f15d-82db-4299-a959-09c22475daec	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8110f15d-82db-4299-a959-09c22475daec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:cast:s1,f:xs:XP:kayla-s-music-box:cast:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
+8110f15d-82db-4299-a959-09c22475daec	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:f0a0:s1,f:xs:XP:kayla-s-music-box:f0a0:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
+8110f15d-82db-4299-a959-09c22475daec	f0/a1	Effect	agreed	-	FX	start	4	0	x:xs:XP:kayla-s-music-box:cast:s1,f:xs:XP:kayla-s-music-box:cast:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
 8110fe69-c66c-4e2c-86ee-dcc8dc9a13d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8110fe69-c66c-4e2c-86ee-dcc8dc9a13d1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8110fe69-c66c-4e2c-86ee-dcc8dc9a13d1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,8 +141,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81ab8947-8046-4944-ae58-006a6eefa08a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yannik-scavenging-sentinel:f0t1:s1,f:xs:XP:yannik-scavenging-sentinel:f0t1:s1	-	-	-	8c0bd19283bb	-	cbe16e8bc2a0	-	-	2026-11-24	xproof
 81ab8947-8046-4944-ae58-006a6eefa08a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81ab8947-8046-4944-ae58-006a6eefa08a	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81abb451-5ee0-4f90-bacc-a8ff69726a27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81abb451-5ee0-4f90-bacc-a8ff69726a27	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+81abb451-5ee0-4f90-bacc-a8ff69726a27	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:death-greeter-s-champion:f0t0:s1,f:xs:XP:death-greeter-s-champion:f0t0:s1	-	-	-	8c0bd19283bb	-	77f7fb07f2e7	-	-	2026-11-24	xproof
+81abb451-5ee0-4f90-bacc-a8ff69726a27	f0/t0	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:death-greeter-s-champion:f0t0:s1,f:xs:XP:death-greeter-s-champion:f0t0:s1	-	-	-	8c0bd19283bb	-	77f7fb07f2e7	-	-	2026-11-24	xproof
 81b15ed1-7069-4f8b-96b9-f6d67298afef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:voice-of-the-provinces:f0t0:s1,f:xs:XP:voice-of-the-provinces:f0t0:s1	-	-	-	d864b561c9cb	-	a7afcacfa775	-	-	2026-11-24	xproof
 81b15ed1-7069-4f8b-96b9-f6d67298afef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:voice-of-the-provinces:f0t0:s1,f:xs:XP:voice-of-the-provinces:f0t0:s1	-	-	-	d864b561c9cb	-	a7afcacfa775	-	-	2026-11-24	xproof
 81b2242b-40c9-475a-a198-28dd348235ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

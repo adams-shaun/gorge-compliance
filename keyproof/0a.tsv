@@ -100,10 +100,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a746c49-cc44-467a-85b7-3c498559aea7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a79237e-0811-4a8a-bd4d-db3ca91bff22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a79237e-0811-4a8a-bd4d-db3ca91bff22	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:alpha-deathclaw:cast:s1,f:xs:XP:alpha-deathclaw:cast:s1	-	-	-	8c0bd19283bb	-	9f0b213492bc	-	-	2026-11-24	xproof
+0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:alpha-deathclaw:f0a0:s1,f:xs:XP:alpha-deathclaw:f0a0:s1	-	-	-	8c0bd19283bb	-	9f0b213492bc	-	-	2026-11-24	xproof
+0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:alpha-deathclaw:cast:s1,f:xs:XP:alpha-deathclaw:cast:s1	-	-	-	8c0bd19283bb	-	9f0b213492bc	-	-	2026-11-24	xproof
+0a7d0d1f-a5ac-4db9-860c-9fcbe3fd9e71	f0/t1	BecomeMonstrous	agreed	-	FX	start	2	0	x:xs:XP:alpha-deathclaw:f0a0:s1,f:xs:XP:alpha-deathclaw:f0a0:s1	-	-	-	8c0bd19283bb	-	9f0b213492bc	-	-	2026-11-24	xproof
 0a7d6489-b239-4ce8-aea3-7b5d0e436f70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a836332-5905-4afa-a442-47d0bcf8acea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:timin-youthful-geist:f0t1:s1,f:xs:XP:timin-youthful-geist:f0t1:s1	-	-	-	8c0bd19283bb	-	4640626fcddb	-	-	2026-11-24	xproof
 0a836332-5905-4afa-a442-47d0bcf8acea	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -133,7 +133,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0aa7bd6a-0a8d-4413-a9e8-b7a459300841	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keldon-vandals:f0t0:s1,f:xs:XP:keldon-vandals:f0t0:s1	-	-	-	5f2128bf97e4	-	06f68a3c500e	-	-	2026-11-24	xproof
 0aa7bd6a-0a8d-4413-a9e8-b7a459300841	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keldon-vandals:f0t0:s1,f:xs:XP:keldon-vandals:f0t0:s1	-	-	-	5f2128bf97e4	-	06f68a3c500e	-	-	2026-11-24	xproof
 0aa7bd6a-0a8d-4413-a9e8-b7a459300841	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0aa875dc-89ae-4e7a-b10d-aadde8e2b95c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0aa875dc-89ae-4e7a-b10d-aadde8e2b95c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clockwork-droid:cast:s1,f:xs:XP:clockwork-droid:cast:s1	-	-	-	8c0bd19283bb	-	3b09824a6090	-	-	2026-11-24	xproof
 0aa9ee99-69a8-452b-a0d5-001384bdff3c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-dead:f0t0:s1,f:xs:XP:omen-of-the-dead:f0t0:s1	-	-	-	ae86f6029288	-	2d67311212a5	-	-	2026-11-24	xproof
 0aa9ee99-69a8-452b-a0d5-001384bdff3c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0aa9ee99-69a8-452b-a0d5-001384bdff3c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-dead:f0t0:s1,f:xs:XP:omen-of-the-dead:f0t0:s1	-	-	-	ae86f6029288	-	2d67311212a5	-	-	2026-11-24	xproof

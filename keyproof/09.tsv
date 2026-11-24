@@ -79,9 +79,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0953772c-9374-4616-9c04-5838aaf626c9	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Tenth District Hero/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 09537e9f-6c8e-4849-9d35-d4f3950a64d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kavu-primarch:cast:s1,f:xs:XP:kavu-primarch:cast:s1	-	-	-	d864b561c9cb	-	f8c4f40157a0	-	-	2026-11-24	xproof
 0956bc16-ff04-4e96-8059-ef62afa2405f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t0	ChangesZone	diverged	-	-	start	0	4	-	4e2027df0723	-	-	8c0bd19283bb	-	923a327c2afe	-	-	2026-11-24	xproof
+0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+0956bc16-ff04-4e96-8059-ef62afa2405f	f0/t2	NULL	owed	refused:no-generator:trigger:LandPlayed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0956c0f5-ff1d-43d5-88de-4c2d603cf798	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:koilos-roc:f0t0:s1,f:xs:XP:koilos-roc:f0t0:s1	-	-	-	ae86f6029288	-	c5a62c9685ec	-	-	2026-11-24	xproof
 0956c0f5-ff1d-43d5-88de-4c2d603cf798	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:koilos-roc:f0t0:s1,f:xs:XP:koilos-roc:f0t0:s1	-	-	-	ae86f6029288	-	c5a62c9685ec	-	-	2026-11-24	xproof
 095f8dac-15b8-4c28-ae33-6dc71152bcc7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0972d46e-423b-454e-87c7-a2d40fb6fb6d	cast	cast-resolve	agreed	-	FX	scen	2	0	Katara, the Fearless/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0972d46e-423b-454e-87c7-a2d40fb6fb6d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Katara, the Fearless/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 09763d9a-056f-49db-a72b-1c7325075789	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09763d9a-056f-49db-a72b-1c7325075789	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09763d9a-056f-49db-a72b-1c7325075789	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 09763d9a-056f-49db-a72b-1c7325075789	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 097bce84-22b1-4d7b-b566-e7c23eb626b9	cast	cast	agreed	-	F	start	2	0	f:xs:XP:mad-dog:cast:s1	-	-	-	fc71ca68c5ac	-	bc462cf3683b	-	-	2026-11-24	xproof
 097bce84-22b1-4d7b-b566-e7c23eb626b9	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:mad-dog:cast:s1	-	-	-	fc71ca68c5ac	-	bc462cf3683b	-	-	2026-11-24	xproof

@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b8c44a0-82ef-4beb-a762-c2a2a21380f3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omen:cast:s1,f:xs:XP:omen:cast:s1	-	-	-	ea3140b6974b	-	4ebc17446f0d	-	-	2026-11-24	xproof
 9b8d9236-0452-4509-aca4-a53a399fff85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b8d9236-0452-4509-aca4-a53a399fff85	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b8d9236-0452-4509-aca4-a53a399fff85	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9b8d9236-0452-4509-aca4-a53a399fff85	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9b90c7d1-38c6-4210-bc76-68c5fcb91202	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b90c7d1-38c6-4210-bc76-68c5fcb91202	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b93ff69-f195-4d72-8e1d-574c3e53bca8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9bdd68e7-7787-4579-a128-09e78fdbf0e2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:berg-strider:cast:s1,f:xs:XP:berg-strider:cast:s1	-	-	-	d864b561c9cb	-	b6c92624a0bc	-	-	2026-11-24	xproof
 9bdd68e7-7787-4579-a128-09e78fdbf0e2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:berg-strider:cast:s1,f:xs:XP:berg-strider:cast:s1	-	-	-	d864b561c9cb	-	b6c92624a0bc	-	-	2026-11-24	xproof
 9bdd6fea-d436-412b-a7b7-bbdba73dc986	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9bdd6fea-d436-412b-a7b7-bbdba73dc986	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9bdd6fea-d436-412b-a7b7-bbdba73dc986	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9bdd6fea-d436-412b-a7b7-bbdba73dc986	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:kitsune-dragon-s-daughter:f0t0:s2,f:xs:XP:kitsune-dragon-s-daughter:f0t0:s2	-	-	-	5437c1394672	-	2a65a1014491	-	-	2026-11-24	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kitsune, Dragon's Daughter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

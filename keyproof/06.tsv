@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0679dcef-e1c3-4739-a769-18a4ffdcfde7	static#0.2	static#0.2	agreed	-	X	scen	1	0	Akawalli, the Seething Tower/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 067b54e4-18f3-48e3-b824-3aba7fcf2408	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-apothecary:cast:s1,f:xs:XP:master-apothecary:cast:s1	-	-	-	fc71ca68c5ac	-	ceb6f2e9afec	-	-	2026-11-24	xproof
 067b54e4-18f3-48e3-b824-3aba7fcf2408	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:master-apothecary:cast:s1,f:xs:XP:master-apothecary:cast:s1	-	-	-	fc71ca68c5ac	-	ceb6f2e9afec	-	-	2026-11-24	xproof
-0684771f-46ea-40a3-b021-e98a7d7cd79d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0684771f-46ea-40a3-b021-e98a7d7cd79d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:towering-gibbon:cast:s1,f:xs:XP:towering-gibbon:cast:s1	-	-	-	8c0bd19283bb	-	a4b5519e73ea	-	-	2026-11-24	xproof
 068b3692-411b-44d4-a7e9-005262760cfc	cast	cast-resolve	agreed	-	FX	scen	2	0	Sacrifice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 068b370f-a358-4244-8050-6c81680c55c7	cast	cast-resolve	agreed	-	X	scen	1	0	Stocking the Pantry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 068b370f-a358-4244-8050-6c81680c55c7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stocking the Pantry/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06a37f16-c929-4b89-bf18-1b3f8f472eef	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Leering Onlooker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 06a3fe24-7e1f-4f98-ba2f-dbb5d38f4b9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06a6130f-f27b-4db0-915d-decd9a7d3c15	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06a6130f-f27b-4db0-915d-decd9a7d3c15	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:crystal-carapace:cast:s1,f:xs:XP:crystal-carapace:cast:s1	-	-	-	ea3140b6974b	-	3e3d38c3a67b	-	-	2026-11-24	xproof
+06a6130f-f27b-4db0-915d-decd9a7d3c15	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:crystal-carapace:cast:s1,f:xs:XP:crystal-carapace:cast:s1	-	-	-	8c0bd19283bb	-	3e3d38c3a67b	-	-	2026-11-24	xproof
 06a94ea3-6cda-42fe-ba3b-40a0e9044f8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06a94ea3-6cda-42fe-ba3b-40a0e9044f8e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06ada754-da78-4eda-8be7-3ac4f06115c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -158,16 +158,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06b1fd96-a3ad-4ebd-9ea4-b3cfb4c9c43d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06b1fd96-a3ad-4ebd-9ea4-b3cfb4c9c43d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 06b60766-a1fb-4ed0-93f6-8423008f75b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06bea0b2-1d0f-4d64-a13e-723d08042e83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arbalest-engineers:f0t0:s1,f:xs:XP:arbalest-engineers:f0t0:s1	-	-	-	ea3140b6974b	-	2618e309c43b	-	-	2026-11-24	xproof
+06bea0b2-1d0f-4d64-a13e-723d08042e83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arbalest-engineers:f0t0:s1,f:xs:XP:arbalest-engineers:f0t0:s1	-	-	-	8c0bd19283bb	-	2618e309c43b	-	-	2026-11-24	xproof
 06bea0b2-1d0f-4d64-a13e-723d08042e83	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06c12fcc-1c08-40a0-a0da-e139c42f083f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:druid-of-horns:cast:s1,f:xs:XP:druid-of-horns:cast:s1	-	-	-	d864b561c9cb	-	1e723437ecf8	-	-	2026-11-24	xproof
 06c12fcc-1c08-40a0-a0da-e139c42f083f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 06c1f8a4-4948-435b-ae98-b1276b57e958	cast	cast-resolve	agreed	-	X	scen	1	0	Traumatic Critique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-06c39c1c-0e34-4ef0-bd06-23245cb9cc59	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06c39c1c-0e34-4ef0-bd06-23245cb9cc59	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+06c39c1c-0e34-4ef0-bd06-23245cb9cc59	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sister-hospitaller:cast:s1,f:xs:XP:sister-hospitaller:cast:s1	-	-	-	8c0bd19283bb	-	bca2efcd61bd	-	-	2026-11-24	xproof
+06c39c1c-0e34-4ef0-bd06-23245cb9cc59	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sister-hospitaller:cast:s1,f:xs:XP:sister-hospitaller:cast:s1	-	-	-	8c0bd19283bb	-	bca2efcd61bd	-	-	2026-11-24	xproof
 06c3e85c-17d8-44e1-a0f8-07ef3f1624cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heated-debate:cast:s1,f:xs:XP:heated-debate:cast:s1	-	-	-	d864b561c9cb	-	a84e98285fa6	-	-	2026-11-24	xproof
 06c47664-2b4b-468e-a38d-04b62e6edd67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06c47664-2b4b-468e-a38d-04b62e6edd67	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+06c47664-2b4b-468e-a38d-04b62e6edd67	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 06ccec61-27d2-4079-80b5-29ebd3a980ee	cast	cast-resolve	agreed	-	X	scen	1	0	Cache Grab/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 06d0cb93-82ea-4868-bfd4-3e2835dcd94e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06d219ff-0083-4c2a-b5b3-2b84bb58f57e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
