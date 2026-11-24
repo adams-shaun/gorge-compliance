@@ -279,7 +279,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # pinned driver keeps both. The merge adds no file of its own; driver suite 162 tests green (UnlessEnergyConfirmTest,
 # ZeroCandidateConfirmTest, ForcedDieRollTest). cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
 # Fork branch fix/xp-forge-driver-unless-energy-confirm.
-FORGE_ORACLE_REF ?= 3494ec7d2bdc0ac257d891a230443c2b9b730ed2
+# 2bf0a1cb36 = 3494ec7d2b plus the one-card order pin: gorge logs a one-pick "order" decision for a look-at-the-top-card
+# put-back (DB$ RearrangeTopOfLibrary | NumCards$ 1: Dewdrop Spy, Merfolk Observer, Saheeli's Silverwing) while Forge calls
+# orderMoveToZoneList with one card, which ScriptedController returned at once, leaving the pin as a leftover (xproof
+# decision_shape strict_miss "unconsumed gorge decision(s): ... order[bottom] [Plains]"). A lone card now goes through
+# StepMachine.orderCards, which takes the order pin only when its pick names that card and otherwise leaves the queue
+# alone. LoneCardOrderTest pins it (driver suite 166 tests). Driver-only change; cardsfolder/tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-lone-card-order.
+FORGE_ORACLE_REF ?= 2bf0a1cb3641001a77e3303bf3c067640a9f799d
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
