@@ -76,7 +76,7 @@ ee4c29c3-f790-4e5e-a0d1-d47af7b62753	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 ee51365b-9f36-44a7-8706-ae5b2f86bd29	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:possessed-barbarian:cast:s1,f:xs:XP:possessed-barbarian:cast:s1	-	-	-	fc71ca68c5ac	-	7d1d47084c20	-	-	2026-11-24	xproof
 ee565d5c-7a3a-481c-91aa-b982cf384220	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee565d5c-7a3a-481c-91aa-b982cf384220	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-ee579a32-a048-4335-b966-231ba731cdea	cast	cast-resolve	agreed	-	X	scen	1	0	Phyrexian Arena/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ee579a32-a048-4335-b966-231ba731cdea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-arena:cast:s1,f:xs:XP:phyrexian-arena:cast:s1	-	-	-	23b491658465	-	8f02df2ddc81	-	-	2026-11-24	xproof
 ee579a32-a048-4335-b966-231ba731cdea	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Phyrexian Arena/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee57fba8-e68b-4c52-8de7-9b9873d84506	cast	cast-resolve	agreed	-	X	scen	1	0	Homesickness/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee5a4902-f993-4fe6-92da-38636962c558	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,7 +128,7 @@ ee8cf4b4-2e23-4f01-a9fc-7b47ddda31b7	f0/a0	NULL	owed	refused:steps-needed:cost:S
 ee8cf4b4-2e23-4f01-a9fc-7b47ddda31b7	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ee8de564-9c46-437e-92e6-829f002e181d	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	fbe545e3dfc1	-	-	2026-11-24	xproof
 ee8e6ef3-eb96-48bd-8619-8a9112b3d4f0	cast	cast-resolve	agreed	-	FX	scen	2	0	Iroh, Grand Lotus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ee8e6ef3-eb96-48bd-8619-8a9112b3d4f0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Iroh, Grand Lotus/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ee8e6ef3-eb96-48bd-8619-8a9112b3d4f0	f0/t0	Attacks/Firebending	agreed	-	FX	start	2	0	x:xs:XP:iroh-grand-lotus:f0t0:s1,f:xs:XP:iroh-grand-lotus:f0t0:s1	-	-	-	23b491658465	-	ef66fdd767b8	-	-	2026-11-24	xproof
 ee8e6ef3-eb96-48bd-8619-8a9112b3d4f0	static#0.0	static#0.0	agreed	-	X	scen	1	0	Iroh, Grand Lotus/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee8e6ef3-eb96-48bd-8619-8a9112b3d4f0	static#0.1	static#0.1	agreed	-	X	scen	1	0	Iroh, Grand Lotus/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ee8f16ba-cbf0-4286-b26c-d78dd35bee17	cast	cast-resolve	agreed	-	X	scen	1	0	Ankle Biter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

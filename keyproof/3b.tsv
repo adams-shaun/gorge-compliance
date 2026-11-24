@@ -218,9 +218,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bdd140b-1406-4d07-8f35-78f2ba92de64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stromkirk-occultist:cast:s1,f:xs:XP:stromkirk-occultist:cast:s1	-	-	-	d864b561c9cb	-	e05a3c597c03	-	-	2026-11-24	xproof
 3bdd140b-1406-4d07-8f35-78f2ba92de64	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3bdd3090-4503-4382-9a11-3e1cfcdffd71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3be3d7e6-7860-438a-b8c8-ef154c18c163	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Arid Archway/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3be3d7e6-7860-438a-b8c8-ef154c18c163	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Arid Archway/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3be3d7e6-7860-438a-b8c8-ef154c18c163	land	play-land	agreed	-	X	scen	1	0	Arid Archway/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3be3d7e6-7860-438a-b8c8-ef154c18c163	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:arid-archway:f0a0:s2,f:xs:XP:arid-archway:f0a0:s2	-	-	-	23b491658465	-	b210899afdf4	-	-	2026-11-24	xproof
+3be3d7e6-7860-438a-b8c8-ef154c18c163	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:arid-archway:land:s1	-	-	-	23b491658465	-	b210899afdf4	-	-	2026-11-24	xproof
+3be3d7e6-7860-438a-b8c8-ef154c18c163	land	land	agreed	-	F	start	2	0	f:xs:XP:arid-archway:land:s1	-	-	-	23b491658465	-	b210899afdf4	-	-	2026-11-24	xproof
 3be6e78f-f9ec-4bf4-b70f-40ba677aaa48	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fresh-meat:cast:s1,f:xs:XP:fresh-meat:cast:s1	-	-	-	d864b561c9cb	-	cfe4f791b2c1	-	-	2026-11-24	xproof
 3beba02f-4d50-4a93-a13b-78d4595bfbfc	cast	cast-resolve	agreed	-	FX	scen	2	0	Diamond Weapon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3beba02f-4d50-4a93-a13b-78d4595bfbfc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Diamond Weapon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
