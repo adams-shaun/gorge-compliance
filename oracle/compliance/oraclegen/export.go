@@ -162,6 +162,14 @@ func ChooseTargets(sc Scenario, ds []rules.OracleDecision) (Scenario, map[int]bo
 // castSteps is the set of cast step indices whose targets ChooseTargets took
 // from the cast; those target decisions travel through castSpell and are not
 // scripted a second time.
+//
+// A Support pick on a cast or activate step rewrites that step: its support
+// target is the ability's FIRST target, so an inline Step.Targets preset would
+// fill that slot and make XMage skip its own "up to N" ask. The preset is
+// cleared and the step leaves castSteps, so every one of the cast's targets is
+// scripted as a TARGET answer with the support answers first (support_pick.go).
+// The Steps slice is shared with the caller's scenario (the item the answers
+// are serialized with), so it sees the cleared preset.
 func XAnswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenario, modes map[string]int, castSteps map[int]bool) [][]XAnswer {
 	return xanswersForScenario(reg, res, sc, modes, castSteps)
 }

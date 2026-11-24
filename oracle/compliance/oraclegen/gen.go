@@ -1319,6 +1319,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var forage map[int][]string
 	var ownBounce map[int]bool
 	var bolster map[int]bool
+	var supports map[int]supportAnswers
 	var snaps []rules.OracleSnapshot
 	var orderAsks map[int]bool
 	for _, ex := range extras {
@@ -1327,6 +1328,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if bolster == nil {
 			bolster = ex.bolster
+		}
+		if supports == nil {
+			supports = ex.supports
 		}
 		if forage == nil {
 			forage = ex.forage
@@ -1449,6 +1453,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	// flip resolves before the step's scripted dialogs re-read the queue;
 	// the measured rows script nothing else on the flip's step).
 	stepFlips := make([][]XAnswer, steps)
+	// Support target answers are collected apart because their step precedes
+	// the decision that poses them: the support target is the source's FIRST
+	// target, so it must lead its announcement step's target queue even when
+	// that step also scripts another target's answer (a support spell's
+	// sub-ability target). Prepending them after demoteTriggerOrderSpans keeps
+	// the trigger-order span indices valid.
+	supportLead := make([][]XAnswer, steps)
 	for _, f := range flips {
 		v := map[bool]string{true: "win", false: "lose"}[f.Win]
 		if f.Step < 0 {
@@ -1499,6 +1510,16 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		if searchZoneSuppress[i] {
 			// The mapped SearchLibraryGraveyard* effect folds the optional
 			// search choices into its own library chooseUse.
+			continue
+		}
+		if sa, ok := supports[i]; ok {
+			// XMage asks a Support pick as a target when the source is
+			// announced, not at the resolution step gorge recorded it on
+			// (support_pick.go). The answers lead the announcement step.
+			if sa.step >= 0 && sa.step < steps && len(sa.answers) > 0 {
+				supportLead[sa.step] = append(supportLead[sa.step], sa.answers...)
+				any = true
+			}
 			continue
 		}
 		folded := d.Via == "target" || (d.Kind == "target" && modal[d.Step])
@@ -2087,6 +2108,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	// the inert text over them (dropping the scripted answers). Demoting on
 	// the unshifted list keeps the flips leading either way.
 	demoteTriggerOrderSpans(out, trigSpans)
+	for st := range supportLead {
+		if len(supportLead[st]) > 0 {
+			out[st] = append(supportLead[st], out[st]...)
+		}
+	}
 	for st, fs := range stepFlips {
 		if len(fs) > 0 {
 			out[st] = append(fs, out[st]...)
