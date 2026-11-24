@@ -87,6 +87,27 @@ if [ ! -f "$mymy" ] || ! grep -qF 'delegate.nextInt(bound)' "$mymy"; then
   die "$ref does not forward nextInt(bound) ($mymy); FORGE_ORACLE_REF predates item.die_rolls"
 fi
 
+# item.coin_flips is only honoured when the driver reads it and arms it on the
+# step that flips (ForcedDieRandom.nextBoolean, with the unbounded nextInt a
+# next(bits)-routing wrapper lands on), MyRandom forwards the boolean draw,
+# and the scripted controller calls the flip heads (the forced result is the
+# outcome itself). A driver with any half missing silently flips from its own
+# stream: Mana Clash deals 1 damage per tails it rolled itself and loops a
+# different number of times than gorge's recorded game. Same check-the-source
+# discipline as the die force above.
+creq=$src/src/main/java/forge/oracle/Request.java
+if [ ! -f "$creq" ] || ! grep -qF 'coin_flips' "$creq"; then
+  die "$ref does not read item.coin_flips ($creq); FORGE_ORACLE_REF predates item.coin_flips"
+fi
+for f in "$src/src/main/java/forge/oracle/ForcedDieRandom.java:req.coinFlips(step)" \
+         "$src/src/main/java/forge/oracle/ScriptedController.java:coinFlips(m.step())" \
+         "$mymy:delegate.nextBoolean()"; do
+  file=${f%%:*}; want=${f#*:}
+  if [ ! -f "$file" ] || ! grep -qF "$want" "$file"; then
+    die "$ref does not wire the coin force ($file lacks \"$want\"); FORGE_ORACLE_REF predates item.coin_flips"
+  fi
+done
+
 [ -s "$root/cp.txt" ] || die "no $root/cp.txt; run make forge-oracle-setup"
 [ -x "$jdk/bin/javac" ] || die "no JDK at $jdk"
 
