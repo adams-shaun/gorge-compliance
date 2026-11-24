@@ -19,6 +19,7 @@ import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
 import mage.abilities.costs.OptionalAdditionalSourceCosts;
 import mage.abilities.costs.OrCost;
+import mage.abilities.keyword.KickerAbility;
 import mage.abilities.keyword.LeylineAbility;
 import mage.abilities.keyword.SpreeAbility;
 import mage.abilities.costs.mana.HybridManaCost;
@@ -292,6 +293,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // so the generator's leading scripted "Yes" is that cost's ask. On any
     // other cast a leading Yes belongs to a later ask and is left queued.
     private boolean optionalCostCast = false;
+    // A cast step with cast_mode "kicked": gorge paid the spell's kicker cost
+    // (CR 702.33a: an optional additional cost chosen at announcement, CR
+    // 601.2b). XMage poses it as KickerAbility's "Pay <cost> kicker cost?"
+    // chooseUse (the OptionalAdditionalSourceCosts hook), which is answered
+    // Yes whether or not the generator scripted anything; every other optional
+    // cost on the same cast is still declined as on a plain cast.
+    private boolean kickedCast = false;
     // A cast step with cast_mode "alternative": gorge elected the first
     // alternative cost (Leyline of Mutation's grant, Land Grant's reveal).
     // XMage poses that as its alternative-cost key menu. The mode itself is
@@ -980,6 +988,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (owner.copyCostCast != null && askedBy(owner.copyCostCast, "addOptionalAdditionalCosts")) {
                 // The step elected this copy cost: pay it (the ask is the
                 // keyword's own, so no other optional cost is answered here).
+                return true;
+            }
+            if (owner.kickedCast && askedBy(KickerAbility.class, "addOptionalAdditionalCosts")) {
+                // The step elected Kicker: pay it. A scripted leading Yes is
+                // the same election, so it is consumed (strict mode sees it
+                // used) rather than left to misanswer a later ask.
+                if (!getChoices().isEmpty() && getChoices().get(0).equals("Yes")) {
+                    return super.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
+                }
                 return true;
             }
             if (askedBy(OptionalAdditionalSourceCosts.class, "addOptionalAdditionalCosts")) {
@@ -2299,6 +2316,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // one's optional additional costs.
             bargainedCast = false;
             optionalCostCast = false;
+            kickedCast = false;
             alternativeCostCast = false;
             copyCostCast = null;
             giftPromisedCast = false;
@@ -3678,7 +3696,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** Whether a cast step's cast_mode is one this driver elects: Bargain,
-     * "optionalcost", the face-down Disguise/Morph/Megamorph casts, the "plot" special
+     * "optionalcost", "kicked" (the single Kicker ask; kicked1/kicked2/kickedboth/
+     * multikicked pose per-kicker asks in order and stay rejected), the face-down Disguise/Morph/Megamorph casts, the "plot" special
      * action, a graveyard "flashback" cast, and a "mayplay" cast of a card a
      * play-from-exile permission (Reckless Impulse) reaches are wired
      * ("plot_cast", the later cast of a plotted card, is not); so are the
@@ -3689,7 +3708,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * value. */
     static boolean castModeSupported(String mode) {
         return mode == null || mode.isEmpty()
-                || mode.equals("bargained") || mode.equals("optionalcost")
+                || mode.equals("bargained") || mode.equals("optionalcost") || mode.equals("kicked")
                 || mode.equals("disguised") || mode.equals("morphed") || mode.equals("megamorphed")
                 || mode.equals("plot") || mode.equals("flashback")
                 // "mayplay": the card is in exile (or wherever a play-from-exile
@@ -5608,6 +5627,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
                 bargainedCast = "bargained".equals(castMode);
                 optionalCostCast = "optionalcost".equals(castMode);
+                kickedCast = "kicked".equals(castMode);
                 alternativeCostCast = "alternative".equals(castMode);
                 copyCostCast = copyCostKeyword(castMode);
                 // "plot" is XMage's Plot special action (PlotAbility is a
