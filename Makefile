@@ -91,7 +91,12 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # consumes gorge's waterbend_generic tap picks (Forge asks for waterbend taps through chooseCardsForConvokeOrImprovise, which took
 # only convoke*/improvise* kinds: Katara's Waterbend {X} paid from an empty pool and was refused). Driver-only change; same trees
 # as FORGE_REF ff076d4432. Fork branch fix/waterbend-tap-pick-driver.
-FORGE_ORACLE_REF ?= 963576e5d296e846bb74d1f3a0b32bee3a1f2c93
+# 3384230020 = 963576e5d2 + the scripted controller answers gorge's OriginAlternative$ zone election: one choose_n over zones
+# becomes Forge's initial "search the library?" confirm plus one confirm per alternative zone, and the Optional$ search_confirm is
+# left for Forge's later ChangeZoneGeneral gate; Endure's endure_counters/endure_spirit map to yes/no; and a same-name library
+# order (dig/hideaway bottom) is consumed though its order is unobservable, so it is not a leftover. Driver-only change; same
+# trees as FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-unmapped-asks.
+FORGE_ORACLE_REF ?= 3384230020dc2f419623ce58d26714770065f53a
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
