@@ -278,21 +278,62 @@ func lowerFrom(reg *cards.Registry, t *game.Tape, c *cut, id string, end int, sp
 	l.markDieRolls(m, wt.Entries[:n])
 	l.markCoinFlips(m, wt.Entries[:n])
 	l.compactPayment()
-	for k, e := range wt.Entries[:n] {
-		if e.RNG > 0 && !rngAccounted(e) {
-			l.HasRNG = true
-			l.RNGStep = len(l.StepEntry)
-			for i, se := range l.StepEntry {
-				if i >= l.Prelude && se >= k {
-					l.RNGStep = i
-					break
-				}
-			}
-			l.Item.Ignore = []string{"library_top"}
-			break
+	limit := n
+	if l.Truncated != "" {
+		limit = min(limit, l.TruncatedAt)
+	}
+	for k, e := range wt.Entries[:limit] {
+		if e.RNG == 0 || rngAccounted(e) {
+			continue
 		}
+		after, afterOK := game.Digest{}, k+1 < len(wt.Entries)
+		if afterOK {
+			after = wt.Entries[k+1].Digest
+		}
+		if afterOK && rngShuffle(e, after) {
+			if !l.HasRNG {
+				l.HasRNG = true
+				l.RNGStep = l.stepReaching(k)
+				l.Item.Ignore = []string{"library_top"}
+			}
+			continue
+		}
+		// A draw the tape cannot account for that is not a library shuffle:
+		// the runner's seeded RNG would land somewhere else, and the outcome
+		// can be visible on the board (Crystalline Giant's counter kind), not
+		// just in the library order HasRNG leaves out. Cut the window before
+		// the entry so neither a follower nor the self-check is handed it.
+		l.cutEntry(k, &truncation{ReasonRNG})
+		return l, nil
 	}
 	return l, nil
+}
+
+// stepReaching is the first step past the prelude whose StepEntry reaches tape
+// entry k, or len(StepEntry) when no step does.
+func (l *Lowered) stepReaching(k int) int {
+	for i := l.Prelude; i < len(l.StepEntry); i++ {
+		if l.StepEntry[i] >= k {
+			return i
+		}
+	}
+	return len(l.StepEntry)
+}
+
+// cutEntry keeps only the steps before the one carrying tape entry k: that
+// step and every later step go, and so do the group's mana taps (StepEntry -1)
+// that sit immediately before it. The cut is the first tape entry the lowering
+// did not replay.
+func (l *Lowered) cutEntry(k int, why *truncation) {
+	if l.Truncated != "" && l.TruncatedAt <= k {
+		return
+	}
+	at := l.stepReaching(k)
+	for at > l.Prelude && l.StepEntry[at-1] == -1 {
+		at--
+	}
+	l.drop(at)
+	l.stop(k, why)
 }
 
 // setupAnswerReasons is why the window's setup drive cannot place the cut: it

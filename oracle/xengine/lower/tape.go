@@ -27,6 +27,7 @@ const (
 	ReasonAttackNonPlayer = "attack_nonplayer" // an attack at a planeswalker or battle
 	ReasonUnbindableRef   = "unbindable_ref"   // an object the runner cannot name
 	ReasonLogOnlyCast     = "log_only_cast:"   // a window cast only the event log entitled
+	ReasonRNG             = "rng"              // an engine draw that is neither a recorded outcome nor a library shuffle
 	ReasonStall           = "stall"            // the tape ends in a watchdog, not a game end
 	ReasonUnsupported     = "unsupported_kind:"
 )
@@ -756,6 +757,17 @@ func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) 
 	}
 }
 
+// recordedDraws is the number of engine draws an entry's recorded outcomes
+// account for: one per die roll, and every flip's own count (0 for a flip a
+// FlipCoinMod static forced, 2 under a FlipCoinDoubler static).
+func recordedDraws(e game.Entry) uint64 {
+	draws := uint64(len(e.Rolls))
+	for _, f := range e.Flips {
+		draws += f.DrawCount()
+	}
+	return draws
+}
+
 // rngAccounted reports whether every engine draw an entry consumed is one
 // the tape records explicitly: a die roll or a coin flip. A die or an
 // ordinary flip consumes one draw (gorge's rng.IntN); a FlipCoinMod static
@@ -763,14 +775,41 @@ func attach(st *oraclegen.Step, answers []oraclegen.Answer, group []game.Entry) 
 // static (Krark's Thumb) makes coinResult draw twice for one flip
 // (Flip.DrawCount). RNG must equal the rolls plus every flip's recorded draw
 // count. A surplus draw is a shuffle or a random pick the runner's seeded RNG
-// cannot land where the live game did. One shared test keeps the three gates
-// (answersOf, resolveSpanLowerable, a window's HasRNG) from drifting apart.
-func rngAccounted(e game.Entry) bool {
-	draws := uint64(len(e.Rolls))
-	for _, f := range e.Flips {
-		draws += f.DrawCount()
+// cannot land where the live game did. One shared test keeps the gates
+// (answersOf, resolveSpanLowerable, a window's RNG cut) from drifting apart.
+func rngAccounted(e game.Entry) bool { return e.RNG == recordedDraws(e) }
+
+// rngShuffle reports whether e's surplus draws are a library shuffle. gorge's
+// only random operation that consumes more than one value is the Fisher-Yates
+// Shuffle over one seat's library (rules.rng.Shuffle), which draws
+// len(library)-1 values; after is the digest of the state the entry left, so a
+// seat's library_count names the size of the library it shuffled, and e.Digest
+// (taken before the intent) must show the top of that same library moved.
+// Every other surplus draw -- Crystalline Giant's random counter kind, a
+// random discard, a random target -- draws for the pick it made, and that
+// outcome can land on the board rather than only in the library order a
+// window's HasRNG leaves out. A shuffle that also drew or moved a card after
+// its pass no longer matches the count and is cut too: the window loses a
+// step, never agreement.
+func rngShuffle(e game.Entry, after game.Digest) bool {
+	draws := recordedDraws(e)
+	if e.RNG <= draws {
+		return false
 	}
-	return e.RNG == draws
+	surplus := e.RNG - draws
+	for i, p := range after.Players {
+		if p.LibraryCount <= 1 || surplus != uint64(p.LibraryCount-1) {
+			continue
+		}
+		// A shuffle reorders the library, so the top five cannot stay put. A
+		// matching count with an unchanged top is a pick that drew the same
+		// number as a shuffle would (a one-draw pick at a two-card library),
+		// not a shuffle, and must be cut.
+		if i < len(e.Digest.Players) && !slices.Equal(e.Digest.Players[i].LibraryTop, p.LibraryTop) {
+			return true
+		}
+	}
+	return false
 }
 
 // answersOf is the entries' asks as answers, in tape order; the first entry
