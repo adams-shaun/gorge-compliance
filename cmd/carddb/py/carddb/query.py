@@ -401,10 +401,20 @@ def run_need(conn, args, out):
         raise QueryError("need: this build has no keyproof table")
     limit = _limit(args.limit, "need")
     tier, params = _tier_sql(conn, args.format)
+    # --recredit REFS: agreed keys only REFS backs (X: XMage alone), replayed for the missing engine
+    recredit = getattr(args, "recredit", None)
+    if recredit is not None:
+        if not recredit or "+" in recredit:
+            raise QueryError("need --recredit: want a refs value such as X, got %r" % recredit)
+        where = "k.state='agreed' AND replace(k.refs,'+P','')=?"
+    else:
+        where = "k.state IN ('owed','diverged')"
     sql = ("SELECT t.tier, c.oracle_id, c.name, k.\"key\", k.\"desc\", k.state, k.reason, k.sig "
            "FROM (%s) t JOIN cards c ON c.oracle_id=t.oracle_id "
-           "JOIN keyproof k ON k.oracle_id=c.oracle_id WHERE k.state IN ('owed','diverged') "
-           "ORDER BY %s, k.\"key\"" % (tier, _NEED_ORDER))
+           "JOIN keyproof k ON k.oracle_id=c.oracle_id WHERE %s "
+           "ORDER BY %s, k.\"key\"" % (tier, where, _NEED_ORDER))
+    if recredit is not None:
+        params.append(recredit)
     if limit is not None:
         sql += " LIMIT ?"
         params.append(limit)

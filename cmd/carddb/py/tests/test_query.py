@@ -277,6 +277,31 @@ class Query(Base):
         self.assertEqual(r.returncode, 0, r.stderr)
         self.assertEqual(r.stdout, self.run_cli("need").stdout)
 
+    def test_need_recredit_lists_only_keys_one_engine_backs(self):
+        r = self.run_cli("need", "--recredit", "X")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        lines = r.stdout.splitlines()
+        self.assertEqual(lines[0], self.run_cli("need").stdout.splitlines()[0])  # same columns as need
+        rows = [l.split("\t") for l in lines[1:]]
+        # Bolt's f0/a0 is agreed by XMage alone; its FX cast and the owed/diverged keys are not listed
+        self.assertEqual([(x[2], x[3], x[5]) for x in rows], [("Lightning Bolt", "f0/a0", "agreed")], r.stdout)
+        r = self.run_cli("need", "--recredit", "FX", "--format", "modern")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual(sorted((x.split("\t")[2], x.split("\t")[3]) for x in r.stdout.splitlines()[1:]),
+                         [("Lightning Bolt", "cast")], r.stdout)  # Fire // Ice is banned in modern
+        r = self.run_cli("need", "--recredit", "X+P")
+        self.assertNotEqual(r.returncode, 0)
+        # refs X+P (a P witness beside XMage) still counts as XMage alone
+        db = os.path.join(self.tmp, "need-recredit.sqlite")
+        shutil.copy(self.priv, db)
+        conn = sqlite3.connect(db)
+        conn.execute("UPDATE keyproof SET refs='X+P' WHERE oracle_id=? AND \"key\"='f0/a0'", (OID_A,))
+        conn.commit()
+        conn.close()
+        r = self.cli(self.home, "need", "--db", db, "--private", "--recredit", "X")
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertEqual([l.split("\t")[3] for l in r.stdout.splitlines()[1:]], ["f0/a0"], r.stdout)
+
     def test_need_edhrec_rank_only_orders_tier_three(self):
         # Bolt (tier 2, edhrec rank 42, released first) and Dain (tier 2, no edhrec, released later)
         # both owe a key: the edhrec rank must not push Bolt behind Dain.

@@ -6,6 +6,17 @@ set -euo pipefail
 root=$(realpath -m "${XMAGE_ORACLE_DIR:-$(dirname "$0")/../.oracle-build/xmage}")
 out=${1:-.coverage/xmage-driver/driver-asks-driverout}
 here=$(cd "$(dirname "$0")/.." && pwd)
+src="$here/oracle/xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java"
+# The helper checks below cannot see the funnel call sites: a merge that
+# dropped the wiring would still compile and pass them. Pin every target-ask
+# entry point here -- the plain Target funnel, the Cards/TargetCard funnel and
+# TargetAmount -- and the empty-ask decline those same funnels use.
+lone_calls=$(/usr/bin/grep -c '= unscriptedLoneTarget(\|= unscriptedLoneAmountTarget(' "$src" || true)
+empty_calls=$(/usr/bin/grep -c 'if (unscriptableEmptyAsk(' "$src" || true)
+if [ "${lone_calls:-0}" -lt 3 ] || [ "${empty_calls:-0}" -lt 3 ]; then
+  echo "FAIL driver asks: target-ask funnels are not wired ($lone_calls lone/empty-amount call sites, $empty_calls empty-ask call sites; want 3 each)" >&2
+  exit 1
+fi
 export JAVA_HOME="$root/jdk"
 export PATH="$JAVA_HOME/bin:$PATH"
 tests="$root/mage/Mage.Tests"

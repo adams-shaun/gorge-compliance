@@ -81,7 +81,7 @@ func c1PlayerEffects(i int) func(*effects, node) {
 func c1Rules(i int) func(*effects, node) {
 	return func(e *effects, n node) {
 		for _, r := range list(argN(n, i)) {
-			e.add(ruleToken(variantOf(r)))
+			e.add(p3aEachRuleToken(variantOf(n), argN(n, 0), variantOf(r)))
 		}
 	}
 }

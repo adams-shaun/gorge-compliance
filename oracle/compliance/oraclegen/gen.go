@@ -1318,11 +1318,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var searchZones map[int]searchZoneAsk
 	var forage map[int][]string
 	var ownBounce map[int]bool
+	var tapThenUntap map[int]bool
 	var snaps []rules.OracleSnapshot
 	var orderAsks map[int]bool
 	for _, ex := range extras {
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
+		}
+		if tapThenUntap == nil {
+			tapThenUntap = ex.tapThenUntap
 		}
 		if forage == nil {
 			forage = ex.forage
@@ -1398,6 +1402,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
 	}
+	routing.tapThenUntap = tapThenUntap
 	if searchZones != nil {
 		routing.searchZones = searchZones
 	}

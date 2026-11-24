@@ -156,6 +156,9 @@ def _parser():
     p = sub.choices["need"]
     p.add_argument("--format", metavar="FORMAT")
     p.add_argument("--limit", type=int, default=50)
+    p.add_argument("--recredit", metavar="REFS",
+                   help="list agreed keys whose refs (less +P) are exactly REFS, e.g. X, in place of the "
+                        "owed and diverged keys: the keys to replay for another engine's credit")
     p = sub.choices["proof"]
     p.add_argument("--set", required=True, metavar="SET")
     p = sub.choices["freshness"]

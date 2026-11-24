@@ -46,7 +46,7 @@ XMAGE_SBV2_DIR ?= .oracle-build/xmage-sbv2
 # The mtgish commit the card-definition cross-check reads its data at
 # (oracle/mtgish/MTGISH.lock holds the same ref and the files' sha256).
 # mtgish is MIT; its data carries Oracle text and is never committed.
-MTGISH_REF ?= 153451e44d88baabfeb9902092032c328f4d5416
+MTGISH_REF ?= 1553384c9a970a02514b337db9c86697313530e8
 # gorge's corpus pin and Forge fork, read from gorge's Makefile.
 FORGE_REPO ?= $(shell awk '/^FORGE_REPO/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
 FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefile 2>/dev/null)
