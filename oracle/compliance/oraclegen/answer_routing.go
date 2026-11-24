@@ -68,6 +68,9 @@ type answerRouting struct {
 	// pick). A step absent from the map has no resolved source; the legacy
 	// shape-only test then still applies.
 	digSources map[int]digSource
+	// ownBounce marks the steps whose hidden pick is an own-bounce effect
+	// (own_bounce_source.go): XMage reads that pick from the TARGET queue.
+	ownBounce map[int]bool
 }
 
 func newAnswerRouting(ds []rules.OracleDecision, digSources ...map[int]digSource) *answerRouting {
@@ -719,6 +722,14 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// "Missing TARGET def ... TargetCard", the choice-queue answer left
 		// unused and the AI choosing the card gorge did not).
 		return append(as, XAnswer{d.Seat, "target", r.digTargetAnswer(i)}), true
+	case r.ownBounceTargetAnswer(i) != "":
+		// "Return a permanent you control to its owner's hand" (Kor Skyfisher,
+		// the Karoos): XMage's ReturnToHandChosenControlledPermanentEffect asks
+		// chooseTarget over a TargetControlledPermanent, the TARGET queue. The
+		// generic hidden-pick choice answer is never read there: strict XMage
+		// fails "Missing TARGET def" and the AI bounces the card itself
+		// (SUP-s280-supp xe:RAND:4:11:w8 p0.hand).
+		return append(as, XAnswer{d.Seat, "target", r.ownBounceTargetAnswer(i)}), true
 	case d.Resume == "taporuntap" && len(d.Picks) == 1:
 		// TapOrUntap's election is XMage's chooseUse, not a labelled choice:
 		// the pick's option index maps to the boolean (option 0, the
