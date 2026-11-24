@@ -2155,13 +2155,79 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                 }
             }
-            if (!forcedPick(target.getMinNumberOfTargets() - target.getSize(), candidates.size(), head, headNamesCandidate)) {
+            int needed = target.getMinNumberOfTargets() - target.getSize();
+            if (forcedPick(needed, candidates.size(), head, headNamesCandidate)) {
+                for (UUID id : candidates) {
+                    target.add(id, game);
+                }
+                return true;
+            }
+            if (headNamesCandidate || TestPlayer.CHOICE_SKIP.equals(head)) {
+                // The queue head is this ask's own answer (a name for one of
+                // the offered cards, or a skip); leave it to the base player.
                 return false;
             }
-            for (UUID id : candidates) {
+            List<UUID> offer = new ArrayList<>();
+            for (Card card : cards.getCards(game)) {
+                offer.add(card.getId());
+            }
+            List<UUID> picks = interchangeableLibraryPick(target.isRequired(),
+                    target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(), target.getZone(),
+                    needed, offer, candidates, id -> {
+                        Card card = game.getCard(id);
+                        return card == null ? null : card.getName();
+                    });
+            if (picks == null) {
+                return false;
+            }
+            for (UUID id : picks) {
                 target.add(id, game);
             }
             return true;
+        }
+
+        /** The pick a fixed-count look-at-library ask takes when the offered
+         * cards are interchangeable by name, or null when the ask is a real
+         * choice. A Black Cat, Cunning Thief look at the top nine exiles two
+         * face down: gorge's decision over same-named cards (all Plains) moves
+         * two card objects whose name is all the compared state can see, so
+         * any deterministic subset is the same game state and the trailing
+         * "Missing CHOICE def" is not a divergence. The same shape reaches the
+         * chooseTarget(Cards) funnel for a card whose effect asks that way
+         * (Dimir Charm's "put one back"). The rule is deliberately SHAPE-safe,
+         * not a default pick: it needs a required ask, a fixed count
+         * (min == max), a LIBRARY window (cards are identified by name alone;
+         * a same-named permanent or exiled card can differ by its attached
+         * state), more candidates than picks (a forced pick owns the rest),
+         * and ONE name across every candidate. Distinct names are gorge's real
+         * choice and stay unscripted until the generator scripts it.
+         * {@code offerOrder} is the dialog's own order; {@code candidates} the
+         * legal ones among it. */
+        static List<UUID> interchangeableLibraryPick(boolean required, int minTargets, int maxTargets,
+                Zone zone, int needed, List<UUID> offerOrder, List<UUID> candidates,
+                java.util.function.Function<UUID, String> nameOf) {
+            if (!required || needed <= 0 || minTargets != maxTargets || zone != Zone.LIBRARY
+                    || candidates.size() <= needed) {
+                return null;
+            }
+            String only = null;
+            for (UUID id : candidates) {
+                String name = nameOf.apply(id);
+                if (name == null || only != null && !only.equals(name)) {
+                    return null;
+                }
+                only = name;
+            }
+            List<UUID> picks = new ArrayList<>();
+            for (UUID id : offerOrder) {
+                if (candidates.contains(id)) {
+                    picks.add(id);
+                    if (picks.size() == needed) {
+                        return picks;
+                    }
+                }
+            }
+            return null;
         }
 
         /** The generator scripts a declined pick as a pair -- "No" on the
@@ -2527,7 +2593,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * candidate is taken because gorge settles it without a decision. A
          * short search closes on its skip, and a single-pick search with many
          * legal cards gathers the first one only in the trailing play
-         * ({@link #searchPickChoice}). Every other ask is the base's. */
+         * ({@link #searchPickChoice}). A plain TargetCard look-at window
+         * outside that family (Dimir Charm's "look at the top three, put one
+         * back") is answered by {@link #interchangeableLibraryPick} when every
+         * candidate is the same name. Every other ask is the base's. */
         @Override
         public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game) {
             if (target instanceof mage.target.common.TargetCardInLibrary) {
@@ -2573,6 +2642,48 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     owner.searchPicks.add(picked == null ? "?" : picked.getName());
                     target.addTarget(searchPick, source, game);
                     return true;
+                }
+            }
+            if (target.getZone() == Zone.LIBRARY
+                    && !(target instanceof mage.target.common.TargetCardInLibrary)) {
+                java.util.Collection<UUID> possible = target.possibleTargets(
+                        target.getAffectedAbilityControllerId(this.getId()), source, game, cards);
+                List<UUID> candidates = unchosenCandidates(target, possible);
+                // This funnel consumes the TARGET queue, so a queued answer
+                // that names one of these candidates is this ask's own and
+                // goes to the base; a front skip is this ask's only when it
+                // can close the ask (an "up to" ask whose minimum is met).
+                boolean ownAnswer = !getTargets().isEmpty()
+                        && TestPlayer.TARGET_SKIP.equals(getTargets().get(0)) && skipCanCloseAsk(target);
+                for (String answer : getTargets()) {
+                    for (UUID id : candidates) {
+                        if (answerNamesCandidate(game, id, answer)) {
+                            ownAnswer = true;
+                            break;
+                        }
+                    }
+                    if (ownAnswer) {
+                        break;
+                    }
+                }
+                if (!ownAnswer) {
+                    List<UUID> offer = new ArrayList<>();
+                    for (Card card : cards.getCards(game)) {
+                        offer.add(card.getId());
+                    }
+                    List<UUID> picks = interchangeableLibraryPick(target.isRequired(),
+                            target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(),
+                            target.getZone(), target.getMinNumberOfTargets() - target.getSize(),
+                            offer, candidates, id -> {
+                                Card card = game.getCard(id);
+                                return card == null ? null : card.getName();
+                            });
+                    if (picks != null) {
+                        for (UUID id : picks) {
+                            target.addTarget(id, source, game);
+                        }
+                        return true;
+                    }
                 }
             }
             return super.chooseTarget(outcome, cards, target, source, game);
