@@ -437,11 +437,18 @@ type XAnswer struct {
 // decodes it. It is the one place an item becomes runner JSON, so every caller
 // forces the same rolls. The runner fails a roll whose sides or seat disagree
 // with the engine's and one a step leaves unconsumed.
-func (it Item) Raw() []byte {
+func (it Item) Raw() []byte { return it.RawScenario(it.Scenario) }
+
+// RawScenario is Raw with sc in place of the item's scenario. A probe that
+// replays the item with retargeted or extended steps (xprep's retarget rerun,
+// pending-resolution and modal-trigger continuations) goes through here too, so
+// it forces the same die rolls. sc must keep every step a recorded roll is on,
+// or gorge's runner fails the unconsumed roll.
+func (it Item) RawScenario(sc Scenario) []byte {
 	b, _ := json.Marshal(struct {
 		Scenario
 		DieRolls []DieRoll `json:"die_rolls,omitempty"`
-	}{it.Scenario, it.DieRolls})
+	}{sc, it.DieRolls})
 	return b
 }
 
