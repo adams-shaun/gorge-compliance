@@ -2932,12 +2932,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
         List<Permanent> candidates = new ArrayList<>();
         for (Permanent permanent : battlefield) {
             if (permanent.isToken() && controller.equals(permanent.getControllerId())
-                    && permanent.getName().toLowerCase(java.util.Locale.ROOT).contains(wantedName)) {
+                    && tokenNamed(permanent, wantedName)) {
                 candidates.add(permanent);
             }
         }
         candidates.sort(java.util.Comparator.comparingInt(Permanent::getCreateOrder));
         return wanted > 0 && wanted <= candidates.size() ? candidates.get(wanted - 1) : null;
+    }
+
+    /** Whether a token answers to the lower-cased name: its live name or the
+     * name it was created with. A ref names a token by its creation name, and
+     * a layer-3 name change (Witness Protection: "named Legitimate
+     * Businessperson", CR 613.1c) moves only the live name, so matching the
+     * live name alone loses the token to every ref lookup. Every token ref
+     * resolves through tokenChoice, so this one test covers targets, setup
+     * attachments, combat and answer aliases alike. */
+    private static boolean tokenNamed(Permanent token, String wantedName) {
+        if (token.getName().toLowerCase(java.util.Locale.ROOT).contains(wantedName)) {
+            return true;
+        }
+        return token instanceof mage.game.permanent.PermanentToken
+                && ((mage.game.permanent.PermanentToken) token).getToken().getName()
+                        .toLowerCase(java.util.Locale.ROOT).contains(wantedName);
     }
 
     /** The controller's battlefield permanents in setup/creation order.
