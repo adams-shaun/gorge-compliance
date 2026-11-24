@@ -21,6 +21,7 @@ func runScen(args []string) error {
 	fs := flag.NewFlagSet("scen", flag.ExitOnError)
 	dir := fs.String("cards", ".cards", "corpus dir")
 	manifests := fs.String("manifests", "oracle/compliance/manifests", "set manifests dir (the cards XMage lists, under the spelling it uses)")
+	forgeEditions := fs.String("forge-editions", "", "pinned Forge editions dir (default: find the forge-oracle clone; without it certdeck may pick a card Forge's card DB filters)")
 	card := fs.String("card", "", "the card (required without -census)")
 	key := fs.String("key", "", "the cov key: cast, land, f0/a2, f0/t0, static#0.0, combat#0.block (required without -census)")
 	prefer := fs.String("prefer", "auto", "auto (a scripted-steps item where a template serves the key) or start (always a start file)")
@@ -53,6 +54,9 @@ func runScen(args []string) error {
 		return err
 	}
 	b := certdeck.NewBuilder(reg, sp)
+	if err := useForgeEditions(b, *forgeEditions); err != nil {
+		return err
+	}
 	opt := scen.Options{Prefer: *prefer, Set: *set}
 	if err := os.MkdirAll(*out, 0o755); err != nil {
 		return err
