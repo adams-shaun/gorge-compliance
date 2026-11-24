@@ -30,11 +30,14 @@ import (
 // an activated ability or a trigger, including a copied one) takes this
 // route. A bolster ability GRANTED by another card (Gleam of Authority's
 // AddAbility$ ABBolster) lives in the grantor's SVar, not the recipient's
-// face, and is not seen here. A Support$ pick and a bare Choices$/Chooser$ pick stay on
+// face: the activate step is resolved through ResolveActivatedAbility, the
+// resolver every other granted-ability routing uses, so the SA it names is the
+// granted body whatever grants it. A Support$ pick and a bare Choices$/Chooser$ pick stay on
 // the choice queue -- XMage poses those through Player.choose/makeChoose
 // (or, for Support, as a target declared when the ability goes on the stack,
 // not as a resolution-time pick).
-func bolsterTiePick(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapshot, d rules.OracleDecision) bool {
+func bolsterTiePick(reg *cards.Registry, sc Scenario, g rules.OracleResult, d rules.OracleDecision) bool {
+	snaps := g.Snapshots
 	if reg == nil || d.Step < 0 || pickKind(d, 0) != "counter_pick" {
 		return false
 	}
@@ -43,7 +46,7 @@ func bolsterTiePick(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapsh
 	// card resolves: that is the object resolving while the ask is posed.
 	if d.Step < len(snaps) {
 		for _, o := range snaps[d.Step].Stack {
-			bolsters, resolved := bolsterOnStackObject(reg, sc, snaps[d.Step], d.Step, o)
+			bolsters, resolved := bolsterOnStackObject(reg, sc, g, d.Step, o)
 			if resolved {
 				return bolsters
 			}
@@ -68,10 +71,11 @@ func bolsterTiePick(reg *cards.Registry, sc Scenario, snaps []rules.OracleSnapsh
 // Bolster effect, and whether its source card resolved at all. The abilities
 // are read off the source's displayed card (bolsterSourceRef); the scenario's
 // activate steps still name the object by its bound ref (o.Source).
-func bolsterOnStackObject(reg *cards.Registry, sc Scenario, snap rules.OracleSnapshot, step int, o rules.OracleSnapStack) (bolsters, resolved bool) {
-	if reg == nil || o.Source == "" {
+func bolsterOnStackObject(reg *cards.Registry, sc Scenario, g rules.OracleResult, step int, o rules.OracleSnapStack) (bolsters, resolved bool) {
+	if reg == nil || o.Source == "" || step < 0 || step >= len(g.Snapshots) {
 		return false, false
 	}
+	snap := g.Snapshots[step]
 	src := bolsterSourceRef(reg, snap, o.Source)
 	if _, ok := reg.Lookup(oraclediffRefName(src)); !ok {
 		return false, false
@@ -85,7 +89,7 @@ func bolsterOnStackObject(reg *cards.Registry, sc Scenario, snap rules.OracleSna
 			}
 			return bolsterAtTrigger(reg, src, idx), true
 		}
-		if sa := bolsterActivatedSA(reg, sc, step, o.Source, src); sa != nil {
+		if sa := bolsterActivatedSA(reg, sc, g, step, o.Source, src); sa != nil {
 			return bolsterInChain(sa), true
 		}
 		return bolsterOnCard(reg, src), true
@@ -100,10 +104,26 @@ func bolsterOnStackObject(reg *cards.Registry, sc Scenario, snap rules.OracleSna
 // identity digSourceForStep uses.
 // source is the stack object's bound ref (what the activate step names); face
 // is the displayed card whose printed abilities the step's index counts into.
-func bolsterActivatedSA(reg *cards.Registry, sc Scenario, step int, source, face string) *cards.SA {
+//
+// A step that names a granted, gained or keyword-granted ability (Gleam of
+// Authority's AddAbility$ ABBolster) carries an AbilityIndex that aliases a
+// printed one, or none at all, so it is resolved first through
+// ResolveActivatedAbility. An unresolved grant fails closed to no SA: the
+// printed index must never stand in for it.
+func bolsterActivatedSA(reg *cards.Registry, sc Scenario, g rules.OracleResult, step int, source, face string) *cards.SA {
+	it := Item{Scenario: Scenario{Setup: sc.Setup}}
 	for i := step - 1; i >= 0 && i < len(sc.Steps); i-- {
 		st := sc.Steps[i]
-		if st.Op != "activate" || st.Card != source || st.AbilityIndex == nil {
+		if st.Op != "activate" || st.Card != source {
+			continue
+		}
+		switch sa, kind := ResolveActivatedAbility(reg, it, i, st, g); kind {
+		case ActivatedGranted:
+			return sa
+		case ActivatedGrantedUnresolved:
+			return nil
+		}
+		if st.AbilityIndex == nil {
 			continue
 		}
 		c, ok := reg.Lookup(oraclediffRefName(face))

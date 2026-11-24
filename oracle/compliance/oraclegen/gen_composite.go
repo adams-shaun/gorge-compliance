@@ -135,7 +135,7 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 	// scripts their picks on the TARGET queue (bolster_pick.go).
 	bolsters := map[int]bool{}
 	for i, d := range ds {
-		if bolsterTiePick(reg, sc, res.Snapshots, d) {
+		if bolsterTiePick(reg, sc, res, d) {
 			bolsters[i] = true
 		}
 	}
