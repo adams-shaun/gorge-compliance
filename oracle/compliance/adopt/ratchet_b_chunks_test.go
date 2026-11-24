@@ -72,6 +72,13 @@ func runLevelBChunk(t *testing.T, i int) {
 		t.Fatalf("measured %d of %d sets", len(measured), len(chunk))
 	}
 	fails, slack := CheckRatchetB(measured, ratchet)
+	// A merge gate's stale-only classifier reads this line (the same one
+	// TestCertificationRatchet logs for level A): the B ratchet's outstanding
+	// count includes stale verdicts, so a chunk that only grew on stale
+	// problems is a host XMage replay's to clear, not a defect to fix. Emitted
+	// on every run, so a non-stale problem leaves no stale-only verdict and the
+	// gate fails closed.
+	t.Logf("GORGE-CERT-RESULT %s %s", t.Name(), ratchetVerdict(measured, fails))
 	for _, f := range fails {
 		t.Error(f)
 	}
