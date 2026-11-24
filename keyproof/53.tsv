@@ -124,9 +124,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 539583f4-21c8-4b61-a2c5-f612fadc3ffa	cast	cast-resolve	agreed	-	X	scen	1	0	Last Light of Durin's Day/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 539583f4-21c8-4b61-a2c5-f612fadc3ffa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Last Light of Durin's Day/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 539583f4-21c8-4b61-a2c5-f612fadc3ffa	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Last Light of Durin's Day/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5396045d-744b-435e-8324-a1bfbb03449d	cast	cast-resolve	agreed	-	X	scen	1	0	Clachan Festival/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+5396045d-744b-435e-8324-a1bfbb03449d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:clachan-festival:f0t0:s2,f:xs:XP:clachan-festival:f0t0:s2	-	-	-	267e485f6204	-	f643b168b390	-	-	2026-11-24	xproof
 5396045d-744b-435e-8324-a1bfbb03449d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Clachan Festival/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-5396045d-744b-435e-8324-a1bfbb03449d	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5396045d-744b-435e-8324-a1bfbb03449d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:clachan-festival:f0t0:s2,f:xs:XP:clachan-festival:f0t0:s2	-	-	-	267e485f6204	-	f643b168b390	-	-	2026-11-24	xproof
 53987a39-c18c-4c13-b1ea-fd1b2a369f9e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53987a39-c18c-4c13-b1ea-fd1b2a369f9e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 539899f3-f3f2-4f7a-a6f6-e80d4a39f753	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53a40369-0e62-4ad2-a6bd-65a5ff0da65e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53a4d9ee-6dfa-4a8b-a1e4-7f671a666188	cast	cast-resolve	agreed	-	X	scen	1	0	Auron's Inspiration/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53a59ba9-f4e9-460b-928a-ce6d7ae883f7	cast	cast-resolve	agreed	-	X	scen	1	0	Silken Strength/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-53a59ba9-f4e9-460b-928a-ce6d7ae883f7	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+53a59ba9-f4e9-460b-928a-ce6d7ae883f7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 53a59ba9-f4e9-460b-928a-ce6d7ae883f7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Silken Strength/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53aaa919-d08f-4b76-8583-bc2d4635f991	cast	cast-resolve	agreed	-	X	scen	1	0	Saavik, Stoic Student/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53aaa919-d08f-4b76-8583-bc2d4635f991	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

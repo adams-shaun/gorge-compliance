@@ -47,10 +47,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 114dd40d-5ad8-4913-a08f-572b9521eb5b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 114dd40d-5ad8-4913-a08f-572b9521eb5b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 114dd40d-5ad8-4913-a08f-572b9521eb5b	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-114e1d2c-cefc-4e2a-922e-3b2ceed1871d	cast	cast-resolve	agreed	-	FX	scen	2	0	Maralen, Fae Ascendant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+114e1d2c-cefc-4e2a-922e-3b2ceed1871d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:maralen-fae-ascendant:f0t0:s1,f:xs:XP:maralen-fae-ascendant:f0t0:s1	-	-	-	267e485f6204	-	3fffc42d0f03	-	-	2026-11-24	xproof
 114e1d2c-cefc-4e2a-922e-3b2ceed1871d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Maralen, Fae Ascendant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 114e1d2c-cefc-4e2a-922e-3b2ceed1871d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Maralen, Fae Ascendant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-114e1d2c-cefc-4e2a-922e-3b2ceed1871d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+114e1d2c-cefc-4e2a-922e-3b2ceed1871d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:maralen-fae-ascendant:f0t0:s1,f:xs:XP:maralen-fae-ascendant:f0t0:s1	-	-	-	267e485f6204	-	3fffc42d0f03	-	-	2026-11-24	xproof
 114e1d2c-cefc-4e2a-922e-3b2ceed1871d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Maralen, Fae Ascendant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 115bd33d-4875-4014-ae9f-0052f5acdbb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 115bd33d-4875-4014-ae9f-0052f5acdbb2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -155,9 +155,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11cb509d-21af-48f1-b355-135ebd3e4bd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11cb509d-21af-48f1-b355-135ebd3e4bd1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11cd0c42-4148-4d82-9172-b1a1967fe319	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11ceb2db-021e-422d-976e-7bfe3b67a8aa	cast	cast-resolve	agreed	-	X	scen	1	0	Foraging Wickermaw/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+11ceb2db-021e-422d-976e-7bfe3b67a8aa	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:foraging-wickermaw:f0t0:s2,f:xs:XP:foraging-wickermaw:f0t0:s2	-	-	-	267e485f6204	-	b0ee29dd7f60	-	-	2026-11-24	xproof
 11ceb2db-021e-422d-976e-7bfe3b67a8aa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Foraging Wickermaw/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-11ceb2db-021e-422d-976e-7bfe3b67a8aa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11ceb2db-021e-422d-976e-7bfe3b67a8aa	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:foraging-wickermaw:f0t0:s2,f:xs:XP:foraging-wickermaw:f0t0:s2	-	-	-	267e485f6204	-	b0ee29dd7f60	-	-	2026-11-24	xproof
 11cf103c-f8a3-4892-942d-2c4472dd5716	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11cf103c-f8a3-4892-942d-2c4472dd5716	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11d74dc2-8c11-4d4b-b727-8216d2eb6b4e	cast	cast-resolve	agreed	-	X	scen	1	0	The Super Hero Civil War/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

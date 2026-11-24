@@ -23,8 +23,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8126e60b-cf3d-4bf0-bfb5-f1e914d3e20e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 812701c3-c9b7-4877-bf2e-c37e0f551c45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 812bf52c-37f5-41c9-8a69-009fddbafb3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-812df594-75af-494f-be09-5f9633aca46a	cast	cast-resolve	agreed	-	X	scen	1	0	Deepway Navigator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-812df594-75af-494f-be09-5f9633aca46a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+812df594-75af-494f-be09-5f9633aca46a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:deepway-navigator:f0t0:s2,f:xs:XP:deepway-navigator:f0t0:s2	-	-	-	267e485f6204	-	b4cd5a789a1d	-	-	2026-11-24	xproof
+812df594-75af-494f-be09-5f9633aca46a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:deepway-navigator:f0t0:s2,f:xs:XP:deepway-navigator:f0t0:s2	-	-	-	267e485f6204	-	b4cd5a789a1d	-	-	2026-11-24	xproof
 812df594-75af-494f-be09-5f9633aca46a	static#0.0	static#0.0	diagnosed	-	-	scen	0	0	-	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 81338d64-8fc3-41ac-afc8-e2a79df1159b	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8134f3fd-197a-4b44-a370-311cc955dea3	cast	cast-resolve	agreed	-	X	scen	1	0	Ainok Wayfarer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 814e06c0-9b61-4a64-8c67-73a8eb00a768	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Ferocification/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 814e321d-16fd-4f7b-a8d8-2b089be76f2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 814f30a1-c0d6-4243-839d-0645d7bcbe4c	cast	cast-resolve	agreed	-	X	scen	1	0	Roadside Assistance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-814f30a1-c0d6-4243-839d-0645d7bcbe4c	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+814f30a1-c0d6-4243-839d-0645d7bcbe4c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 814f30a1-c0d6-4243-839d-0645d7bcbe4c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Roadside Assistance/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8150cc84-3f9f-470d-a0f9-ee6d9dab13da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8150cc84-3f9f-470d-a0f9-ee6d9dab13da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

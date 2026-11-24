@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 888d12d4-aaa5-406f-9dc8-8c4e856eb2fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 888d12d4-aaa5-406f-9dc8-8c4e856eb2fe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 888f58c0-1860-4df4-ad75-53e634150680	cast	cast-resolve	agreed	-	X	scen	1	0	Tragic Banshee/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-888f58c0-1860-4df4-ad75-53e634150680	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+888f58c0-1860-4df4-ad75-53e634150680	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 88923ca1-a793-42f0-b9f8-ed9ff9c1185d	cast	cast-resolve	agreed	-	FX	scen	2	0	Super Speed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88923ca1-a793-42f0-b9f8-ed9ff9c1185d	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88923ca1-a793-42f0-b9f8-ed9ff9c1185d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Super Speed/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -110,9 +110,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88aadf60-91f9-4932-a2bc-63365a139d36	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Daredevil, Man Without Fear/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88aadf60-91f9-4932-a2bc-63365a139d36	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Daredevil, Man Without Fear/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88aadf60-91f9-4932-a2bc-63365a139d36	static#0.0	static#0.0	agreed	-	X	scen	1	0	Daredevil, Man Without Fear/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88b076a4-46ff-4a41-95a5-2821f4d8944d	cast	cast-resolve	agreed	-	X	scen	1	0	Twin Blades/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+88b076a4-46ff-4a41-95a5-2821f4d8944d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:twin-blades:f0t0:s2,f:xs:XP:twin-blades:f0t0:s2	-	-	-	267e485f6204	-	a524a4314d06	-	-	2026-11-24	xproof
 88b076a4-46ff-4a41-95a5-2821f4d8944d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Twin Blades/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88b076a4-46ff-4a41-95a5-2821f4d8944d	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+88b076a4-46ff-4a41-95a5-2821f4d8944d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:twin-blades:f0t0:s2,f:xs:XP:twin-blades:f0t0:s2	-	-	-	267e485f6204	-	a524a4314d06	-	-	2026-11-24	xproof
 88b076a4-46ff-4a41-95a5-2821f4d8944d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Twin Blades/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88b0bd3b-d832-4059-b0d9-04630917ae94	cast	cast-resolve	agreed	-	FX	scen	2	0	Ice Magic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88b1e06c-5899-4e83-8204-e2c32c0c6aff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c195485-83f9-424f-854a-50c4f5b04182	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thranduil's Company/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	cast	cast-resolve	agreed	-	X	scen	1	0	Fishing Pole/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fishing Pole/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
+2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ce12817-a7b5-475a-87d0-718d77349a6d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ce12817-a7b5-475a-87d0-718d77349a6d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ce20f43-9357-448f-bb40-7315feb08433	cast	cast-resolve	agreed	-	X	scen	1	0	Toph, the Blind Bandit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2ce20f43-9357-448f-bb40-7315feb08433	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ce20f43-9357-448f-bb40-7315feb08433	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 2ce20f43-9357-448f-bb40-7315feb08433	static#0.0	static#0.0	agreed	-	X	scen	1	0	Toph, the Blind Bandit/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ce2a091-95b6-45e5-9097-77fea411162e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ce2a091-95b6-45e5-9097-77fea411162e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

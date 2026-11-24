@@ -121,11 +121,11 @@ a9b9e798-debc-4f2c-9770-e16f670082f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a9b9e798-debc-4f2c-9770-e16f670082f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9baa117-ab06-4af5-9a09-4be423d7cbbd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9baa117-ab06-4af5-9a09-4be423d7cbbd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a9bae56c-9666-42e8-94ec-03b0a964b142	cast	cast-resolve	agreed	-	X	scen	1	0	Mongoose Lizard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a9bae56c-9666-42e8-94ec-03b0a964b142	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mongoose-lizard:f0t0:s1,f:xs:XP:mongoose-lizard:f0t0:s1	-	-	-	267e485f6204	-	9432d0f3d2d6	-	-	2026-11-24	xproof
 a9bae56c-9666-42e8-94ec-03b0a964b142	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mongoose Lizard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a9bae56c-9666-42e8-94ec-03b0a964b142	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mongoose Lizard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a9bae56c-9666-42e8-94ec-03b0a964b142	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mongoose Lizard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a9bae56c-9666-42e8-94ec-03b0a964b142	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a9bae56c-9666-42e8-94ec-03b0a964b142	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:mongoose-lizard:f0t0:s2,f:xs:XP:mongoose-lizard:f0t0:s2	-	-	-	267e485f6204	-	9432d0f3d2d6	-	-	2026-11-24	xproof
+a9bae56c-9666-42e8-94ec-03b0a964b142	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mongoose-lizard:f0t0:s1,f:xs:XP:mongoose-lizard:f0t0:s1	-	-	-	267e485f6204	-	9432d0f3d2d6	-	-	2026-11-24	xproof
 a9be16d1-5e53-4b85-8921-c6fe9473f923	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9c1fa95-34a8-42ef-af2f-1394df23cad8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9c2bf1b-2d5e-42c5-bc76-8429aaae161c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ a9d0657f-2c5e-4b6f-b8ae-d657cc0f7aef	combat#0.block	combat#0.block	agreed	-	X	sc
 a9d0657f-2c5e-4b6f-b8ae-d657cc0f7aef	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9d288b8-cdc1-4e55-a0c9-d6edfc95e65d	cast	cast-resolve	agreed	-	FX	scen	2	0	Shock/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a9d60d80-bcef-45e0-8ded-d70bd3c2780f	cast	cast-resolve	agreed	-	X	scen	1	0	Caradora, Heart of Alacria/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a9d60d80-bcef-45e0-8ded-d70bd3c2780f	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
+a9d60d80-bcef-45e0-8ded-d70bd3c2780f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof
 a9d68cf5-3055-4ec9-9893-244bfd7046be	cast	cast-resolve	agreed	-	FX	scen	2	0	Action News Crew/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a9d68cf5-3055-4ec9-9893-244bfd7046be	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Action News Crew/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a9d68cf5-3055-4ec9-9893-244bfd7046be	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Action News Crew/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
