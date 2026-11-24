@@ -1,0 +1,117 @@
+{
+ "card": "Plow Through",
+ "family": "spell-conditional",
+ "author": "Oracle + CR only",
+ "scenarios": [
+  {
+   "name": "fight-lifelink-gains-damage-dealt",
+   "cr": [
+    "701.14a",
+    "702.15b"
+   ],
+   "why": "Target creature you control fights target creature an opponent controls: each deals damage equal to its power to the other, and a lifelink fighter's damage gains its controller life equal to the damage dealt (2), not capped at the 1 deathtouch needs to destroy the Wurm.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Plow Through"
+     ],
+     "battlefield": [
+      "Vampire Nighthawk"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Craw Wurm"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Plow Through",
+     "mana": "G",
+     "targets": [
+      "p0:Vampire Nighthawk",
+      "p1:Craw Wurm"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Craw Wurm",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Vampire Nighthawk",
+     "zone": "graveyard"
+    },
+    {
+     "life": {
+      "p0": 22,
+      "p1": 20
+     }
+    }
+   ]
+  },
+  {
+   "name": "fight-lifelink-overkill-gains-full-power",
+   "cr": [
+    "120.3",
+    "701.14a",
+    "702.15b"
+   ],
+   "why": "The fight deals the fighter's whole power, not just lethal damage: Baneslayer Angel (5 power, lifelink) fights a 1/1, all 5 damage is dealt and its controller gains 5, even though 1 damage was already lethal.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Plow Through"
+     ],
+     "battlefield": [
+      "Baneslayer Angel"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Llanowar Elves"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Plow Through",
+     "mana": "G",
+     "targets": [
+      "p0:Baneslayer Angel",
+      "p1:Llanowar Elves"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Llanowar Elves",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Baneslayer Angel",
+     "zone": "battlefield",
+     "damage": 1
+    },
+    {
+     "life": {
+      "p0": 25,
+      "p1": 20
+     }
+    }
+   ]
+  }
+ ]
+}
