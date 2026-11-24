@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"testing"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -54,7 +55,7 @@ func writeGolden(t *testing.T, reg *cards.Registry) *Log {
 	const start = 1
 	h := Header{T: THeader, Format: Format, Seed: 7, ForgeRef: "golden", GameFormat: "constructed", Mulligans: 7, MaxTurns: 60, MaxMS: 600000}
 	toF := map[state.ObjID]int{}
-	cfg := rules.Config{Seed: h.Seed, Tokens: reg.Tokens, NameUniverse: reg.Universe(), Mulligans: h.Mulligans}
+	cfg := rules.Config{Seed: h.Seed, Tokens: reg.Tokens, NamedCorpus: reg.Universe(), Mulligans: h.Mulligans}
 	next := state.ObjID(1)
 	for s := 0; s < 2; s++ {
 		seat := Seat{Seat: s, Name: fmt.Sprintf("vanilla-%d", s)}
@@ -74,6 +75,7 @@ func writeGolden(t *testing.T, reg *cards.Registry) *Log {
 		cfg.Names = append(cfg.Names, seat.Name)
 		cfg.Decks = append(cfg.Decks, deck)
 	}
+	cfg.NameUniverse = decks.NameUniverse(cfg.Decks)
 	l := &Log{Header: h}
 	add := func(e Entry) { l.Entries = append(l.Entries, e) }
 	fids := func(ids []state.ObjID) []int {
