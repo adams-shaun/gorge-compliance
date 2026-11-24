@@ -4,6 +4,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"regexp"
 	"slices"
 	"strings"
 	"testing"
@@ -275,5 +276,64 @@ func TestRatchetScannerRefusesAnEmptyContract(t *testing.T) {
 	})
 	if _, err := Packages(fsys, []string{"oracle/compliance/oraclegen/answer_routing.go"}); err == nil {
 		t.Fatal("a verdict producer with no GORGE-CERT-RESULT package selected silently")
+	}
+}
+
+// verdictWriter matches a shell script that writes or records committed
+// verdict rows: `oraclediff diff -write oracle/compliance/verdicts`, the
+// forge pass's `--verdicts` mode, or the ratchet recording command.
+var verdictWriter = regexp.MustCompile(`compliance/verdicts|-write-ratchet|--verdicts`)
+
+// knownNonProducers are scripts that mention a verdict path but never write a
+// row. Adding one here is a deliberate statement that its change cannot make a
+// committed verdict stale.
+var knownNonProducers = map[string]bool{}
+
+// TestEveryVerdictWritingScriptIsAProducer keeps the producer list honest: it
+// is a hand-kept contract, so a new shell script that writes verdict rows must
+// either select the ratchet packages or be named as a known non-producer here.
+func TestEveryVerdictWritingScriptIsAProducer(t *testing.T) {
+	root, err := filepath.Abs(filepath.Join("..", ".."))
+	if err != nil {
+		t.Fatal(err)
+	}
+	fsys := repoFS(t)
+	found := 0
+	for _, top := range []string{"scripts", "oracle", "ops"} {
+		err := filepath.WalkDir(filepath.Join(root, top), func(p string, d os.DirEntry, werr error) error {
+			if werr != nil || d.IsDir() || !strings.HasSuffix(p, ".sh") {
+				return werr
+			}
+			rel, rerr := filepath.Rel(root, p)
+			if rerr != nil {
+				return rerr
+			}
+			rel = filepath.ToSlash(rel)
+			if strings.HasPrefix(rel, "ops/scripts/tests/") || strings.HasPrefix(rel, "oracle/xmageoracle/") {
+				return nil // smokes and driver tests: covered by their own prefix or by stubs
+			}
+			body, rerr := os.ReadFile(p)
+			if rerr != nil {
+				return rerr
+			}
+			if !verdictWriter.Match(body) || knownNonProducers[rel] {
+				return nil
+			}
+			found++
+			got, perr := Packages(fsys, []string{rel})
+			if perr != nil {
+				return perr
+			}
+			if !slices.Contains(got, "./oracle/compliance/adopt") || !slices.Contains(got, "./oracle/compliance/gate") {
+				t.Errorf("%s writes verdict rows but selects %v: add it to verdictProducerFiles/Prefixes or to knownNonProducers", rel, got)
+			}
+			return nil
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+	}
+	if found == 0 {
+		t.Fatal("scanner found no verdict-writing script: the pattern no longer matches the tree")
 	}
 }
