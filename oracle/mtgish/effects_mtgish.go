@@ -450,7 +450,7 @@ func (e *effects) action(n node, v string) {
 		e.add(layerEffects(list(arg(1)))...)
 	case "CreatePermanentRuleEffectUntil", "CreateEachPermanentRuleEffectUntil":
 		for _, r := range list(arg(1)) {
-			e.add(ruleToken(variantOf(r)))
+			e.add(p3aEachRuleToken(v, arg(0), variantOf(r)))
 		}
 	case "CreatePlayerEffectUntil":
 		for _, x := range list(arg(1)) {
@@ -621,7 +621,7 @@ func lookMove(v string) string {
 func exilableZone(x any) string {
 	v := variantOf(x)
 	switch {
-	case strings.Contains(v, "Graveyard"), strings.Contains(v, "Milled"):
+	case strings.Contains(v, "Graveyard"), strings.Contains(v, "Milled"), strings.Contains(v, "Sacrificed"), strings.Contains(v, "Discarded"):
 		// (A card milled this way is in the graveyard.)
 		return "graveyard"
 	case strings.Contains(v, "Librar"):
@@ -881,7 +881,7 @@ func staticEffects(r any) []string {
 	case "PermanentRuleEffect", "EachPermanentRuleEffect", "PermanentRuleEffect_PlayerMayPayToIgnoreEffectUntil":
 		var out []string
 		for _, x := range list(a[1]) {
-			out = append(out, ruleToken(variantOf(x)))
+			out = append(out, p3aEachRuleToken(v, a[0], variantOf(x)))
 		}
 		return out
 	case "CardEffect":
