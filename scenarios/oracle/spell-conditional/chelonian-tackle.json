@@ -1,0 +1,62 @@
+{
+ "card": "Chelonian Tackle",
+ "family": "spell-conditional",
+ "author": "Oracle + CR only",
+ "scenarios": [
+  {
+   "name": "fight-lifelink-gains-damage-dealt",
+   "cr": [
+    "701.14a",
+    "702.15b"
+   ],
+   "why": "Target creature you control gets +0/+10 until end of turn, then fights the opponent's creature: each deals damage equal to its power to the other, and the lifelink fighter's damage gains its controller life equal to the damage dealt (2), not capped at the 1 deathtouch needs to destroy the Wurm. The +0/+10 keeps the Nighthawk alive through the Wurm's 6 damage.",
+   "setup": {
+    "p0": {
+     "hand": [
+      "Chelonian Tackle"
+     ],
+     "battlefield": [
+      "Vampire Nighthawk"
+     ]
+    },
+    "p1": {
+     "battlefield": [
+      "Craw Wurm"
+     ]
+    }
+   },
+   "steps": [
+    {
+     "op": "cast",
+     "seat": 0,
+     "card": "p0:Chelonian Tackle",
+     "mana": "CCG",
+     "targets": [
+      "p0:Vampire Nighthawk",
+      "p1:Craw Wurm"
+     ]
+    },
+    {
+     "op": "resolve"
+    }
+   ],
+   "expect": [
+    {
+     "card": "p1:Craw Wurm",
+     "zone": "graveyard"
+    },
+    {
+     "card": "p0:Vampire Nighthawk",
+     "zone": "battlefield",
+     "damage": 6
+    },
+    {
+     "life": {
+      "p0": 22,
+      "p1": 20
+     }
+    }
+   ]
+  }
+ ]
+}
