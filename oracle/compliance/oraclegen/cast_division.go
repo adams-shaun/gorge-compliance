@@ -34,10 +34,14 @@ func castDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []r
 //
 // For each cast step whose card's spell ability divides (DealDamage always;
 // PutCounter and PreventDamage only when gorge posed the division ask, as
-// those never posed a damage_split before), the cast-time "divide" ask is
+// those never posed a damage_split before -- except the XMage answer path
+// below, which always marks them), the cast-time "divide" ask is
 // removed and a "damage_split" decision carrying the announced shares is
-// inserted at the head of the step the spell resolves in, where gorge used to
-// pose it. Every other decision list is returned unchanged.
+// inserted: in the Forge view at the cast step, right after the root target
+// ask (the Forge driver allocates the division while targeting and takes it by
+// exact step); in the XMage view at the head of the step the spell resolves
+// in, where gorge used to pose it. Every other decision list is returned
+// unchanged.
 //
 // xmage is the XMage script's view. A cast whose targets travel in the step's
 // answers (a lowered xproof item) scripts that root target ask itself, at the
@@ -61,7 +65,7 @@ func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, 
 		if st.Op != "cast" || st.Card == "" {
 			continue
 		}
-		api, total, ok := spellDivision(reg, oraclediffRefName(st.Card))
+		api, total, ok := spellDivision(reg, st)
 		if !ok {
 			continue
 		}
@@ -96,6 +100,15 @@ func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, 
 					shares[p]++
 				}
 			}
+		case xmage && t.Via == "answer" && total > 0 && total >= n:
+			// XMage's TargetAmount always scripts a divided target ask as
+			// "<ref>^X=<share>", including a lone target whose division
+			// gorge filled without posing an ask (CR 601.2d). Mark the
+			// root ask for every divided API, before the DealDamage-only
+			// arm below, which is the Forge contract: Forge never asks
+			// for a one-target allocation, so the Forge view keeps
+			// skipping it.
+			shares[0] += total - n
 		case api != "DealDamage":
 			continue
 		case total > 0 && total >= n:
@@ -106,7 +119,15 @@ func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, 
 		default:
 			continue
 		}
-		split := rules.OracleDecision{Step: resolveStepOf(sc, res.Snapshots, k), Seat: t.Seat,
+		// The Forge driver allocates the division while the spell is
+		// cast (CR 601.2d), at the cast step, and takes it by exact step.
+		// The XMage view keeps the resolve step, where gorge used to pose
+		// the split.
+		splitStep := k
+		if xmage {
+			splitStep = resolveStepOf(sc, res.Snapshots, k)
+		}
+		split := rules.OracleDecision{Step: splitStep, Seat: t.Seat,
 			Kind: "choose_n", GorgeKind: "choose", Resume: "damage_split", Via: "cast division",
 			Options: n, Picks: []string{}, PickIdx: []int{}, PickRefs: []string{}}
 		for x, s := range shares {
@@ -136,6 +157,13 @@ func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, 
 			if x == j {
 				continue
 			}
+			if !xmage && x == i {
+				// Forge: right after the root target ask, where the
+				// division ask sat.
+				next = append(next, d, split)
+				inserted = true
+				continue
+			}
 			if !inserted && d.Step >= split.Step && x > i {
 				next = append(next, split)
 				inserted = true
@@ -154,35 +182,67 @@ func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, 
 }
 
 // spellDivision reports the API and literal total (0 when the total is not a
-// literal) of the targeted DividedAsYouChoose$ spell ability of the named
-// card, the shapes gorge announces at cast (engine/rules cast_division.go
-// castDivisionAPI). A Charm's modes are sub-abilities, never the root, and
-// keep the resolution-time split.
-func spellDivision(reg *cards.Registry, name string) (string, int, bool) {
-	c, ok := reg.Lookup(name)
+// literal) of the targeted DividedAsYouChoose$ spell ability of the face the
+// cast step casts, the shapes gorge announces at cast (engine/rules
+// cast_division.go castDivisionAPI). A Charm's modes are sub-abilities, never
+// the root, and keep the resolution-time split. Only the cast face is read: a
+// card's other face keeps its own spell ability, which this cast did not
+// announce (an Adventure's PutCounter is never the front creature's).
+func spellDivision(reg *cards.Registry, st Step) (string, int, bool) {
+	c, ok := reg.Lookup(oraclediffRefName(st.Card))
 	if !ok {
 		return "", 0, false
 	}
-	for _, f := range c.Faces {
-		if f == nil {
+	f := castStepFace(c, st)
+	if f == nil {
+		return "", 0, false
+	}
+	for _, sa := range f.Abilities {
+		if sa == nil || sa.Kind != "SP" {
 			continue
 		}
-		for _, sa := range f.Abilities {
-			if sa == nil || sa.Kind != "SP" {
-				continue
-			}
-			switch sa.API {
-			case "DealDamage", "PutCounter", "PreventDamage":
-			default:
-				continue
-			}
-			if strings.TrimSpace(sa.Params["DividedAsYouChoose"]) == "" || !effects.TargetsOf(sa).Targeted() {
-				continue
-			}
-			return sa.API, effects.DividedTotal(sa), true
+		switch sa.API {
+		case "DealDamage", "PutCounter", "PreventDamage":
+		default:
+			continue
 		}
+		if strings.TrimSpace(sa.Params["DividedAsYouChoose"]) == "" || !effects.TargetsOf(sa).Targeted() {
+			continue
+		}
+		return sa.API, effects.DividedTotal(sa), true
 	}
 	return "", 0, false
+}
+
+// castStepFace is the face cast step st casts. An alternate-face cast mode
+// flips the card to its second face before the cast (engine/rules cast_begin.go
+// and cast_window.go: the Adventure/Omen spell half, a Room's other door, an
+// aftermath or split half, a transformed defeated battle, a disturb or
+// converted back face), while adventure_recast returns the card to its main
+// face and every other mode casts the main face. A step's ref may also name an
+// alternate face, which the runner binds to that face's offer
+// (engine/rules/oracle_run_faces.go); that face is selected when the card
+// carries it (a prepared copy's spell face is named this way).
+func castStepFace(c *cards.Card, st Step) *cards.Face {
+	if c == nil || len(c.Faces) == 0 {
+		return nil
+	}
+	switch st.CastMode {
+	case "adventure_alt", "omen_alt", "room_alt", "split_alt", "aftermath", "defeat_cast", "disturb", "converted":
+		if len(c.Faces) > 1 {
+			return c.Faces[1]
+		}
+		return c.Faces[0]
+	case "adventure_recast":
+		return c.Faces[0]
+	}
+	name := cards.NormalizeName(oraclediffRefName(st.Card))
+	for _, f := range c.Faces {
+		if f != nil && cards.NormalizeName(f.Name) == name {
+			return f
+		}
+	}
+	return c.Faces[0]
 }
 
 // castRootTarget is the index of cast step k's own root target ask: the

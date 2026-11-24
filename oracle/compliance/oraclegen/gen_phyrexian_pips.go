@@ -66,6 +66,9 @@ type xanswersExtra struct {
 	// put-back (Brainstorm, Dream Cache) auto-tops without that ask, so its
 	// order answers would be left queued for the next dialog.
 	orderAsks map[int]bool
+	// sources maps a decision step to the cards resolving or acting there
+	// (stepSourceNames); see answerRouting.sources.
+	sources map[int][]string
 }
 
 // isPipDecision reports whether d is one of gorge's ManaAsk pip decisions

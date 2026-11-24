@@ -26,9 +26,13 @@ import (
 //
 // Each key is the rewritten text's first sentence, extended to the whole text
 // when another pick's DIFFERENT text shares that sentence. A long key fails
-// closed: wording XMage prints otherwise leaves the key unmatched (the old
-// inert behaviour), where a short prefix could match the wrong ability of
-// XMage's list. ok is false when the picks cannot be keyed apart (a key that
+// closed against the WRONG ability: a short prefix could match another
+// ability of XMage's list. Wording XMage prints otherwise ("When" where
+// XMage says "Whenever", a text XMage continues past the key's period) is
+// not inert in strict mode -- an unmatched key is a strict_miss -- so the
+// driver's ScriptedChoicePlayer.chooseTriggeredAbility folds that wording
+// (leading when/whenever, case, {this}, trailing period) before it matches
+// the key, and takes the ability only when exactly one fits. ok is false when the picks cannot be keyed apart (a key that
 // is also a prefix of another, different text), and the caller keeps the old
 // text form.
 func xmageTriggerOrderKeys(d rules.OracleDecision) ([]string, bool) {

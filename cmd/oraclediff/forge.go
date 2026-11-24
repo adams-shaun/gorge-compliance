@@ -64,7 +64,8 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     not a field: it is its own decision AFTER the target ask, a
 //     "choose_n" with resume "damage_split" (for a spell gorge announces the
 //     division at cast, CR 601.2d, and oraclegen.CastDivisions restores the
-//     decision at the step the spell resolves in), whose options are the chosen
+//     decision at the cast step, right after the target ask, where the driver
+//     allocates it), whose options are the chosen
 //     targets in order (pick_refs) and whose pick_idx repeats a target's
 //     index once per point it receives. min == max == the total. The target
 //     ask's own "divided" is the literal total only for a triggered ability
@@ -803,12 +804,25 @@ func forgeAbilityLines(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 // forgeAbilityFace is the face whose Abilities[ability_index] step i names,
 // resolved as forgeAbilityLines documents, or nil when the step names no
 // ability or none resolves.
+//
+// A multi-face card can change face during the window without a setup
+// back_face entry: a modal DFC played as its land back face (CR 712.12) has
+// its front spell at the same printed index as the back land's mana ability.
+// The printed face would then resolve, but to the wrong ability, so for a
+// multi-face card the snapshot entering the step is consulted first: it names
+// the face that is actually up. A single-face card keeps the setup path, so an
+// already-emitted line never changes and the Forge result cache stays valid.
 func forgeAbilityFace(reg *cards.Registry, it oraclegen.Item, st oraclegen.Step, g rules.OracleResult, i int) *cards.Face {
 	if st.AbilityIndex == nil || st.Card == "" {
 		return nil
 	}
 	k := *st.AbilityIndex
 	c, ok := reg.Lookup(refCardName(st.Card))
+	if ok && len(c.Faces) > 1 {
+		if f := forgeSnapshotAbilityFace(reg, it, st, g, i); f != nil {
+			return f
+		}
+	}
 	if ok && len(c.Faces) > 0 {
 		face := 0
 		if seat, _, hasSeat := strings.Cut(st.Card, ":"); hasSeat {

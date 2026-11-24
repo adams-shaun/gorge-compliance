@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -209,7 +210,11 @@ func (f *follower) setup() error {
 	if mulligans > 0 && h.FreeMulligan {
 		mulligans++
 	}
-	cfg := rules.Config{Seed: h.Seed, Tokens: f.reg.Tokens, NameUniverse: f.reg.Universe(), Mulligans: mulligans}
+	// The live game and this replay must offer the same card names: scope the
+	// name asks to the seated decks (decks.NameUniverse, the shape gorge's
+	// oracleNameUniverse builds) and keep NamedCorpus whole for the derived
+	// vocabularies and "copy the card named N", as the live game does.
+	cfg := rules.Config{Seed: h.Seed, Tokens: f.reg.Tokens, NamedCorpus: f.reg.Universe(), Mulligans: mulligans}
 	next := state.ObjID(1)
 	for _, s := range h.Seats {
 		cs := make([]*cards.Card, 0, len(s.Cards))
@@ -232,6 +237,7 @@ func (f *follower) setup() error {
 		cfg.Names = append(cfg.Names, s.Name)
 		cfg.Decks = append(cfg.Decks, cs)
 	}
+	cfg.NameUniverse = decks.NameUniverse(cfg.Decks)
 	switch h.GameFormat {
 	case "", "constructed":
 	case "commander":

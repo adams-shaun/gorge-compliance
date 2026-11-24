@@ -8,7 +8,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.cards.CardSetInfo;
+import mage.cards.b.BrightclimbPathway;
+import mage.cards.g.GlasspoolMimic;
 import mage.constants.PhaseStep;
+import mage.constants.Rarity;
 import org.mage.test.player.TestPlayer;
 import sun.misc.Unsafe;
 
@@ -246,18 +250,18 @@ public final class ScenarioReplayCheckpointSeatTest {
         equal(half, d.choosePlayLandSource(dfc, "Brightclimb Pathway", mainCard));
         equal(null, d.choosePlayLandSource(dfc, "Island", null));
 
-        // A modal DFC played as a land enters with a land face up (CR 712.12),
-        // and XMage's PlayLandAbility sits on that half, named for it: the
-        // play command must name Glasspool Shore, not the creature front
-        // Glasspool Mimic. A land front (Pathway) keeps its front name; a
-        // single-faced land is unchanged.
-        mage.cards.Card mimic = new mage.cards.g.GlasspoolMimic(UUID.randomUUID(),
-                new mage.cards.CardSetInfo("Glasspool Mimic", "ZNR", "60", mage.constants.Rarity.RARE));
-        equal("Glasspool Shore", ScenarioReplay.landFaceName(mimic, "Glasspool Mimic"));
-        mage.cards.Card pathway = new mage.cards.b.BrightclimbPathway(UUID.randomUUID(),
-                new mage.cards.CardSetInfo("Brightclimb Pathway", "ZNR", "259", mage.constants.Rarity.RARE));
-        equal("Brightclimb Pathway", ScenarioReplay.landFaceName(pathway, "Brightclimb Pathway"));
-        equal("Swamp", ScenarioReplay.landFaceName(null, "Swamp"));
+        // A land play of a modal DFC names its land half: XMage's
+        // PlayLandAbility for Glasspool Shore reads "Play Glasspool Shore",
+        // while the scenario ref (and the setup alias) name the front face
+        // Glasspool Mimic. A land-front Pathway keeps naming its front half.
+        GlasspoolMimic mimic = new GlasspoolMimic(UUID.randomUUID(),
+                new CardSetInfo("Glasspool Mimic", "ZNR", "070", Rarity.RARE));
+        equal("Glasspool Shore", ScenarioReplay.playLandName(mimic, "Glasspool Mimic"));
+        BrightclimbPathway pathway = new BrightclimbPathway(UUID.randomUUID(),
+                new CardSetInfo("Brightclimb Pathway", "ZNR", "257", Rarity.RARE));
+        equal("Brightclimb Pathway", ScenarioReplay.playLandName(pathway, "Brightclimb Pathway"));
+        // An unresolvable card keeps the ref's spelling.
+        equal("Island", ScenarioReplay.playLandName(null, "Island"));
         System.out.println("PASS checkpoint seat and bound activation text");
     }
 }
