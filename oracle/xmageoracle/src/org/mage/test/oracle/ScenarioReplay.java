@@ -4644,10 +4644,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // had among them, which no permanent has, and its alias can still
             // name a copy left in hand: any untapped one of the name makes the
             // same mana.
-            for (ManaSource s : battlefield) {
-                if (s.card instanceof Permanent && !((Permanent) s.card).isTapped()) {
+            // Never one a later step names by its own ordinal: that step
+            // taps it, and taking it here leaves the later tap nothing.
+            java.util.Set<Integer> reserved = laterNamedOrdinals(ref, stepIdx);
+            for (int i = 0; i < battlefield.size(); i++) {
+                ManaSource s = battlefield.get(i);
+                if (s.card instanceof Permanent && !((Permanent) s.card).isTapped()
+                        && !reserved.contains(i + 1)) {
                     onBattlefield = s;
                     break;
+                }
+            }
+            for (ManaSource s : battlefield) {
+                if (onBattlefield == null && s.card instanceof Permanent && !((Permanent) s.card).isTapped()) {
+                    onBattlefield = s;
                 }
             }
         }
@@ -4687,6 +4697,99 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     + " hand, graveyard, exile or library");
         }
         return sources;
+    }
+
+    /**
+     * A land play whose ref has no setup alias: the card entered the hand
+     * mid-window (drawn, returned, searched), so registerAliases never saw it.
+     * Playing it by name still enters XMage's first same-named card.
+     */
+    private void playUnaliasedLand(TestPlayer p, String playRef, String landName) {
+        java.util.Set<UUID> before = noteBattlefield(p, playRef);
+        playLand(turn, phase, p, landName);
+        refAlias.put(playRef, "@" + playRef);
+        bindEnteredLand(p, playRef, before);
+    }
+
+    /** Queue a snapshot of the battlefield's permanent ids; the returned set
+     * fills when the command runs, just ahead of the play it precedes. */
+    private java.util.Set<UUID> noteBattlefield(TestPlayer p, String playRef) {
+        java.util.Set<UUID> before = new java.util.HashSet<>();
+        runCode("note battlefield " + playRef, turn, phase, p, (info, pl, g) -> {
+            before.clear();
+            for (Permanent perm : g.getBattlefield().getAllPermanents()) {
+                before.add(perm.getId());
+            }
+        });
+        return before;
+    }
+
+    /**
+     * Queue, right after a land play, the binding of its ref to the permanent
+     * the play created. A ref whose alias names no battlefield permanent --
+     * none at all (a card that entered the hand after setup) or a setup
+     * object that is not the card the by-name play entered (a library card
+     * the ref ranked before it was drawn) -- is moved onto the new permanent,
+     * so a later tap, target or pick of the ref resolves through
+     * scenarioObjectId instead of the by-name fallback, which would take a
+     * setup land of the same name (CR 305.1, 605.3a). A ref already bound to
+     * a live permanent is left alone.
+     */
+    private void bindEnteredLand(TestPlayer p, String playRef, java.util.Set<UUID> before) {
+        String front = xmageSpelling(refName(playRef));
+        String live = battlefieldName(playRef);
+        runCode("bind entered " + playRef, turn, phase, p, (info, pl, g) -> {
+            UUID current = scenarioObjectId(g, p, playRef);
+            if (current != null && g.getPermanent(current) != null) {
+                return;
+            }
+            Permanent entered = null;
+            Permanent anyEntered = null;
+            int newCount = 0;
+            for (Permanent perm : g.getBattlefield().getAllPermanents()) {
+                if (before.contains(perm.getId()) || !perm.getControllerId().equals(p.getId())) {
+                    continue;
+                }
+                newCount++;
+                anyEntered = perm;
+                if (entered == null && matchesRef(perm, front, live)) {
+                    entered = perm;
+                }
+            }
+            if (entered == null && newCount == 1) {
+                entered = anyEntered;
+            }
+            if (entered == null) {
+                return;
+            }
+            for (int j = 0; j < seats; j++) {
+                seat(j).getAliases().put(playRef, entered.getId());
+            }
+        });
+    }
+
+    /** The 1-based ordinals of the ref's same-named permanents that a step
+     * AFTER stepIdx activates explicitly (same seat, same name). A name
+     * fallback that must pick some untapped land of the name leaves those
+     * for the later step that names them. */
+    private java.util.Set<Integer> laterNamedOrdinals(String ref, int stepIdx) {
+        java.util.Set<Integer> out = new java.util.HashSet<>();
+        JsonArray all = steps(sc0);
+        String seatPrefix = ref.substring(0, ref.indexOf(':') + 1);
+        String name = refName(ref);
+        for (int i = stepIdx + 1; i < all.size(); i++) {
+            JsonObject later = all.get(i).getAsJsonObject();
+            if (!later.has("op") || !"activate".equals(str(later, "op")) || !later.has("card")
+                    || !later.get("card").isJsonPrimitive()) {
+                continue;
+            }
+            String other = str(later, "card");
+            if (other.startsWith(seatPrefix) && !other.contains(":token:") && refName(other).equals(name)
+                    && other.lastIndexOf('#') >= 0) {
+                out.add(refOrdinal(other));
+            }
+        }
+        return out;
     }
 
     /** The only source in list, or its wanted-th (1-based); null when the
@@ -5913,7 +6016,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String landName = xmageSpelling(refName(playRef));
                 String playAlias = refAlias.get(playRef);
                 if (playAlias == null) {
-                    playLand(turn, phase, p, landName);
+                    playUnaliasedLand(p, playRef, landName);
                     return;
                 }
                 // playLand names the land: XMage enters the FIRST same-named
@@ -5925,6 +6028,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // just ahead of the play and prefix the command with it
                 // ("@key Play <name>").
                 String playKey = "play" + stepIdx;
+                java.util.Set<UUID> before = noteBattlefield(p, playRef);
                 runCode("bind " + playRef, turn, phase, p, (info, pl, g) -> {
                     UUID id = playableLandId(p, g, p.getAliasByName(playAlias), landName);
                     if (id == null) {
@@ -5936,6 +6040,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                 });
                 activateAbility(turn, phase, p, "@" + playKey + " Play " + landName);
+                bindEnteredLand(p, playRef, before);
                 return;
             }
             case "pass":
