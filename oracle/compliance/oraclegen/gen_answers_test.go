@@ -427,7 +427,10 @@ func TestXMQueueCensus(t *testing.T) {
 		kind, label, want string
 	}{
 		{"search", "Wastes", "target"},
-		{"exilecost", "Wastes", "target"},
+		// Exile costs pay through getTargets().choose -> player.choose
+		// (makeChoose); Craft's material is the one target-queue exception,
+		// marked by pickQueue's craft route (TestExileCostFixedSizeRidesChoiceQueue).
+		{"exilecost", "Wastes", "choice"},
 		{"trigger_cost_pay", "Pay {2}", "skip"},
 		{"mana", "Pay 3 life", "skip"},
 		{"mana", "Add W", "choice"},
@@ -448,29 +451,6 @@ func TestXMQueueCensus(t *testing.T) {
 		if got := xmQueue(c.kind, c.label); got != c.want {
 			t.Errorf("xmQueue(%q,%q) = %q, want %q", c.kind, c.label, got, c.want)
 		}
-	}
-}
-
-// TestGraveExileCostChoiceFaces pins the per-face override of the exilecost
-// default: an ExileFromGraveCost is withNotTarget, so XMage reads its pick
-// through player.choose (TestPlayer.makeChoose, the CHOICE queue), while the
-// group-exile and craft costs that share the option kind keep the target
-// routing their templates script. Psychic Frog's find strict-missed "Missing
-// CHOICE def ... TargetCardInYourGraveyard" with the target answer left over.
-func TestGraveExileCostChoiceFaces(t *testing.T) {
-	d := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
-		Options: 7, Min: 3, Max: 3,
-		Picks:     []string{"Island", "Island", "Island"},
-		PickIdx:   []int{0, 1, 2},
-		PickRefs:  []string{"p0:Island#2", "p0:Island#3", "p0:Island#4"},
-		PickKinds: []string{"exilecost", "exilecost", "exilecost"}}
-	choice := []XAnswer{{0, "choice", "Island"}, {0, "choice", "Island"}, {0, "choice", "Island"}}
-	if got := answersWithSources([]rules.OracleDecision{d}, "psychic frog"); !reflect.DeepEqual(got, choice) {
-		t.Errorf("Psychic Frog exile cost = %#v, want the CHOICE queue %#v", got, choice)
-	}
-	target := []XAnswer{{0, "target", "Island"}, {0, "target", "Island"}, {0, "target", "Island"}}
-	if got := answersWithSources([]rules.OracleDecision{d}, "some other card"); !reflect.DeepEqual(got, target) {
-		t.Errorf("unlisted exile cost = %#v, want the default TARGET queue %#v", got, target)
 	}
 }
 
@@ -558,5 +538,63 @@ func TestLoneNamePickIsScripted(t *testing.T) {
 				t.Fatalf("XAnswers = %#v, want %#v", got, want)
 			}
 		})
+	}
+}
+
+// TestExileCostFixedSizeRidesChoiceQueue pins the exile-cost route: XMage pays
+// ExileFromGraveCost/ExileTargetCost/ExileFromHandCost with
+// getTargets().choose -> player.choose, which TestPlayer serves from makeChoose
+// (the CHOICE queue). A fixed-size selection is ONE makeChoose dialog, so its
+// picks are joined with '^'; an open-ended group exile asks for one card per
+// iteration, so its picks stay separate choice answers. Craft's target-queue
+// material is the exception marked by the craft route.
+func TestExileCostFixedSizeRidesChoiceQueue(t *testing.T) {
+	single := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", Min: 1, Max: 1,
+		Picks: []string{"Forest"}, PickIdx: []int{0}, PickRefs: []string{"p0:Forest"},
+		ObjectPicks: []string{"p0:Forest"}, PickKinds: []string{"exilecost"}}
+	if got := pickQueue(single, 0, "Forest", false, false); got != "choice" {
+		t.Fatalf("fixed exile pick queue = %q, want choice", got)
+	}
+	if got := routed(t, []rules.OracleDecision{single}, 1); !reflect.DeepEqual(got, []XAnswer{{0, "choice", "Forest"}}) {
+		t.Fatalf("fixed exile pick answers = %v", got)
+	}
+	multi := single
+	multi.Min, multi.Max = 2, 2
+	multi.Picks = []string{"Forest", "Island"}
+	multi.PickIdx = []int{0, 1}
+	multi.PickRefs = []string{"p0:Forest", "p0:Island"}
+	multi.ObjectPicks = []string{"p0:Forest", "p0:Island"}
+	multi.PickKinds = []string{"exilecost", "exilecost"}
+	if !allChoiceQueue(multi, false) {
+		t.Fatal("a fixed-size two-card exile cost is one makeChoose dialog")
+	}
+	if got := routed(t, []rules.OracleDecision{multi}, 1); !reflect.DeepEqual(got, []XAnswer{{0, "choice", "Forest^Island"}}) {
+		t.Fatalf("fixed two-card exile answers = %v", got)
+	}
+	// Craft's material is the same fixed-size "exilecost" shape but XMage's
+	// CraftAbility pays it through chooseTarget: the craft marker must keep
+	// every pick on the target queue, one answer per material, never joined.
+	if got := pickQueue(multi, 0, "Forest", false, true); got != "target" {
+		t.Fatalf("craft material pick queue = %q, want target", got)
+	}
+	if allChoiceQueue(multi, true) {
+		t.Fatal("craft material is not one makeChoose dialog")
+	}
+	group := single
+	group.Min, group.Max = 1, 3
+	group.Options = 2
+	group.Picks = []string{"Forest", "Island"}
+	group.PickIdx = []int{0, 1}
+	group.PickRefs = []string{"p0:Forest", "p0:Island"}
+	group.ObjectPicks = []string{"p0:Forest", "p0:Island"}
+	group.PickKinds = []string{"exilecost", "exilecost"}
+	if got := pickQueue(group, 0, "Forest", false, false); got != "choice" {
+		t.Fatalf("open group exile pick queue = %q, want choice", got)
+	}
+	if allChoiceQueue(group, false) {
+		t.Fatal("an open-ended group exile is one makeChoose per card, not one joined dialog")
+	}
+	if got := routed(t, []rules.OracleDecision{group}, 1); !reflect.DeepEqual(got, []XAnswer{{0, "choice", "Forest"}, {0, "choice", "Island"}, {0, "choice", "[choice_skip]"}}) {
+		t.Fatalf("open group exile answers = %v, want one choice per card then a skip", got)
 	}
 }

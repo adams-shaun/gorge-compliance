@@ -70,3 +70,15 @@ func TestCraftMaterialOnTargetQueue(t *testing.T) {
 		}
 	}
 }
+
+// Bearscape: a fixed-size non-Craft ExileFromGrave cost is ONE TargetImpl.choose
+// dialog, so makeChoose consumes the observed two-card selection as one
+// "^"-joined choice. Catalogue singles beside it are eaten first and leave the
+// joined answer unused.
+func TestFixedExileCostAnswersJoined(t *testing.T) {
+	it := levelBItem(t, "Bearscape", "activate#0.0")
+	want := []oraclegen.XAnswer{{Seat: 0, Kind: "choice", Value: "Colossal Dreadmaw^Sol Ring"}}
+	if got := it.XAnswers[0]; !reflect.DeepEqual(got, want) {
+		t.Fatalf("fixed exile cost answers = %+v, want %+v", got, want)
+	}
+}

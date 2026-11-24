@@ -294,3 +294,38 @@ func TestStartFocusTimes(t *testing.T) {
 		}
 	}
 }
+
+// TestStartTransformingDFC: a start scen yields for a transforming double-faced
+// card loads in play. scen lists the card on a battlefield, tapped or as a
+// counter bearer by its joined name "A // B" while startDeck deals its front
+// face, so binding a tapped/counter entry must resolve the name the same way.
+func TestStartTransformingDFC(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, tc := range []struct{ card, key string }{
+		{"Treasure Map // Treasure Cove", "f0/a0"}, // counter bearer
+		{"Arcee, Sharpshooter // Arcee, Acrobatic Coupe", "cast"},
+		{"Brass's Tunnel-Grinder // Tecutlan, the Searing Rift", "cast"},
+		{"Aang, at the Crossroads // Aang, Destined Savior", "cast"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, tc.card, tc.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			raw, err := json.Marshal(res.Start)
+			if err != nil {
+				t.Fatal(err)
+			}
+			dir := t.TempDir()
+			if err := os.WriteFile(filepath.Join(dir, "x.start.json"), raw, 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if err := playStart(reg, []string{dir}, "XP", t.TempDir(), false); err != nil {
+				t.Fatalf("play -start: %v", err)
+			}
+		})
+	}
+}

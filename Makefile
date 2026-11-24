@@ -59,7 +59,11 @@ GO_TEST_FLAGS ?= -p=2
 # five-file change as 9bb2f33757; the card fix itself is fix/redemptor-dreadnought-intervening-if,
 # RedemptorDreadnoughtTest and EvercoatUrsineTest. Card behaviour change only for those two cards, so the manifests
 # are unchanged.
-XMAGE_REF  ?= 791c9c554a9db844bb91f6c52b4c2e0e7685a20d
+# dc6da81e81 = 791c9c554a + fork branch fix/stackobject-self-target-on-791 (TargetStackObject drops the casting spell's
+# own stack object from canTarget / possibleTargets, CR 115.5: Katara's Reversal's "up to four target spells and/or
+# abilities" offered the Reversal itself as its one candidate on an empty stack, so the group could not be skipped
+# and the lone-candidate rule countered the spell itself). One target class, no set data: the manifests are unchanged.
+XMAGE_REF  ?= dc6da81e813c3cb42460f2cd386429d6aa6ed18d
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
