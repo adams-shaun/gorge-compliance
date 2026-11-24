@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b17da84-ae4d-4fc1-a327-85e54e6156c6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Koth, the Geomancer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b17dc39-a564-4c61-b483-98ed3da4361b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b19054c-ba33-44b4-b328-bb8ea3f52dab	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b19054c-ba33-44b4-b328-bb8ea3f52dab	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b19054c-ba33-44b4-b328-bb8ea3f52dab	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 3b1c6c1e-e298-4f45-8ab7-e0bb5358e11f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b1c6c1e-e298-4f45-8ab7-e0bb5358e11f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b1c6c1e-e298-4f45-8ab7-e0bb5358e11f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -76,7 +76,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b3c5fc6-6c4a-4e23-9625-5954d1986160	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b46800b-711b-4cbb-b296-26115b4f6839	cast	cast-resolve	agreed	-	FX	scen	2	0	Visions of Villainy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b46800b-711b-4cbb-b296-26115b4f6839	static#0.0	static#0.0	agreed	-	X	scen	1	0	Visions of Villainy/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b4b6af2-f929-4082-a5ae-61a4e074bf14	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b4b6af2-f929-4082-a5ae-61a4e074bf14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silhana-starfletcher:cast:s1,f:xs:XP:silhana-starfletcher:cast:s1	-	-	-	64a08ba7d913	-	03bc2fc0924b	-	-	2026-11-24	xproof
 3b4b6af2-f929-4082-a5ae-61a4e074bf14	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

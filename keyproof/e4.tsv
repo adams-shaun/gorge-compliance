@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 e4021e30-16bf-4178-9a3b-565bfdce4384	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e4021e30-16bf-4178-9a3b-565bfdce4384	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e4021e30-16bf-4178-9a3b-565bfdce4384	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PJ21.json	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 e403fadb-537c-41ac-924a-450f0eabe2c4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e403fadb-537c-41ac-924a-450f0eabe2c4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e405800a-27e6-468a-938b-484346ee20cd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -25,7 +25,7 @@ e41a68b3-e1cb-4f51-bd54-68882d2cc015	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 e41be9ad-3717-4f25-a8e0-c9947a2a0227	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e41be9ad-3717-4f25-a8e0-c9947a2a0227	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e41be9ad-3717-4f25-a8e0-c9947a2a0227	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e41d9b3a-0712-4174-8c5c-224065a63b16	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e41d9b3a-0712-4174-8c5c-224065a63b16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:culling-sun:cast:s1,f:xs:XP:culling-sun:cast:s1	-	-	-	64a08ba7d913	-	7d8a73ba1ed3	-	-	2026-11-24	xproof
 e41e8754-028c-4399-b530-de9e134d04b0	cast	cast-resolve	agreed	-	X	scen	1	0	The Legend of Kyoshi/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e41e8754-028c-4399-b530-de9e134d04b0	f1/a0	activate#1.0	agreed	-	X	scen	1	0	The Legend of Kyoshi/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e41e8754-028c-4399-b530-de9e134d04b0	static#1.0	static#1.0	agreed	-	X	scen	1	0	The Legend of Kyoshi/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -180,8 +180,8 @@ e4bb33b2-adde-4176-9274-7598b559aa6a	combat#0.attack	combat#0.attack	agreed	-	X	
 e4bb33b2-adde-4176-9274-7598b559aa6a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spider-Bot/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e4bb33b2-adde-4176-9274-7598b559aa6a	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e4bcd4ea-e7cd-4471-8f3b-18bb51d3d70c	cast	cast-resolve	agreed	-	X	scen	1	0	Pyroclasm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e4bd8910-770b-4220-8a26-2673491f4a3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e4bd8910-770b-4220-8a26-2673491f4a3e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e4bd8910-770b-4220-8a26-2673491f4a3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:priest-of-urabrask:f0t0:s1,f:xs:XP:priest-of-urabrask:f0t0:s1	-	-	-	64a08ba7d913	-	f9f7a01c9755	-	-	2026-11-24	xproof
+e4bd8910-770b-4220-8a26-2673491f4a3e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:priest-of-urabrask:f0t0:s1,f:xs:XP:priest-of-urabrask:f0t0:s1	-	-	-	64a08ba7d913	-	f9f7a01c9755	-	-	2026-11-24	xproof
 e4be4071-7910-460f-90f3-6c4d8cc9db65	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	359a1a6c1e32	-	-	2026-11-24	xproof
 e4be4071-7910-460f-90f3-6c4d8cc9db65	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	359a1a6c1e32	-	-	2026-11-24	xproof
 e4be4071-7910-460f-90f3-6c4d8cc9db65	static#0.0	static#0.0	agreed	-	X	scen	1	0	Alpharael, Dreaming Acolyte/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

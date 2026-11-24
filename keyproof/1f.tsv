@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f1b6130-3f18-4989-922b-438e41d683da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f1b6130-3f18-4989-922b-438e41d683da	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f1b6130-3f18-4989-922b-438e41d683da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f1c369a-3209-405b-9880-0e10b86e5698	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f1c369a-3209-405b-9880-0e10b86e5698	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:selkie-hedge-mage:f0t0:s1,f:xs:XP:selkie-hedge-mage:f0t0:s1	-	-	-	64a08ba7d913	-	f0fcce16c253	-	-	2026-11-24	xproof
 1f1c369a-3209-405b-9880-0e10b86e5698	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f1c369a-3209-405b-9880-0e10b86e5698	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -57,8 +57,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f384f19-7fb4-4120-8001-5b401b4debbd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f3b0b15-2c38-4aaa-b527-afbb540a6715	cast	cast-resolve	agreed	-	FX	scen	2	0	Toxin Analysis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f3c2b00-0000-4ae1-9650-9553accac52e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f3c2b00-0000-4ae1-9650-9553accac52e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f3c2b00-0000-4ae1-9650-9553accac52e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f3c2b00-0000-4ae1-9650-9553accac52e	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+1f3c2b00-0000-4ae1-9650-9553accac52e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	cast	cast-resolve	agreed	-	FX	scen	2	0	Gearbane Orangutan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gearbane Orangutan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gearbane Orangutan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6755a7af-5b55-4245-a777-27e69979479b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6755a7af-5b55-4245-a777-27e69979479b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 675a0eff-4da0-45cd-9371-fca96c313f4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-675a0eff-4da0-45cd-9371-fca96c313f4c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+675a0eff-4da0-45cd-9371-fca96c313f4c	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PJ21.json	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 675ed28e-4328-4638-aaad-3f47e5c7895f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67601399-089b-44fe-82db-c319729c75bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67601399-089b-44fe-82db-c319729c75bf	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -180,4 +180,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 67f43ac6-2a58-4b53-b5d7-0330e2a252e2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67f59250-d46a-4637-9493-165d23278817	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67f6e949-14d9-4253-9d18-4004cac2f900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-67fba605-9cfa-499c-83e0-4fbd023bcfa0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67fba605-9cfa-499c-83e0-4fbd023bcfa0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-knight:cast:s1,f:xs:XP:blood-knight:cast:s1	-	-	-	64a08ba7d913	-	7bc4c3c81c9a	-	-	2026-11-24	xproof
