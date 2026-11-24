@@ -70,10 +70,13 @@ func TestForgeRolledDie(t *testing.T) {
 // c3b04cf264b = the clean merge of 2bf0a1cb36 and c674c0977f (the SBA graveyard batch order pinned above), both branched
 // from 3494ec7d2b; the two touch disjoint files (forge-oracle ScriptedController/StepMachine vs forge-game GameAction),
 // so the pin keeps both fixes, die-roll code unchanged.
+// 147dd2f00f = the clean merge of c3b04cf264 (the SBA graveyard batch order) and ba5d908b14 (the modal DFC land back
+// face play), die-roll code unchanged, the full driver suite (170 tests, including ForcedDieRollTest,
+// SbaGraveyardOrderTest and ModalLandPlayTest) re-run green on it.
 // This check only compares the Makefile pin to this constant; it cannot tell whether the
-// hash holds a fix. The behavioural evidence is the fork's LoneCardOrderTest (2bf0) and SbaGraveyardOrderTest (c674),
-// and that the pin resolves on origin is checked by scripts/forge-oracle-setup.sh (git ls-remote / --check-pin).
-const forgeOracleDieRollRef = "c3b04cf264b992134477ae759417b4faf28baef3"
+// hash holds a fix. The behavioural evidence is the fork's LoneCardOrderTest (2bf0), SbaGraveyardOrderTest (c674)
+// and ModalLandPlayTest (ba5d), and that the pin resolves on origin is checked by scripts/forge-oracle-setup.sh (git ls-remote / --check-pin).
+const forgeOracleDieRollRef = "147dd2f00fc5dd087d88490bb6afde5b34bc8cb1"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
