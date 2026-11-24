@@ -59,9 +59,11 @@ public final class ScenarioReplayDriverAsksTest {
         phyrexianLife();
         wishDeclined();
         optionalMultiCandidateTarget();
+        mandatoryChoosePickOnTargetQueue();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, alternative cast, promised gift, replacement order,"
-                + " lone forced target, multi-candidate search, phyrexian life, wish decline, optional multi-candidate target");
+                + " lone forced target, multi-candidate search, phyrexian life, wish decline, optional multi-candidate target,"
+                + " mandatory choose pick on the target queue");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -127,6 +129,53 @@ public final class ScenarioReplayDriverAsksTest {
                 "a skip queued for a later target object is hidden from this ask");
         check(laterSkip.equals(Collections.singletonList("Seal of Removal")),
                 "the explicit pick remains this ask's head answer");
+    }
+
+    /** Wayward Guide-Beast: a mandatory non-targeting choose of a controlled land whose pick the
+     * generator scripted on the TARGET queue moves to the CHOICE queue. */
+    private static void mandatoryChoosePickOnTargetQueue() throws Exception {
+        Class<?>[] types = {List.class, List.class, boolean.class, java.util.function.Predicate.class};
+        java.util.function.Predicate<String> lands = a -> a.equals("@p0:Mountain") || a.equals("@p0:Forest");
+        List<String> choices = new ArrayList<>();
+        List<String> targets = new ArrayList<>(Arrays.asList("@p0:Mountain", "Other"));
+        check((Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a target-queue pick naming a candidate moves");
+        check(choices.equals(Collections.singletonList("@p0:Mountain")) && targets.equals(Collections.singletonList("Other")),
+                "the pick leads the choice queue and leaves the target queue: " + choices + " " + targets);
+        choices = new ArrayList<>(Arrays.asList("@p0:Forest"));
+        targets = new ArrayList<>(Arrays.asList("@p0:Mountain"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a choice head that names a candidate is this ask's own answer");
+        choices = new ArrayList<>();
+        targets = new ArrayList<>(Arrays.asList("Other"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a target head naming no candidate stays");
+        targets = new ArrayList<>(Arrays.asList("@p0:Mountain"));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, false, lands),
+                "an ask with no candidates takes nothing");
+        choices = new ArrayList<>(Arrays.asList(TestPlayer.CHOICE_SKIP));
+        check(!(Boolean) adapter("movePickToChoices", types, choices, targets, true, lands),
+                "a choice skip is this ask's own answer");
+        // The helper alone is not the fix: pin that the choose(Outcome, Target...)
+        // override calls it, after the min-0 may handling and before forcedChoose,
+        // behind the role guards (a TargetPermanent ask that is not one of the
+        // source's own targets). Dropping the call or a guard would leave every
+        // check above passing while the strict replay fails again.
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int override = text.indexOf("public boolean choose(Outcome outcome, mage.target.Target target, Ability source, Game game)");
+        check(override >= 0, "ScriptedChoicePlayer must override choose(Outcome, Target, Ability, Game)");
+        int forced = text.indexOf("forcedChoose(target, source, game)", override);
+        int call = text.indexOf("movePickToChoices(", override);
+        check(call >= 0 && forced >= 0 && call < forced,
+                "ScriptedChoicePlayer.choose must call movePickToChoices before forcedChoose");
+        String guard = text.substring(Math.max(override, call - 1200), call);
+        check(guard.contains("getMinNumberOfTargets() > 0")
+                        && guard.contains("instanceof mage.target.TargetPermanent")
+                        && guard.contains("source.getTargets().contains(target)")
+                        && guard.contains("source.getTargets().contains(target.getOriginalTarget())"),
+                "the move must stay behind the mandatory / TargetPermanent / not-the-source's-own-target guards");
     }
 
     /** North Wind Avatar: WishEffect asks "Put a card you own from outside the
