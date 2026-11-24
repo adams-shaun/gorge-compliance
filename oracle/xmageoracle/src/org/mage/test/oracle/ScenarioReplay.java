@@ -680,6 +680,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return false;
         }
 
+        /** Splits gorge's waterbend-helper label "Tap <name> to waterbend for N"
+         * into the permanent's name, or null for any other label. XMage poses
+         * the waterbend ask as a TargetControlledPermanent choice, which reads
+         * the CHOICE queue by name, not the recorded mana-payment plan. */
+        static String waterbendTapName(String label) {
+            if (label == null || !label.startsWith("Tap ")) {
+                return null;
+            }
+            int at = label.indexOf(" to waterbend for ");
+            if (at < 4) {
+                return null;
+            }
+            String name = label.substring(4, at);
+            return name.isEmpty() ? null : name;
+        }
+
         /** Splits a payment-tap label into {permanent name, contribution}
          * ("1" or a WUBRG letter), or null for any other label: a mana wheel's
          * "Tap <name> for mana", a waterbend, a Harmonize "(reduce by N)". */
@@ -2538,17 +2554,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 int beforeChoicesB = playerB.getChoices().size();
                 int beforeTargetsA = playerA.getTargets().size();
                 int beforeTargetsB = playerB.getTargets().size();
+                String payment = paymentAt(sc, i);
+                boolean inferWaterbendX = "activate".equals(op)
+                        && xabilityAt(i).startsWith("waterbend {X}");
                 if (i < xans.size() && xans.get(i).isJsonArray()) {
                     // Queue answers by their recorded seat before registering
                     // actions. XMage consumes these queues while executing the
                     // cast; the action registration itself is deferred.
-                    scripted(xans.get(i).getAsJsonArray());
+                    scripted(xans.get(i).getAsJsonArray(), payment, inferWaterbendX);
                 }
                 int beforeA = playerA.getActions().size();
                 int beforeB = playerB.getActions().size();
                 queuePassCommands(i);
                 tagQueuedActions(beforeA, beforeB);
-                String payment = paymentAt(sc, i);
                 stepPayment = payment;
                 step(st, op, i);
                 String cp = "step " + i + " (" + op + ")";
@@ -4521,6 +4539,46 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // through that match before activating.
     private JsonArray xabilities = new JsonArray();
 
+    /**
+     * The X of a Waterbend {X} activation as the transcript records it: every
+     * waterbend tap label pays one generic (its "for N"), and the step's
+     * recorded pool spend is the rest of the waterbend cost. An explicit
+     * amount answer or "X=<n>" choice is XMage's own X and is left to
+     * TestPlayer.announceX: nothing is inferred beside it, so the step never
+     * queues two X answers.
+     */
+    static int waterbendXFromAnswers(JsonArray as, String payment) {
+        int x = payment == null ? 0 : payment.length();
+        for (JsonElement e : as) {
+            JsonObject a = e.getAsJsonObject();
+            String kind = str(a, "kind");
+            if ("amount".equals(kind)) {
+                return 0;
+            }
+            if (!"choice".equals(kind)) {
+                continue;
+            }
+            String v = str(a, "value");
+            if (v.startsWith("X=")) {
+                return 0;
+            }
+            if (ScriptedChoicePlayer.waterbendTapName(v) == null) {
+                continue;
+            }
+            int at = v.lastIndexOf(" for ");
+            if (at >= 0) {
+                try {
+                    x += Integer.parseInt(v.substring(at + 5).trim());
+                    continue;
+                } catch (NumberFormatException ignored) {
+                    // no contribution: count the tap anyway
+                }
+            }
+            x += 1;
+        }
+        return x;
+    }
+
     /** Step i's XMage ability text, or "" when the item carries none. */
     private String xabilityAt(int i) {
         if (i < xabilities.size() && xabilities.get(i).isJsonPrimitive()) {
@@ -6439,7 +6497,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** Applies the generator's scripted answers (oraclegen.XAnswer). */
-    private void scripted(JsonArray as) {
+    private void scripted(JsonArray as, String payment, boolean inferWaterbendX) {
+        int waterbendX = inferWaterbendX ? waterbendXFromAnswers(as, payment) : 0;
+        boolean waterbendXQueued = false;
         for (JsonElement e : as) {
             JsonObject a = e.getAsJsonObject();
             TestPlayer p = seat(a.get("seat").getAsInt());
@@ -6509,7 +6569,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     } else if (isSeatRef(v)) {
                         setChoice(p, seat(seatOf(v)).getName());
                     } else {
-                        queueChoice(p, aliasChoiceValue(v));
+                        String waterbendTap = ScriptedChoicePlayer.waterbendTapName(v);
+                        if (waterbendTap != null && !waterbendXQueued && waterbendX > 0) {
+                            // Waterbend {X}: xproof records the helper taps and pool spend, not a
+                            // separate X amount. TestPlayer.announceX reads this before the tap ask.
+                            queueChoice(p, "X=" + waterbendX);
+                            waterbendXQueued = true;
+                        }
+                        queueChoice(p, aliasChoiceValue(waterbendTap != null ? waterbendTap : v));
                     }
                     break;
                 default:
