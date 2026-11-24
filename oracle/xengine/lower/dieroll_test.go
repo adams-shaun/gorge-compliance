@@ -1,11 +1,16 @@
 package lower
 
 import (
+	"encoding/json"
 	"reflect"
+	"slices"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
+	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
 // TestLowerDieRollResult: a die roll recorded on a tape entry lowers into the
@@ -167,4 +172,127 @@ func TestLowerDieRollOnResolvingPass(t *testing.T) {
 	if !reflect.DeepEqual(l.Item.DieRolls, want) {
 		t.Fatalf("die rolls %+v, want %+v on the resolving pass (steps %v)", l.Item.DieRolls, want, ops(l))
 	}
+}
+
+// TestSelfCheckForcesDieRolls: Herald of Hadar's {5}{B} rolls a d20 (CR 706.2).
+// The self-check must replay the roll the live game made, not draw its own:
+// a 10-19 roll gains the controller 2 life and a 1-9 roll does not. The test
+// plays the ability at game seeds until the live game rolls 17, and requires
+// the runner's own unforced roll to land in a different row, so the check
+// fails when Item.Raw() leaves die_rolls out. It fails rather than skips when
+// no seed discriminates: a silently green test would not check the fix.
+func TestSelfCheckForcesDieRolls(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	pair := []decks.Deck{
+		{Name: "start-p0", Colours: "B", Cards: slices.Concat([]string{"Herald of Hadar"}, repeatCard(39, "Swamp"))},
+		{Name: "start-p1", Colours: "W", Cards: repeatCard(40, "Plains")},
+	}
+	start := &rules.StartSpec{Seats: []rules.StartSeat{
+		{Battlefield: []int{0, 1, 2, 3, 4, 5, 6}},
+		{},
+	}}
+	last := func(r rules.OracleResult) int32 {
+		return r.Snapshots[len(r.Snapshots)-1].Players[0].Life
+	}
+	const maxSeed = 80
+	var l Lowered
+	found := false
+	for n := 1; n <= maxSeed && !found; n++ {
+		cand, why, _, err := Span(reg, pair, startGameSeed(0, n), game.Options{
+			Set: "XP", MaxTurns: 2, Start: start,
+			Focus: &game.Focus{Seat: 0, Card: "Herald of Hadar", Kind: "ability"},
+		}, false, "xs:XP:herald-of-hadar:ability", "xproof start Herald of Hadar ability")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(why) > 0 {
+			t.Fatalf("seed %d: span refused: %v", n, why)
+		}
+		natural17 := false
+		for _, r := range cand.Item.DieRolls {
+			if r.Sides == 20 && r.Natural == 17 {
+				natural17 = true
+			}
+		}
+		if !natural17 {
+			continue
+		}
+		// natural-17 seeds only: the runner's seeded d20 must then be in
+		// another row, or the forced and unforced runs agree and the case
+		// proves nothing.
+		unforced, err := json.Marshal(cand.Item.Scenario)
+		if err != nil {
+			t.Fatal(err)
+		}
+		own, err := rules.RunOracleScenarioJSON(reg, unforced)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(own.Snapshots) == 0 {
+			t.Fatalf("seed %d: the runner produced no snapshots", n)
+		}
+		if last(own) == 22 {
+			continue
+		}
+		l, found = cand, true
+	}
+	if !found {
+		t.Fatalf("no game seed in 1..%d rolls a natural 17 with the runner's own d20 outside the 10-19 row", maxSeed)
+	}
+	forced, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(forced.Snapshots) == 0 {
+		t.Fatal("the forced run produced no snapshots")
+	}
+	if last(forced) != 22 {
+		t.Fatalf("forced run p0 life %d, want 22 (natural 17 is the 10-19 row)", last(forced))
+	}
+	if c := CheckWindow(reg, l); c.Status != StatusOK {
+		t.Fatalf("%s at step %d, %s: gorge %s, tape %s %v", c.Status, c.Step, c.Field, c.Gorge, c.Tape, c.Fails)
+	}
+}
+
+// TestSetupProbeKeepsRunnableWithDieRolls: the setup-only probe has no steps,
+// so a gameplay die roll's step is out of range for it. The probe must still
+// run (gorge rejects an out-of-range roll), or setupAnswerReasons returns nil
+// and the setup-refusal guard is silently off for every d20 item.
+func TestSetupProbeKeepsRunnableWithDieRolls(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	pair := []decks.Deck{
+		{Name: "start-p0", Colours: "B", Cards: slices.Concat([]string{"Herald of Hadar"}, repeatCard(39, "Swamp"))},
+		{Name: "start-p1", Colours: "W", Cards: repeatCard(40, "Plains")},
+	}
+	start := &rules.StartSpec{Seats: []rules.StartSeat{
+		{Battlefield: []int{0, 1, 2, 3, 4, 5, 6}},
+		{},
+	}}
+	for n := 1; n <= 80; n++ {
+		cand, why, _, err := Span(reg, pair, startGameSeed(0, n), game.Options{
+			Set: "XP", MaxTurns: 2, Start: start,
+			Focus: &game.Focus{Seat: 0, Card: "Herald of Hadar", Kind: "ability"},
+		}, false, "xs:XP:herald-of-hadar:ability", "xproof start Herald of Hadar ability")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(why) > 0 || len(cand.Item.DieRolls) == 0 {
+			continue
+		}
+		// gorge reports a rejected tape as a harness fail on the result, not
+		// as an error, so the guard would see no decisions and pass silently.
+		ok, err := rules.RunOracleScenarioJSON(reg, setupProbeRaw(cand.Item))
+		if err != nil || len(ok.Fails) != 0 {
+			t.Fatalf("seed %d: the setup probe of a die-roll item does not run: err=%v fails=%v", n, err, ok.Fails)
+		}
+		// The unfixed probe (steps cleared, tape kept) must be what fails.
+		bad := cand.Item
+		bad.Steps = nil
+		rr, err := rules.RunOracleScenarioJSON(reg, bad.Raw())
+		if err != nil || len(rr.Fails) == 0 {
+			t.Fatalf("seed %d: a zero-step probe with the tape was accepted (err=%v); the test no longer exercises the guard", n, err)
+		}
+		return
+	}
+	t.Fatal("no game seed in 1..80 produced a die-roll item")
 }

@@ -239,6 +239,14 @@ public final class ScenarioReplaySplitRoomTest {
         equal(true, ScenarioReplay.needsQueuedCastTargets(floodMaw.getSpellAbility()));
         equal(false, ScenarioReplay.replacesCastTargets(withBaseTarget.getSpellAbility()));
         equal(false, ScenarioReplay.replacesCastTargets(null));
+        // A ForEachPlayerTargetsAdjuster also clear()s and adds one blueprint
+        // copy per opponent: Mass Mutiny's inline target was wiped and its
+        // "up to one" copy closed empty, so the spell gained nothing.
+        mage.cards.m.MassMutiny mutiny = new mage.cards.m.MassMutiny(UUID.randomUUID(),
+                new CardSetInfo("Mass Mutiny", "PC2", "1", Rarity.MYTHIC));
+        equal(false, mutiny.getSpellAbility().getAllSelectedTargets().isEmpty());
+        equal(true, ScenarioReplay.replacesCastTargets(mutiny.getSpellAbility()));
+        equal(true, ScenarioReplay.needsQueuedCastTargets(mutiny.getSpellAbility()));
         mage.cards.l.LongRiversPull pull = new mage.cards.l.LongRiversPull(UUID.randomUUID(),
                 new CardSetInfo("Long River's Pull", "BLB", "1", Rarity.RARE));
         equal(true, ScenarioReplay.needsQueuedCastTargets(pull.getSpellAbility()));
