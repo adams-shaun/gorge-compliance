@@ -13,8 +13,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4605d8b3-b714-4717-8ff3-155fabfc1999	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4605d8b3-b714-4717-8ff3-155fabfc1999	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4605d8b3-b714-4717-8ff3-155fabfc1999	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-460c0f0b-bbf4-4307-9b44-350175d83bfe	cast	cast-resolve	agreed	-	X	scen	1	0	Cartographer's Companion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-460c0f0b-bbf4-4307-9b44-350175d83bfe	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+460c0f0b-bbf4-4307-9b44-350175d83bfe	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cartographer-s-companion:f0t0:s2,f:xs:XP:cartographer-s-companion:f0t0:s2	-	-	-	e07cf3a05ba5	-	8248cf7f8405	-	-	2026-11-24	xproof
+460c0f0b-bbf4-4307-9b44-350175d83bfe	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cartographer-s-companion:f0t0:s2,f:xs:XP:cartographer-s-companion:f0t0:s2	-	-	-	e07cf3a05ba5	-	8248cf7f8405	-	-	2026-11-24	xproof
 46137f00-f7f5-430a-857c-ff2dbf2d2579	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4617739e-4e3e-4d06-b074-8f836261a870	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4617739e-4e3e-4d06-b074-8f836261a870	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -83,11 +83,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 465843dc-57d0-46fd-ac47-238723034563	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4658ae19-d203-4c12-b56e-42cd8f0db91d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4658ae19-d203-4c12-b56e-42cd8f0db91d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-465cda20-c8f3-4a7c-a250-875877bce21d	cast	cast-resolve	agreed	-	X	scen	1	0	Abyssal Gorestalker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-465cda20-c8f3-4a7c-a250-875877bce21d	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+465cda20-c8f3-4a7c-a250-875877bce21d	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	ac5b890b9d84	-	-	2026-11-24	xproof
+465cda20-c8f3-4a7c-a250-875877bce21d	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	ac5b890b9d84	-	-	2026-11-24	xproof
 46665089-aa3d-44c3-964d-6638dfbb5782	cast	counter-spell	agreed	-	FX	scen	2	0	Essence Scatter/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4669e8c7-fc37-4b97-9cb7-8d29b43d9176	cast	cast-resolve	agreed	-	X	scen	1	0	Overlord of the Hauntwoods/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4669e8c7-fc37-4b97-9cb7-8d29b43d9176	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4669e8c7-fc37-4b97-9cb7-8d29b43d9176	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-hauntwoods:f0t0:s2,f:xs:XP:overlord-of-the-hauntwoods:f0t0:s2	-	-	-	e07cf3a05ba5	-	9d175506557e	-	-	2026-11-24	xproof
+4669e8c7-fc37-4b97-9cb7-8d29b43d9176	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-hauntwoods:f0t0:s2,f:xs:XP:overlord-of-the-hauntwoods:f0t0:s2	-	-	-	e07cf3a05ba5	-	9d175506557e	-	-	2026-11-24	xproof
 4669e8c7-fc37-4b97-9cb7-8d29b43d9176	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Overlord of the Hauntwoods/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 466af6da-52e8-4ac5-b659-7492e3594ff8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 466af6da-52e8-4ac5-b659-7492e3594ff8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 467ea3e3-7767-405a-9d1a-8fa5de696376	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 467ea3e3-7767-405a-9d1a-8fa5de696376	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 467ea3e3-7767-405a-9d1a-8fa5de696376	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-467f756f-75db-4748-99d3-62651776adfe	cast	cast-resolve	agreed	-	FX	scen	2	0	Lord Skitter's Butcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+467f756f-75db-4748-99d3-62651776adfe	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lord-skitter-s-butcher:f0t0:s2,f:xs:XP:lord-skitter-s-butcher:f0t0:s2	-	-	-	e07cf3a05ba5	-	df6d2c143864	-	-	2026-11-24	xproof
 467f756f-75db-4748-99d3-62651776adfe	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46808926-d95b-4313-89d1-6bdfe13fcb77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4681bcc2-8a46-44cd-8b04-6ab140904dea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

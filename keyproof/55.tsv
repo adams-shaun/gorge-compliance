@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5538d4cf-98eb-4e20-a9c1-42c7cdcad194	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rattleback Apothecary/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5538d4cf-98eb-4e20-a9c1-42c7cdcad194	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rattleback Apothecary/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5538d4cf-98eb-4e20-a9c1-42c7cdcad194	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rattleback Apothecary/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5539d78c-1acc-46dd-ba6d-cc0cdad6ff44	cast	cast-resolve	agreed	-	X	scen	1	0	Benthic Criminologists/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5539d78c-1acc-46dd-ba6d-cc0cdad6ff44	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5539d78c-1acc-46dd-ba6d-cc0cdad6ff44	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:benthic-criminologists:f0t0:s2,f:xs:XP:benthic-criminologists:f0t0:s2	-	-	-	e07cf3a05ba5	-	ec40ec1b2b08	-	-	2026-11-24	xproof
+5539d78c-1acc-46dd-ba6d-cc0cdad6ff44	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:benthic-criminologists:f0t0:s2,f:xs:XP:benthic-criminologists:f0t0:s2	-	-	-	e07cf3a05ba5	-	ec40ec1b2b08	-	-	2026-11-24	xproof
 5539d78c-1acc-46dd-ba6d-cc0cdad6ff44	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Benthic Criminologists/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 553b9606-0519-4b85-b6ae-acc126e537e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 553c2006-e123-406e-ab4a-1d1f67c7468c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -70,10 +70,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5563427d-ffdc-4bea-ad7d-1605894b8a6c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 556c4dad-002e-41a8-8ba3-8b4eda70232f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 556c4dad-002e-41a8-8ba3-8b4eda70232f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-556dd333-4066-41f7-98f6-41794754de71	cast	cast-resolve	agreed	-	X	scen	1	0	Vile Entomber/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+556dd333-4066-41f7-98f6-41794754de71	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:vile-entomber:f0t0:s2,f:xs:XP:vile-entomber:f0t0:s2	-	-	-	e07cf3a05ba5	-	536a09a62da3	-	-	2026-11-24	xproof
 556dd333-4066-41f7-98f6-41794754de71	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vile Entomber/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 556dd333-4066-41f7-98f6-41794754de71	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vile Entomber/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-556dd333-4066-41f7-98f6-41794754de71	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+556dd333-4066-41f7-98f6-41794754de71	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:vile-entomber:f0t0:s2,f:xs:XP:vile-entomber:f0t0:s2	-	-	-	e07cf3a05ba5	-	536a09a62da3	-	-	2026-11-24	xproof
 556f127f-6131-4171-b1ed-11420c21d345	cast	cast-resolve	agreed	-	FX	scen	2	0	Serpent Specialist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 556f127f-6131-4171-b1ed-11420c21d345	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Serpent Specialist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 556f127f-6131-4171-b1ed-11420c21d345	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Serpent Specialist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

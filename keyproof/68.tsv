@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 682eb224-cab4-4829-810b-72e63a9ceb5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6832f9e2-294a-44a2-8af9-eb16ccfdfc36	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6832f9e2-294a-44a2-8af9-eb16ccfdfc36	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-683775ac-481e-4c26-ab2f-5d2813af0268	cast	cast-resolve	agreed	-	FX	scen	2	0	Sentinel of Lost Lore/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+683775ac-481e-4c26-ab2f-5d2813af0268	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	9e6721ef2361	-	-	2026-11-24	xproof
 683775ac-481e-4c26-ab2f-5d2813af0268	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683a06b6-af77-440f-81b9-8958597a7324	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683a06b6-af77-440f-81b9-8958597a7324	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -120,8 +120,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6894345f-52a6-46e4-b278-0783087daee1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68954295-54e3-4303-a6bc-fc4547a4e3a3	cast	cast-resolve	agreed	-	X	scen	1	0	Llanowar Elves/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68954295-54e3-4303-a6bc-fc4547a4e3a3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Llanowar Elves/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-68957dca-df5c-4051-af22-407cb7e47200	cast	cast-resolve	agreed	-	FX	scen	2	0	Meathook Massacre II/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-68957dca-df5c-4051-af22-407cb7e47200	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68957dca-df5c-4051-af22-407cb7e47200	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	ebb1d2576fee	-	-	2026-11-24	xproof
+68957dca-df5c-4051-af22-407cb7e47200	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	ebb1d2576fee	-	-	2026-11-24	xproof
 68957dca-df5c-4051-af22-407cb7e47200	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Meathook Massacre II/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68957dca-df5c-4051-af22-407cb7e47200	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Meathook Massacre II/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6895d7a2-264b-4731-9294-c02e1e220384	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -155,8 +155,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68c0c04e-b0d5-4721-83bf-bf18e8b7e680	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68c3aa66-85f2-494c-8fb2-ad0348814506	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68c3aa66-85f2-494c-8fb2-ad0348814506	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68c56db4-c97a-4c1b-a6f6-096392488e21	cast	cast-resolve	agreed	-	X	scen	1	0	Chupacabra Echo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-68c56db4-c97a-4c1b-a6f6-096392488e21	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68c56db4-c97a-4c1b-a6f6-096392488e21	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:chupacabra-echo:f0t0:s2,f:xs:XP:chupacabra-echo:f0t0:s2	-	-	-	e07cf3a05ba5	-	792de4b7db29	-	-	2026-11-24	xproof
+68c56db4-c97a-4c1b-a6f6-096392488e21	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:chupacabra-echo:f0t0:s2,f:xs:XP:chupacabra-echo:f0t0:s2	-	-	-	e07cf3a05ba5	-	792de4b7db29	-	-	2026-11-24	xproof
 68c7e459-0932-4644-a3c0-9a1eae1db7a3	cast	cast-resolve	agreed	-	FX	scen	2	0	Loot, the Pathfinder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68c7e459-0932-4644-a3c0-9a1eae1db7a3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Loot, the Pathfinder/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68c7e459-0932-4644-a3c0-9a1eae1db7a3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Loot, the Pathfinder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

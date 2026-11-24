@@ -58,9 +58,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63584001-7f58-42ee-b072-914baa66c78a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6358ee1c-3577-4196-bae4-29a3c160a66a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6358ee1c-3577-4196-bae4-29a3c160a66a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-635b854d-de71-4c85-9755-8c97bf3cba36	cast	cast-resolve	agreed	-	X	scen	1	0	Sweettooth Witch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+635b854d-de71-4c85-9755-8c97bf3cba36	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sweettooth-witch:f0t0:s2,f:xs:XP:sweettooth-witch:f0t0:s2	-	-	-	e07cf3a05ba5	-	782125d7fb33	-	-	2026-11-24	xproof
 635b854d-de71-4c85-9755-8c97bf3cba36	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sweettooth Witch/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-635b854d-de71-4c85-9755-8c97bf3cba36	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+635b854d-de71-4c85-9755-8c97bf3cba36	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sweettooth-witch:f0t0:s2,f:xs:XP:sweettooth-witch:f0t0:s2	-	-	-	e07cf3a05ba5	-	782125d7fb33	-	-	2026-11-24	xproof
 635c0a7d-d832-4c10-a5f0-9cde19152cbb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 635c0a7d-d832-4c10-a5f0-9cde19152cbb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 635cc10e-ca25-49a2-af44-3b064263a254	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,8 +145,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63c52071-e3a7-4236-9dcb-e5ea68240dc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63c5f42b-13d0-4391-b033-4ab2f4e3152b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63c5f42b-13d0-4391-b033-4ab2f4e3152b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63c8f510-eba8-4f00-9f80-fbbc74801a4a	cast	cast-resolve	agreed	-	X	scen	1	0	Scampering Surveyor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-63c8f510-eba8-4f00-9f80-fbbc74801a4a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63c8f510-eba8-4f00-9f80-fbbc74801a4a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:scampering-surveyor:f0t0:s1,f:xs:XP:scampering-surveyor:f0t0:s1	-	-	-	e07cf3a05ba5	-	d4e27677232f	-	-	2026-11-24	xproof
+63c8f510-eba8-4f00-9f80-fbbc74801a4a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:scampering-surveyor:f0t0:s1,f:xs:XP:scampering-surveyor:f0t0:s1	-	-	-	e07cf3a05ba5	-	d4e27677232f	-	-	2026-11-24	xproof
 63d50d5e-56de-44c4-b906-b2a21a56e3f3	cast	cast-resolve	agreed	-	X	scen	1	0	Alania, Divergent Storm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63d50d5e-56de-44c4-b906-b2a21a56e3f3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Alania, Divergent Storm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63d846e2-4bef-4911-9508-273c75a4a040	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -172,10 +172,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63e596a2-9126-4af6-8782-c38687d664ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63e596a2-9126-4af6-8782-c38687d664ad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63e596a2-9126-4af6-8782-c38687d664ad	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63e79a6f-ed98-480a-a740-d44e111046f7	cast	cast-resolve	agreed	-	X	scen	1	0	Guarded Heir/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+63e79a6f-ed98-480a-a740-d44e111046f7	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:guarded-heir:f0t0:s2,f:xs:XP:guarded-heir:f0t0:s2	-	-	-	e07cf3a05ba5	-	508c28e20081	-	-	2026-11-24	xproof
 63e79a6f-ed98-480a-a740-d44e111046f7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Guarded Heir/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63e79a6f-ed98-480a-a740-d44e111046f7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Guarded Heir/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-63e79a6f-ed98-480a-a740-d44e111046f7	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63e79a6f-ed98-480a-a740-d44e111046f7	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:guarded-heir:f0t0:s2,f:xs:XP:guarded-heir:f0t0:s2	-	-	-	e07cf3a05ba5	-	508c28e20081	-	-	2026-11-24	xproof
 63e86054-5e9c-48fe-92a1-b71aeb6ee57f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63e86054-5e9c-48fe-92a1-b71aeb6ee57f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63e8ac70-0ec3-4bef-832f-e3f4c8a692ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

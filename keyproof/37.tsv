@@ -66,9 +66,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37449c93-4d32-4f1a-982f-8f3416214368	cast	cast-resolve	agreed	-	FX	scen	2	0	Marchesa, Dealer of Death/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37449c93-4d32-4f1a-982f-8f3416214368	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Marchesa, Dealer of Death/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3745aea4-4455-4859-9772-bcfd14e4067b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-374e54d8-8e73-4268-9dde-c28c77bbbf32	cast	cast-resolve	agreed	-	X	scen	1	0	Aftermath Analyst/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+374e54d8-8e73-4268-9dde-c28c77bbbf32	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:aftermath-analyst:f0t0:s2,f:xs:XP:aftermath-analyst:f0t0:s2	-	-	-	e07cf3a05ba5	-	b957c415a573	-	-	2026-11-24	xproof
 374e54d8-8e73-4268-9dde-c28c77bbbf32	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Aftermath Analyst/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-374e54d8-8e73-4268-9dde-c28c77bbbf32	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+374e54d8-8e73-4268-9dde-c28c77bbbf32	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:aftermath-analyst:f0t0:s2,f:xs:XP:aftermath-analyst:f0t0:s2	-	-	-	e07cf3a05ba5	-	b957c415a573	-	-	2026-11-24	xproof
 374e6c1b-5a9a-4d3f-8bff-2f6bc0419391	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 374e6c1b-5a9a-4d3f-8bff-2f6bc0419391	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 374f550a-a761-4994-a4aa-b05a2ec415de	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -133,8 +133,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 378ae023-04d3-44cc-9248-3d787796ed6c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Living Conundrum/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 378fcd0f-1096-4769-9149-55b4a889ff56	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 378fcd0f-1096-4769-9149-55b4a889ff56	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3792763c-7aa0-4055-b8a1-3257e0443ef1	cast	cast-resolve	agreed	-	X	scen	1	0	Skeleton Archer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3792763c-7aa0-4055-b8a1-3257e0443ef1	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3792763c-7aa0-4055-b8a1-3257e0443ef1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:skeleton-archer:f0t0:s2,f:xs:XP:skeleton-archer:f0t0:s2	-	-	-	e07cf3a05ba5	-	a04060402cb0	-	-	2026-11-24	xproof
+3792763c-7aa0-4055-b8a1-3257e0443ef1	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:skeleton-archer:f0t0:s2,f:xs:XP:skeleton-archer:f0t0:s2	-	-	-	e07cf3a05ba5	-	a04060402cb0	-	-	2026-11-24	xproof
 3795fc31-2369-47d0-b9c9-120f44b8f114	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3795fc31-2369-47d0-b9c9-120f44b8f114	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37985fef-696e-4c6b-9a60-29c5051b5a25	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

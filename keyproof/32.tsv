@@ -108,8 +108,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32845ed6-2328-462e-be3a-579589748588	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3289539e-51eb-4915-bd77-3ac362136f2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3289539e-51eb-4915-bd77-3ac362136f2a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-328a0691-9453-4f2d-a9c3-5c69da252d20	cast	cast-resolve	agreed	-	X	scen	1	0	Dragon Trainer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-328a0691-9453-4f2d-a9c3-5c69da252d20	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+328a0691-9453-4f2d-a9c3-5c69da252d20	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dragon-trainer:f0t0:s2,f:xs:XP:dragon-trainer:f0t0:s2	-	-	-	e07cf3a05ba5	-	ecd6bf9b712a	-	-	2026-11-24	xproof
+328a0691-9453-4f2d-a9c3-5c69da252d20	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dragon-trainer:f0t0:s2,f:xs:XP:dragon-trainer:f0t0:s2	-	-	-	e07cf3a05ba5	-	ecd6bf9b712a	-	-	2026-11-24	xproof
 328b42f1-d679-4f9c-80e3-38fe3b965d10	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 328b42f1-d679-4f9c-80e3-38fe3b965d10	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 328d5ef0-b25e-4f2a-80fe-35c6ae419e8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	cast	cast-resolve	agreed	-	X	scen	1	0	Gruff Triplets/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gruff Triplets/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gruff Triplets/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-32de1b70-f993-4423-b0ef-0762c2b4d1b1	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32de1b70-f993-4423-b0ef-0762c2b4d1b1	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32de1b70-f993-4423-b0ef-0762c2b4d1b1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gruff Triplets/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32e4de02-8437-4ffc-acc9-a3736652d282	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e5339e-9e4f-46f8-b305-f9d6d3ba8bb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -17,8 +17,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c0a0448-b9d6-43a0-8549-64066dac63f0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c0a0448-b9d6-43a0-8549-64066dac63f0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c0a0448-b9d6-43a0-8549-64066dac63f0	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c0a8eed-f2e2-4821-8011-6e6ad2081936	cast	cast-resolve	agreed	-	X	scen	1	0	Solitary Sanctuary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c0a8eed-f2e2-4821-8011-6e6ad2081936	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c0a8eed-f2e2-4821-8011-6e6ad2081936	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:solitary-sanctuary:f0t0:s2,f:xs:XP:solitary-sanctuary:f0t0:s2	-	-	-	e07cf3a05ba5	-	ae160073b4f1	-	-	2026-11-24	xproof
+4c0a8eed-f2e2-4821-8011-6e6ad2081936	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:solitary-sanctuary:f0t0:s2,f:xs:XP:solitary-sanctuary:f0t0:s2	-	-	-	e07cf3a05ba5	-	ae160073b4f1	-	-	2026-11-24	xproof
 4c0a8eed-f2e2-4821-8011-6e6ad2081936	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Solitary Sanctuary/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c0be0d0-766b-4c50-b1ca-cce527196666	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c0be0d0-766b-4c50-b1ca-cce527196666	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -63,12 +63,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c3745ff-6e1e-4660-abe6-1a30611ec00c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c3745ff-6e1e-4660-abe6-1a30611ec00c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c376349-1a50-4215-8a40-f702da81eb7b	cast	cast-resolve	agreed	-	X	scen	1	0	Invasive Maneuvers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c3ad545-b375-44a7-a24e-58baacc4e4b6	cast	cast-resolve	agreed	-	FX	scen	2	0	Annie Joins Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c3ad545-b375-44a7-a24e-58baacc4e4b6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c3ad545-b375-44a7-a24e-58baacc4e4b6	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:annie-joins-up:f0t0:s2,f:xs:XP:annie-joins-up:f0t0:s2	-	-	-	e07cf3a05ba5	-	6cf25f02e38a	-	-	2026-11-24	xproof
+4c3ad545-b375-44a7-a24e-58baacc4e4b6	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:annie-joins-up:f0t0:s2,f:xs:XP:annie-joins-up:f0t0:s2	-	-	-	e07cf3a05ba5	-	6cf25f02e38a	-	-	2026-11-24	xproof
 4c3ad545-b375-44a7-a24e-58baacc4e4b6	static#0.0	static#0.0	agreed	-	X	scen	1	0	Annie Joins Up/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c4559a5-a7a4-4a40-8a8f-e7375c741748	cast	cast-resolve	agreed	-	X	scen	1	0	A Good Day to Die/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c48de92-e053-4af7-b936-d7ec0875e0d3	cast	cast-resolve	agreed	-	X	scen	1	0	Ambush Wolf/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c48de92-e053-4af7-b936-d7ec0875e0d3	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c48de92-e053-4af7-b936-d7ec0875e0d3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:ambush-wolf:f0t0:s2,f:xs:XP:ambush-wolf:f0t0:s2	-	-	-	e07cf3a05ba5	-	fa1d0eda7da5	-	-	2026-11-24	xproof
+4c48de92-e053-4af7-b936-d7ec0875e0d3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:ambush-wolf:f0t0:s2,f:xs:XP:ambush-wolf:f0t0:s2	-	-	-	e07cf3a05ba5	-	fa1d0eda7da5	-	-	2026-11-24	xproof
 4c495e94-3194-47c7-8129-dd0a0f915daa	cast	cast-resolve	agreed	-	X	scen	1	0	Coveted Falcon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c495e94-3194-47c7-8129-dd0a0f915daa	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Coveted Falcon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c495e94-3194-47c7-8129-dd0a0f915daa	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Coveted Falcon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -175,8 +175,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ce6c946-7a93-4a8d-a2c9-086cbd036e3c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ce83f8c-b27e-4e5b-b19b-76b66aaa904b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ce83f8c-b27e-4e5b-b19b-76b66aaa904b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ce8e0d0-6a3e-4c47-a7b7-c1b1ea1b9426	cast	cast-resolve	agreed	-	X	scen	1	0	Prickly Pair/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4ce8e0d0-6a3e-4c47-a7b7-c1b1ea1b9426	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4ce8e0d0-6a3e-4c47-a7b7-c1b1ea1b9426	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:prickly-pair:f0t0:s2,f:xs:XP:prickly-pair:f0t0:s2	-	-	-	e07cf3a05ba5	-	39f8a44ca631	-	-	2026-11-24	xproof
+4ce8e0d0-6a3e-4c47-a7b7-c1b1ea1b9426	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:prickly-pair:f0t0:s2,f:xs:XP:prickly-pair:f0t0:s2	-	-	-	e07cf3a05ba5	-	39f8a44ca631	-	-	2026-11-24	xproof
 4ce95005-82b3-4921-b1c4-60d775a012a2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ceb49f3-a997-468d-9653-8ca5ceb2bcfb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ceb49f3-a997-468d-9653-8ca5ceb2bcfb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

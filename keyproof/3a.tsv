@@ -4,8 +4,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a007dbd-18fd-44d1-a305-7cc8dd6231eb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Coerced to Kill/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a007dbd-18fd-44d1-a305-7cc8dd6231eb	static#0.1	static#0.1	agreed	-	X	scen	1	0	Coerced to Kill/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a018a54-6094-42bb-af6a-ef436c09f0b4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a024389-91a1-460c-b4e8-3f212d2b8400	cast	cast-resolve	agreed	-	X	scen	1	0	Lost in the Maze/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3a024389-91a1-460c-b4e8-3f212d2b8400	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a024389-91a1-460c-b4e8-3f212d2b8400	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	262c1420dd12	-	-	2026-11-24	xproof
+3a024389-91a1-460c-b4e8-3f212d2b8400	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	262c1420dd12	-	-	2026-11-24	xproof
 3a024389-91a1-460c-b4e8-3f212d2b8400	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lost in the Maze/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3a067b98-e775-4b44-addf-9d31716c2191	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a067b98-e775-4b44-addf-9d31716c2191	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,8 +178,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3aab84f2-731c-4079-9623-0b0c433442c3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aafbf63-35c0-4f62-9281-a4d460e8d6f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aafbf63-35c0-4f62-9281-a4d460e8d6f3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ab13412-1eaf-40c0-905d-8a3ca0c51be5	cast	cast-resolve	agreed	-	X	scen	1	0	Plundering Pirate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3ab13412-1eaf-40c0-905d-8a3ca0c51be5	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ab13412-1eaf-40c0-905d-8a3ca0c51be5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:plundering-pirate:f0t0:s2,f:xs:XP:plundering-pirate:f0t0:s2	-	-	-	e07cf3a05ba5	-	f51f4f4b7b6b	-	-	2026-11-24	xproof
+3ab13412-1eaf-40c0-905d-8a3ca0c51be5	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:plundering-pirate:f0t0:s2,f:xs:XP:plundering-pirate:f0t0:s2	-	-	-	e07cf3a05ba5	-	f51f4f4b7b6b	-	-	2026-11-24	xproof
 3ab3996f-aa3f-4041-8634-8e197d51f108	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ab5c3a7-12e7-4394-a495-0bc7c310bf9c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3abc09a9-3baa-45ff-b048-53e42d4fa9f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

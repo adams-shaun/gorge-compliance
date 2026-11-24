@@ -60,9 +60,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 913e6ff0-b522-45a3-9a1e-4a87a515cc1d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 913e6ff0-b522-45a3-9a1e-4a87a515cc1d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 913e6ff0-b522-45a3-9a1e-4a87a515cc1d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91415d12-b13d-4b5c-bb60-6ec6f4fdde6e	cast	cast-resolve	agreed	-	X	scen	1	0	Gold Pan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-91415d12-b13d-4b5c-bb60-6ec6f4fdde6e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gold Pan/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-91415d12-b13d-4b5c-bb60-6ec6f4fdde6e	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91415d12-b13d-4b5c-bb60-6ec6f4fdde6e	cast	cast	owed	not-sent	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	43376f23bc47	-	-	2026-11-24	xproof
+91415d12-b13d-4b5c-bb60-6ec6f4fdde6e	f0/a0	Attach/Equip	owed	not-sent	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	43376f23bc47	-	-	2026-11-24	xproof
+91415d12-b13d-4b5c-bb60-6ec6f4fdde6e	f0/t0	ChangesZone	owed	not-sent	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	43376f23bc47	-	-	2026-11-24	xproof
 91415d12-b13d-4b5c-bb60-6ec6f4fdde6e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gold Pan/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91486e70-94e4-431f-8899-fef019bb206e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9148f2cb-5594-463c-a21b-a67706ec46d1	cast	cast-resolve	agreed	-	X	scen	1	0	Flitterwing Nuisance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91e33674-b13a-41de-8998-4b57016ae42f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e3f057-c24f-42b5-8525-74b44bdefc83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e3f057-c24f-42b5-8525-74b44bdefc83	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91e49e8e-575f-43c8-9263-a8568697e7f4	cast	cast-resolve	agreed	-	X	scen	1	0	Rictus Robber/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+91e49e8e-575f-43c8-9263-a8568697e7f4	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rictus-robber:f0t0:s2,f:xs:XP:rictus-robber:f0t0:s2	-	-	-	e07cf3a05ba5	-	fc2a776ff044	-	-	2026-11-24	xproof
 91e49e8e-575f-43c8-9263-a8568697e7f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e6fb47-59e4-4616-b8dd-3a7e30070074	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e6fb47-59e4-4616-b8dd-3a7e30070074	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

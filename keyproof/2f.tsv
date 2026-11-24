@@ -83,8 +83,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f4ad084-2062-44c0-9975-15f100204531	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Swiftwater Cliffs/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f4ad084-2062-44c0-9975-15f100204531	land	play-land	agreed	-	FX	scen	2	0	Swiftwater Cliffs/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f4b5831-57a2-4778-90c1-0b8ec49afd46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f4d7988-3f5b-45d7-9838-02897d7180be	cast	cast-resolve	agreed	-	FX	scen	2	0	Embalmed Ascendant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f4d7988-3f5b-45d7-9838-02897d7180be	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f4d7988-3f5b-45d7-9838-02897d7180be	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:embalmed-ascendant:f0t0:s2,f:xs:XP:embalmed-ascendant:f0t0:s2	-	-	-	e07cf3a05ba5	-	1f4c48d15153	-	-	2026-11-24	xproof
+2f4d7988-3f5b-45d7-9838-02897d7180be	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:embalmed-ascendant:f0t0:s2,f:xs:XP:embalmed-ascendant:f0t0:s2	-	-	-	e07cf3a05ba5	-	1f4c48d15153	-	-	2026-11-24	xproof
 2f4d7988-3f5b-45d7-9838-02897d7180be	static#0.0	static#0.0	agreed	-	X	scen	1	0	Embalmed Ascendant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f503ee5-9180-438e-8af5-2af7f8f08a3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f503ee5-9180-438e-8af5-2af7f8f08a3a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,15 +124,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f72f111-450a-4da2-81fd-cbc4f9c1ef9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f72f111-450a-4da2-81fd-cbc4f9c1ef9d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f7305c1-51d2-4698-89d5-c64a57ecff80	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f796869-7350-4886-b210-cb5b9cb3e78a	cast	cast-resolve	agreed	-	X	scen	1	0	Provisions Merchant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f796869-7350-4886-b210-cb5b9cb3e78a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f796869-7350-4886-b210-cb5b9cb3e78a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:provisions-merchant:f0t0:s2,f:xs:XP:provisions-merchant:f0t0:s2	-	-	-	e07cf3a05ba5	-	759fb9ad13ac	-	-	2026-11-24	xproof
+2f796869-7350-4886-b210-cb5b9cb3e78a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:provisions-merchant:f0t0:s2,f:xs:XP:provisions-merchant:f0t0:s2	-	-	-	e07cf3a05ba5	-	759fb9ad13ac	-	-	2026-11-24	xproof
 2f796869-7350-4886-b210-cb5b9cb3e78a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Provisions Merchant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f7b46c1-3d82-4fd9-9882-589315cab47b	cast	cast-resolve	agreed	-	X	scen	1	0	Candlestick/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f7b46c1-3d82-4fd9-9882-589315cab47b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Candlestick/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f7b46c1-3d82-4fd9-9882-589315cab47b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Candlestick/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f7b46c1-3d82-4fd9-9882-589315cab47b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Candlestick/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f807301-37df-4724-871a-08e3512b07b3	cast	cast-resolve	agreed	-	FX	scen	2	0	Burglar Rat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f807301-37df-4724-871a-08e3512b07b3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2f807301-37df-4724-871a-08e3512b07b3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:burglar-rat:f0t0:s2,f:xs:XP:burglar-rat:f0t0:s2	-	-	-	e07cf3a05ba5	-	0ba6ac927d44	-	-	2026-11-24	xproof
+2f807301-37df-4724-871a-08e3512b07b3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:burglar-rat:f0t0:s2,f:xs:XP:burglar-rat:f0t0:s2	-	-	-	e07cf3a05ba5	-	0ba6ac927d44	-	-	2026-11-24	xproof
 2f810936-2ba6-4c2b-84a0-ff4c1deb026b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f82b232-21ff-44cc-bc35-0999a1d1c52f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f82b232-21ff-44cc-bc35-0999a1d1c52f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

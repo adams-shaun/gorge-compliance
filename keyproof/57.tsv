@@ -56,8 +56,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5753f4d6-08d0-4e12-85c5-875ee6441626	cast	cast-resolve	agreed	-	X	scen	1	0	Tidings of War/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57544b37-fd5d-4da5-bbb6-7b4a09501dd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57579799-2582-417f-9864-4560cac39ac3	cast	cast-resolve	agreed	-	FX	scen	2	0	Moment of Triumph/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-575a0dc2-206a-406a-90b3-72a92f2ea87a	cast	cast-resolve	agreed	-	X	scen	1	0	Case of the Trampled Garden/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-575a0dc2-206a-406a-90b3-72a92f2ea87a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+575a0dc2-206a-406a-90b3-72a92f2ea87a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:case-of-the-trampled-garden:f0t0:s2,f:xs:XP:case-of-the-trampled-garden:f0t0:s2	-	-	-	e07cf3a05ba5	-	d29ebe89ae8b	-	-	2026-11-24	xproof
+575a0dc2-206a-406a-90b3-72a92f2ea87a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:case-of-the-trampled-garden:f0t0:s2,f:xs:XP:case-of-the-trampled-garden:f0t0:s2	-	-	-	e07cf3a05ba5	-	d29ebe89ae8b	-	-	2026-11-24	xproof
 575a0dc2-206a-406a-90b3-72a92f2ea87a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Case of the Trampled Garden/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 575a0dc2-206a-406a-90b3-72a92f2ea87a	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Case of the Trampled Garden/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 575d067a-83a0-49e7-8a74-e3e46a946c8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -143,10 +143,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57c5cbd6-432d-4d48-9fc6-5b8a6eb223f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57c704bc-8dff-4b90-b4e1-38d12e41b3d1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57c9ff89-dd30-467b-bb3e-499eeea8cb94	cast	cast-resolve	agreed	-	FX	scen	2	0	Idyllic Tutor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-57ce5ebd-cfac-4bb9-b010-04d0c285be27	cast	cast-resolve	agreed	-	X	scen	1	0	Clement, the Worrywort/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+57ce5ebd-cfac-4bb9-b010-04d0c285be27	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	58e87794a3e2	-	-	2026-11-24	xproof
 57ce5ebd-cfac-4bb9-b010-04d0c285be27	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Clement, the Worrywort/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57ce5ebd-cfac-4bb9-b010-04d0c285be27	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Clement, the Worrywort/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-57ce5ebd-cfac-4bb9-b010-04d0c285be27	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57ce5ebd-cfac-4bb9-b010-04d0c285be27	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	58e87794a3e2	-	-	2026-11-24	xproof
 57ce5ebd-cfac-4bb9-b010-04d0c285be27	static#0.0	static#0.0	agreed	-	X	scen	1	0	Clement, the Worrywort/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57cf576b-5a03-4c60-a531-544df2638323	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57cf576b-5a03-4c60-a531-544df2638323	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,9 +175,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57ee0730-3ac5-4f17-ac82-bd4a6673c2bb	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Endstone/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57ee0730-3ac5-4f17-ac82-bd4a6673c2bb	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	The Endstone/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57f0f55d-4cf9-4a35-96dd-05c24c2a9a4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57f15861-82cf-4faf-827c-9bc7f4844d2a	cast	cast-resolve	agreed	-	X	scen	1	0	Runaway Boulder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-57f15861-82cf-4faf-827c-9bc7f4844d2a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Runaway Boulder/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-57f15861-82cf-4faf-827c-9bc7f4844d2a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57f15861-82cf-4faf-827c-9bc7f4844d2a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:runaway-boulder:f0t0:s1,f:xs:XP:runaway-boulder:f0t0:s1	-	-	-	e07cf3a05ba5	-	95b69a6ef65d	-	-	2026-11-24	xproof
+57f15861-82cf-4faf-827c-9bc7f4844d2a	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:runaway-boulder:f0t0:s2,f:xs:XP:runaway-boulder:f0t0:s2	-	-	-	e07cf3a05ba5	-	95b69a6ef65d	-	-	2026-11-24	xproof
+57f15861-82cf-4faf-827c-9bc7f4844d2a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:runaway-boulder:f0t0:s1,f:xs:XP:runaway-boulder:f0t0:s1	-	-	-	e07cf3a05ba5	-	95b69a6ef65d	-	-	2026-11-24	xproof
 57f2aa02-f5f3-42a5-939d-5cc94200951e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57f39ce2-ecbb-4262-8140-03aba5c4303f	cast	cast-resolve	agreed	-	X	scen	1	0	Raph & Leo, Sibling Rivals/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57f39ce2-ecbb-4262-8140-03aba5c4303f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Raph & Leo, Sibling Rivals/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

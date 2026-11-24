@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c195485-83f9-424f-854a-50c4f5b04182	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thranduil's Company/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	cast	cast-resolve	agreed	-	X	scen	1	0	Fishing Pole/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fishing Pole/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c73ef77-ae58-401f-8747-538c4cd075d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c73ef77-ae58-401f-8747-538c4cd075d0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c75623c-59f4-4449-ab43-9d1225185ad9	cast	cast-resolve	agreed	-	X	scen	1	0	Rottenmouth Viper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c75623c-59f4-4449-ab43-9d1225185ad9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c75623c-59f4-4449-ab43-9d1225185ad9	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c75623c-59f4-4449-ab43-9d1225185ad9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rottenmouth Viper/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c75623c-59f4-4449-ab43-9d1225185ad9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rottenmouth Viper/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c769dfc-79be-4fcb-840c-b72cafdd0a23	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ca270f1-a8a2-438f-9321-2c653165f3e4	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ca85872-9436-4515-af50-c13e59605627	cast	cast-resolve	agreed	-	FX	scen	2	0	Spider-Man, Brooklyn Visionary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ca85872-9436-4515-af50-c13e59605627	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ca969eb-3d79-4d1f-8d9d-7b8204ad166a	cast	cast-resolve	agreed	-	X	scen	1	0	Starving Revenant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2ca969eb-3d79-4d1f-8d9d-7b8204ad166a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ca969eb-3d79-4d1f-8d9d-7b8204ad166a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:starving-revenant:f0t0:s2,f:xs:XP:starving-revenant:f0t0:s2	-	-	-	e07cf3a05ba5	-	2446f18307c2	-	-	2026-11-24	xproof
+2ca969eb-3d79-4d1f-8d9d-7b8204ad166a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:starving-revenant:f0t0:s2,f:xs:XP:starving-revenant:f0t0:s2	-	-	-	e07cf3a05ba5	-	2446f18307c2	-	-	2026-11-24	xproof
 2ca969eb-3d79-4d1f-8d9d-7b8204ad166a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Starving Revenant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ca9e6e5-5eec-4593-8816-5c4317c79eb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ca9e6e5-5eec-4593-8816-5c4317c79eb0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,15 +162,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ccdc60a-49a9-44b9-a7af-0ebf18b26785	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sword of Fire and Ice/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 2ccdc60a-49a9-44b9-a7af-0ebf18b26785	static#0.0	static#0.0	agreed	-	X	scen	1	0	Sword of Fire and Ice/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 2cce7250-f8f9-4c0a-87b1-ba3c5b8ed6b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2cdbaa4e-8907-49dc-9fa9-0df70db3bf23	cast	cast-resolve	agreed	-	X	scen	1	0	Coalstoke Gearhulk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2cdbaa4e-8907-49dc-9fa9-0df70db3bf23	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:coalstoke-gearhulk:f0t0:s2,f:xs:XP:coalstoke-gearhulk:f0t0:s2	-	-	-	e07cf3a05ba5	-	c6a2185563e4	-	-	2026-11-24	xproof
 2cdbaa4e-8907-49dc-9fa9-0df70db3bf23	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Coalstoke Gearhulk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdbaa4e-8907-49dc-9fa9-0df70db3bf23	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Coalstoke Gearhulk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cdbaa4e-8907-49dc-9fa9-0df70db3bf23	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2cdbaa4e-8907-49dc-9fa9-0df70db3bf23	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:coalstoke-gearhulk:f0t0:s2,f:xs:XP:coalstoke-gearhulk:f0t0:s2	-	-	-	e07cf3a05ba5	-	c6a2185563e4	-	-	2026-11-24	xproof
 2cdbfda3-98fc-4108-b551-c7049168924e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	White Lotus Hideout/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdbfda3-98fc-4108-b551-c7049168924e	f0/a1	activate#0.1	agreed	-	X	scen	1	0	White Lotus Hideout/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdbfda3-98fc-4108-b551-c7049168924e	f0/a2	activate#0.2	agreed	-	X	scen	1	0	White Lotus Hideout/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdbfda3-98fc-4108-b551-c7049168924e	land	play-land	agreed	-	X	scen	1	0	White Lotus Hideout/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cdc1d82-30dc-4f0a-af20-33dde90269b1	cast	cast-resolve	agreed	-	X	scen	1	0	Starforged Sword/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2cdc1d82-30dc-4f0a-af20-33dde90269b1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:starforged-sword:f0t0:s2,f:xs:XP:starforged-sword:f0t0:s2	-	-	-	e07cf3a05ba5	-	95f0fa42370f	-	-	2026-11-24	xproof
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Starforged Sword/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cdc1d82-30dc-4f0a-af20-33dde90269b1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Starforged Sword/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -14,8 +14,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 170adfe9-ffbe-40b1-b665-e756e7eb0302	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 170adfe9-ffbe-40b1-b665-e756e7eb0302	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 170ee399-d3cd-40ef-a340-193c0f0f6002	cast	cast-resolve	agreed	-	X	scen	1	0	Trickster's Stratagem/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-171150fb-dbe1-4a07-a7ac-5f45762a26b0	cast	cast-resolve	agreed	-	X	scen	1	0	Stockpiling Celebrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-171150fb-dbe1-4a07-a7ac-5f45762a26b0	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+171150fb-dbe1-4a07-a7ac-5f45762a26b0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stockpiling-celebrant:f0t0:s2,f:xs:XP:stockpiling-celebrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	477c4539b285	-	-	2026-11-24	xproof
+171150fb-dbe1-4a07-a7ac-5f45762a26b0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stockpiling-celebrant:f0t0:s2,f:xs:XP:stockpiling-celebrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	477c4539b285	-	-	2026-11-24	xproof
 17191fa9-e956-4f46-b541-465790125b6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17191fa9-e956-4f46-b541-465790125b6b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1720d38a-c3c1-4294-85c1-a91fc7179d6f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	cast	cast-resolve	agreed	-	X	scen	1	0	Sun-Blessed Healer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sun-Blessed Healer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sun-Blessed Healer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	f0/t0	NULL	owed	refused:history:kicked	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 172a8f58-c420-4497-b962-c5853f923667	cast	cast-resolve	agreed	-	FX	scen	2	0	Aerid Konstrari/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 172a8f58-c420-4497-b962-c5853f923667	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aerid Konstrari/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 172a8f58-c420-4497-b962-c5853f923667	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aerid Konstrari/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -136,10 +136,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 178b3fdf-dbee-4245-a811-b21ff8a24f66	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 178e73f9-fc6e-4425-870e-45f96644010a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 178e73f9-fc6e-4425-870e-45f96644010a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17916cf9-1e6c-41bd-96ce-2b050d828838	cast	cast-resolve	agreed	-	X	scen	1	0	Cursed Courtier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+17916cf9-1e6c-41bd-96ce-2b050d828838	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cursed-courtier:f0t0:s2,f:xs:XP:cursed-courtier:f0t0:s2	-	-	-	e07cf3a05ba5	-	a9940b40be12	-	-	2026-11-24	xproof
 17916cf9-1e6c-41bd-96ce-2b050d828838	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cursed Courtier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17916cf9-1e6c-41bd-96ce-2b050d828838	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cursed Courtier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-17916cf9-1e6c-41bd-96ce-2b050d828838	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17916cf9-1e6c-41bd-96ce-2b050d828838	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cursed-courtier:f0t0:s2,f:xs:XP:cursed-courtier:f0t0:s2	-	-	-	e07cf3a05ba5	-	a9940b40be12	-	-	2026-11-24	xproof
 17917b7a-2b2b-4a96-a21e-10cd91375660	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17917b7a-2b2b-4a96-a21e-10cd91375660	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17969b71-9612-45ff-b789-1c033f832154	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

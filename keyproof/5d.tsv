@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d520476-740a-4005-801e-472b24fa6497	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d575b78-3d7b-4860-abc3-e99e429279a1	cast	cast-resolve	agreed	-	X	scen	1	0	Mine Raider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5d575b78-3d7b-4860-abc3-e99e429279a1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mine-raider:f0t0:s2,f:xs:XP:mine-raider:f0t0:s2	-	-	-	e07cf3a05ba5	-	16a2818a7867	-	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mine Raider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mine Raider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -88,8 +88,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d66c2b9-6011-4168-b468-0bde50bac37e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d66c2b9-6011-4168-b468-0bde50bac37e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d6f75f1-dd9c-4d94-aea8-3bdec41eaa29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d748bce-dff8-46fa-a3d1-633863b7bbff	cast	cast-resolve	agreed	-	X	scen	1	0	Kiora, the Rising Tide/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d748bce-dff8-46fa-a3d1-633863b7bbff	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d748bce-dff8-46fa-a3d1-633863b7bbff	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:kiora-the-rising-tide:f0t0:s2,f:xs:XP:kiora-the-rising-tide:f0t0:s2	-	-	-	e07cf3a05ba5	-	bb6aa76d83aa	-	-	2026-11-24	xproof
+5d748bce-dff8-46fa-a3d1-633863b7bbff	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:kiora-the-rising-tide:f0t0:s2,f:xs:XP:kiora-the-rising-tide:f0t0:s2	-	-	-	e07cf3a05ba5	-	bb6aa76d83aa	-	-	2026-11-24	xproof
 5d748bce-dff8-46fa-a3d1-633863b7bbff	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Kiora, the Rising Tide/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d776be0-cece-4496-a3b0-b7424eca77fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d7acb89-1778-409a-9e91-aaeadd13ca27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -103,11 +103,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d808e64-a648-4f1b-a3a9-fd09568db281	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Garrison Excavator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d814b0b-82e8-4145-87e1-4fed44d16465	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d814b0b-82e8-4145-87e1-4fed44d16465	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d840e49-3ca5-4e4f-9152-a365ad2b1773	cast	cast-resolve	agreed	-	X	scen	1	0	Soaring Sandwing/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5d840e49-3ca5-4e4f-9152-a365ad2b1773	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:soaring-sandwing:f0t0:s1,f:xs:XP:soaring-sandwing:f0t0:s1	-	-	-	e07cf3a05ba5	-	16f4d3a971c8	-	-	2026-11-24	xproof
 5d840e49-3ca5-4e4f-9152-a365ad2b1773	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Soaring Sandwing/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d840e49-3ca5-4e4f-9152-a365ad2b1773	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Soaring Sandwing/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d840e49-3ca5-4e4f-9152-a365ad2b1773	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Soaring Sandwing/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d840e49-3ca5-4e4f-9152-a365ad2b1773	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d840e49-3ca5-4e4f-9152-a365ad2b1773	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:soaring-sandwing:f0t0:s2,f:xs:XP:soaring-sandwing:f0t0:s2	-	-	-	e07cf3a05ba5	-	16f4d3a971c8	-	-	2026-11-24	xproof
+5d840e49-3ca5-4e4f-9152-a365ad2b1773	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:soaring-sandwing:f0t0:s1,f:xs:XP:soaring-sandwing:f0t0:s1	-	-	-	e07cf3a05ba5	-	16f4d3a971c8	-	-	2026-11-24	xproof
 5d8acafe-c13e-43ca-a89e-0cfd12d95662	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d8acafe-c13e-43ca-a89e-0cfd12d95662	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d8c4172-eb14-47a4-993a-6d68906a26c5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -127,8 +127,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d957045-acb2-4546-8c19-71511fd497ef	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d95db27-53bb-4a20-9fb8-24998b03e767	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d96170f-14dd-496e-a485-bd3b9eedfe02	cast	cast-resolve	agreed	-	X	scen	1	0	Maddening Hex/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-5d96840e-f9b3-4c86-8f59-f12e5736318f	cast	cast-resolve	agreed	-	X	scen	1	0	Voracious Greatshark/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d96840e-f9b3-4c86-8f59-f12e5736318f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d96840e-f9b3-4c86-8f59-f12e5736318f	cast	cast	agreed	-	X	start	1	0	x:xs:XP:voracious-greatshark:f0t0:s2	-	-	-	e07cf3a05ba5	-	0bb1a2700d20	-	-	2026-11-24	xproof
+5d96840e-f9b3-4c86-8f59-f12e5736318f	f0/t0	ChangesZone	agreed	-	X	start	1	0	x:xs:XP:voracious-greatshark:f0t0:s2	-	-	-	e07cf3a05ba5	-	0bb1a2700d20	-	-	2026-11-24	xproof
 5d998c09-7d89-4265-ada4-6d80cbf56dae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d998c09-7d89-4265-ada4-6d80cbf56dae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	cast	cast-resolve	agreed	-	X	scen	1	0	Syr Alin, the Lion's Claw/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

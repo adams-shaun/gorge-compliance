@@ -14,8 +14,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b100e6f-6c19-49d2-b9c4-613d63d42151	cast	cast-resolve	agreed	-	X	scen	1	0	Rambling Possum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b100e6f-6c19-49d2-b9c4-613d63d42151	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rambling Possum/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b100e6f-6c19-49d2-b9c4-613d63d42151	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rambling Possum/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4b11e435-5888-4e3b-a255-db817392163f	cast	cast-resolve	agreed	-	FX	scen	2	0	Mabel, Heir to Cragflame/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4b11e435-5888-4e3b-a255-db817392163f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b11e435-5888-4e3b-a255-db817392163f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mabel-heir-to-cragflame:f0t0:s2,f:xs:XP:mabel-heir-to-cragflame:f0t0:s2	-	-	-	e07cf3a05ba5	-	93231e4e4ab4	-	-	2026-11-24	xproof
+4b11e435-5888-4e3b-a255-db817392163f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mabel-heir-to-cragflame:f0t0:s2,f:xs:XP:mabel-heir-to-cragflame:f0t0:s2	-	-	-	e07cf3a05ba5	-	93231e4e4ab4	-	-	2026-11-24	xproof
 4b11e435-5888-4e3b-a255-db817392163f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mabel, Heir to Cragflame/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b1603f3-a246-449b-a109-99adb49e5ea4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1603f3-a246-449b-a109-99adb49e5ea4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -54,8 +54,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b3dd7e5-e0b5-4773-bb16-37b757ae74d8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b3dd7e5-e0b5-4773-bb16-37b757ae74d8	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b457bc2-2d8c-42cb-9a63-bb4c459d14e3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b4589ff-d141-49a4-a0bd-1c73fc3651ef	cast	cast-resolve	agreed	-	X	scen	1	0	Stagecoach Security/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4b4589ff-d141-49a4-a0bd-1c73fc3651ef	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b4589ff-d141-49a4-a0bd-1c73fc3651ef	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stagecoach-security:f0t0:s2,f:xs:XP:stagecoach-security:f0t0:s2	-	-	-	e07cf3a05ba5	-	47284a38418c	-	-	2026-11-24	xproof
+4b4589ff-d141-49a4-a0bd-1c73fc3651ef	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stagecoach-security:f0t0:s2,f:xs:XP:stagecoach-security:f0t0:s2	-	-	-	e07cf3a05ba5	-	47284a38418c	-	-	2026-11-24	xproof
 4b473a42-a0c5-43d5-93f9-c599e963a06b	cast	cast-resolve	agreed	-	X	scen	1	0	Season of Weaving/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b4bdbdc-3934-471b-9027-31277e7765ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b4c76e1-c480-4d10-93d4-483ef2debc4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -96,8 +96,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b706959-ea38-4808-870a-7c35d83f7ab2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b706959-ea38-4808-870a-7c35d83f7ab2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b706959-ea38-4808-870a-7c35d83f7ab2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b707ef4-2c17-41e7-8dac-583791a98055	cast	cast-resolve	agreed	-	FX	scen	2	0	Haazda Vigilante/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4b707ef4-2c17-41e7-8dac-583791a98055	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b707ef4-2c17-41e7-8dac-583791a98055	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:haazda-vigilante:f0t0:s2,f:xs:XP:haazda-vigilante:f0t0:s2	-	-	-	e07cf3a05ba5	-	675779ab08ee	-	-	2026-11-24	xproof
+4b707ef4-2c17-41e7-8dac-583791a98055	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:haazda-vigilante:f0t0:s2,f:xs:XP:haazda-vigilante:f0t0:s2	-	-	-	e07cf3a05ba5	-	675779ab08ee	-	-	2026-11-24	xproof
 4b707ef4-2c17-41e7-8dac-583791a98055	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Haazda Vigilante/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b74d2d9-d75b-496e-bbb4-2b95b3d3ba55	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b77479e-8d49-46f6-b774-d8caf151c15c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,7 +183,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4bccfa67-0c6f-42a1-b8d4-0842a8230d1e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rick Jones, Destined Sidekick/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4bcf4f12-470e-4f73-a19a-643a20084e16	cast	cast-resolve	agreed	-	X	scen	1	0	Night of the Sweets' Revenge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4bcf4f12-470e-4f73-a19a-643a20084e16	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Night of the Sweets' Revenge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4bcf4f12-470e-4f73-a19a-643a20084e16	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4bcf4f12-470e-4f73-a19a-643a20084e16	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bcf4f12-470e-4f73-a19a-643a20084e16	static#0.0	static#0.0	agreed	-	X	scen	1	0	Night of the Sweets' Revenge/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4bd1d079-314e-4fb5-9b43-c9c83e5528bc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bd1d079-314e-4fb5-9b43-c9c83e5528bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

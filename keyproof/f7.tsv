@@ -67,9 +67,9 @@ f743d85f-754e-4e70-9907-af54acb9e8d4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Savag
 f746612a-fbed-44ca-b2cc-5928e10cf4bb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f746612a-fbed-44ca-b2cc-5928e10cf4bb	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f746612a-fbed-44ca-b2cc-5928e10cf4bb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f7467fce-61e4-401a-8a3d-b0a2bc347088	cast	cast-resolve	agreed	-	X	scen	1	0	Cloudspire Skycycle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f7467fce-61e4-401a-8a3d-b0a2bc347088	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cloudspire-skycycle:f0t0:s2,f:xs:XP:cloudspire-skycycle:f0t0:s2	-	-	-	e07cf3a05ba5	-	7a1116d229be	-	-	2026-11-24	xproof
 f7467fce-61e4-401a-8a3d-b0a2bc347088	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cloudspire Skycycle/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f7467fce-61e4-401a-8a3d-b0a2bc347088	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f7467fce-61e4-401a-8a3d-b0a2bc347088	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cloudspire-skycycle:f0t0:s2,f:xs:XP:cloudspire-skycycle:f0t0:s2	-	-	-	e07cf3a05ba5	-	7a1116d229be	-	-	2026-11-24	xproof
 f7493bcf-5c17-4562-a759-37082ec49ff8	cast	cast-resolve	agreed	-	X	scen	1	0	Bumi, King of Three Trials/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f7493bcf-5c17-4562-a759-37082ec49ff8	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f749a6d6-2c55-439f-bb02-e95fa54c2ef3	cast	cast-resolve	agreed	-	FX	scen	2	0	Reno and Rude/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -213,10 +213,10 @@ f7ed3cd6-d138-4c12-93bb-91629492a5fa	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 f7ee3935-4510-485a-a863-ac38dffa1908	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7ee3935-4510-485a-a863-ac38dffa1908	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7f32fec-b384-4021-a69f-2dc9220ebc64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f7f435bc-1716-4412-9505-a1f2f2d83d08	cast	cast-resolve	agreed	-	X	scen	1	0	Dragonhawk, Fate's Tempest/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f7f435bc-1716-4412-9505-a1f2f2d83d08	cast	cast	agreed	-	X	start	1	0	x:xs:XP:dragonhawk-fate-s-tempest:f0t0:s2	-	-	-	e07cf3a05ba5	-	fd2e7c6ca0d2	-	-	2026-11-24	xproof
 f7f435bc-1716-4412-9505-a1f2f2d83d08	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dragonhawk, Fate's Tempest/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f7f435bc-1716-4412-9505-a1f2f2d83d08	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dragonhawk, Fate's Tempest/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f7f435bc-1716-4412-9505-a1f2f2d83d08	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f7f435bc-1716-4412-9505-a1f2f2d83d08	f0/t0	ChangesZone	agreed	-	X	start	1	0	x:xs:XP:dragonhawk-fate-s-tempest:f0t0:s2	-	-	-	e07cf3a05ba5	-	fd2e7c6ca0d2	-	-	2026-11-24	xproof
 f7f435bc-1716-4412-9505-a1f2f2d83d08	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Dragonhawk, Fate's Tempest/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f7f4ddc9-cea0-42f9-bbca-2ad87a24bfc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7f4ddc9-cea0-42f9-bbca-2ad87a24bfc8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

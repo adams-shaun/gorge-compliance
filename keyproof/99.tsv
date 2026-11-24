@@ -51,10 +51,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99348e1d-e95e-4911-aae0-8fd1a7345a82	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Skullsnap Nuisance/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99348e1d-e95e-4911-aae0-8fd1a7345a82	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Skullsnap Nuisance/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99348e1d-e95e-4911-aae0-8fd1a7345a82	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Skullsnap Nuisance/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9938d178-0ce6-45c0-b317-fd5c54231579	cast	cast-resolve	agreed	-	X	scen	1	0	Curator of Destinies/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9938d178-0ce6-45c0-b317-fd5c54231579	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	bcea03f43da6	-	-	2026-11-24	xproof
 9938d178-0ce6-45c0-b317-fd5c54231579	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Curator of Destinies/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9938d178-0ce6-45c0-b317-fd5c54231579	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Curator of Destinies/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9938d178-0ce6-45c0-b317-fd5c54231579	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9938d178-0ce6-45c0-b317-fd5c54231579	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	bcea03f43da6	-	-	2026-11-24	xproof
 993a91fa-84ed-4688-9884-e03cbad6c791	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 993a91fa-84ed-4688-9884-e03cbad6c791	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 993b7b94-ed06-422d-9c7e-52a74ce9d045	cast	cast-resolve	agreed	-	X	scen	1	0	Derelict Attic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -140,16 +140,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99c13f8d-7f18-48ce-86da-c74ddb6c1205	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99c3a315-db53-4292-9d31-1efd791d3a13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99c3a315-db53-4292-9d31-1efd791d3a13	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99c5630e-cc04-4203-9006-3bc6a6807762	cast	cast-resolve	agreed	-	X	scen	1	0	Malamet Scythe/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+99c5630e-cc04-4203-9006-3bc6a6807762	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:malamet-scythe:f0t0:s2,f:xs:XP:malamet-scythe:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed8bcac0f0a4	-	-	2026-11-24	xproof
 99c5630e-cc04-4203-9006-3bc6a6807762	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Malamet Scythe/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-99c5630e-cc04-4203-9006-3bc6a6807762	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+99c5630e-cc04-4203-9006-3bc6a6807762	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:malamet-scythe:f0t0:s2,f:xs:XP:malamet-scythe:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed8bcac0f0a4	-	-	2026-11-24	xproof
 99c5630e-cc04-4203-9006-3bc6a6807762	static#0.0	static#0.0	agreed	-	X	scen	1	0	Malamet Scythe/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99c70f4e-de8a-426d-99aa-17b2f87625ba	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Training Compound/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99c70f4e-de8a-426d-99aa-17b2f87625ba	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Training Compound/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99c70f4e-de8a-426d-99aa-17b2f87625ba	land	play-land	agreed	-	X	scen	1	0	Training Compound/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99c8647f-e08d-4217-b637-3f8f2bffdaa3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-99c9920a-f84b-4626-9fe5-d94cc62cd277	cast	cast-resolve	agreed	-	X	scen	1	0	Twisted Sewer-Witch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-99c9920a-f84b-4626-9fe5-d94cc62cd277	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+99c9920a-f84b-4626-9fe5-d94cc62cd277	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:twisted-sewer-witch:f0t0:s2,f:xs:XP:twisted-sewer-witch:f0t0:s2	-	-	-	e07cf3a05ba5	-	c47768499582	-	-	2026-11-24	xproof
+99c9920a-f84b-4626-9fe5-d94cc62cd277	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:twisted-sewer-witch:f0t0:s2,f:xs:XP:twisted-sewer-witch:f0t0:s2	-	-	-	e07cf3a05ba5	-	c47768499582	-	-	2026-11-24	xproof
 99cbc054-2757-4c07-ad04-9ac67dad4abc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99cbc054-2757-4c07-ad04-9ac67dad4abc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99cc909d-3cb2-499c-8231-41418745cd71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

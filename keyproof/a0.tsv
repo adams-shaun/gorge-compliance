@@ -107,10 +107,10 @@ a08f79b7-d66f-47da-9670-afd7409c0c5c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rydi
 a08f79b7-d66f-47da-9670-afd7409c0c5c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rydia, Summoner of Mist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a090bc9c-d253-4a29-87d6-aa849f856d36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a090bc9c-d253-4a29-87d6-aa849f856d36	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	cast	cast-resolve	agreed	-	FX	scen	2	0	Fecund Greenshell/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	f80c13209d86	-	-	2026-11-24	xproof
 a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fecund Greenshell/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fecund Greenshell/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	f80c13209d86	-	-	2026-11-24	xproof
 a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fecund Greenshell/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a0956c3d-d382-486a-81f1-9aa5cf49b2ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0956c3d-d382-486a-81f1-9aa5cf49b2ab	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ a09d9754-a321-4018-a237-e613e915b642	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The 
 a09d9754-a321-4018-a237-e613e915b642	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Prima Vista/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a09da13e-f8a3-410e-941a-9912d2cfe7de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df	cast	cast-resolve	agreed	-	X	scen	1	0	Geological Appraiser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df	f0/t0	NULL	owed	refused:history:wascast	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0a706b2-b237-4183-82fa-2140a23b89e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0a706b2-b237-4183-82fa-2140a23b89e3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0a7319d-9441-4aed-a351-9ff3fb3b1d9e	cast	cast-resolve	agreed	-	X	scen	1	0	Hulldrifter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -175,11 +175,11 @@ a0cbb1ba-73b1-4418-bbe3-5d1a02007c08	cast	cast-resolve	agreed	-	X	scen	1	0	Vibra
 a0cd19c1-9125-4627-83ba-d42c489b4e7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0cd19c1-9125-4627-83ba-d42c489b4e7d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0ce2f5a-9c0b-4801-9105-72f84d8a4a1f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a0d3bb63-2977-41b2-bcc3-2488e6696cb8	cast	cast-resolve	agreed	-	X	scen	1	0	Harvester of Misery/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+a0d3bb63-2977-41b2-bcc3-2488e6696cb8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:harvester-of-misery:f0t0:s1,f:xs:XP:harvester-of-misery:f0t0:s1	-	-	-	e07cf3a05ba5	-	be49474640b7	-	-	2026-11-24	xproof
 a0d3bb63-2977-41b2-bcc3-2488e6696cb8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Harvester of Misery/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 a0d3bb63-2977-41b2-bcc3-2488e6696cb8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Harvester of Misery/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-a0d3bb63-2977-41b2-bcc3-2488e6696cb8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Harvester of Misery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-a0d3bb63-2977-41b2-bcc3-2488e6696cb8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a0d3bb63-2977-41b2-bcc3-2488e6696cb8	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:harvester-of-misery:f0t0:s2,f:xs:XP:harvester-of-misery:f0t0:s2	-	-	-	e07cf3a05ba5	-	be49474640b7	-	-	2026-11-24	xproof
+a0d3bb63-2977-41b2-bcc3-2488e6696cb8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:harvester-of-misery:f0t0:s1,f:xs:XP:harvester-of-misery:f0t0:s1	-	-	-	e07cf3a05ba5	-	be49474640b7	-	-	2026-11-24	xproof
 a0d5fce0-a439-496a-9fcf-9271503f3ce8	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0d5fce0-a439-496a-9fcf-9271503f3ce8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0d615b3-7ee3-43d7-ad37-5f7f1544a8db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

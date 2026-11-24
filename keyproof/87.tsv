@@ -37,8 +37,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 872bebff-720d-459b-8f86-fb9129a8d1fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 872ef617-7cdb-4a7a-85f5-efc9e12bece5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 872ef617-7cdb-4a7a-85f5-efc9e12bece5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87300967-1a59-4dce-8876-f008ff3bfb0b	cast	cast-resolve	agreed	-	X	scen	1	0	Song of Stupefaction/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-87300967-1a59-4dce-8876-f008ff3bfb0b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+87300967-1a59-4dce-8876-f008ff3bfb0b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:song-of-stupefaction:f0t0:s2,f:xs:XP:song-of-stupefaction:f0t0:s2	-	-	-	e07cf3a05ba5	-	71a7f1efc75c	-	-	2026-11-24	xproof
+87300967-1a59-4dce-8876-f008ff3bfb0b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:song-of-stupefaction:f0t0:s2,f:xs:XP:song-of-stupefaction:f0t0:s2	-	-	-	e07cf3a05ba5	-	71a7f1efc75c	-	-	2026-11-24	xproof
 87300967-1a59-4dce-8876-f008ff3bfb0b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Song of Stupefaction/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8733a4fc-4068-4af4-9598-dc3d895e8556	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8733a4fc-4068-4af4-9598-dc3d895e8556	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -220,7 +220,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87f746a3-ca6b-404e-99cc-290a0b23f9c4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87f746a3-ca6b-404e-99cc-290a0b23f9c4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87f82d15-5b6b-400f-8a15-d45a2a735f7d	cast	cast-resolve	agreed	-	X	scen	1	0	Experimental Confectioner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-87f82d15-5b6b-400f-8a15-d45a2a735f7d	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+87f82d15-5b6b-400f-8a15-d45a2a735f7d	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87f82d15-5b6b-400f-8a15-d45a2a735f7d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Experimental Confectioner/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87f8b403-765c-4a2a-8b21-edaaaa889234	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87f8b403-765c-4a2a-8b21-edaaaa889234	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

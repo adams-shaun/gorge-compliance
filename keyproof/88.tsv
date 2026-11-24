@@ -5,9 +5,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 880367e4-50b9-49d0-b596-d462d9b42855	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 880367e4-50b9-49d0-b596-d462d9b42855	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8806ee05-10d5-4492-b672-2f6bcab94be0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-88075828-a76e-412d-b738-182f50e3a133	cast	cast-resolve	agreed	-	X	scen	1	0	Demonic Junker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+88075828-a76e-412d-b738-182f50e3a133	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:demonic-junker:f0t0:s2,f:xs:XP:demonic-junker:f0t0:s2	-	-	-	e07cf3a05ba5	-	beae033bf8f1	-	-	2026-11-24	xproof
 88075828-a76e-412d-b738-182f50e3a133	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Demonic Junker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88075828-a76e-412d-b738-182f50e3a133	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+88075828-a76e-412d-b738-182f50e3a133	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:demonic-junker:f0t0:s2,f:xs:XP:demonic-junker:f0t0:s2	-	-	-	e07cf3a05ba5	-	beae033bf8f1	-	-	2026-11-24	xproof
 88075828-a76e-412d-b738-182f50e3a133	static#0.0	static#0.0	agreed	-	X	scen	1	0	Demonic Junker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88079144-8d8e-4f98-9bee-3762540c94ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88079144-8d8e-4f98-9bee-3762540c94ca	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -32,8 +32,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 882f30e4-4ce1-4581-8d2d-d763aa13befe	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Elemental Mascot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 883267f0-be7e-43c3-b7f8-82981f6d8c23	cast	cast-resolve	agreed	-	X	scen	1	0	Suspend Aggression/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8832b76b-58b7-41b2-b2f6-842563b55b36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8834d3c9-cdb5-423b-bc78-94a94add5e74	cast	cast-resolve	agreed	-	X	scen	1	0	New Horizons/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8834d3c9-cdb5-423b-bc78-94a94add5e74	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8834d3c9-cdb5-423b-bc78-94a94add5e74	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:new-horizons:f0t0:s2,f:xs:XP:new-horizons:f0t0:s2	-	-	-	e07cf3a05ba5	-	607bf6f3092b	-	-	2026-11-24	xproof
+8834d3c9-cdb5-423b-bc78-94a94add5e74	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:new-horizons:f0t0:s2,f:xs:XP:new-horizons:f0t0:s2	-	-	-	e07cf3a05ba5	-	607bf6f3092b	-	-	2026-11-24	xproof
 8834d3c9-cdb5-423b-bc78-94a94add5e74	static#0.0	static#0.0	agreed	-	X	scen	1	0	New Horizons/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88350861-244c-4634-9bc9-e9a79401bd02	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88350861-244c-4634-9bc9-e9a79401bd02	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -102,8 +102,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8896c74b-d466-4c25-94cf-82b5e2b1fdef	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rinoa Heartilly/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 889d26d6-9e6c-4cc0-8e8e-dd932f705a20	cast	cast-resolve	agreed	-	FX	scen	2	0	Temur Tawnyback/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 889d26d6-9e6c-4cc0-8e8e-dd932f705a20	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-88aa032d-dc11-4cae-81f3-ce66353963e0	cast	cast-resolve	agreed	-	X	scen	1	0	Affectionate Indrik/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88aa032d-dc11-4cae-81f3-ce66353963e0	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+88aa032d-dc11-4cae-81f3-ce66353963e0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:affectionate-indrik:f0t0:s2,f:xs:XP:affectionate-indrik:f0t0:s2	-	-	-	e07cf3a05ba5	-	38faa50174d5	-	-	2026-11-24	xproof
+88aa032d-dc11-4cae-81f3-ce66353963e0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:affectionate-indrik:f0t0:s2,f:xs:XP:affectionate-indrik:f0t0:s2	-	-	-	e07cf3a05ba5	-	38faa50174d5	-	-	2026-11-24	xproof
 88aa710c-26ed-490d-9a4b-4a2b48df1733	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88aadf60-91f9-4932-a2bc-63365a139d36	cast	cast-resolve	agreed	-	FX	scen	2	0	Daredevil, Man Without Fear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88aadf60-91f9-4932-a2bc-63365a139d36	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Daredevil, Man Without Fear/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

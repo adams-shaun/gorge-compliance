@@ -76,8 +76,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 445ad01c-c899-424d-8666-ee7bb2a6e535	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 445bb343-9758-459b-970f-47f1705f1e55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 445c46d1-b571-4fe9-92cc-2873242d748f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-445cd4bd-ba7c-42a2-a794-42aed823d0d3	cast	cast-resolve	agreed	-	X	scen	1	0	Irascible Wolverine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-445cd4bd-ba7c-42a2-a794-42aed823d0d3	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+445cd4bd-ba7c-42a2-a794-42aed823d0d3	cast	cast	agreed	-	X	start	1	0	x:xs:XP:irascible-wolverine:f0t0:s2	-	-	-	e07cf3a05ba5	-	fc0b61c70015	-	-	2026-11-24	xproof
+445cd4bd-ba7c-42a2-a794-42aed823d0d3	f0/t0	ChangesZone	agreed	-	X	start	1	0	x:xs:XP:irascible-wolverine:f0t0:s2	-	-	-	e07cf3a05ba5	-	fc0b61c70015	-	-	2026-11-24	xproof
 445dd350-5165-4516-8669-9233f5558605	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 445dfef5-358e-49b1-880c-b30fc45f0a9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4460962e-c9cd-4cfd-b227-4278ee636206	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -91,10 +91,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 446a9d7e-9c1a-4e83-8342-2ed5acae2eed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 446d3207-bff8-4edf-9b20-62abcc56427e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 446d3207-bff8-4edf-9b20-62abcc56427e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-446db5a4-21b0-44c1-b12b-d365313dd67a	cast	cast-resolve	agreed	-	X	scen	1	0	Clifftop Lookout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+446db5a4-21b0-44c1-b12b-d365313dd67a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:clifftop-lookout:f0t0:s2,f:xs:XP:clifftop-lookout:f0t0:s2	-	-	-	e07cf3a05ba5	-	29d0655c49de	-	-	2026-11-24	xproof
 446db5a4-21b0-44c1-b12b-d365313dd67a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Clifftop Lookout/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 446db5a4-21b0-44c1-b12b-d365313dd67a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Clifftop Lookout/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-446db5a4-21b0-44c1-b12b-d365313dd67a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+446db5a4-21b0-44c1-b12b-d365313dd67a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:clifftop-lookout:f0t0:s2,f:xs:XP:clifftop-lookout:f0t0:s2	-	-	-	e07cf3a05ba5	-	29d0655c49de	-	-	2026-11-24	xproof
 4474ecee-0ec3-409b-90df-738d9313fe3c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4474ecee-0ec3-409b-90df-738d9313fe3c	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4474ecee-0ec3-409b-90df-738d9313fe3c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -117,8 +117,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 448b27a5-7c0c-4ab6-bddf-bd62b920aacc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 448b27a5-7c0c-4ab6-bddf-bd62b920aacc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 448c84f9-712b-4970-8719-2ab9c2a59d20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-448cc829-1596-4aec-b180-c0c1e0566f6b	cast	cast-resolve	agreed	-	X	scen	1	0	Wary Thespian/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-448cc829-1596-4aec-b180-c0c1e0566f6b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+448cc829-1596-4aec-b180-c0c1e0566f6b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:wary-thespian:f0t0:s2,f:xs:XP:wary-thespian:f0t0:s2	-	-	-	e07cf3a05ba5	-	d5b5c512f56b	-	-	2026-11-24	xproof
+448cc829-1596-4aec-b180-c0c1e0566f6b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:wary-thespian:f0t0:s2,f:xs:XP:wary-thespian:f0t0:s2	-	-	-	e07cf3a05ba5	-	d5b5c512f56b	-	-	2026-11-24	xproof
 448cc829-1596-4aec-b180-c0c1e0566f6b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Wary Thespian/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 448d9391-9d15-4aa1-87b3-a1d755666c03	cast	cast-resolve	agreed	-	FX	scen	2	0	Mental Modulation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 448d9391-9d15-4aa1-87b3-a1d755666c03	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mental Modulation/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 44bffa3e-4d31-4f9b-829c-e2066ab2f641	cast	cast-resolve	agreed	-	X	scen	1	0	Honored Dreyleader/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44bffa3e-4d31-4f9b-829c-e2066ab2f641	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Honored Dreyleader/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44bffa3e-4d31-4f9b-829c-e2066ab2f641	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Honored Dreyleader/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-44bffa3e-4d31-4f9b-829c-e2066ab2f641	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+44bffa3e-4d31-4f9b-829c-e2066ab2f641	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44bffa3e-4d31-4f9b-829c-e2066ab2f641	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Honored Dreyleader/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44c2fefb-5de3-4406-955a-3fabc46357d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44c437ca-5d36-4bb3-9450-baf0c93ff4ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

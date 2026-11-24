@@ -3,9 +3,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 b800c3e5-4ed9-4603-a987-d830e90cf25e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b801a701-15ce-4792-a3d7-d632e7bd9f72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b801a701-15ce-4792-a3d7-d632e7bd9f72	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b8020a8b-557b-465d-865d-b59fecd7abc1	cast	cast-resolve	agreed	-	X	scen	1	0	Threefold Thunderhulk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b8020a8b-557b-465d-865d-b59fecd7abc1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:threefold-thunderhulk:f0t0:s2,f:xs:XP:threefold-thunderhulk:f0t0:s2	-	-	-	e07cf3a05ba5	-	96e93b8038db	-	-	2026-11-24	xproof
 b8020a8b-557b-465d-865d-b59fecd7abc1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Threefold Thunderhulk/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b8020a8b-557b-465d-865d-b59fecd7abc1	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b8020a8b-557b-465d-865d-b59fecd7abc1	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:threefold-thunderhulk:f0t0:s2,f:xs:XP:threefold-thunderhulk:f0t0:s2	-	-	-	e07cf3a05ba5	-	96e93b8038db	-	-	2026-11-24	xproof
 b8020a8b-557b-465d-865d-b59fecd7abc1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Threefold Thunderhulk/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b80415cd-5887-4146-852e-73119fcd3ec6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b80415cd-5887-4146-852e-73119fcd3ec6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,10 +151,10 @@ b8ef65df-f8e7-44e3-9864-9c127232a2b6	combat#0.attack	combat#0.attack	agreed	-	X	
 b8ef65df-f8e7-44e3-9864-9c127232a2b6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Wandering Rescuer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b8ef65df-f8e7-44e3-9864-9c127232a2b6	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Wandering Rescuer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b8f05217-1f61-4d6d-be17-7fb15f1d1e32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b8f16311-be5a-4648-b024-849a61dff0bc	cast	cast-resolve	agreed	-	X	scen	1	0	Ghalta, Stampede Tyrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b8f16311-be5a-4648-b024-849a61dff0bc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:ghalta-stampede-tyrant:f0t0:s2,f:xs:XP:ghalta-stampede-tyrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	79df5b4c9c19	-	-	2026-11-24	xproof
 b8f16311-be5a-4648-b024-849a61dff0bc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ghalta, Stampede Tyrant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b8f16311-be5a-4648-b024-849a61dff0bc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ghalta, Stampede Tyrant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b8f16311-be5a-4648-b024-849a61dff0bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b8f16311-be5a-4648-b024-849a61dff0bc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:ghalta-stampede-tyrant:f0t0:s2,f:xs:XP:ghalta-stampede-tyrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	79df5b4c9c19	-	-	2026-11-24	xproof
 b8f3b5b5-8835-400f-a626-94ff0a007e56	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b8f3b5b5-8835-400f-a626-94ff0a007e56	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b8f3da11-7c8f-4846-98a6-204bfd8d572b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

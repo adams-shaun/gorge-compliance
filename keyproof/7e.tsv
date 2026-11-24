@@ -88,8 +88,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e60a641-1f2d-45ff-b3f2-d389be938b22	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Lumbering Worldwagon/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e60a641-1f2d-45ff-b3f2-d389be938b22	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lumbering Worldwagon/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e6478c1-e5b3-4641-baa7-7cdeab042569	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e64b1dc-a238-4bff-98ff-2bea44340568	cast	cast-resolve	agreed	-	FX	scen	2	0	Overlord of the Mistmoors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e64b1dc-a238-4bff-98ff-2bea44340568	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7e64b1dc-a238-4bff-98ff-2bea44340568	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-mistmoors:f0t0:s2,f:xs:XP:overlord-of-the-mistmoors:f0t0:s2	-	-	-	e07cf3a05ba5	-	6796ce2ff7a9	-	-	2026-11-24	xproof
+7e64b1dc-a238-4bff-98ff-2bea44340568	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-mistmoors:f0t0:s2,f:xs:XP:overlord-of-the-mistmoors:f0t0:s2	-	-	-	e07cf3a05ba5	-	6796ce2ff7a9	-	-	2026-11-24	xproof
 7e64b1dc-a238-4bff-98ff-2bea44340568	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Overlord of the Mistmoors/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,8 +150,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ecfa47e-1165-46a6-884c-290b1c14d020	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ecfa47e-1165-46a6-884c-290b1c14d020	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ed3918d-509a-4fe6-a32d-5899df8f9046	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ed4afc9-959a-4868-8f4a-2221bea1ba32	cast	cast-resolve	agreed	-	FX	scen	2	0	Intrepid Rabbit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7ed4afc9-959a-4868-8f4a-2221bea1ba32	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ed4afc9-959a-4868-8f4a-2221bea1ba32	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:intrepid-rabbit:f0t1:s2,f:xs:XP:intrepid-rabbit:f0t1:s2	-	-	-	e07cf3a05ba5	-	5103cd45c297	-	-	2026-11-24	xproof
+7ed4afc9-959a-4868-8f4a-2221bea1ba32	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:intrepid-rabbit:f0t1:s2,f:xs:XP:intrepid-rabbit:f0t1:s2	-	-	-	e07cf3a05ba5	-	5103cd45c297	-	-	2026-11-24	xproof
 7ed4afc9-959a-4868-8f4a-2221bea1ba32	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ed52301-81ea-4e7f-b985-cfab0593cae4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ed52301-81ea-4e7f-b985-cfab0593cae4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

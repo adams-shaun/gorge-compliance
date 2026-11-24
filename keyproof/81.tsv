@@ -50,17 +50,17 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 814f30a1-c0d6-4243-839d-0645d7bcbe4c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Roadside Assistance/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8150cc84-3f9f-470d-a0f9-ee6d9dab13da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8150cc84-3f9f-470d-a0f9-ee6d9dab13da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8151668c-6459-41b5-9e57-bb47c3876b81	cast	cast-resolve	agreed	-	X	scen	1	0	Didact Echo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8151668c-6459-41b5-9e57-bb47c3876b81	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8151668c-6459-41b5-9e57-bb47c3876b81	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:didact-echo:f0t0:s2,f:xs:XP:didact-echo:f0t0:s2	-	-	-	e07cf3a05ba5	-	0c8e6f1a6a11	-	-	2026-11-24	xproof
+8151668c-6459-41b5-9e57-bb47c3876b81	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:didact-echo:f0t0:s2,f:xs:XP:didact-echo:f0t0:s2	-	-	-	e07cf3a05ba5	-	0c8e6f1a6a11	-	-	2026-11-24	xproof
 8151668c-6459-41b5-9e57-bb47c3876b81	static#0.0	static#0.0	agreed	-	X	scen	1	0	Didact Echo/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8153cd58-cb8b-461c-a2c9-aaa9e2ea1b31	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8153cd58-cb8b-461c-a2c9-aaa9e2ea1b31	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 815ae30f-f455-4795-96eb-4bcc41d415e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 815ae30f-f455-4795-96eb-4bcc41d415e8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8161248c-16a3-47db-a3ae-cdfd878d49e0	cast	cast-resolve	agreed	-	X	scen	1	0	Terror of Mount Velus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8161248c-16a3-47db-a3ae-cdfd878d49e0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:terror-of-mount-velus:f0t0:s2,f:xs:XP:terror-of-mount-velus:f0t0:s2	-	-	-	e07cf3a05ba5	-	9b5e5b12f450	-	-	2026-11-24	xproof
 8161248c-16a3-47db-a3ae-cdfd878d49e0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Terror of Mount Velus/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8161248c-16a3-47db-a3ae-cdfd878d49e0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Terror of Mount Velus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8161248c-16a3-47db-a3ae-cdfd878d49e0	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8161248c-16a3-47db-a3ae-cdfd878d49e0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:terror-of-mount-velus:f0t0:s2,f:xs:XP:terror-of-mount-velus:f0t0:s2	-	-	-	e07cf3a05ba5	-	9b5e5b12f450	-	-	2026-11-24	xproof
 81622cf6-3021-4ad4-933d-a7e3d8ac817f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81622cf6-3021-4ad4-933d-a7e3d8ac817f	f1/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81622cf6-3021-4ad4-933d-a7e3d8ac817f	f1/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
