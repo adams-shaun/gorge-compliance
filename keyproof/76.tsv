@@ -108,8 +108,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76742bfc-ae99-4b06-b29d-e0e41d92ae14	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Prowler, Clawed Thief/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76742bfc-ae99-4b06-b29d-e0e41d92ae14	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Prowler, Clawed Thief/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76742bfc-ae99-4b06-b29d-e0e41d92ae14	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Prowler, Clawed Thief/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-76771556-3eb7-4f87-aaeb-32ea81105aa2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trynn-champion-of-freedom:f0t1:s1,f:xs:XP:trynn-champion-of-freedom:f0t1:s1	-	-	-	78d0801f2bf1	-	78aaa2e6f67a	-	-	2026-11-24	xproof
-76771556-3eb7-4f87-aaeb-32ea81105aa2	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+76771556-3eb7-4f87-aaeb-32ea81105aa2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trynn-champion-of-freedom:f0t1:s1,f:xs:XP:trynn-champion-of-freedom:f0t1:s1	-	-	-	8c0bd19283bb	-	78aaa2e6f67a	-	-	2026-11-24	xproof
+76771556-3eb7-4f87-aaeb-32ea81105aa2	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 76771556-3eb7-4f87-aaeb-32ea81105aa2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76771cd1-6b74-49bb-9421-8845fe344567	cast	cast-resolve	agreed	-	FX	scen	2	0	Way of the Paradox/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76771cd1-6b74-49bb-9421-8845fe344567	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 767e4aa9-527f-425f-bffb-6d842e1fbb74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 767e4aa9-527f-425f-bffb-6d842e1fbb74	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7681ea90-be9d-4a43-845e-ba051b438429	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7683c2b2-a06f-4691-9cc5-1968dc032885	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:pir-imaginative-rascal:cast:s1,f:xs:XP:pir-imaginative-rascal:cast:s1	-	-	-	78d0801f2bf1	-	4b9d88d7d838	-	-	2026-11-24	xproof
+7683c2b2-a06f-4691-9cc5-1968dc032885	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:pir-imaginative-rascal:cast:s1,f:xs:XP:pir-imaginative-rascal:cast:s1	-	-	-	8c0bd19283bb	-	4b9d88d7d838	-	-	2026-11-24	xproof
 7683c2b2-a06f-4691-9cc5-1968dc032885	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7685ff3f-6d61-4b1d-a381-49bc6274aa01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7685ff3f-6d61-4b1d-a381-49bc6274aa01	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -193,7 +193,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76f22670-6806-4124-8bbb-822ed33d2bda	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bitterbow-sharpshooters:cast:s1,f:xs:XP:bitterbow-sharpshooters:cast:s1	-	-	-	d864b561c9cb	-	281340aaaf44	-	-	2026-11-24	xproof
 76f335d0-7f71-4b1a-b60d-73de954cbe2c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76f335d0-7f71-4b1a-b60d-73de954cbe2c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76f405a1-242a-47e6-9aa6-261e49a85b45	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loyal-subordinate:cast:s1,f:xs:XP:loyal-subordinate:cast:s1	-	-	-	78d0801f2bf1	-	6af706ba893c	-	-	2026-11-24	xproof
+76f405a1-242a-47e6-9aa6-261e49a85b45	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loyal-subordinate:cast:s1,f:xs:XP:loyal-subordinate:cast:s1	-	-	-	8c0bd19283bb	-	6af706ba893c	-	-	2026-11-24	xproof
 76f405a1-242a-47e6-9aa6-261e49a85b45	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 76f52fad-8db2-42f0-8e12-f4341e4c8680	cast	cast-resolve	agreed	-	FX	scen	2	0	Interstellar Effigy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76f52fad-8db2-42f0-8e12-f4341e4c8680	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

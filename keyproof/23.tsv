@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 2306386d-5913-429e-8d8b-ba780841bf6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2306386d-5913-429e-8d8b-ba780841bf6e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fire-omen-crane:f0t0:s1,f:xs:XP:fire-omen-crane:f0t0:s1	-	-	-	78d0801f2bf1	-	e126a71db214	-	-	2026-11-24	xproof
+2306386d-5913-429e-8d8b-ba780841bf6e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fire-omen-crane:f0t0:s1,f:xs:XP:fire-omen-crane:f0t0:s1	-	-	-	8c0bd19283bb	-	e126a71db214	-	-	2026-11-24	xproof
 230811bf-52e7-451e-96ec-9d57c864ac5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 230be0f8-03a4-4452-84c1-ea14cfe49737	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nantuko-disciple:cast:s1,f:xs:XP:nantuko-disciple:cast:s1	-	-	-	25696bf19d5b	-	775c75a4e7ac	-	-	2026-11-24	xproof
 230be0f8-03a4-4452-84c1-ea14cfe49737	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:nantuko-disciple:f0a0:s1,f:xs:XP:nantuko-disciple:f0a0:s1	-	-	-	d864b561c9cb	-	775c75a4e7ac	-	-	2026-11-24	xproof
@@ -190,9 +190,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23d5d43c-ec78-42dd-a53e-a1ee91c94b1d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Erratic Apparition/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23d5d43c-ec78-42dd-a53e-a1ee91c94b1d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Erratic Apparition/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23d5d43c-ec78-42dd-a53e-a1ee91c94b1d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Erratic Apparition/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-23d7d8ba-5237-4ffc-bd5f-b07ff9ec73af	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+23d7d8ba-5237-4ffc-bd5f-b07ff9ec73af	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 23d7d8ba-5237-4ffc-bd5f-b07ff9ec73af	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-23d7d8ba-5237-4ffc-bd5f-b07ff9ec73af	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+23d7d8ba-5237-4ffc-bd5f-b07ff9ec73af	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 23db92aa-d4db-49e3-a5bc-7b120e02822f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23db92aa-d4db-49e3-a5bc-7b120e02822f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:shagrat-loot-bearer:f0t0:s1,f:xs:XP:shagrat-loot-bearer:f0t0:s1	-	-	-	ae86f6029288	-	604f0b39e4c2	-	-	2026-11-24	xproof
 23dd6d4a-d933-4328-8d09-75f7908ae347	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -204,9 +204,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23e98711-0b3f-446d-abcc-9b0378178feb	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 23ecb4bb-b295-46f5-9fd8-a4c66ce80c23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:touch-of-the-eternal:cast:s1,f:xs:XP:touch-of-the-eternal:cast:s1	-	-	-	d864b561c9cb	-	ec1616c41dc0	-	-	2026-11-24	xproof
 23ecb4bb-b295-46f5-9fd8-a4c66ce80c23	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maximus-knight-apparent:f0t0:s1,f:xs:XP:maximus-knight-apparent:f0t0:s1	-	-	-	8c0bd19283bb	-	d60374d1f0e5	-	-	2026-11-24	xproof
-23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
-23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:maximus-knight-apparent:f0t0:s1,f:xs:XP:maximus-knight-apparent:f0t0:s1	-	-	-	8c0bd19283bb	-	d60374d1f0e5	-	-	2026-11-24	xproof
+23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:maximus-knight-apparent:cast:s1,f:xs:XP:maximus-knight-apparent:cast:s1	-	-	-	8c0bd19283bb	-	d60374d1f0e5	-	-	2026-11-24	xproof
+23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:maximus-knight-apparent:cast:s1,f:xs:XP:maximus-knight-apparent:cast:s1	-	-	-	8c0bd19283bb	-	d60374d1f0e5	-	-	2026-11-24	xproof
 23f73983-0337-4464-8817-5f7596d65b38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23f73983-0337-4464-8817-5f7596d65b38	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23f86ee2-b1e3-45c2-bfd5-044919033922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

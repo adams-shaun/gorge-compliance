@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69191459-36ca-4e71-b4bb-0270c4cdaee9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enlisted-wurm:cast:s1,f:xs:XP:enlisted-wurm:cast:s1	-	-	-	8a1b1a193ec0	-	6d415f91efab	-	-	2026-11-24	xproof
 692260bb-e01c-4550-832a-9611856a6ff0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tergrid-s-shadow:cast:s1,f:xs:XP:tergrid-s-shadow:cast:s1	-	-	-	d864b561c9cb	-	698873f72e14	-	-	2026-11-24	xproof
 69266cb7-50eb-43d2-96d6-fc3c85be49f7	cast	cast-resolve	agreed	-	FX	scen	2	0	Magus of the Library/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-69266cb7-50eb-43d2-96d6-fc3c85be49f7	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Magus of the Library/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+69266cb7-50eb-43d2-96d6-fc3c85be49f7	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:magus-of-the-library:f0a1:s1,f:xs:XP:magus-of-the-library:f0a1:s1	-	-	-	8c0bd19283bb	-	5ed2aa83380f	-	-	2026-11-24	xproof
 69266cb7-50eb-43d2-96d6-fc3c85be49f7	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69288566-3015-45de-b391-6fe079865f0c	cast	cast-resolve	agreed	-	X	scen	1	0	Extraordinary Journey/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69288566-3015-45de-b391-6fe079865f0c	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 697b8045-0edb-4f7b-a933-4d41ec2b53d5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dubious Delicacy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 697b8045-0edb-4f7b-a933-4d41ec2b53d5	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Dubious Delicacy/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 697b8045-0edb-4f7b-a933-4d41ec2b53d5	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dubious-delicacy:f0t0:s2,f:xs:XP:dubious-delicacy:f0t0:s2	-	-	-	267e485f6204	-	9ddfc6bc3e1f	-	-	2026-11-24	xproof
-697bcfe1-ecbf-42a1-bfc7-0766d48ca56b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dockside-extortionist:f0t0:s1,f:xs:XP:dockside-extortionist:f0t0:s1	-	-	-	78d0801f2bf1	-	967c4a8d4277	-	-	2026-11-24	xproof
-697bcfe1-ecbf-42a1-bfc7-0766d48ca56b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dockside-extortionist:f0t0:s1,f:xs:XP:dockside-extortionist:f0t0:s1	-	-	-	78d0801f2bf1	-	967c4a8d4277	-	-	2026-11-24	xproof
+697bcfe1-ecbf-42a1-bfc7-0766d48ca56b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dockside-extortionist:f0t0:s1,f:xs:XP:dockside-extortionist:f0t0:s1	-	-	-	8c0bd19283bb	-	967c4a8d4277	-	-	2026-11-24	xproof
+697bcfe1-ecbf-42a1-bfc7-0766d48ca56b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dockside-extortionist:f0t0:s1,f:xs:XP:dockside-extortionist:f0t0:s1	-	-	-	8c0bd19283bb	-	967c4a8d4277	-	-	2026-11-24	xproof
 697c851d-8475-479e-8783-cebdbe9a892d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 697c851d-8475-479e-8783-cebdbe9a892d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 697f3fd9-1577-4f69-bdf8-db1f673d3505	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-bears-of-littjara:cast:s1,f:xs:XP:the-bears-of-littjara:cast:s1	-	-	-	d864b561c9cb	-	b5e7a51f72ea	-	-	2026-11-24	xproof

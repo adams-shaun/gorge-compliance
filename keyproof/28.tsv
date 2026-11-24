@@ -27,8 +27,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28274c39-19e2-4b4c-bd53-d31d6063c2ba	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2829ae08-9964-4679-80e8-46d5d33d10b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 282b4dbf-ec00-48ba-8010-73bee489fa7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:banshee-of-the-dread-choir:cast:s1,f:xs:XP:banshee-of-the-dread-choir:cast:s1	-	-	-	8c0bd19283bb	-	82f48b45f7ec	-	-	2026-11-24	xproof
-282b4dbf-ec00-48ba-8010-73bee489fa7a	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:banshee-of-the-dread-choir:f0t1:s1,f:xs:XP:banshee-of-the-dread-choir:f0t1:s1	-	-	-	78d0801f2bf1	-	82f48b45f7ec	-	-	2026-11-24	xproof
-282b4dbf-ec00-48ba-8010-73bee489fa7a	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:banshee-of-the-dread-choir:f0t1:s1,f:xs:XP:banshee-of-the-dread-choir:f0t1:s1	-	-	-	78d0801f2bf1	-	82f48b45f7ec	-	-	2026-11-24	xproof
+282b4dbf-ec00-48ba-8010-73bee489fa7a	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:banshee-of-the-dread-choir:f0t1:s1,f:xs:XP:banshee-of-the-dread-choir:f0t1:s1	-	-	-	8c0bd19283bb	-	82f48b45f7ec	-	-	2026-11-24	xproof
+282b4dbf-ec00-48ba-8010-73bee489fa7a	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:banshee-of-the-dread-choir:f0t1:s1,f:xs:XP:banshee-of-the-dread-choir:f0t1:s1	-	-	-	8c0bd19283bb	-	82f48b45f7ec	-	-	2026-11-24	xproof
 282d6e61-3240-4f1e-9c2d-8ddb59b03af4	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:wakandan-drone-flock:f0t0:s2,f:xs:XP:wakandan-drone-flock:f0t0:s2	-	-	-	5437c1394672	-	c71cc4e72feb	-	-	2026-11-24	xproof
 282d6e61-3240-4f1e-9c2d-8ddb59b03af4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wakandan Drone Flock/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 282d6e61-3240-4f1e-9c2d-8ddb59b03af4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wakandan Drone Flock/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28da6443-4acc-4f1c-a54f-9153286f18c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28dd0ae4-fc56-4abf-af24-6c6c8d0a10cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28ddc23c-5b0b-4747-9a33-6845acf27bec	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:elvish-harbinger:cast:s1,f:xs:XP:elvish-harbinger:cast:s1	-	-	-	d864b561c9cb	-	19e50ecfaf24	-	-	2026-11-24	xproof
-28ddc23c-5b0b-4747-9a33-6845acf27bec	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+28ddc23c-5b0b-4747-9a33-6845acf27bec	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:elvish-harbinger:f0a0:s1,f:xs:XP:elvish-harbinger:f0a0:s1	-	-	-	8c0bd19283bb	-	19e50ecfaf24	-	-	2026-11-24	xproof
 28ddc23c-5b0b-4747-9a33-6845acf27bec	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:elvish-harbinger:cast:s1,f:xs:XP:elvish-harbinger:cast:s1	-	-	-	d864b561c9cb	-	19e50ecfaf24	-	-	2026-11-24	xproof
 28df85d6-e13a-4178-a361-7015afd316ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28df85d6-e13a-4178-a361-7015afd316ca	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

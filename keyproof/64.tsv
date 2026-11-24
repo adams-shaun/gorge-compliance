@@ -35,7 +35,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 642d3494-7a6a-4aec-ba64-7c0c467ada99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 642fa01d-025e-44dd-8360-5325e5a28282	cast	cast-resolve	agreed	-	FX	scen	2	0	Dread Summons/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64337db7-a66b-42c5-89fd-c9dfc203c0dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64337db7-a66b-42c5-89fd-c9dfc203c0dd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+64337db7-a66b-42c5-89fd-c9dfc203c0dd	f0/a0	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:linessa-zephyr-mage:f0a0:s1,f:xs:XP:linessa-zephyr-mage:f0a0:s1	-	-	-	8c0bd19283bb	-	b448b857935e	-	-	2026-11-24	xproof
 64337db7-a66b-42c5-89fd-c9dfc203c0dd	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 64368768-77b9-4f78-adb7-951ca71dfb28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6437867b-a658-4a71-a8a5-0c5a782d1f84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ashes-of-the-fallen:cast:s1,f:xs:XP:ashes-of-the-fallen:cast:s1	-	-	-	64a08ba7d913	-	99b0c84eeda1	-	-	2026-11-24	xproof
@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 647ca69e-cc01-4b2b-b376-bee2a98331e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 647ca69e-cc01-4b2b-b376-bee2a98331e8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 647d7988-9a5d-4700-9238-938d0d5fae12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-647d7988-9a5d-4700-9238-938d0d5fae12	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+647d7988-9a5d-4700-9238-938d0d5fae12	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 647d7988-9a5d-4700-9238-938d0d5fae12	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 647e5639-6339-48af-af96-e48729e1cad3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6480ab32-3a29-4449-8ff7-c8e43c320ed3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

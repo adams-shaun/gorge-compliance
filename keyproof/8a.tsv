@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a2726a4-29b7-4836-bd0a-9c0d914ed915	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:magma-mine:f0a0:s1,f:xs:XP:magma-mine:f0a0:s1	-	-	-	8c0bd19283bb	-	ea611873536c	-	-	2026-11-24	xproof
 8a2946ad-7a7b-4cda-8591-da8c7da5e072	cast	cast-resolve	agreed	-	X	scen	1	0	Wilderland Scrounger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a2946ad-7a7b-4cda-8591-da8c7da5e072	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wilderland Scrounger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8a2e53f9-8100-488f-8504-b59e9bd1cc29	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rite-of-flame:cast:s1,f:xs:XP:rite-of-flame:cast:s1	-	-	-	78d0801f2bf1	-	955e2c78d376	-	-	2026-11-24	xproof
+8a2e53f9-8100-488f-8504-b59e9bd1cc29	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rite-of-flame:cast:s1,f:xs:XP:rite-of-flame:cast:s1	-	-	-	8c0bd19283bb	-	955e2c78d376	-	-	2026-11-24	xproof
 8a31c49f-5b3f-4f84-a08e-58b30a6bff7c	cast	cast-resolve	agreed	-	FX	scen	2	0	Stormkeld Vanguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a31c49f-5b3f-4f84-a08e-58b30a6bff7c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stormkeld Vanguard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a31c49f-5b3f-4f84-a08e-58b30a6bff7c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stormkeld Vanguard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a8fe94f-81aa-4725-ace6-ed56a1e1ed91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a922366-ee2a-4ddb-a904-683dcf4f191a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a9525f4-74a6-44f0-a1b1-d57937d7783b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a9525f4-74a6-44f0-a1b1-d57937d7783b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+8a9525f4-74a6-44f0-a1b1-d57937d7783b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8a960cc2-3802-42bc-ba28-941bfe9743be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doorkeeper:cast:s1,f:xs:XP:doorkeeper:cast:s1	-	-	-	d864b561c9cb	-	bcbb84b38659	-	-	2026-11-24	xproof
 8a960cc2-3802-42bc-ba28-941bfe9743be	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:doorkeeper:f0a0:s1,f:xs:XP:doorkeeper:f0a0:s1	-	-	-	d864b561c9cb	-	bcbb84b38659	-	-	2026-11-24	xproof
 8a98ddac-7341-4118-b188-51d8d03afd1d	cast	cast-resolve	agreed	-	X	scen	1	0	Uncle Iroh/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -172,14 +172,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8abff7b5-fe27-46bd-b951-b5d9f93f3a14	cast	cast-resolve	agreed	-	FX	scen	2	0	Slash, Reptile Rampager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8abff7b5-fe27-46bd-b951-b5d9f93f3a14	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Slash, Reptile Rampager/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8abff7b5-fe27-46bd-b951-b5d9f93f3a14	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Slash, Reptile Rampager/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8ac09649-3b6c-40fa-81f8-583384c9e0bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrasher-brute:f0t0:s1,f:xs:XP:thrasher-brute:f0t0:s1	-	-	-	78d0801f2bf1	-	9071327d211a	-	-	2026-11-24	xproof
-8ac09649-3b6c-40fa-81f8-583384c9e0bb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thrasher-brute:f0t0:s1,f:xs:XP:thrasher-brute:f0t0:s1	-	-	-	78d0801f2bf1	-	9071327d211a	-	-	2026-11-24	xproof
+8ac09649-3b6c-40fa-81f8-583384c9e0bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrasher-brute:f0t0:s1,f:xs:XP:thrasher-brute:f0t0:s1	-	-	-	8c0bd19283bb	-	9071327d211a	-	-	2026-11-24	xproof
+8ac09649-3b6c-40fa-81f8-583384c9e0bb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thrasher-brute:f0t0:s1,f:xs:XP:thrasher-brute:f0t0:s1	-	-	-	8c0bd19283bb	-	9071327d211a	-	-	2026-11-24	xproof
 8ac23863-0aa7-41bc-b9b7-c5f0566172cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ac23863-0aa7-41bc-b9b7-c5f0566172cf	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:nightveil-sprite:f0t0:s1,f:xs:XP:nightveil-sprite:f0t0:s1	-	-	-	d864b561c9cb	-	054672847f2c	-	-	2026-11-24	xproof
 8ac43884-9f03-4945-98ea-c744d0403f32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ace3c6b-b2b3-4cd1-9828-dcb9ba5b71ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ace9425-fcdd-45b0-abf0-1a7d601de25e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slimefoot-s-survey:cast:s1,f:xs:XP:slimefoot-s-survey:cast:s1	-	-	-	ae86f6029288	-	ffee344f696f	-	-	2026-11-24	xproof
-8ad2ecd5-2d50-4a54-a672-335d7e636a5a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:chakram-retriever:cast:s1,f:xs:XP:chakram-retriever:cast:s1	-	-	-	78d0801f2bf1	-	44a69457314d	-	-	2026-11-24	xproof
+8ad2ecd5-2d50-4a54-a672-335d7e636a5a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:chakram-retriever:cast:s1,f:xs:XP:chakram-retriever:cast:s1	-	-	-	8c0bd19283bb	-	44a69457314d	-	-	2026-11-24	xproof
 8ad2ecd5-2d50-4a54-a672-335d7e636a5a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8ad2ecd5-2d50-4a54-a672-335d7e636a5a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad4f2fe-6d98-4279-a331-3817d40ae46d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seismic-assault:cast:s1,f:xs:XP:seismic-assault:cast:s1	-	-	-	25696bf19d5b	-	7a3999045d87	-	-	2026-11-24	xproof
@@ -195,8 +195,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ada7388-fd8b-434c-a17a-bce19cf3e615	f0/a1	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:elephant-graveyard:f0a0:s1,f:xs:XP:elephant-graveyard:f0a0:s1	-	-	-	8c0bd19283bb	-	67206cc88b12	-	-	2026-11-24	xproof
 8ada7388-fd8b-434c-a17a-bce19cf3e615	land	land	agreed	-	FX	start	2	0	x:xs:XP:elephant-graveyard:land:s1,f:xs:XP:elephant-graveyard:land:s1	-	-	-	ae86f6029288	-	67206cc88b12	-	-	2026-11-24	xproof
 8adbba6e-03ef-4278-aec5-8a4496b377a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8add6996-6c5c-4aa2-93d4-a39efcfd22b2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:celestial-force:cast:s1,f:xs:XP:celestial-force:cast:s1	-	-	-	78d0801f2bf1	-	041fc08e1aca	-	-	2026-11-24	xproof
-8add6996-6c5c-4aa2-93d4-a39efcfd22b2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:celestial-force:cast:s1,f:xs:XP:celestial-force:cast:s1	-	-	-	78d0801f2bf1	-	041fc08e1aca	-	-	2026-11-24	xproof
+8add6996-6c5c-4aa2-93d4-a39efcfd22b2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:celestial-force:cast:s1,f:xs:XP:celestial-force:cast:s1	-	-	-	8c0bd19283bb	-	041fc08e1aca	-	-	2026-11-24	xproof
+8add6996-6c5c-4aa2-93d4-a39efcfd22b2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:celestial-force:cast:s1,f:xs:XP:celestial-force:cast:s1	-	-	-	8c0bd19283bb	-	041fc08e1aca	-	-	2026-11-24	xproof
 8ade0824-9fd0-417d-94dd-ac399e35b582	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ade0824-9fd0-417d-94dd-ac399e35b582	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ae3562f-28b7-4462-96ed-be0cf7052ccc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kor-outfitter:f0t0:s1,f:xs:XP:kor-outfitter:f0t0:s1	-	-	-	8a1b1a193ec0	-	40d26b07fd61	-	-	2026-11-24	xproof

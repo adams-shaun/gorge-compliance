@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3479a4e6-c67d-4958-8a47-43d3a2f69bb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 347a5faa-5656-4a36-af44-ab5a3ed267f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:snooping-newsie:f0t0:s1,f:xs:XP:snooping-newsie:f0t0:s1	-	-	-	d864b561c9cb	-	1a469e2b871b	-	-	2026-11-24	xproof
 347a5faa-5656-4a36-af44-ab5a3ed267f4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:snooping-newsie:f0t0:s1,f:xs:XP:snooping-newsie:f0t0:s1	-	-	-	d864b561c9cb	-	1a469e2b871b	-	-	2026-11-24	xproof
-348201c4-79de-4278-9896-d8b1567cc5cc	cast	cast	owed	harness	-	start	0	0	-	-	-	-	78d0801f2bf1	-	72b49359926b	-	-	2026-11-24	xproof
+348201c4-79de-4278-9896-d8b1567cc5cc	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	72b49359926b	-	-	2026-11-24	xproof
 3483946d-8645-4c22-b0ba-a65a44456324	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34841228-31ac-48ac-b6d6-486b5e1e07dd	cast	cast	agreed	-	F	start	2	0	f:xs:XP:abundant-harvest:cast:s1	-	-	-	d864b561c9cb	-	243264de6077	-	-	2026-11-24	xproof
 3485109b-251f-4bef-a069-308031f47912	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -191,9 +191,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34dd789c-4d80-4ccc-a4f7-2e5388a9689d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angelic-arbiter:cast:s1,f:xs:XP:angelic-arbiter:cast:s1	-	-	-	d864b561c9cb	-	fdebc6dd26ea	-	-	2026-11-24	xproof
 34e05dc1-35af-402d-96ae-e249b3738493	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34e05dc1-35af-402d-96ae-e249b3738493	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34e1477a-c0fb-4364-bb93-04a85c0c2517	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling:cast:s1,f:xs:XP:mu-yanling:cast:s1	-	-	-	78d0801f2bf1	-	5987d76dae1e	-	-	2026-11-24	xproof
-34e1477a-c0fb-4364-bb93-04a85c0c2517	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
-34e1477a-c0fb-4364-bb93-04a85c0c2517	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling:cast:s1,f:xs:XP:mu-yanling:cast:s1	-	-	-	78d0801f2bf1	-	5987d76dae1e	-	-	2026-11-24	xproof
+34e1477a-c0fb-4364-bb93-04a85c0c2517	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling:cast:s1,f:xs:XP:mu-yanling:cast:s1	-	-	-	8c0bd19283bb	-	5987d76dae1e	-	-	2026-11-24	xproof
+34e1477a-c0fb-4364-bb93-04a85c0c2517	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+34e1477a-c0fb-4364-bb93-04a85c0c2517	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling:cast:s1,f:xs:XP:mu-yanling:cast:s1	-	-	-	8c0bd19283bb	-	5987d76dae1e	-	-	2026-11-24	xproof
 34e1477a-c0fb-4364-bb93-04a85c0c2517	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 34e2d6eb-aad4-4776-872e-cebab3938aa0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34e2d6eb-aad4-4776-872e-cebab3938aa0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

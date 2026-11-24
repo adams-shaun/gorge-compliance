@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-1f00edd6-4321-48a1-9053-77c77b922aeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brinelin-the-moon-kraken:f0t0:s1,f:xs:XP:brinelin-the-moon-kraken:f0t0:s1	-	-	-	8c0bd19283bb	-	11881289577e	-	-	2026-11-24	xproof
-1f00edd6-4321-48a1-9053-77c77b922aeb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:brinelin-the-moon-kraken:f0t0:s1,f:xs:XP:brinelin-the-moon-kraken:f0t0:s1	-	-	-	8c0bd19283bb	-	11881289577e	-	-	2026-11-24	xproof
-1f00edd6-4321-48a1-9053-77c77b922aeb	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+1f00edd6-4321-48a1-9053-77c77b922aeb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:brinelin-the-moon-kraken:cast:s1,f:xs:XP:brinelin-the-moon-kraken:cast:s1	-	-	-	8c0bd19283bb	-	11881289577e	-	-	2026-11-24	xproof
+1f00edd6-4321-48a1-9053-77c77b922aeb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:brinelin-the-moon-kraken:cast:s1,f:xs:XP:brinelin-the-moon-kraken:cast:s1	-	-	-	8c0bd19283bb	-	11881289577e	-	-	2026-11-24	xproof
+1f00edd6-4321-48a1-9053-77c77b922aeb	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1f018a8c-6ceb-4d03-94a7-8713467c9cf5	cast	cast-resolve	agreed	-	X	scen	1	0	Fire Navy Trebuchet/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f018a8c-6ceb-4d03-94a7-8713467c9cf5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fire Navy Trebuchet/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f018a8c-6ceb-4d03-94a7-8713467c9cf5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fire Navy Trebuchet/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f37e3a6-ce3a-472f-ac45-0d9b23a31a11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f37e3a6-ce3a-472f-ac45-0d9b23a31a11	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:pyroclastic-elemental:f0a0:s1,f:xs:XP:pyroclastic-elemental:f0a0:s1	-	-	-	d864b561c9cb	-	ded4cf70ae66	-	-	2026-11-24	xproof
 1f384f19-7fb4-4120-8001-5b401b4debbd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f384f19-7fb4-4120-8001-5b401b4debbd	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:reckless-pangolin:f0t0:s1,f:xs:XP:reckless-pangolin:f0t0:s1	-	-	-	78d0801f2bf1	-	6d1629c55850	-	-	2026-11-24	xproof
+1f384f19-7fb4-4120-8001-5b401b4debbd	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:reckless-pangolin:f0t0:s1,f:xs:XP:reckless-pangolin:f0t0:s1	-	-	-	8c0bd19283bb	-	6d1629c55850	-	-	2026-11-24	xproof
 1f3b0b15-2c38-4aaa-b527-afbb540a6715	cast	cast-resolve	agreed	-	FX	scen	2	0	Toxin Analysis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f3c2b00-0000-4ae1-9650-9553accac52e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f3c2b00-0000-4ae1-9650-9553accac52e	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
@@ -133,8 +133,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f9797e2-7ebb-41f9-9199-e9ee575eefd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f9797e2-7ebb-41f9-9199-e9ee575eefd3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:inspiring-unicorn:f0t0:s1,f:xs:XP:inspiring-unicorn:f0t0:s1	-	-	-	d864b561c9cb	-	ad33e17f87f9	-	-	2026-11-24	xproof
 1f9efad1-9f51-47aa-a5a7-9c8103435a01	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keeper-of-keys:f0t0:s1,f:xs:XP:keeper-of-keys:f0t0:s1	-	-	-	8c0bd19283bb	-	5244630d5026	-	-	2026-11-24	xproof
-1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keeper-of-keys:f0t0:s1,f:xs:XP:keeper-of-keys:f0t0:s1	-	-	-	8c0bd19283bb	-	5244630d5026	-	-	2026-11-24	xproof
+1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:keeper-of-keys:cast:s1,f:xs:XP:keeper-of-keys:cast:s1	-	-	-	8c0bd19283bb	-	5244630d5026	-	-	2026-11-24	xproof
+1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:keeper-of-keys:cast:s1,f:xs:XP:keeper-of-keys:cast:s1	-	-	-	8c0bd19283bb	-	5244630d5026	-	-	2026-11-24	xproof
 1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fa272bf-8759-4750-b40b-8e2f6972d570	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fa94925-04e5-4073-91af-1857dbc09991	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oak-street-innkeeper:cast:s1,f:xs:XP:oak-street-innkeeper:cast:s1	-	-	-	d864b561c9cb	-	dbd2ff3680b8	-	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fb736bf-c9bd-45ab-86ce-7f138f1724b2	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1fb736bf-c9bd-45ab-86ce-7f138f1724b2	land	play-land	agreed	-	X	scen	1	0	Gaseous Anomaly/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fba543c-bd22-4f7b-9ff4-0631af8ee814	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1fbb2a7c-8093-4729-b8fe-cf032d99470f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fell-the-mighty:cast:s1,f:xs:XP:fell-the-mighty:cast:s1	-	-	-	78d0801f2bf1	-	fc4c2340ede2	-	-	2026-11-24	xproof
+1fbb2a7c-8093-4729-b8fe-cf032d99470f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fell-the-mighty:cast:s1,f:xs:XP:fell-the-mighty:cast:s1	-	-	-	8c0bd19283bb	-	fc4c2340ede2	-	-	2026-11-24	xproof
 1fbed9e4-86f6-4115-8468-8593e340701f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:krosan-druid:f0t0:s1,f:xs:XP:krosan-druid:f0t0:s1	-	-	-	d864b561c9cb	-	6e3a3d4d4b06	-	-	2026-11-24	xproof
 1fbed9e4-86f6-4115-8468-8593e340701f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:krosan-druid:f0t0:s1,f:xs:XP:krosan-druid:f0t0:s1	-	-	-	d864b561c9cb	-	6e3a3d4d4b06	-	-	2026-11-24	xproof
 1fc1b0d7-7f15-4d00-bc8f-e06489afd425	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

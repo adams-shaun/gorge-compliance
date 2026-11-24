@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9a104f73-597b-49e3-8088-13db31f61900	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Frostbite Pyromental/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9a107e48-3d50-4941-95b1-10f2b29a4245	cast	cast-resolve	agreed	-	FX	scen	2	0	Stroke of Midnight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9a133991-8a7a-4bfd-b0ae-d76433450c03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9a133991-8a7a-4bfd-b0ae-d76433450c03	f0/t0	Attacks/Dethrone	agreed	-	X	start	2	0	x:xs:XP:grenzo-s-cutthroat:f0t0:s1	-	-	-	78d0801f2bf1	-	7aff4e8981e4	-	-	2026-11-24	xproof
+9a133991-8a7a-4bfd-b0ae-d76433450c03	f0/t0	Attacks/Dethrone	agreed	-	X	start	2	0	x:xs:XP:grenzo-s-cutthroat:f0t0:s1	-	-	-	8c0bd19283bb	-	7aff4e8981e4	-	-	2026-11-24	xproof
 9a1412db-45ad-46ea-8f12-a85d203113d8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:demonic-consultation:cast:s2,f:xs:XP:demonic-consultation:cast:s2	-	-	-	ea3140b6974b	-	c123ece1b2af	-	-	2026-11-24	xproof
 9a1622a5-c982-407b-a158-7b8ad9238aac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:searing-barb:cast:s1,f:xs:XP:searing-barb:cast:s1	-	-	-	ae86f6029288	-	4114b09ada83	-	-	2026-11-24	xproof
 9a17452d-3adb-42ec-99f8-0083740cefa0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arborea-pegasus:f0t0:s1,f:xs:XP:arborea-pegasus:f0t0:s1	-	-	-	d864b561c9cb	-	3769ec10d06e	-	-	2026-11-24	xproof
@@ -94,8 +94,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9aacc1ce-8d0d-4a24-9a15-74635f2f127d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9aacc1ce-8d0d-4a24-9a15-74635f2f127d	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9aacc1ce-8d0d-4a24-9a15-74635f2f127d	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9aace0d3-89e6-4254-b96f-ee3a878f2f91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:conqueror-s-flail:cast:s1,f:xs:XP:conqueror-s-flail:cast:s1	-	-	-	78d0801f2bf1	-	720c73c705d7	-	-	2026-11-24	xproof
-9aace0d3-89e6-4254-b96f-ee3a878f2f91	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:conqueror-s-flail:f0a0:s1,f:xs:XP:conqueror-s-flail:f0a0:s1	-	-	-	78d0801f2bf1	-	720c73c705d7	-	-	2026-11-24	xproof
+9aace0d3-89e6-4254-b96f-ee3a878f2f91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:conqueror-s-flail:cast:s1,f:xs:XP:conqueror-s-flail:cast:s1	-	-	-	8c0bd19283bb	-	720c73c705d7	-	-	2026-11-24	xproof
+9aace0d3-89e6-4254-b96f-ee3a878f2f91	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:conqueror-s-flail:f0a0:s1,f:xs:XP:conqueror-s-flail:f0a0:s1	-	-	-	8c0bd19283bb	-	720c73c705d7	-	-	2026-11-24	xproof
 9aaf0df7-5e2d-4f49-a8cb-66523be15ad6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ab0820b-4f5f-47b3-8fa9-43f802aed275	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ab0820b-4f5f-47b3-8fa9-43f802aed275	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9acfec0d-05a0-4b28-a883-e6863f1cb773	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mistmeadow Council/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9ad01fb2-2ba7-447a-a5ef-e57d46421635	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marshal-of-zhalfir:cast:s1,f:xs:XP:marshal-of-zhalfir:cast:s1	-	-	-	ae86f6029288	-	2d6a2d5044cb	-	-	2026-11-24	xproof
 9ad01fb2-2ba7-447a-a5ef-e57d46421635	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:marshal-of-zhalfir:f0a0:s1,f:xs:XP:marshal-of-zhalfir:f0a0:s1	-	-	-	ae86f6029288	-	2d6a2d5044cb	-	-	2026-11-24	xproof
-9ad114d8-2123-4267-b30b-6f4e755bb0de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:proud-mentor:cast:s1,f:xs:XP:proud-mentor:cast:s1	-	-	-	8c0bd19283bb	-	1c33f4b632bf	-	-	2026-11-24	xproof
-9ad114d8-2123-4267-b30b-6f4e755bb0de	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:proud-mentor:f0a0:s1,f:xs:XP:proud-mentor:f0a0:s1	-	-	-	78d0801f2bf1	-	1c33f4b632bf	-	-	2026-11-24	xproof
+9ad114d8-2123-4267-b30b-6f4e755bb0de	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:proud-mentor:cast:s1,f:xs:XP:proud-mentor:cast:s1	-	-	-	8c0bd19283bb	-	1c33f4b632bf	-	-	2026-11-24	xproof
+9ad114d8-2123-4267-b30b-6f4e755bb0de	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:proud-mentor:f0a0:s1,f:xs:XP:proud-mentor:f0a0:s1	-	-	-	8c0bd19283bb	-	1c33f4b632bf	-	-	2026-11-24	xproof
 9ad114d8-2123-4267-b30b-6f4e755bb0de	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ad12c75-e97d-404a-bfa9-26ff1d0bb506	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ad12c75-e97d-404a-bfa9-26ff1d0bb506	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

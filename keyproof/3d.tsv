@@ -87,8 +87,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d713c11-36a7-4b19-8c42-a9b61ef5902c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:thundering-raiju:f0t0:s1,f:xs:XP:thundering-raiju:f0t0:s1	-	-	-	d864b561c9cb	-	9904a7ff6ded	-	-	2026-11-24	xproof
 3d720d55-3df8-40fd-bc93-ad99c1105249	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:saddleback-lagac:cast:s1,f:xs:XP:saddleback-lagac:cast:s1	-	-	-	d864b561c9cb	-	d36c39655380	-	-	2026-11-24	xproof
 3d720d55-3df8-40fd-bc93-ad99c1105249	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:saddleback-lagac:cast:s1,f:xs:XP:saddleback-lagac:cast:s1	-	-	-	d864b561c9cb	-	d36c39655380	-	-	2026-11-24	xproof
-3d73dfd6-fd74-453f-b323-6505825caf4c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nylea-s-colossus:f0t0:s1,f:xs:XP:nylea-s-colossus:f0t0:s1	-	-	-	78d0801f2bf1	-	8adbab652f01	-	-	2026-11-24	xproof
-3d73dfd6-fd74-453f-b323-6505825caf4c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nylea-s-colossus:f0t0:s1,f:xs:XP:nylea-s-colossus:f0t0:s1	-	-	-	78d0801f2bf1	-	8adbab652f01	-	-	2026-11-24	xproof
+3d73dfd6-fd74-453f-b323-6505825caf4c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nylea-s-colossus:f0t0:s1,f:xs:XP:nylea-s-colossus:f0t0:s1	-	-	-	8c0bd19283bb	-	8adbab652f01	-	-	2026-11-24	xproof
+3d73dfd6-fd74-453f-b323-6505825caf4c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nylea-s-colossus:f0t0:s1,f:xs:XP:nylea-s-colossus:f0t0:s1	-	-	-	8c0bd19283bb	-	8adbab652f01	-	-	2026-11-24	xproof
 3d772c44-a756-406d-a83f-f671a81513b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d772c44-a756-406d-a83f-f671a81513b0	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 3d772c44-a756-406d-a83f-f671a81513b0	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3db40361-5f55-417e-a7cd-7e360cc91b4d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Chainsaw/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3db407ec-da4b-4b25-b613-e45c164ffe86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3db407ec-da4b-4b25-b613-e45c164ffe86	f0/t0	Attacks	agreed	-	F	start	2	0	f:xs:XP:cho-arrim-bruiser:f0t0:s1	-	-	-	5f2128bf97e4	-	a64613357150	-	-	2026-11-24	xproof
-3db8466c-864f-48ba-b617-f2c863dfdcbd	cast	cast	owed	harness	-	start	0	0	-	-	-	-	78d0801f2bf1	-	0c0b1126a75f	-	-	2026-11-24	xproof
+3db8466c-864f-48ba-b617-f2c863dfdcbd	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	0c0b1126a75f	-	-	2026-11-24	xproof
 3dc225a2-61b6-4ac9-a86b-df0c2b0b3898	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dc225a2-61b6-4ac9-a86b-df0c2b0b3898	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3dc364f3-3094-4660-80ca-9418588c7fde	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:mithril-coat:cast:s1,f:xs:XP:mithril-coat:cast:s1	-	-	-	ae86f6029288	-	c39e5e36907d	-	-	2026-11-24	xproof

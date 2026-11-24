@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2648559d-1d96-47d2-a769-cfa2cbca2be5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spider-Gwen, Free Spirit/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2648559d-1d96-47d2-a769-cfa2cbca2be5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spider-Gwen, Free Spirit/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 26486a42-4dc6-472b-9a9b-3c3ca78cc3b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-26486a42-4dc6-472b-9a9b-3c3ca78cc3b5	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+26486a42-4dc6-472b-9a9b-3c3ca78cc3b5	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 264cb7f6-6d36-4e58-87f4-83ccaa998a32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 264efed9-65ab-40ad-877f-c6c25ca0281e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:edgar-king-of-figaro:f0t0:s2,f:xs:XP:edgar-king-of-figaro:f0t0:s2	-	-	-	267e485f6204	-	2df2d9cf148e	-	-	2026-11-24	xproof
 264efed9-65ab-40ad-877f-c6c25ca0281e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:edgar-king-of-figaro:f0t0:s2,f:xs:XP:edgar-king-of-figaro:f0t0:s2	-	-	-	267e485f6204	-	2df2d9cf148e	-	-	2026-11-24	xproof
@@ -104,9 +104,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26a716b2-a2e2-405b-accd-df572416d8bf	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26a7f92d-6914-466d-b7c7-9ac121dd5118	cast	cast-resolve	agreed	-	X	scen	1	0	Essence of Antiquity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 26a7f92d-6914-466d-b7c7-9ac121dd5118	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Essence of Antiquity/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-26ae37ab-91f8-4113-beb0-1154f9b62d28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:varchild-betrayer-of-kjeldor:cast:s1,f:xs:XP:varchild-betrayer-of-kjeldor:cast:s1	-	-	-	78d0801f2bf1	-	69e5289275aa	-	-	2026-11-24	xproof
-26ae37ab-91f8-4113-beb0-1154f9b62d28	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
-26ae37ab-91f8-4113-beb0-1154f9b62d28	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+26ae37ab-91f8-4113-beb0-1154f9b62d28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:varchild-betrayer-of-kjeldor:cast:s1,f:xs:XP:varchild-betrayer-of-kjeldor:cast:s1	-	-	-	8c0bd19283bb	-	69e5289275aa	-	-	2026-11-24	xproof
+26ae37ab-91f8-4113-beb0-1154f9b62d28	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+26ae37ab-91f8-4113-beb0-1154f9b62d28	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 26afc8c1-c23f-4212-a2aa-386c71c4a7f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mossbeard-ancient:f0t0:s1,f:xs:XP:mossbeard-ancient:f0t0:s1	-	-	-	d864b561c9cb	-	4a20e2c17272	-	-	2026-11-24	xproof
 26afc8c1-c23f-4212-a2aa-386c71c4a7f9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mossbeard-ancient:f0t0:s1,f:xs:XP:mossbeard-ancient:f0t0:s1	-	-	-	d864b561c9cb	-	4a20e2c17272	-	-	2026-11-24	xproof
 26b077df-7a05-459a-b5ff-bf27767bb519	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

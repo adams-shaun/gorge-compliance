@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a08d878-7816-4d0a-9532-4f2d3c8eee90	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sarkhan-s-dragonfire:cast:s1	-	-	-	d864b561c9cb	-	13ee4ef4657c	-	-	2026-11-24	xproof
 2a098296-6a64-48ba-af40-5b68bae06bec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a098296-6a64-48ba-af40-5b68bae06bec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2a114ff8-fa7d-41b8-b412-6232fbb68efc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrilling-encore:cast:s1,f:xs:XP:thrilling-encore:cast:s1	-	-	-	78d0801f2bf1	-	9b84d52422ed	-	-	2026-11-24	xproof
+2a114ff8-fa7d-41b8-b412-6232fbb68efc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrilling-encore:cast:s1,f:xs:XP:thrilling-encore:cast:s1	-	-	-	8c0bd19283bb	-	9b84d52422ed	-	-	2026-11-24	xproof
 2a14670b-2ab6-4e1d-9b33-610a87bdb7ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a14670b-2ab6-4e1d-9b33-610a87bdb7ce	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a14670b-2ab6-4e1d-9b33-610a87bdb7ce	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a18b3f0-8a78-46d8-b60f-3cd634062f1b	cast	cast-resolve	agreed	-	X	scen	1	0	Refute Destiny/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2a1ca3e2-e1d1-4525-a07e-13d5ba1ac431	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a1ca3e2-e1d1-4525-a07e-13d5ba1ac431	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2a2376b8-6962-4f9e-ba36-fd7de87dc77d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nikara-lair-scavenger:cast:s1,f:xs:XP:nikara-lair-scavenger:cast:s1	-	-	-	8c0bd19283bb	-	006722e253db	-	-	2026-11-24	xproof
+2a2376b8-6962-4f9e-ba36-fd7de87dc77d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:nikara-lair-scavenger:cast:s1,f:xs:XP:nikara-lair-scavenger:cast:s1	-	-	-	8c0bd19283bb	-	006722e253db	-	-	2026-11-24	xproof
 2a2376b8-6962-4f9e-ba36-fd7de87dc77d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2a2376b8-6962-4f9e-ba36-fd7de87dc77d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a249c4b-beaa-4e7f-b4f7-496d282327bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -129,7 +129,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ac2b815-2d72-48e6-b43a-18884a74bf95	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Skycoach Waypoint/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ac2b815-2d72-48e6-b43a-18884a74bf95	land	play-land	agreed	-	X	scen	1	0	Skycoach Waypoint/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ac2d483-2d2a-4912-8db4-04a5a2080831	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ac2d483-2d2a-4912-8db4-04a5a2080831	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	78d0801f2bf1	-	-	-	-	2026-11-24	xproof
+2ac2d483-2d2a-4912-8db4-04a5a2080831	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2ac34f3e-822d-4fde-99ca-a31c4d9503fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ac34f3e-822d-4fde-99ca-a31c4d9503fd	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ac6f1c7-f4c5-4d45-9644-da49d8fe4758	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
