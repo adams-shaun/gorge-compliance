@@ -54,9 +54,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	cast	cast	owed	harness	-	start	0	0	-	-	-	-	9ee19e8250ce	-	4da4cfd16ff3	-	-	2026-11-24	xproof
 5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	9ee19e8250ce	-	4da4cfd16ff3	-	-	2026-11-24	xproof
 5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-5437f560-7f61-4326-be8e-15d74bf4e6ec	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5437f560-7f61-4326-be8e-15d74bf4e6ec	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:gloomfang-mauler:cast:s1,f:xs:XP:gloomfang-mauler:cast:s1	-	-	-	ae86f6029288	-	3024cb56266f	-	-	2026-11-24	xproof
 5437f560-7f61-4326-be8e-15d74bf4e6ec	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	4	0	x:xs:XP:gloomfang-mauler:cast:s1,f:xs:XP:gloomfang-mauler:cast:s1	-	-	-	d864b561c9cb	-	3024cb56266f	-	-	2026-11-24	xproof
-5437f560-7f61-4326-be8e-15d74bf4e6ec	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5437f560-7f61-4326-be8e-15d74bf4e6ec	f0/t0	ChangesZone/Backup	agreed	-	FX	start	4	0	x:xs:XP:gloomfang-mauler:cast:s1,f:xs:XP:gloomfang-mauler:cast:s1	-	-	-	ae86f6029288	-	3024cb56266f	-	-	2026-11-24	xproof
 543e6bb3-a867-43bf-a737-2f5d6d8dc631	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:warped-landscape:land:s1,f:xs:XP:warped-landscape:land:s1	-	-	-	d864b561c9cb	-	d2e0ea90931d	-	-	2026-11-24	xproof
 543e6bb3-a867-43bf-a737-2f5d6d8dc631	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:warped-landscape:f0a1:s1,f:xs:XP:warped-landscape:f0a1:s1	-	-	-	d864b561c9cb	-	d2e0ea90931d	-	-	2026-11-24	xproof
 543e6bb3-a867-43bf-a737-2f5d6d8dc631	land	land	agreed	-	FX	start	2	0	x:xs:XP:warped-landscape:land:s1,f:xs:XP:warped-landscape:land:s1	-	-	-	d864b561c9cb	-	d2e0ea90931d	-	-	2026-11-24	xproof
@@ -81,8 +81,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5454dddf-c6e5-4b0d-b96d-4904c13606dc	cast	cast-resolve	agreed	-	X	scen	1	0	Starport Security/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5454dddf-c6e5-4b0d-b96d-4904c13606dc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Starport Security/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5456f00c-0bef-4c14-902f-f5c14475f284	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5456f00c-0bef-4c14-902f-f5c14475f284	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5456f00c-0bef-4c14-902f-f5c14475f284	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5456f00c-0bef-4c14-902f-f5c14475f284	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+5456f00c-0bef-4c14-902f-f5c14475f284	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5458689c-48e0-48b6-bda8-048fa4718734	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5458689c-48e0-48b6-bda8-048fa4718734	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 545c516f-85a4-4a59-8cfa-03da27121a57	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof

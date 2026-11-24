@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8711b732-8dab-41d4-a85b-b10edcd25e97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8711b732-8dab-41d4-a85b-b10edcd25e97	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 871549e6-24c0-4fbd-8b71-ba8639b0ee47	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-871e4c4e-8105-4cb9-b1cd-53c5f8e64494	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+871e4c4e-8105-4cb9-b1cd-53c5f8e64494	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:colossal-skyturtle:cast:s1,f:xs:XP:colossal-skyturtle:cast:s1	-	-	-	ae86f6029288	-	85386f525c02	-	-	2026-11-24	xproof
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:colossal-skyturtle:cast:s1,f:xs:XP:colossal-skyturtle:cast:s1	-	-	-	d864b561c9cb	-	85386f525c02	-	-	2026-11-24	xproof
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -178,8 +178,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87b8fef3-f40e-44a9-afd5-31d3917b1d59	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87bafa97-38fd-41a2-8b1d-315e88d9d0bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87bafa97-38fd-41a2-8b1d-315e88d9d0bf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87bc6be7-4734-4a11-806e-e9e4f5616fe0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87bc6be7-4734-4a11-806e-e9e4f5616fe0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+87bc6be7-4734-4a11-806e-e9e4f5616fe0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carrion-ants:cast:s1,f:xs:XP:carrion-ants:cast:s1	-	-	-	ae86f6029288	-	8003b5d3dc68	-	-	2026-11-24	xproof
+87bc6be7-4734-4a11-806e-e9e4f5616fe0	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:carrion-ants:f0a0:s1,f:xs:XP:carrion-ants:f0a0:s1	-	-	-	ae86f6029288	-	8003b5d3dc68	-	-	2026-11-24	xproof
 87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97140551-341a-40a1-93fe-0fcaa0c3be33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97140551-341a-40a1-93fe-0fcaa0c3be33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97159138-c34b-416e-b079-5c952383a243	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97159138-c34b-416e-b079-5c952383a243	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97159138-c34b-416e-b079-5c952383a243	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 971b30a8-4ab4-4e96-9d50-597da4d52994	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:danitha-new-benalia-s-light:cast:s1,f:xs:XP:danitha-new-benalia-s-light:cast:s1	-	-	-	ae86f6029288	-	2d9988612680	-	-	2026-11-24	xproof
 971f7b30-0088-4e12-bc1a-262acc7f5f90	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sage-s-nouliths:f0t0:s2,f:xs:XP:sage-s-nouliths:f0t0:s2	-	-	-	267e485f6204	-	83d7e70d4ba0	-	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97e7ada6-dee1-4bb3-a42d-38a61d946bd4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97f11aed-7a5c-4a14-8c2c-5c230c1f05b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97f548b1-6398-4dc7-b5eb-da5a3f24ddb7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97f548b1-6398-4dc7-b5eb-da5a3f24ddb7	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97f548b1-6398-4dc7-b5eb-da5a3f24ddb7	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:king-suleiman:f0a0:s1,f:xs:XP:king-suleiman:f0a0:s1	-	-	-	ae86f6029288	-	4a376c7d1503	-	-	2026-11-24	xproof
 97f929ce-3eb3-4040-972f-0b21d5f2f61f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:volcanic-rambler:cast:s1,f:xs:XP:volcanic-rambler:cast:s1	-	-	-	d864b561c9cb	-	aafa74b9809b	-	-	2026-11-24	xproof
 97f929ce-3eb3-4040-972f-0b21d5f2f61f	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:volcanic-rambler:f0a0:s1,f:xs:XP:volcanic-rambler:f0a0:s1	-	-	-	d864b561c9cb	-	aafa74b9809b	-	-	2026-11-24	xproof
 97f9aa5e-e34d-4029-9213-b32ebaf9859c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -96,9 +96,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 517f84b5-cf99-410d-96ea-910740231dac	cast	cast-resolve	agreed	-	FX	scen	2	0	Void Extrapolator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 517f84b5-cf99-410d-96ea-910740231dac	static#0.0	static#0.0	agreed	-	X	scen	1	0	Void Extrapolator/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 518115c9-0f0f-4249-81ff-e79b27dda1be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5182de2d-aceb-450e-bd20-8bc7db124334	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5182de2d-aceb-450e-bd20-8bc7db124334	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5182de2d-aceb-450e-bd20-8bc7db124334	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5182de2d-aceb-450e-bd20-8bc7db124334	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mary-read-and-anne-bonny:cast:s1,f:xs:XP:mary-read-and-anne-bonny:cast:s1	-	-	-	ae86f6029288	-	a9bb190ecfc6	-	-	2026-11-24	xproof
+5182de2d-aceb-450e-bd20-8bc7db124334	f0/a0	Draw	agreed	-	FX	start	4	0	x:xs:XP:mary-read-and-anne-bonny:cast:s1,f:xs:XP:mary-read-and-anne-bonny:cast:s1	-	-	-	ae86f6029288	-	a9bb190ecfc6	-	-	2026-11-24	xproof
+5182de2d-aceb-450e-bd20-8bc7db124334	f0/t0	Discarded	agreed	-	FX	start	2	0	x:xs:XP:mary-read-and-anne-bonny:cast:s2,f:xs:XP:mary-read-and-anne-bonny:cast:s2	-	-	-	ae86f6029288	-	a9bb190ecfc6	-	-	2026-11-24	xproof
 51833cff-6519-4806-8d91-0040e9a02189	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51833cff-6519-4806-8d91-0040e9a02189	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 518684d9-467a-4936-a3d9-17d23db4622c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -118,8 +118,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e958212-6a5b-4288-8d31-f1572619d7dc	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Liliana, Dreadhorde General/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5e958212-6a5b-4288-8d31-f1572619d7dc	f0/a2	activate#0.2	agreed	-	FX	scen	2	0	Liliana, Dreadhorde General/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5e958212-6a5b-4288-8d31-f1572619d7dc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Liliana, Dreadhorde General/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5e961d15-5972-4e4b-9385-1cd7cd7c6bbe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5e961d15-5972-4e4b-9385-1cd7cd7c6bbe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5e961d15-5972-4e4b-9385-1cd7cd7c6bbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prodigal-sorcerer:cast:s1,f:xs:XP:prodigal-sorcerer:cast:s1	-	-	-	ae86f6029288	-	12deee56453c	-	-	2026-11-24	xproof
+5e961d15-5972-4e4b-9385-1cd7cd7c6bbe	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:prodigal-sorcerer:f0a0:s1,f:xs:XP:prodigal-sorcerer:f0a0:s1	-	-	-	ae86f6029288	-	12deee56453c	-	-	2026-11-24	xproof
 5e968bf3-8d83-480b-81a4-98883cafd04f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e99497f-7c73-49ae-88b3-78d5d74ba9ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e99497f-7c73-49ae-88b3-78d5d74ba9ea	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

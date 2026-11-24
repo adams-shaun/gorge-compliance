@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e1e477a-192a-4e5c-a18b-7e25d9bd47f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e1e477a-192a-4e5c-a18b-7e25d9bd47f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e2017c3-057d-4e30-bd60-f486fddbc6ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e2017c3-057d-4e30-bd60-f486fddbc6ca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8e2017c3-057d-4e30-bd60-f486fddbc6ca	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8e22495d-a921-4c91-ada3-79098851e5d4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e22bf51-1b1b-459b-af78-91188b6e3f09	cast	cast-resolve	agreed	-	X	scen	1	0	Jolly Gerbils/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8e22bf51-1b1b-459b-af78-91188b6e3f09	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jolly Gerbils/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e5d72a1-6ae0-445d-bac7-62da3bd3a8d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e5d72a1-6ae0-445d-bac7-62da3bd3a8d6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8e5e6f1d-4945-4074-a33e-c0e8b6b24a47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e5e6f1d-4945-4074-a33e-c0e8b6b24a47	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:gryffwing-cavalry:f0t0:s1,f:xs:XP:gryffwing-cavalry:f0t0:s1	-	-	-	d864b561c9cb	-	43aacb71a792	-	-	2026-11-24	xproof
+8e5e6f1d-4945-4074-a33e-c0e8b6b24a47	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:gryffwing-cavalry:f0t1:s1,f:xs:XP:gryffwing-cavalry:f0t1:s1	-	-	-	ae86f6029288	-	43aacb71a792	-	-	2026-11-24	xproof
 8e5e6f1d-4945-4074-a33e-c0e8b6b24a47	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e5e8bca-b52a-4178-ab53-bdd0e0e11dc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e5ea773-a60b-4502-9db5-ce93fa61cc89	cast	cast-resolve	agreed	-	X	scen	1	0	Ghalta the Unstoppable/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

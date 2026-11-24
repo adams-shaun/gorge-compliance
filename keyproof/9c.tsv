@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c009b3f-6580-4ab8-84e8-d4cf7a456a02	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gravpack Monoist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c009b3f-6580-4ab8-84e8-d4cf7a456a02	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gravpack Monoist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c009b3f-6580-4ab8-84e8-d4cf7a456a02	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gravpack Monoist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9c021685-4017-49c7-9f58-2ae0243361a0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9c021685-4017-49c7-9f58-2ae0243361a0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hurricane:cast:s1,f:xs:XP:hurricane:cast:s1	-	-	-	ae86f6029288	-	0ba495e6ca13	-	-	2026-11-24	xproof
 9c0255ff-6579-4ce4-810d-01df9922ab33	cast	cast-resolve	agreed	-	X	scen	1	0	Sidequest: Play Blitzball/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c0255ff-6579-4ce4-810d-01df9922ab33	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sidequest: Play Blitzball/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c0255ff-6579-4ce4-810d-01df9922ab33	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sidequest: Play Blitzball/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9cb7f23f-322d-4a87-b6c6-15b9d446aef3	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Champions of the Perfect/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9cb7f23f-322d-4a87-b6c6-15b9d446aef3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Champions of the Perfect/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9cbc8765-1735-48ca-bbc2-411aa7da2ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9cbc8765-1735-48ca-bbc2-411aa7da2ed3	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9cbc8765-1735-48ca-bbc2-411aa7da2ed3	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:goldmaw-champion:f0a0:s1,f:xs:XP:goldmaw-champion:f0a0:s1	-	-	-	ae86f6029288	-	feebe0e3f925	-	-	2026-11-24	xproof
 9cbc9f83-8979-42a5-a466-a8d89c8e6de8	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Bristling Backwoods/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9cbc9f83-8979-42a5-a466-a8d89c8e6de8	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Bristling Backwoods/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9cbc9f83-8979-42a5-a466-a8d89c8e6de8	land	play-land	agreed	-	FX	scen	2	0	Bristling Backwoods/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

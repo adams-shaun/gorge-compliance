@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f1ada92-538b-40cb-9bf3-5c415f5325e6	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Spotcycle Scouter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f1ada92-538b-40cb-9bf3-5c415f5325e6	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f1afedd-c60f-454f-b84a-c8117aec0128	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f1afedd-c60f-454f-b84a-c8117aec0128	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f1afedd-c60f-454f-b84a-c8117aec0128	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 0f1b5cea-2035-444c-9f63-87dcb9782c74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f5a3a09-2f07-4774-9e0f-e99d9a444166	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aurelia, the Warleader/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f5ac364-447b-4c43-9aed-6098dc0bab82	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f5b0c77-1e3d-46a1-ae0e-03ed79196cd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f5b0c77-1e3d-46a1-ae0e-03ed79196cd9	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f5b0c77-1e3d-46a1-ae0e-03ed79196cd9	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:al-abara-s-carpet:f0a0:s1,f:xs:XP:al-abara-s-carpet:f0a0:s1	-	-	-	ae86f6029288	-	6140c92964f9	-	-	2026-11-24	xproof
 0f5b79ca-9f80-420b-a6c5-bb2a9a95c7e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f5da28f-b97c-45d5-87d4-b8ba8638ca8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f5da28f-b97c-45d5-87d4-b8ba8638ca8f	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

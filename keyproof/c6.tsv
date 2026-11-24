@@ -44,7 +44,7 @@ c63a9a3d-13df-4a94-a8e1-18071c351a8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sum
 c63b3511-d597-4c6e-9094-eabdeaa8a394	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 c63b3511-d597-4c6e-9094-eabdeaa8a394	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c640350b-16a5-4227-87fa-8b24fdb367c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c640350b-16a5-4227-87fa-8b24fdb367c7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c640350b-16a5-4227-87fa-8b24fdb367c7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c640654c-487e-4a2c-aced-126ed835b78f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unlicensed-hearse:cast:s1,f:xs:XP:unlicensed-hearse:cast:s1	-	-	-	ae86f6029288	-	d60e8ec97660	-	-	2026-11-24	xproof
 c640654c-487e-4a2c-aced-126ed835b78f	f0/a0	ChangeZone	agreed	-	FX	start	4	0	x:xs:XP:unlicensed-hearse:cast:s1,f:xs:XP:unlicensed-hearse:cast:s1	-	-	-	ae86f6029288	-	d60e8ec97660	-	-	2026-11-24	xproof
 c640654c-487e-4a2c-aced-126ed835b78f	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -111,9 +111,9 @@ c68faebc-b2cd-461b-b93e-e1fcd4816810	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07
 c68faebc-b2cd-461b-b93e-e1fcd4816810	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c68faebc-b2cd-461b-b93e-e1fcd4816810	f0/t1	NULL	owed	refused:no-generator:trigger:CounterAdded	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c6901a89-ac7d-4797-a027-97bb1cf42e60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c6906032-e08b-478f-bc71-cb1184f60bad	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c6906032-e08b-478f-bc71-cb1184f60bad	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:orchard-strider:cast:s1,f:xs:XP:orchard-strider:cast:s1	-	-	-	ae86f6029288	-	eb7d54ffd539	-	-	2026-11-24	xproof
 c6906032-e08b-478f-bc71-cb1184f60bad	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	4	0	x:xs:XP:orchard-strider:cast:s1,f:xs:XP:orchard-strider:cast:s1	-	-	-	d864b561c9cb	-	eb7d54ffd539	-	-	2026-11-24	xproof
-c6906032-e08b-478f-bc71-cb1184f60bad	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c6906032-e08b-478f-bc71-cb1184f60bad	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:orchard-strider:cast:s1,f:xs:XP:orchard-strider:cast:s1	-	-	-	ae86f6029288	-	eb7d54ffd539	-	-	2026-11-24	xproof
 c690f92f-f34f-4df0-9e01-d2ecf3b8f857	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6911265-54ef-4c16-bcf2-1ffb24b7d426	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:kessig-wolf-run:f0a1:s1,f:xs:XP:kessig-wolf-run:f0a1:s1	-	-	-	d864b561c9cb	-	24ce049c7882	-	-	2026-11-24	xproof
 c6911265-54ef-4c16-bcf2-1ffb24b7d426	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ c6adfaa7-d9cf-4501-8e7d-e035369390d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c6b26c1f-121f-4b7c-921e-429b623ca934	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6b3f924-806d-47d3-b044-72b48470196c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6b3f924-806d-47d3-b044-72b48470196c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c6b3f924-806d-47d3-b044-72b48470196c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c6b3f924-806d-47d3-b044-72b48470196c	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c6b915b3-b504-42fb-8059-62a3e8e224e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frenzied-tilling:cast:s1,f:xs:XP:frenzied-tilling:cast:s1	-	-	-	25696bf19d5b	-	d15e7967ec18	-	-	2026-11-24	xproof
 c6b94e03-61c0-4077-b3da-a70795e97278	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:teferi-s-tutelage:cast:s1,f:xs:XP:teferi-s-tutelage:cast:s1	-	-	-	ae86f6029288	-	937d6ad7e5dd	-	-	2026-11-24	xproof
 c6b94e03-61c0-4077-b3da-a70795e97278	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:teferi-s-tutelage:cast:s1,f:xs:XP:teferi-s-tutelage:cast:s1	-	-	-	ae86f6029288	-	937d6ad7e5dd	-	-	2026-11-24	xproof

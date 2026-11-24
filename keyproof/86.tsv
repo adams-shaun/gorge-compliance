@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 86002526-ed3d-47e5-9f2a-55c4fa220ce8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86002526-ed3d-47e5-9f2a-55c4fa220ce8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8603bf74-faab-4910-8e45-0f2e3b318efb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8603bf74-faab-4910-8e45-0f2e3b318efb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8603bf74-faab-4910-8e45-0f2e3b318efb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firebreathing:cast:s1,f:xs:XP:firebreathing:cast:s1	-	-	-	ae86f6029288	-	794d1b3b2aa2	-	-	2026-11-24	xproof
+8603bf74-faab-4910-8e45-0f2e3b318efb	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8603e2d4-93f3-491a-91e7-a187fc6db599	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodrage-brawler:f0t0:s1,f:xs:XP:bloodrage-brawler:f0t0:s1	-	-	-	d864b561c9cb	-	5f34c0b76e3b	-	-	2026-11-24	xproof
 8603e2d4-93f3-491a-91e7-a187fc6db599	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bloodrage-brawler:f0t0:s1,f:xs:XP:bloodrage-brawler:f0t0:s1	-	-	-	d864b561c9cb	-	5f34c0b76e3b	-	-	2026-11-24	xproof
 86084ed9-b8bb-4289-9579-6056194787bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pia-and-kiran-nalaar:f0t0:s1,f:xs:XP:pia-and-kiran-nalaar:f0t0:s1	-	-	-	d864b561c9cb	-	aac218b1a570	-	-	2026-11-24	xproof
@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 864c7575-4589-416c-b143-310d5ef238c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 864c81e4-d612-4939-b4df-4b125cb8cdf2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 864d9db7-34ca-4440-8d6d-096f9eddedd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:surge-engine:cast:s1,f:xs:XP:surge-engine:cast:s1	-	-	-	d864b561c9cb	-	297c1233c2c4	-	-	2026-11-24	xproof
-864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a0	Animate	agreed	-	FX	start	6	0	x:xs:XP:surge-engine:f0a0:s1,f:xs:XP:surge-engine:f0a0:s1	-	-	-	d864b561c9cb	-	297c1233c2c4	-	-	2026-11-24	xproof
+864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a0	Animate	agreed	-	FX	start	4	0	x:xs:XP:surge-engine:f0a1:s1,f:xs:XP:surge-engine:f0a1:s1	-	-	-	ae86f6029288	-	297c1233c2c4	-	-	2026-11-24	xproof
 864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 864fc52a-e9f4-4254-901e-b949d96b34eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

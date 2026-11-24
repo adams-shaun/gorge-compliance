@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 683d8deb-2ab4-4c65-9a23-f4e733f06ba2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683e7135-de54-49c8-a978-4f84628a6a91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683e7135-de54-49c8-a978-4f84628a6a91	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-683e7135-de54-49c8-a978-4f84628a6a91	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+683e7135-de54-49c8-a978-4f84628a6a91	f0/t1	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 683ec6d2-4ea7-46a7-911e-12c83e4c4a06	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6840a63d-d627-4a18-afa9-018406767642	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68413337-ddb9-46f8-8c8e-f3d2d672c652	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -151,8 +151,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68bde9ff-3206-4a9c-9233-4b2387dcd306	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68bde9ff-3206-4a9c-9233-4b2387dcd306	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:talas-lookout:f0t0:s1	-	-	-	ae86f6029288	-	afea57501ee0	-	-	2026-11-24	xproof
 68c0c04e-b0d5-4721-83bf-bf18e8b7e680	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68c0c04e-b0d5-4721-83bf-bf18e8b7e680	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68c0c04e-b0d5-4721-83bf-bf18e8b7e680	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68c0c04e-b0d5-4721-83bf-bf18e8b7e680	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+68c0c04e-b0d5-4721-83bf-bf18e8b7e680	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 68c3aa66-85f2-494c-8fb2-ad0348814506	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68c3aa66-85f2-494c-8fb2-ad0348814506	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:nim-replica:f0a0:s1,f:xs:XP:nim-replica:f0a0:s1	-	-	-	d864b561c9cb	-	1d165c5edb52	-	-	2026-11-24	xproof
 68c56db4-c97a-4c1b-a6f6-096392488e21	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:chupacabra-echo:f0t0:s2,f:xs:XP:chupacabra-echo:f0t0:s2	-	-	-	e07cf3a05ba5	-	792de4b7db29	-	-	2026-11-24	xproof

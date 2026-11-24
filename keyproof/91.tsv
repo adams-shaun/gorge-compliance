@@ -26,8 +26,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91179937-6f55-4d1b-8f06-2efe1c8fea7a	cast	cast-resolve	agreed	-	X	scen	1	0	Channeled Dragonfire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 911b8849-dd0a-4383-8403-ea80227c5d7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 911b8849-dd0a-4383-8403-ea80227c5d7d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-912164c2-b4d4-42e3-a10e-903b8c7b2e6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golden-tail-trainer:f0t0:s1,f:xs:XP:golden-tail-trainer:f0t0:s1	-	-	-	ae86f6029288	-	a3d69183e88f	-	-	2026-11-24	xproof
-912164c2-b4d4-42e3-a10e-903b8c7b2e6d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+912164c2-b4d4-42e3-a10e-903b8c7b2e6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:holy-armor:cast:s1,f:xs:XP:holy-armor:cast:s1	-	-	-	ae86f6029288	-	a3d69183e88f	-	-	2026-11-24	xproof
+912164c2-b4d4-42e3-a10e-903b8c7b2e6d	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 9123086e-ae67-46c5-aed5-6366e2fe5a8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9123086e-ae67-46c5-aed5-6366e2fe5a8c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9128b952-bd36-4a3a-9566-34d999305991	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jade-guardian:f0t0:s1,f:xs:XP:jade-guardian:f0t0:s1	-	-	-	d864b561c9cb	-	6e39b5469626	-	-	2026-11-24	xproof
@@ -47,8 +47,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 913672bc-cc88-4964-a331-7dbce40f2bda	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Barret Wallace/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 913672bc-cc88-4964-a331-7dbce40f2bda	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Barret Wallace/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 913672bc-cc88-4964-a331-7dbce40f2bda	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Barret Wallace/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-913aed6d-60c3-4d08-baf8-359e2c41a797	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-913aed6d-60c3-4d08-baf8-359e2c41a797	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+913aed6d-60c3-4d08-baf8-359e2c41a797	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boris-devilboon:cast:s1,f:xs:XP:boris-devilboon:cast:s1	-	-	-	ae86f6029288	-	8c51d4bc5403	-	-	2026-11-24	xproof
+913aed6d-60c3-4d08-baf8-359e2c41a797	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:boris-devilboon:f0a0:s1,f:xs:XP:boris-devilboon:f0a0:s1	-	-	-	ae86f6029288	-	8c51d4bc5403	-	-	2026-11-24	xproof
 913bca28-faf9-42e6-a8c0-469cd9bc0208	cast	cast-resolve	agreed	-	X	scen	1	0	Earthen Ally/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 913bca28-faf9-42e6-a8c0-469cd9bc0208	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Earthen Ally/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 913bca28-faf9-42e6-a8c0-469cd9bc0208	static#0.0	static#0.0	agreed	-	X	scen	1	0	Earthen Ally/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

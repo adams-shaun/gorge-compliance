@@ -85,8 +85,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1251691e-3c4c-4e45-9f59-f156852f2268	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1253de62-6218-401c-9d98-a5ec8617e0d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1253de62-6218-401c-9d98-a5ec8617e0d8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-12584f75-77c1-4b6b-ae9d-1882792b6b94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12584f75-77c1-4b6b-ae9d-1882792b6b94	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12584f75-77c1-4b6b-ae9d-1882792b6b94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arena-of-the-ancients:f0t0:s1,f:xs:XP:arena-of-the-ancients:f0t0:s1	-	-	-	ae86f6029288	-	717afdfe48aa	-	-	2026-11-24	xproof
+12584f75-77c1-4b6b-ae9d-1882792b6b94	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arena-of-the-ancients:f0t0:s1,f:xs:XP:arena-of-the-ancients:f0t0:s1	-	-	-	ae86f6029288	-	717afdfe48aa	-	-	2026-11-24	xproof
 126038e3-3e7b-4547-83e7-a7f6ec66f782	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loxodon-sergeant:f0t0:s1,f:xs:XP:loxodon-sergeant:f0t0:s1	-	-	-	d864b561c9cb	-	327b5a438f5b	-	-	2026-11-24	xproof
 126038e3-3e7b-4547-83e7-a7f6ec66f782	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loxodon-sergeant:f0t0:s1,f:xs:XP:loxodon-sergeant:f0t0:s1	-	-	-	d864b561c9cb	-	327b5a438f5b	-	-	2026-11-24	xproof
 1264da2f-4767-4bec-b4ed-1c625ac3cf95	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dromoka-s-gift:cast:s1,f:xs:XP:dromoka-s-gift:cast:s1	-	-	-	d864b561c9cb	-	9357180527c8	-	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 126a5d0b-e7d6-458e-87af-47d845678014	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 126a5d0b-e7d6-458e-87af-47d845678014	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 126aab4d-df6e-4840-8cdc-49e890b1557f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-126aab4d-df6e-4840-8cdc-49e890b1557f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+126aab4d-df6e-4840-8cdc-49e890b1557f	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 126bf98a-64d0-4de2-9bf4-f59d36ef6e25	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valakut-fireboar:cast:s1,f:xs:XP:valakut-fireboar:cast:s1	-	-	-	d864b561c9cb	-	0d9f9e208a6e	-	-	2026-11-24	xproof
 126bf98a-64d0-4de2-9bf4-f59d36ef6e25	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:valakut-fireboar:f0t0:s1,f:xs:XP:valakut-fireboar:f0t0:s1	-	-	-	d864b561c9cb	-	0d9f9e208a6e	-	-	2026-11-24	xproof
 126c75c0-414b-4e55-8747-2b5566ce716f	cast	cast-resolve	agreed	-	X	scen	1	0	Firdoch Core/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -198,7 +198,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12c7289f-da53-403a-a607-227f43c7e171	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:trusty-packbeast:f0t0:s1,f:xs:XP:trusty-packbeast:f0t0:s1	-	-	-	d864b561c9cb	-	bbf4518e2d9c	-	-	2026-11-24	xproof
 12c98c1e-7e02-473d-b494-ad8a0731fe82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lagomos-hand-of-hatred:cast:s1,f:xs:XP:lagomos-hand-of-hatred:cast:s1	-	-	-	d864b561c9cb	-	0c40495b75c7	-	-	2026-11-24	xproof
 12c98c1e-7e02-473d-b494-ad8a0731fe82	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12c98c1e-7e02-473d-b494-ad8a0731fe82	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:lagomos-hand-of-hatred:cast:s1,f:xs:XP:lagomos-hand-of-hatred:cast:s1	-	-	-	d864b561c9cb	-	0c40495b75c7	-	-	2026-11-24	xproof
+12c98c1e-7e02-473d-b494-ad8a0731fe82	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lagomos-hand-of-hatred:f0a0:s1,f:xs:XP:lagomos-hand-of-hatred:f0a0:s1	-	-	-	ae86f6029288	-	0c40495b75c7	-	-	2026-11-24	xproof
 12cc800c-c7be-4811-8207-fd01a99cc892	cast	cast-resolve	agreed	-	X	scen	1	0	Chandra, Torch of Defiance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12cc800c-c7be-4811-8207-fd01a99cc892	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Chandra, Torch of Defiance/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12cc800c-c7be-4811-8207-fd01a99cc892	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Chandra, Torch of Defiance/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -223,7 +223,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12da8ba3-ca60-44c8-8627-1b4af2a2c4a3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12db6263-75c2-442f-a1a5-7af7915f8f9f	cast	cast-resolve	agreed	-	X	scen	1	0	Umbral Collar Zealot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12db6263-75c2-442f-a1a5-7af7915f8f9f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Umbral Collar Zealot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12e0321b-1cd7-4519-8929-3261cf11a1a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cleanup-crew:f0t0:s1,f:xs:XP:cleanup-crew:f0t0:s1	-	-	-	d864b561c9cb	-	d24cf4644c26	-	-	2026-11-24	xproof
+12e0321b-1cd7-4519-8929-3261cf11a1a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cleanup-crew:f0t0:s1,f:xs:XP:cleanup-crew:f0t0:s1	-	-	-	ae86f6029288	-	d24cf4644c26	-	-	2026-11-24	xproof
 12e0321b-1cd7-4519-8929-3261cf11a1a9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12e091d0-3fd0-4058-84a9-529023b74c74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jorubai-murk-lurker:cast:s1,f:xs:XP:jorubai-murk-lurker:cast:s1	-	-	-	d864b561c9cb	-	707d453a628d	-	-	2026-11-24	xproof
 12e091d0-3fd0-4058-84a9-529023b74c74	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:jorubai-murk-lurker:f0a0:s1,f:xs:XP:jorubai-murk-lurker:f0a0:s1	-	-	-	d864b561c9cb	-	707d453a628d	-	-	2026-11-24	xproof

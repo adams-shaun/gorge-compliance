@@ -93,8 +93,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b5add91-2e82-4430-bfc5-f4a6366dbbdb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b5add91-2e82-4430-bfc5-f4a6366dbbdb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b5cffd5-5db3-4151-9275-d91387554412	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b60fcfe-fb90-4a00-a708-25b59bfc9b5a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b60fcfe-fb90-4a00-a708-25b59bfc9b5a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8b60fcfe-fb90-4a00-a708-25b59bfc9b5a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:will-o-the-wisp:cast:s1,f:xs:XP:will-o-the-wisp:cast:s1	-	-	-	ae86f6029288	-	00ac92194ba9	-	-	2026-11-24	xproof
+8b60fcfe-fb90-4a00-a708-25b59bfc9b5a	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:will-o-the-wisp:f0a0:s1,f:xs:XP:will-o-the-wisp:f0a0:s1	-	-	-	ae86f6029288	-	00ac92194ba9	-	-	2026-11-24	xproof
 8b641cd3-bb08-4f2e-9dad-24f58a9c32e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b69da01-3ba5-4a61-9e26-e879b6d8b63e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b6d37a7-a88e-45dd-b45e-642a44caaf05	cast	cast-resolve	agreed	-	X	scen	1	0	Resurrected Cultist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -170,13 +170,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8bc17c50-f4c9-46dd-9294-3036ed46de91	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bc17c50-f4c9-46dd-9294-3036ed46de91	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8bc17c50-f4c9-46dd-9294-3036ed46de91	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-8bc30bd5-554e-4fcf-9dec-c7634921858a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8bc30bd5-554e-4fcf-9dec-c7634921858a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8bc30bd5-554e-4fcf-9dec-c7634921858a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8bc30bd5-554e-4fcf-9dec-c7634921858a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:smelted-chargebug:f0t0:s1,f:xs:XP:smelted-chargebug:f0t0:s1	-	-	-	ae86f6029288	-	5dc4306dd496	-	-	2026-11-24	xproof
+8bc30bd5-554e-4fcf-9dec-c7634921858a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:smelted-chargebug:f0t0:s1,f:xs:XP:smelted-chargebug:f0t0:s1	-	-	-	ae86f6029288	-	5dc4306dd496	-	-	2026-11-24	xproof
+8bc30bd5-554e-4fcf-9dec-c7634921858a	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:smelted-chargebug:f0t1:s1,f:xs:XP:smelted-chargebug:f0t1:s1	-	-	-	ae86f6029288	-	5dc4306dd496	-	-	2026-11-24	xproof
 8bc7c769-33e0-4482-95fc-b344b772e174	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bca3213-d8e1-4915-bd9a-9a291cdec1cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bca3213-d8e1-4915-bd9a-9a291cdec1cd	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-8bca5627-27c2-4d10-85c5-2451daa94c5d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodland-sleuth:f0t0:s1,f:xs:XP:woodland-sleuth:f0t0:s1	-	-	-	d864b561c9cb	-	9fbdcb89c2ad	-	-	2026-11-24	xproof
+8bca5627-27c2-4d10-85c5-2451daa94c5d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodland-sleuth:f0t0:s1,f:xs:XP:woodland-sleuth:f0t0:s1	-	-	-	ae86f6029288	-	9fbdcb89c2ad	-	-	2026-11-24	xproof
 8bca5627-27c2-4d10-85c5-2451daa94c5d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bcb0f45-902d-41d6-a10c-60bc27befd30	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:putrid-cyclops:f0t0:s1,f:xs:XP:putrid-cyclops:f0t0:s1	-	-	-	d864b561c9cb	-	672b8e30c59c	-	-	2026-11-24	xproof
 8bcb0f45-902d-41d6-a10c-60bc27befd30	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:putrid-cyclops:f0t0:s1,f:xs:XP:putrid-cyclops:f0t0:s1	-	-	-	d864b561c9cb	-	672b8e30c59c	-	-	2026-11-24	xproof

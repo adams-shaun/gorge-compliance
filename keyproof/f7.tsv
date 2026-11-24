@@ -55,7 +55,7 @@ f73979bb-91a5-4388-b70b-0cd7a4e14291	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 f73979bb-91a5-4388-b70b-0cd7a4e14291	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f73979bb-91a5-4388-b70b-0cd7a4e14291	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f73c7edf-ed2c-41e8-ac83-c83ddd543f14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f73c7edf-ed2c-41e8-ac83-c83ddd543f14	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f73c7edf-ed2c-41e8-ac83-c83ddd543f14	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 f73d89ec-05c9-4998-a24b-bc675b04ec16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f73d89ec-05c9-4998-a24b-bc675b04ec16	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f74095aa-232f-432e-a899-86e9463ab5be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,8 +110,8 @@ f75be4f2-d1a7-40c7-a0e4-ba8b03556ac6	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 f75ed312-3a23-4624-80c5-03980aa22d0b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:llanowar-visionary:cast:s1,f:xs:XP:llanowar-visionary:cast:s1	-	-	-	ae86f6029288	-	aad2a1a84968	-	-	2026-11-24	xproof
 f75ed312-3a23-4624-80c5-03980aa22d0b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:llanowar-visionary:f0a0:s1,f:xs:XP:llanowar-visionary:f0a0:s1	-	-	-	ae86f6029288	-	aad2a1a84968	-	-	2026-11-24	xproof
 f75ed312-3a23-4624-80c5-03980aa22d0b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:llanowar-visionary:cast:s1,f:xs:XP:llanowar-visionary:cast:s1	-	-	-	ae86f6029288	-	aad2a1a84968	-	-	2026-11-24	xproof
-f75f9006-217d-4ec8-9c35-ceefe1c5ae4e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f75f9006-217d-4ec8-9c35-ceefe1c5ae4e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f75f9006-217d-4ec8-9c35-ceefe1c5ae4e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frozen-shade:cast:s1,f:xs:XP:frozen-shade:cast:s1	-	-	-	ae86f6029288	-	78fe2c12b710	-	-	2026-11-24	xproof
+f75f9006-217d-4ec8-9c35-ceefe1c5ae4e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:frozen-shade:f0a0:s1,f:xs:XP:frozen-shade:f0a0:s1	-	-	-	ae86f6029288	-	78fe2c12b710	-	-	2026-11-24	xproof
 f7620c46-b3d8-4694-ac7c-a43933c86c22	cast	cast-resolve	agreed	-	X	scen	1	0	Devoted Duelist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f7620c46-b3d8-4694-ac7c-a43933c86c22	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Devoted Duelist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f762c225-1c8c-4f12-aa88-c8c89e0a7185	cast	cast-resolve	agreed	-	FX	scen	2	0	Gingerbread Hunter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

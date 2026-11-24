@@ -58,8 +58,8 @@ af32ce11-c026-4135-b1e3-10c6aa15c72c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 af335eb3-f60a-44b3-a1ed-1e165f3e3605	cast	cast-resolve	agreed	-	X	scen	1	0	Chalk Outline/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af335eb3-f60a-44b3-a1ed-1e165f3e3605	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Chalk Outline/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af354337-424c-4c7e-8ca5-6149261368d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af354337-424c-4c7e-8ca5-6149261368d2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af354337-424c-4c7e-8ca5-6149261368d2	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af354337-424c-4c7e-8ca5-6149261368d2	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+af354337-424c-4c7e-8ca5-6149261368d2	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 af384946-e22a-45cd-ba07-1a5fbd4a3f0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:feast-of-sanity:cast:s1,f:xs:XP:feast-of-sanity:cast:s1	-	-	-	d864b561c9cb	-	bb13e9e1d697	-	-	2026-11-24	xproof
 af384946-e22a-45cd-ba07-1a5fbd4a3f0c	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 af38d683-77a3-4599-ad2a-1c293ae01d45	cast	cast-resolve	agreed	-	X	scen	1	0	Scuzzback Scrounger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -109,8 +109,8 @@ af7db15c-93af-4c7e-a028-42181d91a923	cast	cast-resolve	agreed	-	X	scen	1	0	Runes
 af7db15c-93af-4c7e-a028-42181d91a923	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Runescale Stormbrood/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af7db15c-93af-4c7e-a028-42181d91a923	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Runescale Stormbrood/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af7db15c-93af-4c7e-a028-42181d91a923	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Runescale Stormbrood/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-af7fabf4-8d55-4b06-9c21-472f4a5775b4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af7fabf4-8d55-4b06-9c21-472f4a5775b4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af7fabf4-8d55-4b06-9c21-472f4a5775b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glasses-of-urza:cast:s1,f:xs:XP:glasses-of-urza:cast:s1	-	-	-	ae86f6029288	-	c6d7e7104172	-	-	2026-11-24	xproof
+af7fabf4-8d55-4b06-9c21-472f4a5775b4	f0/a0	RevealHand	agreed	-	FX	start	4	0	x:xs:XP:glasses-of-urza:cast:s1,f:xs:XP:glasses-of-urza:cast:s1	-	-	-	ae86f6029288	-	c6d7e7104172	-	-	2026-11-24	xproof
 af8aa11b-34be-42a3-a8a2-3cad38f29f66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af8eb20a-dfa2-49a4-892b-26d7e276fcd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af8eb20a-dfa2-49a4-892b-26d7e276fcd2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ afc59d95-d85c-4ab8-b6c5-c78b608b53b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 afc59d95-d85c-4ab8-b6c5-c78b608b53b7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 afc8df6d-7291-400e-b768-0c0c3e3fdc32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afc8df6d-7291-400e-b768-0c0c3e3fdc32	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afc8df6d-7291-400e-b768-0c0c3e3fdc32	f0/a1	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:crook-of-condemnation:f0a0:s1,f:xs:XP:crook-of-condemnation:f0a0:s1	-	-	-	d864b561c9cb	-	cfdb38768892	-	-	2026-11-24	xproof
+afc8df6d-7291-400e-b768-0c0c3e3fdc32	f0/a1	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:crook-of-condemnation:f0a0:s1,f:xs:XP:crook-of-condemnation:f0a0:s1	-	-	-	ae86f6029288	-	cfdb38768892	-	-	2026-11-24	xproof
 afc9436b-8cad-4916-929d-ff33a37b42d5	cast	cast-resolve	agreed	-	FX	scen	2	0	Dawnsire, Sunstar Dreadnought/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 afc9436b-8cad-4916-929d-ff33a37b42d5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dawnsire, Sunstar Dreadnought/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 afc9436b-8cad-4916-929d-ff33a37b42d5	static#0.1	static#0.1	agreed	-	X	scen	1	0	Dawnsire, Sunstar Dreadnought/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

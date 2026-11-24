@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63701aa6-d3b8-4af2-96a4-2dec27d6a661	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:frilled-mystic:cast:s1,f:xs:XP:frilled-mystic:cast:s1	-	-	-	d864b561c9cb	-	c4a3dacdb39a	-	-	2026-11-24	xproof
 6373c66d-edfc-44cb-af2a-2273e0ba53e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6373c66d-edfc-44cb-af2a-2273e0ba53e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63765157-e2ba-4cec-9501-8a405259de5b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63765157-e2ba-4cec-9501-8a405259de5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unfathomable-truths:cast:s1,f:xs:XP:unfathomable-truths:cast:s1	-	-	-	ae86f6029288	-	90aa68039ddc	-	-	2026-11-24	xproof
 63788566-e25a-44bb-bb55-197e1b93b3e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trading-post:cast:s1,f:xs:XP:trading-post:cast:s1	-	-	-	d864b561c9cb	-	2802dd185944	-	-	2026-11-24	xproof
 63788566-e25a-44bb-bb55-197e1b93b3e8	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 63788566-e25a-44bb-bb55-197e1b93b3e8	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:trading-post:f0a1:s1,f:xs:XP:trading-post:f0a1:s1	-	-	-	d864b561c9cb	-	2802dd185944	-	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63c1dfcc-9d47-4dee-b4e6-1f50e716cf9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63c1dfcc-9d47-4dee-b4e6-1f50e716cf9e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63c1eda1-3e6f-4e9c-adf3-a43164df98bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63c1eda1-3e6f-4e9c-adf3-a43164df98bb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+63c1eda1-3e6f-4e9c-adf3-a43164df98bb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 63c52071-e3a7-4236-9dcb-e5ea68240dc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63c5f42b-13d0-4391-b033-4ab2f4e3152b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63c5f42b-13d0-4391-b033-4ab2f4e3152b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

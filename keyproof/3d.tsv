@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d0c1301-4fa7-4245-a13f-f613188eb638	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3d0d4ba4-d5aa-4d9f-89ab-46687637fecf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d0d4ba4-d5aa-4d9f-89ab-46687637fecf	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-3d0eb524-15e7-46f2-8f53-db08a07944d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silkweaver-elite:f0t0:s1,f:xs:XP:silkweaver-elite:f0t0:s1	-	-	-	d864b561c9cb	-	5ce114a536db	-	-	2026-11-24	xproof
+3d0eb524-15e7-46f2-8f53-db08a07944d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silkweaver-elite:f0t0:s1,f:xs:XP:silkweaver-elite:f0t0:s1	-	-	-	ae86f6029288	-	5ce114a536db	-	-	2026-11-24	xproof
 3d0eb524-15e7-46f2-8f53-db08a07944d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d145811-adb2-46a4-b173-bf8152e5de48	cast	cast-resolve	agreed	-	FX	scen	2	0	Unauthorized Exit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d169bb1-e91b-46d8-9280-797192926314	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,9 +125,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3da5977a-36d4-4f32-ab9b-8b93809d818d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:time-sieve:cast:s1,f:xs:XP:time-sieve:cast:s1	-	-	-	8a1b1a193ec0	-	96a5b198ae51	-	-	2026-11-24	xproof
 3da5977a-36d4-4f32-ab9b-8b93809d818d	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 3da5fbe2-e47b-4a1d-9e73-393f37314fa3	cast	cast-resolve	agreed	-	X	scen	1	0	Beastie Beatdown/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3da6d24b-ecbd-4a41-a37e-84a19b243414	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3da6d24b-ecbd-4a41-a37e-84a19b243414	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3da6d24b-ecbd-4a41-a37e-84a19b243414	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3da6d24b-ecbd-4a41-a37e-84a19b243414	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:titans-vanguard:cast:s1,f:xs:XP:titans-vanguard:cast:s1	-	-	-	ae86f6029288	-	f69028f19c2e	-	-	2026-11-24	xproof
+3da6d24b-ecbd-4a41-a37e-84a19b243414	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:titans-vanguard:cast:s1,f:xs:XP:titans-vanguard:cast:s1	-	-	-	ae86f6029288	-	f69028f19c2e	-	-	2026-11-24	xproof
+3da6d24b-ecbd-4a41-a37e-84a19b243414	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:titans-vanguard:f0t1:s1,f:xs:XP:titans-vanguard:f0t1:s1	-	-	-	ae86f6029288	-	f69028f19c2e	-	-	2026-11-24	xproof
 3da87e58-6a4b-48c3-873c-bc654277d4df	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3da87e58-6a4b-48c3-873c-bc654277d4df	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3da90ae6-a8cc-4633-bf49-7413ce91b697	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rust-monster:cast:s1,f:xs:XP:rust-monster:cast:s1	-	-	-	d864b561c9cb	-	34c84d98e5e9	-	-	2026-11-24	xproof

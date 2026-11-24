@@ -11,9 +11,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 570cb560-c246-4652-b230-ab34f966c78a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Balthier and Fran/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 570cb560-c246-4652-b230-ab34f966c78a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Balthier and Fran/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 570cb560-c246-4652-b230-ab34f966c78a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Balthier and Fran/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-57120486-0316-4591-abca-438ab8283d3f	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57120486-0316-4591-abca-438ab8283d3f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cragsmasher-yeti:cast:s1,f:xs:XP:cragsmasher-yeti:cast:s1	-	-	-	ae86f6029288	-	87fb92a7eab9	-	-	2026-11-24	xproof
 57120486-0316-4591-abca-438ab8283d3f	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	4	0	x:xs:XP:cragsmasher-yeti:cast:s1,f:xs:XP:cragsmasher-yeti:cast:s1	-	-	-	d864b561c9cb	-	87fb92a7eab9	-	-	2026-11-24	xproof
-57120486-0316-4591-abca-438ab8283d3f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57120486-0316-4591-abca-438ab8283d3f	f0/t0	ChangesZone/Backup	agreed	-	FX	start	4	0	x:xs:XP:cragsmasher-yeti:cast:s1,f:xs:XP:cragsmasher-yeti:cast:s1	-	-	-	ae86f6029288	-	87fb92a7eab9	-	-	2026-11-24	xproof
 5715ed43-395c-4877-99a7-8e28e7bf9dce	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Eclipsed Realms/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5715ed43-395c-4877-99a7-8e28e7bf9dce	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Eclipsed Realms/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5715ed43-395c-4877-99a7-8e28e7bf9dce	land	play-land	agreed	-	X	scen	1	0	Eclipsed Realms/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57f6a8c2-9d84-4640-9b92-8b8611e05773	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57f6a8c2-9d84-4640-9b92-8b8611e05773	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57f6a8c2-9d84-4640-9b92-8b8611e05773	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57f90b30-bcb0-447e-8788-5c5ded187207	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57f90b30-bcb0-447e-8788-5c5ded187207	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:natural-selection:cast:s1,f:xs:XP:natural-selection:cast:s1	-	-	-	ae86f6029288	-	e7e87d40402f	-	-	2026-11-24	xproof
 57f94fcb-a224-410b-a38e-3ed8cca7d0c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57f94fcb-a224-410b-a38e-3ed8cca7d0c7	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 57fd34d3-3e30-4467-bace-3f4dc2a85c80	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
