@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97428d25-d850-4a98-8852-9440e06a9091	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 97435e03-2fff-4fe0-8fa9-69ab0a046a33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9745fc92-4955-48e3-a6c8-1300891cf078	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-97489ef7-98c3-4700-bbe6-185215d41b25	cast	cast-resolve	agreed	-	X	scen	1	0	Aloe Alchemist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+97489ef7-98c3-4700-bbe6-185215d41b25	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aloe-alchemist:cast:s1,f:xs:XP:aloe-alchemist:cast:s1	-	-	-	8c0bd19283bb	-	0d4707694c19	-	-	2026-11-24	xproof
 97489ef7-98c3-4700-bbe6-185215d41b25	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aloe Alchemist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97489ef7-98c3-4700-bbe6-185215d41b25	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aloe Alchemist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97489ef7-98c3-4700-bbe6-185215d41b25	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aloe Alchemist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97560adc-814e-450c-9ca7-f9364e910a0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97560adc-814e-450c-9ca7-f9364e910a0b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97589fbb-3bd9-49c9-b8d8-bdc895a7f1e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:monstrous-hound:cast:s1,f:xs:XP:monstrous-hound:cast:s1	-	-	-	5f2128bf97e4	-	3f1814fccd2d	-	-	2026-11-24	xproof
-975b4e0f-1133-4ffa-a6b1-d319d248dcde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:parasitic-strix:f0t0:s1,f:xs:XP:parasitic-strix:f0t0:s1	-	-	-	23b491658465	-	dc6ea7e89ed5	-	-	2026-11-24	xproof
+975b4e0f-1133-4ffa-a6b1-d319d248dcde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:parasitic-strix:f0t0:s1,f:xs:XP:parasitic-strix:f0t0:s1	-	-	-	8c0bd19283bb	-	dc6ea7e89ed5	-	-	2026-11-24	xproof
 975b4e0f-1133-4ffa-a6b1-d319d248dcde	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 975ec9a3-6f20-4177-8211-82526e092538	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Overgrown Tomb/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 975ec9a3-6f20-4177-8211-82526e092538	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Overgrown Tomb/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
