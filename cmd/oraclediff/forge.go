@@ -2,7 +2,8 @@ package main
 
 // The Forge oracle's gorge side.
 //
-//	oraclediff forge-export [-cards .cards] -scenarios scen.jsonl -out forge-req.jsonl
+//	oraclediff forge-export [-cards .cards] [-runner PATH] -scenarios scen.jsonl
+//	                       -out forge-req.jsonl (refusals to <dir>/forge-prep.jsonl)
 //	oraclediff forge-diff   [-cards .cards] -req forge-req.jsonl [-forge forge.jsonl]
 //	                        (-cache DIR | -oracle-ref REF -driver SHA) -out forge-diff.jsonl
 //	oraclediff follower-diff -engine NAME [forge-diff's flags]
@@ -21,9 +22,12 @@ package main
 //
 // follower-diff is forge-diff for any registered follower whose items are
 // Forge requests (follower.PrepForgeExport or follower.PrepFollowerExport);
-// forge-diff is follower-diff -engine forge. follower-export
-// (follower_export.go) is forge-export plus a follower's preflight refusals
-// and the engine-neutral identities.
+// forge-diff is follower-diff -engine forge. forge-export asks
+// forge-oracle-run.sh's --preflight which cards the pinned Forge cannot
+// resolve and refuses the items naming one to <dir of out>/forge-prep.jsonl
+// (xengine diff reads those as class not_sent). follower-export
+// (follower_export.go) is forge-export plus a follower's own preflight
+// refusals and the engine-neutral identities.
 
 import (
 	"bufio"
@@ -168,8 +172,9 @@ type ForgeRow struct {
 func runForgeExport(args []string) error {
 	fs := flag.NewFlagSet("forge-export", flag.ExitOnError)
 	dir := fs.String("cards", ".cards", "corpus dir")
-	scen := fs.String("scenarios", "", "scenario JSONL (from gen)")
-	out := fs.String("out", "", "sidecar request JSONL (off-repo)")
+	scen := fs.String("scenarios", "", "scenario JSONL (from gen or xengine play)")
+	out := fs.String("out", "", "sidecar request JSONL (off-repo); refusals go to <dir>/forge-prep.jsonl")
+	runner := fs.String("runner", "", "preflight runner (default: the registry's runner for forge)")
 	fs.Parse(args)
 	if *scen == "" || *out == "" {
 		return fmt.Errorf("forge-export needs -scenarios and -out")
@@ -178,12 +183,49 @@ func runForgeExport(args []string) error {
 	if err != nil {
 		return err
 	}
-	n, err := forgeExport(reg, *scen, *out)
+	fl, ok := follower.Lookup("forge")
+	if !ok {
+		return fmt.Errorf("no forge follower in the registry")
+	}
+	if *runner == "" {
+		*runner = fl.Runner
+	}
+	st, err := forgeExportRefusing(reg, fl, *runner, *scen, *out)
 	if err != nil {
 		return err
 	}
-	fmt.Printf("wrote %d requests to %s\n", n, *out)
+	fmt.Printf("wrote %d requests to %s; %d of %d items refused (%d of %d cards lacking) to %s\n",
+		st.Sent, *out, st.Refused, st.Items, st.Lacking, st.Asked, followerPrepPath(fl, *out))
 	return nil
+}
+
+// forgeExportRefusing writes Forge's requests for the items in scen to out
+// and its refusals beside it, asking runner's --preflight which cards the
+// pinned Forge cannot resolve (the protocol in the file comment). An item
+// naming a refused card is not sent: its refusal row, reason
+// forge_lacks_card, goes beside the requests to <dir of out>/forge-prep.jsonl
+// for xengine diff to read as class not_sent. The Forge pin's cardsfolder
+// lags the corpus, so without this an item naming a newer card dies in
+// Forge's harness with "Couldn't find a card" while gorge's play already
+// counted it as compared.
+func forgeExportRefusing(reg *cards.Registry, fl follower.Follower, runner, scen, out string) (followerExportStats, error) {
+	st := followerExportStats{Census: census{}}
+	prepPath := followerPrepPath(fl, out)
+	for _, p := range []string{out, prepPath} {
+		if err := refuseRepoPath(p); err != nil {
+			return st, err
+		}
+	}
+	items, itemNames, lacks, asked, err := preflightNames(reg, fl, runner, scen, filepath.Dir(out))
+	if err != nil {
+		return st, err
+	}
+	st.Items, st.Asked, st.Lacking = asked.Items, asked.Asked, asked.Lacking
+	st.Sent, st.Refused, err = exportItems(items, itemNames, lacks, fl.Name, out, prepPath, func(it oraclegen.Item) ([]byte, error) {
+		rq, _ := forgeExportItem(reg, it, true)
+		return json.Marshal(rq)
+	})
+	return st, err
 }
 
 // forgeExport writes one request line per scenario Item, in input order.

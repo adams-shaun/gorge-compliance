@@ -16,8 +16,9 @@ import (
 // TestDiffReadsFollowerPrep: for a follower-export follower, an item in the
 // play dir's <engine>-prep.jsonl with no row is class not_sent (the refusal's
 // reason as its message), as xprep.jsonl is for XMage; an item with no row
-// and no refusal stays harness. Forge's forge-export refuses nothing, so a
-// forge-prep.jsonl changes nothing for Forge.
+// and no refusal stays harness. The same holds for Forge: forge-export
+// refuses the items naming a card the pinned Forge cannot resolve to
+// forge-prep.jsonl, and diff reads it the same way.
 func TestDiffReadsFollowerPrep(t *testing.T) {
 	reg, play := playTwo(t)
 	defer follower.RegisterForTest(follower.Follower{
@@ -49,10 +50,12 @@ func TestDiffReadsFollowerPrep(t *testing.T) {
 		t.Fatal(err)
 	}
 	line, _ := json.Marshal(xprep.Refusal{ID: refused, Reason: "fakefol_lacks_card", Detail: "Some Card: not in the fake database"})
-	for _, name := range []string{"fakefol-prep.jsonl", "forge-prep.jsonl"} {
-		if err := os.WriteFile(filepath.Join(play, name), append(line, '\n'), 0o644); err != nil {
-			t.Fatal(err)
-		}
+	if err := os.WriteFile(filepath.Join(play, "fakefol-prep.jsonl"), append(line, '\n'), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	line, _ = json.Marshal(xprep.Refusal{ID: refused, Reason: "forge_lacks_card", Detail: "Some Card: not in the pinned cardsfolder"})
+	if err := os.WriteFile(filepath.Join(play, "forge-prep.jsonl"), append(line, '\n'), 0o644); err != nil {
+		t.Fatal(err)
 	}
 
 	out := filepath.Join(tmp, "fakefol")
@@ -88,7 +91,7 @@ func TestDiffReadsFollowerPrep(t *testing.T) {
 		t.Errorf("REPRO.md does not re-export through follower-export:\n%s", md)
 	}
 
-	// Forge: the same rows, the same prep file, but nothing is not_sent.
+	// Forge: the same rows, the same refusal, now read as not_sent too.
 	forgeRows := filepath.Join(tmp, "forge-rows.jsonl")
 	var stamped []byte
 	if err := readLines(rows, func(b []byte) error {
@@ -108,7 +111,22 @@ func TestDiffReadsFollowerPrep(t *testing.T) {
 	if err := diff(reg, play, "forge", forgeRows, fout, ""); err != nil {
 		t.Fatal(err)
 	}
-	if c := verdictClasses(t, filepath.Join(fout, "verdicts.jsonl"))[refused]; c != classify.ClassHarness {
-		t.Errorf("forge read forge-prep.jsonl: %s is %s, want harness", refused, c)
+	classes = verdictClasses(t, filepath.Join(fout, "verdicts.jsonl"))
+	if c := classes[refused]; c != classify.ClassNotSent {
+		t.Errorf("forge ignored forge-prep.jsonl: %s is %s, want not_sent", refused, c)
+	}
+	if c := classes[missing]; c != classify.ClassHarness {
+		t.Errorf("an item with no refusal is %s, want harness", c)
+	}
+	v = classify.Finding{}
+	b, err = os.ReadFile(filepath.Join(fout, "finds", classify.ClassNotSent, classify.Sanitise(refused), "verdict.json"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := json.Unmarshal(b, &v); err != nil {
+		t.Fatal(err)
+	}
+	if v.Engine != "forge" || v.Msg != "forge_lacks_card" {
+		t.Errorf("forge not_sent verdict: %+v", v)
 	}
 }
