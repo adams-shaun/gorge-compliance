@@ -1916,24 +1916,36 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * ask's skip and stays queued while the lone candidate is taken. */
         static UUID loneTargetChoice(List<String> targetQueue, List<UUID> candidates,
                 boolean skipCanCloseAsk, BiPredicate<UUID, String> matches) {
-            if (candidates.size() != 1) {
-                return null;
-            }
-            UUID only = candidates.get(0);
-            if (!targetQueue.isEmpty()
-                    && TestPlayer.TARGET_SKIP.equals(targetQueue.get(0)) && skipCanCloseAsk) {
-                return null;
-            }
             // TestPlayer.chooseTarget scans the whole visible queue
             // (takeMaxTargetsPerChoose), not only its head: an entry naming
             // the lone candidate anywhere is this ask's own answer, so the
             // base consumes it rather than leaving it queued for a later ask.
+            return candidates.size() == 1 && unscriptedChoice(targetQueue, candidates, skipCanCloseAsk, matches)
+                    ? candidates.get(0) : null;
+        }
+
+        /** Whether an ask reads nothing from {@code targetQueue}: the ask has
+         * a candidate, no queued entry names any candidate, and no front skip
+         * can close the ask. The shared rule behind the lone-candidate and the
+         * divided-amount inference; the caller passes the part of the queue
+         * its base funnel reads. */
+        static boolean unscriptedChoice(List<String> targetQueue, List<UUID> candidates,
+                boolean skipCanCloseAsk, BiPredicate<UUID, String> matches) {
+            if (candidates.isEmpty()) {
+                return false;
+            }
+            if (!targetQueue.isEmpty()
+                    && TestPlayer.TARGET_SKIP.equals(targetQueue.get(0)) && skipCanCloseAsk) {
+                return false;
+            }
             for (String answer : targetQueue) {
-                if (matches.test(only, answer)) {
-                    return null;
+                for (UUID id : candidates) {
+                    if (matches.test(id, answer)) {
+                        return false;
+                    }
                 }
             }
-            return only;
+            return true;
         }
 
         /** The candidates of a target ask that it has not already chosen. */
@@ -1967,6 +1979,94 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         int amount = answer.indexOf("^X=");
                         return answerNamesCandidate(game, id, amount >= 0 ? answer.substring(0, amount) : answer);
                     });
+        }
+
+        /** The shares an unscripted DIVIDED amount takes from {@code candidates}
+         * (in the caller's, stable, order), or null when the ask must go to
+         * the base. gorge records a free division (CR 601.2d) as a decision,
+         * but a lower item can carry no decision log (Ureni, the Song
+         * Unending's ETB after a pass), so the driver uses the same
+         * arithmetic as the generator's fallback for a divided ask with no
+         * recorded split: the total dealt as evenly as possible, the
+         * remainder first. It applies only to a real division, more than one
+         * recipient: a one-recipient ask with several candidates is a target
+         * CHOICE the replay cannot make. Each recipient takes at least one
+         * point and the ask's remaining slots cap the recipients (CR 601.2d,
+         * "any number"). TestPlayer.chooseTargetAmount reads only the queue's
+         * head, so only the head can be this ask's own "name^X=n" answer or
+         * skip. */
+        int[] unscriptedAmountShares(mage.target.TargetAmount target, List<UUID> candidates, Game game) {
+            int slots = target.getMaxNumberOfTargets() - target.getSize();
+            int recipients = Math.min(Math.min(target.getAmountRemaining(), candidates.size()), slots);
+            if (recipients < 2) {
+                return null;
+            }
+            List<String> head = getTargets().subList(0, Math.min(1, getTargets().size()));
+            if (!unscriptedChoice(head, candidates, skipCanCloseAsk(target), (id, answer) -> {
+                int at = answer == null ? -1 : answer.indexOf("^X=");
+                return answerNamesCandidate(game, id, at >= 0 ? answer.substring(0, at) : answer);
+            })) {
+                return null;
+            }
+            return evenShares(target.getAmountRemaining(), recipients);
+        }
+
+        /** Orders the candidates of an inferred division so the remainder and
+         * the recipients cannot vary between replays: XMage's TargetAmount
+         * collects possibleTargets into a HashSet, so its iteration order is
+         * not stable. Battlefield permanents order by the game's creation
+         * order, players after them by name, and any other object by name.
+         * Ids only break a tie between objects the replay cannot otherwise
+         * tell apart. */
+        static List<UUID> stableAmountCandidates(java.util.Collection<UUID> candidates, Game game) {
+            List<UUID> ordered = new ArrayList<>(candidates);
+            ordered.sort((a, b) -> {
+                boolean permanentA = game.getPermanent(a) != null;
+                boolean permanentB = game.getPermanent(b) != null;
+                if (permanentA != permanentB) {
+                    return permanentA ? -1 : 1;
+                }
+                if (permanentA) {
+                    int byOrder = Integer.compare(game.getPermanent(a).getCreateOrder(),
+                            game.getPermanent(b).getCreateOrder());
+                    if (byOrder != 0) {
+                        return byOrder;
+                    }
+                }
+                int byName = amountCandidateName(game, a).compareTo(amountCandidateName(game, b));
+                return byName != 0 ? byName : a.toString().compareTo(b.toString());
+            });
+            return ordered;
+        }
+
+        /** A division candidate's stable display name (a player's name, else
+         * the object's). */
+        private static String amountCandidateName(Game game, UUID id) {
+            Player player = game.getPlayer(id);
+            if (player != null) {
+                return player.getName();
+            }
+            mage.MageObject object = game.getObject(id);
+            return object == null ? "" : object.getName();
+        }
+
+        /** {@code remaining} points split over at most {@code recipients}:
+         * the quotient to each and one more to the first remainder
+         * recipients, so every share is positive and the total is exact. A
+         * recipient costs one point, so an amount smaller than the candidate
+         * set chooses only its first {@code remaining} candidates. */
+        static int[] evenShares(int remaining, int recipients) {
+            if (remaining <= 0 || recipients <= 0) {
+                return new int[0];
+            }
+            recipients = Math.min(recipients, remaining);
+            int[] shares = new int[recipients];
+            int each = remaining / recipients;
+            int extra = remaining % recipients;
+            for (int i = 0; i < recipients; i++) {
+                shares[i] = each + (i < extra ? 1 : 0);
+            }
+            return shares;
         }
 
         @Override
@@ -2597,7 +2697,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * creation-order resolution reaches the TargetAmount path. The same
          * unscripted-ask rules as the plain Target funnel apply: no candidate
          * at any minimum is declined, and a lone candidate takes the whole
-         * remaining amount (the only distribution the rules leave). */
+         * remaining amount (the only distribution the rules leave). Several
+         * candidates with no scripted "name^X=n" answer take the generator's
+         * fallback split (see {@link #unscriptedAmountShares}). */
         @Override
         public boolean chooseTargetAmount(Outcome outcome, mage.target.TargetAmount target,
                 Ability source, Game game) {
@@ -2617,6 +2719,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         UUID lone = unscriptedLoneAmountTarget(target, possible, game);
                         if (lone != null) {
                             target.addTarget(lone, target.getAmountRemaining(), source, game);
+                            return true;
+                        }
+                        List<UUID> candidates = stableAmountCandidates(unchosenCandidates(target, possible), game);
+                        int[] shares = unscriptedAmountShares(target, candidates, game);
+                        if (shares != null) {
+                            for (int i = 0; i < shares.length; i++) {
+                                target.addTarget(candidates.get(i), shares[i], source, game);
+                            }
                             return true;
                         }
                     }
