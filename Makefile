@@ -87,7 +87,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 0791efdeb1 = becb01adc6 + each recorded coin flip result forced on its step (ForcedDieRandom arms item.coin_flips
 # beside the die rolls: nextBoolean returns the recorded result, a forced flip takes no draw, a doubled flip one per
 # result; MyRandom's CountingRandom forwards nextBoolean). Same trees as FORGE_REF ff076d4432.
-FORGE_ORACLE_REF ?= 0791efdeb19566b8e36391f3eaceaafc7a4894cd
+# 963576e5d2 = 96acdef442 (compliance #432's pin: the fork's master + gorge branch, re-synced 11-24) + the scripted controller
+# consumes gorge's waterbend_generic tap picks (Forge asks for waterbend taps through chooseCardsForConvokeOrImprovise, which took
+# only convoke*/improvise* kinds: Katara's Waterbend {X} paid from an empty pool and was refused). Driver-only change; same trees
+# as FORGE_REF ff076d4432. Fork branch fix/waterbend-tap-pick-driver.
+FORGE_ORACLE_REF ?= 963576e5d296e846bb74d1f3a0b32bee3a1f2c93
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
