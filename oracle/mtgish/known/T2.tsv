@@ -20,6 +20,7 @@ Aven Liberator	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: fi
 Aven Mindcensor	T2	abilities	static	replacement	equivalent	script writes the replacement as a static (S: LimitSearchLibrary keyword); mtgish a ReplaceWouldSearch rule
 Backup Plan	T2	abilities	-	pregame	forge-bug	conspiracy unimplemented: script carries only a Text: line
 Banefire	T2	abilities	static	-	equivalent	mtgish folds damage-cant-be-prevented into the spell action (IfElse); script a static
+Banescale Serpent	T2	abilities	static	-	equivalent	protection from the noted creature types: script a self Continuous AddKeyword static, mtgish a Protection keyword (T1 protection row)
 Belfry Spirit	T2	abilities	-	triggered:etb	equivalent	script K:Haunt carries the enters trigger inside the keyword; mtgish spells it out as a TriggerA beside Haunt
 Bell Borca, Spectral Sergeant	T2	abilities	-	static	equivalent	note-mana-value is script bookkeeping (a remember trigger); script P/T static vs mtgish note + CDA
 Belltoll Dragon	T2	abilities	triggered:turnfaceup	-	mtgish-bug	mtgish#1 morph: first line duplicated, face-up trigger lost

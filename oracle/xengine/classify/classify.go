@@ -160,6 +160,7 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 		stopped = x.Harness
 		g, x = pg, px
 	}
+	x = AlignCostGraveyardOrder(g, x)
 	v := oraclediff.CompareOpts(g, nil, x, item.Item.Compare, item.Item.Ignore...)
 	f.Checkpoint, f.Field, f.Gorge, f.Other = v.Checkpoint, v.Field, v.Gorge, v.XMage
 	f.Step = stepOf(v.Checkpoint)
@@ -757,6 +758,192 @@ func rngField(field string) bool {
 	return false
 }
 
+// costStep reports a checkpoint taken after a cast or an activation, a step
+// whose cost payment can move two or more cards to a graveyard.
+func costStep(checkpoint string) bool {
+	return strings.HasSuffix(checkpoint, " (cast)") || strings.HasSuffix(checkpoint, " (activate)")
+}
+
+// AlignCostGraveyardOrder returns x with its graveyards put into gorge's order
+// where the only difference is the order of cards one cost payment moved there.
+// CR 601.2h (602.2b for an ability) lets the player pay a cost's parts in any
+// order, and CR 404.3 lets the owner stack simultaneous arrivals in any order,
+// so "Sacrifice a land, discard this card" (Edge of Autumn's cycling) is legal
+// either way and no engine is wrong.
+//
+// A cast or activate checkpoint whose seat gained two or more cards on top of
+// gorge's graveyard of the step before opens a tie: those cards, as positions in
+// gorge's graveyard. Costs that move cards from a library to a public zone (a
+// mill) are paid last and in an order the rules fix (CR 601.2h), so a checkpoint
+// where gorge's library shrank opens no tie. A tie follows its cards from one
+// checkpoint to the next (an older card leaving the graveyard moves positions
+// but not the tie), and shrinks as its cards leave. At each checkpoint where the
+// follower holds, outside the ties, exactly gorge's cards in gorge's order and,
+// inside each tie, the same cards, the follower's graveyard takes gorge's order.
+// Anything else (a card of a tie replaced, an older card moved, a pass-step SBA
+// batch such as CR 704.5m, which the rules order, see graveyardOrderOnly) is
+// left as the follower has it.
+func AlignCostGraveyardOrder(g rules.OracleResult, x oraclediff.XResult) oraclediff.XResult {
+	n := min(len(g.Snapshots), len(x.Snapshots))
+	var snaps []rules.OracleSnapshot
+	for seat := 0; ; seat++ {
+		seen := false
+		for j := 0; j < n; j++ {
+			if seat < len(x.Snapshots[j].Players) && seat < len(g.Snapshots[j].Players) {
+				seen = true
+			}
+		}
+		if !seen {
+			break
+		}
+		var ties [][]int // positions in gorge's graveyard of each open tie
+		for j := 1; j < n; j++ {
+			if seat >= len(x.Snapshots[j].Players) || seat >= len(g.Snapshots[j].Players) ||
+				seat >= len(g.Snapshots[j-1].Players) {
+				break
+			}
+			prevG, gNow := g.Snapshots[j-1].Players[seat].Graveyard, g.Snapshots[j].Players[seat].Graveyard
+			xNow := x.Snapshots[j].Players[seat].Graveyard
+			kept := keptPositions(prevG, gNow)
+			var next [][]int
+			for _, tie := range ties {
+				var moved []int
+				for _, i := range tie {
+					if kept[i] >= 0 {
+						moved = append(moved, kept[i])
+					}
+				}
+				if len(moved) >= 2 {
+					next = append(next, moved)
+				}
+			}
+			ties = next
+			if costStep(g.Snapshots[j].Checkpoint) && !libraryShrank(g.Snapshots[j-1], g.Snapshots[j]) {
+				if fresh := freshArrivals(kept, len(gNow)); len(fresh) >= 2 {
+					ties = append(ties, fresh)
+				}
+			}
+			if len(ties) == 0 || slices.Equal(gNow, xNow) || !tiedOnly(gNow, xNow, ties) {
+				continue
+			}
+			if snaps == nil {
+				snaps = append([]rules.OracleSnapshot(nil), x.Snapshots...)
+			}
+			ps := append([]rules.OracleSnapPlayer(nil), snaps[j].Players...)
+			ps[seat].Graveyard = gNow
+			snaps[j].Players = ps
+		}
+	}
+	if snaps != nil {
+		x.Snapshots = snaps
+	}
+	return x
+}
+
+// keptPositions maps each position of the graveyard before to its position in the
+// graveyard after, or -1 where that card left: an order-preserving match of the
+// names, each card taking its earliest counterpart.
+func keptPositions(before, after []string) []int {
+	lcs := make([][]int, len(before)+1) // lcs[i][j]: common length of before[i:], after[j:]
+	for i := range lcs {
+		lcs[i] = make([]int, len(after)+1)
+	}
+	for i := len(before) - 1; i >= 0; i-- {
+		for j := len(after) - 1; j >= 0; j-- {
+			if before[i] == after[j] {
+				lcs[i][j] = lcs[i+1][j+1] + 1
+			} else {
+				lcs[i][j] = max(lcs[i+1][j], lcs[i][j+1])
+			}
+		}
+	}
+	kept := make([]int, len(before))
+	for i := range kept {
+		kept[i] = -1
+	}
+	for i, j := 0, 0; i < len(before) && j < len(after); {
+		switch {
+		case before[i] == after[j] && lcs[i][j] == lcs[i+1][j+1]+1:
+			kept[i] = j
+			i, j = i+1, j+1
+		case lcs[i+1][j] >= lcs[i][j+1]:
+			i++
+		default:
+			j++
+		}
+	}
+	return kept
+}
+
+// freshArrivals returns the positions of the graveyard of length size that no
+// card from before kept, when they are the top of it, else nil.
+func freshArrivals(kept []int, size int) []int {
+	held := make([]bool, size)
+	for _, p := range kept {
+		if p >= 0 {
+			held[p] = true
+		}
+	}
+	var fresh []int
+	for p, h := range held {
+		if !h {
+			fresh = append(fresh, p)
+		}
+	}
+	if len(fresh) == 0 || fresh[0] != size-len(fresh) {
+		return nil
+	}
+	return fresh
+}
+
+// libraryShrank reports that any seat's library lost cards between two
+// checkpoints of gorge's run.
+func libraryShrank(before, after rules.OracleSnapshot) bool {
+	for i := range after.Players {
+		if i < len(before.Players) && after.Players[i].LibraryCount < before.Players[i].LibraryCount {
+			return true
+		}
+	}
+	return false
+}
+
+// tiedOnly reports that x differs from g only in the order of the cards inside
+// each tie: the same length, the same card at every position outside the ties,
+// and the same cards (in any order) inside each.
+func tiedOnly(g, x []string, ties [][]int) bool {
+	if len(g) != len(x) {
+		return false
+	}
+	free := make([]bool, len(g))
+	for _, tie := range ties {
+		var gs, xs []string
+		for _, p := range tie {
+			if p < 0 || p >= len(g) || free[p] {
+				return false
+			}
+			free[p] = true
+			gs, xs = append(gs, g[p]), append(xs, x[p])
+		}
+		if !sameCards(gs, xs) {
+			return false
+		}
+	}
+	for p := range g {
+		if !free[p] && g[p] != x[p] {
+			return false
+		}
+	}
+	return true
+}
+
+// sameCards reports that a and b hold the same cards in any order.
+func sameCards(a, b []string) bool {
+	a, b = append([]string(nil), a...), append([]string(nil), b...)
+	sort.Strings(a)
+	sort.Strings(b)
+	return slices.Equal(a, b)
+}
+
 // graveyardOrderOnly reports a pN.graveyard divergence at checkpoint step d
 // that is only the order of two or more cards that entered that graveyard at
 // that step. CR 404.3 lets the owner arrange simultaneous arrivals in any
@@ -786,11 +973,7 @@ func graveyardOrderOnly(g rules.OracleResult, x oraclediff.XResult, v oraclediff
 		!slices.Equal(gNow[:n], before) || !slices.Equal(xNow[:n], before) {
 		return false
 	}
-	a := append([]string(nil), gNow[n:]...)
-	b := append([]string(nil), xNow[n:]...)
-	sort.Strings(a)
-	sort.Strings(b)
-	return slices.Equal(a, b)
+	return sameCards(gNow[n:], xNow[n:])
 }
 
 // shuffledTopExile reports a pN.exile difference after a shuffle (CR 701.24a)

@@ -55,7 +55,6 @@ pub const DECISION_KINDS: &[&str] = &[
     "order_pick",
     "declare_attack",
     "declare_block",
-    "activate_mana_ability",
     "choose_spell_mode",
     "choose_option",
     "finish_selection",

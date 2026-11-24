@@ -16,7 +16,7 @@
 //! priority action the mapper has no `semantic` for (an equip, a crew, ...) is left out of the
 //! candidates and counted in [`Census::unmapped_actions`].
 
-use std::collections::{BTreeMap, HashMap};
+use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::path::Path;
 
 use engine::ai_support::AiDecisionContract;
@@ -27,11 +27,11 @@ use engine::game::{apply, start_game_skip_mulligan, start_game_with_starting_pla
 use engine::types::ability::TargetRef;
 use engine::types::actions::{GameAction, MulliganChoice};
 use engine::types::game_state::{
-    GameState, ManaChoice, ManaChoiceContext, ManaChoicePrompt, MulliganDecisionPhase,
+    CastPaymentMode, GameState, ManaChoice, ManaChoiceContext, ManaChoicePrompt, MulliganDecisionPhase,
     ReplacementChoiceKind, WaitingFor,
 };
-use engine::types::mana::ManaType;
-use engine::types::identifiers::ObjectId;
+use engine::types::identifiers::{CardId, ObjectId};
+use engine::types::mana::{ManaCost, ManaType};
 use engine::types::player::PlayerId;
 #[cfg(feature = "house-ai")]
 use rand_chacha::{rand_core::SeedableRng, ChaCha8Rng};
@@ -40,7 +40,7 @@ use serde_json::{json, Value};
 use crate::json::canonical;
 use crate::semantic as sem;
 use crate::server::{Backend, CatalogDeck, Outcome, Reset};
-use crate::view::{looked_ref, mana_letter, object_ref, observation, seat, spell_entry, Ids};
+use crate::view::{looked_ref, object_ref, observation, seat, spell_entry, Ids};
 use crate::waiting::{classify, unenforceable_pool_rule, Family, Pose};
 
 /// Counts of what the host could not pose. Printed to stderr when the process ends.
@@ -185,6 +185,11 @@ struct Live {
     alias: [std::collections::BTreeMap<String, String>; 2],
     /// Reissued ids so far; each new id is derived from the old one and this count.
     reissued: u64,
+    /// Casts whose payment the seat cancelled this turn, by stable card id: the host's policy otherwise
+    /// re-offers the same unpayable cast forever (its plan chose a target whose cost it cannot pay).
+    /// Cleared on the next turn or by the player's own land/mana action, where resources can change.
+    failed_cards: BTreeSet<CardId>,
+    failed_cast_turn: u32,
 }
 
 pub struct PhaseBackend {
@@ -243,7 +248,7 @@ impl PhaseBackend {
         let (sha, data) = pin.split_once('+').unwrap_or((pin, "unknown"));
         let identity = json!({
             "name": "phase",
-            "version": format!("phase-{pin}/phase-seat-0.1.0/autopay"),
+            "version": format!("phase-{pin}/phase-seat-0.1.0/seat-autopay"),
             "rules_snapshot_id": format!("phase/{sha}"),
             "card_pool_identity": format!("phase-card-data/{data}"),
             "source_revision": source_revision,
@@ -285,8 +290,15 @@ impl PhaseBackend {
 
     /// Pose whatever the game waits on now.
     fn pose(&mut self) -> Outcome {
+        // Settled prompts (`Built::Applied`) move neither `steps` nor `decisions`, so a cycle of them
+        // (activate, cancel back to the root payment, activate the same source) would never end.
+        let mut applied = 0u64;
         loop {
             let live = self.live.as_mut().expect("a live game");
+            if live.state.turn_number != live.failed_cast_turn {
+                live.failed_cards.clear();
+                live.failed_cast_turn = live.state.turn_number;
+            }
             if live.group.is_none() {
                 if live.decisions >= live.max_decisions {
                     return truncated("max_decisions", live.decisions);
@@ -326,7 +338,13 @@ impl PhaseBackend {
                     self.census.decisions += 1;
                     return self.decision(family);
                 }
-                Ok(Built::Applied) => continue,
+                Ok(Built::Applied) => {
+                    applied += 1;
+                    if applied > MAX_APPLIED_PER_POSE {
+                        return self.halt("applied_loop", name);
+                    }
+                    continue;
+                }
                 Err(Stop::Halt(cause, detail)) => return self.halt(cause, &detail),
             }
         }
@@ -471,6 +489,10 @@ fn rewrite_ids(v: &mut Value, alias: &std::collections::BTreeMap<String, String>
     }
 }
 
+/// Most prompts the seat may settle itself between two host decisions. A real payment is a few dozen
+/// taps; a cycle that never reaches the host is a bug, ended as a halt instead of a hang.
+const MAX_APPLIED_PER_POSE: u64 = 10_000;
+
 fn truncated(reason: &str, decisions: u64) -> Outcome {
     Outcome::Terminal(json!({"outcome": "truncated", "classification": "truncated", "winner": null,
         "reason": reason, "decision_count": decisions}))
@@ -567,6 +589,124 @@ fn applies(state: &GameState, actor: PlayerId, action: GameAction) -> bool {
     apply(&mut probe, actor, action).is_ok()
 }
 
+/// Force an `AiDecisionContract` cast/activation onto the manual payment surface.
+///
+/// The contract's actions default to `Auto`, which lets phase tap its own sources. phase computes that
+/// auto-payment's cost before the target is final, so a legal target that changes the cost (Luminous
+/// Rebuke costs {1} less for a tapped target) leaves the engine one mana short and the target choice
+/// fails with `ActionNotAllowed("Cannot pay mana cost")`. The seat therefore takes the manual payment
+/// path and settles the payment itself after the cost is final (see [`settle_payment`]); the manual
+/// path is what moves the payment behind the target, not a promise to ask the host for a tap.
+fn manual(action: &GameAction) -> GameAction {
+    match action {
+        GameAction::CastSpell { object_id, card_id, targets, .. } => GameAction::CastSpell {
+            object_id: *object_id,
+            card_id: *card_id,
+            targets: targets.clone(),
+            payment_mode: CastPaymentMode::Manual,
+        },
+        GameAction::ActivateAbility { source_id, ability_index, .. } => {
+            GameAction::ActivateAbility { source_id: *source_id, ability_index: *ability_index, payment_mode: CastPaymentMode::Manual }
+        }
+        other => other.clone(),
+    }
+}
+
+/// The colours a pending cast's mana cost asks for, in printed order. This is only a preference for
+/// the seat's own source/colour picks; phase remains the legality authority.
+fn wanted_colors(state: &GameState) -> Vec<ManaType> {
+    let Some(pending) = state.pending_cast.as_ref() else { return Vec::new() };
+    let ManaCost::Cost { shards, .. } = &pending.cost else { return Vec::new() };
+    let mut out = Vec::new();
+    for shard in shards {
+        let Some(types) = shard.single_mana_payment_types() else { continue };
+        for t in [ManaType::White, ManaType::Blue, ManaType::Black, ManaType::Red, ManaType::Green, ManaType::Colorless] {
+            if types.contains(t) && !out.contains(&t) {
+                out.push(t);
+            }
+        }
+    }
+    out
+}
+
+/// The seat's answer to a mana ability's colour prompt: a wanted colour of the pending cost when one is
+/// offered, else the first option. Deterministic: options keep the engine's order.
+fn answer_mana_choice(prompt: &ManaChoicePrompt, wanted: &[ManaType]) -> Result<ManaChoice, Stop> {
+    let pick = |options: &[ManaType]| -> Result<ManaType, Stop> {
+        options
+            .iter()
+            .find(|t| wanted.contains(t))
+            .or_else(|| options.first())
+            .copied()
+            .ok_or_else(|| Stop::Halt("dead_end", "ChooseManaColor offers no option".into()))
+    };
+    Ok(match prompt {
+        ManaChoicePrompt::SingleColor { options } => ManaChoice::SingleColor(pick(options)?),
+        ManaChoicePrompt::Combination { options } => {
+            let c = options.first().ok_or_else(|| Stop::Halt("dead_end", "ChooseManaColor offers no combination".into()))?;
+            ManaChoice::Combination(c.clone())
+        }
+        ManaChoicePrompt::AnyCombination { count, options } => ManaChoice::Combination(vec![pick(options)?; *count]),
+    })
+}
+
+/// The best source to activate for the current payment, by a deterministic key: a land tap of a wanted
+/// colour, then any land tap, then a non-land mana ability. Contract candidates are already stable-sorted,
+/// so equal keys keep phase's order.
+fn payment_source(state: &GameState, who: PlayerId) -> Option<GameAction> {
+    let wanted = wanted_colors(state);
+    let contract = AiDecisionContract::issue(state, who);
+    contract
+        .candidates
+        .iter()
+        .filter_map(|c| {
+            let key = match &c.action {
+                GameAction::TapLandForMana { selection } => {
+                    (if wanted.contains(&selection.mana_type) { 0 } else { 1 }, selection.source.object_id.0, selection.ability_index.unwrap_or(0) as u32)
+                }
+                GameAction::ActivateAbility { source_id, ability_index, .. } => (2, source_id.0, *ability_index as u32),
+                _ => return None,
+            };
+            Some((key, c.action.clone()))
+        })
+        .min_by_key(|(key, _)| *key)
+        .map(|(_, action)| action)
+}
+
+/// Settle a payment window without asking the host: finish when the pool covers the cost, else activate
+/// one source, else decline (the engine's always-legal withdrawal). `finish` is false at a mana ability's
+/// own payment window, where there is no priority pass to confirm.
+fn settle_payment(live: &mut Live, who: PlayerId, finish: bool, census: &mut Census) -> Result<(), Stop> {
+    if finish {
+        // A payment the pool already covers is finished by the engine (phase's own confirm). Probed on a
+        // copy because a short pool is refused.
+        let mut probe = live.state.clone();
+        if apply(&mut probe, who, GameAction::PassPriority).is_ok() {
+            live.state = probe;
+            return Ok(());
+        }
+    }
+    if let Some(action) = payment_source(&live.state, who) {
+        return apply_now(live, who, manual(&action));
+    }
+    // Nothing left to activate: count the candidate kinds the payer does not model, then withdraw.
+    let contract = AiDecisionContract::issue(&live.state, who);
+    for c in &contract.candidates {
+        if matches!(c.action, GameAction::PassPriority | GameAction::CancelCast) {
+            continue;
+        }
+        let d = format!("{:?}", c.action);
+        let name = d.split(|ch: char| !ch.is_alphanumeric()).next().unwrap_or("?").to_string();
+        *census.unmapped_actions.entry(name).or_insert(0) += 1;
+    }
+    if finish {
+        if let Some(id) = live.state.pending_cast.as_ref().map(|p| p.card_id) {
+            live.failed_cards.insert(id);
+        }
+    }
+    apply_now(live, who, GameAction::CancelCast)
+}
+
 /// Fill `live.cands` for `family`, or settle the prompt when there is nothing to choose.
 fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, Stop> {
     let viewer = |live: &Live, p: PlayerId, id: ObjectId| shown_ref(&live.state, &live.ids, p, id);
@@ -586,7 +726,17 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 let sem = match &c.action {
                     GameAction::PassPriority => Some(sem::pass()),
                     GameAction::PlayLand { object_id, .. } => viewer(live, who, *object_id).map(|r| sem::play_land(r, 0)),
-                    GameAction::CastSpell { object_id, .. } => viewer(live, who, *object_id).map(|r| sem::cast_spell(r, Some("normal"))),
+                    // A cast the seat cancelled this turn (the payer found nothing to pay with) stays hidden
+                    // from the host until the turn ends: phase's own contract keeps offering it, and
+                    // re-casting it would loop. The trade-off is a cast that is still legal with other
+                    // targets or a changed cost is hidden too. Counted on its own, not as a mapper gap.
+                    GameAction::CastSpell { card_id, .. } if live.failed_cards.contains(card_id) => {
+                        *census.unmapped_actions.entry("suppressed_failed_cast".to_string()).or_insert(0) += 1;
+                        None
+                    }
+                    GameAction::CastSpell { object_id, .. } => {
+                        viewer(live, who, *object_id).map(|r| sem::cast_spell(r, Some("normal")))
+                    }
                     GameAction::ActivateAbility { source_id, ability_index, .. } => {
                         viewer(live, who, *source_id).map(|r| sem::activate_ability(r, *ability_index as u32))
                     }
@@ -599,7 +749,7 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
                 };
                 if let Some(s) = sem {
                     if seen.insert(canonical(&s)) {
-                        cands.push(Cand { semantic: s, effect: Effect::Act(c.action.clone()) });
+                        cands.push(Cand { semantic: s, effect: Effect::Act(manual(&c.action)) });
                     }
                 }
             }
@@ -881,79 +1031,52 @@ fn build(live: &mut Live, family: Family, census: &mut Census) -> Result<Built, 
             }
         }
         (WaitingFor::ManaPayment { player, .. }, Family::ManaPayment) => {
-            let who = *player;
-            live.acting = who;
-            // The profile declares `engine_autopay`: a payment the pool already covers is finished by the
-            // engine (phase's own confirm), not asked. Probed on a copy, since a short pool is refused.
-            let mut probe = live.state.clone();
-            if apply(&mut probe, who, GameAction::PassPriority).is_ok() {
-                live.state = probe;
-                return Ok(Built::Applied);
-            }
-            live.purpose = Some("mana_payment");
-            let spell = live.state.pending_cast.as_ref().and_then(|c| shown_ref(&live.state, &live.ids, who, c.object_id));
-            let Some(spell) = spell else { return Err(Stop::Halt("unresolvable_source", "the spell being paid for".into())) };
-            let contract = AiDecisionContract::issue(&live.state, who);
-            let mut seen = std::collections::BTreeSet::new();
-            for c in &contract.candidates {
-                // A mana ability that is not a land tap (a Treasure, a creature that taps for mana): the same
-                // `activate_mana_ability`, with no colour to name (the source's own ability makes it).
-                if let GameAction::ActivateAbility { source_id, ability_index, .. } = &c.action {
-                    match shown_ref(&live.state, &live.ids, who, *source_id) {
-                        Some(src) => {
-                            let semantic = sem::activate_mana_ability(src, *ability_index as u32, None, None);
-                            if seen.insert(canonical(&semantic)) {
-                                cands.push(Cand { semantic, effect: Effect::Act(c.action.clone()) });
-                            }
-                        }
-                        // A legal mana ability whose source the viewer cannot name is never silently
-                        // dropped: it is counted like any other unmapped action.
-                        None => *census.unmapped_actions.entry("ActivateAbility:unresolvable_source".to_string()).or_insert(0) += 1,
-                    }
-                    continue;
-                }
-                let GameAction::TapLandForMana { selection } = &c.action else {
-                    let d = format!("{:?}", c.action);
-                    let name = d.split(|ch: char| !ch.is_alphanumeric()).next().unwrap_or("?").to_string();
-                    if name != "PassPriority" && name != "CancelCast" {
-                        *census.unmapped_actions.entry(name).or_insert(0) += 1;
-                    }
-                    continue;
-                };
-                let Some(src) = shown_ref(&live.state, &live.ids, who, selection.source.object_id) else {
-                    *census.unmapped_actions.entry("TapLandForMana:unresolvable_source".to_string()).or_insert(0) += 1;
-                    continue;
-                };
-                let semantic = sem::activate_mana_ability(src, selection.ability_index.unwrap_or(0) as u32, Some(mana_letter(selection.mana_type)), None);
-                if seen.insert(canonical(&semantic)) {
-                    cands.push(Cand { semantic, effect: Effect::Act(c.action.clone()) });
-                }
-            }
-            cands.sort_by_key(|c| canonical(&c.semantic));
-            actor = Some(contract.authorized_actor);
-            // Declining to pay is always offered (V9): it withdraws the cast.
-            cands.push(Cand { semantic: sem::optional_cost(spell, "other", false), effect: Effect::Act(GameAction::CancelCast) });
+            live.acting = *player;
+            // The manual surface only defers the payment until the cost is final; the seat then settles
+            // it exactly as phase's autopayer would, from the same contract candidates. Posing the taps
+            // to the host would require it to lower an autopay plan onto a manual wire (a host that only
+            // has the native seat answers an unmatched payment with the V9 decline, cancelling the cast
+            // and re-casting it forever).
+            settle_payment(live, *player, true, census)?;
+            return Ok(Built::Applied);
         }
         (WaitingFor::ManaSourceSelection { player, options, .. }, Family::ManaSource) => {
             live.acting = *player;
-            live.purpose = Some("mana_payment");
-            let spell = live.state.pending_cast.as_ref().and_then(|c| shown_ref(&live.state, &live.ids, *player, c.object_id));
-            let Some(spell) = spell else { return Err(Stop::Halt("unresolvable_source", "the spell being paid for".into())) };
-            let mut seen = std::collections::BTreeSet::new();
+            let wanted = wanted_colors(&live.state);
+            let mut best: Option<((u8, u64, u32), GameAction)> = None;
             for o in options {
-                let Some(src) = shown_ref(&live.state, &live.ids, *player, o.source.object_id) else {
-                    // Never silently dropped: counted like the two sibling branches above.
-                    *census.unmapped_actions.entry("ManaSourceSelection:unresolvable_source".to_string()).or_insert(0) += 1;
-                    continue;
-                };
-                let semantic = sem::activate_mana_ability(src, o.ability_index.unwrap_or(0) as u32, Some(mana_letter(o.mana_type)), None);
-                if seen.insert(canonical(&semantic)) {
-                    cands.push(Cand { semantic, effect: Effect::Act(GameAction::ActivateManaSource { selection: o.clone() }) });
+                let rank = (
+                    if wanted.contains(&o.mana_type) { 0 } else { 1 },
+                    o.source.object_id.0,
+                    o.ability_index.unwrap_or(0) as u32,
+                );
+                if best.as_ref().is_none_or(|(k, _)| rank < *k) {
+                    best = Some((rank, GameAction::ActivateManaSource { selection: o.clone() }));
                 }
             }
-            cands.sort_by_key(|c| canonical(&c.semantic));
-            // Declining to choose a source is always offered (V9).
-            cands.push(Cand { semantic: sem::optional_cost(spell, "other", false), effect: Effect::Act(GameAction::BackToManaPayment) });
+            let action = best.map_or(GameAction::BackToManaPayment, |(_, a)| a);
+            apply_now(live, *player, action)?;
+            return Ok(Built::Applied);
+        }
+        (WaitingFor::ChooseManaColor { player, choice, .. }, Family::ManaChoice) => {
+            live.acting = *player;
+            let choice = answer_mana_choice(choice, &wanted_colors(&live.state))?;
+            apply_now(live, *player, GameAction::ChooseManaColor { choice, count: 1 })?;
+            return Ok(Built::Applied);
+        }
+        (WaitingFor::ManaAbilityManaPayment { player, .. }, Family::ManaAbilityPayment) => {
+            live.acting = *player;
+            settle_payment(live, *player, false, census)?;
+            return Ok(Built::Applied);
+        }
+        (WaitingFor::PayManaAbilityMana { player, options, .. }, Family::ManaAbilityPayment) => {
+            live.acting = *player;
+            let payment = options
+                .first()
+                .cloned()
+                .ok_or_else(|| Stop::Halt("dead_end", "PayManaAbilityMana offers no payment".into()))?;
+            apply_now(live, *player, GameAction::PayManaAbilityMana { payment })?;
+            return Ok(Built::Applied);
         }
         (WaitingFor::TopOrBottomChoice { player, .. }, Family::TopOrBottom) => {
             live.acting = *player;
@@ -1361,6 +1484,7 @@ fn targets(
     // Every slot takes one target: the count within the slot (V1: below `maximum`) is 0.
     let chosen = 0u32;
     let min = u32::from(!s.optional);
+    let mut rejected = 0usize;
     for t in legal {
         let target = match t {
             TargetRef::Player(p) => sem::target_player(seat(*p)),
@@ -1369,16 +1493,42 @@ fn targets(
                 None => continue,
             },
         };
+        let action = GameAction::ChooseTarget { target: Some(t.clone()) };
+        // A target phase rejects must never be offered: the seat answers a rejected action by
+        // halting. A ward cost paid from a short pool is the known case (CR 702.21a); probing
+        // covers every other target-time refusal without naming one.
+        if !applies(&live.state, who, action.clone()) {
+            rejected += 1;
+            continue;
+        }
         cands.push(Cand {
             semantic: sem::choose_target(src.clone(), slot as u32, target, chosen, min, 1),
-            effect: Effect::Act(GameAction::ChooseTarget { target: Some(t.clone()) }),
+            effect: Effect::Act(action),
         });
     }
     if s.optional {
-        cands.push(Cand {
-            semantic: sem::finish_target_selection(src, slot as u32, chosen),
-            effect: Effect::Act(GameAction::ChooseTarget { target: None }),
-        });
+        let action = GameAction::ChooseTarget { target: None };
+        if applies(&live.state, who, action.clone()) {
+            cands.push(Cand {
+                semantic: sem::finish_target_selection(src.clone(), slot as u32, chosen),
+                effect: Effect::Act(action),
+            });
+        }
+    }
+    // CR 601.2i: with no target phase accepts, a cast is withdrawn rather than left on a prompt
+    // no candidate can answer. An activated ability cancels through the same action.
+    if cands.is_empty() {
+        let cancel = matches!(live.state.waiting_for, WaitingFor::TargetSelection { .. })
+            && applies(&live.state, who, GameAction::CancelCast);
+        if cancel {
+            cands.push(Cand {
+                semantic: sem::optional_cost(src, "other", false),
+                effect: Effect::Act(GameAction::CancelCast),
+            });
+        } else {
+            let waiting = classify(&live.state.waiting_for).0;
+            return Err(Stop::Halt("dead_end", format!("no target phase accepts: {} legal, {rejected} rejected in {waiting}", legal.len())));
+        }
     }
     cands.sort_by_key(|c| canonical(&c.semantic));
     Ok(())
@@ -1422,6 +1572,7 @@ impl Backend for PhaseBackend {
             start_game_with_starting_player(&mut state, PlayerId(r.starting_seat));
         }
         self.census.games += 1;
+        let failed_cast_turn = state.turn_number;
         #[cfg(feature = "house-ai")]
         if let Some(h) = self.house.as_mut() {
             h.config = phase_ai::create_config(h.difficulty, phase_ai::Platform::Native).into_measurement(seed);
@@ -1446,6 +1597,8 @@ impl Backend for PhaseBackend {
             shown: Default::default(),
             alias: Default::default(),
             reissued: 0,
+            failed_cards: BTreeSet::new(),
+            failed_cast_turn,
         });
         Ok(self.pose())
     }
@@ -1460,6 +1613,10 @@ impl Backend for PhaseBackend {
         live.steps += 1;
         let applied = match effect {
             Effect::Act(a) => {
+                if matches!(&a, GameAction::PlayLand { .. } | GameAction::TapLandForMana { .. } | GameAction::ActivateAbility { .. }) {
+                    // The resources can change: a cast withdrawn as unpayable may be payable now.
+                    live.failed_cards.clear();
+                }
                 live.group = None;
                 live.carry.clear();
                 live.groups[who.0 as usize] += 1;
@@ -1576,6 +1733,60 @@ mod tests {
             "stack": [{"object_id": "s"}], "known": []});
         let ids: Vec<String> = observed_ids(&obs).into_keys().collect();
         assert_eq!(ids, vec!["a".to_string(), "s".to_string()]);
+    }
+
+    /// The colour prompt is answered from the prompt's own options (one `ChooseManaColor { count: 1 }`),
+    /// preferring a colour the pending cost wants, and an empty option list is a halt, not a guess.
+    #[test]
+    fn mana_colour_prompts_are_answered_from_their_options() {
+        use ManaType::{Black, Green, Red};
+        let single = ManaChoicePrompt::SingleColor { options: vec![Red, Green] };
+        assert_eq!(answer_mana_choice(&single, &[]).ok(), Some(ManaChoice::SingleColor(Red)));
+        assert_eq!(answer_mana_choice(&single, &[Green]).ok(), Some(ManaChoice::SingleColor(Green)));
+        assert_eq!(answer_mana_choice(&single, &[Black]).ok(), Some(ManaChoice::SingleColor(Red)));
+        let any = ManaChoicePrompt::AnyCombination { count: 2, options: vec![Red, Green] };
+        assert_eq!(answer_mana_choice(&any, &[Green]).ok(), Some(ManaChoice::Combination(vec![Green, Green])));
+        let combo = ManaChoicePrompt::Combination { options: vec![vec![Red, Green], vec![Green, Green]] };
+        assert_eq!(answer_mana_choice(&combo, &[Green]).ok(), Some(ManaChoice::Combination(vec![Red, Green])));
+        for empty in [
+            ManaChoicePrompt::SingleColor { options: vec![] },
+            ManaChoicePrompt::Combination { options: vec![] },
+            ManaChoicePrompt::AnyCombination { count: 1, options: vec![] },
+        ] {
+            assert!(matches!(answer_mana_choice(&empty, &[]), Err(Stop::Halt("dead_end", _))));
+        }
+    }
+
+    /// The manual rewrite is exactly the cast/activation opt-in: a land tap keeps its own action, so the
+    /// payment payer can submit it verbatim.
+    #[test]
+    fn manual_rewrites_only_casts_and_activations() {
+        use engine::types::identifiers::CardId;
+        let cast = GameAction::CastSpell {
+            object_id: ObjectId(1),
+            card_id: CardId(2),
+            targets: vec![ObjectId(3)],
+            payment_mode: CastPaymentMode::Auto,
+        };
+        assert!(matches!(manual(&cast), GameAction::CastSpell { payment_mode: CastPaymentMode::Manual, .. }));
+        let activate = GameAction::ActivateAbility { source_id: ObjectId(4), ability_index: 1, payment_mode: CastPaymentMode::Auto };
+        assert!(matches!(
+            manual(&activate),
+            GameAction::ActivateAbility { payment_mode: CastPaymentMode::Manual, .. }
+        ));
+        let tap = GameAction::TapLandForMana {
+            selection: engine::types::mana::ManaSourceSelection {
+                source: engine::types::identifiers::ObjectIncarnationRef::of(ObjectId(5), 0),
+                ability_index: None,
+                mana_type: ManaType::Black,
+                output: engine::types::mana::ManaSourceOutput::Concrete(ManaType::Black),
+                atomic_combination: None,
+                restrictions: vec![],
+                penalty: engine::types::mana::ManaSourcePenalty::None,
+                taps_for_mana: vec![],
+            },
+        };
+        assert_eq!(manual(&tap), tap);
     }
 
     /// An aggregate ward pool gets a witness set whose total power meets the threshold: highest power

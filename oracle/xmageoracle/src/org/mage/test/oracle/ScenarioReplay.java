@@ -680,6 +680,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return false;
         }
 
+        /** Splits gorge's waterbend-helper label "Tap <name> to waterbend for N"
+         * into the permanent's name, or null for any other label. XMage poses
+         * the waterbend ask as a TargetControlledPermanent choice, which reads
+         * the CHOICE queue by name, not the recorded mana-payment plan. */
+        static String waterbendTapName(String label) {
+            if (label == null || !label.startsWith("Tap ")) {
+                return null;
+            }
+            int at = label.indexOf(" to waterbend for ");
+            if (at < 4) {
+                return null;
+            }
+            String name = label.substring(4, at);
+            return name.isEmpty() ? null : name;
+        }
+
         /** Splits a payment-tap label into {permanent name, contribution}
          * ("1" or a WUBRG letter), or null for any other label: a mana wheel's
          * "Tap <name> for mana", a waterbend, a Harmonize "(reduce by N)". */
@@ -992,6 +1008,45 @@ public class ScenarioReplay extends CardTestPlayerBase {
                             && f.getDeclaringClass().getSimpleName().equals(simpleName)));
         }
 
+        /**
+         * The answer to a yes/no a trigger poses while it resolves, when the
+         * step queued no Yes/No for it: gorge folded the may into the body's
+         * pick or cost (CR 603.5: the choice is made as the trigger resolves,
+         * and a may with one legal outcome changes nothing), so it logged the
+         * pick alone -- or nothing at all when there was nothing to pick (an
+         * empty hand for "put a Soldier card from your hand ...", X = 0 for
+         * "tap X untapped Myr ..."). XMage asks the may regardless: the
+         * trigger's own "Use ability?" (TriggeredAbilityImpl.resolve) and the
+         * effect's own "Put ... from your hand?". A queued pick (a name on
+         * the choice or target queue) means gorge went ahead: yes, the pick is
+         * left for the body's own ask. No pick, or a skip gorge logged for the
+         * declined pick (taken off the queue with the decline, as mayPrefix
+         * does), means no. Null when the ask is not posed by a resolving
+         * trigger, or a scripted Yes/No heads the choice queue and TestPlayer
+         * consumes it.
+         */
+        static Boolean foldedOptionalAnswer(boolean triggerResolves, List<String> choices,
+                List<String> targets) {
+            if (!triggerResolves) {
+                return null;
+            }
+            if (!choices.isEmpty() && (choices.get(0).equals("Yes") || choices.get(0).equals("No"))) {
+                return null;
+            }
+            boolean choicePick = !choices.isEmpty() && !TestPlayer.CHOICE_SKIP.equals(choices.get(0));
+            boolean targetPick = !targets.isEmpty() && !TestPlayer.TARGET_SKIP.equals(targets.get(0));
+            if (choicePick || targetPick) {
+                return Boolean.TRUE;
+            }
+            if (!choices.isEmpty()) {
+                choices.remove(0);
+            }
+            if (!targets.isEmpty()) {
+                targets.remove(0);
+            }
+            return Boolean.FALSE;
+        }
+
         /** The opponent a promised Gift goes to: in this two-seat harness the
          * only opponent, named on the choice queue the way makeChoose reads a
          * player, unless the scenario scripted a pick of its own. Null when
@@ -1037,6 +1092,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return !head.equals("Yes") && !head.equals("No");
         }
 
+        /** An unscripted plain wish chooseUse ("Put a card you own from outside
+         * the game ...") is declined when the sideboard holds no card.
+         * WishEffect's filter form (Coax from the Blind Eternities,
+         * alsoFromExile=true) instead says "Reveal ... from outside the game or
+         * choose ... in exile"; exile can still hold a candidate, so that
+         * wording is never declined here. A queued Yes/No is the generator's
+         * own answer and stays for TestPlayer; a non-empty sideboard still asks
+         * because the card may be chosen. */
+        static boolean unanswerableWishAsk(String message, boolean sideboardEmpty, List<String> choices) {
+            if (message == null || !sideboardEmpty
+                    || !message.startsWith("Put a card you own from outside the game")) {
+                return false;
+            }
+            if (!choices.isEmpty()) {
+                String head = choices.get(0);
+                if (head.equals("Yes") || head.equals("No")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         /**
          * The yes/no asks a plain cast step implies. gorge's cast-resolve
          * scenario casts for the mana cost only, so each of these is answered
@@ -1049,10 +1126,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * "optionalcost" cast its leading "Yes" -- gorge elected the cost, so
          * XMage pays it too; an either-or
          * additional cost (OrCost) takes the cost gorge recorded for the step.
+         * A yes/no a resolving trigger poses with no Yes/No queued is
+         * answered from gorge's folded pick (foldedOptionalAnswer).
          * Every other ask stays with the scripted queue.
          */
         @Override
         public boolean chooseUse(Outcome outcome, String message, String secondMessage, String trueText, String falseText, Ability source, Game game) {
+            if (unanswerableWishAsk(message, getSideboard().isEmpty(), getChoices())) {
+                // WishEffect asks before it checks the sideboard. With no card
+                // outside the game (North Wind Avatar's "you may put a card you
+                // own from outside the game into your hand") the prompt has no
+                // candidate and gorge records no decision, so decline it rather
+                // than let strict mode stop at "Missing CHOICE def".
+                return false;
+            }
             if (phyrexianStarved(message, getChoices())) {
                 return false;
             }
@@ -1110,6 +1197,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // placement below, exactly as oracleRun.build's post-placement
                 // LifeChange does.
                 return true;
+            }
+            Boolean folded = foldedOptionalAnswer(source instanceof mage.abilities.TriggeredAbility
+                    && askedBy(mage.abilities.TriggeredAbilityImpl.class, "resolve"), getChoices(), getTargets());
+            if (folded != null) {
+                return folded;
             }
             return super.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
         }
@@ -1215,10 +1307,71 @@ public class ScenarioReplay extends CardTestPlayerBase {
             List<PlayerAction> hidden = hideOtherOccurrences(occurrence);
             try {
                 owner.applyExactBlockers(this, game);
+                dropAutoDeclaredBlocks(game);
                 super.selectBlockers(source, game, defendingPlayerId);
             } finally {
                 getActions().addAll(hidden);
             }
+        }
+
+        /** XMage's combat declares a "blocks this turn if able" blocker itself
+         * before it asks this player, and TestPlayer.selectBlockers throws
+         * "already blocking the maximum amount of creatures" for a queued block
+         * command on top of such a block. gorge records the same pair (the
+         * requirement forces it, CR 509.1c), so drop each queued block command
+         * of this turn whose blocker already blocks that attacker. A pair XMage
+         * did not declare stays queued and keeps TestPlayer's own error. */
+        private void dropAutoDeclaredBlocks(Game game) {
+            UUID attackingPlayer = game.getCombat().getAttackingPlayerId();
+            if (attackingPlayer == null) {
+                return;
+            }
+            for (PlayerAction action : new ArrayList<>(getActions())) {
+                if (action.getTurnNum() != game.getTurnNum() || !action.getAction().startsWith("block:")) {
+                    continue;
+                }
+                String command = action.getAction().substring("block:".length());
+                if (command.startsWith(TestPlayer.BLOCK_SKIP)) {
+                    continue;
+                }
+                String[] groups = command.split("\\$");
+                if (groups.length != 2) {
+                    continue;
+                }
+                Permanent blocker = namedCombatPermanent(groups[0], getId(), null, game);
+                Permanent attacker = namedCombatPermanent(groups[1], attackingPlayer, game.getCombat().getAttackers(), game);
+                if (blocker == null || attacker == null) {
+                    continue;
+                }
+                mage.game.combat.CombatGroup group = game.getCombat().findGroup(attacker.getId());
+                if (group != null && group.getBlockers().contains(blocker.getId())) {
+                    getActions().remove(action);
+                }
+            }
+        }
+
+        /** TestPlayer's name command ("Name" or "Name:k", k the zero-based
+         * index among the controller's matches in battlefield order) resolved
+         * against the live battlefield; attackers only, when `attacking` is
+         * given. Null when nothing matches. */
+        private static Permanent namedCombatPermanent(String command, UUID controller,
+                java.util.Collection<UUID> attacking, Game game) {
+            String name = combatBaseName(command);
+            int index = combatIndex(command);
+            mage.filter.predicate.mageobject.NamePredicate matches =
+                    new mage.filter.predicate.mageobject.NamePredicate(name, true);
+            int seen = 0;
+            for (Permanent permanent : game.getBattlefield().getAllPermanents()) {
+                if (!controller.equals(permanent.getControllerId()) || !permanent.isPhasedIn()
+                        || (attacking != null && !attacking.contains(permanent.getId()))
+                        || !matches.apply(permanent, game)) {
+                    continue;
+                }
+                if (seen++ == index) {
+                    return permanent;
+                }
+            }
+            return null;
         }
 
         // Tokens may be created after scripted() queues an answer. Resolve a
@@ -2455,6 +2608,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
         throw new IllegalArgumentException("invalid scenario turn " + value + " (want integer 1..100)");
     }
 
+    /** Test hook: the count of counters of the given type on the named card
+     * in exile in the game the last replayOnce ran (-1 when no such card).
+     * The snapshot carries exile names only, so the Suspend test reads the
+     * time counters here. */
+    int exileCounters(String cardName, String counterType) {
+        for (Card c : currentGame.getExile().getAllCards(currentGame)) {
+            if (cardName.equals(c.getName())) {
+                return c.getCounters(currentGame).getCount(counterType);
+            }
+        }
+        return -1;
+    }
+
     JsonObject replayOnce(JsonObject sc, boolean strict) {
         JsonObject res = new JsonObject();
         res.addProperty("strict", strict);
@@ -2538,17 +2704,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 int beforeChoicesB = playerB.getChoices().size();
                 int beforeTargetsA = playerA.getTargets().size();
                 int beforeTargetsB = playerB.getTargets().size();
+                String payment = paymentAt(sc, i);
+                boolean inferWaterbendX = "activate".equals(op)
+                        && xabilityAt(i).startsWith("waterbend {X}");
                 if (i < xans.size() && xans.get(i).isJsonArray()) {
                     // Queue answers by their recorded seat before registering
                     // actions. XMage consumes these queues while executing the
                     // cast; the action registration itself is deferred.
-                    scripted(xans.get(i).getAsJsonArray());
+                    scripted(xans.get(i).getAsJsonArray(), payment, inferWaterbendX);
                 }
                 int beforeA = playerA.getActions().size();
                 int beforeB = playerB.getActions().size();
                 queuePassCommands(i);
                 tagQueuedActions(beforeA, beforeB);
-                String payment = paymentAt(sc, i);
                 stepPayment = payment;
                 step(st, op, i);
                 String cp = "step " + i + " (" + op + ")";
@@ -3917,8 +4085,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
 
     /** Whether a cast step's cast_mode is one this driver elects: Bargain,
      * "optionalcost", "kicked" (the single Kicker ask; kicked1/kicked2/kickedboth/
-     * multikicked pose per-kicker asks in order and stay rejected), the face-down Disguise/Morph/Megamorph casts, the "plot" special
-     * action, a graveyard "flashback" cast, and a "mayplay" cast of a card a
+     * multikicked pose per-kicker asks in order and stay rejected), the face-down Disguise/Morph/Megamorph casts, the "plot" and
+     * "suspend" special actions, a graveyard "flashback" cast, and a "mayplay" cast of a card a
      * play-from-exile permission (Reckless Impulse) reaches are wired
      * ("plot_cast", the later cast of a plotted card, is not); so are the
      * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half, whose
@@ -3931,6 +4099,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 || mode.equals("bargained") || mode.equals("optionalcost") || mode.equals("kicked")
                 || mode.equals("disguised") || mode.equals("morphed") || mode.equals("megamorphed")
                 || mode.equals("plot") || mode.equals("flashback")
+                // "suspend": Suspend from hand (CR 702.62a) is a special action
+                // (CR 116.2f), XMage's SuspendAbility, activated like Plot.
+                || mode.equals("suspend")
                 // "mayplay": the card is in exile (or wherever a play-from-exile
                 // permission reaches) rather than hand, but the cast itself is
                 // the card's ordinary SpellAbility, played by name. TestPlayer's
@@ -4520,6 +4691,46 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // ("{T}", "Equip {2}"). The activate: / manaActivate: handlers route it
     // through that match before activating.
     private JsonArray xabilities = new JsonArray();
+
+    /**
+     * The X of a Waterbend {X} activation as the transcript records it: every
+     * waterbend tap label pays one generic (its "for N"), and the step's
+     * recorded pool spend is the rest of the waterbend cost. An explicit
+     * amount answer or "X=<n>" choice is XMage's own X and is left to
+     * TestPlayer.announceX: nothing is inferred beside it, so the step never
+     * queues two X answers.
+     */
+    static int waterbendXFromAnswers(JsonArray as, String payment) {
+        int x = payment == null ? 0 : payment.length();
+        for (JsonElement e : as) {
+            JsonObject a = e.getAsJsonObject();
+            String kind = str(a, "kind");
+            if ("amount".equals(kind)) {
+                return 0;
+            }
+            if (!"choice".equals(kind)) {
+                continue;
+            }
+            String v = str(a, "value");
+            if (v.startsWith("X=")) {
+                return 0;
+            }
+            if (ScriptedChoicePlayer.waterbendTapName(v) == null) {
+                continue;
+            }
+            int at = v.lastIndexOf(" for ");
+            if (at >= 0) {
+                try {
+                    x += Integer.parseInt(v.substring(at + 5).trim());
+                    continue;
+                } catch (NumberFormatException ignored) {
+                    // no contribution: count the tap anyway
+                }
+            }
+            x += 1;
+        }
+        return x;
+    }
 
     /** Step i's XMage ability text, or "" when the item carries none. */
     private String xabilityAt(int i) {
@@ -6056,6 +6267,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), plotText, stepIdx));
                     return;
                 }
+                // "suspend" is XMage's Suspend special action from the hand
+                // (SuspendAbility is a SpecialAction with usesStack false,
+                // CR 116.2f): it pays the suspend cost and exiles the card
+                // with its time counters, no cast and no stack. Activated by
+                // its rule-text prefix "Suspend N" like XMage's SuspendTest,
+                // scoped to the step's card so another suspend card in hand
+                // cannot be picked.
+                if ("suspend".equals(castMode)) {
+                    String suspendText = xabilityAt(stepIdx);
+                    if (suspendText.isEmpty()) {
+                        throw new IllegalArgumentException("suspend step " + stepIdx + " has no xmage_ability");
+                    }
+                    activateAbility(turn, phase, p, boundActivationText(p, str(st, "card"), suspendText, stepIdx));
+                    return;
+                }
                 // "flashback" is the cast of a graveyard card for its
                 // flashback cost. XMage offers it as a separate SpellAbility
                 // named "Flashback <cost>" (CastFromGraveyardAbility), picked
@@ -6439,7 +6665,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** Applies the generator's scripted answers (oraclegen.XAnswer). */
-    private void scripted(JsonArray as) {
+    private void scripted(JsonArray as, String payment, boolean inferWaterbendX) {
+        int waterbendX = inferWaterbendX ? waterbendXFromAnswers(as, payment) : 0;
+        boolean waterbendXQueued = false;
         for (JsonElement e : as) {
             JsonObject a = e.getAsJsonObject();
             TestPlayer p = seat(a.get("seat").getAsInt());
@@ -6509,7 +6737,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     } else if (isSeatRef(v)) {
                         setChoice(p, seat(seatOf(v)).getName());
                     } else {
-                        queueChoice(p, aliasChoiceValue(v));
+                        String waterbendTap = ScriptedChoicePlayer.waterbendTapName(v);
+                        if (waterbendTap != null && !waterbendXQueued && waterbendX > 0) {
+                            // Waterbend {X}: xproof records the helper taps and pool spend, not a
+                            // separate X amount. TestPlayer.announceX reads this before the tap ask.
+                            queueChoice(p, "X=" + waterbendX);
+                            waterbendXQueued = true;
+                        }
+                        queueChoice(p, aliasChoiceValue(waterbendTap != null ? waterbendTap : v));
                     }
                     break;
                 default:
@@ -6974,13 +7209,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * Replace name-only attacker commands with exact declarations when the
-     * controlling seat has both a token and a card of a name, or when the step
-     * declares two same-name cards. XMage's "Name:k" command ranks the two
-     * kinds together and takes whichever it finds first, so it can declare the
-     * card when the scenario recorded the token (and the reverse). It also has
-     * to name the highest-index duplicate first, which reverses the step's
-     * order; a band's leader and XMage's combat asks follow declaration order.
+     * Replace name-only attacker commands with exact declarations when a
+     * command could name a different object than the recorded ref: the
+     * controlling seat has a token and a card of one name, the step declares
+     * a repeat of a name, a ref carries a later "#k" ordinal than its first
+     * live copy, or the seat controls more than one live same-name permanent
+     * (a tapped, summoning-sick or already-attacking duplicate is not in
+     * XMage's "Name:k" rank, while the ref's ordinal counts every copy). It
+     * also has to name the highest-index duplicate first, which reverses the
+     * step's order; a band's leader and XMage's combat asks follow declaration
+     * order.
      *
      * <p>Once a batch needs exact declarations, every ref of that batch that
      * resolves is declared exactly, in the step's own order, not just the
@@ -6999,27 +7237,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             it.remove();
             Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
-            Map<String, Integer> groupSize = new LinkedHashMap<>();
-            Map<String, Boolean> groupExactable = new LinkedHashMap<>();
             Map<String, Permanent> exactByRef = new HashMap<>();
             for (String ref : batch.refs) {
-                String name = battlefieldName(ref);
-                Permanent exact = combatPermanent(ref, name, player.getId(), game);
-                exactByRef.put(ref, exact);
-                groupSize.merge(name, 1, Integer::sum);
-                groupExactable.merge(name, exact != null, (all, one) -> all && one);
+                exactByRef.put(ref, combatPermanent(ref, battlefieldName(ref), player.getId(), game));
             }
             boolean exactNeeded = false;
             for (String ref : batch.refs) {
                 String name = battlefieldName(ref);
                 if (combatRefAmbiguous(name, player.getId(), battlefield)
-                        || (groupSize.get(name) > 1 && groupExactable.get(name))) {
+                        || (exactByRef.get(ref) != null
+                                && combatNameUnreliable(ref, name, player.getId(), battlefield))) {
                     exactNeeded = true;
                     break;
                 }
             }
             if (!exactNeeded) {
-                // No ambiguity and no fully-resolvable same-name group: the
+                // Every name command still names its recorded object: the
                 // name commands keep the behaviour every other step has.
                 continue;
             }
@@ -7052,10 +7285,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * The blocker counterpart of applyExactAttackers. Either side of a
-     * recorded [blocker, attacker] pair can be the token that shares its name
-     * with a card, so both refs are resolved exactly and the pair is declared
-     * directly instead of lowering either to a name.
+     * The blocker counterpart of applyExactAttackers. Both sides of a
+     * recorded [blocker, attacker] pair are resolved exactly and declared
+     * directly instead of lowered to a name when either name command could
+     * name the wrong object: the seat controls more than one same-name
+     * permanent (a token beside a card, or a live duplicate whose rank the
+     * command's filter shifts), or a ref carries a later "#k" ordinal than
+     * its first live copy. The blocker command ranks every controlled
+     * permanent of the name; the attacker command ranks only the currently
+     * attacking ones, so a same-name non-attacker shifts its index too.
      */
     private void applyExactBlockers(TestPlayer player, Game game) {
         UUID attackerId = game.getCombat().getAttackingPlayerId();
@@ -7074,19 +7312,29 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String blockerName = battlefieldName(blockerRef);
                 String attackerName = battlefieldName(attackerRef);
                 Iterable<Permanent> battlefield = game.getBattlefield().getAllPermanents();
-                if (!combatRefAmbiguous(blockerName, player.getId(), battlefield)
-                        && !combatRefAmbiguous(attackerName, attackerId, battlefield)) {
+                Permanent blocker = combatPermanent(blockerRef, blockerName, player.getId(), game);
+                Permanent attacker = combatPermanent(attackerRef, attackerName, attackerId, game);
+                boolean exactNeeded = combatRefAmbiguous(blockerName, player.getId(), battlefield)
+                        || combatRefAmbiguous(attackerName, attackerId, battlefield)
+                        || (blocker != null
+                                && combatNameUnreliable(blockerRef, blockerName, player.getId(), battlefield))
+                        || (attacker != null
+                                && combatNameUnreliable(attackerRef, attackerName, attackerId, battlefield));
+                if (!exactNeeded) {
                     continue;
                 }
                 player.getActions().remove(batch.actions.get(i));
-                Permanent blocker = combatPermanent(blockerRef, blockerName, player.getId(), game);
-                Permanent attacker = combatPermanent(attackerRef, attackerName, attackerId, game);
                 if (blocker == null || attacker == null) {
                     throw new IllegalArgumentException("block " + blockerRef + " -> " + attackerRef
                             + " names no live permanent (battlefield: " + battlefieldListing() + ")");
                 }
-                player.declareBlocker(player.getId(), blocker.getId(), attacker.getId(), game);
                 mage.game.combat.CombatGroup group = game.getCombat().findGroup(attacker.getId());
+                if (group != null && group.getBlockers().contains(blocker.getId())) {
+                    // XMage already declared this pair from a block requirement.
+                    continue;
+                }
+                player.declareBlocker(player.getId(), blocker.getId(), attacker.getId(), game);
+                group = game.getCombat().findGroup(attacker.getId());
                 if (group == null || !group.getBlockers().contains(blocker.getId())) {
                     throw new IllegalArgumentException("block " + blockerRef + " -> " + attackerRef
                             + " was not declared (battlefield: " + battlefieldListing() + ")");
@@ -7162,6 +7410,33 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
         return token && card;
+    }
+
+    /** Whether XMage's name-only combat command may name a different object
+     * than the recorded ref. The command ranks the permanents that currently
+     * match its own filter: the attack command ranks untapped, non-sick
+     * creatures of the name, while a block's attacker side ranks only the
+     * currently attacking ones. The driver's "#k" is instead the scenario
+     * object's setup ordinal across zones. The two ranks agree only for the
+     * first ordinal when the seat controls exactly one live permanent of the
+     * name; a duplicate (tapped, already attacking, phased out, or on the
+     * token/card side of the same name) shifts XMage's index, and a later
+     * ordinal can outlive the earlier copies. Resolving the ref to its bound
+     * object is the only exact answer, so the caller declares it directly. */
+    static boolean combatNameUnreliable(String ref, String name, UUID controller,
+            Iterable<Permanent> battlefield) {
+        if (refOrdinal(ref) > 1) {
+            return true;
+        }
+        int sameName = 0;
+        for (Permanent permanent : battlefield) {
+            if (controller.equals(permanent.getControllerId())
+                    && CardUtil.haveSameNames(permanent.getName(), name, true)
+                    && ++sameName > 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Whether an activation's XMage text turns its permanent face up

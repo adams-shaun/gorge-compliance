@@ -75,6 +75,7 @@ Balshan Beguiler	T4	effects	move:library>library	-	equivalent	script Dig puts th
 Bane, Lord of Darkness	T4	effects	draw:1	-	equivalent	the opponent may have you draw: mtgish MayCost(HavePlayerTakeAction DrawACard), script GenericChoice with a Draw
 Banefire	T4	effects	static:damagecantbeprevented	-	equivalent	mtgish folds damage-cant-be-prevented into the spell action (IfElse); script a static
 Baneful Omen	T4	effects	dig:1	-	equivalent	mtgish MayCost(RevealTopCardOfLibrary): cost there, a Dig in the script
+Banescale Serpent	T4	effects	grant:protection	-	equivalent	protection from the noted creature types: script grants it through a self static, mtgish writes it as a Protection keyword (T1 protection row); the as-enters note maps to choose on both sides
 Banishment	T4	effects	-	move:battlefield>exile	equivalent	one action over several targets or objects vs one sub-ability each
 Bant	T4	effects	grant:ability	grant:indestructible	equivalent	keyword while it has a counter: script grants a conditional static
 Bazaar of Wonders	T4	effects	counter	-	equivalent	two counter checks (graveyard match, battlefield match): script two Counters, mtgish one with an or-condition
@@ -523,6 +524,7 @@ Null Chamber	T4	effects	choose player:cantplaylandsoftype	static:cardeffect	equi
 Ob Nixilis of the Black Oath	T4	effects	effect	draw:* gainlife:*	equivalent	the emblem's activated ability is summarised as an effect in the script
 Ojer Kaslem, Deepest Growth	T4	effects	-	move:library>battlefield	equivalent	mtgish one battlefield move per card type
 Ojer Pakpatiq, Deepest Epoch	T4	effects	grant:rebound	effect	equivalent	rebound granted to the cast spell: a grant vs mtgish's spell effect
+Oko, Lord of the Fae	T4	effects	play	mayplay	digital-variant	Alchemy (Y22) emblem conjures a planeswalker; script casts it at once as an optional Play in the upkeep trigger, mtgish a cast-this-turn permission (mayplay)
 Omnath, Locus of All	T4	effects	dig:1	-	equivalent	script peeks then reveals as two PeekAndReveal SAs
 Once and Future	T4	effects	move:graveyard>hand	-	equivalent	two hand returns of one or two targets: two moves vs one
 Ood Sphere	T4	effects	effect	rule:cantbecometappedunlessitisbeingdeclaredasanattacker	equivalent	goaded creatures' tapping restriction is an Effect
@@ -576,6 +578,7 @@ Primal Prayers	T4	effects	mayplay	flash	equivalent	cast as though it had flash: 
 Primeval Spawn	T4	effects	-	replace:wouldenter	equivalent	the replacement's own effects are summarised by event only
 Prisoner's Dilemma	T4	effects	-	damage:4 damage:8 vote	equivalent	the secret-choice damage outcomes: one computed DealDamage vs one action per outcome
 Professor Onyx	T4	effects	discard:1	-	equivalent	the opponent's optional discard: a Discard in the script, PlayerMayCost in mtgish
+Prophet of the Planeswalker	T4	effects	-	perpetual	digital-variant	Alchemy perpetual: script an Animate Duration$ Perpetual over the beheld planeswalker (summarised as nothing), mtgish a perpetual grant
 Psychotic Episode	T4	effects	dig:1	-	equivalent	reveal hand and top card: two looks vs one
 Pull from the Deep	T4	effects	move:graveyard>hand	-	equivalent	return an instant and a sorcery: two ChangeZones vs one action
 Puppeteer Clique	T4	effects	grant:haste	-	mtgish-bug	haste grant dropped

@@ -687,7 +687,10 @@ mod tests {
         let r = s.handle(br#"{"request_type":"hello","protocol":"spellbench/v2","request_id":"h","protocol_minor":0}"#);
         let v: Value = serde_json::from_slice(&r).unwrap();
         assert_eq!(v["response_type"], "hello_ok");
+        // The seat pays every cost itself (taps, colours, own-mana prompts), so the host never poses
+        // `activate_mana_ability`: that is the spec's `engine_autopay` table.
         assert_eq!(v["engine_defaults"]["mana_payment"], "engine_autopay");
+        assert!(!v["decision_kinds"].as_array().unwrap().iter().any(|k| k == "activate_mana_ability"));
         assert_eq!(v["catalog"][0]["catalog_id"], "d");
         assert_eq!(v["decision_kinds"].as_array().unwrap().len(), crate::semantic::DECISION_KINDS.len());
     }

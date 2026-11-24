@@ -14,11 +14,10 @@ Alchemist's Talent	T1	keywords	class:2:{1}{R} class:3:{4}{R}	class:2:{3}{R} clas
 Arek, False Goldwarden	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 Artificer Class	T1	keywords	class:3:{5}{U}	class:3:{1}{U}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Artist's Talent	T1	keywords	class:2:{2}{R}	class:2:{1}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
-Asymmetry Sage [A-Symmetry Sage]	T1	face	face	-	digital-variant	Alchemy rebalanced face: script names the face A-Symmetry Sage, mtgish keeps Asymmetry Sage
-Asymmetry Sage [Asymmetry Sage]	T1	face	-	face	digital-variant	Alchemy rebalanced face: script names the face A-Symmetry Sage, mtgish keeps Asymmetry Sage
 Aven Liberator	T1	keywords	-	flying	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost
 Awestruck Cygnet	T1	keywords	startingintensity	-	mtgish-bug	Starting intensity 0 dropped (13/13 nonzero kept)
 Bandit's Talent	T1	keywords	class:2:{B} class:3:{3}{B}	class:2:{1}{B} class:3:{B}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
+Banescale Serpent	T1	keywords	-	protection:instant	equivalent	protection from the noted creature types: mtgish a second Protection keyword (protection:*, which matches the script K:Protection:Instant), the script a self Continuous AddKeyword static (T2 static, T4 grant:protection)
 Barbarian Class	T1	keywords	class:2:{1}{R} class:3:{2}{R}	class:2:{R} class:3:{1}{R}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Bard Class	T1	keywords	class:3:{3}{R}{G}	class:3:{R}{G}	mtgish-bug	level costs: mtgish ClassAbility emits an earlier ManaCost capture; script matches the printed costs (i5jb/mtgish#1)
 Belltoll Dragon	T1	keywords	-	flying hexproof	mtgish-bug	mtgish#1 morph line[0] emitted twice; turned-face-up trigger lost

@@ -1034,8 +1034,8 @@ func modeNumbers(reg *cards.Registry, it oraclegen.Item, ds []rules.OracleDecisi
 }
 
 // prefixes is Item.XAbility: parallel to the steps, the XMage rule-text prefix
-// of every activate step's ability and of a cast step that is the Plot special
-// action, and "" elsewhere (nil when no step carries one). An activate step
+// of every activate step's ability and of a cast step that is the Plot or
+// Suspend special action, and "" elsewhere (nil when no step carries one). An activate step
 // whose prefix is unknown is a Refusal.
 //
 // A granted/gained/keyword-granted step is resolved through the same
@@ -1066,6 +1066,27 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 			if c, face, ok := stepCard(reg, it, st); ok {
 				if cost, ok := c.Faces[face].KeywordCostParam("Plot"); ok && cost != "" {
 					out[i] = "Plot " + xmageManaText(cost)
+				}
+			}
+			continue
+		}
+		// Suspend from hand is the same shape (CR 702.62a, 116.2f): gorge
+		// records the special action as a cast step with cast_mode "suspend"
+		// and XMage replays it as the SuspendAbility special action, selected
+		// by its rule-text prefix "Suspend N" (the time-counter count the
+		// Forge keyword K:Suspend:<N>:<cost> leads with, or "X"). XMage's own
+		// SuspendTest selects it by that prefix; the driver scopes the pick
+		// to the step's card.
+		if st.Op == "cast" && strings.EqualFold(st.CastMode, "suspend") {
+			if out == nil {
+				out = make([]string, len(it.Steps))
+			}
+			out[i] = "Suspend"
+			if c, face, ok := stepCard(reg, it, st); ok {
+				if param, ok := c.Faces[face].KeywordParam("Suspend"); ok {
+					if n, _, _ := strings.Cut(param, ":"); strings.TrimSpace(n) != "" {
+						out[i] = "Suspend " + strings.TrimSpace(n)
+					}
 				}
 			}
 			continue

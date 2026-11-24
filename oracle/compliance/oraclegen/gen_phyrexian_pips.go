@@ -36,6 +36,15 @@ type xanswersExtra struct {
 	// casts is the set of the scenario's cast step indices: a forced X
 	// announcement on one is still posed by XMage (castAnnouncesX).
 	casts map[int]bool
+	// activates maps an activation step to the number of X announcements its
+	// costs pose. One is the mana {X}; a non-mana variable cost that announces
+	// its own X (Ludevic, Necrogenius's ExileXFromYourGraveCost) adds another.
+	// A counter-removal cost that reuses the mana X (Talon of Pain) does not.
+	activates map[int]int
+	// searchZones maps a search_zones decision index to the resolved XMage ask
+	// shape (search_zone_source.go). Absent means an unproven effect shape,
+	// which stays unscripted.
+	searchZones map[int]searchZoneAsk
 	// forage maps a forage election's decision index to the graveyard
 	// cards its exile arm took (forageExiles).
 	forage map[int][]string
