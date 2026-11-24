@@ -210,7 +210,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (2 tests: both answers) pins it; the full driver suite (148 tests, including ForcedDieRollTest) is green. Driver-only
 # change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-unleash-replacement.
-FORGE_ORACLE_REF ?= c873c2c939970b0c06542b197ef8e06383729c01
+# bdc90a6b94b = c873c2c9399 plus the trigger-order tie of copies (xproof decision_shape: Dromoka, the Eternal). CR 603.3b: with
+# two Dromoka triggers and Nadaar's venture simultaneous, gorge orders [Dromoka, Dromoka, Nadaar]; the two Dromoka triggers tie
+# on the label and are copies of one trigger, but orderTriggers tested sameEffect on ALL remaining triggers (Nadaar's included)
+# and strict-missed "binds no unique Forge trigger". It now tests only the triggers tied at the best score and takes the first
+# copy (their order is unobservable); a tie between different effects still misses. TriggerOrderTiedCopiesTest (2 tests) pins
+# both. The find's replay (dromoka-the-eternal.request.jsonl) also pins Nadaar's venture: once the order binds, Forge's
+# chooseSingleCardFace asks for the dungeon and gorge's choose_n[dungeon] pick (CR 701.49a) now answers it instead of going
+# unconsumed (a second strict miss the order miss had masked). The full driver suite (151 tests) is green. Driver-only change; cardsfolder/tokenscripts unchanged. Fork branch
+# fix/xp-forge-driver-trigger-order-tied-copies.
+FORGE_ORACLE_REF ?= bdc90a6b94b2b7730d95744f7ecd4c51c85c7242
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
