@@ -180,6 +180,9 @@ if [ "$mode" = preflight ]; then
   # so any one of those accepts the name.
   funny_face() {
     [ -n "$funny" ] || return 1
+    # Cheap prefilter: some filtered joined name must contain "NAME // " before
+    # the per-file cardsfolder scan below (one grep over every card file) runs.
+    grep -qF -e "$1 // " <<<"$funny" || return 1
     local f joined any=1
     while IFS= read -r f; do
       grep -q '^AlternateMode:' "$f" || return 1
@@ -208,8 +211,8 @@ if [ "$mode" = preflight ]; then
     # joined "main // other" (CardRules.getPreInitName), and an adventure/MDFC
     # by its main face; the editions list each the same way, but the corpus
     # names both jointly. Refuse when the joined name or its first face is in
-    # the filtered set; a bare first face is refused when the filtered set
-    # holds a joined name that starts with it.
+    # the filtered set; a bare first face is judged by funny_face's per-file
+    # rule (refused only when every card file defining it is a filtered split).
     first=${n%%" // "*}
     if funny_has "$n" || { [ "$first" != "$n" ] && funny_has "$first"; } ||
        { [ "$first" = "$n" ] && funny_face "$n"; }; then
