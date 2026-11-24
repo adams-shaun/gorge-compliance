@@ -22,6 +22,9 @@ type Focus struct {
 	Card    string // front-face name of the focus card
 	Kind    string // "ability", "cast", "land", "attack" or "" (no forced action)
 	Ability int    // for "ability": the index into Face().Abilities (decision.Option.Ability)
+	// Mode, for "cast", is the cast option's payment kind (decision.Option.Mode,
+	// e.g. "kicked"); "" takes any cast option of the card.
+	Mode string
 }
 
 // focusState is what every seat's focusBot shares with the Setup hook: the
@@ -85,6 +88,42 @@ func (b focusBot) DecideBoard(ctx context.Context, brd botpolicy.Board, d decisi
 	return b.act(d, in, err)
 }
 
+// holdPass is the focus seat's answer to a priority decision before the focus
+// opens: pass, whatever the bot chose. Any other seat or decision keeps the
+// bot's answer.
+func (s *focusState) holdPass(d decision.Decision, in decision.Intent) decision.Intent {
+	if d.Kind != decision.KPriority || int(d.Player) != s.f.Seat {
+		return in
+	}
+	for i, o := range d.Options {
+		if o.Kind == "pass" {
+			in.Choices = []int{i}
+			return in
+		}
+	}
+	return in
+}
+
+// manaFor is, for a cast focus with a Mode (a kicked cast), the focus seat's
+// first activation of a land, or -1. Such a cast is never a planned payment (the
+// payment planner plans the card's own cost), and a seat whose bot pays
+// through plans is offered a cast option only once the pool covers it, so the
+// focus taps its lands (a forced start's mana sources: basics) one by one until the mode's option is offered.
+func (s *focusState) manaFor(d decision.Decision) int {
+	if s.f.Kind != "cast" || s.f.Mode == "" || int(d.Player) != s.f.Seat {
+		return -1
+	}
+	for i, o := range d.Options {
+		if o.Kind != "activate" || s.e == nil {
+			continue
+		}
+		if ob := s.e.G.Obj(o.Obj); ob != nil && ob.Face() != nil && ob.Face().IsLand() {
+			return i
+		}
+	}
+	return -1
+}
+
 // open reports whether the game has reached turn 1's first precombat main
 // phase: the span a start item replays begins there, so an action taken
 // earlier (an upkeep activation) would be missing from it.
@@ -93,10 +132,16 @@ func (s *focusState) open() bool {
 }
 
 // act replaces the bot's answer with the focus action when d offers it.
+// Before turn 1's first precombat main phase the focus seat passes priority
+// instead (holdPass): a land it tapped for mana in the upkeep would empty
+// before main 1 and leave the forced line unaffordable.
 func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decision.Intent, error) {
 	st := b.st
-	if err != nil || st.done || st.f.Kind == "" || !st.open() {
+	if err != nil || st.done || st.f.Kind == "" {
 		return in, err
+	}
+	if !st.open() {
+		return st.holdPass(d, in), nil
 	}
 	switch d.Kind {
 	case decision.KPriority:
@@ -109,15 +154,20 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 			case "ability":
 				ok = o.Kind == "ability" && o.Ability == st.f.Ability
 			case "cast":
-				ok = o.Kind == "cast"
+				ok = o.Kind == "cast" && (st.f.Mode == "" || o.Mode == st.f.Mode)
 			case "land":
 				ok = o.Kind == "play_land"
 			}
 			if ok {
 				st.done = true
 				in.Choices = []int{i}
+				in.Payment = nil
 				return in, nil
 			}
+		}
+		if i := st.manaFor(d); i >= 0 {
+			in.Choices, in.Payment = []int{i}, nil
+			return in, nil
 		}
 	case decision.KAttackers:
 		if st.f.Kind != "attack" {

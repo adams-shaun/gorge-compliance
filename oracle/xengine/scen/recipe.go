@@ -3,6 +3,7 @@ package scen
 import (
 	"fmt"
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -124,8 +125,46 @@ func asEnters(f *cards.Face) bool {
 	return false
 }
 
-// selfZone reports whether a ChangesZone trigger is about the card itself.
-func selfCard(t *cards.Trigger) bool { return strings.Contains(t.Params["ValidCard"], "Card.Self") }
+// selfCard reports whether a trigger is about the card itself: some
+// alternative of its ValidCard is Card with the Self property
+// ("Card.Self+kicked", "Card.wasCastByYou+Self").
+func selfCard(t *cards.Trigger) bool {
+	for _, alt := range strings.Split(t.Params["ValidCard"], ",") {
+		props, ok := strings.CutPrefix(strings.TrimSpace(alt), "Card.")
+		if ok && slices.Contains(strings.Split(props, "+"), "Self") {
+			return true
+		}
+	}
+	return false
+}
+
+// castLine meets a cast-history need (scen.castHistory) on the start's own
+// line: the focus must be seat 0 casting the card from hand, which makes it
+// cast; for "kicked" the lands for the kicker cost are added too and the focus
+// takes the kicked cast option. "" when met, else the refusal.
+func castLine(face *cards.Face, card, hist, generic string, f *StartFile) string {
+	fo := f.Focus
+	if fo == nil || fo.Seat == nil || *fo.Seat != 0 || fo.Kind != "cast" || fo.Card != card || !slices.Contains(f.Setup.P0.Hand, card) {
+		return "history:" + hist
+	}
+	if hist != "kicked" {
+		return ""
+	}
+	k, ok := face.KeywordParam("Kicker")
+	if !ok {
+		return "history:kicked:no-kicker" // multikicker, an and/or kicker read another way
+	}
+	if strings.Contains(k, ":") {
+		return "history:kicked:multi-cost" // "kicked1"/"kicked2": the focus names one mode
+	}
+	mana, why := costTokens(k)
+	if why != "" {
+		return why
+	}
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, landsFor(mana, generic)...)
+	fo.Mode = "kicked"
+	return ""
+}
 
 func newStart(card, key string) *StartFile {
 	return &StartFile{Format: StartFormat, Card: card, Key: key, Players: 2, MaxTurns: 1, Filler: "basics", Seeds: 2}
@@ -135,7 +174,7 @@ func seat(n int) *int { return &n }
 
 // recipe is the start-file path: the placements by key family, then the needs.
 func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, fam string, m []string,
-	sa *cards.SA, trig *cards.Trigger, opt Options) (Result, error) {
+	sa *cards.SA, trig *cards.Trigger, hist string, opt Options) (Result, error) {
 	face := c.Faces[0]
 	f := newStart(card, key)
 	p0, p1 := &f.Setup.P0, &f.Setup.P1
@@ -214,6 +253,11 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	default:
 		return refuse("no-generator")
 	}
+	if hist != "" {
+		if why := castLine(face, card, hist, generic, f); why != "" {
+			return refuse(why)
+		}
+	}
 	for _, bf := range [][]string{p0.Battlefield, p1.Battlefield} {
 		for _, n := range bf {
 			if n != card {
@@ -252,18 +296,36 @@ func FieldBlock(face *cards.Face) string {
 	return ""
 }
 
-// placeNeeds adds what certdeck.Derive says the card reads: graveyard fodder,
-// and the first enabler certdeck picks for each other need, on its side's
-// battlefield, or in its side's hand when FieldBlock says it cannot be placed
-// there (an instant, a sorcery, an Aura: the side casts it). A need StartSpec
-// cannot place (tokens, counters) is a refusal.
+// The forced start (operator rule): a start is built so the only plays it
+// offers are the ones that exercise the key. A need is met by placed state
+// where it can be (a permanent on the battlefield, a life total, tapped
+// lands), so no play is needed to meet it; an enabler that must be cast
+// (an instant, a sorcery, an Aura) comes with exactly the lands its cost
+// takes, and an Aura with one inert bearer. Placed enablers prefer cards no
+// one can act on, so the bots and the three engines face one small decision
+// tree.
+
+// burnedLife is the life an opp-burn need starts the target seat at: below
+// the opponent's 20, as the burn certdeck would have cast leaves it.
+const burnedLife int32 = 17
+
+// bearers are the inert creatures an Aura enabler's caster gets to enchant,
+// first the corpus holds and certdeck accepts: no ability, defender.
+var bearers = []string{"Wall of Stone", "Wall of Wood"}
+
+// placeNeeds adds what certdeck.Derive says the card reads (see the forced
+// start above): graveyard fodder; for a lands need, certdeck's two extra
+// lands, tapped, so they add no mana; for opp-burn, the target seat's life
+// lowered; for a counters need, the counters themselves (placeCounters); for
+// every other need, one of certdeck's picks (pickEnabler). A need StartSpec
+// cannot place is a refusal: tokens (rules.StartSeat has no tokens yet).
 func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, generic string, f *StartFile) (string, error) {
 	needs := certdeck.Derive(c, b.Types())
 	if len(needs) == 0 {
 		return "", nil
 	}
 	for _, n := range needs {
-		if n.Class == certdeck.Token || n.Class == certdeck.Counters {
+		if n.Class == certdeck.Token {
 			return "steps-needed:" + n.Class, nil
 		}
 	}
@@ -277,34 +339,124 @@ func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, g
 			for i := 0; i < 7; i++ {
 				f.Setup.P0.Graveyard = append(f.Setup.P0.Graveyard, generic)
 			}
+		case n.Class == certdeck.Lands:
+			for i := 0; i < 2; i++ {
+				f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, generic)
+				f.Setup.P0.Tapped = append(f.Setup.P0.Tapped, generic)
+			}
+		case n.Class == certdeck.Counters:
+			if err := placeCounters(reg, b, card, n.Arg, f); err != nil {
+				return "", err
+			}
+		case n.Class == certdeck.OppBurn:
+			if f.Setup.P0.Life == nil {
+				l := burnedLife
+				f.Setup.P0.Life = &l
+			}
 		case certdeck.OppSide(n.Class):
-			if got := plan.Opponent.Provided[n.String()]; len(got) > 0 {
-				if err := placeEnabler(reg, &f.Setup.P1, got[0]); err != nil {
-					return "", err
-				}
+			if err := pickEnabler(reg, b, &f.Setup.P1, f.Active != 1, plan.Opponent.Provided[n.String()]); err != nil {
+				return "", err
 			}
 		default:
-			if got := plan.Self.Provided[n.String()]; len(got) > 0 {
-				if err := placeEnabler(reg, &f.Setup.P0, got[0]); err != nil {
-					return "", err
-				}
+			if err := pickEnabler(reg, b, &f.Setup.P0, f.Active != 0, plan.Self.Provided[n.String()]); err != nil {
+				return "", err
 			}
 		}
 	}
 	return "", nil
 }
 
-// placeEnabler lists an enabler on s's battlefield, or in s's hand when
-// FieldBlock refuses it the battlefield.
-func placeEnabler(reg *cards.Registry, s *StartSeat, name string) error {
-	c, ok := reg.Lookup(name)
-	if !ok || len(c.Faces) == 0 {
-		return fmt.Errorf("scen: enabler %q is not in the corpus", name)
+// placedCounters is how many counters of the needed kind a counters need
+// places: one meets "with a counter", "for each counter" and a remove cost.
+const placedCounters int32 = 1
+
+// placeCounters meets a counters need of kind with placed counters (the
+// start's counters field, which gorge's applyStart emits and the lowering
+// restates as setup counters for the followers), not a card that would have
+// to put them: on the focus card where seat 0's battlefield lists it, else on
+// an inert bearer (bearers) added to seat 0's battlefield.
+func placeCounters(reg *cards.Registry, b *certdeck.Builder, card, kind string, f *StartFile) error {
+	s := &f.Setup.P0
+	on := card
+	if !slices.Contains(s.Battlefield, card) {
+		on = ""
+		for _, name := range bearers {
+			if c, ok := reg.Lookup(name); ok && b.Playable(c) {
+				on = name
+				break
+			}
+		}
+		if on == "" {
+			return fmt.Errorf("scen: no inert counter bearer (%v) in the corpus", bearers)
+		}
+		s.Battlefield = append(s.Battlefield, on)
 	}
-	if FieldBlock(c.Faces[0]) != "" {
-		s.Hand = append(s.Hand, name)
+	s.Counters = append(s.Counters, StartCounter{Card: on, Kind: kind, N: placedCounters})
+	return nil
+}
+
+// inertRank orders placeable enablers, lowest first: a noncreature with no
+// activated ability (nothing to activate, nothing to attack or block with),
+// then a creature with none, then the rest.
+func inertRank(f *cards.Face) int {
+	switch {
+	case len(f.Abilities) > 0:
+		return 2
+	case f.IsCreature():
+		return 1
+	}
+	return 0
+}
+
+// pickEnabler meets one need on seat s from certdeck's picks (in its
+// ranking): the most inert pick FieldBlock admits goes on the battlefield;
+// failing one, a pick goes in hand with the lands for its mana cost on the
+// battlefield (the first pick; for a seat whose turn the start is not, offTurn,
+// the first instant-speed pick, since that seat cannot cast a sorcery-speed
+// one before the start ends), and an Aura also gets an inert bearer (bearers)
+// under s.
+func pickEnabler(reg *cards.Registry, b *certdeck.Builder, s *StartSeat, offTurn bool, picks []string) error {
+	if len(picks) == 0 {
 		return nil
 	}
-	s.Battlefield = append(s.Battlefield, name)
+	faces := make([]*cards.Face, len(picks))
+	for i, name := range picks {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			return fmt.Errorf("scen: enabler %q is not in the corpus", name)
+		}
+		faces[i] = c.Faces[0]
+	}
+	best := -1
+	for i, f := range faces {
+		if FieldBlock(f) == "" && (best < 0 || inertRank(f) < inertRank(faces[best])) {
+			best = i
+		}
+	}
+	if best >= 0 {
+		s.Battlefield = append(s.Battlefield, picks[best])
+		return nil
+	}
+	pick := 0
+	if offTurn {
+		for i, f := range faces {
+			if f.IsInstant() || f.HasKeyword("Flash") {
+				pick = i
+				break
+			}
+		}
+	}
+	f := faces[pick]
+	s.Hand = append(s.Hand, picks[pick])
+	s.Battlefield = append(s.Battlefield, landsFor(splitCost(f.ManaCost), basicFor(f.ManaCost))...)
+	if FieldBlock(f) == "aura-unattached" {
+		for _, name := range bearers {
+			if c, ok := reg.Lookup(name); ok && b.Playable(c) {
+				s.Battlefield = append(s.Battlefield, name)
+				return nil
+			}
+		}
+		return fmt.Errorf("scen: no inert Aura bearer (%v) in the corpus", bearers)
+	}
 	return nil
 }
