@@ -44,20 +44,68 @@ func TestXMageOptionalTargetSkipsRoundTrip(t *testing.T) {
 		t.Errorf("decoded plan = %v", back.XTargetSkips)
 	}
 
-	// Raw is the scenario alone: identical with and without the plan, and
-	// decodable by a strict decoder like the runner's.
+	// Raw is the scenario plus the item's recorded die_rolls, never the plan:
+	// the plan and every other XMage-only side table stay out of it.
 	if string(withPlan.Raw()) != string(plain.Raw()) {
 		t.Errorf("the plan changed Raw():\n%s\n%s", withPlan.Raw(), plain.Raw())
 	}
 	if raw := string(withPlan.Raw()); strings.Contains(raw, "target_skip") {
 		t.Errorf("Raw leaks the XMage-only skip: %s", raw)
 	}
-	dec := json.NewDecoder(strings.NewReader(string(withPlan.Raw())))
-	dec.DisallowUnknownFields()
-	var strict Scenario
-	if err := dec.Decode(&strict); err != nil {
-		t.Errorf("Raw is not a clean scenario: %v", err)
+	// With no roll the bytes are exactly the scenario's, so a roll-free item
+	// is byte-identical to before die_rolls existed.
+	if got, want := string(plain.Raw()), string(mustJSON(t, plain.Scenario)); got != want {
+		t.Errorf("Raw of a roll-free item is not the scenario:\n got %s\nwant %s", got, want)
 	}
+	// Raw decodes against the runner's schema: the scenario plus the optional
+	// top-level die_rolls, nothing else (the runner uses DisallowUnknownFields).
+	if err := decodeRunnerScenario(plain.Raw(), &runnerScenario{}); err != nil {
+		t.Errorf("Raw is not a clean runner scenario: %v", err)
+	}
+
+	// The plan still stays out when the item records a roll, and Raw carries
+	// the roll to gorge's runner.
+	rolled, rolledPlan := plain, withPlan
+	rolled.DieRolls = []DieRoll{{Step: 1, Seat: 0, Sides: 20, Natural: 17, Result: 17}}
+	rolledPlan.DieRolls = rolled.DieRolls
+	if string(rolledPlan.Raw()) != string(rolled.Raw()) {
+		t.Errorf("the plan changed a rolled item's Raw():\n%s\n%s", rolledPlan.Raw(), rolled.Raw())
+	}
+	if raw := string(rolled.Raw()); !strings.Contains(raw, `"die_rolls":[{"step":1,"seat":0,"sides":20,"natural":17,"result":17}]`) {
+		t.Errorf("Raw does not carry the recorded roll: %s", raw)
+	}
+	if raw := string(rolled.Raw()); strings.Contains(raw, "target_skip") {
+		t.Errorf("Raw leaks the XMage-only skip with a roll: %s", raw)
+	}
+	var strict runnerScenario
+	if err := decodeRunnerScenario(rolled.Raw(), &strict); err != nil {
+		t.Errorf("Raw with a roll is not a clean runner scenario: %v", err)
+	}
+	if len(strict.DieRolls) != 1 || strict.DieRolls[0].Natural != 17 {
+		t.Errorf("decoded die rolls = %+v", strict.DieRolls)
+	}
+}
+
+// runnerScenario mirrors the shape gorge's oracle runner decodes: the scenario
+// plus its optional top-level die_rolls tape (engine/rules/oracle_run.go).
+type runnerScenario struct {
+	Scenario
+	DieRolls []DieRoll `json:"die_rolls,omitempty"`
+}
+
+func mustJSON(t *testing.T, v any) []byte {
+	t.Helper()
+	b, err := json.Marshal(v)
+	if err != nil {
+		t.Fatal(err)
+	}
+	return b
+}
+
+func decodeRunnerScenario(raw []byte, v any) error {
+	dec := json.NewDecoder(strings.NewReader(string(raw)))
+	dec.DisallowUnknownFields()
+	return dec.Decode(v)
 }
 
 func optSlot(filter string) Slot {

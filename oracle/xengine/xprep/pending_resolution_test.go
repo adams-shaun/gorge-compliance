@@ -83,7 +83,7 @@ func TestPendingResolutionScriptsTheDecline(t *testing.T) {
 	if len(g.Snapshots) != len(it.Steps)+1 || len(g.Snapshots[len(g.Snapshots)-1].Stack) == 0 {
 		t.Fatalf("precondition: the spell must still be on the stack at the cut, snapshots %d", len(g.Snapshots))
 	}
-	ds := pendingResolutionDecisions(reg, it.Scenario, g)
+	ds := pendingResolutionDecisions(reg, it, it.Scenario, g)
 	if len(ds) != 1 {
 		t.Fatalf("pending decisions = %d, want the trigger's one target ask: %+v", len(ds), ds)
 	}
@@ -123,7 +123,7 @@ func TestPendingResolutionLeavesAResolvedWindowAlone(t *testing.T) {
 	if len(g.Snapshots) != len(it.Steps)+1 || len(g.Snapshots[len(g.Snapshots)-1].Stack) != 0 {
 		t.Fatalf("precondition: the continuation must have resolved the spell")
 	}
-	if ds := pendingResolutionDecisions(reg, it.Scenario, g); len(ds) != 0 {
+	if ds := pendingResolutionDecisions(reg, it, it.Scenario, g); len(ds) != 0 {
 		t.Fatalf("a resolved window still completed %+v", ds)
 	}
 }

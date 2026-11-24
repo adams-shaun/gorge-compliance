@@ -19,7 +19,8 @@ import (
 // natural roll instead of rolling its own. The roll is not a gorge decision
 // (Forge poses no decision for a die), so it must not be exported as one: a
 // decision the driver never consumes would be an unconsumed leftover. The
-// side field is also absent from Raw(), which is all gorge's runner reads.
+// side field is also in Raw(), which is all gorge's runner reads, so the runner
+// forces the same roll instead of drawing its own.
 // The driver-side half of the behaviour -- that MyRandom.setRandom's wrapper
 // forwards the bounded draw to the installed generator -- is pinned by
 // forge-oracle's ForcedDieRollTest.productionSetRandomForwardsTheBound.
@@ -41,8 +42,8 @@ func TestForgeRolledDie(t *testing.T) {
 	if len(rq.GorgeDecisions) != 0 {
 		t.Fatalf("die roll exported as a gorge decision: %+v", rq.GorgeDecisions)
 	}
-	if raw := string(rq.Item.Raw()); bytes.Contains([]byte(raw), []byte("die_rolls")) {
-		t.Fatalf("Raw sends the Forge side field to gorge's runner: %s", raw)
+	if raw := string(rq.Item.Raw()); !bytes.Contains([]byte(raw), []byte(`"die_rolls":[{"step":1,"seat":0,"sides":6,"natural":3,"result":3}]`)) {
+		t.Fatalf("Raw does not force the recorded roll on gorge's runner: %s", raw)
 	}
 	b, err := json.Marshal(rq)
 	if err != nil {
@@ -78,7 +79,10 @@ func TestForgeRolledDie(t *testing.T) {
 // and ModalLandPlayTest (ba5d), and that the pin resolves on origin is checked by scripts/forge-oracle-setup.sh (git ls-remote / --check-pin).
 // 9e368ca172 = 147dd2f00f plus the lone forced entity pick (ScriptedController/StepMachine only), die-roll code unchanged,
 // the full driver suite (172 tests, including ForcedDieRollTest) re-run green on it.
-const forgeOracleDieRollRef = "9e368ca1724ffc266f8dd55cd34775c58d817fed"
+// d1b608ce5d = 9e368ca172 plus the Join Forces number announce, LeftOrRight binary and Optional Attach confirm
+// (ScriptedController/StepMachine only), die-roll code unchanged, the full driver suite (177 tests, including
+// ForcedDieRollTest) re-run green on it.
+const forgeOracleDieRollRef = "d1b608ce5db3e73ea9c4a0cd98aa2e8514d2625f"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

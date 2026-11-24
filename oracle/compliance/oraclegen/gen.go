@@ -380,9 +380,11 @@ type Item struct {
 	// gorge's runner (which decodes steps with DisallowUnknownFields).
 	Payment []string `json:"payment,omitempty"`
 	// DieRolls is every die roll the item's steps made, in log order. It is
-	// an Item field, never a Step one, so Raw() never sends it to gorge's
-	// runner (which cannot force a roll at this pin). A follower that must
-	// not roll its own die reads it: XMage scripts each roll through
+	// an Item field, never a Step one. Raw() sends it to gorge's runner as the
+	// scenario's top-level die_rolls (gorge 9b1be11b19), which forces each
+	// natural result instead of drawing from its seeded generator (CR 706.2),
+	// so every Raw() caller replays the recorded roll. A follower that must
+	// not roll its own die reads it too: XMage scripts each roll through
 	// xmage_answers (kind "die"), and a Forge driver forces item.die_rolls
 	// before running the step. Empty for every item that rolls no die, so
 	// existing item bytes are unchanged.
@@ -431,9 +433,23 @@ type XAnswer struct {
 	Value string `json:"value"`
 }
 
-// Raw is the scenario alone, as gorge's runner decodes it.
-func (it Item) Raw() []byte {
-	b, _ := json.Marshal(it.Scenario)
+// Raw is the scenario plus the item's recorded die rolls, as gorge's runner
+// decodes it. It is the one helper for runner JSON that includes the tape, so a
+// caller that replays the item's steps forces the same rolls; a caller that
+// changes the step list must keep the tape's steps in range (or drop the tape). The runner fails a roll whose sides or seat disagree
+// with the engine's and one a step leaves unconsumed.
+func (it Item) Raw() []byte { return it.RawScenario(it.Scenario) }
+
+// RawScenario is Raw with sc in place of the item's scenario. A probe that
+// replays the item with retargeted or extended steps (xprep's retarget rerun,
+// pending-resolution and modal-trigger continuations) goes through here too, so
+// it forces the same die rolls. sc must keep every step a recorded roll is on,
+// or gorge's runner fails the unconsumed roll.
+func (it Item) RawScenario(sc Scenario) []byte {
+	b, _ := json.Marshal(struct {
+		Scenario
+		DieRolls []DieRoll `json:"die_rolls,omitempty"`
+	}{sc, it.DieRolls})
 	return b
 }
 

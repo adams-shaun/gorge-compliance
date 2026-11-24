@@ -334,7 +334,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fail before with exactly those leftovers and pass after; UnmappedAskTest's two lone-Chooser tests (Curator of Destinies) still
 # pass; full driver suite 172 tests. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-lone-entity-consume.
-FORGE_ORACLE_REF ?= 9e368ca1724ffc266f8dd55cd34775c58d817fed
+# d1b608ce5d = 9e368ca172 plus three asks the driver never mapped (xproof clusters xpt-110a8ad3, xpt-4d26982b, xpt-704ee28b,
+# xpt-b8ebd380): announceRequirements with a non-X title (Join Forces' ListTitle$ "amount of mana to pay": Alliance of Arms, Minds
+# Aglow, Shared Trauma, Mana-Charged Dragon) takes gorge's choose_n[number] pick per player (StepMachine.announceNumber, in min..max);
+# chooseBinary(LeftOrRight) (ChooseDirectionEffect: Mystic Barrier) takes gorge's choose_n[direction] pick, true = "left"; an
+# Optional$ Attach's per-attachment confirmAction(sa, null, "Do you want to attach X to Y?") is answered from gorge's one attachment
+# pick (resume attach_subset / attach_choice): yes for an attachment it names, no for the rest and for an empty pick, and the Choices$
+# form's entity pick (the lone Equipment the lone-forced shortcut consumes) is remembered as that attachment's yes. Test
+# UnmappedAsksJoinDirectionAttachTest (5 tests, five fixtures/unmapped requests); full driver suite 177 tests. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-number-direction-attach.
+FORGE_ORACLE_REF ?= d1b608ce5db3e73ea9c4a0cd98aa2e8514d2625f
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
