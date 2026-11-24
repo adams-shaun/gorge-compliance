@@ -98,12 +98,21 @@ func poolString(m state.Mana) string {
 // not a counter: an object keeps a zero entry after its last counter is
 // removed (a stun counter spent by the untap step), while the runner's fresh
 // placement never had one. Dropping zeros keeps the two digests comparable.
+//
+// gorge's internal status markers (the regeneration "Shield", "Deathtouched",
+// the cumulative-upkeep paid marker) are not counters (CR 701.19a, CR 122.1);
+// gorge's oracle snapshot skips them, so this path must too or the live digest
+// carries a SHIELD the replayed snapshot never has. A real shield counter
+// (CR 122.1c) is the distinct kind "SHIELD" and stays.
 func counterMap(cs []state.Counter) map[string]int32 {
 	if len(cs) == 0 {
 		return nil
 	}
 	m := map[string]int32{}
 	for _, c := range cs {
+		if state.InternalCounterMarker(c.Kind) {
+			continue
+		}
 		m[normCounter(c.Kind)] += c.N
 	}
 	for k, n := range m {

@@ -36,7 +36,7 @@ func TestScenarioReplayEndTurnRejectsCompletedStepAnswers(t *testing.T) {
 		}
 	}
 	before := strings.Index(java, "int beforeChoicesA = playerA.getChoices().size();")
-	script := strings.Index(java, "scripted(xans.get(i).getAsJsonArray());")
+	script := strings.Index(java, "scripted(xans.get(i).getAsJsonArray(),")
 	capture := strings.Index(java, "choicesA.add(new ArrayList<>(playerA.getChoices().subList(beforeChoicesA")
 	if before < 0 || script < before || capture < script {
 		t.Fatal("step answer capture must include scripted answers")
