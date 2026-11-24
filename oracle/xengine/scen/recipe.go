@@ -333,6 +333,8 @@ func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, g
 	if err != nil {
 		return "", err
 	}
+	var counterNeeds []certdeck.Need
+	targetBearers := map[string]bool{}
 	for _, n := range needs {
 		switch {
 		case n.Class == certdeck.Graveyard:
@@ -345,22 +347,37 @@ func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, g
 				f.Setup.P0.Tapped = append(f.Setup.P0.Tapped, generic)
 			}
 		case n.Class == certdeck.Counters:
-			if err := placeCounters(reg, b, card, n.Arg, f); err != nil {
-				return "", err
-			}
+			counterNeeds = append(counterNeeds, n)
 		case n.Class == certdeck.OppBurn:
 			if f.Setup.P0.Life == nil {
 				l := burnedLife
 				f.Setup.P0.Life = &l
 			}
 		case certdeck.OppSide(n.Class):
+			before := len(f.Setup.P1.Battlefield)
 			if err := pickEnabler(reg, b, &f.Setup.P1, f.Active != 1, plan.Opponent.Provided[n.String()]); err != nil {
 				return "", err
+			}
+			if n.Class == certdeck.OppTargets {
+				// The card certdeck picked for this target need is the
+				// permanent a counters need should read.
+				for _, name := range f.Setup.P1.Battlefield[before:] {
+					if slices.Contains(plan.Opponent.Provided[n.String()], name) {
+						targetBearers[name] = true
+					}
+				}
 			}
 		default:
 			if err := pickEnabler(reg, b, &f.Setup.P0, f.Active != 0, plan.Self.Provided[n.String()]); err != nil {
 				return "", err
 			}
+		}
+	}
+	// Counters last: the permanent a removal reads may be an enabler another
+	// need places, such as the creature an opposing Aura enchants.
+	for _, n := range counterNeeds {
+		if err := placeCounters(reg, b, c, card, n.Arg, targetBearers, f); err != nil {
+			return "", err
 		}
 	}
 	return "", nil
@@ -373,26 +390,77 @@ const placedCounters int32 = 1
 // placeCounters meets a counters need of kind with placed counters (the
 // start's counters field, which gorge's applyStart emits and the lowering
 // restates as setup counters for the followers), not a card that would have
-// to put them: on the focus card where seat 0's battlefield lists it, else on
-// an inert bearer (bearers) added to seat 0's battlefield.
-func placeCounters(reg *cards.Registry, b *certdeck.Builder, card, kind string, f *StartFile) error {
+// to put them. On seat 0 it is the focus card where the battlefield lists it,
+// else an inert bearer (bearers). On seat 1 it is the permanent the removal
+// reads (CounterSeat): a permanent already placed for a target need, else an
+// inert bearer for the opponent.
+func placeCounters(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, kind string, targetBearers map[string]bool, f *StartFile) error {
+	if certdeck.CounterSeat(c) == 1 {
+		s := &f.Setup.P1
+		on := counterBearer(reg, s, targetBearers)
+		if on == "" {
+			var err error
+			on, err = inertCounterBearer(reg, b)
+			if err != nil {
+				return err
+			}
+			s.Battlefield = append(s.Battlefield, on)
+		}
+		s.Counters = append(s.Counters, StartCounter{Card: on, Kind: kind, N: placedCounters})
+		return nil
+	}
 	s := &f.Setup.P0
 	on := card
-	if !slices.Contains(s.Battlefield, card) {
-		on = ""
-		for _, name := range bearers {
-			if c, ok := reg.Lookup(name); ok && b.Playable(c) {
-				on = name
-				break
-			}
-		}
-		if on == "" {
-			return fmt.Errorf("scen: no inert counter bearer (%v) in the corpus", bearers)
+	if !slices.Contains(s.Battlefield, on) {
+		var err error
+		on, err = inertCounterBearer(reg, b)
+		if err != nil {
+			return err
 		}
 		s.Battlefield = append(s.Battlefield, on)
 	}
 	s.Counters = append(s.Counters, StartCounter{Card: on, Kind: kind, N: placedCounters})
 	return nil
+}
+
+// counterBearer is the permanent s already lists that a removal should read:
+// first a card placed for one of the card's target needs (a creature, a
+// planeswalker, an artifact, ...), then a creature or planeswalker, and none
+// when s has no such permanent.
+func counterBearer(reg *cards.Registry, s *StartSeat, targetBearers map[string]bool) string {
+	used := map[string]bool{}
+	for _, c := range s.Counters {
+		used[c.Card] = true
+	}
+	for _, name := range s.Battlefield {
+		if !used[name] && targetBearers[name] {
+			return name
+		}
+	}
+	for _, name := range s.Battlefield {
+		if used[name] {
+			continue
+		}
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			continue
+		}
+		if face := c.Faces[0]; face.IsCreature() || face.IsPlaneswalker() {
+			return name
+		}
+	}
+	return ""
+}
+
+// inertCounterBearer is the first inert creature (bearers) the corpus holds
+// that certdeck plays.
+func inertCounterBearer(reg *cards.Registry, b *certdeck.Builder) (string, error) {
+	for _, name := range bearers {
+		if c, ok := reg.Lookup(name); ok && b.Playable(c) {
+			return name, nil
+		}
+	}
+	return "", fmt.Errorf("scen: no inert counter bearer (%v) in the corpus", bearers)
 }
 
 // inertRank orders placeable enablers, lowest first: a noncreature with no

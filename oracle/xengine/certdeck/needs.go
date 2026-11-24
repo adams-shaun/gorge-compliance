@@ -89,10 +89,12 @@ func sortNeeds(ns []Need) []Need {
 // unit is one parsed script line: an ability (API set), a trigger or static
 // (Mode set) or an SVar's right-hand side, as its $-parameters.
 type unit struct {
-	api, mode string
-	trigger   bool
-	event     string // a replacement effect's Event$
-	p         map[string]string
+	api, mode  string
+	trigger    bool
+	event      string // a replacement effect's Event$
+	p          map[string]string
+	target     string // the ValidTgts of this unit or the chain that reaches it
+	prevTarget string // the target of the unit before this one in the chain
 }
 
 // repl is whether u is a replacement effect.
@@ -119,19 +121,23 @@ func parseLine(s string) unit {
 // unitsOf is every unit of every face of c, in script order (SVars by name).
 func unitsOf(c *cards.Card) []unit {
 	var us []unit
-	var chain func(s *cards.SA)
-	chain = func(s *cards.SA) {
+	var chain func(s *cards.SA, target string)
+	chain = func(s *cards.SA, target string) {
 		for n := 0; s != nil && n < 8; s, n = s.Sub, n+1 {
-			us = append(us, unit{api: s.API, p: s.Params})
+			prev := target
+			if v := s.Params["ValidTgts"]; v != "" {
+				target = v
+			}
+			us = append(us, unit{api: s.API, p: s.Params, target: target, prevTarget: prev})
 		}
 	}
 	for _, f := range c.Faces {
 		for _, a := range f.Abilities {
-			chain(a)
+			chain(a, "")
 		}
 		for _, t := range f.Triggers {
 			us = append(us, unit{mode: t.Mode, trigger: true, p: t.Params})
-			chain(t.Effect)
+			chain(t.Effect, t.Params["ValidTgts"])
 		}
 		for _, s := range f.Statics {
 			us = append(us, unit{mode: s.Mode, p: s.Params})
@@ -149,6 +155,133 @@ func unitsOf(c *cards.Card) []unit {
 		}
 	}
 	return us
+}
+
+// CounterSeat is the seat (0 or 1) whose permanent a counters need puts its
+// counters on: 1 when the ability that removes or moves counters reads an
+// opponent's permanent (Honest Work enchants a creature an opponent controls;
+// Mabel targets another creature), else 0 for the card's own counters, a
+// replacement or a cost. It follows Defined$/ValidTgts (with the target of the
+// chain a SubAbility runs in), never the card's deck.
+func CounterSeat(c *cards.Card) int {
+	if c == nil {
+		return 0
+	}
+	enchantOpp := false
+	for _, f := range c.Faces {
+		enchantOpp = enchantOpp || enchantsOpponent(f)
+	}
+	us := unitsOf(c)
+	// A unit the chain analysis did not reach (an unlinked SVar) falls back to
+	// the targets the card prints.
+	var targets []string
+	for _, u := range us {
+		if v := u.p["ValidTgts"]; v != "" {
+			targets = append(targets, v)
+		}
+	}
+	for _, u := range us {
+		if !counterMover(u) {
+			continue
+		}
+		def := strings.ToLower(strings.TrimSpace(u.p["Defined"]))
+		switch {
+		case def == "self" || def == "cardname" || strings.Contains(def, "youctrl") || strings.Contains(def, "youown"):
+			continue // the card's own counters (or a creature you control)
+		case strings.Contains(def, "oppctrl") || strings.Contains(def, "opponent"):
+			return 1
+		case def == "enchanted":
+			if enchantOpp {
+				return 1
+			}
+			continue
+		}
+		if u.api == "MoveCounter" {
+			// The source, not the destination, carries the counter: the card's
+			// own permanent (Source$ Self, ValidSource$ Creature.YouCtrl) or,
+			// for Source$ ParentTarget, whatever the parent ability targets
+			// (Black Panther's land you control, Rikku's opponent's creature).
+			src := u.p["Source"]
+			if src == "" {
+				src = u.p["ValidSource"]
+			}
+			if src != "" {
+				if l := strings.ToLower(src); strings.Contains(l, "oppctrl") || strings.Contains(l, "opponent") {
+					return 1
+				} else if strings.EqualFold(src, "ParentTarget") {
+					if opponentFilter(u.prevTarget) {
+						return 1
+					}
+				}
+				continue // Self, Creature.YouCtrl, ...: the card's own
+			}
+		}
+		if u.api == "RemoveCounterAll" {
+			// Removing from all matching permanents reaches the card's own
+			// ones too, so the start's own side exercises it.
+			if v := strings.ToLower(u.p["ValidCards"]); v != "" &&
+				(strings.Contains(v, "oppctrl") || strings.Contains(v, "opponent")) {
+				return 1
+			}
+			continue
+		}
+		if v := u.p["ValidTgts"]; v != "" {
+			if opponentFilter(v) {
+				return 1
+			}
+			continue
+		}
+		switch {
+		case def == "targeted", def == "valid", strings.HasPrefix(def, "valid "), def == "remembered", def == "chosencard":
+			target := u.target
+			if target == "" {
+				for _, v := range targets {
+					if opponentFilter(v) {
+						target = v
+						break
+					}
+				}
+			}
+			if target != "" && opponentFilter(target) {
+				return 1
+			}
+		}
+	}
+	return 0
+}
+
+// counterMover reports whether u removes or moves counters from a permanent:
+// the units whose bearer CounterSeat follows.
+func counterMover(u unit) bool {
+	switch u.api {
+	case "RemoveCounter", "RemoveCounterAll", "MoveCounter", "AddOrRemoveCounter":
+		return true
+	}
+	return u.event == "RemoveCounter"
+}
+
+// enchantsOpponent reports whether f is an Aura whose Enchant names an
+// opponent's permanent ("Creature.OppCtrl").
+func enchantsOpponent(f *cards.Face) bool {
+	p, ok := f.KeywordParam("Enchant")
+	if !ok {
+		return false
+	}
+	l := strings.ToLower(p)
+	return strings.Contains(l, "oppctrl") || strings.Contains(l, "opponent")
+}
+
+// opponentFilter reports whether a card filter names another player's
+// permanent. A filter with no controller restriction targets any player's
+// permanent, which certdeck places on the opponent's side; YouCtrl, YouOwn and
+// Self name the card's own.
+func opponentFilter(v string) bool {
+	l := strings.ToLower(v)
+	if l == "" || strings.Contains(l, "youctrl") || strings.Contains(l, "youown") ||
+		strings.Contains(l, "card.self") || strings.Contains(l, "cardname") {
+		return false
+	}
+	return true
 }
 
 // sortedKeys is m's keys in order: a unit's params are a map, and nothing
@@ -369,10 +502,20 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 		for _, k := range sortedKeys(u.p) {
 			v := u.p[k]
 			if k == "CounterType" && u.api != "PutCounter" && u.api != "PutCounterAll" {
-				counterArg = firstNonEmpty(counterArg, v)
+				if kind, ok := counterKindArg(v); ok {
+					counterArg = firstNonEmpty(counterArg, kind)
+				}
 			}
 			if k == "ValidCounterType" {
-				counterArg = firstNonEmpty(counterArg, firstField(v))
+				if kind, ok := counterKindArg(firstField(v)); ok {
+					counterArg = firstNonEmpty(counterArg, kind)
+				}
+			}
+			if k == "CounterNum" && u.api != "PutCounter" && u.api != "PutCounterAll" &&
+				strings.EqualFold(strings.TrimSpace(v), "All") {
+				// "remove all counters" names the amount, not the kind: it is
+				// still a counter need (Honest Work).
+				counterArg = firstNonEmpty(counterArg, "P1P1")
 			}
 			if k == "Cost" {
 				if m := counterCostX.FindStringSubmatch(v); m != nil && m[1] != "LOYALTY" &&
@@ -477,9 +620,7 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 	if graveyard {
 		add(Graveyard, "")
 	}
-	if counterArg == "Any" {
-		counterArg = "P1P1" // "a counter of any type": the commonest one stands in
-	}
+	counterArg = normalizeCounterKind(counterArg) // "Any"/"All": the commonest kind
 	if counterArg != "" {
 		add(Counters, counterArg)
 	}
@@ -528,6 +669,27 @@ func Derive(c *cards.Card, types map[string]bool) []Need {
 		add(Lands, "")
 	}
 	return sortNeeds(ns)
+}
+
+// counterKindArg normalizes a Forge counter type. "All" and "Any" name every
+// kind, not a kind (Honest Work, Mabel), so they are not counter kinds: a
+// wildcard reads as the commonest kind (CR 122.1). A blank value has none.
+func counterKindArg(v string) (string, bool) {
+	v = strings.TrimSpace(v)
+	if v == "" {
+		return "", false
+	}
+	switch strings.ToLower(v) {
+	case "all", "any":
+		return "P1P1", true
+	}
+	return v, true
+}
+
+// normalizeCounterKind is counterKindArg for a value that may be empty.
+func normalizeCounterKind(v string) string {
+	kind, _ := counterKindArg(v)
+	return kind
 }
 
 // firstField is the first of a comma-separated list ("P1P1,M1M1").
