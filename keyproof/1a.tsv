@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a362e4d-6c02-4b67-ab63-c6622e505195	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Crossway Troublemakers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a362e4d-6c02-4b67-ab63-c6622e505195	static#0.0	static#0.0	agreed	-	X	scen	1	0	Crossway Troublemakers/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a36d2a8-6117-4828-bbe2-bc63212d29d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1a3a274d-41da-47db-ad41-5720f36a7963	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1a3a274d-41da-47db-ad41-5720f36a7963	cast	cast	agreed	-	F	start	2	0	f:xs:XP:unmask:cast:s1	-	-	-	5f2128bf97e4	-	6456c68b8085	-	-	2026-11-24	xproof
 1a4075f3-6c18-4cbe-99e0-f403dd78a7b0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hollow-marauder:f0t0:s2,f:xs:XP:hollow-marauder:f0t0:s2	-	-	-	e07cf3a05ba5	-	fcd63b749940	-	-	2026-11-24	xproof
 1a4075f3-6c18-4cbe-99e0-f403dd78a7b0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hollow Marauder/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a4075f3-6c18-4cbe-99e0-f403dd78a7b0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hollow Marauder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a9bfe76-6c74-4393-b04e-461422a29ddb	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	018d002084df	-	-	2026-11-24	xproof
 1aa1cf50-ee79-4bef-826b-5f1a9e1aa1a5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 1aa5df06-a61d-47e8-b12d-34009854d088	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aa5df06-a61d-47e8-b12d-34009854d088	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1aa6b31b-cd30-4741-abc6-2ef72e445630	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

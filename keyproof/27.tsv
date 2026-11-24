@@ -23,7 +23,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2727a7ec-1cf7-4cd7-b5d4-955db940ddd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 272ab5d5-7edb-4457-8a09-cabe2325c881	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-sentinel:f0t0:s1,f:xs:XP:llanowar-sentinel:f0t0:s1	-	-	-	25696bf19d5b	-	6172fcdf04bc	-	-	2026-11-24	xproof
 272ab5d5-7edb-4457-8a09-cabe2325c881	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:llanowar-sentinel:f0t0:s1,f:xs:XP:llanowar-sentinel:f0t0:s1	-	-	-	25696bf19d5b	-	6172fcdf04bc	-	-	2026-11-24	xproof
-2731c237-eda1-4b74-a294-502d574f4435	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2731c237-eda1-4b74-a294-502d574f4435	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ramosian-rally:cast:s1	-	-	-	5f2128bf97e4	-	c44e3f886dd4	-	-	2026-11-24	xproof
 27348fe5-21d4-40f7-9feb-bba2c2321008	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 273ad15c-366a-4691-978b-d6028b57005a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:morlun-devourer-of-spiders:cast:s2	-	-	-	5437c1394672	-	bf66a55bd5e3	-	-	2026-11-24	xproof
 273ad15c-366a-4691-978b-d6028b57005a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Morlun, Devourer of Spiders/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2769751d-ca67-4d6e-93c9-9587367ae8ab	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 276b1bd8-8918-4226-bab3-100cf5aa3c24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lingering-tormentor:cast:s1,f:xs:XP:lingering-tormentor:cast:s1	-	-	-	8a1b1a193ec0	-	464c71dd0676	-	-	2026-11-24	xproof
 276b1bd8-8918-4226-bab3-100cf5aa3c24	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-276cece9-f9f2-46e6-ae76-daddaa2fb9ab	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+276cece9-f9f2-46e6-ae76-daddaa2fb9ab	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:kor-haven:f0a1:s2,f:xs:XP:kor-haven:f0a1:s2	-	-	-	5f2128bf97e4	-	94c6b50b9017	-	-	2026-11-24	xproof
 276cece9-f9f2-46e6-ae76-daddaa2fb9ab	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 276cece9-f9f2-46e6-ae76-daddaa2fb9ab	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 276dc5c8-c8cf-4b9c-ad75-31876e6e040a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

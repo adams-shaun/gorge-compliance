@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 987aab63-a889-400f-a3bd-feaef978b407	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fire Nation Warship/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 987aab63-a889-400f-a3bd-feaef978b407	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fire Nation Warship/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 987aadac-d6a6-4e50-9468-9e8e53cc5529	cast	cast-resolve	agreed	-	X	scen	1	0	Stingerquill Charm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-987b74f4-02cb-4d47-94e5-d58a3c8e92e4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+987b74f4-02cb-4d47-94e5-d58a3c8e92e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flay:cast:s1,f:xs:XP:flay:cast:s1	-	-	-	5f2128bf97e4	-	28b3d36115d7	-	-	2026-11-24	xproof
 987c1144-69f6-4441-b0a4-d23f931df81f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:southern-air-temple:f0t0:s2,f:xs:XP:southern-air-temple:f0t0:s2	-	-	-	267e485f6204	-	dce695866752	-	-	2026-11-24	xproof
 987c1144-69f6-4441-b0a4-d23f931df81f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:southern-air-temple:f0t0:s2,f:xs:XP:southern-air-temple:f0t0:s2	-	-	-	267e485f6204	-	dce695866752	-	-	2026-11-24	xproof
 987c1144-69f6-4441-b0a4-d23f931df81f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Southern Air Temple/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -133,8 +133,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98a389f4-2905-47f3-b60e-3d4afb3e5cb0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Enduring Innocence/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98a389f4-2905-47f3-b60e-3d4afb3e5cb0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Enduring Innocence/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98a389f4-2905-47f3-b60e-3d4afb3e5cb0	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Enduring Innocence/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98a60a97-3a43-4544-8ea3-40d0bad79caf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98a60a97-3a43-4544-8ea3-40d0bad79caf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+98a60a97-3a43-4544-8ea3-40d0bad79caf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gulf-squid:f0t0:s1,f:xs:XP:gulf-squid:f0t0:s1	-	-	-	5f2128bf97e4	-	791cbddd49b8	-	-	2026-11-24	xproof
+98a60a97-3a43-4544-8ea3-40d0bad79caf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gulf-squid:f0t0:s1,f:xs:XP:gulf-squid:f0t0:s1	-	-	-	5f2128bf97e4	-	791cbddd49b8	-	-	2026-11-24	xproof
 98a61659-9882-417c-9c16-16ebb26f9037	cast	cast-resolve	agreed	-	X	scen	1	0	Carrion Cruiser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98a61659-9882-417c-9c16-16ebb26f9037	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Carrion Cruiser/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98a61659-9882-417c-9c16-16ebb26f9037	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,9 +148,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98b43c61-4563-4a29-8cf0-fb8b34f337ce	cast	cast-resolve	agreed	-	X	scen	1	0	Diary of Dreams/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98b43c61-4563-4a29-8cf0-fb8b34f337ce	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Diary of Dreams/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98b43c61-4563-4a29-8cf0-fb8b34f337ce	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Diary of Dreams/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98b53af9-af1b-4d5d-ae5a-bd444c1339d2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98b53af9-af1b-4d5d-ae5a-bd444c1339d2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98b802f3-4785-41af-adfe-e77d0ae4648c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+98b53af9-af1b-4d5d-ae5a-bd444c1339d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ribbon-snake:cast:s1,f:xs:XP:ribbon-snake:cast:s1	-	-	-	5f2128bf97e4	-	d7cd34b76bf5	-	-	2026-11-24	xproof
+98b53af9-af1b-4d5d-ae5a-bd444c1339d2	f0/a0	Debuff	agreed	-	FX	start	2	0	x:xs:XP:ribbon-snake:f0a0:s1,f:xs:XP:ribbon-snake:f0a0:s1	-	-	-	5f2128bf97e4	-	d7cd34b76bf5	-	-	2026-11-24	xproof
+98b802f3-4785-41af-adfe-e77d0ae4648c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vitalizing-wind:cast:s1,f:xs:XP:vitalizing-wind:cast:s1	-	-	-	5f2128bf97e4	-	976dfbcb6d4b	-	-	2026-11-24	xproof
 98b88734-09e2-4209-a787-9b5b345391f9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98b88734-09e2-4209-a787-9b5b345391f9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98b88734-09e2-4209-a787-9b5b345391f9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98cbac1d-7896-4c63-a265-03bc5d670fa6	cast	cast-resolve	agreed	-	X	scen	1	0	Relentless Drednok/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98cbac1d-7896-4c63-a265-03bc5d670fa6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 98cc734d-16d5-4c3c-98ca-a45efad27127	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98cc734d-16d5-4c3c-98ca-a45efad27127	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+98cc734d-16d5-4c3c-98ca-a45efad27127	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 98d20908-6d68-4d31-b719-207f93c9b402	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Goblin-town/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98d20908-6d68-4d31-b719-207f93c9b402	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Goblin-town/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98d20908-6d68-4d31-b719-207f93c9b402	land	play-land	agreed	-	X	scen	1	0	Goblin-town/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

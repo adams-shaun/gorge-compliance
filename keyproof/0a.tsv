@@ -93,8 +93,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a6f45e9-5c7a-4e2c-bf8a-fc5fe0ae0793	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0a72d6cd-b4a7-4c42-90ba-a14f1733d00e	cast	cast-resolve	agreed	-	FX	scen	2	0	Jadelight Spelunker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a72d6cd-b4a7-4c42-90ba-a14f1733d00e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a73b4da-9b5c-480e-b58b-6a82a52ea71e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a73b4da-9b5c-480e-b58b-6a82a52ea71e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0a73b4da-9b5c-480e-b58b-6a82a52ea71e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vintara-elephant:cast:s1,f:xs:XP:vintara-elephant:cast:s1	-	-	-	5f2128bf97e4	-	72714d932642	-	-	2026-11-24	xproof
+0a73b4da-9b5c-480e-b58b-6a82a52ea71e	f0/a0	Debuff	agreed	-	FX	start	2	0	x:xs:XP:vintara-elephant:f0a0:s1,f:xs:XP:vintara-elephant:f0a0:s1	-	-	-	5f2128bf97e4	-	72714d932642	-	-	2026-11-24	xproof
 0a744206-04c4-46cb-b64d-cf192c9324df	cast	cast-resolve	agreed	-	X	scen	1	0	Rhino's Rampage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a746c49-cc44-467a-85b7-3c498559aea7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a746c49-cc44-467a-85b7-3c498559aea7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,8 +163,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0acc9372-58b4-43bf-ab82-1f95831c81d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0acc9372-58b4-43bf-ab82-1f95831c81d4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0accfb04-bc8b-4cab-997a-2337ac42db8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0accfb04-bc8b-4cab-997a-2337ac42db8f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0accfb04-bc8b-4cab-997a-2337ac42db8f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0accfb04-bc8b-4cab-997a-2337ac42db8f	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+0accfb04-bc8b-4cab-997a-2337ac42db8f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 0accfb04-bc8b-4cab-997a-2337ac42db8f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ace32d6-7261-447c-9ee2-e03febaab91b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ad27d0e-b6c3-4c3f-a389-285d889b6a65	cast	cast-resolve	agreed	-	X	scen	1	0	Ballyrush Banneret/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

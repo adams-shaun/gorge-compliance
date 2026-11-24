@@ -7,7 +7,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c03e0db-ce26-41f6-a12c-861a919e52fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c03e0db-ce26-41f6-a12c-861a919e52fb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c046368-5899-42ef-9972-3a3a6c8fe3fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c046368-5899-42ef-9972-3a3a6c8fe3fd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c046368-5899-42ef-9972-3a3a6c8fe3fd	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 4c054431-3667-4e28-9d68-03b43447c35b	cast	cast-resolve	agreed	-	FX	scen	2	0	Bilbo's Deadly Slice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c05b382-58ab-4a2d-a81c-408ea273b6b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dreadhorde-arcanist:cast:s1,f:xs:XP:dreadhorde-arcanist:cast:s1	-	-	-	d864b561c9cb	-	616f9cc4bc91	-	-	2026-11-24	xproof
 4c05b382-58ab-4a2d-a81c-408ea273b6b6	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:dreadhorde-arcanist:f0t0:s1,f:xs:XP:dreadhorde-arcanist:f0t0:s1	-	-	-	d864b561c9cb	-	616f9cc4bc91	-	-	2026-11-24	xproof
@@ -178,8 +178,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ce8e0d0-6a3e-4c47-a7b7-c1b1ea1b9426	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:prickly-pair:f0t0:s2,f:xs:XP:prickly-pair:f0t0:s2	-	-	-	267e485f6204	-	39f8a44ca631	-	-	2026-11-24	xproof
 4ce8e0d0-6a3e-4c47-a7b7-c1b1ea1b9426	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:prickly-pair:f0t0:s2,f:xs:XP:prickly-pair:f0t0:s2	-	-	-	267e485f6204	-	39f8a44ca631	-	-	2026-11-24	xproof
 4ce95005-82b3-4921-b1c4-60d775a012a2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ceb49f3-a997-468d-9653-8ca5ceb2bcfb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ceb49f3-a997-468d-9653-8ca5ceb2bcfb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4ceb49f3-a997-468d-9653-8ca5ceb2bcfb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firebrand-ranger:cast:s1,f:xs:XP:firebrand-ranger:cast:s1	-	-	-	5f2128bf97e4	-	032be7ecbd71	-	-	2026-11-24	xproof
+4ceb49f3-a997-468d-9653-8ca5ceb2bcfb	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:firebrand-ranger:f0a0:s1,f:xs:XP:firebrand-ranger:f0a0:s1	-	-	-	5f2128bf97e4	-	032be7ecbd71	-	-	2026-11-24	xproof
 4cf10cb6-b082-4c0d-89e9-43cd39716201	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4cf10cb6-b082-4c0d-89e9-43cd39716201	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4cfb6f06-137c-4b41-97ef-6710e899473b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

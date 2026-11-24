@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 541ba65b-9b4e-45bb-9055-4f7560563425	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541ba65b-9b4e-45bb-9055-4f7560563425	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541c6564-ec39-4b14-8c02-dd6a5d122ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-541f13aa-a1ed-453a-b719-82daef1be607	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+541f13aa-a1ed-453a-b719-82daef1be607	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:manipulate-fate:cast:s1,f:xs:XP:manipulate-fate:cast:s1	-	-	-	5f2128bf97e4	-	c5cc29567650	-	-	2026-11-24	xproof
 54216953-c575-4e08-9bee-384721c0bc4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54216953-c575-4e08-9bee-384721c0bc4d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 542423cb-fbfb-4a2f-9f6d-87b273a95e96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-valiant-protector:cast:s1,f:xs:XP:ajani-valiant-protector:cast:s1	-	-	-	d864b561c9cb	-	c5261e925f8d	-	-	2026-11-24	xproof
@@ -125,8 +125,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54866c25-b332-46c8-a2c5-1a71b702ddc0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mindsparker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 54866c25-b332-46c8-a2c5-1a71b702ddc0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mindsparker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 54884040-b426-43da-9bb1-016621e1446d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54884040-b426-43da-9bb1-016621e1446d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dragon-whisperer:f0a2:s1,f:xs:XP:dragon-whisperer:f0a2:s1	-	-	-	ae86f6029288	-	5d02657e08a2	-	-	2026-11-24	xproof
-54884040-b426-43da-9bb1-016621e1446d	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:dragon-whisperer:f0a2:s1,f:xs:XP:dragon-whisperer:f0a2:s1	-	-	-	ae86f6029288	-	5d02657e08a2	-	-	2026-11-24	xproof
+54884040-b426-43da-9bb1-016621e1446d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dragon-whisperer:f0a2:s1,f:xs:XP:dragon-whisperer:f0a2:s1	-	-	-	5f2128bf97e4	-	5d02657e08a2	-	-	2026-11-24	xproof
+54884040-b426-43da-9bb1-016621e1446d	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:dragon-whisperer:f0a2:s1,f:xs:XP:dragon-whisperer:f0a2:s1	-	-	-	5f2128bf97e4	-	5d02657e08a2	-	-	2026-11-24	xproof
 54884040-b426-43da-9bb1-016621e1446d	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54917578-9493-499e-b200-51d5cf7978ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54917578-9493-499e-b200-51d5cf7978ff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 500663c1-390c-4598-b614-4168c4f7debe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hedge-troll:cast:s1,f:xs:XP:hedge-troll:cast:s1	-	-	-	d864b561c9cb	-	d62bd7f1d5d1	-	-	2026-11-24	xproof
 500663c1-390c-4598-b614-4168c4f7debe	f0/a0	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:hedge-troll:cast:s1,f:xs:XP:hedge-troll:cast:s1	-	-	-	d864b561c9cb	-	d62bd7f1d5d1	-	-	2026-11-24	xproof
 50090188-651d-4402-968f-3f6bf9276029	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kyren-negotiations:cast:s1,f:xs:XP:kyren-negotiations:cast:s1	-	-	-	5f2128bf97e4	-	d6972ec0b2b5	-	-	2026-11-24	xproof
-50090188-651d-4402-968f-3f6bf9276029	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+50090188-651d-4402-968f-3f6bf9276029	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keensight-mentor:f0t0:s1,f:xs:XP:keensight-mentor:f0t0:s1	-	-	-	ae86f6029288	-	c1834bf17587	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 500a17a0-8332-414c-9c3a-7157a7800887	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keensight-mentor:f0t0:s1,f:xs:XP:keensight-mentor:f0t0:s1	-	-	-	ae86f6029288	-	c1834bf17587	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50994df7-300d-4e30-897a-0974dc0820ee	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Relentless X-ATM092/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50994df7-300d-4e30-897a-0974dc0820ee	static#0.0	static#0.0	agreed	-	X	scen	1	0	Relentless X-ATM092/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 509bfcbc-a59a-47c8-be78-29823fc010e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-509ea58a-da0a-4e9a-aafc-15f4f65a7467	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saruli-gatekeepers:f0t0:s1,f:xs:XP:saruli-gatekeepers:f0t0:s1	-	-	-	ae86f6029288	-	420fa01d79b8	-	-	2026-11-24	xproof
+509ea58a-da0a-4e9a-aafc-15f4f65a7467	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saruli-gatekeepers:f0t0:s1,f:xs:XP:saruli-gatekeepers:f0t0:s1	-	-	-	5f2128bf97e4	-	420fa01d79b8	-	-	2026-11-24	xproof
 509ea58a-da0a-4e9a-aafc-15f4f65a7467	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 509f255f-c3ee-4836-a583-d018060d0c4d	cast	cast-resolve	agreed	-	X	scen	1	0	Pet Sehlat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50a16634-ebf7-477f-ad6f-23332599f838	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50b14338-9318-4327-a1dd-c0ef38903cc4	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Skysovereign, Consul Flagship/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 50b931f9-f843-4129-a4c8-2bb7a051c063	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50bbbb39-4709-478f-bb51-716c7e4f8323	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50bbbb39-4709-478f-bb51-716c7e4f8323	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+50bbbb39-4709-478f-bb51-716c7e4f8323	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 50bc464e-1c8d-455c-a870-ddbbc4618343	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50bc464e-1c8d-455c-a870-ddbbc4618343	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:pyre-charger:f0a0:s1,f:xs:XP:pyre-charger:f0a0:s1	-	-	-	8a1b1a193ec0	-	838aefb1cd4c	-	-	2026-11-24	xproof
 50bebbb9-01b7-4eb6-8efd-307c9bcd2517	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

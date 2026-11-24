@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05075332-6856-4147-a22d-3a5bd1e96b7b	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 05075332-6856-4147-a22d-3a5bd1e96b7b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-warhorse:f0t0:s1,f:xs:XP:phyrexian-warhorse:f0t0:s1	-	-	-	d864b561c9cb	-	6d38b620f92f	-	-	2026-11-24	xproof
 05079479-86a6-4041-a395-83d325b6ddb7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05079cee-b190-42d7-b59f-130cb545cab7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05079cee-b190-42d7-b59f-130cb545cab7	cast	cast	agreed	-	F	start	2	0	f:xs:XP:outbreak:cast:s1	-	-	-	5f2128bf97e4	-	54cc2547276a	-	-	2026-11-24	xproof
 050dac46-9ba0-4b8a-b61b-1c7ec6f3723a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 050dac46-9ba0-4b8a-b61b-1c7ec6f3723a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 050f5733-7c0b-4991-9a6c-7ea12ccf0ca9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:up-the-beanstalk:f0t0:s1,f:xs:XP:up-the-beanstalk:f0t0:s1	-	-	-	d864b561c9cb	-	a83a3f15677b	-	-	2026-11-24	xproof
@@ -142,10 +142,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05b5c0fb-84b2-4a32-bf66-179c4dccb3df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05b6f9e3-9acd-43a6-acff-caa811aaf0a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akoum-hellkite:cast:s1,f:xs:XP:akoum-hellkite:cast:s1	-	-	-	d864b561c9cb	-	96e538e99211	-	-	2026-11-24	xproof
 05b6f9e3-9acd-43a6-acff-caa811aaf0a1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-05b9dccb-2364-4bca-a12e-8cb54a3f3a0b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05b9dccb-2364-4bca-a12e-8cb54a3f3a0b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05b9dccb-2364-4bca-a12e-8cb54a3f3a0b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viseling:cast:s1,f:xs:XP:viseling:cast:s1	-	-	-	5f2128bf97e4	-	686fc12c1402	-	-	2026-11-24	xproof
+05b9dccb-2364-4bca-a12e-8cb54a3f3a0b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:viseling:cast:s1,f:xs:XP:viseling:cast:s1	-	-	-	5f2128bf97e4	-	686fc12c1402	-	-	2026-11-24	xproof
 05baf38c-677a-42e3-bb8c-a52a0a478984	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05baf38c-677a-42e3-bb8c-a52a0a478984	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05baf38c-677a-42e3-bb8c-a52a0a478984	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:ramosian-commander:f0a0:s1,f:xs:XP:ramosian-commander:f0a0:s1	-	-	-	5f2128bf97e4	-	f6708c25e4e7	-	-	2026-11-24	xproof
 05bbd557-e2c0-4855-8fe6-00527fa39878	cast	cast-resolve	agreed	-	FX	scen	2	0	Rig for War/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 05c2dec2-d2f7-4036-b91f-4fccba10a8bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05c42b13-5125-477c-991f-692c4e22bc53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

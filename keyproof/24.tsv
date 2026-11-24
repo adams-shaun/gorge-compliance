@@ -65,14 +65,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 245b62a8-b606-4106-87c3-a60ce3e16906	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245b62a8-b606-4106-87c3-a60ce3e16906	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245c3681-fc47-47fe-b6e5-34c96315c135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-245c3681-fc47-47fe-b6e5-34c96315c135	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+245c3681-fc47-47fe-b6e5-34c96315c135	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	cast	cast-resolve	agreed	-	X	scen	1	0	Delney, Streetwise Lookout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Delney, Streetwise Lookout/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Delney, Streetwise Lookout/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	static#0.0	static#0.0	agreed	-	X	scen	1	0	Delney, Streetwise Lookout/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	static#0.1	static#0.1	agreed	-	X	scen	1	0	Delney, Streetwise Lookout/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 245e26ec-39eb-4af8-99af-8cc22edbc261	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-245e26ec-39eb-4af8-99af-8cc22edbc261	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+245e26ec-39eb-4af8-99af-8cc22edbc261	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 24630190-a630-4dd3-a8f7-82f129c881e3	cast	cast-resolve	agreed	-	X	scen	1	0	Loporrit Scout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 24630190-a630-4dd3-a8f7-82f129c881e3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Loporrit Scout/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 24645d9e-5e6d-411d-be41-c2bd1659937f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primal-empathy:cast:s1,f:xs:XP:primal-empathy:cast:s1	-	-	-	ae86f6029288	-	cb0c4ac6068b	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24f1f0e9-8c9b-4f32-95ec-7af883bbeef4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24f1f0e9-8c9b-4f32-95ec-7af883bbeef4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24f2cf61-22db-4e34-898f-6baa2957d3ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-24f7143c-d43a-4120-baa0-0235b15d8186	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+24f7143c-d43a-4120-baa0-0235b15d8186	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wave-of-reckoning:cast:s1,f:xs:XP:wave-of-reckoning:cast:s1	-	-	-	5f2128bf97e4	-	653ce35fb944	-	-	2026-11-24	xproof
 24f9c64a-6ce6-41cd-948e-11554d7f17fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24f9c64a-6ce6-41cd-948e-11554d7f17fb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24fd1f47-bb15-45c6-a7b1-ba8eb3bb8b1d	cast	cast-resolve	agreed	-	FX	scen	2	0	Vaan, Street Thief/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

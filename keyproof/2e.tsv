@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e358f7e-c282-4b92-8255-1436c99cda49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e358f7e-c282-4b92-8255-1436c99cda49	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e35bcef-505a-4559-a1fe-f42f4543197f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e35bcef-505a-4559-a1fe-f42f4543197f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2e35bcef-505a-4559-a1fe-f42f4543197f	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2e3cc9b6-7849-4385-a487-c8f5364174e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cruel-reality:cast:s1,f:xs:XP:cruel-reality:cast:s1	-	-	-	d864b561c9cb	-	ed1ee95dc376	-	-	2026-11-24	xproof
 2e3cc9b6-7849-4385-a487-c8f5364174e7	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:cruel-reality:cast:s1,f:xs:XP:cruel-reality:cast:s1	-	-	-	d864b561c9cb	-	ed1ee95dc376	-	-	2026-11-24	xproof
 2e3ec514-fc9e-4964-a493-2a6cc9e63630	cast	cast-resolve	agreed	-	FX	scen	2	0	The Mindskinner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e735849-1930-4f43-86b4-da660ade15bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e735849-1930-4f43-86b4-da660ade15bc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e7a9ea9-f76c-4c12-950f-c613fa16cfa8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2e7a9ea9-f76c-4c12-950f-c613fa16cfa8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2e7a9ea9-f76c-4c12-950f-c613fa16cfa8	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:captain-sisay:f0a0:s1,f:xs:XP:captain-sisay:f0a0:s1	-	-	-	5f2128bf97e4	-	7fbf69c38792	-	-	2026-11-24	xproof
 2e7b4df3-7c36-469f-8db8-b3081a2c5691	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scavenged-blade:f0t0:s1,f:xs:XP:scavenged-blade:f0t0:s1	-	-	-	ae86f6029288	-	6f8ccf728d4f	-	-	2026-11-24	xproof
 2e7b4df3-7c36-469f-8db8-b3081a2c5691	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e7b4df3-7c36-469f-8db8-b3081a2c5691	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scavenged-blade:f0t0:s1,f:xs:XP:scavenged-blade:f0t0:s1	-	-	-	ae86f6029288	-	6f8ccf728d4f	-	-	2026-11-24	xproof

@@ -4,12 +4,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d0213d7-9e25-49d2-93fa-1d346cb2e869	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	bcceadf3c7db	-	-	2026-11-24	xproof
 8d0213d7-9e25-49d2-93fa-1d346cb2e869	f0/t1	Phase	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	bcceadf3c7db	-	-	2026-11-24	xproof
 8d02b297-97c4-4379-9862-0a462400f66f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d02b297-97c4-4379-9862-0a462400f66f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d02b297-97c4-4379-9862-0a462400f66f	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 8d035688-089f-4d5c-bcad-9140a6c1681b	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d038c81-b43f-4721-abda-5dacfc194ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d038c81-b43f-4721-abda-5dacfc194ed3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:burrenton-shield-bearers:f0t0:s1,f:xs:XP:burrenton-shield-bearers:f0t0:s1	-	-	-	d864b561c9cb	-	3de554de70f3	-	-	2026-11-24	xproof
 8d03d050-391c-4311-8c42-4ee632d40fdc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d03d050-391c-4311-8c42-4ee632d40fdc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d03d050-391c-4311-8c42-4ee632d40fdc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 8d0bf685-e521-4d72-acc6-86794f685ce2	cast	cast-resolve	agreed	-	X	scen	1	0	Tunnel Tipster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d0bf685-e521-4d72-acc6-86794f685ce2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tunnel Tipster/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d0bf685-e521-4d72-acc6-86794f685ce2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tunnel Tipster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8da8644c-75a1-4fe9-8e94-900d948d631c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8dad1fa8-3533-4e3c-b9b3-fcd57b20a33d	cast	cast-resolve	agreed	-	X	scen	1	0	Omnipresence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8dad1fa8-3533-4e3c-b9b3-fcd57b20a33d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Omnipresence/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8daed4d8-1a43-4452-85dd-51b320714489	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8daed4d8-1a43-4452-85dd-51b320714489	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:denying-wind:cast:s1,f:xs:XP:denying-wind:cast:s1	-	-	-	5f2128bf97e4	-	3e1c216ca098	-	-	2026-11-24	xproof
 8db0a379-4cf2-43a7-932b-c5646a604578	cast	cast-resolve	agreed	-	FX	scen	2	0	Into the Fae Court/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8db3152a-11b1-4c59-a745-1c40a9b235b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8db3152a-11b1-4c59-a745-1c40a9b235b7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

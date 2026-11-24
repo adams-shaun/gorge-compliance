@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 4e05d1a2-ad53-4f2e-aaea-7ec464b07c04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4e05d1a2-ad53-4f2e-aaea-7ec464b07c04	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4e05d1a2-ad53-4f2e-aaea-7ec464b07c04	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 4e07a0b3-f340-4ed1-a8a9-c25fe6f37fb3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e07a0b3-f340-4ed1-a8a9-c25fe6f37fb3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e07d30a-d29a-49bc-ab49-41ea4116a18c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4edbaac4-dcb3-40b4-abd7-ff2683bd366d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:champion-of-stray-souls:cast:s1,f:xs:XP:champion-of-stray-souls:cast:s1	-	-	-	d864b561c9cb	-	e2513d0ae5d9	-	-	2026-11-24	xproof
-4edbaac4-dcb3-40b4-abd7-ff2683bd366d	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:champion-of-stray-souls:f0a1:s1	-	-	-	ae86f6029288	-	e2513d0ae5d9	-	-	2026-11-24	xproof
+4edbaac4-dcb3-40b4-abd7-ff2683bd366d	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:champion-of-stray-souls:f0a1:s1	-	-	-	5f2128bf97e4	-	e2513d0ae5d9	-	-	2026-11-24	xproof
 4edbaac4-dcb3-40b4-abd7-ff2683bd366d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4eedf21c-0ad1-48da-a9fe-2ffdbf8371e9	cast	cast-resolve	agreed	-	X	scen	1	0	Pain for All/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4eedf21c-0ad1-48da-a9fe-2ffdbf8371e9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Pain for All/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

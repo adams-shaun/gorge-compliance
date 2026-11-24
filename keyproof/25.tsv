@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 252330b1-67cf-4d9e-a413-917ba61e731f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 252d9183-16eb-4345-8d15-56218b33abdd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2531eb1a-ae24-450a-b8e8-dbbd65eaad64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2531eb1a-ae24-450a-b8e8-dbbd65eaad64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2531eb1a-ae24-450a-b8e8-dbbd65eaad64	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 25328cab-c7c0-4c55-99bb-a4149f6c511a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:bramble-armor:cast:s1,f:xs:XP:bramble-armor:cast:s1	-	-	-	d864b561c9cb	-	383042c55eec	-	-	2026-11-24	xproof
 25328cab-c7c0-4c55-99bb-a4149f6c511a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25328cab-c7c0-4c55-99bb-a4149f6c511a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:bramble-armor:cast:s1,f:xs:XP:bramble-armor:cast:s1	-	-	-	d864b561c9cb	-	383042c55eec	-	-	2026-11-24	xproof
@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25443ea4-3177-4e29-a2b1-f3fee60b3205	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 25443ea4-3177-4e29-a2b1-f3fee60b3205	static#0.0	static#0.0	agreed	-	X	scen	1	0	Secret Invasion/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 25450b06-3065-4b4f-975e-586d045e5815	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25450b06-3065-4b4f-975e-586d045e5815	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+25450b06-3065-4b4f-975e-586d045e5815	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2546db90-1f6e-43f7-a116-2fefe67d489d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 254878f0-be90-4653-a395-0c41258fceaf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2549bc57-9ffb-4053-9f10-f2a5f792b845	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25ab42a5-ec1a-4510-b957-1d4f14fa10b0	f0/a0	RollDice	agreed	-	FX	start	1	0	x:xs:XP:herald-of-hadar:f0a0:s1,f:xs:XP:herald-of-hadar:f0a0:s1	-	-	-	d864b561c9cb	-	fc3da52ecb4c	-	-	2026-11-24	xproof
 25ad4e88-b5ee-4853-a4fc-0a0420c746f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25ae99c5-83b7-428d-b049-8ad40e250696	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25ae99c5-83b7-428d-b049-8ad40e250696	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+25ae99c5-83b7-428d-b049-8ad40e250696	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:sliptide-serpent:f0a0:s1,f:xs:XP:sliptide-serpent:f0a0:s1	-	-	-	5f2128bf97e4	-	a67f298e560a	-	-	2026-11-24	xproof
 25af5e13-ebe8-4bc4-b8fe-8b9aee59579c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stinkdrinker-daredevil:cast:s1,f:xs:XP:stinkdrinker-daredevil:cast:s1	-	-	-	d864b561c9cb	-	34057429906f	-	-	2026-11-24	xproof
 25afddd2-6e48-4742-b34e-e3b5def7c0fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25afddd2-6e48-4742-b34e-e3b5def7c0fd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25c83d45-581f-48ba-b6bb-feb66e8a65c7	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sewer-veillance Cam/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 25c83d45-581f-48ba-b6bb-feb66e8a65c7	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25c83d45-581f-48ba-b6bb-feb66e8a65c7	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Sewer-veillance Cam/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-25c8a3b0-c393-4fc6-a373-808cd8e9850c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+25c8a3b0-c393-4fc6-a373-808cd8e9850c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:air-bladder:cast:s1,f:xs:XP:air-bladder:cast:s1	-	-	-	5f2128bf97e4	-	dd711cf34288	-	-	2026-11-24	xproof
 25c983e0-a8c9-4784-91a4-8fe04c6df882	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tocasia-s-welcome:cast:s1,f:xs:XP:tocasia-s-welcome:cast:s1	-	-	-	ae86f6029288	-	9e6fa0793442	-	-	2026-11-24	xproof
 25c983e0-a8c9-4784-91a4-8fe04c6df882	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 25cb5c86-83cd-4a06-b0d1-a0f6fc9158a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-offensive:cast:s1,f:xs:XP:goblin-offensive:cast:s1	-	-	-	5f2128bf97e4	-	8f3bf7986af7	-	-	2026-11-24	xproof

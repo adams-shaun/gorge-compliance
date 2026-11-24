@@ -25,8 +25,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 451a3f52-9810-4137-93b1-9594e7727c29	f0/a1	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 451a3f52-9810-4137-93b1-9594e7727c29	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 451e8ece-7389-4d52-8bc9-450cb5e53e6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4520c630-3650-462f-ab01-215eb2bdbbf5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4520c630-3650-462f-ab01-215eb2bdbbf5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4520c630-3650-462f-ab01-215eb2bdbbf5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zerapa-minotaur:cast:s1,f:xs:XP:zerapa-minotaur:cast:s1	-	-	-	5f2128bf97e4	-	2cb4971700d1	-	-	2026-11-24	xproof
+4520c630-3650-462f-ab01-215eb2bdbbf5	f0/a0	Debuff	agreed	-	FX	start	2	0	x:xs:XP:zerapa-minotaur:f0a0:s1,f:xs:XP:zerapa-minotaur:f0a0:s1	-	-	-	5f2128bf97e4	-	2cb4971700d1	-	-	2026-11-24	xproof
 45222123-f5e0-48ff-b80c-858727d155d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4523c22b-363b-4bc6-ba23-b428054abc5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4527c622-cebe-41eb-9178-4895cccffe99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 454cbc6a-b7f0-445e-842c-5db267917a18	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:earthshaker-dreadmaw:f0t0:s2,f:xs:XP:earthshaker-dreadmaw:f0t0:s2	-	-	-	e07cf3a05ba5	-	45ed90be86ef	-	-	2026-11-24	xproof
 454ed336-362d-46d9-96d5-8fcaa8a1c543	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 455138dd-4f76-4b40-9715-f1b1d61f8f23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-455138dd-4f76-4b40-9715-f1b1d61f8f23	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+455138dd-4f76-4b40-9715-f1b1d61f8f23	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 45579312-499f-41de-b16e-a231d65a2053	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45579312-499f-41de-b16e-a231d65a2053	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 455cbf35-f340-4f1f-a331-5b082c9034ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

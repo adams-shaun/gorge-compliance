@@ -8,7 +8,7 @@ b8020a8b-557b-465d-865d-b59fecd7abc1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thre
 b8020a8b-557b-465d-865d-b59fecd7abc1	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:threefold-thunderhulk:f0t0:s2,f:xs:XP:threefold-thunderhulk:f0t0:s2	-	-	-	e07cf3a05ba5	-	96e93b8038db	-	-	2026-11-24	xproof
 b8020a8b-557b-465d-865d-b59fecd7abc1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Threefold Thunderhulk/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b80415cd-5887-4146-852e-73119fcd3ec6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b80415cd-5887-4146-852e-73119fcd3ec6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b80415cd-5887-4146-852e-73119fcd3ec6	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 b80473f7-f1d4-4aa3-988e-1a8610ffbeee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b80473f7-f1d4-4aa3-988e-1a8610ffbeee	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bag-end-porter:f0t0:s1,f:xs:XP:bag-end-porter:f0t0:s1	-	-	-	ae86f6029288	-	4e0fc2a5c397	-	-	2026-11-24	xproof
 b80879d3-5abd-47e5-8b8c-61db120854e4	cast	cast-resolve	agreed	-	X	scen	1	0	Cleveland Booker, Empath/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -62,8 +62,8 @@ b8619990-9dc2-4fcc-bc7e-457b77cd2a8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b8619990-9dc2-4fcc-bc7e-457b77cd2a8e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 b86a5d90-0820-46cb-b43c-c03a423a3a9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b86a5d90-0820-46cb-b43c-c03a423a3a9f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-b86c0c23-bb29-4af0-bbd4-50b3ae634375	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b86c0c23-bb29-4af0-bbd4-50b3ae634375	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b86c0c23-bb29-4af0-bbd4-50b3ae634375	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firescreamer:cast:s1,f:xs:XP:firescreamer:cast:s1	-	-	-	5f2128bf97e4	-	c4eb9044139a	-	-	2026-11-24	xproof
+b86c0c23-bb29-4af0-bbd4-50b3ae634375	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:firescreamer:f0a0:s1,f:xs:XP:firescreamer:f0a0:s1	-	-	-	5f2128bf97e4	-	c4eb9044139a	-	-	2026-11-24	xproof
 b86ccfc1-a26b-4942-9d77-fef7676c77be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b86ccfc1-a26b-4942-9d77-fef7676c77be	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b86d3142-568a-4eea-b1ae-5fcfc1453533	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -91,8 +91,8 @@ b8942c72-16ce-4f2f-875f-97a56e85a03e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	
 b8961205-87fa-4cce-aba9-84fa2f91a67f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b8961205-87fa-4cce-aba9-84fa2f91a67f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b8961205-87fa-4cce-aba9-84fa2f91a67f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b89b285d-62d3-4013-b881-23f0f236337d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gwyllion-hedge-mage:f0t1:s1,f:xs:XP:gwyllion-hedge-mage:f0t1:s1	-	-	-	ae86f6029288	-	df735be75e8e	-	-	2026-11-24	xproof
-b89b285d-62d3-4013-b881-23f0f236337d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gwyllion-hedge-mage:f0t1:s1,f:xs:XP:gwyllion-hedge-mage:f0t1:s1	-	-	-	ae86f6029288	-	df735be75e8e	-	-	2026-11-24	xproof
+b89b285d-62d3-4013-b881-23f0f236337d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gwyllion-hedge-mage:f0t1:s1,f:xs:XP:gwyllion-hedge-mage:f0t1:s1	-	-	-	5f2128bf97e4	-	df735be75e8e	-	-	2026-11-24	xproof
+b89b285d-62d3-4013-b881-23f0f236337d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gwyllion-hedge-mage:f0t1:s1,f:xs:XP:gwyllion-hedge-mage:f0t1:s1	-	-	-	5f2128bf97e4	-	df735be75e8e	-	-	2026-11-24	xproof
 b89b285d-62d3-4013-b881-23f0f236337d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b89d912a-65a0-4bc9-9e1d-ff8317458a72	cast	cast-resolve	agreed	-	X	scen	1	0	Knight of Malice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b89d912a-65a0-4bc9-9e1d-ff8317458a72	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Knight of Malice/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

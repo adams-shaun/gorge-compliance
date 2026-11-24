@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stomping Ground/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Stomping Ground/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	land	play-land	agreed	-	X	scen	1	0	Stomping Ground/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-16069935-4aeb-481f-98f2-46387775540f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:noggle-hedge-mage:f0t0:s1,f:xs:XP:noggle-hedge-mage:f0t0:s1	-	-	-	ae86f6029288	-	f34be77cea62	-	-	2026-11-24	xproof
+16069935-4aeb-481f-98f2-46387775540f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:noggle-hedge-mage:f0t0:s1,f:xs:XP:noggle-hedge-mage:f0t0:s1	-	-	-	5f2128bf97e4	-	f34be77cea62	-	-	2026-11-24	xproof
 16069935-4aeb-481f-98f2-46387775540f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16069935-4aeb-481f-98f2-46387775540f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16128b90-9b81-476e-8999-3ef498728c39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -45,8 +45,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1636c4d2-f699-4af7-8508-dbce2f0b7b52	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 163baf58-b35d-4f2b-aa53-8384b8b5800a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 163baf58-b35d-4f2b-aa53-8384b8b5800a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-163e5482-700c-4d91-b70c-9170cc8f1ad2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-163e5482-700c-4d91-b70c-9170cc8f1ad2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+163e5482-700c-4d91-b70c-9170cc8f1ad2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pious-warrior:cast:s1,f:xs:XP:pious-warrior:cast:s1	-	-	-	5f2128bf97e4	-	ca51d5fe0bc7	-	-	2026-11-24	xproof
+163e5482-700c-4d91-b70c-9170cc8f1ad2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 163ece8a-0479-4bb2-b559-581985d1898b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 163f1fce-70c8-44e3-a679-f97d52cd1e9a	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Man No More/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 163f1fce-70c8-44e3-a679-f97d52cd1e9a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Spider-Man No More/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -10,8 +10,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3111f8b7-36af-4390-af99-5b8976b2f241	cast	cast	agreed	-	F	start	2	0	f:xs:XP:tazeem-raptor:f0t0:s1	-	-	-	ae86f6029288	-	a4dec155e1e5	-	-	2026-11-24	xproof
 3111f8b7-36af-4390-af99-5b8976b2f241	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:tazeem-raptor:f0t0:s1	-	-	-	ae86f6029288	-	a4dec155e1e5	-	-	2026-11-24	xproof
 31123cb5-2dd5-4f2b-a2fd-8f87095972c6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31136103-535a-4d11-819a-1cbd57ad48a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31136103-535a-4d11-819a-1cbd57ad48a4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+31136103-535a-4d11-819a-1cbd57ad48a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trenching-steed:cast:s1,f:xs:XP:trenching-steed:cast:s1	-	-	-	5f2128bf97e4	-	b6db09b03089	-	-	2026-11-24	xproof
+31136103-535a-4d11-819a-1cbd57ad48a4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:trenching-steed:cast:s1,f:xs:XP:trenching-steed:cast:s1	-	-	-	5f2128bf97e4	-	b6db09b03089	-	-	2026-11-24	xproof
 3113afec-d4ae-46b5-9952-89e2e2c9ae7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 311666bf-705b-4f78-a0b3-0d5bf46db205	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 311666bf-705b-4f78-a0b3-0d5bf46db205	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -77,8 +77,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 315ddc7a-c39c-43d9-b134-23acbd865e3e	cast	cast-resolve	agreed	-	FX	scen	2	0	Squirrelanoids/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 315ddc7a-c39c-43d9-b134-23acbd865e3e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Squirrelanoids/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 315ddc7a-c39c-43d9-b134-23acbd865e3e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Squirrelanoids/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3160dada-d59f-4f23-8420-ba14f9df7514	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3160dada-d59f-4f23-8420-ba14f9df7514	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3160dada-d59f-4f23-8420-ba14f9df7514	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nesting-wurm:f0t0:s1,f:xs:XP:nesting-wurm:f0t0:s1	-	-	-	5f2128bf97e4	-	fddd503d6b81	-	-	2026-11-24	xproof
+3160dada-d59f-4f23-8420-ba14f9df7514	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nesting-wurm:f0t0:s1,f:xs:XP:nesting-wurm:f0t0:s1	-	-	-	5f2128bf97e4	-	fddd503d6b81	-	-	2026-11-24	xproof
 3162e0b4-1348-4c86-8da7-ae23ff968c57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3162e0b4-1348-4c86-8da7-ae23ff968c57	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 316cae8b-31b0-4b76-8b72-8122005e1b4e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clutch-of-the-undercity:cast:s1,f:xs:XP:clutch-of-the-undercity:cast:s1	-	-	-	64a08ba7d913	-	101d4f62ae1c	-	-	2026-11-24	xproof

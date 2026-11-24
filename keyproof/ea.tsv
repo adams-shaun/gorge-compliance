@@ -14,8 +14,8 @@ ea1eb902-a23c-44ff-9169-19baf71de238	f0/t0	NULL	owed	refused:no-generator:trigge
 ea1fc580-a640-4f49-8f29-405c2830eca8	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	fb5a6b1e0ba2	-	-	2026-11-24	xproof
 ea205569-b5a0-4c86-b825-67cd48d3b2e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ea205569-b5a0-4c86-b825-67cd48d3b2e8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ea2614bc-00ad-4859-98f5-689f33357fe6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ea2614bc-00ad-4859-98f5-689f33357fe6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ea2614bc-00ad-4859-98f5-689f33357fe6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:empress-galina:cast:s1,f:xs:XP:empress-galina:cast:s1	-	-	-	5f2128bf97e4	-	7997a86680d3	-	-	2026-11-24	xproof
+ea2614bc-00ad-4859-98f5-689f33357fe6	f0/a0	GainControl	agreed	-	FX	start	2	0	x:xs:XP:empress-galina:f0a0:s1,f:xs:XP:empress-galina:f0a0:s1	-	-	-	5f2128bf97e4	-	7997a86680d3	-	-	2026-11-24	xproof
 ea27c8bf-33c5-443f-b8b2-51235efc2491	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ea29c489-bd04-4f36-8b59-bccaac153152	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:heliod-s-emissary:cast:s1,f:xs:XP:heliod-s-emissary:cast:s1	-	-	-	d864b561c9cb	-	709063a4006c	-	-	2026-11-24	xproof
 ea29c489-bd04-4f36-8b59-bccaac153152	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -51,7 +51,7 @@ ea4c5b8f-a5ff-47dd-8e47-5ae7b21926b4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Foun
 ea4c5b8f-a5ff-47dd-8e47-5ae7b21926b4	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:fountainport-bell:f0t0:s2,f:xs:XP:fountainport-bell:f0t0:s2	-	-	-	e07cf3a05ba5	-	a9abfb75f5b0	-	-	2026-11-24	xproof
 ea4d30c7-7c39-46d5-9b71-a7ebc3e219a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ea4d6fcd-21e0-4e9f-b406-a89042998d98	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ea4d6fcd-21e0-4e9f-b406-a89042998d98	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ea4d6fcd-21e0-4e9f-b406-a89042998d98	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 ea4d6fcd-21e0-4e9f-b406-a89042998d98	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ea5103f5-27e0-4eb1-902c-7f34652d6bf3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orcish-bowmasters:f0t0:s1,f:xs:XP:orcish-bowmasters:f0t0:s1	-	-	-	ae86f6029288	-	2143b5941c70	-	-	2026-11-24	xproof
 ea5103f5-27e0-4eb1-902c-7f34652d6bf3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:orcish-bowmasters:f0t0:s1,f:xs:XP:orcish-bowmasters:f0t0:s1	-	-	-	ae86f6029288	-	2143b5941c70	-	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ eacfe895-5106-437c-b8c1-2ff03c107744	cast	cast-resolve	agreed	-	FX	scen	2	0	Medi
 eacfe895-5106-437c-b8c1-2ff03c107744	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Medic's Kitesail/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eacfe895-5106-437c-b8c1-2ff03c107744	static#0.0	static#0.0	agreed	-	X	scen	1	0	Medic's Kitesail/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ead0820e-fc6b-4ab2-9110-048d6d53985d	cast	cast-resolve	agreed	-	FX	scen	2	0	Panther Pounce/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ead1accc-b90e-424a-a55f-2f4771726ce1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shipwreck-looter:f0t0:s1,f:xs:XP:shipwreck-looter:f0t0:s1	-	-	-	ae86f6029288	-	46d9a19c7f8b	-	-	2026-11-24	xproof
+ead1accc-b90e-424a-a55f-2f4771726ce1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shipwreck-looter:f0t0:s1,f:xs:XP:shipwreck-looter:f0t0:s1	-	-	-	5f2128bf97e4	-	46d9a19c7f8b	-	-	2026-11-24	xproof
 ead1accc-b90e-424a-a55f-2f4771726ce1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ead1bcc4-6bf7-4ace-b705-e3095e6a716c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ead1bcc4-6bf7-4ace-b705-e3095e6a716c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
