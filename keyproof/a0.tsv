@@ -65,8 +65,8 @@ a0657586-0404-4bb0-a92d-25f040d560c1	cast	cast-resolve	agreed	-	X	scen	1	0	Aberr
 a0657586-0404-4bb0-a92d-25f040d560c1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aberrant Manawurm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a0657586-0404-4bb0-a92d-25f040d560c1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aberrant Manawurm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a0657586-0404-4bb0-a92d-25f040d560c1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aberrant Manawurm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a066eeb1-61fc-448b-bbab-650d672652ad	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a066eeb1-61fc-448b-bbab-650d672652ad	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a066eeb1-61fc-448b-bbab-650d672652ad	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+a066eeb1-61fc-448b-bbab-650d672652ad	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	cast	cast-resolve	agreed	-	X	scen	1	0	Oaken Siren/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Oaken Siren/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Oaken Siren/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ a09d9754-a321-4018-a237-e613e915b642	cast	cast-resolve	agreed	-	X	scen	1	0	The P
 a09d9754-a321-4018-a237-e613e915b642	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Prima Vista/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a09d9754-a321-4018-a237-e613e915b642	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Prima Vista/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a09da13e-f8a3-410e-941a-9912d2cfe7de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df	cast	cast-resolve	agreed	-	X	scen	1	0	Geological Appraiser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df	f0/t0	NULL	owed	refused:history:wascast	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geological-appraiser:f0t0:s1,f:xs:XP:geological-appraiser:f0t0:s1	-	-	-	5437c1394672	-	a20c9a815a54	-	-	2026-11-24	xproof
+a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:geological-appraiser:f0t0:s1,f:xs:XP:geological-appraiser:f0t0:s1	-	-	-	5437c1394672	-	a20c9a815a54	-	-	2026-11-24	xproof
 a0a706b2-b237-4183-82fa-2140a23b89e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0a706b2-b237-4183-82fa-2140a23b89e3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0a7319d-9441-4aed-a351-9ff3fb3b1d9e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hulldrifter:f0t0:s2,f:xs:XP:hulldrifter:f0t0:s2	-	-	-	267e485f6204	-	2162cf7c19dc	-	-	2026-11-24	xproof

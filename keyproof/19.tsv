@@ -68,7 +68,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19504e19-2886-4d28-a813-b798a9a446a2	cast	cast-resolve	agreed	-	X	scen	1	0	Alien Symbiosis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19504e19-2886-4d28-a813-b798a9a446a2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Alien Symbiosis/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19504e19-2886-4d28-a813-b798a9a446a2	static#0.1	static#0.1	agreed	-	X	scen	1	0	Alien Symbiosis/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-195107ad-879d-4b02-a44a-a3ba70fedf88	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Desert/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+195107ad-879d-4b02-a44a-a3ba70fedf88	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:desert:f0a1:s1,f:xs:XP:desert:f0a1:s1	-	-	-	5437c1394672	-	609d96e91c41	-	-	2026-11-24	xproof
 195107ad-879d-4b02-a44a-a3ba70fedf88	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 195107ad-879d-4b02-a44a-a3ba70fedf88	land	play-land	agreed	-	FX	scen	2	0	Desert/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1954994f-17bf-4ea5-af72-60f9bfcb6569	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19a11c33-269a-45d3-86c7-827965053f26	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a2f0a0-9e68-4982-a5f5-b77d805befd7	cast	cast-resolve	agreed	-	X	scen	1	0	Demonic Pact/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a2f0a0-9e68-4982-a5f5-b77d805befd7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Demonic Pact/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-19a32e29-45ec-433e-9cb4-b2c32cac8f80	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:beastbond-outcaster:f0t0:s2,f:xs:XP:beastbond-outcaster:f0t0:s2	-	-	-	5437c1394672	-	a829239b252e	-	-	2026-11-24	xproof
+19a32e29-45ec-433e-9cb4-b2c32cac8f80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beastbond-outcaster:f0t0:s1,f:xs:XP:beastbond-outcaster:f0t0:s1	-	-	-	5437c1394672	-	a829239b252e	-	-	2026-11-24	xproof
 19a32e29-45ec-433e-9cb4-b2c32cac8f80	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a39cc5-2134-4dee-932c-81389806c57b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a3c505-b180-47cc-bef3-9e807a8a4a3d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19ed5429-5631-4a36-a69c-ab35860160b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19ed8616-5d27-4f21-88a9-2af7cf5034ca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19ed8616-5d27-4f21-88a9-2af7cf5034ca	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19edde54-153f-46b8-8a8d-a20fdef0667f	cast	cast-resolve	agreed	-	FX	scen	2	0	Captain James T. Kirk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+19edde54-153f-46b8-8a8d-a20fdef0667f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-james-t-kirk:f0t0:s1,f:xs:XP:captain-james-t-kirk:f0t0:s1	-	-	-	5437c1394672	-	8aae4bdd1259	-	-	2026-11-24	xproof
 19edde54-153f-46b8-8a8d-a20fdef0667f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19edde54-153f-46b8-8a8d-a20fdef0667f	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19ef0329-08de-4835-8079-2e791e19f3a6	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof

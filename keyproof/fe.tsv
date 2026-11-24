@@ -24,15 +24,15 @@ fe16f1ab-58b4-4452-abe4-cbd9addd348f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fe174586-d36b-40f6-babd-1f98e76eec22	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Amonkhet Raceway/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fe174586-d36b-40f6-babd-1f98e76eec22	land	play-land	agreed	-	X	scen	1	0	Amonkhet Raceway/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fe174586-d36b-40f6-babd-1f98e76eec22	static#0.0	static#0.0	agreed	-	X	scen	1	0	Amonkhet Raceway/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fe1eb8b3-c605-4711-a057-ed3565bfe75c	cast	cast-resolve	agreed	-	X	scen	1	0	Michelangelo, Mutant BFF/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+fe1eb8b3-c605-4711-a057-ed3565bfe75c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:michelangelo-mutant-bff:f0t0:s1,f:xs:XP:michelangelo-mutant-bff:f0t0:s1	-	-	-	5437c1394672	-	92dca7afac57	-	-	2026-11-24	xproof
 fe1eb8b3-c605-4711-a057-ed3565bfe75c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Michelangelo, Mutant BFF/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fe1eb8b3-c605-4711-a057-ed3565bfe75c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Michelangelo, Mutant BFF/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fe1eb8b3-c605-4711-a057-ed3565bfe75c	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+fe1eb8b3-c605-4711-a057-ed3565bfe75c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:michelangelo-mutant-bff:f0t0:s1,f:xs:XP:michelangelo-mutant-bff:f0t0:s1	-	-	-	5437c1394672	-	92dca7afac57	-	-	2026-11-24	xproof
 fe1eb8b3-c605-4711-a057-ed3565bfe75c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Michelangelo, Mutant BFF/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fe1eb8b3-c605-4711-a057-ed3565bfe75c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Michelangelo, Mutant BFF/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fe1f40fe-011b-4686-b865-fed00c56d30a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fe249f27-db6c-4826-836e-a04efb1a3eaa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fe249f27-db6c-4826-836e-a04efb1a3eaa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fe249f27-db6c-4826-836e-a04efb1a3eaa	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:serpent-warrior:cast:s1,f:xs:XP:serpent-warrior:cast:s1	-	-	-	5437c1394672	-	1903f5dcef42	-	-	2026-11-24	xproof
+fe249f27-db6c-4826-836e-a04efb1a3eaa	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:serpent-warrior:cast:s1,f:xs:XP:serpent-warrior:cast:s1	-	-	-	5437c1394672	-	1903f5dcef42	-	-	2026-11-24	xproof
 fe2e27a9-437e-4d22-aa22-982978793cff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe2e27a9-437e-4d22-aa22-982978793cff	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe2e27a9-437e-4d22-aa22-982978793cff	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -117,7 +117,7 @@ fea4cb32-0329-4199-9abe-bff0cc45882a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 fea4cb32-0329-4199-9abe-bff0cc45882a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fea60c45-cc36-4dd1-8475-23a9361e370d	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fea60c45-cc36-4dd1-8475-23a9361e370d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fea67446-f413-4a8c-b79a-49172e798fff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fea67446-f413-4a8c-b79a-49172e798fff	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 fea95888-e16a-4209-9cd4-623f7f4d2f67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fea997a4-3ed1-4f83-b16a-56939f4b2211	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fea997a4-3ed1-4f83-b16a-56939f4b2211	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -134,10 +134,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fb90df6-a62b-4a9f-ae79-db71d40466ce	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fb94fa4-2aff-4636-ac1b-ed39dc9451a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fb94fa4-2aff-4636-ac1b-ed39dc9451a6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fb9a8a2-4331-4259-9460-a37397554962	cast	cast-resolve	agreed	-	X	scen	1	0	Bringer of the Last Gift/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0fb9a8a2-4331-4259-9460-a37397554962	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bringer-of-the-last-gift:f0t0:s1,f:xs:XP:bringer-of-the-last-gift:f0t0:s1	-	-	-	5437c1394672	-	ed0782736afa	-	-	2026-11-24	xproof
 0fb9a8a2-4331-4259-9460-a37397554962	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bringer of the Last Gift/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0fb9a8a2-4331-4259-9460-a37397554962	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bringer of the Last Gift/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0fb9a8a2-4331-4259-9460-a37397554962	f0/t0	NULL	owed	refused:history:wascast	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+0fb9a8a2-4331-4259-9460-a37397554962	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bringer-of-the-last-gift:f0t0:s1,f:xs:XP:bringer-of-the-last-gift:f0t0:s1	-	-	-	5437c1394672	-	ed0782736afa	-	-	2026-11-24	xproof
 0fb9a928-9adb-4dc1-9761-857df7e6c643	cast	cast-resolve	agreed	-	FX	scen	2	0	Steamcore Scholar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0fb9a928-9adb-4dc1-9761-857df7e6c643	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Steamcore Scholar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0fb9a928-9adb-4dc1-9761-857df7e6c643	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Steamcore Scholar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -170,8 +170,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fd57894-b917-41c8-a394-360d1d31b236	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fdfe986-0216-468b-aac8-bbcf588fd894	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fdfe986-0216-468b-aac8-bbcf588fd894	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fe01c7d-f435-44c1-82f1-0ec2c47d4704	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fe01c7d-f435-44c1-82f1-0ec2c47d4704	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0fe01c7d-f435-44c1-82f1-0ec2c47d4704	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-pilgrim:f0t0:s1,f:xs:XP:heliod-s-pilgrim:f0t0:s1	-	-	-	5437c1394672	-	04b40b469eff	-	-	2026-11-24	xproof
+0fe01c7d-f435-44c1-82f1-0ec2c47d4704	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-pilgrim:f0t0:s1,f:xs:XP:heliod-s-pilgrim:f0t0:s1	-	-	-	5437c1394672	-	04b40b469eff	-	-	2026-11-24	xproof
 0fe16212-66c3-4e45-a641-7391e9b2e304	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fe16212-66c3-4e45-a641-7391e9b2e304	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fe16212-66c3-4e45-a641-7391e9b2e304	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

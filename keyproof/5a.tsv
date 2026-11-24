@@ -113,9 +113,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a7ecb5c-9b22-4d2c-b851-db92c1d3c745	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a81755f-bc44-47ac-8039-8847a5e37922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a8196ef-24ee-40b6-97d1-8a2257180f86	cast	cast-resolve	agreed	-	FX	scen	2	0	Feral Encounter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5a824931-2b65-42b1-8653-d4313a6693d2	cast	cast-resolve	agreed	-	X	scen	1	0	Warp Speed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5a824931-2b65-42b1-8653-d4313a6693d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warp-speed:f0t0:s1,f:xs:XP:warp-speed:f0t0:s1	-	-	-	5437c1394672	-	f3721603325a	-	-	2026-11-24	xproof
 5a824931-2b65-42b1-8653-d4313a6693d2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a824931-2b65-42b1-8653-d4313a6693d2	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a824931-2b65-42b1-8653-d4313a6693d2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:warp-speed:f0t0:s1,f:xs:XP:warp-speed:f0t0:s1	-	-	-	5437c1394672	-	f3721603325a	-	-	2026-11-24	xproof
 5a824aff-52fe-4402-b074-884afb5286d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a824aff-52fe-4402-b074-884afb5286d4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a848c1f-d11a-42fb-b9ce-663901fc9555	cast	cast-resolve	agreed	-	FX	scen	2	0	Revival of the Ancestors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -129,9 +129,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a8977fc-0732-4807-b876-01819aedd70b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pym Technologies/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a8977fc-0732-4807-b876-01819aedd70b	land	play-land	agreed	-	X	scen	1	0	Pym Technologies/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a898412-5b1e-4217-ac78-5b4099ed8e16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a8ae1c0-1935-4d03-aa94-9e9088650821	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a8ae1c0-1935-4d03-aa94-9e9088650821	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a8ae1c0-1935-4d03-aa94-9e9088650821	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a8ae1c0-1935-4d03-aa94-9e9088650821	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+5a8ae1c0-1935-4d03-aa94-9e9088650821	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+5a8ae1c0-1935-4d03-aa94-9e9088650821	f0/a1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 5a8bd4a4-8b10-4eef-8341-28be2afa2c00	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a8bd4a4-8b10-4eef-8341-28be2afa2c00	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a8dd1b7-b63e-4997-9fe8-5e8816bc051b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

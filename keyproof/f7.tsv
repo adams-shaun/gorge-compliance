@@ -7,9 +7,9 @@ f707dfb5-dfa9-471b-ac29-5435c30069cc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 f70d65bf-5f1c-4aee-9bd1-f5ee6974b058	cast	cast-resolve	agreed	-	FX	scen	2	0	Flaring Cinder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 f70d65bf-5f1c-4aee-9bd1-f5ee6974b058	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f70d65bf-5f1c-4aee-9bd1-f5ee6974b058	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Flaring Cinder/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-f70e72e1-9abe-485b-9fea-e8b35352f5b3	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f70e72e1-9abe-485b-9fea-e8b35352f5b3	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:pendelhaven:land:s1,f:xs:XP:pendelhaven:land:s1	-	-	-	5437c1394672	-	32cc1bee253c	-	-	2026-11-24	xproof
 f70e72e1-9abe-485b-9fea-e8b35352f5b3	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f70e72e1-9abe-485b-9fea-e8b35352f5b3	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f70e72e1-9abe-485b-9fea-e8b35352f5b3	land	land	agreed	-	FX	start	2	0	x:xs:XP:pendelhaven:land:s1,f:xs:XP:pendelhaven:land:s1	-	-	-	5437c1394672	-	32cc1bee253c	-	-	2026-11-24	xproof
 f70f1f2e-7277-4bc9-b0bb-b44a1da2c62f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f712aed5-d6e0-45d3-ae20-518b765ce9da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f712aed5-d6e0-45d3-ae20-518b765ce9da	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -99,9 +99,9 @@ f75ac0a3-8795-48b4-91fd-4717900ef5b7	combat#0.block	combat#0.block	agreed	-	X	sc
 f75ac0a3-8795-48b4-91fd-4717900ef5b7	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f75ac0a3-8795-48b4-91fd-4717900ef5b7	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Raven Eagle/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f75ac0a3-8795-48b4-91fd-4717900ef5b7	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Raven Eagle/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f75bb13b-41fc-4614-b35e-f456069ce9c6	cast	cast-resolve	agreed	-	X	scen	1	0	Dwarven Mattock/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f75bb13b-41fc-4614-b35e-f456069ce9c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dwarven-mattock:f0t0:s1,f:xs:XP:dwarven-mattock:f0t0:s1	-	-	-	5437c1394672	-	04256d0d5c27	-	-	2026-11-24	xproof
 f75bb13b-41fc-4614-b35e-f456069ce9c6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dwarven Mattock/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f75bb13b-41fc-4614-b35e-f456069ce9c6	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f75bb13b-41fc-4614-b35e-f456069ce9c6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dwarven-mattock:f0t0:s1,f:xs:XP:dwarven-mattock:f0t0:s1	-	-	-	5437c1394672	-	04256d0d5c27	-	-	2026-11-24	xproof
 f75bb13b-41fc-4614-b35e-f456069ce9c6	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dwarven Mattock/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f75be4f2-d1a7-40c7-a0e4-ba8b03556ac6	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:prismabasher:f0t0:s2,f:xs:XP:prismabasher:f0t0:s2	-	-	-	267e485f6204	-	ef9ef9cf4ff6	-	-	2026-11-24	xproof
 f75be4f2-d1a7-40c7-a0e4-ba8b03556ac6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Prismabasher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -135,9 +135,9 @@ f772e767-a931-4891-94eb-d92a8ca7f8c1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 f7730e2e-aa62-40e7-836d-e6ddb6893816	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7730e2e-aa62-40e7-836d-e6ddb6893816	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f778bf66-e823-4b4c-8586-97e1d519efd8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f77ea393-4142-4c06-8bb3-589ca74a7338	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f77ea393-4142-4c06-8bb3-589ca74a7338	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f77ea393-4142-4c06-8bb3-589ca74a7338	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f77ea393-4142-4c06-8bb3-589ca74a7338	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+f77ea393-4142-4c06-8bb3-589ca74a7338	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+f77ea393-4142-4c06-8bb3-589ca74a7338	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 f780d6f6-540b-4773-8a48-e56e95c2d39e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lasyd-prowler:f0t0:s2,f:xs:XP:lasyd-prowler:f0t0:s2	-	-	-	267e485f6204	-	121dac8d0f72	-	-	2026-11-24	xproof
 f780d6f6-540b-4773-8a48-e56e95c2d39e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lasyd Prowler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f780d6f6-540b-4773-8a48-e56e95c2d39e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lasyd-prowler:f0t0:s2,f:xs:XP:lasyd-prowler:f0t0:s2	-	-	-	267e485f6204	-	121dac8d0f72	-	-	2026-11-24	xproof

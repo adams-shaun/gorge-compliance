@@ -65,8 +65,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 645a4dee-a4e0-4850-a781-522aa718827f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 645a4dee-a4e0-4850-a781-522aa718827f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 645a4dee-a4e0-4850-a781-522aa718827f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-645a5619-d0b2-4153-aae0-ca2adc6f5e3d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-645a5619-d0b2-4153-aae0-ca2adc6f5e3d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+645a5619-d0b2-4153-aae0-ca2adc6f5e3d	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+645a5619-d0b2-4153-aae0-ca2adc6f5e3d	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 645ab3c7-ee1d-4dd0-811f-2dc7f7c7e792	cast	cast-resolve	agreed	-	FX	scen	2	0	Grow from the Ashes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 645b5784-a6f7-4cf3-966a-e1a51420b96b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 645b5784-a6f7-4cf3-966a-e1a51420b96b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,8 +177,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64e39ec9-358a-4aa0-a7e9-164e8aa0b236	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64e413c9-96e5-43c3-a182-84d53fef4327	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64e413c9-96e5-43c3-a182-84d53fef4327	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64e7ef06-ba30-4b19-9d44-ca77944cc930	cast	cast-resolve	agreed	-	FX	scen	2	0	Rank Rat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-64e7ef06-ba30-4b19-9d44-ca77944cc930	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+64e7ef06-ba30-4b19-9d44-ca77944cc930	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rank-rat:f0t0:s1,f:xs:XP:rank-rat:f0t0:s1	-	-	-	5437c1394672	-	0e75fc0dd124	-	-	2026-11-24	xproof
+64e7ef06-ba30-4b19-9d44-ca77944cc930	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rank-rat:f0t0:s1,f:xs:XP:rank-rat:f0t0:s1	-	-	-	5437c1394672	-	0e75fc0dd124	-	-	2026-11-24	xproof
 64ed5c35-8185-4e68-8028-b7b632ef5828	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64ed5c35-8185-4e68-8028-b7b632ef5828	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64ed5c35-8185-4e68-8028-b7b632ef5828	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

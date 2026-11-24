@@ -71,14 +71,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f438b8f-fe23-4f3b-ab2e-f6c33676c462	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f4738db-be2e-4d02-ad0c-1b74dd6bbfdc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f4738db-be2e-4d02-ad0c-1b74dd6bbfdc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f47c869-f4a9-43b0-aec0-8da4e3a3fec5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f47c869-f4a9-43b0-aec0-8da4e3a3fec5	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 1f47ff5a-dd93-46de-a1ca-b412631218bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f47ff5a-dd93-46de-a1ca-b412631218bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f493e26-a556-4ca0-bb44-5408800ccf82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f499d39-b963-45c0-9604-d3cab98c9e05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f4d3a96-bc30-4362-9c1f-40bf79f78e78	cast	cast-resolve	agreed	-	X	scen	1	0	Rot Farm Mortipede/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f4d3a96-bc30-4362-9c1f-40bf79f78e78	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rot Farm Mortipede/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1f513d1e-03ca-4e0f-af48-6490d71d5c41	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f513d1e-03ca-4e0f-af48-6490d71d5c41	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:needle-storm:cast:s1,f:xs:XP:needle-storm:cast:s1	-	-	-	5437c1394672	-	50e3c0c1881a	-	-	2026-11-24	xproof
 1f514b02-7827-4087-a6b7-bd6a3f520a64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f51fea2-ce19-44ef-a330-65cc0fafcd64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f544a9f-c238-4858-be19-d6cd7d023dcc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,8 +177,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d	cast	cast-resolve	agreed	-	X	scen	1	0	Reverberating Summons/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Reverberating Summons/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Reverberating Summons/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1fdcdb1c-a140-40ee-b711-5ea539eb1084	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1fdcdb1c-a140-40ee-b711-5ea539eb1084	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1fdcdb1c-a140-40ee-b711-5ea539eb1084	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+1fdcdb1c-a140-40ee-b711-5ea539eb1084	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 1fde570c-aa96-45ca-a6be-f59c8e4f4b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fde570c-aa96-45ca-a6be-f59c8e4f4b6a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fe549c3-79be-40ef-b57c-de59f24df5ab	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:the-sentry-golden-guardian:f0t0:s2,f:xs:XP:the-sentry-golden-guardian:f0t0:s2	-	-	-	5437c1394672	-	7dd7cdd4804a	-	-	2026-11-24	xproof

@@ -55,7 +55,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d708573-10b8-44fb-b61b-9ad65e3eb465	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d7194f7-1525-4f6e-b974-b947a254f437	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d7194f7-1525-4f6e-b974-b947a254f437	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:starscape-cleric:f0t1:s2,f:xs:XP:starscape-cleric:f0t1:s2	-	-	-	5437c1394672	-	6d972901167e	-	-	2026-11-24	xproof
+8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:starscape-cleric:f0t1:s1,f:xs:XP:starscape-cleric:f0t1:s1	-	-	-	5437c1394672	-	6d972901167e	-	-	2026-11-24	xproof
 8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Starscape Cleric/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Starscape Cleric/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d72ddb3-ef6e-4847-b6d4-5d85b1dd5802	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Starscape Cleric/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -73,11 +73,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d8682f3-9ef3-4aa7-9ea6-8a2ce09bff6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d8682f3-9ef3-4aa7-9ea6-8a2ce09bff6f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d877ee9-1751-48a1-9f2f-02897dae153b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d88facd-cf7e-498e-ab6b-6bd021316162	cast	cast-resolve	agreed	-	X	scen	1	0	Gollum the Abandoned/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8d88facd-cf7e-498e-ab6b-6bd021316162	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gollum-the-abandoned:f0t0:s1,f:xs:XP:gollum-the-abandoned:f0t0:s1	-	-	-	5437c1394672	-	41de331f124f	-	-	2026-11-24	xproof
 8d88facd-cf7e-498e-ab6b-6bd021316162	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gollum the Abandoned/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d88facd-cf7e-498e-ab6b-6bd021316162	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gollum the Abandoned/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d88facd-cf7e-498e-ab6b-6bd021316162	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gollum the Abandoned/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8d88facd-cf7e-498e-ab6b-6bd021316162	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d88facd-cf7e-498e-ab6b-6bd021316162	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gollum-the-abandoned:f0t0:s1,f:xs:XP:gollum-the-abandoned:f0t0:s1	-	-	-	5437c1394672	-	41de331f124f	-	-	2026-11-24	xproof
 8d88facd-cf7e-498e-ab6b-6bd021316162	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gollum the Abandoned/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d8981df-4cdc-4fd4-acd8-095fa3281281	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d8981df-4cdc-4fd4-acd8-095fa3281281	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

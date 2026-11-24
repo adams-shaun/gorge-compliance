@@ -127,16 +127,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ebb8542-5d1d-4f0b-92a9-5a98425860fd	cast	cast-resolve	agreed	-	X	scen	1	0	Kavaron Turbodrone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ebb8542-5d1d-4f0b-92a9-5a98425860fd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kavaron Turbodrone/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ebbe05c-7cc4-4845-87e5-ab93d7ac9623	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ebd64d2-c178-45a2-a51f-9869754baa0f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ebd64d2-c178-45a2-a51f-9869754baa0f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ebd64d2-c178-45a2-a51f-9869754baa0f	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+3ebd64d2-c178-45a2-a51f-9869754baa0f	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 3ebd9c8d-c840-4c2e-ace6-352a68d1c20f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ec1b67a-5ff8-4ce7-8388-d11a23f76f0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ec1b67a-5ff8-4ce7-8388-d11a23f76f0e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ec3d99d-2c49-469a-81d5-f1609b6e49ca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ec7ae18-b203-49bd-95f9-ad5482459a23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ec7ae18-b203-49bd-95f9-ad5482459a23	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ecaefc8-ead2-47a3-a7ea-b030faab65a7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ecaefc8-ead2-47a3-a7ea-b030faab65a7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3ecaefc8-ead2-47a3-a7ea-b030faab65a7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	5437c1394672	-	5706bcc90bfc	-	-	2026-11-24	xproof
+3ecaefc8-ead2-47a3-a7ea-b030faab65a7	f0/a0	Untap	owed	harness	-	start	0	0	-	-	-	-	5437c1394672	-	5706bcc90bfc	-	-	2026-11-24	xproof
 3ece897d-5b52-4fca-9f97-d7e864134c0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ed41d2d-211b-4013-8562-8c64d54cc43a	cast	cast-resolve	agreed	-	X	scen	1	0	Ramos, Dragon Engine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ed41d2d-211b-4013-8562-8c64d54cc43a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ramos, Dragon Engine/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

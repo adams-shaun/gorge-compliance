@@ -195,10 +195,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18cced8b-9836-4e11-bb4e-69a971a33a50	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18cced8b-9836-4e11-bb4e-69a971a33a50	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18d16129-da25-4120-a343-64ce962abba2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18d1765b-3b60-4dda-93a6-d02a4e53f185	cast	cast-resolve	agreed	-	FX	scen	2	0	Mind Meanderer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+18d1765b-3b60-4dda-93a6-d02a4e53f185	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-meanderer:f0t0:s1,f:xs:XP:mind-meanderer:f0t0:s1	-	-	-	5437c1394672	-	f19e8898c40a	-	-	2026-11-24	xproof
 18d1765b-3b60-4dda-93a6-d02a4e53f185	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mind Meanderer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18d1765b-3b60-4dda-93a6-d02a4e53f185	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mind Meanderer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-18d1765b-3b60-4dda-93a6-d02a4e53f185	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18d1765b-3b60-4dda-93a6-d02a4e53f185	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mind-meanderer:f0t0:s1,f:xs:XP:mind-meanderer:f0t0:s1	-	-	-	5437c1394672	-	f19e8898c40a	-	-	2026-11-24	xproof
 18d1765b-3b60-4dda-93a6-d02a4e53f185	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mind Meanderer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18d6b89a-3588-43d9-a247-4747a7d784fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18d6b89a-3588-43d9-a247-4747a7d784fc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -212,7 +212,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18ec721f-c1ac-4581-a61d-2f0b09d6bf92	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ed0c8a-db8f-4247-87c4-544b833f01bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ed0c8a-db8f-4247-87c4-544b833f01bd	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:claim-jumper:f0t0:s2,f:xs:XP:claim-jumper:f0t0:s2	-	-	-	5437c1394672	-	4ee96b570d60	-	-	2026-11-24	xproof
+18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:claim-jumper:f0t0:s1,f:xs:XP:claim-jumper:f0t0:s1	-	-	-	5437c1394672	-	4ee96b570d60	-	-	2026-11-24	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Claim Jumper/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Claim Jumper/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

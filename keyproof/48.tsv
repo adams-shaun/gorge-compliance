@@ -41,8 +41,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4844312c-3c9d-4ca1-986d-4ad35e68454e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4845dc21-7534-4896-b298-4d44cd7a3b27	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4845dc21-7534-4896-b298-4d44cd7a3b27	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4849f2f8-0c0e-470d-a4f5-76547a9570a0	cast	cast-resolve	agreed	-	X	scen	1	0	Rogue Artificial Intelligence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4849f2f8-0c0e-470d-a4f5-76547a9570a0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4849f2f8-0c0e-470d-a4f5-76547a9570a0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rogue-artificial-intelligence:f0t0:s1,f:xs:XP:rogue-artificial-intelligence:f0t0:s1	-	-	-	5437c1394672	-	21e78cbcc3ac	-	-	2026-11-24	xproof
+4849f2f8-0c0e-470d-a4f5-76547a9570a0	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:rogue-artificial-intelligence:f0t0:s2,f:xs:XP:rogue-artificial-intelligence:f0t0:s2	-	-	-	5437c1394672	-	21e78cbcc3ac	-	-	2026-11-24	xproof
 4849f2f8-0c0e-470d-a4f5-76547a9570a0	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 484b3586-c0ed-4793-a3c0-e99f265e092d	cast	cast-resolve	agreed	-	FX	scen	2	0	Caught Red-Handed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 484e8e49-e604-4721-95a4-dd69eb11d4c6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,8 +145,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48b84b58-1a06-4bb4-be1f-ad3ca69e66dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48b84b58-1a06-4bb4-be1f-ad3ca69e66dc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48b84b58-1a06-4bb4-be1f-ad3ca69e66dc	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48b891b6-3175-4864-bb98-af131098c557	cast	cast-resolve	agreed	-	FX	scen	2	0	Fblthp, Knows the Way/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-48b891b6-3175-4864-bb98-af131098c557	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48b891b6-3175-4864-bb98-af131098c557	cast	cast	agreed	-	F	start	2	0	f:xs:XP:fblthp-knows-the-way:f0t0:s1	-	-	-	5437c1394672	-	db44721f8283	-	-	2026-11-24	xproof
+48b891b6-3175-4864-bb98-af131098c557	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:fblthp-knows-the-way:f0t0:s1	-	-	-	5437c1394672	-	db44721f8283	-	-	2026-11-24	xproof
 48b891b6-3175-4864-bb98-af131098c557	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fblthp, Knows the Way/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 48b9c510-03ed-41cb-8c17-16110d447490	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48bda7dd-d023-41e8-8c28-e0cfda0d07ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

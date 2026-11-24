@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 f406630b-d9f1-4fc5-b3f3-5327384b2901	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f409e869-ea1a-4e08-b19e-949436d01cc1	cast	cast-resolve	agreed	-	X	scen	1	0	Excalbian Gamemaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f409e869-ea1a-4e08-b19e-949436d01cc1	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f409e869-ea1a-4e08-b19e-949436d01cc1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:excalbian-gamemaster:f0t0:s1,f:xs:XP:excalbian-gamemaster:f0t0:s1	-	-	-	5437c1394672	-	ad909778e2df	-	-	2026-11-24	xproof
+f409e869-ea1a-4e08-b19e-949436d01cc1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:excalbian-gamemaster:f0t0:s1,f:xs:XP:excalbian-gamemaster:f0t0:s1	-	-	-	5437c1394672	-	ad909778e2df	-	-	2026-11-24	xproof
 f409e869-ea1a-4e08-b19e-949436d01cc1	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f40a1a41-d340-4256-8f97-77499cd511a8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f40a1a41-d340-4256-8f97-77499cd511a8	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -24,13 +24,13 @@ f413a83d-a40d-434c-b20a-4c707c0527fa	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Temp
 f413a83d-a40d-434c-b20a-4c707c0527fa	land	play-land	agreed	-	X	scen	1	0	Temple Garden/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f414f997-06f3-4741-a9a5-9753c182e862	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f414f997-06f3-4741-a9a5-9753c182e862	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f4170db0-3adf-4744-b0ec-e889c713bb93	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f4170db0-3adf-4744-b0ec-e889c713bb93	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f4170db0-3adf-4744-b0ec-e889c713bb93	cast	cast	agreed	-	F	start	4	0	f:xs:XP:primeval-force:cast:s1	-	-	-	5437c1394672	-	c2f26442f0fd	-	-	2026-11-24	xproof
+f4170db0-3adf-4744-b0ec-e889c713bb93	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:primeval-force:cast:s1	-	-	-	5437c1394672	-	c2f26442f0fd	-	-	2026-11-24	xproof
 f41ea1b5-2c31-43fa-b142-244add1efd35	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f41ea1b5-2c31-43fa-b142-244add1efd35	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f41ea1b5-2c31-43fa-b142-244add1efd35	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f41f0290-0f9d-4c51-935e-f69d2120e4a7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f41f0290-0f9d-4c51-935e-f69d2120e4a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f41f0290-0f9d-4c51-935e-f69d2120e4a7	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+f41f0290-0f9d-4c51-935e-f69d2120e4a7	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
 f4232466-dd6a-49bf-be6c-95905c3ded17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f4232466-dd6a-49bf-be6c-95905c3ded17	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f424b5e9-8f02-4491-a7d8-c7e088611c6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -114,9 +114,9 @@ f46c72b8-e2e8-42e6-a2e7-ffa5810a9bf3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 f46e06e2-1658-4bec-b94e-91935cc667fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f46e9fa0-2ed7-4a94-8ad4-031e87a6da45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f46e9fa0-2ed7-4a94-8ad4-031e87a6da45	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f47419a5-b975-4934-a987-ea064a0c7c1a	cast	cast-resolve	agreed	-	X	scen	1	0	Warrior's Blades/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f47419a5-b975-4934-a987-ea064a0c7c1a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warrior-s-blades:f0t0:s1,f:xs:XP:warrior-s-blades:f0t0:s1	-	-	-	5437c1394672	-	397a9d6c2ba8	-	-	2026-11-24	xproof
 f47419a5-b975-4934-a987-ea064a0c7c1a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Warrior's Blades/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f47419a5-b975-4934-a987-ea064a0c7c1a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f47419a5-b975-4934-a987-ea064a0c7c1a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:warrior-s-blades:f0t0:s1,f:xs:XP:warrior-s-blades:f0t0:s1	-	-	-	5437c1394672	-	397a9d6c2ba8	-	-	2026-11-24	xproof
 f47419a5-b975-4934-a987-ea064a0c7c1a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Warrior's Blades/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f474c1f8-43bb-4e56-8131-27c71b3193d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f474d244-d9be-4580-bf62-f97660e9c1a3	cast	cast-resolve	agreed	-	FX	scen	2	0	Feed the Flames/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

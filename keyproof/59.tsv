@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5915039b-3dbd-4a49-8bd3-23ff0fd9c90a	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5915039b-3dbd-4a49-8bd3-23ff0fd9c90a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Intimidation Campaign/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5917216f-5b42-41fa-8976-401bdbeb782e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59180e94-ccdf-4d9f-9a4a-fe55497d0d63	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59180e94-ccdf-4d9f-9a4a-fe55497d0d63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:creeping-mold:cast:s1,f:xs:XP:creeping-mold:cast:s1	-	-	-	5437c1394672	-	fe24656b83aa	-	-	2026-11-24	xproof
 591ce7dc-8407-43ed-acfc-e3d8fd547125	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 591ce7dc-8407-43ed-acfc-e3d8fd547125	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 591fe685-767e-4e6e-905e-cc8b423caa19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -68,7 +68,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 594a57f6-7827-41c7-aa37-00b498720b16	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 594c6b1f-ff0e-4122-8b29-852632a22a79	cast	cast-resolve	agreed	-	X	scen	1	0	Michelangelo, Game Master/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 594c6b1f-ff0e-4122-8b29-852632a22a79	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Michelangelo, Game Master/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5951f734-05d3-41ad-94ee-19bd310077d2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:skyship-buccaneer:f0t0:s2,f:xs:XP:skyship-buccaneer:f0t0:s2	-	-	-	5437c1394672	-	5a9874d74a2b	-	-	2026-11-24	xproof
+5951f734-05d3-41ad-94ee-19bd310077d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skyship-buccaneer:f0t0:s1,f:xs:XP:skyship-buccaneer:f0t0:s1	-	-	-	5437c1394672	-	5a9874d74a2b	-	-	2026-11-24	xproof
 5951f734-05d3-41ad-94ee-19bd310077d2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Skyship Buccaneer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5951f734-05d3-41ad-94ee-19bd310077d2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Skyship Buccaneer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5951f734-05d3-41ad-94ee-19bd310077d2	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	267e485f6204	-	-	-	-	2026-11-24	xproof

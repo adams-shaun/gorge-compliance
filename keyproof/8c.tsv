@@ -5,8 +5,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c0520fa-276b-4d21-b4a9-dce1fce59f6b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c0520fa-276b-4d21-b4a9-dce1fce59f6b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c0520fa-276b-4d21-b4a9-dce1fce59f6b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c05e716-b6eb-4f95-866b-7e43a898ebe2	cast	cast-resolve	agreed	-	X	scen	1	0	Dai Li Agents/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8c05e716-b6eb-4f95-866b-7e43a898ebe2	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+8c05e716-b6eb-4f95-866b-7e43a898ebe2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dai-li-agents:f0t0:s1,f:xs:XP:dai-li-agents:f0t0:s1	-	-	-	5437c1394672	-	4f2ada59bfdc	-	-	2026-11-24	xproof
+8c05e716-b6eb-4f95-866b-7e43a898ebe2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dai-li-agents:f0t0:s1,f:xs:XP:dai-li-agents:f0t0:s1	-	-	-	5437c1394672	-	4f2ada59bfdc	-	-	2026-11-24	xproof
 8c05e716-b6eb-4f95-866b-7e43a898ebe2	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Dai Li Agents/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c069834-ed89-4298-989b-e67036d56196	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c07878f-348c-4fd9-955f-87e975ed61fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c612741-2b30-43b3-bd3f-7df19662d298	cast	cast-resolve	agreed	-	X	scen	1	0	Case File Auditor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c612741-2b30-43b3-bd3f-7df19662d298	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Case File Auditor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c612741-2b30-43b3-bd3f-7df19662d298	static#0.0	static#0.0	agreed	-	X	scen	1	0	Case File Auditor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8c64db66-879e-46ad-9d11-8a95b6cf5d19	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8c64db66-879e-46ad-9d11-8a95b6cf5d19	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anaba-bodyguard:cast:s1,f:xs:XP:anaba-bodyguard:cast:s1	-	-	-	5437c1394672	-	174ca6366129	-	-	2026-11-24	xproof
 8c653a0d-e35a-4596-bed6-b5156192955b	cast	cast-resolve	agreed	-	X	scen	1	0	Scytheclaw Raptor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c653a0d-e35a-4596-bed6-b5156192955b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scytheclaw Raptor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c65d5bd-5d90-4e84-8251-cfef21dd6332	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

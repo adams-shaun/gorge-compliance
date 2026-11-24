@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5802aa98-a9b7-4b0d-9d7c-c3938701870d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jem Lightfoote, Sky Explorer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 580996d4-db9a-4b57-a0e1-a2dbb524121a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 580996d4-db9a-4b57-a0e1-a2dbb524121a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-580de511-863c-4b7a-9d2e-fcdf6e12d54b	cast	cast-resolve	agreed	-	X	scen	1	0	Vraska, the Cutting Glare/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+580de511-863c-4b7a-9d2e-fcdf6e12d54b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-the-cutting-glare:f0t0:s1,f:xs:XP:vraska-the-cutting-glare:f0t0:s1	-	-	-	5437c1394672	-	9bfabc993d8e	-	-	2026-11-24	xproof
 580de511-863c-4b7a-9d2e-fcdf6e12d54b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vraska, the Cutting Glare/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 580de511-863c-4b7a-9d2e-fcdf6e12d54b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vraska, the Cutting Glare/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 580de511-863c-4b7a-9d2e-fcdf6e12d54b	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -57,8 +57,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 582fdfbe-c5fe-45d0-b3ff-e66db5183725	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 582fdfbe-c5fe-45d0-b3ff-e66db5183725	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 582fdfbe-c5fe-45d0-b3ff-e66db5183725	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-583102f8-7232-4fbb-a715-087448536bb2	cast	cast-resolve	agreed	-	FX	scen	2	0	Drix Fatemaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-583102f8-7232-4fbb-a715-087448536bb2	f0/t0	NULL	owed	refused:steps-needed:counters	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+583102f8-7232-4fbb-a715-087448536bb2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drix-fatemaker:f0t0:s1,f:xs:XP:drix-fatemaker:f0t0:s1	-	-	-	5437c1394672	-	07c85962f3be	-	-	2026-11-24	xproof
+583102f8-7232-4fbb-a715-087448536bb2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:drix-fatemaker:f0t0:s1,f:xs:XP:drix-fatemaker:f0t0:s1	-	-	-	5437c1394672	-	07c85962f3be	-	-	2026-11-24	xproof
 583102f8-7232-4fbb-a715-087448536bb2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Drix Fatemaker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58321467-41d6-4419-bcb2-cd3e60f677b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58321467-41d6-4419-bcb2-cd3e60f677b3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,10 +160,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58aac732-3f03-4551-a684-6cb0e3b31c09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58ac4cce-506e-4d6e-a19c-0e875fbfcd81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58ac4cce-506e-4d6e-a19c-0e875fbfcd81	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-58acd6b2-730c-4472-a34a-f2784977aca8	cast	cast-resolve	agreed	-	X	scen	1	0	Dori, Bearer of Friends/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+58acd6b2-730c-4472-a34a-f2784977aca8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dori-bearer-of-friends:f0t0:s1,f:xs:XP:dori-bearer-of-friends:f0t0:s1	-	-	-	5437c1394672	-	f6ae60d35b8d	-	-	2026-11-24	xproof
 58acd6b2-730c-4472-a34a-f2784977aca8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dori, Bearer of Friends/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58acd6b2-730c-4472-a34a-f2784977aca8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dori, Bearer of Friends/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-58acd6b2-730c-4472-a34a-f2784977aca8	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+58acd6b2-730c-4472-a34a-f2784977aca8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dori-bearer-of-friends:f0t0:s1,f:xs:XP:dori-bearer-of-friends:f0t0:s1	-	-	-	5437c1394672	-	f6ae60d35b8d	-	-	2026-11-24	xproof
 58aee5cb-7b88-446e-ab10-9f83c10d7227	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58b0c737-0a84-4f9a-b3b7-300c5de43874	cast	cast-resolve	agreed	-	X	scen	1	0	Studious First-Year/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58b27a79-ba63-45d4-84ee-423ce0d91f6b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:projektor-inspector:f0t0:s2,f:xs:XP:projektor-inspector:f0t0:s2	-	-	-	e07cf3a05ba5	-	930106437467	-	-	2026-11-24	xproof
@@ -246,6 +246,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58f70225-17b5-4aa6-a62a-89c57e31ecc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58f70225-17b5-4aa6-a62a-89c57e31ecc1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58f83528-9110-4895-b5ea-51b90af30a8d	cast	cast-resolve	agreed	-	FX	scen	2	0	Seize the Spoils/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-58fa33fd-02a4-4ec9-9226-82594cfec363	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-58fa33fd-02a4-4ec9-9226-82594cfec363	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+58fa33fd-02a4-4ec9-9226-82594cfec363	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thundermare:f0t0:s1,f:xs:XP:thundermare:f0t0:s1	-	-	-	5437c1394672	-	6e4337d0bb82	-	-	2026-11-24	xproof
+58fa33fd-02a4-4ec9-9226-82594cfec363	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thundermare:f0t0:s1,f:xs:XP:thundermare:f0t0:s1	-	-	-	5437c1394672	-	6e4337d0bb82	-	-	2026-11-24	xproof
 58fd5a3c-83ca-4f6a-99db-21d5e03f2345	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
