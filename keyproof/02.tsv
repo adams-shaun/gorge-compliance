@@ -20,8 +20,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 020aae46-cdba-4c37-9c54-283727c09994	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:taster-of-wares:f0t0:s1,f:xs:XP:taster-of-wares:f0t0:s1	-	-	-	267e485f6204	-	51f38a5d7eb2	-	-	2026-11-24	xproof
 020c26ba-ed46-47c3-925c-b9f32500f503	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 020d0c91-da68-40da-8561-5522377f3d07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-020d561b-2e5d-439e-9e6a-318d23e73542	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-020d561b-2e5d-439e-9e6a-318d23e73542	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+020d561b-2e5d-439e-9e6a-318d23e73542	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+020d561b-2e5d-439e-9e6a-318d23e73542	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 020de6d7-f5a2-4036-ad25-451e5977b4d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beza-the-bounding-spring:cast:s1,f:xs:XP:beza-the-bounding-spring:cast:s1	-	-	-	5437c1394672	-	ca79c25e5206	-	-	2026-11-24	xproof
 020de6d7-f5a2-4036-ad25-451e5977b4d4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:beza-the-bounding-spring:cast:s1,f:xs:XP:beza-the-bounding-spring:cast:s1	-	-	-	5437c1394672	-	ca79c25e5206	-	-	2026-11-24	xproof
 02125db4-4507-467a-ac0c-406de2c7d533	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,9 +150,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02abe85a-c603-4963-aba4-524cc80847ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02abe85a-c603-4963-aba4-524cc80847ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02af53c1-83e6-447f-908b-2757c8aa445c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02b41d0e-82e7-4307-8cc4-8175ff78ea1f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-fire-and-ashes:f0t0:s1,f:xs:XP:kiora-of-fire-and-ashes:f0t0:s1	-	-	-	5437c1394672	-	44efad077510	-	-	2026-11-24	xproof
+02b41d0e-82e7-4307-8cc4-8175ff78ea1f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-fire-and-ashes:f0t0:s1,f:xs:XP:kiora-of-fire-and-ashes:f0t0:s1	-	-	-	25696bf19d5b	-	44efad077510	-	-	2026-11-24	xproof
 02b41d0e-82e7-4307-8cc4-8175ff78ea1f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kiora of Fire and Ashes/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-02b41d0e-82e7-4307-8cc4-8175ff78ea1f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-fire-and-ashes:f0t0:s1,f:xs:XP:kiora-of-fire-and-ashes:f0t0:s1	-	-	-	5437c1394672	-	44efad077510	-	-	2026-11-24	xproof
+02b41d0e-82e7-4307-8cc4-8175ff78ea1f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-fire-and-ashes:f0t0:s1,f:xs:XP:kiora-of-fire-and-ashes:f0t0:s1	-	-	-	25696bf19d5b	-	44efad077510	-	-	2026-11-24	xproof
 02b5acf3-47cb-4d39-9307-e02656f1879b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02b5ea0b-c0a3-4213-9064-e688190fca5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02b5ea0b-c0a3-4213-9064-e688190fca5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -24,8 +24,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d1d9914-3ef2-45c5-b1cb-cb85d2f7394c	cast	cast-resolve	agreed	-	FX	scen	2	0	Tolls of War/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d1d9914-3ef2-45c5-b1cb-cb85d2f7394c	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d1d9914-3ef2-45c5-b1cb-cb85d2f7394c	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Tolls of War/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d2016ed-3ea0-4938-b95e-ee582307e475	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suurok-class-science-vessel:f0t0:s1,f:xs:XP:suurok-class-science-vessel:f0t0:s1	-	-	-	5437c1394672	-	6f9d79f8bd0e	-	-	2026-11-24	xproof
-5d2016ed-3ea0-4938-b95e-ee582307e475	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:suurok-class-science-vessel:f0t0:s1,f:xs:XP:suurok-class-science-vessel:f0t0:s1	-	-	-	5437c1394672	-	6f9d79f8bd0e	-	-	2026-11-24	xproof
+5d2016ed-3ea0-4938-b95e-ee582307e475	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suurok-class-science-vessel:f0t0:s1,f:xs:XP:suurok-class-science-vessel:f0t0:s1	-	-	-	25696bf19d5b	-	6f9d79f8bd0e	-	-	2026-11-24	xproof
+5d2016ed-3ea0-4938-b95e-ee582307e475	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:suurok-class-science-vessel:f0t0:s1,f:xs:XP:suurok-class-science-vessel:f0t0:s1	-	-	-	25696bf19d5b	-	6f9d79f8bd0e	-	-	2026-11-24	xproof
 5d22ab00-b454-4407-93d7-65b47f56cbaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d22ab00-b454-4407-93d7-65b47f56cbaa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d24525f-dbac-434b-bda7-ff8af55245ff	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d520476-740a-4005-801e-472b24fa6497	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d575b78-3d7b-4860-abc3-e99e429279a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mine-raider:f0t0:s1,f:xs:XP:mine-raider:f0t0:s1	-	-	-	5437c1394672	-	16a2818a7867	-	-	2026-11-24	xproof
+5d575b78-3d7b-4860-abc3-e99e429279a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mine-raider:f0t0:s1,f:xs:XP:mine-raider:f0t0:s1	-	-	-	25696bf19d5b	-	16a2818a7867	-	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mine Raider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mine Raider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5db492f2-21c0-4eee-843a-509fa0d3a327	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	cast	cast-resolve	agreed	-	X	scen	1	0	Rocket-Powered Goblin Glider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rocket-Powered Goblin Glider/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5db9121d-934a-44f1-b178-b389c6595af7	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+5db9121d-934a-44f1-b178-b389c6595af7	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rocket-Powered Goblin Glider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5dba7746-c087-4ec1-92ca-ab9882dea24d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5dba7746-c087-4ec1-92ca-ab9882dea24d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

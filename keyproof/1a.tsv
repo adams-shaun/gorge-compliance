@@ -14,8 +14,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a128c02-febf-4ce6-b4d1-28274b5c4ff0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a137a67-4156-45c8-aae9-838f688e12bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a19fc9e-a822-49ca-ade0-d58054f3caf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1a2030cc-d7ee-4059-b2d7-fb95ea8e267b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gravedigger:f0t0:s1,f:xs:XP:gravedigger:f0t0:s1	-	-	-	5437c1394672	-	e1abd89f8a07	-	-	2026-11-24	xproof
-1a2030cc-d7ee-4059-b2d7-fb95ea8e267b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gravedigger:f0t0:s1,f:xs:XP:gravedigger:f0t0:s1	-	-	-	5437c1394672	-	e1abd89f8a07	-	-	2026-11-24	xproof
+1a2030cc-d7ee-4059-b2d7-fb95ea8e267b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gravedigger:f0t0:s1,f:xs:XP:gravedigger:f0t0:s1	-	-	-	25696bf19d5b	-	e1abd89f8a07	-	-	2026-11-24	xproof
+1a2030cc-d7ee-4059-b2d7-fb95ea8e267b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gravedigger:f0t0:s1,f:xs:XP:gravedigger:f0t0:s1	-	-	-	25696bf19d5b	-	e1abd89f8a07	-	-	2026-11-24	xproof
 1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hidden Nursery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hidden Nursery/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961	land	play-land	agreed	-	X	scen	1	0	Hidden Nursery/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -106,13 +106,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a947e4d-8a14-45f1-bb80-760a317b1ed0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Morbius the Living Vampire/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a947e4d-8a14-45f1-bb80-760a317b1ed0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Morbius the Living Vampire/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a947e4d-8a14-45f1-bb80-760a317b1ed0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Morbius the Living Vampire/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1a9607a2-58cb-4bb8-b454-4813528221f8	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-1a9607a2-58cb-4bb8-b454-4813528221f8	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-1a9607a2-58cb-4bb8-b454-4813528221f8	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-1a9bfe76-6c74-4393-b04e-461422a29ddb	cast	cast	owed	harness	-	start	0	0	-	-	-	-	5437c1394672	-	018d002084df	-	-	2026-11-24	xproof
+1a9607a2-58cb-4bb8-b454-4813528221f8	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+1a9607a2-58cb-4bb8-b454-4813528221f8	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+1a9607a2-58cb-4bb8-b454-4813528221f8	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+1a9bfe76-6c74-4393-b04e-461422a29ddb	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	018d002084df	-	-	2026-11-24	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fang-Druid Summoner/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fang-Druid Summoner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1a9bfe76-6c74-4393-b04e-461422a29ddb	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	5437c1394672	-	018d002084df	-	-	2026-11-24	xproof
+1a9bfe76-6c74-4393-b04e-461422a29ddb	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	018d002084df	-	-	2026-11-24	xproof
 1aa1cf50-ee79-4bef-826b-5f1a9e1aa1a5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

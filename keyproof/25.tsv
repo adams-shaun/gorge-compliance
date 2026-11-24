@@ -38,11 +38,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 253bec96-108c-4880-9c04-8bc99ceafa64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 253bec96-108c-4880-9c04-8bc99ceafa64	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 253bec96-108c-4880-9c04-8bc99ceafa64	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:apex-witchstalker:f0t0:s1,f:xs:XP:apex-witchstalker:f0t0:s1	-	-	-	5437c1394672	-	51ccea254215	-	-	2026-11-24	xproof
+253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:apex-witchstalker:f0t0:s1,f:xs:XP:apex-witchstalker:f0t0:s1	-	-	-	25696bf19d5b	-	51ccea254215	-	-	2026-11-24	xproof
 253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Apex Witchstalker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Apex Witchstalker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:apex-witchstalker:f0t0:s2,f:xs:XP:apex-witchstalker:f0t0:s2	-	-	-	5437c1394672	-	51ccea254215	-	-	2026-11-24	xproof
-253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:apex-witchstalker:f0t0:s1,f:xs:XP:apex-witchstalker:f0t0:s1	-	-	-	5437c1394672	-	51ccea254215	-	-	2026-11-24	xproof
+253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:apex-witchstalker:f0t0:s2,f:xs:XP:apex-witchstalker:f0t0:s2	-	-	-	25696bf19d5b	-	51ccea254215	-	-	2026-11-24	xproof
+253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:apex-witchstalker:f0t0:s1,f:xs:XP:apex-witchstalker:f0t0:s1	-	-	-	25696bf19d5b	-	51ccea254215	-	-	2026-11-24	xproof
 253d0cf7-65d3-4f13-aaf2-aae5bb60ac46	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Apex Witchstalker/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 25432a3a-bcfd-4c43-b662-07676e9b3fdd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25432a3a-bcfd-4c43-b662-07676e9b3fdd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,8 +183,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25b30117-03ef-49a5-8743-2d1c167d4bc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25b30117-03ef-49a5-8743-2d1c167d4bc3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25b30117-03ef-49a5-8743-2d1c167d4bc3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25c04be3-f2e0-4f45-a1ca-9e75ffffa9b5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foul-imp:f0t0:s1,f:xs:XP:foul-imp:f0t0:s1	-	-	-	5437c1394672	-	e7d4f13af3b6	-	-	2026-11-24	xproof
-25c04be3-f2e0-4f45-a1ca-9e75ffffa9b5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:foul-imp:f0t0:s1,f:xs:XP:foul-imp:f0t0:s1	-	-	-	5437c1394672	-	e7d4f13af3b6	-	-	2026-11-24	xproof
+25c04be3-f2e0-4f45-a1ca-9e75ffffa9b5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foul-imp:f0t0:s1,f:xs:XP:foul-imp:f0t0:s1	-	-	-	25696bf19d5b	-	e7d4f13af3b6	-	-	2026-11-24	xproof
+25c04be3-f2e0-4f45-a1ca-9e75ffffa9b5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:foul-imp:f0t0:s1,f:xs:XP:foul-imp:f0t0:s1	-	-	-	25696bf19d5b	-	e7d4f13af3b6	-	-	2026-11-24	xproof
 25c83d45-581f-48ba-b6bb-feb66e8a65c7	cast	cast-resolve	agreed	-	FX	scen	2	0	Sewer-veillance Cam/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 25c83d45-581f-48ba-b6bb-feb66e8a65c7	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sewer-veillance Cam/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 25c83d45-581f-48ba-b6bb-feb66e8a65c7	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

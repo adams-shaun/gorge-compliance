@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00771a33-7443-43f9-a61e-1737b62b1f81	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 007c110d-4364-41e5-a8bc-6ac05ecbbd00	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 007c110d-4364-41e5-a8bc-6ac05ecbbd00	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-007d08e8-4db2-47d1-ba39-8bb8efa491a1	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+007d08e8-4db2-47d1-ba39-8bb8efa491a1	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 007f3b20-d58b-4986-8de8-9e419af88628	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 007f3b20-d58b-4986-8de8-9e419af88628	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 008011e2-7b82-4962-af6e-be627112f37f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -102,12 +102,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00876e98-d062-4a12-85e6-86a2b20cf867	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00895741-f94f-4d80-8ca4-c436bf3c8d56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00895741-f94f-4d80-8ca4-c436bf3c8d56	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0089acfe-da66-4dd7-b1e5-4d7407f58257	cast	cast	agreed	-	F	start	2	0	f:xs:XP:theorist-s-proxy:f0t0:s1	-	-	-	5437c1394672	-	9f6c95825b13	-	-	2026-11-24	xproof
-0089acfe-da66-4dd7-b1e5-4d7407f58257	f0/a0	DelayedTrigger	agreed	-	F	start	2	0	f:xs:XP:theorist-s-proxy:f0t0:s1	-	-	-	5437c1394672	-	9f6c95825b13	-	-	2026-11-24	xproof
-0089acfe-da66-4dd7-b1e5-4d7407f58257	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:theorist-s-proxy:f0t0:s1	-	-	-	5437c1394672	-	9f6c95825b13	-	-	2026-11-24	xproof
-008a11c1-d283-49fe-abd7-ff4fe8b1fe79	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-008a11c1-d283-49fe-abd7-ff4fe8b1fe79	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-008a11c1-d283-49fe-abd7-ff4fe8b1fe79	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+0089acfe-da66-4dd7-b1e5-4d7407f58257	cast	cast	agreed	-	F	start	2	0	f:xs:XP:theorist-s-proxy:f0t0:s1	-	-	-	25696bf19d5b	-	9f6c95825b13	-	-	2026-11-24	xproof
+0089acfe-da66-4dd7-b1e5-4d7407f58257	f0/a0	DelayedTrigger	agreed	-	F	start	2	0	f:xs:XP:theorist-s-proxy:f0t0:s1	-	-	-	25696bf19d5b	-	9f6c95825b13	-	-	2026-11-24	xproof
+0089acfe-da66-4dd7-b1e5-4d7407f58257	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:theorist-s-proxy:f0t0:s1	-	-	-	25696bf19d5b	-	9f6c95825b13	-	-	2026-11-24	xproof
+008a11c1-d283-49fe-abd7-ff4fe8b1fe79	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+008a11c1-d283-49fe-abd7-ff4fe8b1fe79	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+008a11c1-d283-49fe-abd7-ff4fe8b1fe79	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 008ac258-763c-4379-bfcd-b9cc4d7296dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 008c92bc-3022-4d34-aa04-584576ff8f8e	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 008c92bc-3022-4d34-aa04-584576ff8f8e	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00ab9841-934f-4a66-a98d-68d01661b1c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00ab9841-934f-4a66-a98d-68d01661b1c9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00abb43b-550f-42d2-9049-61ac56ff5d8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00ad27a1-9162-408d-ac75-970e45d7e06c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:patchwork-gnomes:cast:s1,f:xs:XP:patchwork-gnomes:cast:s1	-	-	-	5437c1394672	-	583a2075e2ea	-	-	2026-11-24	xproof
+00ad27a1-9162-408d-ac75-970e45d7e06c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:patchwork-gnomes:cast:s1,f:xs:XP:patchwork-gnomes:cast:s1	-	-	-	25696bf19d5b	-	583a2075e2ea	-	-	2026-11-24	xproof
 00ad27a1-9162-408d-ac75-970e45d7e06c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00ad5200-5179-4d1b-8bb3-a09e1b31be58	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Theorix Annex/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00ad5200-5179-4d1b-8bb3-a09e1b31be58	land	play-land	agreed	-	X	scen	1	0	Theorix Annex/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

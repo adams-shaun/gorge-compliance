@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f02aa99-481c-4089-8f7c-cfe7eaa7dda0	static#0.0	static#0.0	agreed	-	X	scen	1	0	Improvised Arsenal/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f07a2e6-692b-4d8c-9ecf-4d94b03706a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f07a2e6-692b-4d8c-9ecf-4d94b03706a0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f0c055f-f614-44b0-9374-c53541f89185	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:white-widow-free-agent:f0t0:s1,f:xs:XP:white-widow-free-agent:f0t0:s1	-	-	-	5437c1394672	-	26bc8dbd5249	-	-	2026-11-24	xproof
+4f0c055f-f614-44b0-9374-c53541f89185	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:white-widow-free-agent:f0t0:s1,f:xs:XP:white-widow-free-agent:f0t0:s1	-	-	-	25696bf19d5b	-	26bc8dbd5249	-	-	2026-11-24	xproof
 4f0c055f-f614-44b0-9374-c53541f89185	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f0ec90b-e5a0-49bd-8fa0-9be6ba259a62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f10b164-6d36-4935-92e7-53be73ac4c8a	cast	cast-resolve	agreed	-	X	scen	1	0	Orbital Plunge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -88,9 +88,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f66d82a-492f-4638-9f77-190d4a33ad7f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f69d2f9-c16a-4752-9026-794a29d73af8	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+4f69d2f9-c16a-4752-9026-794a29d73af8	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,9 +118,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f890d42-e4f1-4eed-aa6c-718865de8927	static#0.1	static#0.1	agreed	-	X	scen	1	0	Vizier of the Menagerie/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f890d42-e4f1-4eed-aa6c-718865de8927	static#0.2	static#0.2	agreed	-	X	scen	1	0	Vizier of the Menagerie/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f891c68-c959-4210-94e5-94a8e487d5ef	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f8a70cb-2487-4e6d-9a3f-c6c5313b8e82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:commander-raffi-musiker:f0t0:s1,f:xs:XP:commander-raffi-musiker:f0t0:s1	-	-	-	5437c1394672	-	8d49ef4bf2d7	-	-	2026-11-24	xproof
+4f8a70cb-2487-4e6d-9a3f-c6c5313b8e82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:commander-raffi-musiker:f0t0:s1,f:xs:XP:commander-raffi-musiker:f0t0:s1	-	-	-	25696bf19d5b	-	8d49ef4bf2d7	-	-	2026-11-24	xproof
 4f8a70cb-2487-4e6d-9a3f-c6c5313b8e82	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f8c4927-46c2-4c18-b5af-c6288dbaff6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iridescent-vinelasher:f0t1:s1,f:xs:XP:iridescent-vinelasher:f0t1:s1	-	-	-	5437c1394672	-	02986e909a1e	-	-	2026-11-24	xproof
+4f8c4927-46c2-4c18-b5af-c6288dbaff6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iridescent-vinelasher:f0t1:s1,f:xs:XP:iridescent-vinelasher:f0t1:s1	-	-	-	25696bf19d5b	-	02986e909a1e	-	-	2026-11-24	xproof
 4f8c4927-46c2-4c18-b5af-c6288dbaff6d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Iridescent Vinelasher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f8c4927-46c2-4c18-b5af-c6288dbaff6d	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f8c5fd7-f280-4b0c-bb84-6ff9b258c50f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

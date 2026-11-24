@@ -68,7 +68,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 094689cc-617a-426e-beb9-3f8de692cd5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09496421-74e4-466a-9546-56f2a0c8eef4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09496421-74e4-466a-9546-56f2a0c8eef4	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-094b778f-95a0-436f-a9d0-20a46a674486	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-bard:cast:s1,f:xs:XP:elvish-bard:cast:s1	-	-	-	5437c1394672	-	3dddf606b4bf	-	-	2026-11-24	xproof
+094b778f-95a0-436f-a9d0-20a46a674486	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-bard:cast:s1,f:xs:XP:elvish-bard:cast:s1	-	-	-	25696bf19d5b	-	3dddf606b4bf	-	-	2026-11-24	xproof
 094c4486-6cae-4268-850e-ff0082e5ad10	cast	cast-resolve	agreed	-	FX	scen	2	0	Daydream/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0951b529-646c-4dfd-88ad-84ee117ce722	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0951b529-646c-4dfd-88ad-84ee117ce722	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -97,8 +97,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 096a878e-cff0-430a-90b5-031ecb9bfe1b	cast	cast-resolve	agreed	-	FX	scen	2	0	Tam, Mindful First-Year/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 096a878e-cff0-430a-90b5-031ecb9bfe1b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Tam, Mindful First-Year/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 096a878e-cff0-430a-90b5-031ecb9bfe1b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tam, Mindful First-Year/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-096eac52-00c2-4439-b2f3-ff555d15ec88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marina-vendrell-s-grimoire:f0t0:s1,f:xs:XP:marina-vendrell-s-grimoire:f0t0:s1	-	-	-	5437c1394672	-	257ea4a4301d	-	-	2026-11-24	xproof
-096eac52-00c2-4439-b2f3-ff555d15ec88	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:marina-vendrell-s-grimoire:f0t0:s1,f:xs:XP:marina-vendrell-s-grimoire:f0t0:s1	-	-	-	5437c1394672	-	257ea4a4301d	-	-	2026-11-24	xproof
+096eac52-00c2-4439-b2f3-ff555d15ec88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marina-vendrell-s-grimoire:f0t0:s1,f:xs:XP:marina-vendrell-s-grimoire:f0t0:s1	-	-	-	25696bf19d5b	-	257ea4a4301d	-	-	2026-11-24	xproof
+096eac52-00c2-4439-b2f3-ff555d15ec88	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:marina-vendrell-s-grimoire:f0t0:s1,f:xs:XP:marina-vendrell-s-grimoire:f0t0:s1	-	-	-	25696bf19d5b	-	257ea4a4301d	-	-	2026-11-24	xproof
 096eac52-00c2-4439-b2f3-ff555d15ec88	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Marina Vendrell's Grimoire/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 096eac52-00c2-4439-b2f3-ff555d15ec88	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Marina Vendrell's Grimoire/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 096eac52-00c2-4439-b2f3-ff555d15ec88	static#0.0	static#0.0	agreed	-	X	scen	1	0	Marina Vendrell's Grimoire/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -181,7 +181,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09cc8709-fe10-472a-b05c-e89f3523018d	cast	cast-resolve	agreed	-	FX	scen	2	0	Austere Command/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 09dd85aa-47bc-4713-a9b9-8b52ff2285ed	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Misty Rainforest/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 09dd85aa-47bc-4713-a9b9-8b52ff2285ed	land	play-land	agreed	-	FX	scen	2	0	Misty Rainforest/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-09de1136-8a8f-4539-92a2-611dcdd0790b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-ship:cast:s1,f:xs:XP:ghost-ship:cast:s1	-	-	-	5437c1394672	-	4616c9b7e561	-	-	2026-11-24	xproof
+09de1136-8a8f-4539-92a2-611dcdd0790b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-ship:cast:s1,f:xs:XP:ghost-ship:cast:s1	-	-	-	25696bf19d5b	-	4616c9b7e561	-	-	2026-11-24	xproof
 09de1136-8a8f-4539-92a2-611dcdd0790b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09e588c2-0fb8-4c30-aff3-433db7a07b6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09e588c2-0fb8-4c30-aff3-433db7a07b6e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

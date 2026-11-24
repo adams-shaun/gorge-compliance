@@ -12,8 +12,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 740aa9d9-91a9-431e-8bf9-1344e5273e27	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Twists and Turns/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 740aa9d9-91a9-431e-8bf9-1344e5273e27	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Twists and Turns/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 740aa9d9-91a9-431e-8bf9-1344e5273e27	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Twists and Turns/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-740cafc6-9521-403a-ab5f-11582bf55af0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wrath-of-marit-lage:cast:s1,f:xs:XP:wrath-of-marit-lage:cast:s1	-	-	-	5437c1394672	-	6a4f5c88de71	-	-	2026-11-24	xproof
-740cafc6-9521-403a-ab5f-11582bf55af0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wrath-of-marit-lage:cast:s1,f:xs:XP:wrath-of-marit-lage:cast:s1	-	-	-	5437c1394672	-	6a4f5c88de71	-	-	2026-11-24	xproof
+740cafc6-9521-403a-ab5f-11582bf55af0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wrath-of-marit-lage:cast:s1,f:xs:XP:wrath-of-marit-lage:cast:s1	-	-	-	25696bf19d5b	-	6a4f5c88de71	-	-	2026-11-24	xproof
+740cafc6-9521-403a-ab5f-11582bf55af0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wrath-of-marit-lage:cast:s1,f:xs:XP:wrath-of-marit-lage:cast:s1	-	-	-	25696bf19d5b	-	6a4f5c88de71	-	-	2026-11-24	xproof
 740f9740-aaa7-4061-86f5-85be79742541	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 740f9740-aaa7-4061-86f5-85be79742541	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 740f9740-aaa7-4061-86f5-85be79742541	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 743f4488-fef1-4f4d-b745-d2de92423e00	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 743f4488-fef1-4f4d-b745-d2de92423e00	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 743f4488-fef1-4f4d-b745-d2de92423e00	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-743fa824-18cb-4225-ba7b-5b0bbc3c8d41	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+743fa824-18cb-4225-ba7b-5b0bbc3c8d41	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 7445122d-a943-493c-b7b6-3699cc07db0e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7445122d-a943-493c-b7b6-3699cc07db0e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74466fa6-34d9-42f9-8590-c7f1fa672bf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74900080-80a6-4fd8-9557-5f773c0e4bec	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74910702-e385-48f7-a6b3-064ebed08be7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 749141aa-f6c4-4ad8-b146-406e68ae9b0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-749141aa-f6c4-4ad8-b146-406e68ae9b0b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+749141aa-f6c4-4ad8-b146-406e68ae9b0b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 7491e0bf-8335-44e4-8e05-b9a737a0f2e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7491e0bf-8335-44e4-8e05-b9a737a0f2e7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7492ea06-24d5-4a1f-a6ac-c33743e91aa7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -192,8 +192,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74d85903-6404-41d9-bc00-81c6b2f61bb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74d85903-6404-41d9-bc00-81c6b2f61bb0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74dcff4f-c126-4bbb-b6f0-3f3315bc95fe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74e02bdf-a074-4356-9d06-0df01dd2df66	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-74e02bdf-a074-4356-9d06-0df01dd2df66	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+74e02bdf-a074-4356-9d06-0df01dd2df66	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+74e02bdf-a074-4356-9d06-0df01dd2df66	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 74e3243b-6707-4769-8767-7cf2ef71009a	cast	cast-resolve	agreed	-	FX	scen	2	0	Leonardo, Sewer Samurai/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 74e3243b-6707-4769-8767-7cf2ef71009a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Leonardo, Sewer Samurai/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 74e3243b-6707-4769-8767-7cf2ef71009a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Leonardo, Sewer Samurai/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -209,8 +209,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74f4d505-e114-47be-be27-a7949e8abdc7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74f4d505-e114-47be-be27-a7949e8abdc7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74f5b4a9-8358-40b1-b38a-e034e2b916ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74f67dcf-5afb-45aa-8d4b-3cdb23f6f2a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:triskelion:cast:s1,f:xs:XP:triskelion:cast:s1	-	-	-	5437c1394672	-	89450da54cd5	-	-	2026-11-24	xproof
-74f67dcf-5afb-45aa-8d4b-3cdb23f6f2a1	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:triskelion:cast:s1,f:xs:XP:triskelion:cast:s1	-	-	-	5437c1394672	-	89450da54cd5	-	-	2026-11-24	xproof
+74f67dcf-5afb-45aa-8d4b-3cdb23f6f2a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:triskelion:cast:s1,f:xs:XP:triskelion:cast:s1	-	-	-	25696bf19d5b	-	89450da54cd5	-	-	2026-11-24	xproof
+74f67dcf-5afb-45aa-8d4b-3cdb23f6f2a1	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:triskelion:cast:s1,f:xs:XP:triskelion:cast:s1	-	-	-	25696bf19d5b	-	89450da54cd5	-	-	2026-11-24	xproof
 74fc88d5-19c3-4516-9a06-e9573d659caa	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74fc88d5-19c3-4516-9a06-e9573d659caa	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74fedfc4-3eb7-4845-9d3e-9d5243a0062a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-43037ef5-09e8-4881-beff-ed38cf7574c6	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-43037ef5-09e8-4881-beff-ed38cf7574c6	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+43037ef5-09e8-4881-beff-ed38cf7574c6	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+43037ef5-09e8-4881-beff-ed38cf7574c6	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 4304035c-c3e4-4a19-aa1f-92a83d8aed1f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4304035c-c3e4-4a19-aa1f-92a83d8aed1f	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43057d84-b424-489c-abec-3fb4cb823d80	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -75,8 +75,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 435df16b-3dd4-446e-a643-f9478aaa47c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 435df16b-3dd4-446e-a643-f9478aaa47c0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 435df16b-3dd4-446e-a643-f9478aaa47c0	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4364bef8-f7ec-487c-9b64-b55c4afb864e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-behemoth:cast:s1,f:xs:XP:llanowar-behemoth:cast:s1	-	-	-	5437c1394672	-	080414b1139b	-	-	2026-11-24	xproof
-4364bef8-f7ec-487c-9b64-b55c4afb864e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:llanowar-behemoth:cast:s1,f:xs:XP:llanowar-behemoth:cast:s1	-	-	-	5437c1394672	-	080414b1139b	-	-	2026-11-24	xproof
+4364bef8-f7ec-487c-9b64-b55c4afb864e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-behemoth:cast:s1,f:xs:XP:llanowar-behemoth:cast:s1	-	-	-	25696bf19d5b	-	080414b1139b	-	-	2026-11-24	xproof
+4364bef8-f7ec-487c-9b64-b55c4afb864e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:llanowar-behemoth:cast:s1,f:xs:XP:llanowar-behemoth:cast:s1	-	-	-	25696bf19d5b	-	080414b1139b	-	-	2026-11-24	xproof
 43654381-c55c-4d6d-abfd-12932ceb5a4a	cast	cast-resolve	agreed	-	X	scen	1	0	Silence the Echo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43674fdf-496f-42dc-8a0a-5c42a7c7d910	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43674fdf-496f-42dc-8a0a-5c42a7c7d910	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,11 +164,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43c31a03-2bbd-49a6-8b78-c5f3cab04a07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43c31a03-2bbd-49a6-8b78-c5f3cab04a07	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43c449d1-51a9-45e0-8102-823a6811ff54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43c69d19-c06c-470a-bdba-a0335ff2d655	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:floodpits-drowner:f0t0:s1,f:xs:XP:floodpits-drowner:f0t0:s1	-	-	-	5437c1394672	-	4303171e3130	-	-	2026-11-24	xproof
+43c69d19-c06c-470a-bdba-a0335ff2d655	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:floodpits-drowner:f0t0:s1,f:xs:XP:floodpits-drowner:f0t0:s1	-	-	-	25696bf19d5b	-	4303171e3130	-	-	2026-11-24	xproof
 43c69d19-c06c-470a-bdba-a0335ff2d655	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Floodpits Drowner/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43c69d19-c06c-470a-bdba-a0335ff2d655	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Floodpits Drowner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43c69d19-c06c-470a-bdba-a0335ff2d655	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Floodpits Drowner/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-43c69d19-c06c-470a-bdba-a0335ff2d655	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:floodpits-drowner:f0t0:s1,f:xs:XP:floodpits-drowner:f0t0:s1	-	-	-	5437c1394672	-	4303171e3130	-	-	2026-11-24	xproof
+43c69d19-c06c-470a-bdba-a0335ff2d655	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:floodpits-drowner:f0t0:s1,f:xs:XP:floodpits-drowner:f0t0:s1	-	-	-	25696bf19d5b	-	4303171e3130	-	-	2026-11-24	xproof
 43c92618-0aae-41f8-aa39-393e5d6b5ff7	cast	cast-resolve	agreed	-	X	scen	1	0	Brazen Blademaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43c92618-0aae-41f8-aa39-393e5d6b5ff7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Brazen Blademaster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 43ccc568-2509-49b6-99d7-c56900d1565a	cast	cast-resolve	agreed	-	FX	scen	2	0	Daggerfang Duo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

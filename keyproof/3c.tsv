@@ -9,8 +9,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c037865-d38c-48da-aee9-308975e12638	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
-3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+3c037865-d38c-48da-aee9-308975e12638	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c067370-1e3d-4262-b7d6-f2bb2656b1d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -99,8 +99,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c76bb90-92fb-428b-8e94-def4cf4b6f2d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c76bb90-92fb-428b-8e94-def4cf4b6f2d	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c76bb90-92fb-428b-8e94-def4cf4b6f2d	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c7bafe9-80cd-48d0-bcae-e7910c9fb83b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anti-venom-horrifying-healer:f0t0:s1,f:xs:XP:anti-venom-horrifying-healer:f0t0:s1	-	-	-	5437c1394672	-	97e1d2c3a346	-	-	2026-11-24	xproof
-3c7bafe9-80cd-48d0-bcae-e7910c9fb83b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anti-venom-horrifying-healer:f0t0:s1,f:xs:XP:anti-venom-horrifying-healer:f0t0:s1	-	-	-	5437c1394672	-	97e1d2c3a346	-	-	2026-11-24	xproof
+3c7bafe9-80cd-48d0-bcae-e7910c9fb83b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anti-venom-horrifying-healer:f0t0:s1,f:xs:XP:anti-venom-horrifying-healer:f0t0:s1	-	-	-	25696bf19d5b	-	97e1d2c3a346	-	-	2026-11-24	xproof
+3c7bafe9-80cd-48d0-bcae-e7910c9fb83b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anti-venom-horrifying-healer:f0t0:s1,f:xs:XP:anti-venom-horrifying-healer:f0t0:s1	-	-	-	25696bf19d5b	-	97e1d2c3a346	-	-	2026-11-24	xproof
 3c7dd86d-25eb-4b24-9358-98b951248e04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c7dd86d-25eb-4b24-9358-98b951248e04	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c7dd86d-25eb-4b24-9358-98b951248e04	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -172,9 +172,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3cbdf37b-7fe3-4791-b33c-8591158b0ce5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cc02a23-93b7-445a-9c3e-0e4942ef927b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cc02a23-93b7-445a-9c3e-0e4942ef927b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3cc333a1-c854-4b7c-8002-910e48222371	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:well-worn-spatula:f0t0:s1,f:xs:XP:well-worn-spatula:f0t0:s1	-	-	-	5437c1394672	-	b6b874ecb5d5	-	-	2026-11-24	xproof
+3cc333a1-c854-4b7c-8002-910e48222371	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:well-worn-spatula:f0t0:s1,f:xs:XP:well-worn-spatula:f0t0:s1	-	-	-	25696bf19d5b	-	b6b874ecb5d5	-	-	2026-11-24	xproof
 3cc333a1-c854-4b7c-8002-910e48222371	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Well-Worn Spatula/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3cc333a1-c854-4b7c-8002-910e48222371	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:well-worn-spatula:f0t0:s1,f:xs:XP:well-worn-spatula:f0t0:s1	-	-	-	5437c1394672	-	b6b874ecb5d5	-	-	2026-11-24	xproof
+3cc333a1-c854-4b7c-8002-910e48222371	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:well-worn-spatula:f0t0:s1,f:xs:XP:well-worn-spatula:f0t0:s1	-	-	-	25696bf19d5b	-	b6b874ecb5d5	-	-	2026-11-24	xproof
 3cc333a1-c854-4b7c-8002-910e48222371	static#0.0	static#0.0	agreed	-	X	scen	1	0	Well-Worn Spatula/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3cc48835-3ac0-4774-b380-f9b21d2dc974	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cc4d6f4-79b2-4210-84de-a0febf81eb67	cast	cast-resolve	agreed	-	FX	scen	2	0	Slash of Light/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3cd15225-e9b6-4998-b545-76536c72e948	cast	cast-resolve	agreed	-	FX	scen	2	0	Claim the Kingdom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3cd15225-e9b6-4998-b545-76536c72e948	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Claim the Kingdom/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3cd15225-e9b6-4998-b545-76536c72e948	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Claim the Kingdom/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3cd3cdc9-2ed2-4cdf-b58a-12c3a2ef218b	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	5437c1394672	-	-	-	-	2026-11-24	xproof
+3cd3cdc9-2ed2-4cdf-b58a-12c3a2ef218b	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3cd72848-7b99-4d46-96f5-53f297c9d2a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cd7ef87-4cb4-42ff-842f-e9a465dab165	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cd7ef87-4cb4-42ff-842f-e9a465dab165	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
