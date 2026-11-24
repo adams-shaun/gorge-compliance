@@ -60,11 +60,12 @@ func TestForgeRolledDie(t *testing.T) {
 // a resolution-time payment hook that does not touch dice; becb01adc6 = 95020b95d4 plus the setup-token keyword-counter commit, die-roll code unchanged; 0791efdeb1 = becb01adc6 plus the coin-flip force, die-roll code unchanged and
 // ForcedDieRollTest re-run green beside the new ForcedCoinFlipTest; 963576e5d2 = 96acdef442 plus the waterbend_generic tap pick consumed by the scripted controller, die-roll code unchanged,
 // ForcedDieRollTest and ForcedCoinFlipTest re-run green on it; ff2049dc97 = 963576e5d2 plus the MayPlay land play outside the hand,
-// die-roll code unchanged, the driver's unit tests re-run green on it) contains both. TestForgeRolledDie only sees the Go request and stays green if the pin
+// die-roll code unchanged, the driver's unit tests re-run green on it; cda262a7ef = ff2049dc97 plus the OriginAlternative$/endure/same-name-order mapping, die-roll code unchanged,
+// ForcedDieRollTest and the full driver suite (including LandPlayMayPlayTest, DecisionQueueTest and the AltSourceAnswer/OrderCards behavior tests) re-run green on it) contains both. TestForgeRolledDie only sees the Go request and stays green if the pin
 // is reverted to 0958a1aca2, where Forge rolls its own d6 again; this pin check
 // is the repo-side half. A bump must re-run the pinned driver's
 // ForcedDieRollTest and update the constant deliberately.
-const forgeOracleDieRollRef = "ff2049dc97257e77f5787395b84d2231e963619a"
+const forgeOracleDieRollRef = "cda262a7efd4394466fc3daf74c30f7fee6cf530"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

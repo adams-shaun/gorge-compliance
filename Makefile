@@ -97,7 +97,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # library top, the card Irascible Wolverine / Kulrath Zealot / Crimson Operative exile, Tablet of Discovery's milled card):
 # the card's own land ability plays only from the hand, so the play did nothing ("step N (play) p0:<land> was not played").
 # Driver-only change; same trees as FORGE_REF ff076d4432. Fork branch fix/land-play-mayplay.
-FORGE_ORACLE_REF ?= ff2049dc97257e77f5787395b84d2231e963619a
+# cda262a7ef = ff2049dc97 + the scripted controller answers gorge's OriginAlternative$ zone election: one choose_n over zones
+# becomes Forge's initial "search the library?" confirm plus one confirm per alternative zone, and the Optional$ search_confirm is
+# left for Forge's later ChangeZoneGeneral gate; Endure's endure_counters/endure_spirit map to yes/no; and a same-name library
+# order (dig/hideaway bottom) is consumed though its order is unobservable, so it is not a leftover. Driver-only change; same
+# trees as FORGE_REF ff076d4432. Fork branch fix/xp-forge-driver-unmapped-asks, rebased onto ff2049dc97 so the MayPlay
+# land-play fix is kept beside the zone-election/endure/order fix.
+FORGE_ORACLE_REF ?= cda262a7efd4394466fc3daf74c30f7fee6cf530
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
