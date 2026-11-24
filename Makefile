@@ -343,7 +343,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # form's entity pick (the lone Equipment the lone-forced shortcut consumes) is remembered as that attachment's yes. Test
 # UnmappedAsksJoinDirectionAttachTest (5 tests, five fixtures/unmapped requests); full driver suite 177 tests. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-number-direction-attach.
-FORGE_ORACLE_REF ?= d1b608ce5db3e73ea9c4a0cd98aa2e8514d2625f
+# 65c6664d90 = d1b608ce5d plus the ChooseEvenOddEffect binary: chooseBinary(OddsOrEvens), true = Odd, now takes gorge's
+# choose_n whose pick kind is odd/even/evenodd -- Extinction Event's resolution ask `choose_n[odd] [odd]` and Gollum, Riddle
+# Master's as-enters ask `choose_n[evenodd] [Odd]` (resume "etb", so the role is the pick kind, not a resume). binaryPick
+# and binaryAnswer also hold LeftOrRight (same behaviour and note), so the tap/untap default is TapOrUntap's alone and an
+# unmapped binary kind still misses loudly. OddsOrEvensBinaryTest replays both exported requests; the full driver suite is
+# 179 tests. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-odd-even-binary.
+FORGE_ORACLE_REF ?= 65c6664d90ac8650d371bbbe7f081096cbb2435a
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

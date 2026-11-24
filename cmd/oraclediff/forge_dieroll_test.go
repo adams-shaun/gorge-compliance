@@ -82,7 +82,10 @@ func TestForgeRolledDie(t *testing.T) {
 // d1b608ce5d = 9e368ca172 plus the Join Forces number announce, LeftOrRight binary and Optional Attach confirm
 // (ScriptedController/StepMachine only), die-roll code unchanged, the full driver suite (177 tests, including
 // ForcedDieRollTest) re-run green on it.
-const forgeOracleDieRollRef = "d1b608ce5db3e73ea9c4a0cd98aa2e8514d2625f"
+// 65c6664d90 = d1b608ce5d plus the ChooseEvenOddEffect binary (OddsOrEvens, true = Odd: Extinction Event's
+// choose_n[odd] and Gollum, Riddle Master's choose_n[evenodd]), ScriptedController only, die-roll code unchanged,
+// the full driver suite (179 tests, including ForcedDieRollTest) re-run green on it.
+const forgeOracleDieRollRef = "65c6664d90ac8650d371bbbe7f081096cbb2435a"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
