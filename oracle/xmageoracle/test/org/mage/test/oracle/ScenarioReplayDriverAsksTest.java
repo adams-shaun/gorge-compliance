@@ -192,17 +192,19 @@ public final class ScenarioReplayDriverAsksTest {
      * empty face-down name and never matches, so the driver's override matches
      * the face-down permanent by the card that sits under it. */
     private static void manifestedFaceDownTarget() throws Exception {
-        Class<?>[] types = {boolean.class, String.class, String.class};
-        check((Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Mountain"),
+        Class<?>[] types = {boolean.class, String.class, String.class, boolean.class};
+        check((Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Mountain", false),
                 "the face-down Mountain is the ref's permanent");
-        check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Forest"),
+        check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Forest", false),
                 "another card's name does not match the face-down permanent");
-        check(!(Boolean) adapter("namesFaceDownCard", types, false, "Mountain", "Mountain"),
+        check(!(Boolean) adapter("namesFaceDownCard", types, false, "Mountain", "Mountain", false),
                 "a face-up permanent is answered by the base name comparison, not here");
-        check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "@p0:Mountain#2")
-                        && !(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", ScenarioReplay.faceDownCombatName())
-                        && !(Boolean) adapter("namesFaceDownCard", types, true, null, "Mountain"),
+        check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "@p0:Mountain#2", false)
+                        && !(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", ScenarioReplay.faceDownCombatName(), false)
+                        && !(Boolean) adapter("namesFaceDownCard", types, true, null, "Mountain", false),
                 "an alias, a test command and an unknown card are left to the base");
+        check(!(Boolean) adapter("namesFaceDownCard", types, true, "Mountain", "Mountain", true),
+                "a face-up Mountain keeps the ref, so the candidate order never decides");
     }
 
     /** (f) FIN Choco trigger#0.0: the generator's decline pair ("No" +

@@ -1163,10 +1163,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // dread, cloak), after the steps are queued, so it is matched
             // here against the LIVE game: the ref names the card that became
             // the face-down creature (equip target, sacrifice-cost pick).
-            if (choiceGame != null && object instanceof Permanent) {
+            if (choiceGame != null && object instanceof Permanent
+                    && ((Permanent) object).isFaceDown(choiceGame)) {
                 mage.cards.Card underlying = choiceGame.getCard(object.getId());
-                return namesFaceDownCard(((Permanent) object).isFaceDown(choiceGame),
-                        underlying == null ? null : underlying.getName(), value);
+                String underlyingName = underlying == null ? null : underlying.getName();
+                boolean faceUpTwin = false;
+                for (Permanent other : choiceGame.getBattlefield().getAllPermanents()) {
+                    if (!other.isFaceDown(choiceGame) && other.getName().equals(value)) {
+                        faceUpTwin = true;
+                        break;
+                    }
+                }
+                return namesFaceDownCard(true, underlyingName, value, faceUpTwin);
             }
             return false;
         }
@@ -1175,9 +1183,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * the queued value is the card's plain XMage-spelled name, never an
          * "@" alias or a bracketed test command, and equals the name of the
          * card that sits face down. A face-up permanent is never matched
-         * here (its own name already answered the base's comparison). */
-        static boolean namesFaceDownCard(boolean faceDown, String underlyingName, String value) {
-            return faceDown && underlyingName != null && value != null
+         * here (its own name already answered the base's comparison), and a
+         * face-up permanent of the same name keeps the ref: the candidate
+         * Set's order must not decide between a card and its face-down twin. */
+        static boolean namesFaceDownCard(boolean faceDown, String underlyingName, String value, boolean faceUpTwin) {
+            return faceDown && !faceUpTwin && underlyingName != null && value != null
                     && !value.startsWith("@") && !value.startsWith("[")
                     && underlyingName.equals(value);
         }
