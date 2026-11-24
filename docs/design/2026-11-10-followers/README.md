@@ -24,5 +24,17 @@ run, the codec and its tests live in four-yay.
 - A client run, from four-yay:
   `MANABREW_SERVER_KEY=$(cat <dir>/live/server.key) go run ./cmd/xclient -engine manabrew -relay <url> -policy heuristic -games 100`.
 
+- **The pin is upstream, not the oracle's.** `MANABREW_LIVE_REF` is upstream `dadee731`
+  (`witchesofthehill/manabrew`, on `origin/main`), so a fresh box can fetch and build it.
+  The oracle driver's `MANABREW_ORACLE_REF` (`8684462a6522`) exists only on the local `oracle`
+  branch of the dev clone (the `adams-shaun/manabrew` fork is not public yet) and carries engine
+  patches a live game does not want; `manabrew-server` and `self-hosted-node` are identical in
+  the two trees. Moving the live pin to the fork is a two-line edit of `MANABREW_LIVE_PIN`, once
+  the operator pushes it.
+- Two deviations from the ticket text, both forced: logs live under `$MANABREW_ORACLE_DIR/live/`
+  (not an in-repo `.oracle-build/`, which `manabrew-oracle-setup.sh` refuses for licence reasons),
+  and the node is checked by an ESTABLISHED relay connection plus its "room created" log line,
+  because `self-hosted-node` is a relay client with no listening socket.
+
 Bumping the pin changes what every recorded live transcript is a statement about; bump it
 deliberately, and re-record.

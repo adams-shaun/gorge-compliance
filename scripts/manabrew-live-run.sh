@@ -26,7 +26,6 @@ set -euo pipefail
 
 here=$(cd "$(dirname "$0")/.." && pwd)
 die() { echo "manabrew-live-run: $*" >&2; exit 2; }
-mk() { sed -n "s/^$1 *?= *//p" "$here/Makefile"; }
 pin() { sed -n "s/^$1=//p" "$here/MANABREW_LIVE_PIN" | tail -n 1; }
 gorge_mk() {
 	local g
@@ -127,7 +126,10 @@ server_pid=$!
 echo "$server_pid" > "$live/server.pid"
 
 listens() { # pid port: does pid hold a listening socket on loopback port?
-	ss -lptn "sport = :$2" 2>/dev/null | /usr/bin/grep -q "pid=$1,"
+	local out
+	out=$(ss -lptn "sport = :$2" 2>/dev/null) || return 1
+	case "$out" in *"pid=$1,"*) return 0 ;; esac
+	return 1
 }
 deadline=$((SECONDS + ${LIVE_START_TIMEOUT:-120}))
 until listens "$server_pid" "$port"; do
