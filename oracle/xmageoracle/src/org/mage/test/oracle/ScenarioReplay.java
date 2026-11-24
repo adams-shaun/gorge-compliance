@@ -300,6 +300,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
     // Yes whether or not the generator scripted anything; every other optional
     // cost on the same cast is still declined as on a plain cast.
     private boolean kickedCast = false;
+    // Kicker asks answered on the current kicked cast. The shape check at the
+    // cast arm admits only one non-repeatable kicker cost, so a second ask is
+    // an unmodelled kicker the driver must not keep paying.
+    private int kickerAsks = 0;
     // A cast step with cast_mode "alternative": gorge elected the first
     // alternative cost (Leyline of Mutation's grant, Land Grant's reveal).
     // XMage poses that as its alternative-cost key menu. The mode itself is
@@ -991,9 +995,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return true;
             }
             if (owner.kickedCast && askedBy(KickerAbility.class, "addOptionalAdditionalCosts")) {
-                // The step elected Kicker: pay it. A scripted leading Yes is
-                // the same election, so it is consumed (strict mode sees it
-                // used) rather than left to misanswer a later ask.
+                // The step elected Kicker: pay it, once. A scripted leading
+                // Yes is the same election, so it is consumed (strict mode
+                // sees it used) rather than left to misanswer a later ask.
+                if (++owner.kickerAsks > 1) {
+                    throw new IllegalStateException("cast_mode kicked: a second kicker ask on one cast "
+                            + "(multikicker or multi-cost kicker) unsupported");
+                }
                 if (!getChoices().isEmpty() && getChoices().get(0).equals("Yes")) {
                     return super.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game);
                 }
@@ -3684,6 +3692,37 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return c != null && c.getAbilities().stream().anyMatch(a -> a.getClass().getSimpleName().startsWith("Gift"));
     }
 
+    /** Why a card cannot take cast_mode "kicked", or null when it can. The mode
+     * is gorge's single kernel "kicked" cast, which it also sends for
+     * multikicked, replicated and squadded casts (oracle/gorge.go
+     * repeatedCastMode), so only a card with exactly one plain, non-repeatable
+     * Kicker cost is a faithful single Yes: a Multikicker or any-number-of-modes
+     * kicker is re-asked while it is repeatable, a two-cost kicker would pay
+     * both, and Replicate/Squad pose their own (non-Kicker) asks. Those stay
+     * loud harness errors rather than hanging, over-paying or declining. */
+    static String kickedCastShapeError(String name) {
+        CardInfo info = CardRepository.instance.findCard(name);
+        Card c = info == null ? null : info.createCard();
+        if (c == null) {
+            return null;
+        }
+        List<KickerAbility> kickers = new ArrayList<>();
+        for (mage.abilities.Ability a : c.getAbilities()) {
+            if (a instanceof KickerAbility) {
+                kickers.add((KickerAbility) a);
+            }
+        }
+        if (kickers.isEmpty()) {
+            return "cast_mode kicked on a card without a Kicker ability (replicate/squad) unsupported";
+        }
+        KickerAbility k = kickers.get(0);
+        if (kickers.size() != 1 || k.getClass() != KickerAbility.class || k.getKickerCosts().size() != 1
+                || k.getKickerCosts().get(0).isRepeatable()) {
+            return "cast_mode kicked on a multikicker/multi-kicker card unsupported";
+        }
+        return null;
+    }
+
     /** Whether the card carries an alternative cost XMage offers on a plain
      * cast (EvokeAbility, ImpendingAbility, DashAbility, ...). */
     private static boolean hasAlternativeSourceCost(String name) {
@@ -5628,6 +5667,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 bargainedCast = "bargained".equals(castMode);
                 optionalCostCast = "optionalcost".equals(castMode);
                 kickedCast = "kicked".equals(castMode);
+                kickerAsks = 0;
                 alternativeCostCast = "alternative".equals(castMode);
                 copyCostCast = copyCostKeyword(castMode);
                 // "plot" is XMage's Plot special action (PlotAbility is a
@@ -5705,6 +5745,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String halfName = "adventure_alt".equals(mode) || "omen_alt".equals(mode)
                         ? spellOptionCastName(xmageSpelling(refCard)) : null;
                 String cardName = halfName != null ? halfName : castSpelling(refCard);
+                if (kickedCast) {
+                    String kickedErr = kickedCastShapeError(refCard);
+                    if (kickedErr != null) {
+                        throw new IllegalArgumentException(kickedErr);
+                    }
+                }
                 // A face-down Morph/Megamorph/Disguise cast names the
                 // SpellAbility by its XMage cast spelling; every plain cast
                 // names the card itself. Morph and Megamorph share "using
