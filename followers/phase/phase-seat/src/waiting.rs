@@ -73,10 +73,16 @@ pub enum Family {
     /// each blocker in phase's order, the rest to the last blocker (or to the defender with trample). No
     /// decision is posed.
     CombatDamage,
-    /// `ManaPayment`: finish a payment the pool covers, else `activate_mana_ability` per source or cancel.
+    /// `ManaPayment`: the seat settles the payment itself (finish when the pool covers, else activate a
+    /// source, else cancel), so the host never has to lower an autopay onto a manual tap.
     ManaPayment,
-    /// `ManaSourceSelection`: `activate_mana_ability` per source, or back to the payment.
+    /// `ManaSourceSelection`: the seat picks a source and activates it.
     ManaSource,
+    /// `ChooseManaColor`: the seat answers the colour prompt from the ability's own option list.
+    ManaChoice,
+    /// `ManaAbilityManaPayment`, `PayManaAbilityMana`: the seat pays a mana ability's own mana sub-cost
+    /// from the same sources `ManaPayment` uses, or answers its legal payment vectors.
+    ManaAbilityPayment,
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -107,6 +113,9 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::OpeningHandBottomCards { .. } => ("OpeningHandBottomCards", Pose::Unposed),
         WaitingFor::ManaPayment { .. } => ("ManaPayment", Pose::Posed(Family::ManaPayment)),
         WaitingFor::ManaSourceSelection { .. } => ("ManaSourceSelection", Pose::Posed(Family::ManaSource)),
+        WaitingFor::ChooseManaColor { .. } => ("ChooseManaColor", Pose::Posed(Family::ManaChoice)),
+        WaitingFor::ManaAbilityManaPayment { .. } => ("ManaAbilityManaPayment", Pose::Posed(Family::ManaAbilityPayment)),
+        WaitingFor::PayManaAbilityMana { .. } => ("PayManaAbilityMana", Pose::Posed(Family::ManaAbilityPayment)),
         WaitingFor::AssistChoosePlayer { .. } => ("AssistChoosePlayer", Pose::Unposed),
         WaitingFor::AssistPayment { .. } => ("AssistPayment", Pose::Unposed),
         WaitingFor::ChooseXValue { .. } => ("ChooseXValue", Pose::Posed(Family::ChooseX)),
@@ -204,9 +213,6 @@ pub fn classify(w: &WaitingFor) -> (&'static str, Pose) {
         WaitingFor::ActivationCostOneOfChoice { .. } => ("ActivationCostOneOfChoice", Pose::Unposed),
         WaitingFor::CostTypeChoice { .. } => ("CostTypeChoice", Pose::Unposed),
         WaitingFor::BlightChoice { .. } => ("BlightChoice", Pose::Unposed),
-        WaitingFor::PayManaAbilityMana { .. } => ("PayManaAbilityMana", Pose::Unposed),
-        WaitingFor::ManaAbilityManaPayment { .. } => ("ManaAbilityManaPayment", Pose::Unposed),
-        WaitingFor::ChooseManaColor { .. } => ("ChooseManaColor", Pose::Posed(Family::ManaColor)),
         WaitingFor::CollectEvidenceChoice { .. } => ("CollectEvidenceChoice", Pose::Unposed),
         WaitingFor::HarmonizeTapChoice { .. } => ("HarmonizeTapChoice", Pose::Unposed),
         WaitingFor::RevealUntilKeptChoice { .. } => ("RevealUntilKeptChoice", Pose::Unposed),
@@ -271,9 +277,24 @@ mod tests {
         let src = include_str!("waiting.rs");
         let body = src.split("pub fn classify").nth(1).unwrap().split("#[cfg(test)]").next().unwrap();
         let posed = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Posed(")).count();
-        assert_eq!(posed, 40);
+        assert_eq!(posed, 42);
         let terminal = body.lines().filter(|l| l.trim_start().starts_with("WaitingFor::") && l.contains("Pose::Terminal")).count();
         assert_eq!(terminal, 1);
+    }
+
+    /// A mana ability a seat offers can be followed by a colour choice or by the ability's own mana
+    /// sub-cost. Those prompts must be posed too, otherwise the host that picks the offered activation
+    /// halts the game at `unmapped_decision`. This is the structural guard for the whole family: every
+    /// `WaitingFor` an activation can land in is named here and must be `Pose::Posed`.
+    #[test]
+    fn every_mana_ability_follow_up_is_posed() {
+        let src = include_str!("waiting.rs");
+        let body = src.split("pub fn classify").nth(1).unwrap().split("#[cfg(test)]").next().unwrap();
+        for name in ["ManaPayment", "ManaSourceSelection", "ChooseManaColor", "ManaAbilityManaPayment", "PayManaAbilityMana"] {
+            let prefix = format!("WaitingFor::{name} ");
+            let arm = body.lines().find(|l| l.trim_start().starts_with(&prefix)).unwrap_or_else(|| panic!("{name} has no classify arm"));
+            assert!(arm.contains("Pose::Posed("), "{name} is not posed: {arm}");
+        }
     }
 
     /// Every variant `classify` poses is named by an actual seat arm: `game::build` for a family arm,
@@ -302,7 +323,7 @@ mod tests {
                 assert!(build.contains(&format!("Family::{family}")), "posed family {family} has no build arm");
             }
         }
-        assert_eq!(posed, 40, "the scan must see every posed variant");
+        assert_eq!(posed, 42, "the scan must see every posed variant");
     }
 
     /// A whole-set constraint is validated on the completed `SelectCards`, which the incremental

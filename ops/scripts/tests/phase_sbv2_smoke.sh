@@ -47,6 +47,17 @@ LOCK
 printf '%s' "$BODY" > "$O/card-data-$H16.json"
 : > "$O/card-data-$H16.json.ok"
 
+# The script's default-catalog branch reads the committed pool and the pinned card data; give it a
+# card-data stub shaped like phase's export (only the names, core types and mana cost are read).
+write_valid_card_data() {
+	python3 - "$ROOT/oracle/xengine/pools/fdn-commons.txt" "$1" <<'PY'
+import json, sys
+names = [line.split("#", 1)[0].strip() for line in open(sys.argv[1], encoding="utf-8")]
+cards = {n.lower(): {"card_type": {"core_types": ["Creature"]}, "mana_cost": {}} for n in names if n}
+json.dump(cards, open(sys.argv[2], "w", encoding="utf-8"), sort_keys=True)
+PY
+}
+
 # A stub phase-seat: answers hello with a hello_ok naming phase, any other line with malformed_json,
 # and records its argv and PHASE_REF. STUB_MODE=mute answers nothing.
 cat > "$BIN/cargo" <<'STUB'
@@ -114,6 +125,29 @@ check "  ...with --decks and --source-revision" $(/usr/bin/grep -qF -- "--decks 
 : > "$LOG"
 PHASE_SBV2_DECKS=$TMP/envdecks "$RUN" </dev/null >/dev/null 2>&1
 check "PHASE_SBV2_DECKS is the default catalog" $(/usr/bin/grep -qF -- "--decks $TMP/envdecks [" "$LOG" && echo 0 || echo 1) "$(cat "$LOG")"
+
+# 6b. The generated default catalog: valid card data lets the generator run, the directory is keyed by
+# the pin AND the pool+generator recipe, and a failed generation serves no catalog and leaves no tmp.
+write_valid_card_data "$O/card-data-$H16.json"
+rm -rf "$O"/decks-$H16-*
+: > "$LOG"
+"$RUN" --selftest >/dev/null 2>"$TMP/err"; rc=$?
+catalog_key=$( { cat "$ROOT/oracle/xengine/pools/fdn-commons.txt" "$ROOT/scripts/phase-sbv2-decks.py"; } | sha256sum | cut -c1-16 )
+DECKS=$O/decks-$H16-$catalog_key
+check "the default catalog is generated under a pin+recipe key" \
+	$([ "$rc" = 0 ] && [ -d "$DECKS" ] && [ "$(ls "$DECKS"/*.json 2>/dev/null | wc -l)" = 10 ] && /usr/bin/grep -qF -- "--decks $DECKS [" "$LOG" ] && echo 0 || echo 1) \
+	"rc=$rc decks=$DECKS $(cat "$TMP/err")"
+check "  ...and the key is the pool+generator hash, not just the pin" \
+	$([ "$catalog_key" != "$H16" ] && echo 0 || echo 1) "$catalog_key"
+
+rm -rf "$DECKS"
+printf 'not json' > "$O/card-data-$H16.json"
+: > "$LOG"
+out=$("$RUN" --selftest 2>&1); rc=$?
+check "a failing generator falls back to no catalog without a tmp left behind" \
+	$([ "$rc" = 0 ] && has "$out" "no default catalog" && ! /usr/bin/grep -q -- '--decks ' "$LOG" && [ -z "$(ls -d "$O"/decks-*.tmp.* 2>/dev/null)" ] && echo 0 || echo 1) \
+	"rc=$rc $out"
+write_valid_card_data "$O/card-data-$H16.json"
 
 # 7. Usage errors exit 2 before anything runs.
 : > "$LOG"

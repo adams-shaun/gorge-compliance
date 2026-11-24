@@ -20,20 +20,29 @@ The protocol is gorge's `docs/site/api/spellbench-v2.md`; the phase-server WebSo
 
 ## What is posed
 
-Twenty-one families over 40 `WaitingFor` variants (and `GameOver` as the terminal), one `Family` each in
-`waiting.rs`: priority (pass, play land, cast, activate); mulligan (keep / mulligan, and the London bottom
-as `order_pick` `mulligan_bottom`); attackers and blockers (one substep per creature); targets
-(`TargetSelection`, `TriggerTargetSelection`); optional effect (`OptionalEffectChoice`,
-`OpponentMayChoice`); optional cost; X; mana payment (`ManaPayment`, `ManaSourceSelection`: finish a
-payment the pool covers, else `activate_mana_ability` per source, or cancel); modes (`ModeChoice`,
-`AbilityModeChoice`); trigger order (`OrderTriggers`); scry and surveil (`arrange_card` then
-`order_pick`); top or bottom; equip attachment (`EquipTarget`); a mana colour or combination
-(`ChooseManaColor`); an unless payment (`UnlessPayment`); a resolution-time branch (`ChooseOneOfBranch`);
-a replacement-effect pick (`ReplacementChoice`); and pool picks of `min..=max` cards
-(`DiscardToHandSize`, `DiscardChoice`, `RevealChoice`, `SearchChoice`, `EffectZoneChoice`, `DigChoice`,
-the simple `PayCost` kinds, `ChooseLegend`, `ChooseFromZoneChoice`, `MultiTargetSelection`,
-`BeholdChoice`, `EmpowerJaceChoice`, `SpellCopyOrderChoice`, `WardDiscardChoice`,
-`WardSacrificeChoice`, `UnlessBounceChoice`).
+Twenty-two posed families over 42 `WaitingFor` variants (and `GameOver` as the terminal), one `Family`
+each in `waiting.rs`: priority (pass, play land, cast, activate); mulligan (keep / mulligan, and the
+London bottom as `order_pick` `mulligan_bottom`); attackers and blockers (one substep per creature);
+targets (`TargetSelection`, `TriggerTargetSelection`); optional effect (`OptionalEffectChoice`,
+`OpponentMayChoice`); optional cost; X; mana payment (`ManaPayment`, `ManaSourceSelection`); the
+mana-ability follow-ups (`ChooseManaColor`, `ManaAbilityManaPayment`, `PayManaAbilityMana`); modes
+(`ModeChoice`, `AbilityModeChoice`); trigger order (`OrderTriggers`); scry and surveil (`arrange_card`
+then `order_pick`); top or bottom; equip attachment (`EquipTarget`); an unless payment (`UnlessPayment`);
+a resolution-time branch (`ChooseOneOfBranch`); a replacement-effect pick (`ReplacementChoice`); and pool
+picks of `min..=max` cards (`DiscardToHandSize`, `DiscardChoice`, `RevealChoice`, `SearchChoice`,
+`EffectZoneChoice`, `DigChoice`, the simple `PayCost` kinds, `ChooseLegend`, `ChooseFromZoneChoice`,
+`MultiTargetSelection`, `BeholdChoice`, `EmpowerJaceChoice`, `SpellCopyOrderChoice`,
+`WardDiscardChoice`, `WardSacrificeChoice`, `UnlessBounceChoice`).
+
+The seat declares `engine_defaults.mana_payment: "engine_autopay"` (version suffix `/seat-autopay`): it
+makes every payment choice itself and never poses `activate_mana_ability`, so a host never lowers a
+planned payment onto wire taps. Internally it rewrites every contract cast/activation to
+`CastPaymentMode::Manual`, so phase never auto-taps before the target is final. The seat then settles the payment itself: it taps the best contract candidate (land taps first, a wanted
+colour preferred), answers a mana ability's `ChooseManaColor`/own-mana prompt, and finishes with phase's
+own confirm. This is the same choice phase's autopayer makes, just after the target is final, so a
+target-dependent cost (Luminous Rebuke's {1} discount for a tapped target) no longer fails a legal target
+choice as `Cannot pay mana cost`. The prompt is not sent to the host: a host has no manual wire to lower onto, and its unmatched-payment fallback is V9's `optional_cost
+pay:false`, which would cancel and re-cast the spell forever.
 
 A target candidate is probed on a state copy before it is offered: a `ChooseTarget` phase rejects
 (a ward cost paid from a short pool is the known case, CR 702.21a) is left out rather than posed.
