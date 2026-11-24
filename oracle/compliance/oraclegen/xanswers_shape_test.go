@@ -66,13 +66,15 @@ func TestXAnswersTriggerCostPayNonMana(t *testing.T) {
 		// phrase itself still classifies as mana (xOnlyCostPay), so
 		// triggerCostAnswer answers the chooseUse yes; a paired X
 		// announcement and election is grouped by xTriggerCostGroup
-		// (TestXAnswersXOnlyTriggerCostPay). A raw Forge-style label and a
-		// blight keep their pre-existing routing.
+		// (TestXAnswersXOnlyTriggerCostPay). A raw Forge-style label keeps
+		// its pre-existing routing; a blight is DoIfCostPaid's chooseUse like
+		// any non-mana cost, so its creature pick follows the yes.
 		{"mana X label", []rules.OracleDecision{pay("Pay X", "p0:Wildborn Preserver")},
 			[][]XAnswer{nil, {{0, "choice", "yes"}}}},
 		{"mana hybrid phyrexian label", []rules.OracleDecision{pay("Pay W/U/P", "p0:Brigid")}, nil},
 		{"raw mana label", []rules.OracleDecision{pay("Pay {W}", "p0:Brigid")}, nil},
-		{"blight", []rules.OracleDecision{pay("Blight 1", "p0:Scuzzback Scrounger")}, nil},
+		{"blight", []rules.OracleDecision{pay("Blight 1", "p0:Scuzzback Scrounger")},
+			[][]XAnswer{nil, {{0, "choice", "yes"}}}},
 	} {
 		got := xanswers(c.ds, 2, nil, nil)
 		if c.want == nil {

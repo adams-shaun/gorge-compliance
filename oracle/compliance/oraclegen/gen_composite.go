@@ -128,7 +128,8 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			orderAsks[i] = true
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, snaps: res.Snapshots, orderAsks: orderAsks})
+	searchZones := searchZoneAsks(reg, sc, res.Snapshots, ds)
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that
@@ -385,6 +386,86 @@ func addedNames(old, next []string) []string {
 // sameNames reports whether a and b hold the same names, ignoring order.
 func sameNames(a, b []string) bool {
 	return len(a) == len(b) && len(addedNames(a, b)) == 0
+}
+
+// activationXAnnounces maps each activation step to the number of X
+// announcements its costs pose. The ability is resolved through
+// ResolveActivatedAbility first, so a granted activation is not read against
+// the aliased printed index. A mana {X} contributes one announce (Talon of
+// Pain, Chimeric Staff, Crypt Rats); a separate non-mana variable cost that
+// announces its own X contributes another (Ludevic, Necrogenius's
+// ExileXFromYourGraveCost). A counter-removal cost that reuses the mana X
+// (Talon's Remove X charge counters) does not announce again.
+func activationXAnnounces(reg *cards.Registry, sc Scenario, g rules.OracleResult) map[int]int {
+	if reg == nil {
+		return nil
+	}
+	it := Item{Scenario: Scenario{Setup: sc.Setup}}
+	out := map[int]int{}
+	for i, st := range sc.Steps {
+		if st.Op != "activate" || st.AbilityIndex == nil {
+			continue
+		}
+		sa, kind := ResolveActivatedAbility(reg, it, i, st, g)
+		switch kind {
+		case ActivatedGrantedUnresolved:
+			continue
+		case ActivatedPrinted:
+			face, ok := printedStepFace(reg, it, i, st, g)
+			if !ok {
+				continue
+			}
+			sa = face.Abilities[*st.AbilityIndex]
+		}
+		if sa == nil {
+			continue
+		}
+		if n := activationXAnnounceCount(sa.Params["Cost"]); n > 0 {
+			out[i] = n
+		}
+	}
+	if len(out) == 0 {
+		return nil
+	}
+	return out
+}
+
+// activationXAnnounceCount counts the announceX asks an activation cost poses:
+// one per mana {X}, plus one per non-mana variable cost whose count is X. The
+// counter-removal family reuses the mana announce (XMage's
+// TalonOfPainRemoveVariableCountersSourceCost overrides announceXValue), so it
+// is not counted again; XMin<N> is the VariableManaCost bound marker, not a
+// cost of its own.
+func activationXAnnounceCount(cost string) int {
+	n := 0
+	for _, sym := range forgeCostSymbols(cost) {
+		if sym == "{X}" {
+			n++
+		}
+	}
+	if n == 0 {
+		return 0
+	}
+	for _, tok := range forgeCostTokens(cost) {
+		if _, ok := forgeManaSymbol(tok); ok {
+			continue
+		}
+		if _, ok := loyaltyTokenCount(tok); ok || strings.HasPrefix(tok, "XMin") {
+			continue
+		}
+		head, payload, _ := strings.Cut(tok, "<")
+		payload = strings.TrimSuffix(payload, ">")
+		parts := strings.Split(payload, "/")
+		if len(parts) == 0 || !strings.EqualFold(strings.TrimSpace(parts[0]), "X") {
+			continue
+		}
+		if strings.HasPrefix(strings.ToLower(head), "subcounter") {
+			// Source-counter removal reuses the mana X.
+			continue
+		}
+		n++
+	}
+	return n
 }
 
 // castXSizesCost reports a spell whose X also sizes a non-mana part of its

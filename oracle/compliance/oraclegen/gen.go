@@ -1314,6 +1314,8 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var digSources map[int]digSource
 	var pipPlans map[int][]pipAsk
 	var casts map[int]bool
+	var activates map[int]int
+	var searchZones map[int]searchZoneAsk
 	var forage map[int][]string
 	var ownBounce map[int]bool
 	var snaps []rules.OracleSnapshot
@@ -1339,6 +1341,12 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if casts == nil {
 			casts = ex.casts
+		}
+		if activates == nil {
+			activates = ex.activates
+		}
+		if searchZones == nil {
+			searchZones = ex.searchZones
 		}
 	}
 	// A hand_move/library_placement goes top-first (reverse the answers for
@@ -1390,6 +1398,10 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
 	}
+	if searchZones != nil {
+		routing.searchZones = searchZones
+	}
+	searchZoneSuppress := searchZoneRedundantBooleans(ds, searchZones)
 	// RemoveCounter's CounterType$ Any/All election is one per-counter run of
 	// KChoose picks in gorge but one multi-amount dialog in XMage: fold the
 	// run into one "X=<n>" amount per kind message before the generic choice
@@ -1476,6 +1488,11 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			continue
 		}
+		if searchZoneSuppress[i] {
+			// The mapped SearchLibraryGraveyard* effect folds the optional
+			// search choices into its own library chooseUse.
+			continue
+		}
 		folded := d.Via == "target" || (d.Kind == "target" && modal[d.Step])
 		if d.Step >= steps || (folded && d.Resume != "copy_targets" && castSteps[d.Step]) {
 			// A cast step's own targets reach XMage through castSpell; a
@@ -1520,7 +1537,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			any = true
 			continue
 		}
-		if forcedSingleOption(d) && !pipPlanned[i] && !forcedChoicePosed(ds, i) && !announcesSacrificeX(ds, i) && !castAnnouncesX(d, casts) {
+		if forcedSingleOption(d) && !pipPlanned[i] && !forcedChoicePosed(ds, i) && !announcesSacrificeX(ds, i) && !castAnnouncesX(d, casts) && !activationAnnouncesX(d, activates) {
 			// A forced one-option ask: XMage does not pose it. A forced
 			// target-kind pick is the exception -- one legal opponent is still
 			// a chooseTarget XMage asks for -- and so is a mode ask, which
@@ -1645,17 +1662,6 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[yes]})
 		case "choose_n":
-			if d.Resume == "search_zones" {
-				// gorge's CR 701.23 "and/or" zone choice (cr-g51, Say Its
-				// Name's "search your graveyard, hand, and/or library"): one
-				// multi-pick over the zones. XMage asks it as card-specific
-				// chooseUse prompts ("Search your graveyard?", "...hand?",
-				// "...library?"), which no zone label answers; a scripted
-				// label is instead consumed by an earlier cost target and
-				// fails the replay. Left unscripted, as it was before gorge
-				// posed the ask.
-				continue
-			}
 			if d.Resume == "changezone_dest_alt" {
 				// gorge's DestinationAlternative ask (Dina's Guidance's "put it
 				// into your hand or graveyard"). XMage asks it as a boolean
@@ -1738,8 +1744,10 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// (Melded Moxite's "Discard a card and draw two cards?",
 				// Vampire Gourmand's "Sacrifice another creature and ...?").
 				// A pure mana pay is resolved earlier by triggerCostAnswer
-				// (TriggerCostMana), and a blight/raw-mana label is excluded
-				// by nonManaTriggerCostPay, so each keeps its own route.
+				// (TriggerCostMana); a raw-mana label that is not a pay kind
+				// stays excluded by nonManaTriggerCostPay. A blight cost is a
+				// non-mana cost like any other here: its creature pick follows
+				// the accepted chooseUse (Boggart Mischief).
 				as = append(as, XAnswer{d.Seat, "choice", "yes"})
 				if names := forage[i]; len(names) > 0 {
 					// The exile arm's three graveyard cards: XMage's
@@ -1794,7 +1802,14 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				continue
 			}
 			if len(d.Picks) == 1 && strings.HasPrefix(d.Picks[0], "X = ") {
-				as = append(as, XAnswer{d.Seat, "choice", "X=" + strings.TrimPrefix(d.Picks[0], "X = ")})
+				answer := XAnswer{d.Seat, "choice", "X=" + strings.TrimPrefix(d.Picks[0], "X = ")}
+				as = append(as, answer)
+				for n := 1; activationAnnouncesX(d, activates) && n < activates[d.Step]; n++ {
+					// XMage's VariableManaCost and a separate VariableCostImpl
+					// announce X independently (Ludevic, Necrogenius's mana
+					// {X} then ExileXFromYourGraveCost).
+					as = append(as, answer)
+				}
 				break
 			}
 			if len(d.Picks) == 1 && pickKind(d, 0) == "number" {
@@ -2160,11 +2175,11 @@ func hasCostPick(d rules.OracleDecision) bool {
 // announcesX reports whether d is the single positive "X = <n>" announcement
 // of a cost that names X more than once ({X}{X}, the runner's XMulti mark).
 // XMage's unscripted announce does not pay the repeated X when the pool leaves
-// one legal value (Gogo's unspent CC), so it is scripted. A forced announce of
-// a single-X cost stays unscripted: XMage's default agrees there and the
-// committed rows (Saheeli's Lattice, The Enigma Jewel) would re-hash for
-// nothing. A forced announce that sizes a sacrifice cost is the exception
-// (announcesSacrificeX).
+// one legal value (Gogo's unspent CC), so it is scripted. A forced single-X
+// announce is owned by castAnnouncesX/activationAnnouncesX (a real
+// VariableManaCost step) or left to XMage's own default (a Craft keyword's
+// XMin count: Saheeli's Lattice, The Enigma Jewel). A forced announce that
+// sizes a sacrifice cost is the exception (announcesSacrificeX).
 func announcesX(d rules.OracleDecision) bool {
 	if !d.XMulti || len(d.Picks) != 1 || pickKind(d, 0) != "x" {
 		return false
@@ -2179,12 +2194,36 @@ func announcesX(d rules.OracleDecision) bool {
 // value)"), so it poses the ask however few values gorge's pool allowed: a
 // forced X = 0 cast with no spare mana (The Goose Mother, Lost in the Maze,
 // Meathook Massacre II's {X}{X}) strict-misses "Announce the value for {X}"
-// when it is left unscripted. An ability's or a cost's X is not covered: its
-// forced announce stays with announcesX/announcesSacrificeX; nor is a spell
-// whose X also sizes a non-mana cost part (castXSizesCost: the step is left
-// out of casts).
+// when it is left unscripted. A triggered cost's X stays with announcesX /
+// announcesSacrificeX/xTriggerCostGroup; nor is a spell whose X also sizes a
+// non-mana cost part (castXSizesCost: the step is left out of casts).
 func castAnnouncesX(d rules.OracleDecision, casts map[int]bool) bool {
-	return casts[d.Step] && d.Kind == "choose_n" && len(d.Picks) == 1 && pickKind(d, 0) == "x" &&
+	return announcesXAtStep(d, casts)
+}
+
+// activationAnnouncesX reports the same forced "X = <n>" announcement on an
+// ACTIVATION whose own cost names {X} (Talon of Pain's "{X}, {T}, Remove X
+// charge counters": gorge offered only X = 0 with no charge counters, and
+// XMage's announceX still strict-missed "Announce the value for {X} (any
+// value)"). The mapped count is one per announcing cost: a VariableManaCost
+// and a separate VariableCostImpl each ask (Ludevic, Necrogenius's {X} plus
+// ExileXFromYourGraveCost), while a counter-removal cost that reuses the mana
+// X (Talon) counts once. Craft/XMin is a keyword, not an activation cost, and
+// stays out.
+func activationAnnouncesX(d rules.OracleDecision, activates map[int]int) bool {
+	return activates[d.Step] > 0 && announcesXShape(d)
+}
+
+// announcesXAtStep is the shared shape of a forced single-pick X announcement
+// on an owned step.
+func announcesXAtStep(d rules.OracleDecision, steps map[int]bool) bool {
+	return steps[d.Step] && announcesXShape(d)
+}
+
+// announcesXShape is the forced single-pick X announcement, never the forced
+// one-option label asks these predicates exist to protect.
+func announcesXShape(d rules.OracleDecision) bool {
+	return d.Kind == "choose_n" && len(d.Picks) == 1 && pickKind(d, 0) == "x" &&
 		strings.HasPrefix(d.Picks[0], "X = ")
 }
 

@@ -14,5 +14,6 @@ mkdir -p "$out"
 javac -J-Xmx512m -nowarn -d "$out" -cp "$cp" \
   "$here/oracle/xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java" \
   "$here/oracle/xmageoracle/test/org/mage/test/oracle/ScenarioReplayDriverAsksTest.java"
-java -Xmx512m -XX:ActiveProcessorCount=2 -Dlog4j.configuration=file:/dev/null -cp "$out:$cp" \
-  org.mage.test.oracle.ScenarioReplayDriverAsksTest
+java -Xmx512m -XX:ActiveProcessorCount=2 -Dlog4j.configuration=file:/dev/null \
+  -DscenarioReplay.source="$here/oracle/xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java" \
+  -cp "$out:$cp" org.mage.test.oracle.ScenarioReplayDriverAsksTest
