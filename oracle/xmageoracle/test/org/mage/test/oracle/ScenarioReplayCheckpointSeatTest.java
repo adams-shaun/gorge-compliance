@@ -8,7 +8,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import mage.cards.CardSetInfo;
+import mage.cards.b.BrightclimbPathway;
+import mage.cards.g.GlasspoolMimic;
 import mage.constants.PhaseStep;
+import mage.constants.Rarity;
 import org.mage.test.player.TestPlayer;
 import sun.misc.Unsafe;
 
@@ -245,6 +249,19 @@ public final class ScenarioReplayCheckpointSeatTest {
                 new ScenarioReplay.PlayLandCandidate("Brightclimb Pathway", half, mainCard));
         equal(half, d.choosePlayLandSource(dfc, "Brightclimb Pathway", mainCard));
         equal(null, d.choosePlayLandSource(dfc, "Island", null));
+
+        // A land play of a modal DFC names its land half: XMage's
+        // PlayLandAbility for Glasspool Shore reads "Play Glasspool Shore",
+        // while the scenario ref (and the setup alias) name the front face
+        // Glasspool Mimic. A land-front Pathway keeps naming its front half.
+        GlasspoolMimic mimic = new GlasspoolMimic(UUID.randomUUID(),
+                new CardSetInfo("Glasspool Mimic", "ZNR", "070", Rarity.RARE));
+        equal("Glasspool Shore", ScenarioReplay.playLandName(mimic, "Glasspool Mimic"));
+        BrightclimbPathway pathway = new BrightclimbPathway(UUID.randomUUID(),
+                new CardSetInfo("Brightclimb Pathway", "ZNR", "257", Rarity.RARE));
+        equal("Brightclimb Pathway", ScenarioReplay.playLandName(pathway, "Brightclimb Pathway"));
+        // An unresolvable card keeps the ref's spelling.
+        equal("Island", ScenarioReplay.playLandName(null, "Island"));
         System.out.println("PASS checkpoint seat and bound activation text");
     }
 }
