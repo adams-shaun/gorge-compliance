@@ -152,6 +152,21 @@ func TestFocusActUnit(t *testing.T) {
 		t.Errorf("second offer: choices %v, want the bot's [0]", in.Choices)
 	}
 
+	// Times 2: the action is taken at its first two offers, then the bot's
+	st = openState(Focus{Seat: 0, Card: "X", Kind: "cast", Times: 2}, 7, 8)
+	b = focusBot{st: st}
+	casts := focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, stubOpt{Kind: "cast", Obj: 7})
+	if in, _ = b.act(casts, pass, nil); !slices.Equal(in.Choices, []int{1}) || st.done {
+		t.Errorf("times 2, first: choices %v done %v, want [1], still armed", in.Choices, st.done)
+	}
+	casts = focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, stubOpt{Kind: "cast", Obj: 8})
+	if in, _ = b.act(casts, pass, nil); !slices.Equal(in.Choices, []int{1}) || !st.done {
+		t.Errorf("times 2, second: choices %v done %v, want [1] and done", in.Choices, st.done)
+	}
+	if in, _ = b.act(casts, pass, nil); !slices.Equal(in.Choices, []int{0}) {
+		t.Errorf("times 2, third: choices %v, want the bot's [0]", in.Choices)
+	}
+
 	// no matching option: defer and stay armed
 	st = openState(Focus{Seat: 0, Card: "X", Kind: "ability", Ability: 2}, 7)
 	b = focusBot{st: st}

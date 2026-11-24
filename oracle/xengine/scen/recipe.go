@@ -216,6 +216,10 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx}
 			break
 		}
+		if band := trig.Params["ClassBand"]; band != "" && band != "1" {
+			// a Class level's trigger: the start places the Class at level 1
+			return refuse("steps-needed:class-level")
+		}
 		switch trig.Mode {
 		case "ChangesZone":
 			switch {
@@ -224,7 +228,12 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 				p0.Hand = []string{card}
 				p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
 				f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "cast"}
-			case trig.Params["Origin"] == "Battlefield" && trig.Params["Destination"] == "Graveyard" && selfCard(trig):
+			case trig.Params["Origin"] == "Battlefield" && (trig.Params["Destination"] == "Graveyard" || trig.Params["Destination"] == "Any") && selfCard(trig):
+				// Murder takes a creature to the graveyard, which also meets "leaves
+				// the battlefield" (Destination Any).
+				if !face.IsCreature() {
+					return refuse("no-generator:trigger:ChangesZone:noncreature-self")
+				}
 				murder, ok := reg.Lookup("Murder")
 				if !ok || len(murder.Faces) == 0 {
 					return Result{}, fmt.Errorf("scen: Murder is not in the corpus")
@@ -236,17 +245,21 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 				f.Active = 1
 				f.Focus = &StartFocus{Seat: seat(1), Card: "Murder", Kind: "cast"}
 			default:
-				return refuse("no-generator:trigger:ChangesZone")
+				if why := zoneStart(reg, b, face, card, trig, f); why != "" {
+					return refuse(why)
+				}
+			}
+		case "SpellCast", "SpellCastOrCopy":
+			if why := spellStart(reg, b, face, card, generic, trig, f); why != "" {
+				return refuse(why)
 			}
 		case "Attacks":
 			p0.Battlefield = []string{card}
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "attack"}
 		case "Phase":
-			if trig.Params["Phase"] != "Upkeep" {
-				return refuse("no-generator:trigger:Phase")
+			if why := phaseStart(reg, b, face, card, generic, trig, f); why != "" {
+				return refuse(why)
 			}
-			p0.Battlefield = []string{card}
-			f.Active, f.MaxTurns = 1, 2
 		default:
 			return refuse("no-generator:trigger:" + trig.Mode)
 		}
