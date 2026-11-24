@@ -1759,10 +1759,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * answer is scripted and strict mode otherwise fails "Missing TARGET
          * def" (Black Cat, Cunning Thief's lone opponent; Tishana's Tidebinder
          * countering the only ability on the stack). This matches by role --
-         * one legal candidate and no queued answer of this ask's own -- not by
-         * a list of TargetXxx classes, so the next single-candidate ask class
-         * is covered without another branch. A head naming the candidate is
-         * this ask's own answer and is left to the base. A front skip is this
+         * one legal candidate and no queued answer of this ask's own -- in the
+         * three funnels {@link #unscriptedLoneTarget} names. A queued entry
+         * naming the candidate, at any index (the base scans the whole
+         * queue), is this ask's own answer and is left to the base. A front skip is this
          * ask's own only when {@link #skipCanCloseAsk} says it can close the
          * ask (an "up to" ask whose minimum is met); otherwise it is a later
          * ask's skip and stays queued while the lone candidate is taken. */
@@ -1772,10 +1772,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return null;
             }
             UUID only = candidates.get(0);
-            if (!targetQueue.isEmpty()) {
-                String head = targetQueue.get(0);
-                if (matches.test(only, head)
-                        || TestPlayer.TARGET_SKIP.equals(head) && skipCanCloseAsk) {
+            if (!targetQueue.isEmpty()
+                    && TestPlayer.TARGET_SKIP.equals(targetQueue.get(0)) && skipCanCloseAsk) {
+                return null;
+            }
+            // TestPlayer.chooseTarget scans the whole visible queue
+            // (takeMaxTargetsPerChoose), not only its head: an entry naming
+            // the lone candidate anywhere is this ask's own answer, so the
+            // base consumes it rather than leaving it queued for a later ask.
+            for (String answer : targetQueue) {
+                if (matches.test(only, answer)) {
                     return null;
                 }
             }

@@ -373,6 +373,10 @@ public final class ScenarioReplayDriverAsksTest {
         check(adapter("loneTargetChoice", types,
                         new ArrayList<>(Collections.singletonList("Grizzly Bears")), one, true, byName) == null,
                 "a queued answer naming the candidate was overridden");
+        check(adapter("loneTargetChoice", types,
+                        new ArrayList<>(Arrays.asList("Island", "Grizzly Bears")), one, true, byName) == null,
+                "a queued answer naming the candidate behind another ask's answer (index 1) was left"
+                        + " unconsumed: TestPlayer scans the whole queue, so the base must answer");
         List<String> skip = new ArrayList<>(Collections.singletonList(TestPlayer.TARGET_SKIP));
         check(adapter("loneTargetChoice", types, skip, one, true, byName) == null,
                 "a front skip was overridden on an ask it can close");
