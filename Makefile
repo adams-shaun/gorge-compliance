@@ -222,6 +222,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # driver suite (152 tests, including ForcedDieRollTest, DelvePicksTest and UnleashReplacementTest) is green on the merge.
 # Driver-only change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-delve-picks.
+# 08e1ddd978 = f77c569808 plus the one forge-game engine fix for xproof decision_shape Primal Surge (4 items). DigEffect honoured
+# ForgetOtherRemembered only when something was dug; Primal Surge repeats while Remembered is a permanent, so on the pass over
+# the empty library the last Forest stayed Remembered (already on the battlefield) and DBChangeZone asked a spurious
+# "move Forest from exile" confirm (the 30th over a 29-Forest library; gorge stops at 29). The clear
+# now also runs when nothing is dug. Primal Surge is the only card pairing Dig with ForgetOtherRemembered. Driver tests: 153
+# (PrimalSurgeEmptyDigTest counts exactly 29 confirms; it fails without the engine change). cardsfolder/tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-primal-surge-empty-dig.
 # bdc90a6b94b = c873c2c9399 plus the trigger-order tie of copies (xproof decision_shape: Dromoka, the Eternal). CR 603.3b: with
 # two Dromoka triggers and Nadaar's venture simultaneous, gorge orders [Dromoka, Dromoka, Nadaar]; the two Dromoka triggers tie
 # on the label and are copies of one trigger, but orderTriggers tested sameEffect on ALL remaining triggers (Nadaar's included)
@@ -236,7 +243,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # ForcedDieRollTest, TriggerOrderTiedCopiesTest, DelvePicksTest and UnleashReplacementTest) is green. Driver-only change;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-trigger-order-tied-copies.
-FORGE_ORACLE_REF ?= 41968040cbdc9007180fee8afae21542be83b3d4
+# 051f555862 = the clean merge of 08e1ddd978 (the Primal Surge empty-dig engine fix) and 41968040cb (the trigger-order tie
+# of copies and the venture dungeon pick), so the pinned driver keeps both answers. The merge adds no file of its own and
+# leaves cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-primal-surge-empty-dig.
+FORGE_ORACLE_REF ?= 051f555862737c69c8e0e05cd7a8130a3da0124f
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
