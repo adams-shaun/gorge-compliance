@@ -553,11 +553,10 @@ func stepAfterPass(step string) (string, bool) {
 
 // playStepUnlessPays rewrites the paid as-enters "unless you pay" decision of a
 // land's play step to the yes/no shape XMage's TapSourceUnlessPaysEffect asks.
-// Gorge records it as a two-option mode decision, so the generic router emits a
-// numeric mode answer; the driver puts that on the MODE queue while the
-// as-enters ask reads the CHOICE queue (strict miss "Missing CHOICE def"). A
-// paid pass-step unless cost keeps its numeric mode answer, and a decline stays
-// a mode decision the generic router already scripts "choice no" for.
+// Gorge records it as a two-option mode decision; the generic router now emits
+// the boolean yes for every paid unless cost too, but this rewrite keeps the
+// play-step shape named locally and answers it the same way (a decline is
+// already "choice no" from the generic router).
 func playStepUnlessPays(steps []oraclegen.Step, ds []rules.OracleDecision) []rules.OracleDecision {
 	out := append([]rules.OracleDecision(nil), ds...)
 	for i := range out {

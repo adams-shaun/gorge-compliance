@@ -195,7 +195,18 @@ func DigestOfGame(e *rules.Engine) Digest {
 	}
 	var field []state.ObjID
 	for i := range g.Players {
-		field = append(field, g.Zone(state.ZBattlefield, state.PlayerID(i))...)
+		for _, id := range g.Zone(state.ZBattlefield, state.PlayerID(i)) {
+			// A phased-out permanent is on the battlefield but treated as
+			// though it does not exist (CR 702.26b), and gorge's oracle
+			// snapshot omits it (engine/rules/oracle_snapshot.go: "the
+			// snapshot must not name it"). This path must omit it too, or the
+			// live digest carries a permanent the replayed snapshot never has
+			// and lower.SelfCheck reports a phantom field.len gap.
+			if g.Obj(id).PhasedOut {
+				continue
+			}
+			field = append(field, id)
+		}
 	}
 	sort.Slice(field, func(a, b int) bool { return field[a] < field[b] })
 	for _, id := range field {

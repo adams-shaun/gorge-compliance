@@ -190,8 +190,8 @@ func chooseUseLabels(f *cards.Face) (pairs [][2]string, ok bool) {
 // The corpus's other six KWChoice$ faces (Angelic Skirmisher, Éowyn Lady of
 // Rohan, Linvala Shield of Sea Gate, Mardu Thunderkite, Smogbelcher Chariot,
 // Swiftspear's Teachings) have no GainsChoiceOfAbilitiesEffect implementation
-// at the pin, so they are NOT listed: their XMage ask is a different dialog
-// and a Choice answer would be another unread stray.
+// at the pin, so they are NOT listed here: Angelic Skirmisher's bespoke Choice
+// is in xmageKWChoiceBespokeFaces; the rest are a different ask or absent.
 // TestKWChoiceDialogFacesCensus counts the table and pins each label against an
 // independently written XMage-label table.
 var xmageKWChoiceDialogFaces = map[string]bool{
@@ -231,6 +231,61 @@ func kwChoiceDialogLabels(f *cards.Face) []string {
 	if f == nil || !xmageKWChoiceDialogFaces[strings.ToLower(f.Name)] {
 		return nil
 	}
+	return pumpKWChoiceLabels(f)
+}
+
+// xmageKWChoiceBespokeFaces names the faces whose Pump KWChoice$ XMage poses
+// as ONE bespoke Choice dialog (the card class builds its own ChoiceImpl, not
+// GainsChoiceOfAbilitiesEffect), read from the CHOICE queue by label like the
+// xmageKWChoiceDialogFaces. The value maps each KWChoice$ candidate to its
+// XMage label, read from the card class at XMAGE_REF 7aeb547a86:
+//
+//	AngelicSkirmisher  message "Choose ability for your creatures", choices
+//	                   "First strike", "Vigilance", "Lifelink" (Forge
+//	                   KWChoice$ First Strike,Vigilance,Lifelink)
+//
+// The other five faces stay out, each checked at the pin:
+//
+//	EowynLadyOfRohan       chooseUse("Choose first strike or vigilance") on the
+//	                       unequipped branch, no choice at all when equipped
+//	LinvalaShieldOfSeaGate chooseUse("Choose hexproof or indestructible")
+//	MarduThunderkite, SmogbelcherChariot, SwiftspearsTeachings
+//	                       no Mage.Sets class at the pin
+//
+// The labels differ from gorge's only in case ("First Strike" -> "First
+// strike"), which xmageBespokeChoiceLabel maps; the census test pins every
+// routed label against these values.
+var xmageKWChoiceBespokeFaces = map[string]map[string]string{
+	"angelic skirmisher": {
+		"First Strike": "First strike",
+		"Vigilance":    "Vigilance",
+		"Lifelink":     "Lifelink",
+	},
+}
+
+// kwChoiceBespokeLabels lists the KWChoice$ candidate labels of a face in
+// xmageKWChoiceBespokeFaces; nil for any other face.
+func kwChoiceBespokeLabels(f *cards.Face) []string {
+	if f == nil || xmageKWChoiceBespokeFaces[strings.ToLower(f.Name)] == nil {
+		return nil
+	}
+	return pumpKWChoiceLabels(f)
+}
+
+// xmageBespokeChoiceLabel is the label XMage's bespoke KWChoice dialogs show
+// for a gorge KWChoice$ label: sentence case ("First Strike" -> "First
+// strike"). The decision carries only the label, so the mapping is by shape;
+// the census pins it to xmageKWChoiceBespokeFaces.
+func xmageBespokeChoiceLabel(label string) string {
+	label = strings.TrimSpace(label)
+	if label == "" {
+		return label
+	}
+	return strings.ToUpper(label[:1]) + strings.ToLower(label[1:])
+}
+
+// pumpKWChoiceLabels lists every KWChoice$ entry of the face's Pumps.
+func pumpKWChoiceLabels(f *cards.Face) []string {
 	var out []string
 	add := func(params map[string]string) {
 		for _, name := range strings.Split(params["KWChoice"], ",") {
