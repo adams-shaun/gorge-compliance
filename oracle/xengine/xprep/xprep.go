@@ -106,9 +106,10 @@ func refuse(id, reason, format string, a ...any) *Refusal {
 //     with Item.Card and Item.XMageName stamped (the driver carries exactly
 //     one such spelling); an item holding two or more is refused.
 //
-// Item.XTargetSkips stays unset: the generator derives it from the fixture's
-// omitted optional slots, and a lowered item has no fixture, so the driver
-// keeps its legacy trailing skip.
+// Item.XTargetSkips is the lowering's own (lower.Lowered plans it from the
+// cast's target decisions); Prepare keeps a step's plan only while the
+// retarget leaves that step's targets as the plan was derived from, else the
+// driver keeps its own handling of the step.
 func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.OracleResult) (oraclegen.Item, *Refusal) {
 	it := l.Item
 	if it.Format == oraclegen.FormatCommander {
@@ -139,6 +140,7 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 	if why := sameOutcome(reg, it, sc, g); why != "" {
 		return it, refuse(it.ID, ReasonRetarget, "%s", why)
 	}
+	it.XTargetSkips = keepTargetSkips(it.XTargetSkips, it.Scenario.Steps, sc.Steps)
 	it.Scenario = sc
 	g.Decisions = oraclegen.RetimeEntryTargets(sc.Steps, g.Snapshots, keepTokenLooks(playStepUnlessPays(sc.Steps, g.Decisions)))
 	g.Decisions = append(g.Decisions, pendingResolutionDecisions(reg, it, sc, g)...)
@@ -1430,4 +1432,25 @@ func dropFixedColourAnswers(answers []oraclegen.XAnswer, colour string) (kept []
 		kept = append(kept, a)
 	}
 	return kept, ""
+}
+
+// keepTargetSkips is the lowering's XTargetSkips plan restricted to the steps
+// whose targets the retarget left unchanged: a plan names positions in the
+// step's flat target list, so a rewritten list invalidates it. before and
+// after are the item's steps before and after oraclegen.ChooseTargets.
+func keepTargetSkips(plan [][]oraclegen.XTargetSkip, before, after []oraclegen.Step) [][]oraclegen.XTargetSkip {
+	if len(plan) == 0 {
+		return nil
+	}
+	var out [][]oraclegen.XTargetSkip
+	for i, list := range plan {
+		if len(list) == 0 || i >= len(before) || i >= len(after) || !slices.Equal(before[i].Targets, after[i].Targets) {
+			continue
+		}
+		if out == nil {
+			out = make([][]oraclegen.XTargetSkip, len(plan))
+		}
+		out[i] = list
+	}
+	return out
 }

@@ -1685,3 +1685,97 @@ func TestPrepareModalTriggerChooseTwo(t *testing.T) {
 	}
 	t.Logf("last step answers: %+v", as)
 }
+
+// TestKeepTargetSkipsFollowsRetarget: the lowering's skip plan names positions
+// in a step's flat target list, so Prepare keeps a step's plan only while the
+// retarget leaves that step's targets as they were.
+func TestKeepTargetSkipsFollowsRetarget(t *testing.T) {
+	plan := [][]oraclegen.XTargetSkip{nil, {{At: 0, Slot: 0}, {At: 1, Slot: 2}}, {{At: 1, Slot: 1}}}
+	before := []oraclegen.Step{{Op: "pass"}, {Op: "cast", Targets: []string{"p0:Forest#7"}}, {Op: "cast", Targets: []string{"p1:A"}}}
+	same := slices.Clone(before)
+	got := keepTargetSkips(plan, before, same)
+	if len(got) != 3 || len(got[1]) != 2 || len(got[2]) != 1 {
+		t.Fatalf("unchanged targets lost the plan: %v", got)
+	}
+	moved := slices.Clone(before)
+	moved[2] = oraclegen.Step{Op: "cast", Targets: []string{"p1:B"}}
+	got = keepTargetSkips(plan, before, moved)
+	if len(got) != 3 || len(got[1]) != 2 || got[2] != nil {
+		t.Fatalf("a retargeted step kept its plan (or an untouched one lost it): %v", got)
+	}
+	moved[1] = oraclegen.Step{Op: "cast", Targets: []string{"p0:Forest#8"}}
+	if got := keepTargetSkips(plan, before, moved); got != nil {
+		t.Fatalf("every plan invalidated, still got %v", got)
+	}
+	if got := keepTargetSkips(nil, before, same); got != nil {
+		t.Fatalf("no plan produced %v", got)
+	}
+}
+
+// TestPrepareKeepsLoweredTargetSkips: the lowering's skip plan for a Relive
+// the Past cast that names only a graveyard land reaches the prepared item
+// while Prepare leaves the cast's targets as the plan was derived from. The
+// drop on a retarget is TestKeepTargetSkipsFollowsRetarget's: gorge's picks
+// never differ from a scenario that already names them, so no scenario can
+// provoke the rewrite through Prepare.
+func TestPrepareKeepsLoweredTargetSkips(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	plan := []oraclegen.XTargetSkip{{At: 0, Slot: 0}, {At: 1, Slot: 2}}
+	scenario := func(target string) oraclegen.Scenario {
+		return oraclegen.Scenario{
+			Name: "Relive the Past lone land target",
+			Why:  "the lowered skip plan survives Prepare",
+			Setup: map[string]oraclegen.Seat{
+				"p0": {
+					Hand:      []string{"Relive the Past"},
+					Graveyard: []string{"Forest", "Forest"},
+				},
+				"p1": {},
+			},
+			Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Relive the Past", Mana: "WGGGGGG", Targets: []string{target}},
+				{Op: "resolve"},
+			},
+		}
+	}
+	run := func(sc oraclegen.Scenario) (lower.Lowered, rules.OracleResult) {
+		t.Helper()
+		l := lower.Lowered{Item: oraclegen.Item{ID: "xe:test:relive-skips", Scenario: sc}}
+		l.Item.XTargetSkips = [][]oraclegen.XTargetSkip{plan, nil}
+		res, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
+		if err != nil {
+			t.Fatalf("run scenario: %v", err)
+		}
+		if len(res.Fails) > 0 {
+			t.Fatalf("gorge rejects the scenario: %v", res.Fails)
+		}
+		return l, res
+	}
+
+	l, res := run(scenario("p0:Forest"))
+	it, ref := Prepare(reg, sp, l, res)
+	if ref != nil {
+		t.Fatalf("Prepare refused: %+v", ref)
+	}
+	if len(it.XTargetSkips) < 1 || !slices.Equal(it.XTargetSkips[0], plan) {
+		t.Fatalf("a cast whose targets Prepare left alone lost its plan: %v", it.XTargetSkips)
+	}
+
+	// gorge's result names the other Forest: ChooseTargets rewrites the step's
+	// target to it, so the plan (derived from the first list) is dropped.
+	_, other := run(scenario("p0:Forest#2"))
+	it, ref = Prepare(reg, sp, l, other)
+	if ref != nil {
+		t.Skipf("Prepare refuses the retargeted pair (%+v); the drop is TestKeepTargetSkipsFollowsRetarget's", ref)
+	}
+	if got := it.Steps[0].Targets; len(got) != 1 || got[0] != "p0:Forest#2" {
+		t.Fatalf("retargeted cast targets = %v, want [p0:Forest#2]", got)
+	}
+	if len(it.XTargetSkips) > 0 && len(it.XTargetSkips[0]) > 0 {
+		t.Fatalf("a retargeted cast kept the stale plan %v", it.XTargetSkips[0])
+	}
+}
