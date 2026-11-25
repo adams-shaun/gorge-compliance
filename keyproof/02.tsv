@@ -20,11 +20,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 020aae46-cdba-4c37-9c54-283727c09994	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:taster-of-wares:f0t0:s1,f:xs:XP:taster-of-wares:f0t0:s1	-	-	-	267e485f6204	-	51f38a5d7eb2	-	-	2026-11-24	xproof
 020c26ba-ed46-47c3-925c-b9f32500f503	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-s-scorn:cast:s1,f:xs:XP:vraska-s-scorn:cast:s1	-	-	-	d864b561c9cb	-	11a091cec606	-	-	2026-11-24	xproof
 020d0c91-da68-40da-8561-5522377f3d07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-020d561b-2e5d-439e-9e6a-318d23e73542	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Uldaros Theorix"	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-020d561b-2e5d-439e-9e6a-318d23e73542	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Uldaros Theorix"	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+020d561b-2e5d-439e-9e6a-318d23e73542	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Uldaros Theorix"	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+020d561b-2e5d-439e-9e6a-318d23e73542	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Uldaros Theorix"	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 020de6d7-f5a2-4036-ad25-451e5977b4d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beza-the-bounding-spring:cast:s1,f:xs:XP:beza-the-bounding-spring:cast:s1	-	-	-	5437c1394672	-	ca79c25e5206	-	-	2026-11-24	xproof
 020de6d7-f5a2-4036-ad25-451e5977b4d4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:beza-the-bounding-spring:cast:s1,f:xs:XP:beza-the-bounding-spring:cast:s1	-	-	-	5437c1394672	-	ca79c25e5206	-	-	2026-11-24	xproof
-02125db4-4507-467a-ac0c-406de2c7d533	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+02125db4-4507-467a-ac0c-406de2c7d533	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 021428b1-005c-40ed-9d47-fb5aa970598b	cast	cast-resolve	agreed	-	FX	scen	2	0	River Herald Scout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 021428b1-005c-40ed-9d47-fb5aa970598b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0214805d-d207-42da-a25f-2a8e1990904e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 021d8596-782a-4cfd-8b70-ac5bb8a5aff1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:saltcrusted-steppe:land:s1,f:xs:XP:saltcrusted-steppe:land:s1	-	-	-	9ee19e8250ce	-	6fd57b586dd6	-	-	2026-11-24	xproof
 021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:saltcrusted-steppe:f0a1:s1,f:xs:XP:saltcrusted-steppe:f0a1:s1	-	-	-	d864b561c9cb	-	6fd57b586dd6	-	-	2026-11-24	xproof
-021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	land	land	agreed	-	FX	start	2	0	x:xs:XP:saltcrusted-steppe:land:s1,f:xs:XP:saltcrusted-steppe:land:s1	-	-	-	9ee19e8250ce	-	6fd57b586dd6	-	-	2026-11-24	xproof
 0222414f-98b5-458a-a0fd-831a66cd8b07	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0222414f-98b5-458a-a0fd-831a66cd8b07	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

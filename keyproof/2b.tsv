@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 2b08e5f7-c771-4e03-8560-15de6a8bec71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b08e5f7-c771-4e03-8560-15de6a8bec71	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+2b08e5f7-c771-4e03-8560-15de6a8bec71	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 2b0afb89-0944-4861-b9c3-e909e2ac215e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:badgermole-cub:f0t0:s1,f:xs:XP:badgermole-cub:f0t0:s1	-	-	-	ae86f6029288	-	e1db253a763b	-	-	2026-11-24	xproof
 2b0afb89-0944-4861-b9c3-e909e2ac215e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:badgermole-cub:f0t0:s1,f:xs:XP:badgermole-cub:f0t0:s1	-	-	-	ae86f6029288	-	e1db253a763b	-	-	2026-11-24	xproof
 2b0afb89-0944-4861-b9c3-e909e2ac215e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Badgermole Cub/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b51d6e5-a4cd-4f2f-9762-6ad2cfd8b084	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b51d6e5-a4cd-4f2f-9762-6ad2cfd8b084	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2b548f9a-c160-427d-9bb4-1fe940f8ab28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b548f9a-c160-427d-9bb4-1fe940f8ab28	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+2b548f9a-c160-427d-9bb4-1fe940f8ab28	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 2b565791-1b94-4dad-a48d-be7fc2198e19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b565791-1b94-4dad-a48d-be7fc2198e19	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 2b565791-1b94-4dad-a48d-be7fc2198e19	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2bb2eda7-3b38-4c56-870f-c3218a1056f5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:snapcaster-mage:f0t0:s1,f:xs:XP:snapcaster-mage:f0t0:s1	-	-	-	d864b561c9cb	-	baeaa65d543e	-	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	cast	cast-resolve	agreed	-	X	scen	1	0	Koh, the Face Stealer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Koh, the Face Stealer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Koh, the Face Stealer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2bbb33e3-7d03-457c-92bb-b0c943615fa1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Koh, the Face Stealer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2bc38f14-0314-4351-8138-e2b8bf041404	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:memorial-to-folly:f0a1:s2,f:xs:XP:memorial-to-folly:f0a1:s2	-	-	-	23b491658465	-	1b996de290a5	-	-	2026-11-25	xproof
@@ -178,4 +178,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2bfc7467-1316-43d3-9ca6-ff36cc2de607	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:journey-to-nowhere:f0t0:s1,f:xs:XP:journey-to-nowhere:f0t0:s1	-	-	-	8a1b1a193ec0	-	b9ab01314d70	-	-	2026-11-24	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:journey-to-nowhere:f0t0:s1,f:xs:XP:journey-to-nowhere:f0t0:s1	-	-	-	8a1b1a193ec0	-	b9ab01314d70	-	-	2026-11-24	xproof
-2bfec482-be0d-4768-84e7-1c2c74ea1373	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+2bfec482-be0d-4768-84e7-1c2c74ea1373	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof

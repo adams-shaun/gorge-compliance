@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 081db161-1ad0-4ee7-9d34-c415984080f0	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:orochi-leafcaller:f0a0:s1,f:xs:XP:orochi-leafcaller:f0a0:s1	-	-	-	c2272f704fde	-	8e8dd4ddc18b	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 08261613-1af3-4bd7-9a4d-a366fd508d5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08261b68-b261-4e47-a085-c489ba394108	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0826cf7d-7ccc-459b-a92f-29dc169628f8	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+0826cf7d-7ccc-459b-a92f-29dc169628f8	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 0826cf7d-7ccc-459b-a92f-29dc169628f8	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0828d891-f7c3-4e51-b42e-6ce88d48ac8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:icewrought-sentry:cast:s1,f:xs:XP:icewrought-sentry:cast:s1	-	-	-	23b491658465	-	27d0cfc12c77	-	-	2026-11-24	xproof
 0828d891-f7c3-4e51-b42e-6ce88d48ac8b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:icewrought-sentry:combat0.attack:s1,f:xs:XP:icewrought-sentry:combat0.attack:s1	-	-	-	3aa6ded33acb	-	27d0cfc12c77	-	-	2026-11-25	xproof
@@ -55,7 +55,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Postmortem Professor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:postmortem-professor:combat0.attack:s1,f:xs:XP:postmortem-professor:combat0.attack:s1	-	-	-	23c4009444b0	-	1268324c7f62	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	static#0.0	static#0.0	agreed	-	X	scen	1	0	Postmortem Professor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-085bc7be-bd44-40af-8e8f-a1a8006fe22c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+085bc7be-bd44-40af-8e8f-a1a8006fe22c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 0863c4bc-1e3e-4ff9-8877-88d4021c85e5	cast	cast-resolve	agreed	-	FX	scen	2	0	Thawbringer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0863c4bc-1e3e-4ff9-8877-88d4021c85e5	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0863c4bc-1e3e-4ff9-8877-88d4021c85e5	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Thawbringer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
