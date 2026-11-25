@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 30236ff8-f6d5-462d-9a2f-846b2d8a1ca6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30236ff8-f6d5-462d-9a2f-846b2d8a1ca6	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-pegasus:f0t0:s1,f:xs:XP:phyrexian-pegasus:f0t0:s1	-	-	-	ae86f6029288	-	8603188f2748	-	-	2026-11-24	xproof
 302407c8-0842-4f8e-a5aa-5c11a69851c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-302407c8-0842-4f8e-a5aa-5c11a69851c4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+302407c8-0842-4f8e-a5aa-5c11a69851c4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 30254aa2-2307-4f42-926a-54a416f55f87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30254aa2-2307-4f42-926a-54a416f55f87	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30255f36-2e26-4990-8b54-27f38130d45b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -80,12 +80,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3070f997-24f2-471d-af96-a2f3b588198e	cast	cast	agreed	-	X	start	2	0	x:xs:XP:divine-verdict:cast:s1	-	-	-	336eab778104	-	f9b4b24dac20	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 307421ed-aa59-4518-a0eb-689c60d7b709	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3075dadd-240f-4455-9286-9f1d48f53a3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jar-of-eyeballs:cast:s1,f:xs:XP:jar-of-eyeballs:cast:s1	-	-	-	d864b561c9cb	-	6ff1b2e3602a	-	-	2026-11-24	xproof
-3075dadd-240f-4455-9286-9f1d48f53a3f	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+3075dadd-240f-4455-9286-9f1d48f53a3f	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 3075dadd-240f-4455-9286-9f1d48f53a3f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jar-of-eyeballs:f0t0:s1,f:xs:XP:jar-of-eyeballs:f0t0:s1	-	-	-	23c4009444b0	-	6ff1b2e3602a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 307be184-176a-40a8-944c-48aa00cfdd29	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:radiant-lotus:cast:s1,f:xs:XP:radiant-lotus:cast:s1	-	-	-	23c4009444b0	-	2c40c5c60cf6	-	-	2026-11-25	xproof
 307be184-176a-40a8-944c-48aa00cfdd29	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:radiant-lotus:cast:s1,f:xs:XP:radiant-lotus:cast:s1	-	-	-	23c4009444b0	-	2c40c5c60cf6	-	-	2026-11-25	xproof
 307d20fd-a9c9-4da9-b990-26c653054640	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savage-gorger:cast:s1,f:xs:XP:savage-gorger:cast:s1	-	-	-	d864b561c9cb	-	9867bf08d3c5	-	-	2026-11-24	xproof
-307d20fd-a9c9-4da9-b990-26c653054640	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+307d20fd-a9c9-4da9-b990-26c653054640	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:savage-gorger:f0t0:s1,f:xs:XP:savage-gorger:f0t0:s1	-	-	-	336eab778104	-	9867bf08d3c5	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 30812870-87c0-469c-95a5-811d5a181e72	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:biogenic-upgrade:cast:s1,f:xs:XP:biogenic-upgrade:cast:s1	-	-	-	8c0bd19283bb	-	973b1f394c70	-	-	2026-11-24	xproof
 30820f71-9fd4-453c-b377-c2e0b01c07a7	cast	cast-resolve	agreed	-	X	scen	1	0	Waterlogged Hulk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 30820f71-9fd4-453c-b377-c2e0b01c07a7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Waterlogged Hulk/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

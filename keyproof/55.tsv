@@ -14,8 +14,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 551023a7-9db3-4204-ac64-5847adbafe79	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	242faa74b238	-	-	2026-11-24	xproof
 5513b150-c08f-4f3e-8e41-fd7b43d00b78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vivien-nature-s-avenger:cast:s1,f:xs:XP:vivien-nature-s-avenger:cast:s1	-	-	-	ae86f6029288	-	5eea77078287	-	-	2026-11-24	xproof
 5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:vivien-nature-s-avenger:cast:s1,f:xs:XP:vivien-nature-s-avenger:cast:s1	-	-	-	ae86f6029288	-	5eea77078287	-	-	2026-11-24	xproof
-5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a1	DigUntil	agreed	-	FX	start	2	0	x:xs:XP:vivien-nature-s-avenger:f0a1:s1,f:xs:XP:vivien-nature-s-avenger:f0a1:s1	-	-	-	336eab778104	-	5eea77078287	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5513b150-c08f-4f3e-8e41-fd7b43d00b78	f0/a2	Pump	agreed	-	FX	start	2	0	x:xs:XP:vivien-nature-s-avenger:f0a2:s1,f:xs:XP:vivien-nature-s-avenger:f0a2:s1	-	-	-	336eab778104	-	5eea77078287	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 55159adc-36f0-4088-8930-5d9b45f76365	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:still-life:cast:s1,f:xs:XP:still-life:cast:s1	-	-	-	fc71ca68c5ac	-	3c36825ecc86	-	-	2026-11-24	xproof
 55159adc-36f0-4088-8930-5d9b45f76365	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:still-life:f0a0:s1,f:xs:XP:still-life:f0a0:s1	-	-	-	fc71ca68c5ac	-	3c36825ecc86	-	-	2026-11-24	xproof
 55187899-c445-48e9-80b9-235eaf42f803	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5539d78c-1acc-46dd-ba6d-cc0cdad6ff44	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:benthic-criminologists:f0t1:s1,f:xs:XP:benthic-criminologists:f0t1:s1	-	-	-	23b491658465	-	ec40ec1b2b08	-	-	2026-11-25	xproof
 553b9606-0519-4b85-b6ae-acc126e537e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 553c2006-e123-406e-ab4a-1d1f67c7468c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eye-collector:cast:s1,f:xs:XP:eye-collector:cast:s1	-	-	-	ae86f6029288	-	cc23df58d4c3	-	-	2026-11-24	xproof
-553c2006-e123-406e-ab4a-1d1f67c7468c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+553c2006-e123-406e-ab4a-1d1f67c7468c	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:eye-collector:f0t0:s1,f:xs:XP:eye-collector:f0t0:s1	-	-	-	336eab778104	-	cc23df58d4c3	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 5542afeb-285f-4889-9d09-46ce20d0d189	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5542afeb-285f-4889-9d09-46ce20d0d189	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5542ea4d-34ab-4f89-8894-793a7038f501	cast	cast-resolve	agreed	-	X	scen	1	0	Monstrous Emergence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
