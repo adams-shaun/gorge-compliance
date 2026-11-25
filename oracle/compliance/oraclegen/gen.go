@@ -1467,8 +1467,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	}
 	// A trigger-cost sacrifice the engine folded into its pay election still
 	// needs its one sacrificed permanent on XMage's choice queue ahead of the
-	// effect's own picks (loneTriggerCostSacrifice).
-	loneSacrifice := loneTriggerCostSacrifice(ds, snaps)
+	// effect's own picks (loneTriggerCostSacrifice, from the scenario caller).
+	var loneSacrifice map[int][]string
+	for _, ex := range extras {
+		if loneSacrifice == nil {
+			loneSacrifice = ex.loneSacrifice
+		}
+	}
 	// A hand_move/library_placement goes top-first (reverse the answers for
 	// XMage's successive top asks) or bottom-first (keep them) by where the
 	// after-step checkpoint shows the picks, not by a list of cards. An
