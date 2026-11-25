@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13bf8103-3db3-4ee6-a6bb-441aabfd9e41	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Warden of the Grove/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13bf8103-3db3-4ee6-a6bb-441aabfd9e41	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Warden of the Grove/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13bfc51f-d079-40ef-a4ba-47d06d3150a3	cast	cast-resolve	agreed	-	X	scen	1	0	Command the Stage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-13bfc51f-d079-40ef-a4ba-47d06d3150a3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+13bfc51f-d079-40ef-a4ba-47d06d3150a3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 13c1ca1e-cd17-49ef-bc31-97bff99ec1e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13c4437e-48a9-4c51-9b76-9e83e3ec362f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13c4437e-48a9-4c51-9b76-9e83e3ec362f	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:zephyr-winder:f0t0:s1,f:xs:XP:zephyr-winder:f0t0:s1	-	-	-	054d9f516953	-	bfbbf573bed6	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13ca49a2-8a78-4be4-976a-b684086864bb	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:phantom-beast:f0t0:s1,f:xs:XP:phantom-beast:f0t0:s1	-	-	-	6f84be0f34c0	-	60059df284e7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-13cb7d87-ff12-4742-8f54-f3175536db40	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+13cb7d87-ff12-4742-8f54-f3175536db40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:relearn:cast:s1,f:xs:XP:relearn:cast:s1	-	-	-	cb99a158debc	-	d1a932ad4cad	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91c380f6-2c41-48b7-9f07-104e8659e397	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:adanto-vanguard:cast:s1,f:xs:XP:adanto-vanguard:cast:s1	-	-	-	d864b561c9cb	-	de8d487a0b9d	-	-	2026-11-24	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	cast	cast	agreed	-	F	start	2	0	f:xs:XP:generous-plunderer:f0t0:s1	-	-	-	3aa6ded33acb	-	75fc42421daa	-	-	2026-11-25	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Generous Plunderer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-91c835d1-22ca-4c90-9ba6-c8e01bbc0347	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Generous Plunderer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+91c835d1-22ca-4c90-9ba6-c8e01bbc0347	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:generous-plunderer:combat0.block:s1,f:xs:XP:generous-plunderer:combat0.block:s1	-	-	-	cb99a158debc	-	75fc42421daa	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:generous-plunderer:f0t0:s1	-	-	-	3aa6ded33acb	-	75fc42421daa	-	-	2026-11-25	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Generous Plunderer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

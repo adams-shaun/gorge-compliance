@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12080ea9-0800-4601-b553-6711dd9f9806	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12080ea9-0800-4601-b553-6711dd9f9806	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:horizon-spellbomb:f0t0:s1,f:xs:XP:horizon-spellbomb:f0t0:s1	-	-	-	6f84be0f34c0	-	1797a269bd57	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1208cb6e-34b4-4a23-9a5b-a01229113e38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1208cb6e-34b4-4a23-9a5b-a01229113e38	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+1208cb6e-34b4-4a23-9a5b-a01229113e38	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:advocate-of-the-beast:f0t0:s1,f:xs:XP:advocate-of-the-beast:f0t0:s1	-	-	-	cb99a158debc	-	4f8d4e4e6871	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 120a0bcd-eca2-44eb-ad8d-5e4077f7e21c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 120a0bcd-eca2-44eb-ad8d-5e4077f7e21c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 120b565a-e22b-4d5d-9841-b11750b4ee49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 129476ae-9dab-4e04-8e8e-f249afd56ff9	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:maha-its-feathers-night:static0.0:s1,f:xs:XP:maha-its-feathers-night:static0.0:s1	-	-	-	3aa6ded33acb	-	6ca6ccbcdb22	-	-	2026-11-25	xproof
 12956c07-e679-471b-8dcb-2a2d15b0be55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:honest-work:static0.0:s1,f:xs:XP:honest-work:static0.0:s1	-	-	-	6f84be0f34c0	-	1cb30b2aef07	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 12956c07-e679-471b-8dcb-2a2d15b0be55	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:honest-work:static0.0:s1,f:xs:XP:honest-work:static0.0:s1	-	-	-	6f84be0f34c0	-	1cb30b2aef07	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-12956c07-e679-471b-8dcb-2a2d15b0be55	static#0.0	static.continuous	diverged	-	-	start	0	2	-	d99e783ecede	-	-	9087eefec3ee	-	1cb30b2aef07	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+12956c07-e679-471b-8dcb-2a2d15b0be55	static#0.0	static.continuous	diverged	-	-	start	0	2	-	d99e783ecede	-	-	cb99a158debc	-	1cb30b2aef07	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 129b41cf-8327-42f0-b186-1111b42c08ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:artifist-acumen:cast:s1,f:xs:XP:artifist-acumen:cast:s1	-	-	-	fb9d3088f0bf	-	e7ed8473b021	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 129ec223-e76d-491d-b299-07ac91168d31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 129ee7d6-e3df-40ef-9502-7aad10183031	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
