@@ -10,7 +10,9 @@ import (
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/decision"
 	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/events"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -114,6 +116,17 @@ const (
 	reasonSetupCounterRepl = "setup_replacement:counter_added"
 )
 
+// reasonFieldPlayerCounters is the refusal of a cut whose seat holds player
+// counters while the pinned gorge oracleSeat has no player_counters setup
+// field. The gate's playerTable classifies the field as placeable, so the
+// refusal is added here, once, from the pin's capability; it disappears with
+// the pin bump that adds the field.
+const reasonFieldPlayerCounters = "field:Player.Counters"
+
+// pinPlayerCounters is pincap.PlayerCounters, a var so a test can exercise the
+// placement branch before the pin carries the runner's player_counters field.
+var pinPlayerCounters = pincap.PlayerCounters
+
 // cut is the live engine at one cut point, reduced to what a window needs: the
 // setup it can be rebuilt from, or why it cannot be. Seats are the live game's.
 type cut struct {
@@ -141,6 +154,122 @@ type cut struct {
 // capture reads the live engine at a cut point. It only reads. xmage says the
 // window is replayed by XMage, which narrows the placeable setup tokens.
 func capture(e *rules.Engine, entry int, xmage bool) *cut {
+	return captureAt(e, entry, xmage, false)
+}
+
+// captureStart is capture at the cut of a scripted start (lower.Span): the
+// game's genesis applied a rules.StartSpec, so the cut is turn 1's first main
+// and the scenario replay applies the same position at genesis and drives
+// through the same upkeep. A placed permanent's beginning-of-upkeep/draw
+// trigger therefore fires at the step the live game fired it, not a second
+// time as a later window's setup drive would; Span scripts an optional one off
+// (its state is already in the cut), so captureStart skips reasonPhaseTrig for
+// an optional trigger only. A mandatory trigger still refuses: the setup drive
+// would resolve it and the scenario has no answer saying it already resolved.
+func captureStart(e *rules.Engine, entry int, xmage bool) *cut {
+	return captureAt(e, entry, xmage, true)
+}
+
+// startPhaseTriggerDeclines is one setup answer per battlefield card, back
+// face or setup token whose optional upkeep or draw trigger will ask again
+// while the scenario drive reaches turn 1's first main. The cut already carries
+// the state that trigger left (a verse counter, a life payment), so the answer
+// declines it: accepting would apply the effect twice. A start whose probe asks
+// a fallback yes/no and has no such card gets no answer, so Span keeps its
+// refusal.
+func startPhaseTriggerDeclines(reg *cards.Registry, it oraclegen.Item) []oraclegen.Answer {
+	seats := make([]string, 0, len(it.Scenario.Setup))
+	for k := range it.Scenario.Setup {
+		seats = append(seats, k)
+	}
+	sort.Strings(seats)
+	var out []oraclegen.Answer
+	for _, k := range seats {
+		seat := it.Scenario.Setup[k]
+		for _, name := range seat.Battlefield {
+			c, ok := reg.Lookup(name)
+			if !ok || len(c.Faces) == 0 {
+				continue
+			}
+			face := c.Faces[0]
+			if slices.Contains(seat.BackFace, name) && len(c.Faces) > 1 {
+				face = c.Faces[1]
+			}
+			if n := optionalPhaseTriggerCount(face); n > 0 {
+				for range n {
+					out = append(out, oraclegen.Answer{Kind: string(decision.KTriggerOptional), Pick: []string{"no"}})
+				}
+			}
+		}
+		// A setup token is a battlefield permanent too: its optional upkeep
+		// trigger asks on the drive exactly like a card's.
+		for _, tok := range seat.Tokens {
+			if c, ok := reg.Token(tok.Script); ok && c != nil && len(c.Faces) > 0 {
+				for range optionalPhaseTriggerCount(c.Faces[0]) {
+					out = append(out, oraclegen.Answer{Kind: string(decision.KTriggerOptional), Pick: []string{"no"}})
+				}
+			}
+		}
+	}
+	return out
+}
+
+// isUpkeepOrDrawPhase is a Phase trigger that fires at the beginning of an
+// upkeep or draw step.
+func isUpkeepOrDrawPhase(t *cards.Trigger) bool {
+	if !strings.EqualFold(t.Mode, "Phase") {
+		return false
+	}
+	ph := strings.ToLower(t.Params["Phase"])
+	return strings.Contains(ph, "upkeep") || strings.Contains(ph, "draw")
+}
+
+// optionalPhaseAsk is a Phase trigger its controller may decline with a plain
+// trigger_optional yes/no. The may-ask can live on the Execute SVar's body
+// instead of the trigger line (gorge's mayAskFromSVar); either spelling asks
+// the same setup-drive question.
+func optionalPhaseAsk(f *cards.Face, t *cards.Trigger) bool {
+	if t.Params["OptionalDecider"] != "" || strings.EqualFold(t.Params["Optional"], "True") {
+		return true
+	}
+	body := f.SVars[t.Params["Execute"]]
+	return body != "" && (strings.Contains(body, "Optional$") || strings.Contains(body, "OptionalDecider$"))
+}
+
+// optionalPhaseTriggerCount is how many upkeep or draw Phase triggers of f its
+// controller may decline: only such triggers pose a setup-drive yes/no the
+// start can answer, and each asks its own question.
+func optionalPhaseTriggerCount(f *cards.Face) int {
+	if f == nil {
+		return 0
+	}
+	n := 0
+	for i := range f.Triggers {
+		if t := &f.Triggers[i]; isUpkeepOrDrawPhase(t) && optionalPhaseAsk(f, t) {
+			n++
+		}
+	}
+	return n
+}
+
+// mandatoryPhaseTriggered is true when an upkeep or draw Phase trigger is not
+// optional. Span can script an optional ask off, so only a mandatory one keeps
+// the start refused.
+func mandatoryPhaseTriggered(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for i := range f.Triggers {
+		if t := &f.Triggers[i]; isUpkeepOrDrawPhase(t) && !optionalPhaseAsk(f, t) {
+			return true
+		}
+	}
+	return false
+}
+
+// captureAt is capture with the scripted-start distinction: start is true when
+// the cut is the genesis position of a rules.StartSpec.
+func captureAt(e *rules.Engine, entry int, xmage, start bool) *cut {
 	g := e.G
 	c := &cut{Entry: entry, Turn: g.Turn, Active: int(g.Active), Refs: map[state.ObjID]string{}, MaxID: state.ObjID(len(g.Objs))}
 	w := &walker{g: g, why: map[string]bool{}, auras: map[state.ObjID]bool{}, xmage: xmage}
@@ -173,7 +302,7 @@ func capture(e *rules.Engine, entry int, xmage bool) *cut {
 		if o.Zone == state.ZBattlefield && o.IsToken {
 			w.checkToken(o)
 		}
-		if o.Zone == state.ZBattlefield && phaseTriggered(o) {
+		if o.Zone == state.ZBattlefield && phaseTriggered(o) && (!start || mandatoryPhaseTriggered(o.Face())) {
 			w.why[reasonPhaseTrig] = true
 		}
 		if o.Zone == state.ZBattlefield && slices.Contains(e.Derived(o.ID).Types, "Aura") {
@@ -202,6 +331,23 @@ func capture(e *rules.Engine, entry int, xmage bool) *cut {
 	if len(e.RegisteredContinuous()) > 0 {
 		w.why[reasonContinuous] = true
 	}
+	// A seat's counters are placeable only when the pinned runner's setup has
+	// the player_counters field. Keep the pre-pin refusal until then: a
+	// lowered item that carried the field would fail gorge's strict decoder,
+	// and one that silently dropped it would not reproduce the cut.
+	if !pinPlayerCounters() {
+		for i := range g.Players {
+			for _, pc := range g.Players[i].Counters {
+				if pc.N != 0 {
+					w.why[reasonFieldPlayerCounters] = true
+					break
+				}
+			}
+			if w.why[reasonFieldPlayerCounters] {
+				break
+			}
+		}
+	}
 	if len(w.why) == 0 {
 		w.place(c)
 	}
@@ -229,12 +375,19 @@ func phaseTriggered(o *state.Object) bool {
 	if f == nil {
 		return false
 	}
-	for _, t := range f.Triggers {
-		if !strings.EqualFold(t.Mode, "Phase") {
-			continue
-		}
-		ph := strings.ToLower(t.Params["Phase"])
-		if strings.Contains(ph, "upkeep") || strings.Contains(ph, "draw") {
+	return PhaseTriggeredFace(f)
+}
+
+// PhaseTriggeredFace is phaseTriggered for a card face: a Phase trigger in the
+// upkeep or draw step. It is the one predicate the start generator and the
+// lowering gate both read, so an enabler the generator places and a permanent
+// the gate refuses cannot disagree on what "incidental upkeep trigger" means.
+func PhaseTriggeredFace(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for i := range f.Triggers {
+		if isUpkeepOrDrawPhase(&f.Triggers[i]) {
 			return true
 		}
 	}
@@ -264,6 +417,12 @@ func (w *walker) setupTriggers(c *cut) {
 			tapped = true
 		}
 		if len(c.Setup[s].Counters) > 0 {
+			counters = true
+		}
+		// Player counters are PlayerCounterChange events in the setup drive,
+		// not CounterChange: a "whenever you get a counter" trigger still
+		// fires and the schema cannot say it already resolved.
+		if len(c.Setup[s].PlayerCounters) > 0 {
 			counters = true
 		}
 		// A placed token's counters are CounterChange events too
@@ -1097,6 +1256,20 @@ func (w *walker) place(c *cut) {
 		life := g.Players[s].Life
 		seat.Life = &life
 		seat.Speed = g.Players[s].Speed
+		if pinPlayerCounters() {
+			// The runner's player_counters is the COMPLETE count at the
+			// setup checkpoint, so copy the cut's counters as read, a spent
+			// kind's retained zero entry included (a follower whose setup game
+			// produced the kind moves down to it). Sorted by kind: no map walk
+			// reaches the item bytes.
+			for _, pc := range g.Players[s].Counters {
+				seat.PlayerCounters = append(seat.PlayerCounters,
+					oraclegen.SetupPlayerCounter{Kind: strings.ToUpper(pc.Kind), N: pc.N})
+			}
+			sort.SliceStable(seat.PlayerCounters, func(a, b int) bool {
+				return seat.PlayerCounters[a].Kind < seat.PlayerCounters[b].Kind
+			})
+		}
 		c.Setup[s] = seat
 	}
 	w.placeTokens(c, toks)

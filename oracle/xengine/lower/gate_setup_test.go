@@ -1,6 +1,7 @@
 package lower
 
 import (
+	"bytes"
 	"slices"
 	"strings"
 	"testing"
@@ -652,5 +653,61 @@ func TestGateRefusesStaticEffectGrant(t *testing.T) {
 	plantBattlefieldCard(t, reg, e, "Enduring Innocence", func(o *state.Object) bool { return !o.Tapped })
 	if r := capture(e, at, true).Reasons; slices.Contains(r, reasonContinuous) {
 		t.Fatalf("printed face: reasons %v, want no %s", r, reasonContinuous)
+	}
+}
+
+// TestGateSetupPlayerCounters: a cut whose seats hold player counters is
+// expressible once the pin's runner has the player_counters setup field, and
+// the captured setup restates them as a sorted complete set (ENERGY first,
+// then POISON). The unsupported pin keeps the old field:Player.Counters
+// refusal, so a lowered item never carries a field the pinned decoder rejects.
+func TestGateSetupPlayerCounters(t *testing.T) {
+	reg, pairs := fdnPairs(t, 1)
+	e, at := expressibleCut(t, reg, pairs[0], 100)
+	e.G.Players[0].AddCounter("POISON", 2)
+	e.G.Players[0].AddCounter("ENERGY", 8)
+	e.G.Players[1].AddCounter("EXPERIENCE", 3)
+
+	prior := pinPlayerCounters
+	pinPlayerCounters = func() bool { return true }
+	t.Cleanup(func() { pinPlayerCounters = prior })
+
+	c := capture(e, at, true)
+	if slices.Contains(c.Reasons, reasonFieldPlayerCounters) {
+		t.Fatalf("supported pin still refuses: %v", c.Reasons)
+	}
+	want0 := []oraclegen.SetupPlayerCounter{{Kind: "ENERGY", N: 8}, {Kind: "POISON", N: 2}}
+	if !slices.Equal(c.Setup[0].PlayerCounters, want0) {
+		t.Fatalf("seat 0 player counters %+v, want %+v (sorted)", c.Setup[0].PlayerCounters, want0)
+	}
+	want1 := []oraclegen.SetupPlayerCounter{{Kind: "EXPERIENCE", N: 3}}
+	if !slices.Equal(c.Setup[1].PlayerCounters, want1) {
+		t.Fatalf("seat 1 player counters %+v, want %+v", c.Setup[1].PlayerCounters, want1)
+	}
+	it := c.item(seatMap{}, "id", "name")
+	if !slices.Equal(it.Scenario.Setup["p0"].PlayerCounters, want0) {
+		t.Errorf("item p0 player counters %+v, want %+v", it.Scenario.Setup["p0"].PlayerCounters, want0)
+	}
+	if raw := it.Raw(); !bytes.Contains(raw, []byte(`"player_counters"`)) ||
+		!bytes.Contains(raw, []byte(`"kind":"ENERGY"`)) && !bytes.Contains(raw, []byte(`"kind": "ENERGY"`)) {
+		t.Errorf("item JSON does not name the player counters:\n%s", raw)
+	}
+
+	// A spent kind keeps a zero entry on the live player; the checkpoint is the
+	// complete count, so the zero is restated (a follower whose setup game
+	// produced the kind moves down to it).
+	e.G.Players[1].AddCounter("ENERGY", 2)
+	e.G.Players[1].AddCounter("ENERGY", -2)
+	wantZero := []oraclegen.SetupPlayerCounter{{Kind: "ENERGY", N: 0}, {Kind: "EXPERIENCE", N: 3}}
+	if got := capture(e, at, true).Setup[1].PlayerCounters; !slices.Equal(got, wantZero) {
+		t.Fatalf("seat 1 after a spend: player counters %+v, want %+v (zero kept)", got, wantZero)
+	}
+
+	// The pin this branch is written against has no field yet: the placement
+	// capability turns off and the gate restores the exact refusal the item
+	// decoder would otherwise earn.
+	pinPlayerCounters = func() bool { return false }
+	if r := capture(e, at, true).Reasons; !slices.Contains(r, reasonFieldPlayerCounters) {
+		t.Fatalf("unsupported pin: reasons %v, want %s", r, reasonFieldPlayerCounters)
 	}
 }

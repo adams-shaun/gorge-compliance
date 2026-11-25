@@ -31,6 +31,65 @@ func TestTriggerOrderSameSourceScriptsXMageRuleText(t *testing.T) {
 	}
 }
 
+// TestTriggerOrderDuplicatedSourceUsesNames: Harmonic Prodigy's Prowess and
+// two Soul-Scar Mage Prowess triggers (Prodigy doubles another Wizard's
+// trigger) name Soul-Scar twice, but both picks are the SAME ability of the
+// SAME object, so their mutual order is unobservable (CR 603.3b). The distinct
+// sources still order by name; the second Soul-Scar pick is the one XMage
+// auto-pushes. Before the fix the all-"Prowess" text form keyed every pick
+// "Prowess", XMage matched Soul-Scar's ability first and ordered the stack
+// itself.
+func TestTriggerOrderDuplicatedSourceUsesNames(t *testing.T) {
+	d := rules.OracleDecision{Step: 1, Seat: 0, Kind: "order", GorgeKind: "trigger_order",
+		Options: 3, Min: 3, Max: 3, PickIdx: []int{0, 1, 2}, PickKinds: []string{"trigger", "trigger", "trigger"},
+		Picks:    []string{"Harmonic Prodigy: Prowess", "Soul-Scar Mage: Prowess", "Soul-Scar Mage: Prowess"},
+		PickRefs: []string{"p0:Harmonic Prodigy", "p0:Soul-Scar Mage", "p0:Soul-Scar Mage"}}
+	if !triggerOrderNamesDistinct(d) {
+		t.Fatalf("precondition: %v collapses to distinct source names", d.PickRefs)
+	}
+	got := XAnswers([]rules.OracleDecision{d}, 2, nil)
+	want := [][]XAnswer{
+		nil,
+		{{0, "choice", "Harmonic Prodigy"}, {0, "choice", "Soul-Scar Mage"}},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("XAnswers = %#v, want %#v (order the distinct sources by name)", got, want)
+	}
+}
+
+// TestTriggerOrderIdenticalTextOnDistinctObjectsKeepsTextForm pins the other
+// side of the interchangeable-group rule: Bartz and Boko plus three distinct
+// Lifecreed Duo objects share one rule text, so a rule-text key would match
+// the first object for every pick and XMage would order the stack itself. The
+// keys cannot tell the picks apart (xmageTriggerOrderKeys returns ok=false),
+// so the span keeps the inert verbatim text form, one answer per pick. The
+// FIN level-B verdict pins the replayed result; this pins the routing.
+func TestTriggerOrderIdenticalTextOnDistinctObjectsKeepsTextForm(t *testing.T) {
+	life := "Whenever another creature you control enters, you gain 1 life."
+	bartz := "When CARDNAME enters, each other Bird you control deals damage equal to its power to target creature an opponent controls."
+	d := rules.OracleDecision{Step: 1, Seat: 0, Kind: "order", GorgeKind: "trigger_order",
+		Options: 4, Min: 4, Max: 4, PickIdx: []int{0, 1, 2, 3}, PickKinds: []string{"trigger", "trigger", "trigger", "trigger"},
+		Picks: []string{
+			"Lifecreed Duo: " + life, "Lifecreed Duo: " + life, "Lifecreed Duo: " + life,
+			"Bartz and Boko: " + bartz,
+		},
+		PickRefs: []string{"p0:Lifecreed Duo", "p0:Lifecreed Duo#2", "p0:Lifecreed Duo#3", "p0:Bartz and Boko"}}
+	if triggerOrderNamesDistinct(d) {
+		t.Fatalf("precondition: %v still names the repeated source", d.PickRefs)
+	}
+	if keys, ok := xmageTriggerOrderKeys(d); ok {
+		t.Fatalf("precondition: identical text on distinct refs keyed as %q", keys)
+	}
+	got := XAnswers([]rules.OracleDecision{d}, 2, nil)
+	want := [][]XAnswer{
+		nil,
+		{{0, "choice", life}, {0, "choice", life}, {0, "choice", life}, {0, "choice", bartz}},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("XAnswers = %#v, want %#v (unkeyable repeats keep the verbatim text form)", got, want)
+	}
+}
+
 // TestTriggerOrderDistinctSourceNamesSource is the sibling precondition: the
 // same decision with DISTINCT sources still names each source (the Adrenaline
 // Jockey fix). The two decisions differ only in PickRefs, so a regression that

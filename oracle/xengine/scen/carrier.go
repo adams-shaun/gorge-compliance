@@ -164,7 +164,16 @@ type filterAlt struct {
 	// token is 1 when the alternative requires a token, -1 when it requires a
 	// non-token card (a carrier is a card), 0 when it does not say.
 	token int
-	known bool
+	// tapped is 1 when the alternative requires a tapped permanent, -1 when it
+	// requires an untapped one, 0 when it says nothing. Tapped is the state of
+	// a permanent on the battlefield, not a property of a face, so only a
+	// reader that knows the placed object's state enables it.
+	tapped int
+	known  bool
+	// history is the first game-history property ("wasDealtDamageThisTurn")
+	// the alternative carries: the engine reads it, and nothing has happened
+	// yet at the start's step, so no placed object can meet it.
+	history string
 	// counters are the counters every object the alternative matches must
 	// carry ("counters_GE1_P1P1"): a gate the start meets by placing them.
 	counters []counterGate
@@ -205,8 +214,18 @@ func parseCounterGate(s string) (counterGate, bool) {
 }
 
 // matches is test plus the token requirement: a token maker's token passes
-// isToken true, every placed card passes false.
+// isToken true, every placed card passes false. A tapped/untapped requirement
+// is battlefield state a face alone cannot answer, so it does not match here;
+// matchesState is for a caller that has placed the object.
 func (a filterAlt) matches(f *cards.Face, isToken bool) bool {
+	return a.matchesState(f, isToken, false) && a.tapped == 0
+}
+
+// matchesState is matches with the placed object's tapped state.
+func (a filterAlt) matchesState(f *cards.Face, isToken, tapped bool) bool {
+	if a.tapped > 0 && !tapped || a.tapped < 0 && tapped {
+		return false
+	}
 	return (a.token <= 0 || isToken) && (a.token >= 0 || !isToken) && a.test(f)
 }
 
@@ -262,6 +281,13 @@ func compare(prop string) (stat string, test func(int) bool, ok bool) {
 	return "", nil, false
 }
 
+// historyProp reports whether a filter property words a this-turn event
+// ("wasDealtDamageThisTurn", "dealtDamageToYouThisTurn", "blockedThisTurn"):
+// the start's step is turn 1's precombat main with nothing yet happened, so
+// the engine's reading of it is false for every object. ThisTurnEntered, a
+// prefix, is different (a placed permanent may count) and is not one.
+func historyProp(p string) bool { return strings.HasSuffix(p, "ThisTurn") }
+
 // typeWord reports whether w reads as a type word (Creature, Dragon, Legendary):
 // capitalised letters and hyphens only.
 func typeWord(w string) bool {
@@ -277,17 +303,23 @@ func typeWord(w string) bool {
 }
 
 // parseFilter reads a ValidCard filter into its alternatives. A counter gate
-// ("counters_GE1_P1P1") and a library-top marker ("TopLibrary") are not
-// understood here: a caller that places no counters and no card on top of the
-// library would pick a carrier that does not meet the filter, so the
-// alternative stays unknown. The static start, which does both, reads the
-// filter with parseFilterStatic.
-func parseFilter(s string) []filterAlt { return parseFilterCounters(s, false, false) }
+// ("counters_GE1_P1P1"), a library-top marker ("TopLibrary") and a battlefield
+// state ("tapped"/"untapped") are not understood here: a caller that places no
+// counters, no card on top of the library and no permanent of known state
+// would pick a carrier that does not meet the filter, so the alternative stays
+// unknown. The static start reads the first two with parseFilterStatic, and a
+// focus target the start places reads its state with parseFilterPlaced.
+func parseFilter(s string) []filterAlt { return parseFilterCounters(s, false, false, false) }
 
 // parseFilterStatic is parseFilter for the static start: it places counters and
 // may put the affected card on top of the library, so both markers are
 // understood.
-func parseFilterStatic(s string) []filterAlt { return parseFilterCounters(s, true, true) }
+func parseFilterStatic(s string) []filterAlt { return parseFilterCounters(s, true, true, false) }
+
+// parseFilterPlaced is parseFilter for a target the start places on the
+// battlefield: whether the placed permanent is tapped is then known from
+// StartSeat.Tapped, so the property is read rather than left unknown.
+func parseFilterPlaced(s string) []filterAlt { return parseFilterCounters(s, false, false, true) }
 
 // typeWordAny is a filter test any of the given type words (or creature
 // types) satisfies.
@@ -331,7 +363,7 @@ func pinMatches(p string) bool {
 	return len(effects.UnknownPredicates("Card."+p)) == 0
 }
 
-func parseFilterCounters(s string, countersOK, topLibraryOK bool) []filterAlt {
+func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []filterAlt {
 	var out []filterAlt
 	for _, raw := range strings.Split(s, ",") {
 		raw = strings.TrimSpace(raw)
@@ -369,6 +401,20 @@ func parseFilterCounters(s string, countersOK, topLibraryOK bool) []filterAlt {
 					continue
 				case "inZoneBattlefield":
 					continue // a placed carrier is on the battlefield
+				case "tapped":
+					if !tappedOK {
+						a.known = false
+					} else {
+						a.tapped = 1
+					}
+					continue
+				case "untapped":
+					if !tappedOK {
+						a.known = false
+					} else {
+						a.tapped = -1
+					}
+					continue
 				case "TopLibrary":
 					// only the static start places the affected card there
 					if !topLibraryOK {
@@ -451,6 +497,9 @@ func parseFilterCounters(s string, countersOK, topLibraryOK bool) []filterAlt {
 					continue
 				}
 				a.known = false
+				if a.history == "" && historyProp(p) {
+					a.history = p
+				}
 			}
 		}
 		a.test = func(f *cards.Face) bool {
@@ -916,22 +965,16 @@ func baitTgtFor(reg *cards.Registry, b *certdeck.Builder, card string, sa *cards
 			continue
 		}
 		n := parseAlt(strings.ToLower(raw))
-		if n.combat || !permTypes[n.typ] {
+		if n.combat || !permanentTarget(reg, raw) {
 			continue
 		}
-		known := true
-		for _, a := range parseFilter(raw) {
-			if !a.known {
-				known = false
-				break
-			}
-		}
-		if !known {
+		alts := parseFilterPlaced(raw)
+		if len(alts) != 1 || !alts[0].known {
 			continue
 		}
-		test := restriction(raw)
+		a := alts[0]
 		pick := pickCarrier(reg, b, card, func(f *cards.Face) bool {
-			return faceIs(n, f) && FieldBlock(f) == "" && !deadOnArrival(f) && (test == nil || test(f))
+			return faceIs(n, f) && FieldBlock(f) == "" && !deadOnArrival(f) && a.matchesState(f, false, false)
 		})
 		if pick != "" {
 			// n.side -1 is "the opponent's" from the bait's own view: the

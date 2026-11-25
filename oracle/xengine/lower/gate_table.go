@@ -122,7 +122,7 @@ var playerTable = map[string]entry{
 	"AttackedPlaneswalkersThisTurn": isRefused("this-turn attack record setup cannot restate"),
 	"Pool":                          isRefused("a non-empty mana pool; setup can only seed one after the cut"),
 	"RestrictedMana":                isRefused("restricted mana in the pool"),
-	"Counters":                      isRefused("player counters (poison, energy, experience) are not placeable"),
+	"Counters":                      isPlaced("player counters (poison, energy, experience) ride setup player_counters"),
 	"LastUpkeepTurn":                isIgnored("stamp read by the once-per-upkeep guards at the upkeep step, which is over"),
 	"Snow":                          isRefused("mana-pool bookkeeping"),
 	"TypedMana":                     isRefused("mana-pool bookkeeping"),
