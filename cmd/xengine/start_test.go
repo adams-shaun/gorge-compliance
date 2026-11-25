@@ -848,7 +848,49 @@ func TestStartCombatTriggerIsExercised(t *testing.T) {
 		{"Aether Membrane", "f0/t0", true},                           // AttackerBlocked, the card blocks
 		{"Pious Warrior", "f0/t0", true},                             // DamageDoneOnce, the card is dealt damage
 		{"Akki Lavarunner // Tok-Tok, Volcano Born", "f0/t0", false}, // DamageDone, unblocked
+		{"Vulture, Feathered Fiend", "f0/t0", false},                 // DamageDoneOnce: a flier with power deals it
+		{"Mu Yanling, Wind Rider", "f0/t1", false},                   // DamageDoneOnce, a flier beside the card
 	} {
 		t.Run(c.card, func(t *testing.T) { startCombatIsExercised(t, c.card, c.key, c.block) })
+	}
+}
+
+// TestStartCombatLineNeverDeclaredIsRefused: a combat start has no focus play
+// (kind ""), so its scripted combat is the focus action: a line whose attacker
+// is never offered (a defender cannot attack, CR 702.3b) exercises nothing of
+// the key and is refused as start-not-exercised, not written.
+func TestStartCombatLineNeverDeclaredIsRefused(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	res, err := scen.Generate(reg, b, "Acolyte of the Inferno", "f0/t0", scen.Options{Prefer: "start"})
+	if err != nil || res.Start == nil || res.Start.Focus == nil {
+		t.Fatalf("scen: %v %q", err, res.Reason)
+	}
+	f := res.Start
+	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, "Wall of Stone")
+	f.Focus.Attack = "Wall of Stone"
+	raw, err := f.Marshal()
+	if err != nil {
+		t.Fatal(err)
+	}
+	in, out := t.TempDir(), t.TempDir()
+	if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+		t.Fatal(err)
+	}
+	refused := false
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		var r lowerRow
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		refused = refused || slices.Contains(r.Reasons, reasonStartNotExercised)
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if !refused {
+		t.Errorf("a start whose attacker never attacks was not refused as %s", reasonStartNotExercised)
 	}
 }

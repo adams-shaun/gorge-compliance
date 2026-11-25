@@ -444,6 +444,12 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	if fam != "static" && fam != "combat" {
 		if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
 			if err != nil {
+				if trig != nil && combatTrigModes[trig.Mode] {
+					// a card certdeck cannot build (an unsupported script, a
+					// name XMage spells differently): the combat key keeps the
+					// named refusal it had before it had a start
+					return refuse("no-generator:trigger:" + trig.Mode + ":unsupported")
+				}
 				return Result{}, err
 			}
 			return refuse(why)
