@@ -2031,6 +2031,17 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					break
 				}
 			}
+			if len(d.Picks) == 1 && pickKind(d, 0) == "paylife" {
+				// "Pay any amount of life" (Phyrexian Processor): XMage asks
+				// controller.getAmount(0, life, ...), and TestPlayer.getAmount
+				// reads only an "X=<n>" choice, so the engine's "<n> life"
+				// label is forwarded as the amount. Keyed on the engine's
+				// paylife option kind (etbPayLifeOptions), not the label text.
+				if n, err := strconv.Atoi(strings.TrimSuffix(d.Picks[0], " life")); err == nil {
+					as = append(as, XAnswer{d.Seat, "choice", "X=" + strconv.Itoa(n)})
+					break
+				}
+			}
 			if yn, ok := yesNo(d); ok {
 				as = append(as, XAnswer{d.Seat, "choice", yn})
 				break
