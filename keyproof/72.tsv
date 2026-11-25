@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 723398f2-eaf2-4615-9078-418b9f540a33	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 723398f2-eaf2-4615-9078-418b9f540a33	f0/a1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72350461-8231-4737-a57f-f20fb5d179a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72350461-8231-4737-a57f-f20fb5d179a3	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+72350461-8231-4737-a57f-f20fb5d179a3	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 723669e0-4a04-45ec-8c76-b1a369aa6892	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:budding-insurgent:cast:s1,f:xs:XP:budding-insurgent:cast:s1	-	-	-	fb9d3088f0bf	-	b948870186dc	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 723669e0-4a04-45ec-8c76-b1a369aa6892	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:budding-insurgent:combat0.attack:s1,f:xs:XP:budding-insurgent:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	b948870186dc	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 723669e0-4a04-45ec-8c76-b1a369aa6892	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:budding-insurgent:combat0.block:s1,f:xs:XP:budding-insurgent:combat0.block:s1	-	-	-	fb9d3088f0bf	-	b948870186dc	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -187,7 +187,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 72e1a239-11a7-4dbe-b093-65d395e3ccc9	f0/t3	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-72e2b883-a284-4ab6-8174-1ca289141a49	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+72e2b883-a284-4ab6-8174-1ca289141a49	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 72e61b73-980c-4ee4-b529-a367897620ec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shinen-of-fear-s-chill:cast:s1,f:xs:XP:shinen-of-fear-s-chill:cast:s1	-	-	-	64a08ba7d913	-	8b973a392acf	-	-	2026-11-24	xproof
 72e61b73-980c-4ee4-b529-a367897620ec	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:shinen-of-fear-s-chill:f0a0:s1,f:xs:XP:shinen-of-fear-s-chill:f0a0:s1	-	-	-	23c4009444b0	-	8b973a392acf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 72e6cc74-0574-4421-a6b8-97d180484950	cast	cast	agreed	-	F	start	2	0	f:xs:XP:arcbound-fiend:f0t0:s1	-	-	-	3aa6ded33acb	-	d7ce1f99e584	-	-	2026-11-25	xproof

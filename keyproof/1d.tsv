@@ -90,10 +90,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d789ccd-8192-41b1-a5bb-1e2174657698	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d789ccd-8192-41b1-a5bb-1e2174657698	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d79b7a8-2b4c-4893-afdb-879c74957288	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1d79b7a8-2b4c-4893-afdb-879c74957288	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+1d79b7a8-2b4c-4893-afdb-879c74957288	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 1d7a4e9c-b3c9-421e-b5f4-82d51d7d5125	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temporal-spring:cast:s1,f:xs:XP:temporal-spring:cast:s1	-	-	-	fc71ca68c5ac	-	fb6588866116	-	-	2026-11-24	xproof
 1d7d340d-fe6f-4314-97ba-e0bf36a4ef6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greenhilt-trainee:cast:s1,f:xs:XP:greenhilt-trainee:cast:s1	-	-	-	d864b561c9cb	-	ec513a284500	-	-	2026-11-24	xproof
-1d7d340d-fe6f-4314-97ba-e0bf36a4ef6c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+1d7d340d-fe6f-4314-97ba-e0bf36a4ef6c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1d7d9404-cad6-4c1a-bd47-7a31ebb2791c	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -139,8 +139,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1da438f3-db1c-4713-a60c-e078f31d809c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:izzet-chronarch:cast:s1,f:xs:XP:izzet-chronarch:cast:s1	-	-	-	77494c1ce129	-	b34b1463fe29	-	-	2026-11-24	xproof
 1da438f3-db1c-4713-a60c-e078f31d809c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:izzet-chronarch:cast:s1,f:xs:XP:izzet-chronarch:cast:s1	-	-	-	77494c1ce129	-	b34b1463fe29	-	-	2026-11-24	xproof
 1daba4f6-2a7d-426a-97d1-0298a7100c45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1daba4f6-2a7d-426a-97d1-0298a7100c45	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-1daba4f6-2a7d-426a-97d1-0298a7100c45	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1daba4f6-2a7d-426a-97d1-0298a7100c45	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+1daba4f6-2a7d-426a-97d1-0298a7100c45	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:decoction-module:f0t0:s1,f:xs:XP:decoction-module:f0t0:s1	-	-	-	fb9d3088f0bf	-	f0b1e9a1acd3	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 1dabfade-79e5-44e2-afa6-b20498c6bb8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dae6f39-2cbd-485c-b190-017a26401fd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zealous-conscripts:f0t0:s1,f:xs:XP:zealous-conscripts:f0t0:s1	-	-	-	d864b561c9cb	-	37afe55d9fd5	-	-	2026-11-24	xproof
 1dae6f39-2cbd-485c-b190-017a26401fd4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:zealous-conscripts:f0t0:s1,f:xs:XP:zealous-conscripts:f0t0:s1	-	-	-	d864b561c9cb	-	37afe55d9fd5	-	-	2026-11-24	xproof

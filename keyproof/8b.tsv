@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b2514e5-4124-4f6c-b6b7-24c0ab3d3971	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Erica Ortegas, Plucky Pilot	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 8b2514e5-4124-4f6c-b6b7-24c0ab3d3971	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 8b25f353-0798-4a03-a928-6a701a919468	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b25f353-0798-4a03-a928-6a701a919468	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+8b25f353-0798-4a03-a928-6a701a919468	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:shadowspear:f0a1:s1,f:xs:XP:shadowspear:f0a1:s1	-	-	-	ae86f6029288	-	e6b4e648fff4	-	-	2026-11-24	xproof
@@ -117,7 +117,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b84fec5-617c-4088-8250-2ba1f1f9479a	land	play-land	agreed	-	X	scen	1	0	Balamb Garden, SeeD Academy/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b85a5d4-1cc3-412d-99e7-778af68d79a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b85a5d4-1cc3-412d-99e7-778af68d79a5	f0/a0	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:durable-handicraft:f0a0:s1,f:xs:XP:durable-handicraft:f0a0:s1	-	-	-	d864b561c9cb	-	857dabc2f96e	-	-	2026-11-24	xproof
-8b85a5d4-1cc3-412d-99e7-778af68d79a5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8b85a5d4-1cc3-412d-99e7-778af68d79a5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:durable-handicraft:f0t0:s1,f:xs:XP:durable-handicraft:f0t0:s1	-	-	-	fb9d3088f0bf	-	857dabc2f96e	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 8b89c6f1-8c9e-43ef-ad6b-11424de090e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tajuru-warcaller:f0t0:s1,f:xs:XP:tajuru-warcaller:f0t0:s1	-	-	-	d864b561c9cb	-	a2b55157f000	-	-	2026-11-24	xproof
 8b89c6f1-8c9e-43ef-ad6b-11424de090e4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tajuru-warcaller:f0t0:s1,f:xs:XP:tajuru-warcaller:f0t0:s1	-	-	-	d864b561c9cb	-	a2b55157f000	-	-	2026-11-24	xproof
 8b8c0285-424f-4a82-bfb6-17752cfa71dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:izzet-keyrune:cast:s1,f:xs:XP:izzet-keyrune:cast:s1	-	-	-	d864b561c9cb	-	340a4c26f5ac	-	-	2026-11-24	xproof

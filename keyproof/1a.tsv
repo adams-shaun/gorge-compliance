@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a5f1670-3e71-4379-90ee-a883c8dc6070	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:possessed-aven:cast:s1,f:xs:XP:possessed-aven:cast:s1	-	-	-	fc71ca68c5ac	-	abd5008bd517	-	-	2026-11-24	xproof
 1a60dc0f-e387-4d28-8ff0-c3f1883d0c5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a60dc0f-e387-4d28-8ff0-c3f1883d0c5d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:hamlet-captain:f0t0:s1,f:xs:XP:hamlet-captain:f0t0:s1	-	-	-	d864b561c9cb	-	f5b06c8101d2	-	-	2026-11-24	xproof
-1a60dc0f-e387-4d28-8ff0-c3f1883d0c5d	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+1a60dc0f-e387-4d28-8ff0-c3f1883d0c5d	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 1a61929e-14bd-4f21-b173-00818d49743d	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 1a62ba93-153c-4bed-9f6a-ff914df360c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a62ba93-153c-4bed-9f6a-ff914df360c1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1adb733c-d18a-4019-9229-0ad701a15b1a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kor-aeronaut:f0t0:s1,f:xs:XP:kor-aeronaut:f0t0:s1	-	-	-	8a1b1a193ec0	-	67a2736ae4ae	-	-	2026-11-24	xproof
 1adc4691-20cf-4f55-af85-3132fe1ff2a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1adcc4a8-b2dd-4d9a-bded-188b81c84a10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grim-roustabout:cast:s1,f:xs:XP:grim-roustabout:cast:s1	-	-	-	fb9d3088f0bf	-	a68f54faa63b	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-1adcc4a8-b2dd-4d9a-bded-188b81c84a10	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+1adcc4a8-b2dd-4d9a-bded-188b81c84a10	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 1adcf587-9035-4299-a2bd-62f805fdd897	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:highborn-vampire:cast:s1,f:xs:XP:highborn-vampire:cast:s1	-	-	-	23b491658465	-	0cfa54e31e7f	-	-	2026-11-24	xproof
 1ae339fd-8e64-4e3a-8e27-e4993932ba62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gnarlback-rhino:cast:s1,f:xs:XP:gnarlback-rhino:cast:s1	-	-	-	23b491658465	-	020b3f18a49e	-	-	2026-11-24	xproof
 1ae339fd-8e64-4e3a-8e27-e4993932ba62	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gnarlback-rhino:combat0.attack:s1,f:xs:XP:gnarlback-rhino:combat0.attack:s1	-	-	-	3aa6ded33acb	-	020b3f18a49e	-	-	2026-11-25	xproof
