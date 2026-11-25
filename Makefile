@@ -714,7 +714,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # e76652fae3 = c5ab80906 (movectr + cantprevent; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
 # a2201414482 = oracle/fpin-1125-room-alt: 22d31c3e9d0 (room_alt + attach_optional + K'rrik; above) joined with e76652fae3 (movectr + cantprevent + K'rrik; above); driver-only.
 # 793a015fcf = oracle/fpin-1125-join3: a2201414482 (above) joined with 1947f2b322 (ScenarioReplay --serve warm worker + FORGE_ORACLE_AI_TIMEOUT_S; additive, unset keeps the one-shot run); driver-only, die-roll code unchanged.
-FORGE_ORACLE_REF ?= 793a015fcf6e14923245669ec9a2f3469aa53931
+# d6e26fd04306 = 793a015fcf + the checkpoint snapshot's "offered" (xproof cluster xpt-a64b83f5: every compare:[offered] item diverged at setup
+# because the driver wrote no offered field): SnapshotWriter writes the priority holder's playable abilities, from the listing the bridge
+# answers priority from plus mana abilities as activations, when the item's compare names offered; sources by RefTable.refOf (gorge's objRef).
+# scripts/forge-oracle-test-setup-offered.sh (make forge-driver-tests) replays the Muldrotha find (a graveyard Plains offered as a play) and runs
+# RefTableTest.refOfNamesAnObjectAsGorgeSnapshotsIt; it fails on 793a015fcf. Driver-only; cardsfolder/tokenscripts unchanged.
+# Fork branch fix/xp-forge-driver-setup-offered.
+FORGE_ORACLE_REF ?= d6e26fd04306b7800a532f38cbd2f16a8e715a6a
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
