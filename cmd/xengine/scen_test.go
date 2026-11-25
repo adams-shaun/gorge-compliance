@@ -64,6 +64,12 @@ func TestScenCLI(t *testing.T) {
 }
 
 func TestScenCensusFDN(t *testing.T) {
+	// The census walks every FDN key and is one of the package's two long
+	// tests; it overlaps with TestCertdeckNeeds so the whole cmd/xengine
+	// package stays inside the touched-package gate's 2m timeout. It shares
+	// only the read-only corpus registry: its own registry, builder and temp
+	// output dir are per-test.
+	t.Parallel()
 	reg := testutil.CorpusRegistry(t)
 	out := t.TempDir()
 	if err := runScen(scenArgs("-census", "-set", "FDN", "-out", out)); err != nil {
