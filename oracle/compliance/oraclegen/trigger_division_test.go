@@ -99,3 +99,65 @@ func TestDividedTriggerForgeViewUnchanged(t *testing.T) {
 		t.Fatalf("Forge view changed:\n got %+v\nwant %+v", got, res.Decisions)
 	}
 }
+
+// twoTriggerRun is Magmatic Core's divided trigger on the stack beside a second
+// trigger (Bogardan Hellkite's, a literal divide, as the second divided shape;
+// or any other trigger) in the same step, with a plain ask answered against
+// it. The log does not name which trigger an ask belongs to, so neither ask may
+// borrow the Core's total.
+func twoTriggerRun(t *testing.T, other rules.OracleSnapStack) []string {
+	t.Helper()
+	reg := twinBoltRegistry(t)
+	sc := Scenario{Steps: []Step{{Op: "pass_to", Seat: 0}, {Op: "resolve", Seat: 0}}}
+	ask := rules.OracleDecision{Step: 0, Seat: 1, Kind: "target", Via: "answer", GorgeKind: "target",
+		Options: 2, Min: 1, Max: 1, PickRefs: []string{"p0:Grizzly Bears"}, Picks: []string{"Grizzly Bears"}, PickIdx: []int{0}}
+	core := rules.OracleSnapPerm{Ref: "p0:Magmatic Core", Name: "Magmatic Core", Counters: map[string]int32{"AGE": 3}}
+	res := rules.OracleResult{Decisions: []rules.OracleDecision{ask}, Snapshots: []rules.OracleSnapshot{
+		{},
+		{Permanents: []rules.OracleSnapPerm{core}, Stack: []rules.OracleSnapStack{
+			{Kind: "ability", Source: "p0:Magmatic Core", Trigger: "0"}, other}},
+		{Permanents: []rules.OracleSnapPerm{core}},
+	}}
+	var got []string
+	for _, step := range XAnswersForScenario(reg, res, sc, nil, nil) {
+		for _, a := range step {
+			if a.Kind == "target" {
+				got = append(got, a.Value)
+			}
+		}
+	}
+	return got
+}
+
+// A divided trigger beside another trigger's ordinary target ask: the ordinary
+// ask stays bare (a "^X=<n>" suffix on it is a second target name to XMage's
+// chooseTarget), whether the other trigger is itself divided or not.
+func TestDividedTriggerBesideAnotherTriggerLeavesAskBare(t *testing.T) {
+	for name, other := range map[string]rules.OracleSnapStack{
+		"ordinary trigger": {Kind: "ability", Source: "p0:Prodigal Pyromancer", Trigger: "0"},
+		"divided trigger":  {Kind: "ability", Source: "p0:Magmatic Core", Trigger: "0"},
+	} {
+		if got, want := twoTriggerRun(t, other), []string{"Grizzly Bears"}; !reflect.DeepEqual(got, want) {
+			t.Errorf("%s: got %v want %v", name, got, want)
+		}
+	}
+}
+
+// An ask posed on a cast step is the cast's own root ask: a divided trigger on
+// the stack does not mark it.
+func TestDividedTriggerDoesNotMarkCastStepAsk(t *testing.T) {
+	reg := twinBoltRegistry(t)
+	sc := Scenario{Steps: []Step{{Op: "cast", Seat: 0, Card: "p0:Twin Bolt"}}}
+	ask := rules.OracleDecision{Step: 0, Seat: 0, Kind: "target", Via: "target", GorgeKind: "target",
+		Options: 2, Min: 1, Max: 1, PickRefs: []string{"p1:Grizzly Bears"}, Picks: []string{"Grizzly Bears"}, PickIdx: []int{0}}
+	core := rules.OracleSnapPerm{Ref: "p0:Magmatic Core", Name: "Magmatic Core", Counters: map[string]int32{"AGE": 3}}
+	res := rules.OracleResult{Decisions: []rules.OracleDecision{ask}, Snapshots: []rules.OracleSnapshot{
+		{}, {Permanents: []rules.OracleSnapPerm{core}, Stack: []rules.OracleSnapStack{
+			{Kind: "ability", Source: "p0:Magmatic Core", Trigger: "0"}}},
+	}}
+	for _, d := range markPlacedTriggerDivisions(reg, sc, res, res.Decisions) {
+		if d.Divided != 0 {
+			t.Fatalf("cast-step ask marked: %+v", d)
+		}
+	}
+}

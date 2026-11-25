@@ -27,8 +27,10 @@ import (
 // snapshot at the checkpoint after the step is read through the SVar's
 // Count$CardCounters.<TYPE> / Number$<n> form. Any other lone-target form
 // stays unmarked (its bare answer is what XMage already rejects, so nothing
-// regresses), and the cast and activation asks (their own routes) are left
-// alone. Only decisions the Forge contract never sees are touched: the Forge
+// regresses), and every ask posed on a cast or activate step is left alone:
+// the cast's own root ask is told apart from a trigger's only by its step, so a
+// trigger whose ask lands on such a step (an ETB trigger of the permanent just
+// cast) stays unmarked rather than risk marking the cast's ask. Only decisions the Forge contract never sees are touched: the Forge
 // callers pass xmage false and never reach this.
 func markPlacedTriggerDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult, ds []rules.OracleDecision) []rules.OracleDecision {
 	if reg == nil {
@@ -63,12 +65,25 @@ func markPlacedTriggerDivisions(reg *cards.Registry, sc Scenario, res rules.Orac
 
 // placedTriggerTotal is the divided total of the trigger whose root target ask
 // is ds[i], read against snap (the checkpoint after the ask's step, where the
-// trigger sits on the stack). ok is false unless exactly one stack ability is
-// a divided targeted trigger, so a second trigger cannot lend its total.
+// trigger sits on the stack). ok is false unless exactly one triggered ability
+// is on the stack and it is a divided targeted trigger: the decision log does
+// not name the source of a root ask, so with a second trigger (divided or not)
+// beside it the ask could be either one's, and a divided total must never be
+// lent to another trigger's ordinary target (XMage's chooseTarget reads a
+// "^X=<n>" segment as a second target name).
 func placedTriggerTotal(reg *cards.Registry, snap rules.OracleSnapshot, ds []rules.OracleDecision, i int) (int, bool) {
 	var sa *cards.SA
 	var face *cards.Face
 	var src string
+	triggers := 0
+	for _, o := range snap.Stack {
+		if o.Kind == "ability" && o.Trigger != "" {
+			triggers++
+		}
+	}
+	if triggers != 1 {
+		return 0, false
+	}
 	for _, o := range snap.Stack {
 		if o.Kind != "ability" || o.Trigger == "" {
 			continue
