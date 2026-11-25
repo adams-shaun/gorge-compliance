@@ -664,7 +664,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # as before. LoneForcedCostPickTest (fixtures/gitrog: the f0a0_s1 find) fails before it with the exact miss;
 # scripts/forge-oracle-test-lone-forced-cost-pick.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder
 # and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-lone-forced-cost-pick.
-FORGE_ORACLE_REF ?= e99e48e2b50f66a049d438fd96790293c89b9672
+# 85e4e85fde = 2ece06813a merged with 65d8060f39ba. 2ece06813a (on 1da9dc5c96c) is the dual-typed land colour (xproof cluster
+# xpt-079c8ffe, 102 items: shock, battle, cycling and surveil duals): a land with two basic land types (CR 305.6) has two
+# intrinsic Secondary$ mana abilities, gorge's choice between them is dropped from the request (the step names the ability by
+# index), and StepMachine.abilityFor's basic-land tier kept both and threw "ability identity ... candidates: Mana T; Mana T".
+# forge-export now sends "intrinsic: basic land mana <C>" for such a land and the tier filters by that colour; a bare line is
+# unchanged. scripts/forge-oracle-test-dual-land-colour.sh (make forge-driver-tests) replays Underground Sea's U and B abilities;
+# it fails at 1da9dc5c96c and 65d8060f39ba with the exact miss and passes here. Driver-only; die-roll code, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-dual-colour-on-fpin-65d8.
+# 34f0585c97 = oracle/fpin-1125: 85e4e85fde (dual-land colour; above) joined with e99e48e2b5 (Gitrog lone forced pick; above); driver-only.
+FORGE_ORACLE_REF ?= 34f0585c97b5ea0e9bde19c20b6122473c24deee
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

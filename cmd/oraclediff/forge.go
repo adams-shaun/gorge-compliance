@@ -801,10 +801,38 @@ func forgeAbilityLines(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 		}
 		if f := forgeAbilityFace(reg, it, st, g, i); f != nil {
 			line, _ := abilityLine(f, *st.AbilityIndex)
-			lines[strconv.Itoa(i)] = line
+			lines[strconv.Itoa(i)] = intrinsicColourLine(f, *st.AbilityIndex, line)
 		}
 	}
 	return lines
+}
+
+// intrinsicColourLine names the colour of a land's intrinsic mana ability when
+// the face carries more than one (a land with two basic land types, CR 305.6:
+// Underground Sea, Commercial District). Each of them has the same line, and
+// gorge's choice among them is dropped from the request because the step names
+// the ability by index, so the colour is the only thing that tells the driver
+// which of Forge's two "Mana T" abilities it is: "intrinsic: basic land mana
+// U". A face with one intrinsic ability (Plains) keeps the bare line, so its
+// request bytes do not move.
+func intrinsicColourLine(f *cards.Face, k int, line string) string {
+	if line != oraclegen.IntrinsicManaLine {
+		return line
+	}
+	n := 0
+	for _, sa := range f.Abilities {
+		if sa != nil && sa.Line == oraclegen.IntrinsicManaLine {
+			n++
+		}
+	}
+	if n < 2 {
+		return line
+	}
+	produced := f.Abilities[k].Params["Produced"]
+	if len(produced) != 1 || !strings.Contains("WUBRG", produced) {
+		return line
+	}
+	return line + " " + produced
 }
 
 // forgeAbilityFace is the face whose Abilities[ability_index] step i names,
