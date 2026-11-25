@@ -451,8 +451,10 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 			}
 			// The item names the card it starts and (in its id) the key it was
 			// written for, so a static or combat key -- which no tape entry
-			// names -- is credited too (credit).
-			l.Item.Card = f.Card
+			// names -- is credited too (credit). Card is the front-face spelling
+			// startDeck dealt, not the file's (a joined "A // B" start would
+			// otherwise credit a second spelling of the same key).
+			l.Item.Card = canonicalCard(reg, f.Card)
 			for u, n := range credit(reg, l.Item, tp, 0, len(tp.Entries)-1, true) {
 				exercised.Add(u.Card, u.Key, cov.Counts{Exercised: n})
 			}

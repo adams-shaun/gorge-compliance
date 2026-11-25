@@ -175,15 +175,16 @@ func (p *playKeys) stepKeys(f adjudicate.Finding) (adjudicate.SigInput, []classi
 	_, lhi := classify.LoweredRange(l.lowered(f.Item), tp)
 	hi = min(hi, lhi)
 	uses := classify.Sorted(classify.Uses(p.reg, tp, lo, hi, step <= 0))
+	// The item's own key (its id) is credited too: a static or combat item's
+	// divergence would otherwise name no key at all. A tape key still names the
+	// signature first; describe sees the declared key when it is the only one,
+	// so a static/combat family is named instead of "none".
+	if u, ok := declaredKey(p.reg, f.Item); ok && !slices.Contains(uses, u) {
+		uses = append(uses, u)
+	}
 	k := adjudicate.NoKey
 	if len(uses) > 0 {
 		k = p.describe(uses[0])
-	}
-	// The item's own key (its id) is credited too: a static or combat item's
-	// divergence would otherwise name no key at all. The first key above still
-	// names the signature, so appending leaves an existing signature alone.
-	if u, ok := declaredKey(f.Item); ok && !slices.Contains(uses, u) {
-		uses = append(uses, u)
 	}
 	return adjudicate.InputOf(f, k, op), uses, nil
 }
