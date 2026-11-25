@@ -467,6 +467,62 @@ func TestStartRefusesUnofferedFocus(t *testing.T) {
 	}
 }
 
+// TestStartRoomDoor: a Room placed by setup enters with neither unlocked
+// designation (CR 709.5d), so it has no name and no door's rules text is live
+// (CR 709.5). A start that places a Room and focuses its front-door static
+// would exercise nothing: the CR 709.5e unlock special action is not a step
+// the three runners replay. play refuses it by name instead of writing an
+// item that credits a static that never applied. Both a front-face spelling
+// (Greenhouse) and a joined one (Solitary Study // Endless Corridor) are
+// covered, so the check is on the card's Room type, not its spelling.
+func TestStartRoomDoor(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Greenhouse", "static#0.0"},                         // front-door static, Room placed by setup
+		{"Solitary Study // Endless Corridor", "static#0.0"}, // a second Room shape, by its joined name
+	} {
+		t.Run(c.card+"-"+c.key, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			in, out := t.TempDir(), t.TempDir()
+			if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+				t.Fatal(err)
+			}
+			items, locked := 0, 0
+			if err := readLines(filepath.Join(out, "items.jsonl"), func([]byte) error { items++; return nil }); err != nil {
+				t.Fatal(err)
+			}
+			if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+				var r lowerRow
+				if err := json.Unmarshal(b, &r); err != nil {
+					return err
+				}
+				if r.Status == statusRefused && len(r.Reasons) == 1 && strings.HasPrefix(r.Reasons[0], reasonStartRoomLocked+":") {
+					locked++
+				}
+				return nil
+			}); err != nil {
+				t.Fatal(err)
+			}
+			if items != 0 || locked != 2 {
+				t.Errorf("items %d %s %d, want no item and 2 refusals %q (start %s)", items, reasonStartRoomLocked, locked, reasonStartRoomLocked, raw)
+			}
+		})
+	}
+}
+
 // TestStartTransformingDFC: a start scen yields for a transforming double-faced
 // card loads in play. scen lists the card on a battlefield, tapped or as a
 // counter bearer by its joined name "A // B" while startDeck deals its front
@@ -1127,6 +1183,36 @@ func TestStartGraveyardTargetIsExercised(t *testing.T) {
 		{"Relearn", "cast"},                // instant or sorcery card from your graveyard
 		{"Scribe of the Mindful", "f0/a0"}, // Instant.YouCtrl,Sorcery.YouCtrl
 		{"Protomatter Powder", "f0/a0"},    // Artifact.YouCtrl
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartFocusTargetIsPlaced: the static target check read a target as met
+// when only the focus card itself met it (Adarkar Valkyrie's "target creature
+// other than CARDNAME"), when its type was not one a hand list placed
+// (Equipment, Vehicle), or when the target was a card in a graveyard a Charm
+// choice names (Aid the Fallen) or TgtZone names (Chandra, Acolyte of Flame).
+// The start placed no such target, the play was never offered, and play refused
+// the start as start-not-exercised. A minimal legal target now goes on the
+// right side or zone.
+func TestStartFocusTargetIsPlaced(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Adarkar Valkyrie", "f0/a0"},             // Creature.Other
+		{"Vizier of Tumbling Sands", "f0/a0"},     // Permanent.Other
+		{"Lwaxana Troi, Charming Guest", "f0/a0"}, // Creature.Other+YouCtrl
+		{"Paragon of Eternal Wilds", "f0/a0"},     // Creature.Green+Other+YouCtrl
+		{"Peacewalker Colossus", "f0/a0"},         // Vehicle.Other+YouCtrl
+		{"Auriok Windwalker", "f0/a0"},            // Equipment.YouCtrl
+		{"Kazuul's Toll Collector", "f0/a0"},      // Equipment.YouCtrl
+		{"Saving Grasp", "cast"},                  // Creature.YouOwn
+		{"Aid the Fallen", "cast"},                // Charm choice: creature card in your graveyard
+		{"Fortuitous Find", "cast"},               // Charm choices: artifact/creature card in your graveyard
+		{"Remember the Fallen", "cast"},           // Charm choices: creature/artifact card in your graveyard
+		{"Reborn Hope", "cast"},                   // Card.MultiColor+YouCtrl in the graveyard
+		{"Chandra, Acolyte of Flame", "f0/a2"},    // TgtZone$ Graveyard
 	} {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
 	}

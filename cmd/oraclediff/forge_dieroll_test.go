@@ -179,7 +179,17 @@ func TestForgeRolledDie(t *testing.T) {
 // 793a015fcf = oracle/fpin-1125-join3: a2201414482 (above) joined with 1947f2b322 (ScenarioReplay --serve warm worker; additive); driver-only, die-roll code unchanged.
 // a8512930733 = 793a015fcf plus the unaffordable UnlessCost$ decline (ScriptedController.payCostToPreventEffect and
 // UnlessCostUnaffordableTest); driver-only, die-roll code unchanged.
-const forgeOracleDieRollRef = "a85129307331b83532ef4f111cda7fc4484efc70"
+// 846c4191e6 = 793a015fcf (above) plus the unpinned order to Hand (StepMachine.keepsForgeOrderWithoutPin only);
+// die-roll code unchanged, ForcedDieRollTest re-run green on it (7 of 7).
+// 15a7c960ab2 = 793a015fcf plus the setup Room locked convention (SetupBuilder only); die-roll code unchanged.
+// d6e26fd043 = 793a015fcf plus the checkpoint snapshot's offered (SnapshotWriter, RefTable.refOf, BridgeController.offer's withMana); die-roll code unchanged,
+// ForcedDieRollTest and ForcedCoinFlipTest re-run green on it.
+// 098e9c802e = oracle/fpin-1125-join5: 846c4191e6 (order to Hand; above) joined with d6e26fd043 (offered; above); die-roll code unchanged.
+// 9cc07f0d340 = oracle/fpin-1125-join4: 15a7c960ab2 (setup Room locked) joined with d6e26fd043 (offered); die-roll code unchanged.
+// 032ce65c73b = oracle/fpin-1125-join-hand-offered-room: 098e9c802e (order to Hand) joined with 9cc07f0d340 (setup Room locked); both already carry d6e26fd043 (offered); die-roll code unchanged.
+// 926004bb5396 = oracle/fpin-1125-join8: 032ce65c73b (order to Hand + setup Room locked + offered) joined with a8512930733
+// (unaffordable UnlessCost$ decline); die-roll code unchanged.
+const forgeOracleDieRollRef = "926004bb5396810595e0b4ac3b447ce4227f938e"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

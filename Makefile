@@ -717,7 +717,28 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # a8512930733 = 793a015fcf plus the unaffordable UnlessCost$ decline (ScriptedController.payCostToPreventEffect notes
 # "unless-pay step N: unaffordable, declined" and returns false; UnlessCostUnaffordableTest covers it and the affordable
 # control that still misses); driver-only, die-roll code unchanged.
-FORGE_ORACLE_REF ?= a85129307331b83532ef4f111cda7fc4484efc70
+# 846c4191e6 = 793a015fcf (above) + StepMachine.keepsForgeOrderWithoutPin keeps Forge's order for an unpinned multi-name
+# "order to Hand": the snapshot sorts a hand's names, so gorge records no order for Wrenn and Seven's -8 returning the
+# planeswalker and seven Forests, and the ask strict-missed with an empty leftover. OrderCardsTest.unpinnedHandOrderKeepsForgeOrder,
+# run by scripts/forge-oracle-test-graveyard-transit-order.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
+# unchanged. Fork branch fix/xp-forge-driver-hand-order.
+# 15a7c960ab2 = 793a015fcf plus the setup Room convention (xproof cluster xpt-e4b207b7, Greenhouse // Rickety Gazebo): CR 709.5d gives a Room that
+# enters without being cast neither unlocked designation, so it has no name (CR 709.5). SetupBuilder.unlockNamedDoor used to unlock the door the
+# setup name named, so Forge's setup read "Greenhouse" where gorge's fieldName and the XMage driver read "". Setup now places the Room locked and
+# the name only binds the card; scripts/forge-oracle-test-room-setup-locked.sh (make forge-driver-tests) pins it. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-room-locked.
+# d6e26fd04306 = 793a015fcf + the checkpoint snapshot's "offered" (xproof cluster xpt-a64b83f5: every compare:[offered] item diverged at setup
+# because the driver wrote no offered field): SnapshotWriter writes the priority holder's playable abilities, from the listing the bridge
+# answers priority from plus mana abilities as activations, when the item's compare names offered; sources by RefTable.refOf (gorge's objRef).
+# scripts/forge-oracle-test-setup-offered.sh (make forge-driver-tests) replays the Muldrotha find (a graveyard Plains offered as a play) and runs
+# RefTableTest.refOfNamesAnObjectAsGorgeSnapshotsIt; it fails on 793a015fcf. Driver-only; cardsfolder/tokenscripts unchanged.
+# Fork branch fix/xp-forge-driver-setup-offered.
+# 098e9c802e = oracle/fpin-1125-join5: 846c4191e6 (order to Hand; above) joined with d6e26fd04306 (offered; above); driver-only, die-roll code unchanged.
+# 9cc07f0d340 = oracle/fpin-1125-join4: 15a7c960ab2 (setup Room locked; above) joined with d6e26fd04306 (offered; above); driver-only, die-roll code unchanged.
+# 032ce65c73b = oracle/fpin-1125-join-hand-offered-room: 098e9c802e (order to Hand; above) joined with 9cc07f0d340 (setup Room locked; above); both already carry d6e26fd04306 (offered); driver-only, die-roll code unchanged.
+# 926004bb5396 = oracle/fpin-1125-join8: 032ce65c73b (order to Hand + setup Room locked + offered; above) joined with
+# a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
+FORGE_ORACLE_REF ?= 926004bb5396810595e0b4ac3b447ce4227f938e
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
