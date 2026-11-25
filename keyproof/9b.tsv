@@ -160,17 +160,17 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9bdc1e63-1cf9-4ddb-a7d5-f2a2eb91bdfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bdc1e63-1cf9-4ddb-a7d5-f2a2eb91bdfd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 9bdc79c9-c8b0-4db1-89d9-0ca7920b6576	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9bdc79c9-c8b0-4db1-89d9-0ca7920b6576	f0/t0	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+9bdc79c9-c8b0-4db1-89d9-0ca7920b6576	f0/t0	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 9bdd68e7-7787-4579-a128-09e78fdbf0e2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:berg-strider:cast:s1,f:xs:XP:berg-strider:cast:s1	-	-	-	d864b561c9cb	-	b6c92624a0bc	-	-	2026-11-24	xproof
 9bdd68e7-7787-4579-a128-09e78fdbf0e2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:berg-strider:cast:s1,f:xs:XP:berg-strider:cast:s1	-	-	-	d864b561c9cb	-	b6c92624a0bc	-	-	2026-11-24	xproof
 9bdd6fea-d436-412b-a7b7-bbdba73dc986	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bdd6fea-d436-412b-a7b7-bbdba73dc986	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9bdd6fea-d436-412b-a7b7-bbdba73dc986	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:kitsune-dragon-s-daughter:f0t0:s2,f:xs:XP:kitsune-dragon-s-daughter:f0t0:s2	-	-	-	5437c1394672	-	2a65a1014491	-	-	2026-11-24	xproof
-9be19bdf-db1e-433e-8be4-8b985a568211	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kitsune, Dragon's Daughter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9be19bdf-db1e-433e-8be4-8b985a568211	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kitsune-dragon-s-daughter:combat0.attack:s1,f:xs:XP:kitsune-dragon-s-daughter:combat0.attack:s1	-	-	-	5b42d43d5d80	-	2a65a1014491	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kitsune-dragon-s-daughter:combat0.block:s1,f:xs:XP:kitsune-dragon-s-daughter:combat0.block:s1	-	-	-	23c4009444b0	-	2a65a1014491	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:kitsune-dragon-s-daughter:f0t0:s2,f:xs:XP:kitsune-dragon-s-daughter:f0t0:s2	-	-	-	5437c1394672	-	2a65a1014491	-	-	2026-11-24	xproof
-9be19bdf-db1e-433e-8be4-8b985a568211	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Kitsune, Dragon's Daughter/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9be19bdf-db1e-433e-8be4-8b985a568211	f0/t1	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:kitsune-dragon-s-daughter:combat0.attack:s1,f:xs:XP:kitsune-dragon-s-daughter:combat0.attack:s1	-	-	-	5b42d43d5d80	-	2a65a1014491	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 9be31785-2975-424f-aada-25ee2a0bf6d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9be31785-2975-424f-aada-25ee2a0bf6d8	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 9be3e610-f6bf-4e79-87ca-79dde27945d0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:godtracker-of-jund:cast:s1,f:xs:XP:godtracker-of-jund:cast:s1	-	-	-	8a1b1a193ec0	-	fc2420bb0e2e	-	-	2026-11-24	xproof
