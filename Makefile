@@ -979,7 +979,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # replays the four finds (cmd/oraclediff/testdata/forge/encore-keyword-identity.jsonl) and requires `identity: keyword` with no harness row.
 # Driver-only (StepMachine); die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-encore-keyword-identity.
-FORGE_ORACLE_REF ?= 52ddaba307522af3149b243b31392e8d6730bb1e
+# efd75d00b34 = 52ddaba3075 + gorge's monarch trigger labels (xproof cluster xpt-457c5f66, Grave Venerations and Faramir, Steward of Gondor): at the
+# monarch's end step gorge orders its own end-step trigger beside "The monarch: draw a card" (CR 603.3b, 725.2), fixed synthetic text that no Forge
+# trigger text starts with (Forge hosts the monarch triggers on the "The Monarch" effect card, worded "At the beginning of your end step, draw a
+# card."), so StepMachine.triggerScore scored 0 and the order answer missed. triggerScore now binds "The monarch: draw a card" to that host's Phase
+# trigger and "The monarch: that creature's controller becomes the monarch" to its DamageDone trigger by role (beside the Evoke label binding).
+# TriggerOrderMonarchLabelTest (run-unit-tests.sh) fails on 52ddaba3075 and passes here. Driver-only; die-roll code, cardsfolder and tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-monarch-trigger-label.
+FORGE_ORACLE_REF ?= efd75d00b34da0fe9d0079dd5c9986f3525d6f67
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
