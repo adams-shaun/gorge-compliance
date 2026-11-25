@@ -1875,6 +1875,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[yes]})
 		case "choose_n":
+			if die, _, ok := DieResultPick(d); ok {
+				// "Roll two d6 and choose one result" (Valiant Endeavor): XMage
+				// asks one chooseUse over the two results, true keeping the
+				// first die's. gorge's "die k: result r" label is no choice
+				// text, so it is left over, unconsumed. (XMage poses nothing
+				// when the dice tie; xprep drops that decision beforehand.)
+				as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[die == 1]})
+				break
+			}
 			if d.Resume == "changezone_dest_alt" {
 				// gorge's DestinationAlternative ask (Dina's Guidance's "put it
 				// into your hand or graveyard"). XMage asks it as a boolean
