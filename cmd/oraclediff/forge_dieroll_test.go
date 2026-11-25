@@ -122,7 +122,11 @@ func TestForgeRolledDie(t *testing.T) {
 // afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
 // 3bb8f906e3 = afe18881c6 plus TokenEffect.resolve registering the AtEOT delayed trigger on a zero token amount (forge-game only);
 // driver and die-roll code unchanged.
-const forgeOracleDieRollRef = "3bb8f906e3d3317fc18fc0ff01dd0163d3d776f5"
+// 66671165f3 = afe18881c6 plus the up-to remove-any-type Done pick (StepMachine.peekCounterKind and
+// ScriptedController.chooseCounterType only); die-roll code unchanged, ForcedDieRollTest re-run green in the full driver suite.
+// 149a03bbbec4 = the clean merge of 66671165f31 and 3bb8f906e3 (disjoint files: forge-oracle driver vs forge-game TokenEffect);
+// driver and die-roll code unchanged from 66671165f31.
+const forgeOracleDieRollRef = "149a03bbbec4be2949cd05fedffaacb83674f249"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

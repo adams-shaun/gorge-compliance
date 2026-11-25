@@ -520,7 +520,21 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # MobilizeZeroTokensStillSchedulesSacrificeTest fails on afe18881c6 ("expected [true] but found [false]") and passes after;
 # MyriadNoTokensCreatesNoDelayedTriggerTest and MordorOnTheMarchNothingExiledTest stay green. Driver, cardsfolder and tokenscripts
 # unchanged. Fork branch fix/xp-mobilize-zero-delayed-trigger.
-FORGE_ORACLE_REF ?= 3bb8f906e3d3317fc18fc0ff01dd0163d3d776f5
+# 66671165f31 = afe18881c6e plus the up-to remove-any-type Done pick (fork branch fix/xp-forge-driver-counter-any-done-v2):
+# when the controller stops an UpTo removal early gorge logs remove_counter_done ("Done"), which names no Forge CounterType
+# and which CountersRemoveEffect.removeAnyType has no option for, so the kind ask strict-missed and left it queued. For a
+# RemoveCounter ask StepMachine.peekCounterKind (26b4658101's peek design) now also matches the Done by its pick kind,
+# consumes it and answers the first offered type; that type's chooseNumber finds no counter pick and answers 0 (min is 0 under
+# UpTo), which is how removeAnyType stops. The kind ask peeks before the lone-option shortcut so a single-kind up-to removal
+# consumes its Done too. Test UnmappedAskTest.removeAnyTypeDoneStopsTheUpToRemoval (fixtures/unmapped/counter-remove-any-done.jsonl)
+# fails on afe18881c6e and passes after; scripts/forge-oracle-test-counter-any-done.sh (make forge-driver-tests) replays the
+# Mabel, Bitter Recluse request with LOYALTY then Done and requires Ajani Resolute still on p1's battlefield at 1 loyalty and
+# one +1/+1. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+# 149a03bbbec4 = the clean merge of 66671165f31 and 3bb8f906e3 (the Mobilize X=0 AtEOT fix above): the two touch disjoint
+# files (forge-oracle's up-to remove-any-type Done pick vs forge-game's TokenEffect), so the pin keeps both and the merge adds
+# no code of its own. Driver and die-roll code unchanged from 66671165f31; cardsfolder/tokenscripts unchanged (same as FORGE_REF
+# ff076d4432). Fork branch oracle/fpin-1125-mobilize-zero.
+FORGE_ORACLE_REF ?= 149a03bbbec4be2949cd05fedffaacb83674f249
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
