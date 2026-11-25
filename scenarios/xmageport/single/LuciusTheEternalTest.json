@@ -112,8 +112,7 @@
      }
     }
    ],
-   "xmage": "LuciusTheEternalTest#testLuciusDelayedOnDieTrigger",
-   "known_bug": "XP[effect-comeback-trigger-never-returns]: after Lucius the Eternal dies and exiles itself, the DB$ Effect's ComeBack trigger (Mode$ ChangesZone ValidCard$ Card.IsImprinted, TriggerZones$ Command) never returns Lucius to the battlefield when the targeted creature dies (p0 Lucius battlefield 0, want 1); the Effect delayed-trigger registration in effEffect/checkEventDelayedTriggers is the suspect, not isolated by event log, CR 603.7, 400.7, verified at gorge 981b98963b. Isolating probe at gorge 981b98963b: the same fail with the spells paid by real land taps instead of seeded mana (Lucius battlefield 0, want 1)."
+   "xmage": "LuciusTheEternalTest#testLuciusDelayedOnDieTrigger"
   },
   {
    "name": "test-lucius-delayed-on-return-trigger",
@@ -228,8 +227,7 @@
      "eq": 1
     }
    ],
-   "xmage": "LuciusTheEternalTest#testLuciusDelayedOnReturnTrigger",
-   "known_bug": "XP[effect-comeback-trigger-never-returns]: same cause with the targeted creature bounced instead of destroyed: Lucius's ComeBack trigger does not fire when the imprinted creature leaves the battlefield (p0 Lucius battlefield 0, want 1), CR 603.7, 400.7, verified at gorge 981b98963b. Isolating probe at gorge 981b98963b: the same fail with the spells paid by real land taps instead of seeded mana (Lucius battlefield 0, want 1)."
+   "xmage": "LuciusTheEternalTest#testLuciusDelayedOnReturnTrigger"
   },
   {
    "name": "test-lucius-never-return",
