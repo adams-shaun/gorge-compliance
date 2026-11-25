@@ -1092,3 +1092,70 @@ func TestStartstaticattached(t *testing.T) {
 		}
 	})
 }
+
+// TestStartfacestarts: a key of a double-faced or modal card's back face is
+// started from the card on the battlefield on its back face (BackFace), the
+// focus play the back face's own; a face gorge cannot place there (flip, meld,
+// specialize, split) is refused by the layout, not by the old catch-all
+// "no-generator:face".
+func TestStartfacestarts(t *testing.T) {
+	reg, b := testBuilder(t)
+	const (
+		aclazotz = "Aclazotz, Deepest Betrayal // Temple of the Dead"
+		arlinn   = "Arlinn Kord // Arlinn, Embraced by the Moon"
+		wolfkin  = "Wolfkin Outcast // Wedding Crasher"
+	)
+	for _, tc := range []struct {
+		card, key, kind string
+		ability         int
+	}{
+		{aclazotz, "f1/a0", "ability", 0}, // a modal back face (a land)
+		{arlinn, "f1/a1", "ability", 1},   // a transformed planeswalker's loyalty ability
+		{wolfkin, "f1/t0", "", 0},         // a transformed back face's trigger
+	} {
+		if _, ok := reg.Lookup(tc.card); !ok {
+			t.Fatalf("%s is not in the corpus", tc.card)
+		}
+		res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", tc.card, tc.key, err)
+		}
+		if res.Start == nil {
+			t.Errorf("%s %s: %s %q, want a start", tc.card, tc.key, res.Path, res.Reason)
+			continue
+		}
+		f := res.Start
+		seats := [2]StartSeat{f.Setup.P0, f.Setup.P1}
+		backed := 0
+		for _, sd := range seats {
+			for _, n := range sd.BackFace {
+				backed++
+				if n != tc.card || !slices.Contains(sd.Battlefield, n) {
+					t.Errorf("%s %s: back_face %q is not a battlefield card of its seat %v", tc.card, tc.key, n, sd.Battlefield)
+				}
+			}
+		}
+		if backed != 1 {
+			t.Errorf("%s %s: %d back_face placements, want 1", tc.card, tc.key, backed)
+		}
+		if tc.kind != "" {
+			if f.Focus == nil || f.Focus.Card != tc.card || f.Focus.Kind != tc.kind || f.Focus.Ability != tc.ability {
+				t.Errorf("%s %s: focus %+v, want %s ability %d on the card", tc.card, tc.key, f.Focus, tc.kind, tc.ability)
+			}
+		}
+	}
+	for _, tc := range []struct{ card, key, reason string }{
+		{"Wyll, Pact-Bound Duelist", "f1/t0", "no-generator:face:specialize"},
+		{"Walk-In Closet // Forgotten Cellar", "f1/t0", "no-generator:face:split"},
+		{"Orochi Eggwatcher // Shidako, Broodmistress", "f1/a0", "no-generator:face:flip"},
+		{"Titania, Voice of Gaea // Titania, Gaea Incarnate", "f1/a0", "no-generator:face:meld"},
+	} {
+		res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatalf("%s %s: %v", tc.card, tc.key, err)
+		}
+		if res.Path != PathRefused || res.Reason != tc.reason {
+			t.Errorf("%s %s: %s %q, want refused %q", tc.card, tc.key, res.Path, res.Reason, tc.reason)
+		}
+	}
+}

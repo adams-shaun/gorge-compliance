@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"os"
 	"path/filepath"
@@ -557,6 +558,71 @@ func TestStartMultiFacedFocusIsExercised(t *testing.T) {
 		{"Invasion of Theros // Ephara, Ever-Sheltering", "f0/t0"}, // a battle's enters trigger
 	} {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartBackFaceIsExercised: a back-face key (scen: no-generator:face until
+// now) is played from the card on the battlefield on its back face, the focus
+// play the back face's own ability: the listed card enters transformed
+// (rules.StartSeat.BackFace) and the focus finds it by its front name.
+func TestStartBackFaceIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Aclazotz, Deepest Betrayal // Temple of the Dead", "f1/a0"},        // a modal back face (a land)
+		{"Shaile, Dean of Radiance // Embrose, Dean of Shadow", "f1/a0"},     // a modal creature's ability
+		{"Waterlogged Hulk // Watertight Gondola", "f1/a0"},                  // a transformed artifact's ability
+		{"Tamiyo, Inquisitive Student // Tamiyo, Seasoned Scholar", "f1/a2"}, // a transformed planeswalker's loyalty ability
+		{"Thousand Moons Smithy // Barracks of the Thousand", "f1/t0"},       // a back-face trigger
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			items := startIsExercised(t, reg, b, c.card, c.key)
+			for _, it := range items { // the lowered item still plays the card on its back face
+				kept := 0
+				for _, sd := range it.Setup {
+					kept += len(sd.BackFace)
+				}
+				if kept == 0 {
+					t.Errorf("%s: item %s has no back_face in its setup: the recorded span plays the front face", c.key, it.ID)
+				}
+			}
+		})
+	}
+}
+
+// TestStartBackFaceLostIsRefused: a back-face start whose card turns to its
+// front before the recorded span (Doric's back face transforms it at the
+// upkeep) is refused as start-face-lost, writes no item and credits nothing:
+// the tape plays the front face, so the back-face key was never exercised.
+func TestStartBackFaceLostIsRefused(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	const card = "Doric, Nature's Warden // Doric, Owlbear Avenger"
+	for _, key := range []string{"combat#1.attack", "combat#1.block"} {
+		t.Run(key, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, card, key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				return // refused by scen: no start, nothing to credit
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			in, out := t.TempDir(), t.TempDir()
+			if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+				t.Fatal(err)
+			}
+			if bs, err := os.ReadFile(filepath.Join(out, "items.jsonl")); err != nil || len(bytes.TrimSpace(bs)) != 0 {
+				t.Errorf("items.jsonl %q (err %v), want none: the back face is lost before the span", bs, err)
+			}
+			if bs, err := os.ReadFile(filepath.Join(out, "exercised.tsv")); err != nil || bytes.Contains(bs, []byte(key)) {
+				t.Errorf("exercised.tsv credits %s (err %v): %s", key, err, bs)
+			}
+		})
 	}
 }
 
