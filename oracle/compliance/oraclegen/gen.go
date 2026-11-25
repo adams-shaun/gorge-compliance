@@ -3144,7 +3144,12 @@ func bandAnswers(d rules.OracleDecision) ([]XAnswer, bool) {
 			if memberName == "" {
 				memberName = oraclediffRefName(ref)
 			}
-			member := disambiguatedObjectChoice(d, k, memberName)
+			// The label's member field is the object's live face by
+			// construction, so it names the pick even when it differs from
+			// the ref's setup name (a transformed DFC): the same-name alias
+			// and the owner-qualified ref must both stay available despite
+			// namesObject comparing against the setup name.
+			member := disambiguatedObjectChoiceNamed(d, k, memberName, true)
 			as = append(as, XAnswer{d.Seat, "choice", "yes"}, XAnswer{d.Seat, "choice", member})
 			continue
 		}
@@ -3162,8 +3167,9 @@ func bandAnswers(d rules.OracleDecision) ([]XAnswer, bool) {
 // Predator: "Band Sinuous Predator with Timber Wolves" over ref
 // p0:Kessig Prowler). The leader's live name comes from option 0's decline
 // label ("No more creatures in <leader>'s band"), so a " with " inside either
-// card name cannot split the member wrongly; the last-separator fallback only
-// covers a synthetic decision without First.
+// card name cannot split the member wrongly. Without that label (a synthetic
+// decision) a single " with " is the separator; two or more may belong to the
+// leader's own name ("Dance with Devils"), so the fallback fails closed to "".
 func bandMemberLiveName(d rules.OracleDecision, k int) string {
 	if k < 0 || k >= len(d.Picks) {
 		return ""
@@ -3177,8 +3183,10 @@ func bandMemberLiveName(d rules.OracleDecision, k int) string {
 			return name
 		}
 	}
-	if i := strings.LastIndex(member, " with "); i > 0 {
-		return member[:i]
+	if strings.Count(member, " with ") == 1 {
+		if i := strings.Index(member, " with "); i > 0 {
+			return member[:i]
+		}
 	}
 	return ""
 }
@@ -4035,11 +4043,23 @@ func JoinedChoice(d rules.OracleDecision) string {
 // owner still separates them, else the label with the copy marker appended (no
 // space before the bracket).
 func disambiguatedObjectChoice(d rules.OracleDecision, k int, label string) string {
+	nameIsObject := k < len(d.PickRefs) && namesObject(label, d.PickRefs[k])
+	return disambiguatedObjectChoiceNamed(d, k, label, nameIsObject)
+}
+
+// disambiguatedObjectChoiceNamed is disambiguatedObjectChoice with the
+// object-name test supplied by the caller. A band pick's label spells the
+// member's LIVE face (CR 712.8), so a transformed DFC's name no longer equals
+// oraclediffRefName(ref), the setup front face namesObject compares against.
+// The band label's "Band <member> with <leader>" shape proves the member field
+// is an object name, so bandAnswers passes nameIsObject=true and a transformed
+// pick still gets the exact-ref alias when a same-name sibling is offered.
+func disambiguatedObjectChoiceNamed(d rules.OracleDecision, k int, label string, nameIsObject bool) string {
 	p := ClassifySameName(d, k)
-	if p.Alias != "" && k < len(d.PickRefs) && namesObject(label, d.PickRefs[k]) {
+	if p.Alias != "" && k < len(d.PickRefs) && nameIsObject {
 		return p.Alias
 	}
-	if p.Unanswerable && k < len(d.PickRefs) && namesObject(label, d.PickRefs[k]) {
+	if p.Unanswerable && k < len(d.PickRefs) && nameIsObject {
 		if owner := ownerQualifiedRef(d, k); owner != "" {
 			// "@<ref>", the same spelling as the alias branch: a joined
 			// multi-pick answer binds every segment through the "@" path, and

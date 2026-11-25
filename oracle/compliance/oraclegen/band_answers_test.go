@@ -134,3 +134,86 @@ func TestBandAnswersTransformedMemberUsesLiveName(t *testing.T) {
 		t.Fatalf("transformed band answer without First = %#v, want %#v", got, want)
 	}
 }
+
+// TestBandAnswersTransformedSameNameKeepsAlias is the collision the live-name
+// change must not lose: the transformed pick shares its setup ref's name with
+// another offered copy, so only the exact-ref alias selects the recorded
+// object. The label's back-face name is not the setup name namesObject
+// compares against, but it still names the pick, so the alias must fire.
+func TestBandAnswersTransformedSameNameKeepsAlias(t *testing.T) {
+	sameName := rules.OracleDecision{
+		Step: 5, Seat: 0, Kind: "choose_n", Options: 3, GorgeKind: "choose", Via: "answer",
+		Picks: []string{"Band Sinuous Predator with Timber Wolves"}, PickIdx: []int{1},
+		PickRefs: []string{"p0:Kessig Prowler#2"}, PickRefsInexact: []bool{false},
+		OptionRefs:  []string{"p0:Kessig Prowler#2", "p0:Kessig Prowler#3", "p0:Timber Wolves"},
+		First:       "No more creatures in Timber Wolves's band",
+		ObjectPicks: []string{"p0:Kessig Prowler#2"},
+		PickKinds:   []string{"band"}, Min: 1, Max: 1,
+	}
+	got := routed(t, []rules.OracleDecision{sameName}, 6)
+	want := []XAnswer{
+		{Seat: 0, Kind: "choice", Value: "yes"},
+		{Seat: 0, Kind: "choice", Value: "@p0:Kessig Prowler#2"},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("transformed same-name band answer = %#v, want %#v (exact-ref alias)", got, want)
+	}
+}
+
+// TestBandAnswersTransformedCopyEffectKeepsAlias is the same collision from a
+// copy effect: a second offered creature currently wears the pick's live
+// name, which liveNamedSameNames restates under the pick's setup name. The
+// census then sees two same-name candidates, so the alias must survive the
+// transformed label.
+func TestBandAnswersTransformedCopyEffectKeepsAlias(t *testing.T) {
+	transformed := rules.OracleDecision{
+		Step: 5, Seat: 0, Kind: "choose_n", Options: 3, GorgeKind: "choose", Via: "answer",
+		Picks: []string{"Band Sinuous Predator with Timber Wolves"}, PickIdx: []int{1},
+		PickRefs: []string{"p0:Kessig Prowler"}, PickRefsInexact: []bool{false},
+		OptionRefs:  []string{"p0:Kessig Prowler", "p0:Timber Wolves"},
+		First:       "No more creatures in Timber Wolves's band",
+		ObjectPicks: []string{"p0:Kessig Prowler"},
+		PickKinds:   []string{"band"}, Min: 1, Max: 1,
+	}
+	copied := rules.OracleSnapshot{Permanents: []rules.OracleSnapPerm{
+		{Ref: "p0:Kessig Prowler", Name: "Sinuous Predator"},
+		{Ref: "p0:Timber Wolves", Name: "Sinuous Predator"},
+	}}
+	snaps := []rules.OracleSnapshot{copied, copied, copied, copied, copied, copied, copied}
+	ds := liveNamedSameNames([]rules.OracleDecision{transformed}, snaps)
+	if p := ClassifySameName(ds[0], 0); p.Alias != "@p0:Kessig Prowler" {
+		t.Fatalf("fixture must reach the alias via the copy collision, got %+v (%v)", p, ds[0].OptionRefs)
+	}
+	got := routed(t, ds, 6)
+	want := []XAnswer{
+		{Seat: 0, Kind: "choice", Value: "yes"},
+		{Seat: 0, Kind: "choice", Value: "@p0:Kessig Prowler"},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("transformed copy-effect band answer = %#v, want %#v (exact-ref alias)", got, want)
+	}
+}
+
+// TestBandAnswersAmbiguousLeaderWithoutFirstFallsBackToRef pins the synthetic
+// decision's separator fallback: when First is absent and the leader's own
+// name contains " with ", the last separator is inside the leader's name, so
+// the parse fails closed to the ref's setup name instead of scripting a
+// truncated member ("Timber Wolves with Dance").
+func TestBandAnswersAmbiguousLeaderWithoutFirstFallsBackToRef(t *testing.T) {
+	ambiguous := rules.OracleDecision{
+		Step: 7, Seat: 0, Kind: "choose_n", Options: 3, GorgeKind: "choose", Via: "answer",
+		Picks: []string{"Band Timber Wolves with Dance with Devils"}, PickIdx: []int{1},
+		PickRefs: []string{"p0:Timber Wolves"}, PickRefsInexact: []bool{false},
+		OptionRefs:  []string{"p0:Timber Wolves", "p0:Dance with Devils"},
+		ObjectPicks: []string{"p0:Timber Wolves"},
+		PickKinds:   []string{"band"}, Min: 1, Max: 1,
+	}
+	got := routed(t, []rules.OracleDecision{ambiguous}, 8)
+	want := []XAnswer{
+		{Seat: 0, Kind: "choice", Value: "yes"},
+		{Seat: 0, Kind: "choice", Value: "Timber Wolves"},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("ambiguous-leader band answer = %#v, want %#v (ref's setup name)", got, want)
+	}
+}
