@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 262a5d83-506c-4781-9bc9-1a2b5d83955c	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 262a5d83-506c-4781-9bc9-1a2b5d83955c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 262bc269-3e70-46ae-b0a3-5f8030a6971a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:thallid-germinator:f0t0:s1	-	-	-	3aa6ded33acb	-	a150840d1833	-	-	2026-11-25	xproof
-262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 262bc269-3e70-46ae-b0a3-5f8030a6971a	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:thallid-germinator:f0t0:s1	-	-	-	3aa6ded33acb	-	a150840d1833	-	-	2026-11-25	xproof
 262c5ac9-af41-42d1-a53a-8a671eedd5a6	cast	cast-resolve	agreed	-	FX	scen	2	0	Duel Tactics/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 269a02ca-1425-4b32-81f3-440e1caadb17	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goliath-paladin:f0t0:s1,f:xs:XP:goliath-paladin:f0t0:s1	-	-	-	8c0bd19283bb	-	c593dc6bfed9	-	-	2026-11-24	xproof
 269a02ca-1425-4b32-81f3-440e1caadb17	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goliath-paladin:f0t0:s1,f:xs:XP:goliath-paladin:f0t0:s1	-	-	-	8c0bd19283bb	-	c593dc6bfed9	-	-	2026-11-24	xproof
 269a2b53-52d7-4032-ba62-7b7742e7a159	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hypervolt-grasp:cast:s1,f:xs:XP:hypervolt-grasp:cast:s1	-	-	-	23c4009444b0	-	5f24a47b1357	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-269a2b53-52d7-4032-ba62-7b7742e7a159	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+269a2b53-52d7-4032-ba62-7b7742e7a159	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 26a1b36c-3c27-4eb4-b85f-63459653b773	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26a1b36c-3c27-4eb4-b85f-63459653b773	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 26a1b36c-3c27-4eb4-b85f-63459653b773	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26e47cc5-9dc7-4d54-80a6-1eb77587df36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26e47cc5-9dc7-4d54-80a6-1eb77587df36	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26e47cc5-9dc7-4d54-80a6-1eb77587df36	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-26e47cc5-9dc7-4d54-80a6-1eb77587df36	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+26e47cc5-9dc7-4d54-80a6-1eb77587df36	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 26e549c0-a08b-475b-9138-6dde175cdf55	cast	cast	agreed	-	F	start	2	0	f:xs:XP:eliminate-the-competition:cast:s1	-	-	-	d864b561c9cb	-	95788ba31d24	-	-	2026-11-24	xproof
 26e555f1-e0ed-4b84-8783-1c0c968f462d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 26e555f1-e0ed-4b84-8783-1c0c968f462d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
