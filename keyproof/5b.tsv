@@ -29,15 +29,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b2364d7-a811-4595-a1b4-224c70555ffa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b27b794-580c-472d-b63e-99b271eb115d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b2c6b44-99b3-496d-93ca-d5211222038f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b2c6b44-99b3-496d-93ca-d5211222038f	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5b2c6b44-99b3-496d-93ca-d5211222038f	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 5b2e1105-5af0-4f34-bfe9-15a2f6881edd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:voracious-cobra:cast:s1,f:xs:XP:voracious-cobra:cast:s1	-	-	-	fc71ca68c5ac	-	3321eba6332d	-	-	2026-11-24	xproof
 5b2e1105-5af0-4f34-bfe9-15a2f6881edd	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 5b2ffb53-86b7-4665-a5c7-b85b035b6c81	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:urabrask-the-hidden:cast:s1,f:xs:XP:urabrask-the-hidden:cast:s1	-	-	-	d864b561c9cb	-	ce359b1a17c9	-	-	2026-11-24	xproof
 5b31ac7b-7901-484c-b59f-556284fd562c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lifebane-zombie:f0t0:s1,f:xs:XP:lifebane-zombie:f0t0:s1	-	-	-	d864b561c9cb	-	0cbd3cee851e	-	-	2026-11-24	xproof
 5b31ac7b-7901-484c-b59f-556284fd562c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lifebane-zombie:f0t0:s1,f:xs:XP:lifebane-zombie:f0t0:s1	-	-	-	d864b561c9cb	-	0cbd3cee851e	-	-	2026-11-24	xproof
 5b356a01-900c-4fe5-93bd-45629528c484	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b356a01-900c-4fe5-93bd-45629528c484	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-5b356a01-900c-4fe5-93bd-45629528c484	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5b356a01-900c-4fe5-93bd-45629528c484	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+5b356a01-900c-4fe5-93bd-45629528c484	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 5b38a1e4-a6af-4094-9392-70a87759e20d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b38fafb-3999-46dc-928b-1677625c1943	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b3b512e-6849-4d2e-9352-a36bc1646a92	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shinen-of-fury-s-fire:cast:s1,f:xs:XP:shinen-of-fury-s-fire:cast:s1	-	-	-	64a08ba7d913	-	7d7ef51c4bdc	-	-	2026-11-24	xproof
@@ -70,7 +70,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b677e88-bcc9-4a55-9c89-8bbd0e2344dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b677e88-bcc9-4a55-9c89-8bbd0e2344dc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5b6a821c-51e4-44dc-8353-f4d10eab7fcb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b6a821c-51e4-44dc-8353-f4d10eab7fcb	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5b6a821c-51e4-44dc-8353-f4d10eab7fcb	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 5b6bdf5a-2742-4851-92cd-a857a3852836	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treasure-cruise:cast:s1,f:xs:XP:treasure-cruise:cast:s1	-	-	-	fb9d3088f0bf	-	1372c30af6ed	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 5b6c6dab-0687-4297-b215-89e699d65681	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b6c6dab-0687-4297-b215-89e699d65681	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
