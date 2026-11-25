@@ -161,12 +161,15 @@ func TestForgeRolledDie(t *testing.T) {
 // ScriptedController.chooseCardsForEffect only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
 // 65d8060f39ba = 1da9dc5c96c plus the empty Optional$ Animate confirm (ScriptedController.emptyOptionalAnimateConfirm only);
 // die-roll code unchanged, ForcedDieRollTest re-run green on it.
+// 931d6309cc3 = 65d8060f39ba plus the Optional$ Attach attach_optional yes/no (ScriptedController.attachConfirm only);
+// die-roll code unchanged, ForcedDieRollTest re-run green on it (full driver suite, 227 tests).
 // e99e48e2b50f = 65d8060f39ba plus the forced-pick-leaves-the-queued-pick fix (StepMachine.pickObjects only); die-roll code
 // unchanged, ForcedDieRollTest re-run green on it.
 // 85e4e85fde = 2ece06813a (1da9dc5c96c plus the dual-typed land colour filter, StepMachine.abilityFor only) merged with
 // 65d8060f39ba; die-roll code unchanged, ForcedDieRollTest re-run green on it.
 // 34f0585c97 = oracle/fpin-1125: 85e4e85fde (dual-land colour; above) joined with e99e48e2b5 (Gitrog lone forced pick; above); driver-only.
-const forgeOracleDieRollRef = "34f0585c97b5ea0e9bde19c20b6122473c24deee"
+// 0fe8c90e549 = oracle/fpin-1125-attach: 34f0585c97 (fpin-1125; above) joined with 931d6309cc3 (attach_optional; above); driver-only.
+const forgeOracleDieRollRef = "0fe8c90e54982c8b09ba42dbdda594de9e15ae30"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

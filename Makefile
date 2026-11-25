@@ -654,6 +654,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # EmptyOptionalAnimateConfirmTest (fixtures/animate: the find, and the same request with a Grizzly Bears) fails before it with the exact
 # miss; scripts/forge-oracle-test-empty-optional-animate.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder
 # and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-empty-optional-animate.
+# 931d6309cc3 = 65d8060f39ba plus the Optional$ Attach per-attachment yes/no (xproof cluster xpt-0ae740c1, Bruna, Light of Alabaster):
+# its RepeatEach over the Auras that can enchant it (CR 303.4) runs BrunaAttach once per Aura, so gorge poses one yes/no per Aura
+# (resume attach_optional, pick kind yes/no, no card ref) where it poses the attach_subset card pick for Heavenly Blademaster. The
+# attachConfirm that read only card refs found none, left attachYes empty and answered every confirm no. ScriptedController.attachConfirm
+# now answers from the FIRST attach decision of the step: an attach_optional yes/no at the head answers that very confirm, noted
+# "attach-confirm step N: yes|no X (attach_optional)"; an earlier effect's attach_subset / attach_choice pick is taken first, as before
+# (so a later effect's yes/no is never spent on it). Decisions carry no Aura ref, so several Auras bind to the yes/no's in gorge's
+# log order. UnmappedAsksJoinDirectionAttachTest: brunaAttachOptionalYesAttaches (fixtures/unmapped/attach-optional-yes.jsonl, the find;
+# fails before the fix with "attach pick step 10: []", and asserts Cowed by Wisdom attached_to Bruna in the step-10 snapshot) and
+# attachOptionalDoesNotPreemptAnEarlierSubsetPick (attach-optional-mixed.jsonl: the subset fixture plus a later attach_optional No);
+# scripts/forge-oracle-test-attach-optional-yes.sh (make forge-driver-tests) runs the class (7 tests) with the Heavenly Blademaster and
+# Nahiri cases. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432); full driver suite
+# 227 tests. Fork branch fix/xp-forge-driver-attach-optional-yes.
 # e99e48e2b50f = 65d8060f39ba plus the forced-pick leaves a queued pick for the later ask (xproof clusters xpt-5e60af5c and
 # xpt-f2f006f3, The Gitrog, Ravenous Ride: Memnite saddles it and it hits, and at the trigger's resolution Forge's Sacrifice cost
 # offers the one saddler, so the pick is forced and gorge logs none; the queued p0:Swamp/p0:Forest pick answers the LATER "put up to
@@ -673,7 +686,8 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # it fails at 1da9dc5c96c and 65d8060f39ba with the exact miss and passes here. Driver-only; die-roll code, cardsfolder and
 # tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-dual-colour-on-fpin-65d8.
 # 34f0585c97 = oracle/fpin-1125: 85e4e85fde (dual-land colour; above) joined with e99e48e2b5 (Gitrog lone forced pick; above); driver-only.
-FORGE_ORACLE_REF ?= 34f0585c97b5ea0e9bde19c20b6122473c24deee
+# 0fe8c90e549 = oracle/fpin-1125-attach: 34f0585c97 (fpin-1125; above) joined with 931d6309cc3 (attach_optional; above); driver-only.
+FORGE_ORACLE_REF ?= 0fe8c90e54982c8b09ba42dbdda594de9e15ae30
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
