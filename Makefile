@@ -654,17 +654,20 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # EmptyOptionalAnimateConfirmTest (fixtures/animate: the find, and the same request with a Grizzly Bears) fails before it with the exact
 # miss; scripts/forge-oracle-test-empty-optional-animate.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder
 # and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-empty-optional-animate.
-# dd90d7716d2 = 65d8060f39ba plus the Optional$ Attach per-attachment yes/no (xproof cluster xpt-0ae740c1, Bruna, Light of Alabaster):
+# 931d6309cc3 = 65d8060f39ba plus the Optional$ Attach per-attachment yes/no (xproof cluster xpt-0ae740c1, Bruna, Light of Alabaster):
 # its RepeatEach over the Auras that can enchant it (CR 303.4) runs BrunaAttach once per Aura, so gorge poses one yes/no per Aura
 # (resume attach_optional, pick kind yes/no, no card ref) where it poses the attach_subset card pick for Heavenly Blademaster. The
 # attachConfirm that read only card refs found none, left attachYes empty and answered every confirm no. ScriptedController.attachConfirm
-# now takes an attach_optional yes/no first and answers that confirm from it, noted "attach-confirm step N: yes|no X (attach_optional)";
-# the attach_subset / attach_choice picks are untouched. UnmappedAsksJoinDirectionAttachTest.brunaAttachOptionalYesAttaches
-# (fixtures/unmapped/attach-optional-yes.jsonl, the find) fails before it with "attach pick step 10: []"; scripts/forge-oracle-test-
-# attach-optional-yes.sh (make forge-driver-tests) runs it with the Heavenly Blademaster and Nahiri cases. Driver-only; die-roll code,
-# cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432); full driver suite 226 tests. Fork branch
-# fix/xp-forge-driver-attach-optional-yes.
-FORGE_ORACLE_REF ?= dd90d7716d26c9d61f757634854bdae9c8406193
+# now answers from the FIRST attach decision of the step: an attach_optional yes/no at the head answers that very confirm, noted
+# "attach-confirm step N: yes|no X (attach_optional)"; an earlier effect's attach_subset / attach_choice pick is taken first, as before
+# (so a later effect's yes/no is never spent on it). Decisions carry no Aura ref, so several Auras bind to the yes/no's in gorge's
+# log order. UnmappedAsksJoinDirectionAttachTest: brunaAttachOptionalYesAttaches (fixtures/unmapped/attach-optional-yes.jsonl, the find;
+# fails before the fix with "attach pick step 10: []", and asserts Cowed by Wisdom attached_to Bruna in the step-10 snapshot) and
+# attachOptionalDoesNotPreemptAnEarlierSubsetPick (attach-optional-mixed.jsonl: the subset fixture plus a later attach_optional No);
+# scripts/forge-oracle-test-attach-optional-yes.sh (make forge-driver-tests) runs the class (7 tests) with the Heavenly Blademaster and
+# Nahiri cases. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432); full driver suite
+# 227 tests. Fork branch fix/xp-forge-driver-attach-optional-yes.
+FORGE_ORACLE_REF ?= 931d6309cc3944206d915f734d2ae760bcccdfae
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

@@ -7,10 +7,12 @@
 # attach_optional, no card ref) where Heavenly Blademaster gets one card pick
 # (attach_subset); the driver answers Forge's per-attachment confirm from the
 # yes/no, and a build that read only card refs answered every confirm no
-# ("attach pick step 10: []").
+# ("attach pick step 10: []"). A step holding an earlier attach_subset pick and
+# a later attach_optional keeps them in gorge's log order
+# (attachOptionalDoesNotPreemptAnEarlierSubsetPick).
 #
 # Needs the out-of-tree build at FORGE_ORACLE_REF (make forge-oracle-setup).
-# The wrapper asserts each named test passed (6 run, 0 failures), not just the exit status.
+# The wrapper asserts each named test passed (7 run, 0 failures), not just the exit status.
 # Usage: forge-oracle-test-attach-optional-yes.sh [OUTDIR]
 set -euo pipefail
 
@@ -35,10 +37,10 @@ FORGE_ORACLE_DIR=$forge FORGE_ORACLE_JDK=$jdk \
 
 # TestNG can exit zero with no executed test (a pin that predates or renames the
 # class): assert each named test passed, not just the exit status.
-for t in brunaAttachOptionalYesAttaches heavenlyBlademasterAttachesTheNamedAttachment nahiriLoneEquipmentPickIsTheYes nahiriEmptyPickDeclinesTheAttach; do
+for t in brunaAttachOptionalYesAttaches attachOptionalDoesNotPreemptAnEarlierSubsetPick heavenlyBlademasterAttachesTheNamedAttachment nahiriLoneEquipmentPickIsTheYes nahiriEmptyPickDeclinesTheAttach; do
   grep -qx "PASS UnmappedAsksJoinDirectionAttachTest\.$t" "$log" || fail "UnmappedAsksJoinDirectionAttachTest.$t did not pass; the pinned driver is missing the Optional\$ Attach confirm answers"
 done
-want=6
+want=7
 passes=$(grep -c '^PASS UnmappedAsksJoinDirectionAttachTest\.' "$log" || true)
 [ "$passes" -eq "$want" ] || fail "UnmappedAsksJoinDirectionAttachTest passed $passes tests, want $want"
 grep -q "Total tests run: $want, Passes: $want, Failures: 0" "$log" || fail "TestNG summary is not $want run / $want passes / 0 failures"
