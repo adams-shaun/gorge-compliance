@@ -12,6 +12,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -786,6 +787,75 @@ func TestStartBackFaceIsExercised(t *testing.T) {
 				if kept == 0 {
 					t.Errorf("%s: item %s has no back_face in its setup: the recorded span plays the front face", c.key, it.ID)
 				}
+			}
+		})
+	}
+}
+
+// startExercisesKey plays card's start and fails unless the exercised ledger
+// credits key: the start was offered and the transform fired the back-face
+// trigger. It is startIsExercised plus the ledger read, for a key whose item
+// being written is not enough (a trigger can be lowered without firing).
+func startExercisesKey(t *testing.T, reg *cards.Registry, b *certdeck.Builder, card, key string) {
+	t.Helper()
+	res, err := scen.Generate(reg, b, card, key, scen.Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != scen.PathStart || res.Start == nil {
+		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+	}
+	raw, err := res.Start.Marshal()
+	if err != nil {
+		t.Fatal(err)
+	}
+	in, out := t.TempDir(), t.TempDir()
+	if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+		t.Fatal(err)
+	}
+	bs, err := os.ReadFile(filepath.Join(out, "exercised.tsv"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	led, err := cov.ReadTSV(bytes.NewReader(bs))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if n := led.Get(canonicalCard(reg, card), key).Exercised; n == 0 {
+		t.Errorf("%s %s: exercised=%d, want the start to fire the key (ledger %s)", card, key, n, bs)
+	}
+}
+
+// TestStartTransformedTriggerIsExercised: a Transformed trigger's start must
+// place the front face and put its transform cause on the line, and the
+// triggering transform must actually fire the back-face key. The own-ability
+// and Moonmist enabler shapes play and fire; a daybound or upkeep/draw front
+// is refused by its narrow reason instead of being built into a start that
+// lower.gate refuses (CR 702.145b for Daybound/Nightbound).
+func TestStartTransformedTriggerIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Voldaren Pariah", "f1/t0"}, // own activated transform ability
+		{"Kindly Stranger", "f1/t0"}, // Moonmist, the one-card enabler
+	} {
+		t.Run(c.card, func(t *testing.T) { startExercisesKey(t, reg, b, c.card, c.key) })
+	}
+	for _, c := range []struct{ card, key, reason string }{
+		{"Howlpack Piper", "f1/t1", "no-generator:trigger:Transformed:day-night"},
+		{"Huntmaster of the Fells", "f1/t0", "no-generator:trigger:Transformed:condition"},
+		{"Afflicted Deserter", "f1/t0", "no-generator:trigger:Transformed:condition"},
+		{"Ulrich of the Krallenhorde", "f1/t0", "no-generator:trigger:Transformed:condition"},
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start != nil || res.Path != scen.PathRefused || res.Reason != c.reason {
+				t.Errorf("%s %s: path %q reason %q, want refused %q", c.card, c.key, res.Path, res.Reason, c.reason)
 			}
 		})
 	}

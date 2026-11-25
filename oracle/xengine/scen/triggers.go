@@ -135,6 +135,166 @@ func presentCarrier(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, 
 	seat.Battlefield = append(seat.Battlefield, name)
 }
 
+// selfTransformAbility is the index of face's own activated transform
+// ability ("{2}{B}: Transform CARDNAME.", a SetState Mode$ Transform of the
+// card itself), or -1. A transform effect that names another permanent
+// (Waxing Moon's target, Elvish Vatkeeper's Incubator) is not the card's.
+func selfTransformAbility(face *cards.Face) int {
+	for i, sa := range face.Abilities {
+		if sa == nil || !sa.IsActivated() || sa.API != "SetState" || !strings.EqualFold(sa.Params["Mode"], "Transform") {
+			continue
+		}
+		switch d := strings.TrimSpace(sa.Params["Defined"]); d {
+		case "Self", "CARDNAME", "NICKNAME":
+			return i
+		case "":
+			// no Defined$: self unless the effect names a target
+			if strings.TrimSpace(sa.Params["ValidTgts"]) == "" {
+				return i
+			}
+		}
+	}
+	return -1
+}
+
+// transformAbilityGated reports an activated transform ability whose
+// activation reads a condition or history the start does not model
+// (Kindly Stranger's Activation$ Delirium): focusing it would build a start
+// whose play is never offered. The caller then tries a one-card enabler.
+func transformAbilityGated(sa *cards.SA) bool {
+	for k := range sa.Params {
+		switch {
+		case k == "Activation", k == "UnlessCost", k == "UnlessPayer", k == "IsPresent",
+			k == "PresentDefined", k == "PresentCompare", strings.HasPrefix(k, "Condition"),
+			strings.HasPrefix(k, "CheckSVar"):
+			return true
+		}
+	}
+	return false
+}
+
+// transformEnabler is true when it put a one-card transform cause into the
+// start: Moonmist for a Human creature ("Transform all Humans"). It is cast
+// on the start's line, so the card stands on its front face and the
+// enabler's resolution transforms it into the back face whose Transformed
+// trigger the key reads. A non-Human front has no enabler this recipe can
+// place (Waxing Moon's single target is not forced by a start's cast), so it
+// is refused by transformRefusal.
+func transformEnabler(reg *cards.Registry, front *cards.Face, card string, f *StartFile) bool {
+	if !front.IsCreature() || !front.HasTypeWord("Human") || !cardInCorpus(reg, "Moonmist") {
+		return false
+	}
+	// The enabler is a start-only fixture, not a certdeck enabler: Moonmist is
+	// AI-excluded from the builder's playable pool, but a start deck may hold
+	// and cast any corpus card.
+	const enabler = "Moonmist"
+	f.Setup.P0.Battlefield = []string{card}
+	castCarrier(reg, &f.Setup.P0, enabler)
+	f.Focus = &StartFocus{Seat: seatPtr(0), Card: enabler, Kind: "cast"}
+	return true
+}
+
+// cardInCorpus reports whether the registry holds name with a face.
+func cardInCorpus(reg *cards.Registry, name string) bool {
+	c, ok := reg.Lookup(name)
+	return ok && len(c.Faces) > 0
+}
+
+// transformRefusal names why front has no placeable transform cause, as the
+// narrower reason of a Transformed trigger the start cannot serve: a
+// day/night border, a conditional phase (upkeep count, four Birds, an
+// equipped creature, a may-pay cost), an attack trigger, a spell-count
+// transform, or no transform cause at all.
+func transformRefusal(front *cards.Face) string {
+	const none = "no-generator:trigger:Transformed"
+	if front.HasKeyword("Daybound") || front.HasKeyword("Nightbound") {
+		return none + ":day-night"
+	}
+	for _, t := range front.Triggers {
+		if t.Effect == nil || t.Effect.API != "SetState" || !strings.EqualFold(t.Effect.Params["Mode"], "Transform") {
+			continue
+		}
+		switch t.Mode {
+		case "Phase":
+			return none + ":condition"
+		case "Attacks", "AttackersDeclared":
+			return none + ":attack"
+		case "SpellCast", "SpellCastOrCopy":
+			return none + ":spellcast"
+		default:
+			return none + ":trigger"
+		}
+	}
+	return none + ":no-cause"
+}
+
+// transformedStart is a "when this creature transforms into CARDNAME"
+// trigger (Mode Transformed) on a back face. A BackFace placement is an
+// enter, not a transform (CR 701.27), so the trigger never fires from it:
+// the card stands on its front face and the start's own line transforms it,
+// either with the front face's activated transform ability or with a
+// one-card enabler (transformEnabler). A card with no placeable cause is
+// refused by name (transformRefusal).
+func transformedStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
+	const none = "no-generator:trigger:Transformed"
+	if !selfCard(trig) {
+		return none + ":not-self" // a watcher's "whenever a permanent you control transforms" needs another transform, not this card's
+	}
+	if why := eventParamsOK(trig, "Transformed", "ValidCard"); why != "" {
+		return why
+	}
+	if c.AlternateMode != "DoubleFaced" {
+		// a modal or other two-faced card can be entered on a face but never
+		// transformed into one
+		return none + ":not-transforming"
+	}
+	fi := -1
+	for i, cf := range c.Faces {
+		if cf == face {
+			fi = i
+			break
+		}
+	}
+	if fi != 1 {
+		// transforming INTO the front face would need the back face placed
+		// and transformed back: not a back-face start
+		return none + ":front"
+	}
+	front := c.Faces[0]
+	if why := FieldBlock(front); why != "" {
+		return "battlefield:" + why
+	}
+	if asEnters(front) {
+		return "as-enters"
+	}
+	// A daybound or nightbound permanent cannot be transformed by another
+	// effect or ability (CR 702.145b), and a battlefield permanent with an
+	// upkeep or draw trigger refuses the lowering's cut (lower.phaseTriggered),
+	// so neither can be served by a start that places the card and transforms
+	// it. Refuse by the narrower cause before trying an enabler.
+	if front.HasKeyword("Daybound") || front.HasKeyword("Nightbound") {
+		return none + ":day-night"
+	}
+	if upkeepOrDraw(front) {
+		return none + ":condition"
+	}
+	abilityWhy := ""
+	if i := selfTransformAbility(front); i >= 0 && !transformAbilityGated(front.Abilities[i]) {
+		if why := abilityFocus(reg, b, front, card, generic, i, front.Abilities[i], f); why == "" {
+			return ""
+		} else {
+			abilityWhy = why
+		}
+	}
+	if transformEnabler(reg, front, card, f) {
+		return ""
+	}
+	if abilityWhy != "" {
+		return abilityWhy
+	}
+	return transformRefusal(front)
+}
+
 // selfOrYourCreature reports whether a Phase trigger's tapped condition reads
 // the card itself (PresentDefined Self) or a creature its controller
 // controls: an attack by the card meets either.
