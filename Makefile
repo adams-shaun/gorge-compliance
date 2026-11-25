@@ -74,7 +74,17 @@ GO_TEST_FLAGS ?= -p=2
 # batch after the move and stacked the trigger). RotFarmMortipedeTest and SkeletonCrewTest.test_ReturnItself_NoTrigger
 # (the fork carried it @Ignore'd). Card behaviour change only for the CardsLeaveGraveyardTriggeredAbility cards, so the
 # manifests are unchanged.
-XMAGE_REF  ?= 30c62e641b379a0a888f04412ffa59b8ebe0a618
+# 63c40e5be5 = 30c62e641b merged with fork commit 0777660 (adams-shaun/mage#1, branch fix/ghost-of-illyria-delayed-trigger):
+# ExileReturnBattlefieldNextEndStepTargetEffect creates the "return it at the beginning of the next end step" delayed
+# ability even when nothing was exiled (CR 603.7a), so Skyskipper Duo, Ghost of Illyria, Ennis, Debate Moderator,
+# S.H.I.E.L.D. Flying Car and Eerie Interlude with zero targets stack it at the end step as gorge and Forge do; it
+# returned before adding the delayed ability. SkyskipperDuoTest (zero targets fails before, passes after; one target).
+# 43e83011cb = 63c40e5be5 plus the CR 205.1a type-setting fix: Fowl Play and Reprobation set the card type
+# (LoseType.ALL_BUT_COLOR, so an artifact creature stops being an artifact and loses its other subtypes), and Swift
+# Reconfiguration removes the creature subtypes with the creature type, keeping artifact subtypes. FowlPlayTest,
+# ReprobationTest, SwiftReconfigurationTest. Card behaviour change only for those cards and the
+# ExileReturnBattlefieldNextEndStepTargetEffect users, so the manifests are unchanged. Pin line oracle/xpin-1125.
+XMAGE_REF  ?= 43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
