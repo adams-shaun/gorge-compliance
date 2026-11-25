@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 ab050d55-a47d-4880-b65a-29f562773d7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:worry-beads:f0t0:s1,f:xs:XP:worry-beads:f0t0:s1	-	-	-	3aa6ded33acb	-	9fabd5cdd63e	-	-	2026-11-25	xproof
 ab050d55-a47d-4880-b65a-29f562773d7a	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:worry-beads:f0t0:s1,f:xs:XP:worry-beads:f0t0:s1	-	-	-	3aa6ded33acb	-	9fabd5cdd63e	-	-	2026-11-25	xproof
 ab0707fb-b404-433d-b845-0d50d01cd72e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ab0707fb-b404-433d-b845-0d50d01cd72e	f0/t0	NULL	owed	refused:no-generator:trigger:Scry	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+ab0707fb-b404-433d-b845-0d50d01cd72e	f0/t0	NULL	owed	refused:no-generator:trigger:Scry	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 ab097f46-a7bf-4cf1-a96c-36b681fe79da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nessian-hornbeetle:cast:s1,f:xs:XP:nessian-hornbeetle:cast:s1	-	-	-	23b491658465	-	f1b1803d8884	-	-	2026-11-24	xproof
 ab097f46-a7bf-4cf1-a96c-36b681fe79da	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nessian-hornbeetle:f0t0:s1,f:xs:XP:nessian-hornbeetle:f0t0:s1	-	-	-	3aa6ded33acb	-	f1b1803d8884	-	-	2026-11-25	xproof
 ab0aea13-1dbc-424a-ab7e-cdb303036a56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:high-stride:cast:s1,f:xs:XP:high-stride:cast:s1	-	-	-	3aa6ded33acb	-	2be62b400ca1	-	-	2026-11-25	xproof
@@ -61,8 +61,8 @@ ab4a25d8-e1d0-454e-9d06-f7960a0352bc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ab4cf0ba-617f-4ef6-a831-eb3b41b4ab34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heartmender:f0t0:s1,f:xs:XP:heartmender:f0t0:s1	-	-	-	da6bc3fe8458	-	753370be403b	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 ab4cf0ba-617f-4ef6-a831-eb3b41b4ab34	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:heartmender:f0t0:s1,f:xs:XP:heartmender:f0t0:s1	-	-	-	da6bc3fe8458	-	753370be403b	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 ab4cf0ba-617f-4ef6-a831-eb3b41b4ab34	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-ab4e9284-7904-413e-97b0-69793be79cc5	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-ab4e9284-7904-413e-97b0-69793be79cc5	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ab4e9284-7904-413e-97b0-69793be79cc5	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+ab4e9284-7904-413e-97b0-69793be79cc5	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 ab52988f-ffd0-4154-9052-593a9d450d98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab52988f-ffd0-4154-9052-593a9d450d98	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:goblin-heelcutter:f0t0:s1,f:xs:XP:goblin-heelcutter:f0t0:s1	-	-	-	d864b561c9cb	-	b57a5058382e	-	-	2026-11-24	xproof
 ab539b16-d2a0-404d-8ad3-7ff33f2f1abe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

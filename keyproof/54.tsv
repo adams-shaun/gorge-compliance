@@ -26,11 +26,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 541c6564-ec39-4b14-8c02-dd6a5d122ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541f13aa-a1ed-453a-b719-82daef1be607	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:manipulate-fate:cast:s1,f:xs:XP:manipulate-fate:cast:s1	-	-	-	5f2128bf97e4	-	c5cc29567650	-	-	2026-11-24	xproof
 54216953-c575-4e08-9bee-384721c0bc4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54216953-c575-4e08-9bee-384721c0bc4d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+54216953-c575-4e08-9bee-384721c0bc4d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 542423cb-fbfb-4a2f-9f6d-87b273a95e96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-valiant-protector:cast:s1,f:xs:XP:ajani-valiant-protector:cast:s1	-	-	-	d864b561c9cb	-	c5261e925f8d	-	-	2026-11-24	xproof
 542423cb-fbfb-4a2f-9f6d-87b273a95e96	f0/a0	PutCounter	agreed	-	FX	start	1	0	x:xs:XP:ajani-valiant-protector:cast:s2,f:xs:XP:ajani-valiant-protector:cast:s2	-	-	-	d864b561c9cb	-	c5261e925f8d	-	-	2026-11-24	xproof
 542423cb-fbfb-4a2f-9f6d-87b273a95e96	f0/a1	DigUntil	agreed	-	FX	start	1	0	x:xs:XP:ajani-valiant-protector:cast:s1,f:xs:XP:ajani-valiant-protector:cast:s1	-	-	-	d864b561c9cb	-	c5261e925f8d	-	-	2026-11-24	xproof
-542423cb-fbfb-4a2f-9f6d-87b273a95e96	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+542423cb-fbfb-4a2f-9f6d-87b273a95e96	f0/a2	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:ajani-valiant-protector:f0a2:s1,f:xs:XP:ajani-valiant-protector:f0a2:s1	-	-	-	da6bc3fe8458	-	c5261e925f8d	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 54257132-c67a-4c19-bada-08e7025c2929	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 542831c6-6279-4977-9b29-0fb9c0ebf04d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mischievous-mystic:cast:s1,f:xs:XP:mischievous-mystic:cast:s1	-	-	-	23b491658465	-	418dcc39846d	-	-	2026-11-24	xproof
 542831c6-6279-4977-9b29-0fb9c0ebf04d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:mischievous-mystic:combat0.attack:s1,f:xs:XP:mischievous-mystic:combat0.attack:s1	-	-	-	3aa6ded33acb	-	418dcc39846d	-	-	2026-11-25	xproof

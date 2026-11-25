@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 852c6520-d148-4923-a312-05a9af821f24	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:eroded-canyon:f0t0:s1,f:xs:XP:eroded-canyon:f0t0:s1	-	-	-	23b491658465	-	0622f163c062	-	-	2026-11-25	xproof
 852c6520-d148-4923-a312-05a9af821f24	land	land	agreed	-	FX	start	4	0	x:xs:XP:eroded-canyon:f0t0:s1,f:xs:XP:eroded-canyon:f0t0:s1	-	-	-	23b491658465	-	0622f163c062	-	-	2026-11-25	xproof
 852d4dc3-404d-4565-99e9-1eac8f6eca5e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-852d4dc3-404d-4565-99e9-1eac8f6eca5e	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+852d4dc3-404d-4565-99e9-1eac8f6eca5e	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:desert-of-the-indomitable:f0a1:s1,f:xs:XP:desert-of-the-indomitable:f0a1:s1	-	-	-	da6bc3fe8458	-	655d57a77116	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 852d4dc3-404d-4565-99e9-1eac8f6eca5e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 852e3d89-64a0-4b32-be2b-b1d6cd7c2f64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omenport-vigilante:cast:s1,f:xs:XP:omenport-vigilante:cast:s1	-	-	-	3aa6ded33acb	-	0d82dd638cc7	-	-	2026-11-25	xproof
 852e3d89-64a0-4b32-be2b-b1d6cd7c2f64	static#0.0	static#0.0	agreed	-	X	scen	1	0	Omenport Vigilante/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8578c462-7b2d-4b69-ad10-a2eab44ac98d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 857d94f7-113c-45a4-a88a-5d087347d57f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leonin-shikari:cast:s1,f:xs:XP:leonin-shikari:cast:s1	-	-	-	25696bf19d5b	-	6dd009ee5641	-	-	2026-11-24	xproof
 857db7e0-254a-4920-a71d-9bab6555342f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-857db7e0-254a-4920-a71d-9bab6555342f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+857db7e0-254a-4920-a71d-9bab6555342f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 857f9a8d-ba77-4afd-922d-994f66e478ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyknite:f0t0:s1,f:xs:XP:pyknite:f0t0:s1	-	-	-	8c0bd19283bb	-	551b5387fb9a	-	-	2026-11-24	xproof
 857f9a8d-ba77-4afd-922d-994f66e478ef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pyknite:f0t0:s1,f:xs:XP:pyknite:f0t0:s1	-	-	-	8c0bd19283bb	-	551b5387fb9a	-	-	2026-11-24	xproof
 857febd9-cdd7-4f8e-a852-d88084b0cfbc	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:underground-river:f0a0:s1,f:xs:XP:underground-river:f0a0:s1	-	-	-	c2272f704fde	-	1df0d3e33fd2	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
@@ -133,7 +133,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85b8902f-2515-4ded-b28a-a83334f089f1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:boompile:cast:s2,f:xs:XP:boompile:cast:s2	-	-	-	8c0bd19283bb	-	547ed2d80ecf	-	-	2026-11-24	xproof
 85b8902f-2515-4ded-b28a-a83334f089f1	f0/a0	FlipCoin	agreed	-	FX	start	2	0	x:xs:XP:boompile:cast:s2,f:xs:XP:boompile:cast:s2	-	-	-	8c0bd19283bb	-	547ed2d80ecf	-	-	2026-11-24	xproof
 85bac6ad-b63a-4068-a813-ad685966e171	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85bde6ac-3dd4-4946-8b57-24f57e3eae2b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+85bde6ac-3dd4-4946-8b57-24f57e3eae2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plummet:cast:s1,f:xs:XP:plummet:cast:s1	-	-	-	da6bc3fe8458	-	5c20ee741712	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 85c20c39-7b9c-4661-9372-e659b321773f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85c6290e-2bf2-4666-a606-326a8209ace6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:talonrend:cast:s1,f:xs:XP:talonrend:cast:s1	-	-	-	8a1b1a193ec0	-	f3f027442ac9	-	-	2026-11-24	xproof
 85c6290e-2bf2-4666-a606-326a8209ace6	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:talonrend:f0a0:s2,f:xs:XP:talonrend:f0a0:s2	-	-	-	da6bc3fe8458	-	f3f027442ac9	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85d025d9-158d-4bf1-b3b2-361f3fe59663	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:magmatic-sprinter:cast:s1	-	-	-	ae86f6029288	-	cef501993e8c	-	-	2026-11-24	xproof
 85d025d9-158d-4bf1-b3b2-361f3fe59663	f0/t1	Phase	agreed	-	F	start	4	0	f:xs:XP:magmatic-sprinter:cast:s1	-	-	-	ae86f6029288	-	cef501993e8c	-	-	2026-11-24	xproof
 85d03947-a39a-4f4f-97c3-6d1094c9248e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85d03947-a39a-4f4f-97c3-6d1094c9248e	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+85d03947-a39a-4f4f-97c3-6d1094c9248e	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 85d06533-3c0b-46a8-8fdb-379db9ae7e2e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:assassin-gauntlet:cast:s1,f:xs:XP:assassin-gauntlet:cast:s1	-	-	-	ae86f6029288	-	4de770431045	-	-	2026-11-24	xproof
 85d06533-3c0b-46a8-8fdb-379db9ae7e2e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85d06533-3c0b-46a8-8fdb-379db9ae7e2e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:assassin-gauntlet:cast:s1,f:xs:XP:assassin-gauntlet:cast:s1	-	-	-	ae86f6029288	-	4de770431045	-	-	2026-11-24	xproof

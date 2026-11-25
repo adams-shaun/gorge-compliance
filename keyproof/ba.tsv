@@ -47,7 +47,7 @@ ba3bfe0c-2bd6-469c-802c-440b7caf7fb5	f0/a1	NULL	owed	refused:steps-needed:cost:S
 ba477a45-84cc-4a85-98e4-50dca3e58788	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ba477a45-84cc-4a85-98e4-50dca3e58788	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ba47a07e-890c-411a-9fd0-947c2f738da2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ba47a07e-890c-411a-9fd0-947c2f738da2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+ba47a07e-890c-411a-9fd0-947c2f738da2	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 ba47a07e-890c-411a-9fd0-947c2f738da2	f0/t1	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:volatile-rig:f0t1:s1,f:xs:XP:volatile-rig:f0t1:s1	-	-	-	d864b561c9cb	-	4ff89bafc9bc	-	-	2026-11-24	xproof
 ba48a1a6-a53f-4e7e-881a-472637a3a007	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ba48a1a6-a53f-4e7e-881a-472637a3a007	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ babcc551-39bb-4b1c-92a0-e60b236a59b2	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 babeeaf6-0fe4-491f-bbf5-63a0568b3d6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 babeeaf6-0fe4-491f-bbf5-63a0568b3d6e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 babeeaf6-0fe4-491f-bbf5-63a0568b3d6e	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bac52ae6-24ee-4c4f-a32c-3eb9859dc025	cast	cast-resolve	agreed	-	X	scen	1	0	Trip Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+bac52ae6-24ee-4c4f-a32c-3eb9859dc025	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trip-up:cast:s1,f:xs:XP:trip-up:cast:s1	-	-	-	da6bc3fe8458	-	6d8e2cd34a46	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 bac52ae6-24ee-4c4f-a32c-3eb9859dc025	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:trip-up:f0a1:s1,f:xs:XP:trip-up:f0a1:s1	-	-	-	23c4009444b0	-	6d8e2cd34a46	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bac94fc9-808b-4dc9-b405-408dd2aa6194	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:canyon-crawler:f0t0:s1,f:xs:XP:canyon-crawler:f0t0:s1	-	-	-	267e485f6204	-	2d9af87add91	-	-	2026-11-24	xproof
 bac94fc9-808b-4dc9-b405-408dd2aa6194	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:canyon-crawler:combat0.attack:s1,f:xs:XP:canyon-crawler:combat0.attack:s1	-	-	-	23c4009444b0	-	2d9af87add91	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -163,7 +163,7 @@ bad2385b-6981-46fa-a012-d3992c3bc118	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bad27b43-7716-4ce1-82ba-2a6d437363e7	cast	cast-resolve	agreed	-	X	scen	1	0	The Mechanist, Aerial Artisan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bad27b43-7716-4ce1-82ba-2a6d437363e7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Mechanist, Aerial Artisan/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bad27b43-7716-4ce1-82ba-2a6d437363e7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Mechanist, Aerial Artisan/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bad2e3b2-ad47-4e17-b35e-0fcc13e82937	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+bad2e3b2-ad47-4e17-b35e-0fcc13e82937	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 bad6a5a9-7010-418d-b042-182926aa999d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:norn-s-choirmaster:cast:s1,f:xs:XP:norn-s-choirmaster:cast:s1	-	-	-	8c0bd19283bb	-	c4f887fcbcde	-	-	2026-11-24	xproof
 bad6a5a9-7010-418d-b042-182926aa999d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 bad6a5a9-7010-418d-b042-182926aa999d	f0/t1	Attacks	agreed	-	X	start	2	0	x:xs:XP:norn-s-choirmaster:f0t1:s1	-	-	-	23c4009444b0	-	c4f887fcbcde	-	-	2026-11-25	xproof

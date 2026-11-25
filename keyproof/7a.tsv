@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a4cc57b-9f85-446c-9ca0-98c72b9bb732	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:happily-ever-after:f0t1:s1,f:xs:XP:happily-ever-after:f0t1:s1	-	-	-	3aa6ded33acb	-	62c5c95c47ce	-	-	2026-11-25	xproof
 7a4cc57b-9f85-446c-9ca0-98c72b9bb732	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:happily-ever-after:f0t1:s1,f:xs:XP:happily-ever-after:f0t1:s1	-	-	-	3aa6ded33acb	-	62c5c95c47ce	-	-	2026-11-25	xproof
 7a4cc57b-9f85-446c-9ca0-98c72b9bb732	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:happily-ever-after:f0t1:s1,f:xs:XP:happily-ever-after:f0t1:s1	-	-	-	3aa6ded33acb	-	62c5c95c47ce	-	-	2026-11-25	xproof
-7a4ddb8f-08ad-4bf9-82f6-72b073dd859a	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+7a4ddb8f-08ad-4bf9-82f6-72b073dd859a	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 7a501f7e-eec8-45f7-9ac3-483fd8f5ca5e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tomik-orzhov-lawmage:cast:s1,f:xs:XP:tomik-orzhov-lawmage:cast:s1	-	-	-	fb9d3088f0bf	-	edad741a95ed	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7a501f7e-eec8-45f7-9ac3-483fd8f5ca5e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tomik-orzhov-lawmage:combat0.attack:s1,f:xs:XP:tomik-orzhov-lawmage:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	edad741a95ed	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7a501f7e-eec8-45f7-9ac3-483fd8f5ca5e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tomik-orzhov-lawmage:combat0.block:s1,f:xs:XP:tomik-orzhov-lawmage:combat0.block:s1	-	-	-	fb9d3088f0bf	-	edad741a95ed	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7a838374-fc40-4fb6-9d38-a96f01e7038a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a838374-fc40-4fb6-9d38-a96f01e7038a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wirewood-herald:f0t0:s1,f:xs:XP:wirewood-herald:f0t0:s1	-	-	-	fc71ca68c5ac	-	8efab85fa5b0	-	-	2026-11-24	xproof
 7a8405f5-ef37-460e-8e0b-55378f3b407b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7a8405f5-ef37-460e-8e0b-55378f3b407b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7a8405f5-ef37-460e-8e0b-55378f3b407b	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:vedalken-blademaster:f0t0:s1,f:xs:XP:vedalken-blademaster:f0t0:s1	-	-	-	da6bc3fe8458	-	421a2f84e596	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 7a8baaf9-e21f-41a0-9f15-80764f6e5e68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a8baaf9-e21f-41a0-9f15-80764f6e5e68	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7a8baaf9-e21f-41a0-9f15-80764f6e5e68	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

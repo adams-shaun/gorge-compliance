@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0452be2a-e97a-4269-a9e3-b616265ecb2e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Vivi Ornitier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0452be2a-e97a-4269-a9e3-b616265ecb2e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vivi Ornitier/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 045488b3-0206-4dcd-91ab-59ec542f06c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guidelight-optimizer:cast:s1,f:xs:XP:guidelight-optimizer:cast:s1	-	-	-	23c4009444b0	-	ab2d97b93b42	-	-	2026-11-25	xproof
-045488b3-0206-4dcd-91ab-59ec542f06c0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Guidelight Optimizer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+045488b3-0206-4dcd-91ab-59ec542f06c0	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:guidelight-optimizer:f0a0:s1,f:xs:XP:guidelight-optimizer:f0a0:s1	-	-	-	da6bc3fe8458	-	ab2d97b93b42	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 04559759-1afd-4785-badc-c3416041f016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hallar-the-firefletcher:cast:s1,f:xs:XP:hallar-the-firefletcher:cast:s1	-	-	-	d864b561c9cb	-	3e845bb19eb0	-	-	2026-11-24	xproof
 04559759-1afd-4785-badc-c3416041f016	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0456ec64-2c81-4763-a352-8ff64a4c3d6b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:deadly-rollick:cast:s1	-	-	-	23c4009444b0	-	f23a14ffb740	-	-	2026-11-25	xproof
@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04853f06-3fd2-445d-9b0d-d68d0f116635	f0/t0	NULL	owed	refused:no-generator:trigger:AbilityCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 04858b93-0a2a-44d0-942d-7fadf589cbb7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:curator-of-mysteries:cast:s1,f:xs:XP:curator-of-mysteries:cast:s1	-	-	-	d864b561c9cb	-	8bea646c0d59	-	-	2026-11-24	xproof
 04858b93-0a2a-44d0-942d-7fadf589cbb7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04858b93-0a2a-44d0-942d-7fadf589cbb7	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+04858b93-0a2a-44d0-942d-7fadf589cbb7	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 048925e1-3bd6-4caa-90b9-e75e890032a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 048925e1-3bd6-4caa-90b9-e75e890032a5	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:specter-of-the-fens:f0a0:s1,f:xs:XP:specter-of-the-fens:f0a0:s1	-	-	-	d864b561c9cb	-	8760d0d81d77	-	-	2026-11-24	xproof
 048c3b0b-48ef-42f5-a2af-90aa1d133296	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:atomic-microsizer:cast:s1,f:xs:XP:atomic-microsizer:cast:s1	-	-	-	23c4009444b0	-	900155e2969d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -195,7 +195,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04d8615c-3883-4251-9790-1d8a4a40e142	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 04da8c46-9703-47f2-974b-c144464ec380	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04dc2e9c-312c-4af8-950c-6a7ed859c9be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04dcda3b-3401-4523-8b97-b700a14feb36	cast	cast-resolve	agreed	-	X	scen	1	0	Gallant Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+04dcda3b-3401-4523-8b97-b700a14feb36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gallant-strike:cast:s1,f:xs:XP:gallant-strike:cast:s1	-	-	-	da6bc3fe8458	-	379573fb9396	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 04dcda3b-3401-4523-8b97-b700a14feb36	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:gallant-strike:f0a1:s1,f:xs:XP:gallant-strike:f0a1:s1	-	-	-	23c4009444b0	-	379573fb9396	-	-	2026-11-25	xproof
 04dce348-be42-443a-a88d-c47436ba2ec4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04dd449f-ff3a-4ed7-8241-244d58b371dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-settler:f0t0:s1,f:xs:XP:goblin-settler:f0t0:s1	-	-	-	5f2128bf97e4	-	61f5033d24e4	-	-	2026-11-24	xproof

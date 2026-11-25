@@ -23,7 +23,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b102ccc-7629-457c-aba6-e9b00fd50c85	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b102ccc-7629-457c-aba6-e9b00fd50c85	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+3b102ccc-7629-457c-aba6-e9b00fd50c85	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	static#1.0	static#1.0	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:littjara-mirrorlake:f0a1:s2,f:xs:XP:littjara-mirrorlake:f0a1:s2	-	-	-	23b491658465	-	327b80782d82	-	-	2026-11-25	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a1	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	land	land	agreed	-	FX	start	2	0	x:xs:XP:littjara-mirrorlake:land:s1,f:xs:XP:littjara-mirrorlake:land:s1	-	-	-	d864b561c9cb	-	327b80782d82	-	-	2026-11-24	xproof
-3b583358-d0d5-4f53-b06c-c6439156e684	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3b583358-d0d5-4f53-b06c-c6439156e684	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:outcaster-trailblazer:cast:s1,f:xs:XP:outcaster-trailblazer:cast:s1	-	-	-	3aa6ded33acb	-	06a2cac6ce6a	-	-	2026-11-25	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b6fb13b-f126-4697-90a1-64b14ffcecd6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:snarl-song:cast:s1,f:xs:XP:snarl-song:cast:s1	-	-	-	23c4009444b0	-	e2797e905153	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b7120a6-700b-4c61-bea4-a835f0cc0bcb	cast	cast-resolve	agreed	-	X	scen	1	0	Ice Flan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b7120a6-700b-4c61-bea4-a835f0cc0bcb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ice Flan/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b7120a6-700b-4c61-bea4-a835f0cc0bcb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+3b7120a6-700b-4c61-bea4-a835f0cc0bcb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 3b71aeee-a4a8-46d3-9973-06db14d8bf6c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:jolting-merfolk:f0t0:s1	-	-	-	3aa6ded33acb	-	bacde41d7e1b	-	-	2026-11-25	xproof
 3b71aeee-a4a8-46d3-9973-06db14d8bf6c	f0/a0	Tap	agreed	-	F	start	2	0	f:xs:XP:jolting-merfolk:f0t0:s1	-	-	-	3aa6ded33acb	-	bacde41d7e1b	-	-	2026-11-25	xproof
 3b71aeee-a4a8-46d3-9973-06db14d8bf6c	f0/t0	Phase/Fading	agreed	-	F	start	2	0	f:xs:XP:jolting-merfolk:f0t0:s1	-	-	-	3aa6ded33acb	-	bacde41d7e1b	-	-	2026-11-25	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b9b5b22-5a7d-4e37-a870-ca0f0efa4f36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b9b5b22-5a7d-4e37-a870-ca0f0efa4f36	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:sigil-of-the-empty-throne:f0t0:s1,f:xs:XP:sigil-of-the-empty-throne:f0t0:s1	-	-	-	23c4009444b0	-	fa94d6ee0778	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b9bc41a-a43f-4be7-9452-f61f5ad5b482	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sita-varma-masked-racer:cast:s1,f:xs:XP:sita-varma-masked-racer:cast:s1	-	-	-	23c4009444b0	-	23efeae3f833	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-3b9bc41a-a43f-4be7-9452-f61f5ad5b482	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sita Varma, Masked Racer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3b9bc41a-a43f-4be7-9452-f61f5ad5b482	f0/a0	PutCounter	agreed	-	F	start	1	0	f:xs:XP:sita-varma-masked-racer:f0a0:s2	-	-	-	da6bc3fe8458	-	23efeae3f833	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 3ba19659-461f-482c-b882-b4fca7d5d1f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ba19659-461f-482c-b882-b4fca7d5d1f8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3ba223b7-743f-4f99-836e-869778fb2e99	cast	cast-resolve	agreed	-	FX	scen	2	0	Undercover Crocodelf/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

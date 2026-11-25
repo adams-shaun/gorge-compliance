@@ -63,7 +63,7 @@ f256c828-01d2-4077-823d-8dccd15120bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f25af8de-3edb-400b-9b6c-ec446a8314fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f25af8de-3edb-400b-9b6c-ec446a8314fa	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f25c5451-58fa-4916-8342-ae88c5e406cc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wander-in-death:cast:s1,f:xs:XP:wander-in-death:cast:s1	-	-	-	d864b561c9cb	-	e376748d267b	-	-	2026-11-24	xproof
-f25c5451-58fa-4916-8342-ae88c5e406cc	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+f25c5451-58fa-4916-8342-ae88c5e406cc	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:wander-in-death:f0a1:s1,f:xs:XP:wander-in-death:f0a1:s1	-	-	-	da6bc3fe8458	-	e376748d267b	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 f2630b02-fb48-4167-8a47-8284f7d4c484	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:memnarch-the-warden:f0t0:s1,f:xs:XP:memnarch-the-warden:f0t0:s1	-	-	-	8c0bd19283bb	-	f7492ee2404e	-	-	2026-11-24	xproof
 f2630b02-fb48-4167-8a47-8284f7d4c484	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:memnarch-the-warden:f0t0:s1,f:xs:XP:memnarch-the-warden:f0t0:s1	-	-	-	8c0bd19283bb	-	f7492ee2404e	-	-	2026-11-24	xproof
 f2630b02-fb48-4167-8a47-8284f7d4c484	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:memnarch-the-warden:f0t1:s1,f:xs:XP:memnarch-the-warden:f0t1:s1	-	-	-	8c0bd19283bb	-	f7492ee2404e	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ f2cedb38-12b0-4489-a62b-9b6a3776d695	f0/t0	Phase/Cumulative upkeep	owed	harness	
 f2cf087a-d89a-4145-9394-945ce41c8cca	cast	cast-resolve	agreed	-	X	scen	1	0	Archway Angel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f2cf087a-d89a-4145-9394-945ce41c8cca	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:archway-angel:combat0.attack:s1,f:xs:XP:archway-angel:combat0.attack:s1	-	-	-	3aa6ded33acb	-	04ddf878ae51	-	-	2026-11-25	xproof
 f2cf087a-d89a-4145-9394-945ce41c8cca	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:archway-angel:combat0.block:s1,f:xs:XP:archway-angel:combat0.block:s1	-	-	-	3aa6ded33acb	-	04ddf878ae51	-	-	2026-11-25	xproof
-f2cf087a-d89a-4145-9394-945ce41c8cca	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+f2cf087a-d89a-4145-9394-945ce41c8cca	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 f2d1e991-e13a-43c7-85aa-d53dd14822e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wake-thrasher:cast:s1,f:xs:XP:wake-thrasher:cast:s1	-	-	-	8a1b1a193ec0	-	63f48593da7c	-	-	2026-11-24	xproof
 f2d1e991-e13a-43c7-85aa-d53dd14822e6	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 f2d5949b-3cdc-4efd-9841-7d450e12dbbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-tactician:f0t0:s1,f:xs:XP:aven-tactician:f0t0:s1	-	-	-	d864b561c9cb	-	d2da79dfa106	-	-	2026-11-24	xproof

@@ -19,7 +19,7 @@ b628150b-08a1-4ea3-978d-60255dfb0b7e	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:ph
 b628a39b-c923-473d-900a-1617f47ecb76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b628a39b-c923-473d-900a-1617f47ecb76	f0/a0	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:selvala-explorer-returned:f0a0:s1,f:xs:XP:selvala-explorer-returned:f0a0:s1	-	-	-	8c0bd19283bb	-	7a849c602b09	-	-	2026-11-24	xproof
 b6294891-79e6-4f2a-a82d-6cffce968356	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6294891-79e6-4f2a-a82d-6cffce968356	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b6294891-79e6-4f2a-a82d-6cffce968356	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:kefnet-s-monument:f0t0:s1,f:xs:XP:kefnet-s-monument:f0t0:s1	-	-	-	da6bc3fe8458	-	0dd346cb19de	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 b638407b-4749-41fa-8054-f9db57b849ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ondu-champion:f0t0:s1,f:xs:XP:ondu-champion:f0t0:s1	-	-	-	d864b561c9cb	-	f5fab4d1edfb	-	-	2026-11-24	xproof
 b638407b-4749-41fa-8054-f9db57b849ea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ondu-champion:f0t0:s1,f:xs:XP:ondu-champion:f0t0:s1	-	-	-	d864b561c9cb	-	f5fab4d1edfb	-	-	2026-11-24	xproof
 b638c475-778c-4251-8dac-6a18c3394ae5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tall-as-a-beanstalk:cast:s1,f:xs:XP:tall-as-a-beanstalk:cast:s1	-	-	-	3aa6ded33acb	-	3fae79565342	-	-	2026-11-25	xproof
@@ -54,8 +54,8 @@ b6689782-08d8-48e1-a05d-cd040dfe85bc	f0/t0	NULL	owed	refused:no-generator:trigge
 b66dd751-fef7-4310-9c09-8d1b1fc78fef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b66dd751-fef7-4310-9c09-8d1b1fc78fef	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b66dd751-fef7-4310-9c09-8d1b1fc78fef	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b66deeb5-7371-4f06-b10e-d65165bc07b2	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:painted-bluffs:f0a1:s2,f:xs:XP:painted-bluffs:f0a1:s2	-	-	-	23b491658465	-	502d61051049	-	-	2026-11-25	xproof
-b66deeb5-7371-4f06-b10e-d65165bc07b2	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b66deeb5-7371-4f06-b10e-d65165bc07b2	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:painted-bluffs:f0a1:s1,f:xs:XP:painted-bluffs:f0a1:s1	-	-	-	da6bc3fe8458	-	502d61051049	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+b66deeb5-7371-4f06-b10e-d65165bc07b2	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:painted-bluffs:f0a1:s1,f:xs:XP:painted-bluffs:f0a1:s1	-	-	-	da6bc3fe8458	-	502d61051049	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 b66deeb5-7371-4f06-b10e-d65165bc07b2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b677a73c-f179-46bf-83ee-c2b05f9fca67	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:the-spirit-oasis:f0t0:s2,f:xs:XP:the-spirit-oasis:f0t0:s2	-	-	-	267e485f6204	-	e8d954a9efe8	-	-	2026-11-24	xproof
 b677a73c-f179-46bf-83ee-c2b05f9fca67	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:the-spirit-oasis:f0t0:s2,f:xs:XP:the-spirit-oasis:f0t0:s2	-	-	-	267e485f6204	-	e8d954a9efe8	-	-	2026-11-24	xproof

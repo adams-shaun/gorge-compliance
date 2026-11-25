@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03008c7d-c738-473d-a968-1922b2899d1a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Roadside Blowout/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0300d8a1-ff4e-4e05-a097-4822f80c47e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0300d8a1-ff4e-4e05-a097-4822f80c47e1	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:smolder-initiate:f0t0:s1,f:xs:XP:smolder-initiate:f0t0:s1	-	-	-	23c4009444b0	-	04eb1ca87d86	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-03025ec0-75fe-439d-b0c1-9bdb0f0ff336	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+03025ec0-75fe-439d-b0c1-9bdb0f0ff336	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 03048844-32bb-45a2-a754-73f75eaa4566	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03048844-32bb-45a2-a754-73f75eaa4566	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 030b5408-f216-43e4-8593-f78d22821876	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wail-of-the-forgotten:cast:s1,f:xs:XP:wail-of-the-forgotten:cast:s1	-	-	-	23b491658465	-	980f5362a612	-	-	2026-11-25	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 036b7b89-e49a-4560-9de9-1d4d71f3f666	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sparring Dummy/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 036b7b89-e49a-4560-9de9-1d4d71f3f666	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sparring Dummy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0370afa0-07d3-4787-8a5b-10272cb3a486	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0370afa0-07d3-4787-8a5b-10272cb3a486	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0370afa0-07d3-4787-8a5b-10272cb3a486	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:oketra-s-monument:f0t0:s1,f:xs:XP:oketra-s-monument:f0t0:s1	-	-	-	da6bc3fe8458	-	83e0faddc77b	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 037355be-71e7-4866-80a6-80352c304970	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 037355be-71e7-4866-80a6-80352c304970	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 037eccdb-21c3-4048-af4f-b25dcbe99134	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0390a3dc-386c-402f-a89c-b94867bfb0a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0391691f-6708-481a-93a5-6677e6fa2ff3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunflare-shaman:cast:s1,f:xs:XP:sunflare-shaman:cast:s1	-	-	-	d864b561c9cb	-	aa7e0b88a63d	-	-	2026-11-24	xproof
 0391691f-6708-481a-93a5-6677e6fa2ff3	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:sunflare-shaman:f0a0:s1,f:xs:XP:sunflare-shaman:f0a0:s1	-	-	-	d864b561c9cb	-	aa7e0b88a63d	-	-	2026-11-24	xproof
-03931270-504a-4b0b-af3f-918bf124ea07	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+03931270-504a-4b0b-af3f-918bf124ea07	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 0394846e-bc27-4d67-988e-b08a389690de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:cast:s1,f:xs:XP:rover-blades:cast:s1	-	-	-	23c4009444b0	-	29523231a448	-	-	2026-11-25	xproof
 0394846e-bc27-4d67-988e-b08a389690de	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:f0a0:s1,f:xs:XP:rover-blades:f0a0:s1	-	-	-	23c4009444b0	-	29523231a448	-	-	2026-11-25	xproof
 0394846e-bc27-4d67-988e-b08a389690de	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:f0a1:s1,f:xs:XP:rover-blades:f0a1:s1	-	-	-	23c4009444b0	-	29523231a448	-	-	2026-11-25	xproof
