@@ -654,7 +654,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # EmptyOptionalAnimateConfirmTest (fixtures/animate: the find, and the same request with a Grizzly Bears) fails before it with the exact
 # miss; scripts/forge-oracle-test-empty-optional-animate.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder
 # and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-empty-optional-animate.
-FORGE_ORACLE_REF ?= 65d8060f39ba8a34193c2a9b593ce363d647726e
+# e99e48e2b50f = 65d8060f39ba plus the forced-pick leaves a queued pick for the later ask (xproof clusters xpt-5e60af5c and
+# xpt-f2f006f3, The Gitrog, Ravenous Ride: Memnite saddles it and it hits, and at the trigger's resolution Forge's Sacrifice cost
+# offers the one saddler, so the pick is forced and gorge logs none; the queued p0:Swamp/p0:Forest pick answers the LATER "put up to
+# X land cards from your hand onto the battlefield" ask of the same step, but StepMachine.pickObjects took the queued pick before it
+# checked the forced case, gave it to the Sacrifice cost and strict-missed "gorge pick p0:Swamp is not among Forge's 1 options").
+# pickObjects now returns the options of a forced ask (opts.size() <= min) without consuming a queued pick whose refs are not among
+# them (queuedPickBelongsToLaterAsk), noted as "forced, queued pick left for a later ask"; a queued pick naming an option is taken
+# as before. LoneForcedCostPickTest (fixtures/gitrog: the f0a0_s1 find) fails before it with the exact miss;
+# scripts/forge-oracle-test-lone-forced-cost-pick.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder
+# and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-lone-forced-cost-pick.
+FORGE_ORACLE_REF ?= e99e48e2b50f66a049d438fd96790293c89b9672
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
