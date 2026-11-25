@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"reflect"
 	"slices"
 	"strings"
 	"testing"
@@ -13,6 +14,8 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -261,6 +264,101 @@ func TestStartTokenIsExercised(t *testing.T) {
 				return nil
 			}); err != nil {
 				t.Fatal(err)
+			}
+		})
+	}
+}
+
+// TestStartPlayerCounter: a start file's player_counters are read strictly
+// (no card, only a counter kind the engines track, n >= 1), folded into a
+// sorted slice, mapped to rules.StartSeat when the pin has the field, and
+// seeded into the live game through the setup hook when it does not.
+func TestStartPlayerCounter(t *testing.T) {
+	dir := t.TempDir()
+	p := filepath.Join(dir, "start.json")
+	body := `{"format":"xproof-start-1","card":"Aethersquall Ancient","key":"f0/a0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"battlefield":["Aethersquall Ancient"],"player_counters":[{"kind":"ENERGY","n":8}]},"p1":{}},` +
+		`"filler":"basics","seeds":1}`
+	if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	f, err := readStartFile(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []startCounter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
+		t.Fatalf("p0 player counters %+v, want %+v", f.Setup.P0.PlayerCounters, want)
+	}
+	pcs, err := f.playerCounterSeats()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []pincap.Counter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(pcs[0], want) {
+		t.Fatalf("seat 0 player counters %+v, want %+v", pcs[0], want)
+	}
+	if len(pcs[1]) != 0 {
+		t.Errorf("seat 1 player counters %+v, want none", pcs[1])
+	}
+	// The live game reads them before the focus play.
+	reg := testutil.CorpusRegistry(t)
+	basic, ok := reg.Lookup("Plains")
+	if !ok {
+		t.Fatal("Plains is not in the corpus")
+	}
+	deck := make([]*cards.Card, startDeckSize)
+	for i := range deck {
+		deck[i] = basic
+	}
+	e := rules.New(rules.Config{
+		Seed: 1, Names: []string{"p0", "p1"},
+		Decks:  [][]*cards.Card{deck, deck},
+		Tokens: reg.Tokens, NameUniverse: reg.Universe(),
+	})
+	game.SeedPlayerCounters(e, pcs)
+	if got := e.G.Players[0].Counter("ENERGY"); got != 8 {
+		t.Errorf("p0 ENERGY after the setup seed = %d, want 8", got)
+	}
+	if got := e.G.Players[1].Counter("ENERGY"); got != 0 {
+		t.Errorf("p1 ENERGY after the setup seed = %d, want 0", got)
+	}
+	// End to end: the focus ability is offered and taken with the seeded
+	// energy. A pin without the runner's player_counters field still writes
+	// the gate's field refusal, but never start-not-exercised.
+	out := t.TempDir()
+	if err := playStart(reg, []string{p}, "XP", out, false); err != nil {
+		t.Fatal(err)
+	}
+	rows := 0
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		var r lowerRow
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		rows++
+		if slices.Contains(r.Reasons, reasonStartNotExercised) {
+			t.Errorf("%s: focus never exercised with the seeded energy: %v", r.ID, r.Reasons)
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if rows == 0 {
+		t.Fatal("playStart wrote no lowering rows")
+	}
+	// A card name, an untracked kind and a non-positive amount are refused.
+	for _, tc := range []struct{ name, counters, want string }{
+		{"card", `[{"card":"Aethersquall Ancient","kind":"ENERGY","n":8}]`, "goes on the seat"},
+		{"kind", `[{"kind":"CHARGE","n":1}]`, "not ENERGY, POISON or EXPERIENCE"},
+		{"zero", `[{"kind":"ENERGY","n":0}]`, "want >= 1"},
+	} {
+		t.Run("refuse/"+tc.name, func(t *testing.T) {
+			bad := filepath.Join(dir, tc.name+".json")
+			b := strings.Replace(body, `[{"kind":"ENERGY","n":8}]`, tc.counters, 1)
+			if err := os.WriteFile(bad, []byte(b), 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := readStartFile(bad); err == nil || !strings.Contains(err.Error(), tc.want) {
+				t.Errorf("player counters %s: err %v, want %q", tc.counters, err, tc.want)
 			}
 		})
 	}

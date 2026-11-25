@@ -19,6 +19,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -77,9 +78,14 @@ type startSeat struct {
 	// BackFace names battlefield cards that enter on their back face.
 	BackFace []string       `json:"back_face"`
 	Counters []startCounter `json:"counters"`
-	Attach   []startAttach  `json:"attach"`
-	Tokens   []startToken   `json:"tokens"`
-	Life     *int32         `json:"life"`
+	// PlayerCounters seed counters on the seat itself, not a permanent
+	// (startCounter.Card empty): the energy a PayEnergy<N> cost spends. The
+	// field is passed to rules.StartSeat when the pin has it, else seeded
+	// through the engine's public Emit at setup (pincap).
+	PlayerCounters []startCounter `json:"player_counters"`
+	Attach         []startAttach  `json:"attach"`
+	Tokens         []startToken   `json:"tokens"`
+	Life           *int32         `json:"life"`
 }
 
 type startAttach struct {
@@ -91,7 +97,9 @@ type startAttach struct {
 }
 
 type startCounter struct {
-	Card string `json:"card"`
+	// Card names the battlefield card. Empty means the seat itself
+	// (PlayerCounters), so that JSON omits the field.
+	Card string `json:"card,omitempty"`
 	Kind string `json:"kind"`
 	N    int32  `json:"n"`
 }
@@ -192,6 +200,19 @@ func readStartFile(path string) (*startFile, error) {
 		return nil, fmt.Errorf("%s: seeds %d, want >= 1", path, f.Seeds)
 	case f.Filler != "basics":
 		return nil, fmt.Errorf("%s: filler %q, want \"basics\"", path, f.Filler)
+	}
+	for _, s := range []startSeat{f.Setup.P0, f.Setup.P1} {
+		for _, c := range s.PlayerCounters {
+			if c.Card != "" {
+				return nil, fmt.Errorf("%s: player counter %q names card %q; a player counter goes on the seat", path, c.Kind, c.Card)
+			}
+			if err := playerCounterKindError(c.Kind); err != nil {
+				return nil, fmt.Errorf("%s: %w", path, err)
+			}
+			if c.N < 1 {
+				return nil, fmt.Errorf("%s: player counter %q n %d, want >= 1", path, c.Kind, c.N)
+			}
+		}
 	}
 	if err := oraclediff.ValidateCompare(f.Compare); err != nil {
 		return nil, fmt.Errorf("%s: compare: %w", path, err)
@@ -423,6 +444,14 @@ func startDeckAt(reg *cards.Registry, name string, seat int, s, other startSeat)
 		ss.Tokens = append(ss.Tokens, rules.StartToken{Script: t.Script, Tapped: t.Tapped})
 	}
 	ss.Life = s.Life
+	// Player counters ride rules.StartSeat when the pinned gorge has the
+	// field; pincap reports that once. Without it, playStart seeds them through
+	// the engine's Emit at setup (game.Options.PlayerCounters).
+	if cs, err := playerCountersOf(s.PlayerCounters); err != nil {
+		return d, ss, fmt.Errorf("start %s: %w", name, err)
+	} else {
+		pincap.SetStartPlayerCounters(&ss, cs)
+	}
 	// Filler: the colours of the listed cards' front-face costs, WUBRG order,
 	// one basic each round robin; Plains when there is no coloured symbol.
 	var colours string
@@ -455,6 +484,63 @@ func startCounterKindError(kind string) error {
 		return fmt.Errorf("counter kind %q is not a counter kind", kind)
 	}
 	return nil
+}
+
+// playerCounterKindError is why kind is not a player counter this repo seeds,
+// or nil. Only the kinds the engines track ride the field: ENERGY (CR 107.14),
+// POISON and EXPERIENCE. A cost can only spend the first today, but a start
+// that needs the other two is still expressible instead of silently dropped.
+func playerCounterKindError(kind string) error {
+	switch strings.ToUpper(strings.TrimSpace(kind)) {
+	case "ENERGY", "POISON", "EXPERIENCE":
+		return nil
+	}
+	return fmt.Errorf("player counter kind %q is not ENERGY, POISON or EXPERIENCE", kind)
+}
+
+// playerCountersOf validates a seat's player counters and folds them into the
+// shared, sorted pincap form. A player counter names no card: an entry with a
+// card would place the counters on a permanent that a PayEnergy cost never
+// reads.
+func playerCountersOf(cs []startCounter) ([]pincap.Counter, error) {
+	out := make([]pincap.Counter, 0, len(cs))
+	for _, c := range cs {
+		if c.Card != "" {
+			return nil, fmt.Errorf("player counter %q names card %q; a player counter goes on the seat", c.Kind, c.Card)
+		}
+		if err := playerCounterKindError(c.Kind); err != nil {
+			return nil, err
+		}
+		if c.N < 1 {
+			return nil, fmt.Errorf("player counter %q n %d, want >= 1", c.Kind, c.N)
+		}
+		out = append(out, pincap.Counter{Kind: strings.ToUpper(strings.TrimSpace(c.Kind)), N: c.N})
+	}
+	sort.SliceStable(out, func(i, j int) bool { return out[i].Kind < out[j].Kind })
+	// Fold a repeat of one kind, so the cost's total is one entry and every
+	// follower applies it once.
+	folded := out[:0]
+	for _, c := range out {
+		if n := len(folded); n > 0 && folded[n-1].Kind == c.Kind {
+			folded[n-1].N += c.N
+			continue
+		}
+		folded = append(folded, c)
+	}
+	return folded, nil
+}
+
+// playerCounterSeats is both seats' player counters, in seat order.
+func (f *startFile) playerCounterSeats() ([2][]pincap.Counter, error) {
+	var out [2][]pincap.Counter
+	for i, s := range [2]startSeat{f.Setup.P0, f.Setup.P1} {
+		cs, err := playerCountersOf(s.PlayerCounters)
+		if err != nil {
+			return out, err
+		}
+		out[i] = cs
+	}
+	return out, nil
 }
 
 // hasShardLetter reports whether the Forge mana cost has a shard with the
@@ -539,13 +625,22 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				}
 			}
 		}
+		// The pin's own StartSeat carries the counters when pincap says so;
+		// otherwise the live game seeds them at setup, before the focus play.
+		var fallback [2][]pincap.Counter
+		if !pincap.PlayerCounters() {
+			fallback, err = f.playerCounterSeats()
+			if err != nil {
+				return fmt.Errorf("%s: %w", path, err)
+			}
+		}
 		seeds := f.gameSeeds()
 		for s := 1; s <= f.Seeds; s++ {
 			games++
 			id := scen.StartID(set, f.Card, f.Key, s)
 			name := fmt.Sprintf("xproof start %s %s seed %d", f.Card, f.Key, s)
 			took := -1
-			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus, FocusTook: &took}
+			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus, FocusTook: &took, PlayerCounters: fallback}
 			if f.MaxTurns > 0 {
 				// max_turns is the turns played: the engine's watchdog stalls
 				// the game as the turn after them begins.

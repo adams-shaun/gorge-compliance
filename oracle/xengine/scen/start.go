@@ -53,6 +53,13 @@ type StartSeat struct {
 	// double-faced card's transformed side), as rules.StartSeat.BackFace.
 	BackFace []string       `json:"back_face,omitempty"`
 	Counters []StartCounter `json:"counters,omitempty"`
+	// PlayerCounters seeds counters on the seat itself, not on a permanent: a
+	// StartCounter with an empty Card. It is the non-mana cost a start spends
+	// before the focus play (PayEnergy<N> and the energy the start holds), in
+	// a sorted slice so the output never depends on a map walk. The pinned
+	// gorge rules.StartSeat gains the same field in the commit xproof's
+	// PayEnergy starts need; cmd/xengine seeds it through pincap.
+	PlayerCounters []StartCounter `json:"player_counters,omitempty"`
 	// Attach binds a battlefield Aura of this seat to a bearer of the same
 	// seat (gorge's rules.StartAttach). The Aura is listed in Battlefield too;
 	// placeAttach makes it enter attached, which a start placing a bare Aura
@@ -82,9 +89,10 @@ func (s *StartSeat) Attached(name string) bool {
 }
 
 // StartCounter puts N counters of Kind on the first battlefield copy of Card
-// not yet bound.
+// not yet bound. Card is empty for PlayerCounters, which puts them on the
+// seat itself, so the field is omitted from that JSON.
 type StartCounter struct {
-	Card string `json:"card"`
+	Card string `json:"card,omitempty"`
 	Kind string `json:"kind"`
 	N    int32  `json:"n"`
 }

@@ -445,6 +445,50 @@ func TestStartPlayerCounters(t *testing.T) {
 	}
 }
 
+// TestStartPlayerCounterCost: a PayEnergy<N> cost is paid from the seat's
+// player counters (CR 107.14, 122.1), so a start seeds ENERGY on the seat
+// itself instead of refusing the ability. Aethersquall Ancient's {8} ability
+// is the class's first card; the start output stays a sorted slice with no
+// card name, and a malformed amount keeps the old refusal.
+func TestStartPlayerCounterCost(t *testing.T) {
+	reg, b := testBuilder(t)
+	const card = "Aethersquall Ancient"
+	res, err := Generate(reg, b, card, "f0/a0", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathStart || res.Start == nil {
+		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+	}
+	f := res.Start
+	focusIs(t, f, 0, card, "ability", 0)
+	if want := []StartCounter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
+		t.Fatalf("p0 player counters %+v, want %+v", f.Setup.P0.PlayerCounters, want)
+	}
+	if len(f.Setup.P1.PlayerCounters) != 0 {
+		t.Errorf("p1 player counters %+v, want none", f.Setup.P1.PlayerCounters)
+	}
+	raw, err := f.Marshal()
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !bytes.Contains(raw, []byte(`"player_counters"`)) || !bytes.Contains(raw, []byte(`"kind": "ENERGY"`)) {
+		t.Errorf("start bytes do not name the player counters:\n%s", raw)
+	}
+	if bytes.Contains(raw, []byte(`"card": ""`)) {
+		t.Errorf("a seat player counter serialised an empty card:\n%s", raw)
+	}
+	c, ok := reg.Lookup(card)
+	if !ok || len(c.Faces) == 0 {
+		t.Fatalf("%s is not in the corpus", card)
+	}
+	for _, cost := range []string{"PayEnergy<0>", "PayEnergy<x>"} {
+		if _, why := planCost(reg, b, c.Faces[0], card, cost, "U"); why != "steps-needed:cost:PayEnergy" {
+			t.Errorf("cost %q: reason %q, want steps-needed:cost:PayEnergy", cost, why)
+		}
+	}
+}
+
 // TestScenUnlistedByXMageIsGenerated: a card no XMage manifest lists is still
 // generated, not refused not-sent. Forge is the reference oracle (operator
 // 11-24): the XMage leg marks the item not_sent and keyproof credits a Forge
