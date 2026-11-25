@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b4b21ed-c24e-4038-83fb-bd7f3c3426cd	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:emberheart-challenger:f0t0:s1,f:xs:XP:emberheart-challenger:f0t0:s1	-	-	-	3aa6ded33acb	-	4fb05e44d6c4	-	-	2026-11-25	xproof
 5b4e1163-09aa-4597-9a41-e1e384975056	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b4e1163-09aa-4597-9a41-e1e384975056	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b4e1163-09aa-4597-9a41-e1e384975056	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+5b4e1163-09aa-4597-9a41-e1e384975056	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5b51958d-533a-45e4-aac1-3c157670978b	cast	cast-resolve	agreed	-	FX	scen	2	0	Sibsig Appraiser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b51958d-533a-45e4-aac1-3c157670978b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b5524f7-3c68-4c7b-be1b-745ffcad8006	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,8 +105,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b8e8ef2-2f04-4485-ae12-08f52dac81a2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:culber-and-stamets-star-crossed:f0t0:s1,f:xs:XP:culber-and-stamets-star-crossed:f0t0:s1	-	-	-	23c4009444b0	-	fb884f6c5c6f	-	-	2026-11-25	xproof
 5b8f0cdf-572d-4025-b930-79291f7c35be	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:mercurial-spelldancer:f0t1:s1,f:xs:XP:mercurial-spelldancer:f0t1:s1	-	-	-	054d9f516953	-	51980734d596	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:mercurial-spelldancer:f0t0:s1,f:xs:XP:mercurial-spelldancer:f0t0:s1	-	-	-	054d9f516953	-	51980734d596	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:mercurial-spelldancer:f0t0:s1,f:xs:XP:mercurial-spelldancer:f0t0:s1	-	-	-	054d9f516953	-	51980734d596	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5b919920-b1b6-499b-a7fe-c630778a7831	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valley-rally:cast:s1,f:xs:XP:valley-rally:cast:s1	-	-	-	336eab778104	-	4c43aa3c0d13	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 5b95a5ed-a6b2-4044-9273-2021d27794e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blight-sickle:cast:s1,f:xs:XP:blight-sickle:cast:s1	-	-	-	8a1b1a193ec0	-	1ccf25142767	-	-	2026-11-24	xproof
 5b95a5ed-a6b2-4044-9273-2021d27794e9	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:blight-sickle:f0a0:s1	-	-	-	8a1b1a193ec0	-	1ccf25142767	-	-	2026-11-24	xproof
