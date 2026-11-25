@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f5ebbb8-f49b-488f-bb85-888aaa918bdd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gumdrop Poisoner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f5ebbb8-f49b-488f-bb85-888aaa918bdd	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f5f2792-0cc4-4caa-b798-2ee9597f2524	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f5f2792-0cc4-4caa-b798-2ee9597f2524	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+4f5f2792-0cc4-4caa-b798-2ee9597f2524	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4f5fee21-bf29-4873-baf4-04911c309d81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f5fee21-bf29-4873-baf4-04911c309d81	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4f63d306-cc14-405c-8424-d8990c670c74	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:territorial-aetherkite:cast:s1,f:xs:XP:territorial-aetherkite:cast:s1	-	-	-	8c0bd19283bb	-	419183ee5893	-	-	2026-11-24	xproof
@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4f66d82a-492f-4638-9f77-190d4a33ad7f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kirtar-s-wrath:cast:s1,f:xs:XP:kirtar-s-wrath:cast:s1	-	-	-	fc71ca68c5ac	-	31e36fa706fc	-	-	2026-11-24	xproof
-4f69d2f9-c16a-4752-9026-794a29d73af8	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+4f69d2f9-c16a-4752-9026-794a29d73af8	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t1	NULL	owed	refused:no-generator:trigger:CounterAdded	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fbaf052-a8c3-4395-8f40-0cb3a10d5ccd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malakir-cullblade:cast:s1,f:xs:XP:malakir-cullblade:cast:s1	-	-	-	d864b561c9cb	-	e8d48470f919	-	-	2026-11-24	xproof
 4fbaf052-a8c3-4395-8f40-0cb3a10d5ccd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:malakir-cullblade:f0t0:s1,f:xs:XP:malakir-cullblade:f0t0:s1	-	-	-	fb9d3088f0bf	-	e8d48470f919	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 4fbb8e03-22f1-4171-88e9-877244e25613	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fbb8e03-22f1-4171-88e9-877244e25613	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+4fbb8e03-22f1-4171-88e9-877244e25613	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4fbe1c02-f5bf-47c7-80de-09a32d01e5db	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:evangel-of-heliod:cast:s1,f:xs:XP:evangel-of-heliod:cast:s1	-	-	-	d864b561c9cb	-	18163c09bf21	-	-	2026-11-24	xproof
 4fbe1c02-f5bf-47c7-80de-09a32d01e5db	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:evangel-of-heliod:cast:s1,f:xs:XP:evangel-of-heliod:cast:s1	-	-	-	d864b561c9cb	-	18163c09bf21	-	-	2026-11-24	xproof
 4fbfc814-df10-4d61-ada9-c96cc8ee8d8c	cast	cast-resolve	agreed	-	FX	scen	2	0	Whirlwing Stormbrood/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fbfc814-df10-4d61-ada9-c96cc8ee8d8c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Whirlwing Stormbrood/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fbfc814-df10-4d61-ada9-c96cc8ee8d8c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Whirlwing Stormbrood/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fc5f871-a809-4a4a-adfb-eb4cd52837c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fallen-shinobi:cast:s1,f:xs:XP:fallen-shinobi:cast:s1	-	-	-	d864b561c9cb	-	63c0ef623796	-	-	2026-11-24	xproof
-4fc5f871-a809-4a4a-adfb-eb4cd52837c8	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+4fc5f871-a809-4a4a-adfb-eb4cd52837c8	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4fc5f871-a809-4a4a-adfb-eb4cd52837c8	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:fallen-shinobi:f0t0:s1,f:xs:XP:fallen-shinobi:f0t0:s1	-	-	-	336eab778104	-	63c0ef623796	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 4fc69345-4c1f-4113-8e1c-15b8e2e597fc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:write-into-being:cast:s1	-	-	-	d864b561c9cb	-	28599f77981b	-	-	2026-11-24	xproof
 4fc7c7a0-bfff-4833-a0d0-a38dc29e9dfb	cast	cast-resolve	agreed	-	FX	scen	2	0	Skilled Battlecarver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
