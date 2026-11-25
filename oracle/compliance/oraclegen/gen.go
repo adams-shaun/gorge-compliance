@@ -1737,6 +1737,23 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			// std-pass note that XMage picks it unasked no longer holds).
 			as = targetDecisionAnswers(routing, i)
 		case "mode":
+			if d.Resume == "cipher" {
+				// Cipher's encode (CR 702.99a) is one KModes decision in gorge:
+				// no pick declines, one pick names the creature. XMage asks a
+				// boolean chooseUse, then (when encoding) the creature target;
+				// the numeric mode queue never sees it.
+				if len(d.PickRefs) == 0 {
+					as = append(as, XAnswer{d.Seat, "choice", "no"})
+					break
+				}
+				as = append(as, XAnswer{d.Seat, "choice", "yes"})
+				for k, ref := range d.PickRefs {
+					// The pick's label is "Encode on <name>"; the target
+					// queue matches the creature's own name.
+					as = append(as, XAnswer{d.Seat, "target", targetPickValue(d, k, oraclediffRefName(ref))})
+				}
+				break
+			}
 			if d.Resume == "play" {
 				// Optional Play effects (Discover, Cascade, and other carriers)
 				// are XMage chooseUse asks, not numeric mode choices. Gorge's
