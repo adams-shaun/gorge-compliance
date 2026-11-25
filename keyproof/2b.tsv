@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b548f9a-c160-427d-9bb4-1fe940f8ab28	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:boreal-centaur:f0a0:s1,f:xs:XP:boreal-centaur:f0a0:s1	-	-	-	44e3ec152eea	-	25b3438bd78b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2b565791-1b94-4dad-a48d-be7fc2198e19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b565791-1b94-4dad-a48d-be7fc2198e19	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:jushi-apprentice-tomoya-the-revealer:f0a0:s1,f:xs:XP:jushi-apprentice-tomoya-the-revealer:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-2b565791-1b94-4dad-a48d-be7fc2198e19	f1/a0	NULL	owed	refused:no-generator:face:flip	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+2b565791-1b94-4dad-a48d-be7fc2198e19	f1/a0	NULL	owed	refused:no-generator:face:flip	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 2b5f70ec-33da-4dff-9cff-fe05eb906685	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b62543f-a475-457a-a96b-b5d070383d3c	cast	cast-resolve	agreed	-	FX	scen	2	0	Goldvein Hydra/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2b62543f-a475-457a-a96b-b5d070383d3c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Goldvein Hydra/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2bf84938-6049-4d03-b09e-85bd0763a187	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rootwater-alligator:cast:s1,f:xs:XP:rootwater-alligator:cast:s1	-	-	-	5f2128bf97e4	-	1c2be39a1cab	-	-	2026-11-24	xproof
 2bf84938-6049-4d03-b09e-85bd0763a187	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:rootwater-alligator:cast:s1,f:xs:XP:rootwater-alligator:cast:s1	-	-	-	5f2128bf97e4	-	1c2be39a1cab	-	-	2026-11-24	xproof
 2bfc7467-1316-43d3-9ca6-ff36cc2de607	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2bfc7467-1316-43d3-9ca6-ff36cc2de607	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+2bfc7467-1316-43d3-9ca6-ff36cc2de607	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:journey-to-nowhere:f0t0:s1,f:xs:XP:journey-to-nowhere:f0t0:s1	-	-	-	8a1b1a193ec0	-	b9ab01314d70	-	-	2026-11-24	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:journey-to-nowhere:f0t0:s1,f:xs:XP:journey-to-nowhere:f0t0:s1	-	-	-	8a1b1a193ec0	-	b9ab01314d70	-	-	2026-11-24	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:journey-to-nowhere:f0t1:s1,f:xs:XP:journey-to-nowhere:f0t1:s1	-	-	-	6f84be0f34c0	-	b9ab01314d70	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
