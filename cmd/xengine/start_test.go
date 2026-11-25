@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
@@ -561,6 +562,104 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 		t.Errorf("no item written (lowering %v; start %s)", refused, raw)
 	}
 	return items
+}
+
+// TestStartChangesZoneTriggersAreExercised: the ChangesZone/ChangesZoneAll
+// recipes scen builds are focuses xengine can actually take: a token maker
+// (Anointer Priest), an Aura attached to a bearer then destroyed (Aspect of
+// Mongoose, Banewasp Affliction), a scripted combat (Abattoir Ghoul), a
+// graveyard return (Attuned Hunter), and Magnetic Theft plus an end-step
+// sacrifice (Avarice Amulet). A recipe that generates but is never offered
+// still owes the key (start-not-exercised).
+//
+// The exercised ledger cannot prove the trigger fired: credit (cmd/xengine)
+// always joins the item id's declared key, so Exercised > 0 for any lowered
+// start. The test reads the lowered cast instead: its target must be the start
+// focus's named key object (the Aura, its bearer, the Equipment and the
+// sacrificial bearer), which is what makes the zone change and the trigger.
+func TestStartChangesZoneTriggersAreExercised(t *testing.T) {
+	keys := [][2]string{
+		{"Abattoir Ghoul", "f0/t0"},
+		{"Anointer Priest", "f0/t0"},
+		{"Aspect of Mongoose", "f0/t0"},
+		{"Attuned Hunter", "f0/t0"},
+		{"Avarice Amulet", "f0/t0"},
+		{"Banewasp Affliction", "f0/t0"},
+	}
+	ks := lowerKeyStarts(t, keys)
+	reg, b := certdeckBuilder(t)
+	for _, k := range keys {
+		res, err := scen.Generate(reg, b, k[0], k[1], scen.Options{Prefer: "start"})
+		if err != nil || res.Start == nil || res.Start.Focus == nil {
+			t.Fatalf("%s %s: generate: %+v %v", k[0], k[1], res, err)
+		}
+		if res.Start.Focus.Kind != "cast" {
+			continue // an attack focus (Abattoir Ghoul) names no cast target
+		}
+		want := res.Start.Focus.Targets
+		seen := 0
+		for id, it := range ks.items {
+			if it.Card != k[0] {
+				continue
+			}
+			cast := false
+			for _, st := range it.Steps {
+				if st.Op != "cast" || !strings.HasSuffix(st.Card, ":"+res.Start.Focus.Card) {
+					continue
+				}
+				cast = true
+				if len(want) == 0 {
+					continue // the focus play's own target (Regrowth's graveyard card)
+				}
+				var got []string
+				for _, ref := range st.Targets {
+					got = append(got, oraclediff.RefName(ref))
+				}
+				if !slices.Equal(got, want) {
+					t.Errorf("%s: %s targets %v, want the named key objects %v", id, st.Card, got, want)
+				}
+			}
+			if !cast {
+				t.Errorf("%s: no cast of the focus %q", id, res.Start.Focus.Card)
+				continue
+			}
+			seen++
+		}
+		if seen == 0 {
+			t.Errorf("%s %s: no lowered item with the focus cast", k[0], k[1])
+		}
+	}
+}
+
+// TestStartChangesZoneKeysCreditedByTape: credit always joins the item id's
+// declared key, so a start whose focus never moves the key object still reads
+// exercised. With that join off, only the tape credits the key: each
+// ChangesZone start must make its own trigger fire. Dead Man's Chest is the
+// Aura whose Enchant keyword names an opponent's creature, so its bearer must
+// sit on the other seat (a bearer on its own seat is no legal Enchant target
+// and the Aura never attaches); Keiga and Vengeant Vampire are self-dies
+// triggers with a target, which the start must still place.
+func TestStartChangesZoneKeysCreditedByTape(t *testing.T) {
+	creditDeclared = false
+	t.Cleanup(func() { creditDeclared = true })
+	keys := [][2]string{
+		{"Abattoir Ghoul", "f0/t0"},
+		{"Anointer Priest", "f0/t0"},
+		{"Aspect of Mongoose", "f0/t0"},
+		{"Attuned Hunter", "f0/t0"},
+		{"Avarice Amulet", "f0/t0"},
+		{"Banewasp Affliction", "f0/t0"},
+		{"Dead Man's Chest", "f0/t0"},
+		{"Keiga, the Tide Star", "f0/t0"},
+		{"Vengeant Vampire", "f0/t0"},
+	}
+	ks := lowerKeyStarts(t, keys)
+	led := readExercised(t, ks.play)
+	for _, k := range keys {
+		if got := led.Get(k[0], k[1]); got.Exercised == 0 {
+			t.Errorf("%s %s: the tape credits no use of the key (ledger %+v): the start never fires the trigger", k[0], k[1], got)
+		}
+	}
 }
 
 // TestStartManaAbilityIsExercised: a focus that is a mana ability was never

@@ -615,7 +615,194 @@ func TestStartZoneTriggers(t *testing.T) {
 	}
 }
 
+// TestStartzonetriggers is the dispatch's repro spelling. It covers the
+// ChangesZone/ChangesZoneAll causes the plain carrier recipes missed: a token
+// entering (Anointer Priest, Advent of the Wurm cast), an Aura attached and
+// destroyed (Aspect of Mongoose, Banewasp Affliction), a creature damaged by
+// the card and then dying (Abattoir Ghoul), a card leaving a graveyard
+// (Attuned Hunter, Regrowth), and an Equipment attached then losing its bearer
+// (Avarice Amulet, Magnetic Theft and Ball Lightning's end-step sacrifice).
+// The destruction focuses name their target: the key Aura or creature, its
+// bearer, or (Magnetic Theft) the Equipment and the sacrificial bearer.
+func TestStartzonetriggers(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key string
+		check     func(*testing.T, *StartFile)
+	}{
+		{"Abattoir Ghoul", "f0/t0", func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.Attack != "Abattoir Ghoul" || f.Focus.Block == "" || f.Active != 0 {
+				t.Fatalf("focus %+v active %d, want the Ghoul attacking into a blocker", f.Focus, f.Active)
+			}
+			if !slices.Contains(f.Setup.P1.Battlefield, f.Focus.Block) {
+				t.Errorf("p1 battlefield %v does not hold the blocker %q", f.Setup.P1.Battlefield, f.Focus.Block)
+			}
+		}},
+		{"Anointer Priest", "f0/t0", func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.Kind != "cast" || len(f.Setup.P0.Hand) != 1 || f.Focus.Card != f.Setup.P0.Hand[0] {
+				t.Fatalf("focus %+v hand %v, want a token-maker cast", f.Focus, f.Setup.P0.Hand)
+			}
+			if len(f.Setup.P0.Battlefield) == 0 || f.Setup.P0.Battlefield[0] != "Anointer Priest" {
+				t.Errorf("p0 battlefield %v, want Anointer Priest first", f.Setup.P0.Battlefield)
+			}
+		}},
+		{"Attuned Hunter", "f0/t0", func(t *testing.T, f *StartFile) {
+			if f.Focus == nil || f.Focus.Kind != "cast" || f.Focus.Card != "Regrowth" {
+				t.Fatalf("focus %+v, want Regrowth cast", f.Focus)
+			}
+			if len(f.Setup.P0.Graveyard) == 0 {
+				t.Error("p0 graveyard is empty, so nothing can leave it")
+			}
+			if len(f.Setup.P0.Battlefield) == 0 || f.Setup.P0.Battlefield[0] != "Attuned Hunter" {
+				t.Errorf("p0 battlefield %v, want Attuned Hunter first", f.Setup.P0.Battlefield)
+			}
+		}},
+		{"Aspect of Mongoose", "f0/t0", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 1, "Naturalize", "cast", 0)
+			attached(t, f, "Aspect of Mongoose")
+			if !slices.Equal(f.Focus.Targets, []string{"Aspect of Mongoose"}) {
+				t.Errorf("focus targets %v, want the Aura itself", f.Focus.Targets)
+			}
+		}},
+		{"Avarice Amulet", "f0/t0", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 0, "Magnetic Theft", "cast", 0)
+			if !slices.Contains(f.Setup.P0.Battlefield, "Avarice Amulet") ||
+				!slices.Contains(f.Setup.P0.Battlefield, "Ball Lightning") {
+				t.Errorf("p0 battlefield %v, want Avarice Amulet and Ball Lightning", f.Setup.P0.Battlefield)
+			}
+			if !slices.Equal(f.Focus.Targets, []string{"Avarice Amulet", "Ball Lightning"}) {
+				t.Errorf("focus targets %v, want the Equipment then Ball Lightning", f.Focus.Targets)
+			}
+		}},
+		{"Banewasp Affliction", "f0/t0", func(t *testing.T, f *StartFile) {
+			focusIs(t, f, 1, "Murder", "cast", 0)
+			attached(t, f, "Banewasp Affliction")
+			if want := attachBearerOf(t, f, "Banewasp Affliction"); !slices.Equal(f.Focus.Targets, []string{want}) {
+				t.Errorf("focus targets %v, want the attached bearer %q", f.Focus.Targets, want)
+			}
+		}},
+	}
+	for _, r := range rows {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := DecodeStartFile(raw); err != nil {
+				t.Fatalf("start file does not decode: %v\n%s", err, raw)
+			}
+			r.check(t, res.Start)
+		})
+	}
+}
+
+// attached asserts the file places card attached to a bearer on the same seat.
+func attached(t *testing.T, f *StartFile, card string) {
+	t.Helper()
+	for _, a := range f.Setup.P0.Attach {
+		bearers := f.Setup.P0.Battlefield
+		if a.Opp {
+			bearers = f.Setup.P1.Battlefield
+		}
+		if a.Card == card && a.To != "" && slices.Contains(bearers, a.To) {
+			return
+		}
+	}
+	t.Errorf("p0 attach %+v battlefield %v, want %q attached to a placed bearer", f.Setup.P0.Attach, f.Setup.P0.Battlefield, card)
+}
+
+// attachBearerOf is the bearer card is attached to, or "".
+func attachBearerOf(t *testing.T, f *StartFile, card string) string {
+	t.Helper()
+	for _, a := range f.Setup.P0.Attach {
+		if a.Card == card {
+			return a.To
+		}
+	}
+	return ""
+}
+
+// TestStartAttachedBearerSeat: an Aura whose Enchant keyword is "creature an
+// opponent controls" (Dead Man's Chest) is attached to a bearer on the
+// opponent's seat, which the start's attach marks Opp; and a self-dies trigger
+// with its own target (Keiga, Vengeant Vampire) still has a creature on the
+// opposing side for it to take besides the lands and the removal spell.
+func TestStartAttachedBearerSeat(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Dead Man's Chest", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Dead Man's Chest: %+v %v", res, err)
+	}
+	f := res.Start
+	if len(f.Setup.P0.Attach) != 1 || !f.Setup.P0.Attach[0].Opp {
+		t.Fatalf("p0 attach %+v, want the Aura attached to an opposing bearer", f.Setup.P0.Attach)
+	}
+	attached(t, f, "Dead Man's Chest")
+	bearer := f.Setup.P0.Attach[0].To
+	if slices.Contains(f.Setup.P0.Battlefield, bearer) {
+		t.Errorf("p0 battlefield %v holds the bearer %q of an opponent-only Enchant", f.Setup.P0.Battlefield, bearer)
+	}
+	if !slices.Equal(f.Focus.Targets, []string{bearer}) {
+		t.Errorf("focus targets %v, want the bearer %q", f.Focus.Targets, bearer)
+	}
+	for _, card := range []string{"Keiga, the Tide Star", "Vengeant Vampire"} {
+		res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s: %+v %v", card, res, err)
+		}
+		creature := false
+		for _, n := range res.Start.Setup.P1.Battlefield {
+			if c, ok := reg.Lookup(n); ok && len(c.Faces) > 0 && c.Faces[0].IsCreature() {
+				creature = true
+			}
+		}
+		if !creature {
+			t.Errorf("%s: p1 battlefield %v holds no creature for the trigger's target", card, res.Start.Setup.P1.Battlefield)
+		}
+	}
+}
+
+// TestStartSelfDiesKeepsGraveTarget: a dies trigger whose effect returns or
+// exiles a card from the graveyard still needs its own target placed. The
+// focus play (Murder) names no graveyard target, so an override that read only
+// the focus card dropped Myr Retriever's artifact and the other self-dies
+// triggers' targets; placeGraveTargets now places both the key's and the
+// focus play's.
+func TestStartSelfDiesKeepsGraveTarget(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, card := range []string{"Myr Retriever", "Vesperlark", "Junk Diver", "Workshop Assistant"} {
+		t.Run(card, func(t *testing.T) {
+			res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Focus == nil || f.Focus.Card != "Murder" || !slices.Equal(f.Focus.Targets, []string{card}) {
+				t.Fatalf("focus %+v, want Murder targeting %s", f.Focus, card)
+			}
+			for _, n := range f.Setup.P0.Graveyard {
+				c, ok := reg.Lookup(n)
+				if ok && len(c.Faces) > 0 && !c.Faces[0].IsBasic() {
+					return
+				}
+			}
+			t.Errorf("p0 graveyard %v holds only basics, want the trigger's nonbasic target", f.Setup.P0.Graveyard)
+		})
+	}
+}
+
 // TestStartSpellCastTriggers: a cast trigger is a carrier spell the filter
+
 // takes, cast by the seat ValidActivatingPlayer names: Reach Through Mists
 // ({U} instant, draw a card) for a noncreature spell, on the opponent's turn
 // for "whenever you cast a spell during an opponent's turn" (Brineborn

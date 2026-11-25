@@ -154,13 +154,16 @@ const (
 
 // filterAlt is one comma alternative of a Forge ValidCard filter
 // ("Creature.Other+YouCtrl"), read as far as a start needs it: who controls
-// the card, whether it is the card itself, and a test of a carrier's face.
-// Known is false when some property is not understood: no carrier is picked
-// for it.
+// the card, whether it is the card itself, whether it is a token, and a test
+// of a carrier's face. Known is false when some property is not understood:
+// no carrier is picked for it.
 type filterAlt struct {
 	ctrl  int
 	self  bool
 	other bool
+	// token is 1 when the alternative requires a token, -1 when it requires a
+	// non-token card (a carrier is a card), 0 when it does not say.
+	token int
 	known bool
 	// counters are the counters every object the alternative matches must
 	// carry ("counters_GE1_P1P1"): a gate the start meets by placing them.
@@ -199,6 +202,12 @@ func parseCounterGate(s string) (counterGate, bool) {
 		return counterGate{}, false
 	}
 	return counterGate{kind: rest, n: int32(n)}, true
+}
+
+// matches is test plus the token requirement: a token maker's token passes
+// isToken true, every placed card passes false.
+func (a filterAlt) matches(f *cards.Face, isToken bool) bool {
+	return (a.token <= 0 || isToken) && (a.token >= 0 || !isToken) && a.test(f)
 }
 
 var colourWord = map[string]byte{"White": 'W', "Blue": 'U', "Black": 'B', "Red": 'R', "Green": 'G'}
@@ -367,7 +376,11 @@ func parseFilterCounters(s string, countersOK, topLibraryOK bool) []filterAlt {
 					}
 					continue
 				case "!token", "nonToken":
-					continue // every carrier is a card
+					a.token = -1
+					continue
+				case "token":
+					a.token = 1
+					continue
 				}
 				if test, ok := filterProps[p]; ok {
 					if !pinMatches(p) {
@@ -473,7 +486,7 @@ func filterCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string
 		if !a.known || a.self {
 			continue
 		}
-		if n := pickCarrier(reg, b, card, func(f *cards.Face) bool { return extra(f) && a.test(f) }); n != "" {
+		if n := pickCarrier(reg, b, card, func(f *cards.Face) bool { return extra(f) && a.matches(f, false) }); n != "" {
 			if a.ctrl == ctrlOpp {
 				return n, 1
 			}
@@ -493,7 +506,7 @@ func landCarrier(reg *cards.Registry, filter, generic string) (name string, seat
 		}
 		for _, basic := range append([]string{generic}, "Plains", "Island", "Swamp", "Mountain", "Forest") {
 			c, ok := reg.Lookup(basic)
-			if !ok || len(c.Faces) == 0 || !a.test(c.Faces[0]) {
+			if !ok || len(c.Faces) == 0 || !a.matches(c.Faces[0], false) {
 				continue
 			}
 			if a.ctrl == ctrlOpp {
