@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 942216f7-6803-4ab3-9239-463002590f6f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:infused-arrows:cast:s1,f:xs:XP:infused-arrows:cast:s1	-	-	-	25696bf19d5b	-	c40082d97121	-	-	2026-11-24	xproof
 942407bf-862a-4a0b-b19d-b9f8ee833026	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 942a461a-49aa-4eeb-b399-a2afba41ade9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-942a461a-49aa-4eeb-b399-a2afba41ade9	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+942a461a-49aa-4eeb-b399-a2afba41ade9	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 942ac2ac-7528-4768-8398-8520a8ee15e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-america-wings-of-freedom:cast:s1,f:xs:XP:captain-america-wings-of-freedom:cast:s1	-	-	-	23c4009444b0	-	6c0a418c58f8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 942ac2ac-7528-4768-8398-8520a8ee15e5	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:captain-america-wings-of-freedom:combat0.attack:s1	-	-	-	23c4009444b0	-	6c0a418c58f8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 942ac2ac-7528-4768-8398-8520a8ee15e5	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:captain-america-wings-of-freedom:combat0.block:s1	-	-	-	23c4009444b0	-	6c0a418c58f8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 94be2e86-ba0e-4b8d-9b9c-114adacb26db	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:way-of-the-mind-sculptor:f0t0:s1	-	-	-	25696bf19d5b	-	bfe6a00ba0de	-	-	2026-11-24	xproof
 94be2e86-ba0e-4b8d-9b9c-114adacb26db	f0/t1	AbilityCast	agreed	-	F	start	2	0	f:xs:XP:way-of-the-mind-sculptor:f0t0:s1	-	-	-	25696bf19d5b	-	bfe6a00ba0de	-	-	2026-11-24	xproof
 94c47804-bb64-4a91-85c5-9241c39685aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-94c47804-bb64-4a91-85c5-9241c39685aa	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+94c47804-bb64-4a91-85c5-9241c39685aa	f0/a0	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:creakwood-ghoul:f0a0:s2,f:xs:XP:creakwood-ghoul:f0a0:s2	-	-	-	336eab778104	-	1e159d003dba	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 94c64d41-d756-42b6-b0e7-0a351d64a68c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zhao-the-moon-slayer:cast:s1,f:xs:XP:zhao-the-moon-slayer:cast:s1	-	-	-	23c4009444b0	-	2c36cff33c84	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 94c64d41-d756-42b6-b0e7-0a351d64a68c	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:zhao-the-moon-slayer:combat0.attack:s1,f:xs:XP:zhao-the-moon-slayer:combat0.attack:s1	-	-	-	23c4009444b0	-	2c36cff33c84	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 94c64d41-d756-42b6-b0e7-0a351d64a68c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Zhao, the Moon Slayer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 94c98a3b-9c3e-497f-b954-8f2248ca01ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94c9aea7-564d-4fc8-ae14-7b22cba18b95	cast	cast-resolve	agreed	-	FX	scen	2	0	Red Tiger Mechan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 94cce37a-a752-4cde-a5b5-e8a15f8af52c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-94cce37a-a752-4cde-a5b5-e8a15f8af52c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+94cce37a-a752-4cde-a5b5-e8a15f8af52c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 94d3de8c-c8a2-4775-9096-d518f227f09a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94d5c904-6504-4df2-b242-daf88a988475	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-pandorica:cast:s1	-	-	-	8c0bd19283bb	-	b04eddf49005	-	-	2026-11-24	xproof
 94d5c904-6504-4df2-b242-daf88a988475	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

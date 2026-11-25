@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 f3073e4f-ca7e-4fde-88a4-bd7b6ebfbc8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grizzly-fate:cast:s1,f:xs:XP:grizzly-fate:cast:s1	-	-	-	fc71ca68c5ac	-	f484ad79bdad	-	-	2026-11-24	xproof
-f307b5b4-e949-4f69-8dc7-856e33a45a16	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+f307b5b4-e949-4f69-8dc7-856e33a45a16	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 f3087daa-d2ff-4227-abff-3398da6297af	cast	cast	agreed	-	F	start	2	0	f:xs:XP:way-of-the-necromancer:f0t0:s1	-	-	-	25696bf19d5b	-	de6eb3e4df53	-	-	2026-11-24	xproof
 f3087daa-d2ff-4227-abff-3398da6297af	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:way-of-the-necromancer:f0t0:s1	-	-	-	25696bf19d5b	-	de6eb3e4df53	-	-	2026-11-24	xproof
 f3087daa-d2ff-4227-abff-3398da6297af	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:way-of-the-necromancer:f0t1:s1,f:xs:XP:way-of-the-necromancer:f0t1:s1	-	-	-	fb9d3088f0bf	-	de6eb3e4df53	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -14,7 +14,7 @@ f30a084c-5705-40f5-8e0d-2083d33973c7	combat#0.block	combat.block	agreed	-	FX	sta
 f30a084c-5705-40f5-8e0d-2083d33973c7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:curse-marred-demon:f0t0:s1,f:xs:XP:curse-marred-demon:f0t0:s1	-	-	-	25696bf19d5b	-	a8bb4d4c5222	-	-	2026-11-24	xproof
 f30aa897-7027-47e7-ae58-73cbc448c1f0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:environmental-scientist:f0t0:s2,f:xs:XP:environmental-scientist:f0t0:s2	-	-	-	5437c1394672	-	a28270a7f2b1	-	-	2026-11-24	xproof
 f30aa897-7027-47e7-ae58-73cbc448c1f0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:environmental-scientist:f0t0:s2,f:xs:XP:environmental-scientist:f0t0:s2	-	-	-	5437c1394672	-	a28270a7f2b1	-	-	2026-11-24	xproof
-f30e9371-2c12-496a-80e1-40c3408defed	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+f30e9371-2c12-496a-80e1-40c3408defed	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 f30f17f0-bd2d-4f10-9739-111917acc100	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glissa-s-scorn:cast:s1,f:xs:XP:glissa-s-scorn:cast:s1	-	-	-	3aa6ded33acb	-	6da0d7c43eac	-	-	2026-11-25	xproof
 f3176779-74f7-4136-a701-438feeead7a0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aang-airbending-master:f0t2:s1,f:xs:XP:aang-airbending-master:f0t2:s1	-	-	-	23c4009444b0	-	8c8eea8772fc	-	-	2026-11-25	xproof
 f3176779-74f7-4136-a701-438feeead7a0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aang-airbending-master:f0t2:s1,f:xs:XP:aang-airbending-master:f0t2:s1	-	-	-	23c4009444b0	-	8c8eea8772fc	-	-	2026-11-25	xproof
@@ -75,7 +75,7 @@ f352ec62-bf09-45f2-b5b7-75931177b15f	f0/a0	NULL	owed	refused:steps-needed:cost:S
 f352ec62-bf09-45f2-b5b7-75931177b15f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:spore-flower:f0t0:s1,f:xs:XP:spore-flower:f0t0:s1	-	-	-	3aa6ded33acb	-	658d7e36f017	-	-	2026-11-25	xproof
 f353948c-b5f9-4840-a89a-19206dde9d47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slab-hammer:cast:s1,f:xs:XP:slab-hammer:cast:s1	-	-	-	d864b561c9cb	-	5e92026f860d	-	-	2026-11-24	xproof
 f353948c-b5f9-4840-a89a-19206dde9d47	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:slab-hammer:f0a0:s1,f:xs:XP:slab-hammer:f0a0:s1	-	-	-	d864b561c9cb	-	5e92026f860d	-	-	2026-11-24	xproof
-f353948c-b5f9-4840-a89a-19206dde9d47	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+f353948c-b5f9-4840-a89a-19206dde9d47	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 f356087e-e1d2-4c25-aa1d-215d09535e7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f356087e-e1d2-4c25-aa1d-215d09535e7c	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:larceny:f0t0:s1,f:xs:XP:larceny:f0t0:s1	-	-	-	23c4009444b0	-	79b5af5aa048	-	-	2026-11-25	xproof
 f35aa497-bd0f-4642-8713-820b9f014da5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rubble-rouser:f0t0:s2,f:xs:XP:rubble-rouser:f0t0:s2	-	-	-	5437c1394672	-	453f7e776951	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ f39a3798-1ff0-4d1b-933f-bfcc0f265168	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:en
 f39e2611-c837-4ad7-b3a8-1ee48b74777c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:corpse-connoisseur:cast:s1,f:xs:XP:corpse-connoisseur:cast:s1	-	-	-	8a1b1a193ec0	-	1c52516e6968	-	-	2026-11-24	xproof
 f39e2611-c837-4ad7-b3a8-1ee48b74777c	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:corpse-connoisseur:f0a0:s1,f:xs:XP:corpse-connoisseur:f0a0:s1	-	-	-	3aa6ded33acb	-	1c52516e6968	-	-	2026-11-25	xproof
 f39e2611-c837-4ad7-b3a8-1ee48b74777c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:corpse-connoisseur:f0a0:s1,f:xs:XP:corpse-connoisseur:f0a0:s1	-	-	-	3aa6ded33acb	-	1c52516e6968	-	-	2026-11-25	xproof
-f39f33ac-074d-442d-ae4c-1d694ee315f3	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:jund-panorama:f0a0:s1,f:xs:XP:jund-panorama:f0a0:s1	-	-	-	da6bc3fe8458	-	5e5912b2cb76	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+f39f33ac-074d-442d-ae4c-1d694ee315f3	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:jund-panorama:f0a0:s1,f:xs:XP:jund-panorama:f0a0:s1	-	-	-	336eab778104	-	5e5912b2cb76	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 f39f33ac-074d-442d-ae4c-1d694ee315f3	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:jund-panorama:f0a0:s1,f:xs:XP:jund-panorama:f0a0:s1	-	-	-	23b491658465	-	5e5912b2cb76	-	-	2026-11-25	xproof
 f39f33ac-074d-442d-ae4c-1d694ee315f3	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3a07ae4-b0f8-43e6-adba-217f220cc2d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

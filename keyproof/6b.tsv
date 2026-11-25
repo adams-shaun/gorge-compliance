@@ -19,8 +19,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6b1552f2-df64-485a-8509-b1916edf19cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b1552f2-df64-485a-8509-b1916edf19cf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b19377c-f178-49cb-95f8-fd3451acc7cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b19377c-f178-49cb-95f8-fd3451acc7cf	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-6b19377c-f178-49cb-95f8-fd3451acc7cf	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6b19377c-f178-49cb-95f8-fd3451acc7cf	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6b19377c-f178-49cb-95f8-fd3451acc7cf	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6b1d178f-9713-4dcf-920b-ddf2c94cc427	cast	cast	owed	harness	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	b663c2f4e3ab	-	-	2026-11-24	xproof
 6b1d178f-9713-4dcf-920b-ddf2c94cc427	f0/t0	DamageDone	owed	harness	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	b663c2f4e3ab	-	-	2026-11-24	xproof
 6b1e4940-11ac-4d85-98f4-3f50d1060b96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gem-of-becoming:cast:s1,f:xs:XP:gem-of-becoming:cast:s1	-	-	-	d864b561c9cb	-	b66b254fae14	-	-	2026-11-24	xproof
@@ -152,10 +152,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6bb7419b-e085-4616-8e5c-4ed08cb2b4c1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Skystinger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6bb7d0df-7a9f-4e17-8c31-7628c4b12356	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f1/a2	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f1/a2	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6bb7d985-b033-46a2-9bbb-6f7ee62aaaff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herald-of-the-fair:f0t0:s1,f:xs:XP:herald-of-the-fair:f0t0:s1	-	-	-	d864b561c9cb	-	cdf956587444	-	-	2026-11-24	xproof
 6bb7d985-b033-46a2-9bbb-6f7ee62aaaff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:herald-of-the-fair:f0t0:s1,f:xs:XP:herald-of-the-fair:f0t0:s1	-	-	-	d864b561c9cb	-	cdf956587444	-	-	2026-11-24	xproof
 6bb8c22c-8b01-45f8-8c9e-f683e6b4f022	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:melira-the-living-cure:cast:s1,f:xs:XP:melira-the-living-cure:cast:s1	-	-	-	ae86f6029288	-	14d776fd7f66	-	-	2026-11-24	xproof
