@@ -25,3 +25,23 @@ func TestStackKeysSourcelessDesignationTrigger(t *testing.T) {
 		t.Errorf("spell %q = %q, want its own name", "The Monarch", got)
 	}
 }
+
+// TestStackInitiativeTriggerIsSourceless: the CR 726.2 initiative trigger
+// ("whenever a player takes the initiative, that player ventures into the
+// Undercity") has no source card. gorge names it "", Forge and XMage name it
+// "The Initiative", and the stacks compare equal.
+func TestStackInitiativeTriggerIsSourceless(t *testing.T) {
+	keys := func(src string) field {
+		return field{"stack", stackKeys([]rules.OracleSnapStack{{Kind: "ability", Source: src, Controller: 0}})}
+	}
+	g, x := keys(""), keys("The Initiative")
+	if !fieldEqual(g, x) {
+		t.Errorf("gorge's %s, follower's %s", g.value, x.value)
+	}
+	if g.value != "[ability:@p0]" || x.value != "[ability:@p0]" {
+		t.Errorf("rendered: %q, %q", g.value, x.value)
+	}
+	if key := stackKeys([]rules.OracleSnapStack{{Kind: "spell", Source: "The Initiative", Controller: 0}}); key != "[spell:The Initiative@p0]" {
+		t.Errorf("spell The Initiative = %q, want its own name", key)
+	}
+}
