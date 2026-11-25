@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 541744d9-449d-420a-a5a1-2fffba18450f	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:primal-beyond:f0a1:s1,f:xs:XP:primal-beyond:f0a1:s1	-	-	-	336eab778104	-	b25fc9203f8f	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 541744d9-449d-420a-a5a1-2fffba18450f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54175132-2c44-4749-8dfd-d08dcc63e4b3	cast	cast-resolve	agreed	-	FX	scen	2	0	Elusive Otter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-54175132-2c44-4749-8dfd-d08dcc63e4b3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Elusive Otter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+54175132-2c44-4749-8dfd-d08dcc63e4b3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:elusive-otter-grove-s-bounty:combat0.attack:s1,f:xs:XP:elusive-otter-grove-s-bounty:combat0.attack:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 54175132-2c44-4749-8dfd-d08dcc63e4b3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Elusive Otter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 54175132-2c44-4749-8dfd-d08dcc63e4b3	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Elusive Otter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 54175132-2c44-4749-8dfd-d08dcc63e4b3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Elusive Otter/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -159,10 +159,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54c2b3b3-e247-4146-8045-d49480b795f2	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:racers-scoreboard:f0t0:s2,f:xs:XP:racers-scoreboard:f0t0:s2	-	-	-	267e485f6204	-	65381c98020b	-	-	2026-11-24	xproof
 54c2b3b3-e247-4146-8045-d49480b795f2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Racers' Scoreboard/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 54c3d8ba-ee7c-4f15-8ee3-e5daf860b428	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54ca5904-9099-497a-9684-101656025487	cast	cast-resolve	agreed	-	X	scen	1	0	Terra, Magical Adept/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+54ca5904-9099-497a-9684-101656025487	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:terra-magical-adept-esper-terra:cast:s1,f:xs:XP:terra-magical-adept-esper-terra:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 54ca5904-9099-497a-9684-101656025487	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Terra, Magical Adept/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 54ca5904-9099-497a-9684-101656025487	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Terra, Magical Adept/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-54ca5904-9099-497a-9684-101656025487	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Terra, Magical Adept/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+54ca5904-9099-497a-9684-101656025487	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:terra-magical-adept-esper-terra:f0a0:s1,f:xs:XP:terra-magical-adept-esper-terra:f0a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+54ca5904-9099-497a-9684-101656025487	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:terra-magical-adept-esper-terra:cast:s1,f:xs:XP:terra-magical-adept-esper-terra:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 54d32245-c796-4e8e-b61e-c218e3902565	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54d32245-c796-4e8e-b61e-c218e3902565	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54d32245-c796-4e8e-b61e-c218e3902565	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

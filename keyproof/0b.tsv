@@ -59,8 +59,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b504dc6-61cc-4a72-907c-145fa4c72466	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:seraph-sanctuary:f0t1:s1,f:xs:XP:seraph-sanctuary:f0t1:s1	-	-	-	fb9d3088f0bf	-	47c161df4292	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 0b504dc6-61cc-4a72-907c-145fa4c72466	land	land	agreed	-	FX	start	4	0	x:xs:XP:seraph-sanctuary:f0t0:s1,f:xs:XP:seraph-sanctuary:f0t0:s1	-	-	-	d864b561c9cb	-	47c161df4292	-	-	2026-11-24	xproof
 0b55eac6-a745-4bf4-8926-5ce83bc38d7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treasure-map-treasure-cove:cast:s1,f:xs:XP:treasure-map-treasure-cove:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
-0b55eac6-a745-4bf4-8926-5ce83bc38d7d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Treasure Map/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0b55eac6-a745-4bf4-8926-5ce83bc38d7d	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Treasure Map/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0b55eac6-a745-4bf4-8926-5ce83bc38d7d	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:treasure-map-treasure-cove:f0a0:s1,f:xs:XP:treasure-map-treasure-cove:f0a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+0b55eac6-a745-4bf4-8926-5ce83bc38d7d	f1/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:treasure-map-treasure-cove:f1a0:s1,f:xs:XP:treasure-map-treasure-cove:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 0b55eac6-a745-4bf4-8926-5ce83bc38d7d	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Treasure Map/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0b583980-1508-4247-8a28-7127241d8ec0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b583980-1508-4247-8a28-7127241d8ec0	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0bb359bb-a1db-4535-8245-097ee989f4f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grisly-transformation:cast:s1,f:xs:XP:grisly-transformation:cast:s1	-	-	-	3aa6ded33acb	-	69d8198b9129	-	-	2026-11-25	xproof
 0bb359bb-a1db-4535-8245-097ee989f4f5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grisly-transformation:cast:s1,f:xs:XP:grisly-transformation:cast:s1	-	-	-	3aa6ded33acb	-	69d8198b9129	-	-	2026-11-25	xproof
 0bb73c07-0220-4ba9-8d85-3c357c223833	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0bb73c07-0220-4ba9-8d85-3c357c223833	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+0bb73c07-0220-4ba9-8d85-3c357c223833	f1/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:kabira-takedown-kabira-plateau:f1a0:s1,f:xs:XP:kabira-takedown-kabira-plateau:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 0bb8500a-bc29-43f1-ab22-2b8adeb9c99d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thriving-rats:f0t0:s1,f:xs:XP:thriving-rats:f0t0:s1	-	-	-	d864b561c9cb	-	79a1588b9104	-	-	2026-11-24	xproof
 0bb8500a-bc29-43f1-ab22-2b8adeb9c99d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thriving-rats:f0t0:s1,f:xs:XP:thriving-rats:f0t0:s1	-	-	-	d864b561c9cb	-	79a1588b9104	-	-	2026-11-24	xproof
 0bb8500a-bc29-43f1-ab22-2b8adeb9c99d	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:thriving-rats:f0t1:s1,f:xs:XP:thriving-rats:f0t1:s1	-	-	-	d864b561c9cb	-	79a1588b9104	-	-	2026-11-24	xproof

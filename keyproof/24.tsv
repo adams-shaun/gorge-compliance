@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 245934d9-c7b7-4a97-9c56-7760d934ef27	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 245aa786-d607-414f-ab55-b003b2b9faf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245aa786-d607-414f-ab55-b003b2b9faf4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-245aa786-d607-414f-ab55-b003b2b9faf4	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+245aa786-d607-414f-ab55-b003b2b9faf4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:autumnal-gloom-ancient-of-the-equinox:f0t0:s1,f:xs:XP:autumnal-gloom-ancient-of-the-equinox:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 245b62a8-b606-4106-87c3-a60ce3e16906	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245b62a8-b606-4106-87c3-a60ce3e16906	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:spurred-wolverine:f0a0:s1,f:xs:XP:spurred-wolverine:f0a0:s1	-	-	-	5b42d43d5d80	-	4dfe672ae8a2	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 245c3681-fc47-47fe-b6e5-34c96315c135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,7 +128,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 249fdd3e-376c-4ec2-a612-4353e0e61ee2	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:the-seedcore:f0a1:s1,f:xs:XP:the-seedcore:f0a1:s1	-	-	-	054d9f516953	-	03413f477702	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 249fdd3e-376c-4ec2-a612-4353e0e61ee2	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 249fdd3e-376c-4ec2-a612-4353e0e61ee2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-24a29be4-5bc2-469b-b2ce-2fb305c3facb	cast	cast-resolve	agreed	-	X	scen	1	0	Emeritus of Ideation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+24a29be4-5bc2-469b-b2ce-2fb305c3facb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emeritus-of-ideation-ancestral-recall:cast:s1,f:xs:XP:emeritus-of-ideation-ancestral-recall:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 24a29be4-5bc2-469b-b2ce-2fb305c3facb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Emeritus of Ideation/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 24a29be4-5bc2-469b-b2ce-2fb305c3facb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Emeritus of Ideation/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 24a29be4-5bc2-469b-b2ce-2fb305c3facb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Emeritus of Ideation/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
