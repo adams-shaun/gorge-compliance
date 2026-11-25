@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70113003-be5e-406a-9aec-cb480468c36d	cast	cast-resolve	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70113003-be5e-406a-9aec-cb480468c36d	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70113003-be5e-406a-9aec-cb480468c36d	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-70113003-be5e-406a-9aec-cb480468c36d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+70113003-be5e-406a-9aec-cb480468c36d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 70113003-be5e-406a-9aec-cb480468c36d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70113003-be5e-406a-9aec-cb480468c36d	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70113003-be5e-406a-9aec-cb480468c36d	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -80,7 +80,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7063eb2b-81a4-4599-b1db-edf861e39bfb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mek-leth-berserker:cast:s1,f:xs:XP:mek-leth-berserker:cast:s1	-	-	-	8c0bd19283bb	-	1ba7b5b6f353	-	-	2026-11-24	xproof
 706833f7-af50-45bf-8f1d-d3a5a31cf2c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glistening-deluge:cast:s1,f:xs:XP:glistening-deluge:cast:s1	-	-	-	ae86f6029288	-	b00d6b3b7107	-	-	2026-11-24	xproof
 7068637c-b025-41a5-be31-df1850f33b68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7069d241-4e66-40bf-afd1-551a4a5457f0	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:hidden-lair:f0a0:s1,f:xs:XP:hidden-lair:f0a0:s1	-	-	-	9087eefec3ee	-	1c6c13acb4e7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+7069d241-4e66-40bf-afd1-551a4a5457f0	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:hidden-lair:f0a0:s1,f:xs:XP:hidden-lair:f0a0:s1	-	-	-	9087eefec3ee	-	1c6c13acb4e7	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 7069d241-4e66-40bf-afd1-551a4a5457f0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hidden Lair/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7069d241-4e66-40bf-afd1-551a4a5457f0	land	land	agreed	-	FX	start	2	0	x:xs:XP:hidden-lair:land:s1,f:xs:XP:hidden-lair:land:s1	-	-	-	fb9d3088f0bf	-	1c6c13acb4e7	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 706ae742-1807-44b7-a4fa-f2e26f61519a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70d1caee-1c35-4fa3-bbc3-a7dcc226be90	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 70d35dbd-1d91-4a2a-a643-6870d168f4f5	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:adagia-windswept-bastion:f0a0:s1,f:xs:XP:adagia-windswept-bastion:f0a0:s1	-	-	-	ce0c2b5e5b13	-	0622c30bb188	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 70d35dbd-1d91-4a2a-a643-6870d168f4f5	land	land	agreed	-	FX	start	2	0	x:xs:XP:adagia-windswept-bastion:land:s1,f:xs:XP:adagia-windswept-bastion:land:s1	-	-	-	23c4009444b0	-	0622c30bb188	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-70d35dbd-1d91-4a2a-a643-6870d168f4f5	static#0.0	static.continuous	diverged	-	-	start	0	2	-	e4aa770172c1	-	-	9087eefec3ee	-	0622c30bb188	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+70d35dbd-1d91-4a2a-a643-6870d168f4f5	static#0.0	static.continuous	diverged	-	-	start	0	2	-	855e24e4a025	-	-	9087eefec3ee	-	0622c30bb188	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 70d39ca3-1bbd-47ec-8723-2abe35b6dc51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70d39ca3-1bbd-47ec-8723-2abe35b6dc51	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 70d52457-1867-482c-ba7a-1f7dacc4514f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-princess-takes-flight:cast:s1,f:xs:XP:the-princess-takes-flight:cast:s1	-	-	-	23b491658465	-	7fc915926472	-	-	2026-11-24	xproof

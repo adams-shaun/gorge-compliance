@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33042d12-f08b-4b3e-b106-c424ef868c13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blade-of-the-swarm:f0t0:s1,f:xs:XP:blade-of-the-swarm:f0t0:s1	-	-	-	23c4009444b0	-	02d86f15e0cb	-	-	2026-11-25	xproof
 33042d12-f08b-4b3e-b106-c424ef868c13	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blade-of-the-swarm:f0t0:s1,f:xs:XP:blade-of-the-swarm:f0t0:s1	-	-	-	23c4009444b0	-	02d86f15e0cb	-	-	2026-11-25	xproof
 330e109c-1885-4946-9edc-895408519b3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-330e109c-1885-4946-9edc-895408519b3d	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+330e109c-1885-4946-9edc-895408519b3d	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 330e8a18-d224-4416-b59d-02b749c3a674	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:christine-chapel-combat-medic:f0t0:s1,f:xs:XP:christine-chapel-combat-medic:f0t0:s1	-	-	-	8c0bd19283bb	-	e61a3274a41d	-	-	2026-11-24	xproof
 330e8a18-d224-4416-b59d-02b749c3a674	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:christine-chapel-combat-medic:f0t0:s1,f:xs:XP:christine-chapel-combat-medic:f0t0:s1	-	-	-	8c0bd19283bb	-	e61a3274a41d	-	-	2026-11-24	xproof
 330e8a18-d224-4416-b59d-02b749c3a674	f0/t1	LifeGained	agreed	-	FX	start	1	0	x:xs:XP:christine-chapel-combat-medic:f0t0:s1,f:xs:XP:christine-chapel-combat-medic:f0t0:s1	-	-	-	8c0bd19283bb	-	e61a3274a41d	-	-	2026-11-24	xproof
@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33435856-ea24-4d10-84d5-6872b35b63a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:voice-of-truth:cast:s1,f:xs:XP:voice-of-truth:cast:s1	-	-	-	5f2128bf97e4	-	250397c5ebe2	-	-	2026-11-24	xproof
 3346a585-d35a-4f8b-b9ab-7e453ebd15f4	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3346a585-d35a-4f8b-b9ab-7e453ebd15f4	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3348df85-e61c-47b5-857d-c79befb38a8a	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3348df85-e61c-47b5-857d-c79befb38a8a	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 3348df85-e61c-47b5-857d-c79befb38a8a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3348df85-e61c-47b5-857d-c79befb38a8a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 334a98c0-9a16-4145-8f5b-bdf017afe73f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:windgrace-acolyte:cast:s1,f:xs:XP:windgrace-acolyte:cast:s1	-	-	-	d864b561c9cb	-	73f555339b90	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3372b994-47de-4e89-9bfc-76e1cb3f1cfa	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3372b994-47de-4e89-9bfc-76e1cb3f1cfa	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3378fef3-4d8c-4d9e-a338-4abb6f70d410	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aqueous-form:cast:s1,f:xs:XP:aqueous-form:cast:s1	-	-	-	d864b561c9cb	-	cdb3c72deb7a	-	-	2026-11-24	xproof
-3378fef3-4d8c-4d9e-a338-4abb6f70d410	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3378fef3-4d8c-4d9e-a338-4abb6f70d410	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 337b0807-94cb-48d0-b752-61fbd05560e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 337e322b-6144-4e0b-b998-df475166fcf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33826f91-7680-4a4c-be39-db6c2c0bd465	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
