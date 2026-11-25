@@ -71,9 +71,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:mine-raider:combat0.attack:s1	-	-	-	3aa6ded33acb	-	16a2818a7867	-	-	2026-11-25	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mine-raider:combat0.block:s1,f:xs:XP:mine-raider:combat0.block:s1	-	-	-	3aa6ded33acb	-	16a2818a7867	-	-	2026-11-25	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mine-raider:f0t0:s1,f:xs:XP:mine-raider:f0t0:s1	-	-	-	3aa6ded33acb	-	16a2818a7867	-	-	2026-11-25	xproof
-5d58aefe-a3df-4e0a-b679-b967cd5fd2c6	cast	cast-resolve	agreed	-	X	scen	1	0	Boggart Cursecrafter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-5d58aefe-a3df-4e0a-b679-b967cd5fd2c6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Boggart Cursecrafter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-5d58aefe-a3df-4e0a-b679-b967cd5fd2c6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Boggart Cursecrafter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+5d58aefe-a3df-4e0a-b679-b967cd5fd2c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boggart-cursecrafter:cast:s1,f:xs:XP:boggart-cursecrafter:cast:s1	-	-	-	23c4009444b0	-	2c475436de40	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5d58aefe-a3df-4e0a-b679-b967cd5fd2c6	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:boggart-cursecrafter:combat0.attack:s1,f:xs:XP:boggart-cursecrafter:combat0.attack:s1	-	-	-	23c4009444b0	-	2c475436de40	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5d58aefe-a3df-4e0a-b679-b967cd5fd2c6	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:boggart-cursecrafter:combat0.block:s1,f:xs:XP:boggart-cursecrafter:combat0.block:s1	-	-	-	23c4009444b0	-	2c475436de40	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5d58aefe-a3df-4e0a-b679-b967cd5fd2c6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Boggart Cursecrafter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5d5b63a4-c9d9-4971-9d4e-2eab86f251e2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:minister-of-pain:cast:s1,f:xs:XP:minister-of-pain:cast:s1	-	-	-	d864b561c9cb	-	ef320d0fe75e	-	-	2026-11-24	xproof
 5d5b63a4-c9d9-4971-9d4e-2eab86f251e2	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:minister-of-pain:cast:s1,f:xs:XP:minister-of-pain:cast:s1	-	-	-	d864b561c9cb	-	ef320d0fe75e	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5da954fa-9001-4557-825c-1462035d21ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5da954fa-9001-4557-825c-1462035d21ed	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5daac63a-1534-4194-8cb7-506508e364f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:invigorating-surge:cast:s1,f:xs:XP:invigorating-surge:cast:s1	-	-	-	ae86f6029288	-	a08a196b764d	-	-	2026-11-24	xproof
-5dabb7c1-8937-42b0-87c6-1cc7af46aaae	cast	cast-resolve	agreed	-	X	scen	1	0	Deep Space Scan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5dabb7c1-8937-42b0-87c6-1cc7af46aaae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deep-space-scan:cast:s1,f:xs:XP:deep-space-scan:cast:s1	-	-	-	23c4009444b0	-	1034e3e6560c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5db492f2-21c0-4eee-843a-509fa0d3a327	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rocket-powered-goblin-glider:cast:s1,f:xs:XP:rocket-powered-goblin-glider:cast:s1	-	-	-	23c4009444b0	-	565741e16a1e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:rocket-powered-goblin-glider:f0a0:s1,f:xs:XP:rocket-powered-goblin-glider:f0a0:s1	-	-	-	23c4009444b0	-	565741e16a1e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

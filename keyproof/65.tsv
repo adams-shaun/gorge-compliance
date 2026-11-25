@@ -76,8 +76,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 654ff673-4630-4068-9bcf-e88a7877eb58	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6556a15b-be4b-45ea-867d-3a8e26202b42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6556a15b-be4b-45ea-867d-3a8e26202b42	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6557813b-4ee7-4881-a37c-10c8ea097360	cast	cast-resolve	agreed	-	X	scen	1	0	Wartime Protestors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6557813b-4ee7-4881-a37c-10c8ea097360	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wartime Protestors/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6557813b-4ee7-4881-a37c-10c8ea097360	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wartime-protestors:cast:s1,f:xs:XP:wartime-protestors:cast:s1	-	-	-	23c4009444b0	-	91283fc2d190	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6557813b-4ee7-4881-a37c-10c8ea097360	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wartime-protestors:f0t0:s1,f:xs:XP:wartime-protestors:f0t0:s1	-	-	-	23c4009444b0	-	91283fc2d190	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 655a2b78-6a6c-4b9e-b7c0-48d3768978f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scales-of-shale:cast:s1,f:xs:XP:scales-of-shale:cast:s1	-	-	-	3aa6ded33acb	-	efb7c554e75f	-	-	2026-11-25	xproof
 655a2b78-6a6c-4b9e-b7c0-48d3768978f5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Scales of Shale/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 655a584c-5280-4317-b707-101b7e31dcb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65dd4ae3-432c-4d57-ac14-4d827262ea0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65dd4ae3-432c-4d57-ac14-4d827262ea0b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65ddd04c-7207-4f6c-ae1b-c5e02a520a51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chandra-s-phoenix:cast:s1,f:xs:XP:chandra-s-phoenix:cast:s1	-	-	-	d864b561c9cb	-	a8ecac1e293c	-	-	2026-11-24	xproof
-65ddd04c-7207-4f6c-ae1b-c5e02a520a51	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+65ddd04c-7207-4f6c-ae1b-c5e02a520a51	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 65e07c0f-4eff-4b38-9785-63684d67c0d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65e07c0f-4eff-4b38-9785-63684d67c0d8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65e1558c-6b09-4ddc-b520-f19f4fb972af	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

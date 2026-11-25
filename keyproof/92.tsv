@@ -20,9 +20,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 920684d0-aef3-4408-a66b-a0c9394c58f4	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 920684d0-aef3-4408-a66b-a0c9394c58f4	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 920684d0-aef3-4408-a66b-a0c9394c58f4	f0/t1	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-9207facd-fbf9-4faa-ac44-6c0bcac81551	cast	cast-resolve	agreed	-	X	scen	1	0	Goliath Daydreamer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+9207facd-fbf9-4faa-ac44-6c0bcac81551	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goliath-daydreamer:cast:s1,f:xs:XP:goliath-daydreamer:cast:s1	-	-	-	23c4009444b0	-	ed7b51ac91d1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9207facd-fbf9-4faa-ac44-6c0bcac81551	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Goliath Daydreamer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-9207facd-fbf9-4faa-ac44-6c0bcac81551	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Goliath Daydreamer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+9207facd-fbf9-4faa-ac44-6c0bcac81551	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:goliath-daydreamer:f0t1:s1,f:xs:XP:goliath-daydreamer:f0t1:s1	-	-	-	23c4009444b0	-	ed7b51ac91d1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 920c1dd4-c3f6-4020-a6f0-2e8acad2c212	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 920c4df3-9517-44cd-8304-28b1ef69d60e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 920c4df3-9517-44cd-8304-28b1ef69d60e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 922a8e27-a367-40c6-84df-86ed32f71c7c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:oltec-cloud-guard:f0t0:s2,f:xs:XP:oltec-cloud-guard:f0t0:s2	-	-	-	e07cf3a05ba5	-	f5e427eb138e	-	-	2026-11-24	xproof
 922c6e1b-abcf-40e0-847e-9ebb7d0b6fd4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 922c6e1b-abcf-40e0-847e-9ebb7d0b6fd4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-922c6e1b-abcf-40e0-847e-9ebb7d0b6fd4	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+922c6e1b-abcf-40e0-847e-9ebb7d0b6fd4	f0/a1	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:grimoire-of-the-dead:f0a1:s1,f:xs:XP:grimoire-of-the-dead:f0a1:s1	-	-	-	23c4009444b0	-	ac5967b429ac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 922d603e-6623-4455-b91f-fad76f94045a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:starfield-of-nyx:f0t0:s1	-	-	-	3aa6ded33acb	-	fa4131eb414b	-	-	2026-11-25	xproof
 922d603e-6623-4455-b91f-fad76f94045a	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:starfield-of-nyx:f0t0:s1	-	-	-	3aa6ded33acb	-	fa4131eb414b	-	-	2026-11-25	xproof
 922d9d79-8038-4185-9dfb-2d2d52fd8460	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:serum-visionary:cast:s1,f:xs:XP:serum-visionary:cast:s1	-	-	-	ae86f6029288	-	957071eedd2f	-	-	2026-11-24	xproof

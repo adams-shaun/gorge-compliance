@@ -78,7 +78,7 @@ b93915ac-744b-4b59-8f16-ae68d6d898c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b93915ac-744b-4b59-8f16-ae68d6d898c6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9397684-f226-4f77-a57a-88f97fbd96a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:living-lightning-charged-up:cast:s1,f:xs:XP:living-lightning-charged-up:cast:s1	-	-	-	8c0bd19283bb	-	69db07bad8f9	-	-	2026-11-24	xproof
 b9397684-f226-4f77-a57a-88f97fbd96a5	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:living-lightning-charged-up:cast:s1,f:xs:XP:living-lightning-charged-up:cast:s1	-	-	-	8c0bd19283bb	-	69db07bad8f9	-	-	2026-11-24	xproof
-b93cd38a-1d0c-40e6-aaf1-621a2c88bf46	cast	cast-resolve	agreed	-	X	scen	1	0	Harmonized Crescendo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+b93cd38a-1d0c-40e6-aaf1-621a2c88bf46	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:harmonized-crescendo:cast:s1,f:xs:XP:harmonized-crescendo:cast:s1	-	-	-	23c4009444b0	-	6304e939eb9f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b93eaf66-91b3-44da-851c-79810901be0c	cast	cast-resolve	agreed	-	FX	scen	2	0	Wayspeaker Bodyguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b93eaf66-91b3-44da-851c-79810901be0c	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b93eaf66-91b3-44da-851c-79810901be0c	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Wayspeaker Bodyguard/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -234,5 +234,5 @@ b9ed0081-7eda-4ff9-ac2d-bcdc29a22d9f	f0/t0	NULL	owed	refused:no-generator:trigge
 b9f4f96b-6e54-4fe6-8df7-623e0fc72409	cast	cast-resolve	agreed	-	FX	scen	2	0	Mentor of the Meek/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b9f4f96b-6e54-4fe6-8df7-623e0fc72409	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Mentor of the Meek/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b9f63388-d1ac-4895-84c5-e5b1db187463	cast	cast	agreed	-	F	start	2	0	f:xs:XP:essence-filter:cast:s1	-	-	-	ea3140b6974b	-	bb5fd9270f8c	-	-	2026-11-24	xproof
-b9fff42d-31cf-4edf-8353-4a3b996bb77b	cast	cast-resolve	agreed	-	X	scen	1	0	Meek Attack/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b9fff42d-31cf-4edf-8353-4a3b996bb77b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Meek Attack/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+b9fff42d-31cf-4edf-8353-4a3b996bb77b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meek-attack:cast:s1,f:xs:XP:meek-attack:cast:s1	-	-	-	23c4009444b0	-	74a4217fc196	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b9fff42d-31cf-4edf-8353-4a3b996bb77b	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:meek-attack:f0a0:s1,f:xs:XP:meek-attack:f0a0:s1	-	-	-	23c4009444b0	-	74a4217fc196	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

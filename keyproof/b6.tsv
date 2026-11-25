@@ -3,11 +3,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 b6021700-992a-4faa-8f83-a9af03dc7296	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6021700-992a-4faa-8f83-a9af03dc7296	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b6021700-992a-4faa-8f83-a9af03dc7296	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:baru-fist-of-krosa:f0t0:s1,f:xs:XP:baru-fist-of-krosa:f0t0:s1	-	-	-	23c4009444b0	-	7ceac74003c9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-b608288e-1755-4738-b828-9df6998bae8d	cast	cast-resolve	agreed	-	X	scen	1	0	Illusion Spinners/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b608288e-1755-4738-b828-9df6998bae8d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Illusion Spinners/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b608288e-1755-4738-b828-9df6998bae8d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Illusion Spinners/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+b608288e-1755-4738-b828-9df6998bae8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:illusion-spinners:cast:s1,f:xs:XP:illusion-spinners:cast:s1	-	-	-	23c4009444b0	-	723110a95690	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b608288e-1755-4738-b828-9df6998bae8d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:illusion-spinners:combat0.attack:s1,f:xs:XP:illusion-spinners:combat0.attack:s1	-	-	-	23c4009444b0	-	723110a95690	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b608288e-1755-4738-b828-9df6998bae8d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:illusion-spinners:combat0.block:s1,f:xs:XP:illusion-spinners:combat0.block:s1	-	-	-	23c4009444b0	-	723110a95690	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b608288e-1755-4738-b828-9df6998bae8d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Illusion Spinners/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b608288e-1755-4738-b828-9df6998bae8d	static#0.1	static#0.1	agreed	-	X	scen	1	0	Illusion Spinners/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+b608288e-1755-4738-b828-9df6998bae8d	static#0.1	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:illusion-spinners:static0.1:s1,f:xs:XP:illusion-spinners:static0.1:s1	-	-	-	23c4009444b0	-	723110a95690	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b60aff46-2d5a-47e2-9340-39d34a47c3e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruthless-instincts:cast:s1,f:xs:XP:ruthless-instincts:cast:s1	-	-	-	3aa6ded33acb	-	e881d61da542	-	-	2026-11-25	xproof
 b60d83ea-18bf-4c64-b4ee-981d54629362	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b61718ad-7102-4ed2-b884-733bc46df715	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -25,9 +25,9 @@ b638407b-4749-41fa-8054-f9db57b849ea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 b638c475-778c-4251-8dac-6a18c3394ae5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tall-as-a-beanstalk:cast:s1,f:xs:XP:tall-as-a-beanstalk:cast:s1	-	-	-	3aa6ded33acb	-	3fae79565342	-	-	2026-11-25	xproof
 b63dad39-4dd5-4340-953e-b05df1a3c776	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:congregation-at-dawn:cast:s1,f:xs:XP:congregation-at-dawn:cast:s1	-	-	-	64a08ba7d913	-	7fe0be7003e8	-	-	2026-11-24	xproof
 b63e5518-61f3-4cde-a799-5f3ee6aba70b	cast	cast-resolve	agreed	-	X	scen	1	0	Mudbutton Cursetosser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b63e5518-61f3-4cde-a799-5f3ee6aba70b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mudbutton Cursetosser/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+b63e5518-61f3-4cde-a799-5f3ee6aba70b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:mudbutton-cursetosser:combat0.attack:s1,f:xs:XP:mudbutton-cursetosser:combat0.attack:s1	-	-	-	23c4009444b0	-	f0ee5da24971	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b63e5518-61f3-4cde-a799-5f3ee6aba70b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mudbutton Cursetosser/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b63e5518-61f3-4cde-a799-5f3ee6aba70b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mudbutton Cursetosser/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+b63e5518-61f3-4cde-a799-5f3ee6aba70b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mudbutton-cursetosser:f0t0:s1,f:xs:XP:mudbutton-cursetosser:f0t0:s1	-	-	-	23c4009444b0	-	f0ee5da24971	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b63e5518-61f3-4cde-a799-5f3ee6aba70b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mudbutton Cursetosser/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b64051c0-e791-4fcb-b79f-4287e1b06468	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:compass-gnome:f0t0:s2,f:xs:XP:compass-gnome:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed947238ad33	-	-	2026-11-24	xproof
 b64051c0-e791-4fcb-b79f-4287e1b06468	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:compass-gnome:f0t0:s2,f:xs:XP:compass-gnome:f0t0:s2	-	-	-	e07cf3a05ba5	-	ed947238ad33	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ b6ddb093-1fff-4648-b7a1-141a3875599c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b6ddb093-1fff-4648-b7a1-141a3875599c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6e36e77-0cea-4b7a-b968-774b1e74a992	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-soulgorger:f0t0:s1,f:xs:XP:phyrexian-soulgorger:f0t0:s1	-	-	-	23c4009444b0	-	66c2e0e77947	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b6e36e77-0cea-4b7a-b968-774b1e74a992	f0/t0	Phase/Cumulative upkeep	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-soulgorger:f0t0:s1,f:xs:XP:phyrexian-soulgorger:f0t0:s1	-	-	-	23c4009444b0	-	66c2e0e77947	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-b6e82d4f-4fbf-495c-bebd-982d2a855ad0	cast	cast-resolve	agreed	-	X	scen	1	0	Tiger-Dillo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b6e82d4f-4fbf-495c-bebd-982d2a855ad0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tiger-dillo:cast:s1,f:xs:XP:tiger-dillo:cast:s1	-	-	-	23c4009444b0	-	c0710acc5787	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b6e82d4f-4fbf-495c-bebd-982d2a855ad0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tiger-Dillo/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6e82d4f-4fbf-495c-bebd-982d2a855ad0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tiger-Dillo/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b6e82d4f-4fbf-495c-bebd-982d2a855ad0	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tiger-Dillo/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

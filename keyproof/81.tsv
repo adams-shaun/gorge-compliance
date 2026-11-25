@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8109aeff-1ba7-46c2-89ab-450d6ff99c28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 810a6cf5-e9f4-48e1-8e06-3e0af85633ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:day-s-undoing:cast:s1,f:xs:XP:day-s-undoing:cast:s1	-	-	-	d864b561c9cb	-	6f879e815042	-	-	2026-11-24	xproof
 8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8110f15d-82db-4299-a959-09c22475daec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:cast:s1,f:xs:XP:kayla-s-music-box:cast:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
 8110f15d-82db-4299-a959-09c22475daec	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:f0a0:s1,f:xs:XP:kayla-s-music-box:f0a0:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
 8110f15d-82db-4299-a959-09c22475daec	f0/a1	Effect	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:f0a1:s1,f:xs:XP:kayla-s-music-box:f0a1:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81c515b7-9174-4b34-ad07-4144e3dbaaac	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:nardole-resourceful-cyborg:f0t0:s1,f:xs:XP:nardole-resourceful-cyborg:f0t0:s1	-	-	-	23c4009444b0	-	98741c6ae45c	-	-	2026-11-25	xproof
 81c70ae7-3c18-4c9b-8505-e4db9e0e6518	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wishclaw-talisman:cast:s1,f:xs:XP:wishclaw-talisman:cast:s1	-	-	-	23b491658465	-	6439b8e1a5b6	-	-	2026-11-24	xproof
 81c70ae7-3c18-4c9b-8505-e4db9e0e6518	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:wishclaw-talisman:f0a0:s1,f:xs:XP:wishclaw-talisman:f0a0:s1	-	-	-	3aa6ded33acb	-	6439b8e1a5b6	-	-	2026-11-25	xproof
-81cb888c-c4d3-45a2-a03e-bfd91a2af2be	cast	cast-resolve	agreed	-	X	scen	1	0	Mirrorform/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+81cb888c-c4d3-45a2-a03e-bfd91a2af2be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirrorform:cast:s1,f:xs:XP:mirrorform:cast:s1	-	-	-	23c4009444b0	-	4b92e54ef7d8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 81d62f0a-b2ba-4e87-9003-e5472bd1101f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81d72511-88b4-45ec-a5a9-e722caf55577	cast	cast-resolve	agreed	-	FX	scen	2	0	Mystical Teachings/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 81dcb85e-d61f-430b-9540-5a3bb1378d5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

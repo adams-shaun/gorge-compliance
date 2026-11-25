@@ -48,8 +48,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 114dd40d-5ad8-4913-a08f-572b9521eb5b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 114dd40d-5ad8-4913-a08f-572b9521eb5b	land	land	agreed	-	FX	start	2	0	x:xs:XP:turbulent-fen:land:s1,f:xs:XP:turbulent-fen:land:s1	-	-	-	8c0bd19283bb	-	588eb9b5d525	-	-	2026-11-24	xproof
 114e1d2c-cefc-4e2a-922e-3b2ceed1871d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:maralen-fae-ascendant:f0t0:s1,f:xs:XP:maralen-fae-ascendant:f0t0:s1	-	-	-	267e485f6204	-	3fffc42d0f03	-	-	2026-11-24	xproof
-114e1d2c-cefc-4e2a-922e-3b2ceed1871d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Maralen, Fae Ascendant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-114e1d2c-cefc-4e2a-922e-3b2ceed1871d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Maralen, Fae Ascendant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+114e1d2c-cefc-4e2a-922e-3b2ceed1871d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:maralen-fae-ascendant:combat0.attack:s1,f:xs:XP:maralen-fae-ascendant:combat0.attack:s1	-	-	-	23c4009444b0	-	3fffc42d0f03	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+114e1d2c-cefc-4e2a-922e-3b2ceed1871d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:maralen-fae-ascendant:combat0.block:s1,f:xs:XP:maralen-fae-ascendant:combat0.block:s1	-	-	-	23c4009444b0	-	3fffc42d0f03	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 114e1d2c-cefc-4e2a-922e-3b2ceed1871d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:maralen-fae-ascendant:f0t0:s1,f:xs:XP:maralen-fae-ascendant:f0t0:s1	-	-	-	267e485f6204	-	3fffc42d0f03	-	-	2026-11-24	xproof
 114e1d2c-cefc-4e2a-922e-3b2ceed1871d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Maralen, Fae Ascendant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 115bd33d-4875-4014-ae9f-0052f5acdbb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 115dabbd-1a09-4641-a428-92fcbfd82ae9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:patrol-hound:cast:s1,f:xs:XP:patrol-hound:cast:s1	-	-	-	fc71ca68c5ac	-	b5e9cb810916	-	-	2026-11-24	xproof
 115dabbd-1a09-4641-a428-92fcbfd82ae9	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 115f1397-fa24-4412-80b7-e2a6ddedcd4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-115f1397-fa24-4412-80b7-e2a6ddedcd4c	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+115f1397-fa24-4412-80b7-e2a6ddedcd4c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:deranged-outcast:f0a0:s1,f:xs:XP:deranged-outcast:f0a0:s1	-	-	-	23c4009444b0	-	ae6e0e16a6c2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 115fd5ac-460b-49a3-83ed-9d56a7aecb14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:artisan-s-sorrow:cast:s1,f:xs:XP:artisan-s-sorrow:cast:s1	-	-	-	d864b561c9cb	-	fa4810e4e9f2	-	-	2026-11-24	xproof
 1162c7ff-c0cb-469a-ad3c-322b0981ae1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1162c7ff-c0cb-469a-ad3c-322b0981ae1d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mitotic-slime:f0t0:s1,f:xs:XP:mitotic-slime:f0t0:s1	-	-	-	23c4009444b0	-	ad2b9eda28b4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

@@ -26,7 +26,7 @@ dd257eb3-4112-41e5-9c7d-00d1f683dbdb	f0/t0	NULL	owed	refused:no-generator:trigge
 dd25afe0-a69a-4e0b-b364-b88d3a522ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd25afe0-a69a-4e0b-b364-b88d3a522ed3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd27c5fa-4355-4e5c-8219-b74cfe209da0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:high-perfect-morcant:f0t0:s1,f:xs:XP:high-perfect-morcant:f0t0:s1	-	-	-	25696bf19d5b	-	fb33cb068c8d	-	-	2026-11-24	xproof
-dd27c5fa-4355-4e5c-8219-b74cfe209da0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	High Perfect Morcant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+dd27c5fa-4355-4e5c-8219-b74cfe209da0	f0/a0	Proliferate	agreed	-	FX	start	2	0	x:xs:XP:high-perfect-morcant:f0a0:s1,f:xs:XP:high-perfect-morcant:f0a0:s1	-	-	-	23c4009444b0	-	fb33cb068c8d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dd27c5fa-4355-4e5c-8219-b74cfe209da0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:high-perfect-morcant:f0t0:s1,f:xs:XP:high-perfect-morcant:f0t0:s1	-	-	-	25696bf19d5b	-	fb33cb068c8d	-	-	2026-11-24	xproof
 dd27d0f2-fe1e-4b63-9ba0-6264ca3c70f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd27d0f2-fe1e-4b63-9ba0-6264ca3c70f8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -44,8 +44,8 @@ dd2f698c-b3b4-4dc8-9950-9be03ca7dc9e	f0/a1	NULL	owed	refused:start-not-exercised
 dd310fa1-02e0-4c39-a1ae-7bb0ed42bc1e	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Believe in the Cleave"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 dd33af3e-ab8c-486c-baae-a37cc857f180	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd33af3e-ab8c-486c-baae-a37cc857f180	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-dd35a377-0865-4b25-bd0f-aaead29a9f0e	cast	cast-resolve	agreed	-	X	scen	1	0	Doran, Besieged by Time/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-dd35a377-0865-4b25-bd0f-aaead29a9f0e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Doran, Besieged by Time/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+dd35a377-0865-4b25-bd0f-aaead29a9f0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doran-besieged-by-time:cast:s1,f:xs:XP:doran-besieged-by-time:cast:s1	-	-	-	23c4009444b0	-	aaf93df6e8aa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+dd35a377-0865-4b25-bd0f-aaead29a9f0e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:doran-besieged-by-time:f0t0:s1,f:xs:XP:doran-besieged-by-time:f0t0:s1	-	-	-	23c4009444b0	-	aaf93df6e8aa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dd35a377-0865-4b25-bd0f-aaead29a9f0e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Doran, Besieged by Time/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 dd35a377-0865-4b25-bd0f-aaead29a9f0e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Doran, Besieged by Time/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 dd36aea8-9f1c-4daf-86f6-ab9307279ce7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:minotaur-skullcleaver:f0t0:s1,f:xs:XP:minotaur-skullcleaver:f0t0:s1	-	-	-	d864b561c9cb	-	a229db907bec	-	-	2026-11-24	xproof

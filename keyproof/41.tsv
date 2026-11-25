@@ -33,10 +33,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 411cf990-972c-4ee3-9ae4-98602f269407	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:carefree-swinemaster:f0t0:s1,f:xs:XP:carefree-swinemaster:f0t0:s1	-	-	-	8c0bd19283bb	-	331372c27b55	-	-	2026-11-24	xproof
 411f3ea6-36ad-4bbc-8cde-e79662a08ee9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plated-crusher:cast:s1,f:xs:XP:plated-crusher:cast:s1	-	-	-	d864b561c9cb	-	558b5c519d37	-	-	2026-11-24	xproof
 412197f2-0e95-47fb-83db-ae8301c90ff0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4121b7d9-5fbe-40e2-a2a6-d7633f423b5f	cast	cast-resolve	agreed	-	X	scen	1	0	Nightmare Sower/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-4121b7d9-5fbe-40e2-a2a6-d7633f423b5f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nightmare Sower/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-4121b7d9-5fbe-40e2-a2a6-d7633f423b5f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Nightmare Sower/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-4121b7d9-5fbe-40e2-a2a6-d7633f423b5f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nightmare Sower/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+4121b7d9-5fbe-40e2-a2a6-d7633f423b5f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nightmare-sower:cast:s1,f:xs:XP:nightmare-sower:cast:s1	-	-	-	23c4009444b0	-	27739a391d52	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4121b7d9-5fbe-40e2-a2a6-d7633f423b5f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:nightmare-sower:combat0.attack:s1,f:xs:XP:nightmare-sower:combat0.attack:s1	-	-	-	23c4009444b0	-	27739a391d52	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4121b7d9-5fbe-40e2-a2a6-d7633f423b5f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:nightmare-sower:combat0.block:s1,f:xs:XP:nightmare-sower:combat0.block:s1	-	-	-	23c4009444b0	-	27739a391d52	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4121b7d9-5fbe-40e2-a2a6-d7633f423b5f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:nightmare-sower:f0t0:s1,f:xs:XP:nightmare-sower:f0t0:s1	-	-	-	23c4009444b0	-	27739a391d52	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4122720b-cad9-4ebb-b458-be71411c21e3	cast	cast-resolve	agreed	-	X	scen	1	0	Glassworks/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4122720b-cad9-4ebb-b458-be71411c21e3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Glassworks/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4122720b-cad9-4ebb-b458-be71411c21e3	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Glassworks/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 417e798d-9ca6-4cd0-adb4-f61d3becb201	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 417e798d-9ca6-4cd0-adb4-f61d3becb201	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 41820f91-27cf-41c0-bb5e-9adf6845a6a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-41820f91-27cf-41c0-bb5e-9adf6845a6a4	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+41820f91-27cf-41c0-bb5e-9adf6845a6a4	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4187fd6d-5660-4ea7-a9dd-402487ec8721	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:veiled-apparition:cast:s1,f:xs:XP:veiled-apparition:cast:s1	-	-	-	5f2128bf97e4	-	f0bb6be73fb2	-	-	2026-11-24	xproof
 4187fd6d-5660-4ea7-a9dd-402487ec8721	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 418be12f-b40a-4018-86c1-98c9000a999a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moroii:f0t0:s1,f:xs:XP:moroii:f0t0:s1	-	-	-	3aa6ded33acb	-	aff2cce337f0	-	-	2026-11-25	xproof

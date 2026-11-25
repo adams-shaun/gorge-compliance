@@ -47,9 +47,9 @@ fa3ae120-756d-4c52-91f9-235767539d67	cast	cast-resolve	agreed	-	X	scen	1	0	Mondo
 fa3ae120-756d-4c52-91f9-235767539d67	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mondo Gecko/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa3ae120-756d-4c52-91f9-235767539d67	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mondo Gecko/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa3d8a6f-dc5b-4890-a806-f785a41660c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fa3d8a6f-dc5b-4890-a806-f785a41660c7	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+fa3d8a6f-dc5b-4890-a806-f785a41660c7	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 fa3d8a6f-dc5b-4890-a806-f785a41660c7	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:helvault:f0a1:s1,f:xs:XP:helvault:f0a1:s1	-	-	-	d864b561c9cb	-	3f7804f8176f	-	-	2026-11-24	xproof
-fa3d8a6f-dc5b-4890-a806-f785a41660c7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+fa3d8a6f-dc5b-4890-a806-f785a41660c7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 fa3ed0f6-e44e-433d-80d3-824de5e6135a	cast	cast-resolve	agreed	-	FX	scen	2	0	Fortress Kin-Guard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fa3ed0f6-e44e-433d-80d3-824de5e6135a	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fa43077b-5d8b-4fb1-8dda-2a9185e6715e	cast	cast-resolve	agreed	-	FX	scen	2	0	Kaito, Bane of Nightmares/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -215,7 +215,7 @@ fae834ee-2b2e-4f68-b4a4-81592cbecefb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fae834ee-2b2e-4f68-b4a4-81592cbecefb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 fae90808-bafa-44d8-972a-17ded87576ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 faeaa3eb-6eb8-4621-98c7-0c6f58bbff85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-faeaa3eb-6eb8-4621-98c7-0c6f58bbff85	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+faeaa3eb-6eb8-4621-98c7-0c6f58bbff85	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:champion-of-the-parish:f0t0:s1,f:xs:XP:champion-of-the-parish:f0t0:s1	-	-	-	23c4009444b0	-	c7802a3b3b7a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 faecfb8d-2f63-4b98-a842-b11448f0d538	cast	cast-resolve	agreed	-	FX	scen	2	0	Foggy Swamp Spirit Keeper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 faecfb8d-2f63-4b98-a842-b11448f0d538	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:foggy-swamp-spirit-keeper:combat0.attack:s1,f:xs:XP:foggy-swamp-spirit-keeper:combat0.attack:s1	-	-	-	23c4009444b0	-	c1554ea86901	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 faecfb8d-2f63-4b98-a842-b11448f0d538	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:foggy-swamp-spirit-keeper:combat0.block:s1,f:xs:XP:foggy-swamp-spirit-keeper:combat0.block:s1	-	-	-	23c4009444b0	-	c1554ea86901	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -232,8 +232,8 @@ faf296b0-59e5-4ec9-9912-e5e21c0ce9f5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 faf296b0-59e5-4ec9-9912-e5e21c0ce9f5	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 faf296b0-59e5-4ec9-9912-e5e21c0ce9f5	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 faf2f368-a7e7-4427-bc03-929f294b1e03	cast	cast-resolve	agreed	-	FX	scen	2	0	Prideful Feastling/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-faf2f368-a7e7-4427-bc03-929f294b1e03	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Prideful Feastling/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-faf2f368-a7e7-4427-bc03-929f294b1e03	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Prideful Feastling/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+faf2f368-a7e7-4427-bc03-929f294b1e03	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:prideful-feastling:combat0.attack:s1,f:xs:XP:prideful-feastling:combat0.attack:s1	-	-	-	23c4009444b0	-	9ad19c66bab2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+faf2f368-a7e7-4427-bc03-929f294b1e03	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:prideful-feastling:combat0.block:s1,f:xs:XP:prideful-feastling:combat0.block:s1	-	-	-	23c4009444b0	-	9ad19c66bab2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 faf81ae0-0b35-45ef-a50d-6cecf0c0eeeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragonlord-s-servant:cast:s1,f:xs:XP:dragonlord-s-servant:cast:s1	-	-	-	23b491658465	-	f72fc20cb137	-	-	2026-11-24	xproof
 faf81ae0-0b35-45ef-a50d-6cecf0c0eeeb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dragonlord's Servant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fafdba94-51cd-413c-82f3-eb294825c6ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heaven-s-gate:cast:s1,f:xs:XP:heaven-s-gate:cast:s1	-	-	-	3aa6ded33acb	-	19e72b9b75fc	-	-	2026-11-25	xproof

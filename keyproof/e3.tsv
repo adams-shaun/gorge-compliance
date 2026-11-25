@@ -42,7 +42,7 @@ e335485a-80fc-40d4-8be6-7eabf2bab571	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs
 e3367ed8-16a3-4b04-bc6a-e0a3c794e6d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghor-clan-bloodscale:cast:s1,f:xs:XP:ghor-clan-bloodscale:cast:s1	-	-	-	77494c1ce129	-	7d08c6641e24	-	-	2026-11-24	xproof
 e3367ed8-16a3-4b04-bc6a-e0a3c794e6d3	f0/a0	Pump	agreed	-	X	start	2	0	x:xs:XP:ghor-clan-bloodscale:f0a0:s1	-	-	-	23c4009444b0	-	7d08c6641e24	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e339c6cb-c75d-4dd4-8c1a-78f844983242	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e339c6cb-c75d-4dd4-8c1a-78f844983242	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e339c6cb-c75d-4dd4-8c1a-78f844983242	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shattered-angel:f0t0:s1,f:xs:XP:shattered-angel:f0t0:s1	-	-	-	23c4009444b0	-	1545840da8bd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e33c1744-843f-438f-a8c3-2d9f60120776	cast	cast-resolve	agreed	-	FX	scen	2	0	Rotisserie Elemental/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e33c1744-843f-438f-a8c3-2d9f60120776	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:rotisserie-elemental:combat0.attack:s1	-	-	-	3aa6ded33acb	-	cee83e8d4216	-	-	2026-11-25	xproof
 e33c1744-843f-438f-a8c3-2d9f60120776	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:rotisserie-elemental:combat0.block:s1,f:xs:XP:rotisserie-elemental:combat0.block:s1	-	-	-	3aa6ded33acb	-	cee83e8d4216	-	-	2026-11-25	xproof
@@ -79,10 +79,10 @@ e35d4c62-5211-4785-b683-a83719195d87	cast	cast-resolve	agreed	-	X	scen	1	0	Spine
 e35d4c62-5211-4785-b683-a83719195d87	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spinerock Tyrant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e35d4c62-5211-4785-b683-a83719195d87	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spinerock Tyrant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e35d4c62-5211-4785-b683-a83719195d87	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spinerock Tyrant/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-e35d7886-8c03-471c-b598-118d7eceddb4	cast	cast-resolve	agreed	-	X	scen	1	0	Enraged Flamecaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-e35d7886-8c03-471c-b598-118d7eceddb4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Enraged Flamecaster/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-e35d7886-8c03-471c-b598-118d7eceddb4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Enraged Flamecaster/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-e35d7886-8c03-471c-b598-118d7eceddb4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Enraged Flamecaster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+e35d7886-8c03-471c-b598-118d7eceddb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enraged-flamecaster:cast:s1,f:xs:XP:enraged-flamecaster:cast:s1	-	-	-	23c4009444b0	-	1bdc9dd205b5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e35d7886-8c03-471c-b598-118d7eceddb4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:enraged-flamecaster:combat0.attack:s1,f:xs:XP:enraged-flamecaster:combat0.attack:s1	-	-	-	23c4009444b0	-	1bdc9dd205b5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e35d7886-8c03-471c-b598-118d7eceddb4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:enraged-flamecaster:combat0.block:s1,f:xs:XP:enraged-flamecaster:combat0.block:s1	-	-	-	23c4009444b0	-	1bdc9dd205b5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e35d7886-8c03-471c-b598-118d7eceddb4	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:enraged-flamecaster:f0t0:s1,f:xs:XP:enraged-flamecaster:f0t0:s1	-	-	-	23c4009444b0	-	1bdc9dd205b5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e36100d6-d9ae-454a-bba1-b50a69d5a28f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swordsman-s-steel:f0t0:s1,f:xs:XP:swordsman-s-steel:f0t0:s1	-	-	-	8c0bd19283bb	-	abe8d458f950	-	-	2026-11-24	xproof
 e36100d6-d9ae-454a-bba1-b50a69d5a28f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e36100d6-d9ae-454a-bba1-b50a69d5a28f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:swordsman-s-steel:f0t0:s1,f:xs:XP:swordsman-s-steel:f0t0:s1	-	-	-	8c0bd19283bb	-	abe8d458f950	-	-	2026-11-24	xproof

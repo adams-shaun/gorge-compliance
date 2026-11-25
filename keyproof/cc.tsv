@@ -70,7 +70,7 @@ cc65821a-1893-4087-b461-35cf9fd26c71	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Orcri
 cc65821a-1893-4087-b461-35cf9fd26c71	static#0.0	static#0.0	agreed	-	X	scen	1	0	Orcrist, Goblin-cleaver/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc65a99f-ac7f-4ded-bb00-a5daf51e4bcd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heal-the-scars:cast:s1,f:xs:XP:heal-the-scars:cast:s1	-	-	-	3aa6ded33acb	-	5bd1c08e44e7	-	-	2026-11-25	xproof
 cc65ac73-5bef-4ecb-ad8e-39199084c027	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cc65ac73-5bef-4ecb-ad8e-39199084c027	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+cc65ac73-5bef-4ecb-ad8e-39199084c027	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cathars-crusade:f0t0:s1,f:xs:XP:cathars-crusade:f0t0:s1	-	-	-	23c4009444b0	-	7f1f7b34ac06	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cc6a83c7-e645-4a53-9550-be79b42cd851	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loyal-warhound:f0t0:s1,f:xs:XP:loyal-warhound:f0t0:s1	-	-	-	3aa6ded33acb	-	471dfca05ba2	-	-	2026-11-25	xproof
 cc6a83c7-e645-4a53-9550-be79b42cd851	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loyal-warhound:f0t0:s1,f:xs:XP:loyal-warhound:f0t0:s1	-	-	-	3aa6ded33acb	-	471dfca05ba2	-	-	2026-11-25	xproof
 cc6f2b79-8fcd-4542-904b-943c7493b8ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -79,7 +79,7 @@ cc710da0-5a2e-4bc4-8fdd-d90e7bc1f224	land	land	agreed	-	FX	start	2	0	x:xs:XP:bar
 cc71b6c4-09d4-423b-a134-2f2f2fd7b533	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc72ec48-9e8b-4ded-b445-f3a839fd1abe	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tajuru-beastmaster:cast:s1,f:xs:XP:tajuru-beastmaster:cast:s1	-	-	-	d864b561c9cb	-	110eeb30369c	-	-	2026-11-24	xproof
 cc72ec48-9e8b-4ded-b445-f3a839fd1abe	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tajuru-beastmaster:cast:s1,f:xs:XP:tajuru-beastmaster:cast:s1	-	-	-	d864b561c9cb	-	110eeb30369c	-	-	2026-11-24	xproof
-cc7d902e-c86e-4771-ba66-2f63e847cff1	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+cc7d902e-c86e-4771-ba66-2f63e847cff1	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cc7d99e8-f9dc-47d3-b6c0-e9308d33c3c0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:invincible-hymn:cast:s1,f:xs:XP:invincible-hymn:cast:s1	-	-	-	8a1b1a193ec0	-	714417317d98	-	-	2026-11-24	xproof
 cc7dcb89-534b-4e86-abd2-8362855e2f66	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-s-zeal:cast:s1,f:xs:XP:vampire-s-zeal:cast:s1	-	-	-	3aa6ded33acb	-	8f996aef0f2e	-	-	2026-11-25	xproof
 cc7f290f-ca00-4285-9bdb-4b4402444f30	cast	cast-resolve	agreed	-	FX	scen	2	0	Lord of Atlantis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -91,8 +91,8 @@ cc913f28-18ef-485e-8d2b-ae0115523020	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cc913f28-18ef-485e-8d2b-ae0115523020	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cc929343-db65-43d5-9bf6-9f0bd77c2cd8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc94462f-a207-4fdb-8704-aa979c244cab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gravepurge:cast:s1,f:xs:XP:gravepurge:cast:s1	-	-	-	d864b561c9cb	-	9f9640cf2bdd	-	-	2026-11-24	xproof
-cc9523da-f48e-49ab-9989-a4031dafb426	cast	cast-resolve	agreed	-	X	scen	1	0	Heirloom Auntie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-cc9523da-f48e-49ab-9989-a4031dafb426	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Heirloom Auntie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+cc9523da-f48e-49ab-9989-a4031dafb426	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heirloom-auntie:cast:s1,f:xs:XP:heirloom-auntie:cast:s1	-	-	-	23c4009444b0	-	431a29f4f389	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+cc9523da-f48e-49ab-9989-a4031dafb426	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:heirloom-auntie:f0t0:s1,f:xs:XP:heirloom-auntie:f0t0:s1	-	-	-	23c4009444b0	-	431a29f4f389	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cc965557-f69e-4689-8791-d3618e4ffbfa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hormagaunt-horde:f0t1:s1,f:xs:XP:hormagaunt-horde:f0t1:s1	-	-	-	23c4009444b0	-	4b73bc8bcf0d	-	-	2026-11-25	xproof
 cc965557-f69e-4689-8791-d3618e4ffbfa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 cc965557-f69e-4689-8791-d3618e4ffbfa	f0/t1	ChangesZone/Ravenous	agreed	-	FX	start	2	0	x:xs:XP:hormagaunt-horde:f0t1:s1,f:xs:XP:hormagaunt-horde:f0t1:s1	-	-	-	23c4009444b0	-	4b73bc8bcf0d	-	-	2026-11-25	xproof

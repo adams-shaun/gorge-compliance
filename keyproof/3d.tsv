@@ -56,8 +56,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d4a7dd3-9258-4bd1-adc4-08f0205e196a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dwynen-s-elite:f0t0:s2,f:xs:XP:dwynen-s-elite:f0t0:s2	-	-	-	e07cf3a05ba5	-	3071cbc0d02e	-	-	2026-11-24	xproof
 3d4a7dd3-9258-4bd1-adc4-08f0205e196a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dwynen-s-elite:f0t0:s2,f:xs:XP:dwynen-s-elite:f0t0:s2	-	-	-	e07cf3a05ba5	-	3071cbc0d02e	-	-	2026-11-24	xproof
 3d4b9d71-4275-4c18-a4dc-9aad234eb92c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-fire-nation-drill:cast:s2	-	-	-	5437c1394672	-	a2788e58097a	-	-	2026-11-24	xproof
-3d4b9d71-4275-4c18-a4dc-9aad234eb92c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Fire Nation Drill/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3d4b9d71-4275-4c18-a4dc-9aad234eb92c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	The Fire Nation Drill/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3d4b9d71-4275-4c18-a4dc-9aad234eb92c	f0/a0	AnimateAll	agreed	-	FX	start	2	0	x:xs:XP:the-fire-nation-drill:f0a0:s1,f:xs:XP:the-fire-nation-drill:f0a0:s1	-	-	-	23c4009444b0	-	a2788e58097a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3d4b9d71-4275-4c18-a4dc-9aad234eb92c	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:the-fire-nation-drill:f0a1:s1,f:xs:XP:the-fire-nation-drill:f0a1:s1	-	-	-	23c4009444b0	-	a2788e58097a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3d4b9d71-4275-4c18-a4dc-9aad234eb92c	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:the-fire-nation-drill:cast:s2	-	-	-	5437c1394672	-	a2788e58097a	-	-	2026-11-24	xproof
 3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	cast	cast-resolve	agreed	-	X	scen	1	0	Virulent Emissary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Virulent Emissary/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d776a25-c341-4058-9b5f-84e70edb25a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d776a25-c341-4058-9b5f-84e70edb25a4	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3d783beb-9ca6-4681-9276-fc3ad13b993f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d783beb-9ca6-4681-9276-fc3ad13b993f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3d783beb-9ca6-4681-9276-fc3ad13b993f	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:balefire-dragon:f0t0:s1,f:xs:XP:balefire-dragon:f0t0:s1	-	-	-	23c4009444b0	-	ff168a9f8d0c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3d794629-9014-460a-8d3b-785eadc1cdb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d794629-9014-460a-8d3b-785eadc1cdb5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d79cbe2-cf1b-4313-ab47-0118fcdbfc6c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:phylath-world-sculptor:cast:s1,f:xs:XP:phylath-world-sculptor:cast:s1	-	-	-	ae86f6029288	-	ad52a30a86d7	-	-	2026-11-24	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3dc364f3-3094-4660-80ca-9418588c7fde	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:mithril-coat:f0a0:s1,f:xs:XP:mithril-coat:f0a0:s1	-	-	-	3aa6ded33acb	-	c39e5e36907d	-	-	2026-11-25	xproof
 3dc364f3-3094-4660-80ca-9418588c7fde	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:mithril-coat:cast:s1,f:xs:XP:mithril-coat:cast:s1	-	-	-	ae86f6029288	-	c39e5e36907d	-	-	2026-11-24	xproof
 3dc51dfc-7a60-41bf-b944-6afad6b06c22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3dc51dfc-7a60-41bf-b944-6afad6b06c22	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3dc51dfc-7a60-41bf-b944-6afad6b06c22	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goldnight-commander:f0t0:s1,f:xs:XP:goldnight-commander:f0t0:s1	-	-	-	23c4009444b0	-	5073ac6b16ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3dc71e16-b935-4ad7-b3f7-945ac2c179a7	cast	cast-resolve	agreed	-	X	scen	1	0	Chrome Dome/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3dc71e16-b935-4ad7-b3f7-945ac2c179a7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Chrome Dome/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3dc71e16-b935-4ad7-b3f7-945ac2c179a7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Chrome Dome/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

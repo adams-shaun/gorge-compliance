@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7145e1b7-b991-4651-b21d-0620cb017090	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7146eecb-8a79-467c-936e-f577e481cf59	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-flare:cast:s1,f:xs:XP:war-flare:cast:s1	-	-	-	d864b561c9cb	-	af18376aea82	-	-	2026-11-24	xproof
 7149de06-d676-47bc-a50f-e1058d89c890	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7149de06-d676-47bc-a50f-e1058d89c890	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7149de06-d676-47bc-a50f-e1058d89c890	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:heirs-of-stromkirk:f0t0:s1,f:xs:XP:heirs-of-stromkirk:f0t0:s1	-	-	-	23c4009444b0	-	e90cbaec07e2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 714dcaf0-442b-4849-917a-7e6af2ea0210	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Kes, Evolving Telepath"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 714dcaf0-442b-4849-917a-7e6af2ea0210	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 714ebb3d-303e-4f4b-b219-96a2b7d6b751	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Primetime Suspect"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71668016-cefb-43d2-a84c-47956cffd71e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71668016-cefb-43d2-a84c-47956cffd71e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7166bf81-05c2-457d-a0bb-a175175b8e79	cast	cast-resolve	agreed	-	X	scen	1	0	Wandering Musicians/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7166bf81-05c2-457d-a0bb-a175175b8e79	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wandering Musicians/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7166bf81-05c2-457d-a0bb-a175175b8e79	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:wandering-musicians:f0t0:s1,f:xs:XP:wandering-musicians:f0t0:s1	-	-	-	23c4009444b0	-	7b84905faaba	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 717152c3-2082-49aa-9274-a1a6abe54b65	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:chartooth-cougar:cast:s2,f:xs:XP:chartooth-cougar:cast:s2	-	-	-	fc71ca68c5ac	-	3f1f87edfc6c	-	-	2026-11-24	xproof
 717152c3-2082-49aa-9274-a1a6abe54b65	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:chartooth-cougar:cast:s2,f:xs:XP:chartooth-cougar:cast:s2	-	-	-	fc71ca68c5ac	-	3f1f87edfc6c	-	-	2026-11-24	xproof
 717152c3-2082-49aa-9274-a1a6abe54b65	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:chartooth-cougar:cast:s1,f:xs:XP:chartooth-cougar:cast:s1	-	-	-	fc71ca68c5ac	-	3f1f87edfc6c	-	-	2026-11-24	xproof

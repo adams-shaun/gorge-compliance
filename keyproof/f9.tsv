@@ -79,7 +79,7 @@ f966ae40-4717-4f41-9437-0e38b01a8be9	f0/a0	PutCounterAll	agreed	-	FX	start	2	0	x
 f9672b63-415a-448b-a3da-140df63a0f0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pridemalkin:f0t0:s1,f:xs:XP:pridemalkin:f0t0:s1	-	-	-	ae86f6029288	-	59748752e8f9	-	-	2026-11-24	xproof
 f9672b63-415a-448b-a3da-140df63a0f0c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pridemalkin:f0t0:s1,f:xs:XP:pridemalkin:f0t0:s1	-	-	-	ae86f6029288	-	59748752e8f9	-	-	2026-11-24	xproof
 f9697a59-46e2-4612-b30b-d041a38fdd30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f9697a59-46e2-4612-b30b-d041a38fdd30	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+f9697a59-46e2-4612-b30b-d041a38fdd30	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rage-thrower:f0t0:s1,f:xs:XP:rage-thrower:f0t0:s1	-	-	-	23c4009444b0	-	448fd530310f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f96a2aa6-3259-4bb6-92cd-4d17215d04d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f96a2aa6-3259-4bb6-92cd-4d17215d04d0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f96fcb37-5f17-4231-b1a2-64f5fe45730b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -117,8 +117,8 @@ f9af02f3-6ab1-469c-9d37-e8f6fa9608c4	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:
 f9af02f3-6ab1-469c-9d37-e8f6fa9608c4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f9b46a1a-474f-4fac-8d71-131c1720e4c0	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Borg Queen, Perfection Mani	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f9b46a1a-474f-4fac-8d71-131c1720e4c0	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Borg Queen, Perfection Mani	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-f9b7bbea-ea20-400b-a5b7-4d6993d8777b	cast	cast-resolve	agreed	-	X	scen	1	0	Creakwood Safewright/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-f9b7bbea-ea20-400b-a5b7-4d6993d8777b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Creakwood Safewright/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+f9b7bbea-ea20-400b-a5b7-4d6993d8777b	cast	cast	diverged	-	-	start	0	2	-	6fefd2839139	-	-	23c4009444b0	-	7aab349b4658	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f9b7bbea-ea20-400b-a5b7-4d6993d8777b	f0/t0	Phase	diverged	-	-	start	0	2	-	89f98fd8f30c	-	-	23c4009444b0	-	7aab349b4658	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f9be5566-c3df-44cc-9de4-29510c8c245f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-knives:cast:s1,f:xs:XP:mind-knives:cast:s1	-	-	-	ea3140b6974b	-	eb691a50d16a	-	-	2026-11-24	xproof
 f9bf996e-ae14-40a3-a8d8-f5725ddaa270	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:spell-stutter:cast:s2,f:xs:XP:spell-stutter:cast:s2	-	-	-	23b491658465	-	de68570c9830	-	-	2026-11-24	xproof
 f9ca35e1-24c5-46f4-a666-0dfe2c920e8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

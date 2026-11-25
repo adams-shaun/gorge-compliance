@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c17f48b-467e-4953-85d0-221cef5b3bff	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:lurking-nightstalker:f0t0:s1,f:xs:XP:lurking-nightstalker:f0t0:s1	-	-	-	5f2128bf97e4	-	f3ee2fc757fa	-	-	2026-11-24	xproof
 8c1c0117-6fc0-43c5-a4c8-6472de6503d9	cast	cast-resolve	agreed	-	FX	scen	2	0	Toph, Hardheaded Teacher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c1c0117-6fc0-43c5-a4c8-6472de6503d9	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c1c0117-6fc0-43c5-a4c8-6472de6503d9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Toph, Hardheaded Teacher/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8c1c0117-6fc0-43c5-a4c8-6472de6503d9	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:toph-hardheaded-teacher:f0t1:s1,f:xs:XP:toph-hardheaded-teacher:f0t1:s1	-	-	-	23c4009444b0	-	0c934fe41eef	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8c1c519a-6edd-4204-b825-b0feca5afa42	cast	cast-resolve	agreed	-	X	scen	1	0	Chelonian Tackle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c1e5b25-ee5a-4ea9-a715-08dd1a4f51c4	cast	cast-resolve	agreed	-	FX	scen	2	0	Raphael, the Nightwatcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c1e5b25-ee5a-4ea9-a715-08dd1a4f51c4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Raphael, the Nightwatcher/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -116,8 +116,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c90b558-de07-4689-9427-da68d823c2e8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c91d50b-bf58-4d06-b3b7-4b6db867bfce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c95d823-6bbd-4484-8f38-b1bb20403085	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ca2f668-2a4d-4a1e-abcc-093ccbc29295	cast	cast-resolve	agreed	-	FX	scen	2	0	Mornsong Aria/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-8ca2f668-2a4d-4a1e-abcc-093ccbc29295	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mornsong Aria/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+8ca2f668-2a4d-4a1e-abcc-093ccbc29295	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mornsong-aria:f0t0:s1,f:xs:XP:mornsong-aria:f0t0:s1	-	-	-	23c4009444b0	-	ebc57d15a1e4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8ca2f668-2a4d-4a1e-abcc-093ccbc29295	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:mornsong-aria:f0t0:s1,f:xs:XP:mornsong-aria:f0t0:s1	-	-	-	23c4009444b0	-	ebc57d15a1e4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8ca2f668-2a4d-4a1e-abcc-093ccbc29295	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mornsong Aria/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8ca2f668-2a4d-4a1e-abcc-093ccbc29295	static#0.1	static#0.1	agreed	-	X	scen	1	0	Mornsong Aria/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8ca33b31-4707-40d0-b4ed-cbe625793122	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

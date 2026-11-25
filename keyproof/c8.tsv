@@ -109,8 +109,8 @@ c8877da5-7008-4b47-955e-d205220c91e6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c8909015-ea49-47cb-8d37-653904f965bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seal-away:f0t0:s1,f:xs:XP:seal-away:f0t0:s1	-	-	-	d864b561c9cb	-	e31a91a24d87	-	-	2026-11-24	xproof
 c8909015-ea49-47cb-8d37-653904f965bb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:seal-away:f0t0:s1,f:xs:XP:seal-away:f0t0:s1	-	-	-	d864b561c9cb	-	e31a91a24d87	-	-	2026-11-24	xproof
 c892d28c-4a78-4a7f-b8d5-c3663b819c5e	cast	cast-resolve	agreed	-	FX	scen	2	0	Deepchannel Duelist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-c892d28c-4a78-4a7f-b8d5-c3663b819c5e	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Deepchannel Duelist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c892d28c-4a78-4a7f-b8d5-c3663b819c5e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Deepchannel Duelist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+c892d28c-4a78-4a7f-b8d5-c3663b819c5e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:deepchannel-duelist:static0.0:s1,f:xs:XP:deepchannel-duelist:static0.0:s1	-	-	-	23c4009444b0	-	eaff12ced701	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c892d28c-4a78-4a7f-b8d5-c3663b819c5e	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:deepchannel-duelist:static0.0:s1,f:xs:XP:deepchannel-duelist:static0.0:s1	-	-	-	23c4009444b0	-	eaff12ced701	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c8981af1-b0aa-4c19-8520-a7fb59018bc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8a1b3dd-bc36-4d97-8f93-1151446f04e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8a20fc7-025b-403a-b893-ff5efcbdc9d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -136,8 +136,8 @@ c8bc28ea-5630-49d5-963a-5789fa83f3c7	combat#0.attack	combat#0.attack	agreed	-	X	
 c8bc28ea-5630-49d5-963a-5789fa83f3c7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Devouring Sugarmaw/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c8bc28ea-5630-49d5-963a-5789fa83f3c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Devouring Sugarmaw/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c8bf2dce-7bcd-45cb-bf15-f53e24333a01	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:luminollusk:f0t0:s2,f:xs:XP:luminollusk:f0t0:s2	-	-	-	267e485f6204	-	de8d1bf13243	-	-	2026-11-24	xproof
-c8bf2dce-7bcd-45cb-bf15-f53e24333a01	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Luminollusk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-c8bf2dce-7bcd-45cb-bf15-f53e24333a01	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Luminollusk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+c8bf2dce-7bcd-45cb-bf15-f53e24333a01	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:luminollusk:combat0.attack:s1,f:xs:XP:luminollusk:combat0.attack:s1	-	-	-	23c4009444b0	-	de8d1bf13243	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c8bf2dce-7bcd-45cb-bf15-f53e24333a01	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:luminollusk:combat0.block:s1,f:xs:XP:luminollusk:combat0.block:s1	-	-	-	23c4009444b0	-	de8d1bf13243	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c8bf2dce-7bcd-45cb-bf15-f53e24333a01	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:luminollusk:f0t0:s2,f:xs:XP:luminollusk:f0t0:s2	-	-	-	267e485f6204	-	de8d1bf13243	-	-	2026-11-24	xproof
 c8c110db-4d98-4087-a3b0-c7fe88b5e38a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8c110db-4d98-4087-a3b0-c7fe88b5e38a	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -202,7 +202,7 @@ c8e96a51-24c9-4955-8bf0-6ef448fa8011	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c8e96a51-24c9-4955-8bf0-6ef448fa8011	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8e9a7e1-28ae-40e3-8715-1bb0aa2057c7	cast	cast-resolve	agreed	-	X	scen	1	0	Bloodline Recollector/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c8e9a7e1-28ae-40e3-8715-1bb0aa2057c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bloodline Recollector/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c8e9bec0-43e5-4e84-9e0e-5f3db362f1e4	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+c8e9bec0-43e5-4e84-9e0e-5f3db362f1e4	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c8ebfc8b-3cee-491b-a568-8a8dcb22541d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c8ebfc8b-3cee-491b-a568-8a8dcb22541d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c8ed45e6-ae4f-4c44-9f73-45793f30acd6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:operations-officer:cast:s1,f:xs:XP:operations-officer:cast:s1	-	-	-	8c0bd19283bb	-	03e53c6584d6	-	-	2026-11-24	xproof

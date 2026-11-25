@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 774dce79-67e0-4820-8013-c7a7347993ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cathar-commando:cast:s1,f:xs:XP:cathar-commando:cast:s1	-	-	-	23b491658465	-	de8f43af1b31	-	-	2026-11-24	xproof
 774dce79-67e0-4820-8013-c7a7347993ce	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:cathar-commando:f0a0:s1,f:xs:XP:cathar-commando:f0a0:s1	-	-	-	23b491658465	-	de8f43af1b31	-	-	2026-11-24	xproof
 774e474a-f2a1-4b62-8cfe-40ad509f9062	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-774e474a-f2a1-4b62-8cfe-40ad509f9062	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+774e474a-f2a1-4b62-8cfe-40ad509f9062	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:markov-blademaster:f0t0:s1,f:xs:XP:markov-blademaster:f0t0:s1	-	-	-	23c4009444b0	-	42ad966dccbf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 774e53b2-5aec-43e1-b4fe-8812b8430401	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 775617cd-7264-4365-94c4-ffae4eb9ec8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 775617cd-7264-4365-94c4-ffae4eb9ec8b	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
