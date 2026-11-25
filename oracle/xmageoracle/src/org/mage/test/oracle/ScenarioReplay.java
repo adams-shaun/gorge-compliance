@@ -8854,6 +8854,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     castObjectSpell(turn, phase, p, castObject);
                 } else if (!tg.isEmpty() && castQueuedTargets(turn, phase, p, cardName, castObject, tg, castAbility)) {
                     // Cast with its targets queued: see castQueuedTargets.
+                } else if (namesStackAbility(tg)) {
+                    // A target that names a pending stack ability (Stifle on
+                    // Dark Sphere's ability, "p1:ability:Dark Sphere"): the
+                    // inline "$target=" string would hand TestPlayer the raw
+                    // ref, which names no card, and the cast fails "Can't
+                    // find ability to activate". Queue every target instead:
+                    // queueCastTarget binds the ability ref to its live stack
+                    // object (queueAbilityTarget), the one binding activations
+                    // and answers use.
+                    castWithQueuedTargets(p, tg, () -> castObjectSpell(turn, phase, p, castObject));
                 } else if (!tg.isEmpty() && spellTargetsOnCastTrigger(cardName)) {
                     // The spell declares no target: its recorded targets
                     // belong to a cast trigger (Zone.STACK), whose own chooser
@@ -9479,6 +9489,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * (engine/rules/oracle_run.go splitRef). */
     static boolean isAbilityRef(String ref) {
         return isScenarioRef(ref) && ref.startsWith("ability:", ref.indexOf(':') + 1);
+    }
+
+    /** True when any target ref names a pending stack ability: such a cast
+     * cannot take the inline "$target=" string, which has no spelling for
+     * a stack ability. */
+    static boolean namesStackAbility(List<String> targets) {
+        for (String t : targets) {
+            if (isAbilityRef(t)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** The source card name of an ability ref, "#k" and seat stripped. */
