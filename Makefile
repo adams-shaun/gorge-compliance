@@ -777,7 +777,21 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # before it with the exact miss; scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) runs it. Driver-only.
 # 53059b9bbf2 = oracle/fpin-1125-join10: 6fcacdc21814 (join9; above) joined with 019d50429f (the ChangeTargets accept/retarget
 # fix; above); driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 53059b9bbf2d85b11f810f54699145b731665a8b
+# e45e911953c = 53059b9bbf2 plus the below-min target decline (xproof cluster xpt-6e2fff25, Kitsune, Dragon's Daughter
+# with p1's lone Grizzly Bears): the trigger's "exchange control of two other target creatures controlled by different
+# players" needs exactly two targets (TargetMin$ 2 | TargetMax$ 2 | TargetsWithDifferentControllers) and only one other
+# creature exists, so the required number of targets cannot be chosen and the ability is removed without going on the
+# stack (CR 603.3d with 601.2c); gorge logs no target ask. Forge's TargetRestrictions.hasCandidates is true with one
+# candidate, so Forge asked for targets gorge never posed and StepMachine.targets ended in "Missing target answer at
+# step 9" (Forge's own TargetSelection would also fail to reach min and drop the trigger). targets now mirrors
+# TargetSelection's gate right before the miss: when no pending decision has unused refs and even the largest legal set
+# cannot reach min (getAllCandidates already filters TargetUnique and already-chosen through canTarget; the distinct
+# controller count is mirrored for TargetsWithDifferentControllers/ForEachPlayer), it notes "fewer candidates than min,
+# ability not put on the stack" and returns false without a miss; enough candidates plus no gorge answer keeps the miss.
+# TargetsBelowMinTest (fork fixtures targets-below-min/) fails on 53059b9bbf2 with the exact miss and passes here;
+# scripts/forge-oracle-test-targets-below-min.sh (make forge-driver-tests) runs it. Driver-only; die-roll code,
+# cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-targets-below-min.
+FORGE_ORACLE_REF ?= e45e911953c94991e63335d3ea14d0c881ba283a
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
