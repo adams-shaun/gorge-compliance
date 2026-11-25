@@ -112,7 +112,13 @@ GO_TEST_FLAGS ?= -p=2
 # siblings on 98052067d4 and touch only their own card and test, so the join carries both fork heads (it adds no
 # code of its own). Card behaviour changes only for Wild Shape and at Extraordinary Journey's X = 0, so the
 # manifests are unchanged. Fork branch fix/join-wild-shape-extraordinary-journey.
-XMAGE_REF  ?= 11940683b903024a728751604bc5b1573a00e86a
+# 5cc61aaba0b = 11940683b90 (above) + Thought Collapse and Didn't Say Please counter the spell before its controller
+# mills (CR 608.2c, 701.6a): both milled first, so the countered spell was last in the graveyard.
+# CounterTargetThenMillEffect reads the target's controller, counters, then mills; CounterThenMillOrderTest fails
+# before (countered spell last) and passes after, and the driver replay of xs:XP:thought-collapse:cast:s1/s2 now
+# matches gorge and Forge. Fork branch fix/thought-collapse-counter-first (5566c5c1f4 cherry-picked onto
+# 11940683b90, so the Wild Shape fix stays in the pin).
+XMAGE_REF  ?= 5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage

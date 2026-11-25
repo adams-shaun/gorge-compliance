@@ -1,0 +1,261 @@
+diff --git a/Mage.Sets/src/mage/cards/d/DidntSayPlease.java b/Mage.Sets/src/mage/cards/d/DidntSayPlease.java
+index 96f5edc3635..631c77a9df6 100644
+--- a/Mage.Sets/src/mage/cards/d/DidntSayPlease.java
++++ b/Mage.Sets/src/mage/cards/d/DidntSayPlease.java
+@@ -1,15 +1,9 @@
+ package mage.cards.d;
+ 
+-import mage.abilities.Ability;
+-import mage.abilities.effects.Effect;
+-import mage.abilities.effects.OneShotEffect;
+-import mage.abilities.effects.common.CounterTargetEffect;
++import mage.abilities.effects.common.CounterTargetThenMillEffect;
+ import mage.cards.CardImpl;
+ import mage.cards.CardSetInfo;
+ import mage.constants.CardType;
+-import mage.constants.Outcome;
+-import mage.game.Game;
+-import mage.players.Player;
+ import mage.target.TargetSpell;
+ 
+ import java.util.UUID;
+@@ -23,7 +17,8 @@ public final class DidntSayPlease extends CardImpl {
+         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
+ 
+         // Counter target spell. Its controller puts the top three cards of their library into their graveyard.
+-        this.getSpellAbility().addEffect(new DidntSayPleaseEffect());
++        this.getSpellAbility().addEffect(new CounterTargetThenMillEffect(
++                3, "Counter target spell. Its controller mills three cards."));
+         this.getSpellAbility().addTarget(new TargetSpell());
+     }
+ 
+@@ -36,32 +31,3 @@ public final class DidntSayPlease extends CardImpl {
+         return new DidntSayPlease(this);
+     }
+ }
+-
+-class DidntSayPleaseEffect extends OneShotEffect {
+-
+-    private static final Effect effect = new CounterTargetEffect();
+-
+-    DidntSayPleaseEffect() {
+-        super(Outcome.Benefit);
+-        staticText = "Counter target spell. Its controller mills three cards.";
+-    }
+-
+-    private DidntSayPleaseEffect(final DidntSayPleaseEffect effect) {
+-        super(effect);
+-    }
+-
+-    @Override
+-    public DidntSayPleaseEffect copy() {
+-        return new DidntSayPleaseEffect(this);
+-    }
+-
+-    @Override
+-    public boolean apply(Game game, Ability source) {
+-        Player player = game.getPlayer(game.getControllerId(source.getFirstTarget()));
+-        if (player == null) {
+-            return false;
+-        }
+-        player.millCards(3, source, game);
+-        return effect.apply(game, source);
+-    }
+-}
+diff --git a/Mage.Sets/src/mage/cards/t/ThoughtCollapse.java b/Mage.Sets/src/mage/cards/t/ThoughtCollapse.java
+index dae6de61490..03bf5880550 100644
+--- a/Mage.Sets/src/mage/cards/t/ThoughtCollapse.java
++++ b/Mage.Sets/src/mage/cards/t/ThoughtCollapse.java
+@@ -1,15 +1,9 @@
+ package mage.cards.t;
+ 
+-import mage.abilities.Ability;
+-import mage.abilities.effects.Effect;
+-import mage.abilities.effects.OneShotEffect;
+-import mage.abilities.effects.common.CounterTargetEffect;
++import mage.abilities.effects.common.CounterTargetThenMillEffect;
+ import mage.cards.CardImpl;
+ import mage.cards.CardSetInfo;
+ import mage.constants.CardType;
+-import mage.constants.Outcome;
+-import mage.game.Game;
+-import mage.players.Player;
+ import mage.target.TargetSpell;
+ 
+ import java.util.UUID;
+@@ -23,7 +17,8 @@ public final class ThoughtCollapse extends CardImpl {
+         super(ownerId, setInfo, new CardType[]{CardType.INSTANT}, "{1}{U}{U}");
+ 
+         // Counter target spell. Its controller puts the top three cards of their library into their graveyard.
+-        this.getSpellAbility().addEffect(new ThoughtCollapseEffect());
++        this.getSpellAbility().addEffect(new CounterTargetThenMillEffect(
++                3, "Counter target spell. Its controller mills three cards"));
+         this.getSpellAbility().addTarget(new TargetSpell());
+     }
+ 
+@@ -36,32 +31,3 @@ public final class ThoughtCollapse extends CardImpl {
+         return new ThoughtCollapse(this);
+     }
+ }
+-
+-class ThoughtCollapseEffect extends OneShotEffect {
+-
+-    private static final Effect effect = new CounterTargetEffect();
+-
+-    ThoughtCollapseEffect() {
+-        super(Outcome.Benefit);
+-        staticText = "Counter target spell. Its controller mills three cards";
+-    }
+-
+-    private ThoughtCollapseEffect(final ThoughtCollapseEffect effect) {
+-        super(effect);
+-    }
+-
+-    @Override
+-    public ThoughtCollapseEffect copy() {
+-        return new ThoughtCollapseEffect(this);
+-    }
+-
+-    @Override
+-    public boolean apply(Game game, Ability source) {
+-        Player player = game.getPlayer(game.getControllerId(source.getFirstTarget()));
+-        if (player == null) {
+-            return false;
+-        }
+-        player.millCards(3, source, game);
+-        return effect.apply(game, source);
+-    }
+-}
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/abilities/oneshot/counterspell/CounterThenMillOrderTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/abilities/oneshot/counterspell/CounterThenMillOrderTest.java
+new file mode 100644
+index 00000000000..5d1fb596cd7
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/abilities/oneshot/counterspell/CounterThenMillOrderTest.java
+@@ -0,0 +1,71 @@
++package org.mage.test.cards.abilities.oneshot.counterspell;
++
++import mage.cards.Card;
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++import java.util.Arrays;
++import java.util.List;
++import java.util.stream.Collectors;
++
++/**
++ * "Counter target spell. Its controller mills three cards." The instructions
++ * run in printed order (CR 608.2c): the countered spell is in the graveyard
++ * first (CR 701.6a), then the three milled cards go on top of it. Two separate
++ * events, so the owner has no CR 404.3 choice of order.
++ * <p>
++ * Thought Collapse and Didn't Say Please share the counter-then-mill effect;
++ * both used to mill before they countered, which put the countered spell last.
++ */
++public class CounterThenMillOrderTest extends CardTestPlayerBase {
++
++    private static final String BOLT = "Lightning Bolt";
++    private static final String THOUGHT_COLLAPSE = "Thought Collapse";
++    private static final String DIDNT_SAY_PLEASE = "Didn't Say Please";
++
++    private List<String> graveyardNames() {
++        return currentGame.getPlayer(playerA.getId()).getGraveyard()
++                .getCards(currentGame)
++                .stream()
++                .map(Card::getName)
++                .collect(Collectors.toList());
++    }
++
++    private void counterThenMill(String counterspell) {
++        skipInitShuffling();
++        removeAllCardsFromLibrary(playerA);
++
++        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
++        addCard(Zone.HAND, playerA, BOLT);
++        addCard(Zone.BATTLEFIELD, playerB, "Island", 3);
++        addCard(Zone.HAND, playerB, counterspell);
++        // addCard(Zone.LIBRARY) puts the last added card on top
++        addCard(Zone.LIBRARY, playerA, "Plains");
++        addCard(Zone.LIBRARY, playerA, "Island");
++        addCard(Zone.LIBRARY, playerA, "Plains");
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, BOLT, playerB);
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerB, counterspell, BOLT);
++
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.BEGIN_COMBAT);
++        execute();
++
++        Assert.assertEquals("the countered spell is in the graveyard before the three milled cards",
++                Arrays.asList(BOLT, "Plains", "Island", "Plains"), graveyardNames());
++        assertGraveyardCount(playerB, counterspell, 1);
++    }
++
++    @Test
++    public void testThoughtCollapseCountersBeforeMilling() {
++        counterThenMill(THOUGHT_COLLAPSE);
++    }
++
++    @Test
++    public void testDidntSayPleaseCountersBeforeMilling() {
++        counterThenMill(DIDNT_SAY_PLEASE);
++    }
++}
+diff --git a/Mage/src/main/java/mage/abilities/effects/common/CounterTargetThenMillEffect.java b/Mage/src/main/java/mage/abilities/effects/common/CounterTargetThenMillEffect.java
+new file mode 100644
+index 00000000000..63747fd3750
+--- /dev/null
++++ b/Mage/src/main/java/mage/abilities/effects/common/CounterTargetThenMillEffect.java
+@@ -0,0 +1,50 @@
++package mage.abilities.effects.common;
++
++import mage.abilities.Ability;
++import mage.abilities.effects.OneShotEffect;
++import mage.constants.Outcome;
++import mage.game.Game;
++import mage.players.Player;
++
++import java.util.UUID;
++
++/**
++ * "Counter target spell. Its controller mills N cards."
++ * <p>
++ * The instructions are carried out in printed order (CR 608.2c): the countered
++ * spell goes to its owner's graveyard first (CR 701.6a), then the milled cards
++ * go on top of it. The target's controller is read before the counter because
++ * the stack object is gone once the spell has been countered.
++ */
++public class CounterTargetThenMillEffect extends OneShotEffect {
++
++    private final int millAmount;
++
++    public CounterTargetThenMillEffect(int millAmount, String text) {
++        super(Outcome.Benefit);
++        this.millAmount = millAmount;
++        this.staticText = text;
++    }
++
++    protected CounterTargetThenMillEffect(final CounterTargetThenMillEffect effect) {
++        super(effect);
++        this.millAmount = effect.millAmount;
++    }
++
++    @Override
++    public CounterTargetThenMillEffect copy() {
++        return new CounterTargetThenMillEffect(this);
++    }
++
++    @Override
++    public boolean apply(Game game, Ability source) {
++        UUID targetId = source.getFirstTarget();
++        Player controller = targetId == null ? null : game.getPlayer(game.getControllerId(targetId));
++        if (controller == null) {
++            return false;
++        }
++        boolean countered = new CounterTargetEffect().apply(game, source);
++        controller.millCards(millAmount, source, game);
++        return countered;
++    }
++}
