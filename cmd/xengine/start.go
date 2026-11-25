@@ -111,6 +111,9 @@ type startFocus struct {
 	Ability int    `json:"ability"`
 	Mode    string `json:"mode"`
 	Times   int    `json:"times"`
+	// Bait is the spell the focus seat's opponent casts before the focus play
+	// (game.Focus.Bait).
+	Bait string `json:"bait"`
 	// Targets are the permanents the focus play must target, in the order the
 	// play asks for them (game.Focus.Targets).
 	Targets []string `json:"targets"`
@@ -253,6 +256,7 @@ func (f *startFile) focusOf() (game.Focus, error) {
 			out.Kind, out.Ability, out.Mode, out.Times = o.Kind, o.Ability, o.Mode, o.Times
 		}
 		out.Attack, out.Block = o.Attack, o.Block
+		out.Bait = o.Bait
 		out.Targets = o.Targets
 	}
 	if out.Seat < 0 || out.Seat > 1 {

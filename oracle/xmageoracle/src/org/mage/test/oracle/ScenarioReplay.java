@@ -3903,12 +3903,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // field's later value cannot describe this checkpoint.
                 final boolean settleHere = settleCheckpoint;
                 settleCheckpoint = false;
+                // A pass that only hands priority on runs its checkpoint before
+                // XMage moves the priority (TestPlayer's pass returns first), so
+                // the snapshot must name the seat that receives priority
+                // (CR 117.3d), not the passer the game still reports. Captured
+                // here: `i` and the step array are only final for this step.
+                final int passSeat = seatOfStep(steps, i);
+                final boolean handsPriorityOn = passHandsPriorityOn(steps, i, activeSeat, seats);
                 runCode(cp, turn, phase, checkpointSeat(op, st, i), (info, p, g) -> {
                     if (settleHere) {
                         g.checkStateAndTriggered();
                     }
                     applyDeclarationStepEnd(reportAs, g);
-                    JsonObject snap = snapshot(info, g);
+                    JsonObject snap = snapshot(info, g,
+                            handsPriorityOn ? nextPriorityPlayer(g, passSeat) : null);
                     if (reportAs != null) {
                         snap.addProperty("step", reportAs.name());
                     }
@@ -5073,10 +5081,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 || adjuster instanceof mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
     }
 
-    /** The card's spell ability, or null when the name does not resolve. */
+    /** The named face's spell ability, or null when the name does not
+     * resolve. A modal double-faced card is one XMage card object registered
+     * under its front face, so the repository resolves its back-face name too;
+     * the object's first SpellAbility is the front half's, while a cast of
+     * the back face (cast_mode "modal_spell") must be analysed through the
+     * right half's own SpellAbility. */
     private static Ability spellAbility(String name) {
         CardInfo info = CardRepository.instance.findCard(name);
         Card c = info == null ? null : info.createCard();
+        if (c instanceof ModalDoubleFacedCard
+                && name.equals(((ModalDoubleFacedCard) c).getRightHalfCard().getName())) {
+            return ((ModalDoubleFacedCard) c).getRightHalfCard().getSpellAbility();
+        }
         return c == null ? null : c.getSpellAbility();
     }
 
@@ -5377,9 +5394,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * "suspend" and "foretell" special actions, a graveyard "flashback" cast, and a "mayplay" cast of a card a
      * play-from-exile permission (Reckless Impulse) reaches are wired
      * ("plot_cast", the later cast of a plotted card, is not); so are the
-     * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half and the
-     * "room_alt" cast of a Room's second door, whose parent card the step
-     * names and the cast arm resolves to the half. An
+     * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half, the
+     * "room_alt" cast of a Room's second door, and the "modal_spell" cast of
+     * a modal double-faced card's back face (CR 712.12), whose parent card the
+     * step names and the cast arm resolves to the half. An
      * absent or empty mode is the ordinary cast. Any other mode is a scenario
      * the driver cannot replay and must reject loudly rather than cast at face
      * value. */
@@ -5426,6 +5444,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // SpellAbility, so the cast arm resolves it like an Adventure
                 // half but from the card object's name (altCastHalfName).
                 || mode.equals("room_alt")
+                // "modal_spell": a modal double-faced card cast with its back
+                // face up (CR 712.12). The step names the parent card; XMage
+                // casts the back face through that half's own SpellAbility,
+                // named for the back face (altCastHalfName), like a split
+                // half. A land back face is a "play", not this mode.
+                || mode.equals("modal_spell")
                 // "warped": Warp (CR 702.185) is its own SpellAbility on the
                 // card (WarpAbility, "<card> with Warp"), picked by that name
                 // like WarpTest does; the step's mana is the warp cost.
@@ -5803,9 +5827,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * Omen halves are inset spell cards (spellOptionCastName); a Room is a
      * split card and "room_alt" is its second door, whose own name is the
      * back half of the whole "A // B" spelling (CR 709.3, 709.5), which is
-     * what XMage's split-half SpellAbility is called. A non-split name has
-     * no back half to name, so it falls through to castSpelling (the step has
-     * to name the ability itself) instead of guessing at a half. */
+     * what XMage's split-half SpellAbility is called. "modal_spell" is a
+     * modal double-faced card's back face (CR 712.12), whose XMage
+     * SpellAbility is the right half card, named for that half
+     * (modalBackFaceName). A name with no such back half falls through to
+     * castSpelling (the step has to name the ability itself) instead of
+     * guessing at a half. */
     static String altCastHalfName(String mode, String xmageName) {
         if ("adventure_alt".equals(mode) || "omen_alt".equals(mode)) {
             return spellOptionCastName(xmageName);
@@ -5813,7 +5840,31 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if ("room_alt".equals(mode)) {
             return xmageName.contains(" // ") ? backHalf(xmageName) : null;
         }
+        if ("modal_spell".equals(mode)) {
+            return modalBackFaceName(xmageName);
+        }
         return null;
+    }
+
+    /** The XMage cast name of a modal double-faced card's back face (the
+     * right half), or null when the name is not one. CR 712.12 lets a player
+     * cast such a card with its back face up, and XMage's castSpell then
+     * takes the right half's own SpellAbility ("Cast <back face>"), exactly
+     * as a split card's second half is cast by its half name. Matched by card
+     * type, not a card or mode list, so every modal DFC -- including one
+     * printed after this driver -- resolves; a step that already names the
+     * half falls through to castSpelling and still replays. The lookup is the
+     * front half of a whole "A // B" spelling because XMage's card object is
+     * registered under the front face. */
+    static String modalBackFaceName(String xmageName) {
+        String lookup = xmageName.contains(" // ") ? frontHalf(xmageName) : xmageName;
+        CardInfo info = CardRepository.instance.findCard(lookup, true);
+        Card c = info == null ? null : info.createCard();
+        if (!(c instanceof ModalDoubleFacedCard)) {
+            return null;
+        }
+        String back = ((ModalDoubleFacedCard) c).getRightHalfCard().getName();
+        return back == null || back.isEmpty() || back.equals(xmageName) ? null : back;
     }
 
     private String castSpelling(String n) {
@@ -6924,6 +6975,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return PASS_HANDOFF;
         }
         throw new IllegalArgumentException("unsupported pass pattern at step " + index);
+    }
+
+    /** Whether the checkpoint of the pass at {@code index} is taken before
+     * XMage has handed the priority on (CR 117.3d). A pass that resolves the
+     * top object hands priority back to the active player and a pass that
+     * enters a step hands it to that step's first player; their checkpoints
+     * already run at that priority. Every other pass only hands priority to
+     * the next seat, which is the holder the post-pass snapshot must name. */
+    static boolean passHandsPriorityOn(JsonArray steps, int index, int activeSeat, int seats) {
+        if (!isOp(steps, index, "pass")) {
+            return false;
+        }
+        if (isPassRun(steps, index)) {
+            JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+            return !posFlag(pos, "resolves") && !passEntersNewStep(steps, index, seats);
+        }
+        // A pair's second pass resolves the top object (or, as the scenario's
+        // opening pair, advances the step); every other legacy pass is a
+        // handoff to the other seat.
+        return passAction(steps, index, activeSeat) != PASS_PAIR_SECOND;
     }
 
     /** Whether step {@code index} is a pass of a recorded game: a pass that
@@ -9502,6 +9573,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return id.equals(playerA.getId()) ? 0 : id.equals(playerB.getId()) ? 1 : -1;
     }
 
+    /** The player who receives priority after {@code seat} passes: the next
+     * in-game seat in the game's own turn order (CR 117.3d), derived from
+     * GameState's player list so a reversed turn order and a leaver are
+     * handled the way the engine handles them. Null when nobody is left. */
+    private UUID nextPriorityPlayer(Game g, int seat) {
+        Player next = g.getState().getPlayerList(seat(seat).getId()).getNext(g, false);
+        return next == null ? null : next.getId();
+    }
+
     /** The permanent's keyword names, sorted and de-duplicated. Spec H5
      * (confirmed against the XMage source): a keyword ability's getRule() is
      * its lower-case name ("flying", "first strike"), which the comparator
@@ -9532,13 +9612,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     private JsonObject snapshot(String checkpoint, Game g) {
+        return snapshot(checkpoint, g, null);
+    }
+
+    /** The checkpoint's snapshot. {@code holderAfterStep}, when a pass
+     * checkpoint is captured before XMage moves the priority, names the seat
+     * that receives it (CR 117.3d); every other snapshot reads the game's
+     * current holder. Both fields that report the holder -- priority and
+     * offered -- read this one value, so they cannot disagree. */
+    private JsonObject snapshot(String checkpoint, Game g, UUID holderAfterStep) {
         lastCheckpointStack = stackNames(g);
+        UUID holder = holderAfterStep != null && !g.hasEnded() ? holderAfterStep : g.getPriorityPlayerId();
         JsonObject s = new JsonObject();
         s.addProperty("checkpoint", checkpoint);
         s.addProperty("turn", g.getTurnNum());
         s.addProperty("step", g.getTurnStepType() == null ? "" : g.getTurnStepType().name());
         s.addProperty("active", seatIndex(g, g.getActivePlayerId()));
-        s.addProperty("priority", seatIndex(g, g.getPriorityPlayerId()));
+        s.addProperty("priority", seatIndex(g, holder));
         s.addProperty("over", g.hasEnded());
         JsonArray players = new JsonArray();
         for (int i = 0; i < seats; i++) {
@@ -9669,7 +9759,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         s.add("stack", stack);
         if (wantsOffered()) {
-            s.add("offered", offered(g));
+            s.add("offered", offered(g, holder));
         }
         return (JsonObject) gorgeSpellings(s);
     }
@@ -9690,18 +9780,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * What the player holding priority may play, in gorge's snapshot
-     * vocabulary (rules.OracleSnapOffered): the source's scenario ref, the
-     * kind ("cast", "play" for a land, otherwise "activate" -- mana abilities
-     * included, CR 605.3a: a mana ability is activatable whenever its
-     * controller has priority), and the ability's rule text. The comparer
-     * strips the display prefixes. No priority player (the game ended, or the
-     * checkpoint is a skipped-step label recorded after the turn) offers
-     * nothing.
+     * What the player holding priority -- or, at a pass checkpoint XMage has
+     * not yet handed on, the seat that receives it -- may play, in gorge's
+     * snapshot vocabulary (rules.OracleSnapOffered): the source's scenario
+     * ref, the kind ("cast", "play" for a land, otherwise "activate" -- mana
+     * abilities included, CR 605.3a: a mana ability is activatable whenever
+     * its controller has priority), and the ability's rule text. The comparer
+     * strips the display prefixes. {@code holder} is the snapshot's one
+     * priority-holder value; null (the game ended, or the checkpoint is a
+     * skipped-step label recorded after the turn) offers nothing.
      */
-    private JsonArray offered(Game g) {
+    private JsonArray offered(Game g, UUID holder) {
         JsonArray out = new JsonArray();
-        UUID holder = g.getPriorityPlayerId();
         if (holder == null || g.hasEnded()) {
             return out;
         }

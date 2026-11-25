@@ -358,7 +358,7 @@ func parseFilterCounters(s string, countersOK, topLibraryOK bool) []filterAlt {
 				case "YouCtrl", "YouOwn":
 					a.ctrl = ctrlYou
 					continue
-				case "OppCtrl", "OppOwn":
+				case "OppCtrl", "OppOwn", "YouDontCtrl":
 					a.ctrl = ctrlOpp
 					continue
 				case "Self":

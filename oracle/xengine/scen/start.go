@@ -116,6 +116,13 @@ type StartFocus struct {
 	// Times is how many times the focus takes its action (0 or absent: once):
 	// "whenever you cast your second spell each turn" is two casts.
 	Times int `json:"times,omitempty"`
+	// Bait, for a play that targets a spell, names the spell the focus seat's
+	// opponent casts at turn 1's first main-phase priority before the focus
+	// play, so the play's target is on the stack (CR 115.1a). The start places
+	// it in the opponent's hand with the lands its cost takes, and the opponent
+	// is the active seat when the bait is no instant (a creature spell is cast
+	// on its controller's main phase).
+	Bait string `json:"bait,omitempty"`
 	// Attack and Block are the scripted combat the focus play waits for: the
 	// active seat attacks with exactly Attack, the defending seat blocks it
 	// with exactly Block (no blocks when "" while Attack is set), and only
