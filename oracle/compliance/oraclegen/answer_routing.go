@@ -418,11 +418,23 @@ type digSource struct {
 	// the looks whose look-and-pick chooseTarget dialog has been measured on
 	// XMage for sizes above two (Symbiote Spider-Man).
 	dynamic bool
+	// bottom is true when every Dig in the set puts a Library rest on the
+	// library BOTTOM (LibraryPosition2 -1, the default). A rest that goes back
+	// on top (Ancestral Knowledge, LibraryPosition2$ 0) is a different XMage
+	// dialog and keeps its choice-queue answer.
+	bottom bool
 }
 
-// digFact is one Dig's second destination and whether its look is variable.
+// digFact is one Dig's second destination, the position a Library rest takes,
+// and whether its look is variable. second and pos2 carry the defaults the
+// engine applies at execution time (engine/effects/dig_params.go): an omitted
+// DestinationZone2 is the library, and an omitted LibraryPosition2 on a library
+// rest is -1 (bottom). The compiled corpus omits both for the cards that print
+// "the rest on the bottom of your library" (Lone Revenant, Dragonlord Ojutai),
+// so reading the raw params alone would never see their Library rest.
 type digFact struct {
 	second  string
+	pos2    string
 	dynamic bool
 }
 
@@ -601,13 +613,14 @@ func digSourceFromSeconds(dests []digFact) (digSource, bool) {
 		return digSource{}, false
 	}
 	seconds := make([]string, len(dests))
-	dynamic := true
+	dynamic, bottom := true, true
 	for i, f := range dests {
 		seconds[i] = f.second
 		dynamic = dynamic && f.dynamic
+		bottom = bottom && f.pos2 == "-1"
 	}
 	dest, known := agreeDigSecond(seconds)
-	return digSource{second: dest, known: known, dynamic: dynamic}, true
+	return digSource{second: dest, known: known, dynamic: dynamic, bottom: bottom}, true
 }
 
 // collectDigSeconds walks an ability's SubAbility$ chain, recording every
@@ -620,7 +633,16 @@ func collectDigSeconds(sa *cards.SA, seen map[*cards.SA]bool, dests *[]digFact) 
 	if sa.API == "Dig" {
 		num := strings.TrimSpace(sa.Params["DigNum"])
 		_, err := strconv.Atoi(num)
-		*dests = append(*dests, digFact{strings.TrimSpace(sa.Params["DestinationZone2"]), num != "" && err != nil})
+		// The same defaults engine/effects/dig_params.go applies.
+		second := strings.TrimSpace(sa.Params["DestinationZone2"])
+		pos2 := strings.TrimSpace(sa.Params["LibraryPosition2"])
+		if second == "" {
+			second = "Library"
+		}
+		if strings.EqualFold(second, "Library") && pos2 == "" {
+			pos2 = "-1"
+		}
+		*dests = append(*dests, digFact{second, pos2, num != "" && err != nil})
 	}
 	collectDigSeconds(sa.Sub, seen, dests)
 }
@@ -700,10 +722,18 @@ func (r *answerRouting) digTargetAnswer(i int) string {
 // digRestTargetQueue reports whether a fixed-size look's second destination is
 // one whose take XMage asks on the TARGET queue: the graveyard, or the library
 // bottom (Lone Revenant, Dragonlord Ojutai: PutCards.HAND, PutCards.BOTTOM_ANY,
-// "Missing TARGET def" when answered on the choice queue). The N-1 bottom-order
-// choices that follow stay on the choice queue (gen.go's dig_bottom arm).
-func digRestTargetQueue(second string) bool {
-	return strings.EqualFold(second, "Graveyard") || strings.EqualFold(second, "Library")
+// "Missing TARGET def" when answered on the choice queue). A rest put back on
+// top of the library is not that dialog (Ancestral Knowledge picks with
+// controller.choose, the choice queue). The N-1 bottom-order choices that
+// follow stay on the choice queue (gen.go's dig_bottom arm).
+func digRestTargetQueue(src digSource) bool {
+	switch {
+	case strings.EqualFold(src.second, "Graveyard"):
+		return true
+	case strings.EqualFold(src.second, "Library"):
+		return src.bottom
+	}
+	return false
 }
 
 // digGraveyardTakeAnswer is the target-queue answer for the take of a
@@ -728,7 +758,7 @@ func (r *answerRouting) digGraveyardTakeAnswer(i int) string {
 		}
 	}
 	src, ok := r.digSources[d.Step]
-	if !ok || !src.known || src.dynamic || !digRestTargetQueue(src.second) {
+	if !ok || !src.known || src.dynamic || !digRestTargetQueue(src) {
 		return ""
 	}
 	return strings.Join(d.Picks, "^")
