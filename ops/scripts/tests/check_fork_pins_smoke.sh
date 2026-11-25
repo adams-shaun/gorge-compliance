@@ -14,7 +14,8 @@
 # non-40-hex pin (2), a pin that moves backward (1 and both short SHAs), a pin
 # that diverges (1), a forward bump (0), a local develop ahead of origin/develop
 # (1), a pin new to the base (0), and the contents-API fallback when the base ref
-# is not in the checkout (0).
+# is not in the checkout (0), and an unauthenticated gh falling back to the REST
+# API (200 passes, 404 fails, 403 is exit 2).
 #
 #   ops/scripts/tests/check_fork_pins_smoke.sh
 set -uo pipefail
@@ -217,6 +218,52 @@ GH_CONTENTS=$(printf 'FORGE_ORACLE_REF ?= %s\nXMAGE_REF ?= %s\n' "$FORGE" "$XMAG
 out=$(cd "$NONGIT" && GITHUB_REPOSITORY=smoke/repo GH_CONTENTS="$GH_CONTENTS" GH_LOG=$LOG PATH="$BIN:$PATH" "$BASH_BIN" scripts/check-fork-pins.sh 2>&1); rc=$?
 check "no base ref: contents API fallback (exit 0)" $([ "$rc" = 0 ] && echo 0 || echo 1) "rc=$rc $out"
 check "  ...asked for develop's Makefile" $(/usr/bin/grep -qx "gh api repos/smoke/repo/contents/Makefile?ref=develop --jq .content" "$LOG" && echo 0 || echo 1) "$(cat "$LOG")"
+
+# 13. gh without auth: the REST fallback (curl stub) decides. A 200 with the same
+#     sha passes; a 404 is still "push it first" (exit 1); a 403 (rate limit or
+#     private fork) is ENV (exit 2), never a FAIL.
+cat > "$BIN/gh-unauth" <<'STUB'
+#!/usr/bin/env bash
+echo "gh $*" >> "$GH_LOG"
+echo "To get started with GitHub CLI, please run:  gh auth login" >&2
+exit 4
+STUB
+chmod +x "$BIN/gh-unauth"
+UBIN=$TMP/unauthbin
+mkdir -p "$UBIN"
+cp "$BIN/gh-unauth" "$UBIN/gh"
+cat > "$UBIN/curl" <<'STUB'
+#!/usr/bin/env bash
+out=; url=
+while [ $# -gt 0 ]; do
+	case $1 in
+	-o) out=$2; shift ;;
+	-w | -H | -m) shift ;;
+	-*) ;;
+	*) url=$1 ;;
+	esac
+	shift
+done
+echo "curl $url" >> "$GH_LOG"
+code=${CURL_CODE:-200}
+sha=${url##*/}
+case $url in
+*/compare/*) printf '{"status":"%s"}' "${GH_COMPARE_STATUS:-ahead}" >"$out" ;;
+*) printf '{"sha":"%s"}' "$sha" >"$out" ;;
+esac
+printf '%s' "$code"
+STUB
+chmod +x "$UBIN/curl"
+set_base_makefile
+write_makefile
+: > "$LOG"
+out=$(cd "$TMP/repo" && GH_LOG=$LOG PATH="$UBIN:$PATH" "$BASH_BIN" scripts/check-fork-pins.sh 2>&1); rc=$?
+check "unauthenticated gh: REST fallback confirms both pins (exit 0)" $([ "$rc" = 0 ] && has "$out" "fork pin FORGE_ORACLE_REF $FORGE is in the adams-shaun/forge fork network" && echo 0 || echo 1) "rc=$rc $out"
+check "  ...asked the unauthenticated endpoint" $(/usr/bin/grep -qx "curl https://api.github.com/repos/adams-shaun/forge/commits/$FORGE" "$LOG" && echo 0 || echo 1) "$(cat "$LOG")"
+out=$(cd "$TMP/repo" && GH_LOG=$LOG CURL_CODE=404 PATH="$UBIN:$PATH" "$BASH_BIN" scripts/check-fork-pins.sh 2>&1); rc=$?
+check "unauthenticated gh, REST 404: a missing pin still fails (exit 1)" $([ "$rc" = 1 ] && has "$out" "is not on adams-shaun/forge: push it first" && echo 0 || echo 1) "rc=$rc $out"
+out=$(cd "$TMP/repo" && GH_LOG=$LOG CURL_CODE=403 PATH="$UBIN:$PATH" "$BASH_BIN" scripts/check-fork-pins.sh 2>&1); rc=$?
+check "unauthenticated gh, REST 403: ENV, not FAIL (exit 2)" $([ "$rc" = 2 ] && has "$out" "fork pin check could not run" && ! has "$out" "push it first" && echo 0 || echo 1) "rc=$rc $out"
 
 [ "$fails" = 0 ] && echo "check_fork_pins_smoke: all passed" || echo "check_fork_pins_smoke: $fails FAILED"
 exit $((fails != 0))
