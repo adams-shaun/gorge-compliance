@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b8c44a0-82ef-4beb-a762-c2a2a21380f3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omen:cast:s1,f:xs:XP:omen:cast:s1	-	-	-	ea3140b6974b	-	4ebc17446f0d	-	-	2026-11-24	xproof
 9b8d9236-0452-4509-aca4-a53a399fff85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b8d9236-0452-4509-aca4-a53a399fff85	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9b8d9236-0452-4509-aca4-a53a399fff85	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+9b8d9236-0452-4509-aca4-a53a399fff85	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 9b90c7d1-38c6-4210-bc76-68c5fcb91202	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b90c7d1-38c6-4210-bc76-68c5fcb91202	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b93ff69-f195-4d72-8e1d-574c3e53bca8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,8 +164,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9bdd68e7-7787-4579-a128-09e78fdbf0e2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:berg-strider:cast:s1,f:xs:XP:berg-strider:cast:s1	-	-	-	d864b561c9cb	-	b6c92624a0bc	-	-	2026-11-24	xproof
 9bdd68e7-7787-4579-a128-09e78fdbf0e2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:berg-strider:cast:s1,f:xs:XP:berg-strider:cast:s1	-	-	-	d864b561c9cb	-	b6c92624a0bc	-	-	2026-11-24	xproof
 9bdd6fea-d436-412b-a7b7-bbdba73dc986	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9bdd6fea-d436-412b-a7b7-bbdba73dc986	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-9bdd6fea-d436-412b-a7b7-bbdba73dc986	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9bdd6fea-d436-412b-a7b7-bbdba73dc986	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:five-hundred-year-diary:f0a0:s1,f:xs:XP:five-hundred-year-diary:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+9bdd6fea-d436-412b-a7b7-bbdba73dc986	f0/a1	Draw	agreed	-	FX	start	1	0	x:xs:XP:five-hundred-year-diary:f0a0:s1,f:xs:XP:five-hundred-year-diary:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:kitsune-dragon-s-daughter:f0t0:s2,f:xs:XP:kitsune-dragon-s-daughter:f0t0:s2	-	-	-	5437c1394672	-	2a65a1014491	-	-	2026-11-24	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kitsune-dragon-s-daughter:combat0.attack:s1,f:xs:XP:kitsune-dragon-s-daughter:combat0.attack:s1	-	-	-	5b42d43d5d80	-	2a65a1014491	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kitsune-dragon-s-daughter:combat0.block:s1,f:xs:XP:kitsune-dragon-s-daughter:combat0.block:s1	-	-	-	23c4009444b0	-	2a65a1014491	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -182,7 +182,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9be8e04f-f87f-4477-93f3-c546e9b346f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9be8e04f-f87f-4477-93f3-c546e9b346f0	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:mardu-strike-leader:f0t0:s1,f:xs:XP:mardu-strike-leader:f0t0:s1	-	-	-	d864b561c9cb	-	0353a7dc9646	-	-	2026-11-24	xproof
 9be9625e-b98b-416b-aac4-9f7b2dfbd39d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9be9625e-b98b-416b-aac4-9f7b2dfbd39d	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+9be9625e-b98b-416b-aac4-9f7b2dfbd39d	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 9be9d534-470d-463a-ba2f-9817a6723692	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:avaricious-dragon:f0t0:s1,f:xs:XP:avaricious-dragon:f0t0:s1	-	-	-	fb9d3088f0bf	-	77b4431bd967	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 9be9d534-470d-463a-ba2f-9817a6723692	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:avaricious-dragon:f0t0:s1,f:xs:XP:avaricious-dragon:f0t0:s1	-	-	-	fb9d3088f0bf	-	77b4431bd967	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 9be9d534-470d-463a-ba2f-9817a6723692	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:avaricious-dragon:f0t0:s1,f:xs:XP:avaricious-dragon:f0t0:s1	-	-	-	fb9d3088f0bf	-	77b4431bd967	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof

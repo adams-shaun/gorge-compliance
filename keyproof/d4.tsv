@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-d4030d30-4c24-458c-87a9-c2f80bb68d27	cast	cast-resolve	agreed	-	X	scen	1	0	Common Goal/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d4030d30-4c24-458c-87a9-c2f80bb68d27	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:common-goal:cast:s1,f:xs:XP:common-goal:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 d403d1f3-5a92-4f4c-aff2-cff6a0b3b1ec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pulverize:cast:s1,f:xs:XP:pulverize:cast:s1	-	-	-	21b2cceac526	-	c1a1daaf0ab6	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 d40adf5d-5edf-48a0-98f3-fcdbf1b5f25c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nekrataal:f0t0:s1,f:xs:XP:nekrataal:f0t0:s1	-	-	-	25696bf19d5b	-	8ff9d8752089	-	-	2026-11-24	xproof
 d40adf5d-5edf-48a0-98f3-fcdbf1b5f25c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nekrataal:f0t0:s1,f:xs:XP:nekrataal:f0t0:s1	-	-	-	25696bf19d5b	-	8ff9d8752089	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ d4d65797-2b92-4265-9169-133120c86c7f	f0/t0	SpellCast	agreed	-	F	start	2	0	f:xs:X
 d4d65797-2b92-4265-9169-133120c86c7f	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:cityscape-leveler:f0a0:s1,f:xs:XP:cityscape-leveler:f0a0:s1	-	-	-	3aa6ded33acb	-	0546a174bbea	-	-	2026-11-25	xproof
 d4da20c7-ae4a-44c6-8f03-9e719ccee8c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4da20c7-ae4a-44c6-8f03-9e719ccee8c9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d4e0749a-e179-4c19-8536-bf8f1a198549	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dedicated Commons/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d4e0749a-e179-4c19-8536-bf8f1a198549	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:dedicated-commons:f0a0:s1,f:xs:XP:dedicated-commons:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 d4e0749a-e179-4c19-8536-bf8f1a198549	land	land	agreed	-	FX	start	2	0	x:xs:XP:dedicated-commons:land:s1,f:xs:XP:dedicated-commons:land:s1	-	-	-	fb9d3088f0bf	-	c06b649edd96	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 d4e124af-d335-4c42-b60a-fe578f69f7ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4e2b541-31b6-4bcb-a28a-d897deb91484	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ezio-brash-novice:cast:s1,f:xs:XP:ezio-brash-novice:cast:s1	-	-	-	9087eefec3ee	-	783b8d73a69b	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof

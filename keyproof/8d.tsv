@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8dd2e73a-d1b4-4d26-857f-9eb8e384c8ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iroh-s-demonstration:cast:s1,f:xs:XP:iroh-s-demonstration:cast:s1	-	-	-	23c4009444b0	-	d080a504950f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8dd473c7-afd9-40f1-bb8e-0a00f4687318	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-flayer:f0t0:s1,f:xs:XP:mind-flayer:f0t0:s1	-	-	-	d864b561c9cb	-	8e3eb73c93d9	-	-	2026-11-24	xproof
 8dd473c7-afd9-40f1-bb8e-0a00f4687318	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mind-flayer:f0t0:s1,f:xs:XP:mind-flayer:f0t0:s1	-	-	-	d864b561c9cb	-	8e3eb73c93d9	-	-	2026-11-24	xproof
-8dd5b7d5-3d92-40e2-9572-bf70ae591bed	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8dd5b7d5-3d92-40e2-9572-bf70ae591bed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savage-order:cast:s1,f:xs:XP:savage-order:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 8dd5f5af-d2d8-4356-8617-8381081b930c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8dd6d060-d023-48a6-85cb-7a5521b6257b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:revitalizing-repast-old-growth-grove:cast:s1,f:xs:XP:revitalizing-repast-old-growth-grove:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 8dd6d060-d023-48a6-85cb-7a5521b6257b	f1/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:revitalizing-repast-old-growth-grove:f1a0:s1,f:xs:XP:revitalizing-repast-old-growth-grove:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
@@ -174,6 +174,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8df7a58c-053f-4ead-a778-2747718e5f10	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Party Dude/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8df7a58c-053f-4ead-a778-2747718e5f10	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Party Dude/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8dfa789d-ae1c-4f18-a55c-f49a363a5e33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8dfa789d-ae1c-4f18-a55c-f49a363a5e33	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8dfa789d-ae1c-4f18-a55c-f49a363a5e33	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8dfa789d-ae1c-4f18-a55c-f49a363a5e33	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+8dfa789d-ae1c-4f18-a55c-f49a363a5e33	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:chandra-legacy-of-fire:f0t0:s1,f:xs:XP:chandra-legacy-of-fire:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+8dfa789d-ae1c-4f18-a55c-f49a363a5e33	f0/a1	RemoveCounter	agreed	-	FX	start	1	0	x:xs:XP:chandra-legacy-of-fire:f0t0:s2,f:xs:XP:chandra-legacy-of-fire:f0t0:s2	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+8dfa789d-ae1c-4f18-a55c-f49a363a5e33	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:chandra-legacy-of-fire:f0t0:s1,f:xs:XP:chandra-legacy-of-fire:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof

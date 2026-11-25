@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 791cbb7c-7935-4902-b050-9ea9d030e9fa	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:osteomancer-adept:f0a0:s1,f:xs:XP:osteomancer-adept:f0a0:s1	-	-	-	3aa6ded33acb	-	9bb5a13a362d	-	-	2026-11-25	xproof
 791fbaf1-43eb-4555-9275-c4b344f65942	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 792b9752-2d46-48ca-abdd-408a787612da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-792b9752-2d46-48ca-abdd-408a787612da	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+792b9752-2d46-48ca-abdd-408a787612da	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:duke-ulder-ravengard:f0t0:s1,f:xs:XP:duke-ulder-ravengard:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 792d4afd-b3de-4be2-b68a-03a5be7b9627	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:selesnya-cluestone:cast:s1,f:xs:XP:selesnya-cluestone:cast:s1	-	-	-	d864b561c9cb	-	45236b413e42	-	-	2026-11-24	xproof
 792d4afd-b3de-4be2-b68a-03a5be7b9627	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:selesnya-cluestone:cast:s1,f:xs:XP:selesnya-cluestone:cast:s1	-	-	-	d864b561c9cb	-	45236b413e42	-	-	2026-11-24	xproof
 792d4afd-b3de-4be2-b68a-03a5be7b9627	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:selesnya-cluestone:f0a1:s1,f:xs:XP:selesnya-cluestone:f0a1:s1	-	-	-	d864b561c9cb	-	45236b413e42	-	-	2026-11-24	xproof
@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 796dc53d-5a0d-4d19-9fa4-f474a9d96041	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:basilica-bell-haunt:cast:s1,f:xs:XP:basilica-bell-haunt:cast:s1	-	-	-	d864b561c9cb	-	4fe4c6161c05	-	-	2026-11-24	xproof
 796dc53d-5a0d-4d19-9fa4-f474a9d96041	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:basilica-bell-haunt:cast:s1,f:xs:XP:basilica-bell-haunt:cast:s1	-	-	-	d864b561c9cb	-	4fe4c6161c05	-	-	2026-11-24	xproof
 796f1e1f-7fec-429d-82ae-125f541d6cc7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ulasht-the-hate-seed:cast:s1,f:xs:XP:ulasht-the-hate-seed:cast:s1	-	-	-	77494c1ce129	-	bbd7d342d80d	-	-	2026-11-24	xproof
-796f1e1f-7fec-429d-82ae-125f541d6cc7	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+796f1e1f-7fec-429d-82ae-125f541d6cc7	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 797155cd-faf4-4321-8629-c8c352392748	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7971a2a6-f89f-46a5-9008-96cfa49de41a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7971a2a6-f89f-46a5-9008-96cfa49de41a	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 797d8776-9dcf-45b1-8c5e-1d025f916773	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 79824266-bffa-476c-bdd3-976e9d789a42	cast	cast-resolve	agreed	-	FX	scen	2	0	Goblin Negotiation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7986908d-8af2-465a-8597-26e92ca2f1c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7986908d-8af2-465a-8597-26e92ca2f1c9	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+7986908d-8af2-465a-8597-26e92ca2f1c9	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 798aaf78-16d9-474b-a963-f5e9c39aae6e	cast	cast-resolve	agreed	-	FX	scen	2	0	Cosmium Confluence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7991aff6-0b85-41a3-bc31-09811d6fa353	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7996222e-68c8-4a5c-9531-c60cdd88ae05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:startle:cast:s1,f:xs:XP:startle:cast:s1	-	-	-	d864b561c9cb	-	423bbf6f5724	-	-	2026-11-24	xproof

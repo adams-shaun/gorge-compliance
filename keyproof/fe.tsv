@@ -99,12 +99,12 @@ fe8d2874-c626-4d4e-a7f5-11c175a2b3bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fe8d2874-c626-4d4e-a7f5-11c175a2b3bb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe8f5cc0-5849-437f-8d1f-cb191f2fc638	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe8fc442-ed17-40b2-8624-69f2eed3f9be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fe8fc442-ed17-40b2-8624-69f2eed3f9be	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-fe8fc442-ed17-40b2-8624-69f2eed3f9be	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+fe8fc442-ed17-40b2-8624-69f2eed3f9be	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:nesting-dovehawk:f0t0:s1,f:xs:XP:nesting-dovehawk:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+fe8fc442-ed17-40b2-8624-69f2eed3f9be	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:nesting-dovehawk:f0t0:s1,f:xs:XP:nesting-dovehawk:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 fe9106e3-c637-4995-9dc1-cae0be31f23b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe971240-268a-47d4-a14e-3d6352656091	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gift-of-strength:cast:s1,f:xs:XP:gift-of-strength:cast:s1	-	-	-	9087eefec3ee	-	6677b70d8bee	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 fe983088-6e0d-4544-90bd-f5ebb95c3418	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loathsome-chimera:cast:s1,f:xs:XP:loathsome-chimera:cast:s1	-	-	-	ae86f6029288	-	7bf185a5fd04	-	-	2026-11-24	xproof
-fe99d90e-4809-4310-a3f7-ceb540511d55	cast	cast-resolve	agreed	-	X	scen	1	0	Blessed Ghoul/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+fe99d90e-4809-4310-a3f7-ceb540511d55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blessed-ghoul:cast:s1,f:xs:XP:blessed-ghoul:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 fe99d90e-4809-4310-a3f7-ceb540511d55	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:blessed-ghoul:combat0.attack:s1,f:xs:XP:blessed-ghoul:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	a3e5ce02b400	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 fe99d90e-4809-4310-a3f7-ceb540511d55	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:blessed-ghoul:combat0.block:s1,f:xs:XP:blessed-ghoul:combat0.block:s1	-	-	-	fb9d3088f0bf	-	a3e5ce02b400	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 fe99d90e-4809-4310-a3f7-ceb540511d55	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Blessed Ghoul/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ fee0aa18-5103-4814-94e3-87ad3eaf5a6f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 fee18f57-4ae5-4df8-af3b-f82ed2157ac3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spitebellows:cast:s1,f:xs:XP:spitebellows:cast:s1	-	-	-	d864b561c9cb	-	4581b255c1df	-	-	2026-11-24	xproof
 fee18f57-4ae5-4df8-af3b-f82ed2157ac3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spitebellows:f0t0:s1,f:xs:XP:spitebellows:f0t0:s1	-	-	-	23c4009444b0	-	4581b255c1df	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 fee392d9-a961-4f41-81ba-ab1b87c931fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fee392d9-a961-4f41-81ba-ab1b87c931fa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+fee392d9-a961-4f41-81ba-ab1b87c931fa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 fee392d9-a961-4f41-81ba-ab1b87c931fa	f0/t1	Blocks/Bushido	agreed	-	FX	start	2	0	x:xs:XP:indebted-samurai:f0t1:s1,f:xs:XP:indebted-samurai:f0t1:s1	-	-	-	6f84be0f34c0	-	2b0fc73c9cdb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 fee392d9-a961-4f41-81ba-ab1b87c931fa	f0/t2	AttackerBlocked/Bushido	agreed	-	FX	start	2	0	x:xs:XP:indebted-samurai:f0t2:s1,f:xs:XP:indebted-samurai:f0t2:s1	-	-	-	6f84be0f34c0	-	2b0fc73c9cdb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 fee53820-a17c-4f34-9971-581bf8e12fd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98334bfa-c516-4c20-bdc5-9e32e7127adc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:transguild-promenade:f0t0:s1,f:xs:XP:transguild-promenade:f0t0:s1	-	-	-	d864b561c9cb	-	24d30a52019a	-	-	2026-11-24	xproof
 98334bfa-c516-4c20-bdc5-9e32e7127adc	land	land	agreed	-	FX	start	2	0	x:xs:XP:transguild-promenade:f0t0:s1,f:xs:XP:transguild-promenade:f0t0:s1	-	-	-	d864b561c9cb	-	24d30a52019a	-	-	2026-11-24	xproof
 9833e3bd-6e7f-41b7-bf7e-ffb74ff17844	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9833e3bd-6e7f-41b7-bf7e-ffb74ff17844	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+9833e3bd-6e7f-41b7-bf7e-ffb74ff17844	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:chronomancer:f0a0:s1,f:xs:XP:chronomancer:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 9833e3bd-6e7f-41b7-bf7e-ffb74ff17844	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9837287b-d821-4655-8f01-93fc6c7f0ecc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9837287b-d821-4655-8f01-93fc6c7f0ecc	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:nature-s-will:f0t0:s1,f:xs:XP:nature-s-will:f0t0:s1	-	-	-	6f84be0f34c0	-	ea492e6688dc	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -95,11 +95,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 986ae327-f433-4c58-93dc-afc544b9bfcb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 986ba716-3921-4f64-9acf-703200d666f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 986f510c-e2ec-423e-a443-51a169939558	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:tomb-fortress:f0a0:s2,f:xs:XP:tomb-fortress:f0a0:s2	-	-	-	8c0bd19283bb	-	d8199d49afb2	-	-	2026-11-24	xproof
-986f510c-e2ec-423e-a443-51a169939558	f0/a1	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+986f510c-e2ec-423e-a443-51a169939558	f0/a1	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 986f510c-e2ec-423e-a443-51a169939558	land	land	agreed	-	FX	start	2	0	x:xs:XP:tomb-fortress:land:s1,f:xs:XP:tomb-fortress:land:s1	-	-	-	8c0bd19283bb	-	d8199d49afb2	-	-	2026-11-24	xproof
 98799336-a61e-4e35-ac30-51edb81301f6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ovinize:cast:s1,f:xs:XP:ovinize:cast:s1	-	-	-	3aa6ded33acb	-	5004b932237d	-	-	2026-11-25	xproof
 987a0b61-2ce4-47bd-8f5e-1e7bf01d0869	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-987a0b61-2ce4-47bd-8f5e-1e7bf01d0869	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+987a0b61-2ce4-47bd-8f5e-1e7bf01d0869	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:sergeant-john-benton:f0t0:s1,f:xs:XP:sergeant-john-benton:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 987aab63-a889-400f-a3bd-feaef978b407	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-warship:cast:s1,f:xs:XP:fire-nation-warship:cast:s1	-	-	-	23c4009444b0	-	d5d7ff827eea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 987aab63-a889-400f-a3bd-feaef978b407	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-warship:f0a0:s1,f:xs:XP:fire-nation-warship:f0a0:s1	-	-	-	23c4009444b0	-	d5d7ff827eea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 987aab63-a889-400f-a3bd-feaef978b407	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-warship:f0t0:s1,f:xs:XP:fire-nation-warship:f0t0:s1	-	-	-	6f84be0f34c0	-	d5d7ff827eea	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

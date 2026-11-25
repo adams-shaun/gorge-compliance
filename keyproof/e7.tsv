@@ -5,8 +5,8 @@ e705b055-14b3-4de0-b4a7-39626839dea8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 e7079969-8d88-4f18-a872-2661bed6ff74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:noble-templar:cast:s1,f:xs:XP:noble-templar:cast:s1	-	-	-	8c0bd19283bb	-	aedd02a648b0	-	-	2026-11-24	xproof
 e7079969-8d88-4f18-a872-2661bed6ff74	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e70bb7f8-8098-49c5-929c-68f63cd821c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-salt-and-sand:cast:s1,f:xs:XP:kiora-of-salt-and-sand:cast:s1	-	-	-	fb9d3088f0bf	-	2c30e35c2b7d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-e70bb7f8-8098-49c5-929c-68f63cd821c5	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-salt-and-sand:f0t0:s1,f:xs:XP:kiora-of-salt-and-sand:f0t0:s1	-	-	-	23c4009444b0	-	2c30e35c2b7d	-	-	2026-11-25	xproof
-e70bb7f8-8098-49c5-929c-68f63cd821c5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Kiora of Salt and Sand/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e70bb7f8-8098-49c5-929c-68f63cd821c5	f0/t0	AttackersDeclared	owed	harness	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+e70bb7f8-8098-49c5-929c-68f63cd821c5	static#0.0	static.continuous	diverged	-	-	start	0	1	-	1621212ebc77	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 e70f5520-1b9c-4351-8484-30f0dc692e01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e70f5520-1b9c-4351-8484-30f0dc692e01	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:the-haunt-of-hightower:f0t0:s1,f:xs:XP:the-haunt-of-hightower:f0t0:s1	-	-	-	6f84be0f34c0	-	21c46f1675dc	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e70f5520-1b9c-4351-8484-30f0dc692e01	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
@@ -195,13 +195,13 @@ e7d4e952-d7b9-489d-a9a7-c61d08bf17cc	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:
 e7d79fbe-b02c-41c7-8b0a-6477feb1da7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zoanthrope:f0t1:s1,f:xs:XP:zoanthrope:f0t1:s1	-	-	-	23c4009444b0	-	1765d0068a2c	-	-	2026-11-25	xproof
 e7d79fbe-b02c-41c7-8b0a-6477feb1da7a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:zoanthrope:f0t1:s1,f:xs:XP:zoanthrope:f0t1:s1	-	-	-	23c4009444b0	-	1765d0068a2c	-	-	2026-11-25	xproof
 e7d79fbe-b02c-41c7-8b0a-6477feb1da7a	f0/t1	ChangesZone/Ravenous	agreed	-	FX	start	2	0	x:xs:XP:zoanthrope:f0t1:s1,f:xs:XP:zoanthrope:f0t1:s1	-	-	-	23c4009444b0	-	1765d0068a2c	-	-	2026-11-25	xproof
-e7d79fbe-b02c-41c7-8b0a-6477feb1da7a	f0/t2	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+e7d79fbe-b02c-41c7-8b0a-6477feb1da7a	f0/t2	NULL	owed	refused:no-generator:trigger:BecomesTarget:dead	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 e7d8b8ea-07d7-4b6c-aa49-6a2ad185a304	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:termagant-swarm:f0t1:s1,f:xs:XP:termagant-swarm:f0t1:s1	-	-	-	23c4009444b0	-	cd6c50c783de	-	-	2026-11-25	xproof
 e7d8b8ea-07d7-4b6c-aa49-6a2ad185a304	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:termagant-swarm:f0t1:s1,f:xs:XP:termagant-swarm:f0t1:s1	-	-	-	23c4009444b0	-	cd6c50c783de	-	-	2026-11-25	xproof
 e7d8b8ea-07d7-4b6c-aa49-6a2ad185a304	f0/t1	ChangesZone/Ravenous	agreed	-	FX	start	2	0	x:xs:XP:termagant-swarm:f0t1:s1,f:xs:XP:termagant-swarm:f0t1:s1	-	-	-	23c4009444b0	-	cd6c50c783de	-	-	2026-11-25	xproof
 e7dc3d8b-2c79-463d-b862-9f01ccea05fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e7dfe47f-41fc-4071-9ad3-96cd8d9be52e	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-e7dfe47f-41fc-4071-9ad3-96cd8d9be52e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+e7dfe47f-41fc-4071-9ad3-96cd8d9be52e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:gylwain-casting-director:cast:s1,f:xs:XP:gylwain-casting-director:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+e7dfe47f-41fc-4071-9ad3-96cd8d9be52e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gylwain-casting-director:f0t0:s1,f:xs:XP:gylwain-casting-director:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 e7e1b166-9267-426d-897d-24903327b48d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defense-of-the-heart:f0t0:s1,f:xs:XP:defense-of-the-heart:f0t0:s1	-	-	-	3aa6ded33acb	-	942b314caada	-	-	2026-11-25	xproof
 e7e1b166-9267-426d-897d-24903327b48d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:defense-of-the-heart:f0t0:s1,f:xs:XP:defense-of-the-heart:f0t0:s1	-	-	-	3aa6ded33acb	-	942b314caada	-	-	2026-11-25	xproof
 e7e59437-cdd0-476a-b1ec-231be4139d31	cast	cast	agreed	-	F	start	2	0	f:xs:XP:obsessive-skinner:f0t1:s1	-	-	-	3aa6ded33acb	-	7cff5dd67164	-	-	2026-11-25	xproof

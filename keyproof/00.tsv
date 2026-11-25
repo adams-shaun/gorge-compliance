@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 002100cd-1ab1-44da-93a0-1269d47a712a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:waterknot:cast:s1,f:xs:XP:waterknot:cast:s1	-	-	-	d864b561c9cb	-	efb07e2379fb	-	-	2026-11-24	xproof
 00225c40-27ff-410f-a591-5c788c6a2bd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00225c40-27ff-410f-a591-5c788c6a2bd6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00225c40-27ff-410f-a591-5c788c6a2bd6	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+00225c40-27ff-410f-a591-5c788c6a2bd6	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 0023888e-7bec-43e0-8dee-d1a4eb94b372	cast	cast	agreed	-	F	start	4	0	f:xs:XP:palinchron:cast:s1	-	-	-	5f2128bf97e4	-	fb42d107447b	-	-	2026-11-24	xproof
 0023888e-7bec-43e0-8dee-d1a4eb94b372	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:palinchron:f0a0:s1,f:xs:XP:palinchron:f0a0:s1	-	-	-	5f2128bf97e4	-	fb42d107447b	-	-	2026-11-24	xproof
 0023888e-7bec-43e0-8dee-d1a4eb94b372	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:palinchron:cast:s1	-	-	-	5f2128bf97e4	-	fb42d107447b	-	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0068f8c1-d1a2-4f7b-b39f-963acb2c023b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vault-guardsman:f0t0:s1,f:xs:XP:vault-guardsman:f0t0:s1	-	-	-	8c0bd19283bb	-	1513851fb633	-	-	2026-11-24	xproof
 006bbd8b-2007-419d-8b84-9ff73f2f95b7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 006f4a62-8590-4ca0-9f51-3aea26cd1a54	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:one-with-the-kami:cast:s1,f:xs:XP:one-with-the-kami:cast:s1	-	-	-	8c0bd19283bb	-	ad817b30e852	-	-	2026-11-24	xproof
-006f4a62-8590-4ca0-9f51-3aea26cd1a54	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+006f4a62-8590-4ca0-9f51-3aea26cd1a54	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 0070db93-142b-4d04-afd3-836792dc134b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0070db93-142b-4d04-afd3-836792dc134b	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0070db93-142b-4d04-afd3-836792dc134b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00abb43b-550f-42d2-9049-61ac56ff5d8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00ad27a1-9162-408d-ac75-970e45d7e06c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:patchwork-gnomes:cast:s1,f:xs:XP:patchwork-gnomes:cast:s1	-	-	-	25696bf19d5b	-	583a2075e2ea	-	-	2026-11-24	xproof
 00ad27a1-9162-408d-ac75-970e45d7e06c	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:patchwork-gnomes:f0a0:s1,f:xs:XP:patchwork-gnomes:f0a0:s1	-	-	-	23c4009444b0	-	583a2075e2ea	-	-	2026-11-25	xproof
-00ad5200-5179-4d1b-8bb3-a09e1b31be58	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Theorix Annex/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+00ad5200-5179-4d1b-8bb3-a09e1b31be58	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:theorix-annex:f0a0:s1,f:xs:XP:theorix-annex:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 00ad5200-5179-4d1b-8bb3-a09e1b31be58	land	land	agreed	-	FX	start	2	0	x:xs:XP:theorix-annex:land:s1,f:xs:XP:theorix-annex:land:s1	-	-	-	fb9d3088f0bf	-	10935e95c9b7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 00af96af-5eae-4044-a2f7-a08cd0699d1e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ogre-arsonist:f0t0:s1,f:xs:XP:ogre-arsonist:f0t0:s1	-	-	-	5f2128bf97e4	-	1f373adc750b	-	-	2026-11-24	xproof
 00af96af-5eae-4044-a2f7-a08cd0699d1e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ogre-arsonist:f0t0:s1,f:xs:XP:ogre-arsonist:f0t0:s1	-	-	-	5f2128bf97e4	-	1f373adc750b	-	-	2026-11-24	xproof

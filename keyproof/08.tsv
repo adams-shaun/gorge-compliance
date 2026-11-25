@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 080c0557-59ee-4c46-afd9-5baabf0dc3d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 080c0557-59ee-4c46-afd9-5baabf0dc3d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 080df9eb-c26b-494a-96b4-d7e47e501866	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-080df9eb-c26b-494a-96b4-d7e47e501866	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+080df9eb-c26b-494a-96b4-d7e47e501866	f0/a0	ChangeZone	owed	harness	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 080f504f-20c8-4975-837c-d704e879d7f5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:great-goblin-foul-hearted:cast:s1,f:xs:XP:great-goblin-foul-hearted:cast:s1	-	-	-	8c0bd19283bb	-	e626e6ab55d5	-	-	2026-11-24	xproof
 080f504f-20c8-4975-837c-d704e879d7f5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:great-goblin-foul-hearted:cast:s1,f:xs:XP:great-goblin-foul-hearted:cast:s1	-	-	-	8c0bd19283bb	-	e626e6ab55d5	-	-	2026-11-24	xproof
 080f504f-20c8-4975-837c-d704e879d7f5	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:great-goblin-foul-hearted:f0t1:s1,f:xs:XP:great-goblin-foul-hearted:f0t1:s1	-	-	-	8c0bd19283bb	-	e626e6ab55d5	-	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 08e6c786-d553-4c23-9137-cfad84146739	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08e8a63c-9fcc-48cf-a9af-15cbaeec943f	cast	cast-resolve	agreed	-	FX	scen	2	0	Avatar of Burgeoning Echoes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 08e8a63c-9fcc-48cf-a9af-15cbaeec943f	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Avatar of Burgeoning Echoes/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-08e8a63c-9fcc-48cf-a9af-15cbaeec943f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Avatar of Burgeoning Echoes/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+08e8a63c-9fcc-48cf-a9af-15cbaeec943f	static#0.0	static.continuous	diverged	-	-	start	0	1	-	1621212ebc77	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 08e90e85-4103-4acb-a8a7-e1329b460aa7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brightstone-ritual:cast:s1,f:xs:XP:brightstone-ritual:cast:s1	-	-	-	fc71ca68c5ac	-	49688577ebd0	-	-	2026-11-24	xproof
 08e95b6c-9f4c-42d9-ad64-2d905d781d49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08e95b6c-9f4c-42d9-ad64-2d905d781d49	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:sturdy-hatchling:f0t1:s1,f:xs:XP:sturdy-hatchling:f0t1:s1	-	-	-	23c4009444b0	-	4e006adac7f1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

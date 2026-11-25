@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Millennium Calendar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Millennium Calendar/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f266fa4-6667-49db-9d24-dfbabf1449ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f266fa4-6667-49db-9d24-dfbabf1449ca	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+1f266fa4-6667-49db-9d24-dfbabf1449ca	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:uchuulon:f0t0:s1,f:xs:XP:uchuulon:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 1f27aa69-d17e-4f1f-9aba-cee205036f93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f295f2f-969a-4b82-98d1-7fe307ec83a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deepcavern-imp:cast:s1,f:xs:XP:deepcavern-imp:cast:s1	-	-	-	23c4009444b0	-	acdf7e0b9162	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1f295f2f-969a-4b82-98d1-7fe307ec83a7	f0/t0	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:deepcavern-imp:f0t0:s1,f:xs:XP:deepcavern-imp:f0t0:s1	-	-	-	23c4009444b0	-	acdf7e0b9162	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:reverberating-summons:f0a0:s1,f:xs:XP:reverberating-summons:f0a0:s1	-	-	-	23c4009444b0	-	8642fa3ffef6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:reverberating-summons:f0t0:s1,f:xs:XP:reverberating-summons:f0t0:s1	-	-	-	23c4009444b0	-	8642fa3ffef6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1fdcdb1c-a140-40ee-b711-5ea539eb1084	cast	cast	agreed	-	F	start	2	0	f:xs:XP:melkotian-adjudicator:cast:s1	-	-	-	23c4009444b0	-	4617fe31c654	-	-	2026-11-25	xproof
-1fdcdb1c-a140-40ee-b711-5ea539eb1084	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+1fdcdb1c-a140-40ee-b711-5ea539eb1084	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 1fde570c-aa96-45ca-a6be-f59c8e4f4b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fde570c-aa96-45ca-a6be-f59c8e4f4b6a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hunted-witness:f0t0:s1,f:xs:XP:hunted-witness:f0t0:s1	-	-	-	d864b561c9cb	-	0129858b388f	-	-	2026-11-24	xproof
 1fe549c3-79be-40ef-b57c-de59f24df5ab	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:the-sentry-golden-guardian:f0t0:s2,f:xs:XP:the-sentry-golden-guardian:f0t0:s2	-	-	-	5437c1394672	-	7dd7cdd4804a	-	-	2026-11-24	xproof

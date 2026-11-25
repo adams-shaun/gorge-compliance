@@ -148,8 +148,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 84c0db59-255d-41af-a3d4-3f3548f1195f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thieves-guild-enforcer:f0t0:s1,f:xs:XP:thieves-guild-enforcer:f0t0:s1	-	-	-	ae86f6029288	-	156b71c5521a	-	-	2026-11-24	xproof
 84c0db59-255d-41af-a3d4-3f3548f1195f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thieves-guild-enforcer:f0t0:s1,f:xs:XP:thieves-guild-enforcer:f0t0:s1	-	-	-	ae86f6029288	-	156b71c5521a	-	-	2026-11-24	xproof
 84c24e62-26bd-4ca4-b6b9-d31e2065f13b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-84c24e62-26bd-4ca4-b6b9-d31e2065f13b	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-84c24e62-26bd-4ca4-b6b9-d31e2065f13b	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:carmen-cruel-skymarcher:f0t1:s1,f:xs:XP:carmen-cruel-skymarcher:f0t1:s1	-	-	-	8c0bd19283bb	-	ffd658f6eba1	-	-	2026-11-24	xproof
+84c24e62-26bd-4ca4-b6b9-d31e2065f13b	f0/t0	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:carmen-cruel-skymarcher:f0t0:s1,f:xs:XP:carmen-cruel-skymarcher:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+84c24e62-26bd-4ca4-b6b9-d31e2065f13b	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:carmen-cruel-skymarcher:f0t0:s1,f:xs:XP:carmen-cruel-skymarcher:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 84c7d60a-7a7a-4344-8db5-d658792e3ac4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84c7d60a-7a7a-4344-8db5-d658792e3ac4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84c912e8-6a92-47f7-88b6-e777bd0bb424	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:sparkcaster:cast:s1,f:xs:XP:sparkcaster:cast:s1	-	-	-	ee9449e32c7a	-	f5cd906a9152	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 84e8ca5e-730e-468b-943c-7c6358ade95c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ill-gotten-inheritance:f0t0:s1,f:xs:XP:ill-gotten-inheritance:f0t0:s1	-	-	-	3aa6ded33acb	-	4029330c9fbd	-	-	2026-11-25	xproof
 84eaac2e-74ce-4a16-9faa-409df7c58eb3	cast	cast-resolve	agreed	-	FX	scen	2	0	Winter, Tormented Loner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 84eaac2e-74ce-4a16-9faa-409df7c58eb3	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-84eaac2e-74ce-4a16-9faa-409df7c58eb3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Winter, Tormented Loner/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+84eaac2e-74ce-4a16-9faa-409df7c58eb3	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:winter-tormented-loner:static0.0:s1,f:xs:XP:winter-tormented-loner:static0.0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 84ec7820-6608-459c-b172-80e8e3750cf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84ee0da2-d886-4603-9aaa-bc5326a424d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 84ee74e9-b3e3-4f47-8b3c-5c1a70f5cad6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

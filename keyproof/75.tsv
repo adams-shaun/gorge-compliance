@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-7500b7dc-588d-46bd-acc5-885dcd464668	cast	cast-resolve	agreed	-	X	scen	1	0	Tam's Resistance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7500b7dc-588d-46bd-acc5-885dcd464668	cast	cast	diverged	-	-	start	0	2	-	e71b1adb1d2b	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 75070eaf-c931-46e5-9aa1-b849e33580c6	cast	cast-resolve	agreed	-	FX	scen	2	0	Ambling Stormshell/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 75070eaf-c931-46e5-9aa1-b849e33580c6	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:ambling-stormshell:f0t0:s1,f:xs:XP:ambling-stormshell:f0t0:s1	-	-	-	23c4009444b0	-	99227ff57410	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75070eaf-c931-46e5-9aa1-b849e33580c6	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:ambling-stormshell:f0t1:s1,f:xs:XP:ambling-stormshell:f0t1:s1	-	-	-	23c4009444b0	-	99227ff57410	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75c626fb-9dfc-4a94-b59f-f0e45c7b2f56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dega-sanctuary:f0t0:s1,f:xs:XP:dega-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	6601936f5ce9	-	-	2026-11-25	xproof
 75c626fb-9dfc-4a94-b59f-f0e45c7b2f56	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dega-sanctuary:f0t0:s1,f:xs:XP:dega-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	6601936f5ce9	-	-	2026-11-25	xproof
 75c81ce4-ca1d-464a-bb39-e568f8ebf71f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75c81ce4-ca1d-464a-bb39-e568f8ebf71f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+75c81ce4-ca1d-464a-bb39-e568f8ebf71f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 75d38954-6148-4d95-bf4b-cb82efcbe8df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75d38954-6148-4d95-bf4b-cb82efcbe8df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:territorial-scythecat:f0t0:s1,f:xs:XP:territorial-scythecat:f0t0:s1	-	-	-	6f84be0f34c0	-	2abcd926688f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 75d4f61a-8276-43ad-99e6-0d756a597e4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

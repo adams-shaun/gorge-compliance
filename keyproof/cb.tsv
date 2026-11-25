@@ -22,7 +22,7 @@ cb1e1acc-3805-418b-bed1-65838ddb1d62	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Whis
 cb1e697f-6689-4f0b-8725-61d51432b8dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:restore-with-empathy:cast:s1,f:xs:XP:restore-with-empathy:cast:s1	-	-	-	fb9d3088f0bf	-	2c7aee9ad046	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 cb27dc83-85ee-4f54-b032-41cd1806d3ac	cast	cast-resolve	agreed	-	FX	scen	2	0	Way of the Healer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cb27dc83-85ee-4f54-b032-41cd1806d3ac	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cb27dc83-85ee-4f54-b032-41cd1806d3ac	static#0.0	static#0.0	agreed	-	X	scen	1	0	Way of the Healer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cb27dc83-85ee-4f54-b032-41cd1806d3ac	static#0.0	static.continuous	diverged	-	-	start	0	1	-	1621212ebc77	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 cb2803ee-825b-420e-b404-c7c44f15ec15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-black-arrow:f0t0:s1,f:xs:XP:the-black-arrow:f0t0:s1	-	-	-	25696bf19d5b	-	a515a5d3f74b	-	-	2026-11-24	xproof
 cb2803ee-825b-420e-b404-c7c44f15ec15	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:the-black-arrow:static0.0:s1,f:xs:XP:the-black-arrow:static0.0:s1	-	-	-	65d07beecc37	-	a515a5d3f74b	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 cb2803ee-825b-420e-b404-c7c44f15ec15	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-black-arrow:f0t0:s1,f:xs:XP:the-black-arrow:f0t0:s1	-	-	-	25696bf19d5b	-	a515a5d3f74b	-	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ cbd4e160-9eb1-42de-aee8-6f1d1398f633	f0/t0	AttackerBlockedByCreature	agreed	-	FX
 cbd4e160-9eb1-42de-aee8-6f1d1398f633	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:ornery-goblin:f0t1:s1,f:xs:XP:ornery-goblin:f0t1:s1	-	-	-	6f84be0f34c0	-	8d5020e63b90	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 cbd76b22-d04e-48e7-bcab-c7f5466d67d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbd76b22-d04e-48e7-bcab-c7f5466d67d8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cbd76b22-d04e-48e7-bcab-c7f5466d67d8	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+cbd76b22-d04e-48e7-bcab-c7f5466d67d8	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:lux-artillery:f0t1:s1,f:xs:XP:lux-artillery:f0t1:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 cbdbf18f-0180-4ade-a79e-1e644dd42d6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbde4b9d-1549-4892-b8ca-38256a6ac1ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbde4b9d-1549-4892-b8ca-38256a6ac1ba	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:phantasmal-dreadmaw:f0t0:s1,f:xs:XP:phantasmal-dreadmaw:f0t0:s1	-	-	-	6f84be0f34c0	-	20d057691990	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

@@ -103,9 +103,9 @@ a6763205-47c7-4d7f-be8c-2f69e8321048	cast	cast-resolve	agreed	-	FX	scen	2	0	Meph
 a6763205-47c7-4d7f-be8c-2f69e8321048	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mephidross Vampire/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 a6763205-47c7-4d7f-be8c-2f69e8321048	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mephidross Vampire/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 a6763205-47c7-4d7f-be8c-2f69e8321048	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mephidross Vampire/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-a680d1ab-99f2-43d0-b289-5fdba4083d03	cast	cast-resolve	agreed	-	X	scen	1	0	Arni, Humble Scribe/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a680d1ab-99f2-43d0-b289-5fdba4083d03	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Arni, Humble Scribe/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a680d1ab-99f2-43d0-b289-5fdba4083d03	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Arni, Humble Scribe/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a680d1ab-99f2-43d0-b289-5fdba4083d03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arni-humble-scribe:cast:s1,f:xs:XP:arni-humble-scribe:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+a680d1ab-99f2-43d0-b289-5fdba4083d03	f0/a0	Draw	agreed	-	FX	start	4	0	x:xs:XP:arni-humble-scribe:f0a0:s1,f:xs:XP:arni-humble-scribe:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+a680d1ab-99f2-43d0-b289-5fdba4083d03	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arni-humble-scribe:f0t0:s1,f:xs:XP:arni-humble-scribe:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 a681c6ea-b10a-4061-abf4-7b45e06ccebd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a681c6ea-b10a-4061-abf4-7b45e06ccebd	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:rhox-veteran:f0t0:s1,f:xs:XP:rhox-veteran:f0t0:s1	-	-	-	d864b561c9cb	-	ea93d9904652	-	-	2026-11-24	xproof
 a681c6ea-b10a-4061-abf4-7b45e06ccebd	f0/t1	Attacks/Battle cry	agreed	-	FX	start	4	0	x:xs:XP:rhox-veteran:f0t0:s1,f:xs:XP:rhox-veteran:f0t0:s1	-	-	-	d864b561c9cb	-	ea93d9904652	-	-	2026-11-24	xproof
@@ -189,8 +189,8 @@ a6e654fb-3567-4b92-ae9b-d064bba7112a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a6e654fb-3567-4b92-ae9b-d064bba7112a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6e720a2-9819-40ec-a811-7812898b531a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necrotic-hex:cast:s1,f:xs:XP:necrotic-hex:cast:s1	-	-	-	8c0bd19283bb	-	9b586d0e82a8	-	-	2026-11-24	xproof
 a6e7cbfc-6d5a-4a67-9dad-d512d3c97bda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a6e7cbfc-6d5a-4a67-9dad-d512d3c97bda	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-a6e7cbfc-6d5a-4a67-9dad-d512d3c97bda	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+a6e7cbfc-6d5a-4a67-9dad-d512d3c97bda	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:brimaz-blight-of-oreskos:f0t0:s1,f:xs:XP:brimaz-blight-of-oreskos:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+a6e7cbfc-6d5a-4a67-9dad-d512d3c97bda	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:brimaz-blight-of-oreskos:f0t1:s1,f:xs:XP:brimaz-blight-of-oreskos:f0t1:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 a6eb06dc-a62d-4fdb-b336-e304d8d68c92	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a6eb06dc-a62d-4fdb-b336-e304d8d68c92	f0/a0	Token	agreed	-	FX	start	1	0	x:xs:XP:usher-of-the-fallen:f0a0:s1,f:xs:XP:usher-of-the-fallen:f0a0:s1	-	-	-	23c4009444b0	-	bfa39ad82234	-	-	2026-11-25	xproof
 a6f0dcbc-ca45-4ae8-961e-e42ef8d8a975	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:organ-hoarder:cast:s1,f:xs:XP:organ-hoarder:cast:s1	-	-	-	d864b561c9cb	-	729695040781	-	-	2026-11-24	xproof

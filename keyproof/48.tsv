@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4804fc42-588c-487a-8ff7-bcc16749fc1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4804fc42-588c-487a-8ff7-bcc16749fc1f	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:pit-scorpion:f0t0:s1,f:xs:XP:pit-scorpion:f0t0:s1	-	-	-	9087eefec3ee	-	4001b444c8b0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 48060406-dd5a-4df5-84e9-3e797f0248cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48060406-dd5a-4df5-84e9-3e797f0248cd	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+48060406-dd5a-4df5-84e9-3e797f0248cd	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:moira-urborg-haunt:f0t0:s1,f:xs:XP:moira-urborg-haunt:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 48090c64-f41a-447b-ad7a-54e3194f759b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 481e3a30-fbe9-4ed3-a982-8a73f0dca33b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thallid-shell-dweller:f0t0:s1,f:xs:XP:thallid-shell-dweller:f0t0:s1	-	-	-	3aa6ded33acb	-	d52b520b8262	-	-	2026-11-25	xproof
 481e3a30-fbe9-4ed3-a982-8a73f0dca33b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 482006a0-bb2a-4533-891b-2195da5e0f01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 482006a0-bb2a-4533-891b-2195da5e0f01	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:manabond:f0t0:s1,f:xs:XP:manabond:f0t0:s1	-	-	-	baa6f696107c	-	0bed3ac264c0	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 48207d1c-448a-4e1b-974a-642dfea75933	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48220e6c-5752-46e0-9b7f-f0eef274d929	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+48220e6c-5752-46e0-9b7f-f0eef274d929	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 48252207-d345-455c-b655-c2027664e6a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rabaroo-troop:cast:s1,f:xs:XP:rabaroo-troop:cast:s1	-	-	-	23c4009444b0	-	6e5ac81be356	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 48252207-d345-455c-b655-c2027664e6a6	f0/a0	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:rabaroo-troop:f0a0:s1	-	-	-	23c4009444b0	-	6e5ac81be356	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 48252207-d345-455c-b655-c2027664e6a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rabaroo-troop:f0t0:s1,f:xs:XP:rabaroo-troop:f0t0:s1	-	-	-	23c4009444b0	-	6e5ac81be356	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48d9f488-4ebb-4fdb-a568-6930fc2f5416	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:staff-of-nin:f0t0:s1,f:xs:XP:staff-of-nin:f0t0:s1	-	-	-	3aa6ded33acb	-	0134f5e2efb8	-	-	2026-11-25	xproof
 48dab180-4ffd-4b39-9f5a-6bdc017a1eae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tuktuk-rubblefort:cast:s1,f:xs:XP:tuktuk-rubblefort:cast:s1	-	-	-	ae86f6029288	-	823575cfe2ba	-	-	2026-11-24	xproof
 48daee9d-ddaf-410f-8c3a-12fa1064ab56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48daee9d-ddaf-410f-8c3a-12fa1064ab56	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+48daee9d-ddaf-410f-8c3a-12fa1064ab56	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:ancient-copper-dragon:f0t0:s1,f:xs:XP:ancient-copper-dragon:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 48db03c4-c847-4901-8ecb-f480ede94a37	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tamiyo-s-epiphany:cast:s1,f:xs:XP:tamiyo-s-epiphany:cast:s1	-	-	-	d864b561c9cb	-	a7c82e13562d	-	-	2026-11-24	xproof
 48dc8f34-8c73-4155-8a3d-b26a35260e6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48dc8f34-8c73-4155-8a3d-b26a35260e6b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:viridian-harvest:f0t0:s1,f:xs:XP:viridian-harvest:f0t0:s1	-	-	-	6f84be0f34c0	-	9be9804a414a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3589bcfc-42b0-414a-adce-bc690dc631c8	f0/t0	ChangesZone/Hideaway	agreed	-	FX	start	4	0	x:xs:XP:windbrisk-heights:f0t0:s1,f:xs:XP:windbrisk-heights:f0t0:s1	-	-	-	d864b561c9cb	-	a2bf1e40e73f	-	-	2026-11-24	xproof
 3589bcfc-42b0-414a-adce-bc690dc631c8	land	land	agreed	-	FX	start	4	0	x:xs:XP:windbrisk-heights:f0t0:s1,f:xs:XP:windbrisk-heights:f0t0:s1	-	-	-	d864b561c9cb	-	a2bf1e40e73f	-	-	2026-11-24	xproof
 358cfcf3-8ad0-4877-a59a-76ee269169fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35906166-71d1-4089-bbe4-4055edb81fb0	cast	cast-resolve	agreed	-	X	scen	1	0	Conquest Mission/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+35906166-71d1-4089-bbe4-4055edb81fb0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:conquest-mission:cast:s1,f:xs:XP:conquest-mission:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 35906166-71d1-4089-bbe4-4055edb81fb0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:conquest-mission:f0t0:s1,f:xs:XP:conquest-mission:f0t0:s1	-	-	-	6f84be0f34c0	-	5aa4ee1b230c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 35922a30-6b84-44dd-a2f0-306554a1ae90	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:heap-gate:f0a1:s1,f:xs:XP:heap-gate:f0a1:s1	-	-	-	d607930fa548	-	c8f2fb5e5fc3	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 35922a30-6b84-44dd-a2f0-306554a1ae90	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:heap-gate:f0a1:s1,f:xs:XP:heap-gate:f0a1:s1	-	-	-	d607930fa548	-	c8f2fb5e5fc3	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
@@ -183,4 +183,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35f09a11-1d9b-4dfd-9695-b809c871f10d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35f63c60-b0a1-459d-bf51-a8549fb06930	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35f63c60-b0a1-459d-bf51-a8549fb06930	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35f63c60-b0a1-459d-bf51-a8549fb06930	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+35f63c60-b0a1-459d-bf51-a8549fb06930	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof

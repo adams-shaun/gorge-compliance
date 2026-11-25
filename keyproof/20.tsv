@@ -11,8 +11,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2013a774-e6ab-4f2d-a84f-fd277a637d7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20150b58-a442-472c-8191-b44581322eeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mass-production:cast:s1,f:xs:XP:mass-production:cast:s1	-	-	-	ae86f6029288	-	22f80ee27881	-	-	2026-11-24	xproof
 2015f455-988e-444c-93df-23fab179ef87	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-2017d355-403a-4408-9779-94d1125e373f	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-2017d355-403a-4408-9779-94d1125e373f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+2017d355-403a-4408-9779-94d1125e373f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lazotep-sliver:cast:s1,f:xs:XP:lazotep-sliver:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+2017d355-403a-4408-9779-94d1125e373f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 2019004c-ebcf-4665-8736-f01ce7d8fcd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20194297-f2a4-4473-95bc-7c6835e5b6b3	cast	cast-resolve	agreed	-	FX	scen	2	0	Lilysplash Mentor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20194297-f2a4-4473-95bc-7c6835e5b6b3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lilysplash-mentor:combat0.attack:s1,f:xs:XP:lilysplash-mentor:combat0.attack:s1	-	-	-	3aa6ded33acb	-	eef9bf3bac3a	-	-	2026-11-25	xproof
@@ -68,7 +68,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2055eb91-ee36-4752-a6dc-581eaef335c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2055eb91-ee36-4752-a6dc-581eaef335c8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20591a83-7138-4876-b088-035bd3788be3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tamiyo-s-journal:f0t0:s1,f:xs:XP:tamiyo-s-journal:f0t0:s1	-	-	-	3aa6ded33acb	-	c2cc9b8da1cb	-	-	2026-11-25	xproof
-20591a83-7138-4876-b088-035bd3788be3	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+20591a83-7138-4876-b088-035bd3788be3	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 20591a83-7138-4876-b088-035bd3788be3	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:tamiyo-s-journal:f0t0:s1,f:xs:XP:tamiyo-s-journal:f0t0:s1	-	-	-	3aa6ded33acb	-	c2cc9b8da1cb	-	-	2026-11-25	xproof
 20593b29-2987-4b3b-8956-66f91dfe8a13	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	3fe793955cef	-	-	2026-11-24	xproof
 205bcab6-8b6b-4d09-9890-0b7391d59788	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2091eb7e-2357-4ef8-b15e-1e6f82176340	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:mold-adder:f0t0:s1,f:xs:XP:mold-adder:f0t0:s1	-	-	-	3aa6ded33acb	-	c85997a0fe78	-	-	2026-11-25	xproof
 20932bca-52be-4288-9c7d-4154650c5ec9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20932bca-52be-4288-9c7d-4154650c5ec9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20932bca-52be-4288-9c7d-4154650c5ec9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+20932bca-52be-4288-9c7d-4154650c5ec9	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 2094fb68-3859-401f-97f2-c8bae64a4822	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:playful-shove:cast:s1,f:xs:XP:playful-shove:cast:s1	-	-	-	3aa6ded33acb	-	d57882d337f8	-	-	2026-11-25	xproof
 20963cad-1c13-44a1-901a-bfc9930089e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2097ac9e-0f9b-4cd0-8537-2518195e4549	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reality-strobe:cast:s1,f:xs:XP:reality-strobe:cast:s1	-	-	-	d864b561c9cb	-	d7b5d6cb61a4	-	-	2026-11-24	xproof
@@ -139,9 +139,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 20b60c93-124b-42c8-93fb-63bbd1888658	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20b60c93-124b-42c8-93fb-63bbd1888658	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20b8911e-6701-485c-ac62-2b3cc79ec288	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coral-net:cast:s1,f:xs:XP:coral-net:cast:s1	-	-	-	5b42d43d5d80	-	d87adf31b727	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-20b90a18-ff62-4995-b0d6-fbef44dca357	cast	cast-resolve	agreed	-	X	scen	1	0	Karn, Gilded Guardian/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+20b90a18-ff62-4995-b0d6-fbef44dca357	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:karn-gilded-guardian:cast:s1,f:xs:XP:karn-gilded-guardian:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 20b90a18-ff62-4995-b0d6-fbef44dca357	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:karn-gilded-guardian:combat0.attack:s1,f:xs:XP:karn-gilded-guardian:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	fcd5801e8d1f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 20b90a18-ff62-4995-b0d6-fbef44dca357	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:karn-gilded-guardian:combat0.block:s1,f:xs:XP:karn-gilded-guardian:combat0.block:s1	-	-	-	fb9d3088f0bf	-	fcd5801e8d1f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+20b90a18-ff62-4995-b0d6-fbef44dca357	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:karn-gilded-guardian:cast:s1,f:xs:XP:karn-gilded-guardian:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 20b9bc53-7f6d-4616-a2df-5783ab577707	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20c20c86-4435-49e0-bbf3-b51c49c2eadd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beguiler-of-wills:cast:s1,f:xs:XP:beguiler-of-wills:cast:s1	-	-	-	d864b561c9cb	-	f9e0fb5fdbc6	-	-	2026-11-24	xproof
 20c20c86-4435-49e0-bbf3-b51c49c2eadd	f0/a0	GainControl	agreed	-	FX	start	2	0	x:xs:XP:beguiler-of-wills:f0a0:s1,f:xs:XP:beguiler-of-wills:f0a0:s1	-	-	-	d864b561c9cb	-	f9e0fb5fdbc6	-	-	2026-11-24	xproof

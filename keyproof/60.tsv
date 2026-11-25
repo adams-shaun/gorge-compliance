@@ -183,7 +183,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60e3ccf2-63f5-4435-a752-1d82fefb55d7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lagonna-band-elder:f0t0:s1,f:xs:XP:lagonna-band-elder:f0t0:s1	-	-	-	d864b561c9cb	-	266db7c56eb1	-	-	2026-11-24	xproof
 60e6a140-c7fb-4fbe-bd74-6bbb925080e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60e7130a-d321-4e50-93a4-999013c76054	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gut-true-soul-zealot:cast:s1,f:xs:XP:gut-true-soul-zealot:cast:s1	-	-	-	8c0bd19283bb	-	2fbd045c0585	-	-	2026-11-24	xproof
-60e7130a-d321-4e50-93a4-999013c76054	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+60e7130a-d321-4e50-93a4-999013c76054	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:gut-true-soul-zealot:f0t0:s1,f:xs:XP:gut-true-soul-zealot:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 60e7517f-7cc5-4073-9f2c-3e6acb891128	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60ead8a5-11fb-4eeb-99bf-0caaf1de1731	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:psychic-pickpocket:cast:s1,f:xs:XP:psychic-pickpocket:cast:s1	-	-	-	d864b561c9cb	-	039519fe6a2a	-	-	2026-11-24	xproof
 60ead8a5-11fb-4eeb-99bf-0caaf1de1731	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:psychic-pickpocket:cast:s1,f:xs:XP:psychic-pickpocket:cast:s1	-	-	-	d864b561c9cb	-	039519fe6a2a	-	-	2026-11-24	xproof
@@ -193,8 +193,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60f20f32-b6db-4ee7-a0aa-535647e6fcd5	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:marshals-pathcruiser:f0a1:s1,f:xs:XP:marshals-pathcruiser:f0a1:s1	-	-	-	23c4009444b0	-	5db1c12530ca	-	-	2026-11-25	xproof
 60f20f32-b6db-4ee7-a0aa-535647e6fcd5	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:marshals-pathcruiser:cast:s1	-	-	-	23c4009444b0	-	5db1c12530ca	-	-	2026-11-25	xproof
 60f412bb-27e9-4883-8862-96eae96dfee3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-60fa9f5f-2360-4d5e-b291-1318803e3c9f	cast	cast	diverged	-	-	start	0	2	-	892a2ec46781	-	-	23c4009444b0	-	15a7b747a04a	-	-	2026-11-25	xproof
-60fa9f5f-2360-4d5e-b291-1318803e3c9f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+60fa9f5f-2360-4d5e-b291-1318803e3c9f	cast	cast	agreed	-	F	start	4	0	f:xs:XP:mordor-on-the-march:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+60fa9f5f-2360-4d5e-b291-1318803e3c9f	f0/t0	SpellCast/Storm	agreed	-	F	start	4	0	f:xs:XP:mordor-on-the-march:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 60fc5eb0-95d6-49b0-a538-945ef599e484	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defabricate:cast:s1,f:xs:XP:defabricate:cast:s1	-	-	-	9087eefec3ee	-	1d941c6d33af	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 60fc89a1-cc6f-4a32-84c3-09abf7a4a1df	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:brigid-clachan-s-heart-brigid-doun-s-mind:cast:s1,f:xs:XP:brigid-clachan-s-heart-brigid-doun-s-mind:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 60fc89a1-cc6f-4a32-84c3-09abf7a4a1df	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:brigid-clachan-s-heart-brigid-doun-s-mind:cast:s1,f:xs:XP:brigid-clachan-s-heart-brigid-doun-s-mind:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof

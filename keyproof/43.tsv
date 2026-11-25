@@ -35,7 +35,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4325d4d2-5892-4c20-a994-7396b715e94f	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Transwarp Hub"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4325d4d2-5892-4c20-a994-7396b715e94f	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Transwarp Hub"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4327225e-140f-45a4-a56f-dcf472f6c062	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4327225e-140f-45a4-a56f-dcf472f6c062	f0/a0	NULL	owed	refused:start:target-condition:was-dealt-damage-this-turn	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+4327225e-140f-45a4-a56f-dcf472f6c062	f0/a0	NULL	owed	refused:start:target-condition:was-dealt-damage-this-turn	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 43296f8b-58d9-446e-a538-1c4921552c41	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:highcliff-felidar:cast:s1,f:xs:XP:highcliff-felidar:cast:s1	-	-	-	65d07beecc37	-	94d8f1ee013a	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 43296f8b-58d9-446e-a538-1c4921552c41	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:highcliff-felidar:cast:s1,f:xs:XP:highcliff-felidar:cast:s1	-	-	-	65d07beecc37	-	94d8f1ee013a	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 432b37a5-d32a-4b78-91ab-860aa026b7cc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archangel-avacyn-avacyn-the-purifier:f0t0:s1,f:xs:XP:archangel-avacyn-avacyn-the-purifier:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
@@ -73,11 +73,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4355507e-e3a4-4c49-a1f7-344150213a2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4355507e-e3a4-4c49-a1f7-344150213a2f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 435df16b-3dd4-446e-a643-f9478aaa47c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-435df16b-3dd4-446e-a643-f9478aaa47c0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-435df16b-3dd4-446e-a643-f9478aaa47c0	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+435df16b-3dd4-446e-a643-f9478aaa47c0	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:pain-distributor:f0t0:s1,f:xs:XP:pain-distributor:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+435df16b-3dd4-446e-a643-f9478aaa47c0	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pain-distributor:f0t1:s1,f:xs:XP:pain-distributor:f0t1:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 4364bef8-f7ec-487c-9b64-b55c4afb864e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-behemoth:cast:s1,f:xs:XP:llanowar-behemoth:cast:s1	-	-	-	25696bf19d5b	-	080414b1139b	-	-	2026-11-24	xproof
 4364bef8-f7ec-487c-9b64-b55c4afb864e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:llanowar-behemoth:cast:s1,f:xs:XP:llanowar-behemoth:cast:s1	-	-	-	25696bf19d5b	-	080414b1139b	-	-	2026-11-24	xproof
-43654381-c55c-4d6d-abfd-12932ceb5a4a	cast	cast-resolve	agreed	-	X	scen	1	0	Silence the Echo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+43654381-c55c-4d6d-abfd-12932ceb5a4a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silence-the-echo:cast:s1,f:xs:XP:silence-the-echo:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 43674fdf-496f-42dc-8a0a-5c42a7c7d910	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nylea-god-of-the-hunt:cast:s1,f:xs:XP:nylea-god-of-the-hunt:cast:s1	-	-	-	d864b561c9cb	-	3494633d4a67	-	-	2026-11-24	xproof
 43674fdf-496f-42dc-8a0a-5c42a7c7d910	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:nylea-god-of-the-hunt:f0a0:s1,f:xs:XP:nylea-god-of-the-hunt:f0a0:s1	-	-	-	3aa6ded33acb	-	3494633d4a67	-	-	2026-11-25	xproof
 4369adc8-d8e0-4d51-b2a9-7e4a8dfd9f8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

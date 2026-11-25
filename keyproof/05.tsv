@@ -48,11 +48,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 053a90b8-61b1-4390-afc0-c5eaef0138a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 053dff47-25df-424b-8328-3ee00739b4fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grey-host-reinforcements:f0t0:s1,f:xs:XP:grey-host-reinforcements:f0t0:s1	-	-	-	8c0bd19283bb	-	89da59b10354	-	-	2026-11-24	xproof
 053dff47-25df-424b-8328-3ee00739b4fd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grey-host-reinforcements:f0t0:s1,f:xs:XP:grey-host-reinforcements:f0t0:s1	-	-	-	8c0bd19283bb	-	89da59b10354	-	-	2026-11-24	xproof
-053dff47-25df-424b-8328-3ee00739b4fd	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+053dff47-25df-424b-8328-3ee00739b4fd	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:grey-host-reinforcements:f0t1:s1,f:xs:XP:grey-host-reinforcements:f0t1:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 0540eaca-0e03-4831-955a-192ae2b87d35	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lich-s-relic:f0t0:s1,f:xs:XP:lich-s-relic:f0t0:s1	-	-	-	25696bf19d5b	-	da467f17df1e	-	-	2026-11-24	xproof
-0540eaca-0e03-4831-955a-192ae2b87d35	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:lich-s-relic:f0a0:s1,f:xs:XP:lich-s-relic:f0a0:s1	-	-	-	fb9d3088f0bf	-	da467f17df1e	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+0540eaca-0e03-4831-955a-192ae2b87d35	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:lich-s-relic:static0.0:s1,f:xs:XP:lich-s-relic:static0.0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 0540eaca-0e03-4831-955a-192ae2b87d35	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lich-s-relic:f0t0:s1,f:xs:XP:lich-s-relic:f0t0:s1	-	-	-	25696bf19d5b	-	da467f17df1e	-	-	2026-11-24	xproof
-0540eaca-0e03-4831-955a-192ae2b87d35	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lich's Relic/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0540eaca-0e03-4831-955a-192ae2b87d35	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:lich-s-relic:static0.0:s1,f:xs:XP:lich-s-relic:static0.0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 05425f2f-7228-4bf5-8fe1-6fe99107e8e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0544b707-ec67-43e3-a25d-fd7005ab673d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:death-ward:cast:s1,f:xs:XP:death-ward:cast:s1	-	-	-	23c4009444b0	-	3335499edceb	-	-	2026-11-25	xproof
 0547e426-e23e-4c60-ba6b-cfd4b5ff8485	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,8 +178,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05e73886-8311-4a0d-9c8d-4a03c7f20ea2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roost-of-drakes:f0t0:s1,f:xs:XP:roost-of-drakes:f0t0:s1	-	-	-	ae86f6029288	-	eec522b70a90	-	-	2026-11-24	xproof
 05e73886-8311-4a0d-9c8d-4a03c7f20ea2	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 05e910aa-cf84-468c-8a48-256588cbbf08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rampaging-war-mammoth:cast:s1,f:xs:XP:rampaging-war-mammoth:cast:s1	-	-	-	8c0bd19283bb	-	aa74909341e6	-	-	2026-11-24	xproof
-05e910aa-cf84-468c-8a48-256588cbbf08	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-05e910aa-cf84-468c-8a48-256588cbbf08	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+05e910aa-cf84-468c-8a48-256588cbbf08	f0/a0	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:rampaging-war-mammoth:f0a0:s1,f:xs:XP:rampaging-war-mammoth:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+05e910aa-cf84-468c-8a48-256588cbbf08	f0/t0	Cycled	agreed	-	FX	start	2	0	x:xs:XP:rampaging-war-mammoth:f0a0:s1,f:xs:XP:rampaging-war-mammoth:f0a0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 05eccdee-84f8-42d5-b79c-36d081656915	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05f15b7b-28bf-4b63-a4ca-b57712a1a66a	cast	cast-resolve	agreed	-	FX	scen	2	0	Cactusfolk Sureshot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 05f15b7b-28bf-4b63-a4ca-b57712a1a66a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:cactusfolk-sureshot:combat0.attack:s1,f:xs:XP:cactusfolk-sureshot:combat0.attack:s1	-	-	-	3aa6ded33acb	-	bca0f36c7d7d	-	-	2026-11-25	xproof

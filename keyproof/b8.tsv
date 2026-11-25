@@ -11,7 +11,7 @@ b80415cd-5887-4146-852e-73119fcd3ec6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b80415cd-5887-4146-852e-73119fcd3ec6	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:task-force:f0t0:s1,f:xs:XP:task-force:f0t0:s1	-	-	-	21b2cceac526	-	f724abc9ded4	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 b80473f7-f1d4-4aa3-988e-1a8610ffbeee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b80473f7-f1d4-4aa3-988e-1a8610ffbeee	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bag-end-porter:f0t0:s1,f:xs:XP:bag-end-porter:f0t0:s1	-	-	-	ae86f6029288	-	4e0fc2a5c397	-	-	2026-11-24	xproof
-b80879d3-5abd-47e5-8b8c-61db120854e4	cast	cast-resolve	agreed	-	X	scen	1	0	Cleveland Booker, Empath/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b80879d3-5abd-47e5-8b8c-61db120854e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cleveland-booker-empath:cast:s1,f:xs:XP:cleveland-booker-empath:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 b80879d3-5abd-47e5-8b8c-61db120854e4	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:cleveland-booker-empath:f0a0:s1,f:xs:XP:cleveland-booker-empath:f0a0:s1	-	-	-	23c4009444b0	-	355191c0bb5a	-	-	2026-11-25	xproof
 b80879d3-5abd-47e5-8b8c-61db120854e4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cleveland-booker-empath:f0t0:s1,f:xs:XP:cleveland-booker-empath:f0t0:s1	-	-	-	23c4009444b0	-	355191c0bb5a	-	-	2026-11-25	xproof
 b80b6dd3-320b-4304-8073-f74c54e9a8fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -87,7 +87,7 @@ b893b554-9156-4d79-aca8-6e09c523760b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:car
 b893b554-9156-4d79-aca8-6e09c523760b	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:carapace:cast:s1,f:xs:XP:carapace:cast:s1	-	-	-	ea3140b6974b	-	6421cdb2efa8	-	-	2026-11-24	xproof
 b8942c72-16ce-4f2f-875f-97a56e85a03e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vicious-battlerager:f0t0:s1,f:xs:XP:vicious-battlerager:f0t0:s1	-	-	-	8c0bd19283bb	-	5247b445ee84	-	-	2026-11-24	xproof
 b8942c72-16ce-4f2f-875f-97a56e85a03e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vicious-battlerager:f0t0:s1,f:xs:XP:vicious-battlerager:f0t0:s1	-	-	-	8c0bd19283bb	-	5247b445ee84	-	-	2026-11-24	xproof
-b8942c72-16ce-4f2f-875f-97a56e85a03e	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+b8942c72-16ce-4f2f-875f-97a56e85a03e	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:vicious-battlerager:f0t1:s1,f:xs:XP:vicious-battlerager:f0t1:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 b8961205-87fa-4cce-aba9-84fa2f91a67f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b8961205-87fa-4cce-aba9-84fa2f91a67f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 b8961205-87fa-4cce-aba9-84fa2f91a67f	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

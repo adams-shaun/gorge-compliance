@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 461b3f2f-fcee-4160-abfa-061f8b6a784f	f1/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:hengegate-pathway-mistgate-pathway:f1a0:s1,f:xs:XP:hengegate-pathway-mistgate-pathway:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 461b3f2f-fcee-4160-abfa-061f8b6a784f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 461c0c37-7213-4ece-91f7-934e6a1a8d64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-461c0c37-7213-4ece-91f7-934e6a1a8d64	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+461c0c37-7213-4ece-91f7-934e6a1a8d64	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sandsteppe-war-riders:f0t0:s1,f:xs:XP:sandsteppe-war-riders:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 4620bfa8-7198-44ae-a162-51a19ca0f555	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ray-of-revelation:cast:s1,f:xs:XP:ray-of-revelation:cast:s1	-	-	-	25696bf19d5b	-	a32ecca76fa5	-	-	2026-11-24	xproof
 462269c7-ca16-4aa7-bf52-f7fcda25a05b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 462269c7-ca16-4aa7-bf52-f7fcda25a05b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -62,9 +62,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4649991c-4f2c-49c8-9e18-d0ae36328553	cast	cast	agreed	-	X	start	2	0	x:xs:XP:unified-strike:cast:s1	-	-	-	5b42d43d5d80	-	648e53218247	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 464a930a-79d5-4436-864d-3ce9f29475ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:champions-of-minas-tirith:f0t0:s1,f:xs:XP:champions-of-minas-tirith:f0t0:s1	-	-	-	8c0bd19283bb	-	5710795f8023	-	-	2026-11-24	xproof
 464a930a-79d5-4436-864d-3ce9f29475ae	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:champions-of-minas-tirith:f0t0:s1,f:xs:XP:champions-of-minas-tirith:f0t0:s1	-	-	-	8c0bd19283bb	-	5710795f8023	-	-	2026-11-24	xproof
-464a930a-79d5-4436-864d-3ce9f29475ae	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+464a930a-79d5-4436-864d-3ce9f29475ae	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:champions-of-minas-tirith:f0t1:s1,f:xs:XP:champions-of-minas-tirith:f0t1:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 464bfcdb-a82b-4573-92a4-c5e463724fbe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-464bfcdb-a82b-4573-92a4-c5e463724fbe	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+464bfcdb-a82b-4573-92a4-c5e463724fbe	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 464c0150-3dbc-403b-9ada-fef25ab1f29d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brain-freeze:f0t0:s1,f:xs:XP:brain-freeze:f0t0:s1	-	-	-	65d07beecc37	-	a407f0bdd13e	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 464c0150-3dbc-403b-9ada-fef25ab1f29d	f0/t0	SpellCast/Storm	agreed	-	FX	start	2	0	x:xs:XP:brain-freeze:f0t0:s1,f:xs:XP:brain-freeze:f0t0:s1	-	-	-	65d07beecc37	-	a407f0bdd13e	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 464df46a-079b-47c1-95e7-930160abef2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brallin-skyshark-rider:f0t1:s1,f:xs:XP:brallin-skyshark-rider:f0t1:s1	-	-	-	23c4009444b0	-	4aa10a587369	-	-	2026-11-25	xproof
@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4669e8c7-fc37-4b97-9cb7-8d29b43d9176	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-hauntwoods:f0t0:s2,f:xs:XP:overlord-of-the-hauntwoods:f0t0:s2	-	-	-	e07cf3a05ba5	-	9d175506557e	-	-	2026-11-24	xproof
 4669e8c7-fc37-4b97-9cb7-8d29b43d9176	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:overlord-of-the-hauntwoods:f0t1:s1,f:xs:XP:overlord-of-the-hauntwoods:f0t1:s1	-	-	-	23c4009444b0	-	9d175506557e	-	-	2026-11-25	xproof
 466af6da-52e8-4ac5-b659-7492e3594ff8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-466af6da-52e8-4ac5-b659-7492e3594ff8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-466af6da-52e8-4ac5-b659-7492e3594ff8	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+466af6da-52e8-4ac5-b659-7492e3594ff8	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+466af6da-52e8-4ac5-b659-7492e3594ff8	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:faramir-steward-of-gondor:f0t1:s1,f:xs:XP:faramir-steward-of-gondor:f0t1:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 466cf331-2d9c-4ebc-84f6-30c890e1b637	cast	cast-resolve	agreed	-	FX	scen	2	0	Frontier Seeker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 466cf331-2d9c-4ebc-84f6-30c890e1b637	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 466d5226-f4c7-4d69-9f56-4f893010127f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,13 +162,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46b36d25-25bd-48c5-9a53-75230bb27dee	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:swiftwing-assailant:combat0.block:s1,f:xs:XP:swiftwing-assailant:combat0.block:s1	-	-	-	23c4009444b0	-	995149d063d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 46b36d25-25bd-48c5-9a53-75230bb27dee	static#0.0	static#0.0	agreed	-	X	scen	1	0	Swiftwing Assailant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46b5f12e-9fe5-44f6-b895-ee8c33205521	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aberrant:f0t1:s1,f:xs:XP:aberrant:f0t1:s1	-	-	-	23c4009444b0	-	6a929ca8a986	-	-	2026-11-25	xproof
-46b5f12e-9fe5-44f6-b895-ee8c33205521	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+46b5f12e-9fe5-44f6-b895-ee8c33205521	f0/t0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 46b5f12e-9fe5-44f6-b895-ee8c33205521	f0/t1	ChangesZone/Ravenous	agreed	-	FX	start	2	0	x:xs:XP:aberrant:f0t1:s1,f:xs:XP:aberrant:f0t1:s1	-	-	-	23c4009444b0	-	6a929ca8a986	-	-	2026-11-25	xproof
 46ba09a7-42e4-42cd-911c-71d0ade01180	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:locutus-the-one-who-speaks:cast:s1,f:xs:XP:locutus-the-one-who-speaks:cast:s1	-	-	-	fb9d3088f0bf	-	021a6220be67	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 46ba09a7-42e4-42cd-911c-71d0ade01180	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:locutus-the-one-who-speaks:f0a0:s1,f:xs:XP:locutus-the-one-who-speaks:f0a0:s1	-	-	-	23c4009444b0	-	021a6220be67	-	-	2026-11-25	xproof
 46c3a69a-4984-40b0-905f-4b0762c7ad72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46c3a69a-4984-40b0-905f-4b0762c7ad72	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-46c3a69a-4984-40b0-905f-4b0762c7ad72	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+46c3a69a-4984-40b0-905f-4b0762c7ad72	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:titania-nature-s-force:f0t0:s1,f:xs:XP:titania-nature-s-force:f0t0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+46c3a69a-4984-40b0-905f-4b0762c7ad72	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 46c404c3-636a-4945-a61c-62f013a9c50f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46c404c3-636a-4945-a61c-62f013a9c50f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:towering-viewpoint:f0a0:s1,f:xs:XP:towering-viewpoint:f0a0:s1	-	-	-	ae86f6029288	-	85e2343f83ae	-	-	2026-11-24	xproof
 46c727cb-1f47-4775-8af4-0230ef53966b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:brainsurge:cast:s1	-	-	-	ae86f6029288	-	a17defc7e310	-	-	2026-11-24	xproof

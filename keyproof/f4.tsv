@@ -115,9 +115,9 @@ f46e06e2-1658-4bec-b94e-91935cc667fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f46e9fa0-2ed7-4a94-8ad4-031e87a6da45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f46e9fa0-2ed7-4a94-8ad4-031e87a6da45	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:spireside-infiltrator:f0t0:s1,f:xs:XP:spireside-infiltrator:f0t0:s1	-	-	-	4b8018a80bf0	-	145f27ca9a41	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 f47419a5-b975-4934-a987-ea064a0c7c1a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warrior-s-blades:f0t0:s1,f:xs:XP:warrior-s-blades:f0t0:s1	-	-	-	25696bf19d5b	-	397a9d6c2ba8	-	-	2026-11-24	xproof
-f47419a5-b975-4934-a987-ea064a0c7c1a	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:warrior-s-blades:f0a0:s1,f:xs:XP:warrior-s-blades:f0a0:s1	-	-	-	fb9d3088f0bf	-	397a9d6c2ba8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+f47419a5-b975-4934-a987-ea064a0c7c1a	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:warrior-s-blades:static0.0:s1,f:xs:XP:warrior-s-blades:static0.0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 f47419a5-b975-4934-a987-ea064a0c7c1a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:warrior-s-blades:f0t0:s1,f:xs:XP:warrior-s-blades:f0t0:s1	-	-	-	25696bf19d5b	-	397a9d6c2ba8	-	-	2026-11-24	xproof
-f47419a5-b975-4934-a987-ea064a0c7c1a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Warrior's Blades/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f47419a5-b975-4934-a987-ea064a0c7c1a	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:warrior-s-blades:static0.0:s1,f:xs:XP:warrior-s-blades:static0.0:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 f474c1f8-43bb-4e56-8131-27c71b3193d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f474d244-d9be-4580-bf62-f97660e9c1a3	cast	cast-resolve	agreed	-	FX	scen	2	0	Feed the Flames/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 f475b636-eb7f-4dd7-bc87-a1af07064ffe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ f49302c5-8510-4360-841c-a59f53f87e0b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:icy-
 f4964f74-07c0-4edc-984d-57722fb16961	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f4964f74-07c0-4edc-984d-57722fb16961	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f496e8cb-1d79-4a78-be15-fdb7e3d0de71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f496e8cb-1d79-4a78-be15-fdb7e3d0de71	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+f496e8cb-1d79-4a78-be15-fdb7e3d0de71	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 f496ff42-3644-494a-9f21-27f781ee880b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f496ff42-3644-494a-9f21-27f781ee880b	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:codsworth-handy-helper:f0a1:s1,f:xs:XP:codsworth-handy-helper:f0a1:s1	-	-	-	8c0bd19283bb	-	a9e5b0fb7d3c	-	-	2026-11-24	xproof
 f496ff42-3644-494a-9f21-27f781ee880b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
