@@ -399,7 +399,7 @@ var bareCastParams = map[string]bool{
 	"Mode": true, "TriggerDescription": true, "Execute": true,
 	"TriggerZones": true, "ValidCard": true,
 	"ValidActivatingPlayer": true, "ActivatorThisTurnCast": true,
-	"OpponentTurn": true, "TargetsValid": true,
+	"OpponentTurn": true, "TargetsValid": true, "IsSingleTarget": true,
 	"OptionalDecider": true, "ActivationLimit": true, "ResolvedLimit": true,
 	"GameActivationLimit": true, "OrderDuplicates": true,
 	"Secondary": true, "Static": true, "NoResolvingCheck": true,
@@ -409,12 +409,14 @@ var bareCastParams = map[string]bool{
 }
 
 // bareCast reports whether a SpellCast trigger asks nothing more of the cast
-// than that it is a spell. selfTarget allows TargetsValid$ Card.Self, which
-// the heroic arm meets with targetCarrier; any other TargetsValid (or any
-// param outside bareCastParams) is a gate the bare carrier does not satisfy.
+// than that it is a spell. selfTarget allows the two target-shape params the
+// heroic arm meets with targetCarrier -- TargetsValid$ Card.Self and
+// IsSingleTarget$, every targetCarrier naming exactly one target -- while the
+// no-filter arm (an arbitrary inert carrier) refuses both. Any other param
+// outside bareCastParams is a gate neither arm satisfies.
 func bareCast(t *cards.Trigger, selfTarget bool) bool {
 	for p := range t.Params {
-		if p == "TargetsValid" && !selfTarget {
+		if (p == "TargetsValid" || p == "IsSingleTarget") && !selfTarget {
 			return false
 		}
 		if !bareCastParams[p] {

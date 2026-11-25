@@ -654,6 +654,9 @@ func TestStartspellcasttriggers(t *testing.T) {
 		{card: "Artisan of Forms", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
 			p0BF: []string{"Artisan of Forms", "Forest"}, p1BF: []string{"Phyrexian Walker"},
 			focusCard: "Ranger's Guile", focusKind: "cast"},
+		// heroic plus IsSingleTarget: Ranger's Guile names one target
+		{card: "Zada, Hedron Grinder", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Zada, Hedron Grinder", "Forest"}, focusCard: "Ranger's Guile", focusKind: "cast"},
 		// an Aura filter: Rancor is the Aura that targets the card
 		{card: "Druid of Horns", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Rancor", "Web"},
 			p0BF: []string{"Druid of Horns", "Forest", "Forest", "Wall of Stone"}, focusCard: "Rancor", focusKind: "cast"},
@@ -716,6 +719,8 @@ func TestBareCastGateWhitelist(t *testing.T) {
 		{"unknown gate", map[string]string{"Mode": "SpellCast", "FutureGate": "True"}, false},
 		{"non-Self TargetsValid", map[string]string{"Mode": "SpellCast", "TargetsValid": "Creature.YouCtrl"}, false},
 		{"self-target in the no-filter arm", map[string]string{"Mode": "SpellCast", "TargetsValid": "Card.Self"}, false},
+		{"IsSingleTarget in the no-filter arm", map[string]string{"Mode": "SpellCast", "IsSingleTarget": "True"}, false},
+		{"CanTargetOtherCondition", map[string]string{"Mode": "SpellCast", "TargetsValid": "Card.Self", "CanTargetOtherCondition": "Creature.YouCtrl"}, true},
 	} {
 		if bareCast(trig(tc.params), tc.self) {
 			t.Errorf("%s accepted, want refused", tc.name)
@@ -727,6 +732,14 @@ func TestBareCastGateWhitelist(t *testing.T) {
 	}
 	if bareCast(trig(self), false) {
 		t.Error("a self-target trigger was accepted by the no-filter arm")
+	}
+	single := map[string]string{"Mode": "SpellCast", "TargetsValid": "Card.Self",
+		"IsSingleTarget": "True", "ValidCard": "Instant,Sorcery", "Execute": "X"}
+	if !bareCast(trig(single), true) {
+		t.Error("a heroic single-target trigger was refused")
+	}
+	if bareCast(trig(single), false) {
+		t.Error("a single-target trigger was accepted by the no-filter arm")
 	}
 }
 
