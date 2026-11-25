@@ -493,6 +493,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # xs:XP:hurl-through-hell:cast:s1 request and requires p1's Shield Sphere on the stack (controller p0) at step 7 with no
 # harness row. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-mayplay-cast.
+# 3e6bd830a6f = 244c5908482 + gorge's discard_may election (xproof cluster xpt-e4d29b48, Evie Frye and Glacial Dragonhunt's
+# DB$ Discard | Mode$ TgtChoose | Optional$ True | NumCards$ 1): Forge asks chooseCardsToDiscardFrom for 0..1, gorge poses a yes/no
+# election (effDiscardTgtChoose, resume discard_may) and then the card pick, skipped when forced. ScriptedController.chooseCardsToDiscardFrom
+# took only the card pick, so the yes was a leftover and the AI discarded ("Missing discard answer ... 0..1 to pick"). It now
+# takes a queued discard_may yes/no for a min 0 ask first: no is an empty pick, yes is the 1..max pick (a lone card is forced,
+# otherwise gorge's logged discard pick); AnyNumber$ has no election and is unchanged. DiscardMayElectionTest (yes with a lone
+# card, no, yes then gorge's card pick) fails without the change and the full driver suite (198 tests) is green on it;
+# scripts/forge-oracle-test-discard-may-election.sh (make forge-driver-tests) runs it. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-discard-may-election.
 # 7d506c5192 = oracle/fpin-1125: the merge of 26b4658101 into f7b730149a (d0f25fff70), then 244c590848 (the mayplay pin
 # above). 26b4658101 = f7b730149a plus remove-any-type's counter-kind pick left for the amount ask: CountersRemoveEffect
 # .removeAnyType asks chooseCounterType then chooseNumber, and gorge logs one counter-kind pick per counter removed, so with two
@@ -501,14 +510,31 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (StepMachine.peekCounterKind); other asks and the remove-any-counter cost still consume theirs. UnmappedAskTest's mixed-kinds
 # fixture (xs:XP:mabel-bitter-recluse:cast:s1) fails before it; scripts/forge-oracle-test-counter-any-mixed-kinds.sh runs it.
 # Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
-# a6227e70a3 = 7d506c5192 plus cast_mode "evoked". StepMachine.spellForMode had no case for it, so the driver took Emptiness's
-# hard-cost spell and Forge refused the {W/B}{W/B} evoke cast (xproof xs:XP:emptiness:f0t0:s1, Catharsis, Emptiness; CR 702.74a);
-# it now picks the AlternativeCost.Evoke spell. scripts/forge-oracle-test-evoked-cast-mode.sh fails before it. Fork branch
-# fix/xp-driver-evoked-cast-mode.
-# afe18881c6 = oracle/fpin-1125: a6227e70a3 joined with 3e6bd830a6, gorge's discard_may yes/no election before the 0..N discard
-# pick (ScriptedController.chooseCardsToDiscardFrom; fork branch fix/xp-forge-driver-discard-may-election). Both driver-only;
-# die-roll code, cardsfolder and tokenscripts unchanged.
-FORGE_ORACLE_REF ?= afe18881c6e6327caf871661968865a495aaf3de
+# afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
+# 3bb8f906e3 = afe18881c6 plus TokenEffect.resolve registering the AtEOT delayed trigger when the token amount is below 1 (Mobilize X
+# with X = 0 on Avenger of the Fallen, and the Firecat Blitz / Valduk / Lightning Coils X = 0 class): CR 702.181a's "Sacrifice them at
+# the beginning of the next end step" is unconditional, so CR 603.7a creates the delayed trigger at resolution and it does nothing
+# (CR 603.7c); the early `return` before makeTokenTable skipped the only registration point. A script with AtEOTNeedsCard$ True
+# (Myriad, CR 702.116a) is still dropped by registerDelayedTrigger over the empty set. xproof clusters
+# gorge-suspect:avenger-of-the-fallen:f0t0:stack and :combat0.attack:stack (triage xpt-09b99e96, xpt-c1665aee).
+# MobilizeZeroTokensStillSchedulesSacrificeTest fails on afe18881c6 ("expected [true] but found [false]") and passes after;
+# MyriadNoTokensCreatesNoDelayedTriggerTest and MordorOnTheMarchNothingExiledTest stay green. Driver, cardsfolder and tokenscripts
+# unchanged. Fork branch fix/xp-mobilize-zero-delayed-trigger.
+# 66671165f31 = afe18881c6e plus the up-to remove-any-type Done pick (fork branch fix/xp-forge-driver-counter-any-done-v2):
+# when the controller stops an UpTo removal early gorge logs remove_counter_done ("Done"), which names no Forge CounterType
+# and which CountersRemoveEffect.removeAnyType has no option for, so the kind ask strict-missed and left it queued. For a
+# RemoveCounter ask StepMachine.peekCounterKind (26b4658101's peek design) now also matches the Done by its pick kind,
+# consumes it and answers the first offered type; that type's chooseNumber finds no counter pick and answers 0 (min is 0 under
+# UpTo), which is how removeAnyType stops. The kind ask peeks before the lone-option shortcut so a single-kind up-to removal
+# consumes its Done too. Test UnmappedAskTest.removeAnyTypeDoneStopsTheUpToRemoval (fixtures/unmapped/counter-remove-any-done.jsonl)
+# fails on afe18881c6e and passes after; scripts/forge-oracle-test-counter-any-done.sh (make forge-driver-tests) replays the
+# Mabel, Bitter Recluse request with LOYALTY then Done and requires Ajani Resolute still on p1's battlefield at 1 loyalty and
+# one +1/+1. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+# 149a03bbbec4 = the clean merge of 66671165f31 and 3bb8f906e3 (the Mobilize X=0 AtEOT fix above): the two touch disjoint
+# files (forge-oracle's up-to remove-any-type Done pick vs forge-game's TokenEffect), so the pin keeps both and the merge adds
+# no code of its own. Driver and die-roll code unchanged from 66671165f31; cardsfolder/tokenscripts unchanged (same as FORGE_REF
+# ff076d4432). Fork branch oracle/fpin-1125-mobilize-zero.
+FORGE_ORACLE_REF ?= 149a03bbbec4be2949cd05fedffaacb83674f249
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
@@ -531,6 +557,7 @@ help:
 	@echo "  make test-one PKG=./p RUN=TestX — one capped, corpus-checked test run with one verdict line"
 	@echo "  make test-select BASE=ref — print the Go test packages the touched-package gate selects for BASE..HEAD"
 	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
+	@echo "  make precheck       — the merge precheck: FORGE_ORACLE_REF/XMAGE_REF are pushed to our forks"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make carddb-test    — the carddb tool's Python tests (cmd/carddb/py/tests; git + python3 only, no network)"
 	@echo "  make oracle-audit   — the hand Oracle-text audit + XMage ports (audit/; ORACLE_RUN=<Card> to filter)"
@@ -619,6 +646,19 @@ phase-preflight:
 	RUST_MIN_STACK=16777216 $(PHASE_ORACLE_DIR)/target/follower/phase-follower --preflight $$names --card-data $(PHASE_ORACLE_DIR)/card-data-$(shell cut -d' ' -f2 followers/phase/PHASE_PIN).json > $$out && \
 	cat $$out && echo "refused $$(wc -l < $$out) of $$(wc -l < $$names)"
 
+# precheck is the cheap merge gate: every pin a kit build fetches from one of
+# our forks must already be pushed there. A seat-local commit that never
+# reached adams-shaun/forge or adams-shaun/mage breaks every kit build with
+# "upload-pack: not our ref". Tickets land on local develop, so the landing
+# config (.agentctl/config.toml, operator-owned and untracked) must gate merges
+# on this target; CI's lint job runs it on the develop->main PR as the second
+# line of defence. The pins are passed explicitly because make does not export
+# its variables; a FORGE_ORACLE_REF=... on the command line wins over the ?=
+# default.
+.PHONY: precheck
+precheck:
+	FORGE_ORACLE_REF='$(FORGE_ORACLE_REF)' XMAGE_REF='$(XMAGE_REF)' bash scripts/check-fork-pins.sh
+
 boundary:
 	GORGE_TEST_WRAPPER=1 go test -count=1 ./internal/boundary/
 
@@ -640,6 +680,7 @@ smoke:
 	bash ops/scripts/tests/make_cards_smoke.sh
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
+	bash ops/scripts/tests/check_fork_pins_smoke.sh
 	bash ops/scripts/tests/forge_sbv2_smoke.sh
 	bash ops/scripts/tests/xmage_sbv2_smoke.sh
 	bash ops/scripts/tests/phase_oracle_pin_smoke.sh
