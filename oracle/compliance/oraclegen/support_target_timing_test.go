@@ -12,11 +12,11 @@ import (
 
 // TestSupportTargetTiming pins both Support timings at gorge 5326ad5128.
 //
-// A permanent's Support (an enters-the-battlefield trigger or an activated
-// ability) is still a resolution KChoose with ResumeKind "counter_pick", but
+// A permanent's Support ETB trigger is still a resolution KChoose with
+// ResumeKind "counter_pick", but
 // XMage declares it as a target on the source: SupportAbility adds a
-// TargetPermanent to the trigger (SupportAbility.java:37) and the activated
-// ability declares its target on activation. TestPlayer reads those from the
+// TargetPermanent to the trigger (SupportAbility.java:37). TestPlayer reads
+// those from the
 // TARGET queue when the object is announced, so a "choice" on the resolution
 // step is never consumed; the answers are retimed to the announcement step
 // (support_pick.go).
@@ -24,8 +24,12 @@ import (
 // An instant or sorcery's Support is no longer a pick: CR 701.41a with
 // 601.2c announces its "up to N target creatures" while casting (gorge's
 // supportTargetSA/supportAnnounced, engine/rules/support_targets.go and
-// dirac/act_support.go). It is an ordinary cast target decision, which
-// ChooseTargets folds into a preset Step.Targets (castSpell consumes it in
+// dirac/act_support.go), and since gorge 22c9d3aaa2 an ACTIVATED ability's
+// Support is announced at activation the same way (CR 602.2b: the rest of
+// activating an ability is the casting process). Both are ordinary
+// cast/activate target decisions, which
+// ChooseTargets folds into a preset Step.Targets (castSpell/activateAbility
+// consumes it in
 // XMage), or a generated item scripts as a cast-step TARGET answer; there is
 // no counter_pick to retime and nothing may be scripted a second time.
 func TestSupportTargetTiming(t *testing.T) {
@@ -204,9 +208,14 @@ func TestSupportTargetTiming(t *testing.T) {
 		}
 	})
 
-	// An activated support ability declares its target when the ability is
-	// activated, so the answers belong on the activate step even though gorge
-	// asks the pick when the ability resolves.
+	// An activated support ability's targets are announced at activation
+	// itself (CR 602.2b: the rest of activating an ability is the casting
+	// process, so the cast flow's target ask poses the declaration; gorge's
+	// supportTargetSA, extended to activated abilities at 22c9d3aaa2), so the
+	// activate step carries its own targets exactly like a spell's cast: gorge
+	// records an ordinary activate-step target decision, no resolution
+	// counter_pick is ever posed, and activateAbility consumes the step's
+	// targets -- nothing is scripted a second time.
 	t.Run("activated ability", func(t *testing.T) {
 		sc := Scenario{
 			Name: "Joraga Auxiliary support",
@@ -221,19 +230,38 @@ func TestSupportTargetTiming(t *testing.T) {
 					"Island", "Island", "Island", "Island"}},
 			},
 			Steps: []Step{
-				{Op: "activate", Seat: 0, Card: "p0:Joraga Auxiliary", AbilityIndex: supportIntPtr(0)},
+				{Op: "activate", Seat: 0, Card: "p0:Joraga Auxiliary", AbilityIndex: supportIntPtr(0),
+					Targets: []string{"p0:Grizzly Bears"}},
 				{Op: "pass", Seat: 0},
 				{Op: "pass", Seat: 1},
-				{Op: "pass", Seat: 0, Answers: []Answer{{Kind: "choose", Pick: []string{"p0:Grizzly Bears"}}}},
+				{Op: "pass", Seat: 0},
 				{Op: "pass", Seat: 1},
 				{Op: "pass", Seat: 0},
 				{Op: "pass", Seat: 1},
 			},
 		}
-		supportTiming(t, reg, sc, 0, []XAnswer{
-			{Seat: 0, Kind: "target", Value: "Grizzly Bears"},
-			{Seat: 0, Kind: "target", Value: "[target_skip]"},
-		})
+		res := runSupportScenario(t, reg, sc)
+		if got := counterPickSteps(res); len(got) != 0 {
+			t.Fatalf("an activated ability's Support still records counter_pick steps %v", got)
+		}
+		assertCastSupportTarget(t, res, 0, []string{"p0:Grizzly Bears"})
+		sc, castSteps := ChooseTargets(sc, res.Decisions)
+		if !castSteps[0] {
+			t.Fatalf("activate step 0 not marked as carrying its own targets: %v", castSteps)
+		}
+		if got := sc.Steps[0].Targets; !reflect.DeepEqual(got, []string{"p0:Grizzly Bears"}) {
+			t.Fatalf("activate targets = %v, want the support target", got)
+		}
+		out := XAnswersForScenario(reg, res, sc, nil, castSteps)
+		// activateAbility consumes the step's targets, so nothing at all may
+		// be scripted: any answer at any step (a second target, a choice or a
+		// stray target at a resolution step) is a regression.
+		if len(out) != 0 {
+			t.Fatalf("XAnswers scripts %+v; the activation target travels through activateAbility and nothing is owed", out)
+		}
+		if got := supportCounter(res, "Grizzly Bears"); got != 1 {
+			t.Fatalf("Grizzly Bears +1/+1 counters = %d, want 1 (the announced support target)", got)
+		}
 	})
 }
 

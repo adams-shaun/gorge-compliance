@@ -250,7 +250,9 @@ func TestForgeRolledDie(t *testing.T) {
 // re-run green on the pin (run-unit-tests.sh).
 // 30cbb3854d2 = oracle/fpin-1125-join-setup-life-handlib: 8765c682b2f merged with af167fe93c3 (setup life written before any permanent
 // exists), no textual conflicts; die-roll code unchanged, ForcedDieRollTest re-run on the pin (run-unit-tests.sh).
-const forgeOracleDieRollRef = "30cbb3854d2f9433e13216cd61c52869ab686373"
+// 52ddaba3075 = 30cbb3854d2 plus the keyword-expanded ability identity (StepMachine.abilityFor, Encore vs CopyPermanent); die-roll
+// code unchanged, ForcedDieRollTest re-run on the pin (run-unit-tests.sh).
+const forgeOracleDieRollRef = "52ddaba307522af3149b243b31392e8d6730bb1e"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
