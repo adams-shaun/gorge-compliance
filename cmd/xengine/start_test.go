@@ -1836,6 +1836,7 @@ func TestStartSurvivesToMainOne(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
+			t.Logf("%s %s: path %q reason %q", c.card, c.key, res.Path, res.Reason)
 			if res.Path == scen.PathRefused {
 				if !strings.HasPrefix(res.Reason, "start:") {
 					t.Fatalf("%s: refused %q, want a named start: reason or an exercised start", c.card, res.Reason)
@@ -1869,6 +1870,7 @@ func TestStartSurvivesToMainOne(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
+			t.Logf("%s %s: path %q reason %q", c.card, c.key, res.Path, res.Reason)
 			if res.Path == scen.PathRefused {
 				if res.Reason == "" {
 					t.Fatalf("%s: refused without a reason, want a named refusal or an exercised start", c.card)
