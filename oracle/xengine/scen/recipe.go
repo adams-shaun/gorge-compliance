@@ -400,6 +400,13 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	// is the lifegain.
 	skip := func(n certdeck.Need) bool {
 		switch {
+		case n.Class == certdeck.Counters && fam == "activate" && adapts(sa):
+			// CR 702.35a: an Adapt activation is withheld while its source
+			// carries a +1/+1 counter. The card's own CounterAdded trigger
+			// asks certdeck for a counters need (Growth-Chamber Guardian),
+			// and placing that on the focus card left the very ability the
+			// start replays unofferable.
+			return true
 		case trig == nil:
 			return false
 		case trig.Mode == "DamageDone" || trig.Mode == "DamageDoneOnce":
@@ -472,6 +479,14 @@ var bearers = []string{"Wall of Stone", "Wall of Wood"}
 // silently stand in for the player (Final Act, Survivor's Med Kit). A target
 // that also offers a permanent (Permanent,Opponent) keeps its permanent branch.
 const reasonPlayerCounters = "steps-needed:counters:player"
+
+// adapts reports whether sa is an AB$ PutCounter's Adapt$ activation, which
+// gorge offers only while the source has no +1/+1 counters (CR 702.35a,
+// rules' adaptGateOK). A start that meets a counters need on the focus card
+// would otherwise leave the key's own play unofferable.
+func adapts(sa *cards.SA) bool {
+	return sa != nil && sa.Params["Adapt"] != ""
+}
 
 // placeNeeds adds what certdeck.Derive says the card reads (see the forced
 // start above): graveyard fodder; for a lands need, certdeck's two extra
@@ -637,6 +652,30 @@ func inertCounterBearer(reg *cards.Registry, b *certdeck.Builder) (string, error
 	return "", fmt.Errorf("scen: no inert counter bearer (%v) in the corpus", bearers)
 }
 
+// entryCounterUnrestatable reports whether f's placement on the battlefield
+// cannot restate its counter state: an etbCounter grant with a dynamic amount
+// (K:etbCounter:P1P1:X, XKicked, Count$...) re-runs on placement and the start
+// schema has no field for what the live entry added. It mirrors the lower
+// gate's reasonCountersEntry, so an enabler pick cannot make the generated
+// start unlowerable.
+func entryCounterUnrestatable(f *cards.Face) bool {
+	p, ok := f.KeywordParam("etbCounter")
+	if !ok {
+		return false
+	}
+	for _, marker := range []string{"Condition", "CheckSVar", "SVarCompare", "Revolt", "Adamant", "IsPresent", "Optional"} {
+		if strings.Contains(p, marker) {
+			return true // an entry condition the placement would re-run
+		}
+	}
+	parts := strings.Split(p, ":")
+	if len(parts) < 2 {
+		return false
+	}
+	_, err := strconv.Atoi(parts[1])
+	return err != nil
+}
+
 // inertRank orders placeable enablers, lowest first: a noncreature with no
 // activated ability (nothing to activate, nothing to attack or block with),
 // then a creature with none, then the rest.
@@ -668,8 +707,8 @@ func pickEnabler(reg *cards.Registry, b *certdeck.Builder, s *StartSeat, offTurn
 		if !ok || len(c.Faces) == 0 {
 			return fmt.Errorf("scen: enabler %q is not in the corpus", name)
 		}
-		if deadOnArrival(c.Faces[0]) {
-			continue // an X creature with no X dies to SBA the moment it is placed
+		if f := c.Faces[0]; deadOnArrival(f) || entryCounterUnrestatable(f) {
+			continue // an X creature with no X dies to SBA the moment it is placed; a dynamic entry counter cannot be restated
 		}
 		faces, live = append(faces, c.Faces[0]), append(live, name)
 	}

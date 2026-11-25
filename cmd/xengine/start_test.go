@@ -833,3 +833,26 @@ func TestStartOpeningHandFocusIsCast(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+// TestStartAbilityManaFocusIsExercised: an "ability" focus whose cost needs
+// mana was never funded. gorge prices an activated ability against the
+// floating pool as it prices a cast, and the bot leaves the lands that would
+// pay for it untapped (it has no reason to activate a pump or adapt ability),
+// so the option was never offered and play refused every such start as
+// start-not-exercised (xproof 11250904/07/09: 9 keys of the spot box cycles,
+// Growth-Chamber Guardian f0/a0 and Resolute Rider f0/a1 among them). The
+// focus now taps its lands for mana too, but never the focus card itself when
+// the ability's own cost taps it (Vitu-Ghazi, the City-Tree: its {T} is the
+// cost, its mana ability only a source for the rest).
+func TestStartAbilityManaFocusIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Growth-Chamber Guardian", "f0/a0"},   // {2}{G}: Adapt 2
+		{"Resolute Rider", "f0/a1"},            // {W/B}{W/B}{W/B}: indestructible
+		{"Stillmoon Cavalier", "f0/a2"},        // {W/B}{W/B}: +1/+0
+		{"Elvish Hexhunter", "f0/a0"},          // {G/W}, {T}, Sacrifice: destroy target enchantment
+		{"Vitu-Ghazi, the City-Tree", "f0/a1"}, // {2}{G}{W}, {T}: a Saproling; the focus card itself taps for {C}
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}

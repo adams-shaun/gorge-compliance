@@ -53,6 +53,10 @@ type focusState struct {
 	attacked, blocked     bool
 	done                  bool
 	n                     int // actions taken
+	// tapsFocus is whether the focus ability's own cost taps or untaps its
+	// source ({T}, {Q}): a land focus such as Vitu-Ghazi, the City-Tree must
+	// stay untapped to pay that part, so it is never tapped for mana first.
+	tapsFocus bool
 	// manaPick is the mana ability a focus "activate" answer chose, while
 	// the engine may still ask which of the source's mana abilities it
 	// activates (manaChoice); nil otherwise.
@@ -106,9 +110,18 @@ func (s *focusState) read(e *rules.Engine) {
 	want := cards.NormalizeName(s.f.Card)
 	for _, z := range []state.Zone{state.ZHand, state.ZBattlefield, state.ZLibrary, state.ZGraveyard, state.ZExile} {
 		for _, id := range e.G.Zone(z, p) {
-			if isNamed(e.G.Obj(id), want) {
-				s.objs[id] = true
+			o := e.G.Obj(id)
+			if !isNamed(o, want) {
+				continue
 			}
+			s.objs[id] = true
+			// only a battlefield source can be tapped for mana first: the
+			// exclusion is about the land the focus ability's {T} pays with
+			if z != state.ZBattlefield || s.f.Kind != "ability" || s.tapsFocus || s.f.Ability < 0 || s.f.Ability >= len(o.Face().Abilities) {
+				continue
+			}
+			c := rules.ParseCost(o.Face().Abilities[s.f.Ability].Params["Cost"])
+			s.tapsFocus = c.Tap || c.Untap
 		}
 	}
 }
@@ -185,19 +198,25 @@ func (s *focusState) holdPass(d decision.Decision, in decision.Intent) decision.
 	return in
 }
 
-// manaFor is, for a cast focus, the focus seat's first activation of a land,
-// or -1. A seat whose bot pays through plans is offered a cast option only once
-// the pool covers it (an instant or a spell the bot has no reason to cast leaves
-// its lands untapped, and the cast is never offered; a kicked cast is never a
-// planned payment either, as the planner plans the card's own cost), so the
+// manaFor is, for a cast or ability focus, the focus seat's first activation of
+// a land, or -1. gorge offers a cast or activated ability only once the floating
+// pool covers its cost (castable prices against the pool), and a seat whose bot
+// pays through plans leaves the lands of a spell it has no reason to cast
+// untapped (a kicked cast is never a planned payment either, as the planner
+// plans the card's own cost; a pump or adapt ability is no plan at all), so the
 // focus taps its lands (a forced start's mana sources: basics) one by one until
-// the option, the mode's when it has one, is offered.
+// the option, the mode's when it has one, is offered. An ability whose own cost
+// taps its source never taps that source for mana: the {T} of Vitu-Ghazi, the
+// City-Tree's token ability is paid by the very land the pool would have used.
 func (s *focusState) manaFor(d decision.Decision) int {
-	if s.f.Kind != "cast" || int(d.Player) != s.f.Seat {
+	if s.f.Kind != "cast" && s.f.Kind != "ability" || int(d.Player) != s.f.Seat {
 		return -1
 	}
 	for i, o := range d.Options {
 		if o.Kind != "activate" || s.e == nil {
+			continue
+		}
+		if s.tapsFocus && s.objs[o.Obj] {
 			continue
 		}
 		if ob := s.e.G.Obj(o.Obj); ob != nil && ob.Face() != nil && ob.Face().IsLand() {
