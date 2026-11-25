@@ -560,6 +560,23 @@ func TestStartMultiFacedFocusIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartBackFaceIsExercised: a back-face key (scen: no-generator:face until
+// now) is played from the card on the battlefield on its back face, the focus
+// play the back face's own ability: the listed card enters transformed
+// (rules.StartSeat.BackFace) and the focus finds it by its front name.
+func TestStartBackFaceIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Aclazotz, Deepest Betrayal // Temple of the Dead", "f1/a0"},        // a modal back face (a land)
+		{"Shaile, Dean of Radiance // Embrose, Dean of Shadow", "f1/a0"},     // a modal creature's ability
+		{"Waterlogged Hulk // Watertight Gondola", "f1/a0"},                  // a transformed artifact's ability
+		{"Tamiyo, Inquisitive Student // Tamiyo, Seasoned Scholar", "f1/a2"}, // a transformed planeswalker's loyalty ability
+		{"Thousand Moons Smithy // Barracks of the Thousand", "f1/t0"},       // a back-face trigger
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
 // TestStartGraveyardTargetIsExercised: a focus play that targets a card in a
 // graveyard (TgtZone$ Graveyard, or a ChangeZone from Origin$ Graveyard) was
 // read as met, so the start placed no such card (or only the basics a

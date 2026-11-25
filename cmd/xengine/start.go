@@ -61,14 +61,16 @@ type startFile struct {
 
 // startSeat is one seat's position, as card names.
 type startSeat struct {
-	Hand        []string       `json:"hand"`
-	Battlefield []string       `json:"battlefield"`
-	Graveyard   []string       `json:"graveyard"`
-	Exile       []string       `json:"exile"`
-	Library     []string       `json:"library"`
-	Tapped      []string       `json:"tapped"`
-	Counters    []startCounter `json:"counters"`
-	Life        *int32         `json:"life"`
+	Hand        []string `json:"hand"`
+	Battlefield []string `json:"battlefield"`
+	Graveyard   []string `json:"graveyard"`
+	Exile       []string `json:"exile"`
+	Library     []string `json:"library"`
+	Tapped      []string `json:"tapped"`
+	// BackFace names battlefield cards that enter on their back face.
+	BackFace []string       `json:"back_face"`
+	Counters []startCounter `json:"counters"`
+	Life     *int32         `json:"life"`
 }
 
 type startCounter struct {
@@ -252,6 +254,10 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 	var bf []int
 	var frontCost []string
 	add := func(names []string, into *[]int, bfZone bool) error {
+		backs := map[string]int{} // BackFace names left to place, by name
+		for _, n := range s.BackFace {
+			backs[n]++
+		}
 		for _, n := range names {
 			c, ok := reg.Lookup(n)
 			if !ok || len(c.Faces) == 0 {
@@ -260,7 +266,12 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 			if bfZone {
 				// gorge and Forge place such a card differently (scen.FieldBlock),
 				// so the setup could never agree: refuse the file.
-				if why := scen.FieldBlock(c.Faces[0]); why != "" {
+				face := c.Faces[0]
+				if backs[n] > 0 && len(c.Faces) > 1 {
+					face = c.Faces[1] // it enters transformed: the back face is the permanent
+					backs[n]--
+				}
+				if why := scen.FieldBlock(face); why != "" {
 					return fmt.Errorf("start %s: %q cannot be listed on the battlefield (%s): list it in hand", name, n, why)
 				}
 			}
@@ -269,8 +280,7 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 				bf = append(bf, len(d.Cards))
 			}
 			// the front face: a start naming a double-faced card by its back face
-			// places it front-up, and a transformed focus card stops matching the
-			// focus (BackFace starts are XP11)
+			// places it front-up unless the seat's BackFace lists it (bound below)
 			d.Cards = append(d.Cards, c.Faces[0].Name)
 			frontCost = append(frontCost, c.Faces[0].ManaCost)
 		}
@@ -323,6 +333,17 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 		x, y := ss.Counters[a], ss.Counters[b]
 		return x.Card < y.Card || x.Card == y.Card && x.Kind < y.Kind
 	})
+	backed := map[int]bool{}
+	for _, n := range s.BackFace {
+		i, err := bind(n, backed)
+		if err != nil {
+			return d, ss, err
+		}
+		if c, _ := reg.Lookup(n); c == nil || len(c.Faces) < 2 {
+			return d, ss, fmt.Errorf("start %s: %q has no back face", name, n)
+		}
+		ss.BackFace = append(ss.BackFace, i)
+	}
 	ss.Life = s.Life
 	// Filler: the colours of the listed cards' front-face costs, WUBRG order,
 	// one basic each round robin; Plains when there is no coloured symbol.

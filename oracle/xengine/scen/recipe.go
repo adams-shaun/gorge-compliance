@@ -187,13 +187,61 @@ func newStart(card, key string) *StartFile {
 
 func seat(n int) *int { return &n }
 
+// keyFace is the face index a key plays: the f<N> of an activate or trigger key
+// (m is its match), the <N> of static#N.S or combat#N.attack; 0 for cast and land.
+func keyFace(key string, m []string) int {
+	if m == nil {
+		if sm := staticKeyRE.FindStringSubmatch(key); sm != nil {
+			m = sm
+		} else if cm := combatKeyRE.FindStringSubmatch(key); cm != nil {
+			m = cm
+		}
+	}
+	if m == nil {
+		return 0
+	}
+	fi, _ := strconv.Atoi(m[1])
+	return fi
+}
+
+// backFaceRefusal is why a key of face fi cannot start from a card on the
+// battlefield, or "". gorge's StartSeat.BackFace enters a card on its second
+// face, so only a two-faced transforming or modal card's back face is
+// placeable, and only when that face is a permanent. Flip, meld, specialize,
+// split and adventure faces have no such placement.
+func backFaceRefusal(c *cards.Card, fi int) string {
+	switch {
+	case fi == 0:
+		return ""
+	case fi >= len(c.Faces):
+		return "no-generator:face"
+	case fi != 1 || len(c.Faces) != 2 || c.AlternateMode != "DoubleFaced" && c.AlternateMode != "Modal":
+		mode := strings.ToLower(c.AlternateMode)
+		if mode == "" {
+			mode = "other"
+		}
+		return "no-generator:face:" + mode
+	}
+	if why := FieldBlock(c.Faces[1]); why != "" {
+		return "no-generator:face:" + why
+	}
+	return ""
+}
+
 // recipe is the start-file path: the placements by key family, then the needs.
 func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, fam string, m []string,
 	sa *cards.SA, trig *cards.Trigger, hist string, opt Options) (Result, error) {
-	face := c.Faces[0]
+	fi := keyFace(key, m)
+	if why := backFaceRefusal(c, fi); why != "" {
+		return refuse(why)
+	}
+	face := c.Faces[fi]
 	f := newStart(card, key)
 	p0, p1 := &f.Setup.P0, &f.Setup.P1
 	generic := basicFor(face.ManaCost)
+	if face.ManaCost == "" {
+		generic = basicFor(c.Faces[0].ManaCost) // a transformed face has no cost: its colours are the front's
+	}
 	onBF := func() (Result, bool) { // the checks of every recipe that places the card on the battlefield
 		if asEnters(face) {
 			r, _ := refuse("as-enters")
@@ -223,9 +271,6 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			return refuse(why)
 		}
 	case "activate", "trigger":
-		if m[1] != "0" {
-			return refuse("no-generator:face")
-		}
 		if r, ok := onBF(); ok {
 			return r, nil
 		}
@@ -256,6 +301,10 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		case "ChangesZone":
 			switch {
 			case trig.Params["Destination"] == "Battlefield" && selfCard(trig):
+				if fi > 0 {
+					// the card enters as its front face, or is cast as the back one
+					return refuse("no-generator:face:back-etb")
+				}
 				// An ETB is a cast: the card is not on the battlefield yet.
 				p0.Hand = []string{card}
 				p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
@@ -316,6 +365,20 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			return refuse(why)
 		}
 	}
+	if fi > 0 {
+		// a back-face key is played on the back face of the battlefield card:
+		// the first listed copy enters transformed (rules.StartSeat.BackFace)
+		placed := false
+		for _, sd := range []*StartSeat{p0, p1} {
+			if !placed && slices.Contains(sd.Battlefield, card) {
+				sd.BackFace = append(sd.BackFace, card)
+				placed = true
+			}
+		}
+		if !placed {
+			return refuse("no-generator:face:not-on-battlefield")
+		}
+	}
 	for _, bf := range [][]string{p0.Battlefield, p1.Battlefield} {
 		for _, n := range bf {
 			if n != card {
@@ -352,7 +415,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 	}
 	placeGraveTargets(reg, b, face, card, fam, sa, trig, f)
-	if why, err := focusPlayRefusal(reg, b, sa, card, f); err != nil || why != "" {
+	if why, err := focusPlayRefusal(reg, b, face, sa, card, f); err != nil || why != "" {
 		if err != nil {
 			return Result{}, err
 		}
