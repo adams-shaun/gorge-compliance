@@ -442,14 +442,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /** Rule text folded for a wording-tolerant prefix match: markup dropped,
-     * lower case, the source's name as "{this}", whitespace collapsed, and a
-     * leading "when " / "whenever " as one token. */
+     * lower case, the source's name as "{this}", whitespace collapsed, XMage's
+     * mid-sentence " of their choice" elided (Smokestack: "sacrifices a
+     * permanent of their choice for each soot counter", Forge's wording
+     * omits it), and a leading "when " / "whenever " as one token. */
     static String triggerKeyForm(String text, String sourceName) {
         String t = text.replaceAll("<[^<>]*>", "").toLowerCase(java.util.Locale.ROOT);
         if (sourceName != null && !sourceName.isEmpty()) {
             t = t.replace(sourceName.toLowerCase(java.util.Locale.ROOT), "{this}");
         }
         t = t.replaceAll("\\s+", " ").trim();
+        t = t.replace(" of their choice", "");
         if (t.startsWith("whenever ")) {
             t = "when " + t.substring("whenever ".length());
         }
@@ -506,7 +509,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * Forge's TriggerDescription$, which words the same trigger "When ..."
          * where XMage prints "Whenever ..." (Hero of Oxid Ridge) and ends the
          * key at a period where XMage's text continues (Nefarox's "sacrifices
-         * a creature of their choice."). An unmatched head is a strict
+         * a creature of their choice.") and omits XMage's mid-sentence "of their
+         * choice" (Smokestack's "sacrifices a permanent of their choice for each
+         * soot counter"; triggerKeyForm elides it). An unmatched head is a strict
          * "Missing CHOICE def" there. When the head prefix-matches no ability,
          * take the one ability whose normalised rule starts with the normalised
          * key, or -- for a delayed trigger, whose rule text puts the subject first
