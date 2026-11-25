@@ -56,6 +56,17 @@ func castDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult) []r
 // allocation, so restoring the forced lone-target division would leave it
 // unconsumed.
 func castDivisionsFor(reg *cards.Registry, sc Scenario, res rules.OracleResult, xmage bool) []rules.OracleDecision {
+	ds := castSpellDivisions(reg, sc, res, xmage)
+	if xmage {
+		// A divided TRIGGER's root ask is the XMage view's alone (see
+		// markPlacedTriggerDivisions); the Forge contract stays untouched.
+		ds = markPlacedTriggerDivisions(reg, sc, res, ds)
+	}
+	return ds
+}
+
+// castSpellDivisions is the cast-step half of castDivisionsFor.
+func castSpellDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult, xmage bool) []rules.OracleDecision {
 	ds := res.Decisions
 	if reg == nil {
 		return ds
