@@ -2658,3 +2658,70 @@ func TestStarttappedtarget(t *testing.T) {
 		})
 	}
 }
+
+// TestGenerateRefusesVariantOnlyCard covers the Forge variant-only placeholder:
+// an Un-card whose main face Oracle is `<Unsupported Variant>` (Garbage
+// Elemental: the real card is one of the Variant: faces gorge never parses)
+// must be refused, never generated as the empty main face. The variant and
+// control scripts are inline strings, not testdata files: a committed file
+// whose first line is `Name:` and which carries an `Oracle:` line is a Forge
+// card script as the boundary guards define one.
+func TestGenerateRefusesVariantOnlyCard(t *testing.T) {
+	const variantScript = "Name:Garbage Elemental\nManaCost:4 R\nTypes:Creature Elemental\nOracle:<Unsupported Variant>\n" +
+		"\nVariant:C:PT:3/2\nVariant:C:K:Battle cry\n" +
+		"Variant:C:T:Mode$ ChangesZone | Origin$ Any | Destination$ Battlefield | ValidCard$ Card.Self | Execute$ TrigRoll\n" +
+		"Variant:C:SVar:TrigRoll:DB$ RollDice | ResultSVar$ Result | Sides$ 6 | Amount$ 2\n" +
+		"Variant:C:Oracle:When Garbage Elemental enters, roll two six-sided dice. Create a number of 1/1 red Goblin creature tokens equal to the difference between those results.\n"
+	controlScript := strings.Replace(variantScript, "Oracle:<Unsupported Variant>", "Oracle:When Garbage Elemental enters, roll two six-sided dice.", 1)
+
+	reg := cards.NewRegistry()
+	controlReg := cards.NewRegistry()
+	addScript := func(r *cards.Registry, name, src string) {
+		t.Helper()
+		c, diags := cards.ParseBytes(name+".txt", []byte(src))
+		if len(diags) != 0 {
+			t.Fatalf("%s: diags %v", name, diags)
+		}
+		r.Add(c)
+	}
+	addScript(reg, "Garbage Elemental", variantScript)
+	addScript(reg, "Vanilla Ogre", "Name:Vanilla Ogre\nManaCost:2\nTypes:Creature Ogre\nPT:2/2\nOracle:x\n")
+	addScript(controlReg, "Garbage Elemental", controlScript)
+	// A builder over the small registry: the refusal fires before any
+	// certdeck use, but the control and vanilla generations run the recipe,
+	// which reads b.Types().
+	vb := certdeck.NewBuilder(reg, nil)
+	cb := certdeck.NewBuilder(controlReg, nil)
+
+	for _, prefer := range []string{"auto", "start"} {
+		res, err := Generate(reg, nil, "Garbage Elemental", "cast", Options{Prefer: prefer})
+		if err != nil {
+			t.Fatalf("prefer %s: %v", prefer, err)
+		}
+		if res.Path != PathRefused || res.Reason != "variant_only" {
+			t.Errorf("prefer %s: path %q reason %q, want refused/variant_only", prefer, res.Path, res.Reason)
+		}
+		if res.Start != nil || res.Steps != nil {
+			t.Errorf("prefer %s: refused result carries a payload", prefer)
+		}
+	}
+
+	// A real Oracle on the same face generates (the control proves the check is
+	// the placeholder, not the Variant: lines or the card shape).
+	res, err := Generate(controlReg, cb, "Garbage Elemental", "cast", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatalf("control: %v", err)
+	}
+	if res.Path == PathRefused && strings.HasPrefix(res.Reason, "variant_only") {
+		t.Errorf("control refused as %q: the placeholder check over-fires", res.Reason)
+	}
+
+	// ... and a card with no placeholder at all is untouched.
+	res, err = Generate(reg, vb, "Vanilla Ogre", "cast", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatalf("vanilla: %v", err)
+	}
+	if res.Path != PathStart || res.Reason != "" {
+		t.Errorf("vanilla: path %q reason %q, want start", res.Path, res.Reason)
+	}
+}
