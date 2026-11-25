@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 105aea98-8eb9-4fb2-a0cb-7c7513317c5b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Twining Twins/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 105aea98-8eb9-4fb2-a0cb-7c7513317c5b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Twining Twins/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 105cea6e-18e9-4dec-a533-0dca4d41320b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1063822f-47d3-42e9-8a21-f62b12609fe1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+1063822f-47d3-42e9-8a21-f62b12609fe1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 1063822f-47d3-42e9-8a21-f62b12609fe1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fatehold Chronologist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1063822f-47d3-42e9-8a21-f62b12609fe1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fatehold Chronologist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1065eceb-9150-4ea4-bd6d-acaabda14e00	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
@@ -199,7 +199,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10d8f29a-d483-4f06-bc13-d41d62847ffe	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 10db57b4-f895-4514-b610-2252ba676353	cast	cast-resolve	agreed	-	X	scen	1	0	Bullseye, Death Dealer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10db57b4-f895-4514-b610-2252ba676353	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:bullseye-death-dealer:f0a0:s1,f:xs:XP:bullseye-death-dealer:f0a0:s1	-	-	-	23c4009444b0	-	486eb5534228	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-10db57b4-f895-4514-b610-2252ba676353	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+10db57b4-f895-4514-b610-2252ba676353	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 10dda10f-2549-47e5-9a8b-fb414cf38d3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:memorial-vault:cast:s1,f:xs:XP:memorial-vault:cast:s1	-	-	-	23c4009444b0	-	49f16e5bfe94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10dda10f-2549-47e5-9a8b-fb414cf38d3f	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:memorial-vault:f0a0:s1,f:xs:XP:memorial-vault:f0a0:s1	-	-	-	23c4009444b0	-	49f16e5bfe94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10e0b563-4dfc-4530-a010-0ba40bdf02ac	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:pinnacle-starcage:f0t0:s2,f:xs:XP:pinnacle-starcage:f0t0:s2	-	-	-	e07cf3a05ba5	-	dff3cfb96dbd	-	-	2026-11-24	xproof
@@ -220,7 +220,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10fc2009-4212-47c6-8a97-ab0f45c1f91b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Avengers Hangar/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10fc2009-4212-47c6-8a97-ab0f45c1f91b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:avengers-hangar:land:s1,f:xs:XP:avengers-hangar:land:s1	-	-	-	23c4009444b0	-	8302cd40d3a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10fc2009-4212-47c6-8a97-ab0f45c1f91b	land	land	agreed	-	FX	start	2	0	x:xs:XP:avengers-hangar:land:s1,f:xs:XP:avengers-hangar:land:s1	-	-	-	23c4009444b0	-	8302cd40d3a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-10fd868f-45b3-4e2f-89d9-5c0b8a92f9fe	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+10fd868f-45b3-4e2f-89d9-5c0b8a92f9fe	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 10fe402e-8d6f-4058-9f42-86f229055359	cast	cast-resolve	agreed	-	FX	scen	2	0	Friendly Neighborhood/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10fe402e-8d6f-4058-9f42-86f229055359	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10fe402e-8d6f-4058-9f42-86f229055359	static#0.0	static#0.0	agreed	-	X	scen	1	0	Friendly Neighborhood/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

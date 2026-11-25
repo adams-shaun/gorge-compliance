@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d96840e-f9b3-4c86-8f59-f12e5736318f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:voracious-greatshark:cast:s1,f:xs:XP:voracious-greatshark:cast:s1	-	-	-	23b491658465	-	0bb1a2700d20	-	-	2026-11-24	xproof
 5d96840e-f9b3-4c86-8f59-f12e5736318f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:voracious-greatshark:cast:s1,f:xs:XP:voracious-greatshark:cast:s1	-	-	-	23b491658465	-	0bb1a2700d20	-	-	2026-11-24	xproof
 5d998c09-7d89-4265-ada4-6d80cbf56dae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d998c09-7d89-4265-ada4-6d80cbf56dae	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+5d998c09-7d89-4265-ada4-6d80cbf56dae	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:cast:s1,f:xs:XP:syr-alin-the-lion-s-claw:cast:s1	-	-	-	23b491658465	-	d4670641a491	-	-	2026-11-24	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:combat0.attack:s1,f:xs:XP:syr-alin-the-lion-s-claw:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	d4670641a491	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:combat0.block:s1,f:xs:XP:syr-alin-the-lion-s-claw:combat0.block:s1	-	-	-	fb9d3088f0bf	-	d4670641a491	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5db492f2-21c0-4eee-843a-509fa0d3a327	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rocket-powered-goblin-glider:cast:s1,f:xs:XP:rocket-powered-goblin-glider:cast:s1	-	-	-	23c4009444b0	-	565741e16a1e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:rocket-powered-goblin-glider:f0a0:s1,f:xs:XP:rocket-powered-goblin-glider:f0a0:s1	-	-	-	23c4009444b0	-	565741e16a1e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-5db9121d-934a-44f1-b178-b389c6595af7	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+5db9121d-934a-44f1-b178-b389c6595af7	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 5db9121d-934a-44f1-b178-b389c6595af7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rocket-Powered Goblin Glider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5dba7746-c087-4ec1-92ca-ab9882dea24d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:great-oak-guardian:f0t0:s1,f:xs:XP:great-oak-guardian:f0t0:s1	-	-	-	8c0bd19283bb	-	6f4862305043	-	-	2026-11-24	xproof
 5dba7746-c087-4ec1-92ca-ab9882dea24d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:great-oak-guardian:f0t0:s1,f:xs:XP:great-oak-guardian:f0t0:s1	-	-	-	8c0bd19283bb	-	6f4862305043	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ddcc7a5-c869-49fd-baa1-ab5f5f456f90	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5de0769e-5141-42d5-aaa6-549cfc154de8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:highway-robber:f0t0:s1,f:xs:XP:highway-robber:f0t0:s1	-	-	-	25696bf19d5b	-	3079300dbaae	-	-	2026-11-24	xproof
 5de0769e-5141-42d5-aaa6-549cfc154de8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:highway-robber:f0t0:s1,f:xs:XP:highway-robber:f0t0:s1	-	-	-	25696bf19d5b	-	3079300dbaae	-	-	2026-11-24	xproof
-5de32ec7-3085-4b6b-a52e-5a1b3fdf07d3	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+5de32ec7-3085-4b6b-a52e-5a1b3fdf07d3	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 5de50aa5-3b30-4d7d-9203-bc8fc0f8fb34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5de63529-7dea-4018-bf46-afb4bc8b69fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5de63529-7dea-4018-bf46-afb4bc8b69fd	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:krark-clan-ogre:f0a0:s1,f:xs:XP:krark-clan-ogre:f0a0:s1	-	-	-	23c4009444b0	-	26e9e8d53a4f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

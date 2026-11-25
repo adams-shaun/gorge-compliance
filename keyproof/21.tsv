@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 215dfa88-b130-44df-9cfc-f1f0e4a36f4d	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 215dfa88-b130-44df-9cfc-f1f0e4a36f4d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 215dfa88-b130-44df-9cfc-f1f0e4a36f4d	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-2160aed4-5a7a-4eca-96b5-707204fa73bb	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+2160aed4-5a7a-4eca-96b5-707204fa73bb	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 21613fac-d959-44ba-9bcb-0a30b5e6545e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-god-s-oracle:cast:s1,f:xs:XP:storm-god-s-oracle:cast:s1	-	-	-	d864b561c9cb	-	440d61aeb822	-	-	2026-11-24	xproof
 21613fac-d959-44ba-9bcb-0a30b5e6545e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:storm-god-s-oracle:f0a0:s1,f:xs:XP:storm-god-s-oracle:f0a0:s1	-	-	-	d864b561c9cb	-	440d61aeb822	-	-	2026-11-24	xproof
 21613fac-d959-44ba-9bcb-0a30b5e6545e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:storm-god-s-oracle:f0t0:s1,f:xs:XP:storm-god-s-oracle:f0t0:s1	-	-	-	d864b561c9cb	-	440d61aeb822	-	-	2026-11-24	xproof
@@ -124,9 +124,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 21b520c6-c94a-475a-a824-dd96394ea55b	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:conjurer-s-mantle:f0a0:s1,f:xs:XP:conjurer-s-mantle:f0a0:s1	-	-	-	23c4009444b0	-	b807f8384e6e	-	-	2026-11-25	xproof
 21b520c6-c94a-475a-a824-dd96394ea55b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:conjurer-s-mantle:f0a0:s1,f:xs:XP:conjurer-s-mantle:f0a0:s1	-	-	-	23c4009444b0	-	b807f8384e6e	-	-	2026-11-25	xproof
 21b8192e-46a2-4a6a-abd5-3a074efa30a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-21b8192e-46a2-4a6a-abd5-3a074efa30a9	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+21b8192e-46a2-4a6a-abd5-3a074efa30a9	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 21b8d59f-a90d-44ff-a2e3-9f439ac3e14a	cast	cast-resolve	agreed	-	X	scen	1	0	Semester Foreseer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-21b8d59f-a90d-44ff-a2e3-9f439ac3e14a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+21b8d59f-a90d-44ff-a2e3-9f439ac3e14a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 21c66372-8ae8-447c-92df-b56c9ffebd43	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Locus Cobra"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 21c66372-8ae8-447c-92df-b56c9ffebd43	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 21c768fa-4f1a-4a1a-abb9-e69e17426233	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shimmerwing-chimera:f0t0:s1,f:xs:XP:shimmerwing-chimera:f0t0:s1	-	-	-	3aa6ded33acb	-	453210181ed2	-	-	2026-11-25	xproof
