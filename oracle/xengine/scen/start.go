@@ -73,6 +73,13 @@ type StartFocus struct {
 	// Times is how many times the focus takes its action (0 or absent: once):
 	// "whenever you cast your second spell each turn" is two casts.
 	Times int `json:"times,omitempty"`
+	// Attack and Block are the scripted combat the focus play waits for: the
+	// active seat attacks with exactly Attack, the defending seat blocks it
+	// with exactly Block (no blocks when "" while Attack is set), and only
+	// then does the focus seat take its play ("target attacking creature",
+	// "target creature blocking this").
+	Attack string `json:"attack,omitempty"`
+	Block  string `json:"block,omitempty"`
 }
 
 // Marshal is the file's bytes: indented JSON and a final newline.
