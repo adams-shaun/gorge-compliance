@@ -199,7 +199,8 @@ func TestStartSeedBase(t *testing.T) {
 // reads them. Honest Work enchants a creature an opponent controls (the p1
 // Kobolds of Kher Keep certdeck already places), and Mabel's removal targets
 // another creature or planeswalker; both counter needs are P1P1, not the
-// literal All/Any the followers refuse, and sit on the opponent's creature.
+// literal All/Any the followers refuse, and sit on the opponent's creature or
+// planeswalker.
 func TestStartCounterBearer(t *testing.T) {
 	reg, b := certdeckBuilder(t)
 	for _, tc := range []struct {
@@ -208,7 +209,9 @@ func TestStartCounterBearer(t *testing.T) {
 		on        string
 	}{
 		{"Honest Work", "f0/t0", 1, "Kobolds of Kher Keep"},
-		{"Mabel, Bitter Recluse", "f0/t0", 1, "Shifting Wall"},
+		// certdeck's first pick, Shifting Wall, is a 0/0 X creature that dies when a
+		// start places it (scen.deadOnArrival): the next pick is a planeswalker
+		{"Mabel, Bitter Recluse", "f0/t0", 1, "Ajani Resolute"},
 	} {
 		t.Run(tc.card, func(t *testing.T) {
 			res, err := scen.Generate(reg, b, tc.card, tc.key, scen.Options{Prefer: "start"})
@@ -234,8 +237,8 @@ func TestStartCounterBearer(t *testing.T) {
 				t.Errorf("counter bearer %q is not on seat %d's battlefield %v", got.Card, tc.seat, seats[tc.seat].Battlefield)
 			}
 			c, ok := reg.Lookup(got.Card)
-			if !ok || len(c.Faces) == 0 || !c.Faces[0].IsCreature() {
-				t.Errorf("counter bearer %q is not a creature", got.Card)
+			if !ok || len(c.Faces) == 0 || !(c.Faces[0].IsCreature() || c.Faces[0].IsPlaneswalker()) {
+				t.Errorf("counter bearer %q is not a creature or planeswalker", got.Card)
 			}
 			if other := seats[1-tc.seat].Counters; len(other) != 0 {
 				t.Errorf("seat %d counters %+v, want none", 1-tc.seat, other)
@@ -292,5 +295,89 @@ func TestStartFocusTimes(t *testing.T) {
 		if fo.Times != tc.want || fo.Card != "Memnite" || fo.Kind != "cast" {
 			t.Errorf("focus %+v, want Memnite cast times %d", fo, tc.want)
 		}
+	}
+}
+
+// TestStartRefusesUnofferedFocus: a start whose focus seat is never offered the
+// focus play is refused, not written. Burning Oil targets an attacking or
+// blocking creature and nothing attacks at main 1, so the cast is never offered
+// at any priority; Shock off the same lands is offered and cast, and its games
+// are written.
+func TestStartRefusesUnofferedFocus(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	for _, c := range []struct {
+		card    string
+		written bool
+	}{{"Burning Oil", false}, {"Shock", true}} {
+		t.Run(c.card, func(t *testing.T) {
+			in := t.TempDir()
+			body := `{"format":"xproof-start-1","card":"` + c.card + `","key":"cast","players":2,"active":0,` +
+				`"max_turns":1,"setup":{"p0":{"hand":["` + c.card + `"],"battlefield":["Mountain","Mountain"]},` +
+				`"p1":{"battlefield":["Memnite"]}},"filler":"basics","seeds":2,"focus":{"seat":0,"card":"` + c.card + `","kind":"cast"}}`
+			if err := os.WriteFile(filepath.Join(in, "a.json"), []byte(body), 0o644); err != nil {
+				t.Fatal(err)
+			}
+			out := t.TempDir()
+			if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+				t.Fatal(err)
+			}
+			items, refused := 0, 0
+			if err := readLines(filepath.Join(out, "items.jsonl"), func([]byte) error { items++; return nil }); err != nil {
+				t.Fatal(err)
+			}
+			if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+				var r lowerRow
+				if err := json.Unmarshal(b, &r); err != nil {
+					return err
+				}
+				if r.Status == statusRefused && slices.Equal(r.Reasons, []string{reasonStartNotExercised}) {
+					refused++
+				}
+				return nil
+			}); err != nil {
+				t.Fatal(err)
+			}
+			if c.written && (items != 2 || refused != 0) {
+				t.Errorf("items %d refused %d, want 2 items and no refusal", items, refused)
+			}
+			if !c.written && (items != 0 || refused != 2) {
+				t.Errorf("items %d refused %d, want no item and %d refusals %q", items, refused, 2, reasonStartNotExercised)
+			}
+		})
+	}
+}
+
+// TestStartTransformingDFC: a start scen yields for a transforming double-faced
+// card loads in play. scen lists the card on a battlefield, tapped or as a
+// counter bearer by its joined name "A // B" while startDeck deals its front
+// face, so binding a tapped/counter entry must resolve the name the same way.
+func TestStartTransformingDFC(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, tc := range []struct{ card, key string }{
+		{"Treasure Map // Treasure Cove", "f0/a0"}, // counter bearer
+		{"Arcee, Sharpshooter // Arcee, Acrobatic Coupe", "cast"},
+		{"Brass's Tunnel-Grinder // Tecutlan, the Searing Rift", "cast"},
+		{"Aang, at the Crossroads // Aang, Destined Savior", "cast"},
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, tc.card, tc.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			raw, err := json.Marshal(res.Start)
+			if err != nil {
+				t.Fatal(err)
+			}
+			dir := t.TempDir()
+			if err := os.WriteFile(filepath.Join(dir, "x.start.json"), raw, 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if err := playStart(reg, []string{dir}, "XP", t.TempDir(), false); err != nil {
+				t.Fatalf("play -start: %v", err)
+			}
+		})
 	}
 }

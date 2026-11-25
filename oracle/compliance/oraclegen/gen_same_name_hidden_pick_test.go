@@ -51,6 +51,91 @@ func TestSameNameHiddenPickNeverBareName(t *testing.T) {
 	}
 }
 
+// TestSameNameHiddenPickContiguousGraveyardKeepsBareName pins xproof's two
+// Acolyte of Affliction finds (xs:XP:acolyte-of-affliction:cast:s2 and
+// :f0t0:s2): the ETB mills two Forests, then asks "you may return a permanent
+// card from your graveyard to your hand" over seven setup Swamps plus the two
+// milled Forests. Gorge picks p0:Swamp#4 (the first graveyard Swamp, ref
+// rank-derived), so the name-only classifier calls the pick unanswerable and
+// the generic route withheld it; XMage still posed its up-to-one pick with an
+// empty CHOICE queue and strict-missed. The seven Swamps are one contiguous
+// run in the graveyard, so removing any one leaves the same name sequence:
+// the bare name is an exact answer for the outcome gorge produced.
+func TestSameNameHiddenPickContiguousGraveyardKeepsBareName(t *testing.T) {
+	d := rules.OracleDecision{
+		Step: 8, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "hidden_pick",
+		Options: 9, Min: 0, Max: 1,
+		Picks: []string{"Swamp"}, PickRefs: []string{"p0:Swamp#4"}, PickIdx: []int{0},
+		PickKinds: []string{"hidden_pick"},
+		OptionRefs: []string{"p0:Swamp#4", "p0:Swamp#5", "p0:Swamp#6", "p0:Swamp#7",
+			"p0:Swamp#8", "p0:Swamp#9", "p0:Swamp#10", "p0:Forest#2", "p0:Forest#3"},
+		PickRefsInexact: []bool{true},
+	}
+	snaps := make([]rules.OracleSnapshot, 10)
+	// Checkpoint before the step: the seven setup Swamps.
+	snaps[8] = rules.OracleSnapshot{Players: []rules.OracleSnapPlayer{
+		{Seat: 0, Graveyard: []string{"Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp"}},
+	}}
+	// After it: the milled Forests joined, one Swamp went to hand.
+	snaps[9] = rules.OracleSnapshot{Players: []rules.OracleSnapPlayer{
+		{Seat: 0, Graveyard: []string{"Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Swamp", "Forest", "Forest"}},
+	}}
+	// Shape alone still withholds; the snapshots prove the contiguous run.
+	if !hiddenPickUnanswerable(d) {
+		t.Fatalf("fixture must be an unanswerable same-name pick without snapshots")
+	}
+	if hiddenPickWithheld(d, snaps) {
+		t.Fatalf("a contiguous same-name graveyard run was withheld")
+	}
+	got := xanswersSetup([]rules.OracleDecision{d}, 10, nil, nil, nil, nil, xanswersExtra{snaps: snaps})
+	if len(got[8]) != 1 || got[8][0].Value != "Swamp" {
+		t.Fatalf("contiguous-graveyard answer = %+v, want one bare Swamp", got[8])
+	}
+
+	// A filtered ask (only some graveyard cards offered) still reads the run
+	// from the graveyard itself, not from the offered list: the Forest is not
+	// offered, but the two Grizzly Bears stay adjacent and interchangeable.
+	filtered := rules.OracleDecision{
+		Step: 8, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "hidden_pick",
+		Options: 3, Min: 0, Max: 1,
+		Picks: []string{"Grizzly Bears"}, PickRefs: []string{"p0:Grizzly Bears#4"}, PickIdx: []int{0},
+		PickKinds:       []string{"hidden_pick"},
+		OptionRefs:      []string{"p0:Grizzly Bears#4", "p0:Grizzly Bears#5", "p0:Elvish Mystic#2"},
+		PickRefsInexact: []bool{true},
+	}
+	snaps[8].Players[0].Graveyard = []string{"Grizzly Bears", "Grizzly Bears", "Forest"}
+	snaps[9].Players[0].Graveyard = []string{"Forest", "Grizzly Bears"}
+	if hiddenPickWithheld(filtered, snaps) {
+		t.Fatalf("a contiguous same-name run behind a filtered ask was withheld")
+	}
+	got = xanswersSetup([]rules.OracleDecision{filtered}, 10, nil, nil, nil, nil, xanswersExtra{snaps: snaps})
+	if len(got[8]) != 1 || got[8][0].Value != "Grizzly Bears" {
+		t.Fatalf("filtered-graveyard answer = %+v, want one bare Grizzly Bears", got[8])
+	}
+
+	// Pothole Mole: two Forests either side of a Swamp are not one run, so
+	// removing either leaves a different name sequence and the pick stays
+	// withheld.
+	pothole := rules.OracleDecision{
+		Step: 8, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Resume: "hidden_pick",
+		Options: 3, Min: 0, Max: 1,
+		Picks: []string{"Forest"}, PickRefs: []string{"p0:Forest#4"}, PickIdx: []int{0},
+		PickKinds:       []string{"hidden_pick"},
+		OptionRefs:      []string{"p0:Forest#4", "p0:Swamp#4", "p0:Forest#5"},
+		PickRefsInexact: []bool{true},
+	}
+	snaps[8].Players[0].Graveyard = []string{"Forest", "Swamp", "Forest"}
+	snaps[9].Players[0].Graveyard = []string{"Swamp", "Forest"}
+	if !hiddenPickWithheld(pothole, snaps) {
+		t.Fatalf("a broken same-name graveyard run must stay withheld")
+	}
+	for _, xa := range xanswersSetup([]rules.OracleDecision{pothole}, 10, nil, nil, nil, nil, xanswersExtra{snaps: snaps}) {
+		for _, a := range xa {
+			t.Fatalf("broken-run hidden pick answer %+v scripted; want withheld", a)
+		}
+	}
+}
+
 // TestSameNameHiddenPickAllCopiesKeepsBareName pins DSK Greenhouse // Rickety
 // Gazebo (mill four, "return up to two permanent cards"): all four offered
 // objects are p0's Wastes, so which one gorge returns is invisible to the

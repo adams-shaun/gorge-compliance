@@ -315,3 +315,35 @@ func TestFocusBlockUnit(t *testing.T) {
 		t.Errorf("second block decision: %v, want the bot's", got)
 	}
 }
+
+// A plain cast focus taps its lands too: an instant the explore bot has no
+// reason to cast leaves them untapped, and a seat whose bot pays through
+// plans is offered the cast only once the pool covers it. The focus casts
+// Shock off one Mountain on turn 1 and reports it took the action once
+// (Options.FocusTook); a seat given no way to cast reports 0.
+func TestFocusPlainCastTapsLands(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	d0 := decks.Deck{Name: "p0", Colours: "R", Cards: []string{"Shock", "Mountain"}}
+	d1 := decks.Deck{Name: "p1", Colours: "W"}
+	for len(d0.Cards) < 40 {
+		d0.Cards = append(d0.Cards, "Mountain")
+	}
+	for len(d1.Cards) < 40 {
+		d1.Cards = append(d1.Cards, "Plains")
+	}
+	for _, c := range []struct {
+		name string
+		bf   []int
+		want int
+	}{{"a Mountain to tap", []int{1}, 1}, {"no land", nil, 0}} {
+		t.Run(c.name, func(t *testing.T) {
+			took := -1
+			start := &rules.StartSpec{Seats: []rules.StartSeat{{Hand: []int{0}, Battlefield: c.bf}, {}}}
+			opt := Options{Set: "XP", MaxTurns: 2, Start: start, FocusTook: &took, Focus: &Focus{Seat: 0, Card: "Shock", Kind: "cast"}}
+			play(t, reg, [2]decks.Deck{d0, d1}, rules.SeedForStarter(1, 2, 0), opt)
+			if took != c.want {
+				t.Errorf("FocusTook %d, want %d", took, c.want)
+			}
+		})
+	}
+}

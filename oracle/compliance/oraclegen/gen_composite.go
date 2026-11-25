@@ -177,13 +177,23 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			bolsters[i] = true
 		}
 	}
+	// A Craft keyword's material exile is an "exilecost" pick in gorge but
+	// XMage's CraftAbility chooses it through chooseTarget: mark the
+	// decisions whose activated ability carries Keyword$ Craft, so pickQueue
+	// keeps their picks on the TARGET queue (craft_cost_pick.go).
+	crafts := map[int]bool{}
+	for i, d := range ds {
+		if craftMaterialPick(reg, sc, res, d) {
+			crafts[i] = true
+		}
+	}
 	sources := map[int][]string{}
 	for _, d := range ds {
 		if _, done := sources[d.Step]; !done {
 			sources[d.Step] = stepSourceNames(sc, res.Snapshots, d.Step)
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, tapThenUntap: tapFirst, bolster: bolsters, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, tapThenUntap: tapFirst, bolster: bolsters, craft: crafts, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that

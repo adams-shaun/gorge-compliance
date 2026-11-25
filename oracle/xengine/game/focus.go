@@ -122,13 +122,15 @@ func (s *focusState) holdPass(d decision.Decision, in decision.Intent) decision.
 	return in
 }
 
-// manaFor is, for a cast focus with a Mode (a kicked cast), the focus seat's
-// first activation of a land, or -1. Such a cast is never a planned payment (the
-// payment planner plans the card's own cost), and a seat whose bot pays
-// through plans is offered a cast option only once the pool covers it, so the
-// focus taps its lands (a forced start's mana sources: basics) one by one until the mode's option is offered.
+// manaFor is, for a cast focus, the focus seat's first activation of a land,
+// or -1. A seat whose bot pays through plans is offered a cast option only once
+// the pool covers it (an instant or a spell the bot has no reason to cast leaves
+// its lands untapped, and the cast is never offered; a kicked cast is never a
+// planned payment either, as the planner plans the card's own cost), so the
+// focus taps its lands (a forced start's mana sources: basics) one by one until
+// the option, the mode's when it has one, is offered.
 func (s *focusState) manaFor(d decision.Decision) int {
-	if s.f.Kind != "cast" || s.f.Mode == "" || int(d.Player) != s.f.Seat {
+	if s.f.Kind != "cast" || int(d.Player) != s.f.Seat {
 		return -1
 	}
 	for i, o := range d.Options {

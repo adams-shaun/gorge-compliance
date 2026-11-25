@@ -246,6 +246,49 @@ func soleAltCost(d rules.OracleDecision) bool {
 	return d.Kind == "choose_n" && len(d.Picks) == 1 && pickKind(d, 0) == "altaddcost" && d.AltPayable == 1
 }
 
+// altCostExilePick reports an AlternateAdditionalCost either-or ask XMage
+// still poses although gorge counted a single payable option: the option
+// gorge took is a fixed-size exile cost, or Forage (whose ForageCost pays
+// through an ExileFromGraveCost arm). XMage's OrCost.canPay checks each arm
+// in isolation -- the exile arm can always pay while a graveyard card is
+// legal, and a mana arm can pay from the pool -- so it asks whenever both
+// arms can pay on their own, even when the full cast cannot also afford the
+// alternative (Soaring Stoneglider's "exile two cards from your graveyard or
+// pay {1}{W}" and Feed the Cycle's "forage or pay {B}" over a pool that only
+// covers the printed cost). The ask is that chooseUse, so the generic yes/no
+// answer supplies option 0, and the exile pick itself is routed to makeChoose
+// by the fixed-size exilecost rule in pickQueue.
+func altCostExilePick(ds []rules.OracleDecision, i int) bool {
+	d := ds[i]
+	if d.Kind != "choose_n" || len(d.Picks) != 1 || pickKind(d, 0) != "altaddcost" || d.AltPayable != 1 {
+		return false
+	}
+	forage := strings.EqualFold(strings.TrimSpace(d.Picks[0]), "Forage")
+	for j := i + 1; j < len(ds) && sameAsker(d, ds[j]); j++ {
+		n := ds[j]
+		if n.Min <= 0 || n.Min != n.Max || len(n.Picks) == 0 {
+			continue
+		}
+		all := true
+		for k := range n.Picks {
+			if pickKind(n, k) != "exilecost" {
+				all = false
+				break
+			}
+		}
+		if !all {
+			continue
+		}
+		// The exile pick that follows directly is the alternative cost's own
+		// arm. A Forage arm asks its exile selection later in the same cast
+		// (after the spell's target), so it matches anywhere in the step.
+		if j == i+1 || forage {
+			return true
+		}
+	}
+	return false
+}
+
 // manaHoistAnswer is the choice-queue colour answer a mana colour pick
 // scripts, or "" when the decision is not exactly one colour option (the
 // generic choose_n path maps an "Add W" label through manaColourLabel).
@@ -745,7 +788,7 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// only the colour dialog that follows, so the boolean scripts
 		// nothing and the colour pick leads the queue.
 		return nil, true
-	case soleAltCost(d):
+	case soleAltCost(d) && !altCostExilePick(r.ds, i):
 		return as, true
 	case r.triggerCostWindow(i):
 		// The mana-activation window of a triggered "you may pay <cost>. If

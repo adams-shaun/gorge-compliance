@@ -434,36 +434,86 @@ func TestPrefixesGrantedAbility(t *testing.T) {
 	}
 }
 
-// TestPrepareRefusesSpelling: an item holding a card XMage spells differently
-// is refused, whichever zone it sits in; the same item without it is served.
+// TestPrepareRefusesSpelling: an item holding two cards XMage spells
+// differently is refused (the driver carries one spelling), whichever zone
+// they sit in; the same item without them is served.
 func TestPrepareRefusesSpelling(t *testing.T) {
 	reg, sp, ws, _ := prepared(t, 1)
-	var odd []string
-	for _, name := range []string{"Lim-D\u00fbl's Vault", "Fire"} {
-		if sp.Differs(reg, name) {
-			odd = append(odd, name)
+	names := []string{"Lim-D\u00fbl's Vault", "Fire"}
+	for _, name := range names {
+		if !sp.Differs(reg, name) {
+			t.Fatalf("%s: no differing XMage spelling", name)
 		}
 	}
-	if len(odd) == 0 {
-		t.Fatal("no known card with a differing XMage spelling")
+	w := ws[0]
+	l := w.l
+	l.Item.Setup = map[string]oraclegen.Seat{}
+	for k, s := range w.l.Item.Setup {
+		l.Item.Setup[k] = s
+	}
+	s := l.Item.Setup["p1"]
+	s.Graveyard = append(slices.Clone(s.Graveyard), names...)
+	l.Item.Setup["p1"] = s
+	_, ref := Prepare(reg, sp, l, w.g)
+	if ref == nil || ref.Reason != ReasonSpelling {
+		t.Fatalf("two differing cards: got %+v, want %s", ref, ReasonSpelling)
+	}
+	for _, name := range names {
+		if !strings.Contains(ref.Detail, name) {
+			t.Errorf("detail %q does not name %s", ref.Detail, name)
+		}
+	}
+	if _, ref := Prepare(reg, sp, w.l, w.g); ref != nil {
+		t.Errorf("control item refused: %+v", ref)
+	}
+}
+
+// TestPrepareStampsLoneXMageSpelling: an item whose one differing card is
+// Bartolom\u00e9 del Presidio is served with Card and XMageName stamped; an item
+// that already names another card or another XMage spelling is still refused.
+func TestPrepareStampsLoneXMageSpelling(t *testing.T) {
+	reg, sp, ws, _ := prepared(t, 1)
+	const corpus, xmage = "Bartolom\u00e9 del Presidio", "Bartolome del Presidio"
+	if got, ok := sp.XMage(reg, corpus); !ok || got != xmage {
+		t.Fatalf("XMage spelling of %s = %q, %v; want %q", corpus, got, ok, xmage)
 	}
 	w := ws[0]
-	for _, name := range odd {
+	build := func() lower.Lowered {
 		l := w.l
 		l.Item.Setup = map[string]oraclegen.Seat{}
 		for k, s := range w.l.Item.Setup {
 			l.Item.Setup[k] = s
 		}
 		s := l.Item.Setup["p1"]
-		s.Graveyard = append(slices.Clone(s.Graveyard), name)
+		s.Graveyard = append(slices.Clone(s.Graveyard), corpus)
 		l.Item.Setup["p1"] = s
-		_, ref := Prepare(reg, sp, l, w.g)
-		if ref == nil || ref.Reason != ReasonSpelling || !strings.Contains(ref.Detail, name) {
-			t.Errorf("%s in a graveyard: got %+v, want %s", name, ref, ReasonSpelling)
-		}
+		return l
 	}
-	if _, ref := Prepare(reg, sp, w.l, w.g); ref != nil {
-		t.Errorf("control item refused: %+v", ref)
+	// The extra card sits in p1's graveyard for the whole game: gorge's
+	// result shows it in every snapshot, so the rerun still agrees with it.
+	g := w.g
+	g.Snapshots = slices.Clone(g.Snapshots)
+	for i := range g.Snapshots {
+		g.Snapshots[i].Players = slices.Clone(g.Snapshots[i].Players)
+		pl := &g.Snapshots[i].Players[1]
+		pl.Graveyard = append(slices.Clone(pl.Graveyard), corpus)
+	}
+	got, ref := Prepare(reg, sp, build(), g)
+	if ref != nil {
+		t.Fatalf("lone differing card refused: %+v", ref)
+	}
+	if got.Card != corpus || got.XMageName != xmage {
+		t.Errorf("Card, XMageName = %q, %q; want %q, %q", got.Card, got.XMageName, corpus, xmage)
+	}
+	for name, mut := range map[string]func(*oraclegen.Item){
+		"other card":     func(it *oraclegen.Item) { it.Card = "Fire" },
+		"other spelling": func(it *oraclegen.Item) { it.XMageName = "Elsewhere" },
+	} {
+		l := build()
+		mut(&l.Item)
+		if _, ref := Prepare(reg, sp, l, g); ref == nil || ref.Reason != ReasonSpelling {
+			t.Errorf("%s: got %+v, want %s", name, ref, ReasonSpelling)
+		}
 	}
 }
 
