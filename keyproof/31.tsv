@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 312ce96b-6abe-4f72-a205-9b27c885a5fe	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:bramblesnap:cast:s1,f:xs:XP:bramblesnap:cast:s1	-	-	-	d864b561c9cb	-	375a4b251621	-	-	2026-11-24	xproof
 312dbc3a-3ffb-4ed2-a278-8950d8ce8c86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31324235-8a2b-4ce4-b0d4-6d947489b930	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31324235-8a2b-4ce4-b0d4-6d947489b930	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+31324235-8a2b-4ce4-b0d4-6d947489b930	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
 31338e24-a437-4587-acab-cec46be021e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31370fdf-c666-40d2-a7ff-3ba1dfe350cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tunneler-wurm:cast:s1,f:xs:XP:tunneler-wurm:cast:s1	-	-	-	fc71ca68c5ac	-	4aa8d6770628	-	-	2026-11-24	xproof
 31370fdf-c666-40d2-a7ff-3ba1dfe350cd	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:tunneler-wurm:f0a0:s1,f:xs:XP:tunneler-wurm:f0a0:s1	-	-	-	5b42d43d5d80	-	4aa8d6770628	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31f54f88-85a6-43f4-a6de-fb6ef5f0c38d	f0/t0	ChangesZone/Fabricate	agreed	-	FX	start	2	0	x:xs:XP:ambitious-aetherborn:f0t0:s1,f:xs:XP:ambitious-aetherborn:f0t0:s1	-	-	-	3aa6ded33acb	-	96365d4085ff	-	-	2026-11-25	xproof
 31f8dd0d-2495-4c37-a103-96f21164bda8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:wish-good-luck:cast:s1	-	-	-	23b491658465	-	bfc6b162048a	-	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	cast	cast-resolve	agreed	-	X	scen	1	0	Ashling, Rekindled/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
