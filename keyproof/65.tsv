@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6587a463-a108-4854-b6d1-944e89b8c8a4	land	land	agreed	-	FX	start	2	0	x:xs:XP:wooded-foothills:land:s1,f:xs:XP:wooded-foothills:land:s1	-	-	-	25696bf19d5b	-	d91f5f26365c	-	-	2026-11-24	xproof
 6588ea9a-658f-40d9-a64b-3a418ab81183	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6588ea9a-658f-40d9-a64b-3a418ab81183	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-6588ea9a-658f-40d9-a64b-3a418ab81183	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6588ea9a-658f-40d9-a64b-3a418ab81183	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 658bccf8-fe73-4d6a-b37b-7a58034e5e5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 658d54d4-e967-490c-b958-3743b3b1ef45	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rage-scarred-berserker:cast:s1,f:xs:XP:rage-scarred-berserker:cast:s1	-	-	-	ae86f6029288	-	d3073f315915	-	-	2026-11-24	xproof
 658d54d4-e967-490c-b958-3743b3b1ef45	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rage-scarred-berserker:cast:s1,f:xs:XP:rage-scarred-berserker:cast:s1	-	-	-	ae86f6029288	-	d3073f315915	-	-	2026-11-24	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65afedc9-9446-4417-8576-807279061342	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65afedc9-9446-4417-8576-807279061342	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 65b61373-835a-4b22-90d1-d019446e98f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65b61373-835a-4b22-90d1-d019446e98f7	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+65b61373-835a-4b22-90d1-d019446e98f7	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:jetting-glasskite:f0t0:s1,f:xs:XP:jetting-glasskite:f0t0:s1	-	-	-	4b8018a80bf0	-	c3af4e91c6ab	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 65b7a7ca-0e39-4612-9bcd-743bf903544a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65b7a7ca-0e39-4612-9bcd-743bf903544a	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 65b7a7ca-0e39-4612-9bcd-743bf903544a	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof

@@ -86,7 +86,7 @@ a0802918-e18a-4716-befb-96ae6667f2f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a0802918-e18a-4716-befb-96ae6667f2f3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0802918-e18a-4716-befb-96ae6667f2f3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a08189f2-1643-496a-8a91-74864528b4db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a08189f2-1643-496a-8a91-74864528b4db	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+a08189f2-1643-496a-8a91-74864528b4db	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 a08189f2-1643-496a-8a91-74864528b4db	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 a08475a6-1fac-4a3f-b343-aed16a61bc16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jhoira-s-toolbox:cast:s1,f:xs:XP:jhoira-s-toolbox:cast:s1	-	-	-	5f2128bf97e4	-	35e30688c176	-	-	2026-11-24	xproof
 a08475a6-1fac-4a3f-b343-aed16a61bc16	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:jhoira-s-toolbox:f0a0:s1,f:xs:XP:jhoira-s-toolbox:f0a0:s1	-	-	-	5f2128bf97e4	-	35e30688c176	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ a0abd957-01a0-4aa9-8fc8-0e6840d21606	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a0ace0db-1bd6-4b30-b0e2-d266967707d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0ace0db-1bd6-4b30-b0e2-d266967707d7	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:temple-elder:f0a0:s1,f:xs:XP:temple-elder:f0a0:s1	-	-	-	5f2128bf97e4	-	9dee651ae5b5	-	-	2026-11-24	xproof
 a0af158b-f42a-4022-a438-e0a2e1fd6d9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zendikar-resurgent:cast:s1,f:xs:XP:zendikar-resurgent:cast:s1	-	-	-	d864b561c9cb	-	56834daf38cc	-	-	2026-11-24	xproof
-a0af158b-f42a-4022-a438-e0a2e1fd6d9e	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+a0af158b-f42a-4022-a438-e0a2e1fd6d9e	f0/t0	TapsForMana	agreed	-	FX	start	2	0	x:xs:XP:zendikar-resurgent:f0t0:s1,f:xs:XP:zendikar-resurgent:f0t0:s1	-	-	-	4b8018a80bf0	-	56834daf38cc	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 a0af158b-f42a-4022-a438-e0a2e1fd6d9e	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:zendikar-resurgent:f0t1:s1,f:xs:XP:zendikar-resurgent:f0t1:s1	-	-	-	fb9d3088f0bf	-	56834daf38cc	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 a0b16b11-69d9-4e94-aae3-298aa44ce3d4	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 a0b16b11-69d9-4e94-aae3-298aa44ce3d4	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
