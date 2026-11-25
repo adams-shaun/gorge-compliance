@@ -432,6 +432,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # so the pinned driver keeps all three fixes. The merge adds no code of its own; the full driver suite (192 tests, including
 # EchoCumulativeUpkeepTest, ForcedCoinFlipTest, FatesealDigOrderTest and ForcedDieRollTest) is green on it; cardsfolder and
 # tokenscripts unchanged. Fork branch fix/xp-forge-driver-echo-cumulative-upkeep.
+# 528c55d25b4 = the clean merge of 8f537eddcbb (cast_mode "alternative", StepMachine.spellForMode only) and 304ae5ffe0e
+# (the elected unless payment's whole-cost card pick, ScriptedController.chooseCardsForCost only): the two fixes touch disjoint
+# driver files, so the pinned driver keeps both; the merge adds no code of its own. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-alternative-cast-mode.
 # 8f537eddcbb = a3c422f79a6 plus cast_mode "alternative": StaticAbilityAlternativeCost builds a static's alternative-cost
 # cast as a non-basic copy of the spell with AlternativeCost unset (that field is only for the keyword alternatives such as
 # Warp and Escape), while the plain cast stays basic; spellForMode now takes the first such spell. Submerge's free cast
@@ -439,8 +443,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # cast and fail "was not put on the stack". scripts/forge-oracle-test-alternative-cast-mode.sh (make forge-driver-tests)
 # replays the exported xs:XP:submerge:cast:s1 request and requires Submerge on the stack at step 0 with no harness row;
 # make forge-driver-tests is green on it. Driver-only; cardsfolder/tokenscripts unchanged.
-# Fork branch fix/xp-forge-driver-alternative-cast-mode.
-FORGE_ORACLE_REF ?= 8f537eddcbbea0e321eae80cb1874f3275eb678e
+# 304ae5ffe0e = a3c422f79a6 plus the whole-cost card pick of an elected unless payment (xproof cluster xpt-4561863a, Ill-Timed Explosion's
+# UnlessCost$ Discard<2/Card> and Ghostly Dancers + Rent Is Due's tap-two): ScriptedController.chooseCardsForCost asked pickObjects for
+# 0..amount whenever Forge passed isOptional, which every UnlessCost$ payment does, so an option list of exactly the amount (the 2-card
+# hand, the 2 untapped creatures) strict-missed "cost card" although gorge logs no pick for a forced one. gorge's unless_pay answer has
+# already elected the payment (payingUnlessCost), and an elected payment pays the whole cost (CR 118.12, 601.2h), so the ask is now
+# amount..amount there: the exact-size list is forced and a logged pick is still consumed first; outside an elected unless payment the
+# 0..amount ask is unchanged. UnlessCostForcedPickTest (3 tests: both finds replayed, plus a 3-card hand that consumes gorge's logged
+# discard pick) fails without the change; the full driver suite (195 tests) is green on it. Driver-only: cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-unless-cost-cards-forced.
+FORGE_ORACLE_REF ?= 528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
