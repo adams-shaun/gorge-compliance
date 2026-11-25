@@ -99,10 +99,11 @@ func combatKeyStart(reg *cards.Registry, c *cards.Card, card, key string, f *Sta
 	if m == nil {
 		return "no-generator:combat"
 	}
-	if m[1] != "0" {
+	fi, _ := strconv.Atoi(m[1])
+	if fi >= len(c.Faces) {
 		return "no-generator:face"
 	}
-	face := c.Faces[0]
+	face := c.Faces[fi]
 	if !face.IsCreature() {
 		return "no-generator:combat:noncreature"
 	}
@@ -150,10 +151,11 @@ func staticKeyStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, car
 	if m == nil {
 		return "no-generator:static"
 	}
-	if m[1] != "0" {
+	fi, _ := strconv.Atoi(m[1])
+	if fi >= len(c.Faces) {
 		return "no-generator:face"
 	}
-	face := c.Faces[0]
+	face := c.Faces[fi]
 	si, _ := strconv.Atoi(m[2])
 	if si >= len(face.Statics) {
 		return "no-generator:static"
