@@ -736,9 +736,18 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 098e9c802e = oracle/fpin-1125-join5: 846c4191e6 (order to Hand; above) joined with d6e26fd04306 (offered; above); driver-only, die-roll code unchanged.
 # 9cc07f0d340 = oracle/fpin-1125-join4: 15a7c960ab2 (setup Room locked; above) joined with d6e26fd04306 (offered; above); driver-only, die-roll code unchanged.
 # 032ce65c73b = oracle/fpin-1125-join-hand-offered-room: 098e9c802e (order to Hand; above) joined with 9cc07f0d340 (setup Room locked; above); both already carry d6e26fd04306 (offered); driver-only, die-roll code unchanged.
+# a862cd8abc = 793a015fcf plus the empty hidden-origin search fix (ScriptedController only, fork branch fix/xp-forge-driver-empty-hidden-search):
+# Dina's Guidance finding no creature still makes Forge ask ChangeZoneToAltDestination; keep the primary destination with a note, no miss (CR 609.3),
+# and consume the ordinary changezone_dest_alt answer when a card was found. Driver-only; die-roll code unchanged.
+# 0218db82d91 = oracle/fpin-1125-join6: 9cc07f0d340 (setup Room locked + offered; above) joined with a862cd8abc (empty hidden-origin search; above);
+# driver-only, die-roll code unchanged.
+# 1b593040f66 = oracle/fpin-1125-join7: 032ce65c73b (order to Hand + setup Room locked + offered; above) joined with a862cd8abc (empty hidden-origin search; above);
+# driver-only, die-roll code unchanged.
 # 926004bb5396 = oracle/fpin-1125-join8: 032ce65c73b (order to Hand + setup Room locked + offered; above) joined with
 # a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
-FORGE_ORACLE_REF ?= 926004bb5396810595e0b4ac3b447ce4227f938e
+# 6fcacdc21814 = oracle/fpin-1125-join9: 1b593040f66 (empty hidden-origin search + order to Hand + setup Room locked + offered; above) joined with
+# a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
+FORGE_ORACLE_REF ?= 6fcacdc21814855e7cec9a02e58db563ec77beab
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

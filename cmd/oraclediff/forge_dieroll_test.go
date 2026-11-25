@@ -187,9 +187,14 @@ func TestForgeRolledDie(t *testing.T) {
 // 098e9c802e = oracle/fpin-1125-join5: 846c4191e6 (order to Hand; above) joined with d6e26fd043 (offered; above); die-roll code unchanged.
 // 9cc07f0d340 = oracle/fpin-1125-join4: 15a7c960ab2 (setup Room locked) joined with d6e26fd043 (offered); die-roll code unchanged.
 // 032ce65c73b = oracle/fpin-1125-join-hand-offered-room: 098e9c802e (order to Hand) joined with 9cc07f0d340 (setup Room locked); both already carry d6e26fd043 (offered); die-roll code unchanged.
+// a862cd8abc = 793a015fcf plus the empty hidden-origin search fix (ScriptedController only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
+// 0218db82d91 = oracle/fpin-1125-join6: 9cc07f0d340 (setup Room locked + offered) joined with a862cd8abc (empty hidden search); die-roll code unchanged.
+// 1b593040f66 = oracle/fpin-1125-join7: 032ce65c73b (order to Hand + setup Room locked + offered) joined with a862cd8abc (empty hidden search); die-roll code unchanged.
 // 926004bb5396 = oracle/fpin-1125-join8: 032ce65c73b (order to Hand + setup Room locked + offered) joined with a8512930733
 // (unaffordable UnlessCost$ decline); die-roll code unchanged.
-const forgeOracleDieRollRef = "926004bb5396810595e0b4ac3b447ce4227f938e"
+// 6fcacdc21814 = oracle/fpin-1125-join9: 1b593040f66 (empty hidden search + order to Hand + setup Room locked + offered) joined with
+// a8512930733 (unaffordable UnlessCost$ decline); die-roll code unchanged.
+const forgeOracleDieRollRef = "6fcacdc21814855e7cec9a02e58db563ec77beab"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
