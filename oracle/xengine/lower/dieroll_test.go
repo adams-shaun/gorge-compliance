@@ -254,6 +254,74 @@ func TestSelfCheckForcesDieRolls(t *testing.T) {
 	}
 }
 
+// TestSelfCheckForcesCoinFlips: Goblin Bangchuckers' {T} flips a coin (CR
+// 705.1): a win deals 2 damage to any target and a loss deals 2 damage to
+// itself. The self-check must replay the flip the live game made, not draw its
+// own. The test plays the ability at game seeds until it finds both a win and
+// a loss, and requires the runner's own unforced flip to disagree with the win
+// tape, so it fails when Item.Raw() leaves coin_flips out. It fails rather than
+// skips when no seed discriminates: a silently green test would not check the
+// fix.
+func TestSelfCheckForcesCoinFlips(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	pair := []decks.Deck{
+		{Name: "start-p0", Colours: "R", Cards: slices.Concat([]string{"Goblin Bangchuckers"}, repeatCard(39, "Mountain"))},
+		{Name: "start-p1", Colours: "W", Cards: repeatCard(40, "Plains")},
+	}
+	start := &rules.StartSpec{Seats: []rules.StartSeat{
+		{Battlefield: []int{0, 1, 2, 3, 4, 5, 6}},
+		{},
+	}}
+	const maxSeed = 80
+	var found [2]Lowered // [0] a win tape, [1] a loss tape
+	seen := [2]bool{}
+	for n := 1; n <= maxSeed && (!seen[0] || !seen[1]); n++ {
+		cand, why, _, err := Span(reg, pair, startGameSeed(0, n), game.Options{
+			Set: "XP", MaxTurns: 2, Start: start,
+			Focus: &game.Focus{Seat: 0, Card: "Goblin Bangchuckers", Kind: "ability"},
+		}, false, "xs:XP:goblin-bangchuckers:ability", "xproof start Goblin Bangchuckers ability")
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(why) > 0 {
+			t.Fatalf("seed %d: span refused: %v", n, why)
+		}
+		if len(cand.Item.CoinFlips) != 1 {
+			continue
+		}
+		want := cand.Item.CoinFlips[0].Win
+		if !want {
+			// Any loss tape checks that the recorded loss self-checks. It
+			// alone cannot prove the fix: the runner's own first flip at seed
+			// 42 is a loss on this fixture, so forcing and not forcing agree.
+			// The win tape below is the discriminating one.
+			found[1], seen[1] = cand, true
+			continue
+		}
+		// The runner's seeded flip must land on the other side, or the forced
+		// and unforced runs agree and the case proves nothing.
+		unforced, err := json.Marshal(cand.Item.Scenario)
+		if err != nil {
+			t.Fatal(err)
+		}
+		own, err := rules.RunOracleScenarioJSON(reg, unforced)
+		if err != nil {
+			t.Fatal(err)
+		}
+		if len(own.Flips) == 1 && !own.Flips[0].Win {
+			found[0], seen[0] = cand, true
+		}
+	}
+	for i, side := range []string{"win", "loss"} {
+		if !seen[i] {
+			t.Fatalf("no game seed in 1..%d makes a %s tape", maxSeed, side)
+		}
+		if c := CheckWindow(reg, found[i]); c.Status != StatusOK {
+			t.Fatalf("%s tape: %s at step %d, %s: gorge %s, tape %s %v", side, c.Status, c.Step, c.Field, c.Gorge, c.Tape, c.Fails)
+		}
+	}
+}
+
 // TestSetupProbeKeepsRunnableWithDieRolls: the setup-only probe has no steps,
 // so a gameplay die roll's step is out of range for it. The probe must still
 // run (gorge rejects an out-of-range roll), or setupAnswerReasons returns nil
