@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b787ba5-0b87-449f-98cd-9454445e2f48	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8b7a3613-f1bd-4262-9b11-b631167c2c2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foundation-breaker:f0t0:s1,f:xs:XP:foundation-breaker:f0t0:s1	-	-	-	d864b561c9cb	-	9af3210b2285	-	-	2026-11-24	xproof
 8b7a3613-f1bd-4262-9b11-b631167c2c2d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:foundation-breaker:f0t0:s1,f:xs:XP:foundation-breaker:f0t0:s1	-	-	-	d864b561c9cb	-	9af3210b2285	-	-	2026-11-24	xproof
-8b834f83-951b-4b5c-b9f1-3d860baa3c0e	cast	cast-resolve	agreed	-	X	scen	1	0	Winnowing/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+8b834f83-951b-4b5c-b9f1-3d860baa3c0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winnowing:cast:s1,f:xs:XP:winnowing:cast:s1	-	-	-	23c4009444b0	-	2e18f22774be	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8b84fec5-617c-4088-8250-2ba1f1f9479a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Balamb Garden, SeeD Academy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b84fec5-617c-4088-8250-2ba1f1f9479a	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Balamb Garden, SeeD Academy/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8b84fec5-617c-4088-8250-2ba1f1f9479a	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Balamb Garden, SeeD Academy/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -180,9 +180,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8bca5627-27c2-4d10-85c5-2451daa94c5d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:woodland-sleuth:f0t0:s1,f:xs:XP:woodland-sleuth:f0t0:s1	-	-	-	3aa6ded33acb	-	9fbdcb89c2ad	-	-	2026-11-25	xproof
 8bcb0f45-902d-41d6-a10c-60bc27befd30	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:putrid-cyclops:f0t0:s1,f:xs:XP:putrid-cyclops:f0t0:s1	-	-	-	d864b561c9cb	-	672b8e30c59c	-	-	2026-11-24	xproof
 8bcb0f45-902d-41d6-a10c-60bc27befd30	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:putrid-cyclops:f0t0:s1,f:xs:XP:putrid-cyclops:f0t0:s1	-	-	-	d864b561c9cb	-	672b8e30c59c	-	-	2026-11-24	xproof
-8bcbae66-1854-480e-a449-33e5389610ab	cast	cast-resolve	agreed	-	X	scen	1	0	Sapling Nursery/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-8bcbae66-1854-480e-a449-33e5389610ab	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sapling Nursery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-8bcbae66-1854-480e-a449-33e5389610ab	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sapling Nursery/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+8bcbae66-1854-480e-a449-33e5389610ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sapling-nursery:cast:s1,f:xs:XP:sapling-nursery:cast:s1	-	-	-	23c4009444b0	-	657c8bd7a479	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8bcbae66-1854-480e-a449-33e5389610ab	f0/a0	PumpAll	agreed	-	FX	start	4	0	x:xs:XP:sapling-nursery:cast:s1,f:xs:XP:sapling-nursery:cast:s1	-	-	-	23c4009444b0	-	657c8bd7a479	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8bcbae66-1854-480e-a449-33e5389610ab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sapling-nursery:f0t0:s1,f:xs:XP:sapling-nursery:f0t0:s1	-	-	-	23c4009444b0	-	657c8bd7a479	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8bcbae66-1854-480e-a449-33e5389610ab	static#0.0	static#0.0	agreed	-	X	scen	1	0	Sapling Nursery/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8bcdb107-3827-4280-9e5e-7f1e771ef0c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:helica-glider:cast:s1,f:xs:XP:helica-glider:cast:s1	-	-	-	ae86f6029288	-	4cb064729210	-	-	2026-11-24	xproof
 8bd2af55-5a48-4300-a893-ae6cd548db24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -208,8 +208,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8bed1349-4d0a-4544-ba66-c38e72cd2863	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bed92cc-b3f8-4201-bcbc-44535ff1bd96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tainted-adversary:f0t0:s1,f:xs:XP:tainted-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	d311a549804e	-	-	2026-11-24	xproof
 8bed92cc-b3f8-4201-bcbc-44535ff1bd96	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tainted-adversary:f0t0:s1,f:xs:XP:tainted-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	d311a549804e	-	-	2026-11-24	xproof
-8bef3511-ceeb-4d57-972a-ab363ecacd5b	cast	cast-resolve	agreed	-	X	scen	1	0	Timid Shieldbearer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-8bef3511-ceeb-4d57-972a-ab363ecacd5b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Timid Shieldbearer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+8bef3511-ceeb-4d57-972a-ab363ecacd5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:timid-shieldbearer:cast:s1,f:xs:XP:timid-shieldbearer:cast:s1	-	-	-	23c4009444b0	-	56c83fe7b7ed	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8bef3511-ceeb-4d57-972a-ab363ecacd5b	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:timid-shieldbearer:f0a0:s1,f:xs:XP:timid-shieldbearer:f0a0:s1	-	-	-	23c4009444b0	-	56c83fe7b7ed	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8bf8e846-9d10-4dbc-a379-df37bb9fb6d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bf8e846-9d10-4dbc-a379-df37bb9fb6d4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bf90bb0-f9c1-49c8-905e-32747e921e92	cast	cast-resolve	agreed	-	FX	scen	2	0	Freeze in Place/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

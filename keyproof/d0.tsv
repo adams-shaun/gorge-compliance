@@ -138,10 +138,10 @@ d0a1f39b-cda4-4925-83f8-2161f575edfb	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:
 d0a1f39b-cda4-4925-83f8-2161f575edfb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0a31db0-69db-405c-99a3-945617900c54	cast	cast	agreed	-	F	start	2	0	f:xs:XP:obscuring-haze:cast:s1	-	-	-	8c0bd19283bb	-	93727f98de16	-	-	2026-11-24	xproof
 d0a33e9b-dc1e-4643-b179-851f3c71a99d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d0a38e8c-c42c-4c99-8a44-d390ff2511ff	cast	cast-resolve	agreed	-	X	scen	1	0	Unwelcome Sprite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-d0a38e8c-c42c-4c99-8a44-d390ff2511ff	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Unwelcome Sprite/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-d0a38e8c-c42c-4c99-8a44-d390ff2511ff	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Unwelcome Sprite/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-d0a38e8c-c42c-4c99-8a44-d390ff2511ff	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Unwelcome Sprite/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+d0a38e8c-c42c-4c99-8a44-d390ff2511ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unwelcome-sprite:cast:s1,f:xs:XP:unwelcome-sprite:cast:s1	-	-	-	23c4009444b0	-	3bd84656d056	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d0a38e8c-c42c-4c99-8a44-d390ff2511ff	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:unwelcome-sprite:combat0.attack:s1,f:xs:XP:unwelcome-sprite:combat0.attack:s1	-	-	-	23c4009444b0	-	3bd84656d056	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d0a38e8c-c42c-4c99-8a44-d390ff2511ff	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:unwelcome-sprite:combat0.block:s1,f:xs:XP:unwelcome-sprite:combat0.block:s1	-	-	-	23c4009444b0	-	3bd84656d056	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d0a38e8c-c42c-4c99-8a44-d390ff2511ff	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:unwelcome-sprite:f0t0:s1,f:xs:XP:unwelcome-sprite:f0t0:s1	-	-	-	23c4009444b0	-	3bd84656d056	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0a3b261-3daf-4082-8bc5-e66326a6c382	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:valley-rannet:cast:s1,f:xs:XP:valley-rannet:cast:s1	-	-	-	8a1b1a193ec0	-	8fbef63f9696	-	-	2026-11-24	xproof
 d0a3b261-3daf-4082-8bc5-e66326a6c382	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:valley-rannet:cast:s2,f:xs:XP:valley-rannet:cast:s2	-	-	-	8a1b1a193ec0	-	8fbef63f9696	-	-	2026-11-24	xproof
 d0a3b261-3daf-4082-8bc5-e66326a6c382	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	2	0	x:xs:XP:valley-rannet:f0a1:s1,f:xs:XP:valley-rannet:f0a1:s1	-	-	-	23c4009444b0	-	8fbef63f9696	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -174,7 +174,7 @@ d0cd3edd-d908-47c5-bff1-2089c22ab41c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d0cd3edd-d908-47c5-bff1-2089c22ab41c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:namora-the-sea-queen:f0a0:s1,f:xs:XP:namora-the-sea-queen:f0a0:s1	-	-	-	8c0bd19283bb	-	22b8bcb6146f	-	-	2026-11-24	xproof
 d0ce03fa-2284-4217-85b2-4db6b8a88c94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:divining-duelist:f0t0:s1,f:xs:XP:divining-duelist:f0t0:s1	-	-	-	23c4009444b0	-	b2b41c969bb4	-	-	2026-11-25	xproof
 d0ce03fa-2284-4217-85b2-4db6b8a88c94	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:divining-duelist:f0t0:s1,f:xs:XP:divining-duelist:f0t0:s1	-	-	-	23c4009444b0	-	b2b41c969bb4	-	-	2026-11-25	xproof
-d0d13d5d-677d-4e1a-9e58-2f9840581f6d	cast	cast-resolve	agreed	-	X	scen	1	0	Thornfist Striker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d0d13d5d-677d-4e1a-9e58-2f9840581f6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thornfist-striker:cast:s1,f:xs:XP:thornfist-striker:cast:s1	-	-	-	23c4009444b0	-	256496be6f0e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0d13d5d-677d-4e1a-9e58-2f9840581f6d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thornfist Striker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d0d13d5d-677d-4e1a-9e58-2f9840581f6d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thornfist Striker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d0d28e2c-416e-432c-b4bf-07f6302c52ea	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

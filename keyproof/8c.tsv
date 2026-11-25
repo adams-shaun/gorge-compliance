@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c105948-4b8f-4615-b66a-2bbdb3f3d6dd	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c166a06-b056-4a05-ae23-715289e12e36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c166a06-b056-4a05-ae23-715289e12e36	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:soilshaper:f0t0:s1,f:xs:XP:soilshaper:f0t0:s1	-	-	-	23c4009444b0	-	a33a603da8a0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-8c179b8f-3a83-49d6-9e7f-9e17c293ccbb	cast	cast-resolve	agreed	-	X	scen	1	0	Molten Note/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8c179b8f-3a83-49d6-9e7f-9e17c293ccbb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:molten-note:cast:s1,f:xs:XP:molten-note:cast:s1	-	-	-	23c4009444b0	-	5525e7942727	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8c17f48b-467e-4953-85d0-221cef5b3bff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c17f48b-467e-4953-85d0-221cef5b3bff	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:lurking-nightstalker:f0t0:s1,f:xs:XP:lurking-nightstalker:f0t0:s1	-	-	-	5f2128bf97e4	-	f3ee2fc757fa	-	-	2026-11-24	xproof
 8c1c0117-6fc0-43c5-a4c8-6472de6503d9	cast	cast-resolve	agreed	-	FX	scen	2	0	Toph, Hardheaded Teacher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -68,11 +68,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c53a177-c8c8-4b9f-a221-f205da67daa5	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:ramosian-greatsword:f0a0:s1	-	-	-	3aa6ded33acb	-	e47992799c39	-	-	2026-11-25	xproof
 8c55039d-1303-420c-8547-ebdffb63bf89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liliana-s-talent:cast:s1,f:xs:XP:liliana-s-talent:cast:s1	-	-	-	8c0bd19283bb	-	a3521227204c	-	-	2026-11-24	xproof
 8c55039d-1303-420c-8547-ebdffb63bf89	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	cast	cast-resolve	agreed	-	X	scen	1	0	Professor Dellian Fel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Professor Dellian Fel/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Professor Dellian Fel/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Professor Dellian Fel/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a3	activate#0.3	agreed	-	X	scen	1	0	Professor Dellian Fel/activate#0.3/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:professor-dellian-fel:cast:s1,f:xs:XP:professor-dellian-fel:cast:s1	-	-	-	23c4009444b0	-	92c0d1bc113c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a0	GainLife	agreed	-	FX	start	4	0	x:xs:XP:professor-dellian-fel:cast:s1,f:xs:XP:professor-dellian-fel:cast:s1	-	-	-	23c4009444b0	-	92c0d1bc113c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:professor-dellian-fel:f0a1:s1,f:xs:XP:professor-dellian-fel:f0a1:s1	-	-	-	23c4009444b0	-	92c0d1bc113c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a2	Destroy	agreed	-	FX	start	2	0	x:xs:XP:professor-dellian-fel:f0a2:s1,f:xs:XP:professor-dellian-fel:f0a2:s1	-	-	-	23c4009444b0	-	92c0d1bc113c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	f0/a3	Effect	agreed	-	FX	start	2	0	x:xs:XP:professor-dellian-fel:f0a3:s1,f:xs:XP:professor-dellian-fel:f0a3:s1	-	-	-	23c4009444b0	-	92c0d1bc113c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8c601628-b1ed-467b-ba92-8572343147f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-gagglemaster:f0t0:s1,f:xs:XP:aven-gagglemaster:f0t0:s1	-	-	-	ae86f6029288	-	edd61b8e3b3b	-	-	2026-11-24	xproof
 8c601628-b1ed-467b-ba92-8572343147f8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aven-gagglemaster:f0t0:s1,f:xs:XP:aven-gagglemaster:f0t0:s1	-	-	-	ae86f6029288	-	edd61b8e3b3b	-	-	2026-11-24	xproof
 8c612741-2b30-43b3-bd3f-7df19662d298	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:case-file-auditor:cast:s1,f:xs:XP:case-file-auditor:cast:s1	-	-	-	8c0bd19283bb	-	2f167b9523a1	-	-	2026-11-24	xproof

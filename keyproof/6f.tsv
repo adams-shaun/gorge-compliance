@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f8bf968-0571-4582-8c04-9791e44d5df0	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nyx-weaver:f0t0:s1,f:xs:XP:nyx-weaver:f0t0:s1	-	-	-	3aa6ded33acb	-	6314b9932717	-	-	2026-11-25	xproof
 6f8ca795-d6fd-4e3e-911c-c621a942acbb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-of-memories:cast:s1,f:xs:XP:storm-of-memories:cast:s1	-	-	-	8c0bd19283bb	-	c2e2ce63c186	-	-	2026-11-24	xproof
 6f8ca795-d6fd-4e3e-911c-c621a942acbb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-6f8fa68e-e961-4ae1-b27d-22d87e90f26b	cast	cast-resolve	agreed	-	X	scen	1	0	Procrastinate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6f8fa68e-e961-4ae1-b27d-22d87e90f26b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:procrastinate:cast:s1,f:xs:XP:procrastinate:cast:s1	-	-	-	23c4009444b0	-	19262f8d99c9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6f9390ec-08b5-4761-8cb1-5d60190b9661	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f9390ec-08b5-4761-8cb1-5d60190b9661	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6f9390ec-08b5-4761-8cb1-5d60190b9661	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6fd5f773-e53e-4a7d-9093-dddd9b2e741f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fd9ece7-366f-45c7-a8ea-edb4ca637a06	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fd9ece7-366f-45c7-a8ea-edb4ca637a06	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6fdddab4-fcc9-4622-9c17-c69f9d4bca08	cast	cast-resolve	agreed	-	X	scen	1	0	Render Speechless/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6fdddab4-fcc9-4622-9c17-c69f9d4bca08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:render-speechless:cast:s1,f:xs:XP:render-speechless:cast:s1	-	-	-	23c4009444b0	-	a67a522cea3a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6fde4790-4186-4786-aa1a-b6a53bfadc1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:curse-of-marit-lage:f0t0:s1,f:xs:XP:curse-of-marit-lage:f0t0:s1	-	-	-	8c0bd19283bb	-	3a5aeecc426f	-	-	2026-11-24	xproof
 6fde4790-4186-4786-aa1a-b6a53bfadc1c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:curse-of-marit-lage:f0t0:s1,f:xs:XP:curse-of-marit-lage:f0t0:s1	-	-	-	8c0bd19283bb	-	3a5aeecc426f	-	-	2026-11-24	xproof
 6fe35d1f-20b6-4fa8-a318-79e2d415701a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:goldnight-redeemer:cast:s1,f:xs:XP:goldnight-redeemer:cast:s1	-	-	-	d864b561c9cb	-	b46eb822f223	-	-	2026-11-24	xproof

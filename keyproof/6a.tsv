@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a4ef075-9254-4d36-9572-622833fae54e	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:frenzied-baloth:combat0.attack:s1	-	-	-	23c4009444b0	-	0d21d374071a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6a4ef075-9254-4d36-9572-622833fae54e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:frenzied-baloth:combat0.block:s1,f:xs:XP:frenzied-baloth:combat0.block:s1	-	-	-	23c4009444b0	-	0d21d374071a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6a4ef075-9254-4d36-9572-622833fae54e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Frenzied Baloth/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6a51bb21-0c01-4ad8-99d7-17685db90b69	cast	cast-resolve	agreed	-	X	scen	1	0	The Last Ronin's Technique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6a51bb21-0c01-4ad8-99d7-17685db90b69	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-last-ronin-s-technique:cast:s1,f:xs:XP:the-last-ronin-s-technique:cast:s1	-	-	-	23c4009444b0	-	cd55c2d8c363	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6a521eed-0965-4fce-8a11-190dc2863da8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a555c10-4dc2-455d-87b4-c7fdbf3d29a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a5ce1b0-ac78-4a74-9eb7-4064e1687bf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -84,9 +84,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a69116b-3d2e-4eac-9d02-902373de3cb7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a69d4b1-72dd-4599-a16d-32299de5b0b9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sold-out:cast:s1,f:xs:XP:sold-out:cast:s1	-	-	-	23c4009444b0	-	68394d09f188	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6a6b19db-cdeb-4922-8642-5d872f90e7a1	cast	cast-resolve	agreed	-	FX	scen	2	0	Spectacular Skywhale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6a6b19db-cdeb-4922-8642-5d872f90e7a1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spectacular Skywhale/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6a6b19db-cdeb-4922-8642-5d872f90e7a1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spectacular Skywhale/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6a6b19db-cdeb-4922-8642-5d872f90e7a1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spectacular Skywhale/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6a6b19db-cdeb-4922-8642-5d872f90e7a1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:spectacular-skywhale:combat0.attack:s1,f:xs:XP:spectacular-skywhale:combat0.attack:s1	-	-	-	23c4009444b0	-	a4fcfbdf30de	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6a6b19db-cdeb-4922-8642-5d872f90e7a1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:spectacular-skywhale:combat0.block:s1,f:xs:XP:spectacular-skywhale:combat0.block:s1	-	-	-	23c4009444b0	-	a4fcfbdf30de	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6a6b19db-cdeb-4922-8642-5d872f90e7a1	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:spectacular-skywhale:f0t0:s1,f:xs:XP:spectacular-skywhale:f0t0:s1	-	-	-	23c4009444b0	-	a4fcfbdf30de	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6a6c5e17-6465-4a1f-9d63-8a3ce2edc522	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a6c5e17-6465-4a1f-9d63-8a3ce2edc522	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a6cdb3e-c850-4b3c-bf4b-c53dd4eaf56e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fearless-swashbuckler:cast:s1,f:xs:XP:fearless-swashbuckler:cast:s1	-	-	-	23c4009444b0	-	532b119c522c	-	-	2026-11-25	xproof

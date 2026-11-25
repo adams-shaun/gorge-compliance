@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9888d67d-fcad-427f-8ba7-b6d421b3d88e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:suleiman-s-legacy:f0t0:s1,f:xs:XP:suleiman-s-legacy:f0t0:s1	-	-	-	ea3140b6974b	-	d86b0c834040	-	-	2026-11-24	xproof
 9888d67d-fcad-427f-8ba7-b6d421b3d88e	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 989a7353-8d3d-4ea2-ab5e-8535d95dddae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-989b93fe-cad0-4890-a228-8a20ca666f10	cast	cast-resolve	agreed	-	X	scen	1	0	Uneasy Alliance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+989b93fe-cad0-4890-a228-8a20ca666f10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:uneasy-alliance:cast:s1,f:xs:XP:uneasy-alliance:cast:s1	-	-	-	23c4009444b0	-	434939e2ff6b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 989b93fe-cad0-4890-a228-8a20ca666f10	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Uneasy Alliance/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 989b93fe-cad0-4890-a228-8a20ca666f10	static#0.0	static#0.0	agreed	-	X	scen	1	0	Uneasy Alliance/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 989b93fe-cad0-4890-a228-8a20ca666f10	static#0.1	static#0.1	agreed	-	X	scen	1	0	Uneasy Alliance/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -145,9 +145,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98b19afc-7696-46b9-96f0-7f7c60003e1c	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-flame:f0t1:s1,f:xs:XP:cavalier-of-flame:f0t1:s1	-	-	-	d864b561c9cb	-	89fcf5226c7d	-	-	2026-11-24	xproof
 98b283dc-96a6-45a3-8a3f-11458497f358	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:teysa-envoy-of-ghosts:cast:s1,f:xs:XP:teysa-envoy-of-ghosts:cast:s1	-	-	-	d864b561c9cb	-	8cefe8e8a2de	-	-	2026-11-24	xproof
 98b283dc-96a6-45a3-8a3f-11458497f358	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-98b43c61-4563-4a29-8cf0-fb8b34f337ce	cast	cast-resolve	agreed	-	X	scen	1	0	Diary of Dreams/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98b43c61-4563-4a29-8cf0-fb8b34f337ce	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Diary of Dreams/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98b43c61-4563-4a29-8cf0-fb8b34f337ce	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Diary of Dreams/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+98b43c61-4563-4a29-8cf0-fb8b34f337ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:diary-of-dreams:cast:s1,f:xs:XP:diary-of-dreams:cast:s1	-	-	-	23c4009444b0	-	b3021d1d36e6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+98b43c61-4563-4a29-8cf0-fb8b34f337ce	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:diary-of-dreams:f0a0:s1,f:xs:XP:diary-of-dreams:f0a0:s1	-	-	-	23c4009444b0	-	b3021d1d36e6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+98b43c61-4563-4a29-8cf0-fb8b34f337ce	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:diary-of-dreams:f0t0:s1,f:xs:XP:diary-of-dreams:f0t0:s1	-	-	-	23c4009444b0	-	b3021d1d36e6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 98b53af9-af1b-4d5d-ae5a-bd444c1339d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ribbon-snake:cast:s1,f:xs:XP:ribbon-snake:cast:s1	-	-	-	5f2128bf97e4	-	d7cd34b76bf5	-	-	2026-11-24	xproof
 98b53af9-af1b-4d5d-ae5a-bd444c1339d2	f0/a0	Debuff	agreed	-	FX	start	2	0	x:xs:XP:ribbon-snake:f0a0:s1,f:xs:XP:ribbon-snake:f0a0:s1	-	-	-	5f2128bf97e4	-	d7cd34b76bf5	-	-	2026-11-24	xproof
 98b802f3-4785-41af-adfe-e77d0ae4648c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vitalizing-wind:cast:s1,f:xs:XP:vitalizing-wind:cast:s1	-	-	-	5f2128bf97e4	-	976dfbcb6d4b	-	-	2026-11-24	xproof

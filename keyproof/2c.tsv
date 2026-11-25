@@ -55,11 +55,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c47319a-4062-4aec-b68a-e8e8f023cf86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c47319a-4062-4aec-b68a-e8e8f023cf86	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c49d24a-98a4-43c2-bb59-1ef13d4214c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:untimely-malfunction:cast:s1,f:xs:XP:untimely-malfunction:cast:s1	-	-	-	23b491658465	-	a81fc01004c4	-	-	2026-11-24	xproof
-2c5044ff-a303-4276-8e23-7caac30a275b	cast	cast-resolve	agreed	-	X	scen	1	0	Ninja Teen/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c5044ff-a303-4276-8e23-7caac30a275b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ninja Teen/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2c5044ff-a303-4276-8e23-7caac30a275b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ninja-teen:cast:s1,f:xs:XP:ninja-teen:cast:s1	-	-	-	23c4009444b0	-	0948b848d5d3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2c5044ff-a303-4276-8e23-7caac30a275b	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:ninja-teen:f0a0:s1,f:xs:XP:ninja-teen:f0a0:s1	-	-	-	23c4009444b0	-	0948b848d5d3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c5044ff-a303-4276-8e23-7caac30a275b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ninja Teen/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c5044ff-a303-4276-8e23-7caac30a275b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ninja Teen/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c5044ff-a303-4276-8e23-7caac30a275b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ninja Teen/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2c5044ff-a303-4276-8e23-7caac30a275b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ninja-teen:f0t0:s1,f:xs:XP:ninja-teen:f0t0:s1	-	-	-	23c4009444b0	-	0948b848d5d3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2c5044ff-a303-4276-8e23-7caac30a275b	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:ninja-teen:static0.0:s1,f:xs:XP:ninja-teen:static0.0:s1	-	-	-	23c4009444b0	-	0948b848d5d3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c5044ff-a303-4276-8e23-7caac30a275b	static#0.1	static#0.1	agreed	-	X	scen	1	0	Ninja Teen/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c5044ff-a303-4276-8e23-7caac30a275b	static#0.2	static#0.2	agreed	-	X	scen	1	0	Ninja Teen/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c51e20b-07b2-4c96-8d73-87379aafbc7c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
@@ -79,9 +79,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c63e4e1-89d2-4bc6-a232-94e75c4b1c8a	cast	cast-resolve	agreed	-	X	scen	1	0	Mana Crypt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 2c63e4e1-89d2-4bc6-a232-94e75c4b1c8a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mana Crypt/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 2c63e4e1-89d2-4bc6-a232-94e75c4b1c8a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mana Crypt/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-2c654772-c786-4966-a46e-9556bbf31d7c	cast	cast-resolve	agreed	-	X	scen	1	0	Ark of Hunger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c654772-c786-4966-a46e-9556bbf31d7c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ark of Hunger/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c654772-c786-4966-a46e-9556bbf31d7c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ark of Hunger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2c654772-c786-4966-a46e-9556bbf31d7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ark-of-hunger:cast:s1,f:xs:XP:ark-of-hunger:cast:s1	-	-	-	23c4009444b0	-	8f3df3a184dc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2c654772-c786-4966-a46e-9556bbf31d7c	f0/a0	Mill	agreed	-	FX	start	4	0	x:xs:XP:ark-of-hunger:cast:s1,f:xs:XP:ark-of-hunger:cast:s1	-	-	-	23c4009444b0	-	8f3df3a184dc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2c654772-c786-4966-a46e-9556bbf31d7c	f0/t0	ChangesZoneAll	agreed	-	FX	start	4	0	x:xs:XP:ark-of-hunger:cast:s1,f:xs:XP:ark-of-hunger:cast:s1	-	-	-	23c4009444b0	-	8f3df3a184dc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c6934b6-67c4-457a-ae8f-59914fd8f256	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c6934b6-67c4-457a-ae8f-59914fd8f256	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c6b2f4a-4e0e-4dc1-92a8-c07e5cbba5f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,9 +147,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cb968c4-5b50-4242-8db7-dd1fa9ce4948	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ominous-sphinx:cast:s1,f:xs:XP:ominous-sphinx:cast:s1	-	-	-	d864b561c9cb	-	c4f323a4cd11	-	-	2026-11-24	xproof
 2cb968c4-5b50-4242-8db7-dd1fa9ce4948	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2cb98ca9-d7bb-416b-a17e-ee5f8e4d78f2	cast	cast-resolve	agreed	-	X	scen	1	0	Prismatic Ending/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-2cbccc46-bdef-4dfb-90a4-0278c5c8488a	cast	cast-resolve	agreed	-	X	scen	1	0	Quandrix, the Proof/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cbccc46-bdef-4dfb-90a4-0278c5c8488a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Quandrix, the Proof/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2cbccc46-bdef-4dfb-90a4-0278c5c8488a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Quandrix, the Proof/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2cbccc46-bdef-4dfb-90a4-0278c5c8488a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quandrix-the-proof:cast:s1,f:xs:XP:quandrix-the-proof:cast:s1	-	-	-	23c4009444b0	-	0abeeb1356c8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2cbccc46-bdef-4dfb-90a4-0278c5c8488a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:quandrix-the-proof:combat0.attack:s1,f:xs:XP:quandrix-the-proof:combat0.attack:s1	-	-	-	23c4009444b0	-	0abeeb1356c8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2cbccc46-bdef-4dfb-90a4-0278c5c8488a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:quandrix-the-proof:combat0.block:s1,f:xs:XP:quandrix-the-proof:combat0.block:s1	-	-	-	23c4009444b0	-	0abeeb1356c8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2cbccc46-bdef-4dfb-90a4-0278c5c8488a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Quandrix, the Proof/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cc075da-f79b-4050-84eb-2c1b9a30260c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hexhaven Dueling Arena/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2cc075da-f79b-4050-84eb-2c1b9a30260c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hexhaven Dueling Arena/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

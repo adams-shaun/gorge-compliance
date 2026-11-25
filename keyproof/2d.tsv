@@ -50,10 +50,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d49c50b-3e2d-4e74-9b8a-c2f9a495e470	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2d4aedc5-31c5-4281-98e1-b0c2233c3c8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d513c3e-bd27-479e-af32-7f66d96d0de0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2d56a491-b3eb-4f3e-82ab-981d3036c45d	cast	cast-resolve	agreed	-	X	scen	1	0	Krang, Utrom Warlord/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2d56a491-b3eb-4f3e-82ab-981d3036c45d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Krang, Utrom Warlord/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2d56a491-b3eb-4f3e-82ab-981d3036c45d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Krang, Utrom Warlord/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2d56a491-b3eb-4f3e-82ab-981d3036c45d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Krang, Utrom Warlord/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2d56a491-b3eb-4f3e-82ab-981d3036c45d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:krang-utrom-warlord:cast:s1,f:xs:XP:krang-utrom-warlord:cast:s1	-	-	-	23c4009444b0	-	6e4ffd9acf78	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2d56a491-b3eb-4f3e-82ab-981d3036c45d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:krang-utrom-warlord:combat0.attack:s1,f:xs:XP:krang-utrom-warlord:combat0.attack:s1	-	-	-	23c4009444b0	-	6e4ffd9acf78	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2d56a491-b3eb-4f3e-82ab-981d3036c45d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:krang-utrom-warlord:combat0.block:s1,f:xs:XP:krang-utrom-warlord:combat0.block:s1	-	-	-	23c4009444b0	-	6e4ffd9acf78	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2d56a491-b3eb-4f3e-82ab-981d3036c45d	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:krang-utrom-warlord:static0.0:s1,f:xs:XP:krang-utrom-warlord:static0.0:s1	-	-	-	23c4009444b0	-	6e4ffd9acf78	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2d584333-b25e-4291-a2c9-80c6d9f8732a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d5fba80-c84f-4f84-84e4-9c797ac244fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d668f67-7cde-447a-8eb3-35c0c5c5ab69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -107,10 +107,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2db73fff-1a89-4006-945d-a244ff2f0bef	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2db73fff-1a89-4006-945d-a244ff2f0bef	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2db77e35-a54a-4e9c-8081-c97822515879	cast	cast-resolve	agreed	-	FX	scen	2	0	Lord Dregg, Insect Invader/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2db77e35-a54a-4e9c-8081-c97822515879	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lord Dregg, Insect Invader/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2db77e35-a54a-4e9c-8081-c97822515879	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lord Dregg, Insect Invader/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2db77e35-a54a-4e9c-8081-c97822515879	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lord-dregg-insect-invader:combat0.attack:s1,f:xs:XP:lord-dregg-insect-invader:combat0.attack:s1	-	-	-	23c4009444b0	-	705b4699b479	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2db77e35-a54a-4e9c-8081-c97822515879	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lord-dregg-insect-invader:combat0.block:s1,f:xs:XP:lord-dregg-insect-invader:combat0.block:s1	-	-	-	23c4009444b0	-	705b4699b479	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2db77e35-a54a-4e9c-8081-c97822515879	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Lord Dregg, Insect Invader/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2db77e35-a54a-4e9c-8081-c97822515879	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lord Dregg, Insect Invader/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2db77e35-a54a-4e9c-8081-c97822515879	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lord-dregg-insect-invader:f0t0:s1,f:xs:XP:lord-dregg-insect-invader:f0t0:s1	-	-	-	23c4009444b0	-	705b4699b479	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2db8dda3-8136-4cf2-ba2d-ecc344a36725	cast	cast-resolve	agreed	-	FX	scen	2	0	Mechanized Ninja Cavalry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2db8dda3-8136-4cf2-ba2d-ecc344a36725	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2db8fc61-13af-4227-83f9-9f426ab978d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

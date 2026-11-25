@@ -93,11 +93,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b8084b2-0c3c-4a54-86dc-41f4fe513e99	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:apocalypse-demon:f0t0:s1	-	-	-	3aa6ded33acb	-	b9c4df1f806e	-	-	2026-11-25	xproof
 5b83fede-851c-4e9d-98ba-d88f6caffc1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b84101e-7e23-437d-835c-409bc061ecbb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:canopy-cover:cast:s1,f:xs:XP:canopy-cover:cast:s1	-	-	-	8a1b1a193ec0	-	5ef4548858eb	-	-	2026-11-24	xproof
-5b865275-4114-44d0-9832-ae5d3b4efba4	cast	cast-resolve	agreed	-	X	scen	1	0	Frog Butler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5b865275-4114-44d0-9832-ae5d3b4efba4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Frog Butler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5b865275-4114-44d0-9832-ae5d3b4efba4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Frog Butler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5b865275-4114-44d0-9832-ae5d3b4efba4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frog-butler:cast:s1,f:xs:XP:frog-butler:cast:s1	-	-	-	23c4009444b0	-	2e75ac1ac350	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5b865275-4114-44d0-9832-ae5d3b4efba4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:frog-butler:combat0.attack:s1,f:xs:XP:frog-butler:combat0.attack:s1	-	-	-	23c4009444b0	-	2e75ac1ac350	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5b865275-4114-44d0-9832-ae5d3b4efba4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:frog-butler:combat0.block:s1,f:xs:XP:frog-butler:combat0.block:s1	-	-	-	23c4009444b0	-	2e75ac1ac350	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5b865275-4114-44d0-9832-ae5d3b4efba4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Frog Butler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5b865275-4114-44d0-9832-ae5d3b4efba4	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Frog Butler/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5b865275-4114-44d0-9832-ae5d3b4efba4	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:frog-butler:f0a1:s1,f:xs:XP:frog-butler:f0a1:s1	-	-	-	23c4009444b0	-	2e75ac1ac350	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5b8b1f03-9e2e-40f2-97e0-c9fb8d780d56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wave-of-vitriol:cast:s1,f:xs:XP:wave-of-vitriol:cast:s1	-	-	-	8c0bd19283bb	-	c8e2a0f3234b	-	-	2026-11-24	xproof
 5b8e0913-47e9-4d56-971d-abd91b0f7587	cast	cast-resolve	agreed	-	FX	scen	2	0	Campus Guide/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b8e0913-47e9-4d56-971d-abd91b0f7587	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5bb06e6f-e3af-4caa-b66d-77248ad46b61	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Lilypad Village/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5bb06e6f-e3af-4caa-b66d-77248ad46b61	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Lilypad Village/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5bb06e6f-e3af-4caa-b66d-77248ad46b61	land	land	agreed	-	FX	start	2	0	x:xs:XP:lilypad-village:land:s1,f:xs:XP:lilypad-village:land:s1	-	-	-	3aa6ded33acb	-	a56bd2911316	-	-	2026-11-25	xproof
-5bb38d08-582e-43aa-9507-7c20759978ec	cast	cast-resolve	agreed	-	X	scen	1	0	Follow the Lumarets/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5bb38d08-582e-43aa-9507-7c20759978ec	cast	cast	agreed	-	F	start	2	0	f:xs:XP:follow-the-lumarets:cast:s1	-	-	-	23c4009444b0	-	40879d742278	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5bb4961f-0a24-40f8-bfba-8618a9375c93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5bb5e4e5-c3b4-4f67-83e1-bde9ce9f18c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boromir-gondor-s-hope:f0t0:s1,f:xs:XP:boromir-gondor-s-hope:f0t0:s1	-	-	-	8c0bd19283bb	-	73e87c59402f	-	-	2026-11-24	xproof
 5bb5e4e5-c3b4-4f67-83e1-bde9ce9f18c4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:boromir-gondor-s-hope:f0t0:s1,f:xs:XP:boromir-gondor-s-hope:f0t0:s1	-	-	-	8c0bd19283bb	-	73e87c59402f	-	-	2026-11-24	xproof

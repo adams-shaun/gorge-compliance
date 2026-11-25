@@ -27,9 +27,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 882ee72e-2149-4778-a81c-8bf09beb5d66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 882ee72e-2149-4778-a81c-8bf09beb5d66	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:call-of-the-wild:f0a0:s1,f:xs:XP:call-of-the-wild:f0a0:s1	-	-	-	23c4009444b0	-	e1aa9fab8610	-	-	2026-11-25	xproof
 882f30e4-4ce1-4581-8d2d-d763aa13befe	cast	cast-resolve	agreed	-	FX	scen	2	0	Elemental Mascot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-882f30e4-4ce1-4581-8d2d-d763aa13befe	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Elemental Mascot/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-882f30e4-4ce1-4581-8d2d-d763aa13befe	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Elemental Mascot/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-882f30e4-4ce1-4581-8d2d-d763aa13befe	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Elemental Mascot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+882f30e4-4ce1-4581-8d2d-d763aa13befe	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:elemental-mascot:combat0.attack:s1,f:xs:XP:elemental-mascot:combat0.attack:s1	-	-	-	23c4009444b0	-	aca3851f9fe2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+882f30e4-4ce1-4581-8d2d-d763aa13befe	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:elemental-mascot:combat0.block:s1,f:xs:XP:elemental-mascot:combat0.block:s1	-	-	-	23c4009444b0	-	aca3851f9fe2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+882f30e4-4ce1-4581-8d2d-d763aa13befe	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:elemental-mascot:f0t0:s1,f:xs:XP:elemental-mascot:f0t0:s1	-	-	-	23c4009444b0	-	aca3851f9fe2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 883267f0-be7e-43c3-b7f8-82981f6d8c23	cast	cast-resolve	agreed	-	X	scen	1	0	Suspend Aggression/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8832b76b-58b7-41b2-b2f6-842563b55b36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8834d3c9-cdb5-423b-bc78-94a94add5e74	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:new-horizons:f0t0:s2,f:xs:XP:new-horizons:f0t0:s2	-	-	-	e07cf3a05ba5	-	607bf6f3092b	-	-	2026-11-24	xproof
@@ -106,9 +106,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88aa032d-dc11-4cae-81f3-ce66353963e0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:affectionate-indrik:f0t0:s2,f:xs:XP:affectionate-indrik:f0t0:s2	-	-	-	e07cf3a05ba5	-	38faa50174d5	-	-	2026-11-24	xproof
 88aa710c-26ed-490d-9a4b-4a2b48df1733	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88aadf60-91f9-4932-a2bc-63365a139d36	cast	cast-resolve	agreed	-	FX	scen	2	0	Daredevil, Man Without Fear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88aadf60-91f9-4932-a2bc-63365a139d36	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Daredevil, Man Without Fear/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88aadf60-91f9-4932-a2bc-63365a139d36	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Daredevil, Man Without Fear/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88aadf60-91f9-4932-a2bc-63365a139d36	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Daredevil, Man Without Fear/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+88aadf60-91f9-4932-a2bc-63365a139d36	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:daredevil-man-without-fear:combat0.attack:s1,f:xs:XP:daredevil-man-without-fear:combat0.attack:s1	-	-	-	23c4009444b0	-	11644ea09f03	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+88aadf60-91f9-4932-a2bc-63365a139d36	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:daredevil-man-without-fear:combat0.block:s1,f:xs:XP:daredevil-man-without-fear:combat0.block:s1	-	-	-	23c4009444b0	-	11644ea09f03	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+88aadf60-91f9-4932-a2bc-63365a139d36	f0/t0	AttackersDeclared	agreed	-	FX	start	4	0	x:xs:XP:daredevil-man-without-fear:combat0.attack:s1,f:xs:XP:daredevil-man-without-fear:combat0.attack:s1	-	-	-	23c4009444b0	-	11644ea09f03	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 88aadf60-91f9-4932-a2bc-63365a139d36	static#0.0	static#0.0	agreed	-	X	scen	1	0	Daredevil, Man Without Fear/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88b076a4-46ff-4a41-95a5-2821f4d8944d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:twin-blades:f0t0:s2,f:xs:XP:twin-blades:f0t0:s2	-	-	-	267e485f6204	-	a524a4314d06	-	-	2026-11-24	xproof
 88b076a4-46ff-4a41-95a5-2821f4d8944d	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:twin-blades:f0a0:s1,f:xs:XP:twin-blades:f0a0:s1	-	-	-	23c4009444b0	-	a524a4314d06	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -171,4 +171,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88fb9e82-28b9-4275-a1e2-cb3a9bfda127	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 88fb9e82-28b9-4275-a1e2-cb3a9bfda127	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88fb9e82-28b9-4275-a1e2-cb3a9bfda127	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-88fc179c-055b-47c2-b830-1fd2b1377147	cast	cast-resolve	agreed	-	X	scen	1	0	Applied Geometry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+88fc179c-055b-47c2-b830-1fd2b1377147	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:applied-geometry:cast:s1,f:xs:XP:applied-geometry:cast:s1	-	-	-	23c4009444b0	-	37b24f24e570	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

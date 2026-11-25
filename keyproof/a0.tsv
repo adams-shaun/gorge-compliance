@@ -28,8 +28,8 @@ a02e1ca7-23c5-41e3-a744-72fc9e9dd8ba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fir
 a02e1ca7-23c5-41e3-a744-72fc9e9dd8ba	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:fireshrieker:f0a0:s1,f:xs:XP:fireshrieker:f0a0:s1	-	-	-	3aa6ded33acb	-	072ede9e7be0	-	-	2026-11-25	xproof
 a02e1ca7-23c5-41e3-a744-72fc9e9dd8ba	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fireshrieker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a02f9f42-4c3a-4a97-8667-68ba4617f193	cast	cast-resolve	agreed	-	FX	scen	2	0	Practiced Scrollsmith/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a02f9f42-4c3a-4a97-8667-68ba4617f193	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Practiced Scrollsmith/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a02f9f42-4c3a-4a97-8667-68ba4617f193	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Practiced Scrollsmith/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a02f9f42-4c3a-4a97-8667-68ba4617f193	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:practiced-scrollsmith:combat0.attack:s1	-	-	-	23c4009444b0	-	dc4784d64c66	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a02f9f42-4c3a-4a97-8667-68ba4617f193	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:practiced-scrollsmith:combat0.block:s1	-	-	-	23c4009444b0	-	dc4784d64c66	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a02f9f42-4c3a-4a97-8667-68ba4617f193	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a03059dd-f499-407a-9346-6710b0468202	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:impetuous-protege:f0t1:s1,f:xs:XP:impetuous-protege:f0t1:s1	-	-	-	23c4009444b0	-	db81bf098a0f	-	-	2026-11-25	xproof
 a03059dd-f499-407a-9346-6710b0468202	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:impetuous-protege:f0t0:s1	-	-	-	8c0bd19283bb	-	db81bf098a0f	-	-	2026-11-24	xproof
@@ -61,10 +61,10 @@ a05bcc3e-25d5-4111-820e-a097189afb7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a05bcc3e-25d5-4111-820e-a097189afb7e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a05f641c-15c9-43dc-ae0d-1ea372fd33d5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a05f641c-15c9-43dc-ae0d-1ea372fd33d5	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a0657586-0404-4bb0-a92d-25f040d560c1	cast	cast-resolve	agreed	-	X	scen	1	0	Aberrant Manawurm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a0657586-0404-4bb0-a92d-25f040d560c1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aberrant Manawurm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a0657586-0404-4bb0-a92d-25f040d560c1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aberrant Manawurm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a0657586-0404-4bb0-a92d-25f040d560c1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aberrant Manawurm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a0657586-0404-4bb0-a92d-25f040d560c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aberrant-manawurm:cast:s1,f:xs:XP:aberrant-manawurm:cast:s1	-	-	-	23c4009444b0	-	3865206578be	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a0657586-0404-4bb0-a92d-25f040d560c1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:aberrant-manawurm:combat0.attack:s1,f:xs:XP:aberrant-manawurm:combat0.attack:s1	-	-	-	23c4009444b0	-	3865206578be	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a0657586-0404-4bb0-a92d-25f040d560c1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aberrant-manawurm:combat0.block:s1,f:xs:XP:aberrant-manawurm:combat0.block:s1	-	-	-	23c4009444b0	-	3865206578be	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a0657586-0404-4bb0-a92d-25f040d560c1	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:aberrant-manawurm:f0t0:s1,f:xs:XP:aberrant-manawurm:f0t0:s1	-	-	-	23c4009444b0	-	3865206578be	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a066eeb1-61fc-448b-bbab-650d672652ad	cast	cast	agreed	-	F	start	2	0	f:xs:XP:targ-wrangler:cast:s1	-	-	-	23c4009444b0	-	233e0ad57c8c	-	-	2026-11-25	xproof
 a066eeb1-61fc-448b-bbab-650d672652ad	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:targ-wrangler:f0t0:s1	-	-	-	23c4009444b0	-	233e0ad57c8c	-	-	2026-11-25	xproof
 a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oaken-siren:cast:s1,f:xs:XP:oaken-siren:cast:s1	-	-	-	23b491658465	-	77cac3b757fe	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ a0c956dc-d7de-4f11-b76f-7537fbee1731	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Oko,
 a0c956dc-d7de-4f11-b76f-7537fbee1731	f1/a1	activate#1.1	diverged	-	-	scen	0	1	-	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 a0c956dc-d7de-4f11-b76f-7537fbee1731	f1/a2	activate#1.2	diverged	-	-	scen	0	1	-	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 a0c956dc-d7de-4f11-b76f-7537fbee1731	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Oko, Lorwyn Liege/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-a0cbb1ba-73b1-4418-bbe3-5d1a02007c08	cast	cast-resolve	agreed	-	X	scen	1	0	Vibrant Outburst/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a0cbb1ba-73b1-4418-bbe3-5d1a02007c08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vibrant-outburst:cast:s1,f:xs:XP:vibrant-outburst:cast:s1	-	-	-	23c4009444b0	-	a97c85256973	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a0cd19c1-9125-4627-83ba-d42c489b4e7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0cd19c1-9125-4627-83ba-d42c489b4e7d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0ce2f5a-9c0b-4801-9105-72f84d8a4a1f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arrow-storm:cast:s1,f:xs:XP:arrow-storm:cast:s1	-	-	-	d864b561c9cb	-	c54997034f7a	-	-	2026-11-24	xproof

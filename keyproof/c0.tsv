@@ -39,8 +39,8 @@ c01aeaa5-1d3b-4493-9575-30175dcd780d	cast	cast-resolve	agreed	-	X	scen	1	0	Gleam
 c01aeaa5-1d3b-4493-9575-30175dcd780d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gleaming Splendor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c01aeaa5-1d3b-4493-9575-30175dcd780d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gleaming Splendor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c01b221f-3993-43ab-8cde-b42fb344e2a7	cast	cast-resolve	agreed	-	FX	scen	2	0	Sunderflock/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-c01b221f-3993-43ab-8cde-b42fb344e2a7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sunderflock/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-c01b221f-3993-43ab-8cde-b42fb344e2a7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sunderflock/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+c01b221f-3993-43ab-8cde-b42fb344e2a7	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sunderflock:combat0.attack:s1,f:xs:XP:sunderflock:combat0.attack:s1	-	-	-	23c4009444b0	-	56108e676162	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c01b221f-3993-43ab-8cde-b42fb344e2a7	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sunderflock:combat0.block:s1,f:xs:XP:sunderflock:combat0.block:s1	-	-	-	23c4009444b0	-	56108e676162	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c01b221f-3993-43ab-8cde-b42fb344e2a7	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c01b221f-3993-43ab-8cde-b42fb344e2a7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Sunderflock/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 c021c808-dc58-4386-8758-68b858badbd5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirror-sigil-sergeant:f0t0:s1,f:xs:XP:mirror-sigil-sergeant:f0t0:s1	-	-	-	3aa6ded33acb	-	20abcec8bb57	-	-	2026-11-25	xproof
@@ -69,8 +69,8 @@ c04197ad-d2f3-499f-b863-bed0c869519c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The 
 c04197ad-d2f3-499f-b863-bed0c869519c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-echoverse-fulcrum:f0t0:s1,f:xs:XP:the-echoverse-fulcrum:f0t0:s1	-	-	-	25696bf19d5b	-	ed46f331d8e2	-	-	2026-11-24	xproof
 c04b4323-db6a-4ab1-99b7-eef3acad3c4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c04b4323-db6a-4ab1-99b7-eef3acad3c4f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c04d4fd4-e5aa-431d-824b-8bc94245f103	cast	cast-resolve	agreed	-	X	scen	1	0	Fugitive Droid/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c04d4fd4-e5aa-431d-824b-8bc94245f103	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fugitive Droid/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c04d4fd4-e5aa-431d-824b-8bc94245f103	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fugitive-droid:cast:s1,f:xs:XP:fugitive-droid:cast:s1	-	-	-	23c4009444b0	-	c4036b9a954f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c04d4fd4-e5aa-431d-824b-8bc94245f103	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:fugitive-droid:combat0.attack:s1,f:xs:XP:fugitive-droid:combat0.attack:s1	-	-	-	23c4009444b0	-	c4036b9a954f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c04d4fd4-e5aa-431d-824b-8bc94245f103	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fugitive Droid/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c04d4fd4-e5aa-431d-824b-8bc94245f103	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fugitive Droid/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c04d4fd4-e5aa-431d-824b-8bc94245f103	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fugitive Droid/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

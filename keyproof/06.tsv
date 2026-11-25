@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 061e2ef6-ce8d-4319-b525-96b9c2824001	f0/t0	Phase	agreed	-	F	start	1	0	f:xs:XP:goblin-bomb:f0t0:s1	-	-	-	3aa6ded33acb	-	4c732dbeff20	-	-	2026-11-25	xproof
 061e7fb2-2c04-4845-b60a-0e2512a2dec1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:living-lectern:cast:s1,f:xs:XP:living-lectern:cast:s1	-	-	-	23b491658465	-	45c282a5f4af	-	-	2026-11-24	xproof
 061e7fb2-2c04-4845-b60a-0e2512a2dec1	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:living-lectern:f0a0:s1,f:xs:XP:living-lectern:f0a0:s1	-	-	-	23b491658465	-	45c282a5f4af	-	-	2026-11-24	xproof
-06296d4d-a1b3-4e9a-a2fd-a0183bb892a1	cast	cast-resolve	agreed	-	X	scen	1	0	Crowd of True Believers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+06296d4d-a1b3-4e9a-a2fd-a0183bb892a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crowd-of-true-believers:cast:s1,f:xs:XP:crowd-of-true-believers:cast:s1	-	-	-	23c4009444b0	-	793c97dc444f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 06296d4d-a1b3-4e9a-a2fd-a0183bb892a1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Crowd of True Believers/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0629747e-8dd8-4150-95ee-9d860264ccb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0629747e-8dd8-4150-95ee-9d860264ccb0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -63,8 +63,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 063960e0-3f9c-4697-ba5e-81c56ac1b5d2	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0639bd82-084f-47d5-b158-05dfc29efa40	cast	cast	agreed	-	F	start	2	0	f:xs:XP:no-witnesses:cast:s1	-	-	-	23b491658465	-	9a2b487a1c16	-	-	2026-11-24	xproof
 063dd25b-d4b4-4e09-acae-8c52dcb40803	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Foot Headquarters/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-063dd25b-d4b4-4e09-acae-8c52dcb40803	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Foot Headquarters/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-063dd25b-d4b4-4e09-acae-8c52dcb40803	land	play-land	agreed	-	X	scen	1	0	Foot Headquarters/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+063dd25b-d4b4-4e09-acae-8c52dcb40803	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:foot-headquarters:land:s1,f:xs:XP:foot-headquarters:land:s1	-	-	-	23c4009444b0	-	7ba9b5cd9fe8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+063dd25b-d4b4-4e09-acae-8c52dcb40803	land	land	agreed	-	FX	start	2	0	x:xs:XP:foot-headquarters:land:s1,f:xs:XP:foot-headquarters:land:s1	-	-	-	23c4009444b0	-	7ba9b5cd9fe8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 06413d87-d119-4c04-93d5-5ced7ad4a858	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06424141-2c26-4ee8-83c2-dac62e3d3540	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06424141-2c26-4ee8-83c2-dac62e3d3540	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 064a2f4a-ff3f-4622-8727-24b22965416d	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 064a2f4a-ff3f-4622-8727-24b22965416d	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 064c3269-c012-4fc7-84c3-5f147a82a03c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stalactite-dagger:f0t0:s2,f:xs:XP:stalactite-dagger:f0t0:s2	-	-	-	267e485f6204	-	8db1aeadc38d	-	-	2026-11-24	xproof
-064c3269-c012-4fc7-84c3-5f147a82a03c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stalactite Dagger/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+064c3269-c012-4fc7-84c3-5f147a82a03c	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:stalactite-dagger:f0a0:s1,f:xs:XP:stalactite-dagger:f0a0:s1	-	-	-	23c4009444b0	-	8db1aeadc38d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 064c3269-c012-4fc7-84c3-5f147a82a03c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stalactite-dagger:f0t0:s2,f:xs:XP:stalactite-dagger:f0t0:s2	-	-	-	267e485f6204	-	8db1aeadc38d	-	-	2026-11-24	xproof
 064c3269-c012-4fc7-84c3-5f147a82a03c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Stalactite Dagger/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 064c5a14-c2f2-4b7a-8e0b-01b9995e8f89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06bea0b2-1d0f-4d64-a13e-723d08042e83	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arbalest-engineers:f0t0:s1,f:xs:XP:arbalest-engineers:f0t0:s1	-	-	-	3aa6ded33acb	-	2618e309c43b	-	-	2026-11-25	xproof
 06c12fcc-1c08-40a0-a0da-e139c42f083f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:druid-of-horns:cast:s1,f:xs:XP:druid-of-horns:cast:s1	-	-	-	d864b561c9cb	-	1e723437ecf8	-	-	2026-11-24	xproof
 06c12fcc-1c08-40a0-a0da-e139c42f083f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-06c1f8a4-4948-435b-ae98-b1276b57e958	cast	cast-resolve	agreed	-	X	scen	1	0	Traumatic Critique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+06c1f8a4-4948-435b-ae98-b1276b57e958	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:traumatic-critique:cast:s1,f:xs:XP:traumatic-critique:cast:s1	-	-	-	23c4009444b0	-	c7160e466dea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 06c39c1c-0e34-4ef0-bd06-23245cb9cc59	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sister-hospitaller:cast:s1,f:xs:XP:sister-hospitaller:cast:s1	-	-	-	8c0bd19283bb	-	bca2efcd61bd	-	-	2026-11-24	xproof
 06c39c1c-0e34-4ef0-bd06-23245cb9cc59	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sister-hospitaller:cast:s1,f:xs:XP:sister-hospitaller:cast:s1	-	-	-	8c0bd19283bb	-	bca2efcd61bd	-	-	2026-11-24	xproof
 06c3e85c-17d8-44e1-a0f8-07ef3f1624cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heated-debate:cast:s1,f:xs:XP:heated-debate:cast:s1	-	-	-	d864b561c9cb	-	a84e98285fa6	-	-	2026-11-24	xproof

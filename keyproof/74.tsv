@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74b7fe23-5d3a-4092-8d78-7c0eba8f6f73	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 74b7fe23-5d3a-4092-8d78-7c0eba8f6f73	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74b7fe23-5d3a-4092-8d78-7c0eba8f6f73	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74b8182e-54be-444a-97b1-84fc5fd3c290	cast	cast-resolve	agreed	-	X	scen	1	0	End of the Hunt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+74b8182e-54be-444a-97b1-84fc5fd3c290	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:end-of-the-hunt:cast:s1,f:xs:XP:end-of-the-hunt:cast:s1	-	-	-	23c4009444b0	-	a11e8b26961b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 74b8976a-15cb-4604-a65d-ca9735cd6000	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unagi-s-spray:cast:s1,f:xs:XP:unagi-s-spray:cast:s1	-	-	-	8c0bd19283bb	-	2668168d7761	-	-	2026-11-24	xproof
 74c0164c-130f-4572-9066-626c77f6e2ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74c0164c-130f-4572-9066-626c77f6e2ff	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -195,8 +195,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74e02bdf-a074-4356-9d06-0df01dd2df66	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Marooned"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 74e02bdf-a074-4356-9d06-0df01dd2df66	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Marooned"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 74e3243b-6707-4769-8767-7cf2ef71009a	cast	cast-resolve	agreed	-	FX	scen	2	0	Leonardo, Sewer Samurai/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-74e3243b-6707-4769-8767-7cf2ef71009a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Leonardo, Sewer Samurai/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-74e3243b-6707-4769-8767-7cf2ef71009a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Leonardo, Sewer Samurai/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+74e3243b-6707-4769-8767-7cf2ef71009a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:leonardo-sewer-samurai:combat0.attack:s1,f:xs:XP:leonardo-sewer-samurai:combat0.attack:s1	-	-	-	23c4009444b0	-	a73fc981f3fe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+74e3243b-6707-4769-8767-7cf2ef71009a	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:leonardo-sewer-samurai:combat0.block:s1	-	-	-	23c4009444b0	-	a73fc981f3fe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 74e3243b-6707-4769-8767-7cf2ef71009a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Leonardo, Sewer Samurai/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 74e3243b-6707-4769-8767-7cf2ef71009a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Leonardo, Sewer Samurai/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 74e6dd0f-2866-4d45-a214-8b09b837bc02	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:slipstream-eel:cast:s2,f:xs:XP:slipstream-eel:cast:s2	-	-	-	fc71ca68c5ac	-	10bbe11b9a6e	-	-	2026-11-24	xproof

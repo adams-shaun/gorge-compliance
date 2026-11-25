@@ -129,8 +129,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b94a11b-21b0-4465-a520-69608f022fb4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b94a11b-21b0-4465-a520-69608f022fb4	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1b94ee87-a2f4-47f1-9fc7-4a167cad1b3b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:shinestriker:f0t0:s2,f:xs:XP:shinestriker:f0t0:s2	-	-	-	267e485f6204	-	150c5e494485	-	-	2026-11-24	xproof
-1b94ee87-a2f4-47f1-9fc7-4a167cad1b3b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shinestriker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-1b94ee87-a2f4-47f1-9fc7-4a167cad1b3b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shinestriker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+1b94ee87-a2f4-47f1-9fc7-4a167cad1b3b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:shinestriker:combat0.attack:s1,f:xs:XP:shinestriker:combat0.attack:s1	-	-	-	23c4009444b0	-	150c5e494485	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1b94ee87-a2f4-47f1-9fc7-4a167cad1b3b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:shinestriker:combat0.block:s1,f:xs:XP:shinestriker:combat0.block:s1	-	-	-	23c4009444b0	-	150c5e494485	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1b94ee87-a2f4-47f1-9fc7-4a167cad1b3b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:shinestriker:f0t0:s2,f:xs:XP:shinestriker:f0t0:s2	-	-	-	267e485f6204	-	150c5e494485	-	-	2026-11-24	xproof
 1b99c32d-1d02-410e-84bf-9db2ca05f576	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:healing-technique:cast:s1,f:xs:XP:healing-technique:cast:s1	-	-	-	8c0bd19283bb	-	0829970e76cd	-	-	2026-11-24	xproof
 1b99c32d-1d02-410e-84bf-9db2ca05f576	f0/t0	SpellCast/Demonstrate	agreed	-	FX	start	2	0	x:xs:XP:healing-technique:cast:s1,f:xs:XP:healing-technique:cast:s1	-	-	-	8c0bd19283bb	-	0829970e76cd	-	-	2026-11-24	xproof

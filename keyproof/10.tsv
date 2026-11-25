@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 101407b4-e7e8-4aff-84a2-a97947358b88	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:liminal-hold:f0t0:s2,f:xs:XP:liminal-hold:f0t0:s2	-	-	-	267e485f6204	-	29ec3e211927	-	-	2026-11-24	xproof
 10172c40-7169-4098-9452-b35797d27065	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vastwood-zendikon:cast:s1,f:xs:XP:vastwood-zendikon:cast:s1	-	-	-	8a1b1a193ec0	-	f28daf15467e	-	-	2026-11-24	xproof
 10172c40-7169-4098-9452-b35797d27065	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-10185447-a13f-40d8-a8b6-39ce801f2fc0	cast	cast-resolve	agreed	-	X	scen	1	0	Stomped by the Foot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+10185447-a13f-40d8-a8b6-39ce801f2fc0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stomped-by-the-foot:cast:s1,f:xs:XP:stomped-by-the-foot:cast:s1	-	-	-	23c4009444b0	-	0f30d2b4aed1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 101a5c2d-b0b4-45a7-b236-df474ac47356	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 101b2387-58a1-4ef9-8395-0024713e217b	cast	cast-resolve	agreed	-	FX	scen	2	0	Test of Courage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 102356a9-0de5-4034-b121-034da5deb4f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dark-offering:cast:s1,f:xs:XP:dark-offering:cast:s1	-	-	-	3aa6ded33acb	-	431e163e9da9	-	-	2026-11-25	xproof
@@ -125,8 +125,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:wrenn-and-six:cast:s1,f:xs:XP:wrenn-and-six:cast:s1	-	-	-	d864b561c9cb	-	53ea956d1032	-	-	2026-11-24	xproof
 108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-10916f33-aaa6-43a1-9835-b60fd061161f	cast	cast-resolve	agreed	-	X	scen	1	0	A.I.M. Synthoids/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-10916f33-aaa6-43a1-9835-b60fd061161f	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+10916f33-aaa6-43a1-9835-b60fd061161f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:a-i-m-synthoids:cast:s1,f:xs:XP:a-i-m-synthoids:cast:s1	-	-	-	23c4009444b0	-	cd7d8af00667	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+10916f33-aaa6-43a1-9835-b60fd061161f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:a-i-m-synthoids:cast:s1,f:xs:XP:a-i-m-synthoids:cast:s1	-	-	-	23c4009444b0	-	cd7d8af00667	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1091c83a-a4b9-457f-a69a-9a44a7e10759	cast	cast-resolve	agreed	-	FX	scen	2	0	Echo, Perceptive Prodigy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1091c83a-a4b9-457f-a69a-9a44a7e10759	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:echo-perceptive-prodigy:combat0.attack:s1,f:xs:XP:echo-perceptive-prodigy:combat0.attack:s1	-	-	-	23c4009444b0	-	57f288f704c5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1091c83a-a4b9-457f-a69a-9a44a7e10759	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:echo-perceptive-prodigy:combat0.block:s1,f:xs:XP:echo-perceptive-prodigy:combat0.block:s1	-	-	-	23c4009444b0	-	57f288f704c5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -198,7 +198,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10d8f29a-d483-4f06-bc13-d41d62847ffe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10d8f29a-d483-4f06-bc13-d41d62847ffe	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 10db57b4-f895-4514-b610-2252ba676353	cast	cast-resolve	agreed	-	X	scen	1	0	Bullseye, Death Dealer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-10db57b4-f895-4514-b610-2252ba676353	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bullseye, Death Dealer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+10db57b4-f895-4514-b610-2252ba676353	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:bullseye-death-dealer:f0a0:s1,f:xs:XP:bullseye-death-dealer:f0a0:s1	-	-	-	23c4009444b0	-	486eb5534228	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10db57b4-f895-4514-b610-2252ba676353	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10dda10f-2549-47e5-9a8b-fb414cf38d3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:memorial-vault:cast:s1,f:xs:XP:memorial-vault:cast:s1	-	-	-	23c4009444b0	-	49f16e5bfe94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10dda10f-2549-47e5-9a8b-fb414cf38d3f	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:memorial-vault:f0a0:s1,f:xs:XP:memorial-vault:f0a0:s1	-	-	-	23c4009444b0	-	49f16e5bfe94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -218,8 +218,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10f274f9-9044-447b-81c9-d4906ad9e6be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10f274f9-9044-447b-81c9-d4906ad9e6be	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 10fc2009-4212-47c6-8a97-ab0f45c1f91b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Avengers Hangar/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-10fc2009-4212-47c6-8a97-ab0f45c1f91b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Avengers Hangar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-10fc2009-4212-47c6-8a97-ab0f45c1f91b	land	play-land	agreed	-	X	scen	1	0	Avengers Hangar/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+10fc2009-4212-47c6-8a97-ab0f45c1f91b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:avengers-hangar:land:s1,f:xs:XP:avengers-hangar:land:s1	-	-	-	23c4009444b0	-	8302cd40d3a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+10fc2009-4212-47c6-8a97-ab0f45c1f91b	land	land	agreed	-	FX	start	2	0	x:xs:XP:avengers-hangar:land:s1,f:xs:XP:avengers-hangar:land:s1	-	-	-	23c4009444b0	-	8302cd40d3a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10fd868f-45b3-4e2f-89d9-5c0b8a92f9fe	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10fe402e-8d6f-4058-9f42-86f229055359	cast	cast-resolve	agreed	-	FX	scen	2	0	Friendly Neighborhood/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10fe402e-8d6f-4058-9f42-86f229055359	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41699d92-c209-4fcb-bbd6-685b3437d0c2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gorehorn-raider:f0t0:s1,f:xs:XP:gorehorn-raider:f0t0:s1	-	-	-	23c4009444b0	-	63d51043671e	-	-	2026-11-25	xproof
 416c70ab-f136-43e0-b5d5-9af8d4211c01	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:deluge-virtuoso:f0t0:s2,f:xs:XP:deluge-virtuoso:f0t0:s2	-	-	-	5437c1394672	-	31f3fed78988	-	-	2026-11-24	xproof
 416c70ab-f136-43e0-b5d5-9af8d4211c01	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:deluge-virtuoso:f0t0:s2,f:xs:XP:deluge-virtuoso:f0t0:s2	-	-	-	5437c1394672	-	31f3fed78988	-	-	2026-11-24	xproof
-416c70ab-f136-43e0-b5d5-9af8d4211c01	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Deluge Virtuoso/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+416c70ab-f136-43e0-b5d5-9af8d4211c01	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:deluge-virtuoso:f0t1:s1,f:xs:XP:deluge-virtuoso:f0t1:s1	-	-	-	23c4009444b0	-	31f3fed78988	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 416de3dd-c15d-4596-9386-5cac53302724	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 416de3dd-c15d-4596-9386-5cac53302724	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 416f49e2-feb1-43e7-befc-b0e02181b202	cast	cast-resolve	agreed	-	X	scen	1	0	Robe of Stars/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -190,9 +190,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41fb2b0e-d0a0-4e47-a6f3-fc9860ade65a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marshal-s-anthem:cast:s1,f:xs:XP:marshal-s-anthem:cast:s1	-	-	-	8a1b1a193ec0	-	05706c1f2032	-	-	2026-11-24	xproof
 41fb2b0e-d0a0-4e47-a6f3-fc9860ade65a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:marshal-s-anthem:cast:s1,f:xs:XP:marshal-s-anthem:cast:s1	-	-	-	8a1b1a193ec0	-	05706c1f2032	-	-	2026-11-24	xproof
 41fbdaa2-7a7a-44d5-a8f4-77624350eedd	cast	cast-resolve	agreed	-	FX	scen	2	0	Splinter, Hamato Yoshi/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-41fbdaa2-7a7a-44d5-a8f4-77624350eedd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Splinter, Hamato Yoshi/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-41fbdaa2-7a7a-44d5-a8f4-77624350eedd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Splinter, Hamato Yoshi/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-41fbdaa2-7a7a-44d5-a8f4-77624350eedd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Splinter, Hamato Yoshi/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+41fbdaa2-7a7a-44d5-a8f4-77624350eedd	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:splinter-hamato-yoshi:combat0.attack:s1,f:xs:XP:splinter-hamato-yoshi:combat0.attack:s1	-	-	-	23c4009444b0	-	e381bca5732b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+41fbdaa2-7a7a-44d5-a8f4-77624350eedd	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:splinter-hamato-yoshi:combat0.block:s1,f:xs:XP:splinter-hamato-yoshi:combat0.block:s1	-	-	-	23c4009444b0	-	e381bca5732b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+41fbdaa2-7a7a-44d5-a8f4-77624350eedd	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:splinter-hamato-yoshi:static0.0:s1,f:xs:XP:splinter-hamato-yoshi:static0.0:s1	-	-	-	23c4009444b0	-	e381bca5732b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 41fbf835-baee-4530-9155-e2c1b9045567	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 41fbf835-baee-4530-9155-e2c1b9045567	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 41fbf835-baee-4530-9155-e2c1b9045567	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

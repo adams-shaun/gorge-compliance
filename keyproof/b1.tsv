@@ -48,16 +48,16 @@ b1412eda-e3a4-41b2-932e-795a0ba0f7f8	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP
 b145952b-52e3-4a66-b47e-f08a489f9443	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b145952b-52e3-4a66-b47e-f08a489f9443	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b1462c82-7702-451b-b612-990353a79ac4	cast	cast-resolve	agreed	-	FX	scen	2	0	The Neutrinos/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b1462c82-7702-451b-b612-990353a79ac4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Neutrinos/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b1462c82-7702-451b-b612-990353a79ac4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Neutrinos/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b1462c82-7702-451b-b612-990353a79ac4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:the-neutrinos:combat0.attack:s1,f:xs:XP:the-neutrinos:combat0.attack:s1	-	-	-	23c4009444b0	-	9f253710e8d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b1462c82-7702-451b-b612-990353a79ac4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-neutrinos:combat0.block:s1,f:xs:XP:the-neutrinos:combat0.block:s1	-	-	-	23c4009444b0	-	9f253710e8d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b1462c82-7702-451b-b612-990353a79ac4	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	The Neutrinos/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b1462c82-7702-451b-b612-990353a79ac4	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	The Neutrinos/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b1462c82-7702-451b-b612-990353a79ac4	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:the-neutrinos:combat0.attack:s1,f:xs:XP:the-neutrinos:combat0.attack:s1	-	-	-	23c4009444b0	-	9f253710e8d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b148578c-c0bf-4785-b97c-4b6f83028008	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b14bd895-1d4e-4bd5-9ac1-fed56afb6c90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b14bd895-1d4e-4bd5-9ac1-fed56afb6c90	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b14d05c0-fe10-4079-a90e-0aea1a8fd375	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b14d05c0-fe10-4079-a90e-0aea1a8fd375	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-b14d3226-adc2-4bdd-9e69-fefdc946ac04	cast	cast-resolve	agreed	-	X	scen	1	0	Wander Off/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b14d3226-adc2-4bdd-9e69-fefdc946ac04	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wander-off:cast:s1,f:xs:XP:wander-off:cast:s1	-	-	-	23c4009444b0	-	57d4c291197d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b153fc70-0312-4856-befd-bb6b9a04a26e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:join-the-dead:cast:s1,f:xs:XP:join-the-dead:cast:s1	-	-	-	3aa6ded33acb	-	b16e28549075	-	-	2026-11-25	xproof
 b1544f21-7e98-461b-aed5-e748b0168c52	cast	cast-resolve	agreed	-	FX	scen	2	0	Swords to Plowshares/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b15c6203-6311-44eb-916d-a4c271960c74	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof

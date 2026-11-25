@@ -9,7 +9,7 @@ f0140f00-5414-493b-962d-33312d49f6ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haz
 f0140f00-5414-493b-962d-33312d49f6ea	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f014b1a1-20ef-475c-bf83-f1a82e68ab97	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:fiery-fall:cast:s1,f:xs:XP:fiery-fall:cast:s1	-	-	-	8a1b1a193ec0	-	88466860137f	-	-	2026-11-24	xproof
 f014b1a1-20ef-475c-bf83-f1a82e68ab97	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:fiery-fall:cast:s2,f:xs:XP:fiery-fall:cast:s2	-	-	-	8a1b1a193ec0	-	88466860137f	-	-	2026-11-24	xproof
-f0163420-2f91-493c-bad4-2cd33e9856bf	cast	cast-resolve	agreed	-	X	scen	1	0	Tome Blast/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f0163420-2f91-493c-bad4-2cd33e9856bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tome-blast:cast:s1,f:xs:XP:tome-blast:cast:s1	-	-	-	23c4009444b0	-	c3f020f8135c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f01c779a-97be-4727-ab62-33579f52447a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f01c779a-97be-4727-ab62-33579f52447a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f01c779a-97be-4727-ab62-33579f52447a	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -78,9 +78,9 @@ f0787397-8edb-4794-8ee1-22f97a057be8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 f07a24c0-bf3c-4733-9473-c6be3b16950e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f07b821c-bbc1-4def-b009-6c03689478d0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tarfire:cast:s1,f:xs:XP:tarfire:cast:s1	-	-	-	d864b561c9cb	-	4980d055cb2c	-	-	2026-11-24	xproof
 f07bd49d-8e71-4d56-be2a-638514011318	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f07c07d7-00f1-44a5-b51f-0a22cc51fd2b	cast	cast-resolve	agreed	-	X	scen	1	0	Snooping Page/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f07c07d7-00f1-44a5-b51f-0a22cc51fd2b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Snooping Page/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f07c07d7-00f1-44a5-b51f-0a22cc51fd2b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Snooping Page/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f07c07d7-00f1-44a5-b51f-0a22cc51fd2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:snooping-page:cast:s1,f:xs:XP:snooping-page:cast:s1	-	-	-	23c4009444b0	-	89331ccf6d22	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f07c07d7-00f1-44a5-b51f-0a22cc51fd2b	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:snooping-page:f0t0:s1,f:xs:XP:snooping-page:f0t0:s1	-	-	-	23c4009444b0	-	89331ccf6d22	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f07c07d7-00f1-44a5-b51f-0a22cc51fd2b	f0/t1	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:snooping-page:f0t0:s1,f:xs:XP:snooping-page:f0t0:s1	-	-	-	23c4009444b0	-	89331ccf6d22	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f07e6ba7-42e8-4b4d-9831-00a856059060	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f0801029-bcf7-4bdb-84bf-e88dcaa9dc03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f0801029-bcf7-4bdb-84bf-e88dcaa9dc03	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51acd176-e84d-42c2-acb2-cceeb28a9fec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51af3da5-0970-436e-baa6-3171889a40e0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:primary-research:f0t0:s2,f:xs:XP:primary-research:f0t0:s2	-	-	-	5437c1394672	-	bde0fc0e1c6b	-	-	2026-11-24	xproof
 51af3da5-0970-436e-baa6-3171889a40e0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:primary-research:f0t0:s2,f:xs:XP:primary-research:f0t0:s2	-	-	-	5437c1394672	-	bde0fc0e1c6b	-	-	2026-11-24	xproof
-51af3da5-0970-436e-baa6-3171889a40e0	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Primary Research/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+51af3da5-0970-436e-baa6-3171889a40e0	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:primary-research:f0t1:s1,f:xs:XP:primary-research:f0t1:s1	-	-	-	23c4009444b0	-	bde0fc0e1c6b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 51af8662-07e6-4771-8ff2-c54364987698	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51b47053-d169-4627-982f-f29b8630d75f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51b47053-d169-4627-982f-f29b8630d75f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -139,10 +139,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51bb6d3b-be6a-435d-8a80-0c0f0161892d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:storyteller-pixie:combat0.block:s1,f:xs:XP:storyteller-pixie:combat0.block:s1	-	-	-	3aa6ded33acb	-	c752b0e50d03	-	-	2026-11-25	xproof
 51bb6d3b-be6a-435d-8a80-0c0f0161892d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Storyteller Pixie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51bd7bc4-12cd-434e-8691-3123a018e634	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51c0b46c-c379-420a-a4a4-d18724c759aa	cast	cast-resolve	agreed	-	X	scen	1	0	Technodrome/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+51c0b46c-c379-420a-a4a4-d18724c759aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:technodrome:cast:s1,f:xs:XP:technodrome:cast:s1	-	-	-	23c4009444b0	-	d4d9a5be676f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 51c0b46c-c379-420a-a4a4-d18724c759aa	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Technodrome/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51c0b46c-c379-420a-a4a4-d18724c759aa	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Technodrome/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-51c0b46c-c379-420a-a4a4-d18724c759aa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Technodrome/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+51c0b46c-c379-420a-a4a4-d18724c759aa	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:technodrome:f0a0:s1,f:xs:XP:technodrome:f0a0:s1	-	-	-	23c4009444b0	-	d4d9a5be676f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 51c0b46c-c379-420a-a4a4-d18724c759aa	static#0.0	static#0.0	agreed	-	X	scen	1	0	Technodrome/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51c0b46c-c379-420a-a4a4-d18724c759aa	static#0.1	static#0.1	agreed	-	X	scen	1	0	Technodrome/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51c1f21d-1512-4885-bfdc-58790cf77d51	cast	cast-resolve	agreed	-	X	scen	1	0	Ultron Drone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -62,10 +62,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 434a20f8-3f87-4004-9155-0f196fc2257e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 434e58f4-4237-454f-a2d0-61885c9aafaa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archon-of-redemption:f0t0:s1,f:xs:XP:archon-of-redemption:f0t0:s1	-	-	-	8a1b1a193ec0	-	08ce73173e14	-	-	2026-11-24	xproof
 434e58f4-4237-454f-a2d0-61885c9aafaa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:archon-of-redemption:f0t0:s1,f:xs:XP:archon-of-redemption:f0t0:s1	-	-	-	8a1b1a193ec0	-	08ce73173e14	-	-	2026-11-24	xproof
-434e720f-2bfa-49b6-a5ac-fe0c0b24764d	cast	cast-resolve	agreed	-	X	scen	1	0	Buzz Bots/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-434e720f-2bfa-49b6-a5ac-fe0c0b24764d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Buzz Bots/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-434e720f-2bfa-49b6-a5ac-fe0c0b24764d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Buzz Bots/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-434e720f-2bfa-49b6-a5ac-fe0c0b24764d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Buzz Bots/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+434e720f-2bfa-49b6-a5ac-fe0c0b24764d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:buzz-bots:cast:s1,f:xs:XP:buzz-bots:cast:s1	-	-	-	23c4009444b0	-	8f6f01f31e3b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+434e720f-2bfa-49b6-a5ac-fe0c0b24764d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:buzz-bots:combat0.attack:s1,f:xs:XP:buzz-bots:combat0.attack:s1	-	-	-	23c4009444b0	-	8f6f01f31e3b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+434e720f-2bfa-49b6-a5ac-fe0c0b24764d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:buzz-bots:combat0.block:s1,f:xs:XP:buzz-bots:combat0.block:s1	-	-	-	23c4009444b0	-	8f6f01f31e3b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+434e720f-2bfa-49b6-a5ac-fe0c0b24764d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:buzz-bots:combat0.block:s1,f:xs:XP:buzz-bots:combat0.block:s1	-	-	-	23c4009444b0	-	8f6f01f31e3b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 434e82b5-abd4-41ac-a5b1-2dd01c667374	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 434e82b5-abd4-41ac-a5b1-2dd01c667374	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 434e82b5-abd4-41ac-a5b1-2dd01c667374	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 437cfd16-94bc-43ba-afd8-e9e9d028a4ca	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 43827acb-70cf-44a3-8560-e9f7330c835e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ardent-electromancer:f0t0:s1,f:xs:XP:ardent-electromancer:f0t0:s1	-	-	-	ae86f6029288	-	bdb134f1ea4f	-	-	2026-11-24	xproof
 43827acb-70cf-44a3-8560-e9f7330c835e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ardent-electromancer:f0t0:s1,f:xs:XP:ardent-electromancer:f0t0:s1	-	-	-	ae86f6029288	-	bdb134f1ea4f	-	-	2026-11-24	xproof
-4384996f-aeaa-41ac-aa0e-12d72c887731	cast	cast-resolve	agreed	-	X	scen	1	0	Pursue the Past/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4384996f-aeaa-41ac-aa0e-12d72c887731	cast	cast	agreed	-	F	start	2	0	f:xs:XP:pursue-the-past:cast:s1	-	-	-	23c4009444b0	-	b07fc4bc9eb3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 438546b8-0b67-4bec-a43b-f2fc7449c90e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 438546b8-0b67-4bec-a43b-f2fc7449c90e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 438a0a7a-00bc-4d93-8e69-a8a6084523c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:littjara-glade-warden:cast:s1,f:xs:XP:littjara-glade-warden:cast:s1	-	-	-	d864b561c9cb	-	99cf8db969fa	-	-	2026-11-24	xproof

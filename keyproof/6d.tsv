@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d7f7e6e-5076-4af7-afe3-3e500835c4aa	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gravelgill-scoundrel:combat0.block:s1,f:xs:XP:gravelgill-scoundrel:combat0.block:s1	-	-	-	23c4009444b0	-	b16b67438b89	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d7f7e6e-5076-4af7-afe3-3e500835c4aa	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:gravelgill-scoundrel:combat0.attack:s1,f:xs:XP:gravelgill-scoundrel:combat0.attack:s1	-	-	-	23c4009444b0	-	b16b67438b89	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d819742-3d02-4d60-9b10-82caa49a9d49	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:novel-nunchaku:f0t0:s2,f:xs:XP:novel-nunchaku:f0t0:s2	-	-	-	5437c1394672	-	656e0f05cde0	-	-	2026-11-24	xproof
-6d819742-3d02-4d60-9b10-82caa49a9d49	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Novel Nunchaku/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6d819742-3d02-4d60-9b10-82caa49a9d49	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:novel-nunchaku:f0a0:s1,f:xs:XP:novel-nunchaku:f0a0:s1	-	-	-	23c4009444b0	-	656e0f05cde0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d819742-3d02-4d60-9b10-82caa49a9d49	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:novel-nunchaku:f0t0:s2,f:xs:XP:novel-nunchaku:f0t0:s2	-	-	-	5437c1394672	-	656e0f05cde0	-	-	2026-11-24	xproof
 6d819742-3d02-4d60-9b10-82caa49a9d49	static#0.0	static#0.0	agreed	-	X	scen	1	0	Novel Nunchaku/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d86dcaa-2295-4f4d-ada7-216f96138d81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,8 +110,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d920c99-8a85-4b20-97c2-7aa0c79ae70a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:poison-arrow:cast:s1,f:xs:XP:poison-arrow:cast:s1	-	-	-	5f2128bf97e4	-	daf0e03477e2	-	-	2026-11-24	xproof
 6d92f14b-470b-40bc-b294-f725d46f307e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d92f14b-470b-40bc-b294-f725d46f307e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6d972501-4174-4bf0-a26b-2edef31b3a0c	cast	cast-resolve	agreed	-	X	scen	1	0	Slumbering Walker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-6d972501-4174-4bf0-a26b-2edef31b3a0c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Slumbering Walker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+6d972501-4174-4bf0-a26b-2edef31b3a0c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:slumbering-walker:cast:s1	-	-	-	23c4009444b0	-	412066f9b597	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6d972501-4174-4bf0-a26b-2edef31b3a0c	f0/t0	Phase	agreed	-	F	start	4	0	f:xs:XP:slumbering-walker:cast:s1	-	-	-	23c4009444b0	-	412066f9b597	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d9ab641-ba99-4b27-a84e-8c2ae57a2fc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d9ab641-ba99-4b27-a84e-8c2ae57a2fc1	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6d9ab641-ba99-4b27-a84e-8c2ae57a2fc1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

@@ -121,10 +121,10 @@ a19e0a7f-d356-4d2c-8414-70a40ce18674	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a19e0a7f-d356-4d2c-8414-70a40ce18674	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:flowstone-charger:f0t0:s1,f:xs:XP:flowstone-charger:f0t0:s1	-	-	-	fc71ca68c5ac	-	a7e4abfad23f	-	-	2026-11-24	xproof
 a1a49639-bcc4-4522-8862-c9fb13d40880	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a1a7757f-7e9b-4b5b-b9df-e98d8918caac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a1a791be-71e6-4c1f-8717-08ca62d40de2	cast	cast-resolve	agreed	-	X	scen	1	0	Brave Brawler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a1a791be-71e6-4c1f-8717-08ca62d40de2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Brave Brawler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a1a791be-71e6-4c1f-8717-08ca62d40de2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Brave Brawler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a1a791be-71e6-4c1f-8717-08ca62d40de2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Brave Brawler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a1a791be-71e6-4c1f-8717-08ca62d40de2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brave-brawler:cast:s1,f:xs:XP:brave-brawler:cast:s1	-	-	-	23c4009444b0	-	0064383ff781	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a1a791be-71e6-4c1f-8717-08ca62d40de2	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:brave-brawler:combat0.attack:s1,f:xs:XP:brave-brawler:combat0.attack:s1	-	-	-	23c4009444b0	-	0064383ff781	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a1a791be-71e6-4c1f-8717-08ca62d40de2	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:brave-brawler:combat0.block:s1,f:xs:XP:brave-brawler:combat0.block:s1	-	-	-	23c4009444b0	-	0064383ff781	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a1a791be-71e6-4c1f-8717-08ca62d40de2	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:brave-brawler:f0a0:s1,f:xs:XP:brave-brawler:f0a0:s1	-	-	-	23c4009444b0	-	0064383ff781	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a1a9695e-073b-4a65-b3ec-2cfddc23202a	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:the-grey-havens:f0a1:s2,f:xs:XP:the-grey-havens:f0a1:s2	-	-	-	23b491658465	-	b40999f98b1b	-	-	2026-11-25	xproof
 a1a9695e-073b-4a65-b3ec-2cfddc23202a	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a1a9695e-073b-4a65-b3ec-2cfddc23202a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-grey-havens:f0t0:s1,f:xs:XP:the-grey-havens:f0t0:s1	-	-	-	ae86f6029288	-	b40999f98b1b	-	-	2026-11-24	xproof
@@ -153,8 +153,8 @@ a1cc5e37-b09a-4b7f-afd5-77c1c35aa425	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:car
 a1cc5e37-b09a-4b7f-afd5-77c1c35aa425	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:carrion-feeder:cast:s1,f:xs:XP:carrion-feeder:cast:s1	-	-	-	25696bf19d5b	-	0a69042cf00b	-	-	2026-11-24	xproof
 a1cdcb8c-1e12-4d39-aa4a-db678a80df9c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:baral-s-expertise:cast:s1,f:xs:XP:baral-s-expertise:cast:s1	-	-	-	d864b561c9cb	-	ed71d63f93c2	-	-	2026-11-24	xproof
 a1cec8e8-cf3c-42a4-b625-ca0cd148664e	cast	cast-resolve	agreed	-	FX	scen	2	0	Dream Beavers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a1cec8e8-cf3c-42a4-b625-ca0cd148664e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dream Beavers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a1cec8e8-cf3c-42a4-b625-ca0cd148664e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dream Beavers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a1cec8e8-cf3c-42a4-b625-ca0cd148664e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dream-beavers:combat0.attack:s1,f:xs:XP:dream-beavers:combat0.attack:s1	-	-	-	23c4009444b0	-	ebd88b886fd8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a1cec8e8-cf3c-42a4-b625-ca0cd148664e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dream-beavers:combat0.block:s1,f:xs:XP:dream-beavers:combat0.block:s1	-	-	-	23c4009444b0	-	ebd88b886fd8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a1cec8e8-cf3c-42a4-b625-ca0cd148664e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a1cee8d7-f619-47b4-ba8c-faf3106d4e41	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a1cee8d7-f619-47b4-ba8c-faf3106d4e41	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

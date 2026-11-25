@@ -110,7 +110,7 @@ e27feb69-3120-4e8d-8ee6-0f87b58e2ae3	f0/t1	DamageDoneOnce	agreed	-	FX	start	2	0	
 e28227eb-b3b5-42fa-b597-1fefd2a70186	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e28227eb-b3b5-42fa-b597-1fefd2a70186	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e286a191-39d4-4073-b844-11d2aba911b4	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:strixhaven-skycoach:f0t0:s2,f:xs:XP:strixhaven-skycoach:f0t0:s2	-	-	-	5437c1394672	-	1ef2a6e0b0c0	-	-	2026-11-24	xproof
-e286a191-39d4-4073-b844-11d2aba911b4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Strixhaven Skycoach/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e286a191-39d4-4073-b844-11d2aba911b4	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:strixhaven-skycoach:f0a0:s1,f:xs:XP:strixhaven-skycoach:f0a0:s1	-	-	-	23c4009444b0	-	1ef2a6e0b0c0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e286a191-39d4-4073-b844-11d2aba911b4	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:strixhaven-skycoach:f0t0:s2,f:xs:XP:strixhaven-skycoach:f0t0:s2	-	-	-	5437c1394672	-	1ef2a6e0b0c0	-	-	2026-11-24	xproof
 e286d1aa-bb74-4568-98b5-a693ac7a369d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venerable-warsinger:cast:s1,f:xs:XP:venerable-warsinger:cast:s1	-	-	-	d864b561c9cb	-	f89d1a5b651d	-	-	2026-11-24	xproof
 e286d1aa-bb74-4568-98b5-a693ac7a369d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -192,8 +192,8 @@ e2e44d46-9df4-46f8-acf7-5581b2257620	cast	NULL	owed	refused:start:needs-stack-ta
 e2ea7d01-6564-4a7f-b935-49a5e3978dac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:traumatize:cast:s1,f:xs:XP:traumatize:cast:s1	-	-	-	25696bf19d5b	-	49d5fc1282a5	-	-	2026-11-24	xproof
 e2ef027d-0ef7-4c8b-a594-3918290b02d9	cast	cast	agreed	-	F	start	2	0	f:xs:XP:serene-sunset:cast:s1	-	-	-	fc71ca68c5ac	-	f5bffc1e00ca	-	-	2026-11-24	xproof
 e2ef355a-2472-47e0-9b2e-987994291921	cast	cast-resolve	agreed	-	FX	scen	2	0	East Wind Avatar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e2ef355a-2472-47e0-9b2e-987994291921	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	East Wind Avatar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e2ef355a-2472-47e0-9b2e-987994291921	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	East Wind Avatar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e2ef355a-2472-47e0-9b2e-987994291921	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:east-wind-avatar:combat0.attack:s1,f:xs:XP:east-wind-avatar:combat0.attack:s1	-	-	-	23c4009444b0	-	70085cf44840	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e2ef355a-2472-47e0-9b2e-987994291921	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:east-wind-avatar:combat0.block:s1,f:xs:XP:east-wind-avatar:combat0.block:s1	-	-	-	23c4009444b0	-	70085cf44840	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e2ef355a-2472-47e0-9b2e-987994291921	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	East Wind Avatar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e2ef3a24-9e78-47fc-9192-049aa0ddb7a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e2f57e48-ff5b-4a42-9b7c-1bd23b0d78ed	cast	cast-resolve	agreed	-	X	scen	1	0	Seedpod Squire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

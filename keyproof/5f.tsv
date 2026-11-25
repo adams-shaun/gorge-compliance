@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f46f86a-9779-4ed3-99cb-76a03d380598	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f46f86a-9779-4ed3-99cb-76a03d380598	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f4834c7-cd63-420b-8492-ef127ffd4f45	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:anchovy-banana-pizza:f0t0:s2,f:xs:XP:anchovy-banana-pizza:f0t0:s2	-	-	-	267e485f6204	-	df8cc48720ee	-	-	2026-11-24	xproof
-5f4834c7-cd63-420b-8492-ef127ffd4f45	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Anchovy & Banana Pizza/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5f4834c7-cd63-420b-8492-ef127ffd4f45	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:anchovy-banana-pizza:f0a0:s1,f:xs:XP:anchovy-banana-pizza:f0a0:s1	-	-	-	23c4009444b0	-	df8cc48720ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5f4834c7-cd63-420b-8492-ef127ffd4f45	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:anchovy-banana-pizza:f0t0:s2,f:xs:XP:anchovy-banana-pizza:f0t0:s2	-	-	-	267e485f6204	-	df8cc48720ee	-	-	2026-11-24	xproof
 5f4939dc-6e87-47fa-8287-9da60d4b5db2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gilded-ghoda:cast:s1,f:xs:XP:gilded-ghoda:cast:s1	-	-	-	23c4009444b0	-	3f5a745ab77f	-	-	2026-11-25	xproof
 5f4939dc-6e87-47fa-8287-9da60d4b5db2	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:gilded-ghoda:f0a0:s1,f:xs:XP:gilded-ghoda:f0a0:s1	-	-	-	23c4009444b0	-	3f5a745ab77f	-	-	2026-11-25	xproof
@@ -74,13 +74,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f554df8-c70f-4212-aec7-597fe8a88553	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f55d41a-ef93-4d4f-ab55-13ea887e7af2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:unquenchable-thirst:cast:s1,f:xs:XP:unquenchable-thirst:cast:s1	-	-	-	3aa6ded33acb	-	8e581571ad8e	-	-	2026-11-25	xproof
 5f55d41a-ef93-4d4f-ab55-13ea887e7af2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:unquenchable-thirst:cast:s1,f:xs:XP:unquenchable-thirst:cast:s1	-	-	-	3aa6ded33acb	-	8e581571ad8e	-	-	2026-11-25	xproof
-5f56a303-b3da-41df-a959-7823a87ee60c	cast	cast-resolve	agreed	-	X	scen	1	0	Mathemagics/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5f56a303-b3da-41df-a959-7823a87ee60c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mathemagics:cast:s1,f:xs:XP:mathemagics:cast:s1	-	-	-	23c4009444b0	-	34e083261f7b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5f5c5f59-1cc0-4a72-863c-c26db411f114	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f5c5f59-1cc0-4a72-863c-c26db411f114	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pacifism:cast:s1,f:xs:XP:pacifism:cast:s1	-	-	-	8c0bd19283bb	-	a830bfb5a863	-	-	2026-11-24	xproof
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	static#0.0	static#0.0	agreed	-	X	scen	1	0	Pacifism/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	static#0.1	static#0.1	agreed	-	X	scen	1	0	Pacifism/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5f5fe039-4be4-42ae-9fa4-4392328aa665	cast	cast-resolve	agreed	-	X	scen	1	0	Topiary Lecturer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5f5fe039-4be4-42ae-9fa4-4392328aa665	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:topiary-lecturer:cast:s1,f:xs:XP:topiary-lecturer:cast:s1	-	-	-	23c4009444b0	-	a46157748354	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5f5fe039-4be4-42ae-9fa4-4392328aa665	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Topiary Lecturer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f5fe039-4be4-42ae-9fa4-4392328aa665	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Topiary Lecturer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f601f48-d24b-4883-9fde-b3f620e7c9ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-omens:f0t0:s1,f:xs:XP:wall-of-omens:f0t0:s1	-	-	-	d864b561c9cb	-	467c4131dd50	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5fa7cf3a-2a4d-4dd7-890b-49c497570b16	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:district-mascot:f0a1:s1,f:xs:XP:district-mascot:f0a1:s1	-	-	-	23c4009444b0	-	3076b1984ae6	-	-	2026-11-25	xproof
 5fa86b45-1d5b-42df-8811-6a10903f3039	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fa86b45-1d5b-42df-8811-6a10903f3039	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flowstone-wall:f0a0:s1,f:xs:XP:flowstone-wall:f0a0:s1	-	-	-	5f2128bf97e4	-	40b69d8c0371	-	-	2026-11-24	xproof
-5faa9e54-1cc4-48c0-bbfa-a495087c36d6	cast	cast-resolve	agreed	-	X	scen	1	0	Zimone's Experiment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5faa9e54-1cc4-48c0-bbfa-a495087c36d6	cast	cast	agreed	-	F	start	2	0	f:xs:XP:zimone-s-experiment:cast:s1	-	-	-	23c4009444b0	-	09a99c9220c1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5fab0d9c-ccf7-4c6a-94b4-959be139dad8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fab0d9c-ccf7-4c6a-94b4-959be139dad8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:goblin-general:f0t0:s1,f:xs:XP:goblin-general:f0t0:s1	-	-	-	5f2128bf97e4	-	be7cf5d239db	-	-	2026-11-24	xproof
 5fac139a-07d3-4e6c-98e3-d98b199f7a6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:young-pyromancer:cast:s1,f:xs:XP:young-pyromancer:cast:s1	-	-	-	d864b561c9cb	-	396be64e1346	-	-	2026-11-24	xproof
@@ -172,8 +172,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5fca0ce6-e6ba-4319-b3c4-b4d48901e9b4	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:kydele-chosen-of-kruphix:f0a0:s1,f:xs:XP:kydele-chosen-of-kruphix:f0a0:s1	-	-	-	8c0bd19283bb	-	aa9898a19db8	-	-	2026-11-24	xproof
 5fcc057e-e6c2-4e37-a786-9a5ef94926e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inescapable-blaze:cast:s1,f:xs:XP:inescapable-blaze:cast:s1	-	-	-	d864b561c9cb	-	06e1f2cfc109	-	-	2026-11-24	xproof
 5fd09dbc-8bcd-4fe0-91b5-b00e721fa7eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5fd193c0-ed9f-4afb-b6cd-c1a20008fc0b	cast	cast-resolve	agreed	-	X	scen	1	0	Comforting Counsel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5fd193c0-ed9f-4afb-b6cd-c1a20008fc0b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Comforting Counsel/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5fd193c0-ed9f-4afb-b6cd-c1a20008fc0b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:comforting-counsel:cast:s1,f:xs:XP:comforting-counsel:cast:s1	-	-	-	23c4009444b0	-	181d52c9f688	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5fd193c0-ed9f-4afb-b6cd-c1a20008fc0b	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:comforting-counsel:f0t0:s1,f:xs:XP:comforting-counsel:f0t0:s1	-	-	-	23c4009444b0	-	181d52c9f688	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5fd193c0-ed9f-4afb-b6cd-c1a20008fc0b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Comforting Counsel/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5fd78088-53db-453b-90a3-b8426b0a8269	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fd78088-53db-453b-90a3-b8426b0a8269	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -207,5 +207,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5fff2bf4-9e26-4815-9bf6-672ed7e55b96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ordeal-of-nylea:cast:s1,f:xs:XP:ordeal-of-nylea:cast:s1	-	-	-	8c0bd19283bb	-	e31896d051dd	-	-	2026-11-24	xproof
 5fff2bf4-9e26-4815-9bf6-672ed7e55b96	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ordeal of Nylea/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5fff2bf4-9e26-4815-9bf6-672ed7e55b96	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ordeal of Nylea/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5fffd840-1e6e-4f5d-b847-802f9a25eb5c	cast	cast-resolve	agreed	-	X	scen	1	0	Vinebred Brawler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-5fffd840-1e6e-4f5d-b847-802f9a25eb5c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vinebred Brawler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+5fffd840-1e6e-4f5d-b847-802f9a25eb5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vinebred-brawler:cast:s1,f:xs:XP:vinebred-brawler:cast:s1	-	-	-	23c4009444b0	-	347fb9953996	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5fffd840-1e6e-4f5d-b847-802f9a25eb5c	f0/t0	Attacks	agreed	-	F	start	2	0	f:xs:XP:vinebred-brawler:f0t0:s1	-	-	-	23c4009444b0	-	347fb9953996	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

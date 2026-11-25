@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f51aede-fb86-4b7e-9027-2ba8be62b567	static#0.0	static#0.0	agreed	-	X	scen	1	0	Uthros Psionicist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f52993c-a20a-48fe-b463-2a33873b489a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gnathosaur:cast:s1,f:xs:XP:gnathosaur:cast:s1	-	-	-	d864b561c9cb	-	de07ceb8fa3c	-	-	2026-11-24	xproof
 7f52993c-a20a-48fe-b463-2a33873b489a	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:gnathosaur:f0a0:s1,f:xs:XP:gnathosaur:f0a0:s1	-	-	-	23c4009444b0	-	de07ceb8fa3c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-7f577b46-c69d-4c75-9db5-7e10206b6b59	cast	cast-resolve	agreed	-	X	scen	1	0	Geometer's Arthropod/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7f577b46-c69d-4c75-9db5-7e10206b6b59	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geometer-s-arthropod:cast:s1,f:xs:XP:geometer-s-arthropod:cast:s1	-	-	-	23c4009444b0	-	5701775791a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7f577b46-c69d-4c75-9db5-7e10206b6b59	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Geometer's Arthropod/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f591bfb-a241-4980-9cb3-fb5af3355f6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f5bebfd-faf3-485f-b906-aa96d621d499	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f8dad7f-a573-469f-9095-4ba3886b4f0b	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 7f8dad7f-a573-469f-9095-4ba3886b4f0b	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 7f8dad7f-a573-469f-9095-4ba3886b4f0b	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-7f8f46c0-889a-4c9a-9bfa-2b43db608d55	cast	cast-resolve	agreed	-	X	scen	1	0	Fix What's Broken/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7f8f46c0-889a-4c9a-9bfa-2b43db608d55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fix-what-s-broken:cast:s1,f:xs:XP:fix-what-s-broken:cast:s1	-	-	-	23c4009444b0	-	6d303e361917	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7f961374-00b0-40df-83eb-9ced2bb519aa	cast	cast-resolve	agreed	-	X	scen	1	0	Ravenhill Flock/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f961374-00b0-40df-83eb-9ced2bb519aa	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ravenhill Flock/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f961374-00b0-40df-83eb-9ced2bb519aa	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ravenhill Flock/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fe361ef-a168-4847-92a2-21c1661aac06	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thieves-tools:f0t0:s1,f:xs:XP:thieves-tools:f0t0:s1	-	-	-	d864b561c9cb	-	5a96b0113dee	-	-	2026-11-24	xproof
 7fe39c74-cb7c-4eee-a657-8a99a4ab383a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:territorial-allosaurus:f0t0:s1,f:xs:XP:territorial-allosaurus:f0t0:s1	-	-	-	d864b561c9cb	-	e2827a4bd00a	-	-	2026-11-24	xproof
 7fe39c74-cb7c-4eee-a657-8a99a4ab383a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:territorial-allosaurus:f0t0:s1,f:xs:XP:territorial-allosaurus:f0t0:s1	-	-	-	d864b561c9cb	-	e2827a4bd00a	-	-	2026-11-24	xproof
-7fe5baab-b182-4cd9-bea5-912ce9b1464a	cast	cast-resolve	agreed	-	X	scen	1	0	Sygg's Command/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+7fe5baab-b182-4cd9-bea5-912ce9b1464a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sygg-s-command:cast:s1,f:xs:XP:sygg-s-command:cast:s1	-	-	-	23c4009444b0	-	9c5650177196	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7fe5cad0-8db8-4cb3-9d61-bda84477654d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fe67cef-38c8-4071-86df-71053818d908	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liliana-s-influence:cast:s1,f:xs:XP:liliana-s-influence:cast:s1	-	-	-	d864b561c9cb	-	cb9a25ff93ca	-	-	2026-11-24	xproof
 7ff007cb-c994-4643-a6d4-c58e030514e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seedguide-ash:cast:s1,f:xs:XP:seedguide-ash:cast:s1	-	-	-	d864b561c9cb	-	81266eddfec5	-	-	2026-11-24	xproof

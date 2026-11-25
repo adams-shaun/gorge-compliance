@@ -68,10 +68,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 295cd8e1-0830-46c1-9957-556afd4bcee6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 295cd8e1-0830-46c1-9957-556afd4bcee6	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 295f8b8d-102a-47af-93c2-f8182c5f11ca	cast	cast-resolve	agreed	-	FX	scen	2	0	Ascendant Dustspeaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-295f8b8d-102a-47af-93c2-f8182c5f11ca	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ascendant Dustspeaker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-295f8b8d-102a-47af-93c2-f8182c5f11ca	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ascendant Dustspeaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+295f8b8d-102a-47af-93c2-f8182c5f11ca	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ascendant-dustspeaker:combat0.attack:s1,f:xs:XP:ascendant-dustspeaker:combat0.attack:s1	-	-	-	23c4009444b0	-	ece018311b89	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+295f8b8d-102a-47af-93c2-f8182c5f11ca	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ascendant-dustspeaker:combat0.block:s1,f:xs:XP:ascendant-dustspeaker:combat0.block:s1	-	-	-	23c4009444b0	-	ece018311b89	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 295f8b8d-102a-47af-93c2-f8182c5f11ca	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-295f8b8d-102a-47af-93c2-f8182c5f11ca	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Ascendant Dustspeaker/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+295f8b8d-102a-47af-93c2-f8182c5f11ca	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:ascendant-dustspeaker:combat0.attack:s1,f:xs:XP:ascendant-dustspeaker:combat0.attack:s1	-	-	-	23c4009444b0	-	ece018311b89	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2962cfc6-6557-4aee-a95a-8ca3bb06eb29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2962cfc6-6557-4aee-a95a-8ca3bb06eb29	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2962fe4c-bf48-454b-8a6b-0f8253352ae8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:spelunking:cast:s2	-	-	-	5437c1394672	-	ec04eafbc0c4	-	-	2026-11-24	xproof
@@ -86,10 +86,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 296dee6b-6ec1-4ea4-8dc3-23080dd37646	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 296e79f9-57cb-4af7-9e18-48d2d655b537	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doom-s-servo-guards:f0t0:s1,f:xs:XP:doom-s-servo-guards:f0t0:s1	-	-	-	8c0bd19283bb	-	bde0ad370fba	-	-	2026-11-24	xproof
 296e79f9-57cb-4af7-9e18-48d2d655b537	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:doom-s-servo-guards:f0t0:s1,f:xs:XP:doom-s-servo-guards:f0t0:s1	-	-	-	8c0bd19283bb	-	bde0ad370fba	-	-	2026-11-24	xproof
-2970d09b-4bef-468e-8de5-f994c820ccc0	cast	cast-resolve	agreed	-	X	scen	1	0	Pestbrood Sloth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2970d09b-4bef-468e-8de5-f994c820ccc0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pestbrood Sloth/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2970d09b-4bef-468e-8de5-f994c820ccc0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pestbrood Sloth/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2970d09b-4bef-468e-8de5-f994c820ccc0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pestbrood Sloth/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2970d09b-4bef-468e-8de5-f994c820ccc0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pestbrood-sloth:cast:s1,f:xs:XP:pestbrood-sloth:cast:s1	-	-	-	23c4009444b0	-	004b1c6b6915	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2970d09b-4bef-468e-8de5-f994c820ccc0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:pestbrood-sloth:combat0.attack:s1,f:xs:XP:pestbrood-sloth:combat0.attack:s1	-	-	-	23c4009444b0	-	004b1c6b6915	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2970d09b-4bef-468e-8de5-f994c820ccc0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:pestbrood-sloth:combat0.block:s1,f:xs:XP:pestbrood-sloth:combat0.block:s1	-	-	-	23c4009444b0	-	004b1c6b6915	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2970d09b-4bef-468e-8de5-f994c820ccc0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pestbrood-sloth:f0t0:s1,f:xs:XP:pestbrood-sloth:f0t0:s1	-	-	-	23c4009444b0	-	004b1c6b6915	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 29723d39-aaca-48fd-ba4a-14931e4483e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29723d39-aaca-48fd-ba4a-14931e4483e9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2972b9c8-d9b3-4bb3-b9c5-9aa70fb1ac71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:super-mutant-scavenger:f0t0:s1,f:xs:XP:super-mutant-scavenger:f0t0:s1	-	-	-	8c0bd19283bb	-	c060e530be69	-	-	2026-11-24	xproof
@@ -149,8 +149,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29c1f80e-f7e2-425e-a225-e88351fcbaab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29c1f80e-f7e2-425e-a225-e88351fcbaab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elderfang-ritualist:f0t0:s1,f:xs:XP:elderfang-ritualist:f0t0:s1	-	-	-	d864b561c9cb	-	f582c2682ce7	-	-	2026-11-24	xproof
 29c21edd-781b-448e-824a-17bc8b8f4077	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29c23fd7-0ac4-46af-8ecd-92b726575252	cast	cast-resolve	agreed	-	X	scen	1	0	Lecturing Scornmage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-29c23fd7-0ac4-46af-8ecd-92b726575252	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lecturing Scornmage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+29c23fd7-0ac4-46af-8ecd-92b726575252	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lecturing-scornmage:cast:s1,f:xs:XP:lecturing-scornmage:cast:s1	-	-	-	23c4009444b0	-	bd20c2a77e77	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+29c23fd7-0ac4-46af-8ecd-92b726575252	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:lecturing-scornmage:f0t0:s1,f:xs:XP:lecturing-scornmage:f0t0:s1	-	-	-	23c4009444b0	-	bd20c2a77e77	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 29cb8f47-7bb5-4881-98ef-59fc858cf9d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29cb8f47-7bb5-4881-98ef-59fc858cf9d7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29cb8f47-7bb5-4881-98ef-59fc858cf9d7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof

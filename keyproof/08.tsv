@@ -49,24 +49,24 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 08574d1b-4b76-42dd-884b-29c5a61cfdda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08574d1b-4b76-42dd-884b-29c5a61cfdda	f0/a0	NULL	owed	refused:steps-needed:cost:BP	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 08574d1b-4b76-42dd-884b-29c5a61cfdda	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-0859d16e-2a1f-4b48-8687-99af8a8bdb38	cast	cast-resolve	agreed	-	X	scen	1	0	Postmortem Professor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0859d16e-2a1f-4b48-8687-99af8a8bdb38	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Postmortem Professor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0859d16e-2a1f-4b48-8687-99af8a8bdb38	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:postmortem-professor:cast:s1,f:xs:XP:postmortem-professor:cast:s1	-	-	-	23c4009444b0	-	1268324c7f62	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0859d16e-2a1f-4b48-8687-99af8a8bdb38	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:postmortem-professor:combat0.attack:s1,f:xs:XP:postmortem-professor:combat0.attack:s1	-	-	-	23c4009444b0	-	1268324c7f62	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Postmortem Professor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Postmortem Professor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0859d16e-2a1f-4b48-8687-99af8a8bdb38	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Postmortem Professor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0859d16e-2a1f-4b48-8687-99af8a8bdb38	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:postmortem-professor:combat0.attack:s1,f:xs:XP:postmortem-professor:combat0.attack:s1	-	-	-	23c4009444b0	-	1268324c7f62	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	static#0.0	static#0.0	agreed	-	X	scen	1	0	Postmortem Professor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 085bc7be-bd44-40af-8e8f-a1a8006fe22c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0863c4bc-1e3e-4ff9-8877-88d4021c85e5	cast	cast-resolve	agreed	-	FX	scen	2	0	Thawbringer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0863c4bc-1e3e-4ff9-8877-88d4021c85e5	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0863c4bc-1e3e-4ff9-8877-88d4021c85e5	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Thawbringer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0866a630-d962-4aa9-a15f-08b2947540ef	cast	cast-resolve	agreed	-	FX	scen	2	0	Cosmic Cube/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0866a630-d962-4aa9-a15f-08b2947540ef	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cosmic Cube/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0866a630-d962-4aa9-a15f-08b2947540ef	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:cosmic-cube:f0t0:s1,f:xs:XP:cosmic-cube:f0t0:s1	-	-	-	23c4009444b0	-	8d4521fec72f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0866a630-d962-4aa9-a15f-08b2947540ef	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Cosmic Cube/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0867755a-9fb9-42ad-897e-6206fbfbc1f8	cast	cast-resolve	agreed	-	FX	scen	2	0	Rampart Hunter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0867755a-9fb9-42ad-897e-6206fbfbc1f8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rampart Hunter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0867755a-9fb9-42ad-897e-6206fbfbc1f8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rampart Hunter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0867755a-9fb9-42ad-897e-6206fbfbc1f8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-08688903-d9cc-4d57-ba91-14a8523551b9	cast	cast-resolve	agreed	-	X	scen	1	0	Silvergill Peddler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+08688903-d9cc-4d57-ba91-14a8523551b9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silvergill-peddler:cast:s1,f:xs:XP:silvergill-peddler:cast:s1	-	-	-	23c4009444b0	-	844a4a2bc65e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 08688903-d9cc-4d57-ba91-14a8523551b9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Silvergill Peddler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 0868ebbb-2fe9-4f53-9697-acad8cda5ec1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greed-s-gambit:cast:s1,f:xs:XP:greed-s-gambit:cast:s1	-	-	-	23b491658465	-	043fac89a1ad	-	-	2026-11-25	xproof
 0868ebbb-2fe9-4f53-9697-acad8cda5ec1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:greed-s-gambit:cast:s1,f:xs:XP:greed-s-gambit:cast:s1	-	-	-	23b491658465	-	043fac89a1ad	-	-	2026-11-25	xproof

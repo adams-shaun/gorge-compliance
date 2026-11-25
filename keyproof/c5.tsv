@@ -34,14 +34,14 @@ c52eaa87-9251-4a47-83fd-04e582ade612	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Wil
 c52eaa87-9251-4a47-83fd-04e582ade612	land	play-land	agreed	-	FX	scen	2	0	Willowrush Verge/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c52fc8a1-43c6-41f8-b010-03be7c89ef1d	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c52fc8a1-43c6-41f8-b010-03be7c89ef1d	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-c531801c-acf0-45ae-a112-054cc5ccb6ed	cast	cast-resolve	agreed	-	X	scen	1	0	Burrog Banemaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c531801c-acf0-45ae-a112-054cc5ccb6ed	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Burrog Banemaker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c531801c-acf0-45ae-a112-054cc5ccb6ed	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Burrog Banemaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c531801c-acf0-45ae-a112-054cc5ccb6ed	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Burrog Banemaker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c531801c-acf0-45ae-a112-054cc5ccb6ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burrog-banemaker:cast:s1,f:xs:XP:burrog-banemaker:cast:s1	-	-	-	23c4009444b0	-	3ea76d0c058b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c531801c-acf0-45ae-a112-054cc5ccb6ed	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:burrog-banemaker:combat0.attack:s1,f:xs:XP:burrog-banemaker:combat0.attack:s1	-	-	-	23c4009444b0	-	3ea76d0c058b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c531801c-acf0-45ae-a112-054cc5ccb6ed	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:burrog-banemaker:combat0.block:s1,f:xs:XP:burrog-banemaker:combat0.block:s1	-	-	-	23c4009444b0	-	3ea76d0c058b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c531801c-acf0-45ae-a112-054cc5ccb6ed	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:burrog-banemaker:f0a0:s1,f:xs:XP:burrog-banemaker:f0a0:s1	-	-	-	23c4009444b0	-	3ea76d0c058b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c5323a43-82de-4340-8578-b3ffcc66f8fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5323a43-82de-4340-8578-b3ffcc66f8fa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c5355c5e-d07d-48ca-90c5-98edcab1a3c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c5373026-8b43-42a7-aa69-a1b0f1619795	cast	cast-resolve	agreed	-	X	scen	1	0	Pull from the Grave/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c5373026-8b43-42a7-aa69-a1b0f1619795	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pull-from-the-grave:cast:s1,f:xs:XP:pull-from-the-grave:cast:s1	-	-	-	23c4009444b0	-	bdf9a7224d4d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c53b7602-5e36-4900-896c-844bf6eac22e	cast	cast-resolve	agreed	-	X	scen	1	0	Smaug the Magnificent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c53b7602-5e36-4900-896c-844bf6eac22e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Smaug the Magnificent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c53b7602-5e36-4900-896c-844bf6eac22e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Smaug the Magnificent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -127,7 +127,7 @@ c584bdf2-b328-4e50-81e3-45ca6c2aff7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vor
 c584bdf2-b328-4e50-81e3-45ca6c2aff7a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:voracious-vampire:f0t0:s1,f:xs:XP:voracious-vampire:f0t0:s1	-	-	-	d864b561c9cb	-	d5ac6ebc8ce7	-	-	2026-11-24	xproof
 c586312d-d04a-4bfb-bbb2-b41186ca178e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c590c1bd-430c-4515-9343-ba818c02bc5f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-c596b847-4e05-4279-8675-b4e39cb3dc91	cast	cast-resolve	agreed	-	X	scen	1	0	Manhole Missile/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c596b847-4e05-4279-8675-b4e39cb3dc91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:manhole-missile:cast:s1,f:xs:XP:manhole-missile:cast:s1	-	-	-	23c4009444b0	-	bfadfd154afe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c597cfae-3f92-4d31-8bc1-5a2da995f1bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fogwalker:f0t0:s1,f:xs:XP:fogwalker:f0t0:s1	-	-	-	d864b561c9cb	-	f410de8a2943	-	-	2026-11-24	xproof
 c597cfae-3f92-4d31-8bc1-5a2da995f1bf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fogwalker:f0t0:s1,f:xs:XP:fogwalker:f0t0:s1	-	-	-	d864b561c9cb	-	f410de8a2943	-	-	2026-11-24	xproof
 c5a1516a-5e01-48c5-88c7-2178f4b2ad24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

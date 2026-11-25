@@ -111,10 +111,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57994ace-3dd6-407f-b465-c70b552bd466	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57994ace-3dd6-407f-b465-c70b552bd466	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5799baed-3457-4bf2-adf3-239a41dcc1c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thwart-the-enemy:cast:s1,f:xs:XP:thwart-the-enemy:cast:s1	-	-	-	ae86f6029288	-	580f50861c45	-	-	2026-11-24	xproof
-579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	cast	cast-resolve	agreed	-	X	scen	1	0	Black Widow, Super Spy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Black Widow, Super Spy/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Black Widow, Super Spy/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Black Widow, Super Spy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:black-widow-super-spy:cast:s1,f:xs:XP:black-widow-super-spy:cast:s1	-	-	-	23c4009444b0	-	d2313a277274	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:black-widow-super-spy:combat0.attack:s1,f:xs:XP:black-widow-super-spy:combat0.attack:s1	-	-	-	23c4009444b0	-	d2313a277274	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:black-widow-super-spy:combat0.block:s1,f:xs:XP:black-widow-super-spy:combat0.block:s1	-	-	-	23c4009444b0	-	d2313a277274	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:black-widow-super-spy:combat0.attack:s1,f:xs:XP:black-widow-super-spy:combat0.attack:s1	-	-	-	23c4009444b0	-	d2313a277274	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 57b0205d-ad9d-45b7-8556-0733aa7a4987	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57b22bc3-23e8-4632-b10a-495fac5c77c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57b37df5-fee4-4720-931f-f0cb0a8b338c	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:orzhov-guildgate:f0a0:s2,f:xs:XP:orzhov-guildgate:f0a0:s2	-	-	-	8c0bd19283bb	-	c953d8e81b84	-	-	2026-11-24	xproof
@@ -181,10 +181,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57f15861-82cf-4faf-827c-9bc7f4844d2a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:runaway-boulder:f0t0:s1,f:xs:XP:runaway-boulder:f0t0:s1	-	-	-	e07cf3a05ba5	-	95b69a6ef65d	-	-	2026-11-24	xproof
 57f2aa02-f5f3-42a5-939d-5cc94200951e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57f39ce2-ecbb-4262-8140-03aba5c4303f	cast	cast-resolve	agreed	-	X	scen	1	0	Raph & Leo, Sibling Rivals/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-57f39ce2-ecbb-4262-8140-03aba5c4303f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Raph & Leo, Sibling Rivals/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+57f39ce2-ecbb-4262-8140-03aba5c4303f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:raph-leo-sibling-rivals:f0t0:s1,f:xs:XP:raph-leo-sibling-rivals:f0t0:s1	-	-	-	23c4009444b0	-	47c359ffdc81	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 57f58d52-0014-4cac-94fc-668063cc147a	cast	cast-resolve	agreed	-	X	scen	1	0	Shattered Acolyte/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-57f58d52-0014-4cac-94fc-668063cc147a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shattered Acolyte/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-57f58d52-0014-4cac-94fc-668063cc147a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shattered Acolyte/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+57f58d52-0014-4cac-94fc-668063cc147a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:shattered-acolyte:combat0.attack:s1,f:xs:XP:shattered-acolyte:combat0.attack:s1	-	-	-	23c4009444b0	-	97d133081e3a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+57f58d52-0014-4cac-94fc-668063cc147a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:shattered-acolyte:combat0.block:s1,f:xs:XP:shattered-acolyte:combat0.block:s1	-	-	-	23c4009444b0	-	97d133081e3a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 57f58d52-0014-4cac-94fc-668063cc147a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Shattered Acolyte/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57f6a8c2-9d84-4640-9b92-8b8611e05773	cast	cast	owed	rng	-	start	0	0	-	-	-	-	8c0bd19283bb	-	5998e02bcc72	-	-	2026-11-24	xproof
 57f6a8c2-9d84-4640-9b92-8b8611e05773	f0/t0	ChangesZone	owed	rng	-	start	0	0	-	-	-	-	8c0bd19283bb	-	5998e02bcc72	-	-	2026-11-24	xproof

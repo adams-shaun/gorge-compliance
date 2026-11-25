@@ -46,8 +46,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 123147b4-57d0-44cd-bdd5-a449ac86c1cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 123147b4-57d0-44cd-bdd5-a449ac86c1cb	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:vile-deacon:f0t0:s1,f:xs:XP:vile-deacon:f0t0:s1	-	-	-	3aa6ded33acb	-	7d36748edb3a	-	-	2026-11-25	xproof
 1232c461-643c-40a3-901e-09b665f817da	cast	cast-resolve	agreed	-	FX	scen	2	0	Noxious Newt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1232c461-643c-40a3-901e-09b665f817da	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Noxious Newt/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1232c461-643c-40a3-901e-09b665f817da	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Noxious Newt/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1232c461-643c-40a3-901e-09b665f817da	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:noxious-newt:combat0.attack:s1,f:xs:XP:noxious-newt:combat0.attack:s1	-	-	-	23c4009444b0	-	25e7a08c4937	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1232c461-643c-40a3-901e-09b665f817da	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:noxious-newt:combat0.block:s1,f:xs:XP:noxious-newt:combat0.block:s1	-	-	-	23c4009444b0	-	25e7a08c4937	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1232c461-643c-40a3-901e-09b665f817da	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Noxious Newt/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 123337af-f976-4956-949f-c650da812113	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12367806-5924-485c-814a-5b67dd79235e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:evolved-sleeper:cast:s1,f:xs:XP:evolved-sleeper:cast:s1	-	-	-	d864b561c9cb	-	59e6e24bf487	-	-	2026-11-24	xproof
@@ -55,11 +55,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12367806-5924-485c-814a-5b67dd79235e	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:evolved-sleeper:f0a1:s1,f:xs:XP:evolved-sleeper:f0a1:s1	-	-	-	d864b561c9cb	-	59e6e24bf487	-	-	2026-11-24	xproof
 12367806-5924-485c-814a-5b67dd79235e	f0/a2	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:evolved-sleeper:f0a2:s1,f:xs:XP:evolved-sleeper:f0a2:s1	-	-	-	d864b561c9cb	-	59e6e24bf487	-	-	2026-11-24	xproof
 123880ad-7b54-4ab0-82eb-c78b12ab89a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12397dbf-99a9-40c3-aa7c-76d09baad008	cast	cast-resolve	agreed	-	X	scen	1	0	Teacher's Pest/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12397dbf-99a9-40c3-aa7c-76d09baad008	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Teacher's Pest/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12397dbf-99a9-40c3-aa7c-76d09baad008	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Teacher's Pest/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12397dbf-99a9-40c3-aa7c-76d09baad008	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Teacher's Pest/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12397dbf-99a9-40c3-aa7c-76d09baad008	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Teacher's Pest/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+12397dbf-99a9-40c3-aa7c-76d09baad008	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:teacher-s-pest:cast:s1,f:xs:XP:teacher-s-pest:cast:s1	-	-	-	23c4009444b0	-	4810ebbbb70e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+12397dbf-99a9-40c3-aa7c-76d09baad008	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:teacher-s-pest:combat0.attack:s1,f:xs:XP:teacher-s-pest:combat0.attack:s1	-	-	-	23c4009444b0	-	4810ebbbb70e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+12397dbf-99a9-40c3-aa7c-76d09baad008	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:teacher-s-pest:combat0.block:s1,f:xs:XP:teacher-s-pest:combat0.block:s1	-	-	-	23c4009444b0	-	4810ebbbb70e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+12397dbf-99a9-40c3-aa7c-76d09baad008	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:teacher-s-pest:f0a0:s1,f:xs:XP:teacher-s-pest:f0a0:s1	-	-	-	23c4009444b0	-	4810ebbbb70e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+12397dbf-99a9-40c3-aa7c-76d09baad008	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:teacher-s-pest:combat0.attack:s1,f:xs:XP:teacher-s-pest:combat0.attack:s1	-	-	-	23c4009444b0	-	4810ebbbb70e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1239d3bf-06e8-4732-b1e2-f6eb145e5894	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thorn-thallid:f0t0:s1,f:xs:XP:thorn-thallid:f0t0:s1	-	-	-	3aa6ded33acb	-	fec6f24076c7	-	-	2026-11-25	xproof
 1239d3bf-06e8-4732-b1e2-f6eb145e5894	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1239d3bf-06e8-4732-b1e2-f6eb145e5894	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:thorn-thallid:f0t0:s1,f:xs:XP:thorn-thallid:f0t0:s1	-	-	-	3aa6ded33acb	-	fec6f24076c7	-	-	2026-11-25	xproof

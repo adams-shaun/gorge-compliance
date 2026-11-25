@@ -11,8 +11,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d04aa8c-7bff-42c6-bed3-0b18d2cb1529	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d04aa8c-7bff-42c6-bed3-0b18d2cb1529	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:nogi-draco-zealot:f0t0:s1,f:xs:XP:nogi-draco-zealot:f0t0:s1	-	-	-	23c4009444b0	-	b359501af146	-	-	2026-11-25	xproof
 3d081701-514b-4611-b5a1-239b8f335fb6	cast	cast-resolve	agreed	-	FX	scen	2	0	Insectoid Exterminator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3d081701-514b-4611-b5a1-239b8f335fb6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Insectoid Exterminator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3d081701-514b-4611-b5a1-239b8f335fb6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Insectoid Exterminator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3d081701-514b-4611-b5a1-239b8f335fb6	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:insectoid-exterminator:combat0.attack:s1,f:xs:XP:insectoid-exterminator:combat0.attack:s1	-	-	-	23c4009444b0	-	098806e19b3f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3d081701-514b-4611-b5a1-239b8f335fb6	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:insectoid-exterminator:combat0.block:s1,f:xs:XP:insectoid-exterminator:combat0.block:s1	-	-	-	23c4009444b0	-	098806e19b3f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3d081701-514b-4611-b5a1-239b8f335fb6	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Insectoid Exterminator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d0c1301-4fa7-4245-a13f-f613188eb638	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d0c1301-4fa7-4245-a13f-f613188eb638	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -59,10 +59,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d4b9d71-4275-4c18-a4dc-9aad234eb92c	f0/a0	AnimateAll	agreed	-	FX	start	2	0	x:xs:XP:the-fire-nation-drill:f0a0:s1,f:xs:XP:the-fire-nation-drill:f0a0:s1	-	-	-	23c4009444b0	-	a2788e58097a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3d4b9d71-4275-4c18-a4dc-9aad234eb92c	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:the-fire-nation-drill:f0a1:s1,f:xs:XP:the-fire-nation-drill:f0a1:s1	-	-	-	23c4009444b0	-	a2788e58097a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3d4b9d71-4275-4c18-a4dc-9aad234eb92c	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:the-fire-nation-drill:cast:s2	-	-	-	5437c1394672	-	a2788e58097a	-	-	2026-11-24	xproof
-3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	cast	cast-resolve	agreed	-	X	scen	1	0	Virulent Emissary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Virulent Emissary/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Virulent Emissary/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Virulent Emissary/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:virulent-emissary:cast:s1,f:xs:XP:virulent-emissary:cast:s1	-	-	-	23c4009444b0	-	b224bc92a3fd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:virulent-emissary:combat0.attack:s1,f:xs:XP:virulent-emissary:combat0.attack:s1	-	-	-	23c4009444b0	-	b224bc92a3fd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:virulent-emissary:combat0.block:s1,f:xs:XP:virulent-emissary:combat0.block:s1	-	-	-	23c4009444b0	-	b224bc92a3fd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3d4bec90-7bbc-4385-a2b8-303c7a8d0a0f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:virulent-emissary:f0t0:s1,f:xs:XP:virulent-emissary:f0t0:s1	-	-	-	23c4009444b0	-	b224bc92a3fd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3d4c7f1a-deca-4bae-90c7-68d623da400e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d4c7f1a-deca-4bae-90c7-68d623da400e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:purestrain-genestealer:f0t0:s1,f:xs:XP:purestrain-genestealer:f0t0:s1	-	-	-	8c0bd19283bb	-	2ef801a34a52	-	-	2026-11-24	xproof
 3d4ec57a-8541-42ed-9790-7933f96c8adf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,10 +162,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3dc51dfc-7a60-41bf-b944-6afad6b06c22	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goldnight-commander:f0t0:s1,f:xs:XP:goldnight-commander:f0t0:s1	-	-	-	23c4009444b0	-	5073ac6b16ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3dc71e16-b935-4ad7-b3f7-945ac2c179a7	cast	cast-resolve	agreed	-	X	scen	1	0	Chrome Dome/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3dc71e16-b935-4ad7-b3f7-945ac2c179a7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Chrome Dome/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3dc71e16-b935-4ad7-b3f7-945ac2c179a7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Chrome Dome/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3dc71e16-b935-4ad7-b3f7-945ac2c179a7	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:chrome-dome:static0.0:s1,f:xs:XP:chrome-dome:static0.0:s1	-	-	-	23c4009444b0	-	77bb43869a6b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3dc73517-0767-46ae-bc8d-ee378237a509	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rooftop-percher:f0t0:s2,f:xs:XP:rooftop-percher:f0t0:s2	-	-	-	267e485f6204	-	635c9e9e63f0	-	-	2026-11-24	xproof
-3dc73517-0767-46ae-bc8d-ee378237a509	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rooftop Percher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-3dc73517-0767-46ae-bc8d-ee378237a509	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rooftop Percher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+3dc73517-0767-46ae-bc8d-ee378237a509	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rooftop-percher:combat0.attack:s1,f:xs:XP:rooftop-percher:combat0.attack:s1	-	-	-	23c4009444b0	-	635c9e9e63f0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3dc73517-0767-46ae-bc8d-ee378237a509	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:rooftop-percher:combat0.block:s1,f:xs:XP:rooftop-percher:combat0.block:s1	-	-	-	23c4009444b0	-	635c9e9e63f0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3dc73517-0767-46ae-bc8d-ee378237a509	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rooftop-percher:f0t0:s2,f:xs:XP:rooftop-percher:f0t0:s2	-	-	-	267e485f6204	-	635c9e9e63f0	-	-	2026-11-24	xproof
 3dc8d15a-3ca7-4d1f-a819-c1b7f947a59e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:threaten:cast:s1,f:xs:XP:threaten:cast:s1	-	-	-	3aa6ded33acb	-	60d122f6ded9	-	-	2026-11-25	xproof
 3dcbbbeb-4efe-4363-bfb4-b7d7f803bafa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -194,10 +194,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3de0e14f-c917-4c00-8341-1170ac9b3cbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3de0e14f-c917-4c00-8341-1170ac9b3cbc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3de0e14f-c917-4c00-8341-1170ac9b3cbc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-3debd5c7-da3c-4130-8ed9-e156e10034b6	cast	cast-resolve	agreed	-	X	scen	1	0	Arnyn, Deathbloom Botanist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3debd5c7-da3c-4130-8ed9-e156e10034b6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Arnyn, Deathbloom Botanist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3debd5c7-da3c-4130-8ed9-e156e10034b6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Arnyn, Deathbloom Botanist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3debd5c7-da3c-4130-8ed9-e156e10034b6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Arnyn, Deathbloom Botanist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3debd5c7-da3c-4130-8ed9-e156e10034b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arnyn-deathbloom-botanist:cast:s1,f:xs:XP:arnyn-deathbloom-botanist:cast:s1	-	-	-	23c4009444b0	-	e8de9dbe8a21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3debd5c7-da3c-4130-8ed9-e156e10034b6	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:arnyn-deathbloom-botanist:combat0.attack:s1,f:xs:XP:arnyn-deathbloom-botanist:combat0.attack:s1	-	-	-	23c4009444b0	-	e8de9dbe8a21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3debd5c7-da3c-4130-8ed9-e156e10034b6	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:arnyn-deathbloom-botanist:combat0.block:s1,f:xs:XP:arnyn-deathbloom-botanist:combat0.block:s1	-	-	-	23c4009444b0	-	e8de9dbe8a21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3debd5c7-da3c-4130-8ed9-e156e10034b6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arnyn-deathbloom-botanist:f0t0:s1,f:xs:XP:arnyn-deathbloom-botanist:f0t0:s1	-	-	-	23c4009444b0	-	e8de9dbe8a21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3decbc45-3e79-455f-9d62-878ee31b458d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3decbc45-3e79-455f-9d62-878ee31b458d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ded0c0c-40ce-4d14-a9a6-b023bc19ee0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

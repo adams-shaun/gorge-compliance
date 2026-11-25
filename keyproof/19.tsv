@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1917bda6-c0e1-4c80-8009-74c28cf6b8e9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Edgar, Moonlit Sovereign/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1917bda6-c0e1-4c80-8009-74c28cf6b8e9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Edgar, Moonlit Sovereign/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 191ba5f0-45f4-4b7f-910d-4bd4d2d28b33	cast	cast-resolve	agreed	-	FX	scen	2	0	Beast, Erudite Aerialist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-191ba5f0-45f4-4b7f-910d-4bd4d2d28b33	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Beast, Erudite Aerialist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+191ba5f0-45f4-4b7f-910d-4bd4d2d28b33	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:beast-erudite-aerialist:f0t0:s1,f:xs:XP:beast-erudite-aerialist:f0t0:s1	-	-	-	23c4009444b0	-	600b57f4d76e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 191ba5f0-45f4-4b7f-910d-4bd4d2d28b33	static#0.0	static#0.0	diagnosed	-	-	scen	0	0	-	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 191e003f-1a78-4d85-9c70-2ae132a5f9cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 191e003f-1a78-4d85-9c70-2ae132a5f9cc	f0/a0	Effect	diverged	-	-	start	0	2	-	dfff93d2383f	-	-	23c4009444b0	-	794c65686593	-	-	2026-11-25	xproof
@@ -36,8 +36,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 192e150a-96b0-42d6-9d39-03d0bed61f41	cast	cast-resolve	agreed	-	FX	scen	2	0	Super Villain Lockup/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 192e150a-96b0-42d6-9d39-03d0bed61f41	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 192f3c8a-1120-4f7f-ae0f-fe9bde59cd08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:telling-time:cast:s1,f:xs:XP:telling-time:cast:s1	-	-	-	77494c1ce129	-	eb4c2c89013f	-	-	2026-11-24	xproof
-1939679b-ea2e-4a75-b3ce-d7af68437484	cast	cast-resolve	agreed	-	X	scen	1	0	Michelangelo, Improviser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1939679b-ea2e-4a75-b3ce-d7af68437484	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Michelangelo, Improviser/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1939679b-ea2e-4a75-b3ce-d7af68437484	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:michelangelo-improviser:cast:s1,f:xs:XP:michelangelo-improviser:cast:s1	-	-	-	23c4009444b0	-	470b1035ede1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1939679b-ea2e-4a75-b3ce-d7af68437484	f0/t0	DamageDone	agreed	-	F	start	2	0	f:xs:XP:michelangelo-improviser:f0t0:s1	-	-	-	23c4009444b0	-	470b1035ede1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 193c1671-328e-4f9c-836e-055f46c3aab0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakalite:cast:s1,f:xs:XP:rakalite:cast:s1	-	-	-	ae86f6029288	-	d849994b1f32	-	-	2026-11-24	xproof
 193c1671-328e-4f9c-836e-055f46c3aab0	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:rakalite:f0a0:s1,f:xs:XP:rakalite:f0a0:s1	-	-	-	ae86f6029288	-	d849994b1f32	-	-	2026-11-24	xproof
 193f9b12-ee34-40c2-9315-6794416a4f62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clarion-cathars:f0t0:s1,f:xs:XP:clarion-cathars:f0t0:s1	-	-	-	d864b561c9cb	-	e998c0ce3a9c	-	-	2026-11-24	xproof
@@ -55,11 +55,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1941f993-41d7-49e3-8891-41b3cecd5a9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1941f993-41d7-49e3-8891-41b3cecd5a9d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 194260af-aba5-4d18-a69b-eedb97ed4a4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-194284f7-cf92-4d9f-a8ce-e4dc3505ab7a	cast	cast-resolve	agreed	-	X	scen	1	0	Donatello's Technique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+194284f7-cf92-4d9f-a8ce-e4dc3505ab7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:donatello-s-technique:cast:s1,f:xs:XP:donatello-s-technique:cast:s1	-	-	-	23c4009444b0	-	4ff1085547ed	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1945e165-7636-4727-89ba-3811251ef175	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 194af2be-50c7-484b-bdd3-402bad70335b	cast	cast-resolve	agreed	-	FX	scen	2	0	Donatello, Way with Machines/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-194af2be-50c7-484b-bdd3-402bad70335b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Donatello, Way with Machines/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-194af2be-50c7-484b-bdd3-402bad70335b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Donatello, Way with Machines/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+194af2be-50c7-484b-bdd3-402bad70335b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:donatello-way-with-machines:combat0.attack:s1,f:xs:XP:donatello-way-with-machines:combat0.attack:s1	-	-	-	23c4009444b0	-	b4c2e65677dc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+194af2be-50c7-484b-bdd3-402bad70335b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:donatello-way-with-machines:combat0.block:s1,f:xs:XP:donatello-way-with-machines:combat0.block:s1	-	-	-	23c4009444b0	-	b4c2e65677dc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 194af2be-50c7-484b-bdd3-402bad70335b	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Donatello, Way with Machines/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 194e2563-c0bf-4151-bbb0-0d626130b055	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 194e2563-c0bf-4151-bbb0-0d626130b055	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -152,10 +152,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19cede61-1982-47d1-9e0e-49ac6de00798	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wicked-wolf:cast:s1,f:xs:XP:wicked-wolf:cast:s1	-	-	-	ae86f6029288	-	74da0907bb20	-	-	2026-11-24	xproof
 19cede61-1982-47d1-9e0e-49ac6de00798	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 19cede61-1982-47d1-9e0e-49ac6de00798	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wicked-wolf:cast:s1,f:xs:XP:wicked-wolf:cast:s1	-	-	-	ae86f6029288	-	74da0907bb20	-	-	2026-11-24	xproof
-19cf5798-4600-4a66-b1c7-de77bde157d0	cast	cast	agreed	-	X	start	1	0	x:xs:XP:tablet-of-discovery:f0t0:s2	-	-	-	5437c1394672	-	5c4f71686ce9	-	-	2026-11-24	xproof
+19cf5798-4600-4a66-b1c7-de77bde157d0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tablet-of-discovery:cast:s1,f:xs:XP:tablet-of-discovery:cast:s1	-	-	-	23c4009444b0	-	5c4f71686ce9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 19cf5798-4600-4a66-b1c7-de77bde157d0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tablet of Discovery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19cf5798-4600-4a66-b1c7-de77bde157d0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Tablet of Discovery/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-19cf5798-4600-4a66-b1c7-de77bde157d0	f0/t0	ChangesZone	agreed	-	X	start	1	0	x:xs:XP:tablet-of-discovery:f0t0:s2	-	-	-	5437c1394672	-	5c4f71686ce9	-	-	2026-11-24	xproof
+19cf5798-4600-4a66-b1c7-de77bde157d0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tablet-of-discovery:cast:s1,f:xs:XP:tablet-of-discovery:cast:s1	-	-	-	23c4009444b0	-	5c4f71686ce9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 19d11ca8-a95b-4e6e-a71f-8f9d06c580fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19d11ca8-a95b-4e6e-a71f-8f9d06c580fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19d5eb29-2d35-44e7-afa1-3ba8d812ed41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

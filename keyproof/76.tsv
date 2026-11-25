@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 761ee6f9-b0fa-43c9-8d1f-9591ea18e52d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 761ee6f9-b0fa-43c9-8d1f-9591ea18e52d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 762679dd-4345-43c3-929b-15959443aeb0	cast	cast-resolve	agreed	-	X	scen	1	0	Soulbright Seeker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-762679dd-4345-43c3-929b-15959443aeb0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Soulbright Seeker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+762679dd-4345-43c3-929b-15959443aeb0	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:soulbright-seeker:f0a0:s1,f:xs:XP:soulbright-seeker:f0a0:s1	-	-	-	23c4009444b0	-	1c2712319e61	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7627163a-1689-446f-b5aa-a6c56aefb532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knife:cast:s1,f:xs:XP:knife:cast:s1	-	-	-	23b491658465	-	1b7a81660b68	-	-	2026-11-24	xproof
 7627163a-1689-446f-b5aa-a6c56aefb532	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:knife:f0a0:s1,f:xs:XP:knife:f0a0:s1	-	-	-	8c0bd19283bb	-	1b7a81660b68	-	-	2026-11-24	xproof
 7627163a-1689-446f-b5aa-a6c56aefb532	f0/a1	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:knife:f0a1:s1	-	-	-	23b491658465	-	1b7a81660b68	-	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 766787ef-654a-4544-b5d7-d2f96949edf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76678885-3674-443d-b9a2-2a460cf6aac0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7668f7bc-9a43-4024-87c3-995aa0a65aaa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:encumbered-reejerey:cast:s1,f:xs:XP:encumbered-reejerey:cast:s1	-	-	-	23c4009444b0	-	b617ffff8572	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-7668f7bc-9a43-4024-87c3-995aa0a65aaa	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Encumbered Reejerey/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+7668f7bc-9a43-4024-87c3-995aa0a65aaa	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:tributary-vaulter:cast:s1,f:xs:XP:tributary-vaulter:cast:s1	-	-	-	23c4009444b0	-	b617ffff8572	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 766c2c67-d1ee-44ff-b9bb-355361646ef1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 766c2c67-d1ee-44ff-b9bb-355361646ef1	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:warlock-class:f0a1:s1,f:xs:XP:warlock-class:f0a1:s1	-	-	-	23b491658465	-	3cb33f2a8f4a	-	-	2026-11-25	xproof
 766c2c67-d1ee-44ff-b9bb-355361646ef1	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

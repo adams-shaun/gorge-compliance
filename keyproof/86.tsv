@@ -55,7 +55,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 863a5ddb-2d66-4a07-bafc-38290776d5c0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 863ad4b8-094b-46b3-b6cd-0640e1f01d6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 863ad4b8-094b-46b3-b6cd-0640e1f01d6d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-863cbd12-da20-456e-8698-06fba4d9bd5c	cast	cast-resolve	agreed	-	X	scen	1	0	Arcane Omens/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+863cbd12-da20-456e-8698-06fba4d9bd5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arcane-omens:cast:s1,f:xs:XP:arcane-omens:cast:s1	-	-	-	23c4009444b0	-	3de3ddb4236c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 863d6607-912b-4186-9874-87d5473ec481	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86468528-833d-48f9-b299-cdf54dd47d77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tishana-s-wayfinder:f0t0:s1,f:xs:XP:tishana-s-wayfinder:f0t0:s1	-	-	-	d864b561c9cb	-	7a7507b3719d	-	-	2026-11-24	xproof
 86468528-833d-48f9-b299-cdf54dd47d77	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tishana-s-wayfinder:f0t0:s1,f:xs:XP:tishana-s-wayfinder:f0t0:s1	-	-	-	d864b561c9cb	-	7a7507b3719d	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86b8fdad-0025-4b6f-8527-23686820a5cd	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 86b98c3e-f568-4bfc-977f-d1be270936e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:molder:cast:s1,f:xs:XP:molder:cast:s1	-	-	-	3aa6ded33acb	-	4d055b20ae6d	-	-	2026-11-25	xproof
 86bd332f-ba61-49a4-ad31-de4d7e3638c6	cast	cast-resolve	agreed	-	FX	scen	2	0	Shadow Urchin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-86bd332f-ba61-49a4-ad31-de4d7e3638c6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Shadow Urchin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+86bd332f-ba61-49a4-ad31-de4d7e3638c6	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:shadow-urchin:f0t0:s1,f:xs:XP:shadow-urchin:f0t0:s1	-	-	-	23c4009444b0	-	74566cfc9ba8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 86bd332f-ba61-49a4-ad31-de4d7e3638c6	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Shadow Urchin/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 86be501c-6f05-4ce0-adb0-7adb135bfb93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ever-after:cast:s1,f:xs:XP:ever-after:cast:s1	-	-	-	d864b561c9cb	-	2781a4d4800a	-	-	2026-11-24	xproof
 86bf58f2-7f25-4e10-b797-25e0e8e67769	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -235,9 +235,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86ef2ceb-b7e6-4451-92ec-8528ea191d3a	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 86ef6474-613f-41fb-931c-d4279b03ed99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86ef86de-104f-4eae-a2db-893b50e95ad7	cast	cast-resolve	agreed	-	FX	scen	2	0	Tokka & Rahzar, Terrible Twos/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-86ef86de-104f-4eae-a2db-893b50e95ad7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tokka & Rahzar, Terrible Twos/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-86ef86de-104f-4eae-a2db-893b50e95ad7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tokka & Rahzar, Terrible Twos/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-86ef86de-104f-4eae-a2db-893b50e95ad7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tokka & Rahzar, Terrible Twos/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+86ef86de-104f-4eae-a2db-893b50e95ad7	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tokka-rahzar-terrible-twos:combat0.attack:s1,f:xs:XP:tokka-rahzar-terrible-twos:combat0.attack:s1	-	-	-	23c4009444b0	-	3efaeac6013c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+86ef86de-104f-4eae-a2db-893b50e95ad7	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tokka-rahzar-terrible-twos:combat0.block:s1,f:xs:XP:tokka-rahzar-terrible-twos:combat0.block:s1	-	-	-	23c4009444b0	-	3efaeac6013c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+86ef86de-104f-4eae-a2db-893b50e95ad7	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:tokka-rahzar-terrible-twos:f0t0:s1,f:xs:XP:tokka-rahzar-terrible-twos:f0t0:s1	-	-	-	23c4009444b0	-	3efaeac6013c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 86f2890d-3e5a-48db-bb22-a6cb8cbd39ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86f2890d-3e5a-48db-bb22-a6cb8cbd39ce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86f725f6-b48b-4dcc-9a02-e258a226e31c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

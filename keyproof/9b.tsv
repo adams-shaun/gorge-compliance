@@ -152,8 +152,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9bcf66d0-8a4d-4c57-b4de-4cc35399465e	f0/a0	Reveal	agreed	-	FX	start	2	0	x:xs:XP:nightshade-seer:f0a0:s1,f:xs:XP:nightshade-seer:f0a0:s1	-	-	-	5f2128bf97e4	-	27d5f9b00f18	-	-	2026-11-24	xproof
 9bd013df-ad75-4099-940b-1765c58faf26	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Castle Doom/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9bd013df-ad75-4099-940b-1765c58faf26	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Castle Doom/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9bd013df-ad75-4099-940b-1765c58faf26	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Castle Doom/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9bd013df-ad75-4099-940b-1765c58faf26	land	play-land	agreed	-	X	scen	1	0	Castle Doom/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9bd013df-ad75-4099-940b-1765c58faf26	f0/a2	Token	agreed	-	FX	start	2	0	x:xs:XP:castle-doom:f0a2:s1,f:xs:XP:castle-doom:f0a2:s1	-	-	-	23c4009444b0	-	ccfa1cefd384	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9bd013df-ad75-4099-940b-1765c58faf26	land	land	agreed	-	FX	start	2	0	x:xs:XP:castle-doom:land:s1,f:xs:XP:castle-doom:land:s1	-	-	-	23c4009444b0	-	ccfa1cefd384	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9bd3a4bb-cc12-4e5f-a33f-77ab0c7788db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bd4a0bd-d10c-434a-8254-89f38740aafd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bd62fa0-b99c-4b64-a6f6-608cf01f8ef3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9bdd6fea-d436-412b-a7b7-bbdba73dc986	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:kitsune-dragon-s-daughter:f0t0:s2,f:xs:XP:kitsune-dragon-s-daughter:f0t0:s2	-	-	-	5437c1394672	-	2a65a1014491	-	-	2026-11-24	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kitsune, Dragon's Daughter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9be19bdf-db1e-433e-8be4-8b985a568211	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kitsune, Dragon's Daughter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9be19bdf-db1e-433e-8be4-8b985a568211	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kitsune-dragon-s-daughter:combat0.block:s1,f:xs:XP:kitsune-dragon-s-daughter:combat0.block:s1	-	-	-	23c4009444b0	-	2a65a1014491	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:kitsune-dragon-s-daughter:f0t0:s2,f:xs:XP:kitsune-dragon-s-daughter:f0t0:s2	-	-	-	5437c1394672	-	2a65a1014491	-	-	2026-11-24	xproof
 9be19bdf-db1e-433e-8be4-8b985a568211	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Kitsune, Dragon's Daughter/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9be31785-2975-424f-aada-25ee2a0bf6d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

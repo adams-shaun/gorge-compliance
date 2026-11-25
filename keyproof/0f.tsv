@@ -4,8 +4,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f0282c6-aceb-4879-8ec8-482d0501204a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-clone-saga:cast:s1,f:xs:XP:the-clone-saga:cast:s1	-	-	-	23c4009444b0	-	a9e5f0d3aff6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0f052d9f-5a40-4eb9-9d8a-e01dec1db191	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f052d9f-5a40-4eb9-9d8a-e01dec1db191	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-0f0959ff-4464-4738-9d79-5b06f368f144	cast	cast-resolve	agreed	-	X	scen	1	0	Inkling Mascot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0f0959ff-4464-4738-9d79-5b06f368f144	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Inkling Mascot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0f0959ff-4464-4738-9d79-5b06f368f144	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inkling-mascot:cast:s1,f:xs:XP:inkling-mascot:cast:s1	-	-	-	23c4009444b0	-	e8edd70bc08e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0f0959ff-4464-4738-9d79-5b06f368f144	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:inkling-mascot:f0t0:s1,f:xs:XP:inkling-mascot:f0t0:s1	-	-	-	23c4009444b0	-	e8edd70bc08e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0f12aec9-5898-4261-bebd-1b545e0aea68	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-unbound:f0t0:s1,f:xs:XP:mind-unbound:f0t0:s1	-	-	-	3aa6ded33acb	-	d845d5d7e50a	-	-	2026-11-25	xproof
 0f12aec9-5898-4261-bebd-1b545e0aea68	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:mind-unbound:f0t0:s1,f:xs:XP:mind-unbound:f0t0:s1	-	-	-	3aa6ded33acb	-	d845d5d7e50a	-	-	2026-11-25	xproof
 0f1ada92-538b-40cb-9bf3-5c415f5325e6	cast	cast-resolve	agreed	-	FX	scen	2	0	Spotcycle Scouter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fe602b7-9f88-4d3d-af24-7790df867ed5	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 0fe66bc0-8eda-4625-a068-6a5de826466f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:first-response:f0t0:s1,f:xs:XP:first-response:f0t0:s1	-	-	-	3aa6ded33acb	-	2f755e17a8a9	-	-	2026-11-25	xproof
 0fe66bc0-8eda-4625-a068-6a5de826466f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:first-response:f0t0:s1,f:xs:XP:first-response:f0t0:s1	-	-	-	3aa6ded33acb	-	2f755e17a8a9	-	-	2026-11-25	xproof
-0fe6c042-1182-4392-8938-fee36149d74f	cast	cast-resolve	agreed	-	X	scen	1	0	Baron Helmut Zemo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0fe6c042-1182-4392-8938-fee36149d74f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:baron-helmut-zemo:cast:s1,f:xs:XP:baron-helmut-zemo:cast:s1	-	-	-	23c4009444b0	-	228c8e1e45bb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0fe6c042-1182-4392-8938-fee36149d74f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Baron Helmut Zemo/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0fe6c042-1182-4392-8938-fee36149d74f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Baron Helmut Zemo/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0fe76004-b2f4-4b11-abce-75fd76f68b4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

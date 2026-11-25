@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5948381a-419d-4b8b-8ea2-ea623cb0d606	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 594a57f6-7827-41c7-aa37-00b498720b16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 594a57f6-7827-41c7-aa37-00b498720b16	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:warteye-witch:f0t0:s1,f:xs:XP:warteye-witch:f0t0:s1	-	-	-	d864b561c9cb	-	fce249f4d3f0	-	-	2026-11-24	xproof
-594c6b1f-ff0e-4122-8b29-852632a22a79	cast	cast-resolve	agreed	-	X	scen	1	0	Michelangelo, Game Master/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-594c6b1f-ff0e-4122-8b29-852632a22a79	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Michelangelo, Game Master/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+594c6b1f-ff0e-4122-8b29-852632a22a79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:michelangelo-game-master:cast:s1,f:xs:XP:michelangelo-game-master:cast:s1	-	-	-	23c4009444b0	-	9aad9c5c94b6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+594c6b1f-ff0e-4122-8b29-852632a22a79	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:michelangelo-game-master:f0t0:s1,f:xs:XP:michelangelo-game-master:f0t0:s1	-	-	-	23c4009444b0	-	9aad9c5c94b6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5951f734-05d3-41ad-94ee-19bd310077d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skyship-buccaneer:f0t0:s1,f:xs:XP:skyship-buccaneer:f0t0:s1	-	-	-	23c4009444b0	-	5a9874d74a2b	-	-	2026-11-25	xproof
 5951f734-05d3-41ad-94ee-19bd310077d2	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:skyship-buccaneer:combat0.attack:s1,f:xs:XP:skyship-buccaneer:combat0.attack:s1	-	-	-	23c4009444b0	-	5a9874d74a2b	-	-	2026-11-25	xproof
 5951f734-05d3-41ad-94ee-19bd310077d2	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:skyship-buccaneer:combat0.block:s1,f:xs:XP:skyship-buccaneer:combat0.block:s1	-	-	-	23c4009444b0	-	5a9874d74a2b	-	-	2026-11-25	xproof
@@ -76,8 +76,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 595ae6f1-e66a-4774-943a-9d5368f4a3b4	f0/a0	Token	agreed	-	F	start	2	0	f:xs:XP:hornet-cannon:f0a0:s1	-	-	-	5f2128bf97e4	-	3c19037e26da	-	-	2026-11-24	xproof
 595cbe23-4969-4fc2-8386-e5f3e6adfd5f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gerrard-s-irregulars:cast:s1,f:xs:XP:gerrard-s-irregulars:cast:s1	-	-	-	5f2128bf97e4	-	dcaf5a77d266	-	-	2026-11-24	xproof
 595f0eb5-f521-4174-9c48-b89e85ea907c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Titan's Grave/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-595f0eb5-f521-4174-9c48-b89e85ea907c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Titan's Grave/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-595f0eb5-f521-4174-9c48-b89e85ea907c	land	play-land	agreed	-	X	scen	1	0	Titan's Grave/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+595f0eb5-f521-4174-9c48-b89e85ea907c	f0/a1	Surveil	agreed	-	FX	start	2	0	x:xs:XP:titan-s-grave:f0a1:s1,f:xs:XP:titan-s-grave:f0a1:s1	-	-	-	23c4009444b0	-	daeca9d07598	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+595f0eb5-f521-4174-9c48-b89e85ea907c	land	land	agreed	-	FX	start	2	0	x:xs:XP:titan-s-grave:land:s1,f:xs:XP:titan-s-grave:land:s1	-	-	-	23c4009444b0	-	daeca9d07598	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 595f1dee-8c3b-44a6-9e71-a4bb4334b309	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 595f1dee-8c3b-44a6-9e71-a4bb4334b309	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5960dd01-6797-4c73-b48a-f637b9c288cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -159,10 +159,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59d22de5-e310-44d7-89cf-ef3529e40cef	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 59d9070c-dc60-420e-aa0e-32cfb97dfe88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59d96fc0-6580-43c2-8c6a-dcf983644561	cast	cast-resolve	agreed	-	FX	scen	2	0	Shredder, Unrelenting/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-59d96fc0-6580-43c2-8c6a-dcf983644561	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shredder, Unrelenting/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-59d96fc0-6580-43c2-8c6a-dcf983644561	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shredder, Unrelenting/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+59d96fc0-6580-43c2-8c6a-dcf983644561	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:shredder-unrelenting:combat0.attack:s1,f:xs:XP:shredder-unrelenting:combat0.attack:s1	-	-	-	23c4009444b0	-	18597ec73cf8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+59d96fc0-6580-43c2-8c6a-dcf983644561	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:shredder-unrelenting:combat0.block:s1,f:xs:XP:shredder-unrelenting:combat0.block:s1	-	-	-	23c4009444b0	-	18597ec73cf8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 59d96fc0-6580-43c2-8c6a-dcf983644561	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59d96fc0-6580-43c2-8c6a-dcf983644561	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Shredder, Unrelenting/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+59d96fc0-6580-43c2-8c6a-dcf983644561	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:shredder-unrelenting:combat0.attack:s1,f:xs:XP:shredder-unrelenting:combat0.attack:s1	-	-	-	23c4009444b0	-	18597ec73cf8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 59dbc873-72d9-4e7b-9442-2c7b8e8523e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruination:cast:s1,f:xs:XP:ruination:cast:s1	-	-	-	5f2128bf97e4	-	fef495f14a19	-	-	2026-11-24	xproof
 59e1899f-a9e8-48aa-b3fb-0b7d9fd6859c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59e1899f-a9e8-48aa-b3fb-0b7d9fd6859c	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:seahunter:f0a0:s1,f:xs:XP:seahunter:f0a0:s1	-	-	-	5f2128bf97e4	-	136af50331cf	-	-	2026-11-24	xproof

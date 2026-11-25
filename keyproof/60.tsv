@@ -102,9 +102,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60733a3a-dfc9-429a-af2d-f0ce9a58d533	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 607425ac-9e90-4c9e-88bf-72f8a76cce97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6074632b-4520-4ae8-bcdc-26b1eff71af9	cast	cast-resolve	agreed	-	FX	scen	2	0	Savanti Romero, Time's Exile/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6074632b-4520-4ae8-bcdc-26b1eff71af9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Savanti Romero, Time's Exile/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6074632b-4520-4ae8-bcdc-26b1eff71af9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Savanti Romero, Time's Exile/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6074632b-4520-4ae8-bcdc-26b1eff71af9	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Savanti Romero, Time's Exile/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6074632b-4520-4ae8-bcdc-26b1eff71af9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:savanti-romero-time-s-exile:combat0.attack:s1,f:xs:XP:savanti-romero-time-s-exile:combat0.attack:s1	-	-	-	23c4009444b0	-	11112f224a15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6074632b-4520-4ae8-bcdc-26b1eff71af9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:savanti-romero-time-s-exile:combat0.block:s1,f:xs:XP:savanti-romero-time-s-exile:combat0.block:s1	-	-	-	23c4009444b0	-	11112f224a15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6074632b-4520-4ae8-bcdc-26b1eff71af9	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:savanti-romero-time-s-exile:combat0.attack:s1,f:xs:XP:savanti-romero-time-s-exile:combat0.attack:s1	-	-	-	23c4009444b0	-	11112f224a15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 60754d4b-2add-4928-8d30-8ce9c0f54f91	cast	cast-resolve	agreed	-	X	scen	1	0	Raft Security Officer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 60754d4b-2add-4928-8d30-8ce9c0f54f91	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Raft Security Officer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6075b999-75c5-41c8-898d-ee612ba79a92	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 607f9177-fea0-464c-a15f-65842865546a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60808c8f-5257-451b-a9b6-389ba51598d5	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 60824fae-20ed-4122-82c9-e99a1b679c54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-60826714-b9fd-4c89-b9f2-1a3c3229686b	cast	cast-resolve	agreed	-	X	scen	1	0	Tainted Treats/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+60826714-b9fd-4c89-b9f2-1a3c3229686b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tainted-treats:cast:s1,f:xs:XP:tainted-treats:cast:s1	-	-	-	23c4009444b0	-	cc35fb5cf4bf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 608293f1-34aa-4e55-8389-73f975858de6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 608293f1-34aa-4e55-8389-73f975858de6	f0/t0	NULL	owed	refused:no-generator:trigger:LandPlayed	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 6082f66e-3641-4b09-bb04-86bf29ee1c6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:return-of-the-nightstalkers:cast:s1,f:xs:XP:return-of-the-nightstalkers:cast:s1	-	-	-	5f2128bf97e4	-	43f9ccfa76b9	-	-	2026-11-24	xproof
@@ -139,8 +139,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60a3345c-3234-4f4b-baab-df12dad6b44b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:poison-blade-mentor:f0t0:s1,f:xs:XP:poison-blade-mentor:f0t0:s1	-	-	-	3aa6ded33acb	-	d735fee03fce	-	-	2026-11-25	xproof
 60ac490c-b489-4ad2-bcc2-3babaabf8ccb	cast	cast-resolve	agreed	-	X	scen	1	0	Tempest Angler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 60ac490c-b489-4ad2-bcc2-3babaabf8ccb	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:tempest-angler:f0t0:s1,f:xs:XP:tempest-angler:f0t0:s1	-	-	-	23c4009444b0	-	fd4a2af1a0df	-	-	2026-11-25	xproof
-60ad7aaa-8ce6-4449-8e8d-4ccf925010db	cast	cast-resolve	agreed	-	X	scen	1	0	Sizzling Changeling/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-60ad7aaa-8ce6-4449-8e8d-4ccf925010db	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sizzling Changeling/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+60ad7aaa-8ce6-4449-8e8d-4ccf925010db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sizzling-changeling:cast:s1,f:xs:XP:sizzling-changeling:cast:s1	-	-	-	23c4009444b0	-	58508266b5fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+60ad7aaa-8ce6-4449-8e8d-4ccf925010db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sizzling-changeling:f0t0:s1,f:xs:XP:sizzling-changeling:f0t0:s1	-	-	-	23c4009444b0	-	58508266b5fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 60b03a44-a7bd-48fa-8c8f-1704aed02cd7	cast	cast-resolve	agreed	-	FX	scen	2	0	Ancestor Dragon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 60b03a44-a7bd-48fa-8c8f-1704aed02cd7	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ancestor-dragon:combat0.attack:s1,f:xs:XP:ancestor-dragon:combat0.attack:s1	-	-	-	3aa6ded33acb	-	6712dd45937e	-	-	2026-11-25	xproof
 60b03a44-a7bd-48fa-8c8f-1704aed02cd7	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ancestor-dragon:combat0.block:s1,f:xs:XP:ancestor-dragon:combat0.block:s1	-	-	-	3aa6ded33acb	-	6712dd45937e	-	-	2026-11-25	xproof

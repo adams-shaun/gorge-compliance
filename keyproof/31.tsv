@@ -75,8 +75,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31585036-cdc3-47f5-9fc7-913212826f2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 315c97ee-e544-4166-8016-a5dce87adf63	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Tarkir Charm"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 315ddc7a-c39c-43d9-b134-23acbd865e3e	cast	cast-resolve	agreed	-	FX	scen	2	0	Squirrelanoids/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-315ddc7a-c39c-43d9-b134-23acbd865e3e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Squirrelanoids/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-315ddc7a-c39c-43d9-b134-23acbd865e3e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Squirrelanoids/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+315ddc7a-c39c-43d9-b134-23acbd865e3e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:squirrelanoids:combat0.attack:s1,f:xs:XP:squirrelanoids:combat0.attack:s1	-	-	-	23c4009444b0	-	bf65a2a05e15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+315ddc7a-c39c-43d9-b134-23acbd865e3e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:squirrelanoids:combat0.block:s1,f:xs:XP:squirrelanoids:combat0.block:s1	-	-	-	23c4009444b0	-	bf65a2a05e15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3160dada-d59f-4f23-8420-ba14f9df7514	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nesting-wurm:f0t0:s1,f:xs:XP:nesting-wurm:f0t0:s1	-	-	-	5f2128bf97e4	-	fddd503d6b81	-	-	2026-11-24	xproof
 3160dada-d59f-4f23-8420-ba14f9df7514	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nesting-wurm:f0t0:s1,f:xs:XP:nesting-wurm:f0t0:s1	-	-	-	5f2128bf97e4	-	fddd503d6b81	-	-	2026-11-24	xproof
 3162e0b4-1348-4c86-8da7-ae23ff968c57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -94,8 +94,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3173ca98-d46a-4de3-a95e-3eaad28d4017	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:omega-heartless-evolution:f0t0:s1,f:xs:XP:omega-heartless-evolution:f0t0:s1	-	-	-	267e485f6204	-	632c8d7529fd	-	-	2026-11-24	xproof
 3178c1f9-f644-4926-ac9a-d40e4db79955	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sterling-hound:f0t0:s2,f:xs:XP:sterling-hound:f0t0:s2	-	-	-	267e485f6204	-	c0f4b9d92814	-	-	2026-11-24	xproof
 3178c1f9-f644-4926-ac9a-d40e4db79955	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sterling-hound:f0t0:s2,f:xs:XP:sterling-hound:f0t0:s2	-	-	-	267e485f6204	-	c0f4b9d92814	-	-	2026-11-24	xproof
-31816924-1430-4581-86e8-325e2ca16217	cast	cast-resolve	agreed	-	X	scen	1	0	Agents of HYDRA/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-31816924-1430-4581-86e8-325e2ca16217	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Agents of HYDRA/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+31816924-1430-4581-86e8-325e2ca16217	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:agents-of-hydra:cast:s1,f:xs:XP:agents-of-hydra:cast:s1	-	-	-	23c4009444b0	-	b9f1369575d3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+31816924-1430-4581-86e8-325e2ca16217	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:agents-of-hydra:f0t0:s1,f:xs:XP:agents-of-hydra:f0t0:s1	-	-	-	23c4009444b0	-	b9f1369575d3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 318304f5-0929-4cd3-97e6-08ac1ac48aa6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3186fddd-23fd-440c-ad61-b4130e00f765	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jeska-warrior-adept:cast:s1,f:xs:XP:jeska-warrior-adept:cast:s1	-	-	-	fc71ca68c5ac	-	6d4597918f93	-	-	2026-11-24	xproof
 3186fddd-23fd-440c-ad61-b4130e00f765	f0/a0	DealDamage	agreed	-	FX	start	4	0	x:xs:XP:jeska-warrior-adept:cast:s1,f:xs:XP:jeska-warrior-adept:cast:s1	-	-	-	fc71ca68c5ac	-	6d4597918f93	-	-	2026-11-24	xproof
@@ -178,8 +178,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31f15274-301b-47c5-ba19-0ced04520878	f0/a0	ChangeZone	agreed	-	FX	start	3	0	x:xs:XP:ambrosia-whiteheart:cast:s2,f:xs:XP:ambrosia-whiteheart:cast:s2	-	-	-	5437c1394672	-	c609a4e2c8c6	-	-	2026-11-24	xproof
 31f32afa-5b2a-4218-ae7b-642e1cac3911	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31f3a9f3-881e-4dc9-b71d-5d1fc86477bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mindblaze:cast:s1,f:xs:XP:mindblaze:cast:s1	-	-	-	23c4009444b0	-	bbfcde54140c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-31f3d37f-e613-427f-b34c-cc87611ea078	cast	cast-resolve	agreed	-	X	scen	1	0	Muse Seeker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-31f3d37f-e613-427f-b34c-cc87611ea078	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Muse Seeker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+31f3d37f-e613-427f-b34c-cc87611ea078	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:muse-seeker:cast:s1,f:xs:XP:muse-seeker:cast:s1	-	-	-	23c4009444b0	-	2f2662969d91	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+31f3d37f-e613-427f-b34c-cc87611ea078	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:muse-seeker:f0t0:s1,f:xs:XP:muse-seeker:f0t0:s1	-	-	-	23c4009444b0	-	2f2662969d91	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 31f54f88-85a6-43f4-a6de-fb6ef5f0c38d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ambitious-aetherborn:f0t0:s1,f:xs:XP:ambitious-aetherborn:f0t0:s1	-	-	-	3aa6ded33acb	-	96365d4085ff	-	-	2026-11-25	xproof
 31f54f88-85a6-43f4-a6de-fb6ef5f0c38d	f0/t0	ChangesZone/Fabricate	agreed	-	FX	start	2	0	x:xs:XP:ambitious-aetherborn:f0t0:s1,f:xs:XP:ambitious-aetherborn:f0t0:s1	-	-	-	3aa6ded33acb	-	96365d4085ff	-	-	2026-11-25	xproof
 31f8dd0d-2495-4c37-a103-96f21164bda8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:wish-good-luck:cast:s1	-	-	-	23b491658465	-	bfc6b162048a	-	-	2026-11-24	xproof

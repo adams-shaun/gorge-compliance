@@ -17,8 +17,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	cast	cast-resolve	agreed	-	X	scen	1	0	Eardrum Rattler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Eardrum Rattler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2516949d-75bb-4aea-a41d-0298bb129471	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slip-through-space:cast:s1,f:xs:XP:slip-through-space:cast:s1	-	-	-	d864b561c9cb	-	44a5c0e15e85	-	-	2026-11-24	xproof
-2519ccc0-c206-41fb-aa15-2ef88025ff96	cast	cast-resolve	agreed	-	X	scen	1	0	Prehistoric Pet/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2519ccc0-c206-41fb-aa15-2ef88025ff96	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Prehistoric Pet/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2519ccc0-c206-41fb-aa15-2ef88025ff96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prehistoric-pet:cast:s1,f:xs:XP:prehistoric-pet:cast:s1	-	-	-	23c4009444b0	-	eeabd18140dc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2519ccc0-c206-41fb-aa15-2ef88025ff96	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:prehistoric-pet:combat0.attack:s1,f:xs:XP:prehistoric-pet:combat0.attack:s1	-	-	-	23c4009444b0	-	eeabd18140dc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2519ccc0-c206-41fb-aa15-2ef88025ff96	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Prehistoric Pet/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2519ccc0-c206-41fb-aa15-2ef88025ff96	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Prehistoric Pet/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2519ccc0-c206-41fb-aa15-2ef88025ff96	static#0.0	static#0.0	agreed	-	X	scen	1	0	Prehistoric Pet/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -128,9 +128,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 258a78cc-a9f3-459a-9837-93a9856f72db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blacklance-paragon:f0t0:s1,f:xs:XP:blacklance-paragon:f0t0:s1	-	-	-	ae86f6029288	-	75b0144c5160	-	-	2026-11-24	xproof
 258e4da4-e7fd-4049-92df-e5433b9f0ce9	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	bacb0dd7de42	-	-	2026-11-24	xproof
 258f5045-3aa7-4b95-a15f-3172577294a8	cast	cast-resolve	agreed	-	FX	scen	2	0	Prismari, the Inspiration/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-258f5045-3aa7-4b95-a15f-3172577294a8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Prismari, the Inspiration/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-258f5045-3aa7-4b95-a15f-3172577294a8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Prismari, the Inspiration/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-258f5045-3aa7-4b95-a15f-3172577294a8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Prismari, the Inspiration/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+258f5045-3aa7-4b95-a15f-3172577294a8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:prismari-the-inspiration:combat0.attack:s1,f:xs:XP:prismari-the-inspiration:combat0.attack:s1	-	-	-	23c4009444b0	-	2a933c596121	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+258f5045-3aa7-4b95-a15f-3172577294a8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:prismari-the-inspiration:combat0.block:s1,f:xs:XP:prismari-the-inspiration:combat0.block:s1	-	-	-	23c4009444b0	-	2a933c596121	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+258f5045-3aa7-4b95-a15f-3172577294a8	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:prismari-the-inspiration:f0t0:s1,f:xs:XP:prismari-the-inspiration:f0t0:s1	-	-	-	23c4009444b0	-	2a933c596121	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 258f5045-3aa7-4b95-a15f-3172577294a8	static#0.0	static#0.0	agreed	-	X	scen	1	0	Prismari, the Inspiration/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 25933e8b-fa48-4152-9eae-388aef10ad37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25933e8b-fa48-4152-9eae-388aef10ad37	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,9 +177,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25afddd2-6e48-4742-b34e-e3b5def7c0fd	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 25afddd2-6e48-4742-b34e-e3b5def7c0fd	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 25b0876e-c995-486e-8536-6e68b76b9c86	cast	cast-resolve	agreed	-	FX	scen	2	0	Voracious Tome-Skimmer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-25b0876e-c995-486e-8536-6e68b76b9c86	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Voracious Tome-Skimmer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-25b0876e-c995-486e-8536-6e68b76b9c86	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Voracious Tome-Skimmer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-25b0876e-c995-486e-8536-6e68b76b9c86	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Voracious Tome-Skimmer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+25b0876e-c995-486e-8536-6e68b76b9c86	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:voracious-tome-skimmer:combat0.attack:s1,f:xs:XP:voracious-tome-skimmer:combat0.attack:s1	-	-	-	23c4009444b0	-	99806f86f235	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+25b0876e-c995-486e-8536-6e68b76b9c86	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:voracious-tome-skimmer:combat0.block:s1,f:xs:XP:voracious-tome-skimmer:combat0.block:s1	-	-	-	23c4009444b0	-	99806f86f235	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+25b0876e-c995-486e-8536-6e68b76b9c86	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:voracious-tome-skimmer:f0t0:s1,f:xs:XP:voracious-tome-skimmer:f0t0:s1	-	-	-	23c4009444b0	-	99806f86f235	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 25b30117-03ef-49a5-8743-2d1c167d4bc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25b30117-03ef-49a5-8743-2d1c167d4bc3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25b30117-03ef-49a5-8743-2d1c167d4bc3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jack-of-hearts-volatile-hero:f0t0:s1,f:xs:XP:jack-of-hearts-volatile-hero:f0t0:s1	-	-	-	8c0bd19283bb	-	879b888f75ce	-	-	2026-11-24	xproof

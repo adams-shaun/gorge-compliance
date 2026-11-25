@@ -6,7 +6,7 @@ cb029c0f-b08a-4952-b236-8166b9f17119	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cb029c0f-b08a-4952-b236-8166b9f17119	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 cb06cf58-3cc6-429a-9bb0-be4b1c53de30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb0e1afa-fd9e-4bf9-bcb1-6e8110d6e2ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cb0e1afa-fd9e-4bf9-bcb1-6e8110d6e2ff	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+cb0e1afa-fd9e-4bf9-bcb1-6e8110d6e2ff	f0/t0	ChangesZone/Evolve	agreed	-	FX	start	2	0	x:xs:XP:mikey-don-party-planners:f0t0:s1,f:xs:XP:mikey-don-party-planners:f0t0:s1	-	-	-	23c4009444b0	-	dabb82746bbd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cb0eb84d-b41b-4147-aa7c-089b7fabd835	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb0eb84d-b41b-4147-aa7c-089b7fabd835	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cb102767-f8d8-4477-9a24-07686870bda7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -44,9 +44,9 @@ cb3edb86-ddd5-461c-98b5-ffb4df437a39	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:
 cb3edb86-ddd5-461c-98b5-ffb4df437a39	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:boommobile:f0t0:s2,f:xs:XP:boommobile:f0t0:s2	-	-	-	e07cf3a05ba5	-	99c1ec28c673	-	-	2026-11-24	xproof
 cb4414a6-27d0-4922-938b-391283535f24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thran-forge:cast:s1,f:xs:XP:thran-forge:cast:s1	-	-	-	ea3140b6974b	-	06dc4f8ec53c	-	-	2026-11-24	xproof
 cb4414a6-27d0-4922-938b-391283535f24	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-cb45860a-1937-4803-b6d8-331a35be39fd	cast	cast-resolve	agreed	-	X	scen	1	0	Fractal Tender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb45860a-1937-4803-b6d8-331a35be39fd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fractal Tender/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb45860a-1937-4803-b6d8-331a35be39fd	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Fractal Tender/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cb45860a-1937-4803-b6d8-331a35be39fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fractal-tender:cast:s1,f:xs:XP:fractal-tender:cast:s1	-	-	-	23c4009444b0	-	cf8a8c988ab8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+cb45860a-1937-4803-b6d8-331a35be39fd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:fractal-tender:f0t0:s1,f:xs:XP:fractal-tender:f0t0:s1	-	-	-	23c4009444b0	-	cf8a8c988ab8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+cb45860a-1937-4803-b6d8-331a35be39fd	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:fractal-tender:f0t1:s1,f:xs:XP:fractal-tender:f0t1:s1	-	-	-	23c4009444b0	-	cf8a8c988ab8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cb45860a-1937-4803-b6d8-331a35be39fd	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Fractal Tender/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cb490f3f-74ed-4d38-8eda-9948c095f3bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb4b4b63-682b-4439-9757-84cca7a27db2	cast	cast-resolve	agreed	-	FX	scen	2	0	Eagle of the Great Shelf/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

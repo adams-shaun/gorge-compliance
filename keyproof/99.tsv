@@ -24,10 +24,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 991ae2f7-3f8e-4364-8698-5277786d7dcd	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:boros-keyrune:f0a1:s1,f:xs:XP:boros-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	080ae2278e3e	-	-	2026-11-24	xproof
 991efbf1-299d-4892-aeab-8ff9827f7168	cast	cast-resolve	agreed	-	FX	scen	2	0	Transit Mage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 991efbf1-299d-4892-aeab-8ff9827f7168	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-991f4eec-cf3e-4554-ba88-c44bb0d255f0	cast	cast-resolve	agreed	-	X	scen	1	0	Tributary Vaulter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-991f4eec-cf3e-4554-ba88-c44bb0d255f0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tributary Vaulter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-991f4eec-cf3e-4554-ba88-c44bb0d255f0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tributary Vaulter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-991f4eec-cf3e-4554-ba88-c44bb0d255f0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tributary Vaulter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+991f4eec-cf3e-4554-ba88-c44bb0d255f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tributary-vaulter:cast:s1,f:xs:XP:tributary-vaulter:cast:s1	-	-	-	23c4009444b0	-	c112470d17cb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+991f4eec-cf3e-4554-ba88-c44bb0d255f0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tributary-vaulter:combat0.attack:s1,f:xs:XP:tributary-vaulter:combat0.attack:s1	-	-	-	23c4009444b0	-	c112470d17cb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+991f4eec-cf3e-4554-ba88-c44bb0d255f0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tributary-vaulter:combat0.block:s1,f:xs:XP:tributary-vaulter:combat0.block:s1	-	-	-	23c4009444b0	-	c112470d17cb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+991f4eec-cf3e-4554-ba88-c44bb0d255f0	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:tributary-vaulter:combat0.attack:s1,f:xs:XP:tributary-vaulter:combat0.attack:s1	-	-	-	23c4009444b0	-	c112470d17cb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 991fab9c-8554-4e64-a933-6cc2ffa4edb1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kurbis-harvest-celebrant:cast:s1,f:xs:XP:kurbis-harvest-celebrant:cast:s1	-	-	-	8c0bd19283bb	-	d7a3ec4d2fc6	-	-	2026-11-24	xproof
 991fab9c-8554-4e64-a933-6cc2ffa4edb1	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:kurbis-harvest-celebrant:cast:s1,f:xs:XP:kurbis-harvest-celebrant:cast:s1	-	-	-	8c0bd19283bb	-	d7a3ec4d2fc6	-	-	2026-11-24	xproof
 99204279-2a50-4dd6-84ec-f84ba31554cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -96,7 +96,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99642419-ab24-4770-9f1c-84d2806441b5	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 9965d9c5-2ebf-4a6c-930e-55c5890979be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thought-vessel:cast:s1,f:xs:XP:thought-vessel:cast:s1	-	-	-	8c0bd19283bb	-	708bce2742e7	-	-	2026-11-24	xproof
 9965d9c5-2ebf-4a6c-930e-55c5890979be	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:thought-vessel:cast:s1,f:xs:XP:thought-vessel:cast:s1	-	-	-	8c0bd19283bb	-	708bce2742e7	-	-	2026-11-24	xproof
-99678cc9-59c8-4358-b847-8c38ffb4a050	cast	cast-resolve	agreed	-	X	scen	1	0	Practiced Offense/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+99678cc9-59c8-4358-b847-8c38ffb4a050	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:practiced-offense:cast:s1,f:xs:XP:practiced-offense:cast:s1	-	-	-	23c4009444b0	-	d873218d7b98	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9967b292-1239-4aed-b871-72e40d1f3e26	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arcane-melee:cast:s1,f:xs:XP:arcane-melee:cast:s1	-	-	-	d864b561c9cb	-	0652409f734d	-	-	2026-11-24	xproof
 9969b822-2ead-4956-bac2-875ffd90e872	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:windstorm:cast:s1,f:xs:XP:windstorm:cast:s1	-	-	-	8a1b1a193ec0	-	8b3a61b4f520	-	-	2026-11-24	xproof
 9971697b-2acc-4bc2-a44e-074d03a51df7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archangel:cast:s1,f:xs:XP:archangel:cast:s1	-	-	-	25696bf19d5b	-	7322cb353a0a	-	-	2026-11-24	xproof

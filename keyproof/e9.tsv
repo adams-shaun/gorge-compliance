@@ -49,9 +49,9 @@ e9222f89-e495-4502-bb0c-f5e802686b01	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ele
 e923d956-b036-4789-9311-4763a71fcbf8	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e923d956-b036-4789-9311-4763a71fcbf8	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e923d956-b036-4789-9311-4763a71fcbf8	f0/a1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-e929b730-9aa2-49e1-9a65-50afc0fbe3e0	cast	cast-resolve	agreed	-	X	scen	1	0	Atlantean Cavalry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e929b730-9aa2-49e1-9a65-50afc0fbe3e0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Atlantean Cavalry/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e929b730-9aa2-49e1-9a65-50afc0fbe3e0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Atlantean Cavalry/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e929b730-9aa2-49e1-9a65-50afc0fbe3e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:atlantean-cavalry:cast:s1,f:xs:XP:atlantean-cavalry:cast:s1	-	-	-	23c4009444b0	-	6217e990e246	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e929b730-9aa2-49e1-9a65-50afc0fbe3e0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:atlantean-cavalry:combat0.attack:s1,f:xs:XP:atlantean-cavalry:combat0.attack:s1	-	-	-	23c4009444b0	-	6217e990e246	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e929b730-9aa2-49e1-9a65-50afc0fbe3e0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:atlantean-cavalry:combat0.block:s1,f:xs:XP:atlantean-cavalry:combat0.block:s1	-	-	-	23c4009444b0	-	6217e990e246	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e929b730-9aa2-49e1-9a65-50afc0fbe3e0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Atlantean Cavalry/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e93089b1-e790-402b-a994-69a7e422e4f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kuldotha-flamefiend:f0t0:s1,f:xs:XP:kuldotha-flamefiend:f0t0:s1	-	-	-	3aa6ded33acb	-	b2716e58bb01	-	-	2026-11-25	xproof
 e93089b1-e790-402b-a994-69a7e422e4f2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kuldotha-flamefiend:f0t0:s1,f:xs:XP:kuldotha-flamefiend:f0t0:s1	-	-	-	3aa6ded33acb	-	b2716e58bb01	-	-	2026-11-25	xproof
@@ -99,9 +99,9 @@ e9638ad1-4e1d-4721-91f5-8cf13d0d0d0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e9638ad1-4e1d-4721-91f5-8cf13d0d0d0d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e96542ed-1931-4da1-9d9e-d10878c4ae6b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-snake:cast:s1,f:xs:XP:fire-snake:cast:s1	-	-	-	ea3140b6974b	-	3d531786da76	-	-	2026-11-24	xproof
 e96542ed-1931-4da1-9d9e-d10878c4ae6b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fire-snake:f0t0:s1,f:xs:XP:fire-snake:f0t0:s1	-	-	-	ea3140b6974b	-	3d531786da76	-	-	2026-11-24	xproof
-e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	cast	cast-resolve	agreed	-	X	scen	1	0	Quintessential Katana/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Quintessential Katana/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Quintessential Katana/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quintessential-katana:cast:s1,f:xs:XP:quintessential-katana:cast:s1	-	-	-	23c4009444b0	-	d773e2dae92b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:quintessential-katana:f0a0:s1,f:xs:XP:quintessential-katana:f0a0:s1	-	-	-	23c4009444b0	-	d773e2dae92b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:quintessential-katana:f0t0:s1,f:xs:XP:quintessential-katana:f0t0:s1	-	-	-	23c4009444b0	-	d773e2dae92b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e9685c61-e33d-4ae0-9dd3-7fd0df5eb46f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Quintessential Katana/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e96a9f9a-9326-4f0b-98ad-23210c97299f	cast	cast-resolve	agreed	-	X	scen	1	0	Savvy Profiteer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e96a9f9a-9326-4f0b-98ad-23210c97299f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -134,7 +134,7 @@ e9903d75-f71d-45d0-ac5f-955c0c227e02	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 e9958344-13d5-4f7b-acc8-904e5d99b90e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:splendid-agony:cast:s1,f:xs:XP:splendid-agony:cast:s1	-	-	-	3aa6ded33acb	-	5e1797a8947d	-	-	2026-11-25	xproof
 e996cd67-739c-40f4-b276-0042acf26c71	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e996cd67-739c-40f4-b276-0042acf26c71	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e9975888-c75f-471e-a70d-17449e92226d	cast	cast-resolve	agreed	-	X	scen	1	0	Pain 101/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e9975888-c75f-471e-a70d-17449e92226d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pain-101:cast:s1,f:xs:XP:pain-101:cast:s1	-	-	-	23c4009444b0	-	70ed8c28203a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e99c088e-1326-4844-b932-fb51802656f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e99c58bd-b405-4474-bd32-1a993c9f2979	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e99d6c5c-b029-4cd1-bd7a-6f8ea91eb4a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

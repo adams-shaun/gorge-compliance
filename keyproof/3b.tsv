@@ -101,7 +101,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b6ef144-bb98-4686-9718-204f1c3cf020	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:worldsoul-s-rage:cast:s1,f:xs:XP:worldsoul-s-rage:cast:s1	-	-	-	8c0bd19283bb	-	57f0203cdd3a	-	-	2026-11-25	xproof
 3b6f608d-f27d-44cd-b0a1-0e1e1aa1c98a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b6f608d-f27d-44cd-b0a1-0e1e1aa1c98a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-3b6fb13b-f126-4697-90a1-64b14ffcecd6	cast	cast-resolve	agreed	-	X	scen	1	0	Snarl Song/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3b6fb13b-f126-4697-90a1-64b14ffcecd6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:snarl-song:cast:s1,f:xs:XP:snarl-song:cast:s1	-	-	-	23c4009444b0	-	e2797e905153	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b7120a6-700b-4c61-bea4-a835f0cc0bcb	cast	cast-resolve	agreed	-	X	scen	1	0	Ice Flan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b7120a6-700b-4c61-bea4-a835f0cc0bcb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ice Flan/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b7120a6-700b-4c61-bea4-a835f0cc0bcb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -116,11 +116,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b7b862a-7edd-4e96-b4b9-f7113b4c93f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b7ea3ac-ac0a-40aa-b743-d153e1c47d8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b7ea3ac-ac0a-40aa-b743-d153e1c47d8c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3b8240ad-71d3-4117-8531-6c8e79bffdb9	cast	cast-resolve	agreed	-	X	scen	1	0	Scolding Administrator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b8240ad-71d3-4117-8531-6c8e79bffdb9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scolding Administrator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b8240ad-71d3-4117-8531-6c8e79bffdb9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scolding Administrator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b8240ad-71d3-4117-8531-6c8e79bffdb9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scolding Administrator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b8240ad-71d3-4117-8531-6c8e79bffdb9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Scolding Administrator/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3b8240ad-71d3-4117-8531-6c8e79bffdb9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scolding-administrator:cast:s1,f:xs:XP:scolding-administrator:cast:s1	-	-	-	23c4009444b0	-	c67e10c2eb26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3b8240ad-71d3-4117-8531-6c8e79bffdb9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:scolding-administrator:combat0.attack:s1,f:xs:XP:scolding-administrator:combat0.attack:s1	-	-	-	23c4009444b0	-	c67e10c2eb26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3b8240ad-71d3-4117-8531-6c8e79bffdb9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:scolding-administrator:combat0.block:s1,f:xs:XP:scolding-administrator:combat0.block:s1	-	-	-	23c4009444b0	-	c67e10c2eb26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3b8240ad-71d3-4117-8531-6c8e79bffdb9	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:scolding-administrator:f0t0:s1,f:xs:XP:scolding-administrator:f0t0:s1	-	-	-	23c4009444b0	-	c67e10c2eb26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3b8240ad-71d3-4117-8531-6c8e79bffdb9	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scolding-administrator:f0t1:s1,f:xs:XP:scolding-administrator:f0t1:s1	-	-	-	23c4009444b0	-	c67e10c2eb26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b8eea0b-6f8c-449c-9ab8-a22a035465d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b90dd70-798e-4dc4-99e7-b36d6823af2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b91be0e-0683-48df-91b0-25e90b492796	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bba3b36-f8d7-4fd6-892a-797226210b6e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:combat0.attack:s1,f:xs:XP:malcolm-alluring-scoundrel:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1641639f428a	-	-	2026-11-25	xproof
 3bba3b36-f8d7-4fd6-892a-797226210b6e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:combat0.block:s1,f:xs:XP:malcolm-alluring-scoundrel:combat0.block:s1	-	-	-	3aa6ded33acb	-	1641639f428a	-	-	2026-11-25	xproof
 3bba3b36-f8d7-4fd6-892a-797226210b6e	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:combat0.attack:s1,f:xs:XP:malcolm-alluring-scoundrel:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1641639f428a	-	-	2026-11-25	xproof
-3bbad38b-7d88-4ff2-9fd3-5081536e7c56	cast	cast-resolve	agreed	-	X	scen	1	0	Page, Loose Leaf/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3bbad38b-7d88-4ff2-9fd3-5081536e7c56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:page-loose-leaf:cast:s1,f:xs:XP:page-loose-leaf:cast:s1	-	-	-	23c4009444b0	-	ea5e4f255301	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3bbad38b-7d88-4ff2-9fd3-5081536e7c56	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Page, Loose Leaf/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bbad38b-7d88-4ff2-9fd3-5081536e7c56	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Page, Loose Leaf/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bbfceba-9f3a-4988-a009-13c9472138b1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

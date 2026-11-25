@@ -19,9 +19,9 @@ ac161100-46b7-4f0f-a72b-84aaa45980ad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ac161100-46b7-4f0f-a72b-84aaa45980ad	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ac193909-7e81-4082-ad02-2a60d142a0ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-host:cast:s1,f:xs:XP:blood-host:cast:s1	-	-	-	d864b561c9cb	-	2b04841f79be	-	-	2026-11-24	xproof
 ac193909-7e81-4082-ad02-2a60d142a0ab	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	cast	cast-resolve	agreed	-	X	scen	1	0	Captain America, Super-Soldier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Captain America, Super-Soldier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Captain America, Super-Soldier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-america-super-soldier:cast:s1,f:xs:XP:captain-america-super-soldier:cast:s1	-	-	-	23c4009444b0	-	6f5908e270a0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:captain-america-super-soldier:combat0.attack:s1	-	-	-	23c4009444b0	-	6f5908e270a0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:captain-america-super-soldier:combat0.block:s1	-	-	-	23c4009444b0	-	6f5908e270a0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ac1b6ffc-12a9-4d9c-a9fc-68a839a40738	static#0.0	static#0.0	agreed	-	X	scen	1	0	Captain America, Super-Soldier/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac2086fe-98ee-4280-9c7c-c5c2d6548a8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burst-lightning:cast:s1,f:xs:XP:burst-lightning:cast:s1	-	-	-	8c0bd19283bb	-	624afb26dcad	-	-	2026-11-24	xproof
 ac2173f9-f223-440a-9231-fd98762bdc6f	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
@@ -119,10 +119,10 @@ ac94860b-70b8-4624-9758-4bb024a56f60	cast	cast-resolve	agreed	-	FX	scen	2	0	Path
 ac94860b-70b8-4624-9758-4bb024a56f60	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Path to Redemption/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac94860b-70b8-4624-9758-4bb024a56f60	static#0.0	static#0.0	agreed	-	X	scen	1	0	Path to Redemption/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ac94860b-70b8-4624-9758-4bb024a56f60	static#0.1	static#0.1	agreed	-	X	scen	1	0	Path to Redemption/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ac950d10-e373-42d3-907b-ee56e45a2084	cast	cast-resolve	agreed	-	X	scen	1	0	Crossbones, Malicious Mercenary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ac950d10-e373-42d3-907b-ee56e45a2084	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Crossbones, Malicious Mercenary/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ac950d10-e373-42d3-907b-ee56e45a2084	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Crossbones, Malicious Mercenary/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ac950d10-e373-42d3-907b-ee56e45a2084	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Crossbones, Malicious Mercenary/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ac950d10-e373-42d3-907b-ee56e45a2084	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crossbones-malicious-mercenary:cast:s1,f:xs:XP:crossbones-malicious-mercenary:cast:s1	-	-	-	23c4009444b0	-	c691c06e0295	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ac950d10-e373-42d3-907b-ee56e45a2084	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:crossbones-malicious-mercenary:combat0.attack:s1,f:xs:XP:crossbones-malicious-mercenary:combat0.attack:s1	-	-	-	23c4009444b0	-	c691c06e0295	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ac950d10-e373-42d3-907b-ee56e45a2084	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:crossbones-malicious-mercenary:combat0.block:s1,f:xs:XP:crossbones-malicious-mercenary:combat0.block:s1	-	-	-	23c4009444b0	-	c691c06e0295	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ac950d10-e373-42d3-907b-ee56e45a2084	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:crossbones-malicious-mercenary:f0t0:s1,f:xs:XP:crossbones-malicious-mercenary:f0t0:s1	-	-	-	23c4009444b0	-	c691c06e0295	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ac96d27c-dbae-4094-9209-3ef143f64713	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac96d27c-dbae-4094-9209-3ef143f64713	f0/a0	DealDamage	agreed	-	X	start	2	0	x:xs:XP:soul-of-shandalar:f0a0:s1	-	-	-	d864b561c9cb	-	0004438016b9	-	-	2026-11-24	xproof
 ac96d27c-dbae-4094-9209-3ef143f64713	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

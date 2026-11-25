@@ -52,8 +52,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 203b72d2-a273-49cc-bd10-2fbc07ed2fc8	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Agents of S.H.I.E.L.D./trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 203eb24c-f135-44e2-bdae-80b7b3d0fb15	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 2043fbde-48c4-4a77-8911-8991d77de1eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foot-mystic:f0t0:s1,f:xs:XP:foot-mystic:f0t0:s1	-	-	-	23c4009444b0	-	a44f9716eb21	-	-	2026-11-25	xproof
-2043fbde-48c4-4a77-8911-8991d77de1eb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Foot Mystic/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2043fbde-48c4-4a77-8911-8991d77de1eb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Foot Mystic/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2043fbde-48c4-4a77-8911-8991d77de1eb	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:foot-mystic:combat0.attack:s1,f:xs:XP:foot-mystic:combat0.attack:s1	-	-	-	23c4009444b0	-	a44f9716eb21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2043fbde-48c4-4a77-8911-8991d77de1eb	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:foot-mystic:combat0.block:s1,f:xs:XP:foot-mystic:combat0.block:s1	-	-	-	23c4009444b0	-	a44f9716eb21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2043fbde-48c4-4a77-8911-8991d77de1eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:foot-mystic:f0t0:s1,f:xs:XP:foot-mystic:f0t0:s1	-	-	-	23c4009444b0	-	a44f9716eb21	-	-	2026-11-25	xproof
 2047a613-809d-4a47-9c78-f58a380ba18d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-trumpeter:cast:s1,f:xs:XP:rakdos-trumpeter:cast:s1	-	-	-	d864b561c9cb	-	e5e5d643e7e5	-	-	2026-11-24	xproof
 2047a613-809d-4a47-9c78-f58a380ba18d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:rakdos-trumpeter:f0a0:s1,f:xs:XP:rakdos-trumpeter:f0a0:s1	-	-	-	d864b561c9cb	-	e5e5d643e7e5	-	-	2026-11-24	xproof
@@ -169,9 +169,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 20f2fc0e-b1d4-4f80-9c7a-a9fb25fef7b8	cast	cast-resolve	agreed	-	FX	scen	2	0	Trapped in the Screen/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20f2fc0e-b1d4-4f80-9c7a-a9fb25fef7b8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20f2fc0e-b1d4-4f80-9c7a-a9fb25fef7b8	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Trapped in the Screen/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-20f3388f-0931-4a09-bcda-96deb01e1787	cast	cast-resolve	agreed	-	X	scen	1	0	Cuboid Colony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-20f3388f-0931-4a09-bcda-96deb01e1787	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cuboid Colony/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-20f3388f-0931-4a09-bcda-96deb01e1787	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cuboid Colony/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+20f3388f-0931-4a09-bcda-96deb01e1787	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cuboid-colony:cast:s1,f:xs:XP:cuboid-colony:cast:s1	-	-	-	23c4009444b0	-	150540d7d432	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+20f3388f-0931-4a09-bcda-96deb01e1787	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:cuboid-colony:combat0.attack:s1,f:xs:XP:cuboid-colony:combat0.attack:s1	-	-	-	23c4009444b0	-	150540d7d432	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+20f3388f-0931-4a09-bcda-96deb01e1787	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:cuboid-colony:combat0.block:s1,f:xs:XP:cuboid-colony:combat0.block:s1	-	-	-	23c4009444b0	-	150540d7d432	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 20f3388f-0931-4a09-bcda-96deb01e1787	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cuboid Colony/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20f3bc44-c7fa-4d5a-adb9-2dd1d2d66ffe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sardian-cliffstomper:cast:s1,f:xs:XP:sardian-cliffstomper:cast:s1	-	-	-	ae86f6029288	-	5ec3d1cf0431	-	-	2026-11-24	xproof
 20f92504-d03c-437e-9814-b25ee384b3ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

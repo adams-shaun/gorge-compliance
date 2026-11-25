@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7312efc2-8a02-47cd-874b-c3338241435e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:seymour-flux:f0t0:s1,f:xs:XP:seymour-flux:f0t0:s1	-	-	-	23c4009444b0	-	b1db4c9b9d15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 73144877-1d37-4c7a-8493-3cef191b9211	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:omni-cheese-pizza:f0t0:s2,f:xs:XP:omni-cheese-pizza:f0t0:s2	-	-	-	5437c1394672	-	1354249dc8ce	-	-	2026-11-24	xproof
 73144877-1d37-4c7a-8493-3cef191b9211	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Omni-Cheese Pizza/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-73144877-1d37-4c7a-8493-3cef191b9211	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Omni-Cheese Pizza/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+73144877-1d37-4c7a-8493-3cef191b9211	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:omni-cheese-pizza:f0a1:s1,f:xs:XP:omni-cheese-pizza:f0a1:s1	-	-	-	23c4009444b0	-	1354249dc8ce	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 73144877-1d37-4c7a-8493-3cef191b9211	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:omni-cheese-pizza:f0t0:s2,f:xs:XP:omni-cheese-pizza:f0t0:s2	-	-	-	5437c1394672	-	1354249dc8ce	-	-	2026-11-24	xproof
 731821b1-89fd-4166-94b8-35a1364e4d9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 731898d3-465b-4ecb-a346-b91881714ebc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -46,8 +46,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 733cfc16-9a16-41e2-b36e-3d7a546c67f0	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:guul-draz-specter:f0t0:s1,f:xs:XP:guul-draz-specter:f0t0:s1	-	-	-	23c4009444b0	-	7e971d330a5f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7340199d-60c7-4c27-9a0f-047790273db0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73413bd5-8c40-4d45-8f05-c20c39ee4017	cast	cast-resolve	agreed	-	FX	scen	2	0	Madame Null, Power Broker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-73413bd5-8c40-4d45-8f05-c20c39ee4017	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Madame Null, Power Broker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-73413bd5-8c40-4d45-8f05-c20c39ee4017	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Madame Null, Power Broker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+73413bd5-8c40-4d45-8f05-c20c39ee4017	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:madame-null-power-broker:combat0.attack:s1,f:xs:XP:madame-null-power-broker:combat0.attack:s1	-	-	-	23c4009444b0	-	cde143c589cd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+73413bd5-8c40-4d45-8f05-c20c39ee4017	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:madame-null-power-broker:combat0.block:s1,f:xs:XP:madame-null-power-broker:combat0.block:s1	-	-	-	23c4009444b0	-	cde143c589cd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 73413bd5-8c40-4d45-8f05-c20c39ee4017	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Madame Null, Power Broker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7341a04a-b6d6-4106-b1c3-3483f9d37663	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7346337e-ac12-4dd2-826d-77ec0013e74f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 738d2be9-c40b-4a9b-95ed-18d659080918	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tourach-s-canticle:cast:s1,f:xs:XP:tourach-s-canticle:cast:s1	-	-	-	d864b561c9cb	-	db8c3ce0e28a	-	-	2026-11-24	xproof
 738d8d1c-4ceb-4115-89e1-1f2149fb4f5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 738d8d1c-4ceb-4115-89e1-1f2149fb4f5f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73905f94-9665-4d82-8927-725d2c4fc4bd	cast	cast-resolve	agreed	-	X	scen	1	0	Dissection Practice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+73905f94-9665-4d82-8927-725d2c4fc4bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dissection-practice:cast:s1,f:xs:XP:dissection-practice:cast:s1	-	-	-	23c4009444b0	-	eeab4c697b96	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7392c58b-1ba9-4cf3-8449-aa5de3c42130	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fiddlehead-kami:cast:s1,f:xs:XP:fiddlehead-kami:cast:s1	-	-	-	64a08ba7d913	-	e4cca10b80ea	-	-	2026-11-24	xproof
 7392c58b-1ba9-4cf3-8449-aa5de3c42130	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:fiddlehead-kami:f0t0:s1,f:xs:XP:fiddlehead-kami:f0t0:s1	-	-	-	23c4009444b0	-	e4cca10b80ea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 739621e6-e138-4ef9-87e8-c730b5a7f495	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

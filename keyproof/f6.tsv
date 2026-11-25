@@ -4,8 +4,8 @@ f60234e4-9b53-47a5-a21a-82c80b5af072	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:row
 f6036065-7196-44d4-8a27-2199f0e1a03c	cast	cast-resolve	agreed	-	FX	scen	2	0	Harmonized Trio/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f6036065-7196-44d4-8a27-2199f0e1a03c	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Harmonized Trio/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f6059731-2e10-4f72-a214-b257f1677e9e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mutant Town/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f6059731-2e10-4f72-a214-b257f1677e9e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mutant Town/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f6059731-2e10-4f72-a214-b257f1677e9e	land	play-land	agreed	-	X	scen	1	0	Mutant Town/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f6059731-2e10-4f72-a214-b257f1677e9e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mutant-town:land:s1,f:xs:XP:mutant-town:land:s1	-	-	-	23c4009444b0	-	c2407c08a959	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f6059731-2e10-4f72-a214-b257f1677e9e	land	land	agreed	-	FX	start	2	0	x:xs:XP:mutant-town:land:s1,f:xs:XP:mutant-town:land:s1	-	-	-	23c4009444b0	-	c2407c08a959	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f6069a4f-744e-43e8-9f8b-7c13b8b0187f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6069a4f-744e-43e8-9f8b-7c13b8b0187f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 f606bd15-b380-447f-b147-72f811266593	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bulwark-giant:f0t0:s1,f:xs:XP:bulwark-giant:f0t0:s1	-	-	-	d864b561c9cb	-	a9d492cc6477	-	-	2026-11-24	xproof
@@ -97,8 +97,8 @@ f6747295-d21d-40d7-bc70-baa4a37ae668	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f6747295-d21d-40d7-bc70-baa4a37ae668	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f6747295-d21d-40d7-bc70-baa4a37ae668	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f6758e8f-5462-48a7-96d3-60d07b1563fc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:scarblade-scout:f0t0:s2,f:xs:XP:scarblade-scout:f0t0:s2	-	-	-	267e485f6204	-	79e9feef22bf	-	-	2026-11-24	xproof
-f6758e8f-5462-48a7-96d3-60d07b1563fc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scarblade Scout/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-f6758e8f-5462-48a7-96d3-60d07b1563fc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scarblade Scout/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+f6758e8f-5462-48a7-96d3-60d07b1563fc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:scarblade-scout:combat0.attack:s1,f:xs:XP:scarblade-scout:combat0.attack:s1	-	-	-	23c4009444b0	-	79e9feef22bf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f6758e8f-5462-48a7-96d3-60d07b1563fc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:scarblade-scout:combat0.block:s1,f:xs:XP:scarblade-scout:combat0.block:s1	-	-	-	23c4009444b0	-	79e9feef22bf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f6758e8f-5462-48a7-96d3-60d07b1563fc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:scarblade-scout:f0t0:s2,f:xs:XP:scarblade-scout:f0t0:s2	-	-	-	267e485f6204	-	79e9feef22bf	-	-	2026-11-24	xproof
 f6771d32-395e-4832-b33d-cbc12dff1516	cast	cast-resolve	agreed	-	X	scen	1	0	Thranduil, Sindarin Liege/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f6771d32-395e-4832-b33d-cbc12dff1516	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thranduil, Sindarin Liege/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
