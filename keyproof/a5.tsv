@@ -96,7 +96,7 @@ a58adf82-d9e2-4b47-933e-68180f280ba2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mys
 a58ee84f-1d9c-4924-b7b1-14a9b2ba3b98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:umara-raptor:f0t0:s1,f:xs:XP:umara-raptor:f0t0:s1	-	-	-	8a1b1a193ec0	-	b5ca03ecb1f4	-	-	2026-11-24	xproof
 a58ee84f-1d9c-4924-b7b1-14a9b2ba3b98	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:umara-raptor:f0t0:s1,f:xs:XP:umara-raptor:f0t0:s1	-	-	-	8a1b1a193ec0	-	b5ca03ecb1f4	-	-	2026-11-24	xproof
 a598e6ce-21ee-49c1-989e-ee864208262f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a598e6ce-21ee-49c1-989e-ee864208262f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+a598e6ce-21ee-49c1-989e-ee864208262f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:soulblade-djinn:f0t0:s1,f:xs:XP:soulblade-djinn:f0t0:s1	-	-	-	fb9d3088f0bf	-	2d0aea208488	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 a59a23f2-158f-4dea-8593-75fe7b31b726	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a59a23f2-158f-4dea-8593-75fe7b31b726	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a59b854c-0e04-4581-b9d3-1516263d7ace	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Borg Cube"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -126,7 +126,7 @@ a5ae93e9-0385-47fd-9d8f-306e9a6b7fe6	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	st
 a5ae93e9-0385-47fd-9d8f-306e9a6b7fe6	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a5ba544f-b223-47c8-a408-b00512772107	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a5ba544f-b223-47c8-a408-b00512772107	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-a5ba544f-b223-47c8-a408-b00512772107	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+a5ba544f-b223-47c8-a408-b00512772107	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shadows-of-the-past:f0t0:s1,f:xs:XP:shadows-of-the-past:f0t0:s1	-	-	-	fb9d3088f0bf	-	9f1917829a3d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sentinel-of-the-nameless-city:f0t0:s2,f:xs:XP:sentinel-of-the-nameless-city:f0t0:s2	-	-	-	e07cf3a05ba5	-	ba10ae624068	-	-	2026-11-24	xproof
 a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-the-nameless-city:combat0.attack:s1,f:xs:XP:sentinel-of-the-nameless-city:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ba10ae624068	-	-	2026-11-25	xproof
 a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-the-nameless-city:combat0.block:s1,f:xs:XP:sentinel-of-the-nameless-city:combat0.block:s1	-	-	-	3aa6ded33acb	-	ba10ae624068	-	-	2026-11-25	xproof

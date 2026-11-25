@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c297085-5ec1-4d29-9a8e-1785c016ce09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c2c5f3b-61f3-4772-9ade-f5be80719e9f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:catacomb-sifter:f0t0:s1,f:xs:XP:catacomb-sifter:f0t0:s1	-	-	-	d864b561c9cb	-	db0351d7ec57	-	-	2026-11-24	xproof
 4c2c5f3b-61f3-4772-9ade-f5be80719e9f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:catacomb-sifter:f0t0:s1,f:xs:XP:catacomb-sifter:f0t0:s1	-	-	-	d864b561c9cb	-	db0351d7ec57	-	-	2026-11-24	xproof
-4c2c5f3b-61f3-4772-9ade-f5be80719e9f	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+4c2c5f3b-61f3-4772-9ade-f5be80719e9f	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:catacomb-sifter:f0t1:s1,f:xs:XP:catacomb-sifter:f0t1:s1	-	-	-	fb9d3088f0bf	-	db0351d7ec57	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 4c2c8cc6-bb90-468a-867b-db56f4eb7e59	cast	cast	agreed	-	F	start	2	0	f:xs:XP:planet-killer:cast:s1	-	-	-	8c0bd19283bb	-	24ccc816ef10	-	-	2026-11-24	xproof
 4c2c8cc6-bb90-468a-867b-db56f4eb7e59	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4c2e84dc-b4f5-4eca-af07-1c53a1caae7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravine-raider:cast:s1,f:xs:XP:ravine-raider:cast:s1	-	-	-	3aa6ded33acb	-	20d5fcd1a784	-	-	2026-11-25	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4cd6ad78-7441-4dd7-b486-d9575e8e0947	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4cd6ad78-7441-4dd7-b486-d9575e8e0947	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4cd9b48e-5774-4a1c-857f-9f4a92db9b41	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jori-en-ruin-diver:cast:s1,f:xs:XP:jori-en-ruin-diver:cast:s1	-	-	-	d864b561c9cb	-	d5357d897daa	-	-	2026-11-24	xproof
-4cd9b48e-5774-4a1c-857f-9f4a92db9b41	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+4cd9b48e-5774-4a1c-857f-9f4a92db9b41	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:jori-en-ruin-diver:f0t0:s1,f:xs:XP:jori-en-ruin-diver:f0t0:s1	-	-	-	fb9d3088f0bf	-	d5357d897daa	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 4cdb9f80-d08f-4986-99c8-573166d66082	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Night Market/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4cdb9f80-d08f-4986-99c8-573166d66082	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Night Market/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4cdb9f80-d08f-4986-99c8-573166d66082	land	land	agreed	-	FX	start	2	0	x:xs:XP:night-market:land:s1,f:xs:XP:night-market:land:s1	-	-	-	23c4009444b0	-	7afda5946393	-	-	2026-11-25	xproof

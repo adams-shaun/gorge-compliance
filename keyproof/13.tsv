@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13613f6e-a6e4-4493-b029-8ec11610c29f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136596a0-b179-40be-b42d-c0b992621c95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136596a0-b179-40be-b42d-c0b992621c95	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-136596a0-b179-40be-b42d-c0b992621c95	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+136596a0-b179-40be-b42d-c0b992621c95	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 136596a0-b179-40be-b42d-c0b992621c95	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 136c9ecb-59b4-4ef6-bcb2-7b8d3df3ee75	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:razaketh-the-foulblooded:cast:s1,f:xs:XP:razaketh-the-foulblooded:cast:s1	-	-	-	d864b561c9cb	-	5606f2d21b8a	-	-	2026-11-24	xproof
 136c9ecb-59b4-4ef6-bcb2-7b8d3df3ee75	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -201,7 +201,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13f6f960-ef79-4f2c-8874-90fe9e77099e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ground-seal:f0t0:s1,f:xs:XP:ground-seal:f0t0:s1	-	-	-	25696bf19d5b	-	72f9d83d0b05	-	-	2026-11-24	xproof
 13f6f960-ef79-4f2c-8874-90fe9e77099e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ground-seal:f0t0:s1,f:xs:XP:ground-seal:f0t0:s1	-	-	-	25696bf19d5b	-	72f9d83d0b05	-	-	2026-11-24	xproof
 13f9a845-d0e9-4790-99e0-b857204ad1da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13f9a845-d0e9-4790-99e0-b857204ad1da	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+13f9a845-d0e9-4790-99e0-b857204ad1da	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:thought-harvester:f0t0:s1,f:xs:XP:thought-harvester:f0t0:s1	-	-	-	fb9d3088f0bf	-	7f8478cee673	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 13fb5413-0057-4022-84da-2c90ce065ed1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13fb5413-0057-4022-84da-2c90ce065ed1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 13fbd525-c9ee-4bd6-b269-94fb264024b6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gohn, Town of Ruin/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -34,8 +34,8 @@ b9110be0-3f0c-449b-8baf-689e92fdb8f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emb
 b9176173-c4a1-45ae-8f34-bd6b31c141fe	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cartouche-of-solidarity:cast:s1,f:xs:XP:cartouche-of-solidarity:cast:s1	-	-	-	d864b561c9cb	-	c9c711495995	-	-	2026-11-24	xproof
 b9176173-c4a1-45ae-8f34-bd6b31c141fe	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cartouche-of-solidarity:cast:s1,f:xs:XP:cartouche-of-solidarity:cast:s1	-	-	-	d864b561c9cb	-	c9c711495995	-	-	2026-11-24	xproof
 b917c3aa-2d54-49e0-924a-dfd02eaf4b2d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b917c3aa-2d54-49e0-924a-dfd02eaf4b2d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-b917c3aa-2d54-49e0-924a-dfd02eaf4b2d	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b917c3aa-2d54-49e0-924a-dfd02eaf4b2d	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:jhessian-thief:f0t0:s1,f:xs:XP:jhessian-thief:f0t0:s1	-	-	-	fb9d3088f0bf	-	67e374dfeba8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+b917c3aa-2d54-49e0-924a-dfd02eaf4b2d	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:jhessian-thief:f0t1:s1,f:xs:XP:jhessian-thief:f0t1:s1	-	-	-	fb9d3088f0bf	-	67e374dfeba8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 b917e472-2550-4381-b756-45487c2c187a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	96fdb14349a3	-	-	2026-11-24	xproof
 b917e472-2550-4381-b756-45487c2c187a	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	96fdb14349a3	-	-	2026-11-24	xproof
 b917e472-2550-4381-b756-45487c2c187a	f0/t1	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	96fdb14349a3	-	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ b93eaf66-91b3-44da-851c-79810901be0c	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Ways
 b9432430-df01-497d-b025-7576dce830e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9447f25-f285-4b62-8976-4a49363dfdd7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sigil-of-valor:cast:s1,f:xs:XP:sigil-of-valor:cast:s1	-	-	-	d864b561c9cb	-	1c4cc59d37b3	-	-	2026-11-24	xproof
 b9447f25-f285-4b62-8976-4a49363dfdd7	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sigil-of-valor:f0a0:s1,f:xs:XP:sigil-of-valor:f0a0:s1	-	-	-	d864b561c9cb	-	1c4cc59d37b3	-	-	2026-11-24	xproof
-b9447f25-f285-4b62-8976-4a49363dfdd7	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b9447f25-f285-4b62-8976-4a49363dfdd7	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 b94591b8-2e99-4983-8f36-9b52207bfd2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b947b9a7-7a42-447d-b3fd-e20dba8a8f41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b94c0336-2ca8-4bb1-bb1f-e9babd1826ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -201,7 +201,7 @@ b9d388ca-1a63-4a11-bf33-9f7b87305a52	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf
 b9d388ca-1a63-4a11-bf33-9f7b87305a52	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9d51e07-851f-4b7b-bffe-7c1efff0714c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:break-the-spell:cast:s1,f:xs:XP:break-the-spell:cast:s1	-	-	-	23b491658465	-	0faa763f52a6	-	-	2026-11-24	xproof
 b9d75969-15ac-4509-b95c-a762fc2b99f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:null-caller:cast:s1,f:xs:XP:null-caller:cast:s1	-	-	-	d864b561c9cb	-	d034a64b3ae8	-	-	2026-11-24	xproof
-b9d75969-15ac-4509-b95c-a762fc2b99f9	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b9d75969-15ac-4509-b95c-a762fc2b99f9	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:null-caller:f0a0:s1,f:xs:XP:null-caller:f0a0:s1	-	-	-	fb9d3088f0bf	-	d034a64b3ae8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 b9d89f7c-a362-48dc-a335-f0e556e83f35	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:daring-archaeologist:f0t0:s1,f:xs:XP:daring-archaeologist:f0t0:s1	-	-	-	d864b561c9cb	-	17b6a60b6097	-	-	2026-11-24	xproof
 b9d89f7c-a362-48dc-a335-f0e556e83f35	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:daring-archaeologist:f0t0:s1,f:xs:XP:daring-archaeologist:f0t0:s1	-	-	-	d864b561c9cb	-	17b6a60b6097	-	-	2026-11-24	xproof
 b9d89f7c-a362-48dc-a335-f0e556e83f35	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -225,7 +225,7 @@ b9e61e68-9dc8-4295-95dc-dd66a0907c8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:for
 b9e61e68-9dc8-4295-95dc-dd66a0907c8c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:forsaken-wastes:cast:s1,f:xs:XP:forsaken-wastes:cast:s1	-	-	-	ea3140b6974b	-	c72c91598317	-	-	2026-11-24	xproof
 b9e61e68-9dc8-4295-95dc-dd66a0907c8c	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 b9e93832-93b7-409d-91aa-13757225824d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b9e93832-93b7-409d-91aa-13757225824d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b9e93832-93b7-409d-91aa-13757225824d	f0/t0	DamageDone/Renown	agreed	-	FX	start	2	0	x:xs:XP:citadel-castellan:f0t0:s1,f:xs:XP:citadel-castellan:f0t0:s1	-	-	-	fb9d3088f0bf	-	c3e85c9c36bd	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 b9ea2e9c-a83b-40dd-ad52-b16d65989ba3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9ea2e9c-a83b-40dd-ad52-b16d65989ba3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 b9ea2e9c-a83b-40dd-ad52-b16d65989ba3	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof

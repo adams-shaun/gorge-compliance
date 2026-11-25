@@ -80,7 +80,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e768d03-b2a3-4783-9cf5-7470f0203349	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e7b9caf-8285-4386-98bc-9a809827f447	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e8adf34-0834-4027-9cda-18df69239e2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e8adf34-0834-4027-9cda-18df69239e2b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0e8adf34-0834-4027-9cda-18df69239e2b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:embodiment-of-fury:f0t0:s1,f:xs:XP:embodiment-of-fury:f0t0:s1	-	-	-	fb9d3088f0bf	-	b53e4caa7da6	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0e8ae1f7-8926-414a-8434-db0b0f877505	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e8ae1f7-8926-414a-8434-db0b0f877505	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0e91a873-a680-4ca2-b073-26aa39376d77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -94,10 +94,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e99efaf-6402-44c5-ae8b-1f5bb1b68333	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Red Herring/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e99efaf-6402-44c5-ae8b-1f5bb1b68333	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Red Herring/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e99efaf-6402-44c5-ae8b-1f5bb1b68333	static#0.0	static#0.0	agreed	-	X	scen	1	0	Red Herring/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0e9c7380-7584-43e6-8c31-5d1bb1685fe0	cast	cast	agreed	-	X	start	2	0	x:xs:XP:tolsimir-midnight-s-light:cast:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
+0e9c7380-7584-43e6-8c31-5d1bb1685fe0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tolsimir-midnight-s-light:cast:s1,f:xs:XP:tolsimir-midnight-s-light:cast:s1	-	-	-	fb9d3088f0bf	-	f2a96a56dfe5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-midnight-s-light:combat0.attack:s1,f:xs:XP:tolsimir-midnight-s-light:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f2a96a56dfe5	-	-	2026-11-25	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-midnight-s-light:combat0.block:s1,f:xs:XP:tolsimir-midnight-s-light:combat0.block:s1	-	-	-	3aa6ded33acb	-	f2a96a56dfe5	-	-	2026-11-25	xproof
-0e9c7380-7584-43e6-8c31-5d1bb1685fe0	f0/t0	ChangesZone	agreed	-	X	start	2	0	x:xs:XP:tolsimir-midnight-s-light:cast:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
+0e9c7380-7584-43e6-8c31-5d1bb1685fe0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tolsimir-midnight-s-light:cast:s1,f:xs:XP:tolsimir-midnight-s-light:cast:s1	-	-	-	fb9d3088f0bf	-	f2a96a56dfe5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-midnight-s-light:f0t1:s1,f:xs:XP:tolsimir-midnight-s-light:f0t1:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
 0e9d8e12-b9da-4452-a758-5caffd8a752e	cast	cast-resolve	agreed	-	FX	scen	2	0	Magitek Armor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e9d8e12-b9da-4452-a758-5caffd8a752e	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Magitek Armor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0eb11b2d-a397-48da-a0f3-9f0f83f42282	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Tezzeret, Cruel Captain/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eb1d539-6301-46b0-903e-487eda34253f	cast	cast-resolve	agreed	-	FX	scen	2	0	Daretti, Rocketeer Engineer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eb1d539-6301-46b0-903e-487eda34253f	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0eb1d539-6301-46b0-903e-487eda34253f	f0/t1	Attacks	agreed	-	X	start	2	0	x:xs:XP:daretti-rocketeer-engineer:f0t1:s1	-	-	-	23c4009444b0	-	3955031297fa	-	-	2026-11-25	xproof
+0eb1d539-6301-46b0-903e-487eda34253f	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:daretti-rocketeer-engineer:f0t1:s1,f:xs:XP:daretti-rocketeer-engineer:f0t1:s1	-	-	-	fb9d3088f0bf	-	3955031297fa	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0eb1d539-6301-46b0-903e-487eda34253f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Daretti, Rocketeer Engineer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eb41c36-5910-41fd-97fc-1cae2332e5c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0eb8983e-4e44-4bfe-81dd-ddb41007a166	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:plumecreed-mentor:f0t0:s2,f:xs:XP:plumecreed-mentor:f0t0:s2	-	-	-	e07cf3a05ba5	-	0502e6ee79eb	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ee0b090-3f1e-49d6-bcad-91e0cf1d12ae	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:madblind-mountain:f0a0:s1,f:xs:XP:madblind-mountain:f0a0:s1	-	-	-	23b491658465	-	5bd13c3d4de3	-	-	2026-11-25	xproof
 0ee0b090-3f1e-49d6-bcad-91e0cf1d12ae	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ee14128-3bec-4b65-8ee4-619337d4ed45	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leatherback-baloth:cast:s1,f:xs:XP:leatherback-baloth:cast:s1	-	-	-	77494c1ce129	-	0a23c3e3b67f	-	-	2026-11-24	xproof
-0ee28549-5909-4372-8376-34010b7b6654	cast	cast-resolve	agreed	-	X	scen	1	0	Fear of Isolation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0ee28549-5909-4372-8376-34010b7b6654	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fear-of-isolation:cast:s1,f:xs:XP:fear-of-isolation:cast:s1	-	-	-	fb9d3088f0bf	-	f613b4604b44	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0ee28549-5909-4372-8376-34010b7b6654	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:fear-of-isolation:combat0.attack:s1,f:xs:XP:fear-of-isolation:combat0.attack:s1	-	-	-	23c4009444b0	-	f613b4604b44	-	-	2026-11-25	xproof
 0ee28549-5909-4372-8376-34010b7b6654	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:fear-of-isolation:combat0.block:s1,f:xs:XP:fear-of-isolation:combat0.block:s1	-	-	-	23c4009444b0	-	f613b4604b44	-	-	2026-11-25	xproof
 0ee41ef9-0b39-4d00-a68e-7914839a7175	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bone-devourer:cast:s1,f:xs:XP:bone-devourer:cast:s1	-	-	-	8c0bd19283bb	-	7d06056786f8	-	-	2026-11-24	xproof

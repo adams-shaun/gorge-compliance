@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 328d5ef0-b25e-4f2a-80fe-35c6ae419e8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 328d5ef0-b25e-4f2a-80fe-35c6ae419e8a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32902854-2c64-431e-9d9c-9a23e52afb1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormchaser-mage:cast:s1,f:xs:XP:stormchaser-mage:cast:s1	-	-	-	d864b561c9cb	-	421ec3d5df0c	-	-	2026-11-24	xproof
-32902854-2c64-431e-9d9c-9a23e52afb1b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+32902854-2c64-431e-9d9c-9a23e52afb1b	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:stormchaser-mage:f0t0:s1,f:xs:XP:stormchaser-mage:f0t0:s1	-	-	-	fb9d3088f0bf	-	421ec3d5df0c	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 3292d795-4fdc-4e42-959a-dd5e8591c5cc	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3292d795-4fdc-4e42-959a-dd5e8591c5cc	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

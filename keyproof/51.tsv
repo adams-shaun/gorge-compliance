@@ -82,8 +82,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 515fb257-ec07-4978-af16-47a10a22ba3c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 515fb257-ec07-4978-af16-47a10a22ba3c	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 51622e89-aa5e-4dd6-a078-eb45e8ebb434	cast	cast-resolve	agreed	-	FX	scen	2	0	Seraphic Steed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-51622e89-aa5e-4dd6-a078-eb45e8ebb434	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:seraphic-steed:combat0.attack:s1	-	-	-	3aa6ded33acb	-	37e1710c2fef	-	-	2026-11-25	xproof
-51622e89-aa5e-4dd6-a078-eb45e8ebb434	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Seraphic Steed/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+51622e89-aa5e-4dd6-a078-eb45e8ebb434	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:seraphic-steed:combat0.attack:s1,f:xs:XP:seraphic-steed:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	37e1710c2fef	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+51622e89-aa5e-4dd6-a078-eb45e8ebb434	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:seraphic-steed:combat0.block:s1,f:xs:XP:seraphic-steed:combat0.block:s1	-	-	-	fb9d3088f0bf	-	37e1710c2fef	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 51622e89-aa5e-4dd6-a078-eb45e8ebb434	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Seraphic Steed/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51622e89-aa5e-4dd6-a078-eb45e8ebb434	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Seraphic Steed/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 516d1ac4-e831-44b6-8266-131dde7fe802	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tragic-lesson:cast:s1,f:xs:XP:tragic-lesson:cast:s1	-	-	-	d864b561c9cb	-	b15ca649f791	-	-	2026-11-24	xproof

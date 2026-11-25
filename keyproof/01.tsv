@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 017cadd8-55ee-497a-84d4-6535173bc1eb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 017f1f83-18a8-4523-917d-98f6ca7838b7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	e764bcb5b2f2	-	-	2026-11-25	xproof
 017f4471-db5a-4ad0-97b3-b1f12b52578a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-017f4471-db5a-4ad0-97b3-b1f12b52578a	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+017f4471-db5a-4ad0-97b3-b1f12b52578a	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:zulaport-chainmage:f0a0:s1,f:xs:XP:zulaport-chainmage:f0a0:s1	-	-	-	fb9d3088f0bf	-	bfdea8b0ec83	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 01800a0c-ad93-4e45-a904-38253a143638	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01805d0d-3a72-4d26-9475-3e68c278b7fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01805d0d-3a72-4d26-9475-3e68c278b7fe	f0/a0	DealDamage	agreed	-	FX	start	1	0	x:xs:XP:cinder-elemental:f0a0:s2,f:xs:XP:cinder-elemental:f0a0:s2	-	-	-	d864b561c9cb	-	8bfdd873bd43	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0192ba05-6144-4fec-a803-462ecdf64195	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:royal-warden:f0a0:s1,f:xs:XP:royal-warden:f0a0:s1	-	-	-	23c4009444b0	-	62499280c87c	-	-	2026-11-25	xproof
 0192ba05-6144-4fec-a803-462ecdf64195	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:royal-warden:f0a0:s1,f:xs:XP:royal-warden:f0a0:s1	-	-	-	23c4009444b0	-	62499280c87c	-	-	2026-11-25	xproof
 019461d9-63ae-43d3-a9d4-bd745d0cf46c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-019461d9-63ae-43d3-a9d4-bd745d0cf46c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+019461d9-63ae-43d3-a9d4-bd745d0cf46c	f0/t0	DamageDone/Renown	agreed	-	FX	start	2	0	x:xs:XP:rhox-maulers:f0t0:s1,f:xs:XP:rhox-maulers:f0t0:s1	-	-	-	fb9d3088f0bf	-	f559ff3e6386	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 01990628-12b4-49c9-af3d-03120891efc4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01990628-12b4-49c9-af3d-03120891efc4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:spitfire-handler:f0a0:s1,f:xs:XP:spitfire-handler:f0a0:s1	-	-	-	fc71ca68c5ac	-	b00529bd4176	-	-	2026-11-24	xproof
 019a3229-dd1c-4f70-a8fb-e33dbc54df39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

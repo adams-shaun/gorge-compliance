@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 870185fc-7b05-47d3-95ff-97fbf12796d4	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 870185fc-7b05-47d3-95ff-97fbf12796d4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 87038d1b-0fa9-4604-b119-1de56db30144	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyromancer-s-assault:cast:s1,f:xs:XP:pyromancer-s-assault:cast:s1	-	-	-	d864b561c9cb	-	09493a05f7ce	-	-	2026-11-24	xproof
-87038d1b-0fa9-4604-b119-1de56db30144	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+87038d1b-0fa9-4604-b119-1de56db30144	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:pyromancer-s-assault:f0t0:s1,f:xs:XP:pyromancer-s-assault:f0t0:s1	-	-	-	fb9d3088f0bf	-	09493a05f7ce	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 87050537-99c9-4993-a770-4329b2e749e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cid-timeless-artificer:cast:s1,f:xs:XP:cid-timeless-artificer:cast:s1	-	-	-	23c4009444b0	-	6b1aa23fae71	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 87050537-99c9-4993-a770-4329b2e749e4	f0/a0	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:cid-timeless-artificer:f0a0:s1,f:xs:XP:cid-timeless-artificer:f0a0:s1	-	-	-	23c4009444b0	-	6b1aa23fae71	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 87050537-99c9-4993-a770-4329b2e749e4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cid, Timeless Artificer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87105cdf-c28e-4fd9-83d0-0fef1704b174	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skirk-fire-marshal:cast:s1,f:xs:XP:skirk-fire-marshal:cast:s1	-	-	-	fc71ca68c5ac	-	576362706bb8	-	-	2026-11-24	xproof
 87105cdf-c28e-4fd9-83d0-0fef1704b174	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 8711b732-8dab-41d4-a85b-b10edcd25e97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8711b732-8dab-41d4-a85b-b10edcd25e97	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8711b732-8dab-41d4-a85b-b10edcd25e97	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:strongarm-monk:f0t0:s1,f:xs:XP:strongarm-monk:f0t0:s1	-	-	-	fb9d3088f0bf	-	1b2b7c13b735	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 871549e6-24c0-4fbd-8b71-ba8639b0ee47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:karoo-meerkat:cast:s1,f:xs:XP:karoo-meerkat:cast:s1	-	-	-	8c0bd19283bb	-	f76b3f44be63	-	-	2026-11-24	xproof
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:colossal-skyturtle:cast:s1,f:xs:XP:colossal-skyturtle:cast:s1	-	-	-	ae86f6029288	-	85386f525c02	-	-	2026-11-24	xproof
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:colossal-skyturtle:cast:s1,f:xs:XP:colossal-skyturtle:cast:s1	-	-	-	d864b561c9cb	-	85386f525c02	-	-	2026-11-24	xproof

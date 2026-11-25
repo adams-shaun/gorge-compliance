@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 572afa0f-9e82-4899-b622-a7554625b9f4	f0/t0	NULL	owed	refused:no-generator:trigger:Evolved	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 572afa0f-9e82-4899-b622-a7554625b9f4	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 572b1aeb-d2a0-433d-b167-86e683c2127d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-572b1aeb-d2a0-433d-b167-86e683c2127d	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+572b1aeb-d2a0-433d-b167-86e683c2127d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-the-eternal-watch:f0t0:s1,f:xs:XP:sentinel-of-the-eternal-watch:f0t0:s1	-	-	-	fb9d3088f0bf	-	8f590235db3b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 57303267-7e69-4bd3-8e1f-a528d41121a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57303267-7e69-4bd3-8e1f-a528d41121a1	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 57308fc8-8915-4211-a5fd-9363caea9ab9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-fleets:f0t0:s1,f:xs:XP:scourge-of-fleets:f0t0:s1	-	-	-	d864b561c9cb	-	d49a8670e757	-	-	2026-11-24	xproof
@@ -125,8 +125,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57b4da3f-361a-4cbe-b77f-190ec33eefd8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57b75be4-9229-4a48-a59e-a0f812f38637	cast	cast-resolve	agreed	-	X	scen	1	0	Diplomatic Relations/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57b86d5c-3269-44bc-a838-3c5439d820d9	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:mirrorpool:f0a1:s1,f:xs:XP:mirrorpool:f0a1:s1	-	-	-	23b491658465	-	4c974fd0f9dc	-	-	2026-11-25	xproof
-57b86d5c-3269-44bc-a838-3c5439d820d9	f0/a1	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-57b86d5c-3269-44bc-a838-3c5439d820d9	f0/a2	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+57b86d5c-3269-44bc-a838-3c5439d820d9	f0/a1	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+57b86d5c-3269-44bc-a838-3c5439d820d9	f0/a2	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 57b86d5c-3269-44bc-a838-3c5439d820d9	land	land	agreed	-	FX	start	2	0	x:xs:XP:mirrorpool:land:s1,f:xs:XP:mirrorpool:land:s1	-	-	-	d864b561c9cb	-	4c974fd0f9dc	-	-	2026-11-24	xproof
 57bbd80b-290f-461e-8dc6-26ba4d673fa9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dawnhand-eulogist:f0t0:s2,f:xs:XP:dawnhand-eulogist:f0t0:s2	-	-	-	267e485f6204	-	4933acb99ef5	-	-	2026-11-24	xproof
 57bbd80b-290f-461e-8dc6-26ba4d673fa9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dawnhand-eulogist:combat0.attack:s1,f:xs:XP:dawnhand-eulogist:combat0.attack:s1	-	-	-	23c4009444b0	-	4933acb99ef5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

@@ -31,8 +31,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 180efbd4-0f77-41cc-8ae2-2e6ccf853d10	static#0.0	static#0.0	agreed	-	X	scen	1	0	Archon of the Wild Rose/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1816b87c-73ba-4bfc-a51e-c982381c067d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1816eede-c5bd-49df-958f-a3af64cb2932	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omnath-locus-of-rage:cast:s1,f:xs:XP:omnath-locus-of-rage:cast:s1	-	-	-	d864b561c9cb	-	8fcee017a642	-	-	2026-11-24	xproof
-1816eede-c5bd-49df-958f-a3af64cb2932	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1816eede-c5bd-49df-958f-a3af64cb2932	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:omnath-locus-of-rage:cast:s1,f:xs:XP:omnath-locus-of-rage:cast:s1	-	-	-	d864b561c9cb	-	8fcee017a642	-	-	2026-11-24	xproof
+1816eede-c5bd-49df-958f-a3af64cb2932	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:omnath-locus-of-rage:f0t0:s1,f:xs:XP:omnath-locus-of-rage:f0t0:s1	-	-	-	fb9d3088f0bf	-	8fcee017a642	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+1816eede-c5bd-49df-958f-a3af64cb2932	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:omnath-locus-of-rage:f0t0:s1,f:xs:XP:omnath-locus-of-rage:f0t0:s1	-	-	-	fb9d3088f0bf	-	8fcee017a642	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 1817acd5-5ed0-47b8-8e56-4715a488867e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sparktongue-dragon:f0t0:s1,f:xs:XP:sparktongue-dragon:f0t0:s1	-	-	-	d864b561c9cb	-	911c53c24250	-	-	2026-11-24	xproof
 1817acd5-5ed0-47b8-8e56-4715a488867e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sparktongue-dragon:f0t0:s1,f:xs:XP:sparktongue-dragon:f0t0:s1	-	-	-	d864b561c9cb	-	911c53c24250	-	-	2026-11-24	xproof
 1818b0b1-0104-4673-9be8-acfc773ef87d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18563bc9-6090-4629-b304-89a67d93f635	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 18563bc9-6090-4629-b304-89a67d93f635	f1/t1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 185b3b9f-f798-4ca4-af99-b17a24fcc1c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-185b3b9f-f798-4ca4-af99-b17a24fcc1c6	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+185b3b9f-f798-4ca4-af99-b17a24fcc1c6	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:drana-s-chosen:f0a0:s1,f:xs:XP:drana-s-chosen:f0a0:s1	-	-	-	fb9d3088f0bf	-	9acf129893be	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 185c70c1-8403-4ae5-b45d-3679d4ee092a	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:rockfall-vale:f0a0:s1,f:xs:XP:rockfall-vale:f0a0:s1	-	-	-	23b491658465	-	434e2d46a5e7	-	-	2026-11-24	xproof
 185c70c1-8403-4ae5-b45d-3679d4ee092a	land	land	agreed	-	FX	start	2	0	x:xs:XP:rockfall-vale:land:s1,f:xs:XP:rockfall-vale:land:s1	-	-	-	23b491658465	-	434e2d46a5e7	-	-	2026-11-24	xproof
 185d6356-8f8d-4b32-8259-b4eb0a95866c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
