@@ -432,7 +432,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # so the pinned driver keeps all three fixes. The merge adds no code of its own; the full driver suite (192 tests, including
 # EchoCumulativeUpkeepTest, ForcedCoinFlipTest, FatesealDigOrderTest and ForcedDieRollTest) is green on it; cardsfolder and
 # tokenscripts unchanged. Fork branch fix/xp-forge-driver-echo-cumulative-upkeep.
-FORGE_ORACLE_REF ?= a3c422f79a6b46d723c6bccb1cb6fbfcf22e553e
+# 8f537eddcbb = a3c422f79a6 plus cast_mode "alternative": StaticAbilityAlternativeCost builds a static's alternative-cost
+# cast as a non-basic copy of the spell with AlternativeCost unset (that field is only for the keyword alternatives such as
+# Warp and Escape), while the plain cast stays basic; spellForMode now takes the first such spell. Submerge's free cast
+# (CR 118.9) and a granted or may-play alternative (Leyline of Mutation, Warped Space) no longer fall through to the plain
+# cast and fail "was not put on the stack". scripts/forge-oracle-test-alternative-cast-mode.sh (make forge-driver-tests)
+# replays the exported xs:XP:submerge:cast:s1 request and requires Submerge on the stack at step 0 with no harness row;
+# make forge-driver-tests is green on it. Driver-only; cardsfolder/tokenscripts unchanged.
+# Fork branch fix/xp-forge-driver-alternative-cast-mode.
+FORGE_ORACLE_REF ?= 8f537eddcbbea0e321eae80cb1874f3275eb678e
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
