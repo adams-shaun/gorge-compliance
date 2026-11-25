@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 925775c6-b6d2-4793-a363-bd5aca871aa8	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:foxfire-oak:f0a0:s2,f:xs:XP:foxfire-oak:f0a0:s2	-	-	-	da6bc3fe8458	-	0d8b43ffbcc1	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 9259e918-ace5-4f13-9035-d8bc8c820d25	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:march-from-the-black-gate:cast:s1,f:xs:XP:march-from-the-black-gate:cast:s1	-	-	-	ae86f6029288	-	fb82c4144069	-	-	2026-11-24	xproof
 9259e918-ace5-4f13-9035-d8bc8c820d25	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:march-from-the-black-gate:cast:s1,f:xs:XP:march-from-the-black-gate:cast:s1	-	-	-	ae86f6029288	-	fb82c4144069	-	-	2026-11-24	xproof
-9259e918-ace5-4f13-9035-d8bc8c820d25	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+9259e918-ace5-4f13-9035-d8bc8c820d25	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 925b3d1b-98cd-44f5-8aa0-e2b17df2808a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:take-inventory:cast:s1,f:xs:XP:take-inventory:cast:s1	-	-	-	d864b561c9cb	-	e3f5d1c629ca	-	-	2026-11-24	xproof
 925cacdc-6d09-4fbd-9258-9f0539da180c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:thr-r-s-map:cast:s1	-	-	-	fb9d3088f0bf	-	cbe3459733c7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 925cacdc-6d09-4fbd-9258-9f0539da180c	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:thr-r-s-map:f0a0:s1,f:xs:XP:thr-r-s-map:f0a0:s1	-	-	-	fb9d3088f0bf	-	cbe3459733c7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9285cdf1-ad25-4aee-a865-1bf0cc905183	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fear-of-the-dark:f0t0:s1,f:xs:XP:fear-of-the-dark:f0t0:s1	-	-	-	23c4009444b0	-	d5837b746d80	-	-	2026-11-25	xproof
 9286ddc5-8151-4129-aaf6-2a2abe7047e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 928a7fbc-ba34-42a9-947e-0f3bf1cba152	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-928a7fbc-ba34-42a9-947e-0f3bf1cba152	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+928a7fbc-ba34-42a9-947e-0f3bf1cba152	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:balshan-beguiler:f0t0:s1,f:xs:XP:balshan-beguiler:f0t0:s1	-	-	-	5b42d43d5d80	-	72e5c105ae30	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 928c62fe-9c4d-4e89-bd7a-0d3b6a81f393	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 928c62fe-9c4d-4e89-bd7a-0d3b6a81f393	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9290f549-3e5d-4e39-a20e-8be6b674abc7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jadecraft-artisan:f0t0:s1,f:xs:XP:jadecraft-artisan:f0t0:s1	-	-	-	d864b561c9cb	-	599ec3581a88	-	-	2026-11-24	xproof

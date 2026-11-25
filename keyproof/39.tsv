@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:spiritmonger:f0a0:s1,f:xs:XP:spiritmonger:f0a0:s1	-	-	-	fc71ca68c5ac	-	c9002c1369b2	-	-	2026-11-24	xproof
 3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	f0/a1	ChooseColor	agreed	-	FX	start	2	0	x:xs:XP:spiritmonger:f0a1:s1,f:xs:XP:spiritmonger:f0a1:s1	-	-	-	fc71ca68c5ac	-	c9002c1369b2	-	-	2026-11-24	xproof
-3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+3913c7f2-86b7-4dd4-84a6-9bd4c1c66781	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:spiritmonger:f0t0:s1,f:xs:XP:spiritmonger:f0t0:s1	-	-	-	5b42d43d5d80	-	c9002c1369b2	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 39144f72-789e-457a-a7e7-862f90c34e15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39144f72-789e-457a-a7e7-862f90c34e15	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 39144f72-789e-457a-a7e7-862f90c34e15	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 397964db-465a-407d-9dc7-d0a4944473ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enhanced-awareness:cast:s1,f:xs:XP:enhanced-awareness:cast:s1	-	-	-	d864b561c9cb	-	554af2f9d78f	-	-	2026-11-24	xproof
 397b9dcf-690a-4a58-8637-bb9baab7cc2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elder-gargaroth:cast:s1,f:xs:XP:elder-gargaroth:cast:s1	-	-	-	cb99a158debc	-	9b29ebfb9341	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:elder-gargaroth:f0t0:s1,f:xs:XP:elder-gargaroth:f0t0:s1	-	-	-	21b2cceac526	-	9b29ebfb9341	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
-397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 397df813-c759-4246-8def-122c7ff82d88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 397e0d30-a3bf-4b33-98b6-b880f8de5cbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 397e0d30-a3bf-4b33-98b6-b880f8de5cbb	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

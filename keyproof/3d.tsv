@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d51077f-4ce5-475a-9e65-e9076d779825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d51077f-4ce5-475a-9e65-e9076d779825	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d5205ad-6fd0-4afc-b817-c86b6bddb325	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d5205ad-6fd0-4afc-b817-c86b6bddb325	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+3d5205ad-6fd0-4afc-b817-c86b6bddb325	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:gustcloak-savior:f0t0:s1,f:xs:XP:gustcloak-savior:f0t0:s1	-	-	-	5b42d43d5d80	-	552787ad6ea9	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 3d529824-8e82-4c44-8e28-ed3419740c11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d563149-7d4e-43e5-b701-28e3212051ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d563149-7d4e-43e5-b701-28e3212051ec	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:raging-regisaur:f0t0:s1,f:xs:XP:raging-regisaur:f0t0:s1	-	-	-	d864b561c9cb	-	88cd2faa144d	-	-	2026-11-24	xproof
@@ -117,8 +117,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d937cd9-b1e1-406d-9e29-3b9d3ceea3be	cast	cast	agreed	-	F	start	2	0	f:xs:XP:kayla-s-command:cast:s1	-	-	-	ae86f6029288	-	e4f6723ca240	-	-	2026-11-24	xproof
 3d95e8b1-0ddb-4bd3-b4cc-de55b6f8c403	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primal-visitation:cast:s1,f:xs:XP:primal-visitation:cast:s1	-	-	-	d864b561c9cb	-	7949bf0b3a12	-	-	2026-11-24	xproof
 3d98a656-1737-486f-9b25-449b7c871d1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d98a656-1737-486f-9b25-449b7c871d1f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-3d98a656-1737-486f-9b25-449b7c871d1f	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+3d98a656-1737-486f-9b25-449b7c871d1f	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:aurification:f0t0:s1,f:xs:XP:aurification:f0t0:s1	-	-	-	5b42d43d5d80	-	2b9001bbb283	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+3d98a656-1737-486f-9b25-449b7c871d1f	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aurification:f0t1:s1,f:xs:XP:aurification:f0t1:s1	-	-	-	5b42d43d5d80	-	2b9001bbb283	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 3d9f854e-1ee5-4aa1-a33b-d3ae08f15dd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3da1412e-a72c-4da1-8848-37145ca6614a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:narcolepsy:f0t0:s1,f:xs:XP:narcolepsy:f0t0:s1	-	-	-	23c4009444b0	-	aa56d24a154d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3da1412e-a72c-4da1-8848-37145ca6614a	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:narcolepsy:f0t0:s1,f:xs:XP:narcolepsy:f0t0:s1	-	-	-	23c4009444b0	-	aa56d24a154d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -161,7 +161,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3dc51dfc-7a60-41bf-b944-6afad6b06c22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dc51dfc-7a60-41bf-b944-6afad6b06c22	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goldnight-commander:f0t0:s1,f:xs:XP:goldnight-commander:f0t0:s1	-	-	-	23c4009444b0	-	5073ac6b16ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3dc71e16-b935-4ad7-b3f7-945ac2c179a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chrome-dome:cast:s1,f:xs:XP:chrome-dome:cast:s1	-	-	-	054d9f516953	-	77bb43869a6b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-3dc71e16-b935-4ad7-b3f7-945ac2c179a7	f0/a0	CopyPermanent	diverged	-	-	start	0	2	-	183d973368bd	-	-	21b2cceac526	-	77bb43869a6b	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+3dc71e16-b935-4ad7-b3f7-945ac2c179a7	f0/a0	CopyPermanent	diverged	-	-	start	0	1	-	183d973368bd	-	-	5b42d43d5d80	-	77bb43869a6b	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 3dc71e16-b935-4ad7-b3f7-945ac2c179a7	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:chrome-dome:static0.0:s1,f:xs:XP:chrome-dome:static0.0:s1	-	-	-	23c4009444b0	-	77bb43869a6b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3dc73517-0767-46ae-bc8d-ee378237a509	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rooftop-percher:f0t0:s2,f:xs:XP:rooftop-percher:f0t0:s2	-	-	-	267e485f6204	-	635c9e9e63f0	-	-	2026-11-24	xproof
 3dc73517-0767-46ae-bc8d-ee378237a509	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rooftop-percher:combat0.attack:s1,f:xs:XP:rooftop-percher:combat0.attack:s1	-	-	-	23c4009444b0	-	635c9e9e63f0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

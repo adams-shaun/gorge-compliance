@@ -42,16 +42,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 694f7e51-7b8b-4f00-bd77-a52eded4aaa1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69501650-ed48-4ebf-9287-b0338c5bc5d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trumpeting-herd:cast:s1,f:xs:XP:trumpeting-herd:cast:s1	-	-	-	d864b561c9cb	-	40500a3e6a1c	-	-	2026-11-24	xproof
 69556f6c-c05b-4902-bac7-012f0ed81b75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
-69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+69556f6c-c05b-4902-bac7-012f0ed81b75	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 69565f6e-2e23-4cd8-bd21-1283e06729a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69565f6e-2e23-4cd8-bd21-1283e06729a3	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+69565f6e-2e23-4cd8-bd21-1283e06729a3	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 695661ac-6f50-4a0e-9831-a0e285bab4bf	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wild-celebrants:cast:s1,f:xs:XP:wild-celebrants:cast:s1	-	-	-	d864b561c9cb	-	d4fe84f3eafd	-	-	2026-11-24	xproof
 695661ac-6f50-4a0e-9831-a0e285bab4bf	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wild-celebrants:cast:s1,f:xs:XP:wild-celebrants:cast:s1	-	-	-	d864b561c9cb	-	d4fe84f3eafd	-	-	2026-11-24	xproof
 695a84b5-96b0-4e48-b615-15624efab3b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:focus-the-mind:cast:s1,f:xs:XP:focus-the-mind:cast:s1	-	-	-	23c4009444b0	-	e70688980f37	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 695a84b5-96b0-4e48-b615-15624efab3b7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Focus the Mind/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 695ce90b-a5a2-4d8c-ac05-07f04010603e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-695ce90b-a5a2-4d8c-ac05-07f04010603e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+695ce90b-a5a2-4d8c-ac05-07f04010603e	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:blood-celebrant:f0a0:s1,f:xs:XP:blood-celebrant:f0a0:s1	-	-	-	5b42d43d5d80	-	99f80b7d2586	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 695ebb35-55fd-4ed1-8cbe-e3fc1223115b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 695eea46-1535-48c5-bbb6-0b8379e77bfc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 695eea46-1535-48c5-bbb6-0b8379e77bfc	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:arasta-of-the-endless-web:f0t0:s1,f:xs:XP:arasta-of-the-endless-web:f0t0:s1	-	-	-	78568f009138	-	2cde7df2708b	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof

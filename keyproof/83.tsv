@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8356b1fe-02f8-4bb9-bcdb-bb7454eb18ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:decorated-griffin:cast:s1,f:xs:XP:decorated-griffin:cast:s1	-	-	-	d864b561c9cb	-	f61d344142bb	-	-	2026-11-24	xproof
 8356b1fe-02f8-4bb9-bcdb-bb7454eb18ed	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:decorated-griffin:f0a0:s1,f:xs:XP:decorated-griffin:f0a0:s1	-	-	-	d864b561c9cb	-	f61d344142bb	-	-	2026-11-24	xproof
 83578de7-5488-4952-af47-8fe966897210	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83578de7-5488-4952-af47-8fe966897210	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+83578de7-5488-4952-af47-8fe966897210	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:headhunter:f0t0:s1,f:xs:XP:headhunter:f0t0:s1	-	-	-	5b42d43d5d80	-	1fabb0650952	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 8358f65a-7572-430d-b4f0-4fba7a372bd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8358f65a-7572-430d-b4f0-4fba7a372bd9	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:akki-underminer:f0t0:s1,f:xs:XP:akki-underminer:f0t0:s1	-	-	-	23c4009444b0	-	ab9225b7dc59	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 835abd35-27ea-45fe-b55d-25081c57bd4a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zero-point-ballad:cast:s1,f:xs:XP:zero-point-ballad:cast:s1	-	-	-	6f84be0f34c0	-	7bb392839ec7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -123,8 +123,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 838eeca8-02f9-44fa-8170-1426622adf30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 838eeca8-02f9-44fa-8170-1426622adf30	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 838eeca8-02f9-44fa-8170-1426622adf30	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83914a83-4de2-4d64-9770-f68a12014167	cast	cast	owed	harness	-	start	0	0	-	-	-	-	21b2cceac526	-	1ec11dfc11d9	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
-83914a83-4de2-4d64-9770-f68a12014167	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	21b2cceac526	-	1ec11dfc11d9	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+83914a83-4de2-4d64-9770-f68a12014167	cast	cast	owed	harness	-	start	0	0	-	-	-	-	5b42d43d5d80	-	1ec11dfc11d9	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+83914a83-4de2-4d64-9770-f68a12014167	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	5b42d43d5d80	-	1ec11dfc11d9	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 83917116-d2d8-4701-a79f-af17486706ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83959c3d-053c-4d95-a1b0-fe92f2b906db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83959c3d-053c-4d95-a1b0-fe92f2b906db	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

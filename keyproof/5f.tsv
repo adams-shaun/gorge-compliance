@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f079a75-899e-467d-b443-3b87ce2fb548	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:boros-reckoner:f0t0:s1,f:xs:XP:boros-reckoner:f0t0:s1	-	-	-	6f84be0f34c0	-	413e094a1c04	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5f08f79e-bbbe-4af0-ade6-9ad006a5a0d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0be4ce-898e-4849-ab8f-a85fb05c3017	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:territorial-kavu:cast:s1,f:xs:XP:territorial-kavu:cast:s1	-	-	-	d864b561c9cb	-	9881f71424e6	-	-	2026-11-24	xproof
-5f0be4ce-898e-4849-ab8f-a85fb05c3017	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+5f0be4ce-898e-4849-ab8f-a85fb05c3017	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 5f0c8c60-96f1-4b26-a9f6-386e1cec517d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0e8fd5-9db9-4507-a42f-cb99080b89e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0fa785-37ab-46a8-9ec0-6f8b29576d93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f2628e3-e29a-4d77-bc27-6e1ce240d192	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghoultree:cast:s1,f:xs:XP:ghoultree:cast:s1	-	-	-	d864b561c9cb	-	f275edea24b9	-	-	2026-11-24	xproof
 5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lifecrafter-s-bestiary:f0t0:s1,f:xs:XP:lifecrafter-s-bestiary:f0t0:s1	-	-	-	3aa6ded33acb	-	5bf5227d3e6b	-	-	2026-11-25	xproof
 5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lifecrafter-s-bestiary:f0t0:s1,f:xs:XP:lifecrafter-s-bestiary:f0t0:s1	-	-	-	3aa6ded33acb	-	5bf5227d3e6b	-	-	2026-11-25	xproof
-5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	land	play-land	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f2be3c2-060a-43e1-b63b-9cd3c78ffcb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,8 +150,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5fac139a-07d3-4e6c-98e3-d98b199f7a6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:young-pyromancer:cast:s1,f:xs:XP:young-pyromancer:cast:s1	-	-	-	d864b561c9cb	-	396be64e1346	-	-	2026-11-24	xproof
 5fac139a-07d3-4e6c-98e3-d98b199f7a6f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:young-pyromancer:f0t0:s1,f:xs:XP:young-pyromancer:f0t0:s1	-	-	-	fb9d3088f0bf	-	396be64e1346	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 5facb256-b993-43f8-b971-b3a59a7434bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:last-laugh:cast:s1,f:xs:XP:last-laugh:cast:s1	-	-	-	fc71ca68c5ac	-	709844b1c143	-	-	2026-11-24	xproof
-5facb256-b993-43f8-b971-b3a59a7434bf	f0/t0	Always	agreed	-	FX	start	2	0	x:xs:XP:last-laugh:cast:s1,f:xs:XP:last-laugh:cast:s1	-	-	-	fc71ca68c5ac	-	709844b1c143	-	-	2026-11-24	xproof
-5facb256-b993-43f8-b971-b3a59a7434bf	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+5facb256-b993-43f8-b971-b3a59a7434bf	f0/t0	Always	agreed	-	FX	start	2	0	x:xs:XP:last-laugh:f0t1:s1,f:xs:XP:last-laugh:f0t1:s1	-	-	-	5b42d43d5d80	-	709844b1c143	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+5facb256-b993-43f8-b971-b3a59a7434bf	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:last-laugh:f0t1:s1,f:xs:XP:last-laugh:f0t1:s1	-	-	-	5b42d43d5d80	-	709844b1c143	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 5fae52ed-1b84-406e-951d-b0d329dc48a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fb899c1-3a2f-4b5e-a82d-fece51bdf786	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fb899c1-3a2f-4b5e-a82d-fece51bdf786	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:blessed-spirits:f0t0:s1,f:xs:XP:blessed-spirits:f0t0:s1	-	-	-	fb9d3088f0bf	-	f6eca3afd0f1	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof

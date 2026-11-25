@@ -24,7 +24,7 @@ d137586f-83b0-40af-8100-443460b07ac0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d137586f-83b0-40af-8100-443460b07ac0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d139294c-36bb-4a1e-800d-50c4a4ae9877	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d13a9cb1-1c76-4ac1-80d8-3c471753a588	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crashing-centaur:cast:s1,f:xs:XP:crashing-centaur:cast:s1	-	-	-	fc71ca68c5ac	-	c7110b68a8e6	-	-	2026-11-24	xproof
-d13a9cb1-1c76-4ac1-80d8-3c471753a588	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+d13a9cb1-1c76-4ac1-80d8-3c471753a588	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:crashing-centaur:f0a0:s1,f:xs:XP:crashing-centaur:f0a0:s1	-	-	-	5b42d43d5d80	-	c7110b68a8e6	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 d13aff7c-f0ee-44e2-ae1c-62cd86ad46a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aerial-caravan:cast:s1,f:xs:XP:aerial-caravan:cast:s1	-	-	-	5f2128bf97e4	-	3b358219a3cb	-	-	2026-11-24	xproof
 d13aff7c-f0ee-44e2-ae1c-62cd86ad46a6	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:aerial-caravan:f0a0:s1,f:xs:XP:aerial-caravan:f0a0:s1	-	-	-	5f2128bf97e4	-	3b358219a3cb	-	-	2026-11-24	xproof
 d13c111a-ebfc-48ac-b734-f203c7c29d21	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:puppet-crafting:cast:s1,f:xs:XP:puppet-crafting:cast:s1	-	-	-	fb9d3088f0bf	-	aa1fc26254b8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -71,8 +71,8 @@ d160887f-f78e-4a66-9766-0b7dd852a784	f0/t0	NULL	owed	refused:no-generator:trigge
 d1620449-930a-4895-a143-fd2a0a3c8b17	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:rejuvenating-springs:f0a0:s1,f:xs:XP:rejuvenating-springs:f0a0:s1	-	-	-	8c0bd19283bb	-	4acbdfb73e8c	-	-	2026-11-24	xproof
 d1620449-930a-4895-a143-fd2a0a3c8b17	land	land	agreed	-	FX	start	2	0	x:xs:XP:rejuvenating-springs:land:s1,f:xs:XP:rejuvenating-springs:land:s1	-	-	-	8c0bd19283bb	-	4acbdfb73e8c	-	-	2026-11-24	xproof
 d16298ac-67bd-4f9d-9979-23c1b7e4b359	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:starlit-sanctum:f0a0:s1,f:xs:XP:starlit-sanctum:f0a0:s1	-	-	-	fc71ca68c5ac	-	079baf8ed449	-	-	2026-11-24	xproof
-d16298ac-67bd-4f9d-9979-23c1b7e4b359	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-d16298ac-67bd-4f9d-9979-23c1b7e4b359	f0/a2	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+d16298ac-67bd-4f9d-9979-23c1b7e4b359	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:starlit-sanctum:f0a1:s1,f:xs:XP:starlit-sanctum:f0a1:s1	-	-	-	5b42d43d5d80	-	079baf8ed449	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+d16298ac-67bd-4f9d-9979-23c1b7e4b359	f0/a2	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:starlit-sanctum:f0a2:s1,f:xs:XP:starlit-sanctum:f0a2:s1	-	-	-	5b42d43d5d80	-	079baf8ed449	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 d16298ac-67bd-4f9d-9979-23c1b7e4b359	land	land	agreed	-	FX	start	2	0	x:xs:XP:starlit-sanctum:land:s1,f:xs:XP:starlit-sanctum:land:s1	-	-	-	fc71ca68c5ac	-	079baf8ed449	-	-	2026-11-24	xproof
 d1663b51-37a1-45a0-b477-2d3e7dd0828e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warg-tactics:cast:s1,f:xs:XP:warg-tactics:cast:s1	-	-	-	fb9d3088f0bf	-	ccc64cb7f269	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 d16783a4-9980-451b-9af0-33866980bc8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alphinaud-leveilleur:f0t1:s1,f:xs:XP:alphinaud-leveilleur:f0t1:s1	-	-	-	23c4009444b0	-	e545f3e790c3	-	-	2026-11-25	xproof
@@ -136,7 +136,7 @@ d1a9fd14-fecb-4d2a-983c-70143238275b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d1aba343-d85a-4829-bdfe-db31fcb3c320	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deep-spawn:f0t0:s1,f:xs:XP:deep-spawn:f0t0:s1	-	-	-	3aa6ded33acb	-	41980292d96b	-	-	2026-11-25	xproof
 d1aba343-d85a-4829-bdfe-db31fcb3c320	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:deep-spawn:f0t0:s1,f:xs:XP:deep-spawn:f0t0:s1	-	-	-	3aa6ded33acb	-	41980292d96b	-	-	2026-11-25	xproof
 d1aba343-d85a-4829-bdfe-db31fcb3c320	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:deep-spawn:f0t0:s1,f:xs:XP:deep-spawn:f0t0:s1	-	-	-	3aa6ded33acb	-	41980292d96b	-	-	2026-11-25	xproof
-d1af8018-35b5-4b6f-93c8-1ed6bd8c92b1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+d1af8018-35b5-4b6f-93c8-1ed6bd8c92b1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 d1af8018-35b5-4b6f-93c8-1ed6bd8c92b1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hallway Heckler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d1b74fb9-8ef3-40be-bc79-45ffb4c597eb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:hangar-scrounger:cast:s1,f:xs:XP:hangar-scrounger:cast:s1	-	-	-	ae86f6029288	-	c612c8a4da72	-	-	2026-11-24	xproof
 d1b74fb9-8ef3-40be-bc79-45ffb4c597eb	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:hangar-scrounger:f0t0:s1,f:xs:XP:hangar-scrounger:f0t0:s1	-	-	-	9087eefec3ee	-	c612c8a4da72	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof

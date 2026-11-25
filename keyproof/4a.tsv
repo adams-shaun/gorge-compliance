@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Dion, Bahamut's Dominant/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Dion, Bahamut's Dominant/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dion, Bahamut's Dominant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dion, Bahamut's Dominant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a1126a3-f8ce-4790-aa51-1e3f4b63eb18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-the-nobilis:cast:s1,f:xs:XP:scourge-of-the-nobilis:cast:s1	-	-	-	da6bc3fe8458	-	4568c3699e63	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 4a1b8db2-8814-45b3-ab8a-a1c8522d7fa1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavern-thoctar:cast:s1,f:xs:XP:cavern-thoctar:cast:s1	-	-	-	8a1b1a193ec0	-	dfd061446cb2	-	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4aa34391-d532-48e5-a125-2619d04f27ff	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:faultgrinder:cast:s1,f:xs:XP:faultgrinder:cast:s1	-	-	-	d864b561c9cb	-	be5b61fc34fd	-	-	2026-11-24	xproof
 4aa34391-d532-48e5-a125-2619d04f27ff	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:faultgrinder:cast:s1,f:xs:XP:faultgrinder:cast:s1	-	-	-	d864b561c9cb	-	be5b61fc34fd	-	-	2026-11-24	xproof
 4aa9764a-39ab-4d55-bc71-45f83035fb4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4aa9764a-39ab-4d55-bc71-45f83035fb4c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+4aa9764a-39ab-4d55-bc71-45f83035fb4c	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:filthy-cur:f0t0:s1,f:xs:XP:filthy-cur:f0t0:s1	-	-	-	5b42d43d5d80	-	82b14a379158	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 4aab6794-506f-413c-91e0-d886e0019dce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aab6794-506f-413c-91e0-d886e0019dce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aae7102-301a-429d-b169-4f462384d55d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ad9c550-5605-4ffe-8e27-e9f2d9ada000	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stormplain-detainment:f0t0:s2,f:xs:XP:stormplain-detainment:f0t0:s2	-	-	-	267e485f6204	-	f581bad070cf	-	-	2026-11-24	xproof
 4ad9c550-5605-4ffe-8e27-e9f2d9ada000	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stormplain-detainment:f0t0:s2,f:xs:XP:stormplain-detainment:f0t0:s2	-	-	-	267e485f6204	-	f581bad070cf	-	-	2026-11-24	xproof
 4adc39dd-8de1-4298-947c-ff666ec3adeb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4adc39dd-8de1-4298-947c-ff666ec3adeb	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+4adc39dd-8de1-4298-947c-ff666ec3adeb	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:seaside-haven:f0a1:s1,f:xs:XP:seaside-haven:f0a1:s1	-	-	-	5b42d43d5d80	-	8b7811a9fa8d	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 4adc39dd-8de1-4298-947c-ff666ec3adeb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4adcd967-9ff7-4940-b8b9-0c4215bbcb75	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anzrag-the-quake-mole:cast:s1,f:xs:XP:anzrag-the-quake-mole:cast:s1	-	-	-	23b491658465	-	abddcbc8f40e	-	-	2026-11-24	xproof
 4adcd967-9ff7-4940-b8b9-0c4215bbcb75	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:anzrag-the-quake-mole:f0a0:s1,f:xs:XP:anzrag-the-quake-mole:f0a0:s1	-	-	-	23b491658465	-	abddcbc8f40e	-	-	2026-11-24	xproof

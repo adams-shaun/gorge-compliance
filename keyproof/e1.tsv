@@ -22,7 +22,7 @@ e1135564-ca93-4c5b-8686-cafdbaf0205e	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	
 e11591ee-7074-488e-8d2f-f8c89e385a55	cast	cast-resolve	agreed	-	FX	scen	2	0	Hog-Monkey/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e11591ee-7074-488e-8d2f-f8c89e385a55	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Hog-Monkey/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e11591ee-7074-488e-8d2f-f8c89e385a55	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Hog-Monkey/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e1169108-1bc8-42ca-a056-a9358fba10cb	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e1169108-1bc8-42ca-a056-a9358fba10cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swelter:cast:s1,f:xs:XP:swelter:cast:s1	-	-	-	5b42d43d5d80	-	cbaf148e6a99	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 e11839d5-99fe-4cc8-802e-be669ad274ee	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cheering-crowd:cast:s1,f:xs:XP:cheering-crowd:cast:s1	-	-	-	336eab778104	-	2e6b4231c332	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 e11839d5-99fe-4cc8-802e-be669ad274ee	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:cheering-crowd:f0t0:s1,f:xs:XP:cheering-crowd:f0t0:s1	-	-	-	336eab778104	-	2e6b4231c332	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 e119869d-1f66-402b-8251-d351965cf0d3	cast	cast-resolve	agreed	-	X	scen	1	0	Paradise Druid/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -48,13 +48,13 @@ e123fd7d-ace9-48a4-9510-eedcc837d8e8	combat#0.block	combat#0.block	agreed	-	X	sc
 e123fd7d-ace9-48a4-9510-eedcc837d8e8	f0/a0	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:iron-spider-stark-upgrade:f0a0:s1,f:xs:XP:iron-spider-stark-upgrade:f0a0:s1	-	-	-	23c4009444b0	-	1cb1df545449	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e123fd7d-ace9-48a4-9510-eedcc837d8e8	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Iron Spider, Stark Upgrade/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e12497ba-2c49-4609-befa-ebba828bedd6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ordeal-of-erebos:cast:s1,f:xs:XP:ordeal-of-erebos:cast:s1	-	-	-	d864b561c9cb	-	ad392b40c677	-	-	2026-11-24	xproof
-e12497ba-2c49-4609-befa-ebba828bedd6	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
-e12497ba-2c49-4609-befa-ebba828bedd6	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+e12497ba-2c49-4609-befa-ebba828bedd6	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+e12497ba-2c49-4609-befa-ebba828bedd6	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 e12bba04-b10f-4bbd-959c-560f31630951	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:embodiment-of-spring:cast:s1,f:xs:XP:embodiment-of-spring:cast:s1	-	-	-	d864b561c9cb	-	572c095d986a	-	-	2026-11-24	xproof
 e12bba04-b10f-4bbd-959c-560f31630951	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:embodiment-of-spring:f0a0:s1,f:xs:XP:embodiment-of-spring:f0a0:s1	-	-	-	d864b561c9cb	-	572c095d986a	-	-	2026-11-24	xproof
 e12ed186-01c1-4da5-b90f-cfbb77c4e8d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e12f00f4-89f2-4d1d-94cf-460945d80a4e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e12f00f4-89f2-4d1d-94cf-460945d80a4e	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+e12f00f4-89f2-4d1d-94cf-460945d80a4e	f0/a0	DealDamage	agreed	-	X	start	2	0	x:xs:XP:venomspout-brackus:f0a0:s1	-	-	-	5b42d43d5d80	-	c418616a8f34	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 e12fb44a-524e-4603-a89c-fad8204fdb2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawnhart-mentor:f0t0:s1,f:xs:XP:dawnhart-mentor:f0t0:s1	-	-	-	d864b561c9cb	-	9f89eb796c7f	-	-	2026-11-24	xproof
 e12fb44a-524e-4603-a89c-fad8204fdb2b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e12fb44a-524e-4603-a89c-fad8204fdb2b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dawnhart-mentor:f0t0:s1,f:xs:XP:dawnhart-mentor:f0t0:s1	-	-	-	d864b561c9cb	-	9f89eb796c7f	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ e1a64bba-eaff-4f59-b85d-7df0b13e2e6b	f0/t0	NULL	owed	refused:start-not-exercised
 e1a64bba-eaff-4f59-b85d-7df0b13e2e6b	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 e1a776d2-fb3a-4215-a14e-4b6e9bda95df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1a89535-7126-48e0-b335-b732a677b157	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e1a9c467-2d64-4e11-adf3-7333c923b187	cast	cast-resolve	agreed	-	X	scen	1	0	Part in Friendship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e1a9c467-2d64-4e11-adf3-7333c923b187	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Part in Friendship/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e1a9c467-2d64-4e11-adf3-7333c923b187	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:part-in-friendship:cast:s1,f:xs:XP:part-in-friendship:cast:s1	-	-	-	5b42d43d5d80	-	96abe6e610e5	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+e1a9c467-2d64-4e11-adf3-7333c923b187	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:part-in-friendship:f0t0:s1,f:xs:XP:part-in-friendship:f0t0:s1	-	-	-	5b42d43d5d80	-	96abe6e610e5	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 e1aad679-93ec-420e-881b-35ebc99763a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1aad679-93ec-420e-881b-35ebc99763a2	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 e1abac67-ae07-4bb2-a048-7e41e0fc0371	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

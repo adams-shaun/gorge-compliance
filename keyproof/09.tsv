@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0956c0f5-ff1d-43d5-88de-4c2d603cf798	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:koilos-roc:f0t0:s1,f:xs:XP:koilos-roc:f0t0:s1	-	-	-	ae86f6029288	-	c5a62c9685ec	-	-	2026-11-24	xproof
 0956c0f5-ff1d-43d5-88de-4c2d603cf798	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:koilos-roc:f0t0:s1,f:xs:XP:koilos-roc:f0t0:s1	-	-	-	ae86f6029288	-	c5a62c9685ec	-	-	2026-11-24	xproof
 095f8dac-15b8-4c28-ae33-6dc71152bcc7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-095f8dac-15b8-4c28-ae33-6dc71152bcc7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+095f8dac-15b8-4c28-ae33-6dc71152bcc7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:squee-s-embrace:f0t0:s1,f:xs:XP:squee-s-embrace:f0t0:s1	-	-	-	5b42d43d5d80	-	3bef0b9204f2	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 09618da4-6e2d-4047-96d7-0576c0754e7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:end-the-festivities:cast:s1,f:xs:XP:end-the-festivities:cast:s1	-	-	-	ae86f6029288	-	f5d92a3bdf62	-	-	2026-11-24	xproof
 0961b68d-bb0c-4bfb-ad78-01f90b3b97c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0964288c-0397-428a-9a84-784aaea4e040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09be0f69-9c7f-491f-964d-bfbbc2d4251f	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:abbot-of-keral-keep:f0t1:s1,f:xs:XP:abbot-of-keral-keep:f0t1:s1	-	-	-	fb9d3088f0bf	-	b802c4ceed16	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 09bf80cc-1112-4f4c-9431-92d741bf2230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09bf80cc-1112-4f4c-9431-92d741bf2230	f0/t0	Attacks	agreed	-	F	start	2	0	f:xs:XP:rotting-giant:f0t0:s1	-	-	-	fc71ca68c5ac	-	08236a4aedca	-	-	2026-11-24	xproof
-09bf80cc-1112-4f4c-9431-92d741bf2230	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+09bf80cc-1112-4f4c-9431-92d741bf2230	f0/t1	Blocks	agreed	-	FX	start	2	0	x:xs:XP:rotting-giant:f0t1:s1,f:xs:XP:rotting-giant:f0t1:s1	-	-	-	5b42d43d5d80	-	08236a4aedca	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 09c275bd-8323-485e-81f6-aff1f99d0d03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hauntwoods-shrieker:cast:s1,f:xs:XP:hauntwoods-shrieker:cast:s1	-	-	-	23c4009444b0	-	a851a90fb715	-	-	2026-11-25	xproof
 09c275bd-8323-485e-81f6-aff1f99d0d03	f0/a0	SetState	agreed	-	FX	start	2	0	x:xs:XP:hauntwoods-shrieker:f0a0:s1,f:xs:XP:hauntwoods-shrieker:f0a0:s1	-	-	-	23c4009444b0	-	a851a90fb715	-	-	2026-11-25	xproof
 09c275bd-8323-485e-81f6-aff1f99d0d03	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:hauntwoods-shrieker:f0a0:s1,f:xs:XP:hauntwoods-shrieker:f0a0:s1	-	-	-	23c4009444b0	-	a851a90fb715	-	-	2026-11-25	xproof

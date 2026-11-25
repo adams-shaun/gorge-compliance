@@ -81,8 +81,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a1	AddTurn	agreed	-	FX	start	2	0	x:xs:XP:magistrate-s-scepter:f0a1:s1,f:xs:XP:magistrate-s-scepter:f0a1:s1	-	-	-	23c4009444b0	-	1753ac2799a0	-	-	2026-11-25	xproof
 48792146-e20c-4d93-83af-f746069fc6f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48792146-e20c-4d93-83af-f746069fc6f1	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-48792146-e20c-4d93-83af-f746069fc6f1	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+48792146-e20c-4d93-83af-f746069fc6f1	f0/a0	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:gempalm-strider:f0a0:s1,f:xs:XP:gempalm-strider:f0a0:s1	-	-	-	5b42d43d5d80	-	eba1ac74822b	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+48792146-e20c-4d93-83af-f746069fc6f1	f0/t0	Cycled	agreed	-	FX	start	2	0	x:xs:XP:gempalm-strider:f0a0:s1,f:xs:XP:gempalm-strider:f0a0:s1	-	-	-	5b42d43d5d80	-	eba1ac74822b	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 4879c8f0-8832-4290-bc71-9838940f75cd	cast	cast-resolve	agreed	-	FX	scen	2	0	Valley Floodcaller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4879c8f0-8832-4290-bc71-9838940f75cd	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Valley Floodcaller/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4879c8f0-8832-4290-bc71-9838940f75cd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Valley Floodcaller/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

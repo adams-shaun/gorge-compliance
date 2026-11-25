@@ -7,7 +7,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c061a1b-206a-4fcc-92e5-30c8ed9d65c1	cast	cast-resolve	agreed	-	FX	scen	2	0	Artistic Process/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c07d09e-e127-4573-b827-6c50246f7a31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c0845c3-f4b5-444e-8f42-da0c7dbf2841	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c0845c3-f4b5-444e-8f42-da0c7dbf2841	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+0c0845c3-f4b5-444e-8f42-da0c7dbf2841	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 0c0845c3-f4b5-444e-8f42-da0c7dbf2841	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 0c0940c6-8126-4d58-809e-871cf8588ef9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:starlit-soothsayer:cast:s1,f:xs:XP:starlit-soothsayer:cast:s1	-	-	-	23c4009444b0	-	79387de693b4	-	-	2026-11-25	xproof
 0c0940c6-8126-4d58-809e-871cf8588ef9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:starlit-soothsayer:combat0.attack:s1,f:xs:XP:starlit-soothsayer:combat0.attack:s1	-	-	-	23c4009444b0	-	79387de693b4	-	-	2026-11-25	xproof
@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c319f45-cb0f-4641-acd8-145768acb3fc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c31edd0-a471-4994-8209-b0a7370fc27b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slithery-stalker:f0t0:s1,f:xs:XP:slithery-stalker:f0t0:s1	-	-	-	fc71ca68c5ac	-	e38f95489f3b	-	-	2026-11-24	xproof
 0c31edd0-a471-4994-8209-b0a7370fc27b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:slithery-stalker:f0t0:s1,f:xs:XP:slithery-stalker:f0t0:s1	-	-	-	fc71ca68c5ac	-	e38f95489f3b	-	-	2026-11-24	xproof
-0c31edd0-a471-4994-8209-b0a7370fc27b	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+0c31edd0-a471-4994-8209-b0a7370fc27b	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:slithery-stalker:f0t1:s1,f:xs:XP:slithery-stalker:f0t1:s1	-	-	-	5b42d43d5d80	-	e38f95489f3b	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 0c34e962-99d9-4163-b852-4f61886546aa	cast	cast	diverged	-	-	start	0	2	-	0a558de5dbf7	-	-	23c4009444b0	-	6b47ccea5962	-	-	2026-11-25	xproof
 0c34e962-99d9-4163-b852-4f61886546aa	f0/t0	ChangesZone	diverged	-	-	start	0	2	-	0a558de5dbf7	-	-	23c4009444b0	-	6b47ccea5962	-	-	2026-11-25	xproof
 0c34e962-99d9-4163-b852-4f61886546aa	f0/t1	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
