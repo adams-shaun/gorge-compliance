@@ -1222,6 +1222,58 @@ public class ScenarioReplay extends CardTestPlayerBase {
                             && f.getDeclaringClass().getSimpleName().equals(simpleName)));
         }
 
+        private static Mode getModeOf(Ability source) {
+            return source == null || source.getModes() == null ? null : source.getModes().getMode();
+        }
+
+        /** Whether the current ask is posed straight from the named method of a
+         * class of the given type: the first frame outside the player classes
+         * (TestPlayer, this wrapper) is that method. askedBy matches any frame, so
+         * it also matches an ask the effect resolving inside that method poses. */
+        private static boolean askedDirectlyBy(Class<?> type, String method) {
+            return StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).walk(frames ->
+                    frames.filter(f -> !Player.class.isAssignableFrom(f.getDeclaringClass()))
+                            .findFirst()
+                            .map(f -> f.getMethodName().equals(method) && type.isAssignableFrom(f.getDeclaringClass()))
+                            .orElse(false));
+        }
+
+        /**
+         * The trigger-level "use this ability?" ask XMage poses only because
+         * setDoOnlyOnceEachTurn made the trigger optional, while the Oracle
+         * "may" belongs to the effect (its own text carries one): the trigger
+         * ask posed straight from TriggeredAbilityImpl.resolve, on an ability
+         * limited to once each turn whose effects already say "may".
+         */
+        static boolean onceEachTurnSyntheticUseAsk(Ability source, Mode mode) {
+            if (!(source instanceof mage.abilities.TriggeredAbilityImpl) || mode == null
+                    || !askedDirectlyBy(mage.abilities.TriggeredAbilityImpl.class, "resolve")
+                    || !doesOnlyOnceEachTurn((mage.abilities.TriggeredAbilityImpl) source)) {
+                return false;
+            }
+            for (mage.abilities.effects.Effect e : source.getEffects()) {
+                String text = e.getText(mode);
+                if (text != null && MAY_WORD.matcher(text).find()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static final java.util.regex.Pattern MAY_WORD =
+                java.util.regex.Pattern.compile("\\bmay\\b", java.util.regex.Pattern.CASE_INSENSITIVE);
+
+        /** TriggeredAbilityImpl keeps its once-each-turn flag private, with no getter. */
+        private static boolean doesOnlyOnceEachTurn(mage.abilities.TriggeredAbilityImpl ability) {
+            try {
+                java.lang.reflect.Field f = mage.abilities.TriggeredAbilityImpl.class.getDeclaredField("doOnlyOnceEachTurn");
+                f.setAccessible(true);
+                return f.getBoolean(ability);
+            } catch (ReflectiveOperationException e) {
+                throw new IllegalStateException("TriggeredAbilityImpl.doOnlyOnceEachTurn is gone: " + e, e);
+            }
+        }
+
         /**
          * The answer to a yes/no a trigger poses while it resolves, when the
          * step queued no Yes/No for it: gorge folded the may into the body's
@@ -1664,6 +1716,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 if (answer != null) {
                     return answer;
                 }
+            }
+            if (onceEachTurnSyntheticUseAsk(source, getModeOf(source))) {
+                // XMage's setDoOnlyOnceEachTurn also makes the trigger optional,
+                // so TriggeredAbilityImpl.resolve asks "use this ability?" before
+                // the effect's own "you may" ask (Planetarium of Wan Shi Tong's
+                // "look at the top card. You may cast that card ... Do this only
+                // once each turn"). The Oracle text has no trigger-level may and
+                // gorge records no decision for it; the scripted Yes/No is the
+                // effect's own and stays queued for it. Declining here (the
+                // folded-optional default below) skips the whole trigger.
+                return true;
             }
             Boolean folded = foldedOptionalAnswer(source instanceof mage.abilities.TriggeredAbility
                     && askedBy(mage.abilities.TriggeredAbilityImpl.class, "resolve"), getChoices(), getTargets());
