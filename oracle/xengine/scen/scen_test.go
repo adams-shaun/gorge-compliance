@@ -700,7 +700,11 @@ func TestStartzonetriggers(t *testing.T) {
 func attached(t *testing.T, f *StartFile, card string) {
 	t.Helper()
 	for _, a := range f.Setup.P0.Attach {
-		if a.Card == card && a.To != "" && slices.Contains(f.Setup.P0.Battlefield, a.To) {
+		bearers := f.Setup.P0.Battlefield
+		if a.Opp {
+			bearers = f.Setup.P1.Battlefield
+		}
+		if a.Card == card && a.To != "" && slices.Contains(bearers, a.To) {
 			return
 		}
 	}
@@ -716,6 +720,46 @@ func attachBearerOf(t *testing.T, f *StartFile, card string) string {
 		}
 	}
 	return ""
+}
+
+// TestStartAttachedBearerSeat: an Aura whose Enchant keyword is "creature an
+// opponent controls" (Dead Man's Chest) is attached to a bearer on the
+// opponent's seat, which the start's attach marks Opp; and a self-dies trigger
+// with its own target (Keiga, Vengeant Vampire) still has a creature on the
+// opposing side for it to take besides the lands and the removal spell.
+func TestStartAttachedBearerSeat(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Dead Man's Chest", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Dead Man's Chest: %+v %v", res, err)
+	}
+	f := res.Start
+	if len(f.Setup.P0.Attach) != 1 || !f.Setup.P0.Attach[0].Opp {
+		t.Fatalf("p0 attach %+v, want the Aura attached to an opposing bearer", f.Setup.P0.Attach)
+	}
+	attached(t, f, "Dead Man's Chest")
+	bearer := f.Setup.P0.Attach[0].To
+	if slices.Contains(f.Setup.P0.Battlefield, bearer) {
+		t.Errorf("p0 battlefield %v holds the bearer %q of an opponent-only Enchant", f.Setup.P0.Battlefield, bearer)
+	}
+	if !slices.Equal(f.Focus.Targets, []string{bearer}) {
+		t.Errorf("focus targets %v, want the bearer %q", f.Focus.Targets, bearer)
+	}
+	for _, card := range []string{"Keiga, the Tide Star", "Vengeant Vampire"} {
+		res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s: %+v %v", card, res, err)
+		}
+		creature := false
+		for _, n := range res.Start.Setup.P1.Battlefield {
+			if c, ok := reg.Lookup(n); ok && len(c.Faces) > 0 && c.Faces[0].IsCreature() {
+				creature = true
+			}
+		}
+		if !creature {
+			t.Errorf("%s: p1 battlefield %v holds no creature for the trigger's target", card, res.Start.Setup.P1.Battlefield)
+		}
+	}
 }
 
 // TestStartSelfDiesKeepsGraveTarget: a dies trigger whose effect returns or

@@ -302,12 +302,12 @@ func attachedByStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 	p0, p1 := &f.Setup.P0, &f.Setup.P1
 	switch {
 	case FieldBlock(face) == "aura-unattached":
-		bearer := attachBearer(reg, b, card, face)
+		bearer, bs := attachBearer(reg, b, card, face)
 		if bearer == "" {
 			return none + ":filter"
 		}
-		p0.Battlefield = []string{card, bearer}
-		p0.Attach = append(p0.Attach, StartAttach{Card: card, To: bearer})
+		p0.Battlefield = []string{card}
+		placeBearer(p0, p1, card, bearer, bs)
 		if !murderFocus(reg, b, p1, f, 1) {
 			return none + ":filter"
 		}
@@ -333,17 +333,29 @@ func attachedByStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 	return ""
 }
 
-// attachBearer is the most inert creature the Aura's Enchant keyword takes, or
-// "" when the keyword names no permanent a carrier can be (a player).
-func attachBearer(reg *cards.Registry, b *certdeck.Builder, card string, face *cards.Face) string {
+// placeBearer puts the Aura card's bearer on seat bs (the one its Enchant
+// keyword names) and attaches the Aura, which p0 controls, to it.
+func placeBearer(p0, p1 *StartSeat, card, bearer string, bs int) {
+	at := StartAttach{Card: card, To: bearer, Opp: bs == 1}
+	if bs == 1 {
+		p1.Battlefield = append(p1.Battlefield, bearer)
+	} else {
+		p0.Battlefield = append(p0.Battlefield, bearer)
+	}
+	p0.Attach = append(p0.Attach, at)
+}
+
+// attachBearer is the most inert creature the Aura's Enchant keyword takes and
+// the seat that must control it, or "" when the keyword names no permanent a
+// carrier can be (a player).
+func attachBearer(reg *cards.Registry, b *certdeck.Builder, card string, face *cards.Face) (string, int) {
 	req, ok := enchantReq(face)
 	if !ok {
-		return ""
+		return "", 0
 	}
-	name, _ := filterCarrier(reg, b, card, strings.Join(req.raw, ","), func(c *cards.Face) bool {
+	return filterCarrier(reg, b, card, strings.Join(req.raw, ","), func(c *cards.Face) bool {
 		return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c)
 	})
-	return name
 }
 
 // murderFocus is the opponent's Murder destroying the card or its bearer: the
@@ -823,12 +835,11 @@ func selfDiesStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, c
 		return ""
 	}
 	if FieldBlock(face) == "aura-unattached" {
-		bearer := attachBearer(reg, b, card, face)
+		bearer, bs := attachBearer(reg, b, card, face)
 		if bearer == "" {
 			return none + ":noncreature-self"
 		}
-		p0.Battlefield = append(p0.Battlefield, bearer)
-		p0.Attach = append(p0.Attach, StartAttach{Card: card, To: bearer})
+		placeBearer(p0, p1, card, bearer, bs)
 	}
 	name := destroySpell(reg, b, face)
 	if name == "" || !focusCast(reg, b, p1, name) {

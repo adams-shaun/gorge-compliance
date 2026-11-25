@@ -63,6 +63,8 @@ type StartSeat struct {
 type StartAttach struct {
 	Card string `json:"card"`
 	To   string `json:"to"`
+	// Opp: the bearer is on the other seat's battlefield, not this seat's.
+	Opp bool `json:"opp,omitempty"`
 }
 
 // Attached reports whether name is an Aura the seat lists in Attach.

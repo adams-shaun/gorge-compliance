@@ -334,14 +334,10 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			return n.Class == certdeck.OppBlockers
 		case trig.Mode == "LifeGained":
 			return n.Class == certdeck.Life && n.Arg == "gain"
-		case f.Focus != nil && len(f.Focus.Targets) > 0 &&
-			n.Class != certdeck.Graveyard && n.Class != certdeck.Life && n.Class != certdeck.OppBurn:
-			// A destruction or attach focus names the key object it must
-			// target. A need's enabler that the play could target too (a
-			// body, an opp-target, an extra land) makes the ask ambiguous or
-			// lets the bot aim elsewhere, so the focus line places no
-			// permanent enabler; graveyard fodder and life totals are not
-			// targets and stay.
+		case n.Class == certdeck.Bodies && len(f.Setup.P0.Attach) > 0:
+			// An Aura start places its own bearer, on the seat its Enchant
+			// keyword names: certdeck's body for the Aura would be a second
+			// creature, on our side, that the removal could take instead.
 			return true
 		case n.Class == certdeck.Token && focusCastsToken(reg, b, f, card, triggerFilter(trig)):
 			// The trigger's own token filter chose a token-maker focus; the

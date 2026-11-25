@@ -527,6 +527,37 @@ func TestStartChangesZoneTriggersAreExercised(t *testing.T) {
 	}
 }
 
+// TestStartChangesZoneKeysCreditedByTape: credit always joins the item id's
+// declared key, so a start whose focus never moves the key object still reads
+// exercised. With that join off, only the tape credits the key: each
+// ChangesZone start must make its own trigger fire. Dead Man's Chest is the
+// Aura whose Enchant keyword names an opponent's creature, so its bearer must
+// sit on the other seat (a bearer on its own seat is no legal Enchant target
+// and the Aura never attaches); Keiga and Vengeant Vampire are self-dies
+// triggers with a target, which the start must still place.
+func TestStartChangesZoneKeysCreditedByTape(t *testing.T) {
+	creditDeclared = false
+	t.Cleanup(func() { creditDeclared = true })
+	keys := [][2]string{
+		{"Abattoir Ghoul", "f0/t0"},
+		{"Anointer Priest", "f0/t0"},
+		{"Aspect of Mongoose", "f0/t0"},
+		{"Attuned Hunter", "f0/t0"},
+		{"Avarice Amulet", "f0/t0"},
+		{"Banewasp Affliction", "f0/t0"},
+		{"Dead Man's Chest", "f0/t0"},
+		{"Keiga, the Tide Star", "f0/t0"},
+		{"Vengeant Vampire", "f0/t0"},
+	}
+	ks := lowerKeyStarts(t, keys)
+	led := readExercised(t, ks.play)
+	for _, k := range keys {
+		if got := led.Get(k[0], k[1]); got.Exercised == 0 {
+			t.Errorf("%s %s: the tape credits no use of the key (ledger %+v): the start never fires the trigger", k[0], k[1], got)
+		}
+	}
+}
+
 // TestStartManaAbilityIsExercised: a focus that is a mana ability was never
 // taken. gorge offers a mana ability at priority as one "activate" option per
 // source, never as an "ability" option with the ability's index, so the focus
