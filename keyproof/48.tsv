@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 487382ea-0050-4a3f-bcf6-0ce41d6f4ebf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thundering-tanadon:cast:s1,f:xs:XP:thundering-tanadon:cast:s1	-	-	-	d864b561c9cb	-	2fb93c76ee61	-	-	2026-11-24	xproof
 487485a6-cf79-48c0-bea9-0ec6b3ee253c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+487485a6-cf79-48c0-bea9-0ec6b3ee253c	f0/a1	AddTurn	agreed	-	FX	start	2	0	x:xs:XP:magistrate-s-scepter:f0a1:s1,f:xs:XP:magistrate-s-scepter:f0a1:s1	-	-	-	23c4009444b0	-	1753ac2799a0	-	-	2026-11-25	xproof
 48792146-e20c-4d93-83af-f746069fc6f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48792146-e20c-4d93-83af-f746069fc6f1	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 48792146-e20c-4d93-83af-f746069fc6f1	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof

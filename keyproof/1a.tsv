@@ -111,13 +111,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a9607a2-58cb-4bb8-b454-4813528221f8	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Tasha Yar, Out of Time"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:fang-druid-summoner:cast:s1,f:xs:XP:fang-druid-summoner:cast:s1	-	-	-	23b491658465	-	018d002084df	-	-	2026-11-24	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:fang-druid-summoner:combat0.attack:s1,f:xs:XP:fang-druid-summoner:combat0.attack:s1	-	-	-	23c4009444b0	-	018d002084df	-	-	2026-11-25	xproof
-1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fang-Druid Summoner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:fang-druid-summoner:combat0.block:s1,f:xs:XP:fang-druid-summoner:combat0.block:s1	-	-	-	23c4009444b0	-	018d002084df	-	-	2026-11-25	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:fang-druid-summoner:cast:s1,f:xs:XP:fang-druid-summoner:cast:s1	-	-	-	23b491658465	-	018d002084df	-	-	2026-11-24	xproof
 1aa1cf50-ee79-4bef-826b-5f1a9e1aa1a5	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 1aa5df06-a61d-47e8-b12d-34009854d088	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1aa5df06-a61d-47e8-b12d-34009854d088	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1aa5df06-a61d-47e8-b12d-34009854d088	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:living-hive:f0t0:s1,f:xs:XP:living-hive:f0t0:s1	-	-	-	23c4009444b0	-	4fb8bfb7472b	-	-	2026-11-25	xproof
 1aa6b31b-cd30-4741-abc6-2ef72e445630	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aa6b31b-cd30-4741-abc6-2ef72e445630	f0/t0	Attacks	agreed	-	F	start	2	0	f:xs:XP:carrion-rats:f0t0:s1	-	-	-	fc71ca68c5ac	-	27ad5fea55e7	-	-	2026-11-24	xproof
 1aa6b31b-cd30-4741-abc6-2ef72e445630	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -147,8 +147,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ac6fabb-71db-442f-8c14-ba9e659f906c	cast	cast-resolve	agreed	-	X	scen	1	0	Chrome Companion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ac6fabb-71db-442f-8c14-ba9e659f906c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Chrome Companion/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ac6fabb-71db-442f-8c14-ba9e659f906c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Chrome Companion/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1acb289f-fb7f-4d83-aaef-4e7b9462c593	cast	cast-resolve	agreed	-	X	scen	1	0	Pacesetter Paragon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1acb289f-fb7f-4d83-aaef-4e7b9462c593	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Pacesetter Paragon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1acb289f-fb7f-4d83-aaef-4e7b9462c593	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pacesetter-paragon:cast:s1,f:xs:XP:pacesetter-paragon:cast:s1	-	-	-	23c4009444b0	-	2c61a0aed94c	-	-	2026-11-25	xproof
+1acb289f-fb7f-4d83-aaef-4e7b9462c593	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:pacesetter-paragon:f0a0:s1,f:xs:XP:pacesetter-paragon:f0a0:s1	-	-	-	23c4009444b0	-	2c61a0aed94c	-	-	2026-11-25	xproof
 1ad39f85-799a-42ae-852c-9117d689fe65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ad39f85-799a-42ae-852c-9117d689fe65	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ad39f85-799a-42ae-852c-9117d689fe65	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof

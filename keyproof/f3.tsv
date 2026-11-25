@@ -77,12 +77,12 @@ f353948c-b5f9-4840-a89a-19206dde9d47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sla
 f353948c-b5f9-4840-a89a-19206dde9d47	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:slab-hammer:f0a0:s1,f:xs:XP:slab-hammer:f0a0:s1	-	-	-	d864b561c9cb	-	5e92026f860d	-	-	2026-11-24	xproof
 f353948c-b5f9-4840-a89a-19206dde9d47	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f356087e-e1d2-4c25-aa1d-215d09535e7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f356087e-e1d2-4c25-aa1d-215d09535e7c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+f356087e-e1d2-4c25-aa1d-215d09535e7c	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:larceny:f0t0:s1,f:xs:XP:larceny:f0t0:s1	-	-	-	23c4009444b0	-	79b5af5aa048	-	-	2026-11-25	xproof
 f35aa497-bd0f-4642-8713-820b9f014da5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rubble-rouser:f0t0:s2,f:xs:XP:rubble-rouser:f0t0:s2	-	-	-	5437c1394672	-	453f7e776951	-	-	2026-11-24	xproof
 f35aa497-bd0f-4642-8713-820b9f014da5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rubble Rouser/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f35aa497-bd0f-4642-8713-820b9f014da5	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rubble-rouser:f0t0:s2,f:xs:XP:rubble-rouser:f0t0:s2	-	-	-	5437c1394672	-	453f7e776951	-	-	2026-11-24	xproof
-f35aace7-57b5-44b8-91d2-4710eb7d5548	cast	cast-resolve	agreed	-	X	scen	1	0	Mutant Surveyor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f35aace7-57b5-44b8-91d2-4710eb7d5548	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mutant Surveyor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f35aace7-57b5-44b8-91d2-4710eb7d5548	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mutant-surveyor:cast:s1,f:xs:XP:mutant-surveyor:cast:s1	-	-	-	23c4009444b0	-	bac7d9aec19f	-	-	2026-11-25	xproof
+f35aace7-57b5-44b8-91d2-4710eb7d5548	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:mutant-surveyor:f0a0:s1,f:xs:XP:mutant-surveyor:f0a0:s1	-	-	-	23c4009444b0	-	bac7d9aec19f	-	-	2026-11-25	xproof
 f35aace7-57b5-44b8-91d2-4710eb7d5548	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mutant Surveyor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f3623759-bf3a-4846-9ef7-1b732ad4355f	cast	cast	agreed	-	X	start	2	0	x:xs:XP:rushwood-legate:cast:s1	-	-	-	5f2128bf97e4	-	9d82f97b940e	-	-	2026-11-24	xproof
 f3654fbd-16a5-4953-84ac-534e8421032f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -102,10 +102,11 @@ f376f4c6-4526-4ae3-a84a-e8ea50fe78b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dep
 f376f4c6-4526-4ae3-a84a-e8ea50fe78b6	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:depth-charge-colossus:f0a0:s1,f:xs:XP:depth-charge-colossus:f0a0:s1	-	-	-	ae86f6029288	-	c762fb5cff29	-	-	2026-11-24	xproof
 f3817f63-7bde-46c5-93cb-b4756f5f821e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f3817f63-7bde-46c5-93cb-b4756f5f821e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-f3838ff1-5403-4f3f-8531-36029c13fcfc	cast	cast-resolve	agreed	-	X	scen	1	0	Riptide Gearhulk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f3838ff1-5403-4f3f-8531-36029c13fcfc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Riptide Gearhulk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f3838ff1-5403-4f3f-8531-36029c13fcfc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:riptide-gearhulk:cast:s1,f:xs:XP:riptide-gearhulk:cast:s1	-	-	-	23c4009444b0	-	f9d14f6ed9b1	-	-	2026-11-25	xproof
+f3838ff1-5403-4f3f-8531-36029c13fcfc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:riptide-gearhulk:combat0.attack:s1,f:xs:XP:riptide-gearhulk:combat0.attack:s1	-	-	-	23c4009444b0	-	f9d14f6ed9b1	-	-	2026-11-25	xproof
 f3838ff1-5403-4f3f-8531-36029c13fcfc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Riptide Gearhulk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f3838ff1-5403-4f3f-8531-36029c13fcfc	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Riptide Gearhulk/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f3838ff1-5403-4f3f-8531-36029c13fcfc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:riptide-gearhulk:cast:s1,f:xs:XP:riptide-gearhulk:cast:s1	-	-	-	23c4009444b0	-	f9d14f6ed9b1	-	-	2026-11-25	xproof
+f3838ff1-5403-4f3f-8531-36029c13fcfc	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:riptide-gearhulk:f0t1:s1,f:xs:XP:riptide-gearhulk:f0t1:s1	-	-	-	23c4009444b0	-	f9d14f6ed9b1	-	-	2026-11-25	xproof
 f386bca6-a08e-462b-b1d9-c3b03929c68d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f387b1c6-25a6-4fff-90d3-fff027b247a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f387b1c6-25a6-4fff-90d3-fff027b247a5	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof

@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f05f3ed-e3b7-4225-b3f2-c12eda335237	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flesh-to-dust:cast:s1,f:xs:XP:flesh-to-dust:cast:s1	-	-	-	d864b561c9cb	-	a52763bbc9ff	-	-	2026-11-24	xproof
 2f0741f9-802b-4761-8094-7b1f3ea1a424	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f074636-6a36-46a3-b872-add79e19aa8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thieving-magpie:cast:s1,f:xs:XP:thieving-magpie:cast:s1	-	-	-	25696bf19d5b	-	40d73a9cb951	-	-	2026-11-24	xproof
-2f074636-6a36-46a3-b872-add79e19aa8b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+2f074636-6a36-46a3-b872-add79e19aa8b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 2f092562-9e17-43cd-aeb8-d0567f99363e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f0bad22-a3f5-4b2b-96bf-ff1473e2262d	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f0bad22-a3f5-4b2b-96bf-ff1473e2262d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:korok-liberated-rage:f0t0:s1,f:xs:XP:korok-liberated-rage:f0t0:s1	-	-	-	8c0bd19283bb	-	2f5b115426fc	-	-	2026-11-24	xproof
@@ -192,7 +192,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fb54c18-f69b-4712-af36-14d8a6d4df2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fb54c18-f69b-4712-af36-14d8a6d4df2b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2fb6f65f-a0fb-4d45-be1b-d6405e61d47a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2fb6f65f-a0fb-4d45-be1b-d6405e61d47a	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+2fb6f65f-a0fb-4d45-be1b-d6405e61d47a	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:bosh-iron-golem:f0a0:s1,f:xs:XP:bosh-iron-golem:f0a0:s1	-	-	-	23c4009444b0	-	f00555fbfd6f	-	-	2026-11-25	xproof
 2fb8e100-58a1-4dc6-bc38-ad7f115e3e46	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 2fb8e100-58a1-4dc6-bc38-ad7f115e3e46	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 2fb8e100-58a1-4dc6-bc38-ad7f115e3e46	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof

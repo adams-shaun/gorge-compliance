@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a011d0d-da29-4287-b50c-12746abfa38c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tilling-treefolk:f0t0:s1,f:xs:XP:tilling-treefolk:f0t0:s1	-	-	-	8a1b1a193ec0	-	a42252b96095	-	-	2026-11-24	xproof
 8a04fd45-6526-4c73-8b38-5e40a2380451	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a05ec32-7b0c-4f23-a4f7-413301c2a70a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a05ec32-7b0c-4f23-a4f7-413301c2a70a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8a05ec32-7b0c-4f23-a4f7-413301c2a70a	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:coastal-piracy:f0t0:s1,f:xs:XP:coastal-piracy:f0t0:s1	-	-	-	23c4009444b0	-	580170d382a4	-	-	2026-11-25	xproof
 8a09d4a2-4796-4a15-ab75-a3a0b717f62d	cast	cast-resolve	agreed	-	FX	scen	2	0	Ares, God of War/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a09d4a2-4796-4a15-ab75-a3a0b717f62d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ares, God of War/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a09d4a2-4796-4a15-ab75-a3a0b717f62d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ares, God of War/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a825e4c-4a87-4b8d-84f7-3e50b896d7cb	f0/t0	Attacks	agreed	-	FX	start	1	0	x:xs:XP:lightfoot-rogue:f0t0:s1,f:xs:XP:lightfoot-rogue:f0t0:s1	-	-	-	d864b561c9cb	-	fff16d7f3fc4	-	-	2026-11-24	xproof
 8a83d284-75a0-4901-b7d9-c4b7586ee327	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:river-of-tears:f0a0:s1,f:xs:XP:river-of-tears:f0a0:s1	-	-	-	d864b561c9cb	-	8cc0509c5f85	-	-	2026-11-24	xproof
 8a83d284-75a0-4901-b7d9-c4b7586ee327	land	land	agreed	-	FX	start	2	0	x:xs:XP:river-of-tears:land:s1,f:xs:XP:river-of-tears:land:s1	-	-	-	d864b561c9cb	-	8cc0509c5f85	-	-	2026-11-24	xproof
-8a8bc537-b69f-441d-a10e-d7f17f2f75bb	cast	cast-resolve	agreed	-	X	scen	1	0	Pothole Mole/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8a8bc537-b69f-441d-a10e-d7f17f2f75bb	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a8bc537-b69f-441d-a10e-d7f17f2f75bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pothole-mole:cast:s1,f:xs:XP:pothole-mole:cast:s1	-	-	-	23c4009444b0	-	45757d346423	-	-	2026-11-25	xproof
+8a8bc537-b69f-441d-a10e-d7f17f2f75bb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pothole-mole:cast:s1,f:xs:XP:pothole-mole:cast:s1	-	-	-	23c4009444b0	-	45757d346423	-	-	2026-11-25	xproof
 8a8e225b-14e4-464f-bebe-89b4c9be7fe1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -164,9 +164,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8abb1be2-d02b-4a78-9fcb-d2c9102a840b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8abe0577-8fdb-4e4a-a871-01b21732c961	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8abe0577-8fdb-4e4a-a871-01b21732c961	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8abeaa77-d455-47e7-bf60-aefb94ab83fb	cast	cast-resolve	agreed	-	X	scen	1	0	Howler's Heavy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8abeaa77-d455-47e7-bf60-aefb94ab83fb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Howler's Heavy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8abeaa77-d455-47e7-bf60-aefb94ab83fb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Howler's Heavy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8abeaa77-d455-47e7-bf60-aefb94ab83fb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:howler-s-heavy:cast:s1,f:xs:XP:howler-s-heavy:cast:s1	-	-	-	23c4009444b0	-	37af324d73cf	-	-	2026-11-25	xproof
+8abeaa77-d455-47e7-bf60-aefb94ab83fb	f0/a0	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:howler-s-heavy:f0a0:s1,f:xs:XP:howler-s-heavy:f0a0:s1	-	-	-	23c4009444b0	-	37af324d73cf	-	-	2026-11-25	xproof
+8abeaa77-d455-47e7-bf60-aefb94ab83fb	f0/t0	Cycled	agreed	-	FX	start	2	0	x:xs:XP:howler-s-heavy:f0a0:s1,f:xs:XP:howler-s-heavy:f0a0:s1	-	-	-	23c4009444b0	-	37af324d73cf	-	-	2026-11-25	xproof
 8abef87a-4a5c-412e-8137-827cee50bb8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ornery-kudu:f0t0:s1,f:xs:XP:ornery-kudu:f0t0:s1	-	-	-	d864b561c9cb	-	e18cc0627f0f	-	-	2026-11-24	xproof
 8abef87a-4a5c-412e-8137-827cee50bb8b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ornery-kudu:f0t0:s1,f:xs:XP:ornery-kudu:f0t0:s1	-	-	-	d864b561c9cb	-	e18cc0627f0f	-	-	2026-11-24	xproof
 8abff7b5-fe27-46bd-b951-b5d9f93f3a14	cast	cast-resolve	agreed	-	FX	scen	2	0	Slash, Reptile Rampager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

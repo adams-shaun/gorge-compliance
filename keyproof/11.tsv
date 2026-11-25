@@ -28,8 +28,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1135ebc3-9537-4341-956b-6e22d8be5f20	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Troyan, Gutsy Explorer/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11369d8b-6443-43c3-a60f-dd920a4e8c08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winged-coatl:cast:s1,f:xs:XP:winged-coatl:cast:s1	-	-	-	8a1b1a193ec0	-	ac3cdac5e29b	-	-	2026-11-24	xproof
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lotusguard-disciple:f0t0:s2,f:xs:XP:lotusguard-disciple:f0t0:s2	-	-	-	267e485f6204	-	cefc2a332b63	-	-	2026-11-24	xproof
-1139ee31-cb6e-4ae6-a08b-252c46b2db97	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lotusguard Disciple/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1139ee31-cb6e-4ae6-a08b-252c46b2db97	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lotusguard Disciple/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1139ee31-cb6e-4ae6-a08b-252c46b2db97	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lotusguard-disciple:combat0.attack:s1,f:xs:XP:lotusguard-disciple:combat0.attack:s1	-	-	-	23c4009444b0	-	cefc2a332b63	-	-	2026-11-25	xproof
+1139ee31-cb6e-4ae6-a08b-252c46b2db97	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lotusguard-disciple:combat0.block:s1,f:xs:XP:lotusguard-disciple:combat0.block:s1	-	-	-	23c4009444b0	-	cefc2a332b63	-	-	2026-11-25	xproof
 1139ee31-cb6e-4ae6-a08b-252c46b2db97	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lotusguard-disciple:f0t0:s2,f:xs:XP:lotusguard-disciple:f0t0:s2	-	-	-	267e485f6204	-	cefc2a332b63	-	-	2026-11-24	xproof
 113c3024-c3bd-4c3a-8c08-3828646d9ca2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:forerunner-of-the-empire:cast:s1,f:xs:XP:forerunner-of-the-empire:cast:s1	-	-	-	d864b561c9cb	-	9d5b3cc5c8a6	-	-	2026-11-24	xproof
 113c3024-c3bd-4c3a-8c08-3828646d9ca2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:forerunner-of-the-empire:cast:s1,f:xs:XP:forerunner-of-the-empire:cast:s1	-	-	-	d864b561c9cb	-	9d5b3cc5c8a6	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11c7662f-e688-40a6-98fd-6ae89d231b44	f0/a4	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11cb509d-21af-48f1-b355-135ebd3e4bd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11cb509d-21af-48f1-b355-135ebd3e4bd1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:doomed-dissenter:f0t0:s1,f:xs:XP:doomed-dissenter:f0t0:s1	-	-	-	d864b561c9cb	-	c81ccfdd1b91	-	-	2026-11-24	xproof
-11cd0c42-4148-4d82-9172-b1a1967fe319	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	d8f6acbbaed5	-	-	2026-11-24	xproof
+11cd0c42-4148-4d82-9172-b1a1967fe319	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:browbeat:cast:s1,f:xs:XP:browbeat:cast:s1	-	-	-	23c4009444b0	-	d8f6acbbaed5	-	-	2026-11-25	xproof
 11ceb2db-021e-422d-976e-7bfe3b67a8aa	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:foraging-wickermaw:f0t0:s2,f:xs:XP:foraging-wickermaw:f0t0:s2	-	-	-	267e485f6204	-	b0ee29dd7f60	-	-	2026-11-24	xproof
 11ceb2db-021e-422d-976e-7bfe3b67a8aa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Foraging Wickermaw/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 11ceb2db-021e-422d-976e-7bfe3b67a8aa	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:foraging-wickermaw:f0t0:s2,f:xs:XP:foraging-wickermaw:f0t0:s2	-	-	-	267e485f6204	-	b0ee29dd7f60	-	-	2026-11-24	xproof

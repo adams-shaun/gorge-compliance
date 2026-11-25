@@ -23,7 +23,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e10c141-dfb0-409b-b8c9-cdfe93b42a06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wreck-and-rebuild:cast:s1,f:xs:XP:wreck-and-rebuild:cast:s1	-	-	-	8c0bd19283bb	-	c5e57ae05344	-	-	2026-11-24	xproof
 7e162cc1-9482-4812-8897-209ec2927ec0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e162cc1-9482-4812-8897-209ec2927ec0	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:lesser-gargadon:f0t0:s1,f:xs:XP:lesser-gargadon:f0t0:s1	-	-	-	d864b561c9cb	-	a8153ac352a8	-	-	2026-11-24	xproof
-7e162cc1-9482-4812-8897-209ec2927ec0	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7e162cc1-9482-4812-8897-209ec2927ec0	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 7e16595f-bdeb-422e-b99a-bfc0ed52e9f8	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:restless-cottage:f0a0:s1,f:xs:XP:restless-cottage:f0a0:s1	-	-	-	23b491658465	-	31f3e77644f1	-	-	2026-11-24	xproof
 7e16595f-bdeb-422e-b99a-bfc0ed52e9f8	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:restless-cottage:f0a1:s1,f:xs:XP:restless-cottage:f0a1:s1	-	-	-	23b491658465	-	31f3e77644f1	-	-	2026-11-24	xproof
 7e16595f-bdeb-422e-b99a-bfc0ed52e9f8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:restless-cottage:f0a1:s1,f:xs:XP:restless-cottage:f0a1:s1	-	-	-	23b491658465	-	31f3e77644f1	-	-	2026-11-24	xproof
@@ -83,9 +83,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e605a8c-d6d4-410a-aca4-52576d08d81c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e605a8c-d6d4-410a-aca4-52576d08d81c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 7e60a641-1f2d-45ff-b3f2-d389be938b22	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lumbering-worldwagon:f0t0:s1,f:xs:XP:lumbering-worldwagon:f0t0:s1	-	-	-	267e485f6204	-	46955d0df812	-	-	2026-11-24	xproof
-7e60a641-1f2d-45ff-b3f2-d389be938b22	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lumbering Worldwagon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7e60a641-1f2d-45ff-b3f2-d389be938b22	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:lumbering-worldwagon:f0a0:s1,f:xs:XP:lumbering-worldwagon:f0a0:s1	-	-	-	23c4009444b0	-	46955d0df812	-	-	2026-11-25	xproof
 7e60a641-1f2d-45ff-b3f2-d389be938b22	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lumbering-worldwagon:f0t0:s1,f:xs:XP:lumbering-worldwagon:f0t0:s1	-	-	-	267e485f6204	-	46955d0df812	-	-	2026-11-24	xproof
-7e60a641-1f2d-45ff-b3f2-d389be938b22	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Lumbering Worldwagon/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7e60a641-1f2d-45ff-b3f2-d389be938b22	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:lumbering-worldwagon:f0a0:s1,f:xs:XP:lumbering-worldwagon:f0a0:s1	-	-	-	23c4009444b0	-	46955d0df812	-	-	2026-11-25	xproof
 7e60a641-1f2d-45ff-b3f2-d389be938b22	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lumbering Worldwagon/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e6478c1-e5b3-4641-baa7-7cdeab042569	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:selvala-s-charge:cast:s1,f:xs:XP:selvala-s-charge:cast:s1	-	-	-	8c0bd19283bb	-	1ddcafaea373	-	-	2026-11-24	xproof
 7e64b1dc-a238-4bff-98ff-2bea44340568	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-mistmoors:f0t0:s2,f:xs:XP:overlord-of-the-mistmoors:f0t0:s2	-	-	-	e07cf3a05ba5	-	6796ce2ff7a9	-	-	2026-11-24	xproof

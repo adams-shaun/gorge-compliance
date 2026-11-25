@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0452be2a-e97a-4269-a9e3-b616265ecb2e	cast	cast-resolve	agreed	-	X	scen	1	0	Vivi Ornitier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0452be2a-e97a-4269-a9e3-b616265ecb2e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Vivi Ornitier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0452be2a-e97a-4269-a9e3-b616265ecb2e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vivi Ornitier/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-045488b3-0206-4dcd-91ab-59ec542f06c0	cast	cast-resolve	agreed	-	X	scen	1	0	Guidelight Optimizer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+045488b3-0206-4dcd-91ab-59ec542f06c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guidelight-optimizer:cast:s1,f:xs:XP:guidelight-optimizer:cast:s1	-	-	-	23c4009444b0	-	ab2d97b93b42	-	-	2026-11-25	xproof
 045488b3-0206-4dcd-91ab-59ec542f06c0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Guidelight Optimizer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04559759-1afd-4785-badc-c3416041f016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hallar-the-firefletcher:cast:s1,f:xs:XP:hallar-the-firefletcher:cast:s1	-	-	-	d864b561c9cb	-	3e845bb19eb0	-	-	2026-11-24	xproof
 04559759-1afd-4785-badc-c3416041f016	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04da8c46-9703-47f2-974b-c144464ec380	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04dc2e9c-312c-4af8-950c-6a7ed859c9be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04dcda3b-3401-4523-8b97-b700a14feb36	cast	cast-resolve	agreed	-	X	scen	1	0	Gallant Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-04dcda3b-3401-4523-8b97-b700a14feb36	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gallant Strike/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+04dcda3b-3401-4523-8b97-b700a14feb36	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:gallant-strike:f0a1:s1,f:xs:XP:gallant-strike:f0a1:s1	-	-	-	23c4009444b0	-	379573fb9396	-	-	2026-11-25	xproof
 04dce348-be42-443a-a88d-c47436ba2ec4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04dd449f-ff3a-4ed7-8241-244d58b371dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-settler:f0t0:s1,f:xs:XP:goblin-settler:f0t0:s1	-	-	-	5f2128bf97e4	-	61f5033d24e4	-	-	2026-11-24	xproof
 04dd449f-ff3a-4ed7-8241-244d58b371dc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-settler:f0t0:s1,f:xs:XP:goblin-settler:f0t0:s1	-	-	-	5f2128bf97e4	-	61f5033d24e4	-	-	2026-11-24	xproof

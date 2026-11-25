@@ -156,11 +156,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49be65fd-3755-410d-b0dc-2e5861ea2552	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:thopter-spy-network:f0t0:s1,f:xs:XP:thopter-spy-network:f0t0:s1	-	-	-	3aa6ded33acb	-	3158f95cb605	-	-	2026-11-25	xproof
 49be65fd-3755-410d-b0dc-2e5861ea2552	f0/t1	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:thopter-spy-network:f0t0:s1,f:xs:XP:thopter-spy-network:f0t0:s1	-	-	-	3aa6ded33acb	-	3158f95cb605	-	-	2026-11-25	xproof
 49bf3805-cc9e-4550-8a01-171282aa49c9	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-49bfecc3-6258-454e-a8fd-fc49098a0898	cast	cast-resolve	agreed	-	X	scen	1	0	Pit Automaton/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+49bfecc3-6258-454e-a8fd-fc49098a0898	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pit-automaton:cast:s1,f:xs:XP:pit-automaton:cast:s1	-	-	-	23c4009444b0	-	125c1f893694	-	-	2026-11-25	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pit Automaton/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-49bfecc3-6258-454e-a8fd-fc49098a0898	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pit Automaton/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+49bfecc3-6258-454e-a8fd-fc49098a0898	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:pit-automaton:combat0.block:s1,f:xs:XP:pit-automaton:combat0.block:s1	-	-	-	23c4009444b0	-	125c1f893694	-	-	2026-11-25	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Pit Automaton/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-49bfecc3-6258-454e-a8fd-fc49098a0898	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Pit Automaton/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+49bfecc3-6258-454e-a8fd-fc49098a0898	f0/a1	DelayedTrigger	agreed	-	FX	start	2	0	x:xs:XP:pit-automaton:f0a1:s1,f:xs:XP:pit-automaton:f0a1:s1	-	-	-	23c4009444b0	-	125c1f893694	-	-	2026-11-25	xproof
 49c0aac5-d650-4ada-a194-3bf77f104bc1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ransom-note:f0t0:s1,f:xs:XP:ransom-note:f0t0:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof
 49c0aac5-d650-4ada-a194-3bf77f104bc1	f0/a0	Charm	agreed	-	FX	start	2	0	x:xs:XP:ransom-note:f0a0:s1,f:xs:XP:ransom-note:f0a0:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof
 49c0aac5-d650-4ada-a194-3bf77f104bc1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ransom-note:f0t0:s1,f:xs:XP:ransom-note:f0t0:s1	-	-	-	8c0bd19283bb	-	be7d40c1ca22	-	-	2026-11-24	xproof

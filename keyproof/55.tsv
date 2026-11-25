@@ -23,8 +23,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 551e4356-5b1f-475c-a64b-9c50ea9b0368	cast	cast-resolve	agreed	-	X	scen	1	0	Boar-q-pine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 551e4356-5b1f-475c-a64b-9c50ea9b0368	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Boar-q-pine/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dross-harvester:f0t0:s1,f:xs:XP:dross-harvester:f0t0:s1	-	-	-	23c4009444b0	-	634e6524e117	-	-	2026-11-25	xproof
+5520ada0-f173-4b5e-a0b8-a5938a1c0a4b	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:dross-harvester:f0t0:s1,f:xs:XP:dross-harvester:f0t0:s1	-	-	-	23c4009444b0	-	634e6524e117	-	-	2026-11-25	xproof
 55259de3-561d-4a9e-bb28-63c6a7ac5c68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55259de3-561d-4a9e-bb28-63c6a7ac5c68	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55259de3-561d-4a9e-bb28-63c6a7ac5c68	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

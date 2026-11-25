@@ -45,8 +45,8 @@ a03a9ddb-595a-4dff-b7cb-7ad60655f1ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a03a9ddb-595a-4dff-b7cb-7ad60655f1ee	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a03a9ddb-595a-4dff-b7cb-7ad60655f1ee	f0/a1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a03fa584-ceb5-410c-9b80-f75d00215537	cast	cast-resolve	agreed	-	X	scen	1	0	Tenderize/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a04696c4-4138-47e2-8da4-81d61748519f	cast	cast-resolve	agreed	-	X	scen	1	0	March of the World Ooze/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a04696c4-4138-47e2-8da4-81d61748519f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	March of the World Ooze/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a04696c4-4138-47e2-8da4-81d61748519f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:march-of-the-world-ooze:cast:s1,f:xs:XP:march-of-the-world-ooze:cast:s1	-	-	-	23c4009444b0	-	4d88e335cebc	-	-	2026-11-25	xproof
+a04696c4-4138-47e2-8da4-81d61748519f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:march-of-the-world-ooze:f0t0:s1,f:xs:XP:march-of-the-world-ooze:f0t0:s1	-	-	-	23c4009444b0	-	4d88e335cebc	-	-	2026-11-25	xproof
 a04696c4-4138-47e2-8da4-81d61748519f	static#0.0	static#0.0	diagnosed	-	-	scen	0	0	-	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a0476da9-51b1-4cd3-90c4-ad01d0e4c3d6	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:azorius-herald:cast:s1,f:xs:XP:azorius-herald:cast:s1	-	-	-	77494c1ce129	-	cc9cd75abd72	-	-	2026-11-24	xproof
 a0476da9-51b1-4cd3-90c4-ad01d0e4c3d6	f0/t0	ChangesZone	agreed	-	FX	start	6	0	x:xs:XP:azorius-herald:cast:s1,f:xs:XP:azorius-herald:cast:s1	-	-	-	77494c1ce129	-	cc9cd75abd72	-	-	2026-11-24	xproof
@@ -129,7 +129,7 @@ a0a1cd2b-ed7c-4cce-8497-4873e1e5e3df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 a0a706b2-b237-4183-82fa-2140a23b89e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0a706b2-b237-4183-82fa-2140a23b89e3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a0a7319d-9441-4aed-a351-9ff3fb3b1d9e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hulldrifter:f0t0:s2,f:xs:XP:hulldrifter:f0t0:s2	-	-	-	267e485f6204	-	2162cf7c19dc	-	-	2026-11-24	xproof
-a0a7319d-9441-4aed-a351-9ff3fb3b1d9e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hulldrifter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a0a7319d-9441-4aed-a351-9ff3fb3b1d9e	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:hulldrifter:f0a0:s1,f:xs:XP:hulldrifter:f0a0:s1	-	-	-	23c4009444b0	-	2162cf7c19dc	-	-	2026-11-25	xproof
 a0a7319d-9441-4aed-a351-9ff3fb3b1d9e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hulldrifter:f0t0:s2,f:xs:XP:hulldrifter:f0t0:s2	-	-	-	267e485f6204	-	2162cf7c19dc	-	-	2026-11-24	xproof
 a0a79e9e-38cb-45d8-a7ec-7cf10ef7e5fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:collected-conjuring:cast:s1,f:xs:XP:collected-conjuring:cast:s1	-	-	-	d864b561c9cb	-	99c18856db28	-	-	2026-11-24	xproof
 a0a8c04e-3ce7-4945-a6af-7e40a990c82c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:gustha-ebbasdotter:cast:s1	-	-	-	8c0bd19283bb	-	baab6c799902	-	-	2026-11-24	xproof

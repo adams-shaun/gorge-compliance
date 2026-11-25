@@ -71,11 +71,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 285c9f49-4aeb-468c-bb41-f5ccb5257e2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-kavu:cast:s1,f:xs:XP:yavimaya-kavu:cast:s1	-	-	-	fc71ca68c5ac	-	4ca4e7f6a638	-	-	2026-11-24	xproof
 285fecb7-f872-454d-ac2f-bc5615c70cd8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 286213a8-ae53-4f97-9f81-e13bed462d0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28673657-f05f-4b0a-b80c-939773abdefb	cast	cast-resolve	agreed	-	X	scen	1	0	Gloryheath Lynx/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-28673657-f05f-4b0a-b80c-939773abdefb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gloryheath Lynx/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-28673657-f05f-4b0a-b80c-939773abdefb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gloryheath Lynx/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-28673657-f05f-4b0a-b80c-939773abdefb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gloryheath Lynx/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-28673657-f05f-4b0a-b80c-939773abdefb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gloryheath Lynx/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+28673657-f05f-4b0a-b80c-939773abdefb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gloryheath-lynx:cast:s1,f:xs:XP:gloryheath-lynx:cast:s1	-	-	-	23c4009444b0	-	665b7cb21c7a	-	-	2026-11-25	xproof
+28673657-f05f-4b0a-b80c-939773abdefb	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gloryheath-lynx:combat0.attack:s1,f:xs:XP:gloryheath-lynx:combat0.attack:s1	-	-	-	23c4009444b0	-	665b7cb21c7a	-	-	2026-11-25	xproof
+28673657-f05f-4b0a-b80c-939773abdefb	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gloryheath-lynx:combat0.block:s1,f:xs:XP:gloryheath-lynx:combat0.block:s1	-	-	-	23c4009444b0	-	665b7cb21c7a	-	-	2026-11-25	xproof
+28673657-f05f-4b0a-b80c-939773abdefb	f0/a0	AlterAttribute/Saddle	agreed	-	F	start	2	0	f:xs:XP:gloryheath-lynx:f0a0:s1	-	-	-	23c4009444b0	-	665b7cb21c7a	-	-	2026-11-25	xproof
+28673657-f05f-4b0a-b80c-939773abdefb	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:gloryheath-lynx:f0t0:s1,f:xs:XP:gloryheath-lynx:f0a0:s1	-	-	-	23c4009444b0	-	665b7cb21c7a	-	-	2026-11-25	xproof
 2867d539-6a63-4fae-aae2-a7fdd4dd9f28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chandra-fire-artisan:cast:s1,f:xs:XP:chandra-fire-artisan:cast:s1	-	-	-	d864b561c9cb	-	40857e1fabed	-	-	2026-11-24	xproof
 2867d539-6a63-4fae-aae2-a7fdd4dd9f28	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:chandra-fire-artisan:cast:s1,f:xs:XP:chandra-fire-artisan:cast:s1	-	-	-	d864b561c9cb	-	40857e1fabed	-	-	2026-11-24	xproof
 2867d539-6a63-4fae-aae2-a7fdd4dd9f28	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

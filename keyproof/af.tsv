@@ -152,7 +152,7 @@ afc9436b-8cad-4916-929d-ff33a37b42d5	static#0.1	static#0.1	agreed	-	X	scen	1	0	D
 afcc68e2-3634-43ce-ae99-dd2ec735d146	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sakashima-s-student:cast:s1,f:xs:XP:sakashima-s-student:cast:s1	-	-	-	8c0bd19283bb	-	c2340750cbd9	-	-	2026-11-24	xproof
 afcc68e2-3634-43ce-ae99-dd2ec735d146	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 afd2141f-1b0f-46b5-b1ac-aa28982d16c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afd2141f-1b0f-46b5-b1ac-aa28982d16c0	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+afd2141f-1b0f-46b5-b1ac-aa28982d16c0	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:wall-of-mulch:f0a0:s1,f:xs:XP:wall-of-mulch:f0a0:s1	-	-	-	23c4009444b0	-	fa0ddd48fa76	-	-	2026-11-25	xproof
 afd9b232-3f46-40c5-b1cf-2a7e8c955eba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afd9b232-3f46-40c5-b1cf-2a7e8c955eba	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:diabolic-machine:f0a0:s1,f:xs:XP:diabolic-machine:f0a0:s1	-	-	-	fc71ca68c5ac	-	a8d9a18e234e	-	-	2026-11-24	xproof
 afddba56-f9a0-4917-8167-c9fd17ca9954	cast	cast-resolve	agreed	-	X	scen	1	0	Solarium Sentry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -167,10 +167,10 @@ afedce7b-0e18-40ad-a26a-1933fddb560d	f1/a0	NULL	owed	refused:no-generator:face	-
 afee3422-5490-411b-a36e-82e447c1bd0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:imaginary-pet:f0t0:s1,f:xs:XP:imaginary-pet:f0t0:s1	-	-	-	3aa6ded33acb	-	98f44c8cbb74	-	-	2026-11-25	xproof
 afee3422-5490-411b-a36e-82e447c1bd0f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:imaginary-pet:f0t0:s1,f:xs:XP:imaginary-pet:f0t0:s1	-	-	-	3aa6ded33acb	-	98f44c8cbb74	-	-	2026-11-25	xproof
 aff0740f-51d5-41c7-ac13-97c298cfd743	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:oildeep-gearhulk:f0t0:s2,f:xs:XP:oildeep-gearhulk:f0t0:s2	-	-	-	267e485f6204	-	6b86780e32fa	-	-	2026-11-24	xproof
-aff0740f-51d5-41c7-ac13-97c298cfd743	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Oildeep Gearhulk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-aff0740f-51d5-41c7-ac13-97c298cfd743	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Oildeep Gearhulk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+aff0740f-51d5-41c7-ac13-97c298cfd743	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:oildeep-gearhulk:combat0.attack:s1,f:xs:XP:oildeep-gearhulk:combat0.attack:s1	-	-	-	23c4009444b0	-	6b86780e32fa	-	-	2026-11-25	xproof
+aff0740f-51d5-41c7-ac13-97c298cfd743	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:oildeep-gearhulk:combat0.block:s1,f:xs:XP:oildeep-gearhulk:combat0.block:s1	-	-	-	23c4009444b0	-	6b86780e32fa	-	-	2026-11-25	xproof
 aff0740f-51d5-41c7-ac13-97c298cfd743	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:oildeep-gearhulk:f0t0:s2,f:xs:XP:oildeep-gearhulk:f0t0:s2	-	-	-	267e485f6204	-	6b86780e32fa	-	-	2026-11-24	xproof
-aff0740f-51d5-41c7-ac13-97c298cfd743	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Oildeep Gearhulk/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+aff0740f-51d5-41c7-ac13-97c298cfd743	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:oildeep-gearhulk:f0t1:s1,f:xs:XP:oildeep-gearhulk:f0t1:s1	-	-	-	23c4009444b0	-	6b86780e32fa	-	-	2026-11-25	xproof
 aff20717-265d-4214-a8f5-f520bb243cb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aff21bd1-87b0-409c-bfad-08f3690ef220	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aff21bd1-87b0-409c-bfad-08f3690ef220	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:killmonger-ruthless-usurper:f0t0:s1,f:xs:XP:killmonger-ruthless-usurper:f0t0:s1	-	-	-	8c0bd19283bb	-	ec9ae5dffce7	-	-	2026-11-24	xproof

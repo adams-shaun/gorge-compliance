@@ -47,11 +47,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58285b70-0d13-4723-b5a4-91fb6f9ccf03	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gallia, Tragic Host/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58285b70-0d13-4723-b5a4-91fb6f9ccf03	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gallia, Tragic Host/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58285b70-0d13-4723-b5a4-91fb6f9ccf03	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Gallia, Tragic Host/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	cast	cast-resolve	agreed	-	X	scen	1	0	Redshift, Rocketeer Chief/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Redshift, Rocketeer Chief/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Redshift, Rocketeer Chief/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Redshift, Rocketeer Chief/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Redshift, Rocketeer Chief/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:redshift-rocketeer-chief:cast:s1,f:xs:XP:redshift-rocketeer-chief:cast:s1	-	-	-	23c4009444b0	-	317a2bd00d34	-	-	2026-11-25	xproof
+582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:redshift-rocketeer-chief:combat0.attack:s1,f:xs:XP:redshift-rocketeer-chief:combat0.attack:s1	-	-	-	23c4009444b0	-	317a2bd00d34	-	-	2026-11-25	xproof
+582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:redshift-rocketeer-chief:combat0.block:s1,f:xs:XP:redshift-rocketeer-chief:combat0.block:s1	-	-	-	23c4009444b0	-	317a2bd00d34	-	-	2026-11-25	xproof
+582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:redshift-rocketeer-chief:combat0.attack:s1,f:xs:XP:redshift-rocketeer-chief:combat0.attack:s1	-	-	-	23c4009444b0	-	317a2bd00d34	-	-	2026-11-25	xproof
+582c7e54-d64c-4ffb-ae5f-d2752b3ed10b	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:redshift-rocketeer-chief:f0a1:s1,f:xs:XP:redshift-rocketeer-chief:f0a1:s1	-	-	-	23c4009444b0	-	317a2bd00d34	-	-	2026-11-25	xproof
 582c8030-1d41-4c63-8ed6-06aad398a96c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 582c8030-1d41-4c63-8ed6-06aad398a96c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 582fdfbe-c5fe-45d0-b3ff-e66db5183725	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

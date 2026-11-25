@@ -101,11 +101,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b759831-abe8-4996-a897-3c6d6d30a1c7	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:broodheart-engine:f0t0:s1	-	-	-	23c4009444b0	-	ee10dfa16537	-	-	2026-11-25	xproof
 1b76a54d-5a9f-4b1b-a075-4b4c4de8ba0a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:erinis-gloom-stalker:cast:s1,f:xs:XP:erinis-gloom-stalker:cast:s1	-	-	-	8c0bd19283bb	-	37abb8542b9a	-	-	2026-11-24	xproof
 1b76a54d-5a9f-4b1b-a075-4b4c4de8ba0a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:erinis-gloom-stalker:f0t0:s1,f:xs:XP:erinis-gloom-stalker:f0t0:s1	-	-	-	8c0bd19283bb	-	37abb8542b9a	-	-	2026-11-24	xproof
-1b788680-28e3-4378-9607-bd42acb4fbad	cast	cast-resolve	agreed	-	X	scen	1	0	Sabotage Strategist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b788680-28e3-4378-9607-bd42acb4fbad	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sabotage Strategist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b788680-28e3-4378-9607-bd42acb4fbad	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sabotage Strategist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b788680-28e3-4378-9607-bd42acb4fbad	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sabotage Strategist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b788680-28e3-4378-9607-bd42acb4fbad	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sabotage Strategist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1b788680-28e3-4378-9607-bd42acb4fbad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sabotage-strategist:cast:s1,f:xs:XP:sabotage-strategist:cast:s1	-	-	-	23c4009444b0	-	b2d1e49544ac	-	-	2026-11-25	xproof
+1b788680-28e3-4378-9607-bd42acb4fbad	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sabotage-strategist:combat0.attack:s1,f:xs:XP:sabotage-strategist:combat0.attack:s1	-	-	-	23c4009444b0	-	b2d1e49544ac	-	-	2026-11-25	xproof
+1b788680-28e3-4378-9607-bd42acb4fbad	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sabotage-strategist:combat0.block:s1,f:xs:XP:sabotage-strategist:combat0.block:s1	-	-	-	23c4009444b0	-	b2d1e49544ac	-	-	2026-11-25	xproof
+1b788680-28e3-4378-9607-bd42acb4fbad	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:sabotage-strategist:f0a0:s1,f:xs:XP:sabotage-strategist:f0a0:s1	-	-	-	23c4009444b0	-	b2d1e49544ac	-	-	2026-11-25	xproof
+1b788680-28e3-4378-9607-bd42acb4fbad	f0/t0	AttackersDeclared	agreed	-	FX	start	4	0	x:xs:XP:sabotage-strategist:combat0.block:s1,f:xs:XP:sabotage-strategist:combat0.block:s1	-	-	-	23c4009444b0	-	b2d1e49544ac	-	-	2026-11-25	xproof
 1b78aa71-b554-45dc-a737-52cd74c3e7f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b799c30-4a43-403d-b822-0555bd513913	cast	cast-resolve	agreed	-	X	scen	1	0	Earth Kingdom Jailer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1b799c30-4a43-403d-b822-0555bd513913	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

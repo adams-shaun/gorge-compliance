@@ -40,9 +40,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c2d2888-38be-41f9-aaf2-8337e87d2aed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c2dd8dc-8623-4518-b3fd-dcb9f647fa98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c2dd8dc-8623-4518-b3fd-dcb9f647fa98	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c31fec9-e4b3-4761-990e-7be38eb05604	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2c7a2e9f0e62	-	-	2026-11-25	xproof
-8c31fec9-e4b3-4761-990e-7be38eb05604	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2c7a2e9f0e62	-	-	2026-11-25	xproof
-8c31fec9-e4b3-4761-990e-7be38eb05604	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2c7a2e9f0e62	-	-	2026-11-25	xproof
+8c31fec9-e4b3-4761-990e-7be38eb05604	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:karmic-guide:cast:s1,f:xs:XP:karmic-guide:cast:s1	-	-	-	23c4009444b0	-	2c7a2e9f0e62	-	-	2026-11-25	xproof
+8c31fec9-e4b3-4761-990e-7be38eb05604	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:karmic-guide:cast:s1,f:xs:XP:karmic-guide:cast:s1	-	-	-	23c4009444b0	-	2c7a2e9f0e62	-	-	2026-11-25	xproof
+8c31fec9-e4b3-4761-990e-7be38eb05604	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	2c7a2e9f0e62	-	-	2026-11-25	xproof
 8c3495bf-02e7-4ad9-949d-92eb3d2b662a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c34b089-aad1-476e-958a-3077bf1bbb51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:talisman-of-curiosity:cast:s1,f:xs:XP:talisman-of-curiosity:cast:s1	-	-	-	d864b561c9cb	-	5913588cbede	-	-	2026-11-24	xproof
 8c34b089-aad1-476e-958a-3077bf1bbb51	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -129,10 +129,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8cac286c-1a17-4ee1-9858-d7a2f8c09037	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8cac919f-3bb8-49cb-b4e4-4dd0dcd7746c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:erkenbrand-lord-of-westfold:f0t0:s1,f:xs:XP:erkenbrand-lord-of-westfold:f0t0:s1	-	-	-	ae86f6029288	-	745fbe4084ab	-	-	2026-11-24	xproof
 8cac919f-3bb8-49cb-b4e4-4dd0dcd7746c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:erkenbrand-lord-of-westfold:f0t0:s1,f:xs:XP:erkenbrand-lord-of-westfold:f0t0:s1	-	-	-	ae86f6029288	-	745fbe4084ab	-	-	2026-11-24	xproof
-8cadf9c0-9a63-4cde-a6be-0ae86890c831	cast	cast-resolve	agreed	-	X	scen	1	0	Keen Buccaneer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8cadf9c0-9a63-4cde-a6be-0ae86890c831	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Keen Buccaneer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8cadf9c0-9a63-4cde-a6be-0ae86890c831	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Keen Buccaneer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8cadf9c0-9a63-4cde-a6be-0ae86890c831	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Keen Buccaneer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8cadf9c0-9a63-4cde-a6be-0ae86890c831	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keen-buccaneer:cast:s1,f:xs:XP:keen-buccaneer:cast:s1	-	-	-	23c4009444b0	-	2508e6741a1a	-	-	2026-11-25	xproof
+8cadf9c0-9a63-4cde-a6be-0ae86890c831	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:keen-buccaneer:combat0.attack:s1,f:xs:XP:keen-buccaneer:combat0.attack:s1	-	-	-	23c4009444b0	-	2508e6741a1a	-	-	2026-11-25	xproof
+8cadf9c0-9a63-4cde-a6be-0ae86890c831	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:keen-buccaneer:combat0.block:s1,f:xs:XP:keen-buccaneer:combat0.block:s1	-	-	-	23c4009444b0	-	2508e6741a1a	-	-	2026-11-25	xproof
+8cadf9c0-9a63-4cde-a6be-0ae86890c831	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:keen-buccaneer:f0a0:s1,f:xs:XP:keen-buccaneer:f0a0:s1	-	-	-	23c4009444b0	-	2508e6741a1a	-	-	2026-11-25	xproof
 8cb36a67-9206-4665-a03f-64f52ba559c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:into-the-flood-maw:cast:s1,f:xs:XP:into-the-flood-maw:cast:s1	-	-	-	23b491658465	-	e8071f3f34e4	-	-	2026-11-24	xproof
 8cb3f047-bd8b-4a34-8a2b-ced2cc0487eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cb6dbb5-9ea2-4c19-8173-148080fb898e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:reverent-hoplite:cast:s1,f:xs:XP:reverent-hoplite:cast:s1	-	-	-	ae86f6029288	-	a9fdd077a57d	-	-	2026-11-24	xproof

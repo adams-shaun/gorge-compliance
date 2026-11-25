@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 431c5b04-7387-4724-adfa-d1eb7874e79e	cast	cast-resolve	agreed	-	X	scen	1	0	Terrific Team-Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 431c5b04-7387-4724-adfa-d1eb7874e79e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Terrific Team-Up/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 431d6a2b-e22c-4921-a5f1-dd672f764f78	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:grim-bauble:f0t0:s2,f:xs:XP:grim-bauble:f0t0:s2	-	-	-	267e485f6204	-	7d24da05aa1c	-	-	2026-11-24	xproof
-431d6a2b-e22c-4921-a5f1-dd672f764f78	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Grim Bauble/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+431d6a2b-e22c-4921-a5f1-dd672f764f78	f0/a0	Surveil	agreed	-	FX	start	2	0	x:xs:XP:grim-bauble:f0a0:s1,f:xs:XP:grim-bauble:f0a0:s1	-	-	-	23c4009444b0	-	7d24da05aa1c	-	-	2026-11-25	xproof
 431d6a2b-e22c-4921-a5f1-dd672f764f78	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:grim-bauble:f0t0:s2,f:xs:XP:grim-bauble:f0t0:s2	-	-	-	267e485f6204	-	7d24da05aa1c	-	-	2026-11-24	xproof
 431e85e3-15e6-471b-ba71-6058394c9a96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-storm-cosmium-raider:cast:s1,f:xs:XP:captain-storm-cosmium-raider:cast:s1	-	-	-	23b491658465	-	ec3bab976110	-	-	2026-11-24	xproof
 431e85e3-15e6-471b-ba71-6058394c9a96	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:captain-storm-cosmium-raider:cast:s1,f:xs:XP:captain-storm-cosmium-raider:cast:s1	-	-	-	23b491658465	-	ec3bab976110	-	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 437553c1-0aa4-4093-b6e5-c175ede5f278	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Malevolent Chandelier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4377cc84-19d3-48e0-9588-d18b4fbf4e6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4377cc84-19d3-48e0-9588-d18b4fbf4e6d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-437b2dab-15e0-4b9a-a204-58622d37a3b3	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	48c06b70130d	-	-	2026-11-24	xproof
+437b2dab-15e0-4b9a-a204-58622d37a3b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fact-or-fiction:cast:s1,f:xs:XP:fact-or-fiction:cast:s1	-	-	-	23c4009444b0	-	48c06b70130d	-	-	2026-11-25	xproof
 437be0ad-2dd1-42c8-bf62-5af95228b2f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 437be0ad-2dd1-42c8-bf62-5af95228b2f8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:haunted-angel:f0t0:s1,f:xs:XP:haunted-angel:f0t0:s1	-	-	-	fc71ca68c5ac	-	a0d624913852	-	-	2026-11-24	xproof
 437cfd16-94bc-43ba-afd8-e9e9d028a4ca	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof

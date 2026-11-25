@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b740cd6-e07d-4273-8a7f-e084bdaf0f1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b77fb85-a6d8-4f3e-8493-99ec5b5a6d67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b7b3a34-13ff-45d4-ad0d-ac4bad9d0581	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b7b3a34-13ff-45d4-ad0d-ac4bad9d0581	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+7b7b3a34-13ff-45d4-ad0d-ac4bad9d0581	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 7b7e622c-815a-44a0-88ff-62bbe8dd5582	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b7e622c-815a-44a0-88ff-62bbe8dd5582	f0/t0	NULL	owed	refused:no-generator:trigger:Evolved	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7b7e622c-815a-44a0-88ff-62bbe8dd5582	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b9b3347-a374-40fd-a12a-73187225194e	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 7b9ddff4-82f5-4068-8105-116b8a6180d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b9ddff4-82f5-4068-8105-116b8a6180d5	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:clockwork-beetle:f0t0:s1,f:xs:XP:clockwork-beetle:f0t0:s1	-	-	-	d864b561c9cb	-	36546fae0649	-	-	2026-11-24	xproof
-7b9ddff4-82f5-4068-8105-116b8a6180d5	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7b9ddff4-82f5-4068-8105-116b8a6180d5	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 7b9fafe7-d26a-4ed5-b4c4-ce13763770b5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b9fafe7-d26a-4ed5-b4c4-ce13763770b5	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b9fafe7-d26a-4ed5-b4c4-ce13763770b5	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
