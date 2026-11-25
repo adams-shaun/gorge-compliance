@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 420d09b5-aced-4f71-914c-90d19f7476dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 420d09b5-aced-4f71-914c-90d19f7476dc	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 42176320-ee7f-44c9-916e-5ee4a6108be3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42176320-ee7f-44c9-916e-5ee4a6108be3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+42176320-ee7f-44c9-916e-5ee4a6108be3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 421c661a-24d9-4797-b538-2a4243825628	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42208fea-8c24-451f-861d-6d70c0a7a502	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42226b87-0746-4ebf-9fd0-108d508462af	cast	cast	agreed	-	F	start	2	0	f:xs:XP:clone:cast:s1	-	-	-	25696bf19d5b	-	9473363c4d09	-	-	2026-11-24	xproof
@@ -36,8 +36,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 423a1fc2-f623-4b5f-9a3e-7f63b2f3cf5d	f0/t0	ChangesZone/Persist	agreed	-	FX	start	2	0	x:xs:XP:scuzzback-marauders:f0t0:s1,f:xs:XP:scuzzback-marauders:f0t0:s1	-	-	-	3aa6ded33acb	-	0c08a3c1bc80	-	-	2026-11-25	xproof
 423bebcc-8fa0-49c4-aa22-728bf51a535b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 423bebcc-8fa0-49c4-aa22-728bf51a535b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-423c1079-bdba-42fc-8732-59cb83ebafc3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sibsig-muckdraggers:cast:s1,f:xs:XP:sibsig-muckdraggers:cast:s1	-	-	-	fb9d3088f0bf	-	3cf1e1c2512f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-423c1079-bdba-42fc-8732-59cb83ebafc3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sibsig-muckdraggers:cast:s1,f:xs:XP:sibsig-muckdraggers:cast:s1	-	-	-	fb9d3088f0bf	-	3cf1e1c2512f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+423c1079-bdba-42fc-8732-59cb83ebafc3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sibsig-muckdraggers:cast:s1,f:xs:XP:sibsig-muckdraggers:cast:s1	-	-	-	fb9d3088f0bf	-	3cf1e1c2512f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+423c1079-bdba-42fc-8732-59cb83ebafc3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sibsig-muckdraggers:cast:s1,f:xs:XP:sibsig-muckdraggers:cast:s1	-	-	-	fb9d3088f0bf	-	3cf1e1c2512f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 423c8465-82cd-4f54-b5ac-022b7ebcf3e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 423c8465-82cd-4f54-b5ac-022b7ebcf3e4	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 42441362-d638-423a-8928-ab3fd9b2d4f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

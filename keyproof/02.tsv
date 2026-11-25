@@ -20,8 +20,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 020aae46-cdba-4c37-9c54-283727c09994	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:taster-of-wares:f0t0:s1,f:xs:XP:taster-of-wares:f0t0:s1	-	-	-	267e485f6204	-	51f38a5d7eb2	-	-	2026-11-24	xproof
 020c26ba-ed46-47c3-925c-b9f32500f503	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-s-scorn:cast:s1,f:xs:XP:vraska-s-scorn:cast:s1	-	-	-	d864b561c9cb	-	11a091cec606	-	-	2026-11-24	xproof
 020d0c91-da68-40da-8561-5522377f3d07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-020d561b-2e5d-439e-9e6a-318d23e73542	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Uldaros Theorix"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-020d561b-2e5d-439e-9e6a-318d23e73542	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Uldaros Theorix"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+020d561b-2e5d-439e-9e6a-318d23e73542	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Uldaros Theorix"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+020d561b-2e5d-439e-9e6a-318d23e73542	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Uldaros Theorix"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 020de6d7-f5a2-4036-ad25-451e5977b4d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beza-the-bounding-spring:cast:s1,f:xs:XP:beza-the-bounding-spring:cast:s1	-	-	-	5437c1394672	-	ca79c25e5206	-	-	2026-11-24	xproof
 020de6d7-f5a2-4036-ad25-451e5977b4d4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:beza-the-bounding-spring:cast:s1,f:xs:XP:beza-the-bounding-spring:cast:s1	-	-	-	5437c1394672	-	ca79c25e5206	-	-	2026-11-24	xproof
 02125db4-4507-467a-ac0c-406de2c7d533	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 027dd013-baa7-4111-b3c9-f4d1414e9c45	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 027dd013-baa7-4111-b3c9-f4d1414e9c45	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0282b5c0-e792-4099-a3fa-329eda11fb44	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:odunos-river-trawler:f0t0:s1,f:xs:XP:odunos-river-trawler:f0t0:s1	-	-	-	d864b561c9cb	-	1241b08f8064	-	-	2026-11-24	xproof
-0282b5c0-e792-4099-a3fa-329eda11fb44	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+0282b5c0-e792-4099-a3fa-329eda11fb44	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0282b5c0-e792-4099-a3fa-329eda11fb44	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:odunos-river-trawler:f0t0:s1,f:xs:XP:odunos-river-trawler:f0t0:s1	-	-	-	d864b561c9cb	-	1241b08f8064	-	-	2026-11-24	xproof
 028335db-58f6-47fe-8c6a-f336d0d91fb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0283bf5e-ddf2-4a4a-a7cf-d3e27eed7e7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02c60b8b-f665-4279-a00f-ae03991df4a6	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 02d25219-888d-4032-9e9e-8c6f879a9084	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghostly-touch:cast:s1,f:xs:XP:ghostly-touch:cast:s1	-	-	-	3aa6ded33acb	-	c66b62fb6d5d	-	-	2026-11-25	xproof
 02d4c3a8-c733-45c1-bca5-51eed47c9230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02d4c3a8-c733-45c1-bca5-51eed47c9230	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+02d4c3a8-c733-45c1-bca5-51eed47c9230	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 02d4fe7d-ade4-40b1-b323-73a52c440525	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02d50c11-51e3-4b3f-bf3d-3b1775d514f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02d69413-e040-46b1-8f58-69bde666329d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

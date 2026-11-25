@@ -16,8 +16,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f1b5cea-2035-444c-9f63-87dcb9782c74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-0f208cd3-7673-4380-9cb8-5b6f09966ebd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lake-town-toymaker:cast:s1,f:xs:XP:lake-town-toymaker:cast:s1	-	-	-	fb9d3088f0bf	-	b7ade4294288	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-0f208cd3-7673-4380-9cb8-5b6f09966ebd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lake-town-toymaker:f0t0:s1,f:xs:XP:lake-town-toymaker:f0t0:s1	-	-	-	fb9d3088f0bf	-	b7ade4294288	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+0f208cd3-7673-4380-9cb8-5b6f09966ebd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lake-town-toymaker:cast:s1,f:xs:XP:lake-town-toymaker:cast:s1	-	-	-	fb9d3088f0bf	-	b7ade4294288	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+0f208cd3-7673-4380-9cb8-5b6f09966ebd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lake-town-toymaker:f0t0:s1,f:xs:XP:lake-town-toymaker:f0t0:s1	-	-	-	fb9d3088f0bf	-	b7ade4294288	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0f222f3d-f02b-42b9-aedf-fb7ed92d4889	cast	cast-resolve	agreed	-	FX	scen	2	0	Two-Headed Hunter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f222f3d-f02b-42b9-aedf-fb7ed92d4889	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Two-Headed Hunter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f222f3d-f02b-42b9-aedf-fb7ed92d4889	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Two-Headed Hunter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -77,8 +77,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f71416c-e244-48b4-acbe-2a8ef540db0f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:llanowar-empath:cast:s1,f:xs:XP:llanowar-empath:cast:s1	-	-	-	d864b561c9cb	-	fdec1f02adfb	-	-	2026-11-24	xproof
 0f730bd9-2060-46b1-9208-0ac6562e8b2a	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 0f772f35-6d98-4ac8-88e5-02539737078b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f772f35-6d98-4ac8-88e5-02539737078b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-0f772f35-6d98-4ac8-88e5-02539737078b	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+0f772f35-6d98-4ac8-88e5-02539737078b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+0f772f35-6d98-4ac8-88e5-02539737078b	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0f77c0c9-4dc4-489a-b547-e93287c4d1a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f786c99-d245-4b11-bcce-6e13fb1255cc	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	b4cc5002948c	-	-	2026-11-24	xproof
 0f7a7348-3081-4fbb-9386-719a4ae7fa57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -95,8 +95,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f8b97fe-3e5e-47c2-9a9d-7f77482aa159	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:azami-lady-of-scrolls:cast:s1,f:xs:XP:azami-lady-of-scrolls:cast:s1	-	-	-	25696bf19d5b	-	d88ee124de66	-	-	2026-11-24	xproof
 0f8b97fe-3e5e-47c2-9a9d-7f77482aa159	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:azami-lady-of-scrolls:cast:s1,f:xs:XP:azami-lady-of-scrolls:cast:s1	-	-	-	25696bf19d5b	-	d88ee124de66	-	-	2026-11-24	xproof
 0f8de7f0-c61d-415d-b4db-4959374343da	cast	cast-resolve	agreed	-	FX	scen	2	0	Denzilore Fatehold/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0f8de7f0-c61d-415d-b4db-4959374343da	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:denzilore-fatehold:combat0.attack:s1,f:xs:XP:denzilore-fatehold:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	bcf6e272914f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-0f8de7f0-c61d-415d-b4db-4959374343da	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:denzilore-fatehold:combat0.block:s1,f:xs:XP:denzilore-fatehold:combat0.block:s1	-	-	-	fb9d3088f0bf	-	bcf6e272914f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+0f8de7f0-c61d-415d-b4db-4959374343da	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:denzilore-fatehold:combat0.attack:s1,f:xs:XP:denzilore-fatehold:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	bcf6e272914f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+0f8de7f0-c61d-415d-b4db-4959374343da	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:denzilore-fatehold:combat0.block:s1,f:xs:XP:denzilore-fatehold:combat0.block:s1	-	-	-	fb9d3088f0bf	-	bcf6e272914f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0f8de7f0-c61d-415d-b4db-4959374343da	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Denzilore Fatehold/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f8de7f0-c61d-415d-b4db-4959374343da	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Denzilore Fatehold/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f8ebf11-b5ec-4f21-8c49-90d569b5a4c5	cast	cast-resolve	agreed	-	FX	scen	2	0	Worthy Cost/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -163,8 +163,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fcd476f-4db8-4293-9388-1678a0043c9e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grinding-station:f0t0:s1,f:xs:XP:grinding-station:f0t0:s1	-	-	-	23c4009444b0	-	519d5ecb0865	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0fcfef04-a954-4423-82b0-c70dc64a8fbc	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0fd114c4-092b-4e28-b0dc-ef529f3bc73e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fd11de4-2dfd-4345-b3cb-d7d65e11c6d9	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-0fd11de4-2dfd-4345-b3cb-d7d65e11c6d9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+0fd11de4-2dfd-4345-b3cb-d7d65e11c6d9	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+0fd11de4-2dfd-4345-b3cb-d7d65e11c6d9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0fd18a9b-c112-4e48-8fd7-e53fe4500943	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fd27f59-36ec-4235-8e1f-4a4a14972f4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fd57894-b917-41c8-a394-360d1d31b236	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

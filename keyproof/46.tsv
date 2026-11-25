@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 464a930a-79d5-4436-864d-3ce9f29475ae	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:champions-of-minas-tirith:f0t0:s1,f:xs:XP:champions-of-minas-tirith:f0t0:s1	-	-	-	8c0bd19283bb	-	5710795f8023	-	-	2026-11-24	xproof
 464a930a-79d5-4436-864d-3ce9f29475ae	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 464bfcdb-a82b-4573-92a4-c5e463724fbe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-464bfcdb-a82b-4573-92a4-c5e463724fbe	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+464bfcdb-a82b-4573-92a4-c5e463724fbe	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 464c0150-3dbc-403b-9ada-fef25ab1f29d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 464c0150-3dbc-403b-9ada-fef25ab1f29d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 464df46a-079b-47c1-95e7-930160abef2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brallin-skyshark-rider:f0t1:s1,f:xs:XP:brallin-skyshark-rider:f0t1:s1	-	-	-	23c4009444b0	-	4aa10a587369	-	-	2026-11-25	xproof
@@ -101,7 +101,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46752289-01e8-4839-8889-49db1efd2e1a	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:armored-guardian:f0a1:s1,f:xs:XP:armored-guardian:f0a1:s1	-	-	-	5f2128bf97e4	-	57e1b48e33e1	-	-	2026-11-24	xproof
 46762944-8364-45c4-8008-e693e97ddc46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46779609-4fa7-4fd2-b5b4-7d4d749339e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-46779609-4fa7-4fd2-b5b4-7d4d749339e6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:courser-of-kruphix:f0t0:s1,f:xs:XP:courser-of-kruphix:f0t0:s1	-	-	-	fb9d3088f0bf	-	f87293cadb8a	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+46779609-4fa7-4fd2-b5b4-7d4d749339e6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:courser-of-kruphix:f0t0:s1,f:xs:XP:courser-of-kruphix:f0t0:s1	-	-	-	fb9d3088f0bf	-	f87293cadb8a	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 467c526a-02a7-405d-98de-c632ea83519b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:you-find-some-prisoners:cast:s1,f:xs:XP:you-find-some-prisoners:cast:s1	-	-	-	ae86f6029288	-	1ce1e92c934f	-	-	2026-11-24	xproof
 467c9fe6-d1d3-4242-bc0c-e522b4f21d56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 467c9fe6-d1d3-4242-bc0c-e522b4f21d56	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4681facf-21ca-4118-a827-0e3d4233d8e6	cast	cast-resolve	agreed	-	FX	scen	2	0	Canyon Crab/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4681facf-21ca-4118-a827-0e3d4233d8e6	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Canyon Crab/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4681facf-21ca-4118-a827-0e3d4233d8e6	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Canyon Crab/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4682c39e-c21a-4c8b-bc63-9cbac59dc563	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+4682c39e-c21a-4c8b-bc63-9cbac59dc563	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 468604f2-52e6-4bb1-8a4f-ad0851288cba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 468604f2-52e6-4bb1-8a4f-ad0851288cba	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:centaur-safeguard:f0t0:s1,f:xs:XP:centaur-safeguard:f0t0:s1	-	-	-	d864b561c9cb	-	31f8caab8b01	-	-	2026-11-24	xproof
 468658bc-19d8-464a-ab8e-d36281680273	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -52,7 +52,7 @@ f732873e-0b34-4ccc-8b4c-9f02463ba57b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 f732873e-0b34-4ccc-8b4c-9f02463ba57b	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:exemplar-of-strength:f0t1:s1,f:xs:XP:exemplar-of-strength:f0t1:s1	-	-	-	d864b561c9cb	-	42c262a7b73f	-	-	2026-11-24	xproof
 f73416a8-40e5-4791-948f-147ef2221ee7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f73979bb-91a5-4388-b70b-0cd7a4e14291	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f73979bb-91a5-4388-b70b-0cd7a4e14291	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+f73979bb-91a5-4388-b70b-0cd7a4e14291	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 f73979bb-91a5-4388-b70b-0cd7a4e14291	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f73c7edf-ed2c-41e8-ac83-c83ddd543f14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f73c7edf-ed2c-41e8-ac83-c83ddd543f14	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -180,9 +180,9 @@ f7b6f5d4-b122-4ab4-a2c2-449ac781359a	f0/a0	AlterAttribute/Saddle	agreed	-	FX	sta
 f7b6f5d4-b122-4ab4-a2c2-449ac781359a	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:lagorin-soul-of-alacria:f0a0:s1,f:xs:XP:lagorin-soul-of-alacria:f0a0:s1	-	-	-	23c4009444b0	-	893803870f76	-	-	2026-11-25	xproof
 f7b70077-5518-45f9-9833-01a4f8afac71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7b70077-5518-45f9-9833-01a4f8afac71	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
-f7b754d3-9863-420d-895d-00e70b8b078a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:danitha-sword-of-hope:cast:s1,f:xs:XP:danitha-sword-of-hope:cast:s1	-	-	-	fb9d3088f0bf	-	6a1a0f2ff1d5	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-f7b754d3-9863-420d-895d-00e70b8b078a	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:danitha-sword-of-hope:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	6a1a0f2ff1d5	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-f7b754d3-9863-420d-895d-00e70b8b078a	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:danitha-sword-of-hope:combat0.block:s1	-	-	-	fb9d3088f0bf	-	6a1a0f2ff1d5	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+f7b754d3-9863-420d-895d-00e70b8b078a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:danitha-sword-of-hope:cast:s1,f:xs:XP:danitha-sword-of-hope:cast:s1	-	-	-	fb9d3088f0bf	-	6a1a0f2ff1d5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+f7b754d3-9863-420d-895d-00e70b8b078a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:danitha-sword-of-hope:combat0.attack:s1,f:xs:XP:danitha-sword-of-hope:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	6a1a0f2ff1d5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+f7b754d3-9863-420d-895d-00e70b8b078a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:danitha-sword-of-hope:combat0.block:s1,f:xs:XP:danitha-sword-of-hope:combat0.block:s1	-	-	-	fb9d3088f0bf	-	6a1a0f2ff1d5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 f7b754d3-9863-420d-895d-00e70b8b078a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Danitha, Sword of Hope/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f7c237e6-17a4-4e72-8cc3-456aec738394	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barrin-s-codex:f0t0:s1,f:xs:XP:barrin-s-codex:f0t0:s1	-	-	-	3aa6ded33acb	-	16280847b9ce	-	-	2026-11-25	xproof
 f7c237e6-17a4-4e72-8cc3-456aec738394	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:barrin-s-codex:f0t0:s1,f:xs:XP:barrin-s-codex:f0t0:s1	-	-	-	3aa6ded33acb	-	16280847b9ce	-	-	2026-11-25	xproof
@@ -229,6 +229,6 @@ f7f78825-10d6-441a-ae26-51b77cc271cd	f0/t1	ChangesZone/For Mirrodin	agreed	-	FX	
 f7f8a186-313e-4a29-bf4e-b6a200dfd1ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7fa054f-39cb-47d3-a55d-3f70ae164063	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7fa6ac0-70db-4586-b881-5a19db644dfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f7fa6ac0-70db-4586-b881-5a19db644dfb	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+f7fa6ac0-70db-4586-b881-5a19db644dfb	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 f7ff0046-8365-4ea4-9872-583d140f7b3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7ff0046-8365-4ea4-9872-583d140f7b3f	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof

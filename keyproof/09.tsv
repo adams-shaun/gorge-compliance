@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09618da4-6e2d-4047-96d7-0576c0754e7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:end-the-festivities:cast:s1,f:xs:XP:end-the-festivities:cast:s1	-	-	-	ae86f6029288	-	f5d92a3bdf62	-	-	2026-11-24	xproof
 0961b68d-bb0c-4bfb-ad78-01f90b3b97c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0964288c-0397-428a-9a84-784aaea4e040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0964288c-0397-428a-9a84-784aaea4e040	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+0964288c-0397-428a-9a84-784aaea4e040	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 09650a76-05c4-40a0-b861-d146b3ba87d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09650a76-05c4-40a0-b861-d146b3ba87d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09650a76-05c4-40a0-b861-d146b3ba87d6	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09cacd93-5c20-4993-9ee2-a756204796f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eyeblight-assassin:f0t0:s1,f:xs:XP:eyeblight-assassin:f0t0:s1	-	-	-	d864b561c9cb	-	2215aeb79f89	-	-	2026-11-24	xproof
 09cacd93-5c20-4993-9ee2-a756204796f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eyeblight-assassin:f0t0:s1,f:xs:XP:eyeblight-assassin:f0t0:s1	-	-	-	d864b561c9cb	-	2215aeb79f89	-	-	2026-11-24	xproof
 09cc0faa-71d7-428b-9fc4-5ba09e244e89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09cc0faa-71d7-428b-9fc4-5ba09e244e89	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+09cc0faa-71d7-428b-9fc4-5ba09e244e89	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 09cc2cda-14d1-424e-a688-1b49b1b4c392	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09cc2cda-14d1-424e-a688-1b49b1b4c392	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 09cc8709-fe10-472a-b05c-e89f3523018d	cast	cast-resolve	agreed	-	FX	scen	2	0	Austere Command/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -201,7 +201,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09f09d0a-6054-4545-b81e-0295773cc5f0	cast	cast-resolve	agreed	-	X	scen	1	0	The Arkenstone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 09f09d0a-6054-4545-b81e-0295773cc5f0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Arkenstone/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 09f09d0a-6054-4545-b81e-0295773cc5f0	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Arkenstone/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-09f3d60c-34ee-41ec-a047-fe2140b11950	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dead-drop:cast:s1,f:xs:XP:dead-drop:cast:s1	-	-	-	fb9d3088f0bf	-	fadf2626f42c	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+09f3d60c-34ee-41ec-a047-fe2140b11950	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dead-drop:cast:s1,f:xs:XP:dead-drop:cast:s1	-	-	-	fb9d3088f0bf	-	fadf2626f42c	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 09f52275-99e6-45e0-b2db-cafe26d5fb91	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09f52275-99e6-45e0-b2db-cafe26d5fb91	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09f73f77-a9bc-4718-be7d-ba6e08576e3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

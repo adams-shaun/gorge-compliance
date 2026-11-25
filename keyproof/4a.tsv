@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a338863-d599-46e7-9c30-e11b898ae1b0	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:chitterspitter:f0t0:s1,f:xs:XP:chitterspitter:f0t0:s1	-	-	-	3aa6ded33acb	-	7baa12d93cc6	-	-	2026-11-25	xproof
 4a37f4a0-2869-4f81-b51b-4c3e7e0e0671	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-anguish:f0t0:s1,f:xs:XP:ajani-s-anguish:f0t0:s1	-	-	-	25696bf19d5b	-	25c0b465fa48	-	-	2026-11-24	xproof
 4a37f4a0-2869-4f81-b51b-4c3e7e0e0671	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-anguish:f0t0:s1,f:xs:XP:ajani-s-anguish:f0t0:s1	-	-	-	25696bf19d5b	-	25c0b465fa48	-	-	2026-11-24	xproof
-4a37f4a0-2869-4f81-b51b-4c3e7e0e0671	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-anguish:static0.0:s1,f:xs:XP:ajani-s-anguish:static0.0:s1	-	-	-	fb9d3088f0bf	-	25c0b465fa48	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+4a37f4a0-2869-4f81-b51b-4c3e7e0e0671	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-anguish:static0.0:s1,f:xs:XP:ajani-s-anguish:static0.0:s1	-	-	-	fb9d3088f0bf	-	25c0b465fa48	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 4a3a25ae-61f5-4bcd-ae3d-4b31feaa83d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a3a25ae-61f5-4bcd-ae3d-4b31feaa83d8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a3a25ae-61f5-4bcd-ae3d-4b31feaa83d8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a4dc133-541f-456b-a95f-3d707e1c95e9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a4dc133-541f-456b-a95f-3d707e1c95e9	f0/a2	Draw	agreed	-	FX	start	2	0	x:xs:XP:jace-memory-adept:f0a2:s1,f:xs:XP:jace-memory-adept:f0a2:s1	-	-	-	23c4009444b0	-	56883c34a1e1	-	-	2026-11-25	xproof
 4a4f6e85-df16-49a4-8fc6-149a28c2cb42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a4f6e85-df16-49a4-8fc6-149a28c2cb42	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+4a4f6e85-df16-49a4-8fc6-149a28c2cb42	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 4a574140-0657-4f49-b497-331447f17b29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a574140-0657-4f49-b497-331447f17b29	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 4a58954a-1d20-48b8-847c-3615de67e122	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:warbriar-blessing:cast:s1,f:xs:XP:warbriar-blessing:cast:s1	-	-	-	ae86f6029288	-	663174100080	-	-	2026-11-24	xproof
@@ -85,10 +85,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a678c6f-5a93-4a3b-80fd-4c0d0f9040c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a6887e3-7a65-4f24-be71-183b00a0ad56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a6887e3-7a65-4f24-be71-183b00a0ad56	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garruk-veiled-butcher:cast:s1,f:xs:XP:garruk-veiled-butcher:cast:s1	-	-	-	fb9d3088f0bf	-	d4380b8999ab	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	f0/a0	Pump	agreed	-	FX	start	3	0	x:xs:XP:garruk-veiled-butcher:cast:s2,f:xs:XP:garruk-veiled-butcher:cast:s2	-	-	-	fb9d3088f0bf	-	d4380b8999ab	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	f0/a1	Sacrifice	agreed	-	FX	start	3	0	x:xs:XP:garruk-veiled-butcher:cast:s1,f:xs:XP:garruk-veiled-butcher:cast:s1	-	-	-	fb9d3088f0bf	-	d4380b8999ab	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	f0/a2	Discard	agreed	-	FX	start	2	0	x:xs:XP:garruk-veiled-butcher:f0a2:s1,f:xs:XP:garruk-veiled-butcher:f0a2:s1	-	-	-	fb9d3088f0bf	-	d4380b8999ab	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garruk-veiled-butcher:cast:s1,f:xs:XP:garruk-veiled-butcher:cast:s1	-	-	-	fb9d3088f0bf	-	d4380b8999ab	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:garruk-veiled-butcher:cast:s1,f:xs:XP:garruk-veiled-butcher:cast:s1	-	-	-	fb9d3088f0bf	-	d4380b8999ab	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	f0/a1	Sacrifice	agreed	-	FX	start	2	0	x:xs:XP:garruk-veiled-butcher:f0a1:s1,f:xs:XP:garruk-veiled-butcher:f0a1:s1	-	-	-	fb9d3088f0bf	-	d4380b8999ab	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+4a6972fe-348a-4a19-a1d0-bdf8f1f9c792	f0/a2	Discard	agreed	-	FX	start	2	0	x:xs:XP:garruk-veiled-butcher:f0a2:s1,f:xs:XP:garruk-veiled-butcher:f0a2:s1	-	-	-	fb9d3088f0bf	-	d4380b8999ab	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 4a71f404-e48d-4c86-882e-4e21c8210dea	cast	cast	agreed	-	F	start	2	0	f:xs:XP:topplegeist:f0t1:s1	-	-	-	3aa6ded33acb	-	436c4ccfa59e	-	-	2026-11-25	xproof
 4a71f404-e48d-4c86-882e-4e21c8210dea	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:topplegeist:f0t1:s1	-	-	-	3aa6ded33acb	-	436c4ccfa59e	-	-	2026-11-25	xproof
 4a71f404-e48d-4c86-882e-4e21c8210dea	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:topplegeist:f0t1:s1	-	-	-	3aa6ded33acb	-	436c4ccfa59e	-	-	2026-11-25	xproof

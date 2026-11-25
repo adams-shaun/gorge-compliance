@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d4ef98d-228e-41ff-9133-53f0987e58d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d51d448-14a6-4125-aa80-159ed6afbd03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d579f04-b494-41a1-ba7c-b9779f75b818	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d579f04-b494-41a1-ba7c-b9779f75b818	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+8d579f04-b494-41a1-ba7c-b9779f75b818	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 8d5a8513-0728-46ff-be72-3aefa07c7658	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d5a8513-0728-46ff-be72-3aefa07c7658	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:silent-chant-zubera:f0t0:s1,f:xs:XP:silent-chant-zubera:f0t0:s1	-	-	-	23c4009444b0	-	933eea06b127	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8d6ad0a0-3b71-4fab-8874-470285c39299	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fruit-of-tizerus:cast:s1,f:xs:XP:fruit-of-tizerus:cast:s1	-	-	-	ae86f6029288	-	f93859e348af	-	-	2026-11-24	xproof
@@ -74,9 +74,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d8682f3-9ef3-4aa7-9ea6-8a2ce09bff6f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d877ee9-1751-48a1-9f2f-02897dae153b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sagu-mauler:cast:s1,f:xs:XP:sagu-mauler:cast:s1	-	-	-	d864b561c9cb	-	4cdd5ec72bdb	-	-	2026-11-24	xproof
 8d88facd-cf7e-498e-ab6b-6bd021316162	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gollum-the-abandoned:f0t0:s1,f:xs:XP:gollum-the-abandoned:f0t0:s1	-	-	-	25696bf19d5b	-	41de331f124f	-	-	2026-11-24	xproof
-8d88facd-cf7e-498e-ab6b-6bd021316162	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gollum-the-abandoned:combat0.attack:s1,f:xs:XP:gollum-the-abandoned:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	41de331f124f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+8d88facd-cf7e-498e-ab6b-6bd021316162	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gollum-the-abandoned:combat0.attack:s1,f:xs:XP:gollum-the-abandoned:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	41de331f124f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 8d88facd-cf7e-498e-ab6b-6bd021316162	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gollum the Abandoned/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8d88facd-cf7e-498e-ab6b-6bd021316162	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:gollum-the-abandoned:f0a0:s1,f:xs:XP:gollum-the-abandoned:f0a0:s1	-	-	-	fb9d3088f0bf	-	41de331f124f	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+8d88facd-cf7e-498e-ab6b-6bd021316162	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:gollum-the-abandoned:f0a0:s1,f:xs:XP:gollum-the-abandoned:f0a0:s1	-	-	-	fb9d3088f0bf	-	41de331f124f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 8d88facd-cf7e-498e-ab6b-6bd021316162	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gollum-the-abandoned:f0t0:s1,f:xs:XP:gollum-the-abandoned:f0t0:s1	-	-	-	25696bf19d5b	-	41de331f124f	-	-	2026-11-24	xproof
 8d88facd-cf7e-498e-ab6b-6bd021316162	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gollum the Abandoned/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d8981df-4cdc-4fd4-acd8-095fa3281281	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -127,7 +127,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8dcfa697-5350-43b9-896f-c5eefcc3893a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8dcfa697-5350-43b9-896f-c5eefcc3893a	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 8dd0f86d-6f9e-47e3-97dd-3a3fc075ea93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wurmcalling:cast:s1,f:xs:XP:wurmcalling:cast:s1	-	-	-	9ee19e8250ce	-	0f85be438f48	-	-	2026-11-24	xproof
-8dd23c50-cc84-4064-89cd-8d52fbfbd4ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:break-under-pressure:cast:s1,f:xs:XP:break-under-pressure:cast:s1	-	-	-	fb9d3088f0bf	-	337db7ef7ca7	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+8dd23c50-cc84-4064-89cd-8d52fbfbd4ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:break-under-pressure:cast:s1,f:xs:XP:break-under-pressure:cast:s1	-	-	-	fb9d3088f0bf	-	337db7ef7ca7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 8dd2e73a-d1b4-4d26-857f-9eb8e384c8ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iroh-s-demonstration:cast:s1,f:xs:XP:iroh-s-demonstration:cast:s1	-	-	-	23c4009444b0	-	d080a504950f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8dd473c7-afd9-40f1-bb8e-0a00f4687318	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-flayer:f0t0:s1,f:xs:XP:mind-flayer:f0t0:s1	-	-	-	d864b561c9cb	-	8e3eb73c93d9	-	-	2026-11-24	xproof
 8dd473c7-afd9-40f1-bb8e-0a00f4687318	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mind-flayer:f0t0:s1,f:xs:XP:mind-flayer:f0t0:s1	-	-	-	d864b561c9cb	-	8e3eb73c93d9	-	-	2026-11-24	xproof

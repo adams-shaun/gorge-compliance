@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 871e4c4e-8105-4cb9-b1cd-53c5f8e64494	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 87217160-0687-4482-b9a3-91bad8527675	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87217160-0687-4482-b9a3-91bad8527675	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-87217160-0687-4482-b9a3-91bad8527675	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:soul-of-zendikar:f0a1:s1,f:xs:XP:soul-of-zendikar:f0a1:s1	-	-	-	fb9d3088f0bf	-	c296422294e5	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+87217160-0687-4482-b9a3-91bad8527675	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:soul-of-zendikar:f0a1:s1,f:xs:XP:soul-of-zendikar:f0a1:s1	-	-	-	fb9d3088f0bf	-	c296422294e5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 8721b0a6-52ff-4749-92db-82bb36f5a73e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:search-party-captain:f0t0:s1,f:xs:XP:search-party-captain:f0t0:s1	-	-	-	d864b561c9cb	-	150fa4b2e637	-	-	2026-11-24	xproof
 8721b0a6-52ff-4749-92db-82bb36f5a73e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:search-party-captain:f0t0:s1,f:xs:XP:search-party-captain:f0t0:s1	-	-	-	d864b561c9cb	-	150fa4b2e637	-	-	2026-11-24	xproof
 8727284f-e9a6-49ea-9fb8-1076883ceecf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,9 +126,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8790c7be-c14a-4293-bc4a-3d0efe42ed79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8790c7be-c14a-4293-bc4a-3d0efe42ed79	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8790f842-e842-4bed-adf4-5b3cc5fd68a9	cast	cast-resolve	agreed	-	FX	scen	2	0	Old Fat Spider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8790f842-e842-4bed-adf4-5b3cc5fd68a9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:old-fat-spider:combat0.attack:s1,f:xs:XP:old-fat-spider:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	36ba178a90bd	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+8790f842-e842-4bed-adf4-5b3cc5fd68a9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:old-fat-spider:combat0.attack:s1,f:xs:XP:old-fat-spider:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	36ba178a90bd	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 8790f842-e842-4bed-adf4-5b3cc5fd68a9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Old Fat Spider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8790f842-e842-4bed-adf4-5b3cc5fd68a9	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:old-fat-spider:f0t0:s1,f:xs:XP:old-fat-spider:f0t0:s1	-	-	-	fb9d3088f0bf	-	36ba178a90bd	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+8790f842-e842-4bed-adf4-5b3cc5fd68a9	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:old-fat-spider:f0t0:s1,f:xs:XP:old-fat-spider:f0t0:s1	-	-	-	fb9d3088f0bf	-	36ba178a90bd	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 8790f842-e842-4bed-adf4-5b3cc5fd68a9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Old Fat Spider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8791adf7-16b5-4692-9eaa-0d0c58867d9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8791adf7-16b5-4692-9eaa-0d0c58867d9d	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:sightless-ghoul:f0t0:s1,f:xs:XP:sightless-ghoul:f0t0:s1	-	-	-	3aa6ded33acb	-	8842e4c8ba09	-	-	2026-11-25	xproof
@@ -180,9 +180,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87bafa97-38fd-41a2-8b1d-315e88d9d0bf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87bc6be7-4734-4a11-806e-e9e4f5616fe0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carrion-ants:cast:s1,f:xs:XP:carrion-ants:cast:s1	-	-	-	ae86f6029288	-	8003b5d3dc68	-	-	2026-11-24	xproof
 87bc6be7-4734-4a11-806e-e9e4f5616fe0	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:carrion-ants:f0a0:s1,f:xs:XP:carrion-ants:f0a0:s1	-	-	-	ae86f6029288	-	8003b5d3dc68	-	-	2026-11-24	xproof
-87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Blastoneuron"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Blastoneuron"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Blastoneuron"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Blastoneuron"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 87bd0fdb-c5b9-46ea-9858-1a870960351f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87bedc9b-b4d2-41b6-b9f1-e1aeb8e75ec3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rootrider-faun:cast:s1,f:xs:XP:rootrider-faun:cast:s1	-	-	-	23b491658465	-	49fc9009d343	-	-	2026-11-24	xproof
 87bedc9b-b4d2-41b6-b9f1-e1aeb8e75ec3	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:rootrider-faun:f0a0:s1,f:xs:XP:rootrider-faun:f0a0:s1	-	-	-	23b491658465	-	49fc9009d343	-	-	2026-11-24	xproof
@@ -214,7 +214,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87f1a840-021c-4699-a2c4-f2926daf98eb	cast	cast-resolve	agreed	-	FX	scen	2	0	Hero in Training/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87f1a840-021c-4699-a2c4-f2926daf98eb	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87f22ec6-6668-4e15-b38c-fa1ac0292c6b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:predatory-impetus:cast:s1,f:xs:XP:predatory-impetus:cast:s1	-	-	-	23c4009444b0	-	0eac6885e954	-	-	2026-11-25	xproof
-87f39199-3e4b-44fa-8406-62019eb43c10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gallia-the-merrymaker:cast:s1,f:xs:XP:gallia-the-merrymaker:cast:s1	-	-	-	fb9d3088f0bf	-	2965b482977a	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+87f39199-3e4b-44fa-8406-62019eb43c10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gallia-the-merrymaker:cast:s1,f:xs:XP:gallia-the-merrymaker:cast:s1	-	-	-	fb9d3088f0bf	-	2965b482977a	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 87f39199-3e4b-44fa-8406-62019eb43c10	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gallia, the Merrymaker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87f39199-3e4b-44fa-8406-62019eb43c10	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gallia, the Merrymaker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 87f746a3-ca6b-404e-99cc-290a0b23f9c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myojin-of-seeing-winds:cast:s1,f:xs:XP:myojin-of-seeing-winds:cast:s1	-	-	-	64a08ba7d913	-	ae5b0d8a62f8	-	-	2026-11-24	xproof

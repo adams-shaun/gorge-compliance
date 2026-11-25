@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f67b8e0-fbbd-48ef-989d-690d44b70304	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f67b8e0-fbbd-48ef-989d-690d44b70304	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 7f691e0d-dac5-4d7e-8727-dd2cab9a7863	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f691e0d-dac5-4d7e-8727-dd2cab9a7863	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+7f691e0d-dac5-4d7e-8727-dd2cab9a7863	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7f6ddfa2-31ba-4cb7-83e7-1f099e3e8dc3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brass-gnat:f0t0:s1,f:xs:XP:brass-gnat:f0t0:s1	-	-	-	3aa6ded33acb	-	5586e01fa041	-	-	2026-11-25	xproof
 7f6ddfa2-31ba-4cb7-83e7-1f099e3e8dc3	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:brass-gnat:f0t0:s1,f:xs:XP:brass-gnat:f0t0:s1	-	-	-	3aa6ded33acb	-	5586e01fa041	-	-	2026-11-25	xproof
 7f7049e8-49ed-46da-89f7-1e40aefb3b0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -85,16 +85,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f8dad7f-a573-469f-9095-4ba3886b4f0b	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 7f8dad7f-a573-469f-9095-4ba3886b4f0b	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 7f8f46c0-889a-4c9a-9bfa-2b43db608d55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fix-what-s-broken:cast:s1,f:xs:XP:fix-what-s-broken:cast:s1	-	-	-	23c4009444b0	-	6d303e361917	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-7f961374-00b0-40df-83eb-9ced2bb519aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravenhill-flock:cast:s1,f:xs:XP:ravenhill-flock:cast:s1	-	-	-	fb9d3088f0bf	-	588c8afc9ed5	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-7f961374-00b0-40df-83eb-9ced2bb519aa	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ravenhill-flock:combat0.attack:s1,f:xs:XP:ravenhill-flock:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	588c8afc9ed5	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-7f961374-00b0-40df-83eb-9ced2bb519aa	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ravenhill-flock:combat0.block:s1,f:xs:XP:ravenhill-flock:combat0.block:s1	-	-	-	fb9d3088f0bf	-	588c8afc9ed5	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+7f961374-00b0-40df-83eb-9ced2bb519aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravenhill-flock:cast:s1,f:xs:XP:ravenhill-flock:cast:s1	-	-	-	fb9d3088f0bf	-	588c8afc9ed5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+7f961374-00b0-40df-83eb-9ced2bb519aa	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ravenhill-flock:combat0.attack:s1,f:xs:XP:ravenhill-flock:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	588c8afc9ed5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+7f961374-00b0-40df-83eb-9ced2bb519aa	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ravenhill-flock:combat0.block:s1,f:xs:XP:ravenhill-flock:combat0.block:s1	-	-	-	fb9d3088f0bf	-	588c8afc9ed5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7f961374-00b0-40df-83eb-9ced2bb519aa	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ravenhill Flock/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f9a8845-d760-44a7-a4c9-8a20dba4e14a	cast	cast-resolve	agreed	-	X	scen	1	0	Mjölnir, Hammer of Thor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f9a8845-d760-44a7-a4c9-8a20dba4e14a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mjölnir, Hammer of Thor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f9a8845-d760-44a7-a4c9-8a20dba4e14a	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Mjölnir, Hammer of Thor/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7f9bc0c9-0333-4c02-bc14-e6affe848b5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f9d5219-0306-4c39-8640-dcb4314042de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f9d5219-0306-4c39-8640-dcb4314042de	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:altac-bloodseeker:f0t0:s1,f:xs:XP:altac-bloodseeker:f0t0:s1	-	-	-	fb9d3088f0bf	-	8fdefec7461d	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+7f9d5219-0306-4c39-8640-dcb4314042de	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:altac-bloodseeker:f0t0:s1,f:xs:XP:altac-bloodseeker:f0t0:s1	-	-	-	fb9d3088f0bf	-	8fdefec7461d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7fa1430f-cd2e-4071-a161-e32a61e33714	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fa1eca4-0db1-446b-b3cb-15a619ffa97b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spire-owl:f0t0:s1,f:xs:XP:spire-owl:f0t0:s1	-	-	-	5f2128bf97e4	-	047da9adb96a	-	-	2026-11-24	xproof
 7fa1eca4-0db1-446b-b3cb-15a619ffa97b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spire-owl:f0t0:s1,f:xs:XP:spire-owl:f0t0:s1	-	-	-	5f2128bf97e4	-	047da9adb96a	-	-	2026-11-24	xproof

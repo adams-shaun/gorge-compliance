@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7131cdb6-15d0-407e-a7e2-b2a0deef9363	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 713332c1-5bd8-400f-bfff-c1ca0697a043	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:opt:cast:s1,f:xs:XP:opt:cast:s1	-	-	-	23b491658465	-	589e7822d532	-	-	2026-11-24	xproof
 71355b51-e70e-47b0-8460-933af3567141	cast	cast-resolve	agreed	-	FX	scen	2	0	Craterclaw Colossus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-71355b51-e70e-47b0-8460-933af3567141	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+71355b51-e70e-47b0-8460-933af3567141	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 71362163-2ac3-4f8b-86b9-34fe083e2095	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 713641c4-544e-4c25-ab11-10894be2cb53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71366469-04ea-4526-bf24-7abc02fdc5ab	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71393988-ad6f-43fd-9978-c0de15ae8e87	land	land	agreed	-	FX	start	2	0	x:xs:XP:forgotten-monument:land:s1,f:xs:XP:forgotten-monument:land:s1	-	-	-	23b491658465	-	665c833e5bd6	-	-	2026-11-24	xproof
 71393988-ad6f-43fd-9978-c0de15ae8e87	static#0.0	static#0.0	agreed	-	X	scen	1	0	Forgotten Monument/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 713eba2e-d19d-4056-b224-f93857dbdafe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mana-skimmer:cast:s1,f:xs:XP:mana-skimmer:cast:s1	-	-	-	9ee19e8250ce	-	383a3fa051f7	-	-	2026-11-24	xproof
-713eba2e-d19d-4056-b224-f93857dbdafe	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+713eba2e-d19d-4056-b224-f93857dbdafe	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7140d726-0136-43af-84b5-85005a66a186	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7140f396-1bfa-4b28-ba28-fa15eba74652	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:ruins-of-oran-rief:f0a0:s1,f:xs:XP:ruins-of-oran-rief:f0a0:s1	-	-	-	d864b561c9cb	-	199d07c49619	-	-	2026-11-24	xproof
 7140f396-1bfa-4b28-ba28-fa15eba74652	f0/a1	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71af7e54-e22d-4354-a35c-80e4e5f4031c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71b178bd-3b37-4de9-97a3-96e23d5444a4	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 71b5fdf2-4475-4102-85eb-9be164a9ae29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-71b5fdf2-4475-4102-85eb-9be164a9ae29	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+71b5fdf2-4475-4102-85eb-9be164a9ae29	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 71b7d5c4-c16c-4c6b-8e2e-e9b5cc128e1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71b81f3f-6092-4819-8529-e27bccfcf088	cast	cast-resolve	agreed	-	X	scen	1	0	Ragamuffin Raptor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 71b81f3f-6092-4819-8529-e27bccfcf088	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
