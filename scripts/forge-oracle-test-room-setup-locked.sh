@@ -30,7 +30,7 @@ rows=$out/rows.jsonl
 fail() { echo "forge-oracle-test-room-setup-locked: FAIL: $*" >&2; exit 1; }
 
 cat > "$req" <<'JSON'
-{"id":"xs:XP:greenhouse-rickety-gazebo:static0.0:s1","item":{"id":"xs:XP:greenhouse-rickety-gazebo:static0.0:s1","card":"Greenhouse","template":"xproof-start","compare":["offered"],"name":"xproof start Greenhouse // Rickety Gazebo static#0.0 seed 1","turn":1,"cr":[],"why":"A gorge game from a scripted start, replayed from turn 1's first main phase.","setup":{"p0":{"battlefield":["Greenhouse","Forest"],"tapped_after_untap":["Forest"],"library_top":["Forest","Forest","Forest","Forest","Forest"],"life":20},"p1":{"library_top":["Plains","Plains","Plains","Plains","Plains"],"life":20}},"steps":[{"op":"pass","seat":0}]}}
+{"id":"xs:XP:greenhouse-rickety-gazebo:static0.0:s1","scenario_sha":"699f0799f9c0673a81e49f647cc4b59115548dd85731affcba0fa6ce1373ceb6","item":{"id":"xs:XP:greenhouse-rickety-gazebo:static0.0:s1","card":"Greenhouse","template":"xproof-start","compare":["offered"],"name":"xproof start Greenhouse // Rickety Gazebo static#0.0 seed 1","turn":1,"cr":[],"why":"A gorge game from a scripted start, replayed from turn 1's first main phase.","setup":{"p0":{"battlefield":["Greenhouse","Forest"],"tapped_after_untap":["Forest"],"library_top":["Forest","Forest","Forest","Forest","Forest"],"life":20},"p1":{"library_top":["Plains","Plains","Plains","Plains","Plains"],"life":20}},"steps":[{"op":"pass","seat":0}]}}
 JSON
 
 "$here/scripts/forge-oracle-run.sh" "$req" "$rows" \
