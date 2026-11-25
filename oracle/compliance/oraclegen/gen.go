@@ -1958,6 +1958,19 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = manaAllocationAnswers(d)
 				break
 			}
+			if d.Options == 1 && d.Min == 1 && d.Max == 1 && len(d.Picks) == 1 && pickKind(d, 0) == "trigger_cost_tap" {
+				// A triggered optional tap over ONE candidate (Spider-Man, To
+				// the Rescue's "you may tap it", the tap window's part.N == 1):
+				// XMage's card effect poses chooseUse(Outcome.Tap) and taps
+				// the source itself, so the boolean "yes" is the whole answer
+				// -- forwarding the pick's object label would desync the
+				// queue. hasCostPick keeps the ask out of the forced-fold; a
+				// decline keeps the driver's foldedOptionalAnswer FALSE
+				// default. A multi-candidate tap cost (Options > 1) or a Min-0
+				// dyn-tap election keeps its ordinary routing.
+				as = append(as, XAnswer{d.Seat, "choice", "yes"})
+				break
+			}
 			if pickKind(d, 0) == "trigger_cost_pay" && len(d.Picks) == 1 && nonManaTriggerCostPay(d) {
 				// The pay side of a triggered optional cost XMage poses as a
 				// chooseUse. Gorge elected the cost, so answer XMage's
@@ -2470,13 +2483,14 @@ func forcedSingleOption(d rules.OracleDecision) bool {
 }
 
 // hasCostPick reports whether any pick pays a cost through a chooser XMage
-// poses even when the choice is forced: a tap (Crew/Saddle), sacrifice or
-// exile cost. These picks name object identities, so they can never be the
+// poses even when the choice is forced: a tap (Crew/Saddle), a triggered
+// optional tap (Spider-Man, To the Rescue's "you may tap it"), a sacrifice or
+// an exile cost. These picks name object identities, so they can never be the
 // lone-label ask forcedSingleOption drops.
 func hasCostPick(d rules.OracleDecision) bool {
 	for _, k := range d.PickKinds {
 		switch k {
-		case "tapcost", "sacrifice", "exilecost":
+		case "tapcost", "trigger_cost_tap", "sacrifice", "exilecost":
 			return true
 		}
 	}
