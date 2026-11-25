@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 fb084141-cb80-479e-b5d4-114c1f31eb6c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:generous-patron:cast:s1,f:xs:XP:generous-patron:cast:s1	-	-	-	8c0bd19283bb	-	06cdb58fa5ee	-	-	2026-11-24	xproof
 fb084141-cb80-479e-b5d4-114c1f31eb6c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:generous-patron:cast:s1,f:xs:XP:generous-patron:cast:s1	-	-	-	8c0bd19283bb	-	06cdb58fa5ee	-	-	2026-11-24	xproof
-fb084141-cb80-479e-b5d4-114c1f31eb6c	f0/t1	NULL	owed	refused:no-generator:trigger:CounterPlayerAddedAll	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
+fb084141-cb80-479e-b5d4-114c1f31eb6c	f0/t1	NULL	owed	refused:no-generator:trigger:CounterPlayerAddedAll	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 fb0c9048-73ee-434b-a018-dbfbe32e56f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb1369aa-25a2-4e2a-9cbe-6cfe7e238b1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb150d6a-5f81-4fd8-92b2-22a9615bfd4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winter-sky:cast:s1,f:xs:XP:winter-sky:cast:s1	-	-	-	ea3140b6974b	-	6d0c5c1568eb	-	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ fb711b7d-bd7f-48e3-a6de-a12f94ef55d2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 fb7171f8-60a0-4309-93ff-113e1f62113c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mogg-mob:cast:s1,f:xs:XP:mogg-mob:cast:s1	-	-	-	ae86f6029288	-	dab9028581a1	-	-	2026-11-24	xproof
 fb7171f8-60a0-4309-93ff-113e1f62113c	f0/a0	DealDamage	agreed	-	FX	start	4	0	x:xs:XP:mogg-mob:cast:s1,f:xs:XP:mogg-mob:cast:s1	-	-	-	ae86f6029288	-	dab9028581a1	-	-	2026-11-24	xproof
 fb7adbee-a3b0-42bf-988f-9d4faf6bd006	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fb7adbee-a3b0-42bf-988f-9d4faf6bd006	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
+fb7adbee-a3b0-42bf-988f-9d4faf6bd006	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 fb818376-6e87-4aa3-a050-4b5f82942593	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:walker-of-the-wastes:cast:s1,f:xs:XP:walker-of-the-wastes:cast:s1	-	-	-	d864b561c9cb	-	0c51d65b8be9	-	-	2026-11-24	xproof
 fb818d43-8e5d-41aa-98f8-5826dfd5dfdb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:janjeet-sentry:f0t0:s1,f:xs:XP:janjeet-sentry:f0t0:s1	-	-	-	d864b561c9cb	-	65553a2cad5f	-	-	2026-11-24	xproof
 fb818d43-8e5d-41aa-98f8-5826dfd5dfdb	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
@@ -182,7 +182,7 @@ fbed6f1a-e224-413c-b13e-3555caaef02a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ora
 fbed6f1a-e224-413c-b13e-3555caaef02a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:orator-of-ojutai:f0t0:s1,f:xs:XP:orator-of-ojutai:f0t0:s1	-	-	-	3aa6ded33acb	-	e23d7c27e5e7	-	-	2026-11-25	xproof
 fbf074b2-d650-43b2-b8b8-d7a778dfd27e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jokulmorder:f0t0:s1,f:xs:XP:jokulmorder:f0t0:s1	-	-	-	0984227a67dd	-	38d37488016d	-	-	2026-11-24	xproof
 fbf074b2-d650-43b2-b8b8-d7a778dfd27e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jokulmorder:f0t0:s1,f:xs:XP:jokulmorder:f0t0:s1	-	-	-	0984227a67dd	-	38d37488016d	-	-	2026-11-24	xproof
-fbf074b2-d650-43b2-b8b8-d7a778dfd27e	f0/t1	NULL	owed	refused:no-generator:trigger:LandPlayed	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
+fbf074b2-d650-43b2-b8b8-d7a778dfd27e	f0/t1	NULL	owed	refused:no-generator:trigger:LandPlayed	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 fbf0bde7-cb13-402b-b3ab-81c787ce4827	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbf0bde7-cb13-402b-b3ab-81c787ce4827	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:radha-coalition-warlord:f0t0:s1,f:xs:XP:radha-coalition-warlord:f0t0:s1	-	-	-	054d9f516953	-	e3d5b1be4e83	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 fbf2653e-9cc4-442f-bc73-6e2ba6e067cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:early-winter:cast:s1,f:xs:XP:early-winter:cast:s1	-	-	-	3aa6ded33acb	-	47d18a54370a	-	-	2026-11-25	xproof
