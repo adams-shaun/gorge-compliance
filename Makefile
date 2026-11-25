@@ -908,6 +908,24 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # recorded state with no event or trigger, and refuses an unknown, keyword or negative entry. PlayerCountersSetupTest (5 tests, red
 # before) is run by scripts/forge-oracle-test-player-counters.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-player-counters.
+# 19c49ba7117 = 0ca7a220bd0 + a "pN:ability:Name[#k]" target ref (xproof cluster xpt-1d873918, Azorius Guildmage's "{2}{U}: Counter
+# target activated ability" aimed at Dark Sphere's ability, CR 113.3b / 602.2): StepMachine.targetObject resolved a target ref only to a
+# player or a card, so the stack ability never bound to the TargetType$ Activated slot and the activation was refused ("was not put on
+# the stack"). It now binds the k-th pending non-spell stack instance, oldest first (RefTable.nthPending), activated or triggered by that
+# seat whose source card is the named card, wherever the source is now (Dark Sphere sacrificed itself). AbilityTargetRefTest replays the
+# exported request (fixtures/abilitytarget; red without the branch: "was not put on the stack"), scripts/forge-oracle-test-ability-target-ref.sh
+# (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432),
+# ForcedDieRollTest, RefTableTest, DriverContractTest and ChangeTargetsConfirmTest re-run green. Fork branch fix/xp-forge-driver-ability-target-ref.
+# d38946a0fd9 = oracle/fpin-1125-join-abilitytarget-playercounters: 19c49ba7117 (above) merged with 495ed200e9f (above), each a
+# driver-only commit on 0ca7a220bd0 (RefTable/StepMachine/AbilityTargetRefTest vs SetupBuilder/PlayerCountersSetupTest), no textual
+# conflicts (git merge-tree). AbilityTargetRefTest and PlayerCountersSetupTest run together at this pin; die-roll code, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch oracle/fpin-1125-join-abilitytarget-playercounters.
+# f3065a4da86 = oracle/fpin-1125-join20: 495ed200e9f (above) merged with 53635f189cc (the unbound optional-untap election answered at
+# the ask, CR 502.3/117.3d, xproof clusters xpt-4782660c/xpt-5133dae0, Whip Vine; ScriptedController/StepMachine/SnapshotWriter only), no
+# textual conflicts (all three files auto-merged). UntapElectionTest runs at this pin via scripts/forge-oracle-test-untap-election.sh
+# (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# NOTE (merge): f3065a4da86 is the untap-election branch's pin but does not contain the ability-target ref (19c49ba7117); the pin stays at
+# d38946a0fd9 until a fork join of 19c49ba7117 + 53635f189cc exists. UntapElectionTest (scripts/forge-oracle-test-untap-election.sh) needs that join.
 # af167fe93c3 = 495ed200e9f (above) + the setup life is a state (xproof cluster xpt-57a0a28c, Angel of Vitality): SetupBuilder wrote a
 # seat's life with Player.setLife after the battlefield was placed, and Forge turns a raise into gainLife and a drop into loseLife
 # (CR 119.5), so Angel of Vitality's "if you would gain life, you gain that much life plus 1 instead" (CR 614) made a setup life of 25
@@ -915,7 +933,12 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # while no replacement effect or trigger exists. SetupLifeReplacementTest (4 tests, 3 red before) is run by
 # scripts/forge-oracle-test-setup-life-replacement.sh (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and
 # tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-life-state.
-FORGE_ORACLE_REF ?= af167fe93c30a9c3a60494db9e4506f13df210dc
+# 18e28a7af59 = oracle/fpin-1125-join-setup-life: d38946a0fd9 (above) merged with af167fe93c3 (the setup life is a state, xproof cluster
+# xpt-57a0a28c, Angel of Vitality; SetupBuilder.placeLife writes every seat's life before the first permanent exists), no textual conflicts
+# (the two sides touch disjoint files except SetupBuilder, which auto-merged). SetupLifeReplacementTest runs at this pin via
+# scripts/forge-oracle-test-setup-life-replacement.sh (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch oracle/fpin-1125-join-setup-life.
+FORGE_ORACLE_REF ?= 18e28a7af594ff52b3afb24599668b21fef7306f
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

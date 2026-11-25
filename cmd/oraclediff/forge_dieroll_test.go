@@ -228,9 +228,17 @@ func TestForgeRolledDie(t *testing.T) {
 // re-run green on the pin (run-unit-tests.sh).
 // 495ed200e9f = 0ca7a220bd0 (join18, above) plus setup player_counters (SetupBuilder.placePlayerCounters, PlayerCountersSetupTest);
 // die-roll code unchanged, ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
+// 19c49ba7117 = 0ca7a220bd0 plus the "pN:ability:Name" stack-ability target ref (xpt-1d873918); die-roll code unchanged.
+// d38946a0fd9 = 19c49ba7117 merged with 495ed200e9f, no textual conflicts (the two sides touch disjoint files); die-roll
+// code unchanged.
+// f3065a4da86 = oracle/fpin-1125-join20: 495ed200e9f (above) merged with 53635f189cc (the unbound optional-untap election
+// answered at the ask; ScriptedController/StepMachine/SnapshotWriter only), no textual conflicts; die-roll code unchanged,
+// ForcedDieRollTest run on the pin (run-unit-tests.sh).
+// (merge) the pin stays at d38946a0fd9: f3065a4da86 lacks the ability-target ref; a fork join of both is pending.
 // af167fe93c3 = 495ed200e9f plus the setup life written before any permanent exists (SetupBuilder.placeLife, SetupLifeReplacementTest);
 // die-roll code unchanged, ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
-const forgeOracleDieRollRef = "af167fe93c30a9c3a60494db9e4506f13df210dc"
+// 18e28a7af59 = oracle/fpin-1125-join-setup-life: d38946a0fd9 merged with af167fe93c3, no textual conflicts; die-roll code unchanged.
+const forgeOracleDieRollRef = "18e28a7af594ff52b3afb24599668b21fef7306f"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
