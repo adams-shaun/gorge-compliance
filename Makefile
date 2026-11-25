@@ -100,7 +100,11 @@ GO_TEST_FLAGS ?= -p=2
 # instead of one per token (CR 603.7a: "Sacrifice them" is one instruction). ChandraAcolyteOfFlameTest fails before
 # (Missing CHOICE def ... Triggered list (total 2)) and passes after; the card now matches gorge and Forge at the
 # beginning of the end step (one ability on the stack).
-XMAGE_REF  ?= 98052067d47006cdc887f357dcde286eddc1d5ec
+# 5144fc1304f = 98052067d4 + Wild Shape's layer-4 effect adds the chosen mode's subtype (Turtle, Spider or Elephant)
+# instead of the hardcoded Human, so the target becomes that creature type and loses its printed creature types
+# (CR 205.1a, 613.1d). WildShapeTest checks all three modes; card behaviour changes only for Wild Shape, so the
+# manifests are unchanged.
+XMAGE_REF  ?= 5144fc1304fbde4945e53ec97bd14f73cfe1c3f0
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
