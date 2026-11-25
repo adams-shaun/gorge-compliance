@@ -511,7 +511,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fixture (xs:XP:mabel-bitter-recluse:cast:s1) fails before it; scripts/forge-oracle-test-counter-any-mixed-kinds.sh runs it.
 # Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
 # afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
-FORGE_ORACLE_REF ?= afe18881c6e6327caf871661968865a495aaf3de
+# 66671165f31 = afe18881c6e plus the up-to remove-any-type Done pick (fork branch fix/xp-forge-driver-counter-any-done-v2):
+# when the controller stops an UpTo removal early gorge logs remove_counter_done ("Done"), which names no Forge CounterType
+# and which CountersRemoveEffect.removeAnyType has no option for, so the kind ask strict-missed and left it queued. For a
+# RemoveCounter ask StepMachine.peekCounterKind (26b4658101's peek design) now also matches the Done by its pick kind,
+# consumes it and answers the first offered type; that type's chooseNumber finds no counter pick and answers 0 (min is 0 under
+# UpTo), which is how removeAnyType stops. The kind ask peeks before the lone-option shortcut so a single-kind up-to removal
+# consumes its Done too. Test UnmappedAskTest.removeAnyTypeDoneStopsTheUpToRemoval (fixtures/unmapped/counter-remove-any-done.jsonl)
+# fails on afe18881c6e and passes after; scripts/forge-oracle-test-counter-any-done.sh (make forge-driver-tests) replays the
+# Mabel, Bitter Recluse request with LOYALTY then Done and requires Ajani Resolute still on p1's battlefield at 1 loyalty and
+# one +1/+1. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+FORGE_ORACLE_REF ?= 66671165f315fd9166baa92751ec18cf2ec89319
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
