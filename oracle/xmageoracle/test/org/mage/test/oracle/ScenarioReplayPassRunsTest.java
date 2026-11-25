@@ -1,6 +1,7 @@
 package org.mage.test.oracle;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.BufferedReader;
@@ -427,6 +428,51 @@ public final class ScenarioReplayPassRunsTest {
                 "the resolving pass sees one ability left, and the third activation stacks on it");
     }
 
+    /** Wizard's Retort over Reach Through Mists with Drowner Initiate out
+     * (xproof find xs:XP:wizard-s-retort:cast:s1, triage xpt-d3ec72e4): p1
+     * casts Reach Through Mists and passes, p0 answers by tapping two Islands
+     * and casting Retort, and only then p1 Fatal Pushes the Initiate. With
+     * p1's step-4 handoff pass folded into p0's response, p1's Push (steps
+     * 9-10) ran before p0's steps 5-8; the Push resolved, the Initiate's
+     * "pay {1}" trigger took Island#3 by auto-payment, and step 12's
+     * explicit tap of p0:Island#3 found no mana ability ("activate step 12 on
+     * Island has no mana ability"). Every step is checkpointed once, in step
+     * order, and step 12 taps the third Island itself. */
+    private static void replayRespondingOpponentKeepsWizardsRetortPayment(Path dir) throws Exception {
+        String line = new String(Files.readAllBytes(
+                dir.resolve("responding-opponent-handoff-pass-wizards-retort.jsonl")), StandardCharsets.UTF_8).trim();
+        JsonObject res = replay(JsonParser.parseString(line).getAsJsonObject());
+        noHarness(res, "Wizard's Retort handoff pass");
+        List<String> order = new ArrayList<>();
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        for (int i = 0; i < snaps.size(); i++) {
+            String cp = snaps.get(i).getAsJsonObject().get("checkpoint").getAsString();
+            if (!cp.equals("setup")) {
+                order.add(cp.substring(0, cp.indexOf(' ', 5)));
+            }
+        }
+        List<String> want = new ArrayList<>();
+        for (int i = 0; i < 31; i++) {
+            want.add("step " + i);
+        }
+        equal(want, order, "one snapshot per step, in step order");
+        JsonObject tapped = snaps.get(13).getAsJsonObject();
+        equal("step 12 (activate)", tapped.get("checkpoint").getAsString(), "step 12 checkpoint");
+        int islands = 0;
+        int tappedIslands = 0;
+        for (JsonElement e : tapped.getAsJsonArray("permanents")) {
+            JsonObject perm = e.getAsJsonObject();
+            if (perm.get("name").getAsString().equals("Island") && perm.get("controller").getAsInt() == 0) {
+                islands++;
+                if (perm.get("tapped").getAsBoolean()) {
+                    tappedIslands++;
+                }
+            }
+        }
+        equal(3, islands, "p0 Islands at step 12");
+        equal(3, tappedIslands, "p0 Islands tapped at step 12");
+    }
+
     /** A declaration-ahead checkpoint stands after a step end, which empties
      * every mana pool through XMage's own emptyManaPools; an ordinary
      * checkpoint keeps the pool XMage shows. */
@@ -545,6 +591,7 @@ public final class ScenarioReplayPassRunsTest {
             replayPassPairSplitByOpponentManaAbility(Paths.get(args[0]));
             stackedOtherSeatActivationsKeepResolvingPassCheckpoint(Paths.get(args[0]));
             replayRespondingOpponentKeepsStepOrder(Paths.get(args[0]));
+            replayRespondingOpponentKeepsWizardsRetortPayment(Paths.get(args[0]));
         }
         System.out.println("ScenarioReplayPassRunsTest ok");
     }
