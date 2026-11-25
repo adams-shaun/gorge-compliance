@@ -46,9 +46,9 @@ e921839f-9d91-41a9-bc89-016af3c757aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:con
 e92185f8-579c-4645-9cb8-ef5deb9eebc8	cast	cast-resolve	agreed	-	X	scen	1	0	Sandworm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e92185f8-579c-4645-9cb8-ef5deb9eebc8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e9222f89-e495-4502-bb0c-f5e802686b01	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:electro-s-bolt:cast:s1,f:xs:XP:electro-s-bolt:cast:s1	-	-	-	23c4009444b0	-	38c8f9157f65	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-e923d956-b036-4789-9311-4763a71fcbf8	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e923d956-b036-4789-9311-4763a71fcbf8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:king-darien-xlviii:cast:s1	-	-	-	6f84be0f34c0	-	7269c3e2f34c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e923d956-b036-4789-9311-4763a71fcbf8	f0/a0	PutCounter	agreed	-	F	start	2	0	f:xs:XP:king-darien-xlviii:f0a0:s1	-	-	-	6f84be0f34c0	-	7269c3e2f34c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-e923d956-b036-4789-9311-4763a71fcbf8	f0/a1	PumpAll	agreed	-	F	start	4	0	f:xs:XP:king-darien-xlviii:f0a0:s1	-	-	-	6f84be0f34c0	-	7269c3e2f34c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+e923d956-b036-4789-9311-4763a71fcbf8	f0/a1	PumpAll	agreed	-	F	start	2	0	f:xs:XP:king-darien-xlviii:cast:s1	-	-	-	6f84be0f34c0	-	7269c3e2f34c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e929b730-9aa2-49e1-9a65-50afc0fbe3e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:atlantean-cavalry:cast:s1,f:xs:XP:atlantean-cavalry:cast:s1	-	-	-	23c4009444b0	-	6217e990e246	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e929b730-9aa2-49e1-9a65-50afc0fbe3e0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:atlantean-cavalry:combat0.attack:s1,f:xs:XP:atlantean-cavalry:combat0.attack:s1	-	-	-	23c4009444b0	-	6217e990e246	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e929b730-9aa2-49e1-9a65-50afc0fbe3e0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:atlantean-cavalry:combat0.block:s1,f:xs:XP:atlantean-cavalry:combat0.block:s1	-	-	-	23c4009444b0	-	6217e990e246	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -156,7 +156,7 @@ e9b4e857-39e5-4a06-89ad-3dd94b3f252a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 e9b4e857-39e5-4a06-89ad-3dd94b3f252a	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:paralyze:cast:s1,f:xs:XP:paralyze:cast:s1	-	-	-	ae86f6029288	-	4052fe0b3b37	-	-	2026-11-24	xproof
 e9b5d4f3-b98a-463a-b628-289c2df81204	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9b6a394-691c-425a-9307-76d8edc7375e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e9b6a394-691c-425a-9307-76d8edc7375e	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e9b6a394-691c-425a-9307-76d8edc7375e	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:otawara-soaring-city:f0a1:s1,f:xs:XP:otawara-soaring-city:f0a1:s1	-	-	-	6f84be0f34c0	-	957256c3ebee	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e9b6a394-691c-425a-9307-76d8edc7375e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9b8679d-52a9-4f0f-9365-f3e4b7a69805	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winter-s-grasp:cast:s1,f:xs:XP:winter-s-grasp:cast:s1	-	-	-	ea3140b6974b	-	147425c3c4e0	-	-	2026-11-24	xproof
 e9bc324e-c200-45ef-8b9b-52a61d0f7374	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

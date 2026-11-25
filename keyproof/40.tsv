@@ -50,8 +50,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40578245-2cb8-4a6a-aeff-2252719c2d1c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 405a2cf9-62a0-460c-bf2a-ce4c351b61ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 405a54b3-fb9f-4503-a4fc-3ba6a5e58205	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prodigy-s-prototype:cast:s1,f:xs:XP:prodigy-s-prototype:cast:s1	-	-	-	d864b561c9cb	-	c971531cd0af	-	-	2026-11-24	xproof
-405a54b3-fb9f-4503-a4fc-3ba6a5e58205	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-405a54b3-fb9f-4503-a4fc-3ba6a5e58205	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+405a54b3-fb9f-4503-a4fc-3ba6a5e58205	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:prodigy-s-prototype:f0a0:s1,f:xs:XP:prodigy-s-prototype:f0a0:s1	-	-	-	6f84be0f34c0	-	c971531cd0af	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+405a54b3-fb9f-4503-a4fc-3ba6a5e58205	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:prodigy-s-prototype:f0a0:s1,f:xs:XP:prodigy-s-prototype:f0a0:s1	-	-	-	6f84be0f34c0	-	c971531cd0af	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 405c4a7b-dbb3-48a1-9205-7dbe6e2ad363	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:aatchik-emerald-radian:f0t0:s2,f:xs:XP:aatchik-emerald-radian:f0t0:s2	-	-	-	e07cf3a05ba5	-	c7d39de3b8d7	-	-	2026-11-24	xproof
 405c4a7b-dbb3-48a1-9205-7dbe6e2ad363	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:aatchik-emerald-radian:f0t0:s2,f:xs:XP:aatchik-emerald-radian:f0t0:s2	-	-	-	e07cf3a05ba5	-	c7d39de3b8d7	-	-	2026-11-24	xproof
 405c4a7b-dbb3-48a1-9205-7dbe6e2ad363	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aatchik, Emerald Radian/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40b85f70-78b6-427a-9fb9-c3a72b8528ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ulvenwald-hydra:f0t0:s1,f:xs:XP:ulvenwald-hydra:f0t0:s1	-	-	-	d864b561c9cb	-	137931b2e368	-	-	2026-11-24	xproof
 40b85f70-78b6-427a-9fb9-c3a72b8528ed	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ulvenwald-hydra:f0t0:s1,f:xs:XP:ulvenwald-hydra:f0t0:s1	-	-	-	d864b561c9cb	-	137931b2e368	-	-	2026-11-24	xproof
 40bb7b6b-a75d-4b59-ba45-a5801dcd59a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40bb7b6b-a75d-4b59-ba45-a5801dcd59a1	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+40bb7b6b-a75d-4b59-ba45-a5801dcd59a1	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 40be0923-5d57-46fd-84ef-7f1a1fd5da42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40c1375b-1d15-4525-894a-16b7a0ac02b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40c1375b-1d15-4525-894a-16b7a0ac02b4	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:renowned-weaponsmith:f0a0:s2,f:xs:XP:renowned-weaponsmith:f0a0:s2	-	-	-	d864b561c9cb	-	290c2317f8fd	-	-	2026-11-24	xproof

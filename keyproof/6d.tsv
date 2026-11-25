@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 6d03971a-8365-449a-8fbe-07b5b9bb42dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6d03971a-8365-449a-8fbe-07b5b9bb42dc	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-6d03971a-8365-449a-8fbe-07b5b9bb42dc	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+6d03971a-8365-449a-8fbe-07b5b9bb42dc	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6d03971a-8365-449a-8fbe-07b5b9bb42dc	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:prosperous-thief:f0t0:s1,f:xs:XP:prosperous-thief:f0t0:s1	-	-	-	6f84be0f34c0	-	23c28378593e	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6d0a2e5f-af10-4754-81d7-b7afa6282d7d	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6d0a2e5f-af10-4754-81d7-b7afa6282d7d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6d138115-36bf-4cf8-8033-197cea2d0208	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -200,8 +200,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6df2e8c9-d87e-4f0d-a3d3-b8eee5cdafd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6df2e8c9-d87e-4f0d-a3d3-b8eee5cdafd0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6df57d67-2fd9-4e7a-b67b-f361fc30e496	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6df57d67-2fd9-4e7a-b67b-f361fc30e496	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-6df57d67-2fd9-4e7a-b67b-f361fc30e496	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+6df57d67-2fd9-4e7a-b67b-f361fc30e496	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6df57d67-2fd9-4e7a-b67b-f361fc30e496	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:distinguished-conjurer:f0t0:s1,f:xs:XP:distinguished-conjurer:f0t0:s1	-	-	-	6f84be0f34c0	-	2af4797a212d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6df620b8-1e54-4f63-8556-12c75e5679af	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6df6e834-1917-4bf4-b0b7-09834bf90fb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6df6e834-1917-4bf4-b0b7-09834bf90fb2	f0/t0	Blocks/Bushido	agreed	-	FX	start	2	0	x:xs:XP:samurai-of-the-pale-curtain:f0t0:s1,f:xs:XP:samurai-of-the-pale-curtain:f0t0:s1	-	-	-	6f84be0f34c0	-	3ea4c66eb108	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
