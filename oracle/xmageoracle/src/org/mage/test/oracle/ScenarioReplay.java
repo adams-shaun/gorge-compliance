@@ -12,8 +12,12 @@ import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.Mode;
 import mage.abilities.PlayLandAbility;
+import mage.abilities.StaticAbility;
 import mage.abilities.common.AttacksEachCombatStaticAbility;
 import mage.abilities.common.SimpleStaticAbility;
+import mage.abilities.effects.AsThoughEffect;
+import mage.abilities.effects.ContinuousEffect;
+import mage.abilities.effects.ContinuousEffects;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.costs.AlternativeSourceCosts;
 import mage.abilities.costs.Cost;
@@ -36,6 +40,7 @@ import mage.cards.Cards;
 import mage.cards.CardsImpl;
 import mage.cards.DoubleFacedCard;
 import mage.cards.ModalDoubleFacedCard;
+import mage.constants.AsThoughEffectType;
 import mage.constants.CardType;
 import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
@@ -8129,6 +8134,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // both set SpellAbilityCastMode.MORPH, so both suffix " using
                 // Morph" (MorphAbility.java:79-88; MegamorphTest.java:24).
                 String mode = castMode;
+                if ("mayplay".equals(mode)) {
+                    // A card cast from exile under a permanent's static
+                    // permission is only in TestPlayer's playable set if that
+                    // permission applies. XMage registers static abilities
+                    // before the permanent exists (zcc 0), so a permission
+                    // that keys its exile zone on the source's zcc misses the
+                    // zone the entering trigger used (Azula, Cunning
+                    // Usurper). Re-derive those counters at this cast's own
+                    // priority, before the activate command queues.
+                    runCode("repair static permission source zcc", turn, phase, p,
+                            (info, pl, g) -> repairStaticSourceZCC(g));
+                }
                 if (!sc0.has("xmage_answers")) {
                     answers(st, p);
                 }
@@ -8689,6 +8706,63 @@ public class ScenarioReplay extends CardTestPlayerBase {
             activateAbility(turn, phase, p, "Cast " + castObject, target);
         } else {
             castSpell(turn, phase, p, castObject, target);
+        }
+    }
+
+    /**
+     * Re-derive the source zone-change counter of every continuous effect's
+     * static ability from the permanent that currently supplies it.
+     *
+     * XMage registers a card's static abilities with GameState at load time
+     * (GameState.addAbility -> addEffect), before the card is a permanent, so
+     * getStackMomentSourceZCC() stays 0 -- the warning on
+     * CardUtil.getExileZoneId names exactly this. A static effect that keys
+     * instance state on that counter, as the play-from-exile permissions do
+     * (CardUtil.getExileZoneId(game, source)), then reads the zone of the
+     * pre-game placeholder instead of the settled permanent. Azula, Cunning
+     * Usurper is one: AzulaCunningUsurperExileEffect runs with the entering
+     * trigger's zcc while AzulaCunningUsurperCastEffect asks for the zcc-0
+     * zone, so TestPlayer.getPlayable never lists the exiled card's cast
+     * ("Can't find ability to activate command: Cast @p1:Shield Sphere").
+     *
+     * The permanent's counter is the authority. Only a registered static
+     * ability still at 0 is touched, and only when its source is a battlefield
+     * permanent, so an ability the engine already initialized is left alone.
+     * Sweeping every layered and as-thought effect covers the next static
+     * permission that keys on its own zcc without naming the card.
+     */
+    static void repairStaticSourceZCC(Game game) {
+        java.util.Map<java.util.UUID, Integer> permanentZCC = new java.util.HashMap<>();
+        for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+            permanentZCC.put(permanent.getId(), permanent.getZoneChangeCounter(game));
+        }
+        if (permanentZCC.isEmpty()) {
+            return;
+        }
+        java.util.Set<java.util.UUID> repaired = new java.util.HashSet<>();
+        java.util.function.Consumer<Ability> repair = ability -> {
+            if (!(ability instanceof StaticAbility)
+                    || ability.getStackMomentSourceZCC() != 0
+                    || !repaired.add(ability.getId())) {
+                return;
+            }
+            Integer zcc = permanentZCC.get(ability.getSourceId());
+            if (zcc != null && zcc > 0) {
+                ability.setSourceObjectZoneChangeCounter(zcc);
+            }
+        };
+        ContinuousEffects effects = game.getState().getContinuousEffects();
+        for (ContinuousEffect effect : effects.getLayeredEffects(game)) {
+            for (Ability ability : effects.getLayeredEffectAbilities(effect)) {
+                repair.accept(ability);
+            }
+        }
+        for (AsThoughEffectType type : AsThoughEffectType.values()) {
+            for (AsThoughEffect effect : effects.getApplicableAsThoughEffects(type, game)) {
+                for (Ability ability : effects.getAsThoughEffectsAbility(effect)) {
+                    repair.accept(ability);
+                }
+            }
         }
     }
 

@@ -714,12 +714,39 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # e76652fae3 = c5ab80906 (movectr + cantprevent; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
 # a2201414482 = oracle/fpin-1125-room-alt: 22d31c3e9d0 (room_alt + attach_optional + K'rrik; above) joined with e76652fae3 (movectr + cantprevent + K'rrik; above); driver-only.
 # 793a015fcf = oracle/fpin-1125-join3: a2201414482 (above) joined with 1947f2b322 (ScenarioReplay --serve warm worker + FORGE_ORACLE_AI_TIMEOUT_S; additive, unset keeps the one-shot run); driver-only, die-roll code unchanged.
+# a8512930733 = 793a015fcf plus the unaffordable UnlessCost$ decline (ScriptedController.payCostToPreventEffect notes
+# "unless-pay step N: unaffordable, declined" and returns false; UnlessCostUnaffordableTest covers it and the affordable
+# control that still misses); driver-only, die-roll code unchanged.
+# 846c4191e6 = 793a015fcf (above) + StepMachine.keepsForgeOrderWithoutPin keeps Forge's order for an unpinned multi-name
+# "order to Hand": the snapshot sorts a hand's names, so gorge records no order for Wrenn and Seven's -8 returning the
+# planeswalker and seven Forests, and the ask strict-missed with an empty leftover. OrderCardsTest.unpinnedHandOrderKeepsForgeOrder,
+# run by scripts/forge-oracle-test-graveyard-transit-order.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
+# unchanged. Fork branch fix/xp-forge-driver-hand-order.
+# 15a7c960ab2 = 793a015fcf plus the setup Room convention (xproof cluster xpt-e4b207b7, Greenhouse // Rickety Gazebo): CR 709.5d gives a Room that
+# enters without being cast neither unlocked designation, so it has no name (CR 709.5). SetupBuilder.unlockNamedDoor used to unlock the door the
+# setup name named, so Forge's setup read "Greenhouse" where gorge's fieldName and the XMage driver read "". Setup now places the Room locked and
+# the name only binds the card; scripts/forge-oracle-test-room-setup-locked.sh (make forge-driver-tests) pins it. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-room-locked.
 # d6e26fd04306 = 793a015fcf + the checkpoint snapshot's "offered" (xproof cluster xpt-a64b83f5: every compare:[offered] item diverged at setup
 # because the driver wrote no offered field): SnapshotWriter writes the priority holder's playable abilities, from the listing the bridge
 # answers priority from plus mana abilities as activations, when the item's compare names offered; sources by RefTable.refOf (gorge's objRef).
 # scripts/forge-oracle-test-setup-offered.sh (make forge-driver-tests) replays the Muldrotha find (a graveyard Plains offered as a play) and runs
 # RefTableTest.refOfNamesAnObjectAsGorgeSnapshotsIt; it fails on 793a015fcf. Driver-only; cardsfolder/tokenscripts unchanged.
 # Fork branch fix/xp-forge-driver-setup-offered.
+# 098e9c802e = oracle/fpin-1125-join5: 846c4191e6 (order to Hand; above) joined with d6e26fd04306 (offered; above); driver-only, die-roll code unchanged.
+# 9cc07f0d340 = oracle/fpin-1125-join4: 15a7c960ab2 (setup Room locked; above) joined with d6e26fd04306 (offered; above); driver-only, die-roll code unchanged.
+# 032ce65c73b = oracle/fpin-1125-join-hand-offered-room: 098e9c802e (order to Hand; above) joined with 9cc07f0d340 (setup Room locked; above); both already carry d6e26fd04306 (offered); driver-only, die-roll code unchanged.
+# a862cd8abc = 793a015fcf plus the empty hidden-origin search fix (ScriptedController only, fork branch fix/xp-forge-driver-empty-hidden-search):
+# Dina's Guidance finding no creature still makes Forge ask ChangeZoneToAltDestination; keep the primary destination with a note, no miss (CR 609.3),
+# and consume the ordinary changezone_dest_alt answer when a card was found. Driver-only; die-roll code unchanged.
+# 0218db82d91 = oracle/fpin-1125-join6: 9cc07f0d340 (setup Room locked + offered; above) joined with a862cd8abc (empty hidden-origin search; above);
+# driver-only, die-roll code unchanged.
+# 1b593040f66 = oracle/fpin-1125-join7: 032ce65c73b (order to Hand + setup Room locked + offered; above) joined with a862cd8abc (empty hidden-origin search; above);
+# driver-only, die-roll code unchanged.
+# 926004bb5396 = oracle/fpin-1125-join8: 032ce65c73b (order to Hand + setup Room locked + offered; above) joined with
+# a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
+# 6fcacdc21814 = oracle/fpin-1125-join9: 1b593040f66 (empty hidden-origin search + order to Hand + setup Room locked + offered; above) joined with
+# a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
 # b0ddb8556a = d6e26fd04306 plus the empty Optional$ ChangeTargets confirm (xproof cluster xpt-bf9a34cd: Redirect on Reach
 # Through Mists, a targetless spell, still makes Forge ask "Do you want to change targets?" while gorge's effChangeTargets
 # skips a declaration with no old targets and logs no decision, CR 115.7): ScriptedController.emptyChangeTargetsConfirm
@@ -728,12 +755,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 019d50429f = b0ddb8556a plus the targeted ChangeTargets retarget pick (CR 115.7): a subject that DOES hold a target logs a
 # gorge choose_n marked retarget, so DecisionQueue.Decision reads the marker, ScriptedController.retargetConfirm answers the
 # optional confirm from it (an empty pick declines and is consumed; picks answer yes and stay for the new-target ask), and
-# StepMachine.retargetTargets applies the pick to the declaration. This is the second half of the Redirect case: the targeted
-# spell must consume gorge's answer instead of strict-missing. ChangeTargetsConfirmTest (fixtures/changetargets: the find,
-# the real targeted replay, and the same replay with a picked new target) fails before it with the exact miss;
-# scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder and
-# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-empty-change-targets.
-FORGE_ORACLE_REF ?= 019d50429f00a5ed2910b6b84aa06df7cb3f333d
+# StepMachine.retargetTargets applies the pick to the declaration. ChangeTargetsConfirmTest (fixtures/changetargets) fails
+# before it with the exact miss; scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) runs it. Driver-only.
+# 53059b9bbf2 = oracle/fpin-1125-join10: 6fcacdc21814 (join9; above) joined with 019d50429f (the ChangeTargets accept/retarget
+# fix; above); driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 53059b9bbf2d85b11f810f54699145b731665a8b
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
