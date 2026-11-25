@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 491c6f69-9b75-4d5d-b41f-a14b2fbfdd07	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 491c6f69-9b75-4d5d-b41f-a14b2fbfdd07	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 4920492e-c210-4d99-ace9-184d65e697f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4920492e-c210-4d99-ace9-184d65e697f5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+4920492e-c210-4d99-ace9-184d65e697f5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 492108b7-f831-4739-925f-c3a419859c52	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4924b3a4-a218-4783-8a4d-82361fdecc78	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4924b3a4-a218-4783-8a4d-82361fdecc78	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49be65fd-3755-410d-b0dc-2e5861ea2552	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thopter-spy-network:f0t0:s1,f:xs:XP:thopter-spy-network:f0t0:s1	-	-	-	3aa6ded33acb	-	3158f95cb605	-	-	2026-11-25	xproof
 49be65fd-3755-410d-b0dc-2e5861ea2552	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:thopter-spy-network:f0t0:s1,f:xs:XP:thopter-spy-network:f0t0:s1	-	-	-	3aa6ded33acb	-	3158f95cb605	-	-	2026-11-25	xproof
 49be65fd-3755-410d-b0dc-2e5861ea2552	f0/t1	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:thopter-spy-network:f0t0:s1,f:xs:XP:thopter-spy-network:f0t0:s1	-	-	-	3aa6ded33acb	-	3158f95cb605	-	-	2026-11-25	xproof
-49bf3805-cc9e-4550-8a01-171282aa49c9	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+49bf3805-cc9e-4550-8a01-171282aa49c9	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pit-automaton:cast:s1,f:xs:XP:pit-automaton:cast:s1	-	-	-	23c4009444b0	-	125c1f893694	-	-	2026-11-25	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pit Automaton/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:pit-automaton:combat0.block:s1,f:xs:XP:pit-automaton:combat0.block:s1	-	-	-	23c4009444b0	-	125c1f893694	-	-	2026-11-25	xproof
