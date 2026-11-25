@@ -254,7 +254,9 @@ func TestForgeRolledDie(t *testing.T) {
 // code unchanged, ForcedDieRollTest re-run on the pin (run-unit-tests.sh).
 // efd75d00b34 = 52ddaba3075 plus the monarch trigger label role binding (StepMachine.triggerScore); die-roll code unchanged,
 // ForcedDieRollTest re-run on the pin (run-unit-tests.sh).
-const forgeOracleDieRollRef = "efd75d00b34da0fe9d0079dd5c9986f3525d6f67"
+// 71fd77c15c0 = efd75d00b34 plus StepMachine.pickObjects/pickFrom clamping a pick's min to the option count (ChooseFewerThanMinTest);
+// die-roll code unchanged, ForcedDieRollTest re-run on the pin (run-unit-tests.sh).
+const forgeOracleDieRollRef = "71fd77c15c0e42d9357a53896dbac05812480ff5"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
