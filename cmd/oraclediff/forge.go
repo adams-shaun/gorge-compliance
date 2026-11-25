@@ -129,10 +129,12 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     names the opponent in its label).
 //   - A cast step's cast_mode names a non-default cast option the driver
 //     must select: the plot or suspend special action, an Adventure or Omen half, a
-//     modal back face, a warp cast, an optional cost paid at cast time
+//     modal back face, a warp cast, a may-play cast of a card outside its
+//     owner's hand ("mayplay"), the first alternative cost ("alternative"),
+//     an optional cost paid at cast time
 //     ("optionalcost", kicked, buyback, entwined, offspring, replicated);
-//     empty is the ordinary cast. Modes outside xengine/classify's
-//     forgeElectedCastModes are cast the ordinary way. gen's Step still
+//     empty is the ordinary cast. Modes outside the Forge registry entry's
+//     CastModes (oracle/xengine/follower) are cast the ordinary way. gen's Step still
 //     carries no kicked: a kick is paid only through a logged optional-cost
 //     decision.
 //   - The Item's payment array is parallel to its steps: entry i is the exact
