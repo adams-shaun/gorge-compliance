@@ -200,7 +200,7 @@ func steps(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key st
 		if skip != nil {
 			return nil, false
 		}
-		it.ID = fmt.Sprintf("xs:%s:%s:%s:steps", opt.Set, Slug(card), KeyID(key))
+		it.ID = StepsID(opt.Set, card, key)
 		if xm, ok := b.Sp.XMage(reg, card); ok && xm != card && it.XMageName == "" {
 			it.XMageName = xm
 		}

@@ -14,7 +14,6 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
-	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
@@ -239,15 +238,6 @@ func (s startSeat) lists(card string) bool {
 	return false
 }
 
-var nonSlug = regexp.MustCompile(`[^a-z0-9]+`)
-
-// startID is xs:<SET>:<slug>:<keyid>:s<n>.
-func startID(set, card, key string, n int) string {
-	slug := strings.Trim(nonSlug.ReplaceAllString(strings.ToLower(card), "-"), "-")
-	keyid := strings.NewReplacer("/", "", "#", "").Replace(key)
-	return fmt.Sprintf("xs:%s:%s:%s:s%d", set, slug, keyid, n)
-}
-
 // startDeck is a seat's deck and its scripted position: the listed cards in
 // the order hand, battlefield, graveyard, exile, library, then basics to 40.
 func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules.StartSeat, error) {
@@ -429,7 +419,7 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 		seeds := f.gameSeeds()
 		for s := 1; s <= f.Seeds; s++ {
 			games++
-			id := startID(set, f.Card, f.Key, s)
+			id := scen.StartID(set, f.Card, f.Key, s)
 			name := fmt.Sprintf("xproof start %s %s seed %d", f.Card, f.Key, s)
 			took := -1
 			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus, FocusTook: &took}
@@ -459,7 +449,13 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				hist[statusRefused]++
 				continue
 			}
-			for u, n := range classify.Uses(reg, tp, 0, len(tp.Entries)-1, true) {
+			// The item names the card it starts and (in its id) the key it was
+			// written for, so a static or combat key -- which no tape entry
+			// names -- is credited too (credit). Card is the front-face spelling
+			// startDeck dealt, not the file's (a joined "A // B" start would
+			// otherwise credit a second spelling of the same key).
+			l.Item.Card = canonicalCard(reg, f.Card)
+			for u, n := range credit(reg, l.Item, tp, 0, len(tp.Entries)-1, true) {
 				exercised.Add(u.Card, u.Key, cov.Counts{Exercised: n})
 			}
 			if len(reasons) > 0 {

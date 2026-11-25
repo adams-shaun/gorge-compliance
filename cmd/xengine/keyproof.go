@@ -15,6 +15,7 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/levelb"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/adjudicate"
@@ -137,7 +138,7 @@ func (p *playKeys) credited(it oraclegen.Item, id string) ([]classify.Use, bool,
 		return nil, false, err
 	}
 	lo, hi := classify.LoweredRange(l.lowered(it), tp)
-	return classify.Sorted(classify.Uses(p.reg, tp, lo, hi, true)), true, nil
+	return classify.Sorted(credit(p.reg, it, tp, lo, hi, true)), true, nil
 }
 
 // stepKeys is the signature input of finding f and every key its diverging
@@ -174,6 +175,13 @@ func (p *playKeys) stepKeys(f adjudicate.Finding) (adjudicate.SigInput, []classi
 	_, lhi := classify.LoweredRange(l.lowered(f.Item), tp)
 	hi = min(hi, lhi)
 	uses := classify.Sorted(classify.Uses(p.reg, tp, lo, hi, step <= 0))
+	// The item's own key (its id) is credited too: a static or combat item's
+	// divergence would otherwise name no key at all. A tape key still names the
+	// signature first; describe sees the declared key when it is the only one,
+	// so a static/combat family is named instead of "none".
+	if u, ok := declaredKey(p.reg, f.Item); ok && !slices.Contains(uses, u) {
+		uses = append(uses, u)
+	}
 	k := adjudicate.NoKey
 	if len(uses) > 0 {
 		k = p.describe(uses[0])
@@ -196,9 +204,16 @@ func (p *playKeys) describe(u classify.Use) adjudicate.KeyDesc {
 			k.Desc = ck.Desc
 		}
 	}
+	if k.Desc == "-" {
+		k.Desc = requirementDesc(c, u.Key)
+	}
 	switch {
 	case u.Key == "cast" || u.Key == "land":
 		k.Family = u.Key
+	case strings.HasPrefix(u.Key, "static#"):
+		k.Family = "static"
+	case strings.HasPrefix(u.Key, "combat#"):
+		k.Family = "combat"
 	case strings.Contains(u.Key, "/t"):
 		k.Family = "trigger"
 	default:
@@ -211,6 +226,17 @@ func (p *playKeys) describe(u classify.Use) adjudicate.KeyDesc {
 		}
 	}
 	return k
+}
+
+// requirementDesc is the sub-family levelb names for a level-B key
+// ("static.disable-triggers", "combat.attack"), "-" for a key it does not list.
+func requirementDesc(c *cards.Card, key string) string {
+	for _, r := range levelb.Requirements(c) {
+		if r.Key == key {
+			return r.Sub
+		}
+	}
+	return "-"
 }
 
 // costWords is an ability cost without its mana: the cost words, each stripped
@@ -324,6 +350,9 @@ func (t *kpTable) desc(u classify.Use) string {
 			if ck.ID == u.Key {
 				desc = ck.Desc
 			}
+		}
+		if desc == "-" {
+			desc = requirementDesc(c, u.Key)
 		}
 	}
 	return desc
