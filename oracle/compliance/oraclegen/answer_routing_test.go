@@ -136,3 +136,62 @@ func TestUnpayableCostWindowRoutesNo(t *testing.T) {
 		t.Fatalf("tapped window + decline scripts %v, want %v", got, want)
 	}
 }
+
+// TestAltCostExileChoiceIsPosed pins the one-payable OrCost exception: when
+// the arm gorge took is a fixed-size exile cost, XMage's OrCost still asks.
+// Its canPay checks the exile arm and the mana arm in isolation, so it asks
+// even when the full cast cannot afford the alternative (Soaring
+// Stoneglider). The ask is the generic yes/no for option 0, and the exile
+// pick follows on the choice queue.
+func TestAltCostExileChoiceIsPosed(t *testing.T) {
+	ask := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", Options: 2,
+		Picks: []string{"Exile 2 card"}, PickIdx: []int{0}, PickRefs: []string{"Exile 2 card"},
+		PickKinds: []string{"altaddcost"}, Min: 1, Max: 1, AltPayable: 1}
+	two := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", Options: 7,
+		Picks: []string{"Forest", "Island"}, PickIdx: []int{0, 1},
+		PickRefs: []string{"p0:Forest", "p0:Island"}, ObjectPicks: []string{"p0:Forest", "p0:Island"},
+		PickKinds: []string{"exilecost", "exilecost"}, Min: 2, Max: 2}
+	got := routed(t, []rules.OracleDecision{ask, two}, 1)
+	want := []XAnswer{{0, "choice", "yes"}, {0, "choice", "Forest^Island"}}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("two-card exile OrCost: got %v want %v", got, want)
+	}
+
+	one := two
+	one.Min, one.Max = 1, 1
+	one.Picks = []string{"Forest"}
+	one.PickIdx = []int{0}
+	one.PickRefs = []string{"p0:Forest"}
+	one.ObjectPicks = []string{"p0:Forest"}
+	one.PickKinds = []string{"exilecost"}
+	got = routed(t, []rules.OracleDecision{ask, one}, 1)
+	want = []XAnswer{{0, "choice", "yes"}, {0, "choice", "Forest"}}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("one-card exile OrCost: got %v want %v", got, want)
+	}
+
+	// Forage's exile selection is asked later in the same cast (after the
+	// spell's own target), so its fixed exilecost pick is not the next
+	// decision. XMage's ForageCost is still that OrCost chooseUse.
+	forageAsk := ask
+	forageAsk.Picks = []string{"Forage"}
+	forageAsk.PickRefs = []string{"Forage"}
+	forageExile := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", Options: 1,
+		Picks: []string{"Exile three cards from your graveyard"}, PickIdx: []int{0},
+		PickRefs: []string{"Exile three cards from your graveyard"}, PickKinds: []string{"forage_exile"},
+		Min: 1, Max: 1}
+	if _, owned := newAnswerRouting([]rules.OracleDecision{forageAsk, forageExile, two}).route(0); owned {
+		t.Fatal("a Forage OrCost ask must stay with the generic yes/no")
+	}
+	if yn, ok := yesNo(forageAsk); !ok || yn != "yes" {
+		t.Fatalf("Forage OrCost answer = %q,%v, want yes", yn, ok)
+	}
+
+	// A non-exile one-payable cost keeps the historical drop: XMage poses no
+	// chooseUse for it.
+	discard := one
+	discard.PickKinds = []string{"discard"}
+	if _, owned := newAnswerRouting([]rules.OracleDecision{ask, discard}).route(0); !owned {
+		t.Fatal("a one-payable non-exile OrCost ask must stay with the routing")
+	}
+}

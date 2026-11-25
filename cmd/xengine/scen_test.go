@@ -39,8 +39,8 @@ func TestScenCLI(t *testing.T) {
 	if f.Card != "Thornvault Forager" || f.Key != "f0/a2" || f.Focus == nil || f.Focus.Kind != "ability" || f.Focus.Ability != 2 {
 		t.Errorf("start file: %+v focus %+v", f, f.Focus)
 	}
-	// XP3's playStart (cmd/xengine/start.go) is not on this base: when it lands,
-	// lower this file with it and assert 0 refusals (see the report).
+	// the lowered starts of the combat and static families are held to their
+	// key in start_combat_static_test.go (TestPlayStartCombatStatic)
 
 	auto := t.TempDir()
 	if err := runScen(scenArgs("-card", "Llanowar Elves", "-key", "f0/a0", "-set", "FDN", "-out", auto)); err != nil {
@@ -52,7 +52,7 @@ func TestScenCLI(t *testing.T) {
 	}
 
 	ref := t.TempDir()
-	if err := runScen(scenArgs("-card", "Aggressive Mammoth", "-key", "static#0.0", "-prefer", "start", "-out", ref)); err != nil {
+	if err := runScen(scenArgs("-card", "Karn, Argent Defender", "-key", "static#0.0", "-prefer", "start", "-out", ref)); err != nil {
 		t.Fatal(err)
 	}
 	if ents, _ := os.ReadDir(ref); len(ents) != 0 {
@@ -115,16 +115,21 @@ func scenTSVRows(t *testing.T, path string) [][]string {
 // whose starts held a Mystery Booster 2 playtest card the Forge card DB filters
 // (Indicate for Remove Soul and Deflection, Mox Poison for Retract, Gobland for
 // Devoted Retainer). The filtered pool must make each start name some other
-// enabler, or none.
+// enabler, or none. Remove Soul and Deflection target a spell on the stack, which
+// a start cannot hold at main 1 (start:needs-stack-target): they write no file.
 func TestScenForgeFilteredStarts(t *testing.T) {
 	testutil.CorpusRegistry(t)
 	out := t.TempDir()
 	filtered := map[string]bool{"Indicate": true, "Mox Poison": true, "Gobland": true}
+	stackTargets := map[string]bool{"Remove Soul": true, "Deflection": true}
 	for _, card := range []string{"Remove Soul", "Deflection", "Retract", "Devoted Retainer"} {
 		if err := runScen(scenArgs("-card", card, "-key", "cast", "-set", "XP", "-out", out)); err != nil {
 			t.Fatalf("%s: %v", card, err)
 		}
 		raw, err := os.ReadFile(filepath.Join(out, scen.Slug(card)+"-cast.start.json"))
+		if os.IsNotExist(err) && stackTargets[card] {
+			continue
+		}
 		if err != nil {
 			t.Fatalf("%s: %v", card, err)
 		}

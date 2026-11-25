@@ -255,6 +255,17 @@ func lowerWindow(reg *cards.Registry, t *game.Tape, c *cut, id string, end int, 
 }
 
 func lowerFrom(reg *cards.Registry, t *game.Tape, c *cut, id string, end int, span bool, name string) (Lowered, error) {
+	l, err := lowerSteps(reg, t, c, id, end, span, name)
+	if err != nil {
+		return l, err
+	}
+	// Planned once every cut is final: a truncated item plans its kept steps.
+	l.planTargetSkips(reg)
+	return l, nil
+}
+
+// lowerSteps is lowerFrom's lowering, before the XMage target-skip plan.
+func lowerSteps(reg *cards.Registry, t *game.Tape, c *cut, id string, end int, span bool, name string) (Lowered, error) {
 	wt := windowTape(t, c, end)
 	n := end - c.Entry
 	m := seatMap{swap: c.Active == 1, rngOK: true}

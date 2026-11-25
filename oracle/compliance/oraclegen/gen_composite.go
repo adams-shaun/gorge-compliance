@@ -88,13 +88,16 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 	}
 	collapseRoomLock(ds)
 	unposeCollectEvidenceDeclines(reg, ds)
-	// A Support pick is a counter_pick in gorge but a TARGET on XMage's spell
-	// or triggered ability: SupportEffect/SupportAbility declare it when the
-	// object is announced, so its answers belong on the cast/announcement step
-	// rather than the resolution step (support_pick.go). On a cast step the
-	// support target is the spell ability's FIRST target, so an inline
-	// Step.Targets preset would fill that slot and make XMage skip its own "up
-	// to" ask entirely; clear the preset and let every target of the cast or
+	// A permanent's Support (its enters-the-battlefield trigger or an
+	// activated ability) is a counter_pick in gorge but a TARGET on XMage's
+	// SupportAbility/activated ability, declared when the object is announced,
+	// so its answers belong on the announcement step rather than the
+	// resolution step (support_pick.go). An instant or sorcery's Support is
+	// not in this loop: since gorge 5326ad5128 it is a cast target decision.
+	// Activate steps (and cast steps of a permanent whose trigger is announced
+	// by the cast) can carry a Step.Targets preset that would fill the
+	// support slot, the ability's FIRST target, and make XMage skip its own
+	// "up to" ask entirely; clear the preset and let every target of the
 	// activation come from the answer queue, support answers first. The
 	// Scenario value shares its Steps slice with the caller, so the cleared
 	// preset is what the item serializes.
@@ -177,13 +180,35 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			bolsters[i] = true
 		}
 	}
+	// A Craft keyword's material exile is an "exilecost" pick in gorge but
+	// XMage's CraftAbility chooses it through chooseTarget: mark the
+	// decisions whose activated ability carries Keyword$ Craft, so pickQueue
+	// keeps their picks on the TARGET queue (craft_cost_pick.go).
+	crafts := map[int]bool{}
+	for i, d := range ds {
+		if craftMaterialPick(reg, sc, res, d) {
+			crafts[i] = true
+		}
+	}
 	sources := map[int][]string{}
 	for _, d := range ds {
 		if _, done := sources[d.Step]; !done {
 			sources[d.Step] = stepSourceNames(sc, res.Snapshots, d.Step)
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, tapThenUntap: tapFirst, bolster: bolsters, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
+	// The all-player damage punisher's unless election (Browbeat and its
+	// siblings): XMage offers its chooseUse to every payer even after one
+	// accepts, so the answers expand to one boolean per seat (unless_payers.go).
+	allPlayerUnless := unlessAllPlayerDecisions(reg, sc, res.Snapshots, ds)
+	seats := sc.Players
+	if seats < 1 {
+		seats = 2
+	}
+	// A chooseUse whose yes branch moves the looked-at window to the library
+	// bottom asks a follow-up card order XMage poses and gorge does not
+	// (choose_dialog_order.go, Petals of Insight).
+	chooseUseOrders := chooseUseBottomOrders(reg, sc, res.Snapshots, ds)
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, allPlayerUnless: allPlayerUnless, seats: seats, chooseUseOrders: chooseUseOrders, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, tapThenUntap: tapFirst, bolster: bolsters, craft: crafts, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that

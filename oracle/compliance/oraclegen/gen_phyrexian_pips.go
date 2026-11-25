@@ -57,6 +57,11 @@ type xanswersExtra struct {
 	// election, which XMage's BolsterEffect asks through chooseTarget
 	// (bolster_pick.go).
 	bolster map[int]bool
+	// craft marks the decisions whose exilecost pick pays a Craft keyword's
+	// material cost. XMage's CraftAbility chooses its material through
+	// chooseTarget, the TARGET queue, unlike every other exile cost's
+	// getTargets().choose on the choice queue (craft_cost_pick.go).
+	craft map[int]bool
 	// supports maps a Support counter_pick decision index to the target
 	// answers XMage asks at the source's announcement, not at resolution
 	// (support_pick.go). A present key is owned by that route.
@@ -73,6 +78,17 @@ type xanswersExtra struct {
 	// sources maps a decision step to the cards resolving or acting there
 	// (stepSourceNames); see answerRouting.sources.
 	sources map[int][]string
+	// allPlayerUnless marks every unless-pay decision whose resolving face is
+	// the "any player may have <source> deal N damage to them" punisher
+	// (unless_payers.go); see answerRouting.allPlayerUnless.
+	allPlayerUnless map[int]bool
+	// seats is the match's seat count (0 keeps the two-seat game), the payer
+	// range an allPlayerUnless election answers.
+	seats int
+	// chooseUseOrders maps a step to the card-order choices XMage asks after
+	// a chooseUse whose yes branch moves the looked-at window to the library
+	// bottom (choose_dialog_order.go).
+	chooseUseOrders map[int][]XAnswer
 }
 
 // isPipDecision reports whether d is one of gorge's ManaAsk pip decisions

@@ -2185,13 +2185,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // the offered cards, or a skip); leave it to the base player.
                 return false;
             }
-            List<UUID> offer = new ArrayList<>();
-            for (Card card : cards.getCards(game)) {
-                offer.add(card.getId());
+            List<UUID> offered = offeredCandidates(cards, candidates, game);
+            UUID order = unscriptedCardOrderPick(target, cards, candidates, game, false);
+            if (order != null) {
+                target.add(order, game);
+                return true;
             }
             List<UUID> picks = interchangeableLibraryPick(owner.pastLastCheckpoint(),
                     target.isRequired(), target.getMinNumberOfTargets(),
-                    target.getMaxNumberOfTargets(), target.getZone(), needed, offer, candidates,
+                    target.getMaxNumberOfTargets(), target.getZone(), needed, offered, candidates,
                     id -> {
                         Card card = game.getCard(id);
                         return card == null ? null : card.getName();
@@ -2203,6 +2205,92 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 target.add(id, game);
             }
             return true;
+        }
+
+        /** Whether a Cards/TargetCard ask is XMage's card-ORDER dialog rather
+         * than a pick. Three families build it: the putCardsOn{Bottom,Top}
+         * OfLibrary(anyOrder) paths and putCardOnTopXOfLibrary take one card
+         * at a time through a TargetCard(Zone.ALL) named "card ORDER to put
+         * ...", ZonesHandler.chooseOrder's simultaneous-zone-change sites
+         * (graveyard, top/bottom of library) name it "order to put ...", and a
+         * card's own order loop (Proteus Staff's "card to put on bottom ...
+         * (last chosen will be on bottom)") uses a Zone.LIBRARY window. Every
+         * one of them ends its target name with the "last (one) chosen will
+         * be" clause, whichever zone and wording it uses, so a new ordering
+         * call site is covered by that role rather than by a card, effect or
+         * message list. A pick-one (Booster Tutor's pack, Psychotic Episode's
+         * hand-plus-topdeck, Agonizing Memories' hand pick) carries no such
+         * clause; the Zone.HAND window is a sequence of picks, never an order,
+         * so it is excluded too. The fixed 1/1 count narrows the role further. */
+        static boolean isCardOrderAsk(Zone zone, int minTargets, int maxTargets, String targetName) {
+            if (minTargets != 1 || maxTargets != 1 || zone == Zone.HAND || targetName == null) {
+                return false;
+            }
+            String lower = targetName.toLowerCase(java.util.Locale.ROOT);
+            return lower.contains("last chosen will be") || lower.contains("last one chosen will be");
+        }
+
+        /** The card an order ask takes when every offered card has the same
+         * name, or null when the order can change the compared state. XMage
+         * asks an order one card at a time (n-1 asks), and gorge records no
+         * decision for a pile of indistinguishable cards (Fathom Trawl's
+         * revealed lands): every name the replay compares is unchanged by the
+         * order. Unlike {@link #interchangeableLibraryPick} this runs inside
+         * the compared window too -- there is no gorge decision here whose
+         * strict miss could be hidden. The offer order is the window's
+         * insertion order (CardsImpl, the looked-at library order), so the
+         * first card is deterministic. Distinct names are a real order gorge
+         * should have posed under CR 401.4 (the owner of cards put in one
+         * position at the same time arranges them): null leaves the ask to the
+         * base, whose strict miss the item reports as a gorge finding. */
+        static UUID interchangeableCardOrderPick(boolean orderAsk, List<UUID> offered,
+                java.util.function.Function<UUID, String> nameOf) {
+            if (!orderAsk || offered.size() < 2) {
+                return null;
+            }
+            String only = null;
+            for (UUID id : offered) {
+                String name = nameOf.apply(id);
+                if (name == null || only != null && !only.equals(name)) {
+                    return null;
+                }
+                only = name;
+            }
+            return offered.get(0);
+        }
+
+        /** The cards a Cards/TargetCard window offers the ask: the window's
+         * own insertion order (CardsImpl, so the looked-at library order),
+         * intersected with the target's legal candidates. Both Cards funnels
+         * use this one list so an order ask and a fixed-count pick read the
+         * same deterministic offer order. */
+        static List<UUID> offeredCandidates(Cards cards, List<UUID> candidates, Game game) {
+            java.util.Set<UUID> legal = new java.util.HashSet<>(candidates);
+            List<UUID> offered = new ArrayList<>();
+            for (Card card : cards.getCards(game)) {
+                if (legal.contains(card.getId())) {
+                    offered.add(card.getId());
+                }
+            }
+            return offered;
+        }
+
+        /** The card an unscripted order ask takes from the funnel's window,
+         * or null. Both Cards funnels call this one rule; a queue answer the
+         * funnel considers the ask's own ({@code queueNamesCandidate}) stays
+         * with the base, and the role gate is {@link #isCardOrderAsk}. */
+        UUID unscriptedCardOrderPick(mage.target.TargetCard target, Cards cards,
+                List<UUID> candidates, Game game, boolean queueNamesCandidate) {
+            if (queueNamesCandidate || !isCardOrderAsk(target.getZone(),
+                    target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(),
+                    target.getTargetName())) {
+                return null;
+            }
+            return interchangeableCardOrderPick(true,
+                    offeredCandidates(cards, candidates, game), id -> {
+                        Card card = game.getCard(id);
+                        return card == null ? null : card.getName();
+                    });
         }
 
         /** The pick a fixed-count look-at-library ask takes when the offered
@@ -2673,7 +2761,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     return true;
                 }
             }
-            if (target.getZone() == Zone.LIBRARY
+            boolean orderAsk = isCardOrderAsk(target.getZone(), target.getMinNumberOfTargets(),
+                    target.getMaxNumberOfTargets(), target.getTargetName());
+            if (orderAsk || target.getZone() == Zone.LIBRARY
                     && !(target instanceof mage.target.common.TargetCardInLibrary)) {
                 java.util.Collection<UUID> possible = target.possibleTargets(
                         target.getAffectedAbilityControllerId(this.getId()), source, game, cards);
@@ -2696,15 +2786,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                 }
                 if (!ownAnswer) {
-                    List<UUID> offer = new ArrayList<>();
-                    for (Card card : cards.getCards(game)) {
-                        offer.add(card.getId());
+                    UUID order = unscriptedCardOrderPick(target, cards, candidates, game, false);
+                    if (order != null) {
+                        target.addTarget(order, source, game);
+                        return true;
                     }
+                }
+                if (!ownAnswer && target.getZone() == Zone.LIBRARY
+                        && !(target instanceof mage.target.common.TargetCardInLibrary)) {
+                    List<UUID> offered = offeredCandidates(cards, candidates, game);
                     List<UUID> picks = interchangeableLibraryPick(owner.pastLastCheckpoint(),
                             target.isRequired(), target.getMinNumberOfTargets(),
                             target.getMaxNumberOfTargets(), target.getZone(),
                             target.getMinNumberOfTargets() - target.getSize(),
-                            offer, candidates, id -> {
+                            offered, candidates, id -> {
                                 Card card = game.getCard(id);
                                 return card == null ? null : card.getName();
                             });
@@ -4847,6 +4942,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
         return false;
+    }
+
+    /** Whether a lone cast target cannot take the inline "$target=" form: the
+     * spell has two or more independent target objects and every one is an
+     * "up to" object (minimum 0), so the one target may belong to any of them
+     * and the string form (which sets it on the first object) would reject a
+     * ref only a later object accepts. A spell with a required object, a
+     * divided object or a target adjuster keeps its own routes. */
+    static boolean loneTargetNeedsQueue(Ability ability) {
+        if (ability == null || hasTargetAdjuster(ability) || targetsDivided(ability)) {
+            return false;
+        }
+        List<mage.target.Target> objects = ability.getAllSelectedTargets();
+        if (objects.size() < 2) {
+            return false;
+        }
+        for (mage.target.Target t : objects) {
+            if (t.getMinNumberOfTargets() != 0 || t.getMaxNumberOfTargets() < 1) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /** Whether an ability has a divided-amount target (TargetAmount). */
@@ -7588,6 +7705,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     // card in hand, not the spell, so target by name.
                     String spell = castSpelling(refName(tg.get(0)));
                     castSpell(turn, phase, p, castObject, spell, spell);
+                } else if (tg.size() == 1 && loneTargetNeedsQueue(castAbility)) {
+                    // One card or permanent target (a lone player ref and a
+                    // spell on the stack took their own routes above) for a
+                    // spell with several independent "up to" objects (Relive
+                    // the Past's artifact, land and non-Aura enchantment): the
+                    // inline string form sets the ref on the FIRST object,
+                    // which rejects a ref only a later object accepts ("Can't
+                    // find ability to activate command").
+                    // Queue it instead; an object with no candidate is
+                    // declined at ask time (unscriptableEmptyAsk) and one that
+                    // is posed again is closed by closeCastAskedAgain.
+                    castWithQueuedTargets(p, tg, () -> castObjectSpell(turn, phase, p, castObject));
                 } else if (tg.size() == 1) {
                     // A single target goes through XMage's own string form. A
                     // divided target whose inline form XMage cannot read

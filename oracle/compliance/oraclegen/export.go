@@ -135,6 +135,19 @@ func XAnswers(ds []rules.OracleDecision, steps int, modes map[string]int) [][]XA
 	return xanswers(ds, steps, modes, nil)
 }
 
+// TargetPickValue is the TARGET-queue spelling of decision d's pick k, the
+// same spelling XAnswersForScenario emits. A cost template that scripts a
+// target-queue cost answer (Craft's material) uses it so the answer dedupes
+// exactly against the routed one, including the exact-ref form a same-named
+// pick needs.
+func TargetPickValue(d rules.OracleDecision, k int) string {
+	label := ""
+	if k >= 0 && k < len(d.Picks) {
+		label = d.Picks[k]
+	}
+	return targetPickValue(d, k, label)
+}
+
 // XAnswersWithSnapshots is XAnswers plus the gorge result's checkpoints. A
 // library_placement/hand_move destination is re-derived from the after-step
 // library top instead of guessed from the decision shape: a bottom placement
@@ -163,13 +176,16 @@ func ChooseTargets(sc Scenario, ds []rules.OracleDecision) (Scenario, map[int]bo
 // from the cast; those target decisions travel through castSpell and are not
 // scripted a second time.
 //
-// A Support pick on a cast or activate step rewrites that step: its support
-// target is the ability's FIRST target, so an inline Step.Targets preset would
-// fill that slot and make XMage skip its own "up to N" ask. The preset is
-// cleared and the step leaves castSteps, so every one of the cast's targets is
-// scripted as a TARGET answer with the support answers first (support_pick.go).
-// The Steps slice is shared with the caller's scenario (the item the answers
-// are serialized with), so it sees the cleared preset.
+// A Support counter_pick (a permanent's enters trigger or an activated
+// ability; an instant or sorcery's Support is announced at cast since gorge
+// 5326ad5128 and is an ordinary cast target decision) rewrites its
+// announcement step: the support target is the ability's FIRST target, so an
+// inline Step.Targets preset would fill that slot and make XMage skip its own
+// "up to N" ask. The preset is cleared and the step leaves castSteps, so every
+// one of the step's own targets is scripted as a TARGET answer with the
+// support answers first (support_pick.go). The Steps slice is shared with the
+// caller's scenario (the item the answers are serialized with), so it sees the
+// cleared preset.
 func XAnswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenario, modes map[string]int, castSteps map[int]bool) [][]XAnswer {
 	return xanswersForScenario(reg, res, sc, modes, castSteps)
 }

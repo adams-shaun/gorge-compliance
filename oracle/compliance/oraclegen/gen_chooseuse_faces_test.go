@@ -58,6 +58,7 @@ var xmageChooseUseTrueLabel = map[string]string{
 	"spark of creativity":       "CARDNAME deals damage to target creature.",
 	"liar's pendulum":           "A card with the chosen name is in that player's hand.",
 	"palantír of orthanc":       "CARDNAME's controller draws a card.",
+	"petals of insight":         "You may put those cards on the bottom of your library in any order. If you do, return CARDNAME to its owner's hand.",
 	"sin prodder":               "Yes (take damage)",
 	"soul echo":                 "For each 1 damage that would be dealt to this player until their next upkeep, they remove an echo counter from CARDNAME instead.",
 	"terrapact intimidator":     "CARDNAME's controller creates two Lander tokens.",
@@ -97,7 +98,7 @@ func TestDecoyGambitDrawIsYesReturnIsNo(t *testing.T) {
 // XMage-source proof (see choice_dialog.go).
 func TestChooseUseFacesModeNumbersCensus(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
-	if len(xmageChooseUseFaces) != 14 || len(xmageChooseUseTrueLabel) != 14 {
+	if len(xmageChooseUseFaces) != 15 || len(xmageChooseUseTrueLabel) != 15 {
 		t.Fatalf("xmageChooseUseFaces has %d entries, true-label table %d; adding one needs an XMage-source proof (see its comment)",
 			len(xmageChooseUseFaces), len(xmageChooseUseTrueLabel))
 	}

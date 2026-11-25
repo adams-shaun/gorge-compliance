@@ -70,8 +70,9 @@ func listIs(t *testing.T, what string, got, want []string) {
 
 // Needs certdeck.Derive returns for the fixture cards (printed from Derive and
 // Build at this pin): Thornvault Forager [type:Squirrel graveyard] (enabler
-// Frog-Squirrels); Crypt Feaster [graveyard opp-blockers] (enabler Shifting
-// Wall on p1); Banner of Kinship [counters:FELLOWSHIP]; every other fixture
+// Frog-Squirrels); Crypt Feaster [graveyard opp-blockers] (certdeck's
+// first pick, Shifting Wall, is a 0/0 X creature that dies when placed, so the
+// enabler on p1 is Shield Sphere); Banner of Kinship [counters:FELLOWSHIP]; every other fixture
 // card none.
 func TestScenFixtures(t *testing.T) {
 	reg, b := testBuilder(t)
@@ -94,7 +95,7 @@ func TestScenFixtures(t *testing.T) {
 		{"Crypt Feaster", "f0/t0", want{path: "steps"}, want{path: "start", check: func(t *testing.T, f *StartFile) {
 			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Crypt Feaster"})
 			listIs(t, "p0 graveyard", f.Setup.P0.Graveyard, rep("Swamp", 7))
-			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, []string{"Shifting Wall"})
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, []string{"Shield Sphere"})
 			focusIs(t, f, 0, "Crypt Feaster", "attack", 0)
 		}}},
 		// an upkeep trigger is the card cast on turn 1 and the game run to its
@@ -118,8 +119,9 @@ func TestScenFixtures(t *testing.T) {
 			}
 		}}},
 		{"Scoured Barrens", "land", want{path: "start", check: barrens}, want{path: "start", check: barrens}},
-		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "no-generator:static"}},
-		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "refused", reason: "no-generator:combat"}},
+		{"Aggressive Mammoth", "static#0.0", want{path: "steps"}, want{path: "start", check: mammothStatic}},
+		{"Magnigoth Sentry", "combat#0.block", want{path: "steps"}, want{path: "start", check: sentryBlock}},
+		{"Magnigoth Sentry", "combat#0.attack", want{path: "steps"}, want{path: "start", check: sentryAttack}},
 		{"Banner of Kinship", "static#0.0", want{path: "steps"}, want{path: "refused", reason: "as-enters"}},
 		{"Gatekeeper of Malakir", "f0/t0", want{path: "start", check: gatekeeper}, want{path: "start", check: gatekeeper}},
 	}
@@ -159,6 +161,40 @@ func overseer(t *testing.T, f *StartFile) {
 	listIs(t, "p0 hand", f.Setup.P0.Hand, []string{"Inspiring Overseer"})
 	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, rep("Plains", 3))
 	focusIs(t, f, 0, "Inspiring Overseer", "cast", 0)
+}
+
+// mammothStatic: "other creatures you control have trample" reads a second
+// creature, which the start places beside the card; no action is forced.
+func mammothStatic(t *testing.T, f *StartFile) {
+	// "other creatures you control have trample": the card and a creature carrier
+	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Aggressive Mammoth", "Memnite"})
+	if f.Focus != nil && f.Focus.Kind != "" {
+		t.Errorf("focus %+v, want no forced action", f.Focus)
+	}
+	// the grant is a keyword: observable only when the item compares keywords
+	if !reflect.DeepEqual(f.Compare, []string{"keywords"}) {
+		t.Errorf("compare %v, want [keywords]", f.Compare)
+	}
+}
+
+// sentryAttack: the card attacks into the fixture blocker.
+func sentryAttack(t *testing.T, f *StartFile) {
+	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Magnigoth Sentry"})
+	listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, []string{"Grizzly Bears"})
+	focusIs(t, f, 0, "Magnigoth Sentry", "attack", 0)
+	if f.Active != 0 {
+		t.Errorf("active %d, want 0", f.Active)
+	}
+}
+
+// sentryBlock: the opponent is active and its fixture attacks the card.
+func sentryBlock(t *testing.T, f *StartFile) {
+	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Magnigoth Sentry"})
+	listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, []string{"Grizzly Bears"})
+	focusIs(t, f, 0, "Magnigoth Sentry", "block", 0)
+	if f.Active != 1 {
+		t.Errorf("active %d, want 1", f.Active)
+	}
 }
 
 func barrens(t *testing.T, f *StartFile) {
@@ -645,4 +681,192 @@ func TestStartLifeGained(t *testing.T) {
 		{card: "Drogskol Reaver", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Chaplain's Blessing"}, p0BF: []string{"Drogskol Reaver", "Plains"},
 			focusCard: "Chaplain's Blessing", focusKind: "cast"},
 	})
+}
+
+// TestStartCombatStaticRefusals: a combat or static key a start cannot set up
+// is refused by a reason narrower than "no-generator:static"/"combat".
+func TestStartCombatStaticRefusals(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range [][3]string{
+		{"Karn, Argent Defender", "static#0.0", "no-generator:static:DisableTriggers"},
+		{"Academy Wall", "combat#0.attack", "no-generator:combat:defender"},
+		{"Holy Strength", "static#0.0", "no-generator:static:attached"},
+		// the attack/block is not offered, or the effect is not seen
+		{"Magus of the Moat", "combat#0.attack", "no-generator:combat:restricted"},
+		{"Frenetic Raptor", "combat#0.block", "no-generator:combat:restricted"},
+		{"Blazing Archon", "combat#0.block", "no-generator:combat:restricted"},
+		{"Yavimaya Enchantress", "static#0.0", "no-generator:static:computed"},
+		{"Relentless Rats", "static#0.0", "no-generator:static:computed"},
+		{"Riftstone Portal", "static#0.0", "no-generator:static:zone"},
+	} {
+		res, err := Generate(reg, b, r[0], r[1], Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != PathRefused || res.Reason != r[2] {
+			t.Errorf("%s %s: path %q reason %q, want refused %q", r[0], r[1], res.Path, res.Reason, r[2])
+		}
+	}
+}
+
+// permanents is the faces of the card names a seat lists on the battlefield.
+func permanents(t *testing.T, reg *cards.Registry, names []string) []*cards.Face {
+	t.Helper()
+	var out []*cards.Face
+	for _, n := range names {
+		c, ok := reg.Lookup(n)
+		if !ok {
+			t.Fatalf("%q is not in the corpus", n)
+		}
+		out = append(out, c.Faces[0])
+	}
+	return out
+}
+
+func TestStartDeadOnArrival(t *testing.T) {
+	reg, _ := testBuilder(t)
+	for name, want := range map[string]bool{
+		"Endless One": true, "Walking Ballista": true, "Ugin's Conjurant": true, "Phyrexian Marauder": true,
+		"Grizzly Bears": false, "Wall of Stone": false, "Shield Sphere": false, "Tarmogoyf": false, "Forest": false,
+	} {
+		c, ok := reg.Lookup(name)
+		if !ok {
+			t.Fatalf("%q is not in the corpus", name)
+		}
+		if got := deadOnArrival(c.Faces[0]); got != want {
+			t.Errorf("deadOnArrival(%s) = %v, want %v", name, got, want)
+		}
+	}
+}
+
+// TestStartCombatStaticIgnoreOtherNeeds: a static or combat key places its own
+// objects only. An unrelated need of the card (a token trigger: certdeck's
+// token need) neither refuses the key nor adds state.
+func TestStartCombatStaticIgnoreOtherNeeds(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct {
+		card, key string
+		p0, p1    []string
+	}{
+		{"Arahbo, the First Fang", "static#0.0", []string{"Arahbo, the First Fang", "Sanctuary Cat"}, nil},
+		{"Gadrak, the Crown-Scourge", "combat#0.block", []string{"Gadrak, the Crown-Scourge"}, []string{"Grizzly Bears"}},
+	} {
+		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+		if err != nil || res.Path != PathStart {
+			t.Fatalf("%s %s: %v path %q reason %q, want a start", r.card, r.key, err, res.Path, res.Reason)
+		}
+		f := res.Start
+		listIs(t, r.card+" p0 battlefield", f.Setup.P0.Battlefield, r.p0)
+		listIs(t, r.card+" p1 battlefield", f.Setup.P1.Battlefield, r.p1)
+		if len(f.Setup.P0.Graveyard)+len(f.Setup.P0.Tapped) != 0 {
+			t.Errorf("%s: unrelated state placed: graveyard %v tapped %v", r.card, f.Setup.P0.Graveyard, f.Setup.P0.Tapped)
+		}
+	}
+}
+
+// TestStartStaticObserved: a static whose effect the comparison cannot see is
+// refused; a keyword grant carries the keyword opt-in; a land the filter reads
+// is a placed basic.
+func TestStartStaticObserved(t *testing.T) {
+	reg, b := testBuilder(t)
+	gen := func(card, key string) Result {
+		res, err := Generate(reg, b, card, key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		return res
+	}
+	if res := gen("Primal Rage", "static#0.0"); res.Path != PathStart || !reflect.DeepEqual(res.Start.Compare, []string{"keywords"}) {
+		t.Errorf("Primal Rage: path %q, want a start comparing keywords", res.Path)
+	}
+	if res := gen("Aggressive Mammoth", "static#0.0"); res.Path != PathStart || !reflect.DeepEqual(res.Start.Compare, []string{"keywords"}) {
+		t.Errorf("Aggressive Mammoth: path %q, want a start comparing keywords", res.Path)
+	}
+	// a pump alone compares nothing extra
+	if res := gen("Glorious Anthem", "static#0.0"); res.Path != PathStart || len(res.Start.Compare) != 0 {
+		t.Errorf("Glorious Anthem: path %q start %+v, want a start with no extra compare", res.Path, res.Start)
+	}
+}
+
+// TestStartFocusIsOffered: a start's focus play is legal at the first focus-seat
+// priority (the focus seat takes it at turn 1's first main phase), or the key is
+// refused by name. A 0/0 creature with an enters-with-counters replacement (Endless
+// One, Ugin's Conjurant, Phyrexian Marauder) dies to SBA when a start places it, so
+// it is never an enabler or a bearer: Branching Bolt and Cloak of Confusion get a
+// creature that lives. Bone to Ash targets a spell on the stack and Burning Oil an
+// attacking or blocking creature, neither of which a start can have at main 1.
+func TestStartFocusIsOffered(t *testing.T) {
+	reg, b := testBuilder(t)
+	creature := func(names []string) bool {
+		for _, f := range permanents(t, reg, names) {
+			if f.IsCreature() && !deadOnArrival(f) {
+				return true
+			}
+		}
+		return false
+	}
+	rows := []struct {
+		card, key, reason string
+		check             func(t *testing.T, f *StartFile)
+	}{
+		{card: "Aether Tradewinds", key: "cast", check: func(t *testing.T, f *StartFile) {
+			// "target permanent you don't control" needs a permanent on p1
+			if len(f.Setup.P1.Battlefield) == 0 {
+				t.Error("p1 has no permanent for the you-don't-control target")
+			}
+		}},
+		{card: "Bone to Ash", key: "cast", reason: "start:needs-stack-target"},
+		{card: "Burning Oil", key: "cast", reason: "start:needs-combat"},
+		{card: "Branching Bolt", key: "cast", check: func(t *testing.T, f *StartFile) {
+			if !creature(f.Setup.P1.Battlefield) {
+				t.Errorf("p1 battlefield %v has no creature that survives", f.Setup.P1.Battlefield)
+			}
+		}},
+		{card: "Cloak of Confusion", key: "cast", check: func(t *testing.T, f *StartFile) {
+			if !creature(f.Setup.P0.Battlefield) {
+				t.Errorf("p0 battlefield %v has no creature that survives, for the Aura to enchant", f.Setup.P0.Battlefield)
+			}
+		}},
+		{card: "Asceticism", key: "f0/a0", check: func(t *testing.T, f *StartFile) {
+			if !creature(f.Setup.P1.Battlefield) {
+				t.Errorf("p1 battlefield %v has no creature that survives", f.Setup.P1.Battlefield)
+			}
+		}},
+		{card: "Copper Carapace", key: "f0/a0", check: func(t *testing.T, f *StartFile) {
+			if !creature(f.Setup.P0.Battlefield) {
+				t.Errorf("p0 battlefield %v has no creature that survives, to equip", f.Setup.P0.Battlefield)
+			}
+		}},
+		{card: "Anathemancer", key: "f0/a0", check: func(t *testing.T, f *StartFile) {
+			// unearth is activated from the graveyard
+			if !slices.Contains(f.Setup.P0.Graveyard, "Anathemancer") || slices.Contains(f.Setup.P0.Battlefield, "Anathemancer") {
+				t.Errorf("p0 graveyard %v battlefield %v, want Anathemancer in the graveyard only", f.Setup.P0.Graveyard, f.Setup.P0.Battlefield)
+			}
+		}},
+	}
+	for _, r := range rows {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if r.reason != "" {
+				if res.Path != PathRefused || res.Reason != r.reason {
+					t.Fatalf("path %q reason %q, want refused %q", res.Path, res.Reason, r.reason)
+				}
+				return
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			for _, bf := range [][]string{res.Start.Setup.P0.Battlefield, res.Start.Setup.P1.Battlefield} {
+				for _, f := range permanents(t, reg, bf) {
+					if deadOnArrival(f) {
+						t.Errorf("%s is placed on the battlefield and dies to SBA", f.Name)
+					}
+				}
+			}
+			r.check(t, res.Start)
+		})
+	}
 }

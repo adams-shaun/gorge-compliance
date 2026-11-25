@@ -1336,13 +1336,26 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var ownBounce map[int]bool
 	var tapThenUntap map[int]bool
 	var bolster map[int]bool
+	var craft map[int]bool
 	var supports map[int]supportAnswers
 	var snaps []rules.OracleSnapshot
 	var orderAsks map[int]bool
 	var sources map[int][]string
+	var allPlayerUnless map[int]bool
+	var seats int
+	var chooseUseOrders map[int][]XAnswer
 	for _, ex := range extras {
 		if sources == nil {
 			sources = ex.sources
+		}
+		if allPlayerUnless == nil {
+			allPlayerUnless = ex.allPlayerUnless
+		}
+		if seats == 0 {
+			seats = ex.seats
+		}
+		if chooseUseOrders == nil {
+			chooseUseOrders = ex.chooseUseOrders
 		}
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
@@ -1352,6 +1365,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if bolster == nil {
 			bolster = ex.bolster
+		}
+		if craft == nil {
+			craft = ex.craft
 		}
 		if supports == nil {
 			supports = ex.supports
@@ -1428,6 +1444,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		routing.searchZones = searchZones
 	}
 	routing.sources = sources
+	routing.allPlayerUnless = allPlayerUnless
+	routing.seats = seats
+	routing.chooseUseOrders = chooseUseOrders
 	searchZoneSuppress := searchZoneRedundantBooleans(ds, searchZones)
 	// RemoveCounter's CounterType$ Any/All election is one per-counter run of
 	// KChoose picks in gorge but one multi-amount dialog in XMage: fold the
@@ -1634,6 +1653,16 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// which the ordinary choose_n route below already joins into
 				// one aliased choice; leaving the paid pick as a numeric mode
 				// answer sends chooseUse to TestPlayer's AI instead.
+				if routing.allPlayerUnless[i] {
+					// The "any player may have <source> deal N damage to
+					// them" punisher: XMage offers its chooseUse to every
+					// player in range, even after one accepts, while gorge
+					// stops at the first payer. Script one boolean per payer
+					// seat, not one per recorded decision, or the payer
+					// XMage still asks is left to its AI (Browbeat).
+					as = append(as, routing.allPlayerUnlessAnswers(i)...)
+					break
+				}
 				as = append(as, XAnswer{d.Seat, "choice", unlessPolarity(d)})
 				break
 			}
@@ -1692,8 +1721,14 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// Timetwister-style per-player "may shuffle" (Turtles in
 					// Time) or a source-proven xmageChooseUseFaces punisher
 					// (Terrapact Intimidator's targeted opponent). The answer
-					// is yes/no for whichever seat chose.
+					// is yes/no for whichever seat chose. A yes branch that
+					// moves the looked-at window to the library bottom in any
+					// order carries XMage's follow-up card-order asks
+					// (chooseUseBottomOrders, Petals of Insight).
 					as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[m == ModeYesQueue]})
+					if m == ModeYesQueue {
+						as = append(as, routing.chooseUseOrders[d.Step]...)
+					}
 					continue
 				}
 				n := i + 1
@@ -1889,7 +1924,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// a "yes" ahead of it. The decline already scripts "no".
 				as = append(as, XAnswer{d.Seat, "choice", "yes"})
 			}
-			if hiddenPickUnanswerable(d) {
+			if hiddenPickWithheld(d, snaps) {
 				// A hidden-zone pick (a graveyard "you may return a land
 				// card") among same-named cards no exact answer can name: the
 				// bare label would let XMage return whichever one it meets
@@ -1897,7 +1932,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// answer instead of a false divergence (CR 608.2d).
 				break
 			}
-			if len(d.Picks) > 1 && allChoiceQueue(d) {
+			if len(d.Picks) > 1 && allChoiceQueue(d, craft[i]) {
 				// One makeChoose dialog consumes ONE definition, whose own
 				// parser splits on '^' into the multi-card selection (Dig's
 				// "put two of them into your hand", a discard-two). Emitting
@@ -1906,7 +1941,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", JoinedChoice(d)})
 			} else {
 				for k, label := range d.Picks {
-					switch pickQueue(d, k, label, bolster[i]) {
+					switch pickQueue(d, k, label, bolster[i], craft[i]) {
 					case "skip":
 						// XMage resolves this pick inside its computer player (a
 						// library search) or pays it from the pool (a mana-tapping
@@ -2404,13 +2439,24 @@ func modeNumberFor(d rules.OracleDecision, k int, modes map[string]int) (int, bo
 
 // allChoiceQueue reports whether every pick in a decision reaches XMage's
 // choice queue (makeChoose). A decision with a target or skipped pick is not
-// one makeChoose dialog and must not be joined with '^'.
-func allChoiceQueue(d rules.OracleDecision) bool {
+// one makeChoose dialog and must not be joined with '^'. It asks pickQueue,
+// the same per-pick route the answer emission uses, so every shape-gated route
+// (a fixed-size exile cost, a Craft material cost) is joined or kept separate
+// exactly as its answers are.
+func allChoiceQueue(d rules.OracleDecision, craft bool) bool {
 	if d.Retarget {
 		return false
 	}
+	if hasExileCostPick(d) && !(d.Min > 0 && d.Min == d.Max) {
+		// An open-ended exile cost (a group exile's "one or more") settles one
+		// card per TargetImpl.choose iteration, so each pick is its own
+		// makeChoose record; joining them would leave all but the first card
+		// unexiled. A fixed-size selection (min == max) is the one joined
+		// record.
+		return false
+	}
 	for k, label := range d.Picks {
-		if xmQueue(pickKind(d, k), label) != "choice" {
+		if pickQueue(d, k, label, false, craft) != "choice" {
 			return false
 		}
 	}
@@ -3110,13 +3156,24 @@ func pickKind(d rules.OracleDecision, k int) string {
 // label text, is the authority -- the mechanism the census test pins.
 func xmQueue(kind, label string) string {
 	switch kind {
-	case "search", "exilecost":
-		// A library search (TargetCardInLibrary) and an exile-from-graveyard
-		// cost (TargetCardInYourGraveyard) are answered from the target
+	case "search":
+		// A library search (TargetCardInLibrary) is answered from the target
 		// queue: measured on the std pass, 47 search carriers (Shared Roots,
-		// Nature's Rhythm, Solemn Simulacrum, ...) and Feed the Cycle /
-		// Soaring Stoneglider agree only with a target answer.
+		// Nature's Rhythm, Solemn Simulacrum, ...) agree only with a target
+		// answer.
 		return "target"
+	case "exilecost":
+		// An exile COST is not a TargetXxx target selection:
+		// ExileFromGraveCost/ExileTargetCost/ExileFromHandCost (and
+		// ExileXFromYourGraveCost's generated ExileFromGraveCost) all pay with
+		// getTargets().choose() -> TargetImpl.choose -> player.choose, which
+		// TestPlayer serves from makeChoose, the CHOICE queue (Ludevic's
+		// ExileXFromYourGraveCost left a target answer unused). A fixed-size
+		// selection is one joined makeChoose record; an open-ended group exile
+		// is one record per card (allChoiceQueue keeps it unjoined). Craft's
+		// material is the sole target-queue exception, marked by craft in
+		// pickQueue (craft_cost_pick.go). The census pins this kind mapping.
+		return "choice"
 	case "trigger_cost_pay", "trigger_cost_pay_manual":
 		return "skip"
 	case "mana":
@@ -3660,8 +3717,8 @@ func namesObject(label, ref string) bool {
 	return strings.EqualFold(label, oraclediffRefName(ref))
 }
 
-// hiddenPickUnanswerable reports a hidden_pick decision with a pick that
-// shares its name with another offered object and has no exact spelling:
+// hiddenPickWithheld reports whether a hidden_pick decision has a pick that
+// shares its name with another offered object and no exact spelling:
 // ClassifySameName finds no alias or unique copy marker (the ref is
 // rank-derived) and no owner prefix separates the candidates (both objects
 // are one seat's). A bare name there reaches XMage's first same-named card
@@ -3679,7 +3736,13 @@ func namesObject(label, ref string) bool {
 // one scripted Wastes, XMage's AI returns two). Pothole Mole's ask offers a
 // different name too, and a copy sitting between other cards moves the
 // zone's order, so it stays withheld.
-func hiddenPickUnanswerable(d rules.OracleDecision) bool {
+//
+// snaps widen that interchangeability to a graveyard's own copies
+// (graveyardPickCopiesInterchangeable): every copy of one name in one
+// contiguous run is equally valid even when the ask offers other names, as
+// Acolyte of Affliction's seven Swamps behind "may return a permanent card".
+// A caller without snapshots cannot prove the run and keeps the withhold.
+func hiddenPickWithheld(d rules.OracleDecision, snaps []rules.OracleSnapshot) bool {
 	if d.Resume != "hidden_pick" {
 		return false
 	}
@@ -3688,11 +3751,124 @@ func hiddenPickUnanswerable(d rules.OracleDecision) bool {
 			!namesObject(d.Picks[k], d.PickRefs[k]) {
 			continue
 		}
-		if ownerQualifiedRef(d, k) == "" && !offersOnlyCopiesOf(d, k) {
-			return true
+		if ownerQualifiedRef(d, k) != "" || offersOnlyCopiesOf(d, k) ||
+			graveyardPickCopiesInterchangeable(d, k, snaps) {
+			continue
 		}
+		return true
 	}
 	return false
+}
+
+// hiddenPickUnanswerable is hiddenPickWithheld without snapshots: a
+// shape-only caller cannot prove a copy run interchangeable, so it keeps the
+// conservative withhold.
+func hiddenPickUnanswerable(d rules.OracleDecision) bool { return hiddenPickWithheld(d, nil) }
+
+// graveyardPickCopiesInterchangeable reports whether pick k's same-named
+// offered copies are interchangeable in the picker's graveyard: every offered
+// same-named object is one of that seat's non-token copies, the graveyard held
+// all of them in one contiguous run at the start of the step, and the step
+// removed exactly the copies this decision picked, leaving one run behind.
+//
+// A graveyard delta identifies the zone (a hand/library pick leaves it
+// unchanged) and the run proves the outcome: removing any copy from a
+// contiguous same-name run leaves the same name sequence, so the bare name is
+// an exact answer for every copy (Acolyte of Affliction's seven Swamps).
+// Pothole Mole's two Forests sit either side of a Swamp -- not one run -- so
+// they are not interchangeable and stay withheld. A filtered ask (only the
+// graveyard's lands offered) is covered too: the run is read from the
+// graveyard itself, not from the offered list.
+func graveyardPickCopiesInterchangeable(d rules.OracleDecision, k int, snaps []rules.OracleSnapshot) bool {
+	if d.Step < 0 || d.Step+1 >= len(snaps) || k < 0 || k >= len(d.PickRefs) ||
+		len(d.PickRefs) == 0 || len(d.OptionRefs) == 0 {
+		return false
+	}
+	ref := d.PickRefs[k]
+	if strings.Contains(ref, ":token:") {
+		return false
+	}
+	name := oraclediffRefName(ref)
+	seat, ok := refSeat(ref)
+	if !ok {
+		return false
+	}
+	offered := 0
+	for _, candidate := range d.OptionRefs {
+		if !strings.EqualFold(oraclediffRefName(candidate), name) {
+			continue
+		}
+		if s, ok := refSeat(candidate); !ok || s != seat || strings.Contains(candidate, ":token:") {
+			return false
+		}
+		offered++
+	}
+	if offered < 2 {
+		return false
+	}
+	// The picks of this name are the cards the step took out of the graveyard;
+	// their count is the delta the after-step checkpoint must show.
+	gone := 0
+	for _, pick := range d.PickRefs {
+		if s, ok := refSeat(pick); ok && s == seat &&
+			strings.EqualFold(oraclediffRefName(pick), name) && !strings.Contains(pick, ":token:") {
+			gone++
+		}
+	}
+	if gone == 0 {
+		return false
+	}
+	before := seatGraveyard(snaps[d.Step], seat)
+	after := seatGraveyard(snaps[d.Step+1], seat)
+	if countFolded(before, name) < offered || !oneRun(before, name) {
+		return false
+	}
+	if n := countFolded(after, name); n != countFolded(before, name)-gone || (n > 0 && !oneRun(after, name)) {
+		return false
+	}
+	return true
+}
+
+// seatGraveyard returns seat's graveyard in zone order at snap, or nil when
+// the snapshot has no such seat.
+func seatGraveyard(snap rules.OracleSnapshot, seat int) []string {
+	for _, p := range snap.Players {
+		if p.Seat == seat {
+			return p.Graveyard
+		}
+	}
+	return nil
+}
+
+// countFolded counts the names equal to name, ignoring case.
+func countFolded(names []string, name string) int {
+	n := 0
+	for _, s := range names {
+		if strings.EqualFold(s, name) {
+			n++
+		}
+	}
+	return n
+}
+
+// oneRun reports whether names holds at least one copy of name and every copy
+// occupies one contiguous run. A name broken by another card is not one run:
+// removing either copy then leaves a different name sequence.
+func oneRun(names []string, name string) bool {
+	seen, inside, closed := false, false, false
+	for _, s := range names {
+		if strings.EqualFold(s, name) {
+			if closed {
+				return false
+			}
+			seen, inside = true, true
+			continue
+		}
+		if inside {
+			inside, closed = false, true
+		}
+	}
+	return seen
 }
 
 // offersOnlyCopiesOf reports whether every object decision d offers is a
@@ -3923,9 +4099,18 @@ func twoPilesPileAnswer(d rules.OracleDecision) string {
 // reaches XMage's choice queue: only a search of your own library is the
 // TargetCardInLibrary target ask (measured on the std pass). bolster marks
 // the decision as a Bolster tie election, whose counter_pick XMage asks
-// through chooseTarget (bolster_pick.go).
-func pickQueue(d rules.OracleDecision, k int, label string, bolster bool) string {
+// through chooseTarget (bolster_pick.go). craft marks a Craft keyword's
+// material exile, which CraftAbility pays through chooseTarget rather than the
+// choice queue every other exile cost uses (craft_cost_pick.go).
+func pickQueue(d rules.OracleDecision, k int, label string, bolster, craft bool) string {
 	if bolster && pickKind(d, k) == "counter_pick" {
+		return "target"
+	}
+	if craft && pickKind(d, k) == "exilecost" {
+		// Craft material is a TargetCardInGraveyardBattlefieldOrStack chosen
+		// by CraftAbility.CraftCost.pay -> player.chooseTarget: the TARGET
+		// queue, one answer per material. The kind-level choice mapping must
+		// not capture it just because a Craft cost also has min == max.
 		return "target"
 	}
 	if d.Retarget {

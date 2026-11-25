@@ -434,36 +434,86 @@ func TestPrefixesGrantedAbility(t *testing.T) {
 	}
 }
 
-// TestPrepareRefusesSpelling: an item holding a card XMage spells differently
-// is refused, whichever zone it sits in; the same item without it is served.
+// TestPrepareRefusesSpelling: an item holding two cards XMage spells
+// differently is refused (the driver carries one spelling), whichever zone
+// they sit in; the same item without them is served.
 func TestPrepareRefusesSpelling(t *testing.T) {
 	reg, sp, ws, _ := prepared(t, 1)
-	var odd []string
-	for _, name := range []string{"Lim-D\u00fbl's Vault", "Fire"} {
-		if sp.Differs(reg, name) {
-			odd = append(odd, name)
+	names := []string{"Lim-D\u00fbl's Vault", "Fire"}
+	for _, name := range names {
+		if !sp.Differs(reg, name) {
+			t.Fatalf("%s: no differing XMage spelling", name)
 		}
 	}
-	if len(odd) == 0 {
-		t.Fatal("no known card with a differing XMage spelling")
+	w := ws[0]
+	l := w.l
+	l.Item.Setup = map[string]oraclegen.Seat{}
+	for k, s := range w.l.Item.Setup {
+		l.Item.Setup[k] = s
+	}
+	s := l.Item.Setup["p1"]
+	s.Graveyard = append(slices.Clone(s.Graveyard), names...)
+	l.Item.Setup["p1"] = s
+	_, ref := Prepare(reg, sp, l, w.g)
+	if ref == nil || ref.Reason != ReasonSpelling {
+		t.Fatalf("two differing cards: got %+v, want %s", ref, ReasonSpelling)
+	}
+	for _, name := range names {
+		if !strings.Contains(ref.Detail, name) {
+			t.Errorf("detail %q does not name %s", ref.Detail, name)
+		}
+	}
+	if _, ref := Prepare(reg, sp, w.l, w.g); ref != nil {
+		t.Errorf("control item refused: %+v", ref)
+	}
+}
+
+// TestPrepareStampsLoneXMageSpelling: an item whose one differing card is
+// Bartolom\u00e9 del Presidio is served with Card and XMageName stamped; an item
+// that already names another card or another XMage spelling is still refused.
+func TestPrepareStampsLoneXMageSpelling(t *testing.T) {
+	reg, sp, ws, _ := prepared(t, 1)
+	const corpus, xmage = "Bartolom\u00e9 del Presidio", "Bartolome del Presidio"
+	if got, ok := sp.XMage(reg, corpus); !ok || got != xmage {
+		t.Fatalf("XMage spelling of %s = %q, %v; want %q", corpus, got, ok, xmage)
 	}
 	w := ws[0]
-	for _, name := range odd {
+	build := func() lower.Lowered {
 		l := w.l
 		l.Item.Setup = map[string]oraclegen.Seat{}
 		for k, s := range w.l.Item.Setup {
 			l.Item.Setup[k] = s
 		}
 		s := l.Item.Setup["p1"]
-		s.Graveyard = append(slices.Clone(s.Graveyard), name)
+		s.Graveyard = append(slices.Clone(s.Graveyard), corpus)
 		l.Item.Setup["p1"] = s
-		_, ref := Prepare(reg, sp, l, w.g)
-		if ref == nil || ref.Reason != ReasonSpelling || !strings.Contains(ref.Detail, name) {
-			t.Errorf("%s in a graveyard: got %+v, want %s", name, ref, ReasonSpelling)
-		}
+		return l
 	}
-	if _, ref := Prepare(reg, sp, w.l, w.g); ref != nil {
-		t.Errorf("control item refused: %+v", ref)
+	// The extra card sits in p1's graveyard for the whole game: gorge's
+	// result shows it in every snapshot, so the rerun still agrees with it.
+	g := w.g
+	g.Snapshots = slices.Clone(g.Snapshots)
+	for i := range g.Snapshots {
+		g.Snapshots[i].Players = slices.Clone(g.Snapshots[i].Players)
+		pl := &g.Snapshots[i].Players[1]
+		pl.Graveyard = append(slices.Clone(pl.Graveyard), corpus)
+	}
+	got, ref := Prepare(reg, sp, build(), g)
+	if ref != nil {
+		t.Fatalf("lone differing card refused: %+v", ref)
+	}
+	if got.Card != corpus || got.XMageName != xmage {
+		t.Errorf("Card, XMageName = %q, %q; want %q, %q", got.Card, got.XMageName, corpus, xmage)
+	}
+	for name, mut := range map[string]func(*oraclegen.Item){
+		"other card":     func(it *oraclegen.Item) { it.Card = "Fire" },
+		"other spelling": func(it *oraclegen.Item) { it.XMageName = "Elsewhere" },
+	} {
+		l := build()
+		mut(&l.Item)
+		if _, ref := Prepare(reg, sp, l, g); ref == nil || ref.Reason != ReasonSpelling {
+			t.Errorf("%s: got %+v, want %s", name, ref, ReasonSpelling)
+		}
 	}
 }
 
@@ -1634,4 +1684,98 @@ func TestPrepareModalTriggerChooseTwo(t *testing.T) {
 		t.Errorf("last step answers = %+v, want the chosen modes' target answers after the modes", as)
 	}
 	t.Logf("last step answers: %+v", as)
+}
+
+// TestKeepTargetSkipsFollowsRetarget: the lowering's skip plan names positions
+// in a step's flat target list, so Prepare keeps a step's plan only while the
+// retarget leaves that step's targets as they were.
+func TestKeepTargetSkipsFollowsRetarget(t *testing.T) {
+	plan := [][]oraclegen.XTargetSkip{nil, {{At: 0, Slot: 0}, {At: 1, Slot: 2}}, {{At: 1, Slot: 1}}}
+	before := []oraclegen.Step{{Op: "pass"}, {Op: "cast", Targets: []string{"p0:Forest#7"}}, {Op: "cast", Targets: []string{"p1:A"}}}
+	same := slices.Clone(before)
+	got := keepTargetSkips(plan, before, same)
+	if len(got) != 3 || len(got[1]) != 2 || len(got[2]) != 1 {
+		t.Fatalf("unchanged targets lost the plan: %v", got)
+	}
+	moved := slices.Clone(before)
+	moved[2] = oraclegen.Step{Op: "cast", Targets: []string{"p1:B"}}
+	got = keepTargetSkips(plan, before, moved)
+	if len(got) != 3 || len(got[1]) != 2 || got[2] != nil {
+		t.Fatalf("a retargeted step kept its plan (or an untouched one lost it): %v", got)
+	}
+	moved[1] = oraclegen.Step{Op: "cast", Targets: []string{"p0:Forest#8"}}
+	if got := keepTargetSkips(plan, before, moved); got != nil {
+		t.Fatalf("every plan invalidated, still got %v", got)
+	}
+	if got := keepTargetSkips(nil, before, same); got != nil {
+		t.Fatalf("no plan produced %v", got)
+	}
+}
+
+// TestPrepareKeepsLoweredTargetSkips: the lowering's skip plan for a Relive
+// the Past cast that names only a graveyard land reaches the prepared item
+// while Prepare leaves the cast's targets as the plan was derived from. The
+// drop on a retarget is TestKeepTargetSkipsFollowsRetarget's: gorge's picks
+// never differ from a scenario that already names them, so no scenario can
+// provoke the rewrite through Prepare.
+func TestPrepareKeepsLoweredTargetSkips(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sp, err := decks.LoadSpellings(manifestDir)
+	if err != nil {
+		t.Fatal(err)
+	}
+	plan := []oraclegen.XTargetSkip{{At: 0, Slot: 0}, {At: 1, Slot: 2}}
+	scenario := func(target string) oraclegen.Scenario {
+		return oraclegen.Scenario{
+			Name: "Relive the Past lone land target",
+			Why:  "the lowered skip plan survives Prepare",
+			Setup: map[string]oraclegen.Seat{
+				"p0": {
+					Hand:      []string{"Relive the Past"},
+					Graveyard: []string{"Forest", "Forest"},
+				},
+				"p1": {},
+			},
+			Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Relive the Past", Mana: "WGGGGGG", Targets: []string{target}},
+				{Op: "resolve"},
+			},
+		}
+	}
+	run := func(sc oraclegen.Scenario) (lower.Lowered, rules.OracleResult) {
+		t.Helper()
+		l := lower.Lowered{Item: oraclegen.Item{ID: "xe:test:relive-skips", Scenario: sc}}
+		l.Item.XTargetSkips = [][]oraclegen.XTargetSkip{plan, nil}
+		res, err := rules.RunOracleScenarioJSON(reg, l.Item.Raw())
+		if err != nil {
+			t.Fatalf("run scenario: %v", err)
+		}
+		if len(res.Fails) > 0 {
+			t.Fatalf("gorge rejects the scenario: %v", res.Fails)
+		}
+		return l, res
+	}
+
+	l, res := run(scenario("p0:Forest"))
+	it, ref := Prepare(reg, sp, l, res)
+	if ref != nil {
+		t.Fatalf("Prepare refused: %+v", ref)
+	}
+	if len(it.XTargetSkips) < 1 || !slices.Equal(it.XTargetSkips[0], plan) {
+		t.Fatalf("a cast whose targets Prepare left alone lost its plan: %v", it.XTargetSkips)
+	}
+
+	// gorge's result names the other Forest: ChooseTargets rewrites the step's
+	// target to it, so the plan (derived from the first list) is dropped.
+	_, other := run(scenario("p0:Forest#2"))
+	it, ref = Prepare(reg, sp, l, other)
+	if ref != nil {
+		t.Skipf("Prepare refuses the retargeted pair (%+v); the drop is TestKeepTargetSkipsFollowsRetarget's", ref)
+	}
+	if got := it.Steps[0].Targets; len(got) != 1 || got[0] != "p0:Forest#2" {
+		t.Fatalf("retargeted cast targets = %v, want [p0:Forest#2]", got)
+	}
+	if len(it.XTargetSkips) > 0 && len(it.XTargetSkips[0]) > 0 {
+		t.Fatalf("a retargeted cast kept the stale plan %v", it.XTargetSkips[0])
+	}
 }

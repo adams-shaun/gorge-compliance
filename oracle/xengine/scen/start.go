@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"regexp"
 	"strings"
 )
 
@@ -28,6 +29,10 @@ type StartFile struct {
 	// absent: 1): a retried key sets it to play new games.
 	SeedBase uint64      `json:"seed_base,omitempty"`
 	Focus    *StartFocus `json:"focus,omitempty"`
+	// Compare is the item's opt-in comparison fields (oraclediff.Compare*) the
+	// lowered item carries: a static start whose effect is a keyword is
+	// observable only with "keywords".
+	Compare []string `json:"compare,omitempty"`
 }
 
 // StartSetup holds the two seats' placements.
@@ -119,4 +124,61 @@ func Slug(name string) string {
 // KeyID is a key with "/" and "#" removed (f0/a2 -> f0a2).
 func KeyID(key string) string {
 	return strings.NewReplacer("/", "", "#", "").Replace(key)
+}
+
+// StartID is the id of a start item: xs:<set>:<slug>:<keyid>:s<n>. It and
+// StepsID are the only constructors of an xs: item id; ParseID is the only
+// reader, so the key an item was built for cannot drift from its id.
+func StartID(set, card, key string, n int) string {
+	return fmt.Sprintf("xs:%s:%s:%s:s%d", set, Slug(card), KeyID(key), n)
+}
+
+// StepsID is the id of a scripted-steps item: xs:<set>:<slug>:<keyid>:steps.
+func StepsID(set, card, key string) string {
+	return fmt.Sprintf("xs:%s:%s:%s:steps", set, Slug(card), KeyID(key))
+}
+
+// ParseID splits an xs: item id written by StartID or StepsID into its set,
+// card slug, key and ordinal ("s<n>" or "steps"). KeyID throws away "/" and
+// "#", so the key is rebuilt from its family (f0/a2, static#0.0,
+// combat#0.block, cast, land): the id names the key the item was built for,
+// which no tape entry does for a static or combat key.
+func ParseID(id string) (set, slug, key, ordinal string, ok bool) {
+	rest, found := strings.CutPrefix(id, "xs:")
+	if !found {
+		return "", "", "", "", false
+	}
+	parts := strings.Split(rest, ":")
+	if len(parts) != 4 || parts[0] == "" || parts[1] == "" || parts[3] == "" {
+		return "", "", "", "", false
+	}
+	key, ok = keyFromID(parts[2])
+	if !ok {
+		return "", "", "", "", false
+	}
+	return parts[0], parts[1], key, parts[3], true
+}
+
+var (
+	abilityKeyIDRE = regexp.MustCompile(`^f(\d+)([at])(\d+)$`)
+	staticKeyIDRE  = regexp.MustCompile(`^static(\d+)\.(\d+)$`)
+	combatKeyIDRE  = regexp.MustCompile(`^combat(\d+)\.(attack|block)$`)
+)
+
+// keyFromID is KeyID's inverse over the key families an item id can name.
+func keyFromID(keyid string) (string, bool) {
+	switch keyid {
+	case "cast", "land":
+		return keyid, true
+	}
+	if m := abilityKeyIDRE.FindStringSubmatch(keyid); m != nil {
+		return "f" + m[1] + "/" + m[2] + m[3], true
+	}
+	if m := staticKeyIDRE.FindStringSubmatch(keyid); m != nil {
+		return "static#" + m[1] + "." + m[2], true
+	}
+	if m := combatKeyIDRE.FindStringSubmatch(keyid); m != nil {
+		return "combat#" + m[1] + "." + m[2], true
+	}
+	return "", false
 }

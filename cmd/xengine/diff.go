@@ -236,7 +236,7 @@ func diff(reg *cards.Registry, playDir, engine, rowsPath, out, only string) erro
 			f = classify.Classify(l, tp, g, x, engine)
 			if classify.Credited(f.Class) {
 				lo, hi := classify.LoweredRange(l, tp)
-				for _, u := range classify.Sorted(classify.Uses(reg, tp, lo, hi, true)) {
+				for _, u := range classify.Sorted(credit(reg, it, tp, lo, hi, true)) {
 					compared.Add(u.Card, u.Key, cov.Counts{Compared: 1})
 				}
 			}

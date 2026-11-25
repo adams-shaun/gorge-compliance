@@ -20,7 +20,7 @@ import (
 type Focus struct {
 	Seat    int
 	Card    string // front-face name of the focus card
-	Kind    string // "ability", "cast", "land", "attack" or "" (no forced action)
+	Kind    string // "ability", "cast", "land", "attack", "block" or "" (no forced action)
 	Ability int    // for "ability": the index into Face().Abilities (decision.Option.Ability)
 	// Mode, for "cast", is the cast option's payment kind (decision.Option.Mode,
 	// e.g. "kicked"); "" takes any cast option of the card.
@@ -72,6 +72,12 @@ func (s *focusState) read(e *rules.Engine) {
 	}
 }
 
+// Kind "block": the focus seat is the defender. Its first block declaration
+// blocks with the focus card (the first option naming it), and every other
+// seat's attackers decision is answered with an attack by at least one creature
+// (the bot's own pick, or the first option), so the block is offered and taken
+// whatever the bots' policies.
+
 // focusBot is a seat that takes the focus action once. It lets the bot it wraps
 // decide first (its random stream is spent exactly as before, as bandBot does),
 // replaces that answer when the focus action is on offer, and from then on
@@ -116,13 +122,15 @@ func (s *focusState) holdPass(d decision.Decision, in decision.Intent) decision.
 	return in
 }
 
-// manaFor is, for a cast focus with a Mode (a kicked cast), the focus seat's
-// first activation of a land, or -1. Such a cast is never a planned payment (the
-// payment planner plans the card's own cost), and a seat whose bot pays
-// through plans is offered a cast option only once the pool covers it, so the
-// focus taps its lands (a forced start's mana sources: basics) one by one until the mode's option is offered.
+// manaFor is, for a cast focus, the focus seat's first activation of a land,
+// or -1. A seat whose bot pays through plans is offered a cast option only once
+// the pool covers it (an instant or a spell the bot has no reason to cast leaves
+// its lands untapped, and the cast is never offered; a kicked cast is never a
+// planned payment either, as the planner plans the card's own cost), so the
+// focus taps its lands (a forced start's mana sources: basics) one by one until
+// the option, the mode's when it has one, is offered.
 func (s *focusState) manaFor(d decision.Decision) int {
-	if s.f.Kind != "cast" || s.f.Mode == "" || int(d.Player) != s.f.Seat {
+	if s.f.Kind != "cast" || int(d.Player) != s.f.Seat {
 		return -1
 	}
 	for i, o := range d.Options {
@@ -151,6 +159,9 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 	st := b.st
 	if err != nil || st.done || st.f.Kind == "" {
 		return in, err
+	}
+	if st.f.Kind == "block" {
+		return st.block(d, in), nil
 	}
 	if !st.open() {
 		return st.holdPass(d, in), nil
@@ -198,4 +209,32 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 		}
 	}
 	return in, nil
+}
+
+// block is act for a "block" focus: the defending focus seat blocks with the
+// focus card; any other seat attacks (the focus seat's opponent, whose bot
+// might otherwise decline to).
+func (s *focusState) block(d decision.Decision, in decision.Intent) decision.Intent {
+	if !s.open() {
+		return s.holdPass(d, in)
+	}
+	switch d.Kind {
+	case decision.KAttackers:
+		if int(d.Player) == s.f.Seat || len(in.Choices) > 0 || len(d.Options) == 0 {
+			return in
+		}
+		in.Choices = []int{0}
+	case decision.KBlockers:
+		if int(d.Player) != s.f.Seat {
+			return in
+		}
+		for i, o := range d.Options {
+			if s.objs[o.Obj] {
+				s.took()
+				in.Choices = []int{i}
+				return in
+			}
+		}
+	}
+	return in
 }

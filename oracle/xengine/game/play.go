@@ -50,6 +50,10 @@ type Options struct {
 	// Focus, when non-nil, makes one seat take the focus action once, on its
 	// first chance (focus.go).
 	Focus *Focus
+	// FocusTook, when non-nil (with Focus), is set when Play returns to how
+	// many times the focus seat took its action: 0 means the action was never
+	// offered at any priority, so the game exercised nothing of the key.
+	FocusTook *int
 	// plainSeats seats the bare explore bot where Play seats a bandBot (a test
 	// compares the two on a game with no band).
 	plainSeats bool
@@ -191,7 +195,8 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 		if opt.plainSeats {
 			bot = hb
 		}
-		if fst != nil && opt.Focus.Seat == i {
+		// a block focus also steers the other seats: their attack is forced
+		if fst != nil && (opt.Focus.Seat == i || opt.Focus.Kind == "block") {
 			bot = focusBot{bot: bot, st: fst}
 		}
 		seats[i] = bot
@@ -267,6 +272,9 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 	if e != nil {
 		r.flush(e)
 		r.markReanswered(e)
+	}
+	if fst != nil && opt.FocusTook != nil {
+		*opt.FocusTook = fst.n
 	}
 	t.Outcome = Outcome{Turns: o.Turns, Intents: o.Intents, Stall: o.StallOn, Diag: o.Livelock}
 	if o.StallOn == "panic" {

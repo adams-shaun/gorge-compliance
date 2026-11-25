@@ -8,11 +8,12 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
 
-	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
@@ -24,6 +25,10 @@ import (
 
 // startFormat is the format tag of a start file.
 const startFormat = "xproof-start-1"
+
+// reasonStartNotExercised is the refusal of a start whose focus seat was never
+// offered the focus play.
+const reasonStartNotExercised = "start-not-exercised"
 
 // startDeckSize is the size a seat's deck is filled to with basics.
 const startDeckSize = 40
@@ -48,6 +53,10 @@ type startFile struct {
 	// key retried in a later cycle plays new games, not the same Seeds again.
 	SeedBase uint64      `json:"seed_base"`
 	Focus    *startFocus `json:"focus"`
+	// Compare is the item's opt-in comparison fields (oraclediff.Compare*),
+	// carried onto the lowered item: a start whose key is a keyword grant is
+	// observable only with "keywords" (null: the item compares nothing extra).
+	Compare []string `json:"compare"`
 }
 
 // startSeat is one seat's position, as card names.
@@ -151,6 +160,9 @@ func readStartFile(path string) (*startFile, error) {
 	case f.Filler != "basics":
 		return nil, fmt.Errorf("%s: filler %q, want \"basics\"", path, f.Filler)
 	}
+	if err := oraclediff.ValidateCompare(f.Compare); err != nil {
+		return nil, fmt.Errorf("%s: compare: %w", path, err)
+	}
 	return &f, nil
 }
 
@@ -226,15 +238,6 @@ func (s startSeat) lists(card string) bool {
 	return false
 }
 
-var nonSlug = regexp.MustCompile(`[^a-z0-9]+`)
-
-// startID is xs:<SET>:<slug>:<keyid>:s<n>.
-func startID(set, card, key string, n int) string {
-	slug := strings.Trim(nonSlug.ReplaceAllString(strings.ToLower(card), "-"), "-")
-	keyid := strings.NewReplacer("/", "", "#", "").Replace(key)
-	return fmt.Sprintf("xs:%s:%s:%s:s%d", set, slug, keyid, n)
-}
-
 // startDeck is a seat's deck and its scripted position: the listed cards in
 // the order hand, battlefield, graveyard, exile, library, then basics to 40.
 func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules.StartSeat, error) {
@@ -278,8 +281,14 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 		}
 	}
 	bind := func(card string, used map[int]bool) (int, error) {
+		// d.Cards holds front-face names, so resolve the listed name the same
+		// way add did: a double-faced card is listed as "A // B" or by its back.
+		want := card
+		if c, ok := reg.Lookup(card); ok && len(c.Faces) > 0 {
+			want = c.Faces[0].Name
+		}
 		for _, i := range bf {
-			if d.Cards[i] == card && !used[i] {
+			if d.Cards[i] == want && !used[i] {
 				used[i] = true
 				return i, nil
 			}
@@ -410,9 +419,10 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 		seeds := f.gameSeeds()
 		for s := 1; s <= f.Seeds; s++ {
 			games++
-			id := startID(set, f.Card, f.Key, s)
+			id := scen.StartID(set, f.Card, f.Key, s)
 			name := fmt.Sprintf("xproof start %s %s seed %d", f.Card, f.Key, s)
-			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus}
+			took := -1
+			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus, FocusTook: &took}
 			if f.MaxTurns > 0 {
 				// max_turns is the turns played: the engine's watchdog stalls
 				// the game as the turn after them begins.
@@ -427,7 +437,25 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				hist[row.Status]++
 				continue
 			}
-			for u, n := range classify.Uses(reg, tp, 0, len(tp.Entries)-1, true) {
+			if focus.Kind != "" && took == 0 {
+				// The focus seat was never offered the focus play (no target, wrong
+				// timing, an enabler that died): the game exercises nothing of the
+				// key, so the file is refused, not written.
+				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartNotExercised}})
+				if err != nil {
+					return err
+				}
+				lowerLog.Write(b)
+				hist[statusRefused]++
+				continue
+			}
+			// The item names the card it starts and (in its id) the key it was
+			// written for, so a static or combat key -- which no tape entry
+			// names -- is credited too (credit). Card is the front-face spelling
+			// startDeck dealt, not the file's (a joined "A // B" start would
+			// otherwise credit a second spelling of the same key).
+			l.Item.Card = canonicalCard(reg, f.Card)
+			for u, n := range credit(reg, l.Item, tp, 0, len(tp.Entries)-1, true) {
 				exercised.Add(u.Card, u.Key, cov.Counts{Exercised: n})
 			}
 			if len(reasons) > 0 {
@@ -438,6 +466,11 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				lowerLog.Write(b)
 				hist[statusRefused]++
 				continue
+			}
+			for _, c := range f.Compare {
+				if !slices.Contains(l.Item.Compare, c) {
+					l.Item.Compare = append(l.Item.Compare, c)
+				}
 			}
 			if err := em.emit(l, spanFile(l), lower.CheckWindow(reg, l)); err != nil {
 				return err
