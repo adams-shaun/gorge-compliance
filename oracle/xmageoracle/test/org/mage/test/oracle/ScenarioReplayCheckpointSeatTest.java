@@ -329,6 +329,24 @@ public final class ScenarioReplayCheckpointSeatTest {
         equal("Brightclimb Pathway", ScenarioReplay.playLandName(pathway, "Brightclimb Pathway"));
         // An unresolvable card keeps the ref's spelling.
         equal("Island", ScenarioReplay.playLandName(null, "Island"));
+
+        // A recorded pass into either declaration step is a declaration
+        // checkpoint: the declaration is the pending turn-based action, so
+        // nobody has priority and offered is empty (CR 508.1, 509.1). The
+        // switch covers both steps; a pass into another step is not one.
+        for (String step : List.of("declare-attackers", "declare-blockers")) {
+            JsonObject decl = JsonParser.parseString("{\"steps\":[{\"op\":\"pass\",\"seat\":0}],"
+                    + "\"xmage_pos\":[{\"turn\":1,\"step\":\"" + step + "\",\"active\":0,\"moved\":true}]}")
+                    .getAsJsonObject();
+            ScenarioReplay.mergePassPositions(decl);
+            equal(step.equals("declare-attackers") ? PhaseStep.DECLARE_ATTACKERS : PhaseStep.DECLARE_BLOCKERS,
+                    ScenarioReplay.declarationCheckpoint(ScenarioReplay.steps(decl), 0, 2));
+        }
+        JsonObject combat = JsonParser.parseString("{\"steps\":[{\"op\":\"pass\",\"seat\":0}],"
+                + "\"xmage_pos\":[{\"turn\":1,\"step\":\"begin-combat\",\"active\":0,\"moved\":true}]}")
+                .getAsJsonObject();
+        ScenarioReplay.mergePassPositions(combat);
+        equal(null, ScenarioReplay.declarationCheckpoint(ScenarioReplay.steps(combat), 0, 2));
         System.out.println("PASS checkpoint seat and bound activation text");
     }
 }

@@ -128,6 +128,41 @@ public final class ScenarioReplayOfferedCheckpointTest {
                 "step 1 (p1's resolving pass) is already at p0's next-step priority");
     }
 
+    /** The xproof mm-menon / icetill-explorer shape: both seats pass through
+     * beginning of combat, so the second pass enters declare attackers. The
+     * active player declares attackers as a turn-based action before anyone
+     * gets priority (CR 508.1, 117.3a), so gorge's pending decision is the
+     * declaration and its checkpoint offers nothing. XMage still names p0
+     * there and used to list p0's mana ability. The earlier pass checkpoints
+     * still offer the holder's options, so an empty set at step 3 is the
+     * declaration, not a holder that happens to have nothing. */
+    private static void passIntoDeclareAttackersOffersNothing() throws Exception {
+        JsonObject res = replay("{"
+                + "\"id\":\"offered-declare-attackers-pending\","
+                + "\"name\":\"a pass into declare attackers offers nothing before the declaration\","
+                + "\"turn\":1,"
+                + "\"compare\":[\"offered\"],"
+                + "\"xmage_pos\":["
+                + "{\"turn\":1,\"step\":\"main1\",\"active\":0},"
+                + "{\"turn\":1,\"step\":\"begin-combat\",\"active\":0,\"moved\":true},"
+                + "{\"turn\":1,\"step\":\"begin-combat\",\"active\":0},"
+                + "{\"turn\":1,\"step\":\"declare-attackers\",\"active\":0,\"moved\":true}],"
+                + "\"setup\":{\"p0\":{\"battlefield\":[\"Forest\"]},\"p1\":{}},"
+                + "\"steps\":[{\"op\":\"pass\",\"seat\":0},{\"op\":\"pass\",\"seat\":1},"
+                + "{\"op\":\"pass\",\"seat\":0},{\"op\":\"pass\",\"seat\":1}]"
+                + "}");
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        equal(5, snaps.size(), "setup plus four step checkpoints");
+        equal(Collections.singletonList("p0:Forest|activate"), offered(snaps.get(2).getAsJsonObject()),
+                "step 1 (pass into begin combat) offers the active seat's Forest");
+        equal("DECLARE_ATTACKERS", snaps.get(4).getAsJsonObject().get("step").getAsString(),
+                "step 3 checkpoint is the declare-attackers step");
+        equal(0, snaps.get(4).getAsJsonObject().get("priority").getAsInt(),
+                "step 3 (pass into declare attackers) still names p0 as the priority holder");
+        equal(Collections.emptyList(), offered(snaps.get(4).getAsJsonObject()),
+                "step 3 (pass into declare attackers) offers nothing before the declaration");
+    }
+
     public static void main(String[] args) throws Exception {
         passHandoffReportsNonActiveSeat();
         System.out.println("PASS a lone pass checkpoint offers the non-active seat's empty set");
@@ -135,5 +170,7 @@ public final class ScenarioReplayOfferedCheckpointTest {
         System.out.println("PASS a lone pass checkpoint offers the new holder's options");
         legacyPairFirstPassHandsOff();
         System.out.println("PASS a legacy pair's first pass offers the new holder's options");
+        passIntoDeclareAttackersOffersNothing();
+        System.out.println("PASS a pass into declare attackers offers nothing before the declaration");
     }
 }
