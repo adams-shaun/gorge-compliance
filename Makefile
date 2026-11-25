@@ -396,7 +396,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
 # 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
 # Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
-FORGE_ORACLE_REF ?= d0f16bee2e018d35874a0a8838491c1af1b02b82
+# 752947823d = d0f16bee2e plus the fork's second-combat-damage-step priority fix b16a076d04 (cherry-picked as 67df148f93):
+# PhaseHandler.onPhaseBegin COMBAT_DAMAGE no longer clears givePriorityToPlayer when assignCombatDamage(false) assigns nothing,
+# so a lone first striker's regular damage step gives priority (CR 510.3, 510.4; xproof cluster forge_skips_damage_step,
+# triage xpt-c647818a: Akroma, Angel of Wrath and Goblin Striker). SecondCombatDamageStepPriorityTest fails on d0f16bee2e and
+# passes after. Driver and die-roll code unchanged; cardsfolder/tokenscripts unchanged. Fork branch
+# fix/xp-forge-oracle-damage-step-priority.
+FORGE_ORACLE_REF ?= 752947823de577f59db46031648ce2ec88dbe65a
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
