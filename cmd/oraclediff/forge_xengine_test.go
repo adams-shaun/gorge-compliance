@@ -169,6 +169,18 @@ func TestForgeKeepsComboColourPick(t *testing.T) {
 	if got := build("p0:Overgrown Zealot", 0, "Add any color"); len(got) != 0 {
 		t.Fatalf("Overgrown Zealot wheel exported: %+v", got)
 	}
+	// A filter land's Combo is Amount$ 2: its per-colour label ("Add GG") is
+	// not one colour symbol, the driver cannot read it as the colour, so it
+	// stays dropped as before.
+	for _, c := range []struct {
+		card string
+		k    int
+		pick string
+	}{{"p0:Wooded Bastion", 1, "Pay G/W: Add GG"}, {"p0:Mystic Gate", 1, "Pay W/U: Add WW"}} {
+		if got := build(c.card, c.k, c.pick); len(got) != 0 {
+			t.Fatalf("%s multi-pip label exported: %+v", c.card, got)
+		}
+	}
 }
 
 // TestXengineForgeExportEmptyDeclaration: an xengine item's empty attack or
