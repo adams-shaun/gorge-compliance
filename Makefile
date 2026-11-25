@@ -908,7 +908,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # recorded state with no event or trigger, and refuses an unknown, keyword or negative entry. PlayerCountersSetupTest (5 tests, red
 # before) is run by scripts/forge-oracle-test-player-counters.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-player-counters.
-FORGE_ORACLE_REF ?= 495ed200e9f367aa7298908df5f4530c2cc4c8af
+# af167fe93c3 = 495ed200e9f (above) + the setup life is a state (xproof cluster xpt-57a0a28c, Angel of Vitality): SetupBuilder wrote a
+# seat's life with Player.setLife after the battlefield was placed, and Forge turns a raise into gainLife and a drop into loseLife
+# (CR 119.5), so Angel of Vitality's "if you would gain life, you gain that much life plus 1 instead" (CR 614) made a setup life of 25
+# read 26 while gorge and XMage held 25. SetupBuilder.placeLife now writes every seat's life before the first permanent is placed,
+# while no replacement effect or trigger exists. SetupLifeReplacementTest (4 tests, 3 red before) is run by
+# scripts/forge-oracle-test-setup-life-replacement.sh (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-life-state.
+FORGE_ORACLE_REF ?= af167fe93c30a9c3a60494db9e4506f13df210dc
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

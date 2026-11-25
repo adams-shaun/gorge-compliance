@@ -228,7 +228,9 @@ func TestForgeRolledDie(t *testing.T) {
 // re-run green on the pin (run-unit-tests.sh).
 // 495ed200e9f = 0ca7a220bd0 (join18, above) plus setup player_counters (SetupBuilder.placePlayerCounters, PlayerCountersSetupTest);
 // die-roll code unchanged, ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
-const forgeOracleDieRollRef = "495ed200e9f367aa7298908df5f4530c2cc4c8af"
+// af167fe93c3 = 495ed200e9f plus the setup life written before any permanent exists (SetupBuilder.placeLife, SetupLifeReplacementTest);
+// die-roll code unchanged, ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
+const forgeOracleDieRollRef = "af167fe93c30a9c3a60494db9e4506f13df210dc"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
