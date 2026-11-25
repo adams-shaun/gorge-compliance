@@ -75,7 +75,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e734759-d43a-4bbe-baff-26d866ff0923	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nightmare-incursion:cast:s1,f:xs:XP:nightmare-incursion:cast:s1	-	-	-	8a1b1a193ec0	-	903381767826	-	-	2026-11-24	xproof
 3e765710-e567-4af0-b5f5-7c182649b757	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e765710-e567-4af0-b5f5-7c182649b757	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-3e7707df-54e3-4307-9695-2de4e3edcf89	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3e7707df-54e3-4307-9695-2de4e3edcf89	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3e771f5b-2de3-4a1b-8281-ab1f7491e5a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fungusaur:cast:s1,f:xs:XP:fungusaur:cast:s1	-	-	-	ae86f6029288	-	e9d2ee28084e	-	-	2026-11-24	xproof
 3e771f5b-2de3-4a1b-8281-ab1f7491e5a1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3e7879d5-62ea-4c9a-9fc0-659d70f3a8e1	cast	cast-resolve	agreed	-	FX	scen	2	0	Unscrupulous Agent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -135,8 +135,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ec3d99d-2c49-469a-81d5-f1609b6e49ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reclaiming-vines:cast:s1,f:xs:XP:reclaiming-vines:cast:s1	-	-	-	d864b561c9cb	-	3325b952a0b9	-	-	2026-11-24	xproof
 3ec7ae18-b203-49bd-95f9-ad5482459a23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ec7ae18-b203-49bd-95f9-ad5482459a23	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-3ecaefc8-ead2-47a3-a7ea-b030faab65a7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	5706bcc90bfc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-3ecaefc8-ead2-47a3-a7ea-b030faab65a7	f0/a0	Untap	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	5706bcc90bfc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3ecaefc8-ead2-47a3-a7ea-b030faab65a7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	5706bcc90bfc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+3ecaefc8-ead2-47a3-a7ea-b030faab65a7	f0/a0	Untap	owed	harness	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	5706bcc90bfc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3ece897d-5b52-4fca-9f97-d7e864134c0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ed41d2d-211b-4013-8562-8c64d54cc43a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ramos-dragon-engine:cast:s1,f:xs:XP:ramos-dragon-engine:cast:s1	-	-	-	8c0bd19283bb	-	2ffff32232e8	-	-	2026-11-24	xproof
 3ed41d2d-211b-4013-8562-8c64d54cc43a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ramos-dragon-engine:combat0.attack:s1,f:xs:XP:ramos-dragon-engine:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2ffff32232e8	-	-	2026-11-25	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ee78cfc-0e9e-4737-a7e2-b42f94228040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ee78cfc-0e9e-4737-a7e2-b42f94228040	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cruel-celebrant:f0t0:s1,f:xs:XP:cruel-celebrant:f0t0:s1	-	-	-	d864b561c9cb	-	d32cfffcd12e	-	-	2026-11-24	xproof
 3eec0ca6-e461-4583-9989-e4f6b15a53f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3eec0ca6-e461-4583-9989-e4f6b15a53f8	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3eec0ca6-e461-4583-9989-e4f6b15a53f8	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3eeeb159-aa45-4a9b-9618-8542604b9830	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-kingpin-of-crime:cast:s1,f:xs:XP:the-kingpin-of-crime:cast:s1	-	-	-	23c4009444b0	-	be7d8a943cf8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3eeeb159-aa45-4a9b-9618-8542604b9830	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:the-kingpin-of-crime:f0t0:s1,f:xs:XP:the-kingpin-of-crime:f0t0:s1	-	-	-	23c4009444b0	-	be7d8a943cf8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3eeeb159-aa45-4a9b-9618-8542604b9830	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Kingpin of Crime/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -106,8 +106,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 597bce51-af89-4d13-9a97-667b4f4f4694	f0/t0	Attacks/Annihilator	agreed	-	FX	start	2	0	x:xs:XP:ulamog-s-crusher:f0t0:s1,f:xs:XP:ulamog-s-crusher:f0t0:s1	-	-	-	d864b561c9cb	-	7d30be2a6e5c	-	-	2026-11-24	xproof
 597bd341-c5a0-47a3-9864-1fccab8a2a00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tangle-spider:cast:s1,f:xs:XP:tangle-spider:cast:s1	-	-	-	25696bf19d5b	-	dee7f44a90b1	-	-	2026-11-24	xproof
 598283f3-ae29-43b9-8743-6c065136dcad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5987ce77-10ad-4871-900a-5a005fcf4955	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-5987ce77-10ad-4871-900a-5a005fcf4955	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5987ce77-10ad-4871-900a-5a005fcf4955	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+5987ce77-10ad-4871-900a-5a005fcf4955	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 598a7347-b772-4839-a02f-b930076c1354	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 598a7347-b772-4839-a02f-b930076c1354	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 598a7410-35e8-4d62-9bf1-d44ee7717040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59e8747a-3e3f-48d2-aaee-af94ecee378b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shackle-slinger:cast:s1,f:xs:XP:shackle-slinger:cast:s1	-	-	-	3aa6ded33acb	-	e987b1ba0316	-	-	2026-11-25	xproof
 59e8747a-3e3f-48d2-aaee-af94ecee378b	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:shackle-slinger:f0t0:s1,f:xs:XP:shackle-slinger:f0t0:s1	-	-	-	3aa6ded33acb	-	e987b1ba0316	-	-	2026-11-25	xproof
 59eab251-af80-4091-98de-9ed413c14cdc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59eab251-af80-4091-98de-9ed413c14cdc	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+59eab251-af80-4091-98de-9ed413c14cdc	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 59edd0e7-37c2-45f9-9f9d-8002be459662	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grizzled-leotau:cast:s1,f:xs:XP:grizzled-leotau:cast:s1	-	-	-	8a1b1a193ec0	-	c4351e2b71a4	-	-	2026-11-24	xproof
 59f10ddb-8287-4d2c-8c60-1080b108fa78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59f10ddb-8287-4d2c-8c60-1080b108fa78	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:requiem-angel:f0t0:s1,f:xs:XP:requiem-angel:f0t0:s1	-	-	-	23c4009444b0	-	6f0f5daa21ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

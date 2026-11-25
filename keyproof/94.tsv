@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 94688e25-28cb-45aa-95ea-0d6f547cae57	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:matterbending-mage:f0t0:s2,f:xs:XP:matterbending-mage:f0t0:s2	-	-	-	5437c1394672	-	435744826b17	-	-	2026-11-24	xproof
 94688e25-28cb-45aa-95ea-0d6f547cae57	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Matterbending Mage/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 94688e62-f39f-41fd-9309-f16b715ef724	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-946bba74-0951-408c-b06f-167739b10934	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+946bba74-0951-408c-b06f-167739b10934	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 946d770f-0a59-415b-b334-8f7353b96046	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pardic-swordsmith:cast:s1,f:xs:XP:pardic-swordsmith:cast:s1	-	-	-	fc71ca68c5ac	-	0594c892d160	-	-	2026-11-24	xproof
 946d770f-0a59-415b-b334-8f7353b96046	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 9472c96a-2827-4af6-a6a1-b6749a5e9069	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:benevolent-blessing:cast:s1,f:xs:XP:benevolent-blessing:cast:s1	-	-	-	8c0bd19283bb	-	05eacf3e0dda	-	-	2026-11-24	xproof
@@ -101,7 +101,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 947835a2-a72f-44e2-a183-99dcb019d6ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deathbellow-war-cry:cast:s1,f:xs:XP:deathbellow-war-cry:cast:s1	-	-	-	ae86f6029288	-	b6c2ffc639d5	-	-	2026-11-24	xproof
 94794f7c-62e7-43c8-ba7f-ac5c0bc9a712	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 947a2665-2f4d-4193-8768-118f85334549	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-947a2665-2f4d-4193-8768-118f85334549	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+947a2665-2f4d-4193-8768-118f85334549	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 947b40a2-e272-4ef6-85fb-3d767a21bc7a	cast	cast-resolve	agreed	-	FX	scen	2	0	Esper Origins/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 94806688-329d-429d-8126-2c9187e71f54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94806688-329d-429d-8126-2c9187e71f54	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:kyscu-drake:f0a0:s1,f:xs:XP:kyscu-drake:f0a0:s1	-	-	-	8c0bd19283bb	-	b92edf9031b9	-	-	2026-11-24	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 94be2e86-ba0e-4b8d-9b9c-114adacb26db	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:way-of-the-mind-sculptor:f0t0:s1	-	-	-	25696bf19d5b	-	bfe6a00ba0de	-	-	2026-11-24	xproof
 94be2e86-ba0e-4b8d-9b9c-114adacb26db	f0/t1	AbilityCast	agreed	-	F	start	2	0	f:xs:XP:way-of-the-mind-sculptor:f0t0:s1	-	-	-	25696bf19d5b	-	bfe6a00ba0de	-	-	2026-11-24	xproof
 94c47804-bb64-4a91-85c5-9241c39685aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-94c47804-bb64-4a91-85c5-9241c39685aa	f0/a0	NULL	owed	refused:steps-needed:cost:BG	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+94c47804-bb64-4a91-85c5-9241c39685aa	f0/a0	NULL	owed	refused:steps-needed:cost:BG	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 94c64d41-d756-42b6-b0e7-0a351d64a68c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zhao-the-moon-slayer:cast:s1,f:xs:XP:zhao-the-moon-slayer:cast:s1	-	-	-	23c4009444b0	-	2c36cff33c84	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 94c64d41-d756-42b6-b0e7-0a351d64a68c	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:zhao-the-moon-slayer:combat0.attack:s1,f:xs:XP:zhao-the-moon-slayer:combat0.attack:s1	-	-	-	23c4009444b0	-	2c36cff33c84	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 94c64d41-d756-42b6-b0e7-0a351d64a68c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Zhao, the Moon Slayer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

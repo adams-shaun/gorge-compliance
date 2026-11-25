@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4e1bc03c-e131-4422-beba-0a45a26fdf43	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nut-collector:f0t0:s1,f:xs:XP:nut-collector:f0t0:s1	-	-	-	3aa6ded33acb	-	513e1274975d	-	-	2026-11-25	xproof
 4e1bc03c-e131-4422-beba-0a45a26fdf43	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nut-collector:f0t0:s1,f:xs:XP:nut-collector:f0t0:s1	-	-	-	3aa6ded33acb	-	513e1274975d	-	-	2026-11-25	xproof
 4e1efd99-8bfc-4650-a430-a754578facbd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4e1efd99-8bfc-4650-a430-a754578facbd	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4e1efd99-8bfc-4650-a430-a754578facbd	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 4e1f4211-5865-492d-b850-0d36ac12e857	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enforcer-griffin:cast:s1,f:xs:XP:enforcer-griffin:cast:s1	-	-	-	d864b561c9cb	-	278a489f96ec	-	-	2026-11-24	xproof
 4e34a49d-f031-48ac-a458-97b79124b76c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Midgar, City of Mako/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4e34a49d-f031-48ac-a458-97b79124b76c	land	play-land	agreed	-	X	scen	1	0	Midgar, City of Mako/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -71,8 +71,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4e94f685-f392-40a8-8ad4-683351877fd9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:forsaken-drifters:f0t0:s1,f:xs:XP:forsaken-drifters:f0t0:s1	-	-	-	d864b561c9cb	-	58cba9234e25	-	-	2026-11-24	xproof
 4e964f31-c764-4af5-8c27-a46fd721fab4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:springmane-cervin:f0t0:s1,f:xs:XP:springmane-cervin:f0t0:s1	-	-	-	d864b561c9cb	-	064c1773565c	-	-	2026-11-24	xproof
 4e964f31-c764-4af5-8c27-a46fd721fab4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:springmane-cervin:f0t0:s1,f:xs:XP:springmane-cervin:f0t0:s1	-	-	-	d864b561c9cb	-	064c1773565c	-	-	2026-11-24	xproof
-4e9a63d2-b48b-4740-95ba-7966ada95baf	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-4e9a63d2-b48b-4740-95ba-7966ada95baf	f0/a0	NULL	owed	refused:steps-needed:cost:UB	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4e9a63d2-b48b-4740-95ba-7966ada95baf	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+4e9a63d2-b48b-4740-95ba-7966ada95baf	f0/a0	NULL	owed	refused:steps-needed:cost:UB	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 4e9b878b-80a2-433b-941b-92d854e83d58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4e9b878b-80a2-433b-941b-92d854e83d58	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:weatherseed-treefolk:f0t0:s1,f:xs:XP:weatherseed-treefolk:f0t0:s1	-	-	-	5f2128bf97e4	-	81f561a3d612	-	-	2026-11-24	xproof
 4ea488b2-5ba0-4565-b928-570c8e03b926	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

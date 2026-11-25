@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d3563dd-a2c1-463c-a0ed-5ac22388bdbe	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5d3563dd-a2c1-463c-a0ed-5ac22388bdbe	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d3563dd-a2c1-463c-a0ed-5ac22388bdbe	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d36e5ee-1e23-48fe-ad13-081cc153342b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5d36e5ee-1e23-48fe-ad13-081cc153342b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 5d451958-25f3-4e70-8be2-c832f60f39e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:serpent-s-soul-jar:cast:s1,f:xs:XP:serpent-s-soul-jar:cast:s1	-	-	-	8c0bd19283bb	-	f1441fe2c410	-	-	2026-11-24	xproof
 5d451958-25f3-4e70-8be2-c832f60f39e9	f0/a0	Effect	agreed	-	FX	start	4	0	x:xs:XP:serpent-s-soul-jar:cast:s1,f:xs:XP:serpent-s-soul-jar:cast:s1	-	-	-	8c0bd19283bb	-	f1441fe2c410	-	-	2026-11-24	xproof
 5d451958-25f3-4e70-8be2-c832f60f39e9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -63,7 +63,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d4ed768-0a37-4604-8121-43920ed9fb4a	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 5d520476-740a-4005-801e-472b24fa6497	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ink-eyes-servant-of-oni:cast:s1,f:xs:XP:ink-eyes-servant-of-oni:cast:s1	-	-	-	64a08ba7d913	-	56a0b293e6a6	-	-	2026-11-24	xproof
 5d520476-740a-4005-801e-472b24fa6497	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:ink-eyes-servant-of-oni:f0a0:s1,f:xs:XP:ink-eyes-servant-of-oni:f0a0:s1	-	-	-	23c4009444b0	-	56a0b293e6a6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-5d520476-740a-4005-801e-472b24fa6497	f0/a1	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5d520476-740a-4005-801e-472b24fa6497	f0/a1	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 5d520476-740a-4005-801e-472b24fa6497	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:ink-eyes-servant-of-oni:f0a0:s1,f:xs:XP:ink-eyes-servant-of-oni:f0a0:s1	-	-	-	23c4009444b0	-	56a0b293e6a6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:djeru-with-eyes-open:f0t0:s1,f:xs:XP:djeru-with-eyes-open:f0t0:s1	-	-	-	d864b561c9cb	-	a6f2dc5be24c	-	-	2026-11-24	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:djeru-with-eyes-open:f0t0:s1,f:xs:XP:djeru-with-eyes-open:f0t0:s1	-	-	-	d864b561c9cb	-	a6f2dc5be24c	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ddcc7a5-c869-49fd-baa1-ab5f5f456f90	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5de0769e-5141-42d5-aaa6-549cfc154de8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:highway-robber:f0t0:s1,f:xs:XP:highway-robber:f0t0:s1	-	-	-	25696bf19d5b	-	3079300dbaae	-	-	2026-11-24	xproof
 5de0769e-5141-42d5-aaa6-549cfc154de8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:highway-robber:f0t0:s1,f:xs:XP:highway-robber:f0t0:s1	-	-	-	25696bf19d5b	-	3079300dbaae	-	-	2026-11-24	xproof
-5de32ec7-3085-4b6b-a52e-5a1b3fdf07d3	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5de32ec7-3085-4b6b-a52e-5a1b3fdf07d3	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 5de50aa5-3b30-4d7d-9203-bc8fc0f8fb34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5de63529-7dea-4018-bf46-afb4bc8b69fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5de63529-7dea-4018-bf46-afb4bc8b69fd	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:krark-clan-ogre:f0a0:s1,f:xs:XP:krark-clan-ogre:f0a0:s1	-	-	-	23c4009444b0	-	26e9e8d53a4f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

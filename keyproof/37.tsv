@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 374e54d8-8e73-4268-9dde-c28c77bbbf32	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:aftermath-analyst:f0t0:s2,f:xs:XP:aftermath-analyst:f0t0:s2	-	-	-	e07cf3a05ba5	-	b957c415a573	-	-	2026-11-24	xproof
 374e6c1b-5a9a-4d3f-8bff-2f6bc0419391	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 374e6c1b-5a9a-4d3f-8bff-2f6bc0419391	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-374f550a-a761-4994-a4aa-b05a2ec415de	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+374f550a-a761-4994-a4aa-b05a2ec415de	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 37513bd8-7303-4ac6-a7a7-224184faf758	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Theorist's Sanctum/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37513bd8-7303-4ac6-a7a7-224184faf758	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Theorist's Sanctum/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37513bd8-7303-4ac6-a7a7-224184faf758	land	play-land	agreed	-	FX	scen	2	0	Theorist's Sanctum/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3759f1de-eda1-4f09-b12b-ea5f5fc731d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:federation-field-medic:f0t0:s1,f:xs:XP:federation-field-medic:f0t0:s1	-	-	-	23c4009444b0	-	7da1fe425ce2	-	-	2026-11-25	xproof
 3759f1de-eda1-4f09-b12b-ea5f5fc731d7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:federation-field-medic:f0t0:s1,f:xs:XP:federation-field-medic:f0t0:s1	-	-	-	23c4009444b0	-	7da1fe425ce2	-	-	2026-11-25	xproof
 375ea10b-da68-4c66-b3eb-f5113c09ea4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-376271a6-80f0-47a6-990a-5ec5517aae42	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+376271a6-80f0-47a6-990a-5ec5517aae42	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3763de30-28e1-4689-a71c-07d2fea3a466	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:zoetic-cavern:land:s1,f:xs:XP:zoetic-cavern:land:s1	-	-	-	77494c1ce129	-	6c3bc1607541	-	-	2026-11-24	xproof
 3763de30-28e1-4689-a71c-07d2fea3a466	land	land	agreed	-	FX	start	2	0	x:xs:XP:zoetic-cavern:land:s1,f:xs:XP:zoetic-cavern:land:s1	-	-	-	77494c1ce129	-	6c3bc1607541	-	-	2026-11-24	xproof
 3765e8bb-e70d-4503-b8dc-1e684e434c18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:verdurous-gearhulk:f0t0:s1,f:xs:XP:verdurous-gearhulk:f0t0:s1	-	-	-	d864b561c9cb	-	65175c97350f	-	-	2026-11-24	xproof
@@ -154,9 +154,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37aae6d1-1de0-47d1-85dd-d4a6d9635c05	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:psionic-entity:f0a0:s1,f:xs:XP:psionic-entity:f0a0:s1	-	-	-	fc71ca68c5ac	-	f214ee104037	-	-	2026-11-24	xproof
 37ad9318-6690-4a8d-bcea-9fcbca58769d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37b7f044-f57b-4d13-82be-46fd01f1dba6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:witherscale-wurm:cast:s1,f:xs:XP:witherscale-wurm:cast:s1	-	-	-	8a1b1a193ec0	-	f68efd647c02	-	-	2026-11-24	xproof
-37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t2	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+37b7f044-f57b-4d13-82be-46fd01f1dba6	f0/t2	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 37bd9e54-c93e-4fec-9b21-6940da75ab7a	cast	cast-resolve	agreed	-	FX	scen	2	0	Pull Through the Weft/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37c06f89-db36-4937-9404-2b07cd22e1a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawn-s-truce:cast:s1,f:xs:XP:dawn-s-truce:cast:s1	-	-	-	23b491658465	-	233b1d4fe3de	-	-	2026-11-24	xproof
 37c49483-bef6-47c6-9354-ead8560d48da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
