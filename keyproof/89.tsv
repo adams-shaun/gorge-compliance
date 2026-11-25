@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8958a6fe-76ef-45e3-8522-6bc13486b447	f0/t0	NULL	owed	refused:no-generator:trigger:Scry	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8959a147-75b1-4f4a-a699-cb354ff55e59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 895a0e00-20a9-44f8-9215-66edcdf016b7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-895a0e00-20a9-44f8-9215-66edcdf016b7	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+895a0e00-20a9-44f8-9215-66edcdf016b7	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 895a0e00-20a9-44f8-9215-66edcdf016b7	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 895f23a2-55b7-4cc0-8939-2efaaf097e6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 895f23a2-55b7-4cc0-8939-2efaaf097e6f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 89c89499-23a8-412d-9406-1a7ffc88c64d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:wreck-remover:f0t0:s1,f:xs:XP:wreck-remover:f0t0:s1	-	-	-	267e485f6204	-	727bed28d06a	-	-	2026-11-24	xproof
 89c89499-23a8-412d-9406-1a7ffc88c64d	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:wreck-remover:f0t0:s2,f:xs:XP:wreck-remover:f0t0:s2	-	-	-	267e485f6204	-	727bed28d06a	-	-	2026-11-24	xproof
 89c89499-23a8-412d-9406-1a7ffc88c64d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:wreck-remover:f0t0:s1,f:xs:XP:wreck-remover:f0t0:s1	-	-	-	267e485f6204	-	727bed28d06a	-	-	2026-11-24	xproof
-89c89499-23a8-412d-9406-1a7ffc88c64d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Wreck Remover/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+89c89499-23a8-412d-9406-1a7ffc88c64d	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:wreck-remover:f0t1:s1,f:xs:XP:wreck-remover:f0t1:s1	-	-	-	23c4009444b0	-	727bed28d06a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 89ca686a-7c72-4d8f-9290-e89635624a83	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cavern of Souls/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89ca686a-7c72-4d8f-9290-e89635624a83	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Cavern of Souls/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 89ca686a-7c72-4d8f-9290-e89635624a83	land	land	agreed	-	FX	start	2	0	x:xs:XP:cavern-of-souls:land:s1,f:xs:XP:cavern-of-souls:land:s1	-	-	-	8c0bd19283bb	-	da50d1143265	-	-	2026-11-24	xproof

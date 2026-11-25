@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 644eeefd-e684-4ca8-8aef-a892ca130c07	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 645005dd-3438-4b88-bb19-561f9679a022	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oggyar-battle-seer:cast:s1,f:xs:XP:oggyar-battle-seer:cast:s1	-	-	-	d864b561c9cb	-	ccc456f2030c	-	-	2026-11-24	xproof
 645005dd-3438-4b88-bb19-561f9679a022	f0/a0	Scry	agreed	-	FX	start	4	0	x:xs:XP:oggyar-battle-seer:cast:s1,f:xs:XP:oggyar-battle-seer:cast:s1	-	-	-	d864b561c9cb	-	ccc456f2030c	-	-	2026-11-24	xproof
-6454c457-a278-431a-9e8d-bfd1a966bdde	cast	cast-resolve	agreed	-	X	scen	1	0	Vnwxt, Verbose Host/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6454c457-a278-431a-9e8d-bfd1a966bdde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vnwxt-verbose-host:cast:s1,f:xs:XP:vnwxt-verbose-host:cast:s1	-	-	-	23c4009444b0	-	365ad6028b26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6454c457-a278-431a-9e8d-bfd1a966bdde	static#0.0	static#0.0	agreed	-	X	scen	1	0	Vnwxt, Verbose Host/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6454c457-a278-431a-9e8d-bfd1a966bdde	static#0.1	static#0.1	agreed	-	X	scen	1	0	Vnwxt, Verbose Host/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64553181-9852-459f-a6e0-54ce188dd937	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6465f93d-e6bf-4a7b-86f3-5a2376f8b127	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keldon-strike-team:f0t0:s1,f:xs:XP:keldon-strike-team:f0t0:s1	-	-	-	d864b561c9cb	-	f26ec7c1a0a8	-	-	2026-11-24	xproof
 6465f93d-e6bf-4a7b-86f3-5a2376f8b127	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keldon-strike-team:f0t0:s1,f:xs:XP:keldon-strike-team:f0t0:s1	-	-	-	d864b561c9cb	-	f26ec7c1a0a8	-	-	2026-11-24	xproof
 64687880-03f9-4f38-985b-1027c797e33f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64687880-03f9-4f38-985b-1027c797e33f	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+64687880-03f9-4f38-985b-1027c797e33f	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 64687880-03f9-4f38-985b-1027c797e33f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 64687880-03f9-4f38-985b-1027c797e33f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6469c7fd-6c0f-4233-8c38-4742ddcf3c3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

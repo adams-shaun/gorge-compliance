@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5058b9f1-9941-495d-9eed-554ae2f6d500	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 50608184-90d3-43d2-a221-deb186c78323	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-piker:cast:s1,f:xs:XP:goblin-piker:cast:s1	-	-	-	25696bf19d5b	-	53fffec2cbce	-	-	2026-11-24	xproof
 50608b7e-b6b2-40ca-91ec-db3e03dbb1af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50608b7e-b6b2-40ca-91ec-db3e03dbb1af	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+50608b7e-b6b2-40ca-91ec-db3e03dbb1af	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:spark-elemental:f0t0:s1,f:xs:XP:spark-elemental:f0t0:s1	-	-	-	23c4009444b0	-	c636dae96636	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5064a55a-9692-4a67-9e82-16250b9140d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50676eba-a55a-4749-bb07-74a30e015781	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50676eba-a55a-4749-bb07-74a30e015781	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 507c2921-7070-482d-8754-dc667e3315bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 507c2921-7070-482d-8754-dc667e3315bd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 507d2f27-08a9-4938-b191-5734cda42ef2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-507d2f27-08a9-4938-b191-5734cda42ef2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+507d2f27-08a9-4938-b191-5734cda42ef2	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 507fc71d-0dfc-4bfe-bc71-de88162c39a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 507fc71d-0dfc-4bfe-bc71-de88162c39a1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:iron-man-modern-marvel:f0t0:s1,f:xs:XP:iron-man-modern-marvel:f0t0:s1	-	-	-	23c4009444b0	-	2a761e1a9737	-	-	2026-11-25	xproof
 507ffc26-6c45-4167-9e0d-3c88b065720a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

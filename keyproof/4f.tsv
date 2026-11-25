@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f2d4538-dc1d-4c09-964b-b0d7c240fb7d	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4f348e7a-fe13-4621-bd88-5d2fb5b597f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sylvan-basilisk:cast:s1,f:xs:XP:sylvan-basilisk:cast:s1	-	-	-	25696bf19d5b	-	211db3f70d5b	-	-	2026-11-24	xproof
 4f348e7a-fe13-4621-bd88-5d2fb5b597f2	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-4f3d7102-f8ce-42d4-94eb-f69b695773d1	cast	cast-resolve	agreed	-	X	scen	1	0	Rebellious Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4f3d7102-f8ce-42d4-94eb-f69b695773d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rebellious-strike:cast:s1,f:xs:XP:rebellious-strike:cast:s1	-	-	-	23c4009444b0	-	4d2aea69c27b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4f40d66a-1fd8-4b06-b6cb-9cbcf33bc041	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f40d66a-1fd8-4b06-b6cb-9cbcf33bc041	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f40d66a-1fd8-4b06-b6cb-9cbcf33bc041	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f63d306-cc14-405c-8424-d8990c670c74	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:territorial-aetherkite:cast:s1,f:xs:XP:territorial-aetherkite:cast:s1	-	-	-	8c0bd19283bb	-	419183ee5893	-	-	2026-11-24	xproof
 4f63d306-cc14-405c-8424-d8990c670c74	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:territorial-aetherkite:cast:s1,f:xs:XP:territorial-aetherkite:cast:s1	-	-	-	8c0bd19283bb	-	419183ee5893	-	-	2026-11-24	xproof
 4f65e6a9-0d90-44b9-9b76-00814db2dbd8	cast	cast-resolve	agreed	-	FX	scen	2	0	Laughing Mad/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4f66489c-5a19-40ad-9126-461fa8231f1b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4f66489c-5a19-40ad-9126-461fa8231f1b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4f66489c-5a19-40ad-9126-461fa8231f1b	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	f0/t1	ChangesZone/Afterlife	agreed	-	FX	start	2	0	x:xs:XP:orzhov-racketeers:f0t1:s1,f:xs:XP:orzhov-racketeers:f0t1:s1	-	-	-	d864b561c9cb	-	7fe0ff02acb6	-	-	2026-11-24	xproof
-4f6dbd90-f7fe-4adf-a00f-27573c0bd5c4	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+4f6dbd90-f7fe-4adf-a00f-27573c0bd5c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lose-hope:cast:s1,f:xs:XP:lose-hope:cast:s1	-	-	-	23c4009444b0	-	f7cb5f0666af	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4f6e2e47-34df-4bf3-a546-e06b42840167	cast	cast-resolve	agreed	-	FX	scen	2	0	Divine Resilience/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f70b0ee-c24c-45fa-b878-9ba69266344f	cast	cast-resolve	diagnosed	-	-	scen	0	0	-	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4f70b0ee-c24c-45fa-b878-9ba69266344f	f0/t0	trigger#0.0	diagnosed	-	-	scen	0	0	-	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -130,8 +130,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f945baa-40a9-4494-b2f9-f1926f3fec84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4f9c66f9-f5d4-499d-9325-e779e6612bca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fa113da-44aa-4c84-8f63-b1cad63da926	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fa113da-44aa-4c84-8f63-b1cad63da926	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-4fa113da-44aa-4c84-8f63-b1cad63da926	f0/t1	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-slith:f0t1:s1,f:xs:XP:arcbound-slith:f0t1:s1	-	-	-	d864b561c9cb	-	2364dedadd7e	-	-	2026-11-24	xproof
+4fa113da-44aa-4c84-8f63-b1cad63da926	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:arcbound-slith:f0t0:s1,f:xs:XP:arcbound-slith:f0t0:s1	-	-	-	23c4009444b0	-	2364dedadd7e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4fa113da-44aa-4c84-8f63-b1cad63da926	f0/t1	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-slith:f0t0:s1,f:xs:XP:arcbound-slith:f0t0:s1	-	-	-	23c4009444b0	-	2364dedadd7e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4fa23be3-a192-45ab-bdf6-646d4be305e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cartouche-of-zeal:f0t0:s1,f:xs:XP:cartouche-of-zeal:f0t0:s1	-	-	-	3aa6ded33acb	-	cf158bc3633d	-	-	2026-11-25	xproof
 4fa23be3-a192-45ab-bdf6-646d4be305e1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cartouche-of-zeal:f0t0:s1,f:xs:XP:cartouche-of-zeal:f0t0:s1	-	-	-	3aa6ded33acb	-	cf158bc3633d	-	-	2026-11-25	xproof
 4fa2c9cb-106c-482c-9ba7-5bba2ea9e4a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-america-unbowed:f0t0:s1,f:xs:XP:captain-america-unbowed:f0t0:s1	-	-	-	8c0bd19283bb	-	27a0f4a619d9	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fb00dbe-1f82-4ba6-b18c-97e816d10d3a	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:patchwork-banner:cast:s2,f:xs:XP:patchwork-banner:cast:s2	-	-	-	8c0bd19283bb	-	f99d4fc06a01	-	-	2026-11-24	xproof
 4fb00dbe-1f82-4ba6-b18c-97e816d10d3a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Patchwork Banner/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fb0ff70-eba1-4485-b68d-444eb512a2a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:furious-bellow:cast:s1,f:xs:XP:furious-bellow:cast:s1	-	-	-	d864b561c9cb	-	cf5d162d7680	-	-	2026-11-24	xproof
-4fb1d33f-a87d-46cf-a73e-882c3dbcb26f	cast	cast-resolve	agreed	-	X	scen	1	0	Furious Forebear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4fb1d33f-a87d-46cf-a73e-882c3dbcb26f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:furious-forebear:cast:s1,f:xs:XP:furious-forebear:cast:s1	-	-	-	23c4009444b0	-	8db0bc32d00a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4fb1d33f-a87d-46cf-a73e-882c3dbcb26f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Furious Forebear/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4fb7aeb6-2fc3-459e-bad8-1c7ea92f7ae7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4fb8312c-058a-415c-93ab-59d37ebad270	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

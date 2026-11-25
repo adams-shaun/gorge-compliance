@@ -34,9 +34,9 @@ a3169d1a-fd8d-474e-9e9f-1bd7db510e8b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:fl
 a31a66ee-5ddf-4d70-9ae9-725fc7327706	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a322ad80-e64b-4e9a-b542-3a036dc14d28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a323a3af-8a74-433c-8994-707a09ef3a0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nezumi-cutthroat:cast:s1,f:xs:XP:nezumi-cutthroat:cast:s1	-	-	-	64a08ba7d913	-	4a10225d00db	-	-	2026-11-24	xproof
-a3275d80-112b-4839-a014-e44ef48d2e6b	cast	cast-resolve	agreed	-	X	scen	1	0	Kishla Skimmer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a3275d80-112b-4839-a014-e44ef48d2e6b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kishla Skimmer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a3275d80-112b-4839-a014-e44ef48d2e6b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kishla Skimmer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a3275d80-112b-4839-a014-e44ef48d2e6b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kishla-skimmer:cast:s1,f:xs:XP:kishla-skimmer:cast:s1	-	-	-	23c4009444b0	-	ef6d6e30cf54	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a3275d80-112b-4839-a014-e44ef48d2e6b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kishla-skimmer:combat0.attack:s1,f:xs:XP:kishla-skimmer:combat0.attack:s1	-	-	-	23c4009444b0	-	ef6d6e30cf54	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a3275d80-112b-4839-a014-e44ef48d2e6b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kishla-skimmer:combat0.block:s1,f:xs:XP:kishla-skimmer:combat0.block:s1	-	-	-	23c4009444b0	-	ef6d6e30cf54	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a3275d80-112b-4839-a014-e44ef48d2e6b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kishla Skimmer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a32b8502-7427-48a5-a880-14516ff2fe77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-thief:f0t0:s1,f:xs:XP:master-thief:f0t0:s1	-	-	-	d864b561c9cb	-	a41eb27c2493	-	-	2026-11-24	xproof
 a32b8502-7427-48a5-a880-14516ff2fe77	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:master-thief:f0t0:s1,f:xs:XP:master-thief:f0t0:s1	-	-	-	d864b561c9cb	-	a41eb27c2493	-	-	2026-11-24	xproof
@@ -204,7 +204,7 @@ a3c56e71-0de6-447a-a9b4-0971f56c2362	combat#0.attack	combat#0.attack	agreed	-	X	
 a3c56e71-0de6-447a-a9b4-0971f56c2362	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Momo, Friendly Flier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a3c56e71-0de6-447a-a9b4-0971f56c2362	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Momo, Friendly Flier/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a3c56e71-0de6-447a-a9b4-0971f56c2362	static#0.0	static#0.0	agreed	-	X	scen	1	0	Momo, Friendly Flier/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a3c672b8-9c7d-47cc-877b-580904c6d72b	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+a3c672b8-9c7d-47cc-877b-580904c6d72b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a3c8d817-7949-4dae-b9f5-f9d952479270	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a3c8d817-7949-4dae-b9f5-f9d952479270	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a3c8d817-7949-4dae-b9f5-f9d952479270	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

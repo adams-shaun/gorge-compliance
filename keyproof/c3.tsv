@@ -88,8 +88,8 @@ c383b28c-b319-49cd-acf1-4721a1301bbb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c387f46f-ad91-4964-8dc6-acefe537fe3c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c38cc5fe-936a-4d61-a816-9be773ae1d02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c38cc5fe-936a-4d61-a816-9be773ae1d02	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c38db10f-c0b7-4391-b49a-77079a4d087c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c38db10f-c0b7-4391-b49a-77079a4d087c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c38db10f-c0b7-4391-b49a-77079a4d087c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c38db10f-c0b7-4391-b49a-77079a4d087c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c38db10f-c0b7-4391-b49a-77079a4d087c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c38db10f-c0b7-4391-b49a-77079a4d087c	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c38f7447-e646-438d-81bd-fe2a71c8a79c	cast	cast-resolve	agreed	-	X	scen	1	0	Ninja of the Hand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -142,8 +142,8 @@ c3b6e114-7bc8-4890-97d9-edbeea1f425f	cast	cast	agreed	-	F	start	2	0	f:xs:XP:assa
 c3b6e114-7bc8-4890-97d9-edbeea1f425f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c3b6e114-7bc8-4890-97d9-edbeea1f425f	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:assault-suit:f0t0:s1	-	-	-	3aa6ded33acb	-	893b1e6f347d	-	-	2026-11-25	xproof
 c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:feral-deceiver:cast:s1,f:xs:XP:feral-deceiver:cast:s1	-	-	-	25696bf19d5b	-	ff7b95614550	-	-	2026-11-24	xproof
-c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	f0/a0	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:feral-deceiver:f0a0:s1,f:xs:XP:feral-deceiver:f0a0:s1	-	-	-	23c4009444b0	-	ff7b95614550	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	f0/a1	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:feral-deceiver:f0a1:s1,f:xs:XP:feral-deceiver:f0a1:s1	-	-	-	23c4009444b0	-	ff7b95614550	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c3bd1d38-e73f-4e30-b22a-dca0a0e4d701	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c3bd1d38-e73f-4e30-b22a-dca0a0e4d701	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c3c25a2c-f71c-4cb7-9117-0bcda9248bfd	cast	cast-resolve	agreed	-	X	scen	1	0	Prismari Charm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

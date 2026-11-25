@@ -99,8 +99,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3871cad2-e793-4c41-ac79-f84cbc2634a5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nantuko-shaman:f0t0:s1,f:xs:XP:nantuko-shaman:f0t0:s1	-	-	-	3aa6ded33acb	-	d4d8f32180b2	-	-	2026-11-25	xproof
 3875aef0-3102-4fbf-be90-e4139f7a2348	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 387b12b1-d8f5-487b-972f-5303b23eed5a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dusyut-earthcarver:cast:s1,f:xs:XP:dusyut-earthcarver:cast:s1	-	-	-	23b491658465	-	553f18ed81ec	-	-	2026-11-24	xproof
-387b12b1-d8f5-487b-972f-5303b23eed5a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dusyut Earthcarver/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-387b12b1-d8f5-487b-972f-5303b23eed5a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dusyut Earthcarver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+387b12b1-d8f5-487b-972f-5303b23eed5a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dusyut-earthcarver:combat0.attack:s1,f:xs:XP:dusyut-earthcarver:combat0.attack:s1	-	-	-	23c4009444b0	-	553f18ed81ec	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+387b12b1-d8f5-487b-972f-5303b23eed5a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dusyut-earthcarver:combat0.block:s1,f:xs:XP:dusyut-earthcarver:combat0.block:s1	-	-	-	23c4009444b0	-	553f18ed81ec	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 387b12b1-d8f5-487b-972f-5303b23eed5a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dusyut-earthcarver:cast:s1,f:xs:XP:dusyut-earthcarver:cast:s1	-	-	-	23b491658465	-	553f18ed81ec	-	-	2026-11-24	xproof
 387b6b07-a283-412d-94c3-f7f1dc76e858	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 388168b3-ec68-4af2-b88c-6a5ec88c15f6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ayara-first-of-locthwain:cast:s1,f:xs:XP:ayara-first-of-locthwain:cast:s1	-	-	-	ae86f6029288	-	62057d940a86	-	-	2026-11-24	xproof
@@ -186,4 +186,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38f7ff90-4cdf-4403-ad10-1400e05c32e9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:manhole-cover:f0t0:s1,f:xs:XP:manhole-cover:f0t0:s1	-	-	-	8c0bd19283bb	-	ae20e55a0e87	-	-	2026-11-24	xproof
 38f9e766-a2ad-437b-a38c-d6f3ffd261fb	cast	cast	agreed	-	F	start	2	0	f:xs:XP:delraich:cast:s1	-	-	-	5f2128bf97e4	-	5d2b04faaeab	-	-	2026-11-24	xproof
 38ff7aa1-e2cb-450d-a18f-45841f9f9337	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38ff7aa1-e2cb-450d-a18f-45841f9f9337	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+38ff7aa1-e2cb-450d-a18f-45841f9f9337	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:desecration-elemental:f0t0:s1,f:xs:XP:desecration-elemental:f0t0:s1	-	-	-	23c4009444b0	-	b129cf1edd8d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

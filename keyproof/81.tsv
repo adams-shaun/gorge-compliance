@@ -27,8 +27,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 812df594-75af-494f-be09-5f9633aca46a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:deepway-navigator:f0t0:s2,f:xs:XP:deepway-navigator:f0t0:s2	-	-	-	267e485f6204	-	b4cd5a789a1d	-	-	2026-11-24	xproof
 812df594-75af-494f-be09-5f9633aca46a	static#0.0	static#0.0	diagnosed	-	-	scen	0	0	-	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 81338d64-8fc3-41ac-afc8-e2a79df1159b	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8134f3fd-197a-4b44-a370-311cc955dea3	cast	cast-resolve	agreed	-	X	scen	1	0	Ainok Wayfarer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8134f3fd-197a-4b44-a370-311cc955dea3	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8134f3fd-197a-4b44-a370-311cc955dea3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ainok-wayfarer:cast:s1,f:xs:XP:ainok-wayfarer:cast:s1	-	-	-	23c4009444b0	-	418a78ceb177	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8134f3fd-197a-4b44-a370-311cc955dea3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ainok-wayfarer:cast:s1,f:xs:XP:ainok-wayfarer:cast:s1	-	-	-	23c4009444b0	-	418a78ceb177	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8138a9d7-63cb-4d40-ac9e-1a9b10766113	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 813c0654-7e3b-435b-b7a5-148f0c36a4be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 813c0654-7e3b-435b-b7a5-148f0c36a4be	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81728b98-8cf9-4734-a318-69184bb4d15c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arrest:cast:s1,f:xs:XP:arrest:cast:s1	-	-	-	25696bf19d5b	-	dedcbcc799f2	-	-	2026-11-24	xproof
 8173e160-9a22-43f7-90d1-9ada043bc1b7	cast	cast-resolve	agreed	-	FX	scen	2	0	Grub's Command/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 817464d8-1e2d-4e12-96f8-5c7ec9b3e681	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:thundering-broodwagon:f0t0:s1,f:xs:XP:thundering-broodwagon:f0t0:s1	-	-	-	267e485f6204	-	6d4a06ada76a	-	-	2026-11-24	xproof
-817464d8-1e2d-4e12-96f8-5c7ec9b3e681	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thundering Broodwagon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+817464d8-1e2d-4e12-96f8-5c7ec9b3e681	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:thundering-broodwagon:f0a0:s1,f:xs:XP:thundering-broodwagon:f0a0:s1	-	-	-	23c4009444b0	-	6d4a06ada76a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 817464d8-1e2d-4e12-96f8-5c7ec9b3e681	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:thundering-broodwagon:f0t0:s2,f:xs:XP:thundering-broodwagon:f0t0:s2	-	-	-	267e485f6204	-	6d4a06ada76a	-	-	2026-11-24	xproof
 817464d8-1e2d-4e12-96f8-5c7ec9b3e681	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:thundering-broodwagon:f0t0:s1,f:xs:XP:thundering-broodwagon:f0t0:s1	-	-	-	267e485f6204	-	6d4a06ada76a	-	-	2026-11-24	xproof
 81763d7d-3897-4be9-bbf6-f6f5dee366ff	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

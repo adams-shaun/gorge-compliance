@@ -112,8 +112,8 @@ f75ed312-3a23-4624-80c5-03980aa22d0b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:ll
 f75ed312-3a23-4624-80c5-03980aa22d0b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:llanowar-visionary:cast:s1,f:xs:XP:llanowar-visionary:cast:s1	-	-	-	ae86f6029288	-	aad2a1a84968	-	-	2026-11-24	xproof
 f75f9006-217d-4ec8-9c35-ceefe1c5ae4e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frozen-shade:cast:s1,f:xs:XP:frozen-shade:cast:s1	-	-	-	ae86f6029288	-	78fe2c12b710	-	-	2026-11-24	xproof
 f75f9006-217d-4ec8-9c35-ceefe1c5ae4e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:frozen-shade:f0a0:s1,f:xs:XP:frozen-shade:f0a0:s1	-	-	-	ae86f6029288	-	78fe2c12b710	-	-	2026-11-24	xproof
-f7620c46-b3d8-4694-ac7c-a43933c86c22	cast	cast-resolve	agreed	-	X	scen	1	0	Devoted Duelist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f7620c46-b3d8-4694-ac7c-a43933c86c22	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Devoted Duelist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f7620c46-b3d8-4694-ac7c-a43933c86c22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devoted-duelist:cast:s1,f:xs:XP:devoted-duelist:cast:s1	-	-	-	23c4009444b0	-	5484e65d404a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f7620c46-b3d8-4694-ac7c-a43933c86c22	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:devoted-duelist:f0t0:s1,f:xs:XP:devoted-duelist:f0t0:s1	-	-	-	23c4009444b0	-	5484e65d404a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f762c225-1c8c-4f12-aa88-c8c89e0a7185	cast	cast-resolve	agreed	-	FX	scen	2	0	Gingerbread Hunter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f762c225-1c8c-4f12-aa88-c8c89e0a7185	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f763d118-3183-4604-a50c-7c3933e2185e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:qasali-slingers:f0t0:s1,f:xs:XP:qasali-slingers:f0t0:s1	-	-	-	8c0bd19283bb	-	a8abdb444001	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ f77ea393-4142-4c06-8bb3-589ca74a7338	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-
 f77ea393-4142-4c06-8bb3-589ca74a7338	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:the-caretaker:f0t0:s1	-	-	-	23c4009444b0	-	27cb57000941	-	-	2026-11-25	xproof
 f77ea393-4142-4c06-8bb3-589ca74a7338	f0/t1	BecomesTarget/Ward	agreed	-	F	start	2	0	f:xs:XP:the-caretaker:f0t1:s1	-	-	-	23c4009444b0	-	27cb57000941	-	-	2026-11-25	xproof
 f780d6f6-540b-4773-8a48-e56e95c2d39e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lasyd-prowler:f0t0:s2,f:xs:XP:lasyd-prowler:f0t0:s2	-	-	-	267e485f6204	-	121dac8d0f72	-	-	2026-11-24	xproof
-f780d6f6-540b-4773-8a48-e56e95c2d39e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lasyd Prowler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f780d6f6-540b-4773-8a48-e56e95c2d39e	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:lasyd-prowler:f0a0:s1,f:xs:XP:lasyd-prowler:f0a0:s1	-	-	-	23c4009444b0	-	121dac8d0f72	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f780d6f6-540b-4773-8a48-e56e95c2d39e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lasyd-prowler:f0t0:s2,f:xs:XP:lasyd-prowler:f0t0:s2	-	-	-	267e485f6204	-	121dac8d0f72	-	-	2026-11-24	xproof
 f780ee53-62b0-4c32-b5b7-047651f48e5f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:hidden-necropolis:f0a0:s1,f:xs:XP:hidden-necropolis:f0a0:s1	-	-	-	23b491658465	-	cc0ce61141fa	-	-	2026-11-24	xproof
 f780ee53-62b0-4c32-b5b7-047651f48e5f	f0/a1	Discover	agreed	-	FX	start	2	0	x:xs:XP:hidden-necropolis:f0a1:s1,f:xs:XP:hidden-necropolis:f0a1:s1	-	-	-	23b491658465	-	cc0ce61141fa	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ f7907327-4df3-4bb2-a274-03d9e266af2f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:v
 f792f40d-1d37-4854-98da-e4020c6a44d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f792f40d-1d37-4854-98da-e4020c6a44d4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7944c30-d226-4cb9-931d-6e9f2fe5cb42	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hair-strung-koto:cast:s1,f:xs:XP:hair-strung-koto:cast:s1	-	-	-	25696bf19d5b	-	58ba8887ccf6	-	-	2026-11-24	xproof
-f7944c30-d226-4cb9-931d-6e9f2fe5cb42	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+f7944c30-d226-4cb9-931d-6e9f2fe5cb42	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:hair-strung-koto:f0a0:s1,f:xs:XP:hair-strung-koto:f0a0:s1	-	-	-	23c4009444b0	-	58ba8887ccf6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f79f5cb7-d238-41ab-85f0-eb21cc6bf561	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plague-spores:cast:s1,f:xs:XP:plague-spores:cast:s1	-	-	-	fc71ca68c5ac	-	4f7e9eae3cd0	-	-	2026-11-24	xproof
 f7a4458a-7e8a-46bb-b62d-991c606c7a15	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f7a8066e-f8a4-4202-8825-0327d11e58c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kumena-s-awakening:f0t0:s1,f:xs:XP:kumena-s-awakening:f0t0:s1	-	-	-	3aa6ded33acb	-	ac43fd4580cf	-	-	2026-11-25	xproof
@@ -194,7 +194,7 @@ f7d52eac-edc9-464b-a163-07c136aa6e4c	combat#0.block	combat#0.block	agreed	-	X	sc
 f7d52eac-edc9-464b-a163-07c136aa6e4c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Elegy Acolyte/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f7d52eac-edc9-464b-a163-07c136aa6e4c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Elegy Acolyte/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f7d8b91b-6541-4d3e-af51-7e000eac69c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f7d8b91b-6541-4d3e-af51-7e000eac69c1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f7d8b91b-6541-4d3e-af51-7e000eac69c1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f7d8b91b-6541-4d3e-af51-7e000eac69c1	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f7d8b91b-6541-4d3e-af51-7e000eac69c1	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f7d8b91b-6541-4d3e-af51-7e000eac69c1	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

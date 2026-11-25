@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27599eff-19df-48e2-9a1e-0c087f42a075	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:firemantle-mage:cast:s1,f:xs:XP:firemantle-mage:cast:s1	-	-	-	d864b561c9cb	-	e41418657a70	-	-	2026-11-24	xproof
 275d0b90-a8d6-4388-b7db-34615287f532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:precognitive-perception:cast:s1,f:xs:XP:precognitive-perception:cast:s1	-	-	-	d864b561c9cb	-	c21b4bfa1b97	-	-	2026-11-24	xproof
 275f70e9-a5b8-4eeb-935d-8f4cffc3293b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pristine-angel:cast:s1,f:xs:XP:pristine-angel:cast:s1	-	-	-	25696bf19d5b	-	ee3f7d261a1d	-	-	2026-11-24	xproof
-275f70e9-a5b8-4eeb-935d-8f4cffc3293b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+275f70e9-a5b8-4eeb-935d-8f4cffc3293b	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:pristine-angel:f0t0:s1,f:xs:XP:pristine-angel:f0t0:s1	-	-	-	23c4009444b0	-	ee3f7d261a1d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 27618701-e8c9-4117-94f3-3836cf34990d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27618701-e8c9-4117-94f3-3836cf34990d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2764741c-1f3e-459a-a487-54cbac2c84a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2796c3d9-9e56-40f2-8398-7a131c4657ff	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2796c3d9-9e56-40f2-8398-7a131c4657ff	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scathing Shadelock/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 279f3aa5-5807-4797-8cd1-e009984a3691	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:take-the-fall:cast:s1,f:xs:XP:take-the-fall:cast:s1	-	-	-	3aa6ded33acb	-	1dc0ac1c87da	-	-	2026-11-25	xproof
-27a1f42c-0b86-4609-9609-1fa9cab7e7c9	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27a1f42c-0b86-4609-9609-1fa9cab7e7c9	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 27a3aa64-1de7-4b0c-af23-52886e7d258a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:prismatic-undercurrents:f0t0:s2,f:xs:XP:prismatic-undercurrents:f0t0:s2	-	-	-	267e485f6204	-	ca440e55cedf	-	-	2026-11-24	xproof
 27a3aa64-1de7-4b0c-af23-52886e7d258a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:prismatic-undercurrents:f0t0:s2,f:xs:XP:prismatic-undercurrents:f0t0:s2	-	-	-	267e485f6204	-	ca440e55cedf	-	-	2026-11-24	xproof
 27a3aa64-1de7-4b0c-af23-52886e7d258a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Prismatic Undercurrents/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 27b047e3-0d41-45e2-98e9-9391d7923a1e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27b047e3-0d41-45e2-98e9-9391d7923a1e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27b4fee0-ae46-4d15-96cd-aff8f3009de8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-27b5d9d8-cc19-46be-9862-405cf7ef5408	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+27b5d9d8-cc19-46be-9862-405cf7ef5408	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 27b5d9d8-cc19-46be-9862-405cf7ef5408	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 27b690f2-d7ce-43b6-8e8b-98a8ffe487bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 27b690f2-d7ce-43b6-8e8b-98a8ffe487bb	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

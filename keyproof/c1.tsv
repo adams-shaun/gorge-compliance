@@ -85,9 +85,9 @@ c1624d10-8838-4af8-aea1-a96c0fe6fd6b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Goldv
 c1624d10-8838-4af8-aea1-a96c0fe6fd6b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Goldvein Pick/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c16367eb-1c0a-4197-8e2f-2d74e4381024	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:akoum-boulderfoot:cast:s1,f:xs:XP:akoum-boulderfoot:cast:s1	-	-	-	d864b561c9cb	-	3344fcd75ae6	-	-	2026-11-24	xproof
 c16367eb-1c0a-4197-8e2f-2d74e4381024	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:akoum-boulderfoot:cast:s1,f:xs:XP:akoum-boulderfoot:cast:s1	-	-	-	d864b561c9cb	-	3344fcd75ae6	-	-	2026-11-24	xproof
-c163a95e-9414-4b8c-b5a2-1e7674530404	cast	cast-resolve	agreed	-	X	scen	1	0	Streaking Oilgorger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c163a95e-9414-4b8c-b5a2-1e7674530404	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Streaking Oilgorger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c163a95e-9414-4b8c-b5a2-1e7674530404	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Streaking Oilgorger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c163a95e-9414-4b8c-b5a2-1e7674530404	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:streaking-oilgorger:cast:s1,f:xs:XP:streaking-oilgorger:cast:s1	-	-	-	23c4009444b0	-	6270bd9c60fc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c163a95e-9414-4b8c-b5a2-1e7674530404	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:streaking-oilgorger:combat0.attack:s1,f:xs:XP:streaking-oilgorger:combat0.attack:s1	-	-	-	23c4009444b0	-	6270bd9c60fc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c163a95e-9414-4b8c-b5a2-1e7674530404	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:streaking-oilgorger:combat0.block:s1,f:xs:XP:streaking-oilgorger:combat0.block:s1	-	-	-	23c4009444b0	-	6270bd9c60fc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c163a95e-9414-4b8c-b5a2-1e7674530404	static#0.0	static#0.0	agreed	-	X	scen	1	0	Streaking Oilgorger/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c16495fc-784d-4bac-9a68-ed437008df73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c16495fc-784d-4bac-9a68-ed437008df73	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ c169929a-850b-4d46-9f14-a922f4465d85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c16d79d9-c159-421f-90a2-13313a1de5f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c16d79d9-c159-421f-90a2-13313a1de5f6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c174dcbb-03a0-439c-b3d8-ed61bd46dc67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:artful-dodge:cast:s1,f:xs:XP:artful-dodge:cast:s1	-	-	-	d864b561c9cb	-	a37c6d6ad33c	-	-	2026-11-24	xproof
-c178953c-3888-4edd-9d0c-265bd82b1d24	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c178953c-3888-4edd-9d0c-265bd82b1d24	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c178953c-3888-4edd-9d0c-265bd82b1d24	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c1795e9c-31c9-4892-a796-7656e09257b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1795e9c-31c9-4892-a796-7656e09257b3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ c1b276b7-f1b3-4f6f-b6a2-1315d805e0f2	f0/t0	NULL	owed	refused:no-generator:trigge
 c1b276b7-f1b3-4f6f-b6a2-1315d805e0f2	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:chittering-dispatcher:f0t1:s1,f:xs:XP:chittering-dispatcher:f0t1:s1	-	-	-	8c0bd19283bb	-	58497dd603a9	-	-	2026-11-24	xproof
 c1b4a6cf-ac9c-410f-9982-31e371d49aed	cast	cast	agreed	-	F	start	2	0	f:xs:XP:jodah-s-avenger:cast:s1	-	-	-	9ee19e8250ce	-	af9c3e97ca39	-	-	2026-11-24	xproof
 c1b4a6cf-ac9c-410f-9982-31e371d49aed	f0/a0	Pump	agreed	-	F	start	2	0	f:xs:XP:jodah-s-avenger:cast:s1	-	-	-	9ee19e8250ce	-	af9c3e97ca39	-	-	2026-11-24	xproof
-c1b6795a-1ac6-4edb-bcee-4db1f1fbe8ea	cast	cast-resolve	agreed	-	X	scen	1	0	Spin Out/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c1b6795a-1ac6-4edb-bcee-4db1f1fbe8ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spin-out:cast:s1,f:xs:XP:spin-out:cast:s1	-	-	-	23c4009444b0	-	102134c66fda	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c1b8cfe9-e8fc-4321-94ce-86ab1f1ae2d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1b8cfe9-e8fc-4321-94ce-86ab1f1ae2d0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 c1bdd361-c7f2-4aa2-8d07-b582775551ff	cast	cast-resolve	agreed	-	X	scen	1	0	Blech, Loafing Pest/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ c1cb870a-8c1f-435c-b678-e456c4d2d627	f0/t0	NULL	owed	refused:no-generator:trigge
 c1cbbda0-e02b-4b9c-8669-ea87ca629520	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dress-down:f0t0:s1,f:xs:XP:dress-down:f0t0:s1	-	-	-	d864b561c9cb	-	60516c897629	-	-	2026-11-24	xproof
 c1cbbda0-e02b-4b9c-8669-ea87ca629520	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dress-down:f0t0:s1,f:xs:XP:dress-down:f0t0:s1	-	-	-	d864b561c9cb	-	60516c897629	-	-	2026-11-24	xproof
 c1cbbda0-e02b-4b9c-8669-ea87ca629520	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:dress-down:f0t0:s1,f:xs:XP:dress-down:f0t0:s1	-	-	-	d864b561c9cb	-	60516c897629	-	-	2026-11-24	xproof
-c1cf9d74-e700-456a-9e5a-1c4df22db268	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c1cf9d74-e700-456a-9e5a-1c4df22db268	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c1d0537b-954f-4d3b-b9fe-1dd7ffaa1197	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1d54d0c-53fc-474c-ba89-2aa1be3bf27d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1d5a631-a963-43a4-a5c0-1ba23bd88d0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -25,8 +25,8 @@ f122624f-f30d-444e-a62a-939829241045	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f122624f-f30d-444e-a62a-939829241045	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1231def-96fb-4408-a0c9-25d6932d7ead	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1266a1b-bae6-4ded-b4d5-7586a5b6c5d0	cast	cast-resolve	agreed	-	FX	scen	2	0	Clarion Conqueror/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f1266a1b-bae6-4ded-b4d5-7586a5b6c5d0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Clarion Conqueror/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f1266a1b-bae6-4ded-b4d5-7586a5b6c5d0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Clarion Conqueror/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f1266a1b-bae6-4ded-b4d5-7586a5b6c5d0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:clarion-conqueror:combat0.attack:s1,f:xs:XP:clarion-conqueror:combat0.attack:s1	-	-	-	23c4009444b0	-	b9095c8634e9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f1266a1b-bae6-4ded-b4d5-7586a5b6c5d0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:clarion-conqueror:combat0.block:s1,f:xs:XP:clarion-conqueror:combat0.block:s1	-	-	-	23c4009444b0	-	b9095c8634e9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f1266a1b-bae6-4ded-b4d5-7586a5b6c5d0	static#0.0	static#0.0	agreed	-	X	scen	1	0	Clarion Conqueror/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f12c2b65-4a04-4fab-ae77-973fe5cc823d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:howling-galefang:cast:s1,f:xs:XP:howling-galefang:cast:s1	-	-	-	23b491658465	-	477a815dc3cd	-	-	2026-11-24	xproof
 f12c2b65-4a04-4fab-ae77-973fe5cc823d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:howling-galefang:combat0.attack:s1,f:xs:XP:howling-galefang:combat0.attack:s1	-	-	-	3aa6ded33acb	-	477a815dc3cd	-	-	2026-11-25	xproof
@@ -62,7 +62,7 @@ f15761cf-2ac5-4458-957c-15badb1dda50	cast	cast	agreed	-	F	start	2	0	f:xs:XP:land
 f15908ea-2be0-4035-933d-4412fe032164	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:hero-of-goma-fada:cast:s1,f:xs:XP:hero-of-goma-fada:cast:s1	-	-	-	d864b561c9cb	-	453d5b1286ae	-	-	2026-11-24	xproof
 f15908ea-2be0-4035-933d-4412fe032164	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:hero-of-goma-fada:cast:s1,f:xs:XP:hero-of-goma-fada:cast:s1	-	-	-	d864b561c9cb	-	453d5b1286ae	-	-	2026-11-24	xproof
 f15911a5-f597-452e-a015-b115339f28fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f15911a5-f597-452e-a015-b115339f28fc	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+f15911a5-f597-452e-a015-b115339f28fc	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f15a202d-c1c4-49bd-924a-7a0a5667ff70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f15a202d-c1c4-49bd-924a-7a0a5667ff70	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:daring-skyjek:f0t0:s1,f:xs:XP:daring-skyjek:f0t0:s1	-	-	-	3aa6ded33acb	-	343b30a69f0f	-	-	2026-11-25	xproof
 f15bd5c0-99ff-42c6-8eed-48de6df81b61	cast	cast-resolve	agreed	-	X	scen	1	0	Radioactive Spider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ f1ef5698-14bd-42bf-aae5-2870699e4186	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f1f0eab3-681b-4c2d-b590-555951920880	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:buried-in-the-garden:cast:s1,f:xs:XP:buried-in-the-garden:cast:s1	-	-	-	23b491658465	-	0268789d1f4d	-	-	2026-11-24	xproof
 f1f0eab3-681b-4c2d-b590-555951920880	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:buried-in-the-garden:cast:s1,f:xs:XP:buried-in-the-garden:cast:s1	-	-	-	23b491658465	-	0268789d1f4d	-	-	2026-11-24	xproof
 f1f0eab3-681b-4c2d-b590-555951920880	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Buried in the Garden/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f1f3df1c-5c51-445a-b66d-eee4aab23691	cast	cast-resolve	agreed	-	X	scen	1	0	Desperate Measures/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f1f3df1c-5c51-445a-b66d-eee4aab23691	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:desperate-measures:cast:s1,f:xs:XP:desperate-measures:cast:s1	-	-	-	23c4009444b0	-	d13705ce5ce0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f1f45310-d665-400d-934f-e48e7858ce8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1f45310-d665-400d-934f-e48e7858ce8c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f1f77fb4-2c83-4cbf-894e-624abe6cd95f	cast	cast-resolve	agreed	-	X	scen	1	0	Perils of the Past/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -56,11 +56,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02269353-2949-4599-b5a3-f20fdb501285	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:recantation:f0t0:s1,f:xs:XP:recantation:f0t0:s1	-	-	-	3aa6ded33acb	-	d2e09de454e4	-	-	2026-11-25	xproof
 0230de18-8d15-4cfa-9d42-7ccddd9f9570	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0232418d-1c52-4573-b488-c62345ca1c8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0232418d-1c52-4573-b488-c62345ca1c8d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0232418d-1c52-4573-b488-c62345ca1c8d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 02358f98-99d5-45a3-b7e3-f2cbf08fa52c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02358f98-99d5-45a3-b7e3-f2cbf08fa52c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0236ad13-d8e4-49b4-b397-fe2f6136665d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02393093-e970-40a0-848b-9cd758450cbb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02393093-e970-40a0-848b-9cd758450cbb	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0239b661-80be-4b52-b3b7-fca229192b58	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:excavating-anurid:f0t0:s1,f:xs:XP:excavating-anurid:f0t0:s1	-	-	-	d864b561c9cb	-	6de76e99c576	-	-	2026-11-24	xproof
 0239b661-80be-4b52-b3b7-fca229192b58	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:excavating-anurid:f0t0:s1,f:xs:XP:excavating-anurid:f0t0:s1	-	-	-	d864b561c9cb	-	6de76e99c576	-	-	2026-11-24	xproof
 023e26d8-b67d-43dd-89b1-8905b1183094	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ma-chao-western-warrior:cast:s1,f:xs:XP:ma-chao-western-warrior:cast:s1	-	-	-	5f2128bf97e4	-	f0e10385bfbb	-	-	2026-11-24	xproof
@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0259a9ed-0558-4183-b737-871ed5573c32	cast	cast-resolve	agreed	-	X	scen	1	0	Gran-Gran/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0259a9ed-0558-4183-b737-871ed5573c32	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gran-Gran/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0259a9ed-0558-4183-b737-871ed5573c32	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gran-Gran/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0259f063-3e3f-4e07-9066-f748d4819829	cast	cast-resolve	agreed	-	X	scen	1	0	Nature's Rhythm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0259f063-3e3f-4e07-9066-f748d4819829	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nature-s-rhythm:cast:s1,f:xs:XP:nature-s-rhythm:cast:s1	-	-	-	23c4009444b0	-	186f5f80ce6a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 025bbfc8-bccd-4062-b758-7f9e1f8ad420	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 025bbfc8-bccd-4062-b758-7f9e1f8ad420	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 025f8db8-11d1-4c59-8e1f-004c9c843fd8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spearbreaker-behemoth:cast:s1,f:xs:XP:spearbreaker-behemoth:cast:s1	-	-	-	8a1b1a193ec0	-	e8cb93963560	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02c60b8b-f665-4279-a00f-ae03991df4a6	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 02d25219-888d-4032-9e9e-8c6f879a9084	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghostly-touch:cast:s1,f:xs:XP:ghostly-touch:cast:s1	-	-	-	3aa6ded33acb	-	c66b62fb6d5d	-	-	2026-11-25	xproof
 02d4c3a8-c733-45c1-bca5-51eed47c9230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02d4c3a8-c733-45c1-bca5-51eed47c9230	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+02d4c3a8-c733-45c1-bca5-51eed47c9230	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 02d4fe7d-ade4-40b1-b323-73a52c440525	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02d50c11-51e3-4b3f-bf3d-3b1775d514f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02d69413-e040-46b1-8f58-69bde666329d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

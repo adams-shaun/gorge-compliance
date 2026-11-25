@@ -32,8 +32,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6734497c-16f0-4c4b-ba24-337333511fc6	f0/a1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67362406-b1ca-49e2-800d-9050bfe8742a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67362406-b1ca-49e2-800d-9050bfe8742a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6736bb96-6718-48bb-9385-789d3349dc20	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6736bb96-6718-48bb-9385-789d3349dc20	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6736bb96-6718-48bb-9385-789d3349dc20	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6736bb96-6718-48bb-9385-789d3349dc20	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 67389ccc-dacc-4ce3-a9a2-f551a0d6e9d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67391f99-739a-490a-ba16-7fa1d758ec34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drana-kalastria-bloodchief:cast:s1,f:xs:XP:drana-kalastria-bloodchief:cast:s1	-	-	-	d864b561c9cb	-	b8288ff226ff	-	-	2026-11-24	xproof
 67391f99-739a-490a-ba16-7fa1d758ec34	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:drana-kalastria-bloodchief:f0a0:s2,f:xs:XP:drana-kalastria-bloodchief:f0a0:s2	-	-	-	d864b561c9cb	-	b8288ff226ff	-	-	2026-11-24	xproof

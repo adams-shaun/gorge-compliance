@@ -81,8 +81,8 @@ f6476884-f73f-465f-8e7f-ea312a5b306d	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:loo
 f6476884-f73f-465f-8e7f-ea312a5b306d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Loot, Exuberant Explorer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f64878c1-1fba-44f7-a24f-d24bef2e03ae	cast	cast-resolve	agreed	-	X	scen	1	0	Slippery Bogle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 f652c593-e8fa-42ff-a8b4-206556b273de	cast	cast-resolve	agreed	-	FX	scen	2	0	Attuned Hunter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f652c593-e8fa-42ff-a8b4-206556b273de	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Attuned Hunter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f652c593-e8fa-42ff-a8b4-206556b273de	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Attuned Hunter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f652c593-e8fa-42ff-a8b4-206556b273de	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:attuned-hunter:combat0.attack:s1,f:xs:XP:attuned-hunter:combat0.attack:s1	-	-	-	23c4009444b0	-	4de81f156cf2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f652c593-e8fa-42ff-a8b4-206556b273de	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:attuned-hunter:combat0.block:s1,f:xs:XP:attuned-hunter:combat0.block:s1	-	-	-	23c4009444b0	-	4de81f156cf2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f652c593-e8fa-42ff-a8b4-206556b273de	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Attuned Hunter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f664596a-9ad1-4db3-95b0-457698ad2f66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6653d90-cd30-4b2b-9592-97d5769dc3d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -191,7 +191,7 @@ f6de5bd7-7704-4a0c-a27a-9e565e49f5e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dra
 f6de5bd7-7704-4a0c-a27a-9e565e49f5e9	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:dragonstorm-globe:cast:s2,f:xs:XP:dragonstorm-globe:cast:s2	-	-	-	23c4009444b0	-	758c0d25dda8	-	-	2026-11-25	xproof
 f6dec1e0-148a-4742-815f-56806305897d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unblinking-bleb:cast:s1,f:xs:XP:unblinking-bleb:cast:s1	-	-	-	d864b561c9cb	-	6df4b627ca36	-	-	2026-11-24	xproof
 f6dec1e0-148a-4742-815f-56806305897d	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-f6e0cb77-4115-4948-8e1e-fdb774b1b254	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f6e0cb77-4115-4948-8e1e-fdb774b1b254	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f6e160c1-b29f-4f3d-ab55-43ffe3ab4acf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f6e160c1-b29f-4f3d-ab55-43ffe3ab4acf	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kolaghan-the-storm-s-fury:f0t0:s1,f:xs:XP:kolaghan-the-storm-s-fury:f0t0:s1	-	-	-	d864b561c9cb	-	81df259ebd54	-	-	2026-11-24	xproof
 f6e1eb52-9f13-425c-8309-1b08ed6557db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

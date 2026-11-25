@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15030c1d-7c0a-4273-a022-eb98d6c7a1ce	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loan-shark:f0t0:s1,f:xs:XP:loan-shark:f0t0:s1	-	-	-	3aa6ded33acb	-	d481f0d6aea9	-	-	2026-11-25	xproof
 15039c85-31e2-4a2b-82f8-2f8270ff9a00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:majestic-genesis:cast:s1,f:xs:XP:majestic-genesis:cast:s1	-	-	-	8c0bd19283bb	-	115ee656f76a	-	-	2026-11-24	xproof
 150ab025-5cc3-4468-a724-bbba8838445d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-150ab025-5cc3-4468-a724-bbba8838445d	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+150ab025-5cc3-4468-a724-bbba8838445d	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 150cefd2-061d-43b2-8470-c17be0144021	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 150dd67b-4de2-4fcd-b753-e4096de911a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 150dd67b-4de2-4fcd-b753-e4096de911a2	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:tocasia-s-onulet:f0a0:s1,f:xs:XP:tocasia-s-onulet:f0a0:s1	-	-	-	3aa6ded33acb	-	8a864f49f4c4	-	-	2026-11-25	xproof
@@ -82,10 +82,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15885e58-76a9-49fa-ae67-a0482aacd81c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:david-and-carol-marcus-creators:f0t0:s1,f:xs:XP:david-and-carol-marcus-creators:f0t0:s1	-	-	-	25696bf19d5b	-	bde3d8c71560	-	-	2026-11-24	xproof
 1589d90d-411a-4e77-9771-51518b2b224b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 158aaeab-1646-4160-9615-bc8747620a03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-158d0272-a850-4399-8afa-d0caa143c3cb	cast	cast-resolve	agreed	-	X	scen	1	0	Avenger of the Fallen/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-158d0272-a850-4399-8afa-d0caa143c3cb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Avenger of the Fallen/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-158d0272-a850-4399-8afa-d0caa143c3cb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Avenger of the Fallen/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-158d0272-a850-4399-8afa-d0caa143c3cb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Avenger of the Fallen/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+158d0272-a850-4399-8afa-d0caa143c3cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:avenger-of-the-fallen:cast:s1,f:xs:XP:avenger-of-the-fallen:cast:s1	-	-	-	23c4009444b0	-	a1abef695056	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+158d0272-a850-4399-8afa-d0caa143c3cb	combat#0.attack	combat.attack	diverged	-	-	start	0	2	-	c4dff6b551c8	-	-	23c4009444b0	-	a1abef695056	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+158d0272-a850-4399-8afa-d0caa143c3cb	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:avenger-of-the-fallen:combat0.block:s1,f:xs:XP:avenger-of-the-fallen:combat0.block:s1	-	-	-	23c4009444b0	-	a1abef695056	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+158d0272-a850-4399-8afa-d0caa143c3cb	f0/t0	Attacks/Mobilize	diverged	-	-	start	0	2	-	5c4b24b02cfd	-	-	23c4009444b0	-	a1abef695056	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 158db438-52ba-4c30-b7bf-d1c4f76da917	cast	cast-resolve	agreed	-	FX	scen	2	0	Sphinx's Tutelage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 158db438-52ba-4c30-b7bf-d1c4f76da917	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sphinx's Tutelage/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 158db438-52ba-4c30-b7bf-d1c4f76da917	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -143,8 +143,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15ec1bfc-b0a0-4058-87bb-8dbaf17b7f3b	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 15ec1bfc-b0a0-4058-87bb-8dbaf17b7f3b	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 15ec1bfc-b0a0-4058-87bb-8dbaf17b7f3b	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-15ee7e1d-b13e-4fd0-bc41-345b6ed34f53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-15ee7e1d-b13e-4fd0-bc41-345b6ed34f53	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+15ee7e1d-b13e-4fd0-bc41-345b6ed34f53	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:honden-of-cleansing-fire:f0t0:s1,f:xs:XP:honden-of-cleansing-fire:f0t0:s1	-	-	-	23c4009444b0	-	8119f49fefd9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+15ee7e1d-b13e-4fd0-bc41-345b6ed34f53	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:honden-of-cleansing-fire:f0t0:s1,f:xs:XP:honden-of-cleansing-fire:f0t0:s1	-	-	-	23c4009444b0	-	8119f49fefd9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 15f1fe23-5af4-4fc4-8cde-2e0bf9f9be0c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15f1fe23-5af4-4fc4-8cde-2e0bf9f9be0c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15f2085f-d5e6-4bc6-870f-00fcaccd981b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savior-of-the-small:cast:s1,f:xs:XP:savior-of-the-small:cast:s1	-	-	-	23c4009444b0	-	b4571e3d3e84	-	-	2026-11-25	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15fb3a7a-a6c3-4bef-9f72-1d04b623063e	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:molten-tail-masticore:f0t0:s1	-	-	-	3aa6ded33acb	-	792be6b48a69	-	-	2026-11-25	xproof
 15fbb7b1-c62d-4f82-9f35-2c10299779f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15fbb7b1-c62d-4f82-9f35-2c10299779f4	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-15fc4e74-300e-4c2d-8ed7-004553b2f7c2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+15fc4e74-300e-4c2d-8ed7-004553b2f7c2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 15fc4e74-300e-4c2d-8ed7-004553b2f7c2	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 15fd66db-f9dd-40ab-92bc-9e0575bd7489	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15feb59b-bbbe-462a-8d38-d20735bbc2f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

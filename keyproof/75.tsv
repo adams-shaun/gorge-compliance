@@ -2,9 +2,9 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 7500b7dc-588d-46bd-acc5-885dcd464668	cast	cast-resolve	agreed	-	X	scen	1	0	Tam's Resistance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 75070eaf-c931-46e5-9aa1-b849e33580c6	cast	cast-resolve	agreed	-	FX	scen	2	0	Ambling Stormshell/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-75070eaf-c931-46e5-9aa1-b849e33580c6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ambling Stormshell/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-75070eaf-c931-46e5-9aa1-b849e33580c6	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ambling Stormshell/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-75070eaf-c931-46e5-9aa1-b849e33580c6	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Ambling Stormshell/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+75070eaf-c931-46e5-9aa1-b849e33580c6	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:ambling-stormshell:f0t0:s1,f:xs:XP:ambling-stormshell:f0t0:s1	-	-	-	23c4009444b0	-	99227ff57410	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+75070eaf-c931-46e5-9aa1-b849e33580c6	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:ambling-stormshell:f0t1:s1,f:xs:XP:ambling-stormshell:f0t1:s1	-	-	-	23c4009444b0	-	99227ff57410	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+75070eaf-c931-46e5-9aa1-b849e33580c6	f0/t2	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:ambling-stormshell:f0t2:s1,f:xs:XP:ambling-stormshell:f0t2:s1	-	-	-	23c4009444b0	-	99227ff57410	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75131d75-0703-44d0-b503-35190be8e66f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75131d75-0703-44d0-b503-35190be8e66f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 75132177-0881-4158-9d65-73f5ba9d4402	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -70,7 +70,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7552a9b4-b82f-491f-ad52-e271cf730211	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7552a9b4-b82f-491f-ad52-e271cf730211	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 75540897-53f6-433b-bd70-9851551df6ef	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:cave-of-temptation:f0a1:s2,f:xs:XP:cave-of-temptation:f0a1:s2	-	-	-	8c0bd19283bb	-	f56f6e4e7f22	-	-	2026-11-25	xproof
-75540897-53f6-433b-bd70-9851551df6ef	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75540897-53f6-433b-bd70-9851551df6ef	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75540897-53f6-433b-bd70-9851551df6ef	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75540897-53f6-433b-bd70-9851551df6ef	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7555c429-5f2d-4171-b6b0-8e3c8da7f314	cast	cast-resolve	agreed	-	X	scen	1	0	Satoru, the Infiltrator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7578a192-82e5-43ff-8dee-225f313c484a	cast	cast-resolve	agreed	-	X	scen	1	0	Run Behind/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7578a192-82e5-43ff-8dee-225f313c484a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Run Behind/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7579e1a2-2747-4e37-9a7a-c13b62190195	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7579e1a2-2747-4e37-9a7a-c13b62190195	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7579e1a2-2747-4e37-9a7a-c13b62190195	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7579e1a2-2747-4e37-9a7a-c13b62190195	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7579f57d-c76e-4703-a030-34fb7160cb23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7579f57d-c76e-4703-a030-34fb7160cb23	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

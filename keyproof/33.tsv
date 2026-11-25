@@ -16,10 +16,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 330f2e60-810d-4fe0-9a35-b3f2b29e3e2a	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:true-faith-censer:f0a0:s1	-	-	-	d864b561c9cb	-	b136b3d284d1	-	-	2026-11-24	xproof
 330f97ee-6bb2-4a4b-a8bc-411659dc4260	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 330f97ee-6bb2-4a4b-a8bc-411659dc4260	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-33117d34-ea70-4566-92a3-5dec9bfe529a	cast	cast-resolve	agreed	-	X	scen	1	0	Krotiq Nestguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+33117d34-ea70-4566-92a3-5dec9bfe529a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:krotiq-nestguard:cast:s1,f:xs:XP:krotiq-nestguard:cast:s1	-	-	-	23c4009444b0	-	548ab5835e63	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 33117d34-ea70-4566-92a3-5dec9bfe529a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Krotiq Nestguard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-33117d34-ea70-4566-92a3-5dec9bfe529a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Krotiq Nestguard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-33117d34-ea70-4566-92a3-5dec9bfe529a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Krotiq Nestguard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+33117d34-ea70-4566-92a3-5dec9bfe529a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:krotiq-nestguard:combat0.block:s1,f:xs:XP:krotiq-nestguard:combat0.block:s1	-	-	-	23c4009444b0	-	548ab5835e63	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+33117d34-ea70-4566-92a3-5dec9bfe529a	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:krotiq-nestguard:f0a0:s1,f:xs:XP:krotiq-nestguard:f0a0:s1	-	-	-	23c4009444b0	-	548ab5835e63	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 331233ba-0ddc-4cb2-b3b7-1b782e03529f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grim-feast:f0t0:s1,f:xs:XP:grim-feast:f0t0:s1	-	-	-	3aa6ded33acb	-	d2beba1f7f07	-	-	2026-11-25	xproof
 331233ba-0ddc-4cb2-b3b7-1b782e03529f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:grim-feast:f0t0:s1,f:xs:XP:grim-feast:f0t0:s1	-	-	-	3aa6ded33acb	-	d2beba1f7f07	-	-	2026-11-25	xproof
 331233ba-0ddc-4cb2-b3b7-1b782e03529f	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
@@ -111,8 +111,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 339c39d9-7e10-458e-b602-4f0550840436	f0/a1	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:platoon-dispenser:f0a1:s1,f:xs:XP:platoon-dispenser:f0a1:s1	-	-	-	3aa6ded33acb	-	e52b8eeaccfb	-	-	2026-11-25	xproof
 339c39d9-7e10-458e-b602-4f0550840436	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 339f5334-b65a-445a-a016-20e997e0b4bb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mistrise Village/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-339f5334-b65a-445a-a016-20e997e0b4bb	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Mistrise Village/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-339f5334-b65a-445a-a016-20e997e0b4bb	land	play-land	agreed	-	X	scen	1	0	Mistrise Village/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+339f5334-b65a-445a-a016-20e997e0b4bb	f0/a1	DelayedTrigger	agreed	-	FX	start	2	0	x:xs:XP:mistrise-village:f0a1:s1,f:xs:XP:mistrise-village:f0a1:s1	-	-	-	23c4009444b0	-	b2713950f785	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+339f5334-b65a-445a-a016-20e997e0b4bb	land	land	agreed	-	FX	start	2	0	x:xs:XP:mistrise-village:land:s1,f:xs:XP:mistrise-village:land:s1	-	-	-	23c4009444b0	-	b2713950f785	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 33a162f3-e781-494f-ab8f-12a84801a694	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foreboding-fruit:cast:s1,f:xs:XP:foreboding-fruit:cast:s1	-	-	-	ae86f6029288	-	3bcf29f28b97	-	-	2026-11-24	xproof
 33a45c4a-1481-4c7e-b823-435cb84231e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33a4e73d-d93a-4b6f-88ff-cd53f20d178c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spectacle Summit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -127,8 +127,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33a7d29a-ebc0-4606-91b6-7381e2a16016	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33a7d29a-ebc0-4606-91b6-7381e2a16016	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 33a90122-7280-4481-9b97-5879194cae40	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dalkovan Encampment/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-33a90122-7280-4481-9b97-5879194cae40	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Dalkovan Encampment/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-33a90122-7280-4481-9b97-5879194cae40	land	play-land	agreed	-	X	scen	1	0	Dalkovan Encampment/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+33a90122-7280-4481-9b97-5879194cae40	f0/a1	Effect	agreed	-	FX	start	2	0	x:xs:XP:dalkovan-encampment:f0a1:s1,f:xs:XP:dalkovan-encampment:f0a1:s1	-	-	-	23c4009444b0	-	f0da82679a14	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+33a90122-7280-4481-9b97-5879194cae40	land	land	agreed	-	FX	start	2	0	x:xs:XP:dalkovan-encampment:land:s1,f:xs:XP:dalkovan-encampment:land:s1	-	-	-	23c4009444b0	-	f0da82679a14	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 33a981ac-878d-4257-936f-55b4e6543c12	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brushwagg:cast:s1,f:xs:XP:brushwagg:cast:s1	-	-	-	ea3140b6974b	-	3739ceb2600f	-	-	2026-11-24	xproof
 33a981ac-878d-4257-936f-55b4e6543c12	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 33a981ac-878d-4257-936f-55b4e6543c12	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof

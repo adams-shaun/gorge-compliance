@@ -65,10 +65,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 164f3f85-21fc-40b7-9871-4f303ba98428	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1650d85f-4c65-429d-8952-f68b62935a55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1650d85f-4c65-429d-8952-f68b62935a55	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1654cab1-0697-4547-b1fe-2d0a61385199	cast	cast-resolve	agreed	-	X	scen	1	0	Boulderborn Dragon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1654cab1-0697-4547-b1fe-2d0a61385199	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Boulderborn Dragon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1654cab1-0697-4547-b1fe-2d0a61385199	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Boulderborn Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1654cab1-0697-4547-b1fe-2d0a61385199	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Boulderborn Dragon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1654cab1-0697-4547-b1fe-2d0a61385199	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boulderborn-dragon:cast:s1,f:xs:XP:boulderborn-dragon:cast:s1	-	-	-	23c4009444b0	-	6ee943721b0a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1654cab1-0697-4547-b1fe-2d0a61385199	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:boulderborn-dragon:combat0.attack:s1,f:xs:XP:boulderborn-dragon:combat0.attack:s1	-	-	-	23c4009444b0	-	6ee943721b0a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1654cab1-0697-4547-b1fe-2d0a61385199	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:boulderborn-dragon:combat0.block:s1,f:xs:XP:boulderborn-dragon:combat0.block:s1	-	-	-	23c4009444b0	-	6ee943721b0a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1654cab1-0697-4547-b1fe-2d0a61385199	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:boulderborn-dragon:combat0.attack:s1,f:xs:XP:boulderborn-dragon:combat0.attack:s1	-	-	-	23c4009444b0	-	6ee943721b0a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1657be64-b38f-4074-a743-bf558dc57901	cast	cast-resolve	agreed	-	X	scen	1	0	Harsh Annotation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 165bdc68-1da0-47db-a069-978fc4c04b3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:caustic-bronco:cast:s1,f:xs:XP:caustic-bronco:cast:s1	-	-	-	8c0bd19283bb	-	eedb57c7c6cd	-	-	2026-11-25	xproof
 165bdc68-1da0-47db-a069-978fc4c04b3f	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:caustic-bronco:f0a0:s1,f:xs:XP:caustic-bronco:f0a0:s1	-	-	-	3aa6ded33acb	-	eedb57c7c6cd	-	-	2026-11-25	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16c46eaf-7a31-4957-ab7c-ff07fbbd9ddc	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16c587db-d07b-47ab-8b03-c3b2cc7144f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16c587db-d07b-47ab-8b03-c3b2cc7144f5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16c99713-f19e-4b25-9b03-6a8d8203adfe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16c99713-f19e-4b25-9b03-6a8d8203adfe	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 16cae855-d93a-445d-9cac-dbc5a7c18cb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16cae855-d93a-445d-9cac-dbc5a7c18cb1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16cb916d-bb19-42ec-9a01-969e9d067b40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

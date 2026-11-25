@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 3501a839-eef5-44e4-8637-b5754780454e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3501ed98-473c-4a17-8b5f-1e0c00ee75da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:salvaging-station:f0t0:s1,f:xs:XP:salvaging-station:f0t0:s1	-	-	-	23c4009444b0	-	0d7821a03a78	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 35023c04-ae62-47bf-80a0-faa2d7a67788	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haazda-officer:f0t0:s1,f:xs:XP:haazda-officer:f0t0:s1	-	-	-	d864b561c9cb	-	d1779b887a80	-	-	2026-11-24	xproof
 35023c04-ae62-47bf-80a0-faa2d7a67788	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:haazda-officer:f0t0:s1,f:xs:XP:haazda-officer:f0t0:s1	-	-	-	d864b561c9cb	-	d1779b887a80	-	-	2026-11-24	xproof
 35044f8a-c8e0-41ae-ba61-43109e51f7e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hulk, Gamma Goliath/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3509171e-8d7d-4e9e-97a1-58e6c7d225ed	cast	cast-resolve	agreed	-	X	scen	1	0	Summon: Fenrir/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 350b3c1c-b37e-4279-9b49-0fb93c5e7e33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eyes-of-the-watcher:cast:s1,f:xs:XP:eyes-of-the-watcher:cast:s1	-	-	-	25696bf19d5b	-	6087ca15ca8c	-	-	2026-11-24	xproof
-350b3c1c-b37e-4279-9b49-0fb93c5e7e33	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+350b3c1c-b37e-4279-9b49-0fb93c5e7e33	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:eyes-of-the-watcher:f0t0:s1,f:xs:XP:eyes-of-the-watcher:f0t0:s1	-	-	-	23c4009444b0	-	6087ca15ca8c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 350f5c0a-563f-41c5-8f7b-10f409bb4d3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35101c6c-0bcc-4b1f-9cb5-a82e4d2f8220	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35101c6c-0bcc-4b1f-9cb5-a82e4d2f8220	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:gluttonous-cyclops:f0a0:s1,f:xs:XP:gluttonous-cyclops:f0a0:s1	-	-	-	d864b561c9cb	-	ea5a138b7595	-	-	2026-11-24	xproof
@@ -161,8 +161,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35c027cd-f754-4e41-9242-8a9d0481171c	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:dimir-house-guard:cast:s1,f:xs:XP:dimir-house-guard:cast:s1	-	-	-	64a08ba7d913	-	cb2809edb224	-	-	2026-11-24	xproof
 35c027cd-f754-4e41-9242-8a9d0481171c	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 35c60b66-8c85-432e-90fe-99c19d21ed15	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cori Mountain Monastery/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-35c60b66-8c85-432e-90fe-99c19d21ed15	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Cori Mountain Monastery/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-35c60b66-8c85-432e-90fe-99c19d21ed15	land	play-land	agreed	-	X	scen	1	0	Cori Mountain Monastery/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+35c60b66-8c85-432e-90fe-99c19d21ed15	f0/a1	Dig	agreed	-	FX	start	2	0	x:xs:XP:cori-mountain-monastery:f0a1:s1,f:xs:XP:cori-mountain-monastery:f0a1:s1	-	-	-	23c4009444b0	-	6f684b89ce83	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+35c60b66-8c85-432e-90fe-99c19d21ed15	land	land	agreed	-	FX	start	2	0	x:xs:XP:cori-mountain-monastery:land:s1,f:xs:XP:cori-mountain-monastery:land:s1	-	-	-	23c4009444b0	-	6f684b89ce83	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 35cb88aa-6ed9-4a2d-9bbc-5937e1df4f4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35cb88aa-6ed9-4a2d-9bbc-5937e1df4f4a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:heir-of-the-wilds:f0t0:s1,f:xs:XP:heir-of-the-wilds:f0t0:s1	-	-	-	3aa6ded33acb	-	8e6644c4c8b2	-	-	2026-11-25	xproof
 35d3d96a-d303-4bf5-b972-f311331ec07a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,4 +183,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35f09a11-1d9b-4dfd-9695-b809c871f10d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35f63c60-b0a1-459d-bf51-a8549fb06930	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35f63c60-b0a1-459d-bf51-a8549fb06930	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35f63c60-b0a1-459d-bf51-a8549fb06930	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+35f63c60-b0a1-459d-bf51-a8549fb06930	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

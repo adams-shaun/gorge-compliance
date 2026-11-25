@@ -48,7 +48,7 @@ fd4236e5-6a2c-45ec-afb3-cd4fc516fbf1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:con
 fd4236e5-6a2c-45ec-afb3-cd4fc516fbf1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:concerted-effort:cast:s1,f:xs:XP:concerted-effort:cast:s1	-	-	-	64a08ba7d913	-	c1aa39cc0aa3	-	-	2026-11-24	xproof
 fd44986c-cf37-4f6e-b8d6-1795ec794b5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fd44986c-cf37-4f6e-b8d6-1795ec794b5f	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:vorapede:f0t0:s1,f:xs:XP:vorapede:f0t0:s1	-	-	-	3aa6ded33acb	-	6991e4cf2abc	-	-	2026-11-25	xproof
-fd45063f-c83c-431c-9104-f139c497ec0d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fd45063f-c83c-431c-9104-f139c497ec0d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 fd45063f-c83c-431c-9104-f139c497ec0d	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:silent-clearing:f0a1:s1,f:xs:XP:silent-clearing:f0a1:s1	-	-	-	d864b561c9cb	-	3ac294098eb3	-	-	2026-11-24	xproof
 fd45063f-c83c-431c-9104-f139c497ec0d	land	land	agreed	-	FX	start	2	0	x:xs:XP:silent-clearing:land:s1,f:xs:XP:silent-clearing:land:s1	-	-	-	d864b561c9cb	-	3ac294098eb3	-	-	2026-11-24	xproof
 fd4d83fa-070c-46bf-a620-041f69acdea9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sentry-of-the-underworld:cast:s1,f:xs:XP:sentry-of-the-underworld:cast:s1	-	-	-	d864b561c9cb	-	e725cc39e517	-	-	2026-11-24	xproof
@@ -79,13 +79,13 @@ fd62ad01-601f-4250-bc2a-8ef3982e45c4	f0/t0	NULL	owed	refused:no-generator:trigge
 fd65468c-d75a-4be2-8a0c-9c4e808e3dd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shambling-strider:cast:s1,f:xs:XP:shambling-strider:cast:s1	-	-	-	8c0bd19283bb	-	8e7d0d25f854	-	-	2026-11-24	xproof
 fd65468c-d75a-4be2-8a0c-9c4e808e3dd0	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:shambling-strider:f0a0:s1,f:xs:XP:shambling-strider:f0a0:s1	-	-	-	8c0bd19283bb	-	8e7d0d25f854	-	-	2026-11-24	xproof
 fd666669-ad23-4e41-b78c-1cd7b82eb8b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:felothar-dawn-of-the-abzan:cast:s2,f:xs:XP:felothar-dawn-of-the-abzan:cast:s2	-	-	-	5437c1394672	-	bb4e8a3fb02a	-	-	2026-11-24	xproof
-fd666669-ad23-4e41-b78c-1cd7b82eb8b4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Felothar, Dawn of the Abzan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fd666669-ad23-4e41-b78c-1cd7b82eb8b4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Felothar, Dawn of the Abzan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+fd666669-ad23-4e41-b78c-1cd7b82eb8b4	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:felothar-dawn-of-the-abzan:combat0.attack:s1	-	-	-	23c4009444b0	-	bb4e8a3fb02a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+fd666669-ad23-4e41-b78c-1cd7b82eb8b4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:felothar-dawn-of-the-abzan:combat0.block:s1,f:xs:XP:felothar-dawn-of-the-abzan:combat0.block:s1	-	-	-	23c4009444b0	-	bb4e8a3fb02a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 fd666669-ad23-4e41-b78c-1cd7b82eb8b4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:felothar-dawn-of-the-abzan:cast:s2,f:xs:XP:felothar-dawn-of-the-abzan:cast:s2	-	-	-	5437c1394672	-	bb4e8a3fb02a	-	-	2026-11-24	xproof
-fd666669-ad23-4e41-b78c-1cd7b82eb8b4	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Felothar, Dawn of the Abzan/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+fd666669-ad23-4e41-b78c-1cd7b82eb8b4	f0/t1	Attacks	agreed	-	X	start	4	0	x:xs:XP:felothar-dawn-of-the-abzan:combat0.attack:s1	-	-	-	23c4009444b0	-	bb4e8a3fb02a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 fd6afb5e-d99a-44a7-9af4-9f064da95d63	cast	cast-resolve	agreed	-	X	scen	1	0	Starfighter Pilot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fd6afb5e-d99a-44a7-9af4-9f064da95d63	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Starfighter Pilot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fd6ba826-e7b1-4375-8aaf-c3cd3dc7ba07	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+fd6ba826-e7b1-4375-8aaf-c3cd3dc7ba07	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 fd6e1967-237a-41f6-bbf4-2c869f9447c8	cast	cast-resolve	agreed	-	FX	scen	2	0	Twitching Doll/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fd6e1967-237a-41f6-bbf4-2c869f9447c8	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Twitching Doll/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fd6e1967-237a-41f6-bbf4-2c869f9447c8	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Twitching Doll/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

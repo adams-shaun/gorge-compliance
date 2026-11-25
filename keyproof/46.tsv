@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-4600e968-fe3a-446a-a306-bd10e6763e0d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4600e968-fe3a-446a-a306-bd10e6763e0d	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4601e4c7-74bc-44ce-9274-68ba79f8aae1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nerd-rage:f0t0:s1,f:xs:XP:nerd-rage:f0t0:s1	-	-	-	8c0bd19283bb	-	f4b8a1508b76	-	-	2026-11-24	xproof
 4601e4c7-74bc-44ce-9274-68ba79f8aae1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nerd-rage:f0t0:s1,f:xs:XP:nerd-rage:f0t0:s1	-	-	-	8c0bd19283bb	-	f4b8a1508b76	-	-	2026-11-24	xproof
 4601ed7b-716e-4c89-b733-1eeabe8bf5a2	cast	cast-resolve	agreed	-	X	scen	1	0	Joo Dee, One of Many/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -157,9 +157,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46b1a169-bc32-47bf-b379-fa0c3d13878f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cori-Steel Cutter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46b1a169-bc32-47bf-b379-fa0c3d13878f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cori-Steel Cutter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46b1a169-bc32-47bf-b379-fa0c3d13878f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cori-Steel Cutter/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-46b36d25-25bd-48c5-9a53-75230bb27dee	cast	cast-resolve	agreed	-	X	scen	1	0	Swiftwing Assailant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-46b36d25-25bd-48c5-9a53-75230bb27dee	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Swiftwing Assailant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-46b36d25-25bd-48c5-9a53-75230bb27dee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Swiftwing Assailant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+46b36d25-25bd-48c5-9a53-75230bb27dee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swiftwing-assailant:cast:s1,f:xs:XP:swiftwing-assailant:cast:s1	-	-	-	23c4009444b0	-	995149d063d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+46b36d25-25bd-48c5-9a53-75230bb27dee	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:swiftwing-assailant:combat0.attack:s1,f:xs:XP:swiftwing-assailant:combat0.attack:s1	-	-	-	23c4009444b0	-	995149d063d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+46b36d25-25bd-48c5-9a53-75230bb27dee	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:swiftwing-assailant:combat0.block:s1,f:xs:XP:swiftwing-assailant:combat0.block:s1	-	-	-	23c4009444b0	-	995149d063d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 46b36d25-25bd-48c5-9a53-75230bb27dee	static#0.0	static#0.0	agreed	-	X	scen	1	0	Swiftwing Assailant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 46b5f12e-9fe5-44f6-b895-ee8c33205521	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aberrant:f0t1:s1,f:xs:XP:aberrant:f0t1:s1	-	-	-	23c4009444b0	-	6a929ca8a986	-	-	2026-11-25	xproof
 46b5f12e-9fe5-44f6-b895-ee8c33205521	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 46db3dc2-9eb1-4be3-96f9-0013119fcd97	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46ddc2e1-386f-4aaf-b37b-37b1708e0d9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46e311ef-c86e-4aad-8b42-ef0d68a90c2e	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-46e4ace2-e8bf-4b72-81de-286215886a10	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+46e4ace2-e8bf-4b72-81de-286215886a10	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 46e50ee9-91f8-416e-82fa-f1a76e61fb73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46e50ee9-91f8-416e-82fa-f1a76e61fb73	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 46e8bec0-1a09-4e6e-b78a-7ba161686ca9	cast	cast-resolve	agreed	-	FX	scen	2	0	Cindering Cutthroat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

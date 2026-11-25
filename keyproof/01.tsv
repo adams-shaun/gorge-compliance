@@ -163,8 +163,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01b3af6d-ab7d-4137-a94a-1cf2cbfd9d44	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lich-s-caress:cast:s1,f:xs:XP:lich-s-caress:cast:s1	-	-	-	3aa6ded33acb	-	2e0e0ed4a6ef	-	-	2026-11-25	xproof
 01b778d7-0965-48ab-a81f-e29f8a233d07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01bba3b8-6372-437e-ab34-ae2c8105cd28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summoning-station:cast:s1,f:xs:XP:summoning-station:cast:s1	-	-	-	25696bf19d5b	-	14a6385eb4f9	-	-	2026-11-24	xproof
-01bba3b8-6372-437e-ab34-ae2c8105cd28	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:summoning-station:cast:s1,f:xs:XP:summoning-station:cast:s1	-	-	-	25696bf19d5b	-	14a6385eb4f9	-	-	2026-11-24	xproof
-01bba3b8-6372-437e-ab34-ae2c8105cd28	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+01bba3b8-6372-437e-ab34-ae2c8105cd28	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:summoning-station:f0t0:s1,f:xs:XP:summoning-station:f0t0:s1	-	-	-	23c4009444b0	-	14a6385eb4f9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+01bba3b8-6372-437e-ab34-ae2c8105cd28	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:summoning-station:f0t0:s1,f:xs:XP:summoning-station:f0t0:s1	-	-	-	23c4009444b0	-	14a6385eb4f9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 01bc8bfa-2e46-4324-a848-cc68bc9330d0	cast	cast	agreed	-	F	start	2	0	f:xs:XP:doomsday-confluence:cast:s1	-	-	-	8c0bd19283bb	-	a6c92a9c7346	-	-	2026-11-24	xproof
 01becf76-aa53-4fd5-94c1-665c64674219	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 01becf76-aa53-4fd5-94c1-665c64674219	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -174,8 +174,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01c39670-3677-49df-a4f6-e5062e0909d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01c729d7-9b80-479d-8d30-ae47c76c2c50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01c8d29f-4924-4d55-80bc-0c0c06bcb733	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eight-and-a-half-tails:cast:s1,f:xs:XP:eight-and-a-half-tails:cast:s1	-	-	-	25696bf19d5b	-	c561a7b8db94	-	-	2026-11-24	xproof
-01c8d29f-4924-4d55-80bc-0c0c06bcb733	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-01c8d29f-4924-4d55-80bc-0c0c06bcb733	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+01c8d29f-4924-4d55-80bc-0c0c06bcb733	f0/a0	Protection	agreed	-	FX	start	2	0	x:xs:XP:eight-and-a-half-tails:f0a0:s1,f:xs:XP:eight-and-a-half-tails:f0a0:s1	-	-	-	23c4009444b0	-	c561a7b8db94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+01c8d29f-4924-4d55-80bc-0c0c06bcb733	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:eight-and-a-half-tails:f0a1:s1,f:xs:XP:eight-and-a-half-tails:f0a1:s1	-	-	-	23c4009444b0	-	c561a7b8db94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 01cb56d7-f859-46fd-b6c9-40d2c4965b69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01cb56d7-f859-46fd-b6c9-40d2c4965b69	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 01cd52f9-7fac-4396-bec7-d06bf683e011	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akki-rockspeaker:f0t0:s1,f:xs:XP:akki-rockspeaker:f0t0:s1	-	-	-	25696bf19d5b	-	fb621188fe25	-	-	2026-11-24	xproof

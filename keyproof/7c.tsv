@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c07970d-063a-44a1-9761-b80aafa90dac	cast	cast-resolve	agreed	-	X	scen	1	0	Stark Industries Executive/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7c07970d-063a-44a1-9761-b80aafa90dac	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stark Industries Executive/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7c0e4731-d384-4f63-a36c-b571d8f79922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7c0e4731-d384-4f63-a36c-b571d8f79922	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7c0e4731-d384-4f63-a36c-b571d8f79922	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7c0e4731-d384-4f63-a36c-b571d8f79922	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:leonin-battlemage:f0t0:s1,f:xs:XP:leonin-battlemage:f0t0:s1	-	-	-	23c4009444b0	-	b32f55f8e400	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7c0e4731-d384-4f63-a36c-b571d8f79922	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:leonin-battlemage:f0t0:s1,f:xs:XP:leonin-battlemage:f0t0:s1	-	-	-	23c4009444b0	-	b32f55f8e400	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7c0ef3b7-b368-4a5b-8cbe-bf1f47610f74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:daggersail-aeronaut:cast:s1,f:xs:XP:daggersail-aeronaut:cast:s1	-	-	-	d864b561c9cb	-	6b9150ecd52f	-	-	2026-11-24	xproof
 7c158405-d3ef-4c10-a504-7b061ef71a74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c158405-d3ef-4c10-a504-7b061ef71a74	f0/a0	Phases	agreed	-	F	start	2	0	f:xs:XP:rainbow-efreet:f0a0:s1	-	-	-	ea3140b6974b	-	dda1652dd28b	-	-	2026-11-24	xproof
@@ -27,9 +27,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c27136a-bf9d-4f42-9c37-abe347fad1bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:weaponcraft-enthusiast:f0t0:s1,f:xs:XP:weaponcraft-enthusiast:f0t0:s1	-	-	-	3aa6ded33acb	-	f114b38e7185	-	-	2026-11-25	xproof
 7c27136a-bf9d-4f42-9c37-abe347fad1bb	f0/t0	ChangesZone/Fabricate	agreed	-	FX	start	2	0	x:xs:XP:weaponcraft-enthusiast:f0t0:s1,f:xs:XP:weaponcraft-enthusiast:f0t0:s1	-	-	-	3aa6ded33acb	-	f114b38e7185	-	-	2026-11-25	xproof
 7c2f1915-8d91-47c6-bab4-be325348673a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7c304547-a4b1-46c9-baed-16d2bfbe16eb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7c304547-a4b1-46c9-baed-16d2bfbe16eb	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7c304547-a4b1-46c9-baed-16d2bfbe16eb	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-7c304547-a4b1-46c9-baed-16d2bfbe16eb	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7c304547-a4b1-46c9-baed-16d2bfbe16eb	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7c309759-e607-4bad-b615-f7c673e508ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rofellos-s-gift:cast:s1,f:xs:XP:rofellos-s-gift:cast:s1	-	-	-	5f2128bf97e4	-	3331a896a5b7	-	-	2026-11-24	xproof
 7c3171da-7a95-4f8e-ba30-c31af21c1828	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c3171da-7a95-4f8e-ba30-c31af21c1828	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7cee6d43-5dec-4989-85ec-c635ec783ec7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sagu Wildling/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7cee6d43-5dec-4989-85ec-c635ec783ec7	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ceec1c7-c1f9-4d47-a203-6ee98c5d30d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ceec1c7-c1f9-4d47-a203-6ee98c5d30d2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ceec1c7-c1f9-4d47-a203-6ee98c5d30d2	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7ceec1fd-4af5-40d4-9d17-424e21889d64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dueling-rapier:f0t0:s1,f:xs:XP:dueling-rapier:f0t0:s1	-	-	-	d864b561c9cb	-	4549cf03363d	-	-	2026-11-24	xproof
 7ceec1fd-4af5-40d4-9d17-424e21889d64	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ceec1fd-4af5-40d4-9d17-424e21889d64	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dueling-rapier:f0t0:s1,f:xs:XP:dueling-rapier:f0t0:s1	-	-	-	d864b561c9cb	-	4549cf03363d	-	-	2026-11-24	xproof

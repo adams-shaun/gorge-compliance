@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b020aeb-7b27-43f2-9767-d93dae3d102a	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 9b06cfae-1655-4b0e-a160-9b32f27c7c9a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pardic-collaborator:cast:s1,f:xs:XP:pardic-collaborator:cast:s1	-	-	-	fc71ca68c5ac	-	8a0d99d41f76	-	-	2026-11-24	xproof
 9b06cfae-1655-4b0e-a160-9b32f27c7c9a	f0/a0	Pump	agreed	-	X	start	2	0	x:xs:XP:pardic-collaborator:f0a0:s1	-	-	-	fc71ca68c5ac	-	8a0d99d41f76	-	-	2026-11-24	xproof
-9b06f2bf-146d-4b30-b467-e16f1a942253	cast	cast-resolve	agreed	-	X	scen	1	0	Dracogenesis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9b06f2bf-146d-4b30-b467-e16f1a942253	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dracogenesis:cast:s1,f:xs:XP:dracogenesis:cast:s1	-	-	-	23c4009444b0	-	ba6347dc2b10	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9b06f2bf-146d-4b30-b467-e16f1a942253	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dracogenesis/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b084cd4-cc21-4f3a-9ac5-1e1160a31aa6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b0a14b9-977d-4e25-a519-eaddb0f94b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9bb8c54b-1228-4b7c-8651-52cb5b0f6e72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bbee1a5-2eb0-4fad-9524-4ad9cc5ca998	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bbee1a5-2eb0-4fad-9524-4ad9cc5ca998	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-9bc0ca04-26ab-4743-bc65-0b5f4115c8f7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9bc0ca04-26ab-4743-bc65-0b5f4115c8f7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9bc0ca04-26ab-4743-bc65-0b5f4115c8f7	f0/a0	NULL	owed	refused:steps-needed:cost:GU	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9bc458ac-5566-4978-aeaa-73b600d4ec29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bc5ed59-ae13-40df-94b9-c56c32673857	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

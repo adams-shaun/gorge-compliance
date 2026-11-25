@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f2d1de6-42e0-4f45-b43d-ce4980146469	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dawn's Light Archer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1f2d1de6-42e0-4f45-b43d-ce4980146469	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dawn's Light Archer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1f2d6cf4-b8f4-440f-ac08-ca47ada868ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slobad-goblin-tinkerer:cast:s1,f:xs:XP:slobad-goblin-tinkerer:cast:s1	-	-	-	25696bf19d5b	-	30ecb73cfdf0	-	-	2026-11-24	xproof
-1f2d6cf4-b8f4-440f-ac08-ca47ada868ac	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1f2d6cf4-b8f4-440f-ac08-ca47ada868ac	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:slobad-goblin-tinkerer:f0a0:s1,f:xs:XP:slobad-goblin-tinkerer:f0a0:s1	-	-	-	23c4009444b0	-	30ecb73cfdf0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1f300320-ad98-4812-b34b-54885a86aee9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ember-shot:cast:s1,f:xs:XP:ember-shot:cast:s1	-	-	-	fc71ca68c5ac	-	f0996cef1a1d	-	-	2026-11-24	xproof
 1f361ae9-98a2-40ff-a579-fa5b9f510df4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rotting-rats:cast:s1,f:xs:XP:rotting-rats:cast:s1	-	-	-	8a1b1a193ec0	-	1f5dbcacec17	-	-	2026-11-24	xproof
 1f361ae9-98a2-40ff-a579-fa5b9f510df4	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:rotting-rats:f0a0:s1,f:xs:XP:rotting-rats:f0a0:s1	-	-	-	3aa6ded33acb	-	1f5dbcacec17	-	-	2026-11-25	xproof
@@ -115,10 +115,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f7e85cf-afee-4041-9436-1fb69b4ec292	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noise-marine:f0t0:s1,f:xs:XP:noise-marine:f0t0:s1	-	-	-	23c4009444b0	-	b881bc83b9a5	-	-	2026-11-25	xproof
 1f7f7765-aeb9-4e47-a6b9-ce823bb29e33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:transcendent-message:cast:s1,f:xs:XP:transcendent-message:cast:s1	-	-	-	d864b561c9cb	-	773e996d14fe	-	-	2026-11-24	xproof
 1f82e4b9-e67f-4f34-ac4c-57b0b300ee42	cast	cast	agreed	-	F	start	1	0	f:xs:XP:mardu-siegebreaker:f0t0:s2	-	-	-	5437c1394672	-	f50679058a1b	-	-	2026-11-24	xproof
-1f82e4b9-e67f-4f34-ac4c-57b0b300ee42	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mardu Siegebreaker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1f82e4b9-e67f-4f34-ac4c-57b0b300ee42	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mardu Siegebreaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1f82e4b9-e67f-4f34-ac4c-57b0b300ee42	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:mardu-siegebreaker:combat0.attack:s1	-	-	-	23c4009444b0	-	f50679058a1b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1f82e4b9-e67f-4f34-ac4c-57b0b300ee42	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mardu-siegebreaker:combat0.block:s1,f:xs:XP:mardu-siegebreaker:combat0.block:s1	-	-	-	23c4009444b0	-	f50679058a1b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1f82e4b9-e67f-4f34-ac4c-57b0b300ee42	f0/t0	ChangesZone	agreed	-	F	start	1	0	f:xs:XP:mardu-siegebreaker:f0t0:s2	-	-	-	5437c1394672	-	f50679058a1b	-	-	2026-11-24	xproof
-1f82e4b9-e67f-4f34-ac4c-57b0b300ee42	f0/t1	Attacks	agreed	-	F	start	1	0	f:xs:XP:mardu-siegebreaker:f0t0:s2	-	-	-	5437c1394672	-	f50679058a1b	-	-	2026-11-24	xproof
+1f82e4b9-e67f-4f34-ac4c-57b0b300ee42	f0/t1	Attacks	agreed	-	F	start	2	0	f:xs:XP:mardu-siegebreaker:combat0.attack:s1	-	-	-	23c4009444b0	-	f50679058a1b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1f82fe6b-1ec7-400b-a80d-40921b359723	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f861517-ac53-4218-b62e-35e971098b6d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:saprazzan-bailiff:cast:s1,f:xs:XP:saprazzan-bailiff:cast:s1	-	-	-	5f2128bf97e4	-	2321cfc0c3c3	-	-	2026-11-24	xproof
 1f861517-ac53-4218-b62e-35e971098b6d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:saprazzan-bailiff:cast:s1,f:xs:XP:saprazzan-bailiff:cast:s1	-	-	-	5f2128bf97e4	-	2321cfc0c3c3	-	-	2026-11-24	xproof
@@ -174,7 +174,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fd04d9e-cf89-49ba-a932-5d278f65bf77	f0/t0	ChangesZone/For Mirrodin	agreed	-	FX	start	2	0	x:xs:XP:mirran-bardiche:f0t0:s1,f:xs:XP:mirran-bardiche:f0t0:s1	-	-	-	ae86f6029288	-	70b23bf38a28	-	-	2026-11-24	xproof
 1fd729f6-27ea-4b07-81f0-885f2c0c00eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fd754fd-c053-4638-b379-46d903357b01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d	cast	cast-resolve	agreed	-	X	scen	1	0	Reverberating Summons/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reverberating-summons:cast:s1,f:xs:XP:reverberating-summons:cast:s1	-	-	-	23c4009444b0	-	8642fa3ffef6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Reverberating Summons/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fd78bf7-43ba-4e09-834b-14bfc1fd9d0d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Reverberating Summons/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fdcdb1c-a140-40ee-b711-5ea539eb1084	cast	cast	agreed	-	F	start	2	0	f:xs:XP:melkotian-adjudicator:cast:s1	-	-	-	23c4009444b0	-	4617fe31c654	-	-	2026-11-25	xproof

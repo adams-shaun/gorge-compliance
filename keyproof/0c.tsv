@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c0bb9b0-e7e0-465e-826b-2e56032aed1b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:stunning-shot:cast:s1	-	-	-	8c0bd19283bb	-	a3cccb0c6408	-	-	2026-11-24	xproof
 0c0d6c7e-a7cc-49e0-bf84-3fc33dd10b90	cast	cast-resolve	agreed	-	FX	scen	2	0	Deepfathom Echo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c0d6c7e-a7cc-49e0-bf84-3fc33dd10b90	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Deepfathom Echo/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0c0eeb01-62e7-4a7f-923d-a7b830e4c83b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0c0eeb01-62e7-4a7f-923d-a7b830e4c83b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0c0f7092-3fe6-4a6e-8b4e-803810b43e50	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gearsmith-guardian:cast:s1,f:xs:XP:gearsmith-guardian:cast:s1	-	-	-	d864b561c9cb	-	d4fa9b5f1c95	-	-	2026-11-24	xproof
 0c0ffb66-94db-4ba9-afde-c5b4fbf09578	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drag-the-canal:cast:s1,f:xs:XP:drag-the-canal:cast:s1	-	-	-	23b491658465	-	6b0c99a803a4	-	-	2026-11-24	xproof
 0c107664-a9fc-4684-8a1b-fa750401a6dd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:niambi-faithful-healer:cast:s1,f:xs:XP:niambi-faithful-healer:cast:s1	-	-	-	d864b561c9cb	-	258510c20226	-	-	2026-11-24	xproof
@@ -156,8 +156,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0caf42f5-abff-48aa-9bbf-df6cba169ef3	f0/t1	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2957ed0bb120	-	-	2026-11-25	xproof
 0cb41c3f-5e6a-4c63-80b5-c9ab84b4e4bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0cb41c3f-5e6a-4c63-80b5-c9ab84b4e4bf	f0/t0	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:order-of-sacred-dusk:f0t0:s1,f:xs:XP:order-of-sacred-dusk:f0t0:s1	-	-	-	23c4009444b0	-	6dc1b1b5e475	-	-	2026-11-25	xproof
-0cb76b04-d9c3-46fc-a3f2-5f0cb0d91761	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0cb76b04-d9c3-46fc-a3f2-5f0cb0d91761	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+0cb76b04-d9c3-46fc-a3f2-5f0cb0d91761	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:honden-of-infinite-rage:f0t0:s1,f:xs:XP:honden-of-infinite-rage:f0t0:s1	-	-	-	23c4009444b0	-	8887b2589686	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0cb76b04-d9c3-46fc-a3f2-5f0cb0d91761	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:honden-of-infinite-rage:f0t0:s1,f:xs:XP:honden-of-infinite-rage:f0t0:s1	-	-	-	23c4009444b0	-	8887b2589686	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0cb7f468-070a-463c-b00c-16db3421d16a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:culling-mark:cast:s1,f:xs:XP:culling-mark:cast:s1	-	-	-	3aa6ded33acb	-	7f0827a8d7b0	-	-	2026-11-25	xproof
 0cbe2a00-4303-4ade-98b5-4172d97f15fb	cast	cast-resolve	agreed	-	FX	scen	2	0	Boilerbilges Ripper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0cbe2a00-4303-4ade-98b5-4172d97f15fb	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

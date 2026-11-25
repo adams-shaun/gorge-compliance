@@ -98,13 +98,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 396cc8ce-9efa-4fc7-90a6-b439b2b021db	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Battlesong Berserker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 396efb56-7a54-4d91-b2ce-7f3c62c3238b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3970e021-209d-41d3-9466-8b3ef9ab1a4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3970e021-209d-41d3-9466-8b3ef9ab1a4c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+3970e021-209d-41d3-9466-8b3ef9ab1a4c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 39780477-01ba-40c6-8fe6-2178efb10b92	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3979067a-9c68-443d-a85f-d9f07be880b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3979067a-9c68-443d-a85f-d9f07be880b9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3979067a-9c68-443d-a85f-d9f07be880b9	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 397964db-465a-407d-9dc7-d0a4944473ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enhanced-awareness:cast:s1,f:xs:XP:enhanced-awareness:cast:s1	-	-	-	d864b561c9cb	-	554af2f9d78f	-	-	2026-11-24	xproof
-397b9dcf-690a-4a58-8637-bb9baab7cc2f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+397b9dcf-690a-4a58-8637-bb9baab7cc2f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 397b9dcf-690a-4a58-8637-bb9baab7cc2f	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 397df813-c759-4246-8def-122c7ff82d88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,8 +152,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39a4416f-9b40-432e-aeb6-cc7bf519b37a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hunted-dragon:f0t0:s1,f:xs:XP:hunted-dragon:f0t0:s1	-	-	-	64a08ba7d913	-	bc848d32d93a	-	-	2026-11-24	xproof
 39a4416f-9b40-432e-aeb6-cc7bf519b37a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hunted-dragon:f0t0:s1,f:xs:XP:hunted-dragon:f0t0:s1	-	-	-	64a08ba7d913	-	bc848d32d93a	-	-	2026-11-24	xproof
 39a7c52d-0b89-47c1-a376-5004c94c2e0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39a7c52d-0b89-47c1-a376-5004c94c2e0f	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-39a7c52d-0b89-47c1-a376-5004c94c2e0f	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+39a7c52d-0b89-47c1-a376-5004c94c2e0f	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+39a7c52d-0b89-47c1-a376-5004c94c2e0f	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 39acc3d0-85fc-4814-93f2-e709c3b2c86b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:everything-comes-to-dust:cast:s1,f:xs:XP:everything-comes-to-dust:cast:s1	-	-	-	8c0bd19283bb	-	ba08b1be8e8d	-	-	2026-11-24	xproof
 39b359c1-48b8-43a7-b972-54764eadd2c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jeskai-infiltrator:cast:s1,f:xs:XP:jeskai-infiltrator:cast:s1	-	-	-	d864b561c9cb	-	597cdc702919	-	-	2026-11-24	xproof
 39b359c1-48b8-43a7-b972-54764eadd2c7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

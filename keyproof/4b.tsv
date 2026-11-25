@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b508087-99da-4eb1-8b12-29162f2ec85d	f0/a1	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:altanak-the-thrice-called:cast:s1,f:xs:XP:altanak-the-thrice-called:cast:s1	-	-	-	23c4009444b0	-	6d7bd5ebdc23	-	-	2026-11-25	xproof
 4b508087-99da-4eb1-8b12-29162f2ec85d	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b515bb0-f275-4400-8032-3173b799ab40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:walking-ballista:cast:s1,f:xs:XP:walking-ballista:cast:s1	-	-	-	d864b561c9cb	-	16260c3ec56a	-	-	2026-11-24	xproof
-4b515bb0-f275-4400-8032-3173b799ab40	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b515bb0-f275-4400-8032-3173b799ab40	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b515bb0-f275-4400-8032-3173b799ab40	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4b51edb1-37cc-4993-a8a5-2eb5f79fa191	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:protection-racket:f0t0:s1,f:xs:XP:protection-racket:f0t0:s1	-	-	-	23c4009444b0	-	4c70c7a4da91	-	-	2026-11-25	xproof
 4b51edb1-37cc-4993-a8a5-2eb5f79fa191	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:protection-racket:f0t0:s1,f:xs:XP:protection-racket:f0t0:s1	-	-	-	23c4009444b0	-	4c70c7a4da91	-	-	2026-11-25	xproof
@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b8bf64b-4800-45ff-81c6-2857f34999b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b8bf64b-4800-45ff-81c6-2857f34999b5	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4b8d7d30-a97f-4169-a860-02783ca622ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b8d7d30-a97f-4169-a860-02783ca622ea	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+4b8d7d30-a97f-4169-a860-02783ca622ea	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b8d82fe-571d-4fd6-8d0c-77b7e5ef3e23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b8fb8dc-f1c5-4994-8a58-4849e7e85539	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heckling-fiends:cast:s1,f:xs:XP:heckling-fiends:cast:s1	-	-	-	d864b561c9cb	-	e01903af920b	-	-	2026-11-24	xproof
 4b8fb8dc-f1c5-4994-8a58-4849e7e85539	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:heckling-fiends:f0a0:s1,f:xs:XP:heckling-fiends:f0a0:s1	-	-	-	d864b561c9cb	-	e01903af920b	-	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4bd20d79-0861-494a-a8f2-f6ddb5088004	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-errant-of-eos:f0t0:s1,f:xs:XP:knight-errant-of-eos:f0t0:s1	-	-	-	ae86f6029288	-	c6a54fa025bb	-	-	2026-11-24	xproof
 4bd20d79-0861-494a-a8f2-f6ddb5088004	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:knight-errant-of-eos:f0t0:s1,f:xs:XP:knight-errant-of-eos:f0t0:s1	-	-	-	ae86f6029288	-	c6a54fa025bb	-	-	2026-11-24	xproof
 4bd38337-fb79-4809-848a-308c682825d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4bd38337-fb79-4809-848a-308c682825d1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4bd38337-fb79-4809-848a-308c682825d1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4bd7b380-ed4b-46a1-8211-1c4b651a52c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bd7b380-ed4b-46a1-8211-1c4b651a52c6	f0/t0	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-hybrid:f0t0:s1,f:xs:XP:arcbound-hybrid:f0t0:s1	-	-	-	d864b561c9cb	-	00d5d408c258	-	-	2026-11-24	xproof
 4bda947d-493f-47a0-b0d2-516a6ef6b2c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gilanra-caller-of-wirewood:cast:s1,f:xs:XP:gilanra-caller-of-wirewood:cast:s1	-	-	-	8c0bd19283bb	-	85154dc4609b	-	-	2026-11-24	xproof

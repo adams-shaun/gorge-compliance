@@ -35,8 +35,8 @@ e0206af2-8034-4351-a797-a1d996f080b5	static#0.0	static#0.0	agreed	-	X	scen	1	0	S
 e0209690-71f1-41f3-860a-a0737edaf1f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormcloud-djinn:cast:s1,f:xs:XP:stormcloud-djinn:cast:s1	-	-	-	9ee19e8250ce	-	769102fa48f5	-	-	2026-11-24	xproof
 e0209690-71f1-41f3-860a-a0737edaf1f9	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:stormcloud-djinn:f0a0:s1,f:xs:XP:stormcloud-djinn:f0a0:s1	-	-	-	d864b561c9cb	-	769102fa48f5	-	-	2026-11-24	xproof
 e0256da6-21f3-4019-9da0-75962b7f295c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cruel-deceiver:cast:s1,f:xs:XP:cruel-deceiver:cast:s1	-	-	-	25696bf19d5b	-	a3bc551aec1a	-	-	2026-11-24	xproof
-e0256da6-21f3-4019-9da0-75962b7f295c	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-e0256da6-21f3-4019-9da0-75962b7f295c	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+e0256da6-21f3-4019-9da0-75962b7f295c	f0/a0	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:cruel-deceiver:f0a0:s1,f:xs:XP:cruel-deceiver:f0a0:s1	-	-	-	23c4009444b0	-	a3bc551aec1a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e0256da6-21f3-4019-9da0-75962b7f295c	f0/a1	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:cruel-deceiver:f0a1:s1,f:xs:XP:cruel-deceiver:f0a1:s1	-	-	-	23c4009444b0	-	a3bc551aec1a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e025a714-02da-4b0c-8021-cf3e8dc9b19e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-locust-god:cast:s1,f:xs:XP:the-locust-god:cast:s1	-	-	-	d864b561c9cb	-	e000449173b8	-	-	2026-11-24	xproof
 e025a714-02da-4b0c-8021-cf3e8dc9b19e	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:the-locust-god:f0a0:s1,f:xs:XP:the-locust-god:f0a0:s1	-	-	-	d864b561c9cb	-	e000449173b8	-	-	2026-11-24	xproof
 e025a714-02da-4b0c-8021-cf3e8dc9b19e	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:the-locust-god:f0a0:s1,f:xs:XP:the-locust-god:f0a0:s1	-	-	-	d864b561c9cb	-	e000449173b8	-	-	2026-11-24	xproof
@@ -113,8 +113,8 @@ e08b19ca-f9d7-4c33-b37a-a77b37aabf1b	cast	cast-resolve	agreed	-	X	scen	1	0	Hamat
 e08c71aa-d35c-4c20-b4db-ae9d36ee3169	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 e08d264d-5731-4e2a-ae6d-5a74ef648575	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magus-of-the-bazaar:cast:s1,f:xs:XP:magus-of-the-bazaar:cast:s1	-	-	-	9ee19e8250ce	-	a1e33421717c	-	-	2026-11-24	xproof
 e08d264d-5731-4e2a-ae6d-5a74ef648575	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:magus-of-the-bazaar:f0a0:s1,f:xs:XP:magus-of-the-bazaar:f0a0:s1	-	-	-	d864b561c9cb	-	a1e33421717c	-	-	2026-11-24	xproof
-e08debdc-2db5-4562-8a02-4158bfc0db88	cast	cast-resolve	agreed	-	X	scen	1	0	Poised Practitioner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e08debdc-2db5-4562-8a02-4158bfc0db88	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Poised Practitioner/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e08debdc-2db5-4562-8a02-4158bfc0db88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:poised-practitioner:cast:s1,f:xs:XP:poised-practitioner:cast:s1	-	-	-	23c4009444b0	-	f2ecf1a70229	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e08debdc-2db5-4562-8a02-4158bfc0db88	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:poised-practitioner:f0t0:s1,f:xs:XP:poised-practitioner:f0t0:s1	-	-	-	23c4009444b0	-	f2ecf1a70229	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e091718c-0c26-46d9-b694-f95effbac3e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mina-and-denn-wildborn:cast:s1,f:xs:XP:mina-and-denn-wildborn:cast:s1	-	-	-	d864b561c9cb	-	16c9e622aa16	-	-	2026-11-24	xproof
 e091718c-0c26-46d9-b694-f95effbac3e5	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e0930791-72b0-4d8b-b242-7b4094fed14e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:failed-conversion:cast:s1,f:xs:XP:failed-conversion:cast:s1	-	-	-	ae86f6029288	-	3c50d8aefad2	-	-	2026-11-24	xproof

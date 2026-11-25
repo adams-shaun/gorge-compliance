@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e8e5ad4-05a3-4757-8797-c37bf49506d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e8ffb63-1a7b-4ebe-839d-d5192522db65	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9e8ffb63-1a7b-4ebe-839d-d5192522db65	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-9e9164be-3534-4445-bfad-00d16a50575c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9e9164be-3534-4445-bfad-00d16a50575c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9e9164be-3534-4445-bfad-00d16a50575c	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 9e9189d9-3b25-476b-b096-bb540398c1d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e9189d9-3b25-476b-b096-bb540398c1d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ece4b78-9554-4e4e-8491-68a6091f9c6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ecf56b9-1f36-4030-8333-1675ccc663d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nightmare-s-thirst:cast:s1,f:xs:XP:nightmare-s-thirst:cast:s1	-	-	-	d864b561c9cb	-	a12c8aaaf72c	-	-	2026-11-24	xproof
 9ed4e48f-91bd-45f9-9f31-a2705b330713	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-art-of-tea:cast:s1,f:xs:XP:the-art-of-tea:cast:s1	-	-	-	8c0bd19283bb	-	5c011d3903bd	-	-	2026-11-24	xproof
-9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	cast	cast-resolve	agreed	-	X	scen	1	0	Hundred-Battle Veteran/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hundred-battle-veteran:cast:s1,f:xs:XP:hundred-battle-veteran:cast:s1	-	-	-	23c4009444b0	-	87ce67a0a12c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hundred-Battle Veteran/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hundred-Battle Veteran/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	static#0.1	static#0.1	agreed	-	X	scen	1	0	Hundred-Battle Veteran/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

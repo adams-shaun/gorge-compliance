@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88b1e06c-5899-4e83-8204-e2c32c0c6aff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:subjugator-angel:f0t0:s1,f:xs:XP:subjugator-angel:f0t0:s1	-	-	-	d864b561c9cb	-	fc4ecc2b6237	-	-	2026-11-24	xproof
 88b1e06c-5899-4e83-8204-e2c32c0c6aff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:subjugator-angel:f0t0:s1,f:xs:XP:subjugator-angel:f0t0:s1	-	-	-	d864b561c9cb	-	fc4ecc2b6237	-	-	2026-11-24	xproof
 88b50194-bc39-47a6-968b-983553d89cf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-88b51e15-6630-4e14-a6b8-db0aa12e34ef	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+88b51e15-6630-4e14-a6b8-db0aa12e34ef	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 88ba283d-2d03-4455-a4a3-a2a5622209bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88ba283d-2d03-4455-a4a3-a2a5622209bd	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 88bb91b5-2ccd-4ce9-8cd4-e54d63c12abf	cast	cast-resolve	agreed	-	FX	scen	2	0	Coruscation Mage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -128,7 +128,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88c187fd-b3d3-4218-8e63-380a9ca9f1b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88c187fd-b3d3-4218-8e63-380a9ca9f1b4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 88cadf97-4b24-481a-9136-96c017fd96e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vermiculos:cast:s1,f:xs:XP:vermiculos:cast:s1	-	-	-	25696bf19d5b	-	59153853539f	-	-	2026-11-24	xproof
-88cadf97-4b24-481a-9136-96c017fd96e9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+88cadf97-4b24-481a-9136-96c017fd96e9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vermiculos:f0t0:s1,f:xs:XP:vermiculos:f0t0:s1	-	-	-	23c4009444b0	-	59153853539f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 88cd12e5-ca89-4176-96fd-320fe2ccd087	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ob-nixilis-the-hate-twisted:cast:s1,f:xs:XP:ob-nixilis-the-hate-twisted:cast:s1	-	-	-	d864b561c9cb	-	ebf1af2df4e0	-	-	2026-11-24	xproof
 88cd12e5-ca89-4176-96fd-320fe2ccd087	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:ob-nixilis-the-hate-twisted:cast:s1,f:xs:XP:ob-nixilis-the-hate-twisted:cast:s1	-	-	-	d864b561c9cb	-	ebf1af2df4e0	-	-	2026-11-24	xproof
 88cd12e5-ca89-4176-96fd-320fe2ccd087	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:ob-nixilis-the-hate-twisted:cast:s1,f:xs:XP:ob-nixilis-the-hate-twisted:cast:s1	-	-	-	d864b561c9cb	-	ebf1af2df4e0	-	-	2026-11-24	xproof

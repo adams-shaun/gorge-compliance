@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83578de7-5488-4952-af47-8fe966897210	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83578de7-5488-4952-af47-8fe966897210	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 8358f65a-7572-430d-b4f0-4fba7a372bd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8358f65a-7572-430d-b4f0-4fba7a372bd9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+8358f65a-7572-430d-b4f0-4fba7a372bd9	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:akki-underminer:f0t0:s1,f:xs:XP:akki-underminer:f0t0:s1	-	-	-	23c4009444b0	-	ab9225b7dc59	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 835abd35-27ea-45fe-b55d-25081c57bd4a	cast	cast-resolve	agreed	-	X	scen	1	0	Zero Point Ballad/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 835c195a-8c35-4076-896d-8d2972cac270	cast	cast-resolve	agreed	-	X	scen	1	0	The End/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 835c195a-8c35-4076-896d-8d2972cac270	static#0.0	static#0.0	agreed	-	X	scen	1	0	The End/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -170,8 +170,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83c69c05-173d-4c1b-9541-1dde474fef5f	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:bonehoard:f0t0:s1,f:xs:XP:bonehoard:f0t0:s1	-	-	-	d864b561c9cb	-	fe7cc9a16a03	-	-	2026-11-24	xproof
 83c8a3a6-2e1a-4e26-8847-6d066f42d906	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83c8f1ca-194e-4cb6-9d5f-029133c1edbc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lotuslight-dancers:f0t0:s2,f:xs:XP:lotuslight-dancers:f0t0:s2	-	-	-	267e485f6204	-	c07cf1af0919	-	-	2026-11-24	xproof
-83c8f1ca-194e-4cb6-9d5f-029133c1edbc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lotuslight Dancers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83c8f1ca-194e-4cb6-9d5f-029133c1edbc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lotuslight Dancers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+83c8f1ca-194e-4cb6-9d5f-029133c1edbc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lotuslight-dancers:combat0.attack:s1,f:xs:XP:lotuslight-dancers:combat0.attack:s1	-	-	-	23c4009444b0	-	c07cf1af0919	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+83c8f1ca-194e-4cb6-9d5f-029133c1edbc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lotuslight-dancers:combat0.block:s1,f:xs:XP:lotuslight-dancers:combat0.block:s1	-	-	-	23c4009444b0	-	c07cf1af0919	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83c8f1ca-194e-4cb6-9d5f-029133c1edbc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lotuslight-dancers:f0t0:s2,f:xs:XP:lotuslight-dancers:f0t0:s2	-	-	-	267e485f6204	-	c07cf1af0919	-	-	2026-11-24	xproof
 83cb9ab7-6a8f-40b5-b076-6fa669ff15f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83cb9ab7-6a8f-40b5-b076-6fa669ff15f2	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

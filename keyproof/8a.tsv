@@ -82,8 +82,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a628875-96c8-4a28-aaff-99fd99ae778e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a628875-96c8-4a28-aaff-99fd99ae778e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8a64cf8e-ae7f-4697-93fc-9c946eb1088b	cast	cast-resolve	agreed	-	FX	scen	2	0	Delta Bloodflies/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8a64cf8e-ae7f-4697-93fc-9c946eb1088b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Delta Bloodflies/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8a64cf8e-ae7f-4697-93fc-9c946eb1088b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Delta Bloodflies/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8a64cf8e-ae7f-4697-93fc-9c946eb1088b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:delta-bloodflies:combat0.attack:s1,f:xs:XP:delta-bloodflies:combat0.attack:s1	-	-	-	23c4009444b0	-	4cace2d110e0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8a64cf8e-ae7f-4697-93fc-9c946eb1088b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:delta-bloodflies:combat0.block:s1,f:xs:XP:delta-bloodflies:combat0.block:s1	-	-	-	23c4009444b0	-	4cace2d110e0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8a64cf8e-ae7f-4697-93fc-9c946eb1088b	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Delta Bloodflies/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8a69a0f0-5f0f-4098-ab6d-be3233af5cd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a70bde5-c514-4dcf-919a-48bdd1c17768	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -117,7 +117,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a83d284-75a0-4901-b7d9-c4b7586ee327	land	land	agreed	-	FX	start	2	0	x:xs:XP:river-of-tears:land:s1,f:xs:XP:river-of-tears:land:s1	-	-	-	d864b561c9cb	-	8cc0509c5f85	-	-	2026-11-24	xproof
 8a8bc537-b69f-441d-a10e-d7f17f2f75bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pothole-mole:cast:s1,f:xs:XP:pothole-mole:cast:s1	-	-	-	23c4009444b0	-	45757d346423	-	-	2026-11-25	xproof
 8a8bc537-b69f-441d-a10e-d7f17f2f75bb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pothole-mole:cast:s1,f:xs:XP:pothole-mole:cast:s1	-	-	-	23c4009444b0	-	45757d346423	-	-	2026-11-25	xproof
-8a8e225b-14e4-464f-bebe-89b4c9be7fe1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a8e225b-14e4-464f-bebe-89b4c9be7fe1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8a8fe94f-81aa-4725-ace6-ed56a1e1ed91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -96,7 +96,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e66dc2f-44f3-44f1-8ed7-7f991b3718be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e677ded-7af3-4af0-81df-b70d6ee616ec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:daily-bugle-reporters:f0t0:s1,f:xs:XP:daily-bugle-reporters:f0t0:s1	-	-	-	23c4009444b0	-	b099c243526c	-	-	2026-11-25	xproof
 2e677ded-7af3-4af0-81df-b70d6ee616ec	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:daily-bugle-reporters:f0t0:s1,f:xs:XP:daily-bugle-reporters:f0t0:s1	-	-	-	23c4009444b0	-	b099c243526c	-	-	2026-11-25	xproof
-2e68e3f7-b168-4541-b8a0-791a8a6ebde8	cast	cast-resolve	agreed	-	X	scen	1	0	Cruel Truths/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2e68e3f7-b168-4541-b8a0-791a8a6ebde8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cruel-truths:cast:s1,f:xs:XP:cruel-truths:cast:s1	-	-	-	23c4009444b0	-	2c00c8d605df	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2e6be9ad-d726-4598-92a7-1ba7eda317a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wildfire-cerberus:cast:s1,f:xs:XP:wildfire-cerberus:cast:s1	-	-	-	d864b561c9cb	-	9f91d1e195fc	-	-	2026-11-24	xproof
 2e6be9ad-d726-4598-92a7-1ba7eda317a5	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:wildfire-cerberus:f0a0:s1,f:xs:XP:wildfire-cerberus:f0a0:s1	-	-	-	d864b561c9cb	-	9f91d1e195fc	-	-	2026-11-24	xproof
 2e6be9ad-d726-4598-92a7-1ba7eda317a5	f0/t0	BecomeMonstrous	agreed	-	FX	start	2	0	x:xs:XP:wildfire-cerberus:f0a0:s1,f:xs:XP:wildfire-cerberus:f0a0:s1	-	-	-	d864b561c9cb	-	9f91d1e195fc	-	-	2026-11-24	xproof
@@ -146,10 +146,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2eb16535-718f-4b88-92bc-96429d796327	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:syr-ginger-the-meal-ender:f0a0:s1,f:xs:XP:syr-ginger-the-meal-ender:f0a0:s1	-	-	-	3aa6ded33acb	-	e315c4bb75c6	-	-	2026-11-25	xproof
 2eb16535-718f-4b88-92bc-96429d796327	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:syr-ginger-the-meal-ender:f0t0:s1,f:xs:XP:syr-ginger-the-meal-ender:f0t0:s1	-	-	-	3aa6ded33acb	-	e315c4bb75c6	-	-	2026-11-25	xproof
 2eb16535-718f-4b88-92bc-96429d796327	static#0.0	static#0.0	agreed	-	X	scen	1	0	Syr Ginger, the Meal Ender/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2eb2f6a2-e31a-4d3e-93ce-100394899014	cast	cast-resolve	agreed	-	X	scen	1	0	Kotis, the Fangkeeper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2eb2f6a2-e31a-4d3e-93ce-100394899014	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kotis, the Fangkeeper/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2eb2f6a2-e31a-4d3e-93ce-100394899014	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kotis, the Fangkeeper/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2eb2f6a2-e31a-4d3e-93ce-100394899014	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kotis, the Fangkeeper/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2eb2f6a2-e31a-4d3e-93ce-100394899014	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kotis-the-fangkeeper:cast:s1,f:xs:XP:kotis-the-fangkeeper:cast:s1	-	-	-	23c4009444b0	-	c05d60d848b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2eb2f6a2-e31a-4d3e-93ce-100394899014	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kotis-the-fangkeeper:combat0.attack:s1,f:xs:XP:kotis-the-fangkeeper:combat0.attack:s1	-	-	-	23c4009444b0	-	c05d60d848b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2eb2f6a2-e31a-4d3e-93ce-100394899014	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kotis-the-fangkeeper:combat0.block:s1,f:xs:XP:kotis-the-fangkeeper:combat0.block:s1	-	-	-	23c4009444b0	-	c05d60d848b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2eb2f6a2-e31a-4d3e-93ce-100394899014	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:kotis-the-fangkeeper:combat0.attack:s1,f:xs:XP:kotis-the-fangkeeper:combat0.attack:s1	-	-	-	23c4009444b0	-	c05d60d848b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2eb4da30-2600-4a7f-8e6c-6a090faa9a8d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2eb4da30-2600-4a7f-8e6c-6a090faa9a8d	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2eb4da30-2600-4a7f-8e6c-6a090faa9a8d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ed1879a-83b8-48df-a6d2-fe28e912b4c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slagstorm:cast:s1,f:xs:XP:slagstorm:cast:s1	-	-	-	8c0bd19283bb	-	3476b3ea6147	-	-	2026-11-24	xproof
 2ed5083e-1c58-48c0-8413-390971021d94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ed76a99-fe5c-4d68-b572-a30848055c8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ed76a99-fe5c-4d68-b572-a30848055c8a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ed76a99-fe5c-4d68-b572-a30848055c8a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2edf106d-f504-430e-ad9c-50fc95b0ad9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ee08dcd-5558-45be-b619-8a550f3865ad	cast	cast	agreed	-	F	start	2	0	f:xs:XP:experimental-augury:cast:s1	-	-	-	d864b561c9cb	-	5d6d17917ed6	-	-	2026-11-24	xproof
 2ee46c98-aee7-459a-80fa-4ed9d8a3acda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

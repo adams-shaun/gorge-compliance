@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 511951ed-fbff-4e44-9429-27f237496672	cast	cast-resolve	agreed	-	FX	scen	2	0	Paradox Shaper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 511951ed-fbff-4e44-9429-27f237496672	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Paradox Shaper/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 511951ed-fbff-4e44-9429-27f237496672	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Paradox Shaper/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-511d3de9-076b-4811-bddf-00623f98993f	cast	cast-resolve	agreed	-	X	scen	1	0	Auroral Procession/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+511d3de9-076b-4811-bddf-00623f98993f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:auroral-procession:cast:s1,f:xs:XP:auroral-procession:cast:s1	-	-	-	23c4009444b0	-	4bbfd8daf1b4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 511e35cd-2e19-4803-a404-b790af0cea60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 511e35cd-2e19-4803-a404-b790af0cea60	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 511e35cd-2e19-4803-a404-b790af0cea60	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51f091a7-9b0b-4362-8e9c-c174752f369b	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:white-plume-adventurer:f0t1:s1	-	-	-	23c4009444b0	-	1ef17f95300f	-	-	2026-11-25	xproof
 51f17fe1-1cf7-4362-b9a2-8ec225d41b03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ana-sanctuary:f0t0:s1,f:xs:XP:ana-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	9c10c1b1dc77	-	-	2026-11-25	xproof
 51f17fe1-1cf7-4362-b9a2-8ec225d41b03	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ana-sanctuary:f0t0:s1,f:xs:XP:ana-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	9c10c1b1dc77	-	-	2026-11-25	xproof
-51f1ceb9-2305-4a4e-b422-7dd7f8deef98	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+51f1ceb9-2305-4a4e-b422-7dd7f8deef98	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 51f4eb1f-abf2-425a-b78e-cafac177da89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51f4eb1f-abf2-425a-b78e-cafac177da89	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 51f561db-ca7f-4661-bc04-99b8af02b8c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

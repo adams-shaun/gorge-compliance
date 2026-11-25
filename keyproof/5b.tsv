@@ -21,8 +21,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b173737-d33e-482f-a91e-f37e3e428e86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b173737-d33e-482f-a91e-f37e3e428e86	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b18d2fd-bc65-49a2-b812-c217f125571d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b18d2fd-bc65-49a2-b812-c217f125571d	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-5b18d2fd-bc65-49a2-b812-c217f125571d	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+5b18d2fd-bc65-49a2-b812-c217f125571d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5b18d2fd-bc65-49a2-b812-c217f125571d	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5b194438-6946-45dd-8d77-c9de8c115d09	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:outrageous-robbery:cast:s1,f:xs:XP:outrageous-robbery:cast:s1	-	-	-	8c0bd19283bb	-	90f4ec16b36f	-	-	2026-11-24	xproof
 5b1dc298-403d-484d-90dd-e1c9b73e0188	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b1dc298-403d-484d-90dd-e1c9b73e0188	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rootless-yew:f0t0:s1,f:xs:XP:rootless-yew:f0t0:s1	-	-	-	d864b561c9cb	-	882db9f9e2ea	-	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b6a821c-51e4-44dc-8353-f4d10eab7fcb	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5b6bdf5a-2742-4851-92cd-a857a3852836	cast	cast	diverged	-	-	start	0	2	-	0a520ded0ebd	-	-	d864b561c9cb	-	1372c30af6ed	-	-	2026-11-24	xproof
 5b6c6dab-0687-4297-b215-89e699d65681	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b6c6dab-0687-4297-b215-89e699d65681	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5b6c6dab-0687-4297-b215-89e699d65681	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5b6f2770-e774-4a77-801f-a3fda093c3dd	cast	cast-resolve	agreed	-	X	scen	1	0	Human Torch, Johnny Storm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b6f2770-e774-4a77-801f-a3fda093c3dd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Human Torch, Johnny Storm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b6f2770-e774-4a77-801f-a3fda093c3dd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Human Torch, Johnny Storm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

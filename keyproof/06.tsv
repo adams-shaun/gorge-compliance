@@ -46,8 +46,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06343800-b555-4a13-ad4d-19e37d200138	cast	cast	agreed	-	F	start	2	0	f:xs:XP:fangkeeper-s-familiar:f0t0:s1	-	-	-	23c4009444b0	-	f2960bd7bb49	-	-	2026-11-25	xproof
 06343800-b555-4a13-ad4d-19e37d200138	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:fangkeeper-s-familiar:f0t0:s1	-	-	-	23c4009444b0	-	f2960bd7bb49	-	-	2026-11-25	xproof
 06355d3f-a82d-4f12-a399-016a12824795	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:shefet-archfiend:f0t0:s1,f:xs:XP:shefet-archfiend:f0t0:s1	-	-	-	267e485f6204	-	59316c177192	-	-	2026-11-24	xproof
-06355d3f-a82d-4f12-a399-016a12824795	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shefet Archfiend/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-06355d3f-a82d-4f12-a399-016a12824795	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shefet Archfiend/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+06355d3f-a82d-4f12-a399-016a12824795	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:shefet-archfiend:combat0.attack:s1,f:xs:XP:shefet-archfiend:combat0.attack:s1	-	-	-	23c4009444b0	-	59316c177192	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+06355d3f-a82d-4f12-a399-016a12824795	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:shefet-archfiend:combat0.block:s1,f:xs:XP:shefet-archfiend:combat0.block:s1	-	-	-	23c4009444b0	-	59316c177192	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 06355d3f-a82d-4f12-a399-016a12824795	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:shefet-archfiend:f0t0:s2,f:xs:XP:shefet-archfiend:f0t0:s2	-	-	-	267e485f6204	-	59316c177192	-	-	2026-11-24	xproof
 06355d3f-a82d-4f12-a399-016a12824795	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:shefet-archfiend:f0t0:s1,f:xs:XP:shefet-archfiend:f0t0:s1	-	-	-	267e485f6204	-	59316c177192	-	-	2026-11-24	xproof
 0635ab65-fc1a-4e43-9e11-3a1ad3093830	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ecological-appreciation:cast:s1,f:xs:XP:ecological-appreciation:cast:s1	-	-	-	d864b561c9cb	-	43fb014dcc92	-	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 066ba81e-b32d-4808-97ab-0b5f52d557e4	f0/a0	NULL	owed	refused:steps-needed:cost:BP	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 066ba81e-b32d-4808-97ab-0b5f52d557e4	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:lashwrithe:f0t0:s1,f:xs:XP:lashwrithe:f0t0:s1	-	-	-	d864b561c9cb	-	1a4b339470b9	-	-	2026-11-24	xproof
 066dfefd-eef5-4c81-8e8a-310bac01674f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-066dfefd-eef5-4c81-8e8a-310bac01674f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+066dfefd-eef5-4c81-8e8a-310bac01674f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:battered-golem:f0t0:s1,f:xs:XP:battered-golem:f0t0:s1	-	-	-	23c4009444b0	-	dded8e87d214	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 066e7379-d439-41cb-a8c9-60964040b110	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 066e7379-d439-41cb-a8c9-60964040b110	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tattered-mummy:f0t0:s1,f:xs:XP:tattered-mummy:f0t0:s1	-	-	-	d864b561c9cb	-	d96c14528bd0	-	-	2026-11-24	xproof
 066f6a3d-5e7b-40a4-b348-6dfb5d5239de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

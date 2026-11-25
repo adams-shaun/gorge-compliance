@@ -63,9 +63,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e414dc2-d0ff-43e5-9aa2-cd9d96de6d89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e419975-e054-4c35-8845-a08589ebb08f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e4c02c2-2e54-4e8d-8d94-6b2454027e7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5e512ce9-5e2e-4ec3-9486-a10c63cff299	cast	cast-resolve	agreed	-	X	scen	1	0	Unswerving Sloth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5e512ce9-5e2e-4ec3-9486-a10c63cff299	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Unswerving Sloth/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5e512ce9-5e2e-4ec3-9486-a10c63cff299	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Unswerving Sloth/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5e512ce9-5e2e-4ec3-9486-a10c63cff299	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unswerving-sloth:cast:s1,f:xs:XP:unswerving-sloth:cast:s1	-	-	-	23c4009444b0	-	19edb9c0c331	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5e512ce9-5e2e-4ec3-9486-a10c63cff299	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:unswerving-sloth:f0a0:s1,f:xs:XP:unswerving-sloth:f0a0:s1	-	-	-	23c4009444b0	-	19edb9c0c331	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5e512ce9-5e2e-4ec3-9486-a10c63cff299	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:unswerving-sloth:f0a0:s1,f:xs:XP:unswerving-sloth:f0a0:s1	-	-	-	23c4009444b0	-	19edb9c0c331	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5e53fe9f-9995-47ff-85e9-f09b70d7af15	cast	cast-resolve	agreed	-	X	scen	1	0	Scorpion Sentinel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5e53fe9f-9995-47ff-85e9-f09b70d7af15	static#0.0	static#0.0	agreed	-	X	scen	1	0	Scorpion Sentinel/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5e57a8cd-f4f0-40b2-84a0-e002751c0d40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:portable-hole:f0t0:s1,f:xs:XP:portable-hole:f0t0:s1	-	-	-	d864b561c9cb	-	6ba7e48c796b	-	-	2026-11-24	xproof
@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e78e6e0-60f0-4c3c-b8dd-bd673f5152b8	cast	cast-resolve	agreed	-	FX	scen	2	0	Viashino Pyromancer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5e78e6e0-60f0-4c3c-b8dd-bd673f5152b8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ed533a7-82b0-4a71-a9e9-4dffe9d18851	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5ed533a7-82b0-4a71-a9e9-4dffe9d18851	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5ed93d71-3f62-49d4-a9ca-5728c44b0633	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ed93d71-3f62-49d4-a9ca-5728c44b0633	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+5ed93d71-3f62-49d4-a9ca-5728c44b0633	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:woebearer:f0t0:s1,f:xs:XP:woebearer:f0t0:s1	-	-	-	23c4009444b0	-	3e40050ae938	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5edfe083-391b-41ae-ac4d-d648042cfa5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ee9940a-0569-45b6-b28c-0ef3914013a9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:marvelous-melee:cast:s1,f:xs:XP:marvelous-melee:cast:s1	-	-	-	8c0bd19283bb	-	fe7d8bdf9618	-	-	2026-11-24	xproof
 5ee9940a-0569-45b6-b28c-0ef3914013a9	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:marvelous-melee:cast:s2,f:xs:XP:marvelous-melee:cast:s2	-	-	-	8c0bd19283bb	-	fe7d8bdf9618	-	-	2026-11-24	xproof

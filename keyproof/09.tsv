@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09618da4-6e2d-4047-96d7-0576c0754e7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:end-the-festivities:cast:s1,f:xs:XP:end-the-festivities:cast:s1	-	-	-	ae86f6029288	-	f5d92a3bdf62	-	-	2026-11-24	xproof
 0961b68d-bb0c-4bfb-ad78-01f90b3b97c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0964288c-0397-428a-9a84-784aaea4e040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0964288c-0397-428a-9a84-784aaea4e040	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+0964288c-0397-428a-9a84-784aaea4e040	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 09650a76-05c4-40a0-b861-d146b3ba87d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09650a76-05c4-40a0-b861-d146b3ba87d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09650a76-05c4-40a0-b861-d146b3ba87d6	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -103,9 +103,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 096eac52-00c2-4439-b2f3-ff555d15ec88	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Marina Vendrell's Grimoire/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 096eac52-00c2-4439-b2f3-ff555d15ec88	static#0.0	static#0.0	agreed	-	X	scen	1	0	Marina Vendrell's Grimoire/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 096fbb51-be73-4edc-a051-770a12c09005	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09726c3d-f700-4bf4-a9e7-326fe41b0a4a	cast	cast-resolve	agreed	-	X	scen	1	0	Skybox Ferry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-09726c3d-f700-4bf4-a9e7-326fe41b0a4a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Skybox Ferry/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-09726c3d-f700-4bf4-a9e7-326fe41b0a4a	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Skybox Ferry/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+09726c3d-f700-4bf4-a9e7-326fe41b0a4a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skybox-ferry:cast:s1,f:xs:XP:skybox-ferry:cast:s1	-	-	-	23c4009444b0	-	4ef42d212d18	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+09726c3d-f700-4bf4-a9e7-326fe41b0a4a	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:skybox-ferry:f0a0:s1,f:xs:XP:skybox-ferry:f0a0:s1	-	-	-	23c4009444b0	-	4ef42d212d18	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+09726c3d-f700-4bf4-a9e7-326fe41b0a4a	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:skybox-ferry:f0a1:s1,f:xs:XP:skybox-ferry:f0a1:s1	-	-	-	23c4009444b0	-	4ef42d212d18	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0972d46e-423b-454e-87c7-a2d40fb6fb6d	cast	cast-resolve	agreed	-	FX	scen	2	0	Katara, the Fearless/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0972d46e-423b-454e-87c7-a2d40fb6fb6d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Katara, the Fearless/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 09763d9a-056f-49db-a72b-1c7325075789	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09947592-1730-4c1c-bfa5-be53a68d6919	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deputized-protester:cast:s1,f:xs:XP:deputized-protester:cast:s1	-	-	-	8c0bd19283bb	-	9bc3cf7ecb57	-	-	2026-11-24	xproof
 09947592-1730-4c1c-bfa5-be53a68d6919	f0/t0	Attacks/Melee	agreed	-	FX	start	2	0	x:xs:XP:deputized-protester:f0t0:s1,f:xs:XP:deputized-protester:f0t0:s1	-	-	-	8c0bd19283bb	-	9bc3cf7ecb57	-	-	2026-11-24	xproof
 0994d596-0b15-4156-8e94-5b566dcad6cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09955b4b-6052-4c27-8b63-9548482b3c5c	cast	cast-resolve	agreed	-	X	scen	1	0	Heritage Reclamation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+09955b4b-6052-4c27-8b63-9548482b3c5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heritage-reclamation:cast:s1,f:xs:XP:heritage-reclamation:cast:s1	-	-	-	23c4009444b0	-	70b69f1dad36	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0996d48a-f92a-4aaf-b8a3-f7ec8ff986ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magma-rift:cast:s1,f:xs:XP:magma-rift:cast:s1	-	-	-	8a1b1a193ec0	-	6ab22a66b671	-	-	2026-11-24	xproof
 0998768a-1632-4da1-8310-352582501c4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 099a5835-da6c-4e03-ad3e-aeb448897fed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:owl-familiar:f0t0:s1,f:xs:XP:owl-familiar:f0t0:s1	-	-	-	ea3140b6974b	-	c72043c06872	-	-	2026-11-24	xproof

@@ -8,7 +8,7 @@ dc0a51d4-5b7e-4987-b1fe-349fd118a625	land	play-land	agreed	-	X	scen	1	0	Hall of 
 dc0bc051-2d5c-4b7f-9902-4f9d5ef8f19d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:evangel-of-synthesis:cast:s1,f:xs:XP:evangel-of-synthesis:cast:s1	-	-	-	ae86f6029288	-	68a5fd811a42	-	-	2026-11-24	xproof
 dc0bc051-2d5c-4b7f-9902-4f9d5ef8f19d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:evangel-of-synthesis:cast:s1,f:xs:XP:evangel-of-synthesis:cast:s1	-	-	-	ae86f6029288	-	68a5fd811a42	-	-	2026-11-24	xproof
 dc0bd3a3-f34e-4d81-b9e8-b172b005d671	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dc0bd3a3-f34e-4d81-b9e8-b172b005d671	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dc0bd3a3-f34e-4d81-b9e8-b172b005d671	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dc0decb9-32da-47aa-a51a-0d9c623c534a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iron-will:cast:s1,f:xs:XP:iron-will:cast:s1	-	-	-	5f2128bf97e4	-	88479ca00e7d	-	-	2026-11-24	xproof
 dc0decb9-32da-47aa-a51a-0d9c623c534a	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc10544f-dd30-4d4a-b6e6-bbed7d1ed4a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -104,8 +104,8 @@ dc92bbee-a445-4927-932b-15985bb93f19	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 dc9374df-134d-4d32-842e-991e2bfb2dc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc9ae094-139f-4f28-9d4e-4d6def765744	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 dc9b963e-eae7-4919-a5a9-16aad04e4b22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:innocence-kami:cast:s1,f:xs:XP:innocence-kami:cast:s1	-	-	-	25696bf19d5b	-	ff012ca3fddb	-	-	2026-11-24	xproof
-dc9b963e-eae7-4919-a5a9-16aad04e4b22	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-dc9b963e-eae7-4919-a5a9-16aad04e4b22	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+dc9b963e-eae7-4919-a5a9-16aad04e4b22	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+dc9b963e-eae7-4919-a5a9-16aad04e4b22	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dca25245-523a-4587-a059-a14ee2ef908d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:armored-armadillo:cast:s1,f:xs:XP:armored-armadillo:cast:s1	-	-	-	23b491658465	-	76d8a844d7a6	-	-	2026-11-24	xproof
 dca25245-523a-4587-a059-a14ee2ef908d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:armored-armadillo:f0a0:s1,f:xs:XP:armored-armadillo:f0a0:s1	-	-	-	23b491658465	-	76d8a844d7a6	-	-	2026-11-24	xproof
 dca25245-523a-4587-a059-a14ee2ef908d	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:armored-armadillo:f0t0:s1,f:xs:XP:armored-armadillo:f0t0:s1	-	-	-	3aa6ded33acb	-	76d8a844d7a6	-	-	2026-11-25	xproof
@@ -155,7 +155,7 @@ dcddeac9-8de7-4347-a956-522f4f2fc63b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 dcde1a62-33a5-4454-a389-9bf7a3521a4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dcdf40a9-5a7e-45b1-aee4-36dda598baaf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dce202c7-fe8e-462a-858e-7a5a69bd5b6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dce4d65f-cb91-48a2-a2a7-013e73dfb667	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dce4d65f-cb91-48a2-a2a7-013e73dfb667	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dceb96a4-d3c5-43a2-93f6-50316e1e7a1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dceb96a4-d3c5-43a2-93f6-50316e1e7a1b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dcebce37-02eb-4b5d-86be-42b4a0287624	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -28,7 +28,7 @@ ff24d18d-9c5d-4ffe-846f-a8d568b32724	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ff24d18d-9c5d-4ffe-846f-a8d568b32724	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scurry-of-gremlins:f0t0:s1,f:xs:XP:scurry-of-gremlins:f0t0:s1	-	-	-	ae86f6029288	-	e63d29f359ad	-	-	2026-11-24	xproof
 ff27ff37-96c0-41af-8881-a078e884e67b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff27ff96-afd2-45df-b799-3046179e27c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ff281103-7a9b-4eb1-b81e-b8cd137b6e98	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ff281103-7a9b-4eb1-b81e-b8cd137b6e98	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ff2ab17e-185b-4782-a4e2-e8ace40ef1bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:type-03-borg-vessel:cast:s1,f:xs:XP:type-03-borg-vessel:cast:s1	-	-	-	8c0bd19283bb	-	d0452e7168b5	-	-	2026-11-24	xproof
 ff35e480-8ea2-47bb-bb2a-24cefe9c2139	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff35e480-8ea2-47bb-bb2a-24cefe9c2139	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ ff6b52b7-ae3c-465b-b10e-901160e5230e	f0/t0	NULL	owed	refused:no-generator:trigge
 ff6bc9f5-5a83-42d9-b1a4-f0979aed28ad	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Live Long and Prosper"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ff6e4346-463c-445d-8f72-11cb35dd99ee	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:red-dragon:cast:s1,f:xs:XP:red-dragon:cast:s1	-	-	-	d864b561c9cb	-	08adb116e6a1	-	-	2026-11-24	xproof
 ff6e4346-463c-445d-8f72-11cb35dd99ee	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:red-dragon:cast:s1,f:xs:XP:red-dragon:cast:s1	-	-	-	d864b561c9cb	-	08adb116e6a1	-	-	2026-11-24	xproof
-ff72b900-ce3c-4cc4-a50e-e501e17631ca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ff72b900-ce3c-4cc4-a50e-e501e17631ca	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ff72b900-ce3c-4cc4-a50e-e501e17631ca	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ff768016-67f8-409e-8359-9ed05bcb46d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff77074f-48ef-4c01-8ede-4e9be3e483f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -161,8 +161,8 @@ ffdad8fb-69ee-40d3-b2eb-b0aee0a5becc	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:t
 ffe05d4b-0ec9-4319-bb11-1366dc091224	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ffe25048-0bd4-49b5-aecb-2b1b57fb8d8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:borderland-ranger:f0t0:s1,f:xs:XP:borderland-ranger:f0t0:s1	-	-	-	8a1b1a193ec0	-	4c08f16d6139	-	-	2026-11-24	xproof
 ffe25048-0bd4-49b5-aecb-2b1b57fb8d8b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:borderland-ranger:f0t0:s1,f:xs:XP:borderland-ranger:f0t0:s1	-	-	-	8a1b1a193ec0	-	4c08f16d6139	-	-	2026-11-24	xproof
-ffecd3e8-aa28-41a1-8154-a54ae3ce8016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ffecd3e8-aa28-41a1-8154-a54ae3ce8016	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+ffecd3e8-aa28-41a1-8154-a54ae3ce8016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clearwater-goblet:f0t0:s1,f:xs:XP:clearwater-goblet:f0t0:s1	-	-	-	23c4009444b0	-	841dd4174b90	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ffecd3e8-aa28-41a1-8154-a54ae3ce8016	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:clearwater-goblet:f0t0:s1,f:xs:XP:clearwater-goblet:f0t0:s1	-	-	-	23c4009444b0	-	841dd4174b90	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 fff28b30-9903-4a0a-a723-31216abd457d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fff66029-24bb-4354-a650-99a205fd168f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quarry-beetle:f0t0:s1,f:xs:XP:quarry-beetle:f0t0:s1	-	-	-	d864b561c9cb	-	31990ad62d34	-	-	2026-11-24	xproof
 fff66029-24bb-4354-a650-99a205fd168f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:quarry-beetle:f0t0:s1,f:xs:XP:quarry-beetle:f0t0:s1	-	-	-	d864b561c9cb	-	31990ad62d34	-	-	2026-11-24	xproof

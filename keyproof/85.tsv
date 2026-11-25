@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85ac3efc-5e19-4661-b52f-116f57e39581	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:behind-the-mask:cast:s1,f:xs:XP:behind-the-mask:cast:s1	-	-	-	23b491658465	-	9645280aabe0	-	-	2026-11-25	xproof
 85ac3efc-5e19-4661-b52f-116f57e39581	static#0.0	static#0.0	agreed	-	X	scen	1	0	Behind the Mask/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 85aedc9f-df35-49bc-88c8-23efda9a4b1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85aedc9f-df35-49bc-88c8-23efda9a4b1b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+85aedc9f-df35-49bc-88c8-23efda9a4b1b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 85b0a2ea-dbdc-456e-9ce1-faa8c13f84d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85b52f70-b583-4f04-a2ab-226d7291c03a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85b52f70-b583-4f04-a2ab-226d7291c03a	f0/a0	DealDamage	owed	harness	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	1286cdfae8f7	-	-	2026-11-24	xproof
@@ -154,10 +154,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85d2948c-1a79-418d-80c4-bc1012a4d313	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85d7c8d4-6f99-4b1d-9e0e-ff41bbeee682	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:festive-funeral:cast:s1,f:xs:XP:festive-funeral:cast:s1	-	-	-	3aa6ded33acb	-	684df3a45333	-	-	2026-11-25	xproof
 85d87087-48ee-4dc8-a1c0-9c9ccb885adc	cast	cast-resolve	agreed	-	FX	scen	2	0	Eshki Dragonclaw/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-85d87087-48ee-4dc8-a1c0-9c9ccb885adc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Eshki Dragonclaw/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-85d87087-48ee-4dc8-a1c0-9c9ccb885adc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Eshki Dragonclaw/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-85d87087-48ee-4dc8-a1c0-9c9ccb885adc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Eshki Dragonclaw/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-85d87087-48ee-4dc8-a1c0-9c9ccb885adc	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Eshki Dragonclaw/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+85d87087-48ee-4dc8-a1c0-9c9ccb885adc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:eshki-dragonclaw:combat0.attack:s1,f:xs:XP:eshki-dragonclaw:combat0.attack:s1	-	-	-	23c4009444b0	-	d1a8ae538002	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+85d87087-48ee-4dc8-a1c0-9c9ccb885adc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:eshki-dragonclaw:combat0.block:s1,f:xs:XP:eshki-dragonclaw:combat0.block:s1	-	-	-	23c4009444b0	-	d1a8ae538002	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+85d87087-48ee-4dc8-a1c0-9c9ccb885adc	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:eshki-dragonclaw:f0t0:s1,f:xs:XP:eshki-dragonclaw:f0t0:s1	-	-	-	23c4009444b0	-	d1a8ae538002	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+85d87087-48ee-4dc8-a1c0-9c9ccb885adc	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:eshki-dragonclaw:f0t1:s1,f:xs:XP:eshki-dragonclaw:f0t1:s1	-	-	-	23c4009444b0	-	d1a8ae538002	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 85dda096-48b2-414e-8c4d-4ffa6e5dac11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thriving-turtle:f0t0:s1,f:xs:XP:thriving-turtle:f0t0:s1	-	-	-	d864b561c9cb	-	39358cff08e3	-	-	2026-11-24	xproof
 85dda096-48b2-414e-8c4d-4ffa6e5dac11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thriving-turtle:f0t0:s1,f:xs:XP:thriving-turtle:f0t0:s1	-	-	-	d864b561c9cb	-	39358cff08e3	-	-	2026-11-24	xproof
 85dda096-48b2-414e-8c4d-4ffa6e5dac11	f0/t1	Attacks	agreed	-	X	start	2	0	x:xs:XP:thriving-turtle:f0t1:s1	-	-	-	d864b561c9cb	-	39358cff08e3	-	-	2026-11-24	xproof

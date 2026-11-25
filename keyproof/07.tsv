@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 072db429-3838-42ba-89b6-e26cbce22af9	cast	cast-resolve	agreed	-	FX	scen	2	0	Pest Control/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 072db429-3838-42ba-89b6-e26cbce22af9	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Pest Control/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 073169f2-da3a-4a93-8c01-b3fd8558d225	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:interplanar-beacon:f0a1:s1,f:xs:XP:interplanar-beacon:f0a1:s1	-	-	-	8c0bd19283bb	-	ecb30a63b0a7	-	-	2026-11-25	xproof
-073169f2-da3a-4a93-8c01-b3fd8558d225	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+073169f2-da3a-4a93-8c01-b3fd8558d225	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 073169f2-da3a-4a93-8c01-b3fd8558d225	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 073169f2-da3a-4a93-8c01-b3fd8558d225	land	land	agreed	-	FX	start	2	0	x:xs:XP:interplanar-beacon:land:s1,f:xs:XP:interplanar-beacon:land:s1	-	-	-	d864b561c9cb	-	ecb30a63b0a7	-	-	2026-11-24	xproof
 0734272d-5cce-476d-a663-fbf0bd7cd3a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0790c8bd-a094-49b5-8843-e8b02cba145b	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 07947d01-ebb1-46b7-9bdd-ea00e034805b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-elemental:f0t0:s1,f:xs:XP:war-elemental:f0t0:s1	-	-	-	25696bf19d5b	-	04d069420c7d	-	-	2026-11-24	xproof
 07947d01-ebb1-46b7-9bdd-ea00e034805b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:war-elemental:f0t0:s1,f:xs:XP:war-elemental:f0t0:s1	-	-	-	25696bf19d5b	-	04d069420c7d	-	-	2026-11-24	xproof
-07947d01-ebb1-46b7-9bdd-ea00e034805b	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+07947d01-ebb1-46b7-9bdd-ea00e034805b	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0798eb13-83f1-4b7c-b537-83a9da2915a6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:trial-of-zeal:cast:s1,f:xs:XP:trial-of-zeal:cast:s1	-	-	-	d864b561c9cb	-	e64ef5cb99cd	-	-	2026-11-24	xproof
 0798eb13-83f1-4b7c-b537-83a9da2915a6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:trial-of-zeal:cast:s1,f:xs:XP:trial-of-zeal:cast:s1	-	-	-	d864b561c9cb	-	e64ef5cb99cd	-	-	2026-11-24	xproof
 0798eb13-83f1-4b7c-b537-83a9da2915a6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

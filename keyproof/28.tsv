@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28045b32-4c1a-40e5-a15d-524d0f8fe6ec	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:archmage-of-runes:f0t0:s1,f:xs:XP:archmage-of-runes:f0t0:s1	-	-	-	3aa6ded33acb	-	aaba8125bcc6	-	-	2026-11-25	xproof
 28045b32-4c1a-40e5-a15d-524d0f8fe6ec	static#0.0	static#0.0	agreed	-	X	scen	1	0	Archmage of Runes/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 280d5601-802c-4607-9655-75cc83248210	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-280d5601-802c-4607-9655-75cc83248210	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+280d5601-802c-4607-9655-75cc83248210	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 282003f4-862a-4f80-8f45-e470fc0fe2fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blightwidow:cast:s1,f:xs:XP:blightwidow:cast:s1	-	-	-	d864b561c9cb	-	1c15e845b41e	-	-	2026-11-24	xproof
 28225bae-2d96-4352-b256-0c2ff4ef65e9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:syr-vondam-the-lucent:f0t0:s2,f:xs:XP:syr-vondam-the-lucent:f0t0:s2	-	-	-	267e485f6204	-	114060f0d3f9	-	-	2026-11-24	xproof
 28225bae-2d96-4352-b256-0c2ff4ef65e9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Syr Vondam, the Lucent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -52,10 +52,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2842217a-173e-4879-8b25-fefe2fc1123f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Thor, God of Thunder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2842217a-173e-4879-8b25-fefe2fc1123f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:thor-god-of-thunder:f0t0:s2,f:xs:XP:thor-god-of-thunder:f0t0:s2	-	-	-	5437c1394672	-	911a7ceb8edb	-	-	2026-11-24	xproof
 2842217a-173e-4879-8b25-fefe2fc1123f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Thor, God of Thunder/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2844d274-cb60-46c1-a73b-e763c633e496	cast	cast-resolve	agreed	-	X	scen	1	0	Alchemist's Assistant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2844d274-cb60-46c1-a73b-e763c633e496	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Alchemist's Assistant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2844d274-cb60-46c1-a73b-e763c633e496	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Alchemist's Assistant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2844d274-cb60-46c1-a73b-e763c633e496	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Alchemist's Assistant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2844d274-cb60-46c1-a73b-e763c633e496	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-assistant:cast:s1,f:xs:XP:alchemist-s-assistant:cast:s1	-	-	-	23c4009444b0	-	441e4cbfc793	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2844d274-cb60-46c1-a73b-e763c633e496	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-assistant:combat0.attack:s1,f:xs:XP:alchemist-s-assistant:combat0.attack:s1	-	-	-	23c4009444b0	-	441e4cbfc793	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2844d274-cb60-46c1-a73b-e763c633e496	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-assistant:combat0.block:s1,f:xs:XP:alchemist-s-assistant:combat0.block:s1	-	-	-	23c4009444b0	-	441e4cbfc793	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2844d274-cb60-46c1-a73b-e763c633e496	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-assistant:f0a0:s1,f:xs:XP:alchemist-s-assistant:f0a0:s1	-	-	-	23c4009444b0	-	441e4cbfc793	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 28479aa8-d1cd-421a-8bbb-0594bb4dd410	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 284b0605-4b33-499e-aff3-e8b9edcce39b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 284db94d-e583-4355-89fd-6c0906f9d17e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28ebe75a-cddd-469b-be8a-286776b83388	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormcaller-s-boon:cast:s1,f:xs:XP:stormcaller-s-boon:cast:s1	-	-	-	8a1b1a193ec0	-	2f16556b2c1d	-	-	2026-11-24	xproof
 28ebe75a-cddd-469b-be8a-286776b83388	f0/a0	PumpAll	agreed	-	FX	start	4	0	x:xs:XP:stormcaller-s-boon:cast:s1,f:xs:XP:stormcaller-s-boon:cast:s1	-	-	-	8a1b1a193ec0	-	2f16556b2c1d	-	-	2026-11-24	xproof
 28ecc209-d78b-4b37-8411-fb8079f6e088	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tyrranax:cast:s1,f:xs:XP:tyrranax:cast:s1	-	-	-	25696bf19d5b	-	a407fc29419f	-	-	2026-11-24	xproof
-28ecc209-d78b-4b37-8411-fb8079f6e088	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+28ecc209-d78b-4b37-8411-fb8079f6e088	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:tyrranax:f0a0:s1,f:xs:XP:tyrranax:f0a0:s1	-	-	-	23c4009444b0	-	a407fc29419f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 28f0765a-de09-4be3-b952-aee75b9ede03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fascination:cast:s1,f:xs:XP:fascination:cast:s1	-	-	-	d864b561c9cb	-	b5af2dc66b74	-	-	2026-11-24	xproof
 28f35fa1-befa-40b4-95ab-30bb53d339ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghor-clan-savage:cast:s1,f:xs:XP:ghor-clan-savage:cast:s1	-	-	-	64a08ba7d913	-	97f79231716d	-	-	2026-11-24	xproof
 28f3d535-9503-4d35-aeed-d3e59259f760	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

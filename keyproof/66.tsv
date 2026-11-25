@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66208129-20fb-4cb4-8f00-8d4574c9c653	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Meditation Pools/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66208129-20fb-4cb4-8f00-8d4574c9c653	land	play-land	agreed	-	X	scen	1	0	Meditation Pools/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66290104-ac65-4eb5-bf00-89b944249e07	cast	cast-resolve	agreed	-	FX	scen	2	0	Neriv, Heart of the Storm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66290104-ac65-4eb5-bf00-89b944249e07	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Neriv, Heart of the Storm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66290104-ac65-4eb5-bf00-89b944249e07	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Neriv, Heart of the Storm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+66290104-ac65-4eb5-bf00-89b944249e07	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:neriv-heart-of-the-storm:combat0.attack:s1,f:xs:XP:neriv-heart-of-the-storm:combat0.attack:s1	-	-	-	23c4009444b0	-	18773eff1794	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+66290104-ac65-4eb5-bf00-89b944249e07	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:neriv-heart-of-the-storm:combat0.block:s1,f:xs:XP:neriv-heart-of-the-storm:combat0.block:s1	-	-	-	23c4009444b0	-	18773eff1794	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6629a48b-be9a-4636-8add-69d096a1ca7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6629a48b-be9a-4636-8add-69d096a1ca7e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 6629e5f3-ac59-48f8-b09c-3b98f59b9922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 780f029f-e2e1-431b-9a8b-a1af51d7da77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:giant-crab:cast:s1,f:xs:XP:giant-crab:cast:s1	-	-	-	8c0bd19283bb	-	7511697273ba	-	-	2026-11-24	xproof
 780f029f-e2e1-431b-9a8b-a1af51d7da77	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:giant-crab:f0a0:s1,f:xs:XP:giant-crab:f0a0:s1	-	-	-	ea3140b6974b	-	7511697273ba	-	-	2026-11-24	xproof
 780f8be6-d477-43ca-92ba-0fe480bbd54d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-780f8be6-d477-43ca-92ba-0fe480bbd54d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+780f8be6-d477-43ca-92ba-0fe480bbd54d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7810915f-df4d-445a-8ba8-fe6ed3abf1ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7810915f-df4d-445a-8ba8-fe6ed3abf1ae	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7811b50d-af76-43cd-8753-43cf65fbefa3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -29,7 +29,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7826f3f5-c8f2-43f5-a837-ff016da625e6	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:webspinner-cuff:f0a0:s1	-	-	-	3aa6ded33acb	-	7c016df776d7	-	-	2026-11-25	xproof
 7826f3f5-c8f2-43f5-a837-ff016da625e6	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 782c47c5-b108-415c-9b70-a033ac52956f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-782c47c5-b108-415c-9b70-a033ac52956f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+782c47c5-b108-415c-9b70-a033ac52956f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 782dcbc4-5a11-42f5-b8d9-4572e36d45b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 782e8499-0714-4cee-869e-8ebd7dad0242	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drakewing-krasis:cast:s1,f:xs:XP:drakewing-krasis:cast:s1	-	-	-	d864b561c9cb	-	86d536bc6916	-	-	2026-11-24	xproof
 78301998-fd9b-4cd5-afad-dbcb43cac2a7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 784bda96-5bc1-47bc-a69e-e38b047ed914	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 784c039d-a9b2-4b22-a937-c8f7b475e96a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 784c039d-a9b2-4b22-a937-c8f7b475e96a	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-784c039d-a9b2-4b22-a937-c8f7b475e96a	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-784c039d-a9b2-4b22-a937-c8f7b475e96a	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+784c039d-a9b2-4b22-a937-c8f7b475e96a	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+784c039d-a9b2-4b22-a937-c8f7b475e96a	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 78504edb-6536-4a11-ac1c-7d53684f2226	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kazuul-warlord:f0t0:s1,f:xs:XP:kazuul-warlord:f0t0:s1	-	-	-	8a1b1a193ec0	-	e82638eb25d5	-	-	2026-11-24	xproof
 78504edb-6536-4a11-ac1c-7d53684f2226	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kazuul-warlord:f0t0:s1,f:xs:XP:kazuul-warlord:f0t0:s1	-	-	-	8a1b1a193ec0	-	e82638eb25d5	-	-	2026-11-24	xproof
 7851e4c8-020c-4a3d-88ed-0c97609cdfed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:experimental-overload:cast:s1,f:xs:XP:experimental-overload:cast:s1	-	-	-	ae86f6029288	-	e8f6b84dd1ff	-	-	2026-11-24	xproof
@@ -74,14 +74,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 786b3657-b595-4b38-83f2-d40915e51e2b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:phyrexian-revoker:cast:s1	-	-	-	ea3140b6974b	-	0f1efb563f69	-	-	2026-11-24	xproof
 787055e6-5d65-458e-a56e-66ef0574d2ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78725353-9274-420a-b722-add0f43c444e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7875c063-19c3-4e6e-81d8-1a378a4e16e5	cast	cast-resolve	agreed	-	X	scen	1	0	Dragonback Lancer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7875c063-19c3-4e6e-81d8-1a378a4e16e5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dragonback Lancer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7875c063-19c3-4e6e-81d8-1a378a4e16e5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dragonback Lancer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7875c063-19c3-4e6e-81d8-1a378a4e16e5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dragonback Lancer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-78780f37-f215-4ae1-adce-6255b0146873	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7875c063-19c3-4e6e-81d8-1a378a4e16e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragonback-lancer:cast:s1,f:xs:XP:dragonback-lancer:cast:s1	-	-	-	23c4009444b0	-	cc2562401723	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7875c063-19c3-4e6e-81d8-1a378a4e16e5	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dragonback-lancer:combat0.attack:s1,f:xs:XP:dragonback-lancer:combat0.attack:s1	-	-	-	23c4009444b0	-	cc2562401723	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7875c063-19c3-4e6e-81d8-1a378a4e16e5	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dragonback-lancer:combat0.block:s1,f:xs:XP:dragonback-lancer:combat0.block:s1	-	-	-	23c4009444b0	-	cc2562401723	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7875c063-19c3-4e6e-81d8-1a378a4e16e5	f0/t0	Attacks/Mobilize	agreed	-	FX	start	2	0	x:xs:XP:dragonback-lancer:f0t0:s1,f:xs:XP:dragonback-lancer:f0t0:s1	-	-	-	23c4009444b0	-	cc2562401723	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+78780f37-f215-4ae1-adce-6255b0146873	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 78780f37-f215-4ae1-adce-6255b0146873	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 78780f37-f215-4ae1-adce-6255b0146873	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-78780f37-f215-4ae1-adce-6255b0146873	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+78780f37-f215-4ae1-adce-6255b0146873	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 787935ab-26a6-4b4a-9c14-e106160e951d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 787b494b-731b-4e99-8e46-157bc86f6eea	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 7880576b-8ad9-4382-97c5-7a631106a35e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravos-soultender:f0t0:s1,f:xs:XP:ravos-soultender:f0t0:s1	-	-	-	23c4009444b0	-	f6f366b1446c	-	-	2026-11-25	xproof
@@ -130,14 +130,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78afa295-c9f4-4a81-9f7b-5746a3cf6b31	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:inga-rune-eyes:cast:s1,f:xs:XP:inga-rune-eyes:cast:s1	-	-	-	d864b561c9cb	-	ff2ef7f6e7ff	-	-	2026-11-24	xproof
 78afa295-c9f4-4a81-9f7b-5746a3cf6b31	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:inga-rune-eyes:f0t1:s1,f:xs:XP:inga-rune-eyes:f0t1:s1	-	-	-	d864b561c9cb	-	ff2ef7f6e7ff	-	-	2026-11-24	xproof
 78b1cb2d-1b48-4068-b6f3-8727ef9e8080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78b1cb2d-1b48-4068-b6f3-8727ef9e8080	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+78b1cb2d-1b48-4068-b6f3-8727ef9e8080	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dripping-tongue-zubera:f0t0:s1,f:xs:XP:dripping-tongue-zubera:f0t0:s1	-	-	-	23c4009444b0	-	b4bd1ebd4d8c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 78b2b68d-6e27-49f3-8373-6e19faf6f679	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78b364b7-d180-484c-a1d9-9d7a4e8abb57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78b364b7-d180-484c-a1d9-9d7a4e8abb57	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78b6dd40-c182-4037-a4d3-9fd012b2c584	cast	cast-resolve	agreed	-	X	scen	1	0	Herd Heirloom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-78b6dd40-c182-4037-a4d3-9fd012b2c584	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Herd Heirloom/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+78b6dd40-c182-4037-a4d3-9fd012b2c584	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herd-heirloom:cast:s1,f:xs:XP:herd-heirloom:cast:s1	-	-	-	23c4009444b0	-	085cd5d3e09c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+78b6dd40-c182-4037-a4d3-9fd012b2c584	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:herd-heirloom:cast:s1,f:xs:XP:herd-heirloom:cast:s1	-	-	-	23c4009444b0	-	085cd5d3e09c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 78b6dd40-c182-4037-a4d3-9fd012b2c584	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Herd Heirloom/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-78b86f23-650b-4347-917c-3ee8c6007e4e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+78b86f23-650b-4347-917c-3ee8c6007e4e	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 78b86f23-650b-4347-917c-3ee8c6007e4e	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 78b86f23-650b-4347-917c-3ee8c6007e4e	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 78bac92f-333f-4c43-bccf-03c3772ee99b	cast	cast-resolve	agreed	-	FX	scen	2	0	Corpses of the Lost/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

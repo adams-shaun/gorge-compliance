@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 740f9740-aaa7-4061-86f5-85be79742541	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geralf-s-messenger:f0t0:s1,f:xs:XP:geralf-s-messenger:f0t0:s1	-	-	-	d864b561c9cb	-	37e42b5e288a	-	-	2026-11-24	xproof
 740f9740-aaa7-4061-86f5-85be79742541	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:geralf-s-messenger:f0t0:s1,f:xs:XP:geralf-s-messenger:f0t0:s1	-	-	-	d864b561c9cb	-	37e42b5e288a	-	-	2026-11-24	xproof
 740f9740-aaa7-4061-86f5-85be79742541	f0/t1	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:geralf-s-messenger:f0t1:s1,f:xs:XP:geralf-s-messenger:f0t1:s1	-	-	-	3aa6ded33acb	-	37e42b5e288a	-	-	2026-11-25	xproof
-740f9ab2-fc94-4abc-82b4-6b53116bf1a4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+740f9ab2-fc94-4abc-82b4-6b53116bf1a4	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7416c8db-ec33-4d92-866c-b7fdc69c8b41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 741c51f1-cfbe-4c29-ac8f-ca6bcd2652f9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 741c51f1-cfbe-4c29-ac8f-ca6bcd2652f9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -202,7 +202,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74e6dd0f-2866-4d45-a214-8b09b837bc02	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:slipstream-eel:cast:s2,f:xs:XP:slipstream-eel:cast:s2	-	-	-	fc71ca68c5ac	-	10bbe11b9a6e	-	-	2026-11-24	xproof
 74e6dd0f-2866-4d45-a214-8b09b837bc02	f0/a0	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:slipstream-eel:cast:s1,f:xs:XP:slipstream-eel:cast:s1	-	-	-	fc71ca68c5ac	-	10bbe11b9a6e	-	-	2026-11-24	xproof
 74ed0bd3-ac31-41a4-8220-d8e7c8c1c437	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74ed0bd3-ac31-41a4-8220-d8e7c8c1c437	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+74ed0bd3-ac31-41a4-8220-d8e7c8c1c437	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 74ed0bd3-ac31-41a4-8220-d8e7c8c1c437	land	land	agreed	-	FX	start	2	0	x:xs:XP:dwarven-mine:f0t0:s1,f:xs:XP:dwarven-mine:f0t0:s1	-	-	-	23b491658465	-	d28398552fd9	-	-	2026-11-25	xproof
 74f361f8-a0d8-4824-9380-61469d6a19cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74f361f8-a0d8-4824-9380-61469d6a19cf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
