@@ -231,6 +231,31 @@ public final class ScenarioReplayOfferedCheckpointTest {
                 "step 6 (pass into declare blockers) keeps p0's offered set when no blocker is legal");
     }
 
+    /** The xproof adagia / evendo shape: Adagia, Windswept Bastion has its
+     * own "{T}: Add {W}" and the same rule text as each Plains. XMage's
+     * getPlayable hides an ability whose text an earlier permanent already
+     * listed, so the Plains vanished from the offered set although each is a
+     * distinct mana ability of a distinct source (CR 605.3a). Every one of
+     * them must be offered. */
+    private static void identicalManaAbilitiesOnDifferentSourcesAreAllOffered() throws Exception {
+        JsonObject res = replay("{"
+                + "\"id\":\"offered-duplicate-mana-abilities\","
+                + "\"name\":\"Plains and Adagia's own Add {W} are all offered\","
+                + "\"turn\":1,"
+                + "\"compare\":[\"offered\"],"
+                + "\"setup\":{\"p0\":{\"battlefield\":[\"Adagia, Windswept Bastion\",\"Plains\",\"Plains\"]},\"p1\":{}},"
+                + "\"steps\":[]"
+                + "}");
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        List<String> got = offered(snaps.get(0).getAsJsonObject());
+        List<String> want = new ArrayList<>();
+        for (String s : new String[] {"p0:Plains", "p0:Plains#2", "p0:Adagia, Windswept Bastion"}) {
+            want.add(s + "|activate");
+        }
+        Collections.sort(want);
+        equal(want, got, "setup offers each Plains and Adagia's own mana ability");
+    }
+
     /** Whether the named permanent is attacking at this snapshot. */
     private static boolean attacking(JsonObject snap, String name) {
         for (JsonElement e : snap.getAsJsonArray("permanents")) {
@@ -255,5 +280,7 @@ public final class ScenarioReplayOfferedCheckpointTest {
         System.out.println("PASS a pass into declare attackers without an attacker keeps the holder's options");
         passIntoDeclareBlockersWithoutABlockerOffersTheHoldersOptions();
         System.out.println("PASS a pass into declare blockers without a blocker keeps the holder's options");
+        identicalManaAbilitiesOnDifferentSourcesAreAllOffered();
+        System.out.println("PASS identical mana abilities on different sources are all offered");
     }
 }

@@ -10270,7 +10270,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (pr == null) {
             return out;
         }
-        for (Ability a : pr.getPlayable(g, true)) {
+        List<? extends Ability> playable = playableKeepingDuplicates(pr, g);
+        for (Ability a : playable) {
             mage.MageObject src = g.getObject(a.getSourceId());
             if (src == null) {
                 continue;
@@ -10288,6 +10289,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
             out.add(o);
         }
         return out;
+    }
+
+    /**
+     * What {@code pr} may play, with identical abilities kept. The public
+     * {@code getPlayable(g, true)} hides an ability whose rule text an earlier
+     * object already listed ("first instance only", an AI convenience), so
+     * identical mana abilities on different sources -- four Plains beside
+     * Adagia's own "{T}: Add {W}" -- would list one source and drop the rest.
+     * Each source's ability is its own offer (CR 605.3a), so go to the
+     * PlayerImpl behind the TestPlayer wrapper and ask for duplicates kept.
+     */
+    static List<? extends Ability> playableKeepingDuplicates(Player pr, Game g) {
+        Player impl = pr instanceof TestPlayer ? ((TestPlayer) pr).getComputerPlayer() : pr;
+        if (impl instanceof mage.players.PlayerImpl) {
+            return ((mage.players.PlayerImpl) impl).getPlayable(g, true, mage.constants.Zone.ALL, false);
+        }
+        return pr.getPlayable(g, true);
     }
 
     /** The scenario ref of an offered ability's source: the setup alias of
