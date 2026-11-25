@@ -863,8 +863,11 @@ func intrinsicLandMana(sa *cards.SA) bool {
 }
 
 // intrinsicManaLine is the SA.Line cards.IntrinsicManaAbility stamps on the
-// ability it builds.
+// ability it builds. IntrinsicManaLine exports it for the Forge request.
 const intrinsicManaLine = "intrinsic: basic land mana"
+
+// IntrinsicManaLine is intrinsicManaLine.
+const IntrinsicManaLine = intrinsicManaLine
 
 func intrinsicManaText(sa *cards.SA) string {
 	return fmt.Sprintf("{T}: Add {%s}.", strings.TrimSpace(sa.ParamStr(cards.PKProduced)))
