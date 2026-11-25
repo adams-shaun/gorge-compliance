@@ -501,7 +501,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (StepMachine.peekCounterKind); other asks and the remove-any-counter cost still consume theirs. UnmappedAskTest's mixed-kinds
 # fixture (xs:XP:mabel-bitter-recluse:cast:s1) fails before it; scripts/forge-oracle-test-counter-any-mixed-kinds.sh runs it.
 # Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
-FORGE_ORACLE_REF ?= 7d506c5192e8bcf75b1f191f5a5e28d5a8219e20
+# a6227e70a3 = 7d506c5192 plus cast_mode "evoked". StepMachine.spellForMode had no case for it, so the driver took Emptiness's
+# hard-cost spell and Forge refused the {W/B}{W/B} evoke cast (xproof xs:XP:emptiness:f0t0:s1, Catharsis, Emptiness; CR 702.74a);
+# it now picks the AlternativeCost.Evoke spell. scripts/forge-oracle-test-evoked-cast-mode.sh fails before it. Fork branch
+# fix/xp-driver-evoked-cast-mode.
+# afe18881c6 = oracle/fpin-1125: a6227e70a3 joined with 3e6bd830a6, gorge's discard_may yes/no election before the 0..N discard
+# pick (ScriptedController.chooseCardsToDiscardFrom; fork branch fix/xp-forge-driver-discard-may-election). Both driver-only;
+# die-roll code, cardsfolder and tokenscripts unchanged.
+FORGE_ORACLE_REF ?= afe18881c6e6327caf871661968865a495aaf3de
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

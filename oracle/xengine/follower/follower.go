@@ -96,7 +96,7 @@ type Follower struct {
 
 // forgeCastModes are the cast_mode values the Forge driver can act on:
 // StepMachine.spellForMode picks the plot or suspend special action, an Adventure or Omen
-// half, a modal back face, a warp cast, a may-play cast of a card outside its
+// half, a modal back face, a warp cast, an evoke cast (CR 702.74a), a may-play cast of a card outside its
 // owner's hand ("mayplay") or the first alternative cost ("alternative"), and
 // spellFor may instead take the MayPlay-bound copy out of
 // Card.getAllPossibleAbilities; the optional-cost modes pay the kicker,
@@ -106,7 +106,7 @@ type Follower struct {
 // the driver's gap.
 var forgeCastModes = []string{"", "optionalcost",
 	"plot", "suspend", "adventure_alt", "omen_alt", "modal_spell", "warped",
-	"mayplay", "alternative",
+	"mayplay", "alternative", "evoked",
 	"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined",
 	"offspring", "replicated", "multikicked"}
 
