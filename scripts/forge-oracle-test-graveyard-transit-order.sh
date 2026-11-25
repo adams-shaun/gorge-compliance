@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # forge-oracle-test-graveyard-transit-order.sh -- driver unit test for an
-# unpinned simultaneous zone order.
+# unpinned simultaneous zone order, and for the PINNED ask that offers a card
+# the pin does not name.
 #
 # Sorin, Lord of Innistrad's -6 destroys p1's Crimson Kobolds and Tibalt, the
 # Fiend-Blooded, then a ChangeZoneAll returns them to the battlefield in the
@@ -16,11 +17,24 @@
 # strict-misses, and a pin a checkpoint can see is still consumed and still
 # orders the ask.
 #
+# The pinned half (xpt-18625cef, Thassa's Rebuff): Seed of Hope's mill moves
+# Island and Forest together, and Island returns to the hand within the step,
+# so the pin names only [Forest, Seed of Hope] while Forge's ask offers the
+# milled pair, and the matching strict-missed whenever an offered card was
+# not named by the pin. forge-export now writes graveyard_ends (the names in
+# the seat's graveyard at the pin's step end) and StepMachine.orderGraveyardPin
+# keeps Forge's offered order after the named cards for a transit card
+# (pinnedGraveyardOrderKeepsATransitOfferedCard, red on e45e911953c), while a
+# name the end graveyard DOES contain is still a strict miss
+# (pinnedGraveyardOrderStillMissesAnUnnamedCardTheCheckpointsSee) and an
+# export without graveyard_ends still misses too
+# (pinnedGraveyardOrderWithoutEndNamesStillMisses).
+#
 # OrderCardsTest.unpinnedGraveyardOrderKeepsForgeOrder,
 # .unpinnedBattlefieldOrderKeepsForgeOrder, .unpinnedHandOrderKeepsForgeOrder,
 # .unpinnedOtherZoneStillLooseMisses and .pinnedGraveyardOrderStillApplies pin
-# both halves. The wrapper asserts the 14-test count and each of those five
-# names, not just the class's exit
+# both halves. The wrapper asserts the 17-test count and each of those five
+# names and the three pinned-transit ones, not just the class's exit
 # status: a pin that predates these tests (c9419 has nine) would otherwise run
 # green and silently drop the coverage. Needs the out-of-tree build at
 # FORGE_ORACLE_REF (make
@@ -47,11 +61,13 @@ FORGE_ORACLE_DIR=$forge FORGE_ORACLE_JDK=$jdk \
   FORGE_ORACLE_TEST_CLASSES=forge.oracle.OrderCardsTest \
   bash "$runner" 2>&1 | tee "$log"
 
-want=14
+want=17
 passes=$(grep -c '^PASS OrderCardsTest\.' "$log" || true)
 [ "$passes" -eq "$want" ] || fail "OrderCardsTest passed $passes tests, want $want: the pinned driver is missing the transit-order tests"
 for t in unpinnedGraveyardOrderKeepsForgeOrder unpinnedBattlefieldOrderKeepsForgeOrder \
   unpinnedHandOrderKeepsForgeOrder unpinnedOtherZoneStillLooseMisses \
-  pinnedGraveyardOrderStillApplies; do
+  pinnedGraveyardOrderStillApplies pinnedGraveyardOrderKeepsATransitOfferedCard \
+  pinnedGraveyardOrderStillMissesAnUnnamedCardTheCheckpointsSee \
+  pinnedGraveyardOrderWithoutEndNamesStillMisses; do
   grep -qx "PASS OrderCardsTest\.$t" "$log" || fail "OrderCardsTest.$t did not pass; the pinned driver is missing the transit-order fix"
 done

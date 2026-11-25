@@ -813,13 +813,30 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (make forge-driver-tests) runs it. Driver tests only (test class + fixture); cardsfolder and tokenscripts unchanged
 # (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-new-targets-resolve.
 # NOTE (merge): ChangeTargetsMandatoryTest lives only on fork commit 61f44264a28 (= e45e911953c + the test), which lacks the
-# pending-declaration offered rule (a4380dd47f). The ref below is the join11 pin that keeps that driver fix, so
-# scripts/forge-oracle-test-change-targets-mandatory.sh needs a fork join of 61f44264a28 into join11 before make
-# forge-driver-tests passes it; bump FORGE_ORACLE_REF to that join once it is pushed.
+# pending-declaration offered rule (a4380dd47f). The ref below (join12) keeps that driver fix, so
+# scripts/forge-oracle-test-change-targets-mandatory.sh needed a fork join of 61f44264a28 into join12 before make
+# forge-driver-tests passed it; join14 below is that join.
+# 8b89eabc655 = e45e911953c (above) with the PINNED half of the transit graveyard order (xproof cluster xpt-18625cef,
+# Thassa's Rebuff): Seed of Hope's mill moves Island and Forest together, Island returns to the hand within the step, so
+# forge_order.go's checkpoint delta pins only [Forest, Seed of Hope] while Forge's "order to Graveyard" ask offers the
+# milled pair, and StepMachine.orderByNames strict-missed whenever an offered card was not named by the pin. forge-export
+# now writes graveyard_ends ("<step>:<seat>" to the names in that seat's graveyard at the step's end) and
+# StepMachine.orderGraveyardPin orders the named cards by the pin and keeps Forge's offered order after them for an
+# unnamed card whose name is absent from the end graveyard (its position is not observable at the next checkpoint, so no
+# gorge answer can exist), with a note; a name the end graveyard DOES contain is an arrival the checkpoints see, so an
+# unnamed one still misses, and an absent end list still misses too. OrderCardsTest's
+# pinnedGraveyardOrderKeepsATransitOfferedCard (red on e45e911953c), pinnedGraveyardOrderStillMissesAnUnnamedCardTheCheckpointsSee
+# and pinnedGraveyardOrderWithoutEndNamesStillMisses cover both halves; scripts/forge-oracle-test-graveyard-transit-order.sh
+# (make forge-driver-tests) pins the 17-test count. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch driver-transit-pin.
 # 2ac6012982e = oracle/fpin-1125-join11: a4380dd47f (the pending-declaration offered rule; above) merged with e45e911953c (the
 # below-min target decline; above), no textual conflicts; driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
-# 586a3850332 = oracle/fpin-1125-join13: join11 (2ac6012982e) + the mandatory ChangeTargets regression test 61f44264a28
-# (ChangeTargetsMandatoryTest; the join the note above asks for) + the PayLife<X> announcement below (xproof cluster xpt-b1209a2d).
+# 6d6b2d485ab = oracle/fpin-1125-join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit graveyard
+# order, above), no textual conflicts (StepMachine.java auto-merged); driver-only, die-roll code unchanged (same as
+# FORGE_REF ff076d4432). r0's 1656bcb2a73 was described here but never pushed to the fork; this is the pushed merge.
+# ad4cd3ba0f8 = oracle/fpin-1125-join14: join12 (6d6b2d485ab, above) merged with the PayLife<X> announcement 892f8bd63b6 (below) and the
+# mandatory ChangeTargets regression test 61f44264a28 (ChangeTargetsMandatoryTest; the join the NOTE (merge) above asks for), no textual
+# conflicts. It supersedes the earlier join13 586a3850332 (join11 + both), which lacked the transit order. Xproof cluster xpt-b1209a2d.
 # Phyrexian Processor's "pay any amount of life" is AB$ StoreSVar | Cost$ Mandatory PayLife<X>: Forge announces the amount as the cost's X (PlaySpellAbility.announceValuesLikeX), while gorge logs it as a
 # choose_n with pick kind paylife and an "N life" label, 0 included (CR 119.4, 118.3). ScriptedController.announceRequirements took the X
 # only from an x decision, so the pick was a leftover and the AI answered ("Missing x answer at step 6: X for"). It now binds a paylife
@@ -828,7 +845,7 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fixtures/phyrexian/processor-zero-life.jsonl, the exported xs:XP:phyrexian-processor:cast:s1 request) fails without the change with
 # the exact "Missing x answer at step 6: X for" miss; scripts/forge-oracle-test-phyrexian-processor-paylife.sh (make forge-driver-tests)
 # runs it. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-paylife-x.
-FORGE_ORACLE_REF ?= 586a38503323fbb0533e083d43ed8a1235fa0931
+FORGE_ORACLE_REF ?= ad4cd3ba0f8a7fcb5eeccc8c579cf00bf0784858
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
