@@ -10,8 +10,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:swarmborn-giant:f0a0:s1,f:xs:XP:swarmborn-giant:f0a0:s1	-	-	-	d864b561c9cb	-	271c08cdae04	-	-	2026-11-24	xproof
 9d09697f-8c5c-4bf9-811f-2f847ee374f0	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:swarmborn-giant:f0t0:s1,f:xs:XP:swarmborn-giant:f0t0:s1	-	-	-	6f84be0f34c0	-	271c08cdae04	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9d0d19e4-34f9-4bfa-9c8b-74356d223a18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d0d19e4-34f9-4bfa-9c8b-74356d223a18	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-9d0d19e4-34f9-4bfa-9c8b-74356d223a18	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+9d0d19e4-34f9-4bfa-9c8b-74356d223a18	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+9d0d19e4-34f9-4bfa-9c8b-74356d223a18	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 9d0eb1f4-08ef-4ac9-902b-47335ab46984	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:conclave-guildmage:cast:s1,f:xs:XP:conclave-guildmage:cast:s1	-	-	-	d864b561c9cb	-	912bde2a18b7	-	-	2026-11-24	xproof
 9d0eb1f4-08ef-4ac9-902b-47335ab46984	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:conclave-guildmage:f0a0:s1,f:xs:XP:conclave-guildmage:f0a0:s1	-	-	-	d864b561c9cb	-	912bde2a18b7	-	-	2026-11-24	xproof
 9d0eb1f4-08ef-4ac9-902b-47335ab46984	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:conclave-guildmage:f0a1:s1,f:xs:XP:conclave-guildmage:f0a1:s1	-	-	-	d864b561c9cb	-	912bde2a18b7	-	-	2026-11-24	xproof
@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d973df5-b2e8-4af8-8379-0f8282e1e62a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d973df5-b2e8-4af8-8379-0f8282e1e62a	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 9d9b52b2-2edc-4f7f-a8d9-e024b1398847	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d9b52b2-2edc-4f7f-a8d9-e024b1398847	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+9d9b52b2-2edc-4f7f-a8d9-e024b1398847	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 9d9b52b2-2edc-4f7f-a8d9-e024b1398847	f1/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9da50130-3f83-4968-983c-7dcba257cf1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9da50130-3f83-4968-983c-7dcba257cf1b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

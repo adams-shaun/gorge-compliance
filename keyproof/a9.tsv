@@ -41,12 +41,12 @@ a93a8edf-2879-4cae-b3b9-b46298270823	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hyd
 a93a8edf-2879-4cae-b3b9-b46298270823	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:hydro-man-fluid-felon:f0t0:s1,f:xs:XP:hydro-man-fluid-felon:f0t0:s1	-	-	-	23c4009444b0	-	65071b4f5fbc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a93a8edf-2879-4cae-b3b9-b46298270823	f0/t1	Phase	agreed	-	FX	start	6	0	x:xs:XP:hydro-man-fluid-felon:cast:s1,f:xs:XP:hydro-man-fluid-felon:cast:s1	-	-	-	23c4009444b0	-	65071b4f5fbc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a93b5956-c11e-434e-bed5-94af9de55382	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nezumi-prowler:f0t0:s1,f:xs:XP:nezumi-prowler:f0t0:s1	-	-	-	d864b561c9cb	-	06bbb3fe81d8	-	-	2026-11-24	xproof
-a93b5956-c11e-434e-bed5-94af9de55382	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+a93b5956-c11e-434e-bed5-94af9de55382	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 a93b5956-c11e-434e-bed5-94af9de55382	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nezumi-prowler:f0t0:s1,f:xs:XP:nezumi-prowler:f0t0:s1	-	-	-	d864b561c9cb	-	06bbb3fe81d8	-	-	2026-11-24	xproof
 a93f0735-9854-487d-b646-d55e2bee00c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grendel-spawn-of-knull:cast:s1,f:xs:XP:grendel-spawn-of-knull:cast:s1	-	-	-	8c0bd19283bb	-	7c49cadeaca0	-	-	2026-11-24	xproof
 a945710e-fab6-4b54-ba40-586f2e54baf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a945710e-fab6-4b54-ba40-586f2e54baf4	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:vampire-scrivener:f0t0:s1,f:xs:XP:vampire-scrivener:f0t0:s1	-	-	-	054d9f516953	-	eb4a8bbfd4ac	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-a945710e-fab6-4b54-ba40-586f2e54baf4	f0/t1	NULL	owed	refused:no-generator:trigger:LifeLost	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+a945710e-fab6-4b54-ba40-586f2e54baf4	f0/t1	NULL	owed	refused:no-generator:trigger:LifeLost	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 a9471b33-b5b0-408a-9900-6964e5fe42da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plan-the-heist:cast:s1,f:xs:XP:plan-the-heist:cast:s1	-	-	-	3aa6ded33acb	-	d1ac9915494e	-	-	2026-11-25	xproof
 a949c96c-362c-45a3-bd5c-ce5ce153ee9e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a949c96c-362c-45a3-bd5c-ce5ce153ee9e	f0/a1	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:terrain-generator:f0a0:s1	-	-	-	8c0bd19283bb	-	9c7db494ecce	-	-	2026-11-24	xproof
@@ -87,8 +87,8 @@ a984db23-40ea-428d-829f-e944267280f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a984db23-40ea-428d-829f-e944267280f8	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:faerie-mastermind:f0a0:s1,f:xs:XP:faerie-mastermind:f0a0:s1	-	-	-	ae86f6029288	-	51399adf2dc4	-	-	2026-11-24	xproof
 a984db23-40ea-428d-829f-e944267280f8	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:faerie-mastermind:f0t0:s1,f:xs:XP:faerie-mastermind:f0t0:s1	-	-	-	054d9f516953	-	51399adf2dc4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 a9855326-8958-4b03-b81b-1f9e4d1335b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a9855326-8958-4b03-b81b-1f9e4d1335b1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-a9855326-8958-4b03-b81b-1f9e4d1335b1	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+a9855326-8958-4b03-b81b-1f9e4d1335b1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+a9855326-8958-4b03-b81b-1f9e4d1335b1	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 a9855326-8958-4b03-b81b-1f9e4d1335b1	f1/t1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 a98764e2-3cf6-40a4-aba5-34e2411623ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:soulsurge-elemental:cast:s1,f:xs:XP:soulsurge-elemental:cast:s1	-	-	-	d864b561c9cb	-	e50b83c7f3ab	-	-	2026-11-24	xproof
 a98c2d81-4add-4292-bbdd-e1b69ff936d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:planar-cleansing:cast:s1,f:xs:XP:planar-cleansing:cast:s1	-	-	-	8a1b1a193ec0	-	920c144f6e15	-	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ a9a35c77-637f-4d56-afa2-6c8a4ded4838	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sti
 a9a35c77-637f-4d56-afa2-6c8a4ded4838	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stinging-cave-crawler:combat0.attack:s1,f:xs:XP:stinging-cave-crawler:combat0.attack:s1	-	-	-	3aa6ded33acb	-	23d77c3912bf	-	-	2026-11-25	xproof
 a9a35c77-637f-4d56-afa2-6c8a4ded4838	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:stinging-cave-crawler:combat0.block:s1,f:xs:XP:stinging-cave-crawler:combat0.block:s1	-	-	-	3aa6ded33acb	-	23d77c3912bf	-	-	2026-11-25	xproof
 a9a35c77-637f-4d56-afa2-6c8a4ded4838	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:stinging-cave-crawler:f0t0:s1,f:xs:XP:stinging-cave-crawler:f0t0:s1	-	-	-	23b491658465	-	23d77c3912bf	-	-	2026-11-25	xproof
-a9abed25-9256-4fc7-8afb-edb4286e18f4	cast	cast	owed	harness	-	start	0	0	-	-	-	-	9087eefec3ee	-	d9e7b720da55	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+a9abed25-9256-4fc7-8afb-edb4286e18f4	cast	cast	owed	harness	-	start	0	0	-	-	-	-	9087eefec3ee	-	d9e7b720da55	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 a9aedd96-1aee-480d-87fe-3ed94bd64599	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9b1dd4a-2eaf-4448-a767-da705d3ec32b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9b1dd4a-2eaf-4448-a767-da705d3ec32b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:hellkite-whelp:f0t0:s1,f:xs:XP:hellkite-whelp:f0t0:s1	-	-	-	d864b561c9cb	-	9d908ebb4dec	-	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ a9b3ee21-1af1-4e7e-8e48-d7c90d056f5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cry
 a9b3ee21-1af1-4e7e-8e48-d7c90d056f5c	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:cryotheory-adept:f0a0:s1,f:xs:XP:cryotheory-adept:f0a0:s1	-	-	-	fb9d3088f0bf	-	a82239605de1	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 a9b3ee21-1af1-4e7e-8e48-d7c90d056f5c	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:cryotheory-adept:f0t0:s1,f:xs:XP:cryotheory-adept:f0t0:s1	-	-	-	fb9d3088f0bf	-	a82239605de1	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 a9b8d020-4d72-4934-8942-df29ef19fc1d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a9b8d020-4d72-4934-8942-df29ef19fc1d	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+a9b8d020-4d72-4934-8942-df29ef19fc1d	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 a9b8d020-4d72-4934-8942-df29ef19fc1d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a9b9e798-debc-4f2c-9770-e16f670082f7	cast	cast	agreed	-	F	start	2	0	f:xs:XP:koskun-falls:f0t0:s1	-	-	-	3aa6ded33acb	-	b9bce9548637	-	-	2026-11-25	xproof
 a9b9e798-debc-4f2c-9770-e16f670082f7	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:koskun-falls:f0t0:s1	-	-	-	3aa6ded33acb	-	b9bce9548637	-	-	2026-11-25	xproof
