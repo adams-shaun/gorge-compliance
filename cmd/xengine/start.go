@@ -78,6 +78,7 @@ type startSeat struct {
 	BackFace []string       `json:"back_face"`
 	Counters []startCounter `json:"counters"`
 	Attach   []startAttach  `json:"attach"`
+	Tokens   []startToken   `json:"tokens"`
 	Life     *int32         `json:"life"`
 }
 
@@ -93,6 +94,13 @@ type startCounter struct {
 	Card string `json:"card"`
 	Kind string `json:"kind"`
 	N    int32  `json:"n"`
+}
+
+// startToken is a token the file mints onto the seat's battlefield, by its
+// token definition script (gorge's Config.Tokens key). It names no deck card.
+type startToken struct {
+	Script string `json:"script"`
+	Tapped bool   `json:"tapped"`
 }
 
 // startFocus overrides the defaults of the focus seat (focusOf).
@@ -402,6 +410,17 @@ func startDeckAt(reg *cards.Registry, name string, seat int, s, other startSeat)
 			return d, ss, fmt.Errorf("start %s: %q has no back face", name, n)
 		}
 		ss.BackFace = append(ss.BackFace, i)
+	}
+	for _, t := range s.Tokens {
+		// An unknown script mints nothing (gorge skips it), so refuse the file
+		// rather than silently start without the token the key needs.
+		if t.Script == "" {
+			return d, ss, fmt.Errorf("start %s: token with no script", name)
+		}
+		if _, ok := reg.Token(t.Script); !ok {
+			return d, ss, fmt.Errorf("start %s: token script %q not found", name, t.Script)
+		}
+		ss.Tokens = append(ss.Tokens, rules.StartToken{Script: t.Script, Tapped: t.Tapped})
 	}
 	ss.Life = s.Life
 	// Filler: the colours of the listed cards' front-face costs, WUBRG order,
