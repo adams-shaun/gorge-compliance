@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"reflect"
 	"slices"
 	"sort"
 	"strings"
@@ -14,6 +15,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -268,6 +270,109 @@ func TestStartTokenIsExercised(t *testing.T) {
 				return nil
 			}); err != nil {
 				t.Fatal(err)
+			}
+		})
+	}
+}
+
+// TestStartPlayerCounter: a start file's player_counters are read strictly
+// (no card, only a counter kind the engines track, n >= 1), folded into a
+// sorted slice, and mapped to rules.StartSeat.PlayerCounters through the pin
+// capability. The current pin has no such field; the seam proves the mapping
+// path, and a start on a pin without the field is refused loudly instead of
+// silently playing with no energy.
+func TestStartPlayerCounter(t *testing.T) {
+	dir := t.TempDir()
+	p := filepath.Join(dir, "start.json")
+	body := `{"format":"xproof-start-1","card":"Aethersquall Ancient","key":"f0/a0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"battlefield":["Aethersquall Ancient"],"player_counters":[{"kind":"ENERGY","n":8}]},"p1":{}},` +
+		`"filler":"basics","seeds":1}`
+	if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	f, err := readStartFile(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []startCounter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
+		t.Fatalf("p0 player counters %+v, want %+v", f.Setup.P0.PlayerCounters, want)
+	}
+	cs, err := playerCountersOf(f.Setup.P0.PlayerCounters)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []pincap.Counter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(cs, want) {
+		t.Fatalf("seat 0 player counters %+v, want %+v", cs, want)
+	}
+	// A repeat of one kind is folded and the slice is sorted by kind, never a
+	// map walk: the same JSON always produces the same item bytes.
+	folded := filepath.Join(dir, "folded.json")
+	foldedBody := strings.Replace(body, `[{"kind":"ENERGY","n":8}]`,
+		`[{"kind":"POISON","n":2},{"kind":"ENERGY","n":3},{"kind":"ENERGY","n":5}]`, 1)
+	if err := os.WriteFile(folded, []byte(foldedBody), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	ff, err := readStartFile(folded)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got, err := playerCountersOf(ff.Setup.P0.PlayerCounters)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []pincap.Counter{{Kind: "ENERGY", N: 8}, {Kind: "POISON", N: 2}}; !reflect.DeepEqual(got, want) {
+		t.Fatalf("folded player counters %+v, want %+v", got, want)
+	}
+	// The native mapping: swap the pincap setter for a recorder, so this test
+	// covers startDeckAt -> rules.StartSeat.PlayerCounters even while the pin
+	// has no such field. Removing the mapping makes this fail.
+	reg := testutil.CorpusRegistry(t)
+	prior := setStartPlayerCounters
+	var mapped []pincap.Counter
+	setStartPlayerCounters = func(ss *rules.StartSeat, cs []pincap.Counter) bool {
+		mapped = append([]pincap.Counter(nil), cs...)
+		return true
+	}
+	t.Cleanup(func() { setStartPlayerCounters = prior })
+	if _, _, err := startDeckAt(reg, "start-p0", 0, f.Setup.P0, f.Setup.P1); err != nil {
+		t.Fatal(err)
+	}
+	if want := []pincap.Counter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(mapped, want) {
+		t.Fatalf("mapped player counters %+v, want %+v", mapped, want)
+	}
+	// A seat with none does not call the setter at all.
+	mapped = nil
+	if _, _, err := startDeckAt(reg, "start-p0", 0, startSeat{Battlefield: []string{"Plains"}}, startSeat{}); err != nil {
+		t.Fatal(err)
+	}
+	if mapped != nil {
+		t.Errorf("seat with no player counters called the setter with %+v", mapped)
+	}
+	// At a pin without the native field, a start that names counters is an
+	// error, not a silently unaffordable focus play written as
+	// start-not-exercised far from the cause.
+	setStartPlayerCounters = prior
+	if pincap.PlayerCounters() {
+		t.Skip("the pin now has rules.StartSeat.PlayerCounters; the pre-pin refusal no longer applies")
+	}
+	if _, _, err := startDeckAt(reg, "start-p0", 0, f.Setup.P0, f.Setup.P1); err == nil ||
+		!strings.Contains(err.Error(), "rules.StartSeat.PlayerCounters") {
+		t.Fatalf("pre-pin start with counters: err %v, want a rules.StartSeat.PlayerCounters refusal", err)
+	}
+	// A card name, an untracked kind and a non-positive amount are refused.
+	for _, tc := range []struct{ name, counters, want string }{
+		{"card", `[{"card":"Aethersquall Ancient","kind":"ENERGY","n":8}]`, "goes on the seat"},
+		{"kind", `[{"kind":"CHARGE","n":1}]`, "not ENERGY, POISON or EXPERIENCE"},
+		{"zero", `[{"kind":"ENERGY","n":0}]`, "want >= 1"},
+	} {
+		t.Run("refuse/"+tc.name, func(t *testing.T) {
+			bad := filepath.Join(dir, tc.name+".json")
+			b := strings.Replace(body, `[{"kind":"ENERGY","n":8}]`, tc.counters, 1)
+			if err := os.WriteFile(bad, []byte(b), 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := readStartFile(bad); err == nil || !strings.Contains(err.Error(), tc.want) {
+				t.Errorf("player counters %s: err %v, want %q", tc.counters, err, tc.want)
 			}
 		})
 	}
@@ -1239,6 +1344,8 @@ func TestStartFocusTargetIsPlaced(t *testing.T) {
 		{"Remember the Fallen", "cast"},           // Charm choices: creature/artifact card in your graveyard
 		{"Reborn Hope", "cast"},                   // Card.MultiColor+YouCtrl in the graveyard
 		{"Chandra, Acolyte of Flame", "f0/a2"},    // TgtZone$ Graveyard
+		{"Aerial Assault", "cast"},                // Creature.tapped: the target must be placed tapped
+		{"Asphyxiate", "cast"},                    // Creature.untapped: the target must be placed untapped
 	} {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
 	}
@@ -1575,5 +1682,53 @@ func TestStartActivationConditionIsMetOrRefused(t *testing.T) {
 				t.Errorf("path %q reason %q, want refused %q", res.Path, res.Reason, c.reason)
 			}
 		})
+	}
+}
+
+// TestPlayStartPlayerCountersPinRefusesPerID: at a pin without
+// rules.StartSeat.PlayerCounters, the start that names energy is refused per
+// id in the lowering log and the other starts of the directory still play.
+func TestPlayStartPlayerCountersPinRefusesPerID(t *testing.T) {
+	if pincap.PlayerCounters() {
+		t.Skip("the pin now has rules.StartSeat.PlayerCounters; there is nothing to refuse")
+	}
+	reg := testutil.CorpusRegistry(t)
+	dir := t.TempDir()
+	good, err := os.ReadFile("testdata/start/thornvault-forager-f0a2.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, "b-good.json"), good, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	energy := `{"format":"xproof-start-1","card":"Aethersquall Ancient","key":"f0/a0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"battlefield":["Aethersquall Ancient"],"player_counters":[{"kind":"ENERGY","n":8}]},"p1":{}},` +
+		`"filler":"basics","seeds":2}`
+	// Sorts first, so a hard error here would lose b-good.json.
+	if err := os.WriteFile(filepath.Join(dir, "a-energy.json"), []byte(energy), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	out := t.TempDir()
+	if err := playStart(reg, []string{dir}, "XP", out, false); err != nil {
+		t.Fatalf("one pre-pin start aborted the batch: %v", err)
+	}
+	refused := 0
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		if bytes.Contains(b, []byte(reasonStartPlayerCountersPin)) {
+			refused++
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if refused != 2 {
+		t.Errorf("%d refused rows with %q, want 2 (one per seed)", refused, reasonStartPlayerCountersPin)
+	}
+	items := 0
+	if err := readLines(filepath.Join(out, "items.jsonl"), func([]byte) error { items++; return nil }); err != nil {
+		t.Fatal(err)
+	}
+	if items == 0 {
+		t.Error("the other start of the directory wrote no item")
 	}
 }

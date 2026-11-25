@@ -1,6 +1,7 @@
 package scen
 
 import (
+	"sort"
 	"strconv"
 	"strings"
 
@@ -38,7 +39,10 @@ type costPlan struct {
 	hand      []string // cards the cost discards
 	graveyard []string // cards the cost exiles from the graveyard
 	counters  []StartCounter
-	life      int32 // the life a PayLife<N> needs: N+1 when N is 20 or more (0: the default 20)
+	// playerCounters seed the seat itself (Card empty): the energy a
+	// PayEnergy<N> spends before the focus play.
+	playerCounters []StartCounter
+	life           int32 // the life a PayLife<N> needs: N+1 when N is 20 or more (0: the default 20)
 }
 
 // planCost reads cost for the card's ability: every token a start can meet
@@ -54,7 +58,10 @@ type costPlan struct {
 //     ExileFromGrave<N/Type>: N fodder cards in the graveyard;
 //   - SubCounter<N/Kind>: N counters of Kind on the card (a planeswalker's
 //     LOYALTY: only those its printed loyalty lacks); AddCounter<N/Kind> on
-//     the card needs nothing.
+//     the card needs nothing;
+//   - PayEnergy<N>: N ENERGY counters on the seat itself, recorded in
+//     PlayerCounters (a start position can hold the energy the ability
+//     spends). A malformed or non-positive amount stays refused.
 func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, cost, generic string) (costPlan, string) {
 	p := costPlan{zone: zoneBattlefield}
 	for _, tok := range splitCost(cost) {
@@ -74,6 +81,20 @@ func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, 
 		}
 		head, args := costArgs(tok)
 		refusal := "steps-needed:cost:" + head
+		if head == "PayEnergy" {
+			// PayEnergy<N> has one argument, not the <N/Type> pair the other
+			// cases read, so it is parsed before the generic N. Only a
+			// positive whole amount is a cost a start can cover.
+			if len(args) != 1 {
+				return p, refusal
+			}
+			amount, err := strconv.Atoi(args[0])
+			if err != nil || amount < 1 {
+				return p, refusal
+			}
+			p.playerCounters = addPlayerCounter(p.playerCounters, "ENERGY", int32(amount))
+			continue
+		}
 		n := 0
 		if len(args) >= 2 {
 			var err error
@@ -241,10 +262,33 @@ func (p costPlan) applyExtras(s *StartSeat) {
 	s.Hand = append(s.Hand, p.hand...)
 	s.Graveyard = append(s.Graveyard, p.graveyard...)
 	s.Counters = append(s.Counters, p.counters...)
+	for _, c := range p.playerCounters {
+		s.PlayerCounters = addPlayerCounter(s.PlayerCounters, c.Kind, c.N)
+	}
+	sortPlayerCounters(s.PlayerCounters)
 	if p.life > 0 && (s.Life == nil || *s.Life < p.life) {
 		l := p.life
 		s.Life = &l
 	}
+}
+
+// addPlayerCounter adds n of kind to cs, folding a repeat of the same kind.
+// It keeps the sum in ONE entry so a cost that pays energy twice names the
+// total, and so the slice never has two rows a follower would apply twice.
+func addPlayerCounter(cs []StartCounter, kind string, n int32) []StartCounter {
+	for i := range cs {
+		if cs[i].Kind == kind {
+			cs[i].N += n
+			return cs
+		}
+	}
+	return append(cs, StartCounter{Kind: kind, N: n})
+}
+
+// sortPlayerCounters orders a seat's player counters by kind. The output is a
+// sorted slice, never a map walk, so a generated start is deterministic.
+func sortPlayerCounters(cs []StartCounter) {
+	sort.SliceStable(cs, func(i, j int) bool { return cs[i].Kind < cs[j].Kind })
 }
 
 // castStart places the card in seat 0's hand with the lands for its mana cost

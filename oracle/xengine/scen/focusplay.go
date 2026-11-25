@@ -284,14 +284,14 @@ func parseAlt(alt string) altNeed {
 	return n
 }
 
-// altFilter is the k-th alternative as parseFilter reads it: its type head and
-// every property parseFilter understands (a property it does not read is not
-// tested). ok is false when there is no raw alternative to read.
+// altFilter is the k-th alternative as parseFilterPlaced reads it: its type
+// head, every property parseFilter understands, and the tapped state the start
+// can place. ok is false when there is no raw alternative to read.
 func (r *tgtReq) altFilter(k int) (filterAlt, bool) {
 	if k >= len(r.raw) {
 		return filterAlt{}, false
 	}
-	alts := parseFilter(r.raw[k])
+	alts := parseFilterPlaced(r.raw[k])
 	if len(alts) != 1 {
 		return filterAlt{}, false
 	}
@@ -301,9 +301,11 @@ func (r *tgtReq) altFilter(k int) (filterAlt, bool) {
 // altMet reports whether permanent f (on the focus seat's side when mine, else
 // the opponent's) meets the alternative's filter, and is not the focus play's
 // source when the alternative says .Other (Adarkar Valkyrie's "target creature
-// other than CARDNAME"). The filter test carries the type head as well as the
-// properties, so a subtype (Equipment, Vehicle) is not met by any permanent.
-func altMet(n altNeed, a filterAlt, f *cards.Face, mine bool, source string) bool {
+// other than CARDNAME"). tapped is the placed copy's battlefield state, which
+// a filter property such as "tapped"/"untapped" tests. The filter test carries
+// the type head as well as the properties, so a subtype (Equipment, Vehicle)
+// is not met by any permanent.
+func altMet(n altNeed, a filterAlt, f *cards.Face, mine bool, source string, tapped bool) bool {
 	if n.combat {
 		return false // nothing attacks or blocks at the first main priority
 	}
@@ -316,7 +318,7 @@ func altMet(n altNeed, a filterAlt, f *cards.Face, mine bool, source string) boo
 	if a.history != "" {
 		return false // a this-turn event: no placed permanent has undergone it
 	}
-	if a.test != nil && !a.matches(f, false) {
+	if a.test != nil && !a.matchesState(f, false, tapped) {
 		return false
 	}
 	return f.IsPermanent()
@@ -351,12 +353,13 @@ func unmet(reg *cards.Registry, f *StartFile, seat int, reqs []tgtReq, source st
 					met = append(met, [2]int{side, j})
 				}
 			}
-			for side, bf := range [][]string{mine.Battlefield, theirs.Battlefield} {
-				for j, name := range bf {
+			for side, sd := range []*StartSeat{mine, theirs} {
+				tapped := sd.TappedCopies()
+				for j, name := range sd.Battlefield {
 					if reqs[i].unique && taken[[2]int{side, j}] {
 						continue
 					}
-					if c, found := reg.Lookup(name); found && len(c.Faces) > 0 && altMet(n, filter, c.Faces[0], side == 0, source) {
+					if c, found := reg.Lookup(name); found && len(c.Faces) > 0 && altMet(n, filter, c.Faces[0], side == 0, source, tapped[j]) {
 						met = append(met, [2]int{side, j})
 					}
 				}
@@ -750,6 +753,12 @@ func placeOppTarget(reg *cards.Registry, b *certdeck.Builder, card, source strin
 				sd = own
 			}
 			sd.Battlefield = append(sd.Battlefield, name)
+			if filter.tapped > 0 {
+				// record the state the target was chosen for: an untapped
+				// carrier would leave the focus play unoffered (start-not-
+				// exercised), which is a refusal, not a warning
+				sd.Tapped = append(sd.Tapped, name)
+			}
 			return true, ""
 		}
 	}
@@ -806,15 +815,18 @@ func placeOppTarget(reg *cards.Registry, b *certdeck.Builder, card, source strin
 // pool excludes), then a land for a land target (the pool holds no lands). The
 // focus play's own source is never returned for a .Other target.
 func pickTargetPermanent(reg *cards.Registry, b *certdeck.Builder, card, source string, n altNeed, a filterAlt, raw string, mine bool) string {
+	// the copy placeOppTarget appends is tapped exactly when the alternative
+	// requires it; pick the face against that state
+	tapped := a.tapped > 0
 	keep := func(c *cards.Face) bool {
-		return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c) && altMet(n, a, c, mine, source)
+		return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c) && altMet(n, a, c, mine, source, tapped)
 	}
 	if name := pickCarrier(reg, b, card, keep); name != "" {
 		return name
 	}
 	if n.typ == "land" {
 		if name := landFixture(reg, b, raw); name != "" {
-			if c, ok := reg.Lookup(name); ok && len(c.Faces) > 0 && altMet(n, a, c.Faces[0], mine, source) {
+			if c, ok := reg.Lookup(name); ok && len(c.Faces) > 0 && altMet(n, a, c.Faces[0], mine, source, tapped) {
 				return name
 			}
 		}
