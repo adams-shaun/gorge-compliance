@@ -375,6 +375,23 @@ public final class ScenarioReplayCastModeTest {
      * the two untapped Plains alone untouched and no harness row. */
     private static void evokedCastPaysEvokeCost() throws Exception {
         equal("true", castModeSupported("evoked"), "evoked cast_mode");
+        // The election itself, on AbilityImpl's menu as XMage words it
+        // (AlternativeSourceCostsImpl.getAlternativeCostText): Evoke is key 1,
+        // the plain cast key 2. Without a match nothing is queued and the
+        // non-strict replay below leaves the pick to the AI, so it passes
+        // only when the AI happens to evoke.
+        mage.choices.ChoiceImpl menu = new mage.choices.ChoiceImpl(false);
+        menu.setMessage("You may choose an alternative cost");
+        java.util.Map<String, String> keys = new java.util.LinkedHashMap<>();
+        keys.put("1", "Cast with Evoke alternative cost: {W/B}{W/B} (Emptiness)");
+        keys.put("2", "Cast with no alternative cost: {4}{W/B}{W/B}");
+        menu.setKeyChoices(keys);
+        java.util.List<String> queued = new java.util.ArrayList<>(java.util.Arrays.asList("Pay W", "Pay W"));
+        java.lang.reflect.Method elect = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer")
+                .getDeclaredMethod("evokeCostKey", mage.choices.Choice.class, java.util.List.class);
+        elect.setAccessible(true);
+        equal(true, elect.invoke(null, menu, queued), "evokeCostKey elects on XMage's Evoke menu");
+        equal(java.util.Arrays.asList("1", "Pay W", "Pay W"), queued, "evoke key queued ahead of the payment picks");
         JsonObject sc = JsonParser.parseString("{id:'xs:XP:emptiness:f0t0:s1',name:'Emptiness',card:'Emptiness',"
                 + "setup:{p0:{battlefield:['Plains','Plains','Plains','Plains'],hand:['Emptiness'],"
                 + "library_top:['Plains','Plains','Plains','Plains']},p1:{battlefield:['Phyrexian Walker']}},"

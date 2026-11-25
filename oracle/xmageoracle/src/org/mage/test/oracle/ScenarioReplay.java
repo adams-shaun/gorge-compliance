@@ -1477,10 +1477,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return electAlternativeKey(message, choices, "1");
         }
 
+        /** AlternativeSourceCostsImpl.getAlternativeCostText's prefix for
+         * EvokeAbility: "Cast with " + name + " alternative cost: ...". */
+        static final String EVOKE_COST_TEXT = "Cast with Evoke alternative cost";
+
         /** Elects the Evoke alternative cost (CR 702.74a) on XMage's
-         * alternative-cost key menu: the key whose text begins "Evoke"
-         * (EvokeAbility's getAlternativeCostText), not key 1, so a card that
-         * offers another alternative first still elects evoke. A menu with no
+         * alternative-cost key menu: the key whose text begins
+         * EVOKE_COST_TEXT (EvokeAbility's getAlternativeCostText), not key 1,
+         * so a card that offers another alternative first still elects evoke. A menu with no
          * Evoke entry is left to the strict-choose failure. Returns whether it
          * queued the election. */
         static boolean evokeCostKey(mage.choices.Choice choice, List<String> choices) {
@@ -1489,7 +1493,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             for (java.util.Map.Entry<String, String> e : choice.getKeyChoices().entrySet()) {
                 String text = e.getValue() == null ? "" : e.getValue().replaceAll("<[^<>]*>", "");
-                if (text.startsWith("Evoke")) {
+                if (text.startsWith(EVOKE_COST_TEXT)) {
                     return electAlternativeKey(choice.getMessage(), choices, e.getKey());
                 }
             }
