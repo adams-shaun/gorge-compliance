@@ -347,3 +347,20 @@ func TestFocusPlainCastTapsLands(t *testing.T) {
 		})
 	}
 }
+
+// holdPass over a priority intent that carries the bot's payment and announce
+// (the bot casting the focus card itself in main 1) is a plain pass: a leftover
+// Payment recorded a second pick next to the pass and lowered to nothing.
+func TestFocusHoldPassDropsBotPayment(t *testing.T) {
+	st := openState(Focus{Seat: 0, Card: "X", Kind: "ability"}, 7)
+	d := focusDecision(decision.KPriority, stubOpt{Kind: "pass"}, stubOpt{Kind: "cast", Obj: 7})
+	in := decision.Intent{
+		Choices:  []int{1},
+		Payment:  &decision.PaymentSelection{},
+		Announce: &decision.AnnounceSelection{},
+	}
+	out := st.holdPass(d, in)
+	if !slices.Equal(out.Choices, []int{0}) || out.Payment != nil || out.Announce != nil || out.Rest != nil {
+		t.Errorf("holdPass: %+v, want only the pass choice", out)
+	}
+}

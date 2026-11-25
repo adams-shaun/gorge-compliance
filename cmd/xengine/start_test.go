@@ -667,6 +667,8 @@ func TestStartAttackingTargetIsExercised(t *testing.T) {
 	for _, c := range []struct{ card, key string }{
 		{"Gravel Slinger", "f0/a0"},   // T: attacking or blocking creature; the Slinger stays home
 		{"Rubblehulk", "f0/a0"},       // bloodrush from hand
+		{"Wasteland Viper", "f0/a0"},  // bloodrush, a {G} cast the start pays: holdPass dropped no payment
+		{"Wrecking Ogre", "f0/a0"},    // bloodrush, a {3}{R}{R} cast the start pays
 		{"Unraveling Mummy", "f0/a0"}, // Zombie.attacking: a subtype head
 		{"Pitfall Trap", "cast"},      // Creature.attacking+withoutFlying
 	} {
