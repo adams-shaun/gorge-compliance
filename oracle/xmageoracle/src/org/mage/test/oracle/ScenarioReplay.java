@@ -3650,6 +3650,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             activeSeat = (TURN - 1) % 2;
             attackAdvancedTurn = false;
             resetOccurrences();
+            seedNaturalStepsBeforeStart(TURN);
             enterQueuedStep(TURN, MAIN, false);
             queueSetupChoices(sc);
             build(sc);
@@ -6959,6 +6960,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
         runtimeOccTurn = 0;
         runtimeStepCounts.clear();
         runtimeStepOccurrence.clear();
+    }
+
+    /** The replay starts in the scenario turn's main 1, but the game runs
+     * that turn's natural upkeep and draw before it: the runtime side counts
+     * them. Count them on the queued side too, so an additional upkeep or
+     * draw step after the start (CR 500.8) is occurrence 2 in both. The draw
+     * is counted only when it runs: a two-player game's starting player skips
+     * the draw step of turn 1 (TwoPlayerDuel's one-shot TurnMod), so there
+     * the runtime never sees a natural draw and an additional one is
+     * occurrence 1. A three-seat FreeForAll has no such skip. */
+    private void seedNaturalStepsBeforeStart(int turnNum) {
+        EnumMap<PhaseStep, Integer> counts = queuedOccurrences.computeIfAbsent(
+                turnNum, key -> new EnumMap<>(PhaseStep.class));
+        counts.put(PhaseStep.UPKEEP, 1);
+        if (!(seats == 2 && turnNum == 1)) {
+            counts.put(PhaseStep.DRAW, 1);
+        }
     }
 
     /** Record a position the queued replay enters. A pass that moved within
