@@ -59,3 +59,51 @@ func forests() []string {
 	}
 	return out
 }
+
+// TestAcceptedOptionalTriggerEmptySearchKeepsPair pins the negative: Hunting
+// Cheetah's trigger line carries OptionalDecider$ You, so gorge asks the
+// yes/no first. A "yes" with a search that finds nothing is not a decline of
+// the trigger; XMage consumes the yes and runs the search, so the generic
+// target_skip must stay.
+func TestAcceptedOptionalTriggerEmptySearchKeepsPair(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	sc := Scenario{
+		Name: "Hunting Cheetah accepted empty search",
+		Turn: 1,
+		Setup: map[string]Seat{
+			"p0": {Battlefield: []string{"Hunting Cheetah"}, LibraryTop: forests()},
+			"p1": {},
+		},
+		Steps: []Step{
+			{Op: "pass", Seat: 0}, {Op: "pass", Seat: 1}, {Op: "pass", Seat: 0}, {Op: "pass", Seat: 1},
+			{Op: "attack", Seat: 0, Attackers: []string{"p0:Hunting Cheetah"}, Defender: "p1"},
+			{Op: "pass", Seat: 0}, {Op: "pass", Seat: 1},
+			{Op: "pass", Seat: 0}, {Op: "pass", Seat: 1}, {Op: "pass", Seat: 0}, {Op: "resolve"},
+		},
+	}
+	raw, err := json.Marshal(sc)
+	if err != nil {
+		t.Fatal(err)
+	}
+	res, err := rules.RunOracleScenarioJSON(reg, raw)
+	if err != nil {
+		t.Fatalf("run scenario: %v", err)
+	}
+	var sawOptional, sawEmptySearch bool
+	for _, d := range res.Decisions {
+		if d.Kind == "yesno" && d.GorgeKind == "trigger_optional" {
+			sawOptional = true
+		}
+		if d.Kind == "choose_n" && d.Resume == "search" && len(d.Picks) == 0 {
+			sawEmptySearch = true
+		}
+		if optionalTriggerSearchDecline(reg, sc, res, d) {
+			t.Fatalf("decision %+v marked as an optional-trigger decline", d)
+		}
+	}
+	// Non-vacuous: the scenario really asked the yes/no, then an empty search.
+	if !sawOptional || !sawEmptySearch {
+		t.Fatalf("scenario lost its shape: trigger_optional=%v emptySearch=%v decisions=%+v",
+			sawOptional, sawEmptySearch, res.Decisions)
+	}
+}

@@ -20,16 +20,18 @@ import (
 //
 // The source is resolved by counterPickSource, the stack snapshot at the
 // decision's own step: the trigger on the stack names its printed index, and
-// the trigger's description must say "you may search". A look-at-the-top "up
+// the trigger's description must say "you may search" and neither the trigger
+// line nor any SA of its chain may carry OptionalDecider$ (else gorge asks a
+// trigger_optional yes/no first and a "yes" with an empty search is no decline
+// of the trigger: Hunting Cheetah). A look-at-the-top "up
 // to" pick (Zimone's Experiment) is not a library-search trigger and keeps the
 // measured pair.
 func optionalTriggerSearchDecline(reg *cards.Registry, sc Scenario, g rules.OracleResult, d rules.OracleDecision) bool {
 	if reg == nil || d.Step < 0 || len(d.Picks) != 0 || d.Min != 0 || d.Max < 1 || d.Kind != "choose_n" {
 		return false
 	}
-	switch d.Resume {
-	case "search", "hidden_pick", "choice", "":
-	default:
+	// Only the resume measured on Hexhaven Invigorator.
+	if d.Resume != "search" {
 		return false
 	}
 	obj, matched, onStack := counterPickSource(reg, sc, g, d, libraryChangeZoneNoDecider)
@@ -50,12 +52,24 @@ func optionalTriggerSearchDecline(reg *cards.Registry, sc Scenario, g rules.Orac
 			continue
 		}
 		tr := f.Triggers[idx]
+		// A trigger-level (or any chain-level) OptionalDecider$ means gorge
+		// asks the yes/no first; a "yes" followed by an empty search is not a
+		// decline of the whole trigger, so keep the generic pair.
+		if strings.TrimSpace(tr.Params["OptionalDecider"]) != "" ||
+			counterPickInChain(tr.Effect, saHasOptionalDecider) {
+			continue
+		}
 		if counterPickInChain(tr.Effect, libraryChangeZoneNoDecider) &&
 			strings.Contains(strings.ToLower(tr.Params["TriggerDescription"]), "you may search") {
 			return true
 		}
 	}
 	return false
+}
+
+// saHasOptionalDecider reports an SA carrying its own OptionalDecider$.
+func saHasOptionalDecider(sa *cards.SA) bool {
+	return strings.TrimSpace(sa.Params["OptionalDecider"]) != ""
 }
 
 // libraryChangeZoneNoDecider is a ChangeZone out of the library with no
