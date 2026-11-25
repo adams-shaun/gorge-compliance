@@ -92,7 +92,9 @@ GO_TEST_FLAGS ?= -p=2
 # Inferno Incarnate's leaves-the-battlefield "sacrifice a land" uses SacrificeControllerEffect (SacrificeEffect had no
 # target pointer, so nobody sacrificed; CR 603.10a). MoltenManInfernoIncarnateTest. Each test fails before and passes
 # after. Card behaviour change only for those cards, so the manifests are unchanged.
-XMAGE_REF  ?= 1b6d284d103ec532cf0f3d4c22477e03756ff613
+# 27b8bfe661: Necromaster Dragon: the mill now sits inside DoIfCostPaid, so declining the {2} mills nothing
+# (CR 608.2c). NecromasterDragonTest fails before and passes after. A Mage.Sets census found no other card.
+XMAGE_REF  ?= 27b8bfe66159db22002db3b7ae25f3f531b7ef8d
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
