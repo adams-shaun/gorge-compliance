@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02079e18-ac14-4255-95c4-741eb76c4799	f0/t0	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:albino-troll:f0t0:s1,f:xs:XP:albino-troll:f0t0:s1	-	-	-	baa6f696107c	-	2f32f65382c8	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 02090581-61aa-4348-ad57-451be8ee91c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ponder:cast:s1,f:xs:XP:ponder:cast:s1	-	-	-	8c0bd19283bb	-	c601c10f40cc	-	-	2026-11-24	xproof
 02095128-82cd-4531-b47e-471307746f81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02095128-82cd-4531-b47e-471307746f81	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+02095128-82cd-4531-b47e-471307746f81	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
 020963ef-24c0-48cc-8776-bc257df684bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 020963ef-24c0-48cc-8776-bc257df684bc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0209dc74-ac49-4deb-907a-e9fa49d27a0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 021d8596-782a-4cfd-8b70-ac5bb8a5aff1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:saltcrusted-steppe:land:s1,f:xs:XP:saltcrusted-steppe:land:s1	-	-	-	9ee19e8250ce	-	6fd57b586dd6	-	-	2026-11-24	xproof
 021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:saltcrusted-steppe:f0a1:s1,f:xs:XP:saltcrusted-steppe:f0a1:s1	-	-	-	d864b561c9cb	-	6fd57b586dd6	-	-	2026-11-24	xproof
-021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
 021e4165-2f02-4bd4-86ca-cb7bf4c9e23d	land	land	agreed	-	FX	start	2	0	x:xs:XP:saltcrusted-steppe:land:s1,f:xs:XP:saltcrusted-steppe:land:s1	-	-	-	9ee19e8250ce	-	6fd57b586dd6	-	-	2026-11-24	xproof
 0222414f-98b5-458a-a0fd-831a66cd8b07	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0222414f-98b5-458a-a0fd-831a66cd8b07	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:tainted-isle:f0a1:s1,f:xs:XP:tainted-isle:f0a1:s1	-	-	-	5b42d43d5d80	-	53a3c8bb637c	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02be0b99-d40b-4287-989b-12eb2701115c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02be0b99-d40b-4287-989b-12eb2701115c	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 02bff648-fbad-4d61-ab09-93993a5fda58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02bff648-fbad-4d61-ab09-93993a5fda58	f0/t0	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+02bff648-fbad-4d61-ab09-93993a5fda58	f0/t0	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
 02c08d0b-0d76-4533-a7e9-d40c7c4b3450	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02c08d0b-0d76-4533-a7e9-d40c7c4b3450	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:shoreline-salvager:f0t0:s1,f:xs:XP:shoreline-salvager:f0t0:s1	-	-	-	23c4009444b0	-	2b37dcc5de8a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 02c60b8b-f665-4279-a00f-ae03991df4a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
