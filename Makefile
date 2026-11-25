@@ -569,6 +569,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # scripts/forge-oracle-test-foretell-cast-mode.sh and forge-oracle-test-riot-choice.sh replay the finds. Driver-only;
 # die-roll code, cardsfolder and tokenscripts unchanged.
 # c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
+# 2b591baf9c = c9419dd87a + one driver commit: ScriptedController.chooseCardName(sa, faces, message) answers an empty face list with "" and a note
+# (ChooseFromDefinedCards$ Remembered with no nonland card revealed, Alhammarret, High Arbiter; ChooseCardNameAi returns "" and the effect names
+# nothing; gorge logs no decision) instead of a 'Missing card name answer' strict miss (xpt-e750d7a5). ChooseCardNameEmptyFacesTest fails before and
+# passes after. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
 # 0b7fde3680d = f1e3e00905c plus the zero-mode Charm driver fix (fork branch
 # fix/xp-forge-driver-zero-mode-charm): Bumi, King of Three Trials's ETB is
 # DB$ Charm | MinCharmNum$ 0 | CharmNum$ X with X = the Lesson cards in your
@@ -607,7 +611,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # ScriptedController and test files, so one pin carries every driver fix: the zero-mode charm answer and the transit-order
 # fallback. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork branch
 # fix/xp-forge-driver-zero-mode-charm (advanced with the transit-order pin).
-FORGE_ORACLE_REF ?= a1990dd5f833a8d908f93f5002416d8141fac444
+# eb695169f9 = 2b591baf9c (the empty face list above) merged with 0558bd00b88 (the transit zone order above), so one pin
+# carries both driver fixes: chooseCardName answers an empty face list with "" and orderCards keeps Forge's offered order
+# for an unpinned Graveyard/Battlefield transit. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork
+# branch fix/xp-forge-driver-name-empty-faces.
+# 141e1ff5403 = the clean merge of a1990dd5f833 (above: zero-mode Charm and the transit order) and eb695169f9 (above: the
+# empty-face chooseCardName and the transit order). The two touch separate ScriptedController methods (chooseModeForAbility
+# and StepMachine.hasMode vs chooseCardName) and separate test files, and both carry the same 0558bd00b88 transit-order
+# half, so one pin carries every driver fix: the zero-mode charm answer, the empty-face chooseCardName answer and the
+# transit-order fallback. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork branch
+# fix/xp-forge-driver-zero-mode-charm (advanced with the empty-face chooseCardName pin).
+FORGE_ORACLE_REF ?= 141e1ff540330df088e8732358fce270ec984184
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
