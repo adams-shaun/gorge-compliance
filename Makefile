@@ -452,7 +452,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 0..amount ask is unchanged. UnlessCostForcedPickTest (3 tests: both finds replayed, plus a 3-card hand that consumes gorge's logged
 # discard pick) fails without the change; the full driver suite (195 tests) is green on it. Driver-only: cardsfolder/tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-unless-cost-cards-forced.
-FORGE_ORACLE_REF ?= 528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c
+# 244c5908482 = 528c55d25b4 + cast_mode "mayplay": a cast from exile under a MayPlay static (Hurl Through Hell's "you may
+# cast that card") is the MayPlay-bound copy c.getAllPossibleAbilities offers with getMayPlay() set, not the card's own
+# hand-restricted spell, which SpellAbilityRestriction.checkZoneRestrictions refuses ("was not put on the stack", CR
+# 601.2a). spellForMode takes that copy for the mode, and spellFor does the same for any cast whose card is outside the
+# hand and not in the command zone; a basic copy is preferred as commandZoneSpell does, and Forge granting none is a loud
+# HarnessError. The command-zone pick now uses the same helper, so one selector covers every MayPlay cast.
+# scripts/forge-oracle-test-mayplay-cast.sh (make forge-driver-tests) replays the exported
+# xs:XP:hurl-through-hell:cast:s1 request and requires p1's Shield Sphere on the stack (controller p0) at step 7 with no
+# harness row. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-mayplay-cast.
+FORGE_ORACLE_REF ?= 244c590848288b35a4b6a0a2dd0da122a1f5dca9
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
