@@ -30,12 +30,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 431e85e3-15e6-471b-ba71-6058394c9a96	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:captain-storm-cosmium-raider:cast:s1,f:xs:XP:captain-storm-cosmium-raider:cast:s1	-	-	-	23b491658465	-	ec3bab976110	-	-	2026-11-24	xproof
 43257a85-2cbe-4931-9755-106808ab124a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43257a85-2cbe-4931-9755-106808ab124a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43257a85-2cbe-4931-9755-106808ab124a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+43257a85-2cbe-4931-9755-106808ab124a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 4325ae73-af43-4a7d-a552-9909f0dc77db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4325d4d2-5892-4c20-a994-7396b715e94f	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Transwarp Hub"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4325d4d2-5892-4c20-a994-7396b715e94f	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Transwarp Hub"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4327225e-140f-45a4-a56f-dcf472f6c062	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4327225e-140f-45a4-a56f-dcf472f6c062	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+4327225e-140f-45a4-a56f-dcf472f6c062	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 43296f8b-58d9-446e-a538-1c4921552c41	cast	cast	diverged	-	-	start	0	2	-	643c8a225299	-	-	23c4009444b0	-	94d8f1ee013a	-	-	2026-11-25	xproof
 43296f8b-58d9-446e-a538-1c4921552c41	f0/t0	ChangesZone	diverged	-	-	start	0	2	-	59cd63731b41	-	-	23c4009444b0	-	94d8f1ee013a	-	-	2026-11-25	xproof
 432b37a5-d32a-4b78-91ab-860aa026b7cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 438a0a7a-00bc-4d93-8e69-a8a6084523c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:littjara-glade-warden:cast:s1,f:xs:XP:littjara-glade-warden:cast:s1	-	-	-	d864b561c9cb	-	99cf8db969fa	-	-	2026-11-24	xproof
 438a0a7a-00bc-4d93-8e69-a8a6084523c5	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 438be2fa-5f8d-42ff-894a-671ba4221196	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-438be2fa-5f8d-42ff-894a-671ba4221196	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+438be2fa-5f8d-42ff-894a-671ba4221196	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 438ee544-78a2-4e32-9343-70838b60ac16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 439537ca-53c1-47cb-9174-5872c3c46288	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forerunner-of-the-legion:f0t0:s1,f:xs:XP:forerunner-of-the-legion:f0t0:s1	-	-	-	d864b561c9cb	-	34a940e9786a	-	-	2026-11-24	xproof
 439537ca-53c1-47cb-9174-5872c3c46288	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:forerunner-of-the-legion:f0t0:s1,f:xs:XP:forerunner-of-the-legion:f0t0:s1	-	-	-	d864b561c9cb	-	34a940e9786a	-	-	2026-11-24	xproof

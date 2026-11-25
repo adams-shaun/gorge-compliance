@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 61105cb5-d7a1-4021-a006-dd1b947dfa68	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 61178a6c-70b7-447d-87ee-a8d9369c3d15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6119fe8e-e7e2-4cc1-a44d-fe95a230db80	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6119fe8e-e7e2-4cc1-a44d-fe95a230db80	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+6119fe8e-e7e2-4cc1-a44d-fe95a230db80	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 611bfaa6-b098-48d9-9e49-1e7dc8687f15	cast	counter-spell	agreed	-	X	scen	1	0	Repulsive Mutation/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 611f1714-a8bb-4ce4-a810-4d26fe64e358	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-captain-of-eos:f0t0:s1,f:xs:XP:knight-captain-of-eos:f0t0:s1	-	-	-	8a1b1a193ec0	-	36b1c8ee3028	-	-	2026-11-24	xproof
 611f1714-a8bb-4ce4-a810-4d26fe64e358	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -80,8 +80,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 616c7f45-5295-4b8c-a828-ff3a5ba4d917	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 616cb1be-074a-46c2-b8f1-6b9f15b7bc23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arctic-aven:cast:s1,f:xs:XP:arctic-aven:cast:s1	-	-	-	d864b561c9cb	-	e14cb17cf626	-	-	2026-11-24	xproof
 616cb1be-074a-46c2-b8f1-6b9f15b7bc23	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:arctic-aven:cast:s1,f:xs:XP:arctic-aven:cast:s1	-	-	-	d864b561c9cb	-	e14cb17cf626	-	-	2026-11-24	xproof
-61703e94-cb57-44d8-b37b-7b14b3cfd86d	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
-61703e94-cb57-44d8-b37b-7b14b3cfd86d	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+61703e94-cb57-44d8-b37b-7b14b3cfd86d	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+61703e94-cb57-44d8-b37b-7b14b3cfd86d	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 6172e5b9-2a01-429c-a140-e9b22fbab56e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6172e5b9-2a01-429c-a140-e9b22fbab56e	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:faerie-noble:f0a0:s1,f:xs:XP:faerie-noble:f0a0:s1	-	-	-	ea3140b6974b	-	1f14cda25357	-	-	2026-11-24	xproof
 6175197f-cf3c-41df-9d24-b4fffa09631a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 250f8642-9754-48fd-8f09-70ed13d7a42c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 25143290-2dd5-4def-a857-a1db6d3ed2eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/t0	NULL	owed	refused:no-generator:trigger:Unattached	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/t0	NULL	owed	refused:no-generator:trigger:Unattached	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eardrum-rattler:cast:s1,f:xs:XP:eardrum-rattler:cast:s1	-	-	-	fb9d3088f0bf	-	bf3b5139ebd8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Eardrum Rattler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2516949d-75bb-4aea-a41d-0298bb129471	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slip-through-space:cast:s1,f:xs:XP:slip-through-space:cast:s1	-	-	-	d864b561c9cb	-	44a5c0e15e85	-	-	2026-11-24	xproof
@@ -92,7 +92,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25712827-626a-484d-bc52-f3bd6087857f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2572add6-c0b1-44bd-8713-1e94e3fe69d6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pestilence-demon:cast:s1,f:xs:XP:pestilence-demon:cast:s1	-	-	-	d864b561c9cb	-	0da8d154cf69	-	-	2026-11-24	xproof
 2572add6-c0b1-44bd-8713-1e94e3fe69d6	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:pestilence-demon:f0a0:s1,f:xs:XP:pestilence-demon:f0a0:s1	-	-	-	d864b561c9cb	-	0da8d154cf69	-	-	2026-11-24	xproof
-25756e33-25e5-4976-8cce-a39fa2c4b007	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+25756e33-25e5-4976-8cce-a39fa2c4b007	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 2577860a-663a-4b56-880c-05576522e3b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2577860a-663a-4b56-880c-05576522e3b7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:vaultbreaker:f0t0:s1,f:xs:XP:vaultbreaker:f0t0:s1	-	-	-	d864b561c9cb	-	2ac3c1786b3f	-	-	2026-11-24	xproof
 2577ef8e-d85e-47af-ac34-629f31992751	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-rift:f0t0:s1,f:xs:XP:aether-rift:f0t0:s1	-	-	-	3aa6ded33acb	-	1c83a0d29d1c	-	-	2026-11-25	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2586a59d-8501-4c22-9d69-f4bf91de7024	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:necra-sanctuary:f0t0:s1,f:xs:XP:necra-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	6b8b8b454070	-	-	2026-11-25	xproof
 25877c41-39a4-4cc3-ac4b-8f3dd06d579b	cast	cast-resolve	agreed	-	FX	scen	2	0	Exsanguinate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 25895c28-23c1-439e-858b-5cb31fdc31de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25895c28-23c1-439e-858b-5cb31fdc31de	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+25895c28-23c1-439e-858b-5cb31fdc31de	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 258a78cc-a9f3-459a-9837-93a9856f72db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blacklance-paragon:f0t0:s1,f:xs:XP:blacklance-paragon:f0t0:s1	-	-	-	ae86f6029288	-	75b0144c5160	-	-	2026-11-24	xproof
 258a78cc-a9f3-459a-9837-93a9856f72db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blacklance-paragon:f0t0:s1,f:xs:XP:blacklance-paragon:f0t0:s1	-	-	-	ae86f6029288	-	75b0144c5160	-	-	2026-11-24	xproof
 258e4da4-e7fd-4049-92df-e5433b9f0ce9	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	bacb0dd7de42	-	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25ecd09e-d8bf-4929-96e2-e5132ea4f718	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:data-professor-of-humanities:cast:s1,f:xs:XP:data-professor-of-humanities:cast:s1	-	-	-	8c0bd19283bb	-	d14c177995cb	-	-	2026-11-24	xproof
 25ecd09e-d8bf-4929-96e2-e5132ea4f718	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 25edeff3-7727-4b80-9459-2bb6b8587fb9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25f0527c-1340-4218-970f-9e4f84ef96e8	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+25f0527c-1340-4218-970f-9e4f84ef96e8	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 25fb0396-7355-4ff1-8ad3-d5a82adf6cc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25fb2a67-fd7f-4a06-bd59-118d82c86d6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25fc274f-d5af-4174-b8e8-c2e65bb4c13f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
