@@ -323,6 +323,7 @@ func forgeExportItem(reg *cards.Registry, it oraclegen.Item, forgeDriver bool) (
 func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision, forgeDriver bool) forgeRequest {
 	decisions = forgeDropNamedManaAbilityDecisions(reg, it, g, forgeDropDeclarationDecisions(it, decisions))
 	decisions = forgeExploreAsYesNo(decisions)
+	decisions = lower.CipherAsYesNo(decisions)
 	decisions = forgeUntapNoOps(g, decisions)
 	decisions = oraclegen.RetimeEntryTargets(it.Steps, g.Snapshots, decisions)
 	var graveyardEnds map[string][]string

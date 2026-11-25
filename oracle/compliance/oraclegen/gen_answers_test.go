@@ -242,6 +242,19 @@ func TestXAnswersQueueRoutingShapes(t *testing.T) {
 			want: []XAnswer{{0, "choice", "[choice_skip]"}},
 		},
 		{
+			// Cipher's encode (CR 702.99a) is one KModes decision in gorge; a
+			// decline is XMage's chooseUse "no" and no creature target.
+			name: "cipher decline: chooseUse no",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "mode", GorgeKind: "modes", Resume: "cipher", Options: 1, Min: 0, Max: 1, First: "Encode on Memnite", OptionRefs: []string{"p0:Memnite"}},
+			want: []XAnswer{{0, "choice", "no"}},
+		},
+		{
+			// An encode is chooseUse "yes" then the creature target.
+			name: "cipher encode: chooseUse yes then the creature",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "mode", GorgeKind: "modes", Resume: "cipher", Options: 1, Min: 0, Max: 1, Picks: []string{"Encode on Memnite"}, PickIdx: []int{0}, PickRefs: []string{"p0:Memnite"}, First: "Encode on Memnite", OptionRefs: []string{"p0:Memnite"}},
+			want: []XAnswer{{0, "choice", "yes"}, {0, "target", "Memnite"}},
+		},
+		{
 			// A mana ability's colour pick is a real choice dialog; XMage's
 			// Choice key is the colour NAME.
 			name: "mana colour: Add W maps to White",
