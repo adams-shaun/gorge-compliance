@@ -283,7 +283,7 @@ func unmet(reg *cards.Registry, f *StartFile, seat int, reqs []tgtReq) (*tgtReq,
 // target on the opponent's side certdeck's needs did not derive (Aether
 // Tradewinds' "permanent you don't control") is placed here, from certdeck's
 // opposing-target picks, so only a play no placement can serve is refused.
-func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, sa *cards.SA, card string, f *StartFile) (string, error) {
+func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face, sa *cards.SA, card string, f *StartFile) (string, error) {
 	fc := f.Focus
 	if fc == nil || fc.Seat == nil || (fc.Kind != "cast" && fc.Kind != "ability") {
 		return "", nil
@@ -293,6 +293,9 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, sa *cards.SA, ca
 		return "", nil
 	}
 	face := c.Faces[0]
+	if fc.Card == card && own != nil {
+		face = own // the key's own face: a back-face key's ability is not the front's
+	}
 	var choices [][]tgtReq
 	switch {
 	case fc.Kind == "ability" && fc.Card == card && sa != nil:
