@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06296d4d-a1b3-4e9a-a2fd-a0183bb892a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crowd-of-true-believers:cast:s1,f:xs:XP:crowd-of-true-believers:cast:s1	-	-	-	23c4009444b0	-	793c97dc444f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 06296d4d-a1b3-4e9a-a2fd-a0183bb892a1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Crowd of True Believers/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0629747e-8dd8-4150-95ee-9d860264ccb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0629747e-8dd8-4150-95ee-9d860264ccb0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0629747e-8dd8-4150-95ee-9d860264ccb0	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:generous-visitor:f0t0:s1,f:xs:XP:generous-visitor:f0t0:s1	-	-	-	6f84be0f34c0	-	910c69eb46a5	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 062c8e40-dea7-4df7-bcaa-f1d696fe61c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aetherjacket:cast:s1,f:xs:XP:aetherjacket:cast:s1	-	-	-	23c4009444b0	-	696d9401677a	-	-	2026-11-25	xproof
 062c8e40-dea7-4df7-bcaa-f1d696fe61c3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:aetherjacket:combat0.attack:s1,f:xs:XP:aetherjacket:combat0.attack:s1	-	-	-	23c4009444b0	-	696d9401677a	-	-	2026-11-25	xproof
 062c8e40-dea7-4df7-bcaa-f1d696fe61c3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aetherjacket:combat0.block:s1,f:xs:XP:aetherjacket:combat0.block:s1	-	-	-	23c4009444b0	-	696d9401677a	-	-	2026-11-25	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 068b370f-a358-4244-8050-6c81680c55c7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stocking the Pantry/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 068b370f-a358-4244-8050-6c81680c55c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stocking the Pantry/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 068b9586-53e3-4791-a26c-a6b38d038f66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-068b9586-53e3-4791-a26c-a6b38d038f66	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+068b9586-53e3-4791-a26c-a6b38d038f66	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 068b9586-53e3-4791-a26c-a6b38d038f66	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:dreadlight-monstrosity:f0t0:s1,f:xs:XP:dreadlight-monstrosity:f0t0:s1	-	-	-	6f84be0f34c0	-	783b5adab2d0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 068cbbe3-43c3-425e-80ec-d1ce5c02ea9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06905dfb-b2df-4849-8848-fd3c964aa8c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malamet-brawler:cast:s1,f:xs:XP:malamet-brawler:cast:s1	-	-	-	23b491658465	-	f5de13864b46	-	-	2026-11-24	xproof

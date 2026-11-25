@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0868ebbb-2fe9-4f53-9697-acad8cda5ec1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greed-s-gambit:cast:s1,f:xs:XP:greed-s-gambit:cast:s1	-	-	-	23b491658465	-	043fac89a1ad	-	-	2026-11-25	xproof
 0868ebbb-2fe9-4f53-9697-acad8cda5ec1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:greed-s-gambit:cast:s1,f:xs:XP:greed-s-gambit:cast:s1	-	-	-	23b491658465	-	043fac89a1ad	-	-	2026-11-25	xproof
 0868ebbb-2fe9-4f53-9697-acad8cda5ec1	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:greed-s-gambit:cast:s1,f:xs:XP:greed-s-gambit:cast:s1	-	-	-	23b491658465	-	043fac89a1ad	-	-	2026-11-25	xproof
-0868ebbb-2fe9-4f53-9697-acad8cda5ec1	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Greed's Gambit/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+0868ebbb-2fe9-4f53-9697-acad8cda5ec1	f0/t2	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:greed-s-gambit:f0t2:s1,f:xs:XP:greed-s-gambit:f0t2:s1	-	-	-	6f84be0f34c0	-	043fac89a1ad	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 086b2564-9114-4ba2-94fd-b490f98f38a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0870e9f8-9e02-4997-9554-41a4e8eec4cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ephara-s-radiance:cast:s1,f:xs:XP:ephara-s-radiance:cast:s1	-	-	-	d864b561c9cb	-	a7124d63d4b4	-	-	2026-11-24	xproof
 08740dda-0629-4b6f-bbcc-c8088105b5e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-sun:f0t0:s1,f:xs:XP:omen-of-the-sun:f0t0:s1	-	-	-	ae86f6029288	-	3ccfbf770e1f	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 08a0e845-9ef9-4de1-b9fe-4530357346ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:biblioplex-tomekeeper:f0t0:s1,f:xs:XP:biblioplex-tomekeeper:f0t0:s1	-	-	-	23c4009444b0	-	27d0c7b930fe	-	-	2026-11-25	xproof
 08a0e845-9ef9-4de1-b9fe-4530357346ca	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:biblioplex-tomekeeper:f0t0:s1,f:xs:XP:biblioplex-tomekeeper:f0t0:s1	-	-	-	23c4009444b0	-	27d0c7b930fe	-	-	2026-11-25	xproof
 08a40717-c272-42e6-adb1-0148614b1202	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-08a40717-c272-42e6-adb1-0148614b1202	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+08a40717-c272-42e6-adb1-0148614b1202	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedAll	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 08a40717-c272-42e6-adb1-0148614b1202	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 08adacab-96c3-4532-8ab3-0c8064fa4150	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08ae9f91-48c8-4721-a82d-063defc1b727	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

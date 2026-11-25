@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0baabe39-72ae-47bd-a095-cbf7eb8a6361	land	land	agreed	-	FX	start	2	0	x:xs:XP:ancient-ziggurat:land:s1,f:xs:XP:ancient-ziggurat:land:s1	-	-	-	8a1b1a193ec0	-	32d0cce09112	-	-	2026-11-24	xproof
 0baf75b3-cc02-47cc-873a-8d5f17da0ec9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0baf75b3-cc02-47cc-873a-8d5f17da0ec9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0baf75b3-cc02-47cc-873a-8d5f17da0ec9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0baf75b3-cc02-47cc-873a-8d5f17da0ec9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:implement-of-examination:f0t0:s1,f:xs:XP:implement-of-examination:f0t0:s1	-	-	-	6f84be0f34c0	-	f6cf3697cb74	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0bb1c704-47f1-4d0c-8158-cfcd0b5e4d06	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bb20c36-689f-4a7c-80b5-a12bda821847	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fabrication-foundry:cast:s1,f:xs:XP:fabrication-foundry:cast:s1	-	-	-	23b491658465	-	0ce0e5ddc04c	-	-	2026-11-24	xproof
 0bb20c36-689f-4a7c-80b5-a12bda821847	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:fabrication-foundry:f0a0:s1,f:xs:XP:fabrication-foundry:f0a0:s1	-	-	-	23b491658465	-	0ce0e5ddc04c	-	-	2026-11-24	xproof
@@ -155,9 +155,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0bb8500a-bc29-43f1-ab22-2b8adeb9c99d	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:thriving-rats:f0t1:s1,f:xs:XP:thriving-rats:f0t1:s1	-	-	-	d864b561c9cb	-	79a1588b9104	-	-	2026-11-24	xproof
 0bb860c5-41af-494e-9b0f-d05d6fa8255c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-pathcutter:cast:s1,f:xs:XP:elvish-pathcutter:cast:s1	-	-	-	fc71ca68c5ac	-	4cd74349f791	-	-	2026-11-24	xproof
 0bb860c5-41af-494e-9b0f-d05d6fa8255c	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:elvish-pathcutter:f0a0:s1,f:xs:XP:elvish-pathcutter:f0a0:s1	-	-	-	fc71ca68c5ac	-	4cd74349f791	-	-	2026-11-24	xproof
-0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:hall-of-oracles:f0a1:s1,f:xs:XP:hall-of-oracles:f0a1:s1	-	-	-	23b491658465	-	cfb15ca03292	-	-	2026-11-25	xproof
-0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:hall-of-oracles:f0a1:s1,f:xs:XP:hall-of-oracles:f0a1:s1	-	-	-	6f84be0f34c0	-	cfb15ca03292	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:hall-of-oracles:f0a1:s1,f:xs:XP:hall-of-oracles:f0a1:s1	-	-	-	6f84be0f34c0	-	cfb15ca03292	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0bb896ba-e15e-43a9-9120-e674d7ba003c	land	land	agreed	-	FX	start	2	0	x:xs:XP:hall-of-oracles:land:s1,f:xs:XP:hall-of-oracles:land:s1	-	-	-	d864b561c9cb	-	cfb15ca03292	-	-	2026-11-24	xproof
 0bbab99f-2ff6-4d48-b7c1-1ab0500c9422	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bbcb563-09b3-499d-a9cc-3a6d7501dd81	cast	cast-resolve	agreed	-	X	scen	1	0	Collected Company/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -170,9 +170,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0bbd6cad-9b6f-45a6-9f2e-d7b4853586ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bbd6cad-9b6f-45a6-9f2e-d7b4853586ae	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0bbd6cad-9b6f-45a6-9f2e-d7b4853586ae	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-0bbd6cad-9b6f-45a6-9f2e-d7b4853586ae	f0/t2	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0bbd6cad-9b6f-45a6-9f2e-d7b4853586ae	f0/t2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0bbd6cad-9b6f-45a6-9f2e-d7b4853586ae	f1/t0	NULL	owed	refused:no-generator:face:back-etb	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-0bbd6cad-9b6f-45a6-9f2e-d7b4853586ae	f1/t1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0bbd6cad-9b6f-45a6-9f2e-d7b4853586ae	f1/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0bbd6cad-9b6f-45a6-9f2e-d7b4853586ae	f1/t2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0bbeb0ee-647b-43d3-91b3-6869d5ccb8b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bbeb0ee-647b-43d3-91b3-6869d5ccb8b8	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

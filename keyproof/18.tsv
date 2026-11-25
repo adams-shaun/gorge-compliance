@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 180919a5-67b2-473a-9b90-a828bdc2477c	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 180ba940-2b11-4953-b7ce-74847e1aebfd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:assemble-the-players:cast:s1,f:xs:XP:assemble-the-players:cast:s1	-	-	-	23b491658465	-	e49728272835	-	-	2026-11-25	xproof
 180ba940-2b11-4953-b7ce-74847e1aebfd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Assemble the Players/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-180ba940-2b11-4953-b7ce-74847e1aebfd	static#0.1	static#0.1	agreed	-	X	scen	1	0	Assemble the Players/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+180ba940-2b11-4953-b7ce-74847e1aebfd	static#0.1	static.continuous	diverged	-	-	start	0	2	-	51a6a89cd873	-	-	6f84be0f34c0	-	e49728272835	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 180d9c48-6d6c-4d20-965a-0ee2ad57f99b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180d9c48-6d6c-4d20-965a-0ee2ad57f99b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hedron-scrabbler:f0t0:s1,f:xs:XP:hedron-scrabbler:f0t0:s1	-	-	-	23c4009444b0	-	6c0b60e36c45	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 180e1a7e-890d-477c-80a5-da8a5f2857b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18290c4b-cff6-4ee5-a487-fe0d5706d3de	land	land	agreed	-	FX	start	2	0	x:xs:XP:urban-retreat:land:s1,f:xs:XP:urban-retreat:land:s1	-	-	-	23c4009444b0	-	f57a77ade3a3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1829f1dc-1fa9-4361-b318-d4dee280e6fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1829f1dc-1fa9-4361-b318-d4dee280e6fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1829f1dc-1fa9-4361-b318-d4dee280e6fd	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1829f1dc-1fa9-4361-b318-d4dee280e6fd	f0/t0	ChangesZoneAll	agreed	-	FX	start	2	0	x:xs:XP:anje-maid-of-dishonor:f0t0:s1,f:xs:XP:anje-maid-of-dishonor:f0t0:s1	-	-	-	6f84be0f34c0	-	6da9b6071f96	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 182c9af9-d867-4848-ab36-ac7b1914f41a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-emissary:cast:s1,f:xs:XP:heliod-s-emissary:cast:s1	-	-	-	d864b561c9cb	-	458c52057b4e	-	-	2026-11-24	xproof
 182c9af9-d867-4848-ab36-ac7b1914f41a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:heliod-s-emissary:f0t0:s1,f:xs:XP:heliod-s-emissary:f0t0:s1	-	-	-	d864b561c9cb	-	458c52057b4e	-	-	2026-11-24	xproof
 182d38b4-48bb-4050-a19a-c0a6bb241bbd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:root-elemental:cast:s1,f:xs:XP:root-elemental:cast:s1	-	-	-	8c0bd19283bb	-	3acc51499661	-	-	2026-11-24	xproof

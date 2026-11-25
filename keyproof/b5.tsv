@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 b500c460-2814-47a4-b307-17ca519f3565	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gallant-cavalry:f0t0:s1,f:xs:XP:gallant-cavalry:f0t0:s1	-	-	-	d864b561c9cb	-	32b350470320	-	-	2026-11-24	xproof
 b500c460-2814-47a4-b307-17ca519f3565	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gallant-cavalry:f0t0:s1,f:xs:XP:gallant-cavalry:f0t0:s1	-	-	-	d864b561c9cb	-	32b350470320	-	-	2026-11-24	xproof
 b501128b-2797-401b-8aec-923050081cae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b501128b-2797-401b-8aec-923050081cae	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b501128b-2797-401b-8aec-923050081cae	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:etherium-spinner:f0t0:s1,f:xs:XP:etherium-spinner:f0t0:s1	-	-	-	6f84be0f34c0	-	89fc553c874e	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 b5027d79-83e9-437a-baae-03cc3a13a608	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5027d79-83e9-437a-baae-03cc3a13a608	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:stormbound-geist:f0t0:s1,f:xs:XP:stormbound-geist:f0t0:s1	-	-	-	3aa6ded33acb	-	52c65a12223d	-	-	2026-11-25	xproof
 b5029f21-e0d6-4f22-9afd-79452de26490	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mai-jaded-edge:cast:s1,f:xs:XP:mai-jaded-edge:cast:s1	-	-	-	23c4009444b0	-	e18fb233a3ce	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -67,7 +67,7 @@ b5483037-5dd2-4282-a201-de2e08aaa76e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b548578c-4910-402c-8e78-498924e0a9be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:consumed-by-greed:cast:s1,f:xs:XP:consumed-by-greed:cast:s1	-	-	-	3aa6ded33acb	-	46c9c3d694f6	-	-	2026-11-25	xproof
 b550a94d-3a92-416e-b651-510cdbdd05f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b550a94d-3a92-416e-b651-510cdbdd05f1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b550a94d-3a92-416e-b651-510cdbdd05f1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+b550a94d-3a92-416e-b651-510cdbdd05f1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:retributive-wand:f0t0:s1,f:xs:XP:retributive-wand:f0t0:s1	-	-	-	6f84be0f34c0	-	17bb1c8e0653	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 b5516bc9-ec8d-4323-8748-96c49d7d0622	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadly-tempest:cast:s1,f:xs:XP:deadly-tempest:cast:s1	-	-	-	8c0bd19283bb	-	ea97ad199972	-	-	2026-11-24	xproof
 b558541f-ae57-41f7-a5bd-e23fa35e68b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b558541f-ae57-41f7-a5bd-e23fa35e68b4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,9 +170,9 @@ b5ba8155-520b-4053-be31-2744b77fb862	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs
 b5ba87f5-3589-4a8b-ad65-2ae2523e98e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thornweald-archer:cast:s1,f:xs:XP:thornweald-archer:cast:s1	-	-	-	23b491658465	-	b14488a3ff3d	-	-	2026-11-24	xproof
 b5ba87f5-3589-4a8b-ad65-2ae2523e98e8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:thornweald-archer:combat0.attack:s1,f:xs:XP:thornweald-archer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	b14488a3ff3d	-	-	2026-11-25	xproof
 b5ba87f5-3589-4a8b-ad65-2ae2523e98e8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:thornweald-archer:combat0.block:s1,f:xs:XP:thornweald-archer:combat0.block:s1	-	-	-	3aa6ded33acb	-	b14488a3ff3d	-	-	2026-11-25	xproof
-b5bc4adf-9105-4901-989c-63612314af5c	cast	cast-resolve	agreed	-	FX	scen	2	0	Evershrike's Gift/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+b5bc4adf-9105-4901-989c-63612314af5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:evershrike-s-gift:static0.0:s1,f:xs:XP:evershrike-s-gift:static0.0:s1	-	-	-	6f84be0f34c0	-	1761385293e7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 b5bc4adf-9105-4901-989c-63612314af5c	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Evershrike's Gift/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b5bc4adf-9105-4901-989c-63612314af5c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Evershrike's Gift/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+b5bc4adf-9105-4901-989c-63612314af5c	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:evershrike-s-gift:static0.0:s1,f:xs:XP:evershrike-s-gift:static0.0:s1	-	-	-	6f84be0f34c0	-	1761385293e7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 b5c03abf-4297-4402-9107-539e92d41f2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valiant-knight:cast:s1,f:xs:XP:valiant-knight:cast:s1	-	-	-	d864b561c9cb	-	32f2e197ed21	-	-	2026-11-24	xproof
 b5c03abf-4297-4402-9107-539e92d41f2f	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:valiant-knight:f0a0:s1,f:xs:XP:valiant-knight:f0a0:s1	-	-	-	d864b561c9cb	-	32f2e197ed21	-	-	2026-11-24	xproof
 b5c64331-2ba5-43ad-b77c-979875cc39e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goobbue-gardener:cast:s1,f:xs:XP:goobbue-gardener:cast:s1	-	-	-	23c4009444b0	-	3d30d52f3d8c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

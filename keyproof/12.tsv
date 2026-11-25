@@ -7,7 +7,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 120446cc-f55b-40db-915d-2669c1083e56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12080ea9-0800-4601-b553-6711dd9f9806	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12080ea9-0800-4601-b553-6711dd9f9806	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12080ea9-0800-4601-b553-6711dd9f9806	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+12080ea9-0800-4601-b553-6711dd9f9806	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:horizon-spellbomb:f0t0:s1,f:xs:XP:horizon-spellbomb:f0t0:s1	-	-	-	6f84be0f34c0	-	1797a269bd57	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1208cb6e-34b4-4a23-9a5b-a01229113e38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1208cb6e-34b4-4a23-9a5b-a01229113e38	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 120a0bcd-eca2-44eb-ad8d-5e4077f7e21c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 126bf98a-64d0-4de2-9bf4-f59d36ef6e25	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valakut-fireboar:cast:s1,f:xs:XP:valakut-fireboar:cast:s1	-	-	-	d864b561c9cb	-	0d9f9e208a6e	-	-	2026-11-24	xproof
 126bf98a-64d0-4de2-9bf4-f59d36ef6e25	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:valakut-fireboar:f0t0:s1,f:xs:XP:valakut-fireboar:f0t0:s1	-	-	-	d864b561c9cb	-	0d9f9e208a6e	-	-	2026-11-24	xproof
 126c75c0-414b-4e55-8747-2b5566ce716f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firdoch-core:cast:s1,f:xs:XP:firdoch-core:cast:s1	-	-	-	23c4009444b0	-	346ee0ebcd29	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-126c75c0-414b-4e55-8747-2b5566ce716f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Firdoch Core/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+126c75c0-414b-4e55-8747-2b5566ce716f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:firdoch-core:f0a0:s1,f:xs:XP:firdoch-core:f0a0:s1	-	-	-	6f84be0f34c0	-	346ee0ebcd29	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 126c75c0-414b-4e55-8747-2b5566ce716f	f0/a1	activate#0.1	diagnosed	-	-	scen	0	0	-	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 126e9140-2c05-4c00-8b01-5653456c736a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 126e9140-2c05-4c00-8b01-5653456c736a	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

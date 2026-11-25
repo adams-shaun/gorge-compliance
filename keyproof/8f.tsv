@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8fb44b03-017f-4cf3-a79b-8f6cc33570ca	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fb48d65-406b-4231-83ea-9cf3bb8dff76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fb48d65-406b-4231-83ea-9cf3bb8dff76	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8fb48d65-406b-4231-83ea-9cf3bb8dff76	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8fb48d65-406b-4231-83ea-9cf3bb8dff76	f0/t0	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:ravenous-squirrel:f0t0:s1,f:xs:XP:ravenous-squirrel:f0t0:s1	-	-	-	6f84be0f34c0	-	3f573c96416d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8fb599a7-2c61-446b-a7a7-cd5367f9b796	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8fb7ad08-9bb2-49f1-8ed0-8cc8abca4fe0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:peer-past-the-veil:cast:s1,f:xs:XP:peer-past-the-veil:cast:s1	-	-	-	23c4009444b0	-	560858c862aa	-	-	2026-11-25	xproof
 8fb9ff2d-1e90-4a26-8397-bb981fda2f7b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:breya-s-apprentice:f0t0:s1,f:xs:XP:breya-s-apprentice:f0t0:s1	-	-	-	d864b561c9cb	-	a30a6983f35b	-	-	2026-11-24	xproof
@@ -185,8 +185,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8fe1e619-f827-43f5-acaf-3b79aa671d1d	f0/t0	Discarded	agreed	-	FX	start	2	0	x:xs:XP:grisly-survivor:f0t0:s1,f:xs:XP:grisly-survivor:f0t0:s1	-	-	-	4b8018a80bf0	-	9f2002001414	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8fe257e5-b54a-4e56-8040-d2eaa0bb0a6a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enlightened-ascetic:f0t0:s1,f:xs:XP:enlightened-ascetic:f0t0:s1	-	-	-	d864b561c9cb	-	44cefb78d62c	-	-	2026-11-24	xproof
 8fe257e5-b54a-4e56-8040-d2eaa0bb0a6a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enlightened-ascetic:f0t0:s1,f:xs:XP:enlightened-ascetic:f0t0:s1	-	-	-	d864b561c9cb	-	44cefb78d62c	-	-	2026-11-24	xproof
-8fe6e954-f19b-4d11-83d3-74c634d51bad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8fe6e954-f19b-4d11-83d3-74c634d51bad	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8fe6e954-f19b-4d11-83d3-74c634d51bad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:briarbridge-tracker:f0t0:s1,f:xs:XP:briarbridge-tracker:f0t0:s1	-	-	-	6f84be0f34c0	-	dec3669eb787	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+8fe6e954-f19b-4d11-83d3-74c634d51bad	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:briarbridge-tracker:f0t0:s1,f:xs:XP:briarbridge-tracker:f0t0:s1	-	-	-	6f84be0f34c0	-	dec3669eb787	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8fea91ee-5849-4c46-8198-fd383d9a55e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arachnus-spinner:cast:s1,f:xs:XP:arachnus-spinner:cast:s1	-	-	-	d864b561c9cb	-	f27ab823ec42	-	-	2026-11-24	xproof
 8fea91ee-5849-4c46-8198-fd383d9a55e8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:arachnus-spinner:cast:s1,f:xs:XP:arachnus-spinner:cast:s1	-	-	-	d864b561c9cb	-	f27ab823ec42	-	-	2026-11-24	xproof
 8feb7149-a4dc-491a-a0b4-d2e8b85a97ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

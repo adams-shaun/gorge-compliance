@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6615f881-960c-4216-a32a-63856bc3afd0	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Ancient One/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6615f881-960c-4216-a32a-63856bc3afd0	static#0.1	static#0.1	agreed	-	X	scen	1	0	The Ancient One/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 661618a2-54c7-4136-beff-fff5ff7d84cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-661618a2-54c7-4136-beff-fff5ff7d84cb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+661618a2-54c7-4136-beff-fff5ff7d84cb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 661736eb-97d7-4b3c-ab18-708479a5fb29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 661a99ef-8d5b-4aac-98f6-52b17a8ecf52	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 661a99ef-8d5b-4aac-98f6-52b17a8ecf52	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:turntimber-basilisk:f0t0:s1,f:xs:XP:turntimber-basilisk:f0t0:s1	-	-	-	23c4009444b0	-	30b4f09fe5c6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6629a48b-be9a-4636-8add-69d096a1ca7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6629a48b-be9a-4636-8add-69d096a1ca7e	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:double-vision:f0t0:s1,f:xs:XP:double-vision:f0t0:s1	-	-	-	6f84be0f34c0	-	2b4d0313dcc4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6629e5f3-ac59-48f8-b09c-3b98f59b9922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6629e5f3-ac59-48f8-b09c-3b98f59b9922	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6629e5f3-ac59-48f8-b09c-3b98f59b9922	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 662a2158-4176-4b4a-be6a-13f4501d22f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 663d9559-6619-46fe-8ff4-655f1d5e0e4c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valgavoth-s-onslaught:cast:s1,f:xs:XP:valgavoth-s-onslaught:cast:s1	-	-	-	23c4009444b0	-	cda4445d7a27	-	-	2026-11-25	xproof
 663e120a-a74f-47fb-aa0a-9d1a75db626e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:de-evolve:f0t0:s1,f:xs:XP:de-evolve:f0t0:s1	-	-	-	23c4009444b0	-	720f5490760c	-	-	2026-11-25	xproof

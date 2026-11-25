@@ -86,13 +86,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e60a641-1f2d-45ff-b3f2-d389be938b22	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:lumbering-worldwagon:f0a0:s1,f:xs:XP:lumbering-worldwagon:f0a0:s1	-	-	-	23c4009444b0	-	46955d0df812	-	-	2026-11-25	xproof
 7e60a641-1f2d-45ff-b3f2-d389be938b22	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lumbering-worldwagon:f0t0:s1,f:xs:XP:lumbering-worldwagon:f0t0:s1	-	-	-	267e485f6204	-	46955d0df812	-	-	2026-11-24	xproof
 7e60a641-1f2d-45ff-b3f2-d389be938b22	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:lumbering-worldwagon:f0a0:s1,f:xs:XP:lumbering-worldwagon:f0a0:s1	-	-	-	23c4009444b0	-	46955d0df812	-	-	2026-11-25	xproof
-7e60a641-1f2d-45ff-b3f2-d389be938b22	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lumbering Worldwagon/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7e60a641-1f2d-45ff-b3f2-d389be938b22	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:lumbering-worldwagon:static0.0:s1,f:xs:XP:lumbering-worldwagon:static0.0:s1	-	-	-	6f84be0f34c0	-	46955d0df812	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7e6478c1-e5b3-4641-baa7-7cdeab042569	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:selvala-s-charge:cast:s1,f:xs:XP:selvala-s-charge:cast:s1	-	-	-	8c0bd19283bb	-	1ddcafaea373	-	-	2026-11-24	xproof
 7e64b1dc-a238-4bff-98ff-2bea44340568	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-mistmoors:f0t0:s2,f:xs:XP:overlord-of-the-mistmoors:f0t0:s2	-	-	-	e07cf3a05ba5	-	6796ce2ff7a9	-	-	2026-11-24	xproof
 7e64b1dc-a238-4bff-98ff-2bea44340568	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-mistmoors:f0t0:s2,f:xs:XP:overlord-of-the-mistmoors:f0t0:s2	-	-	-	e07cf3a05ba5	-	6796ce2ff7a9	-	-	2026-11-24	xproof
 7e64b1dc-a238-4bff-98ff-2bea44340568	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:overlord-of-the-mistmoors:f0t1:s1,f:xs:XP:overlord-of-the-mistmoors:f0t1:s1	-	-	-	23c4009444b0	-	6796ce2ff7a9	-	-	2026-11-25	xproof
-7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chatterstorm:f0t0:s1,f:xs:XP:chatterstorm:f0t0:s1	-	-	-	6f84be0f34c0	-	fe4f69fe657f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+7e6c7b57-bd6a-4ac8-bcab-c3a879f479c2	f0/t0	SpellCast/Storm	agreed	-	FX	start	2	0	x:xs:XP:chatterstorm:f0t0:s1,f:xs:XP:chatterstorm:f0t0:s1	-	-	-	6f84be0f34c0	-	fe4f69fe657f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7e6cfec7-3b54-43db-853a-27c164776a5f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savannah-sage:f0t0:s1,f:xs:XP:savannah-sage:f0t0:s1	-	-	-	d864b561c9cb	-	c63ad8ffe7f4	-	-	2026-11-24	xproof
 7e6cfec7-3b54-43db-853a-27c164776a5f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:savannah-sage:f0t0:s1,f:xs:XP:savannah-sage:f0t0:s1	-	-	-	d864b561c9cb	-	c63ad8ffe7f4	-	-	2026-11-24	xproof
 7e6e2c37-3a06-456a-ae0f-37b7dc1a3e2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

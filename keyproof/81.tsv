@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8109aeff-1ba7-46c2-89ab-450d6ff99c28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 810a6cf5-e9f4-48e1-8e06-3e0af85633ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:day-s-undoing:cast:s1,f:xs:XP:day-s-undoing:cast:s1	-	-	-	d864b561c9cb	-	6f879e815042	-	-	2026-11-24	xproof
 8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dread-slaver:f0t0:s1,f:xs:XP:dread-slaver:f0t0:s1	-	-	-	6f84be0f34c0	-	36443220c3da	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8110f15d-82db-4299-a959-09c22475daec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:cast:s1,f:xs:XP:kayla-s-music-box:cast:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
 8110f15d-82db-4299-a959-09c22475daec	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:f0a0:s1,f:xs:XP:kayla-s-music-box:f0a0:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
 8110f15d-82db-4299-a959-09c22475daec	f0/a1	Effect	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:f0a1:s1,f:xs:XP:kayla-s-music-box:f0a1:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8134f3fd-197a-4b44-a370-311cc955dea3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ainok-wayfarer:cast:s1,f:xs:XP:ainok-wayfarer:cast:s1	-	-	-	23c4009444b0	-	418a78ceb177	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8138a9d7-63cb-4d40-ac9e-1a9b10766113	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 813c0654-7e3b-435b-b7a5-148f0c36a4be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-813c0654-7e3b-435b-b7a5-148f0c36a4be	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+813c0654-7e3b-435b-b7a5-148f0c36a4be	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:soulknife-spy:f0t0:s1,f:xs:XP:soulknife-spy:f0t0:s1	-	-	-	6f84be0f34c0	-	9f4b3087b062	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 813c19f5-3580-488d-9eee-c7a563def532	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 813c19f5-3580-488d-9eee-c7a563def532	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 813c19f5-3580-488d-9eee-c7a563def532	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:gideon-blackblade:f0a1:s1,f:xs:XP:gideon-blackblade:f0a1:s1	-	-	-	336eab778104	-	7df879d2c120	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8170ddd6-c054-4851-bdc2-4d319b60ba41	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cynette-jelly-drover:f0t0:s1,f:xs:XP:cynette-jelly-drover:f0t0:s1	-	-	-	8c0bd19283bb	-	543b1a27943e	-	-	2026-11-24	xproof
 8170ddd6-c054-4851-bdc2-4d319b60ba41	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cynette-jelly-drover:f0t1:s1,f:xs:XP:cynette-jelly-drover:f0t1:s1	-	-	-	8c0bd19283bb	-	543b1a27943e	-	-	2026-11-24	xproof
 81713b4d-85df-4b2c-9673-4f5162590149	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81713b4d-85df-4b2c-9673-4f5162590149	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+81713b4d-85df-4b2c-9673-4f5162590149	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:duelcraft-trainer:f0t0:s1,f:xs:XP:duelcraft-trainer:f0t0:s1	-	-	-	6f84be0f34c0	-	5e10aea1909f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 81728b98-8cf9-4734-a318-69184bb4d15c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arrest:cast:s1,f:xs:XP:arrest:cast:s1	-	-	-	25696bf19d5b	-	dedcbcc799f2	-	-	2026-11-24	xproof
 8173e160-9a22-43f7-90d1-9ada043bc1b7	cast	cast-resolve	agreed	-	FX	scen	2	0	Grub's Command/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 817464d8-1e2d-4e12-96f8-5c7ec9b3e681	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:thundering-broodwagon:f0t0:s1,f:xs:XP:thundering-broodwagon:f0t0:s1	-	-	-	267e485f6204	-	6d4a06ada76a	-	-	2026-11-24	xproof

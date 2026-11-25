@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 143714b8-30ae-42c2-84d9-e58aed7dff5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 143714b8-30ae-42c2-84d9-e58aed7dff5b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 143714b8-30ae-42c2-84d9-e58aed7dff5b	f0/a1	Dig	agreed	-	FX	start	2	0	x:xs:XP:geistflame-reservoir:f0a1:s1,f:xs:XP:geistflame-reservoir:f0a1:s1	-	-	-	d864b561c9cb	-	ac061378840e	-	-	2026-11-24	xproof
-143714b8-30ae-42c2-84d9-e58aed7dff5b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+143714b8-30ae-42c2-84d9-e58aed7dff5b	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:geistflame-reservoir:f0t0:s1,f:xs:XP:geistflame-reservoir:f0t0:s1	-	-	-	6f84be0f34c0	-	ac061378840e	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 143a269a-b9ee-48ba-bd7b-4aa46eb36778	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 143d3fcf-2152-4911-b95a-d23b91662f33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hapatra-s-mark:cast:s1,f:xs:XP:hapatra-s-mark:cast:s1	-	-	-	d864b561c9cb	-	69415440b6f3	-	-	2026-11-24	xproof
 143d7a32-c15d-4a1f-ad81-cf1e6aa92bf3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14d5ed90-0aa7-48f0-9017-83912b9e89d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geistwave:cast:s1,f:xs:XP:geistwave:cast:s1	-	-	-	6f84be0f34c0	-	f60b277e0734	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14d5fdb3-14a3-461d-8515-a520c2c9e666	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d5fdb3-14a3-461d-8515-a520c2c9e666	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:fleshtaker:f0a0:s1,f:xs:XP:fleshtaker:f0a0:s1	-	-	-	6f84be0f34c0	-	dec47fdcb45c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-14d5fdb3-14a3-461d-8515-a520c2c9e666	f0/t0	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:fleshtaker:f0a0:s1,f:xs:XP:fleshtaker:f0a0:s1	-	-	-	6f84be0f34c0	-	dec47fdcb45c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+14d5fdb3-14a3-461d-8515-a520c2c9e666	f0/t0	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:fleshtaker:f0t0:s1,f:xs:XP:fleshtaker:f0t0:s1	-	-	-	6f84be0f34c0	-	dec47fdcb45c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14d71432-c2e6-4c81-92ef-cf98e1fcf5f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d71432-c2e6-4c81-92ef-cf98e1fcf5f8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d71432-c2e6-4c81-92ef-cf98e1fcf5f8	f0/a1	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

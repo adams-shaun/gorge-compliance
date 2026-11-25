@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3dc73517-0767-46ae-bc8d-ee378237a509	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rooftop-percher:f0t0:s2,f:xs:XP:rooftop-percher:f0t0:s2	-	-	-	267e485f6204	-	635c9e9e63f0	-	-	2026-11-24	xproof
 3dc8d15a-3ca7-4d1f-a819-c1b7f947a59e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:threaten:cast:s1,f:xs:XP:threaten:cast:s1	-	-	-	3aa6ded33acb	-	60d122f6ded9	-	-	2026-11-25	xproof
 3dcbbbeb-4efe-4363-bfb4-b7d7f803bafa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3dcbbbeb-4efe-4363-bfb4-b7d7f803bafa	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3dcbbbeb-4efe-4363-bfb4-b7d7f803bafa	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:glorious-enforcer:f0t0:s1,f:xs:XP:glorious-enforcer:f0t0:s1	-	-	-	6f84be0f34c0	-	619b7bcb4c43	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3dcc35f3-74dc-46a8-8aa9-3411189f0547	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:charismatic-conqueror:cast:s1,f:xs:XP:charismatic-conqueror:cast:s1	-	-	-	8c0bd19283bb	-	c613f4205cff	-	-	2026-11-24	xproof
 3dcc35f3-74dc-46a8-8aa9-3411189f0547	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3dce6c6c-599f-4e35-ae15-728c5e78dee1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -193,7 +193,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ddd58a3-85f6-40ba-812f-057c0c4417a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3de0e14f-c917-4c00-8341-1170ac9b3cbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3de0e14f-c917-4c00-8341-1170ac9b3cbc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3de0e14f-c917-4c00-8341-1170ac9b3cbc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3de0e14f-c917-4c00-8341-1170ac9b3cbc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:origin-spellbomb:f0t0:s1,f:xs:XP:origin-spellbomb:f0t0:s1	-	-	-	6f84be0f34c0	-	638bb57d4008	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3debd5c7-da3c-4130-8ed9-e156e10034b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arnyn-deathbloom-botanist:cast:s1,f:xs:XP:arnyn-deathbloom-botanist:cast:s1	-	-	-	23c4009444b0	-	e8de9dbe8a21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3debd5c7-da3c-4130-8ed9-e156e10034b6	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:arnyn-deathbloom-botanist:combat0.attack:s1,f:xs:XP:arnyn-deathbloom-botanist:combat0.attack:s1	-	-	-	23c4009444b0	-	e8de9dbe8a21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3debd5c7-da3c-4130-8ed9-e156e10034b6	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:arnyn-deathbloom-botanist:combat0.block:s1,f:xs:XP:arnyn-deathbloom-botanist:combat0.block:s1	-	-	-	23c4009444b0	-	e8de9dbe8a21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

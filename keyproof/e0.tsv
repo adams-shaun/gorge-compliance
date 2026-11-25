@@ -15,7 +15,7 @@ e01382e0-a685-41c4-9ab6-727ffdbf2e0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e0142e7d-7b0b-4290-a56c-5fa950fdccf8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:loot-the-anomaly:cast:s1	-	-	-	4b8018a80bf0	-	8032bb299de2	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e0142e7d-7b0b-4290-a56c-5fa950fdccf8	f0/a0	Pump	agreed	-	F	start	2	0	f:xs:XP:loot-the-anomaly:f0a0:s1	-	-	-	4b8018a80bf0	-	8032bb299de2	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e0155236-13c5-4e01-b4de-b8fa4af846d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dramatic-finale:cast:s1,f:xs:XP:dramatic-finale:cast:s1	-	-	-	6f84be0f34c0	-	c3b57707c6a1	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-e0155236-13c5-4e01-b4de-b8fa4af846d8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e0155236-13c5-4e01-b4de-b8fa4af846d8	f0/t0	ChangesZoneAll	agreed	-	FX	start	2	0	x:xs:XP:dramatic-finale:f0t0:s1,f:xs:XP:dramatic-finale:f0t0:s1	-	-	-	6f84be0f34c0	-	c3b57707c6a1	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e015ea73-8260-4dd7-9531-7d5cbff9a1e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:obsidian-battle-axe:cast:s1,f:xs:XP:obsidian-battle-axe:cast:s1	-	-	-	d864b561c9cb	-	00a82c4bcd2a	-	-	2026-11-24	xproof
 e015ea73-8260-4dd7-9531-7d5cbff9a1e7	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:obsidian-battle-axe:f0a0:s1,f:xs:XP:obsidian-battle-axe:f0a0:s1	-	-	-	d864b561c9cb	-	00a82c4bcd2a	-	-	2026-11-24	xproof
 e015ea73-8260-4dd7-9531-7d5cbff9a1e7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:obsidian-battle-axe:f0t0:s1,f:xs:XP:obsidian-battle-axe:f0t0:s1	-	-	-	23c4009444b0	-	00a82c4bcd2a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -189,7 +189,7 @@ e0eaa43f-1c46-4299-9ecd-5f4a32d292cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e0edb2fc-2533-407c-85e5-4337f4233f05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0edb2fc-2533-407c-85e5-4337f4233f05	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0edb2fc-2533-407c-85e5-4337f4233f05	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e0edb2fc-2533-407c-85e5-4337f4233f05	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e0edb2fc-2533-407c-85e5-4337f4233f05	f0/a2	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:kaya-geist-hunter:f0a2:s1,f:xs:XP:kaya-geist-hunter:f0a2:s1	-	-	-	6f84be0f34c0	-	0186656fbd36	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e0f05979-daba-43eb-b356-24284e7ca99c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blur-sliver:cast:s1,f:xs:XP:blur-sliver:cast:s1	-	-	-	d864b561c9cb	-	2bfb0d3e6f13	-	-	2026-11-24	xproof
 e0f18302-5ccf-47d2-a8a1-bb7aeaca9a53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e0f23e7e-2858-4f5e-9dd5-8a0ba934a048	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lampad-of-death-s-vigil:cast:s1,f:xs:XP:lampad-of-death-s-vigil:cast:s1	-	-	-	ae86f6029288	-	96a316e30066	-	-	2026-11-24	xproof

@@ -65,7 +65,7 @@ b67db32b-30a9-49d2-b4c2-90a9f80c36eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 b6801429-3995-4571-92f9-ef211675c5d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6801429-3995-4571-92f9-ef211675c5d5	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:preeminent-captain:f0t0:s1,f:xs:XP:preeminent-captain:f0t0:s1	-	-	-	d864b561c9cb	-	467ad48d513d	-	-	2026-11-24	xproof
 b6811c31-fcd3-4d00-89d5-cf974575a87c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b6811c31-fcd3-4d00-89d5-cf974575a87c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b6811c31-fcd3-4d00-89d5-cf974575a87c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 b6811c31-fcd3-4d00-89d5-cf974575a87c	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 b6821131-9ae1-4a3c-8235-90deae33c05f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dread-drone:f0t0:s1,f:xs:XP:dread-drone:f0t0:s1	-	-	-	d864b561c9cb	-	10a1e7307945	-	-	2026-11-24	xproof
 b6821131-9ae1-4a3c-8235-90deae33c05f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dread-drone:f0t0:s1,f:xs:XP:dread-drone:f0t0:s1	-	-	-	d864b561c9cb	-	10a1e7307945	-	-	2026-11-24	xproof
@@ -90,8 +90,8 @@ b693c3de-2eaf-4850-b405-e79d00adefda	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:ta
 b69bbb8d-7f8c-45d6-983a-759b5fce6ebd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-mycotyrant:cast:s1,f:xs:XP:the-mycotyrant:cast:s1	-	-	-	8c0bd19283bb	-	9cd9e30ced98	-	-	2026-11-24	xproof
 b69bbb8d-7f8c-45d6-983a-759b5fce6ebd	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:the-mycotyrant:combat0.attack:s1,f:xs:XP:the-mycotyrant:combat0.attack:s1	-	-	-	3aa6ded33acb	-	9cd9e30ced98	-	-	2026-11-25	xproof
 b69bbb8d-7f8c-45d6-983a-759b5fce6ebd	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-mycotyrant:combat0.block:s1,f:xs:XP:the-mycotyrant:combat0.block:s1	-	-	-	3aa6ded33acb	-	9cd9e30ced98	-	-	2026-11-25	xproof
-b69bbb8d-7f8c-45d6-983a-759b5fce6ebd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:the-mycotyrant:cast:s1,f:xs:XP:the-mycotyrant:cast:s1	-	-	-	8c0bd19283bb	-	9cd9e30ced98	-	-	2026-11-24	xproof
-b69bbb8d-7f8c-45d6-983a-759b5fce6ebd	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Mycotyrant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b69bbb8d-7f8c-45d6-983a-759b5fce6ebd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:the-mycotyrant:static0.0:s1,f:xs:XP:the-mycotyrant:static0.0:s1	-	-	-	6f84be0f34c0	-	9cd9e30ced98	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+b69bbb8d-7f8c-45d6-983a-759b5fce6ebd	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:the-mycotyrant:static0.0:s1,f:xs:XP:the-mycotyrant:static0.0:s1	-	-	-	6f84be0f34c0	-	9cd9e30ced98	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 b69e68e7-0612-40f8-a40a-9c4e77653442	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6a005db-e7e2-4b88-bc8a-c257bcc31cf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b6a21e53-6f62-4874-b9cc-84ae177a0da6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saru-unthreatened:f0t0:s1,f:xs:XP:saru-unthreatened:f0t0:s1	-	-	-	25696bf19d5b	-	aa9d84f33edf	-	-	2026-11-24	xproof
