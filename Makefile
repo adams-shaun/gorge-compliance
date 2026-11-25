@@ -845,7 +845,27 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fixtures/phyrexian/processor-zero-life.jsonl, the exported xs:XP:phyrexian-processor:cast:s1 request) fails without the change with
 # the exact "Missing x answer at step 6: X for" miss; scripts/forge-oracle-test-phyrexian-processor-paylife.sh (make forge-driver-tests)
 # runs it. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-paylife-x.
-FORGE_ORACLE_REF ?= ad4cd3ba0f8a7fcb5eeccc8c579cf00bf0784858
+# dcbac6a957 = 2ac6012982e plus the altaddcost tap ability choice (xproof cluster xpt-bf618006, Disruption Protocol,
+# gorge~forge): p0 casts Disruption Protocol choosing gorge's altaddcost pick "Tap 1 artifact" (Memnite), and Forge offers
+# two SAs (tap an artifact / pay {1}). gorge is right (CR 601.2b: either additional cost). getAbilityToPlay bound the pick
+# by substring of the cost text, then by "cost" + verb against the CostPart class name; "tap 1 artifact" is not in Forge's
+# cost text (CostTapType prints "Tap 1 untapped Artifact you control") and the part class of tapXType<1/Artifact> is
+# CostTapType (costtaptype != costtap), so neither rule bound and the strict run missed ("Missing ability choice answer at
+# step 7"). The verb fallback now goes through costPartClassFor, an explicit map from gorge's CostPhrase label to the Forge
+# CostPart class: "tap this permanent" ({T}) is CostTap, any other tap label is CostTapType (same split for untap), "pay N
+# life"/"pay N energy"/plain mana is CostPayLife/CostPayEnergy/CostPartMana, "take N damage" CostDamage, a gain-life label
+# CostGainLife, "add N <kind> counters" CostPutCounter, "put ... into your library" CostPutCardToLib, "put ... from exile"
+# CostExiledMoveToGrave, "return ... to its owner's hand" CostReturn, dice/coins CostRollDice/CostFlipCoin, a chosen reveal
+# CostRevealChosen; unlisted verbs keep the old "cost" + verb naming, and the discard/sacrifice/forage/blight rules are
+# unchanged. TapTypeAbilityChoiceTest (fork fixtures altaddcost/disruption-protocol-tap-s1.jsonl, the exported find) fails
+# on 2ac6012982e with the exact miss and passes here; scripts/forge-oracle-test-tap-type-ability-choice.sh (make
+# forge-driver-tests) runs it. Driver-only; cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork
+# branch fix/xp-forge-driver-tap-altaddcost (tip 5bc8d1f9b0 adds the ChangeTargetsMandatoryTest join; merged into join15 below).
+# 9124c696744 = oracle/fpin-1125-join15: join14 (ad4cd3ba0f8, above) merged with 5bc8d1f9b0 (dcbac6a957, the altaddcost tap ability
+# choice above, plus the ChangeTargets test join14 already carries), no textual conflicts (ScriptedController.java auto-merged); the
+# merge tree is 173000f9b6f. TapTypeAbilityChoiceTest and the join14 driver tests run together at this pin. Driver-only; die-roll code,
+# cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 9124c696744f88779c0bc976be2f403c8b239174
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
