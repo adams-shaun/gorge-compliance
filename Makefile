@@ -621,7 +621,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # half, so one pin carries every driver fix: the zero-mode charm answer, the empty-face chooseCardName answer and the
 # transit-order fallback. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork branch
 # fix/xp-forge-driver-zero-mode-charm (advanced with the empty-face chooseCardName pin).
-FORGE_ORACLE_REF ?= 141e1ff540330df088e8732358fce270ec984184
+# 3d8f89a00d = eb695169f9 (above) + fork branch fix/xp-forge-driver-evoke-trigger-label: StepMachine.triggerScore binds gorge's fixed
+# Evoke label "<card>: sacrifice it (evoked)" (CR 702.74a, trigger_queue.go) to the host's Forge trigger whose keyword is Evoke, so
+# orderTriggers no longer misses it beside an ETB trigger (CR 603.3b; Emptiness, Catharsis; xpt-58b75f98, xpt-93baef91);
+# TriggerOrderEvokeLabelTest fails before it (1a2655bbd3 is that commit). Also joins oracle/fpin-1125's 2d4eac3d93 (DigMultiple pick,
+# AlternativeDecider library position). Driver-only; cardsfolder and tokenscripts unchanged.
+# 68d36f8247a = the clean merge of 141e1ff5403 (above: zero-mode Charm, the empty-face chooseCardName and the transit order) and
+# 3d8f89a00d (above: the Evoke trigger label, the DigMultiple pick and the AltDestination library position). The two touch
+# separate ScriptedController methods (chooseModeForAbility/chooseCardName vs triggerScore/chooseDig/alt-destination) and
+# separate test files; the shared eb695/0558 halves are the same on both sides, so one pin carries every driver fix: the
+# zero-mode charm answer, the empty-face chooseCardName answer, the transit-order fallback, the Evoke trigger label and the
+# DigMultiple/AltDestination picks. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork branch
+# fix/xp-forge-driver-zero-mode-charm (advanced with the evoke/DigMultiple pin).
+FORGE_ORACLE_REF ?= 68d36f8247a3285e0417f9beccf7a66240020297
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

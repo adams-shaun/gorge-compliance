@@ -152,7 +152,12 @@ func TestForgeRolledDie(t *testing.T) {
 // 141e1ff5403 = the clean merge of a1990dd5f833 (zero-mode Charm and the transit order) and eb695169f9 (the empty-face
 // chooseCardName and the transit order); both carry the same 0558bd00b88 transit-order half and touch separate
 // ScriptedController methods and test files. Die-roll code unchanged.
-const forgeOracleDieRollRef = "141e1ff540330df088e8732358fce270ec984184"
+// 3d8f89a00d = eb695169f9 merged with 1a2655bbd3 (the Evoke sacrifice label binding, StepMachine.triggerScore only) and 2d4eac3d93 (the DigMultiple
+// pick and AlternativeDecider position answers); die-roll code unchanged, ForcedDieRollTest re-run green on it (7 of 7).
+// 68d36f8247a = the clean merge of 141e1ff5403 (zero-mode Charm, the empty-face chooseCardName and the transit order) and
+// 3d8f89a00d (the Evoke trigger label, the DigMultiple pick and the AltDestination library position); both carry the same
+// eb695/0558 halves and touch separate ScriptedController methods and test files. Die-roll code unchanged.
+const forgeOracleDieRollRef = "68d36f8247a3285e0417f9beccf7a66240020297"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
