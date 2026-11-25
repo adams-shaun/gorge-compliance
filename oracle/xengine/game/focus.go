@@ -93,7 +93,7 @@ func (s *focusState) read(e *rules.Engine) {
 		want := cards.NormalizeName(l.name)
 		for p := range e.G.Players {
 			for _, id := range e.G.Zone(state.ZBattlefield, state.PlayerID(p)) {
-				if o := e.G.Obj(id); o != nil && o.Face() != nil && cards.NormalizeName(o.Face().Name) == want {
+				if isNamed(e.G.Obj(id), want) {
 					l.objs[id] = true
 				}
 			}
@@ -106,11 +106,24 @@ func (s *focusState) read(e *rules.Engine) {
 	want := cards.NormalizeName(s.f.Card)
 	for _, z := range []state.Zone{state.ZHand, state.ZBattlefield, state.ZLibrary, state.ZGraveyard, state.ZExile} {
 		for _, id := range e.G.Zone(z, p) {
-			if o := e.G.Obj(id); o != nil && o.Face() != nil && cards.NormalizeName(o.Face().Name) == want {
+			if isNamed(e.G.Obj(id), want) {
 				s.objs[id] = true
 			}
 		}
 	}
+}
+
+// isNamed reports whether o is the card want (a cards.NormalizeName) names:
+// its current face, or its front face, which a transformed permanent (a start's
+// BackFace placement) no longer shows.
+func isNamed(o *state.Object, want string) bool {
+	if o == nil || o.Face() == nil {
+		return false
+	}
+	if cards.NormalizeName(o.Face().Name) == want {
+		return true
+	}
+	return o.Card != nil && len(o.Card.Faces) > 0 && cards.NormalizeName(o.Card.Faces[0].Name) == want
 }
 
 // Kind "block": the focus seat is the defender. Its first block declaration
