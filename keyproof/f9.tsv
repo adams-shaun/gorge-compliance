@@ -3,9 +3,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 f903b76f-d405-427a-b115-5066eb311e10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f9085e55-2833-41b7-9100-a35dc04dee93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f9085e55-2833-41b7-9100-a35dc04dee93	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f9085e55-2833-41b7-9100-a35dc04dee93	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-f9085e55-2833-41b7-9100-a35dc04dee93	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-f9085e55-2833-41b7-9100-a35dc04dee93	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+f9085e55-2833-41b7-9100-a35dc04dee93	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+f9085e55-2833-41b7-9100-a35dc04dee93	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+f9085e55-2833-41b7-9100-a35dc04dee93	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 f90b00f6-36e0-4988-9409-57297483a952	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cast-out:cast:s1,f:xs:XP:cast-out:cast:s1	-	-	-	d864b561c9cb	-	29d0114bc932	-	-	2026-11-24	xproof
 f90b00f6-36e0-4988-9409-57297483a952	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f90b00f6-36e0-4988-9409-57297483a952	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cast-out:cast:s1,f:xs:XP:cast-out:cast:s1	-	-	-	d864b561c9cb	-	29d0114bc932	-	-	2026-11-24	xproof
@@ -114,7 +114,7 @@ f99f4b52-21ae-47a2-8ae6-b0aa7386723a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 f99f4b52-21ae-47a2-8ae6-b0aa7386723a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f9af02f3-6ab1-469c-9d37-e8f6fa9608c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forebear-s-blade:cast:s1,f:xs:XP:forebear-s-blade:cast:s1	-	-	-	d864b561c9cb	-	6be71709950a	-	-	2026-11-24	xproof
 f9af02f3-6ab1-469c-9d37-e8f6fa9608c4	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:forebear-s-blade:f0a0:s1,f:xs:XP:forebear-s-blade:f0a0:s1	-	-	-	d864b561c9cb	-	6be71709950a	-	-	2026-11-24	xproof
-f9af02f3-6ab1-469c-9d37-e8f6fa9608c4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+f9af02f3-6ab1-469c-9d37-e8f6fa9608c4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 f9b46a1a-474f-4fac-8d71-131c1720e4c0	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Borg Queen, Perfection Mani	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f9b46a1a-474f-4fac-8d71-131c1720e4c0	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Borg Queen, Perfection Mani	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f9b7bbea-ea20-400b-a5b7-4d6993d8777b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:creakwood-safewright:cast:s1,f:xs:XP:creakwood-safewright:cast:s1	-	-	-	c2272f704fde	-	7aab349b4658	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof

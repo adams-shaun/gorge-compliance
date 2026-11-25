@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3361cf88-171a-4ddd-ac56-a31d42613c80	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3361cf88-171a-4ddd-ac56-a31d42613c80	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3361cf88-171a-4ddd-ac56-a31d42613c80	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:clockwork-dragon:f0t0:s1,f:xs:XP:clockwork-dragon:f0t0:s1	-	-	-	d864b561c9cb	-	40ace82f2821	-	-	2026-11-24	xproof
-3361cf88-171a-4ddd-ac56-a31d42613c80	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+3361cf88-171a-4ddd-ac56-a31d42613c80	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 3362dec2-b157-4a00-8abf-0d7b5a14c6f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3364bad6-6d0a-4141-b410-86e3d9e1916e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3364bad6-6d0a-4141-b410-86e3d9e1916e	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -183,7 +183,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 33db6dc8-2c88-4a7f-8d4d-3bc9fb6544b2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 33db6dc8-2c88-4a7f-8d4d-3bc9fb6544b2	f0/t1	Attacks/Firebending	agreed	-	X	start	2	0	x:xs:XP:zuko-firebending-master:f0t1:s1	-	-	-	8c0bd19283bb	-	8a1dce8f7405	-	-	2026-11-24	xproof
 33de01e9-ce5a-42d4-afcb-343cd54a6d80	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:caves-of-koilos:f0a0:s1,f:xs:XP:caves-of-koilos:f0a0:s1	-	-	-	c2272f704fde	-	f7a8f6416d23	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-33de01e9-ce5a-42d4-afcb-343cd54a6d80	f0/a1	Mana	owed	harness	-	start	0	0	-	-	-	-	336eab778104	-	f7a8f6416d23	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+33de01e9-ce5a-42d4-afcb-343cd54a6d80	f0/a1	Mana	owed	harness	-	start	0	0	-	-	-	-	336eab778104	-	f7a8f6416d23	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 33de01e9-ce5a-42d4-afcb-343cd54a6d80	land	land	agreed	-	FX	start	2	0	x:xs:XP:caves-of-koilos:land:s1,f:xs:XP:caves-of-koilos:land:s1	-	-	-	25696bf19d5b	-	f7a8f6416d23	-	-	2026-11-24	xproof
 33e3793c-098f-4897-88f3-9f9ce9081e0f	cast	cast-resolve	agreed	-	X	scen	1	0	Pompous Battlemage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 33e3793c-098f-4897-88f3-9f9ce9081e0f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pompous Battlemage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

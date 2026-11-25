@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 178b3fdf-dbee-4245-a811-b21ff8a24f66	cast	cast	agreed	-	X	start	2	0	x:xs:XP:samut-vizier-of-naktamun:cast:s1	-	-	-	ae86f6029288	-	a82d2f52ba8e	-	-	2026-11-24	xproof
 178b3fdf-dbee-4245-a811-b21ff8a24f66	f0/t0	DamageDone	agreed	-	X	start	2	0	x:xs:XP:samut-vizier-of-naktamun:cast:s1	-	-	-	ae86f6029288	-	a82d2f52ba8e	-	-	2026-11-24	xproof
 178e73f9-fc6e-4425-870e-45f96644010a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lurking-chupacabra:cast:s1,f:xs:XP:lurking-chupacabra:cast:s1	-	-	-	d864b561c9cb	-	acfe7fb985ae	-	-	2026-11-24	xproof
-178e73f9-fc6e-4425-870e-45f96644010a	f0/t0	NULL	owed	refused:no-generator:trigger:Explores	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+178e73f9-fc6e-4425-870e-45f96644010a	f0/t0	NULL	owed	refused:no-generator:trigger:Explores	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 17916cf9-1e6c-41bd-96ce-2b050d828838	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cursed-courtier:f0t0:s2,f:xs:XP:cursed-courtier:f0t0:s2	-	-	-	e07cf3a05ba5	-	a9940b40be12	-	-	2026-11-24	xproof
 17916cf9-1e6c-41bd-96ce-2b050d828838	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:cursed-courtier:combat0.attack:s1,f:xs:XP:cursed-courtier:combat0.attack:s1	-	-	-	3aa6ded33acb	-	a9940b40be12	-	-	2026-11-25	xproof
 17916cf9-1e6c-41bd-96ce-2b050d828838	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:cursed-courtier:combat0.block:s1,f:xs:XP:cursed-courtier:combat0.block:s1	-	-	-	3aa6ded33acb	-	a9940b40be12	-	-	2026-11-25	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17c0cf45-a031-40e8-a37f-eda98a8f785b	cast	cast-resolve	agreed	-	X	scen	1	0	Stolen Uniform/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17c4807c-158e-4a86-90f1-d8fb2ebe892a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-last-stand:cast:s1,f:xs:XP:ajani-s-last-stand:cast:s1	-	-	-	d864b561c9cb	-	5e4e6f436258	-	-	2026-11-24	xproof
 17c4807c-158e-4a86-90f1-d8fb2ebe892a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-last-stand:f0t0:s1,f:xs:XP:ajani-s-last-stand:f0t0:s1	-	-	-	336eab778104	-	5e4e6f436258	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-17c4807c-158e-4a86-90f1-d8fb2ebe892a	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+17c4807c-158e-4a86-90f1-d8fb2ebe892a	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 17c5b5c9-5c58-46dc-b0a7-a635b9997bb8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17c7878f-891f-40a6-80a7-47fcc7b8e29b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 17c934a7-3480-4309-a217-ca2550538ae7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -198,7 +198,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17df95b2-49ef-43ca-b3c8-66a270f457a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17df95b2-49ef-43ca-b3c8-66a270f457a7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:rogue-kavu:f0t0:s1,f:xs:XP:rogue-kavu:f0t0:s1	-	-	-	d864b561c9cb	-	66670f7c6ede	-	-	2026-11-24	xproof
 17e00d6e-c57d-48ea-a1a1-0c1097083851	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17e00d6e-c57d-48ea-a1a1-0c1097083851	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+17e00d6e-c57d-48ea-a1a1-0c1097083851	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 17e11f0c-4ac7-4060-9e0b-27cd5c151e50	cast	cast-resolve	agreed	-	X	scen	1	0	Zoyowa's Justice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17e4085e-af44-4ba8-af05-ccfe4b35f96a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temple-acolyte:f0t0:s1,f:xs:XP:temple-acolyte:f0t0:s1	-	-	-	5f2128bf97e4	-	fb7c39e1655a	-	-	2026-11-24	xproof
 17e4085e-af44-4ba8-af05-ccfe4b35f96a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:temple-acolyte:f0t0:s1,f:xs:XP:temple-acolyte:f0t0:s1	-	-	-	5f2128bf97e4	-	fb7c39e1655a	-	-	2026-11-24	xproof
