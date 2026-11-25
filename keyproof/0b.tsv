@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b2e9571-0c28-4a8f-9ba7-0147b40290a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arrogant-poet:cast:s1,f:xs:XP:arrogant-poet:cast:s1	-	-	-	d864b561c9cb	-	13125be175db	-	-	2026-11-24	xproof
 0b2e9571-0c28-4a8f-9ba7-0147b40290a7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:arrogant-poet:f0t0:s1,f:xs:XP:arrogant-poet:f0t0:s1	-	-	-	d864b561c9cb	-	13125be175db	-	-	2026-11-24	xproof
 0b331f27-0d78-4d22-b546-36c5dec37606	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vastwood-animist:cast:s1,f:xs:XP:vastwood-animist:cast:s1	-	-	-	8a1b1a193ec0	-	6f234ac88950	-	-	2026-11-24	xproof
-0b331f27-0d78-4d22-b546-36c5dec37606	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+0b331f27-0d78-4d22-b546-36c5dec37606	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 0b34f471-40da-4c7a-81df-245fc3d14092	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flame-sweep:cast:s1,f:xs:XP:flame-sweep:cast:s1	-	-	-	d864b561c9cb	-	83a8fb18ee63	-	-	2026-11-24	xproof
 0b350f23-9150-40c7-8ac7-86adfdb8ba52	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b350f23-9150-40c7-8ac7-86adfdb8ba52	f0/t0	NULL	owed	refused:no-generator:trigger:LandPlayed	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b40032b-711d-499f-8bb9-87855f1fce9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maralen-of-the-mornsong:f0t0:s1,f:xs:XP:maralen-of-the-mornsong:f0t0:s1	-	-	-	23c4009444b0	-	02189fecc238	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0b40032b-711d-499f-8bb9-87855f1fce9e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:maralen-of-the-mornsong:f0t0:s1,f:xs:XP:maralen-of-the-mornsong:f0t0:s1	-	-	-	23c4009444b0	-	02189fecc238	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0b40e537-d385-450d-93a9-b60a25bfe508	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stitchwing-skaab:cast:s1,f:xs:XP:stitchwing-skaab:cast:s1	-	-	-	d864b561c9cb	-	262a38154bcc	-	-	2026-11-24	xproof
-0b40e537-d385-450d-93a9-b60a25bfe508	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0b40e537-d385-450d-93a9-b60a25bfe508	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:stitchwing-skaab:f0a0:s1,f:xs:XP:stitchwing-skaab:f0a0:s1	-	-	-	fb9d3088f0bf	-	262a38154bcc	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 0b4742b7-e769-4354-beaf-6b4d18768ec1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b4925d7-e2bb-4b74-a538-80fe759799ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b4925d7-e2bb-4b74-a538-80fe759799ad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,7 +187,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0bd67481-6bd9-48d6-92bd-8933b5ea1eae	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:peregrine-drake:f0t0:s1	-	-	-	5f2128bf97e4	-	01b84b8db3ee	-	-	2026-11-24	xproof
 0bd7fd12-a0b7-4b4e-8a33-cace6e6bd6d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oath-of-liliana:f0t0:s1,f:xs:XP:oath-of-liliana:f0t0:s1	-	-	-	d864b561c9cb	-	4055dc9afb4d	-	-	2026-11-24	xproof
 0bd7fd12-a0b7-4b4e-8a33-cace6e6bd6d1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oath-of-liliana:f0t0:s1,f:xs:XP:oath-of-liliana:f0t0:s1	-	-	-	d864b561c9cb	-	4055dc9afb4d	-	-	2026-11-24	xproof
-0bd7fd12-a0b7-4b4e-8a33-cace6e6bd6d1	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0bd7fd12-a0b7-4b4e-8a33-cace6e6bd6d1	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:oath-of-liliana:f0t1:s1,f:xs:XP:oath-of-liliana:f0t1:s1	-	-	-	fb9d3088f0bf	-	4055dc9afb4d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 0bd8917c-bec4-4603-bc3f-8e0c2afae56a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bd8917c-bec4-4603-bc3f-8e0c2afae56a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 0bdebad7-a05e-439a-b5a9-241a2d09f943	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:riverguard-s-reflexes:cast:s1,f:xs:XP:riverguard-s-reflexes:cast:s1	-	-	-	23c4009444b0	-	924601402d24	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

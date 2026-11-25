@@ -9,8 +9,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 910488bf-66ab-415e-973b-1262b2ab7454	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 910488bf-66ab-415e-973b-1262b2ab7454	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:marble-diamond:f0a0:s2,f:xs:XP:marble-diamond:f0a0:s2	-	-	-	8c0bd19283bb	-	3c1c07f8878f	-	-	2026-11-24	xproof
 9107ece7-a263-4203-ab09-069193cc4902	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9107ece7-a263-4203-ab09-069193cc4902	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9107ece7-a263-4203-ab09-069193cc4902	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+9107ece7-a263-4203-ab09-069193cc4902	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ingenious-skaab:f0t0:s1,f:xs:XP:ingenious-skaab:f0t0:s1	-	-	-	fb9d3088f0bf	-	5d15cbfc348b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+9107ece7-a263-4203-ab09-069193cc4902	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:ingenious-skaab:f0t0:s1,f:xs:XP:ingenious-skaab:f0t0:s1	-	-	-	fb9d3088f0bf	-	5d15cbfc348b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 91081181-aec6-47de-b8ef-241a2f4fe880	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mad-prophet:cast:s1,f:xs:XP:mad-prophet:cast:s1	-	-	-	d864b561c9cb	-	0dd110f603c6	-	-	2026-11-24	xproof
 91081181-aec6-47de-b8ef-241a2f4fe880	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:mad-prophet:f0a0:s1,f:xs:XP:mad-prophet:f0a0:s1	-	-	-	fb9d3088f0bf	-	0dd110f603c6	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 910860ce-d617-48c1-b44d-b1d95cdd006f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:neurok-prodigy:cast:s1,f:xs:XP:neurok-prodigy:cast:s1	-	-	-	25696bf19d5b	-	c969dff50a1c	-	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 914ce8f6-5e92-436d-8541-1c72da8577dc	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 91508175-fa1d-4c51-99d4-036a2de6abb0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thalia-s-lieutenant:f0t0:s1,f:xs:XP:thalia-s-lieutenant:f0t0:s1	-	-	-	d864b561c9cb	-	09aabf68fbd5	-	-	2026-11-24	xproof
 91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thalia-s-lieutenant:f0t0:s1,f:xs:XP:thalia-s-lieutenant:f0t0:s1	-	-	-	d864b561c9cb	-	09aabf68fbd5	-	-	2026-11-24	xproof
-91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thalia-s-lieutenant:f0t1:s1,f:xs:XP:thalia-s-lieutenant:f0t1:s1	-	-	-	fb9d3088f0bf	-	09aabf68fbd5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 915091d5-3f58-4429-8f3a-0fd7aef87afe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enigmatic-incarnation:cast:s1,f:xs:XP:enigmatic-incarnation:cast:s1	-	-	-	ae86f6029288	-	41df77cedff2	-	-	2026-11-24	xproof
 915091d5-3f58-4429-8f3a-0fd7aef87afe	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:enigmatic-incarnation:cast:s1,f:xs:XP:enigmatic-incarnation:cast:s1	-	-	-	ae86f6029288	-	41df77cedff2	-	-	2026-11-24	xproof
 91585b64-f10d-47c6-a563-384ceb944710	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

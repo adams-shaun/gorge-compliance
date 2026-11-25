@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e550295-eaf4-4962-bc52-261d7c2d71ae	f0/a1	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:artificial-anomaly:f0a1:s1,f:xs:XP:artificial-anomaly:f0a1:s1	-	-	-	23c4009444b0	-	1a60c09045c2	-	-	2026-11-25	xproof
 7e550295-eaf4-4962-bc52-261d7c2d71ae	land	land	agreed	-	FX	start	2	0	x:xs:XP:artificial-anomaly:land:s1,f:xs:XP:artificial-anomaly:land:s1	-	-	-	fb9d3088f0bf	-	1a60c09045c2	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7e5d2801-873f-4318-9c23-9a73e00e31a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7e5d2801-873f-4318-9c23-9a73e00e31a4	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7e5d2801-873f-4318-9c23-9a73e00e31a4	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:advanced-stitchwing:f0a0:s1,f:xs:XP:advanced-stitchwing:f0a0:s1	-	-	-	fb9d3088f0bf	-	8eabd9029cdb	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 7e5d9efe-48a9-434b-bb09-056e0e09cc9a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e5d9efe-48a9-434b-bb09-056e0e09cc9a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e605a8c-d6d4-410a-aca4-52576d08d81c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stampeding-serow:f0t0:s1,f:xs:XP:stampeding-serow:f0t0:s1	-	-	-	23c4009444b0	-	ed048fe58f47	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ef7d902-1f05-40b3-8997-dec197b0b678	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spider-Verse/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ef7d902-1f05-40b3-8997-dec197b0b678	static#0.0	static#0.0	agreed	-	X	scen	1	0	Spider-Verse/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ef8df9f-3fab-44fd-b5a9-f57e54dbc38e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ef8df9f-3fab-44fd-b5a9-f57e54dbc38e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+7ef8df9f-3fab-44fd-b5a9-f57e54dbc38e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 7efd5d62-6da2-428a-98e3-5b842f668656	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7efd5d62-6da2-428a-98e3-5b842f668656	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7efe9fe5-d93c-46a6-afbd-9655a902c6bc	cast	cast-resolve	agreed	-	FX	scen	2	0	Vote Out/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

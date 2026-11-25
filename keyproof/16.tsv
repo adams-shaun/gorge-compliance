@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16604fee-cd8d-41e4-8269-3c7ff756613d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tomik-izzet-sparkmage:cast:s1,f:xs:XP:tomik-izzet-sparkmage:cast:s1	-	-	-	fb9d3088f0bf	-	cdf1a1510f6b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 16604fee-cd8d-41e4-8269-3c7ff756613d	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:tomik-izzet-sparkmage:f0t0:s1,f:xs:XP:tomik-izzet-sparkmage:f0t0:s1	-	-	-	fb9d3088f0bf	-	cdf1a1510f6b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 16616aa2-5490-4fab-9de4-f37ca8c8be08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghoulcaller-s-accomplice:cast:s1,f:xs:XP:ghoulcaller-s-accomplice:cast:s1	-	-	-	d864b561c9cb	-	d43f450b53fd	-	-	2026-11-24	xproof
-16616aa2-5490-4fab-9de4-f37ca8c8be08	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+16616aa2-5490-4fab-9de4-f37ca8c8be08	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:ghoulcaller-s-accomplice:f0a0:s1,f:xs:XP:ghoulcaller-s-accomplice:f0a0:s1	-	-	-	fb9d3088f0bf	-	d43f450b53fd	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 16629f59-bae8-4c19-bf50-443eb0ed6856	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:felidar-retreat:cast:s1,f:xs:XP:felidar-retreat:cast:s1	-	-	-	23b491658465	-	3df2d899ad95	-	-	2026-11-24	xproof
 16629f59-bae8-4c19-bf50-443eb0ed6856	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:felidar-retreat:f0t0:s1,f:xs:XP:felidar-retreat:f0t0:s1	-	-	-	3aa6ded33acb	-	3df2d899ad95	-	-	2026-11-25	xproof
 1663d54f-4f39-4a03-aac2-e2923cbb7de8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frost-trickster:f0t0:s1,f:xs:XP:frost-trickster:f0t0:s1	-	-	-	d864b561c9cb	-	4c42e2739bfc	-	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16c293c8-bd1d-4db9-b197-da14f2f37cb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16c39265-72d9-4c86-a961-8dd38ff9adcd	cast	counter-spell	diverged	-	-	scen	0	1	-	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 16c46eaf-7a31-4957-ab7c-ff07fbbd9ddc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16c46eaf-7a31-4957-ab7c-ff07fbbd9ddc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+16c46eaf-7a31-4957-ab7c-ff07fbbd9ddc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 16c587db-d07b-47ab-8b03-c3b2cc7144f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16c587db-d07b-47ab-8b03-c3b2cc7144f5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16c99713-f19e-4b25-9b03-6a8d8203adfe	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

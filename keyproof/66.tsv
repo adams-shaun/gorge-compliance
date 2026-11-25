@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66c227f2-0e74-43e2-ab24-3866d15c5eef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:cast:s1,f:xs:XP:gateway-sneak:cast:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
 66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gateway Sneak/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:f0t1:s1,f:xs:XP:gateway-sneak:f0t1:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
-66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summon-titan:cast:s1,f:xs:XP:summon-titan:cast:s1	-	-	-	23c4009444b0	-	12cd7b1f69ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Summon: Titan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Summon: Titan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -201,7 +201,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scourgemark:f0t0:s1,f:xs:XP:scourgemark:f0t0:s1	-	-	-	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	xproof
 66fa2326-1b5d-41fb-b919-83bf9f383577	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:blooming-marsh:land:s1,f:xs:XP:blooming-marsh:land:s1	-	-	-	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	xproof
 66fa2326-1b5d-41fb-b919-83bf9f383577	land	land	agreed	-	FX	start	2	0	x:xs:XP:blooming-marsh:land:s1,f:xs:XP:blooming-marsh:land:s1	-	-	-	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	xproof
-66fa528f-0e3a-450f-9035-1ba5a8a921e6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+66fa528f-0e3a-450f-9035-1ba5a8a921e6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 66fb4764-d309-4c30-a2a4-474f9030dc87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66fb4764-d309-4c30-a2a4-474f9030dc87	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:festering-goblin:f0t0:s1,f:xs:XP:festering-goblin:f0t0:s1	-	-	-	d864b561c9cb	-	190d5cb46db5	-	-	2026-11-24	xproof
 66fc64db-7dc4-43fa-8087-281a72286c35	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vaporous-djinn:f0t0:s1,f:xs:XP:vaporous-djinn:f0t0:s1	-	-	-	3aa6ded33acb	-	6fab44f6f9c1	-	-	2026-11-25	xproof

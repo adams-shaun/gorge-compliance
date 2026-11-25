@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 62007675-8a0d-4211-83b2-0daf3641dedc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enigma-drake:cast:s1,f:xs:XP:enigma-drake:cast:s1	-	-	-	8c0bd19283bb	-	d9671ec52b49	-	-	2026-11-24	xproof
-62007675-8a0d-4211-83b2-0daf3641dedc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:enigma-drake:combat0.attack:s1,f:xs:XP:enigma-drake:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	d9671ec52b49	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+62007675-8a0d-4211-83b2-0daf3641dedc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:enigma-drake:combat0.attack:s1,f:xs:XP:enigma-drake:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	d9671ec52b49	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 62007675-8a0d-4211-83b2-0daf3641dedc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:enigma-drake:combat0.block:s1,f:xs:XP:enigma-drake:combat0.block:s1	-	-	-	3aa6ded33acb	-	d9671ec52b49	-	-	2026-11-25	xproof
 62007675-8a0d-4211-83b2-0daf3641dedc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Enigma Drake/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 62009b63-ca6c-4fb0-8c9a-eccdec51cb18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6237896e-f033-41b2-9943-670f1becb582	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 623903de-3c04-4745-9af3-d7ec9fb2574d	cast	cast-resolve	agreed	-	FX	scen	2	0	Bite Down/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 623c1873-cd83-4a5f-b391-fd0d2bb89061	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thunder-magic:cast:s1,f:xs:XP:thunder-magic:cast:s1	-	-	-	23c4009444b0	-	efd64f541083	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-623d9db1-a3af-4a1c-9643-975de364e073	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+623d9db1-a3af-4a1c-9643-975de364e073	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 623e261c-d4b9-4dea-930d-e0573a1deaee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 623e261c-d4b9-4dea-930d-e0573a1deaee	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 623f3efb-5431-42d4-98aa-9caac40e4e83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fleeting-image:cast:s1,f:xs:XP:fleeting-image:cast:s1	-	-	-	25696bf19d5b	-	c9a7b3789fa9	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 627de3d8-ad5e-4f9b-b83c-476cc98fea9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 627de3d8-ad5e-4f9b-b83c-476cc98fea9b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:paleoloth:f0t0:s1,f:xs:XP:paleoloth:f0t0:s1	-	-	-	23c4009444b0	-	b89dbc898a11	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 627e9668-5e1c-4ab6-83f4-612a42d0afce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-627e9668-5e1c-4ab6-83f4-612a42d0afce	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+627e9668-5e1c-4ab6-83f4-612a42d0afce	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 6283e5ca-9924-478b-89a5-36924accb9aa	cast	cast-resolve	agreed	-	X	scen	1	0	Duskwatch Hunter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6283e5ca-9924-478b-89a5-36924accb9aa	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:duskwatch-hunter:combat0.attack:s1,f:xs:XP:duskwatch-hunter:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	dc4ddb5587d4	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 6283e5ca-9924-478b-89a5-36924accb9aa	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Duskwatch Hunter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

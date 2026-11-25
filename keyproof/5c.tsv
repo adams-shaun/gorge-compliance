@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c63a244-75d7-4372-baf4-7a3526f240c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c68853e-4fb8-465e-b262-e6dbaf972533	cast	cast-resolve	agreed	-	FX	scen	2	0	Self-Reflection/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5c6956ad-8031-4708-82ed-75491755d2a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rune-cervin-rider:cast:s1,f:xs:XP:rune-cervin-rider:cast:s1	-	-	-	8a1b1a193ec0	-	5e5a2d3d57f8	-	-	2026-11-24	xproof
-5c6956ad-8031-4708-82ed-75491755d2a4	f0/a0	NULL	owed	refused:steps-needed:cost:GW	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+5c6956ad-8031-4708-82ed-75491755d2a4	f0/a0	NULL	owed	refused:steps-needed:cost:GW	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	cast	cast	agreed	-	F	start	4	0	f:xs:XP:colonel-autumn:cast:s1	-	-	-	8c0bd19283bb	-	eef08e65d768	-	-	2026-11-24	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	f0/t0	Exploited	agreed	-	F	start	4	0	f:xs:XP:colonel-autumn:cast:s1	-	-	-	8c0bd19283bb	-	eef08e65d768	-	-	2026-11-24	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	f0/t1	ChangesZone/Exploit	agreed	-	F	start	4	0	f:xs:XP:colonel-autumn:cast:s1	-	-	-	8c0bd19283bb	-	eef08e65d768	-	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c94b616-8edf-465c-b316-4599df95c52a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:stegron-the-dinosaur-man:combat0.block:s1,f:xs:XP:stegron-the-dinosaur-man:combat0.block:s1	-	-	-	23c4009444b0	-	3789e83e35c7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5c94b616-8edf-465c-b316-4599df95c52a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stegron the Dinosaur Man/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5c975dbb-aabb-43fe-877c-c3950019a584	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5c975dbb-aabb-43fe-877c-c3950019a584	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+5c975dbb-aabb-43fe-877c-c3950019a584	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 5c9a2789-4b8c-4706-a95a-99561cd6d09c	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 5c9d814b-4257-47bc-a1df-c3480bc038ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c9f4fde-b96f-41bf-b214-f83511df1f8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

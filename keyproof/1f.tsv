@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f696446-30ba-42ab-b4fc-ee9c956b0a62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orc-general:cast:s1,f:xs:XP:orc-general:cast:s1	-	-	-	fc71ca68c5ac	-	01441850dcd4	-	-	2026-11-24	xproof
 1f696446-30ba-42ab-b4fc-ee9c956b0a62	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 1f6bff6c-a2f0-4ed7-8169-acb4d31a7187	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mercurial-geists:cast:s1,f:xs:XP:mercurial-geists:cast:s1	-	-	-	d864b561c9cb	-	77c9e02de62c	-	-	2026-11-24	xproof
-1f6bff6c-a2f0-4ed7-8169-acb4d31a7187	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1f6bff6c-a2f0-4ed7-8169-acb4d31a7187	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:mercurial-geists:f0t0:s1,f:xs:XP:mercurial-geists:f0t0:s1	-	-	-	fb9d3088f0bf	-	77c9e02de62c	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 1f6fd5d9-d123-4986-a18b-206cc2dfb3f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f6fd5d9-d123-4986-a18b-206cc2dfb3f1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:cavalry-pegasus:f0t0:s1,f:xs:XP:cavalry-pegasus:f0t0:s1	-	-	-	d864b561c9cb	-	f269a0be3952	-	-	2026-11-24	xproof
 1f74d046-e695-4ad9-a27c-8ff1f30d4c23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f874f7f-b959-4de5-a5db-e65a90ac2f9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f874f7f-b959-4de5-a5db-e65a90ac2f9d	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1f8d387e-e4bb-4e76-a173-f46f7b107b95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f8d387e-e4bb-4e76-a173-f46f7b107b95	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1f8d387e-e4bb-4e76-a173-f46f7b107b95	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:olivia-mobilized-for-war:f0t0:s1,f:xs:XP:olivia-mobilized-for-war:f0t0:s1	-	-	-	fb9d3088f0bf	-	2fadf55c2dea	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 1f8d4d5f-e82f-45f3-823e-1bb6b536eb18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grand-arbiter-augustin-iv:cast:s1,f:xs:XP:grand-arbiter-augustin-iv:cast:s1	-	-	-	16ec2936189a	-	6714b31fec21	-	-	2026-11-24	xproof
 1f91297a-ec2b-4ea8-9198-aa1daac20ff8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f938353-9081-4dc1-b8e7-d18ece038bd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valorous-stance:cast:s1,f:xs:XP:valorous-stance:cast:s1	-	-	-	3aa6ded33acb	-	95b87fd7f175	-	-	2026-11-25	xproof
