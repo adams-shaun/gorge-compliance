@@ -135,6 +135,19 @@ func XAnswers(ds []rules.OracleDecision, steps int, modes map[string]int) [][]XA
 	return xanswers(ds, steps, modes, nil)
 }
 
+// TargetPickValue is the TARGET-queue spelling of decision d's pick k, the
+// same spelling XAnswersForScenario emits. A cost template that scripts a
+// target-queue cost answer (Craft's material) uses it so the answer dedupes
+// exactly against the routed one, including the exact-ref form a same-named
+// pick needs.
+func TargetPickValue(d rules.OracleDecision, k int) string {
+	label := ""
+	if k >= 0 && k < len(d.Picks) {
+		label = d.Picks[k]
+	}
+	return targetPickValue(d, k, label)
+}
+
 // XAnswersWithSnapshots is XAnswers plus the gorge result's checkpoints. A
 // library_placement/hand_move destination is re-derived from the after-step
 // library top instead of guessed from the decision shape: a bottom placement

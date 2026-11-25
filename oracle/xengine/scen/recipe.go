@@ -212,6 +212,15 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why != "" {
 				return refuse(why)
 			}
+			if plan.zone == zoneBattlefield {
+				switch z := strings.ToLower(sa.Params["ActivationZone"]); z {
+				case "", "battlefield":
+				case zoneHand, zoneGraveyard:
+					plan.zone = z // unearth, channel, ...: the card sits where the ability is activated from
+				default:
+					return refuse("start:activation-zone:" + z)
+				}
+			}
 			applyCost(plan, card, generic, f)
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx}
 			break
@@ -308,6 +317,12 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		return false
 	}
 	if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
+		if err != nil {
+			return Result{}, err
+		}
+		return refuse(why)
+	}
+	if why, err := focusPlayRefusal(reg, b, sa, card, f); err != nil || why != "" {
 		if err != nil {
 			return Result{}, err
 		}
@@ -516,7 +531,7 @@ func counterBearer(reg *cards.Registry, s *StartSeat, targetBearers map[string]b
 // that certdeck plays.
 func inertCounterBearer(reg *cards.Registry, b *certdeck.Builder) (string, error) {
 	for _, name := range bearers {
-		if c, ok := reg.Lookup(name); ok && b.Playable(c) {
+		if c, ok := reg.Lookup(name); ok && b.Playable(c) && !deadOnArrival(c.Faces[0]) {
 			return name, nil
 		}
 	}
@@ -547,13 +562,21 @@ func pickEnabler(reg *cards.Registry, b *certdeck.Builder, s *StartSeat, offTurn
 	if len(picks) == 0 {
 		return nil
 	}
-	faces := make([]*cards.Face, len(picks))
-	for i, name := range picks {
+	var faces []*cards.Face
+	var live []string
+	for _, name := range picks {
 		c, ok := reg.Lookup(name)
 		if !ok || len(c.Faces) == 0 {
 			return fmt.Errorf("scen: enabler %q is not in the corpus", name)
 		}
-		faces[i] = c.Faces[0]
+		if deadOnArrival(c.Faces[0]) {
+			continue // an X creature with no X dies to SBA the moment it is placed
+		}
+		faces, live = append(faces, c.Faces[0]), append(live, name)
+	}
+	picks = live
+	if len(picks) == 0 {
+		return nil
 	}
 	best := -1
 	for i, f := range faces {
@@ -579,7 +602,7 @@ func pickEnabler(reg *cards.Registry, b *certdeck.Builder, s *StartSeat, offTurn
 	s.Battlefield = append(s.Battlefield, landsFor(splitCost(f.ManaCost), basicFor(f.ManaCost))...)
 	if FieldBlock(f) == "aura-unattached" {
 		for _, name := range bearers {
-			if c, ok := reg.Lookup(name); ok && b.Playable(c) {
+			if c, ok := reg.Lookup(name); ok && b.Playable(c) && !deadOnArrival(c.Faces[0]) {
 				s.Battlefield = append(s.Battlefield, name)
 				return nil
 			}

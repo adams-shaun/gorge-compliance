@@ -59,7 +59,11 @@ GO_TEST_FLAGS ?= -p=2
 # five-file change as 9bb2f33757; the card fix itself is fix/redemptor-dreadnought-intervening-if,
 # RedemptorDreadnoughtTest and EvercoatUrsineTest. Card behaviour change only for those two cards, so the manifests
 # are unchanged.
-XMAGE_REF  ?= 791c9c554a9db844bb91f6c52b4c2e0e7685a20d
+# dc6da81e81 = 791c9c554a + fork branch fix/stackobject-self-target-on-791 (TargetStackObject drops the casting spell's
+# own stack object from canTarget / possibleTargets, CR 115.5: Katara's Reversal's "up to four target spells and/or
+# abilities" offered the Reversal itself as its one candidate on an empty stack, so the group could not be skipped
+# and the lone-candidate rule countered the spell itself). One target class, no set data: the manifests are unchanged.
+XMAGE_REF  ?= dc6da81e813c3cb42460f2cd386429d6aa6ed18d
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -409,6 +413,7 @@ help:
 	@echo "  make cards [GORGE_ROOT=../gorge] — link a gorge checkout's .cards corpus here (run gorge's make fetch-cards compile-cards first)"
 	@echo "  make test           — go test ./... (capped like gorge's)"
 	@echo "  make test-one PKG=./p RUN=TestX — one capped, corpus-checked test run with one verdict line"
+	@echo "  make test-select BASE=ref — print the Go test packages the touched-package gate selects for BASE..HEAD"
 	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make carddb-test    — the carddb tool's Python tests (cmd/carddb/py/tests; git + python3 only, no network)"
@@ -435,6 +440,7 @@ help:
 	@echo "  make mtgish-xc      — the mtgish card-definition cross-check: corpus report + the corpus ledger ratchet"
 	@echo "  make follower-proto-test [RUN=name] — cargo test for the engine-neutral follower crate (followers/proto; output under FOLLOWERS_CACHE)"
 	@echo "  make xmage-driver-tests — the Java driver's unit tests (needs xmage-oracle-setup)"
+	@echo "  make forge-driver-tests — the Forge replay/unit driver tests (needs forge-oracle-setup)"
 
 .PHONY: cards test boundary oracle-audit smoke follower-proto-test phase-oracle-setup phase-follower-test phase-seat-test phase-preflight
 cards:
@@ -454,6 +460,12 @@ test-one: export TIMEOUT := $(TIMEOUT)
 test-one: export TAGS := $(TAGS)
 test-one:
 	@RUN='$(value RUN)' SKIP='$(value SKIP)' bash scripts/test-targets.sh one
+
+# test-select: BASE=ref [HEAD=ref] — the touched-package gate's package list
+# (scripts/test-select.sh, internal/testselect; the last stdout line is a package).
+.PHONY: test-select
+test-select:
+	@bash scripts/test-select.sh '$(BASE)' '$(HEAD)'
 
 follower-proto-test:
 	systemd-run --user --scope -q -p MemoryMax=4G -p CPUQuota=400% env CARGO_TARGET_DIR=$(FOLLOWERS_CACHE)/target/proto $(CARGO) test --locked --manifest-path followers/proto/Cargo.toml $(RUN)
@@ -523,6 +535,7 @@ smoke:
 	bash ops/scripts/tests/follower_check_smoke.sh
 	bash ops/scripts/tests/follower_sweep_smoke_smoke.sh
 	bash ops/scripts/tests/test_targets_smoke.sh
+	bash ops/scripts/tests/test_select_smoke.sh
 
 # xengine-sweep runs the chunked, resumable cross-engine sweep
 # (scripts/xengine-sweep.sh): SETS='FDN BLB' CHUNKS=4 GAMES=50. Heavy: it starts
@@ -566,6 +579,16 @@ xmage-driver-tests:
 	fi
 	@test -s "$(XMAGE_ORACLE_DIR)/tests.cp" || { echo "no XMage build at $(XMAGE_ORACLE_DIR): run make xmage-oracle-setup, or set XMAGE_ORACLE_DIR" >&2; exit 1; }
 	for t in scripts/xmage-oracle-test-*.sh scripts/forge-oracle-test-*.sh; do echo "== $$t"; XMAGE_ORACLE_DIR=$(XMAGE_ORACLE_DIR) bash "$$t" "$(XMAGE_DRIVER_OUT)/$$(basename $$t .sh)" || exit 1; done
+
+# forge-driver-tests is the Forge-only half of xmage-driver-tests: the exporter
+# regression (testdata/forge/mdfc-spell-ability.jsonl through forge-export)
+# plus the replay/unit wrappers scripts/forge-oracle-test-*.sh at
+# FORGE_ORACLE_REF. Needs the out-of-tree build from make forge-oracle-setup.
+.PHONY: forge-driver-tests
+forge-driver-tests:
+	@test -s "$(FORGE_ORACLE_DIR)/cp.txt" || { echo "no Forge build at $(FORGE_ORACLE_DIR): run make forge-oracle-setup, or set FORGE_ORACLE_DIR" >&2; exit 1; }
+	PKG=./cmd/oraclediff RUN='^TestForgeAbilityLinesUseSnapshotFaceForShatterskull' bash scripts/test-targets.sh one
+	for t in scripts/forge-oracle-test-*.sh; do echo "== $$t"; FORGE_ORACLE_DIR=$(FORGE_ORACLE_DIR) XMAGE_ORACLE_DIR=$(XMAGE_ORACLE_DIR) bash "$$t" "$(XMAGE_DRIVER_OUT)/$$(basename $$t .sh)" || exit 1; done
 
 .PHONY: compliance-manifests
 compliance-manifests:

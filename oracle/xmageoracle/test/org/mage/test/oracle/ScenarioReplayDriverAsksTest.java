@@ -72,11 +72,13 @@ public final class ScenarioReplayDriverAsksTest {
         wishDeclined();
         optionalMultiCandidateTarget();
         mandatoryChoosePickOnTargetQueue();
+        cardOrderPick();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, look-at/exile same-name choice,"
                 + " alternative cast, promised gift, replacement order,"
                 + " lone forced target, divided amount, multi-candidate search, phyrexian life, wish decline,"
-                + " optional multi-candidate target, mandatory choose pick on the target queue");
+                + " optional multi-candidate target, mandatory choose pick on the target queue,"
+                + " same-name card order");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
@@ -937,6 +939,94 @@ public final class ScenarioReplayDriverAsksTest {
                         default: throw new AssertionError("unexpected game call " + method);
                     }
                 });
+    }
+
+    /** Fathom Trawl, PutCards.BOTTOM_ANY (and every any-order path): XMage
+     * asks the order one card at a time through a "card ORDER to put ..."
+     * TargetCard. When every card in the window has the same name the order
+     * changes no state the replay compares, and gorge records no decision for
+     * it, so the driver takes the first offered card per ask (the window is
+     * CardsImpl, the looked-at library order). ZonesHandler.chooseOrder's
+     * simultaneous-zone-change asks and a card's own order loop (Proteus
+     * Staff) are the same role and are covered too. A distinct-name order is
+     * gorge's own CR 401.4 choice and stays the base's strict miss; a pick-one
+     * (Booster Tutor, Psychotic Episode, Agonizing Memories' hand pick) is not
+     * an order and must not be guessed. */
+    private static void cardOrderPick() throws Exception {
+        Class<?>[] ask = {mage.constants.Zone.class, int.class, int.class, String.class};
+        check((Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.ALL, 1, 1,
+                        "card ORDER to put on the BOTTOM of your library (last one chosen will be bottommost)"),
+                "PutCards.BOTTOM_ANY's TargetCard is not recognised as an order ask");
+        check((Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.ALL, 1, 1,
+                        "card ORDER to put on the TOP of your library (last one chosen will be topmost)"),
+                "putCardsOnTopOfLibrary's order ask is not recognised");
+        check((Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.ALL, 1, 1,
+                        "card ORDER to put seventh from the TOP of your library (last one chosen will be topmost)"),
+                "putCardOnTopXOfLibrary's order ask is not recognised");
+        check((Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.ALL, 1, 1,
+                        "order to put on bottom of library (last chosen will be bottommost)"),
+                "ZonesHandler.chooseOrder's library order ask is not recognised");
+        check((Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.ALL, 1, 1,
+                        "order to put in graveyard (last chosen will be on top)"),
+                "ZonesHandler.chooseOrder's graveyard order ask is not recognised");
+        check((Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.GRAVEYARD, 1, 1,
+                        "card to put on the top of your graveyard (last one chosen will be topmost)"),
+                "PlayerImpl's simultaneous-graveyard order ask is not recognised");
+        check((Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.LIBRARY, 1, 1,
+                        "card to put on bottom of your library (last chosen will be on bottom)"),
+                "Proteus Staff's own library order loop is not recognised");
+        check(!(Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.ALL, 1, 1, "card"),
+                "a plain pick-one from a Zone.ALL window was misread as an order ask");
+        check(!(Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.ALL, 1, 1, "creature card"),
+                "Booster Tutor's Zone.ALL pick-one was misread as an order ask");
+        check(!(Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.HAND, 1, 1,
+                        "card to put on the top of library (last chosen will be on top)"),
+                "Agonizing Memories' two hand picks are a sequence of choices, not an order");
+        check(!(Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.LIBRARY, 1, 1,
+                        "card to put back on top of your library"),
+                "a plain look-at pick is not an order ask");
+        check(!(Boolean) adapter("isCardOrderAsk", ask, mage.constants.Zone.ALL, 0, 1,
+                        "card ORDER to put on the BOTTOM of your library (last one chosen will be bottommost)"),
+                "an up-to order ask is not the fixed one-at-a-time dialog");
+        java.util.UUID first = UUID.randomUUID();
+        java.util.UUID second = UUID.randomUUID();
+        java.util.UUID third = UUID.randomUUID();
+        java.util.function.Function<UUID, String> same = id -> "Island";
+        java.util.function.Function<UUID, String> mixed =
+                id -> id.equals(third) ? "Forest" : "Island";
+        Class<?>[] types = {boolean.class, List.class, java.util.function.Function.class};
+        List<UUID> offered = new ArrayList<>(Arrays.asList(first, second, third));
+        check(first.equals(adapter("interchangeableCardOrderPick", types, true, offered, same)),
+                "a same-named card order did not take the first offered card");
+        check(adapter("interchangeableCardOrderPick", types, true, offered, mixed) == null,
+                "a distinct-name card order was guessed (gorge's CR 401.4 choice)");
+        check(adapter("interchangeableCardOrderPick", types, false, offered, same) == null,
+                "a non-order ask was answered by the order rule");
+        check(adapter("interchangeableCardOrderPick", types, true,
+                        new ArrayList<>(Collections.singletonList(first)), same) == null,
+                "a single remaining card is the caller's last move, not an order ask");
+        // The helper alone is not the fix: a merge that drops a funnel's call
+        // leaves every check above passing while the order ask strict-misses
+        // again. Pin both Cards funnels to the one shared decision, and that
+        // decision to the role gate and the same-name rule.
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int forced = text.indexOf("private boolean forcedChooseCards(");
+        int helper = text.indexOf("UUID unscriptedCardOrderPick(", forced);
+        int forcedCall = text.indexOf("unscriptedCardOrderPick(", forced);
+        check(forced >= 0 && forcedCall > forced && forcedCall < helper,
+                "forcedChooseCards (choose(Cards, TargetCard)) must call unscriptedCardOrderPick");
+        int funnel = text.indexOf(
+                "public boolean chooseTarget(Outcome outcome, Cards cards, mage.target.TargetCard target");
+        int funnelCall = text.indexOf("unscriptedCardOrderPick(", funnel);
+        int funnelFallback = text.indexOf("return super.chooseTarget(", funnel);
+        check(funnel >= 0 && funnelCall > funnel && funnelCall < funnelFallback,
+                "chooseTarget(Cards, TargetCard) must call the same unscriptedCardOrderPick");
+        int gate = text.indexOf("isCardOrderAsk(", helper);
+        int pick = text.indexOf("interchangeableCardOrderPick(", helper);
+        check(gate > helper && pick > gate,
+                "unscriptedCardOrderPick must gate on isCardOrderAsk before the same-name rule");
     }
 
     private static void seat(ScenarioReplay owner, String field, TestPlayer player) throws Exception {

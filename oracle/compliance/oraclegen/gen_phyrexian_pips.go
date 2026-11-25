@@ -57,6 +57,11 @@ type xanswersExtra struct {
 	// election, which XMage's BolsterEffect asks through chooseTarget
 	// (bolster_pick.go).
 	bolster map[int]bool
+	// craft marks the decisions whose exilecost pick pays a Craft keyword's
+	// material cost. XMage's CraftAbility chooses its material through
+	// chooseTarget, the TARGET queue, unlike every other exile cost's
+	// getTargets().choose on the choice queue (craft_cost_pick.go).
+	craft map[int]bool
 	// supports maps a Support counter_pick decision index to the target
 	// answers XMage asks at the source's announcement, not at resolution
 	// (support_pick.go). A present key is owned by that route.

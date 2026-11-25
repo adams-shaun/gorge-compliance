@@ -25,6 +25,10 @@ import (
 // startFormat is the format tag of a start file.
 const startFormat = "xproof-start-1"
 
+// reasonStartNotExercised is the refusal of a start whose focus seat was never
+// offered the focus play.
+const reasonStartNotExercised = "start-not-exercised"
+
 // startDeckSize is the size a seat's deck is filled to with basics.
 const startDeckSize = 40
 
@@ -278,8 +282,14 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 		}
 	}
 	bind := func(card string, used map[int]bool) (int, error) {
+		// d.Cards holds front-face names, so resolve the listed name the same
+		// way add did: a double-faced card is listed as "A // B" or by its back.
+		want := card
+		if c, ok := reg.Lookup(card); ok && len(c.Faces) > 0 {
+			want = c.Faces[0].Name
+		}
 		for _, i := range bf {
-			if d.Cards[i] == card && !used[i] {
+			if d.Cards[i] == want && !used[i] {
 				used[i] = true
 				return i, nil
 			}
@@ -412,7 +422,8 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 			games++
 			id := startID(set, f.Card, f.Key, s)
 			name := fmt.Sprintf("xproof start %s %s seed %d", f.Card, f.Key, s)
-			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus}
+			took := -1
+			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus, FocusTook: &took}
 			if f.MaxTurns > 0 {
 				// max_turns is the turns played: the engine's watchdog stalls
 				// the game as the turn after them begins.
@@ -425,6 +436,18 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				b, _ := jsonl(row)
 				lowerLog.Write(b)
 				hist[row.Status]++
+				continue
+			}
+			if focus.Kind != "" && took == 0 {
+				// The focus seat was never offered the focus play (no target, wrong
+				// timing, an enabler that died): the game exercises nothing of the
+				// key, so the file is refused, not written.
+				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartNotExercised}})
+				if err != nil {
+					return err
+				}
+				lowerLog.Write(b)
+				hist[statusRefused]++
 				continue
 			}
 			for u, n := range classify.Uses(reg, tp, 0, len(tp.Entries)-1, true) {

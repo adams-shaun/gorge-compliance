@@ -102,7 +102,9 @@ func refuse(id, reason, format string, a ...any) *Refusal {
 //     when that completion cannot decide it, the item is refused rather than
 //     replayed with an unscripted ask.
 //   - Ability prefixes: oraclegen.XMageAbility of the step card's face.
-//   - Spellings: an item holding a card XMage spells differently is refused.
+//   - Spellings: an item holding one card XMage spells differently is served
+//     with Item.Card and Item.XMageName stamped (the driver carries exactly
+//     one such spelling); an item holding two or more is refused.
 //
 // Item.XTargetSkips stays unset: the generator derives it from the fixture's
 // omitted optional slots, and a lowered item has no fixture, so the driver
@@ -113,7 +115,11 @@ func Prepare(reg *cards.Registry, sp *decks.Spellings, l lower.Lowered, g rules.
 		return it, refuse(it.ID, ReasonCommander, "format commander; the XMage driver plays no Commander game")
 	}
 	if bad := differing(reg, sp, it); len(bad) > 0 {
-		return it, refuse(it.ID, ReasonSpelling, "%s", strings.Join(bad, "; "))
+		corpus, xm, ok := loneSpelling(reg, sp, it)
+		if !ok {
+			return it, refuse(it.ID, ReasonSpelling, "%s", strings.Join(bad, "; "))
+		}
+		it.Card, it.XMageName = corpus, xm
 	}
 	if len(g.Snapshots) == 0 {
 		return it, refuse(it.ID, ReasonNoResult, "gorge result has no snapshots")
@@ -969,6 +975,27 @@ func differing(reg *cards.Registry, sp *decks.Spellings, it oraclegen.Item) []st
 		}
 	}
 	return out
+}
+
+// loneSpelling is the corpus and XMage spellings of the item's one differing
+// card, when the driver's single Item.Card/Item.XMageName pair can carry it:
+// exactly one distinct card differs, and the item names neither a different
+// card nor a different XMage spelling already.
+func loneSpelling(reg *cards.Registry, sp *decks.Spellings, it oraclegen.Item) (corpus, xm string, ok bool) {
+	for _, n := range cardNames(it) {
+		x, known := sp.XMage(reg, n)
+		if !known || x == n {
+			continue
+		}
+		if corpus != "" {
+			return "", "", false
+		}
+		corpus, xm = n, x
+	}
+	if corpus == "" || (it.Card != "" && it.Card != corpus) || (it.XMageName != "" && it.XMageName != xm) {
+		return "", "", false
+	}
+	return corpus, xm, true
 }
 
 // unlisted is the item's corpus cards no manifest lists under any spelling; a
