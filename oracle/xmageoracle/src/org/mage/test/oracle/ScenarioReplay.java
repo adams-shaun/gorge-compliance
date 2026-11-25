@@ -8016,12 +8016,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         bindAnswerAlias(parts[0]);
                         addTarget(p, amountTargetName(parts[0]) + "^X=" + parts[1]);
                     } else {
-                        if (isScenarioRef(v)) {
-                            // A same-name target the generator names by its
-                            // exact ref: bind its @alias if it entered after
-                            // setup, so targetName resolves it.
-                            bindAnswerAlias(v);
-                        }
+                        // Bind every ref the answer names before targetName:
+                        // a bare ref, an "@ref" spelling, or a "^"-joined
+                        // multi-part record (echo's single SacrificeTargetCost
+                        // selects all its lands from one record). A target
+                        // that entered after setup has no @alias yet, and
+                        // targetName passes an "@..." value through unchanged,
+                        // so binding only a bare isScenarioRef(v) value left
+                        // those targets unmatched. bindAnswerAlias splits on
+                        // "^" and strips "@", so this one call covers every
+                        // shape and is a no-op for labels and skip tokens.
+                        bindAnswerAlias(v);
                         addTarget(p, v.equals("[target_skip]") ? TestPlayer.TARGET_SKIP : targetName(v));
                     }
                     break;

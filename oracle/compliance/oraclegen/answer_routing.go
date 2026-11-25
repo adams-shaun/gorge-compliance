@@ -828,6 +828,21 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// answer, never the gorge label (measured strict miss: "Missing
 		// CHOICE def ... Pay {B} and transform Grub, Notorious Auntie?").
 		return append(as, XAnswer{d.Seat, "choice", triggerCostAnswer(d)}), true
+	case echoCumulativeElectionAnswer(d) != "":
+		// Echo and cumulative upkeep pose the same pay/decline chooseUse.
+		// Gorge's label ("Sacrifice 2 land", "Pay {2}{W}{W}") is not a
+		// boolean; the generic choose_n arm would leave it on the choice
+		// queue and the replay would stop at the next cost target
+		// (xpt-bcbe2139: Skizzik Surger, Polar Kraken).
+		return append(as, XAnswer{d.Seat, "choice", echoCumulativeElectionAnswer(d)}), true
+	case r.echoCumulativeActionPick(i):
+		// The non-mana echo/cumulative payment's sacrifice (Skizzik
+		// Surger's two lands, Polar Kraken's land): XMage's
+		// SacrificeTargetCost picks through TargetSacrifice, the TARGET
+		// queue, not makeChoose. Echo pays one cost (one joined target
+		// record); cumulative upkeep pays one cost copy per age counter
+		// (one target answer per pick).
+		return append(as, echoCumulativeActionAnswers(d)...), true
 	case waterbendHelperDeclined(d):
 		// The waterbend tap-helpers ask: XMage pays the ability's waterbend
 		// generic from the prefilled mana pool and never poses the ask, so
