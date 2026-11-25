@@ -75,6 +75,15 @@ func TestXMageAbilityCostSpelling(t *testing.T) {
 			2: "{1}{R}, {T}, Remove two pressure counters from {this}, Sacrifice {this}",
 		}},
 		{"Goblin Bomb", map[int]string{0: "Remove five fuse counters from {this}, Sacrifice {this}"}},
+		// "{T}, Sacrifice two lands and Sandstone Deadfall": a separate
+		// SacrificeTargetCost(2, lands) and SacrificeSourceCost
+		// (SandstoneDeadfall.java:29-31), joined with ", ".
+		{"Sandstone Deadfall", map[int]string{0: "{T}, Sacrifice two lands, Sacrifice {this}"}},
+		// Source-first sacrifices keep the Oracle spelling: a CompositeCost
+		// with explicit text, or an "and ..." text on the second cost.
+		{"Magus of the Order", map[int]string{0: "{G}, {T}, Sacrifice {this} and another green creature"}},
+		{"Mount Doom", map[int]string{0: "{T}, Pay 1 life", 1: "{1}{B}{R}, {T}", 2: "{5}{B}{R}, {T}, Sacrifice {this} and a legendary artifact"}},
+		{"Great Hall of Starnheim", map[int]string{0: "{T}", 1: "{W}{W}{B}, {T}, Sacrifice {this} and a creature you control"}},
 		// The same Oracle shape with both halves in one CompositeCost whose
 		// explicit text ends "and sacrifice it" keeps the Oracle spelling:
 		// GrimoireOfTheDead.java:50-53, KhalniHeartExpedition.java:33-37,

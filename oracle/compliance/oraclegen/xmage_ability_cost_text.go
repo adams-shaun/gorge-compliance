@@ -49,6 +49,17 @@
 //     (e.g. KhalniHeartExpedition.java:33-37,
 //     QuestForTheGemblades.java:38-42), which CostsImpl renders verbatim, so
 //     this too is per card, never a general " and sacrifice it" rule.
+//   - "Sacrifice two lands and {this}" -> "Sacrifice two lands, Sacrifice
+//     {this}" for the cards in xmageSeparateSacrificeSelfCards: Sandstone
+//     Deadfall adds SacrificeTargetCost(2, FILTER_LANDS) and a plain
+//     SacrificeSourceCost as separate costs (SandstoneDeadfall.java:29-31), so
+//     CostsImpl.getText joins them with ", " and capitalises the latter. The
+//     other corpus cards whose Oracle cost names the card after a sacrifice
+//     (Kyscu Drake, Magus of the Order, Mount Doom, Urborg Panther, Glass-Cast
+//     Heart) put the source first in a CompositeCost with its own text, and
+//     Great Hall of Starnheim / Sword of the Ages set a "and ..." text on the
+//     second cost, so none of them takes this rewrite: per card, never a
+//     general " and {this}" rule.
 //   - "another card named {this}" / "other cards named {this}" keeps the
 //     card's printed name: the cost's text is the target filter's message,
 //     built from a literal name (GrandeurAbility's "another card named " +
@@ -85,6 +96,13 @@ var xmageSeparateSacrificeItCards = map[string]bool{
 	"Goblin Bomb":      true,
 }
 
+// xmageSeparateSacrificeSelfCards are the cards whose printed "Sacrifice <N>
+// <things> and <this card's name>" cost XMage renders as two comma-joined
+// costs, "Sacrifice <N> <things>, Sacrifice {this}" (see the header).
+var xmageSeparateSacrificeSelfCards = map[string]bool{
+	"Sandstone Deadfall": true,
+}
+
 var (
 	sacrificeThisRE   = regexp.MustCompile(`^Sacrifice this [A-Za-z]+$`)
 	exileThisRE       = regexp.MustCompile(`^Exile this ([A-Za-z]+)$`)
@@ -110,6 +128,9 @@ func xmageCostText(cost, sourceName, shortName string) string {
 	}
 	if xmageSeparateSacrificeItCards[sourceName] {
 		rest = strings.Replace(rest, " and sacrifice it", ", Sacrifice {this}", 1)
+	}
+	if xmageSeparateSacrificeSelfCards[sourceName] && strings.HasSuffix(rest, " and {this}") {
+		rest = strings.TrimSuffix(rest, " and {this}") + ", Sacrifice {this}"
 	}
 	parts := strings.Split(rest, ", ")
 	for i, part := range parts {
