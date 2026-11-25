@@ -1893,7 +1893,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// a "yes" ahead of it. The decline already scripts "no".
 				as = append(as, XAnswer{d.Seat, "choice", "yes"})
 			}
-			if hiddenPickUnanswerable(d) {
+			if hiddenPickWithheld(d, snaps) {
 				// A hidden-zone pick (a graveyard "you may return a land
 				// card") among same-named cards no exact answer can name: the
 				// bare label would let XMage return whichever one it meets
@@ -3686,8 +3686,8 @@ func namesObject(label, ref string) bool {
 	return strings.EqualFold(label, oraclediffRefName(ref))
 }
 
-// hiddenPickUnanswerable reports a hidden_pick decision with a pick that
-// shares its name with another offered object and has no exact spelling:
+// hiddenPickWithheld reports whether a hidden_pick decision has a pick that
+// shares its name with another offered object and no exact spelling:
 // ClassifySameName finds no alias or unique copy marker (the ref is
 // rank-derived) and no owner prefix separates the candidates (both objects
 // are one seat's). A bare name there reaches XMage's first same-named card
@@ -3705,7 +3705,13 @@ func namesObject(label, ref string) bool {
 // one scripted Wastes, XMage's AI returns two). Pothole Mole's ask offers a
 // different name too, and a copy sitting between other cards moves the
 // zone's order, so it stays withheld.
-func hiddenPickUnanswerable(d rules.OracleDecision) bool {
+//
+// snaps widen that interchangeability to a graveyard's own copies
+// (graveyardPickCopiesInterchangeable): every copy of one name in one
+// contiguous run is equally valid even when the ask offers other names, as
+// Acolyte of Affliction's seven Swamps behind "may return a permanent card".
+// A caller without snapshots cannot prove the run and keeps the withhold.
+func hiddenPickWithheld(d rules.OracleDecision, snaps []rules.OracleSnapshot) bool {
 	if d.Resume != "hidden_pick" {
 		return false
 	}
@@ -3714,11 +3720,124 @@ func hiddenPickUnanswerable(d rules.OracleDecision) bool {
 			!namesObject(d.Picks[k], d.PickRefs[k]) {
 			continue
 		}
-		if ownerQualifiedRef(d, k) == "" && !offersOnlyCopiesOf(d, k) {
-			return true
+		if ownerQualifiedRef(d, k) != "" || offersOnlyCopiesOf(d, k) ||
+			graveyardPickCopiesInterchangeable(d, k, snaps) {
+			continue
 		}
+		return true
 	}
 	return false
+}
+
+// hiddenPickUnanswerable is hiddenPickWithheld without snapshots: a
+// shape-only caller cannot prove a copy run interchangeable, so it keeps the
+// conservative withhold.
+func hiddenPickUnanswerable(d rules.OracleDecision) bool { return hiddenPickWithheld(d, nil) }
+
+// graveyardPickCopiesInterchangeable reports whether pick k's same-named
+// offered copies are interchangeable in the picker's graveyard: every offered
+// same-named object is one of that seat's non-token copies, the graveyard held
+// all of them in one contiguous run at the start of the step, and the step
+// removed exactly the copies this decision picked, leaving one run behind.
+//
+// A graveyard delta identifies the zone (a hand/library pick leaves it
+// unchanged) and the run proves the outcome: removing any copy from a
+// contiguous same-name run leaves the same name sequence, so the bare name is
+// an exact answer for every copy (Acolyte of Affliction's seven Swamps).
+// Pothole Mole's two Forests sit either side of a Swamp -- not one run -- so
+// they are not interchangeable and stay withheld. A filtered ask (only the
+// graveyard's lands offered) is covered too: the run is read from the
+// graveyard itself, not from the offered list.
+func graveyardPickCopiesInterchangeable(d rules.OracleDecision, k int, snaps []rules.OracleSnapshot) bool {
+	if d.Step < 0 || d.Step+1 >= len(snaps) || k < 0 || k >= len(d.PickRefs) ||
+		len(d.PickRefs) == 0 || len(d.OptionRefs) == 0 {
+		return false
+	}
+	ref := d.PickRefs[k]
+	if strings.Contains(ref, ":token:") {
+		return false
+	}
+	name := oraclediffRefName(ref)
+	seat, ok := refSeat(ref)
+	if !ok {
+		return false
+	}
+	offered := 0
+	for _, candidate := range d.OptionRefs {
+		if !strings.EqualFold(oraclediffRefName(candidate), name) {
+			continue
+		}
+		if s, ok := refSeat(candidate); !ok || s != seat || strings.Contains(candidate, ":token:") {
+			return false
+		}
+		offered++
+	}
+	if offered < 2 {
+		return false
+	}
+	// The picks of this name are the cards the step took out of the graveyard;
+	// their count is the delta the after-step checkpoint must show.
+	gone := 0
+	for _, pick := range d.PickRefs {
+		if s, ok := refSeat(pick); ok && s == seat &&
+			strings.EqualFold(oraclediffRefName(pick), name) && !strings.Contains(pick, ":token:") {
+			gone++
+		}
+	}
+	if gone == 0 {
+		return false
+	}
+	before := seatGraveyard(snaps[d.Step], seat)
+	after := seatGraveyard(snaps[d.Step+1], seat)
+	if countFolded(before, name) < offered || !oneRun(before, name) {
+		return false
+	}
+	if n := countFolded(after, name); n != countFolded(before, name)-gone || (n > 0 && !oneRun(after, name)) {
+		return false
+	}
+	return true
+}
+
+// seatGraveyard returns seat's graveyard in zone order at snap, or nil when
+// the snapshot has no such seat.
+func seatGraveyard(snap rules.OracleSnapshot, seat int) []string {
+	for _, p := range snap.Players {
+		if p.Seat == seat {
+			return p.Graveyard
+		}
+	}
+	return nil
+}
+
+// countFolded counts the names equal to name, ignoring case.
+func countFolded(names []string, name string) int {
+	n := 0
+	for _, s := range names {
+		if strings.EqualFold(s, name) {
+			n++
+		}
+	}
+	return n
+}
+
+// oneRun reports whether names holds at least one copy of name and every copy
+// occupies one contiguous run. A name broken by another card is not one run:
+// removing either copy then leaves a different name sequence.
+func oneRun(names []string, name string) bool {
+	seen, inside, closed := false, false, false
+	for _, s := range names {
+		if strings.EqualFold(s, name) {
+			if closed {
+				return false
+			}
+			seen, inside = true, true
+			continue
+		}
+		if inside {
+			inside, closed = false, true
+		}
+	}
+	return seen
 }
 
 // offersOnlyCopiesOf reports whether every object decision d offers is a
