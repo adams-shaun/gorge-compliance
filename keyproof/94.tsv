@@ -173,8 +173,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 94daa0c2-4790-4193-aaa8-ba492e8c8fe7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94daa0c2-4790-4193-aaa8-ba492e8c8fe7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94dcbcc0-6941-4e8c-8741-4b47ae231eba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-94df7ab5-bc30-4825-b4bc-ea757cdc08f7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-94df7ab5-bc30-4825-b4bc-ea757cdc08f7	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+94df7ab5-bc30-4825-b4bc-ea757cdc08f7	cast	NULL	owed	refused:start:cantbecast	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+94df7ab5-bc30-4825-b4bc-ea757cdc08f7	f0/t0	NULL	owed	refused:start:cantbecast	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 94e71162-7c9d-46f4-90e8-413a1b08a198	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mental-journey:cast:s1,f:xs:XP:mental-journey:cast:s1	-	-	-	ae86f6029288	-	2de77598d77a	-	-	2026-11-24	xproof
 94e71162-7c9d-46f4-90e8-413a1b08a198	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	2	0	x:xs:XP:mental-journey:cast:s1,f:xs:XP:mental-journey:cast:s1	-	-	-	d864b561c9cb	-	2de77598d77a	-	-	2026-11-24	xproof
 94e8791b-e72f-4aed-b761-826779337168	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:station-monitor:cast:s1,f:xs:XP:station-monitor:cast:s1	-	-	-	23c4009444b0	-	6054a054f560	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
