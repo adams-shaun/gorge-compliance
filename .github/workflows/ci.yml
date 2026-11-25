@@ -92,6 +92,17 @@ jobs:
       - name: shell syntax
         working-directory: gorge-compliance
         run: for f in $(git ls-files '*.sh'); do bash -n "$f" || exit 1; done
+      # A FORGE_ORACLE_REF/XMAGE_REF that is not in our fork network breaks
+      # every kit build ("upload-pack: not our ref"). Tickets land on local
+      # develop, not by PR to develop, so the landing config's [[gates]] entry
+      # is the primary check; this job covers the develop->main PR. gh reads
+      # both public forks with the job token; fail closed if the API cannot
+      # answer.
+      - name: fork pins are pushed
+        working-directory: gorge-compliance
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: make precheck
 
   test:
     needs: pin

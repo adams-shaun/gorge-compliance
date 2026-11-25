@@ -486,7 +486,22 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (make forge-driver-tests) replays the Mabel, Bitter Recluse request with LOYALTY then Done and requires Ajani Resolute
 # still on p1's battlefield at 1 loyalty and one +1/+1, with no harness or strict-miss row. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-counter-any-done.
-FORGE_ORACLE_REF ?= 6bcd573a9d685e5c23006f9e31a5f47bdc0e2bff
+# 3e6bd830a6f = 244c5908482 + gorge's discard_may election (xproof cluster xpt-e4d29b48, Evie Frye and Glacial Dragonhunt's
+# DB$ Discard | Mode$ TgtChoose | Optional$ True | NumCards$ 1): Forge asks chooseCardsToDiscardFrom for 0..1, gorge poses a yes/no
+# election (effDiscardTgtChoose, resume discard_may) and then the card pick, skipped when forced. ScriptedController.chooseCardsToDiscardFrom
+# took only the card pick, so the yes was a leftover and the AI discarded ("Missing discard answer ... 0..1 to pick"). It now
+# takes a queued discard_may yes/no for a min 0 ask first: no is an empty pick, yes is the 1..max pick (a lone card is forced,
+# otherwise gorge's logged discard pick); AnyNumber$ has no election and is unchanged. DiscardMayElectionTest (yes with a lone
+# card, no, yes then gorge's card pick) fails without the change and the full driver suite (198 tests) is green on it;
+# scripts/forge-oracle-test-discard-may-election.sh (make forge-driver-tests) runs it. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-discard-may-election.
+# 7fd5e0ca01f = the clean merge of 6bcd573a9d6 (the up-to remove-any-type Done pick, fork branch
+# fix/xp-forge-driver-counter-any-done) and 3e6bd830a6f (the discard_may election, fork branch
+# fix/xp-forge-driver-discard-may-election), both children of 244c5908482 and touching disjoint code (the counter-kind ask in
+# StepMachine/ScriptedController.chooseCounterType vs ScriptedController.chooseCardsToDiscardFrom); the merge adds no code of its own.
+# make forge-driver-tests runs both scripts/forge-oracle-test-counter-any-done.sh and scripts/forge-oracle-test-discard-may-election.sh
+# on it. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 7fd5e0ca01fcfa9ea97d1fc64ae4936d42ca188b
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
@@ -509,6 +524,7 @@ help:
 	@echo "  make test-one PKG=./p RUN=TestX — one capped, corpus-checked test run with one verdict line"
 	@echo "  make test-select BASE=ref — print the Go test packages the touched-package gate selects for BASE..HEAD"
 	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
+	@echo "  make precheck       — the merge precheck: FORGE_ORACLE_REF/XMAGE_REF are pushed to our forks"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make carddb-test    — the carddb tool's Python tests (cmd/carddb/py/tests; git + python3 only, no network)"
 	@echo "  make oracle-audit   — the hand Oracle-text audit + XMage ports (audit/; ORACLE_RUN=<Card> to filter)"
@@ -597,6 +613,19 @@ phase-preflight:
 	RUST_MIN_STACK=16777216 $(PHASE_ORACLE_DIR)/target/follower/phase-follower --preflight $$names --card-data $(PHASE_ORACLE_DIR)/card-data-$(shell cut -d' ' -f2 followers/phase/PHASE_PIN).json > $$out && \
 	cat $$out && echo "refused $$(wc -l < $$out) of $$(wc -l < $$names)"
 
+# precheck is the cheap merge gate: every pin a kit build fetches from one of
+# our forks must already be pushed there. A seat-local commit that never
+# reached adams-shaun/forge or adams-shaun/mage breaks every kit build with
+# "upload-pack: not our ref". Tickets land on local develop, so the landing
+# config (.agentctl/config.toml, operator-owned and untracked) must gate merges
+# on this target; CI's lint job runs it on the develop->main PR as the second
+# line of defence. The pins are passed explicitly because make does not export
+# its variables; a FORGE_ORACLE_REF=... on the command line wins over the ?=
+# default.
+.PHONY: precheck
+precheck:
+	FORGE_ORACLE_REF='$(FORGE_ORACLE_REF)' XMAGE_REF='$(XMAGE_REF)' bash scripts/check-fork-pins.sh
+
 boundary:
 	GORGE_TEST_WRAPPER=1 go test -count=1 ./internal/boundary/
 
@@ -618,6 +647,7 @@ smoke:
 	bash ops/scripts/tests/make_cards_smoke.sh
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
+	bash ops/scripts/tests/check_fork_pins_smoke.sh
 	bash ops/scripts/tests/forge_sbv2_smoke.sh
 	bash ops/scripts/tests/xmage_sbv2_smoke.sh
 	bash ops/scripts/tests/phase_oracle_pin_smoke.sh

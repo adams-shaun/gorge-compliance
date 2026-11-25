@@ -114,7 +114,12 @@ func TestForgeRolledDie(t *testing.T) {
 // (StepMachine/ScriptedController only); die-roll code unchanged, so ForcedDieRollTest's subject is untouched.
 // 6bcd573a9d6 = 9a35b501bbb plus the up-to remove-any-type Done pick consumed at the counter-kind ask
 // (StepMachine/ScriptedController only); die-roll code unchanged, and ForcedDieRollTest re-run green on it (7/7).
-const forgeOracleDieRollRef = "6bcd573a9d685e5c23006f9e31a5f47bdc0e2bff"
+// 3e6bd830a6f = 244c5908482 plus the discard_may election (ScriptedController.chooseCardsToDiscardFrom only); die-roll code
+// unchanged, and the full driver suite (198 tests, ForcedDieRollTest and ForcedCoinFlipTest among them) is green on it.
+// 7fd5e0ca01f = the clean merge of 6bcd573a9d6 and 3e6bd830a6f (both children of 244c5908482, disjoint driver code), so the
+// pinned driver keeps the Done pick and the discard_may election; die-roll code unchanged, and ForcedDieRollTest (7/7) and
+// DiscardMayElectionTest (3/3) re-run green on the merge.
+const forgeOracleDieRollRef = "7fd5e0ca01fcfa9ea97d1fc64ae4936d42ca188b"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

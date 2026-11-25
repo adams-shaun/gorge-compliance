@@ -356,8 +356,8 @@ func staticRequestJSON(line string) string {
 }
 
 // TestForgeScriptFixturesCarryTheirItemSHA: every hand-authored request in
-// scripts/forge-oracle-test-*.sh names its own item's scenario_sha. A copied
-// request can otherwise keep the scenario it was copied from (the Done fixture
+// scripts/forge-oracle-test-*.sh carries a scenario_sha, and it is its own
+// item's. A copied request can otherwise keep the scenario it was copied from (the Done fixture
 // did), so two different scenarios share an identity and a consumer keyed by
 // it conflates them. The check is over all such scripts, so a new fixture or a
 // later answers edit is covered without listing the files.
@@ -376,15 +376,15 @@ func TestForgeScriptFixturesCarryTheirItemSHA(t *testing.T) {
 			t.Fatal(err)
 		}
 		for i, line := range strings.Split(string(b), "\n") {
-			// Only a fixture that carries a scenario_sha is this test's
-			// subject. A shell-escaped apostrophe can make a request line
-			// invalid JSON on its own (the suspend fixture writes one
-			// through printf); that fixture has no sha to check.
-			if !strings.Contains(line, `"scenario_sha"`) {
+			// A shell-quoted apostrophe ('"'"') is one apostrophe once the
+			// shell has run; read the request as the driver will.
+			line = strings.ReplaceAll(line, `'"'"'`, `'`)
+			if !strings.Contains(line, `{"id":`) && !strings.Contains(line, `"scenario_sha"`) {
 				continue
 			}
 			raw := staticRequestJSON(line)
 			if raw == "" {
+				t.Errorf("%s:%d: the line holds no one-line {\"id\": request to check", path, i+1)
 				continue
 			}
 			var rq forgeRequest
@@ -392,7 +392,11 @@ func TestForgeScriptFixturesCarryTheirItemSHA(t *testing.T) {
 				t.Fatalf("%s:%d: static request is not JSON: %v", path, i+1, err)
 			}
 			if rq.Item.ID == "" {
-				t.Errorf("%s:%d: request %q has a scenario_sha but no item", path, i+1, rq.ID)
+				t.Errorf("%s:%d: request %q has no item", path, i+1, rq.ID)
+				continue
+			}
+			if rq.ScenarioSHA == "" {
+				t.Errorf("%s:%d: request %q carries no scenario_sha (want %s)", path, i+1, rq.ID, gate.ItemSHA(rq.Item))
 				continue
 			}
 			checked++
