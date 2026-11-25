@@ -83,6 +83,17 @@ func restrictsCombat(st *cards.Static, card, fix *cards.Face, attack bool) bool 
 	return !named
 }
 
+// restrictingStatic is the first static of face that restrictsCombat for the
+// key's action, or nil.
+func restrictingStatic(face, fix *cards.Face, attack bool) *cards.Static {
+	for i := range face.Statics {
+		if st := &face.Statics[i]; restrictsCombat(st, face, fix, attack) {
+			return st
+		}
+	}
+	return nil
+}
+
 // combatKeyStart is a level-B combat key (combat#F.attack, combat#F.block) as
 // a start: the card on the battlefield since the turn began (no summoning
 // sickness), and the fixture creature on the other side.
@@ -112,11 +123,7 @@ func combatKeyStart(reg *cards.Registry, c *cards.Card, card, key string, f *Sta
 	if !ok || len(fix.Faces) == 0 || !fix.Faces[0].IsCreature() {
 		return "no-generator:combat:fixture"
 	}
-	for i := range face.Statics {
-		st := &face.Statics[i]
-		if !restrictsCombat(st, face, fix.Faces[0], m[2] == "attack") {
-			continue
-		}
+	if st := restrictingStatic(face, fix.Faces[0], m[2] == "attack"); st != nil {
 		switch {
 		case m[2] == "attack" && st.Mode == "CantAttack" && selfStatic(st):
 			return "no-generator:combat:cant-attack"

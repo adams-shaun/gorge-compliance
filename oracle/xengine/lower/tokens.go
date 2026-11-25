@@ -76,6 +76,14 @@ var xmageSetupTokens = map[string]bool{
 	"wu_2_2_detective":                 true,
 }
 
+// SetupTokenScript reports whether XMage's setup token table maps a token
+// definition script. A start can place a token by that script only when both
+// followers replay the setup, so the generator refuses a kind only one leg
+// could play rather than writing a start that refuses at lowering time. The
+// table tracks ScenarioReplay.SETUP_TOKENS (TestXMageSetupTokenTableMatchesDriver),
+// so a newly mapped stem lifts the refusal without another list to edit.
+func SetupTokenScript(script string) bool { return xmageSetupTokens[script] }
+
 // tokenStems is the reverse of g.Tokens: the stem of each token definition.
 // Two stems sharing one definition resolve to the first in sorted order.
 func tokenStems(g *state.Game) map[*cards.Card]string {
