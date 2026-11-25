@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31505942-52c4-4485-9241-c9592e6839e4	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:soulstinger:f0t1:s1,f:xs:XP:soulstinger:f0t1:s1	-	-	-	d864b561c9cb	-	500be44c6f83	-	-	2026-11-24	xproof
 315772f2-abd2-4681-b8c8-1db4b0ccbbcd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31585036-cdc3-47f5-9fc7-913212826f2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-315c97ee-e544-4166-8016-a5dce87adf63	cast	cast	owed	harness	-	start	0	0	-	-	-	-	be173c120256	-	cbf2392f3da1	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+315c97ee-e544-4166-8016-a5dce87adf63	cast	cast	owed	harness	-	start	0	0	-	-	-	-	ac103c32f3f2	-	cbf2392f3da1	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 315ddc7a-c39c-43d9-b134-23acbd865e3e	cast	cast-resolve	agreed	-	FX	scen	2	0	Squirrelanoids/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 315ddc7a-c39c-43d9-b134-23acbd865e3e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:squirrelanoids:combat0.attack:s1,f:xs:XP:squirrelanoids:combat0.attack:s1	-	-	-	23c4009444b0	-	bf65a2a05e15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 315ddc7a-c39c-43d9-b134-23acbd865e3e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:squirrelanoids:combat0.block:s1,f:xs:XP:squirrelanoids:combat0.block:s1	-	-	-	23c4009444b0	-	bf65a2a05e15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -138,8 +138,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31be715f-9ad3-435c-9e52-e108fe96b969	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31be715f-9ad3-435c-9e52-e108fe96b969	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 31bf199b-dfb1-428e-96a5-eb25104e2b43	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:late-to-dinner:cast:s1,f:xs:XP:late-to-dinner:cast:s1	-	-	-	6f84be0f34c0	-	a63c6f9ca926	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-31bfb6ca-4455-4e3d-8f0f-e82f71990d61	cast	cast	owed	harness	-	start	0	0	-	-	-	-	be173c120256	-	8e1b2915e39b	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
-31bfb6ca-4455-4e3d-8f0f-e82f71990d61	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	be173c120256	-	8e1b2915e39b	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+31bfb6ca-4455-4e3d-8f0f-e82f71990d61	cast	cast	owed	harness	-	start	0	0	-	-	-	-	ac103c32f3f2	-	8e1b2915e39b	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+31bfb6ca-4455-4e3d-8f0f-e82f71990d61	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	ac103c32f3f2	-	8e1b2915e39b	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 31c30c4f-12f4-4cbc-b7c1-123f36b8df75	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:runner-s-bane:f0t0:s1,f:xs:XP:runner-s-bane:f0t0:s1	-	-	-	3aa6ded33acb	-	c75dc00f27cb	-	-	2026-11-25	xproof
 31c30c4f-12f4-4cbc-b7c1-123f36b8df75	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:runner-s-bane:f0t0:s1,f:xs:XP:runner-s-bane:f0t0:s1	-	-	-	3aa6ded33acb	-	c75dc00f27cb	-	-	2026-11-25	xproof
 31c7453e-33b8-4eb6-abac-28cdb35fb993	cast	cast	agreed	-	F	start	4	0	f:xs:XP:salt-vampire:cast:s1	-	-	-	23c4009444b0	-	407e7bfb3cf2	-	-	2026-11-25	xproof
