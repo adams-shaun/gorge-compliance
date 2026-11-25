@@ -81,6 +81,25 @@ func (s *StartSeat) Attached(name string) bool {
 	return false
 }
 
+// TappedCopies reports, for each Battlefield entry in order, whether that copy
+// is tapped. Tapped names bind to the first copy of the name not bound yet, as
+// the start file's lowering does (cmd/xengine's startDeck): a repeated name
+// (four Mountains, one tapped to sacrifice) marks one copy, not all of them.
+// A name with no battlefield copy is ignored here; the lowering refuses it.
+func (s *StartSeat) TappedCopies() []bool {
+	flags := make([]bool, len(s.Battlefield))
+	used := make([]bool, len(s.Battlefield))
+	for _, name := range s.Tapped {
+		for i, card := range s.Battlefield {
+			if !used[i] && card == name {
+				used[i], flags[i] = true, true
+				break
+			}
+		}
+	}
+	return flags
+}
+
 // StartCounter puts N counters of Kind on the first battlefield copy of Card
 // not yet bound.
 type StartCounter struct {
