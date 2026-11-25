@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 440881ad-48cf-4b82-8bb5-f506d1a51755	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 440ab324-205f-4f53-a8cc-994f30aefd74	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 44154004-e50e-45d1-bde0-ba6e3354067c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-44154004-e50e-45d1-bde0-ba6e3354067c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+44154004-e50e-45d1-bde0-ba6e3354067c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4415b65d-5473-4b19-94f7-e5cf4ce64d5e	cast	cast-resolve	agreed	-	FX	scen	2	0	Cracked Skull/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4415b65d-5473-4b19-94f7-e5cf4ce64d5e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4415b65d-5473-4b19-94f7-e5cf4ce64d5e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Cracked Skull/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:emrakul-the-exigent-doom:combat0.attack:s1,f:xs:XP:emrakul-the-exigent-doom:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	c1f43e3a040d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:emrakul-the-exigent-doom:combat0.block:s1,f:xs:XP:emrakul-the-exigent-doom:combat0.block:s1	-	-	-	fb9d3088f0bf	-	c1f43e3a040d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44240b1e-c104-4eb4-8ab9-0d56607ba241	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swiftblade-vindicator:cast:s1,f:xs:XP:swiftblade-vindicator:cast:s1	-	-	-	3aa6ded33acb	-	c776007bd144	-	-	2026-11-25	xproof
 44240b1e-c104-4eb4-8ab9-0d56607ba241	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:swiftblade-vindicator:combat0.attack:s1,f:xs:XP:swiftblade-vindicator:combat0.attack:s1	-	-	-	3aa6ded33acb	-	c776007bd144	-	-	2026-11-25	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 448396b8-b691-457a-8569-1282c3fca65a	f0/a1	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:infected-vermin:f0a1:s1,f:xs:XP:infected-vermin:f0a1:s1	-	-	-	fc71ca68c5ac	-	4f3a6ce9f5d1	-	-	2026-11-24	xproof
 4489a526-0e07-4d37-9e83-628f7eb256c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4489a526-0e07-4d37-9e83-628f7eb256c6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4489a526-0e07-4d37-9e83-628f7eb256c6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+4489a526-0e07-4d37-9e83-628f7eb256c6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 448b27a5-7c0c-4ab6-bddf-bd62b920aacc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forced-fruition:cast:s1,f:xs:XP:forced-fruition:cast:s1	-	-	-	d864b561c9cb	-	bf4b040db294	-	-	2026-11-24	xproof
 448b27a5-7c0c-4ab6-bddf-bd62b920aacc	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:forced-fruition:f0t0:s1,f:xs:XP:forced-fruition:f0t0:s1	-	-	-	23c4009444b0	-	bf4b040db294	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 448c84f9-712b-4970-8719-2ab9c2a59d20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 448da389-81db-4931-9cf7-3fde0ce9392f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 448da389-81db-4931-9cf7-3fde0ce9392f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 448e0cf2-c97c-4dc0-96ef-91f1eb75d97c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-448e0cf2-c97c-4dc0-96ef-91f1eb75d97c	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+448e0cf2-c97c-4dc0-96ef-91f1eb75d97c	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 448e0cf2-c97c-4dc0-96ef-91f1eb75d97c	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 448f5c55-7334-4fa4-9d90-0e57bae19444	cast	cast	agreed	-	F	start	2	0	f:xs:XP:mist-dragon:cast:s1	-	-	-	8c0bd19283bb	-	fa9c58ae2430	-	-	2026-11-24	xproof
 448f5c55-7334-4fa4-9d90-0e57bae19444	f0/a0	Pump	agreed	-	F	start	4	0	f:xs:XP:mist-dragon:cast:s1	-	-	-	8c0bd19283bb	-	fa9c58ae2430	-	-	2026-11-24	xproof

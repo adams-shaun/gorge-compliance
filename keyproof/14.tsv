@@ -46,9 +46,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 144119bc-7fd1-45c5-9e29-f742e7c255ac	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 144119bc-7fd1-45c5-9e29-f742e7c255ac	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 144119bc-7fd1-45c5-9e29-f742e7c255ac	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-14442f5b-0bad-4c58-b268-d775787571d8	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Deep Space 9"	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-14442f5b-0bad-4c58-b268-d775787571d8	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Deep Space 9"	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-14442f5b-0bad-4c58-b268-d775787571d8	f0/t1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Deep Space 9"	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+14442f5b-0bad-4c58-b268-d775787571d8	cast	cast	agreed	-	F	start	6	0	f:xs:XP:deep-space-9:cast:s1	-	-	-	4b8018a80bf0	-	7900a135ab80	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+14442f5b-0bad-4c58-b268-d775787571d8	f0/t0	ChangesZone	agreed	-	F	start	6	0	f:xs:XP:deep-space-9:cast:s1	-	-	-	4b8018a80bf0	-	7900a135ab80	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+14442f5b-0bad-4c58-b268-d775787571d8	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:deep-space-9:f0t1:s1	-	-	-	4b8018a80bf0	-	7900a135ab80	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1448489c-dfb8-43aa-ae3d-ed832381c1d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scrabbling-skullcrab:cast:s1,f:xs:XP:scrabbling-skullcrab:cast:s1	-	-	-	23c4009444b0	-	8bf24dc8b27f	-	-	2026-11-25	xproof
 1448489c-dfb8-43aa-ae3d-ed832381c1d9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scrabbling-skullcrab:f0t0:s1,f:xs:XP:scrabbling-skullcrab:f0t0:s1	-	-	-	23c4009444b0	-	8bf24dc8b27f	-	-	2026-11-25	xproof
 1448489c-dfb8-43aa-ae3d-ed832381c1d9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Scrabbling Skullcrab/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14d71432-c2e6-4c81-92ef-cf98e1fcf5f8	f0/a1	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 14d85a83-323b-4e42-88bf-71167a8174e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d85a83-323b-4e42-88bf-71167a8174e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-14d85a83-323b-4e42-88bf-71167a8174e3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+14d85a83-323b-4e42-88bf-71167a8174e3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14d9bb24-df7b-4f41-aeca-aad639b280db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:relic-golem:cast:s1,f:xs:XP:relic-golem:cast:s1	-	-	-	ae86f6029288	-	4a6b7e84d26c	-	-	2026-11-24	xproof
 14d9bb24-df7b-4f41-aeca-aad639b280db	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:relic-golem:f0a0:s1,f:xs:XP:relic-golem:f0a0:s1	-	-	-	ae86f6029288	-	4a6b7e84d26c	-	-	2026-11-24	xproof
 14df239a-c7cc-492a-94f5-2971f6efe17b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:vampirism:cast:s1	-	-	-	8c0bd19283bb	-	6aa6e5f87578	-	-	2026-11-24	xproof

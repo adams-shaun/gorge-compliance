@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cbbb3f3-63a4-4983-81ea-8c405b10e63f	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:voice-of-resurgence:f0t1:s1,f:xs:XP:voice-of-resurgence:f0t1:s1	-	-	-	d864b561c9cb	-	d76a5cee2a3f	-	-	2026-11-24	xproof
 5cbe6066-07f8-45de-b3b4-b8590d111b0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravenous-cosmozoan:cast:s1,f:xs:XP:ravenous-cosmozoan:cast:s1	-	-	-	fb9d3088f0bf	-	c5bdff213716	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 5cc57770-1070-45f6-9d76-d402c55a0d06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mischievous-chimera:cast:s1,f:xs:XP:mischievous-chimera:cast:s1	-	-	-	ae86f6029288	-	df34a4acc481	-	-	2026-11-24	xproof
-5cc57770-1070-45f6-9d76-d402c55a0d06	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+5cc57770-1070-45f6-9d76-d402c55a0d06	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:mischievous-chimera:f0t0:s1,f:xs:XP:mischievous-chimera:f0t0:s1	-	-	-	4b8018a80bf0	-	df34a4acc481	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5cc5be7a-cbe6-4853-bb95-0390e25b4f2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cc5be7a-cbe6-4853-bb95-0390e25b4f2b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stingerback-terror:cast:s1,f:xs:XP:stingerback-terror:cast:s1	-	-	-	3aa6ded33acb	-	04405a20636e	-	-	2026-11-25	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cd17347-5558-46f9-b8bb-ae5deeb1f229	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cd35d18-115b-4d7c-8d05-3d4c8303f46e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cd35d18-115b-4d7c-8d05-3d4c8303f46e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cd35d18-115b-4d7c-8d05-3d4c8303f46e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+5cd35d18-115b-4d7c-8d05-3d4c8303f46e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5cdb69e5-9395-4ef6-be18-71e3dd70df66	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swashbuckler-s-whip:cast:s1,f:xs:XP:swashbuckler-s-whip:cast:s1	-	-	-	8c0bd19283bb	-	6e23f3bffd71	-	-	2026-11-24	xproof
 5cdb69e5-9395-4ef6-be18-71e3dd70df66	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:swashbuckler-s-whip:f0a0:s1,f:xs:XP:swashbuckler-s-whip:f0a0:s1	-	-	-	8c0bd19283bb	-	6e23f3bffd71	-	-	2026-11-24	xproof
 5cdb69e5-9395-4ef6-be18-71e3dd70df66	static#0.0	static#0.0	agreed	-	X	scen	1	0	Swashbuckler's Whip/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56a80bd3-b81b-428d-96e1-f03ab6199cf3	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 56a8554c-d427-44ca-a01d-9e12c89acd1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56a8554c-d427-44ca-a01d-9e12c89acd1e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56aeaee8-e014-485e-b7ad-e26ade663bcf	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+56aeaee8-e014-485e-b7ad-e26ade663bcf	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 56aeaee8-e014-485e-b7ad-e26ade663bcf	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 56aeaee8-e014-485e-b7ad-e26ade663bcf	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 56aec5bd-a8e8-403f-b339-0fc817426428	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -126,8 +126,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56b69e46-a1e4-4545-99e2-ee4385b7e429	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keening-banshee:f0t0:s1,f:xs:XP:keening-banshee:f0t0:s1	-	-	-	64a08ba7d913	-	0a7c1d8e1ebb	-	-	2026-11-24	xproof
 56c1a548-c80c-432b-bf92-d4ef6117b298	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56c1a548-c80c-432b-bf92-d4ef6117b298	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:dimir-cutpurse:f0t0:s1,f:xs:XP:dimir-cutpurse:f0t0:s1	-	-	-	23c4009444b0	-	3f435224aa08	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-56c412be-daab-4461-931f-1e2ea8ecd75d	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Null Summoner"	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-56c412be-daab-4461-931f-1e2ea8ecd75d	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Null Summoner"	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+56c412be-daab-4461-931f-1e2ea8ecd75d	cast	cast	agreed	-	F	start	4	0	f:xs:XP:null-summoner:cast:s1	-	-	-	4b8018a80bf0	-	5f490718be55	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+56c412be-daab-4461-931f-1e2ea8ecd75d	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:null-summoner:cast:s1	-	-	-	4b8018a80bf0	-	5f490718be55	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 56c558f3-535d-49aa-a2de-54e0bb598483	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56c558f3-535d-49aa-a2de-54e0bb598483	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:isolation-cell:f0t0:s1,f:xs:XP:isolation-cell:f0t0:s1	-	-	-	23c4009444b0	-	60999001cef9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 56c5afdc-6777-45c7-8e2c-3cadecb95c5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -158,5 +158,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56f5ed8d-ef53-4766-9ef3-1e24a10e267b	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:buried-treasure:f0a0:s1,f:xs:XP:buried-treasure:f0a0:s1	-	-	-	da6bc3fe8458	-	d77d1851a1ea	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 56f5ed8d-ef53-4766-9ef3-1e24a10e267b	f0/a1	Discover	agreed	-	FX	start	2	0	x:xs:XP:buried-treasure:f0a1:s1,f:xs:XP:buried-treasure:f0a1:s1	-	-	-	3aa6ded33acb	-	d77d1851a1ea	-	-	2026-11-25	xproof
 56f782b7-d46c-4aa1-ae16-66d6401c72ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56f782b7-d46c-4aa1-ae16-66d6401c72ae	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+56f782b7-d46c-4aa1-ae16-66d6401c72ae	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 56f782b7-d46c-4aa1-ae16-66d6401c72ae	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:throat-slitter:f0t0:s1,f:xs:XP:throat-slitter:f0t0:s1	-	-	-	23c4009444b0	-	264800faa626	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

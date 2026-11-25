@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a2	SetLife	agreed	-	FX	start	2	0	x:xs:XP:vraska-relic-seeker:f0a2:s1,f:xs:XP:vraska-relic-seeker:f0a2:s1	-	-	-	336eab778104	-	46246a7288d4	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 3c037865-d38c-48da-aee9-308975e12638	cast	cast	agreed	-	F	start	2	0	f:xs:XP:seven-of-nine:cast:s1	-	-	-	23c4009444b0	-	352b9ef612a9	-	-	2026-11-25	xproof
-3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herald-of-torment:f0t0:s1,f:xs:XP:herald-of-torment:f0t0:s1	-	-	-	3aa6ded33acb	-	dd74058759d6	-	-	2026-11-25	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:herald-of-torment:f0t0:s1,f:xs:XP:herald-of-torment:f0t0:s1	-	-	-	3aa6ded33acb	-	dd74058759d6	-	-	2026-11-25	xproof
 3c067370-1e3d-4262-b7d6-f2bb2656b1d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3cd15225-e9b6-4998-b545-76536c72e948	cast	cast-resolve	agreed	-	FX	scen	2	0	Claim the Kingdom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3cd15225-e9b6-4998-b545-76536c72e948	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Claim the Kingdom/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3cd15225-e9b6-4998-b545-76536c72e948	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Claim the Kingdom/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3cd3cdc9-2ed2-4cdf-b58a-12c3a2ef218b	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Roads Go Ever, Ever On"	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+3cd3cdc9-2ed2-4cdf-b58a-12c3a2ef218b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:roads-go-ever-ever-on:cast:s1	-	-	-	4b8018a80bf0	-	ed683b5372f2	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3cd72848-7b99-4d46-96f5-53f297c9d2a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cd7ef87-4cb4-42ff-842f-e9a465dab165	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roil-cartographer:cast:s1,f:xs:XP:roil-cartographer:cast:s1	-	-	-	ae86f6029288	-	cb18adb64026	-	-	2026-11-24	xproof
 3cd7ef87-4cb4-42ff-842f-e9a465dab165	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
