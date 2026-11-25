@@ -210,7 +210,7 @@ index.
 
 **`cast_mode`** says how a spell is cast. `""` is the ordinary way. Others name an alternative or
 optional cost: `kicked`, `kicked1`, `kicked2`, `kickedboth`, `multikicked`, `buyback`, `entwined`,
-`offspring`, `replicated`, `optionalcost`, `plot`, `suspend`, `adventure_alt`, `omen_alt`, `modal_spell`,
+`offspring`, `replicated`, `optionalcost`, `plot`, `suspend`, `mayplay`, `alternative`, `adventure_alt`, `omen_alt`, `modal_spell`,
 `warped`, `flashback`, and more as gorge supports them. If your driver can't act on a mode, list the
 ones it can in the registry's `CastModes`. A cast with any other mode then becomes `harness` instead of
 a false `diverge`.
