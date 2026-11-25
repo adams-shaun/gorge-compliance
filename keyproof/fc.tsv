@@ -46,7 +46,7 @@ fc3ee37a-f676-44af-80d0-774ff271ce11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fc46649d-9d84-4082-9d2d-fbb7ce91c6a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quarrel-s-end:cast:s1,f:xs:XP:quarrel-s-end:cast:s1	-	-	-	9087eefec3ee	-	066f07e33c21	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 fc467fe5-85ab-4c95-8d21-49096778b107	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:apex-altisaur:f0t0:s1,f:xs:XP:apex-altisaur:f0t0:s1	-	-	-	8c0bd19283bb	-	28608fe7003e	-	-	2026-11-24	xproof
 fc467fe5-85ab-4c95-8d21-49096778b107	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:apex-altisaur:f0t0:s1,f:xs:XP:apex-altisaur:f0t0:s1	-	-	-	8c0bd19283bb	-	28608fe7003e	-	-	2026-11-24	xproof
-fc467fe5-85ab-4c95-8d21-49096778b107	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+fc467fe5-85ab-4c95-8d21-49096778b107	f0/t1	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:apex-altisaur:f0t1:s1,f:xs:XP:apex-altisaur:f0t1:s1	-	-	-	65d07beecc37	-	28608fe7003e	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 fc4c969d-408c-46d1-8dba-fabecc2c30ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:false-cure:cast:s1,f:xs:XP:false-cure:cast:s1	-	-	-	fc71ca68c5ac	-	b098898b8746	-	-	2026-11-24	xproof
 fc4f2cdb-966c-4576-8b37-b3d138f5710e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:god-eternal-rhonas:f0t0:s1,f:xs:XP:god-eternal-rhonas:f0t0:s1	-	-	-	d864b561c9cb	-	455cd5fd04c5	-	-	2026-11-24	xproof
 fc4f2cdb-966c-4576-8b37-b3d138f5710e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:god-eternal-rhonas:f0t0:s1,f:xs:XP:god-eternal-rhonas:f0t0:s1	-	-	-	d864b561c9cb	-	455cd5fd04c5	-	-	2026-11-24	xproof
@@ -204,7 +204,7 @@ fcf92abb-6c06-42d2-a3d1-f44ec997d56d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:urs
 fcf92abb-6c06-42d2-a3d1-f44ec997d56d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ursapine:f0a0:s1,f:xs:XP:ursapine:f0a0:s1	-	-	-	d864b561c9cb	-	cdbde017e91a	-	-	2026-11-24	xproof
 fcf9ced2-867d-4bc5-b7b6-6153ed2cac97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodtracker:cast:s1,f:xs:XP:bloodtracker:cast:s1	-	-	-	8c0bd19283bb	-	146c0e67127d	-	-	2026-11-24	xproof
 fcf9ced2-867d-4bc5-b7b6-6153ed2cac97	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:bloodtracker:f0a0:s1,f:xs:XP:bloodtracker:f0a0:s1	-	-	-	8c0bd19283bb	-	146c0e67127d	-	-	2026-11-24	xproof
-fcf9ced2-867d-4bc5-b7b6-6153ed2cac97	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+fcf9ced2-867d-4bc5-b7b6-6153ed2cac97	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bloodtracker:f0t0:s1,f:xs:XP:bloodtracker:f0t0:s1	-	-	-	65d07beecc37	-	146c0e67127d	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 fcfa5671-a7b1-4170-9c72-f18a9eccfa31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fcfb96d7-9b3b-4f60-8714-eebe4d9c002b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fcfbe3b8-a955-45d8-9329-3af565a3b53c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

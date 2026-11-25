@@ -132,7 +132,7 @@ d09aecc5-4f78-49f8-b503-677e84e36a6d	cast	NULL	owed	refused:scen failed: xengine
 d09aecc5-4f78-49f8-b503-677e84e36a6d	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Saiba Syphoner"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 d09b0648-e324-4a16-b78c-d1849177c04f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d09b0648-e324-4a16-b78c-d1849177c04f	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:sanitarium-skeleton:f0a0:s1,f:xs:XP:sanitarium-skeleton:f0a0:s1	-	-	-	3aa6ded33acb	-	c3824dec2903	-	-	2026-11-25	xproof
-d09c9cba-fdd2-479b-ad5d-d05181c3e3f9	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+d09c9cba-fdd2-479b-ad5d-d05181c3e3f9	cast	cast	agreed	-	F	start	2	0	f:xs:XP:fierce-guardianship:cast:s1	-	-	-	65d07beecc37	-	629d27bf0e9c	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 d0a1f39b-cda4-4925-83f8-2161f575edfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d0a1f39b-cda4-4925-83f8-2161f575edfb	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:argentum-armor:f0a0:s1,f:xs:XP:argentum-armor:f0a0:s1	-	-	-	3aa6ded33acb	-	4845a3113521	-	-	2026-11-25	xproof
 d0a1f39b-cda4-4925-83f8-2161f575edfb	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
@@ -177,8 +177,8 @@ d0ce03fa-2284-4217-85b2-4db6b8a88c94	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 d0d13d5d-677d-4e1a-9e58-2f9840581f6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thornfist-striker:cast:s1,f:xs:XP:thornfist-striker:cast:s1	-	-	-	23c4009444b0	-	256496be6f0e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0d13d5d-677d-4e1a-9e58-2f9840581f6d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thornfist Striker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d0d13d5d-677d-4e1a-9e58-2f9840581f6d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thornfist Striker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d0d28e2c-416e-432c-b4bf-07f6302c52ea	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-d0d28e2c-416e-432c-b4bf-07f6302c52ea	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+d0d28e2c-416e-432c-b4bf-07f6302c52ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grismold-the-dreadsower:cast:s1,f:xs:XP:grismold-the-dreadsower:cast:s1	-	-	-	65d07beecc37	-	283faec149d0	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+d0d28e2c-416e-432c-b4bf-07f6302c52ea	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:grismold-the-dreadsower:cast:s1,f:xs:XP:grismold-the-dreadsower:cast:s1	-	-	-	65d07beecc37	-	283faec149d0	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 d0d28e2c-416e-432c-b4bf-07f6302c52ea	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 d0d2c45b-b6e3-4999-bdab-976e8f0d6617	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragon-fodder:cast:s1,f:xs:XP:dragon-fodder:cast:s1	-	-	-	8c0bd19283bb	-	25b1b22d1c04	-	-	2026-11-24	xproof
 d0d35864-1edc-4af1-9b89-3d7e94908011	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

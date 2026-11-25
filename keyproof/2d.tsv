@@ -76,8 +76,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d8aa053-289d-40d9-baa7-9bd1c5b8e957	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:greenbelt-guardian:f0a1:s1,f:xs:XP:greenbelt-guardian:f0a1:s1	-	-	-	23c4009444b0	-	b08db8ba9f0e	-	-	2026-11-25	xproof
 2d8e1054-654f-42e8-8c29-12c3cf13a3eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d8eba16-cfca-4a38-bde0-6ee36c67231a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2d8eba16-cfca-4a38-bde0-6ee36c67231a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-2d8eba16-cfca-4a38-bde0-6ee36c67231a	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+2d8eba16-cfca-4a38-bde0-6ee36c67231a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+2d8eba16-cfca-4a38-bde0-6ee36c67231a	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 2d91cf05-fc39-4d76-8c95-62738b57e0a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d91cf05-fc39-4d76-8c95-62738b57e0a0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:griffin-protector:f0t0:s1,f:xs:XP:griffin-protector:f0t0:s1	-	-	-	fb9d3088f0bf	-	3a6ad4ea4aeb	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 2d92a035-dd7a-4426-a8c0-f04e0b836dad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ddd33e1-b48e-42e2-a60a-f09f151d3c1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2de138b0-3159-4a0c-a474-a4e5600b2e51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:festival-of-embers:cast:s1,f:xs:XP:festival-of-embers:cast:s1	-	-	-	3aa6ded33acb	-	0a0cfdb07771	-	-	2026-11-25	xproof
 2de138b0-3159-4a0c-a474-a4e5600b2e51	f0/a0	Sacrifice	agreed	-	FX	start	2	0	x:xs:XP:festival-of-embers:f0a0:s1,f:xs:XP:festival-of-embers:f0a0:s1	-	-	-	3aa6ded33acb	-	0a0cfdb07771	-	-	2026-11-25	xproof
-2de138b0-3159-4a0c-a474-a4e5600b2e51	static#0.0	static.continuous	diverged	-	-	start	0	2	-	d99e783ecede	-	-	65d07beecc37	-	0a0cfdb07771	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+2de138b0-3159-4a0c-a474-a4e5600b2e51	static#0.0	static.continuous	diverged	-	-	start	0	2	-	d99e783ecede	-	-	65d07beecc37	-	0a0cfdb07771	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 2de6c3d9-1759-40a2-99c6-8cbe17b4bcdd	cast	cast	agreed	-	F	start	2	0	f:xs:XP:entreat-the-dead:cast:s1	-	-	-	8c0bd19283bb	-	76a5975acdfd	-	-	2026-11-24	xproof
 2de7367b-a5a4-43f4-8f8f-b931ea28150d	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:slayers-stronghold:f0a0:s2,f:xs:XP:slayers-stronghold:f0a0:s2	-	-	-	d864b561c9cb	-	5d38ff381775	-	-	2026-11-24	xproof
 2de7367b-a5a4-43f4-8f8f-b931ea28150d	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:slayers-stronghold:f0a1:s1,f:xs:XP:slayers-stronghold:f0a1:s1	-	-	-	d864b561c9cb	-	5d38ff381775	-	-	2026-11-24	xproof

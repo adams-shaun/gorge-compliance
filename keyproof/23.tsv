@@ -190,8 +190,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23d5d43c-ec78-42dd-a53e-a1ee91c94b1d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:erratic-apparition:combat0.block:s1,f:xs:XP:erratic-apparition:combat0.block:s1	-	-	-	23c4009444b0	-	3db0c1db1974	-	-	2026-11-25	xproof
 23d5d43c-ec78-42dd-a53e-a1ee91c94b1d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:erratic-apparition:f0t0:s1,f:xs:XP:erratic-apparition:f0t0:s1	-	-	-	cb99a158debc	-	3db0c1db1974	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 23d5d43c-ec78-42dd-a53e-a1ee91c94b1d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Erratic Apparition/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-23d7d8ba-5237-4ffc-bd5f-b07ff9ec73af	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-23d7d8ba-5237-4ffc-bd5f-b07ff9ec73af	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+23d7d8ba-5237-4ffc-bd5f-b07ff9ec73af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:turntimber-sower:cast:s1,f:xs:XP:turntimber-sower:cast:s1	-	-	-	65d07beecc37	-	79bf652fce6c	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+23d7d8ba-5237-4ffc-bd5f-b07ff9ec73af	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:turntimber-sower:f0a0:s1,f:xs:XP:turntimber-sower:f0a0:s1	-	-	-	65d07beecc37	-	79bf652fce6c	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 23d7d8ba-5237-4ffc-bd5f-b07ff9ec73af	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 23db92aa-d4db-49e3-a5bc-7b120e02822f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23db92aa-d4db-49e3-a5bc-7b120e02822f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:shagrat-loot-bearer:f0t0:s1,f:xs:XP:shagrat-loot-bearer:f0t0:s1	-	-	-	ae86f6029288	-	604f0b39e4c2	-	-	2026-11-24	xproof
@@ -205,7 +205,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23ecb4bb-b295-46f5-9fd8-a4c66ce80c23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:touch-of-the-eternal:f0t0:s1,f:xs:XP:touch-of-the-eternal:f0t0:s1	-	-	-	3aa6ded33acb	-	ec1616c41dc0	-	-	2026-11-25	xproof
 23ecb4bb-b295-46f5-9fd8-a4c66ce80c23	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:touch-of-the-eternal:f0t0:s1,f:xs:XP:touch-of-the-eternal:f0t0:s1	-	-	-	3aa6ded33acb	-	ec1616c41dc0	-	-	2026-11-25	xproof
 23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:maximus-knight-apparent:cast:s1,f:xs:XP:maximus-knight-apparent:cast:s1	-	-	-	8c0bd19283bb	-	d60374d1f0e5	-	-	2026-11-24	xproof
-23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:maximus-knight-apparent:f0a0:s1,f:xs:XP:maximus-knight-apparent:f0a0:s1	-	-	-	65d07beecc37	-	d60374d1f0e5	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:maximus-knight-apparent:cast:s1,f:xs:XP:maximus-knight-apparent:cast:s1	-	-	-	8c0bd19283bb	-	d60374d1f0e5	-	-	2026-11-24	xproof
 23f73983-0337-4464-8817-5f7596d65b38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23f73983-0337-4464-8817-5f7596d65b38	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

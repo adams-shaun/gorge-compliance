@@ -117,8 +117,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a83d284-75a0-4901-b7d9-c4b7586ee327	land	land	agreed	-	FX	start	2	0	x:xs:XP:river-of-tears:land:s1,f:xs:XP:river-of-tears:land:s1	-	-	-	d864b561c9cb	-	8cc0509c5f85	-	-	2026-11-24	xproof
 8a8bc537-b69f-441d-a10e-d7f17f2f75bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pothole-mole:cast:s1,f:xs:XP:pothole-mole:cast:s1	-	-	-	23c4009444b0	-	45757d346423	-	-	2026-11-25	xproof
 8a8bc537-b69f-441d-a10e-d7f17f2f75bb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pothole-mole:cast:s1,f:xs:XP:pothole-mole:cast:s1	-	-	-	23c4009444b0	-	45757d346423	-	-	2026-11-25	xproof
-8a8e225b-14e4-464f-bebe-89b4c9be7fe1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+8a8e225b-14e4-464f-bebe-89b4c9be7fe1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 8a8fe94f-81aa-4725-ace6-ed56a1e1ed91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a922366-ee2a-4ddb-a904-683dcf4f191a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ace3c6b-b2b3-4cd1-9828-dcb9ba5b71ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ace9425-fcdd-45b0-abf0-1a7d601de25e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slimefoot-s-survey:cast:s1,f:xs:XP:slimefoot-s-survey:cast:s1	-	-	-	ae86f6029288	-	ffee344f696f	-	-	2026-11-24	xproof
 8ad2ecd5-2d50-4a54-a672-335d7e636a5a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chakram-retriever:f0t1:s1,f:xs:XP:chakram-retriever:f0t1:s1	-	-	-	23c4009444b0	-	44a69457314d	-	-	2026-11-25	xproof
-8ad2ecd5-2d50-4a54-a672-335d7e636a5a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+8ad2ecd5-2d50-4a54-a672-335d7e636a5a	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:chakram-retriever:f0t0:s1,f:xs:XP:chakram-retriever:f0t0:s1	-	-	-	65d07beecc37	-	44a69457314d	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 8ad2ecd5-2d50-4a54-a672-335d7e636a5a	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:chakram-retriever:f0t1:s1,f:xs:XP:chakram-retriever:f0t1:s1	-	-	-	23c4009444b0	-	44a69457314d	-	-	2026-11-25	xproof
 8ad4f2fe-6d98-4279-a331-3817d40ae46d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seismic-assault:cast:s1,f:xs:XP:seismic-assault:cast:s1	-	-	-	25696bf19d5b	-	7a3999045d87	-	-	2026-11-24	xproof
 8ad4f2fe-6d98-4279-a331-3817d40ae46d	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:seismic-assault:f0a0:s1,f:xs:XP:seismic-assault:f0a0:s1	-	-	-	23c4009444b0	-	7a3999045d87	-	-	2026-11-25	xproof
