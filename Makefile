@@ -814,8 +814,8 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-new-targets-resolve.
 # NOTE (merge): ChangeTargetsMandatoryTest lives only on fork commit 61f44264a28 (= e45e911953c + the test), which lacks the
 # pending-declaration offered rule (a4380dd47f). The ref below (join12) keeps that driver fix, so
-# scripts/forge-oracle-test-change-targets-mandatory.sh needs a fork join of 61f44264a28 into join12 before make
-# forge-driver-tests passes it; bump FORGE_ORACLE_REF to that join once it is pushed.
+# scripts/forge-oracle-test-change-targets-mandatory.sh needed a fork join of 61f44264a28 into join12 before make
+# forge-driver-tests passed it; join14 below is that join.
 # 8b89eabc655 = e45e911953c (above) with the PINNED half of the transit graveyard order (xproof cluster xpt-18625cef,
 # Thassa's Rebuff): Seed of Hope's mill moves Island and Forest together, Island returns to the hand within the step, so
 # forge_order.go's checkpoint delta pins only [Forest, Seed of Hope] while Forge's "order to Graveyard" ask offers the
@@ -834,7 +834,81 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # 6d6b2d485ab = oracle/fpin-1125-join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit graveyard
 # order, above), no textual conflicts (StepMachine.java auto-merged); driver-only, die-roll code unchanged (same as
 # FORGE_REF ff076d4432). r0's 1656bcb2a73 was described here but never pushed to the fork; this is the pushed merge.
-FORGE_ORACLE_REF ?= 6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef
+# ad4cd3ba0f8 = oracle/fpin-1125-join14: join12 (6d6b2d485ab, above) merged with the PayLife<X> announcement 892f8bd63b6 (below) and the
+# mandatory ChangeTargets regression test 61f44264a28 (ChangeTargetsMandatoryTest; the join the NOTE (merge) above asks for), no textual
+# conflicts. It supersedes the earlier join13 586a3850332 (join11 + both), which lacked the transit order. Xproof cluster xpt-b1209a2d.
+# Phyrexian Processor's "pay any amount of life" is AB$ StoreSVar | Cost$ Mandatory PayLife<X>: Forge announces the amount as the cost's X (PlaySpellAbility.announceValuesLikeX), while gorge logs it as a
+# choose_n with pick kind paylife and an "N life" label, 0 included (CR 119.4, 118.3). ScriptedController.announceRequirements took the X
+# only from an x decision, so the pick was a leftover and the AI answered ("Missing x answer at step 6: X for"). It now binds a paylife
+# pick ("N life") to the X announce of an ability whose cost has a CostPayLife with amount X, after the x decision is tried and only
+# for that cost shape. PhyrexianProcessorPayLifeTest (0 life: no harness row, no leftover, life 20; 3 life: life 17; fixture fork
+# fixtures/phyrexian/processor-zero-life.jsonl, the exported xs:XP:phyrexian-processor:cast:s1 request) fails without the change with
+# the exact "Missing x answer at step 6: X for" miss; scripts/forge-oracle-test-phyrexian-processor-paylife.sh (make forge-driver-tests)
+# runs it. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-paylife-x.
+# 6095b085edc = ad4cd3ba0f8 (join14; above) plus the face-down cast modes (StepMachine.spellForMode only): gorge's cast_mode
+# "morphed"/"megamorphed"/"disguised" (CR 702.37c, 702.168a, 702.169a) hit the spellForMode default, so the driver cast the
+# card's printed spell and Forge refused it where the printed cost exceeds the mana gorge paid (Belltoll Dragon megamorphed for
+# {3} over three Islands: "step 3 (cast) p0:Belltoll Dragon was not put on the stack", xproof cluster xpt-716677db, 2 cycles /
+# 4 items gorge~forge) and cast face up where it does not (Sleuth Instructor {1}{W}). spellForMode now maps all three modes to
+# the one face-down spell Forge builds per printed keyword (CardFactoryUtil.abilityCastFaceDown, a Spell with
+# setCastFaceDown(true) and Cost {3}; Megamorph builds it with the same Morph key). FaceDownCastModeTest (fixtures/morph/,
+# Belltoll Dragon megamorphed, Weaver of Lies morphed and Sleuth Instructor disguised, each cut after the cast) fails on
+# ad4cd3ba0f8 with the exact "was not put on the stack" harness row (megamorphed, morphed) and the printed-spell note
+# (disguised), passes here; scripts/forge-oracle-test-facedown-cast-mode.sh (make forge-driver-tests) runs it. Driver-only;
+# die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-facedown-cast.
+# dcbac6a957 = 2ac6012982e plus the altaddcost tap ability choice (xproof cluster xpt-bf618006, Disruption Protocol,
+# gorge~forge): p0 casts Disruption Protocol choosing gorge's altaddcost pick "Tap 1 artifact" (Memnite), and Forge offers
+# two SAs (tap an artifact / pay {1}). gorge is right (CR 601.2b: either additional cost). getAbilityToPlay bound the pick
+# by substring of the cost text, then by "cost" + verb against the CostPart class name; "tap 1 artifact" is not in Forge's
+# cost text (CostTapType prints "Tap 1 untapped Artifact you control") and the part class of tapXType<1/Artifact> is
+# CostTapType (costtaptype != costtap), so neither rule bound and the strict run missed ("Missing ability choice answer at
+# step 7"). The verb fallback now goes through costPartClassFor, an explicit map from gorge's CostPhrase label to the Forge
+# CostPart class: "tap this permanent" ({T}) is CostTap, any other tap label is CostTapType (same split for untap), "pay N
+# life"/"pay N energy"/plain mana is CostPayLife/CostPayEnergy/CostPartMana, "take N damage" CostDamage, a gain-life label
+# CostGainLife, "add N <kind> counters" CostPutCounter, "put ... into your library" CostPutCardToLib, "put ... from exile"
+# CostExiledMoveToGrave, "return ... to its owner's hand" CostReturn, dice/coins CostRollDice/CostFlipCoin, a chosen reveal
+# CostRevealChosen; unlisted verbs keep the old "cost" + verb naming, and the discard/sacrifice/forage/blight rules are
+# unchanged. TapTypeAbilityChoiceTest (fork fixtures altaddcost/disruption-protocol-tap-s1.jsonl, the exported find) fails
+# on 2ac6012982e with the exact miss and passes here; scripts/forge-oracle-test-tap-type-ability-choice.sh (make
+# forge-driver-tests) runs it. Driver-only; cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork
+# branch fix/xp-forge-driver-tap-altaddcost (tip 5bc8d1f9b0 adds the ChangeTargetsMandatoryTest join; merged into join15 below).
+# 9124c696744 = oracle/fpin-1125-join15: join14 (ad4cd3ba0f8, above) merged with 5bc8d1f9b0 (dcbac6a957, the altaddcost tap ability
+# choice above, plus the ChangeTargets test join14 already carries), no textual conflicts (ScriptedController.java auto-merged); the
+# merge tree is 173000f9b6f. TapTypeAbilityChoiceTest and the join14 driver tests run together at this pin. Driver-only; die-roll code,
+# cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# 686e3f82713 = oracle/fpin-1125-join17: join15 (9124c696744, below) merged with 6095b085edc (the face-down cast modes above), no
+# textual conflicts (ScriptedController.java and StepMachine.java touch different areas; merge tree 83e433b219b). FaceDownCastModeTest,
+# TapTypeAbilityChoiceTest and ForcedDieRollTest run together at this pin (11 tests, 0 failures). Driver-only; die-roll code,
+# cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# a2954de67aa = ad4cd3ba0f8 (join14) + the no-legal-new-target answer (xproof cluster xpt-5b82851f, Deflection, Shunt and Swerve): Forge's
+# mandatory ChangeTargets effect asks chooseNewTargetsFor even when no new target is legal, and gorge poses no decision then (the target
+# stays, CR 115.7a), so the ask was a strict miss ("Missing new targets answer at step 15") once Aerial Volley's only creature with flying
+# left the battlefield. ScriptedController.chooseNewTargetsFor now counts the candidates Forge's TargetSelection would offer (the ability's
+# target restrictions plus the effect's filter, targets cleared and restored as Forge does) and, with fewer than the declaration's targets,
+# keeps them with a note; a legal candidate and no gorge decision is still the miss. ChangeTargetsNoCandidateTest (fixtures/changetargets/
+# deflection-aerial-volley-no-candidate.jsonl, the exported xs:XP:deflection:cast:s1 request) fails without the change with the exact miss;
+# scripts/forge-oracle-test-change-targets-no-candidate.sh (make forge-driver-tests) runs it. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-change-targets-no-candidate.
+# 3405b168dc = oracle/fpin-1125-join18: join17 (686e3f82713, join15 + the face-down cast modes 6095b085edc) merged with
+# join16 (852c41880dd, join15 + the Speedball optional ChangeTargets confirm 0aee1572747, review of cli-20261125T132000Z-b46ca2c9),
+# no textual conflicts (ScriptedController.java auto-merged).
+# 5c66bb14fa = 3405b168dc merged with a2954de67aa (the no-legal-new-target answer above), no textual conflicts
+# (ScriptedController.java auto-merged). The ChangeTargets tests, TapTypeAbilityChoiceTest and the join14/15 driver tests run
+# together at this pin. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# 0ca7a220bd = 5c66bb14fa + the r1 review follow-up: the candidate count excludes the declaration's current targets (Forge's
+# own selection clears them first, PlayerControllerHuman.chooseNewTargetsFor, so it does not; but re-picking the old target
+# leaves the game unchanged), and a second fixture, deflection-volley-second-flyer-still-miss.jsonl, pins that a legal new
+# target with no gorge decision is still a miss (ChangeTargetsNoCandidateTest.legalNewTargetWithNoGorgeDecisionIsStillAMiss,
+# 2 tests now). Driver-only; cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# 495ed200e9f = 0ca7a220bd0 (join18, above) + setup player_counters (xproof cluster xpt-a32b5388, Demon of Dark Schemes): SetupBuilder
+# read life, speed, the commander fields and the zones but never a seat's player_counters, so a setup ENERGY=4 never reached the
+# player and the {2}{B}, Pay {E}{E}{E}{E} ability was refused ("was not put on the stack (cost unpaid)") while gorge held the energy.
+# SetupBuilder.placePlayerCounters now sets each entry as the COMPLETE count of its kind (ENERGY/POISON/EXPERIENCE/RAD, also 0) as
+# recorded state with no event or trigger, and refuses an unknown, keyword or negative entry. PlayerCountersSetupTest (5 tests, red
+# before) is run by scripts/forge-oracle-test-player-counters.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-player-counters.
+FORGE_ORACLE_REF ?= 495ed200e9f367aa7298908df5f4530c2cc4c8af
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
