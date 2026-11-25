@@ -347,3 +347,20 @@ func TestFocusPlainCastTapsLands(t *testing.T) {
 		})
 	}
 }
+
+// TestFocusHoldPassDropsBotPayment: holdPass answers the focus seat's priority
+// with a plain pass; a cast payment or announcement the bot chose is dropped,
+// or the recorder writes it as a second pick.
+func TestFocusHoldPassDropsBotPayment(t *testing.T) {
+	st := openState(Focus{Seat: 0, Card: "X", Kind: "ability"}, 7)
+	d := focusDecision(decision.KPriority, stubOpt{Kind: "cast", Obj: 7}, stubOpt{Kind: "pass"})
+	for _, in := range []decision.Intent{
+		{Payment: &decision.PaymentSelection{ActionID: "cast:7"}},
+		{Announce: &decision.AnnounceSelection{ActionID: "cast:7"}},
+	} {
+		out := st.holdPass(d, in)
+		if !slices.Equal(out.Choices, []int{1}) || out.Payment != nil || out.Announce != nil || out.Rest != nil {
+			t.Errorf("holdPass(%+v) = %+v, want only the pass choice [1]", in, out)
+		}
+	}
+}

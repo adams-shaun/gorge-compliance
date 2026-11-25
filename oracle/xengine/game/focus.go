@@ -148,15 +148,16 @@ func (b focusBot) DecideBoard(ctx context.Context, brd botpolicy.Board, d decisi
 }
 
 // holdPass is the focus seat's answer to a priority decision before the focus
-// opens: pass, whatever the bot chose. Any other seat or decision keeps the
-// bot's answer.
+// opens: a plain pass, whatever the bot chose; a cast payment or announcement
+// the bot answered with is dropped, or the recorder writes it as a second pick.
+// Any other seat or decision keeps the bot's answer.
 func (s *focusState) holdPass(d decision.Decision, in decision.Intent) decision.Intent {
 	if d.Kind != decision.KPriority || int(d.Player) != s.f.Seat {
 		return in
 	}
 	for i, o := range d.Options {
 		if o.Kind == "pass" {
-			in.Choices = []int{i}
+			in.Choices, in.Rest, in.Payment, in.Announce = []int{i}, nil, nil, nil
 			return in
 		}
 	}

@@ -706,3 +706,15 @@ func TestStartFocusCombatantTargetIsExercised(t *testing.T) {
 		t.Run(card, func(t *testing.T) { startCombatIsExercised(t, card, "f0/a0", true) })
 	}
 }
+
+// TestStartCastableBloodrushIsExercised: a bloodrush card its start can pay
+// to cast (Wasteland Viper {G} on a Forest, Wrecking Ogre {3}{R}{R} on five
+// Mountains) made the explore bot answer main 1's priority with a cast
+// payment; the focus seat's holdPass swapped in the pass but kept the payment,
+// so the first entry carried two picks and lowered to nothing
+// (priority_picks). The held pass now carries no payment.
+func TestStartCastableBloodrushIsExercised(t *testing.T) {
+	for _, card := range []string{"Wasteland Viper", "Wrecking Ogre"} {
+		t.Run(card, func(t *testing.T) { startCombatIsExercised(t, card, "f0/a0", false) })
+	}
+}
