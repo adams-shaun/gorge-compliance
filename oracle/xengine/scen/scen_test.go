@@ -634,6 +634,75 @@ func TestStartSpellCastTriggers(t *testing.T) {
 	}
 }
 
+// TestStartmisctriggers: the event modes (eventStart, eventFixtures): the
+// start causes the event the trigger reads with one fixture play on the seat
+// that makes it. A discard is Coercion cast at the seat whose hand is exactly
+// the card the filter takes (Abyssal Nocturnus: the opponent's Swamp,
+// Aclazotz: a land; Ajani's Last Stand: the card itself, discarded by the
+// opponent's Coercion, with the Plains its IsPresent reads); Coercion's only
+// target is an opponent, so the bot has no other target to choose; a draw is
+// Reach Through Mists cast as often as the trigger's Number says (Zimone and
+// Dina's second card) by the seat the filter names (Sheoldred: the opponent);
+// a sacrifice is a carrier sacrificing itself; a tap is the card's own {T}
+// ability or its attack (Zhur-Taa Druid taps itself for mana, Zar Ojanen
+// attacks); a crime is Coercion cast at the opponent (Vadmir); an
+// untap is the card placed tapped through the other seat's turn 1 to its own
+// untap step; a target is the opponent's Murder, Disenchant (an enchantment)
+// or the card's controller's trick. A turned-face-up trigger is refused by
+// name: a face-down permanent cannot be placed and turning it up is a second
+// play. A trigger whose condition the start does not model is refused by name.
+func TestStartmisctriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		{card: "Abyssal Nocturnus", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Coercion"},
+			p0BF: cat([]string{"Abyssal Nocturnus"}, rep("Swamp", 3)), p1Hand: rep("Swamp", 1),
+			focusCard: "Coercion", focusKind: "cast"},
+		{card: "Ajani's Last Stand", key: "f0/t1", active: 1, maxTurns: 1, p0Hand: []string{"Ajani's Last Stand"},
+			p0BF: rep("Plains", 2), p1Hand: []string{"Coercion"}, p1BF: rep("Swamp", 3),
+			focusSeat: 1, focusCard: "Coercion", focusKind: "cast"},
+		{card: "Zimone and Dina", key: "f0/t0", maxTurns: 1, p0Hand: rep("Reach Through Mists", 2),
+			p0BF: cat([]string{"Zimone and Dina"}, rep("Island", 2)), focusCard: "Reach Through Mists", focusKind: "cast", focusTime: 2},
+		{card: "Sheoldred, the Apocalypse", key: "f0/t1", active: 1, maxTurns: 1, p0BF: []string{"Sheoldred, the Apocalypse"},
+			p1Hand: []string{"Reach Through Mists"}, p1BF: []string{"Island"}, focusSeat: 1, focusCard: "Reach Through Mists", focusKind: "cast"},
+		{card: "Zodiark, Umbral God", key: "f0/t1", maxTurns: 1, p0BF: []string{"Zodiark, Umbral God", "Kami of False Hope"},
+			focusCard: "Kami of False Hope", focusKind: "ability"},
+		{card: "Zar Ojanen, Scion of Efrava", key: "f0/t0", maxTurns: 1, p0BF: []string{"Zar Ojanen, Scion of Efrava"},
+			focusCard: "Zar Ojanen, Scion of Efrava", focusKind: "attack"},
+		{card: "Zhur-Taa Druid", key: "f0/t0", maxTurns: 1, p0BF: []string{"Zhur-Taa Druid"},
+			focusCard: "Zhur-Taa Druid", focusKind: "ability"},
+		{card: "Vadmir, New Blood", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Coercion"},
+			p0BF:      cat([]string{"Vadmir, New Blood"}, rep("Swamp", 3)),
+			focusCard: "Coercion", focusKind: "cast"},
+		{card: "Wild Defiance", key: "f0/t0", active: 1, maxTurns: 1, p0BF: []string{"Wild Defiance", "Memnite"},
+			p1Hand: []string{"Murder"}, p1BF: rep("Swamp", 3), focusSeat: 1, focusCard: "Murder", focusKind: "cast"},
+		{card: "Treacherous Blessing", key: "f0/t2", active: 1, maxTurns: 1, p0BF: []string{"Treacherous Blessing"},
+			p1Hand: []string{"Disenchant"}, p1BF: rep("Plains", 2), focusSeat: 1, focusCard: "Disenchant", focusKind: "cast"},
+		{card: "Acid-Spewer Dragon", key: "f0/t0", reason: "no-generator:trigger:TurnFaceUp:face-down"},
+		{card: "Ainok Survivalist", key: "f0/t0", reason: "no-generator:trigger:TurnFaceUp:face-down"},
+		{card: "Xyris, the Writhing Storm", key: "f0/t0", reason: "no-generator:trigger:Drawn:condition"},
+	})
+	reg, b := testBuilder(t)
+	// the discard and crime fixtures take no target but an opponent: the bot
+	// has no other target to choose, so the focus play is the forced line
+	for _, name := range []string{eventFixtures.Discard, eventFixtures.Crime} {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces[0].Abilities) == 0 || c.Faces[0].Abilities[0].Params["ValidTgts"] != "Opponent" {
+			t.Errorf("fixture %s: want a spell whose one target is an opponent", name)
+		}
+	}
+	// an untap: the card placed tapped, the game run to its own untap step
+	// (the other seat's turn 1, then turn 2), with no focus play
+	res, err := Generate(reg, b, "Aerie Worshippers", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("Aerie Worshippers: %+v %v", res, err)
+	}
+	f := res.Start
+	if !slices.Equal(f.Setup.P0.Battlefield, []string{"Aerie Worshippers"}) || !slices.Equal(f.Setup.P0.Tapped, []string{"Aerie Worshippers"}) ||
+		f.Active != 1 || f.MaxTurns != 2 || f.Focus != nil {
+		t.Errorf("Aerie Worshippers: battlefield %v tapped %v active %d max_turns %d focus %+v, want it placed tapped, seat 1 active, 2 turns, no focus",
+			f.Setup.P0.Battlefield, f.Setup.P0.Tapped, f.Active, f.MaxTurns, f.Focus)
+	}
+}
+
 // TestStartCosts: an activated ability's non-mana cost is met by start
 // state (planCost), never by a play: Memnite to sacrifice for "another
 // creature" (Agency Coroner), a basic placed tapped for a land (Ripchain
