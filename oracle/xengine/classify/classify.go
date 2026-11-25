@@ -195,9 +195,9 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 	case ignoredCastMode(item, v, f.Step, fl) != "":
 		f.Class = ClassHarness
 		f.Msg = engine + ": " + ignoredCastMode(item, v, f.Step, fl)
-	case sameNameTriggerOrder(item, v, f.Step, fl) != "":
+	case sameNameTriggerOrder(item, g, v, f.Step, fl) != "":
 		f.Class = ClassHarness
-		f.Msg = engine + ": " + sameNameTriggerOrder(item, v, f.Step, fl)
+		f.Msg = engine + ": " + sameNameTriggerOrder(item, g, v, f.Step, fl)
 	case graveyardOrderOnly(g, x, v, f.Step):
 		f.Class = ClassHarness
 		f.Msg = engine + ": two or more cards entered the graveyard in the same step and the engines ordered them differently (CR 404.3)"
@@ -533,12 +533,15 @@ func ignoredCastMode(item lower.Lowered, v oraclediff.Verdict, d int, fl followe
 // cannot be told apart and XMage orders them itself; from there its game
 // differs by the driver's gap, not by a rule. "" for anything else.
 //
-// A pick that names one ref twice (two triggers of one source object, such as
-// Norin's blocked-creature trigger once per blocked creature) is ambiguous for
-// every follower, by-name or not: the pick does not say which trigger goes
-// first, so the follower orders them itself (CR 603.3b, the order is the
-// controller's free choice). Such a pick is class harness for any follower.
-func sameNameTriggerOrder(item lower.Lowered, v oraclediff.Verdict, d int, fl followers.Follower) string {
+// A pick that names one ref twice is ambiguous for every follower, by-name or
+// not, unless the two picks are the SAME ability of the same object: then their
+// mutual order is unobservable (CR 603.3b, the controller's free choice) and
+// the repeat is not a driver gap. The rule text comes from gorge's recorded
+// decision for the same step (triggerOrderPickTexts); without it the repeat
+// stays ambiguous, the conservative reading. A repeat of a NAME over different
+// refs is never interchangeable (XMage's name match takes the first object),
+// and a repeat of a ref over different texts is a real ambiguity.
+func sameNameTriggerOrder(item lower.Lowered, g rules.OracleResult, v oraclediff.Verdict, d int, fl followers.Follower) string {
 	if v.Status != oraclediff.Diverge || d < 0 {
 		return ""
 	}
@@ -550,20 +553,48 @@ func sameNameTriggerOrder(item lower.Lowered, v oraclediff.Verdict, d int, fl fo
 			if a.Kind != "trigger_order" {
 				continue
 			}
-			seen, seenRef := map[string]bool{}, map[string]bool{}
-			for _, p := range a.Pick {
+			texts := triggerOrderPickTexts(g, i, a)
+			seen, seenRef := map[string]int{}, map[string]int{}
+			for k, p := range a.Pick {
 				n := oraclediff.RefName(p)
-				if fl.TriggerOrderByName && seen[n] {
+				if j, ok := seen[n]; ok && fl.TriggerOrderByName && !triggerOrderInterchangeable(a.Pick, texts, j, k) {
 					return fmt.Sprintf("the driver cannot order triggers of objects named %q apart (step %d)", n, i)
 				}
-				if seenRef[p] {
+				if j, ok := seenRef[p]; ok && !triggerOrderInterchangeable(a.Pick, texts, j, k) {
 					return fmt.Sprintf("the recorded trigger order names %q twice and cannot say which of its triggers goes first (step %d)", p, i)
 				}
-				seen[n], seenRef[p] = true, true
+				seen[n], seenRef[p] = k, k
 			}
 		}
 	}
 	return ""
+}
+
+// triggerOrderPickTexts is the rule text of each pick of a trigger_order
+// answer, read from gorge's recorded decision for the same item step (the
+// lowered answer carries refs only). nil when no decision matches, so no pair
+// can be shown interchangeable.
+func triggerOrderPickTexts(g rules.OracleResult, step int, a oraclegen.Answer) []string {
+	for _, d := range g.Decisions {
+		if d.Step != step || d.GorgeKind != "trigger_order" || len(d.Picks) != len(a.Pick) {
+			continue
+		}
+		if slices.Equal(d.PickRefs, a.Pick) {
+			return d.Picks
+		}
+	}
+	return nil
+}
+
+// triggerOrderInterchangeable reports whether picks j and k are one ability of
+// one object: same ref and same rule text. Only then is their mutual order
+// unobservable (CR 603.3b); any other repeat is something the follower must
+// order and a harness pick does not.
+func triggerOrderInterchangeable(picks, texts []string, j, k int) bool {
+	if j >= len(picks) || k >= len(picks) || picks[j] != picks[k] {
+		return false
+	}
+	return texts != nil && j < len(texts) && k < len(texts) && texts[j] == texts[k]
 }
 
 // paymentChoice reports a pool-only difference on the paying seat at or right

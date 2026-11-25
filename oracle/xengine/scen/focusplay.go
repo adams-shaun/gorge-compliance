@@ -7,6 +7,7 @@ import (
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/effects"
 )
 
 // The focus play must be offered. A start's focus seat takes its play at the
@@ -314,6 +315,9 @@ func altMet(n altNeed, a filterAlt, f *cards.Face, mine bool, source string, tap
 	if n.other && f.Name == source {
 		return false
 	}
+	if a.history != "" {
+		return false // a this-turn event: no placed permanent has undergone it
+	}
 	if a.test != nil && !a.matchesState(f, false, tapped) {
 		return false
 	}
@@ -427,8 +431,21 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 			}
 		}
 	}
+	// The activation gates the engine reads at offer time (the phase window,
+	// the Activation$ condition, the IsPresent$/CheckSVar$ family, a
+	// legendary spell's lock, the card's own CantBeCast statics): a gate they
+	// cannot satisfy keeps the play from being offered at all, so refuse the
+	// start here. A stack target means a bait may be cast first, which can
+	// move the active seat, so a turn-owner gate is not decidable yet.
+	baitable := false
+	for _, sts := range stacks {
+		baitable = baitable || len(sts) > 0
+	}
+	if why := focusGateRefusal(reg, b, face, sa, card, f, baitable); why != "" {
+		return why, nil
+	}
 	if len(choices) == 0 {
-		return "", nil
+		return "", nil // no target to place: a cast with no SP ability (a creature spell) too
 	}
 	seat := *fc.Seat
 	// source is the permanent whose ability the focus play activates: a .Other
@@ -526,7 +543,11 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, own *cards.Face,
 				continue
 			}
 			// an unmet permanent target: place one on the side it names
-			if !placeOppTarget(reg, b, card, source, bad, seat, f) {
+			placed, tcond := placeOppTarget(reg, b, card, source, bad, seat, f)
+			if !placed {
+				if tcond != "" {
+					return tcond, nil
+				}
 				break
 			}
 		}
@@ -699,7 +720,13 @@ const maxTargetPlacements = 4
 // placed; a land target's land comes from the mana base. A filter parseFilter
 // does not fully read falls back to certdeck's most inert opposing-target pick,
 // so no card is placed blind.
-func placeOppTarget(reg *cards.Registry, b *certdeck.Builder, card, source string, r *tgtReq, seat int, f *StartFile) bool {
+// placeOppTarget places a permanent the unmet target requirement r accepts.
+// It returns whether it placed one and, when it did not, the named refusal
+// for a target whose filter carries a predicate no part of the filter reads
+// (the engine's UnknownPredicates census): a blind certdeck pick cannot be
+// trusted to meet it, so the play is refused by the condition's name rather
+// than written with a target the engine would reject.
+func placeOppTarget(reg *cards.Registry, b *certdeck.Builder, card, source string, r *tgtReq, seat int, f *StartFile) (bool, string) {
 	s, own := &f.Setup.P1, &f.Setup.P0
 	if seat == 1 {
 		s, own = own, s
@@ -732,35 +759,54 @@ func placeOppTarget(reg *cards.Registry, b *certdeck.Builder, card, source strin
 				// exercised), which is a refusal, not a warning
 				sd.Tapped = append(sd.Tapped, name)
 			}
-			return true
+			return true, ""
 		}
 	}
 	// A filter parseFilter does not fully read (a counter gate, say): certdeck
 	// can place a pick that meets it (placeCounters) where a carrier cannot.
+	// A predicate no part of the filter recognises is different: the matcher
+	// itself never matches it, so a blind pick cannot meet it and the play is
+	// refused by the condition's name.
+	unknown := ""
 	typ := "creature"
 	for k, alt := range r.alts {
 		n := parseAlt(alt)
 		if n.side == 1 || n.combat || !permanentTarget(reg, alt) {
 			continue // only the focus seat's own: not placeable on the other side
 		}
-		if filter, ok := r.altFilter(k); ok && filter.known {
+		if filter, ok := r.altFilter(k); ok && filter.history != "" {
+			// a this-turn event no placed object has undergone
+			if unknown == "" {
+				unknown = condKind(filter.history)
+			}
+			continue
+		} else if ok && filter.known {
 			continue // read above: placed, or no card meets it
+		}
+		if preds := effects.UnknownPredicates(r.raw[k]); len(preds) > 0 {
+			if unknown == "" {
+				unknown = condKind(preds[0])
+			}
+			continue
 		}
 		if n.typ != "permanent" && n.typ != "card" {
 			typ = n.typ
 		}
 		plan, err := b.Build(card, []certdeck.Need{{Class: certdeck.OppTargets, Arg: typ}})
 		if err != nil {
-			return false
+			break
 		}
 		picks := plan.Opponent.Provided[certdeck.Need{Class: certdeck.OppTargets, Arg: typ}.String()]
 		before := len(s.Battlefield)
 		if err := pickEnabler(reg, b, s, false, picks); err != nil {
-			return false
+			break
 		}
-		return len(s.Battlefield) > before
+		return len(s.Battlefield) > before, ""
 	}
-	return false
+	if unknown != "" {
+		return false, "start:target-condition:" + unknown
+	}
+	return false, ""
 }
 
 // pickTargetPermanent is the most inert permanent a target alternative accepts

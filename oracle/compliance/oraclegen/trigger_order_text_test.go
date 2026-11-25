@@ -17,6 +17,7 @@ func TestXMageTriggerOrderKeysTable(t *testing.T) {
 	for _, tc := range []struct {
 		name  string
 		picks []string
+		refs  []string // nil: a hand-written decision with no scenario refs
 		want  []string // nil: not keyable, the caller keeps the old text form
 	}{
 		{
@@ -58,6 +59,17 @@ func TestXMageTriggerOrderKeysTable(t *testing.T) {
 			want:  []string{"When this enters, do a thing."},
 		},
 		{
+			name:  "identical text on one source is one interchangeable ability",
+			picks: []string{"Soul-Scar Mage: Prowess", "Soul-Scar Mage: Prowess"},
+			refs:  []string{"p0:Soul-Scar Mage", "p0:Soul-Scar Mage"},
+			want:  []string{"Prowess"},
+		},
+		{
+			name:  "identical text on two different sources cannot key",
+			picks: []string{"Otter Token: Prowess", "Otter Token: Prowess"},
+			refs:  []string{"p0:token:Otter Token#2", "p0:token:Otter Token"},
+		},
+		{
 			name:  "a whole text that prefixes another pick's different text cannot key",
 			picks: []string{"Source: When this enters, draw a card", "Source: When this enters, draw a card and gain 1 life."},
 		},
@@ -66,7 +78,7 @@ func TestXMageTriggerOrderKeysTable(t *testing.T) {
 			picks: []string{"Source: When this enters, draw a card."},
 		},
 	} {
-		d := rules.OracleDecision{Kind: "order", GorgeKind: "trigger_order", Picks: tc.picks}
+		d := rules.OracleDecision{Kind: "order", GorgeKind: "trigger_order", Picks: tc.picks, PickRefs: tc.refs}
 		got, ok := xmageTriggerOrderKeys(d)
 		if tc.want == nil {
 			if ok {
