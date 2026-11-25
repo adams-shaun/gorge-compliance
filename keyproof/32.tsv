@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3233af43-7826-4895-b67e-03c6102c2cd5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kutzil, Malamet Exemplar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3233af43-7826-4895-b67e-03c6102c2cd5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Kutzil, Malamet Exemplar/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32412a41-2929-4417-90bc-21c5659eeb72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32412a41-2929-4417-90bc-21c5659eeb72	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+32412a41-2929-4417-90bc-21c5659eeb72	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 3241a3f5-7ae5-4497-9dd2-a55f3370a055	cast	cast-resolve	agreed	-	FX	scen	2	0	Solve for Disappointment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3241abc1-d739-4ac3-93d1-7fc2898b943b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:jinxed-choker:f0t1:s1	-	-	-	3aa6ded33acb	-	43d1d2ec6a87	-	-	2026-11-25	xproof
 3241abc1-d739-4ac3-93d1-7fc2898b943b	f0/a0	PutCounter	agreed	-	F	start	2	0	f:xs:XP:jinxed-choker:f0t1:s1	-	-	-	3aa6ded33acb	-	43d1d2ec6a87	-	-	2026-11-25	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 328a0691-9453-4f2d-a9c3-5c69da252d20	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dragon-trainer:f0t0:s2,f:xs:XP:dragon-trainer:f0t0:s2	-	-	-	e07cf3a05ba5	-	ecd6bf9b712a	-	-	2026-11-24	xproof
 328a0691-9453-4f2d-a9c3-5c69da252d20	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dragon-trainer:f0t0:s2,f:xs:XP:dragon-trainer:f0t0:s2	-	-	-	e07cf3a05ba5	-	ecd6bf9b712a	-	-	2026-11-24	xproof
 328b42f1-d679-4f9c-80e3-38fe3b965d10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:psychic-corrosion:cast:s1,f:xs:XP:psychic-corrosion:cast:s1	-	-	-	d864b561c9cb	-	3af23a0ff5e8	-	-	2026-11-24	xproof
-328b42f1-d679-4f9c-80e3-38fe3b965d10	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+328b42f1-d679-4f9c-80e3-38fe3b965d10	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 328d5ef0-b25e-4f2a-80fe-35c6ae419e8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 328d5ef0-b25e-4f2a-80fe-35c6ae419e8a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32902854-2c64-431e-9d9c-9a23e52afb1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormchaser-mage:cast:s1,f:xs:XP:stormchaser-mage:cast:s1	-	-	-	d864b561c9cb	-	421ec3d5df0c	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32aee76a-e738-4898-985a-801d1cce15ea	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-vision:combat0.block:s1,f:xs:XP:the-vision:combat0.block:s1	-	-	-	fb9d3088f0bf	-	358333722a84	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 32aee76a-e738-4898-985a-801d1cce15ea	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:the-vision:f0t0:s1,f:xs:XP:the-vision:f0t0:s1	-	-	-	fb9d3088f0bf	-	358333722a84	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 32af5f7b-a970-484a-9aff-226749551d32	cast	cast-resolve	agreed	-	FX	scen	2	0	Thousand Moons Smithy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-32af5f7b-a970-484a-9aff-226749551d32	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+32af5f7b-a970-484a-9aff-226749551d32	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Thousand Moons Smithy/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Thousand Moons Smithy/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Thousand Moons Smithy/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

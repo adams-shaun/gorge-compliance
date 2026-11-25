@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7613c50b-4568-4340-b64a-ab427aaffd51	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:rhys-the-exiled:f0a0:s1,f:xs:XP:rhys-the-exiled:f0a0:s1	-	-	-	23c4009444b0	-	9946f52cd9d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7613c50b-4568-4340-b64a-ab427aaffd51	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:rhys-the-exiled:f0a0:s1,f:xs:XP:rhys-the-exiled:f0a0:s1	-	-	-	23c4009444b0	-	9946f52cd9d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 76164af1-275e-4d68-9df5-9801768512ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76164af1-275e-4d68-9df5-9801768512ef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+76164af1-275e-4d68-9df5-9801768512ef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 76168d1b-266d-4d27-9e97-248b0c2c7e8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76168d1b-266d-4d27-9e97-248b0c2c7e8f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:safehold-duo:f0t0:s1,f:xs:XP:safehold-duo:f0t0:s1	-	-	-	23c4009444b0	-	dcd101f89f90	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 76168d1b-266d-4d27-9e97-248b0c2c7e8f	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:safehold-duo:f0t1:s1,f:xs:XP:safehold-duo:f0t1:s1	-	-	-	23c4009444b0	-	dcd101f89f90	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -26,8 +26,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7616e834-4852-40c8-9de6-d89f96119f12	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 761bb894-d3f9-4248-af76-1559c502e342	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 761bb894-d3f9-4248-af76-1559c502e342	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-761bb894-d3f9-4248-af76-1559c502e342	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-761bb894-d3f9-4248-af76-1559c502e342	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+761bb894-d3f9-4248-af76-1559c502e342	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:teferi-timebender:f0a1:s1,f:xs:XP:teferi-timebender:f0a1:s1	-	-	-	336eab778104	-	539ff62cf5bc	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+761bb894-d3f9-4248-af76-1559c502e342	f0/a2	AddTurn	agreed	-	FX	start	2	0	x:xs:XP:teferi-timebender:f0a2:s1,f:xs:XP:teferi-timebender:f0a2:s1	-	-	-	336eab778104	-	539ff62cf5bc	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 761cb262-f83b-4a99-9345-b773182a7671	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 761cb262-f83b-4a99-9345-b773182a7671	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 761ebd6a-8f53-46fa-b3cd-16616b773007	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 766e277c-983e-488c-a885-c03c3c0d3357	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viashino-firstblade:f0t0:s1,f:xs:XP:viashino-firstblade:f0t0:s1	-	-	-	d864b561c9cb	-	cf92a7b9b48c	-	-	2026-11-24	xproof
 766e277c-983e-488c-a885-c03c3c0d3357	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:viashino-firstblade:f0t0:s1,f:xs:XP:viashino-firstblade:f0t0:s1	-	-	-	d864b561c9cb	-	cf92a7b9b48c	-	-	2026-11-24	xproof
 76703951-f42f-4e1d-af51-e1e06a89bd5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76703951-f42f-4e1d-af51-e1e06a89bd5e	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+76703951-f42f-4e1d-af51-e1e06a89bd5e	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:intruding-soulrager:cast:s1,f:xs:XP:intruding-soulrager:cast:s1	-	-	-	23c4009444b0	-	5a08111645e9	-	-	2026-11-25	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:intruding-soulrager:combat0.attack:s1,f:xs:XP:intruding-soulrager:combat0.attack:s1	-	-	-	23c4009444b0	-	5a08111645e9	-	-	2026-11-25	xproof
 7673d0db-07d6-4b40-a32e-f2c98d7ea7c1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:intruding-soulrager:combat0.block:s1,f:xs:XP:intruding-soulrager:combat0.block:s1	-	-	-	23c4009444b0	-	5a08111645e9	-	-	2026-11-25	xproof

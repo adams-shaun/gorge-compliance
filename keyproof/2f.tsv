@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f57a220-9f64-4143-979a-d6aaf63d49b2	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:treetop-snarespinner:combat0.block:s1,f:xs:XP:treetop-snarespinner:combat0.block:s1	-	-	-	23c4009444b0	-	1faebd62dd2b	-	-	2026-11-25	xproof
 2f57a220-9f64-4143-979a-d6aaf63d49b2	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:treetop-snarespinner:f0a0:s1,f:xs:XP:treetop-snarespinner:f0a0:s1	-	-	-	23c4009444b0	-	1faebd62dd2b	-	-	2026-11-25	xproof
 2f5bf099-2e01-4e1c-9ebf-0ce0ac66939e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f5f46ed-b8aa-4864-bd20-17281d4632bf	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+2f5f46ed-b8aa-4864-bd20-17281d4632bf	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2f5f46ed-b8aa-4864-bd20-17281d4632bf	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Abigale, Poet Laureate/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f5f46ed-b8aa-4864-bd20-17281d4632bf	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Abigale, Poet Laureate/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f5f46ed-b8aa-4864-bd20-17281d4632bf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Abigale, Poet Laureate/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f920bf2-6a49-47c2-be3c-9787c377673b	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:skystreak-engineer:f0a0:s1,f:xs:XP:skystreak-engineer:f0a0:s1	-	-	-	23c4009444b0	-	2a6d4653a0f2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2f921740-de98-4276-8196-47a38a1e4591	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necromantic-summons:cast:s1,f:xs:XP:necromantic-summons:cast:s1	-	-	-	336eab778104	-	94ae8dc92333	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2f947056-fa10-4491-95e5-532ea3b76d10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scab-clan-charger:cast:s1,f:xs:XP:scab-clan-charger:cast:s1	-	-	-	d864b561c9cb	-	89bf8bb7f33d	-	-	2026-11-24	xproof
-2f947056-fa10-4491-95e5-532ea3b76d10	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+2f947056-fa10-4491-95e5-532ea3b76d10	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2f959c67-2b0b-4ba8-a8aa-90c25a3806ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f959c67-2b0b-4ba8-a8aa-90c25a3806ec	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2f990b54-fbf3-4949-85bb-9ba39710e72a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dive-down:cast:s1,f:xs:XP:dive-down:cast:s1	-	-	-	336eab778104	-	667e1d1849df	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
@@ -248,7 +248,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2fecfbef-e521-4025-94ea-451c9abde3de	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:doctor-octopus-master-planner:static0.0:s1,f:xs:XP:doctor-octopus-master-planner:static0.0:s1	-	-	-	23c4009444b0	-	e30bd8d1f3b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2fecfbef-e521-4025-94ea-451c9abde3de	static#0.1	static#0.1	agreed	-	X	scen	1	0	Doctor Octopus, Master Planner/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ff309e3-90e0-40e7-a277-3df057f8f198	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ff309e3-90e0-40e7-a277-3df057f8f198	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+2ff309e3-90e0-40e7-a277-3df057f8f198	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:talons-of-wildwood:f0a0:s1,f:xs:XP:talons-of-wildwood:f0a0:s1	-	-	-	336eab778104	-	0dff96b6c2d8	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2ff5a5ed-d6db-4dfa-b1fd-38ad872ad30a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ff5a5ed-d6db-4dfa-b1fd-38ad872ad30a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ff92886-5c17-47a4-a02b-a97432d9203e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

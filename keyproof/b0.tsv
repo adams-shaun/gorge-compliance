@@ -39,7 +39,7 @@ b02ab3c7-fe4a-443c-b860-ba971d3301b0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 b02ab3c7-fe4a-443c-b860-ba971d3301b0	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 b02ab3c7-fe4a-443c-b860-ba971d3301b0	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b02bd695-ec7f-47be-b797-e2b4b309cc2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b02d24fd-62b4-4f78-96af-57f88c98c5c8	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+b02d24fd-62b4-4f78-96af-57f88c98c5c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragonshift:cast:s1,f:xs:XP:dragonshift:cast:s1	-	-	-	336eab778104	-	d56612aafbca	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 b0322e2e-e9f9-4fe2-a7a5-3e49665ad177	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bayek-of-siwa:cast:s1,f:xs:XP:bayek-of-siwa:cast:s1	-	-	-	ae86f6029288	-	5c74548d7190	-	-	2026-11-24	xproof
 b03397e5-56af-47c0-ab9a-746a0c99c568	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:nessian-game-warden:cast:s1,f:xs:XP:nessian-game-warden:cast:s1	-	-	-	d864b561c9cb	-	d6fb5bb90d1d	-	-	2026-11-24	xproof
 b03397e5-56af-47c0-ab9a-746a0c99c568	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:nessian-game-warden:cast:s1,f:xs:XP:nessian-game-warden:cast:s1	-	-	-	d864b561c9cb	-	d6fb5bb90d1d	-	-	2026-11-24	xproof
@@ -58,7 +58,7 @@ b03fc155-2a70-4106-853c-33bdc88d548c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nec
 b03fc155-2a70-4106-853c-33bdc88d548c	f0/t0	DamageDone	agreed	-	F	start	2	0	f:xs:XP:necromaster-dragon:f0t0:s1	-	-	-	fb9d3088f0bf	-	d1961c7fe26a	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 b044b4fd-d504-4a11-80bf-eb8fb0b6e21e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b044b4fd-d504-4a11-80bf-eb8fb0b6e21e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b044b4fd-d504-4a11-80bf-eb8fb0b6e21e	f0/a1	NULL	owed	refused:steps-needed:cost:RW	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b044b4fd-d504-4a11-80bf-eb8fb0b6e21e	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 b047cd3f-9129-41cc-8b91-b0dc970f5068	cast	cast-resolve	agreed	-	FX	scen	2	0	Brilliance Unleashed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b0493924-dc6d-4655-865f-7e9b40f547ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b0493924-dc6d-4655-865f-7e9b40f547ea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:malcator-s-watcher:f0t0:s1,f:xs:XP:malcator-s-watcher:f0t0:s1	-	-	-	ae86f6029288	-	a6d48893d6d7	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ b07ef53e-46db-457e-a5a2-846bb9805b70	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 b081352b-d17b-4031-bbcc-c5c02cbfa6b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b081352b-d17b-4031-bbcc-c5c02cbfa6b6	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 b081352b-d17b-4031-bbcc-c5c02cbfa6b6	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:otharri-suns-glory:f0t0:s1,f:xs:XP:otharri-suns-glory:f0t0:s1	-	-	-	8c0bd19283bb	-	0f787e2aab7f	-	-	2026-11-24	xproof
-b081726f-0ed6-4ab0-833e-f510ac6fbeaa	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+b081726f-0ed6-4ab0-833e-f510ac6fbeaa	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 b0871e12-b156-4fa6-b01c-acaae222b3a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sprouting-goblin:f0t0:s1,f:xs:XP:sprouting-goblin:f0t0:s1	-	-	-	ae86f6029288	-	4268f8cb1fc4	-	-	2026-11-24	xproof
 b0871e12-b156-4fa6-b01c-acaae222b3a5	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 b0871e12-b156-4fa6-b01c-acaae222b3a5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sprouting-goblin:f0t0:s1,f:xs:XP:sprouting-goblin:f0t0:s1	-	-	-	ae86f6029288	-	4268f8cb1fc4	-	-	2026-11-24	xproof

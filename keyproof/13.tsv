@@ -29,7 +29,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	cast	cast-resolve	agreed	-	X	scen	1	0	Valkyrie Aerial Unit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:valkyrie-aerial-unit:combat0.attack:s1,f:xs:XP:valkyrie-aerial-unit:combat0.attack:s1	-	-	-	23c4009444b0	-	19eb4323cf41	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:valkyrie-aerial-unit:combat0.block:s1,f:xs:XP:valkyrie-aerial-unit:combat0.block:s1	-	-	-	23c4009444b0	-	19eb4323cf41	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-1333d690-a6dc-4ef8-8c57-2ba16727c0a5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+1333d690-a6dc-4ef8-8c57-2ba16727c0a5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Valkyrie Aerial Unit/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13358b1d-0a35-48ed-a7fb-70359fa3998f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1337d89e-a883-4568-a14f-9ca3305cc3df	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hell's Kitchen/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -145,18 +145,18 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13bf8103-3db3-4ee6-a6bb-441aabfd9e41	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Warden of the Grove/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13bf8103-3db3-4ee6-a6bb-441aabfd9e41	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Warden of the Grove/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13bfc51f-d079-40ef-a4ba-47d06d3150a3	cast	cast-resolve	agreed	-	X	scen	1	0	Command the Stage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-13bfc51f-d079-40ef-a4ba-47d06d3150a3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+13bfc51f-d079-40ef-a4ba-47d06d3150a3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 13c1ca1e-cd17-49ef-bc31-97bff99ec1e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13c4437e-48a9-4c51-9b76-9e83e3ec362f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13c4437e-48a9-4c51-9b76-9e83e3ec362f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 13c81fc5-dd35-481d-8e32-4d404fb0e4ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13c81fc5-dd35-481d-8e32-4d404fb0e4ac	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:conclave-evangelist:f0t1:s1,f:xs:XP:conclave-evangelist:f0t1:s1	-	-	-	8c0bd19283bb	-	9e14924620a3	-	-	2026-11-24	xproof
 13c81fc5-dd35-481d-8e32-4d404fb0e4ac	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:conclave-evangelist:f0t1:s1,f:xs:XP:conclave-evangelist:f0t1:s1	-	-	-	8c0bd19283bb	-	9e14924620a3	-	-	2026-11-24	xproof
-13ca3ede-a4c8-463d-b160-99b4071034b0	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+13ca3ede-a4c8-463d-b160-99b4071034b0	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 13ca49a2-8a78-4be4-976a-b684086864bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shadow-mysterious-assassin:cast:s1,f:xs:XP:shadow-mysterious-assassin:cast:s1	-	-	-	8c0bd19283bb	-	178bb462779c	-	-	2026-11-24	xproof
 13ca49a2-8a78-4be4-976a-b684086864bb	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 13cb7d87-ff12-4742-8f54-f3175536db40	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:sorin-solemn-visitor:cast:s1,f:xs:XP:sorin-solemn-visitor:cast:s1	-	-	-	d864b561c9cb	-	a3a1915393b8	-	-	2026-11-24	xproof
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:sorin-solemn-visitor:f0a2:s1,f:xs:XP:sorin-solemn-visitor:f0a2:s1	-	-	-	fb9d3088f0bf	-	a3a1915393b8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 1f21cf59-6390-44b4-ab2e-ef290dfd8c85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nest-of-scarabs:cast:s1,f:xs:XP:nest-of-scarabs:cast:s1	-	-	-	d864b561c9cb	-	ea736c64b59f	-	-	2026-11-24	xproof
-1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:cast:s1,f:xs:XP:the-millennium-calendar:cast:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/a0	MultiplyCounter	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:f0a0:s1,f:xs:XP:the-millennium-calendar:f0a0:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Millennium Calendar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f544a9f-c238-4858-be19-d6cd7d023dcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:opportunity:cast:s1,f:xs:XP:opportunity:cast:s1	-	-	-	25696bf19d5b	-	3ab3c9138b93	-	-	2026-11-24	xproof
 1f570526-7fb0-4fe5-8014-b5793eb65f87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f57a9f1-6b95-4395-bdf0-c5289b786ab1	cast	cast-resolve	agreed	-	X	scen	1	0	The Everflowing Well/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1f57a9f1-6b95-4395-bdf0-c5289b786ab1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+1f57a9f1-6b95-4395-bdf0-c5289b786ab1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 1f57a9f1-6b95-4395-bdf0-c5289b786ab1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Everflowing Well/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f57a9f1-6b95-4395-bdf0-c5289b786ab1	f1/a0	activate#1.0	agreed	-	X	scen	1	0	The Everflowing Well/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f57a9f1-6b95-4395-bdf0-c5289b786ab1	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	The Everflowing Well/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

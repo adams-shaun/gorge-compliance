@@ -187,8 +187,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19edde54-153f-46b8-8a8d-a20fdef0667f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-james-t-kirk:f0t0:s1,f:xs:XP:captain-james-t-kirk:f0t0:s1	-	-	-	23c4009444b0	-	8aae4bdd1259	-	-	2026-11-25	xproof
 19edde54-153f-46b8-8a8d-a20fdef0667f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:captain-james-t-kirk:f0t0:s1,f:xs:XP:captain-james-t-kirk:f0t0:s1	-	-	-	23c4009444b0	-	8aae4bdd1259	-	-	2026-11-25	xproof
 19edde54-153f-46b8-8a8d-a20fdef0667f	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19ef0329-08de-4835-8079-2e791e19f3a6	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Kid Loki"	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-19ef0329-08de-4835-8079-2e791e19f3a6	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+19ef0329-08de-4835-8079-2e791e19f3a6	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Kid Loki"	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+19ef0329-08de-4835-8079-2e791e19f3a6	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a3	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a4	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f23d9e-0c05-4028-9c64-60b9a20020f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gleam-of-battle:cast:s1,f:xs:XP:gleam-of-battle:cast:s1	-	-	-	d864b561c9cb	-	5b7d0401b4da	-	-	2026-11-24	xproof
-19f23d9e-0c05-4028-9c64-60b9a20020f9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+19f23d9e-0c05-4028-9c64-60b9a20020f9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 19f2c2c1-cd29-4e66-b5d9-e85e1979d843	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t0:s1,f:xs:XP:spitting-dilophosaurus:f0t0:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof
 19f2c2c1-cd29-4e66-b5d9-e85e1979d843	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t0:s1,f:xs:XP:spitting-dilophosaurus:f0t0:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof
 19f2c2c1-cd29-4e66-b5d9-e85e1979d843	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t1:s1,f:xs:XP:spitting-dilophosaurus:f0t1:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof

@@ -48,7 +48,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a2fbdd3-4940-4bbf-ae19-f6d00d7ff294	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:junkblade-bruiser:combat0.block:s1,f:xs:XP:junkblade-bruiser:combat0.block:s1	-	-	-	3aa6ded33acb	-	ad048fc6dc10	-	-	2026-11-25	xproof
 0a2fbdd3-4940-4bbf-ae19-f6d00d7ff294	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Junkblade Bruiser/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a356d04-2e86-435b-9766-27b93b468a61	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gene-pollinator:cast:s1,f:xs:XP:gene-pollinator:cast:s1	-	-	-	23c4009444b0	-	3657be23b24a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-0a356d04-2e86-435b-9766-27b93b468a61	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gene Pollinator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0a356d04-2e86-435b-9766-27b93b468a61	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:gene-pollinator:f0a0:s1,f:xs:XP:gene-pollinator:f0a0:s1	-	-	-	336eab778104	-	3657be23b24a	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 0a35df9d-80a0-4b6f-91d5-dad980af47e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a364879-31bd-4760-833d-165cde1e96c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yellowjacket-heartless-marauder:cast:s1,f:xs:XP:yellowjacket-heartless-marauder:cast:s1	-	-	-	fb9d3088f0bf	-	e51b5ff5f9ef	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 0a364879-31bd-4760-833d-165cde1e96c6	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:yellowjacket-heartless-marauder:combat0.attack:s1,f:xs:XP:yellowjacket-heartless-marauder:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	e51b5ff5f9ef	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a57ac2e-276b-41ea-89f4-287f530114c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a57ac2e-276b-41ea-89f4-287f530114c6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a5e3748-2e58-4e53-9653-8af4e21cf223	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a5e3748-2e58-4e53-9653-8af4e21cf223	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+0a5e3748-2e58-4e53-9653-8af4e21cf223	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 0a64b683-7017-44cb-923f-b512fe3886f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a64b683-7017-44cb-923f-b512fe3886f6	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:rustmouth-ogre:f0t0:s1,f:xs:XP:rustmouth-ogre:f0t0:s1	-	-	-	23c4009444b0	-	fce2be720075	-	-	2026-11-25	xproof
 0a661f7a-5d56-4d73-bab7-22bfc5cef22e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,8 +110,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a836332-5905-4afa-a442-47d0bcf8acea	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:timin-youthful-geist:f0t1:s1,f:xs:XP:timin-youthful-geist:f0t1:s1	-	-	-	23c4009444b0	-	4640626fcddb	-	-	2026-11-25	xproof
 0a8511b9-ed7d-4e33-9c2f-96b9a4c535e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a85402a-e3be-4ebb-8001-9d9a20dde7e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a85402a-e3be-4ebb-8001-9d9a20dde7e8	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-0a85402a-e3be-4ebb-8001-9d9a20dde7e8	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0a85402a-e3be-4ebb-8001-9d9a20dde7e8	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:fungal-plots:f0a0:s1,f:xs:XP:fungal-plots:f0a0:s1	-	-	-	336eab778104	-	3b0ddef45c03	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+0a85402a-e3be-4ebb-8001-9d9a20dde7e8	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 0a88d1b1-ac3c-41da-b3f5-b689af0e45d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a8c1002-e237-42d8-b152-aefecab283d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a8c1002-e237-42d8-b152-aefecab283d0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f053f0d-c9c7-4fcd-b218-a29d1d080104	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancient-vendetta:cast:s1,f:xs:XP:ancient-vendetta:cast:s1	-	-	-	23c4009444b0	-	4f1540dd4404	-	-	2026-11-25	xproof
 6f067bfd-1c59-463f-99e1-61161b43b405	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f096e98-d351-4050-90ed-4c6f12e129d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f096e98-d351-4050-90ed-4c6f12e129d6	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6f096e98-d351-4050-90ed-4c6f12e129d6	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:llanowar-envoy:f0a0:s1,f:xs:XP:llanowar-envoy:f0a0:s1	-	-	-	336eab778104	-	fd3fb01fd1a8	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6f0b814b-94e6-48f2-9ccf-c376ca03bba3	cast	cast-resolve	agreed	-	X	scen	1	0	Antagonist Incorporator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f0c6876-dcae-46e5-8c62-6929733c3525	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f0c6876-dcae-46e5-8c62-6929733c3525	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -133,8 +133,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f9a4bb2-5959-4a5c-83af-c2729e6673df	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Omashu City/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f9a4bb2-5959-4a5c-83af-c2729e6673df	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:omashu-city:f0a1:s1,f:xs:XP:omashu-city:f0a1:s1	-	-	-	23c4009444b0	-	d1ec6e7151d8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6f9a4bb2-5959-4a5c-83af-c2729e6673df	land	land	agreed	-	FX	start	2	0	x:xs:XP:omashu-city:land:s1,f:xs:XP:omashu-city:land:s1	-	-	-	23c4009444b0	-	d1ec6e7151d8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-6f9bc0c6-1792-4771-a839-95a22d9c699a	cast	cast-resolve	agreed	-	X	scen	1	0	Meltstrider's Resolve/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6f9bc0c6-1792-4771-a839-95a22d9c699a	f0/t0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6f9bc0c6-1792-4771-a839-95a22d9c699a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meltstrider-s-resolve:f0t0:s1,f:xs:XP:meltstrider-s-resolve:f0t0:s1	-	-	-	336eab778104	-	b3f8b349f1b7	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6f9bc0c6-1792-4771-a839-95a22d9c699a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:meltstrider-s-resolve:f0t0:s1,f:xs:XP:meltstrider-s-resolve:f0t0:s1	-	-	-	336eab778104	-	b3f8b349f1b7	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6f9bc0c6-1792-4771-a839-95a22d9c699a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Meltstrider's Resolve/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f9bc0c6-1792-4771-a839-95a22d9c699a	static#0.1	static#0.1	agreed	-	X	scen	1	0	Meltstrider's Resolve/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f9bce77-f7f0-453b-86cd-1e6bd71980a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
