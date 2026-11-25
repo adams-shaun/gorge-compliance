@@ -25,23 +25,30 @@ import (
 // creature transforms into CARDNAME ...] not found in [White, Blue, ...]").
 //
 // Each key is the rewritten text's first sentence, extended to the whole text
-// when another pick's DIFFERENT text shares that sentence. A long key fails
-// closed against the WRONG ability: a short prefix could match another
-// ability of XMage's list. Wording XMage prints otherwise ("When" where
-// XMage says "Whenever", a text XMage continues past the key's period) is
-// not inert in strict mode -- an unmatched key is a strict_miss -- so the
-// driver's ScriptedChoicePlayer.chooseTriggeredAbility folds that wording
-// (leading when/whenever, case, {this}, trailing period) before it matches
-// the key, and takes the ability only when exactly one fits. ok is false when the picks cannot be keyed apart (a key that
-// is also a prefix of another, different text), and the caller keeps the old
-// text form.
+// when another pick that is NOT the same ability of the same object shares
+// that sentence. A long key fails closed against the WRONG ability: a short
+// prefix could match another ability of XMage's list. Wording XMage prints
+// otherwise ("When" where XMage says "Whenever", a text XMage continues past
+// the key's period) is not inert in strict mode -- an unmatched key is a
+// strict_miss -- so the driver's ScriptedChoicePlayer.chooseTriggeredAbility
+// folds that wording (leading when/whenever, case, {this}, trailing period)
+// before it matches
+// the key, and takes the ability only when exactly one fits. ok is false when
+// the picks cannot be keyed apart: a key that is also a prefix of another,
+// different pick (a different source ref or a different text), including two
+// different sources with identical text, which the same key would both match.
+// The caller then keeps the old text form.
 func xmageTriggerOrderKeys(d rules.OracleDecision) ([]string, bool) {
 	n := len(d.Picks)
 	if n < 2 {
 		return nil, false
 	}
 	texts := make([]string, n)
+	refs := make([]string, n)
 	for k, label := range d.Picks {
+		if k < len(d.PickRefs) {
+			refs[k] = d.PickRefs[k]
+		}
 		source := ""
 		if i := strings.Index(label, ": "); i >= 0 {
 			source = label[:i]
@@ -53,7 +60,7 @@ func xmageTriggerOrderKeys(d rules.OracleDecision) ([]string, bool) {
 	}
 	keys := make([]string, 0, n-1)
 	for k := 0; k+1 < n; k++ {
-		key, ok := distinctTriggerKey(texts, k)
+		key, ok := distinctTriggerKey(texts, refs, k)
 		if !ok {
 			return nil, false
 		}
@@ -63,13 +70,29 @@ func xmageTriggerOrderKeys(d rules.OracleDecision) ([]string, bool) {
 }
 
 // distinctTriggerKey is texts[k]'s first sentence, or the whole text when the
-// sentence is also a prefix of another pick's different text; false when even
-// the whole text is.
-func distinctTriggerKey(texts []string, k int) (string, bool) {
+// sentence is also a prefix of another pick's text that is NOT the same
+// ability of the same object; false when even the whole text is. A pick is
+// interchangeable with k only when it shares both the ref and the text: two
+// Prowess triggers of one Soul-Scar Mage are one group, but two Prowess
+// triggers of different objects (or two different abilities of one object)
+// must still be told apart.
+func distinctTriggerKey(texts, refs []string, k int) (string, bool) {
 	own := texts[k]
+	ref := func(i int) string {
+		if i < len(refs) {
+			return refs[i]
+		}
+		return ""
+	}
 	clash := func(key string) bool {
 		for j, other := range texts {
-			if j != k && other != own && strings.HasPrefix(other, key) {
+			if j == k {
+				continue
+			}
+			if other == own && ref(j) == ref(k) {
+				continue
+			}
+			if strings.HasPrefix(other, key) {
 				return true
 			}
 		}
