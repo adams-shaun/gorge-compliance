@@ -214,7 +214,7 @@ func backFaceRefusal(c *cards.Card, fi int) string {
 	case fi == 0:
 		return ""
 	case fi >= len(c.Faces):
-		return "no-generator:face"
+		return "no-generator:face" // not reached for an f key (Generate errors on an unknown face first); a static/combat key of an unknown face
 	case fi != 1 || len(c.Faces) != 2 || c.AlternateMode != "DoubleFaced" && c.AlternateMode != "Modal":
 		mode := strings.ToLower(c.AlternateMode)
 		if mode == "" {
@@ -239,7 +239,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	f := newStart(card, key)
 	p0, p1 := &f.Setup.P0, &f.Setup.P1
 	generic := basicFor(face.ManaCost)
-	if face.ManaCost == "" {
+	if fi > 0 && (face.ManaCost == "" || face.ManaCost == "no cost") {
 		generic = basicFor(c.Faces[0].ManaCost) // a transformed face has no cost: its colours are the front's
 	}
 	onBF := func() (Result, bool) { // the checks of every recipe that places the card on the battlefield

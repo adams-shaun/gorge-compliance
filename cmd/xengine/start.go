@@ -14,6 +14,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
@@ -29,6 +30,12 @@ const startFormat = "xproof-start-1"
 // reasonStartNotExercised is the refusal of a start whose focus seat was never
 // offered the focus play.
 const reasonStartNotExercised = "start-not-exercised"
+
+// reasonStartFaceLost is the refusal of a start that places a card on its back
+// face whose lowered setup no longer does: the card turned to its front before
+// the recorded span (an upkeep "transform this"), so the tape plays the front
+// face and must not credit the back-face key.
+const reasonStartFaceLost = "start-face-lost"
 
 // startDeckSize is the size a seat's deck is filled to with basics.
 const startDeckSize = 40
@@ -404,6 +411,25 @@ func spanFile(l lower.Lowered) *game.Tape {
 	return &t
 }
 
+// backFaceLost is the first card the start file places on its back face
+// (either seat's back_face) that the lowered item's setup no longer lists on a
+// back face, or "". The lowering relabels the seats (the active one is p0), so
+// the item's two seats are searched together; it names a card by its front face.
+func backFaceLost(reg *cards.Registry, f *startFile, it oraclegen.Item) string {
+	var kept []string
+	for _, sd := range it.Setup {
+		kept = append(kept, sd.BackFace...)
+	}
+	for _, sd := range []startSeat{f.Setup.P0, f.Setup.P1} {
+		for _, n := range sd.BackFace {
+			if !slices.Contains(kept, canonicalCard(reg, n)) {
+				return n
+			}
+		}
+	}
+	return ""
+}
+
 // playStart plays every start file of paths (see startFiles) and writes the
 // items, gorge rows, lowering log, exercised ledger and tapes of the games into
 // out, as play does. set names the item ids; xmage says XMage replays them.
@@ -468,6 +494,15 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				// timing, an enabler that died): the game exercises nothing of the
 				// key, so the file is refused, not written.
 				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartNotExercised}})
+				if err != nil {
+					return err
+				}
+				lowerLog.Write(b)
+				hist[statusRefused]++
+				continue
+			}
+			if lost := backFaceLost(reg, f, l.Item); lost != "" {
+				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartFaceLost + ":" + lost}})
 				if err != nil {
 					return err
 				}
