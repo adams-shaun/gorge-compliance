@@ -63,7 +63,13 @@ func landsFor(manaTokens []string, generic string) []string {
 			}
 			continue
 		}
-		if tok == "X" || tok == "S" {
+		if tok == "X" {
+			continue
+		}
+		if tok == "S" {
+			// {S}: one mana from a snow source -- the snow-covered basic of
+			// the card's colour (a plain basic could never pay it)
+			out = append(out, "Snow-Covered "+generic)
 			continue
 		}
 		parts := shardParts(tok)
@@ -251,9 +257,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	}
 	switch fam {
 	case "cast":
-		p0.Hand = []string{card}
-		p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
-		f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "cast"}
+		if why := castStart(reg, b, face, card, generic, f); why != "" {
+			return refuse(why)
+		}
 	case "land":
 		p0.Hand = []string{card}
 		f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "land"}
@@ -306,9 +312,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 					return refuse("no-generator:face:back-etb")
 				}
 				// An ETB is a cast: the card is not on the battlefield yet.
-				p0.Hand = []string{card}
-				p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
-				f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "cast"}
+				if why := castStart(reg, b, face, card, generic, f); why != "" {
+					return refuse(why)
+				}
 			case trig.Params["Origin"] == "Battlefield" && (trig.Params["Destination"] == "Graveyard" || trig.Params["Destination"] == "Any") && selfCard(trig):
 				// Murder takes a creature to the graveyard, which also meets "leaves
 				// the battlefield" (Destination Any).

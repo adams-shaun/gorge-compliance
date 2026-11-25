@@ -67,10 +67,7 @@ func phaseStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 		if !face.IsPermanent() {
 			return "no-generator:trigger:Phase"
 		}
-		p0.Hand = []string{card}
-		p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
-		f.Focus = &StartFocus{Seat: seatPtr(0), Card: card, Kind: "cast"}
-		return ""
+		return castStart(reg, b, face, card, generic, f)
 	}
 	switch {
 	case late && tapped:
@@ -341,10 +338,7 @@ func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 	none := "no-generator:trigger:" + trig.Mode
 	p0 := &f.Setup.P0
 	if selfCard(trig) {
-		p0.Hand = []string{card}
-		p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
-		f.Focus = &StartFocus{Seat: seatPtr(0), Card: card, Kind: "cast"}
-		return ""
+		return castStart(reg, b, face, card, generic, f)
 	}
 	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
 		return none
