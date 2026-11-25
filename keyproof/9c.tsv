@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c3c9a22-e092-4845-b661-047590746498	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c3c9a22-e092-4845-b661-047590746498	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:saber-ants:f0t0:s1,f:xs:XP:saber-ants:f0t0:s1	-	-	-	21b2cceac526	-	d32d687087c1	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 9c3d2e1f-a5da-47f4-aea8-5861ef7e1b90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c3d2e1f-a5da-47f4-aea8-5861ef7e1b90	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	0eea096c7979	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+9c3d2e1f-a5da-47f4-aea8-5861ef7e1b90	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	e32a96558fa7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 9c3e4bd4-2e1e-4103-adc3-f9ccc259dcdf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:precognition-field:cast:s1,f:xs:XP:precognition-field:cast:s1	-	-	-	d864b561c9cb	-	bfa19724da89	-	-	2026-11-24	xproof
 9c3e4bd4-2e1e-4103-adc3-f9ccc259dcdf	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:precognition-field:f0a0:s1,f:xs:XP:precognition-field:f0a0:s1	-	-	-	d864b561c9cb	-	bfa19724da89	-	-	2026-11-24	xproof
 9c41b4ad-a73f-4274-9b71-9c9834910e05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:plaza-of-heroes:f0a2:s1,f:xs:XP:plaza-of-heroes:f0a2:s1	-	-	-	054d9f516953	-	0b1b3700bc53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:plaza-of-heroes:f0a1:s1,f:xs:XP:plaza-of-heroes:f0a1:s1	-	-	-	054d9f516953	-	0b1b3700bc53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a2	ManaReflected	agreed	-	FX	start	2	0	x:xs:XP:plaza-of-heroes:f0a2:s1,f:xs:XP:plaza-of-heroes:f0a2:s1	-	-	-	054d9f516953	-	0b1b3700bc53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a3	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	0eea096c7979	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a3	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	e32a96558fa7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c5a3407-e3e6-4f5f-9c24-6f24c19e1a2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c5a3407-e3e6-4f5f-9c24-6f24c19e1a2e	f0/a0	Destroy	agreed	-	X	start	2	0	x:xs:XP:skyshooter:f0a0:s1	-	-	-	5b42d43d5d80	-	a411049d8fde	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof

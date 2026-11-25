@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a1ca3e2-e1d1-4525-a07e-13d5ba1ac431	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a1ca3e2-e1d1-4525-a07e-13d5ba1ac431	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:exorcist:f0a0:s1,f:xs:XP:exorcist:f0a0:s1	-	-	-	9087eefec3ee	-	88cdd4b5b428	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 2a2376b8-6962-4f9e-ba36-fd7de87dc77d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nikara-lair-scavenger:f0t1:s1,f:xs:XP:nikara-lair-scavenger:f0t1:s1	-	-	-	23c4009444b0	-	006722e253db	-	-	2026-11-25	xproof
-2a2376b8-6962-4f9e-ba36-fd7de87dc77d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	0eea096c7979	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+2a2376b8-6962-4f9e-ba36-fd7de87dc77d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	e32a96558fa7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 2a2376b8-6962-4f9e-ba36-fd7de87dc77d	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:nikara-lair-scavenger:f0t1:s1,f:xs:XP:nikara-lair-scavenger:f0t1:s1	-	-	-	23c4009444b0	-	006722e253db	-	-	2026-11-25	xproof
 2a249c4b-beaa-4e7f-b4f7-496d282327bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a263e61-303f-449d-a431-c26cabdc68e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2af1930c-a5f2-4e7e-910f-e84458b051ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2af1930c-a5f2-4e7e-910f-e84458b051ac	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:deeproot-warrior:f0t0:s1,f:xs:XP:deeproot-warrior:f0t0:s1	-	-	-	6f84be0f34c0	-	43a1e92150d9	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2af22962-8f66-4868-a175-ad5d7f4c9d58	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leeching-licid:cast:s1,f:xs:XP:leeching-licid:cast:s1	-	-	-	8c0bd19283bb	-	fc83301004b1	-	-	2026-11-24	xproof
-2af22962-8f66-4868-a175-ad5d7f4c9d58	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	0eea096c7979	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+2af22962-8f66-4868-a175-ad5d7f4c9d58	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	e32a96558fa7	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 2af236b0-6b30-4ddc-8735-864d2ffad68e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pride-of-the-road:cast:s1,f:xs:XP:pride-of-the-road:cast:s1	-	-	-	23c4009444b0	-	d9d9c8938747	-	-	2026-11-25	xproof
 2af236b0-6b30-4ddc-8735-864d2ffad68e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:pride-of-the-road:combat0.attack:s1,f:xs:XP:pride-of-the-road:combat0.attack:s1	-	-	-	23c4009444b0	-	d9d9c8938747	-	-	2026-11-25	xproof
 2af236b0-6b30-4ddc-8735-864d2ffad68e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:pride-of-the-road:combat0.block:s1,f:xs:XP:pride-of-the-road:combat0.block:s1	-	-	-	23c4009444b0	-	d9d9c8938747	-	-	2026-11-25	xproof
