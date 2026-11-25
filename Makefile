@@ -569,7 +569,12 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # scripts/forge-oracle-test-foretell-cast-mode.sh and forge-oracle-test-riot-choice.sh replay the finds. Driver-only;
 # die-roll code, cardsfolder and tokenscripts unchanged.
 # c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
-FORGE_ORACLE_REF ?= c9419dd87a36a901c602460432e9731203211e1d
+# 2d4eac3d93 = oracle/fpin-1125: c9419dd87a plus fork branch fix/xp-forge-driver-altdest-dig: AlternativeDecider's library position answered
+# by gorge's pick kind (primary = Forge's "Top (2nd)", bottom; Trickster's Stratagem, Happy Hogan, xpt-71c21a6c) and DigMultiple's
+# chooseCardsForEffectMultiple answered from gorge's digmultiple pick (In the Presence of Ages, xpt-cd204b22). Tests
+# AltDestinationSecondFromTopTest, DigMultiplePickTest; replays scripts/forge-oracle-test-{alt-destination-second-from-top,digmultiple-pick}.sh.
+# Driver-only; cardsfolder/tokenscripts unchanged.
+FORGE_ORACLE_REF ?= 2d4eac3d93692a36cab60f93cc4d070dd1140eab
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
