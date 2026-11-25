@@ -3160,6 +3160,17 @@ func yesNo(d rules.OracleDecision) (string, bool) {
 		return "yes", true
 	case "gift_decline":
 		return "no", true
+	case "unless":
+		// "Discard one <spec> instead" (Thirst for Discovery): XMage's
+		// DoIfCostPaid chooseUse before the DiscardCardCost target, so the
+		// elected side is chooseUse yes and the card pick follows as the
+		// cost's own choice. The label is never a literal choice.
+		return "yes", true
+	case "ordinary":
+		// The same ask's decline side ("No — discard normally"): chooseUse no.
+		if d.Picks[0] == "No — discard normally" {
+			return "no", true
+		}
 	case "endure_counters":
 		// Endure is XMage's chooseUse "Put N +1/+1 counters on
 		// <it> or create a N/N Spirit token?" (EndureSourceEffect.doEndure,

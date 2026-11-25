@@ -598,3 +598,35 @@ func TestExileCostFixedSizeRidesChoiceQueue(t *testing.T) {
 		t.Fatalf("open group exile answers = %v, want one choice per card then a skip", got)
 	}
 }
+
+// TestUnlessDiscardElectionIsChooseUse: Thirst for Discovery's "Yes — discard
+// one Land.Basic" (pick kind "unless") is XMage's DoIfCostPaid chooseUse, so
+// it scripts "yes" and the card pick follows as the cost's own choice rather
+// than the label reaching XMage as a literal choice.
+func TestUnlessDiscardElectionIsChooseUse(t *testing.T) {
+	ds := []rules.OracleDecision{
+		{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Options: 2, Min: 1, Max: 1,
+			Picks: []string{"Yes — discard one Land.Basic"}, PickRefs: []string{"Yes — discard one Land.Basic"},
+			PickIdx: []int{0}, PickKinds: []string{"unless"}},
+		{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Options: 3, Min: 1, Max: 1,
+			Picks: []string{"Island"}, PickRefs: []string{"p0:Island#4"}, PickIdx: []int{0}, PickKinds: []string{"discard"}},
+	}
+	if yn, ok := yesNo(ds[0]); !ok || yn != "yes" {
+		t.Fatalf("yesNo(unless) = %q, %v; want yes", yn, ok)
+	}
+	want := [][]XAnswer{{{0, "choice", "yes"}, {0, "choice", "Island"}}}
+	if got := XAnswers(ds, 1, nil); !reflect.DeepEqual(got, want) {
+		t.Fatalf("XAnswers = %#v, want %#v", got, want)
+	}
+}
+
+// TestUnlessDiscardDeclineIsChooseUseNo: the "No — discard normally" side of
+// the same ask is chooseUse no.
+func TestUnlessDiscardDeclineIsChooseUseNo(t *testing.T) {
+	d := rules.OracleDecision{Step: 0, Kind: "choose_n", GorgeKind: "choose", Options: 2, Min: 1, Max: 1,
+		Picks: []string{"No — discard normally"}, PickRefs: []string{"No — discard normally"},
+		PickIdx: []int{1}, PickKinds: []string{"ordinary"}}
+	if yn, ok := yesNo(d); !ok || yn != "no" {
+		t.Fatalf("yesNo(ordinary decline) = %q, %v; want no", yn, ok)
+	}
+}
