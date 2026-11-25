@@ -10,20 +10,21 @@ import (
 // snapshotBody returns the text of ScenarioReplay's snapshot implementation,
 // so the assertions below cannot be satisfied by a keywords mention elsewhere
 // in the file. The two-argument overload is a one-line delegate to the body
-// that carries the checkpoint/holderAfterStep/declarationPending parameters, so read the latter:
-// matching the shorter signature would inspect only the delegate.
+// that carries the checkpoint/holderAfterStep/declarationPending parameters,
+// so read the latter: brace-matching from its signature, since the body has
+// nested blocks whose closing braces sit at the method's own indent, which a
+// first-closing-brace cut would mistake for the end of the method.
 func snapshotBody(t *testing.T, java string) string {
 	t.Helper()
 	i := strings.Index(java, "private JsonObject snapshot(String checkpoint, Game g, UUID holderAfterStep, boolean declarationPending) {")
 	if i < 0 {
 		t.Fatal("ScenarioReplay.java has no snapshot implementation")
 	}
-	rest := java[i:]
-	j := strings.Index(rest, "\n    }\n")
-	if j < 0 {
-		t.Fatal("snapshot method has no closing brace")
+	snap := braceBlock(java[i:])
+	if !strings.Contains(snap, "holderAfterStep") {
+		t.Fatal("snapshot extraction returned the delegate, not the implementation body")
 	}
-	return rest[:j]
+	return snap
 }
 
 // TestDriverSnapshotEmitsPermanentKeywords pins L12: the XMage snapshot adds a
