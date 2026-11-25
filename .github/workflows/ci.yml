@@ -252,7 +252,18 @@ jobs:
           git init -q -b docs-data
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          # carddb.yml publishes sets.json, writers.json and sets-carddb.md to this same branch.
+          # This push replaces the branch with an orphan commit, so carry those three over first.
+          remote="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          if git fetch -q --depth 1 "$remote" docs-data; then
+            for f in sets.json writers.json sets-carddb.md; do
+              git show "FETCH_HEAD:$f" > "$f" 2>/dev/null || rm -f "$f"
+            done
+          fi
           git add status-A.jsonl status-B.jsonl meta.json
+          for f in sets.json writers.json sets-carddb.md; do
+            [ ! -f "$f" ] || git add "$f"
+          done
           git commit -q -m "docs-data: compliance status $(date -u +%F)"
           git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" docs-data:docs-data
       # The data branch keeps its history (git is the pin history). The writer

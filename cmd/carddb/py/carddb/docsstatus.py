@@ -234,3 +234,117 @@ def export(db_path, out_dir):
         json.dump(meta, f, sort_keys=True)
         f.write("\n")
     return len(la), len(lb)
+
+
+# ------------------------------------------------------------------ per-set xproof snippet
+
+XPROOF_STATES = ("agreed", "owed", "diagnosed", "diverged", "excluded")
+_VERDICT_AGREE = ("agree", "supported", "pass", "ok")
+
+
+def _has_table(con, name):
+    return con.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name=?", (name,)).fetchone() is not None
+
+
+def sets_data(db_path):
+    """-> ({set_code: {"xproof": {state: abilities}, ["proven_cards": n]}}, names, writers).
+
+    xproof counts keyproof rows (abilities) of the cards printed in the set, per state; a card printed in
+    several sets counts in each. A set with no keyproof row is ABSENT (never an all-zero entry); a state
+    that is not one of XPROOF_STATES is not counted. `proven_cards` (the cards of the set with an agreeing
+    status row, any level) is present only when the status table has rows, else the key is absent.
+    `dirac_supported` is absent until a dirac per-set writer exists. writers: [{writer, table, ran}]."""
+    con = sqlite3.connect("file:%s?mode=ro" % db_path, uri=True)
+    con.row_factory = sqlite3.Row
+    try:
+        names = {r["set_code"]: r["name"] for r in con.execute("SELECT set_code, name FROM sets")}
+        out = {}
+        if _has_table(con, "keyproof") and _has_table(con, "printings"):
+            # one row per (set, card, key): a card printed twice in a set must not count its keys twice
+            for r in con.execute(
+                    "SELECT s.set_code AS set_code, k.state AS state, COUNT(*) AS n FROM keyproof k "
+                    "JOIN (SELECT DISTINCT set_code, oracle_id FROM printings) s ON s.oracle_id=k.oracle_id "
+                    "GROUP BY s.set_code, k.state ORDER BY s.set_code, k.state"):
+                if r["state"] not in XPROOF_STATES:
+                    continue
+                ent = out.setdefault(r["set_code"], {"xproof": {s: 0 for s in XPROOF_STATES}})
+                ent["xproof"][r["state"]] = r["n"]
+            if _has_table(con, "status") and con.execute("SELECT 1 FROM status LIMIT 1").fetchone():
+                col = _verdict_column(con)
+                proven = {}
+                if col:
+                    for r in con.execute(
+                            "SELECT p.set_code AS set_code, COUNT(DISTINCT p.oracle_id) AS n FROM printings p "
+                            "JOIN status t ON t.oracle_id=p.oracle_id WHERE lower(t.%s) IN (%s) "
+                            "GROUP BY p.set_code" % (col, ",".join("?" * len(_VERDICT_AGREE))), _VERDICT_AGREE):
+                        proven[r["set_code"]] = r["n"]
+                for code, ent in out.items():
+                    ent["proven_cards"] = proven.get(code, 0)
+        writers = []
+        if _has_table(con, "_meta_writers"):
+            writers = [{"writer": r["writer"], "table": r["table"], "ran": r["ran"]} for r in con.execute(
+                'SELECT writer, "table", ran FROM _meta_writers ORDER BY writer, "table"')]
+    finally:
+        con.close()
+    return out, names, writers
+
+
+def _verdict_column(con):
+    cols = [r[1] for r in con.execute("PRAGMA table_info(status)")]
+    for name in ("verdict", "status", "outcome"):
+        if name in cols:
+            return name
+    return None
+
+
+def _cell(text):
+    return str(text).replace("|", "\\|").replace("\n", " ")
+
+
+def _section(name, lines):
+    return ["<!-- --8<-- [start:%s] -->" % name] + lines + ["<!-- --8<-- [end:%s] -->" % name]
+
+
+def render_sets_md(data, names, writers):
+    """The finished markdown gorge includes unchanged: three snippet sections, headline, sets, freshness."""
+    codes = sorted(data)
+    totals = {s: sum(data[c]["xproof"][s] for c in codes) for s in XPROOF_STATES}
+    have_proven = any("proven_cards" in data[c] for c in codes)
+    head = ["| xproof abilities, summed over sets | Count |", "| --- | ---: |"]
+    head.append("| Sets with xproof rows | %d |" % len(codes))
+    for s in XPROOF_STATES:
+        head.append("| %s | %d |" % (s.capitalize(), totals[s]))
+    if have_proven:
+        head.append("| Proven cards | %d |" % sum(data[c].get("proven_cards", 0) for c in codes))
+    cols = ["Set", "Name", "Agreed", "Owed", "Diverged"] + (["Proven"] if have_proven else [])
+    body = ["| " + " | ".join(cols) + " |", "| --- | --- | ---: | ---: | ---: |" + (" ---: |" if have_proven else "")]
+    for c in codes:
+        x = data[c]["xproof"]
+        row = ["`%s`" % c, _cell(names.get(c, c)), str(x["agreed"]), str(x["owed"]), str(x["diverged"])]
+        if have_proven:
+            row.append(str(data[c].get("proven_cards", 0)))
+        body.append("| " + " | ".join(row) + " |")
+    if not codes:
+        body = ["No set has xproof rows yet."]
+    if writers:
+        fresh = ["*Data written by: " + "; ".join("%s (%s) %s" % (_cell(w["writer"]), _cell(w["table"]), w["ran"])
+                                                  for w in writers) + ".*"]
+    else:
+        fresh = ["*No writer freshness recorded.*"]
+    lines = (["<!-- carddb docs-sets: generated, do not edit -->", ""] + _section("headline", head) + [""] +
+             _section("sets", body) + [""] + _section("freshness", fresh))
+    return "\n".join(lines) + "\n"
+
+
+def export_sets(db_path, out_dir):
+    """Write sets.json, writers.json and sets-carddb.md from a built SQLite (docs-data shapes, all
+    deterministic: sorted keys, no wall clock). -> number of sets written."""
+    data, names, writers = sets_data(db_path)
+    os.makedirs(out_dir, exist_ok=True)
+    texts = {"sets.json": json.dumps(data, sort_keys=True, indent=1) + "\n",
+             "writers.json": json.dumps(writers, sort_keys=True, indent=1) + "\n",
+             "sets-carddb.md": render_sets_md(data, names, writers)}
+    for name, text in texts.items():
+        with open(os.path.join(out_dir, name), "w", encoding="utf-8", newline="\n") as f:
+            f.write(text)
+    return len(data)

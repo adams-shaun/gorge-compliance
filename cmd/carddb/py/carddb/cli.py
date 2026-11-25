@@ -5,6 +5,7 @@
   ingest status --status-a FILE --meta FILE [--status-b FILE]
                                         oraclediff status output -> cert_sets status columns (docs site data)
   docs-status --db FILE --out DIR         built SQLite -> status-A.jsonl, status-B.jsonl, meta.json for the docs build
+  docs-sets --db FILE --out DIR           built SQLite -> sets.json, writers.json, sets-carddb.md (per-set xproof snippet)
   publish [--bulk] [--private]            commit what is staged, rebase, push
   merge-driver %O %A %B %P                git's merge driver (registered by the tool itself)
   build [--private] [--text FILE]         SQLite from the shards
@@ -74,6 +75,9 @@ def _parser():
     p = sub.add_parser("docs-status")
     p.add_argument("--db", required=True, metavar="FILE", help="built carddb.sqlite")
     p.add_argument("--out", required=True, metavar="DIR", help="directory for status-A.jsonl, status-B.jsonl, meta.json")
+    p = sub.add_parser("docs-sets")
+    p.add_argument("--db", required=True, metavar="FILE", help="built carddb.sqlite")
+    p.add_argument("--out", required=True, metavar="DIR", help="directory for sets.json, writers.json, sets-carddb.md")
     p = sub.add_parser("publish")
     p.add_argument("--bulk", action="store_true", help="allow more than 50000 changed lines")
     p.add_argument("--private", action="store_true")
@@ -242,6 +246,10 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
         if args.verb == "docs-status":
             na, nb = docsstatus_mod.export(args.db, args.out)
             print("carddb docs-status: %d Level A set(s), %d Level B set(s) -> %s" % (na, nb, args.out), file=stdout)
+            return 0
+        if args.verb == "docs-sets":
+            n = docsstatus_mod.export_sets(args.db, args.out)
+            print("carddb docs-sets: %d set(s) with xproof rows -> %s" % (n, args.out), file=stdout)
             return 0
         if args.verb == "ingest" and args.source == "status":
             if not args.status_a or not args.meta:

@@ -229,7 +229,7 @@ jobs:
         run: |
           set -euo pipefail
           for f in cmd/carddb/main.py cmd/carddb/py/carddb/compliance.py \
-                   cmd/carddb/py/carddb/dirac.py oracle/compliance/dirac-gaps.tsv GORGE_PIN go.mod \
+                   cmd/carddb/py/carddb/dirac.py cmd/carddb/py/carddb/docsstatus.py oracle/compliance/dirac-gaps.tsv GORGE_PIN go.mod \
                    cmd/carddb/py/carddb/release.py cmd/carddb/py/parquet_export.py \
                    carddb/schema/v1/_meta/size.tsv \
                    oracle/compliance/manifests Makefile; do
@@ -341,6 +341,38 @@ jobs:
         run: |
           set -euo pipefail
           python3 -I cmd/carddb/main.py build --out "$RUNNER_TEMP/carddb.sqlite"
+      # The docs site's per-set xproof snippet (sets.json, writers.json, sets-carddb.md) rides the
+      # docs-data branch next to status-A/B.jsonl and meta.json. ci.yml force-pushes that branch as an
+      # orphan commit, so this step fetches the branch first and adds only these three files on top of
+      # whatever is there (status files untouched); ci.yml's publish re-adds the three in turn.
+      # A dry run publishes nothing. A push that finds nothing changed commits nothing.
+      - name: Publish the per-set xproof snippet to docs-data
+        if: env.DRY_RUN != 'true'
+        working-directory: tool
+        shell: bash
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/docs-sets"
+          python3 -I cmd/carddb/main.py docs-sets --db "$RUNNER_TEMP/carddb.sqlite" --out "$out"
+          remote="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          work="$RUNNER_TEMP/docs-data"
+          rm -rf "$work"
+          if git ls-remote --exit-code --heads "$remote" docs-data >/dev/null 2>&1; then
+            git clone -q --depth 1 --branch docs-data "$remote" "$work"
+          else
+            git init -q -b docs-data "$work"
+          fi
+          cp "$out/sets.json" "$out/writers.json" "$out/sets-carddb.md" "$work/"
+          cd "$work"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add sets.json writers.json sets-carddb.md
+          if git diff --cached --quiet; then
+            echo "docs-data: per-set snippet unchanged"
+          else
+            git commit -q -m "docs-data: per-set xproof snippet ${MEASURED}"
+            git push "$remote" docs-data:docs-data
+          fi
       - name: Compress the SQLite
         run: |
           set -euo pipefail
