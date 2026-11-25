@@ -142,9 +142,11 @@ func combatKeyStart(reg *cards.Registry, c *cards.Card, card, key string, f *Sta
 // meets ("other creatures you control have trample"). The card is placed on the
 // battlefield with one such carrier, on the seat the filter names, and the game
 // plays on with no forced action: the static applies to the carrier from the
-// start. The card itself is the affected object when the static reads Self.
-// Every other mode, and a static no placement can satisfy, is refused with the
-// mode or the condition in the reason.
+// start. The card itself is the affected object when the static reads Self; an
+// Aura's or Equipment's static is attached to a bearer (attachStart), and a
+// condition the start can place is met (staticCondition). Every other mode, and
+// a static no placement can satisfy, is refused with the mode or the condition
+// in the reason.
 func staticKeyStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key string, f *StartFile) string {
 	m := staticKeyRE.FindStringSubmatch(key)
 	if m == nil {
@@ -162,11 +164,6 @@ func staticKeyStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, car
 	if st.ModeKind() != cards.StaticContinuous {
 		return "no-generator:static:" + st.Mode
 	}
-	for _, k := range []string{"Condition", "CheckSVar", "IsPresent", "PresentZone", "CheckSecondSVar", "ConditionDefined"} {
-		if st.Params[k] != "" {
-			return "no-generator:static:conditional"
-		}
-	}
 	for _, k := range []string{"AffectedZone", "EffectZone"} {
 		if z := st.Params[k]; z != "" && z != "Battlefield" {
 			return "no-generator:static:zone"
@@ -176,33 +173,242 @@ func staticKeyStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, car
 	if aff == "" {
 		return "no-generator:static:no-affected"
 	}
-	// an Aura's or Equipment's bearer (gorge folds AffectedDefined into the
-	// Affected filter as EnchantedBy/EquippedBy): a start file has no attach
-	if strings.Contains(aff, "EnchantedBy") || strings.Contains(aff, "EquippedBy") {
-		return "no-generator:static:attached"
-	}
+	attached := strings.Contains(aff, "EnchantedBy") || strings.Contains(aff, "EquippedBy")
 	compare, why := staticObserved(st)
 	if why != "" {
 		return why
 	}
 	f.Setup.P0.Battlefield = []string{card}
 	f.Compare = compare
-	if selfStatic(st) {
-		return ""
+	switch {
+	case attached:
+		// an Aura's or Equipment's bearer (gorge folds AffectedDefined into the
+		// Affected filter as EnchantedBy/EquippedBy): the start attaches it
+		if why := attachStart(reg, b, face, card, aff, f); why != "" {
+			return why
+		}
+	case selfStatic(st):
+	default:
+		name, s := filterCarrier(reg, b, card, aff, (*cards.Face).IsPermanent)
+		if name == "" {
+			name, s = landCarrier(reg, aff, basicFor(face.ManaCost))
+		}
+		if name == "" {
+			return "no-generator:static:affected"
+		}
+		placeOn(f, s, name)
 	}
-	name, s := filterCarrier(reg, b, card, aff, (*cards.Face).IsPermanent)
-	if name == "" {
-		name, s = landCarrier(reg, aff, basicFor(face.ManaCost))
-	}
-	if name == "" {
-		return "no-generator:static:affected"
-	}
+	return staticCondition(reg, b, face, card, st, f)
+}
+
+// placeOn adds a permanent to seat s's battlefield.
+func placeOn(f *StartFile, s int, name string) {
 	if s == 1 {
 		f.Setup.P1.Battlefield = append(f.Setup.P1.Battlefield, name)
 	} else {
 		f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, name)
 	}
+}
+
+// bearerFor is the most inert permanent that meets a filter an Aura enchants or
+// an Equipment equips (the walls first: bearers; else a carrier; else a basic
+// land), and the seat that controls it; "" when none.
+func bearerFor(reg *cards.Registry, b *certdeck.Builder, card, filter, generic string) (string, int) {
+	for _, a := range parseFilter(filter) {
+		if !a.known || a.self {
+			continue
+		}
+		for _, w := range bearers {
+			if c, ok := reg.Lookup(w); ok && len(c.Faces) > 0 && b.Playable(c) && !deadOnArrival(c.Faces[0]) && a.test(c.Faces[0]) {
+				if a.ctrl == ctrlOpp {
+					return w, 1
+				}
+				return w, 0
+			}
+		}
+	}
+	if name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsPermanent); name != "" {
+		return name, s
+	}
+	return landCarrier(reg, filter, generic)
+}
+
+// attachStart sets up the bearer of an attached static. An Aura is cast from
+// hand (with exactly the lands its cost takes) on the bearer already on the
+// battlefield: the focus is the cast, whose one legal target is the bearer. An
+// Equipment sits on the battlefield beside its bearer with the lands of its
+// equip cost, and the focus is the equip ability. Anything else attached (a
+// Fortify, a Reconfigure, a Bestow) is refused.
+func attachStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, aff string, f *StartFile) string {
+	generic := basicFor(face.ManaCost)
+	p0 := &f.Setup.P0
+	switch {
+	case strings.Contains(aff, "EnchantedBy") && FieldBlock(face) == "aura-unattached":
+		er, ok := enchantReq(face)
+		if !ok {
+			return "no-generator:static:attached"
+		}
+		for _, tok := range splitCost(face.ManaCost) {
+			if !manaTokenRE.MatchString(tok) || tok == "X" || tok == "S" {
+				return "no-generator:static:attached"
+			}
+		}
+		bearer, s := bearerFor(reg, b, card, strings.Join(er.raw, ","), generic)
+		if bearer == "" {
+			return "no-generator:static:bearer"
+		}
+		p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
+		p0.Hand = []string{card}
+		placeOn(f, s, bearer)
+		f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "cast"}
+		return ""
+	case strings.Contains(aff, "EquippedBy"):
+		for i, sa := range face.Abilities {
+			if sa.Params["Keyword"] != "Equip" {
+				continue
+			}
+			plan, why := planCost(reg, b, face, card, sa.Params["Cost"], generic)
+			if why != "" {
+				return why
+			}
+			if plan.zone != zoneBattlefield {
+				return "no-generator:static:attached"
+			}
+			bearer, s := bearerFor(reg, b, card, sa.Params["ValidTgts"], generic)
+			if bearer == "" {
+				return "no-generator:static:bearer"
+			}
+			p0.Battlefield = nil
+			applyCost(plan, card, generic, f)
+			placeOn(f, s, bearer)
+			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: i}
+			return ""
+		}
+	}
+	return "no-generator:static:attached"
+}
+
+// staticCondition places what a static's condition reads, or refuses it as
+// "no-generator:static:conditional". Understood: IsPresent (a battlefield count
+// of at least n: n carriers meeting the filter), CheckSVar on the controller's
+// life total, and the named conditions PlayerTurn (the start's active seat is
+// seat 0), Hellbent (no card in hand), Metalcraft (three artifacts) and
+// Threshold (seven cards in the graveyard). A static with none is unconditioned.
+func staticCondition(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, st *cards.Static, f *StartFile) string {
+	const refused = "no-generator:static:conditional"
+	for _, k := range []string{"CheckSecondSVar", "SecondSVarCompare", "ConditionDefined", "ConditionPresent", "PresentDefined"} {
+		if st.Params[k] != "" {
+			return refused
+		}
+	}
+	p0 := &f.Setup.P0
+	if filter := st.Params["IsPresent"]; filter != "" {
+		if z := st.Params["PresentZone"]; z != "" && z != "Battlefield" {
+			return refused
+		}
+		n, ok := atLeast(st.Params["PresentCompare"])
+		if !ok || n > 7 {
+			return refused
+		}
+		name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsPermanent)
+		if name == "" {
+			name, s = landCarrier(reg, filter, basicFor(face.ManaCost))
+		}
+		if name == "" {
+			return refused
+		}
+		if pl := st.Params["PresentPlayer"]; pl == "Opponent" {
+			s = 1
+		} else if pl != "" && pl != "You" && pl != "Any" {
+			return refused
+		}
+		for i := 0; i < n; i++ {
+			placeOn(f, s, name)
+		}
+	} else if st.Params["PresentZone"] != "" || st.Params["PresentCompare"] != "" {
+		return refused
+	}
+	if sv := st.Params["CheckSVar"]; sv != "" {
+		if face.SVars[sv] != "Count$YourLifeTotal" {
+			return refused
+		}
+		life, ok := lifeFor(st.Params["SVarCompare"])
+		if !ok {
+			return refused
+		}
+		p0.Life = &life
+	} else if st.Params["SVarCompare"] != "" {
+		return refused
+	}
+	switch c := st.Params["Condition"]; c {
+	case "":
+	case "PlayerTurn":
+		if f.Active != 0 {
+			return refused
+		}
+	case "Hellbent":
+		if len(p0.Hand) > 0 {
+			return refused
+		}
+	case "Metalcraft":
+		name, s := filterCarrier(reg, b, card, "Artifact.YouCtrl", (*cards.Face).IsPermanent)
+		if name == "" {
+			return refused
+		}
+		for i := 0; i < 3; i++ {
+			placeOn(f, s, name)
+		}
+	case "Threshold":
+		name := pickCarrier(reg, b, card, func(*cards.Face) bool { return true })
+		if name == "" {
+			return refused
+		}
+		for i := 0; i < 7; i++ {
+			p0.Graveyard = append(p0.Graveyard, name)
+		}
+	default:
+		return refused
+	}
 	return ""
+}
+
+// atLeast is the count a PresentCompare ("" is GE1, "GE2", "GT1") asks for.
+func atLeast(cmp string) (int, bool) {
+	if cmp == "" {
+		return 1, true
+	}
+	op, num := cmp[:min(2, len(cmp))], strings.TrimPrefix(cmp, cmp[:min(2, len(cmp))])
+	n, err := strconv.Atoi(num)
+	switch {
+	case err != nil || n < 0:
+		return 0, false
+	case op == "GE":
+		return max(n, 1), true
+	case op == "GT":
+		return n + 1, true
+	}
+	return 0, false
+}
+
+// lifeFor is a life total (from the start's 20) that meets an SVarCompare
+// ("GE25", "LE5"): the bound itself, one past it for a strict comparison.
+func lifeFor(cmp string) (int32, bool) {
+	if len(cmp) < 3 {
+		return 0, false
+	}
+	n, err := strconv.Atoi(cmp[2:])
+	if err != nil || n < 1 || n > 1000 {
+		return 0, false
+	}
+	switch cmp[:2] {
+	case "GE", "LE", "EQ":
+		return int32(n), true
+	case "GT":
+		return int32(n + 1), true
+	case "LT":
+		return int32(n - 1), true
+	}
+	return 0, false
 }
 
 // staticObserved is how the start observes a Continuous static's effect, or why

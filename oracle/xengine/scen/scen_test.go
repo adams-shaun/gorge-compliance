@@ -690,7 +690,9 @@ func TestStartCombatStaticRefusals(t *testing.T) {
 	for _, r := range [][3]string{
 		{"Karn, Argent Defender", "static#0.0", "no-generator:static:DisableTriggers"},
 		{"Academy Wall", "combat#0.attack", "no-generator:combat:defender"},
-		{"Holy Strength", "static#0.0", "no-generator:static:attached"},
+		{"Aether Syphon", "static#0.0", "no-generator:static:unobserved"}, // a granted trigger is not seen
+		{"Armory Mice", "static#0.0", "no-generator:static:conditional"},  // a this-turn count
+		{"Aettir and Priwen", "static#0.0", "no-generator:static:computed"},
 		// the attack/block is not offered, or the effect is not seen
 		{"Magus of the Moat", "combat#0.attack", "no-generator:combat:restricted"},
 		{"Frenetic Raptor", "combat#0.block", "no-generator:combat:restricted"},
@@ -902,4 +904,36 @@ func TestLandsForSlashlessHybrid(t *testing.T) {
 	if !hasShard("2 WB WB", 'B') || hasShard("2 WB WB", 'U') {
 		t.Error("hasShard misreads a slashless hybrid")
 	}
+}
+
+// TestStartstaticattached: a static whose effect reads the bearer of an Aura or
+// Equipment, or a condition the start can place, is a start and not a refusal:
+// the Aura is cast on a bearer, the Equipment is equipped to one, and a life
+// total or counted permanents meet the condition.
+func TestStartstaticattached(t *testing.T) {
+	t.Run("start", func(t *testing.T) {
+		checkStartRows(t, []startRow{
+			{card: "Airtight Alibi", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Airtight Alibi"},
+				p0BF: []string{"Forest", "Forest", "Forest", "Wall of Stone"}, focusCard: "Airtight Alibi", focusKind: "cast"},
+			{card: "Alien Symbiosis", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Alien Symbiosis"},
+				p0BF: []string{"Swamp", "Swamp", "Wall of Stone"}, focusCard: "Alien Symbiosis", focusKind: "cast"},
+			{card: "Holy Strength", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Holy Strength"},
+				p0BF: []string{"Plains", "Wall of Stone"}, focusCard: "Holy Strength", focusKind: "cast"},
+			// an Equipment is on the battlefield with its bearer and the lands of its equip cost
+			{card: "Bonesplitter", key: "static#0.0", maxTurns: 1,
+				p0BF: []string{"Bonesplitter", "Plains", "Wall of Stone"}, focusCard: "Bonesplitter", focusKind: "ability"},
+			// a life-total condition is the placed life; no action is forced
+			{card: "Angel of Vitality", key: "static#0.0", maxTurns: 1, p0BF: []string{"Angel of Vitality"}},
+		})
+	})
+	t.Run("life", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		res, err := Generate(reg, b, "Angel of Vitality", "static#0.0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%v path %q reason %q", err, res.Path, res.Reason)
+		}
+		if l := res.Start.Setup.P0.Life; l == nil || *l != 25 {
+			t.Errorf("p0 life %v, want 25", l)
+		}
+	})
 }
