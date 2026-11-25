@@ -396,7 +396,27 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
 # 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
 # Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
-FORGE_ORACLE_REF ?= d0f16bee2e018d35874a0a8838491c1af1b02b82
+# 70b77c0ff08 = the clean merge of 9b17c1fc83 (the coin force no longer spent by an unrelated unbounded draw) and 24a3344b81
+# (the Dig order-to-Library answer for Spin into Myth's fateseal): they touch disjoint files (ForcedDieRandom vs
+# ScriptedController/StepMachine), so the pin keeps both; die-roll code unchanged.
+# 9b17c1fc83 = d0f16bee2e0 plus the coin force no longer spent by an unrelated unbounded draw: ForcedDieRandom.nextInt() polled the armed
+# flips for a next(bits)-routing MyRandom, which the pin's MyRandom (nextBoolean forwarded) made dead for the flip and live for every
+# other unbounded draw. Aggregates.random over a Set draws nextInt() per item and Goblin Kaboomist's Land Mine token art pick does, on
+# the resolution that holds its flip, so the recorded lost flip was spent first and Forge flipped from its seeded stream (xproof rng
+# xs:XP:goblin-kaboomist:f0t0:s2, step 37, xpt-825fefd2). The override is gone; the fork's ForcedCoinFlipTest pins the Set pick leaving
+# the flip armed (anUnrelatedUnboundedDrawDoesNotSpendTheArmedFlip is the structural guard; its fixtures/coin win/lose rows carry
+# different ids, so they are not by themselves a guarantee that an unforced build fails one). scripts/forge-oracle-test-coinflip.sh
+# (make forge-driver-tests) replays the find twice under ONE id, flip lost then won, so an unforced build gives the same game both
+# times and fails exactly one; scripts/forge-oracle-run.sh refuses a ForcedDieRandom that declares the unbounded nextInt().
+# Driver-only: forge-game, cardsfolder and tokenscripts unchanged from d0f16bee2e0. Fork branch fix/xp-forge-driver-kaboomist-coinflip-step.
+# 24a3344b81 = d0f16bee2e0 plus Spin into Myth's fateseal (xproof cluster xpt-be0cfba7): Forge's DigEffect asks
+# orderMoveToZoneList for the cards a Dig sent to the library bottom (to their OWNER's controller), but gorge logs only its
+# one choose_n[dig] pick and no order decision. StepMachine.pickObjects remembers the consumed dig pick and orderCards answers
+# a Dig LibraryPosition$ -1 order ask from it (first pick moved first, so it ends highest; CR 401.4), matched by name multiset
+# at the same step, seat not compared. Test FatesealDigOrderTest (fixtures/unmapped/fateseal-dig-order.jsonl), run by
+# scripts/forge-oracle-test-fateseal-dig-order.sh. Driver-only (ScriptedController/StepMachine), die-roll code unchanged;
+# cardsfolder/tokenscripts unchanged. Fork branch fix/xp-forge-driver-fateseal-dig-order.
+FORGE_ORACLE_REF ?= 70b77c0ff083dad4a4ebf669840baffb33bed996
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
