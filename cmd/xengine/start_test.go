@@ -9,7 +9,9 @@ import (
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
@@ -396,45 +398,115 @@ func TestStartHybridCostIsExercised(t *testing.T) {
 		"Kitchen Finks",       // 1 GW GW
 		"Spectral Procession", // 2W 2W 2W
 	} {
-		t.Run(card, func(t *testing.T) {
-			res, err := scen.Generate(reg, b, card, "cast", scen.Options{Prefer: "start"})
-			if err != nil {
-				t.Fatal(err)
-			}
-			if res.Path != scen.PathStart || res.Start == nil {
-				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
-			}
-			raw, err := res.Start.Marshal()
-			if err != nil {
-				t.Fatal(err)
-			}
-			in := t.TempDir()
-			if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
-				t.Fatal(err)
-			}
-			out := t.TempDir()
-			if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
-				t.Fatal(err)
-			}
-			items := 0
-			if err := readLines(filepath.Join(out, "items.jsonl"), func([]byte) error { items++; return nil }); err != nil {
-				t.Fatal(err)
-			}
-			if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
-				var r lowerRow
-				if err := json.Unmarshal(b, &r); err != nil {
-					return err
+		t.Run(card, func(t *testing.T) { _ = startIsExercised(t, reg, b, card, "cast") })
+	}
+}
+
+// startIsExercised generates the start file for card's key, plays it, and
+// fails when play refuses it as start-not-exercised or writes no item; it
+// returns the items written.
+func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, card, key string) []oraclegen.Item {
+	t.Helper()
+	res, err := scen.Generate(reg, b, card, key, scen.Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != scen.PathStart || res.Start == nil {
+		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+	}
+	raw, err := res.Start.Marshal()
+	if err != nil {
+		t.Fatal(err)
+	}
+	in := t.TempDir()
+	if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	out := t.TempDir()
+	if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+		t.Fatal(err)
+	}
+	var items []oraclegen.Item
+	if err := readLines(filepath.Join(out, "items.jsonl"), func(b []byte) error {
+		var it oraclegen.Item
+		if err := json.Unmarshal(b, &it); err != nil {
+			return err
+		}
+		items = append(items, it)
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	var refused []string
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		var r lowerRow
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		if slices.Contains(r.Reasons, reasonStartNotExercised) {
+			t.Errorf("%s: %s (start %s)", r.ID, reasonStartNotExercised, raw)
+		}
+		if r.Status != "" {
+			refused = append(refused, string(b))
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if len(items) == 0 {
+		t.Errorf("no item written (lowering %v; start %s)", refused, raw)
+	}
+	return items
+}
+
+// TestStartManaAbilityIsExercised: a focus that is a mana ability was never
+// taken. gorge offers a mana ability at priority as one "activate" option per
+// source, never as an "ability" option with the ability's index, so the focus
+// seat waited for an option that never came and play refused every such start
+// as start-not-exercised.
+func TestStartManaAbilityIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct {
+		card, key string
+		ability   int
+	}{
+		{"Agent of Stromgald", "f0/a0", 0}, // R: Add {B}
+		{"Bog Initiate", "f0/a0", 0},       // 1: Add {B}
+		{"Cabal Coffers", "f0/a0", 0},      // 2, T: Add {B} for each Swamp you control
+		{"Bayou", "f0/a1", 1},              // T: Add {G}, the second of Bayou's two
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			for _, it := range startIsExercised(t, reg, b, c.card, c.key) {
+				// the focus ability itself is a step of the item: an activate
+				// of the card at the key's index
+				found := false
+				for _, st := range it.Steps {
+					if st.Op == "activate" && strings.Contains(st.Card, c.card) && st.AbilityIndex != nil && *st.AbilityIndex == c.ability {
+						found = true
+					}
 				}
-				if slices.Contains(r.Reasons, reasonStartNotExercised) {
-					t.Errorf("%s: %s (p0 battlefield %v)", r.ID, reasonStartNotExercised, res.Start.Setup.P0.Battlefield)
+				if !found {
+					t.Errorf("%s: no activate step of %s ability %d: %+v", it.ID, c.card, c.ability, it.Steps)
 				}
-				return nil
-			}); err != nil {
-				t.Fatal(err)
-			}
-			if items == 0 {
-				t.Errorf("no item written (p0 battlefield %v)", res.Start.Setup.P0.Battlefield)
 			}
 		})
+	}
+}
+
+// TestStartTargetRestrictionIsExercised: the focus play's target check read
+// only a target's card type and side, never the rest of its ValidTgts filter
+// (Permanent.nonLand, a colour, withFlying, cmcLE3), so a start met "target
+// nonland permanent" with its own land and "target black creature" with an
+// Ornithopter: the planted target was illegal, the play was never offered,
+// and play refused the start as start-not-exercised.
+func TestStartTargetRestrictionIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Aerial Volley", "cast"},   // Creature.withFlying
+		{"Celestial Purge", "cast"}, // Permanent.Black,Permanent.Red
+		{"Abrupt Decay", "cast"},    // Permanent.nonLand+cmcLE3
+		{"Daraja Griffin", "f0/a0"}, // Sac<1/CARDNAME>: destroy target black creature
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
 	}
 }
