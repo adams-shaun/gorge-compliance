@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d0fa514-87fc-46ff-bf49-4cd332396978	cast	cast	agreed	-	F	start	4	0	f:xs:XP:scythe-tiger:cast:s1	-	-	-	8a1b1a193ec0	-	3a8491078a99	-	-	2026-11-24	xproof
 4d0fa514-87fc-46ff-bf49-4cd332396978	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:scythe-tiger:cast:s1	-	-	-	8a1b1a193ec0	-	3a8491078a99	-	-	2026-11-24	xproof
 4d165c0f-3e40-45ad-92a1-53b13c07b34d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4d165c0f-3e40-45ad-92a1-53b13c07b34d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4d165c0f-3e40-45ad-92a1-53b13c07b34d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4d1885d1-212e-47ae-865f-e6dc4148ddf2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:repeat-offender:cast:s1,f:xs:XP:repeat-offender:cast:s1	-	-	-	23b491658465	-	9f34ee423cb6	-	-	2026-11-24	xproof
 4d1885d1-212e-47ae-865f-e6dc4148ddf2	f0/a0	Branch	agreed	-	FX	start	2	0	x:xs:XP:repeat-offender:f0a0:s1,f:xs:XP:repeat-offender:f0a0:s1	-	-	-	8c0bd19283bb	-	9f34ee423cb6	-	-	2026-11-24	xproof
 4d18bcba-a346-445e-a182-6cc30b7e066d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d97b9d1-1138-40da-b593-8065ea6ed7b3	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:grievous-wound:cast:s1,f:xs:XP:grievous-wound:cast:s1	-	-	-	23c4009444b0	-	9774596a3ab8	-	-	2026-11-25	xproof
 4d97b9d1-1138-40da-b593-8065ea6ed7b3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Grievous Wound/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4d98aea2-b4ff-4903-ba28-a53fbfaad6b1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-4d99e786-585d-4026-9253-19741fb357de	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4d99e786-585d-4026-9253-19741fb357de	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4da17e9e-df3e-4c46-a0cf-baafbe67186f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4da17e9e-df3e-4c46-a0cf-baafbe67186f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4da17e9e-df3e-4c46-a0cf-baafbe67186f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -185,4 +185,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4dfd33e8-7e30-493b-8564-f7df5f0257aa	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Edgewall Inn/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4dfd33e8-7e30-493b-8564-f7df5f0257aa	land	land	agreed	-	FX	start	2	0	x:xs:XP:edgewall-inn:land:s1,f:xs:XP:edgewall-inn:land:s1	-	-	-	23b491658465	-	4f06e287e649	-	-	2026-11-24	xproof
 4dfea3bf-dfd1-4abd-a17e-f3a07488a069	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4dfea3bf-dfd1-4abd-a17e-f3a07488a069	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4dfea3bf-dfd1-4abd-a17e-f3a07488a069	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:arena-athlete:f0t0:s1,f:xs:XP:arena-athlete:f0t0:s1	-	-	-	6f84be0f34c0	-	cc3af66d41a3	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

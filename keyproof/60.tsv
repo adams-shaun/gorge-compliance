@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6044696a-0f64-474a-840e-8ed4dbd30221	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nael-avizoa-aeronaut:cast:s1,f:xs:XP:nael-avizoa-aeronaut:cast:s1	-	-	-	d864b561c9cb	-	1d26be8f91ff	-	-	2026-11-24	xproof
 6044696a-0f64-474a-840e-8ed4dbd30221	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6047a38c-ec03-428d-9f4f-15d767f8176e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shrine-of-boundless-growth:f0t1:s1,f:xs:XP:shrine-of-boundless-growth:f0t1:s1	-	-	-	3aa6ded33acb	-	14443ea9d5cc	-	-	2026-11-25	xproof
-6047a38c-ec03-428d-9f4f-15d767f8176e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6047a38c-ec03-428d-9f4f-15d767f8176e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6047a38c-ec03-428d-9f4f-15d767f8176e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6047a38c-ec03-428d-9f4f-15d767f8176e	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:shrine-of-boundless-growth:f0t1:s1,f:xs:XP:shrine-of-boundless-growth:f0t1:s1	-	-	-	3aa6ded33acb	-	14443ea9d5cc	-	-	2026-11-25	xproof
 6048fc70-0dcc-4b54-977d-16e240225f82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:diregraf-ghoul:cast:s1,f:xs:XP:diregraf-ghoul:cast:s1	-	-	-	8c0bd19283bb	-	c4caa09f21e7	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60d640a4-032b-4279-ac75-8f200ca776fb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vedalken-orrery:cast:s1,f:xs:XP:vedalken-orrery:cast:s1	-	-	-	25696bf19d5b	-	6079deea0bf4	-	-	2026-11-24	xproof
 60dabe9e-4872-4aec-9e8e-35358b3b7dd5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:riders-of-gavony:cast:s1,f:xs:XP:riders-of-gavony:cast:s1	-	-	-	d864b561c9cb	-	84403f842561	-	-	2026-11-24	xproof
 60dd4233-ee50-42b8-88f5-ac5d105d83cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:double-down:cast:s1,f:xs:XP:double-down:cast:s1	-	-	-	23b491658465	-	164ae4a1ca77	-	-	2026-11-24	xproof
-60dd4233-ee50-42b8-88f5-ac5d105d83cd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Double Down/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+60dd4233-ee50-42b8-88f5-ac5d105d83cd	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:double-down:f0t0:s1,f:xs:XP:double-down:f0t0:s1	-	-	-	6f84be0f34c0	-	164ae4a1ca77	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 60e358ec-eb11-4a16-a0ae-b7c064a8ea6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hieroglyphic-illumination:cast:s1,f:xs:XP:hieroglyphic-illumination:cast:s1	-	-	-	d864b561c9cb	-	3e6e75c18ef7	-	-	2026-11-24	xproof
 60e358ec-eb11-4a16-a0ae-b7c064a8ea6c	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60e3ccf2-63f5-4435-a752-1d82fefb55d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lagonna-band-elder:f0t0:s1,f:xs:XP:lagonna-band-elder:f0t0:s1	-	-	-	d864b561c9cb	-	266db7c56eb1	-	-	2026-11-24	xproof

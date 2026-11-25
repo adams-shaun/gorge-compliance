@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e412b68-9179-4094-960a-95692428855b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:zo-zu-the-punisher:f0t0:s1,f:xs:XP:zo-zu-the-punisher:f0t0:s1	-	-	-	23c4009444b0	-	58690e215920	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0e471b6d-4ba4-46aa-a802-81e401cbfa56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e49ec18-f979-4168-b7df-7728f3fe442e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e49ec18-f979-4168-b7df-7728f3fe442e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0e49ec18-f979-4168-b7df-7728f3fe442e	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:war-wing-siren:f0t0:s1,f:xs:XP:war-wing-siren:f0t0:s1	-	-	-	6f84be0f34c0	-	796e1b96f6ba	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0e4d2fbc-1b34-4501-9022-8ea800cb2d24	cast	cast	agreed	-	F	start	2	0	f:xs:XP:talon-of-pain:cast:s1	-	-	-	25696bf19d5b	-	d5a37abf2d96	-	-	2026-11-24	xproof
 0e4d2fbc-1b34-4501-9022-8ea800cb2d24	f0/a0	DealDamage	agreed	-	FX	start	1	0	x:xs:XP:talon-of-pain:f0t0:s2,f:xs:XP:talon-of-pain:f0t0:s2	-	-	-	6f84be0f34c0	-	d5a37abf2d96	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0e4d2fbc-1b34-4501-9022-8ea800cb2d24	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:talon-of-pain:f0t0:s1,f:xs:XP:talon-of-pain:f0t0:s1	-	-	-	6f84be0f34c0	-	d5a37abf2d96	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ea2c5ad-2982-4041-8c9d-a1d31ced11aa	cast	cast-resolve	agreed	-	X	scen	1	0	Detention Chariot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ea2c5ad-2982-4041-8c9d-a1d31ced11aa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Detention Chariot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ea2c5ad-2982-4041-8c9d-a1d31ced11aa	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Detention Chariot/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ea2c5ad-2982-4041-8c9d-a1d31ced11aa	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0ea2c5ad-2982-4041-8c9d-a1d31ced11aa	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0ea58cfe-b37c-49a6-a3be-7e60065b8238	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tom-bert-and-william:cast:s1,f:xs:XP:tom-bert-and-william:cast:s1	-	-	-	8c0bd19283bb	-	e42e4adf3eeb	-	-	2026-11-24	xproof
 0ea58cfe-b37c-49a6-a3be-7e60065b8238	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:tom-bert-and-william:f0a0:s1,f:xs:XP:tom-bert-and-william:f0a0:s1	-	-	-	3aa6ded33acb	-	e42e4adf3eeb	-	-	2026-11-25	xproof
 0ea58cfe-b37c-49a6-a3be-7e60065b8238	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tom-bert-and-william:f0t0:s1,f:xs:XP:tom-bert-and-william:f0t0:s1	-	-	-	23b491658465	-	e42e4adf3eeb	-	-	2026-11-24	xproof

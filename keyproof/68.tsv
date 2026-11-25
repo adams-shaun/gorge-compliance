@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 683775ac-481e-4c26-ab2f-5d2813af0268	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-lost-lore:f0t0:s1,f:xs:XP:sentinel-of-lost-lore:f0t0:s1	-	-	-	3aa6ded33acb	-	9e6721ef2361	-	-	2026-11-25	xproof
 683a06b6-af77-440f-81b9-8958597a7324	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 683a06b6-af77-440f-81b9-8958597a7324	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:alert-heedbonder:f0t0:s1,f:xs:XP:alert-heedbonder:f0t0:s1	-	-	-	44e3ec152eea	-	2fdf48460d88	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-683d8deb-2ab4-4c65-9a23-f4e733f06ba2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+683d8deb-2ab4-4c65-9a23-f4e733f06ba2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reborn-hope:cast:s1,f:xs:XP:reborn-hope:cast:s1	-	-	-	6f84be0f34c0	-	95ba0e991d05	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 683e7135-de54-49c8-a978-4f84628a6a91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:serendib-djinn:f0t0:s1,f:xs:XP:serendib-djinn:f0t0:s1	-	-	-	3aa6ded33acb	-	45a7c34db239	-	-	2026-11-25	xproof
 683e7135-de54-49c8-a978-4f84628a6a91	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:serendib-djinn:f0t0:s1,f:xs:XP:serendib-djinn:f0t0:s1	-	-	-	3aa6ded33acb	-	45a7c34db239	-	-	2026-11-25	xproof
 683e7135-de54-49c8-a978-4f84628a6a91	f0/t1	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 689c5a47-24ec-4cbf-bc93-ebb492732cad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 689cd6a8-8be0-49a6-9758-a81cc9f55cc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haunted-one:cast:s1,f:xs:XP:haunted-one:cast:s1	-	-	-	8c0bd19283bb	-	80ff929e7074	-	-	2026-11-24	xproof
 68a1a67e-9d40-47dd-b282-6c1b15465f62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68a1a67e-9d40-47dd-b282-6c1b15465f62	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+68a1a67e-9d40-47dd-b282-6c1b15465f62	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 68a2e371-ccf0-4c2a-aeef-c66852811e1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68a58e0b-1506-492e-8ca3-016e520c10ba	cast	cast-resolve	agreed	-	FX	scen	2	0	Cornered by Black Mages/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68a91b87-1845-419b-aae7-ee1237554946	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68d3084b-0f4b-44a6-8954-6ebaf1db9269	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-pilfered-proof:cast:s1,f:xs:XP:case-of-the-pilfered-proof:cast:s1	-	-	-	6f84be0f34c0	-	84d580d46dff	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 68d3084b-0f4b-44a6-8954-6ebaf1db9269	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Case of the Pilfered Proof/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68d3084b-0f4b-44a6-8954-6ebaf1db9269	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Case of the Pilfered Proof/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-68d3084b-0f4b-44a6-8954-6ebaf1db9269	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Case of the Pilfered Proof/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+68d3084b-0f4b-44a6-8954-6ebaf1db9269	f0/t2	Phase	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-pilfered-proof:f0t2:s1,f:xs:XP:case-of-the-pilfered-proof:f0t2:s1	-	-	-	6f84be0f34c0	-	84d580d46dff	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 68d3f547-674a-4d8a-b02f-01bc2f161916	cast	cast	agreed	-	F	start	2	0	f:xs:XP:way-of-the-pyromancer:f0t0:s1	-	-	-	25696bf19d5b	-	59e919db9bf2	-	-	2026-11-24	xproof
 68d3f547-674a-4d8a-b02f-01bc2f161916	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:way-of-the-pyromancer:f0t0:s1	-	-	-	25696bf19d5b	-	59e919db9bf2	-	-	2026-11-24	xproof
 68d3f547-674a-4d8a-b02f-01bc2f161916	static#0.0	static#0.0	agreed	-	X	scen	1	0	Way of the Pyromancer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

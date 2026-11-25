@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 132859dd-de66-45c6-8af4-ab5e202a17b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanctum-of-fruitful-harvest:f0t0:s1,f:xs:XP:sanctum-of-fruitful-harvest:f0t0:s1	-	-	-	44e3ec152eea	-	7c788ae83171	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 132859dd-de66-45c6-8af4-ab5e202a17b0	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sanctum-of-fruitful-harvest:f0t0:s1,f:xs:XP:sanctum-of-fruitful-harvest:f0t0:s1	-	-	-	44e3ec152eea	-	7c788ae83171	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 132c8a62-00bc-4b89-b775-099d8909f200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-132ca99a-a3c7-4ed6-b4d0-0edcd7140ca2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+132ca99a-a3c7-4ed6-b4d0-0edcd7140ca2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 132de6c2-4ca2-41da-9c78-caa59838b641	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunstar-lightsmith:cast:s1,f:xs:XP:sunstar-lightsmith:cast:s1	-	-	-	23c4009444b0	-	f4d71bc11d42	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 132de6c2-4ca2-41da-9c78-caa59838b641	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:sunstar-lightsmith:f0t0:s1,f:xs:XP:sunstar-lightsmith:f0t0:s1	-	-	-	23c4009444b0	-	f4d71bc11d42	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 133109c3-a2ca-4231-b3b1-baa700800b07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primordial-ooze:f0t0:s1,f:xs:XP:primordial-ooze:f0t0:s1	-	-	-	3aa6ded33acb	-	efdfaba241bd	-	-	2026-11-25	xproof
@@ -76,7 +76,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13718d93-fe46-4a18-a511-88649ef1c9de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1373fa8d-0a39-4451-a482-ce2071438dc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1373fa8d-0a39-4451-a482-ce2071438dc8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1373fa8d-0a39-4451-a482-ce2071438dc8	f1/a0	NULL	owed	refused:no-generator:face:flip	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+1373fa8d-0a39-4451-a482-ce2071438dc8	f1/a0	NULL	owed	refused:no-generator:face:flip	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1374498c-58fd-40b9-b63b-f87fedc42e58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1374498c-58fd-40b9-b63b-f87fedc42e58	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1374498c-58fd-40b9-b63b-f87fedc42e58	f0/t0	NULL	owed	refused:no-generator:trigger:Transformed	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1397e7d5-4aa4-4c8d-8957-845579b775f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tactical-officer:cast:s1,f:xs:XP:tactical-officer:cast:s1	-	-	-	fb9d3088f0bf	-	9f339f2677bf	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 1397e7d5-4aa4-4c8d-8957-845579b775f7	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:tactical-officer:f0t0:s1,f:xs:XP:tactical-officer:f0t0:s1	-	-	-	23c4009444b0	-	9f339f2677bf	-	-	2026-11-25	xproof
 139a5f0b-6f76-4918-96e6-cdcf27253230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-139a5f0b-6f76-4918-96e6-cdcf27253230	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:nessian-boar:f0t0:s1,f:xs:XP:nessian-boar:f0t0:s1	-	-	-	44e3ec152eea	-	79ca5ca6e975	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+139a5f0b-6f76-4918-96e6-cdcf27253230	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:nessian-boar:f0t0:s1,f:xs:XP:nessian-boar:f0t0:s1	-	-	-	6f84be0f34c0	-	79ca5ca6e975	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 139af10d-a3e5-4ade-b876-87324e6c8017	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twisted-abomination:cast:s1,f:xs:XP:twisted-abomination:cast:s1	-	-	-	d864b561c9cb	-	7759de1ebf52	-	-	2026-11-24	xproof
 139af10d-a3e5-4ade-b876-87324e6c8017	f0/a0	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:twisted-abomination:cast:s1,f:xs:XP:twisted-abomination:cast:s1	-	-	-	d864b561c9cb	-	7759de1ebf52	-	-	2026-11-24	xproof
 139af10d-a3e5-4ade-b876-87324e6c8017	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:twisted-abomination:cast:s2,f:xs:XP:twisted-abomination:cast:s2	-	-	-	9ee19e8250ce	-	7759de1ebf52	-	-	2026-11-24	xproof
