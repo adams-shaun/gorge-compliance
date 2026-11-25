@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 86002526-ed3d-47e5-9f2a-55c4fa220ce8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86002526-ed3d-47e5-9f2a-55c4fa220ce8	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+86002526-ed3d-47e5-9f2a-55c4fa220ce8	f0/t0	Blocks	agreed	-	FX	start	2	0	x:xs:XP:folk-of-an-havva:f0t0:s1,f:xs:XP:folk-of-an-havva:f0t0:s1	-	-	-	9087eefec3ee	-	9d44a965a9f8	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 8603bf74-faab-4910-8e45-0f2e3b318efb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firebreathing:cast:s1,f:xs:XP:firebreathing:cast:s1	-	-	-	ae86f6029288	-	794d1b3b2aa2	-	-	2026-11-24	xproof
 8603bf74-faab-4910-8e45-0f2e3b318efb	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 8603e2d4-93f3-491a-91e7-a187fc6db599	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodrage-brawler:f0t0:s1,f:xs:XP:bloodrage-brawler:f0t0:s1	-	-	-	d864b561c9cb	-	5f34c0b76e3b	-	-	2026-11-24	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8629fdef-dbbe-4a97-a7e1-6b1646f4ca0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8629fdef-dbbe-4a97-a7e1-6b1646f4ca0b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 862af5c4-cb34-4bfa-a7ff-209e103defd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-862af5c4-cb34-4bfa-a7ff-209e103defd6	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+862af5c4-cb34-4bfa-a7ff-209e103defd6	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 862b777a-4816-4a3e-be8d-ddfcb72268e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 862ecb4e-7030-48d5-bbdf-655662059430	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boreal-griffin:cast:s1,f:xs:XP:boreal-griffin:cast:s1	-	-	-	16ec2936189a	-	a70505e63b2c	-	-	2026-11-24	xproof
 862ecb4e-7030-48d5-bbdf-655662059430	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:boreal-griffin:f0a0:s1,f:xs:XP:boreal-griffin:f0a0:s1	-	-	-	44e3ec152eea	-	a70505e63b2c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -64,12 +64,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 864d9db7-34ca-4440-8d6d-096f9eddedd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:surge-engine:cast:s1,f:xs:XP:surge-engine:cast:s1	-	-	-	d864b561c9cb	-	297c1233c2c4	-	-	2026-11-24	xproof
 864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:surge-engine:f0a1:s1,f:xs:XP:surge-engine:f0a1:s1	-	-	-	23b491658465	-	297c1233c2c4	-	-	2026-11-25	xproof
 864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
-864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+864d9db7-34ca-4440-8d6d-096f9eddedd4	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 864fc52a-e9f4-4254-901e-b949d96b34eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 864fc52a-e9f4-4254-901e-b949d96b34eb	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
-8650bd97-ecf6-420f-9b72-a749970afcd4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wellspring:cast:s1,f:xs:XP:wellspring:cast:s1	-	-	-	8c0bd19283bb	-	e875d6d5f4a7	-	-	2026-11-24	xproof
-8650bd97-ecf6-420f-9b72-a749970afcd4	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wellspring:cast:s1,f:xs:XP:wellspring:cast:s1	-	-	-	8c0bd19283bb	-	e875d6d5f4a7	-	-	2026-11-24	xproof
-8650bd97-ecf6-420f-9b72-a749970afcd4	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+8650bd97-ecf6-420f-9b72-a749970afcd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wellspring:f0t1:s1,f:xs:XP:wellspring:f0t1:s1	-	-	-	9087eefec3ee	-	e875d6d5f4a7	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+8650bd97-ecf6-420f-9b72-a749970afcd4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wellspring:f0t1:s1,f:xs:XP:wellspring:f0t1:s1	-	-	-	9087eefec3ee	-	e875d6d5f4a7	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+8650bd97-ecf6-420f-9b72-a749970afcd4	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:wellspring:f0t1:s1,f:xs:XP:wellspring:f0t1:s1	-	-	-	9087eefec3ee	-	e875d6d5f4a7	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 8651da8e-9b2c-4530-a521-aea490ad88d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-retrieval:cast:s1,f:xs:XP:alchemist-s-retrieval:cast:s1	-	-	-	6f84be0f34c0	-	a832040ef75a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8652d88f-edca-4235-b942-6e7467608de8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boon-bringer-valkyrie:f0t0:s1,f:xs:XP:boon-bringer-valkyrie:f0t0:s1	-	-	-	ae86f6029288	-	89182b1d7d9c	-	-	2026-11-24	xproof
 8652d88f-edca-4235-b942-6e7467608de8	f0/t0	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:boon-bringer-valkyrie:f0t0:s1,f:xs:XP:boon-bringer-valkyrie:f0t0:s1	-	-	-	ae86f6029288	-	89182b1d7d9c	-	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 86d76078-9af3-45a7-90d6-72946afdc78b	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:goldlust-triad:f0t1:s1,f:xs:XP:goldlust-triad:f0t1:s1	-	-	-	8c0bd19283bb	-	723e4f1a5538	-	-	2026-11-24	xproof
 86d76078-9af3-45a7-90d6-72946afdc78b	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:goldlust-triad:f0t1:s1,f:xs:XP:goldlust-triad:f0t1:s1	-	-	-	8c0bd19283bb	-	723e4f1a5538	-	-	2026-11-24	xproof
 86da33ac-f8ac-48c8-a50b-22fd761dff8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86da33ac-f8ac-48c8-a50b-22fd761dff8f	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+86da33ac-f8ac-48c8-a50b-22fd761dff8f	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 86dc3a41-4fb9-4b1f-8279-2b5edbc7e170	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:binding-negotiation:cast:s1,f:xs:XP:binding-negotiation:cast:s1	-	-	-	23b491658465	-	680a762cffc0	-	-	2026-11-24	xproof
 86ddbc56-3318-49cf-be95-78772ef87637	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86ddbc56-3318-49cf-be95-78772ef87637	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof

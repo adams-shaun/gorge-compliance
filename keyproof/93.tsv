@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9357fc7f-c9d0-4ce2-a6dd-0ff1f24bfc56	cast	cast-resolve	agreed	-	FX	scen	2	0	Spellscorn Coven/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9357fc7f-c9d0-4ce2-a6dd-0ff1f24bfc56	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spellscorn Coven/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9357fc7f-c9d0-4ce2-a6dd-0ff1f24bfc56	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spellscorn Coven/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9357fc7f-c9d0-4ce2-a6dd-0ff1f24bfc56	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+9357fc7f-c9d0-4ce2-a6dd-0ff1f24bfc56	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 93596258-bb44-4aa3-833d-9a0ab16b5ec1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crumb-and-get-it:cast:s1,f:xs:XP:crumb-and-get-it:cast:s1	-	-	-	336eab778104	-	1905e9767d7f	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 935e0cac-51ee-4cb7-a209-f085e0f099ed	cast	cast-resolve	agreed	-	FX	scen	2	0	Sylvan Tutor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9360d30c-4556-4b41-bd50-08b4367e5efb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sawback-manticore:cast:s1,f:xs:XP:sawback-manticore:cast:s1	-	-	-	ea3140b6974b	-	b7f3a89e65a1	-	-	2026-11-24	xproof
@@ -142,9 +142,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93b6a170-a816-4556-aa27-a729231715e7	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 93b6a170-a816-4556-aa27-a729231715e7	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 93b91d18-6acf-42e5-9a31-bc6e01f90c1f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
-93b91d18-6acf-42e5-9a31-bc6e01f90c1f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+93b91d18-6acf-42e5-9a31-bc6e01f90c1f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 93b91d18-6acf-42e5-9a31-bc6e01f90c1f	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
-93b91d18-6acf-42e5-9a31-bc6e01f90c1f	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+93b91d18-6acf-42e5-9a31-bc6e01f90c1f	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 93bfb762-e69e-4d8e-a5b7-e13dd12cd42a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93bfb762-e69e-4d8e-a5b7-e13dd12cd42a	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 93c2b91d-7d4e-483c-a11f-4a525f881503	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barbed-batterfist:f0t0:s1,f:xs:XP:barbed-batterfist:f0t0:s1	-	-	-	d864b561c9cb	-	8ca94fcfd770	-	-	2026-11-24	xproof

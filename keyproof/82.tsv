@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8220c5fa-28dc-40d0-a38a-d8eefc2795d6	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:stensia-bloodhall:f0a1:s1,f:xs:XP:stensia-bloodhall:f0a1:s1	-	-	-	d864b561c9cb	-	46a59d644329	-	-	2026-11-24	xproof
 8220c5fa-28dc-40d0-a38a-d8eefc2795d6	land	land	agreed	-	FX	start	2	0	x:xs:XP:stensia-bloodhall:land:s1,f:xs:XP:stensia-bloodhall:land:s1	-	-	-	d864b561c9cb	-	46a59d644329	-	-	2026-11-24	xproof
 82246ef2-4267-4daf-9463-908c2e142e7d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82246ef2-4267-4daf-9463-908c2e142e7d	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+82246ef2-4267-4daf-9463-908c2e142e7d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:crystal-golem:f0t0:s1,f:xs:XP:crystal-golem:f0t0:s1	-	-	-	9087eefec3ee	-	83930cba4fa4	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 82259c84-773d-4670-9b09-d73f5a3be7ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82259c84-773d-4670-9b09-d73f5a3be7ea	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 8226f31d-6f51-49c3-87f7-0c68f7f4f9ce	cast	cast-resolve	agreed	-	FX	scen	2	0	Make Your Move/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82875793-b264-4ceb-8525-ef3b6d086072	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82875793-b264-4ceb-8525-ef3b6d086072	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:slinking-skirge:f0a0:s1,f:xs:XP:slinking-skirge:f0a0:s1	-	-	-	5f2128bf97e4	-	25f6a476e578	-	-	2026-11-24	xproof
 8289190c-b180-48e3-b92f-7dccbca61b39	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
-8289190c-b180-48e3-b92f-7dccbca61b39	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+8289190c-b180-48e3-b92f-7dccbca61b39	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 828c1a94-36e1-484b-afc8-87f85956d60d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-gnats:cast:s1,f:xs:XP:yavimaya-gnats:cast:s1	-	-	-	ea3140b6974b	-	e75aa1325825	-	-	2026-11-24	xproof
 828c1a94-36e1-484b-afc8-87f85956d60d	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-gnats:f0a0:s1,f:xs:XP:yavimaya-gnats:f0a0:s1	-	-	-	ea3140b6974b	-	e75aa1325825	-	-	2026-11-24	xproof
 828fe0c0-e280-4a8b-9e49-68cb34c2da97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pollenbright-druid:f0t0:s1,f:xs:XP:pollenbright-druid:f0t0:s1	-	-	-	3aa6ded33acb	-	6eedc137e845	-	-	2026-11-25	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82fa14d8-5019-4e1b-a86c-923d9292b87a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:frozen-in-ice:f0t0:s1,f:xs:XP:frozen-in-ice:f0t0:s1	-	-	-	23c4009444b0	-	af32ec132774	-	-	2026-11-25	xproof
 82fa14d8-5019-4e1b-a86c-923d9292b87a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Frozen in Ice/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82fb9834-de65-41a5-b908-f49668dee3ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82fb9834-de65-41a5-b908-f49668dee3ec	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+82fb9834-de65-41a5-b908-f49668dee3ec	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:auspicious-ancestor:f0t0:s1,f:xs:XP:auspicious-ancestor:f0t0:s1	-	-	-	9087eefec3ee	-	280a3ca548b0	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 82fb9834-de65-41a5-b908-f49668dee3ec	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:auspicious-ancestor:f0t1:s1,f:xs:XP:auspicious-ancestor:f0t1:s1	-	-	-	ea3140b6974b	-	280a3ca548b0	-	-	2026-11-24	xproof
 82fefb82-a436-488d-8ecd-594686117e34	cast	cast-resolve	agreed	-	FX	scen	2	0	Foggy Swamp Vinebender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82fefb82-a436-488d-8ecd-594686117e34	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:foggy-swamp-vinebender:combat0.attack:s1,f:xs:XP:foggy-swamp-vinebender:combat0.attack:s1	-	-	-	23c4009444b0	-	959c47856cf0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

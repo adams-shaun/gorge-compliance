@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f384f19-7fb4-4120-8001-5b401b4debbd	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:reckless-pangolin:f0t0:s1,f:xs:XP:reckless-pangolin:f0t0:s1	-	-	-	8c0bd19283bb	-	6d1629c55850	-	-	2026-11-24	xproof
 1f3b0b15-2c38-4aaa-b527-afbb540a6715	cast	cast-resolve	agreed	-	FX	scen	2	0	Toxin Analysis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f3c2b00-0000-4ae1-9650-9553accac52e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f3c2b00-0000-4ae1-9650-9553accac52e	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+1f3c2b00-0000-4ae1-9650-9553accac52e	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 1f3c2b00-0000-4ae1-9650-9553accac52e	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:ninja-of-the-deep-hours:f0t0:s1,f:xs:XP:ninja-of-the-deep-hours:f0t0:s1	-	-	-	23c4009444b0	-	e616c9c3b0f8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	cast	cast-resolve	agreed	-	FX	scen	2	0	Gearbane Orangutan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gearbane-orangutan:combat0.attack:s1,f:xs:XP:gearbane-orangutan:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8beaefc89cfb	-	-	2026-11-25	xproof
@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f544a9f-c238-4858-be19-d6cd7d023dcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:opportunity:cast:s1,f:xs:XP:opportunity:cast:s1	-	-	-	25696bf19d5b	-	3ab3c9138b93	-	-	2026-11-24	xproof
 1f570526-7fb0-4fe5-8014-b5793eb65f87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f57a9f1-6b95-4395-bdf0-c5289b786ab1	cast	cast-resolve	agreed	-	X	scen	1	0	The Everflowing Well/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1f57a9f1-6b95-4395-bdf0-c5289b786ab1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+1f57a9f1-6b95-4395-bdf0-c5289b786ab1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 1f57a9f1-6b95-4395-bdf0-c5289b786ab1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Everflowing Well/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f57a9f1-6b95-4395-bdf0-c5289b786ab1	f1/a0	activate#1.0	agreed	-	X	scen	1	0	The Everflowing Well/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f57a9f1-6b95-4395-bdf0-c5289b786ab1	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	The Everflowing Well/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f938353-9081-4dc1-b8e7-d18ece038bd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valorous-stance:cast:s1,f:xs:XP:valorous-stance:cast:s1	-	-	-	3aa6ded33acb	-	95b87fd7f175	-	-	2026-11-25	xproof
 1f9797e2-7ebb-41f9-9199-e9ee575eefd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f9797e2-7ebb-41f9-9199-e9ee575eefd3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:inspiring-unicorn:f0t0:s1,f:xs:XP:inspiring-unicorn:f0t0:s1	-	-	-	d864b561c9cb	-	ad33e17f87f9	-	-	2026-11-24	xproof
-1f9efad1-9f51-47aa-a5a7-9c8103435a01	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+1f9efad1-9f51-47aa-a5a7-9c8103435a01	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keeper-of-keys:f0t1:s1,f:xs:XP:keeper-of-keys:f0t1:s1	-	-	-	3aa6ded33acb	-	5244630d5026	-	-	2026-11-25	xproof
 1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keeper-of-keys:f0t1:s1,f:xs:XP:keeper-of-keys:f0t1:s1	-	-	-	3aa6ded33acb	-	5244630d5026	-	-	2026-11-25	xproof
 1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:keeper-of-keys:f0t1:s1,f:xs:XP:keeper-of-keys:f0t1:s1	-	-	-	3aa6ded33acb	-	5244630d5026	-	-	2026-11-25	xproof
@@ -167,7 +167,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fcf95d7-fd70-474b-be0a-e43502633556	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:vengeful-vampire:f0t0:s1,f:xs:XP:vengeful-vampire:f0t0:s1	-	-	-	3aa6ded33acb	-	c88c542e94b9	-	-	2026-11-25	xproof
 1fd00656-83ba-4feb-b089-224007936b99	cast	cast-resolve	agreed	-	FX	scen	2	0	Mockingbird, Ace Agent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fd00656-83ba-4feb-b089-224007936b99	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:mockingbird-ace-agent:combat0.attack:s1,f:xs:XP:mockingbird-ace-agent:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	e91723f2da4e	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-1fd00656-83ba-4feb-b089-224007936b99	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:mockingbird-ace-agent:combat0.block:s1	-	-	-	fb9d3088f0bf	-	e91723f2da4e	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+1fd00656-83ba-4feb-b089-224007936b99	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mockingbird-ace-agent:combat0.block:s1,f:xs:XP:mockingbird-ace-agent:combat0.block:s1	-	-	-	9087eefec3ee	-	e91723f2da4e	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 1fd00656-83ba-4feb-b089-224007936b99	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:mockingbird-ace-agent:f0t0:s1,f:xs:XP:mockingbird-ace-agent:f0t0:s1	-	-	-	fb9d3088f0bf	-	e91723f2da4e	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 1fd04d9e-cf89-49ba-a932-5d278f65bf77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirran-bardiche:f0t0:s1,f:xs:XP:mirran-bardiche:f0t0:s1	-	-	-	ae86f6029288	-	70b23bf38a28	-	-	2026-11-24	xproof
 1fd04d9e-cf89-49ba-a932-5d278f65bf77	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:mirran-bardiche:f0a0:s1,f:xs:XP:mirran-bardiche:f0a0:s1	-	-	-	3aa6ded33acb	-	70b23bf38a28	-	-	2026-11-25	xproof

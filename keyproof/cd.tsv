@@ -13,7 +13,7 @@ cd10ebc9-9f6c-4da2-9a86-263902002ebc	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs
 cd1677e4-c356-43cd-9766-5fb8a1e64249	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd170b1c-879b-414e-9f0e-5e7fb099e7bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd170b1c-879b-414e-9f0e-5e7fb099e7bb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cd1a6508-aaba-4515-9496-057915d02040	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+cd1a6508-aaba-4515-9496-057915d02040	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:illumination:cast:s1,f:xs:XP:illumination:cast:s1	-	-	-	9087eefec3ee	-	769ff3f1f7f6	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 cd1a9d87-4c91-4456-8d88-19e0d6e0b200	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gandalf-spark-starter:f0t0:s1,f:xs:XP:gandalf-spark-starter:f0t0:s1	-	-	-	25696bf19d5b	-	bc7deac70cd0	-	-	2026-11-24	xproof
 cd1a9d87-4c91-4456-8d88-19e0d6e0b200	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gandalf-spark-starter:combat0.attack:s1,f:xs:XP:gandalf-spark-starter:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	bc7deac70cd0	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 cd1a9d87-4c91-4456-8d88-19e0d6e0b200	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gandalf-spark-starter:combat0.block:s1,f:xs:XP:gandalf-spark-starter:combat0.block:s1	-	-	-	fb9d3088f0bf	-	bc7deac70cd0	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -117,7 +117,7 @@ cd954a2a-5799-4c65-af8a-47adb1ce5e91	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 cd954a2a-5799-4c65-af8a-47adb1ce5e91	f0/t1	Blocks/Bushido	agreed	-	FX	start	2	0	x:xs:XP:kitsune-dawnblade:f0t1:s1,f:xs:XP:kitsune-dawnblade:f0t1:s1	-	-	-	6f84be0f34c0	-	ac2b9d9bd485	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 cd954a2a-5799-4c65-af8a-47adb1ce5e91	f0/t2	AttackerBlocked/Bushido	agreed	-	FX	start	2	0	x:xs:XP:kitsune-dawnblade:f0t2:s1,f:xs:XP:kitsune-dawnblade:f0t2:s1	-	-	-	6f84be0f34c0	-	ac2b9d9bd485	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 cd97f8b4-e751-4b52-987b-a442aef57809	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cd97f8b4-e751-4b52-987b-a442aef57809	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+cd97f8b4-e751-4b52-987b-a442aef57809	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:skulking-ghost:f0t0:s1,f:xs:XP:skulking-ghost:f0t0:s1	-	-	-	9087eefec3ee	-	5ae6584ce663	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 cd98a31b-cc7e-43f9-982e-109ad9850908	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:verduran-enchantress:cast:s1,f:xs:XP:verduran-enchantress:cast:s1	-	-	-	25696bf19d5b	-	9c64038fd256	-	-	2026-11-24	xproof
 cd98a31b-cc7e-43f9-982e-109ad9850908	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:verduran-enchantress:f0t0:s1,f:xs:XP:verduran-enchantress:f0t0:s1	-	-	-	23c4009444b0	-	9c64038fd256	-	-	2026-11-25	xproof
 cd990c63-ba29-46f8-afa5-4cd5fe0b0166	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
