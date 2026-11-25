@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79d2efb2-145d-4377-a4e2-832ff2cb5677	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:exit-specialist:combat0.attack:s1,f:xs:XP:exit-specialist:combat0.attack:s1	-	-	-	3aa6ded33acb	-	0f8ecf36e27d	-	-	2026-11-25	xproof
 79d2efb2-145d-4377-a4e2-832ff2cb5677	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Exit Specialist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79d2efb2-145d-4377-a4e2-832ff2cb5677	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Exit Specialist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-79d2efb2-145d-4377-a4e2-832ff2cb5677	static#0.0	static#0.0	agreed	-	X	scen	1	0	Exit Specialist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+79d2efb2-145d-4377-a4e2-832ff2cb5677	static#0.0	static.cant-block-by-blocker-filter	agreed	-	FX	start	2	0	x:xs:XP:exit-specialist:static0.0:s1,f:xs:XP:exit-specialist:static0.0:s1	-	-	-	6f84be0f34c0	-	0f8ecf36e27d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 79d34537-4633-4728-a1b3-5822119f0c84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bonded-fetch:cast:s1,f:xs:XP:bonded-fetch:cast:s1	-	-	-	d864b561c9cb	-	0d02409f3633	-	-	2026-11-24	xproof
 79d34537-4633-4728-a1b3-5822119f0c84	f0/a0	Draw	agreed	-	FX	start	4	0	x:xs:XP:bonded-fetch:cast:s1,f:xs:XP:bonded-fetch:cast:s1	-	-	-	d864b561c9cb	-	0d02409f3633	-	-	2026-11-24	xproof
 79d46e09-2548-440f-9c02-3c3dc39a0cd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

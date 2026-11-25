@@ -68,8 +68,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05551d91-50c6-46d1-86a4-cd3d177d0923	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:anim-pakal-thousandth-moon:f0t0:s1,f:xs:XP:anim-pakal-thousandth-moon:f0t0:s1	-	-	-	3aa6ded33acb	-	d92310c48666	-	-	2026-11-25	xproof
 05608055-d97a-4c8f-833d-47b3dd1ea255	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 05608055-d97a-4c8f-833d-47b3dd1ea255	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-0561043a-3896-4bb1-8ff5-ee674ddfea2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sengir-autocrat:f0t0:s1,f:xs:XP:sengir-autocrat:f0t0:s1	-	-	-	6f84be0f34c0	-	8084f1f58187	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sengir-autocrat:f0t0:s1,f:xs:XP:sengir-autocrat:f0t0:s1	-	-	-	6f84be0f34c0	-	8084f1f58187	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0561043a-3896-4bb1-8ff5-ee674ddfea2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sengir-autocrat:cast:s1,f:xs:XP:sengir-autocrat:cast:s1	-	-	-	6f84be0f34c0	-	8084f1f58187	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sengir-autocrat:cast:s1,f:xs:XP:sengir-autocrat:cast:s1	-	-	-	6f84be0f34c0	-	8084f1f58187	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sengir-autocrat:f0t1:s1,f:xs:XP:sengir-autocrat:f0t1:s1	-	-	-	6f84be0f34c0	-	8084f1f58187	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0566ab5d-c804-4ac0-add2-87fc352b4c7e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:phyrexian-awakening:cast:s1,f:xs:XP:phyrexian-awakening:cast:s1	-	-	-	ae86f6029288	-	7698a2d8833b	-	-	2026-11-24	xproof
 0566ab5d-c804-4ac0-add2-87fc352b4c7e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:phyrexian-awakening:cast:s1,f:xs:XP:phyrexian-awakening:cast:s1	-	-	-	ae86f6029288	-	7698a2d8833b	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05abc57a-839d-4376-986c-8e3855e34239	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:irreverent-revelers:f0t0:s1,f:xs:XP:irreverent-revelers:f0t0:s1	-	-	-	3aa6ded33acb	-	1aa11d5b21a6	-	-	2026-11-25	xproof
 05ac6e5c-b773-45ed-9c74-3cd4b05bc287	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05ac6e5c-b773-45ed-9c74-3cd4b05bc287	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05ac6e5c-b773-45ed-9c74-3cd4b05bc287	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+05ac6e5c-b773-45ed-9c74-3cd4b05bc287	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:deathrender:f0t0:s1	-	-	-	6f84be0f34c0	-	ea84325a5fa2	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 05b020fd-21be-495d-ae45-7de3b1224e6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05b020fd-21be-495d-ae45-7de3b1224e6d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05b5c0fb-84b2-4a32-bf66-179c4dccb3df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05d75b10-4f20-4083-af27-f85c6e207fd0	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:ghirapur-aether-grid:f0a0:s1,f:xs:XP:ghirapur-aether-grid:f0a0:s1	-	-	-	fb9d3088f0bf	-	41493c3eebb9	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 05da6b06-fb5f-41e8-b0a2-d949646e36d9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mephitic-draught:f0t0:s2,f:xs:XP:mephitic-draught:f0t0:s2	-	-	-	e07cf3a05ba5	-	bafe83524188	-	-	2026-11-24	xproof
 05da6b06-fb5f-41e8-b0a2-d949646e36d9	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mephitic-draught:f0t0:s2,f:xs:XP:mephitic-draught:f0t0:s2	-	-	-	e07cf3a05ba5	-	bafe83524188	-	-	2026-11-24	xproof
-05da6b06-fb5f-41e8-b0a2-d949646e36d9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Mephitic Draught/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+05da6b06-fb5f-41e8-b0a2-d949646e36d9	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mephitic-draught:f0t1:s1,f:xs:XP:mephitic-draught:f0t1:s1	-	-	-	6f84be0f34c0	-	bafe83524188	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 05e6b243-48a6-4a42-bc5f-413441de9c33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05e6b243-48a6-4a42-bc5f-413441de9c33	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

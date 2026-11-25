@@ -200,7 +200,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77eb44ca-53e9-4924-b19f-31732f14ef14	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:simian-simulacrum:f0a0:s1,f:xs:XP:simian-simulacrum:f0a0:s1	-	-	-	3aa6ded33acb	-	1fc31ef7595b	-	-	2026-11-25	xproof
 77eb76cf-a361-44e0-aeee-e8ef4b695799	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:persistent-marshstalker:cast:s1,f:xs:XP:persistent-marshstalker:cast:s1	-	-	-	3aa6ded33acb	-	5643d85efc5b	-	-	2026-11-25	xproof
 77eb76cf-a361-44e0-aeee-e8ef4b695799	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Persistent Marshstalker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-77eb76cf-a361-44e0-aeee-e8ef4b695799	static#0.0	static#0.0	agreed	-	X	scen	1	0	Persistent Marshstalker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+77eb76cf-a361-44e0-aeee-e8ef4b695799	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:persistent-marshstalker:static0.0:s1,f:xs:XP:persistent-marshstalker:static0.0:s1	-	-	-	6f84be0f34c0	-	5643d85efc5b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 77ec26f9-c7de-4bd8-bafb-8b9825891015	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77eda626-5cef-496d-b291-cfa1ee6fc1fb	cast	cast	agreed	-	F	start	2	0	f:xs:XP:cycle-of-renewal:cast:s1	-	-	-	23c4009444b0	-	270c60da41c8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 77f02ae6-2411-4378-b5e0-cc1cf5964458	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

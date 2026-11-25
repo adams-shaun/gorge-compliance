@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b3c069b-5bed-4b70-b04c-b7143a4a6e96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:feral-invocation:cast:s1,f:xs:XP:feral-invocation:cast:s1	-	-	-	d864b561c9cb	-	cb03a0a9d2f9	-	-	2026-11-24	xproof
 5b4508a3-1d21-46ec-8a50-cd3171a7348a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:soul-enervation:f0t0:s2,f:xs:XP:soul-enervation:f0t0:s2	-	-	-	e07cf3a05ba5	-	2befba286fa4	-	-	2026-11-24	xproof
 5b4508a3-1d21-46ec-8a50-cd3171a7348a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:soul-enervation:f0t0:s2,f:xs:XP:soul-enervation:f0t0:s2	-	-	-	e07cf3a05ba5	-	2befba286fa4	-	-	2026-11-24	xproof
-5b4508a3-1d21-46ec-8a50-cd3171a7348a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Soul Enervation/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5b4508a3-1d21-46ec-8a50-cd3171a7348a	f0/t1	ChangesZoneAll	agreed	-	FX	start	2	0	x:xs:XP:soul-enervation:f0t1:s1,f:xs:XP:soul-enervation:f0t1:s1	-	-	-	6f84be0f34c0	-	2befba286fa4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5b4a400b-435d-4140-984b-65f034c6a9fc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ransack:cast:s1	-	-	-	5f2128bf97e4	-	9498a413e5bd	-	-	2026-11-24	xproof
 5b4b08a5-3af8-4c33-ab5e-7bee7f79e77a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nocturnal-raid:cast:s1,f:xs:XP:nocturnal-raid:cast:s1	-	-	-	ea3140b6974b	-	5518c3085683	-	-	2026-11-24	xproof
 5b4b21ed-c24e-4038-83fb-bd7f3c3426cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emberheart-challenger:cast:s1,f:xs:XP:emberheart-challenger:cast:s1	-	-	-	23b491658465	-	4fb05e44d6c4	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b5dece6-b1e0-4844-bbf9-3b44008ffa70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b5ef43b-13fd-4461-8d2d-18be65e9a790	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ichor-wellspring:f0t0:s1,f:xs:XP:ichor-wellspring:f0t0:s1	-	-	-	d864b561c9cb	-	18b5e9cca727	-	-	2026-11-24	xproof
 5b5ef43b-13fd-4461-8d2d-18be65e9a790	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ichor-wellspring:f0t0:s1,f:xs:XP:ichor-wellspring:f0t0:s1	-	-	-	d864b561c9cb	-	18b5e9cca727	-	-	2026-11-24	xproof
-5b5ef43b-13fd-4461-8d2d-18be65e9a790	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5b5ef43b-13fd-4461-8d2d-18be65e9a790	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ichor-wellspring:f0t1:s1,f:xs:XP:ichor-wellspring:f0t1:s1	-	-	-	6f84be0f34c0	-	18b5e9cca727	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5b5ef88c-f863-4f55-91fc-a63f7f3c1b3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:outlaws-fury:cast:s1,f:xs:XP:outlaws-fury:cast:s1	-	-	-	23b491658465	-	68c20c4fc4a7	-	-	2026-11-25	xproof
 5b60a257-e4f8-412e-b146-b7983a384753	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b677e88-bcc9-4a55-9c89-8bbd0e2344dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

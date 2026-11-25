@@ -47,7 +47,7 @@ dc45b2e3-272b-479b-8e3b-36eead606a3a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:han
 dc48079a-b1c4-4c43-a989-418c78a264ec	cast	cast	agreed	-	F	start	1	0	f:xs:XP:planar-engineering:cast:s2	-	-	-	5437c1394672	-	84e097d923d9	-	-	2026-11-24	xproof
 dc4a4996-108a-4aac-850f-2d9f76403446	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boomerang:cast:s1,f:xs:XP:boomerang:cast:s1	-	-	-	25696bf19d5b	-	76d51837aafc	-	-	2026-11-24	xproof
 dc4d5602-47cb-47c8-8a43-3b840e12b79c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:homicide-investigator:cast:s1,f:xs:XP:homicide-investigator:cast:s1	-	-	-	6f84be0f34c0	-	65f6459b04fc	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-dc4d5602-47cb-47c8-8a43-3b840e12b79c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Homicide Investigator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+dc4d5602-47cb-47c8-8a43-3b840e12b79c	f0/t0	ChangesZoneAll	agreed	-	FX	start	2	0	x:xs:XP:homicide-investigator:f0t0:s1,f:xs:XP:homicide-investigator:f0t0:s1	-	-	-	6f84be0f34c0	-	65f6459b04fc	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 dc548b03-ef5f-40df-8311-35d4cf26f3c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:paladin-s-shield:f0t0:s1,f:xs:XP:paladin-s-shield:f0t0:s1	-	-	-	d864b561c9cb	-	2e697f7c5edd	-	-	2026-11-24	xproof
 dc548b03-ef5f-40df-8311-35d4cf26f3c5	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:paladin-s-shield:f0a0:s1,f:xs:XP:paladin-s-shield:f0a0:s1	-	-	-	3aa6ded33acb	-	2e697f7c5edd	-	-	2026-11-25	xproof
 dc548b03-ef5f-40df-8311-35d4cf26f3c5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:paladin-s-shield:f0t0:s1,f:xs:XP:paladin-s-shield:f0t0:s1	-	-	-	d864b561c9cb	-	2e697f7c5edd	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ dcc31cbf-f75d-4584-a97b-aa9d19d7b142	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 dcc31cbf-f75d-4584-a97b-aa9d19d7b142	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:zhur-taa-swine:f0a0:s1,f:xs:XP:zhur-taa-swine:f0a0:s1	-	-	-	336eab778104	-	400a07470de0	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 dcc51bcb-a61e-471f-8a01-7fcbc069fcba	cast	cast	agreed	-	F	start	2	0	f:xs:XP:relive-the-past:cast:s1	-	-	-	23b491658465	-	7c6482f50293	-	-	2026-11-24	xproof
 dcc55415-216e-4e18-83d6-43f301359f84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dcc55415-216e-4e18-83d6-43f301359f84	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+dcc55415-216e-4e18-83d6-43f301359f84	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aspect-of-mongoose:f0t0:s1,f:xs:XP:aspect-of-mongoose:f0t0:s1	-	-	-	6f84be0f34c0	-	b671bcdc8511	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 dcc59bd6-2c5f-48eb-8008-83ce6eb5a442	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dcc5ca3f-5309-4833-bee4-f2508382ea06	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dcc5ca3f-5309-4833-bee4-f2508382ea06	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

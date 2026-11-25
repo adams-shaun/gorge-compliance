@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 386c5895-9713-4c28-9ba8-8ca0caa06c13	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gate-colossus:combat0.attack:s1,f:xs:XP:gate-colossus:combat0.attack:s1	-	-	-	3aa6ded33acb	-	e37497feec00	-	-	2026-11-25	xproof
 386c5895-9713-4c28-9ba8-8ca0caa06c13	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gate Colossus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 386c5895-9713-4c28-9ba8-8ca0caa06c13	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gate Colossus/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-386c5895-9713-4c28-9ba8-8ca0caa06c13	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gate Colossus/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+386c5895-9713-4c28-9ba8-8ca0caa06c13	static#0.0	static.cant-block-by-blocker-filter	agreed	-	FX	start	2	0	x:xs:XP:gate-colossus:static0.0:s1,f:xs:XP:gate-colossus:static0.0:s1	-	-	-	6f84be0f34c0	-	e37497feec00	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 386c5895-9713-4c28-9ba8-8ca0caa06c13	static#0.1	static#0.1	agreed	-	X	scen	1	0	Gate Colossus/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 386faeef-f5cc-4ef9-b8cb-6ef06b33cbd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:righteous-authority:cast:s1,f:xs:XP:righteous-authority:cast:s1	-	-	-	d864b561c9cb	-	73b012cf8628	-	-	2026-11-24	xproof
 386faeef-f5cc-4ef9-b8cb-6ef06b33cbd0	f0/t0	NULL	owed	refused:history:enchantedcontroller	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

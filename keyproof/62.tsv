@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 62007675-8a0d-4211-83b2-0daf3641dedc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enigma-drake:cast:s1,f:xs:XP:enigma-drake:cast:s1	-	-	-	8c0bd19283bb	-	d9671ec52b49	-	-	2026-11-24	xproof
 62007675-8a0d-4211-83b2-0daf3641dedc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:enigma-drake:combat0.attack:s1,f:xs:XP:enigma-drake:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	d9671ec52b49	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 62007675-8a0d-4211-83b2-0daf3641dedc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:enigma-drake:combat0.block:s1,f:xs:XP:enigma-drake:combat0.block:s1	-	-	-	3aa6ded33acb	-	d9671ec52b49	-	-	2026-11-25	xproof
-62007675-8a0d-4211-83b2-0daf3641dedc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Enigma Drake/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+62007675-8a0d-4211-83b2-0daf3641dedc	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:enigma-drake:static0.0:s1,f:xs:XP:enigma-drake:static0.0:s1	-	-	-	6f84be0f34c0	-	d9671ec52b49	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 62009b63-ca6c-4fb0-8c9a-eccdec51cb18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 62009b63-ca6c-4fb0-8c9a-eccdec51cb18	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6202d1cf-5359-4783-846d-7f35460e42b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 622a53bd-d894-422c-a606-7126041afa02	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Fomori Vault/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 622a53bd-d894-422c-a606-7126041afa02	land	play-land	agreed	-	FX	scen	2	0	Fomori Vault/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 622d783d-4201-4769-8a0f-442b358d8bf1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undying-rage:cast:s1,f:xs:XP:undying-rage:cast:s1	-	-	-	64a08ba7d913	-	58e75bbb4c36	-	-	2026-11-24	xproof
-622d783d-4201-4769-8a0f-442b358d8bf1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+622d783d-4201-4769-8a0f-442b358d8bf1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undying-rage:f0t0:s1,f:xs:XP:undying-rage:f0t0:s1	-	-	-	6f84be0f34c0	-	58e75bbb4c36	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 622e2561-48b1-4aca-9abb-9a3c284dcceb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 622e2561-48b1-4aca-9abb-9a3c284dcceb	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 622e2561-48b1-4aca-9abb-9a3c284dcceb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

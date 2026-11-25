@@ -92,7 +92,7 @@ b94c0336-2ca8-4bb1-bb1f-e9babd1826ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b94c233e-11d3-4556-a1da-bd193e58b663	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tempest-djinn:cast:s1,f:xs:XP:tempest-djinn:cast:s1	-	-	-	3aa6ded33acb	-	ee611631cd00	-	-	2026-11-25	xproof
 b94c233e-11d3-4556-a1da-bd193e58b663	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tempest-djinn:combat0.attack:s1,f:xs:XP:tempest-djinn:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	ee611631cd00	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 b94c233e-11d3-4556-a1da-bd193e58b663	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tempest-djinn:combat0.block:s1,f:xs:XP:tempest-djinn:combat0.block:s1	-	-	-	3aa6ded33acb	-	ee611631cd00	-	-	2026-11-25	xproof
-b94c233e-11d3-4556-a1da-bd193e58b663	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tempest Djinn/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b94c233e-11d3-4556-a1da-bd193e58b663	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:tempest-djinn:static0.0:s1,f:xs:XP:tempest-djinn:static0.0:s1	-	-	-	6f84be0f34c0	-	ee611631cd00	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 b94fcdd2-7e50-439c-b5eb-aaa9ec7dee08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9526bd5-ed83-466f-8819-e9a8487bbe77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magmatic-core:cast:s1,f:xs:XP:magmatic-core:cast:s1	-	-	-	23c4009444b0	-	d33daa9d3901	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b9526bd5-ed83-466f-8819-e9a8487bbe77	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:magmatic-core:cast:s1,f:xs:XP:magmatic-core:cast:s1	-	-	-	23c4009444b0	-	d33daa9d3901	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -193,9 +193,9 @@ b9cec31a-9891-414f-b528-954612168832	f0/t0	ChangesZone/Living Weapon	agreed	-	FX
 b9cf9f1e-0280-43b6-9d58-262052dcb8a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9d018ff-de27-4bf6-9cc6-9d9a46db3eb9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9d018ff-de27-4bf6-9cc6-9d9a46db3eb9	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:fallowsage:f0t0:s1,f:xs:XP:fallowsage:f0t0:s1	-	-	-	44e3ec152eea	-	ac2a37e88ddc	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-b9d0f2e1-62c2-44fd-ad38-471daf17bb0a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tolarian-terror:cast:s1,f:xs:XP:tolarian-terror:cast:s1	-	-	-	23b491658465	-	da3457475351	-	-	2026-11-24	xproof
+b9d0f2e1-62c2-44fd-ad38-471daf17bb0a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tolarian-terror:static0.0:s1,f:xs:XP:tolarian-terror:static0.0:s1	-	-	-	6f84be0f34c0	-	da3457475351	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 b9d0f2e1-62c2-44fd-ad38-471daf17bb0a	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:tolarian-terror:f0t0:s1,f:xs:XP:tolarian-terror:f0t0:s1	-	-	-	3aa6ded33acb	-	da3457475351	-	-	2026-11-25	xproof
-b9d0f2e1-62c2-44fd-ad38-471daf17bb0a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tolarian Terror/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b9d0f2e1-62c2-44fd-ad38-471daf17bb0a	static#0.0	static.cost	agreed	-	FX	start	2	0	x:xs:XP:tolarian-terror:static0.0:s1,f:xs:XP:tolarian-terror:static0.0:s1	-	-	-	6f84be0f34c0	-	da3457475351	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 b9d186f5-1c92-4539-a5b5-e7fbd4b726fe	cast	cast	agreed	-	F	start	2	0	f:xs:XP:living-wish:cast:s1	-	-	-	fc71ca68c5ac	-	7feeab8ed92b	-	-	2026-11-24	xproof
 b9d388ca-1a63-4a11-bf33-9f7b87305a52	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9d388ca-1a63-4a11-bf33-9f7b87305a52	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
