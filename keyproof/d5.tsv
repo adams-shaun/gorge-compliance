@@ -78,10 +78,10 @@ d563d988-7a6e-4870-a20a-02c7b8f0f879	cast	NULL	owed	refused:scen failed: xengine
 d563d988-7a6e-4870-a20a-02c7b8f0f879	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Simic Slaw"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 d563d988-7a6e-4870-a20a-02c7b8f0f879	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 d56602f3-64df-4c68-a4a3-95c37c021e72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d566d5f1-5abd-405b-8553-d267ecbe72ab	cast	cast-resolve	agreed	-	X	scen	1	0	The Thing, Ben Grimm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d566d5f1-5abd-405b-8553-d267ecbe72ab	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Thing, Ben Grimm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d566d5f1-5abd-405b-8553-d267ecbe72ab	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Thing, Ben Grimm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d566d5f1-5abd-405b-8553-d267ecbe72ab	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Thing, Ben Grimm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d566d5f1-5abd-405b-8553-d267ecbe72ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-thing-ben-grimm:cast:s1,f:xs:XP:the-thing-ben-grimm:cast:s1	-	-	-	23c4009444b0	-	38c039cde859	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d566d5f1-5abd-405b-8553-d267ecbe72ab	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:the-thing-ben-grimm:combat0.attack:s1,f:xs:XP:the-thing-ben-grimm:combat0.attack:s1	-	-	-	23c4009444b0	-	38c039cde859	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d566d5f1-5abd-405b-8553-d267ecbe72ab	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-thing-ben-grimm:combat0.block:s1,f:xs:XP:the-thing-ben-grimm:combat0.block:s1	-	-	-	23c4009444b0	-	38c039cde859	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d566d5f1-5abd-405b-8553-d267ecbe72ab	f0/t0	DamageDoneOnce	agreed	-	FX	start	4	0	x:xs:XP:the-thing-ben-grimm:cast:s1,f:xs:XP:the-thing-ben-grimm:cast:s1	-	-	-	23c4009444b0	-	38c039cde859	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d569d969-ce39-4314-b5f0-76b45f5c4c7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d56afdf6-51e0-4151-a86c-4c4827a50a0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:umbral-juke:cast:s1,f:xs:XP:umbral-juke:cast:s1	-	-	-	d864b561c9cb	-	659e98f46969	-	-	2026-11-24	xproof
 d56f1543-2b2d-4ce3-bcfe-41224a0cece4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ d5770b0f-4493-42e9-a2d7-0e74a28da4ba	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 d5770b0f-4493-42e9-a2d7-0e74a28da4ba	f0/t1	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:the-earth-king:f0t1:s1,f:xs:XP:the-earth-king:f0t1:s1	-	-	-	23c4009444b0	-	e6025971fb6b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d578ef54-6a6b-4839-a059-261728fdaef1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:fate-foretold:cast:s1,f:xs:XP:fate-foretold:cast:s1	-	-	-	d864b561c9cb	-	b5a4c087a546	-	-	2026-11-24	xproof
 d578ef54-6a6b-4839-a059-261728fdaef1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:fate-foretold:cast:s1,f:xs:XP:fate-foretold:cast:s1	-	-	-	d864b561c9cb	-	b5a4c087a546	-	-	2026-11-24	xproof
-d578ef54-6a6b-4839-a059-261728fdaef1	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+d578ef54-6a6b-4839-a059-261728fdaef1	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d57a8f0b-7989-4db5-8756-6f2690097252	cast	cast-resolve	agreed	-	FX	scen	2	0	Damnation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d57adf99-972a-43fe-9ba2-2b01e673252f	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d57adf99-972a-43fe-9ba2-2b01e673252f	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

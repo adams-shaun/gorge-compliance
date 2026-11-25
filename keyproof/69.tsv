@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69924636-138e-4baa-a378-0fd7df5b847d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:finneas-ace-archer:combat0.block:s1,f:xs:XP:finneas-ace-archer:combat0.block:s1	-	-	-	3aa6ded33acb	-	da3cf727d5d6	-	-	2026-11-25	xproof
 69924636-138e-4baa-a378-0fd7df5b847d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:finneas-ace-archer:combat0.attack:s1,f:xs:XP:finneas-ace-archer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	da3cf727d5d6	-	-	2026-11-25	xproof
 699380f9-a032-4838-baf1-1575f37eb642	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-699610c9-c991-4faf-b712-d015ef0799ad	cast	cast-resolve	agreed	-	X	scen	1	0	Doc Samson, Super Psychiatrist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+699610c9-c991-4faf-b712-d015ef0799ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doc-samson-super-psychiatrist:cast:s1,f:xs:XP:doc-samson-super-psychiatrist:cast:s1	-	-	-	23c4009444b0	-	ec9159be716e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 699610c9-c991-4faf-b712-d015ef0799ad	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Doc Samson, Super Psychiatrist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6996c354-d3fa-40c3-8534-27d2f5b74756	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6996c354-d3fa-40c3-8534-27d2f5b74756	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69b5af09-b3e6-4abf-b62e-9199c4f43ba7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bravado:cast:s1,f:xs:XP:bravado:cast:s1	-	-	-	5f2128bf97e4	-	7850abc70003	-	-	2026-11-24	xproof
 69b96fe5-9733-4b43-bd66-075742e142d9	cast	cast-resolve	agreed	-	X	scen	1	0	Cruel Calculations/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69b9fa68-b409-4de1-9a40-5262386a0180	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:healer-of-the-pride:cast:s1,f:xs:XP:healer-of-the-pride:cast:s1	-	-	-	d864b561c9cb	-	84fa2690a45a	-	-	2026-11-24	xproof
-69b9fa68-b409-4de1-9a40-5262386a0180	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+69b9fa68-b409-4de1-9a40-5262386a0180	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:healer-of-the-pride:f0t0:s1,f:xs:XP:healer-of-the-pride:f0t0:s1	-	-	-	23c4009444b0	-	84fa2690a45a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 69ba7864-0d09-4517-ad1a-7efaf437ded0	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 69bcdb42-c170-4848-b95b-f4621867d084	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arashin-cleric:f0t0:s1,f:xs:XP:arashin-cleric:f0t0:s1	-	-	-	d864b561c9cb	-	0b9c856dbf50	-	-	2026-11-24	xproof
 69bcdb42-c170-4848-b95b-f4621867d084	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arashin-cleric:f0t0:s1,f:xs:XP:arashin-cleric:f0t0:s1	-	-	-	d864b561c9cb	-	0b9c856dbf50	-	-	2026-11-24	xproof

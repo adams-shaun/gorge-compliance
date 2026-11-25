@@ -48,7 +48,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 674a269c-61ed-4fb5-ad74-422e581a5a91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 674b9469-3213-4cb0-be7e-db209bc09f92	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 674c34eb-1080-4811-8f2a-5006e08d98b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-674c34eb-1080-4811-8f2a-5006e08d98b8	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+674c34eb-1080-4811-8f2a-5006e08d98b8	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 675281ff-b81f-4e5e-9f85-9f8cd202b50b	f0/a0	Mana	agreed	-	FX	start	6	0	x:xs:XP:inkmoth-nexus:f0a0:s1,f:xs:XP:inkmoth-nexus:f0a0:s1	-	-	-	d864b561c9cb	-	e7db049d890a	-	-	2026-11-24	xproof
 675281ff-b81f-4e5e-9f85-9f8cd202b50b	f0/a1	Animate	agreed	-	FX	start	6	0	x:xs:XP:inkmoth-nexus:f0a0:s1,f:xs:XP:inkmoth-nexus:f0a0:s1	-	-	-	d864b561c9cb	-	e7db049d890a	-	-	2026-11-24	xproof
 675281ff-b81f-4e5e-9f85-9f8cd202b50b	land	land	agreed	-	FX	start	2	0	x:xs:XP:inkmoth-nexus:land:s1,f:xs:XP:inkmoth-nexus:land:s1	-	-	-	d864b561c9cb	-	e7db049d890a	-	-	2026-11-24	xproof
@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 677b9c19-4886-4e06-88f8-9afa94e58aa8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dramatic Accusation/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 677b9c19-4886-4e06-88f8-9afa94e58aa8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:dramatic-accusation:f0t0:s2,f:xs:XP:dramatic-accusation:f0t0:s2	-	-	-	5437c1394672	-	36bbfbf839a2	-	-	2026-11-24	xproof
 677c3616-295f-493a-8b60-1e22b0224cfa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-677c3616-295f-493a-8b60-1e22b0224cfa	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+677c3616-295f-493a-8b60-1e22b0224cfa	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:ring-of-three-wishes:f0a0:s1,f:xs:XP:ring-of-three-wishes:f0a0:s1	-	-	-	23c4009444b0	-	283966561b0d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 678095cc-ec8f-471a-b675-e59905d65c33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 678095cc-ec8f-471a-b675-e59905d65c33	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6781166b-f6ab-4076-8e97-0cd9342f1b41	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:charmed-stray:f0t0:s1,f:xs:XP:charmed-stray:f0t0:s1	-	-	-	d864b561c9cb	-	b142a4c1506e	-	-	2026-11-24	xproof

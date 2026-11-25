@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47437865-0032-4f47-b0ab-034cc841bb84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chandra-s-outrage:cast:s1,f:xs:XP:chandra-s-outrage:cast:s1	-	-	-	23c4009444b0	-	524864be2884	-	-	2026-11-25	xproof
 47496941-8007-45a0-a981-76c683cbddc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 474db5db-914e-474d-b0c2-7987d5986dc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-474db5db-914e-474d-b0c2-7987d5986dc3	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+474db5db-914e-474d-b0c2-7987d5986dc3	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 474f0675-4088-4f77-8081-f9ed7d492837	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:say-its-name:cast:s1,f:xs:XP:say-its-name:cast:s1	-	-	-	23c4009444b0	-	d7e1284b8f2b	-	-	2026-11-25	xproof
 474f0675-4088-4f77-8081-f9ed7d492837	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Say Its Name/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 475099d9-4743-420a-ada8-3932f5ef9e82	cast	cast	agreed	-	X	start	2	0	x:xs:XP:rouse:cast:s1	-	-	-	5f2128bf97e4	-	d0c55d4415df	-	-	2026-11-24	xproof
@@ -169,4 +169,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47f8df80-abc9-4d46-8078-8fbc23430259	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:patron-of-the-arts:f0t0:s1,f:xs:XP:patron-of-the-arts:f0t0:s1	-	-	-	8c0bd19283bb	-	b1ea2b193839	-	-	2026-11-24	xproof
 47f8df80-abc9-4d46-8078-8fbc23430259	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:patron-of-the-arts:f0t1:s1,f:xs:XP:patron-of-the-arts:f0t1:s1	-	-	-	8c0bd19283bb	-	b1ea2b193839	-	-	2026-11-24	xproof
 47fbb4f0-565b-4682-9971-0735210c76e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-47fbb4f0-565b-4682-9971-0735210c76e5	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+47fbb4f0-565b-4682-9971-0735210c76e5	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

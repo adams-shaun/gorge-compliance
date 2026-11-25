@@ -174,10 +174,10 @@ cee06ea6-8bad-4858-b78e-04879a825bbe	f0/a0	Attach	agreed	-	FX	start	2	0	x:xs:XP:
 cee06ea6-8bad-4858-b78e-04879a825bbe	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cee3d8e5-f26f-4f47-8a7b-9ac07ebf9025	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cat-warriors:cast:s1,f:xs:XP:cat-warriors:cast:s1	-	-	-	ae86f6029288	-	92716e067629	-	-	2026-11-24	xproof
 cee583b7-7cc3-40ea-a227-b760839ec291	cast	cast-resolve	agreed	-	X	scen	1	0	Dwalin, Weaponmaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cee583b7-7cc3-40ea-a227-b760839ec291	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dwalin, Weaponmaster/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cee583b7-7cc3-40ea-a227-b760839ec291	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dwalin, Weaponmaster/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cee583b7-7cc3-40ea-a227-b760839ec291	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:dwalin-weaponmaster:combat0.attack:s1	-	-	-	23c4009444b0	-	75ac4193e09a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+cee583b7-7cc3-40ea-a227-b760839ec291	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:dwalin-weaponmaster:combat0.block:s1	-	-	-	23c4009444b0	-	75ac4193e09a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cee583b7-7cc3-40ea-a227-b760839ec291	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-cee583b7-7cc3-40ea-a227-b760839ec291	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Dwalin, Weaponmaster/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cee583b7-7cc3-40ea-a227-b760839ec291	f0/t1	Attacks	agreed	-	X	start	4	0	x:xs:XP:dwalin-weaponmaster:combat0.attack:s1	-	-	-	23c4009444b0	-	75ac4193e09a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cee836f1-87a4-43db-a6ea-55575a4ce781	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cee836f1-87a4-43db-a6ea-55575a4ce781	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cee836f1-87a4-43db-a6ea-55575a4ce781	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

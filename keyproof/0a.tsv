@@ -50,10 +50,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a356d04-2e86-435b-9766-27b93b468a61	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gene-pollinator:cast:s1,f:xs:XP:gene-pollinator:cast:s1	-	-	-	23c4009444b0	-	3657be23b24a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0a356d04-2e86-435b-9766-27b93b468a61	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gene Pollinator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a35df9d-80a0-4b6f-91d5-dad980af47e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a364879-31bd-4760-833d-165cde1e96c6	cast	cast-resolve	agreed	-	X	scen	1	0	Yellowjacket, Heartless Marauder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0a364879-31bd-4760-833d-165cde1e96c6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Yellowjacket, Heartless Marauder/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0a364879-31bd-4760-833d-165cde1e96c6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Yellowjacket, Heartless Marauder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0a364879-31bd-4760-833d-165cde1e96c6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Yellowjacket, Heartless Marauder/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0a364879-31bd-4760-833d-165cde1e96c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yellowjacket-heartless-marauder:cast:s1,f:xs:XP:yellowjacket-heartless-marauder:cast:s1	-	-	-	23c4009444b0	-	e51b5ff5f9ef	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0a364879-31bd-4760-833d-165cde1e96c6	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:yellowjacket-heartless-marauder:combat0.attack:s1,f:xs:XP:yellowjacket-heartless-marauder:combat0.attack:s1	-	-	-	23c4009444b0	-	e51b5ff5f9ef	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0a364879-31bd-4760-833d-165cde1e96c6	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:yellowjacket-heartless-marauder:combat0.block:s1,f:xs:XP:yellowjacket-heartless-marauder:combat0.block:s1	-	-	-	23c4009444b0	-	e51b5ff5f9ef	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0a364879-31bd-4760-833d-165cde1e96c6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:yellowjacket-heartless-marauder:f0t0:s1,f:xs:XP:yellowjacket-heartless-marauder:f0t0:s1	-	-	-	23c4009444b0	-	e51b5ff5f9ef	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0a364b66-95df-480b-a733-e90f6d5c4d2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a364b66-95df-480b-a733-e90f6d5c4d2b	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0a41221a-0cce-4aae-989a-24b70acca8db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -76,12 +76,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a56a33b-033f-4398-8dc1-e531be059710	cast	cast-resolve	agreed	-	FX	scen	2	0	Unsparing Boltcaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a56a33b-033f-4398-8dc1-e531be059710	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a56e2ad-684d-45a7-9145-479d1505bba2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a56e2ad-684d-45a7-9145-479d1505bba2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0a56e2ad-684d-45a7-9145-479d1505bba2	f0/t0	ChangesZone/Evolve	agreed	-	FX	start	2	0	x:xs:XP:adaptive-snapjaw:f0t0:s1,f:xs:XP:adaptive-snapjaw:f0t0:s1	-	-	-	23c4009444b0	-	ce73953f4150	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0a576352-ed10-4a54-b886-d664432277c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a57ac2e-276b-41ea-89f4-287f530114c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a57ac2e-276b-41ea-89f4-287f530114c6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a5e3748-2e58-4e53-9653-8af4e21cf223	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a5e3748-2e58-4e53-9653-8af4e21cf223	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0a5e3748-2e58-4e53-9653-8af4e21cf223	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0a64b683-7017-44cb-923f-b512fe3886f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a64b683-7017-44cb-923f-b512fe3886f6	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:rustmouth-ogre:f0t0:s1,f:xs:XP:rustmouth-ogre:f0t0:s1	-	-	-	23c4009444b0	-	fce2be720075	-	-	2026-11-25	xproof
 0a661f7a-5d56-4d73-bab7-22bfc5cef22e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -129,7 +129,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0aa2ab46-c5ad-462b-b441-dbbc4b2c3532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omnivorous-flytrap:f0t0:s1,f:xs:XP:omnivorous-flytrap:f0t0:s1	-	-	-	23c4009444b0	-	5e6d7a8e8981	-	-	2026-11-25	xproof
 0aa2ab46-c5ad-462b-b441-dbbc4b2c3532	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:omnivorous-flytrap:f0t0:s1,f:xs:XP:omnivorous-flytrap:f0t0:s1	-	-	-	23c4009444b0	-	5e6d7a8e8981	-	-	2026-11-25	xproof
 0aa2ab46-c5ad-462b-b441-dbbc4b2c3532	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:omnivorous-flytrap:f0t1:s1,f:xs:XP:omnivorous-flytrap:f0t1:s1	-	-	-	23c4009444b0	-	5e6d7a8e8981	-	-	2026-11-25	xproof
-0aa556a6-66aa-42f1-ba41-0001e10c20a4	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	b30cc7bf7506	-	-	2026-11-24	xproof
+0aa556a6-66aa-42f1-ba41-0001e10c20a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steam-augury:cast:s1,f:xs:XP:steam-augury:cast:s1	-	-	-	23c4009444b0	-	b30cc7bf7506	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0aa7bd6a-0a8d-4413-a9e8-b7a459300841	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	06f68a3c500e	-	-	2026-11-25	xproof
 0aa7bd6a-0a8d-4413-a9e8-b7a459300841	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	06f68a3c500e	-	-	2026-11-25	xproof
 0aa7bd6a-0a8d-4413-a9e8-b7a459300841	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	06f68a3c500e	-	-	2026-11-25	xproof

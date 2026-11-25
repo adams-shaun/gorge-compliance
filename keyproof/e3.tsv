@@ -7,7 +7,7 @@ e3056f28-868b-401a-a528-7528d639bdeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e3056f28-868b-401a-a528-7528d639bdeb	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:prismatic-lens:f0a1:s1,f:xs:XP:prismatic-lens:f0a1:s1	-	-	-	23b491658465	-	1019e7e672ec	-	-	2026-11-25	xproof
 e3056f28-868b-401a-a528-7528d639bdeb	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e30b4eb8-6393-486a-9f8e-970ad2351d8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e30b4eb8-6393-486a-9f8e-970ad2351d8a	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e30b4eb8-6393-486a-9f8e-970ad2351d8a	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e30c639a-d46c-4488-bfdd-d4282046153c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e30c639a-d46c-4488-bfdd-d4282046153c	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e30ccf07-0969-4e81-ba43-c50a2ff9c040	cast	cast-resolve	agreed	-	FX	scen	2	0	Rehearsed Debater/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ e3474632-6d81-43a8-9329-4c7e0c631755	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 e3480c8f-15ad-451b-bb34-b129805569e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stunted-growth:cast:s1,f:xs:XP:stunted-growth:cast:s1	-	-	-	8c0bd19283bb	-	5c40822f7f81	-	-	2026-11-24	xproof
 e3483dd4-0118-4143-9b55-51078a6f274a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:epitaph-golem:cast:s1,f:xs:XP:epitaph-golem:cast:s1	-	-	-	d864b561c9cb	-	0af22aa4f4f3	-	-	2026-11-24	xproof
 e3483dd4-0118-4143-9b55-51078a6f274a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:epitaph-golem:f0a0:s1,f:xs:XP:epitaph-golem:f0a0:s1	-	-	-	d864b561c9cb	-	0af22aa4f4f3	-	-	2026-11-24	xproof
-e3491542-569e-48a8-b625-fa7c4aa2792a	cast	cast-resolve	agreed	-	X	scen	1	0	Down in the Valley/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e3491542-569e-48a8-b625-fa7c4aa2792a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:down-in-the-valley:cast:s1	-	-	-	23c4009444b0	-	8de07efd006a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e349be42-5f14-44a9-9608-281985c10e2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marauding-mako:cast:s1,f:xs:XP:marauding-mako:cast:s1	-	-	-	23c4009444b0	-	be7449b75273	-	-	2026-11-25	xproof
 e349be42-5f14-44a9-9608-281985c10e2d	f0/a0	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:marauding-mako:f0a0:s1,f:xs:XP:marauding-mako:f0a0:s1	-	-	-	23c4009444b0	-	be7449b75273	-	-	2026-11-25	xproof
 e349be42-5f14-44a9-9608-281985c10e2d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Marauding Mako/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -70,8 +70,8 @@ e3542d0f-fcee-4df7-aa95-b55138caa2ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:har
 e3542d0f-fcee-4df7-aa95-b55138caa2ab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:harried-spearguard:f0t0:s1,f:xs:XP:harried-spearguard:f0t0:s1	-	-	-	23b491658465	-	4ec74c3dc555	-	-	2026-11-24	xproof
 e3552730-fe09-443f-b432-9640b69c7bbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3559565-0512-4525-addb-bf27903bcd13	cast	cast-resolve	agreed	-	FX	scen	2	0	Night Nurse, Healer of Heroes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e3559565-0512-4525-addb-bf27903bcd13	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Night Nurse, Healer of Heroes/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e3559565-0512-4525-addb-bf27903bcd13	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Night Nurse, Healer of Heroes/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e3559565-0512-4525-addb-bf27903bcd13	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:night-nurse-healer-of-heroes:combat0.attack:s1,f:xs:XP:night-nurse-healer-of-heroes:combat0.attack:s1	-	-	-	23c4009444b0	-	35af6dc4bf4e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e3559565-0512-4525-addb-bf27903bcd13	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:night-nurse-healer-of-heroes:combat0.block:s1,f:xs:XP:night-nurse-healer-of-heroes:combat0.block:s1	-	-	-	23c4009444b0	-	35af6dc4bf4e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e3559565-0512-4525-addb-bf27903bcd13	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3570ac7-c593-40e3-bbd6-ec3da6d8158d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3570ac7-c593-40e3-bbd6-ec3da6d8158d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ e37416cc-f343-44cd-8676-4ce4d4068e85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e37416cc-f343-44cd-8676-4ce4d4068e85	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e376702a-f56e-4e47-aa8c-3f80384d12a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e380e37d-926b-4a4b-a275-7844bf4956d5	cast	cast-resolve	agreed	-	X	scen	1	0	Titania, Rugged Rumbler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e380e37d-926b-4a4b-a275-7844bf4956d5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Titania, Rugged Rumbler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e380e37d-926b-4a4b-a275-7844bf4956d5	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:titania-rugged-rumbler:f0t0:s1,f:xs:XP:titania-rugged-rumbler:f0t0:s1	-	-	-	23c4009444b0	-	28b4bc1c6912	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e3886fe8-9b76-4613-8891-4ec74657c087	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e38b8ecb-e7ae-474d-b6a4-29cc1aa8ccd9	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 e38e3723-05f5-4a51-8364-1cda19f9cc49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ e3a665f9-6e51-4e0d-923b-e9552d5978a4	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 e3a665f9-6e51-4e0d-923b-e9552d5978a4	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Sackville-Bagginses/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e3aa16cf-079b-4737-9ffd-7bfdffef0cb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3aa16cf-079b-4737-9ffd-7bfdffef0cb2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e3aa16cf-079b-4737-9ffd-7bfdffef0cb2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e3aa16cf-079b-4737-9ffd-7bfdffef0cb2	f0/t0	ChangesZone/Evolve	agreed	-	FX	start	2	0	x:xs:XP:gyre-sage:f0t0:s1,f:xs:XP:gyre-sage:f0t0:s1	-	-	-	23c4009444b0	-	2988577d3b60	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e3ad2c77-2a41-4a4a-a6bf-e542d0162b88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3ad2c77-2a41-4a4a-a6bf-e542d0162b88	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3ad5cbc-4245-4e1e-8204-509381fa0c1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

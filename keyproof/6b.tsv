@@ -70,9 +70,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6b5565a2-be5c-46b1-99df-8094e77446cc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:renegade-silent:cast:s1	-	-	-	8c0bd19283bb	-	c15e25bcc4a9	-	-	2026-11-24	xproof
 6b5565a2-be5c-46b1-99df-8094e77446cc	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:renegade-silent:cast:s1	-	-	-	8c0bd19283bb	-	c15e25bcc4a9	-	-	2026-11-24	xproof
 6b589e70-9c1d-48dd-a597-479959e692bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b59bb1f-f2d4-4d47-bd57-23927d588381	cast	cast-resolve	agreed	-	X	scen	1	0	Hawkeye, Master Marksman/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6b59bb1f-f2d4-4d47-bd57-23927d588381	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hawkeye-master-marksman:cast:s1,f:xs:XP:hawkeye-master-marksman:cast:s1	-	-	-	23c4009444b0	-	7680376a6746	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6b59bb1f-f2d4-4d47-bd57-23927d588381	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hawkeye, Master Marksman/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6b59bb1f-f2d4-4d47-bd57-23927d588381	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hawkeye, Master Marksman/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6b59bb1f-f2d4-4d47-bd57-23927d588381	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:hawkeye-master-marksman:combat0.block:s1	-	-	-	23c4009444b0	-	7680376a6746	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6b59bb1f-f2d4-4d47-bd57-23927d588381	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hawkeye, Master Marksman/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6b59ffa2-5c8b-4549-aa09-2f2a5cabc5af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b5d1b0a-544c-41e6-bc32-c2b0c9bb4576	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6b8cf2a0-b045-4d91-9d91-c602d40c6237	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b8cf2a0-b045-4d91-9d91-c602d40c6237	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b9194dd-2296-4879-ac5e-f89b18431df6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6b9194dd-2296-4879-ac5e-f89b18431df6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+6b9194dd-2296-4879-ac5e-f89b18431df6	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6b941291-1802-4ced-9869-39fa43825550	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadly-recluse:cast:s1,f:xs:XP:deadly-recluse:cast:s1	-	-	-	8a1b1a193ec0	-	c8235a2cd08c	-	-	2026-11-24	xproof
 6b9cd3d0-4316-4945-b960-12f51052d260	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b9cd3d0-4316-4945-b960-12f51052d260	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -188,8 +188,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6bda307b-1508-4582-952b-c690db85e045	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:hermitic-nautilus:combat0.block:s1,f:xs:XP:hermitic-nautilus:combat0.block:s1	-	-	-	3aa6ded33acb	-	b62f593a3105	-	-	2026-11-25	xproof
 6bda307b-1508-4582-952b-c690db85e045	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:hermitic-nautilus:f0a0:s1,f:xs:XP:hermitic-nautilus:f0a0:s1	-	-	-	23b491658465	-	b62f593a3105	-	-	2026-11-24	xproof
 6bdff38d-0a52-42e5-86ea-edd7029b44f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6bdff38d-0a52-42e5-86ea-edd7029b44f6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-6bdff38d-0a52-42e5-86ea-edd7029b44f6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+6bdff38d-0a52-42e5-86ea-edd7029b44f6	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:staff-of-the-wild-magus:f0t0:s1,f:xs:XP:staff-of-the-wild-magus:f0t0:s1	-	-	-	23c4009444b0	-	60a17563ad86	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6bdff38d-0a52-42e5-86ea-edd7029b44f6	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:staff-of-the-wild-magus:f0t1:s1,f:xs:XP:staff-of-the-wild-magus:f0t1:s1	-	-	-	23c4009444b0	-	60a17563ad86	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6be0bf15-fdcb-4425-9bd8-3c39039cab7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mordenkainen:cast:s1,f:xs:XP:mordenkainen:cast:s1	-	-	-	d864b561c9cb	-	2db4ab6e9dfb	-	-	2026-11-24	xproof
 6be0bf15-fdcb-4425-9bd8-3c39039cab7d	f0/a0	Draw	agreed	-	FX	start	1	0	x:xs:XP:mordenkainen:cast:s2,f:xs:XP:mordenkainen:cast:s2	-	-	-	d864b561c9cb	-	2db4ab6e9dfb	-	-	2026-11-24	xproof
 6be0bf15-fdcb-4425-9bd8-3c39039cab7d	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:mordenkainen:cast:s1,f:xs:XP:mordenkainen:cast:s1	-	-	-	d864b561c9cb	-	2db4ab6e9dfb	-	-	2026-11-24	xproof

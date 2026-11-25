@@ -100,7 +100,7 @@ d97de156-5a6d-4dc6-953e-d4bad63cbad2	cast	NULL	owed	refused:start-not-exercised	
 d9806ba7-8af4-4e8e-9238-7bc40c6bee0b	cast	cast-resolve	agreed	-	X	scen	1	0	Collective Drone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d981977d-acfa-432a-b1d7-1808a89a5998	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rise-of-the-varmints:cast:s1,f:xs:XP:rise-of-the-varmints:cast:s1	-	-	-	3aa6ded33acb	-	0417539de8e3	-	-	2026-11-25	xproof
 d981d85c-e97b-4fe7-b415-6e73a3e7e35c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d981d85c-e97b-4fe7-b415-6e73a3e7e35c	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+d981d85c-e97b-4fe7-b415-6e73a3e7e35c	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d985b12e-2731-4ccf-9f51-90218b20b42a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silverquill-charm:cast:s1,f:xs:XP:silverquill-charm:cast:s1	-	-	-	23c4009444b0	-	ca67b889f3e7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d988ed15-2927-421b-9a6e-01f0261272c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skeletal-wurm:cast:s1,f:xs:XP:skeletal-wurm:cast:s1	-	-	-	d864b561c9cb	-	30edbbe5783a	-	-	2026-11-24	xproof
 d988ed15-2927-421b-9a6e-01f0261272c2	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:skeletal-wurm:f0a0:s1,f:xs:XP:skeletal-wurm:f0a0:s1	-	-	-	d864b561c9cb	-	30edbbe5783a	-	-	2026-11-24	xproof
@@ -195,9 +195,9 @@ d9ec9a4f-0644-47c5-bc09-1201d5251bde	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:ae
 d9ec9a4f-0644-47c5-bc09-1201d5251bde	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aetherwind-basker:f0t0:s1,f:xs:XP:aetherwind-basker:f0t0:s1	-	-	-	d864b561c9cb	-	abb644f56b2e	-	-	2026-11-24	xproof
 d9ec9a4f-0644-47c5-bc09-1201d5251bde	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:aetherwind-basker:f0t1:s1,f:xs:XP:aetherwind-basker:f0t1:s1	-	-	-	d864b561c9cb	-	abb644f56b2e	-	-	2026-11-24	xproof
 d9ecb346-7745-4106-a3e1-c467a3b91ec7	cast	cast	agreed	-	F	start	2	0	f:xs:XP:barrel-down-sokenzan:cast:s1	-	-	-	64a08ba7d913	-	374ab127c102	-	-	2026-11-24	xproof
-d9ed7252-11d1-432b-9101-ac08cd28826d	cast	cast-resolve	agreed	-	X	scen	1	0	Beorn's Hospitality/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d9ed7252-11d1-432b-9101-ac08cd28826d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Beorn's Hospitality/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d9ed7252-11d1-432b-9101-ac08cd28826d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Beorn's Hospitality/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d9ed7252-11d1-432b-9101-ac08cd28826d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beorn-s-hospitality:cast:s1,f:xs:XP:beorn-s-hospitality:cast:s1	-	-	-	23c4009444b0	-	566102ca8c9f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d9ed7252-11d1-432b-9101-ac08cd28826d	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:beorn-s-hospitality:f0a0:s1,f:xs:XP:beorn-s-hospitality:f0a0:s1	-	-	-	23c4009444b0	-	566102ca8c9f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d9ed7252-11d1-432b-9101-ac08cd28826d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:beorn-s-hospitality:f0t0:s1,f:xs:XP:beorn-s-hospitality:f0t0:s1	-	-	-	23c4009444b0	-	566102ca8c9f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d9ee7916-2c9d-4489-8dd8-86929b09c6ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:midnight-arsonist:f0t0:s1,f:xs:XP:midnight-arsonist:f0t0:s1	-	-	-	8c0bd19283bb	-	00fb6f6ad559	-	-	2026-11-24	xproof
 d9ee7916-2c9d-4489-8dd8-86929b09c6ea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:midnight-arsonist:f0t0:s1,f:xs:XP:midnight-arsonist:f0t0:s1	-	-	-	8c0bd19283bb	-	00fb6f6ad559	-	-	2026-11-24	xproof
 d9f01177-2237-475e-ad91-114bfae077ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:calix-destiny-s-hand:cast:s1,f:xs:XP:calix-destiny-s-hand:cast:s1	-	-	-	ae86f6029288	-	729c61db5795	-	-	2026-11-24	xproof

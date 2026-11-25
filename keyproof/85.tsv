@@ -26,8 +26,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8517e5f4-89c5-4879-9b4f-b35e268798df	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:aetherstream-leopard:f0t1:s1,f:xs:XP:aetherstream-leopard:f0t1:s1	-	-	-	d864b561c9cb	-	308ea4644dde	-	-	2026-11-24	xproof
 851be993-35d7-4566-96a0-3fe84d17979e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanguine-sacrament:cast:s1,f:xs:XP:sanguine-sacrament:cast:s1	-	-	-	d864b561c9cb	-	30c59a8279ac	-	-	2026-11-24	xproof
 8520ee67-439b-4f15-838b-420bacbb8b13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8520ee67-439b-4f15-838b-420bacbb8b13	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-8520ee67-439b-4f15-838b-420bacbb8b13	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8520ee67-439b-4f15-838b-420bacbb8b13	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:experiment-one:f0a0:s1,f:xs:XP:experiment-one:f0a0:s1	-	-	-	23c4009444b0	-	b56c15983440	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8520ee67-439b-4f15-838b-420bacbb8b13	f0/t0	ChangesZone/Evolve	agreed	-	FX	start	2	0	x:xs:XP:experiment-one:f0t0:s1,f:xs:XP:experiment-one:f0t0:s1	-	-	-	23c4009444b0	-	b56c15983440	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 852621bf-9ab7-4027-89fb-b438e4080684	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sage-of-the-falls:cast:s1,f:xs:XP:sage-of-the-falls:cast:s1	-	-	-	ae86f6029288	-	81a7057ec04a	-	-	2026-11-24	xproof
 852621bf-9ab7-4027-89fb-b438e4080684	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sage-of-the-falls:cast:s1,f:xs:XP:sage-of-the-falls:cast:s1	-	-	-	ae86f6029288	-	81a7057ec04a	-	-	2026-11-24	xproof
 852657c0-18a4-4b28-b9ae-7728acdb5044	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirari-s-wake:cast:s1,f:xs:XP:mirari-s-wake:cast:s1	-	-	-	25696bf19d5b	-	c7d4d75ce64a	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8578c462-7b2d-4b69-ad10-a2eab44ac98d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 857d94f7-113c-45a4-a88a-5d087347d57f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leonin-shikari:cast:s1,f:xs:XP:leonin-shikari:cast:s1	-	-	-	25696bf19d5b	-	6dd009ee5641	-	-	2026-11-24	xproof
 857db7e0-254a-4920-a71d-9bab6555342f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-857db7e0-254a-4920-a71d-9bab6555342f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+857db7e0-254a-4920-a71d-9bab6555342f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 857f9a8d-ba77-4afd-922d-994f66e478ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyknite:f0t0:s1,f:xs:XP:pyknite:f0t0:s1	-	-	-	8c0bd19283bb	-	551b5387fb9a	-	-	2026-11-24	xproof
 857f9a8d-ba77-4afd-922d-994f66e478ef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pyknite:f0t0:s1,f:xs:XP:pyknite:f0t0:s1	-	-	-	8c0bd19283bb	-	551b5387fb9a	-	-	2026-11-24	xproof
 857febd9-cdd7-4f8e-a852-d88084b0cfbc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85d025d9-158d-4bf1-b3b2-361f3fe59663	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:magmatic-sprinter:cast:s1	-	-	-	ae86f6029288	-	cef501993e8c	-	-	2026-11-24	xproof
 85d025d9-158d-4bf1-b3b2-361f3fe59663	f0/t1	Phase	agreed	-	F	start	4	0	f:xs:XP:magmatic-sprinter:cast:s1	-	-	-	ae86f6029288	-	cef501993e8c	-	-	2026-11-24	xproof
 85d03947-a39a-4f4f-97c3-6d1094c9248e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85d03947-a39a-4f4f-97c3-6d1094c9248e	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+85d03947-a39a-4f4f-97c3-6d1094c9248e	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 85d06533-3c0b-46a8-8fdb-379db9ae7e2e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:assassin-gauntlet:cast:s1,f:xs:XP:assassin-gauntlet:cast:s1	-	-	-	ae86f6029288	-	4de770431045	-	-	2026-11-24	xproof
 85d06533-3c0b-46a8-8fdb-379db9ae7e2e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85d06533-3c0b-46a8-8fdb-379db9ae7e2e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:assassin-gauntlet:cast:s1,f:xs:XP:assassin-gauntlet:cast:s1	-	-	-	ae86f6029288	-	4de770431045	-	-	2026-11-24	xproof
@@ -162,8 +162,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85dda096-48b2-414e-8c4d-4ffa6e5dac11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thriving-turtle:f0t0:s1,f:xs:XP:thriving-turtle:f0t0:s1	-	-	-	d864b561c9cb	-	39358cff08e3	-	-	2026-11-24	xproof
 85dda096-48b2-414e-8c4d-4ffa6e5dac11	f0/t1	Attacks	agreed	-	X	start	2	0	x:xs:XP:thriving-turtle:f0t1:s1	-	-	-	d864b561c9cb	-	39358cff08e3	-	-	2026-11-24	xproof
 85dec6cf-6f27-4eb0-834b-5f6fbbe25fc8	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Man, To the Rescue/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-85dec6cf-6f27-4eb0-834b-5f6fbbe25fc8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spider-Man, To the Rescue/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-85dec6cf-6f27-4eb0-834b-5f6fbbe25fc8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spider-Man, To the Rescue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+85dec6cf-6f27-4eb0-834b-5f6fbbe25fc8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:spider-man-to-the-rescue:combat0.attack:s1,f:xs:XP:spider-man-to-the-rescue:combat0.attack:s1	-	-	-	23c4009444b0	-	dcb42dea3de2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+85dec6cf-6f27-4eb0-834b-5f6fbbe25fc8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:spider-man-to-the-rescue:combat0.block:s1,f:xs:XP:spider-man-to-the-rescue:combat0.block:s1	-	-	-	23c4009444b0	-	dcb42dea3de2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 85dec6cf-6f27-4eb0-834b-5f6fbbe25fc8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 85df3564-5134-4dc2-9021-40ec84ee6d08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-jonathan-archer:f0t0:s1,f:xs:XP:captain-jonathan-archer:f0t0:s1	-	-	-	25696bf19d5b	-	c4198f37d977	-	-	2026-11-24	xproof
 85df3564-5134-4dc2-9021-40ec84ee6d08	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:captain-jonathan-archer:f0a0:s1,f:xs:XP:captain-jonathan-archer:f0a0:s1	-	-	-	23c4009444b0	-	c4198f37d977	-	-	2026-11-25	xproof

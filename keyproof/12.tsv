@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12080ea9-0800-4601-b553-6711dd9f9806	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12080ea9-0800-4601-b553-6711dd9f9806	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1208cb6e-34b4-4a23-9a5b-a01229113e38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1208cb6e-34b4-4a23-9a5b-a01229113e38	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1208cb6e-34b4-4a23-9a5b-a01229113e38	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 120a0bcd-eca2-44eb-ad8d-5e4077f7e21c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 120a0bcd-eca2-44eb-ad8d-5e4077f7e21c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 120b565a-e22b-4d5d-9841-b11750b4ee49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -206,9 +206,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12cc800c-c7be-4811-8207-fd01a99cc892	f0/a3	Effect	agreed	-	FX	start	2	0	x:xs:XP:chandra-torch-of-defiance:f0a3:s1,f:xs:XP:chandra-torch-of-defiance:f0a3:s1	-	-	-	3aa6ded33acb	-	cff2a43dbed9	-	-	2026-11-25	xproof
 12cc97ec-5d03-4434-a31b-51e77d208466	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grey-knight-paragon:f0t0:s1,f:xs:XP:grey-knight-paragon:f0t0:s1	-	-	-	8c0bd19283bb	-	042fe480e5f4	-	-	2026-11-24	xproof
 12cc97ec-5d03-4434-a31b-51e77d208466	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grey-knight-paragon:f0t0:s1,f:xs:XP:grey-knight-paragon:f0t0:s1	-	-	-	8c0bd19283bb	-	042fe480e5f4	-	-	2026-11-24	xproof
-12d51534-a98d-487b-9ba9-c10861dff992	cast	cast-resolve	agreed	-	X	scen	1	0	S.H.I.E.L.D. Flying Car/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12d51534-a98d-487b-9ba9-c10861dff992	f0/a0	activate#0.0	agreed	-	X	scen	1	0	S.H.I.E.L.D. Flying Car/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-12d51534-a98d-487b-9ba9-c10861dff992	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+12d51534-a98d-487b-9ba9-c10861dff992	cast	cast	agreed	-	F	start	2	0	f:xs:XP:s-h-i-e-l-d-flying-car:cast:s1	-	-	-	23c4009444b0	-	c98401c9740c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+12d51534-a98d-487b-9ba9-c10861dff992	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:s-h-i-e-l-d-flying-car:f0a0:s1,f:xs:XP:s-h-i-e-l-d-flying-car:f0a0:s1	-	-	-	23c4009444b0	-	c98401c9740c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+12d51534-a98d-487b-9ba9-c10861dff992	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:s-h-i-e-l-d-flying-car:cast:s1	-	-	-	23c4009444b0	-	c98401c9740c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 12d617b1-c95b-4b1c-a586-ccfdf5898b03	cast	cast-resolve	agreed	-	X	scen	1	0	Hexhaven Invigorator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12d617b1-c95b-4b1c-a586-ccfdf5898b03	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hexhaven Invigorator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12d617b1-c95b-4b1c-a586-ccfdf5898b03	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hexhaven Invigorator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00ad5200-5179-4d1b-8bb3-a09e1b31be58	land	play-land	agreed	-	X	scen	1	0	Theorix Annex/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00af96af-5eae-4044-a2f7-a08cd0699d1e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ogre-arsonist:f0t0:s1,f:xs:XP:ogre-arsonist:f0t0:s1	-	-	-	5f2128bf97e4	-	1f373adc750b	-	-	2026-11-24	xproof
 00af96af-5eae-4044-a2f7-a08cd0699d1e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ogre-arsonist:f0t0:s1,f:xs:XP:ogre-arsonist:f0t0:s1	-	-	-	5f2128bf97e4	-	1f373adc750b	-	-	2026-11-24	xproof
-00afc724-be09-4e92-a50c-88011bd10ccd	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+00afc724-be09-4e92-a50c-88011bd10ccd	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 00b34fab-5a80-4a4d-b6cf-72479197677a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00b34fab-5a80-4a4d-b6cf-72479197677a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00b36996-43c6-42a5-892c-c7c8864cf973	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
@@ -196,8 +196,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00e75a6b-699e-4824-86e5-66d45245cd9b	cast	cast-resolve	agreed	-	X	scen	1	0	Oracle's Restoration/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00e94b75-ad31-4e1f-b3be-eed7cd3e4d76	cast	cast-resolve	agreed	-	X	scen	1	0	Stand Up for Yourself/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00e9957a-5684-4a07-954e-8161925fefe4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bond-of-discipline:cast:s1,f:xs:XP:bond-of-discipline:cast:s1	-	-	-	d864b561c9cb	-	0251b9224c46	-	-	2026-11-24	xproof
-00ed7aca-b3c1-4d48-acd5-b1596daeb4c3	cast	cast-resolve	agreed	-	X	scen	1	0	Whiplash, Vengeful Engineer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-00ed7aca-b3c1-4d48-acd5-b1596daeb4c3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Whiplash, Vengeful Engineer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+00ed7aca-b3c1-4d48-acd5-b1596daeb4c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:whiplash-vengeful-engineer:cast:s1,f:xs:XP:whiplash-vengeful-engineer:cast:s1	-	-	-	23c4009444b0	-	0b886844e0a1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+00ed7aca-b3c1-4d48-acd5-b1596daeb4c3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:whiplash-vengeful-engineer:f0t0:s1,f:xs:XP:whiplash-vengeful-engineer:f0t0:s1	-	-	-	23c4009444b0	-	0b886844e0a1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 00ef1c55-dea1-4564-bd57-66de86cba4df	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:selesnya-sanctuary:f0a0:s1,f:xs:XP:selesnya-sanctuary:f0a0:s1	-	-	-	d864b561c9cb	-	f426547c41a4	-	-	2026-11-24	xproof
 00ef1c55-dea1-4564-bd57-66de86cba4df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:selesnya-sanctuary:land:s1,f:xs:XP:selesnya-sanctuary:land:s1	-	-	-	64a08ba7d913	-	f426547c41a4	-	-	2026-11-24	xproof
 00ef1c55-dea1-4564-bd57-66de86cba4df	land	land	agreed	-	FX	start	2	0	x:xs:XP:selesnya-sanctuary:land:s1,f:xs:XP:selesnya-sanctuary:land:s1	-	-	-	64a08ba7d913	-	f426547c41a4	-	-	2026-11-24	xproof

@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 723398f2-eaf2-4615-9078-418b9f540a33	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 723398f2-eaf2-4615-9078-418b9f540a33	f0/a1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72350461-8231-4737-a57f-f20fb5d179a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-72350461-8231-4737-a57f-f20fb5d179a3	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+72350461-8231-4737-a57f-f20fb5d179a3	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 723669e0-4a04-45ec-8c76-b1a369aa6892	cast	cast-resolve	agreed	-	X	scen	1	0	Budding Insurgent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 723669e0-4a04-45ec-8c76-b1a369aa6892	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Budding Insurgent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 723669e0-4a04-45ec-8c76-b1a369aa6892	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Budding Insurgent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -147,8 +147,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 72a7faa0-cb0c-4841-84f3-e340b19fe045	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:predict:cast:s1,f:xs:XP:predict:cast:s1	-	-	-	8c0bd19283bb	-	d06e0819da60	-	-	2026-11-24	xproof
 72a8620e-1ba2-40a8-9b22-11cc57864adf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:galvanic-arc:f0t0:s1,f:xs:XP:galvanic-arc:f0t0:s1	-	-	-	3aa6ded33acb	-	70be7e30b543	-	-	2026-11-25	xproof
 72a8620e-1ba2-40a8-9b22-11cc57864adf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:galvanic-arc:f0t0:s1,f:xs:XP:galvanic-arc:f0t0:s1	-	-	-	3aa6ded33acb	-	70be7e30b543	-	-	2026-11-25	xproof
-72a9a85d-7cfc-4b3c-82db-9d35be6c0982	cast	cast-resolve	agreed	-	X	scen	1	0	Bilbo, Thief in the Night/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-72a9a85d-7cfc-4b3c-82db-9d35be6c0982	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bilbo, Thief in the Night/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+72a9a85d-7cfc-4b3c-82db-9d35be6c0982	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bilbo-thief-in-the-night:cast:s1,f:xs:XP:bilbo-thief-in-the-night:cast:s1	-	-	-	23c4009444b0	-	6717c1b0b9ea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+72a9a85d-7cfc-4b3c-82db-9d35be6c0982	f0/t0	Attacks	agreed	-	F	start	2	0	f:xs:XP:bilbo-thief-in-the-night:f0t0:s1	-	-	-	23c4009444b0	-	6717c1b0b9ea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 72a9a85d-7cfc-4b3c-82db-9d35be6c0982	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bilbo, Thief in the Night/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 72adf091-4491-4afe-b893-b8d20ad38a86	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:illustrious-wanderglyph:f0t0:s1,f:xs:XP:illustrious-wanderglyph:f0t0:s1	-	-	-	23c4009444b0	-	39dc090df4f3	-	-	2026-11-25	xproof
 72adf091-4491-4afe-b893-b8d20ad38a86	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:illustrious-wanderglyph:f0t0:s1,f:xs:XP:illustrious-wanderglyph:f0t0:s1	-	-	-	23c4009444b0	-	39dc090df4f3	-	-	2026-11-25	xproof

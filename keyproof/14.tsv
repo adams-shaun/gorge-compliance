@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 141c33be-7a25-4981-b62c-efee8e8ec91d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 141d9b88-5326-4e3d-8f16-5293246fab88	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 141f952b-9e9f-48c5-9c88-b1504dfa73bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-141f952b-9e9f-48c5-9c88-b1504dfa73bc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+141f952b-9e9f-48c5-9c88-b1504dfa73bc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1420b7db-859b-4ad5-9844-10413cc70478	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1420b7db-859b-4ad5-9844-10413cc70478	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1423b8e6-9165-4a89-a6ed-18085f460bca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -71,8 +71,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14613521-a939-426e-9bd5-183186b51583	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14646c85-12ad-4b99-a2af-e4a790e034ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1466687f-cfe1-4e6e-ad8e-dca5e8e4c06d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1466687f-cfe1-4e6e-ad8e-dca5e8e4c06d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1466687f-cfe1-4e6e-ad8e-dca5e8e4c06d	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1466687f-cfe1-4e6e-ad8e-dca5e8e4c06d	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:staff-of-the-mind-magus:f0t0:s1,f:xs:XP:staff-of-the-mind-magus:f0t0:s1	-	-	-	23c4009444b0	-	b892d87aa7f1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1466687f-cfe1-4e6e-ad8e-dca5e8e4c06d	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:staff-of-the-mind-magus:f0t0:s1,f:xs:XP:staff-of-the-mind-magus:f0t0:s1	-	-	-	23c4009444b0	-	b892d87aa7f1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 14691783-1246-45ed-a439-c86d7b5eef62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14691783-1246-45ed-a439-c86d7b5eef62	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14693689-d087-43b6-9c3f-63ab0648fc20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

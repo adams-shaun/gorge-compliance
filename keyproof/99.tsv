@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99ba0d4f-b2bf-48ea-95d6-b6b85ee077ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99ba0d4f-b2bf-48ea-95d6-b6b85ee077ab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:crawling-chorus:f0t0:s1,f:xs:XP:crawling-chorus:f0t0:s1	-	-	-	ae86f6029288	-	0b5bf204b886	-	-	2026-11-24	xproof
 99bba323-b5a4-4ff3-8ad1-2a19ed119069	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fluxcharger:cast:s1,f:xs:XP:fluxcharger:cast:s1	-	-	-	d864b561c9cb	-	bca7179d8d57	-	-	2026-11-24	xproof
-99bba323-b5a4-4ff3-8ad1-2a19ed119069	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+99bba323-b5a4-4ff3-8ad1-2a19ed119069	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:fluxcharger:f0t0:s1,f:xs:XP:fluxcharger:f0t0:s1	-	-	-	23c4009444b0	-	bca7179d8d57	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 99bc739e-c745-47d8-8401-2f34b6becd85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99c13f8d-7f18-48ce-86da-c74ddb6c1205	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99c13f8d-7f18-48ce-86da-c74ddb6c1205	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 99c5630e-cc04-4203-9006-3bc6a6807762	static#0.0	static#0.0	agreed	-	X	scen	1	0	Malamet Scythe/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99c70f4e-de8a-426d-99aa-17b2f87625ba	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Training Compound/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 99c70f4e-de8a-426d-99aa-17b2f87625ba	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Training Compound/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-99c70f4e-de8a-426d-99aa-17b2f87625ba	land	play-land	agreed	-	X	scen	1	0	Training Compound/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+99c70f4e-de8a-426d-99aa-17b2f87625ba	land	land	agreed	-	FX	start	2	0	x:xs:XP:training-compound:land:s1,f:xs:XP:training-compound:land:s1	-	-	-	23c4009444b0	-	3bef32ae9d1c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 99c8647f-e08d-4217-b637-3f8f2bffdaa3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 99c9920a-f84b-4626-9fe5-d94cc62cd277	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:twisted-sewer-witch:f0t0:s2,f:xs:XP:twisted-sewer-witch:f0t0:s2	-	-	-	e07cf3a05ba5	-	c47768499582	-	-	2026-11-24	xproof
 99c9920a-f84b-4626-9fe5-d94cc62cd277	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:twisted-sewer-witch:f0t0:s2,f:xs:XP:twisted-sewer-witch:f0t0:s2	-	-	-	e07cf3a05ba5	-	c47768499582	-	-	2026-11-24	xproof

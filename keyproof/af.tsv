@@ -24,7 +24,7 @@ af1553eb-4f9f-4335-9078-56649bd8d8fc	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Brass
 af18e496-fef9-4869-867b-bdac653cafd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af18e496-fef9-4869-867b-bdac653cafd0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af199b80-d5d8-417a-97d5-459a5bd48b22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prescient-chimera:cast:s1,f:xs:XP:prescient-chimera:cast:s1	-	-	-	d864b561c9cb	-	5c05ed31f705	-	-	2026-11-24	xproof
-af199b80-d5d8-417a-97d5-459a5bd48b22	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+af199b80-d5d8-417a-97d5-459a5bd48b22	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:prescient-chimera:f0t0:s1,f:xs:XP:prescient-chimera:f0t0:s1	-	-	-	23c4009444b0	-	5c05ed31f705	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 af1acf07-39e2-441e-a1e0-1db535535e2e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:white-mage-s-staff:f0t0:s2,f:xs:XP:white-mage-s-staff:f0t0:s2	-	-	-	267e485f6204	-	74d975fbaf2e	-	-	2026-11-24	xproof
 af1acf07-39e2-441e-a1e0-1db535535e2e	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:white-mage-s-staff:f0a0:s1,f:xs:XP:white-mage-s-staff:f0a0:s1	-	-	-	23c4009444b0	-	74d975fbaf2e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 af1acf07-39e2-441e-a1e0-1db535535e2e	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:white-mage-s-staff:f0t0:s2,f:xs:XP:white-mage-s-staff:f0t0:s2	-	-	-	267e485f6204	-	74d975fbaf2e	-	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ af6124cf-e8c5-44f3-964a-4ac0caa6f22b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 af6351a9-ac01-4fed-9ea9-a352d21a8312	cast	cast-resolve	agreed	-	X	scen	1	0	Tenacious Drone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af6351a9-ac01-4fed-9ea9-a352d21a8312	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tenacious-drone:f0t0:s1,f:xs:XP:tenacious-drone:f0t0:s1	-	-	-	23c4009444b0	-	51b095fc605d	-	-	2026-11-25	xproof
 af642b8d-a085-4a07-8a1d-ca385d4700f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-af642b8d-a085-4a07-8a1d-ca385d4700f7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+af642b8d-a085-4a07-8a1d-ca385d4700f7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 af6438b9-3fde-45c9-af69-dff686c1e0de	cast	cast-resolve	agreed	-	X	scen	1	0	Virtue of Courage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af6438b9-3fde-45c9-af69-dff686c1e0de	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Virtue of Courage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af698bd5-5f56-4d2a-9f02-8c3e781210cd	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

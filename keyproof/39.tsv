@@ -24,8 +24,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39144f72-789e-457a-a7e7-862f90c34e15	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 39144f72-789e-457a-a7e7-862f90c34e15	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39145960-a212-46b4-addb-4b187f6bf6fd	cast	cast-resolve	agreed	-	FX	scen	2	0	Knight of Wundagore/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-39145960-a212-46b4-addb-4b187f6bf6fd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Knight of Wundagore/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-39145960-a212-46b4-addb-4b187f6bf6fd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Knight of Wundagore/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+39145960-a212-46b4-addb-4b187f6bf6fd	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:knight-of-wundagore:combat0.attack:s1,f:xs:XP:knight-of-wundagore:combat0.attack:s1	-	-	-	23c4009444b0	-	615ed8c228f1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+39145960-a212-46b4-addb-4b187f6bf6fd	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:knight-of-wundagore:combat0.block:s1,f:xs:XP:knight-of-wundagore:combat0.block:s1	-	-	-	23c4009444b0	-	615ed8c228f1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 39145960-a212-46b4-addb-4b187f6bf6fd	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Knight of Wundagore/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3918eaa7-5a34-4d6a-be93-a95e733d041b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:merchant-of-venom:cast:s1,f:xs:XP:merchant-of-venom:cast:s1	-	-	-	8c0bd19283bb	-	e254fc0e3868	-	-	2026-11-24	xproof
 3918eaa7-5a34-4d6a-be93-a95e733d041b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:merchant-of-venom:cast:s1,f:xs:XP:merchant-of-venom:cast:s1	-	-	-	8c0bd19283bb	-	e254fc0e3868	-	-	2026-11-24	xproof
@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39322103-c40e-4d05-8e87-a92d1cbc7b68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39322103-c40e-4d05-8e87-a92d1cbc7b68	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 393586d3-1f1a-4f3a-96b8-ed1a8fdf00c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-warlord:cast:s1,f:xs:XP:vampire-warlord:cast:s1	-	-	-	d864b561c9cb	-	b47169e718bc	-	-	2026-11-24	xproof
-393586d3-1f1a-4f3a-96b8-ed1a8fdf00c6	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+393586d3-1f1a-4f3a-96b8-ed1a8fdf00c6	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:vampire-warlord:f0a0:s1,f:xs:XP:vampire-warlord:f0a0:s1	-	-	-	23c4009444b0	-	b47169e718bc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 39375b5d-f509-4482-8d34-797dae17d38b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39375b5d-f509-4482-8d34-797dae17d38b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3937a96c-3be1-465d-98b6-1db67d2215e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -61,8 +61,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 393ef069-ea6b-4969-b878-d942281cc918	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 393ef069-ea6b-4969-b878-d942281cc918	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:exquisite-huntmaster:f0t0:s1,f:xs:XP:exquisite-huntmaster:f0t0:s1	-	-	-	8c0bd19283bb	-	b8973192b855	-	-	2026-11-24	xproof
 393ff8c5-4da0-4290-b498-222cc0244026	cast	cast-resolve	agreed	-	FX	scen	2	0	H.E.R.B.I.E. Scout Unit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-393ff8c5-4da0-4290-b498-222cc0244026	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	H.E.R.B.I.E. Scout Unit/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-393ff8c5-4da0-4290-b498-222cc0244026	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	H.E.R.B.I.E. Scout Unit/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+393ff8c5-4da0-4290-b498-222cc0244026	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:h-e-r-b-i-e-scout-unit:combat0.attack:s1,f:xs:XP:h-e-r-b-i-e-scout-unit:combat0.attack:s1	-	-	-	23c4009444b0	-	197bc02e0910	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+393ff8c5-4da0-4290-b498-222cc0244026	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:h-e-r-b-i-e-scout-unit:combat0.block:s1,f:xs:XP:h-e-r-b-i-e-scout-unit:combat0.block:s1	-	-	-	23c4009444b0	-	197bc02e0910	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 393ff8c5-4da0-4290-b498-222cc0244026	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39412e6d-2837-4729-abf9-e64a5ba87e40	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 39419d29-47e7-4d71-953b-96a2e14ae964	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -185,13 +185,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39cae244-96e1-4ea3-899a-3aa871cca31c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:slumbering-cerberus:f0t0:s1,f:xs:XP:slumbering-cerberus:f0t0:s1	-	-	-	23c4009444b0	-	5362367358a0	-	-	2026-11-25	xproof
 39d283e0-9d9b-4c04-aa6a-66a9883af9a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toucan-puffin:f0t0:s1,f:xs:XP:toucan-puffin:f0t0:s1	-	-	-	8c0bd19283bb	-	854d1004e576	-	-	2026-11-24	xproof
 39d283e0-9d9b-4c04-aa6a-66a9883af9a2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:toucan-puffin:f0t0:s1,f:xs:XP:toucan-puffin:f0t0:s1	-	-	-	8c0bd19283bb	-	854d1004e576	-	-	2026-11-24	xproof
-39d4373b-35b4-4ceb-b4d5-9ca474365eb0	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	240c2bc7596e	-	-	2026-11-24	xproof
+39d4373b-35b4-4ceb-b4d5-9ca474365eb0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spawn-of-rix-maadi:cast:s1,f:xs:XP:spawn-of-rix-maadi:cast:s1	-	-	-	23c4009444b0	-	240c2bc7596e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 39d60cd8-bebc-407d-b361-8e49e70e339a	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39d60cd8-bebc-407d-b361-8e49e70e339a	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39d993be-30ad-4756-a494-fd8808d474c9	cast	cast-resolve	agreed	-	X	scen	1	0	Tigra, Feline Fury/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-39d993be-30ad-4756-a494-fd8808d474c9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tigra, Feline Fury/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-39d993be-30ad-4756-a494-fd8808d474c9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tigra, Feline Fury/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-39d993be-30ad-4756-a494-fd8808d474c9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tigra, Feline Fury/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+39d993be-30ad-4756-a494-fd8808d474c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tigra-feline-fury:cast:s1,f:xs:XP:tigra-feline-fury:cast:s1	-	-	-	23c4009444b0	-	44eebc6ba031	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+39d993be-30ad-4756-a494-fd8808d474c9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tigra-feline-fury:combat0.attack:s1,f:xs:XP:tigra-feline-fury:combat0.attack:s1	-	-	-	23c4009444b0	-	44eebc6ba031	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+39d993be-30ad-4756-a494-fd8808d474c9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tigra-feline-fury:combat0.block:s1,f:xs:XP:tigra-feline-fury:combat0.block:s1	-	-	-	23c4009444b0	-	44eebc6ba031	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+39d993be-30ad-4756-a494-fd8808d474c9	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:tigra-feline-fury:f0t0:s1,f:xs:XP:tigra-feline-fury:f0t0:s1	-	-	-	23c4009444b0	-	44eebc6ba031	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 39daa265-8d02-4449-9c45-ae8ec2b13e5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39e01990-9928-440c-a5c3-82aea29e2cd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39e01990-9928-440c-a5c3-82aea29e2cd0	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:soltari-crusader:f0a0:s1,f:xs:XP:soltari-crusader:f0a0:s1	-	-	-	ea3140b6974b	-	ef9501cb8e4f	-	-	2026-11-24	xproof

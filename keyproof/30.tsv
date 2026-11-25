@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 30236ff8-f6d5-462d-9a2f-846b2d8a1ca6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30236ff8-f6d5-462d-9a2f-846b2d8a1ca6	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-pegasus:f0t0:s1,f:xs:XP:phyrexian-pegasus:f0t0:s1	-	-	-	ae86f6029288	-	8603188f2748	-	-	2026-11-24	xproof
 302407c8-0842-4f8e-a5aa-5c11a69851c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-302407c8-0842-4f8e-a5aa-5c11a69851c4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+302407c8-0842-4f8e-a5aa-5c11a69851c4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 30254aa2-2307-4f42-926a-54a416f55f87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30254aa2-2307-4f42-926a-54a416f55f87	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30255f36-2e26-4990-8b54-27f38130d45b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 30536d1f-8b1a-474f-a508-d3426480a532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:call-to-the-feast:cast:s1,f:xs:XP:call-to-the-feast:cast:s1	-	-	-	d864b561c9cb	-	6200e92e0909	-	-	2026-11-24	xproof
 3055381a-fb6b-47a3-8e77-a44768808e27	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3055381a-fb6b-47a3-8e77-a44768808e27	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3055381a-fb6b-47a3-8e77-a44768808e27	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3055381a-fb6b-47a3-8e77-a44768808e27	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:eater-of-hope:f0a1:s1,f:xs:XP:eater-of-hope:f0a1:s1	-	-	-	23c4009444b0	-	1f672ba1fd5d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 30597aff-ebb6-4927-b350-fe559fb92c8f	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dominion Infiltration"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 306002e6-d68d-47ad-879b-e6060efebeff	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Temporal Conqueror"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 306002e6-d68d-47ad-879b-e6060efebeff	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Temporal Conqueror"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -154,10 +154,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 30c7e304-ecfe-44c1-88d1-f507df63c080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30c7e304-ecfe-44c1-88d1-f507df63c080	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:blind-zealot:f0t0:s1,f:xs:XP:blind-zealot:f0t0:s1	-	-	-	23c4009444b0	-	94530cdf0357	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 30ca8e92-5955-46a1-86c1-094a873f518f	cast	cast-resolve	agreed	-	FX	scen	2	0	Beorn the Fierce/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-30ca8e92-5955-46a1-86c1-094a873f518f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Beorn the Fierce/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-30ca8e92-5955-46a1-86c1-094a873f518f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Beorn the Fierce/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-30ca8e92-5955-46a1-86c1-094a873f518f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Beorn the Fierce/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-30ca8e92-5955-46a1-86c1-094a873f518f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Beorn the Fierce/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+30ca8e92-5955-46a1-86c1-094a873f518f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:beorn-the-fierce:combat0.attack:s1,f:xs:XP:beorn-the-fierce:combat0.attack:s1	-	-	-	23c4009444b0	-	c1437c43cba1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+30ca8e92-5955-46a1-86c1-094a873f518f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:beorn-the-fierce:combat0.block:s1,f:xs:XP:beorn-the-fierce:combat0.block:s1	-	-	-	23c4009444b0	-	c1437c43cba1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+30ca8e92-5955-46a1-86c1-094a873f518f	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:beorn-the-fierce:combat0.attack:s1,f:xs:XP:beorn-the-fierce:combat0.attack:s1	-	-	-	23c4009444b0	-	c1437c43cba1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+30ca8e92-5955-46a1-86c1-094a873f518f	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:beorn-the-fierce:static0.0:s1,f:xs:XP:beorn-the-fierce:static0.0:s1	-	-	-	23c4009444b0	-	c1437c43cba1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 30cc8f7b-3c28-40f5-8f8f-157e8212280b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30cd69a8-7893-4075-94ca-04450ff821d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 30d0d75f-e94c-460b-b957-9f1d655c0f65	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dwynen-gilt-leaf-daen:cast:s1,f:xs:XP:dwynen-gilt-leaf-daen:cast:s1	-	-	-	23b491658465	-	0c36e6d7667a	-	-	2026-11-24	xproof

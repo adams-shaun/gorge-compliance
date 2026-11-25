@@ -40,7 +40,7 @@ d03fd358-ff3f-45ab-9601-07dbb535cb51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d03fd358-ff3f-45ab-9601-07dbb535cb51	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d04356f1-0e1a-4689-8e54-f88c4c6dd936	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d04356f1-0e1a-4689-8e54-f88c4c6dd936	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-d04356f1-0e1a-4689-8e54-f88c4c6dd936	f0/a1	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+d04356f1-0e1a-4689-8e54-f88c4c6dd936	f0/a1	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0458ffe-9a61-443f-8e80-3d2dde224a4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seize-opportunity:cast:s1,f:xs:XP:seize-opportunity:cast:s1	-	-	-	23c4009444b0	-	2598df7d776f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d047a819-5196-4a16-8d67-a4edaf6fdef0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dwarven-recruiter:f0t0:s1,f:xs:XP:dwarven-recruiter:f0t0:s1	-	-	-	fc71ca68c5ac	-	224de11df57e	-	-	2026-11-24	xproof
 d047a819-5196-4a16-8d67-a4edaf6fdef0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dwarven-recruiter:f0t0:s1,f:xs:XP:dwarven-recruiter:f0t0:s1	-	-	-	fc71ca68c5ac	-	224de11df57e	-	-	2026-11-24	xproof
@@ -63,8 +63,8 @@ d05336cb-6157-47e7-942f-43becd67a5bf	f0/t0	NULL	owed	refused:no-generator:trigge
 d057289d-5e28-43d5-8ff3-4a1bc723477d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:day-of-judgment:cast:s1,f:xs:XP:day-of-judgment:cast:s1	-	-	-	23b491658465	-	0192376e0511	-	-	2026-11-24	xproof
 d05aeada-2a9f-464d-8a66-b6e90f43bae3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:refuse-to-yield:cast:s1,f:xs:XP:refuse-to-yield:cast:s1	-	-	-	3aa6ded33acb	-	39dbdddd39d8	-	-	2026-11-25	xproof
 d05db2c1-a19a-4803-8e8a-fa2f9b798181	cast	cast-resolve	agreed	-	FX	scen	2	0	Bard, King of Dale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d05db2c1-a19a-4803-8e8a-fa2f9b798181	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bard, King of Dale/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d05db2c1-a19a-4803-8e8a-fa2f9b798181	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bard, King of Dale/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d05db2c1-a19a-4803-8e8a-fa2f9b798181	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:bard-king-of-dale:combat0.attack:s1,f:xs:XP:bard-king-of-dale:combat0.attack:s1	-	-	-	23c4009444b0	-	1d3a96c060cb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d05db2c1-a19a-4803-8e8a-fa2f9b798181	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:bard-king-of-dale:combat0.block:s1,f:xs:XP:bard-king-of-dale:combat0.block:s1	-	-	-	23c4009444b0	-	1d3a96c060cb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d061972e-6f4f-41a7-966a-88839f105f19	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0653734-9eb7-48c6-9042-65ffdd50fd2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodripper:f0t0:s1,f:xs:XP:woodripper:f0t0:s1	-	-	-	23c4009444b0	-	15c47154fcb5	-	-	2026-11-25	xproof
 d0653734-9eb7-48c6-9042-65ffdd50fd2a	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:woodripper:f0t0:s1,f:xs:XP:woodripper:f0t0:s1	-	-	-	23c4009444b0	-	15c47154fcb5	-	-	2026-11-25	xproof
@@ -192,7 +192,7 @@ d0d844f2-6cf4-49f2-95db-64e932a15b17	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d0d844f2-6cf4-49f2-95db-64e932a15b17	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d0d90dd8-0642-489f-9afc-11c307f258f2	cast	cast-resolve	agreed	-	FX	scen	2	0	Tifa's Limit Break/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d0db5996-f749-48d2-8fb3-a69104113828	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d0db5996-f749-48d2-8fb3-a69104113828	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+d0db5996-f749-48d2-8fb3-a69104113828	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:death-s-presence:f0t0:s1,f:xs:XP:death-s-presence:f0t0:s1	-	-	-	23c4009444b0	-	39fd00ab008a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0dd425b-fdba-41b4-b9e6-f5161610bd7e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ezuri-s-predation:cast:s1,f:xs:XP:ezuri-s-predation:cast:s1	-	-	-	8c0bd19283bb	-	5755da4a3649	-	-	2026-11-24	xproof
 d0e1904e-1a37-41f6-8582-b9ea794bb886	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:abduction:f0t0:s1,f:xs:XP:abduction:f0t0:s1	-	-	-	ea3140b6974b	-	13bf28ca805f	-	-	2026-11-24	xproof
 d0e1904e-1a37-41f6-8582-b9ea794bb886	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:abduction:f0t0:s1,f:xs:XP:abduction:f0t0:s1	-	-	-	ea3140b6974b	-	13bf28ca805f	-	-	2026-11-24	xproof
@@ -217,8 +217,8 @@ d0eeb863-6c1b-4e84-9199-e77f15724626	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:
 d0eeb863-6c1b-4e84-9199-e77f15724626	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wolfrider-s-saddle:f0t0:s1,f:xs:XP:wolfrider-s-saddle:f0t0:s1	-	-	-	ae86f6029288	-	c3386283c114	-	-	2026-11-24	xproof
 d0f06250-25a5-4003-8f3a-6d85ef32ea10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keening-stone:cast:s1,f:xs:XP:keening-stone:cast:s1	-	-	-	d864b561c9cb	-	d90c2f958e3e	-	-	2026-11-24	xproof
 d0f06250-25a5-4003-8f3a-6d85ef32ea10	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:keening-stone:f0a0:s1,f:xs:XP:keening-stone:f0a0:s1	-	-	-	d864b561c9cb	-	d90c2f958e3e	-	-	2026-11-24	xproof
-d0f62148-1015-49b8-b61f-a4332325a6b0	cast	cast-resolve	agreed	-	X	scen	1	0	Elven Raft-Steerer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d0f62148-1015-49b8-b61f-a4332325a6b0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Elven Raft-Steerer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d0f62148-1015-49b8-b61f-a4332325a6b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elven-raft-steerer:cast:s1,f:xs:XP:elven-raft-steerer:cast:s1	-	-	-	23c4009444b0	-	6153fcb6fef9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d0f62148-1015-49b8-b61f-a4332325a6b0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elven-raft-steerer:f0t0:s1,f:xs:XP:elven-raft-steerer:f0t0:s1	-	-	-	23c4009444b0	-	6153fcb6fef9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0fa43f6-d8f6-4674-b538-6d546b7dcf40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moon-vigil-adherents:cast:s1,f:xs:XP:moon-vigil-adherents:cast:s1	-	-	-	23c4009444b0	-	03cd30edc6b3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0fa43f6-d8f6-4674-b538-6d546b7dcf40	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:moon-vigil-adherents:combat0.attack:s1,f:xs:XP:moon-vigil-adherents:combat0.attack:s1	-	-	-	23c4009444b0	-	03cd30edc6b3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d0fa43f6-d8f6-4674-b538-6d546b7dcf40	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:moon-vigil-adherents:combat0.block:s1,f:xs:XP:moon-vigil-adherents:combat0.block:s1	-	-	-	23c4009444b0	-	03cd30edc6b3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

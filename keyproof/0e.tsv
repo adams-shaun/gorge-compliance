@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e14940b-87e1-4139-8f30-3629b3ad3a59	cast	cast-resolve	agreed	-	X	scen	1	0	Shields Up!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e20afd2-507b-4878-a78c-f23b51ec071f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e235b96-9507-4f4b-9578-4fb8ed854cc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e235b96-9507-4f4b-9578-4fb8ed854cc2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0e235b96-9507-4f4b-9578-4fb8ed854cc2	f0/t0	ChangesZone/Evolve	agreed	-	FX	start	2	0	x:xs:XP:shambleshark:f0t0:s1,f:xs:XP:shambleshark:f0t0:s1	-	-	-	23c4009444b0	-	efd8263453e1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0e2418f8-2f32-4f79-8ce7-44eae8e764cb	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	990447633bda	-	-	2026-11-25	xproof
 0e2418f8-2f32-4f79-8ce7-44eae8e764cb	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	990447633bda	-	-	2026-11-25	xproof
 0e24c0d2-2333-425c-952e-9a13e6519cd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -61,9 +61,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e5b40dc-debf-48a1-8398-5ea00b5a5166	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sazh-katzroy:f0t0:s1,f:xs:XP:sazh-katzroy:f0t0:s1	-	-	-	23c4009444b0	-	b1c03af8493d	-	-	2026-11-25	xproof
 0e5b40dc-debf-48a1-8398-5ea00b5a5166	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sazh-katzroy:f0t0:s1,f:xs:XP:sazh-katzroy:f0t0:s1	-	-	-	23c4009444b0	-	b1c03af8493d	-	-	2026-11-25	xproof
 0e5b40dc-debf-48a1-8398-5ea00b5a5166	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sazh-katzroy:f0t1:s1,f:xs:XP:sazh-katzroy:f0t1:s1	-	-	-	23c4009444b0	-	b1c03af8493d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	cast	cast-resolve	agreed	-	X	scen	1	0	Futurist Forge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Futurist Forge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:futurist-forge:cast:s1,f:xs:XP:futurist-forge:cast:s1	-	-	-	23c4009444b0	-	a17ea90a115d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:futurist-forge:f0a0:s1,f:xs:XP:futurist-forge:f0a0:s1	-	-	-	23c4009444b0	-	a17ea90a115d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:futurist-forge:cast:s1,f:xs:XP:futurist-forge:cast:s1	-	-	-	23c4009444b0	-	a17ea90a115d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0e608f48-d3a6-422c-839d-f06bb8a32014	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:savage-hunger:cast:s1,f:xs:XP:savage-hunger:cast:s1	-	-	-	8a1b1a193ec0	-	1721adbdafc8	-	-	2026-11-24	xproof
 0e608f48-d3a6-422c-839d-f06bb8a32014	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:savage-hunger:cast:s2,f:xs:XP:savage-hunger:cast:s2	-	-	-	8a1b1a193ec0	-	1721adbdafc8	-	-	2026-11-24	xproof
 0e61a062-f13a-4958-91de-909650c662a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,10 +165,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ed2a07c-a7a5-4910-a63c-e72803947afb	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0ed2a07c-a7a5-4910-a63c-e72803947afb	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0ed811b7-6ead-4906-9e40-9096b735e271	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0edaf433-4ded-4841-bc86-136780c0767f	cast	cast-resolve	agreed	-	X	scen	1	0	Unliving Legionnaire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0edaf433-4ded-4841-bc86-136780c0767f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Unliving Legionnaire/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0edaf433-4ded-4841-bc86-136780c0767f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Unliving Legionnaire/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0edaf433-4ded-4841-bc86-136780c0767f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Unliving Legionnaire/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0edaf433-4ded-4841-bc86-136780c0767f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unliving-legionnaire:cast:s1,f:xs:XP:unliving-legionnaire:cast:s1	-	-	-	23c4009444b0	-	7a2325bcc00a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0edaf433-4ded-4841-bc86-136780c0767f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:unliving-legionnaire:combat0.attack:s1,f:xs:XP:unliving-legionnaire:combat0.attack:s1	-	-	-	23c4009444b0	-	7a2325bcc00a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0edaf433-4ded-4841-bc86-136780c0767f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:unliving-legionnaire:combat0.block:s1,f:xs:XP:unliving-legionnaire:combat0.block:s1	-	-	-	23c4009444b0	-	7a2325bcc00a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0edaf433-4ded-4841-bc86-136780c0767f	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:unliving-legionnaire:f0a0:s1,f:xs:XP:unliving-legionnaire:f0a0:s1	-	-	-	23c4009444b0	-	7a2325bcc00a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0edc8ad3-2920-4b25-8a86-98ce216111d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0edc8ad3-2920-4b25-8a86-98ce216111d1	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sorcerer-s-wand:f0a0:s1,f:xs:XP:sorcerer-s-wand:f0a0:s1	-	-	-	3aa6ded33acb	-	c820e494703d	-	-	2026-11-25	xproof
 0edd4894-0df0-4a4e-8a96-d20360ea81c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akroan-phalanx:cast:s1,f:xs:XP:akroan-phalanx:cast:s1	-	-	-	d864b561c9cb	-	b4a0b5399ded	-	-	2026-11-24	xproof

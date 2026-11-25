@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2127a245-d664-45cb-8ed1-0024de1a10df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2127a245-d664-45cb-8ed1-0024de1a10df	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 212d058b-69c6-4dc2-8c93-bdfe26dc2ffe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hammer-of-purphoros:cast:s1,f:xs:XP:hammer-of-purphoros:cast:s1	-	-	-	d864b561c9cb	-	68a39b111114	-	-	2026-11-24	xproof
-212d058b-69c6-4dc2-8c93-bdfe26dc2ffe	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+212d058b-69c6-4dc2-8c93-bdfe26dc2ffe	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:hammer-of-purphoros:f0a0:s1,f:xs:XP:hammer-of-purphoros:f0a0:s1	-	-	-	23c4009444b0	-	68a39b111114	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 212fdb7c-1c7e-4eed-b1ed-bcc14a425da8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lita-little-orphan-amphibian:cast:s1,f:xs:XP:lita-little-orphan-amphibian:cast:s1	-	-	-	23c4009444b0	-	7b50dd50b8f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 212fdb7c-1c7e-4eed-b1ed-bcc14a425da8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lita-little-orphan-amphibian:f0t0:s1,f:xs:XP:lita-little-orphan-amphibian:f0t0:s1	-	-	-	23c4009444b0	-	7b50dd50b8f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 21338b71-37f5-4121-9b84-565025ebcd17	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 21b520c6-c94a-475a-a824-dd96394ea55b	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:conjurer-s-mantle:f0a0:s1,f:xs:XP:conjurer-s-mantle:f0a0:s1	-	-	-	23c4009444b0	-	b807f8384e6e	-	-	2026-11-25	xproof
 21b520c6-c94a-475a-a824-dd96394ea55b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:conjurer-s-mantle:f0a0:s1,f:xs:XP:conjurer-s-mantle:f0a0:s1	-	-	-	23c4009444b0	-	b807f8384e6e	-	-	2026-11-25	xproof
 21b8192e-46a2-4a6a-abd5-3a074efa30a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-21b8192e-46a2-4a6a-abd5-3a074efa30a9	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+21b8192e-46a2-4a6a-abd5-3a074efa30a9	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 21b8d59f-a90d-44ff-a2e3-9f439ac3e14a	cast	cast-resolve	agreed	-	X	scen	1	0	Semester Foreseer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 21b8d59f-a90d-44ff-a2e3-9f439ac3e14a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 21c66372-8ae8-447c-92df-b56c9ffebd43	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Locus Cobra"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof

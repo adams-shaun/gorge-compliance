@@ -20,9 +20,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f14e92d-307f-4854-b7ec-a2f6ce03dced	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f14e92d-307f-4854-b7ec-a2f6ce03dced	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f14e92d-307f-4854-b7ec-a2f6ce03dced	f0/a1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f15abe7-54aa-40ed-a15d-5b827f1c3923	cast	cast-resolve	agreed	-	X	scen	1	0	Swordsman, Sharp Scoundrel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f15abe7-54aa-40ed-a15d-5b827f1c3923	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Swordsman, Sharp Scoundrel/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f15abe7-54aa-40ed-a15d-5b827f1c3923	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Swordsman, Sharp Scoundrel/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2f15abe7-54aa-40ed-a15d-5b827f1c3923	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swordsman-sharp-scoundrel:cast:s1,f:xs:XP:swordsman-sharp-scoundrel:cast:s1	-	-	-	23c4009444b0	-	49eda89488af	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2f15abe7-54aa-40ed-a15d-5b827f1c3923	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:swordsman-sharp-scoundrel:f0t0:s1,f:xs:XP:swordsman-sharp-scoundrel:f0t0:s1	-	-	-	23c4009444b0	-	49eda89488af	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2f15abe7-54aa-40ed-a15d-5b827f1c3923	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:swordsman-sharp-scoundrel:f0t1:s1,f:xs:XP:swordsman-sharp-scoundrel:f0t1:s1	-	-	-	23c4009444b0	-	49eda89488af	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2f18967d-c2cd-449d-a288-df6343672743	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	d16ab9837e1f	-	-	2026-11-25	xproof
 2f18967d-c2cd-449d-a288-df6343672743	f0/a0	PumpAll	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	d16ab9837e1f	-	-	2026-11-25	xproof
 2f18967d-c2cd-449d-a288-df6343672743	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	d16ab9837e1f	-	-	2026-11-25	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f920bf2-6a49-47c2-be3c-9787c377673b	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:skystreak-engineer:f0a0:s1,f:xs:XP:skystreak-engineer:f0a0:s1	-	-	-	23c4009444b0	-	2a6d4653a0f2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2f921740-de98-4276-8196-47a38a1e4591	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2f947056-fa10-4491-95e5-532ea3b76d10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scab-clan-charger:cast:s1,f:xs:XP:scab-clan-charger:cast:s1	-	-	-	d864b561c9cb	-	89bf8bb7f33d	-	-	2026-11-24	xproof
-2f947056-fa10-4491-95e5-532ea3b76d10	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+2f947056-fa10-4491-95e5-532ea3b76d10	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2f959c67-2b0b-4ba8-a8aa-90c25a3806ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f959c67-2b0b-4ba8-a8aa-90c25a3806ec	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2f990b54-fbf3-4949-85bb-9ba39710e72a	cast	cast-resolve	agreed	-	X	scen	1	0	Dive Down/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -184,8 +184,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2facb1b3-4522-4610-a0ab-29ac53ca7fcd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:greenwarden-of-murasa:f0t0:s1,f:xs:XP:greenwarden-of-murasa:f0t0:s1	-	-	-	d864b561c9cb	-	1bdc4c503cce	-	-	2026-11-24	xproof
 2facb1b3-4522-4610-a0ab-29ac53ca7fcd	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:greenwarden-of-murasa:f0t1:s1,f:xs:XP:greenwarden-of-murasa:f0t1:s1	-	-	-	d864b561c9cb	-	1bdc4c503cce	-	-	2026-11-24	xproof
 2fadf4aa-1b7e-4e72-ad20-809a59ddccf8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:peri-brown:cast:s1,f:xs:XP:peri-brown:cast:s1	-	-	-	8c0bd19283bb	-	aec72c839cdb	-	-	2026-11-24	xproof
-2fb0f2d2-ed1f-4181-91f2-684a71c34998	cast	cast-resolve	agreed	-	X	scen	1	0	Speed, Young Avenger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2fb0f2d2-ed1f-4181-91f2-684a71c34998	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Speed, Young Avenger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2fb0f2d2-ed1f-4181-91f2-684a71c34998	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:speed-young-avenger:cast:s1,f:xs:XP:speed-young-avenger:cast:s1	-	-	-	23c4009444b0	-	81315a4ed070	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2fb0f2d2-ed1f-4181-91f2-684a71c34998	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:speed-young-avenger:f0t0:s1,f:xs:XP:speed-young-avenger:f0t0:s1	-	-	-	23c4009444b0	-	81315a4ed070	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2fb13687-0518-4ba0-a5ae-dd609464b026	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fb13687-0518-4ba0-a5ae-dd609464b026	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2fb13687-0518-4ba0-a5ae-dd609464b026	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

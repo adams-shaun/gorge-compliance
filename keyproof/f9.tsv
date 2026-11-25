@@ -19,7 +19,7 @@ f916f689-a314-4952-8107-41c4c2f2e811	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP
 f91a71b7-9bc0-4609-a312-ffede52dc0ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lilting-refrain:f0t0:s1,f:xs:XP:lilting-refrain:f0t0:s1	-	-	-	23c4009444b0	-	9209d2ab4865	-	-	2026-11-25	xproof
 f91a71b7-9bc0-4609-a312-ffede52dc0ad	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 f91a71b7-9bc0-4609-a312-ffede52dc0ad	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lilting-refrain:f0t0:s1,f:xs:XP:lilting-refrain:f0t0:s1	-	-	-	23c4009444b0	-	9209d2ab4865	-	-	2026-11-25	xproof
-f91c860e-3feb-4a5a-b7ef-4e7d38d61c75	cast	cast-resolve	agreed	-	X	scen	1	0	Rewrite History/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f91c860e-3feb-4a5a-b7ef-4e7d38d61c75	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rewrite-history:cast:s1,f:xs:XP:rewrite-history:cast:s1	-	-	-	23c4009444b0	-	72cbc9181bd3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f91c860e-3feb-4a5a-b7ef-4e7d38d61c75	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rewrite History/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f91c860e-3feb-4a5a-b7ef-4e7d38d61c75	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rewrite History/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f91ef713-5289-4901-9291-0a5afe6f997b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ f93dc9cc-3dd2-4e2b-b972-217ab9d89dfe	combat#0.block	combat#0.block	agreed	-	X	sc
 f93dc9cc-3dd2-4e2b-b972-217ab9d89dfe	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:muerra-trash-tactician:f0t0:s1	-	-	-	3aa6ded33acb	-	22656c52f01d	-	-	2026-11-25	xproof
 f93fa6ec-1f13-4109-aa60-11e148f7ba88	cast	cast-resolve	agreed	-	FX	scen	2	0	Super-Adaptoid/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f93fa6ec-1f13-4109-aa60-11e148f7ba88	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f93fa6ec-1f13-4109-aa60-11e148f7ba88	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Super-Adaptoid/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f93fa6ec-1f13-4109-aa60-11e148f7ba88	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:evil-s-thrall:cast:s1,f:xs:XP:evil-s-thrall:cast:s1	-	-	-	23c4009444b0	-	938dc58d8ec6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f93fa6ec-1f13-4109-aa60-11e148f7ba88	static#0.0	static#0.0	agreed	-	X	scen	1	0	Super-Adaptoid/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f94002a1-582f-4b9d-a4f7-dae816f21c1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f94002a1-582f-4b9d-a4f7-dae816f21c1d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,4 +150,4 @@ f9f719cb-7778-4109-bbd3-4504ee1b5f49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 f9f719cb-7778-4109-bbd3-4504ee1b5f49	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f9f82958-a7c6-4161-b0d8-fdbf7a3dd911	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:entrancing-melody:cast:s1,f:xs:XP:entrancing-melody:cast:s1	-	-	-	3aa6ded33acb	-	b5c7f56bb7c4	-	-	2026-11-25	xproof
 f9fd9b1c-4c00-4db7-bbfe-7fd5d8bb9258	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f9fd9b1c-4c00-4db7-bbfe-7fd5d8bb9258	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+f9fd9b1c-4c00-4db7-bbfe-7fd5d8bb9258	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

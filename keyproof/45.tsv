@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45aa8bdb-54da-4069-bd6c-c63396154464	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 45aeac84-4705-4179-be3f-b31bde844ea0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45aeac84-4705-4179-be3f-b31bde844ea0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-45aeac84-4705-4179-be3f-b31bde844ea0	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+45aeac84-4705-4179-be3f-b31bde844ea0	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 45b1a19b-6a0c-4534-9106-99c2e5fc30d6	cast	cast-resolve	agreed	-	X	scen	1	0	Khaaaaaaaaaaaannn!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45b34d33-7d70-4308-8f07-bb044be891bb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:merfolk-wayfinder:cast:s1,f:xs:XP:merfolk-wayfinder:cast:s1	-	-	-	8a1b1a193ec0	-	d66f0752b701	-	-	2026-11-24	xproof
 45b34d33-7d70-4308-8f07-bb044be891bb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:merfolk-wayfinder:cast:s1,f:xs:XP:merfolk-wayfinder:cast:s1	-	-	-	8a1b1a193ec0	-	d66f0752b701	-	-	2026-11-24	xproof
@@ -199,8 +199,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45d40cdb-21cc-4569-a894-83dd3026c947	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45d5cd4c-7285-4507-8cbf-eace7a734f41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45d652c4-188e-4f00-acdd-1be014922cbc	cast	cast-resolve	agreed	-	FX	scen	2	0	Attercop/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-45d652c4-188e-4f00-acdd-1be014922cbc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Attercop/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-45d652c4-188e-4f00-acdd-1be014922cbc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Attercop/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+45d652c4-188e-4f00-acdd-1be014922cbc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:attercop:combat0.attack:s1,f:xs:XP:attercop:combat0.attack:s1	-	-	-	23c4009444b0	-	a402c82e7405	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+45d652c4-188e-4f00-acdd-1be014922cbc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:attercop:combat0.block:s1,f:xs:XP:attercop:combat0.block:s1	-	-	-	23c4009444b0	-	a402c82e7405	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 45d652c4-188e-4f00-acdd-1be014922cbc	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Attercop/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45d939d1-e9ca-4b4b-a0a9-59b936210a5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45d939d1-e9ca-4b4b-a0a9-59b936210a5b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -221,7 +221,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45f386ba-ad62-4c0e-b6ad-ae02ca8f2bec	cast	cast	agreed	-	F	start	2	0	f:xs:XP:blood-on-the-snow:cast:s1	-	-	-	d864b561c9cb	-	da1e9fcb6774	-	-	2026-11-24	xproof
 45f4d057-5134-40a2-9590-ddba73a65582	cast	cast-resolve	agreed	-	X	scen	1	0	Prophesied End/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45f88a6a-ac8a-4a53-a96b-f09ca33c79ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-45f88a6a-ac8a-4a53-a96b-f09ca33c79ba	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+45f88a6a-ac8a-4a53-a96b-f09ca33c79ba	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 45f91d6a-eaab-4179-ac1f-5dc9e647a3da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45fa04ee-3b5c-45b3-8c09-bda08cca3630	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:excavation-elephant:f0t0:s1,f:xs:XP:excavation-elephant:f0t0:s1	-	-	-	d864b561c9cb	-	91d98768c74d	-	-	2026-11-24	xproof
 45fa04ee-3b5c-45b3-8c09-bda08cca3630	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:excavation-elephant:f0t0:s1,f:xs:XP:excavation-elephant:f0t0:s1	-	-	-	d864b561c9cb	-	91d98768c74d	-	-	2026-11-24	xproof

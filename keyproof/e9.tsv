@@ -74,7 +74,7 @@ e949b362-4988-4482-ac51-c1049af9040c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Chron
 e949b362-4988-4482-ac51-c1049af9040c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Chronicle of Victory/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e94ef397-f5c5-4b8d-ae27-528352fa1d1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e94ef397-f5c5-4b8d-ae27-528352fa1d1e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e94ef397-f5c5-4b8d-ae27-528352fa1d1e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e94ef397-f5c5-4b8d-ae27-528352fa1d1e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:trostani-selesnya-s-voice:f0t0:s1,f:xs:XP:trostani-selesnya-s-voice:f0t0:s1	-	-	-	23c4009444b0	-	56e4252c8c4f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e9517fc3-d1bc-42f7-b052-9f629b302735	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:enlistment-officer:cast:s1,f:xs:XP:enlistment-officer:cast:s1	-	-	-	fc71ca68c5ac	-	8a59ebbfcdd1	-	-	2026-11-24	xproof
 e9517fc3-d1bc-42f7-b052-9f629b302735	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:enlistment-officer:cast:s1,f:xs:XP:enlistment-officer:cast:s1	-	-	-	fc71ca68c5ac	-	8a59ebbfcdd1	-	-	2026-11-24	xproof
 e9566303-15cf-4444-a044-fc19540f21b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,9 +178,9 @@ e9c9a445-4386-4616-ad00-f08064d73dcd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wis
 e9c9e730-3b73-48e3-845b-1b7f2d16050c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:bond-of-flourishing:cast:s1	-	-	-	d864b561c9cb	-	82d42c423fe4	-	-	2026-11-24	xproof
 e9ccec56-ec2b-4ab8-b929-6e4795711db9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9ccec56-ec2b-4ab8-b929-6e4795711db9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e9d20b6d-fa4f-473b-9866-230fd92a1319	cast	cast-resolve	agreed	-	X	scen	1	0	Invisible Woman, Sue Storm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e9d20b6d-fa4f-473b-9866-230fd92a1319	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Invisible Woman, Sue Storm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e9d20b6d-fa4f-473b-9866-230fd92a1319	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Invisible Woman, Sue Storm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e9d20b6d-fa4f-473b-9866-230fd92a1319	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:invisible-woman-sue-storm:cast:s1,f:xs:XP:invisible-woman-sue-storm:cast:s1	-	-	-	23c4009444b0	-	cf8db28e32f1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e9d20b6d-fa4f-473b-9866-230fd92a1319	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:invisible-woman-sue-storm:combat0.attack:s1,f:xs:XP:invisible-woman-sue-storm:combat0.attack:s1	-	-	-	23c4009444b0	-	cf8db28e32f1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e9d20b6d-fa4f-473b-9866-230fd92a1319	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:invisible-woman-sue-storm:combat0.block:s1,f:xs:XP:invisible-woman-sue-storm:combat0.block:s1	-	-	-	23c4009444b0	-	cf8db28e32f1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e9d20b6d-fa4f-473b-9866-230fd92a1319	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Invisible Woman, Sue Storm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e9db79fd-a5b6-4d59-9176-e713e2e9c708	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9dbfda3-e162-49f0-b9bf-f8213e27c17d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ e9dfab69-7618-4d90-8bb4-cf23581d1bad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e9dfab69-7618-4d90-8bb4-cf23581d1bad	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e9e0b78e-07d5-4603-8e3b-27274148d1a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9e18a5a-d265-456f-a049-fa4b7e223263	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:korozda-gorgon:cast:s1,f:xs:XP:korozda-gorgon:cast:s1	-	-	-	d864b561c9cb	-	6e332f20c344	-	-	2026-11-24	xproof
-e9e18a5a-d265-456f-a049-fa4b7e223263	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+e9e18a5a-d265-456f-a049-fa4b7e223263	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e9e43839-7cc1-40ff-a8ec-a47316de6440	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9e55768-ed62-4998-9922-dbcdeab12aee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9e56b1d-5ad2-4807-8c4c-1a1a6a25ecbf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

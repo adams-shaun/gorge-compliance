@@ -6,8 +6,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b04a337-3152-481e-973f-a11dbd615f93	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:nullhide-ferox:f0a0:s1,f:xs:XP:nullhide-ferox:f0a0:s1	-	-	-	d864b561c9cb	-	b280b0781e5e	-	-	2026-11-24	xproof
 5b079914-1302-40b5-8060-7c3e5b6e9eae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:next-of-kin:cast:s1,f:xs:XP:next-of-kin:cast:s1	-	-	-	8c0bd19283bb	-	01c613e87814	-	-	2026-11-24	xproof
 5b079914-1302-40b5-8060-7c3e5b6e9eae	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-5b090ba3-0ecb-4585-b5b7-9d6028c32487	cast	cast-resolve	agreed	-	X	scen	1	0	Misty Knight, Hero for Hire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5b090ba3-0ecb-4585-b5b7-9d6028c32487	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Misty Knight, Hero for Hire/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5b090ba3-0ecb-4585-b5b7-9d6028c32487	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:misty-knight-hero-for-hire:cast:s1,f:xs:XP:misty-knight-hero-for-hire:cast:s1	-	-	-	23c4009444b0	-	f8895caae982	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5b090ba3-0ecb-4585-b5b7-9d6028c32487	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:misty-knight-hero-for-hire:f0a0:s1,f:xs:XP:misty-knight-hero-for-hire:f0a0:s1	-	-	-	23c4009444b0	-	f8895caae982	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5b0a4530-6e19-41a2-9ea6-e4c8cf85b6c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mouse-trapper:cast:s1,f:xs:XP:mouse-trapper:cast:s1	-	-	-	3aa6ded33acb	-	445d80679d57	-	-	2026-11-25	xproof
 5b0a4530-6e19-41a2-9ea6-e4c8cf85b6c4	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:mouse-trapper:f0t0:s1,f:xs:XP:mouse-trapper:f0t0:s1	-	-	-	3aa6ded33acb	-	445d80679d57	-	-	2026-11-25	xproof
 5b0cb089-087d-4b91-9e63-8186dc737a00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tahngarth-s-rage:cast:s1,f:xs:XP:tahngarth-s-rage:cast:s1	-	-	-	8c0bd19283bb	-	4e47b974e263	-	-	2026-11-24	xproof
@@ -74,13 +74,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b6bdf5a-2742-4851-92cd-a857a3852836	cast	cast	diverged	-	-	start	0	2	-	0a520ded0ebd	-	-	d864b561c9cb	-	1372c30af6ed	-	-	2026-11-24	xproof
 5b6c6dab-0687-4297-b215-89e699d65681	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b6c6dab-0687-4297-b215-89e699d65681	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-5b6f2770-e774-4a77-801f-a3fda093c3dd	cast	cast-resolve	agreed	-	X	scen	1	0	Human Torch, Johnny Storm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5b6f2770-e774-4a77-801f-a3fda093c3dd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Human Torch, Johnny Storm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5b6f2770-e774-4a77-801f-a3fda093c3dd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Human Torch, Johnny Storm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5b6f2770-e774-4a77-801f-a3fda093c3dd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Human Torch, Johnny Storm/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5b6f2770-e774-4a77-801f-a3fda093c3dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:human-torch-johnny-storm:cast:s1,f:xs:XP:human-torch-johnny-storm:cast:s1	-	-	-	23c4009444b0	-	ee96e86ed06d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5b6f2770-e774-4a77-801f-a3fda093c3dd	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:human-torch-johnny-storm:combat0.attack:s1,f:xs:XP:human-torch-johnny-storm:combat0.attack:s1	-	-	-	23c4009444b0	-	ee96e86ed06d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5b6f2770-e774-4a77-801f-a3fda093c3dd	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:human-torch-johnny-storm:combat0.block:s1,f:xs:XP:human-torch-johnny-storm:combat0.block:s1	-	-	-	23c4009444b0	-	ee96e86ed06d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5b6f2770-e774-4a77-801f-a3fda093c3dd	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:human-torch-johnny-storm:f0a0:s1,f:xs:XP:human-torch-johnny-storm:f0a0:s1	-	-	-	23c4009444b0	-	ee96e86ed06d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5b6f2770-e774-4a77-801f-a3fda093c3dd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Human Torch, Johnny Storm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b6f655b-1518-4ab1-8765-3f549819ef3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5b79b68a-db71-4638-824e-ab89b1716c86	cast	cast-resolve	agreed	-	X	scen	1	0	Dáin, Lord of the Iron Hills/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5b79b68a-db71-4638-824e-ab89b1716c86	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:d-in-lord-of-the-iron-hills:cast:s1,f:xs:XP:d-in-lord-of-the-iron-hills:cast:s1	-	-	-	23c4009444b0	-	cdfdd5372b10	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5b79b68a-db71-4638-824e-ab89b1716c86	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dáin, Lord of the Iron Hills/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b79b68a-db71-4638-824e-ab89b1716c86	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dáin, Lord of the Iron Hills/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b79b68a-db71-4638-824e-ab89b1716c86	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dáin, Lord of the Iron Hills/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ba19dbe-9dbb-4cc9-81a3-18c26f27bd0f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:teapot-slinger:combat0.block:s1,f:xs:XP:teapot-slinger:combat0.block:s1	-	-	-	23c4009444b0	-	dffde208b94c	-	-	2026-11-25	xproof
 5ba19dbe-9dbb-4cc9-81a3-18c26f27bd0f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Teapot Slinger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ba482e9-fbb0-4d9f-a3a9-414892bcdfed	cast	cast-resolve	agreed	-	FX	scen	2	0	Dancing from Dark to Dawn/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5ba482e9-fbb0-4d9f-a3a9-414892bcdfed	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dancing from Dark to Dawn/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5ba482e9-fbb0-4d9f-a3a9-414892bcdfed	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:dancing-from-dark-to-dawn:f0t0:s1,f:xs:XP:dancing-from-dark-to-dawn:f0t0:s1	-	-	-	23c4009444b0	-	47b739108471	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5ba482e9-fbb0-4d9f-a3a9-414892bcdfed	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Dancing from Dark to Dawn/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ba6a472-b2f3-4d8e-838c-269aaa5eb2e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ba73182-30a7-4bad-9cb6-c0feecc2db33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

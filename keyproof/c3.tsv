@@ -92,10 +92,10 @@ c38db10f-c0b7-4391-b49a-77079a4d087c	cast	NULL	owed	refused:start-not-exercised	
 c38db10f-c0b7-4391-b49a-77079a4d087c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c38db10f-c0b7-4391-b49a-77079a4d087c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c38db10f-c0b7-4391-b49a-77079a4d087c	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-c38f7447-e646-438d-81bd-fe2a71c8a79c	cast	cast-resolve	agreed	-	X	scen	1	0	Ninja of the Hand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c38f7447-e646-438d-81bd-fe2a71c8a79c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ninja of the Hand/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c38f7447-e646-438d-81bd-fe2a71c8a79c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ninja of the Hand/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c38f7447-e646-438d-81bd-fe2a71c8a79c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ninja of the Hand/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c38f7447-e646-438d-81bd-fe2a71c8a79c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ninja-of-the-hand:cast:s1,f:xs:XP:ninja-of-the-hand:cast:s1	-	-	-	23c4009444b0	-	a326f1bd8e94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c38f7447-e646-438d-81bd-fe2a71c8a79c	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ninja-of-the-hand:combat0.attack:s1,f:xs:XP:ninja-of-the-hand:combat0.attack:s1	-	-	-	23c4009444b0	-	a326f1bd8e94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c38f7447-e646-438d-81bd-fe2a71c8a79c	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ninja-of-the-hand:combat0.block:s1,f:xs:XP:ninja-of-the-hand:combat0.block:s1	-	-	-	23c4009444b0	-	a326f1bd8e94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c38f7447-e646-438d-81bd-fe2a71c8a79c	f0/a0	Discard	agreed	-	FX	start	2	0	x:xs:XP:ninja-of-the-hand:f0a0:s1,f:xs:XP:ninja-of-the-hand:f0a0:s1	-	-	-	23c4009444b0	-	a326f1bd8e94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c39112ab-ee1f-4f00-b18b-692b5fe32b80	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c39112ab-ee1f-4f00-b18b-692b5fe32b80	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 c3936db3-d3b6-4a92-9773-6f3c52dc419d	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Seasoned Cryomancer"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -145,7 +145,7 @@ c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fer
 c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	f0/a0	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:feral-deceiver:f0a0:s1,f:xs:XP:feral-deceiver:f0a0:s1	-	-	-	23c4009444b0	-	ff7b95614550	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	f0/a1	PeekAndReveal	agreed	-	FX	start	2	0	x:xs:XP:feral-deceiver:f0a1:s1,f:xs:XP:feral-deceiver:f0a1:s1	-	-	-	23c4009444b0	-	ff7b95614550	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c3bd1d38-e73f-4e30-b22a-dca0a0e4d701	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c3bd1d38-e73f-4e30-b22a-dca0a0e4d701	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+c3bd1d38-e73f-4e30-b22a-dca0a0e4d701	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c3c25a2c-f71c-4cb7-9117-0bcda9248bfd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prismari-charm:cast:s1,f:xs:XP:prismari-charm:cast:s1	-	-	-	23c4009444b0	-	049cb828735b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c3c40f93-7e10-4139-b9e0-b6dfff8b8038	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c3c40f93-7e10-4139-b9e0-b6dfff8b8038	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ c3fb2829-64f2-4795-b815-edcc5bbbc360	combat#0.attack	combat#0.attack	agreed	-	X	
 c3fb2829-64f2-4795-b815-edcc5bbbc360	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Guardian of the Halls/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3fb2829-64f2-4795-b815-edcc5bbbc360	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Guardian of the Halls/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c3fda16e-fd56-434e-91ac-561ae0482f43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c3fda16e-fd56-434e-91ac-561ae0482f43	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-c3fda16e-fd56-434e-91ac-561ae0482f43	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+c3fda16e-fd56-434e-91ac-561ae0482f43	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:staff-of-the-death-magus:f0t0:s1,f:xs:XP:staff-of-the-death-magus:f0t0:s1	-	-	-	23c4009444b0	-	ea76aada0727	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c3fda16e-fd56-434e-91ac-561ae0482f43	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:staff-of-the-death-magus:f0t1:s1,f:xs:XP:staff-of-the-death-magus:f0t1:s1	-	-	-	23c4009444b0	-	ea76aada0727	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c3fdfb94-2d10-4743-864c-a59fdd57d8b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c3fdfb94-2d10-4743-864c-a59fdd57d8b7	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

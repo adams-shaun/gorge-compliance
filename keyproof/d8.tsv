@@ -9,14 +9,14 @@ d8067f42-68c0-42da-a1d6-859953939555	combat#0.attack	combat.attack	agreed	-	FX	s
 d8067f42-68c0-42da-a1d6-859953939555	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:moonrise-cleric:combat0.block:s1,f:xs:XP:moonrise-cleric:combat0.block:s1	-	-	-	3aa6ded33acb	-	cda21e80b26e	-	-	2026-11-25	xproof
 d8067f42-68c0-42da-a1d6-859953939555	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:moonrise-cleric:combat0.attack:s1,f:xs:XP:moonrise-cleric:combat0.attack:s1	-	-	-	3aa6ded33acb	-	cda21e80b26e	-	-	2026-11-25	xproof
 d8070ee7-dbd1-4d38-9715-ba14e103e379	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d8070ee7-dbd1-4d38-9715-ba14e103e379	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+d8070ee7-dbd1-4d38-9715-ba14e103e379	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d80d87f5-af9e-404b-88e3-7a4b419dc32c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d80d87f5-af9e-404b-88e3-7a4b419dc32c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d81285b7-a718-411a-8be3-ecc0cfe0bcb0	cast	cast-resolve	agreed	-	X	scen	1	0	Goblin Sharpshooter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d81285b7-a718-411a-8be3-ecc0cfe0bcb0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Goblin Sharpshooter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d81285b7-a718-411a-8be3-ecc0cfe0bcb0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Goblin Sharpshooter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d812c8e3-a475-4ad2-a93f-7208ad873676	cast	cast-resolve	agreed	-	FX	scen	2	0	Madame Hydra/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d812c8e3-a475-4ad2-a93f-7208ad873676	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Madame Hydra/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d812c8e3-a475-4ad2-a93f-7208ad873676	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:madame-hydra:f0t0:s1,f:xs:XP:madame-hydra:f0t0:s1	-	-	-	23c4009444b0	-	cc982efe3ea7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d812fc6d-b96d-4986-b171-9f3feee603dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hinterland-sanctifier:cast:s1,f:xs:XP:hinterland-sanctifier:cast:s1	-	-	-	23c4009444b0	-	6adfb6d0e37e	-	-	2026-11-25	xproof
 d812fc6d-b96d-4986-b171-9f3feee603dc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:valley-questcaller:cast:s1,f:xs:XP:valley-questcaller:cast:s1	-	-	-	23c4009444b0	-	6adfb6d0e37e	-	-	2026-11-25	xproof
 d816df03-c79b-4c63-913f-41b38afc173c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sky-scourer:cast:s1,f:xs:XP:sky-scourer:cast:s1	-	-	-	d864b561c9cb	-	37e1719c3f82	-	-	2026-11-24	xproof
@@ -38,8 +38,8 @@ d827575f-e364-4a20-887e-3091e5501a4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d827575f-e364-4a20-887e-3091e5501a4f	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d82783d9-9bfe-4fcd-a7d2-6e2477f99edc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d82783d9-9bfe-4fcd-a7d2-6e2477f99edc	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-d82929f2-57ad-45be-a834-984437046026	cast	cast-resolve	agreed	-	X	scen	1	0	Super Intelligence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d82929f2-57ad-45be-a834-984437046026	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Super Intelligence/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d82929f2-57ad-45be-a834-984437046026	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:super-intelligence:cast:s1,f:xs:XP:super-intelligence:cast:s1	-	-	-	23c4009444b0	-	c125cb81c1fa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d82929f2-57ad-45be-a834-984437046026	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:super-intelligence:cast:s1,f:xs:XP:super-intelligence:cast:s1	-	-	-	23c4009444b0	-	c125cb81c1fa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d82bde29-1576-4736-a755-df9c37765202	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d8366080-dd0c-40cf-84e9-f628dfe8f45c	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Grilka, Widowed Warrior"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d8366080-dd0c-40cf-84e9-f628dfe8f45c	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Grilka, Widowed Warrior"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -122,8 +122,8 @@ d895863e-a3c5-4e1f-bd28-e47a8717bbd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d895863e-a3c5-4e1f-bd28-e47a8717bbd0	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d895df97-e7e7-4f15-a79b-0ce8f1a252d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d895df97-e7e7-4f15-a79b-0ce8f1a252d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d89aa87a-d59a-41e2-b92f-15c9bc6d3d13	cast	cast-resolve	agreed	-	X	scen	1	0	Project Deathlok Soldier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d89aa87a-d59a-41e2-b92f-15c9bc6d3d13	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Project Deathlok Soldier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d89aa87a-d59a-41e2-b92f-15c9bc6d3d13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:project-deathlok-soldier:cast:s1,f:xs:XP:project-deathlok-soldier:cast:s1	-	-	-	23c4009444b0	-	809161397c6c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d89aa87a-d59a-41e2-b92f-15c9bc6d3d13	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:project-deathlok-soldier:f0a0:s1,f:xs:XP:project-deathlok-soldier:f0a0:s1	-	-	-	23c4009444b0	-	809161397c6c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d89bbfe7-e7ef-4f1c-a6b5-6d8ef4079daa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavalry-drillmaster:f0t0:s1,f:xs:XP:cavalry-drillmaster:f0t0:s1	-	-	-	d864b561c9cb	-	8b70709f3d59	-	-	2026-11-24	xproof
 d89bbfe7-e7ef-4f1c-a6b5-6d8ef4079daa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cavalry-drillmaster:f0t0:s1,f:xs:XP:cavalry-drillmaster:f0t0:s1	-	-	-	d864b561c9cb	-	8b70709f3d59	-	-	2026-11-24	xproof
 d89f34e4-8628-4faf-89e6-c9c16023ae8b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:nyota-uhura-communications:cast:s1	-	-	-	23b491658465	-	5c0860ef765b	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ d8a552ca-2c7b-410e-bd7e-1bb81465277a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d8a552ca-2c7b-410e-bd7e-1bb81465277a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d8ad23a1-0b43-48ea-9fbe-d89b29194509	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:accursed-marauder:cast:s1,f:xs:XP:accursed-marauder:cast:s1	-	-	-	ae86f6029288	-	afc2897456f2	-	-	2026-11-24	xproof
 d8ad23a1-0b43-48ea-9fbe-d89b29194509	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:accursed-marauder:cast:s1,f:xs:XP:accursed-marauder:cast:s1	-	-	-	ae86f6029288	-	afc2897456f2	-	-	2026-11-24	xproof
-d8ae8c38-501e-44ea-9faf-cf9d11ba6616	cast	cast-resolve	agreed	-	X	scen	1	0	The Scarlet Witch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d8ae8c38-501e-44ea-9faf-cf9d11ba6616	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-scarlet-witch:cast:s1,f:xs:XP:the-scarlet-witch:cast:s1	-	-	-	23c4009444b0	-	5f83c92a4171	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d8ae8c38-501e-44ea-9faf-cf9d11ba6616	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Scarlet Witch/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8afd7b0-7cd0-4caf-ac43-a0e24a93ca09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d8afd7b0-7cd0-4caf-ac43-a0e24a93ca09	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

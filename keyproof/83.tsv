@@ -93,15 +93,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8371dee1-5f4a-410a-8b7c-e4110cdbe9bd	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dauntless-survivor:cast:s1,f:xs:XP:dauntless-survivor:cast:s1	-	-	-	ae86f6029288	-	c0ef7bd5d11b	-	-	2026-11-24	xproof
 83734824-1cad-4649-87ae-a5c338771c4c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 837417d8-8260-486d-a3ed-3b5711eaf34a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83798eb8-b14f-4620-bce2-1a6804a24dc7	cast	cast-resolve	agreed	-	X	scen	1	0	Hawkeye's Bow/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83798eb8-b14f-4620-bce2-1a6804a24dc7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hawkeye's Bow/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83798eb8-b14f-4620-bce2-1a6804a24dc7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hawkeye's Bow/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+83798eb8-b14f-4620-bce2-1a6804a24dc7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hawkeye-s-bow:cast:s1,f:xs:XP:hawkeye-s-bow:cast:s1	-	-	-	23c4009444b0	-	f3bf1574c646	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+83798eb8-b14f-4620-bce2-1a6804a24dc7	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:hawkeye-s-bow:f0a0:s1,f:xs:XP:hawkeye-s-bow:f0a0:s1	-	-	-	23c4009444b0	-	f3bf1574c646	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+83798eb8-b14f-4620-bce2-1a6804a24dc7	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:hawkeye-s-bow:f0a0:s1,f:xs:XP:hawkeye-s-bow:f0a0:s1	-	-	-	23c4009444b0	-	f3bf1574c646	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83798eb8-b14f-4620-bce2-1a6804a24dc7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hawkeye's Bow/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 837c5d0e-0a33-4f9d-ae25-68a687bdf640	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 837c5d0e-0a33-4f9d-ae25-68a687bdf640	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:chrome-host-seedshark:f0t0:s1,f:xs:XP:chrome-host-seedshark:f0t0:s1	-	-	-	23c4009444b0	-	9c8b58130886	-	-	2026-11-25	xproof
 837f72a9-9522-46e9-a48c-c6ff6d0bbe67	cast	cast	diverged	-	-	start	0	2	-	0a520ded0ebd	-	-	d864b561c9cb	-	c9fe5f5589d3	-	-	2026-11-24	xproof
 8381b04a-666b-4e33-b277-6db39fdfe905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8381b04a-666b-4e33-b277-6db39fdfe905	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+8381b04a-666b-4e33-b277-6db39fdfe905	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83837ceb-7aae-4257-8545-a6cf34656e3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:votary-of-the-conclave:cast:s1,f:xs:XP:votary-of-the-conclave:cast:s1	-	-	-	77494c1ce129	-	2c2c748b6fb4	-	-	2026-11-24	xproof
 83837ceb-7aae-4257-8545-a6cf34656e3b	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:votary-of-the-conclave:f0a0:s1,f:xs:XP:votary-of-the-conclave:f0a0:s1	-	-	-	23c4009444b0	-	2c2c748b6fb4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83856c3a-652e-4afc-9dc0-0072324ac36f	cast	cast-resolve	agreed	-	FX	scen	2	0	Sanctuary Wall/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

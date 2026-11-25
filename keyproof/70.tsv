@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70564c3a-858f-498e-8b92-acb3ca54ae7e	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Aang, the Last Airbender/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70570170-be76-4c56-9151-c4b6e253f462	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vigilance:cast:s1,f:xs:XP:vigilance:cast:s1	-	-	-	64a08ba7d913	-	82b29f85fcb9	-	-	2026-11-24	xproof
 7058e7c3-b704-47f6-85f8-ee584f76a1fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7058e7c3-b704-47f6-85f8-ee584f76a1fe	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7058e7c3-b704-47f6-85f8-ee584f76a1fe	f0/t0	ChangesZone/Evolve	agreed	-	FX	start	2	0	x:xs:XP:clinging-anemones:f0t0:s1,f:xs:XP:clinging-anemones:f0t0:s1	-	-	-	23c4009444b0	-	42278c0a7fec	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 705a1985-ed39-4a4b-812e-a677170b596e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 705a1985-ed39-4a4b-812e-a677170b596e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 705b4da3-d463-4808-b79c-dc0c1830945a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7068637c-b025-41a5-be31-df1850f33b68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7069d241-4e66-40bf-afd1-551a4a5457f0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hidden Lair/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7069d241-4e66-40bf-afd1-551a4a5457f0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hidden Lair/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7069d241-4e66-40bf-afd1-551a4a5457f0	land	play-land	agreed	-	X	scen	1	0	Hidden Lair/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7069d241-4e66-40bf-afd1-551a4a5457f0	land	land	agreed	-	FX	start	2	0	x:xs:XP:hidden-lair:land:s1,f:xs:XP:hidden-lair:land:s1	-	-	-	23c4009444b0	-	1c6c13acb4e7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 706ae742-1807-44b7-a4fa-f2e26f61519a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 706ae742-1807-44b7-a4fa-f2e26f61519a	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 706f7d56-f4da-48ba-ac94-fc09580beec7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:priest-of-iroas:cast:s1,f:xs:XP:priest-of-iroas:cast:s1	-	-	-	d864b561c9cb	-	dc50b017ae62	-	-	2026-11-24	xproof

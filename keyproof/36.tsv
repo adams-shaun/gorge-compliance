@@ -94,11 +94,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36875030-8094-4e2c-860d-c0820825a24e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arcbound-whelp:cast:s1,f:xs:XP:arcbound-whelp:cast:s1	-	-	-	d864b561c9cb	-	188cc8061944	-	-	2026-11-24	xproof
 36875030-8094-4e2c-860d-c0820825a24e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:arcbound-whelp:f0a0:s1,f:xs:XP:arcbound-whelp:f0a0:s1	-	-	-	d864b561c9cb	-	188cc8061944	-	-	2026-11-24	xproof
 36875030-8094-4e2c-860d-c0820825a24e	f0/t0	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-whelp:f0t0:s1,f:xs:XP:arcbound-whelp:f0t0:s1	-	-	-	d864b561c9cb	-	188cc8061944	-	-	2026-11-24	xproof
-3688ad0d-653b-4d5d-a57e-444db679d83e	cast	cast-resolve	agreed	-	X	scen	1	0	The Serpent Society/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3688ad0d-653b-4d5d-a57e-444db679d83e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Serpent Society/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3688ad0d-653b-4d5d-a57e-444db679d83e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Serpent Society/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3688ad0d-653b-4d5d-a57e-444db679d83e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-serpent-society:cast:s1,f:xs:XP:the-serpent-society:cast:s1	-	-	-	23c4009444b0	-	1bad5ae092f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3688ad0d-653b-4d5d-a57e-444db679d83e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:the-serpent-society:combat0.attack:s1,f:xs:XP:the-serpent-society:combat0.attack:s1	-	-	-	23c4009444b0	-	1bad5ae092f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3688ad0d-653b-4d5d-a57e-444db679d83e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-serpent-society:combat0.block:s1,f:xs:XP:the-serpent-society:combat0.block:s1	-	-	-	23c4009444b0	-	1bad5ae092f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3688ad0d-653b-4d5d-a57e-444db679d83e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Serpent Society/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3688ad0d-653b-4d5d-a57e-444db679d83e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Serpent Society/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3688ad0d-653b-4d5d-a57e-444db679d83e	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:the-serpent-society:f0t1:s1,f:xs:XP:the-serpent-society:f0t1:s1	-	-	-	23c4009444b0	-	1bad5ae092f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 36896550-151d-472c-bfc1-1d9bbf7cc04d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36896550-151d-472c-bfc1-1d9bbf7cc04d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3689ef94-2573-4424-b52e-379656340345	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hightide-hermit:f0t0:s1,f:xs:XP:hightide-hermit:f0t0:s1	-	-	-	d864b561c9cb	-	dd98ee653f87	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36a247d6-0d40-4f61-935c-60f42aa98562	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36a247d6-0d40-4f61-935c-60f42aa98562	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:halcyon-glaze:f0t0:s1,f:xs:XP:halcyon-glaze:f0t0:s1	-	-	-	23c4009444b0	-	0cece38ca467	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 36a3c910-95b8-45a2-9f84-5681336d868c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-36a3c910-95b8-45a2-9f84-5681336d868c	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+36a3c910-95b8-45a2-9f84-5681336d868c	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 36a3c910-95b8-45a2-9f84-5681336d868c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:frontline-medic:f0t0:s1,f:xs:XP:frontline-medic:f0t0:s1	-	-	-	3aa6ded33acb	-	7f577773f48e	-	-	2026-11-25	xproof
 36a600fe-91b4-46a0-97ee-0cea2b63ec8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36a8ceb1-148b-41e0-a7bf-ceb879bf08e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36b5022d-fa62-46ea-97ab-23c0f60f62a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36b58705-c5a5-4547-8d8b-a7c35e1f69ae	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gathering Place/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 36b58705-c5a5-4547-8d8b-a7c35e1f69ae	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gathering Place/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-36b58705-c5a5-4547-8d8b-a7c35e1f69ae	land	play-land	agreed	-	X	scen	1	0	Gathering Place/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+36b58705-c5a5-4547-8d8b-a7c35e1f69ae	land	land	agreed	-	FX	start	2	0	x:xs:XP:gathering-place:land:s1,f:xs:XP:gathering-place:land:s1	-	-	-	23c4009444b0	-	e974be6ef0e3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 36b5c793-30f6-4f21-8bf6-c18d1c46d732	cast	cast-resolve	agreed	-	FX	scen	2	0	Xande, Dark Mage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 36b5c793-30f6-4f21-8bf6-c18d1c46d732	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:xande-dark-mage:combat0.attack:s1,f:xs:XP:xande-dark-mage:combat0.attack:s1	-	-	-	23c4009444b0	-	98be24f430f8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 36b5c793-30f6-4f21-8bf6-c18d1c46d732	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:xande-dark-mage:combat0.block:s1,f:xs:XP:xande-dark-mage:combat0.block:s1	-	-	-	23c4009444b0	-	98be24f430f8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

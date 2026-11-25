@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 925b3d1b-98cd-44f5-8aa0-e2b17df2808a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:take-inventory:cast:s1,f:xs:XP:take-inventory:cast:s1	-	-	-	d864b561c9cb	-	e3f5d1c629ca	-	-	2026-11-24	xproof
 925cacdc-6d09-4fbd-9258-9f0539da180c	cast	cast-resolve	agreed	-	X	scen	1	0	Thrór's Map/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 925cacdc-6d09-4fbd-9258-9f0539da180c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thrór's Map/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-925ce68e-9323-4985-8fef-0d3f36e0d74c	cast	cast-resolve	agreed	-	X	scen	1	0	Bombur, Gentle Dreamer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+925ce68e-9323-4985-8fef-0d3f36e0d74c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bombur-gentle-dreamer:cast:s1,f:xs:XP:bombur-gentle-dreamer:cast:s1	-	-	-	23c4009444b0	-	fe7d417bd66e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 925feb7e-7876-430b-b95a-92b236a2e409	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:change-of-fortune:cast:s1,f:xs:XP:change-of-fortune:cast:s1	-	-	-	d864b561c9cb	-	84fbd38b124b	-	-	2026-11-24	xproof
 9263287d-f782-4318-9ab8-e2e5f8107f5e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:resonating-lute:cast:s1,f:xs:XP:resonating-lute:cast:s1	-	-	-	23c4009444b0	-	bf8d02e86d84	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9263287d-f782-4318-9ab8-e2e5f8107f5e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Resonating Lute/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92c43ee1-0f7d-4993-8d3a-689cc87d7480	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92c43ee1-0f7d-4993-8d3a-689cc87d7480	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 92c470c9-1373-4f3a-9805-5e9613874793	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prognostic-sphinx:cast:s1,f:xs:XP:prognostic-sphinx:cast:s1	-	-	-	d864b561c9cb	-	5d056afc0a9f	-	-	2026-11-24	xproof
-92c470c9-1373-4f3a-9805-5e9613874793	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+92c470c9-1373-4f3a-9805-5e9613874793	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:prognostic-sphinx:f0a0:s1,f:xs:XP:prognostic-sphinx:f0a0:s1	-	-	-	23c4009444b0	-	5d056afc0a9f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92c470c9-1373-4f3a-9805-5e9613874793	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:prognostic-sphinx:f0t0:s1,f:xs:XP:prognostic-sphinx:f0t0:s1	-	-	-	d864b561c9cb	-	5d056afc0a9f	-	-	2026-11-24	xproof
 92c824da-2351-43bd-9fa0-d09709ad8205	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:basri-s-acolyte:cast:s1,f:xs:XP:basri-s-acolyte:cast:s1	-	-	-	ae86f6029288	-	258110308247	-	-	2026-11-24	xproof
 92c824da-2351-43bd-9fa0-d09709ad8205	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:basri-s-acolyte:cast:s1,f:xs:XP:basri-s-acolyte:cast:s1	-	-	-	ae86f6029288	-	258110308247	-	-	2026-11-24	xproof
@@ -215,11 +215,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92dfeeb2-1117-422b-87ea-08a589f1134b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elite-guardmage:f0t0:s1,f:xs:XP:elite-guardmage:f0t0:s1	-	-	-	d864b561c9cb	-	3c6ce18e0655	-	-	2026-11-24	xproof
 92dfeeb2-1117-422b-87ea-08a589f1134b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elite-guardmage:f0t0:s1,f:xs:XP:elite-guardmage:f0t0:s1	-	-	-	d864b561c9cb	-	3c6ce18e0655	-	-	2026-11-24	xproof
 92e222c2-28e6-4d43-8b48-480ebcd88495	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:falcon-winged-wonder:f0t0:s2,f:xs:XP:falcon-winged-wonder:f0t0:s2	-	-	-	5437c1394672	-	66b3bdc63637	-	-	2026-11-24	xproof
-92e222c2-28e6-4d43-8b48-480ebcd88495	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Falcon, Winged Wonder/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-92e222c2-28e6-4d43-8b48-480ebcd88495	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Falcon, Winged Wonder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+92e222c2-28e6-4d43-8b48-480ebcd88495	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:falcon-winged-wonder:combat0.attack:s1,f:xs:XP:falcon-winged-wonder:combat0.attack:s1	-	-	-	23c4009444b0	-	66b3bdc63637	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+92e222c2-28e6-4d43-8b48-480ebcd88495	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:falcon-winged-wonder:combat0.block:s1,f:xs:XP:falcon-winged-wonder:combat0.block:s1	-	-	-	23c4009444b0	-	66b3bdc63637	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92e222c2-28e6-4d43-8b48-480ebcd88495	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:falcon-winged-wonder:f0t0:s2,f:xs:XP:falcon-winged-wonder:f0t0:s2	-	-	-	5437c1394672	-	66b3bdc63637	-	-	2026-11-24	xproof
 92e2f982-f8b9-4c3b-ab50-14c025370e5c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92e2f982-f8b9-4c3b-ab50-14c025370e5c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+92e2f982-f8b9-4c3b-ab50-14c025370e5c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92e45a8f-c582-45e1-9b7f-def219023ebf	cast	cast-resolve	agreed	-	FX	scen	2	0	West Wind Avatar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92e45a8f-c582-45e1-9b7f-def219023ebf	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:west-wind-avatar:combat0.attack:s1,f:xs:XP:west-wind-avatar:combat0.attack:s1	-	-	-	23c4009444b0	-	2b538b5ad22d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92e45a8f-c582-45e1-9b7f-def219023ebf	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:west-wind-avatar:combat0.block:s1,f:xs:XP:west-wind-avatar:combat0.block:s1	-	-	-	23c4009444b0	-	2b538b5ad22d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
