@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00d1596a-c3e2-4109-86da-388934a0c652	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:coeurl:f0a0:s1,f:xs:XP:coeurl:f0a0:s1	-	-	-	23c4009444b0	-	b1636bcf89b9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 00d3fcdf-6959-4437-9bad-93a8625510a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00d8efa6-a2d9-4249-8da7-b45173675329	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00d8efa6-a2d9-4249-8da7-b45173675329	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+00d8efa6-a2d9-4249-8da7-b45173675329	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 00de57d2-7cb6-4337-9bc6-f6711e4dfabf	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:game-trail:f0a0:s1,f:xs:XP:game-trail:f0a0:s1	-	-	-	d864b561c9cb	-	c28d8efda258	-	-	2026-11-24	xproof
 00de57d2-7cb6-4337-9bc6-f6711e4dfabf	land	land	agreed	-	F	start	2	0	f:xs:XP:game-trail:land:s1	-	-	-	d864b561c9cb	-	c28d8efda258	-	-	2026-11-24	xproof
 00e0b103-892c-49b3-836d-867fff197bbd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:puppeteer-clique:f0t0:s1,f:xs:XP:puppeteer-clique:f0t0:s1	-	-	-	8a1b1a193ec0	-	0fe9d19e11c0	-	-	2026-11-24	xproof
@@ -217,7 +217,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00fc773a-72aa-4b58-a17c-8ac0f17c4c85	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00fdcc19-88ed-46c3-91f0-095806228105	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00fdcc19-88ed-46c3-91f0-095806228105	f0/t0	Discarded	agreed	-	FX	start	2	0	x:xs:XP:waste-not:f0t0:s1,f:xs:XP:waste-not:f0t0:s1	-	-	-	4b8018a80bf0	-	9557ead27b71	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-00fdcc19-88ed-46c3-91f0-095806228105	f0/t1	Discarded	agreed	-	FX	start	2	0	x:xs:XP:waste-not:f0t1:s1,f:xs:XP:waste-not:f0t1:s1	-	-	-	4b8018a80bf0	-	9557ead27b71	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+00fdcc19-88ed-46c3-91f0-095806228105	f0/t1	Discarded	agreed	-	FX	start	2	0	x:xs:XP:waste-not:f0t1:s1,f:xs:XP:waste-not:f0t1:s1	-	-	-	44e3ec152eea	-	9557ead27b71	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 00fdcc19-88ed-46c3-91f0-095806228105	f0/t2	Discarded	agreed	-	FX	start	2	0	x:xs:XP:waste-not:f0t2:s1,f:xs:XP:waste-not:f0t2:s1	-	-	-	4b8018a80bf0	-	9557ead27b71	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 00ff5598-2f7f-4e28-8b63-5ae1ce18f0c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unscrupulous-contractor:cast:s2,f:xs:XP:unscrupulous-contractor:cast:s2	-	-	-	5437c1394672	-	47b40185b834	-	-	2026-11-24	xproof
 00ff5598-2f7f-4e28-8b63-5ae1ce18f0c5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:unscrupulous-contractor:cast:s2,f:xs:XP:unscrupulous-contractor:cast:s2	-	-	-	5437c1394672	-	47b40185b834	-	-	2026-11-24	xproof
