@@ -783,7 +783,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # checkpoint is that pending decision). Forge hands the seat priority once its callback returns without a declaration and used to list the seat's mana
 # abilities. scripts/forge-oracle-test-declare-attackers-offered.sh (make forge-driver-tests) fails on 53059b9bbf2 and passes here. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-offered-declaration.
-FORGE_ORACLE_REF ?= 99e8228cbae8ea0763a9710408ee543e22ec860d
+# a4380dd47f = 99e8228cba, narrowed: only a pass that ENTERS the declaration step offers nothing (StepMachine passes enteredStep to
+# SnapshotWriter.offered); an explicit empty attack/block is answered, so the priority after it still offers the holder's options.
+# The test script gains empty-attack/empty-block rows (red on 99e8228cba). Driver-only, die-roll code unchanged.
+FORGE_ORACLE_REF ?= a4380dd47f73b7c665ecfbaf7f3226de7c43bfea
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

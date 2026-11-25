@@ -23,6 +23,10 @@
 # legal blocker, gorge records the forced empty declaration and step 4 is a live
 # priority that still offers the holder's options.
 #
+# An explicit empty declaration (`block` with no pairs, `attack` with no
+# attackers) is answered: its own checkpoint is a live priority and still offers
+# the holder's options, though the game state is the same as the pending one.
+#
 # Needs the out-of-tree build (make forge-oracle-setup), like the other
 # forge-oracle-test-*.sh that replay a game. Usage:
 # forge-oracle-test-declare-attackers-offered.sh [OUTDIR]
@@ -57,6 +61,16 @@ rows = {
     "blocker": row("t:offered-declare-blockers", {"battlefield": ["Memnite", "Forest"]},
                    {"battlefield": ["Memnite"]}, to_blockers),
     "no-blocker": row("t:offered-declare-blockers-none", {"battlefield": ["Memnite", "Forest"]}, {}, to_blockers),
+    "empty-block": row("t:offered-declare-blockers-empty", {"battlefield": ["Memnite", "Forest"]},
+                       {"battlefield": ["Memnite"]},
+                       [{"op": "attack", "seat": 0, "attackers": ["p0:Memnite"], "defender": "p1"},
+                        {"op": "pass_to", "decision": "blockers"},
+                        {"op": "block", "seat": 1, "blocks": []},
+                        {"op": "pass_to", "step": "main2"}]),
+    "empty-attack": row("t:offered-declare-attackers-empty", {"battlefield": ["Memnite", "Forest"]}, {},
+                        [{"op": "pass_to", "decision": "attackers"},
+                         {"op": "attack", "seat": 0, "attackers": [], "defender": "p1"},
+                         {"op": "pass_to", "step": "main2"}]),
     "attacker": row("t:offered-declare-attackers", {"battlefield": ["Memnite", "Forest"]}, {}, passes),
     "no-attacker": row("t:offered-declare-attackers-none", {"battlefield": ["Forest"]}, {}, passes),
 }
@@ -64,7 +78,7 @@ for name, r in rows.items():
     open("%s/request-%s.jsonl" % (sys.argv[1], name), "w").write(json.dumps(r, separators=(",", ":")) + "\n")
 PY
 
-for k in attacker no-attacker blocker no-blocker; do
+for k in attacker no-attacker blocker no-blocker empty-block empty-attack; do
   "$here/scripts/forge-oracle-run.sh" "$out/request-$k.jsonl" "$out/rows-$k.jsonl" \
     || fail "forge-oracle-run.sh failed on $k (is the Forge build at FORGE_ORACLE_REF present? make forge-oracle-setup)"
 done
@@ -123,5 +137,14 @@ if offered(s4) != []:
 nb = load("no-blocker").get("step 4 (pass)")
 if nb is None or not offered(nb):
     fail("with no legal blocker step 4 is a live priority and offers the holder's options, not %r" % (nb,))
-print("PASS declare attackers: a pending declaration offers nothing; no legal attacker keeps the holder's options; likewise for blockers")
+# An explicit EMPTY declaration is answered: the priority that follows it is a
+# live one (CR 117.3a) and still lists the holder's mana ability, though the
+# game state (step, attackers/blockers, a legal option) matches the pending one.
+eb = load("empty-block").get("step 2 (block)")
+if eb is None or eb.get("step") != "declare-blockers" or offered(eb) != ["p0:Forest|activate"]:
+    fail("after an explicit empty block declaration the live priority lists p0's Forest: %r" % (eb,))
+ea = load("empty-attack").get("step 1 (attack)")
+if ea is None or ea.get("step") != "declare-attackers" or offered(ea) != ["p0:Forest|activate"]:
+    fail("after an explicit empty attack declaration the live priority lists p0's Forest: %r" % (ea,))
+print("PASS declare attackers: a pending declaration offers nothing; no legal attacker keeps the holder's options; likewise for blockers; an explicit empty declaration is answered and offers the holder's options")
 PY

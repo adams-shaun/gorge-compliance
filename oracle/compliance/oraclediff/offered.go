@@ -48,8 +48,10 @@ var reminderText = regexp.MustCompile(`\([^)]*\)|</?[a-z]+>`)
 // anyColorMana is the lead of every spelling of "add mana of any color": gorge's
 // "Add any color", XMage's and Forge's "Add X mana of any one color, where X is ...",
 // "Add one mana of any color". The colour class is the identity; the amount's
-// spelling and the trailing "where X is ..." clause are not.
-var anyColorMana = regexp.MustCompile(`^add(?:(?:x|one|two|three|\d+)?manaof)?any(?:one)?color`)
+// spelling and the trailing "where X is ..." clause are not. A restricted lead ("...of any
+// color that a land an opponent controls could produce") is a different ability: the
+// colour class must end the clause or be followed by "," or ".".
+var anyColorMana = regexp.MustCompile(`^add(?:(?:x|one|two|three|\d+)?manaof)?any(?:one)?color(?:[.,]|$)`)
 
 func offeredLabel(source, label string) string {
 	// A parenthesized reminder is not ability identity, and its text may hold
