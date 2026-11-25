@@ -714,6 +714,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # e76652fae3 = c5ab80906 (movectr + cantprevent; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
 # a2201414482 = oracle/fpin-1125-room-alt: 22d31c3e9d0 (room_alt + attach_optional + K'rrik; above) joined with e76652fae3 (movectr + cantprevent + K'rrik; above); driver-only.
 # 793a015fcf = oracle/fpin-1125-join3: a2201414482 (above) joined with 1947f2b322 (ScenarioReplay --serve warm worker + FORGE_ORACLE_AI_TIMEOUT_S; additive, unset keeps the one-shot run); driver-only, die-roll code unchanged.
+# 846c4191e6 = 793a015fcf (above) + StepMachine.keepsForgeOrderWithoutPin keeps Forge's order for an unpinned multi-name
+# "order to Hand": the snapshot sorts a hand's names, so gorge records no order for Wrenn and Seven's -8 returning the
+# planeswalker and seven Forests, and the ask strict-missed with an empty leftover. OrderCardsTest.unpinnedHandOrderKeepsForgeOrder,
+# run by scripts/forge-oracle-test-graveyard-transit-order.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
+# unchanged. Fork branch fix/xp-forge-driver-hand-order.
 # 15a7c960ab2 = 793a015fcf plus the setup Room convention (xproof cluster xpt-e4b207b7, Greenhouse // Rickety Gazebo): CR 709.5d gives a Room that
 # enters without being cast neither unlocked designation, so it has no name (CR 709.5). SetupBuilder.unlockNamedDoor used to unlock the door the
 # setup name named, so Forge's setup read "Greenhouse" where gorge's fieldName and the XMage driver read "". Setup now places the Room locked and
@@ -725,13 +730,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # scripts/forge-oracle-test-setup-offered.sh (make forge-driver-tests) replays the Muldrotha find (a graveyard Plains offered as a play) and runs
 # RefTableTest.refOfNamesAnObjectAsGorgeSnapshotsIt; it fails on 793a015fcf. Driver-only; cardsfolder/tokenscripts unchanged.
 # Fork branch fix/xp-forge-driver-setup-offered.
+# 098e9c802e = oracle/fpin-1125-join5: 846c4191e6 (order to Hand; above) joined with d6e26fd04306 (offered; above); driver-only, die-roll code unchanged.
 # 9cc07f0d340 = oracle/fpin-1125-join4: 15a7c960ab2 (setup Room locked; above) joined with d6e26fd04306 (offered; above); driver-only, die-roll code unchanged.
+# 032ce65c73b = oracle/fpin-1125-join-hand-offered-room: 098e9c802e (order to Hand; above) joined with 9cc07f0d340 (setup Room locked; above); both already carry d6e26fd04306 (offered); driver-only, die-roll code unchanged.
 # a862cd8abc = 793a015fcf plus the empty hidden-origin search fix (ScriptedController only, fork branch fix/xp-forge-driver-empty-hidden-search):
 # Dina's Guidance finding no creature still makes Forge ask ChangeZoneToAltDestination; keep the primary destination with a note, no miss (CR 609.3),
 # and consume the ordinary changezone_dest_alt answer when a card was found. Driver-only; die-roll code unchanged.
 # 0218db82d91 = oracle/fpin-1125-join6: 9cc07f0d340 (setup Room locked + offered; above) joined with a862cd8abc (empty hidden-origin search; above);
 # driver-only, die-roll code unchanged.
-FORGE_ORACLE_REF ?= 0218db82d91a96fc3a324da828572e63b6fd5191
+# 1b593040f66 = oracle/fpin-1125-join7: 032ce65c73b (order to Hand + setup Room locked + offered; above) joined with a862cd8abc (empty hidden-origin search; above);
+# driver-only, die-roll code unchanged.
+FORGE_ORACLE_REF ?= 1b593040f668ffd03c81ddb896e6a8f9b918487e
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
