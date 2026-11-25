@@ -9,12 +9,12 @@ f40a1a41-d340-4256-8f97-77499cd511a8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP
 f40a1a41-d340-4256-8f97-77499cd511a8	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:maccready-lamplight-mayor:f0t1:s1,f:xs:XP:maccready-lamplight-mayor:f0t1:s1	-	-	-	23c4009444b0	-	26dda4739ec3	-	-	2026-11-25	xproof
 f40cb1af-3db6-4e90-830f-86ff4b60e239	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hazardroot-herbalist:cast:s1,f:xs:XP:hazardroot-herbalist:cast:s1	-	-	-	3aa6ded33acb	-	400bcf5bdf17	-	-	2026-11-25	xproof
 f40cb1af-3db6-4e90-830f-86ff4b60e239	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:hazardroot-herbalist:f0t0:s1,f:xs:XP:hazardroot-herbalist:f0t0:s1	-	-	-	3aa6ded33acb	-	400bcf5bdf17	-	-	2026-11-25	xproof
-f40e6bbf-1fed-4ec5-869d-18c2dd396d14	cast	cast-resolve	agreed	-	X	scen	1	0	Vincent Valentine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f40e6bbf-1fed-4ec5-869d-18c2dd396d14	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Vincent Valentine/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f40e6bbf-1fed-4ec5-869d-18c2dd396d14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vincent-valentine-galian-beast:cast:s1,f:xs:XP:vincent-valentine-galian-beast:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+f40e6bbf-1fed-4ec5-869d-18c2dd396d14	combat#1.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:vincent-valentine-galian-beast:combat1.attack:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 f40e6bbf-1fed-4ec5-869d-18c2dd396d14	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Vincent Valentine/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f40e6bbf-1fed-4ec5-869d-18c2dd396d14	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vincent Valentine/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f40e6bbf-1fed-4ec5-869d-18c2dd396d14	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Vincent Valentine/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f40e6bbf-1fed-4ec5-869d-18c2dd396d14	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Vincent Valentine/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f40e6bbf-1fed-4ec5-869d-18c2dd396d14	f1/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:vincent-valentine-galian-beast:f1t0:s1,f:xs:XP:vincent-valentine-galian-beast:combat1.attack:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 f40f374b-acaf-459d-9ccd-b0b22d1a3f28	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Great Arashin City/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f40f374b-acaf-459d-9ccd-b0b22d1a3f28	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Great Arashin City/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f40f374b-acaf-459d-9ccd-b0b22d1a3f28	land	play-land	agreed	-	FX	scen	2	0	Great Arashin City/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -41,7 +41,7 @@ f427a1ed-d7ca-40e5-a759-a1096bad166d	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs
 f429ca15-c578-4c1d-a604-fd5509c92dba	cast	cast-resolve	agreed	-	FX	scen	2	0	Lodestone Needle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f429ca15-c578-4c1d-a604-fd5509c92dba	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Lodestone Needle/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f429ca15-c578-4c1d-a604-fd5509c92dba	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f429ca15-c578-4c1d-a604-fd5509c92dba	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Lodestone Needle/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f429ca15-c578-4c1d-a604-fd5509c92dba	f1/a0	Explore	agreed	-	FX	start	2	0	x:xs:XP:lodestone-needle-guidestone-compass:f1a0:s1,f:xs:XP:lodestone-needle-guidestone-compass:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 f42b6510-7322-4733-85ea-7ae6bd6ca8fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f42b6510-7322-4733-85ea-7ae6bd6ca8fc	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:quirion-dryad:f0t0:s1,f:xs:XP:quirion-dryad:f0t0:s1	-	-	-	23c4009444b0	-	d199ddb7722c	-	-	2026-11-25	xproof
 f42d4556-5be2-4861-9f88-1b630b43eff2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ f460ff80-8175-43f7-9810-540cf3817085	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:co
 f4629329-a79b-4460-a1bc-9ae0f59adf5a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:joshua-phoenix-s-dominant-phoenix-warden-of-fire:f0t0:s1,f:xs:XP:joshua-phoenix-s-dominant-phoenix-warden-of-fire:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 f4629329-a79b-4460-a1bc-9ae0f59adf5a	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Joshua, Phoenix's Dominant/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f4629329-a79b-4460-a1bc-9ae0f59adf5a	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Joshua, Phoenix's Dominant/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f4629329-a79b-4460-a1bc-9ae0f59adf5a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Joshua, Phoenix's Dominant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f4629329-a79b-4460-a1bc-9ae0f59adf5a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:joshua-phoenix-s-dominant-phoenix-warden-of-fire:f0a0:s1,f:xs:XP:joshua-phoenix-s-dominant-phoenix-warden-of-fire:f0a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 f4629329-a79b-4460-a1bc-9ae0f59adf5a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:joshua-phoenix-s-dominant-phoenix-warden-of-fire:f0t0:s1,f:xs:XP:joshua-phoenix-s-dominant-phoenix-warden-of-fire:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 f46416cc-0c3d-4d90-bdcb-910c5d4a2014	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liu-bei-lord-of-shu:cast:s1,f:xs:XP:liu-bei-lord-of-shu:cast:s1	-	-	-	5f2128bf97e4	-	7860e92e1b6f	-	-	2026-11-24	xproof
 f4669822-716b-45c7-a7f2-040062509fe9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

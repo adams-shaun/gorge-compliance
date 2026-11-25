@@ -136,9 +136,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 028f2c1d-9c1d-4ac3-adf4-644b5166502b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 028f2c1d-9c1d-4ac3-adf4-644b5166502b	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:glademuse:f0t0:s1,f:xs:XP:glademuse:f0t0:s1	-	-	-	b8f573385218	-	a2ffcb0c9f55	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
 028fa430-722d-45aa-b415-3f84076091a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0296d57e-e5b9-456f-bb21-eb584adefb4c	cast	cast-resolve	agreed	-	X	scen	1	0	Gollum, Silent Slinker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0296d57e-e5b9-456f-bb21-eb584adefb4c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gollum, Silent Slinker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0296d57e-e5b9-456f-bb21-eb584adefb4c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gollum, Silent Slinker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0296d57e-e5b9-456f-bb21-eb584adefb4c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:gollum-silent-slinker-meager-meal:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+0296d57e-e5b9-456f-bb21-eb584adefb4c	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gollum-silent-slinker-meager-meal:combat0.attack:s1,f:xs:XP:gollum-silent-slinker-meager-meal:combat0.attack:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+0296d57e-e5b9-456f-bb21-eb584adefb4c	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gollum-silent-slinker-meager-meal:combat0.block:s1,f:xs:XP:gollum-silent-slinker-meager-meal:combat0.block:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 029d08cb-da4d-4f4e-b667-62712af63260	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chain-of-plasma:cast:s1,f:xs:XP:chain-of-plasma:cast:s1	-	-	-	fc71ca68c5ac	-	7a9bb25a2bbb	-	-	2026-11-24	xproof
 02a506bd-203f-421c-b72e-e2ba77e922aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02a506bd-203f-421c-b72e-e2ba77e922aa	f0/t0	Discarded	agreed	-	FX	start	2	0	x:xs:XP:ruthless-sniper:f0t0:s1,f:xs:XP:ruthless-sniper:f0t0:s1	-	-	-	4b8018a80bf0	-	491c7f44c847	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02c08d0b-0d76-4533-a7e9-d40c7c4b3450	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02c08d0b-0d76-4533-a7e9-d40c7c4b3450	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:shoreline-salvager:f0t0:s1,f:xs:XP:shoreline-salvager:f0t0:s1	-	-	-	23c4009444b0	-	2b37dcc5de8a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 02c60b8b-f665-4279-a00f-ae03991df4a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02c60b8b-f665-4279-a00f-ae03991df4a6	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+02c60b8b-f665-4279-a00f-ae03991df4a6	f1/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:azusa-s-many-journeys-likeness-of-the-seeker:f1t0:s1,f:xs:XP:azusa-s-many-journeys-likeness-of-the-seeker:f1t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 02d25219-888d-4032-9e9e-8c6f879a9084	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghostly-touch:cast:s1,f:xs:XP:ghostly-touch:cast:s1	-	-	-	3aa6ded33acb	-	c66b62fb6d5d	-	-	2026-11-25	xproof
 02d4c3a8-c733-45c1-bca5-51eed47c9230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02d4c3a8-c733-45c1-bca5-51eed47c9230	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:blind-creeper:f0t0:s1,f:xs:XP:blind-creeper:f0t0:s1	-	-	-	6f84be0f34c0	-	10facc71b045	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

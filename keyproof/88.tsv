@@ -39,9 +39,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88350861-244c-4634-9bc9-e9a79401bd02	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:krosan-warchief:f0a0:s1,f:xs:XP:krosan-warchief:f0a0:s1	-	-	-	65d07beecc37	-	46d159b18230	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 883a2b57-1075-4479-920b-3f7d5da1f444	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 883a2b57-1075-4479-920b-3f7d5da1f444	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-883a4180-9ede-4249-a4b8-3a29c998fb63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tithing-blade-consuming-sepulcher:f0t0:s1,f:xs:XP:tithing-blade-consuming-sepulcher:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+883a4180-9ede-4249-a4b8-3a29c998fb63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tithing-blade-consuming-sepulcher:cast:s1,f:xs:XP:tithing-blade-consuming-sepulcher:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tithing Blade/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-883a4180-9ede-4249-a4b8-3a29c998fb63	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tithing-blade-consuming-sepulcher:f0t0:s1,f:xs:XP:tithing-blade-consuming-sepulcher:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+883a4180-9ede-4249-a4b8-3a29c998fb63	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tithing-blade-consuming-sepulcher:cast:s1,f:xs:XP:tithing-blade-consuming-sepulcher:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Tithing Blade/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 883ad210-917b-40e6-8682-31d6eb3ed12a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 883ad210-917b-40e6-8682-31d6eb3ed12a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:burakos-party-leader:f0t0:s1,f:xs:XP:burakos-party-leader:f0t0:s1	-	-	-	8c0bd19283bb	-	cf87ddc3fe29	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88e43e62-8bce-41b3-ac2d-47043fcc7077	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lamentation:f0t0:s1,f:xs:XP:lamentation:f0t0:s1	-	-	-	8c0bd19283bb	-	b2eca72a3ac7	-	-	2026-11-24	xproof
 88e5300d-8339-41cb-85bf-325909116b61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88e5b905-fe52-4fd6-8cdf-b7ede5166ebc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:darkheart-sliver:cast:s1	-	-	-	8c0bd19283bb	-	5e17a1e7b8c1	-	-	2026-11-24	xproof
-88e9006a-cfdf-40f3-80d5-23465f3dceca	cast	cast-resolve	agreed	-	X	scen	1	0	Fuss/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+88e9006a-cfdf-40f3-80d5-23465f3dceca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fuss-bother:cast:s1,f:xs:XP:fuss-bother:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 88ed66fc-7068-44a7-b00f-3be22fb500cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88eeb519-5782-4732-bd34-81d1ee6dbc8f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ka-zar-of-the-savage-land:cast:s1,f:xs:XP:ka-zar-of-the-savage-land:cast:s1	-	-	-	fb9d3088f0bf	-	f0b0a41a279a	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 88eeb519-5782-4732-bd34-81d1ee6dbc8f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ka-zar-of-the-savage-land:cast:s1,f:xs:XP:ka-zar-of-the-savage-land:cast:s1	-	-	-	fb9d3088f0bf	-	f0b0a41a279a	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof

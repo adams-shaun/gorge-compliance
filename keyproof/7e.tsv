@@ -125,10 +125,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e8f5b34-fd16-4307-9104-17b584b25b14	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:awakener-druid:f0t0:s1,f:xs:XP:awakener-druid:f0t0:s1	-	-	-	8a1b1a193ec0	-	aee5c724293f	-	-	2026-11-24	xproof
 7e92be29-ccd1-4556-bb2a-ac7902bc77c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e92be29-ccd1-4556-bb2a-ac7902bc77c2	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:manaforce-mace:f0a0:s1,f:xs:XP:manaforce-mace:f0a0:s1	-	-	-	3aa6ded33acb	-	112568f47e06	-	-	2026-11-25	xproof
-7e97a242-0bac-4f18-9228-e98ecca36254	cast	cast-resolve	agreed	-	X	scen	1	0	Scavenger Regent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e97a242-0bac-4f18-9228-e98ecca36254	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scavenger Regent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7e97a242-0bac-4f18-9228-e98ecca36254	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scavenger-regent-exude-toxin:cast:s1,f:xs:XP:scavenger-regent-exude-toxin:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+7e97a242-0bac-4f18-9228-e98ecca36254	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:scavenger-regent-exude-toxin:combat0.attack:s1,f:xs:XP:scavenger-regent-exude-toxin:combat0.attack:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 7e97a242-0bac-4f18-9228-e98ecca36254	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scavenger Regent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e97a242-0bac-4f18-9228-e98ecca36254	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scavenger Regent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7e97a242-0bac-4f18-9228-e98ecca36254	f0/t0	BecomesTarget/Ward	agreed	-	F	start	2	0	f:xs:XP:scavenger-regent-exude-toxin:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 7ea0012b-b90b-43d6-bb5b-e4e92452bea7	cast	cast-resolve	agreed	-	FX	scen	2	0	Forum Familiar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ea0012b-b90b-43d6-bb5b-e4e92452bea7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Forum Familiar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ea71a36-8fa8-4ba3-9cb1-7fc6917c3ddd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
