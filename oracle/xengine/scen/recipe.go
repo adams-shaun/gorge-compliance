@@ -505,11 +505,20 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	placeGraveTargets(reg, b, face, card, fam, sa, trig, f)
 	// The start now holds everything its needs placed: only a CDA toughness
 	// still zero over this finished start (Mortivore, an empty graveyard) is
-	// dead on arrival. Eluge's Islands, a Forest for Gaea's Liege, are placed
-	// by the needs above and are counted here.
+	// dead on arrival, and only an upkeep the finished start cannot pay
+	// (focusUpkeepBlock) costs the card or the focus play's mana before the
+	// first main priority. Eluge's Islands, a Forest for Gaea's Liege, are
+	// placed by the needs above and are counted here.
 	if slices.Contains(p0.Battlefield, card) || slices.Contains(p1.Battlefield, card) {
 		if cdaToughness(face) && cdaToughnessZero(reg, face, f) {
 			return refuse("start:dead-on-arrival")
+		}
+		seat := 0
+		if slices.Contains(p1.Battlefield, card) {
+			seat = 1
+		}
+		if why := focusUpkeepBlock(reg, face, card, seat, f); why != "" {
+			return refuse(why)
 		}
 	}
 	if why, err := focusPlayRefusal(reg, b, face, sa, card, f); err != nil || why != "" {
@@ -592,7 +601,9 @@ func upkeepLiability(face *cards.Face) string {
 // that sacrifices its own source or makes its controller pay a cost (mana,
 // a discard, a life payment). The trigger's Execute SVar is walked with its
 // SubAbility chain; a trigger that only adds counters or draws is not a
-// liability.
+// liability. It is the enabler gate's strict read (pickEnabler): the focus
+// card's own upkeep is judged over the finished start instead
+// (focusUpkeepBlock), because a start may hold the mana the cost takes.
 func upkeepCostsSelf(face *cards.Face) bool {
 	for i := range face.Triggers {
 		t := &face.Triggers[i]
@@ -610,6 +621,394 @@ func upkeepCostsSelf(face *cards.Face) bool {
 		}
 	}
 	return false
+}
+
+// focusUpkeepBlock is why the finished start cannot be assumed to reach turn
+// 1's first main priority with the focus card on the battlefield and the
+// focus play's mana, or "". The setup drive plays the upkeep before the cut:
+// Echo and cumulative upkeep ask their cost then, and a beginning-of-upkeep
+// or draw trigger may sacrifice its source or make its controller pay. Like
+// the CDA check above it, it judges the finished start:
+//   - when the focus play is another card's, or the card is still in hand (a
+//     cast or a land drop), the focus card's fate costs the key nothing: the
+//     play is still offered (Earthlink's upkeep may sacrifice it before its
+//     Kami of False Hope dies);
+//   - a trigger that cannot fire from the start's placement (a TriggerZones
+//     other than Battlefield, Pyre Zombie's graveyard) or is optional
+//     (OptionalDecider, Brass Gnat's "you may pay {1}") never binds;
+//   - a "your upkeep" trigger whose source sits under the non-active seat
+//     does not fire on turn 1 (the block keys);
+//   - otherwise the cost is judged against the start: refuse only if the
+//     seat's untapped lands cannot pay it as well as the focus play's own
+//     mana, or the hand, graveyard or battlefield resource it spends is not
+//     there (Molten-Tail Masticore's discard from an empty hand).
+func focusUpkeepBlock(reg *cards.Registry, face *cards.Face, card string, seat int, f *StartFile) string {
+	if !focusHoldsCard(f, card) {
+		return ""
+	}
+	if k, ok := face.KeywordParam("Echo"); ok {
+		cost := k
+		if strings.TrimSpace(cost) == "" {
+			cost = face.ManaCost
+		}
+		if upkeepManaShort(reg, f, seat, cost, focusManaCost(reg, f)) {
+			return "start:echo"
+		}
+	}
+	if k, ok := face.KeywordParam("Cumulative upkeep"); ok && strings.TrimSpace(k) != "" {
+		if upkeepManaShort(reg, f, seat, k, focusManaCost(reg, f)) {
+			return "start:cumulative-upkeep"
+		}
+	}
+	for i := range face.Triggers {
+		req, binds := triggerUpkeepReq(&face.Triggers[i], seat, f)
+		if !binds {
+			continue
+		}
+		if upkeepReqShort(reg, f, seat, req, focusManaCost(reg, f)) {
+			return "start:upkeep-cost"
+		}
+	}
+	return ""
+}
+
+// focusHoldsCard reports whether the focus play is on the card itself, or a
+// static or scripted combat the card must live for: only then does the
+// card's turn-1 upkeep cost the key anything.
+func focusHoldsCard(f *StartFile, card string) bool {
+	fo := f.Focus
+	if fo == nil || fo.Card == "" {
+		return true
+	}
+	if fo.Card != card {
+		return false // the focus play is another card's
+	}
+	switch fo.Kind {
+	case "cast", "land":
+		return false // in hand until main 1: no upkeep trigger fires yet
+	}
+	return true
+}
+
+// upkeepReq is what one beginning-of-upkeep or draw trigger asks of its
+// controller's placed state at turn 1's upkeep.
+type upkeepReq struct {
+	mana        string // mana tokens the seat must tap
+	hand        int    // cards the hand must hold
+	grave       int    // matching cards the graveyard must hold
+	graveFilter string
+	field       string // a permanent type the battlefield must hold (a sacrifice of another)
+	self        bool   // the card itself is sacrificed with no cost to avoid it
+	atRisk      bool   // the chain sacrifices the card (a cost unpaid loses it)
+}
+
+// triggerUpkeepReq is the upkeepReq of one Phase trigger, and whether it
+// binds the start at all: false when the trigger cannot fire from the
+// start's placement, is optional, is not the active seat's turn, or takes
+// nothing the start can lack.
+func triggerUpkeepReq(t *cards.Trigger, seat int, f *StartFile) (upkeepReq, bool) {
+	req := upkeepReq{}
+	ph := strings.ToLower(t.Params["Phase"])
+	if !strings.Contains(ph, "upkeep") && !strings.Contains(ph, "draw") {
+		return req, false
+	}
+	if z := t.Params["TriggerZones"]; z != "" && !zoneOnBattlefield(z) {
+		return req, false // the trigger never fires from the battlefield (Pyre Zombie)
+	}
+	if t.Params["OptionalDecider"] != "" {
+		return req, false // "you may": the bot declines to no loss (Brass Gnat)
+	}
+	if strings.EqualFold(t.Params["ValidPlayer"], "You") && seat != f.Active {
+		return req, false // "your upkeep": not the active seat's turn (the block keys)
+	}
+	for sa := t.Effect; sa != nil; sa = sa.Sub {
+		// An optional step the controller declines to no effect (an optional
+		// sacrifice of another permanent, Yawgmoth Demon's artifact) is no
+		// cost; an optional sacrifice of the card itself still may lose it.
+		if sa.Params["Optional"] == "True" && !(sa.API == "Sacrifice" && sacValidSelf(sa)) {
+			continue
+		}
+		if c := sa.Params["UnlessCost"]; c != "" {
+			mergeUpkeepCost(&req, c)
+		} else if c := sa.Params["Cost"]; c != "" {
+			mergeUpkeepCost(&req, c)
+		}
+		switch sa.API {
+		case "Sacrifice":
+			if sacValidSelf(sa) {
+				req.atRisk = true
+				if sa.Params["UnlessCost"] == "" && sa.Params["Cost"] == "" && sa.Params["UnlessPayer"] == "" {
+					req.self = true
+				}
+			} else if req.field == "" {
+				req.field = sa.Params["SacValid"]
+			}
+		case "Discard":
+			if n := saNum(sa); n > req.hand {
+				req.hand = n
+			}
+		case "ChangeZone":
+			if strings.Contains(sa.Params["Origin"], "Graveyard") && strings.Contains(sa.Params["Destination"], "Exile") {
+				if n := saNum(sa); n > req.grave {
+					req.grave = n
+					req.graveFilter = sa.Params["ChangeType"]
+				}
+			}
+		}
+	}
+	return req, req.mana != "" || req.hand > 0 || req.grave > 0 || req.field != "" || req.self
+}
+
+// zoneOnBattlefield reads a TriggerZones list ("Battlefield",
+// "Battlefield,Command"): whether it holds Battlefield, the zone a placed
+// permanent's trigger fires from.
+func zoneOnBattlefield(z string) bool {
+	for _, w := range strings.Split(z, ",") {
+		if strings.EqualFold(strings.TrimSpace(w), "Battlefield") {
+			return true
+		}
+	}
+	return false
+}
+
+// saNum is an SA's card count (NumCards, ChangeNum), 1 when it says none.
+func saNum(sa *cards.SA) int {
+	for _, p := range []string{"NumCards", "ChangeNum", "NumAtt"} {
+		if v := sa.Params[p]; v != "" {
+			if n, err := strconv.Atoi(v); err == nil && n > 0 {
+				return n
+			}
+		}
+	}
+	return 1
+}
+
+// sacValidSelf reads a Sacrifice's SacValid: the card itself when it names
+// none, the card, or a Self alternative of it.
+func sacValidSelf(sa *cards.SA) bool {
+	v := strings.TrimSpace(sa.Params["SacValid"])
+	if v == "" || v == "CARDNAME" || v == "NICKNAME" {
+		return true
+	}
+	if strings.Contains(v, "Other") {
+		return false
+	}
+	return strings.Contains(v, "Self")
+}
+
+// mergeUpkeepCost reads one UnlessCost/Cost into req: mana tokens, and the
+// non-mana steps a start can lack (a discard, a graveyard exile, a reveal).
+func mergeUpkeepCost(req *upkeepReq, cost string) {
+	for _, tok := range splitCost(cost) {
+		if manaTokenRE.MatchString(tok) {
+			req.mana = strings.TrimSpace(req.mana + " " + tok)
+			continue
+		}
+		head, args := costArgs(tok)
+		n := 1
+		if len(args) >= 1 {
+			if v, err := strconv.Atoi(args[0]); err == nil {
+				n = v
+			}
+		}
+		switch head {
+		case "Discard", "Reveal":
+			if n > req.hand {
+				req.hand = n
+			}
+		case "Exile", "ExileFromGrave":
+			if head == "ExileFromGrave" || len(args) >= 3 && strings.Contains(args[2], "Graveyard") {
+				if n > req.grave {
+					req.grave = n
+					if len(args) >= 2 {
+						req.graveFilter = args[1]
+					}
+				}
+			} else if n > req.hand {
+				req.hand = n
+			}
+		case "PayMana":
+			if len(args) >= 1 {
+				req.mana = strings.TrimSpace(req.mana + " " + args[0])
+			}
+		}
+	}
+}
+
+// upkeepReqShort reports whether the start cannot meet req as well as the
+// focus play's own mana. A cost the judge cannot read is no proof of a short
+// start.
+func upkeepReqShort(reg *cards.Registry, f *StartFile, seat int, req upkeepReq, focusMana []string) bool {
+	if req.self {
+		return true // sacrificed whatever the start holds
+	}
+	sd := &f.Setup.P0
+	if seat != 0 {
+		sd = &f.Setup.P1
+	}
+	// A resource the start lacks only costs the key when the card's survival
+	// rides on it (a sacrifice the cost must avert): a bare mandatory
+	// discard or graveyard exile over an empty hand or graveyard is a
+	// trigger that does nothing (Enemy of Enlightenment's "each player
+	// discards a card"). The mana is the same either way: an unpaid
+	// sacrifice cost still sacrifices, and an unpaid bare payment still
+	// takes the tapped mana the focus play wants.
+	if req.hand > 0 && (req.atRisk || req.mana != "") && len(sd.Hand) < req.hand {
+		return true
+	}
+	if req.atRisk && req.grave > 0 {
+		n, ok := seatZoneCount(reg, f, seat, "graveyard", req.graveFilter)
+		if ok && n < req.grave {
+			return true
+		}
+	}
+	if req.atRisk && req.field != "" {
+		n, ok := seatZoneCount(reg, f, seat, "battlefield", req.field)
+		if ok && n < 1 {
+			return true
+		}
+	}
+	if req.mana != "" {
+		return upkeepManaShort(reg, f, seat, req.mana, focusMana)
+	}
+	return false
+}
+
+// seatZoneCount is how many cards of one seat's zone match filter; ok is
+// false when no alternative of the filter is readable.
+func seatZoneCount(reg *cards.Registry, f *StartFile, seat int, zone, filter string) (int, bool) {
+	alts := parseFilter(filter)
+	if len(alts) == 0 {
+		return 0, false
+	}
+	known := false
+	for _, a := range alts {
+		known = known || a.known
+	}
+	if !known {
+		return 0, false
+	}
+	sd := &f.Setup.P0
+	if seat != 0 {
+		sd = &f.Setup.P1
+	}
+	var names []string
+	switch zone {
+	case "graveyard":
+		names = sd.Graveyard
+	case "hand":
+		names = sd.Hand
+	default:
+		names = sd.Battlefield
+	}
+	n := 0
+	for _, name := range names {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			continue
+		}
+		for _, a := range alts {
+			if !a.known || a.ctrl == ctrlOpp {
+				continue
+			}
+			if a.test(c.Faces[0]) {
+				n++
+				break
+			}
+		}
+	}
+	return n, true
+}
+
+// focusManaCost is the mana the focus play taps from the same untapped lands
+// the upkeep would pay from: a cast focus its card's mana cost (plus a
+// kicked cast's kicker), an ability focus the ability's Cost. nil when the
+// focus play needs no mana (a land drop, the scripted combat) or its cost
+// has none.
+func focusManaCost(reg *cards.Registry, f *StartFile) []string {
+	fo := f.Focus
+	if fo == nil || fo.Card == "" {
+		return nil
+	}
+	c, ok := reg.Lookup(fo.Card)
+	if !ok || len(c.Faces) == 0 {
+		return nil
+	}
+	face := c.Faces[0]
+	var cost string
+	switch fo.Kind {
+	case "cast":
+		cost = face.ManaCost
+		if fo.Mode == "kicked" {
+			if k, ok := face.KeywordParam("Kicker"); ok && !strings.Contains(k, ":") {
+				cost = strings.TrimSpace(cost + " " + k)
+			}
+		}
+	case "ability":
+		if fo.Ability >= 0 && fo.Ability < len(face.Abilities) {
+			cost = face.Abilities[fo.Ability].Params["Cost"]
+		}
+	}
+	if cost == "" {
+		return nil
+	}
+	mana, why := costTokens(cost)
+	if why != "" {
+		return nil
+	}
+	return mana
+}
+
+// basicColour is a basic land's colour letter.
+var basicColour = map[string]string{"Plains": "W", "Island": "U", "Swamp": "B", "Mountain": "R", "Forest": "G"}
+
+// upkeepManaShort reports whether seat's untapped lands cannot pay mana as
+// well as the focus play's own cost: a basic pays its colour, an untapped
+// non-basic land pays generic only, and the focus play's tokens are paid
+// first. A cost the judge cannot read is not a short start.
+func upkeepManaShort(reg *cards.Registry, f *StartFile, seat int, cost string, focusMana []string) bool {
+	mana, why := costTokens(cost)
+	if why != "" {
+		return false
+	}
+	need := map[string]int{}
+	generic := 0
+	for _, toks := range [][]string{focusMana, mana} {
+		for _, tok := range toks {
+			if n, err := strconv.Atoi(tok); err == nil {
+				generic += n
+				continue
+			}
+			first := shardParts(tok)[0]
+			if c := basicOf[first]; c != "" && first != "C" {
+				need[first]++
+			} else {
+				generic++ // C, S and a Phyrexian alternative the life pays
+			}
+		}
+	}
+	sd := &f.Setup.P0
+	if seat != 0 {
+		sd = &f.Setup.P1
+	}
+	pool, avail := 0, map[string]int{}
+	for _, name := range sd.Battlefield {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 || !c.Faces[0].HasTypeWord("Land") || slices.Contains(sd.Tapped, name) {
+			continue
+		}
+		pool++
+		if col, ok := basicColour[name]; ok {
+			avail[col]++
+		}
+	}
+	for col, n := range need {
+		if avail[col] < n {
+			return true
+		}
+		pool -= n
+	}
+	return pool < generic
 }
 
 // The forced start (operator rule): a start is built so the only plays it

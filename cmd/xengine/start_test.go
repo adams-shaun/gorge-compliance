@@ -1849,6 +1849,30 @@ func TestStartSurvivesToMainOne(t *testing.T) {
 			_ = startIsExercised(t, reg, b, c.card, c.key)
 		})
 	}
+	// The refined upkeep check must keep exercising the keys develop
+	// exercises: the focus card elsewhere or still in hand pays nothing for
+	// its own upkeep (Earthlink, Thelon's Chant), a trigger that cannot fire
+	// from the battlefield or is optional never binds (Pyre Zombie, Brass
+	// Gnat). Each must write a start that plays and exercises: a start:
+	// refusal here is a regression.
+	for _, c := range []struct{ card, key string }{
+		{"Earthlink", "f0/t1"},           // upkeep sacrifice with the focus on the Kami
+		{"Pyre Zombie", "f0/a0"},         // upkeep trigger fires from the graveyard
+		{"Brass Gnat", "combat#0.block"}, // optional upkeep payment declines
+		{"Thelon's Chant", "f0/t1"},      // upkeep sacrifice with the focus on the Grizzly Bears
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			t.Logf("%s %s: path %q reason %q", c.card, c.key, res.Path, res.Reason)
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("%s %s: path %q reason %q, want an exercised start", c.card, c.key, res.Path, res.Reason)
+			}
+			_ = startIsExercised(t, reg, b, c.card, c.key)
+		})
+	}
 	// The rest of the report's keys are the same class: a CDA or X focus or
 	// target, an upkeep-sacrifice focus, an Echo or cumulative-upkeep enabler,
 	// and an attack focus that cannot attack. A key the generator already
@@ -1900,6 +1924,11 @@ func TestStartKeepsCDAFocusWhoseNeedsPlaceTheCount(t *testing.T) {
 		{"Gaea's Liege", "f0/a0"},
 		{"Old Man Willow", "f0/t0"},
 		{"Greensleeves, Maro-Sorcerer", "f0/t0"},
+		// The CDA judge cannot refuse a count the focus card joins or a
+		// cross-seat count, and a numeric toughness is not a zero:
+		{"Ashaya, Soul of the Wild", "static#0.1"}, // counts itself as a Forest land
+		{"Harmonious Grovestrider", "f0/t0"},       // a numeric toughness of one
+		{"Consuming Aberration", "f0/t0"},          // counts the opponent's graveyards
 	} {
 		t.Run(c.card, func(t *testing.T) {
 			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})

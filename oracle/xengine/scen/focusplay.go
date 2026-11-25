@@ -115,14 +115,42 @@ func cdaToughnessZero(reg *cards.Registry, face *cards.Face, f *StartFile) bool 
 func cdaExprZero(reg *cards.Registry, face *cards.Face, f *StartFile, expr string) (zero, known bool) {
 	switch {
 	case strings.HasPrefix(expr, "Count$ValidGraveyard "):
-		n, ok := startZoneCount(reg, f, strings.TrimPrefix(expr, "Count$ValidGraveyard "), "graveyard")
-		return n == 0, ok
+		filter := strings.TrimPrefix(expr, "Count$ValidGraveyard ")
+		n, ok := startZoneCount(reg, f, filter, "graveyard")
+		if n != 0 || !ok {
+			return n == 0, ok
+		}
+		// A count of the other seat's zone alone (Consuming Aberration's
+		// opponent's graveyard) is no zero the generator can vouch for: the
+		// start's needs fill their own controller's zone, and the other
+		// seat's the generator cannot place.
+		if crossSeatZoneFilter(filter) {
+			return false, false
+		}
+		return true, true
 	case strings.HasPrefix(expr, "Count$ValidHand "):
-		n, ok := startZoneCount(reg, f, strings.TrimPrefix(expr, "Count$ValidHand "), "hand")
-		return n == 0, ok
+		filter := strings.TrimPrefix(expr, "Count$ValidHand ")
+		n, ok := startZoneCount(reg, f, filter, "hand")
+		if n != 0 || !ok {
+			return n == 0, ok
+		}
+		if crossSeatZoneFilter(filter) {
+			return false, false
+		}
+		return true, true
 	case strings.HasPrefix(expr, "Count$Valid "):
-		n, ok := startZoneCount(reg, f, strings.TrimPrefix(expr, "Count$Valid "), "battlefield")
-		return n == 0, ok
+		filter := strings.TrimPrefix(expr, "Count$Valid ")
+		n, ok := startZoneCount(reg, f, filter, "battlefield")
+		if n != 0 || !ok {
+			return n == 0, ok
+		}
+		// The card itself may join the count: its printed types, or a type
+		// its own static adds (Ashaya makes its controller's nontoken
+		// creatures Forest lands, so it counts itself as a land;
+		// Swampbenders makes every land a Swamp). A zero over placed state
+		// alone is then no zero. A zone count cannot count the card (it is
+		// on the battlefield), so the check is the battlefield branch's.
+		return false, !faceCountsItself(face, filter)
 	case strings.HasPrefix(expr, "PlayerCountPlayers$HighestLifeTotal"):
 		return startHighestLife(f) >= 20, true
 	case strings.HasPrefix(expr, "SVar$"):
@@ -196,6 +224,52 @@ func startZoneCount(reg *cards.Registry, f *StartFile, filter, zone string) (int
 	return n, true
 }
 
+// crossSeatZoneFilter reports a zone filter that counts only the other
+// seat's cards (Card.OppOwn): the start's needs fill their own controller's
+// zone, so a zero over placed state is not the zero the game reads.
+func crossSeatZoneFilter(filter string) bool {
+	for _, a := range parseFilter(filter) {
+		if a.known && a.ctrl == ctrlOpp {
+			return true
+		}
+	}
+	return false
+}
+
+// faceCountsItself reports whether the battlefield filter counts the card
+// itself: a printed type of its, or a type its own static adds.
+func faceCountsItself(face *cards.Face, filter string) bool {
+	for _, raw := range strings.Split(filter, ",") {
+		raw = strings.TrimSpace(raw)
+		head, props, _ := strings.Cut(raw, ".")
+		oppos := false
+		for _, p := range strings.Split(props, "+") {
+			switch p {
+			case "OppCtrl", "OppOwn", "YouDontCtrl":
+				oppos = true
+			}
+		}
+		if oppos || head == "" || head != "Card" && head != "Permanent" && !typeWord(head) {
+			continue
+		}
+		if face.HasTypeWord(head) {
+			return true
+		}
+		for i := range face.Statics {
+			for _, p := range []string{"AddType", "SetTypes", "SetType"} {
+				for _, w := range strings.FieldsFunc(face.Statics[i].Params[p], func(r rune) bool {
+					return r == '&' || r == ',' || r == ' '
+				}) {
+					if strings.EqualFold(strings.TrimSpace(w), head) {
+						return true
+					}
+				}
+			}
+		}
+	}
+	return false
+}
+
 // startHighestLife is the highest life total the start seats hold (20 when a
 // seat has no override), the value Scourge of the Skyclaves' CDA subtracts.
 func startHighestLife(f *StartFile) int32 {
@@ -209,24 +283,21 @@ func startHighestLife(f *StartFile) int32 {
 }
 
 // focusCardBlock is why the key's own face cannot be placed on the battlefield
-// for the start, or "": a creature whose printed toughness is 0 or less, a
-// dynamic entry counter the start schema cannot restate, or an upkeep
-// liability (upkeepLiability) that costs the turn-1 upkeep. It reads only the
+// for the start, or "": a creature whose printed toughness is 0 or less, or a
+// dynamic entry counter the start schema cannot restate. It reads only the
 // card; a CDA toughness depends on the finished start (cdaToughnessZero, run
-// by recipe after the needs are placed). The check runs for every key whose
-// card the start puts on the battlefield, not only an ability or combat
-// focus: a dies-trigger key whose card is a 0/0 X creature dies before the
-// focus play can target it (Hooded Hydra for Murder), and a static key whose
-// card is sacrificed at the upkeep proves nothing.
+// by recipe after the needs are placed), and so does the card's turn-1 upkeep
+// (focusUpkeepBlock, also recipe): the start's placed lands and the focus
+// play's own mana decide whether the upkeep can be paid. The checks run for
+// every key whose card the start puts on the battlefield, not only an ability
+// or combat focus: a dies-trigger key whose card is a 0/0 X creature dies
+// before the focus play can target it (Hooded Hydra for Murder).
 func focusCardBlock(face *cards.Face) string {
 	switch {
 	case numericToughnessDead(face):
 		return "start:dead-on-arrival"
 	case entryCounterUnrestatable(face):
 		return "start:entry-counter"
-	}
-	if why := upkeepLiability(face); why != "" {
-		return "start:" + why
 	}
 	return ""
 }

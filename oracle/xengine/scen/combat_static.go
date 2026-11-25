@@ -228,7 +228,10 @@ func cantBlockByAttackerStart(reg *cards.Registry, b *certdeck.Builder, face *ca
 	for _, k := range []string{"ValidAttacker", "Affected", "ValidCard"} {
 		attacker = attacker || filterNamesSelf(st.Params[k])
 	}
-	if !attacker || !face.IsCreature() || face.HasKeyword("Defender") || deadOnArrival(face) {
+	// numericToughnessDead, not deadOnArrival: the key's own card's CDA is
+	// judged over the finished start (cdaToughnessZero), so only a printed
+	// 0 toughness refuses here.
+	if !attacker || !face.IsCreature() || face.HasKeyword("Defender") || numericToughnessDead(face) {
 		return "no-generator:static:CantBlockBy"
 	}
 	blocker := combatFixture
@@ -481,7 +484,10 @@ func attackingStaticStart(reg *cards.Registry, b *certdeck.Builder, card, aff st
 		return "no-generator:static:affected"
 	}
 	af := c.Faces[0]
-	if !af.IsCreature() || af.HasKeyword("Defender") || deadOnArrival(af) {
+	// numericToughnessDead, not deadOnArrival: the attacking card is the
+	// focus; a CDA toughness on it is recipe's post-needs decision when it is
+	// the key's card, and a guess here would refuse a start the game plays.
+	if !af.IsCreature() || af.HasKeyword("Defender") || numericToughnessDead(af) {
 		return "no-generator:static:affected"
 	}
 	f.Focus = &StartFocus{Seat: seat(0), Card: attacker, Kind: "attack"}
