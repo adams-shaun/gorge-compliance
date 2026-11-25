@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7613c50b-4568-4340-b64a-ab427aaffd51	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:rhys-the-exiled:f0a0:s1,f:xs:XP:rhys-the-exiled:f0a0:s1	-	-	-	23c4009444b0	-	9946f52cd9d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7613c50b-4568-4340-b64a-ab427aaffd51	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:rhys-the-exiled:f0a0:s1,f:xs:XP:rhys-the-exiled:f0a0:s1	-	-	-	23c4009444b0	-	9946f52cd9d6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 76164af1-275e-4d68-9df5-9801768512ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76164af1-275e-4d68-9df5-9801768512ef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+76164af1-275e-4d68-9df5-9801768512ef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 76168d1b-266d-4d27-9e97-248b0c2c7e8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76168d1b-266d-4d27-9e97-248b0c2c7e8f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:safehold-duo:f0t0:s1,f:xs:XP:safehold-duo:f0t0:s1	-	-	-	23c4009444b0	-	dcd101f89f90	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 76168d1b-266d-4d27-9e97-248b0c2c7e8f	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:safehold-duo:f0t1:s1,f:xs:XP:safehold-duo:f0t1:s1	-	-	-	23c4009444b0	-	dcd101f89f90	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 761ebd6a-8f53-46fa-b3cd-16616b773007	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 761ee6f9-b0fa-43c9-8d1f-9591ea18e52d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 761ee6f9-b0fa-43c9-8d1f-9591ea18e52d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-762679dd-4345-43c3-929b-15959443aeb0	cast	cast-resolve	agreed	-	X	scen	1	0	Soulbright Seeker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+762679dd-4345-43c3-929b-15959443aeb0	cast	cast	agreed	-	F	start	2	0	f:xs:XP:soulbright-seeker:cast:s1	-	-	-	41149fc165a7	-	1c2712319e61	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 762679dd-4345-43c3-929b-15959443aeb0	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:soulbright-seeker:f0a0:s1,f:xs:XP:soulbright-seeker:f0a0:s1	-	-	-	23c4009444b0	-	1c2712319e61	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7627163a-1689-446f-b5aa-a6c56aefb532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knife:cast:s1,f:xs:XP:knife:cast:s1	-	-	-	23b491658465	-	1b7a81660b68	-	-	2026-11-24	xproof
 7627163a-1689-446f-b5aa-a6c56aefb532	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:knife:f0a0:s1,f:xs:XP:knife:f0a0:s1	-	-	-	8c0bd19283bb	-	1b7a81660b68	-	-	2026-11-24	xproof
@@ -204,4 +204,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76fdbc2c-d2b1-466f-9230-06e187bcc9e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:divert-disaster:cast:s1,f:xs:XP:divert-disaster:cast:s1	-	-	-	9087eefec3ee	-	20d3fce465c7	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 76fe7cfa-c3db-4122-b262-f7c5c90fcdd7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76ff6653-f9b9-4bfe-92a9-52bda275b340	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76ff6653-f9b9-4bfe-92a9-52bda275b340	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce:noncombat	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+76ff6653-f9b9-4bfe-92a9-52bda275b340	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce:noncombat	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof

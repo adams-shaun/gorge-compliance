@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d0213d7-9e25-49d2-93fa-1d346cb2e869	f0/t0	ChangesZone	agreed	-	F	start	6	0	f:xs:XP:akroan-horse:cast:s1	-	-	-	fb9d3088f0bf	-	bcceadf3c7db	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 8d0213d7-9e25-49d2-93fa-1d346cb2e869	f0/t1	Phase	agreed	-	F	start	6	0	f:xs:XP:akroan-horse:cast:s1	-	-	-	fb9d3088f0bf	-	bcceadf3c7db	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 8d02b297-97c4-4379-9862-0a462400f66f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d02b297-97c4-4379-9862-0a462400f66f	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+8d02b297-97c4-4379-9862-0a462400f66f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-altar:f0a0:s1,f:xs:XP:phyrexian-altar:f0a0:s1	-	-	-	41149fc165a7	-	21c895a07d96	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 8d035688-089f-4d5c-bcad-9140a6c1681b	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d038c81-b43f-4721-abda-5dacfc194ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d038c81-b43f-4721-abda-5dacfc194ed3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:burrenton-shield-bearers:f0t0:s1,f:xs:XP:burrenton-shield-bearers:f0t0:s1	-	-	-	d864b561c9cb	-	3de554de70f3	-	-	2026-11-24	xproof
@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d7cf56c-94fd-47d8-9e0f-cd3163688983	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:luminous-angel:f0t0:s1,f:xs:XP:luminous-angel:f0t0:s1	-	-	-	3aa6ded33acb	-	3e6c5d72a1b3	-	-	2026-11-25	xproof
 8d83dfb3-5662-4109-b465-bf5f257e58a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d83dfb3-5662-4109-b465-bf5f257e58a5	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared:amount	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
-8d84a706-080c-4fb2-b1b9-3dbb3294fb7b	cast	cast	agreed	-	X	start	2	0	x:xs:XP:osseous-exhale:cast:s1	-	-	-	baa6f696107c	-	3aea6828f66a	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+8d84a706-080c-4fb2-b1b9-3dbb3294fb7b	cast	cast	agreed	-	X	start	2	0	x:xs:XP:osseous-exhale:cast:s1	-	-	-	41149fc165a7	-	3aea6828f66a	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 8d84a706-080c-4fb2-b1b9-3dbb3294fb7b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Osseous Exhale/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d857d79-bdb2-4ca3-abd6-7db8f6b3bcfa	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8d857d79-bdb2-4ca3-abd6-7db8f6b3bcfa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

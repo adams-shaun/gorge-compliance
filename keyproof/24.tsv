@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 245b62a8-b606-4106-87c3-a60ce3e16906	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245b62a8-b606-4106-87c3-a60ce3e16906	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 245c3681-fc47-47fe-b6e5-34c96315c135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-245c3681-fc47-47fe-b6e5-34c96315c135	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+245c3681-fc47-47fe-b6e5-34c96315c135	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-reaper:f0t0:s1,f:xs:XP:phyrexian-reaper:f0t0:s1	-	-	-	41149fc165a7	-	d6a2df31da3c	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:delney-streetwise-lookout:cast:s1,f:xs:XP:delney-streetwise-lookout:cast:s1	-	-	-	23b491658465	-	1cb2a4eafaa2	-	-	2026-11-24	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:delney-streetwise-lookout:combat0.attack:s1,f:xs:XP:delney-streetwise-lookout:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1cb2a4eafaa2	-	-	2026-11-25	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Delney, Streetwise Lookout/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24919141-82d2-42ad-963c-e53511a868b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24919141-82d2-42ad-963c-e53511a868b3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sigarda-champion-of-light:f0t0:s1,f:xs:XP:sigarda-champion-of-light:f0t0:s1	-	-	-	3aa6ded33acb	-	69bf283d9720	-	-	2026-11-25	xproof
 2493fe65-2ecb-418f-8e4e-797f83475c73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2493fe65-2ecb-418f-8e4e-797f83475c73	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+2493fe65-2ecb-418f-8e4e-797f83475c73	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 2494101a-2c6b-45d8-95fe-e62bf9a25130	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:imskir-iron-eater:cast:s1,f:xs:XP:imskir-iron-eater:cast:s1	-	-	-	ae86f6029288	-	ddf67b96adee	-	-	2026-11-24	xproof
 2494101a-2c6b-45d8-95fe-e62bf9a25130	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:imskir-iron-eater:f0a0:s1,f:xs:XP:imskir-iron-eater:f0a0:s1	-	-	-	9087eefec3ee	-	ddf67b96adee	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 2494101a-2c6b-45d8-95fe-e62bf9a25130	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:imskir-iron-eater:cast:s1,f:xs:XP:imskir-iron-eater:cast:s1	-	-	-	ae86f6029288	-	ddf67b96adee	-	-	2026-11-24	xproof
