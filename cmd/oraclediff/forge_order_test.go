@@ -67,11 +67,17 @@ func TestForgeGraveyardOrderDecisions(t *testing.T) {
 		t.Errorf("graveyard_ends = %v, want the step-end graveyard under 1:0", ends)
 	}
 
-	// A pin that already reached the decisions is not added twice, and an
-	// order for a single card (or copies of one) is not a pin at all.
+	// A pin that already reached the decisions (the runner queued it) is not
+	// added twice, but it still carries the step's end graveyard: its ask can
+	// offer a transit card, which strict-misses without the ends to classify
+	// it by. An order for a single card (or copies of one) is not a pin at all.
 	have := append(append([]rules.OracleDecision(nil), ds...), o)
-	if again, againEnds := forgeGraveyardOrderDecisions(it, g, have); len(again) != len(have) || againEnds != nil {
-		t.Errorf("order decision duplicated or ends for an unpinned step: %+v %v", again, againEnds)
+	again, againEnds := forgeGraveyardOrderDecisions(it, g, have)
+	if len(again) != len(have) {
+		t.Errorf("order decision duplicated: %+v", again)
+	}
+	if want := map[string][]string{"1:0": {"A", "C", "A"}}; !reflect.DeepEqual(againEnds, want) {
+		t.Errorf("graveyard_ends for a runner-produced pin = %v, want the pinned step's end graveyard", againEnds)
 	}
 }
 

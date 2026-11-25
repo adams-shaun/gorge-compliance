@@ -212,9 +212,10 @@ func TestForgeRolledDie(t *testing.T) {
 // offered only); die-roll code unchanged, ForcedDieRollTest re-run green on it (make forge-driver-tests).
 // 2ac6012982e = oracle/fpin-1125-join11: a4380dd47f (above) merged with e45e911953c (53059b9bbf2 plus the below-min target decline,
 // StepMachine.targets only); die-roll code unchanged, ForcedDieRollTest re-run green on it (make forge-driver-tests).
-// 1656bcb2a73 = join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit graveyard order, above),
-// no textual conflicts; die-roll code unchanged, ForcedDieRollTest not re-run here (Java build is the operator's).
-const forgeOracleDieRollRef = "1656bcb2a73cd86dd8b25f33c84920fda3aaf422"
+// 6d6b2d485ab = oracle/fpin-1125-join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit
+// graveyard order, above), no textual conflicts; die-roll code unchanged, ForcedDieRollTest re-run green on it
+// (make forge-driver-tests). r0's 1656bcb2a73 was described here but never pushed to the fork; this is the pushed merge.
+const forgeOracleDieRollRef = "6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

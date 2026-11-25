@@ -815,9 +815,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (same as FORGE_REF ff076d4432). Fork branch driver-transit-pin.
 # 2ac6012982e = oracle/fpin-1125-join11: a4380dd47f (the pending-declaration offered rule; above) merged with e45e911953c (the
 # below-min target decline; above), no textual conflicts; driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
-# 1656bcb2a73 = join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit graveyard order, above), no
-# textual conflicts (StepMachine.java auto-merged); driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 1656bcb2a73cd86dd8b25f33c84920fda3aaf422
+# 6d6b2d485ab = oracle/fpin-1125-join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit graveyard
+# order, above), no textual conflicts (StepMachine.java auto-merged); driver-only, die-roll code unchanged (same as
+# FORGE_REF ff076d4432). r0's 1656bcb2a73 was described here but never pushed to the fork; this is the pushed merge.
+FORGE_ORACLE_REF ?= 6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
