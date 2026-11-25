@@ -3855,12 +3855,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
      *    it reached; any other recorded pass checkpoints on the seat that
      *    passed, which still holds priority.
      *
-     * Every other op keeps seat 0, which acts last on the turn it is on. That
-     * includes the declarations: XMage makes attack and block in the step's
-     * beginStep on the declaring seat, not as a queued action of that seat, so
-     * a checkpoint on the declaring seat would run only after the active
-     * seat's next pass moved the game on. attach is likewise queued on
-     * playerA.
+     *  - a declaration (attack, block) checkpoints on the ACTIVE seat. XMage
+     *    makes the declaration in the step's beginStep, and the step's first
+     *    priority then goes to the active seat: on seat 1's turn that is
+     *    playerB, so a checkpoint left on playerA runs only after playerB's
+     *    next pass has moved the game on, and the two snapshots cross (the
+     *    pass lands at the declaration's index). On seat 0's turn this is
+     *    playerA, unchanged.
+     *
+     * Every other op keeps the seat-0 fallback, which acts last on the turn it
+     * is on; attach is likewise queued on playerA.
      */
     private TestPlayer checkpointSeat(String op, JsonObject st, int stepIdx) {
         if (op.equals("pass") && isPassRun(steps(sc0), stepIdx)) {
@@ -3882,6 +3886,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // second checkpoint must follow that wait there.
             return seat(activeSeat);
         }
+        if (op.equals("attack") || op.equals("block")) {
+            // The declaration itself is beginStep work on the declaring seat,
+            // not a queued action of that seat; the checkpoint after it must
+            // ride the queue that holds the step's first priority, which is
+            // the active seat's. Registering it there also keeps it ahead of
+            // the active seat's following pass checkpoint, so the snapshots
+            // stay in step order. Checked before the recorded-action rule:
+            // attack and block are never actions of a seat's queue.
+            return seat(activeSeat);
+        }
         if (sc0 != null && opensOnOtherSeat(steps(sc0), stepIdx, activeSeat)) {
             // A recorded game's action of the seat that is not active runs on
             // that seat's queue, and so must its checkpoint: a checkpoint on
@@ -3898,11 +3912,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (sc0 != null && isRecordedAction(steps(sc0), stepIdx)) {
             // A recorded cast, activation or land play is queued on the seat
             // that takes it, and that seat's queue carries its checkpoint
-            // between its other actions. A declaration (attack, block) is
-            // beginStep work on the declaring seat, not an action of its
-            // queue, and attach is queued on playerA; those keep seat 0,
-            // which acts last on the turn it is on and so snapshots after the
-            // declaration has happened.
+            // between its other actions. attach is queued on playerA and
+            // keeps the fallback below.
             return seat(seatOfStep(steps(sc0), stepIdx));
         }
         return playerA;
