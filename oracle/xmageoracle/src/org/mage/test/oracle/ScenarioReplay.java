@@ -6289,7 +6289,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         UUID boundId = scenarioObjectId(g, p, ref);
         if (boundId != null) {
-            Permanent bound = g.getPermanent(boundId);
+            Permanent bound = boundPermanent(boundId, g.getBattlefield().getAllPermanents());
             if (bound != null) {
                 if (!bound.getControllerId().equals(p.getId())) {
                     throw new IllegalStateException("harness: activate step " + stepIdx + " names " + card
@@ -8961,9 +8961,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * ref: a card ref's `#k` is the setup/objRef ordinal ACROSS ZONES (the
      * second `X` in the deck is `p0:X#2` whether it sits in the graveyard or
      * the battlefield), not a rank among the controller's live battlefield
-     * permanents, so only the bound object id can identify it. `name` is the
-     * XMage spelling from battlefieldName; `boundId` is the id bound to a
-     * non-token ref (null when the driver never bound one). */
+     * permanents, so only the bound object's identity can identify it -- its
+     * own id, or the main card's id for a DFC whose permanent is a front half
+     * (boundPermanent). `name` is the XMage spelling from battlefieldName;
+     * `boundId` is the id bound to a non-token ref (null when the driver never
+     * bound one). */
     static Permanent combatPermanent(String ref, String name, UUID controller, UUID boundId,
             Iterable<Permanent> battlefield) {
         if (ref.contains(":token:")) {
@@ -8975,12 +8977,34 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             return token;
         }
+        Permanent bound = boundPermanent(boundId, battlefield);
+        return bound != null && controller.equals(bound.getControllerId()) ? bound : null;
+    }
+
+    /** The live permanent a setup-bound object id names, or null. The id is
+     * usually the permanent's own, but a double-faced card's alias binds the
+     * MAIN card while the permanent XMage makes is its front half: a DFC cast
+     * from hand enters as a half whose id differs from the hand card's id, and
+     * a transform keeps that half permanent (CR 712.8, 701.28). Matching the
+     * permanent's main-card id as well is what makes a card cast during the
+     * scenario resolve from the ref that named it in hand, and the next
+     * zone-change or transform cannot break it: {@code getMainCard()} follows
+     * the physical card, not the current face. */
+    static Permanent boundPermanent(UUID boundId, Iterable<Permanent> battlefield) {
         if (boundId == null) {
             return null;
         }
         for (Permanent permanent : battlefield) {
-            if (!permanent.isToken() && permanent.getId().equals(boundId)
-                    && controller.equals(permanent.getControllerId())) {
+            if (!permanent.isToken() && permanent.getId().equals(boundId)) {
+                return permanent;
+            }
+        }
+        for (Permanent permanent : battlefield) {
+            if (permanent.isToken()) {
+                continue;
+            }
+            Card main = permanent.getMainCard();
+            if (main != null && main.getId().equals(boundId)) {
                 return permanent;
             }
         }
