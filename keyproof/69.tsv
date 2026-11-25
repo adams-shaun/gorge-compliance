@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 69003cbc-8e5a-41dc-ac53-18f6e776217b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sparkmage-apprentice:f0t0:s1,f:xs:XP:sparkmage-apprentice:f0t0:s1	-	-	-	77494c1ce129	-	8d42d478ba16	-	-	2026-11-24	xproof
 69003cbc-8e5a-41dc-ac53-18f6e776217b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sparkmage-apprentice:f0t0:s1,f:xs:XP:sparkmage-apprentice:f0t0:s1	-	-	-	77494c1ce129	-	8d42d478ba16	-	-	2026-11-24	xproof
-69038520-7156-48d9-aae8-ba3cc76a5993	cast	cast-resolve	agreed	-	X	scen	1	0	Frilled Sparkshooter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+69038520-7156-48d9-aae8-ba3cc76a5993	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frilled-sparkshooter:cast:s1,f:xs:XP:frilled-sparkshooter:cast:s1	-	-	-	3aa6ded33acb	-	e063fc50a294	-	-	2026-11-25	xproof
 69038520-7156-48d9-aae8-ba3cc76a5993	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Frilled Sparkshooter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 69038520-7156-48d9-aae8-ba3cc76a5993	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Frilled Sparkshooter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 690acf56-8af4-4e96-a3a7-c8bbfe524d24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -102,9 +102,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 698098b8-b8e4-4e88-b13a-6b039579d192	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69812cd2-9885-45ed-9d79-658597bfeb8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mogg-bombers:cast:s1,f:xs:XP:mogg-bombers:cast:s1	-	-	-	5f2128bf97e4	-	46e2db2ebaea	-	-	2026-11-24	xproof
 69812cd2-9885-45ed-9d79-658597bfeb8b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-69826a0d-3ec9-47e7-b129-2fc13b41a07e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69826a0d-3ec9-47e7-b129-2fc13b41a07e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-69826a0d-3ec9-47e7-b129-2fc13b41a07e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+69826a0d-3ec9-47e7-b129-2fc13b41a07e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:torch-song:f0t0:s1,f:xs:XP:torch-song:f0t0:s1	-	-	-	3aa6ded33acb	-	ad81db1f047c	-	-	2026-11-25	xproof
+69826a0d-3ec9-47e7-b129-2fc13b41a07e	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:torch-song:f0t0:s1,f:xs:XP:torch-song:f0t0:s1	-	-	-	3aa6ded33acb	-	ad81db1f047c	-	-	2026-11-25	xproof
+69826a0d-3ec9-47e7-b129-2fc13b41a07e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:torch-song:f0t0:s1,f:xs:XP:torch-song:f0t0:s1	-	-	-	3aa6ded33acb	-	ad81db1f047c	-	-	2026-11-25	xproof
 69858691-1190-4454-af0a-87c2ac4ab6ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69872a9a-fe54-4e58-940c-89395af71acd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:finale-of-devastation:cast:s1,f:xs:XP:finale-of-devastation:cast:s1	-	-	-	d864b561c9cb	-	b20b42e4fb69	-	-	2026-11-24	xproof
 6987d5d4-0ef6-4326-a590-678ac160fe56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,9 +118,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69909846-94f9-4b2c-918f-274ba2aa4279	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	4165c0077f08	-	-	2026-11-24	xproof
 6990ac82-49d4-412d-9c3d-1e7fb5479313	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69924636-138e-4baa-a378-0fd7df5b847d	cast	cast-resolve	agreed	-	X	scen	1	0	Finneas, Ace Archer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-69924636-138e-4baa-a378-0fd7df5b847d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Finneas, Ace Archer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-69924636-138e-4baa-a378-0fd7df5b847d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Finneas, Ace Archer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-69924636-138e-4baa-a378-0fd7df5b847d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Finneas, Ace Archer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+69924636-138e-4baa-a378-0fd7df5b847d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:finneas-ace-archer:combat0.attack:s1,f:xs:XP:finneas-ace-archer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	da3cf727d5d6	-	-	2026-11-25	xproof
+69924636-138e-4baa-a378-0fd7df5b847d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:finneas-ace-archer:combat0.block:s1,f:xs:XP:finneas-ace-archer:combat0.block:s1	-	-	-	3aa6ded33acb	-	da3cf727d5d6	-	-	2026-11-25	xproof
+69924636-138e-4baa-a378-0fd7df5b847d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:finneas-ace-archer:combat0.attack:s1,f:xs:XP:finneas-ace-archer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	da3cf727d5d6	-	-	2026-11-25	xproof
 699380f9-a032-4838-baf1-1575f37eb642	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 699610c9-c991-4faf-b712-d015ef0799ad	cast	cast-resolve	agreed	-	X	scen	1	0	Doc Samson, Super Psychiatrist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 699610c9-c991-4faf-b712-d015ef0799ad	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Doc Samson, Super Psychiatrist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

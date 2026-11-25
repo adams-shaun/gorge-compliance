@@ -35,7 +35,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c2fd3a3-96f2-4e84-85a9-77698c2f83aa	cast	cast	agreed	-	X	start	2	0	x:xs:XP:volcanic-salvo:cast:s1	-	-	-	ae86f6029288	-	847af8af4f38	-	-	2026-11-24	xproof
 9c30147a-1131-402e-bdaf-9006b1022b83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c329f3d-4d0a-4012-8aa6-92afdd120a52	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blade-of-selves:cast:s1,f:xs:XP:blade-of-selves:cast:s1	-	-	-	8c0bd19283bb	-	f1c79c8c91fe	-	-	2026-11-24	xproof
-9c329f3d-4d0a-4012-8aa6-92afdd120a52	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9c329f3d-4d0a-4012-8aa6-92afdd120a52	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:blade-of-selves:f0a0:s1,f:xs:XP:blade-of-selves:f0a0:s1	-	-	-	3aa6ded33acb	-	f1c79c8c91fe	-	-	2026-11-25	xproof
 9c36760b-57c5-488b-afc9-ef141942c6ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archfiend-of-despair:cast:s1,f:xs:XP:archfiend-of-despair:cast:s1	-	-	-	8c0bd19283bb	-	f51c54e73942	-	-	2026-11-24	xproof
 9c36760b-57c5-488b-afc9-ef141942c6ab	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:archfiend-of-despair:cast:s1,f:xs:XP:archfiend-of-despair:cast:s1	-	-	-	8c0bd19283bb	-	f51c54e73942	-	-	2026-11-24	xproof
 9c39bc53-52d3-4610-920e-5607a625b01f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a3	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c5a3407-e3e6-4f5f-9c24-6f24c19e1a2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c5a3407-e3e6-4f5f-9c24-6f24c19e1a2e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9c5a3407-e3e6-4f5f-9c24-6f24c19e1a2e	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 9c5f0d91-9d86-4e66-94fd-4af93ad01838	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spirited-companion:f0t0:s1,f:xs:XP:spirited-companion:f0t0:s1	-	-	-	ae86f6029288	-	bf1a43596e9b	-	-	2026-11-24	xproof
 9c5f0d91-9d86-4e66-94fd-4af93ad01838	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spirited-companion:f0t0:s1,f:xs:XP:spirited-companion:f0t0:s1	-	-	-	ae86f6029288	-	bf1a43596e9b	-	-	2026-11-24	xproof
 9c5f130d-5972-449e-83db-41fb8cf76004	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

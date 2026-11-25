@@ -13,7 +13,7 @@ cd10ebc9-9f6c-4da2-9a86-263902002ebc	f0/t0	NULL	owed	refused:no-generator:trigge
 cd1677e4-c356-43cd-9766-5fb8a1e64249	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd170b1c-879b-414e-9f0e-5e7fb099e7bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd170b1c-879b-414e-9f0e-5e7fb099e7bb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cd1a6508-aaba-4515-9496-057915d02040	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cd1a6508-aaba-4515-9496-057915d02040	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 cd1a9d87-4c91-4456-8d88-19e0d6e0b200	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gandalf-spark-starter:f0t0:s1,f:xs:XP:gandalf-spark-starter:f0t0:s1	-	-	-	25696bf19d5b	-	bc7deac70cd0	-	-	2026-11-24	xproof
 cd1a9d87-4c91-4456-8d88-19e0d6e0b200	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gandalf, Spark Starter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cd1a9d87-4c91-4456-8d88-19e0d6e0b200	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gandalf, Spark Starter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -51,8 +51,8 @@ cd3d79e9-c72e-4321-bca1-54505d51331a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cd3d79e9-c72e-4321-bca1-54505d51331a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cd403866-bef1-413a-85e2-c86e295b3589	cast	cast-resolve	agreed	-	X	scen	1	0	Agent of Atlas/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cd403866-bef1-413a-85e2-c86e295b3589	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Agent of Atlas/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cd444267-712c-450f-a349-e27faf4f4c7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cd444267-712c-450f-a349-e27faf4f4c7c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cd444267-712c-450f-a349-e27faf4f4c7c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:soldevi-golem:f0t0:s1	-	-	-	3aa6ded33acb	-	3631c04679a6	-	-	2026-11-25	xproof
+cd444267-712c-450f-a349-e27faf4f4c7c	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:soldevi-golem:f0t0:s1	-	-	-	3aa6ded33acb	-	3631c04679a6	-	-	2026-11-25	xproof
 cd45a29f-73bc-435c-9d50-09a4ecaa77be	cast	cast	agreed	-	F	start	2	0	f:xs:XP:howlsquad-heavy:cast:s1	-	-	-	23b491658465	-	bb613ccfd60c	-	-	2026-11-24	xproof
 cd45a29f-73bc-435c-9d50-09a4ecaa77be	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:howlsquad-heavy:static0.0:s1,f:xs:XP:howlsquad-heavy:static0.0:s1	-	-	-	3aa6ded33acb	-	bb613ccfd60c	-	-	2026-11-25	xproof
 cd45a29f-73bc-435c-9d50-09a4ecaa77be	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:howlsquad-heavy:static0.0:s1,f:xs:XP:howlsquad-heavy:static0.0:s1	-	-	-	3aa6ded33acb	-	bb613ccfd60c	-	-	2026-11-25	xproof

@@ -92,8 +92,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 646f9ad8-9d18-4b42-954a-e21a62e9f0e8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:aang-s-iceberg:f0t0:s2,f:xs:XP:aang-s-iceberg:f0t0:s2	-	-	-	267e485f6204	-	110e1e091c86	-	-	2026-11-24	xproof
 646f9ad8-9d18-4b42-954a-e21a62e9f0e8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Aang's Iceberg/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 646f9ad8-9d18-4b42-954a-e21a62e9f0e8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:aang-s-iceberg:f0t0:s2,f:xs:XP:aang-s-iceberg:f0t0:s2	-	-	-	267e485f6204	-	110e1e091c86	-	-	2026-11-24	xproof
-6470afc0-2f67-454a-8a5b-d8dfea4b84ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6470afc0-2f67-454a-8a5b-d8dfea4b84ce	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6470afc0-2f67-454a-8a5b-d8dfea4b84ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:extravagant-spirit:f0t0:s1,f:xs:XP:extravagant-spirit:f0t0:s1	-	-	-	3aa6ded33acb	-	7d6b87928e57	-	-	2026-11-25	xproof
+6470afc0-2f67-454a-8a5b-d8dfea4b84ce	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:extravagant-spirit:f0t0:s1,f:xs:XP:extravagant-spirit:f0t0:s1	-	-	-	3aa6ded33acb	-	7d6b87928e57	-	-	2026-11-25	xproof
 6471335e-e054-4e68-b02e-052d65a2fdfc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6471335e-e054-4e68-b02e-052d65a2fdfc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:flockchaser-phantom:f0t0:s1,f:xs:XP:flockchaser-phantom:f0t0:s1	-	-	-	8c0bd19283bb	-	20ed0b9b003f	-	-	2026-11-24	xproof
 64722c32-975b-43b9-9b4a-9511c75740d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64824ae5-efab-4b55-9d3c-b9c690bad857	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 6487fc1b-5c83-4d09-94d3-175725bcb922	cast	cast-resolve	agreed	-	FX	scen	2	0	Brigid's Command/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 64883ef2-c536-42e2-b52f-cfd1984fcdfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-648e4072-b991-46fd-b057-1e807091dcdf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-648e4072-b991-46fd-b057-1e807091dcdf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+648e4072-b991-46fd-b057-1e807091dcdf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloudskate:f0t0:s1,f:xs:XP:cloudskate:f0t0:s1	-	-	-	3aa6ded33acb	-	1e9053e9a0eb	-	-	2026-11-25	xproof
+648e4072-b991-46fd-b057-1e807091dcdf	f0/t0	Phase/Fading	agreed	-	FX	start	2	0	x:xs:XP:cloudskate:f0t0:s1,f:xs:XP:cloudskate:f0t0:s1	-	-	-	3aa6ded33acb	-	1e9053e9a0eb	-	-	2026-11-25	xproof
 649300e2-c491-435d-92d5-f1b88f0e2e2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 649300e2-c491-435d-92d5-f1b88f0e2e2e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 6493960b-4bbb-4ef0-8efb-abb122b1697d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6522070b-7002-44fd-8deb-832fe67ef9a9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:flock-impostor:combat0.block:s1,f:xs:XP:flock-impostor:combat0.block:s1	-	-	-	3aa6ded33acb	-	f4941bdfaf70	-	-	2026-11-25	xproof
 6522070b-7002-44fd-8deb-832fe67ef9a9	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:flock-impostor:f0t0:s2,f:xs:XP:flock-impostor:f0t0:s2	-	-	-	e07cf3a05ba5	-	f4941bdfaf70	-	-	2026-11-24	xproof
 65260087-48b5-4968-8584-7cc561bb312c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65260087-48b5-4968-8584-7cc561bb312c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+65260087-48b5-4968-8584-7cc561bb312c	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 652bfa31-b2eb-4cba-850f-1db02a83bb35	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 652d282d-6dec-4043-a531-480f12ba471e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 652d282d-6dec-4043-a531-480f12ba471e	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6556a15b-be4b-45ea-867d-3a8e26202b42	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6557813b-4ee7-4881-a37c-10c8ea097360	cast	cast-resolve	agreed	-	X	scen	1	0	Wartime Protestors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6557813b-4ee7-4881-a37c-10c8ea097360	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wartime Protestors/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-655a2b78-6a6c-4b9e-b7c0-48d3768978f5	cast	cast-resolve	agreed	-	X	scen	1	0	Scales of Shale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+655a2b78-6a6c-4b9e-b7c0-48d3768978f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scales-of-shale:cast:s1,f:xs:XP:scales-of-shale:cast:s1	-	-	-	3aa6ded33acb	-	efb7c554e75f	-	-	2026-11-25	xproof
 655a2b78-6a6c-4b9e-b7c0-48d3768978f5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Scales of Shale/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 655a584c-5280-4317-b707-101b7e31dcb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 655aece2-f33a-46e0-8f80-112ae8a457fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:convergence-of-dominion:cast:s1,f:xs:XP:convergence-of-dominion:cast:s1	-	-	-	8c0bd19283bb	-	5854ef4709e1	-	-	2026-11-24	xproof

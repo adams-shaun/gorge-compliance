@@ -30,8 +30,8 @@ cb2803ee-825b-420e-b404-c7c44f15ec15	static#0.0	static#0.0	agreed	-	X	scen	1	0	T
 cb2c8ea9-c125-4742-a562-b693254152e5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lunar-hatchling:cast:s1,f:xs:XP:lunar-hatchling:cast:s1	-	-	-	8c0bd19283bb	-	ec61be02163e	-	-	2026-11-24	xproof
 cb2c8ea9-c125-4742-a562-b693254152e5	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:lunar-hatchling:cast:s2,f:xs:XP:lunar-hatchling:cast:s2	-	-	-	8c0bd19283bb	-	ec61be02163e	-	-	2026-11-24	xproof
 cb2d222c-df42-41a7-a517-0a41e47a4280	cast	cast-resolve	agreed	-	FX	scen	2	0	Knightfisher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb2d222c-df42-41a7-a517-0a41e47a4280	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Knightfisher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb2d222c-df42-41a7-a517-0a41e47a4280	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Knightfisher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cb2d222c-df42-41a7-a517-0a41e47a4280	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:knightfisher:combat0.attack:s1,f:xs:XP:knightfisher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	a63385cd682d	-	-	2026-11-25	xproof
+cb2d222c-df42-41a7-a517-0a41e47a4280	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:knightfisher:combat0.block:s1,f:xs:XP:knightfisher:combat0.block:s1	-	-	-	3aa6ded33acb	-	a63385cd682d	-	-	2026-11-25	xproof
 cb2d222c-df42-41a7-a517-0a41e47a4280	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Knightfisher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cb33edaf-b604-48b8-8b9c-d6e462a8bebb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:charmed-sleep:cast:s1,f:xs:XP:charmed-sleep:cast:s1	-	-	-	3aa6ded33acb	-	4c251da0be2e	-	-	2026-11-25	xproof
 cb33edaf-b604-48b8-8b9c-d6e462a8bebb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:charmed-sleep:cast:s1,f:xs:XP:charmed-sleep:cast:s1	-	-	-	3aa6ded33acb	-	4c251da0be2e	-	-	2026-11-25	xproof
@@ -53,7 +53,7 @@ cb4b4b63-682b-4439-9757-84cca7a27db2	cast	cast-resolve	agreed	-	FX	scen	2	0	Eagl
 cb4b4b63-682b-4439-9757-84cca7a27db2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Eagle of the Great Shelf/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cb4b4b63-682b-4439-9757-84cca7a27db2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Eagle of the Great Shelf/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cb4b4b63-682b-4439-9757-84cca7a27db2	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Eagle of the Great Shelf/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb4baf53-51ed-468b-a468-5d7d45a6dc26	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cb4baf53-51ed-468b-a468-5d7d45a6dc26	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloak-of-feathers:cast:s1,f:xs:XP:cloak-of-feathers:cast:s1	-	-	-	3aa6ded33acb	-	53e5a8e49770	-	-	2026-11-25	xproof
 cb4f65b0-2841-42bf-8e18-d04a3b9f1a76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb4f65b0-2841-42bf-8e18-d04a3b9f1a76	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:epistolary-librarian:f0t0:s1,f:xs:XP:epistolary-librarian:f0t0:s1	-	-	-	8c0bd19283bb	-	9e202a898a9e	-	-	2026-11-24	xproof
 cb50ec2e-cb27-4ee5-a7de-64ab93619cea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -69,10 +69,10 @@ cb666ea8-55e3-4e27-ae6d-806677dfc17a	cast	cast-resolve	agreed	-	FX	scen	2	0	Airt
 cb666ea8-55e3-4e27-ae6d-806677dfc17a	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb666ea8-55e3-4e27-ae6d-806677dfc17a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Airtight Alibi/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cb666ea8-55e3-4e27-ae6d-806677dfc17a	static#0.1	static#0.1	agreed	-	X	scen	1	0	Airtight Alibi/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb68d1e4-36aa-4a00-b671-8959e7d526d4	cast	cast-resolve	agreed	-	X	scen	1	0	Lunar Convocation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb68d1e4-36aa-4a00-b671-8959e7d526d4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lunar Convocation/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb68d1e4-36aa-4a00-b671-8959e7d526d4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lunar Convocation/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb68d1e4-36aa-4a00-b671-8959e7d526d4	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Lunar Convocation/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cb68d1e4-36aa-4a00-b671-8959e7d526d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lunar-convocation:cast:s1,f:xs:XP:lunar-convocation:cast:s1	-	-	-	3aa6ded33acb	-	310e3ed71710	-	-	2026-11-25	xproof
+cb68d1e4-36aa-4a00-b671-8959e7d526d4	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:lunar-convocation:f0a0:s1,f:xs:XP:lunar-convocation:f0a0:s1	-	-	-	3aa6ded33acb	-	310e3ed71710	-	-	2026-11-25	xproof
+cb68d1e4-36aa-4a00-b671-8959e7d526d4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lunar-convocation:f0t0:s1,f:xs:XP:lunar-convocation:f0t0:s1	-	-	-	3aa6ded33acb	-	310e3ed71710	-	-	2026-11-25	xproof
+cb68d1e4-36aa-4a00-b671-8959e7d526d4	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:lunar-convocation:f0t1:s1,f:xs:XP:lunar-convocation:f0t1:s1	-	-	-	3aa6ded33acb	-	310e3ed71710	-	-	2026-11-25	xproof
 cb690399-0fb8-4bd8-a73d-5e0e594ff2ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb690399-0fb8-4bd8-a73d-5e0e594ff2ae	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb69e07c-c831-4992-8089-3a3a1278c45b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inescapable-brute:cast:s1,f:xs:XP:inescapable-brute:cast:s1	-	-	-	8a1b1a193ec0	-	4bc124c296fc	-	-	2026-11-24	xproof
@@ -169,8 +169,8 @@ cbcc2577-7556-4174-83ff-9e00611412b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tri
 cbcc2577-7556-4174-83ff-9e00611412b3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:trial-of-solidarity:f0t0:s1,f:xs:XP:trial-of-solidarity:f0t0:s1	-	-	-	d864b561c9cb	-	f760a64009df	-	-	2026-11-24	xproof
 cbcc2577-7556-4174-83ff-9e00611412b3	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cbd483b5-5554-43ed-a729-535d01b0d5d3	cast	cast-resolve	agreed	-	X	scen	1	0	Jace Reawakened/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cbd483b5-5554-43ed-a729-535d01b0d5d3	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:jace-reawakened:f0a0:s1,f:xs:XP:jace-reawakened:f0a0:s1	-	-	-	3aa6ded33acb	-	80c8f57d7b35	-	-	2026-11-25	xproof
-cbd483b5-5554-43ed-a729-535d01b0d5d3	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:theater-of-horrors:f0t0:s1,f:xs:XP:theater-of-horrors:f0t0:s1	-	-	-	3aa6ded33acb	-	80c8f57d7b35	-	-	2026-11-25	xproof
+cbd483b5-5554-43ed-a729-535d01b0d5d3	f0/a0	Draw	agreed	-	FX	start	1	0	x:xs:XP:kyren-sniper:f0t0:s2,f:xs:XP:kyren-sniper:f0t0:s2	-	-	-	3aa6ded33acb	-	80c8f57d7b35	-	-	2026-11-25	xproof
+cbd483b5-5554-43ed-a729-535d01b0d5d3	f0/a1	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:kyren-sniper:f0t0:s1,f:xs:XP:kyren-sniper:f0t0:s1	-	-	-	3aa6ded33acb	-	80c8f57d7b35	-	-	2026-11-25	xproof
 cbd483b5-5554-43ed-a729-535d01b0d5d3	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:jace-reawakened:f0a2:s1,f:xs:XP:jace-reawakened:f0a2:s1	-	-	-	3aa6ded33acb	-	80c8f57d7b35	-	-	2026-11-25	xproof
 cbd483b5-5554-43ed-a729-535d01b0d5d3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Jace Reawakened/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cbd4e160-9eb1-42de-aee8-6f1d1398f633	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

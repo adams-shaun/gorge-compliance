@@ -20,7 +20,7 @@ c916b81f-700e-4a1a-8c8e-c4685ceaecd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c916b81f-700e-4a1a-8c8e-c4685ceaecd2	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c91b0dd5-4c63-49a5-95bf-c342b6ff2076	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:vraska-joins-up:f0t0:s2,f:xs:XP:vraska-joins-up:f0t0:s2	-	-	-	e07cf3a05ba5	-	8715d60a6c1d	-	-	2026-11-24	xproof
 c91b0dd5-4c63-49a5-95bf-c342b6ff2076	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:vraska-joins-up:f0t0:s2,f:xs:XP:vraska-joins-up:f0t0:s2	-	-	-	e07cf3a05ba5	-	8715d60a6c1d	-	-	2026-11-24	xproof
-c91b0dd5-4c63-49a5-95bf-c342b6ff2076	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Vraska Joins Up/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c91b0dd5-4c63-49a5-95bf-c342b6ff2076	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:vraska-joins-up:f0t1:s1,f:xs:XP:vraska-joins-up:f0t1:s1	-	-	-	3aa6ded33acb	-	8715d60a6c1d	-	-	2026-11-25	xproof
 c91c7d6b-a502-4b66-9509-3c1eda00e763	cast	cast-resolve	agreed	-	X	scen	1	0	Fíli the Pathfinder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c91c7d6b-a502-4b66-9509-3c1eda00e763	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fíli the Pathfinder/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c91e64d4-e687-4ccd-a56e-796cff6e052c	cast	cast-resolve	agreed	-	FX	scen	2	0	Baron Strucker, HYDRA Overlord/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -99,8 +99,8 @@ c97957a2-8310-4cff-8aad-871b7901d124	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Care
 c97957a2-8310-4cff-8aad-871b7901d124	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Caretaker's Talent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c97957a2-8310-4cff-8aad-871b7901d124	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Caretaker's Talent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c97957a2-8310-4cff-8aad-871b7901d124	static#0.0	static#0.0	agreed	-	X	scen	1	0	Caretaker's Talent/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c9798915-3f9e-466b-bbd6-f4e126bdb67d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c9798915-3f9e-466b-bbd6-f4e126bdb67d	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+c9798915-3f9e-466b-bbd6-f4e126bdb67d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maddening-wind:cast:s1,f:xs:XP:maddening-wind:cast:s1	-	-	-	3aa6ded33acb	-	4f2bd6027ae0	-	-	2026-11-25	xproof
+c9798915-3f9e-466b-bbd6-f4e126bdb67d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:maddening-wind:cast:s1,f:xs:XP:maddening-wind:cast:s1	-	-	-	3aa6ded33acb	-	4f2bd6027ae0	-	-	2026-11-25	xproof
 c9798915-3f9e-466b-bbd6-f4e126bdb67d	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 c98163f4-4a78-43f8-9855-4a23ebb9ceeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c9823e5f-d0f8-4d28-8b3b-55f94ea9d76f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -158,9 +158,9 @@ c9dd2bf5-32e0-47f7-9a49-501c262d745b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c9de9f0b-bf07-4171-b54d-69033424a212	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c9de9f0b-bf07-4171-b54d-69033424a212	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c9de9f0b-bf07-4171-b54d-69033424a212	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-c9e7218f-07f2-46f3-bc63-eb5c0d32538b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arctic-wolves:f0t0:s1,f:xs:XP:arctic-wolves:f0t0:s1	-	-	-	8c0bd19283bb	-	e396fa14f3ac	-	-	2026-11-24	xproof
-c9e7218f-07f2-46f3-bc63-eb5c0d32538b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arctic-wolves:f0t0:s1,f:xs:XP:arctic-wolves:f0t0:s1	-	-	-	8c0bd19283bb	-	e396fa14f3ac	-	-	2026-11-24	xproof
-c9e7218f-07f2-46f3-bc63-eb5c0d32538b	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c9e7218f-07f2-46f3-bc63-eb5c0d32538b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e396fa14f3ac	-	-	2026-11-25	xproof
+c9e7218f-07f2-46f3-bc63-eb5c0d32538b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e396fa14f3ac	-	-	2026-11-25	xproof
+c9e7218f-07f2-46f3-bc63-eb5c0d32538b	f0/t1	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e396fa14f3ac	-	-	2026-11-25	xproof
 c9ed4397-e7b7-469c-94e3-8fc70d88664f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cytoplast-root-kin:cast:s1,f:xs:XP:cytoplast-root-kin:cast:s1	-	-	-	16ec2936189a	-	2a48d7956017	-	-	2026-11-24	xproof
 c9ed4397-e7b7-469c-94e3-8fc70d88664f	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 c9ed4397-e7b7-469c-94e3-8fc70d88664f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cytoplast-root-kin:cast:s1,f:xs:XP:cytoplast-root-kin:cast:s1	-	-	-	16ec2936189a	-	2a48d7956017	-	-	2026-11-24	xproof

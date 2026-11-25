@@ -54,11 +54,11 @@ e12bba04-b10f-4bbd-959c-560f31630951	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emb
 e12bba04-b10f-4bbd-959c-560f31630951	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:embodiment-of-spring:f0a0:s1,f:xs:XP:embodiment-of-spring:f0a0:s1	-	-	-	d864b561c9cb	-	572c095d986a	-	-	2026-11-24	xproof
 e12ed186-01c1-4da5-b90f-cfbb77c4e8d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e12f00f4-89f2-4d1d-94cf-460945d80a4e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e12f00f4-89f2-4d1d-94cf-460945d80a4e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e12f00f4-89f2-4d1d-94cf-460945d80a4e	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 e12fb44a-524e-4603-a89c-fad8204fdb2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawnhart-mentor:f0t0:s1,f:xs:XP:dawnhart-mentor:f0t0:s1	-	-	-	d864b561c9cb	-	9f89eb796c7f	-	-	2026-11-24	xproof
 e12fb44a-524e-4603-a89c-fad8204fdb2b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e12fb44a-524e-4603-a89c-fad8204fdb2b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dawnhart-mentor:f0t0:s1,f:xs:XP:dawnhart-mentor:f0t0:s1	-	-	-	d864b561c9cb	-	9f89eb796c7f	-	-	2026-11-24	xproof
-e13113ba-1923-493c-a48d-ca320b7adbde	cast	cast-resolve	agreed	-	X	scen	1	0	Scorching Shot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e13113ba-1923-493c-a48d-ca320b7adbde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scorching-shot:cast:s1,f:xs:XP:scorching-shot:cast:s1	-	-	-	3aa6ded33acb	-	20bd5d1e04b5	-	-	2026-11-25	xproof
 e132bba0-40c5-4095-99a3-02cad520ca99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e132bba0-40c5-4095-99a3-02cad520ca99	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:vectis-silencers:f0a0:s1,f:xs:XP:vectis-silencers:f0a0:s1	-	-	-	8a1b1a193ec0	-	80c3529c6b52	-	-	2026-11-24	xproof
 e139176f-483f-4f05-af3d-0176d0048b62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -106,8 +106,8 @@ e1733392-1402-458b-bbc7-673d733c731c	f0/t1	Attacks/Training	agreed	-	FX	start	2	
 e175a3c1-df6c-4aa7-a4c9-893b466ad9e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e17db9d8-14b0-4f72-aacc-f51fae4597e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawnfeather-eagle:f0t0:s1,f:xs:XP:dawnfeather-eagle:f0t0:s1	-	-	-	d864b561c9cb	-	e7d3b40bb848	-	-	2026-11-24	xproof
 e17db9d8-14b0-4f72-aacc-f51fae4597e2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dawnfeather-eagle:f0t0:s1,f:xs:XP:dawnfeather-eagle:f0t0:s1	-	-	-	d864b561c9cb	-	e7d3b40bb848	-	-	2026-11-24	xproof
-e17e3bda-75cb-47a1-9f60-f50705a46a1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e17e3bda-75cb-47a1-9f60-f50705a46a1e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e17e3bda-75cb-47a1-9f60-f50705a46a1e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	feb5e2ccfb49	-	-	2026-11-25	xproof
+e17e3bda-75cb-47a1-9f60-f50705a46a1e	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	feb5e2ccfb49	-	-	2026-11-25	xproof
 e17ea7eb-362e-4c61-97cd-537f3921bced	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1865bec-1744-40c2-9031-7d6363be5333	cast	cast-resolve	agreed	-	FX	scen	2	0	The Last Ronin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e186cc6f-8c11-4475-a704-0b4c3a9eade9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:byway-courier:cast:s1,f:xs:XP:byway-courier:cast:s1	-	-	-	d864b561c9cb	-	3c3fd50499de	-	-	2026-11-24	xproof
@@ -162,9 +162,9 @@ e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lil
 e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	f0/a0	PutCounter	agreed	-	FX	start	1	0	x:xs:XP:liliana-death-wielder:cast:s2,f:xs:XP:liliana-death-wielder:cast:s2	-	-	-	d864b561c9cb	-	34e71085cc03	-	-	2026-11-24	xproof
 e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	f0/a1	Destroy	agreed	-	FX	start	1	0	x:xs:XP:liliana-death-wielder:cast:s1,f:xs:XP:liliana-death-wielder:cast:s1	-	-	-	d864b561c9cb	-	34e71085cc03	-	-	2026-11-24	xproof
 e1b6cc44-41b6-43d0-9fe9-722cebb1c47b	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-e1b74ef7-ab6b-4d40-8087-3f3a448b7e0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e1b74ef7-ab6b-4d40-8087-3f3a448b7e0a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e1b74ef7-ab6b-4d40-8087-3f3a448b7e0a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e1b74ef7-ab6b-4d40-8087-3f3a448b7e0a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crovax-the-cursed:f0t0:s1,f:xs:XP:crovax-the-cursed:f0t0:s1	-	-	-	3aa6ded33acb	-	b6ec88d7ffab	-	-	2026-11-25	xproof
+e1b74ef7-ab6b-4d40-8087-3f3a448b7e0a	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:crovax-the-cursed:f0t0:s1,f:xs:XP:crovax-the-cursed:f0t0:s1	-	-	-	3aa6ded33acb	-	b6ec88d7ffab	-	-	2026-11-25	xproof
+e1b74ef7-ab6b-4d40-8087-3f3a448b7e0a	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:crovax-the-cursed:f0t0:s1,f:xs:XP:crovax-the-cursed:f0t0:s1	-	-	-	3aa6ded33acb	-	b6ec88d7ffab	-	-	2026-11-25	xproof
 e1b7db10-58a1-46fc-ac6c-287393ed96c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1b7db10-58a1-46fc-ac6c-287393ed96c2	f0/t0	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:rhox-charger:f0t0:s1,f:xs:XP:rhox-charger:f0t0:s1	-	-	-	8a1b1a193ec0	-	603c36edb5f2	-	-	2026-11-24	xproof
 e1bf20b0-2bd7-4a0f-9a02-41e43bd44641	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

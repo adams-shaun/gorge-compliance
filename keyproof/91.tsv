@@ -70,7 +70,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9148f2cb-5594-463c-a21b-a67706ec46d1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Flitterwing Nuisance/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9148f2cb-5594-463c-a21b-a67706ec46d1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Flitterwing Nuisance/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 914ce8f6-5e92-436d-8541-1c72da8577dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-914ce8f6-5e92-436d-8541-1c72da8577dc	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+914ce8f6-5e92-436d-8541-1c72da8577dc	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 91508175-fa1d-4c51-99d4-036a2de6abb0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thalia-s-lieutenant:f0t0:s1,f:xs:XP:thalia-s-lieutenant:f0t0:s1	-	-	-	d864b561c9cb	-	09aabf68fbd5	-	-	2026-11-24	xproof
 91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thalia-s-lieutenant:f0t0:s1,f:xs:XP:thalia-s-lieutenant:f0t0:s1	-	-	-	d864b561c9cb	-	09aabf68fbd5	-	-	2026-11-24	xproof
 91508175-fa1d-4c51-99d4-036a2de6abb0	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91d0a557-7a80-46d5-b823-392a84a6be44	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 91dab3e2-039e-4db9-94e3-1146bced18ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91dab3e2-039e-4db9-94e3-1146bced18ed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91ddd2bd-2dec-4670-8edb-e89c009b2187	cast	cast-resolve	agreed	-	X	scen	1	0	Pearl of Wisdom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+91ddd2bd-2dec-4670-8edb-e89c009b2187	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pearl-of-wisdom:cast:s1,f:xs:XP:pearl-of-wisdom:cast:s1	-	-	-	3aa6ded33acb	-	452af68dde41	-	-	2026-11-25	xproof
 91ddd2bd-2dec-4670-8edb-e89c009b2187	static#0.0	static#0.0	agreed	-	X	scen	1	0	Pearl of Wisdom/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91e09399-3f09-4323-8533-51536ecb7869	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e09399-3f09-4323-8533-51536ecb7869	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -181,8 +181,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91e3f057-c24f-42b5-8525-74b44bdefc83	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 91e49e8e-575f-43c8-9263-a8568697e7f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rictus-robber:f0t0:s1,f:xs:XP:rictus-robber:f0t0:s1	-	-	-	3aa6ded33acb	-	fc2a776ff044	-	-	2026-11-25	xproof
 91e49e8e-575f-43c8-9263-a8568697e7f4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rictus-robber:f0t0:s1,f:xs:XP:rictus-robber:f0t0:s1	-	-	-	3aa6ded33acb	-	fc2a776ff044	-	-	2026-11-25	xproof
-91e6fb47-59e4-4616-b8dd-3a7e30070074	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91e6fb47-59e4-4616-b8dd-3a7e30070074	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91e6fb47-59e4-4616-b8dd-3a7e30070074	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bottomless-pit:f0t0:s1,f:xs:XP:bottomless-pit:f0t0:s1	-	-	-	3aa6ded33acb	-	408781e4d603	-	-	2026-11-25	xproof
+91e6fb47-59e4-4616-b8dd-3a7e30070074	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:bottomless-pit:f0t0:s1,f:xs:XP:bottomless-pit:f0t0:s1	-	-	-	3aa6ded33acb	-	408781e4d603	-	-	2026-11-25	xproof
 91e71279-c9d2-4873-916a-59da03a65741	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e71279-c9d2-4873-916a-59da03a65741	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91ebedb5-cb5f-4c58-ad30-6c6b0a106aa0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frogtosser-banneret:cast:s1,f:xs:XP:frogtosser-banneret:cast:s1	-	-	-	d864b561c9cb	-	26cac847c7d9	-	-	2026-11-24	xproof

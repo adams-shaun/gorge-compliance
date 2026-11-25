@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1228bd6f-565d-4ad5-bd24-e5aa1ead5dee	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:herald-of-war:f0t0:s1,f:xs:XP:herald-of-war:f0t0:s1	-	-	-	d864b561c9cb	-	7053b58d464b	-	-	2026-11-24	xproof
 1229b82f-fc50-4259-83c6-31f706ac2303	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:horde-of-boggarts:cast:s1,f:xs:XP:horde-of-boggarts:cast:s1	-	-	-	8a1b1a193ec0	-	511ad751cf22	-	-	2026-11-24	xproof
 123147b4-57d0-44cd-bdd5-a449ac86c1cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-123147b4-57d0-44cd-bdd5-a449ac86c1cb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+123147b4-57d0-44cd-bdd5-a449ac86c1cb	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:vile-deacon:f0t0:s1,f:xs:XP:vile-deacon:f0t0:s1	-	-	-	3aa6ded33acb	-	7d36748edb3a	-	-	2026-11-25	xproof
 1232c461-643c-40a3-901e-09b665f817da	cast	cast-resolve	agreed	-	FX	scen	2	0	Noxious Newt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1232c461-643c-40a3-901e-09b665f817da	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Noxious Newt/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1232c461-643c-40a3-901e-09b665f817da	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Noxious Newt/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 124c8663-21f3-4cd8-a060-9d04be35c43f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 124cf15a-587a-4f1f-a943-f462072f2098	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 124fea1b-c0e9-4e56-b026-82dddee0d36e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-124fea1b-c0e9-4e56-b026-82dddee0d36e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+124fea1b-c0e9-4e56-b026-82dddee0d36e	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 1251691e-3c4c-4e45-9f59-f156852f2268	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lossarnach-captain:f0t0:s1,f:xs:XP:lossarnach-captain:f0t0:s1	-	-	-	8c0bd19283bb	-	ff9efc6767ab	-	-	2026-11-24	xproof
 1251691e-3c4c-4e45-9f59-f156852f2268	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lossarnach-captain:f0t0:s1,f:xs:XP:lossarnach-captain:f0t0:s1	-	-	-	8c0bd19283bb	-	ff9efc6767ab	-	-	2026-11-24	xproof
 1251691e-3c4c-4e45-9f59-f156852f2268	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,16 +140,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1285a519-b3a8-4014-8f33-89f3beb0c00b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 128b6751-4b47-4d7d-895e-c5d85776f6c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 128e0bd1-ed1d-4f53-8dae-83ee95f6fa2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-128ec451-97f6-4f01-8929-689fd4c45f40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-128ec451-97f6-4f01-8929-689fd4c45f40	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-128ec451-97f6-4f01-8929-689fd4c45f40	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+128ec451-97f6-4f01-8929-689fd4c45f40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-prowler:f0t0:s1,f:xs:XP:phyrexian-prowler:f0t0:s1	-	-	-	3aa6ded33acb	-	24b2c75d801f	-	-	2026-11-25	xproof
+128ec451-97f6-4f01-8929-689fd4c45f40	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-prowler:f0t0:s1,f:xs:XP:phyrexian-prowler:f0t0:s1	-	-	-	3aa6ded33acb	-	24b2c75d801f	-	-	2026-11-25	xproof
+128ec451-97f6-4f01-8929-689fd4c45f40	f0/t0	Phase/Fading	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-prowler:f0t0:s1,f:xs:XP:phyrexian-prowler:f0t0:s1	-	-	-	3aa6ded33acb	-	24b2c75d801f	-	-	2026-11-25	xproof
 128f7e5a-17e0-4069-a185-c9f874c7d234	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:consulate-crackdown:f0t0:s1,f:xs:XP:consulate-crackdown:f0t0:s1	-	-	-	d864b561c9cb	-	ccb692e3405c	-	-	2026-11-24	xproof
 128f7e5a-17e0-4069-a185-c9f874c7d234	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:consulate-crackdown:f0t0:s1,f:xs:XP:consulate-crackdown:f0t0:s1	-	-	-	d864b561c9cb	-	ccb692e3405c	-	-	2026-11-24	xproof
-129476ae-9dab-4e04-8e8e-f249afd56ff9	cast	cast-resolve	agreed	-	X	scen	1	0	Maha, Its Feathers Night/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-129476ae-9dab-4e04-8e8e-f249afd56ff9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Maha, Its Feathers Night/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-129476ae-9dab-4e04-8e8e-f249afd56ff9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Maha, Its Feathers Night/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-129476ae-9dab-4e04-8e8e-f249afd56ff9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Maha, Its Feathers Night/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-129476ae-9dab-4e04-8e8e-f249afd56ff9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Maha, Its Feathers Night/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+129476ae-9dab-4e04-8e8e-f249afd56ff9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maha-its-feathers-night:cast:s1,f:xs:XP:maha-its-feathers-night:cast:s1	-	-	-	3aa6ded33acb	-	6ca6ccbcdb22	-	-	2026-11-25	xproof
+129476ae-9dab-4e04-8e8e-f249afd56ff9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:maha-its-feathers-night:combat0.attack:s1,f:xs:XP:maha-its-feathers-night:combat0.attack:s1	-	-	-	3aa6ded33acb	-	6ca6ccbcdb22	-	-	2026-11-25	xproof
+129476ae-9dab-4e04-8e8e-f249afd56ff9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:maha-its-feathers-night:combat0.block:s1,f:xs:XP:maha-its-feathers-night:combat0.block:s1	-	-	-	3aa6ded33acb	-	6ca6ccbcdb22	-	-	2026-11-25	xproof
+129476ae-9dab-4e04-8e8e-f249afd56ff9	f0/t0	BecomesTarget/Ward	agreed	-	F	start	2	0	f:xs:XP:maha-its-feathers-night:f0t0:s1	-	-	-	3aa6ded33acb	-	6ca6ccbcdb22	-	-	2026-11-25	xproof
+129476ae-9dab-4e04-8e8e-f249afd56ff9	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:maha-its-feathers-night:static0.0:s1,f:xs:XP:maha-its-feathers-night:static0.0:s1	-	-	-	3aa6ded33acb	-	6ca6ccbcdb22	-	-	2026-11-25	xproof
 12956c07-e679-471b-8dcb-2a2d15b0be55	cast	cast	agreed	-	F	start	2	0	f:xs:XP:honest-work:f0t0:s1	-	-	-	25696bf19d5b	-	1cb30b2aef07	-	-	2026-11-24	xproof
 12956c07-e679-471b-8dcb-2a2d15b0be55	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:honest-work:f0t0:s1	-	-	-	25696bf19d5b	-	1cb30b2aef07	-	-	2026-11-24	xproof
 12956c07-e679-471b-8dcb-2a2d15b0be55	static#0.0	static#0.0	agreed	-	X	scen	1	0	Honest Work/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

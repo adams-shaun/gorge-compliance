@@ -31,8 +31,8 @@ d2240ce8-0bd6-4c4f-a73e-fb0a2af5bfac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d22b7d4a-0ac7-4221-80fd-a47edad03b84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d22b7d4a-0ac7-4221-80fd-a47edad03b84	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d22b7d4a-0ac7-4221-80fd-a47edad03b84	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-d22d3934-8437-4a18-81c1-4e9c501846ca	cast	cast-resolve	agreed	-	X	scen	1	0	Tomb Trawler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d22d3934-8437-4a18-81c1-4e9c501846ca	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tomb Trawler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d22d3934-8437-4a18-81c1-4e9c501846ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tomb-trawler:cast:s1,f:xs:XP:tomb-trawler:cast:s1	-	-	-	3aa6ded33acb	-	7f9aa4e1618a	-	-	2026-11-25	xproof
+d22d3934-8437-4a18-81c1-4e9c501846ca	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:tomb-trawler:f0a0:s1,f:xs:XP:tomb-trawler:f0a0:s1	-	-	-	3aa6ded33acb	-	7f9aa4e1618a	-	-	2026-11-25	xproof
 d22ff377-d282-4a28-9dce-96f25913dc96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d22ff377-d282-4a28-9dce-96f25913dc96	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d22ff377-d282-4a28-9dce-96f25913dc96	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -128,8 +128,8 @@ d2a86d0c-a4fe-434c-a45c-812cdec9169f	cast	NULL	owed	refused:not-sent	-	start	0	0
 d2a86d0c-a4fe-434c-a45c-812cdec9169f	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 d2aa50d2-d22d-495e-afc9-23a51c8c8f32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2aa9649-8394-48ca-bee6-a044e5a86b38	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:spinewoods-paladin:f0t0:s2,f:xs:XP:spinewoods-paladin:f0t0:s2	-	-	-	267e485f6204	-	3f5f0a1fb943	-	-	2026-11-24	xproof
-d2aa9649-8394-48ca-bee6-a044e5a86b38	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spinewoods Paladin/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d2aa9649-8394-48ca-bee6-a044e5a86b38	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spinewoods Paladin/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d2aa9649-8394-48ca-bee6-a044e5a86b38	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:spinewoods-paladin:combat0.attack:s1,f:xs:XP:spinewoods-paladin:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3f5f0a1fb943	-	-	2026-11-25	xproof
+d2aa9649-8394-48ca-bee6-a044e5a86b38	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:spinewoods-paladin:combat0.block:s1,f:xs:XP:spinewoods-paladin:combat0.block:s1	-	-	-	3aa6ded33acb	-	3f5f0a1fb943	-	-	2026-11-25	xproof
 d2aa9649-8394-48ca-bee6-a044e5a86b38	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:spinewoods-paladin:f0t0:s2,f:xs:XP:spinewoods-paladin:f0t0:s2	-	-	-	267e485f6204	-	3f5f0a1fb943	-	-	2026-11-24	xproof
 d2abfcd1-c00c-43fa-a9ca-a9577b3c8a60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2abfcd1-c00c-43fa-a9ca-a9577b3c8a60	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ d2bcff58-7a8a-46ef-b6b3-39501d4c8e6e	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Thun
 d2bcff58-7a8a-46ef-b6b3-39501d4c8e6e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:thundering-falls:f0t0:s1,f:xs:XP:thundering-falls:f0t0:s1	-	-	-	23b491658465	-	87ef86113d24	-	-	2026-11-24	xproof
 d2bcff58-7a8a-46ef-b6b3-39501d4c8e6e	land	land	agreed	-	FX	start	4	0	x:xs:XP:thundering-falls:f0t0:s1,f:xs:XP:thundering-falls:f0t0:s1	-	-	-	23b491658465	-	87ef86113d24	-	-	2026-11-24	xproof
 d2bd182c-532f-4c77-adb8-754f2c2fcd82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2bd23a6-4f77-4d6e-bf8f-339cb7a4184d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d2bd23a6-4f77-4d6e-bf8f-339cb7a4184d	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 d2be289e-e560-405d-9728-d8a4ee9cbf56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tigereye-cameo:cast:s1,f:xs:XP:tigereye-cameo:cast:s1	-	-	-	fc71ca68c5ac	-	4b1b7aa727e4	-	-	2026-11-24	xproof
 d2be289e-e560-405d-9728-d8a4ee9cbf56	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:tigereye-cameo:cast:s1,f:xs:XP:tigereye-cameo:cast:s1	-	-	-	fc71ca68c5ac	-	4b1b7aa727e4	-	-	2026-11-24	xproof
 d2c53737-c265-46e3-a779-52c6b4f82d7d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:break-asunder:cast:s2,f:xs:XP:break-asunder:cast:s2	-	-	-	fc71ca68c5ac	-	b9f24bb84ff9	-	-	2026-11-24	xproof

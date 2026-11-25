@@ -79,12 +79,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f523026-beda-4549-96c0-e92108170261	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thriving-ibex:f0t0:s1,f:xs:XP:thriving-ibex:f0t0:s1	-	-	-	d864b561c9cb	-	c20a8d27cffe	-	-	2026-11-24	xproof
 3f523026-beda-4549-96c0-e92108170261	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thriving-ibex:f0t0:s1,f:xs:XP:thriving-ibex:f0t0:s1	-	-	-	d864b561c9cb	-	c20a8d27cffe	-	-	2026-11-24	xproof
 3f523026-beda-4549-96c0-e92108170261	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:thriving-ibex:f0t1:s1,f:xs:XP:thriving-ibex:f0t1:s1	-	-	-	d864b561c9cb	-	c20a8d27cffe	-	-	2026-11-24	xproof
-3f53fd3e-9116-4599-81df-a9390461b549	cast	cast	agreed	-	F	start	2	0	f:xs:XP:bloodcurdler:cast:s1	-	-	-	fc71ca68c5ac	-	d136f8a8c09e	-	-	2026-11-24	xproof
-3f53fd3e-9116-4599-81df-a9390461b549	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f53fd3e-9116-4599-81df-a9390461b549	cast	cast	agreed	-	F	start	2	0	f:xs:XP:bloodcurdler:f0t0:s1	-	-	-	3aa6ded33acb	-	d136f8a8c09e	-	-	2026-11-25	xproof
+3f53fd3e-9116-4599-81df-a9390461b549	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:bloodcurdler:f0t0:s1	-	-	-	3aa6ded33acb	-	d136f8a8c09e	-	-	2026-11-25	xproof
 3f599e15-cbc5-4170-b6b4-efd16aa222ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f5acd90-199c-4ed3-9c8a-eeac4670d876	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f5bbfaa-cbd7-47af-9aa2-abb49d672734	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f5bbfaa-cbd7-47af-9aa2-abb49d672734	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f5bbfaa-cbd7-47af-9aa2-abb49d672734	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2966160dd281	-	-	2026-11-25	xproof
+3f5bbfaa-cbd7-47af-9aa2-abb49d672734	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2966160dd281	-	-	2026-11-25	xproof
 3f5db55a-8bae-4e97-86bd-f2a2dacf07a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grizzlegom-hurloon-hero:cast:s1,f:xs:XP:grizzlegom-hurloon-hero:cast:s1	-	-	-	8c0bd19283bb	-	edf875e49c67	-	-	2026-11-24	xproof
 3f5db55a-8bae-4e97-86bd-f2a2dacf07a4	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:grizzlegom-hurloon-hero:f0t0:s1,f:xs:XP:grizzlegom-hurloon-hero:f0t0:s1	-	-	-	8c0bd19283bb	-	edf875e49c67	-	-	2026-11-24	xproof
 3f60de36-ed63-4d08-a012-fc16e91da46d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,8 +137,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Alacrian Armory/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3fa5e109-4a67-4523-8183-90e48a906400	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fa5e109-4a67-4523-8183-90e48a906400	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3fa67c92-6328-4d0a-95e3-656d447ab20e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3fa67c92-6328-4d0a-95e3-656d447ab20e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3fa67c92-6328-4d0a-95e3-656d447ab20e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zealots-en-dal:f0t0:s1,f:xs:XP:zealots-en-dal:f0t0:s1	-	-	-	3aa6ded33acb	-	fd4a014de3fe	-	-	2026-11-25	xproof
+3fa67c92-6328-4d0a-95e3-656d447ab20e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:zealots-en-dal:f0t0:s1,f:xs:XP:zealots-en-dal:f0t0:s1	-	-	-	3aa6ded33acb	-	fd4a014de3fe	-	-	2026-11-25	xproof
 3fa71348-fa4d-4f39-a451-cf1570591991	cast	cast-resolve	agreed	-	X	scen	1	0	Imperious Perfect/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3fa71348-fa4d-4f39-a451-cf1570591991	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Imperious Perfect/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3fa71348-fa4d-4f39-a451-cf1570591991	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:imperious-perfect:static0.0:s1,f:xs:XP:imperious-perfect:static0.0:s1	-	-	-	3aa6ded33acb	-	8b3ec265211c	-	-	2026-11-25	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3fdc76b0-450a-4fcb-8a64-113edce67f3d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bronze-walrus:f0t0:s1,f:xs:XP:bronze-walrus:f0t0:s1	-	-	-	8c0bd19283bb	-	de7c91fd82f9	-	-	2026-11-24	xproof
 3fdee2ab-7ec6-4fc6-ad99-f04571f94583	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marjhan:cast:s1,f:xs:XP:marjhan:cast:s1	-	-	-	ea3140b6974b	-	92c02efe3e41	-	-	2026-11-24	xproof
 3fdee2ab-7ec6-4fc6-ad99-f04571f94583	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-3fdee2ab-7ec6-4fc6-ad99-f04571f94583	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3fdee2ab-7ec6-4fc6-ad99-f04571f94583	f0/a1	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 3fdee2ab-7ec6-4fc6-ad99-f04571f94583	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 3fdf064d-a5be-4925-87b1-3547997f0840	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lictor:f0t0:s1,f:xs:XP:lictor:f0t0:s1	-	-	-	23b491658465	-	34c2e97aa91d	-	-	2026-11-24	xproof
 3fdf064d-a5be-4925-87b1-3547997f0840	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

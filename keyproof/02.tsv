@@ -4,9 +4,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0203e250-d60e-46c6-9c58-d620f0377be0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 020503f5-0915-4cd5-a617-1c7bde045e10	cast	counter-spell	agreed	-	X	scen	1	0	Reasonable Doubt/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 02070488-9203-4304-9392-a111d20218c5	cast	cast-resolve	agreed	-	X	scen	1	0	Flashback/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-02079e18-ac14-4255-95c4-741eb76c4799	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02079e18-ac14-4255-95c4-741eb76c4799	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02079e18-ac14-4255-95c4-741eb76c4799	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02079e18-ac14-4255-95c4-741eb76c4799	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2f32f65382c8	-	-	2026-11-25	xproof
+02079e18-ac14-4255-95c4-741eb76c4799	f0/a0	Regenerate	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2f32f65382c8	-	-	2026-11-25	xproof
+02079e18-ac14-4255-95c4-741eb76c4799	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2f32f65382c8	-	-	2026-11-25	xproof
 02090581-61aa-4348-ad57-451be8ee91c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ponder:cast:s1,f:xs:XP:ponder:cast:s1	-	-	-	8c0bd19283bb	-	c601c10f40cc	-	-	2026-11-24	xproof
 02095128-82cd-4531-b47e-471307746f81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02095128-82cd-4531-b47e-471307746f81	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -51,9 +51,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02238355-9c84-4ae0-b850-269f460144a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seasoned-pyromancer:f0t0:s1,f:xs:XP:seasoned-pyromancer:f0t0:s1	-	-	-	d864b561c9cb	-	7245e2eaecb4	-	-	2026-11-24	xproof
 02238355-9c84-4ae0-b850-269f460144a8	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 02238355-9c84-4ae0-b850-269f460144a8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:seasoned-pyromancer:f0t0:s1,f:xs:XP:seasoned-pyromancer:f0t0:s1	-	-	-	d864b561c9cb	-	7245e2eaecb4	-	-	2026-11-24	xproof
-02269353-2949-4599-b5a3-f20fdb501285	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:recantation:cast:s1,f:xs:XP:recantation:cast:s1	-	-	-	5f2128bf97e4	-	d2e09de454e4	-	-	2026-11-24	xproof
-02269353-2949-4599-b5a3-f20fdb501285	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-02269353-2949-4599-b5a3-f20fdb501285	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02269353-2949-4599-b5a3-f20fdb501285	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:recantation:f0t0:s1,f:xs:XP:recantation:f0t0:s1	-	-	-	3aa6ded33acb	-	d2e09de454e4	-	-	2026-11-25	xproof
+02269353-2949-4599-b5a3-f20fdb501285	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:recantation:f0t0:s1,f:xs:XP:recantation:f0t0:s1	-	-	-	3aa6ded33acb	-	d2e09de454e4	-	-	2026-11-25	xproof
+02269353-2949-4599-b5a3-f20fdb501285	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:recantation:f0t0:s1,f:xs:XP:recantation:f0t0:s1	-	-	-	3aa6ded33acb	-	d2e09de454e4	-	-	2026-11-25	xproof
 0230de18-8d15-4cfa-9d42-7ccddd9f9570	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0232418d-1c52-4573-b488-c62345ca1c8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0232418d-1c52-4573-b488-c62345ca1c8d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -111,9 +111,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0274f286-46a1-4028-878a-88c2146a895c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sultai-emissary:f0t0:s1,f:xs:XP:sultai-emissary:f0t0:s1	-	-	-	d864b561c9cb	-	a3a6b92ba45c	-	-	2026-11-24	xproof
 02765930-e15e-4cc1-ac0d-040334a9c5bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02765930-e15e-4cc1-ac0d-040334a9c5bc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-027989e7-20c4-4773-b6b4-20337cc5fe8c	cast	cast-resolve	agreed	-	X	scen	1	0	Eluge, the Shoreless Sea/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-027989e7-20c4-4773-b6b4-20337cc5fe8c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-027989e7-20c4-4773-b6b4-20337cc5fe8c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Eluge, the Shoreless Sea/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+027989e7-20c4-4773-b6b4-20337cc5fe8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eluge-the-shoreless-sea:cast:s1,f:xs:XP:eluge-the-shoreless-sea:cast:s1	-	-	-	3aa6ded33acb	-	9e97f47d556d	-	-	2026-11-25	xproof
+027989e7-20c4-4773-b6b4-20337cc5fe8c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eluge-the-shoreless-sea:cast:s1,f:xs:XP:eluge-the-shoreless-sea:cast:s1	-	-	-	3aa6ded33acb	-	9e97f47d556d	-	-	2026-11-25	xproof
+027989e7-20c4-4773-b6b4-20337cc5fe8c	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:eluge-the-shoreless-sea:f0t1:s1,f:xs:XP:eluge-the-shoreless-sea:f0t1:s1	-	-	-	3aa6ded33acb	-	9e97f47d556d	-	-	2026-11-25	xproof
 027989e7-20c4-4773-b6b4-20337cc5fe8c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Eluge, the Shoreless Sea/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 027989e7-20c4-4773-b6b4-20337cc5fe8c	static#0.1	static#0.1	agreed	-	X	scen	1	0	Eluge, the Shoreless Sea/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 027dd013-baa7-4111-b3c9-f4d1414e9c45	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 02f46271-c90d-4318-9004-74e7bee64a89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02f46271-c90d-4318-9004-74e7bee64a89	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 02f46271-c90d-4318-9004-74e7bee64a89	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-02f5ceb4-8b9c-4107-972b-6eec365c4a6c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+02f5ceb4-8b9c-4107-972b-6eec365c4a6c	cast	cast	agreed	-	X	start	2	0	x:xs:XP:thunderclap:cast:s1	-	-	-	3aa6ded33acb	-	10f912aa2b3a	-	-	2026-11-25	xproof
 02f8ec49-f490-408b-a76e-58e160a5a5a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marsh-flitter:f0t0:s1,f:xs:XP:marsh-flitter:f0t0:s1	-	-	-	d864b561c9cb	-	575f09ccf7c6	-	-	2026-11-24	xproof
 02f8ec49-f490-408b-a76e-58e160a5a5a7	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:marsh-flitter:f0t0:s1,f:xs:XP:marsh-flitter:f0t0:s1	-	-	-	d864b561c9cb	-	575f09ccf7c6	-	-	2026-11-24	xproof
 02f8ec49-f490-408b-a76e-58e160a5a5a7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:marsh-flitter:f0t0:s1,f:xs:XP:marsh-flitter:f0t0:s1	-	-	-	d864b561c9cb	-	575f09ccf7c6	-	-	2026-11-24	xproof

@@ -74,9 +74,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2279005d-5434-49ce-b16a-212759c5775a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:markov-warlord:f0t0:s1,f:xs:XP:markov-warlord:f0t0:s1	-	-	-	d864b561c9cb	-	7c4dc0f95e06	-	-	2026-11-24	xproof
 227cbba1-700b-4255-b730-b324ab3dec34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beetleform-mage:cast:s1,f:xs:XP:beetleform-mage:cast:s1	-	-	-	d864b561c9cb	-	e9135e0c51e4	-	-	2026-11-24	xproof
 227cbba1-700b-4255-b730-b324ab3dec34	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:beetleform-mage:f0a0:s1,f:xs:XP:beetleform-mage:f0a0:s1	-	-	-	d864b561c9cb	-	e9135e0c51e4	-	-	2026-11-24	xproof
-227ed0b7-7a9a-41f1-a190-1d1b85a44720	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-227ed0b7-7a9a-41f1-a190-1d1b85a44720	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-227ed0b7-7a9a-41f1-a190-1d1b85a44720	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+227ed0b7-7a9a-41f1-a190-1d1b85a44720	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	56e45d132dce	-	-	2026-11-25	xproof
+227ed0b7-7a9a-41f1-a190-1d1b85a44720	f0/a0	Pump	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	56e45d132dce	-	-	2026-11-25	xproof
+227ed0b7-7a9a-41f1-a190-1d1b85a44720	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	56e45d132dce	-	-	2026-11-25	xproof
 227f95ba-65b1-4399-8b12-39f8b1327d62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 227f95ba-65b1-4399-8b12-39f8b1327d62	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 227fb13b-0a07-4937-9048-7cf02efbc8e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

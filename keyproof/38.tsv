@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3819daab-fe35-4f99-9282-47bd05c7fcd6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:affa-guard-hound:f0t0:s1,f:xs:XP:affa-guard-hound:f0t0:s1	-	-	-	d864b561c9cb	-	12534a3a4fde	-	-	2026-11-24	xproof
 3819daab-fe35-4f99-9282-47bd05c7fcd6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:affa-guard-hound:f0t0:s1,f:xs:XP:affa-guard-hound:f0t0:s1	-	-	-	d864b561c9cb	-	12534a3a4fde	-	-	2026-11-24	xproof
 381a3e8e-71dd-48e4-ab62-53478bde4a14	cast	cast-resolve	agreed	-	FX	scen	2	0	Agate-Blade Assassin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-381a3e8e-71dd-48e4-ab62-53478bde4a14	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Agate-Blade Assassin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+381a3e8e-71dd-48e4-ab62-53478bde4a14	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:agate-blade-assassin:f0t0:s1,f:xs:XP:agate-blade-assassin:f0t0:s1	-	-	-	3aa6ded33acb	-	6539181d9a5f	-	-	2026-11-25	xproof
 381df197-5fb7-44ab-a31f-96c4993a0e53	cast	cast-resolve	agreed	-	FX	scen	2	0	Shantotto, Tactician Magician/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 381df197-5fb7-44ab-a31f-96c4993a0e53	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Shantotto, Tactician Magician/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 381eb146-879e-473c-b628-65f6c0814a29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -38,10 +38,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 382267da-c63c-432e-8a11-f803cf0e3a3a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 382b7873-e78d-473b-8346-d92d16e8f634	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tooth-and-nail:cast:s1,f:xs:XP:tooth-and-nail:cast:s1	-	-	-	25696bf19d5b	-	bf0a36c1315b	-	-	2026-11-24	xproof
 382bc554-d170-4c19-82dd-829f254e855e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-382d18a2-438e-4ae7-a83f-1658ef1f9b07	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hidden Grotto/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+382d18a2-438e-4ae7-a83f-1658ef1f9b07	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:hidden-grotto:land:s2,f:xs:XP:hidden-grotto:land:s2	-	-	-	3aa6ded33acb	-	4fd526704472	-	-	2026-11-25	xproof
 382d18a2-438e-4ae7-a83f-1658ef1f9b07	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Hidden Grotto/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-382d18a2-438e-4ae7-a83f-1658ef1f9b07	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hidden Grotto/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-382d18a2-438e-4ae7-a83f-1658ef1f9b07	land	play-land	agreed	-	X	scen	1	0	Hidden Grotto/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+382d18a2-438e-4ae7-a83f-1658ef1f9b07	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hidden-grotto:land:s1,f:xs:XP:hidden-grotto:land:s1	-	-	-	3aa6ded33acb	-	4fd526704472	-	-	2026-11-25	xproof
+382d18a2-438e-4ae7-a83f-1658ef1f9b07	land	land	agreed	-	FX	start	2	0	x:xs:XP:hidden-grotto:land:s1,f:xs:XP:hidden-grotto:land:s1	-	-	-	3aa6ded33acb	-	4fd526704472	-	-	2026-11-25	xproof
 38347ab3-ae43-4d10-b665-8520ace0eb76	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-filigree-sylex:cast:s1,f:xs:XP:the-filigree-sylex:cast:s1	-	-	-	ae86f6029288	-	afb20ed17803	-	-	2026-11-24	xproof
 38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a0	PutCounter	agreed	-	FX	start	3	0	x:xs:XP:the-filigree-sylex:cast:s2,f:xs:XP:the-filigree-sylex:cast:s2	-	-	-	ae86f6029288	-	afb20ed17803	-	-	2026-11-24	xproof
 38347ab3-ae43-4d10-b665-8520ace0eb76	f0/a1	DestroyAll	agreed	-	FX	start	3	0	x:xs:XP:the-filigree-sylex:cast:s1,f:xs:XP:the-filigree-sylex:cast:s1	-	-	-	ae86f6029288	-	afb20ed17803	-	-	2026-11-24	xproof
@@ -175,8 +175,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38ea058d-f8cd-4bd9-9142-8f0d3d56d571	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38ea22cd-2c5d-4f66-a111-207aca4c67c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vicious-hunger:cast:s1,f:xs:XP:vicious-hunger:cast:s1	-	-	-	25696bf19d5b	-	1e726ab132ab	-	-	2026-11-24	xproof
 38eabfea-5ea5-4baa-8ad6-7a7cb00e1fed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spider-food:cast:s1,f:xs:XP:spider-food:cast:s1	-	-	-	23b491658465	-	5e19f07c8b35	-	-	2026-11-24	xproof
-38ec5b13-b143-4818-9243-b1715dab3bef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38ec5b13-b143-4818-9243-b1715dab3bef	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38ec5b13-b143-4818-9243-b1715dab3bef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:paupers-cage:f0t0:s1,f:xs:XP:paupers-cage:f0t0:s1	-	-	-	3aa6ded33acb	-	79df9b7d9ecc	-	-	2026-11-25	xproof
+38ec5b13-b143-4818-9243-b1715dab3bef	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:paupers-cage:f0t0:s1,f:xs:XP:paupers-cage:f0t0:s1	-	-	-	3aa6ded33acb	-	79df9b7d9ecc	-	-	2026-11-25	xproof
 38ece0fa-2c94-4eae-b6ab-74b783862f3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38f3b157-0df4-409b-89cc-086e1531cd5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gray-merchant-of-asphodel:f0t0:s1,f:xs:XP:gray-merchant-of-asphodel:f0t0:s1	-	-	-	d864b561c9cb	-	7a473b10964d	-	-	2026-11-24	xproof
 38f3b157-0df4-409b-89cc-086e1531cd5b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gray-merchant-of-asphodel:f0t0:s1,f:xs:XP:gray-merchant-of-asphodel:f0t0:s1	-	-	-	d864b561c9cb	-	7a473b10964d	-	-	2026-11-24	xproof

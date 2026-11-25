@@ -105,16 +105,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9abf9a0e-8e7d-406b-a01d-d4870b30134e	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 9abf9a0e-8e7d-406b-a01d-d4870b30134e	land	land	agreed	-	FX	start	2	0	x:xs:XP:the-shire:land:s1,f:xs:XP:the-shire:land:s1	-	-	-	ae86f6029288	-	6dddc8f9a387	-	-	2026-11-24	xproof
 9ac20f38-adc4-40a9-95c9-bbdc689b928b	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	cast	cast-resolve	agreed	-	X	scen	1	0	Nettle Guard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Nettle Guard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nettle Guard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nettle-guard:cast:s1,f:xs:XP:nettle-guard:cast:s1	-	-	-	3aa6ded33acb	-	aae6aad9945e	-	-	2026-11-25	xproof
+9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:nettle-guard:f0a0:s1,f:xs:XP:nettle-guard:f0a0:s1	-	-	-	3aa6ded33acb	-	aae6aad9945e	-	-	2026-11-25	xproof
+9ac2dcb6-dacc-4fcb-b820-9fc6744ec503	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:nettle-guard:f0t0:s1,f:xs:XP:nettle-guard:f0t0:s1	-	-	-	3aa6ded33acb	-	aae6aad9945e	-	-	2026-11-25	xproof
 9ac57a10-3402-4656-9079-f713884cde35	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ac57a10-3402-4656-9079-f713884cde35	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ac57a10-3402-4656-9079-f713884cde35	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 9ac62ff0-6d13-4091-ba84-fbfbe742a4f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ac62ff0-6d13-4091-ba84-fbfbe742a4f4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ac77cfd-7d78-4c8a-bffc-17649a852114	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ac77cfd-7d78-4c8a-bffc-17649a852114	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ac77cfd-7d78-4c8a-bffc-17649a852114	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carnophage:f0t0:s1,f:xs:XP:carnophage:f0t0:s1	-	-	-	3aa6ded33acb	-	258e35eb5592	-	-	2026-11-25	xproof
+9ac77cfd-7d78-4c8a-bffc-17649a852114	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:carnophage:f0t0:s1,f:xs:XP:carnophage:f0t0:s1	-	-	-	3aa6ded33acb	-	258e35eb5592	-	-	2026-11-25	xproof
 9acb74a9-f372-43ad-a80d-4f8d52236eb8	cast	cast-resolve	agreed	-	FX	scen	2	0	Meddling Youths/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9acb74a9-f372-43ad-a80d-4f8d52236eb8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Meddling Youths/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ace6510-7876-48e4-9cae-1c24f2229e03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:timely-hordemate:f0t0:s1,f:xs:XP:timely-hordemate:f0t0:s1	-	-	-	3aa6ded33acb	-	7a0b8e0b0a4f	-	-	2026-11-25	xproof

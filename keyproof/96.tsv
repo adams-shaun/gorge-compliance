@@ -62,9 +62,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6	cast	cast-resolve	agreed	-	FX	scen	2	0	Bearer of Glory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Bearer of Glory/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bearer of Glory/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-963de959-848d-48df-90fa-88a6d988b9fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-963de959-848d-48df-90fa-88a6d988b9fe	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-963de959-848d-48df-90fa-88a6d988b9fe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+963de959-848d-48df-90fa-88a6d988b9fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ticking-gnomes:f0t0:s1,f:xs:XP:ticking-gnomes:f0t0:s1	-	-	-	3aa6ded33acb	-	9e5e2a217b86	-	-	2026-11-25	xproof
+963de959-848d-48df-90fa-88a6d988b9fe	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:ticking-gnomes:f0t0:s1,f:xs:XP:ticking-gnomes:f0t0:s1	-	-	-	3aa6ded33acb	-	9e5e2a217b86	-	-	2026-11-25	xproof
+963de959-848d-48df-90fa-88a6d988b9fe	f0/t0	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:ticking-gnomes:f0t0:s1,f:xs:XP:ticking-gnomes:f0t0:s1	-	-	-	3aa6ded33acb	-	9e5e2a217b86	-	-	2026-11-25	xproof
 963e36de-b803-417f-8166-4d328d358203	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 963f2848-15bd-441b-a55c-635f53b7b63f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 963f2848-15bd-441b-a55c-635f53b7b63f	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:gargoyle-castle:f0a1:s1,f:xs:XP:gargoyle-castle:f0a1:s1	-	-	-	8a1b1a193ec0	-	c8f9c8ece2c0	-	-	2026-11-24	xproof
@@ -177,10 +177,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	static#1.0	static#1.0	agreed	-	X	scen	1	0	Aang, at the Crossroads/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e68c7a-f187-4aa6-998c-238e7c833809	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96e68c7a-f187-4aa6-998c-238e7c833809	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-96e6d220-87db-4dab-abaa-e80c9577d89a	cast	cast-resolve	agreed	-	X	scen	1	0	Gossip's Talent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-96e6d220-87db-4dab-abaa-e80c9577d89a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gossip's Talent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+96e6d220-87db-4dab-abaa-e80c9577d89a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gossip-s-talent:cast:s1,f:xs:XP:gossip-s-talent:cast:s1	-	-	-	3aa6ded33acb	-	a36a0d6095b0	-	-	2026-11-25	xproof
+96e6d220-87db-4dab-abaa-e80c9577d89a	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:gossip-s-talent:f0a0:s1,f:xs:XP:gossip-s-talent:f0a0:s1	-	-	-	3aa6ded33acb	-	a36a0d6095b0	-	-	2026-11-25	xproof
 96e6d220-87db-4dab-abaa-e80c9577d89a	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gossip's Talent/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-96e6d220-87db-4dab-abaa-e80c9577d89a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gossip's Talent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+96e6d220-87db-4dab-abaa-e80c9577d89a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gossip-s-talent:f0t0:s1,f:xs:XP:gossip-s-talent:f0t0:s1	-	-	-	3aa6ded33acb	-	a36a0d6095b0	-	-	2026-11-25	xproof
 96e6d220-87db-4dab-abaa-e80c9577d89a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gossip's Talent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e6d220-87db-4dab-abaa-e80c9577d89a	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Gossip's Talent/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e7e4c8-f66d-4327-aee6-85da648418f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maximize-velocity:cast:s1,f:xs:XP:maximize-velocity:cast:s1	-	-	-	d864b561c9cb	-	88b9bacb4e2a	-	-	2026-11-24	xproof

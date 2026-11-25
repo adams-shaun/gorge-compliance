@@ -47,8 +47,8 @@ e8270c29-1887-4d3f-b70f-6b79ada8fe47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e828b189-0e8f-43b8-b909-4c23e742e028	cast	cast-resolve	agreed	-	FX	scen	2	0	Ghostly Prison/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e8291185-9d87-4aa2-b7ba-d4946e5a082f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-of-enduring-hope:f0t0:s1,f:xs:XP:aven-of-enduring-hope:f0t0:s1	-	-	-	d864b561c9cb	-	715365dd49be	-	-	2026-11-24	xproof
 e8291185-9d87-4aa2-b7ba-d4946e5a082f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aven-of-enduring-hope:f0t0:s1,f:xs:XP:aven-of-enduring-hope:f0t0:s1	-	-	-	d864b561c9cb	-	715365dd49be	-	-	2026-11-24	xproof
-e82ce5c6-1e42-4e87-b696-67aa3822ec9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e82ce5c6-1e42-4e87-b696-67aa3822ec9c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e82ce5c6-1e42-4e87-b696-67aa3822ec9c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:peacekeeper:f0t0:s1,f:xs:XP:peacekeeper:f0t0:s1	-	-	-	3aa6ded33acb	-	bc0c2ef2728f	-	-	2026-11-25	xproof
+e82ce5c6-1e42-4e87-b696-67aa3822ec9c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:peacekeeper:f0t0:s1,f:xs:XP:peacekeeper:f0t0:s1	-	-	-	3aa6ded33acb	-	bc0c2ef2728f	-	-	2026-11-25	xproof
 e82daa7b-d9fd-48c4-b5b2-f3b1f6ef1a24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e82daa7b-d9fd-48c4-b5b2-f3b1f6ef1a24	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e82f46f3-143b-46ae-ab5d-4aa177437a64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,8 +180,8 @@ e8cf80a1-6908-4adb-88e7-2015672d4905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e8cf80a1-6908-4adb-88e7-2015672d4905	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e8cfb24a-7e52-4e39-a9e1-969b4a65b62e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e8d0accc-b320-4c07-8a71-a09db860351e	cast	cast-resolve	agreed	-	X	scen	1	0	Vaultborn Tyrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-e8d0accc-b320-4c07-8a71-a09db860351e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vaultborn Tyrant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-e8d0accc-b320-4c07-8a71-a09db860351e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vaultborn Tyrant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+e8d0accc-b320-4c07-8a71-a09db860351e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:vaultborn-tyrant:combat0.attack:s1,f:xs:XP:vaultborn-tyrant:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7d4a881866a7	-	-	2026-11-25	xproof
+e8d0accc-b320-4c07-8a71-a09db860351e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:vaultborn-tyrant:combat0.block:s1,f:xs:XP:vaultborn-tyrant:combat0.block:s1	-	-	-	3aa6ded33acb	-	7d4a881866a7	-	-	2026-11-25	xproof
 e8d0accc-b320-4c07-8a71-a09db860351e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 e8d0accc-b320-4c07-8a71-a09db860351e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Vaultborn Tyrant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 e8d0eafe-540a-4b2e-a989-e98ff3c31105	cast	cast-resolve	agreed	-	FX	scen	2	0	Take Up the Shield/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

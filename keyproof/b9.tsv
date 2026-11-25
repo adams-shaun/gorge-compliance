@@ -184,9 +184,9 @@ b9be76a3-e14f-48dd-8824-17d5708ac7e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b9c58cfb-b7d5-4e86-a5d3-efb07192aa22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glimmer-of-genius:cast:s1,f:xs:XP:glimmer-of-genius:cast:s1	-	-	-	d864b561c9cb	-	3db07a6b95dd	-	-	2026-11-24	xproof
 b9c8b929-f3ee-457f-9cbc-9de18eb69dc5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ranger-of-eos:f0t0:s1,f:xs:XP:ranger-of-eos:f0t0:s1	-	-	-	8a1b1a193ec0	-	255754e3d733	-	-	2026-11-24	xproof
 b9c8b929-f3ee-457f-9cbc-9de18eb69dc5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ranger-of-eos:f0t0:s1,f:xs:XP:ranger-of-eos:f0t0:s1	-	-	-	8a1b1a193ec0	-	255754e3d733	-	-	2026-11-24	xproof
-b9cd714b-2ad8-4fdb-a8aa-82b17730e071	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deranged-hermit:f0t0:s1,f:xs:XP:deranged-hermit:f0t0:s1	-	-	-	5f2128bf97e4	-	6379332016b0	-	-	2026-11-24	xproof
-b9cd714b-2ad8-4fdb-a8aa-82b17730e071	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:deranged-hermit:f0t0:s1,f:xs:XP:deranged-hermit:f0t0:s1	-	-	-	5f2128bf97e4	-	6379332016b0	-	-	2026-11-24	xproof
-b9cd714b-2ad8-4fdb-a8aa-82b17730e071	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b9cd714b-2ad8-4fdb-a8aa-82b17730e071	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	6379332016b0	-	-	2026-11-25	xproof
+b9cd714b-2ad8-4fdb-a8aa-82b17730e071	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	6379332016b0	-	-	2026-11-25	xproof
+b9cd714b-2ad8-4fdb-a8aa-82b17730e071	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	6379332016b0	-	-	2026-11-25	xproof
 b9cec31a-9891-414f-b528-954612168832	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tangleweave-armor:cast:s1,f:xs:XP:tangleweave-armor:cast:s1	-	-	-	8c0bd19283bb	-	a44e20ece609	-	-	2026-11-24	xproof
 b9cec31a-9891-414f-b528-954612168832	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9cec31a-9891-414f-b528-954612168832	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:tangleweave-armor:cast:s1,f:xs:XP:tangleweave-armor:cast:s1	-	-	-	8c0bd19283bb	-	a44e20ece609	-	-	2026-11-24	xproof
@@ -214,7 +214,7 @@ b9dec104-c636-4770-a7fc-7a3331face15	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wildw
 b9dee727-8ad8-42e0-93c6-5ef91d3f7309	cast	cast-resolve	agreed	-	FX	scen	2	0	Aquitect's Defenses/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b9dee727-8ad8-42e0-93c6-5ef91d3f7309	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9dee727-8ad8-42e0-93c6-5ef91d3f7309	static#0.0	static#0.0	agreed	-	X	scen	1	0	Aquitect's Defenses/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b9df2cdf-397c-458d-89cf-911568737ffa	cast	cast-resolve	agreed	-	X	scen	1	0	Mockingbird/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b9df2cdf-397c-458d-89cf-911568737ffa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mockingbird:cast:s1,f:xs:XP:mockingbird:cast:s1	-	-	-	3aa6ded33acb	-	4519cb362831	-	-	2026-11-25	xproof
 b9df2cdf-397c-458d-89cf-911568737ffa	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mockingbird/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b9df2cdf-397c-458d-89cf-911568737ffa	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mockingbird/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b9e4d34a-ba91-4ad6-b886-daeeda6c9498	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hollow-one:cast:s1,f:xs:XP:hollow-one:cast:s1	-	-	-	d864b561c9cb	-	a2e9e93e0228	-	-	2026-11-24	xproof

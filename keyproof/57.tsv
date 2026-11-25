@@ -144,8 +144,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57c704bc-8dff-4b90-b4e1-38d12e41b3d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:get-the-point:cast:s1,f:xs:XP:get-the-point:cast:s1	-	-	-	3aa6ded33acb	-	e2dcf1b85893	-	-	2026-11-25	xproof
 57c9ff89-dd30-467b-bb3e-499eeea8cb94	cast	cast-resolve	agreed	-	FX	scen	2	0	Idyllic Tutor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 57ce5ebd-cfac-4bb9-b010-04d0c285be27	cast	cast	agreed	-	F	start	2	0	f:xs:XP:clement-the-worrywort:cast:s2	-	-	-	5437c1394672	-	58e87794a3e2	-	-	2026-11-24	xproof
-57ce5ebd-cfac-4bb9-b010-04d0c285be27	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Clement, the Worrywort/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-57ce5ebd-cfac-4bb9-b010-04d0c285be27	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Clement, the Worrywort/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+57ce5ebd-cfac-4bb9-b010-04d0c285be27	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:clement-the-worrywort:combat0.attack:s1,f:xs:XP:clement-the-worrywort:combat0.attack:s1	-	-	-	3aa6ded33acb	-	58e87794a3e2	-	-	2026-11-25	xproof
+57ce5ebd-cfac-4bb9-b010-04d0c285be27	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:clement-the-worrywort:combat0.block:s1,f:xs:XP:clement-the-worrywort:combat0.block:s1	-	-	-	3aa6ded33acb	-	58e87794a3e2	-	-	2026-11-25	xproof
 57ce5ebd-cfac-4bb9-b010-04d0c285be27	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:clement-the-worrywort:cast:s2	-	-	-	5437c1394672	-	58e87794a3e2	-	-	2026-11-24	xproof
 57ce5ebd-cfac-4bb9-b010-04d0c285be27	static#0.0	static#0.0	agreed	-	X	scen	1	0	Clement, the Worrywort/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57cf576b-5a03-4c60-a531-544df2638323	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -78,8 +78,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c59ab03-8744-4148-be06-eb1b0147f2cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c59ab03-8744-4148-be06-eb1b0147f2cc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3c5c227a-335b-4995-9821-d4269a0a233a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hugs-grisly-guardian:cast:s2	-	-	-	5437c1394672	-	f2728a82599e	-	-	2026-11-24	xproof
-3c5c227a-335b-4995-9821-d4269a0a233a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hugs, Grisly Guardian/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3c5c227a-335b-4995-9821-d4269a0a233a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hugs, Grisly Guardian/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3c5c227a-335b-4995-9821-d4269a0a233a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:hugs-grisly-guardian:combat0.attack:s1,f:xs:XP:hugs-grisly-guardian:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f2728a82599e	-	-	2026-11-25	xproof
+3c5c227a-335b-4995-9821-d4269a0a233a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:hugs-grisly-guardian:combat0.block:s1,f:xs:XP:hugs-grisly-guardian:combat0.block:s1	-	-	-	3aa6ded33acb	-	f2728a82599e	-	-	2026-11-25	xproof
 3c5c227a-335b-4995-9821-d4269a0a233a	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:hugs-grisly-guardian:cast:s2	-	-	-	5437c1394672	-	f2728a82599e	-	-	2026-11-24	xproof
 3c5c227a-335b-4995-9821-d4269a0a233a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hugs, Grisly Guardian/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3c5e269e-1baa-4b40-8e0f-1763ac85dc6b	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
@@ -89,8 +89,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c6913cc-c543-45f8-ad3b-ccd282efa6f7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c692dd9-3986-46de-ac10-cc917b7c41b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c692dd9-3986-46de-ac10-cc917b7c41b7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:leonin-of-the-lost-pride:f0t0:s1,f:xs:XP:leonin-of-the-lost-pride:f0t0:s1	-	-	-	ae86f6029288	-	8e6d156aedc9	-	-	2026-11-24	xproof
-3c6a8ad8-9b40-4136-9cfd-2b4cf9a9d900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c6a8ad8-9b40-4136-9cfd-2b4cf9a9d900	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c6a8ad8-9b40-4136-9cfd-2b4cf9a9d900	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crescendo-of-war:f0t0:s1,f:xs:XP:crescendo-of-war:f0t0:s1	-	-	-	3aa6ded33acb	-	05ced3b2e3e4	-	-	2026-11-25	xproof
+3c6a8ad8-9b40-4136-9cfd-2b4cf9a9d900	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:crescendo-of-war:f0t0:s1,f:xs:XP:crescendo-of-war:f0t0:s1	-	-	-	3aa6ded33acb	-	05ced3b2e3e4	-	-	2026-11-25	xproof
 3c741801-bfa5-4ff6-bf06-8d5edc06388d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c75234b-e367-46da-8454-be4315f9b9de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:precinct-captain:cast:s1,f:xs:XP:precinct-captain:cast:s1	-	-	-	d864b561c9cb	-	8ca897043d05	-	-	2026-11-24	xproof
 3c75234b-e367-46da-8454-be4315f9b9de	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c7ffc6c-88be-4127-a673-fba8c1aa5fa1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:auratouched-mage:cast:s1,f:xs:XP:auratouched-mage:cast:s1	-	-	-	64a08ba7d913	-	e03863584740	-	-	2026-11-24	xproof
 3c7ffc6c-88be-4127-a673-fba8c1aa5fa1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:auratouched-mage:cast:s1,f:xs:XP:auratouched-mage:cast:s1	-	-	-	64a08ba7d913	-	e03863584740	-	-	2026-11-24	xproof
 3c8044b7-3999-4825-8448-0a1a325f1b48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c8044b7-3999-4825-8448-0a1a325f1b48	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3c8044b7-3999-4825-8448-0a1a325f1b48	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 3c82389c-7442-4599-89a0-fb2482e727a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c82389c-7442-4599-89a0-fb2482e727a3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3c83ea11-7141-41a2-ba77-1ed2722dfe74	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -138,11 +138,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c9242fd-915b-4f6d-b4ee-830c9d80c9e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c939ea6-68b7-4965-b1d3-af1d3dc79778	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deceiver-exarch:f0t0:s1,f:xs:XP:deceiver-exarch:f0t0:s1	-	-	-	3aa6ded33acb	-	b69b36c1543f	-	-	2026-11-25	xproof
 3c939ea6-68b7-4965-b1d3-af1d3dc79778	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:deceiver-exarch:f0t0:s1,f:xs:XP:deceiver-exarch:f0t0:s1	-	-	-	3aa6ded33acb	-	b69b36c1543f	-	-	2026-11-25	xproof
-3c970f43-17da-4187-a084-efd53b579067	cast	cast-resolve	agreed	-	X	scen	1	0	Ral, Crackling Wit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3c970f43-17da-4187-a084-efd53b579067	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ral, Crackling Wit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3c970f43-17da-4187-a084-efd53b579067	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ral, Crackling Wit/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3c970f43-17da-4187-a084-efd53b579067	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Ral, Crackling Wit/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3c970f43-17da-4187-a084-efd53b579067	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ral, Crackling Wit/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3c970f43-17da-4187-a084-efd53b579067	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ral-crackling-wit:cast:s1,f:xs:XP:ral-crackling-wit:cast:s1	-	-	-	3aa6ded33acb	-	098afb3945c3	-	-	2026-11-25	xproof
+3c970f43-17da-4187-a084-efd53b579067	f0/a0	Token	agreed	-	FX	start	3	0	x:xs:XP:ral-crackling-wit:cast:s1,f:xs:XP:ral-crackling-wit:cast:s1	-	-	-	3aa6ded33acb	-	098afb3945c3	-	-	2026-11-25	xproof
+3c970f43-17da-4187-a084-efd53b579067	f0/a1	Draw	agreed	-	FX	start	5	0	x:xs:XP:ral-crackling-wit:cast:s2,f:xs:XP:ral-crackling-wit:cast:s2	-	-	-	3aa6ded33acb	-	098afb3945c3	-	-	2026-11-25	xproof
+3c970f43-17da-4187-a084-efd53b579067	f0/a2	Draw	agreed	-	FX	start	2	0	x:xs:XP:ral-crackling-wit:f0a2:s1,f:xs:XP:ral-crackling-wit:f0a2:s1	-	-	-	3aa6ded33acb	-	098afb3945c3	-	-	2026-11-25	xproof
+3c970f43-17da-4187-a084-efd53b579067	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:ral-crackling-wit:f0t0:s1,f:xs:XP:ral-crackling-wit:f0t0:s1	-	-	-	3aa6ded33acb	-	098afb3945c3	-	-	2026-11-25	xproof
 3c97c311-7ad5-47ec-b421-f6c3bfbda9fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c9d217e-d7f8-43df-9bb6-58d29f93e2c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frillscare-mentor:f0t0:s1,f:xs:XP:frillscare-mentor:f0t0:s1	-	-	-	ae86f6029288	-	7fb98e36f86b	-	-	2026-11-24	xproof
 3c9d217e-d7f8-43df-9bb6-58d29f93e2c4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

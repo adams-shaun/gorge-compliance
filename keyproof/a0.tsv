@@ -108,8 +108,8 @@ a08f79b7-d66f-47da-9670-afd7409c0c5c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rydia
 a090bc9c-d253-4a29-87d6-aa849f856d36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-pilgrims:f0t0:s1,f:xs:XP:guardian-of-pilgrims:f0t0:s1	-	-	-	d864b561c9cb	-	1aa58a464d5d	-	-	2026-11-24	xproof
 a090bc9c-d253-4a29-87d6-aa849f856d36	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-pilgrims:f0t0:s1,f:xs:XP:guardian-of-pilgrims:f0t0:s1	-	-	-	d864b561c9cb	-	1aa58a464d5d	-	-	2026-11-24	xproof
 a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:fecund-greenshell:cast:s2	-	-	-	5437c1394672	-	f80c13209d86	-	-	2026-11-24	xproof
-a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fecund Greenshell/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fecund Greenshell/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:fecund-greenshell:combat0.attack:s1,f:xs:XP:fecund-greenshell:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f80c13209d86	-	-	2026-11-25	xproof
+a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:fecund-greenshell:combat0.block:s1,f:xs:XP:fecund-greenshell:combat0.block:s1	-	-	-	3aa6ded33acb	-	f80c13209d86	-	-	2026-11-25	xproof
 a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:fecund-greenshell:cast:s2	-	-	-	5437c1394672	-	f80c13209d86	-	-	2026-11-24	xproof
 a090be5a-b0f2-4c17-8f7d-e742f9de8f6b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fecund Greenshell/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a0956c3d-d382-486a-81f1-9aa5cf49b2ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ a0b4fa95-4c61-40ff-b645-a1dbe8825750	f0/t0	NULL	owed	refused:no-generator:trigge
 a0b6aa7d-a8cd-4af7-8fb2-d2fa0861e123	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0b97e33-2d0c-4800-a9f5-9cd9be651ea8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0baa9eb-0b1e-4d90-a7a1-f7102f575467	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a0baa9eb-0b1e-4d90-a7a1-f7102f575467	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a0baa9eb-0b1e-4d90-a7a1-f7102f575467	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:martyrs-tomb:f0a0:s1,f:xs:XP:martyrs-tomb:f0a0:s1	-	-	-	3aa6ded33acb	-	ffe8a403df64	-	-	2026-11-25	xproof
 a0bc9c88-8bec-4d92-a078-08883c82cb28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0c3c26e-e9e8-424d-922e-a692bb479ebd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0c3c26e-e9e8-424d-922e-a692bb479ebd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -199,8 +199,8 @@ a0f29566-bca8-4fe8-86ce-4a051ece6d5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a0f6834c-faa9-4d90-adad-847a8b337fe6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0fdc716-31b9-47f6-8639-de8bb7e3629f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zenith-seeker:cast:s1,f:xs:XP:zenith-seeker:cast:s1	-	-	-	d864b561c9cb	-	564473171b14	-	-	2026-11-24	xproof
 a0fdc716-31b9-47f6-8639-de8bb7e3629f	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-a0fe91a8-633c-4902-bc75-da0a5aa76992	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:radiant-s-dragoons:f0t0:s1,f:xs:XP:radiant-s-dragoons:f0t0:s1	-	-	-	5f2128bf97e4	-	9ac95c50d193	-	-	2026-11-24	xproof
-a0fe91a8-633c-4902-bc75-da0a5aa76992	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:radiant-s-dragoons:f0t0:s1,f:xs:XP:radiant-s-dragoons:f0t0:s1	-	-	-	5f2128bf97e4	-	9ac95c50d193	-	-	2026-11-24	xproof
-a0fe91a8-633c-4902-bc75-da0a5aa76992	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a0fe91a8-633c-4902-bc75-da0a5aa76992	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9ac95c50d193	-	-	2026-11-25	xproof
+a0fe91a8-633c-4902-bc75-da0a5aa76992	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9ac95c50d193	-	-	2026-11-25	xproof
+a0fe91a8-633c-4902-bc75-da0a5aa76992	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9ac95c50d193	-	-	2026-11-25	xproof
 a0ff742b-f709-43ac-84d2-dc00c723bad6	cast	cast	agreed	-	X	start	2	0	x:xs:XP:krosan-cloudscraper:f0t0:s1	-	-	-	3aa6ded33acb	-	9f53a6fb6877	-	-	2026-11-25	xproof
 a0ff742b-f709-43ac-84d2-dc00c723bad6	f0/t0	Phase	agreed	-	X	start	2	0	x:xs:XP:krosan-cloudscraper:f0t0:s1	-	-	-	3aa6ded33acb	-	9f53a6fb6877	-	-	2026-11-25	xproof

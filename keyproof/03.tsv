@@ -17,9 +17,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0319a50f-cbcd-45ab-9630-9e9f1498d23d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 0319a50f-cbcd-45ab-9630-9e9f1498d23d	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 031cd561-d9b1-4a0e-bc38-bc09e80563c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-031cfc7d-8bda-454b-b88a-15d3f5fe47e2	cast	cast-resolve	agreed	-	X	scen	1	0	Hired Claw/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-031cfc7d-8bda-454b-b88a-15d3f5fe47e2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hired Claw/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-031cfc7d-8bda-454b-b88a-15d3f5fe47e2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hired Claw/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+031cfc7d-8bda-454b-b88a-15d3f5fe47e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hired-claw:cast:s1,f:xs:XP:hired-claw:cast:s1	-	-	-	3aa6ded33acb	-	c7bd217017bb	-	-	2026-11-25	xproof
+031cfc7d-8bda-454b-b88a-15d3f5fe47e2	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:hired-claw:f0a0:s1,f:xs:XP:hired-claw:f0a0:s1	-	-	-	3aa6ded33acb	-	c7bd217017bb	-	-	2026-11-25	xproof
+031cfc7d-8bda-454b-b88a-15d3f5fe47e2	f0/t0	AttackersDeclared	agreed	-	FX	start	6	0	x:xs:XP:hired-claw:cast:s1,f:xs:XP:hired-claw:cast:s1	-	-	-	3aa6ded33acb	-	c7bd217017bb	-	-	2026-11-25	xproof
 031ddf1e-afcf-4b09-8859-4df0f0ab5dcf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 031ddf1e-afcf-4b09-8859-4df0f0ab5dcf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 031ddf1e-afcf-4b09-8859-4df0f0ab5dcf	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -58,10 +58,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0334a2f8-a74a-44c9-ba64-d9b7fabe160c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cosmic Spider-Man/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0334a2f8-a74a-44c9-ba64-d9b7fabe160c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cosmic Spider-Man/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0334a2f8-a74a-44c9-ba64-d9b7fabe160c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cosmic Spider-Man/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0339bd11-ad71-4998-9b5d-a32790f0e5e3	cast	cast-resolve	agreed	-	X	scen	1	0	Barkform Harvester/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0339bd11-ad71-4998-9b5d-a32790f0e5e3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Barkform Harvester/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0339bd11-ad71-4998-9b5d-a32790f0e5e3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Barkform Harvester/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0339bd11-ad71-4998-9b5d-a32790f0e5e3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Barkform Harvester/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0339bd11-ad71-4998-9b5d-a32790f0e5e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barkform-harvester:cast:s1,f:xs:XP:barkform-harvester:cast:s1	-	-	-	3aa6ded33acb	-	3b102883bd74	-	-	2026-11-25	xproof
+0339bd11-ad71-4998-9b5d-a32790f0e5e3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:barkform-harvester:combat0.attack:s1,f:xs:XP:barkform-harvester:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3b102883bd74	-	-	2026-11-25	xproof
+0339bd11-ad71-4998-9b5d-a32790f0e5e3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:barkform-harvester:combat0.block:s1,f:xs:XP:barkform-harvester:combat0.block:s1	-	-	-	3aa6ded33acb	-	3b102883bd74	-	-	2026-11-25	xproof
+0339bd11-ad71-4998-9b5d-a32790f0e5e3	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:barkform-harvester:f0a0:s1,f:xs:XP:barkform-harvester:f0a0:s1	-	-	-	3aa6ded33acb	-	3b102883bd74	-	-	2026-11-25	xproof
 0339d25b-9591-49c0-bf31-4ba749ebd0b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0342b085-be20-475a-bc38-59b9cb6012e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-chainwhirler:f0t0:s1,f:xs:XP:goblin-chainwhirler:f0t0:s1	-	-	-	d864b561c9cb	-	2eb293a48240	-	-	2026-11-24	xproof
 0342b085-be20-475a-bc38-59b9cb6012e8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-chainwhirler:f0t0:s1,f:xs:XP:goblin-chainwhirler:f0t0:s1	-	-	-	d864b561c9cb	-	2eb293a48240	-	-	2026-11-24	xproof
@@ -174,7 +174,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03e27ebd-6141-4002-b41f-0bf9d6ec2908	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 03e27ebd-6141-4002-b41f-0bf9d6ec2908	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 03e27ebd-6141-4002-b41f-0bf9d6ec2908	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-03e356ae-f1e8-4730-8d2b-b9e2f32db915	cast	cast-resolve	agreed	-	X	scen	1	0	Mind Spiral/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+03e356ae-f1e8-4730-8d2b-b9e2f32db915	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-spiral:cast:s1,f:xs:XP:mind-spiral:cast:s1	-	-	-	3aa6ded33acb	-	055787d38168	-	-	2026-11-25	xproof
 03e59169-d8f8-40da-b5f7-645d16365e7b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03ebc100-68ac-4d53-adc2-d537212f7d31	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venom-connoisseur:cast:s1,f:xs:XP:venom-connoisseur:cast:s1	-	-	-	23b491658465	-	4a4bda991285	-	-	2026-11-24	xproof
 03ebc100-68ac-4d53-adc2-d537212f7d31	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venom-connoisseur:f0t0:s1,f:xs:XP:venom-connoisseur:f0t0:s1	-	-	-	3aa6ded33acb	-	4a4bda991285	-	-	2026-11-25	xproof

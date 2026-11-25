@@ -178,9 +178,9 @@ e7c200a9-4793-44c8-ba8d-6298dc83bbac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e7c3bd74-959c-4b07-b13d-30fe0f0ede2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7c4bc25-806c-4a75-85bf-a0e66308d5d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mycosynth-fiend:cast:s1,f:xs:XP:mycosynth-fiend:cast:s1	-	-	-	d864b561c9cb	-	7f4bcc35c6b2	-	-	2026-11-24	xproof
 e7c5a568-3855-4a20-9edf-01a8a6a4ba97	cast	cast-resolve	agreed	-	X	scen	1	0	Vraska, the Silencer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e7c5a568-3855-4a20-9edf-01a8a6a4ba97	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vraska, the Silencer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e7c5a568-3855-4a20-9edf-01a8a6a4ba97	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vraska, the Silencer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e7c5a568-3855-4a20-9edf-01a8a6a4ba97	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vraska, the Silencer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e7c5a568-3855-4a20-9edf-01a8a6a4ba97	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:vraska-the-silencer:combat0.attack:s1,f:xs:XP:vraska-the-silencer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	bad2f9873889	-	-	2026-11-25	xproof
+e7c5a568-3855-4a20-9edf-01a8a6a4ba97	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:vraska-the-silencer:combat0.block:s1,f:xs:XP:vraska-the-silencer:combat0.block:s1	-	-	-	3aa6ded33acb	-	bad2f9873889	-	-	2026-11-25	xproof
+e7c5a568-3855-4a20-9edf-01a8a6a4ba97	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vraska-the-silencer:combat0.block:s1,f:xs:XP:vraska-the-silencer:combat0.block:s1	-	-	-	3aa6ded33acb	-	bad2f9873889	-	-	2026-11-25	xproof
 e7c879fa-a34b-42d9-8edf-29254380c1f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7c879fa-a34b-42d9-8edf-29254380c1f7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7cd87d4-028c-49d9-9416-69f57e7dfec5	cast	cast	agreed	-	F	start	2	0	f:xs:XP:koya-death-from-above:cast:s2	-	-	-	5437c1394672	-	10878ed5cb29	-	-	2026-11-24	xproof
@@ -202,8 +202,8 @@ e7d8b8ea-07d7-4b6c-aa49-6a2ad185a304	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	
 e7dc3d8b-2c79-463d-b862-9f01ccea05fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7dfe47f-41fc-4071-9ad3-96cd8d9be52e	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e7dfe47f-41fc-4071-9ad3-96cd8d9be52e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-e7e1b166-9267-426d-897d-24903327b48d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e7e1b166-9267-426d-897d-24903327b48d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e7e1b166-9267-426d-897d-24903327b48d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defense-of-the-heart:f0t0:s1,f:xs:XP:defense-of-the-heart:f0t0:s1	-	-	-	3aa6ded33acb	-	942b314caada	-	-	2026-11-25	xproof
+e7e1b166-9267-426d-897d-24903327b48d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:defense-of-the-heart:f0t0:s1,f:xs:XP:defense-of-the-heart:f0t0:s1	-	-	-	3aa6ded33acb	-	942b314caada	-	-	2026-11-25	xproof
 e7e59437-cdd0-476a-b1ec-231be4139d31	cast	cast	agreed	-	F	start	2	0	f:xs:XP:obsessive-skinner:f0t1:s1	-	-	-	3aa6ded33acb	-	7cff5dd67164	-	-	2026-11-25	xproof
 e7e59437-cdd0-476a-b1ec-231be4139d31	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:obsessive-skinner:f0t1:s1	-	-	-	3aa6ded33acb	-	7cff5dd67164	-	-	2026-11-25	xproof
 e7e59437-cdd0-476a-b1ec-231be4139d31	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:obsessive-skinner:f0t1:s1	-	-	-	3aa6ded33acb	-	7cff5dd67164	-	-	2026-11-25	xproof

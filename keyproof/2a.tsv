@@ -63,7 +63,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a64cee5-04e2-4cbf-8fa9-d55c854f9500	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:genestealer-locus:f0t0:s1,f:xs:XP:genestealer-locus:f0t0:s1	-	-	-	8c0bd19283bb	-	2a036d0d4dd4	-	-	2026-11-24	xproof
 2a6a1e58-85a9-436e-b1a0-373baa44d6f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a6a1e58-85a9-436e-b1a0-373baa44d6f2	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:retrieval-agent:f0a0:s1,f:xs:XP:retrieval-agent:f0a0:s1	-	-	-	ae86f6029288	-	472d1ad59a78	-	-	2026-11-24	xproof
-2a6abd59-e448-46f1-9af8-bb9040645971	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2a6abd59-e448-46f1-9af8-bb9040645971	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seize-the-day:cast:s1,f:xs:XP:seize-the-day:cast:s1	-	-	-	3aa6ded33acb	-	adf442cfb8d8	-	-	2026-11-25	xproof
 2a6b32cd-a0f5-4e3e-9069-b525d485f84f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a6b32cd-a0f5-4e3e-9069-b525d485f84f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2a6c7826-dcfe-4029-894e-6c82c4dd84b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a70f3d7-9b5c-455e-8c4b-55870d77bd7d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kingfisher:f0t0:s1,f:xs:XP:kingfisher:f0t0:s1	-	-	-	5f2128bf97e4	-	2ae90b3e557c	-	-	2026-11-24	xproof
 2a73db99-5e31-49a8-91e7-b28b3434585d	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2a73db99-5e31-49a8-91e7-b28b3434585d	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-2a74a055-ff7f-434b-8dfb-d9fb72579cee	cast	cast-resolve	agreed	-	X	scen	1	0	Hazel's Nocturne/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2a74a055-ff7f-434b-8dfb-d9fb72579cee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hazel-s-nocturne:cast:s1,f:xs:XP:hazel-s-nocturne:cast:s1	-	-	-	3aa6ded33acb	-	abb72a9d4e43	-	-	2026-11-25	xproof
 2a7504b9-220d-412e-9381-b6a8a3750241	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:najal-the-storm-runner:cast:s1,f:xs:XP:najal-the-storm-runner:cast:s1	-	-	-	d864b561c9cb	-	0f9ed6197198	-	-	2026-11-24	xproof
 2a7504b9-220d-412e-9381-b6a8a3750241	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:najal-the-storm-runner:f0t0:s1,f:xs:XP:najal-the-storm-runner:f0t0:s1	-	-	-	d864b561c9cb	-	0f9ed6197198	-	-	2026-11-24	xproof
 2a79c29c-e539-49c5-b10c-1d5fd77842c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ulvenwald-bear:f0t0:s1,f:xs:XP:ulvenwald-bear:f0t0:s1	-	-	-	3aa6ded33acb	-	f6c9b4b992f3	-	-	2026-11-25	xproof
@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a99c0d6-3200-44ff-8d4c-f7a38cecb05f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:fire-nation-occupation:cast:s1,f:xs:XP:fire-nation-occupation:cast:s1	-	-	-	8c0bd19283bb	-	0a68c3616e3a	-	-	2026-11-24	xproof
 2a99c0d6-3200-44ff-8d4c-f7a38cecb05f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:fire-nation-occupation:cast:s1,f:xs:XP:fire-nation-occupation:cast:s1	-	-	-	8c0bd19283bb	-	0a68c3616e3a	-	-	2026-11-24	xproof
 2a99c0d6-3200-44ff-8d4c-f7a38cecb05f	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-2a9d9433-7b0f-45a3-88aa-9fd7e410c224	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2a9d9433-7b0f-45a3-88aa-9fd7e410c224	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 2aa03852-6c38-4e91-afed-0c4cd5964598	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gibbering-fiend:f0t1:s1,f:xs:XP:gibbering-fiend:f0t1:s1	-	-	-	3aa6ded33acb	-	9b20da97dd1c	-	-	2026-11-25	xproof
 2aa03852-6c38-4e91-afed-0c4cd5964598	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gibbering-fiend:f0t1:s1,f:xs:XP:gibbering-fiend:f0t1:s1	-	-	-	3aa6ded33acb	-	9b20da97dd1c	-	-	2026-11-25	xproof
 2aa03852-6c38-4e91-afed-0c4cd5964598	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:gibbering-fiend:f0t1:s1,f:xs:XP:gibbering-fiend:f0t1:s1	-	-	-	3aa6ded33acb	-	9b20da97dd1c	-	-	2026-11-25	xproof
@@ -151,8 +151,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ad9f28c-94a9-4884-9e3b-42341adfaa5d	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ecstatic-electromancer:f0t1:s1,f:xs:XP:ecstatic-electromancer:f0t1:s1	-	-	-	8c0bd19283bb	-	70d6b56f7b84	-	-	2026-11-24	xproof
 2ad9f28c-94a9-4884-9e3b-42341adfaa5d	f0/t2	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2adbb56a-45e9-4fbe-b586-3488ef8014a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enter-the-infinite:cast:s1,f:xs:XP:enter-the-infinite:cast:s1	-	-	-	d864b561c9cb	-	c25e3aaf8cb9	-	-	2026-11-24	xproof
-2ae36d31-08b7-481a-bfa1-a5c65921dee0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ae36d31-08b7-481a-bfa1-a5c65921dee0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2ae36d31-08b7-481a-bfa1-a5c65921dee0	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	8631fe66c8ce	-	-	2026-11-25	xproof
+2ae36d31-08b7-481a-bfa1-a5c65921dee0	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	8631fe66c8ce	-	-	2026-11-25	xproof
 2ae71e86-4400-4a30-9077-4d57a43e7395	cast	cast-resolve	agreed	-	X	scen	1	0	Risen Reef/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 2ae828d1-0c8b-4558-bd0b-512760020913	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ae828d1-0c8b-4558-bd0b-512760020913	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:garrison-griffin:f0t0:s1,f:xs:XP:garrison-griffin:f0t0:s1	-	-	-	ae86f6029288	-	7db037aee5e4	-	-	2026-11-24	xproof

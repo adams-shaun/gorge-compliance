@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c6ce876-781b-437d-b20e-db0b6e2769f4	cast	cast	agreed	-	F	start	4	0	f:xs:XP:colonel-autumn:cast:s1	-	-	-	8c0bd19283bb	-	eef08e65d768	-	-	2026-11-24	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	f0/t0	Exploited	agreed	-	F	start	4	0	f:xs:XP:colonel-autumn:cast:s1	-	-	-	8c0bd19283bb	-	eef08e65d768	-	-	2026-11-24	xproof
 5c6ce876-781b-437d-b20e-db0b6e2769f4	f0/t1	ChangesZone/Exploit	agreed	-	F	start	4	0	f:xs:XP:colonel-autumn:cast:s1	-	-	-	8c0bd19283bb	-	eef08e65d768	-	-	2026-11-24	xproof
-5c77bf76-bb0f-4e44-babe-0e7b7b555e1f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5c77bf76-bb0f-4e44-babe-0e7b7b555e1f	cast	cast	agreed	-	F	start	2	0	f:xs:XP:quicksilver-dagger:cast:s1	-	-	-	3aa6ded33acb	-	ee17001c76d3	-	-	2026-11-25	xproof
 5c780dda-ee76-482a-a610-53c321c4fdec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c780dda-ee76-482a-a610-53c321c4fdec	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c780dda-ee76-482a-a610-53c321c4fdec	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,9 +125,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cc57770-1070-45f6-9d76-d402c55a0d06	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5cc5be7a-cbe6-4853-bb95-0390e25b4f2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cc5be7a-cbe6-4853-bb95-0390e25b4f2b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	cast	cast-resolve	agreed	-	X	scen	1	0	Stingerback Terror/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stingerback Terror/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stingerback Terror/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stingerback-terror:cast:s1,f:xs:XP:stingerback-terror:cast:s1	-	-	-	3aa6ded33acb	-	04405a20636e	-	-	2026-11-25	xproof
+5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stingerback-terror:combat0.attack:s1,f:xs:XP:stingerback-terror:combat0.attack:s1	-	-	-	3aa6ded33acb	-	04405a20636e	-	-	2026-11-25	xproof
+5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:stingerback-terror:combat0.block:s1,f:xs:XP:stingerback-terror:combat0.block:s1	-	-	-	3aa6ded33acb	-	04405a20636e	-	-	2026-11-25	xproof
 5cc6ca73-c38f-4ef8-a2c9-4f0342eebb73	static#0.0	static#0.0	agreed	-	X	scen	1	0	Stingerback Terror/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5cca85e0-43e8-4b97-a43b-1b8f23f541d1	cast	cast-resolve	agreed	-	X	scen	1	0	Jet's Brainwashing/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5cca974b-1a6c-485f-adc0-81d2b7dca286	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

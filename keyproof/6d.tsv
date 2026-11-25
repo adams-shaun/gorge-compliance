@@ -12,8 +12,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d174448-52f5-4439-9586-3abc5af940d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d174448-52f5-4439-9586-3abc5af940d7	f0/t0	Attacks/Melee	agreed	-	FX	start	2	0	x:xs:XP:drogskol-reinforcements:f0t0:s1,f:xs:XP:drogskol-reinforcements:f0t0:s1	-	-	-	8c0bd19283bb	-	87f986baad6d	-	-	2026-11-24	xproof
 6d194882-ca37-49bb-ac9f-a751c53850a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bribery:cast:s1,f:xs:XP:bribery:cast:s1	-	-	-	25696bf19d5b	-	b7fd98e445b3	-	-	2026-11-24	xproof
-6d1a9d06-028f-487a-b490-27100c128ea3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:precognition:cast:s1,f:xs:XP:precognition:cast:s1	-	-	-	ea3140b6974b	-	5696af180027	-	-	2026-11-24	xproof
-6d1a9d06-028f-487a-b490-27100c128ea3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6d1a9d06-028f-487a-b490-27100c128ea3	cast	cast	agreed	-	F	start	2	0	f:xs:XP:precognition:f0t0:s1	-	-	-	3aa6ded33acb	-	5696af180027	-	-	2026-11-25	xproof
+6d1a9d06-028f-487a-b490-27100c128ea3	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:precognition:f0t0:s1	-	-	-	3aa6ded33acb	-	5696af180027	-	-	2026-11-25	xproof
 6d1d53e3-60ee-40a1-89a5-0648760cd83f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d1f8073-4da2-4abc-abb4-2053c4a40bbf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fyndhorn-brownie:cast:s1,f:xs:XP:fyndhorn-brownie:cast:s1	-	-	-	ea3140b6974b	-	957d007f8406	-	-	2026-11-24	xproof
 6d1f8073-4da2-4abc-abb4-2053c4a40bbf	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:fyndhorn-brownie:f0a0:s1,f:xs:XP:fyndhorn-brownie:f0a0:s1	-	-	-	ea3140b6974b	-	957d007f8406	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Zookeeper Mechan/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Zookeeper Mechan/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d4daf9c-e2f4-4d0e-b2e4-ded04d644b11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6d4daf9c-e2f4-4d0e-b2e4-ded04d644b11	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6d4daf9c-e2f4-4d0e-b2e4-ded04d644b11	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 6d4e558e-9109-4918-a082-fdcbaffd516b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d4e7943-1fdf-4085-8af0-658badbd0cb8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d4e7943-1fdf-4085-8af0-658badbd0cb8	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

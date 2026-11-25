@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-b000bcf5-529a-447a-bc2e-ae6f42d6073b	cast	cast-resolve	agreed	-	X	scen	1	0	Vadmir, New Blood/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b000bcf5-529a-447a-bc2e-ae6f42d6073b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vadmir-new-blood:cast:s1,f:xs:XP:vadmir-new-blood:cast:s1	-	-	-	3aa6ded33acb	-	dcdedd6b5746	-	-	2026-11-25	xproof
 b000bcf5-529a-447a-bc2e-ae6f42d6073b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vadmir, New Blood/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b000bcf5-529a-447a-bc2e-ae6f42d6073b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Vadmir, New Blood/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b000bcf5-529a-447a-bc2e-ae6f42d6073b	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:vadmir-new-blood:static0.0:s1,f:xs:XP:vadmir-new-blood:static0.0:s1	-	-	-	3aa6ded33acb	-	dcdedd6b5746	-	-	2026-11-25	xproof
 b00171b4-d1be-47e9-9293-ea57092f196b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b00171b4-d1be-47e9-9293-ea57092f196b	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 b0060b32-b856-4ff7-a113-cec2dc8f8dc6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:see-the-unwritten:cast:s1,f:xs:XP:see-the-unwritten:cast:s1	-	-	-	d864b561c9cb	-	7f0f9576daa8	-	-	2026-11-24	xproof
@@ -103,10 +103,10 @@ b0709570-a145-4c3c-ba56-f06d25753855	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b0709570-a145-4c3c-ba56-f06d25753855	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 b0713b1e-544d-4549-9371-61ac7f6c2a6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b0713b1e-544d-4549-9371-61ac7f6c2a6a	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-b071bbaf-79fa-413b-807b-2cc86c8a8125	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0747a4f-d041-4750-aef5-a5d101696f65	cast	cast-resolve	agreed	-	X	scen	1	0	Galewind Moose/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b0747a4f-d041-4750-aef5-a5d101696f65	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Galewind Moose/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b0747a4f-d041-4750-aef5-a5d101696f65	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Galewind Moose/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b071bbaf-79fa-413b-807b-2cc86c8a8125	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+b0747a4f-d041-4750-aef5-a5d101696f65	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:galewind-moose:cast:s1,f:xs:XP:galewind-moose:cast:s1	-	-	-	3aa6ded33acb	-	8fb10d586f88	-	-	2026-11-25	xproof
+b0747a4f-d041-4750-aef5-a5d101696f65	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:galewind-moose:combat0.attack:s1,f:xs:XP:galewind-moose:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8fb10d586f88	-	-	2026-11-25	xproof
+b0747a4f-d041-4750-aef5-a5d101696f65	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:galewind-moose:combat0.block:s1,f:xs:XP:galewind-moose:combat0.block:s1	-	-	-	3aa6ded33acb	-	8fb10d586f88	-	-	2026-11-25	xproof
 b075b645-2e5a-4d91-9440-02db4e6f5d08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b079f9db-974d-4525-a894-57b754ba9dcc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b079f9db-974d-4525-a894-57b754ba9dcc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -158,7 +158,7 @@ b0af0c54-2a59-4075-8543-d41ff20c4c87	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:wi
 b0af0c54-2a59-4075-8543-d41ff20c4c87	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wind-scarred-crag:land:s1,f:xs:XP:wind-scarred-crag:land:s1	-	-	-	8c0bd19283bb	-	1f019f8f6b40	-	-	2026-11-24	xproof
 b0af0c54-2a59-4075-8543-d41ff20c4c87	land	land	agreed	-	FX	start	2	0	x:xs:XP:wind-scarred-crag:land:s1,f:xs:XP:wind-scarred-crag:land:s1	-	-	-	8c0bd19283bb	-	1f019f8f6b40	-	-	2026-11-24	xproof
 b0af249d-9255-42f5-bafc-ac61ee281930	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b0af249d-9255-42f5-bafc-ac61ee281930	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b0af249d-9255-42f5-bafc-ac61ee281930	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 b0b2ca8c-cb5a-45f8-ae7c-63ad9ebb4afd	cast	cast-resolve	agreed	-	FX	scen	2	0	Unsettling Twins/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b0b2ca8c-cb5a-45f8-ae7c-63ad9ebb4afd	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b0b58a03-462c-4964-97c7-42bc777ec23e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ b0bd842c-d518-42b3-850c-22a70f7f1436	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:com
 b0bdc033-29f0-4dcb-87ff-ccd56126f7e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b0be3f25-edb1-4299-959c-9aad909730ca	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tarnation Vista/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b0be3f25-edb1-4299-959c-9aad909730ca	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Tarnation Vista/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b0be3f25-edb1-4299-959c-9aad909730ca	land	play-land	agreed	-	X	scen	1	0	Tarnation Vista/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+b0be3f25-edb1-4299-959c-9aad909730ca	land	land	agreed	-	FX	start	2	0	x:xs:XP:tarnation-vista:land:s1,f:xs:XP:tarnation-vista:land:s1	-	-	-	3aa6ded33acb	-	78b03da80ea4	-	-	2026-11-25	xproof
 b0bf1964-c543-4c53-9f09-0dd7c608d5c5	cast	cast-resolve	agreed	-	FX	scen	2	0	Black Panther, Vanguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b0bf1964-c543-4c53-9f09-0dd7c608d5c5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Black Panther, Vanguard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b0c28b2b-a2dd-4b76-bb1c-cec55a0a6784	cast	cast-resolve	agreed	-	X	scen	1	0	Flotsam/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -26,10 +26,10 @@ b318d94e-314f-4df8-a178-b5ddd756e1c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b32253d6-5f00-40a8-a7e5-dc4655cd288c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b32253d6-5f00-40a8-a7e5-dc4655cd288c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b32253d6-5f00-40a8-a7e5-dc4655cd288c	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-b3235d21-ce52-4a99-a2fe-99b0fe7cc8bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malignant-growth:cast:s1,f:xs:XP:malignant-growth:cast:s1	-	-	-	ea3140b6974b	-	2ad23407d6c3	-	-	2026-11-24	xproof
-b3235d21-ce52-4a99-a2fe-99b0fe7cc8bc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b3235d21-ce52-4a99-a2fe-99b0fe7cc8bc	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-b3235d21-ce52-4a99-a2fe-99b0fe7cc8bc	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b3235d21-ce52-4a99-a2fe-99b0fe7cc8bc	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2ad23407d6c3	-	-	2026-11-25	xproof
+b3235d21-ce52-4a99-a2fe-99b0fe7cc8bc	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2ad23407d6c3	-	-	2026-11-25	xproof
+b3235d21-ce52-4a99-a2fe-99b0fe7cc8bc	f0/t1	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2ad23407d6c3	-	-	2026-11-25	xproof
+b3235d21-ce52-4a99-a2fe-99b0fe7cc8bc	f0/t2	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2ad23407d6c3	-	-	2026-11-25	xproof
 b32484ee-c7d8-472d-818f-2c37783d028a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sisterhood-of-karn:cast:s1,f:xs:XP:sisterhood-of-karn:cast:s1	-	-	-	8c0bd19283bb	-	9ddc8a8915fd	-	-	2026-11-24	xproof
 b32484ee-c7d8-472d-818f-2c37783d028a	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 b32649cb-bf5c-45fa-86f0-8bf4e8555f06	cast	cast	agreed	-	F	start	2	0	f:xs:XP:dune-drifter:cast:s2	-	-	-	5437c1394672	-	79a064e67860	-	-	2026-11-24	xproof
@@ -120,8 +120,8 @@ b39d98c3-0173-4d7c-83d0-f80db82fc9ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b39d98c3-0173-4d7c-83d0-f80db82fc9ba	f0/a0	Shuffle	agreed	-	FX	start	2	0	x:xs:XP:magus-of-the-mind:f0a0:s1,f:xs:XP:magus-of-the-mind:f0a0:s1	-	-	-	8c0bd19283bb	-	9f39ec018ce0	-	-	2026-11-24	xproof
 b39f03cf-3d1a-42ad-903f-e3b3542878b0	cast	cast-resolve	agreed	-	X	scen	1	0	Front Porch Sentries/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b39f03cf-3d1a-42ad-903f-e3b3542878b0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Front Porch Sentries/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b3a80545-9a8a-46b2-9d8c-b0d66fb68a5d	cast	cast-resolve	agreed	-	X	scen	1	0	Sword of Wealth and Power/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-b3a80545-9a8a-46b2-9d8c-b0d66fb68a5d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sword of Wealth and Power/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+b3a80545-9a8a-46b2-9d8c-b0d66fb68a5d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sword-of-wealth-and-power:cast:s1,f:xs:XP:sword-of-wealth-and-power:cast:s1	-	-	-	3aa6ded33acb	-	ce2c5d061029	-	-	2026-11-25	xproof
+b3a80545-9a8a-46b2-9d8c-b0d66fb68a5d	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sword-of-wealth-and-power:f0a0:s1,f:xs:XP:sword-of-wealth-and-power:f0a0:s1	-	-	-	3aa6ded33acb	-	ce2c5d061029	-	-	2026-11-25	xproof
 b3a80545-9a8a-46b2-9d8c-b0d66fb68a5d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sword of Wealth and Power/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b3a80545-9a8a-46b2-9d8c-b0d66fb68a5d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Sword of Wealth and Power/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b3a84b75-a6a2-4521-a9f1-92596796c703	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -130,9 +130,9 @@ b3aa5889-0d98-4a8c-a8b1-ada1e9b169e1	f0/t0	NULL	owed	refused:no-generator:trigge
 b3ab43f2-4f2b-4439-9254-0110ce443fdb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b3ab43f2-4f2b-4439-9254-0110ce443fdb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b3ab43f2-4f2b-4439-9254-0110ce443fdb	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-b3ac27d6-7e18-404d-9af2-b03897a5f1d9	cast	cast-resolve	agreed	-	X	scen	1	0	Wylie Duke, Atiin Hero/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b3ac27d6-7e18-404d-9af2-b03897a5f1d9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wylie Duke, Atiin Hero/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b3ac27d6-7e18-404d-9af2-b03897a5f1d9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wylie Duke, Atiin Hero/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b3ac27d6-7e18-404d-9af2-b03897a5f1d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wylie-duke-atiin-hero:cast:s1,f:xs:XP:wylie-duke-atiin-hero:cast:s1	-	-	-	3aa6ded33acb	-	23797319730b	-	-	2026-11-25	xproof
+b3ac27d6-7e18-404d-9af2-b03897a5f1d9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:wylie-duke-atiin-hero:combat0.attack:s1,f:xs:XP:wylie-duke-atiin-hero:combat0.attack:s1	-	-	-	3aa6ded33acb	-	23797319730b	-	-	2026-11-25	xproof
+b3ac27d6-7e18-404d-9af2-b03897a5f1d9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:wylie-duke-atiin-hero:combat0.block:s1,f:xs:XP:wylie-duke-atiin-hero:combat0.block:s1	-	-	-	3aa6ded33acb	-	23797319730b	-	-	2026-11-25	xproof
 b3ac27d6-7e18-404d-9af2-b03897a5f1d9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wylie Duke, Atiin Hero/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b3ae1481-9fa7-45dd-bbf5-de2d815c4227	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b3ae1481-9fa7-45dd-bbf5-de2d815c4227	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -147,8 +147,8 @@ b3b5137d-0225-4dba-9231-d235ab0f137c	land	land	agreed	-	FX	start	2	0	x:xs:XP:nov
 b3b58231-d532-423b-91d0-78d9c0f66f0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b3b8c7d0-46b9-4519-808a-154e503a58b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liliana-s-devotee:cast:s1,f:xs:XP:liliana-s-devotee:cast:s1	-	-	-	ae86f6029288	-	f9b2a30055eb	-	-	2026-11-24	xproof
 b3b8c7d0-46b9-4519-808a-154e503a58b6	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-b3b8fe34-4f69-4555-bcac-04563d02c99f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thran-war-machine:cast:s1,f:xs:XP:thran-war-machine:cast:s1	-	-	-	5f2128bf97e4	-	f8629599b369	-	-	2026-11-24	xproof
-b3b8fe34-4f69-4555-bcac-04563d02c99f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b3b8fe34-4f69-4555-bcac-04563d02c99f	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	f8629599b369	-	-	2026-11-25	xproof
+b3b8fe34-4f69-4555-bcac-04563d02c99f	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	f8629599b369	-	-	2026-11-25	xproof
 b3b9a87d-cb95-435c-90b6-037406cab32e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b3c12848-528d-4005-878f-4f950a07240a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b3c5b7b6-8002-41f2-87fc-1ed7f9e103ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

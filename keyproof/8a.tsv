@@ -71,9 +71,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a5259cc-224d-4748-b764-63ad0e4e02f1	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Moment"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8a5259cc-224d-4748-b764-63ad0e4e02f1	f0/a1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Moment"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8a5259cc-224d-4748-b764-63ad0e4e02f1	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Moment"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-8a52f3c0-2552-4425-b2e3-5496eb2232a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a52f3c0-2552-4425-b2e3-5496eb2232a7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	5388894fd72b	-	-	2026-11-25	xproof
 8a52f3c0-2552-4425-b2e3-5496eb2232a7	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-8a52f3c0-2552-4425-b2e3-5496eb2232a7	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8a52f3c0-2552-4425-b2e3-5496eb2232a7	f0/t1	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	5388894fd72b	-	-	2026-11-25	xproof
 8a56c2a7-7131-4495-aa27-52f48e5f1fb6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a56c2a7-7131-4495-aa27-52f48e5f1fb6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8a5e17a0-6f3c-49ed-b328-ed90a46ed6c5	cast	cast-resolve	agreed	-	X	scen	1	0	Burdened Stoneback/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

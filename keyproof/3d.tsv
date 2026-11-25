@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d2b5201-c2bf-4753-89ad-543795740216	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d2bd4f6-174d-411a-b930-9161aeefd33a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tinybones-joins-up:f0t0:s2,f:xs:XP:tinybones-joins-up:f0t0:s2	-	-	-	267e485f6204	-	22042ee75d6b	-	-	2026-11-24	xproof
 3d2bd4f6-174d-411a-b930-9161aeefd33a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:tinybones-joins-up:f0t0:s2,f:xs:XP:tinybones-joins-up:f0t0:s2	-	-	-	267e485f6204	-	22042ee75d6b	-	-	2026-11-24	xproof
-3d2bd4f6-174d-411a-b930-9161aeefd33a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Tinybones Joins Up/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3d2bd4f6-174d-411a-b930-9161aeefd33a	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tinybones-joins-up:f0t1:s1,f:xs:XP:tinybones-joins-up:f0t1:s1	-	-	-	3aa6ded33acb	-	22042ee75d6b	-	-	2026-11-25	xproof
 3d2e9712-d546-40ac-a5ea-2dd7b7d9e0c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:floating-dream-zubera:cast:s1,f:xs:XP:floating-dream-zubera:cast:s1	-	-	-	25696bf19d5b	-	e659138f943c	-	-	2026-11-24	xproof
 3d2e9712-d546-40ac-a5ea-2dd7b7d9e0c1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3d2ea1a3-72af-48bc-a8f1-98facc2eebd0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d4c7f1a-deca-4bae-90c7-68d623da400e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d4c7f1a-deca-4bae-90c7-68d623da400e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:purestrain-genestealer:f0t0:s1,f:xs:XP:purestrain-genestealer:f0t0:s1	-	-	-	8c0bd19283bb	-	2ef801a34a52	-	-	2026-11-24	xproof
 3d4ec57a-8541-42ed-9790-7933f96c8adf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d50266f-5a2f-4a48-ab15-87e733624fd4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d50266f-5a2f-4a48-ab15-87e733624fd4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d50266f-5a2f-4a48-ab15-87e733624fd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unquestioned-authority:f0t0:s1,f:xs:XP:unquestioned-authority:f0t0:s1	-	-	-	3aa6ded33acb	-	165dedb2f19a	-	-	2026-11-25	xproof
+3d50266f-5a2f-4a48-ab15-87e733624fd4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:unquestioned-authority:f0t0:s1,f:xs:XP:unquestioned-authority:f0t0:s1	-	-	-	3aa6ded33acb	-	165dedb2f19a	-	-	2026-11-25	xproof
 3d51077f-4ce5-475a-9e65-e9076d779825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d51077f-4ce5-475a-9e65-e9076d779825	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d5205ad-6fd0-4afc-b817-c86b6bddb325	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,8 +134,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3da90ae6-a8cc-4633-bf49-7413ce91b697	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3dadb654-6191-4ad3-8315-46f5613fbc01	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:biblioplex-assistant:f0t0:s1,f:xs:XP:biblioplex-assistant:f0t0:s1	-	-	-	d864b561c9cb	-	c2fb1e9c0568	-	-	2026-11-24	xproof
 3dadb654-6191-4ad3-8315-46f5613fbc01	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:biblioplex-assistant:f0t0:s1,f:xs:XP:biblioplex-assistant:f0t0:s1	-	-	-	d864b561c9cb	-	c2fb1e9c0568	-	-	2026-11-24	xproof
-3db0207d-d80b-4915-b157-6a3e5b3a154e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3db0207d-d80b-4915-b157-6a3e5b3a154e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3db0207d-d80b-4915-b157-6a3e5b3a154e	cast	cast	agreed	-	X	start	2	0	x:xs:XP:grinning-demon:f0t0:s1	-	-	-	3aa6ded33acb	-	33a5f868cf04	-	-	2026-11-25	xproof
+3db0207d-d80b-4915-b157-6a3e5b3a154e	f0/t0	Phase	agreed	-	X	start	2	0	x:xs:XP:grinning-demon:f0t0:s1	-	-	-	3aa6ded33acb	-	33a5f868cf04	-	-	2026-11-25	xproof
 3db16fb8-5650-4568-b975-42ad3d44ebcd	cast	cast-resolve	agreed	-	FX	scen	2	0	Electro, Assaulting Battery/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3db16fb8-5650-4568-b975-42ad3d44ebcd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Electro, Assaulting Battery/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3db16fb8-5650-4568-b975-42ad3d44ebcd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Electro, Assaulting Battery/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -209,7 +209,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 3df11e5c-19aa-441c-a889-6b40eb3fdabf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:xander-s-pact:cast:s1,f:xs:XP:xander-s-pact:cast:s1	-	-	-	8c0bd19283bb	-	9d7205bc0a9c	-	-	2026-11-24	xproof
 3df49c4d-a285-4826-824e-b742b0deed3a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:confounding-riddle:cast:s1	-	-	-	23b491658465	-	95dfcccda773	-	-	2026-11-24	xproof
-3df4eb80-e8dd-4a9e-bd8a-b4b23fb9de6c	cast	cast-resolve	agreed	-	X	scen	1	0	Psychic Whorl/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3df4eb80-e8dd-4a9e-bd8a-b4b23fb9de6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:psychic-whorl:cast:s1,f:xs:XP:psychic-whorl:cast:s1	-	-	-	3aa6ded33acb	-	b01453fa3d67	-	-	2026-11-25	xproof
 3df676fe-c4f8-41c0-9743-781090bdc547	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 3dfbf95e-a91b-429c-96e2-95ac777e7027	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dfbf95e-a91b-429c-96e2-95ac777e7027	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sejiri-steppe:f0t0:s1,f:xs:XP:sejiri-steppe:f0t0:s1	-	-	-	8a1b1a193ec0	-	bca79aac94f0	-	-	2026-11-24	xproof

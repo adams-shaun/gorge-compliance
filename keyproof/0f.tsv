@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f2335bf-6a13-4483-997a-fd19d30c4d48	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	S.H.I.E.L.D. Helicarrier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f2335bf-6a13-4483-997a-fd19d30c4d48	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f2504b0-bd5a-4b61-b8bb-c8b20aa1e26e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rabid-rats:cast:s1,f:xs:XP:rabid-rats:cast:s1	-	-	-	5f2128bf97e4	-	cbf84e2209d8	-	-	2026-11-24	xproof
-0f2504b0-bd5a-4b61-b8bb-c8b20aa1e26e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f2504b0-bd5a-4b61-b8bb-c8b20aa1e26e	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 0f264e5b-264e-4e97-9a8d-8ae1d6a286ce	cast	cast-resolve	agreed	-	X	scen	1	0	Drown in the Loch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 0f26be86-eab1-45fd-8b69-5ecff2565c60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f26be86-eab1-45fd-8b69-5ecff2565c60	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -69,8 +69,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f63de7b-03f2-49ad-b217-88fe9c50d68a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:snarespinner:cast:s1,f:xs:XP:snarespinner:cast:s1	-	-	-	d864b561c9cb	-	2f61faeaeaad	-	-	2026-11-24	xproof
 0f63de7b-03f2-49ad-b217-88fe9c50d68a	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0f68ae67-1671-4281-8b6b-3e52fdd4915f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:salvation-swan:f0t0:s2,f:xs:XP:salvation-swan:f0t0:s2	-	-	-	e07cf3a05ba5	-	9d7d8f15f616	-	-	2026-11-24	xproof
-0f68ae67-1671-4281-8b6b-3e52fdd4915f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Salvation Swan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0f68ae67-1671-4281-8b6b-3e52fdd4915f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Salvation Swan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0f68ae67-1671-4281-8b6b-3e52fdd4915f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:salvation-swan:combat0.attack:s1,f:xs:XP:salvation-swan:combat0.attack:s1	-	-	-	3aa6ded33acb	-	9d7d8f15f616	-	-	2026-11-25	xproof
+0f68ae67-1671-4281-8b6b-3e52fdd4915f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:salvation-swan:combat0.block:s1,f:xs:XP:salvation-swan:combat0.block:s1	-	-	-	3aa6ded33acb	-	9d7d8f15f616	-	-	2026-11-25	xproof
 0f68ae67-1671-4281-8b6b-3e52fdd4915f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:salvation-swan:f0t0:s2,f:xs:XP:salvation-swan:f0t0:s2	-	-	-	e07cf3a05ba5	-	9d7d8f15f616	-	-	2026-11-24	xproof
 0f6e66d5-4f27-485b-999d-ee55c1e218b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f71416c-e244-48b4-acbe-2a8ef540db0f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:llanowar-empath:cast:s1,f:xs:XP:llanowar-empath:cast:s1	-	-	-	d864b561c9cb	-	fdec1f02adfb	-	-	2026-11-24	xproof

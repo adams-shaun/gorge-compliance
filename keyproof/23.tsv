@@ -36,8 +36,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23320d55-80cb-4da3-a53c-8c75abdc8c8f	cast	cast-resolve	agreed	-	FX	scen	2	0	Ignis Scientia/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23320d55-80cb-4da3-a53c-8c75abdc8c8f	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Ignis Scientia/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23320d55-80cb-4da3-a53c-8c75abdc8c8f	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-233c6686-ead8-4569-941d-3bfa768ff270	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-233c6686-ead8-4569-941d-3bfa768ff270	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+233c6686-ead8-4569-941d-3bfa768ff270	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aku-djinn:f0t0:s1,f:xs:XP:aku-djinn:f0t0:s1	-	-	-	3aa6ded33acb	-	d0a2597cf56a	-	-	2026-11-25	xproof
+233c6686-ead8-4569-941d-3bfa768ff270	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:aku-djinn:f0t0:s1,f:xs:XP:aku-djinn:f0t0:s1	-	-	-	3aa6ded33acb	-	d0a2597cf56a	-	-	2026-11-25	xproof
 233e3b4b-faaf-451d-8a2e-e9f5a6ced671	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:giant-sized-flying-ant:f0t0:s1,f:xs:XP:giant-sized-flying-ant:f0t0:s1	-	-	-	23b491658465	-	9ef5f16c88a2	-	-	2026-11-24	xproof
 233e3b4b-faaf-451d-8a2e-e9f5a6ced671	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Giant-Sized Flying Ant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 233e3b4b-faaf-451d-8a2e-e9f5a6ced671	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Giant-Sized Flying Ant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -50,9 +50,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2345b243-ed0d-4556-8017-d533db1fbc74	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 23467047-6dba-4498-b783-1ebc4f74b8c2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23467047-6dba-4498-b783-1ebc4f74b8c2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2346be19-7344-4f11-be2c-a22750cb7e1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2346be19-7344-4f11-be2c-a22750cb7e1d	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-2346be19-7344-4f11-be2c-a22750cb7e1d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2346be19-7344-4f11-be2c-a22750cb7e1d	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	c741512763f7	-	-	2026-11-25	xproof
+2346be19-7344-4f11-be2c-a22750cb7e1d	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	c741512763f7	-	-	2026-11-25	xproof
+2346be19-7344-4f11-be2c-a22750cb7e1d	f0/t1	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	c741512763f7	-	-	2026-11-25	xproof
 2348f3d4-02cc-4611-a7e0-b77604d5f2e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2348f3d4-02cc-4611-a7e0-b77604d5f2e8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2348f3d4-02cc-4611-a7e0-b77604d5f2e8	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -74,8 +74,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 235bf0ba-658c-463f-b112-7478ba27bd7b	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 235bf0ba-658c-463f-b112-7478ba27bd7b	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 235e3231-c5e5-4696-a867-705b2c4158fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scrapshooter:f0t0:s1,f:xs:XP:scrapshooter:f0t0:s1	-	-	-	23b491658465	-	2bc37731cbf6	-	-	2026-11-24	xproof
-235e3231-c5e5-4696-a867-705b2c4158fe	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scrapshooter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-235e3231-c5e5-4696-a867-705b2c4158fe	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scrapshooter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+235e3231-c5e5-4696-a867-705b2c4158fe	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:scrapshooter:combat0.attack:s1,f:xs:XP:scrapshooter:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2bc37731cbf6	-	-	2026-11-25	xproof
+235e3231-c5e5-4696-a867-705b2c4158fe	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:scrapshooter:combat0.block:s1,f:xs:XP:scrapshooter:combat0.block:s1	-	-	-	3aa6ded33acb	-	2bc37731cbf6	-	-	2026-11-25	xproof
 235e3231-c5e5-4696-a867-705b2c4158fe	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 2361ca87-6352-4ba3-8d91-b3d71242914d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23625877-b6db-480c-8885-a62b7d0457df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2385c8fb-9c38-4ff3-8f61-4e25a8c7d46b	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Krang & Shredder/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23875679-5c08-44ff-90b3-13a1a758e5f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23878990-dcbd-4a2a-b4f7-ee7edb396c71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rust-shield-rampager:f0t0:s1,f:xs:XP:rust-shield-rampager:f0t0:s1	-	-	-	23b491658465	-	1a6f8585e79a	-	-	2026-11-24	xproof
-23878990-dcbd-4a2a-b4f7-ee7edb396c71	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rust-Shield Rampager/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+23878990-dcbd-4a2a-b4f7-ee7edb396c71	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rust-shield-rampager:combat0.attack:s1,f:xs:XP:rust-shield-rampager:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1a6f8585e79a	-	-	2026-11-25	xproof
 23878990-dcbd-4a2a-b4f7-ee7edb396c71	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rust-Shield Rampager/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23878990-dcbd-4a2a-b4f7-ee7edb396c71	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 23878990-dcbd-4a2a-b4f7-ee7edb396c71	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rust-Shield Rampager/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -107,9 +107,9 @@ d08117ec-e6ec-4c63-91d4-1bda59446c54	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thu
 d08117ec-e6ec-4c63-91d4-1bda59446c54	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d0868a52-5b19-4429-acf1-399f3ae8308c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d0868a52-5b19-4429-acf1-399f3ae8308c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-d08725e6-ed9a-4c82-89d4-0dd037c376f6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:multani-s-acolyte:f0t0:s1,f:xs:XP:multani-s-acolyte:f0t0:s1	-	-	-	5f2128bf97e4	-	2f0d7c9d8d86	-	-	2026-11-24	xproof
-d08725e6-ed9a-4c82-89d4-0dd037c376f6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:multani-s-acolyte:f0t0:s1,f:xs:XP:multani-s-acolyte:f0t0:s1	-	-	-	5f2128bf97e4	-	2f0d7c9d8d86	-	-	2026-11-24	xproof
-d08725e6-ed9a-4c82-89d4-0dd037c376f6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d08725e6-ed9a-4c82-89d4-0dd037c376f6	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2f0d7c9d8d86	-	-	2026-11-25	xproof
+d08725e6-ed9a-4c82-89d4-0dd037c376f6	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2f0d7c9d8d86	-	-	2026-11-25	xproof
+d08725e6-ed9a-4c82-89d4-0dd037c376f6	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2f0d7c9d8d86	-	-	2026-11-25	xproof
 d08b8dd6-3a44-4e86-8ce8-2d0a014a9aa8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d08b8dd6-3a44-4e86-8ce8-2d0a014a9aa8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d08b8dd6-3a44-4e86-8ce8-2d0a014a9aa8	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -203,9 +203,9 @@ d0e529e3-0f77-4a55-ba35-46591f48d960	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 d0e529e3-0f77-4a55-ba35-46591f48d960	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d0e58b8e-2c41-4602-a905-c2a6086ecf70	cast	cast-resolve	agreed	-	FX	scen	2	0	Molecular Modifier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d0e58b8e-2c41-4602-a905-c2a6086ecf70	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Molecular Modifier/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d0e6203b-cef2-470f-8c79-7b139290e2d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d0e6203b-cef2-470f-8c79-7b139290e2d5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d0e6203b-cef2-470f-8c79-7b139290e2d5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d0e6203b-cef2-470f-8c79-7b139290e2d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dystopia:f0t0:s1,f:xs:XP:dystopia:f0t0:s1	-	-	-	3aa6ded33acb	-	c462ccfee6ba	-	-	2026-11-25	xproof
+d0e6203b-cef2-470f-8c79-7b139290e2d5	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dystopia:f0t0:s1,f:xs:XP:dystopia:f0t0:s1	-	-	-	3aa6ded33acb	-	c462ccfee6ba	-	-	2026-11-25	xproof
+d0e6203b-cef2-470f-8c79-7b139290e2d5	f0/t1	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	c462ccfee6ba	-	-	2026-11-25	xproof
 d0e810bb-5f38-4045-a718-30d423c05659	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:poison-tip-archer:cast:s1,f:xs:XP:poison-tip-archer:cast:s1	-	-	-	d864b561c9cb	-	fd57b6e52c46	-	-	2026-11-24	xproof
 d0e810bb-5f38-4045-a718-30d423c05659	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d0ec32d9-1d4e-4b6f-bc95-addbb484b0d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -223,5 +223,5 @@ d0fa43f6-d8f6-4674-b538-6d546b7dcf40	cast	cast-resolve	agreed	-	X	scen	1	0	Moon-
 d0fa43f6-d8f6-4674-b538-6d546b7dcf40	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Moon-Vigil Adherents/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d0fa43f6-d8f6-4674-b538-6d546b7dcf40	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Moon-Vigil Adherents/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d0fa43f6-d8f6-4674-b538-6d546b7dcf40	static#0.0	static#0.0	agreed	-	X	scen	1	0	Moon-Vigil Adherents/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-d0ff30c8-ddb7-439d-b14d-c83fe3c8da87	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:polar-kraken:cast:s1,f:xs:XP:polar-kraken:cast:s1	-	-	-	8c0bd19283bb	-	74752388f7e4	-	-	2026-11-24	xproof
-d0ff30c8-ddb7-439d-b14d-c83fe3c8da87	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d0ff30c8-ddb7-439d-b14d-c83fe3c8da87	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	74752388f7e4	-	-	2026-11-25	xproof
+d0ff30c8-ddb7-439d-b14d-c83fe3c8da87	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	74752388f7e4	-	-	2026-11-25	xproof

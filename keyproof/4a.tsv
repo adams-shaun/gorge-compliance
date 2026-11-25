@@ -50,8 +50,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a3cc4f6-037f-461d-a3b7-9f9e24c4b8cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a3fba0c-50b1-4139-834e-c8fc8e1315bb	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 4a40cee1-fc09-4f97-aef8-440778d8c0ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twisted-image:cast:s1,f:xs:XP:twisted-image:cast:s1	-	-	-	3aa6ded33acb	-	4802f58b452b	-	-	2026-11-25	xproof
-4a4418fa-7574-4027-aa09-4ca789be15ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a4418fa-7574-4027-aa09-4ca789be15ba	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4a4418fa-7574-4027-aa09-4ca789be15ba	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	5af4a07124d5	-	-	2026-11-25	xproof
+4a4418fa-7574-4027-aa09-4ca789be15ba	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	5af4a07124d5	-	-	2026-11-25	xproof
 4a46ea59-6c5d-4bed-9951-b5590f9a1bdb	cast	cast-resolve	agreed	-	X	scen	1	0	Tony Stark/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a46ea59-6c5d-4bed-9951-b5590f9a1bdb	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Tony Stark/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a46ea59-6c5d-4bed-9951-b5590f9a1bdb	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Tony Stark/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4abda0ad-0a2b-4bd9-81c7-56329e62311d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ac53b34-20d2-4a53-bade-4f998fb6ae67	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:thopter-engineer:cast:s1,f:xs:XP:thopter-engineer:cast:s1	-	-	-	d864b561c9cb	-	7a7cac73b8f6	-	-	2026-11-24	xproof
 4ac53b34-20d2-4a53-bade-4f998fb6ae67	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:thopter-engineer:cast:s1,f:xs:XP:thopter-engineer:cast:s1	-	-	-	d864b561c9cb	-	7a7cac73b8f6	-	-	2026-11-24	xproof
-4ac8c118-3942-4c92-856c-20d764283650	cast	cast-resolve	agreed	-	X	scen	1	0	Slick Sequence/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4ac8c118-3942-4c92-856c-20d764283650	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slick-sequence:cast:s1,f:xs:XP:slick-sequence:cast:s1	-	-	-	3aa6ded33acb	-	680d5ff54e05	-	-	2026-11-25	xproof
 4ac9116f-36bc-4d71-b696-d6ee064e1d58	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:juggernaut:cast:s1,f:xs:XP:juggernaut:cast:s1	-	-	-	23b491658465	-	2aa6698d5d5f	-	-	2026-11-24	xproof
 4ac9116f-36bc-4d71-b696-d6ee064e1d58	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:juggernaut:combat0.attack:s1,f:xs:XP:juggernaut:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2aa6698d5d5f	-	-	2026-11-25	xproof
 4ac9116f-36bc-4d71-b696-d6ee064e1d58	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Juggernaut/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

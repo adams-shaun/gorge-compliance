@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b8559a7-e11f-430d-8a7a-785a7005c4c4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:kjeldoran-outrider:f0a0:s1,f:xs:XP:kjeldoran-outrider:f0a0:s1	-	-	-	d864b561c9cb	-	b948e2aa2868	-	-	2026-11-24	xproof
 7b860806-0118-40f8-861b-225a7c1cf151	cast	cast-resolve	agreed	-	X	scen	1	0	Stampeding Scurryfoot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b860806-0118-40f8-861b-225a7c1cf151	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stampeding Scurryfoot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7b89b7d2-c724-4d5d-9f0b-7d3302ad1168	cast	cast-resolve	agreed	-	X	scen	1	0	Agate Assault/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7b89b7d2-c724-4d5d-9f0b-7d3302ad1168	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:agate-assault:cast:s1,f:xs:XP:agate-assault:cast:s1	-	-	-	3aa6ded33acb	-	98bfedc0d6d5	-	-	2026-11-25	xproof
 7b8f1458-c638-4907-9363-f7cc22d04605	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b8f1458-c638-4907-9363-f7cc22d04605	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:chameleon-colossus:f0a0:s1,f:xs:XP:chameleon-colossus:f0a0:s1	-	-	-	d864b561c9cb	-	46a055dfbf4f	-	-	2026-11-24	xproof
 7b8f4879-578e-40e4-863a-41d0c32c6bdd	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	1003c33b3578	-	-	2026-11-25	xproof
@@ -147,10 +147,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7bb3c3b8-25b7-4c48-aa41-dcdcebbc3d5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7bb3c3b8-25b7-4c48-aa41-dcdcebbc3d5e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:creepy-puppeteer:f0t0:s1,f:xs:XP:creepy-puppeteer:f0t0:s1	-	-	-	3aa6ded33acb	-	3bf682ccc488	-	-	2026-11-25	xproof
 7bb41690-f8ec-462a-ba29-be453eb86fca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7bb51602-60e8-4730-b11c-2870d6b42e20	cast	cast-resolve	agreed	-	X	scen	1	0	Azure Beastbinder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7bb51602-60e8-4730-b11c-2870d6b42e20	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Azure Beastbinder/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7bb51602-60e8-4730-b11c-2870d6b42e20	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:azure-beastbinder:cast:s1,f:xs:XP:azure-beastbinder:cast:s1	-	-	-	3aa6ded33acb	-	ae6102b37e64	-	-	2026-11-25	xproof
+7bb51602-60e8-4730-b11c-2870d6b42e20	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:azure-beastbinder:combat0.attack:s1,f:xs:XP:azure-beastbinder:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ae6102b37e64	-	-	2026-11-25	xproof
 7bb51602-60e8-4730-b11c-2870d6b42e20	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Azure Beastbinder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7bb51602-60e8-4730-b11c-2870d6b42e20	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Azure Beastbinder/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7bb51602-60e8-4730-b11c-2870d6b42e20	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:azure-beastbinder:combat0.attack:s1,f:xs:XP:azure-beastbinder:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ae6102b37e64	-	-	2026-11-25	xproof
 7bb51602-60e8-4730-b11c-2870d6b42e20	static#0.0	static#0.0	agreed	-	X	scen	1	0	Azure Beastbinder/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7bb5c5af-6943-4958-a666-0c322d5b9f33	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:swat:cast:s1,f:xs:XP:swat:cast:s1	-	-	-	5f2128bf97e4	-	cad6c279455f	-	-	2026-11-24	xproof
 7bb5c5af-6943-4958-a666-0c322d5b9f33	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:swat:cast:s2,f:xs:XP:swat:cast:s2	-	-	-	5f2128bf97e4	-	cad6c279455f	-	-	2026-11-24	xproof
@@ -158,7 +158,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7bb7b937-a7ad-4f5c-b173-df71556c48e9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:serum-raker:f0t0:s1,f:xs:XP:serum-raker:f0t0:s1	-	-	-	d864b561c9cb	-	e32a77b54036	-	-	2026-11-24	xproof
 7bb843b6-c55b-4796-b1a7-2fff7b05c276	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7bbede9a-8981-4435-9854-af61a18c6166	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:silver-deputy:f0t0:s2,f:xs:XP:silver-deputy:f0t0:s2	-	-	-	267e485f6204	-	44a620efa0b2	-	-	2026-11-24	xproof
-7bbede9a-8981-4435-9854-af61a18c6166	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Silver Deputy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7bbede9a-8981-4435-9854-af61a18c6166	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:silver-deputy:f0a0:s1,f:xs:XP:silver-deputy:f0a0:s1	-	-	-	3aa6ded33acb	-	44a620efa0b2	-	-	2026-11-25	xproof
 7bbede9a-8981-4435-9854-af61a18c6166	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:silver-deputy:f0t0:s2,f:xs:XP:silver-deputy:f0t0:s2	-	-	-	267e485f6204	-	44a620efa0b2	-	-	2026-11-24	xproof
 7bc4c7e2-6758-4a85-84e7-03ab93981106	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tinybones-the-pickpocket:cast:s1,f:xs:XP:tinybones-the-pickpocket:cast:s1	-	-	-	23b491658465	-	4df880811733	-	-	2026-11-24	xproof
 7bc4c7e2-6758-4a85-84e7-03ab93981106	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tinybones-the-pickpocket:combat0.attack:s1,f:xs:XP:tinybones-the-pickpocket:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4df880811733	-	-	2026-11-25	xproof

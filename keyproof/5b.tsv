@@ -8,8 +8,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b079914-1302-40b5-8060-7c3e5b6e9eae	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5b090ba3-0ecb-4585-b5b7-9d6028c32487	cast	cast-resolve	agreed	-	X	scen	1	0	Misty Knight, Hero for Hire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5b090ba3-0ecb-4585-b5b7-9d6028c32487	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Misty Knight, Hero for Hire/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5b0a4530-6e19-41a2-9ea6-e4c8cf85b6c4	cast	cast-resolve	agreed	-	X	scen	1	0	Mouse Trapper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5b0a4530-6e19-41a2-9ea6-e4c8cf85b6c4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mouse Trapper/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5b0a4530-6e19-41a2-9ea6-e4c8cf85b6c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mouse-trapper:cast:s1,f:xs:XP:mouse-trapper:cast:s1	-	-	-	3aa6ded33acb	-	445d80679d57	-	-	2026-11-25	xproof
+5b0a4530-6e19-41a2-9ea6-e4c8cf85b6c4	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:mouse-trapper:f0t0:s1,f:xs:XP:mouse-trapper:f0t0:s1	-	-	-	3aa6ded33acb	-	445d80679d57	-	-	2026-11-25	xproof
 5b0cb089-087d-4b91-9e63-8186dc737a00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tahngarth-s-rage:cast:s1,f:xs:XP:tahngarth-s-rage:cast:s1	-	-	-	8c0bd19283bb	-	4e47b974e263	-	-	2026-11-24	xproof
 5b0dcf09-df51-4ad3-848e-c0ffb25824f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nimblewright-schematic:f0t0:s1,f:xs:XP:nimblewright-schematic:f0t0:s1	-	-	-	8c0bd19283bb	-	cd0be01f71f3	-	-	2026-11-24	xproof
 5b0dcf09-df51-4ad3-848e-c0ffb25824f9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nimblewright-schematic:f0t0:s1,f:xs:XP:nimblewright-schematic:f0t0:s1	-	-	-	8c0bd19283bb	-	cd0be01f71f3	-	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5bb06e6f-e3af-4caa-b66d-77248ad46b61	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lilypad Village/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5bb06e6f-e3af-4caa-b66d-77248ad46b61	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Lilypad Village/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5bb06e6f-e3af-4caa-b66d-77248ad46b61	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Lilypad Village/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5bb06e6f-e3af-4caa-b66d-77248ad46b61	land	play-land	agreed	-	X	scen	1	0	Lilypad Village/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5bb06e6f-e3af-4caa-b66d-77248ad46b61	land	land	agreed	-	FX	start	2	0	x:xs:XP:lilypad-village:land:s1,f:xs:XP:lilypad-village:land:s1	-	-	-	3aa6ded33acb	-	a56bd2911316	-	-	2026-11-25	xproof
 5bb38d08-582e-43aa-9507-7c20759978ec	cast	cast-resolve	agreed	-	X	scen	1	0	Follow the Lumarets/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5bb4961f-0a24-40f8-bfba-8618a9375c93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5bb5e4e5-c3b4-4f67-83e1-bde9ce9f18c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boromir-gondor-s-hope:f0t0:s1,f:xs:XP:boromir-gondor-s-hope:f0t0:s1	-	-	-	8c0bd19283bb	-	73e87c59402f	-	-	2026-11-24	xproof

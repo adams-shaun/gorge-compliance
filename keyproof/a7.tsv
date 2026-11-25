@@ -21,9 +21,9 @@ a71e8d07-1a49-47a0-834e-de87d750a200	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Iron
 a71e8d07-1a49-47a0-834e-de87d750a200	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Iron Hills/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a71e8d07-1a49-47a0-834e-de87d750a200	land	play-land	agreed	-	X	scen	1	0	Iron Hills/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7213bef-0e9c-44e1-97cb-d1da0ef370bf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a72213e7-16f0-4fbe-91d3-750ca51a4336	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vile-requiem:cast:s1,f:xs:XP:vile-requiem:cast:s1	-	-	-	5f2128bf97e4	-	3d451e742b1b	-	-	2026-11-24	xproof
-a72213e7-16f0-4fbe-91d3-750ca51a4336	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a72213e7-16f0-4fbe-91d3-750ca51a4336	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a72213e7-16f0-4fbe-91d3-750ca51a4336	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vile-requiem:f0t0:s1,f:xs:XP:vile-requiem:f0t0:s1	-	-	-	3aa6ded33acb	-	3d451e742b1b	-	-	2026-11-25	xproof
+a72213e7-16f0-4fbe-91d3-750ca51a4336	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:vile-requiem:f0t0:s1,f:xs:XP:vile-requiem:f0t0:s1	-	-	-	3aa6ded33acb	-	3d451e742b1b	-	-	2026-11-25	xproof
+a72213e7-16f0-4fbe-91d3-750ca51a4336	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:vile-requiem:f0t0:s1,f:xs:XP:vile-requiem:f0t0:s1	-	-	-	3aa6ded33acb	-	3d451e742b1b	-	-	2026-11-25	xproof
 a7243d25-22a2-4df5-adaf-1f40f5330ec1	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sakashima-the-impostor:cast:s1	-	-	-	64a08ba7d913	-	cd72cbe6bd08	-	-	2026-11-24	xproof
 a7285536-6cc1-448e-839a-606d585fbd9d	cast	cast-resolve	agreed	-	X	scen	1	0	Humpback Whales/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7285536-6cc1-448e-839a-606d585fbd9d	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -79,8 +79,8 @@ a75b02ba-b0c8-47e3-a05c-e9ba221a7578	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Tarr
 a75dbe70-7e3e-446f-9a76-9fbb414f2e7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a75dbe70-7e3e-446f-9a76-9fbb414f2e7c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a75ddd9c-2574-46e9-ac85-58082789ff3e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scytheclaw:f0t1:s1,f:xs:XP:scytheclaw:f0t1:s1	-	-	-	8c0bd19283bb	-	8b5f677e2db6	-	-	2026-11-24	xproof
-a75ddd9c-2574-46e9-ac85-58082789ff3e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a75ddd9c-2574-46e9-ac85-58082789ff3e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+a75ddd9c-2574-46e9-ac85-58082789ff3e	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:scytheclaw:f0a0:s1,f:xs:XP:scytheclaw:f0a0:s1	-	-	-	3aa6ded33acb	-	8b5f677e2db6	-	-	2026-11-25	xproof
+a75ddd9c-2574-46e9-ac85-58082789ff3e	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:scytheclaw:f0a0:s1,f:xs:XP:scytheclaw:f0a0:s1	-	-	-	3aa6ded33acb	-	8b5f677e2db6	-	-	2026-11-25	xproof
 a75ddd9c-2574-46e9-ac85-58082789ff3e	f0/t1	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:scytheclaw:f0t1:s1,f:xs:XP:scytheclaw:f0t1:s1	-	-	-	8c0bd19283bb	-	8b5f677e2db6	-	-	2026-11-24	xproof
 a762e8cb-9d33-41fc-b2e8-0c5ad4d7268e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a762e8cb-9d33-41fc-b2e8-0c5ad4d7268e	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -133,7 +133,7 @@ a7b0d897-38c0-4f90-81e8-3c5b8d31a607	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gla
 a7b0d897-38c0-4f90-81e8-3c5b8d31a607	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Glamermite/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 a7b0d897-38c0-4f90-81e8-3c5b8d31a607	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Glamermite/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 a7b0d897-38c0-4f90-81e8-3c5b8d31a607	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-a7b12df9-fddd-4cd4-8c09-d54a47867ab6	cast	cast-resolve	agreed	-	X	scen	1	0	Diresight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a7b12df9-fddd-4cd4-8c09-d54a47867ab6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:diresight:cast:s1,f:xs:XP:diresight:cast:s1	-	-	-	3aa6ded33acb	-	0d7d12569168	-	-	2026-11-25	xproof
 a7b4a519-d85f-40ae-bb5f-08bc1d301418	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7b6cd8b-1bed-4742-8c97-8be4edbfc8ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7b6cd8b-1bed-4742-8c97-8be4edbfc8ee	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d46a97a-b1d6-4bf3-b3ba-a5cdfd4c8bf5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:pitiless-fists:f0t0:s2,f:xs:XP:pitiless-fists:f0t0:s2	-	-	-	5437c1394672	-	8e00c9e0330b	-	-	2026-11-24	xproof
 0d46a97a-b1d6-4bf3-b3ba-a5cdfd4c8bf5	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:pitiless-fists:f0t0:s2,f:xs:XP:pitiless-fists:f0t0:s2	-	-	-	5437c1394672	-	8e00c9e0330b	-	-	2026-11-24	xproof
 0d46a97a-b1d6-4bf3-b3ba-a5cdfd4c8bf5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Pitiless Fists/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-0d49187a-1c37-4c3a-afc2-fac2bbc6b29a	cast	cast-resolve	agreed	-	X	scen	1	0	Portent of Calamity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0d49187a-1c37-4c3a-afc2-fac2bbc6b29a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:portent-of-calamity:cast:s1,f:xs:XP:portent-of-calamity:cast:s1	-	-	-	3aa6ded33acb	-	8074097ca481	-	-	2026-11-25	xproof
 0d496c6e-8f7b-420f-9197-dacd2feb528f	cast	cast-resolve	agreed	-	FX	scen	2	0	Ghalta the Immovable/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d496c6e-8f7b-420f-9197-dacd2feb528f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ghalta the Immovable/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d496c6e-8f7b-420f-9197-dacd2feb528f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ghalta the Immovable/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -132,8 +132,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d899095-cef7-43d2-aaf7-eb73b62f5ec8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d8c2d7b-7cce-4115-a3f8-18c23731544e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d8c2d7b-7cce-4115-a3f8-18c23731544e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0d8fded4-0393-43c2-82a1-383f29de65ce	cast	cast-resolve	agreed	-	X	scen	1	0	Wrangler of the Damned/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0d8fded4-0393-43c2-82a1-383f29de65ce	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wrangler of the Damned/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0d8fded4-0393-43c2-82a1-383f29de65ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wrangler-of-the-damned:cast:s1,f:xs:XP:wrangler-of-the-damned:cast:s1	-	-	-	3aa6ded33acb	-	3b3303cde7ac	-	-	2026-11-25	xproof
+0d8fded4-0393-43c2-82a1-383f29de65ce	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:wrangler-of-the-damned:f0t0:s1,f:xs:XP:wrangler-of-the-damned:f0t0:s1	-	-	-	3aa6ded33acb	-	3b3303cde7ac	-	-	2026-11-25	xproof
 0d95ee14-9ff0-4d7f-be56-361a500ce36f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:custodi-lich:cast:s1,f:xs:XP:custodi-lich:cast:s1	-	-	-	8c0bd19283bb	-	acc0bb0d51fb	-	-	2026-11-24	xproof
 0d95ee14-9ff0-4d7f-be56-361a500ce36f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:custodi-lich:cast:s1,f:xs:XP:custodi-lich:cast:s1	-	-	-	8c0bd19283bb	-	acc0bb0d51fb	-	-	2026-11-24	xproof
 0d95ee14-9ff0-4d7f-be56-361a500ce36f	f0/t1	BecomeMonarch	agreed	-	FX	start	4	0	x:xs:XP:custodi-lich:cast:s1,f:xs:XP:custodi-lich:cast:s1	-	-	-	8c0bd19283bb	-	acc0bb0d51fb	-	-	2026-11-24	xproof

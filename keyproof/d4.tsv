@@ -120,7 +120,7 @@ d4a911af-95fa-47a5-8564-cdf210120b01	f0/a1	NULL	owed	refused:steps-needed:cost:D
 d4a911af-95fa-47a5-8564-cdf210120b01	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Leisure Bicycle"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 d4a9d63a-5a8a-4f51-9e49-43d6dc3234b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greedy-freebooter:cast:s1,f:xs:XP:greedy-freebooter:cast:s1	-	-	-	23b491658465	-	6c80cc515ea7	-	-	2026-11-24	xproof
 d4a9d63a-5a8a-4f51-9e49-43d6dc3234b1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:greedy-freebooter:f0t0:s1,f:xs:XP:greedy-freebooter:f0t0:s1	-	-	-	23b491658465	-	6c80cc515ea7	-	-	2026-11-24	xproof
-d4ab7848-5c37-4c6b-be29-0bb703333e5b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d4ab7848-5c37-4c6b-be29-0bb703333e5b	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 d4b0a6e6-937d-428a-a469-bc09c30ac276	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4b10505-2b7a-4099-aacb-ff2359b24310	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:planar-portal:cast:s1,f:xs:XP:planar-portal:cast:s1	-	-	-	25696bf19d5b	-	5f49c3eb0f3b	-	-	2026-11-24	xproof
 d4b10505-2b7a-4099-aacb-ff2359b24310	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:planar-portal:f0a0:s1,f:xs:XP:planar-portal:f0a0:s1	-	-	-	d864b561c9cb	-	5f49c3eb0f3b	-	-	2026-11-24	xproof
@@ -151,10 +151,10 @@ d4e0749a-e179-4c19-8536-bf8f1a198549	land	play-land	agreed	-	X	scen	1	0	Dedicate
 d4e124af-d335-4c42-b60a-fe578f69f7ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4e2b541-31b6-4bcb-a28a-d897deb91484	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4e2b541-31b6-4bcb-a28a-d897deb91484	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:ezio-brash-novice:f0t0:s1	-	-	-	ae86f6029288	-	783b8d73a69b	-	-	2026-11-24	xproof
-d4e2cc1a-4212-4284-9ebe-d3c40931de50	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:icy-prison:f0t0:s1,f:xs:XP:icy-prison:f0t0:s1	-	-	-	ea3140b6974b	-	93aeb068993d	-	-	2026-11-24	xproof
-d4e2cc1a-4212-4284-9ebe-d3c40931de50	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:icy-prison:f0t0:s1,f:xs:XP:icy-prison:f0t0:s1	-	-	-	ea3140b6974b	-	93aeb068993d	-	-	2026-11-24	xproof
+d4e2cc1a-4212-4284-9ebe-d3c40931de50	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:icy-prison:f0t2:s1,f:xs:XP:icy-prison:f0t2:s1	-	-	-	3aa6ded33acb	-	93aeb068993d	-	-	2026-11-25	xproof
+d4e2cc1a-4212-4284-9ebe-d3c40931de50	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:icy-prison:f0t2:s1,f:xs:XP:icy-prison:f0t2:s1	-	-	-	3aa6ded33acb	-	93aeb068993d	-	-	2026-11-25	xproof
 d4e2cc1a-4212-4284-9ebe-d3c40931de50	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-d4e2cc1a-4212-4284-9ebe-d3c40931de50	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d4e2cc1a-4212-4284-9ebe-d3c40931de50	f0/t2	Phase	agreed	-	FX	start	2	0	x:xs:XP:icy-prison:f0t2:s1,f:xs:XP:icy-prison:f0t2:s1	-	-	-	3aa6ded33acb	-	93aeb068993d	-	-	2026-11-25	xproof
 d4e3440d-4e34-40d7-8a42-c673225c0332	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deep-gnome-terramancer:cast:s1,f:xs:XP:deep-gnome-terramancer:cast:s1	-	-	-	8c0bd19283bb	-	8a1cb2d2d5d4	-	-	2026-11-24	xproof
 d4e3440d-4e34-40d7-8a42-c673225c0332	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d4e4c8a5-e97b-4295-a403-d17834f73502	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Foul Roads/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -163,9 +163,9 @@ d4e4c8a5-e97b-4295-a403-d17834f73502	land	play-land	agreed	-	X	scen	1	0	Foul Roa
 d4e875d9-2245-470d-aa2f-1dfe66ce2d15	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4e875d9-2245-470d-aa2f-1dfe66ce2d15	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4e875d9-2245-470d-aa2f-1dfe66ce2d15	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d4e8aa93-c0d1-49b7-bbf4-35a155048774	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:child-of-gaea:cast:s1,f:xs:XP:child-of-gaea:cast:s1	-	-	-	5f2128bf97e4	-	3e3abdf888f7	-	-	2026-11-24	xproof
-d4e8aa93-c0d1-49b7-bbf4-35a155048774	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d4e8aa93-c0d1-49b7-bbf4-35a155048774	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d4e8aa93-c0d1-49b7-bbf4-35a155048774	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:child-of-gaea:f0t0:s1,f:xs:XP:child-of-gaea:f0t0:s1	-	-	-	3aa6ded33acb	-	3e3abdf888f7	-	-	2026-11-25	xproof
+d4e8aa93-c0d1-49b7-bbf4-35a155048774	f0/a0	Regenerate	agreed	-	FX	start	1	0	x:xs:XP:child-of-gaea:f0t0:s2,f:xs:XP:child-of-gaea:f0t0:s2	-	-	-	3aa6ded33acb	-	3e3abdf888f7	-	-	2026-11-25	xproof
+d4e8aa93-c0d1-49b7-bbf4-35a155048774	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:child-of-gaea:f0t0:s1,f:xs:XP:child-of-gaea:f0t0:s1	-	-	-	3aa6ded33acb	-	3e3abdf888f7	-	-	2026-11-25	xproof
 d4ecee6d-b23f-48e7-b7e5-347027225709	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:selesnya-keyrune:cast:s1,f:xs:XP:selesnya-keyrune:cast:s1	-	-	-	d864b561c9cb	-	bd278ebc4ce7	-	-	2026-11-24	xproof
 d4ecee6d-b23f-48e7-b7e5-347027225709	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:selesnya-keyrune:cast:s1,f:xs:XP:selesnya-keyrune:cast:s1	-	-	-	d864b561c9cb	-	bd278ebc4ce7	-	-	2026-11-24	xproof
 d4ecee6d-b23f-48e7-b7e5-347027225709	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:selesnya-keyrune:f0a1:s1,f:xs:XP:selesnya-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	bd278ebc4ce7	-	-	2026-11-24	xproof

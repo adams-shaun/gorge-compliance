@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 0b035f3c-ba21-4a73-b4df-11a7e8c19056	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0b085c90-95df-4823-ba67-9eb398b1ec94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raka-sanctuary:cast:s1,f:xs:XP:raka-sanctuary:cast:s1	-	-	-	fc71ca68c5ac	-	5aef86b51890	-	-	2026-11-24	xproof
-0b085c90-95df-4823-ba67-9eb398b1ec94	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0b085c90-95df-4823-ba67-9eb398b1ec94	cast	cast	agreed	-	F	start	2	0	f:xs:XP:raka-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	5aef86b51890	-	-	2026-11-25	xproof
+0b085c90-95df-4823-ba67-9eb398b1ec94	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:raka-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	5aef86b51890	-	-	2026-11-25	xproof
 0b0c02eb-4d9e-4fea-bad6-9ef5d7bb5295	cast	cast	agreed	-	F	start	2	0	f:xs:XP:jwari-shapeshifter:cast:s1	-	-	-	8a1b1a193ec0	-	ae471de90c0d	-	-	2026-11-24	xproof
 0b0c98ba-3505-40aa-b0f2-e03c9790f51e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glaring-aegis:f0t0:s1,f:xs:XP:glaring-aegis:f0t0:s1	-	-	-	d864b561c9cb	-	9f433e25a459	-	-	2026-11-24	xproof
 0b0c98ba-3505-40aa-b0f2-e03c9790f51e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:glaring-aegis:f0t0:s1,f:xs:XP:glaring-aegis:f0t0:s1	-	-	-	d864b561c9cb	-	9f433e25a459	-	-	2026-11-24	xproof
@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b137853-7cb9-424b-8285-12938991eafb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b16a650-68b0-44dc-a9e1-15b7966e0b18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orcish-oriflamme:cast:s1,f:xs:XP:orcish-oriflamme:cast:s1	-	-	-	ae86f6029288	-	36e0679aaf7b	-	-	2026-11-24	xproof
 0b19082c-8f80-448b-9e1b-0f324a159409	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:builder-s-talent:f0t0:s2,f:xs:XP:builder-s-talent:f0t0:s2	-	-	-	e07cf3a05ba5	-	2c01b84c889f	-	-	2026-11-24	xproof
-0b19082c-8f80-448b-9e1b-0f324a159409	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Builder's Talent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0b19082c-8f80-448b-9e1b-0f324a159409	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:builder-s-talent:f0a0:s1,f:xs:XP:builder-s-talent:f0a0:s1	-	-	-	3aa6ded33acb	-	2c01b84c889f	-	-	2026-11-25	xproof
 0b19082c-8f80-448b-9e1b-0f324a159409	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Builder's Talent/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0b19082c-8f80-448b-9e1b-0f324a159409	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:builder-s-talent:f0t0:s2,f:xs:XP:builder-s-talent:f0t0:s2	-	-	-	e07cf3a05ba5	-	2c01b84c889f	-	-	2026-11-24	xproof
 0b19082c-8f80-448b-9e1b-0f324a159409	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Builder's Talent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

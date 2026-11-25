@@ -91,8 +91,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f592b83-7838-4466-8bcb-093ac7346c55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f59b3d9-1535-4e13-a0a1-0f839fe90ac6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f5ac983-a7a5-4b9d-a25c-727a7de6c465	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f5b7f4c-a3d2-4472-80f5-8504562fc7fd	cast	cast-resolve	agreed	-	X	scen	1	0	Brave-Kin Duo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1f5b7f4c-a3d2-4472-80f5-8504562fc7fd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Brave-Kin Duo/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1f5b7f4c-a3d2-4472-80f5-8504562fc7fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brave-kin-duo:cast:s1,f:xs:XP:brave-kin-duo:cast:s1	-	-	-	3aa6ded33acb	-	583e72389de1	-	-	2026-11-25	xproof
+1f5b7f4c-a3d2-4472-80f5-8504562fc7fd	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:brave-kin-duo:f0a0:s1,f:xs:XP:brave-kin-duo:f0a0:s1	-	-	-	3aa6ded33acb	-	583e72389de1	-	-	2026-11-25	xproof
 1f6056be-67c8-40a9-86ef-1606961644eb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cacophony-unleashed:f0t0:s1,f:xs:XP:cacophony-unleashed:f0t0:s1	-	-	-	8c0bd19283bb	-	69c60112a3b5	-	-	2026-11-24	xproof
 1f6056be-67c8-40a9-86ef-1606961644eb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cacophony-unleashed:f0t0:s1,f:xs:XP:cacophony-unleashed:f0t0:s1	-	-	-	8c0bd19283bb	-	69c60112a3b5	-	-	2026-11-24	xproof
 1f6056be-67c8-40a9-86ef-1606961644eb	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cacophony-unleashed:f0t0:s1,f:xs:XP:cacophony-unleashed:f0t0:s1	-	-	-	8c0bd19283bb	-	69c60112a3b5	-	-	2026-11-24	xproof
@@ -133,9 +133,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f9797e2-7ebb-41f9-9199-e9ee575eefd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f9797e2-7ebb-41f9-9199-e9ee575eefd3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:inspiring-unicorn:f0t0:s1,f:xs:XP:inspiring-unicorn:f0t0:s1	-	-	-	d864b561c9cb	-	ad33e17f87f9	-	-	2026-11-24	xproof
 1f9efad1-9f51-47aa-a5a7-9c8103435a01	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:keeper-of-keys:cast:s1,f:xs:XP:keeper-of-keys:cast:s1	-	-	-	8c0bd19283bb	-	5244630d5026	-	-	2026-11-24	xproof
-1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:keeper-of-keys:cast:s1,f:xs:XP:keeper-of-keys:cast:s1	-	-	-	8c0bd19283bb	-	5244630d5026	-	-	2026-11-24	xproof
-1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keeper-of-keys:f0t1:s1,f:xs:XP:keeper-of-keys:f0t1:s1	-	-	-	3aa6ded33acb	-	5244630d5026	-	-	2026-11-25	xproof
+1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keeper-of-keys:f0t1:s1,f:xs:XP:keeper-of-keys:f0t1:s1	-	-	-	3aa6ded33acb	-	5244630d5026	-	-	2026-11-25	xproof
+1fa0f877-e26c-4a26-8c69-4bf8fcdd30b5	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:keeper-of-keys:f0t1:s1,f:xs:XP:keeper-of-keys:f0t1:s1	-	-	-	3aa6ded33acb	-	5244630d5026	-	-	2026-11-25	xproof
 1fa272bf-8759-4750-b40b-8e2f6972d570	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fa94925-04e5-4073-91af-1857dbc09991	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oak-street-innkeeper:cast:s1,f:xs:XP:oak-street-innkeeper:cast:s1	-	-	-	d864b561c9cb	-	dbd2ff3680b8	-	-	2026-11-24	xproof
 1fb1afc0-a3bf-4368-9ca0-47dd8c4c3c60	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maga-traitor-to-mortals:f0t0:s1,f:xs:XP:maga-traitor-to-mortals:f0t0:s1	-	-	-	64a08ba7d913	-	0f2c72c5743c	-	-	2026-11-24	xproof

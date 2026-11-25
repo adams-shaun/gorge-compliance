@@ -81,9 +81,9 @@ bb86849c-fdec-4ca5-a8c0-ed682d921759	f0/t0	NULL	owed	refused:not-sent	-	start	0	
 bb87917f-33fb-4024-9317-0992c2f8f55e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb87ec08-bb1b-43d8-8809-92904cbba685	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 bb87ec08-bb1b-43d8-8809-92904cbba685	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-bb8a55a5-596e-427c-b745-4de8b0dfb095	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bb8a55a5-596e-427c-b745-4de8b0dfb095	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bb8a55a5-596e-427c-b745-4de8b0dfb095	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bb8a55a5-596e-427c-b745-4de8b0dfb095	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defender-en-vec:f0t0:s1,f:xs:XP:defender-en-vec:f0t0:s1	-	-	-	3aa6ded33acb	-	8f7fe6c8e19f	-	-	2026-11-25	xproof
+bb8a55a5-596e-427c-b745-4de8b0dfb095	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:defender-en-vec:f0t0:s1,f:xs:XP:defender-en-vec:f0t0:s1	-	-	-	3aa6ded33acb	-	8f7fe6c8e19f	-	-	2026-11-25	xproof
+bb8a55a5-596e-427c-b745-4de8b0dfb095	f0/t0	Phase/Fading	agreed	-	FX	start	2	0	x:xs:XP:defender-en-vec:f0t0:s1,f:xs:XP:defender-en-vec:f0t0:s1	-	-	-	3aa6ded33acb	-	8f7fe6c8e19f	-	-	2026-11-25	xproof
 bb8c2c0f-fc63-40c6-98c6-691e42b3b8c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disruptor-pistol:cast:s1,f:xs:XP:disruptor-pistol:cast:s1	-	-	-	8c0bd19283bb	-	6bb45429e12c	-	-	2026-11-24	xproof
 bb8c2c0f-fc63-40c6-98c6-691e42b3b8c9	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 bb8c6dd2-1abe-4eb2-be1f-b0c078e5f257	cast	cast-resolve	agreed	-	FX	scen	2	0	Turtle Blimp/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -178,11 +178,11 @@ bbf873c2-94c1-46b8-912e-e29e48e0212c	cast	cast-resolve	agreed	-	X	scen	1	0	Iron 
 bbf873c2-94c1-46b8-912e-e29e48e0212c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Iron Fist, Living Weapon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bbf9fd47-10e1-4749-b06f-4fe72200afc7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bbf9fd47-10e1-4749-b06f-4fe72200afc7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bbfb3e4a-b389-4391-8141-13b68c0ef2e0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bbfb3e4a-b389-4391-8141-13b68c0ef2e0	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 bbfc5011-a9b7-442d-a443-974a5a64de46	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:heaped-harvest:f0t0:s2,f:xs:XP:heaped-harvest:f0t0:s2	-	-	-	e07cf3a05ba5	-	d79df6b5c2d7	-	-	2026-11-24	xproof
-bbfc5011-a9b7-442d-a443-974a5a64de46	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Heaped Harvest/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+bbfc5011-a9b7-442d-a443-974a5a64de46	f0/a0	GainLife	agreed	-	F	start	2	0	f:xs:XP:heaped-harvest:f0a0:s1	-	-	-	3aa6ded33acb	-	d79df6b5c2d7	-	-	2026-11-25	xproof
 bbfc5011-a9b7-442d-a443-974a5a64de46	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:heaped-harvest:f0t0:s2,f:xs:XP:heaped-harvest:f0t0:s2	-	-	-	e07cf3a05ba5	-	d79df6b5c2d7	-	-	2026-11-24	xproof
-bbfc5011-a9b7-442d-a443-974a5a64de46	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Heaped Harvest/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+bbfc5011-a9b7-442d-a443-974a5a64de46	f0/t1	Sacrificed	agreed	-	F	start	2	0	f:xs:XP:heaped-harvest:f0a0:s1	-	-	-	3aa6ded33acb	-	d79df6b5c2d7	-	-	2026-11-25	xproof
 bbfced8f-0f83-4cc9-9143-aa2473828b48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bbfd0de0-3558-4833-bae4-8efae44b7fff	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dreadwing-scavenger:f0t0:s2,f:xs:XP:dreadwing-scavenger:f0t0:s2	-	-	-	e07cf3a05ba5	-	e3531ca15b1e	-	-	2026-11-24	xproof
 bbfd0de0-3558-4833-bae4-8efae44b7fff	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dreadwing Scavenger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 515fb257-ec07-4978-af16-47a10a22ba3c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 515fb257-ec07-4978-af16-47a10a22ba3c	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 51622e89-aa5e-4dd6-a078-eb45e8ebb434	cast	cast-resolve	agreed	-	FX	scen	2	0	Seraphic Steed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-51622e89-aa5e-4dd6-a078-eb45e8ebb434	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Seraphic Steed/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+51622e89-aa5e-4dd6-a078-eb45e8ebb434	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:seraphic-steed:combat0.attack:s1	-	-	-	3aa6ded33acb	-	37e1710c2fef	-	-	2026-11-25	xproof
 51622e89-aa5e-4dd6-a078-eb45e8ebb434	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Seraphic Steed/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51622e89-aa5e-4dd6-a078-eb45e8ebb434	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Seraphic Steed/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 51622e89-aa5e-4dd6-a078-eb45e8ebb434	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Seraphic Steed/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -115,10 +115,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51a0d1c2-ff29-4ac9-84a2-ad4f566fee8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51a2671b-677e-434c-9f1a-d768fe1190c9	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Lt. Arex, Ever-Adapting"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 51a2671b-677e-434c-9f1a-d768fe1190c9	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Lt. Arex, Ever-Adapting"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-51a6819d-c8fb-4f52-ab0c-4ae845728ed2	cast	cast-resolve	agreed	-	X	scen	1	0	Redrock Sentinel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+51a6819d-c8fb-4f52-ab0c-4ae845728ed2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:redrock-sentinel:cast:s1,f:xs:XP:redrock-sentinel:cast:s1	-	-	-	3aa6ded33acb	-	e78b629a5a6e	-	-	2026-11-25	xproof
 51a6819d-c8fb-4f52-ab0c-4ae845728ed2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Redrock Sentinel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-51a6819d-c8fb-4f52-ab0c-4ae845728ed2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Redrock Sentinel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-51a6819d-c8fb-4f52-ab0c-4ae845728ed2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Redrock Sentinel/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+51a6819d-c8fb-4f52-ab0c-4ae845728ed2	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:redrock-sentinel:combat0.block:s1,f:xs:XP:redrock-sentinel:combat0.block:s1	-	-	-	3aa6ded33acb	-	e78b629a5a6e	-	-	2026-11-25	xproof
+51a6819d-c8fb-4f52-ab0c-4ae845728ed2	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:redrock-sentinel:f0a0:s1,f:xs:XP:redrock-sentinel:f0a0:s1	-	-	-	3aa6ded33acb	-	e78b629a5a6e	-	-	2026-11-25	xproof
 51a886f2-9b0a-4964-9d59-99dc1a68a97c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51abc95c-bd92-46f7-a0a1-6e9f8e0dda87	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 51acd176-e84d-42c2-acb2-cceeb28a9fec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -184,8 +184,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51f091a7-9b0b-4362-8e9c-c174752f369b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:white-plume-adventurer:cast:s1,f:xs:XP:white-plume-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	1ef17f95300f	-	-	2026-11-24	xproof
 51f091a7-9b0b-4362-8e9c-c174752f369b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:white-plume-adventurer:cast:s1,f:xs:XP:white-plume-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	1ef17f95300f	-	-	2026-11-24	xproof
 51f091a7-9b0b-4362-8e9c-c174752f369b	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51f17fe1-1cf7-4362-b9a2-8ec225d41b03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51f17fe1-1cf7-4362-b9a2-8ec225d41b03	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+51f17fe1-1cf7-4362-b9a2-8ec225d41b03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ana-sanctuary:f0t0:s1,f:xs:XP:ana-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	9c10c1b1dc77	-	-	2026-11-25	xproof
+51f17fe1-1cf7-4362-b9a2-8ec225d41b03	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ana-sanctuary:f0t0:s1,f:xs:XP:ana-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	9c10c1b1dc77	-	-	2026-11-25	xproof
 51f1ceb9-2305-4a4e-b422-7dd7f8deef98	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51f4eb1f-abf2-425a-b78e-cafac177da89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51f4eb1f-abf2-425a-b78e-cafac177da89	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

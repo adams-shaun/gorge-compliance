@@ -78,8 +78,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a620d20-f14e-43d0-8e57-c2a197e2ec51	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:urza-s-factory:land:s1,f:xs:XP:urza-s-factory:land:s1	-	-	-	77494c1ce129	-	f7032dcf6c4d	-	-	2026-11-24	xproof
 5a620d20-f14e-43d0-8e57-c2a197e2ec51	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 5a620d20-f14e-43d0-8e57-c2a197e2ec51	land	land	agreed	-	FX	start	2	0	x:xs:XP:urza-s-factory:land:s1,f:xs:XP:urza-s-factory:land:s1	-	-	-	77494c1ce129	-	f7032dcf6c4d	-	-	2026-11-24	xproof
-5a647f28-6e26-4262-8593-d582e0a691f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a647f28-6e26-4262-8593-d582e0a691f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a647f28-6e26-4262-8593-d582e0a691f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nature-s-wrath:f0t0:s1,f:xs:XP:nature-s-wrath:f0t0:s1	-	-	-	3aa6ded33acb	-	f137b48e2600	-	-	2026-11-25	xproof
+5a647f28-6e26-4262-8593-d582e0a691f7	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nature-s-wrath:f0t0:s1,f:xs:XP:nature-s-wrath:f0t0:s1	-	-	-	3aa6ded33acb	-	f137b48e2600	-	-	2026-11-25	xproof
 5a647f28-6e26-4262-8593-d582e0a691f7	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 5a647f28-6e26-4262-8593-d582e0a691f7	f0/t2	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 5a651557-ce08-46ba-aecd-0e4fbfdef3c0	cast	cast-resolve	agreed	-	X	scen	1	0	Bile-Vial Boggart/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5aa3abf1-d56b-4f42-8c84-7e5a2c15ee0f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5aa3abf1-d56b-4f42-8c84-7e5a2c15ee0f	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5aa3abf1-d56b-4f42-8c84-7e5a2c15ee0f	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-5aa66cb0-86b9-4e85-9a17-df78416d682d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5aa66cb0-86b9-4e85-9a17-df78416d682d	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 5aa6d553-a144-4c5b-83fa-65e931903899	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viridian-shaman:f0t0:s1,f:xs:XP:viridian-shaman:f0t0:s1	-	-	-	25696bf19d5b	-	e8369f86c551	-	-	2026-11-24	xproof
 5aa6d553-a144-4c5b-83fa-65e931903899	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:viridian-shaman:f0t0:s1,f:xs:XP:viridian-shaman:f0t0:s1	-	-	-	25696bf19d5b	-	e8369f86c551	-	-	2026-11-24	xproof
 5aa76c5d-8046-42ce-b61d-cc9b4806c11a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saheeli-the-sun-s-brilliance:cast:s1,f:xs:XP:saheeli-the-sun-s-brilliance:cast:s1	-	-	-	23b491658465	-	e9d016af849c	-	-	2026-11-24	xproof

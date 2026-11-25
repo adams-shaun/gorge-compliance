@@ -15,8 +15,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2017d355-403a-4408-9779-94d1125e373f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2019004c-ebcf-4665-8736-f01ce7d8fcd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20194297-f2a4-4473-95bc-7c6835e5b6b3	cast	cast-resolve	agreed	-	FX	scen	2	0	Lilysplash Mentor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-20194297-f2a4-4473-95bc-7c6835e5b6b3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lilysplash Mentor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-20194297-f2a4-4473-95bc-7c6835e5b6b3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lilysplash Mentor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+20194297-f2a4-4473-95bc-7c6835e5b6b3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lilysplash-mentor:combat0.attack:s1,f:xs:XP:lilysplash-mentor:combat0.attack:s1	-	-	-	3aa6ded33acb	-	eef9bf3bac3a	-	-	2026-11-25	xproof
+20194297-f2a4-4473-95bc-7c6835e5b6b3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lilysplash-mentor:combat0.block:s1,f:xs:XP:lilysplash-mentor:combat0.block:s1	-	-	-	3aa6ded33acb	-	eef9bf3bac3a	-	-	2026-11-25	xproof
 20194297-f2a4-4473-95bc-7c6835e5b6b3	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Lilysplash Mentor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 201a4455-1b6b-4e13-a0d5-4cf2116e1673	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 201b8936-18f4-4881-a1d4-c308cf3832bf	cast	cast-resolve	agreed	-	X	scen	1	0	The Legend of Kuruk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2084a7f6-226b-4fb4-a30e-703f674d33b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:badgermole:f0t0:s1,f:xs:XP:badgermole:f0t0:s1	-	-	-	25696bf19d5b	-	5324e59f5b18	-	-	2026-11-24	xproof
 2084a7f6-226b-4fb4-a30e-703f674d33b4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:badgermole:f0t0:s1,f:xs:XP:badgermole:f0t0:s1	-	-	-	25696bf19d5b	-	5324e59f5b18	-	-	2026-11-24	xproof
 2084a7f6-226b-4fb4-a30e-703f674d33b4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Badgermole/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2085642e-29be-4e13-81dc-1f2ff6c095eb	cast	cast-resolve	agreed	-	X	scen	1	0	Slickshot Vault-Buster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2085642e-29be-4e13-81dc-1f2ff6c095eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slickshot-vault-buster:cast:s1,f:xs:XP:slickshot-vault-buster:cast:s1	-	-	-	3aa6ded33acb	-	253c644e53e7	-	-	2026-11-25	xproof
 2085642e-29be-4e13-81dc-1f2ff6c095eb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Slickshot Vault-Buster/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2085642e-29be-4e13-81dc-1f2ff6c095eb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Slickshot Vault-Buster/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2085642e-29be-4e13-81dc-1f2ff6c095eb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Slickshot Vault-Buster/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -117,7 +117,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 20932bca-52be-4288-9c7d-4154650c5ec9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20932bca-52be-4288-9c7d-4154650c5ec9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20932bca-52be-4288-9c7d-4154650c5ec9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2094fb68-3859-401f-97f2-c8bae64a4822	cast	cast-resolve	agreed	-	X	scen	1	0	Playful Shove/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2094fb68-3859-401f-97f2-c8bae64a4822	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:playful-shove:cast:s1,f:xs:XP:playful-shove:cast:s1	-	-	-	3aa6ded33acb	-	d57882d337f8	-	-	2026-11-25	xproof
 20963cad-1c13-44a1-901a-bfc9930089e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2097ac9e-0f9b-4cd0-8537-2518195e4549	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reality-strobe:cast:s1,f:xs:XP:reality-strobe:cast:s1	-	-	-	d864b561c9cb	-	d7b5d6cb61a4	-	-	2026-11-24	xproof
 209de43d-0cdd-4075-9f41-88e3d2ff90df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 20c3c8ab-e996-462e-a1f6-87421fc3ee55	cast	cast-resolve	agreed	-	FX	scen	2	0	Warren Torchmaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 20c3c8ab-e996-462e-a1f6-87421fc3ee55	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Warren Torchmaster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 20c705e3-4141-41f8-ad73-bf953f0e1ddd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20c7630d-a97f-4f09-9ec5-b7a1739107de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20c7630d-a97f-4f09-9ec5-b7a1739107de	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+20c7630d-a97f-4f09-9ec5-b7a1739107de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:krovikan-fetish:f0t0:s1,f:xs:XP:krovikan-fetish:f0t0:s1	-	-	-	3aa6ded33acb	-	aff5976bb625	-	-	2026-11-25	xproof
+20c7630d-a97f-4f09-9ec5-b7a1739107de	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:krovikan-fetish:f0t0:s1,f:xs:XP:krovikan-fetish:f0t0:s1	-	-	-	3aa6ded33acb	-	aff5976bb625	-	-	2026-11-25	xproof
 20c8b03c-303d-4e19-96ec-3fabae843352	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shrieking-grotesque:f0t0:s1,f:xs:XP:shrieking-grotesque:f0t0:s1	-	-	-	9ee19e8250ce	-	45910a283cbd	-	-	2026-11-24	xproof
 20c8b03c-303d-4e19-96ec-3fabae843352	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 20c9fb06-3941-456f-ba02-4fbde9deb1e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

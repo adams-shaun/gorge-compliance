@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 cf02b774-2b3a-4459-bf59-e5d291691e77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cf0799f3-ef64-4fcc-924a-5265e52c9727	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:impending-disaster:cast:s1,f:xs:XP:impending-disaster:cast:s1	-	-	-	5f2128bf97e4	-	bd0060e4d908	-	-	2026-11-24	xproof
-cf0799f3-ef64-4fcc-924a-5265e52c9727	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cf0799f3-ef64-4fcc-924a-5265e52c9727	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:impending-disaster:f0t0:s1,f:xs:XP:impending-disaster:f0t0:s1	-	-	-	3aa6ded33acb	-	bd0060e4d908	-	-	2026-11-25	xproof
+cf0799f3-ef64-4fcc-924a-5265e52c9727	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:impending-disaster:f0t0:s1,f:xs:XP:impending-disaster:f0t0:s1	-	-	-	3aa6ded33acb	-	bd0060e4d908	-	-	2026-11-25	xproof
 cf082161-47ff-46b9-926d-3fa5e5727861	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf082161-47ff-46b9-926d-3fa5e5727861	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf082161-47ff-46b9-926d-3fa5e5727861	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:abuna-acolyte:f0a1:s1,f:xs:XP:abuna-acolyte:f0a1:s1	-	-	-	d864b561c9cb	-	658af513c99c	-	-	2026-11-24	xproof
@@ -14,8 +14,8 @@ cf0a15f5-5f41-4eea-81f7-02059b9586a2	f0/t0	NULL	owed	refused:no-generator:trigge
 cf0d1859-699e-47d4-bc91-7c5ff61fabe9	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 cf0d1859-699e-47d4-bc91-7c5ff61fabe9	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 cf0d1859-699e-47d4-bc91-7c5ff61fabe9	land	play-land	agreed	-	X	scen	1	0	Temporal Anomaly/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cf0dcb27-f02e-4065-81dc-75fbbb09ea3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cf0dcb27-f02e-4065-81dc-75fbbb09ea3f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cf0dcb27-f02e-4065-81dc-75fbbb09ea3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oath-of-druids:f0t0:s1,f:xs:XP:oath-of-druids:f0t0:s1	-	-	-	3aa6ded33acb	-	39095cb6c2e1	-	-	2026-11-25	xproof
+cf0dcb27-f02e-4065-81dc-75fbbb09ea3f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:oath-of-druids:f0t0:s1,f:xs:XP:oath-of-druids:f0t0:s1	-	-	-	3aa6ded33acb	-	39095cb6c2e1	-	-	2026-11-25	xproof
 cf0f3aee-78b6-4a98-8e09-8861b73c2e74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf0f3aee-78b6-4a98-8e09-8861b73c2e74	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:conscripted-infantry:f0t0:s1,f:xs:XP:conscripted-infantry:f0t0:s1	-	-	-	ae86f6029288	-	9ee5f6fc82ae	-	-	2026-11-24	xproof
 cf14d4e5-5965-45ad-97f7-26facf2884b5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fertile-ground:cast:s1,f:xs:XP:fertile-ground:cast:s1	-	-	-	25696bf19d5b	-	ca696cb8ce84	-	-	2026-11-24	xproof
@@ -76,7 +76,7 @@ cf527bbd-e898-4aa9-909d-daec2f4b62ad	cast	cast-resolve	agreed	-	X	scen	1	0	Theor
 cf56a5b4-48fa-4d53-a4b9-14afe079c1d3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:orysa-tide-choreographer:f0t0:s2,f:xs:XP:orysa-tide-choreographer:f0t0:s2	-	-	-	5437c1394672	-	2e66ed4ff051	-	-	2026-11-24	xproof
 cf56a5b4-48fa-4d53-a4b9-14afe079c1d3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:orysa-tide-choreographer:f0t0:s2,f:xs:XP:orysa-tide-choreographer:f0t0:s2	-	-	-	5437c1394672	-	2e66ed4ff051	-	-	2026-11-24	xproof
 cf56a5b4-48fa-4d53-a4b9-14afe079c1d3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Orysa, Tide Choreographer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cf58e309-00e8-438e-813e-2e1c1002db23	cast	cast-resolve	agreed	-	X	scen	1	0	Dour Port-Mage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cf58e309-00e8-438e-813e-2e1c1002db23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dour-port-mage:cast:s1,f:xs:XP:dour-port-mage:cast:s1	-	-	-	3aa6ded33acb	-	76dd88187374	-	-	2026-11-25	xproof
 cf58e309-00e8-438e-813e-2e1c1002db23	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dour Port-Mage/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cf58e309-00e8-438e-813e-2e1c1002db23	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dour Port-Mage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cf590bb7-2ea4-446a-9ca2-1e0706c2c41e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

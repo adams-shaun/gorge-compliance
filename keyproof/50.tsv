@@ -141,8 +141,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50aa7aff-1f01-4224-9a83-01f74d703ec2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50aa7aff-1f01-4224-9a83-01f74d703ec2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	cast	cast-resolve	agreed	-	FX	scen	2	0	Pawpatch Recruit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-50ab0194-c7dc-4f11-abc0-1a82393cc42e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pawpatch Recruit/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-50ab0194-c7dc-4f11-abc0-1a82393cc42e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pawpatch Recruit/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+50ab0194-c7dc-4f11-abc0-1a82393cc42e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:pawpatch-recruit:combat0.attack:s1,f:xs:XP:pawpatch-recruit:combat0.attack:s1	-	-	-	3aa6ded33acb	-	0b10ad6a7ccf	-	-	2026-11-25	xproof
+50ab0194-c7dc-4f11-abc0-1a82393cc42e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:pawpatch-recruit:combat0.block:s1,f:xs:XP:pawpatch-recruit:combat0.block:s1	-	-	-	3aa6ded33acb	-	0b10ad6a7ccf	-	-	2026-11-25	xproof
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Pawpatch Recruit/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50ab0194-c7dc-4f11-abc0-1a82393cc42e	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50ace222-57f1-477f-9e06-155d7b403512	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:realm-scorcher-hellkite:f0t0:s1,f:xs:XP:realm-scorcher-hellkite:f0t0:s1	-	-	-	3aa6ded33acb	-	7910b3692eb6	-	-	2026-11-25	xproof
@@ -165,8 +165,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50bee80e-89df-48c2-b608-ba66ff3e794a	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50bf5af6-50d7-4dea-936e-508e24db0a03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 50bf5af6-50d7-4dea-936e-508e24db0a03	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50c038a4-6546-4a15-a117-176849edaa3d	cast	cast-resolve	agreed	-	X	scen	1	0	Raccoon Rallier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-50c038a4-6546-4a15-a117-176849edaa3d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Raccoon Rallier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+50c038a4-6546-4a15-a117-176849edaa3d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raccoon-rallier:cast:s1,f:xs:XP:raccoon-rallier:cast:s1	-	-	-	3aa6ded33acb	-	aaeafb52836d	-	-	2026-11-25	xproof
+50c038a4-6546-4a15-a117-176849edaa3d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:raccoon-rallier:f0a0:s1,f:xs:XP:raccoon-rallier:f0a0:s1	-	-	-	3aa6ded33acb	-	aaeafb52836d	-	-	2026-11-25	xproof
 50c13b38-9865-4c60-b2df-3fd6e3a9c6a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inferno-jet:cast:s1,f:xs:XP:inferno-jet:cast:s1	-	-	-	d864b561c9cb	-	3a621f16a1ff	-	-	2026-11-24	xproof
 50c13b38-9865-4c60-b2df-3fd6e3a9c6a2	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 50c477c1-8457-40f6-bba9-1a4ba0862178	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

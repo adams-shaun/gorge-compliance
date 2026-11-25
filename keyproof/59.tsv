@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59cbed39-a07e-491e-a95a-adafe19eb652	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jace-s-ruse:cast:s1,f:xs:XP:jace-s-ruse:cast:s1	-	-	-	d864b561c9cb	-	3416af22550d	-	-	2026-11-24	xproof
 59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:narcissism:cast:s1,f:xs:XP:narcissism:cast:s1	-	-	-	fc71ca68c5ac	-	bc551a1bbb3a	-	-	2026-11-24	xproof
 59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59cd56d2-42f3-44de-b1b8-a5f9105dcaa8	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:narcissism:f0a1:s1,f:xs:XP:narcissism:f0a1:s1	-	-	-	3aa6ded33acb	-	bc551a1bbb3a	-	-	2026-11-25	xproof
 59d22de5-e310-44d7-89cf-ef3529e40cef	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59d22de5-e310-44d7-89cf-ef3529e40cef	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 59d22de5-e310-44d7-89cf-ef3529e40cef	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59e1899f-a9e8-48aa-b3fb-0b7d9fd6859c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59e1899f-a9e8-48aa-b3fb-0b7d9fd6859c	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:seahunter:f0a0:s1,f:xs:XP:seahunter:f0a0:s1	-	-	-	5f2128bf97e4	-	136af50331cf	-	-	2026-11-24	xproof
 59e7f2ae-4535-4191-98be-3e65b6b2befa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doom-blade:cast:s1,f:xs:XP:doom-blade:cast:s1	-	-	-	8a1b1a193ec0	-	8b048328719c	-	-	2026-11-24	xproof
-59e8747a-3e3f-48d2-aaee-af94ecee378b	cast	cast-resolve	agreed	-	X	scen	1	0	Shackle Slinger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-59e8747a-3e3f-48d2-aaee-af94ecee378b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Shackle Slinger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+59e8747a-3e3f-48d2-aaee-af94ecee378b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shackle-slinger:cast:s1,f:xs:XP:shackle-slinger:cast:s1	-	-	-	3aa6ded33acb	-	e987b1ba0316	-	-	2026-11-25	xproof
+59e8747a-3e3f-48d2-aaee-af94ecee378b	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:shackle-slinger:f0t0:s1,f:xs:XP:shackle-slinger:f0t0:s1	-	-	-	3aa6ded33acb	-	e987b1ba0316	-	-	2026-11-25	xproof
 59eab251-af80-4091-98de-9ed413c14cdc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59eab251-af80-4091-98de-9ed413c14cdc	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 59edd0e7-37c2-45f9-9f9d-8002be459662	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grizzled-leotau:cast:s1,f:xs:XP:grizzled-leotau:cast:s1	-	-	-	8a1b1a193ec0	-	c4351e2b71a4	-	-	2026-11-24	xproof
@@ -182,5 +182,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59f75a19-95cd-4ac8-94f1-27c1f915c34a	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 59f8f2c4-d30d-411c-9fac-a5a3219bb124	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59fa8323-bba9-4c51-833d-2ab966599b62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59fb1640-d8ed-476a-a78d-91d60b6faac5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-war-buggy:cast:s1,f:xs:XP:goblin-war-buggy:cast:s1	-	-	-	5f2128bf97e4	-	7d66df86440c	-	-	2026-11-24	xproof
-59fb1640-d8ed-476a-a78d-91d60b6faac5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+59fb1640-d8ed-476a-a78d-91d60b6faac5	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	7d66df86440c	-	-	2026-11-25	xproof
+59fb1640-d8ed-476a-a78d-91d60b6faac5	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	7d66df86440c	-	-	2026-11-25	xproof

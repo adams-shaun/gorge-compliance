@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 555df32f-f8e9-49af-bc4a-1194ea325a97	cast	cast-resolve	agreed	-	X	scen	1	0	Questing Druid/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 555df32f-f8e9-49af-bc4a-1194ea325a97	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Questing Druid/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5562b4bd-1485-47d4-a087-d93dafc37272	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5563427d-ffdc-4bea-ad7d-1605894b8a6c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5563427d-ffdc-4bea-ad7d-1605894b8a6c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5563427d-ffdc-4bea-ad7d-1605894b8a6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:awakening:f0t0:s1,f:xs:XP:awakening:f0t0:s1	-	-	-	3aa6ded33acb	-	abc1a472d976	-	-	2026-11-25	xproof
+5563427d-ffdc-4bea-ad7d-1605894b8a6c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:awakening:f0t0:s1,f:xs:XP:awakening:f0t0:s1	-	-	-	3aa6ded33acb	-	abc1a472d976	-	-	2026-11-25	xproof
 556c4dad-002e-41a8-8ba3-8b4eda70232f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 556c4dad-002e-41a8-8ba3-8b4eda70232f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 556dd333-4066-41f7-98f6-41794754de71	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:vile-entomber:f0t0:s2,f:xs:XP:vile-entomber:f0t0:s2	-	-	-	e07cf3a05ba5	-	536a09a62da3	-	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 55eb9310-f24b-410b-850b-a7d0d5117946	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55eca80c-dcd8-4c2f-aa0f-fb0aec7b80f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ophiomancer:f0t0:s1,f:xs:XP:ophiomancer:f0t0:s1	-	-	-	3aa6ded33acb	-	548bfc0994cd	-	-	2026-11-25	xproof
 55eca80c-dcd8-4c2f-aa0f-fb0aec7b80f7	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ophiomancer:f0t0:s1,f:xs:XP:ophiomancer:f0t0:s1	-	-	-	3aa6ded33acb	-	548bfc0994cd	-	-	2026-11-25	xproof
-55ede1d4-593d-433c-943a-4db12eeb5fa8	cast	cast-resolve	agreed	-	X	scen	1	0	Scalestorm Summoner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-55ede1d4-593d-433c-943a-4db12eeb5fa8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scalestorm Summoner/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+55ede1d4-593d-433c-943a-4db12eeb5fa8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scalestorm-summoner:cast:s1,f:xs:XP:scalestorm-summoner:cast:s1	-	-	-	3aa6ded33acb	-	acea7272597d	-	-	2026-11-25	xproof
+55ede1d4-593d-433c-943a-4db12eeb5fa8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:scalestorm-summoner:f0t0:s1,f:xs:XP:scalestorm-summoner:f0t0:s1	-	-	-	3aa6ded33acb	-	acea7272597d	-	-	2026-11-25	xproof
 55ef129e-698e-424f-be3c-3fbba6c2cc3e	cast	cast-resolve	agreed	-	FX	scen	2	0	Thalia, the Survivor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55ef129e-698e-424f-be3c-3fbba6c2cc3e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Thalia, the Survivor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55ef129e-698e-424f-be3c-3fbba6c2cc3e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Thalia, the Survivor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

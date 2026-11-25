@@ -36,8 +36,8 @@ f81ca3a5-356d-4b5d-afc2-a33aa774816b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 f8219a99-1620-40aa-a257-fc3dfb239d51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f82265fd-e772-4347-a27f-37b00ccd416b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:zealous-lorecaster:f0t0:s2,f:xs:XP:zealous-lorecaster:f0t0:s2	-	-	-	5437c1394672	-	96bca694e413	-	-	2026-11-24	xproof
 f82265fd-e772-4347-a27f-37b00ccd416b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:zealous-lorecaster:f0t0:s2,f:xs:XP:zealous-lorecaster:f0t0:s2	-	-	-	5437c1394672	-	96bca694e413	-	-	2026-11-24	xproof
-f823b122-94ac-42ba-b511-9e54d64db112	cast	cast-resolve	agreed	-	X	scen	1	0	Mindwhisker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f823b122-94ac-42ba-b511-9e54d64db112	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mindwhisker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f823b122-94ac-42ba-b511-9e54d64db112	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:mindwhisker:cast:s1,f:xs:XP:mindwhisker:cast:s1	-	-	-	3aa6ded33acb	-	bfeee183d997	-	-	2026-11-25	xproof
+f823b122-94ac-42ba-b511-9e54d64db112	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:mindwhisker:f0t0:s1,f:xs:XP:mindwhisker:f0t0:s1	-	-	-	3aa6ded33acb	-	bfeee183d997	-	-	2026-11-25	xproof
 f823b122-94ac-42ba-b511-9e54d64db112	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mindwhisker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f825c98f-a327-440b-8c0d-ebe02e23bfb7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f825c98f-a327-440b-8c0d-ebe02e23bfb7	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:field-of-ruin:f0a1:s1,f:xs:XP:field-of-ruin:f0a1:s1	-	-	-	d864b561c9cb	-	2dff55a3b2b0	-	-	2026-11-24	xproof
@@ -108,13 +108,13 @@ f88db161-3d00-4f45-b2a4-cbdc4f8e5312	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wil
 f88e1616-a7c7-4122-b626-bfa799cccaa4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oracle-of-tragedy:f0t0:s1,f:xs:XP:oracle-of-tragedy:f0t0:s1	-	-	-	3aa6ded33acb	-	287bc5bccf6d	-	-	2026-11-25	xproof
 f88e1616-a7c7-4122-b626-bfa799cccaa4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oracle-of-tragedy:f0t0:s1,f:xs:XP:oracle-of-tragedy:f0t0:s1	-	-	-	3aa6ded33acb	-	287bc5bccf6d	-	-	2026-11-25	xproof
 f88e1616-a7c7-4122-b626-bfa799cccaa4	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oracle-of-tragedy:f0t1:s1,f:xs:XP:oracle-of-tragedy:f0t1:s1	-	-	-	3aa6ded33acb	-	287bc5bccf6d	-	-	2026-11-25	xproof
-f88e7647-49dc-4d55-99f6-2f153854e5c0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f88e7647-49dc-4d55-99f6-2f153854e5c0	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 f88eeb04-4b8e-4c76-a8c6-90887b94d518	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f890d51a-dc90-4179-8423-4738a72a527c	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 f890d51a-dc90-4179-8423-4738a72a527c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 f890d51a-dc90-4179-8423-4738a72a527c	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-f893d3d6-efef-4394-8e15-e01deed72b4f	cast	cast-resolve	agreed	-	X	scen	1	0	Sterling Keykeeper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f893d3d6-efef-4394-8e15-e01deed72b4f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sterling Keykeeper/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f893d3d6-efef-4394-8e15-e01deed72b4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sterling-keykeeper:cast:s1,f:xs:XP:sterling-keykeeper:cast:s1	-	-	-	3aa6ded33acb	-	710c7970c9dd	-	-	2026-11-25	xproof
+f893d3d6-efef-4394-8e15-e01deed72b4f	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:sterling-keykeeper:f0a0:s1,f:xs:XP:sterling-keykeeper:f0a0:s1	-	-	-	3aa6ded33acb	-	710c7970c9dd	-	-	2026-11-25	xproof
 f895ec2e-7481-4280-a5c0-38b58c440faf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frostwielder:cast:s1,f:xs:XP:frostwielder:cast:s1	-	-	-	25696bf19d5b	-	dae68290c92c	-	-	2026-11-24	xproof
 f895ec2e-7481-4280-a5c0-38b58c440faf	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 f8961618-ae68-4d13-84eb-8b5464ce4971	cast	cast-resolve	agreed	-	FX	scen	2	0	Vow to Erebor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ f8c32c80-9693-4ae4-a387-21ec8a3cdd40	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 f8c32c80-9693-4ae4-a387-21ec8a3cdd40	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8c9cb9f-3a37-4004-9cde-f51ca5579e1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8cc1dc4-740d-4c5b-ac51-7355730a6595	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plaguebearer:cast:s1,f:xs:XP:plaguebearer:cast:s1	-	-	-	5f2128bf97e4	-	e7281f33af1f	-	-	2026-11-24	xproof
-f8cc1dc4-740d-4c5b-ac51-7355730a6595	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f8cc1dc4-740d-4c5b-ac51-7355730a6595	f0/a0	Destroy	agreed	-	F	start	2	0	f:xs:XP:plaguebearer:f0a0:s1	-	-	-	3aa6ded33acb	-	e7281f33af1f	-	-	2026-11-25	xproof
 f8ce8573-7c87-4f47-a0d4-14bd335f2c1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-ringleader:cast:s1,f:xs:XP:rakdos-ringleader:cast:s1	-	-	-	d864b561c9cb	-	e301704661d1	-	-	2026-11-24	xproof
 f8ce8573-7c87-4f47-a0d4-14bd335f2c1d	f0/a0	Regenerate	agreed	-	X	start	2	0	x:xs:XP:rakdos-ringleader:f0a0:s1	-	-	-	d864b561c9cb	-	e301704661d1	-	-	2026-11-24	xproof
 f8ce8573-7c87-4f47-a0d4-14bd335f2c1d	f0/t0	DamageDone	agreed	-	X	start	2	0	x:xs:XP:rakdos-ringleader:f0a0:s1	-	-	-	d864b561c9cb	-	e301704661d1	-	-	2026-11-24	xproof

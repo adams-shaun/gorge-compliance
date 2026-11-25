@@ -135,10 +135,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c9e3e6a-0bab-4619-b135-d2dbe824b1f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:field-tested-frying-pan:f0t0:s1,f:xs:XP:field-tested-frying-pan:f0t0:s1	-	-	-	8c0bd19283bb	-	dedbb52db98d	-	-	2026-11-24	xproof
 0c9e3e6a-0bab-4619-b135-d2dbe824b1f0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c9e3e6a-0bab-4619-b135-d2dbe824b1f0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:field-tested-frying-pan:f0t0:s1,f:xs:XP:field-tested-frying-pan:f0t0:s1	-	-	-	8c0bd19283bb	-	dedbb52db98d	-	-	2026-11-24	xproof
-0c9ec9a1-738a-4f69-b367-5dbf3d046bf1	cast	cast-resolve	agreed	-	X	scen	1	0	Servant of the Stinger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0c9ec9a1-738a-4f69-b367-5dbf3d046bf1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Servant of the Stinger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0c9ec9a1-738a-4f69-b367-5dbf3d046bf1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Servant of the Stinger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0c9ec9a1-738a-4f69-b367-5dbf3d046bf1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Servant of the Stinger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0c9ec9a1-738a-4f69-b367-5dbf3d046bf1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:servant-of-the-stinger:cast:s1,f:xs:XP:servant-of-the-stinger:cast:s1	-	-	-	3aa6ded33acb	-	ec63e2c1170e	-	-	2026-11-25	xproof
+0c9ec9a1-738a-4f69-b367-5dbf3d046bf1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:servant-of-the-stinger:combat0.attack:s1,f:xs:XP:servant-of-the-stinger:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ec63e2c1170e	-	-	2026-11-25	xproof
+0c9ec9a1-738a-4f69-b367-5dbf3d046bf1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:servant-of-the-stinger:combat0.block:s1,f:xs:XP:servant-of-the-stinger:combat0.block:s1	-	-	-	3aa6ded33acb	-	ec63e2c1170e	-	-	2026-11-25	xproof
+0c9ec9a1-738a-4f69-b367-5dbf3d046bf1	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:servant-of-the-stinger:f0t0:s1,f:xs:XP:servant-of-the-stinger:f0t0:s1	-	-	-	3aa6ded33acb	-	ec63e2c1170e	-	-	2026-11-25	xproof
 0ca0a186-026d-4cec-9c23-15d94e6acca9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ca0a186-026d-4cec-9c23-15d94e6acca9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ca1f76d-ae77-490a-8b32-d30ad33afc2d	cast	cast-resolve	agreed	-	X	scen	1	0	Apocalypse Runner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -151,9 +151,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0caccec3-4942-499a-9434-0c94389afcf8	cast	cast-resolve	agreed	-	X	scen	1	0	Surgical Precision/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0caeb396-e574-4e80-a1f6-79988fe9ba19	cast	cast-resolve	agreed	-	X	scen	1	0	Rufus Shinra/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0caeb396-e574-4e80-a1f6-79988fe9ba19	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rufus Shinra/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0caf42f5-abff-48aa-9bbf-df6cba169ef3	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	2957ed0bb120	-	-	2026-11-24	xproof
-0caf42f5-abff-48aa-9bbf-df6cba169ef3	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	2957ed0bb120	-	-	2026-11-24	xproof
-0caf42f5-abff-48aa-9bbf-df6cba169ef3	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0caf42f5-abff-48aa-9bbf-df6cba169ef3	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2957ed0bb120	-	-	2026-11-25	xproof
+0caf42f5-abff-48aa-9bbf-df6cba169ef3	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2957ed0bb120	-	-	2026-11-25	xproof
+0caf42f5-abff-48aa-9bbf-df6cba169ef3	f0/t1	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2957ed0bb120	-	-	2026-11-25	xproof
 0cb41c3f-5e6a-4c63-80b5-c9ab84b4e4bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0cb41c3f-5e6a-4c63-80b5-c9ab84b4e4bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0cb76b04-d9c3-46fc-a3f2-5f0cb0d91761	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,8 +171,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0cc5aaa1-07bf-4872-ac72-303cef9fb143	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dragon-mantle:f0t0:s1,f:xs:XP:dragon-mantle:f0t0:s1	-	-	-	d864b561c9cb	-	2ff49cdaa2e4	-	-	2026-11-24	xproof
 0cc6d683-366f-4ae4-be60-20ad9621fdaf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stroke-of-genius:cast:s1,f:xs:XP:stroke-of-genius:cast:s1	-	-	-	5f2128bf97e4	-	f3c00baec471	-	-	2026-11-24	xproof
 0cc89c15-5a48-4998-b6df-21791b6ed9a3	cast	cast-resolve	agreed	-	FX	scen	2	0	Roughshod Duo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0cc89c15-5a48-4998-b6df-21791b6ed9a3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Roughshod Duo/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0cc89c15-5a48-4998-b6df-21791b6ed9a3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Roughshod Duo/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0cc89c15-5a48-4998-b6df-21791b6ed9a3	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:roughshod-duo:combat0.attack:s1	-	-	-	3aa6ded33acb	-	e6511100e8d0	-	-	2026-11-25	xproof
+0cc89c15-5a48-4998-b6df-21791b6ed9a3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:roughshod-duo:combat0.block:s1,f:xs:XP:roughshod-duo:combat0.block:s1	-	-	-	3aa6ded33acb	-	e6511100e8d0	-	-	2026-11-25	xproof
 0cc89c15-5a48-4998-b6df-21791b6ed9a3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Roughshod Duo/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ccc75a0-1bc2-461f-ab6f-0f182328a863	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inferno-fist:cast:s1,f:xs:XP:inferno-fist:cast:s1	-	-	-	3aa6ded33acb	-	c8b5d22a8eec	-	-	2026-11-25	xproof
 0ccc75a0-1bc2-461f-ab6f-0f182328a863	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

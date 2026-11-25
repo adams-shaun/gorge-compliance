@@ -30,9 +30,9 @@ d91ea728-2d69-42cb-bb5d-e2b058f0d7b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d91ea728-2d69-42cb-bb5d-e2b058f0d7b1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d92411b3-cb25-4123-a78e-4f785dfdae0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d92411b3-cb25-4123-a78e-4f785dfdae0c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d924c13e-f266-47b0-9711-ba9a9b9df1cb	cast	cast-resolve	agreed	-	X	scen	1	0	Stoic Sphinx/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d924c13e-f266-47b0-9711-ba9a9b9df1cb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stoic Sphinx/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d924c13e-f266-47b0-9711-ba9a9b9df1cb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stoic Sphinx/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d924c13e-f266-47b0-9711-ba9a9b9df1cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stoic-sphinx:cast:s1,f:xs:XP:stoic-sphinx:cast:s1	-	-	-	3aa6ded33acb	-	fc17cda1ecb9	-	-	2026-11-25	xproof
+d924c13e-f266-47b0-9711-ba9a9b9df1cb	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stoic-sphinx:combat0.attack:s1,f:xs:XP:stoic-sphinx:combat0.attack:s1	-	-	-	3aa6ded33acb	-	fc17cda1ecb9	-	-	2026-11-25	xproof
+d924c13e-f266-47b0-9711-ba9a9b9df1cb	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:stoic-sphinx:combat0.block:s1,f:xs:XP:stoic-sphinx:combat0.block:s1	-	-	-	3aa6ded33acb	-	fc17cda1ecb9	-	-	2026-11-25	xproof
 d924c13e-f266-47b0-9711-ba9a9b9df1cb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Stoic Sphinx/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d925e560-faa1-40a9-b25a-47065ee891e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d92714c0-4e22-47f9-a4d4-405894e734d0	cast	cast-resolve	agreed	-	X	scen	1	0	Shredder's Technique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ d94ff0b8-5499-4eeb-80f0-20c7fbf07499	combat#0.block	combat.block	agreed	-	FX	sta
 d94ff0b8-5499-4eeb-80f0-20c7fbf07499	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:voja-jaws-of-the-conclave:combat0.attack:s1,f:xs:XP:voja-jaws-of-the-conclave:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f76747658af4	-	-	2026-11-25	xproof
 d94ff0b8-5499-4eeb-80f0-20c7fbf07499	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Voja, Jaws of the Conclave/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9517c5d-66d0-4178-96fb-a8c04f311ad8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d955a26a-d474-4dff-9eba-69fcfe92d8ae	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d955a26a-d474-4dff-9eba-69fcfe92d8ae	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 d95aeeb0-b722-4f70-85fc-6866be4854bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d95aeeb0-b722-4f70-85fc-6866be4854bd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d95af032-3efd-40c7-8229-ade9d974934f	cast	cast-resolve	agreed	-	X	scen	1	0	U.S.S. Enterprise-D, Galaxy-Class/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ d97c4bca-6433-4cb0-b63a-fdf8360fc29c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d97c4bca-6433-4cb0-b63a-fdf8360fc29c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d97de156-5a6d-4dc6-953e-d4bad63cbad2	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 d9806ba7-8af4-4e8e-9238-7bc40c6bee0b	cast	cast-resolve	agreed	-	X	scen	1	0	Collective Drone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d981977d-acfa-432a-b1d7-1808a89a5998	cast	cast-resolve	agreed	-	X	scen	1	0	Rise of the Varmints/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d981977d-acfa-432a-b1d7-1808a89a5998	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rise-of-the-varmints:cast:s1,f:xs:XP:rise-of-the-varmints:cast:s1	-	-	-	3aa6ded33acb	-	0417539de8e3	-	-	2026-11-25	xproof
 d981d85c-e97b-4fe7-b415-6e73a3e7e35c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d981d85c-e97b-4fe7-b415-6e73a3e7e35c	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d985b12e-2731-4ccf-9f51-90218b20b42a	cast	cast-resolve	agreed	-	X	scen	1	0	Silverquill Charm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -107,12 +107,12 @@ d988ed15-2927-421b-9a6e-01f0261272c2	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs
 d989d8aa-2b2a-4fd2-a8c9-1d182909987c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d989d8aa-2b2a-4fd2-a8c9-1d182909987c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d98cc18b-6ebb-4f55-9d0d-b8fbe9a92bc1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:thunder-lasso:f0t0:s2,f:xs:XP:thunder-lasso:f0t0:s2	-	-	-	267e485f6204	-	31b59ae16ca4	-	-	2026-11-24	xproof
-d98cc18b-6ebb-4f55-9d0d-b8fbe9a92bc1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thunder Lasso/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d98cc18b-6ebb-4f55-9d0d-b8fbe9a92bc1	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:thunder-lasso:f0a0:s1,f:xs:XP:thunder-lasso:f0a0:s1	-	-	-	3aa6ded33acb	-	31b59ae16ca4	-	-	2026-11-25	xproof
 d98cc18b-6ebb-4f55-9d0d-b8fbe9a92bc1	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:thunder-lasso:f0t0:s2,f:xs:XP:thunder-lasso:f0t0:s2	-	-	-	267e485f6204	-	31b59ae16ca4	-	-	2026-11-24	xproof
 d98cc18b-6ebb-4f55-9d0d-b8fbe9a92bc1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Thunder Lasso/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d98cc18b-6ebb-4f55-9d0d-b8fbe9a92bc1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thunder Lasso/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d98edd47-c9de-46e9-a184-ba3bc0be42c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d98edd47-c9de-46e9-a184-ba3bc0be42c4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d98edd47-c9de-46e9-a184-ba3bc0be42c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rushwood-elemental:f0t0:s1,f:xs:XP:rushwood-elemental:f0t0:s1	-	-	-	3aa6ded33acb	-	059c79118b17	-	-	2026-11-25	xproof
+d98edd47-c9de-46e9-a184-ba3bc0be42c4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:rushwood-elemental:f0t0:s1,f:xs:XP:rushwood-elemental:f0t0:s1	-	-	-	3aa6ded33acb	-	059c79118b17	-	-	2026-11-25	xproof
 d99197b9-143a-462f-ace4-f35228ba082e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d99197b9-143a-462f-ace4-f35228ba082e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d99a1d9a-7721-4331-bf22-1c6ee0bd825a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

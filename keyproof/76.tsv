@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 762d864b-69bc-43ac-af2f-e18186010169	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sliver Overlord/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 762d864b-69bc-43ac-af2f-e18186010169	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Sliver Overlord/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 762e01d8-c16a-44b8-8ba0-052d1a2f312f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76347258-71d5-4874-adde-ff7aa932b808	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76347258-71d5-4874-adde-ff7aa932b808	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 7635fb35-7ac8-4e61-8a52-6b0c14cd88b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lodestone-myr:cast:s1,f:xs:XP:lodestone-myr:cast:s1	-	-	-	25696bf19d5b	-	c5a054d09d0c	-	-	2026-11-24	xproof
 7635fb35-7ac8-4e61-8a52-6b0c14cd88b8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:lodestone-myr:cast:s1,f:xs:XP:lodestone-myr:cast:s1	-	-	-	25696bf19d5b	-	c5a054d09d0c	-	-	2026-11-24	xproof
 76372327-41ec-4516-abff-3b612e073629	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kona-rescue-beastie:cast:s1,f:xs:XP:kona-rescue-beastie:cast:s1	-	-	-	23b491658465	-	8931b47f47b3	-	-	2026-11-24	xproof
@@ -75,8 +75,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 765a12fc-9b66-4bb7-88f6-6e7bd2d2f8c7	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7661484b-1faa-4ed7-b77b-fc1e625d23e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7661484b-1faa-4ed7-b77b-fc1e625d23e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7661dda6-4e7b-42d0-8374-0a1fe65b83e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7661dda6-4e7b-42d0-8374-0a1fe65b83e4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7661dda6-4e7b-42d0-8374-0a1fe65b83e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kyren-sniper:f0t0:s1,f:xs:XP:kyren-sniper:f0t0:s1	-	-	-	3aa6ded33acb	-	96bc2b6c440f	-	-	2026-11-25	xproof
+7661dda6-4e7b-42d0-8374-0a1fe65b83e4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:kyren-sniper:f0t0:s1,f:xs:XP:kyren-sniper:f0t0:s1	-	-	-	3aa6ded33acb	-	96bc2b6c440f	-	-	2026-11-25	xproof
 7662af07-1ebc-4545-bffd-7a2e0c513b71	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defenders-of-humanity:f0t0:s1,f:xs:XP:defenders-of-humanity:f0t0:s1	-	-	-	8c0bd19283bb	-	c9545afcdd99	-	-	2026-11-24	xproof
 7662af07-1ebc-4545-bffd-7a2e0c513b71	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 7662af07-1ebc-4545-bffd-7a2e0c513b71	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:defenders-of-humanity:f0t0:s1,f:xs:XP:defenders-of-humanity:f0t0:s1	-	-	-	8c0bd19283bb	-	c9545afcdd99	-	-	2026-11-24	xproof
@@ -155,13 +155,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76c036df-44f5-4021-b7fc-656147351341	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Key to the Side-Door/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76c06de7-39ff-4b80-8e54-20910372cffd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76c06de7-39ff-4b80-8e54-20910372cffd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76c142ef-0f07-4215-8d11-d25f7114c70d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76c142ef-0f07-4215-8d11-d25f7114c70d	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 76c229d2-4bdd-4520-97dd-afb40f8c65ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76c229d2-4bdd-4520-97dd-afb40f8c65ec	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mindslicer:f0t0:s1,f:xs:XP:mindslicer:f0t0:s1	-	-	-	d864b561c9cb	-	d3d41329a285	-	-	2026-11-24	xproof
 76c2571d-7d45-4c7a-99d1-302e2b26f8f6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76c2e0b4-d4fa-4e98-b363-0a76eb481304	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:finch-formation:f0t1:s1,f:xs:XP:finch-formation:f0t1:s1	-	-	-	23b491658465	-	889eff3ba2a5	-	-	2026-11-24	xproof
-76c2e0b4-d4fa-4e98-b363-0a76eb481304	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Finch Formation/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-76c2e0b4-d4fa-4e98-b363-0a76eb481304	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Finch Formation/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+76c2e0b4-d4fa-4e98-b363-0a76eb481304	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:finch-formation:combat0.attack:s1,f:xs:XP:finch-formation:combat0.attack:s1	-	-	-	3aa6ded33acb	-	889eff3ba2a5	-	-	2026-11-25	xproof
+76c2e0b4-d4fa-4e98-b363-0a76eb481304	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:finch-formation:combat0.block:s1,f:xs:XP:finch-formation:combat0.block:s1	-	-	-	3aa6ded33acb	-	889eff3ba2a5	-	-	2026-11-25	xproof
 76c2e0b4-d4fa-4e98-b363-0a76eb481304	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:finch-formation:f0t1:s1,f:xs:XP:finch-formation:f0t1:s1	-	-	-	23b491658465	-	889eff3ba2a5	-	-	2026-11-24	xproof
 76c2e0b4-d4fa-4e98-b363-0a76eb481304	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 76c7a339-015b-4074-8e10-14d52b784f9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 902a7588-602c-456f-8250-c94f35e56d3a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:norwood-priestess:cast:s1,f:xs:XP:norwood-priestess:cast:s1	-	-	-	5f2128bf97e4	-	0abe3c6f7dff	-	-	2026-11-24	xproof
 902a7588-602c-456f-8250-c94f35e56d3a	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:norwood-priestess:f0a0:s1	-	-	-	5f2128bf97e4	-	0abe3c6f7dff	-	-	2026-11-24	xproof
 902b82fd-bb18-4833-b427-af8c9751f870	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-902e7d4b-7ab4-40b5-b3a5-c83ef604989a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+902e7d4b-7ab4-40b5-b3a5-c83ef604989a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primal-boost:cast:s1,f:xs:XP:primal-boost:cast:s1	-	-	-	3aa6ded33acb	-	6c2f6563afa7	-	-	2026-11-25	xproof
 902e7d4b-7ab4-40b5-b3a5-c83ef604989a	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:primal-boost:cast:s1,f:xs:XP:primal-boost:cast:s1	-	-	-	23b491658465	-	6c2f6563afa7	-	-	2026-11-24	xproof
 902e7d4b-7ab4-40b5-b3a5-c83ef604989a	f0/t0	Cycled	agreed	-	FX	start	2	0	x:xs:XP:primal-boost:cast:s1,f:xs:XP:primal-boost:cast:s1	-	-	-	23b491658465	-	6c2f6563afa7	-	-	2026-11-24	xproof
 902eb71f-62b3-40cb-816b-f6b7e92e91e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9076a886-efe0-4c99-8661-f0fd7a7b3129	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Paramecia Coloniex/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 90772e8f-9b39-4cdd-864f-5e2c917f645e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90772e8f-9b39-4cdd-864f-5e2c917f645e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9078db26-3a54-4a11-9aae-e45c38da7226	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9078db26-3a54-4a11-9aae-e45c38da7226	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 9078db26-3a54-4a11-9aae-e45c38da7226	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:miscalculation:cast:s1,f:xs:XP:miscalculation:cast:s1	-	-	-	23b491658465	-	f9bbad49c8f2	-	-	2026-11-24	xproof
 9082d364-9fe4-47bd-9097-8888ae75b2e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9082d364-9fe4-47bd-9097-8888ae75b2e1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 90c62b27-027a-44a3-8d21-3c62701b18a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:redemption-choir:f0t0:s1,f:xs:XP:redemption-choir:f0t0:s1	-	-	-	8c0bd19283bb	-	4c73be131b5e	-	-	2026-11-24	xproof
 90c62b27-027a-44a3-8d21-3c62701b18a8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90c62b27-027a-44a3-8d21-3c62701b18a8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90c6f338-fc41-4499-8f39-1cd202a2cd31	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90c6f338-fc41-4499-8f39-1cd202a2cd31	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 90c6f338-fc41-4499-8f39-1cd202a2cd31	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 90c763b9-6173-46ff-b31c-7dcafc774170	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:walking-skyscraper:cast:s1,f:xs:XP:walking-skyscraper:cast:s1	-	-	-	d864b561c9cb	-	8fa8e7e87cfc	-	-	2026-11-24	xproof
 90c78f79-982f-4acd-a8ba-0c6ce115a248	cast	cast-resolve	agreed	-	FX	scen	2	0	In the Pale Moonlight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -12,9 +12,9 @@ f507f9ba-a7e9-4e45-86dc-8c60a72a6234	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP
 f509ac02-f22e-4d1a-9fe1-afa96dd7806d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f509ac02-f22e-4d1a-9fe1-afa96dd7806d	f0/t0	NULL	owed	refused:steps-needed:cost:XMin1	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 f50bbe5e-a839-40e1-ba79-1e96f91bd218	cast	cast-resolve	agreed	-	FX	scen	2	0	Seedglaive Mentor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f50bbe5e-a839-40e1-ba79-1e96f91bd218	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Seedglaive Mentor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f50bbe5e-a839-40e1-ba79-1e96f91bd218	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Seedglaive Mentor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f50bbe5e-a839-40e1-ba79-1e96f91bd218	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Seedglaive Mentor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f50bbe5e-a839-40e1-ba79-1e96f91bd218	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:seedglaive-mentor:combat0.attack:s1,f:xs:XP:seedglaive-mentor:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ac868eef9c81	-	-	2026-11-25	xproof
+f50bbe5e-a839-40e1-ba79-1e96f91bd218	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:seedglaive-mentor:combat0.block:s1,f:xs:XP:seedglaive-mentor:combat0.block:s1	-	-	-	3aa6ded33acb	-	ac868eef9c81	-	-	2026-11-25	xproof
+f50bbe5e-a839-40e1-ba79-1e96f91bd218	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:seedglaive-mentor:f0t0:s1,f:xs:XP:seedglaive-mentor:f0t0:s1	-	-	-	3aa6ded33acb	-	ac868eef9c81	-	-	2026-11-25	xproof
 f50d2a5c-2408-4c09-81cd-55e2ca9b1ce1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f50d2a5c-2408-4c09-81cd-55e2ca9b1ce1	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f50ec16b-13f5-4e20-ae09-9c7dee9d223b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:v-ger-the-intruder:f0t0:s1,f:xs:XP:v-ger-the-intruder:f0t0:s1	-	-	-	25696bf19d5b	-	ea5f8a4038e8	-	-	2026-11-24	xproof
@@ -34,8 +34,8 @@ f52c0ef9-ca35-47bd-9359-01e7b97ee770	cast	cast	owed	harness	-	start	0	0	-	-	-	-	
 f52c0ef9-ca35-47bd-9359-01e7b97ee770	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	7b8cc65b2225	-	-	2026-11-25	xproof
 f536a518-160e-4267-89da-3d34accc6d2c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flash-thompson-spider-fan:f0t0:s1,f:xs:XP:flash-thompson-spider-fan:f0t0:s1	-	-	-	23b491658465	-	5b697c66ddf9	-	-	2026-11-24	xproof
 f536a518-160e-4267-89da-3d34accc6d2c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-f536acf3-ff8e-48da-8509-00e7ce4a1678	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f536acf3-ff8e-48da-8509-00e7ce4a1678	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f536acf3-ff8e-48da-8509-00e7ce4a1678	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pit-spawn:f0t0:s1,f:xs:XP:pit-spawn:f0t0:s1	-	-	-	3aa6ded33acb	-	1db59a83ba43	-	-	2026-11-25	xproof
+f536acf3-ff8e-48da-8509-00e7ce4a1678	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:pit-spawn:f0t0:s1,f:xs:XP:pit-spawn:f0t0:s1	-	-	-	3aa6ded33acb	-	1db59a83ba43	-	-	2026-11-25	xproof
 f536acf3-ff8e-48da-8509-00e7ce4a1678	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 f53732d3-d317-4042-a0ad-1a99c7ffc94f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f53732d3-d317-4042-a0ad-1a99c7ffc94f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

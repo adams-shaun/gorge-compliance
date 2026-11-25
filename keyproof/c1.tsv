@@ -13,8 +13,8 @@ c1121b83-1ba2-473d-89c9-e3bbd4529072	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c1121b83-1ba2-473d-89c9-e3bbd4529072	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c112852f-61d5-4b94-b864-c7d0b5333b29	cast	cast-resolve	agreed	-	FX	scen	2	0	Loki, God of Mischief/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c112852f-61d5-4b94-b864-c7d0b5333b29	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Loki, God of Mischief/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c115159c-6991-4812-b3b6-6ed80221cab4	cast	cast-resolve	agreed	-	FX	scen	2	0	Muerra, Trash Tactician/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c115159c-6991-4812-b3b6-6ed80221cab4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Muerra, Trash Tactician/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c115159c-6991-4812-b3b6-6ed80221cab4	cast	cast	agreed	-	X	start	2	0	x:xs:XP:muerra-trash-tactician:f0t0:s1	-	-	-	3aa6ded33acb	-	afbeb8064066	-	-	2026-11-25	xproof
+c115159c-6991-4812-b3b6-6ed80221cab4	f0/t0	Phase	agreed	-	X	start	2	0	x:xs:XP:muerra-trash-tactician:f0t0:s1	-	-	-	3aa6ded33acb	-	afbeb8064066	-	-	2026-11-25	xproof
 c115159c-6991-4812-b3b6-6ed80221cab4	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Muerra, Trash Tactician/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c115159c-6991-4812-b3b6-6ed80221cab4	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Muerra, Trash Tactician/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c1157d79-38ea-4a88-b346-7b12614ff78a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -40,16 +40,16 @@ c12b4b1a-fab0-4e9f-8e04-d8a409a965bc	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-
 c12b5b9a-a46e-4635-8603-62c2ca5ee58e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mischievous-poltergeist:cast:s1,f:xs:XP:mischievous-poltergeist:cast:s1	-	-	-	ea3140b6974b	-	f9a5a742a9c6	-	-	2026-11-24	xproof
 c12b5b9a-a46e-4635-8603-62c2ca5ee58e	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:mischievous-poltergeist:f0a0:s1,f:xs:XP:mischievous-poltergeist:f0a0:s1	-	-	-	8c0bd19283bb	-	f9a5a742a9c6	-	-	2026-11-24	xproof
 c1346677-d89e-49d0-9819-08805f00bb64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1348afe-4dc7-41bb-9d3f-1e8751abd7db	cast	cast-resolve	agreed	-	X	scen	1	0	Wanted Griffin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c1348afe-4dc7-41bb-9d3f-1e8751abd7db	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wanted Griffin/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c1348afe-4dc7-41bb-9d3f-1e8751abd7db	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wanted Griffin/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c1348afe-4dc7-41bb-9d3f-1e8751abd7db	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wanted Griffin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c1348afe-4dc7-41bb-9d3f-1e8751abd7db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wanted-griffin:cast:s1,f:xs:XP:wanted-griffin:cast:s1	-	-	-	3aa6ded33acb	-	2ad1e2fea0dd	-	-	2026-11-25	xproof
+c1348afe-4dc7-41bb-9d3f-1e8751abd7db	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:wanted-griffin:combat0.attack:s1,f:xs:XP:wanted-griffin:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2ad1e2fea0dd	-	-	2026-11-25	xproof
+c1348afe-4dc7-41bb-9d3f-1e8751abd7db	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:wanted-griffin:combat0.block:s1,f:xs:XP:wanted-griffin:combat0.block:s1	-	-	-	3aa6ded33acb	-	2ad1e2fea0dd	-	-	2026-11-25	xproof
+c1348afe-4dc7-41bb-9d3f-1e8751abd7db	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wanted-griffin:combat0.block:s1,f:xs:XP:wanted-griffin:combat0.block:s1	-	-	-	3aa6ded33acb	-	2ad1e2fea0dd	-	-	2026-11-25	xproof
 c1372f18-9b33-40e8-bfe2-dc4ca3b3ef55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c138bd7f-8751-4e96-b54a-d5082e1a491f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c138bd7f-8751-4e96-b54a-d5082e1a491f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 c13955b8-bad3-4f79-ad9f-11e214a1cab2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:smash-to-dust:cast:s1,f:xs:XP:smash-to-dust:cast:s1	-	-	-	d864b561c9cb	-	c8ab221edfd0	-	-	2026-11-24	xproof
-c13b9ee5-cf4f-47bc-a6e8-1dbf98df3d9c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:think-tank:cast:s1,f:xs:XP:think-tank:cast:s1	-	-	-	fc71ca68c5ac	-	8ee140b8ef13	-	-	2026-11-24	xproof
-c13b9ee5-cf4f-47bc-a6e8-1dbf98df3d9c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c13b9ee5-cf4f-47bc-a6e8-1dbf98df3d9c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:think-tank:f0t0:s1,f:xs:XP:think-tank:f0t0:s1	-	-	-	3aa6ded33acb	-	8ee140b8ef13	-	-	2026-11-25	xproof
+c13b9ee5-cf4f-47bc-a6e8-1dbf98df3d9c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:think-tank:f0t0:s1,f:xs:XP:think-tank:f0t0:s1	-	-	-	3aa6ded33acb	-	8ee140b8ef13	-	-	2026-11-25	xproof
 c13c5f07-dac5-47d0-a088-e24b9fbec3c5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c13c5f07-dac5-47d0-a088-e24b9fbec3c5	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c13c5f07-dac5-47d0-a088-e24b9fbec3c5	land	land	agreed	-	FX	start	2	0	x:xs:XP:turbulent-shore:land:s1,f:xs:XP:turbulent-shore:land:s1	-	-	-	8c0bd19283bb	-	453c11fd8bed	-	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ c15c13d2-8db9-4801-a1f0-f087f2551c92	f0/a0	Manifest	agreed	-	F	start	4	0	f:xs:XP
 c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shoreline-looter:cast:s1,f:xs:XP:shoreline-looter:cast:s1	-	-	-	23b491658465	-	72ea77afa67b	-	-	2026-11-24	xproof
 c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:shoreline-looter:combat0.attack:s1,f:xs:XP:shoreline-looter:combat0.attack:s1	-	-	-	3aa6ded33acb	-	72ea77afa67b	-	-	2026-11-25	xproof
 c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shoreline Looter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:shoreline-looter:combat0.attack:s1,f:xs:XP:shoreline-looter:combat0.attack:s1	-	-	-	3aa6ded33acb	-	72ea77afa67b	-	-	2026-11-25	xproof
+c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	f0/t0	DamageDone	agreed	-	FX	start	1	0	x:xs:XP:lilypad-village:land:s1,f:xs:XP:lilypad-village:land:s1	-	-	-	3aa6ded33acb	-	72ea77afa67b	-	-	2026-11-25	xproof
 c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	static#0.0	static#0.0	agreed	-	X	scen	1	0	Shoreline Looter/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c15e5cb8-b94c-4157-9327-410e66606b82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c15e5e93-2eff-407d-ae75-437e36ef85ba	cast	cast-resolve	agreed	-	FX	scen	2	0	Allies at Last/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

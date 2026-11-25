@@ -80,8 +80,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 736892cb-a34b-4bb9-b56c-e26e3db207a2	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 736ce43b-28cd-4b8b-9936-3e3975a56b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73733fa5-d292-40ec-8f17-05ba5feb40ab	cast	cast-resolve	agreed	-	FX	scen	2	0	Reckless Lackey/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-73733fa5-d292-40ec-8f17-05ba5feb40ab	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Reckless Lackey/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-73733fa5-d292-40ec-8f17-05ba5feb40ab	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Reckless Lackey/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+73733fa5-d292-40ec-8f17-05ba5feb40ab	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:reckless-lackey:combat0.attack:s1,f:xs:XP:reckless-lackey:combat0.attack:s1	-	-	-	3aa6ded33acb	-	9a762c70f777	-	-	2026-11-25	xproof
+73733fa5-d292-40ec-8f17-05ba5feb40ab	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:reckless-lackey:combat0.block:s1,f:xs:XP:reckless-lackey:combat0.block:s1	-	-	-	3aa6ded33acb	-	9a762c70f777	-	-	2026-11-25	xproof
 73733fa5-d292-40ec-8f17-05ba5feb40ab	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Reckless Lackey/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7373b50b-a707-40fb-967a-550c31e6ea59	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	2601e50f29a4	-	-	2026-11-24	xproof
 7373b50b-a707-40fb-967a-550c31e6ea59	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

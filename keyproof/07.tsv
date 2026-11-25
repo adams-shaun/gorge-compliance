@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0757c5a7-e51b-4c39-bb4d-b32657c10cb4	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:lilah-undefeated-slickshot:f0t1:s1,f:xs:XP:lilah-undefeated-slickshot:f0t1:s1	-	-	-	3aa6ded33acb	-	d8f0f221c43d	-	-	2026-11-25	xproof
 075fd933-689c-4199-85bd-e7994d936145	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fortress-crab:cast:s1,f:xs:XP:fortress-crab:cast:s1	-	-	-	d864b561c9cb	-	c302e2a1128b	-	-	2026-11-24	xproof
 07617648-6490-4719-acec-7705671f7e01	cast	cast-resolve	agreed	-	FX	scen	2	0	Protege's Awakening/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-07634620-a83a-4ca0-8a60-2a21368a2661	cast	cast-resolve	agreed	-	X	scen	1	0	Dewdrop Cure/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+07634620-a83a-4ca0-8a60-2a21368a2661	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dewdrop-cure:cast:s1,f:xs:XP:dewdrop-cure:cast:s1	-	-	-	3aa6ded33acb	-	4d71da9a5e6a	-	-	2026-11-25	xproof
 076584c8-ec58-4711-8f59-4839a4fa88ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0765c18b-25a0-4f79-aa1e-7adba7f5c91e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 076865e9-ee10-4a87-9180-4274202d37c1	cast	cast-resolve	agreed	-	FX	scen	2	0	Starbreach Whale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -65,8 +65,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 076cf4f1-b3d4-4175-b976-938ad851cc0e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Coliseum Behemoth/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 076cf4f1-b3d4-4175-b976-938ad851cc0e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Coliseum Behemoth/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 076cf4f1-b3d4-4175-b976-938ad851cc0e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-0772c5d2-9189-47e2-b0ee-13babd94ea93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0772c5d2-9189-47e2-b0ee-13babd94ea93	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0772c5d2-9189-47e2-b0ee-13babd94ea93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:subversion:f0t0:s1,f:xs:XP:subversion:f0t0:s1	-	-	-	3aa6ded33acb	-	81f55a19fcc7	-	-	2026-11-25	xproof
+0772c5d2-9189-47e2-b0ee-13babd94ea93	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:subversion:f0t0:s1,f:xs:XP:subversion:f0t0:s1	-	-	-	3aa6ded33acb	-	81f55a19fcc7	-	-	2026-11-25	xproof
 07792d72-d5db-41b9-871c-e720e12ce659	cast	cast-resolve	agreed	-	X	scen	1	0	Cemetery Recruitment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 077ae62d-ed94-4365-a8b7-97fd99cff028	cast	cast-resolve	agreed	-	X	scen	1	0	Rabid Gnaw/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 077b5ed2-05c2-4a16-b5eb-794884ee1c21	cast	cast-resolve	agreed	-	X	scen	1	0	Demon Wall/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

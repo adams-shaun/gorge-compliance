@@ -17,9 +17,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f1e8f25-ee23-40a6-a3f2-369bb960267f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f2252f6-69b9-4c56-b078-803db301a874	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f28b65b-4b73-4080-9cdc-d236ad99f39c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:track-down:cast:s1,f:xs:XP:track-down:cast:s1	-	-	-	ae86f6029288	-	92d64169eded	-	-	2026-11-24	xproof
-8f2ab0a8-9d60-493b-a284-9ed7fa07e5ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devouring-strossus:cast:s1,f:xs:XP:devouring-strossus:cast:s1	-	-	-	5f2128bf97e4	-	2bb9c2296f30	-	-	2026-11-24	xproof
-8f2ab0a8-9d60-493b-a284-9ed7fa07e5ea	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:devouring-strossus:cast:s1,f:xs:XP:devouring-strossus:cast:s1	-	-	-	5f2128bf97e4	-	2bb9c2296f30	-	-	2026-11-24	xproof
-8f2ab0a8-9d60-493b-a284-9ed7fa07e5ea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8f2ab0a8-9d60-493b-a284-9ed7fa07e5ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devouring-strossus:f0t0:s1,f:xs:XP:devouring-strossus:f0t0:s1	-	-	-	3aa6ded33acb	-	2bb9c2296f30	-	-	2026-11-25	xproof
+8f2ab0a8-9d60-493b-a284-9ed7fa07e5ea	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:devouring-strossus:f0t0:s1,f:xs:XP:devouring-strossus:f0t0:s1	-	-	-	3aa6ded33acb	-	2bb9c2296f30	-	-	2026-11-25	xproof
+8f2ab0a8-9d60-493b-a284-9ed7fa07e5ea	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:devouring-strossus:f0t0:s1,f:xs:XP:devouring-strossus:f0t0:s1	-	-	-	3aa6ded33acb	-	2bb9c2296f30	-	-	2026-11-25	xproof
 8f2c8498-5b10-4ec7-8678-598c90987556	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disciple-of-bolas:f0t0:s1,f:xs:XP:disciple-of-bolas:f0t0:s1	-	-	-	d864b561c9cb	-	75a198daa16a	-	-	2026-11-24	xproof
 8f2c8498-5b10-4ec7-8678-598c90987556	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:disciple-of-bolas:f0t0:s1,f:xs:XP:disciple-of-bolas:f0t0:s1	-	-	-	d864b561c9cb	-	75a198daa16a	-	-	2026-11-24	xproof
 8f31d870-872d-4671-80d1-8d2ecd2c38d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gather-the-pack:cast:s1,f:xs:XP:gather-the-pack:cast:s1	-	-	-	d864b561c9cb	-	1271ca194f11	-	-	2026-11-24	xproof
@@ -96,8 +96,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f761657-7127-4552-a200-532e063e2419	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ribskiff:f0t0:s1,f:xs:XP:ribskiff:f0t0:s1	-	-	-	ae86f6029288	-	b8bfa01ab117	-	-	2026-11-24	xproof
 8f780497-23bb-44c3-982c-e2b8a7a29999	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f780497-23bb-44c3-982c-e2b8a7a29999	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f788188-d901-44f3-9fec-e2e5d0263140	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f788188-d901-44f3-9fec-e2e5d0263140	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8f788188-d901-44f3-9fec-e2e5d0263140	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	f7e5f9773d01	-	-	2026-11-25	xproof
+8f788188-d901-44f3-9fec-e2e5d0263140	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	f7e5f9773d01	-	-	2026-11-25	xproof
 8f7dd328-b367-4546-ba79-1efc1e97f2ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f7f4061-8998-40e9-b980-c63f27e7a5cd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f7f4061-8998-40e9-b980-c63f27e7a5cd	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

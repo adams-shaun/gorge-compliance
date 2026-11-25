@@ -12,7 +12,7 @@ d6026309-aae9-43e7-938b-69db7af7139c	static#0.0	static#0.0	agreed	-	X	scen	1	0	I
 d604c75e-9d81-49de-80bc-08f4ef3ee975	cast	cast-resolve	agreed	-	X	scen	1	0	Potioner's Trove/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d604c75e-9d81-49de-80bc-08f4ef3ee975	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Potioner's Trove/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d604c75e-9d81-49de-80bc-08f4ef3ee975	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Potioner's Trove/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d605d9d1-c01a-4ef6-89f9-06fae8cd57e6	cast	cast-resolve	agreed	-	X	scen	1	0	Calamitous Tide/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d605d9d1-c01a-4ef6-89f9-06fae8cd57e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:calamitous-tide:cast:s1,f:xs:XP:calamitous-tide:cast:s1	-	-	-	3aa6ded33acb	-	4e56c2e1f405	-	-	2026-11-25	xproof
 d608a3fa-faee-44a4-9ab6-be701d3b7a49	cast	cast-resolve	agreed	-	X	scen	1	0	Starting Column/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d608a3fa-faee-44a4-9ab6-be701d3b7a49	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Starting Column/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d608a3fa-faee-44a4-9ab6-be701d3b7a49	static#0.0	static#0.0	agreed	-	X	scen	1	0	Starting Column/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -25,7 +25,7 @@ d6158860-ada8-4e39-8156-23dee2f68f79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ugi
 d6158860-ada8-4e39-8156-23dee2f68f79	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d6158860-ada8-4e39-8156-23dee2f68f79	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d6192840-5e5d-48fa-a256-3b1e8c1c307a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d619cce4-036a-4da2-ae64-f43fc095ebe9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d619cce4-036a-4da2-ae64-f43fc095ebe9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pinpoint-avalanche:cast:s1,f:xs:XP:pinpoint-avalanche:cast:s1	-	-	-	3aa6ded33acb	-	1db968020d6b	-	-	2026-11-25	xproof
 d61fb9e8-d05a-481a-a90f-5def300c9abb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d61fb9e8-d05a-481a-a90f-5def300c9abb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cordial-vampire:f0t0:s1,f:xs:XP:cordial-vampire:f0t0:s1	-	-	-	d864b561c9cb	-	193f686c94e7	-	-	2026-11-24	xproof
 d620de15-8141-4877-9330-8328a3fa85e1	cast	cast-resolve	agreed	-	FX	scen	2	0	Defossilize/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -120,8 +120,8 @@ d69cb63f-98cc-4699-a03d-4f1beeeb7065	combat#0.attack	combat.attack	agreed	-	FX	s
 d69cb63f-98cc-4699-a03d-4f1beeeb7065	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:rakish-scoundrel:combat0.block:s1,f:xs:XP:rakish-scoundrel:combat0.block:s1	-	-	-	3aa6ded33acb	-	1b246b35edab	-	-	2026-11-25	xproof
 d69cb63f-98cc-4699-a03d-4f1beeeb7065	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rakish-scoundrel:f0t0:s2,f:xs:XP:rakish-scoundrel:f0t0:s2	-	-	-	e07cf3a05ba5	-	1b246b35edab	-	-	2026-11-24	xproof
 d69cb63f-98cc-4699-a03d-4f1beeeb7065	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rakish Scoundrel/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d69f3aaf-8462-432d-afaf-4176ac04962b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d69f3aaf-8462-432d-afaf-4176ac04962b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d69f3aaf-8462-432d-afaf-4176ac04962b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	0266df0b0cdb	-	-	2026-11-25	xproof
+d69f3aaf-8462-432d-afaf-4176ac04962b	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	0266df0b0cdb	-	-	2026-11-25	xproof
 d6a03a52-7e85-46de-920c-93a3f6479c4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6a03a52-7e85-46de-920c-93a3f6479c4c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6a03a52-7e85-46de-920c-93a3f6479c4c	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -202,8 +202,8 @@ d6eb2bfc-1e86-4e36-9d48-12de16955b98	cast	cast-resolve	agreed	-	X	scen	1	0	Sage 
 d6eb2bfc-1e86-4e36-9d48-12de16955b98	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sage of the Fang/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6eb2bfc-1e86-4e36-9d48-12de16955b98	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6ee6cc1-902d-4f56-afa5-6fa4813bfbbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6ee8bd6-0207-46ee-9892-c1d1b23b934e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6ee8bd6-0207-46ee-9892-c1d1b23b934e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d6ee8bd6-0207-46ee-9892-c1d1b23b934e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blastoderm:f0t0:s1,f:xs:XP:blastoderm:f0t0:s1	-	-	-	3aa6ded33acb	-	cc61c858fcb5	-	-	2026-11-25	xproof
+d6ee8bd6-0207-46ee-9892-c1d1b23b934e	f0/t0	Phase/Fading	agreed	-	FX	start	2	0	x:xs:XP:blastoderm:f0t0:s1,f:xs:XP:blastoderm:f0t0:s1	-	-	-	3aa6ded33acb	-	cc61c858fcb5	-	-	2026-11-25	xproof
 d6eef6a7-0cf4-4ee8-90e0-727a283c3be9	cast	cast-resolve	agreed	-	X	scen	1	0	Flame-Chain Mauler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d6eef6a7-0cf4-4ee8-90e0-727a283c3be9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Flame-Chain Mauler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d6efff61-2087-4f48-a8a8-6c465190dad9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

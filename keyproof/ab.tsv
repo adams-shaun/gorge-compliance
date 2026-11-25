@@ -1,12 +1,12 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-ab050d55-a47d-4880-b65a-29f562773d7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ab050d55-a47d-4880-b65a-29f562773d7a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ab050d55-a47d-4880-b65a-29f562773d7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:worry-beads:f0t0:s1,f:xs:XP:worry-beads:f0t0:s1	-	-	-	3aa6ded33acb	-	9fabd5cdd63e	-	-	2026-11-25	xproof
+ab050d55-a47d-4880-b65a-29f562773d7a	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:worry-beads:f0t0:s1,f:xs:XP:worry-beads:f0t0:s1	-	-	-	3aa6ded33acb	-	9fabd5cdd63e	-	-	2026-11-25	xproof
 ab0707fb-b404-433d-b845-0d50d01cd72e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab0707fb-b404-433d-b845-0d50d01cd72e	f0/t0	NULL	owed	refused:no-generator:trigger:Scry	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ab097f46-a7bf-4cf1-a96c-36b681fe79da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nessian-hornbeetle:cast:s1,f:xs:XP:nessian-hornbeetle:cast:s1	-	-	-	23b491658465	-	f1b1803d8884	-	-	2026-11-24	xproof
 ab097f46-a7bf-4cf1-a96c-36b681fe79da	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nessian-hornbeetle:f0t0:s1,f:xs:XP:nessian-hornbeetle:f0t0:s1	-	-	-	3aa6ded33acb	-	f1b1803d8884	-	-	2026-11-25	xproof
-ab0aea13-1dbc-424a-ab7e-cdb303036a56	cast	cast-resolve	agreed	-	X	scen	1	0	High Stride/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ab0aea13-1dbc-424a-ab7e-cdb303036a56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:high-stride:cast:s1,f:xs:XP:high-stride:cast:s1	-	-	-	3aa6ded33acb	-	2be62b400ca1	-	-	2026-11-25	xproof
 ab0dd461-25bc-4374-bed8-72fc2d51b5e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanctuary-blade:cast:s1,f:xs:XP:sanctuary-blade:cast:s1	-	-	-	8c0bd19283bb	-	90f2cdda19bb	-	-	2026-11-24	xproof
 ab0dd461-25bc-4374-bed8-72fc2d51b5e1	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sanctuary-blade:f0a0:s1,f:xs:XP:sanctuary-blade:f0a0:s1	-	-	-	8c0bd19283bb	-	90f2cdda19bb	-	-	2026-11-24	xproof
 ab0e2aa0-1ddd-4a4c-b7cd-4063caaa8bcd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloudthresher:f0t0:s1,f:xs:XP:cloudthresher:f0t0:s1	-	-	-	d864b561c9cb	-	12dc3fa127fb	-	-	2026-11-24	xproof
@@ -14,15 +14,15 @@ ab0e2aa0-1ddd-4a4c-b7cd-4063caaa8bcd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 ab1379b7-0016-4d2a-a83b-952666e43b89	cast	cast-resolve	agreed	-	X	scen	1	0	Hymn of the Faller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ab151429-0890-4231-a3a7-34e8455dac70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab151429-0890-4231-a3a7-34e8455dac70	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-ab1cc360-b9de-48d9-9983-4dfe4a7d2a37	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ab1cc360-b9de-48d9-9983-4dfe4a7d2a37	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 ab1d04ef-5f39-4a95-969e-b0872e6db0d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab23a9e4-2d62-4b01-9d52-593de40811b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab23a9e4-2d62-4b01-9d52-593de40811b0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab23a9e4-2d62-4b01-9d52-593de40811b0	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab23a9e4-2d62-4b01-9d52-593de40811b0	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ab23cca2-b59e-4d34-80de-98bd08985275	cast	cast-resolve	agreed	-	FX	scen	2	0	Sterling Supplier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ab23cca2-b59e-4d34-80de-98bd08985275	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sterling Supplier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ab23cca2-b59e-4d34-80de-98bd08985275	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sterling Supplier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ab23cca2-b59e-4d34-80de-98bd08985275	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sterling-supplier:combat0.attack:s1,f:xs:XP:sterling-supplier:combat0.attack:s1	-	-	-	3aa6ded33acb	-	c26e383c6283	-	-	2026-11-25	xproof
+ab23cca2-b59e-4d34-80de-98bd08985275	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sterling-supplier:combat0.block:s1,f:xs:XP:sterling-supplier:combat0.block:s1	-	-	-	3aa6ded33acb	-	c26e383c6283	-	-	2026-11-25	xproof
 ab23cca2-b59e-4d34-80de-98bd08985275	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab282bb1-900e-40b8-9821-8e2de88927bc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:blooming-stinger:f0t0:s2,f:xs:XP:blooming-stinger:f0t0:s2	-	-	-	267e485f6204	-	72018a6daa76	-	-	2026-11-24	xproof
 ab282bb1-900e-40b8-9821-8e2de88927bc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Blooming Stinger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

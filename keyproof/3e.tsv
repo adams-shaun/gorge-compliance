@@ -86,8 +86,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e7df01c-75af-440d-97fd-1b1b794281b9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3e7f67d6-db12-4034-b8e3-9c9d401c8f57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e7f67d6-db12-4034-b8e3-9c9d401c8f57	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-3e81c22e-52ec-4142-9a98-88681d04ce60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3e81c22e-52ec-4142-9a98-88681d04ce60	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3e81c22e-52ec-4142-9a98-88681d04ce60	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	0bac95b62bba	-	-	2026-11-25	xproof
+3e81c22e-52ec-4142-9a98-88681d04ce60	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	0bac95b62bba	-	-	2026-11-25	xproof
 3e83dec6-e1a0-4137-aaab-308dfd3122e1	cast	cast	agreed	-	F	start	2	0	f:xs:XP:vivien-arkbow-ranger:cast:s1	-	-	-	ae86f6029288	-	620c79a524c3	-	-	2026-11-24	xproof
 3e83dec6-e1a0-4137-aaab-308dfd3122e1	f0/a0	PutCounter	agreed	-	F	start	2	0	f:xs:XP:vivien-arkbow-ranger:cast:s1	-	-	-	ae86f6029288	-	620c79a524c3	-	-	2026-11-24	xproof
 3e83dec6-e1a0-4137-aaab-308dfd3122e1	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

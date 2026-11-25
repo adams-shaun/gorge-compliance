@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1420b7db-859b-4ad5-9844-10413cc70478	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1420b7db-859b-4ad5-9844-10413cc70478	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1423b8e6-9165-4a89-a6ed-18085f460bca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1423b8e6-9165-4a89-a6ed-18085f460bca	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1423b8e6-9165-4a89-a6ed-18085f460bca	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:power-armor:f0a0:s1,f:xs:XP:power-armor:f0a0:s1	-	-	-	3aa6ded33acb	-	4047e56cc1b3	-	-	2026-11-25	xproof
 142409ce-1187-4554-bc07-6432c4d22dbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14247820-5ecb-40bd-8dee-0625cc745ec2	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	4c42d55f9560	-	-	2026-11-24	xproof
 14291205-1ac2-4804-b365-4f65377d5803	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grey-havens-navigator:f0t0:s1,f:xs:XP:grey-havens-navigator:f0t0:s1	-	-	-	ae86f6029288	-	809493db9630	-	-	2026-11-24	xproof
@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1470f614-88eb-4d3c-bc4f-270dfb512b6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:extra-arms:cast:s1,f:xs:XP:extra-arms:cast:s1	-	-	-	8c0bd19283bb	-	53127b1070c9	-	-	2026-11-24	xproof
 1470f614-88eb-4d3c-bc4f-270dfb512b6c	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1473580d-7cb2-48f5-a77d-08f49244c5e8	cast	cast-resolve	agreed	-	FX	scen	2	0	Essence Channeler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1473580d-7cb2-48f5-a77d-08f49244c5e8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Essence Channeler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1473580d-7cb2-48f5-a77d-08f49244c5e8	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:essence-channeler:f0t0:s1,f:xs:XP:essence-channeler:f0t0:s1	-	-	-	3aa6ded33acb	-	0f0c9ae88644	-	-	2026-11-25	xproof
 1473580d-7cb2-48f5-a77d-08f49244c5e8	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Essence Channeler/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1473580d-7cb2-48f5-a77d-08f49244c5e8	static#0.0	static#0.0	agreed	-	X	scen	1	0	Essence Channeler/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 147d1e5c-fcfd-4115-a2f9-bea9b7ad7bb6	cast	cast-resolve	agreed	-	FX	scen	2	0	Intrepid Trufflesnout/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

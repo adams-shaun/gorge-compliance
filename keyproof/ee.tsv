@@ -186,12 +186,12 @@ eec31fe0-a633-4424-84d2-90fe88016310	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emb
 eec55307-8525-4dae-a030-d210f3895138	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eec55307-8525-4dae-a030-d210f3895138	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 eec72bcf-ccbc-43fc-8bdd-7bf4faa1fad7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eec72bcf-ccbc-43fc-8bdd-7bf4faa1fad7	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eec72bcf-ccbc-43fc-8bdd-7bf4faa1fad7	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 eec7500b-418d-4387-beb2-d53e047c1d22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eec7500b-418d-4387-beb2-d53e047c1d22	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eec7d4f4-4141-49ed-8978-aefacc0a6609	cast	cast-resolve	agreed	-	X	scen	1	0	Raven of Fell Omens/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-eec7d4f4-4141-49ed-8978-aefacc0a6609	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Raven of Fell Omens/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-eec7d4f4-4141-49ed-8978-aefacc0a6609	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Raven of Fell Omens/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+eec7d4f4-4141-49ed-8978-aefacc0a6609	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raven-of-fell-omens:cast:s1,f:xs:XP:raven-of-fell-omens:cast:s1	-	-	-	3aa6ded33acb	-	67f0e8608331	-	-	2026-11-25	xproof
+eec7d4f4-4141-49ed-8978-aefacc0a6609	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:raven-of-fell-omens:combat0.attack:s1,f:xs:XP:raven-of-fell-omens:combat0.attack:s1	-	-	-	3aa6ded33acb	-	67f0e8608331	-	-	2026-11-25	xproof
+eec7d4f4-4141-49ed-8978-aefacc0a6609	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:raven-of-fell-omens:combat0.block:s1,f:xs:XP:raven-of-fell-omens:combat0.block:s1	-	-	-	3aa6ded33acb	-	67f0e8608331	-	-	2026-11-25	xproof
 eec7d4f4-4141-49ed-8978-aefacc0a6609	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Raven of Fell Omens/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eec81460-899d-4b4c-b33c-ce2ca704df17	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crude-bent-blade:f0t0:s1,f:xs:XP:crude-bent-blade:f0t0:s1	-	-	-	25696bf19d5b	-	a5265b571279	-	-	2026-11-24	xproof
 eec81460-899d-4b4c-b33c-ce2ca704df17	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Crude Bent Blade/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10185447-a13f-40d8-a8b6-39ce801f2fc0	cast	cast-resolve	agreed	-	X	scen	1	0	Stomped by the Foot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 101a5c2d-b0b4-45a7-b236-df474ac47356	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 101b2387-58a1-4ef9-8395-0024713e217b	cast	cast-resolve	agreed	-	FX	scen	2	0	Test of Courage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-102356a9-0de5-4034-b121-034da5deb4f2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+102356a9-0de5-4034-b121-034da5deb4f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dark-offering:cast:s1,f:xs:XP:dark-offering:cast:s1	-	-	-	3aa6ded33acb	-	431e163e9da9	-	-	2026-11-25	xproof
 10277cc5-f53b-4b33-bd68-edb0534a2040	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mournwhelk:f0t0:s1,f:xs:XP:mournwhelk:f0t0:s1	-	-	-	d864b561c9cb	-	389e8a32c5ff	-	-	2026-11-24	xproof
 10277cc5-f53b-4b33-bd68-edb0534a2040	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mournwhelk:f0t0:s1,f:xs:XP:mournwhelk:f0t0:s1	-	-	-	d864b561c9cb	-	389e8a32c5ff	-	-	2026-11-24	xproof
 102b0a65-f2e0-4ef3-a9dc-4a85557b852e	cast	cast	agreed	-	F	start	1	0	f:xs:XP:valduk-keeper-of-the-flame:cast:s2	-	-	-	d864b561c9cb	-	cac28db843e9	-	-	2026-11-24	xproof
@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1049bc06-83de-4ed6-ae38-f259e5038a95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1049bc06-83de-4ed6-ae38-f259e5038a95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 104a8f76-d178-4a33-bb59-e8767da3d982	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tidal-kraken:cast:s1,f:xs:XP:tidal-kraken:cast:s1	-	-	-	25696bf19d5b	-	8e94046b423b	-	-	2026-11-24	xproof
-104baa4e-a3f3-45dc-979d-4c58b659ba1a	cast	cast-resolve	agreed	-	X	scen	1	0	Brambleguard Captain/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-104baa4e-a3f3-45dc-979d-4c58b659ba1a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Brambleguard Captain/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+104baa4e-a3f3-45dc-979d-4c58b659ba1a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brambleguard-captain:cast:s1,f:xs:XP:brambleguard-captain:cast:s1	-	-	-	3aa6ded33acb	-	0bd2e7f54b67	-	-	2026-11-25	xproof
+104baa4e-a3f3-45dc-979d-4c58b659ba1a	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:brambleguard-captain:cast:s1,f:xs:XP:brambleguard-captain:cast:s1	-	-	-	3aa6ded33acb	-	0bd2e7f54b67	-	-	2026-11-25	xproof
 104ea189-14cd-420f-afdc-57b0f827ab8e	cast	cast-resolve	agreed	-	FX	scen	2	0	Relentless Rats/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1050f029-60d4-4769-b39f-9100c949a822	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cathedral-sanctifier:f0t0:s1,f:xs:XP:cathedral-sanctifier:f0t0:s1	-	-	-	d864b561c9cb	-	a5d64cd27a15	-	-	2026-11-24	xproof
 1050f029-60d4-4769-b39f-9100c949a822	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cathedral-sanctifier:f0t0:s1,f:xs:XP:cathedral-sanctifier:f0t0:s1	-	-	-	d864b561c9cb	-	a5d64cd27a15	-	-	2026-11-24	xproof
@@ -83,9 +83,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1063822f-47d3-42e9-8a21-f62b12609fe1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fatehold Chronologist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1065eceb-9150-4ea4-bd6d-acaabda14e00	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 106ae855-574b-411d-8689-cbb9eeb4f602	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-106ca7bd-6dad-43fe-af58-8667ebddb2eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-106ca7bd-6dad-43fe-af58-8667ebddb2eb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-106ca7bd-6dad-43fe-af58-8667ebddb2eb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+106ca7bd-6dad-43fe-af58-8667ebddb2eb	cast	cast	agreed	-	F	start	2	0	f:xs:XP:legacy-s-allure:f0t0:s1	-	-	-	3aa6ded33acb	-	7672cc991bde	-	-	2026-11-25	xproof
+106ca7bd-6dad-43fe-af58-8667ebddb2eb	f0/a0	GainControl	agreed	-	F	start	2	0	f:xs:XP:legacy-s-allure:f0t0:s1	-	-	-	3aa6ded33acb	-	7672cc991bde	-	-	2026-11-25	xproof
+106ca7bd-6dad-43fe-af58-8667ebddb2eb	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:legacy-s-allure:f0t0:s1	-	-	-	3aa6ded33acb	-	7672cc991bde	-	-	2026-11-25	xproof
 106e343f-c6f4-4155-ad01-63e482d4d38e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:groundshaker-sliver:cast:s1,f:xs:XP:groundshaker-sliver:cast:s1	-	-	-	d864b561c9cb	-	0667a8d221a4	-	-	2026-11-24	xproof
 106e9c0d-67a2-4db7-97d9-03e1ea1b40b5	cast	cast-resolve	agreed	-	FX	scen	2	0	Cryogen Relic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 106e9c0d-67a2-4db7-97d9-03e1ea1b40b5	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Cryogen Relic/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

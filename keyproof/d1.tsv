@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-d1005625-0a78-4f8e-bf51-80458fc0e9d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d1005625-0a78-4f8e-bf51-80458fc0e9d6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d1005625-0a78-4f8e-bf51-80458fc0e9d6	cast	cast	agreed	-	F	start	1	0	f:xs:XP:chaotic-goo:f0t0:s1	-	-	-	3aa6ded33acb	-	922468117d74	-	-	2026-11-25	xproof
+d1005625-0a78-4f8e-bf51-80458fc0e9d6	f0/t0	Phase	agreed	-	F	start	1	0	f:xs:XP:chaotic-goo:f0t0:s1	-	-	-	3aa6ded33acb	-	922468117d74	-	-	2026-11-25	xproof
 d119ca9a-ee82-42c2-81e6-684205ca5183	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d11e627b-8a48-411d-a261-2c9a02a758ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d11e627b-8a48-411d-a261-2c9a02a758ba	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclaredOneTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -148,9 +148,9 @@ d1c44856-ca53-4b6e-902e-8d9c6fe1f61c	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:fo
 d1c44856-ca53-4b6e-902e-8d9c6fe1f61c	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:foundry-champion:f0a1:s1,f:xs:XP:foundry-champion:f0a1:s1	-	-	-	d864b561c9cb	-	41ebbfb7204a	-	-	2026-11-24	xproof
 d1c44856-ca53-4b6e-902e-8d9c6fe1f61c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:foundry-champion:cast:s1,f:xs:XP:foundry-champion:cast:s1	-	-	-	d864b561c9cb	-	41ebbfb7204a	-	-	2026-11-24	xproof
 d1c8f14b-7977-488a-8bd9-cefd6687f017	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d1cc6979-d786-4035-963b-768ac8cef116	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mesmeric-trance:cast:s1,f:xs:XP:mesmeric-trance:cast:s1	-	-	-	ea3140b6974b	-	aa40870bad8a	-	-	2026-11-24	xproof
-d1cc6979-d786-4035-963b-768ac8cef116	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-d1cc6979-d786-4035-963b-768ac8cef116	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d1cc6979-d786-4035-963b-768ac8cef116	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	aa40870bad8a	-	-	2026-11-25	xproof
+d1cc6979-d786-4035-963b-768ac8cef116	f0/a0	Draw	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	aa40870bad8a	-	-	2026-11-25	xproof
+d1cc6979-d786-4035-963b-768ac8cef116	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	aa40870bad8a	-	-	2026-11-25	xproof
 d1cfbbcc-4aee-4400-b5a8-18713829ae72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d1d171de-1c6d-4fb9-817a-9c689c709f3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d1d719e9-9c02-40cf-8849-91a5c120a516	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alabaster-host-intercessor:cast:s2,f:xs:XP:alabaster-host-intercessor:cast:s2	-	-	-	ae86f6029288	-	d5ae731df0be	-	-	2026-11-24	xproof

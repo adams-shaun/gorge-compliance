@@ -184,20 +184,20 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5fdff691-686d-4ce0-bd12-eea676a648b4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 5fe07a76-f261-4f16-8a15-571bed707261	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sigarda-font-of-blessings:cast:s1,f:xs:XP:sigarda-font-of-blessings:cast:s1	-	-	-	ae86f6029288	-	25681c9d0021	-	-	2026-11-24	xproof
 5fe13418-c63c-4f3c-9a42-7ab06949e3cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5fe29c25-a7ad-4c79-a5a5-da1bbc832141	cast	cast-resolve	agreed	-	X	scen	1	0	Season of the Bold/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5fe29c25-a7ad-4c79-a5a5-da1bbc832141	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:season-of-the-bold:cast:s1,f:xs:XP:season-of-the-bold:cast:s1	-	-	-	3aa6ded33acb	-	cc25d0a9f9a7	-	-	2026-11-25	xproof
 5fe2ed67-55a6-4816-910f-0e3c38ea06a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fe3aabd-3271-41bf-ae50-f6efaba7c4ae	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:carrot-cake:f0t0:s2,f:xs:XP:carrot-cake:f0t0:s2	-	-	-	e07cf3a05ba5	-	22d860f14196	-	-	2026-11-24	xproof
-5fe3aabd-3271-41bf-ae50-f6efaba7c4ae	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Carrot Cake/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5fe3aabd-3271-41bf-ae50-f6efaba7c4ae	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:carrot-cake:f0a0:s1,f:xs:XP:carrot-cake:f0a0:s1	-	-	-	3aa6ded33acb	-	22d860f14196	-	-	2026-11-25	xproof
 5fe3aabd-3271-41bf-ae50-f6efaba7c4ae	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:carrot-cake:f0t0:s2,f:xs:XP:carrot-cake:f0t0:s2	-	-	-	e07cf3a05ba5	-	22d860f14196	-	-	2026-11-24	xproof
-5fe3aabd-3271-41bf-ae50-f6efaba7c4ae	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Carrot Cake/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5fe3aabd-3271-41bf-ae50-f6efaba7c4ae	f0/t1	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:carrot-cake:f0a0:s1,f:xs:XP:carrot-cake:f0a0:s1	-	-	-	3aa6ded33acb	-	22d860f14196	-	-	2026-11-25	xproof
 5fe6f4ae-3fb1-4df6-8760-88c8666068df	cast	cast-resolve	agreed	-	X	scen	1	0	Dr. Beverly Crusher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5fe6f4ae-3fb1-4df6-8760-88c8666068df	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 5fe86083-1009-4de2-b186-f817ad1cc4e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fe86083-1009-4de2-b186-f817ad1cc4e4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fe86083-1009-4de2-b186-f817ad1cc4e4	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5fed5377-07cf-4ad9-86fd-1efe1f182088	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5feedfb0-30e6-400d-9e28-d541ea1aa14e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5feedfb0-30e6-400d-9e28-d541ea1aa14e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5feedfb0-30e6-400d-9e28-d541ea1aa14e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plague-spitter:f0t0:s1,f:xs:XP:plague-spitter:f0t0:s1	-	-	-	3aa6ded33acb	-	985a179f76aa	-	-	2026-11-25	xproof
+5feedfb0-30e6-400d-9e28-d541ea1aa14e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:plague-spitter:f0t0:s1,f:xs:XP:plague-spitter:f0t0:s1	-	-	-	3aa6ded33acb	-	985a179f76aa	-	-	2026-11-25	xproof
 5feedfb0-30e6-400d-9e28-d541ea1aa14e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ff647e4-730a-498f-8f2c-5bd64d5a9780	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:cathedral-of-war:f0t0:s1,f:xs:XP:cathedral-of-war:f0t0:s1	-	-	-	23b491658465	-	cf08e0688caf	-	-	2026-11-25	xproof
 5ff647e4-730a-498f-8f2c-5bd64d5a9780	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

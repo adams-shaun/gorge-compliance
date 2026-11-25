@@ -90,7 +90,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f6e0abb-18d0-4a15-9b21-0a72542998ac	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:azra-smokeshaper:cast:s1,f:xs:XP:azra-smokeshaper:cast:s1	-	-	-	d864b561c9cb	-	ed5ac9a48ced	-	-	2026-11-24	xproof
 6f6e0abb-18d0-4a15-9b21-0a72542998ac	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6f6e0abb-18d0-4a15-9b21-0a72542998ac	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:azra-smokeshaper:cast:s1,f:xs:XP:azra-smokeshaper:cast:s1	-	-	-	d864b561c9cb	-	ed5ac9a48ced	-	-	2026-11-24	xproof
-6f705338-b00b-4a6d-924f-443e7c5670b7	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6f705338-b00b-4a6d-924f-443e7c5670b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:death-mutation:cast:s1,f:xs:XP:death-mutation:cast:s1	-	-	-	3aa6ded33acb	-	d8b2418e6ba7	-	-	2026-11-25	xproof
 6f76fec2-6fd0-4d33-b39a-f1684922d478	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blisterstick-shaman:f0t0:s1,f:xs:XP:blisterstick-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	bbacc772a4ad	-	-	2026-11-24	xproof
 6f76fec2-6fd0-4d33-b39a-f1684922d478	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blisterstick-shaman:f0t0:s1,f:xs:XP:blisterstick-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	bbacc772a4ad	-	-	2026-11-24	xproof
 6f78d21b-1959-4edc-9f28-d7ada539abef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -155,9 +155,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6facb0f6-fa49-4ce6-9f95-15bb3ce4bcf2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fb6e37e-d774-4a50-8ea3-b955535c2065	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:teeka-s-dragon:cast:s1,f:xs:XP:teeka-s-dragon:cast:s1	-	-	-	ea3140b6974b	-	86b73cd230b5	-	-	2026-11-24	xproof
 6fb6e37e-d774-4a50-8ea3-b955535c2065	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-6fbaa853-48d4-4a3b-b22d-27415cc266d7	cast	cast-resolve	agreed	-	X	scen	1	0	Quaketusk Boar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6fbaa853-48d4-4a3b-b22d-27415cc266d7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Quaketusk Boar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6fbaa853-48d4-4a3b-b22d-27415cc266d7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Quaketusk Boar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6fbaa853-48d4-4a3b-b22d-27415cc266d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quaketusk-boar:cast:s1,f:xs:XP:quaketusk-boar:cast:s1	-	-	-	3aa6ded33acb	-	315321c2fc58	-	-	2026-11-25	xproof
+6fbaa853-48d4-4a3b-b22d-27415cc266d7	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:quaketusk-boar:combat0.attack:s1,f:xs:XP:quaketusk-boar:combat0.attack:s1	-	-	-	3aa6ded33acb	-	315321c2fc58	-	-	2026-11-25	xproof
+6fbaa853-48d4-4a3b-b22d-27415cc266d7	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:quaketusk-boar:combat0.block:s1,f:xs:XP:quaketusk-boar:combat0.block:s1	-	-	-	3aa6ded33acb	-	315321c2fc58	-	-	2026-11-25	xproof
 6fbade4d-502d-45d7-a79e-3fd9e3e7ccdf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fc26faa-94a8-433f-8863-126c2d2e73b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6fc7401f-66fe-4d17-be2f-afcf892be740	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:federation-probe:f0t0:s1,f:xs:XP:federation-probe:f0t0:s1	-	-	-	25696bf19d5b	-	f7ae74a85959	-	-	2026-11-24	xproof
