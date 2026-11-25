@@ -54,6 +54,68 @@ public final class ScenarioReplayCheckpointSeatTest {
         throw new NoSuchFieldException(name);
     }
 
+    /** Turn 2 with seat 1 active: the two shapes from the xproof harness
+     * cluster -- an empty declaration (Crumbling Ashes step 26) and a
+     * one-creature declaration (Extruder step 31). The declaration's
+     * checkpoint and the active seat's following pass must land on the SAME
+     * queue, the active seat's, so the step-order registration runs them in
+     * step order. Left on playerA, the declaration would run only after that
+     * pass on playerB and the two snapshots would swap. Seat 0's own turn
+     * keeps the old seat for both. */
+    private static void opponentTurnAttackCheckpointPrecedesNextPass(
+            ScenarioReplay d, TestPlayer a, TestPlayer b, Method seatFor) throws Exception {
+        set(d, "turn", 2);
+        set(d, "activeSeat", 1);
+
+        // Empty declaration: pass p0 enters declare-attackers, attack p1,
+        // then p1's pass.
+        JsonObject empty = JsonParser.parseString("{\"steps\":["
+                + "{\"op\":\"pass\",\"seat\":0},"
+                + "{\"op\":\"attack\",\"seat\":1,\"defender\":\"p0\"},"
+                + "{\"op\":\"pass\",\"seat\":1}],"
+                + "\"xmage_pos\":[{\"turn\":2,\"step\":\"declare-attackers\",\"active\":1,\"moved\":true},"
+                + "null,{\"turn\":2,\"step\":\"declare-attackers\",\"active\":1}]}")
+                .getAsJsonObject();
+        ScenarioReplay.mergePassPositions(empty);
+        set(d, "sc0", empty);
+        JsonArray es = ScenarioReplay.steps(empty);
+        TestPlayer emptyAttack = (TestPlayer) seatFor.invoke(d, "attack", es.get(1).getAsJsonObject(), 1);
+        TestPlayer emptyPass = (TestPlayer) seatFor.invoke(d, "pass", es.get(2).getAsJsonObject(), 2);
+        equal(b, emptyPass);
+        equal(true, emptyAttack == emptyPass);
+
+        // One-creature declaration: the same turn shape with an attacker list.
+        JsonObject one = JsonParser.parseString("{\"steps\":["
+                + "{\"op\":\"pass\",\"seat\":0},"
+                + "{\"op\":\"attack\",\"seat\":1,\"attackers\":[\"p1:Memnite\"],\"defender\":\"p0\"},"
+                + "{\"op\":\"pass\",\"seat\":1}],"
+                + "\"xmage_pos\":[{\"turn\":2,\"step\":\"declare-attackers\",\"active\":1,\"moved\":true},"
+                + "null,{\"turn\":2,\"step\":\"declare-attackers\",\"active\":1}]}")
+                .getAsJsonObject();
+        ScenarioReplay.mergePassPositions(one);
+        set(d, "sc0", one);
+        JsonArray os = ScenarioReplay.steps(one);
+        TestPlayer oneAttack = (TestPlayer) seatFor.invoke(d, "attack", os.get(1).getAsJsonObject(), 1);
+        TestPlayer onePass = (TestPlayer) seatFor.invoke(d, "pass", os.get(2).getAsJsonObject(), 2);
+        equal(b, onePass);
+        equal(true, oneAttack == onePass);
+
+        // Seat 0's own turn is unchanged: both checkpoints stay on playerA.
+        set(d, "turn", 1);
+        set(d, "activeSeat", 0);
+        JsonObject own = JsonParser.parseString("{\"steps\":["
+                + "{\"op\":\"attack\",\"seat\":0,\"attackers\":[\"p0:Bear\"]},"
+                + "{\"op\":\"pass\",\"seat\":0}],"
+                + "\"xmage_pos\":[null,{\"turn\":1,\"step\":\"declare-attackers\",\"active\":0}]}")
+                .getAsJsonObject();
+        ScenarioReplay.mergePassPositions(own);
+        set(d, "sc0", own);
+        JsonArray ownSteps = ScenarioReplay.steps(own);
+        equal(a, seatFor.invoke(d, "attack", ownSteps.get(0).getAsJsonObject(), 0));
+        equal(a, seatFor.invoke(d, "pass", ownSteps.get(1).getAsJsonObject(), 1));
+        set(d, "turn", 2);
+    }
+
     public static void main(String[] args) throws Exception {
         Field uf = Unsafe.class.getDeclaredField("theUnsafe");
         uf.setAccessible(true);
@@ -174,6 +236,11 @@ public final class ScenarioReplayCheckpointSeatTest {
         JsonArray ats = ScenarioReplay.steps(attackRun);
         set(d, "activeSeat", 0);
         equal(true, seatFor.invoke(d, "attack", ats.get(0).getAsJsonObject(), 0) == a);
+
+        // On seat 1's turn the declaration and that seat's following pass
+        // must share the active seat's queue (the harness row that paired
+        // step 26's attack snapshot with step 27's pass).
+        opponentTurnAttackCheckpointPrecedesNextPass(d, a, b, seatFor);
 
         // The activation text names its card: a space-free alias prefix, so
         // "+1" no longer matches whichever planeswalker XMage lists first.
