@@ -997,7 +997,12 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # driver strict-missed "gorge picked 1, Forge wants 2..2"). ChooseFewerThanMinTest (run-unit-tests.sh) fails on efd75d00b34 and passes here;
 # one pick over two candidates where two are required still misses. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
 # (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-choose-fewer-than-min.
-FORGE_ORACLE_REF ?= 71fd77c15c0e42d9357a53896dbac05812480ff5
+# bdad3bd38b1 = 71fd77c15c0 plus the values-list chooseNumber (RollDiceEffect ChosenSVar$, CR 706.2) answered from gorge's numeric choose_n
+# when the pick is an offered value (StepMachine.chooseNumberFrom); it missed unconditionally (xproof clusters xpt-8a6bce20, xpt-c9c0e640,
+# Valiant Endeavor "strict_miss: Missing number answer"). UnmappedAskTest's three Valiant Endeavor cases (forced rolls 3 and 6: pick 3 six
+# Knights, pick 6 three, unoffered 4 still misses) fail on 71fd77c15c0 and pass here. Driver-only; die-roll forcing, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-choose-number-values.
+FORGE_ORACLE_REF ?= bdad3bd38b1c0f5c85ffaae2a15f09548e4dfea7
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
