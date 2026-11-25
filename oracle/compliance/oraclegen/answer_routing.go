@@ -82,6 +82,19 @@ type answerRouting struct {
 	// (stepSourceNames), for the face-keyed XMage dialog tables. A nil map
 	// (a shape-only caller) matches no face.
 	sources map[int][]string
+	// allPlayerUnless marks an unless-pay decision whose rider is the
+	// "any player may have <source> deal N damage to them" punisher
+	// (unless_payers.go). XMage asks EVERY player one chooseUse for that
+	// shape, even after one accepts, while gorge stops at the first payer.
+	allPlayerUnless map[int]bool
+	// seats is the match's seat count; the payer range an allPlayerUnless
+	// election answers. Zero (a caller with no scenario) keeps the
+	// two-seat game.
+	seats int
+	// chooseUseOrders maps a step to the card-order choices XMage asks after
+	// a chooseUse whose yes branch puts the whole looked-at window on the
+	// library bottom (choose_dialog_order.go, Petals of Insight).
+	chooseUseOrders map[int][]XAnswer
 }
 
 func newAnswerRouting(ds []rules.OracleDecision, digSources ...map[int]digSource) *answerRouting {

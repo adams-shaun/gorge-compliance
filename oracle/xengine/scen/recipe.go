@@ -198,7 +198,15 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		if r, ok := onBF(); ok {
 			return r, nil
 		}
-		return refuse("no-generator:" + fam)
+		var why string
+		if fam == "combat" {
+			why = combatKeyStart(reg, c, card, key, f)
+		} else {
+			why = staticKeyStart(reg, b, c, card, key, f)
+		}
+		if why != "" {
+			return refuse(why)
+		}
 	case "activate", "trigger":
 		if m[1] != "0" {
 			return refuse("no-generator:face")
@@ -316,11 +324,16 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 		return false
 	}
-	if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
-		if err != nil {
-			return Result{}, err
+	// A static or combat key places its own objects (staticKeyStart,
+	// combatKeyStart): what else the card reads (a token, a graveyard) is
+	// no part of the key, and a need for it would refuse the key or add state.
+	if fam != "static" && fam != "combat" {
+		if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
+			if err != nil {
+				return Result{}, err
+			}
+			return refuse(why)
 		}
-		return refuse(why)
 	}
 	if why, err := focusPlayRefusal(reg, b, sa, card, f); err != nil || why != "" {
 		if err != nil {

@@ -39,8 +39,8 @@ func TestScenCLI(t *testing.T) {
 	if f.Card != "Thornvault Forager" || f.Key != "f0/a2" || f.Focus == nil || f.Focus.Kind != "ability" || f.Focus.Ability != 2 {
 		t.Errorf("start file: %+v focus %+v", f, f.Focus)
 	}
-	// XP3's playStart (cmd/xengine/start.go) is not on this base: when it lands,
-	// lower this file with it and assert 0 refusals (see the report).
+	// the lowered starts of the combat and static families are held to their
+	// key in start_combat_static_test.go (TestPlayStartCombatStatic)
 
 	auto := t.TempDir()
 	if err := runScen(scenArgs("-card", "Llanowar Elves", "-key", "f0/a0", "-set", "FDN", "-out", auto)); err != nil {
@@ -52,7 +52,7 @@ func TestScenCLI(t *testing.T) {
 	}
 
 	ref := t.TempDir()
-	if err := runScen(scenArgs("-card", "Aggressive Mammoth", "-key", "static#0.0", "-prefer", "start", "-out", ref)); err != nil {
+	if err := runScen(scenArgs("-card", "Karn, Argent Defender", "-key", "static#0.0", "-prefer", "start", "-out", ref)); err != nil {
 		t.Fatal(err)
 	}
 	if ents, _ := os.ReadDir(ref); len(ents) != 0 {

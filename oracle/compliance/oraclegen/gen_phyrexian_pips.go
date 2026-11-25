@@ -78,6 +78,17 @@ type xanswersExtra struct {
 	// sources maps a decision step to the cards resolving or acting there
 	// (stepSourceNames); see answerRouting.sources.
 	sources map[int][]string
+	// allPlayerUnless marks every unless-pay decision whose resolving face is
+	// the "any player may have <source> deal N damage to them" punisher
+	// (unless_payers.go); see answerRouting.allPlayerUnless.
+	allPlayerUnless map[int]bool
+	// seats is the match's seat count (0 keeps the two-seat game), the payer
+	// range an allPlayerUnless election answers.
+	seats int
+	// chooseUseOrders maps a step to the card-order choices XMage asks after
+	// a chooseUse whose yes branch moves the looked-at window to the library
+	// bottom (choose_dialog_order.go).
+	chooseUseOrders map[int][]XAnswer
 }
 
 // isPipDecision reports whether d is one of gorge's ManaAsk pip decisions

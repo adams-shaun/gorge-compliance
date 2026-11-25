@@ -193,7 +193,19 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 			sources[d.Step] = stepSourceNames(sc, res.Snapshots, d.Step)
 		}
 	}
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, tapThenUntap: tapFirst, bolster: bolsters, craft: crafts, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
+	// The all-player damage punisher's unless election (Browbeat and its
+	// siblings): XMage offers its chooseUse to every payer even after one
+	// accepts, so the answers expand to one boolean per seat (unless_payers.go).
+	allPlayerUnless := unlessAllPlayerDecisions(reg, sc, res.Snapshots, ds)
+	seats := sc.Players
+	if seats < 1 {
+		seats = 2
+	}
+	// A chooseUse whose yes branch moves the looked-at window to the library
+	// bottom asks a follow-up card order XMage poses and gorge does not
+	// (choose_dialog_order.go, Petals of Insight).
+	chooseUseOrders := chooseUseBottomOrders(reg, sc, res.Snapshots, ds)
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, allPlayerUnless: allPlayerUnless, seats: seats, chooseUseOrders: chooseUseOrders, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, tapThenUntap: tapFirst, bolster: bolsters, craft: crafts, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that

@@ -83,6 +83,7 @@ func choiceDialogLabels(f *cards.Face) []string {
 //	InspiritFlagshipVessel   "Put a +1/+1 counter or two charge counters on ...?"     ("one +1/+1 counter"/"two charge counters")
 //	LiarsPendulum            "Is the chosen card (...) in <controller>'s hand?"       (guess in / guess not in)
 //	PalantirOfOrthanc        "Have <controller> draw a card?"                         (draw / mill and lose life)
+//	PetalsOfInsight          "Put the cards on the bottom of your library in any order?" (bottom and return / draw three)
 //	MultiformWonder          "Should <card> get -2/+2 instead of +2/-2?"              (+2/-2 / -2/+2) -- TRUE = -2/+2 = the SECOND label; added at XMAGE_REF 7aeb547a86
 //	SparkOfCreativity        "Let <card> deal <n> damage to <creature>?"              (deals damage / may play the card) -- added at XMAGE_REF 7aeb547a86
 //	SinProdder               "Put <card> in <controller>'s graveyard?"                (graveyard and damage / to hand)
@@ -109,6 +110,7 @@ var xmageChooseUseFaces = map[string]bool{
 	"liar's pendulum":           true,
 	"multiform wonder":          false, // XMage true = -2/+2 = the second Choices$ label
 	"palantír of orthanc":       true,
+	"petals of insight":         true,
 	"sin prodder":               true,
 	"spark of creativity":       true,
 	"soul echo":                 true,
