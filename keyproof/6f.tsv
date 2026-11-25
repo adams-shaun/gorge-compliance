@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f143c8f-cb5c-4abc-a01b-b6813f5a524c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f143c8f-cb5c-4abc-a01b-b6813f5a524c	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	6d5ab77eb67d	-	-	2026-11-25	xproof
 6f16c3ac-a9b8-47e6-b18b-ae37c74d44a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f16c3ac-a9b8-47e6-b18b-ae37c74d44a0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+6f16c3ac-a9b8-47e6-b18b-ae37c74d44a0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 6f18f41e-df8d-4b59-87cc-ea167823fbda	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pygmy-troll:cast:s1,f:xs:XP:pygmy-troll:cast:s1	-	-	-	5f2128bf97e4	-	d15b20672323	-	-	2026-11-24	xproof
 6f18f41e-df8d-4b59-87cc-ea167823fbda	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:pygmy-troll:f0a0:s1,f:xs:XP:pygmy-troll:f0a0:s1	-	-	-	5f2128bf97e4	-	d15b20672323	-	-	2026-11-24	xproof
 6f18f41e-df8d-4b59-87cc-ea167823fbda	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -70,9 +70,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f554418-9ee6-4a03-b81e-f93d5c70873e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:citizen-s-arrest:f0t0:s1,f:xs:XP:citizen-s-arrest:f0t0:s1	-	-	-	d864b561c9cb	-	44ce30592675	-	-	2026-11-24	xproof
 6f554418-9ee6-4a03-b81e-f93d5c70873e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:citizen-s-arrest:f0t0:s1,f:xs:XP:citizen-s-arrest:f0t0:s1	-	-	-	d864b561c9cb	-	44ce30592675	-	-	2026-11-24	xproof
 6f571092-7244-4223-aa14-f5133cc000d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f571092-7244-4223-aa14-f5133cc000d8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
-6f571092-7244-4223-aa14-f5133cc000d8	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
-6f571092-7244-4223-aa14-f5133cc000d8	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+6f571092-7244-4223-aa14-f5133cc000d8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+6f571092-7244-4223-aa14-f5133cc000d8	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+6f571092-7244-4223-aa14-f5133cc000d8	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 6f5a86bf-caa7-48c9-a59f-b13fb483a9d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f5a86bf-caa7-48c9-a59f-b13fb483a9d4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f5b6cba-3b57-4e6a-afa7-0cb62e5cc7d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
