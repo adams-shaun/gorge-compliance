@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 d7035db0-4bde-4ba3-9028-dd14191c8126	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-archivist:cast:s1,f:xs:XP:elvish-archivist:cast:s1	-	-	-	23b491658465	-	44b6a2736d15	-	-	2026-11-24	xproof
 d7035db0-4bde-4ba3-9028-dd14191c8126	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Elvish Archivist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d7035db0-4bde-4ba3-9028-dd14191c8126	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Elvish Archivist/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d7081ec5-0070-4bc1-97c4-544ac08581ee	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+d7081ec5-0070-4bc1-97c4-544ac08581ee	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 d709f396-021f-49eb-adb5-374aa790eaae	cast	cast-resolve	agreed	-	FX	scen	2	0	Merrow Skyswimmer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 d709f396-021f-49eb-adb5-374aa790eaae	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:merrow-skyswimmer:combat0.attack:s1,f:xs:XP:merrow-skyswimmer:combat0.attack:s1	-	-	-	23c4009444b0	-	c37d89250d5b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d709f396-021f-49eb-adb5-374aa790eaae	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:merrow-skyswimmer:combat0.block:s1,f:xs:XP:merrow-skyswimmer:combat0.block:s1	-	-	-	23c4009444b0	-	c37d89250d5b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -94,7 +94,7 @@ d777e428-cc50-40b1-a241-41576d2575d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:qui
 d777e428-cc50-40b1-a241-41576d2575d1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d777e428-cc50-40b1-a241-41576d2575d1	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:quirion-beastcaller:f0t1:s1,f:xs:XP:quirion-beastcaller:f0t1:s1	-	-	-	ae86f6029288	-	cc3165674ca5	-	-	2026-11-24	xproof
 d7798312-657c-4f4a-9e2d-906284caf50f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d7798312-657c-4f4a-9e2d-906284caf50f	f0/t0	DamageDone/Renown	agreed	-	FX	start	2	0	x:xs:XP:pharika-s-disciple:f0t0:s1,f:xs:XP:pharika-s-disciple:f0t0:s1	-	-	-	fb9d3088f0bf	-	4bbc683935b5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+d7798312-657c-4f4a-9e2d-906284caf50f	f0/t0	DamageDone/Renown	agreed	-	FX	start	2	0	x:xs:XP:pharika-s-disciple:f0t0:s1,f:xs:XP:pharika-s-disciple:f0t0:s1	-	-	-	fb9d3088f0bf	-	4bbc683935b5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 d77d1895-ce02-4302-87c9-649e852fd0ea	cast	cast-resolve	agreed	-	FX	scen	2	0	Captain Kathryn Janeway/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d77d1895-ce02-4302-87c9-649e852fd0ea	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d78654fc-7d90-40ce-9c36-a211424d1a88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -154,9 +154,9 @@ d7dfb4d5-8510-4904-abb7-834ec65d9bf3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tre
 d7dfb4d5-8510-4904-abb7-834ec65d9bf3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:treeguard-duo:f0t0:s2,f:xs:XP:treeguard-duo:f0t0:s2	-	-	-	e07cf3a05ba5	-	18adee9295a6	-	-	2026-11-24	xproof
 d7e127e4-56fd-4116-9c1a-421beab58e5c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 d7e127e4-56fd-4116-9c1a-421beab58e5c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-d7e1d4eb-1d4e-460e-9304-7db9ab50ccb5	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-d7e1d4eb-1d4e-460e-9304-7db9ab50ccb5	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-d7e1d4eb-1d4e-460e-9304-7db9ab50ccb5	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+d7e1d4eb-1d4e-460e-9304-7db9ab50ccb5	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+d7e1d4eb-1d4e-460e-9304-7db9ab50ccb5	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+d7e1d4eb-1d4e-460e-9304-7db9ab50ccb5	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 d7e1d4eb-1d4e-460e-9304-7db9ab50ccb5	land	land	agreed	-	FX	start	2	0	x:xs:XP:nimbus-maze:land:s1,f:xs:XP:nimbus-maze:land:s1	-	-	-	d864b561c9cb	-	6fdff60df2e4	-	-	2026-11-24	xproof
 d7e2b2ba-cb5e-41f1-ad33-baf56c0b72ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d7ebd4a7-c542-469f-8a1c-d48b92fa540a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

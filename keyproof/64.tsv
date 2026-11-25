@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6416dae0-0d40-4d88-b30b-e1a0c8380e78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spire-mangler:f0t0:s1,f:xs:XP:spire-mangler:f0t0:s1	-	-	-	d864b561c9cb	-	d952edd8b1c9	-	-	2026-11-24	xproof
 6416dae0-0d40-4d88-b30b-e1a0c8380e78	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spire-mangler:f0t0:s1,f:xs:XP:spire-mangler:f0t0:s1	-	-	-	d864b561c9cb	-	d952edd8b1c9	-	-	2026-11-24	xproof
 641db975-cf94-44c6-a391-f540a952e0d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savra-queen-of-the-golgari:cast:s1,f:xs:XP:savra-queen-of-the-golgari:cast:s1	-	-	-	77494c1ce129	-	4a670f36fb3e	-	-	2026-11-24	xproof
-641db975-cf94-44c6-a391-f540a952e0d8	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+641db975-cf94-44c6-a391-f540a952e0d8	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 641db975-cf94-44c6-a391-f540a952e0d8	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 6420e8a0-3ef4-4f95-bb6a-12409eef4d48	cast	cast-resolve	agreed	-	FX	scen	2	0	Skullcap Snail/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6420e8a0-3ef4-4f95-bb6a-12409eef4d48	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 642fa01d-025e-44dd-8360-5325e5a28282	cast	cast-resolve	agreed	-	FX	scen	2	0	Dread Summons/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64337db7-a66b-42c5-89fd-c9dfc203c0dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64337db7-a66b-42c5-89fd-c9dfc203c0dd	f0/a0	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:linessa-zephyr-mage:f0a0:s1,f:xs:XP:linessa-zephyr-mage:f0a0:s1	-	-	-	8c0bd19283bb	-	b448b857935e	-	-	2026-11-24	xproof
-64337db7-a66b-42c5-89fd-c9dfc203c0dd	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+64337db7-a66b-42c5-89fd-c9dfc203c0dd	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 64368768-77b9-4f78-adb7-951ca71dfb28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6437867b-a658-4a71-a8a5-0c5a782d1f84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ashes-of-the-fallen:cast:s1,f:xs:XP:ashes-of-the-fallen:cast:s1	-	-	-	64a08ba7d913	-	99b0c84eeda1	-	-	2026-11-24	xproof
 64399663-2c1e-447e-a3ed-c49ebd9f2231	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hoverstone-pilgrim:cast:s1,f:xs:XP:hoverstone-pilgrim:cast:s1	-	-	-	23b491658465	-	c7b4147c0b76	-	-	2026-11-24	xproof
@@ -65,8 +65,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 645a4dee-a4e0-4850-a781-522aa718827f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glistening-oil:f0t0:s1,f:xs:XP:glistening-oil:f0t0:s1	-	-	-	23c4009444b0	-	fdf72ade4fbf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 645a4dee-a4e0-4850-a781-522aa718827f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:glistening-oil:f0t0:s1,f:xs:XP:glistening-oil:f0t0:s1	-	-	-	23c4009444b0	-	fdf72ade4fbf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 645a4dee-a4e0-4850-a781-522aa718827f	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-645a5619-d0b2-4153-aae0-ca2adc6f5e3d	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Species 8472"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-645a5619-d0b2-4153-aae0-ca2adc6f5e3d	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Species 8472"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+645a5619-d0b2-4153-aae0-ca2adc6f5e3d	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Species 8472"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+645a5619-d0b2-4153-aae0-ca2adc6f5e3d	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Species 8472"	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 645ab3c7-ee1d-4dd0-811f-2dc7f7c7e792	cast	cast-resolve	agreed	-	FX	scen	2	0	Grow from the Ashes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 645b5784-a6f7-4cf3-966a-e1a51420b96b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 645b5784-a6f7-4cf3-966a-e1a51420b96b	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 648e4072-b991-46fd-b057-1e807091dcdf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloudskate:f0t0:s1,f:xs:XP:cloudskate:f0t0:s1	-	-	-	3aa6ded33acb	-	1e9053e9a0eb	-	-	2026-11-25	xproof
 648e4072-b991-46fd-b057-1e807091dcdf	f0/t0	Phase/Fading	agreed	-	FX	start	2	0	x:xs:XP:cloudskate:f0t0:s1,f:xs:XP:cloudskate:f0t0:s1	-	-	-	3aa6ded33acb	-	1e9053e9a0eb	-	-	2026-11-25	xproof
 649300e2-c491-435d-92d5-f1b88f0e2e2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-649300e2-c491-435d-92d5-f1b88f0e2e2e	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+649300e2-c491-435d-92d5-f1b88f0e2e2e	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 6493960b-4bbb-4ef0-8efb-abb122b1697d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6494e3c4-5489-44a5-94b6-4ee2d7830896	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boneclad-necromancer:f0t0:s1,f:xs:XP:boneclad-necromancer:f0t0:s1	-	-	-	d864b561c9cb	-	7542e9fc61b7	-	-	2026-11-24	xproof
 6494e3c4-5489-44a5-94b6-4ee2d7830896	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:boneclad-necromancer:f0t0:s1,f:xs:XP:boneclad-necromancer:f0t0:s1	-	-	-	d864b561c9cb	-	7542e9fc61b7	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64a9a6b4-26b5-4d23-be86-85c54e9c4727	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 64aa732c-d939-48c7-b1d6-c73fa1eedb40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64aa732c-d939-48c7-b1d6-c73fa1eedb40	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64ab6dfe-ed87-47ec-afd5-a7f2e7e6bbd2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+64ab6dfe-ed87-47ec-afd5-a7f2e7e6bbd2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 64acb083-a0a3-46ec-9c93-b2ac36878703	cast	cast-resolve	agreed	-	FX	scen	2	0	Water Tribe Rallier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64acb083-a0a3-46ec-9c93-b2ac36878703	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Water Tribe Rallier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64ad5657-78e9-4f34-8877-18c4f51fff9a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glint-horn-buccaneer:cast:s1,f:xs:XP:glint-horn-buccaneer:cast:s1	-	-	-	d864b561c9cb	-	0470d914624b	-	-	2026-11-24	xproof

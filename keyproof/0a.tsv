@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-0a023964-2905-4928-9c3e-dc63e6ebd218	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+0a023964-2905-4928-9c3e-dc63e6ebd218	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 0a023964-2905-4928-9c3e-dc63e6ebd218	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rakdos-carnarium:land:s1,f:xs:XP:rakdos-carnarium:land:s1	-	-	-	16ec2936189a	-	9de3e274c0ff	-	-	2026-11-24	xproof
 0a023964-2905-4928-9c3e-dc63e6ebd218	land	land	agreed	-	FX	start	2	0	x:xs:XP:rakdos-carnarium:land:s1,f:xs:XP:rakdos-carnarium:land:s1	-	-	-	16ec2936189a	-	9de3e274c0ff	-	-	2026-11-24	xproof
 0a029c61-b1de-427b-a8e8-36f3a23f001b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a64b683-7017-44cb-923f-b512fe3886f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a64b683-7017-44cb-923f-b512fe3886f6	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:rustmouth-ogre:f0t0:s1,f:xs:XP:rustmouth-ogre:f0t0:s1	-	-	-	23c4009444b0	-	fce2be720075	-	-	2026-11-25	xproof
 0a661f7a-5d56-4d73-bab7-22bfc5cef22e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a661f7a-5d56-4d73-bab7-22bfc5cef22e	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+0a661f7a-5d56-4d73-bab7-22bfc5cef22e	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 0a66ce8b-af99-411f-8ecb-52a5d2f6af3d	cast	cast-resolve	agreed	-	FX	scen	2	0	Ertha Jo, Frontier Mentor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a66ce8b-af99-411f-8ecb-52a5d2f6af3d	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a66ce8b-af99-411f-8ecb-52a5d2f6af3d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ertha Jo, Frontier Mentor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ad5f4c5-f6d2-4e96-af65-5488d9711113	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ad5f4c5-f6d2-4e96-af65-5488d9711113	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0adcf8d2-6eb9-4679-8ad5-f28e2f4aba39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0adcf8d2-6eb9-4679-8ad5-f28e2f4aba39	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:student-of-ojutai:f0t0:s1,f:xs:XP:student-of-ojutai:f0t0:s1	-	-	-	fb9d3088f0bf	-	48a0544ef1f1	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+0adcf8d2-6eb9-4679-8ad5-f28e2f4aba39	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:student-of-ojutai:f0t0:s1,f:xs:XP:student-of-ojutai:f0t0:s1	-	-	-	fb9d3088f0bf	-	48a0544ef1f1	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 0adede77-5181-4190-8066-4797cefe0189	cast	cast-resolve	agreed	-	FX	scen	2	0	Yenna, Redtooth Regent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0adede77-5181-4190-8066-4797cefe0189	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Yenna, Redtooth Regent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ae0c880-a508-471f-a90b-029c417f6b3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

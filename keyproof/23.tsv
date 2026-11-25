@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23102d8a-3a93-4e83-af5b-401c85ba9dbc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:spikeshell-harrier:f0t0:s2,f:xs:XP:spikeshell-harrier:f0t0:s2	-	-	-	267e485f6204	-	59bc4369e05e	-	-	2026-11-24	xproof
 23102d8a-3a93-4e83-af5b-401c85ba9dbc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:spikeshell-harrier:f0t0:s2,f:xs:XP:spikeshell-harrier:f0t0:s2	-	-	-	267e485f6204	-	59bc4369e05e	-	-	2026-11-24	xproof
 2313a3f9-3eac-4684-a25e-6a6ae445a723	cast	cast-resolve	agreed	-	X	scen	1	0	Veteran Guardmouse/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2313a3f9-3eac-4684-a25e-6a6ae445a723	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:veteran-guardmouse:f0t0:s1,f:xs:XP:veteran-guardmouse:f0t0:s1	-	-	-	fb9d3088f0bf	-	2103f2f6c61d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+2313a3f9-3eac-4684-a25e-6a6ae445a723	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:veteran-guardmouse:f0t0:s1,f:xs:XP:veteran-guardmouse:f0t0:s1	-	-	-	fb9d3088f0bf	-	2103f2f6c61d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 23140c6f-c674-4d13-9b78-bce0ffcb981f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:melek-reforged-researcher:cast:s1,f:xs:XP:melek-reforged-researcher:cast:s1	-	-	-	23b491658465	-	79b105ca9427	-	-	2026-11-24	xproof
 23140c6f-c674-4d13-9b78-bce0ffcb981f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Melek, Reforged Researcher/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23140c6f-c674-4d13-9b78-bce0ffcb981f	static#0.1	static#0.1	agreed	-	X	scen	1	0	Melek, Reforged Researcher/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -197,7 +197,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23db92aa-d4db-49e3-a5bc-7b120e02822f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:shagrat-loot-bearer:f0t0:s1,f:xs:XP:shagrat-loot-bearer:f0t0:s1	-	-	-	ae86f6029288	-	604f0b39e4c2	-	-	2026-11-24	xproof
 23dd6d4a-d933-4328-8d09-75f7908ae347	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23dd895c-92bd-4af0-8b1a-7d76ca49178f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23dd895c-92bd-4af0-8b1a-7d76ca49178f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+23dd895c-92bd-4af0-8b1a-7d76ca49178f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 23e98711-0b3f-446d-abcc-9b0378178feb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23e98711-0b3f-446d-abcc-9b0378178feb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23e98711-0b3f-446d-abcc-9b0378178feb	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
