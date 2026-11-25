@@ -9,9 +9,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2202faf1-5638-46bf-8bf4-91870b669717	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:lightning-spear:f0a0:s1,f:xs:XP:lightning-spear:f0a0:s1	-	-	-	d864b561c9cb	-	ac3d0a7279fe	-	-	2026-11-24	xproof
 2202faf1-5638-46bf-8bf4-91870b669717	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22076484-e9d5-4f33-8cf3-b9b427436b05	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:paladin-s-arms:f0t0:s2,f:xs:XP:paladin-s-arms:f0t0:s2	-	-	-	267e485f6204	-	b5409df51f7f	-	-	2026-11-24	xproof
-22076484-e9d5-4f33-8cf3-b9b427436b05	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:paladin-s-arms:f0a0:s1,f:xs:XP:paladin-s-arms:f0a0:s1	-	-	-	23c4009444b0	-	b5409df51f7f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+22076484-e9d5-4f33-8cf3-b9b427436b05	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:paladin-s-arms:static0.0:s1,f:xs:XP:paladin-s-arms:static0.0:s1	-	-	-	4b8018a80bf0	-	b5409df51f7f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 22076484-e9d5-4f33-8cf3-b9b427436b05	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:paladin-s-arms:f0t0:s2,f:xs:XP:paladin-s-arms:f0t0:s2	-	-	-	267e485f6204	-	b5409df51f7f	-	-	2026-11-24	xproof
-22076484-e9d5-4f33-8cf3-b9b427436b05	static#0.0	static#0.0	agreed	-	X	scen	1	0	Paladin's Arms/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+22076484-e9d5-4f33-8cf3-b9b427436b05	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:paladin-s-arms:static0.0:s1,f:xs:XP:paladin-s-arms:static0.0:s1	-	-	-	4b8018a80bf0	-	b5409df51f7f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 220e3298-1663-4731-b50f-247076e1328b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 220e3298-1663-4731-b50f-247076e1328b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 220e3298-1663-4731-b50f-247076e1328b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

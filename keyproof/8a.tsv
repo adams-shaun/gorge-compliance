@@ -36,9 +36,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a20707f-9764-4236-9aa9-858a2419f012	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:loathsome-curator:cast:s1,f:xs:XP:loathsome-curator:cast:s1	-	-	-	d864b561c9cb	-	27262c105d43	-	-	2026-11-24	xproof
 8a20707f-9764-4236-9aa9-858a2419f012	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:loathsome-curator:cast:s1,f:xs:XP:loathsome-curator:cast:s1	-	-	-	d864b561c9cb	-	27262c105d43	-	-	2026-11-24	xproof
 8a265910-2e10-4e97-88ab-c0cb1a712eb8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cursed-windbreaker:f0t0:s2,f:xs:XP:cursed-windbreaker:f0t0:s2	-	-	-	e07cf3a05ba5	-	84eca2b6ce51	-	-	2026-11-24	xproof
-8a265910-2e10-4e97-88ab-c0cb1a712eb8	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:cursed-windbreaker:f0a0:s1,f:xs:XP:cursed-windbreaker:f0a0:s1	-	-	-	23c4009444b0	-	84eca2b6ce51	-	-	2026-11-25	xproof
+8a265910-2e10-4e97-88ab-c0cb1a712eb8	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:cursed-windbreaker:static0.0:s1,f:xs:XP:cursed-windbreaker:static0.0:s1	-	-	-	4b8018a80bf0	-	84eca2b6ce51	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8a265910-2e10-4e97-88ab-c0cb1a712eb8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cursed-windbreaker:f0t0:s2,f:xs:XP:cursed-windbreaker:f0t0:s2	-	-	-	e07cf3a05ba5	-	84eca2b6ce51	-	-	2026-11-24	xproof
-8a265910-2e10-4e97-88ab-c0cb1a712eb8	static#0.0	static#0.0	agreed	-	X	scen	1	0	Cursed Windbreaker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8a265910-2e10-4e97-88ab-c0cb1a712eb8	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:cursed-windbreaker:static0.0:s1,f:xs:XP:cursed-windbreaker:static0.0:s1	-	-	-	4b8018a80bf0	-	84eca2b6ce51	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8a268636-75d5-4631-8272-8b001f569db5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a2726a4-29b7-4836-bd0a-9c0d914ed915	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a2726a4-29b7-4836-bd0a-9c0d914ed915	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:magma-mine:f0a0:s1,f:xs:XP:magma-mine:f0a0:s1	-	-	-	8c0bd19283bb	-	ea611873536c	-	-	2026-11-24	xproof

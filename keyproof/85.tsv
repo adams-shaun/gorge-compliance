@@ -77,9 +77,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8551a9cf-c54b-42d4-92d6-550f4890a3d7	land	land	agreed	-	FX	start	2	0	x:xs:XP:orzhova-the-church-of-deals:land:s1,f:xs:XP:orzhova-the-church-of-deals:land:s1	-	-	-	77494c1ce129	-	69ae0f5df006	-	-	2026-11-24	xproof
 8551e1df-47eb-419e-8dd2-e96b9a450912	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burrowing-razormaw:cast:s1,f:xs:XP:burrowing-razormaw:cast:s1	-	-	-	ae86f6029288	-	cf2c1c5bba41	-	-	2026-11-24	xproof
 8551e1df-47eb-419e-8dd2-e96b9a450912	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:burrowing-razormaw:f0t0:s1,f:xs:XP:burrowing-razormaw:f0t0:s1	-	-	-	ae86f6029288	-	cf2c1c5bba41	-	-	2026-11-24	xproof
-855318cb-9382-4183-87c7-93bdfac86431	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:robotics-mastery:cast:s1,f:xs:XP:robotics-mastery:cast:s1	-	-	-	23c4009444b0	-	88fd8e70315a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-855318cb-9382-4183-87c7-93bdfac86431	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:robotics-mastery:cast:s1,f:xs:XP:robotics-mastery:cast:s1	-	-	-	23c4009444b0	-	88fd8e70315a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-855318cb-9382-4183-87c7-93bdfac86431	static#0.0	static#0.0	agreed	-	X	scen	1	0	Robotics Mastery/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+855318cb-9382-4183-87c7-93bdfac86431	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:robotics-mastery:static0.0:s1,f:xs:XP:robotics-mastery:static0.0:s1	-	-	-	4b8018a80bf0	-	88fd8e70315a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+855318cb-9382-4183-87c7-93bdfac86431	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:robotics-mastery:static0.0:s1,f:xs:XP:robotics-mastery:static0.0:s1	-	-	-	4b8018a80bf0	-	88fd8e70315a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+855318cb-9382-4183-87c7-93bdfac86431	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:robotics-mastery:static0.0:s1,f:xs:XP:robotics-mastery:static0.0:s1	-	-	-	4b8018a80bf0	-	88fd8e70315a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 855353e2-b686-482a-b987-c6ae456f088c	cast	cast-resolve	agreed	-	X	scen	1	0	Whoosh!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 85573a3d-2993-491a-8f8d-bbdb844fa84e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85573a3d-2993-491a-8f8d-bbdb844fa84e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85e2b073-e953-46f9-a1d4-0dfe030b3751	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shimmer-of-possibility:cast:s1,f:xs:XP:shimmer-of-possibility:cast:s1	-	-	-	d864b561c9cb	-	ff4e711a5c6d	-	-	2026-11-24	xproof
 85e797de-da27-4cd5-8fa4-4aef948988b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85e797de-da27-4cd5-8fa4-4aef948988b2	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-85e797de-da27-4cd5-8fa4-4aef948988b2	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+85e797de-da27-4cd5-8fa4-4aef948988b2	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 85eafa00-51df-4070-9b2d-247457ba3364	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85eafa00-51df-4070-9b2d-247457ba3364	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 85eb890e-a5e1-48f8-b813-e8424d18b28a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:migloz-maze-crusher:cast:s1,f:xs:XP:migloz-maze-crusher:cast:s1	-	-	-	ae86f6029288	-	d10a341b3ea8	-	-	2026-11-24	xproof

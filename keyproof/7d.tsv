@@ -23,9 +23,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d249b16-33ef-463e-9e5d-0b84d434f093	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:breaching-leviathan:cast:s1,f:xs:XP:breaching-leviathan:cast:s1	-	-	-	8c0bd19283bb	-	4349d2d4c104	-	-	2026-11-24	xproof
 7d249b16-33ef-463e-9e5d-0b84d434f093	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:breaching-leviathan:cast:s1,f:xs:XP:breaching-leviathan:cast:s1	-	-	-	8c0bd19283bb	-	4349d2d4c104	-	-	2026-11-24	xproof
 7d27c583-469c-42d7-a547-8c65654e9d95	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:biorganic-carapace:f0t0:s2,f:xs:XP:biorganic-carapace:f0t0:s2	-	-	-	267e485f6204	-	a180020ac422	-	-	2026-11-24	xproof
-7d27c583-469c-42d7-a547-8c65654e9d95	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:biorganic-carapace:f0a0:s1,f:xs:XP:biorganic-carapace:f0a0:s1	-	-	-	23c4009444b0	-	a180020ac422	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7d27c583-469c-42d7-a547-8c65654e9d95	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:biorganic-carapace:static0.0:s1,f:xs:XP:biorganic-carapace:static0.0:s1	-	-	-	4b8018a80bf0	-	a180020ac422	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7d27c583-469c-42d7-a547-8c65654e9d95	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:biorganic-carapace:f0t0:s2,f:xs:XP:biorganic-carapace:f0t0:s2	-	-	-	267e485f6204	-	a180020ac422	-	-	2026-11-24	xproof
-7d27c583-469c-42d7-a547-8c65654e9d95	static#0.0	static#0.0	agreed	-	X	scen	1	0	Biorganic Carapace/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7d27c583-469c-42d7-a547-8c65654e9d95	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:biorganic-carapace:static0.0:s1,f:xs:XP:biorganic-carapace:static0.0:s1	-	-	-	4b8018a80bf0	-	a180020ac422	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7d2a7741-1dff-4fac-92d8-abea24f23f97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:three-tree-scribe:cast:s1,f:xs:XP:three-tree-scribe:cast:s1	-	-	-	23c4009444b0	-	440d192e13f8	-	-	2026-11-25	xproof
 7d2a7741-1dff-4fac-92d8-abea24f23f97	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Three Tree Scribe/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7d306de8-a93b-429b-9436-0501be97dc8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:farfinder:f0t0:s1,f:xs:XP:farfinder:f0t0:s1	-	-	-	ae86f6029288	-	31f06a050d8c	-	-	2026-11-24	xproof
@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7d6e5a88-a7fd-466c-a9f8-5015e3400176	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d6e5a88-a7fd-466c-a9f8-5015e3400176	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d6f6ee4-77c2-4986-91c7-7dee962fc1a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
