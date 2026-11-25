@@ -3990,6 +3990,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 closeCastAskedAgain(getTargets(), source,
                         target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(), target.getSize());
             }
+            // An "up to" (or any-number) ask whose minimum is met and that
+            // already chose at least one scripted target has its list closed
+            // by the script: gorge poses ONE decision for the whole selection
+            // (CR 601.2c), so a further ask is XMage's iteration of the same
+            // ask, not a new decision, and nothing more is scripted for it.
+            // Closing it keeps the lone-candidate rule below (and the base's
+            // AI) from picking on: Riverchurn Monument's "{1}, {T}: Any
+            // number of target players each mill two" scripted p1, and the
+            // re-ask's lone candidate p0 is not gorge's choice (gorge milled
+            // p1 only, XMage both players).
+            if (closeScriptedTargetList(target, source, game)) {
+                return target.getSize() > 0 && target.isChosen(game);
+            }
             if (target.getSize() < target.getMaxNumberOfTargets()) {
                 // A lone legal candidate is not a choice: gorge settles it
                 // without a decision, so no answer is scripted and strict mode
@@ -4003,6 +4016,42 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             return super.chooseTarget(outcome, target, source, game);
+        }
+
+        /**
+         * Whether an "up to" target ask that already chose at least one
+         * scripted target of its own and reads none of its own answers from
+         * the queue is XMage's re-ask of the same selection, and must close
+         * with what it has: the minimum is met (a skip could close it), every
+         * recorded pick is chosen, and no queue entry names a candidate still
+         * open, so nothing the script holds belongs to this ask. An ask that
+         * never chose (size 0) keeps the unscripted rules: a lone candidate is
+         * gorge's silent election and an empty legal set is unscriptable. An
+         * ask with a queued answer of its own -- its next pick, or a closing
+         * skip -- belongs to the base. */
+        private boolean closeScriptedTargetList(mage.target.Target target, Ability source, Game game) {
+            if (target.getMaxNumberOfTargets() <= target.getMinNumberOfTargets()
+                    || target.getSize() == 0
+                    || target.getSize() < target.getMinNumberOfTargets()) {
+                return false;
+            }
+            UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+            java.util.Collection<UUID> possible = target.possibleTargets(abilityControllerId, source, game);
+            if (possible.isEmpty()) {
+                // With no candidate left the ask can add nothing. An optional
+                // ask whose queue front is a skip was NOT declined by the
+                // unscriptable-empty rule (the skip is its own answer) and the
+                // ordinary path must consume it, so leave that one open.
+                return !(!getTargets().isEmpty() && TestPlayer.TARGET_SKIP.equals(getTargets().get(0)));
+            }
+            List<UUID> unchosen = unchosenCandidates(target, possible);
+            if (unchosen.isEmpty()) {
+                // Every candidate is chosen: a queued skip may be this ask's
+                // own closing skip, which the ordinary path honours.
+                return false;
+            }
+            return unscriptedChoice(getTargets(), unchosen, skipCanCloseAsk(target),
+                    (id, answer) -> answerNamesCandidate(game, id, answer));
         }
 
         /** The stack object in the target's own legal set that a queued
