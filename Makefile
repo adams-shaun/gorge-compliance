@@ -100,7 +100,25 @@ GO_TEST_FLAGS ?= -p=2
 # instead of one per token (CR 603.7a: "Sacrifice them" is one instruction). ChandraAcolyteOfFlameTest fails before
 # (Missing CHOICE def ... Triggered list (total 2)) and passes after; the card now matches gorge and Forge at the
 # beginning of the end step (one ability on the stack).
-XMAGE_REF  ?= 98052067d47006cdc887f357dcde286eddc1d5ec
+# 5144fc1304f = 98052067d4 + Wild Shape's layer-4 effect adds the chosen mode's subtype (Turtle, Spider or Elephant)
+# instead of the hardcoded Human, so the target becomes that creature type and loses its printed creature types
+# (CR 205.1a, 613.1d). WildShapeTest checks all three modes; card behaviour changes only for Wild Shape, so the
+# manifests are unchanged.
+# 8ddb51df0c = 98052067d4 + Extraordinary Journey resolves with no targets when X is 0 ("exile up to X target
+# creatures", CR 601.2c, 115.6): XTargetsCountAdjuster leaves the ability's target list empty and the effect read
+# getTargets().get(0), throwing IndexOutOfBoundsException. ExtraordinaryJourneyTest.testXZeroResolvesWithNoTargets
+# fails before (Index 0 out of bounds for length 0) and passes after; card behaviour changes only at X = 0.
+# 11940683b90 = 8ddb51df0c (above) joined with 5144fc1304f (Wild Shape; above): 5144fc1304f and 8ddb51df0c are
+# siblings on 98052067d4 and touch only their own card and test, so the join carries both fork heads (it adds no
+# code of its own). Card behaviour changes only for Wild Shape and at Extraordinary Journey's X = 0, so the
+# manifests are unchanged. Fork branch fix/join-wild-shape-extraordinary-journey.
+# 5cc61aaba0b = 11940683b90 (above) + Thought Collapse and Didn't Say Please counter the spell before its controller
+# mills (CR 608.2c, 701.6a): both milled first, so the countered spell was last in the graveyard.
+# CounterTargetThenMillEffect reads the target's controller, counters, then mills; CounterThenMillOrderTest fails
+# before (countered spell last) and passes after, and the driver replay of xs:XP:thought-collapse:cast:s1/s2 now
+# matches gorge and Forge. Fork branch fix/thought-collapse-counter-first (5566c5c1f4 cherry-picked onto
+# 11940683b90, so the Wild Shape fix stays in the pin).
+XMAGE_REF  ?= 5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -747,7 +765,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
 # 6fcacdc21814 = oracle/fpin-1125-join9: 1b593040f66 (empty hidden-origin search + order to Hand + setup Room locked + offered; above) joined with
 # a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
-FORGE_ORACLE_REF ?= 6fcacdc21814855e7cec9a02e58db563ec77beab
+# b0ddb8556a = d6e26fd04306 plus the empty Optional$ ChangeTargets confirm (xproof cluster xpt-bf9a34cd: Redirect on Reach
+# Through Mists, a targetless spell, still makes Forge ask "Do you want to change targets?" while gorge's effChangeTargets
+# skips a declaration with no old targets and logs no decision, CR 115.7): ScriptedController.emptyChangeTargetsConfirm
+# answers no, noted as "empty change targets confirm", only when no yes/no is queued and no subject spell or subability holds
+# a target; a targeted subject still takes the queued answer and keeps the strict miss when none was logged.
+# 019d50429f = b0ddb8556a plus the targeted ChangeTargets retarget pick (CR 115.7): a subject that DOES hold a target logs a
+# gorge choose_n marked retarget, so DecisionQueue.Decision reads the marker, ScriptedController.retargetConfirm answers the
+# optional confirm from it (an empty pick declines and is consumed; picks answer yes and stay for the new-target ask), and
+# StepMachine.retargetTargets applies the pick to the declaration. ChangeTargetsConfirmTest (fixtures/changetargets) fails
+# before it with the exact miss; scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) runs it. Driver-only.
+# 53059b9bbf2 = oracle/fpin-1125-join10: 6fcacdc21814 (join9; above) joined with 019d50429f (the ChangeTargets accept/retarget
+# fix; above); driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 53059b9bbf2d85b11f810f54699145b731665a8b
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

@@ -164,7 +164,16 @@ type filterAlt struct {
 	// token is 1 when the alternative requires a token, -1 when it requires a
 	// non-token card (a carrier is a card), 0 when it does not say.
 	token int
-	known bool
+	// tapped is 1 when the alternative requires a tapped permanent, -1 when it
+	// requires an untapped one, 0 when it says nothing. Tapped is the state of
+	// a permanent on the battlefield, not a property of a face, so only a
+	// reader that knows the placed object's state enables it.
+	tapped int
+	known  bool
+	// history is the first game-history property ("wasDealtDamageThisTurn")
+	// the alternative carries: the engine reads it, and nothing has happened
+	// yet at the start's step, so no placed object can meet it.
+	history string
 	// counters are the counters every object the alternative matches must
 	// carry ("counters_GE1_P1P1"): a gate the start meets by placing them.
 	counters []counterGate
@@ -205,8 +214,18 @@ func parseCounterGate(s string) (counterGate, bool) {
 }
 
 // matches is test plus the token requirement: a token maker's token passes
-// isToken true, every placed card passes false.
+// isToken true, every placed card passes false. A tapped/untapped requirement
+// is battlefield state a face alone cannot answer, so it does not match here;
+// matchesState is for a caller that has placed the object.
 func (a filterAlt) matches(f *cards.Face, isToken bool) bool {
+	return a.matchesState(f, isToken, false) && a.tapped == 0
+}
+
+// matchesState is matches with the placed object's tapped state.
+func (a filterAlt) matchesState(f *cards.Face, isToken, tapped bool) bool {
+	if a.tapped > 0 && !tapped || a.tapped < 0 && tapped {
+		return false
+	}
 	return (a.token <= 0 || isToken) && (a.token >= 0 || !isToken) && a.test(f)
 }
 
@@ -262,6 +281,13 @@ func compare(prop string) (stat string, test func(int) bool, ok bool) {
 	return "", nil, false
 }
 
+// historyProp reports whether a filter property words a this-turn event
+// ("wasDealtDamageThisTurn", "dealtDamageToYouThisTurn", "blockedThisTurn"):
+// the start's step is turn 1's precombat main with nothing yet happened, so
+// the engine's reading of it is false for every object. ThisTurnEntered, a
+// prefix, is different (a placed permanent may count) and is not one.
+func historyProp(p string) bool { return strings.HasSuffix(p, "ThisTurn") }
+
 // typeWord reports whether w reads as a type word (Creature, Dragon, Legendary):
 // capitalised letters and hyphens only.
 func typeWord(w string) bool {
@@ -277,17 +303,23 @@ func typeWord(w string) bool {
 }
 
 // parseFilter reads a ValidCard filter into its alternatives. A counter gate
-// ("counters_GE1_P1P1") and a library-top marker ("TopLibrary") are not
-// understood here: a caller that places no counters and no card on top of the
-// library would pick a carrier that does not meet the filter, so the
-// alternative stays unknown. The static start, which does both, reads the
-// filter with parseFilterStatic.
-func parseFilter(s string) []filterAlt { return parseFilterCounters(s, false, false) }
+// ("counters_GE1_P1P1"), a library-top marker ("TopLibrary") and a battlefield
+// state ("tapped"/"untapped") are not understood here: a caller that places no
+// counters, no card on top of the library and no permanent of known state
+// would pick a carrier that does not meet the filter, so the alternative stays
+// unknown. The static start reads the first two with parseFilterStatic, and a
+// focus target the start places reads its state with parseFilterPlaced.
+func parseFilter(s string) []filterAlt { return parseFilterCounters(s, false, false, false) }
 
 // parseFilterStatic is parseFilter for the static start: it places counters and
 // may put the affected card on top of the library, so both markers are
 // understood.
-func parseFilterStatic(s string) []filterAlt { return parseFilterCounters(s, true, true) }
+func parseFilterStatic(s string) []filterAlt { return parseFilterCounters(s, true, true, false) }
+
+// parseFilterPlaced is parseFilter for a target the start places on the
+// battlefield: whether the placed permanent is tapped is then known from
+// StartSeat.Tapped, so the property is read rather than left unknown.
+func parseFilterPlaced(s string) []filterAlt { return parseFilterCounters(s, false, false, true) }
 
 // typeWordAny is a filter test any of the given type words (or creature
 // types) satisfies.
@@ -331,7 +363,7 @@ func pinMatches(p string) bool {
 	return len(effects.UnknownPredicates("Card."+p)) == 0
 }
 
-func parseFilterCounters(s string, countersOK, topLibraryOK bool) []filterAlt {
+func parseFilterCounters(s string, countersOK, topLibraryOK, tappedOK bool) []filterAlt {
 	var out []filterAlt
 	for _, raw := range strings.Split(s, ",") {
 		raw = strings.TrimSpace(raw)
@@ -369,6 +401,20 @@ func parseFilterCounters(s string, countersOK, topLibraryOK bool) []filterAlt {
 					continue
 				case "inZoneBattlefield":
 					continue // a placed carrier is on the battlefield
+				case "tapped":
+					if !tappedOK {
+						a.known = false
+					} else {
+						a.tapped = 1
+					}
+					continue
+				case "untapped":
+					if !tappedOK {
+						a.known = false
+					} else {
+						a.tapped = -1
+					}
+					continue
 				case "TopLibrary":
 					// only the static start places the affected card there
 					if !topLibraryOK {
@@ -451,6 +497,9 @@ func parseFilterCounters(s string, countersOK, topLibraryOK bool) []filterAlt {
 					continue
 				}
 				a.known = false
+				if a.history == "" && historyProp(p) {
+					a.history = p
+				}
 			}
 		}
 		a.test = func(f *cards.Face) bool {
@@ -752,4 +801,204 @@ func castCarrier(reg *cards.Registry, s *StartSeat, name string) {
 	cost := c.Faces[0].ManaCost
 	s.Hand = append(s.Hand, name)
 	s.Battlefield = append(s.Battlefield, landsFor(splitCost(cost), basicFor(cost))...)
+}
+
+// baitPool is the bait candidates beyond the inert carrier pool, built once:
+// activation, the permanent faces whose activated ability a bait seat can
+// take (a stack target that is an activated ability), and targeted, the
+// instant faces whose one ability has exactly one battlefield target a placed
+// permanent can meet (a Spell.singleTarget stack target).
+type baitPool struct {
+	activation []*cards.Face
+	targeted   []*cards.Face
+}
+
+// baitPools holds each registry's bait pool.
+var baitPools sync.Map // *cards.Registry -> *baitPool
+
+// baitPoolOf is reg's bait pool, ranked like fixtureLess so the pick is
+// deterministic.
+func baitPoolOf(reg *cards.Registry, b *certdeck.Builder) *baitPool {
+	if v, ok := baitPools.Load(reg); ok {
+		return v.(*baitPool)
+	}
+	pool := &baitPool{}
+	for _, c := range reg.AllCards() {
+		if len(c.Faces) != 1 || !b.Playable(c) {
+			continue
+		}
+		f := c.Faces[0]
+		if f.IsPermanent() && !f.IsLand() && FieldBlock(f) == "" && !deadOnArrival(f) &&
+			len(f.Triggers)+len(f.Statics)+len(f.Repls) == 0 && evergreenOnly(f) && activationAbilitiesOK(f) {
+			pool.activation = append(pool.activation, f)
+		}
+		if f.IsInstant() && targetedCastCarrier(f) {
+			pool.targeted = append(pool.targeted, f)
+		}
+	}
+	sort.SliceStable(pool.activation, func(i, j int) bool { return fixtureLess(pool.activation[i], pool.activation[j]) })
+	sort.SliceStable(pool.targeted, func(i, j int) bool { return fixtureLess(pool.targeted[i], pool.targeted[j]) })
+	baitPools.Store(reg, pool)
+	return pool
+}
+
+// activationAbilitiesOK reports whether f has an activated ability a bait
+// activation can take, and no other one it could not (the engine offers the
+// source's ability options in face order, so any one of them may be the bait):
+// every non-mana activated ability must be one.
+func activationAbilitiesOK(f *cards.Face) bool {
+	n := 0
+	for _, sa := range f.Abilities {
+		if cards.IsManaAbilitySA(sa) {
+			continue
+		}
+		if !activationOK(sa) {
+			return false
+		}
+		n++
+	}
+	return n > 0
+}
+
+// activationOK is whether sa is an activated ability a bait activation can
+// take: not a mana ability (a mana ability never uses the stack, so there
+// would be nothing to target), no target of its own, and an activation the
+// bait seat can pay and take at turn 1's first main priority from the other
+// seat (no sorcery-speed or gated activation, a cost of mana, tap, a
+// sacrifice or paid life only).
+func activationOK(sa *cards.SA) bool {
+	if cards.IsManaAbilitySA(sa) {
+		return false
+	}
+	p := sa.Params
+	if p["ValidTgts"] != "" || p["TargetType"] != "" || p["TargetValidTargeting"] != "" ||
+		p["Optional"] != "" || p["MayChooseTarget"] != "" || p["TargetMin"] == "0" {
+		return false
+	}
+	for _, k := range []string{"SorcerySpeed", "Condition", "ConditionCheckSVar", "Phase", "TurnLimit"} {
+		if p[k] != "" {
+			return false
+		}
+	}
+	if v := p["Activator"]; v != "" && v != "You" && v != "Any" {
+		return false
+	}
+	if v := p["Cost"]; v != "" {
+		mana, why := costTokens(v)
+		if why != "" {
+			return false
+		}
+		for _, tok := range mana {
+			if tok == "X" || tok == "S" || tok == "C" {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+// baitAbilityOf is f's first non-mana activated ability, the one the engine
+// offers first and a bait activation takes, or nil.
+func baitAbilityOf(f *cards.Face) *cards.SA {
+	for _, sa := range f.Abilities {
+		if !cards.IsManaAbilitySA(sa) {
+			return sa
+		}
+	}
+	return nil
+}
+
+// targetedCastCarrier is whether f is an instant a bait seat can cast as a
+// spell with a single target: one ability with exactly one required target on
+// the battlefield (no zone, no TargetType, no TargetValidTargeting), a mana
+// cost of basic-land tokens only, no keyword, no alternate cost, and only
+// numeric effect amounts (no SVar-driven one the start cannot size). It is
+// cast from a hand, so FieldBlock (which reads battlefield placement) does
+// not gate it.
+func targetedCastCarrier(f *cards.Face) bool {
+	for _, tok := range splitCost(f.ManaCost) {
+		if !manaTokenRE.MatchString(tok) || tok == "X" || tok == "S" || tok == "C" {
+			return false
+		}
+	}
+	if len(f.Triggers)+len(f.Statics)+len(f.Repls) > 0 || len(f.Keywords) > 0 {
+		return false
+	}
+	if len(f.Abilities) != 1 {
+		return false
+	}
+	sa := f.Abilities[0]
+	if sa.Sub != nil || sa.API == "Charm" {
+		return false
+	}
+	p := sa.Params
+	if p["ValidTgts"] == "" || p["TargetType"] != "" || p["TargetValidTargeting"] != "" ||
+		p["Cost"] != "" || p["UnlessCost"] != "" || p["Optional"] != "" ||
+		p["MayChooseTarget"] != "" || p["TargetMin"] == "0" || p["Choices"] != "" {
+		return false
+	}
+	if zone := strings.ToLower(p["TgtZone"]); zone != "" && zone != "battlefield" {
+		return false
+	}
+	for _, k := range []string{"NumDmg", "NumCards", "LifeAmount", "NumAtt", "NumDef"} {
+		if v := p[k]; v != "" {
+			if _, err := strconv.Atoi(strings.TrimPrefix(v, "+")); err != nil {
+				return false
+			}
+		}
+	}
+	return true
+}
+
+// baitTgtFor is a permanent the bait spell's one ability can target, and
+// whether it sits on the bait seat's battlefield (false: only the focus
+// seat's meets the filter, "Creature.OppCtrl" from the bait's view). The most
+// inert carrier of the type the filter takes, on the bait seat's side for an
+// unrestricted or YouCtrl alternative (from the bait's own view), on the
+// focus seat's for an OppCtrl one. Only a filter parseFilter reads is placed:
+// an unknown restriction could make the bait's own target illegal in the
+// engine, and a start that cannot place it keeps the refusal.
+func baitTgtFor(reg *cards.Registry, b *certdeck.Builder, card string, sa *cards.SA) (name string, onBaitSeat bool) {
+	for _, raw := range strings.Split(sa.Params["ValidTgts"], ",") {
+		raw = strings.TrimSpace(raw)
+		if raw == "" {
+			continue
+		}
+		n := parseAlt(strings.ToLower(raw))
+		if n.combat || !permanentTarget(reg, raw) {
+			continue
+		}
+		alts := parseFilterPlaced(raw)
+		if len(alts) != 1 || !alts[0].known {
+			continue
+		}
+		a := alts[0]
+		pick := pickCarrier(reg, b, card, func(f *cards.Face) bool {
+			return faceIs(n, f) && FieldBlock(f) == "" && !deadOnArrival(f) && a.matchesState(f, false, false)
+		})
+		if pick != "" {
+			// n.side -1 is "the opponent's" from the bait's own view: the
+			// focus seat, where the target is placed
+			return pick, n.side != -1
+		}
+	}
+	return "", false
+}
+
+// faceIs is the type part of altMet without a side: whether f is the kind of
+// permanent the alternative n asks for.
+func faceIs(n altNeed, f *cards.Face) bool {
+	switch n.typ {
+	case "creature":
+		return f.IsCreature()
+	case "artifact":
+		return f.HasTypeWord("Artifact")
+	case "enchantment":
+		return f.HasTypeWord("Enchantment")
+	case "land":
+		return f.IsLand()
+	case "planeswalker":
+		return f.IsPlaneswalker()
+	}
+	return f.IsPermanent()
 }

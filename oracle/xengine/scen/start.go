@@ -53,6 +53,14 @@ type StartSeat struct {
 	// double-faced card's transformed side), as rules.StartSeat.BackFace.
 	BackFace []string       `json:"back_face,omitempty"`
 	Counters []StartCounter `json:"counters,omitempty"`
+	// PlayerCounters seeds counters on the seat itself, not on a permanent: a
+	// StartCounter with an empty Card. It is the non-mana cost a start spends
+	// before the focus play (PayEnergy<N> and the energy the start holds), in
+	// a sorted slice so the output never depends on a map walk. The pinned
+	// gorge rules.StartSeat gains the same field in the commit xproof's
+	// PayEnergy starts need; cmd/xengine maps it through pincap and refuses the
+	// start until that pin carries the field.
+	PlayerCounters []StartCounter `json:"player_counters,omitempty"`
 	// Attach binds a battlefield Aura of this seat to a bearer of the same
 	// seat (gorge's rules.StartAttach). The Aura is listed in Battlefield too;
 	// placeAttach makes it enter attached, which a start placing a bare Aura
@@ -81,10 +89,30 @@ func (s *StartSeat) Attached(name string) bool {
 	return false
 }
 
+// TappedCopies reports, for each Battlefield entry in order, whether that copy
+// is tapped. Tapped names bind to the first copy of the name not bound yet, as
+// the start file's lowering does (cmd/xengine's startDeck): a repeated name
+// (four Mountains, one tapped to sacrifice) marks one copy, not all of them.
+// A name with no battlefield copy is ignored here; the lowering refuses it.
+func (s *StartSeat) TappedCopies() []bool {
+	flags := make([]bool, len(s.Battlefield))
+	used := make([]bool, len(s.Battlefield))
+	for _, name := range s.Tapped {
+		for i, card := range s.Battlefield {
+			if !used[i] && card == name {
+				used[i], flags[i] = true, true
+				break
+			}
+		}
+	}
+	return flags
+}
+
 // StartCounter puts N counters of Kind on the first battlefield copy of Card
-// not yet bound.
+// not yet bound. Card is empty for PlayerCounters, which puts them on the
+// seat itself, so the field is omitted from that JSON.
 type StartCounter struct {
-	Card string `json:"card"`
+	Card string `json:"card,omitempty"`
 	Kind string `json:"kind"`
 	N    int32  `json:"n"`
 }
@@ -123,6 +151,32 @@ type StartFocus struct {
 	// is the active seat when the bait is no instant (a creature spell is cast
 	// on its controller's main phase).
 	Bait string `json:"bait,omitempty"`
+	// BaitSelf, for a play that targets a spell only the focus seat itself
+	// could have cast ("target creature spell you control"), names the spell
+	// the focus seat casts and holds priority on (CR 117.3a) before its play,
+	// so its own spell is the play's target. The start places it in the focus
+	// seat's hand with the lands its cost takes; the focus seat is already the
+	// active seat, so a creature spell bait is cast in its own main phase.
+	BaitSelf string `json:"baitSelf,omitempty"`
+	// BaitAbility, for a play that targets an activated ability, names the
+	// permanent (placed on the bait seat's battlefield with the lands its
+	// ability cost takes) whose ability the bait seat activates at turn 1's
+	// first main-phase priority before the focus play, so the play's target
+	// is on the stack (CR 115.1a). A cast bait cannot serve it: nothing is
+	// cast, the opponent has to activate.
+	BaitAbility string `json:"baitAbility,omitempty"`
+	// BaitAbilitySelf is whether the BaitAbility permanent sits on the focus
+	// seat's battlefield and the focus seat itself activates it (its copy- or
+	// counter-ability play targets only an ability it controls:
+	// "Activated.YouCtrl", Lithoform Engine).
+	BaitAbilitySelf bool `json:"baitAbilitySelf,omitempty"`
+	// BaitTarget names the permanent the bait spell targets at its cast, when
+	// the bait spell itself has a target (a Spell.singleTarget focus play:
+	// "target spell with a single target" is met only by a targeted bait).
+	// The start places it on the bait seat's battlefield, or on the focus
+	// seat's when the bait's filter names an opponent-controlled permanent,
+	// and the bait seat names it as the bait spell's target.
+	BaitTarget string `json:"baitTarget,omitempty"`
 	// Attack and Block are the scripted combat the focus play waits for: the
 	// active seat attacks with exactly Attack, the defending seat blocks it
 	// with exactly Block (no blocks when "" while Attack is set), and only

@@ -8,6 +8,7 @@ import (
 	"sync"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
@@ -44,9 +45,10 @@ func phaseSeat(vp string) (seat int, why string) {
 //     the DSK Survivors) is met by the card attacking (focus attack), which
 //     taps it before the second main phase;
 //   - a step before it (upkeep, draw, the first main phase) cannot be reached
-//     from a placed card (the lowering refuses a battlefield upkeep or draw
-//     trigger at the cut, which the setup drive would fire a second time), so
-//     the card is cast from hand on turn 1 with exactly its mana, and the game
+//     from a placed card: the setup drive would fire the card's own phase
+//     trigger before the focus step (Span declines an optional one, so it would
+//     not fire the key, and a mandatory one refuses the span outright), so the
+//     card is cast from hand on turn 1 with exactly its mana, and the game
 //     runs to the named player's next such step: turn 3 for You, turn 2 for an
 //     opponent or any player.
 func phaseStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
@@ -81,9 +83,10 @@ func phaseStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 		f.Active, f.MaxTurns = 0, 1
 		f.Focus = &StartFocus{Seat: seatPtr(0), Card: card, Kind: "attack"}
 	case late && upkeepOrDraw(face):
-		// The card's own upkeep or draw trigger would refuse a battlefield
-		// placement at the cut (lower.phaseTriggered): cast it on turn 1, before
-		// the step.
+		// The card's own upkeep or draw trigger would fire on the setup drive
+		// before the focus step (a mandatory one refuses the span; Span can only
+		// decline an optional one). Cast it on turn 1, after that upkeep, so the
+		// trigger cannot fire before the step the key names.
 		if seat == 1 {
 			return "no-generator:trigger:Phase:upkeep-card"
 		}
@@ -306,20 +309,11 @@ func selfOrYourCreature(trig *cards.Trigger) bool {
 	return p == "Creature.YouCtrl+tapped" || p == "Creature.tapped+YouCtrl"
 }
 
-// upkeepOrDraw reports a beginning-of-upkeep or draw-step trigger on face (the
-// lowering's phaseTriggered, read from the card).
-func upkeepOrDraw(face *cards.Face) bool {
-	for _, t := range face.Triggers {
-		if !strings.EqualFold(t.Mode, "Phase") {
-			continue
-		}
-		ph := strings.ToLower(t.Params["Phase"])
-		if strings.Contains(ph, "upkeep") || strings.Contains(ph, "draw") {
-			return true
-		}
-	}
-	return false
-}
+// upkeepOrDraw reports a beginning-of-upkeep or draw-step trigger on face. It
+// is lower.PhaseTriggeredFace, the lowering gate's own predicate, so the
+// generator cannot place a permanent the gate would refuse for a reason the
+// two disagree about.
+func upkeepOrDraw(face *cards.Face) bool { return lower.PhaseTriggeredFace(face) }
 
 func seatPtr(n int) *int { return &n }
 

@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"os"
 	"path/filepath"
+	"reflect"
 	"slices"
 	"sort"
 	"strings"
@@ -14,6 +15,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/scen"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -268,6 +270,109 @@ func TestStartTokenIsExercised(t *testing.T) {
 				return nil
 			}); err != nil {
 				t.Fatal(err)
+			}
+		})
+	}
+}
+
+// TestStartPlayerCounter: a start file's player_counters are read strictly
+// (no card, only a counter kind the engines track, n >= 1), folded into a
+// sorted slice, and mapped to rules.StartSeat.PlayerCounters through the pin
+// capability. The current pin has no such field; the seam proves the mapping
+// path, and a start on a pin without the field is refused loudly instead of
+// silently playing with no energy.
+func TestStartPlayerCounter(t *testing.T) {
+	dir := t.TempDir()
+	p := filepath.Join(dir, "start.json")
+	body := `{"format":"xproof-start-1","card":"Aethersquall Ancient","key":"f0/a0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"battlefield":["Aethersquall Ancient"],"player_counters":[{"kind":"ENERGY","n":8}]},"p1":{}},` +
+		`"filler":"basics","seeds":1}`
+	if err := os.WriteFile(p, []byte(body), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	f, err := readStartFile(p)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []startCounter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(f.Setup.P0.PlayerCounters, want) {
+		t.Fatalf("p0 player counters %+v, want %+v", f.Setup.P0.PlayerCounters, want)
+	}
+	cs, err := playerCountersOf(f.Setup.P0.PlayerCounters)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []pincap.Counter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(cs, want) {
+		t.Fatalf("seat 0 player counters %+v, want %+v", cs, want)
+	}
+	// A repeat of one kind is folded and the slice is sorted by kind, never a
+	// map walk: the same JSON always produces the same item bytes.
+	folded := filepath.Join(dir, "folded.json")
+	foldedBody := strings.Replace(body, `[{"kind":"ENERGY","n":8}]`,
+		`[{"kind":"POISON","n":2},{"kind":"ENERGY","n":3},{"kind":"ENERGY","n":5}]`, 1)
+	if err := os.WriteFile(folded, []byte(foldedBody), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	ff, err := readStartFile(folded)
+	if err != nil {
+		t.Fatal(err)
+	}
+	got, err := playerCountersOf(ff.Setup.P0.PlayerCounters)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if want := []pincap.Counter{{Kind: "ENERGY", N: 8}, {Kind: "POISON", N: 2}}; !reflect.DeepEqual(got, want) {
+		t.Fatalf("folded player counters %+v, want %+v", got, want)
+	}
+	// The native mapping: swap the pincap setter for a recorder, so this test
+	// covers startDeckAt -> rules.StartSeat.PlayerCounters even while the pin
+	// has no such field. Removing the mapping makes this fail.
+	reg := testutil.CorpusRegistry(t)
+	prior := setStartPlayerCounters
+	var mapped []pincap.Counter
+	setStartPlayerCounters = func(ss *rules.StartSeat, cs []pincap.Counter) bool {
+		mapped = append([]pincap.Counter(nil), cs...)
+		return true
+	}
+	t.Cleanup(func() { setStartPlayerCounters = prior })
+	if _, _, err := startDeckAt(reg, "start-p0", 0, f.Setup.P0, f.Setup.P1); err != nil {
+		t.Fatal(err)
+	}
+	if want := []pincap.Counter{{Kind: "ENERGY", N: 8}}; !reflect.DeepEqual(mapped, want) {
+		t.Fatalf("mapped player counters %+v, want %+v", mapped, want)
+	}
+	// A seat with none does not call the setter at all.
+	mapped = nil
+	if _, _, err := startDeckAt(reg, "start-p0", 0, startSeat{Battlefield: []string{"Plains"}}, startSeat{}); err != nil {
+		t.Fatal(err)
+	}
+	if mapped != nil {
+		t.Errorf("seat with no player counters called the setter with %+v", mapped)
+	}
+	// At a pin without the native field, a start that names counters is an
+	// error, not a silently unaffordable focus play written as
+	// start-not-exercised far from the cause.
+	setStartPlayerCounters = prior
+	if pincap.PlayerCounters() {
+		t.Skip("the pin now has rules.StartSeat.PlayerCounters; the pre-pin refusal no longer applies")
+	}
+	if _, _, err := startDeckAt(reg, "start-p0", 0, f.Setup.P0, f.Setup.P1); err == nil ||
+		!strings.Contains(err.Error(), "rules.StartSeat.PlayerCounters") {
+		t.Fatalf("pre-pin start with counters: err %v, want a rules.StartSeat.PlayerCounters refusal", err)
+	}
+	// A card name, an untracked kind and a non-positive amount are refused.
+	for _, tc := range []struct{ name, counters, want string }{
+		{"card", `[{"card":"Aethersquall Ancient","kind":"ENERGY","n":8}]`, "goes on the seat"},
+		{"kind", `[{"kind":"CHARGE","n":1}]`, "not ENERGY, POISON or EXPERIENCE"},
+		{"zero", `[{"kind":"ENERGY","n":0}]`, "want >= 1"},
+	} {
+		t.Run("refuse/"+tc.name, func(t *testing.T) {
+			bad := filepath.Join(dir, tc.name+".json")
+			b := strings.Replace(body, `[{"kind":"ENERGY","n":8}]`, tc.counters, 1)
+			if err := os.WriteFile(bad, []byte(b), 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if _, err := readStartFile(bad); err == nil || !strings.Contains(err.Error(), tc.want) {
+				t.Errorf("player counters %s: err %v, want %q", tc.counters, err, tc.want)
 			}
 		})
 	}
@@ -579,8 +684,8 @@ func TestStartHybridCostIsExercised(t *testing.T) {
 }
 
 // startIsExercised generates the start file for card's key, plays it, and
-// fails when play refuses it as start-not-exercised or writes no item; it
-// returns the items written.
+// fails when play refuses it as start-not-exercised or writes fewer items than
+// the start's seeds; it returns the items written.
 func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, card, key string) []oraclegen.Item {
 	t.Helper()
 	res, err := scen.Generate(reg, b, card, key, scen.Options{Prefer: "start"})
@@ -601,8 +706,10 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 			refused = append(refused, string(b))
 		}
 	}
-	if len(items) == 0 {
-		t.Errorf("no item written (lowering %v; start %s)", refused, raw)
+	// One item per seed is the generator's contract: a seed that lowers to no
+	// item leaves the key unproven there even when the other seed writes one.
+	if len(items) != res.Start.Seeds {
+		t.Errorf("%d item(s), want %d (one per seed): lowering %v (start %s)", len(items), res.Start.Seeds, refused, raw)
 	}
 	return items
 }
@@ -868,6 +975,24 @@ func TestStartStackTargetIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartStackTargetIncidentalUpkeepIsExercised: a bait start still lowers
+// when the only beginning-of-upkeep trigger is incidental to the focus play.
+// Wizard's Retort needs a Wizard, and certdeck's first pick (Drifter il-Dal)
+// has an upkeep trigger, so the generator must skip it for the battlefield;
+// Lilting Refrain is the focus card itself, and the scenario replay walks the
+// same turn-1 upkeep the live start did, so its optional trigger does not
+// refuse the span.
+func TestStartStackTargetIncidentalUpkeepIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Wizard's Retort", "cast"},
+		{"Lilting Refrain", "f0/a0"},
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
 // TestStartStackTargetCostIsExercised: an alternate additional cost
 // ("behold a Jace or pay {1}", "tap an artifact or pay {1}") is paid in
 // addition to the mana cost, and the generated start placed only the printed
@@ -893,41 +1018,109 @@ func TestStartStackTargetCostIsExercised(t *testing.T) {
 // (TargetValidTargeting: the first bait was an inert Reach Through Mists no
 // such spell can be cast against), Ring of Immortals (an ability that targets a
 // spell), Admiral's Order and Aerial Assault (the brief's needs-target
-// refusals), and the alternate-additional-cost cards.
+// refusals), the alternate-additional-cost cards, and the residual bait forms:
+// an activated-ability target (Bind, Squelch, Interdict), a
+// Spell.singleTarget target (Divert, Deflection, Misdirection), a
+// you-control stack target the focus seat meets with its own held pre-cast
+// (Double Major, Increasing Vengeance), and a focus-seat ability target whose
+// bait's lands must not consume the focus ability's colour (Weaver of
+// Harmony).
 var stackTargetHardCards = []string{
 	"Remove Soul", "Meddle", "Admiral's Order", "Aerial Assault",
 	"Keep Safe", "Outwit", "Intervene", "Avoid Fate", "Hindering Light", "Confound",
 	"Psychic Rebuttal", "Turn Aside", "Rebuff the Wicked", "Not of This World",
 	"Teferi's Response", "Ring of Immortals",
 	"Countersculpt", "Disruption Protocol", "Louisoix's Sacrifice", "Wild Unraveling",
+	"Wizard's Retort", "Lilting Refrain", // incidental upkeep triggers on a placed enabler / the focus card
+	"Bind", "Squelch", "Interdict",
+	"Divert", "Deflection", "Misdirection",
+	"Double Major", "Increasing Vengeance",
+	"Weaver of Harmony",
 }
 
-// stackTargetUpkeepCards are stack-target cards whose bait start lowers to no
-// item: an unscripted upkeep trigger refuses the start after its focus play was
-// offered, so they are exempt from the "wrote an item" check below only.
-var stackTargetUpkeepCards = map[string]bool{"Wizard's Retort": true, "Lilting Refrain": true}
+// stackTargetWatchedCards are the stack-target cards whose incidental upkeep
+// trigger once made every bait start lower to no item (Wizard's Retort's
+// certdeck Wizard was Drifter il-Dal, and Lilting Refrain is the focus card).
+// They are no longer exempt: the census requires an item from every bait start
+// and logs each of these keys, so a regression names the card and key.
+var stackTargetWatchedCards = map[string]bool{"Wizard's Retort": true, "Lilting Refrain": true}
 
 // stackTargetCards is every playable card with a face whose script declares a
 // stack target, sorted.
 func stackTargetCards(reg *cards.Registry, b *certdeck.Builder) []string {
+	return cardsWithStackTarget(reg, b, func(spell, ability bool) bool { return spell || ability })
+}
+
+// stackAbilityTargetCards is every playable card with a face whose script
+// declares an activated or triggered ability on the stack. It is the census
+// for the ability-target bait class (Bind, Squelch, Lithoform Engine, Weaver of
+// Harmony): a predicate that only looked for "Spell" left every one of them
+// outside the whole-corpus run.
+func stackAbilityTargetCards(reg *cards.Registry, b *certdeck.Builder) []string {
+	return cardsWithStackTarget(reg, b, func(_, ability bool) bool { return ability })
+}
+
+// stackTargetKinds reads a Forge TargetType value into whether it names a
+// spell (Spell/SpellAbility) or an ability (Activated/Triggered). A suffix on
+// the kind (Activated.singleTarget, Spell.Colorless) does not change the kind.
+func stackTargetKinds(tt string) (spell, ability bool) {
+	for _, tok := range strings.Split(tt, ",") {
+		head, _, _ := strings.Cut(strings.TrimSpace(tok), ".")
+		switch head {
+		case "Spell", "SpellAbility":
+			spell = true
+		case "Activated", "Triggered":
+			ability = true
+		}
+	}
+	return spell, ability
+}
+
+// svarTargetKinds reads one SubAbility$ line for the stack kinds its
+// TargetType or TargetValidTargeting names.
+func svarTargetKinds(v string) (spell, ability bool) {
+	for _, field := range strings.Split(v, "|") {
+		k, val, ok := strings.Cut(field, "$")
+		if !ok {
+			continue
+		}
+		switch strings.TrimSpace(k) {
+		case "TargetType":
+			s, a := stackTargetKinds(val)
+			spell, ability = spell || s, ability || a
+		case "TargetValidTargeting":
+			if strings.TrimSpace(val) != "" {
+				spell = true
+			}
+		}
+	}
+	return spell, ability
+}
+
+// cardsWithStackTarget is every playable card whose abilities or SubAbility
+// lines name a stack target the keep predicate admits, sorted. Both the direct
+// ability Params and the named SVars are read, so an ability reached only by
+// SubAbility$ is not missed.
+func cardsWithStackTarget(reg *cards.Registry, b *certdeck.Builder, keep func(spell, ability bool) bool) []string {
 	var names []string
 	for _, c := range reg.AllCards() {
 		if len(c.Faces) == 0 || !b.Playable(c) {
 			continue
 		}
 		for _, f := range c.Faces {
-			stackTarget := false
+			spell, ability := false, false
 			for _, a := range f.Abilities {
-				if strings.Contains(a.Params["TargetType"], "Spell") || a.Params["TargetValidTargeting"] != "" {
-					stackTarget = true
+				s, ab := stackTargetKinds(a.Params["TargetType"])
+				if a.Params["TargetValidTargeting"] != "" {
+					s = true
 				}
+				spell, ability = spell || s, ability || ab
 			}
 			for _, v := range f.SVars {
-				if strings.Contains(v, "TargetType$") && strings.Contains(v, "Spell") {
-					stackTarget = true
-				}
+				s, ab := svarTargetKinds(v)
+				spell, ability = spell || s, ability || ab
 			}
-			if stackTarget {
+			if keep(spell, ability) {
 				names = append(names, f.Name)
 				break
 			}
@@ -939,8 +1132,8 @@ func stackTargetCards(reg *cards.Registry, b *certdeck.Builder) []string {
 
 // stackTargetCensus generates every key of each card and plays each start that
 // carries a bait: the focus play must be offered on both seeds (no
-// start-not-exercised row), and a bait start must lower to at least one item
-// unless the card is a known upkeep refusal. This is the guard for the class of
+// start-not-exercised row), and a bait start must lower to at least one item.
+// This is the guard for the class of
 // regression where the bait was accepted for a spell the focus play could never
 // target (TargetValidTargeting, a bait cast from the hand against "wasn't cast
 // from hand", a sorcery-speed focus behind the bait): xengine play refused
@@ -966,8 +1159,9 @@ func stackTargetCensus(t *testing.T, reg *cards.Registry, b *certdeck.Builder, n
 				refused++
 				continue
 			}
-			if res.Start.Focus == nil || res.Start.Focus.Bait == "" {
-				noBait++ // a start with no bait (an ability target, or no stack target)
+			if res.Start.Focus == nil || (res.Start.Focus.Bait == "" && res.Start.Focus.BaitSelf == "" &&
+				res.Start.Focus.BaitAbility == "" && res.Start.Focus.BaitTarget == "") {
+				noBait++ // a start with no bait at all (a non-stack key, or no stack target)
 				continue
 			}
 			wrote++
@@ -979,12 +1173,15 @@ func stackTargetCensus(t *testing.T, reg *cards.Registry, b *certdeck.Builder, n
 					t.Errorf("%s %s: %s (start %s)", card, key, reasonStartNotExercised, raw)
 				}
 			}
-			if len(items) == 0 && !stackTargetUpkeepCards[card] {
+			if len(items) != res.Start.Seeds {
 				bad = true
-				t.Errorf("%s %s: a bait start lowered to no item (start %s)", card, key, raw)
+				t.Errorf("%s %s: a bait start wrote %d item(s), want %d (one per seed) (start %s)", card, key, len(items), res.Start.Seeds, raw)
 			}
 			if !bad {
 				exercised++
+				if stackTargetWatchedCards[card] {
+					t.Logf("stack-target census: %s %s exercised (%d item(s))", card, key, len(items))
+				}
 			}
 		}
 	}
@@ -998,6 +1195,18 @@ func TestStartStackTargetHardCardsAreExercised(t *testing.T) {
 	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	stackTargetCensus(t, reg, b, stackTargetHardCards)
+}
+
+// TestStartAbilityTargetCensusIsExercised is the default-run census for the
+// ability-target bait class: every playable card whose script names an
+// Activated or Triggered stack target. The "Spell"-only predicate left this
+// class out of the whole-corpus run, so a generated ability bait that the
+// replay refused (Weaver of Harmony's self-activated bait ate the focus
+// ability's colour) was never gated.
+func TestStartAbilityTargetCensusIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	stackTargetCensus(t, reg, b, stackAbilityTargetCards(reg, b))
 }
 
 // TestStartStackTargetCensusIsExercised is the same census over every
@@ -1213,6 +1422,8 @@ func TestStartFocusTargetIsPlaced(t *testing.T) {
 		{"Remember the Fallen", "cast"},           // Charm choices: creature/artifact card in your graveyard
 		{"Reborn Hope", "cast"},                   // Card.MultiColor+YouCtrl in the graveyard
 		{"Chandra, Acolyte of Flame", "f0/a2"},    // TgtZone$ Graveyard
+		{"Aerial Assault", "cast"},                // Creature.tapped: the target must be placed tapped
+		{"Asphyxiate", "cast"},                    // Creature.untapped: the target must be placed untapped
 	} {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
 	}
@@ -1499,5 +1710,103 @@ func TestStartCombatLineNeverDeclaredIsRefused(t *testing.T) {
 	}
 	if !refused {
 		t.Errorf("a start whose attacker never attacks was not refused as %s", reasonStartNotExercised)
+	}
+}
+
+// TestStartActivationConditionIsMetOrRefused: the activation gates the engine
+// reads when it offers the focus play must either be satisfied by placed
+// state or refuse the start by name. Crater Elemental's Formidable count,
+// Kindly Stranger's Delirium condition, Bloodline Keeper's five-Vampire
+// present gate and the legendary lock on Urza's Ruinous Blast are placed to
+// and the keys fire; Aven Augur's upkeep-only window is refused, never
+// written as a start the play would refuse as start-not-exercised.
+func TestStartActivationConditionIsMetOrRefused(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Crater Elemental", "f0/a1"},                         // CheckSVar$ FormidableTest GE8
+		{"Kindly Stranger // Demon-Possessed Witch", "f0/a0"}, // Activation$ Delirium
+		{"Bloodline Keeper // Lord of Lineage", "f0/a1"},      // IsPresent$ GE5
+		{"Urza's Ruinous Blast", "cast"},                      // legendary sorcery
+		{"Companion of the Trials", "f0/a0"},                  // IsPresent$ Planeswalker.Gideon+YouCtrl, no PresentCompare$
+		{"Tectonic Edge", "f0/a1"},                            // PlayerCountOpponents$HighestValid Land.YouCtrl GE4
+		{"Shadows of the Past", "f0/a0"},                      // four creature cards in the graveyard
+		{"Champions of the Shoal", "cast"},                    // BeholdExile<1/Merfolk>
+		// optional and X additional costs the bot may decline: still starts
+		{"Crashing Wave", "cast"},
+		{"March of Wretched Sorrow", "cast"},
+		{"Explosive Singularity", "cast"},
+		{"Aether Tide", "cast"},
+	} {
+		t.Run(c.card, func(t *testing.T) { startExercisesKey(t, reg, b, c.card, c.key) })
+	}
+	// a gate no placed state can satisfy at turn 1's main refuses by name
+	for _, c := range []struct{ card, key, reason string }{
+		{"Aven Augur", "f0/a0", "start:upkeep-only"},
+		{"Hell's Caretaker", "f0/a0", "start:upkeep-only"},
+		{"Bloodsoaked Champion", "f0/a0", "start:attackers-declared"}, // Raid: Count$AttackersDeclared
+		{"Vengeful Devil", "f0/a0", "start:morbid"},                   // Count$Morbid.1.0
+		{"Serra Avenger", "cast", "start:cantbecast"},                 // a vanilla creature spell with a CantBeCast static
+		{"Ogre Siegebreaker", "f0/a0", "start:target-condition:was-dealt-damage-this-turn"},
+		{"Witch's Mist", "f0/a0", "start:target-condition:was-dealt-damage-this-turn"},
+		{"Sword of the Paruns", "f0/a0", "start:present-count"}, // IsPresent$ Card.EquippedBy, no PresentCompare$
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start != nil || res.Path != scen.PathRefused || res.Reason != c.reason {
+				t.Errorf("path %q reason %q, want refused %q", res.Path, res.Reason, c.reason)
+			}
+		})
+	}
+}
+
+// TestPlayStartPlayerCountersPinRefusesPerID: at a pin without
+// rules.StartSeat.PlayerCounters, the start that names energy is refused per
+// id in the lowering log and the other starts of the directory still play.
+func TestPlayStartPlayerCountersPinRefusesPerID(t *testing.T) {
+	if pincap.PlayerCounters() {
+		t.Skip("the pin now has rules.StartSeat.PlayerCounters; there is nothing to refuse")
+	}
+	reg := testutil.CorpusRegistry(t)
+	dir := t.TempDir()
+	good, err := os.ReadFile("testdata/start/thornvault-forager-f0a2.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, "b-good.json"), good, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	energy := `{"format":"xproof-start-1","card":"Aethersquall Ancient","key":"f0/a0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"battlefield":["Aethersquall Ancient"],"player_counters":[{"kind":"ENERGY","n":8}]},"p1":{}},` +
+		`"filler":"basics","seeds":2}`
+	// Sorts first, so a hard error here would lose b-good.json.
+	if err := os.WriteFile(filepath.Join(dir, "a-energy.json"), []byte(energy), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	out := t.TempDir()
+	if err := playStart(reg, []string{dir}, "XP", out, false); err != nil {
+		t.Fatalf("one pre-pin start aborted the batch: %v", err)
+	}
+	refused := 0
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		if bytes.Contains(b, []byte(reasonStartPlayerCountersPin)) {
+			refused++
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if refused != 2 {
+		t.Errorf("%d refused rows with %q, want 2 (one per seed)", refused, reasonStartPlayerCountersPin)
+	}
+	items := 0
+	if err := readLines(filepath.Join(out, "items.jsonl"), func([]byte) error { items++; return nil }); err != nil {
+		t.Fatal(err)
+	}
+	if items == 0 {
+		t.Error("the other start of the directory wrote no item")
 	}
 }

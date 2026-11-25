@@ -56,6 +56,7 @@ import mage.game.Game;
 import mage.game.GameException;
 import mage.game.turn.Step;
 import mage.game.PutToBattlefieldInfo;
+import mage.game.combat.CombatGroup;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
@@ -93,6 +94,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 /**
  * Replays gorge oracle scenarios (the oracle-scenario schema of gorge's runner, scenarios/oracle) in XMage and
@@ -1290,6 +1292,41 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return !getChoices().isEmpty() && (getChoices().get(0).equals("Yes") || getChoices().get(0).equals("No"));
         }
 
+        /** Whether the ask is UntapLandsEffect's up-to untap shortcut. XMage
+         * offers it before the target ask when every tapped land fits under
+         * the effect's cap: "Include your tapped lands to untap?". Its
+         * chooseUse does not accept aliases, while the target.choose that
+         * follows is makeChoose and does, so the shortcut must not eat
+         * gorge's picks. */
+        static boolean includeTappedLandsAsk(String message) {
+            return "Include your tapped lands to untap?".equals(message);
+        }
+
+        /** Whether {@code answer} names a land the shortcut could untap:
+         * {@code tappedOnly} restricts it to the effect's candidates (tapped
+         * lands the source's controller controls), otherwise any land on the
+         * battlefield, so an already-untapped or foreign pick is recognised
+         * as the no-op it is. */
+        private boolean untapIncludeNames(Game game, Ability source, String answer, boolean tappedOnly) {
+            if (answer == null || game == null) {
+                return false;
+            }
+            UUID controllerId = source != null ? source.getControllerId() : getId();
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+                if (!permanent.isLand(game)) {
+                    continue;
+                }
+                if (tappedOnly && (!permanent.isTapped()
+                        || controllerId == null || !controllerId.equals(permanent.getControllerId()))) {
+                    continue;
+                }
+                if (answerNamesCandidate(game, permanent.getId(), answer)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /** XMage's Phyrexian cost prompts: AbilityImpl.handlePhyrexianCosts
          * ("... (phyrexian cost)?" at CR 601.2b), ManaCostsImpl
          * .handlePhyrexianManaCosts ("...?" while a cost is paid) and
@@ -1518,6 +1555,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // target queue when handOffCardPick has still to move it --
                 // else no, without consuming either queue.
                 return zonePickQueued(message, game);
+            }
+            if (includeTappedLandsAsk(message) && !scriptedYesNoNext()) {
+                // UntapLandsEffect's "Include your tapped lands to untap?"
+                // shortcut (CR 608.2d's up-to untap choice). Answering it here
+                // keeps the alias off the ask's choice dialog, which refuses
+                // them; the effect's own target.choose (makeChoose) accepts
+                // them and consumes gorge's picks and skip.
+                Boolean answer = untapIncludeAnswer(getChoices(),
+                        pick -> untapIncludeNames(game, source, pick, true),
+                        pick -> untapIncludeNames(game, source, pick, false));
+                if (answer != null) {
+                    return answer;
+                }
             }
             Boolean folded = foldedOptionalAnswer(source instanceof mage.abilities.TriggeredAbility
                     && askedBy(mage.abilities.TriggeredAbilityImpl.class, "resolve"), getChoices(), getTargets());
@@ -2075,6 +2125,55 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 askTarget = previousTarget;
                 askSource = previousSource;
             }
+        }
+
+        /**
+         * The answer to UntapLandsEffect's "Include your tapped lands to
+         * untap?" shortcut, or null when a scripted Yes/No heads the choice
+         * queue and TestPlayer must consume it itself. TRUE takes the shortcut
+         * (untap every tapped land, no target ask); FALSE leaves the target
+         * ask to read the choice queue, which is where gorge's up-to picks and
+         * its closing [choice_skip] sit.
+         * <p>
+         * The shortcut is declined whenever the queue already holds this ask's
+         * answer: a [choice_skip], a pick naming a tapped land of the
+         * controller's (a real untap), or -- after pruning it -- a pick naming
+         * a land that is not a candidate (already untapped, or not the
+         * controller's). Such a pick is a no-op, never an invitation to untap
+         * something else (the Peregrine Drake rule), so it is consumed here and
+         * the ask is closed with a skip. With no pick queued for the ask the
+         * shortcut is the rules' only outcome and is taken, leaving the queue
+         * untouched for later asks.
+         */
+        static Boolean untapIncludeAnswer(List<String> choices,
+                Predicate<String> namesTappedLand, Predicate<String> namesLand) {
+            if (choices.isEmpty()) {
+                return Boolean.TRUE;
+            }
+            String head = choices.get(0);
+            if (head.equals("Yes") || head.equals("No")) {
+                return null;
+            }
+            boolean prunedNoop = false;
+            while (!choices.isEmpty()) {
+                String pick = choices.get(0);
+                if (TestPlayer.CHOICE_SKIP.equals(pick) || namesTappedLand.test(pick)) {
+                    return Boolean.FALSE;
+                }
+                if (!namesLand.test(pick)) {
+                    break;
+                }
+                // A land the effect cannot untap: gorge recorded the no-op
+                // pick, so consume it instead of letting the target ask fail
+                // on a non-candidate or the shortcut untap other lands.
+                choices.remove(0);
+                prunedNoop = true;
+            }
+            if (prunedNoop) {
+                choices.add(0, TestPlayer.CHOICE_SKIP);
+                return Boolean.FALSE;
+            }
+            return Boolean.TRUE;
         }
 
         /**
@@ -4134,6 +4233,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 String cp = "step " + i + " (" + op + ")";
                 final PhaseStep reportAs = checkpointStepAs;
                 checkpointStepAs = null;
+                // The pass into a declaration step is a non-priority pending
+                // decision (CR 508.1, 509.1, 117.3a) only when the declaration
+                // has a legal option. With none, gorge records the forced empty
+                // declaration inside the step transition and its checkpoint is
+                // the live priority that follows, which does offer the holder's
+                // options. Covers both the checkpoint moved before the
+                // declaration (reportAs: a recorded declaration proves at least
+                // one option) and one taken in the step when the scenario never
+                // declares (the mm-menon/icetill shape, decided from the game
+                // state at that checkpoint).
+                final PhaseStep declaration = reportAs != null
+                        ? reportAs : declarationCheckpoint(steps, i, seats);
                 // A forced resolution queued during this step (waitStackResolved
                 // override) must settle before the snapshot. Capture the flag
                 // now: the whole action queue is built before execute(), so the
@@ -4152,8 +4263,10 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         g.checkStateAndTriggered();
                     }
                     applyDeclarationStepEnd(reportAs, g);
+                    final boolean declarationPending = declaration != null
+                            && (reportAs != null || declarationHadOptions(declaration, g));
                     JsonObject snap = snapshot(info, g,
-                            handsPriorityOn ? nextPriorityPlayer(g, passSeat) : null);
+                            handsPriorityOn ? nextPriorityPlayer(g, passSeat) : null, declarationPending);
                     if (reportAs != null) {
                         snap.addProperty("step", reportAs.name());
                     }
@@ -4658,6 +4771,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     pl.increaseSpeed(g);
                 }
             }
+            putSeatSetupPlayerCounters(pl, s);
         }
         // Setup state is written without the events the game loop reacts to:
         // addCard's tapped placement and setTapped here flip a tap flag,
@@ -4729,6 +4843,45 @@ public class ScenarioReplay extends CardTestPlayerBase {
         for (Map.Entry<String, JsonElement> byKind : kinds.entrySet()) {
             permanent.getCounters(game).addCounter(
                     xmageCounter(byKind.getKey()).createInstance(byKind.getValue().getAsInt()));
+        }
+    }
+
+    /** Writes a seat's setup "player_counters" as recorded state (each entry is
+     * the COMPLETE count for its kind, applied as a delta): straight into
+     * the PlayerImpl counter set, with no ADD_COUNTERS event and no
+     * COUNTER_ADDED trigger (CR 122.1; energy is a player counter, CR 107.14).
+     * The Player interface exposes only addCounters, which fires both, so the
+     * write goes through the delegate's field the same way
+     * clearSetupEntryHistory reaches turnsOnBattlefield. */
+    static void putSeatSetupPlayerCounters(TestPlayer pl, JsonObject seat) {
+        if (seat.has("player_counters")) {
+            putSetupPlayerCounters(pl, seat.getAsJsonArray("player_counters"));
+        }
+    }
+
+    static void putSetupPlayerCounters(TestPlayer pl, JsonArray counters) {
+        try {
+            java.lang.reflect.Field delegate = TestPlayer.class.getDeclaredField("computerPlayer");
+            delegate.setAccessible(true);
+            Object impl = delegate.get(pl);
+            java.lang.reflect.Field field = mage.players.PlayerImpl.class.getDeclaredField("counters");
+            field.setAccessible(true);
+            mage.counters.Counters cs = (mage.counters.Counters) field.get(impl);
+            for (JsonElement e : counters) {
+                JsonObject pc = e.getAsJsonObject();
+                CounterType type = xmageCounter(pc.get("kind").getAsString());
+                // "n" is the COMPLETE count at the setup checkpoint (also 0),
+                // so move the seat to it: a counter the game already produced
+                // before the cut's main must not be added twice.
+                int delta = pc.get("n").getAsInt() - cs.getCount(type);
+                if (delta > 0) {
+                    cs.addCounter(type.createInstance(delta));
+                } else if (delta < 0) {
+                    cs.removeCounter(type, -delta);
+                }
+            }
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("cannot place setup player counters", e);
         }
     }
 
@@ -7423,17 +7576,86 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return null;
         }
         JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+        PhaseStep at = declarationStep(pos);
+        if (at == PhaseStep.DECLARE_ATTACKERS && declares(steps, index + 1, "attack", "attackers")) {
+            return at;
+        }
+        if (at == PhaseStep.DECLARE_BLOCKERS && declares(steps, index + 1, "block", "blocks")) {
+            return at;
+        }
+        return null;
+    }
+
+    /** The declaration step a recorded pass checkpoint stands at: the pass
+     * entered declare-attackers (or declare-blockers), so the step's
+     * declaration is the pending turn-based action and nobody holds priority
+     * (CR 508.1, 509.1, 117.3a). This holds whether or not the scenario then
+     * records the declaration: declarationAhead moves that checkpoint before
+     * the step, while a scenario that never declares (the xproof mm-menon /
+     * icetill shape) checkpoints in the step itself. Null for any other pass. */
+    static PhaseStep declarationCheckpoint(JsonArray steps, int index) {
+        return declarationCheckpoint(steps, index, seatCount(steps));
+    }
+
+    static PhaseStep declarationCheckpoint(JsonArray steps, int index, int seats) {
+        if (!passEntersNewStep(steps, index, seats)) {
+            return null;
+        }
+        return declarationStep(steps.get(index).getAsJsonObject().getAsJsonObject("xpos"));
+    }
+
+    /** Whether the declaration phase a pass checkpoint stands at had at least
+     * one legal option, so gorge stopped there with a pending non-priority
+     * declaration (CR 508.1, 509.1, 117.3a). The checkpoint is taken at the
+     * step's first priority, after XMage has already declared or skipped: an
+     * attacker or blocker in combat is evidence of a legal option, as is one
+     * still available. No option means gorge recorded the forced empty
+     * declaration inside the step transition and the checkpoint is the live
+     * priority that follows, whose offered set is not empty by rule. */
+    static boolean declarationHadOptions(PhaseStep declaration, Game g) {
+        switch (declaration) {
+            case DECLARE_ATTACKERS: {
+                if (!g.getCombat().getAttackers().isEmpty()) {
+                    return true;
+                }
+                Player active = g.getPlayer(g.getActivePlayerId());
+                return active != null && !active.getAvailableAttackers(g).isEmpty();
+            }
+            case DECLARE_BLOCKERS: {
+                if (!g.getCombat().getBlockers().isEmpty()) {
+                    return true;
+                }
+                if (g.getCombat().getAttackers().isEmpty()) {
+                    return false;
+                }
+                for (CombatGroup group : g.getCombat().getGroups()) {
+                    Player defender = g.getPlayer(group.getDefendingPlayerId());
+                    if (defender == null) {
+                        continue;
+                    }
+                    for (Permanent blocker : defender.getAvailableBlockers(g)) {
+                        if (group.canBlock(blocker, g)) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+            default:
+                return false;
+        }
+    }
+
+    /** The declaration step a pass position names, or null for another step. */
+    private static PhaseStep declarationStep(JsonObject pos) {
         if (!pos.has("step")) {
             return null;
         }
-        String at = pos.get("step").getAsString();
-        if (at.equals("declare-attackers") && declares(steps, index + 1, "attack", "attackers")) {
-            return PhaseStep.DECLARE_ATTACKERS;
+        switch (pos.get("step").getAsString()) {
+            case "declare-attackers": return PhaseStep.DECLARE_ATTACKERS;
+            case "declare-blockers": return PhaseStep.DECLARE_BLOCKERS;
+            default: return null;
         }
-        if (at.equals("declare-blockers") && declares(steps, index + 1, "block", "blocks")) {
-            return PhaseStep.DECLARE_BLOCKERS;
-        }
-        return null;
     }
 
     /** Whether step {@code index} is the op with a non-empty declaration list. */
@@ -9849,15 +10071,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     private JsonObject snapshot(String checkpoint, Game g) {
-        return snapshot(checkpoint, g, null);
+        return snapshot(checkpoint, g, null, false);
     }
 
     /** The checkpoint's snapshot. {@code holderAfterStep}, when a pass
      * checkpoint is captured before XMage moves the priority, names the seat
      * that receives it (CR 117.3d); every other snapshot reads the game's
      * current holder. Both fields that report the holder -- priority and
-     * offered -- read this one value, so they cannot disagree. */
-    private JsonObject snapshot(String checkpoint, Game g, UUID holderAfterStep) {
+     * offered -- read this one value, so they cannot disagree unless the
+     * checkpoint is a pending declaration: {@code declarationPending} marks
+     * the pass into declare-attackers/declare-blockers, where the declaration
+     * is a turn-based action before anyone has priority (CR 508.1, 509.1,
+     * 117.3a). gorge's snapshot offers nothing for a non-priority pending
+     * decision, so this checkpoint does too even though XMage still names the
+     * active player. */
+    private JsonObject snapshot(String checkpoint, Game g, UUID holderAfterStep, boolean declarationPending) {
         lastCheckpointStack = stackNames(g);
         UUID holder = holderAfterStep != null && !g.hasEnded() ? holderAfterStep : g.getPriorityPlayerId();
         JsonObject s = new JsonObject();
@@ -9996,7 +10224,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         s.add("stack", stack);
         if (wantsOffered()) {
-            s.add("offered", offered(g, holder));
+            s.add("offered", declarationPending ? new JsonArray() : offered(g, holder));
         }
         return (JsonObject) gorgeSpellings(s);
     }
