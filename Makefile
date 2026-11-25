@@ -890,7 +890,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # top placement for Forge's successive puts). scripts/forge-oracle-test-hand-library-placement.sh (make forge-driver-tests)
 # replays the find and fails on 686e3f82713 with the exact miss. Driver-only; die-roll code, cardsfolder and tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-hand-library-placement.
-FORGE_ORACLE_REF ?= 9b233511947ecded0e40578ea10986dca99da487
+# 0ca7a220bd0 = oracle/fpin-1125-join18 tip: 3405b168dc3 (join17 above merged with join16 852c41880dd, which is 0aee1572747's
+# Speedball optional ChangeTargets confirm regression test: ChangeTargetsConfirmTest runs six tests at this pin, the sixth
+# speedballTriggerChangeTargetsConfirmConsumesTheRetargetPick) merged with a2954de67aa (no legal new target keeps the targets,
+# ChangeTargetsNoCandidateTest) and 0ca7a220bd0 (the retarget count excludes the current target; review r1, xpt-5b82851f), no
+# textual conflicts (ScriptedController.java: the join16/join17 confirm rule and the no-candidate guard touch different areas).
+# Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# 47dd7358b32 = oracle/fpin-1125-join19: c72762cfadea (join18 tip: 0ca7a220bd0 above plus 53635f189c, the unbound optional-untap
+# election answer, xpt-4782660c) merged with 9b233511947 (the forced Hand->Library put-back, above), no textual conflicts
+# (StepMachine/DecisionQueue vs ScriptedController ChangeTargets touch different areas; merge tree 5d6202a0c7cb). ForcedDieRollTest
+# re-run green on the pin. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 47dd7358b326fbf557acc84dd0ac1bc23df7be99
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

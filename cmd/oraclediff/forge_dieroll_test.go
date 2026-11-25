@@ -224,7 +224,15 @@ func TestForgeRolledDie(t *testing.T) {
 // 6095b085edc (above), no textual conflicts; die-roll code unchanged, ForcedDieRollTest re-run green on the pin.
 // 9b233511947 = 686e3f82713 (above) plus the forced Hand->Library put-back placement order (StepMachine.seedHandLibraryPlacement,
 // DecisionQueue.isLibraryPlacementOrder, ScriptedController zone-change asks); die-roll code unchanged.
-const forgeOracleDieRollRef = "9b233511947ecded0e40578ea10986dca99da487"
+// 0ca7a220bd0 = oracle/fpin-1125-join18 tip: join17 (above) merged with join16 (852c41880dd, the Speedball optional
+// ChangeTargets confirm regression test) and a2954de67aa / 0ca7a220bd0 (the no-legal-new-target guard and its review r1
+// retarget-count fix, ChangeTargetsNoCandidateTest), no textual conflicts; die-roll code unchanged, ForcedDieRollTest
+// re-run green on the pin (run-unit-tests.sh).
+// 47dd7358b32 = oracle/fpin-1125-join19: c72762cfadea (join18 tip: 0ca7a220bd0 above plus 53635f189c, the unbound optional-untap
+// election answer) merged with 9b233511947 (the forced Hand->Library put-back, above), no textual conflicts (StepMachine/
+// DecisionQueue vs ScriptedController ChangeTargets touch different areas; merge tree 5d6202a0c7cb); die-roll code unchanged,
+// ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
+const forgeOracleDieRollRef = "47dd7358b326fbf557acc84dd0ac1bc23df7be99"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
