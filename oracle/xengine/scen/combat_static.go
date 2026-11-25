@@ -173,7 +173,8 @@ func staticKeyStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, car
 	if aff == "" {
 		return "no-generator:static:no-affected"
 	}
-	attached := strings.Contains(aff, "EnchantedBy") || strings.Contains(aff, "EquippedBy")
+	enchanted, equipped := attachedAffected(aff)
+	attached := enchanted != "" || equipped != ""
 	compare, why := staticObserved(st)
 	if why != "" {
 		return why
@@ -184,7 +185,7 @@ func staticKeyStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, car
 	case attached:
 		// an Aura's or Equipment's bearer (gorge folds AffectedDefined into the
 		// Affected filter as EnchantedBy/EquippedBy): the start attaches it
-		if why := attachStart(reg, b, face, card, aff, f); why != "" {
+		if why := attachStart(reg, b, face, card, enchanted, equipped, f); why != "" {
 			return why
 		}
 	case selfStatic(st):
@@ -210,40 +211,109 @@ func placeOn(f *StartFile, s int, name string) {
 	}
 }
 
-// bearerFor is the most inert permanent that meets a filter an Aura enchants or
-// an Equipment equips (the walls first: bearers; else a carrier; else a basic
-// land), and the seat that controls it; "" when none.
-func bearerFor(reg *cards.Registry, b *certdeck.Builder, card, filter, generic string) (string, int) {
-	for _, a := range parseFilter(filter) {
-		if !a.known || a.self {
-			continue
-		}
-		for _, w := range bearers {
-			if c, ok := reg.Lookup(w); ok && len(c.Faces) > 0 && b.Playable(c) && !deadOnArrival(c.Faces[0]) && a.test(c.Faces[0]) {
-				if a.ctrl == ctrlOpp {
-					return w, 1
+// attachedAffected reads an Affected filter for the objects an attachment
+// affects: the alternatives that carry the bare EnchantedBy (an Aura's bearer)
+// or EquippedBy (an Equipment's) property, each with that property removed
+// ("Creature.Human+EnchantedBy" gives "Creature.Human"), joined back into a
+// filter; "" when no alternative carries it. A negated or qualified form
+// ("!EnchantedBy", "EnchantedBy Aura") is not an attached bearer, so it is left
+// to the ordinary Affected path, which refuses a property it does not read.
+func attachedAffected(aff string) (enchanted, equipped string) {
+	var enc, eq []string
+	for _, raw := range strings.Split(aff, ",") {
+		head, props, _ := strings.Cut(strings.TrimSpace(raw), ".")
+		kept := []string{}
+		var isEnc, isEq bool
+		for _, p := range strings.Split(props, "+") {
+			switch p {
+			case "EnchantedBy":
+				isEnc = true
+			case "EquippedBy":
+				isEq = true
+			default:
+				if p != "" {
+					kept = append(kept, p)
 				}
-				return w, 0
+			}
+		}
+		if head == "EnchantedBy" || head == "EquippedBy" {
+			isEnc, isEq, head = head == "EnchantedBy", head == "EquippedBy", "Card"
+		}
+		alt := head
+		if len(kept) > 0 {
+			alt += "." + strings.Join(kept, "+")
+		}
+		switch {
+		case isEnc && !isEq:
+			enc = append(enc, alt)
+		case isEq && !isEnc:
+			eq = append(eq, alt)
+		}
+	}
+	return strings.Join(enc, ","), strings.Join(eq, ",")
+}
+
+// bearerFor is the most inert permanent that meets both what an Aura enchants
+// or an Equipment equips (reach) and what the static affects (affected, the
+// attached property removed), so the static's effect lands on it: the walls
+// first (bearers), else a carrier, else a basic land. It also returns the seat
+// that controls it; "" when none. An alternative holding a property the filter
+// code does not read is skipped, so such a static is refused rather than given
+// a bearer it may not affect.
+func bearerFor(reg *cards.Registry, b *certdeck.Builder, card, reach, affected, generic string) (string, int) {
+	type pair struct {
+		test func(*cards.Face) bool
+		seat int
+	}
+	var pairs []pair
+	for _, r := range parseFilter(reach) {
+		for _, a := range parseFilter(affected) {
+			if !r.known || r.self || !a.known || a.self || (r.ctrl != ctrlAny && a.ctrl != ctrlAny && r.ctrl != a.ctrl) {
+				continue
+			}
+			seat := 0
+			if r.ctrl == ctrlOpp || a.ctrl == ctrlOpp {
+				seat = 1
+			}
+			r, a := r, a
+			pairs = append(pairs, pair{func(f *cards.Face) bool { return r.test(f) && a.test(f) }, seat})
+		}
+	}
+	for _, p := range pairs {
+		for _, w := range bearers {
+			if c, ok := reg.Lookup(w); ok && len(c.Faces) > 0 && b.Playable(c) && !deadOnArrival(c.Faces[0]) && p.test(c.Faces[0]) {
+				return w, p.seat
 			}
 		}
 	}
-	if name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsPermanent); name != "" {
-		return name, s
+	for _, p := range pairs {
+		if n := pickCarrier(reg, b, card, func(f *cards.Face) bool { return f.IsPermanent() && p.test(f) }); n != "" {
+			return n, p.seat
+		}
 	}
-	return landCarrier(reg, filter, generic)
+	for _, p := range pairs {
+		for _, basic := range append([]string{generic}, "Plains", "Island", "Swamp", "Mountain", "Forest") {
+			if c, ok := reg.Lookup(basic); ok && len(c.Faces) > 0 && p.test(c.Faces[0]) {
+				return basic, p.seat
+			}
+		}
+	}
+	return "", 0
 }
 
 // attachStart sets up the bearer of an attached static. An Aura is cast from
 // hand (with exactly the lands its cost takes) on the bearer already on the
 // battlefield: the focus is the cast, whose one legal target is the bearer. An
 // Equipment sits on the battlefield beside its bearer with the lands of its
-// equip cost, and the focus is the equip ability. Anything else attached (a
-// Fortify, a Reconfigure, a Bestow) is refused.
-func attachStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, aff string, f *StartFile) string {
+// equip cost, and the focus is the equip ability. The bearer meets the
+// static's Affected filter as well as the Aura's or equip's target (enchanted
+// and equipped are that filter, the attached property removed). Anything else
+// attached (a Fortify, a Reconfigure, a Bestow) is refused.
+func attachStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, enchanted, equipped string, f *StartFile) string {
 	generic := basicFor(face.ManaCost)
 	p0 := &f.Setup.P0
 	switch {
-	case strings.Contains(aff, "EnchantedBy") && FieldBlock(face) == "aura-unattached":
+	case enchanted != "" && FieldBlock(face) == "aura-unattached":
 		er, ok := enchantReq(face)
 		if !ok {
 			return "no-generator:static:attached"
@@ -253,7 +323,7 @@ func attachStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 				return "no-generator:static:attached"
 			}
 		}
-		bearer, s := bearerFor(reg, b, card, strings.Join(er.raw, ","), generic)
+		bearer, s := bearerFor(reg, b, card, strings.Join(er.raw, ","), enchanted, generic)
 		if bearer == "" {
 			return "no-generator:static:bearer"
 		}
@@ -262,7 +332,7 @@ func attachStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 		placeOn(f, s, bearer)
 		f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "cast"}
 		return ""
-	case strings.Contains(aff, "EquippedBy"):
+	case equipped != "":
 		for i, sa := range face.Abilities {
 			if sa.Params["Keyword"] != "Equip" {
 				continue
@@ -274,7 +344,7 @@ func attachStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 			if plan.zone != zoneBattlefield {
 				return "no-generator:static:attached"
 			}
-			bearer, s := bearerFor(reg, b, card, sa.Params["ValidTgts"], generic)
+			bearer, s := bearerFor(reg, b, card, sa.Params["ValidTgts"], equipped, generic)
 			if bearer == "" {
 				return "no-generator:static:bearer"
 			}

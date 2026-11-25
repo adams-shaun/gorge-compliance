@@ -926,6 +926,49 @@ func TestStartstaticattached(t *testing.T) {
 			{card: "Angel of Vitality", key: "static#0.0", maxTurns: 1, p0BF: []string{"Angel of Vitality"}},
 		})
 	})
+	// the bearer meets the static's Affected filter, not only what the Aura
+	// enchants or the equip targets; a static no bearer can meet, or whose
+	// attachment is negated or qualified, is refused and never a false start
+	t.Run("affected", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		for _, r := range []struct {
+			card, key, bearerType string
+		}{
+			{"Equestrian Skill", "static#0.1", "Human"},
+			{"Bladed Bracers", "static#0.1", ""},
+		} {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil || res.Start == nil {
+				t.Fatalf("%s: %v path %q reason %q", r.card, err, res.Path, res.Reason)
+			}
+			var bearer string
+			for _, n := range append(res.Start.Setup.P0.Battlefield, res.Start.Setup.P1.Battlefield...) {
+				if c, ok := reg.Lookup(n); ok && n != r.card && c.Faces[0].IsCreature() {
+					bearer = n
+				}
+			}
+			c, _ := reg.Lookup(bearer)
+			if bearer == "" || r.bearerType == "" && !(c.Faces[0].HasTypeWord("Human") || c.Faces[0].HasTypeWord("Angel")) ||
+				r.bearerType != "" && !c.Faces[0].HasTypeWord(r.bearerType) {
+				t.Errorf("%s: bearer %q does not meet the static's Affected filter (%v)", r.card, bearer, res.Start.Setup)
+			}
+		}
+	})
+	t.Run("refused", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		for _, r := range []struct{ card, key string }{
+			{"Vampirism", "static#0.1"},        // Creature.YouCtrl+!EnchantedBy: the bearer is excluded
+			{"Face of Divinity", "static#0.1"}, // Creature.EnchantedBy Aura.Other: one Aura only
+		} {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start != nil || res.Path != PathRefused {
+				t.Errorf("%s %s: path %q reason %q, want a refusal", r.card, r.key, res.Path, res.Reason)
+			}
+		}
+	})
 	t.Run("life", func(t *testing.T) {
 		reg, b := testBuilder(t)
 		res, err := Generate(reg, b, "Angel of Vitality", "static#0.0", Options{Prefer: "start"})
