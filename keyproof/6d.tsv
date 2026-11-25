@@ -63,9 +63,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d4472ad-3fbf-4a5d-94de-dfee04fda9c3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:subway-train:f0t0:s2,f:xs:XP:subway-train:f0t0:s2	-	-	-	267e485f6204	-	14e2bb57d72d	-	-	2026-11-24	xproof
 6d44c87b-8945-4c39-b034-7690cf483992	cast	cast-resolve	agreed	-	FX	scen	2	0	Mary Jane Watson/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d44c87b-8945-4c39-b034-7690cf483992	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mary Jane Watson/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0	cast	cast-resolve	agreed	-	X	scen	1	0	Zookeeper Mechan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zookeeper-mechan:cast:s1,f:xs:XP:zookeeper-mechan:cast:s1	-	-	-	23c4009444b0	-	10878bd699d4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Zookeeper Mechan/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Zookeeper Mechan/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:zookeeper-mechan:f0a1:s1,f:xs:XP:zookeeper-mechan:f0a1:s1	-	-	-	23c4009444b0	-	10878bd699d4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d4daf9c-e2f4-4d0e-b2e4-ded04d644b11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d4daf9c-e2f4-4d0e-b2e4-ded04d644b11	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 6d4e558e-9109-4918-a082-fdcbaffd516b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d588e25-7b4d-43c0-b45b-1b0ffb277a78	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d588e25-7b4d-43c0-b45b-1b0ffb277a78	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6d5bb714-1bf4-4f75-9ea8-bdbd18b0425b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Treno, Dark City/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6d5bb714-1bf4-4f75-9ea8-bdbd18b0425b	land	play-land	agreed	-	X	scen	1	0	Treno, Dark City/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6d5bb714-1bf4-4f75-9ea8-bdbd18b0425b	land	land	agreed	-	FX	start	2	0	x:xs:XP:treno-dark-city:land:s1,f:xs:XP:treno-dark-city:land:s1	-	-	-	23c4009444b0	-	7f6e4a931dd7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d5dc34b-3eea-4b77-8db7-94bc30b14c4c	cast	cast-resolve	agreed	-	X	scen	1	0	Rabid Bite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d611800-5b0e-40ca-82a2-5b294a1ebf6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d6ba936-4a15-4c40-aaa6-71605fb732d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -91,8 +91,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d776c7b-4ca1-48cd-88c7-dfbbe5a56a0b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d7be242-a072-40ce-b540-95880506cccd	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 6d7f3139-9776-43bb-ae12-12ed4f5c3a51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:novijen-sages:cast:s1,f:xs:XP:novijen-sages:cast:s1	-	-	-	16ec2936189a	-	a98572aaddcb	-	-	2026-11-24	xproof
-6d7f3139-9776-43bb-ae12-12ed4f5c3a51	f0/a0	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	16ec2936189a	-	-	-	-	2026-11-24	xproof
-6d7f3139-9776-43bb-ae12-12ed4f5c3a51	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+6d7f3139-9776-43bb-ae12-12ed4f5c3a51	f0/a0	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6d7f3139-9776-43bb-ae12-12ed4f5c3a51	f0/t0	ChangesZone/Graft	agreed	-	FX	start	2	0	x:xs:XP:novijen-sages:f0t0:s1,f:xs:XP:novijen-sages:f0t0:s1	-	-	-	23c4009444b0	-	a98572aaddcb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d7f7e6e-5076-4af7-afe3-3e500835c4aa	cast	cast-resolve	agreed	-	X	scen	1	0	Gravelgill Scoundrel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 6d7f7e6e-5076-4af7-afe3-3e500835c4aa	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gravelgill Scoundrel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 6d7f7e6e-5076-4af7-afe3-3e500835c4aa	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gravelgill Scoundrel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6db90f86-205a-4e0b-944b-74742bc4e59d	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:sardian-avenger:f0t0:s1	-	-	-	8c0bd19283bb	-	742dcbde7189	-	-	2026-11-24	xproof
 6db90f86-205a-4e0b-944b-74742bc4e59d	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6dba119e-1b08-42e0-8d0a-b606bd90af02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gruul-war-plow:cast:s1,f:xs:XP:gruul-war-plow:cast:s1	-	-	-	77494c1ce129	-	f0dc6f8e300c	-	-	2026-11-24	xproof
-6dba119e-1b08-42e0-8d0a-b606bd90af02	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+6dba119e-1b08-42e0-8d0a-b606bd90af02	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:gruul-war-plow:f0a0:s1,f:xs:XP:gruul-war-plow:f0a0:s1	-	-	-	23c4009444b0	-	f0dc6f8e300c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6dbd0764-4bfe-4a58-905d-aeee70ceb798	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6dbd0764-4bfe-4a58-905d-aeee70ceb798	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6dbeeb49-55c6-4ceb-94dd-3e4110dff8c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

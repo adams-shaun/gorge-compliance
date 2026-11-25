@@ -7,9 +7,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32083c9f-04c6-4b6f-9e24-cc8f3cae3e3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3209ad08-5482-4dd4-a02e-1dbe99ce6b54	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brink-of-madness:f0t0:s1,f:xs:XP:brink-of-madness:f0t0:s1	-	-	-	3aa6ded33acb	-	a5b1680607ae	-	-	2026-11-25	xproof
 3209ad08-5482-4dd4-a02e-1dbe99ce6b54	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:brink-of-madness:f0t0:s1,f:xs:XP:brink-of-madness:f0t0:s1	-	-	-	3aa6ded33acb	-	a5b1680607ae	-	-	2026-11-25	xproof
-320ed2ec-ef06-41fb-ac8a-72579f11544c	cast	cast-resolve	agreed	-	X	scen	1	0	Wurmwall Sweeper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-320ed2ec-ef06-41fb-ac8a-72579f11544c	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-320ed2ec-ef06-41fb-ac8a-72579f11544c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wurmwall Sweeper/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+320ed2ec-ef06-41fb-ac8a-72579f11544c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wurmwall-sweeper:cast:s1,f:xs:XP:wurmwall-sweeper:cast:s1	-	-	-	23c4009444b0	-	83018d3f704b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+320ed2ec-ef06-41fb-ac8a-72579f11544c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wurmwall-sweeper:cast:s1,f:xs:XP:wurmwall-sweeper:cast:s1	-	-	-	23c4009444b0	-	83018d3f704b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+320ed2ec-ef06-41fb-ac8a-72579f11544c	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:wurmwall-sweeper:static0.0:s1,f:xs:XP:wurmwall-sweeper:static0.0:s1	-	-	-	23c4009444b0	-	83018d3f704b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32116127-cf96-4a1b-8896-a1ebc087b597	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32116127-cf96-4a1b-8896-a1ebc087b597	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32116127-cf96-4a1b-8896-a1ebc087b597	land	land	agreed	-	FX	start	2	0	x:xs:XP:llanowar-wastes:land:s1,f:xs:XP:llanowar-wastes:land:s1	-	-	-	25696bf19d5b	-	dd6dbde74348	-	-	2026-11-24	xproof
@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32438050-5ae7-4c19-bcaf-5a07a673e0e0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Reef Roads/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32438050-5ae7-4c19-bcaf-5a07a673e0e0	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:reef-roads:f0a1:s1,f:xs:XP:reef-roads:f0a1:s1	-	-	-	23c4009444b0	-	1f3ff3f7c59c	-	-	2026-11-25	xproof
 32438050-5ae7-4c19-bcaf-5a07a673e0e0	land	land	agreed	-	FX	start	2	0	x:xs:XP:reef-roads:land:s1,f:xs:XP:reef-roads:land:s1	-	-	-	23c4009444b0	-	1f3ff3f7c59c	-	-	2026-11-25	xproof
-324493fc-a205-4177-aa94-cf4672844c81	cast	cast-resolve	agreed	-	X	scen	1	0	Random Encounter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+324493fc-a205-4177-aa94-cf4672844c81	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:random-encounter:cast:s1,f:xs:XP:random-encounter:cast:s1	-	-	-	23c4009444b0	-	89e7e8d8d2e6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32452ccf-88c7-41d6-93e5-15d31f29726d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3247fca3-7458-47ee-875b-c55f2a3e2962	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 324824cb-f938-401c-b9b5-d8908b431ef0	cast	cast	agreed	-	X	start	2	0	x:xs:XP:snuff-out:cast:s1	-	-	-	8c0bd19283bb	-	3d7fe196ee12	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32972d7a-c7c6-437c-8e7c-6c7d56b130e4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-nel-toth:cast:s1,f:xs:XP:scourge-of-nel-toth:cast:s1	-	-	-	8c0bd19283bb	-	ec5547f39962	-	-	2026-11-24	xproof
 329f6434-8f1b-4a10-8feb-2a9dc5f2712b	cast	cast-resolve	agreed	-	X	scen	1	0	Heated Argument/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 329f6e2e-6c37-4e98-bd45-bd252f1a2bd9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-ickspitter:cast:s1,f:xs:XP:rakdos-ickspitter:cast:s1	-	-	-	16ec2936189a	-	f404b88708ed	-	-	2026-11-24	xproof
-329f6e2e-6c37-4e98-bd45-bd252f1a2bd9	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+329f6e2e-6c37-4e98-bd45-bd252f1a2bd9	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:rakdos-ickspitter:f0a0:s1,f:xs:XP:rakdos-ickspitter:f0a0:s1	-	-	-	23c4009444b0	-	f404b88708ed	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 329fcb1e-7066-46c5-ba27-20ed2b18c1ba	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

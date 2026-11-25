@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a343a5f-3f9b-43c3-8532-8391de7a5443	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jacked-rabbit:f0t1:s1,f:xs:XP:jacked-rabbit:f0t1:s1	-	-	-	23c4009444b0	-	3b916b9acbad	-	-	2026-11-25	xproof
 5a343a5f-3f9b-43c3-8532-8391de7a5443	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5a343a5f-3f9b-43c3-8532-8391de7a5443	f0/t1	ChangesZone/Ravenous	agreed	-	FX	start	2	0	x:xs:XP:jacked-rabbit:f0t1:s1,f:xs:XP:jacked-rabbit:f0t1:s1	-	-	-	23c4009444b0	-	3b916b9acbad	-	-	2026-11-25	xproof
-5a367c9c-9a7f-4587-aa05-c0fba46ed838	cast	cast-resolve	agreed	-	X	scen	1	0	Scout for Survivors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5a367c9c-9a7f-4587-aa05-c0fba46ed838	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scout-for-survivors:cast:s1,f:xs:XP:scout-for-survivors:cast:s1	-	-	-	23c4009444b0	-	1f1322465e74	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5a399467-abb7-4f33-962d-8bef5aa9ebf3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aligned-hedron-network:f0t0:s1,f:xs:XP:aligned-hedron-network:f0t0:s1	-	-	-	d864b561c9cb	-	9ac820b01d95	-	-	2026-11-24	xproof
 5a399467-abb7-4f33-962d-8bef5aa9ebf3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aligned-hedron-network:f0t0:s1,f:xs:XP:aligned-hedron-network:f0t0:s1	-	-	-	d864b561c9cb	-	9ac820b01d95	-	-	2026-11-24	xproof
 5a3f9c4d-20a8-46aa-9cf3-3916f56a7906	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-servitor:f0t0:s1,f:xs:XP:blood-servitor:f0t0:s1	-	-	-	d864b561c9cb	-	0e6f4f7e9ed1	-	-	2026-11-24	xproof
@@ -76,7 +76,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a5f39ab-21b4-415f-aa1f-d8fad420d372	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a5f39ab-21b4-415f-aa1f-d8fad420d372	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a620d20-f14e-43d0-8e57-c2a197e2ec51	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:urza-s-factory:land:s1,f:xs:XP:urza-s-factory:land:s1	-	-	-	77494c1ce129	-	f7032dcf6c4d	-	-	2026-11-24	xproof
-5a620d20-f14e-43d0-8e57-c2a197e2ec51	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+5a620d20-f14e-43d0-8e57-c2a197e2ec51	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:urza-s-factory:f0a1:s1,f:xs:XP:urza-s-factory:f0a1:s1	-	-	-	23c4009444b0	-	f7032dcf6c4d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5a620d20-f14e-43d0-8e57-c2a197e2ec51	land	land	agreed	-	FX	start	2	0	x:xs:XP:urza-s-factory:land:s1,f:xs:XP:urza-s-factory:land:s1	-	-	-	77494c1ce129	-	f7032dcf6c4d	-	-	2026-11-24	xproof
 5a647f28-6e26-4262-8593-d582e0a691f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nature-s-wrath:f0t0:s1,f:xs:XP:nature-s-wrath:f0t0:s1	-	-	-	3aa6ded33acb	-	f137b48e2600	-	-	2026-11-25	xproof
 5a647f28-6e26-4262-8593-d582e0a691f7	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nature-s-wrath:f0t0:s1,f:xs:XP:nature-s-wrath:f0t0:s1	-	-	-	3aa6ded33acb	-	f137b48e2600	-	-	2026-11-25	xproof

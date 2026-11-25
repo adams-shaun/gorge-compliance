@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 381a3e8e-71dd-48e4-ab62-53478bde4a14	cast	cast-resolve	agreed	-	FX	scen	2	0	Agate-Blade Assassin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 381a3e8e-71dd-48e4-ab62-53478bde4a14	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:agate-blade-assassin:f0t0:s1,f:xs:XP:agate-blade-assassin:f0t0:s1	-	-	-	3aa6ded33acb	-	6539181d9a5f	-	-	2026-11-25	xproof
 381df197-5fb7-44ab-a31f-96c4993a0e53	cast	cast-resolve	agreed	-	FX	scen	2	0	Shantotto, Tactician Magician/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-381df197-5fb7-44ab-a31f-96c4993a0e53	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Shantotto, Tactician Magician/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+381df197-5fb7-44ab-a31f-96c4993a0e53	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:shantotto-tactician-magician:f0t0:s1,f:xs:XP:shantotto-tactician-magician:f0t0:s1	-	-	-	23c4009444b0	-	e59998668bef	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 381eb146-879e-473c-b628-65f6c0814a29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 381eb146-879e-473c-b628-65f6c0814a29	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:merfolk-skyscout:f0t0:s1,f:xs:XP:merfolk-skyscout:f0t0:s1	-	-	-	d864b561c9cb	-	2d2bfe04678d	-	-	2026-11-24	xproof
 381eb146-879e-473c-b628-65f6c0814a29	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 388168b3-ec68-4af2-b88c-6a5ec88c15f6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ayara-first-of-locthwain:cast:s1,f:xs:XP:ayara-first-of-locthwain:cast:s1	-	-	-	ae86f6029288	-	62057d940a86	-	-	2026-11-24	xproof
 3883f5de-92bf-4692-80e5-f03365bf7112	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38872730-0fd1-414e-8015-29d1bc649913	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38872730-0fd1-414e-8015-29d1bc649913	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+38872730-0fd1-414e-8015-29d1bc649913	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:poisonbelly-ogre:f0t0:s1,f:xs:XP:poisonbelly-ogre:f0t0:s1	-	-	-	23c4009444b0	-	44ef9fd89eff	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 38877c68-b69b-4ee1-8e8f-5137a184a8f7	cast	counter-spell	agreed	-	FX	scen	2	0	Spell Snare/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 388b7b0f-b26d-4de9-bfa6-8c3cbcc2e284	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:fairgrounds-warden:cast:s1,f:xs:XP:fairgrounds-warden:cast:s1	-	-	-	d864b561c9cb	-	553bf342af3e	-	-	2026-11-24	xproof
 388b7b0f-b26d-4de9-bfa6-8c3cbcc2e284	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:fairgrounds-warden:cast:s1,f:xs:XP:fairgrounds-warden:cast:s1	-	-	-	d864b561c9cb	-	553bf342af3e	-	-	2026-11-24	xproof
@@ -166,8 +166,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38e43d06-33f1-4672-b0be-b0ea8bf36291	cast	cast	agreed	-	F	start	2	0	f:xs:XP:roil-s-retribution:cast:s1	-	-	-	d864b561c9cb	-	f9fa7407fce1	-	-	2026-11-24	xproof
 38e64b15-47c0-4453-a51e-a53c1aebc8d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38e64b15-47c0-4453-a51e-a53c1aebc8d0	f0/a0	MustBlock	agreed	-	F	start	2	0	f:xs:XP:sisters-of-stone-death:f0a1:s1	-	-	-	9ee19e8250ce	-	905c1edfaaea	-	-	2026-11-24	xproof
-38e64b15-47c0-4453-a51e-a53c1aebc8d0	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-38e64b15-47c0-4453-a51e-a53c1aebc8d0	f0/a2	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+38e64b15-47c0-4453-a51e-a53c1aebc8d0	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+38e64b15-47c0-4453-a51e-a53c1aebc8d0	f0/a2	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:sisters-of-stone-death:f0a2:s1,f:xs:XP:sisters-of-stone-death:f0a2:s1	-	-	-	23c4009444b0	-	905c1edfaaea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 38e7be61-944e-46f2-be76-fde8b0c19905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38e7be61-944e-46f2-be76-fde8b0c19905	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 38e7be61-944e-46f2-be76-fde8b0c19905	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

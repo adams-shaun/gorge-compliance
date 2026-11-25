@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9aace0d3-89e6-4254-b96f-ee3a878f2f91	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:conqueror-s-flail:f0a0:s1,f:xs:XP:conqueror-s-flail:f0a0:s1	-	-	-	8c0bd19283bb	-	720c73c705d7	-	-	2026-11-24	xproof
 9aaf0df7-5e2d-4f49-a8cb-66523be15ad6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ab0820b-4f5f-47b3-8fa9-43f802aed275	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ab0820b-4f5f-47b3-8fa9-43f802aed275	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+9ab0820b-4f5f-47b3-8fa9-43f802aed275	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:borborygmos:f0t0:s1,f:xs:XP:borborygmos:f0t0:s1	-	-	-	23c4009444b0	-	ff3887f12f4d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9ab101c2-215b-4736-873a-4a1ef6666b6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9abeb38c-2243-424c-bfbc-87aa45b6ea4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9abf9a0e-8e7d-406b-a01d-d4870b30134e	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:the-shire:f0a0:s1,f:xs:XP:the-shire:f0a0:s1	-	-	-	ae86f6029288	-	6dddc8f9a387	-	-	2026-11-24	xproof
@@ -141,8 +141,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ad903c5-1528-44d6-b4b6-f05a2399d91f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:quickbeam-upstart-ent:cast:s1,f:xs:XP:quickbeam-upstart-ent:cast:s1	-	-	-	ae86f6029288	-	625f22947e04	-	-	2026-11-24	xproof
 9ad903c5-1528-44d6-b4b6-f05a2399d91f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:quickbeam-upstart-ent:cast:s1,f:xs:XP:quickbeam-upstart-ent:cast:s1	-	-	-	ae86f6029288	-	625f22947e04	-	-	2026-11-24	xproof
 9ad956c8-71d3-436f-961e-e2dfc1d2ca70	cast	cast-resolve	agreed	-	FX	scen	2	0	Rust Harvester/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9ad956c8-71d3-436f-961e-e2dfc1d2ca70	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rust Harvester/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9ad956c8-71d3-436f-961e-e2dfc1d2ca70	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rust Harvester/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9ad956c8-71d3-436f-961e-e2dfc1d2ca70	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rust-harvester:combat0.attack:s1,f:xs:XP:rust-harvester:combat0.attack:s1	-	-	-	23c4009444b0	-	780a4f01194c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9ad956c8-71d3-436f-961e-e2dfc1d2ca70	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:rust-harvester:combat0.block:s1,f:xs:XP:rust-harvester:combat0.block:s1	-	-	-	23c4009444b0	-	780a4f01194c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9ad956c8-71d3-436f-961e-e2dfc1d2ca70	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Rust Harvester/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ad999fe-889a-426a-86b3-c0c311b82041	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ad999fe-889a-426a-86b3-c0c311b82041	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

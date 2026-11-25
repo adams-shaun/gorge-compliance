@@ -31,7 +31,7 @@ ce19d2dd-4b2c-493e-8963-ad97649248e2	f0/t0	ChangesZone	agreed	-	X	start	4	0	x:xs
 ce1a6c1f-6b4e-4d19-b256-48d073b359b7	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:additive-evolution:f0t0:s2,f:xs:XP:additive-evolution:f0t0:s2	-	-	-	5437c1394672	-	072e68c1733c	-	-	2026-11-24	xproof
 ce1a6c1f-6b4e-4d19-b256-48d073b359b7	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:additive-evolution:f0t0:s2,f:xs:XP:additive-evolution:f0t0:s2	-	-	-	5437c1394672	-	072e68c1733c	-	-	2026-11-24	xproof
 ce1a6c1f-6b4e-4d19-b256-48d073b359b7	f0/t1	Phase	agreed	-	FX	start	1	0	x:xs:XP:additive-evolution:f0t0:s2,f:xs:XP:additive-evolution:f0t0:s2	-	-	-	5437c1394672	-	072e68c1733c	-	-	2026-11-24	xproof
-ce25dd89-dcc7-4576-b148-ef4c1cd5290c	cast	cast-resolve	agreed	-	X	scen	1	0	Fungal Colossus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ce25dd89-dcc7-4576-b148-ef4c1cd5290c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fungal-colossus:cast:s1,f:xs:XP:fungal-colossus:cast:s1	-	-	-	23c4009444b0	-	f72d9d7a3c5f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ce25dd89-dcc7-4576-b148-ef4c1cd5290c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fungal Colossus/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ce291948-125d-493d-8770-8b3aac515f9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce291948-125d-493d-8770-8b3aac515f9b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,19 +134,19 @@ cea09261-41a2-43e5-bf43-c4097e6615c6	cast	cast-resolve	agreed	-	FX	scen	2	0	Appe
 cea73a4b-e10a-4517-a92b-24a08321009f	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 cea79fa0-2a76-41f3-846f-4d1a6ff5f629	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cea79fa0-2a76-41f3-846f-4d1a6ff5f629	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cea79fa0-2a76-41f3-846f-4d1a6ff5f629	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+cea79fa0-2a76-41f3-846f-4d1a6ff5f629	f0/t0	ChangesZone/Graft	agreed	-	FX	start	2	0	x:xs:XP:aquastrand-spider:f0t0:s1,f:xs:XP:aquastrand-spider:f0t0:s1	-	-	-	23c4009444b0	-	e39b0ffcb8ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ceb302df-d67e-4e5d-aca0-f53bcdea658d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ceb302df-d67e-4e5d-aca0-f53bcdea658d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ceba3d03-be5a-4dd7-b829-7db216a0f44e	cast	cast-resolve	agreed	-	X	scen	1	0	Clive, Ifrit's Dominant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ceba3d03-be5a-4dd7-b829-7db216a0f44e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Clive, Ifrit's Dominant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ceba3d03-be5a-4dd7-b829-7db216a0f44e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cebc9fcc-25ec-4366-a914-b95afbd134b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cebc9fcc-25ec-4366-a914-b95afbd134b0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+cebc9fcc-25ec-4366-a914-b95afbd134b0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cec10abd-2a2d-4d89-9ecc-ea50c2ac1538	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boosted-sloop:cast:s1,f:xs:XP:boosted-sloop:cast:s1	-	-	-	23c4009444b0	-	72484e5e13e7	-	-	2026-11-25	xproof
 cec10abd-2a2d-4d89-9ecc-ea50c2ac1538	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:boosted-sloop:f0a0:s1,f:xs:XP:boosted-sloop:f0a0:s1	-	-	-	23c4009444b0	-	72484e5e13e7	-	-	2026-11-25	xproof
 cec10abd-2a2d-4d89-9ecc-ea50c2ac1538	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:boosted-sloop:f0a0:s1,f:xs:XP:boosted-sloop:f0a0:s1	-	-	-	23c4009444b0	-	72484e5e13e7	-	-	2026-11-25	xproof
 cec11318-4578-4c66-a9be-1704df0c296c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:qumulox:cast:s1,f:xs:XP:qumulox:cast:s1	-	-	-	25696bf19d5b	-	534200154bac	-	-	2026-11-24	xproof
-cec95b9f-9d1e-4988-befe-d0c9e20e428d	cast	cast-resolve	agreed	-	X	scen	1	0	Lost in Space/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cec95b9f-9d1e-4988-befe-d0c9e20e428d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lost-in-space:cast:s1,f:xs:XP:lost-in-space:cast:s1	-	-	-	23c4009444b0	-	95d736552612	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ced2ae56-988a-4c60-93d0-85a2261be72c	cast	cast-resolve	agreed	-	FX	scen	2	0	Digsite Conservator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ced2ae56-988a-4c60-93d0-85a2261be72c	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Digsite Conservator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ced2ae56-988a-4c60-93d0-85a2261be72c	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Digsite Conservator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -191,9 +191,9 @@ ceeeacbc-01b0-4421-aaca-2ce6cdbe45d7	static#0.0	static#0.0	agreed	-	X	scen	1	0	T
 ceef2d5a-77ea-4e56-9806-fd1a2d5be400	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cef11518-ecb2-4250-996c-a03fa9dfb09e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cef11518-ecb2-4250-996c-a03fa9dfb09e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:darkslick-drake:f0t0:s1,f:xs:XP:darkslick-drake:f0t0:s1	-	-	-	d864b561c9cb	-	f9fe290342fb	-	-	2026-11-24	xproof
-cef5361a-a189-4e05-a8b8-fc764aed73b9	cast	cast-resolve	agreed	-	X	scen	1	0	All-Fates Scroll/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cef5361a-a189-4e05-a8b8-fc764aed73b9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:all-fates-scroll:cast:s1,f:xs:XP:all-fates-scroll:cast:s1	-	-	-	23c4009444b0	-	2bdb845bbb4f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cef5361a-a189-4e05-a8b8-fc764aed73b9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	All-Fates Scroll/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cef5361a-a189-4e05-a8b8-fc764aed73b9	f0/a1	activate#0.1	agreed	-	X	scen	1	0	All-Fates Scroll/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cef5361a-a189-4e05-a8b8-fc764aed73b9	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:all-fates-scroll:f0a1:s1,f:xs:XP:all-fates-scroll:f0a1:s1	-	-	-	23c4009444b0	-	2bdb845bbb4f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cef64ec6-cdfb-42a4-9a4a-3ef5448e93fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oxidda-scrapmelter:f0t0:s1,f:xs:XP:oxidda-scrapmelter:f0t0:s1	-	-	-	d864b561c9cb	-	c836e472cd79	-	-	2026-11-24	xproof
 cef64ec6-cdfb-42a4-9a4a-3ef5448e93fc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oxidda-scrapmelter:f0t0:s1,f:xs:XP:oxidda-scrapmelter:f0t0:s1	-	-	-	d864b561c9cb	-	c836e472cd79	-	-	2026-11-24	xproof
 cef7396d-2168-4282-bf38-670ca9eebd91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thought-knot-seer:f0t0:s1,f:xs:XP:thought-knot-seer:f0t0:s1	-	-	-	d864b561c9cb	-	2f698ed8bd60	-	-	2026-11-24	xproof

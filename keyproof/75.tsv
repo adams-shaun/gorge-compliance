@@ -86,9 +86,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 755dbf29-7484-444f-b5df-29ec4b4bbc82	cast	cast	agreed	-	F	start	2	0	f:xs:XP:elven-rite:cast:s1	-	-	-	5f2128bf97e4	-	545b63bb5f1e	-	-	2026-11-24	xproof
 756042c5-e444-45d7-8dc6-ae7c83c98438	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghalta-and-mavren:cast:s1,f:xs:XP:ghalta-and-mavren:cast:s1	-	-	-	d864b561c9cb	-	29625f20302f	-	-	2026-11-24	xproof
 756042c5-e444-45d7-8dc6-ae7c83c98438	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-75645b1f-0e12-4a05-b47f-0d2e2616c3ca	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-75645b1f-0e12-4a05-b47f-0d2e2616c3ca	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-75645b1f-0e12-4a05-b47f-0d2e2616c3ca	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+75645b1f-0e12-4a05-b47f-0d2e2616c3ca	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+75645b1f-0e12-4a05-b47f-0d2e2616c3ca	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:gruul-guildmage:f0a0:s1,f:xs:XP:gruul-guildmage:f0a0:s1	-	-	-	23c4009444b0	-	28db6e39439a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+75645b1f-0e12-4a05-b47f-0d2e2616c3ca	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:gruul-guildmage:f0a1:s1,f:xs:XP:gruul-guildmage:f0a1:s1	-	-	-	23c4009444b0	-	28db6e39439a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75701981-b9fc-471f-a97f-e897bb3dfb77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75701981-b9fc-471f-a97f-e897bb3dfb77	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 75719f87-ce1a-40d6-ac5a-5ebf0c936c84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blitzball:cast:s1,f:xs:XP:blitzball:cast:s1	-	-	-	23c4009444b0	-	533ad915cca5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

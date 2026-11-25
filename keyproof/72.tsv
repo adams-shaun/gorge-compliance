@@ -59,8 +59,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7246e3a0-f8b7-4c1b-ae75-a1eb8990a728	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:ashen-firebeast:f0a0:s1,f:xs:XP:ashen-firebeast:f0a0:s1	-	-	-	fc71ca68c5ac	-	909d8a38f441	-	-	2026-11-24	xproof
 724700ad-1e4e-4cbc-af7f-0b3b87ed4bc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golden-ratio:cast:s1,f:xs:XP:golden-ratio:cast:s1	-	-	-	d864b561c9cb	-	a35976cf027d	-	-	2026-11-24	xproof
 724b4a59-9c69-4f2b-a436-72183c62f1ff	cast	cast-resolve	agreed	-	FX	scen	2	0	Nebula Dragon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-724b4a59-9c69-4f2b-a436-72183c62f1ff	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nebula Dragon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-724b4a59-9c69-4f2b-a436-72183c62f1ff	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Nebula Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+724b4a59-9c69-4f2b-a436-72183c62f1ff	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:nebula-dragon:combat0.attack:s1,f:xs:XP:nebula-dragon:combat0.attack:s1	-	-	-	23c4009444b0	-	ab583e625a18	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+724b4a59-9c69-4f2b-a436-72183c62f1ff	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:nebula-dragon:combat0.block:s1,f:xs:XP:nebula-dragon:combat0.block:s1	-	-	-	23c4009444b0	-	ab583e625a18	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 724b4a59-9c69-4f2b-a436-72183c62f1ff	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 724bc69c-cd09-4ff8-91e7-70500b9474e1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:frilled-mystic:cast:s1,f:xs:XP:frilled-mystic:cast:s1	-	-	-	d864b561c9cb	-	b331cbdf7fbb	-	-	2026-11-24	xproof
 724bc69c-cd09-4ff8-91e7-70500b9474e1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:frilled-mystic:cast:s1,f:xs:XP:frilled-mystic:cast:s1	-	-	-	d864b561c9cb	-	b331cbdf7fbb	-	-	2026-11-24	xproof
@@ -68,7 +68,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 724c8a20-bfb3-4c63-8cfa-5ad4c72ebe2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fugue:cast:s1,f:xs:XP:fugue:cast:s1	-	-	-	5f2128bf97e4	-	bd4d90e5a538	-	-	2026-11-24	xproof
 724d8247-33b1-42bf-a827-7b66e45504c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 724f3d2f-0513-4efd-961f-56a7ea7b5731	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-724f3d2f-0513-4efd-961f-56a7ea7b5731	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+724f3d2f-0513-4efd-961f-56a7ea7b5731	f0/t0	Attacks/Battle cry	agreed	-	X	start	2	0	x:xs:XP:signal-pest:f0t0:s1	-	-	-	23c4009444b0	-	9dc52f30adf9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7253e7d1-b1df-4637-bf64-850be7fa5188	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7253e7d1-b1df-4637-bf64-850be7fa5188	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7255705c-b788-4bb1-824a-9262f4a0864e	cast	cast-resolve	agreed	-	X	scen	1	0	Elemental Teachings/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

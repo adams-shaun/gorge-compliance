@@ -43,8 +43,8 @@ a32b8502-7427-48a5-a880-14516ff2fe77	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 a32e08fa-bea4-4ba9-a126-9bf0a91f67e2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fields of Strife/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a32e08fa-bea4-4ba9-a126-9bf0a91f67e2	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Fields of Strife/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a32e08fa-bea4-4ba9-a126-9bf0a91f67e2	land	play-land	agreed	-	X	scen	1	0	Fields of Strife/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a33073bf-66c1-425b-9f25-748b343f33fe	cast	cast	owed	harness	-	start	0	0	-	-	-	-	16ec2936189a	-	39336b54034d	-	-	2026-11-24	xproof
-a33073bf-66c1-425b-9f25-748b343f33fe	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+a33073bf-66c1-425b-9f25-748b343f33fe	cast	cast	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+a33073bf-66c1-425b-9f25-748b343f33fe	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a332e80a-dc51-4dc6-bc85-e114a1c6fdb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vanquish-the-horde:cast:s1,f:xs:XP:vanquish-the-horde:cast:s1	-	-	-	ae86f6029288	-	026ee183f8ec	-	-	2026-11-24	xproof
 a336c10a-b5bd-47ff-ba2d-31e27af1e15a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tendershoot-dryad:f0t0:s1,f:xs:XP:tendershoot-dryad:f0t0:s1	-	-	-	3aa6ded33acb	-	f41109db5418	-	-	2026-11-25	xproof
 a336c10a-b5bd-47ff-ba2d-31e27af1e15a	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:tendershoot-dryad:f0t0:s1,f:xs:XP:tendershoot-dryad:f0t0:s1	-	-	-	3aa6ded33acb	-	f41109db5418	-	-	2026-11-25	xproof
@@ -52,7 +52,7 @@ a33961bb-fff0-4f4a-aa35-f904dbf2b075	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a33961bb-fff0-4f4a-aa35-f904dbf2b075	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a33982e4-d7d2-4319-bf04-534b8f253dfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a339961e-3555-467f-a4f8-c5eaac7e7ed1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:warrior-s-sword:f0t0:s2,f:xs:XP:warrior-s-sword:f0t0:s2	-	-	-	267e485f6204	-	9eb9e88b4471	-	-	2026-11-24	xproof
-a339961e-3555-467f-a4f8-c5eaac7e7ed1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Warrior's Sword/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a339961e-3555-467f-a4f8-c5eaac7e7ed1	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:warrior-s-sword:f0a0:s1,f:xs:XP:warrior-s-sword:f0a0:s1	-	-	-	23c4009444b0	-	9eb9e88b4471	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a339961e-3555-467f-a4f8-c5eaac7e7ed1	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:warrior-s-sword:f0t0:s2,f:xs:XP:warrior-s-sword:f0t0:s2	-	-	-	267e485f6204	-	9eb9e88b4471	-	-	2026-11-24	xproof
 a339961e-3555-467f-a4f8-c5eaac7e7ed1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Warrior's Sword/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a33f6ec8-5992-43a1-a16c-d8e83c4017fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -122,9 +122,9 @@ a36dda2e-4cb8-4821-9c93-bd637ae7b333	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 a37159df-f6d7-4db6-85de-0ea77f425993	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a371d035-488e-4b3d-81de-ee7859452c0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a371d035-488e-4b3d-81de-ee7859452c0e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-a37314cf-bbbd-4003-b94d-0e6e60edfc15	cast	cast-resolve	agreed	-	X	scen	1	0	Synthesizer Labship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a37314cf-bbbd-4003-b94d-0e6e60edfc15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:synthesizer-labship:cast:s1,f:xs:XP:synthesizer-labship:cast:s1	-	-	-	23c4009444b0	-	fbee18702392	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a37314cf-bbbd-4003-b94d-0e6e60edfc15	static#0.0	static#0.0	agreed	-	X	scen	1	0	Synthesizer Labship/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a37314cf-bbbd-4003-b94d-0e6e60edfc15	static#0.1	static#0.1	agreed	-	X	scen	1	0	Synthesizer Labship/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a37314cf-bbbd-4003-b94d-0e6e60edfc15	static#0.1	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:synthesizer-labship:static0.1:s1,f:xs:XP:synthesizer-labship:static0.1:s1	-	-	-	23c4009444b0	-	fbee18702392	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a37387f0-9d57-49ff-aa38-2c6b359e8916	cast	cast-resolve	agreed	-	FX	scen	2	0	Grab the Prize/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a37544b6-0048-4213-8e40-76ba8a0b6d1b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a37544b6-0048-4213-8e40-76ba8a0b6d1b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:soaring-seacliff:f0t0:s1,f:xs:XP:soaring-seacliff:f0t0:s1	-	-	-	8a1b1a193ec0	-	4764c251e36b	-	-	2026-11-24	xproof

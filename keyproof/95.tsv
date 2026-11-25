@@ -76,8 +76,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95664c29-9801-4dfc-9dbd-465abf6bb4ee	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:barrow-naughty:combat0.block:s1,f:xs:XP:barrow-naughty:combat0.block:s1	-	-	-	3aa6ded33acb	-	35ed822b972f	-	-	2026-11-25	xproof
 95664c29-9801-4dfc-9dbd-465abf6bb4ee	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:barrow-naughty:f0a0:s1,f:xs:XP:barrow-naughty:f0a0:s1	-	-	-	23b491658465	-	35ed822b972f	-	-	2026-11-24	xproof
 95664c29-9801-4dfc-9dbd-465abf6bb4ee	static#0.0	static#0.0	agreed	-	X	scen	1	0	Barrow Naughty/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9567d963-4815-466b-a319-6d138b6a0cd2	cast	cast-resolve	agreed	-	X	scen	1	0	Triple Triad/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9567d963-4815-466b-a319-6d138b6a0cd2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Triple Triad/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9567d963-4815-466b-a319-6d138b6a0cd2	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:triple-triad:cast:s1,f:xs:XP:triple-triad:cast:s1	-	-	-	23c4009444b0	-	6548f7c2c615	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9567d963-4815-466b-a319-6d138b6a0cd2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:triple-triad:f0t0:s1,f:xs:XP:triple-triad:f0t0:s1	-	-	-	23c4009444b0	-	6548f7c2c615	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9573c85a-e574-4b4e-aae0-2165c45fd27e	cast	cast-resolve	agreed	-	X	scen	1	0	Worldwalker Helm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9573c85a-e574-4b4e-aae0-2165c45fd27e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Worldwalker Helm/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9575d7ce-f26d-4b90-87a3-6329e9799572	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Abandoned Air Temple/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -90,17 +90,17 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9587bdb3-fb6a-47c0-898d-404bf60fcb6b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	36722f811f7f	-	-	2026-11-24	xproof
 9587bdb3-fb6a-47c0-898d-404bf60fcb6b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	36722f811f7f	-	-	2026-11-24	xproof
 9588a7fd-bbe5-4a81-9a7e-d8e8f6c0537d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:candy-grapple:cast:s1,f:xs:XP:candy-grapple:cast:s1	-	-	-	3aa6ded33acb	-	d90783588297	-	-	2026-11-25	xproof
-958c2a27-9fb1-42b4-a0ef-296584763a98	cast	cast-resolve	agreed	-	X	scen	1	0	Stiltzkin, Moogle Merchant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-958c2a27-9fb1-42b4-a0ef-296584763a98	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stiltzkin, Moogle Merchant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-958c2a27-9fb1-42b4-a0ef-296584763a98	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stiltzkin, Moogle Merchant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-958c2a27-9fb1-42b4-a0ef-296584763a98	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stiltzkin, Moogle Merchant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+958c2a27-9fb1-42b4-a0ef-296584763a98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stiltzkin-moogle-merchant:cast:s1,f:xs:XP:stiltzkin-moogle-merchant:cast:s1	-	-	-	23c4009444b0	-	2c11887ac4c5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+958c2a27-9fb1-42b4-a0ef-296584763a98	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stiltzkin-moogle-merchant:combat0.attack:s1,f:xs:XP:stiltzkin-moogle-merchant:combat0.attack:s1	-	-	-	23c4009444b0	-	2c11887ac4c5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+958c2a27-9fb1-42b4-a0ef-296584763a98	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:stiltzkin-moogle-merchant:combat0.block:s1,f:xs:XP:stiltzkin-moogle-merchant:combat0.block:s1	-	-	-	23c4009444b0	-	2c11887ac4c5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+958c2a27-9fb1-42b4-a0ef-296584763a98	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:stiltzkin-moogle-merchant:f0a0:s1,f:xs:XP:stiltzkin-moogle-merchant:f0a0:s1	-	-	-	23c4009444b0	-	2c11887ac4c5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 958d71ff-c9f7-46f0-96ca-79e7f4d65a16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elesh-norn-grand-cenobite:cast:s1,f:xs:XP:elesh-norn-grand-cenobite:cast:s1	-	-	-	d864b561c9cb	-	2665c50e797c	-	-	2026-11-24	xproof
 958d81c2-ca09-4275-890e-3bb595317325	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iron-man-armor:f0t0:s1,f:xs:XP:iron-man-armor:f0t0:s1	-	-	-	5437c1394672	-	c32a9e98558e	-	-	2026-11-24	xproof
 958d81c2-ca09-4275-890e-3bb595317325	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Iron Man Armor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 958d81c2-ca09-4275-890e-3bb595317325	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Iron Man Armor/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 958d81c2-ca09-4275-890e-3bb595317325	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:iron-man-armor:f0t0:s1,f:xs:XP:iron-man-armor:f0t0:s1	-	-	-	5437c1394672	-	c32a9e98558e	-	-	2026-11-24	xproof
 958d81c2-ca09-4275-890e-3bb595317325	static#0.0	static#0.0	agreed	-	X	scen	1	0	Iron Man Armor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-95921d1e-0487-4274-b797-8652e94fc4bc	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	24250bc7da46	-	-	2026-11-25	xproof
+95921d1e-0487-4274-b797-8652e94fc4bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kjeldoran-javelineer:cast:s1,f:xs:XP:kjeldoran-javelineer:cast:s1	-	-	-	23c4009444b0	-	24250bc7da46	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 95921d1e-0487-4274-b797-8652e94fc4bc	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 95921d1e-0487-4274-b797-8652e94fc4bc	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	24250bc7da46	-	-	2026-11-25	xproof
 9594b8e0-a176-447a-a52e-e1a77175b748	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:supply-drop:cast:s1,f:xs:XP:supply-drop:cast:s1	-	-	-	ae86f6029288	-	795658badf0f	-	-	2026-11-24	xproof
@@ -109,8 +109,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9597c974-6120-43a7-9ad3-7e4fddc8c9f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9597c974-6120-43a7-9ad3-7e4fddc8c9f5	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 959acb66-84ca-4535-bca2-ad591895735e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:niv-mizzet-the-firemind:cast:s1,f:xs:XP:niv-mizzet-the-firemind:cast:s1	-	-	-	77494c1ce129	-	f1f41d4ededb	-	-	2026-11-24	xproof
-959acb66-84ca-4535-bca2-ad591895735e	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-959acb66-84ca-4535-bca2-ad591895735e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+959acb66-84ca-4535-bca2-ad591895735e	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:niv-mizzet-the-firemind:f0a0:s1,f:xs:XP:niv-mizzet-the-firemind:f0a0:s1	-	-	-	23c4009444b0	-	f1f41d4ededb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+959acb66-84ca-4535-bca2-ad591895735e	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:niv-mizzet-the-firemind:f0a0:s1,f:xs:XP:niv-mizzet-the-firemind:f0a0:s1	-	-	-	23c4009444b0	-	f1f41d4ededb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 959bcf99-3c9a-4f99-98b2-13514d3dac16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 959e1f72-4ba2-4c87-95d1-ca0265dc128c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadeye-harpooner:f0t0:s1,f:xs:XP:deadeye-harpooner:f0t0:s1	-	-	-	3aa6ded33acb	-	99b3a67bc01d	-	-	2026-11-25	xproof
 959e1f72-4ba2-4c87-95d1-ca0265dc128c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:deadeye-harpooner:f0t0:s1,f:xs:XP:deadeye-harpooner:f0t0:s1	-	-	-	3aa6ded33acb	-	99b3a67bc01d	-	-	2026-11-25	xproof

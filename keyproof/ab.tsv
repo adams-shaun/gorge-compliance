@@ -11,7 +11,7 @@ ab0dd461-25bc-4374-bed8-72fc2d51b5e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:san
 ab0dd461-25bc-4374-bed8-72fc2d51b5e1	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sanctuary-blade:f0a0:s1,f:xs:XP:sanctuary-blade:f0a0:s1	-	-	-	8c0bd19283bb	-	90f2cdda19bb	-	-	2026-11-24	xproof
 ab0e2aa0-1ddd-4a4c-b7cd-4063caaa8bcd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloudthresher:f0t0:s1,f:xs:XP:cloudthresher:f0t0:s1	-	-	-	d864b561c9cb	-	12dc3fa127fb	-	-	2026-11-24	xproof
 ab0e2aa0-1ddd-4a4c-b7cd-4063caaa8bcd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cloudthresher:f0t0:s1,f:xs:XP:cloudthresher:f0t0:s1	-	-	-	d864b561c9cb	-	12dc3fa127fb	-	-	2026-11-24	xproof
-ab1379b7-0016-4d2a-a83b-952666e43b89	cast	cast-resolve	agreed	-	X	scen	1	0	Hymn of the Faller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ab1379b7-0016-4d2a-a83b-952666e43b89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hymn-of-the-faller:cast:s1,f:xs:XP:hymn-of-the-faller:cast:s1	-	-	-	23c4009444b0	-	52472abcd652	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ab151429-0890-4231-a3a7-34e8455dac70	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ivory-crane-netsuke:f0t0:s1,f:xs:XP:ivory-crane-netsuke:f0t0:s1	-	-	-	23c4009444b0	-	1716cea4b16d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ab151429-0890-4231-a3a7-34e8455dac70	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ivory-crane-netsuke:f0t0:s1,f:xs:XP:ivory-crane-netsuke:f0t0:s1	-	-	-	23c4009444b0	-	1716cea4b16d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ab1cc360-b9de-48d9-9983-4dfe4a7d2a37	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
@@ -25,8 +25,8 @@ ab23cca2-b59e-4d34-80de-98bd08985275	combat#0.attack	combat.attack	agreed	-	FX	s
 ab23cca2-b59e-4d34-80de-98bd08985275	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sterling-supplier:combat0.block:s1,f:xs:XP:sterling-supplier:combat0.block:s1	-	-	-	3aa6ded33acb	-	c26e383c6283	-	-	2026-11-25	xproof
 ab23cca2-b59e-4d34-80de-98bd08985275	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab282bb1-900e-40b8-9821-8e2de88927bc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:blooming-stinger:f0t0:s2,f:xs:XP:blooming-stinger:f0t0:s2	-	-	-	267e485f6204	-	72018a6daa76	-	-	2026-11-24	xproof
-ab282bb1-900e-40b8-9821-8e2de88927bc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Blooming Stinger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ab282bb1-900e-40b8-9821-8e2de88927bc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Blooming Stinger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ab282bb1-900e-40b8-9821-8e2de88927bc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:blooming-stinger:combat0.attack:s1,f:xs:XP:blooming-stinger:combat0.attack:s1	-	-	-	23c4009444b0	-	72018a6daa76	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ab282bb1-900e-40b8-9821-8e2de88927bc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:blooming-stinger:combat0.block:s1,f:xs:XP:blooming-stinger:combat0.block:s1	-	-	-	23c4009444b0	-	72018a6daa76	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ab282bb1-900e-40b8-9821-8e2de88927bc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:blooming-stinger:f0t0:s2,f:xs:XP:blooming-stinger:f0t0:s2	-	-	-	267e485f6204	-	72018a6daa76	-	-	2026-11-24	xproof
 ab28a801-6ab1-4db2-8ae2-c24bb4c10ebb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ancestral-blade:cast:s1,f:xs:XP:ancestral-blade:cast:s1	-	-	-	d864b561c9cb	-	925767429be8	-	-	2026-11-24	xproof
 ab28a801-6ab1-4db2-8ae2-c24bb4c10ebb	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:ancestral-blade:f0a0:s1,f:xs:XP:ancestral-blade:f0a0:s1	-	-	-	3aa6ded33acb	-	925767429be8	-	-	2026-11-25	xproof
@@ -158,7 +158,7 @@ abc49dc3-03b3-48a4-afe1-5fc435b65d0f	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:i
 abc519b8-82de-4559-be03-ddb1ddaab993	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 abc5ac3e-f196-49df-8a9d-16df3114ffad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 abc5ac3e-f196-49df-8a9d-16df3114ffad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-abcb5321-c295-4abf-8622-7de79679d27a	cast	cast-resolve	agreed	-	X	scen	1	0	Depressurize/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+abcb5321-c295-4abf-8622-7de79679d27a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:depressurize:cast:s1,f:xs:XP:depressurize:cast:s1	-	-	-	23c4009444b0	-	38a25ebde072	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 abccb19f-098b-4453-b7bc-838ad5914ebe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 abccb19f-098b-4453-b7bc-838ad5914ebe	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:penumbra-wurm:f0t0:s1,f:xs:XP:penumbra-wurm:f0t0:s1	-	-	-	fc71ca68c5ac	-	c98b72242edf	-	-	2026-11-24	xproof
 abcf5e77-88fc-4b76-a1e8-907a5b27d612	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clan-defiance:cast:s1,f:xs:XP:clan-defiance:cast:s1	-	-	-	d864b561c9cb	-	ef56da9733aa	-	-	2026-11-24	xproof

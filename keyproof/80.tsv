@@ -32,8 +32,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8038337b-aff9-49aa-800c-0e12d2688765	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 803971e6-67f3-4fda-aeb6-69ef8ea4b54e	cast	cast-resolve	agreed	-	X	scen	1	0	Turtles in Time/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8039df5c-b26b-4277-8226-4c08a5a69fbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8039df5c-b26b-4277-8226-4c08a5a69fbb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8039df5c-b26b-4277-8226-4c08a5a69fbb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+8039df5c-b26b-4277-8226-4c08a5a69fbb	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:gelectrode:f0t0:s1,f:xs:XP:gelectrode:f0t0:s1	-	-	-	23c4009444b0	-	9e9c3e0be140	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8039df5c-b26b-4277-8226-4c08a5a69fbb	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:gelectrode:f0t0:s1,f:xs:XP:gelectrode:f0t0:s1	-	-	-	23c4009444b0	-	9e9c3e0be140	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 803f2f95-533e-4b5a-8ede-d00fad779430	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lantern-scout:f0t0:s1,f:xs:XP:lantern-scout:f0t0:s1	-	-	-	d864b561c9cb	-	8977047cb597	-	-	2026-11-24	xproof
 803f2f95-533e-4b5a-8ede-d00fad779430	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lantern-scout:f0t0:s1,f:xs:XP:lantern-scout:f0t0:s1	-	-	-	d864b561c9cb	-	8977047cb597	-	-	2026-11-24	xproof
 80405d7a-f533-44bd-ac85-890476cf2b78	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -89,8 +89,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 80a49a1b-a202-4c14-b093-dc76eb0f42c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sungrass-egg:cast:s1,f:xs:XP:sungrass-egg:cast:s1	-	-	-	fc71ca68c5ac	-	d2ec7f99ab6d	-	-	2026-11-24	xproof
 80a49a1b-a202-4c14-b093-dc76eb0f42c7	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:sungrass-egg:f0a0:s1,f:xs:XP:sungrass-egg:f0a0:s1	-	-	-	fc71ca68c5ac	-	d2ec7f99ab6d	-	-	2026-11-24	xproof
 80b4a9f7-008d-4979-a3df-7637fae68167	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tidewater-minion:cast:s1,f:xs:XP:tidewater-minion:cast:s1	-	-	-	77494c1ce129	-	f9d6e9ac7c12	-	-	2026-11-24	xproof
-80b4a9f7-008d-4979-a3df-7637fae68167	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-80b4a9f7-008d-4979-a3df-7637fae68167	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+80b4a9f7-008d-4979-a3df-7637fae68167	f0/a0	Debuff	agreed	-	FX	start	2	0	x:xs:XP:tidewater-minion:f0a0:s1,f:xs:XP:tidewater-minion:f0a0:s1	-	-	-	23c4009444b0	-	f9d6e9ac7c12	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+80b4a9f7-008d-4979-a3df-7637fae68167	f0/a1	Untap	agreed	-	FX	start	4	0	x:xs:XP:tidewater-minion:f0a0:s1,f:xs:XP:tidewater-minion:f0a0:s1	-	-	-	23c4009444b0	-	f9d6e9ac7c12	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 80bb9ce4-1f3c-42ca-b75f-9a6b2f42073b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 80bb9ce4-1f3c-42ca-b75f-9a6b2f42073b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 80bc56a9-40e0-48da-ae86-190e39c8a4a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:copy-artifact:cast:s1,f:xs:XP:copy-artifact:cast:s1	-	-	-	ae86f6029288	-	142f5c9e166c	-	-	2026-11-24	xproof

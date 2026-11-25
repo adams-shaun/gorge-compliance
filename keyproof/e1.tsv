@@ -65,8 +65,8 @@ e139176f-483f-4f05-af3d-0176d0048b62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e139176f-483f-4f05-af3d-0176d0048b62	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e13c1703-1184-4a8c-9310-f11e4e673597	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	e263a81d09ca	-	-	2026-11-24	xproof
 e13c1703-1184-4a8c-9310-f11e4e673597	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-e13d7600-0924-42eb-9d65-aa18548624a7	cast	cast-resolve	agreed	-	X	scen	1	0	Prompto Argentum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e13d7600-0924-42eb-9d65-aa18548624a7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Prompto Argentum/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e13d7600-0924-42eb-9d65-aa18548624a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prompto-argentum:cast:s1,f:xs:XP:prompto-argentum:cast:s1	-	-	-	23c4009444b0	-	1d22d3948bba	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e13d7600-0924-42eb-9d65-aa18548624a7	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:prompto-argentum:f0t0:s1,f:xs:XP:prompto-argentum:f0t0:s1	-	-	-	23c4009444b0	-	1d22d3948bba	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e14532e9-ecc2-4028-b99e-3629533962bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:referee-squad:f0t0:s1,f:xs:XP:referee-squad:f0t0:s1	-	-	-	d864b561c9cb	-	84c43046ed6d	-	-	2026-11-24	xproof
 e14532e9-ecc2-4028-b99e-3629533962bc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:referee-squad:f0t0:s1,f:xs:XP:referee-squad:f0t0:s1	-	-	-	d864b561c9cb	-	84c43046ed6d	-	-	2026-11-24	xproof
 e14ac0f3-00d5-4a95-990c-b7ea157bb87e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:paraselene:cast:s1,f:xs:XP:paraselene:cast:s1	-	-	-	d864b561c9cb	-	247728770105	-	-	2026-11-24	xproof
@@ -80,7 +80,7 @@ e157ad1e-be35-47f3-92db-01799f8fb6a5	f0/a0	NULL	owed	refused:steps-needed:cost:D
 e157ad1e-be35-47f3-92db-01799f8fb6a5	f0/a1	Pump	agreed	-	F	start	2	0	f:xs:XP:psychic-frog:cast:s1	-	-	-	d864b561c9cb	-	7a862eb67f79	-	-	2026-11-24	xproof
 e157ad1e-be35-47f3-92db-01799f8fb6a5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e15c78d4-6fb1-4bd3-8219-c66b83fcaba1	cast	cast-resolve	agreed	-	FX	scen	2	0	Vaultguard Trooper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e15c78d4-6fb1-4bd3-8219-c66b83fcaba1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vaultguard Trooper/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e15c78d4-6fb1-4bd3-8219-c66b83fcaba1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:vaultguard-trooper:f0t0:s1,f:xs:XP:vaultguard-trooper:f0t0:s1	-	-	-	23c4009444b0	-	037174067a25	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e15db59f-4477-4139-8e7e-741ab4584e7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e15db59f-4477-4139-8e7e-741ab4584e7f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:akroan-hoplite:f0t0:s1,f:xs:XP:akroan-hoplite:f0t0:s1	-	-	-	d864b561c9cb	-	13d62f0e59b8	-	-	2026-11-24	xproof
 e1626880-0fa3-441a-9978-b293fc87c418	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lightning-security-sergeant:cast:s1,f:xs:XP:lightning-security-sergeant:cast:s1	-	-	-	23b491658465	-	1bdcce75f31d	-	-	2026-11-24	xproof
@@ -124,9 +124,9 @@ e1905321-180b-41d2-b7ef-0974ab90f188	cast	cast-resolve	agreed	-	X	scen	1	0	Felon
 e195f2f8-2db7-46b8-948c-c3c27f2e5825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e195f2f8-2db7-46b8-948c-c3c27f2e5825	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e197104f-5382-4cb2-8afe-5ca0594629c2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-e1976b6c-7e43-4f4a-b082-f95495a1b260	cast	cast-resolve	agreed	-	X	scen	1	0	Singularity Rupture/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e1976b6c-7e43-4f4a-b082-f95495a1b260	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:singularity-rupture:cast:s1,f:xs:XP:singularity-rupture:cast:s1	-	-	-	23c4009444b0	-	e55b2b775b9d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e198126a-f280-47f7-8bd0-3dc9f5ff05a0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Windurst, Federation Center/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e198126a-f280-47f7-8bd0-3dc9f5ff05a0	land	play-land	agreed	-	X	scen	1	0	Windurst, Federation Center/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e198126a-f280-47f7-8bd0-3dc9f5ff05a0	land	land	agreed	-	FX	start	2	0	x:xs:XP:windurst-federation-center:land:s1,f:xs:XP:windurst-federation-center:land:s1	-	-	-	23c4009444b0	-	026d808685ea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e199e183-e857-4dc7-87f4-36b32c4dac96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e19d5071-4ea1-4883-b067-a21e553f96e0	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:hidden-courtyard:f0a0:s1,f:xs:XP:hidden-courtyard:f0a0:s1	-	-	-	23b491658465	-	c548c0fec579	-	-	2026-11-24	xproof
 e19d5071-4ea1-4883-b067-a21e553f96e0	f0/a1	Discover	agreed	-	FX	start	2	0	x:xs:XP:hidden-courtyard:f0a1:s1,f:xs:XP:hidden-courtyard:f0a1:s1	-	-	-	23b491658465	-	c548c0fec579	-	-	2026-11-24	xproof

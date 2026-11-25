@@ -51,9 +51,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b49924b-cf83-46d9-b665-9c718a40e16c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:monumental-corruption:cast:s1,f:xs:XP:monumental-corruption:cast:s1	-	-	-	8c0bd19283bb	-	531ff7820238	-	-	2026-11-24	xproof
 0b49dbdc-4f1d-4895-b263-a48c7b7e6b44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b49dbdc-4f1d-4895-b263-a48c7b7e6b44	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0b4cb111-ecf7-4ff7-a9e3-c944054f3370	cast	cast-resolve	agreed	-	X	scen	1	0	Monoist Sentry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0b4cb111-ecf7-4ff7-a9e3-c944054f3370	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:monoist-sentry:cast:s1,f:xs:XP:monoist-sentry:cast:s1	-	-	-	23c4009444b0	-	481bfa7a87e8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0b4cb111-ecf7-4ff7-a9e3-c944054f3370	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Monoist Sentry/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0b4cb111-ecf7-4ff7-a9e3-c944054f3370	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Monoist Sentry/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0b4cb111-ecf7-4ff7-a9e3-c944054f3370	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:monoist-sentry:combat0.block:s1,f:xs:XP:monoist-sentry:combat0.block:s1	-	-	-	23c4009444b0	-	481bfa7a87e8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0b504dc6-61cc-4a72-907c-145fa4c72466	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:seraph-sanctuary:f0a0:s2,f:xs:XP:seraph-sanctuary:f0a0:s2	-	-	-	d864b561c9cb	-	47c161df4292	-	-	2026-11-24	xproof
 0b504dc6-61cc-4a72-907c-145fa4c72466	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:seraph-sanctuary:f0t0:s1,f:xs:XP:seraph-sanctuary:f0t0:s1	-	-	-	d864b561c9cb	-	47c161df4292	-	-	2026-11-24	xproof
 0b504dc6-61cc-4a72-907c-145fa4c72466	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

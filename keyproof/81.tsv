@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 818f908c-9af6-4edc-bb0e-193bc830e2e4	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Chandra, Flameshaper/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8191342b-b25e-4c4d-8f69-aee662148ff4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8191342b-b25e-4c4d-8f69-aee662148ff4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8191342b-b25e-4c4d-8f69-aee662148ff4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+8191342b-b25e-4c4d-8f69-aee662148ff4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 819351c6-b0d6-42dc-9bd9-d1a3851aad7c	cast	cast	agreed	-	F	start	4	0	f:xs:XP:oaken-brawler:cast:s1	-	-	-	d864b561c9cb	-	ccb5e2cd1693	-	-	2026-11-24	xproof
 819351c6-b0d6-42dc-9bd9-d1a3851aad7c	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:oaken-brawler:cast:s1	-	-	-	d864b561c9cb	-	ccb5e2cd1693	-	-	2026-11-24	xproof
 819e1765-8325-4e6f-89c1-63ea86de369f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,9 +152,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81b51bb1-89b9-46a0-ad7a-a43c0d214f11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81b61770-2ed5-4a50-84d0-97790002fc5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81b61770-2ed5-4a50-84d0-97790002fc5a	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-81b67745-0b1f-4433-963d-9b9653fb4d95	cast	cast-resolve	agreed	-	X	scen	1	0	Ride the Shoopuf/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-81b67745-0b1f-4433-963d-9b9653fb4d95	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ride the Shoopuf/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-81b67745-0b1f-4433-963d-9b9653fb4d95	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ride the Shoopuf/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+81b67745-0b1f-4433-963d-9b9653fb4d95	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ride-the-shoopuf:cast:s1,f:xs:XP:ride-the-shoopuf:cast:s1	-	-	-	23c4009444b0	-	fc4d88d9c6c1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+81b67745-0b1f-4433-963d-9b9653fb4d95	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:ride-the-shoopuf:f0a0:s1,f:xs:XP:ride-the-shoopuf:f0a0:s1	-	-	-	23c4009444b0	-	fc4d88d9c6c1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+81b67745-0b1f-4433-963d-9b9653fb4d95	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ride-the-shoopuf:f0t0:s1,f:xs:XP:ride-the-shoopuf:f0t0:s1	-	-	-	23c4009444b0	-	fc4d88d9c6c1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 81b90905-fbc0-426a-a084-c3300533abb4	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 81ba3a33-0e04-4f68-9a42-1dd717733b57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lavinia-azorius-renegade:cast:s1,f:xs:XP:lavinia-azorius-renegade:cast:s1	-	-	-	d864b561c9cb	-	8d866376fe7e	-	-	2026-11-24	xproof
 81ba3a33-0e04-4f68-9a42-1dd717733b57	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

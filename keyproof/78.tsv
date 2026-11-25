@@ -107,8 +107,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 789b6a61-656e-40c0-be78-9c89c4ecfb0b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:smoldering-efreet:f0t0:s1,f:xs:XP:smoldering-efreet:f0t0:s1	-	-	-	d864b561c9cb	-	b5330e623ea4	-	-	2026-11-24	xproof
 789b7af5-ac15-40b6-b5b7-f3fcdcfb52e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrun-breaker-of-silence:cast:s1,f:xs:XP:thrun-breaker-of-silence:cast:s1	-	-	-	ae86f6029288	-	674383c08741	-	-	2026-11-24	xproof
 789bf406-38f0-4888-b2ff-c4a95ac79283	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rakdos-the-defiler:cast:s1,f:xs:XP:rakdos-the-defiler:cast:s1	-	-	-	16ec2936189a	-	80f5491ec5ce	-	-	2026-11-24	xproof
-789bf406-38f0-4888-b2ff-c4a95ac79283	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-789bf406-38f0-4888-b2ff-c4a95ac79283	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+789bf406-38f0-4888-b2ff-c4a95ac79283	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:rakdos-the-defiler:f0t0:s1,f:xs:XP:rakdos-the-defiler:f0t0:s1	-	-	-	23c4009444b0	-	80f5491ec5ce	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+789bf406-38f0-4888-b2ff-c4a95ac79283	f0/t1	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:rakdos-the-defiler:f0t0:s1,f:xs:XP:rakdos-the-defiler:f0t0:s1	-	-	-	23c4009444b0	-	80f5491ec5ce	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 789d2858-f342-422c-9187-c6ace9485ed5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 789d2858-f342-422c-9187-c6ace9485ed5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 789e034c-7f4a-4fd5-9dd8-48313742126e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:become-brutes:cast:s1,f:xs:XP:become-brutes:cast:s1	-	-	-	23b491658465	-	e7cb5d014504	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78a7bb30-fc60-410c-b086-862b5521c1aa	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 78a9cb8d-52bb-4182-ad7d-e4f8f0bb9797	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78a9cb8d-52bb-4182-ad7d-e4f8f0bb9797	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-78ac1e6c-2704-4844-9e87-642324c23997	cast	cast-resolve	agreed	-	X	scen	1	0	Roving Actuator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+78ac1e6c-2704-4844-9e87-642324c23997	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roving-actuator:cast:s1,f:xs:XP:roving-actuator:cast:s1	-	-	-	23c4009444b0	-	5b0e803f8f55	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 78afa295-c9f4-4a81-9f7b-5746a3cf6b31	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:inga-rune-eyes:cast:s1,f:xs:XP:inga-rune-eyes:cast:s1	-	-	-	d864b561c9cb	-	ff2ef7f6e7ff	-	-	2026-11-24	xproof
 78afa295-c9f4-4a81-9f7b-5746a3cf6b31	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:inga-rune-eyes:cast:s1,f:xs:XP:inga-rune-eyes:cast:s1	-	-	-	d864b561c9cb	-	ff2ef7f6e7ff	-	-	2026-11-24	xproof
 78afa295-c9f4-4a81-9f7b-5746a3cf6b31	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:inga-rune-eyes:f0t1:s1,f:xs:XP:inga-rune-eyes:f0t1:s1	-	-	-	d864b561c9cb	-	ff2ef7f6e7ff	-	-	2026-11-24	xproof

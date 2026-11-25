@@ -55,8 +55,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92225b59-4f39-4175-ad0d-88e96f4d906a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:galadhrim-bow:f0t0:s1,f:xs:XP:galadhrim-bow:f0t0:s1	-	-	-	ae86f6029288	-	f1b316c76cc2	-	-	2026-11-24	xproof
 92225b59-4f39-4175-ad0d-88e96f4d906a	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:galadhrim-bow:f0a0:s1,f:xs:XP:galadhrim-bow:f0a0:s1	-	-	-	3aa6ded33acb	-	f1b316c76cc2	-	-	2026-11-25	xproof
 92225b59-4f39-4175-ad0d-88e96f4d906a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:galadhrim-bow:f0t0:s1,f:xs:XP:galadhrim-bow:f0t0:s1	-	-	-	ae86f6029288	-	f1b316c76cc2	-	-	2026-11-24	xproof
-92226fd2-ad93-4722-89a0-ca88ea03e1b4	cast	cast-resolve	agreed	-	X	scen	1	0	Eumidian Terrabotanist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-92226fd2-ad93-4722-89a0-ca88ea03e1b4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Eumidian Terrabotanist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+92226fd2-ad93-4722-89a0-ca88ea03e1b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eumidian-terrabotanist:cast:s1,f:xs:XP:eumidian-terrabotanist:cast:s1	-	-	-	23c4009444b0	-	c1f240f62eaf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+92226fd2-ad93-4722-89a0-ca88ea03e1b4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eumidian-terrabotanist:f0t0:s1,f:xs:XP:eumidian-terrabotanist:f0t0:s1	-	-	-	23c4009444b0	-	c1f240f62eaf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9223488e-5206-4d43-90ef-387189dcee16	cast	cast-resolve	agreed	-	FX	scen	2	0	Suki, Kyoshi Warrior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9223488e-5206-4d43-90ef-387189dcee16	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Suki, Kyoshi Warrior/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9223488e-5206-4d43-90ef-387189dcee16	static#0.0	static#0.0	agreed	-	X	scen	1	0	Suki, Kyoshi Warrior/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -120,8 +120,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92680de3-6ee2-4b73-b0f5-38383482dcca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92680de3-6ee2-4b73-b0f5-38383482dcca	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9268d369-173e-4325-98f6-348beeb8ba62	cast	cast-resolve	agreed	-	FX	scen	2	0	Galuf's Final Act/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-926d52a5-4db1-46ce-9567-17c28bf56ae7	cast	cast-resolve	agreed	-	X	scen	1	0	Weftstalker Ardent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-926d52a5-4db1-46ce-9567-17c28bf56ae7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Weftstalker Ardent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+926d52a5-4db1-46ce-9567-17c28bf56ae7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:weftstalker-ardent:cast:s1,f:xs:XP:weftstalker-ardent:cast:s1	-	-	-	23c4009444b0	-	ada9a4d14bd1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+926d52a5-4db1-46ce-9567-17c28bf56ae7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:weftstalker-ardent:f0t0:s1,f:xs:XP:weftstalker-ardent:f0t0:s1	-	-	-	23c4009444b0	-	ada9a4d14bd1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9270eb03-4600-40cc-83a5-ea987d5d4978	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gix-s-command:cast:s1,f:xs:XP:gix-s-command:cast:s1	-	-	-	ae86f6029288	-	f5b99f64452b	-	-	2026-11-24	xproof
 9275108c-7eaf-4edd-aa6d-e5263d5ac7fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9277b680-a146-4d4f-9649-39cddafdb585	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

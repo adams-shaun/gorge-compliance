@@ -11,8 +11,8 @@ f105ccdd-65bc-4880-bbfe-f57fc0e060ea	f0/a0	NULL	owed	refused:steps-needed:cost:S
 f1136a22-b202-4688-a44c-a9979c91261a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spring-splasher:cast:s1,f:xs:XP:spring-splasher:cast:s1	-	-	-	3aa6ded33acb	-	de926182ae78	-	-	2026-11-25	xproof
 f1136a22-b202-4688-a44c-a9979c91261a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spring-splasher:f0t0:s1,f:xs:XP:spring-splasher:f0t0:s1	-	-	-	3aa6ded33acb	-	de926182ae78	-	-	2026-11-25	xproof
 f1190fb9-72a2-48f8-bc2d-61240f1e9119	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:zodiark-umbral-god:f0t0:s2,f:xs:XP:zodiark-umbral-god:f0t0:s2	-	-	-	267e485f6204	-	ec68f3b9d6be	-	-	2026-11-24	xproof
-f1190fb9-72a2-48f8-bc2d-61240f1e9119	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Zodiark, Umbral God/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f1190fb9-72a2-48f8-bc2d-61240f1e9119	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Zodiark, Umbral God/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f1190fb9-72a2-48f8-bc2d-61240f1e9119	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:zodiark-umbral-god:combat0.attack:s1,f:xs:XP:zodiark-umbral-god:combat0.attack:s1	-	-	-	23c4009444b0	-	ec68f3b9d6be	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+f1190fb9-72a2-48f8-bc2d-61240f1e9119	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:zodiark-umbral-god:combat0.block:s1,f:xs:XP:zodiark-umbral-god:combat0.block:s1	-	-	-	23c4009444b0	-	ec68f3b9d6be	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f1190fb9-72a2-48f8-bc2d-61240f1e9119	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:zodiark-umbral-god:f0t0:s2,f:xs:XP:zodiark-umbral-god:f0t0:s2	-	-	-	267e485f6204	-	ec68f3b9d6be	-	-	2026-11-24	xproof
 f1190fb9-72a2-48f8-bc2d-61240f1e9119	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Zodiark, Umbral God/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f11e914c-16bc-4836-bc14-bc1b5de9cd87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -155,7 +155,7 @@ f1d300b6-f9cf-40a9-8520-d78cd7d813cf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:net
 f1d300b6-f9cf-40a9-8520-d78cd7d813cf	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nettletooth-djinn:f0t0:s1,f:xs:XP:nettletooth-djinn:f0t0:s1	-	-	-	3aa6ded33acb	-	2c7f4130a5da	-	-	2026-11-25	xproof
 f1d826d1-d2da-46ce-b1db-81393c88d865	cast	cast-resolve	agreed	-	FX	scen	2	0	Susurian Dirgecraft/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f1d826d1-d2da-46ce-b1db-81393c88d865	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f1d826d1-d2da-46ce-b1db-81393c88d865	static#0.0	static#0.0	agreed	-	X	scen	1	0	Susurian Dirgecraft/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f1d826d1-d2da-46ce-b1db-81393c88d865	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:susurian-dirgecraft:static0.0:s1,f:xs:XP:susurian-dirgecraft:static0.0:s1	-	-	-	23c4009444b0	-	c45b7e2f599f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 f1d8e9a6-1903-4be5-8609-1009a463f393	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anthem-of-champions:cast:s1,f:xs:XP:anthem-of-champions:cast:s1	-	-	-	23c4009444b0	-	b709eb0625a5	-	-	2026-11-25	xproof
 f1d8e9a6-1903-4be5-8609-1009a463f393	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:anthem-of-champions:static0.0:s1,f:xs:XP:anthem-of-champions:static0.0:s1	-	-	-	23c4009444b0	-	b709eb0625a5	-	-	2026-11-25	xproof
 f1dca9ac-8886-4688-9245-763ef486701c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

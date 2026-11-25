@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-0a023964-2905-4928-9c3e-dc63e6ebd218	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+0a023964-2905-4928-9c3e-dc63e6ebd218	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0a023964-2905-4928-9c3e-dc63e6ebd218	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rakdos-carnarium:land:s1,f:xs:XP:rakdos-carnarium:land:s1	-	-	-	16ec2936189a	-	9de3e274c0ff	-	-	2026-11-24	xproof
 0a023964-2905-4928-9c3e-dc63e6ebd218	land	land	agreed	-	FX	start	2	0	x:xs:XP:rakdos-carnarium:land:s1,f:xs:XP:rakdos-carnarium:land:s1	-	-	-	16ec2936189a	-	9de3e274c0ff	-	-	2026-11-24	xproof
 0a029c61-b1de-427b-a8e8-36f3a23f001b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a2fbdd3-4940-4bbf-ae19-f6d00d7ff294	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:junkblade-bruiser:combat0.attack:s1,f:xs:XP:junkblade-bruiser:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ad048fc6dc10	-	-	2026-11-25	xproof
 0a2fbdd3-4940-4bbf-ae19-f6d00d7ff294	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:junkblade-bruiser:combat0.block:s1,f:xs:XP:junkblade-bruiser:combat0.block:s1	-	-	-	3aa6ded33acb	-	ad048fc6dc10	-	-	2026-11-25	xproof
 0a2fbdd3-4940-4bbf-ae19-f6d00d7ff294	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Junkblade Bruiser/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0a356d04-2e86-435b-9766-27b93b468a61	cast	cast-resolve	agreed	-	X	scen	1	0	Gene Pollinator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0a356d04-2e86-435b-9766-27b93b468a61	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gene-pollinator:cast:s1,f:xs:XP:gene-pollinator:cast:s1	-	-	-	23c4009444b0	-	3657be23b24a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0a356d04-2e86-435b-9766-27b93b468a61	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gene Pollinator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0a35df9d-80a0-4b6f-91d5-dad980af47e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a364879-31bd-4760-833d-165cde1e96c6	cast	cast-resolve	agreed	-	X	scen	1	0	Yellowjacket, Heartless Marauder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a44da1d-7914-4592-a00f-7e40e0d07f91	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:expedition-raptor:cast:s1,f:xs:XP:expedition-raptor:cast:s1	-	-	-	d864b561c9cb	-	ffdf67adfe99	-	-	2026-11-24	xproof
 0a44da1d-7914-4592-a00f-7e40e0d07f91	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:expedition-raptor:cast:s1,f:xs:XP:expedition-raptor:cast:s1	-	-	-	d864b561c9cb	-	ffdf67adfe99	-	-	2026-11-24	xproof
 0a45d8d4-2a5e-4b5b-b430-fc2fd5fd82c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skarrgan-skybreaker:cast:s1,f:xs:XP:skarrgan-skybreaker:cast:s1	-	-	-	77494c1ce129	-	4b2ea2c12851	-	-	2026-11-24	xproof
-0a45d8d4-2a5e-4b5b-b430-fc2fd5fd82c0	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+0a45d8d4-2a5e-4b5b-b430-fc2fd5fd82c0	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:skarrgan-skybreaker:f0a0:s1,f:xs:XP:skarrgan-skybreaker:f0a0:s1	-	-	-	23c4009444b0	-	4b2ea2c12851	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0a467e75-f68d-4ad0-85ff-b8516de8d5bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hexgold-slith:f0t0:s1,f:xs:XP:hexgold-slith:f0t0:s1	-	-	-	ae86f6029288	-	302a9ee675da	-	-	2026-11-24	xproof
 0a467e75-f68d-4ad0-85ff-b8516de8d5bc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hexgold-slith:f0t0:s1,f:xs:XP:hexgold-slith:f0t0:s1	-	-	-	ae86f6029288	-	302a9ee675da	-	-	2026-11-24	xproof
 0a467e75-f68d-4ad0-85ff-b8516de8d5bc	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:hexgold-slith:f0t1:s1,f:xs:XP:hexgold-slith:f0t1:s1	-	-	-	ae86f6029288	-	302a9ee675da	-	-	2026-11-24	xproof

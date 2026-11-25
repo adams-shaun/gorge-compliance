@@ -104,8 +104,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f6f4c98-ed7e-4fb1-8bfe-4210a39f77f2	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:unstoppable-plan:cast:s1,f:xs:XP:unstoppable-plan:cast:s1	-	-	-	23c4009444b0	-	0e617825cd12	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3f79603a-3173-404e-8c69-b2254c1270dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dune-beetle:cast:s1,f:xs:XP:dune-beetle:cast:s1	-	-	-	d864b561c9cb	-	02d3a1051307	-	-	2026-11-24	xproof
 3f79780a-accd-4782-94a8-a6e71fb3ada7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:evil-eye-of-orms-by-gore:cast:s1,f:xs:XP:evil-eye-of-orms-by-gore:cast:s1	-	-	-	25696bf19d5b	-	dbe0ad4a1078	-	-	2026-11-24	xproof
-3f806353-592e-431c-a7dd-a4c64034f94d	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-3f806353-592e-431c-a7dd-a4c64034f94d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+3f806353-592e-431c-a7dd-a4c64034f94d	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3f806353-592e-431c-a7dd-a4c64034f94d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3f85b92d-7212-4fc7-a5e8-6350e1acfdd3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:vedalken-plotter:cast:s1,f:xs:XP:vedalken-plotter:cast:s1	-	-	-	77494c1ce129	-	4e9f29cea3aa	-	-	2026-11-24	xproof
 3f85b92d-7212-4fc7-a5e8-6350e1acfdd3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:vedalken-plotter:cast:s1,f:xs:XP:vedalken-plotter:cast:s1	-	-	-	77494c1ce129	-	4e9f29cea3aa	-	-	2026-11-24	xproof
 3f86e6c6-fca5-43e9-88cc-4546cdd5f0ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

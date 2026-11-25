@@ -16,8 +16,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b1351e6-165e-4ca3-96d5-4774b3176362	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b1351e6-165e-4ca3-96d5-4774b3176362	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:leonin-warleader:f0t0:s1,f:xs:XP:leonin-warleader:f0t0:s1	-	-	-	d864b561c9cb	-	c87ca2f2f73c	-	-	2026-11-24	xproof
 8b13ec4d-812a-48b0-8a64-6847a694a03a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:exosuit-savior:f0t0:s2,f:xs:XP:exosuit-savior:f0t0:s2	-	-	-	267e485f6204	-	d8f5cdbe4c1c	-	-	2026-11-24	xproof
-8b13ec4d-812a-48b0-8a64-6847a694a03a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Exosuit Savior/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8b13ec4d-812a-48b0-8a64-6847a694a03a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Exosuit Savior/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8b13ec4d-812a-48b0-8a64-6847a694a03a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:exosuit-savior:combat0.attack:s1,f:xs:XP:exosuit-savior:combat0.attack:s1	-	-	-	23c4009444b0	-	d8f5cdbe4c1c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8b13ec4d-812a-48b0-8a64-6847a694a03a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:exosuit-savior:combat0.block:s1,f:xs:XP:exosuit-savior:combat0.block:s1	-	-	-	23c4009444b0	-	d8f5cdbe4c1c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8b13ec4d-812a-48b0-8a64-6847a694a03a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:exosuit-savior:f0t0:s2,f:xs:XP:exosuit-savior:f0t0:s2	-	-	-	267e485f6204	-	d8f5cdbe4c1c	-	-	2026-11-24	xproof
 8b153452-b4f2-4310-99e2-c729f28be6b9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nimble-brigand:cast:s1,f:xs:XP:nimble-brigand:cast:s1	-	-	-	23b491658465	-	dd220aaa33ce	-	-	2026-11-25	xproof
 8b153452-b4f2-4310-99e2-c729f28be6b9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:nimble-brigand:combat0.attack:s1,f:xs:XP:nimble-brigand:combat0.attack:s1	-	-	-	3aa6ded33acb	-	dd220aaa33ce	-	-	2026-11-25	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:shadowspear:f0a1:s1,f:xs:XP:shadowspear:f0a1:s1	-	-	-	ae86f6029288	-	e6b4e648fff4	-	-	2026-11-24	xproof
 8b2ba6f8-1060-4167-9941-3ab7bd4e0ca8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b2ba6f8-1060-4167-9941-3ab7bd4e0ca8	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+8b2ba6f8-1060-4167-9941-3ab7bd4e0ca8	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8b34d1df-4024-497d-bd28-a7caa8c3fa24	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sunblast-angel:cast:s1,f:xs:XP:sunblast-angel:cast:s1	-	-	-	d864b561c9cb	-	eb12e5fb142a	-	-	2026-11-24	xproof
 8b34d1df-4024-497d-bd28-a7caa8c3fa24	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sunblast-angel:cast:s1,f:xs:XP:sunblast-angel:cast:s1	-	-	-	d864b561c9cb	-	eb12e5fb142a	-	-	2026-11-24	xproof
 8b3526c4-efc8-42be-a0ab-de10c4cc986d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b4aa971-b919-4750-8388-33d4f42c9280	f0/a0	Mana	agreed	-	FX	start	3	0	x:xs:XP:tree-of-tales:f0a0:s1,f:xs:XP:tree-of-tales:f0a0:s1	-	-	-	8c0bd19283bb	-	9968ae3e4193	-	-	2026-11-24	xproof
 8b4aa971-b919-4750-8388-33d4f42c9280	land	land	agreed	-	FX	start	2	0	x:xs:XP:tree-of-tales:land:s1,f:xs:XP:tree-of-tales:land:s1	-	-	-	8c0bd19283bb	-	9968ae3e4193	-	-	2026-11-24	xproof
 8b4aae48-be01-4b42-8d32-45071650da03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cognivore:cast:s1,f:xs:XP:cognivore:cast:s1	-	-	-	fc71ca68c5ac	-	0e1de5deab6f	-	-	2026-11-24	xproof
-8b4bfdc5-8c0a-40c3-abbf-ada4a536dc34	cast	cast-resolve	agreed	-	X	scen	1	0	Summon: Choco/Mog/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8b4bfdc5-8c0a-40c3-abbf-ada4a536dc34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summon-choco-mog:cast:s1,f:xs:XP:summon-choco-mog:cast:s1	-	-	-	23c4009444b0	-	133c5516a887	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8b50de69-121a-48c4-bd7c-c8858f35f6ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b52f30c-5e38-4333-88ab-901b37105b36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b52f30c-5e38-4333-88ab-901b37105b36	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

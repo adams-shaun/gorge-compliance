@@ -4,8 +4,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c044dd1-8938-4d62-a7b2-e2298de08f70	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zimone-all-questioning:cast:s1,f:xs:XP:zimone-all-questioning:cast:s1	-	-	-	23c4009444b0	-	632fa185d827	-	-	2026-11-25	xproof
 6c044dd1-8938-4d62-a7b2-e2298de08f70	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:zimone-all-questioning:f0t0:s1,f:xs:XP:zimone-all-questioning:f0t0:s1	-	-	-	23c4009444b0	-	632fa185d827	-	-	2026-11-25	xproof
 6c05b882-51d9-43d8-93b8-c3317590f76a	cast	cast-resolve	agreed	-	FX	scen	2	0	Mm'menon, Uthros Exile/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6c05b882-51d9-43d8-93b8-c3317590f76a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mm'menon, Uthros Exile/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6c05b882-51d9-43d8-93b8-c3317590f76a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mm'menon, Uthros Exile/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6c05b882-51d9-43d8-93b8-c3317590f76a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:mm-menon-uthros-exile:combat0.attack:s1,f:xs:XP:mm-menon-uthros-exile:combat0.attack:s1	-	-	-	23c4009444b0	-	58bb57da4772	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+6c05b882-51d9-43d8-93b8-c3317590f76a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mm-menon-uthros-exile:combat0.block:s1,f:xs:XP:mm-menon-uthros-exile:combat0.block:s1	-	-	-	23c4009444b0	-	58bb57da4772	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6c05b882-51d9-43d8-93b8-c3317590f76a	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Mm'menon, Uthros Exile/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c076776-f497-4abf-ab06-f551768cffae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c076776-f497-4abf-ab06-f551768cffae	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6cd6b56d-d69e-4144-a6c7-8c066629435b	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6cd8cf2a-972f-41b7-ab0c-b4953accc2fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:folk-of-the-pines:cast:s1,f:xs:XP:folk-of-the-pines:cast:s1	-	-	-	ea3140b6974b	-	74f4122f05cd	-	-	2026-11-24	xproof
 6cd8cf2a-972f-41b7-ab0c-b4953accc2fe	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:folk-of-the-pines:f0a0:s1,f:xs:XP:folk-of-the-pines:f0a0:s1	-	-	-	8c0bd19283bb	-	74f4122f05cd	-	-	2026-11-24	xproof
-6cdc6548-cb32-437f-850a-9002542ad3d5	cast	cast-resolve	agreed	-	X	scen	1	0	Memories Returning/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6cdc6548-cb32-437f-850a-9002542ad3d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:memories-returning:cast:s1,f:xs:XP:memories-returning:cast:s1	-	-	-	23c4009444b0	-	e26bf94c8d97	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6ce24851-70d2-416c-8733-78928b4eee74	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wailing-ghoul:cast:s1,f:xs:XP:wailing-ghoul:cast:s1	-	-	-	d864b561c9cb	-	ad22e0679445	-	-	2026-11-24	xproof
 6ce24851-70d2-416c-8733-78928b4eee74	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wailing-ghoul:cast:s1,f:xs:XP:wailing-ghoul:cast:s1	-	-	-	d864b561c9cb	-	ad22e0679445	-	-	2026-11-24	xproof
 6ce6aed2-b959-4572-96fd-fee340d5a5ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 483e0c6c-8131-486c-b482-cc3396c9786b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Daily Bugle Building/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 483e0c6c-8131-486c-b482-cc3396c9786b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Daily Bugle Building/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 483e0c6c-8131-486c-b482-cc3396c9786b	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Daily Bugle Building/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-483e0c6c-8131-486c-b482-cc3396c9786b	land	play-land	agreed	-	X	scen	1	0	Daily Bugle Building/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+483e0c6c-8131-486c-b482-cc3396c9786b	land	land	agreed	-	FX	start	2	0	x:xs:XP:daily-bugle-building:land:s1,f:xs:XP:daily-bugle-building:land:s1	-	-	-	23c4009444b0	-	df1279546e8b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4844312c-3c9d-4ca1-986d-4ad35e68454e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:living-wall:cast:s1,f:xs:XP:living-wall:cast:s1	-	-	-	ae86f6029288	-	27f9893d32ee	-	-	2026-11-24	xproof
 4844312c-3c9d-4ca1-986d-4ad35e68454e	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:living-wall:f0a0:s1,f:xs:XP:living-wall:f0a0:s1	-	-	-	ae86f6029288	-	27f9893d32ee	-	-	2026-11-24	xproof
 4845dc21-7534-4896-b298-4d44cd7a3b27	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:moggcatcher:cast:s1,f:xs:XP:moggcatcher:cast:s1	-	-	-	5f2128bf97e4	-	25a8b624065d	-	-	2026-11-24	xproof
@@ -151,7 +151,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48b9c510-03ed-41cb-8c17-16110d447490	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ramirez-depietro:cast:s1,f:xs:XP:ramirez-depietro:cast:s1	-	-	-	fc71ca68c5ac	-	6ebb6a6fe3d5	-	-	2026-11-24	xproof
 48bda7dd-d023-41e8-8c28-e0cfda0d07ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-cloudchaser:f0t0:s1,f:xs:XP:aven-cloudchaser:f0t0:s1	-	-	-	25696bf19d5b	-	22d846f6e63b	-	-	2026-11-24	xproof
 48bda7dd-d023-41e8-8c28-e0cfda0d07ca	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aven-cloudchaser:f0t0:s1,f:xs:XP:aven-cloudchaser:f0t0:s1	-	-	-	25696bf19d5b	-	22d846f6e63b	-	-	2026-11-24	xproof
-48c0cd06-465d-4901-bf23-948a003afc0b	cast	cast-resolve	agreed	-	X	scen	1	0	Honor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+48c0cd06-465d-4901-bf23-948a003afc0b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:honor:cast:s1,f:xs:XP:honor:cast:s1	-	-	-	23c4009444b0	-	57b7712d7c80	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 48c127f0-2857-4c36-97bc-1291b6fe4a82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48c2dc82-7bed-4730-8b8b-1970b743414f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tenacious-tosk:cast:s1,f:xs:XP:tenacious-tosk:cast:s1	-	-	-	8c0bd19283bb	-	ffce3b65314e	-	-	2026-11-24	xproof
 48c2dc82-7bed-4730-8b8b-1970b743414f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

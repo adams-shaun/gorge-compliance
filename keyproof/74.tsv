@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7472af8e-2e93-43b2-bc32-a3741f6d7502	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ozai, the Phoenix King/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7476a14a-611e-4f81-b603-fd600e88568f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:thornado:cast:s1,f:xs:XP:thornado:cast:s1	-	-	-	d864b561c9cb	-	e732fdb139e9	-	-	2026-11-24	xproof
 7476a14a-611e-4f81-b603-fd600e88568f	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:thornado:cast:s2,f:xs:XP:thornado:cast:s2	-	-	-	d864b561c9cb	-	e732fdb139e9	-	-	2026-11-24	xproof
-74776491-29c3-46e6-989b-cf9a00bbfcef	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+74776491-29c3-46e6-989b-cf9a00bbfcef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pillory-of-the-sleepless:cast:s1,f:xs:XP:pillory-of-the-sleepless:cast:s1	-	-	-	23c4009444b0	-	39e42573094b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 74788d52-dad7-4c10-8567-a2c86ed90a67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74788d52-dad7-4c10-8567-a2c86ed90a67	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 747a1b36-eb4f-44e6-9e5a-bb1a0259a471	cast	cast-resolve	agreed	-	FX	scen	2	0	Ferocity of the Hunt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -213,6 +213,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74f67dcf-5afb-45aa-8d4b-3cdb23f6f2a1	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:triskelion:cast:s1,f:xs:XP:triskelion:cast:s1	-	-	-	25696bf19d5b	-	89450da54cd5	-	-	2026-11-24	xproof
 74fc88d5-19c3-4516-9a06-e9573d659caa	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74fc88d5-19c3-4516-9a06-e9573d659caa	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74fedfc4-3eb7-4845-9d3e-9d5243a0062a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	16ec2936189a	-	cfd387129da1	-	-	2026-11-24	xproof
-74fedfc4-3eb7-4845-9d3e-9d5243a0062a	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	16ec2936189a	-	cfd387129da1	-	-	2026-11-24	xproof
-74fedfc4-3eb7-4845-9d3e-9d5243a0062a	f0/t1	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	16ec2936189a	-	cfd387129da1	-	-	2026-11-24	xproof
+74fedfc4-3eb7-4845-9d3e-9d5243a0062a	cast	cast	agreed	-	F	start	6	0	f:xs:XP:court-hussar:cast:s1	-	-	-	23c4009444b0	-	cfd387129da1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+74fedfc4-3eb7-4845-9d3e-9d5243a0062a	f0/t0	ChangesZone	agreed	-	F	start	6	0	f:xs:XP:court-hussar:cast:s1	-	-	-	23c4009444b0	-	cfd387129da1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+74fedfc4-3eb7-4845-9d3e-9d5243a0062a	f0/t1	ChangesZone	agreed	-	F	start	6	0	f:xs:XP:court-hussar:cast:s1	-	-	-	23c4009444b0	-	cfd387129da1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

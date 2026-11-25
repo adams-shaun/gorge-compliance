@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e5a5cee-d068-42cf-bf58-8e1360720be0	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:fireslinger:f0a0:s1,f:xs:XP:fireslinger:f0a0:s1	-	-	-	8c0bd19283bb	-	91f685ad30e3	-	-	2026-11-24	xproof
 0e5b40dc-debf-48a1-8398-5ea00b5a5166	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sazh-katzroy:f0t0:s1,f:xs:XP:sazh-katzroy:f0t0:s1	-	-	-	23c4009444b0	-	b1c03af8493d	-	-	2026-11-25	xproof
 0e5b40dc-debf-48a1-8398-5ea00b5a5166	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sazh-katzroy:f0t0:s1,f:xs:XP:sazh-katzroy:f0t0:s1	-	-	-	23c4009444b0	-	b1c03af8493d	-	-	2026-11-25	xproof
-0e5b40dc-debf-48a1-8398-5ea00b5a5166	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sazh Katzroy/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0e5b40dc-debf-48a1-8398-5ea00b5a5166	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sazh-katzroy:f0t1:s1,f:xs:XP:sazh-katzroy:f0t1:s1	-	-	-	23c4009444b0	-	b1c03af8493d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	cast	cast-resolve	agreed	-	X	scen	1	0	Futurist Forge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Futurist Forge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e5f97b5-bb8c-4688-a141-5db4d4eeccf0	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -102,9 +102,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e9d8e12-b9da-4452-a758-5caffd8a752e	cast	cast-resolve	agreed	-	FX	scen	2	0	Magitek Armor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e9d8e12-b9da-4452-a758-5caffd8a752e	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Magitek Armor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e9d8e12-b9da-4452-a758-5caffd8a752e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ea2a099-7c81-4012-8148-4d377f2d64e1	cast	cast-resolve	agreed	-	X	scen	1	0	Squire's Lightblade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ea2a099-7c81-4012-8148-4d377f2d64e1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Squire's Lightblade/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ea2a099-7c81-4012-8148-4d377f2d64e1	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ea2a099-7c81-4012-8148-4d377f2d64e1	cast	cast	agreed	-	X	start	2	0	x:xs:XP:squire-s-lightblade:cast:s1	-	-	-	23c4009444b0	-	2f72fcc51311	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0ea2a099-7c81-4012-8148-4d377f2d64e1	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:squire-s-lightblade:f0a0:s1,f:xs:XP:squire-s-lightblade:f0a0:s1	-	-	-	23c4009444b0	-	2f72fcc51311	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0ea2a099-7c81-4012-8148-4d377f2d64e1	f0/t0	ChangesZone	agreed	-	X	start	2	0	x:xs:XP:squire-s-lightblade:cast:s1	-	-	-	23c4009444b0	-	2f72fcc51311	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0ea2a099-7c81-4012-8148-4d377f2d64e1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Squire's Lightblade/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ea2c5ad-2982-4041-8c9d-a1d31ced11aa	cast	cast-resolve	agreed	-	X	scen	1	0	Detention Chariot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ea2c5ad-2982-4041-8c9d-a1d31ced11aa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Detention Chariot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0eb11b2d-a397-48da-a0f3-9f0f83f42282	cast	cast-resolve	agreed	-	FX	scen	2	0	Tezzeret, Cruel Captain/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eb11b2d-a397-48da-a0f3-9f0f83f42282	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Tezzeret, Cruel Captain/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eb11b2d-a397-48da-a0f3-9f0f83f42282	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Tezzeret, Cruel Captain/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0eb11b2d-a397-48da-a0f3-9f0f83f42282	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Tezzeret, Cruel Captain/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0eb11b2d-a397-48da-a0f3-9f0f83f42282	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:tezzeret-cruel-captain:f0a2:s1,f:xs:XP:tezzeret-cruel-captain:f0a2:s1	-	-	-	23c4009444b0	-	9f690bd93d77	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0eb11b2d-a397-48da-a0f3-9f0f83f42282	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Tezzeret, Cruel Captain/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eb1d539-6301-46b0-903e-487eda34253f	cast	cast-resolve	agreed	-	FX	scen	2	0	Daretti, Rocketeer Engineer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eb1d539-6301-46b0-903e-487eda34253f	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,8 +139,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0eb8983e-4e44-4bfe-81dd-ddb41007a166	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:plumecreed-mentor:f0t0:s2,f:xs:XP:plumecreed-mentor:f0t0:s2	-	-	-	e07cf3a05ba5	-	0502e6ee79eb	-	-	2026-11-24	xproof
 0ebd8ab3-d4b7-480e-b7b1-267078edddf2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ebd8ab3-d4b7-480e-b7b1-267078edddf2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ebec97e-3cb1-41e2-a693-0febb5623016	cast	cast-resolve	agreed	-	X	scen	1	0	Harmonious Grovestrider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0ebec97e-3cb1-41e2-a693-0febb5623016	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Harmonious Grovestrider/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0ebec97e-3cb1-41e2-a693-0febb5623016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:harmonious-grovestrider:cast:s1,f:xs:XP:harmonious-grovestrider:cast:s1	-	-	-	23c4009444b0	-	1fa554e51fac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0ebec97e-3cb1-41e2-a693-0febb5623016	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:harmonious-grovestrider:f0t0:s1,f:xs:XP:harmonious-grovestrider:f0t0:s1	-	-	-	23c4009444b0	-	1fa554e51fac	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0ebec97e-3cb1-41e2-a693-0febb5623016	static#0.0	static#0.0	agreed	-	X	scen	1	0	Harmonious Grovestrider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0ec153ee-2a91-4196-9105-212dd1864aea	cast	cast	agreed	-	F	start	4	0	f:xs:XP:hecatomb:cast:s1	-	-	-	ea3140b6974b	-	de628f8e88c5	-	-	2026-11-24	xproof
 0ec153ee-2a91-4196-9105-212dd1864aea	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

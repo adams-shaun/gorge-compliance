@@ -25,8 +25,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 980cd7d5-a511-49ab-bc52-08b71c65db76	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:kindlespark-duo:f0t0:s1,f:xs:XP:kindlespark-duo:f0t0:s1	-	-	-	3aa6ded33acb	-	0d6c4253cdbd	-	-	2026-11-25	xproof
 980e1721-3717-4425-95a4-938dbf2ac661	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 981138d0-bf61-406a-85be-68cc5e58796c	cast	cast-resolve	agreed	-	FX	scen	2	0	Tapestry Warden/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-981138d0-bf61-406a-85be-68cc5e58796c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tapestry Warden/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-981138d0-bf61-406a-85be-68cc5e58796c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tapestry Warden/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+981138d0-bf61-406a-85be-68cc5e58796c	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tapestry-warden:combat0.attack:s1,f:xs:XP:tapestry-warden:combat0.attack:s1	-	-	-	23c4009444b0	-	61ba66bd4c16	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+981138d0-bf61-406a-85be-68cc5e58796c	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tapestry-warden:combat0.block:s1,f:xs:XP:tapestry-warden:combat0.block:s1	-	-	-	23c4009444b0	-	61ba66bd4c16	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 981138d0-bf61-406a-85be-68cc5e58796c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tapestry Warden/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 981138d0-bf61-406a-85be-68cc5e58796c	static#0.1	static#0.1	agreed	-	X	scen	1	0	Tapestry Warden/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98116aec-2ab1-4bee-b727-9feff6274825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

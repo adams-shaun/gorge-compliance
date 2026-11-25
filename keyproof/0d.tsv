@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-0d007479-c5e8-4aa1-b53e-fa962783deee	cast	cast-resolve	agreed	-	X	scen	1	0	Rydia's Return/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0d007479-c5e8-4aa1-b53e-fa962783deee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rydia-s-return:cast:s1,f:xs:XP:rydia-s-return:cast:s1	-	-	-	23c4009444b0	-	828f8d0d9350	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0d054301-8465-4a4c-91e7-9a28dda92e57	cast	cast-resolve	agreed	-	FX	scen	2	0	Summon: Esper Ramuh/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d058991-3751-4afe-80c9-79f0c6e10282	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d058991-3751-4afe-80c9-79f0c6e10282	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -71,9 +71,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0d4ee553-f206-4e70-a7b2-a3670440aee7	cast	cast	agreed	-	F	start	2	0	f:xs:XP:return-to-the-ranks:cast:s1	-	-	-	d864b561c9cb	-	3e65404bead2	-	-	2026-11-24	xproof
 0d5a1870-6d26-47e7-a86c-f3ff15cb0707	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0d5a1870-6d26-47e7-a86c-f3ff15cb0707	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-0d5bbde7-6f33-4708-b3ab-34d4528af649	cast	cast-resolve	agreed	-	X	scen	1	0	Magitek Scythe/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0d5bbde7-6f33-4708-b3ab-34d4528af649	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Magitek Scythe/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0d5bbde7-6f33-4708-b3ab-34d4528af649	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0d5bbde7-6f33-4708-b3ab-34d4528af649	cast	cast	agreed	-	X	start	2	0	x:xs:XP:magitek-scythe:cast:s1	-	-	-	23c4009444b0	-	3a4c1b5513b0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0d5bbde7-6f33-4708-b3ab-34d4528af649	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:magitek-scythe:f0a0:s1,f:xs:XP:magitek-scythe:f0a0:s1	-	-	-	23c4009444b0	-	3a4c1b5513b0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0d5bbde7-6f33-4708-b3ab-34d4528af649	f0/t0	ChangesZone	agreed	-	X	start	2	0	x:xs:XP:magitek-scythe:cast:s1	-	-	-	23c4009444b0	-	3a4c1b5513b0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0d5bbde7-6f33-4708-b3ab-34d4528af649	static#0.0	static#0.0	agreed	-	X	scen	1	0	Magitek Scythe/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0d5eb0b9-9b08-4d26-b141-a9d612a680a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roaming-ghostlight:f0t0:s1,f:xs:XP:roaming-ghostlight:f0t0:s1	-	-	-	ae86f6029288	-	9efb6bc345b6	-	-	2026-11-24	xproof
 0d5eb0b9-9b08-4d26-b141-a9d612a680a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roaming-ghostlight:f0t0:s1,f:xs:XP:roaming-ghostlight:f0t0:s1	-	-	-	ae86f6029288	-	9efb6bc345b6	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0da19cd4-7b3f-47bb-bb35-cbcc88ab53cd	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:trigon-of-corruption:f0a0:s1,f:xs:XP:trigon-of-corruption:f0a0:s1	-	-	-	d864b561c9cb	-	c4d14f57b237	-	-	2026-11-24	xproof
 0da19cd4-7b3f-47bb-bb35-cbcc88ab53cd	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0da4988f-47ca-4786-ac33-edbc9cfd6785	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0da4988f-47ca-4786-ac33-edbc9cfd6785	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+0da4988f-47ca-4786-ac33-edbc9cfd6785	f0/t0	SpellCast	agreed	-	F	start	2	0	f:xs:XP:spelltithe-enforcer:f0t0:s1	-	-	-	23c4009444b0	-	f034c3b61572	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0da68ca2-07fd-4359-95a9-fb2f815e6ed0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wildfire:cast:s1,f:xs:XP:wildfire:cast:s1	-	-	-	25696bf19d5b	-	ab51adecf495	-	-	2026-11-24	xproof
 0daed54c-ced9-4910-b62f-693f25190607	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0daed54c-ced9-4910-b62f-693f25190607	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:primal-forcemage:f0t0:s1,f:xs:XP:primal-forcemage:f0t0:s1	-	-	-	23c4009444b0	-	240b3a4c3c26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

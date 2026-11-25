@@ -14,9 +14,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 930b48b8-dbd1-4109-9eaa-7d7e9a04fa5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 931c0cd3-06fb-42da-86f2-476d08a238f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 931c0cd3-06fb-42da-86f2-476d08a238f9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-931c2153-e5e5-4642-bff0-f9dadcc24c9a	cast	cast-resolve	agreed	-	X	scen	1	0	Hullcarver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-931c2153-e5e5-4642-bff0-f9dadcc24c9a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hullcarver/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-931c2153-e5e5-4642-bff0-f9dadcc24c9a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hullcarver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+931c2153-e5e5-4642-bff0-f9dadcc24c9a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hullcarver:cast:s1,f:xs:XP:hullcarver:cast:s1	-	-	-	23c4009444b0	-	e1fff48f61e0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+931c2153-e5e5-4642-bff0-f9dadcc24c9a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:hullcarver:combat0.attack:s1,f:xs:XP:hullcarver:combat0.attack:s1	-	-	-	23c4009444b0	-	e1fff48f61e0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+931c2153-e5e5-4642-bff0-f9dadcc24c9a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:hullcarver:combat0.block:s1,f:xs:XP:hullcarver:combat0.block:s1	-	-	-	23c4009444b0	-	e1fff48f61e0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 931d3dcb-4bbb-4f1a-95e2-7e315faf4158	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:conversion-apparatus:cast:s1,f:xs:XP:conversion-apparatus:cast:s1	-	-	-	8c0bd19283bb	-	fecd6851f941	-	-	2026-11-24	xproof
 931d3dcb-4bbb-4f1a-95e2-7e315faf4158	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:conversion-apparatus:cast:s2,f:xs:XP:conversion-apparatus:cast:s2	-	-	-	8c0bd19283bb	-	fecd6851f941	-	-	2026-11-24	xproof
 931d3dcb-4bbb-4f1a-95e2-7e315faf4158	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:conversion-apparatus:f0a1:s1,f:xs:XP:conversion-apparatus:f0a1:s1	-	-	-	8c0bd19283bb	-	fecd6851f941	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93cf50cf-0ecc-4d3e-abea-778c1ebacec4	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:massacre-wurm:f0t0:s2,f:xs:XP:massacre-wurm:f0t0:s2	-	-	-	e07cf3a05ba5	-	29c8fea71f5b	-	-	2026-11-24	xproof
 93cf50cf-0ecc-4d3e-abea-778c1ebacec4	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:massacre-wurm:f0t1:s1,f:xs:XP:massacre-wurm:f0t1:s1	-	-	-	3aa6ded33acb	-	29c8fea71f5b	-	-	2026-11-25	xproof
 93cfa771-067f-44ed-9e29-6caf698ee9aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:experiment-kraj:cast:s1,f:xs:XP:experiment-kraj:cast:s1	-	-	-	16ec2936189a	-	af43e0ebeb4b	-	-	2026-11-24	xproof
-93cfa771-067f-44ed-9e29-6caf698ee9aa	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+93cfa771-067f-44ed-9e29-6caf698ee9aa	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:experiment-kraj:f0a0:s1,f:xs:XP:experiment-kraj:f0a0:s1	-	-	-	23c4009444b0	-	af43e0ebeb4b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 93d0691f-17b8-458b-a624-e182fc481f49	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 93d0e129-e3b5-4aff-9e50-f34771ed00ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fathom-mage:cast:s1,f:xs:XP:fathom-mage:cast:s1	-	-	-	d864b561c9cb	-	6930e938722b	-	-	2026-11-24	xproof
 93d0e129-e3b5-4aff-9e50-f34771ed00ff	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAdded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -187,9 +187,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93e336e3-2be7-4581-8ab3-9bea422d81c3	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:cargo-ship:cast:s2,f:xs:XP:cargo-ship:cast:s2	-	-	-	23c4009444b0	-	3561aa1a90fe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 93e336e3-2be7-4581-8ab3-9bea422d81c3	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:cargo-ship:f0a1:s1,f:xs:XP:cargo-ship:f0a1:s1	-	-	-	23c4009444b0	-	3561aa1a90fe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 93e38650-ce22-4ab9-b79d-cc7b6477c075	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Gold Saucer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-93e38650-ce22-4ab9-b79d-cc7b6477c075	f0/a1	activate#0.1	agreed	-	X	scen	1	0	The Gold Saucer/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-93e38650-ce22-4ab9-b79d-cc7b6477c075	f0/a2	activate#0.2	agreed	-	X	scen	1	0	The Gold Saucer/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-93e38650-ce22-4ab9-b79d-cc7b6477c075	land	play-land	agreed	-	X	scen	1	0	The Gold Saucer/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+93e38650-ce22-4ab9-b79d-cc7b6477c075	f0/a1	FlipCoin	agreed	-	FX	start	1	0	x:xs:XP:the-gold-saucer:f0a1:s2,f:xs:XP:the-gold-saucer:f0a1:s2	-	-	-	23c4009444b0	-	8ba0f72f682c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+93e38650-ce22-4ab9-b79d-cc7b6477c075	f0/a2	Draw	agreed	-	FX	start	2	0	x:xs:XP:the-gold-saucer:f0a2:s1,f:xs:XP:the-gold-saucer:f0a2:s1	-	-	-	23c4009444b0	-	8ba0f72f682c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+93e38650-ce22-4ab9-b79d-cc7b6477c075	land	land	agreed	-	FX	start	2	0	x:xs:XP:the-gold-saucer:land:s1,f:xs:XP:the-gold-saucer:land:s1	-	-	-	23c4009444b0	-	8ba0f72f682c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 93e40d56-18fd-42e1-a598-636aab79b836	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93e40d56-18fd-42e1-a598-636aab79b836	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93e4308e-e701-440e-861a-a30324654095	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

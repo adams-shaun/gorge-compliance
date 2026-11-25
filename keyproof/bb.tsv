@@ -79,8 +79,8 @@ bb86849c-fdec-4ca5-a8c0-ed682d921759	cast	NULL	owed	refused:scen failed: xengine
 bb86849c-fdec-4ca5-a8c0-ed682d921759	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Genesis Device"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bb86849c-fdec-4ca5-a8c0-ed682d921759	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Genesis Device"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bb87917f-33fb-4024-9317-0992c2f8f55e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bb87ec08-bb1b-43d8-8809-92904cbba685	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-bb87ec08-bb1b-43d8-8809-92904cbba685	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+bb87ec08-bb1b-43d8-8809-92904cbba685	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+bb87ec08-bb1b-43d8-8809-92904cbba685	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:leyline-of-lightning:f0t0:s1,f:xs:XP:leyline-of-lightning:f0t0:s1	-	-	-	23c4009444b0	-	f75c6f6b6da2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bb8a55a5-596e-427c-b745-4de8b0dfb095	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defender-en-vec:f0t0:s1,f:xs:XP:defender-en-vec:f0t0:s1	-	-	-	3aa6ded33acb	-	8f7fe6c8e19f	-	-	2026-11-25	xproof
 bb8a55a5-596e-427c-b745-4de8b0dfb095	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:defender-en-vec:f0t0:s1,f:xs:XP:defender-en-vec:f0t0:s1	-	-	-	3aa6ded33acb	-	8f7fe6c8e19f	-	-	2026-11-25	xproof
 bb8a55a5-596e-427c-b745-4de8b0dfb095	f0/t0	Phase/Fading	agreed	-	FX	start	2	0	x:xs:XP:defender-en-vec:f0t0:s1,f:xs:XP:defender-en-vec:f0t0:s1	-	-	-	3aa6ded33acb	-	8f7fe6c8e19f	-	-	2026-11-25	xproof
@@ -90,8 +90,8 @@ bb8c6dd2-1abe-4eb2-be1f-b0c078e5f257	cast	cast-resolve	agreed	-	FX	scen	2	0	Turt
 bb8c6dd2-1abe-4eb2-be1f-b0c078e5f257	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Turtle Blimp/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bb8c6dd2-1abe-4eb2-be1f-b0c078e5f257	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb956492-e3ed-483a-9169-5b795a8e619e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:astelli-reclaimer:f0t0:s2,f:xs:XP:astelli-reclaimer:f0t0:s2	-	-	-	267e485f6204	-	8a9be474863a	-	-	2026-11-24	xproof
-bb956492-e3ed-483a-9169-5b795a8e619e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Astelli Reclaimer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bb956492-e3ed-483a-9169-5b795a8e619e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Astelli Reclaimer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+bb956492-e3ed-483a-9169-5b795a8e619e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:astelli-reclaimer:combat0.attack:s1,f:xs:XP:astelli-reclaimer:combat0.attack:s1	-	-	-	23c4009444b0	-	8a9be474863a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+bb956492-e3ed-483a-9169-5b795a8e619e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:astelli-reclaimer:combat0.block:s1,f:xs:XP:astelli-reclaimer:combat0.block:s1	-	-	-	23c4009444b0	-	8a9be474863a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bb956492-e3ed-483a-9169-5b795a8e619e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:astelli-reclaimer:f0t0:s2,f:xs:XP:astelli-reclaimer:f0t0:s2	-	-	-	267e485f6204	-	8a9be474863a	-	-	2026-11-24	xproof
 bb95db4d-5017-4121-bf79-d68476602d8c	cast	cast-resolve	agreed	-	X	scen	1	0	Zombify/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bb9bb65e-504f-4edd-8d47-d0efa03e7d17	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spectral-deluge:cast:s1,f:xs:XP:spectral-deluge:cast:s1	-	-	-	8c0bd19283bb	-	62609f657b5b	-	-	2026-11-24	xproof
@@ -151,8 +151,8 @@ bbe3726b-e14d-48d1-8bbf-40d48f1ef8c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sta
 bbe41a21-f8ad-4e5c-88d8-2a41dfd32d13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bbe41a21-f8ad-4e5c-88d8-2a41dfd32d13	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bbe41a21-f8ad-4e5c-88d8-2a41dfd32d13	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-bbe740f8-6e7c-4cfd-9134-9bf8d5f48cf5	cast	cast-resolve	agreed	-	X	scen	1	0	Beamsaw Prospector/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bbe740f8-6e7c-4cfd-9134-9bf8d5f48cf5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Beamsaw Prospector/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+bbe740f8-6e7c-4cfd-9134-9bf8d5f48cf5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beamsaw-prospector:cast:s1,f:xs:XP:beamsaw-prospector:cast:s1	-	-	-	23c4009444b0	-	051229e3c49e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+bbe740f8-6e7c-4cfd-9134-9bf8d5f48cf5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:beamsaw-prospector:f0t0:s1,f:xs:XP:beamsaw-prospector:f0t0:s1	-	-	-	23c4009444b0	-	051229e3c49e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bbe79ca2-8f05-4f1b-b5d3-84724d3eff3a	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Matoc, Lavamancer"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 bbe79ca2-8f05-4f1b-b5d3-84724d3eff3a	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 bbe79ca2-8f05-4f1b-b5d3-84724d3eff3a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

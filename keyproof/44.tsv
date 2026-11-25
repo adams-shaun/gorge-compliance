@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 448396b8-b691-457a-8569-1282c3fca65a	f0/a1	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:infected-vermin:f0a1:s1,f:xs:XP:infected-vermin:f0a1:s1	-	-	-	fc71ca68c5ac	-	4f3a6ce9f5d1	-	-	2026-11-24	xproof
 4489a526-0e07-4d37-9e83-628f7eb256c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4489a526-0e07-4d37-9e83-628f7eb256c6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4489a526-0e07-4d37-9e83-628f7eb256c6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+4489a526-0e07-4d37-9e83-628f7eb256c6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 448b27a5-7c0c-4ab6-bddf-bd62b920aacc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forced-fruition:cast:s1,f:xs:XP:forced-fruition:cast:s1	-	-	-	d864b561c9cb	-	bf4b040db294	-	-	2026-11-24	xproof
 448b27a5-7c0c-4ab6-bddf-bd62b920aacc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 448c84f9-712b-4970-8719-2ab9c2a59d20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 44906d21-83cc-49ec-8505-4f7b020ac05f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44906d21-83cc-49ec-8505-4f7b020ac05f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:motivated-pony:f0t0:s1,f:xs:XP:motivated-pony:f0t0:s1	-	-	-	23c4009444b0	-	e324903b9080	-	-	2026-11-25	xproof
 449142ff-7190-471b-99a5-f77095a827dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-449142ff-7190-471b-99a5-f77095a827dd	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+449142ff-7190-471b-99a5-f77095a827dd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:surveilling-sprite:f0t0:s1,f:xs:XP:surveilling-sprite:f0t0:s1	-	-	-	23c4009444b0	-	15c8039f18e2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 44924f1e-edc4-481b-93f3-78606d4fd691	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ranger-s-hawk:cast:s1,f:xs:XP:ranger-s-hawk:cast:s1	-	-	-	d864b561c9cb	-	cf6cf725243f	-	-	2026-11-24	xproof
 44924f1e-edc4-481b-93f3-78606d4fd691	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4492c329-174a-44aa-be4d-9f018173b9a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

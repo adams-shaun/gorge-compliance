@@ -126,7 +126,7 @@ c5843d13-855f-41dd-ac13-3c7f7e18bb39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c584bdf2-b328-4e50-81e3-45ca6c2aff7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:voracious-vampire:f0t0:s1,f:xs:XP:voracious-vampire:f0t0:s1	-	-	-	d864b561c9cb	-	d5ac6ebc8ce7	-	-	2026-11-24	xproof
 c584bdf2-b328-4e50-81e3-45ca6c2aff7a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:voracious-vampire:f0t0:s1,f:xs:XP:voracious-vampire:f0t0:s1	-	-	-	d864b561c9cb	-	d5ac6ebc8ce7	-	-	2026-11-24	xproof
 c586312d-d04a-4bfb-bbb2-b41186ca178e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c590c1bd-430c-4515-9343-ba818c02bc5f	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+c590c1bd-430c-4515-9343-ba818c02bc5f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c596b847-4e05-4279-8675-b4e39cb3dc91	cast	cast-resolve	agreed	-	X	scen	1	0	Manhole Missile/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c597cfae-3f92-4d31-8bc1-5a2da995f1bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fogwalker:f0t0:s1,f:xs:XP:fogwalker:f0t0:s1	-	-	-	d864b561c9cb	-	f410de8a2943	-	-	2026-11-24	xproof
 c597cfae-3f92-4d31-8bc1-5a2da995f1bf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fogwalker:f0t0:s1,f:xs:XP:fogwalker:f0t0:s1	-	-	-	d864b561c9cb	-	f410de8a2943	-	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ c5a39f76-dd1b-442c-9f52-08561ecb91ad	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:c
 c5a39f76-dd1b-442c-9f52-08561ecb91ad	land	land	agreed	-	FX	start	2	0	x:xs:XP:country-roads:land:s1,f:xs:XP:country-roads:land:s1	-	-	-	23c4009444b0	-	af67c0a21530	-	-	2026-11-25	xproof
 c5a61e61-d5fe-41ef-afd6-ba5e0399b986	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5a6d752-9975-4059-8552-55c6ffb3ab68	cast	cast-resolve	agreed	-	FX	scen	2	0	Rook Turret/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c5a6d752-9975-4059-8552-55c6ffb3ab68	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rook Turret/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c5a6d752-9975-4059-8552-55c6ffb3ab68	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rook Turret/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c5a6d752-9975-4059-8552-55c6ffb3ab68	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rook-turret:combat0.attack:s1,f:xs:XP:rook-turret:combat0.attack:s1	-	-	-	23c4009444b0	-	42ca55a56dda	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c5a6d752-9975-4059-8552-55c6ffb3ab68	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:rook-turret:combat0.block:s1,f:xs:XP:rook-turret:combat0.block:s1	-	-	-	23c4009444b0	-	42ca55a56dda	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c5a6d752-9975-4059-8552-55c6ffb3ab68	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rook Turret/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c5a7a82e-3c13-4fa1-8bf5-bb85b2890f75	cast	cast-resolve	agreed	-	X	scen	1	0	Astute Terraformer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c5a7a82e-3c13-4fa1-8bf5-bb85b2890f75	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:astute-terraformer:f0a0:s1,f:xs:XP:astute-terraformer:f0a0:s1	-	-	-	23c4009444b0	-	e7f25bedb42e	-	-	2026-11-25	xproof

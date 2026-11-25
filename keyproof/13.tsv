@@ -22,13 +22,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 132859dd-de66-45c6-8af4-ab5e202a17b0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 132c8a62-00bc-4b89-b775-099d8909f200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132ca99a-a3c7-4ed6-b4d0-0edcd7140ca2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-132de6c2-4ca2-41da-9c78-caa59838b641	cast	cast-resolve	agreed	-	X	scen	1	0	Sunstar Lightsmith/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-132de6c2-4ca2-41da-9c78-caa59838b641	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sunstar Lightsmith/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+132de6c2-4ca2-41da-9c78-caa59838b641	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunstar-lightsmith:cast:s1,f:xs:XP:sunstar-lightsmith:cast:s1	-	-	-	23c4009444b0	-	f4d71bc11d42	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+132de6c2-4ca2-41da-9c78-caa59838b641	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:sunstar-lightsmith:f0t0:s1,f:xs:XP:sunstar-lightsmith:f0t0:s1	-	-	-	23c4009444b0	-	f4d71bc11d42	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 133109c3-a2ca-4231-b3b1-baa700800b07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primordial-ooze:f0t0:s1,f:xs:XP:primordial-ooze:f0t0:s1	-	-	-	3aa6ded33acb	-	efdfaba241bd	-	-	2026-11-25	xproof
 133109c3-a2ca-4231-b3b1-baa700800b07	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:primordial-ooze:f0t0:s1,f:xs:XP:primordial-ooze:f0t0:s1	-	-	-	3aa6ded33acb	-	efdfaba241bd	-	-	2026-11-25	xproof
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	cast	cast-resolve	agreed	-	X	scen	1	0	Valkyrie Aerial Unit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1333d690-a6dc-4ef8-8c57-2ba16727c0a5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Valkyrie Aerial Unit/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1333d690-a6dc-4ef8-8c57-2ba16727c0a5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Valkyrie Aerial Unit/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1333d690-a6dc-4ef8-8c57-2ba16727c0a5	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:valkyrie-aerial-unit:combat0.attack:s1,f:xs:XP:valkyrie-aerial-unit:combat0.attack:s1	-	-	-	23c4009444b0	-	19eb4323cf41	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1333d690-a6dc-4ef8-8c57-2ba16727c0a5	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:valkyrie-aerial-unit:combat0.block:s1,f:xs:XP:valkyrie-aerial-unit:combat0.block:s1	-	-	-	23c4009444b0	-	19eb4323cf41	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Valkyrie Aerial Unit/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13358b1d-0a35-48ed-a7fb-70359fa3998f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -101,9 +101,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1386d111-a2a7-4df1-91d7-947664126989	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1386d111-a2a7-4df1-91d7-947664126989	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1389ae4a-c3a5-4678-9012-937a3cbaf7f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1389c9fa-fec2-4212-a7aa-6dfb318dc202	cast	cast-resolve	agreed	-	X	scen	1	0	Bagel and Schmear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1389c9fa-fec2-4212-a7aa-6dfb318dc202	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bagel and Schmear/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1389c9fa-fec2-4212-a7aa-6dfb318dc202	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Bagel and Schmear/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1389c9fa-fec2-4212-a7aa-6dfb318dc202	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bagel-and-schmear:cast:s1,f:xs:XP:bagel-and-schmear:cast:s1	-	-	-	23c4009444b0	-	99ca0c1a7f0f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1389c9fa-fec2-4212-a7aa-6dfb318dc202	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:bagel-and-schmear:f0a0:s1,f:xs:XP:bagel-and-schmear:f0a0:s1	-	-	-	23c4009444b0	-	99ca0c1a7f0f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1389c9fa-fec2-4212-a7aa-6dfb318dc202	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:bagel-and-schmear:f0a1:s1,f:xs:XP:bagel-and-schmear:f0a1:s1	-	-	-	23c4009444b0	-	99ca0c1a7f0f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 138f9daa-19d4-4290-94a7-09e00dbcebb0	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13958d6f-25f9-4a6c-a16c-e7a20e1b9117	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1396e7f1-ac91-4778-9f71-493c7a44bd51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -120,8 +120,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 139b0fd5-8aa7-4b36-ab5d-cbf398381c6d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sun-blessed-mount:cast:s1,f:xs:XP:sun-blessed-mount:cast:s1	-	-	-	d864b561c9cb	-	e678c3e502ae	-	-	2026-11-24	xproof
 139fb542-89fd-4b9e-87e6-ec925bcca93a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13a884b5-8970-4d71-9082-a8b6c8db9a01	cast	cast	agreed	-	F	start	2	0	f:xs:XP:burning-wish:cast:s1	-	-	-	fc71ca68c5ac	-	953026403bb5	-	-	2026-11-24	xproof
-13a8b19b-23bd-4e45-81ff-23371665e4fc	cast	cast-resolve	agreed	-	X	scen	1	0	Requiem Monolith/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-13a8b19b-23bd-4e45-81ff-23371665e4fc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Requiem Monolith/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+13a8b19b-23bd-4e45-81ff-23371665e4fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:requiem-monolith:cast:s1,f:xs:XP:requiem-monolith:cast:s1	-	-	-	23c4009444b0	-	7c33b40ff911	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+13a8b19b-23bd-4e45-81ff-23371665e4fc	f0/a0	Animate	agreed	-	FX	start	4	0	x:xs:XP:requiem-monolith:cast:s1,f:xs:XP:requiem-monolith:cast:s1	-	-	-	23c4009444b0	-	7c33b40ff911	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13aa88a0-4b47-4012-ba50-002e51e637cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13aab4fc-4c89-45e6-8275-b074b00d0ee9	f0/a0	Mana	agreed	-	FX	start	5	0	x:xs:XP:zhalfirin-void:f0a0:s2,f:xs:XP:zhalfirin-void:f0a0:s2	-	-	-	d864b561c9cb	-	7dd86323b9b2	-	-	2026-11-24	xproof
 13aab4fc-4c89-45e6-8275-b074b00d0ee9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:zhalfirin-void:f0t0:s1,f:xs:XP:zhalfirin-void:f0t0:s1	-	-	-	d864b561c9cb	-	7dd86323b9b2	-	-	2026-11-24	xproof
@@ -135,8 +135,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13b0a3f3-04a5-465f-898b-13a28f795a16	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pyre-spawn:f0t0:s1,f:xs:XP:pyre-spawn:f0t0:s1	-	-	-	d864b561c9cb	-	012e3160f6c8	-	-	2026-11-24	xproof
 13b33a41-c22b-4e7a-8323-abadf7f80961	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:polluted-bonds:cast:s1,f:xs:XP:polluted-bonds:cast:s1	-	-	-	8a1b1a193ec0	-	70eb53285ad2	-	-	2026-11-24	xproof
 13b33a41-c22b-4e7a-8323-abadf7f80961	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-13b4aeac-4530-4e09-a547-548b4884bb2f	cast	cast-resolve	agreed	-	X	scen	1	0	The Lunar Whale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-13b4aeac-4530-4e09-a547-548b4884bb2f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Lunar Whale/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+13b4aeac-4530-4e09-a547-548b4884bb2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-lunar-whale:cast:s1,f:xs:XP:the-lunar-whale:cast:s1	-	-	-	23c4009444b0	-	181cf956fe1f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+13b4aeac-4530-4e09-a547-548b4884bb2f	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:the-lunar-whale:f0a0:s1,f:xs:XP:the-lunar-whale:f0a0:s1	-	-	-	23c4009444b0	-	181cf956fe1f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13b4aeac-4530-4e09-a547-548b4884bb2f	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Lunar Whale/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13b4aeac-4530-4e09-a547-548b4884bb2f	static#0.1	static#0.1	agreed	-	X	scen	1	0	The Lunar Whale/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13bad22a-6ba3-4197-8658-e47049a1cf1f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:explore-the-underdark:cast:s1,f:xs:XP:explore-the-underdark:cast:s1	-	-	-	8c0bd19283bb	-	49ce6fcf3499	-	-	2026-11-24	xproof

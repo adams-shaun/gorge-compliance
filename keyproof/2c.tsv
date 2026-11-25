@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c24b7c3-7c90-4109-a4aa-d9cae6febf34	cast	cast	diverged	-	-	start	0	2	-	52ef79e5e771	-	-	23c4009444b0	-	11a4a29c55c4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c275a85-5a15-46cd-a6e7-add63f9b853d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sterling-grove:cast:s1,f:xs:XP:sterling-grove:cast:s1	-	-	-	25696bf19d5b	-	662dd5e90f27	-	-	2026-11-24	xproof
 2c275a85-5a15-46cd-a6e7-add63f9b853d	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:sterling-grove:f0a0:s1,f:xs:XP:sterling-grove:f0a0:s1	-	-	-	d864b561c9cb	-	662dd5e90f27	-	-	2026-11-24	xproof
-2c2ef1ed-2f93-48c5-bf86-e46318599aeb	cast	cast-resolve	agreed	-	X	scen	1	0	Mechan Assembler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c2ef1ed-2f93-48c5-bf86-e46318599aeb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mechan Assembler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2c2ef1ed-2f93-48c5-bf86-e46318599aeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mechan-assembler:cast:s1,f:xs:XP:mechan-assembler:cast:s1	-	-	-	23c4009444b0	-	c7ae9a16ecb9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2c2ef1ed-2f93-48c5-bf86-e46318599aeb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mechan-assembler:f0t0:s1,f:xs:XP:mechan-assembler:f0t0:s1	-	-	-	23c4009444b0	-	c7ae9a16ecb9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c2fdeff-a0c6-44cb-9603-4a9865f62985	cast	cast-resolve	agreed	-	X	scen	1	0	Planetary Bombardment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c378f72-917c-49d4-ba68-51ebaf18d976	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c38f4c7-1b3f-42b4-a175-edab7acd6cc6	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -117,7 +117,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c96ab90-155b-4bf4-acc9-65a2f0cd3189	land	land	agreed	-	FX	start	2	0	x:xs:XP:capital-city:land:s1,f:xs:XP:capital-city:land:s1	-	-	-	23c4009444b0	-	157edffe2825	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c99d52d-f909-4494-aeee-937ae779fd4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c99d52d-f909-4494-aeee-937ae779fd4a	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-2c9bf40b-ddcb-4f46-a81e-56b91dfc784f	cast	cast-resolve	agreed	-	X	scen	1	0	Poison the Waters/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2c9bf40b-ddcb-4f46-a81e-56b91dfc784f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:poison-the-waters:cast:s1,f:xs:XP:poison-the-waters:cast:s1	-	-	-	23c4009444b0	-	820462ccce34	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2ca270f1-a8a2-438f-9321-2c653165f3e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ca270f1-a8a2-438f-9321-2c653165f3e4	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:jefferies-tube:f0a1:s1,f:xs:XP:jefferies-tube:f0a1:s1	-	-	-	8c0bd19283bb	-	8ea3ec0beff3	-	-	2026-11-24	xproof
 2ca270f1-a8a2-438f-9321-2c653165f3e4	f0/a1	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof

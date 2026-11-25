@@ -10,8 +10,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4709f11c-aef8-45ac-b2bf-e640c568dfac	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 470a8ee9-1870-44d8-8ade-64ec8084b9f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 470a8ee9-1870-44d8-8ade-64ec8084b9f7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-470c16c5-b078-47f5-89b0-42991e1f7157	cast	cast-resolve	agreed	-	X	scen	1	0	Sami, Ship's Engineer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-470c16c5-b078-47f5-89b0-42991e1f7157	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sami, Ship's Engineer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+470c16c5-b078-47f5-89b0-42991e1f7157	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sami-ship-s-engineer:cast:s1,f:xs:XP:sami-ship-s-engineer:cast:s1	-	-	-	23c4009444b0	-	5d6ae5e543d4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+470c16c5-b078-47f5-89b0-42991e1f7157	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sami-ship-s-engineer:f0t0:s1,f:xs:XP:sami-ship-s-engineer:f0t0:s1	-	-	-	23c4009444b0	-	5d6ae5e543d4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 470ec98e-120c-446d-ade6-7d80aa836b55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 470ec98e-120c-446d-ade6-7d80aa836b55	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 470ec98e-120c-446d-ade6-7d80aa836b55	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 479dd04b-0048-446a-9202-a4dc9472e5c3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tishana-voice-of-thunder:cast:s1,f:xs:XP:tishana-voice-of-thunder:cast:s1	-	-	-	d864b561c9cb	-	a8444dcb1ead	-	-	2026-11-24	xproof
 47a0079f-3544-45bc-a32a-bd93844c8c43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47a0079f-3544-45bc-a32a-bd93844c8c43	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-47a0079f-3544-45bc-a32a-bd93844c8c43	f0/t1	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+47a0079f-3544-45bc-a32a-bd93844c8c43	f0/t1	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 47a66451-8a4e-4fc6-8685-96e1feb8f997	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dispersal-technician:f0t0:s1,f:xs:XP:dispersal-technician:f0t0:s1	-	-	-	d864b561c9cb	-	fd65f6b8f6a3	-	-	2026-11-24	xproof
 47a66451-8a4e-4fc6-8685-96e1feb8f997	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dispersal-technician:f0t0:s1,f:xs:XP:dispersal-technician:f0t0:s1	-	-	-	d864b561c9cb	-	fd65f6b8f6a3	-	-	2026-11-24	xproof
 47a785ed-8095-4685-8daa-02c4e2b0ffcd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spellseeker:f0t0:s1,f:xs:XP:spellseeker:f0t0:s1	-	-	-	8c0bd19283bb	-	57d1daf5b032	-	-	2026-11-24	xproof

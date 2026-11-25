@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b4a07bd-5345-4520-bd05-b5173e08135c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eivor-battle-ready:cast:s1,f:xs:XP:eivor-battle-ready:cast:s1	-	-	-	ae86f6029288	-	130fc4f3ef9a	-	-	2026-11-24	xproof
 1b4a07bd-5345-4520-bd05-b5173e08135c	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:eivor-battle-ready:cast:s1,f:xs:XP:eivor-battle-ready:cast:s1	-	-	-	ae86f6029288	-	130fc4f3ef9a	-	-	2026-11-24	xproof
 1b524149-340e-4f94-9520-6a5258fabb00	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:monk-s-fist:f0t0:s2,f:xs:XP:monk-s-fist:f0t0:s2	-	-	-	267e485f6204	-	772736fd7ebf	-	-	2026-11-24	xproof
-1b524149-340e-4f94-9520-6a5258fabb00	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Monk's Fist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1b524149-340e-4f94-9520-6a5258fabb00	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:monk-s-fist:f0a0:s1,f:xs:XP:monk-s-fist:f0a0:s1	-	-	-	23c4009444b0	-	772736fd7ebf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1b524149-340e-4f94-9520-6a5258fabb00	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:monk-s-fist:f0t0:s2,f:xs:XP:monk-s-fist:f0t0:s2	-	-	-	267e485f6204	-	772736fd7ebf	-	-	2026-11-24	xproof
 1b524149-340e-4f94-9520-6a5258fabb00	static#0.0	static#0.0	agreed	-	X	scen	1	0	Monk's Fist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1b550c27-14b0-45fb-b17e-fcb061dc6ad0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gimli-s-fury:cast:s1,f:xs:XP:gimli-s-fury:cast:s1	-	-	-	3aa6ded33acb	-	cea24baf358a	-	-	2026-11-25	xproof
@@ -210,6 +210,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1bf6248c-658c-4540-8bee-81af79d349be	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1bf88f66-b673-4652-981b-3ea5d28f5c29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1bf88f66-b673-4652-981b-3ea5d28f5c29	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-1bf982e9-5868-46bf-81e3-f29ada33d169	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+1bf982e9-5868-46bf-81e3-f29ada33d169	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1bfdbb96-cc18-4609-ba17-d169967df8d0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:geistcatcher-s-rig:cast:s1,f:xs:XP:geistcatcher-s-rig:cast:s1	-	-	-	d864b561c9cb	-	8807a475c36d	-	-	2026-11-24	xproof
 1bfdbb96-cc18-4609-ba17-d169967df8d0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:geistcatcher-s-rig:cast:s1,f:xs:XP:geistcatcher-s-rig:cast:s1	-	-	-	d864b561c9cb	-	8807a475c36d	-	-	2026-11-24	xproof

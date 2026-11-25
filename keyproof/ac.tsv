@@ -98,10 +98,10 @@ ac88975c-fb2c-441a-bdd4-e7de6ba865e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wha
 ac88975c-fb2c-441a-bdd4-e7de6ba865e7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ac88975c-fb2c-441a-bdd4-e7de6ba865e7	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ac8952c9-bd30-48cd-b964-7e6271f9cbc8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sephara-sky-s-blade:cast:s1	-	-	-	d864b561c9cb	-	2b829c56c5d9	-	-	2026-11-24	xproof
-ac8cae63-270c-4f73-b29b-50f8f2395fd9	cast	cast-resolve	agreed	-	X	scen	1	0	City Pigeon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ac8cae63-270c-4f73-b29b-50f8f2395fd9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	City Pigeon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ac8cae63-270c-4f73-b29b-50f8f2395fd9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	City Pigeon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ac8cae63-270c-4f73-b29b-50f8f2395fd9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	City Pigeon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ac8cae63-270c-4f73-b29b-50f8f2395fd9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:city-pigeon:cast:s1,f:xs:XP:city-pigeon:cast:s1	-	-	-	23c4009444b0	-	132a295384fc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ac8cae63-270c-4f73-b29b-50f8f2395fd9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:city-pigeon:combat0.attack:s1,f:xs:XP:city-pigeon:combat0.attack:s1	-	-	-	23c4009444b0	-	132a295384fc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ac8cae63-270c-4f73-b29b-50f8f2395fd9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:city-pigeon:combat0.block:s1,f:xs:XP:city-pigeon:combat0.block:s1	-	-	-	23c4009444b0	-	132a295384fc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ac8cae63-270c-4f73-b29b-50f8f2395fd9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:city-pigeon:combat0.block:s1,f:xs:XP:city-pigeon:combat0.block:s1	-	-	-	23c4009444b0	-	132a295384fc	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ac8cf699-f67b-44da-bb79-eb95cfc0026d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cartographer-s-hawk:cast:s1,f:xs:XP:cartographer-s-hawk:cast:s1	-	-	-	8c0bd19283bb	-	0c9e84744f1e	-	-	2026-11-24	xproof
 ac8cf699-f67b-44da-bb79-eb95cfc0026d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ac8fba34-512c-4f24-999a-ab72f1ce4acb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ acb58839-2b26-4724-9e9b-b49b8217b13f	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:fl
 acb8d6a0-4bbd-4a42-bcac-3656367cc051	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:arcbound-shikari:f0t0:s2,f:xs:XP:arcbound-shikari:f0t0:s2	-	-	-	d864b561c9cb	-	61ed5f15ca3c	-	-	2026-11-24	xproof
 acb8d6a0-4bbd-4a42-bcac-3656367cc051	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:arcbound-shikari:f0t0:s2,f:xs:XP:arcbound-shikari:f0t0:s2	-	-	-	d864b561c9cb	-	61ed5f15ca3c	-	-	2026-11-24	xproof
 acb8d6a0-4bbd-4a42-bcac-3656367cc051	f0/t1	ChangesZone/Modular	agreed	-	FX	start	1	0	x:xs:XP:arcbound-shikari:f0t1:s2,f:xs:XP:arcbound-shikari:f0t1:s2	-	-	-	8c0bd19283bb	-	61ed5f15ca3c	-	-	2026-11-24	xproof
-acba24c1-168c-473b-96bb-1ba836c69f22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-acba24c1-168c-473b-96bb-1ba836c69f22	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+acba24c1-168c-473b-96bb-1ba836c69f22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ratcatcher:f0t0:s1,f:xs:XP:ratcatcher:f0t0:s1	-	-	-	23c4009444b0	-	af14f21b2f63	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+acba24c1-168c-473b-96bb-1ba836c69f22	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ratcatcher:f0t0:s1,f:xs:XP:ratcatcher:f0t0:s1	-	-	-	23c4009444b0	-	af14f21b2f63	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 acc07d0d-141b-4169-9643-6f20739e91be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acc091c0-3891-41b9-b5f6-7537fe9493fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acc091c0-3891-41b9-b5f6-7537fe9493fe	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:jungle-creeper:f0a0:s1,f:xs:XP:jungle-creeper:f0a0:s1	-	-	-	3aa6ded33acb	-	9c03e2c858ba	-	-	2026-11-25	xproof
@@ -187,8 +187,8 @@ ace86e56-efde-4eb7-8815-71456a4c3abe	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ace8e88e-ca6a-4bdf-8c6d-1b914fc00259	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ace8e88e-ca6a-4bdf-8c6d-1b914fc00259	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 aceac269-5100-428a-a4a3-bac57031e30b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aceea999-90ab-472c-86a7-48af1542cbcf	cast	cast-resolve	agreed	-	X	scen	1	0	Anticausal Vestige/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-aceea999-90ab-472c-86a7-48af1542cbcf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Anticausal Vestige/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+aceea999-90ab-472c-86a7-48af1542cbcf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anticausal-vestige:cast:s1,f:xs:XP:anticausal-vestige:cast:s1	-	-	-	23c4009444b0	-	0ea910be5144	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+aceea999-90ab-472c-86a7-48af1542cbcf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anticausal-vestige:cast:s1,f:xs:XP:anticausal-vestige:cast:s1	-	-	-	23c4009444b0	-	0ea910be5144	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 acf22340-7ff9-443f-a846-c44bb5a3f4e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:creeping-peeper:cast:s1,f:xs:XP:creeping-peeper:cast:s1	-	-	-	23c4009444b0	-	355d0b376181	-	-	2026-11-25	xproof
 acf22340-7ff9-443f-a846-c44bb5a3f4e7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Creeping Peeper/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 acf388b2-c4e3-4f1b-a16c-88f991d5c17b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

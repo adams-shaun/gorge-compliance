@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 194e2563-c0bf-4151-bbb0-0d626130b055	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1950067a-cc57-42a8-b1ee-f03e1b50591b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1950067a-cc57-42a8-b1ee-f03e1b50591b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19504e19-2886-4d28-a813-b798a9a446a2	cast	cast-resolve	agreed	-	X	scen	1	0	Alien Symbiosis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+19504e19-2886-4d28-a813-b798a9a446a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alien-symbiosis:cast:s1,f:xs:XP:alien-symbiosis:cast:s1	-	-	-	23c4009444b0	-	1ac01b6a83b2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 19504e19-2886-4d28-a813-b798a9a446a2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Alien Symbiosis/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19504e19-2886-4d28-a813-b798a9a446a2	static#0.1	static#0.1	agreed	-	X	scen	1	0	Alien Symbiosis/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 195107ad-879d-4b02-a44a-a3ba70fedf88	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:desert:f0a1:s1,f:xs:XP:desert:f0a1:s1	-	-	-	25696bf19d5b	-	609d96e91c41	-	-	2026-11-24	xproof
@@ -86,8 +86,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1962d9b3-f057-4d2c-9c5b-386d9a66148a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1965ca0e-1357-4437-82d3-1a78353ab5f1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vantress-paladin:cast:s1,f:xs:XP:vantress-paladin:cast:s1	-	-	-	ae86f6029288	-	f472bc33ab4c	-	-	2026-11-24	xproof
 196d6ef6-80d9-4bfd-a5ed-d9e8b00faad0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1972e0db-e595-4ec2-b97c-902561bb275b	cast	cast-resolve	agreed	-	X	scen	1	0	Kavaron Harrier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1972e0db-e595-4ec2-b97c-902561bb275b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kavaron Harrier/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1972e0db-e595-4ec2-b97c-902561bb275b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kavaron-harrier:cast:s1,f:xs:XP:kavaron-harrier:cast:s1	-	-	-	23c4009444b0	-	4f5739b93c5f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1972e0db-e595-4ec2-b97c-902561bb275b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kavaron-harrier:f0t0:s1,f:xs:XP:kavaron-harrier:f0t0:s1	-	-	-	23c4009444b0	-	4f5739b93c5f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1973f1e9-aa14-49dc-bafe-be17b30ba288	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1973f1e9-aa14-49dc-bafe-be17b30ba288	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 197582b9-4c86-41a3-ad0c-789a0db8e087	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof

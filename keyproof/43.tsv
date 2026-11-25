@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 439f7ac8-19f0-4227-82a7-48294adc2114	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 43a2bd01-3fce-4191-a08a-1e379c7770b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43a2bd01-3fce-4191-a08a-1e379c7770b0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-43a2bd01-3fce-4191-a08a-1e379c7770b0	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+43a2bd01-3fce-4191-a08a-1e379c7770b0	f0/a1	Attach/Equip	agreed	-	F	start	2	0	f:xs:XP:rakdos-riteknife:f0a1:s1	-	-	-	23c4009444b0	-	3baf7a5c268f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 43a515f2-b53a-4bb4-bb6e-0d79c9162359	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:giant-caterpillar:cast:s1,f:xs:XP:giant-caterpillar:cast:s1	-	-	-	8c0bd19283bb	-	66a31418e8ca	-	-	2026-11-24	xproof
 43a515f2-b53a-4bb4-bb6e-0d79c9162359	f0/a0	DelayedTrigger	agreed	-	FX	start	2	0	x:xs:XP:giant-caterpillar:f0a0:s1,f:xs:XP:giant-caterpillar:f0a0:s1	-	-	-	ea3140b6974b	-	66a31418e8ca	-	-	2026-11-24	xproof
 43a6de3e-152e-4af1-acec-53405742425c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:otterball-antics:cast:s1,f:xs:XP:otterball-antics:cast:s1	-	-	-	3aa6ded33acb	-	91f42aed5c1d	-	-	2026-11-25	xproof
@@ -209,5 +209,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 43fea418-db6f-4953-89d1-6873b2ca41a8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43feb61f-5de0-41b6-b678-9785c476dc08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 43febbcd-ecbe-4edb-ad90-7fc6dc381d05	cast	cast-resolve	agreed	-	FX	scen	2	0	Exalted Sunborn/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-43febbcd-ecbe-4edb-ad90-7fc6dc381d05	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Exalted Sunborn/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-43febbcd-ecbe-4edb-ad90-7fc6dc381d05	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Exalted Sunborn/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+43febbcd-ecbe-4edb-ad90-7fc6dc381d05	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:exalted-sunborn:combat0.attack:s1,f:xs:XP:exalted-sunborn:combat0.attack:s1	-	-	-	23c4009444b0	-	c5a71e3fae1f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+43febbcd-ecbe-4edb-ad90-7fc6dc381d05	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:exalted-sunborn:combat0.block:s1,f:xs:XP:exalted-sunborn:combat0.block:s1	-	-	-	23c4009444b0	-	c5a71e3fae1f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

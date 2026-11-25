@@ -16,10 +16,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 280d5601-802c-4607-9655-75cc83248210	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 282003f4-862a-4f80-8f45-e470fc0fe2fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blightwidow:cast:s1,f:xs:XP:blightwidow:cast:s1	-	-	-	d864b561c9cb	-	1c15e845b41e	-	-	2026-11-24	xproof
 28225bae-2d96-4352-b256-0c2ff4ef65e9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:syr-vondam-the-lucent:f0t0:s2,f:xs:XP:syr-vondam-the-lucent:f0t0:s2	-	-	-	267e485f6204	-	114060f0d3f9	-	-	2026-11-24	xproof
-28225bae-2d96-4352-b256-0c2ff4ef65e9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Syr Vondam, the Lucent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-28225bae-2d96-4352-b256-0c2ff4ef65e9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Syr Vondam, the Lucent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+28225bae-2d96-4352-b256-0c2ff4ef65e9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:syr-vondam-the-lucent:combat0.attack:s1,f:xs:XP:syr-vondam-the-lucent:combat0.attack:s1	-	-	-	23c4009444b0	-	114060f0d3f9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+28225bae-2d96-4352-b256-0c2ff4ef65e9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:syr-vondam-the-lucent:combat0.block:s1,f:xs:XP:syr-vondam-the-lucent:combat0.block:s1	-	-	-	23c4009444b0	-	114060f0d3f9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 28225bae-2d96-4352-b256-0c2ff4ef65e9	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:syr-vondam-the-lucent:f0t0:s2,f:xs:XP:syr-vondam-the-lucent:f0t0:s2	-	-	-	267e485f6204	-	114060f0d3f9	-	-	2026-11-24	xproof
-28225bae-2d96-4352-b256-0c2ff4ef65e9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Syr Vondam, the Lucent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+28225bae-2d96-4352-b256-0c2ff4ef65e9	f0/t1	Attacks	agreed	-	FX	start	4	0	x:xs:XP:syr-vondam-the-lucent:combat0.attack:s1,f:xs:XP:syr-vondam-the-lucent:combat0.attack:s1	-	-	-	23c4009444b0	-	114060f0d3f9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2825f7b0-21a9-44e2-b81f-542686981107	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:craterize:cast:s1,f:xs:XP:craterize:cast:s1	-	-	-	d864b561c9cb	-	2d2928549d1a	-	-	2026-11-24	xproof
 2825ff5a-5340-4494-bfde-80f6f5bce5a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lavaborn-muse:f0t0:s1,f:xs:XP:lavaborn-muse:f0t0:s1	-	-	-	3aa6ded33acb	-	cd6baccec444	-	-	2026-11-25	xproof
 2825ff5a-5340-4494-bfde-80f6f5bce5a2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lavaborn-muse:f0t0:s1,f:xs:XP:lavaborn-muse:f0t0:s1	-	-	-	3aa6ded33acb	-	cd6baccec444	-	-	2026-11-25	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28cc015f-1f3e-417a-9762-de25109fee5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mosscoat-goriak:cast:s1,f:xs:XP:mosscoat-goriak:cast:s1	-	-	-	ae86f6029288	-	60dbbb30085b	-	-	2026-11-24	xproof
 28cfafdb-5014-44e3-9133-4554129c1aee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fated-retribution:cast:s1,f:xs:XP:fated-retribution:cast:s1	-	-	-	d864b561c9cb	-	c4c063e9bff0	-	-	2026-11-24	xproof
 28d24add-da3a-4697-8fd2-5106c9225c0e	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-28d500ea-720f-4332-891e-404fb03acb5c	cast	cast-resolve	agreed	-	X	scen	1	0	Arachne, Psionic Weaver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+28d500ea-720f-4332-891e-404fb03acb5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arachne-psionic-weaver:cast:s1,f:xs:XP:arachne-psionic-weaver:cast:s1	-	-	-	23c4009444b0	-	add7b85f67f4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 28d500ea-720f-4332-891e-404fb03acb5c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Arachne, Psionic Weaver/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 28da6443-4acc-4f1c-a54f-9153286f18c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28dd0ae4-fc56-4abf-af24-6c6c8d0a10cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

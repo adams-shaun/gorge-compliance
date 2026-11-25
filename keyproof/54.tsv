@@ -78,15 +78,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 545399a0-f1f5-40bc-bd40-038946df8ad7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:machinate:cast:s1,f:xs:XP:machinate:cast:s1	-	-	-	25696bf19d5b	-	1fef9c6e3aa6	-	-	2026-11-24	xproof
 5453e4fa-49ea-43fc-8de5-6873d29ef627	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:waylaying-pirates:f0t0:s2,f:xs:XP:waylaying-pirates:f0t0:s2	-	-	-	e07cf3a05ba5	-	06ba18c15832	-	-	2026-11-24	xproof
 5453e4fa-49ea-43fc-8de5-6873d29ef627	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:waylaying-pirates:f0t0:s2,f:xs:XP:waylaying-pirates:f0t0:s2	-	-	-	e07cf3a05ba5	-	06ba18c15832	-	-	2026-11-24	xproof
-5454dddf-c6e5-4b0d-b96d-4904c13606dc	cast	cast-resolve	agreed	-	X	scen	1	0	Starport Security/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5454dddf-c6e5-4b0d-b96d-4904c13606dc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Starport Security/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5454dddf-c6e5-4b0d-b96d-4904c13606dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:starport-security:cast:s1,f:xs:XP:starport-security:cast:s1	-	-	-	23c4009444b0	-	b03190769b21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5454dddf-c6e5-4b0d-b96d-4904c13606dc	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:starport-security:f0a0:s1,f:xs:XP:starport-security:f0a0:s1	-	-	-	23c4009444b0	-	b03190769b21	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5456f00c-0bef-4c14-902f-f5c14475f284	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5456f00c-0bef-4c14-902f-f5c14475f284	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5456f00c-0bef-4c14-902f-f5c14475f284	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5458689c-48e0-48b6-bda8-048fa4718734	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5458689c-48e0-48b6-bda8-048fa4718734	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-545c516f-85a4-4a59-8cfa-03da27121a57	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-545c516f-85a4-4a59-8cfa-03da27121a57	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+5458689c-48e0-48b6-bda8-048fa4718734	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:stoneshaker-shaman:f0t0:s1,f:xs:XP:stoneshaker-shaman:f0t0:s1	-	-	-	23c4009444b0	-	d95ae945118b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+545c516f-85a4-4a59-8cfa-03da27121a57	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+545c516f-85a4-4a59-8cfa-03da27121a57	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5460c76f-39dc-4db0-acf7-146d533d822b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5460c76f-39dc-4db0-acf7-146d533d822b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 546201d0-3fa5-44e4-a526-ab0945711e49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

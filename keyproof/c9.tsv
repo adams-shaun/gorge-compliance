@@ -5,8 +5,8 @@ c9046281-dedb-4246-8e5d-7786fe0c41c7	f0/t0	NULL	owed	refused:no-generator:trigge
 c9048d35-aff7-45ae-ae97-db89397b3e74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:avalanche-riders:f0t1:s1,f:xs:XP:avalanche-riders:f0t1:s1	-	-	-	23c4009444b0	-	c897435b770f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c9048d35-aff7-45ae-ae97-db89397b3e74	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:avalanche-riders:f0t1:s1,f:xs:XP:avalanche-riders:f0t1:s1	-	-	-	23c4009444b0	-	c897435b770f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c9048d35-aff7-45ae-ae97-db89397b3e74	f0/t1	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:avalanche-riders:f0t1:s1,f:xs:XP:avalanche-riders:f0t1:s1	-	-	-	23c4009444b0	-	c897435b770f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-c90da077-de8c-4402-abfc-b63dd15853da	cast	cast-resolve	agreed	-	X	scen	1	0	Broodguard Elite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c90da077-de8c-4402-abfc-b63dd15853da	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Broodguard Elite/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c90da077-de8c-4402-abfc-b63dd15853da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:broodguard-elite:cast:s1,f:xs:XP:broodguard-elite:cast:s1	-	-	-	23c4009444b0	-	8985f3bc0bf2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c90da077-de8c-4402-abfc-b63dd15853da	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:broodguard-elite:cast:s1,f:xs:XP:broodguard-elite:cast:s1	-	-	-	23c4009444b0	-	8985f3bc0bf2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c90ea9d5-82f7-4b92-8cb1-10d0a7378e8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sky-eel-school:f0t0:s1,f:xs:XP:sky-eel-school:f0t0:s1	-	-	-	d864b561c9cb	-	e255c5fe1367	-	-	2026-11-24	xproof
 c90ea9d5-82f7-4b92-8cb1-10d0a7378e8c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sky-eel-school:f0t0:s1,f:xs:XP:sky-eel-school:f0t0:s1	-	-	-	d864b561c9cb	-	e255c5fe1367	-	-	2026-11-24	xproof
 c910c1c0-2b78-4e0f-bb55-e0581b2e07e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:military-discipline:f0t0:s1,f:xs:XP:military-discipline:f0t0:s1	-	-	-	ae86f6029288	-	54a19089c595	-	-	2026-11-24	xproof
@@ -65,7 +65,7 @@ c94332ac-982a-4c0f-85d4-43e950ac3069	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 c946be2c-1e8f-46bc-ab75-861926d4aa63	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c947171b-ed9e-4b83-af45-bd595a8d84ee	cast	cast-resolve	agreed	-	FX	scen	2	0	Warmaker Gunship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c947171b-ed9e-4b83-af45-bd595a8d84ee	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c947171b-ed9e-4b83-af45-bd595a8d84ee	static#0.0	static#0.0	agreed	-	X	scen	1	0	Warmaker Gunship/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c947171b-ed9e-4b83-af45-bd595a8d84ee	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:warmaker-gunship:static0.0:s1,f:xs:XP:warmaker-gunship:static0.0:s1	-	-	-	23c4009444b0	-	676f84a42920	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c951fca7-f333-4ca3-b5d6-83967d1d093d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c951fca7-f333-4ca3-b5d6-83967d1d093d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c95309e9-5c2f-4518-b2fd-825d3d0a4ae0	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -162,9 +162,9 @@ c9e7218f-07f2-46f3-bc63-eb5c0d32538b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	
 c9e7218f-07f2-46f3-bc63-eb5c0d32538b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e396fa14f3ac	-	-	2026-11-25	xproof
 c9e7218f-07f2-46f3-bc63-eb5c0d32538b	f0/t1	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e396fa14f3ac	-	-	2026-11-25	xproof
 c9ed4397-e7b7-469c-94e3-8fc70d88664f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cytoplast-root-kin:cast:s1,f:xs:XP:cytoplast-root-kin:cast:s1	-	-	-	16ec2936189a	-	2a48d7956017	-	-	2026-11-24	xproof
-c9ed4397-e7b7-469c-94e3-8fc70d88664f	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+c9ed4397-e7b7-469c-94e3-8fc70d88664f	f0/a0	MoveCounter	agreed	-	FX	start	2	0	x:xs:XP:cytoplast-root-kin:f0a0:s1,f:xs:XP:cytoplast-root-kin:f0a0:s1	-	-	-	23c4009444b0	-	2a48d7956017	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c9ed4397-e7b7-469c-94e3-8fc70d88664f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cytoplast-root-kin:cast:s1,f:xs:XP:cytoplast-root-kin:cast:s1	-	-	-	16ec2936189a	-	2a48d7956017	-	-	2026-11-24	xproof
-c9ed4397-e7b7-469c-94e3-8fc70d88664f	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+c9ed4397-e7b7-469c-94e3-8fc70d88664f	f0/t1	ChangesZone/Graft	agreed	-	FX	start	2	0	x:xs:XP:cytoplast-root-kin:f0t1:s1,f:xs:XP:cytoplast-root-kin:f0t1:s1	-	-	-	23c4009444b0	-	2a48d7956017	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c9ed8b01-959a-47d6-891e-0abbdccf6e4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c9edddb4-0d60-4d21-8887-51d943c6a31f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:consult-the-necrosages:cast:s1,f:xs:XP:consult-the-necrosages:cast:s1	-	-	-	64a08ba7d913	-	5784177b7c52	-	-	2026-11-24	xproof
 c9efec35-823f-4c78-be36-d1a57d8b6f44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

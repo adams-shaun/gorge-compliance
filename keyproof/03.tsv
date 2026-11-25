@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03259490-a789-4f96-8c5b-b410425bdd02	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:haunted-dead:cast:s1,f:xs:XP:haunted-dead:cast:s1	-	-	-	d864b561c9cb	-	4a51732eb2b3	-	-	2026-11-24	xproof
 03259ab0-caa8-4620-b070-127e2c712252	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wedgelight-rammer:f0t0:s1,f:xs:XP:wedgelight-rammer:f0t0:s1	-	-	-	25696bf19d5b	-	813adbb794fe	-	-	2026-11-24	xproof
 03259ab0-caa8-4620-b070-127e2c712252	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wedgelight-rammer:f0t0:s1,f:xs:XP:wedgelight-rammer:f0t0:s1	-	-	-	25696bf19d5b	-	813adbb794fe	-	-	2026-11-24	xproof
-03259ab0-caa8-4620-b070-127e2c712252	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wedgelight Rammer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+03259ab0-caa8-4620-b070-127e2c712252	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:wedgelight-rammer:static0.0:s1,f:xs:XP:wedgelight-rammer:static0.0:s1	-	-	-	23c4009444b0	-	813adbb794fe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 032b5fc4-5aca-41b6-9bf6-2c1ed0018968	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aggressive-mammoth:cast:s1,f:xs:XP:aggressive-mammoth:cast:s1	-	-	-	3aa6ded33acb	-	a1a552c3371d	-	-	2026-11-25	xproof
 032b5fc4-5aca-41b6-9bf6-2c1ed0018968	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:aggressive-mammoth:combat0.attack:s1,f:xs:XP:aggressive-mammoth:combat0.attack:s1	-	-	-	3aa6ded33acb	-	a1a552c3371d	-	-	2026-11-25	xproof
 032b5fc4-5aca-41b6-9bf6-2c1ed0018968	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aggressive-mammoth:combat0.block:s1,f:xs:XP:aggressive-mammoth:combat0.block:s1	-	-	-	3aa6ded33acb	-	a1a552c3371d	-	-	2026-11-25	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 032cc574-f7e7-4753-9a30-76cbd45d9563	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:caustic-hound:f0t0:s1,f:xs:XP:caustic-hound:f0t0:s1	-	-	-	d864b561c9cb	-	a0b8d5105458	-	-	2026-11-24	xproof
 032ec6e2-6cc3-4a97-9cc7-3233f5e11904	cast	cast-resolve	agreed	-	FX	scen	2	0	Reclamation Sage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 032ec6e2-6cc3-4a97-9cc7-3233f5e11904	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-032f59c3-9f47-4db3-a43c-065a99ed7efe	cast	cast-resolve	agreed	-	X	scen	1	0	Summon: Primal Odin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+032f59c3-9f47-4db3-a43c-065a99ed7efe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summon-primal-odin:cast:s1,f:xs:XP:summon-primal-odin:cast:s1	-	-	-	23c4009444b0	-	8dcea0e1c258	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 032fdd08-2ea7-442e-8162-0a8e5a585253	cast	cast-resolve	agreed	-	X	scen	1	0	Close Encounter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 032fdd08-2ea7-442e-8162-0a8e5a585253	static#0.0	static#0.0	agreed	-	X	scen	1	0	Close Encounter/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0332f7b5-dad3-4fd0-b86c-78bd8301f59d	cast	cast-resolve	agreed	-	FX	scen	2	0	Gnawing Crescendo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -55,9 +55,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0333cb81-5f44-4f31-9ee7-725e4f6af7b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yew-spirit:cast:s1,f:xs:XP:yew-spirit:cast:s1	-	-	-	d864b561c9cb	-	4b5af79f19ca	-	-	2026-11-24	xproof
 0333cb81-5f44-4f31-9ee7-725e4f6af7b3	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:yew-spirit:f0a0:s1,f:xs:XP:yew-spirit:f0a0:s1	-	-	-	d864b561c9cb	-	4b5af79f19ca	-	-	2026-11-24	xproof
 0334a2f8-a74a-44c9-ba64-d9b7fabe160c	cast	cast-resolve	agreed	-	X	scen	1	0	Cosmic Spider-Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0334a2f8-a74a-44c9-ba64-d9b7fabe160c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cosmic Spider-Man/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0334a2f8-a74a-44c9-ba64-d9b7fabe160c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cosmic Spider-Man/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0334a2f8-a74a-44c9-ba64-d9b7fabe160c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cosmic Spider-Man/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0334a2f8-a74a-44c9-ba64-d9b7fabe160c	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:cosmic-spider-man:combat0.attack:s1	-	-	-	23c4009444b0	-	6b6d54e305ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0334a2f8-a74a-44c9-ba64-d9b7fabe160c	combat#0.block	combat.block	agreed	-	X	start	2	0	x:xs:XP:cosmic-spider-man:combat0.block:s1	-	-	-	23c4009444b0	-	6b6d54e305ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0334a2f8-a74a-44c9-ba64-d9b7fabe160c	f0/t0	Phase	agreed	-	X	start	2	0	x:xs:XP:cosmic-spider-man:combat0.attack:s1	-	-	-	23c4009444b0	-	6b6d54e305ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0339bd11-ad71-4998-9b5d-a32790f0e5e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barkform-harvester:cast:s1,f:xs:XP:barkform-harvester:cast:s1	-	-	-	3aa6ded33acb	-	3b102883bd74	-	-	2026-11-25	xproof
 0339bd11-ad71-4998-9b5d-a32790f0e5e3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:barkform-harvester:combat0.attack:s1,f:xs:XP:barkform-harvester:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3b102883bd74	-	-	2026-11-25	xproof
 0339bd11-ad71-4998-9b5d-a32790f0e5e3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:barkform-harvester:combat0.block:s1,f:xs:XP:barkform-harvester:combat0.block:s1	-	-	-	3aa6ded33acb	-	3b102883bd74	-	-	2026-11-25	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0380e99c-18f9-4472-8223-bb208e5f0963	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Earth Village Ruffians/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 038463c8-d2e1-4e7b-829d-67a744ae2660	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 038463c8-d2e1-4e7b-829d-67a744ae2660	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:unliving-psychopath:f0a1:s1,f:xs:XP:unliving-psychopath:f0a1:s1	-	-	-	9ee19e8250ce	-	f921b97ec765	-	-	2026-11-24	xproof
-038463c8-d2e1-4e7b-829d-67a744ae2660	f0/a1	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+038463c8-d2e1-4e7b-829d-67a744ae2660	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 038519b9-bca8-4b27-b5ac-2409595469d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0385be55-8e8e-4e7d-b6b7-51adc6eb98fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03873314-6e64-43ab-95c0-3d8692a57a03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -182,10 +182,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03ee49c9-95a3-44f1-b010-f7c4b2f86a7c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:vito-s-inquisitor:f0a0:s1,f:xs:XP:vito-s-inquisitor:f0a0:s1	-	-	-	3aa6ded33acb	-	f85fcb84f300	-	-	2026-11-25	xproof
 03efb4f3-b8e2-4441-824f-886dc40712c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03efb4f3-b8e2-4441-824f-886dc40712c4	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-03f04c2c-1036-497e-8b13-06c61b0b0ba6	cast	cast-resolve	agreed	-	X	scen	1	0	Territorial Bruntar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-03f04c2c-1036-497e-8b13-06c61b0b0ba6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Territorial Bruntar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-03f04c2c-1036-497e-8b13-06c61b0b0ba6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Territorial Bruntar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-03f04c2c-1036-497e-8b13-06c61b0b0ba6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Territorial Bruntar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+03f04c2c-1036-497e-8b13-06c61b0b0ba6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:territorial-bruntar:cast:s1,f:xs:XP:territorial-bruntar:cast:s1	-	-	-	23c4009444b0	-	6200568f5f13	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+03f04c2c-1036-497e-8b13-06c61b0b0ba6	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:territorial-bruntar:combat0.attack:s1,f:xs:XP:territorial-bruntar:combat0.attack:s1	-	-	-	23c4009444b0	-	6200568f5f13	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+03f04c2c-1036-497e-8b13-06c61b0b0ba6	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:territorial-bruntar:combat0.block:s1,f:xs:XP:territorial-bruntar:combat0.block:s1	-	-	-	23c4009444b0	-	6200568f5f13	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+03f04c2c-1036-497e-8b13-06c61b0b0ba6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:territorial-bruntar:f0t0:s1,f:xs:XP:territorial-bruntar:f0t0:s1	-	-	-	23c4009444b0	-	6200568f5f13	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 03f5946b-e000-4b39-a49f-1c31668b51bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:autumn-s-veil:cast:s1,f:xs:XP:autumn-s-veil:cast:s1	-	-	-	d864b561c9cb	-	2c0c7bc58127	-	-	2026-11-24	xproof
 03f5c566-825c-4c46-9c01-a2f9b1e70a13	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03f5c566-825c-4c46-9c01-a2f9b1e70a13	f0/a1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

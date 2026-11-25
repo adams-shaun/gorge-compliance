@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d1446f4-cf71-4798-b921-8f6824350319	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:wei-ambush-force:f0t0:s1,f:xs:XP:wei-ambush-force:f0t0:s1	-	-	-	5f2128bf97e4	-	109295446af2	-	-	2026-11-24	xproof
 2d16d51b-47e0-4cdc-83dd-a805ba50bd83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:out-cold:cast:s1,f:xs:XP:out-cold:cast:s1	-	-	-	8c0bd19283bb	-	620a8993f231	-	-	2026-11-24	xproof
 2d1a15dc-3123-4425-b036-a3b5a83fcdf8	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Islanders/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2d1bbeda-2e81-4aaa-9494-094ec3dd6c3b	cast	cast-resolve	agreed	-	X	scen	1	0	Suplex/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2d1bbeda-2e81-4aaa-9494-094ec3dd6c3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suplex:cast:s1,f:xs:XP:suplex:cast:s1	-	-	-	23c4009444b0	-	1ddd9a3f70da	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2d29c40a-4e13-4d99-bb5a-e991e385b8c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d29c40a-4e13-4d99-bb5a-e991e385b8c2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2d3010d5-5c21-4342-ad79-a737b6731230	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scavenged-weaponry:f0t0:s1,f:xs:XP:scavenged-weaponry:f0t0:s1	-	-	-	3aa6ded33acb	-	a10e014af5f3	-	-	2026-11-25	xproof
@@ -39,8 +39,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d41fd1f-4a98-45dd-a3c5-f7c5e0152109	cast	cast-resolve	agreed	-	FX	scen	2	0	Circle of Power/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2d425f5d-326f-46f8-ab84-852b01db4adb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d44bdd2-aa31-415a-be71-d9e98ef12334	cast	cast-resolve	agreed	-	FX	scen	2	0	Noctis, Prince of Lucis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2d44bdd2-aa31-415a-be71-d9e98ef12334	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Noctis, Prince of Lucis/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2d44bdd2-aa31-415a-be71-d9e98ef12334	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Noctis, Prince of Lucis/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2d44bdd2-aa31-415a-be71-d9e98ef12334	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:noctis-prince-of-lucis:combat0.attack:s1,f:xs:XP:noctis-prince-of-lucis:combat0.attack:s1	-	-	-	23c4009444b0	-	5d81e3dd7799	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2d44bdd2-aa31-415a-be71-d9e98ef12334	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:noctis-prince-of-lucis:combat0.block:s1,f:xs:XP:noctis-prince-of-lucis:combat0.block:s1	-	-	-	23c4009444b0	-	5d81e3dd7799	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2d44bdd2-aa31-415a-be71-d9e98ef12334	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Noctis, Prince of Lucis/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2d44bdd2-aa31-415a-be71-d9e98ef12334	static#0.0	static#0.0	agreed	-	X	scen	1	0	Noctis, Prince of Lucis/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2d4721f1-1a49-45aa-99d5-ab8c6f3f3ab6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

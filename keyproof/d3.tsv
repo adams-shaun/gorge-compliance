@@ -85,7 +85,7 @@ d36d3c93-ed24-4447-9d15-3071f5c0989b	combat#0.block	combat.block	agreed	-	FX	sta
 d36d3c93-ed24-4447-9d15-3071f5c0989b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hoarding-dragon:f0t0:s2,f:xs:XP:hoarding-dragon:f0t0:s2	-	-	-	e07cf3a05ba5	-	3d98b58f5b8f	-	-	2026-11-24	xproof
 d36d3c93-ed24-4447-9d15-3071f5c0989b	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hoarding-dragon:f0t1:s1,f:xs:XP:hoarding-dragon:f0t1:s1	-	-	-	8c0bd19283bb	-	3d98b58f5b8f	-	-	2026-11-24	xproof
 d36e0c9f-c025-4dfe-9644-9cad2461ce38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d36e0c9f-c025-4dfe-9644-9cad2461ce38	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+d36e0c9f-c025-4dfe-9644-9cad2461ce38	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d36e11f1-6ab3-4273-8114-a8fbbe21c1c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fanatical-firebrand:cast:s1,f:xs:XP:fanatical-firebrand:cast:s1	-	-	-	8c0bd19283bb	-	9ad9b6d9576a	-	-	2026-11-24	xproof
 d36e11f1-6ab3-4273-8114-a8fbbe21c1c3	f0/a0	DealDamage	agreed	-	FX	start	4	0	x:xs:XP:fanatical-firebrand:cast:s1,f:xs:XP:fanatical-firebrand:cast:s1	-	-	-	8c0bd19283bb	-	9ad9b6d9576a	-	-	2026-11-24	xproof
 d36f64a0-53f7-4c56-9f40-a7927a5c2608	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -106,9 +106,9 @@ d37e0127-6f68-438e-8b9e-a71bb3c34733	combat#0.block	combat#0.block	agreed	-	X	sc
 d37e0127-6f68-438e-8b9e-a71bb3c34733	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Forsaken Miner/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d37e0127-6f68-438e-8b9e-a71bb3c34733	static#0.0	static#0.0	agreed	-	X	scen	1	0	Forsaken Miner/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d37e37d7-ce66-42cb-862e-fc5c414cfeb6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d37e595f-afe7-4ad9-87db-b9ceb3f435e8	cast	cast-resolve	agreed	-	X	scen	1	0	Ring of the Lucii/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d37e595f-afe7-4ad9-87db-b9ceb3f435e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ring-of-the-lucii:cast:s1,f:xs:XP:ring-of-the-lucii:cast:s1	-	-	-	23c4009444b0	-	5fdd7e2cd57d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d37e595f-afe7-4ad9-87db-b9ceb3f435e8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ring of the Lucii/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d37e595f-afe7-4ad9-87db-b9ceb3f435e8	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ring of the Lucii/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d37e595f-afe7-4ad9-87db-b9ceb3f435e8	f0/a1	Tap	agreed	-	FX	start	2	0	x:xs:XP:ring-of-the-lucii:f0a1:s1,f:xs:XP:ring-of-the-lucii:f0a1:s1	-	-	-	23c4009444b0	-	5fdd7e2cd57d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d37effd3-d194-4609-9994-6d70038a68f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d37effd3-d194-4609-9994-6d70038a68f9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d37effd3-d194-4609-9994-6d70038a68f9	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -209,7 +209,7 @@ d3ebe9ae-108f-4d23-a236-35d632889cf8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d3edbb47-6892-4853-badc-cc01499d4e55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d3ee7f5d-56b4-4d87-9642-dcd8449dfb45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d3ee7f5d-56b4-4d87-9642-dcd8449dfb45	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d3f4aa87-a89e-43f8-abc3-712e6bf08889	cast	cast-resolve	agreed	-	X	scen	1	0	Shambling Cie'th/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d3f4aa87-a89e-43f8-abc3-712e6bf08889	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shambling-cie-th:cast:s1,f:xs:XP:shambling-cie-th:cast:s1	-	-	-	23c4009444b0	-	ddf8a8ec1842	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d3f4aa87-a89e-43f8-abc3-712e6bf08889	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Shambling Cie'th/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d3f58efb-ba75-4caf-9e33-74236c707b83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:makindi-patrol:f0t0:s1,f:xs:XP:makindi-patrol:f0t0:s1	-	-	-	d864b561c9cb	-	79cf83ab60e7	-	-	2026-11-24	xproof
 d3f58efb-ba75-4caf-9e33-74236c707b83	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:makindi-patrol:f0t0:s1,f:xs:XP:makindi-patrol:f0t0:s1	-	-	-	d864b561c9cb	-	79cf83ab60e7	-	-	2026-11-24	xproof

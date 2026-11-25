@@ -90,8 +90,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 585511e1-4cca-4e70-963d-56f98ae49c29	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 585511e1-4cca-4e70-963d-56f98ae49c29	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 58582fac-4c42-4a1c-9ab1-4a892b500da4	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:quantum-riddler:f0t0:s2,f:xs:XP:quantum-riddler:f0t0:s2	-	-	-	267e485f6204	-	7e1392cb255b	-	-	2026-11-24	xproof
-58582fac-4c42-4a1c-9ab1-4a892b500da4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Quantum Riddler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-58582fac-4c42-4a1c-9ab1-4a892b500da4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Quantum Riddler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+58582fac-4c42-4a1c-9ab1-4a892b500da4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:quantum-riddler:combat0.attack:s1,f:xs:XP:quantum-riddler:combat0.attack:s1	-	-	-	23c4009444b0	-	7e1392cb255b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+58582fac-4c42-4a1c-9ab1-4a892b500da4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:quantum-riddler:combat0.block:s1,f:xs:XP:quantum-riddler:combat0.block:s1	-	-	-	23c4009444b0	-	7e1392cb255b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 58582fac-4c42-4a1c-9ab1-4a892b500da4	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:quantum-riddler:f0t0:s2,f:xs:XP:quantum-riddler:f0t0:s2	-	-	-	267e485f6204	-	7e1392cb255b	-	-	2026-11-24	xproof
 5859fd59-8732-414a-8932-007980af495d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodland-bellower:f0t0:s1,f:xs:XP:woodland-bellower:f0t0:s1	-	-	-	d864b561c9cb	-	53bcee7a053a	-	-	2026-11-24	xproof
 5859fd59-8732-414a-8932-007980af495d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:woodland-bellower:f0t0:s1,f:xs:XP:woodland-bellower:f0t0:s1	-	-	-	d864b561c9cb	-	53bcee7a053a	-	-	2026-11-24	xproof
@@ -127,9 +127,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58805c22-29cc-4ab2-a95c-b1798eb7a90d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5881aac2-4f31-45cb-bdb5-64a29ec23316	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sower-of-temptation:f0t0:s1,f:xs:XP:sower-of-temptation:f0t0:s1	-	-	-	d864b561c9cb	-	969e39c169f8	-	-	2026-11-24	xproof
 5881aac2-4f31-45cb-bdb5-64a29ec23316	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sower-of-temptation:f0t0:s1,f:xs:XP:sower-of-temptation:f0t0:s1	-	-	-	d864b561c9cb	-	969e39c169f8	-	-	2026-11-24	xproof
-58838588-13d5-4948-babf-d09cc59d76a1	cast	cast	owed	harness	-	start	0	0	-	-	-	-	77494c1ce129	-	25319433617b	-	-	2026-11-24	xproof
-58838588-13d5-4948-babf-d09cc59d76a1	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
-58838588-13d5-4948-babf-d09cc59d76a1	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	77494c1ce129	-	25319433617b	-	-	2026-11-24	xproof
+58838588-13d5-4948-babf-d09cc59d76a1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:crystal-seer:cast:s1,f:xs:XP:crystal-seer:cast:s1	-	-	-	23c4009444b0	-	25319433617b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+58838588-13d5-4948-babf-d09cc59d76a1	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:crystal-seer:f0a0:s1,f:xs:XP:crystal-seer:f0a0:s1	-	-	-	23c4009444b0	-	25319433617b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+58838588-13d5-4948-babf-d09cc59d76a1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:crystal-seer:cast:s1,f:xs:XP:crystal-seer:cast:s1	-	-	-	23c4009444b0	-	25319433617b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 58853200-efbe-41cc-87f1-720841308f4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tower-defense:cast:s1,f:xs:XP:tower-defense:cast:s1	-	-	-	d864b561c9cb	-	4ec160adcfb1	-	-	2026-11-24	xproof
 5887922e-d1fb-44e2-9498-2065ce8ac870	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5887922e-d1fb-44e2-9498-2065ce8ac870	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:festering-newt:f0t0:s1,f:xs:XP:festering-newt:f0t0:s1	-	-	-	d864b561c9cb	-	235531559427	-	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58ce3c79-8903-41be-8494-56d7953074ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58ce3c79-8903-41be-8494-56d7953074ad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58d39991-420b-4eca-967d-49ad3f9a4702	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-torch-goblin:cast:s1,f:xs:XP:war-torch-goblin:cast:s1	-	-	-	77494c1ce129	-	0475617cfb2d	-	-	2026-11-24	xproof
-58d39991-420b-4eca-967d-49ad3f9a4702	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+58d39991-420b-4eca-967d-49ad3f9a4702	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 58d5d563-cb60-4977-86cd-f32cd811aa77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phantom-blade:f0t0:s1,f:xs:XP:phantom-blade:f0t0:s1	-	-	-	ae86f6029288	-	bf7bdc481304	-	-	2026-11-24	xproof
 58d5d563-cb60-4977-86cd-f32cd811aa77	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58d5d563-cb60-4977-86cd-f32cd811aa77	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phantom-blade:f0t0:s1,f:xs:XP:phantom-blade:f0t0:s1	-	-	-	ae86f6029288	-	bf7bdc481304	-	-	2026-11-24	xproof

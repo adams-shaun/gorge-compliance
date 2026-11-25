@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-22000392-99e9-4927-a488-1bcb576f6275	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
+22000392-99e9-4927-a488-1bcb576f6275	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 22005b01-84b1-4d4b-9193-3c561bd422ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22005b01-84b1-4d4b-9193-3c561bd422ce	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 22008c3b-6e15-41cc-a15c-7871495191aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raphael-the-muscle:f0t0:s1,f:xs:XP:raphael-the-muscle:f0t0:s1	-	-	-	8c0bd19283bb	-	c1d4b5d9ee15	-	-	2026-11-24	xproof
@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2202faf1-5638-46bf-8bf4-91870b669717	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:lightning-spear:f0a0:s1,f:xs:XP:lightning-spear:f0a0:s1	-	-	-	d864b561c9cb	-	ac3d0a7279fe	-	-	2026-11-24	xproof
 2202faf1-5638-46bf-8bf4-91870b669717	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22076484-e9d5-4f33-8cf3-b9b427436b05	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:paladin-s-arms:f0t0:s2,f:xs:XP:paladin-s-arms:f0t0:s2	-	-	-	267e485f6204	-	b5409df51f7f	-	-	2026-11-24	xproof
-22076484-e9d5-4f33-8cf3-b9b427436b05	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Paladin's Arms/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+22076484-e9d5-4f33-8cf3-b9b427436b05	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:paladin-s-arms:f0a0:s1,f:xs:XP:paladin-s-arms:f0a0:s1	-	-	-	23c4009444b0	-	b5409df51f7f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 22076484-e9d5-4f33-8cf3-b9b427436b05	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:paladin-s-arms:f0t0:s2,f:xs:XP:paladin-s-arms:f0t0:s2	-	-	-	267e485f6204	-	b5409df51f7f	-	-	2026-11-24	xproof
 22076484-e9d5-4f33-8cf3-b9b427436b05	static#0.0	static#0.0	agreed	-	X	scen	1	0	Paladin's Arms/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 220e3298-1663-4731-b50f-247076e1328b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22f008b3-c263-4dcc-855f-403da9ca4cd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22f0dbbb-9d8d-42bc-8903-fc0b65e00952	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marvin-murderous-mimic:cast:s1,f:xs:XP:marvin-murderous-mimic:cast:s1	-	-	-	23c4009444b0	-	73e4787690b2	-	-	2026-11-25	xproof
 22f0dbbb-9d8d-42bc-8903-fc0b65e00952	static#0.0	static#0.0	agreed	-	X	scen	1	0	Marvin, Murderous Mimic/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-22f259b3-9de1-44a1-a89d-f2f1b1249d4d	cast	cast-resolve	agreed	-	X	scen	1	0	Opera Love Song/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+22f259b3-9de1-44a1-a89d-f2f1b1249d4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:opera-love-song:cast:s1,f:xs:XP:opera-love-song:cast:s1	-	-	-	23c4009444b0	-	d7a7d9826fd0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 22f5f39d-0898-4c47-8fa8-7d97102d3229	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22f5f39d-0898-4c47-8fa8-7d97102d3229	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 22f6391e-2634-440f-af1b-9581d1bff818	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
