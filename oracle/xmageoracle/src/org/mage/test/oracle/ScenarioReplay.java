@@ -401,7 +401,32 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 found = i;
             }
         }
-        return found;
+        if (found >= 0) {
+            return found;
+        }
+        // A delayed trigger's rule text puts the subject first and the timing
+        // last ("You draw a card at the beginning of the next turn's
+        // upkeep.", Arcane Denial's caster draw), so the generator's key
+        // ("Draw a card.") prefixes no rule. Fall back to containment: take
+        // the one ability whose normalised rule contains the normalised key
+        // -- only when exactly one does. Two identical copies are
+        // interchangeable (either would satisfy the same ask), so two of the
+        // same text still take the first; any other several-match keeps
+        // TestPlayer's own handling, the same strict miss as before.
+        int hit = -1;
+        for (int i = 0; i < rules.size(); i++) {
+            String rule = triggerKeyForm(rules.get(i), sourceName);
+            if (!rule.contains(want)) {
+                continue;
+            }
+            if (hit >= 0 && !rule.equals(triggerKeyForm(rules.get(hit), sourceName))) {
+                return -1;
+            }
+            if (hit < 0) {
+                hit = i;
+            }
+        }
+        return hit;
     }
 
     /** Rule text folded for a wording-tolerant prefix match: markup dropped,
@@ -470,10 +495,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * where XMage prints "Whenever ..." (Hero of Oxid Ridge) and ends the
          * key at a period where XMage's text continues (Nefarox's "sacrifices
          * a creature of their choice."). An unmatched head is a strict
-         * "Missing CHOICE def" there. When the head prefix-matches no ability,
-         * take the one ability whose normalised rule starts with the
-         * normalised key (CR 603.3b: the controller's pick); none or several
-         * matching keeps TestPlayer's own handling. */
+ * "Missing CHOICE def" there. When the head prefix-matches no ability,
+ * take the one ability whose normalised rule starts with the normalised
+ * key, or -- for a delayed trigger, whose rule text puts the subject first
+ * and the timing last (Arcane Denial's key "Draw a card." against XMage's
+ * "You draw a card at the beginning of the next turn's upkeep.") -- whose
+ * normalised rule contains it (CR 603.3b: the controller's pick); none or
+ * several matching keeps TestPlayer's own handling. */
         @Override
         public mage.abilities.TriggeredAbility chooseTriggeredAbility(
                 List<mage.abilities.TriggeredAbility> abilities, Game game) {
