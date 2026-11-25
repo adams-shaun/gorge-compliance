@@ -493,19 +493,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
 
-        /** The occurrence to keep visible, or 0 when this player holds no
-         * positioned action (a helper test double). Asking the game for its
-         * Step is only needed when some action can actually be filtered. */
+        /** The occurrence to keep visible, or 0 for a helper test double. The
+         * Step is always counted, even at a step this player has nothing
+         * queued for: the runtime count of a step name must include its
+         * natural occurrence (turn 1's upkeep and draw before the replay's
+         * main 1 start), or an additional step of that name (Obeka's extra
+         * upkeeps, CR 500.8) would be counted as occurrence 1. */
         private int currentOccurrence(Game game) {
             if (owner.actionOccurrences == null) {
                 return 0;
             }
-            for (PlayerAction action : getActions()) {
-                if (owner.actionOccurrences.containsKey(action)) {
-                    return owner.runtimeOccurrence(game);
-                }
-            }
-            return 0;
+            return owner.runtimeOccurrence(game);
         }
 
         /** Remove the actions of every other occurrence of the current step,
@@ -3650,6 +3648,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             activeSeat = (TURN - 1) % 2;
             attackAdvancedTurn = false;
             resetOccurrences();
+            seedNaturalStepsBeforeStart(TURN);
             enterQueuedStep(TURN, MAIN, false);
             queueSetupChoices(sc);
             build(sc);
@@ -6959,6 +6958,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
         runtimeOccTurn = 0;
         runtimeStepCounts.clear();
         runtimeStepOccurrence.clear();
+    }
+
+    /** The replay starts in the scenario turn's main 1, but the game runs
+     * that turn's natural upkeep and draw before it: the runtime side counts
+     * them. Count them on the queued side too, so an additional upkeep or
+     * draw step after the start (CR 500.8) is occurrence 2 in both. */
+    private void seedNaturalStepsBeforeStart(int turnNum) {
+        EnumMap<PhaseStep, Integer> counts = queuedOccurrences.computeIfAbsent(
+                turnNum, key -> new EnumMap<>(PhaseStep.class));
+        counts.put(PhaseStep.UPKEEP, 1);
+        counts.put(PhaseStep.DRAW, 1);
     }
 
     /** Record a position the queued replay enters. A pass that moved within

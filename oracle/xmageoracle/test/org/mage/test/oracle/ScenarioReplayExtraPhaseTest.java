@@ -25,6 +25,7 @@ import java.util.List;
  * out-of-tree build's card database and deck files, like a full replay. */
 public final class ScenarioReplayExtraPhaseTest {
     private static final String FIXTURE = "extra-phase-all-out-assault.jsonl";
+    private static final String UPKEEP_FIXTURE = "extra-upkeep-start-turn-obeka.jsonl";
 
     private static void equal(Object want, Object got, String what) {
         if (!want.equals(got)) {
@@ -151,5 +152,38 @@ public final class ScenarioReplayExtraPhaseTest {
         equal(4, count(cutActual, "POSTCOMBAT_MAIN"), "cut window's main-2 checkpoints");
         System.out.println("PASS a window cut at the extra main stops at that occurrence: "
                 + cutActual.size() + " checkpoints, last " + cutActual.get(cutActual.size() - 1));
+
+        additionalUpkeepAfterCombatOnStartTurn(dir);
+    }
+
+    /** Obeka, Splitter of Seconds: a replay from turn 1 main 1 whose combat
+     * adds two upkeep steps after end of combat (CR 500.8). The queued side
+     * once never counted turn 1's natural upkeep, so the extra upkeeps were
+     * queued as occurrence 1 and ran in the natural upkeep, before the setup
+     * snapshot. The setup snapshot must come first and every upkeep
+     * checkpoint must sit after end of combat. */
+    private static void additionalUpkeepAfterCombatOnStartTurn(Path dir) throws Exception {
+        String line = new String(Files.readAllBytes(dir.resolve(UPKEEP_FIXTURE)), StandardCharsets.UTF_8).trim();
+        JsonObject sc = JsonParser.parseString(line).getAsJsonObject();
+        List<String> expected = expectedSteps(sc);
+        equal("PRECOMBAT_MAIN", expected.get(0), "expected first checkpoint");
+        // Four upkeep checkpoints in turn 1 (two extra upkeeps, a pass pair
+        // each) plus the turn 2 natural upkeep the window ends at.
+        equal(5, count(expected, "UPKEEP"), "expected upkeep checkpoints");
+
+        JsonObject res = replay(sc);
+        noHarness(res, UPKEEP_FIXTURE);
+        equal(expected.size(), res.getAsJsonArray("snapshots").size(), "upkeep snapshot count");
+        List<String> actual = snapshotSteps(res);
+        for (int i = 0; i < expected.size(); i++) {
+            equal(expected.get(i), actual.get(i), "upkeep snapshot " + i + " step");
+        }
+        equal("PRECOMBAT_MAIN", actual.get(0), "first snapshot");
+        if (actual.indexOf("UPKEEP") < actual.indexOf("END_COMBAT")) {
+            throw new AssertionError("an upkeep checkpoint precedes end of combat: " + actual);
+        }
+        System.out.println("PASS additional upkeeps after combat on the start turn: "
+                + actual.size() + " checkpoints, setup first, " + count(actual, "UPKEEP")
+                + " upkeep checkpoints after end of combat");
     }
 }
