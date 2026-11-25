@@ -94,7 +94,9 @@ func TestForgeRolledDie(t *testing.T) {
 // die-roll code unchanged), the full driver suite (177 tests, including ForcedDieRollTest) re-run green on it.
 // fef74c5308f = the clean merge of 0c4ca7afb3d and a445a858b2: the two fixes touch disjoint files (forge-oracle driver vs
 // forge-game), so the pin keeps both; die-roll and driver code are unchanged from 0c4ca7afb3d.
-const forgeOracleDieRollRef = "d0f16bee2e018d35874a0a8838491c1af1b02b82"
+// 9d7baedf34 = d0f16bee2e plus the echo/cumulative-upkeep pay-or-sacrifice answer (ScriptedController only), die-roll
+// code unchanged, the full driver suite (188 tests, including ForcedDieRollTest and EchoCumulativeUpkeepTest) re-run green on it.
+const forgeOracleDieRollRef = "9d7baedf342926a7a00aabd30572393e1a7754eb"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

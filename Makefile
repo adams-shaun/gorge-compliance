@@ -396,7 +396,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
 # 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
 # Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
-FORGE_ORACLE_REF ?= d0f16bee2e018d35874a0a8838491c1af1b02b82
+# 9d7baedf34 = d0f16bee2e plus the echo and cumulative upkeep pay-or-sacrifice answer: Forge builds both keywords as an
+# upkeep trigger whose DB$ Sacrifice asks payCostToPreventEffect for Echo$/CumulativeUpkeep$, but the driver only took an
+# unless_pay decision there, so gorge's one-pick election became a strict miss plus a leftover. payCostToPreventEffect
+# now also takes that decision by pick kind: echo_pay/echo_pay_manual/cumulative_pay/cumulative_pay_manual pay through
+# payCostDuringAbilityResolve with payingUnlessCost set, and echo_sac/cumulative_sac decline (Forge sacrifices the source).
+# The payment's own cost choose consumes the follow-up echo_action_pick / cumulative_action_sac / discard pick through
+# ScriptedCostDecision and the sacrifice/discard overrides. EchoCumulativeUpkeepTest (5 tests: echo pay, echo sacrifice,
+# cumulative pay, cumulative pay with a creature sacrifice, a non-mana echo cost) and the full driver suite (188 tests)
+# are green on it. Driver-only change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# Fork branch fix/xp-forge-driver-echo-cumulative-upkeep.
+FORGE_ORACLE_REF ?= 9d7baedf342926a7a00aabd30572393e1a7754eb
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
