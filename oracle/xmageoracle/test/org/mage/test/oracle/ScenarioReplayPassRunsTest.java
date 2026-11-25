@@ -396,7 +396,10 @@ public final class ScenarioReplayPassRunsTest {
         check(ScenarioReplay.phaseOfGorgeStep("first-strike-damage") == PhaseStep.FIRST_COMBAT_DAMAGE, "first-strike-damage");
         check(ScenarioReplay.phaseOfGorgeStep("combat-damage") == PhaseStep.COMBAT_DAMAGE, "combat-damage");
         check(ScenarioReplay.phaseOfGorgeStep("end") == PhaseStep.END_TURN, "end");
-        check(throwsIae(() -> ScenarioReplay.phaseOfGorgeStep("cleanup")), "a step with no priority is refused");
+        // Cleanup normally gives no priority, but a trigger there does (CR 514.3a),
+        // so gorge records passes at it (see ScenarioReplayCleanupPriorityTest).
+        check(ScenarioReplay.phaseOfGorgeStep("cleanup") == PhaseStep.CLEANUP, "cleanup");
+        check(throwsIae(() -> ScenarioReplay.phaseOfGorgeStep("no-such-step")), "an unknown step is refused");
 
         // A pass that finds the stack non-empty resolves its top object, on
         // the active seat, as a legacy pair's second pass does.

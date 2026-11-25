@@ -423,7 +423,10 @@ func filterHasProp(filter, prop string) bool {
 // that the blocker died from its damage.
 func damageStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, f *StartFile) string {
 	const none = "no-generator:trigger:ChangesZone"
-	if !face.IsCreature() || deadOnArrival(face) {
+	// The card's own CDA is not a bare-placement death here: it is the key's
+	// card, and recipe's post-needs check (cdaToughnessZero) judges it over
+	// the finished start, so only a printed 0 toughness is one.
+	if !face.IsCreature() || numericToughnessDead(face) {
 		return none + ":damaged-noncreature"
 	}
 	victim := pickCarrier(reg, b, card, func(c *cards.Face) bool {
@@ -1059,7 +1062,10 @@ func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 		c, _ := reg.Lookup(name)
 		target, tseat, targetFace = name, s, c.Faces[0]
 	}
-	if target == card && deadOnArrival(face) {
+	// numericToughnessDead, not deadOnArrival: the CDA of the key's own card
+	// is judged over the finished start (cdaToughnessZero), so a Harmonious
+	// Grovestrider the Murder cast targets is not dead here.
+	if target == card && numericToughnessDead(face) {
 		return none + ":dead" // an X creature placed without its X dies at once
 	}
 	// the spell: the first the target is a legal target of and the source
