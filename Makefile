@@ -719,7 +719,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # setup name named, so Forge's setup read "Greenhouse" where gorge's fieldName and the XMage driver read "". Setup now places the Room locked and
 # the name only binds the card; scripts/forge-oracle-test-room-setup-locked.sh (make forge-driver-tests) pins it. Driver-only; cardsfolder/tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-room-locked.
-FORGE_ORACLE_REF ?= 15a7c960ab2a7368349d3b4beaf00b9c87f02088
+# d6e26fd04306 = 793a015fcf + the checkpoint snapshot's "offered" (xproof cluster xpt-a64b83f5: every compare:[offered] item diverged at setup
+# because the driver wrote no offered field): SnapshotWriter writes the priority holder's playable abilities, from the listing the bridge
+# answers priority from plus mana abilities as activations, when the item's compare names offered; sources by RefTable.refOf (gorge's objRef).
+# scripts/forge-oracle-test-setup-offered.sh (make forge-driver-tests) replays the Muldrotha find (a graveyard Plains offered as a play) and runs
+# RefTableTest.refOfNamesAnObjectAsGorgeSnapshotsIt; it fails on 793a015fcf. Driver-only; cardsfolder/tokenscripts unchanged.
+# Fork branch fix/xp-forge-driver-setup-offered.
+# 9cc07f0d340 = oracle/fpin-1125-join4: 15a7c960ab2 (setup Room locked; above) joined with d6e26fd04306 (offered; above); driver-only, die-roll code unchanged.
+FORGE_ORACLE_REF ?= 9cc07f0d3407548988cc0b21f75025598fb7b3e1
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
