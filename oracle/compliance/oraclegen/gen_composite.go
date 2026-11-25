@@ -5,6 +5,7 @@ import (
 
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
+	costvocab "github.com/adams-shaun/gorge/engine/rules/cost"
 )
 
 // xanswersForScenario translates a composite gorge election ("Yes — discard" /
@@ -230,7 +231,7 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 	// bottom asks a follow-up card order XMage poses and gorge does not
 	// (choose_dialog_order.go, Petals of Insight).
 	chooseUseOrders := chooseUseBottomOrders(reg, sc, res.Snapshots, ds)
-	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, allPlayerUnless: allPlayerUnless, seats: seats, chooseUseOrders: chooseUseOrders, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), removeCounterCosts: removeCounterCostAsks(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), ownBounce: bounces, ownGraveyardExile: ownGraveyardExile, tapThenUntap: tapFirst, bolster: bolsters, optionalTriggerSearch: optionalTriggerSearch, craft: crafts, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
+	out := xanswersSetup(ds, len(sc.Steps), modes, castSteps, sc.Setup, res.Flips, xanswersExtra{sources: sources, allPlayerUnless: allPlayerUnless, seats: seats, chooseUseOrders: chooseUseOrders, digs: digs, pips: phyrexianPipPlan(reg, res, sc), casts: casts, activates: activationXAnnounces(reg, sc, res), removeCounterCosts: removeCounterCostAsks(reg, sc, res), searchZones: searchZones, forage: forageExiles(ds, res.Snapshots), loneSacrifice: loneTriggerCostSacrifice(reg, ds, res.Snapshots), ownBounce: bounces, ownGraveyardExile: ownGraveyardExile, tapThenUntap: tapFirst, bolster: bolsters, optionalTriggerSearch: optionalTriggerSearch, craft: crafts, supports: supports, snaps: res.Snapshots, orderAsks: orderAsks})
 	// The deterministic trample assignment XMage poses as a multi-amount
 	// dialog is no decision the engine recorded, so it is synthesized from
 	// the scenario's own attack/block steps and leads the pass_to step that
@@ -465,6 +466,137 @@ func forageExiles(ds []rules.OracleDecision, snaps []rules.OracleSnapshot) map[i
 		out[i] = exiled
 	}
 	return out
+}
+
+// loneTriggerCostSacrifice maps an accepted trigger-cost pay whose label is a
+// sacrifice and whose sacrifice the engine folded -- one legal candidate, so
+// gorge records no pick for it -- to that candidate's name. The checkpoint is
+// the only record: the pay decision's ObjectPicks name the source, not the
+// sacrificed creature, and gorge poses no pick when the choice is forced.
+//
+// It applies ONLY where XMage poses the sacrifice as an optional pick of its
+// own: The Gitrog, Ravenous Ride's card-specific effect folds the "you may"
+// into a TargetSacrifice(0, 1) whose makeChoose reads the CHOICE queue, so
+// without the name the effect's own hand pick (the land) is consumed by the
+// sacrifice ask: "Found wrong choice command (invalid target or miss skip
+// command): Swamp" (xpt-77cb30f4, xpt-cfdb102c). An ordinary Sac<> cost
+// (SacrificeSourceCost, SacrificeTargetCost's mandatory 1..1 target)
+// auto-resolves a lone candidate, so an alias there is either unconsumed
+// (Servant of the Stinger: a leftover) or needless (Killmonger, Felothar);
+// optionalSacrificeTrigger keys the helper on the cost spec XMage implements
+// that way (a relational SaddledThisTurn filter), read from the source card's
+// own trigger cost.
+//
+// A step that also records an explicit sacrifice pick is left to that pick's
+// own routing, and anything but exactly ONE permanent leaving the battlefield,
+// that permanent being the one card the payer's graveyard gained (a token, a
+// zone replacement, a simultaneous death, an unclear before-checkpoint), is
+// left unscripted rather than guessed.
+func loneTriggerCostSacrifice(reg *cards.Registry, ds []rules.OracleDecision, snaps []rules.OracleSnapshot) map[int][]string {
+	if reg == nil {
+		return nil
+	}
+	posed := map[[2]int]bool{}
+	for _, e := range ds {
+		for _, k := range e.PickKinds {
+			if k == "sacrifice" {
+				posed[[2]int{e.Step, e.Seat}] = true
+			}
+		}
+	}
+	var out map[int][]string
+	for i, d := range ds {
+		if len(d.Picks) != 1 || pickKind(d, 0) != "trigger_cost_pay" ||
+			!strings.Contains(strings.ToLower(strings.TrimSpace(d.Picks[0])), "sacrifice") {
+			continue
+		}
+		if d.Step < 0 || d.Step+1 >= len(snaps) || posed[[2]int{d.Step, d.Seat}] {
+			continue
+		}
+		ref := ""
+		switch {
+		case len(d.ObjectPicks) > 0:
+			ref = d.ObjectPicks[0]
+		case len(d.PickRefs) > 0:
+			ref = d.PickRefs[0]
+		}
+		if ref == "" {
+			continue
+		}
+		c, ok := reg.Lookup(oraclediffRefName(ref))
+		if !ok || !optionalSacrificeTrigger(c) {
+			continue
+		}
+		before, after := snaps[d.Step], snaps[d.Step+1]
+		if d.Seat < 0 || d.Seat >= len(before.Players) || d.Seat >= len(after.Players) {
+			continue
+		}
+		moved := addedNames(before.Players[d.Seat].Graveyard, after.Players[d.Seat].Graveyard)
+		if len(moved) != 1 {
+			continue
+		}
+		name := moved[0]
+		left := leftBattlefield(before.Permanents, after.Permanents)
+		if len(left) != 1 || left[0].Name != name || left[0].Controller != d.Seat || left[0].Token {
+			continue
+		}
+		if out == nil {
+			out = map[int][]string{}
+		}
+		out[i] = []string{name}
+	}
+	return out
+}
+
+// optionalSacrificeTrigger reports whether a face's triggered ability (or a
+// sub-ability it chains to) pays a sacrifice cost over a SaddledThisTurn
+// candidate set: the shape XMage implements as a card-specific effect asking
+// an optional TargetSacrifice(0, 1) rather than a DoIfCostPaid chooseUse.
+func optionalSacrificeTrigger(c *cards.Card) bool {
+	for _, f := range c.Faces {
+		if f == nil {
+			continue
+		}
+		for _, t := range f.Triggers {
+			for sa := t.Effect; sa != nil; sa = sa.Sub {
+				raw := sa.Params["Cost"]
+				if !strings.Contains(raw, "Sac<") {
+					continue
+				}
+				for _, part := range costvocab.ParseCost(raw).Sac {
+					if strings.Contains(part.Spec, "SaddledThisTurn") {
+						return true
+					}
+				}
+			}
+		}
+	}
+	return false
+}
+
+// leftBattlefield is the multiset difference before - after of the
+// battlefield's permanents, matched by name, controller and token-ness (a
+// ref's ordinal can shift when a same-named copy leaves).
+func leftBattlefield(before, after []rules.OracleSnapPerm) []rules.OracleSnapPerm {
+	type key struct {
+		name  string
+		ctrl  int
+		token bool
+	}
+	counts := map[key]int{}
+	for _, p := range after {
+		counts[key{p.Name, p.Controller, p.Token}]++
+	}
+	var left []rules.OracleSnapPerm
+	for _, p := range before {
+		k := key{p.Name, p.Controller, p.Token}
+		if counts[k] > 0 {
+			counts[k]--
+			continue
+		}
+		left = append(left, p)
+	}
+	return left
 }
 
 // addedNames is the multiset difference next - old, in next's order.

@@ -1,0 +1,58 @@
+diff --git a/Mage.Sets/src/mage/cards/l/LoamDryad.java b/Mage.Sets/src/mage/cards/l/LoamDryad.java
+index d2859b1c33..fafaf0cda2 100644
+--- a/Mage.Sets/src/mage/cards/l/LoamDryad.java
++++ b/Mage.Sets/src/mage/cards/l/LoamDryad.java
+@@ -27,7 +27,10 @@ public final class LoamDryad extends CardImpl {
+ 
+         // {T}, Tap an untapped creature you control: Add one mana of any color.
+         Ability ability = new AnyColorManaAbility();
+-        ability.addCost(new TapTargetCost(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURES));
++        // One creature, so the singular filter: the cost's text is built from the
++        // filter's message, and the plural one reads "Tap an untapped creatures
++        // you control", which is not the printed Oracle text.
++        ability.addCost(new TapTargetCost(StaticFilters.FILTER_CONTROLLED_UNTAPPED_CREATURE));
+         this.addAbility(ability);
+     }
+ 
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/soi/LoamDryadTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/soi/LoamDryadTest.java
+new file mode 100644
+index 0000000000..fdc39c014e
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/soi/LoamDryadTest.java
+@@ -0,0 +1,36 @@
++package org.mage.test.cards.single.soi;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * Loam Dryad: "{T}, Tap an untapped creature you control: Add one mana of any
++ * color." The cost targets one creature, so the ability's rule text has to use
++ * the singular "creature"; the plural filter produced "Tap an untapped
++ * creatures you control" and broke text-matched activation.
++ */
++public class LoamDryadTest extends CardTestPlayerBase {
++
++    @Test
++    public void testTapUntappedCreatureForMana() {
++        addCard(Zone.BATTLEFIELD, playerA, "Loam Dryad", 1);
++        addCard(Zone.BATTLEFIELD, playerA, "Memnite", 1);
++
++        activateManaAbility(1, PhaseStep.PRECOMBAT_MAIN, playerA, "{T}, Tap an untapped creature you control");
++        setChoice(playerA, "Memnite");
++        setChoice(playerA, "White");
++
++        // The pool is checked in the step that made the mana: it empties as the
++        // step ends, so an after-execute assert would read zero.
++        checkManaPool("one white mana", 1, PhaseStep.PRECOMBAT_MAIN, playerA, "W", 1);
++
++        setStrictChooseMode(true);
++        setStopAt(1, PhaseStep.PRECOMBAT_MAIN);
++        execute();
++
++        assertTapped("Loam Dryad", true);
++        assertTapped("Memnite", true);
++    }
++}

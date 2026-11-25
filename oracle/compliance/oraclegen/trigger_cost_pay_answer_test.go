@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
 // A step that also scripts a lone cost_posed decline must answer its
@@ -120,6 +121,99 @@ func TestXAnswersXOnlyTriggerCostPay(t *testing.T) {
 		d := rules.OracleDecision{Kind: "choose_n", Picks: []string{label}, PickKinds: []string{"trigger_cost_pay"}}
 		if xOnlyCostPay(d) {
 			t.Fatalf("%q misread as an X-only cost", label)
+		}
+	}
+}
+
+// A trigger-cost sacrifice the engine folded into its pay election still
+// needs the sacrificed creature's name on XMage's CHOICE queue where XMage
+// poses the sacrifice as an optional pick of its own. The Gitrog, Ravenous
+// Ride's "you may sacrifice a creature that saddled it this turn" has one
+// legal candidate (Memnite), so gorge logs only the pay pick and the
+// checkpoint's battlefield->graveyard move; XMage's card-specific effect
+// folds the "you may" into a TargetSacrifice(0, 1), whose makeChoose reads
+// the same CHOICE queue. Without the name the effect's own hand pick (the
+// land) is consumed by the sacrifice ask: "Found wrong choice command
+// (invalid target or miss skip command): Swamp" (xpt-77cb30f4/xpt-cfdb102c).
+// The alias must lead the land answer, as the forage branch's graveyard names
+// do.
+func TestTriggerCostSacrificeLonePickScriptsAlias(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	pay := func(src, label string) rules.OracleDecision {
+		return rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+			Options: 2, Min: 1, Max: 1, Picks: []string{label},
+			PickRefs: []string{"p0:" + src}, PickKinds: []string{"trigger_cost_pay"},
+			ObjectPicks: []string{"p0:" + src}, Via: "answer"}
+	}
+	land := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Min: 0, Max: 1, Picks: []string{"Swamp"}, PickIdx: []int{0},
+		PickRefs: []string{"p0:Swamp"}, PickKinds: []string{"hand_move"}, Resume: "hand_move",
+		ObjectPicks: []string{"p0:Swamp"}, Via: "answer"}
+	perm := func(name string, token bool) rules.OracleSnapPerm {
+		return rules.OracleSnapPerm{Name: name, Controller: 0, Token: token}
+	}
+	// snaps is the before/after checkpoint pair: the battlefield loses every
+	// permanent named in left and the payer's graveyard gains graveyard.
+	snaps := func(before []rules.OracleSnapPerm, left []string, graveyard ...string) []rules.OracleSnapshot {
+		gone := map[string]bool{}
+		for _, n := range left {
+			gone[n] = true
+		}
+		var after []rules.OracleSnapPerm
+		for _, p := range before {
+			if !gone[p.Name] {
+				after = append(after, p)
+			}
+		}
+		return []rules.OracleSnapshot{
+			{},
+			{Players: []rules.OracleSnapPlayer{{Seat: 0}, {Seat: 1}}, Permanents: before},
+			{Players: []rules.OracleSnapPlayer{{Seat: 0, Graveyard: graveyard}, {Seat: 1}}, Permanents: after},
+		}
+	}
+	run := func(d rules.OracleDecision, sn []rules.OracleSnapshot) [][]XAnswer {
+		ds := []rules.OracleDecision{d, land}
+		extra := xanswersExtra{snaps: sn, loneSacrifice: loneTriggerCostSacrifice(reg, ds, sn)}
+		return xanswersSetup(ds, 2, nil, nil, nil, nil, extra)
+	}
+	gitrog := pay("The Gitrog, Ravenous Ride", "Sacrifice creature that saddled it this turn")
+	one := snaps([]rules.OracleSnapPerm{perm("The Gitrog, Ravenous Ride", false), perm("Memnite", false)}, []string{"Memnite"}, "Memnite")
+
+	got := run(gitrog, one)
+	want := [][]XAnswer{nil, {{0, "choice", "yes"}, {0, "choice", "Memnite"}, {0, "choice", "Swamp"}}}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("xanswers = %#v, want %#v", got, want)
+	}
+
+	// Without the card registry the helper cannot tell XMage's optional
+	// TargetSacrifice from an auto-resolving cost, so it scripts nothing.
+	if got := loneTriggerCostSacrifice(nil, []rules.OracleDecision{gitrog, land}, one); got != nil {
+		t.Fatalf("nil registry scripted %v", got)
+	}
+
+	bare := [][]XAnswer{nil, {{0, "choice", "yes"}, {0, "choice", "Swamp"}}}
+	for name, tc := range map[string]struct {
+		d  rules.OracleDecision
+		sn []rules.OracleSnapshot
+	}{
+		// Two creatures died: not a folded lone pick, and two scripted names
+		// would both be consumed by XMage's single TargetSacrifice slot.
+		"two deaths": {gitrog, snaps([]rules.OracleSnapPerm{perm("The Gitrog, Ravenous Ride", false), perm("Memnite", false), perm("Ornithopter", false)}, []string{"Memnite", "Ornithopter"}, "Memnite", "Ornithopter")},
+		// A token sacrifice reaches no graveyard; an unrelated real death on
+		// the same step must not be read as the sacrifice.
+		"token plus unrelated death": {gitrog, snaps([]rules.OracleSnapPerm{perm("The Gitrog, Ravenous Ride", false), perm("Treasure", true), perm("Grizzly Bears", false)}, []string{"Treasure", "Grizzly Bears"}, "Grizzly Bears")},
+		// A source sacrifice (Servant of the Stinger's Sac<1/CARDNAME>) has no
+		// choice or target ask for an alias to answer: it would be an
+		// unconsumed leftover, so the label alone must not script it.
+		"source sacrifice": {pay("Servant of the Stinger", "Sacrifice 1 permanent"),
+			snaps([]rules.OracleSnapPerm{perm("Servant of the Stinger", false)}, []string{"Servant of the Stinger"}, "Servant of the Stinger")},
+		// A mandatory 1..1 SacrificeTargetCost (Killmonger) auto-resolves a
+		// lone candidate: no alias is needed, so its rows stay unmoved.
+		"target sacrifice cost": {pay("Killmonger, Scourge of Wakanda", "Sacrifice another creature"),
+			snaps([]rules.OracleSnapPerm{perm("Killmonger, Scourge of Wakanda", false), perm("Memnite", false)}, []string{"Memnite"}, "Memnite")},
+	} {
+		if got := run(tc.d, tc.sn); !reflect.DeepEqual(got, bare) {
+			t.Fatalf("%s: xanswers = %#v, want %#v (no guessed sacrifice name)", name, got, bare)
 		}
 	}
 }
