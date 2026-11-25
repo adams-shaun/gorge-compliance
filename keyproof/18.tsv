@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 180286e4-67fa-44d5-9e90-4a4e99c016a7	f1/t1	trigger#1.1	agreed	-	X	scen	1	0	Grub, Storied Matriarch/trigger#1.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1803850e-9499-4bf7-a4d9-6bf655cbe87d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1803850e-9499-4bf7-a4d9-6bf655cbe87d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1803850e-9499-4bf7-a4d9-6bf655cbe87d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+1803850e-9499-4bf7-a4d9-6bf655cbe87d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 180919a5-67b2-473a-9b90-a828bdc2477c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180919a5-67b2-473a-9b90-a828bdc2477c	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:shadowheart-dark-justiciar:f0a0:s1,f:xs:XP:shadowheart-dark-justiciar:f0a0:s1	-	-	-	65d07beecc37	-	8e4428417cec	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 180ba940-2b11-4953-b7ce-74847e1aebfd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:assemble-the-players:cast:s1,f:xs:XP:assemble-the-players:cast:s1	-	-	-	23b491658465	-	e49728272835	-	-	2026-11-25	xproof
@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18202185-f9d4-446a-b34e-fae9800240f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18207fe8-41e4-418d-b5f9-e1239c527e67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:extract-the-truth:cast:s1,f:xs:XP:extract-the-truth:cast:s1	-	-	-	d864b561c9cb	-	0cd90e61b40d	-	-	2026-11-24	xproof
 1820af5c-9cc2-4b77-b4ca-86084442f087	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1820af5c-9cc2-4b77-b4ca-86084442f087	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+1820af5c-9cc2-4b77-b4ca-86084442f087	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 1820af5c-9cc2-4b77-b4ca-86084442f087	f0/t1	Phase	diverged	-	-	start	0	2	-	a5067425b0c3	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 1820b6e9-83fd-40b9-953e-ba1a8ae69614	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunken-hope:cast:s1,f:xs:XP:sunken-hope:cast:s1	-	-	-	25696bf19d5b	-	e5045bc0f143	-	-	2026-11-24	xproof
 1820b6e9-83fd-40b9-953e-ba1a8ae69614	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sunken-hope:cast:s1,f:xs:XP:sunken-hope:cast:s1	-	-	-	25696bf19d5b	-	e5045bc0f143	-	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18ac2282-83af-4acc-b20b-6a95771da688	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ad0dd1-2d0e-46b4-8ab1-ece07180267f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ad0dd1-2d0e-46b4-8ab1-ece07180267f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18ad0dd1-2d0e-46b4-8ab1-ece07180267f	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+18ad0dd1-2d0e-46b4-8ab1-ece07180267f	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 18ae6be7-cfb6-42e3-a04e-99e9c1471ecd	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ae6be7-cfb6-42e3-a04e-99e9c1471ecd	f0/t0	Attacks/Myriad	agreed	-	FX	start	4	0	x:xs:XP:dalek-squadron:f0t0:s1,f:xs:XP:dalek-squadron:f0t0:s1	-	-	-	8c0bd19283bb	-	6ec5fa6e8e1c	-	-	2026-11-24	xproof
 18aee20d-ab73-4fdb-a65c-101beae5fcf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
