@@ -4623,6 +4623,21 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * copy of the card under test carries XMage's spelling while the combat
      * ref carries the scenario's. */
     static Permanent tokenChoice(String ref, String name, UUID controller, Iterable<Permanent> battlefield) {
+        Permanent chosen = tokenChoice(ref, name, controller, battlefield, false);
+        if (chosen != null) {
+            return chosen;
+        }
+        // Forge's token scripts name a token "<Name> Token" while XMage may
+        // name the same token bare: Empower's planeswalker token is "Jace"
+        // where u_empower_jace.txt says "Jace Token". Fall back to the bare
+        // name only when no live token contains the full ref name, so a
+        // literal "Treasure Token" is never displaced by a "Treasure" token.
+        String bare = withoutTokenSuffix(name);
+        return bare == null ? null : tokenChoice(ref, bare, controller, battlefield, true);
+    }
+
+    private static Permanent tokenChoice(String ref, String name, UUID controller,
+            Iterable<Permanent> battlefield, boolean exactName) {
         String wantedName = name.toLowerCase(java.util.Locale.ROOT);
         int wanted = 1;
         int hash = ref.lastIndexOf('#');
@@ -4632,7 +4647,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
         List<Permanent> candidates = new ArrayList<>();
         for (Permanent permanent : battlefield) {
             if (permanent.isToken() && controller.equals(permanent.getControllerId())
-                    && tokenNamed(permanent, wantedName)) {
+                    && (exactName ? tokenNamedExactly(permanent, wantedName)
+                            : tokenNamed(permanent, wantedName))) {
                 candidates.add(permanent);
             }
         }
@@ -4654,6 +4670,33 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return token instanceof mage.game.permanent.PermanentToken
                 && ((mage.game.permanent.PermanentToken) token).getToken().getName()
                         .toLowerCase(java.util.Locale.ROOT).contains(wantedName);
+    }
+
+    /** Whether a token's live or creation name IS the wanted lower-cased name.
+     * The " Token" suffix fallback must be exact: a ref "Jace Token" names
+     * XMage's "Jace" token, not "Jace, Reality Sculptor" or "Jace's
+     * Phantasm". */
+    private static boolean tokenNamedExactly(Permanent token, String wantedName) {
+        if (token.getName().toLowerCase(java.util.Locale.ROOT).equals(wantedName)) {
+            return true;
+        }
+        return token instanceof mage.game.permanent.PermanentToken
+                && ((mage.game.permanent.PermanentToken) token).getToken().getName()
+                        .toLowerCase(java.util.Locale.ROOT).equals(wantedName);
+    }
+
+    /** A Forge token name without its " Token" suffix, or null when it has
+     * none. The suffix is a Forge token-script convention, not part of the
+     * token's name: XMage's planeswalker and other named tokens carry the
+     * bare name (JacePlaneswalkerToken is "Jace"). Deriving the bare name
+     * here covers every such token, not one card at a time. */
+    private static String withoutTokenSuffix(String name) {
+        String suffix = " Token";
+        if (name.length() <= suffix.length()
+                || !name.regionMatches(true, name.length() - suffix.length(), suffix, 0, suffix.length())) {
+            return null;
+        }
+        return name.substring(0, name.length() - suffix.length());
     }
 
     /** The controller's battlefield permanents in setup/creation order.
@@ -8649,10 +8692,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
 
     /** Whether a live source object's name is the scenario ref's card, under
      * both spellings the driver carries (the card under test's XMage name,
-     * and a split/Room object's front half). */
+     * and a split/Room object's front half), and under the bare name of a
+     * Forge "<Name> Token" ref when the live source is XMage's bare-named
+     * token (Empower's "Jace"). */
     private boolean sourceNameIsNamed(String live, String name) {
-        return live != null
-                && (live.equals(xmageSpelling(name)) || gorgeSpellingRule(gorgeName, xmageName, live).equals(name));
+        if (live == null) {
+            return false;
+        }
+        if (live.equals(xmageSpelling(name)) || gorgeSpellingRule(gorgeName, xmageName, live).equals(name)) {
+            return true;
+        }
+        String bare = withoutTokenSuffix(name);
+        return bare != null && live.equals(bare);
     }
 
     /** The name form XMage's attack/block command takes. Unlike a cast
