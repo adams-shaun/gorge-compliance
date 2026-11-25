@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a800427-ff8c-4b3c-baee-85211b70656d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aurelia, the Law Above/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2a800427-ff8c-4b3c-baee-85211b70656d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aurelia, the Law Above/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2a86b70b-34ca-45df-8aa1-c3fb2da72dc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2a86b70b-34ca-45df-8aa1-c3fb2da72dc3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+2a86b70b-34ca-45df-8aa1-c3fb2da72dc3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2a87e3a9-10e3-4b00-aeb9-d3336b2fa3b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mardu-skullhunter:f0t0:s1,f:xs:XP:mardu-skullhunter:f0t0:s1	-	-	-	3aa6ded33acb	-	b52f0de66779	-	-	2026-11-25	xproof
 2a87e3a9-10e3-4b00-aeb9-d3336b2fa3b3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mardu-skullhunter:f0t0:s1,f:xs:XP:mardu-skullhunter:f0t0:s1	-	-	-	3aa6ded33acb	-	b52f0de66779	-	-	2026-11-25	xproof
 2a885729-0618-4a25-b18d-b0587f14718d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ac2d483-2d2a-4912-8db4-04a5a2080831	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2ac34f3e-822d-4fde-99ca-a31c4d9503fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ac34f3e-822d-4fde-99ca-a31c4d9503fd	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ac6f1c7-f4c5-4d45-9644-da49d8fe4758	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+2ac6f1c7-f4c5-4d45-9644-da49d8fe4758	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2ac93092-1a57-4cf7-8f03-1dca86d5c476	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:resplendent-angel:cast:s1,f:xs:XP:resplendent-angel:cast:s1	-	-	-	3aa6ded33acb	-	48e74281bbab	-	-	2026-11-25	xproof
 2ac93092-1a57-4cf7-8f03-1dca86d5c476	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:resplendent-angel:combat0.attack:s1,f:xs:XP:resplendent-angel:combat0.attack:s1	-	-	-	3aa6ded33acb	-	48e74281bbab	-	-	2026-11-25	xproof
 2ac93092-1a57-4cf7-8f03-1dca86d5c476	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:resplendent-angel:combat0.block:s1,f:xs:XP:resplendent-angel:combat0.block:s1	-	-	-	3aa6ded33acb	-	48e74281bbab	-	-	2026-11-25	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2af01e09-f233-4675-89cd-470816471c62	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Painter's Studio/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2af01e09-f233-4675-89cd-470816471c62	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Painter's Studio/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2af1930c-a5f2-4e7e-910f-e84458b051ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2af1930c-a5f2-4e7e-910f-e84458b051ac	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+2af1930c-a5f2-4e7e-910f-e84458b051ac	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2af22962-8f66-4868-a175-ad5d7f4c9d58	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leeching-licid:cast:s1,f:xs:XP:leeching-licid:cast:s1	-	-	-	8c0bd19283bb	-	fc83301004b1	-	-	2026-11-24	xproof
 2af22962-8f66-4868-a175-ad5d7f4c9d58	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2af236b0-6b30-4ddc-8735-864d2ffad68e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pride-of-the-road:cast:s1,f:xs:XP:pride-of-the-road:cast:s1	-	-	-	23c4009444b0	-	d9d9c8938747	-	-	2026-11-25	xproof

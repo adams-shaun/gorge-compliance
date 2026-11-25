@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 211814a5-195d-41c6-b96c-4c26b2cbb33c	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 211868ca-662b-4054-bf50-c9e16bb58c49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 211add65-b63d-43ad-8d69-b0598e003fef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-211d1c59-0111-48dd-9ff6-d03e7ff2ad5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kin-tree-severance:cast:s1,f:xs:XP:kin-tree-severance:cast:s1	-	-	-	ce0c2b5e5b13	-	08bb425c117e	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+211d1c59-0111-48dd-9ff6-d03e7ff2ad5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kin-tree-severance:cast:s1,f:xs:XP:kin-tree-severance:cast:s1	-	-	-	336eab778104	-	08bb425c117e	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 211dca11-b633-4deb-9d51-210fd3843995	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dashing-bloodsucker:cast:s1,f:xs:XP:dashing-bloodsucker:cast:s1	-	-	-	23c4009444b0	-	e2c2637f4080	-	-	2026-11-25	xproof
 211dca11-b633-4deb-9d51-210fd3843995	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dashing-bloodsucker:f0t0:s1,f:xs:XP:dashing-bloodsucker:f0t0:s1	-	-	-	23c4009444b0	-	e2c2637f4080	-	-	2026-11-25	xproof
 211dca11-b633-4deb-9d51-210fd3843995	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Dashing Bloodsucker/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -86,8 +86,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 21645448-ecbd-4036-b9ed-47cd903079e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2167ac25-d042-4b48-b770-8b94acc1a965	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 21695c70-f746-4d77-b6d3-e2713a5c929e	cast	cast-resolve	agreed	-	X	scen	1	0	Bogslither's Embrace/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-216a2a92-9ca3-4ca3-8af7-686c13b04290	f0/a0	Mana	agreed	-	X	start	2	0	x:xs:XP:shadowy-backstreet:f0a0:s1	-	-	-	ce0c2b5e5b13	-	0f9aa671dd23	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-216a2a92-9ca3-4ca3-8af7-686c13b04290	f0/a1	Mana	agreed	-	X	start	2	0	x:xs:XP:shadowy-backstreet:f0a1:s1	-	-	-	ce0c2b5e5b13	-	0f9aa671dd23	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+216a2a92-9ca3-4ca3-8af7-686c13b04290	f0/a0	Mana	agreed	-	X	start	2	0	x:xs:XP:shadowy-backstreet:f0a0:s1	-	-	-	336eab778104	-	0f9aa671dd23	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+216a2a92-9ca3-4ca3-8af7-686c13b04290	f0/a1	Mana	agreed	-	X	start	2	0	x:xs:XP:shadowy-backstreet:f0a1:s1	-	-	-	336eab778104	-	0f9aa671dd23	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 216a2a92-9ca3-4ca3-8af7-686c13b04290	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:shadowy-backstreet:f0t0:s1,f:xs:XP:shadowy-backstreet:f0t0:s1	-	-	-	23b491658465	-	0f9aa671dd23	-	-	2026-11-24	xproof
 216a2a92-9ca3-4ca3-8af7-686c13b04290	land	land	agreed	-	FX	start	4	0	x:xs:XP:shadowy-backstreet:f0t0:s1,f:xs:XP:shadowy-backstreet:f0t0:s1	-	-	-	23b491658465	-	0f9aa671dd23	-	-	2026-11-24	xproof
 216c5a72-ef87-4ada-bf52-437e50874be5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

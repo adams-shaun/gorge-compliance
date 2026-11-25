@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:cast:s1,f:xs:XP:flailing-soldier:cast:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:f0a0:s1,f:xs:XP:flailing-soldier:f0a0:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:f0a1:s1,f:xs:XP:flailing-soldier:f0a1:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
-2c22af49-c6ef-4de6-bb84-6b3e99879148	cast	cast-resolve	agreed	-	X	scen	1	0	Steer Clear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2c22af49-c6ef-4de6-bb84-6b3e99879148	cast	cast	agreed	-	X	start	2	0	x:xs:XP:steer-clear:cast:s1	-	-	-	336eab778104	-	8d72e5b7b2cc	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2c232056-9dd6-4a78-be08-3bff19daa88d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:embereth-veteran:cast:s1,f:xs:XP:embereth-veteran:cast:s1	-	-	-	23b491658465	-	007a01468d54	-	-	2026-11-24	xproof
 2c232056-9dd6-4a78-be08-3bff19daa88d	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:embereth-veteran:f0a0:s1,f:xs:XP:embereth-veteran:f0a0:s1	-	-	-	3aa6ded33acb	-	007a01468d54	-	-	2026-11-25	xproof
 2c24b7c3-7c90-4109-a4aa-d9cae6febf34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orb-of-dreams:cast:s1,f:xs:XP:orb-of-dreams:cast:s1	-	-	-	fb9d3088f0bf	-	11a4a29c55c4	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c5044ff-a303-4276-8e23-7caac30a275b	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:ninja-teen:static0.0:s1,f:xs:XP:ninja-teen:static0.0:s1	-	-	-	23c4009444b0	-	0948b848d5d3	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c5044ff-a303-4276-8e23-7caac30a275b	static#0.1	static#0.1	agreed	-	X	scen	1	0	Ninja Teen/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c5044ff-a303-4276-8e23-7caac30a275b	static#0.2	static#0.2	agreed	-	X	scen	1	0	Ninja Teen/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c51e20b-07b2-4c96-8d73-87379aafbc7c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+2c51e20b-07b2-4c96-8d73-87379aafbc7c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2c51e20b-07b2-4c96-8d73-87379aafbc7c	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:countervailing-winds:cast:s1,f:xs:XP:countervailing-winds:cast:s1	-	-	-	23b491658465	-	769c74c4a636	-	-	2026-11-25	xproof
 2c526c61-6cdb-440c-b4c8-b6d1503cef73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c53a913-8a99-4a15-9c47-e79af026dc05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skybeast-tracker:cast:s1,f:xs:XP:skybeast-tracker:cast:s1	-	-	-	23b491658465	-	942ea201c242	-	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cb96408-9195-4e41-ad9a-f8c74fbad083	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2cb96408-9195-4e41-ad9a-f8c74fbad083	f0/t1	Attacks/Training	agreed	-	FX	start	2	0	x:xs:XP:torens-fist-of-the-angels:f0t1:s1,f:xs:XP:torens-fist-of-the-angels:f0t1:s1	-	-	-	3aa6ded33acb	-	71137bf2c991	-	-	2026-11-25	xproof
 2cb968c4-5b50-4242-8db7-dd1fa9ce4948	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ominous-sphinx:cast:s1,f:xs:XP:ominous-sphinx:cast:s1	-	-	-	d864b561c9cb	-	c4f323a4cd11	-	-	2026-11-24	xproof
-2cb968c4-5b50-4242-8db7-dd1fa9ce4948	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+2cb968c4-5b50-4242-8db7-dd1fa9ce4948	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2cb98ca9-d7bb-416b-a17e-ee5f8e4d78f2	cast	cast-resolve	agreed	-	X	scen	1	0	Prismatic Ending/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 2cbccc46-bdef-4dfb-90a4-0278c5c8488a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quandrix-the-proof:cast:s1,f:xs:XP:quandrix-the-proof:cast:s1	-	-	-	23c4009444b0	-	0abeeb1356c8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2cbccc46-bdef-4dfb-90a4-0278c5c8488a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:quandrix-the-proof:combat0.attack:s1,f:xs:XP:quandrix-the-proof:combat0.attack:s1	-	-	-	23c4009444b0	-	0abeeb1356c8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

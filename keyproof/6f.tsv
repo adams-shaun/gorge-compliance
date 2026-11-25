@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f143c8f-cb5c-4abc-a01b-b6813f5a524c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f143c8f-cb5c-4abc-a01b-b6813f5a524c	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	6d5ab77eb67d	-	-	2026-11-25	xproof
 6f16c3ac-a9b8-47e6-b18b-ae37c74d44a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f16c3ac-a9b8-47e6-b18b-ae37c74d44a0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6f16c3ac-a9b8-47e6-b18b-ae37c74d44a0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6f18f41e-df8d-4b59-87cc-ea167823fbda	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pygmy-troll:cast:s1,f:xs:XP:pygmy-troll:cast:s1	-	-	-	5f2128bf97e4	-	d15b20672323	-	-	2026-11-24	xproof
 6f18f41e-df8d-4b59-87cc-ea167823fbda	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:pygmy-troll:f0a0:s1,f:xs:XP:pygmy-troll:f0a0:s1	-	-	-	5f2128bf97e4	-	d15b20672323	-	-	2026-11-24	xproof
 6f18f41e-df8d-4b59-87cc-ea167823fbda	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f34d70e-7a3a-43f7-b2c9-f89519804d3c	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:skull-storm:cast:s1,f:xs:XP:skull-storm:cast:s1	-	-	-	8c0bd19283bb	-	7c6eef0f2a29	-	-	2026-11-24	xproof
 6f377da9-7d7b-4407-8846-75a12b4dd72d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a1	NULL	owed	refused:steps-needed:cost:Exert	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6f377da9-7d7b-4407-8846-75a12b4dd72d	f0/a1	NULL	owed	refused:steps-needed:cost:Exert	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6f3ed8a1-ff5f-411b-9d87-0cce52f42344	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f477e2e-220e-48d9-9236-9564478e796a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f477e2e-220e-48d9-9236-9564478e796a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
@@ -51,8 +51,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f47a67e-1fcd-4f3f-81d0-1a6868606390	f0/a0	TapOrUntap	agreed	-	FX	start	2	0	x:xs:XP:teardrop-kami:cast:s1,f:xs:XP:teardrop-kami:cast:s1	-	-	-	64a08ba7d913	-	e28e7e29d8fb	-	-	2026-11-24	xproof
 6f4848d4-a5dc-4c71-955c-ad2b1cbb7ede	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f4861f4-1b3b-4dbc-b55b-196075d0a693	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f4861f4-1b3b-4dbc-b55b-196075d0a693	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-6f4861f4-1b3b-4dbc-b55b-196075d0a693	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6f4861f4-1b3b-4dbc-b55b-196075d0a693	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6f4861f4-1b3b-4dbc-b55b-196075d0a693	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6f498ff7-38c9-44ea-9cb5-994a003825ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ingenious-prodigy:f0t0:s1,f:xs:XP:ingenious-prodigy:f0t0:s1	-	-	-	3aa6ded33acb	-	e33c0cf95db2	-	-	2026-11-25	xproof
 6f498ff7-38c9-44ea-9cb5-994a003825ee	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ingenious Prodigy/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f498ff7-38c9-44ea-9cb5-994a003825ee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ingenious Prodigy/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -96,7 +96,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f78d21b-1959-4edc-9f28-d7ada539abef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f78d21b-1959-4edc-9f28-d7ada539abef	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f7b9ff4-fe79-4d21-9262-47bcd2411259	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f7b9ff4-fe79-4d21-9262-47bcd2411259	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ce0c2b5e5b13	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6f7b9ff4-fe79-4d21-9262-47bcd2411259	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6f7c29ff-955c-496b-9300-2efb9e99ba2d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f7c29ff-955c-496b-9300-2efb9e99ba2d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6f7ef1d1-c441-41ba-b7d6-6b7727ffcf04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
