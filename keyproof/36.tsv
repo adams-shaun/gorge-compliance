@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36072943-7823-434d-b898-f0a2c4e00af2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 36072943-7823-434d-b898-f0a2c4e00af2	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 3607d700-5a05-4e68-8863-3514c68566ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:towering-baloth:cast:s1,f:xs:XP:towering-baloth:cast:s1	-	-	-	fc71ca68c5ac	-	57de46ea9227	-	-	2026-11-24	xproof
-36081fbb-413f-4924-a536-82add34e38be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-fleet-arsonist:f0t0:s1,f:xs:XP:storm-fleet-arsonist:f0t0:s1	-	-	-	8c0bd19283bb	-	7f95c73151ea	-	-	2026-11-24	xproof
+36081fbb-413f-4924-a536-82add34e38be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-fleet-arsonist:f0t0:s1,f:xs:XP:storm-fleet-arsonist:f0t0:s1	-	-	-	8c0bd19283bb	-	7f95c73151ea	-	-	2026-11-25	xproof
 36081fbb-413f-4924-a536-82add34e38be	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36082b5e-760b-4245-af59-00d308470d1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36082b5e-760b-4245-af59-00d308470d1a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -205,9 +205,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36f5f161-b25e-48e4-b8f9-e6c36dfefe5b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sorin-s-guide:cast:s1,f:xs:XP:sorin-s-guide:cast:s1	-	-	-	d864b561c9cb	-	69461baa859b	-	-	2026-11-24	xproof
 36f5f161-b25e-48e4-b8f9-e6c36dfefe5b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sorin-s-guide:cast:s1,f:xs:XP:sorin-s-guide:cast:s1	-	-	-	d864b561c9cb	-	69461baa859b	-	-	2026-11-24	xproof
 36f68aa3-9955-46f1-bc87-497f16ef5222	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wizard-class:cast:s1,f:xs:XP:wizard-class:cast:s1	-	-	-	d864b561c9cb	-	5d8bd5c5746e	-	-	2026-11-24	xproof
-36f68aa3-9955-46f1-bc87-497f16ef5222	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:wizard-class:f0a1:s1,f:xs:XP:wizard-class:f0a1:s1	-	-	-	8c0bd19283bb	-	5d8bd5c5746e	-	-	2026-11-24	xproof
+36f68aa3-9955-46f1-bc87-497f16ef5222	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:wizard-class:f0a1:s1,f:xs:XP:wizard-class:f0a1:s1	-	-	-	8c0bd19283bb	-	5d8bd5c5746e	-	-	2026-11-25	xproof
 36f68aa3-9955-46f1-bc87-497f16ef5222	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-36f68aa3-9955-46f1-bc87-497f16ef5222	f0/t0	ClassLevelGained/Class	agreed	-	FX	start	2	0	x:xs:XP:wizard-class:f0a1:s1,f:xs:XP:wizard-class:f0a1:s1	-	-	-	8c0bd19283bb	-	5d8bd5c5746e	-	-	2026-11-24	xproof
+36f68aa3-9955-46f1-bc87-497f16ef5222	f0/t0	ClassLevelGained/Class	agreed	-	FX	start	2	0	x:xs:XP:wizard-class:f0a1:s1,f:xs:XP:wizard-class:f0a1:s1	-	-	-	8c0bd19283bb	-	5d8bd5c5746e	-	-	2026-11-25	xproof
 36f68aa3-9955-46f1-bc87-497f16ef5222	f0/t1	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 36f71d49-0f64-4b5d-b1ee-bb0af5e9db9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36f71d49-0f64-4b5d-b1ee-bb0af5e9db9a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
