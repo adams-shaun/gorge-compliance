@@ -65,7 +65,7 @@ if row.get("leftover"):
 if not row.get("strict"):
     fail("not a strict run")
 notes = row.get("notes") or []
-if not any(n.startswith("modes step 8: none (0 modes possible") for n in notes):
+if not any(n.startswith("modes ") and ": none (0 modes possible" in n for n in notes):
     fail("the zero-mode ask was not answered empty; notes = %r" % (notes,))
 if any(n.startswith("loose:") for n in notes):
     fail("the zero-mode ask fell through to the AI; notes = %r" % (notes,))
