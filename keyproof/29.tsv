@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29326487-6d95-40a8-9bcc-f94ada4e27c3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:slavering-branchsnapper:combat0.block:s1,f:xs:XP:slavering-branchsnapper:combat0.block:s1	-	-	-	23c4009444b0	-	3fb91814cf27	-	-	2026-11-25	xproof
 29326487-6d95-40a8-9bcc-f94ada4e27c3	f0/a0	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:slavering-branchsnapper:f0a0:s1	-	-	-	23c4009444b0	-	3fb91814cf27	-	-	2026-11-25	xproof
 29328bcb-e991-4095-9439-f493c8fa3f82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29328bcb-e991-4095-9439-f493c8fa3f82	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+29328bcb-e991-4095-9439-f493c8fa3f82	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 2932baae-bdf1-455a-9ac4-23ba1f83e7e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:adarkar-valkyrie:cast:s1,f:xs:XP:adarkar-valkyrie:cast:s1	-	-	-	16ec2936189a	-	ab5522d8d625	-	-	2026-11-24	xproof
 2932baae-bdf1-455a-9ac4-23ba1f83e7e1	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 2934233a-b90c-45df-b604-ce462480bbb7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29a90fda-541e-4923-b3ed-e2b35d02c74b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sylvan-ranger:cast:s1,f:xs:XP:sylvan-ranger:cast:s1	-	-	-	77494c1ce129	-	43a021153335	-	-	2026-11-24	xproof
 29a90fda-541e-4923-b3ed-e2b35d02c74b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sylvan-ranger:cast:s1,f:xs:XP:sylvan-ranger:cast:s1	-	-	-	77494c1ce129	-	43a021153335	-	-	2026-11-24	xproof
 29ae4471-c28f-4e43-8afb-fee5023e4d08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29ae4471-c28f-4e43-8afb-fee5023e4d08	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+29ae4471-c28f-4e43-8afb-fee5023e4d08	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 29ae5540-5fdf-48be-86ba-b4db0fe19f6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vapor-snare:f0t0:s1,f:xs:XP:vapor-snare:f0t0:s1	-	-	-	23c4009444b0	-	a8727fc6ae35	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 29ae5540-5fdf-48be-86ba-b4db0fe19f6c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:vapor-snare:f0t0:s1,f:xs:XP:vapor-snare:f0t0:s1	-	-	-	23c4009444b0	-	a8727fc6ae35	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 29b3cb3e-aeb1-43eb-8095-9f7881aa34bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3247fca3-7458-47ee-875b-c55f2a3e2962	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 324824cb-f938-401c-b9b5-d8908b431ef0	cast	cast	agreed	-	X	start	2	0	x:xs:XP:snuff-out:cast:s1	-	-	-	8c0bd19283bb	-	3d7fe196ee12	-	-	2026-11-24	xproof
 324a30cc-bddd-463c-9f28-c94c93a26780	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-324a30cc-bddd-463c-9f28-c94c93a26780	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+324a30cc-bddd-463c-9f28-c94c93a26780	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 324d2aa8-6dea-4b0d-898d-1e52ed187565	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:acolyte-of-aclazotz:cast:s1,f:xs:XP:acolyte-of-aclazotz:cast:s1	-	-	-	23b491658465	-	f152db30672a	-	-	2026-11-24	xproof
 324d2aa8-6dea-4b0d-898d-1e52ed187565	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:acolyte-of-aclazotz:f0a0:s1,f:xs:XP:acolyte-of-aclazotz:f0a0:s1	-	-	-	3aa6ded33acb	-	f152db30672a	-	-	2026-11-25	xproof
 325032d5-c452-4454-8976-82f86fee5ab8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32aee76a-e738-4898-985a-801d1cce15ea	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-vision:combat0.block:s1,f:xs:XP:the-vision:combat0.block:s1	-	-	-	fb9d3088f0bf	-	358333722a84	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 32aee76a-e738-4898-985a-801d1cce15ea	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:the-vision:f0t0:s1,f:xs:XP:the-vision:f0t0:s1	-	-	-	fb9d3088f0bf	-	358333722a84	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 32af5f7b-a970-484a-9aff-226749551d32	cast	cast-resolve	agreed	-	FX	scen	2	0	Thousand Moons Smithy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-32af5f7b-a970-484a-9aff-226749551d32	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+32af5f7b-a970-484a-9aff-226749551d32	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Thousand Moons Smithy/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Thousand Moons Smithy/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Thousand Moons Smithy/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
