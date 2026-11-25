@@ -5685,6 +5685,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * clears, then adds one copy of the blueprint per player or opponent): Mass
      * Mutiny's inline target was wiped and its "up to one" per-opponent copy,
      * min 0, was closed with nothing picked, so the spell resolved untargeted.
+     * A {@code TargetsCountAdjuster} (every {@code XTargetsCountAdjuster}
+     * "up to X target" spell: Crashing Wave) does the same, resizing a fresh
+     * copy of the blueprint to the announced count: the inline target sat on
+     * the unadjusted blueprint, the adjuster wiped it, and the chooser's
+     * second ask found nothing scripted, so the spell resolved untargeted.
      */
     static boolean replacesCastTargets(Ability ability) {
         if (ability == null) {
@@ -5692,7 +5697,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         mage.target.targetadjustment.TargetAdjuster adjuster = ability.getTargetAdjuster();
         return adjuster instanceof mage.target.targetadjustment.ConditionalTargetAdjuster
-                || adjuster instanceof mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
+                || adjuster instanceof mage.target.targetadjustment.ForEachPlayerTargetsAdjuster
+                || adjuster instanceof mage.target.targetadjustment.TargetsCountAdjuster;
     }
 
     /** The named face's spell ability, or null when the name does not
