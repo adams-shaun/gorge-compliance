@@ -41,6 +41,7 @@ import mage.constants.ColoredManaSymbol;
 import mage.constants.ManaType;
 import mage.constants.Outcome;
 import mage.constants.PhaseStep;
+import mage.constants.SubType;
 import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
@@ -9352,6 +9353,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 types.add(t.toString());
             }
             perm.getSubtype(g).forEach(st -> types.add(st.toString()));
+            if (perm.isAllNonbasicLandTypes(g)) {
+                // "Is every nonbasic land type" (CR 205.3i) is a flag on the
+                // permanent's subtype state, not a materialised subtype, so
+                // getSubtype above never lists the granted types. Report the
+                // whole enum set the flag grants, derived from the enum so a
+                // new land type joins without a list to edit here.
+                for (SubType st : SubType.getNonbasicLandTypes()) {
+                    String name = st.toString();
+                    if (!types.contains(name)) {
+                        types.add(name);
+                    }
+                }
+            }
             perm.getSuperType(g).forEach(st -> types.add(st.toString()));
             Collections.sort(types);
             o.add("types", GSON.toJsonTree(types));

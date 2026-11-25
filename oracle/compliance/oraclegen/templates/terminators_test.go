@@ -55,7 +55,7 @@ func TestGeneratedTerminatorsAndOptionalCosts(t *testing.T) {
 			// ONE '^'-joined definition, on the TARGET queue: the look of four
 			// whose rest goes to the graveyard is XMage's
 			// LookLibraryAndPickControllerEffect chooseTarget
-			// (digGraveyardTakeAnswer; replayed strict-clean).
+			// (digFixedTakeAnswer; replayed strict-clean).
 			card: "Rakshasa's Bargain",
 			check: func(t *testing.T, it oraclegen.Item) {
 				if !hasAnswer(it.XAnswers, 1, "target", "Wastes^Wastes") {
