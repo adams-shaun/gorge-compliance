@@ -112,7 +112,9 @@ func TestForgeRolledDie(t *testing.T) {
 // replays the xproof Hurl Through Hell request.
 // 9a35b501bbb = 244c5908482 plus the remove-any-type counter-kind pick left for the chooseNumber amount run
 // (StepMachine/ScriptedController only); die-roll code unchanged, so ForcedDieRollTest's subject is untouched.
-const forgeOracleDieRollRef = "9a35b501bbb1c1820e1f0592b1b954e461ba8ba3"
+// 6bcd573a9d6 = 9a35b501bbb plus the up-to remove-any-type Done pick consumed at the counter-kind ask
+// (StepMachine/ScriptedController only); die-roll code unchanged, so ForcedDieRollTest's subject is untouched.
+const forgeOracleDieRollRef = "6bcd573a9d685e5c23006f9e31a5f47bdc0e2bff"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

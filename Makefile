@@ -479,7 +479,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # xs:XP:mabel-bitter-recluse:cast:s1 request and requires p1.graveyard [Ajani Resolute] at step 3 with no harness or
 # strict-miss row. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-counter-kind-peek.
-FORGE_ORACLE_REF ?= 9a35b501bbb1c1820e1f0592b1b954e461ba8ba3
+# 6bcd573a9d6 = 9a35b501bbb + the up-to remove-any-type Done pick: when the controller stops early gorge logs a counter
+# answer of Done (pick kind remove_counter_done), which names no Forge CounterType. Forge's removeAnyType has no Done type,
+# so the kind ask now consumes the Done and answers a legal offered type; that type's chooseNumber then finds no counter
+# pick and answers 0 (min is 0 under UpTo), which is how removeAnyType stops. scripts/forge-oracle-test-counter-any-done.sh
+# (make forge-driver-tests) replays the Mabel, Bitter Recluse request with LOYALTY then Done and requires Ajani Resolute
+# still on p1's battlefield at 1 loyalty and one +1/+1, with no harness or strict-miss row. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-counter-any-done.
+FORGE_ORACLE_REF ?= 6bcd573a9d685e5c23006f9e31a5f47bdc0e2bff
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
