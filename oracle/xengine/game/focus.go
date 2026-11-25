@@ -33,6 +33,11 @@ type Focus struct {
 	// start places the card in the opponent's hand with the lands its cost
 	// takes, and the opponent is the active seat when the bait is no instant.
 	Bait string
+	// Targets are the permanents the focus play must target, in the order the
+	// play asks for them. A forced start names them because another placed
+	// card can be a legal alternative the bot would pick instead (an Aura's
+	// bearer, a need's enabler), so the key object must be named.
+	Targets []string
 	// Times is how many times the seat takes the action (0: once), each at its
 	// first chance after the last.
 	Times int
@@ -342,6 +347,44 @@ func (s *focusState) manaChoice(d decision.Decision, ma *cards.SA) int {
 	return -1
 }
 
+// target answers the focus play's target ask: the named permanents (Focus.
+// Targets), when the ask is the focus card's own spell or ability. The bot's
+// pick would otherwise take the first legal option, which a forced start's
+// other placed cards (an Aura's bearer, a need's enabler) can be. picks the
+// options whose object is named; ok is false for another source, another
+// seat's ask or a target not on offer, which the bot then answers as before.
+func (s *focusState) target(d decision.Decision, in decision.Intent) (decision.Intent, bool) {
+	if len(s.f.Targets) == 0 || d.Kind != decision.KTarget || int(d.Player) != s.f.Seat || s.e == nil {
+		return in, false
+	}
+	if o := s.e.G.Obj(d.Source); o == nil || o.Face() == nil ||
+		cards.NormalizeName(o.Face().Name) != cards.NormalizeName(s.f.Card) {
+		return in, false
+	}
+	want := make(map[string]bool, len(s.f.Targets))
+	for _, n := range s.f.Targets {
+		want[cards.NormalizeName(n)] = true
+	}
+	most := max(d.Max, 1) // a target ask's Max is how many objects this stage takes
+	var picks []int
+	for i, o := range d.Options {
+		if len(picks) >= most || o.Obj == 0 {
+			continue
+		}
+		ob := s.e.G.Obj(o.Obj)
+		if ob == nil || ob.Face() == nil || !want[cards.NormalizeName(ob.Face().Name)] {
+			continue
+		}
+		if !slices.Contains(picks, i) {
+			picks = append(picks, i)
+		}
+	}
+	if len(picks) == 0 || len(picks) < d.Min {
+		return in, false
+	}
+	return answer(in, picks...), true
+}
+
 // open reports whether the game has reached turn 1's first precombat main
 // phase: the span a start item replays begins there, so an action taken
 // earlier (an upkeep activation) would be missing from it.
@@ -429,6 +472,11 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 	if out, ok := st.line(d, in); ok {
 		// the scripted combat is declared whether or not the focus has acted
 		// (a play in the declare attackers step comes before the blocks)
+		return out, nil
+	}
+	// Before the done check: a cast focus marks done when it takes the cast
+	// option, and the target ask follows that answer.
+	if out, ok := st.target(d, in); ok {
 		return out, nil
 	}
 	if st.done || st.f.Kind == "" {

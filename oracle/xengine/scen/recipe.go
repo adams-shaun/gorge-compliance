@@ -328,25 +328,20 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 					return refuse(why)
 				}
 			case trig.Params["Origin"] == "Battlefield" && (trig.Params["Destination"] == "Graveyard" || trig.Params["Destination"] == "Any") && selfCard(trig):
-				// Murder takes a creature to the graveyard, which also meets "leaves
-				// the battlefield" (Destination Any).
-				if !face.IsCreature() {
-					return refuse("no-generator:trigger:ChangesZone:noncreature-self")
+				// Murder (a creature) or a destroy spell (any other permanent,
+				// an Aura first attached) moves the card to the graveyard, which
+				// also meets "leaves the battlefield" (Destination Any).
+				if why := selfDiesStart(reg, b, face, card, f); why != "" {
+					return refuse(why)
 				}
-				murder, ok := reg.Lookup("Murder")
-				if !ok || len(murder.Faces) == 0 {
-					return Result{}, fmt.Errorf("scen: Murder is not in the corpus")
-				}
-				mc := murder.Faces[0].ManaCost
-				p0.Battlefield = []string{card}
-				p1.Hand = []string{"Murder"}
-				p1.Battlefield = landsFor(splitCost(mc), basicFor(mc))
-				f.Active = 1
-				f.Focus = &StartFocus{Seat: seat(1), Card: "Murder", Kind: "cast"}
 			default:
 				if why := zoneStart(reg, b, face, card, trig, f); why != "" {
 					return refuse(why)
 				}
+			}
+		case "ChangesZoneAll":
+			if why := zoneAllStart(reg, b, face, card, trig, f); why != "" {
+				return refuse(why)
 			}
 		case "SpellCast", "SpellCastOrCopy":
 			if why := spellStart(reg, b, face, card, generic, trig, f); why != "" {
@@ -416,14 +411,16 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			return refuse("no-generator:face:not-on-battlefield")
 		}
 	}
-	for _, bf := range [][]string{p0.Battlefield, p1.Battlefield} {
-		for _, n := range bf {
+	for _, seat := range []*StartSeat{p0, p1} {
+		for _, n := range seat.Battlefield {
 			if n != card {
 				continue
 			}
-			if why := FieldBlock(face); why != "" {
-				return refuse("battlefield:" + why)
+			why := FieldBlock(face)
+			if why == "" || why == "aura-unattached" && seat.Attached(n) {
+				continue
 			}
+			return refuse("battlefield:" + why)
 		}
 	}
 	// Needs the start's own line already meets, or must not: a combat-damage
@@ -437,6 +434,16 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			return n.Class == certdeck.OppBlockers
 		case trig.Mode == "LifeGained":
 			return n.Class == certdeck.Life && n.Arg == "gain"
+		case n.Class == certdeck.Bodies && len(f.Setup.P0.Attach) > 0:
+			// An Aura start places its own bearer, on the seat its Enchant
+			// keyword names: certdeck's body for the Aura would be a second
+			// creature, on our side, that the removal could take instead.
+			return true
+		case n.Class == certdeck.Token && focusCastsToken(reg, b, f, card, triggerFilter(trig)):
+			// The trigger's own token filter chose a token-maker focus; the
+			// token enters as that cast, so no placed token is needed (and a
+			// start cannot place one).
+			return true
 		}
 		return false
 	}
@@ -469,9 +476,10 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 
 // FieldBlock is why a start file cannot list face on the battlefield, or "":
 // an instant or sorcery is never a permanent (CR 304.4, 307.4), and an Aura
-// a start file places has no bearer (a start file has no attach), so it stays
-// where it is (CR 303.4g). Either way the engines disagree about where the
-// card ends up (gorge left Path to Exile on the battlefield and lost an
+// a start file places has no bearer unless it is in StartSeat.Attach (a
+// caller that sees the attachment allows aura-unattached), so a bare Aura
+// stays where it is (CR 303.4g). Either way the engines disagree about where
+// the card ends up (gorge left Path to Exile on the battlefield and lost an
 // unattached Aura from the library; Forge put both in hand), so the setup
 // could never agree.
 func FieldBlock(face *cards.Face) string {

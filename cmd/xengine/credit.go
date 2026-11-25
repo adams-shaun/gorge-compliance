@@ -40,6 +40,10 @@ func declaredKey(reg *cards.Registry, it oraclegen.Item) (classify.Use, bool) {
 	return classify.Use{Card: canonicalCard(reg, it.Card), Key: key}, true
 }
 
+// creditDeclared is whether credit joins declaredKey. It is always true outside
+// a test, which clears it to read what the tape alone proves a start played.
+var creditDeclared = true
+
 // credit is every coverage key item credits over the tape's entries lo..hi:
 // classify.Uses, plus the key the item's id declares (declaredKey) when the
 // tape has not already credited it. Counts are not inflated: the declared key
@@ -48,6 +52,9 @@ func declaredKey(reg *cards.Registry, it oraclegen.Item) (classify.Use, bool) {
 // the tape already credited.
 func credit(reg *cards.Registry, it oraclegen.Item, t *game.Tape, lo, hi int, genesis bool) map[classify.Use]int {
 	out := classify.Uses(reg, t, lo, hi, genesis)
+	if !creditDeclared {
+		return out
+	}
 	if u, ok := declaredKey(reg, it); ok {
 		if _, seen := out[u]; !seen {
 			out[u] = 1

@@ -77,8 +77,17 @@ type startSeat struct {
 	// BackFace names battlefield cards that enter on their back face.
 	BackFace []string       `json:"back_face"`
 	Counters []startCounter `json:"counters"`
+	Attach   []startAttach  `json:"attach"`
 	Tokens   []startToken   `json:"tokens"`
 	Life     *int32         `json:"life"`
+}
+
+type startAttach struct {
+	Card string `json:"card"`
+	To   string `json:"to"`
+	// Opp: the bearer is on the other seat's battlefield (an Aura whose Enchant
+	// keyword is "creature an opponent controls").
+	Opp bool `json:"opp"`
 }
 
 type startCounter struct {
@@ -105,6 +114,9 @@ type startFocus struct {
 	// Bait is the spell the focus seat's opponent casts before the focus play
 	// (game.Focus.Bait).
 	Bait string `json:"bait"`
+	// Targets are the permanents the focus play must target, in the order the
+	// play asks for them (game.Focus.Targets).
+	Targets []string `json:"targets"`
 	// Attack and Block are the scripted combat the focus play waits for
 	// (game.Focus.Attack, Block).
 	Attack string `json:"attack"`
@@ -245,6 +257,7 @@ func (f *startFile) focusOf() (game.Focus, error) {
 		}
 		out.Attack, out.Block = o.Attack, o.Block
 		out.Bait = o.Bait
+		out.Targets = o.Targets
 	}
 	if out.Seat < 0 || out.Seat > 1 {
 		return out, fmt.Errorf("focus seat %d: no seat lists %q", out.Seat, f.Card)
@@ -267,11 +280,22 @@ func (s startSeat) lists(card string) bool {
 // startDeck is a seat's deck and its scripted position: the listed cards in
 // the order hand, battlefield, graveyard, exile, library, then basics to 40.
 func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules.StartSeat, error) {
+	return startDeckAt(reg, name, 0, s, startSeat{})
+}
+
+// startDeckAt is startDeck for one seat index: an Attach entry binds the Aura
+// to a bearer on this same seat, or (Opp) on other, the opposing seat's
+// position, whose deck lists hand then battlefield first (rules.StartAttach).
+func startDeckAt(reg *cards.Registry, name string, seat int, s, other startSeat) (decks.Deck, rules.StartSeat, error) {
 	var d decks.Deck
 	var ss rules.StartSeat
 	d.Name = name
 	var bf []int
 	var frontCost []string
+	attached := map[string]bool{}
+	for _, a := range s.Attach {
+		attached[a.Card] = true
+	}
 	add := func(names []string, into *[]int, bfZone bool) error {
 		backs := map[string]int{} // BackFace names left to place, by name
 		for _, n := range s.BackFace {
@@ -284,13 +308,15 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 			}
 			if bfZone {
 				// gorge and Forge place such a card differently (scen.FieldBlock),
-				// so the setup could never agree: refuse the file.
+				// so the setup could never agree: refuse the file. An attached Aura
+				// enters with its bearer, so it is the one exception.
 				face := c.Faces[0]
 				if backs[n] > 0 && len(c.Faces) > 1 {
 					face = c.Faces[1] // it enters transformed: the back face is the permanent
 					backs[n]--
 				}
-				if why := scen.FieldBlock(face); why != "" {
+				if why := scen.FieldBlock(face); why != "" &&
+					!(why == "aura-unattached" && attached[n]) {
 					return fmt.Errorf("start %s: %q cannot be listed on the battlefield (%s): list it in hand", name, n, why)
 				}
 			}
@@ -352,6 +378,32 @@ func startDeck(reg *cards.Registry, name string, s startSeat) (decks.Deck, rules
 		x, y := ss.Counters[a], ss.Counters[b]
 		return x.Card < y.Card || x.Card == y.Card && x.Kind < y.Kind
 	})
+	auraCards, auraBearers := map[int]bool{}, map[int]bool{}
+	for _, a := range s.Attach {
+		bearers := s.Battlefield
+		if a.Opp {
+			bearers = other.Battlefield
+		}
+		if !slices.Contains(s.Battlefield, a.Card) || !slices.Contains(bearers, a.To) {
+			return d, ss, fmt.Errorf("start %s: attach %q to %q: both must be on the battlefield", name, a.Card, a.To)
+		}
+		card, err := bind(a.Card, auraCards)
+		if err != nil {
+			return d, ss, err
+		}
+		if a.Opp {
+			// The other deck is built from the same listing order (hand, then
+			// battlefield): its first battlefield copy is the bearer.
+			ss.Attach = append(ss.Attach, rules.StartAttach{Card: card, ToSeat: 1 - seat,
+				To: len(other.Hand) + slices.Index(other.Battlefield, a.To)})
+			continue
+		}
+		bearer, err := bind(a.To, auraBearers)
+		if err != nil {
+			return d, ss, err
+		}
+		ss.Attach = append(ss.Attach, rules.StartAttach{Card: card, ToSeat: seat, To: bearer})
+	}
 	backed := map[int]bool{}
 	for _, n := range s.BackFace {
 		i, err := bind(n, backed)
@@ -475,11 +527,11 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 		if err != nil {
 			return fmt.Errorf("%s: %w", path, err)
 		}
-		d0, s0, err := startDeck(reg, "start-p0", f.Setup.P0)
+		d0, s0, err := startDeckAt(reg, "start-p0", 0, f.Setup.P0, f.Setup.P1)
 		if err != nil {
 			return fmt.Errorf("%s: %w", path, err)
 		}
-		d1, s1, err := startDeck(reg, "start-p1", f.Setup.P1)
+		d1, s1, err := startDeckAt(reg, "start-p1", 1, f.Setup.P1, f.Setup.P0)
 		if err != nil {
 			return fmt.Errorf("%s: %w", path, err)
 		}
