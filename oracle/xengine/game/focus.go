@@ -61,7 +61,12 @@ func (s *focusState) took() {
 var focusSeen func(*focusState)
 
 // read fills the focus objects: every object of the focus seat, in any zone,
-// whose front face is the focus card.
+// whose front face is the focus card. A multi-faced card is named as its
+// card file names it ("Akoum Warrior // Akoum Teeth") while the object's face
+// carries the front name alone, so both are compared as cards.NormalizeName
+// folds them (to the front face): compared as written, no object of a
+// transforming, modal or adventure card was ever a focus object, and the
+// focus play of every such start went untaken.
 func (s *focusState) read(e *rules.Engine) {
 	s.e = e
 	s.objs = map[state.ObjID]bool{}
@@ -69,9 +74,10 @@ func (s *focusState) read(e *rules.Engine) {
 		return
 	}
 	p := state.PlayerID(s.f.Seat)
+	want := cards.NormalizeName(s.f.Card)
 	for _, z := range []state.Zone{state.ZHand, state.ZBattlefield, state.ZLibrary, state.ZGraveyard, state.ZExile} {
 		for _, id := range e.G.Zone(z, p) {
-			if o := e.G.Obj(id); o != nil && o.Face() != nil && o.Face().Name == s.f.Card {
+			if o := e.G.Obj(id); o != nil && o.Face() != nil && cards.NormalizeName(o.Face().Name) == want {
 				s.objs[id] = true
 			}
 		}
