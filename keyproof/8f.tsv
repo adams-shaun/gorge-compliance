@@ -11,8 +11,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f1c21d6-bf85-4e31-a978-6423c40650d2	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:atlantean-skirmisher:f0t0:s1,f:xs:XP:atlantean-skirmisher:f0t0:s1	-	-	-	8c0bd19283bb	-	5b44b2ac33ad	-	-	2026-11-24	xproof
 8f1d5c8d-98e1-47b7-8347-38887253e34a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f1d65ae-7ce5-4bb6-8c00-eace25ff837c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f1d65ae-7ce5-4bb6-8c00-eace25ff837c	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-8f1d65ae-7ce5-4bb6-8c00-eace25ff837c	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+8f1d65ae-7ce5-4bb6-8c00-eace25ff837c	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+8f1d65ae-7ce5-4bb6-8c00-eace25ff837c	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8f1dae40-b307-446e-bbd2-86aa35813871	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f1e8f25-ee23-40a6-a3f2-369bb960267f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f2252f6-69b9-4c56-b078-803db301a874	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f788188-d901-44f3-9fec-e2e5d0263140	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	f7e5f9773d01	-	-	2026-11-25	xproof
 8f7dd328-b367-4546-ba79-1efc1e97f2ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f7f4061-8998-40e9-b980-c63f27e7a5cd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8f7f4061-8998-40e9-b980-c63f27e7a5cd	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+8f7f4061-8998-40e9-b980-c63f27e7a5cd	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8f7f4061-8998-40e9-b980-c63f27e7a5cd	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f80a7be-3da3-4e84-82a8-dd5d4b2c3f32	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f85088c-256d-4925-a4dd-aafcc2632282	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:magnetic-snuffler:f0t0:s2,f:xs:XP:magnetic-snuffler:f0t0:s2	-	-	-	e07cf3a05ba5	-	09ffe8ff284e	-	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8f867a2c-f17b-4608-bca7-5b49d1387bc7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yuki-onna:f0t0:s1,f:xs:XP:yuki-onna:f0t0:s1	-	-	-	64a08ba7d913	-	3917ab7eaba0	-	-	2026-11-24	xproof
 8f867a2c-f17b-4608-bca7-5b49d1387bc7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:yuki-onna:f0t0:s1,f:xs:XP:yuki-onna:f0t0:s1	-	-	-	64a08ba7d913	-	3917ab7eaba0	-	-	2026-11-24	xproof
 8f867a2c-f17b-4608-bca7-5b49d1387bc7	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:yuki-onna:f0t1:s1,f:xs:XP:yuki-onna:f0t1:s1	-	-	-	23c4009444b0	-	3917ab7eaba0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-8f878efc-850f-43d2-a6fe-5ea8d1dd5afb	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+8f878efc-850f-43d2-a6fe-5ea8d1dd5afb	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8f88b0bf-81bd-4223-9dad-d8c49ff4b87a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f88b0bf-81bd-4223-9dad-d8c49ff4b87a	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8f88b0bf-81bd-4223-9dad-d8c49ff4b87a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

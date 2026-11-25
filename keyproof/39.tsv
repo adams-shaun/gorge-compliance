@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3981970f-b332-49b7-9698-3296830ac399	f0/a0	PutCounter	agreed	-	FX	start	4	0	x:xs:XP:the-darkhold:cast:s1,f:xs:XP:the-darkhold:cast:s1	-	-	-	23b491658465	-	3249b2886f3e	-	-	2026-11-24	xproof
 3981970f-b332-49b7-9698-3296830ac399	f0/a1	SetLife	agreed	-	FX	start	2	0	x:xs:XP:the-darkhold:f0a1:s1,f:xs:XP:the-darkhold:f0a1:s1	-	-	-	23b491658465	-	3249b2886f3e	-	-	2026-11-24	xproof
 3984478b-debb-4a65-ab5b-4bc134e03d82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3984478b-debb-4a65-ab5b-4bc134e03d82	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+3984478b-debb-4a65-ab5b-4bc134e03d82	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3984e5f6-8643-4104-aa9c-18d474e07801	cast	cast-resolve	agreed	-	X	scen	1	0	Bone Miser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3984e5f6-8643-4104-aa9c-18d474e07801	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bone Miser/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3984e5f6-8643-4104-aa9c-18d474e07801	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39bb051f-1ca7-4d9b-b33b-7f559f816e3e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:serra-redeemer:combat0.block:s1,f:xs:XP:serra-redeemer:combat0.block:s1	-	-	-	3aa6ded33acb	-	c411459090f4	-	-	2026-11-25	xproof
 39bb051f-1ca7-4d9b-b33b-7f559f816e3e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:serra-redeemer:f0t0:s1,f:xs:XP:serra-redeemer:f0t0:s1	-	-	-	3aa6ded33acb	-	c411459090f4	-	-	2026-11-25	xproof
 39bf60b2-eeee-48f3-b7b0-6cc2e038afb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39bf60b2-eeee-48f3-b7b0-6cc2e038afb1	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+39bf60b2-eeee-48f3-b7b0-6cc2e038afb1	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 39bf633c-41a6-496d-8aef-1ab7befb503d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39bfe194-1662-4c0e-a7c6-ea7764d29b65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39c10798-9dfc-47a2-9da3-b4038509aebe	cast	cast	agreed	-	F	start	2	0	f:xs:XP:underworld-connections:cast:s1	-	-	-	8c0bd19283bb	-	27990bed820e	-	-	2026-11-24	xproof
