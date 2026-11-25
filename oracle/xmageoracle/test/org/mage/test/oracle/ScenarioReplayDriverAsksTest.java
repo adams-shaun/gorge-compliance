@@ -73,6 +73,7 @@ public final class ScenarioReplayDriverAsksTest {
         emptyOptionalAnimate();
         optionalMultiCandidateTarget();
         mandatoryChoosePickOnTargetQueue();
+        perZoneAttachPick();
         cardOrderPick();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, look-at/exile same-name choice,"
@@ -192,6 +193,48 @@ public final class ScenarioReplayDriverAsksTest {
                         && guard.contains("source.getTargets().contains(target)")
                         && guard.contains("source.getTargets().contains(target.getOriginalTarget())"),
                 "the move must stay behind the mandatory / TargetPermanent / not-the-source's-own-target guards");
+    }
+
+    /** Bruna, Light of Alabaster: XMage asks a per-zone "Attach an Aura from your hand?" may and
+     * then choose(Cards, TargetCard), which reads the CHOICE queue; gorge recorded one yes and the
+     * pick, scripted on the TARGET queue. The zone ask is recognised by role, and the Cards pick
+     * hands the target-queue name to the choice queue before forcedChooseCards. */
+    private static void perZoneAttachPick() throws Exception {
+        Class<?>[] one = {String.class};
+        for (String zone : new String[] {"your hand", "your graveyard", "the battlefield"}) {
+            check((Boolean) adapter("zonePickAsk", one, "Attach an Aura from " + zone + "?"),
+                    "the per-zone attach ask for " + zone + " must be recognised");
+        }
+        check(!(Boolean) adapter("zonePickAsk", one, "Put a land card from your hand onto the battlefield?"),
+                "a put ask is not a per-zone attach ask");
+        check(!(Boolean) adapter("zonePickAsk", one, "Cast a spell from your hand?"),
+                "another per-zone may keeps its own scripted boolean");
+        check(!(Boolean) adapter("zonePickAsk", one, (Object) null), "no message is no ask");
+        Class<?>[] types = {List.class, List.class, boolean.class, java.util.function.Predicate.class};
+        java.util.function.Predicate<String> aura = a -> a.equals("Cowed by Wisdom");
+        List<String> choices = new ArrayList<>();
+        List<String> targets = new ArrayList<>(Arrays.asList("Cowed by Wisdom"));
+        check((Boolean) adapter("movePickToChoices", types, choices, targets, true, aura)
+                        && choices.equals(Collections.singletonList("Cowed by Wisdom")) && targets.isEmpty(),
+                "the scripted Aura pick moves from the target queue to the choice queue");
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int override = text.indexOf("public boolean choose(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game)");
+        check(override >= 0, "ScriptedChoicePlayer must override choose(Outcome, Cards, TargetCard, ...)");
+        int forced = text.indexOf("forcedChooseCards(cards, target, source, game)", override);
+        int call = text.indexOf("handOffCardPick(cards, target, source, game)", override);
+        check(call >= 0 && forced >= 0 && call < forced,
+                "choose(Cards, TargetCard) must call handOffCardPick before forcedChooseCards");
+        int helper = text.indexOf("private void handOffCardPick(");
+        int move = text.indexOf("movePickToChoices(", helper);
+        check(helper >= 0 && move > helper && move < helper + 1500
+                        && text.substring(helper, move).contains("getMinNumberOfTargets() > 0")
+                        && text.substring(helper, move).contains("source.getTargets().contains(target)"),
+                "handOffCardPick must move the pick behind the mandatory / not-the-source's-own-target guards");
+        check(text.contains("return zonePickQueued(message, game);")
+                        && text.indexOf("zonePickAsk(message)") < text.indexOf("foldedOptionalAnswer(source instanceof"),
+                "chooseUse must answer the per-zone attach ask before the folded-optional fallback");
     }
 
     /** North Wind Avatar: WishEffect asks "Put a card you own from outside the

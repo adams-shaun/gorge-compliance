@@ -1203,6 +1203,57 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return opponentNames.get(0);
         }
 
+        /** The per-zone pick may an attach effect poses before every card it
+         * takes from a zone ("Attach an Aura from the battlefield?", "... from
+         * your hand?", "... from your graveyard?"): the zone is the message's
+         * last words, so a new card with the same loop is covered by the role.
+         * The "Attach an " prefix keeps other per-zone mays (a cast or put ask
+         * with its own scripted boolean) out of it. */
+        static boolean zonePickAsk(String message) {
+            return zoneOfPickAsk(message) != null;
+        }
+
+        /** The zone a per-zone pick ask names: HAND, GRAVEYARD or BATTLEFIELD,
+         * else null. */
+        static Zone zoneOfPickAsk(String message) {
+            if (message == null || !message.startsWith("Attach an ") || !message.endsWith("?")) {
+                return null;
+            }
+            if (message.endsWith(" from your hand?")) {
+                return Zone.HAND;
+            }
+            if (message.endsWith(" from your graveyard?")) {
+                return Zone.GRAVEYARD;
+            }
+            if (message.endsWith(" from the battlefield?")) {
+                return Zone.BATTLEFIELD;
+            }
+            return null;
+        }
+
+        private boolean zonePickQueued(String message, Game game) {
+            if (getTargets().isEmpty() || TestPlayer.TARGET_SKIP.equals(getTargets().get(0))) {
+                return false;
+            }
+            String head = getTargets().get(0);
+            Zone zone = zoneOfPickAsk(message);
+            if (zone == Zone.BATTLEFIELD) {
+                for (mage.game.permanent.Permanent p : game.getBattlefield().getAllActivePermanents()) {
+                    if (answerNamesCandidate(game, p.getId(), head)) {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            Cards cards = zone == Zone.HAND ? getHand() : getGraveyard();
+            for (UUID id : cards) {
+                if (answerNamesCandidate(game, id, head)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private boolean scriptedYesNoNext() {
             return !getChoices().isEmpty() && (getChoices().get(0).equals("Yes") || getChoices().get(0).equals("No"));
         }
@@ -1425,6 +1476,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // placement below, exactly as oracleRun.build's post-placement
                 // LifeChange does.
                 return true;
+            }
+            if (zonePickAsk(message) && !scriptedYesNoNext()) {
+                // A per-zone "Attach an Aura from your hand?" (Bruna, Light of
+                // Alabaster) asks a may per pick; gorge recorded ONE yes for the
+                // whole effect and the pick itself, scripted on the target
+                // queue. Yes when the next queued pick lies in the named zone
+                // (choose(Cards, TargetCard) then reads it from the choice
+                // queue), else no, without consuming either queue.
+                return zonePickQueued(message, game);
             }
             Boolean folded = foldedOptionalAnswer(source instanceof mage.abilities.TriggeredAbility
                     && askedBy(mage.abilities.TriggeredAbilityImpl.class, "resolve"), getChoices(), getTargets());
@@ -2227,12 +2287,40 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return shares;
         }
 
+        /** A bespoke non-targeting card pick (Bruna's per-zone Aura attach) is
+         * posed through choose(Cards, TargetCard), which reads the CHOICE
+         * queue, while the generator scripted it for the chooseTarget twin on
+         * the TARGET queue. Move it before forcedChooseCards, which would
+         * otherwise take a lone candidate and strand the scripted target. */
+        private void handOffCardPick(Cards cards, mage.target.TargetCard target, Ability source, Game game) {
+            if (target.getMinNumberOfTargets() > 0 && !getTargets().isEmpty()
+                    && (source == null || !source.getTargets().contains(target))
+                    && (source == null || !source.getTargets().contains(target.getOriginalTarget()))) {
+                UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+                List<UUID> candidates = new ArrayList<>();
+                for (UUID id : target.possibleTargets(abilityControllerId, source, game, cards)) {
+                    if (!target.contains(id)) {
+                        candidates.add(id);
+                    }
+                }
+                movePickToChoices(getChoices(), getTargets(), !candidates.isEmpty(), answer -> {
+                    for (UUID id : candidates) {
+                        if (answerNamesCandidate(game, id, answer)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                });
+            }
+        }
+
         @Override
         public boolean choose(Outcome outcome, Cards cards, mage.target.TargetCard target, Ability source, Game game) {
             Game previous = choiceGame;
             choiceGame = game;
             boolean declined = declinePairToChoiceSkip(target.getMinNumberOfTargets(), getChoices(), getTargets());
             try {
+                handOffCardPick(cards, target, source, game);
                 if (forcedChooseCards(cards, target, source, game)) {
                     return true;
                 }
