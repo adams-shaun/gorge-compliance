@@ -158,7 +158,10 @@ func parseAlt(alt string) altNeed {
 			n.side = 1
 		case "youdontctrl", "oppctrl":
 			n.side = -1
-		case "attacking", "blocking", "attackingyou", "blockedthisturn", "attackedthisturn":
+		case "blockedthisturn":
+			n.combat = true
+		}
+		if combatProps[q] != "" {
 			n.combat = true
 		}
 	}
@@ -232,13 +235,19 @@ func unmet(reg *cards.Registry, f *StartFile, seat int, reqs []tgtReq) (*tgtReq,
 		var took [][2]int
 		for k, alt := range reqs[i].alts {
 			n := parseAlt(alt)
-			if !permTypes[n.typ] {
+			if !permTypes[n.typ] && !n.combat {
 				ok = true // a player, any target or another zone: no permanent needed
 				continue
 			}
 			combat = combat || n.combat
 			test := reqs[i].restrictionOf(k)
 			var met [][2]int
+			if n.combat && k < len(reqs[i].raw) {
+				// a creature in combat: the start's scripted combat (lineMet)
+				if side, j, found := lineMet(reg, f, seat, reqs[i].raw[k]); found && !(reqs[i].unique && taken[[2]int{side, j}]) {
+					met = append(met, [2]int{side, j})
+				}
+			}
 			for side, bf := range [][]string{mine.Battlefield, theirs.Battlefield} {
 				for j, name := range bf {
 					if reqs[i].unique && taken[[2]int{side, j}] {
@@ -324,8 +333,15 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, sa *cards.SA, ca
 				return "", nil // a choice every target of which is met
 			}
 			reason = why
-			if why == reasonNeedsCombat || try >= maxTargetPlacements {
+			if try >= maxTargetPlacements {
 				break
+			}
+			if why == reasonNeedsCombat {
+				// a creature in combat: script the combat the play waits for
+				if !placeLine(reg, b, card, bad, seat, tapsSelf(fc, sa), f) {
+					break
+				}
+				continue
 			}
 			// an unmet permanent target: place one on the opponent's side, when
 			// the target may be the opponent's
@@ -335,6 +351,20 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, sa *cards.SA, ca
 		}
 	}
 	return reason, nil
+}
+
+// tapsSelf reports whether the focus play is an ability whose cost taps the
+// focus card ({T}), which then cannot attack for its own play.
+func tapsSelf(fc *StartFocus, sa *cards.SA) bool {
+	if fc.Kind != "ability" || sa == nil {
+		return false
+	}
+	for _, tok := range strings.Fields(sa.Params["Cost"]) {
+		if tok == "T" {
+			return true
+		}
+	}
+	return false
 }
 
 // maxTargetPlacements bounds the permanents focusPlayRefusal places for one

@@ -298,8 +298,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 				return refuse(why)
 			}
 		case "Attacks":
-			p0.Battlefield = []string{card}
-			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "attack"}
+			if why := attacksStart(reg, b, face, card, trig, f); why != "" {
+				return refuse(why)
+			}
 		case "Phase":
 			if why := phaseStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)

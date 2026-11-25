@@ -281,6 +281,11 @@ func parseFilter(s string) []filterAlt {
 					tests = append(tests, func(f *cards.Face) bool { return f.HasKeyword(kw) })
 					continue
 				}
+				if kw, ok := strings.CutPrefix(p, "without"); ok && typeWord(kw) {
+					// withoutFlying: a carrier holds no keyword but an evergreen one
+					tests = append(tests, func(f *cards.Face) bool { return !f.HasKeyword(kw) })
+					continue
+				}
 				if l, ok := colourWord[p]; ok {
 					tests = append(tests, func(f *cards.Face) bool { return hasShard(f.ManaCost, l) })
 					continue
