@@ -179,7 +179,7 @@ func faceColours(f *cards.Face) string {
 
 func hasShard(cost string, l byte) bool {
 	for _, shard := range strings.Fields(cost) {
-		for _, part := range strings.Split(shard, "/") {
+		for _, part := range shardParts(shard) {
 			if len(part) == 1 && part[0] == l {
 				return true
 			}
