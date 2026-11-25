@@ -20,8 +20,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:burnout-bashtronaut:f0a0:s1,f:xs:XP:burnout-bashtronaut:f0a0:s1	-	-	-	23c4009444b0	-	8b2ce0581e60	-	-	2026-11-25	xproof
 1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Burnout Bashtronaut/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1b1a0f35-3126-4b88-90aa-c56e67850a9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b1a0f35-3126-4b88-90aa-c56e67850a9d	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked:filter	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
-1b1a0f35-3126-4b88-90aa-c56e67850a9d	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks:filter	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+1b1a0f35-3126-4b88-90aa-c56e67850a9d	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+1b1a0f35-3126-4b88-90aa-c56e67850a9d	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 1b1bbad2-13b3-4716-85ef-3956268e23ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b1bbad2-13b3-4716-85ef-3956268e23ad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b1bbad2-13b3-4716-85ef-3956268e23ad	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1bcac664-835a-4474-8ca4-263801bde08e	f0/t0	AttackersDeclared	agreed	-	FX	start	4	0	x:xs:XP:boggart-prankster:cast:s1,f:xs:XP:boggart-prankster:cast:s1	-	-	-	23c4009444b0	-	54bdc9b41415	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1bcc8ca6-5fd0-4fc9-8f0c-f81d8abf9249	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
 1bcc8ca6-5fd0-4fc9-8f0c-f81d8abf9249	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
-1bcc8ca6-5fd0-4fc9-8f0c-f81d8abf9249	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+1bcc8ca6-5fd0-4fc9-8f0c-f81d8abf9249	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 1bd3e453-aa21-4ee6-95c2-d6d920ee8e7a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:terramorphic-expanse:land:s1,f:xs:XP:terramorphic-expanse:land:s1	-	-	-	23b491658465	-	15373cad5f7f	-	-	2026-11-24	xproof
 1bd3e453-aa21-4ee6-95c2-d6d920ee8e7a	land	land	agreed	-	FX	start	2	0	x:xs:XP:terramorphic-expanse:land:s1,f:xs:XP:terramorphic-expanse:land:s1	-	-	-	23b491658465	-	15373cad5f7f	-	-	2026-11-24	xproof
 1bd584d5-4e11-428c-b51e-462e4292b07f	cast	cast-resolve	agreed	-	FX	scen	2	0	Bygone Colossus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
