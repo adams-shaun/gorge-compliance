@@ -136,7 +136,8 @@ func TestForgeRolledDie(t *testing.T) {
 // bfdb3a8051 = 149a03bbbec4 merged with 46203751a5 (foretell cast mode, Riot choice; StepMachine/ScriptedController only);
 // die-roll code unchanged.
 // c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
-const forgeOracleDieRollRef = "c9419dd87a36a901c602460432e9731203211e1d"
+// 2b591baf9c = c9419dd87a + ScriptedController.chooseCardName (empty face list) only; die-roll code unchanged.
+const forgeOracleDieRollRef = "2b591baf9cdfc1f41711fbe5241d51a6f73a9250"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

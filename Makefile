@@ -569,7 +569,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # scripts/forge-oracle-test-foretell-cast-mode.sh and forge-oracle-test-riot-choice.sh replay the finds. Driver-only;
 # die-roll code, cardsfolder and tokenscripts unchanged.
 # c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
-FORGE_ORACLE_REF ?= c9419dd87a36a901c602460432e9731203211e1d
+# 2b591baf9c = c9419dd87a + one driver commit: ScriptedController.chooseCardName(sa, faces, message) answers an empty face list with "" and a note
+# (ChooseFromDefinedCards$ Remembered with no nonland card revealed, Alhammarret, High Arbiter; ChooseCardNameAi returns "" and the effect names
+# nothing; gorge logs no decision) instead of a 'Missing card name answer' strict miss (xpt-e750d7a5). ChooseCardNameEmptyFacesTest fails before and
+# passes after. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+FORGE_ORACLE_REF ?= 2b591baf9cdfc1f41711fbe5241d51a6f73a9250
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
