@@ -195,7 +195,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60f412bb-27e9-4883-8862-96eae96dfee3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60fa9f5f-2360-4d5e-b291-1318803e3c9f	cast	cast	diverged	-	-	start	0	2	-	892a2ec46781	-	-	23c4009444b0	-	15a7b747a04a	-	-	2026-11-25	xproof
 60fa9f5f-2360-4d5e-b291-1318803e3c9f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-60fc5eb0-95d6-49b0-a538-945ef599e484	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+60fc5eb0-95d6-49b0-a538-945ef599e484	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defabricate:cast:s1,f:xs:XP:defabricate:cast:s1	-	-	-	9087eefec3ee	-	1d941c6d33af	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 60fc89a1-cc6f-4a32-84c3-09abf7a4a1df	cast	cast-resolve	agreed	-	X	scen	1	0	Brigid, Clachan's Heart/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 60fc89a1-cc6f-4a32-84c3-09abf7a4a1df	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 60fc89a1-cc6f-4a32-84c3-09abf7a4a1df	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Brigid, Clachan's Heart/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
