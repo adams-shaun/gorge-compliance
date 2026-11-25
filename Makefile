@@ -581,7 +581,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # both halves; scripts/forge-oracle-test-graveyard-transit-order.sh (make forge-driver-tests) runs them. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-transit-graveyard-order.
-FORGE_ORACLE_REF ?= 0558bd00b880cc1919d5b130ba16937f06210181
+# 722b3142c45 = oracle/fpin-1125: 0558bd00b88 plus the one-card TwoPiles split (fork branch
+# fix/xp-forge-driver-twopiles-one-card-split; xproof cluster xpt-fc88455d): Epiphany at the Drownyard cast with X = 0 reveals one
+# card, and gorge's effTwoPiles poses no split for a one-card set (the two splits are the same partition, CR 700.3), logging only
+# the opponent's pile pick. Forge's TwoPilesEffect still asks the separator "Divide cards into two piles" (1 option, 0..1), which
+# strict-missed. StepMachine.loneTwoPilesSplit recognises that ask when no gorge object pick is queued and ScriptedController
+# answers the card as pile 1 (gorge's pile A), so chooseCardsPile reads the "First pile" pick as before; a queued split pick still
+# goes through pickObjects. TwoPilesOneCardSplitTest fails before it with the exact miss;
+# scripts/forge-oracle-test-twopiles-one-card-split.sh (make forge-driver-tests) runs it. Driver-only; die-roll code,
+# cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 722b3142c45fc2e6ac7b2dd4c1dfc0a6aca1255c
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
