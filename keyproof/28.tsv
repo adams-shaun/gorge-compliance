@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28045b32-4c1a-40e5-a15d-524d0f8fe6ec	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:archmage-of-runes:f0t0:s1,f:xs:XP:archmage-of-runes:f0t0:s1	-	-	-	3aa6ded33acb	-	aaba8125bcc6	-	-	2026-11-25	xproof
 28045b32-4c1a-40e5-a15d-524d0f8fe6ec	static#0.0	static#0.0	agreed	-	X	scen	1	0	Archmage of Runes/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 280d5601-802c-4607-9655-75cc83248210	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-280d5601-802c-4607-9655-75cc83248210	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+280d5601-802c-4607-9655-75cc83248210	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 282003f4-862a-4f80-8f45-e470fc0fe2fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blightwidow:cast:s1,f:xs:XP:blightwidow:cast:s1	-	-	-	d864b561c9cb	-	1c15e845b41e	-	-	2026-11-24	xproof
 28225bae-2d96-4352-b256-0c2ff4ef65e9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:syr-vondam-the-lucent:f0t0:s2,f:xs:XP:syr-vondam-the-lucent:f0t0:s2	-	-	-	267e485f6204	-	114060f0d3f9	-	-	2026-11-24	xproof
 28225bae-2d96-4352-b256-0c2ff4ef65e9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:syr-vondam-the-lucent:combat0.attack:s1,f:xs:XP:syr-vondam-the-lucent:combat0.attack:s1	-	-	-	23c4009444b0	-	114060f0d3f9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2876e74f-a242-4995-9702-0b737a1ab67a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2876e74f-a242-4995-9702-0b737a1ab67a	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:psychosis-crawler:f0t0:s1,f:xs:XP:psychosis-crawler:f0t0:s1	-	-	-	6f84be0f34c0	-	3766962d9a0b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 28778958-a1f9-4fea-b551-c193d1257f18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28778958-a1f9-4fea-b551-c193d1257f18	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+28778958-a1f9-4fea-b551-c193d1257f18	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:open-the-graves:f0t0:s1,f:xs:XP:open-the-graves:f0t0:s1	-	-	-	6f84be0f34c0	-	df424eb90458	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 287aae84-b098-456e-b9cb-8eac51c36360	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 287cb63c-d52d-4871-83d1-792a41ae7adc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 287cb63c-d52d-4871-83d1-792a41ae7adc	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:inferno-elemental:f0t0:s1,f:xs:XP:inferno-elemental:f0t0:s1	-	-	-	6f84be0f34c0	-	aeca8d6155eb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28b2d31f-1ff7-4374-8ea3-0dd4a96c4a32	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28b46183-c62f-47b1-9fee-3ba148202cab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28b64167-b7ea-4b4f-8434-061298050366	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28b64167-b7ea-4b4f-8434-061298050366	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+28b64167-b7ea-4b4f-8434-061298050366	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 28bb9a58-f45a-4452-a1f4-c7609373085f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:towashi-guide-bot:cast:s1,f:xs:XP:towashi-guide-bot:cast:s1	-	-	-	d864b561c9cb	-	0b35fb17600b	-	-	2026-11-24	xproof
 28bb9a58-f45a-4452-a1f4-c7609373085f	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:towashi-guide-bot:f0a0:s1,f:xs:XP:towashi-guide-bot:f0a0:s1	-	-	-	d864b561c9cb	-	0b35fb17600b	-	-	2026-11-24	xproof
 28bb9a58-f45a-4452-a1f4-c7609373085f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:towashi-guide-bot:cast:s1,f:xs:XP:towashi-guide-bot:cast:s1	-	-	-	d864b561c9cb	-	0b35fb17600b	-	-	2026-11-24	xproof

@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 652ef093-06e9-4bf1-b9cf-950fe043b319	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 652f049d-770e-4bd7-b65f-fe56e618366a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 652f049d-770e-4bd7-b65f-fe56e618366a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-652f049d-770e-4bd7-b65f-fe56e618366a	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+652f049d-770e-4bd7-b65f-fe56e618366a	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 653010bc-45af-427e-a294-e0cc28d31821	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nissa-s-expedition:cast:s1,f:xs:XP:nissa-s-expedition:cast:s1	-	-	-	d864b561c9cb	-	a5b8abf89235	-	-	2026-11-24	xproof
 6536f72e-ff4e-4cda-bc7d-909145adf829	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elite-instructor:f0t0:s1,f:xs:XP:elite-instructor:f0t0:s1	-	-	-	ae86f6029288	-	19eac450de3d	-	-	2026-11-24	xproof
 6536f72e-ff4e-4cda-bc7d-909145adf829	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elite-instructor:f0t0:s1,f:xs:XP:elite-instructor:f0t0:s1	-	-	-	ae86f6029288	-	19eac450de3d	-	-	2026-11-24	xproof
@@ -117,7 +117,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6587a463-a108-4854-b6d1-944e89b8c8a4	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:wooded-foothills:land:s1,f:xs:XP:wooded-foothills:land:s1	-	-	-	25696bf19d5b	-	d91f5f26365c	-	-	2026-11-24	xproof
 6587a463-a108-4854-b6d1-944e89b8c8a4	land	land	agreed	-	FX	start	2	0	x:xs:XP:wooded-foothills:land:s1,f:xs:XP:wooded-foothills:land:s1	-	-	-	25696bf19d5b	-	d91f5f26365c	-	-	2026-11-24	xproof
 6588ea9a-658f-40d9-a64b-3a418ab81183	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6588ea9a-658f-40d9-a64b-3a418ab81183	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6588ea9a-658f-40d9-a64b-3a418ab81183	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ulvenwald-mysteries:f0t0:s1,f:xs:XP:ulvenwald-mysteries:f0t0:s1	-	-	-	6f84be0f34c0	-	9fa27ac92f59	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6588ea9a-658f-40d9-a64b-3a418ab81183	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 658bccf8-fe73-4d6a-b37b-7a58034e5e5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 658d54d4-e967-490c-b958-3743b3b1ef45	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rage-scarred-berserker:cast:s1,f:xs:XP:rage-scarred-berserker:cast:s1	-	-	-	ae86f6029288	-	d3073f315915	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 659a259d-f75e-4af3-b568-c63225e647de	cast	cast-resolve	agreed	-	FX	scen	2	0	Sporogenic Infection/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 659a259d-f75e-4af3-b568-c63225e647de	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 659a259d-f75e-4af3-b568-c63225e647de	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Sporogenic Infection/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-659bc01c-fa60-4d00-bdad-5bca1d2a978f	cast	cast-resolve	agreed	-	X	scen	1	0	Anafenza, Unyielding Lineage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+659bc01c-fa60-4d00-bdad-5bca1d2a978f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anafenza-unyielding-lineage:cast:s1,f:xs:XP:anafenza-unyielding-lineage:cast:s1	-	-	-	6f84be0f34c0	-	7ee5226d33c7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 659bc01c-fa60-4d00-bdad-5bca1d2a978f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:anafenza-unyielding-lineage:combat0.attack:s1,f:xs:XP:anafenza-unyielding-lineage:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	7ee5226d33c7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 659bc01c-fa60-4d00-bdad-5bca1d2a978f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:anafenza-unyielding-lineage:combat0.block:s1,f:xs:XP:anafenza-unyielding-lineage:combat0.block:s1	-	-	-	fb9d3088f0bf	-	7ee5226d33c7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 659bc01c-fa60-4d00-bdad-5bca1d2a978f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anafenza-unyielding-lineage:f0t0:s1,f:xs:XP:anafenza-unyielding-lineage:f0t0:s1	-	-	-	6f84be0f34c0	-	7ee5226d33c7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

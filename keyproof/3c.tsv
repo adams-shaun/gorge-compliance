@@ -35,7 +35,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c1fe86a-3696-4634-bc26-cd45846529ec	land	land	agreed	-	FX	start	2	0	x:xs:XP:crumbling-vestige:f0t0:s1,f:xs:XP:crumbling-vestige:f0t0:s1	-	-	-	d864b561c9cb	-	588deb17ed58	-	-	2026-11-24	xproof
 3c22e031-4804-4c31-bd3c-c3f29d456b34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fiery-confluence:cast:s1,f:xs:XP:fiery-confluence:cast:s1	-	-	-	8c0bd19283bb	-	8058058c3372	-	-	2026-11-24	xproof
 3c2aec69-ffd9-4a34-888c-58adbbb99bb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c2aec69-ffd9-4a34-888c-58adbbb99bb5	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3c2aec69-ffd9-4a34-888c-58adbbb99bb5	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3c2b9bb2-8201-47e8-84d5-f3518cac03cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kree-sentinel:cast:s1,f:xs:XP:kree-sentinel:cast:s1	-	-	-	fb9d3088f0bf	-	9f3ef333d0dc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3c2b9bb2-8201-47e8-84d5-f3518cac03cb	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kree-sentinel:combat0.attack:s1,f:xs:XP:kree-sentinel:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	9f3ef333d0dc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3c2b9bb2-8201-47e8-84d5-f3518cac03cb	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kree-sentinel:combat0.block:s1,f:xs:XP:kree-sentinel:combat0.block:s1	-	-	-	fb9d3088f0bf	-	9f3ef333d0dc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
@@ -102,8 +102,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c7bafe9-80cd-48d0-bcae-e7910c9fb83b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anti-venom-horrifying-healer:f0t0:s1,f:xs:XP:anti-venom-horrifying-healer:f0t0:s1	-	-	-	25696bf19d5b	-	97e1d2c3a346	-	-	2026-11-24	xproof
 3c7bafe9-80cd-48d0-bcae-e7910c9fb83b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anti-venom-horrifying-healer:f0t0:s1,f:xs:XP:anti-venom-horrifying-healer:f0t0:s1	-	-	-	25696bf19d5b	-	97e1d2c3a346	-	-	2026-11-24	xproof
 3c7dd86d-25eb-4b24-9358-98b951248e04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c7dd86d-25eb-4b24-9358-98b951248e04	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c7dd86d-25eb-4b24-9358-98b951248e04	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3c7dd86d-25eb-4b24-9358-98b951248e04	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:tome-of-the-guildpact:f0t0:s1,f:xs:XP:tome-of-the-guildpact:f0t0:s1	-	-	-	6f84be0f34c0	-	ebef68b19390	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3c7dd86d-25eb-4b24-9358-98b951248e04	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:tome-of-the-guildpact:f0t0:s1,f:xs:XP:tome-of-the-guildpact:f0t0:s1	-	-	-	6f84be0f34c0	-	ebef68b19390	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3c7ea603-c985-4107-806b-a467b5fcca36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scholar-of-new-horizons:cast:s1,f:xs:XP:scholar-of-new-horizons:cast:s1	-	-	-	8c0bd19283bb	-	c641dbf4a68d	-	-	2026-11-24	xproof
 3c7ea603-c985-4107-806b-a467b5fcca36	f0/a0	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3c7ea8d0-d866-4c02-bdfc-13bbc87c094a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -208,7 +208,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ceb23f5-abb1-4569-a1e4-1eed9a9babcf	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:call-the-spirit-dragons:f0t0:s1,f:xs:XP:call-the-spirit-dragons:f0t0:s1	-	-	-	23c4009444b0	-	c8c8a33bf3fa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3ceb23f5-abb1-4569-a1e4-1eed9a9babcf	static#0.0	static#0.0	agreed	-	X	scen	1	0	Call the Spirit Dragons/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ceca713-38de-4428-a4f1-2146f6e98393	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3ceca713-38de-4428-a4f1-2146f6e98393	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3ceca713-38de-4428-a4f1-2146f6e98393	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rumor-gatherer:f0t0:s1,f:xs:XP:rumor-gatherer:f0t0:s1	-	-	-	6f84be0f34c0	-	4caf06a469e9	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3ceda405-8175-416a-beda-9a95f5acc60c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3cef501b-5ce1-4699-89a5-3949f7e65bf1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-friend-to-wolves:f0t0:s1,f:xs:XP:tolsimir-friend-to-wolves:f0t0:s1	-	-	-	d864b561c9cb	-	171d73e083cf	-	-	2026-11-24	xproof
 3cef501b-5ce1-4699-89a5-3949f7e65bf1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-friend-to-wolves:f0t0:s1,f:xs:XP:tolsimir-friend-to-wolves:f0t0:s1	-	-	-	d864b561c9cb	-	171d73e083cf	-	-	2026-11-24	xproof

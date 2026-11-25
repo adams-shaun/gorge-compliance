@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 1102524d-7287-496f-a18a-5fdae6d4c271	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:join-shields:cast:s1,f:xs:XP:join-shields:cast:s1	-	-	-	d864b561c9cb	-	e6247dd1c37c	-	-	2026-11-24	xproof
 1104a746-169c-450a-80ad-bea0493c0576	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1104a746-169c-450a-80ad-bea0493c0576	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+1104a746-169c-450a-80ad-bea0493c0576	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:cabal-paladin:f0t0:s1,f:xs:XP:cabal-paladin:f0t0:s1	-	-	-	6f84be0f34c0	-	9780621baf6e	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 110e5695-a9df-4201-9230-99f6abe9978f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11173ad3-c007-478f-bce0-d756eac07ccb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 111f3f1c-4387-4e61-8bff-6ebe3b7b9d9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11ad6e75-9bbd-40ea-b04a-e6a61db3bcda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11b12954-dd1b-4c50-8433-15d8c1a15e29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11b12954-dd1b-4c50-8433-15d8c1a15e29	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:somberwald-alpha:f0a0:s1,f:xs:XP:somberwald-alpha:f0a0:s1	-	-	-	d864b561c9cb	-	f747e36474b4	-	-	2026-11-24	xproof
-11b12954-dd1b-4c50-8433-15d8c1a15e29	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:somberwald-alpha:f0t0:s1,f:xs:XP:somberwald-alpha:f0t0:s1	-	-	-	44e3ec152eea	-	f747e36474b4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+11b12954-dd1b-4c50-8433-15d8c1a15e29	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:somberwald-alpha:f0t0:s1,f:xs:XP:somberwald-alpha:f0t0:s1	-	-	-	6f84be0f34c0	-	f747e36474b4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 11b21086-0779-4d16-8a56-252c6bee9bed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:djeru-s-renunciation:cast:s1,f:xs:XP:djeru-s-renunciation:cast:s1	-	-	-	d864b561c9cb	-	ba8365832f01	-	-	2026-11-24	xproof
 11b21086-0779-4d16-8a56-252c6bee9bed	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11b529f0-e365-4500-b54a-44e2ac6e709f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maw-of-kozilek:cast:s1,f:xs:XP:maw-of-kozilek:cast:s1	-	-	-	d864b561c9cb	-	6a9416c0da9b	-	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11f1d2b7-0c2b-40df-bf90-3c55b23449af	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:farmer-cotton:f0t0:s1,f:xs:XP:farmer-cotton:f0t0:s1	-	-	-	8c0bd19283bb	-	d00569868e7d	-	-	2026-11-24	xproof
 11f21b50-b4b6-449e-a66a-eedd2920ed93	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:squad-commander:cast:s1,f:xs:XP:squad-commander:cast:s1	-	-	-	ae86f6029288	-	e5c11b6738b0	-	-	2026-11-24	xproof
 11f21b50-b4b6-449e-a66a-eedd2920ed93	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:squad-commander:cast:s1,f:xs:XP:squad-commander:cast:s1	-	-	-	ae86f6029288	-	e5c11b6738b0	-	-	2026-11-24	xproof
-11f21b50-b4b6-449e-a66a-eedd2920ed93	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:squad-commander:f0t1:s1,f:xs:XP:squad-commander:f0t1:s1	-	-	-	44e3ec152eea	-	e5c11b6738b0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+11f21b50-b4b6-449e-a66a-eedd2920ed93	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:squad-commander:f0t1:s1,f:xs:XP:squad-commander:f0t1:s1	-	-	-	6f84be0f34c0	-	e5c11b6738b0	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 11f55ec5-b9a3-4670-8afb-31d29478fb59	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 11f77158-0240-4882-94a4-6bd6b3d94bcc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11f7f6e4-2c39-4478-8c10-4473dbf921a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 142d2063-d692-42a6-b828-42d998914589	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14319020-faf2-49c4-a808-c39650203383	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1432db6a-9466-48f6-9011-60728c437608	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1432db6a-9466-48f6-9011-60728c437608	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+1432db6a-9466-48f6-9011-60728c437608	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14363df6-ac0f-476a-bbd8-ce351de0babf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1436dd81-496e-42a5-b210-fb5b9cdf073f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1436dd81-496e-42a5-b210-fb5b9cdf073f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 143d7a32-c15d-4a1f-ad81-cf1e6aa92bf3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 144119bc-7fd1-45c5-9e29-f742e7c255ac	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 144119bc-7fd1-45c5-9e29-f742e7c255ac	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-144119bc-7fd1-45c5-9e29-f742e7c255ac	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+144119bc-7fd1-45c5-9e29-f742e7c255ac	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14442f5b-0bad-4c58-b268-d775787571d8	cast	cast	agreed	-	F	start	6	0	f:xs:XP:deep-space-9:cast:s1	-	-	-	4b8018a80bf0	-	7900a135ab80	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14442f5b-0bad-4c58-b268-d775787571d8	f0/t0	ChangesZone	agreed	-	F	start	6	0	f:xs:XP:deep-space-9:cast:s1	-	-	-	4b8018a80bf0	-	7900a135ab80	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14442f5b-0bad-4c58-b268-d775787571d8	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:deep-space-9:f0t1:s1	-	-	-	4b8018a80bf0	-	7900a135ab80	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 14c8a590-88ec-4982-ad7b-36a219ff6de7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tyvar-kell:cast:s1,f:xs:XP:tyvar-kell:cast:s1	-	-	-	d864b561c9cb	-	8bf8af7a721a	-	-	2026-11-24	xproof
 14c8a590-88ec-4982-ad7b-36a219ff6de7	f0/a0	PutCounter	agreed	-	FX	start	1	0	x:xs:XP:tyvar-kell:cast:s2,f:xs:XP:tyvar-kell:cast:s2	-	-	-	d864b561c9cb	-	8bf8af7a721a	-	-	2026-11-24	xproof
 14c8a590-88ec-4982-ad7b-36a219ff6de7	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:tyvar-kell:cast:s1,f:xs:XP:tyvar-kell:cast:s1	-	-	-	d864b561c9cb	-	8bf8af7a721a	-	-	2026-11-24	xproof
-14c8a590-88ec-4982-ad7b-36a219ff6de7	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+14c8a590-88ec-4982-ad7b-36a219ff6de7	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:tyvar-kell:f0a2:s1,f:xs:XP:tyvar-kell:f0a2:s1	-	-	-	6f84be0f34c0	-	8bf8af7a721a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 14c8f55d-d177-4c25-a931-ebeb9e6062a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d14ded-8831-47ad-ad90-f6f242cccf03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 14d14ded-8831-47ad-ad90-f6f242cccf03	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

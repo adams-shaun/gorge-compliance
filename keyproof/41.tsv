@@ -133,7 +133,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41960d32-ddb5-42be-94b2-3a2e77ca148d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:omen-of-the-sea:cast:s1,f:xs:XP:omen-of-the-sea:cast:s1	-	-	-	ae86f6029288	-	d65e6472c33a	-	-	2026-11-24	xproof
 419a8ab2-cff6-4811-a559-8791c9bb3d8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 419a8ab2-cff6-4811-a559-8791c9bb3d8e	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-419a8ab2-cff6-4811-a559-8791c9bb3d8e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+419a8ab2-cff6-4811-a559-8791c9bb3d8e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 419b5b4f-cac7-44bf-b1e2-655b5a5d37b1	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:brain-maggot:cast:s1,f:xs:XP:brain-maggot:cast:s1	-	-	-	d864b561c9cb	-	b454438ee934	-	-	2026-11-24	xproof
 419b5b4f-cac7-44bf-b1e2-655b5a5d37b1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:brain-maggot:cast:s1,f:xs:XP:brain-maggot:cast:s1	-	-	-	d864b561c9cb	-	b454438ee934	-	-	2026-11-24	xproof
 419c2ae1-fec7-4c27-a7a0-99f777abb4de	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41ee78ce-a5ef-4f88-b479-2eb6651123f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spiteful-squad:f0t0:s1,f:xs:XP:spiteful-squad:f0t0:s1	-	-	-	d864b561c9cb	-	a06e2011efa2	-	-	2026-11-24	xproof
 41f3acbf-6092-435f-a5af-4d80dd6e1aef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raff-weatherlight-stalwart:cast:s1,f:xs:XP:raff-weatherlight-stalwart:cast:s1	-	-	-	d864b561c9cb	-	6c4d422a4654	-	-	2026-11-24	xproof
 41f3acbf-6092-435f-a5af-4d80dd6e1aef	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:raff-weatherlight-stalwart:f0a0:s1,f:xs:XP:raff-weatherlight-stalwart:f0a0:s1	-	-	-	d864b561c9cb	-	6c4d422a4654	-	-	2026-11-24	xproof
-41f3acbf-6092-435f-a5af-4d80dd6e1aef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+41f3acbf-6092-435f-a5af-4d80dd6e1aef	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:raff-weatherlight-stalwart:f0t0:s1,f:xs:XP:raff-weatherlight-stalwart:f0t0:s1	-	-	-	6f84be0f34c0	-	6c4d422a4654	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 41f53bb5-8a62-4e6b-b9c3-5aa530a036bc	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 41f58e06-5ce0-4b2d-a280-5bb3b6c56dfe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fog-of-gnats:cast:s1,f:xs:XP:fog-of-gnats:cast:s1	-	-	-	5f2128bf97e4	-	baeac97f9a52	-	-	2026-11-24	xproof
 41f58e06-5ce0-4b2d-a280-5bb3b6c56dfe	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:fog-of-gnats:f0a0:s1,f:xs:XP:fog-of-gnats:f0a0:s1	-	-	-	5f2128bf97e4	-	baeac97f9a52	-	-	2026-11-24	xproof

@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c0bb9b0-e7e0-465e-826b-2e56032aed1b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:stunning-shot:cast:s1	-	-	-	8c0bd19283bb	-	a3cccb0c6408	-	-	2026-11-24	xproof
 0c0d6c7e-a7cc-49e0-bf84-3fc33dd10b90	cast	cast-resolve	agreed	-	FX	scen	2	0	Deepfathom Echo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c0d6c7e-a7cc-49e0-bf84-3fc33dd10b90	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Deepfathom Echo/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0c0eeb01-62e7-4a7f-923d-a7b830e4c83b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0c0eeb01-62e7-4a7f-923d-a7b830e4c83b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:urborg-repossession:cast:s1,f:xs:XP:urborg-repossession:cast:s1	-	-	-	6f84be0f34c0	-	478686066341	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0c0f7092-3fe6-4a6e-8b4e-803810b43e50	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gearsmith-guardian:cast:s1,f:xs:XP:gearsmith-guardian:cast:s1	-	-	-	d864b561c9cb	-	d4fa9b5f1c95	-	-	2026-11-24	xproof
 0c0ffb66-94db-4ba9-afde-c5b4fbf09578	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drag-the-canal:cast:s1,f:xs:XP:drag-the-canal:cast:s1	-	-	-	23b491658465	-	6b0c99a803a4	-	-	2026-11-24	xproof
 0c107664-a9fc-4684-8a1b-fa750401a6dd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:niambi-faithful-healer:cast:s1,f:xs:XP:niambi-faithful-healer:cast:s1	-	-	-	d864b561c9cb	-	258510c20226	-	-	2026-11-24	xproof
@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chandra-flamecaller:cast:s1,f:xs:XP:chandra-flamecaller:cast:s1	-	-	-	d864b561c9cb	-	54002e7e65a5	-	-	2026-11-24	xproof
 0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:chandra-flamecaller:f0a0:s1,f:xs:XP:chandra-flamecaller:f0a0:s1	-	-	-	fb9d3088f0bf	-	54002e7e65a5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	f0/a1	Discard	agreed	-	FX	start	2	0	x:xs:XP:chandra-flamecaller:cast:s1,f:xs:XP:chandra-flamecaller:cast:s1	-	-	-	d864b561c9cb	-	54002e7e65a5	-	-	2026-11-24	xproof
-0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0c2a9131-f3d7-4f71-8bcc-3c169574b2e3	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0c319f45-cb0f-4641-acd8-145768acb3fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c319f45-cb0f-4641-acd8-145768acb3fc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c31edd0-a471-4994-8209-b0a7370fc27b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slithery-stalker:f0t0:s1,f:xs:XP:slithery-stalker:f0t0:s1	-	-	-	fc71ca68c5ac	-	e38f95489f3b	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c93c418-e10b-4a6d-bddb-3b786bb6a928	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c93c418-e10b-4a6d-bddb-3b786bb6a928	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0c952586-e522-4982-bebd-96f1db73053d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tourach-dread-cantor:f0t1:s1,f:xs:XP:tourach-dread-cantor:f0t1:s1	-	-	-	d864b561c9cb	-	207fa265a1ee	-	-	2026-11-24	xproof
-0c952586-e522-4982-bebd-96f1db73053d	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0c952586-e522-4982-bebd-96f1db73053d	f0/t0	Discarded	agreed	-	FX	start	2	0	x:xs:XP:tourach-dread-cantor:f0t0:s1,f:xs:XP:tourach-dread-cantor:f0t0:s1	-	-	-	6f84be0f34c0	-	207fa265a1ee	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0c952586-e522-4982-bebd-96f1db73053d	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tourach-dread-cantor:f0t1:s1,f:xs:XP:tourach-dread-cantor:f0t1:s1	-	-	-	d864b561c9cb	-	207fa265a1ee	-	-	2026-11-24	xproof
 0c978da4-9caa-4b4b-be52-889677962ec9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:telim-tor-s-darts:cast:s1,f:xs:XP:telim-tor-s-darts:cast:s1	-	-	-	ea3140b6974b	-	09cbce62030b	-	-	2026-11-24	xproof
 0c978da4-9caa-4b4b-be52-889677962ec9	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:telim-tor-s-darts:f0a0:s1,f:xs:XP:telim-tor-s-darts:f0a0:s1	-	-	-	ea3140b6974b	-	09cbce62030b	-	-	2026-11-24	xproof
