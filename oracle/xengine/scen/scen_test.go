@@ -5,10 +5,12 @@ import (
 	"encoding/json"
 	"reflect"
 	"slices"
+	"strings"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/testkit/testutil"
 )
@@ -986,6 +988,130 @@ func TestStartFocusIsOffered(t *testing.T) {
 			}
 			r.check(t, res.Start)
 		})
+	}
+}
+
+// TestStarttokensteps is the xproof repro for the steps-needed:token class: a
+// card whose needs include a token used to refuse in placeNeeds, so Forge,
+// XMage and gorge never played the key. The start places the token itself
+// (rules.StartSeat.Tokens), so every example builds a start file.
+func TestStarttokensteps(t *testing.T) {
+	reg, b := testBuilder(t)
+	examples := []struct{ card, key string }{
+		{"Abyssal Harvester", "cast"},
+		{"Academy Instructor", "f0/t0"},
+		{"Agent Venom", "cast"},
+		{"Anafenza, Unyielding Lineage", "cast"},
+		{"Audience with Trostani", "cast"},
+		{"Baron Bertram Graywater", "cast"},
+	}
+	for _, tc := range examples {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path == PathRefused {
+				t.Fatalf("%s %s refused %q, want a start file", tc.card, tc.key, res.Reason)
+			}
+			if res.Start == nil {
+				t.Fatalf("%s %s path %q with no start file", tc.card, tc.key, res.Path)
+			}
+			tokens := res.Start.Setup.P0.Tokens
+			if len(tokens) == 0 {
+				t.Fatalf("%s %s start places no token", tc.card, tc.key)
+			}
+			for _, tok := range tokens {
+				if _, ok := reg.Token(tok.Script); !ok {
+					t.Errorf("%s %s places unknown token script %q", tc.card, tc.key, tok.Script)
+				}
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			back, err := DecodeStartFile(raw)
+			if err != nil {
+				t.Fatalf("%s %s: the token start does not decode: %v\n%s", tc.card, tc.key, err, raw)
+			}
+			if !reflect.DeepEqual(back, res.Start) {
+				t.Errorf("%s %s: token start round trip differs:\n%+v\n%+v", tc.card, tc.key, back, res.Start)
+			}
+		})
+	}
+}
+
+// TestTokenStartRefusesUnmappedKind: a token kind XMage's setup token table
+// cannot place is refused at generation with the clean steps-needed:token
+// refusal, not written as a start that lowers to token_unmapped under -xmage.
+// Bloodtithe Harvester reads a Blood token; Abyssal Harvester's generic token
+// is placed (TestStarttokensteps).
+func TestTokenStartRefusesUnmappedKind(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Bloodtithe Harvester", "cast", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathRefused || res.Reason != "steps-needed:token" {
+		t.Errorf("Bloodtithe Harvester: path %q reason %q, want %q", res.Path, res.Reason, "steps-needed:token")
+	}
+}
+
+// TestTokenScriptKinds: a Token need arg maps to the canonical token
+// definition ("<kind> Token") only when the XMage setup token table maps that
+// script too. A start names a token both followers must replay, so a kind only
+// Forge could place keeps the clean steps-needed:token refusal instead of
+// writing a start that refuses at lowering time. A generic token need is an
+// artifact creature token the table maps.
+func TestTokenScriptKinds(t *testing.T) {
+	reg, _ := testBuilder(t)
+	for _, tc := range []struct {
+		kind string
+		want bool
+	}{
+		{"treasure", true},
+		{"food", true},
+		{"clue", true},
+		{"blood", false},
+		{"powerstone", false},
+		{"map", false},
+		{"junk", false},
+	} {
+		script, ok := tokenScript(reg, tc.kind)
+		if ok != tc.want {
+			t.Errorf("tokenScript(%q) ok = %v, want %v (script %q)", tc.kind, ok, tc.want, script)
+			continue
+		}
+		if !ok {
+			continue
+		}
+		if !lower.SetupTokenScript(script) {
+			t.Errorf("tokenScript(%q) = %q, which XMage's setup token table cannot place", tc.kind, script)
+		}
+		c, _ := reg.Token(script)
+		if c == nil || len(c.Faces) == 0 {
+			t.Errorf("tokenScript(%q) = %q, not a token definition", tc.kind, script)
+			continue
+		}
+		if !strings.EqualFold(c.Faces[0].Name, tc.kind+" Token") {
+			t.Errorf("tokenScript(%q) = %q (%q), want the %s Token", tc.kind, script, c.Faces[0].Name, tc.kind)
+		}
+	}
+	script, ok := tokenScript(reg, "")
+	if !ok {
+		t.Fatal("tokenScript(generic) found no definition")
+	}
+	if !lower.SetupTokenScript(script) {
+		t.Errorf("tokenScript(generic) = %q, which XMage's setup token table cannot place", script)
+	}
+	if c, _ := reg.Token(script); c == nil || len(c.Faces) == 0 || !c.Faces[0].IsCreature() || !c.Faces[0].IsArtifact() {
+		t.Errorf("tokenScript(generic) = %q, want an artifact creature token", script)
+	}
+	if _, ok := reg.Token(genericToken); ok && script != genericToken {
+		t.Errorf("tokenScript(generic) = %q, want the corpus's %s", script, genericToken)
+	}
+	if _, ok := tokenScript(reg, "no-such-token-kind"); ok {
+		t.Error("tokenScript(no-such-token-kind) found a definition")
 	}
 }
 
