@@ -8,10 +8,12 @@ import (
 	"os"
 	"path/filepath"
 	"regexp"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
 
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/classify"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
@@ -48,6 +50,10 @@ type startFile struct {
 	// key retried in a later cycle plays new games, not the same Seeds again.
 	SeedBase uint64      `json:"seed_base"`
 	Focus    *startFocus `json:"focus"`
+	// Compare is the item's opt-in comparison fields (oraclediff.Compare*),
+	// carried onto the lowered item: a start whose key is a keyword grant is
+	// observable only with "keywords" (null: the item compares nothing extra).
+	Compare []string `json:"compare"`
 }
 
 // startSeat is one seat's position, as card names.
@@ -150,6 +156,9 @@ func readStartFile(path string) (*startFile, error) {
 		return nil, fmt.Errorf("%s: seeds %d, want >= 1", path, f.Seeds)
 	case f.Filler != "basics":
 		return nil, fmt.Errorf("%s: filler %q, want \"basics\"", path, f.Filler)
+	}
+	if err := oraclediff.ValidateCompare(f.Compare); err != nil {
+		return nil, fmt.Errorf("%s: compare: %w", path, err)
 	}
 	return &f, nil
 }
@@ -438,6 +447,11 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				lowerLog.Write(b)
 				hist[statusRefused]++
 				continue
+			}
+			for _, c := range f.Compare {
+				if !slices.Contains(l.Item.Compare, c) {
+					l.Item.Compare = append(l.Item.Compare, c)
+				}
 			}
 			if err := em.emit(l, spanFile(l), lower.CheckWindow(reg, l)); err != nil {
 				return err

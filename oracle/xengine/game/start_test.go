@@ -274,3 +274,44 @@ func TestFocusKickedCast(t *testing.T) {
 		t.Fatal("the focus never cast Gatekeeper of Malakir")
 	}
 }
+
+// A block focus: the focus seat's block declaration blocks with the focus card
+// whatever the bot chose, every other seat's attack declaration attacks with at
+// least one creature, and the block is taken once.
+func TestFocusBlockUnit(t *testing.T) {
+	st := openState(Focus{Seat: 0, Card: "Wall", Kind: "block"}, 7)
+	b := focusBot{st: st}
+	pick := func(d decision.Decision, in decision.Intent) []int {
+		out, err := b.act(d, in, nil)
+		if err != nil {
+			t.Fatal(err)
+		}
+		return out.Choices
+	}
+	// the opponent (seat 1) attacks even when its bot would not
+	atk := decision.Decision{Kind: decision.KAttackers, Player: 1, Options: []decision.Option{{Kind: "attack", Obj: 9}}}
+	if got := pick(atk, decision.Intent{}); !slices.Equal(got, []int{0}) {
+		t.Errorf("seat 1 attackers: %v, want [0]", got)
+	}
+	// a bot that already attacks keeps its answer
+	if got := pick(atk, decision.Intent{Choices: []int{0}}); !slices.Equal(got, []int{0}) {
+		t.Errorf("seat 1 bot's attack: %v, want [0]", got)
+	}
+	// the focus seat's own attack is its bot's
+	own := decision.Decision{Kind: decision.KAttackers, Player: 0, Options: []decision.Option{{Kind: "attack", Obj: 7}}}
+	if got := pick(own, decision.Intent{}); len(got) != 0 {
+		t.Errorf("focus seat attackers: %v, want the bot's (none)", got)
+	}
+	// the focus seat blocks with the focus card, the other creature left alone
+	blk := decision.Decision{Kind: decision.KBlockers, Player: 0, Options: []decision.Option{
+		{Kind: "block", Obj: 8, Attacker: 9}, {Kind: "block", Obj: 7, Attacker: 9}}}
+	if got := pick(blk, decision.Intent{}); !slices.Equal(got, []int{1}) {
+		t.Errorf("focus block: %v, want [1] (the focus card)", got)
+	}
+	if !st.done {
+		t.Error("the block was taken but the focus is not done")
+	}
+	if got := pick(blk, decision.Intent{}); len(got) != 0 {
+		t.Errorf("second block decision: %v, want the bot's", got)
+	}
+}

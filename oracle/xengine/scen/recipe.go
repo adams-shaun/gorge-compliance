@@ -315,11 +315,16 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 		return false
 	}
-	if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
-		if err != nil {
-			return Result{}, err
+	// A static or combat key places its own objects (staticKeyStart,
+	// combatKeyStart): what else the card reads (a token, a graveyard) is
+	// no part of the key, and a need for it would refuse the key or add state.
+	if fam != "static" && fam != "combat" {
+		if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
+			if err != nil {
+				return Result{}, err
+			}
+			return refuse(why)
 		}
-		return refuse(why)
 	}
 	return Result{Path: PathStart, Start: f}, nil
 }

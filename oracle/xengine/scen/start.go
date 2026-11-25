@@ -28,6 +28,10 @@ type StartFile struct {
 	// absent: 1): a retried key sets it to play new games.
 	SeedBase uint64      `json:"seed_base,omitempty"`
 	Focus    *StartFocus `json:"focus,omitempty"`
+	// Compare is the item's opt-in comparison fields (oraclediff.Compare*) the
+	// lowered item carries: a static start whose effect is a keyword is
+	// observable only with "keywords".
+	Compare []string `json:"compare,omitempty"`
 }
 
 // StartSetup holds the two seats' placements.

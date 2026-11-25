@@ -165,11 +165,14 @@ func overseer(t *testing.T, f *StartFile) {
 // mammothStatic: "other creatures you control have trample" reads a second
 // creature, which the start places beside the card; no action is forced.
 func mammothStatic(t *testing.T, f *StartFile) {
-	if len(f.Setup.P0.Battlefield) != 2 || f.Setup.P0.Battlefield[0] != "Aggressive Mammoth" || f.Setup.P0.Battlefield[1] == "Aggressive Mammoth" {
-		t.Errorf("p0 battlefield = %v, want the Mammoth and one other permanent", f.Setup.P0.Battlefield)
-	}
+	// "other creatures you control have trample": the card and a creature carrier
+	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Aggressive Mammoth", "Memnite"})
 	if f.Focus != nil && f.Focus.Kind != "" {
 		t.Errorf("focus %+v, want no forced action", f.Focus)
+	}
+	// the grant is a keyword: observable only when the item compares keywords
+	if !reflect.DeepEqual(f.Compare, []string{"keywords"}) {
+		t.Errorf("compare %v, want [keywords]", f.Compare)
 	}
 }
 
@@ -187,7 +190,7 @@ func sentryAttack(t *testing.T, f *StartFile) {
 func sentryBlock(t *testing.T, f *StartFile) {
 	listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Magnigoth Sentry"})
 	listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, []string{"Grizzly Bears"})
-	focusIs(t, f, 1, "Grizzly Bears", "attack", 0)
+	focusIs(t, f, 0, "Magnigoth Sentry", "block", 0)
 	if f.Active != 1 {
 		t.Errorf("active %d, want 1", f.Active)
 	}
@@ -687,6 +690,13 @@ func TestStartCombatStaticRefusals(t *testing.T) {
 		{"Karn, Argent Defender", "static#0.0", "no-generator:static:DisableTriggers"},
 		{"Academy Wall", "combat#0.attack", "no-generator:combat:defender"},
 		{"Holy Strength", "static#0.0", "no-generator:static:attached"},
+		// the attack/block is not offered, or the effect is not seen
+		{"Magus of the Moat", "combat#0.attack", "no-generator:combat:restricted"},
+		{"Frenetic Raptor", "combat#0.block", "no-generator:combat:restricted"},
+		{"Blazing Archon", "combat#0.block", "no-generator:combat:restricted"},
+		{"Yavimaya Enchantress", "static#0.0", "no-generator:static:computed"},
+		{"Relentless Rats", "static#0.0", "no-generator:static:computed"},
+		{"Riftstone Portal", "static#0.0", "no-generator:static:zone"},
 	} {
 		res, err := Generate(reg, b, r[0], r[1], Options{Prefer: "start"})
 		if err != nil {
@@ -695,5 +705,54 @@ func TestStartCombatStaticRefusals(t *testing.T) {
 		if res.Path != PathRefused || res.Reason != r[2] {
 			t.Errorf("%s %s: path %q reason %q, want refused %q", r[0], r[1], res.Path, res.Reason, r[2])
 		}
+	}
+}
+
+// TestStartCombatStaticIgnoreOtherNeeds: a static or combat key places its own
+// objects only. An unrelated need of the card (a token trigger: certdeck's
+// token need) neither refuses the key nor adds state.
+func TestStartCombatStaticIgnoreOtherNeeds(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct {
+		card, key string
+		p0, p1    []string
+	}{
+		{"Arahbo, the First Fang", "static#0.0", []string{"Arahbo, the First Fang", "Sanctuary Cat"}, nil},
+		{"Gadrak, the Crown-Scourge", "combat#0.block", []string{"Gadrak, the Crown-Scourge"}, []string{"Grizzly Bears"}},
+	} {
+		res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+		if err != nil || res.Path != PathStart {
+			t.Fatalf("%s %s: %v path %q reason %q, want a start", r.card, r.key, err, res.Path, res.Reason)
+		}
+		f := res.Start
+		listIs(t, r.card+" p0 battlefield", f.Setup.P0.Battlefield, r.p0)
+		listIs(t, r.card+" p1 battlefield", f.Setup.P1.Battlefield, r.p1)
+		if len(f.Setup.P0.Graveyard)+len(f.Setup.P0.Tapped) != 0 {
+			t.Errorf("%s: unrelated state placed: graveyard %v tapped %v", r.card, f.Setup.P0.Graveyard, f.Setup.P0.Tapped)
+		}
+	}
+}
+
+// TestStartStaticObserved: a static whose effect the comparison cannot see is
+// refused; a keyword grant carries the keyword opt-in; a land the filter reads
+// is a placed basic.
+func TestStartStaticObserved(t *testing.T) {
+	reg, b := testBuilder(t)
+	gen := func(card, key string) Result {
+		res, err := Generate(reg, b, card, key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		return res
+	}
+	if res := gen("Primal Rage", "static#0.0"); res.Path != PathStart || !reflect.DeepEqual(res.Start.Compare, []string{"keywords"}) {
+		t.Errorf("Primal Rage: path %q, want a start comparing keywords", res.Path)
+	}
+	if res := gen("Aggressive Mammoth", "static#0.0"); res.Path != PathStart || !reflect.DeepEqual(res.Start.Compare, []string{"keywords"}) {
+		t.Errorf("Aggressive Mammoth: path %q, want a start comparing keywords", res.Path)
+	}
+	// a pump alone compares nothing extra
+	if res := gen("Glorious Anthem", "static#0.0"); res.Path != PathStart || len(res.Start.Compare) != 0 {
+		t.Errorf("Glorious Anthem: path %q start %+v, want a start with no extra compare", res.Path, res.Start)
 	}
 }
