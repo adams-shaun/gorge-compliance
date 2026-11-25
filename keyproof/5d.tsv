@@ -30,8 +30,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d22ab00-b454-4407-93d7-65b47f56cbaa	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5d24525f-dbac-434b-bda7-ff8af55245ff	cast	cast	agreed	-	F	start	4	0	f:xs:XP:glint-hawk:cast:s1	-	-	-	d864b561c9cb	-	a11bf227abcc	-	-	2026-11-24	xproof
 5d24525f-dbac-434b-bda7-ff8af55245ff	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:glint-hawk:cast:s1	-	-	-	d864b561c9cb	-	a11bf227abcc	-	-	2026-11-24	xproof
-5d24fb6b-7176-407c-b917-6c88a6da40df	cast	cast-resolve	agreed	-	X	scen	1	0	Nezumi Linkbreaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d24fb6b-7176-407c-b917-6c88a6da40df	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nezumi Linkbreaker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5d24fb6b-7176-407c-b917-6c88a6da40df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nezumi-linkbreaker:cast:s1,f:xs:XP:nezumi-linkbreaker:cast:s1	-	-	-	23b491658465	-	247a80a0836d	-	-	2026-11-25	xproof
+5d24fb6b-7176-407c-b917-6c88a6da40df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nezumi-linkbreaker:f0t0:s1,f:xs:XP:nezumi-linkbreaker:f0t0:s1	-	-	-	23b491658465	-	247a80a0836d	-	-	2026-11-25	xproof
 5d258409-28d3-4eac-9f1a-3e494db818bf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d258409-28d3-4eac-9f1a-3e494db818bf	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 5d2a9859-1353-4431-9343-f5999450acd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

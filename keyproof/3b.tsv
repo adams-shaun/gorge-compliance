@@ -84,8 +84,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b583358-d0d5-4f53-b06c-c6439156e684	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	cast	cast-resolve	agreed	-	X	scen	1	0	Outcaster Trailblazer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:outcaster-trailblazer:cast:s1,f:xs:XP:outcaster-trailblazer:cast:s1	-	-	-	23b491658465	-	06a2cac6ce6a	-	-	2026-11-25	xproof
+3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:outcaster-trailblazer:cast:s1,f:xs:XP:outcaster-trailblazer:cast:s1	-	-	-	23b491658465	-	06a2cac6ce6a	-	-	2026-11-25	xproof
 3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Outcaster Trailblazer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b601721-90ca-45d3-9a3a-19c719799bfa	cast	cast-resolve	agreed	-	FX	scen	2	0	Gastal Blockbuster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b601721-90ca-45d3-9a3a-19c719799bfa	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
