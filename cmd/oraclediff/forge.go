@@ -721,11 +721,16 @@ type namedManaAbility struct {
 // a one-pick choose_n whose only options are mana and whose pick is that
 // ability's wheel label. An explicit "Combo <colours>" ability is flattened
 // into one option per colour in the wheel (pay.ManaAbilityComboColours), so
-// its per-colour labels count when the face offers a wheel at all; a
-// single-ability source never poses the wheel, and its colour ask ("Add W" for
-// an "Add any color" ability) must stay. A "Chosen" production is labelled
-// with the source's recorded colour, so the wheel labels for every colour
-// count too.
+// gorge's one decision ("Add R") is both the wheel pick and the colour pick.
+// Forge poses only the colour ask (the step's line names the ability), so a
+// single-pip per-colour label is kept: the driver's manaColor reads it as the
+// colour. A multi-pip label ("Add GG" of an Amount$ 2 filter land) is not a
+// single colour symbol, the driver cannot read it, so it is still dropped as a
+// wheel label. Only the ability's own label (an "Add any color" wheel option)
+// and a "Chosen" production's per-colour labels (every colour counts) are
+// dropped in addition. A single-ability source never poses the wheel, and its
+// colour ask ("Add W" for an "Add any color" ability) must stay. A Combo
+// Chosen source's stage-1 label is still dropped: a known follow-up.
 func (a namedManaAbility) drops(d rules.OracleDecision) bool {
 	if d.Kind != "choose_n" || d.Options <= 1 || len(d.Picks) != 1 || len(d.PickKinds) != len(d.Picks) {
 		return false
@@ -747,12 +752,20 @@ func (a namedManaAbility) drops(d rules.OracleDecision) bool {
 		prefix := pay.ManaAbilityCostPrefix(sa)
 		for _, chosen := range []string{"W", "U", "B", "R", "G"} {
 			labels[pay.ManaAbilityLabel(sa, chosen)] = true
+			// A Combo ability's single-pip per-colour label ("Add R") is
+			// the wheel pick AND the colour pick in one recorded decision.
+			// Forge poses no wheel (the step's line names the ability) but
+			// still asks the colour, so the decision is kept for that ask.
+			// A multi-pip label ("Add GG") is unreadable as a colour by the
+			// driver, so it drops as before.
 			cols, ok := pay.ManaAbilityComboColours(sa, chosen)
 			if !ok {
 				continue
 			}
 			for _, col := range cols {
-				labels[prefix+"Add "+pay.ManaAmountPips(sa, col)] = true
+				if pips := pay.ManaAmountPips(sa, col); len(pips) > 1 {
+					labels[prefix+"Add "+pips] = true
+				}
 			}
 		}
 	}

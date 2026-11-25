@@ -1465,6 +1465,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			removeCounterCosts = ex.removeCounterCosts
 		}
 	}
+	// A trigger-cost sacrifice the engine folded into its pay election still
+	// needs its one sacrificed permanent on XMage's choice queue ahead of the
+	// effect's own picks (loneTriggerCostSacrifice, from the scenario caller).
+	var loneSacrifice map[int][]string
+	for _, ex := range extras {
+		if loneSacrifice == nil {
+			loneSacrifice = ex.loneSacrifice
+		}
+	}
 	// A hand_move/library_placement goes top-first (reverse the answers for
 	// XMage's successive top asks) or bottom-first (keep them) by where the
 	// after-step checkpoint shows the picks, not by a list of cards. An
@@ -1931,6 +1940,18 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 					// makeChoose once the chooseUse is accepted; gorge exiles
 					// them without an ask (forageSettle), so they come from
 					// the checkpoint.
+					as = append(as, XAnswer{d.Seat, "choice", strings.Join(names, "^")})
+				}
+				if names := loneSacrifice[i]; len(names) > 0 {
+					// A lone sacrifice the engine folded into this pay
+					// election: XMage's card-specific effect (The Gitrog,
+					// Ravenous Ride's TargetSacrifice(0, 1), no chooseUse of
+					// its own) reads the same CHOICE queue through
+					// makeChoose, and its next pick is the effect's own hand
+					// pick. Emitting the checkpoint's sacrificed permanent
+					// here keeps the land answer off the sacrifice ask; the
+					// leading yes stays for the DoIfCostPaid costs that do
+					// pose a chooseUse.
 					as = append(as, XAnswer{d.Seat, "choice", strings.Join(names, "^")})
 				}
 				break

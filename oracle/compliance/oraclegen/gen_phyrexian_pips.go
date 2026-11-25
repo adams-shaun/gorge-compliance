@@ -31,8 +31,12 @@ type pipAsk struct {
 // xanswersExtra is the scenario context xanswersSetup accepts from the
 // callers that can derive it. The tests and the shape-only callers pass none.
 type xanswersExtra struct {
-	digs map[int]digSource
-	pips map[int][]pipAsk
+	// loneSacrifice maps a trigger_cost_pay decision to the one permanent its
+	// folded optional sacrifice took (loneTriggerCostSacrifice); it needs the
+	// card registry, so only the scenario caller derives it.
+	loneSacrifice map[int][]string
+	digs          map[int]digSource
+	pips          map[int][]pipAsk
 	// casts is the set of the scenario's cast step indices: a forced X
 	// announcement on one is still posed by XMage (castAnnouncesX).
 	casts map[int]bool

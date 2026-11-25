@@ -1595,12 +1595,28 @@ func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.Ma
 			// The record sits on the ability ask and the ability asks a
 			// colour too. A queued "choose" answer owns every KChoose of the
 			// source (the runner's oracleAnswerManaStage leaves the wheel to
-			// it), so the answers must follow the asks the runner poses.
+			// it), so a nameable wheel option is answered first, ahead of the
+			// colour.
 			pre, why := wheelAnswers(reg, mana[0])
-			if why != nil {
-				return nil, why
+			if why == nil {
+				taps[0].Answers = append(pre, taps[0].Answers...)
+			} else {
+				// The wheel option cannot be named by a pick the runner's
+				// substring match can tell apart: a ManaReflected ability
+				// carries a blank production, so its "Add " label is inside a
+				// plain ability's "Add C" and would select the wrong option.
+				// The step still names this ability by index, so leave the
+				// wheel to oracleAnswerManaStage's index match (which wins
+				// over labels) and queue the colour as the runner's wildcard
+				// kind: "any" is consumed by the next decision whose options
+				// accept the pick, while a queued "choose" would suppress the
+				// wheel's index match and be spent on the wheel instead.
+				for i := range taps[0].Answers {
+					if taps[0].Answers[i].Kind == "choose" {
+						taps[0].Answers[i].Kind = "any"
+					}
+				}
 			}
-			taps[0].Answers = append(pre, taps[0].Answers...)
 		}
 		return taps, nil
 	}
