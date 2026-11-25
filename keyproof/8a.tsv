@@ -71,9 +71,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a5259cc-224d-4748-b764-63ad0e4e02f1	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Moment"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8a5259cc-224d-4748-b764-63ad0e4e02f1	f0/a1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Moment"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8a5259cc-224d-4748-b764-63ad0e4e02f1	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Moment"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-8a52f3c0-2552-4425-b2e3-5496eb2232a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mystic-remora:cast:s1,f:xs:XP:mystic-remora:cast:s1	-	-	-	9087eefec3ee	-	5388894fd72b	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
-8a52f3c0-2552-4425-b2e3-5496eb2232a7	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-8a52f3c0-2552-4425-b2e3-5496eb2232a7	f0/t1	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	5388894fd72b	-	-	2026-11-25	xproof
+8a52f3c0-2552-4425-b2e3-5496eb2232a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mystic-remora:f0t1:s1,f:xs:XP:mystic-remora:f0t1:s1	-	-	-	9087eefec3ee	-	5388894fd72b	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+8a52f3c0-2552-4425-b2e3-5496eb2232a7	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+8a52f3c0-2552-4425-b2e3-5496eb2232a7	f0/t1	Phase/Cumulative upkeep	agreed	-	FX	start	2	0	x:xs:XP:mystic-remora:f0t1:s1,f:xs:XP:mystic-remora:f0t1:s1	-	-	-	9087eefec3ee	-	5388894fd72b	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 8a56c2a7-7131-4495-aa27-52f48e5f1fb6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a56c2a7-7131-4495-aa27-52f48e5f1fb6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8a5e17a0-6f3c-49ed-b328-ed90a46ed6c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burdened-stoneback:cast:s1,f:xs:XP:burdened-stoneback:cast:s1	-	-	-	23c4009444b0	-	966d0bd7fced	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ab49974-3f06-4b6b-a416-d6f872b3887f	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ab4d31e-7187-4ba1-97cb-1a0a11ab28bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ab71a49-ce81-44f7-b940-50e7aba64df9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ab99b5e-c9e0-45c2-8df2-864ab0ad1caf	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+8ab99b5e-c9e0-45c2-8df2-864ab0ad1caf	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 8abb1be2-d02b-4a78-9fcb-d2c9102a840b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8abe0577-8fdb-4e4a-a871-01b21732c961	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8abe0577-8fdb-4e4a-a871-01b21732c961	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
