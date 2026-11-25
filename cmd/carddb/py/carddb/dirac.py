@@ -48,7 +48,13 @@ WHY_MAX = 200
 GAP_STATUSES = ("not_lowered", "unverified", "supported")
 
 
-class StaleSnapshot(StoreError):
+class Unavailable(StoreError):
+    """The writer's inputs cannot be had on this machine (gorge not in the module cache, no
+    network). The CLI keeps the last dirac rows and warns: the forge/xmage/catalogue publish
+    must never depend on dirac."""
+
+
+class StaleSnapshot(Unavailable):
     """The gaps snapshot was measured at another gorge pin. GORGE_PIN is bumped by a bot and the
     snapshot needs the GPL corpus to regenerate, so this is expected, not fatal: the CLI keeps the
     last dirac rows and warns, and a publish must not depend on the operator's regeneration."""
@@ -63,7 +69,7 @@ def gorge_dir(repo, explicit=None):
     p = subprocess.run(["go", "list", "-m", "-f", "{{.Dir}}", GORGE_MODULE], cwd=repo,
                        capture_output=True, text=True)
     if p.returncode != 0 or not p.stdout.strip():
-        raise StoreError("dirac: cannot locate %s (go list -m: %s); pass --gorge-dir"
+        raise Unavailable("dirac: cannot locate %s (go list -m: %s); pass --gorge-dir"
                          % (GORGE_MODULE, p.stderr.strip() or "no directory"))
     return p.stdout.strip()
 
@@ -192,7 +198,7 @@ def run(store, repo=None, gorge=None, writer="ci", version=None, ran=None):
         raise StoreError("dirac: %s is not gorge at GORGE_PIN %s" % (gdir, pin[:12]))
     sdir = os.path.join(gdir, "dirac", "support")
     if not os.path.isdir(os.path.join(sdir, "evidence")):
-        raise StoreError("dirac: %s holds no dirac/support/evidence" % gdir)
+        raise Unavailable("dirac: %s holds no dirac/support/evidence" % gdir)
     refused = load_refused(sdir)
     evidence = load_evidence(sdir)
     gaps = load_gaps(os.path.join(repo, GAPS_REL), pin)

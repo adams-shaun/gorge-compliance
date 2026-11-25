@@ -1,6 +1,7 @@
 import json
 import os
 import unittest
+import unittest.mock
 
 from carddb import dirac as dirac_mod
 from carddb import store as store_mod
@@ -148,6 +149,27 @@ class Dirac(Base):
         self.assertIn("::warning::", p.stderr)
         self.assertIn("skipped", p.stdout)
         self.assertEqual(self.snapshot(a.dir), snap)
+
+    def test_cli_gorge_unavailable_keeps_rows_and_exits_zero(self):
+        """A cold runner (gorge not in the module cache -> empty dir) must not fail the publish."""
+        a = self.machine("a", init=True)
+        a.put("cards", [card(OID_A, "Bolt")], writer="mtgjson")
+        repo, g = fixture(self.tmp)
+        self.assertEqual(self.cli(os.path.join(self.tmp, "a"), "dirac", "--repo", repo, "--gorge-dir", g,
+                                  "--measured", MEASURED).returncode, 0)
+        snap = self.snapshot(a.dir)
+        empty = os.path.join(self.tmp, "no-gorge")
+        os.makedirs(empty)
+        p = self.cli(os.path.join(self.tmp, "a"), "dirac", "--repo", repo, "--gorge-dir", empty,
+                     "--measured", MEASURED)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("::warning::", p.stderr)
+        self.assertEqual(self.snapshot(a.dir), snap)
+        with unittest.mock.patch.dict(os.environ, {"CARDDB_GORGE_DIR": ""}), \
+                unittest.mock.patch.object(dirac_mod.subprocess, "run",
+                                           return_value=unittest.mock.Mock(returncode=0, stdout="\n", stderr="")):
+            with self.assertRaises(dirac_mod.Unavailable):
+                dirac_mod.gorge_dir(repo)
 
     def test_cli_verb(self):
         a = self.machine("a", init=True)

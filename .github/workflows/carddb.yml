@@ -316,10 +316,15 @@ jobs:
           go-version-file: tool/go.mod
           cache: false
       - name: Dirac support and evidence writer
+        continue-on-error: true
         working-directory: tool
         run: |
           set -euo pipefail
-          CARDDB_GORGE_DIR=$(go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge) \
+          # a cold runner has no module cache: fetch gorge first (go list prints an empty Dir
+          # and exits 0 otherwise). A failed fetch leaves the dir empty and the verb warns
+          # and keeps the last dirac rows, so the rest of the publish still goes out.
+          go mod download github.com/adams-shaun/gorge || echo "::warning::go mod download of gorge failed"
+          CARDDB_GORGE_DIR=$(go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge || true) \
             python3 -I cmd/carddb/main.py dirac --repo "$GITHUB_WORKSPACE/tool" \
             --source dirac --measured "$MEASURED" --version "$TOOL_REV"
       - name: Report the packed size into _meta/size

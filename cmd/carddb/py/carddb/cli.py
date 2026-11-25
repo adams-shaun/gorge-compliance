@@ -305,9 +305,9 @@ def main(argv=None, stdin=None, stdout=None, stderr=None):
                 changed, counts, nev = dirac_mod.run(pub, repo=args.repo, gorge=args.gorge_dir,
                                                      writer=args.source or "ci", version=args.version,
                                                      ran=args.measured)
-            except dirac_mod.StaleSnapshot as e:
+            except dirac_mod.Unavailable as e:
                 print("::warning::carddb dirac skipped, the last dirac rows are kept: %s" % e, file=stderr)
-                print("carddb dirac: skipped (stale gaps snapshot); dirac rows unchanged", file=stdout)
+                print("carddb dirac: skipped (%s); dirac rows unchanged" % type(e).__name__, file=stdout)
                 return 0
             parts = " ".join("%s=%d" % kv for kv in sorted(counts.items()))
             print("carddb dirac: %d rows changed; %s; %d evidence rows" % (changed, parts, nev), file=stdout)
