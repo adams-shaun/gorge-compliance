@@ -881,6 +881,25 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # textual conflicts (ScriptedController.java and StepMachine.java touch different areas; merge tree 83e433b219b). FaceDownCastModeTest,
 # TapTypeAbilityChoiceTest and ForcedDieRollTest run together at this pin (11 tests, 0 failures). Driver-only; die-roll code,
 # cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# 9b233511947 = 686e3f82713 (join17, above) plus the forced Hand->Library put-back (xproof cluster xpt-83d468df, gorge~forge,
+# Sawtooth Loon): with exactly ChangeNum$ cards eligible gorge poses only the CR 401.4 placement order (an "order" decision of
+# pick kind library_placement, first pick nearest the top), while Forge asks the forced selection one card at a time ("2 options,
+# 1..1 to pick", twice) and places the picks in order; the driver never consumed the order and missed ("Missing zone change answer
+# at step 8"). StepMachine.seedHandLibraryPlacement seeds the per-step carry from the seat's NEXT decision when it is a
+# library_placement order naming exactly the offered cards, so pickObjects answers each ask from it (the export already reverses a
+# top placement for Forge's successive puts). scripts/forge-oracle-test-hand-library-placement.sh (make forge-driver-tests)
+# replays the find and fails on 686e3f82713 with the exact miss. Driver-only; die-roll code, cardsfolder and tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-hand-library-placement.
+# 0ca7a220bd0 = oracle/fpin-1125-join18 tip: 3405b168dc3 (join17 above merged with join16 852c41880dd, which is 0aee1572747's
+# Speedball optional ChangeTargets confirm regression test: ChangeTargetsConfirmTest runs six tests at this pin, the sixth
+# speedballTriggerChangeTargetsConfirmConsumesTheRetargetPick) merged with a2954de67aa (no legal new target keeps the targets,
+# ChangeTargetsNoCandidateTest) and 0ca7a220bd0 (the retarget count excludes the current target; review r1, xpt-5b82851f), no
+# textual conflicts (ScriptedController.java: the join16/join17 confirm rule and the no-candidate guard touch different areas).
+# Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# 47dd7358b32 = oracle/fpin-1125-join19: c72762cfadea (join18 tip: 0ca7a220bd0 above plus 53635f189c, the unbound optional-untap
+# election answer, xpt-4782660c) merged with 9b233511947 (the forced Hand->Library put-back, above), no textual conflicts
+# (StepMachine/DecisionQueue vs ScriptedController ChangeTargets touch different areas; merge tree 5d6202a0c7cb). ForcedDieRollTest
+# re-run green on the pin. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
 # a2954de67aa = ad4cd3ba0f8 (join14) + the no-legal-new-target answer (xproof cluster xpt-5b82851f, Deflection, Shunt and Swerve): Forge's
 # mandatory ChangeTargets effect asks chooseNewTargetsFor even when no new target is legal, and gorge poses no decision then (the target
 # stays, CR 115.7a), so the ask was a strict miss ("Missing new targets answer at step 15") once Aerial Volley's only creature with flying
@@ -920,13 +939,12 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # driver-only commit on 0ca7a220bd0 (RefTable/StepMachine/AbilityTargetRefTest vs SetupBuilder/PlayerCountersSetupTest), no textual
 # conflicts (git merge-tree). AbilityTargetRefTest and PlayerCountersSetupTest run together at this pin; die-roll code, cardsfolder and
 # tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch oracle/fpin-1125-join-abilitytarget-playercounters.
-# f3065a4da86 = oracle/fpin-1125-join20: 495ed200e9f (above) merged with 53635f189cc (the unbound optional-untap election answered at
-# the ask, CR 502.3/117.3d, xproof clusters xpt-4782660c/xpt-5133dae0, Whip Vine; ScriptedController/StepMachine/SnapshotWriter only), no
-# textual conflicts (all three files auto-merged). UntapElectionTest runs at this pin via scripts/forge-oracle-test-untap-election.sh
-# (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-# NOTE (merge): f3065a4da86 is the untap-election branch's pin but does not contain the ability-target ref (19c49ba7117); the pin stays at
-# d38946a0fd9 until a fork join of 19c49ba7117 + 53635f189cc exists. UntapElectionTest (scripts/forge-oracle-test-untap-election.sh) needs that join.
-FORGE_ORACLE_REF ?= d38946a0fd9b5bafca14d748e775a4e5e9060ab4
+# 8765c682b2f = oracle/fpin-1125-join22: d38946a0fd9 (above) merged with a8da5c69719 (oracle/fpin-1125-join21 = join20 f3065a4da86,
+# i.e. 495ed200e9f + the optional-untap election answer 53635f189c, merged with 9b233511947, the forced Hand->Library put-back),
+# no textual conflicts (StepMachine/DecisionQueue/ScriptedController Hand->Library vs RefTable/SetupBuilder/StepMachine target ref;
+# merge tree 027db51c983). ForcedDieRollTest, PlayerCountersSetupTest, AbilityTargetRefTest and the hand-library-placement replay run
+# together at this pin. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 8765c682b2f8086fe9d5612aff7187ff193e6a66
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
