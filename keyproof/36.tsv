@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3608f1f7-8dc5-4dd1-ae91-c830e1de9529	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3609d300-af9f-4ddf-ad0e-8bebeca15a04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 360f7bfd-3b4c-4e87-a251-fd55c8a62320	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-360f7bfd-3b4c-4e87-a251-fd55c8a62320	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+360f7bfd-3b4c-4e87-a251-fd55c8a62320	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	f3b68c68275e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 36117e99-a2bc-46f9-8e17-bd2e2a9c31f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rot-hulk:f0t0:s1,f:xs:XP:rot-hulk:f0t0:s1	-	-	-	8c0bd19283bb	-	eebc746426e7	-	-	2026-11-24	xproof
 36117e99-a2bc-46f9-8e17-bd2e2a9c31f4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rot-hulk:f0t0:s1,f:xs:XP:rot-hulk:f0t0:s1	-	-	-	8c0bd19283bb	-	eebc746426e7	-	-	2026-11-24	xproof
 361b0d7f-1e43-45c5-92c2-92baacaf326f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pile-on:cast:s1,f:xs:XP:pile-on:cast:s1	-	-	-	ae86f6029288	-	9eb1320a3fd0	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36bfcc4a-7f66-4649-ab6b-18d360299d46	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:uchbenbak-the-great-mistake:f0a0:s1,f:xs:XP:uchbenbak-the-great-mistake:f0a0:s1	-	-	-	3aa6ded33acb	-	c4bcb03f6047	-	-	2026-11-25	xproof
 36c78a5f-0148-4596-a346-f8e35037b694	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:time-wipe:cast:s1,f:xs:XP:time-wipe:cast:s1	-	-	-	d864b561c9cb	-	25eac3ef3b10	-	-	2026-11-24	xproof
 36c800cb-b1ca-4432-ad3c-4d8b90337f4c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-processor:cast:s1,f:xs:XP:phyrexian-processor:cast:s1	-	-	-	d607930fa548	-	c79d10bd69ac	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
-36c800cb-b1ca-4432-ad3c-4d8b90337f4c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+36c800cb-b1ca-4432-ad3c-4d8b90337f4c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	f3b68c68275e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 36cb3d18-019c-464d-b591-8c87e1b81f31	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archive-arbiter:f0t0:s1,f:xs:XP:archive-arbiter:f0t0:s1	-	-	-	23c4009444b0	-	1f156f3bc192	-	-	2026-11-25	xproof
 36cb3d18-019c-464d-b591-8c87e1b81f31	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:archive-arbiter:combat0.attack:s1,f:xs:XP:archive-arbiter:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	1f156f3bc192	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 36cb3d18-019c-464d-b591-8c87e1b81f31	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:archive-arbiter:combat0.block:s1,f:xs:XP:archive-arbiter:combat0.block:s1	-	-	-	fb9d3088f0bf	-	1f156f3bc192	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -190,7 +190,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36d55084-4696-4d16-ab3a-b00f1456603f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36d641d4-d3f5-4394-81d7-3209955a1628	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36d6d6c0-721c-40c3-b81f-4f027fcf847e	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-36d6d6c0-721c-40c3-b81f-4f027fcf847e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+36d6d6c0-721c-40c3-b81f-4f027fcf847e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	f3b68c68275e	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 36dd999e-53da-45c7-ae98-90f7aad78680	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tabaxi-toucaneers:cast:s1,f:xs:XP:tabaxi-toucaneers:cast:s1	-	-	-	8c0bd19283bb	-	d3f8aa4865ec	-	-	2026-11-24	xproof
 36dd999e-53da-45c7-ae98-90f7aad78680	f0/t0	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:tabaxi-toucaneers:f0t0:s1,f:xs:XP:tabaxi-toucaneers:f0t0:s1	-	-	-	8c0bd19283bb	-	d3f8aa4865ec	-	-	2026-11-24	xproof
 36dda03b-a3c1-4ef4-ae62-da318028a39e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
