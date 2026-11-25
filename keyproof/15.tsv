@@ -39,9 +39,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 153376c9-dffd-458c-8ce3-a4c8269bc4e9	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 15353e27-96ca-48c7-83d7-efd57c094643	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:overcome:cast:s1,f:xs:XP:overcome:cast:s1	-	-	-	d864b561c9cb	-	0475630c27d4	-	-	2026-11-24	xproof
 15361770-c6dc-4db7-b745-aa03e4b866ea	cast	cast-resolve	agreed	-	X	scen	1	0	Breeches, Eager Pillager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-15361770-c6dc-4db7-b745-aa03e4b866ea	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Breeches, Eager Pillager/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+15361770-c6dc-4db7-b745-aa03e4b866ea	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:breeches-eager-pillager:combat0.attack:s1	-	-	-	3aa6ded33acb	-	408cc7a6828d	-	-	2026-11-25	xproof
 15361770-c6dc-4db7-b745-aa03e4b866ea	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Breeches, Eager Pillager/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-15361770-c6dc-4db7-b745-aa03e4b866ea	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Breeches, Eager Pillager/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+15361770-c6dc-4db7-b745-aa03e4b866ea	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:breeches-eager-pillager:combat0.attack:s1	-	-	-	3aa6ded33acb	-	408cc7a6828d	-	-	2026-11-25	xproof
 15397a59-70a8-441f-abf7-230405a1602b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15397a59-70a8-441f-abf7-230405a1602b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 153a4c11-e75f-46d7-b684-17d500ea13e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,7 +169,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15febce7-8320-4591-9535-ef11c8adecc2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Barbed Bloodletter/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 15fee0bd-ede2-4f65-a9a1-2da4623679d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15fef45d-f1a9-49b2-abaa-fe77bb9d1afd	cast	cast-resolve	agreed	-	X	scen	1	0	Lathliss, Dragon Queen/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-15fef45d-f1a9-49b2-abaa-fe77bb9d1afd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lathliss, Dragon Queen/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-15fef45d-f1a9-49b2-abaa-fe77bb9d1afd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lathliss, Dragon Queen/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+15fef45d-f1a9-49b2-abaa-fe77bb9d1afd	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lathliss-dragon-queen:combat0.attack:s1,f:xs:XP:lathliss-dragon-queen:combat0.attack:s1	-	-	-	3aa6ded33acb	-	38bf95e5898e	-	-	2026-11-25	xproof
+15fef45d-f1a9-49b2-abaa-fe77bb9d1afd	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lathliss-dragon-queen:combat0.block:s1,f:xs:XP:lathliss-dragon-queen:combat0.block:s1	-	-	-	3aa6ded33acb	-	38bf95e5898e	-	-	2026-11-25	xproof
 15fef45d-f1a9-49b2-abaa-fe77bb9d1afd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lathliss, Dragon Queen/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 15fef45d-f1a9-49b2-abaa-fe77bb9d1afd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lathliss, Dragon Queen/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

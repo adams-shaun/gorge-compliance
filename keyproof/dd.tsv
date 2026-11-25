@@ -16,9 +16,9 @@ dd1b4235-f053-4c46-8993-ae8d7860a0f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 dd1b4235-f053-4c46-8993-ae8d7860a0f3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 dd1d21f5-f5cd-43e4-8155-3cca85da80a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd1d21f5-f5cd-43e4-8155-3cca85da80a9	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:princess-lucrezia:f0a0:s2,f:xs:XP:princess-lucrezia:f0a0:s2	-	-	-	23b491658465	-	8a7a7c8def6f	-	-	2026-11-24	xproof
-dd21cbaa-7537-414b-b720-3c7d6fc7c93d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dd21cbaa-7537-414b-b720-3c7d6fc7c93d	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	ce071df8822a	-	-	2026-11-25	xproof
 dd21cbaa-7537-414b-b720-3c7d6fc7c93d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dd21cbaa-7537-414b-b720-3c7d6fc7c93d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dd21cbaa-7537-414b-b720-3c7d6fc7c93d	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	ce071df8822a	-	-	2026-11-25	xproof
 dd2510cd-356c-4d5a-8e5d-e44872eba60b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:faerie-miscreant:f0t0:s1,f:xs:XP:faerie-miscreant:f0t0:s1	-	-	-	3aa6ded33acb	-	4e7d2af964cc	-	-	2026-11-25	xproof
 dd2510cd-356c-4d5a-8e5d-e44872eba60b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:faerie-miscreant:f0t0:s1,f:xs:XP:faerie-miscreant:f0t0:s1	-	-	-	3aa6ded33acb	-	4e7d2af964cc	-	-	2026-11-25	xproof
 dd257eb3-4112-41e5-9c7d-00d1f683dbdb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -68,7 +68,7 @@ dd489f30-d1cf-4236-8390-9c21cd8659e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bli
 dd489f30-d1cf-4236-8390-9c21cd8659e0	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:blizzard-elemental:f0a0:s1,f:xs:XP:blizzard-elemental:f0a0:s1	-	-	-	5f2128bf97e4	-	4e0b085d530b	-	-	2026-11-24	xproof
 dd491ac7-3c6c-4a47-94af-071d1edc5eb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd4cf149-2fae-40e5-b50b-639f6bcec65e	cast	cast-resolve	agreed	-	FX	scen	2	0	Thousand-Year Storm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dd4cf149-2fae-40e5-b50b-639f6bcec65e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thousand-Year Storm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+dd4cf149-2fae-40e5-b50b-639f6bcec65e	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:thousand-year-storm:f0t0:s1,f:xs:XP:thousand-year-storm:f0t0:s1	-	-	-	3aa6ded33acb	-	f226def46359	-	-	2026-11-25	xproof
 dd4f3a78-3167-42d0-8334-5ac36750a253	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd4f3a78-3167-42d0-8334-5ac36750a253	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 dd520d83-297a-487f-b8f3-4997bbc056e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -90,8 +90,8 @@ dd757328-0593-4fc7-a099-e82f5c0677ff	cast	cast-resolve	agreed	-	FX	scen	2	0	Esse
 dd757328-0593-4fc7-a099-e82f5c0677ff	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 dd757328-0593-4fc7-a099-e82f5c0677ff	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Essenceknit Scholar/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dd79a994-7dad-49d4-8d8f-62dbedde4a38	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:alquist-proft-master-sleuth:f0t0:s2,f:xs:XP:alquist-proft-master-sleuth:f0t0:s2	-	-	-	e07cf3a05ba5	-	5ce962661121	-	-	2026-11-24	xproof
-dd79a994-7dad-49d4-8d8f-62dbedde4a38	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Alquist Proft, Master Sleuth/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dd79a994-7dad-49d4-8d8f-62dbedde4a38	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Alquist Proft, Master Sleuth/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+dd79a994-7dad-49d4-8d8f-62dbedde4a38	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:alquist-proft-master-sleuth:combat0.attack:s1,f:xs:XP:alquist-proft-master-sleuth:combat0.attack:s1	-	-	-	3aa6ded33acb	-	5ce962661121	-	-	2026-11-25	xproof
+dd79a994-7dad-49d4-8d8f-62dbedde4a38	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:alquist-proft-master-sleuth:combat0.block:s1,f:xs:XP:alquist-proft-master-sleuth:combat0.block:s1	-	-	-	3aa6ded33acb	-	5ce962661121	-	-	2026-11-25	xproof
 dd79a994-7dad-49d4-8d8f-62dbedde4a38	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Alquist Proft, Master Sleuth/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dd79a994-7dad-49d4-8d8f-62dbedde4a38	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:alquist-proft-master-sleuth:f0t0:s2,f:xs:XP:alquist-proft-master-sleuth:f0t0:s2	-	-	-	e07cf3a05ba5	-	5ce962661121	-	-	2026-11-24	xproof
 dd7df06c-9434-46ce-893c-80081fbc2df7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undead-leotau:cast:s1,f:xs:XP:undead-leotau:cast:s1	-	-	-	8a1b1a193ec0	-	60ba5f76a2bc	-	-	2026-11-24	xproof
@@ -119,10 +119,10 @@ dd99061d-510d-4935-b44e-54721505515f	f0/t0	NULL	owed	refused:battlefield:not-a-p
 dd99d791-3305-4195-ad12-96d958a28764	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crossbow-infantry:cast:s1,f:xs:XP:crossbow-infantry:cast:s1	-	-	-	25696bf19d5b	-	a9d18e41e902	-	-	2026-11-24	xproof
 dd99d791-3305-4195-ad12-96d958a28764	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 dd9a6f6b-f9b7-4292-bc80-b7da326de032	cast	cast-resolve	agreed	-	X	scen	1	0	Aerith Gainsborough/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dd9a6f6b-f9b7-4292-bc80-b7da326de032	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aerith Gainsborough/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dd9a6f6b-f9b7-4292-bc80-b7da326de032	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aerith Gainsborough/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dd9a6f6b-f9b7-4292-bc80-b7da326de032	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aerith Gainsborough/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dd9a6f6b-f9b7-4292-bc80-b7da326de032	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aerith Gainsborough/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+dd9a6f6b-f9b7-4292-bc80-b7da326de032	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:aerith-gainsborough:combat0.attack:s1,f:xs:XP:aerith-gainsborough:combat0.attack:s1	-	-	-	3aa6ded33acb	-	0c4df94a722c	-	-	2026-11-25	xproof
+dd9a6f6b-f9b7-4292-bc80-b7da326de032	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aerith-gainsborough:combat0.block:s1,f:xs:XP:aerith-gainsborough:combat0.block:s1	-	-	-	3aa6ded33acb	-	0c4df94a722c	-	-	2026-11-25	xproof
+dd9a6f6b-f9b7-4292-bc80-b7da326de032	f0/t0	LifeGained	agreed	-	FX	start	6	0	x:xs:XP:aerith-gainsborough:combat0.attack:s1,f:xs:XP:aerith-gainsborough:combat0.attack:s1	-	-	-	3aa6ded33acb	-	0c4df94a722c	-	-	2026-11-25	xproof
+dd9a6f6b-f9b7-4292-bc80-b7da326de032	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:aerith-gainsborough:combat0.attack:s1,f:xs:XP:aerith-gainsborough:combat0.attack:s1	-	-	-	3aa6ded33acb	-	0c4df94a722c	-	-	2026-11-25	xproof
 dda4b515-49c0-43fe-9f6a-36defa326bb1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maalfeld-twins:cast:s1,f:xs:XP:maalfeld-twins:cast:s1	-	-	-	23b491658465	-	210d79eaa60b	-	-	2026-11-24	xproof
 dda4b515-49c0-43fe-9f6a-36defa326bb1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:maalfeld-twins:f0t0:s1,f:xs:XP:maalfeld-twins:f0t0:s1	-	-	-	8c0bd19283bb	-	210d79eaa60b	-	-	2026-11-24	xproof
 dda607bd-f419-4b7f-b052-a5ce6ce22bfe	cast	cast-resolve	agreed	-	X	scen	1	0	Stir Up Trouble/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

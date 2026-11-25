@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:unstoppable-slasher:combat0.attack:s1,f:xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
 6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:unstoppable-slasher:combat0.block:s1,f:xs:XP:unstoppable-slasher:combat0.block:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
 6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:unstoppable-slasher:combat0.attack:s1,f:xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
-6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Unstoppable Slasher/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:unstoppable-slasher:f0t1:s1,f:xs:XP:unstoppable-slasher:f0t1:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
 66630640-9605-44da-afdf-eb9d458d056f	cast	cast-resolve	agreed	-	X	scen	1	0	Mirkwood Nurturer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66630640-9605-44da-afdf-eb9d458d056f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 6665bfe2-942c-4b3d-a976-776fe00c99f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66bee79a-7e47-4fc4-ba07-323cd2de6261	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66c227f2-0e74-43e2-ab24-3866d15c5eef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:cast:s1,f:xs:XP:gateway-sneak:cast:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
 66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gateway Sneak/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gateway Sneak/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:f0t1:s1,f:xs:XP:gateway-sneak:f0t1:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
 66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	cast	cast-resolve	agreed	-	X	scen	1	0	Summon: Titan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Summon: Titan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

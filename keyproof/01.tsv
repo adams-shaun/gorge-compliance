@@ -46,7 +46,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 013c42a4-d555-46c9-9d57-b50d6b59ae9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 013ca531-1ff7-4efc-a280-4bc3ab574072	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mocking-sprite:cast:s1,f:xs:XP:mocking-sprite:cast:s1	-	-	-	23b491658465	-	44faa628979f	-	-	2026-11-24	xproof
 013ca531-1ff7-4efc-a280-4bc3ab574072	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:mocking-sprite:combat0.attack:s1,f:xs:XP:mocking-sprite:combat0.attack:s1	-	-	-	3aa6ded33acb	-	44faa628979f	-	-	2026-11-25	xproof
-013ca531-1ff7-4efc-a280-4bc3ab574072	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mocking Sprite/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+013ca531-1ff7-4efc-a280-4bc3ab574072	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mocking-sprite:combat0.block:s1,f:xs:XP:mocking-sprite:combat0.block:s1	-	-	-	3aa6ded33acb	-	44faa628979f	-	-	2026-11-25	xproof
 013ca531-1ff7-4efc-a280-4bc3ab574072	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mocking Sprite/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 013e4281-4e3e-47c2-ac9a-f570668bcb16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 013e4281-4e3e-47c2-ac9a-f570668bcb16	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01432542-2ea7-45bc-bc90-151516faee0e	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 01443d75-3f86-45c0-81fa-fbf1b3175d4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01443d75-3f86-45c0-81fa-fbf1b3175d4f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-0146de73-29bf-415a-b450-11074553f715	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0146de73-29bf-415a-b450-11074553f715	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 0146f430-da82-48d3-a576-c2b05101797f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawnbringer-cleric:f0t0:s1,f:xs:XP:dawnbringer-cleric:f0t0:s1	-	-	-	23b491658465	-	480f3b440f03	-	-	2026-11-25	xproof
 0146f430-da82-48d3-a576-c2b05101797f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01499544-6850-49f0-a66e-113df19c4340	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pheres-band-brawler:f0t0:s1,f:xs:XP:pheres-band-brawler:f0t0:s1	-	-	-	ae86f6029288	-	38cd4c5d08c7	-	-	2026-11-24	xproof
@@ -156,11 +156,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01ab3603-6c2f-4d65-9bb2-da95efdbe622	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 01ab37a4-21d2-49f4-9b85-cb522a4d04ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01ab7724-1967-4da6-aebd-3729983d6a0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodthorn-flail:cast:s1,f:xs:XP:bloodthorn-flail:cast:s1	-	-	-	23b491658465	-	495862cbc2a8	-	-	2026-11-24	xproof
-01ab7724-1967-4da6-aebd-3729983d6a0e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bloodthorn Flail/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+01ab7724-1967-4da6-aebd-3729983d6a0e	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:bloodthorn-flail:f0a0:s1,f:xs:XP:bloodthorn-flail:f0a0:s1	-	-	-	3aa6ded33acb	-	495862cbc2a8	-	-	2026-11-25	xproof
 01ab7724-1967-4da6-aebd-3729983d6a0e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bloodthorn Flail/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 01afb7a1-6427-4bb6-935a-613e9bda9de3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:etherium-horn-sorcerer:cast:s1,f:xs:XP:etherium-horn-sorcerer:cast:s1	-	-	-	8c0bd19283bb	-	8bb06dbef8f6	-	-	2026-11-24	xproof
 01afb7a1-6427-4bb6-935a-613e9bda9de3	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:etherium-horn-sorcerer:f0a0:s1,f:xs:XP:etherium-horn-sorcerer:f0a0:s1	-	-	-	8c0bd19283bb	-	8bb06dbef8f6	-	-	2026-11-24	xproof
-01b3af6d-ab7d-4137-a94a-1cf2cbfd9d44	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+01b3af6d-ab7d-4137-a94a-1cf2cbfd9d44	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lich-s-caress:cast:s1,f:xs:XP:lich-s-caress:cast:s1	-	-	-	3aa6ded33acb	-	2e0e0ed4a6ef	-	-	2026-11-25	xproof
 01b778d7-0965-48ab-a81f-e29f8a233d07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01bba3b8-6372-437e-ab34-ae2c8105cd28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summoning-station:cast:s1,f:xs:XP:summoning-station:cast:s1	-	-	-	25696bf19d5b	-	14a6385eb4f9	-	-	2026-11-24	xproof
 01bba3b8-6372-437e-ab34-ae2c8105cd28	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:summoning-station:cast:s1,f:xs:XP:summoning-station:cast:s1	-	-	-	25696bf19d5b	-	14a6385eb4f9	-	-	2026-11-24	xproof

@@ -39,7 +39,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e27956e-ba2f-41a9-8e39-ec54424591b6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 6e2c2423-d854-4478-99e6-64f29851f026	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-archdruid:cast:s1,f:xs:XP:elvish-archdruid:cast:s1	-	-	-	23b491658465	-	5935d95fb0f6	-	-	2026-11-24	xproof
 6e2c2423-d854-4478-99e6-64f29851f026	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:elvish-archdruid:f0a0:s2,f:xs:XP:elvish-archdruid:f0a0:s2	-	-	-	23b491658465	-	5935d95fb0f6	-	-	2026-11-24	xproof
-6e2c2423-d854-4478-99e6-64f29851f026	static#0.0	static#0.0	agreed	-	X	scen	1	0	Elvish Archdruid/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6e2c2423-d854-4478-99e6-64f29851f026	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:elvish-archdruid:static0.0:s1,f:xs:XP:elvish-archdruid:static0.0:s1	-	-	-	3aa6ded33acb	-	5935d95fb0f6	-	-	2026-11-25	xproof
 6e33ec9a-e148-4aa6-bff8-b356c45fb369	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e33ec9a-e148-4aa6-bff8-b356c45fb369	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mindeye-drake:f0t0:s1,f:xs:XP:mindeye-drake:f0t0:s1	-	-	-	d864b561c9cb	-	e255abe63b0e	-	-	2026-11-24	xproof
 6e3b3a3f-e32f-4c72-a9fb-dd1e877876b6	cast	cast-resolve	agreed	-	X	scen	1	0	Ill-Timed Explosion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -68,10 +68,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e61ae7b-f2e8-421c-870b-a48c08d07503	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e61ae7b-f2e8-421c-870b-a48c08d07503	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e64f1e0-ddd6-4ee7-8797-086e234b02e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:cast:s1,f:xs:XP:steel-hellkite:cast:s1	-	-	-	23b491658465	-	7847c536d169	-	-	2026-11-24	xproof
-6e64f1e0-ddd6-4ee7-8797-086e234b02e8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Steel Hellkite/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6e64f1e0-ddd6-4ee7-8797-086e234b02e8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Steel Hellkite/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6e64f1e0-ddd6-4ee7-8797-086e234b02e8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:combat0.attack:s1,f:xs:XP:steel-hellkite:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7847c536d169	-	-	2026-11-25	xproof
+6e64f1e0-ddd6-4ee7-8797-086e234b02e8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:combat0.block:s1,f:xs:XP:steel-hellkite:combat0.block:s1	-	-	-	3aa6ded33acb	-	7847c536d169	-	-	2026-11-25	xproof
 6e64f1e0-ddd6-4ee7-8797-086e234b02e8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:f0a0:s1,f:xs:XP:steel-hellkite:f0a0:s1	-	-	-	8c0bd19283bb	-	7847c536d169	-	-	2026-11-24	xproof
-6e64f1e0-ddd6-4ee7-8797-086e234b02e8	f0/a1	DestroyAll	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:cast:s1,f:xs:XP:steel-hellkite:cast:s1	-	-	-	23b491658465	-	7847c536d169	-	-	2026-11-24	xproof
+6e64f1e0-ddd6-4ee7-8797-086e234b02e8	f0/a1	DestroyAll	agreed	-	FX	start	4	0	x:xs:XP:steel-hellkite:combat0.attack:s1,f:xs:XP:steel-hellkite:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7847c536d169	-	-	2026-11-25	xproof
 6e66e983-6349-428b-b511-8738c03ef8fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e67551b-1f6e-4ef4-9baf-520607b8cb61	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dream-stalker:cast:s1,f:xs:XP:dream-stalker:cast:s1	-	-	-	9ee19e8250ce	-	1730e2ba5897	-	-	2026-11-24	xproof
 6e67551b-1f6e-4ef4-9baf-520607b8cb61	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dream-stalker:cast:s1,f:xs:XP:dream-stalker:cast:s1	-	-	-	9ee19e8250ce	-	1730e2ba5897	-	-	2026-11-24	xproof

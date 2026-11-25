@@ -129,8 +129,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19a0d191-64c0-4e8a-8cb0-bf680cc681bb	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Beastrider Vanguard/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 19a11c33-269a-45d3-86c7-827965053f26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19a11c33-269a-45d3-86c7-827965053f26	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-19a2f0a0-9e68-4982-a5f5-b77d805befd7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:demonic-pact:cast:s1,f:xs:XP:demonic-pact:cast:s1	-	-	-	23b491658465	-	e6a52733bc5a	-	-	2026-11-24	xproof
-19a2f0a0-9e68-4982-a5f5-b77d805befd7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Demonic Pact/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+19a2f0a0-9e68-4982-a5f5-b77d805befd7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:demonic-pact:f0t0:s1,f:xs:XP:demonic-pact:f0t0:s1	-	-	-	3aa6ded33acb	-	e6a52733bc5a	-	-	2026-11-25	xproof
+19a2f0a0-9e68-4982-a5f5-b77d805befd7	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:demonic-pact:f0t0:s1,f:xs:XP:demonic-pact:f0t0:s1	-	-	-	3aa6ded33acb	-	e6a52733bc5a	-	-	2026-11-25	xproof
 19a32e29-45ec-433e-9cb4-b2c32cac8f80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beastbond-outcaster:f0t0:s1,f:xs:XP:beastbond-outcaster:f0t0:s1	-	-	-	3aa6ded33acb	-	a829239b252e	-	-	2026-11-25	xproof
 19a32e29-45ec-433e-9cb4-b2c32cac8f80	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:beastbond-outcaster:f0t0:s1,f:xs:XP:beastbond-outcaster:f0t0:s1	-	-	-	3aa6ded33acb	-	a829239b252e	-	-	2026-11-25	xproof
 19a39cc5-2134-4dee-932c-81389806c57b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -201,7 +201,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19f2c2c1-cd29-4e66-b5d9-e85e1979d843	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t0:s1,f:xs:XP:spitting-dilophosaurus:f0t0:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof
 19f2c2c1-cd29-4e66-b5d9-e85e1979d843	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t1:s1,f:xs:XP:spitting-dilophosaurus:f0t1:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof
 19f344ee-031d-4346-9553-c5d32b02df43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19f3ec61-f334-4708-ad93-04ebe15c1798	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19f3ec61-f334-4708-ad93-04ebe15c1798	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 19f66bfa-bdfc-430a-ae39-4535f0b28324	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:subterranean-scout:f0t0:s1,f:xs:XP:subterranean-scout:f0t0:s1	-	-	-	d864b561c9cb	-	9eeed003844a	-	-	2026-11-24	xproof
 19f66bfa-bdfc-430a-ae39-4535f0b28324	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:subterranean-scout:f0t0:s1,f:xs:XP:subterranean-scout:f0t0:s1	-	-	-	d864b561c9cb	-	9eeed003844a	-	-	2026-11-24	xproof
 19fba3c8-3363-4f2f-a2fb-01e59a77447c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mine-bearer:cast:s1,f:xs:XP:mine-bearer:cast:s1	-	-	-	5f2128bf97e4	-	10c0de555f36	-	-	2026-11-24	xproof

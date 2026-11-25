@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 44350127-f6b6-458f-8f2f-e57a78d83303	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 443f2272-6475-4966-8ca2-717d4cf208ee	cast	cast-resolve	agreed	-	FX	scen	2	0	Dinotomaton/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 443f2272-6475-4966-8ca2-717d4cf208ee	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dinotomaton:combat0.attack:s1,f:xs:XP:dinotomaton:combat0.attack:s1	-	-	-	3aa6ded33acb	-	078be8028dfe	-	-	2026-11-25	xproof
-443f2272-6475-4966-8ca2-717d4cf208ee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dinotomaton/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+443f2272-6475-4966-8ca2-717d4cf208ee	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dinotomaton:combat0.block:s1,f:xs:XP:dinotomaton:combat0.block:s1	-	-	-	3aa6ded33acb	-	078be8028dfe	-	-	2026-11-25	xproof
 443f2272-6475-4966-8ca2-717d4cf208ee	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 443f8dd1-333d-42c4-a286-302a9496209a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4443345d-a292-4394-97dd-0e6f4d9aedf7	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 44443716-8356-40cd-a879-35264b29108c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scheming Silvertongue/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-444493a6-0f90-4847-9619-4ea8fbf7cf6f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+444493a6-0f90-4847-9619-4ea8fbf7cf6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:strangling-spores:cast:s1,f:xs:XP:strangling-spores:cast:s1	-	-	-	3aa6ded33acb	-	c451ccb94f82	-	-	2026-11-25	xproof
 4446e59c-29f7-4722-92be-2625c1d3dab9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eagle-of-deliverance:f0t0:s1,f:xs:XP:eagle-of-deliverance:f0t0:s1	-	-	-	ae86f6029288	-	65d1e60074ae	-	-	2026-11-24	xproof
 4446e59c-29f7-4722-92be-2625c1d3dab9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eagle-of-deliverance:f0t0:s1,f:xs:XP:eagle-of-deliverance:f0t0:s1	-	-	-	ae86f6029288	-	65d1e60074ae	-	-	2026-11-24	xproof
 444d50dd-a44a-42db-bbf6-d0978e3bd6a3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

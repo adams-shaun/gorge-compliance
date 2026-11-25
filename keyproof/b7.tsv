@@ -118,7 +118,7 @@ b77dfe2a-ebc9-46b0-9134-2ecb2abdd8be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mys
 b77dfe2a-ebc9-46b0-9134-2ecb2abdd8be	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:mystic-archaeologist:f0a0:s1,f:xs:XP:mystic-archaeologist:f0a0:s1	-	-	-	8c0bd19283bb	-	c291a5735f60	-	-	2026-11-24	xproof
 b7817579-df4d-41db-bb90-2aabac58f299	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b7817579-df4d-41db-bb90-2aabac58f299	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-b783246a-e00b-4cdf-9111-fe0afb896a8e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b783246a-e00b-4cdf-9111-fe0afb896a8e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:easy-prey:cast:s1,f:xs:XP:easy-prey:cast:s1	-	-	-	3aa6ded33acb	-	65675af4a9a2	-	-	2026-11-25	xproof
 b783246a-e00b-4cdf-9111-fe0afb896a8e	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:easy-prey:cast:s1,f:xs:XP:easy-prey:cast:s1	-	-	-	23b491658465	-	65675af4a9a2	-	-	2026-11-25	xproof
 b7851b17-faa2-4767-9716-86997b882690	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undercity-troll:cast:s1,f:xs:XP:undercity-troll:cast:s1	-	-	-	d864b561c9cb	-	92ca87382317	-	-	2026-11-24	xproof
 b7851b17-faa2-4767-9716-86997b882690	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:undercity-troll:f0a0:s1,f:xs:XP:undercity-troll:f0a0:s1	-	-	-	d864b561c9cb	-	92ca87382317	-	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ b7cfbfa1-dd38-47ff-9138-fa6b247afc11	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 b7d231eb-255d-4505-89a9-0c6824622209	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b7d231eb-255d-4505-89a9-0c6824622209	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b7d3e234-0954-4422-96c0-cda91101faa3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:freestrider-lookout:cast:s1,f:xs:XP:freestrider-lookout:cast:s1	-	-	-	8c0bd19283bb	-	0f02f8f5b8d7	-	-	2026-11-25	xproof
-b7d3e234-0954-4422-96c0-cda91101faa3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Freestrider Lookout/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b7d3e234-0954-4422-96c0-cda91101faa3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Freestrider Lookout/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b7d3e234-0954-4422-96c0-cda91101faa3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:freestrider-lookout:combat0.attack:s1,f:xs:XP:freestrider-lookout:combat0.attack:s1	-	-	-	3aa6ded33acb	-	0f02f8f5b8d7	-	-	2026-11-25	xproof
+b7d3e234-0954-4422-96c0-cda91101faa3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:freestrider-lookout:combat0.block:s1,f:xs:XP:freestrider-lookout:combat0.block:s1	-	-	-	3aa6ded33acb	-	0f02f8f5b8d7	-	-	2026-11-25	xproof
 b7d3e234-0954-4422-96c0-cda91101faa3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Freestrider Lookout/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b7d4b7dd-fbb1-4ca3-875f-ef13a95e66ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b7d4b7dd-fbb1-4ca3-875f-ef13a95e66ad	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -192,7 +192,7 @@ b7ee76bf-d15a-489e-8f05-414788f8f649	combat#0.block	combat#0.block	agreed	-	X	sc
 b7ee76bf-d15a-489e-8f05-414788f8f649	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Super Shredder/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b7f56bbb-961a-4641-9446-7292ef188b1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deep-goblin-skulltaker:cast:s1,f:xs:XP:deep-goblin-skulltaker:cast:s1	-	-	-	23b491658465	-	1ccc4a9f37e0	-	-	2026-11-24	xproof
 b7f56bbb-961a-4641-9446-7292ef188b1d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:deep-goblin-skulltaker:combat0.attack:s1,f:xs:XP:deep-goblin-skulltaker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1ccc4a9f37e0	-	-	2026-11-25	xproof
-b7f56bbb-961a-4641-9446-7292ef188b1d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Deep Goblin Skulltaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b7f56bbb-961a-4641-9446-7292ef188b1d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:deep-goblin-skulltaker:combat0.block:s1,f:xs:XP:deep-goblin-skulltaker:combat0.block:s1	-	-	-	3aa6ded33acb	-	1ccc4a9f37e0	-	-	2026-11-25	xproof
 b7f56bbb-961a-4641-9446-7292ef188b1d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Deep Goblin Skulltaker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b7f72e54-7e3a-4720-be69-fc8c5eb4c190	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crumbling-colossus:cast:s1,f:xs:XP:crumbling-colossus:cast:s1	-	-	-	d864b561c9cb	-	7cb3b0393dc0	-	-	2026-11-24	xproof
 b7f72e54-7e3a-4720-be69-fc8c5eb4c190	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:crumbling-colossus:f0t0:s1,f:xs:XP:crumbling-colossus:f0t0:s1	-	-	-	d864b561c9cb	-	7cb3b0393dc0	-	-	2026-11-24	xproof

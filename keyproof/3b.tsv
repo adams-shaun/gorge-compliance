@@ -84,9 +84,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b583358-d0d5-4f53-b06c-c6439156e684	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:outcaster-trailblazer:cast:s1,f:xs:XP:outcaster-trailblazer:cast:s1	-	-	-	23b491658465	-	06a2cac6ce6a	-	-	2026-11-25	xproof
-3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:outcaster-trailblazer:cast:s1,f:xs:XP:outcaster-trailblazer:cast:s1	-	-	-	23b491658465	-	06a2cac6ce6a	-	-	2026-11-25	xproof
-3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Outcaster Trailblazer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:outcaster-trailblazer:cast:s1,f:xs:XP:outcaster-trailblazer:cast:s1	-	-	-	3aa6ded33acb	-	06a2cac6ce6a	-	-	2026-11-25	xproof
+3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:outcaster-trailblazer:cast:s1,f:xs:XP:outcaster-trailblazer:cast:s1	-	-	-	3aa6ded33acb	-	06a2cac6ce6a	-	-	2026-11-25	xproof
+3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:outcaster-trailblazer:f0t1:s1,f:xs:XP:outcaster-trailblazer:f0t1:s1	-	-	-	3aa6ded33acb	-	06a2cac6ce6a	-	-	2026-11-25	xproof
 3b601721-90ca-45d3-9a3a-19c719799bfa	cast	cast-resolve	agreed	-	FX	scen	2	0	Gastal Blockbuster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b601721-90ca-45d3-9a3a-19c719799bfa	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b61b6da-44ed-4766-8134-fca37afd3f2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b66d2c2-be7a-4296-9888-f0cfb2975e89	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:seismic-monstrosaur:combat0.attack:s1,f:xs:XP:seismic-monstrosaur:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d9bcd622114e	-	-	2026-11-25	xproof
 3b66d2c2-be7a-4296-9888-f0cfb2975e89	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:seismic-monstrosaur:combat0.block:s1,f:xs:XP:seismic-monstrosaur:combat0.block:s1	-	-	-	3aa6ded33acb	-	d9bcd622114e	-	-	2026-11-25	xproof
 3b66d2c2-be7a-4296-9888-f0cfb2975e89	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:seismic-monstrosaur:f0a0:s1,f:xs:XP:seismic-monstrosaur:f0a0:s1	-	-	-	3aa6ded33acb	-	d9bcd622114e	-	-	2026-11-25	xproof
-3b66d2c2-be7a-4296-9888-f0cfb2975e89	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Seismic Monstrosaur/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3b66d2c2-be7a-4296-9888-f0cfb2975e89	f0/a1	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:seismic-monstrosaur:f0a1:s1	-	-	-	3aa6ded33acb	-	d9bcd622114e	-	-	2026-11-25	xproof
 3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:caller-of-the-pack:cast:s1,f:xs:XP:caller-of-the-pack:cast:s1	-	-	-	8c0bd19283bb	-	ecc1a65d29c4	-	-	2026-11-24	xproof
 3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	f0/t0	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:caller-of-the-pack:f0t0:s1,f:xs:XP:caller-of-the-pack:f0t0:s1	-	-	-	8c0bd19283bb	-	ecc1a65d29c4	-	-	2026-11-24	xproof
 3b6d773b-e2f7-4e74-9e77-f2e0d369a31e	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
@@ -167,9 +167,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3bb7041c-4f3e-4123-9181-3442ea0c98e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3bb7041c-4f3e-4123-9181-3442ea0c98e8	f0/t0	NULL	owed	refused:no-generator:trigger:Surveil	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3bba3b36-f8d7-4fd6-892a-797226210b6e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:cast:s1,f:xs:XP:malcolm-alluring-scoundrel:cast:s1	-	-	-	23b491658465	-	1641639f428a	-	-	2026-11-24	xproof
-3bba3b36-f8d7-4fd6-892a-797226210b6e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Malcolm, Alluring Scoundrel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3bba3b36-f8d7-4fd6-892a-797226210b6e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:combat0.attack:s1,f:xs:XP:malcolm-alluring-scoundrel:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1641639f428a	-	-	2026-11-25	xproof
 3bba3b36-f8d7-4fd6-892a-797226210b6e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:combat0.block:s1,f:xs:XP:malcolm-alluring-scoundrel:combat0.block:s1	-	-	-	3aa6ded33acb	-	1641639f428a	-	-	2026-11-25	xproof
-3bba3b36-f8d7-4fd6-892a-797226210b6e	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:f0t0:s1,f:xs:XP:malcolm-alluring-scoundrel:f0t0:s1	-	-	-	3aa6ded33acb	-	1641639f428a	-	-	2026-11-25	xproof
+3bba3b36-f8d7-4fd6-892a-797226210b6e	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:malcolm-alluring-scoundrel:combat0.attack:s1,f:xs:XP:malcolm-alluring-scoundrel:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1641639f428a	-	-	2026-11-25	xproof
 3bbad38b-7d88-4ff2-9fd3-5081536e7c56	cast	cast-resolve	agreed	-	X	scen	1	0	Page, Loose Leaf/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bbad38b-7d88-4ff2-9fd3-5081536e7c56	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Page, Loose Leaf/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bbad38b-7d88-4ff2-9fd3-5081536e7c56	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Page, Loose Leaf/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

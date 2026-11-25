@@ -23,7 +23,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 411484ac-a87d-49e8-a7ef-0cd055a872b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 411b9158-e427-4099-bd30-3fbb22edb553	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geyser-drake:cast:s1,f:xs:XP:geyser-drake:cast:s1	-	-	-	23b491658465	-	bef8e97fc0e2	-	-	2026-11-25	xproof
 411b9158-e427-4099-bd30-3fbb22edb553	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:geyser-drake:combat0.attack:s1,f:xs:XP:geyser-drake:combat0.attack:s1	-	-	-	3aa6ded33acb	-	bef8e97fc0e2	-	-	2026-11-25	xproof
-411b9158-e427-4099-bd30-3fbb22edb553	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Geyser Drake/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+411b9158-e427-4099-bd30-3fbb22edb553	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:geyser-drake:combat0.block:s1,f:xs:XP:geyser-drake:combat0.block:s1	-	-	-	3aa6ded33acb	-	bef8e97fc0e2	-	-	2026-11-25	xproof
 411b9158-e427-4099-bd30-3fbb22edb553	static#0.0	static#0.0	agreed	-	X	scen	1	0	Geyser Drake/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 411ba1a2-30bb-4618-b874-6be0d996f07d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 411c3636-a5b3-42fa-8020-ceacf581a4f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41283a82-ce3f-41a6-995e-bc30d8ab5cf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 412eb5ec-bf13-45fb-94b3-c41e62b19d1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savior-of-the-sleeping:cast:s1,f:xs:XP:savior-of-the-sleeping:cast:s1	-	-	-	23b491658465	-	23bca34b3b89	-	-	2026-11-24	xproof
 412eb5ec-bf13-45fb-94b3-c41e62b19d1d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:savior-of-the-sleeping:combat0.attack:s1,f:xs:XP:savior-of-the-sleeping:combat0.attack:s1	-	-	-	3aa6ded33acb	-	23bca34b3b89	-	-	2026-11-25	xproof
-412eb5ec-bf13-45fb-94b3-c41e62b19d1d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Savior of the Sleeping/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+412eb5ec-bf13-45fb-94b3-c41e62b19d1d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:savior-of-the-sleeping:combat0.block:s1,f:xs:XP:savior-of-the-sleeping:combat0.block:s1	-	-	-	3aa6ded33acb	-	23bca34b3b89	-	-	2026-11-25	xproof
 412eb5ec-bf13-45fb-94b3-c41e62b19d1d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:savior-of-the-sleeping:f0t0:s1,f:xs:XP:savior-of-the-sleeping:f0t0:s1	-	-	-	3aa6ded33acb	-	23bca34b3b89	-	-	2026-11-25	xproof
 412f57e8-76af-4636-bab0-e0940300ee2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 412f57e8-76af-4636-bab0-e0940300ee2e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -92,8 +92,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41623eab-38b5-4058-8de2-e6b8706de7a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 41623eab-38b5-4058-8de2-e6b8706de7a2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4162e60f-9d70-4b8c-a838-df57b83c208d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:obyra-dreaming-duelist:cast:s1,f:xs:XP:obyra-dreaming-duelist:cast:s1	-	-	-	23b491658465	-	ef4e406a6bc6	-	-	2026-11-24	xproof
-4162e60f-9d70-4b8c-a838-df57b83c208d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Obyra, Dreaming Duelist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4162e60f-9d70-4b8c-a838-df57b83c208d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Obyra, Dreaming Duelist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4162e60f-9d70-4b8c-a838-df57b83c208d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:obyra-dreaming-duelist:combat0.attack:s1,f:xs:XP:obyra-dreaming-duelist:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ef4e406a6bc6	-	-	2026-11-25	xproof
+4162e60f-9d70-4b8c-a838-df57b83c208d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:obyra-dreaming-duelist:combat0.block:s1,f:xs:XP:obyra-dreaming-duelist:combat0.block:s1	-	-	-	3aa6ded33acb	-	ef4e406a6bc6	-	-	2026-11-25	xproof
 4162e60f-9d70-4b8c-a838-df57b83c208d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:obyra-dreaming-duelist:f0t0:s1,f:xs:XP:obyra-dreaming-duelist:f0t0:s1	-	-	-	3aa6ded33acb	-	ef4e406a6bc6	-	-	2026-11-25	xproof
 4163aa30-7e3d-424f-b003-f4a300f0071e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4163aa30-7e3d-424f-b003-f4a300f0071e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof

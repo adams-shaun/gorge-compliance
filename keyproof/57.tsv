@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57579799-2582-417f-9864-4560cac39ac3	cast	cast-resolve	agreed	-	FX	scen	2	0	Moment of Triumph/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 575a0dc2-206a-406a-90b3-72a92f2ea87a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:case-of-the-trampled-garden:f0t0:s2,f:xs:XP:case-of-the-trampled-garden:f0t0:s2	-	-	-	e07cf3a05ba5	-	d29ebe89ae8b	-	-	2026-11-24	xproof
 575a0dc2-206a-406a-90b3-72a92f2ea87a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:case-of-the-trampled-garden:f0t0:s2,f:xs:XP:case-of-the-trampled-garden:f0t0:s2	-	-	-	e07cf3a05ba5	-	d29ebe89ae8b	-	-	2026-11-24	xproof
-575a0dc2-206a-406a-90b3-72a92f2ea87a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Case of the Trampled Garden/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+575a0dc2-206a-406a-90b3-72a92f2ea87a	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-trampled-garden:f0t1:s1,f:xs:XP:case-of-the-trampled-garden:f0t1:s1	-	-	-	3aa6ded33acb	-	d29ebe89ae8b	-	-	2026-11-25	xproof
 575a0dc2-206a-406a-90b3-72a92f2ea87a	f0/t2	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-trampled-garden:f0t2:s1,f:xs:XP:case-of-the-trampled-garden:f0t2:s1	-	-	-	3aa6ded33acb	-	d29ebe89ae8b	-	-	2026-11-25	xproof
 575d067a-83a0-49e7-8a74-e3e46a946c8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 575d08b2-3150-47d2-8f83-e8bb1f184c0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57bea272-5b38-444e-acc2-6104af2ece22	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:mantis-engine:f0a0:s1,f:xs:XP:mantis-engine:f0a0:s1	-	-	-	d864b561c9cb	-	d457b9c5389f	-	-	2026-11-24	xproof
 57bea272-5b38-444e-acc2-6104af2ece22	f0/a1	Pump	agreed	-	X	start	2	0	x:xs:XP:mantis-engine:f0a1:s1	-	-	-	d864b561c9cb	-	d457b9c5389f	-	-	2026-11-24	xproof
 57c1a98e-c4fb-4144-9e3e-d0fe6789ba26	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:simic-ascendancy:f0t1:s1,f:xs:XP:simic-ascendancy:f0t1:s1	-	-	-	3aa6ded33acb	-	ba10c06b0e02	-	-	2026-11-25	xproof
-57c1a98e-c4fb-4144-9e3e-d0fe6789ba26	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:simic-ascendancy:f0t1:s1,f:xs:XP:simic-ascendancy:f0t1:s1	-	-	-	3aa6ded33acb	-	ba10c06b0e02	-	-	2026-11-25	xproof
+57c1a98e-c4fb-4144-9e3e-d0fe6789ba26	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 57c1a98e-c4fb-4144-9e3e-d0fe6789ba26	f0/t0	CounterAddedOnce	agreed	-	FX	start	2	0	x:xs:XP:simic-ascendancy:f0t1:s1,f:xs:XP:simic-ascendancy:f0t1:s1	-	-	-	3aa6ded33acb	-	ba10c06b0e02	-	-	2026-11-25	xproof
 57c1a98e-c4fb-4144-9e3e-d0fe6789ba26	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:simic-ascendancy:f0t1:s1,f:xs:XP:simic-ascendancy:f0t1:s1	-	-	-	3aa6ded33acb	-	ba10c06b0e02	-	-	2026-11-25	xproof
 57c5cbd6-432d-4d48-9fc6-5b8a6eb223f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

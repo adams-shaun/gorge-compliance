@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7104e471-06aa-426d-af1e-d5f0b1fb18c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7104e471-06aa-426d-af1e-d5f0b1fb18c3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:dauntless-aven:f0t0:s1,f:xs:XP:dauntless-aven:f0t0:s1	-	-	-	d864b561c9cb	-	6e23a5b3e06c	-	-	2026-11-24	xproof
 710a3499-64f8-4d2c-8c9c-d58950e47ea7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eriette-the-beguiler:cast:s1,f:xs:XP:eriette-the-beguiler:cast:s1	-	-	-	8c0bd19283bb	-	ea9994e5476b	-	-	2026-11-25	xproof
-710a3499-64f8-4d2c-8c9c-d58950e47ea7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Eriette, the Beguiler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+710a3499-64f8-4d2c-8c9c-d58950e47ea7	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:eriette-the-beguiler:combat0.attack:s1,f:xs:XP:eriette-the-beguiler:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ea9994e5476b	-	-	2026-11-25	xproof
 710a3499-64f8-4d2c-8c9c-d58950e47ea7	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:eriette-the-beguiler:combat0.block:s1,f:xs:XP:eriette-the-beguiler:combat0.block:s1	-	-	-	3aa6ded33acb	-	ea9994e5476b	-	-	2026-11-25	xproof
 710a3499-64f8-4d2c-8c9c-d58950e47ea7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Eriette, the Beguiler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 710dc9b1-7d32-4330-95a8-3e91a668202a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghirapur-gearcrafter:f0t0:s1,f:xs:XP:ghirapur-gearcrafter:f0t0:s1	-	-	-	d864b561c9cb	-	fc15e671c1de	-	-	2026-11-24	xproof
@@ -15,8 +15,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 711893a5-2f4c-4957-90f5-2b1d6492b175	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 711c10cb-7a85-417d-be24-79d4e4a89993	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 711eea87-0fa3-46e0-a42b-fa5a86455f04	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shivan-dragon:cast:s1,f:xs:XP:shivan-dragon:cast:s1	-	-	-	8c0bd19283bb	-	f3433acfb38c	-	-	2026-11-24	xproof
-711eea87-0fa3-46e0-a42b-fa5a86455f04	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shivan Dragon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-711eea87-0fa3-46e0-a42b-fa5a86455f04	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shivan Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+711eea87-0fa3-46e0-a42b-fa5a86455f04	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:shivan-dragon:combat0.attack:s1,f:xs:XP:shivan-dragon:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f3433acfb38c	-	-	2026-11-25	xproof
+711eea87-0fa3-46e0-a42b-fa5a86455f04	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:shivan-dragon:combat0.block:s1,f:xs:XP:shivan-dragon:combat0.block:s1	-	-	-	3aa6ded33acb	-	f3433acfb38c	-	-	2026-11-25	xproof
 711eea87-0fa3-46e0-a42b-fa5a86455f04	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:shivan-dragon:f0a0:s1,f:xs:XP:shivan-dragon:f0a0:s1	-	-	-	23b491658465	-	f3433acfb38c	-	-	2026-11-24	xproof
 7121b877-d262-4627-acd8-a159f8a779b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71220cc2-5f3d-4c97-ae66-05b1b79adef1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

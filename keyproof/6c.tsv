@@ -43,8 +43,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c3faf4f-83c1-4098-98b8-bae15d59b0de	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c40f825-836e-4b76-8e43-267b4abf013b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devour-flesh:cast:s1,f:xs:XP:devour-flesh:cast:s1	-	-	-	d864b561c9cb	-	b5394d878753	-	-	2026-11-24	xproof
 6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:deathcap-marionette:f0t0:s2,f:xs:XP:deathcap-marionette:f0t0:s2	-	-	-	e07cf3a05ba5	-	4d838754766c	-	-	2026-11-24	xproof
-6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Deathcap Marionette/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Deathcap Marionette/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:deathcap-marionette:combat0.attack:s1,f:xs:XP:deathcap-marionette:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4d838754766c	-	-	2026-11-25	xproof
+6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:deathcap-marionette:combat0.block:s1,f:xs:XP:deathcap-marionette:combat0.block:s1	-	-	-	3aa6ded33acb	-	4d838754766c	-	-	2026-11-25	xproof
 6c4247d0-6dc8-4139-bbf5-c83dfdc7be1f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:deathcap-marionette:f0t0:s2,f:xs:XP:deathcap-marionette:f0t0:s2	-	-	-	e07cf3a05ba5	-	4d838754766c	-	-	2026-11-24	xproof
 6c44d62f-52de-446c-9824-6b474534a612	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c44d62f-52de-446c-9824-6b474534a612	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

@@ -140,9 +140,9 @@ ccb2f92e-69c0-415c-81cd-52c384b3b233	f0/a1	NULL	owed	refused:steps-needed:cost:S
 ccb2f92e-69c0-415c-81cd-52c384b3b233	land	land	agreed	-	FX	start	2	0	x:xs:XP:rushwood-grove:land:s1,f:xs:XP:rushwood-grove:land:s1	-	-	-	5f2128bf97e4	-	e31d84bb58af	-	-	2026-11-24	xproof
 ccb39f4a-2684-4eb7-9066-aad81ae08962	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:massacre-girl-known-killer:cast:s1,f:xs:XP:massacre-girl-known-killer:cast:s1	-	-	-	23b491658465	-	db3ff7e6e8db	-	-	2026-11-24	xproof
 ccb39f4a-2684-4eb7-9066-aad81ae08962	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:massacre-girl-known-killer:combat0.attack:s1,f:xs:XP:massacre-girl-known-killer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	db3ff7e6e8db	-	-	2026-11-25	xproof
-ccb39f4a-2684-4eb7-9066-aad81ae08962	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Massacre Girl, Known Killer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ccb39f4a-2684-4eb7-9066-aad81ae08962	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Massacre Girl, Known Killer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ccb39f4a-2684-4eb7-9066-aad81ae08962	static#0.0	static#0.0	agreed	-	X	scen	1	0	Massacre Girl, Known Killer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ccb39f4a-2684-4eb7-9066-aad81ae08962	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:massacre-girl-known-killer:combat0.block:s1,f:xs:XP:massacre-girl-known-killer:combat0.block:s1	-	-	-	3aa6ded33acb	-	db3ff7e6e8db	-	-	2026-11-25	xproof
+ccb39f4a-2684-4eb7-9066-aad81ae08962	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:massacre-girl-known-killer:combat0.block:s1,f:xs:XP:massacre-girl-known-killer:combat0.block:s1	-	-	-	3aa6ded33acb	-	db3ff7e6e8db	-	-	2026-11-25	xproof
+ccb39f4a-2684-4eb7-9066-aad81ae08962	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:massacre-girl-known-killer:static0.0:s1,f:xs:XP:massacre-girl-known-killer:static0.0:s1	-	-	-	3aa6ded33acb	-	db3ff7e6e8db	-	-	2026-11-25	xproof
 ccb64a70-cbdd-4991-a28d-b137032a4f4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ccb66cdc-909a-42c1-a10f-3886e9ed1936	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:realm-seekers:cast:s1,f:xs:XP:realm-seekers:cast:s1	-	-	-	8c0bd19283bb	-	0a72199f17e1	-	-	2026-11-24	xproof
 ccb66cdc-909a-42c1-a10f-3886e9ed1936	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

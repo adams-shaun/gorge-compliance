@@ -32,8 +32,8 @@ c2248d3d-3157-4610-868d-2b3fae2b1ec8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rak
 c2248d3d-3157-4610-868d-2b3fae2b1ec8	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:raking-claws:cast:s1,f:xs:XP:raking-claws:cast:s1	-	-	-	23b491658465	-	aa116c969bac	-	-	2026-11-25	xproof
 c22589e1-1721-43a3-897e-990af6ebcffa	cast	cast-resolve	agreed	-	FX	scen	2	0	Bruse Tarl, Roving Rancher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c22589e1-1721-43a3-897e-990af6ebcffa	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c22589e1-1721-43a3-897e-990af6ebcffa	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bruse-tarl-roving-rancher:f0t1:s1,f:xs:XP:bruse-tarl-roving-rancher:f0t1:s1	-	-	-	23b491658465	-	158b9aed7f75	-	-	2026-11-24	xproof
-c22589e1-1721-43a3-897e-990af6ebcffa	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bruse Tarl, Roving Rancher/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c22589e1-1721-43a3-897e-990af6ebcffa	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bruse-tarl-roving-rancher:static0.0:s1,f:xs:XP:bruse-tarl-roving-rancher:static0.0:s1	-	-	-	3aa6ded33acb	-	158b9aed7f75	-	-	2026-11-25	xproof
+c22589e1-1721-43a3-897e-990af6ebcffa	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:bruse-tarl-roving-rancher:static0.0:s1,f:xs:XP:bruse-tarl-roving-rancher:static0.0:s1	-	-	-	3aa6ded33acb	-	158b9aed7f75	-	-	2026-11-25	xproof
 c2283655-f6b8-4399-ba1f-68a7107f9485	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:diminisher-witch:f0t0:s1,f:xs:XP:diminisher-witch:f0t0:s1	-	-	-	23b491658465	-	d31cf242e76c	-	-	2026-11-25	xproof
 c2283655-f6b8-4399-ba1f-68a7107f9485	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c22b5968-adea-4f74-877d-8ac2ee452769	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -57,7 +57,7 @@ c23543b7-f637-4a7c-9b72-ec411cd5488e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c235fda2-1a8d-4ac7-9a23-784529a520f0	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c235fda2-1a8d-4ac7-9a23-784529a520f0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c23617c9-53f9-4063-8241-b504e9b80cbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bolrac-clan-basher:cast:s1,f:xs:XP:bolrac-clan-basher:cast:s1	-	-	-	23b491658465	-	7d7c7878c600	-	-	2026-11-25	xproof
-c23617c9-53f9-4063-8241-b504e9b80cbe	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bolrac-Clan Basher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c23617c9-53f9-4063-8241-b504e9b80cbe	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:bolrac-clan-basher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7d7c7878c600	-	-	2026-11-25	xproof
 c23617c9-53f9-4063-8241-b504e9b80cbe	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bolrac-Clan Basher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c238ef51-4b46-43d5-a70b-40270a96a1fd	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:hellion-crucible:f0a0:s2,f:xs:XP:hellion-crucible:f0a0:s2	-	-	-	d864b561c9cb	-	449dda90e9de	-	-	2026-11-24	xproof
 c238ef51-4b46-43d5-a70b-40270a96a1fd	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:hellion-crucible:f0a1:s1,f:xs:XP:hellion-crucible:f0a1:s1	-	-	-	d864b561c9cb	-	449dda90e9de	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ c2affd47-2404-44b0-a571-e64e948130eb	cast	cast	owed	harness	-	start	0	0	-	-	-	-	
 c2affd47-2404-44b0-a571-e64e948130eb	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	39b579296283	-	-	2026-11-25	xproof
 c2affd47-2404-44b0-a571-e64e948130eb	f0/t1	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	39b579296283	-	-	2026-11-25	xproof
 c2b082b4-5d9c-4125-b353-d1cf4f334720	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sazh-s-chocobo:cast:s1,f:xs:XP:sazh-s-chocobo:cast:s1	-	-	-	23b491658465	-	b97967d32030	-	-	2026-11-24	xproof
-c2b082b4-5d9c-4125-b353-d1cf4f334720	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sazh's Chocobo/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c2b082b4-5d9c-4125-b353-d1cf4f334720	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sazh-s-chocobo:f0t0:s1,f:xs:XP:sazh-s-chocobo:f0t0:s1	-	-	-	3aa6ded33acb	-	b97967d32030	-	-	2026-11-25	xproof
 c2b2b743-dfc7-439e-8563-1ccce54422bd	cast	cast-resolve	agreed	-	X	scen	1	0	Death to Our Enemies/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c2b2b743-dfc7-439e-8563-1ccce54422bd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Death to Our Enemies/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c2b2b743-dfc7-439e-8563-1ccce54422bd	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Death to Our Enemies/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ c2c47e13-b581-41a8-a4af-542557a6249a	cast	cast-resolve	agreed	-	X	scen	1	0	Il Mh
 c2c47e13-b581-41a8-a4af-542557a6249a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Il Mheg Pixie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c2c47e13-b581-41a8-a4af-542557a6249a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Il Mheg Pixie/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c2c47e13-b581-41a8-a4af-542557a6249a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Il Mheg Pixie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c2c60973-b4d5-43fa-a0c4-b5688b28df05	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c2c60973-b4d5-43fa-a0c4-b5688b28df05	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 c2c60973-b4d5-43fa-a0c4-b5688b28df05	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c2c7a9c2-28f8-4cf0-a042-420f6a4ba8bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tamiyo-s-immobilizer:cast:s1,f:xs:XP:tamiyo-s-immobilizer:cast:s1	-	-	-	ae86f6029288	-	e5b0765d7a9c	-	-	2026-11-24	xproof
 c2c7a9c2-28f8-4cf0-a042-420f6a4ba8bd	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:tamiyo-s-immobilizer:cast:s1,f:xs:XP:tamiyo-s-immobilizer:cast:s1	-	-	-	ae86f6029288	-	e5b0765d7a9c	-	-	2026-11-24	xproof

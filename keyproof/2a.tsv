@@ -49,8 +49,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a41f61b-a419-4b79-a25f-2506eaf05f55	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a483d95-ff99-40b4-9071-6e78585090d5	cast	cast-resolve	agreed	-	X	scen	1	0	Combat Tutorial/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2a4b42b3-6a95-41e1-9741-b35723d8da73	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:giant-beaver:cast:s1,f:xs:XP:giant-beaver:cast:s1	-	-	-	23b491658465	-	c9521d22849c	-	-	2026-11-25	xproof
-2a4b42b3-6a95-41e1-9741-b35723d8da73	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Giant Beaver/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2a4b42b3-6a95-41e1-9741-b35723d8da73	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Giant Beaver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2a4b42b3-6a95-41e1-9741-b35723d8da73	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:giant-beaver:combat0.attack:s1,f:xs:XP:giant-beaver:combat0.attack:s1	-	-	-	3aa6ded33acb	-	c9521d22849c	-	-	2026-11-25	xproof
+2a4b42b3-6a95-41e1-9741-b35723d8da73	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:giant-beaver:combat0.block:s1,f:xs:XP:giant-beaver:combat0.block:s1	-	-	-	3aa6ded33acb	-	c9521d22849c	-	-	2026-11-25	xproof
 2a4b42b3-6a95-41e1-9741-b35723d8da73	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:giant-beaver:f0a0:s1,f:xs:XP:giant-beaver:f0a0:s1	-	-	-	3aa6ded33acb	-	c9521d22849c	-	-	2026-11-25	xproof
 2a4b42b3-6a95-41e1-9741-b35723d8da73	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:giant-beaver:f0a0:s1,f:xs:XP:giant-beaver:f0a0:s1	-	-	-	3aa6ded33acb	-	c9521d22849c	-	-	2026-11-25	xproof
 2a56fe0b-f8a9-499c-bce1-cec6cb3b66f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -79,8 +79,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2a7e68ed-156c-4680-851b-ae8de4a808a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2a7e68ed-156c-4680-851b-ae8de4a808a5	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2a800427-ff8c-4b3c-baee-85211b70656d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aurelia-the-law-above:cast:s1,f:xs:XP:aurelia-the-law-above:cast:s1	-	-	-	23b491658465	-	77d88b75a3cb	-	-	2026-11-25	xproof
-2a800427-ff8c-4b3c-baee-85211b70656d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aurelia, the Law Above/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2a800427-ff8c-4b3c-baee-85211b70656d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aurelia, the Law Above/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2a800427-ff8c-4b3c-baee-85211b70656d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:aurelia-the-law-above:combat0.attack:s1,f:xs:XP:aurelia-the-law-above:combat0.attack:s1	-	-	-	3aa6ded33acb	-	77d88b75a3cb	-	-	2026-11-25	xproof
+2a800427-ff8c-4b3c-baee-85211b70656d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aurelia-the-law-above:combat0.block:s1,f:xs:XP:aurelia-the-law-above:combat0.block:s1	-	-	-	3aa6ded33acb	-	77d88b75a3cb	-	-	2026-11-25	xproof
 2a800427-ff8c-4b3c-baee-85211b70656d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aurelia, the Law Above/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2a800427-ff8c-4b3c-baee-85211b70656d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aurelia, the Law Above/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2a86b70b-34ca-45df-8aa1-c3fb2da72dc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

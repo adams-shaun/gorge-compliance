@@ -32,9 +32,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d3998fc-a68a-4923-a456-b3e43ab6decb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d3998fc-a68a-4923-a456-b3e43ab6decb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2d3e6549-6cc6-434f-a189-ba3b55e64c34	cast	cast-resolve	agreed	-	FX	scen	2	0	Rampaging Baloths/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2d3e6549-6cc6-434f-a189-ba3b55e64c34	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rampaging Baloths/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2d3e6549-6cc6-434f-a189-ba3b55e64c34	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rampaging-baloths:combat0.attack:s1,f:xs:XP:rampaging-baloths:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2352dae6ebb0	-	-	2026-11-25	xproof
 2d3e6549-6cc6-434f-a189-ba3b55e64c34	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:rampaging-baloths:combat0.block:s1,f:xs:XP:rampaging-baloths:combat0.block:s1	-	-	-	3aa6ded33acb	-	2352dae6ebb0	-	-	2026-11-25	xproof
-2d3e6549-6cc6-434f-a189-ba3b55e64c34	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rampaging Baloths/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2d3e6549-6cc6-434f-a189-ba3b55e64c34	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rampaging-baloths:f0t0:s1,f:xs:XP:rampaging-baloths:f0t0:s1	-	-	-	3aa6ded33acb	-	2352dae6ebb0	-	-	2026-11-25	xproof
 2d400c01-d2d0-442a-bc3d-cf106a754dab	cast	cast-resolve	agreed	-	FX	scen	2	0	Not on My Watch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2d41fd1f-4a98-45dd-a3c5-f7c5e0152109	cast	cast-resolve	agreed	-	FX	scen	2	0	Circle of Power/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2d425f5d-326f-46f8-ab84-852b01db4adb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d72454f-3d87-4acc-9f46-b8c579f44af8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2d785e3e-8e19-4eea-b09f-9a30c792dba1	cast	cast-resolve	agreed	-	FX	scen	2	0	Belligerent Yearling/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2d785e3e-8e19-4eea-b09f-9a30c792dba1	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:belligerent-yearling:combat0.attack:s1	-	-	-	3aa6ded33acb	-	08780e8a394c	-	-	2026-11-25	xproof
-2d785e3e-8e19-4eea-b09f-9a30c792dba1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Belligerent Yearling/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2d785e3e-8e19-4eea-b09f-9a30c792dba1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:belligerent-yearling:combat0.block:s1,f:xs:XP:belligerent-yearling:combat0.block:s1	-	-	-	3aa6ded33acb	-	08780e8a394c	-	-	2026-11-25	xproof
 2d785e3e-8e19-4eea-b09f-9a30c792dba1	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:belligerent-yearling:f0t0:s1,f:xs:XP:belligerent-yearling:f0t0:s1	-	-	-	3aa6ded33acb	-	08780e8a394c	-	-	2026-11-25	xproof
 2d7e00b6-12f0-4b03-82a6-50e3d1b5395e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:progenitus:cast:s1,f:xs:XP:progenitus:cast:s1	-	-	-	8c0bd19283bb	-	fa32bdde25a7	-	-	2026-11-24	xproof
 2d80ee9c-55d4-4115-8a58-63e8460f9795	cast	cast-resolve	agreed	-	X	scen	1	0	Desculpting Blast/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

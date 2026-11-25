@@ -17,7 +17,7 @@ e90e519d-023e-4d19-85ad-9972a76df3ba	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:tr
 e90e519d-023e-4d19-85ad-9972a76df3ba	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e90f298f-c54b-4fe8-82db-5b9153a57712	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zoyowa-lava-tongue:cast:s1,f:xs:XP:zoyowa-lava-tongue:cast:s1	-	-	-	23b491658465	-	0d9abf3dc340	-	-	2026-11-25	xproof
 e90f298f-c54b-4fe8-82db-5b9153a57712	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:zoyowa-lava-tongue:combat0.attack:s1,f:xs:XP:zoyowa-lava-tongue:combat0.attack:s1	-	-	-	3aa6ded33acb	-	0d9abf3dc340	-	-	2026-11-25	xproof
-e90f298f-c54b-4fe8-82db-5b9153a57712	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Zoyowa Lava-Tongue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e90f298f-c54b-4fe8-82db-5b9153a57712	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:zoyowa-lava-tongue:combat0.block:s1,f:xs:XP:zoyowa-lava-tongue:combat0.block:s1	-	-	-	3aa6ded33acb	-	0d9abf3dc340	-	-	2026-11-25	xproof
 e90f298f-c54b-4fe8-82db-5b9153a57712	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Zoyowa Lava-Tongue/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e91053ae-682a-4bbe-8394-fd65e626bacc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e91053ae-682a-4bbe-8394-fd65e626bacc	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -41,7 +41,7 @@ e91e7f62-0788-445e-ba93-2c9d233ec3ab	f0/a0	NULL	owed	refused:steps-needed:cost:E
 e9208fc2-616d-4c32-bd66-76a8bf85a6b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9208fc2-616d-4c32-bd66-76a8bf85a6b5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9208fc2-616d-4c32-bd66-76a8bf85a6b5	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-e920c955-66f5-4c6e-a2a8-8b282f9e456e	cast	cast-resolve	agreed	-	X	scen	1	0	Leaping Ambush/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e920c955-66f5-4c6e-a2a8-8b282f9e456e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leaping-ambush:cast:s1,f:xs:XP:leaping-ambush:cast:s1	-	-	-	3aa6ded33acb	-	badb88f002b9	-	-	2026-11-25	xproof
 e921839f-9d91-41a9-bc89-016af3c757aa	cast	cast-resolve	agreed	-	X	scen	1	0	Consult the Star Charts/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e92185f8-579c-4645-9cb8-ef5deb9eebc8	cast	cast-resolve	agreed	-	X	scen	1	0	Sandworm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e92185f8-579c-4645-9cb8-ef5deb9eebc8	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof

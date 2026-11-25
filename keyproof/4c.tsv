@@ -70,9 +70,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c48de92-e053-4af7-b936-d7ec0875e0d3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:ambush-wolf:f0t0:s2,f:xs:XP:ambush-wolf:f0t0:s2	-	-	-	e07cf3a05ba5	-	fa1d0eda7da5	-	-	2026-11-24	xproof
 4c48de92-e053-4af7-b936-d7ec0875e0d3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:ambush-wolf:f0t0:s2,f:xs:XP:ambush-wolf:f0t0:s2	-	-	-	e07cf3a05ba5	-	fa1d0eda7da5	-	-	2026-11-24	xproof
 4c495e94-3194-47c7-8129-dd0a0f915daa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coveted-falcon:cast:s1,f:xs:XP:coveted-falcon:cast:s1	-	-	-	23b491658465	-	052ad80bcc97	-	-	2026-11-24	xproof
-4c495e94-3194-47c7-8129-dd0a0f915daa	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Coveted Falcon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c495e94-3194-47c7-8129-dd0a0f915daa	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Coveted Falcon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4c495e94-3194-47c7-8129-dd0a0f915daa	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:coveted-falcon:f0t0:s1,f:xs:XP:coveted-falcon:f0t0:s1	-	-	-	23b491658465	-	052ad80bcc97	-	-	2026-11-24	xproof
+4c495e94-3194-47c7-8129-dd0a0f915daa	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:coveted-falcon:combat0.attack:s1,f:xs:XP:coveted-falcon:combat0.attack:s1	-	-	-	3aa6ded33acb	-	052ad80bcc97	-	-	2026-11-25	xproof
+4c495e94-3194-47c7-8129-dd0a0f915daa	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:coveted-falcon:combat0.block:s1,f:xs:XP:coveted-falcon:combat0.block:s1	-	-	-	3aa6ded33acb	-	052ad80bcc97	-	-	2026-11-25	xproof
+4c495e94-3194-47c7-8129-dd0a0f915daa	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:coveted-falcon:combat0.attack:s1,f:xs:XP:coveted-falcon:combat0.attack:s1	-	-	-	3aa6ded33acb	-	052ad80bcc97	-	-	2026-11-25	xproof
 4c495e94-3194-47c7-8129-dd0a0f915daa	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Coveted Falcon/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c502f1b-7361-48c0-8def-0d3b3e9ff628	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stitched-mangler:f0t0:s1,f:xs:XP:stitched-mangler:f0t0:s1	-	-	-	d864b561c9cb	-	563b8c5f4cfb	-	-	2026-11-24	xproof
 4c502f1b-7361-48c0-8def-0d3b3e9ff628	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stitched-mangler:f0t0:s1,f:xs:XP:stitched-mangler:f0t0:s1	-	-	-	d864b561c9cb	-	563b8c5f4cfb	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c9d9d47-1eb6-4981-ba83-d5ec04906e71	cast	cast-resolve	agreed	-	FX	scen	2	0	Systems Override/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4c9f5359-249e-488b-9a7e-db1a43c2b1f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ca31946-72ef-4c45-a7bb-494a99dc2982	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4ca31946-72ef-4c45-a7bb-494a99dc2982	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4ca31946-72ef-4c45-a7bb-494a99dc2982	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:wildwood-tracker:f0t0:s1,f:xs:XP:wildwood-tracker:f0t0:s1	-	-	-	3aa6ded33acb	-	c1e5a4be6cd6	-	-	2026-11-25	xproof
 4ca31946-72ef-4c45-a7bb-494a99dc2982	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 4ca3306b-06f7-4a09-b904-f5540d11ddf1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ca5d2c7-621b-4d5e-9bf4-ff3ae271ba44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4caa97df-1f6c-4806-bf14-e589cc1badb5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foreshadow:cast:s1,f:xs:XP:foreshadow:cast:s1	-	-	-	8c0bd19283bb	-	3db31b7ed446	-	-	2026-11-24	xproof
 4cab6ea8-4a80-4b34-b758-7f2aa4d540e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4cab6ea8-4a80-4b34-b758-7f2aa4d540e4	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-4cb63198-29b5-4607-bd4a-f449807fb764	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:overzealous-muscle:cast:s1,f:xs:XP:overzealous-muscle:cast:s1	-	-	-	23b491658465	-	d42e66e6f28e	-	-	2026-11-25	xproof
+4cb63198-29b5-4607-bd4a-f449807fb764	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:overzealous-muscle:cast:s1,f:xs:XP:overzealous-muscle:cast:s1	-	-	-	3aa6ded33acb	-	d42e66e6f28e	-	-	2026-11-25	xproof
 4cb63198-29b5-4607-bd4a-f449807fb764	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Overzealous Muscle/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4cb86fb6-3e06-4c67-aee0-d5952178f664	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nicanzil-current-conductor:cast:s1,f:xs:XP:nicanzil-current-conductor:cast:s1	-	-	-	23b491658465	-	09315e070103	-	-	2026-11-24	xproof
 4cb86fb6-3e06-4c67-aee0-d5952178f664	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nicanzil, Current Conductor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

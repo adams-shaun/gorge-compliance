@@ -84,9 +84,9 @@ e15c78d4-6fb1-4bd3-8219-c66b83fcaba1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vault
 e15db59f-4477-4139-8e7e-741ab4584e7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e15db59f-4477-4139-8e7e-741ab4584e7f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:akroan-hoplite:f0t0:s1,f:xs:XP:akroan-hoplite:f0t0:s1	-	-	-	d864b561c9cb	-	13d62f0e59b8	-	-	2026-11-24	xproof
 e1626880-0fa3-441a-9978-b293fc87c418	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lightning-security-sergeant:cast:s1,f:xs:XP:lightning-security-sergeant:cast:s1	-	-	-	23b491658465	-	1bdcce75f31d	-	-	2026-11-24	xproof
-e1626880-0fa3-441a-9978-b293fc87c418	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lightning, Security Sergeant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e1626880-0fa3-441a-9978-b293fc87c418	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lightning-security-sergeant:combat0.attack:s1,f:xs:XP:lightning-security-sergeant:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1bdcce75f31d	-	-	2026-11-25	xproof
 e1626880-0fa3-441a-9978-b293fc87c418	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lightning-security-sergeant:combat0.block:s1,f:xs:XP:lightning-security-sergeant:combat0.block:s1	-	-	-	3aa6ded33acb	-	1bdcce75f31d	-	-	2026-11-25	xproof
-e1626880-0fa3-441a-9978-b293fc87c418	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lightning, Security Sergeant/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e1626880-0fa3-441a-9978-b293fc87c418	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:lightning-security-sergeant:combat0.attack:s1,f:xs:XP:lightning-security-sergeant:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1bdcce75f31d	-	-	2026-11-25	xproof
 e1635acd-ed1e-4038-a11a-6518df285253	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:call-of-the-conclave:cast:s1,f:xs:XP:call-of-the-conclave:cast:s1	-	-	-	d864b561c9cb	-	65af75ebeeb9	-	-	2026-11-24	xproof
 e16cbcbd-b03a-404c-8d1e-0a05848181d9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e16cec8b-e0ac-44ee-91cf-658e204ca120	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ e1a2bd31-b800-47cd-8866-1b849a601b09	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	
 e1a41091-6ff1-42bb-b248-90040107efe1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1a41091-6ff1-42bb-b248-90040107efe1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kuldotha-cackler:f0t0:s1,f:xs:XP:kuldotha-cackler:f0t0:s1	-	-	-	ae86f6029288	-	1ab1b5619933	-	-	2026-11-24	xproof
 e1a48505-acbe-4eb4-8e83-3c76cf7a8829	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jhovall-queen:cast:s1,f:xs:XP:jhovall-queen:cast:s1	-	-	-	5f2128bf97e4	-	21e82a589779	-	-	2026-11-24	xproof
-e1a5c389-6a56-4da7-b7c4-e26fdec224e5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e1a5c389-6a56-4da7-b7c4-e26fdec224e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inevitable-end:cast:s1,f:xs:XP:inevitable-end:cast:s1	-	-	-	3aa6ded33acb	-	4aba214f12df	-	-	2026-11-25	xproof
 e1a64bba-eaff-4f59-b85d-7df0b13e2e6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1a64bba-eaff-4f59-b85d-7df0b13e2e6b	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:clockwork-vorrac:f0t0:s1,f:xs:XP:clockwork-vorrac:f0t0:s1	-	-	-	23b491658465	-	184f9ac8dcf0	-	-	2026-11-25	xproof
 e1a64bba-eaff-4f59-b85d-7df0b13e2e6b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

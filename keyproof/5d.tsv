@@ -30,9 +30,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d22ab00-b454-4407-93d7-65b47f56cbaa	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5d24525f-dbac-434b-bda7-ff8af55245ff	cast	cast	agreed	-	F	start	4	0	f:xs:XP:glint-hawk:cast:s1	-	-	-	d864b561c9cb	-	a11bf227abcc	-	-	2026-11-24	xproof
 5d24525f-dbac-434b-bda7-ff8af55245ff	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:glint-hawk:cast:s1	-	-	-	d864b561c9cb	-	a11bf227abcc	-	-	2026-11-24	xproof
-5d24fb6b-7176-407c-b917-6c88a6da40df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nezumi-linkbreaker:cast:s1,f:xs:XP:nezumi-linkbreaker:cast:s1	-	-	-	23b491658465	-	247a80a0836d	-	-	2026-11-25	xproof
-5d24fb6b-7176-407c-b917-6c88a6da40df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nezumi-linkbreaker:f0t0:s1,f:xs:XP:nezumi-linkbreaker:f0t0:s1	-	-	-	23b491658465	-	247a80a0836d	-	-	2026-11-25	xproof
-5d258409-28d3-4eac-9f1a-3e494db818bf	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5d24fb6b-7176-407c-b917-6c88a6da40df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nezumi-linkbreaker:cast:s1,f:xs:XP:nezumi-linkbreaker:cast:s1	-	-	-	3aa6ded33acb	-	247a80a0836d	-	-	2026-11-25	xproof
+5d24fb6b-7176-407c-b917-6c88a6da40df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nezumi-linkbreaker:f0t0:s1,f:xs:XP:nezumi-linkbreaker:f0t0:s1	-	-	-	3aa6ded33acb	-	247a80a0836d	-	-	2026-11-25	xproof
+5d258409-28d3-4eac-9f1a-3e494db818bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cloak-of-confusion:cast:s1,f:xs:XP:cloak-of-confusion:cast:s1	-	-	-	3aa6ded33acb	-	fb14f95879a2	-	-	2026-11-25	xproof
 5d258409-28d3-4eac-9f1a-3e494db818bf	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 5d2a9859-1353-4431-9343-f5999450acd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d2acd3e-4782-42e3-bcd5-80f8b439cc28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -68,8 +68,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d520dd4-7986-41fa-ab94-9226da751668	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:djeru-with-eyes-open:f0t0:s1,f:xs:XP:djeru-with-eyes-open:f0t0:s1	-	-	-	d864b561c9cb	-	a6f2dc5be24c	-	-	2026-11-24	xproof
 5d520dd4-7986-41fa-ab94-9226da751668	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:djeru-with-eyes-open:f0t0:s1,f:xs:XP:djeru-with-eyes-open:f0t0:s1	-	-	-	d864b561c9cb	-	a6f2dc5be24c	-	-	2026-11-24	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mine-raider:f0t0:s1,f:xs:XP:mine-raider:f0t0:s1	-	-	-	3aa6ded33acb	-	16a2818a7867	-	-	2026-11-25	xproof
-5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mine Raider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mine Raider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:mine-raider:combat0.attack:s1	-	-	-	3aa6ded33acb	-	16a2818a7867	-	-	2026-11-25	xproof
+5d575b78-3d7b-4860-abc3-e99e429279a1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mine-raider:combat0.block:s1,f:xs:XP:mine-raider:combat0.block:s1	-	-	-	3aa6ded33acb	-	16a2818a7867	-	-	2026-11-25	xproof
 5d575b78-3d7b-4860-abc3-e99e429279a1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mine-raider:f0t0:s1,f:xs:XP:mine-raider:f0t0:s1	-	-	-	3aa6ded33acb	-	16a2818a7867	-	-	2026-11-25	xproof
 5d58aefe-a3df-4e0a-b679-b967cd5fd2c6	cast	cast-resolve	agreed	-	X	scen	1	0	Boggart Cursecrafter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5d58aefe-a3df-4e0a-b679-b967cd5fd2c6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Boggart Cursecrafter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -104,8 +104,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d814b0b-82e8-4145-87e1-4fed44d16465	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lone-revenant:cast:s1,f:xs:XP:lone-revenant:cast:s1	-	-	-	d864b561c9cb	-	c7cc6566acf9	-	-	2026-11-24	xproof
 5d814b0b-82e8-4145-87e1-4fed44d16465	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5d840e49-3ca5-4e4f-9152-a365ad2b1773	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:soaring-sandwing:f0t0:s1,f:xs:XP:soaring-sandwing:f0t0:s1	-	-	-	e07cf3a05ba5	-	16f4d3a971c8	-	-	2026-11-24	xproof
-5d840e49-3ca5-4e4f-9152-a365ad2b1773	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Soaring Sandwing/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d840e49-3ca5-4e4f-9152-a365ad2b1773	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Soaring Sandwing/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5d840e49-3ca5-4e4f-9152-a365ad2b1773	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:soaring-sandwing:combat0.attack:s1,f:xs:XP:soaring-sandwing:combat0.attack:s1	-	-	-	3aa6ded33acb	-	16f4d3a971c8	-	-	2026-11-25	xproof
+5d840e49-3ca5-4e4f-9152-a365ad2b1773	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:soaring-sandwing:combat0.block:s1,f:xs:XP:soaring-sandwing:combat0.block:s1	-	-	-	3aa6ded33acb	-	16f4d3a971c8	-	-	2026-11-25	xproof
 5d840e49-3ca5-4e4f-9152-a365ad2b1773	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:soaring-sandwing:f0t0:s2,f:xs:XP:soaring-sandwing:f0t0:s2	-	-	-	e07cf3a05ba5	-	16f4d3a971c8	-	-	2026-11-24	xproof
 5d840e49-3ca5-4e4f-9152-a365ad2b1773	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:soaring-sandwing:f0t0:s1,f:xs:XP:soaring-sandwing:f0t0:s1	-	-	-	e07cf3a05ba5	-	16f4d3a971c8	-	-	2026-11-24	xproof
 5d8acafe-c13e-43ca-a89e-0cfd12d95662	cast	cast	agreed	-	F	start	2	0	f:xs:XP:titan-of-industry:f0t0:s1	-	-	-	3aa6ded33acb	-	880473cd20c8	-	-	2026-11-25	xproof
@@ -132,9 +132,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d998c09-7d89-4265-ada4-6d80cbf56dae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d998c09-7d89-4265-ada4-6d80cbf56dae	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:cast:s1,f:xs:XP:syr-alin-the-lion-s-claw:cast:s1	-	-	-	23b491658465	-	d4670641a491	-	-	2026-11-24	xproof
-5d9a4905-4a26-410e-936c-56de849e9ca3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Syr Alin, the Lion's Claw/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5d9a4905-4a26-410e-936c-56de849e9ca3	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d4670641a491	-	-	2026-11-25	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Syr Alin, the Lion's Claw/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5d9a4905-4a26-410e-936c-56de849e9ca3	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:f0t0:s1	-	-	-	23b491658465	-	d4670641a491	-	-	2026-11-24	xproof
+5d9a4905-4a26-410e-936c-56de849e9ca3	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d4670641a491	-	-	2026-11-25	xproof
 5da1f1af-d2e5-4e14-914b-d93f15626636	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5da1f1af-d2e5-4e14-914b-d93f15626636	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5da2e5c7-ec04-4f1f-bb2f-7572f877393c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

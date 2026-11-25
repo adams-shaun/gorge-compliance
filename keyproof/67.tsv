@@ -113,8 +113,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 679480aa-f9ad-4a6c-bd79-db9f9f75433d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bespoke Bō/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6798163a-864f-4844-96b1-77585a7e7ab4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 679841ad-f3ac-48e2-ba11-2cf6d78642b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raging-redcap:cast:s1,f:xs:XP:raging-redcap:cast:s1	-	-	-	23b491658465	-	3053f739ba33	-	-	2026-11-24	xproof
-679841ad-f3ac-48e2-ba11-2cf6d78642b4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Raging Redcap/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-679841ad-f3ac-48e2-ba11-2cf6d78642b4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Raging Redcap/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+679841ad-f3ac-48e2-ba11-2cf6d78642b4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:raging-redcap:combat0.attack:s1,f:xs:XP:raging-redcap:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3053f739ba33	-	-	2026-11-25	xproof
+679841ad-f3ac-48e2-ba11-2cf6d78642b4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:raging-redcap:combat0.block:s1,f:xs:XP:raging-redcap:combat0.block:s1	-	-	-	3aa6ded33acb	-	3053f739ba33	-	-	2026-11-25	xproof
 6799217a-030c-4c1b-9de3-99725c6ef4cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 679d5a1d-8da8-4142-924b-97b359f55309	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 679d5a1d-8da8-4142-924b-97b359f55309	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 67a98359-6f02-4556-ad47-c01b643686d6	f0/t0	Cycled	agreed	-	FX	start	1	0	x:xs:XP:decree-of-justice:cast:s2,f:xs:XP:decree-of-justice:cast:s2	-	-	-	d864b561c9cb	-	41667b2359fb	-	-	2026-11-24	xproof
 67aa946d-e694-494e-ba0c-44880d5bc03e	cast	cast-resolve	agreed	-	FX	scen	2	0	Captain America, Living Legend/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67aa946d-e694-494e-ba0c-44880d5bc03e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:captain-america-living-legend:combat0.attack:s1,f:xs:XP:captain-america-living-legend:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1bb81b1a7e37	-	-	2026-11-25	xproof
-67aa946d-e694-494e-ba0c-44880d5bc03e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Captain America, Living Legend/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+67aa946d-e694-494e-ba0c-44880d5bc03e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:captain-america-living-legend:combat0.block:s1,f:xs:XP:captain-america-living-legend:combat0.block:s1	-	-	-	3aa6ded33acb	-	1bb81b1a7e37	-	-	2026-11-25	xproof
 67aa946d-e694-494e-ba0c-44880d5bc03e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Captain America, Living Legend/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67ab82de-1167-42f5-90bd-21c63edcc712	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iron-man-titan-of-innovation:cast:s1,f:xs:XP:iron-man-titan-of-innovation:cast:s1	-	-	-	8c0bd19283bb	-	bf15b77a0246	-	-	2026-11-24	xproof
 67ab82de-1167-42f5-90bd-21c63edcc712	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:iron-man-titan-of-innovation:cast:s1,f:xs:XP:iron-man-titan-of-innovation:cast:s1	-	-	-	8c0bd19283bb	-	bf15b77a0246	-	-	2026-11-24	xproof

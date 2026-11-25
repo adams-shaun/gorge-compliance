@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 07155470-c5ab-41ae-ade3-bdc06d357379	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nanoform Sentinel/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07159efc-c69f-4164-a8ca-9da641dbf702	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0715e860-3b3b-4331-9718-207973e94fee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tatyova-benthic-druid:cast:s1,f:xs:XP:tatyova-benthic-druid:cast:s1	-	-	-	3aa6ded33acb	-	8b9b5702a231	-	-	2026-11-25	xproof
-0715e860-3b3b-4331-9718-207973e94fee	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tatyova, Benthic Druid/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0715e860-3b3b-4331-9718-207973e94fee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tatyova-benthic-druid:f0t0:s1,f:xs:XP:tatyova-benthic-druid:f0t0:s1	-	-	-	3aa6ded33acb	-	8b9b5702a231	-	-	2026-11-25	xproof
 071733a2-6dc6-4b6e-8ed6-a130d14657fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 071e15b5-6d21-4695-9ad0-69f40eb8f4ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sporoloth-ancient:f0t0:s1,f:xs:XP:sporoloth-ancient:f0t0:s1	-	-	-	3aa6ded33acb	-	7f7591dc71c7	-	-	2026-11-25	xproof
 071e15b5-6d21-4695-9ad0-69f40eb8f4ef	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sporoloth-ancient:f0t0:s1,f:xs:XP:sporoloth-ancient:f0t0:s1	-	-	-	3aa6ded33acb	-	7f7591dc71c7	-	-	2026-11-25	xproof
@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0734272d-5cce-476d-a663-fbf0bd7cd3a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0734272d-5cce-476d-a663-fbf0bd7cd3a7	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 073f12d1-eaa1-4d08-bc1d-b216a3dc0c67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gargantuan-leech:cast:s1,f:xs:XP:gargantuan-leech:cast:s1	-	-	-	23b491658465	-	86b91b812734	-	-	2026-11-24	xproof
-073f12d1-eaa1-4d08-bc1d-b216a3dc0c67	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gargantuan Leech/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+073f12d1-eaa1-4d08-bc1d-b216a3dc0c67	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gargantuan-leech:combat0.attack:s1,f:xs:XP:gargantuan-leech:combat0.attack:s1	-	-	-	3aa6ded33acb	-	86b91b812734	-	-	2026-11-25	xproof
 073f12d1-eaa1-4d08-bc1d-b216a3dc0c67	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gargantuan-leech:combat0.block:s1,f:xs:XP:gargantuan-leech:combat0.block:s1	-	-	-	3aa6ded33acb	-	86b91b812734	-	-	2026-11-25	xproof
 073f12d1-eaa1-4d08-bc1d-b216a3dc0c67	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gargantuan Leech/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07462467-e4a3-409e-bcef-9cc92ca4c299	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 07c20708-c305-46e7-a98e-c99f54aeafec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 07c3e91c-3593-4797-b7be-ef4fb2913cef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dream-spoilers:cast:s1,f:xs:XP:dream-spoilers:cast:s1	-	-	-	23b491658465	-	f3c897cf4ba6	-	-	2026-11-24	xproof
 07c3e91c-3593-4797-b7be-ef4fb2913cef	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dream-spoilers:combat0.attack:s1,f:xs:XP:dream-spoilers:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f3c897cf4ba6	-	-	2026-11-25	xproof
-07c3e91c-3593-4797-b7be-ef4fb2913cef	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dream Spoilers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+07c3e91c-3593-4797-b7be-ef4fb2913cef	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dream-spoilers:combat0.block:s1,f:xs:XP:dream-spoilers:combat0.block:s1	-	-	-	3aa6ded33acb	-	f3c897cf4ba6	-	-	2026-11-25	xproof
 07c3e91c-3593-4797-b7be-ef4fb2913cef	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dream Spoilers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07c7193e-f591-4aee-a3cc-3a2c52a38f9b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	01f20403a929	-	-	2026-11-24	xproof
 07c7193e-f591-4aee-a3cc-3a2c52a38f9b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	01f20403a929	-	-	2026-11-24	xproof

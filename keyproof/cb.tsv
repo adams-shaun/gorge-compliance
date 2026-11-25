@@ -100,9 +100,9 @@ cb952c81-c7bb-4670-938d-296d35551986	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cb952c81-c7bb-4670-938d-296d35551986	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cb952c81-c7bb-4670-938d-296d35551986	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 cb97da84-1d13-4795-b68a-2bf111a50067	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herald-of-faith:cast:s1,f:xs:XP:herald-of-faith:cast:s1	-	-	-	8c0bd19283bb	-	99fe02228b47	-	-	2026-11-24	xproof
-cb97da84-1d13-4795-b68a-2bf111a50067	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Herald of Faith/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb97da84-1d13-4795-b68a-2bf111a50067	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Herald of Faith/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cb97da84-1d13-4795-b68a-2bf111a50067	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:herald-of-faith:f0t0:s1,f:xs:XP:herald-of-faith:f0t0:s1	-	-	-	3aa6ded33acb	-	99fe02228b47	-	-	2026-11-25	xproof
+cb97da84-1d13-4795-b68a-2bf111a50067	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:herald-of-faith:combat0.attack:s1,f:xs:XP:herald-of-faith:combat0.attack:s1	-	-	-	3aa6ded33acb	-	99fe02228b47	-	-	2026-11-25	xproof
+cb97da84-1d13-4795-b68a-2bf111a50067	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:herald-of-faith:combat0.block:s1,f:xs:XP:herald-of-faith:combat0.block:s1	-	-	-	3aa6ded33acb	-	99fe02228b47	-	-	2026-11-25	xproof
+cb97da84-1d13-4795-b68a-2bf111a50067	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:herald-of-faith:combat0.attack:s1,f:xs:XP:herald-of-faith:combat0.attack:s1	-	-	-	3aa6ded33acb	-	99fe02228b47	-	-	2026-11-25	xproof
 cb9994b9-924b-4e10-9075-9cfbec88f2bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:luminarch-aspirant:cast:s1,f:xs:XP:luminarch-aspirant:cast:s1	-	-	-	ae86f6029288	-	e74f8629d82e	-	-	2026-11-24	xproof
 cb9994b9-924b-4e10-9075-9cfbec88f2bf	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:luminarch-aspirant:cast:s1,f:xs:XP:luminarch-aspirant:cast:s1	-	-	-	ae86f6029288	-	e74f8629d82e	-	-	2026-11-24	xproof
 cb99c675-adc5-4dad-8be8-524f5f921213	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,8 +144,8 @@ cbbb5c0c-e953-410d-88c6-8fedb719e94c	cast	cast-resolve	agreed	-	X	scen	1	0	Audie
 cbbca098-0b33-4693-8ea7-a2005b79af3d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dwarven-bloodboiler:cast:s1,f:xs:XP:dwarven-bloodboiler:cast:s1	-	-	-	fc71ca68c5ac	-	494171a9638f	-	-	2026-11-24	xproof
 cbbca098-0b33-4693-8ea7-a2005b79af3d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dwarven-bloodboiler:cast:s1,f:xs:XP:dwarven-bloodboiler:cast:s1	-	-	-	fc71ca68c5ac	-	494171a9638f	-	-	2026-11-24	xproof
 cbbd507e-06da-4b47-befc-61db8c92539e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marauding-brinefang:cast:s1,f:xs:XP:marauding-brinefang:cast:s1	-	-	-	23b491658465	-	587bf17233d4	-	-	2026-11-24	xproof
-cbbd507e-06da-4b47-befc-61db8c92539e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Marauding Brinefang/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cbbd507e-06da-4b47-befc-61db8c92539e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Marauding Brinefang/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cbbd507e-06da-4b47-befc-61db8c92539e	f0/a0	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:marauding-brinefang:f0a0:s1	-	-	-	3aa6ded33acb	-	587bf17233d4	-	-	2026-11-25	xproof
+cbbd507e-06da-4b47-befc-61db8c92539e	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:marauding-brinefang:f0t0:s1,f:xs:XP:marauding-brinefang:f0t0:s1	-	-	-	3aa6ded33acb	-	587bf17233d4	-	-	2026-11-25	xproof
 cbbe535b-12d6-4e6c-8b26-9220f06a1604	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beseech-the-mirror:cast:s1,f:xs:XP:beseech-the-mirror:cast:s1	-	-	-	23b491658465	-	d7870072e9c4	-	-	2026-11-24	xproof
 cbbea4e2-4b36-4965-89b6-00d2a564f146	cast	cast-resolve	agreed	-	FX	scen	2	0	First-Time Flyer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cbbea4e2-4b36-4965-89b6-00d2a564f146	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	First-Time Flyer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -170,8 +170,8 @@ cbcc2577-7556-4174-83ff-9e00611412b3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 cbcc2577-7556-4174-83ff-9e00611412b3	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cbd483b5-5554-43ed-a729-535d01b0d5d3	cast	cast-resolve	agreed	-	X	scen	1	0	Jace Reawakened/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cbd483b5-5554-43ed-a729-535d01b0d5d3	f0/a0	Draw	agreed	-	FX	start	1	0	x:xs:XP:theater-of-horrors:f0t0:s2,f:xs:XP:theater-of-horrors:f0t0:s2	-	-	-	3aa6ded33acb	-	80c8f57d7b35	-	-	2026-11-25	xproof
-cbd483b5-5554-43ed-a729-535d01b0d5d3	f0/a1	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:theater-of-horrors:f0t0:s1,f:xs:XP:theater-of-horrors:f0t0:s1	-	-	-	3aa6ded33acb	-	80c8f57d7b35	-	-	2026-11-25	xproof
-cbd483b5-5554-43ed-a729-535d01b0d5d3	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Jace Reawakened/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cbd483b5-5554-43ed-a729-535d01b0d5d3	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:jace-reawakened:f0a1:s1,f:xs:XP:jace-reawakened:f0a1:s1	-	-	-	3aa6ded33acb	-	80c8f57d7b35	-	-	2026-11-25	xproof
+cbd483b5-5554-43ed-a729-535d01b0d5d3	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:jace-reawakened:f0a2:s1,f:xs:XP:jace-reawakened:f0a2:s1	-	-	-	3aa6ded33acb	-	80c8f57d7b35	-	-	2026-11-25	xproof
 cbd483b5-5554-43ed-a729-535d01b0d5d3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Jace Reawakened/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cbd4e160-9eb1-42de-aee8-6f1d1398f633	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbd4e160-9eb1-42de-aee8-6f1d1398f633	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

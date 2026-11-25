@@ -40,8 +40,8 @@ ac2dd694-d2f1-4025-8400-12332bdc882a	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ac2dd694-d2f1-4025-8400-12332bdc882a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac30745c-addf-433a-be73-d3d9f4cc4328	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:homarid-explorer:f0t0:s1,f:xs:XP:homarid-explorer:f0t0:s1	-	-	-	d864b561c9cb	-	3141901bc809	-	-	2026-11-24	xproof
 ac30745c-addf-433a-be73-d3d9f4cc4328	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:homarid-explorer:f0t0:s1,f:xs:XP:homarid-explorer:f0t0:s1	-	-	-	d864b561c9cb	-	3141901bc809	-	-	2026-11-24	xproof
-ac34bc09-ba8a-4bfb-bc45-e9c3e4d7bdc0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ac34bc09-ba8a-4bfb-bc45-e9c3e4d7bdc0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ac34bc09-ba8a-4bfb-bc45-e9c3e4d7bdc0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sentinel-s-mark:f0t0:s1,f:xs:XP:sentinel-s-mark:f0t0:s1	-	-	-	3aa6ded33acb	-	cb459e842539	-	-	2026-11-25	xproof
+ac34bc09-ba8a-4bfb-bc45-e9c3e4d7bdc0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sentinel-s-mark:f0t0:s1,f:xs:XP:sentinel-s-mark:f0t0:s1	-	-	-	3aa6ded33acb	-	cb459e842539	-	-	2026-11-25	xproof
 ac3d07cd-88c4-4e22-9d86-f92d34f406d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ac3d07cd-88c4-4e22-9d86-f92d34f406d4	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ac3fb7ef-709c-40be-a75b-1b438708388d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ acac15c8-877d-49d4-9b42-90181c05a684	static#0.0	static#0.0	agreed	-	X	scen	1	0	C
 acaed013-2e74-47e3-a687-084388b37a7b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-lit-nourisher:cast:s1,f:xs:XP:ghost-lit-nourisher:cast:s1	-	-	-	64a08ba7d913	-	14a270e74a69	-	-	2026-11-24	xproof
 acaed013-2e74-47e3-a687-084388b37a7b	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 acaed013-2e74-47e3-a687-084388b37a7b	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-acb0084d-3b09-4d2a-a4c1-848c92588845	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+acb0084d-3b09-4d2a-a4c1-848c92588845	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 acb0fa6a-89c8-4957-881e-c61659e86f97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acb57162-7093-4a3c-9818-d3b61ce757c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acb58839-2b26-4724-9e9b-b49b8217b13f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flinthoof-boar:cast:s1,f:xs:XP:flinthoof-boar:cast:s1	-	-	-	d864b561c9cb	-	263d5cca7639	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ acba24c1-168c-473b-96bb-1ba836c69f22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 acba24c1-168c-473b-96bb-1ba836c69f22	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 acc07d0d-141b-4169-9643-6f20739e91be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acc091c0-3891-41b9-b5f6-7537fe9493fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-acc091c0-3891-41b9-b5f6-7537fe9493fe	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+acc091c0-3891-41b9-b5f6-7537fe9493fe	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:jungle-creeper:f0a0:s1,f:xs:XP:jungle-creeper:f0a0:s1	-	-	-	3aa6ded33acb	-	9c03e2c858ba	-	-	2026-11-25	xproof
 acc7d3b8-60f2-4f3b-9cf9-b6b39627d8f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acc7d3b8-60f2-4f3b-9cf9-b6b39627d8f6	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 acc842a4-26e8-435a-b717-c1043b581ff8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ acd382ee-94fb-4a29-b14e-c2a3c6dde7e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cap
 acd382ee-94fb-4a29-b14e-c2a3c6dde7e0	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 acd81d2c-e438-44db-86eb-32fc9cb3fd8f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rampaging-growth:cast:s1,f:xs:XP:rampaging-growth:cast:s1	-	-	-	8c0bd19283bb	-	c72aa1915c6a	-	-	2026-11-24	xproof
 acd881eb-f3b4-4174-9fc2-e3c7c213886b	cast	cast-resolve	agreed	-	X	scen	1	0	Boomerang Basics/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-acdbaa99-18c9-4aa1-8797-69837ca7d8f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rotting-regisaur:cast:s1,f:xs:XP:rotting-regisaur:cast:s1	-	-	-	d864b561c9cb	-	173ec286b779	-	-	2026-11-24	xproof
-acdbaa99-18c9-4aa1-8797-69837ca7d8f5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+acdbaa99-18c9-4aa1-8797-69837ca7d8f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rotting-regisaur:f0t0:s1,f:xs:XP:rotting-regisaur:f0t0:s1	-	-	-	3aa6ded33acb	-	173ec286b779	-	-	2026-11-25	xproof
+acdbaa99-18c9-4aa1-8797-69837ca7d8f5	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:rotting-regisaur:f0t0:s1,f:xs:XP:rotting-regisaur:f0t0:s1	-	-	-	3aa6ded33acb	-	173ec286b779	-	-	2026-11-25	xproof
 acdc17cf-8f8c-42ee-bede-481ce00cf4bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acdc17cf-8f8c-42ee-bede-481ce00cf4bf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 acdc17cf-8f8c-42ee-bede-481ce00cf4bf	f0/a1	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:rakshasa-deathdealer:f0a1:s1,f:xs:XP:rakshasa-deathdealer:f0a1:s1	-	-	-	d864b561c9cb	-	6bfbbdfa270a	-	-	2026-11-24	xproof

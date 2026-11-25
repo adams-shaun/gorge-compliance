@@ -36,8 +36,8 @@ d6273621-c36c-491b-85ca-37445ed30097	combat#0.attack	combat#0.attack	agreed	-	X	
 d6273621-c36c-491b-85ca-37445ed30097	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Illvoi Galeblade/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6273621-c36c-491b-85ca-37445ed30097	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Illvoi Galeblade/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d627996b-cbcd-4162-bd13-9ab286de64d1	cast	cast-resolve	agreed	-	FX	scen	2	0	Bria, Riptide Rogue/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d627996b-cbcd-4162-bd13-9ab286de64d1	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:bria-riptide-rogue:f0t0:s1,f:xs:XP:bria-riptide-rogue:f0t0:s1	-	-	-	3aa6ded33acb	-	cd549de6afc4	-	-	2026-11-25	xproof
-d627996b-cbcd-4162-bd13-9ab286de64d1	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:bria-riptide-rogue:f0t0:s1,f:xs:XP:bria-riptide-rogue:f0t0:s1	-	-	-	3aa6ded33acb	-	cd549de6afc4	-	-	2026-11-25	xproof
+d627996b-cbcd-4162-bd13-9ab286de64d1	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:bria-riptide-rogue:f0t1:s1,f:xs:XP:bria-riptide-rogue:f0t1:s1	-	-	-	3aa6ded33acb	-	cd549de6afc4	-	-	2026-11-25	xproof
+d627996b-cbcd-4162-bd13-9ab286de64d1	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:bria-riptide-rogue:f0t1:s1,f:xs:XP:bria-riptide-rogue:f0t1:s1	-	-	-	3aa6ded33acb	-	cd549de6afc4	-	-	2026-11-25	xproof
 d627996b-cbcd-4162-bd13-9ab286de64d1	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:bria-riptide-rogue:static0.0:s1,f:xs:XP:bria-riptide-rogue:static0.0:s1	-	-	-	3aa6ded33acb	-	cd549de6afc4	-	-	2026-11-25	xproof
 d62b8609-78a5-43ef-8e6e-dbfe8c7453ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d62b8609-78a5-43ef-8e6e-dbfe8c7453ca	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ d6458cf6-eb1f-448b-8205-1b5d887ff2bf	f0/t1	NULL	owed	refused:no-generator:trigge
 d6464ee4-23fc-4d68-bbda-3b53772015d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d64687e4-ec37-4db2-9e60-4626c7a3b011	cast	cast-resolve	agreed	-	FX	scen	2	0	Winternight Stories/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d646e42b-5635-4798-b633-29c093b66a55	cast	cast-resolve	agreed	-	FX	scen	2	0	Inspiring Overseer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d646e42b-5635-4798-b633-29c093b66a55	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Inspiring Overseer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d646e42b-5635-4798-b633-29c093b66a55	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:inspiring-overseer:combat0.attack:s1,f:xs:XP:inspiring-overseer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	e06000e8034f	-	-	2026-11-25	xproof
 d646e42b-5635-4798-b633-29c093b66a55	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:inspiring-overseer:combat0.block:s1,f:xs:XP:inspiring-overseer:combat0.block:s1	-	-	-	3aa6ded33acb	-	e06000e8034f	-	-	2026-11-25	xproof
 d646e42b-5635-4798-b633-29c093b66a55	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d64a4ad2-c80e-4a7f-93f2-b702916dba07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thunderhawk-gunship:f0t0:s1,f:xs:XP:thunderhawk-gunship:f0t0:s1	-	-	-	8c0bd19283bb	-	e0fba61d6e27	-	-	2026-11-24	xproof
@@ -70,7 +70,7 @@ d64a51be-2dd1-485f-98fa-c93d4c296e68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d64a51be-2dd1-485f-98fa-c93d4c296e68	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:carrion-beetles:f0a0:s1,f:xs:XP:carrion-beetles:f0a0:s1	-	-	-	5f2128bf97e4	-	05733e377edc	-	-	2026-11-24	xproof
 d64b0848-0193-4025-ba62-63ecd8fb9f50	cast	counter-spell	agreed	-	X	scen	1	0	Spell Pierce/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d64d69bd-1815-4647-90bc-767fad5c7da7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d64d69bd-1815-4647-90bc-767fad5c7da7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d64d69bd-1815-4647-90bc-767fad5c7da7	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 d64e9152-ef24-4394-aeb0-9c3befc56549	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:altar-of-dementia:cast:s1,f:xs:XP:altar-of-dementia:cast:s1	-	-	-	25696bf19d5b	-	72a412565872	-	-	2026-11-24	xproof
 d64e9152-ef24-4394-aeb0-9c3befc56549	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 d64e96bf-6815-462c-93b4-c9c22dc43eda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ d688baac-0574-4d88-b7eb-a7384c298ef5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d68adf9b-57b1-4c14-97b1-c5906dc5d29b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d68adf9b-57b1-4c14-97b1-c5906dc5d29b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:towering-thunderfist:f0a0:s1,f:xs:XP:towering-thunderfist:f0a0:s1	-	-	-	d864b561c9cb	-	053a61356a95	-	-	2026-11-24	xproof
 d68d175f-f59c-4995-84d4-fc593280194b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6911456-42cb-4b23-a560-dc98784530f5	cast	cast-resolve	agreed	-	X	scen	1	0	Nameless Inversion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+d6911456-42cb-4b23-a560-dc98784530f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nameless-inversion:cast:s1,f:xs:XP:nameless-inversion:cast:s1	-	-	-	3aa6ded33acb	-	d319b6401d47	-	-	2026-11-25	xproof
 d6912f52-e478-4cc6-a34c-67e372abc4fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6912f52-e478-4cc6-a34c-67e372abc4fa	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d692adcf-8ab5-4208-85d1-c75285a85c59	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,9 +149,9 @@ d6b54f58-7775-4180-b2e5-1b57da65a409	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d6b54f58-7775-4180-b2e5-1b57da65a409	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d6b54f58-7775-4180-b2e5-1b57da65a409	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:cast:s1,f:xs:XP:akul-the-unrepentant:cast:s1	-	-	-	8c0bd19283bb	-	3be382dd3441	-	-	2026-11-25	xproof
-d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Akul the Unrepentant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:combat0.attack:s1,f:xs:XP:akul-the-unrepentant:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3be382dd3441	-	-	2026-11-25	xproof
 d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:combat0.block:s1,f:xs:XP:akul-the-unrepentant:combat0.block:s1	-	-	-	3aa6ded33acb	-	3be382dd3441	-	-	2026-11-25	xproof
-d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Akul the Unrepentant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:f0a0:s1,f:xs:XP:akul-the-unrepentant:f0a0:s1	-	-	-	3aa6ded33acb	-	3be382dd3441	-	-	2026-11-25	xproof
 d6b67c7e-3b24-4f60-8e3a-c6ca45229d7f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6b67c7e-3b24-4f60-8e3a-c6ca45229d7f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6b6c27e-8028-49b1-90c6-ae0907159f85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,9 +187,9 @@ d6ded5b0-1309-4f1e-be10-d84ca0a5dd20	f0/t1	NULL	owed	refused:no-generator:trigge
 d6e1b1ff-e4e5-4814-9a20-2d527014463f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6e1b1ff-e4e5-4814-9a20-2d527014463f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d6e68414-80cb-4e08-ae84-b084a3f4b6de	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:faerie-dreamthief:f0t0:s2,f:xs:XP:faerie-dreamthief:f0t0:s2	-	-	-	e07cf3a05ba5	-	46fad6ecd583	-	-	2026-11-24	xproof
-d6e68414-80cb-4e08-ae84-b084a3f4b6de	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Faerie Dreamthief/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d6e68414-80cb-4e08-ae84-b084a3f4b6de	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:faerie-dreamthief:combat0.attack:s1,f:xs:XP:faerie-dreamthief:combat0.attack:s1	-	-	-	3aa6ded33acb	-	46fad6ecd583	-	-	2026-11-25	xproof
 d6e68414-80cb-4e08-ae84-b084a3f4b6de	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:faerie-dreamthief:combat0.block:s1,f:xs:XP:faerie-dreamthief:combat0.block:s1	-	-	-	3aa6ded33acb	-	46fad6ecd583	-	-	2026-11-25	xproof
-d6e68414-80cb-4e08-ae84-b084a3f4b6de	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Faerie Dreamthief/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d6e68414-80cb-4e08-ae84-b084a3f4b6de	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:faerie-dreamthief:f0a0:s1,f:xs:XP:faerie-dreamthief:f0a0:s1	-	-	-	3aa6ded33acb	-	46fad6ecd583	-	-	2026-11-25	xproof
 d6e68414-80cb-4e08-ae84-b084a3f4b6de	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:faerie-dreamthief:f0t0:s2,f:xs:XP:faerie-dreamthief:f0t0:s2	-	-	-	e07cf3a05ba5	-	46fad6ecd583	-	-	2026-11-24	xproof
 d6e78c6a-7555-4818-8054-1cdc0fca92e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6e78c6a-7555-4818-8054-1cdc0fca92e6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

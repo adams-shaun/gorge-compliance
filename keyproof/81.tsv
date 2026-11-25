@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 815ae30f-f455-4795-96eb-4bcc41d415e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 815ae30f-f455-4795-96eb-4bcc41d415e8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8161248c-16a3-47db-a3ae-cdfd878d49e0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:terror-of-mount-velus:f0t0:s2,f:xs:XP:terror-of-mount-velus:f0t0:s2	-	-	-	e07cf3a05ba5	-	9b5e5b12f450	-	-	2026-11-24	xproof
-8161248c-16a3-47db-a3ae-cdfd878d49e0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Terror of Mount Velus/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8161248c-16a3-47db-a3ae-cdfd878d49e0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:terror-of-mount-velus:combat0.attack:s1,f:xs:XP:terror-of-mount-velus:combat0.attack:s1	-	-	-	3aa6ded33acb	-	9b5e5b12f450	-	-	2026-11-25	xproof
 8161248c-16a3-47db-a3ae-cdfd878d49e0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Terror of Mount Velus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8161248c-16a3-47db-a3ae-cdfd878d49e0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:terror-of-mount-velus:f0t0:s2,f:xs:XP:terror-of-mount-velus:f0t0:s2	-	-	-	e07cf3a05ba5	-	9b5e5b12f450	-	-	2026-11-24	xproof
 81622cf6-3021-4ad4-933d-a7e3d8ac817f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -191,8 +191,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81dda1a8-72ac-4e69-8367-4f72c445197c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:disruptor-wanderglyph:f0t0:s1,f:xs:XP:disruptor-wanderglyph:f0t0:s1	-	-	-	23b491658465	-	56363319546e	-	-	2026-11-24	xproof
 81de0cb1-6665-41eb-8dfc-bb30192e1359	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81e5c62c-5aed-41e2-8bd1-610022e880bd	cast	cast-resolve	agreed	-	FX	scen	2	0	Hellspur Brute/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-81e5c62c-5aed-41e2-8bd1-610022e880bd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hellspur Brute/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-81e5c62c-5aed-41e2-8bd1-610022e880bd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hellspur Brute/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+81e5c62c-5aed-41e2-8bd1-610022e880bd	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:hellspur-brute:combat0.attack:s1,f:xs:XP:hellspur-brute:combat0.attack:s1	-	-	-	3aa6ded33acb	-	c94c2f77e8c4	-	-	2026-11-25	xproof
+81e5c62c-5aed-41e2-8bd1-610022e880bd	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:hellspur-brute:combat0.block:s1,f:xs:XP:hellspur-brute:combat0.block:s1	-	-	-	3aa6ded33acb	-	c94c2f77e8c4	-	-	2026-11-25	xproof
 81e5c62c-5aed-41e2-8bd1-610022e880bd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hellspur Brute/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 81e6ade9-a38f-4655-b09c-9ca41a11face	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:breath-of-malfegor:cast:s1,f:xs:XP:breath-of-malfegor:cast:s1	-	-	-	8a1b1a193ec0	-	09a44316ede7	-	-	2026-11-24	xproof
 81f022a7-fd19-4340-b8a0-6b11ab3e9d91	cast	cast-resolve	agreed	-	X	scen	1	0	Living Library/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81f35914-73bf-429f-ba20-32e23ac30159	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Massacre Girl, Most Wanted/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 81f5c70f-fbb1-4b3a-a048-1f4602adfa0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81f5c70f-fbb1-4b3a-a048-1f4602adfa0e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81fa8e6a-5fb8-43de-802f-df5b985c6a7d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+81fa8e6a-5fb8-43de-802f-df5b985c6a7d	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 81fdd1c4-d43b-4f8b-8712-7c2bf45a3e0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81fe554a-5257-446c-ad53-ee45bf5edb40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81ff5764-72ce-4b9a-a14f-07413700d935	cast	cast-resolve	agreed	-	X	scen	1	0	Lluwen, Imperfect Naturalist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -62,9 +62,9 @@ d944d33d-0a95-4d0d-96ce-49d02500227d	combat#0.block	combat#0.block	agreed	-	X	sc
 d944d33d-0a95-4d0d-96ce-49d02500227d	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:zog-triceraton-castaway:f0t0:s2,f:xs:XP:zog-triceraton-castaway:f0t0:s2	-	-	-	5437c1394672	-	9fc33f416aad	-	-	2026-11-24	xproof
 d944d33d-0a95-4d0d-96ce-49d02500227d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:zog-triceraton-castaway:f0t0:s1,f:xs:XP:zog-triceraton-castaway:f0t0:s1	-	-	-	5437c1394672	-	9fc33f416aad	-	-	2026-11-24	xproof
 d94ff0b8-5499-4eeb-80f0-20c7fbf07499	cast	cast-resolve	agreed	-	FX	scen	2	0	Voja, Jaws of the Conclave/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d94ff0b8-5499-4eeb-80f0-20c7fbf07499	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Voja, Jaws of the Conclave/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d94ff0b8-5499-4eeb-80f0-20c7fbf07499	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:voja-jaws-of-the-conclave:combat0.attack:s1,f:xs:XP:voja-jaws-of-the-conclave:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f76747658af4	-	-	2026-11-25	xproof
 d94ff0b8-5499-4eeb-80f0-20c7fbf07499	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:voja-jaws-of-the-conclave:combat0.block:s1,f:xs:XP:voja-jaws-of-the-conclave:combat0.block:s1	-	-	-	3aa6ded33acb	-	f76747658af4	-	-	2026-11-25	xproof
-d94ff0b8-5499-4eeb-80f0-20c7fbf07499	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Voja, Jaws of the Conclave/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d94ff0b8-5499-4eeb-80f0-20c7fbf07499	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:voja-jaws-of-the-conclave:combat0.attack:s1,f:xs:XP:voja-jaws-of-the-conclave:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f76747658af4	-	-	2026-11-25	xproof
 d94ff0b8-5499-4eeb-80f0-20c7fbf07499	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Voja, Jaws of the Conclave/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9517c5d-66d0-4178-96fb-a8c04f311ad8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d955a26a-d474-4dff-9eba-69fcfe92d8ae	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ d9a24444-289f-473f-9985-8df275257555	f0/a2	activate#0.2	agreed	-	X	scen	1	0	Jasm
 d9a24444-289f-473f-9985-8df275257555	land	play-land	agreed	-	X	scen	1	0	Jasmine Dragon Tea Shop/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9a3207a-a330-4517-967e-f37c9a9f1355	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clinquant-skymage:cast:s1,f:xs:XP:clinquant-skymage:cast:s1	-	-	-	23b491658465	-	2ebbda26a890	-	-	2026-11-24	xproof
 d9a3207a-a330-4517-967e-f37c9a9f1355	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:clinquant-skymage:combat0.attack:s1,f:xs:XP:clinquant-skymage:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2ebbda26a890	-	-	2026-11-25	xproof
-d9a3207a-a330-4517-967e-f37c9a9f1355	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Clinquant Skymage/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d9a3207a-a330-4517-967e-f37c9a9f1355	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:clinquant-skymage:combat0.block:s1,f:xs:XP:clinquant-skymage:combat0.block:s1	-	-	-	3aa6ded33acb	-	2ebbda26a890	-	-	2026-11-25	xproof
 d9a3207a-a330-4517-967e-f37c9a9f1355	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Clinquant Skymage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d9a7e5a6-3e41-4fc6-987a-18fe1b9d67dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d9a7e5a6-3e41-4fc6-987a-18fe1b9d67dd	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

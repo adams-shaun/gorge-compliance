@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6317d45a-fe02-4879-b515-bc5327ecb5ae	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:wispdrinker-vampire:combat0.attack:s1,f:xs:XP:wispdrinker-vampire:combat0.attack:s1	-	-	-	3aa6ded33acb	-	25237eed9d1e	-	-	2026-11-25	xproof
 6317d45a-fe02-4879-b515-bc5327ecb5ae	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:wispdrinker-vampire:combat0.block:s1,f:xs:XP:wispdrinker-vampire:combat0.block:s1	-	-	-	3aa6ded33acb	-	25237eed9d1e	-	-	2026-11-25	xproof
 6317d45a-fe02-4879-b515-bc5327ecb5ae	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Wispdrinker Vampire/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6317d45a-fe02-4879-b515-bc5327ecb5ae	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wispdrinker Vampire/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6317d45a-fe02-4879-b515-bc5327ecb5ae	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wispdrinker-vampire:f0t0:s1,f:xs:XP:wispdrinker-vampire:f0t0:s1	-	-	-	3aa6ded33acb	-	25237eed9d1e	-	-	2026-11-25	xproof
 631eb3e9-a3e0-4341-ad2d-e79142ce537d	cast	cast-resolve	agreed	-	FX	scen	2	0	Loch Mare/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 631eb3e9-a3e0-4341-ad2d-e79142ce537d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Loch Mare/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 631eb3e9-a3e0-4341-ad2d-e79142ce537d	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Loch Mare/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -69,8 +69,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 635dda8c-3761-4c87-8723-8cd09878516b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 635dda8c-3761-4c87-8723-8cd09878516b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 635fe908-6f58-4c9e-ac55-0775a7c6f278	cast	cast-resolve	agreed	-	FX	scen	2	0	Angel of Vitality/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-635fe908-6f58-4c9e-ac55-0775a7c6f278	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Angel of Vitality/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-635fe908-6f58-4c9e-ac55-0775a7c6f278	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Angel of Vitality/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+635fe908-6f58-4c9e-ac55-0775a7c6f278	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:angel-of-vitality:combat0.attack:s1,f:xs:XP:angel-of-vitality:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8a48adad5be2	-	-	2026-11-25	xproof
+635fe908-6f58-4c9e-ac55-0775a7c6f278	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:angel-of-vitality:combat0.block:s1,f:xs:XP:angel-of-vitality:combat0.block:s1	-	-	-	3aa6ded33acb	-	8a48adad5be2	-	-	2026-11-25	xproof
 635fe908-6f58-4c9e-ac55-0775a7c6f278	static#0.0	static#0.0	agreed	-	X	scen	1	0	Angel of Vitality/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63604320-68de-415e-b1f9-dd0f85c5d8a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63625b26-3a19-4c3c-b18a-91247bb2a40c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lignify:cast:s1,f:xs:XP:lignify:cast:s1	-	-	-	d864b561c9cb	-	da5d40f10ebf	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 637a10e8-4384-49a0-ad78-03da8930811e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 637b1a19-2925-422e-b867-f87537803071	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gloomhunter:cast:s1,f:xs:XP:gloomhunter:cast:s1	-	-	-	d864b561c9cb	-	b4625ef845e2	-	-	2026-11-24	xproof
 637be5f7-ab39-4e3a-a5eb-c6e48fca00a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:outlaw-medic:cast:s1,f:xs:XP:outlaw-medic:cast:s1	-	-	-	23b491658465	-	df17cd3cf892	-	-	2026-11-25	xproof
-637be5f7-ab39-4e3a-a5eb-c6e48fca00a9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Outlaw Medic/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+637be5f7-ab39-4e3a-a5eb-c6e48fca00a9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:outlaw-medic:combat0.attack:s1,f:xs:XP:outlaw-medic:combat0.attack:s1	-	-	-	3aa6ded33acb	-	df17cd3cf892	-	-	2026-11-25	xproof
 637be5f7-ab39-4e3a-a5eb-c6e48fca00a9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:outlaw-medic:combat0.block:s1,f:xs:XP:outlaw-medic:combat0.block:s1	-	-	-	3aa6ded33acb	-	df17cd3cf892	-	-	2026-11-25	xproof
 637be5f7-ab39-4e3a-a5eb-c6e48fca00a9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:outlaw-medic:f0t0:s1,f:xs:XP:outlaw-medic:f0t0:s1	-	-	-	23b491658465	-	df17cd3cf892	-	-	2026-11-25	xproof
 637c5583-4683-4ae4-8b4e-f5da42a772c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

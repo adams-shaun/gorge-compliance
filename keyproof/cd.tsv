@@ -54,8 +54,8 @@ cd403866-bef1-413a-85e2-c86e295b3589	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Agent
 cd444267-712c-450f-a349-e27faf4f4c7c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd444267-712c-450f-a349-e27faf4f4c7c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd45a29f-73bc-435c-9d50-09a4ecaa77be	cast	cast	agreed	-	F	start	2	0	f:xs:XP:howlsquad-heavy:cast:s1	-	-	-	23b491658465	-	bb613ccfd60c	-	-	2026-11-24	xproof
-cd45a29f-73bc-435c-9d50-09a4ecaa77be	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:howlsquad-heavy:cast:s1	-	-	-	23b491658465	-	bb613ccfd60c	-	-	2026-11-24	xproof
-cd45a29f-73bc-435c-9d50-09a4ecaa77be	static#0.0	static#0.0	agreed	-	X	scen	1	0	Howlsquad Heavy/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cd45a29f-73bc-435c-9d50-09a4ecaa77be	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:howlsquad-heavy:static0.0:s1,f:xs:XP:howlsquad-heavy:static0.0:s1	-	-	-	3aa6ded33acb	-	bb613ccfd60c	-	-	2026-11-25	xproof
+cd45a29f-73bc-435c-9d50-09a4ecaa77be	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:howlsquad-heavy:static0.0:s1,f:xs:XP:howlsquad-heavy:static0.0:s1	-	-	-	3aa6ded33acb	-	bb613ccfd60c	-	-	2026-11-25	xproof
 cd45a29f-73bc-435c-9d50-09a4ecaa77be	static#0.1	static#0.1	agreed	-	X	scen	1	0	Howlsquad Heavy/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cd47eedd-57cb-460d-b339-4785f63a5475	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cd47eedd-57cb-460d-b339-4785f63a5475	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ cddbd819-4895-4712-b44b-d6b51f3d8646	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arc
 cddbd819-4895-4712-b44b-d6b51f3d8646	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:archive-dragon:combat0.attack:s1,f:xs:XP:archive-dragon:combat0.attack:s1	-	-	-	3aa6ded33acb	-	764ec4b007bf	-	-	2026-11-25	xproof
 cddbd819-4895-4712-b44b-d6b51f3d8646	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:archive-dragon:combat0.block:s1,f:xs:XP:archive-dragon:combat0.block:s1	-	-	-	3aa6ded33acb	-	764ec4b007bf	-	-	2026-11-25	xproof
 cddbd819-4895-4712-b44b-d6b51f3d8646	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:archive-dragon:cast:s2,f:xs:XP:archive-dragon:cast:s2	-	-	-	5437c1394672	-	764ec4b007bf	-	-	2026-11-24	xproof
-cddbd819-4895-4712-b44b-d6b51f3d8646	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Archive Dragon/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cddbd819-4895-4712-b44b-d6b51f3d8646	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:archive-dragon:f0t1:s1,f:xs:XP:archive-dragon:f0t1:s1	-	-	-	3aa6ded33acb	-	764ec4b007bf	-	-	2026-11-25	xproof
 cddccc2a-a76e-48b3-b4dd-dfeab89e1619	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cosmic-intervention:cast:s1,f:xs:XP:cosmic-intervention:cast:s1	-	-	-	8c0bd19283bb	-	720aa94a5ef8	-	-	2026-11-24	xproof
 cde26d69-f3e7-4dd0-a53b-cd0ec812d717	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cde26d69-f3e7-4dd0-a53b-cd0ec812d717	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

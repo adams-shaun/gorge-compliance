@@ -34,8 +34,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24310f49-2156-4c0d-b3b1-40ca3182474f	cast	cast-resolve	agreed	-	X	scen	1	0	Sahagin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 24310f49-2156-4c0d-b3b1-40ca3182474f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sahagin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2441696b-a9ba-4813-ba2e-e71f85281d05	cast	cast-resolve	agreed	-	FX	scen	2	0	Wilt-Leaf Liege/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2441696b-a9ba-4813-ba2e-e71f85281d05	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wilt-Leaf Liege/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2441696b-a9ba-4813-ba2e-e71f85281d05	static#0.1	static#0.1	agreed	-	X	scen	1	0	Wilt-Leaf Liege/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2441696b-a9ba-4813-ba2e-e71f85281d05	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:wilt-leaf-liege:static0.0:s1,f:xs:XP:wilt-leaf-liege:static0.0:s1	-	-	-	3aa6ded33acb	-	5cfe4a1644fb	-	-	2026-11-25	xproof
+2441696b-a9ba-4813-ba2e-e71f85281d05	static#0.1	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:wilt-leaf-liege:static0.1:s1,f:xs:XP:wilt-leaf-liege:static0.1:s1	-	-	-	3aa6ded33acb	-	5cfe4a1644fb	-	-	2026-11-25	xproof
 244443f0-c92b-4640-88b6-308b0312c8be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 244443f0-c92b-4640-88b6-308b0312c8be	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 244541f6-cbfc-4e89-9156-64e412f745a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 245c3681-fc47-47fe-b6e5-34c96315c135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245c3681-fc47-47fe-b6e5-34c96315c135	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:delney-streetwise-lookout:cast:s1,f:xs:XP:delney-streetwise-lookout:cast:s1	-	-	-	23b491658465	-	1cb2a4eafaa2	-	-	2026-11-24	xproof
-245d0ccf-87b6-460a-8b99-9e2079f2d375	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Delney, Streetwise Lookout/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+245d0ccf-87b6-460a-8b99-9e2079f2d375	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:delney-streetwise-lookout:combat0.attack:s1,f:xs:XP:delney-streetwise-lookout:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1cb2a4eafaa2	-	-	2026-11-25	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Delney, Streetwise Lookout/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	static#0.0	static#0.0	agreed	-	X	scen	1	0	Delney, Streetwise Lookout/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 245d0ccf-87b6-460a-8b99-9e2079f2d375	static#0.1	static#0.1	agreed	-	X	scen	1	0	Delney, Streetwise Lookout/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

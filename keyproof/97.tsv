@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97671aac-7322-44ae-8908-d573734db3af	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9768d43b-8b3f-4d03-ac1b-e603af832875	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vito-fanatic-of-aclazotz:cast:s1,f:xs:XP:vito-fanatic-of-aclazotz:cast:s1	-	-	-	23b491658465	-	77f193b0b92a	-	-	2026-11-25	xproof
 9768d43b-8b3f-4d03-ac1b-e603af832875	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:vito-fanatic-of-aclazotz:combat0.attack:s1,f:xs:XP:vito-fanatic-of-aclazotz:combat0.attack:s1	-	-	-	3aa6ded33acb	-	77f193b0b92a	-	-	2026-11-25	xproof
-9768d43b-8b3f-4d03-ac1b-e603af832875	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vito, Fanatic of Aclazotz/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9768d43b-8b3f-4d03-ac1b-e603af832875	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:vito-fanatic-of-aclazotz:combat0.block:s1,f:xs:XP:vito-fanatic-of-aclazotz:combat0.block:s1	-	-	-	3aa6ded33acb	-	77f193b0b92a	-	-	2026-11-25	xproof
 9768d43b-8b3f-4d03-ac1b-e603af832875	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vito, Fanatic of Aclazotz/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 976db753-9887-448a-8e67-ec7937b6505c	cast	cast-resolve	agreed	-	X	scen	1	0	Kraven's Cats/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 976db753-9887-448a-8e67-ec7937b6505c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kraven's Cats/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:territorial-witchstalker:cast:s1,f:xs:XP:territorial-witchstalker:cast:s1	-	-	-	23b491658465	-	c9c851a93b2f	-	-	2026-11-24	xproof
 97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Territorial Witchstalker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:territorial-witchstalker:combat0.block:s1,f:xs:XP:territorial-witchstalker:combat0.block:s1	-	-	-	3aa6ded33acb	-	c9c851a93b2f	-	-	2026-11-25	xproof
-97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Territorial Witchstalker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+97b9e3f1-7569-45e0-aef9-0d8d2845dbf1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:territorial-witchstalker:f0t0:s1,f:xs:XP:territorial-witchstalker:f0t0:s1	-	-	-	3aa6ded33acb	-	c9c851a93b2f	-	-	2026-11-25	xproof
 97bb1589-2941-4a75-a5f6-916871e51e9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97bb1589-2941-4a75-a5f6-916871e51e9e	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 97bb1589-2941-4a75-a5f6-916871e51e9e	f0/t1	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

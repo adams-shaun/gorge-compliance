@@ -36,9 +36,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03259ab0-caa8-4620-b070-127e2c712252	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wedgelight-rammer:f0t0:s1,f:xs:XP:wedgelight-rammer:f0t0:s1	-	-	-	25696bf19d5b	-	813adbb794fe	-	-	2026-11-24	xproof
 03259ab0-caa8-4620-b070-127e2c712252	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wedgelight Rammer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 032b5fc4-5aca-41b6-9bf6-2c1ed0018968	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aggressive-mammoth:cast:s1,f:xs:XP:aggressive-mammoth:cast:s1	-	-	-	3aa6ded33acb	-	a1a552c3371d	-	-	2026-11-25	xproof
-032b5fc4-5aca-41b6-9bf6-2c1ed0018968	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aggressive Mammoth/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+032b5fc4-5aca-41b6-9bf6-2c1ed0018968	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:aggressive-mammoth:combat0.attack:s1,f:xs:XP:aggressive-mammoth:combat0.attack:s1	-	-	-	3aa6ded33acb	-	a1a552c3371d	-	-	2026-11-25	xproof
 032b5fc4-5aca-41b6-9bf6-2c1ed0018968	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aggressive-mammoth:combat0.block:s1,f:xs:XP:aggressive-mammoth:combat0.block:s1	-	-	-	3aa6ded33acb	-	a1a552c3371d	-	-	2026-11-25	xproof
-032b5fc4-5aca-41b6-9bf6-2c1ed0018968	static#0.0	static#0.0	agreed	-	X	scen	1	0	Aggressive Mammoth/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+032b5fc4-5aca-41b6-9bf6-2c1ed0018968	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:aggressive-mammoth:static0.0:s1,f:xs:XP:aggressive-mammoth:static0.0:s1	-	-	-	3aa6ded33acb	-	a1a552c3371d	-	-	2026-11-25	xproof
 032b8a0d-491a-4a12-ab9f-689010054d5b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Prismatic Vista/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 032b8a0d-491a-4a12-ab9f-689010054d5b	land	play-land	agreed	-	FX	scen	2	0	Prismatic Vista/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 032cc574-f7e7-4753-9a30-76cbd45d9563	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

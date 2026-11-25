@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 609c3b1c-d9ad-4616-b685-52b85528fde8	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:krovikan-plague:f0t0:s1,f:xs:XP:krovikan-plague:f0t0:s1	-	-	-	ea3140b6974b	-	21e91a62b8ba	-	-	2026-11-24	xproof
 609c3b1c-d9ad-4616-b685-52b85528fde8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:krovikan-plague:f0t0:s1,f:xs:XP:krovikan-plague:f0t0:s1	-	-	-	ea3140b6974b	-	21e91a62b8ba	-	-	2026-11-24	xproof
 609d13dc-c850-4877-8ad3-e84171b58069	cast	cast-resolve	agreed	-	FX	scen	2	0	Jazal Goldmane/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-609d13dc-c850-4877-8ad3-e84171b58069	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Jazal Goldmane/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+609d13dc-c850-4877-8ad3-e84171b58069	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:jazal-goldmane:combat0.attack:s1	-	-	-	3aa6ded33acb	-	28337791790b	-	-	2026-11-25	xproof
 609d13dc-c850-4877-8ad3-e84171b58069	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Jazal Goldmane/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 609d13dc-c850-4877-8ad3-e84171b58069	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Jazal Goldmane/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 60a3345c-3234-4f4b-baab-df12dad6b44b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,9 +142,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60ad7aaa-8ce6-4449-8e8d-4ccf925010db	cast	cast-resolve	agreed	-	X	scen	1	0	Sizzling Changeling/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 60ad7aaa-8ce6-4449-8e8d-4ccf925010db	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sizzling Changeling/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 60b03a44-a7bd-48fa-8c8f-1704aed02cd7	cast	cast-resolve	agreed	-	FX	scen	2	0	Ancestor Dragon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-60b03a44-a7bd-48fa-8c8f-1704aed02cd7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ancestor Dragon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-60b03a44-a7bd-48fa-8c8f-1704aed02cd7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ancestor Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-60b03a44-a7bd-48fa-8c8f-1704aed02cd7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ancestor Dragon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+60b03a44-a7bd-48fa-8c8f-1704aed02cd7	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ancestor-dragon:combat0.attack:s1,f:xs:XP:ancestor-dragon:combat0.attack:s1	-	-	-	3aa6ded33acb	-	6712dd45937e	-	-	2026-11-25	xproof
+60b03a44-a7bd-48fa-8c8f-1704aed02cd7	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ancestor-dragon:combat0.block:s1,f:xs:XP:ancestor-dragon:combat0.block:s1	-	-	-	3aa6ded33acb	-	6712dd45937e	-	-	2026-11-25	xproof
+60b03a44-a7bd-48fa-8c8f-1704aed02cd7	f0/t0	AttackersDeclared	agreed	-	FX	start	4	0	x:xs:XP:ancestor-dragon:combat0.attack:s1,f:xs:XP:ancestor-dragon:combat0.attack:s1	-	-	-	3aa6ded33acb	-	6712dd45937e	-	-	2026-11-25	xproof
 60b0fd7c-a4cc-4a41-8455-debcfeccff81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60b18d94-8ae5-4508-b4db-18f92c2d39fd	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:queen-s-bay-paladin:f0t0:s2,f:xs:XP:queen-s-bay-paladin:f0t0:s2	-	-	-	e07cf3a05ba5	-	9c3850a9f538	-	-	2026-11-24	xproof
 60b18d94-8ae5-4508-b4db-18f92c2d39fd	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:queen-s-bay-paladin:f0t0:s2,f:xs:XP:queen-s-bay-paladin:f0t0:s2	-	-	-	e07cf3a05ba5	-	9c3850a9f538	-	-	2026-11-24	xproof

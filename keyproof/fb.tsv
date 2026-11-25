@@ -49,8 +49,8 @@ fb47ceb6-b3b3-4e81-9c15-b9990c85e892	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fb49c7d2-d750-4676-b90e-76e7fae70a25	cast	cast-resolve	agreed	-	FX	scen	2	0	Adorned Crocodile/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fb49c7d2-d750-4676-b90e-76e7fae70a25	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Adorned Crocodile/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fb49c7d2-d750-4676-b90e-76e7fae70a25	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Adorned Crocodile/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fb4a044b-f25d-47ff-b272-754e577ce50a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:turret-ogre:f0t0:s1,f:xs:XP:turret-ogre:f0t0:s1	-	-	-	23b491658465	-	abbf267053ef	-	-	2026-11-25	xproof
-fb4a044b-f25d-47ff-b272-754e577ce50a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fb4a044b-f25d-47ff-b272-754e577ce50a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:turret-ogre:f0t0:s1,f:xs:XP:turret-ogre:f0t0:s1	-	-	-	3aa6ded33acb	-	abbf267053ef	-	-	2026-11-25	xproof
+fb4a044b-f25d-47ff-b272-754e577ce50a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:turret-ogre:f0t0:s1,f:xs:XP:turret-ogre:f0t0:s1	-	-	-	3aa6ded33acb	-	abbf267053ef	-	-	2026-11-25	xproof
 fb51bafe-5a70-4910-a42e-ef75d9dd2f0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb51bafe-5a70-4910-a42e-ef75d9dd2f0a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fb52dbf1-0cbc-4e1d-8ded-0498b529b4b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -119,7 +119,7 @@ fba0feaa-a43d-44f3-a317-b25ba7b3dabe	cast	cast	owed	harness	-	start	0	0	-	-	-	-	
 fba0feaa-a43d-44f3-a317-b25ba7b3dabe	f0/t0	SpellCast/Storm	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	e68cb0fbe1ce	-	-	2026-11-24	xproof
 fba1329d-d8bf-4c5e-9cf1-5410a42f732e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fba2fa87-3f2a-4a9f-a19e-a1f9dada4118	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gallant-pie-wielder:cast:s1,f:xs:XP:gallant-pie-wielder:cast:s1	-	-	-	23b491658465	-	ecceddf25144	-	-	2026-11-24	xproof
-fba2fa87-3f2a-4a9f-a19e-a1f9dada4118	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gallant Pie-Wielder/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+fba2fa87-3f2a-4a9f-a19e-a1f9dada4118	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:gallant-pie-wielder:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ecceddf25144	-	-	2026-11-25	xproof
 fba2fa87-3f2a-4a9f-a19e-a1f9dada4118	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gallant Pie-Wielder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fba2fa87-3f2a-4a9f-a19e-a1f9dada4118	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gallant Pie-Wielder/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fba54c2d-a664-4e4c-b9d4-e24cf2523ab9	cast	cast-resolve	agreed	-	X	scen	1	0	Planetary Patrol/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -153,8 +153,8 @@ fbb7735f-ec91-4ed4-b735-d94a76e68a80	combat#0.block	combat#0.block	agreed	-	X	sc
 fbb7735f-ec91-4ed4-b735-d94a76e68a80	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Shocking Sharpshooter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fbb9dafa-b1aa-401a-b26c-c0c7e8b7222f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbbc3acb-c917-44ff-ac6f-9dd6ebe3f4ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fbc2f469-09a5-4641-b990-b483d5d15c0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fbc2f469-09a5-4641-b990-b483d5d15c0d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fbc2f469-09a5-4641-b990-b483d5d15c0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tilonalli-s-crown:f0t0:s1,f:xs:XP:tilonalli-s-crown:f0t0:s1	-	-	-	3aa6ded33acb	-	44b4a4f4f49a	-	-	2026-11-25	xproof
+fbc2f469-09a5-4641-b990-b483d5d15c0d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tilonalli-s-crown:f0t0:s1,f:xs:XP:tilonalli-s-crown:f0t0:s1	-	-	-	3aa6ded33acb	-	44b4a4f4f49a	-	-	2026-11-25	xproof
 fbc7350c-d392-44bf-92f7-8dd4743a73b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbcf0c1c-29a7-4e83-8b06-869f83be49cd	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbd295ee-545a-4eab-b000-c0b228dd412d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

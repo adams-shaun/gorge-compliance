@@ -10,9 +10,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d09ebb7-c4c9-4bb7-b6bf-3c8330b954e8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:tymaret-calls-the-dead:cast:s1	-	-	-	ae86f6029288	-	bba754225a5e	-	-	2026-11-24	xproof
 1d0f1186-be6c-45c3-9703-f0c1e13892fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d15a06f-5471-48f2-8c4a-9b0886bef5af	cast	cast-resolve	agreed	-	FX	scen	2	0	Obeka, Splitter of Seconds/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1d15a06f-5471-48f2-8c4a-9b0886bef5af	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Obeka, Splitter of Seconds/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1d15a06f-5471-48f2-8c4a-9b0886bef5af	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:obeka-splitter-of-seconds:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7c233cc1d13e	-	-	2026-11-25	xproof
 1d15a06f-5471-48f2-8c4a-9b0886bef5af	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:obeka-splitter-of-seconds:combat0.block:s1,f:xs:XP:obeka-splitter-of-seconds:combat0.block:s1	-	-	-	3aa6ded33acb	-	7c233cc1d13e	-	-	2026-11-25	xproof
-1d15a06f-5471-48f2-8c4a-9b0886bef5af	f0/t0	DamageDone	agreed	-	F	start	2	0	f:xs:XP:obeka-splitter-of-seconds:f0t0:s1	-	-	-	3aa6ded33acb	-	7c233cc1d13e	-	-	2026-11-25	xproof
+1d15a06f-5471-48f2-8c4a-9b0886bef5af	f0/t0	DamageDone	agreed	-	F	start	2	0	f:xs:XP:obeka-splitter-of-seconds:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7c233cc1d13e	-	-	2026-11-25	xproof
 1d25b831-c1de-4f79-bbb3-1582eda96452	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:elvish-aberration:cast:s2,f:xs:XP:elvish-aberration:cast:s2	-	-	-	fc71ca68c5ac	-	b0baac464bde	-	-	2026-11-24	xproof
 1d25b831-c1de-4f79-bbb3-1582eda96452	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:elvish-aberration:f0a0:s1,f:xs:XP:elvish-aberration:f0a0:s1	-	-	-	8c0bd19283bb	-	b0baac464bde	-	-	2026-11-24	xproof
 1d25b831-c1de-4f79-bbb3-1582eda96452	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:elvish-aberration:cast:s1,f:xs:XP:elvish-aberration:cast:s1	-	-	-	fc71ca68c5ac	-	b0baac464bde	-	-	2026-11-24	xproof
@@ -54,9 +54,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d5ff280-7f4d-4801-aefd-9b6e6b1f2818	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Ajani, Caller of the Pride/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d5ff280-7f4d-4801-aefd-9b6e6b1f2818	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Ajani, Caller of the Pride/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1d5ff280-7f4d-4801-aefd-9b6e6b1f2818	f0/a2	activate#0.2	agreed	-	FX	scen	2	0	Ajani, Caller of the Pride/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1d60c80d-9a95-4051-bbf7-02ca51ee1be2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scrawling-crawler:cast:s1,f:xs:XP:scrawling-crawler:cast:s1	-	-	-	23b491658465	-	86e843fbd639	-	-	2026-11-24	xproof
-1d60c80d-9a95-4051-bbf7-02ca51ee1be2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scrawling Crawler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1d60c80d-9a95-4051-bbf7-02ca51ee1be2	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Scrawling Crawler/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1d60c80d-9a95-4051-bbf7-02ca51ee1be2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scrawling-crawler:f0t0:s1,f:xs:XP:scrawling-crawler:f0t0:s1	-	-	-	3aa6ded33acb	-	86e843fbd639	-	-	2026-11-25	xproof
+1d60c80d-9a95-4051-bbf7-02ca51ee1be2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:scrawling-crawler:f0t0:s1,f:xs:XP:scrawling-crawler:f0t0:s1	-	-	-	3aa6ded33acb	-	86e843fbd639	-	-	2026-11-25	xproof
+1d60c80d-9a95-4051-bbf7-02ca51ee1be2	f0/t1	Drawn	agreed	-	FX	start	2	0	x:xs:XP:scrawling-crawler:f0t0:s1,f:xs:XP:scrawling-crawler:f0t0:s1	-	-	-	3aa6ded33acb	-	86e843fbd639	-	-	2026-11-25	xproof
 1d614b37-d578-4f35-8fd8-3c7800d5f742	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:canopy-gorger:cast:s1,f:xs:XP:canopy-gorger:cast:s1	-	-	-	d864b561c9cb	-	daf4b25d4698	-	-	2026-11-24	xproof
 1d61f3a7-5861-479b-8312-f2d308c35b68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d61f3a7-5861-479b-8312-f2d308c35b68	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -84,8 +84,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d705d77-4b1a-4a17-b3b7-e502f2f6f6e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d705d77-4b1a-4a17-b3b7-e502f2f6f6e6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:koma-s-faithful:f0t0:s1,f:xs:XP:koma-s-faithful:f0t0:s1	-	-	-	d864b561c9cb	-	77d0628f7d74	-	-	2026-11-24	xproof
 1d764f70-985e-4cf0-9482-f30f73b9baf1	cast	cast-resolve	agreed	-	FX	scen	2	0	Kraum, Violent Cacophony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1d764f70-985e-4cf0-9482-f30f73b9baf1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kraum, Violent Cacophony/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1d764f70-985e-4cf0-9482-f30f73b9baf1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kraum, Violent Cacophony/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1d764f70-985e-4cf0-9482-f30f73b9baf1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kraum-violent-cacophony:combat0.attack:s1,f:xs:XP:kraum-violent-cacophony:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3ba6df404370	-	-	2026-11-25	xproof
+1d764f70-985e-4cf0-9482-f30f73b9baf1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kraum-violent-cacophony:combat0.block:s1,f:xs:XP:kraum-violent-cacophony:combat0.block:s1	-	-	-	3aa6ded33acb	-	3ba6df404370	-	-	2026-11-25	xproof
 1d764f70-985e-4cf0-9482-f30f73b9baf1	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:kraum-violent-cacophony:f0t0:s1,f:xs:XP:kraum-violent-cacophony:f0t0:s1	-	-	-	3aa6ded33acb	-	3ba6df404370	-	-	2026-11-25	xproof
 1d789ccd-8192-41b1-a5bb-1e2174657698	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1d789ccd-8192-41b1-a5bb-1e2174657698	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

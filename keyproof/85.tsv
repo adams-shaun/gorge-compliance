@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 851333be-d7d5-472a-95cb-0a28da09ce24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8514f20a-50c7-4319-84cb-2bf263548234	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:breeches-the-blastmaker:cast:s1,f:xs:XP:breeches-the-blastmaker:cast:s1	-	-	-	8c0bd19283bb	-	4f2725a83a31	-	-	2026-11-25	xproof
 8514f20a-50c7-4319-84cb-2bf263548234	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:breeches-the-blastmaker:combat0.attack:s1,f:xs:XP:breeches-the-blastmaker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4f2725a83a31	-	-	2026-11-25	xproof
-8514f20a-50c7-4319-84cb-2bf263548234	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Breeches, the Blastmaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8514f20a-50c7-4319-84cb-2bf263548234	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:breeches-the-blastmaker:combat0.block:s1,f:xs:XP:breeches-the-blastmaker:combat0.block:s1	-	-	-	3aa6ded33acb	-	4f2725a83a31	-	-	2026-11-25	xproof
 8514f20a-50c7-4319-84cb-2bf263548234	f0/t0	SpellCast	agreed	-	FX	start	1	0	x:xs:XP:breeches-the-blastmaker:f0t0:s2,f:xs:XP:breeches-the-blastmaker:f0t0:s2	-	-	-	3aa6ded33acb	-	4f2725a83a31	-	-	2026-11-25	xproof
 8516d8ba-b3f9-4c45-8d70-5dab476e478f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8517e5f4-89c5-4879-9b4f-b35e268798df	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:aetherstream-leopard:cast:s1,f:xs:XP:aetherstream-leopard:cast:s1	-	-	-	d864b561c9cb	-	308ea4644dde	-	-	2026-11-24	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 852d4dc3-404d-4565-99e9-1eac8f6eca5e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 852d4dc3-404d-4565-99e9-1eac8f6eca5e	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 852d4dc3-404d-4565-99e9-1eac8f6eca5e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-852e3d89-64a0-4b32-be2b-b1d6cd7c2f64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omenport-vigilante:cast:s1,f:xs:XP:omenport-vigilante:cast:s1	-	-	-	23b491658465	-	0d82dd638cc7	-	-	2026-11-25	xproof
+852e3d89-64a0-4b32-be2b-b1d6cd7c2f64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omenport-vigilante:cast:s1,f:xs:XP:omenport-vigilante:cast:s1	-	-	-	3aa6ded33acb	-	0d82dd638cc7	-	-	2026-11-25	xproof
 852e3d89-64a0-4b32-be2b-b1d6cd7c2f64	static#0.0	static#0.0	agreed	-	X	scen	1	0	Omenport Vigilante/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 85308fb8-e5a1-4ff1-8606-283cf2056895	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85308fb8-e5a1-4ff1-8606-283cf2056895	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85ee8ab6-8db5-45d7-85ae-64838771146a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Momo, Playful Pet/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 85ee8ab6-8db5-45d7-85ae-64838771146a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Momo, Playful Pet/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 85eefda9-4aab-467d-a08c-be026cb8ff42	cast	cast-resolve	agreed	-	FX	scen	2	0	Amalia Benavides Aguirre/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-85eefda9-4aab-467d-a08c-be026cb8ff42	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Amalia Benavides Aguirre/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+85eefda9-4aab-467d-a08c-be026cb8ff42	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:amalia-benavides-aguirre:f0t0:s1,f:xs:XP:amalia-benavides-aguirre:f0t0:s1	-	-	-	3aa6ded33acb	-	531914d8fe19	-	-	2026-11-25	xproof
 85eefda9-4aab-467d-a08c-be026cb8ff42	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:amalia-benavides-aguirre:f0t1:s1,f:xs:XP:amalia-benavides-aguirre:f0t1:s1	-	-	-	3aa6ded33acb	-	531914d8fe19	-	-	2026-11-25	xproof
 85ef10fd-4a48-4a37-baad-f663fb5439e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85ef10fd-4a48-4a37-baad-f663fb5439e0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

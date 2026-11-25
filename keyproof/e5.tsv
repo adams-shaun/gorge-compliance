@@ -85,7 +85,7 @@ e5a9d34b-c7d4-4682-8e26-dd82e38ee84e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e5a9d34b-c7d4-4682-8e26-dd82e38ee84e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 e5aa32b6-2eaf-4b48-81cc-cd3db976513d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mineshaft-spider:f0t0:s2,f:xs:XP:mineshaft-spider:f0t0:s2	-	-	-	e07cf3a05ba5	-	40cc4a721d88	-	-	2026-11-24	xproof
 e5aa32b6-2eaf-4b48-81cc-cd3db976513d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:mineshaft-spider:combat0.attack:s1,f:xs:XP:mineshaft-spider:combat0.attack:s1	-	-	-	3aa6ded33acb	-	40cc4a721d88	-	-	2026-11-25	xproof
-e5aa32b6-2eaf-4b48-81cc-cd3db976513d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mineshaft Spider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e5aa32b6-2eaf-4b48-81cc-cd3db976513d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mineshaft-spider:combat0.block:s1,f:xs:XP:mineshaft-spider:combat0.block:s1	-	-	-	3aa6ded33acb	-	40cc4a721d88	-	-	2026-11-25	xproof
 e5aa32b6-2eaf-4b48-81cc-cd3db976513d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mineshaft-spider:f0t0:s2,f:xs:XP:mineshaft-spider:f0t0:s2	-	-	-	e07cf3a05ba5	-	40cc4a721d88	-	-	2026-11-24	xproof
 e5afa88a-8bde-47fe-a890-3759f807360f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5afa88a-8bde-47fe-a890-3759f807360f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,9 +110,9 @@ e5c6bbee-5e6c-4a59-bc5d-285c5f5cf228	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 e5cc1492-c9cc-48f0-8c11-02ead883675c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5cc1492-c9cc-48f0-8c11-02ead883675c	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e5cea282-9e61-47da-8c5d-f5fca6a508a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iron-fist-pulverizer:cast:s1,f:xs:XP:iron-fist-pulverizer:cast:s1	-	-	-	23b491658465	-	09bba6add27f	-	-	2026-11-25	xproof
-e5cea282-9e61-47da-8c5d-f5fca6a508a4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Iron-Fist Pulverizer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e5cea282-9e61-47da-8c5d-f5fca6a508a4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Iron-Fist Pulverizer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e5cea282-9e61-47da-8c5d-f5fca6a508a4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Iron-Fist Pulverizer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e5cea282-9e61-47da-8c5d-f5fca6a508a4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:iron-fist-pulverizer:combat0.attack:s1,f:xs:XP:iron-fist-pulverizer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	09bba6add27f	-	-	2026-11-25	xproof
+e5cea282-9e61-47da-8c5d-f5fca6a508a4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:iron-fist-pulverizer:combat0.block:s1,f:xs:XP:iron-fist-pulverizer:combat0.block:s1	-	-	-	3aa6ded33acb	-	09bba6add27f	-	-	2026-11-25	xproof
+e5cea282-9e61-47da-8c5d-f5fca6a508a4	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:iron-fist-pulverizer:f0t0:s1,f:xs:XP:iron-fist-pulverizer:f0t0:s1	-	-	-	3aa6ded33acb	-	09bba6add27f	-	-	2026-11-25	xproof
 e5d896f0-78ed-4374-bca0-9b1a70cab86c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fatal-attraction:f0t0:s1,f:xs:XP:fatal-attraction:f0t0:s1	-	-	-	d864b561c9cb	-	09aecbc98762	-	-	2026-11-24	xproof
 e5d896f0-78ed-4374-bca0-9b1a70cab86c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fatal-attraction:f0t0:s1,f:xs:XP:fatal-attraction:f0t0:s1	-	-	-	d864b561c9cb	-	09aecbc98762	-	-	2026-11-24	xproof
 e5d896f0-78ed-4374-bca0-9b1a70cab86c	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

@@ -59,13 +59,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e3fd1e9-7db6-40de-b1de-cd8cc9f60590	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e43805d-3576-47d4-9331-524869ab99d0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flamewake-phoenix:cast:s1,f:xs:XP:flamewake-phoenix:cast:s1	-	-	-	8c0bd19283bb	-	6b8c696a2cdc	-	-	2026-11-24	xproof
 9e43805d-3576-47d4-9331-524869ab99d0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:flamewake-phoenix:combat0.attack:s1,f:xs:XP:flamewake-phoenix:combat0.attack:s1	-	-	-	3aa6ded33acb	-	6b8c696a2cdc	-	-	2026-11-25	xproof
-9e43805d-3576-47d4-9331-524869ab99d0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Flamewake Phoenix/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9e43805d-3576-47d4-9331-524869ab99d0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:flamewake-phoenix:combat0.block:s1,f:xs:XP:flamewake-phoenix:combat0.block:s1	-	-	-	3aa6ded33acb	-	6b8c696a2cdc	-	-	2026-11-25	xproof
 9e43805d-3576-47d4-9331-524869ab99d0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Flamewake Phoenix/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9e43805d-3576-47d4-9331-524869ab99d0	static#0.0	static#0.0	agreed	-	X	scen	1	0	Flamewake Phoenix/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9e445336-8b1e-4642-b8bc-aa460ad79a3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e445336-8b1e-4642-b8bc-aa460ad79a3f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:gnoll-hunter:f0t0:s1,f:xs:XP:gnoll-hunter:f0t0:s1	-	-	-	3aa6ded33acb	-	5c7b5ce6dca6	-	-	2026-11-25	xproof
 9e459e48-d2bb-4c4e-9a87-58efb56cddd1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:redtooth-vanguard:cast:s1,f:xs:XP:redtooth-vanguard:cast:s1	-	-	-	23b491658465	-	2817fa6add2c	-	-	2026-11-24	xproof
-9e459e48-d2bb-4c4e-9a87-58efb56cddd1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Redtooth Vanguard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9e459e48-d2bb-4c4e-9a87-58efb56cddd1	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:redtooth-vanguard:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2817fa6add2c	-	-	2026-11-25	xproof
 9e459e48-d2bb-4c4e-9a87-58efb56cddd1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:redtooth-vanguard:combat0.block:s1,f:xs:XP:redtooth-vanguard:combat0.block:s1	-	-	-	3aa6ded33acb	-	2817fa6add2c	-	-	2026-11-25	xproof
 9e459e48-d2bb-4c4e-9a87-58efb56cddd1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Redtooth Vanguard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9e45e2da-7064-4ec0-8d09-55fc7d1aeaa8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:simulacrum-shaper:f0t0:s1,f:xs:XP:simulacrum-shaper:f0t0:s1	-	-	-	25696bf19d5b	-	be17b36babef	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ec43ec6-b625-4be8-8f79-3679e6657dbc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mycosynth-wellspring:f0t0:s1,f:xs:XP:mycosynth-wellspring:f0t0:s1	-	-	-	d864b561c9cb	-	03cbad28ff5d	-	-	2026-11-24	xproof
 9ec43ec6-b625-4be8-8f79-3679e6657dbc	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:labyrinth-of-skophos:f0a1:s2,f:xs:XP:labyrinth-of-skophos:f0a1:s2	-	-	-	23b491658465	-	c7fb11045592	-	-	2026-11-25	xproof
-9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8	f0/a1	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ecbc7de-9399-42f4-9c39-b9255080f48c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ecbc7de-9399-42f4-9c39-b9255080f48c	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -197,7 +197,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ef24a79-fade-4c38-b63c-22983206b4ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ef24a79-fade-4c38-b63c-22983206b4ad	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9ef2a604-4053-4ce0-bc08-43d9cc0b15cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ef676f0-53c5-4efe-9341-e960d00dbc69	cast	cast-resolve	agreed	-	X	scen	1	0	Consuming Ashes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9ef676f0-53c5-4efe-9341-e960d00dbc69	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:consuming-ashes:cast:s1,f:xs:XP:consuming-ashes:cast:s1	-	-	-	3aa6ded33acb	-	1a29e2c597da	-	-	2026-11-25	xproof
 9efb3aa4-0023-4e0e-8bd4-f4dff1b3be66	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Galion, Elvenking's Butler"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 9efb3aa4-0023-4e0e-8bd4-f4dff1b3be66	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Galion, Elvenking's Butler"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 9eff1ce5-41e4-4ae6-9480-2b549c8546bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guul-draz-overseer:cast:s1,f:xs:XP:guul-draz-overseer:cast:s1	-	-	-	d864b561c9cb	-	de9b6c4e5db8	-	-	2026-11-24	xproof

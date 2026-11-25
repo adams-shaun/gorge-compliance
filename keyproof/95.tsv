@@ -48,10 +48,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95500513-5519-4131-bb89-42383289f2bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95500513-5519-4131-bb89-42383289f2bd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9552fc97-9e6d-4307-bf58-30bf956356bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plague-drone:cast:s1,f:xs:XP:plague-drone:cast:s1	-	-	-	8c0bd19283bb	-	357e9d0b48a1	-	-	2026-11-24	xproof
-955504bc-050a-42a2-b2e4-ab213183b2be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-crimson-pulse:f0t1:s1,f:xs:XP:case-of-the-crimson-pulse:f0t1:s1	-	-	-	3aa6ded33acb	-	f7ddfcbd9bb5	-	-	2026-11-25	xproof
-955504bc-050a-42a2-b2e4-ab213183b2be	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-crimson-pulse:f0t1:s1,f:xs:XP:case-of-the-crimson-pulse:f0t1:s1	-	-	-	3aa6ded33acb	-	f7ddfcbd9bb5	-	-	2026-11-25	xproof
+955504bc-050a-42a2-b2e4-ab213183b2be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-crimson-pulse:f0t2:s1,f:xs:XP:case-of-the-crimson-pulse:f0t2:s1	-	-	-	3aa6ded33acb	-	f7ddfcbd9bb5	-	-	2026-11-25	xproof
+955504bc-050a-42a2-b2e4-ab213183b2be	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-crimson-pulse:f0t2:s1,f:xs:XP:case-of-the-crimson-pulse:f0t2:s1	-	-	-	3aa6ded33acb	-	f7ddfcbd9bb5	-	-	2026-11-25	xproof
 955504bc-050a-42a2-b2e4-ab213183b2be	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-crimson-pulse:f0t1:s1,f:xs:XP:case-of-the-crimson-pulse:f0t1:s1	-	-	-	3aa6ded33acb	-	f7ddfcbd9bb5	-	-	2026-11-25	xproof
-955504bc-050a-42a2-b2e4-ab213183b2be	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Case of the Crimson Pulse/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+955504bc-050a-42a2-b2e4-ab213183b2be	f0/t2	Phase	agreed	-	FX	start	2	0	x:xs:XP:case-of-the-crimson-pulse:f0t2:s1,f:xs:XP:case-of-the-crimson-pulse:f0t2:s1	-	-	-	3aa6ded33acb	-	f7ddfcbd9bb5	-	-	2026-11-25	xproof
 95560508-7ac9-4be9-8a3f-3c7d5b52807b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95560508-7ac9-4be9-8a3f-3c7d5b52807b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 955a7f4d-7100-4d8b-818c-be8651d0ebe6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mindculling:cast:s1,f:xs:XP:mindculling:cast:s1	-	-	-	d864b561c9cb	-	bd70340b4c12	-	-	2026-11-24	xproof
@@ -72,8 +72,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95649140-7978-4684-a1f1-af771e1d345a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:nephalia-moondrakes:cast:s1,f:xs:XP:nephalia-moondrakes:cast:s1	-	-	-	d864b561c9cb	-	e961fed6a8e7	-	-	2026-11-24	xproof
 95650a60-6f1d-4594-8b53-7fd406212207	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95664c29-9801-4dfc-9dbd-465abf6bb4ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barrow-naughty:cast:s1,f:xs:XP:barrow-naughty:cast:s1	-	-	-	23b491658465	-	35ed822b972f	-	-	2026-11-24	xproof
-95664c29-9801-4dfc-9dbd-465abf6bb4ee	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Barrow Naughty/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-95664c29-9801-4dfc-9dbd-465abf6bb4ee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Barrow Naughty/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+95664c29-9801-4dfc-9dbd-465abf6bb4ee	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:barrow-naughty:combat0.attack:s1,f:xs:XP:barrow-naughty:combat0.attack:s1	-	-	-	3aa6ded33acb	-	35ed822b972f	-	-	2026-11-25	xproof
+95664c29-9801-4dfc-9dbd-465abf6bb4ee	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:barrow-naughty:combat0.block:s1,f:xs:XP:barrow-naughty:combat0.block:s1	-	-	-	3aa6ded33acb	-	35ed822b972f	-	-	2026-11-25	xproof
 95664c29-9801-4dfc-9dbd-465abf6bb4ee	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:barrow-naughty:f0a0:s1,f:xs:XP:barrow-naughty:f0a0:s1	-	-	-	23b491658465	-	35ed822b972f	-	-	2026-11-24	xproof
 95664c29-9801-4dfc-9dbd-465abf6bb4ee	static#0.0	static#0.0	agreed	-	X	scen	1	0	Barrow Naughty/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9567d963-4815-466b-a319-6d138b6a0cd2	cast	cast-resolve	agreed	-	X	scen	1	0	Triple Triad/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 958628af-243c-4eb0-8620-5d483b6da768	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9587bdb3-fb6a-47c0-898d-404bf60fcb6b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	36722f811f7f	-	-	2026-11-24	xproof
 9587bdb3-fb6a-47c0-898d-404bf60fcb6b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	36722f811f7f	-	-	2026-11-24	xproof
-9588a7fd-bbe5-4a81-9a7e-d8e8f6c0537d	cast	cast-resolve	agreed	-	X	scen	1	0	Candy Grapple/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9588a7fd-bbe5-4a81-9a7e-d8e8f6c0537d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:candy-grapple:cast:s1,f:xs:XP:candy-grapple:cast:s1	-	-	-	3aa6ded33acb	-	d90783588297	-	-	2026-11-25	xproof
 958c2a27-9fb1-42b4-a0ef-296584763a98	cast	cast-resolve	agreed	-	X	scen	1	0	Stiltzkin, Moogle Merchant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 958c2a27-9fb1-42b4-a0ef-296584763a98	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stiltzkin, Moogle Merchant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 958c2a27-9fb1-42b4-a0ef-296584763a98	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stiltzkin, Moogle Merchant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95e66851-7aff-4559-91b4-6b8a95c6e1f8	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 95e8e6bb-d83b-46fd-bfdf-fc042d8edd4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95e94dea-5ac0-4d6f-adec-ca147aee861f	cast	cast-resolve	agreed	-	X	scen	1	0	Ajani's Pridemate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-95e94dea-5ac0-4d6f-adec-ca147aee861f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ajani's Pridemate/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+95e94dea-5ac0-4d6f-adec-ca147aee861f	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-pridemate:f0t0:s1,f:xs:XP:ajani-s-pridemate:f0t0:s1	-	-	-	3aa6ded33acb	-	c14cd8eed24f	-	-	2026-11-25	xproof
 95ee46ec-4b60-4fea-a09b-d15c083916b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95ee46ec-4b60-4fea-a09b-d15c083916b3	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 95efbb81-2418-42ed-ae34-5759efff8253	cast	cast-resolve	agreed	-	X	scen	1	0	Inspiring Paladin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

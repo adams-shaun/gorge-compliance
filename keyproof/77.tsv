@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7737ccdc-49f2-463e-8ffd-43ab98d11f45	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 7739311a-682b-48a6-8db2-c07f44141751	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:cast:s1,f:xs:XP:the-gitrog-ravenous-ride:cast:s1	-	-	-	23b491658465	-	44934fd44d14	-	-	2026-11-24	xproof
 7739311a-682b-48a6-8db2-c07f44141751	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:combat0.attack:s1,f:xs:XP:the-gitrog-ravenous-ride:combat0.attack:s1	-	-	-	3aa6ded33acb	-	44934fd44d14	-	-	2026-11-25	xproof
-7739311a-682b-48a6-8db2-c07f44141751	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	The Gitrog, Ravenous Ride/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7739311a-682b-48a6-8db2-c07f44141751	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:combat0.block:s1,f:xs:XP:the-gitrog-ravenous-ride:combat0.block:s1	-	-	-	3aa6ded33acb	-	44934fd44d14	-	-	2026-11-25	xproof
 7739311a-682b-48a6-8db2-c07f44141751	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Gitrog, Ravenous Ride/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7739311a-682b-48a6-8db2-c07f44141751	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:combat0.attack:s1,f:xs:XP:the-gitrog-ravenous-ride:combat0.attack:s1	-	-	-	3aa6ded33acb	-	44934fd44d14	-	-	2026-11-25	xproof
 77398866-eebb-4091-b566-7726f8194a59	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:realmbreaker-the-invasion-tree:cast:s1,f:xs:XP:realmbreaker-the-invasion-tree:cast:s1	-	-	-	d864b561c9cb	-	4933aa2150ca	-	-	2026-11-24	xproof
@@ -203,7 +203,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77eb76cf-a361-44e0-aeee-e8ef4b695799	static#0.0	static#0.0	agreed	-	X	scen	1	0	Persistent Marshstalker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77ec26f9-c7de-4bd8-bafb-8b9825891015	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77eda626-5cef-496d-b291-cfa1ee6fc1fb	cast	cast-resolve	agreed	-	X	scen	1	0	Cycle of Renewal/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-77f02ae6-2411-4378-b5e0-cc1cf5964458	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77f02ae6-2411-4378-b5e0-cc1cf5964458	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 77f1734d-ea0b-4344-8a9e-9d1a34eb6164	cast	cast-resolve	agreed	-	X	scen	1	0	Fresh Start/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77f1734d-ea0b-4344-8a9e-9d1a34eb6164	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fresh Start/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77f257b9-2047-40a3-85c2-00ad17deeb08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d35c7c8-1342-40b7-82ec-2f7973ee8af8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-wasp-janet-van-dyne:f0t0:s1,f:xs:XP:the-wasp-janet-van-dyne:f0t0:s1	-	-	-	8c0bd19283bb	-	9c65350a2469	-	-	2026-11-24	xproof
 8d36d80e-9934-4b56-bf3c-2b18a6da3d2d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:voracious-vermin:f0t0:s2,f:xs:XP:voracious-vermin:f0t0:s2	-	-	-	e07cf3a05ba5	-	d58c4b1703c8	-	-	2026-11-24	xproof
 8d36d80e-9934-4b56-bf3c-2b18a6da3d2d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:voracious-vermin:f0t0:s2,f:xs:XP:voracious-vermin:f0t0:s2	-	-	-	e07cf3a05ba5	-	d58c4b1703c8	-	-	2026-11-24	xproof
-8d36d80e-9934-4b56-bf3c-2b18a6da3d2d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Voracious Vermin/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8d36d80e-9934-4b56-bf3c-2b18a6da3d2d	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:voracious-vermin:f0t1:s1,f:xs:XP:voracious-vermin:f0t1:s1	-	-	-	3aa6ded33acb	-	d58c4b1703c8	-	-	2026-11-25	xproof
 8d38194e-b607-4ff4-9c19-0e8636d463bf	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:raging-ravine:f0a0:s1,f:xs:XP:raging-ravine:f0a0:s1	-	-	-	8a1b1a193ec0	-	b91e54c4f695	-	-	2026-11-24	xproof
 8d38194e-b607-4ff4-9c19-0e8636d463bf	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:raging-ravine:f0a1:s1,f:xs:XP:raging-ravine:f0a1:s1	-	-	-	8a1b1a193ec0	-	b91e54c4f695	-	-	2026-11-24	xproof
 8d38194e-b607-4ff4-9c19-0e8636d463bf	land	land	agreed	-	FX	start	2	0	x:xs:XP:raging-ravine:land:s1,f:xs:XP:raging-ravine:land:s1	-	-	-	8a1b1a193ec0	-	b91e54c4f695	-	-	2026-11-24	xproof
@@ -120,7 +120,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8dbc8fdb-36ce-4f30-b679-9c2029fcd9c6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8dc067bf-f78f-4ac4-b6e7-b305c42cf0bc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8dc067bf-f78f-4ac4-b6e7-b305c42cf0bc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8dc1148f-c6bc-469c-8d1a-7e3efd2de7e2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8dc1148f-c6bc-469c-8d1a-7e3efd2de7e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scorchmark:cast:s1,f:xs:XP:scorchmark:cast:s1	-	-	-	3aa6ded33acb	-	a25ab39f29b4	-	-	2026-11-25	xproof
 8dcba63c-4701-4dc9-81f5-ca8e8933a3ba	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Vector, Imperial Capital/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8dcba63c-4701-4dc9-81f5-ca8e8933a3ba	land	play-land	agreed	-	X	scen	1	0	Vector, Imperial Capital/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8dcf15fd-f000-4424-b74c-22fc2642b8c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

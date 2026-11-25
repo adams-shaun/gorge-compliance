@@ -104,8 +104,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 219cf182-0942-4569-91e9-9bc9bb1d06d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 219cf182-0942-4569-91e9-9bc9bb1d06d0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blood-petal-celebrant:f0t0:s1,f:xs:XP:blood-petal-celebrant:f0t0:s1	-	-	-	d864b561c9cb	-	ebcb4ed08ef9	-	-	2026-11-24	xproof
 21a094d6-de3d-48d4-a35d-b99617da55db	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sneering-shadewriter:f0t0:s2,f:xs:XP:sneering-shadewriter:f0t0:s2	-	-	-	e07cf3a05ba5	-	269d297ed50a	-	-	2026-11-24	xproof
-21a094d6-de3d-48d4-a35d-b99617da55db	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sneering Shadewriter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-21a094d6-de3d-48d4-a35d-b99617da55db	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sneering Shadewriter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+21a094d6-de3d-48d4-a35d-b99617da55db	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sneering-shadewriter:combat0.attack:s1,f:xs:XP:sneering-shadewriter:combat0.attack:s1	-	-	-	3aa6ded33acb	-	269d297ed50a	-	-	2026-11-25	xproof
+21a094d6-de3d-48d4-a35d-b99617da55db	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sneering-shadewriter:combat0.block:s1,f:xs:XP:sneering-shadewriter:combat0.block:s1	-	-	-	3aa6ded33acb	-	269d297ed50a	-	-	2026-11-25	xproof
 21a094d6-de3d-48d4-a35d-b99617da55db	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sneering-shadewriter:f0t0:s2,f:xs:XP:sneering-shadewriter:f0t0:s2	-	-	-	e07cf3a05ba5	-	269d297ed50a	-	-	2026-11-24	xproof
 21a86dcd-03e3-409b-b214-5feed07db584	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 21a86dcd-03e3-409b-b214-5feed07db584	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -129,8 +129,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 21b8d59f-a90d-44ff-a2e3-9f439ac3e14a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 21c66372-8ae8-447c-92df-b56c9ffebd43	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Locus Cobra"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 21c66372-8ae8-447c-92df-b56c9ffebd43	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
-21c768fa-4f1a-4a1a-abb9-e69e17426233	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-21c768fa-4f1a-4a1a-abb9-e69e17426233	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+21c768fa-4f1a-4a1a-abb9-e69e17426233	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shimmerwing-chimera:f0t0:s1,f:xs:XP:shimmerwing-chimera:f0t0:s1	-	-	-	3aa6ded33acb	-	453210181ed2	-	-	2026-11-25	xproof
+21c768fa-4f1a-4a1a-abb9-e69e17426233	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:shimmerwing-chimera:f0t0:s1,f:xs:XP:shimmerwing-chimera:f0t0:s1	-	-	-	3aa6ded33acb	-	453210181ed2	-	-	2026-11-25	xproof
 21c82044-6e16-4e41-a6d0-e4d7cb42f37c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21d269f2-c11c-4094-b526-500f0785f483	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21d269f2-c11c-4094-b526-500f0785f483	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

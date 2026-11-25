@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 922a030c-857b-4c61-93df-b70ebb32abd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 922a030c-857b-4c61-93df-b70ebb32abd3	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 922a8e27-a367-40c6-84df-86ed32f71c7c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:oltec-cloud-guard:f0t0:s2,f:xs:XP:oltec-cloud-guard:f0t0:s2	-	-	-	e07cf3a05ba5	-	f5e427eb138e	-	-	2026-11-24	xproof
-922a8e27-a367-40c6-84df-86ed32f71c7c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Oltec Cloud Guard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-922a8e27-a367-40c6-84df-86ed32f71c7c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Oltec Cloud Guard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+922a8e27-a367-40c6-84df-86ed32f71c7c	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:oltec-cloud-guard:combat0.attack:s1,f:xs:XP:oltec-cloud-guard:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f5e427eb138e	-	-	2026-11-25	xproof
+922a8e27-a367-40c6-84df-86ed32f71c7c	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:oltec-cloud-guard:combat0.block:s1,f:xs:XP:oltec-cloud-guard:combat0.block:s1	-	-	-	3aa6ded33acb	-	f5e427eb138e	-	-	2026-11-25	xproof
 922a8e27-a367-40c6-84df-86ed32f71c7c	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:oltec-cloud-guard:f0t0:s2,f:xs:XP:oltec-cloud-guard:f0t0:s2	-	-	-	e07cf3a05ba5	-	f5e427eb138e	-	-	2026-11-24	xproof
 922c6e1b-abcf-40e0-847e-9ebb7d0b6fd4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 922c6e1b-abcf-40e0-847e-9ebb7d0b6fd4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -199,9 +199,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92d17a26-bf73-4b62-b826-4cbe913d5c5e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodcloaker:cast:s1,f:xs:XP:woodcloaker:cast:s1	-	-	-	8c0bd19283bb	-	b80380026514	-	-	2026-11-24	xproof
 92d17a26-bf73-4b62-b826-4cbe913d5c5e	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 92d24b75-419b-4068-89c1-db9945f74972	cast	cast-resolve	agreed	-	X	scen	1	0	Furtive Courier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-92d24b75-419b-4068-89c1-db9945f74972	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Furtive Courier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+92d24b75-419b-4068-89c1-db9945f74972	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:furtive-courier:combat0.attack:s1,f:xs:XP:furtive-courier:combat0.attack:s1	-	-	-	3aa6ded33acb	-	712d53bc5890	-	-	2026-11-25	xproof
 92d24b75-419b-4068-89c1-db9945f74972	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Furtive Courier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-92d24b75-419b-4068-89c1-db9945f74972	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Furtive Courier/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+92d24b75-419b-4068-89c1-db9945f74972	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:furtive-courier:combat0.attack:s1,f:xs:XP:furtive-courier:combat0.attack:s1	-	-	-	3aa6ded33acb	-	712d53bc5890	-	-	2026-11-25	xproof
 92d24b75-419b-4068-89c1-db9945f74972	static#0.0	static#0.0	agreed	-	X	scen	1	0	Furtive Courier/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92d28545-4403-4c24-8547-efab4dde6a53	cast	cast-resolve	agreed	-	X	scen	1	0	Skyseer's Chariot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92d28545-4403-4c24-8547-efab4dde6a53	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Skyseer's Chariot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

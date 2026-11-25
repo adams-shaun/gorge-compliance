@@ -20,8 +20,8 @@ d317e3f1-553f-44f6-8543-d6d4c42534ad	combat#0.block	combat#0.block	agreed	-	X	sc
 d317e3f1-553f-44f6-8543-d6d4c42534ad	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sonic-shrieker:f0t0:s2,f:xs:XP:sonic-shrieker:f0t0:s2	-	-	-	267e485f6204	-	6f865cb845ec	-	-	2026-11-24	xproof
 d31c6043-e005-4efe-9aa7-d82cb122eebe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d31fd12f-b4dd-4bc3-ace4-703dabd0f607	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:aven-interrupter:cast:s1,f:xs:XP:aven-interrupter:cast:s1	-	-	-	23b491658465	-	1dc5c5321d97	-	-	2026-11-24	xproof
-d31fd12f-b4dd-4bc3-ace4-703dabd0f607	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aven Interrupter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d31fd12f-b4dd-4bc3-ace4-703dabd0f607	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aven Interrupter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d31fd12f-b4dd-4bc3-ace4-703dabd0f607	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:aven-interrupter:combat0.attack:s1,f:xs:XP:aven-interrupter:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1dc5c5321d97	-	-	2026-11-25	xproof
+d31fd12f-b4dd-4bc3-ace4-703dabd0f607	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aven-interrupter:combat0.block:s1,f:xs:XP:aven-interrupter:combat0.block:s1	-	-	-	3aa6ded33acb	-	1dc5c5321d97	-	-	2026-11-25	xproof
 d31fd12f-b4dd-4bc3-ace4-703dabd0f607	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:aven-interrupter:cast:s1,f:xs:XP:aven-interrupter:cast:s1	-	-	-	23b491658465	-	1dc5c5321d97	-	-	2026-11-24	xproof
 d31fd12f-b4dd-4bc3-ace4-703dabd0f607	static#0.0	static#0.0	agreed	-	X	scen	1	0	Aven Interrupter/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d3264482-2a5a-45e8-987f-593b8aceac12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -32,9 +32,9 @@ d32c9439-4c97-412b-83cc-6d9acb48be3c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Exhib
 d32cf19d-a974-4161-851d-dcbf37069e26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d32cf19d-a974-4161-851d-dcbf37069e26	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d32f570a-3738-4a9d-845f-6c7892b69991	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:screaming-phantom:cast:s1,f:xs:XP:screaming-phantom:cast:s1	-	-	-	23b491658465	-	4053d7d08b9f	-	-	2026-11-25	xproof
-d32f570a-3738-4a9d-845f-6c7892b69991	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Screaming Phantom/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d32f570a-3738-4a9d-845f-6c7892b69991	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:screaming-phantom:combat0.attack:s1,f:xs:XP:screaming-phantom:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4053d7d08b9f	-	-	2026-11-25	xproof
 d32f570a-3738-4a9d-845f-6c7892b69991	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:screaming-phantom:combat0.block:s1,f:xs:XP:screaming-phantom:combat0.block:s1	-	-	-	3aa6ded33acb	-	4053d7d08b9f	-	-	2026-11-25	xproof
-d32f570a-3738-4a9d-845f-6c7892b69991	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:screaming-phantom:f0t0:s1,f:xs:XP:screaming-phantom:f0t0:s1	-	-	-	8c0bd19283bb	-	4053d7d08b9f	-	-	2026-11-24	xproof
+d32f570a-3738-4a9d-845f-6c7892b69991	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:screaming-phantom:combat0.attack:s1,f:xs:XP:screaming-phantom:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4053d7d08b9f	-	-	2026-11-25	xproof
 d32f973e-38db-4f74-aec6-258d25c1fb7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keldon-arsonist:cast:s1,f:xs:XP:keldon-arsonist:cast:s1	-	-	-	5f2128bf97e4	-	81b0b9378073	-	-	2026-11-24	xproof
 d32f973e-38db-4f74-aec6-258d25c1fb7d	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 d331db6a-21ff-4dec-aa6a-e30bf925ca32	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Moth Herb Elixir"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
@@ -70,7 +70,7 @@ d35954f1-93c6-4574-9dcf-66de69645a16	cast	cast	agreed	-	F	start	4	0	f:xs:XP:forc
 d35954f1-93c6-4574-9dcf-66de69645a16	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:forceful-cultivator:cast:s1	-	-	-	23b491658465	-	3c4ca76d32ff	-	-	2026-11-24	xproof
 d36075c2-de66-4202-9217-b1102a2bc14b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:pelakka-wurm:f0t0:s2,f:xs:XP:pelakka-wurm:f0t0:s2	-	-	-	e07cf3a05ba5	-	17d0cd752287	-	-	2026-11-24	xproof
 d36075c2-de66-4202-9217-b1102a2bc14b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:pelakka-wurm:combat0.attack:s1,f:xs:XP:pelakka-wurm:combat0.attack:s1	-	-	-	3aa6ded33acb	-	17d0cd752287	-	-	2026-11-25	xproof
-d36075c2-de66-4202-9217-b1102a2bc14b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pelakka Wurm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d36075c2-de66-4202-9217-b1102a2bc14b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:pelakka-wurm:combat0.block:s1,f:xs:XP:pelakka-wurm:combat0.block:s1	-	-	-	3aa6ded33acb	-	17d0cd752287	-	-	2026-11-25	xproof
 d36075c2-de66-4202-9217-b1102a2bc14b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:pelakka-wurm:f0t0:s2,f:xs:XP:pelakka-wurm:f0t0:s2	-	-	-	e07cf3a05ba5	-	17d0cd752287	-	-	2026-11-24	xproof
 d36075c2-de66-4202-9217-b1102a2bc14b	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pelakka-wurm:f0t1:s1,f:xs:XP:pelakka-wurm:f0t1:s1	-	-	-	8c0bd19283bb	-	17d0cd752287	-	-	2026-11-24	xproof
 d360ce89-d80d-4be6-be8c-7e7758cd5840	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ d36acdfe-2b1b-4c19-8b81-0b3127e480fe	cast	NULL	owed	refused:steps-needed:token	-
 d36acdfe-2b1b-4c19-8b81-0b3127e480fe	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d36d3c93-ed24-4447-9d15-3071f5c0989b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hoarding-dragon:f0t0:s2,f:xs:XP:hoarding-dragon:f0t0:s2	-	-	-	e07cf3a05ba5	-	3d98b58f5b8f	-	-	2026-11-24	xproof
 d36d3c93-ed24-4447-9d15-3071f5c0989b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:hoarding-dragon:combat0.attack:s1,f:xs:XP:hoarding-dragon:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3d98b58f5b8f	-	-	2026-11-25	xproof
-d36d3c93-ed24-4447-9d15-3071f5c0989b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hoarding Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d36d3c93-ed24-4447-9d15-3071f5c0989b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:hoarding-dragon:combat0.block:s1,f:xs:XP:hoarding-dragon:combat0.block:s1	-	-	-	3aa6ded33acb	-	3d98b58f5b8f	-	-	2026-11-25	xproof
 d36d3c93-ed24-4447-9d15-3071f5c0989b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hoarding-dragon:f0t0:s2,f:xs:XP:hoarding-dragon:f0t0:s2	-	-	-	e07cf3a05ba5	-	3d98b58f5b8f	-	-	2026-11-24	xproof
 d36d3c93-ed24-4447-9d15-3071f5c0989b	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hoarding-dragon:f0t1:s1,f:xs:XP:hoarding-dragon:f0t1:s1	-	-	-	8c0bd19283bb	-	3d98b58f5b8f	-	-	2026-11-24	xproof
 d36e0c9f-c025-4dfe-9644-9cad2461ce38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ d3b259e9-f9c7-4830-91fa-6e3d9f4cc1e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:one
 d3b259e9-f9c7-4830-91fa-6e3d9f4cc1e3	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:one-thousand-lashes:cast:s1,f:xs:XP:one-thousand-lashes:cast:s1	-	-	-	d864b561c9cb	-	ba76e4ea2ac3	-	-	2026-11-24	xproof
 d3b2d8a2-d3bc-448c-9cf6-6bead6010c28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bristly-bill-spine-sower:cast:s1,f:xs:XP:bristly-bill-spine-sower:cast:s1	-	-	-	23b491658465	-	be300f498ae1	-	-	2026-11-24	xproof
 d3b2d8a2-d3bc-448c-9cf6-6bead6010c28	f0/a0	MultiplyCounter	agreed	-	FX	start	2	0	x:xs:XP:bristly-bill-spine-sower:f0a0:s1,f:xs:XP:bristly-bill-spine-sower:f0a0:s1	-	-	-	23b491658465	-	be300f498ae1	-	-	2026-11-24	xproof
-d3b2d8a2-d3bc-448c-9cf6-6bead6010c28	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bristly Bill, Spine Sower/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d3b2d8a2-d3bc-448c-9cf6-6bead6010c28	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bristly-bill-spine-sower:f0t0:s1,f:xs:XP:bristly-bill-spine-sower:f0t0:s1	-	-	-	3aa6ded33acb	-	be300f498ae1	-	-	2026-11-25	xproof
 d3b408e7-4d39-47a3-b00c-846903f8ae77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trumpet-blast:cast:s1,f:xs:XP:trumpet-blast:cast:s1	-	-	-	25696bf19d5b	-	f32f778874c2	-	-	2026-11-24	xproof
 d3b49970-46b7-441b-bff8-8403d982b8a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d3b49970-46b7-441b-bff8-8403d982b8a7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:majestic-heliopterus:f0t0:s1,f:xs:XP:majestic-heliopterus:f0t0:s1	-	-	-	d864b561c9cb	-	99e61c71bf8a	-	-	2026-11-24	xproof

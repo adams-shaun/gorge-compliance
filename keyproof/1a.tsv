@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a60dc0f-e387-4d28-8ff0-c3f1883d0c5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a60dc0f-e387-4d28-8ff0-c3f1883d0c5d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:hamlet-captain:f0t0:s1,f:xs:XP:hamlet-captain:f0t0:s1	-	-	-	d864b561c9cb	-	f5b06c8101d2	-	-	2026-11-24	xproof
 1a60dc0f-e387-4d28-8ff0-c3f1883d0c5d	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1a61929e-14bd-4f21-b173-00818d49743d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1a61929e-14bd-4f21-b173-00818d49743d	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 1a62ba93-153c-4bed-9f6a-ff914df360c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a62ba93-153c-4bed-9f6a-ff914df360c1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a668556-da98-4f1e-b1f7-26b7d63357a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a8185ed-636b-49ad-bf24-2ab02c7fb91e	cast	counter-spell	agreed	-	X	scen	1	0	Swallowed by Leviathan/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a82be68-3b74-4dfc-9068-3abea61db709	cast	cast-resolve	agreed	-	FX	scen	2	0	Fell Gravship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a82be68-3b74-4dfc-9068-3abea61db709	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1a82be68-3b74-4dfc-9068-3abea61db709	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fell Gravship/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1a82be68-3b74-4dfc-9068-3abea61db709	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:fell-gravship:static0.0:s1,f:xs:XP:fell-gravship:static0.0:s1	-	-	-	3aa6ded33acb	-	772a3850b942	-	-	2026-11-25	xproof
 1a840210-204d-41cd-afc0-46abf7ea5f87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a840210-204d-41cd-afc0-46abf7ea5f87	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 1a846ad6-15c9-4bf9-9127-612018a557b9	cast	cast-resolve	agreed	-	X	scen	1	0	Judge Magister Gabranth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -171,8 +171,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1adcc4a8-b2dd-4d9a-bded-188b81c84a10	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1adcf587-9035-4299-a2bd-62f805fdd897	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:highborn-vampire:cast:s1,f:xs:XP:highborn-vampire:cast:s1	-	-	-	23b491658465	-	0cfa54e31e7f	-	-	2026-11-24	xproof
 1ae339fd-8e64-4e3a-8e27-e4993932ba62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gnarlback-rhino:cast:s1,f:xs:XP:gnarlback-rhino:cast:s1	-	-	-	23b491658465	-	020b3f18a49e	-	-	2026-11-24	xproof
-1ae339fd-8e64-4e3a-8e27-e4993932ba62	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gnarlback Rhino/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1ae339fd-8e64-4e3a-8e27-e4993932ba62	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gnarlback Rhino/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1ae339fd-8e64-4e3a-8e27-e4993932ba62	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gnarlback-rhino:combat0.attack:s1,f:xs:XP:gnarlback-rhino:combat0.attack:s1	-	-	-	3aa6ded33acb	-	020b3f18a49e	-	-	2026-11-25	xproof
+1ae339fd-8e64-4e3a-8e27-e4993932ba62	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gnarlback-rhino:combat0.block:s1,f:xs:XP:gnarlback-rhino:combat0.block:s1	-	-	-	3aa6ded33acb	-	020b3f18a49e	-	-	2026-11-25	xproof
 1ae339fd-8e64-4e3a-8e27-e4993932ba62	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gnarlback Rhino/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ae54fe7-b1d3-4c13-a8ef-f502cf3eb1a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ae88ba6-4973-45d1-a251-4d924ab4bc73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

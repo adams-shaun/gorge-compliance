@@ -49,8 +49,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b4a400b-435d-4140-984b-65f034c6a9fc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ransack:cast:s1	-	-	-	5f2128bf97e4	-	9498a413e5bd	-	-	2026-11-24	xproof
 5b4b08a5-3af8-4c33-ab5e-7bee7f79e77a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nocturnal-raid:cast:s1,f:xs:XP:nocturnal-raid:cast:s1	-	-	-	ea3140b6974b	-	5518c3085683	-	-	2026-11-24	xproof
 5b4b21ed-c24e-4038-83fb-bd7f3c3426cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emberheart-challenger:cast:s1,f:xs:XP:emberheart-challenger:cast:s1	-	-	-	23b491658465	-	4fb05e44d6c4	-	-	2026-11-24	xproof
-5b4b21ed-c24e-4038-83fb-bd7f3c3426cd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Emberheart Challenger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5b4b21ed-c24e-4038-83fb-bd7f3c3426cd	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:emberheart-challenger:f0t1:s1,f:xs:XP:emberheart-challenger:f0t1:s1	-	-	-	3aa6ded33acb	-	4fb05e44d6c4	-	-	2026-11-25	xproof
+5b4b21ed-c24e-4038-83fb-bd7f3c3426cd	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:emberheart-challenger:f0t0:s1,f:xs:XP:emberheart-challenger:f0t0:s1	-	-	-	3aa6ded33acb	-	4fb05e44d6c4	-	-	2026-11-25	xproof
+5b4b21ed-c24e-4038-83fb-bd7f3c3426cd	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:emberheart-challenger:f0t0:s1,f:xs:XP:emberheart-challenger:f0t0:s1	-	-	-	3aa6ded33acb	-	4fb05e44d6c4	-	-	2026-11-25	xproof
 5b4e1163-09aa-4597-9a41-e1e384975056	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b4e1163-09aa-4597-9a41-e1e384975056	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b4e1163-09aa-4597-9a41-e1e384975056	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

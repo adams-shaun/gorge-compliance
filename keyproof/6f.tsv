@@ -53,10 +53,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f4861f4-1b3b-4dbc-b55b-196075d0a693	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f4861f4-1b3b-4dbc-b55b-196075d0a693	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f4861f4-1b3b-4dbc-b55b-196075d0a693	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f498ff7-38c9-44ea-9cb5-994a003825ee	cast	cast-resolve	agreed	-	FX	scen	2	0	Ingenious Prodigy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6f498ff7-38c9-44ea-9cb5-994a003825ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ingenious-prodigy:f0t0:s1,f:xs:XP:ingenious-prodigy:f0t0:s1	-	-	-	3aa6ded33acb	-	e33c0cf95db2	-	-	2026-11-25	xproof
 6f498ff7-38c9-44ea-9cb5-994a003825ee	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ingenious Prodigy/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f498ff7-38c9-44ea-9cb5-994a003825ee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ingenious Prodigy/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6f498ff7-38c9-44ea-9cb5-994a003825ee	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ingenious Prodigy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6f498ff7-38c9-44ea-9cb5-994a003825ee	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ingenious-prodigy:f0t0:s1,f:xs:XP:ingenious-prodigy:f0t0:s1	-	-	-	3aa6ded33acb	-	e33c0cf95db2	-	-	2026-11-25	xproof
 6f4ac4a4-53ec-4bc9-8f5c-d4b801d867b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f4ac4a4-53ec-4bc9-8f5c-d4b801d867b2	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 6f4c94b6-f829-4646-a574-083997b78dfb	cast	cast-resolve	agreed	-	X	scen	1	0	Winter Soldier, Icy Assassin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

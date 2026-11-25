@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ebc4198-7317-4ffb-b8b8-14733c2077ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ebc4198-7317-4ffb-b8b8-14733c2077ff	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8ec03b88-8d3a-4a32-8b7c-7da59b0c03d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8ec03b88-8d3a-4a32-8b7c-7da59b0c03d0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8ec03b88-8d3a-4a32-8b7c-7da59b0c03d0	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:colossus-hammer:f0a0:s1,f:xs:XP:colossus-hammer:f0a0:s1	-	-	-	3aa6ded33acb	-	9a1dc4176861	-	-	2026-11-25	xproof
 8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	cast	cast-resolve	agreed	-	X	scen	1	0	Stalked Researcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stalked Researcher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8ec3c334-8a53-46d8-8cfb-c647c3a1ef74	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stalked Researcher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ecbc87e-a63e-4afc-b5eb-2fc3dcd685f5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grozoth:cast:s1,f:xs:XP:grozoth:cast:s1	-	-	-	64a08ba7d913	-	b2dfb44024f5	-	-	2026-11-24	xproof
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:nurturing-pixie:f0t0:s2,f:xs:XP:nurturing-pixie:f0t0:s2	-	-	-	267e485f6204	-	f1a203d4f380	-	-	2026-11-24	xproof
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nurturing Pixie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8ecd3743-7c32-41ce-9ac1-c8c855a47302	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Nurturing Pixie/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8ecd3743-7c32-41ce-9ac1-c8c855a47302	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:nurturing-pixie:combat0.block:s1,f:xs:XP:nurturing-pixie:combat0.block:s1	-	-	-	3aa6ded33acb	-	f1a203d4f380	-	-	2026-11-25	xproof
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:nurturing-pixie:f0t0:s2,f:xs:XP:nurturing-pixie:f0t0:s2	-	-	-	267e485f6204	-	f1a203d4f380	-	-	2026-11-24	xproof
 8ed27504-f86b-4ce5-9395-7029825176ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-ambushers:cast:s1,f:xs:XP:fire-nation-ambushers:cast:s1	-	-	-	8c0bd19283bb	-	250a29d673fe	-	-	2026-11-24	xproof
 8ed57194-7508-4aef-9373-64f7e80612d8	cast	cast	agreed	-	F	start	4	0	f:xs:XP:treachery:cast:s1	-	-	-	5f2128bf97e4	-	90b567b0ac8f	-	-	2026-11-24	xproof

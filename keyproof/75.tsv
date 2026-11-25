@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7532f0ea-9d13-43ca-9b7d-2d22f2a66017	cast	cast-resolve	agreed	-	X	scen	1	0	Item Shopkeep/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7532f0ea-9d13-43ca-9b7d-2d22f2a66017	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Item Shopkeep/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7534d0b3-4211-4add-8e8d-370c033518d3	cast	cast-resolve	agreed	-	FX	scen	2	0	Goldfury Strider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7534d0b3-4211-4add-8e8d-370c033518d3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Goldfury Strider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7534d0b3-4211-4add-8e8d-370c033518d3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:goldfury-strider:combat0.attack:s1,f:xs:XP:goldfury-strider:combat0.attack:s1	-	-	-	3aa6ded33acb	-	17ac3866acf6	-	-	2026-11-25	xproof
 7534d0b3-4211-4add-8e8d-370c033518d3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:goldfury-strider:combat0.block:s1,f:xs:XP:goldfury-strider:combat0.block:s1	-	-	-	3aa6ded33acb	-	17ac3866acf6	-	-	2026-11-25	xproof
 7534d0b3-4211-4add-8e8d-370c033518d3	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Goldfury Strider/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7536eb66-959d-4dca-9b75-895572ef733c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -198,5 +198,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75fddffb-68f4-4b65-bf3b-4e2ada62a522	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:scion-of-calamity:f0t1:s1,f:xs:XP:scion-of-calamity:f0t1:s1	-	-	-	8c0bd19283bb	-	cf72bc3bbf04	-	-	2026-11-24	xproof
 75fddffb-68f4-4b65-bf3b-4e2ada62a522	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:scion-of-calamity:f0t1:s1,f:xs:XP:scion-of-calamity:f0t1:s1	-	-	-	8c0bd19283bb	-	cf72bc3bbf04	-	-	2026-11-24	xproof
 75ffebc4-8db9-4de6-a330-e3f41cdccecc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archmage-s-newt:cast:s1,f:xs:XP:archmage-s-newt:cast:s1	-	-	-	23b491658465	-	589b96a5c1e5	-	-	2026-11-24	xproof
-75ffebc4-8db9-4de6-a330-e3f41cdccecc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Archmage's Newt/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-75ffebc4-8db9-4de6-a330-e3f41cdccecc	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:archmage-s-newt:f0t0:s1,f:xs:XP:archmage-s-newt:f0t0:s1	-	-	-	3aa6ded33acb	-	589b96a5c1e5	-	-	2026-11-25	xproof
+75ffebc4-8db9-4de6-a330-e3f41cdccecc	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:archmage-s-newt:f0a0:s1,f:xs:XP:archmage-s-newt:f0a0:s1	-	-	-	3aa6ded33acb	-	589b96a5c1e5	-	-	2026-11-25	xproof
+75ffebc4-8db9-4de6-a330-e3f41cdccecc	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:archmage-s-newt:f0a0:s1,f:xs:XP:archmage-s-newt:f0a0:s1	-	-	-	3aa6ded33acb	-	589b96a5c1e5	-	-	2026-11-25	xproof

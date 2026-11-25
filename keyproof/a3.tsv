@@ -46,8 +46,8 @@ a32e08fa-bea4-4ba9-a126-9bf0a91f67e2	land	play-land	agreed	-	X	scen	1	0	Fields o
 a33073bf-66c1-425b-9f25-748b343f33fe	cast	cast	owed	harness	-	start	0	0	-	-	-	-	16ec2936189a	-	39336b54034d	-	-	2026-11-24	xproof
 a33073bf-66c1-425b-9f25-748b343f33fe	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 a332e80a-dc51-4dc6-bc85-e114a1c6fdb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vanquish-the-horde:cast:s1,f:xs:XP:vanquish-the-horde:cast:s1	-	-	-	ae86f6029288	-	026ee183f8ec	-	-	2026-11-24	xproof
-a336c10a-b5bd-47ff-ba2d-31e27af1e15a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a336c10a-b5bd-47ff-ba2d-31e27af1e15a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a336c10a-b5bd-47ff-ba2d-31e27af1e15a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tendershoot-dryad:f0t0:s1,f:xs:XP:tendershoot-dryad:f0t0:s1	-	-	-	3aa6ded33acb	-	f41109db5418	-	-	2026-11-25	xproof
+a336c10a-b5bd-47ff-ba2d-31e27af1e15a	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:tendershoot-dryad:f0t0:s1,f:xs:XP:tendershoot-dryad:f0t0:s1	-	-	-	3aa6ded33acb	-	f41109db5418	-	-	2026-11-25	xproof
 a33961bb-fff0-4f4a-aa35-f904dbf2b075	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a33961bb-fff0-4f4a-aa35-f904dbf2b075	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a33982e4-d7d2-4319-bf04-534b8f253dfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ a3acb58d-3fb1-4602-8575-d78b716b0ea5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a3add0d7-2610-4b4e-9d43-3f04a5cd8259	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cephalid-inkshrouder:cast:s1,f:xs:XP:cephalid-inkshrouder:cast:s1	-	-	-	fc71ca68c5ac	-	7c952fa8be37	-	-	2026-11-24	xproof
 a3add0d7-2610-4b4e-9d43-3f04a5cd8259	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 a3ae6694-6314-42e2-bc12-d0e32d49b347	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bestial-bloodline:cast:s1,f:xs:XP:bestial-bloodline:cast:s1	-	-	-	23b491658465	-	4ab2b6d02182	-	-	2026-11-24	xproof
-a3ae6694-6314-42e2-bc12-d0e32d49b347	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bestial Bloodline/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a3ae6694-6314-42e2-bc12-d0e32d49b347	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:bestial-bloodline:f0a0:s1,f:xs:XP:bestial-bloodline:f0a0:s1	-	-	-	3aa6ded33acb	-	4ab2b6d02182	-	-	2026-11-25	xproof
 a3ae6694-6314-42e2-bc12-d0e32d49b347	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bestial Bloodline/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a3afd8b9-d499-40f7-be41-f8fee6636a1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twilight-prophet:f0t0:s1,f:xs:XP:twilight-prophet:f0t0:s1	-	-	-	3aa6ded33acb	-	b967b8a48902	-	-	2026-11-25	xproof
 a3afd8b9-d499-40f7-be41-f8fee6636a1d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:twilight-prophet:f0t0:s1,f:xs:XP:twilight-prophet:f0t0:s1	-	-	-	3aa6ded33acb	-	b967b8a48902	-	-	2026-11-25	xproof

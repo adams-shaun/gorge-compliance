@@ -53,8 +53,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 913bca28-faf9-42e6-a8c0-469cd9bc0208	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Earthen Ally/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 913bca28-faf9-42e6-a8c0-469cd9bc0208	static#0.0	static#0.0	agreed	-	X	scen	1	0	Earthen Ally/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 913dbce2-6805-453f-a9c3-64f1cc658627	cast	cast-resolve	agreed	-	FX	scen	2	0	Dragon Sniper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-913dbce2-6805-453f-a9c3-64f1cc658627	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dragon Sniper/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-913dbce2-6805-453f-a9c3-64f1cc658627	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dragon Sniper/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+913dbce2-6805-453f-a9c3-64f1cc658627	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dragon-sniper:combat0.attack:s1,f:xs:XP:dragon-sniper:combat0.attack:s1	-	-	-	3aa6ded33acb	-	5323bc70e6f2	-	-	2026-11-25	xproof
+913dbce2-6805-453f-a9c3-64f1cc658627	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dragon-sniper:combat0.block:s1,f:xs:XP:dragon-sniper:combat0.block:s1	-	-	-	3aa6ded33acb	-	5323bc70e6f2	-	-	2026-11-25	xproof
 913dcf97-0804-4b21-8daa-f2b481dc0f2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 913dcf97-0804-4b21-8daa-f2b481dc0f2f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 913e6ff0-b522-45a3-9a1e-4a87a515cc1d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:stark-s-ingenuity:cast:s1,f:xs:XP:stark-s-ingenuity:cast:s1	-	-	-	8c0bd19283bb	-	54d99ecaae72	-	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91693cad-3233-440a-b2f0-fe4d8b17ed42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 916bd025-c44f-49c9-8d76-4b7b2f9a8ba3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:night-of-souls-betrayal:cast:s1,f:xs:XP:night-of-souls-betrayal:cast:s1	-	-	-	64a08ba7d913	-	e0a7554306ad	-	-	2026-11-24	xproof
 916cb70f-3b06-48ed-972d-75f805aa0892	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brineborn-cutthroat:cast:s1,f:xs:XP:brineborn-cutthroat:cast:s1	-	-	-	3aa6ded33acb	-	e6017ae81d5c	-	-	2026-11-25	xproof
-916cb70f-3b06-48ed-972d-75f805aa0892	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Brineborn Cutthroat/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+916cb70f-3b06-48ed-972d-75f805aa0892	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:brineborn-cutthroat:f0t0:s1,f:xs:XP:brineborn-cutthroat:f0t0:s1	-	-	-	3aa6ded33acb	-	e6017ae81d5c	-	-	2026-11-25	xproof
 916d2a0d-1c3e-4102-958d-524b6b4df509	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 916db499-7f0a-45f7-8abe-94818a53e494	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:armored-ascension:cast:s1,f:xs:XP:armored-ascension:cast:s1	-	-	-	3aa6ded33acb	-	8d3442f5554c	-	-	2026-11-25	xproof
 9171248e-045e-4ed4-aa06-eea3ae3d8df0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rowan-s-stalwarts:cast:s1,f:xs:XP:rowan-s-stalwarts:cast:s1	-	-	-	ae86f6029288	-	f07275f6ee1c	-	-	2026-11-24	xproof
@@ -153,10 +153,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91c2f488-2b49-4499-8d5d-c1aff73a4b57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shattered-dreams:cast:s1,f:xs:XP:shattered-dreams:cast:s1	-	-	-	25696bf19d5b	-	19023dc926aa	-	-	2026-11-24	xproof
 91c380f6-2c41-48b7-9f07-104e8659e397	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:adanto-vanguard:cast:s1,f:xs:XP:adanto-vanguard:cast:s1	-	-	-	d864b561c9cb	-	de8d487a0b9d	-	-	2026-11-24	xproof
 91c380f6-2c41-48b7-9f07-104e8659e397	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:adanto-vanguard:cast:s1,f:xs:XP:adanto-vanguard:cast:s1	-	-	-	d864b561c9cb	-	de8d487a0b9d	-	-	2026-11-24	xproof
-91c835d1-22ca-4c90-9ba6-c8e01bbc0347	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:generous-plunderer:cast:s1,f:xs:XP:generous-plunderer:cast:s1	-	-	-	23b491658465	-	75fc42421daa	-	-	2026-11-25	xproof
+91c835d1-22ca-4c90-9ba6-c8e01bbc0347	cast	cast	agreed	-	F	start	2	0	f:xs:XP:generous-plunderer:f0t0:s1	-	-	-	3aa6ded33acb	-	75fc42421daa	-	-	2026-11-25	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Generous Plunderer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Generous Plunderer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-91c835d1-22ca-4c90-9ba6-c8e01bbc0347	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Generous Plunderer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+91c835d1-22ca-4c90-9ba6-c8e01bbc0347	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:generous-plunderer:f0t0:s1	-	-	-	3aa6ded33acb	-	75fc42421daa	-	-	2026-11-25	xproof
 91c835d1-22ca-4c90-9ba6-c8e01bbc0347	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Generous Plunderer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91c83b1e-32d9-4bb4-9a71-05fbb0cb8134	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
