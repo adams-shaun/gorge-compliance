@@ -1415,3 +1415,139 @@ func TestStartfacestarts(t *testing.T) {
 		}
 	}
 }
+
+// TestStartcombattriggers: a combat trigger (blocks, becomes blocked, combat
+// damage dealt or taken) is one scripted combat with no forced play: the active
+// seat attacks with exactly Attack, the other blocks with exactly Block (or not
+// at all), the card beside them. A trigger on an Aura's or Equipment's bearer
+// has no start file to attach with, and stays refused.
+func TestStartcombattriggers(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key     string
+		active        int
+		p0BF, p1BF    []string
+		attack, block string
+	}{
+		// the card attacks and is blocked by the fixture
+		{card: "Acolyte of the Inferno", key: "f0/t0", p0BF: []string{"Acolyte of the Inferno"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Acolyte of the Inferno", block: "Grizzly Bears"},
+		{card: "Ammit Eternal", key: "f0/t2", p0BF: []string{"Ammit Eternal"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Ammit Eternal", block: "Grizzly Bears"},
+		// the card blocks the fixture's attack
+		{card: "Aether Membrane", key: "f0/t0", active: 1, p0BF: []string{"Aether Membrane"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Grizzly Bears", block: "Aether Membrane"},
+		// the card connects: nothing blocks
+		{card: "Akki Lavarunner // Tok-Tok, Volcano Born", key: "f0/t0", p0BF: []string{"Akki Lavarunner // Tok-Tok, Volcano Born"},
+			attack: "Akki Lavarunner // Tok-Tok, Volcano Born"},
+		// the card is dealt the damage
+		{card: "Pious Warrior", key: "f0/t0", active: 1, p0BF: []string{"Pious Warrior"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Grizzly Bears", block: "Pious Warrior"},
+	}
+	for _, r := range rows {
+		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Active != r.active {
+				t.Errorf("active %d, want %d", f.Active, r.active)
+			}
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.p0BF)
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, r.p1BF)
+			fo := f.Focus
+			if fo == nil || fo.Kind != "" || fo.Attack != r.attack || fo.Block != r.block {
+				t.Errorf("focus %+v, want kind \"\" attack %q block %q", fo, r.attack, r.block)
+			}
+			raw, err := f.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := DecodeStartFile(raw); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+	res, err := Generate(reg, b, "Aqueous Form", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Path != PathRefused || res.Reason != "no-generator:trigger:Attacks:filter" {
+		t.Errorf("Aqueous Form: %+v %v, want refused no-generator:trigger:Attacks:filter", res, err)
+	}
+}
+
+// TestStartcombattriggersRefused: a combat start that cannot make its trigger
+// fire is a refusal, not a start the census credits: a damage source with no
+// power deals no damage (CR 120.8), a trigger condition (a monarch, an empty
+// hand, a damage amount) is a state the start does not place, an attacker with
+// menace is not blocked by the one blocker the line scripts (CR 702.111b), and a
+// card certdeck cannot build keeps a named refusal.
+func TestStartcombattriggersRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct{ card, key, reason string }{
+		{"Surge Mare", "f0/t0", "no-generator:trigger:DamageDone:power"},                        // a 0-power card deals the damage
+		{"Tamiyo, Upriser Crowned", "f0/t1", "no-generator:trigger:DamageDoneOnce:condition"},   // CheckDefinedPlayer: monarch
+		{"Kiyomaro, First to Stand", "f0/t0", "no-generator:trigger:DamageDealtOnce:condition"}, // CheckSVar: hand size
+		{"Euru, Acorn Scrounger", "f0/t1", "no-generator:trigger:DamageDoneOnce:unsupported"},   // certdeck: MakeCard
+		{"Labyrinth Raptor", "f0/t0", "no-generator:trigger:AttackerBlocked:filter"},            // the only carrier has menace
+	} {
+		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != r.reason {
+				t.Errorf("path %q reason %q, want refused %s", res.Path, res.Reason, r.reason)
+			}
+		})
+	}
+}
+
+// TestStartcombattriggersDealer: the creature that deals the damage has power:
+// Vulture, Feathered Fiend ("creatures you control with flying deal combat
+// damage") once got Ornithopter (0/2) as the flier. No carrier or fixture the
+// shape picks for a damage source may have no power or menace.
+func TestStartcombattriggersDealer(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, r := range []struct{ card, key string }{
+		{"Vulture, Feathered Fiend", "f0/t0"},
+		{"Kastral, the Windcrested", "f0/t0"},
+		{"Mu Yanling, Wind Rider", "f0/t1"},
+		{"Heroes in a Half Shell", "f0/t0"},
+	} {
+		t.Run(r.card, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil || res.Start.Focus == nil || res.Start.Focus.Attack == "" {
+				t.Fatalf("path %q reason %q, want a combat start", res.Path, res.Reason)
+			}
+			c, ok := reg.Lookup(res.Start.Focus.Attack)
+			if !ok {
+				t.Fatalf("attacker %q not in the corpus", res.Start.Focus.Attack)
+			}
+			if f := c.Faces[0]; f.Power() <= 0 || f.HasKeyword("Menace") {
+				t.Errorf("attacker %s has power %d (menace %v)", f.Name, f.Power(), f.HasKeyword("Menace"))
+			}
+		})
+	}
+}
+
+// TestCombatTrigStartSeatRequired: a seat the mode requires is kept: a card that
+// deals the damage to "You" (its controller) is on the other seat's side, which
+// the card cannot be on, so the start is refused and not seated on seat 0.
+func TestCombatTrigStartSeatRequired(t *testing.T) {
+	reg, b := testBuilder(t)
+	c, ok := reg.Lookup("Grizzly Bears")
+	if !ok {
+		t.Fatal("Grizzly Bears is not in the corpus")
+	}
+	trig := &cards.Trigger{Mode: "DamageDone", Params: map[string]string{"ValidSource": "Card.Self", "ValidTarget": "You", "CombatDamage": "True"}}
+	f := &StartFile{}
+	if why := combatTrigStart(reg, b, c.Faces[0], "Grizzly Bears", trig, f); why == "" || f.Focus != nil {
+		t.Errorf("combatTrigStart = %q focus %+v, want a refusal", why, f.Focus)
+	}
+}

@@ -541,10 +541,11 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				hist[row.Status]++
 				continue
 			}
-			if focus.Kind != "" && took == 0 {
+			if (focus.Kind != "" || focus.Attack != "" || focus.Block != "") && took == 0 {
 				// The focus seat was never offered the focus play (no target, wrong
-				// timing, an enabler that died): the game exercises nothing of the
-				// key, so the file is refused, not written.
+				// timing, an enabler that died), or the scripted combat of a focus
+				// with no play (a combat trigger) was never declared: the game
+				// exercises nothing of the key, so the file is refused, not written.
 				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartNotExercised}})
 				if err != nil {
 					return err
