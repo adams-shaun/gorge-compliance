@@ -398,14 +398,18 @@ func setupAnswerReasons(reg *cards.Registry, it oraclegen.Item) []string {
 }
 
 // setupProbeRaw is the runner JSON of the setup-only probe: the item's
-// scenario with no gameplay steps. The recorded die rolls are gameplay rolls
-// on gameplay steps (markDieRolls never records a setup roll), so the probe
-// leaves them out: gorge's runner rejects a roll whose step is outside the
-// probe's zero-step range, and the guard would then be silently skipped.
+// scenario with no gameplay steps. The recorded die rolls and coin flips are
+// gameplay results on gameplay steps (markDieRolls and markCoinFlips never
+// record a setup one), so the probe leaves them out: gorge's runner rejects a
+// roll whose step is outside the probe's zero-step range, and the guard would
+// then be silently skipped. A flip has no such out-of-range rejection, but a
+// zero-step probe asks no flip, so sending the tape would be a record the
+// runner can only ignore or (in a later gorge) fail on.
 func setupProbeRaw(it oraclegen.Item) []byte {
 	probe := it
 	probe.Steps = nil
 	probe.DieRolls = nil
+	probe.CoinFlips = nil
 	return probe.Raw()
 }
 
