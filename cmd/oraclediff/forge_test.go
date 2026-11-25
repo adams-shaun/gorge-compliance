@@ -12,6 +12,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/gate"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
@@ -103,6 +104,57 @@ func TestForgeExportByteStable(t *testing.T) {
 	}
 	if len(reqs[2].Abilities) != 1 {
 		t.Errorf("Cage abilities = %v, want only step 0", reqs[2].Abilities)
+	}
+}
+
+// TestForgeExportScenarioSHAMatchesWrittenItem: the scenario_sha is the SHA of
+// the Item bytes the request actually carries, for every recorded template
+// forgeDeclarations rewrites. A script fixture is pasted from an export and
+// TestForgeScriptFixturesCarryTheirItemSHA recomputes gate.ItemSHA on the
+// pasted request's own item, so a sha computed before the rewrite is stale the
+// moment a declaration is exported and the paste fails.
+func TestForgeExportScenarioSHAMatchesWrittenItem(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	steps := []oraclegen.Step{
+		{Op: "pass_to", Step: "main1"},
+		{Op: "attack", Seat: 0, Defender: "p1", Attackers: []string{}},
+		{Op: "pass", Seat: 1},
+		{Op: "attack", Seat: 0, Defender: "p1", Attackers: []string{"p0:Bear"}},
+	}
+	var scen bytes.Buffer
+	for _, tmpl := range []string{lower.Template, lower.WindowTemplate, lower.SpanTemplate} {
+		it := oraclegen.Item{ID: "xe:" + tmpl, Template: tmpl, Scenario: oraclegen.Scenario{Steps: steps}}
+		b, err := json.Marshal(it)
+		if err != nil {
+			t.Fatal(err)
+		}
+		scen.Write(append(b, '\n'))
+	}
+	dir := t.TempDir()
+	scenPath, out := filepath.Join(dir, "items.jsonl"), filepath.Join(dir, "req.jsonl")
+	if err := os.WriteFile(scenPath, scen.Bytes(), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := forgeExport(reg, scenPath, out); err != nil {
+		t.Fatal(err)
+	}
+	raw, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	reqs := decodeRequests(t, raw)
+	if len(reqs) != 3 {
+		t.Fatalf("exported %d requests, want 3", len(reqs))
+	}
+	for i, rq := range reqs {
+		// The empty attack at step 1 is rewritten to a pass_to, so the
+		// sha assertion is not vacuous.
+		if len(rq.Item.Steps) != len(steps) || rq.Item.Steps[1].Op != "pass_to" {
+			t.Errorf("request %d (%s): exported steps %+v, want step 1 rewritten", i, rq.ID, rq.Item.Steps)
+		}
+		if got, want := rq.ScenarioSHA, gate.ItemSHA(rq.Item); got != want {
+			t.Errorf("request %d (%s): scenario_sha %s is not its written item's %s", i, rq.ID, got, want)
+		}
 	}
 }
 
@@ -313,6 +365,102 @@ func TestForgeDiffCacheDir(t *testing.T) {
 	}
 	if got, _ := forgeCacheDir("/x", "", ""); got != "/x" {
 		t.Errorf("explicit -cache = %q", got)
+	}
+}
+
+// staticRequestJSON returns the request object beginning at the first
+// `{"id":` on line, or "" when the line has none. A shell script spells a
+// request either as a heredoc line or inside a printf argument, so cut at the
+// balanced closing brace rather than at the end of the line.
+func staticRequestJSON(line string) string {
+	at := strings.Index(line, `{"id":`)
+	if at < 0 {
+		return ""
+	}
+	depth := 0
+	inString, escape := false, false
+	for i := at; i < len(line); i++ {
+		c := line[i]
+		if inString {
+			switch {
+			case escape:
+				escape = false
+			case c == '\\':
+				escape = true
+			case c == '"':
+				inString = false
+			}
+			continue
+		}
+		switch c {
+		case '"':
+			inString = true
+		case '{':
+			depth++
+		case '}':
+			depth--
+			if depth == 0 {
+				return line[at : i+1]
+			}
+		}
+	}
+	return ""
+}
+
+// TestForgeScriptFixturesCarryTheirItemSHA: every hand-authored request in
+// scripts/forge-oracle-test-*.sh carries a scenario_sha, and it is its own
+// item's. A copied request can otherwise keep the scenario it was copied from (the Done fixture
+// did), so two different scenarios share an identity and a consumer keyed by
+// it conflates them. The check is over all such scripts, so a new fixture or a
+// later answers edit is covered without listing the files.
+func TestForgeScriptFixturesCarryTheirItemSHA(t *testing.T) {
+	files, err := filepath.Glob(filepath.Join("..", "..", "scripts", "forge-oracle-test-*.sh"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(files) == 0 {
+		t.Fatal("no Forge driver scripts")
+	}
+	checked := 0
+	for _, path := range files {
+		b, err := os.ReadFile(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for i, line := range strings.Split(string(b), "\n") {
+			// A shell-quoted apostrophe ('"'"') is one apostrophe once the
+			// shell has run; read the request as the driver will.
+			line = strings.ReplaceAll(line, `'"'"'`, `'`)
+			if !strings.Contains(line, `{"id":`) && !strings.Contains(line, `"scenario_sha"`) {
+				continue
+			}
+			raw := staticRequestJSON(line)
+			if raw == "" {
+				t.Errorf("%s:%d: the line holds no one-line {\"id\": request to check", path, i+1)
+				continue
+			}
+			var rq forgeRequest
+			if err := json.Unmarshal([]byte(raw), &rq); err != nil {
+				t.Fatalf("%s:%d: static request is not JSON: %v", path, i+1, err)
+			}
+			if rq.Item.ID == "" {
+				t.Errorf("%s:%d: request %q has no item", path, i+1, rq.ID)
+				continue
+			}
+			if rq.ScenarioSHA == "" {
+				t.Errorf("%s:%d: request %q carries no scenario_sha (want %s)", path, i+1, rq.ID, gate.ItemSHA(rq.Item))
+				continue
+			}
+			checked++
+			// The live-export variants in the odds-or-evens fixture use a
+			// request id with a suffix; the item keeps gorge's id.
+			if got, want := rq.ScenarioSHA, gate.ItemSHA(rq.Item); got != want {
+				t.Errorf("%s:%d: scenario_sha %s is not item %q's %s", path, i+1, got, rq.ID, want)
+			}
+		}
+	}
+	if checked == 0 {
+		t.Fatal("no static Forge request fixture with a scenario_sha was checked")
 	}
 }
 

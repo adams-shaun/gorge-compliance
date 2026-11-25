@@ -55,8 +55,9 @@ import (
 // unset (scripts/forge-oracle-setup.sh writes it).
 const defaultForgeOracleDir = ".oracle-build/forge"
 
-// forgeRequest is one line of forge-req.jsonl. The Item is marshalled
-// exactly as gen wrote it, so its bytes (and gate.ItemSHA) are unchanged.
+// forgeRequest is one line of forge-req.jsonl. The Item is gen's item with the
+// driver rewrites below applied, and ScenarioSHA is gate.ItemSHA of that exact
+// Item, so the request's sha is the item a consumer hashes from the line.
 //
 // The contract the Forge driver reads:
 //
@@ -128,7 +129,7 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     triggered ability's cost; gift_decline declines a gift (gift_promise
 //     names the opponent in its label).
 //   - A cast step's cast_mode names a non-default cast option the driver
-//     must select: the plot or suspend special action, an Adventure or Omen half, a
+//     must select: the plot, suspend or foretell special action, an Adventure or Omen half, a
 //     modal back face, a warp cast, a may-play cast of a card outside its
 //     owner's hand ("mayplay"), the first alternative cost ("alternative"),
 //     an optional cost paid at cast time
@@ -299,13 +300,13 @@ func forgeExportItem(reg *cards.Registry, it oraclegen.Item, forgeDriver bool) (
 }
 
 // forgeBuildRequest assembles the request for one item from gorge's decisions
-// for it: the scenario SHA names the item as given, the decisions lose those
-// for steps the driver will not pose, and the steps are then rewritten.
-// forgeDriver is explicit at every call site: only the Forge driver consumes
-// the Forge-only rewrites and role, and a new caller has to say so instead of
-// inheriting them.
+// for it: the decisions lose those for steps the driver will not pose, and the
+// steps are then rewritten. The scenario SHA names the Item bytes the request
+// actually writes, so a fixture pasted from an export carries the SHA its own
+// item hashes to. forgeDriver is explicit at every call site: only the Forge
+// driver consumes the Forge-only rewrites and role, and a new caller has to say
+// so instead of inheriting them.
 func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult, decisions []rules.OracleDecision, forgeDriver bool) forgeRequest {
-	sha := gate.ItemSHA(it)
 	decisions = forgeDropNamedManaAbilityDecisions(reg, it, g, forgeDropDeclarationDecisions(it, decisions))
 	decisions = forgeExploreAsYesNo(decisions)
 	decisions = forgeUntapNoOps(g, decisions)
@@ -319,6 +320,7 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 		decisions = forgeDropGraveyardOrderDecisions(decisions)
 	}
 	it = forgeDeclarations(it)
+	sha := gate.ItemSHA(it)
 	return forgeRequest{
 		ID: it.ID, ScenarioSHA: sha, Item: it,
 		GorgeDecisions: decisions, Abilities: forgeAbilityLines(reg, it, g),
@@ -328,8 +330,8 @@ func forgeBuildRequest(reg *cards.Registry, it oraclegen.Item, g rules.OracleRes
 // forgeDeclarations adapts, in an xengine item, the steps around each attack
 // and block to how the Forge driver reaches the declaration. Steps keep their
 // index, so the per-step side tables (abilities, decisions) stay aligned.
-// Other items pass through unchanged, and the caller hashes the item before
-// this rewrite, so the scenario SHA still names the lowered item.
+// Other items pass through unchanged. The caller hashes the rewritten item, so
+// the scenario SHA names the exact Item bytes the request writes.
 //
 //   - A declaration with nothing declared (no attackers, no blocks) becomes a
 //     pass_to decision "priority". Forge poses a declaration only to a player

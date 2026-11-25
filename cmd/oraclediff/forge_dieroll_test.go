@@ -119,8 +119,24 @@ func TestForgeRolledDie(t *testing.T) {
 // unchanged, and the full driver suite (198 tests, ForcedDieRollTest and ForcedCoinFlipTest among them) is green on it.
 // 7d506c5192 = oracle/fpin-1125: f7b730149a merged with 26b4658101 (chooseCounterType peeks the counter-kind pick for a
 // RemoveCounter ask, driver-only), then with 244c590848 (the mayplay pin above); die-roll code unchanged.
+// a6227e70a3 = 7d506c5192 plus cast_mode "evoked" (StepMachine.spellForMode picks the AlternativeCost.Evoke spell,
+// CR 702.74a); afe18881c6 = oracle/fpin-1125: a6227e70a3 joined with 3e6bd830a6 (the discard_may election,
+// ScriptedController.chooseCardsToDiscardFrom only); die-roll code unchanged.
 // afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
-const forgeOracleDieRollRef = "afe18881c6e6327caf871661968865a495aaf3de"
+// 3bb8f906e3 = afe18881c6 plus TokenEffect.resolve registering the AtEOT delayed trigger on a zero token amount (forge-game only);
+// driver and die-roll code unchanged.
+// 66671165f3 = afe18881c6 plus the up-to remove-any-type Done pick (StepMachine.peekCounterKind and
+// ScriptedController.chooseCounterType only); die-roll code unchanged, ForcedDieRollTest re-run green in the full driver suite.
+// 149a03bbbec4 = the clean merge of 66671165f31 and 3bb8f906e3 (disjoint files: forge-oracle driver vs forge-game TokenEffect);
+// driver and die-roll code unchanged from 66671165f31.
+// cf742d0aefc = afe18881c6e plus the forced remove-counter amount (ScriptedController.chooseNumber's RemoveCounter branch
+// only), die-roll code unchanged, ForcedDieRollTest re-run green on it.
+// f1e3e00905c = the merge of 149a03bbbec4 and cf742d0aefc (UnmappedAskTest keeps both cases): one pin carries the Done
+// pick, the Mobilize X=0 fix and the forced remove-counter amount; die-roll code unchanged, ForcedDieRollTest re-run green on it.
+// bfdb3a8051 = 149a03bbbec4 merged with 46203751a5 (foretell cast mode, Riot choice; StepMachine/ScriptedController only);
+// die-roll code unchanged.
+// c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
+const forgeOracleDieRollRef = "c9419dd87a36a901c602460432e9731203211e1d"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

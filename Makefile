@@ -84,7 +84,15 @@ GO_TEST_FLAGS ?= -p=2
 # Reconfiguration removes the creature subtypes with the creature type, keeping artifact subtypes. FowlPlayTest,
 # ReprobationTest, SwiftReconfigurationTest. Card behaviour change only for those cards and the
 # ExileReturnBattlefieldNextEndStepTargetEffect users, so the manifests are unchanged. Pin line oracle/xpin-1125.
-XMAGE_REF  ?= 43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae
+# 1b6d284d10 = 43e83011cb + fork commits fbfdc22a15 and 990132654b (both on oracle/xpin-1125). fbfdc22a15: token-copy
+# effects create their delayed sacrifice/exile trigger even when no token is made (CR 603.7a/603.7c): Foggy Swamp Visions
+# and Devastating Onslaught with X = 0, Shredder, Shadow Master, Nacatl War-Pride with no defending creature and Phantom
+# Steed with nothing exiled (the two docs/upstream-patches token-copy patches, now on the fork). FoggySwampVisionsTest,
+# DevastatingOnslaughtTest, ShredderShadowMasterTest, NacatlWarPrideTest, PhantomSteedTest. 990132654b: Molten Man,
+# Inferno Incarnate's leaves-the-battlefield "sacrifice a land" uses SacrificeControllerEffect (SacrificeEffect had no
+# target pointer, so nobody sacrificed; CR 603.10a). MoltenManInfernoIncarnateTest. Each test fails before and passes
+# after. Card behaviour change only for those cards, so the manifests are unchanged.
+XMAGE_REF  ?= 1b6d284d103ec532cf0f3d4c22477e03756ff613
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -510,8 +518,58 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (StepMachine.peekCounterKind); other asks and the remove-any-counter cost still consume theirs. UnmappedAskTest's mixed-kinds
 # fixture (xs:XP:mabel-bitter-recluse:cast:s1) fails before it; scripts/forge-oracle-test-counter-any-mixed-kinds.sh runs it.
 # Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+# a6227e70a3 = 7d506c5192 plus cast_mode "evoked". StepMachine.spellForMode had no case for it, so the driver took Emptiness's
+# hard-cost spell and Forge refused the {W/B}{W/B} evoke cast (xproof xs:XP:emptiness:f0t0:s1, Catharsis, Emptiness; CR 702.74a);
+# it now picks the AlternativeCost.Evoke spell. scripts/forge-oracle-test-evoked-cast-mode.sh fails before it. Fork branch
+# fix/xp-driver-evoked-cast-mode.
 # afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
-FORGE_ORACLE_REF ?= afe18881c6e6327caf871661968865a495aaf3de
+# 3bb8f906e3 = afe18881c6 plus TokenEffect.resolve registering the AtEOT delayed trigger when the token amount is below 1 (Mobilize X
+# with X = 0 on Avenger of the Fallen, and the Firecat Blitz / Valduk / Lightning Coils X = 0 class): CR 702.181a's "Sacrifice them at
+# the beginning of the next end step" is unconditional, so CR 603.7a creates the delayed trigger at resolution and it does nothing
+# (CR 603.7c); the early `return` before makeTokenTable skipped the only registration point. A script with AtEOTNeedsCard$ True
+# (Myriad, CR 702.116a) is still dropped by registerDelayedTrigger over the empty set. xproof clusters
+# gorge-suspect:avenger-of-the-fallen:f0t0:stack and :combat0.attack:stack (triage xpt-09b99e96, xpt-c1665aee).
+# MobilizeZeroTokensStillSchedulesSacrificeTest fails on afe18881c6 ("expected [true] but found [false]") and passes after;
+# MyriadNoTokensCreatesNoDelayedTriggerTest and MordorOnTheMarchNothingExiledTest stay green. Driver, cardsfolder and tokenscripts
+# unchanged. Fork branch fix/xp-mobilize-zero-delayed-trigger.
+# cf742d0aefc = afe18881c6e plus a forced remove-counter amount with no counter pick (fork branch
+# fix/xp-forge-driver-remove-counter-forced-amount): Ferropede's combat-damage trigger removes "a counter" of any type and
+# Wall of Stone has one +1/+1 counter, so a lone kind and the card's fixed CounterNum$ 1 leave no choice and gorge logs no
+# counter-kind pick (CR 122.1). CountersRemoveEffect.removeAnyType still asks chooseNumber(1, 1); the RemoveCounter branch
+# defaulted only min == 0 and strict-missed the forced amount. It now answers min when no counter pick is logged and min == max,
+# and keeps the miss for a free min < max range. UnmappedAskTest.removeAnyTypeForcedAmountRemovesTheLoneCounter (fixture
+# counter-remove-forced-amount.jsonl) fails on afe18881c6e and passes after; scripts/forge-oracle-test-counter-any-mixed-kinds.sh
+# (make forge-driver-tests) runs UnmappedAskTest. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
+# (same as FORGE_REF ff076d4432).
+# 66671165f31 = afe18881c6e plus the up-to remove-any-type Done pick (fork branch fix/xp-forge-driver-counter-any-done-v2):
+# when the controller stops an UpTo removal early gorge logs remove_counter_done ("Done"), which names no Forge CounterType
+# and which CountersRemoveEffect.removeAnyType has no option for, so the kind ask strict-missed and left it queued. For a
+# RemoveCounter ask StepMachine.peekCounterKind (26b4658101's peek design) now also matches the Done by its pick kind,
+# consumes it and answers the first offered type; that type's chooseNumber finds no counter pick and answers 0 (min is 0 under
+# UpTo), which is how removeAnyType stops. The kind ask peeks before the lone-option shortcut so a single-kind up-to removal
+# consumes its Done too. Test UnmappedAskTest.removeAnyTypeDoneStopsTheUpToRemoval (fixtures/unmapped/counter-remove-any-done.jsonl)
+# fails on afe18881c6e and passes after; scripts/forge-oracle-test-counter-any-done.sh (make forge-driver-tests) replays the
+# Mabel, Bitter Recluse request with LOYALTY then Done and requires Ajani Resolute still on p1's battlefield at 1 loyalty and
+# one +1/+1. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+# f1e3e00905c = the merge of 149a03bbbec4 (develop's pin: Done pick 66671165f31 + Mobilize X=0 3bb8f906e3) with cf742d0aefc
+# (the forced remove-counter amount); the only conflict was UnmappedAskTest.java, which keeps removeAnyTypeDoneStopsTheUpToRemoval
+# and removeAnyTypeForcedAmountRemovesTheLoneCounter. One pin carries all three driver fixes: ancestors 66671165f31, 3bb8f906e3
+# and cf742d0aefc. Die-roll code unchanged; ForcedDieRollTest, MobilizeZeroTokensStillSchedulesSacrificeTest and every
+# UnmappedAskTest case green on it (make forge-driver-tests runs the UnmappedAskTest cases). Fork branch
+# fix/xp-forge-driver-remove-counter-forced-amount.
+# 149a03bbbec4 = the clean merge of 66671165f31 and 3bb8f906e3 (the Mobilize X=0 AtEOT fix above): the two touch disjoint
+# files (forge-oracle's up-to remove-any-type Done pick vs forge-game's TokenEffect), so the pin keeps both and the merge adds
+# no code of its own. Driver and die-roll code unchanged from 66671165f31; cardsfolder/tokenscripts unchanged (same as FORGE_REF
+# ff076d4432). Fork branch oracle/fpin-1125-mobilize-zero.
+# bfdb3a8051 = oracle/fpin-1125: 149a03bbbec4 (above) merged with 46203751a5 (fork branch fix/xp-forge-driver-foretell-riot):
+# cast_mode "foretell" takes the K:Foretell special action (StepMachine.spellForMode; checkActed accepts it with no stack once
+# the card is exiled foretold, CR 702.143a/116.2h; Sozin's Comet, xpt-42b07d82), and Riot's UnlessCost$ AddCounter<1/P1P1>
+# reads gorge's choose_n[riot] pick (ScriptedController.payCostToPreventEffect: the counter pick pays, "Gain haste" declines,
+# CR 702.136a; Spider-Punk, xpt-cbd8207b). ForetellSpecialActionTest and RiotChoiceTest fail before it;
+# scripts/forge-oracle-test-foretell-cast-mode.sh and forge-oracle-test-riot-choice.sh replay the finds. Driver-only;
+# die-roll code, cardsfolder and tokenscripts unchanged.
+# c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
+FORGE_ORACLE_REF ?= c9419dd87a36a901c602460432e9731203211e1d
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
