@@ -41,8 +41,9 @@ func deadOnArrival(f *cards.Face) bool {
 }
 
 // tgtReq is one target a play names: the alternatives of its filter (a Forge
-// ValidTgts split at commas), lower-cased; any one meets it.
-type tgtReq struct{ alts []string }
+// ValidTgts split at commas), lower-cased, and the same alternatives as
+// written (raw, for parseFilter's restriction tests); any one meets it.
+type tgtReq struct{ alts, raw []string }
 
 // permTypes are the target types a placed permanent can meet; every other
 // type word (Player, Any, Card, ...) is taken as met.
@@ -62,15 +63,16 @@ func chainReqs(p map[string]string, svars map[string]string, sub *cards.SA, dept
 		if v := p["ValidTgts"]; v != "" && p["TargetMin"] != "0" && p["Optional"] == "" {
 			zone := strings.ToLower(p["TgtZone"])
 			if zone == "" || zone == "battlefield" {
-				var alts []string
-				for _, a := range strings.Split(strings.ToLower(v), ",") {
-					if !strings.Contains(a, "inzone") && !strings.Contains(a, "stack") {
-						alts = append(alts, strings.TrimSpace(a))
+				var alts, raw []string
+				for _, r := range strings.Split(v, ",") {
+					r = strings.TrimSpace(r)
+					if a := strings.ToLower(r); !strings.Contains(a, "inzone") && !strings.Contains(a, "stack") {
+						alts, raw = append(alts, a), append(raw, r)
 					} else {
-						alts = append(alts, "any") // another zone: taken as met
+						alts, raw = append(alts, "any"), append(raw, "Any") // another zone: taken as met
 					}
 				}
-				reqs = append(reqs, tgtReq{alts: alts})
+				reqs = append(reqs, tgtReq{alts: alts, raw: raw})
 			}
 		}
 		switch {
@@ -122,7 +124,7 @@ func enchantReq(face *cards.Face) (tgtReq, bool) {
 	for _, k := range face.Keywords {
 		if rest, ok := strings.CutPrefix(k, "Enchant:"); ok {
 			filter, _, _ := strings.Cut(rest, ":")
-			return tgtReq{alts: strings.Split(strings.ToLower(filter), ",")}, true
+			return tgtReq{alts: strings.Split(strings.ToLower(filter), ","), raw: strings.Split(filter, ",")}, true
 		}
 	}
 	return tgtReq{}, false
@@ -152,13 +154,41 @@ func parseAlt(alt string) altNeed {
 	return n
 }
 
+// restriction is the test of a target alternative's restrictions beyond its
+// type and side (nonLand, a colour, withFlying, cmcLE3), from parseFilter;
+// nil when it has none, or holds a property parseFilter does not read, which
+// is then taken as met, as before restrictions were read at all.
+func restriction(raw string) func(*cards.Face) bool {
+	_, props, _ := strings.Cut(raw, ".")
+	plain := true
+	for _, p := range strings.FieldsFunc(props, func(r rune) bool { return r == '+' }) {
+		switch p {
+		case "YouCtrl", "OppCtrl", "YouDontCtrl", "Other":
+		default:
+			plain = false
+		}
+	}
+	if plain {
+		return nil // a type and a side, which parseAlt already reads
+	}
+	alts := parseFilter(raw)
+	if len(alts) != 1 || !alts[0].known || alts[0].self {
+		return nil
+	}
+	return alts[0].test
+}
+
 // altMet reports whether permanent f (on the focus seat's side when mine, else
-// the opponent's) meets the alternative.
-func altMet(n altNeed, f *cards.Face, mine bool) bool {
+// the opponent's) meets the alternative, and its restrictions (restriction)
+// when test is non-nil.
+func altMet(n altNeed, test func(*cards.Face) bool, f *cards.Face, mine bool) bool {
 	if n.combat {
 		return false // nothing attacks or blocks at the first main priority
 	}
 	if n.side == 1 && !mine || n.side == -1 && mine {
+		return false
+	}
+	if test != nil && !test(f) {
 		return false
 	}
 	switch n.typ {
@@ -185,16 +215,17 @@ func unmet(reg *cards.Registry, f *StartFile, seat int, reqs []tgtReq) (*tgtReq,
 	}
 	for i := range reqs {
 		ok, combat := false, false
-		for _, alt := range reqs[i].alts {
+		for k, alt := range reqs[i].alts {
 			n := parseAlt(alt)
 			if !permTypes[n.typ] {
 				ok = true // a player, any target or another zone: no permanent needed
 				continue
 			}
 			combat = combat || n.combat
+			test := reqs[i].restrictionOf(k)
 			for side, bf := range [][]string{mine.Battlefield, theirs.Battlefield} {
 				for _, name := range bf {
-					if c, found := reg.Lookup(name); found && len(c.Faces) > 0 && altMet(n, c.Faces[0], side == 0) {
+					if c, found := reg.Lookup(name); found && len(c.Faces) > 0 && altMet(n, test, c.Faces[0], side == 0) {
 						ok = true
 					}
 				}
@@ -280,14 +311,46 @@ func focusPlayRefusal(reg *cards.Registry, b *certdeck.Builder, sa *cards.SA, ca
 	return reason, nil
 }
 
-// placeOppTarget places certdeck's most inert opposing-target pick for the
-// unmet target on the seat the focus does not own, and says whether one fit.
+// restrictionOf is restriction of the k-th alternative, nil when r has no
+// raw form of it.
+func (r *tgtReq) restrictionOf(k int) func(*cards.Face) bool {
+	if k >= len(r.raw) {
+		return nil
+	}
+	return restriction(r.raw[k])
+}
+
+// placeOppTarget places a permanent for the unmet target on the seat the
+// focus does not own, and says whether one fit: for an alternative whose
+// restrictions parseFilter reads, the most inert carrier (carrierPool) that
+// meets them; otherwise certdeck's most inert opposing-target pick.
 func placeOppTarget(reg *cards.Registry, b *certdeck.Builder, card string, r *tgtReq, seat int, f *StartFile) bool {
+	s := &f.Setup.P1
+	if seat == 1 {
+		s = &f.Setup.P0
+	}
+	for k, alt := range r.alts {
+		n := parseAlt(alt)
+		test := r.restrictionOf(k)
+		if n.side == 1 || n.combat || !permTypes[n.typ] || test == nil {
+			continue
+		}
+		name := pickCarrier(reg, b, card, func(c *cards.Face) bool {
+			return c.IsPermanent() && FieldBlock(c) == "" && !deadOnArrival(c) && altMet(n, test, c, false)
+		})
+		if name != "" {
+			s.Battlefield = append(s.Battlefield, name)
+			return true
+		}
+	}
 	typ := "creature"
-	for _, alt := range r.alts {
+	for k, alt := range r.alts {
 		n := parseAlt(alt)
 		if n.side == 1 {
 			continue // only the focus seat's own: not placeable on the other side
+		}
+		if r.restrictionOf(k) != nil {
+			continue // no carrier meets its restrictions: no pick placed blind
 		}
 		if permTypes[n.typ] && n.typ != "permanent" {
 			typ = n.typ
@@ -297,10 +360,6 @@ func placeOppTarget(reg *cards.Registry, b *certdeck.Builder, card string, r *tg
 			return false
 		}
 		picks := plan.Opponent.Provided[certdeck.Need{Class: certdeck.OppTargets, Arg: typ}.String()]
-		s := &f.Setup.P1
-		if seat == 1 {
-			s = &f.Setup.P0
-		}
 		before := len(s.Battlefield)
 		if err := pickEnabler(reg, b, s, false, picks); err != nil {
 			return false

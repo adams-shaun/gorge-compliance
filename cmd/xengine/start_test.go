@@ -492,3 +492,21 @@ func TestStartManaAbilityIsExercised(t *testing.T) {
 		})
 	}
 }
+
+// TestStartTargetRestrictionIsExercised: the focus play's target check read
+// only a target's card type and side, never the rest of its ValidTgts filter
+// (Permanent.nonLand, a colour, withFlying, cmcLE3), so a start met "target
+// nonland permanent" with its own land and "target black creature" with an
+// Ornithopter: the planted target was illegal, the play was never offered,
+// and play refused the start as start-not-exercised.
+func TestStartTargetRestrictionIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Aerial Volley", "cast"},   // Creature.withFlying
+		{"Celestial Purge", "cast"}, // Permanent.Black,Permanent.Red
+		{"Abrupt Decay", "cast"},    // Permanent.nonLand+cmcLE3
+		{"Daraja Griffin", "f0/a0"}, // Sac<1/CARDNAME>: destroy target black creature
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
