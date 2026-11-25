@@ -1227,6 +1227,23 @@ func countName(names []string, want string) int {
 	return n
 }
 
+// castModalSteps is the set of steps whose mode decision is the cast spell's
+// OWN announcement (CR 601.2b: gorge's ResumeKind "cast_modes"). Only there is
+// the runner's fallback target decision the spell's target. A modal cast
+// TRIGGER's mode and target are chosen as the trigger is put on the stack
+// (CR 603.3c, ResumeKind "modes"), which can fall on the same cast step
+// (Ojutai Exemplars' "whenever you cast a noncreature spell, choose one"); its
+// target must stay a scripted TARGET answer, not become the spell's own.
+func castModalSteps(ds []rules.OracleDecision) map[int]bool {
+	modal := map[int]bool{}
+	for _, d := range ds {
+		if d.Kind == "mode" && d.Step >= 0 && d.Resume == "cast_modes" {
+			modal[d.Step] = true
+		}
+	}
+	return modal
+}
+
 // chooseTargets rewrites the target-carrying step's Targets from the target
 // decisions gorge's deterministic runner actually made, in order. A
 // target-carrying step is a cast (XMage's castSpell) or an activated
@@ -1256,12 +1273,7 @@ func chooseTargets(sc Scenario, ds []rules.OracleDecision) (Scenario, map[int]bo
 	// Via "target"; fold it into the step too. Left as an xanswer it sat in
 	// XMage's target queue until the NEXT target ask (a copied Shock's
 	// any-target), which then rejected the name (Choreographed Sparks).
-	modal := map[int]bool{}
-	for _, d := range ds {
-		if d.Kind == "mode" && d.Step >= 0 {
-			modal[d.Step] = true
-		}
-	}
+	modal := castModalSteps(ds)
 	chosen := map[int][]string{}
 	castSteps := map[int]bool{}
 	for _, d := range ds {
@@ -1337,6 +1349,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var ownGraveyardExile map[int]bool
 	var tapThenUntap map[int]bool
 	var bolster map[int]bool
+	var optionalTriggerSearch map[int]bool
 	var craft map[int]bool
 	var supports map[int]supportAnswers
 	var snaps []rules.OracleSnapshot
@@ -1370,6 +1383,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if bolster == nil {
 			bolster = ex.bolster
+		}
+		if optionalTriggerSearch == nil {
+			optionalTriggerSearch = ex.optionalTriggerSearch
 		}
 		if craft == nil {
 			craft = ex.craft
@@ -1437,12 +1453,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			pipPlanned[i] = true
 		}
 	}
-	modal := map[int]bool{}
-	for _, d := range ds {
-		if d.Kind == "mode" && d.Step >= 0 {
-			modal[d.Step] = true
-		}
-	}
+	modal := castModalSteps(ds)
 	routing := newAnswerRouting(ds, digSources)
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
@@ -1995,6 +2006,12 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				}
 			}
 			switch {
+			case len(d.Picks) == 0 && optionalTriggerSearch[i]:
+				// A declined search inside a trigger XMage asks as an optional
+				// trigger (chooseUse): the "no" ends it, no search follows, so
+				// an "up to" target skip would be left over (Hexhaven
+				// Invigorator; optionalTriggerSearchDecline).
+				as = append(as, XAnswer{d.Seat, "choice", "no"})
 			case len(d.Picks) == 0:
 				// Declined: XMage may pose it as a yes/no or as an "up to"
 				// pick; script both (measured: Zimone's Experiment agrees
