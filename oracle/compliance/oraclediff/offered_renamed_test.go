@@ -6,7 +6,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
-// An offer's source is labelled by the permanent's current name: Humble Work
+// An offer's source is labelled by the permanent's current name: Honest Work
 // enchants p1's Wall of Stone and names it "Humble Merchant", and both engines
 // offer the same permanent's {T} ability -- gorge by its setup ref, XMage by
 // the current name.
@@ -36,5 +36,18 @@ func TestOfferedRenamedPermanentSource(t *testing.T) {
 	}}
 	if got := offeredKeys(tok.Offered, tok.Permanents); got != "p1:Dragon|activate|" {
 		t.Fatalf("token key %q", got)
+	}
+	// a duplicate-named permanent whose ref already carries its current name
+	// keeps its key byte-identical: relabelling would drop the "#2" suffix,
+	// colliding p1:Forest with p1:Forest#2.
+	dup := rules.OracleSnapshot{Permanents: []rules.OracleSnapPerm{
+		{Ref: "p1:Forest", Name: "Forest", Controller: 1, Owner: 1},
+		{Ref: "p1:Forest#2", Name: "Forest", Controller: 1, Owner: 1},
+	}, Offered: []rules.OracleSnapOffered{
+		{Source: "p1:Forest", Kind: "activate", Label: "{T}: Add {G}"},
+		{Source: "p1:Forest#2", Kind: "activate", Label: "{T}: Add {G}"},
+	}}
+	if got := offeredKeys(dup.Offered, dup.Permanents); got != "p1:Forest|activate|\np1:Forest#2|activate|" {
+		t.Fatalf("duplicate key %q", got)
 	}
 }
