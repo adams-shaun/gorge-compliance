@@ -106,6 +106,7 @@ func readExercised(t *testing.T, play string) *cov.Ledger {
 // defender's bot would do), and a static start's item carries the comparison
 // that sees its effect.
 func TestPlayStartCombatStatic(t *testing.T) {
+	t.Parallel()
 	ks := lowerKeyStarts(t, [][2]string{
 		{"Magnigoth Sentry", "combat#0.attack"},
 		{"Magnigoth Sentry", "combat#0.block"},
@@ -200,6 +201,7 @@ func TestPlayStartCombatStatic(t *testing.T) {
 // canonicalised the same way, or exercised.tsv and keyproof carry a second row
 // for the same card and action.
 func TestPlayStartCombatStaticCanonicalCard(t *testing.T) {
+	t.Parallel()
 	const (
 		joined = "Aang, at the Crossroads // Aang, Destined Savior"
 		front  = "Aang, at the Crossroads"
@@ -252,6 +254,7 @@ func TestPlayStartCombatStaticCanonicalCard(t *testing.T) {
 // The id's keyid is the only place a static# or combat# key survives the
 // lowering (no tape entry names one), so credit reads it back from there.
 func TestKeyproofItemIDKeys(t *testing.T) {
+	t.Parallel()
 	for _, c := range []struct{ id, set, slug, key, ordinal string }{
 		{scen.StartID("XP", "Magnigoth Sentry", "combat#0.attack", 2), "XP", "magnigoth-sentry", "combat#0.attack", "s2"},
 		{scen.StartID("XP", "Primal Rage", "static#0.0", 1), "XP", "primal-rage", "static#0.0", "s1"},
@@ -317,6 +320,7 @@ func stripKeyword(t *testing.T, snaps []rules.OracleSnapshot, kw string) []rules
 // plays (no duplicate counter row aborts it), the key is exercised, and a
 // ReduceCost key is only castable with the reduction.
 func TestPlayStartCountedStatics(t *testing.T) {
+	t.Parallel()
 	keys := [][2]string{
 		{"Boon of the Spirit Realm", "static#0.0"},
 		{"Cinderslash Ravager", "static#0.0"},

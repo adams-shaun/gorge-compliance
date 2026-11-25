@@ -589,6 +589,7 @@ public final class ScenarioReplayDriverContractTest {
         check(castModeSupported("adventure_alt").equals("true"), "adventure_alt cast_mode was not accepted");
         check(castModeSupported("omen_alt").equals("true"), "omen_alt cast_mode was not accepted");
         check(castModeSupported("room_alt").equals("true"), "room_alt cast_mode was not accepted");
+        check(castModeSupported("modal_spell").equals("true"), "modal_spell cast_mode was not accepted");
         check(castModeSupported("warped").equals("true"), "warped cast_mode was not accepted");
         check(castModeSupported("escape").equals("false"),
                 "an unwired cast_mode must be rejected, not cast at face value");
