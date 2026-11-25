@@ -374,8 +374,12 @@ if [ "$mode" = smart ]; then
 		verdict ENV 3
 	fi
 	if [ "${#SELECTED[@]}" = 0 ]; then
-		echo "test-targets: no packages selected for $BASE..HEAD (a non-Go diff; the merge gate still runs the full suite)" >&2
-		verdict EMPTY 4
+		# Unlike test-targeted, smart has already run its checks (shell syntax,
+		# fork pins, licence guards, smokes) by here, so a diff with no Go
+		# package behind it (shell, docs) is a pass of those checks, not an
+		# empty run: EMPTY would be a false red.
+		echo "test-targets: no Go package selected for $BASE..HEAD; the shell, pin, licence and smoke checks above passed" >&2
+		verdict PASS 0
 	fi
 	out=$logdir/smart-${sha%+dirty}.json
 	run_pkgs

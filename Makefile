@@ -790,7 +790,6 @@ phase-preflight:
 # job is what runs the full `go test` gate.
 #
 # boundary is the licence guard on its own (the same step test-smart runs).
-.PHONY: boundary
 boundary:
 	GORGE_TEST_WRAPPER=1 go test -count=1 ./internal/boundary/
 

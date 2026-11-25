@@ -59,7 +59,8 @@ exit "${STUB_GOFMT_RC:-0}"
 STUB
 # git: enough of rev-parse/status/merge-base/diff/ls-files for the selector and
 # the gofmt steps. Handles a leading -C DIR. STUB_DIFF_ALL is the no-pathspec
-# diff (a non-Go path here, so the gofmt step sees nothing).
+# diff (a non-Go path here, so the gofmt step sees nothing). STUB_DIFF_RENAMED is
+# what that diff prints WITHOUT --no-renames (a rename's new path only).
 cat > "$BIN/git" <<'STUB'
 #!/usr/bin/env bash
 echo "git $*" >> "$STUB_LOG"
@@ -85,6 +86,9 @@ diff)
 		[ -n "${STUB_DIFF_GO:-}" ] && printf '%s\n' "$STUB_DIFF_GO"
 	elif [[ "$*" == *"*.sh"* ]]; then
 		[ -n "${STUB_DIFF_SH:-}" ] && printf '%s\n' "$STUB_DIFF_SH"
+	elif [[ "$*" != *"--no-renames"* && -n "${STUB_DIFF_RENAMED:-}" ]]; then
+		# rename detection on: a moved file shows only its new path
+		printf '%s\n' "$STUB_DIFF_RENAMED"
 	else
 		[ -n "${STUB_DIFF_ALL:-}" ] && printf '%s\n' "$STUB_DIFF_ALL"
 	fi
@@ -126,7 +130,7 @@ export PATH="$BIN:$PATH" STUB_LOG=$TMP/calls.log
 export TEST_TARGETS_CARDS=$TMP/cards
 export STUB_SELECT_STDIN=$TMP/select.stdin
 unset TEST_TARGETS_SCOPED PKG RUN SKIP V TIMEOUT TAGS STUB_EVENTS STUB_RC STUB_NOSYSTEMD
-unset STUB_SHA STUB_MB STUB_DIRTY STUB_DIFF_ALL STUB_DIFF_GO STUB_DIFF_SH STUB_SELECT STUB_SELECT_RC
+unset STUB_SHA STUB_MB STUB_DIRTY STUB_DIFF_RENAMED STUB_DIFF_ALL STUB_DIFF_GO STUB_DIFF_SH STUB_SELECT STUB_SELECT_RC
 unset STUB_VET STUB_VET_RC STUB_LIST STUB_MOD STUB_MAKE_RC STUB_BASE_RC STUB_GOFMT STUB_GOFMT_RC
 unset BASE FORGE_ORACLE_REF XMAGE_REF TEST_TARGETS_SLOW_PKGS TEST_TARGETS_SLOW_RUN
 
@@ -227,9 +231,9 @@ check "  ...runs no package" $(! /usr/bin/grep -q '^go test' "$STUB_LOG" && echo
 check "  ...verdict says ./... and ENV" $([[ $LAST == *"test-targeted: ENV abc1234567 ./... "* ]] && echo 0 || echo 1) "$LAST"
 
 tm targeted "targeted rename keeps both sides" 0 "test-targeted: PASS" \
-	STUB_DIFF_ALL=$'oracle/compliance/oraclegen/gen.go\ninternal/foo/gen.go' \
+	STUB_DIFF_ALL=$'oracle/compliance/oraclegen/gen.go\ninternal/foo/gen.go' STUB_DIFF_RENAMED=internal/foo/gen.go \
 	STUB_SELECT=$'./internal/foo\n./oracle/compliance/adopt' STUB_EVENTS="$RUNEV\n$PASSEV"
-check "  ...diffs with --no-renames" $(/usr/bin/grep -q '^git .* diff --name-only --no-renames ' "$STUB_LOG" && echo 0 || echo 1) "$(/usr/bin/grep '^git ' "$STUB_LOG")"
+check "  ...the selector-feeding diff passes --no-renames" $(/usr/bin/grep -Eq '^git .* diff --name-only --no-renames [^ ]+$' "$STUB_LOG" && echo 0 || echo 1) "$(/usr/bin/grep '^git ' "$STUB_LOG")"
 check "  ...feeds the old producer path to the selector" $(/usr/bin/grep -qx 'oracle/compliance/oraclegen/gen.go' "$STUB_SELECT_STDIN" && echo 0 || echo 1) "$(cat "$STUB_SELECT_STDIN")"
 check "  ...feeds the new path to the selector" $(/usr/bin/grep -qx 'internal/foo/gen.go' "$STUB_SELECT_STDIN" && echo 0 || echo 1) "$(cat "$STUB_SELECT_STDIN")"
 check "  ...runs the ratchet package" $(/usr/bin/grep -q '^go test .* ./oracle/compliance/adopt$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
@@ -273,6 +277,12 @@ tm smart "smart Go diff checks gofmt and vet" 0 "test-smart: PASS" \
 	STUB_DIFF_ALL=README.md STUB_DIFF_GO=scripts/foo.go STUB_SELECT=./p STUB_EVENTS="$RUNEV\n$PASSEV"
 check "  ...gofmt saw the changed file" $(/usr/bin/grep -q '^gofmt -l scripts/foo.go$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
 check "  ...vet saw its package" $(/usr/bin/grep -q '^go vet ./scripts$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+
+tm smart "smart empty selection passes its checks" 0 "test-smart: PASS" \
+	STUB_DIFF_ALL=README.md
+check "  ...names no packages" $([[ $LAST == *" - "* ]] && echo 0 || echo 1) "$LAST"
+check "  ...still ran the licence guards and smokes" $(/usr/bin/grep -q '^make -C .* smoke$' "$STUB_LOG" && /usr/bin/grep -q '^make -C .* boundary$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+check "  ...ran no package" $(! /usr/bin/grep -q '^go test' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
 
 tm smart "smart vet failure" 1 "go vet" \
 	STUB_DIFF_ALL=README.md STUB_DIFF_GO=scripts/foo.go STUB_SELECT=./p STUB_VET='foo.go:3:2: undefined: x' STUB_VET_RC=1
