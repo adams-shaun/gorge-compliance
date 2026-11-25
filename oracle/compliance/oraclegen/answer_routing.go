@@ -418,12 +418,37 @@ type digSource struct {
 	// the looks whose look-and-pick chooseTarget dialog has been measured on
 	// XMage for sizes above two (Symbiote Spider-Man).
 	dynamic bool
+	// bottom is true when every Dig in the set puts a Library rest on the
+	// library BOTTOM (LibraryPosition2 -1, the default). A rest that goes back
+	// on top (Ancestral Knowledge, LibraryPosition2$ 0) is a different XMage
+	// dialog and keeps its choice-queue answer.
+	bottom bool
+	// plain is true when every Dig in the set is the unconditional "put one of
+	// them into your hand" take: no ChangeValid filter, no Optional/Reveal
+	// rider, the default Hand destination, one card. Only that shape is
+	// LookLibraryAndPickControllerEffect(N, 1, HAND, BOTTOM_*) on XMage (every
+	// corpus card of that shape was checked against its Java: Impulse,
+	// Anticipate, Lone Revenant, Dragonlord Ojutai, ...). A filtered or
+	// optional look ("you may put a creature card from among them onto the
+	// battlefield": Winota, Vivien's Invocation, Knight-Errant of Eos) is often
+	// a custom effect that picks with player.choose, the CHOICE queue
+	// (TestPlayer sends choose(.., TargetCard) to makeChoose), so it keeps its
+	// choice-queue answer.
+	plain bool
 }
 
-// digFact is one Dig's second destination and whether its look is variable.
+// digFact is one Dig's second destination, the position a Library rest takes,
+// and whether its look is variable. second and pos2 carry the defaults the
+// engine applies at execution time (engine/effects/dig_params.go): an omitted
+// DestinationZone2 is the library, and an omitted LibraryPosition2 on a library
+// rest is -1 (bottom). The compiled corpus omits both for the cards that print
+// "the rest on the bottom of your library" (Lone Revenant, Dragonlord Ojutai),
+// so reading the raw params alone would never see their Library rest.
 type digFact struct {
 	second  string
+	pos2    string
 	dynamic bool
+	plain   bool
 }
 
 // digSourceForStep resolves the card (and, when an index is available, the
@@ -601,13 +626,15 @@ func digSourceFromSeconds(dests []digFact) (digSource, bool) {
 		return digSource{}, false
 	}
 	seconds := make([]string, len(dests))
-	dynamic := true
+	dynamic, bottom, plain := true, true, true
 	for i, f := range dests {
 		seconds[i] = f.second
 		dynamic = dynamic && f.dynamic
+		bottom = bottom && f.pos2 == "-1"
+		plain = plain && f.plain
 	}
 	dest, known := agreeDigSecond(seconds)
-	return digSource{second: dest, known: known, dynamic: dynamic}, true
+	return digSource{second: dest, known: known, dynamic: dynamic, bottom: bottom, plain: plain}, true
 }
 
 // collectDigSeconds walks an ability's SubAbility$ chain, recording every
@@ -620,9 +647,29 @@ func collectDigSeconds(sa *cards.SA, seen map[*cards.SA]bool, dests *[]digFact) 
 	if sa.API == "Dig" {
 		num := strings.TrimSpace(sa.Params["DigNum"])
 		_, err := strconv.Atoi(num)
-		*dests = append(*dests, digFact{strings.TrimSpace(sa.Params["DestinationZone2"]), num != "" && err != nil})
+		// The same defaults engine/effects/dig_params.go applies.
+		second := strings.TrimSpace(sa.Params["DestinationZone2"])
+		pos2 := strings.TrimSpace(sa.Params["LibraryPosition2"])
+		if second == "" {
+			second = "Library"
+		}
+		if strings.EqualFold(second, "Library") && pos2 == "" {
+			pos2 = "-1"
+		}
+		plain := digPlainTake(sa.Params)
+		*dests = append(*dests, digFact{second, pos2, num != "" && err != nil, plain})
 	}
 	collectDigSeconds(sa.Sub, seen, dests)
+}
+
+// digPlainTake is a Dig's unconditional "put one of them into your hand" take
+// (digSource.plain): no ChangeValid filter, no Optional or Reveal rider, the
+// default Hand destination, at most one card.
+func digPlainTake(params map[string]string) bool {
+	p := func(k string) string { return strings.TrimSpace(params[k]) }
+	return p("ChangeValid") == "" && p("Optional") == "" && p("Reveal") == "" &&
+		(p("DestinationZone") == "" || strings.EqualFold(p("DestinationZone"), "Hand")) &&
+		(p("ChangeNum") == "" || p("ChangeNum") == "1")
 }
 
 // agreeDigSecond is the one DestinationZone2 every Dig in the set states.
@@ -663,12 +710,13 @@ func digTakeShape(d rules.OracleDecision) bool {
 // disagree (Memories Returning: Library, none, Library, Hand) is XMage's own
 // multi-step effect whose picks read the CHOICE queue, so a target answer there
 // is the wrong command ("wrong choice command", HARNESS); a step with no
-// resolved source is unknown, and a fixed-size look of three or more is not yet
-// re-measured. Those keep only the historical two-card complement (the
-// shape-only fallback the unthreaded XAnswers callers rely on).
+// resolved source is unknown, and a fixed-size look of three or more whose rest
+// is neither graveyard nor library bottom is not yet re-measured. Those keep
+// only the historical two-card complement (the shape-only fallback the
+// unthreaded XAnswers callers rely on).
 func (r *answerRouting) digTargetAnswer(i int) string {
 	d := r.ds[i]
-	if a := r.digGraveyardTakeAnswer(i); a != "" {
+	if a := r.digFixedTakeAnswer(i); a != "" {
 		return a
 	}
 	if !digTakeShape(d) {
@@ -696,10 +744,30 @@ func (r *answerRouting) digTargetAnswer(i int) string {
 	}
 }
 
-// digGraveyardTakeAnswer is the target-queue answer for the take of a
-// fixed-size look of three or more whose rest goes to the graveyard, or ""
-// for any other decision. The step's source must resolve to Digs that agree on
-// a Graveyard second destination (digSource.known). XMage's
+// digRestTargetQueue reports whether a fixed-size look's second destination is
+// one whose take XMage asks on the TARGET queue: the graveyard, or the library
+// bottom of a plain one-card hand take (Lone Revenant, Dragonlord Ojutai:
+// PutCards.HAND, PutCards.BOTTOM_ANY, "Missing TARGET def" when answered on the
+// choice queue). A rest put back on top of the library is not that dialog
+// (Ancestral Knowledge picks with controller.choose, the choice queue), and a
+// filtered, optional or non-hand look with a bottom rest is frequently a custom
+// effect on the choice queue (src.plain). The N-1 bottom-order choices that
+// follow stay on the choice queue (gen.go's dig_bottom arm).
+func digRestTargetQueue(src digSource) bool {
+	switch {
+	case strings.EqualFold(src.second, "Graveyard"):
+		return true
+	case strings.EqualFold(src.second, "Library"):
+		return src.bottom && src.plain
+	}
+	return false
+}
+
+// digFixedTakeAnswer is the target-queue answer for the take of a
+// fixed-size look of three or more whose rest goes to the graveyard or the
+// library bottom (digRestTargetQueue), or "" for any other decision. The
+// step's source must resolve to Digs that agree on that second destination
+// (digSource.known). XMage's
 // LookLibraryAndPickControllerEffect selects the taken cards (its first
 // destination, gorge's pick) through chooseTarget over a TargetCard, the
 // TARGET queue, however many it takes: measured on Sage of Days (look at
@@ -707,7 +775,7 @@ func (r *answerRouting) digTargetAnswer(i int) string {
 // whose choice-queue answers strict-missed "Missing TARGET def" and were left
 // over. Several picks are one "^"-joined target, which TestPlayer's
 // cards-list chooseTarget splits.
-func (r *answerRouting) digGraveyardTakeAnswer(i int) string {
+func (r *answerRouting) digFixedTakeAnswer(i int) string {
 	d := r.ds[i]
 	if d.Resume != "dig" || len(d.Picks) == 0 || d.Options < 3 || len(d.Picks) >= d.Options {
 		return ""
@@ -718,7 +786,7 @@ func (r *answerRouting) digGraveyardTakeAnswer(i int) string {
 		}
 	}
 	src, ok := r.digSources[d.Step]
-	if !ok || !src.known || src.dynamic || !strings.EqualFold(src.second, "Graveyard") {
+	if !ok || !src.known || src.dynamic || !digRestTargetQueue(src) {
 		return ""
 	}
 	return strings.Join(d.Picks, "^")
