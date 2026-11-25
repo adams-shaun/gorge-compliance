@@ -20,8 +20,8 @@ import (
 // item recorded, on the step that made it, so the driver can force the same
 // result instead of flipping from its own stream (Mana Clash, SUP window
 // xe:RAND:3:19:w7). Like a die roll, a flip is not a gorge decision and must
-// not be exported as one, and it is absent from Raw(), which is all gorge's
-// runner reads.
+// not be exported as one; Raw(), which is all gorge's runner reads, carries it
+// in the runner's shape (no follower-side forced mark).
 func TestForgeFlippedCoin(t *testing.T) {
 	flips := []oraclegen.CoinFlip{
 		{Step: 1, Seat: 0, Win: false},
@@ -45,8 +45,13 @@ func TestForgeFlippedCoin(t *testing.T) {
 	if len(rq.GorgeDecisions) != 0 {
 		t.Fatalf("coin flip exported as a gorge decision: %+v", rq.GorgeDecisions)
 	}
-	if raw := string(rq.Item.Raw()); bytes.Contains([]byte(raw), []byte("coin_flips")) {
-		t.Fatalf("Raw sends the Forge side field to gorge's runner: %s", raw)
+	raw := string(rq.Item.Raw())
+	const wantRaw = `"coin_flips":[{"step":1,"seat":0,"win":false},{"step":1,"seat":1,"win":true},{"step":1,"seat":0,"win":true,"draws":0},{"step":1,"seat":1,"win":true,"draws":2}]`
+	if !bytes.Contains([]byte(raw), []byte(wantRaw)) {
+		t.Fatalf("Raw does not carry the flips in the runner's shape, want %s: %s", wantRaw, raw)
+	}
+	if bytes.Contains([]byte(raw), []byte(`"forced"`)) {
+		t.Fatalf("Raw sends the Forge side forced mark to gorge's runner: %s", raw)
 	}
 	b, err := json.Marshal(rq)
 	if err != nil {

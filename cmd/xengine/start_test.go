@@ -474,6 +474,11 @@ func TestStartManaAbilityIsExercised(t *testing.T) {
 		{"Bog Initiate", "f0/a0", 0},       // 1: Add {B}
 		{"Cabal Coffers", "f0/a0", 0},      // 2, T: Add {B} for each Swamp you control
 		{"Bayou", "f0/a1", 1},              // T: Add {G}, the second of Bayou's two
+		{"Shivan Reef", "f0/a1", 1},        // T: Add {U} or {R}, 1 damage: asks the wheel, then the colour
+		{"Talisman of Dominance", "f0/a1", 1},
+		{"Karplusan Forest", "f0/a1", 1},
+		{"Sliver Hive", "f0/a1", 1}, // Add one mana of any color: a wheel option, then the colour ask
+		{"Grove of the Burnwillows", "f0/a1", 1},
 	} {
 		t.Run(c.card, func(t *testing.T) {
 			for _, it := range startIsExercised(t, reg, b, c.card, c.key) {
@@ -487,6 +492,32 @@ func TestStartManaAbilityIsExercised(t *testing.T) {
 				}
 				if !found {
 					t.Errorf("%s: no activate step of %s ability %d: %+v", it.ID, c.card, c.ability, it.Steps)
+				}
+			}
+		})
+	}
+}
+
+// TestStartManaWheelColourIsExercised: a mana-ability focus that is the second
+// of its source's mana abilities and asks a colour (pain lands, Talismans,
+// Grove of the Burnwillows: f0/a1, "{T}: Add {U} or {B}") records its tap on the
+// engine's choice among the source's mana abilities, and the lowering refused
+// it as unsupported_kind:activate. That choice offers an explicit combo's
+// colours as options of their own, so the step's colour answer picks it.
+func TestStartManaWheelColourIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, card := range []string{"Caves of Koilos", "Talisman of Progress", "Grove of the Burnwillows"} {
+		t.Run(card, func(t *testing.T) {
+			for _, it := range startIsExercised(t, reg, b, card, "f0/a1") {
+				found := false
+				for _, st := range it.Steps {
+					if st.Op == "activate" && strings.Contains(st.Card, card) && st.AbilityIndex != nil && *st.AbilityIndex == 1 &&
+						len(st.Answers) == 1 && st.Answers[0].Kind == "choose" {
+						found = true
+					}
+				}
+				if !found {
+					t.Errorf("%s: no activate step of %s ability 1 with its colour answer: %+v", it.ID, card, it.Steps)
 				}
 			}
 		})

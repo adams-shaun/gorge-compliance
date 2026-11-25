@@ -297,6 +297,42 @@ type CoinFlip struct {
 	Draws  int  `json:"draws,omitempty"`
 }
 
+// runnerCoinFlip is one CoinFlip in the shape gorge's runner decodes
+// (rules.oracleCoinFlip): it has no Forced field (the runner rejects unknown
+// fields), and its draws is a pointer so the ordinary one-draw flip stays
+// absent while a forced flip's 0 tells the runner's forced-flip queue to skip
+// it. A doubler flip keeps its 2.
+type runnerCoinFlip struct {
+	Step  int  `json:"step"`
+	Seat  int  `json:"seat"`
+	Win   bool `json:"win"`
+	Draws *int `json:"draws,omitempty"`
+}
+
+// runnerCoinFlips maps the item's flips to the runner's record shape. It is
+// the one place Forced/Draws become the runner's draws accounting, so a flip
+// the live game forced is never queued for a forced result the runner will
+// never ask for.
+func runnerCoinFlips(fs []CoinFlip) []runnerCoinFlip {
+	if len(fs) == 0 {
+		return nil
+	}
+	out := make([]runnerCoinFlip, 0, len(fs))
+	for _, f := range fs {
+		r := runnerCoinFlip{Step: f.Step, Seat: f.Seat, Win: f.Win}
+		switch {
+		case f.Forced:
+			draws := 0
+			r.Draws = &draws
+		case f.Draws > 0:
+			draws := f.Draws
+			r.Draws = &draws
+		}
+		out = append(out, r)
+	}
+	return out
+}
+
 // ThreeSeats is Scenario.Players for a multiplayer scenario: p0 and two
 // opponents, so one opponent can lose the game while it goes on (CR 800.4a).
 const ThreeSeats = 3
@@ -390,12 +426,17 @@ type Item struct {
 	// existing item bytes are unchanged.
 	DieRolls []DieRoll `json:"die_rolls,omitempty"`
 	// CoinFlips is every coin flip the item's steps made, in log order. Like
-	// DieRolls it is an Item field, never a Step one, so Raw() never sends it
-	// to gorge's runner. A Forge driver must force each result before running
-	// the step (its FlipCoinEffect flips from its own seeded stream, so a card
-	// like Mana Clash loops a different number of times); XMage already
-	// scripts the runner's flips through xmage_answers (kind "flip"). Empty
-	// for every item that flips no coin, so existing item bytes are unchanged.
+	// DieRolls it is an Item field, never a Step one. Raw() sends it to
+	// gorge's runner as the scenario's top-level coin_flips (gorge's
+	// forcedFlips, CR 705.1), which forces each random flip to the recorded
+	// result instead of drawing from its seeded generator, so every Raw()
+	// caller replays the recorded flips; a Forced flip goes as draws 0, which
+	// the runner's forced-flip queue skips. A Forge driver must force each
+	// result before running the step too (its FlipCoinEffect flips from its
+	// own seeded stream, so a card like Mana Clash loops a different number of
+	// times); XMage already scripts the runner's flips through xmage_answers
+	// (kind "flip"). Empty for every item that flips no coin, so existing item
+	// bytes are unchanged.
 	CoinFlips []CoinFlip `json:"coin_flips,omitempty"`
 	// Ignore names snapshot fields the comparison leaves out for this
 	// scenario: library_top after the card shuffles a library.
@@ -433,23 +474,26 @@ type XAnswer struct {
 	Value string `json:"value"`
 }
 
-// Raw is the scenario plus the item's recorded die rolls, as gorge's runner
-// decodes it. It is the one helper for runner JSON that includes the tape, so a
-// caller that replays the item's steps forces the same rolls; a caller that
-// changes the step list must keep the tape's steps in range (or drop the tape). The runner fails a roll whose sides or seat disagree
-// with the engine's and one a step leaves unconsumed.
+// Raw is the scenario plus the item's recorded die rolls and coin flips, as
+// gorge's runner decodes it. It is the one helper for runner JSON that includes
+// the tape, so a caller that replays the item's steps forces the same rolls and
+// flips; a caller that changes the step list must keep the tape's steps in
+// range (or drop the tape). The runner fails a roll whose sides or seat
+// disagree with the engine's and one a step leaves unconsumed; a flip record
+// whose seat disagrees, or one asked past the last record, is a harness fail.
 func (it Item) Raw() []byte { return it.RawScenario(it.Scenario) }
 
 // RawScenario is Raw with sc in place of the item's scenario. A probe that
 // replays the item with retargeted or extended steps (xprep's retarget rerun,
 // pending-resolution and modal-trigger continuations) goes through here too, so
-// it forces the same die rolls. sc must keep every step a recorded roll is on,
-// or gorge's runner fails the unconsumed roll.
+// it forces the same rolls and flips. sc must keep every step a recorded roll
+// or flip is on, or gorge's runner fails the unconsumed roll.
 func (it Item) RawScenario(sc Scenario) []byte {
 	b, _ := json.Marshal(struct {
 		Scenario
-		DieRolls []DieRoll `json:"die_rolls,omitempty"`
-	}{sc, it.DieRolls})
+		DieRolls  []DieRoll        `json:"die_rolls,omitempty"`
+		CoinFlips []runnerCoinFlip `json:"coin_flips,omitempty"`
+	}{sc, it.DieRolls, runnerCoinFlips(it.CoinFlips)})
 	return b
 }
 
