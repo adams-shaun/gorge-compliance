@@ -633,7 +633,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # zero-mode charm answer, the empty-face chooseCardName answer, the transit-order fallback, the Evoke trigger label and the
 # DigMultiple/AltDestination picks. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork branch
 # fix/xp-forge-driver-zero-mode-charm (advanced with the evoke/DigMultiple pin).
-FORGE_ORACLE_REF ?= 68d36f8247a3285e0417f9beccf7a66240020297
+# 1da9dc5c96c = 68d36f8247a (above: every driver fix on develop) plus the one-card TwoPiles split (fork branch
+# fix/xp-forge-driver-twopiles-one-card-split-v3; xproof cluster xpt-fc88455d): Epiphany at the Drownyard cast with X = 0 reveals one
+# card, and gorge's effTwoPiles poses no split for a one-card set (the two splits are the same partition, CR 700.3), logging only
+# the opponent's pile pick. Forge's TwoPilesEffect still asks the separator "Divide cards into two piles" (1 option, 0..1), which
+# strict-missed. StepMachine.loneTwoPilesSplit recognises that ask when no gorge object pick is queued and ScriptedController
+# answers the card as pile 1 (gorge's pile A), so chooseCardsPile reads the "First pile" pick as before; a queued split pick still
+# goes through pickObjects. TwoPilesOneCardSplitTest fails before it with the exact miss;
+# scripts/forge-oracle-test-twopiles-one-card-split.sh (make forge-driver-tests) runs it. Driver-only; die-roll code,
+# cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). The empty-face chooseCardName fix (2b591baf9c) is
+# carried: ChooseCardNameEmptyFacesTest, OrderCardsTest, TriggerOrderEvokeLabelTest and ForcedDieRollTest are green on it.
+FORGE_ORACLE_REF ?= 1da9dc5c96c3789a60eb068c8ac6d973e4329752
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
