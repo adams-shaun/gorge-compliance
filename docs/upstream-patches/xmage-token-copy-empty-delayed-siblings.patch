@@ -1,0 +1,229 @@
+diff --git a/Mage.Sets/src/mage/cards/d/DevastatingOnslaught.java b/Mage.Sets/src/mage/cards/d/DevastatingOnslaught.java
+index e3bdc800..4f984d6b 100644
+--- a/Mage.Sets/src/mage/cards/d/DevastatingOnslaught.java
++++ b/Mage.Sets/src/mage/cards/d/DevastatingOnslaught.java
+@@ -59,12 +59,17 @@ class DevastatingOnslaughtEffect extends OneShotEffect {
+     public boolean apply(Game game, Ability source) {
+         Permanent permanent = game.getPermanent(getTargetPointer().getFirst(game, source));
+         int xValue = GetXValue.instance.calculate(game, source, this);
+-        if (permanent == null || xValue < 1) {
++        if (permanent == null) {
+             return false;
+         }
+         CreateTokenCopyTargetEffect effect = new CreateTokenCopyTargetEffect(null, null, true, xValue);
+         effect.setSavedPermanent(permanent);
+-        effect.apply(game, source);
++        if (xValue > 0) {
++            effect.apply(game, source);
++        }
++        // CR 603.7a: the "sacrifice them" delayed trigger is created by the resolution whether or not
++        // any token was created. With X = 0 it triggers at the beginning of the next end step and
++        // sacrifices nothing (CR 603.7c).
+         effect.sacrificeTokensCreatedAtNextEndStep(game, source);
+         return true;
+     }
+diff --git a/Mage.Sets/src/mage/cards/f/FoggySwampVisions.java b/Mage.Sets/src/mage/cards/f/FoggySwampVisions.java
+index 9c2b496e..916284b0 100644
+--- a/Mage.Sets/src/mage/cards/f/FoggySwampVisions.java
++++ b/Mage.Sets/src/mage/cards/f/FoggySwampVisions.java
+@@ -77,7 +77,7 @@ class FoggySwampVisionsEffect extends OneShotEffect {
+     public boolean apply(Game game, Ability source) {
+         Player player = game.getPlayer(source.getControllerId());
+         Cards cards = new CardsImpl(getTargetPointer().getTargets(game, source));
+-        if (player == null || cards.isEmpty()) {
++        if (player == null) {
+             return false;
+         }
+         player.moveCards(cards, Zone.EXILED, source, game);
+diff --git a/Mage.Sets/src/mage/cards/s/ShredderShadowMaster.java b/Mage.Sets/src/mage/cards/s/ShredderShadowMaster.java
+index 0a1d6d02..d1038c51 100644
+--- a/Mage.Sets/src/mage/cards/s/ShredderShadowMaster.java
++++ b/Mage.Sets/src/mage/cards/s/ShredderShadowMaster.java
+@@ -135,11 +135,12 @@ class ShredderShadowMasterEffect extends OneShotEffect {
+                 }
+             }
+         }
+-        if (!tokens.isEmpty()) {
+-            SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice those tokens");
+-            sacrificeEffect.setTargetPointer(new FixedTargets(new ArrayList<>(tokens), game));
+-            game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(sacrificeEffect), source);
+-        }
++        // CR 603.7a: the "sacrifice those tokens" delayed trigger is created by the resolution whether
++        // or not any token was created. With none it triggers at end of combat and sacrifices nothing
++        // (CR 603.7c).
++        SacrificeTargetEffect sacrificeEffect = new SacrificeTargetEffect("sacrifice those tokens");
++        sacrificeEffect.setTargetPointer(new FixedTargets(new ArrayList<>(tokens), game));
++        game.addDelayedTriggeredAbility(new AtTheEndOfCombatDelayedTriggeredAbility(sacrificeEffect), source);
+         return true;
+     }
+ }
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/eoe/DevastatingOnslaughtTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/eoe/DevastatingOnslaughtTest.java
+new file mode 100644
+index 00000000..940545ad
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/eoe/DevastatingOnslaughtTest.java
+@@ -0,0 +1,53 @@
++package org.mage.test.cards.single.eoe;
++
++import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * Devastating Onslaught
++ * {X}{X}{R}
++ * Sorcery
++ * Create X tokens that are copies of target artifact or creature you control. Those tokens gain
++ * haste until end of turn. Sacrifice them at the beginning of the next end step.
++ * <p>
++ * CR 603.7a: the delayed "sacrifice them" ability is created by the resolution whether or not any
++ * token was created; with X = 0 it still triggers at the beginning of the next end step and
++ * sacrifices nothing (CR 603.7c).
++ */
++public class DevastatingOnslaughtTest extends CardTestPlayerBase {
++
++    private static final String onslaught = "Devastating Onslaught";
++    private static final String bears = "Grizzly Bears";
++
++    @Test
++    public void test_DelayedSacrificeTriggerWithNoToken() {
++        setStrictChooseMode(true);
++
++        addCard(Zone.BATTLEFIELD, playerA, "Mountain");
++        addCard(Zone.BATTLEFIELD, playerA, bears);
++        addCard(Zone.HAND, playerA, onslaught);
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, onslaught);
++        setChoice(playerA, "X=0");
++        addTarget(playerA, bears);
++
++        runCode("delayed sacrifice trigger at the beginning of the end step", 1, PhaseStep.END_TURN, playerA,
++                (info, player, game) -> {
++                    Assert.assertEquals("one delayed ability on the stack", 1, game.getStack().size());
++                    Assert.assertTrue("the delayed sacrifice ability is on the stack",
++                            game.getStack().getFirstOrNull().getStackAbility()
++                                    instanceof AtTheBeginOfNextEndStepDelayedTriggeredAbility);
++                });
++
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        assertPermanentCount(playerA, 2);
++        assertPermanentCount(playerA, bears, 1);
++        assertGraveyardCount(playerA, onslaught, 1);
++    }
++}
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/tla/FoggySwampVisionsTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/tla/FoggySwampVisionsTest.java
+new file mode 100644
+index 00000000..971e3d64
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/tla/FoggySwampVisionsTest.java
+@@ -0,0 +1,49 @@
++package org.mage.test.cards.single.tla;
++
++import mage.abilities.common.delayed.AtTheBeginOfNextEndStepDelayedTriggeredAbility;
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * Foggy Swamp Visions
++ * {1}{B}{B}
++ * Sorcery
++ * As an additional cost to cast this spell, waterbend {X}.
++ * Exile X target creature cards from graveyards. For each creature card exiled this way, create a
++ * token that's a copy of it. At the beginning of your next end step, sacrifice those tokens.
++ * <p>
++ * CR 603.7a: the delayed "sacrifice those tokens" ability is created by the resolution whether or
++ * not any token was created; with X = 0 it still triggers at the beginning of the next end step
++ * and sacrifices nothing (CR 603.7c).
++ */
++public class FoggySwampVisionsTest extends CardTestPlayerBase {
++
++    private static final String foggy = "Foggy Swamp Visions";
++
++    @Test
++    public void test_DelayedSacrificeTriggerWithNoExiledCard() {
++        setStrictChooseMode(true);
++
++        addCard(Zone.BATTLEFIELD, playerA, "Swamp", 3);
++        addCard(Zone.HAND, playerA, foggy);
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, foggy);
++        setChoice(playerA, "X=0");
++
++        runCode("delayed sacrifice trigger at the beginning of the end step", 1, PhaseStep.END_TURN, playerA,
++                (info, player, game) -> {
++                    Assert.assertEquals("one delayed ability on the stack", 1, game.getStack().size());
++                    Assert.assertTrue("the delayed sacrifice ability is on the stack",
++                            game.getStack().getFirstOrNull().getStackAbility()
++                                    instanceof AtTheBeginOfNextEndStepDelayedTriggeredAbility);
++                });
++
++        setStopAt(1, PhaseStep.END_TURN);
++        execute();
++
++        assertGraveyardCount(playerA, foggy, 1);
++    }
++}
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/tmt/ShredderShadowMasterTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/tmt/ShredderShadowMasterTest.java
+new file mode 100644
+index 00000000..2514bf3b
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/tmt/ShredderShadowMasterTest.java
+@@ -0,0 +1,50 @@
++package org.mage.test.cards.single.tmt;
++
++import mage.abilities.common.delayed.AtTheEndOfCombatDelayedTriggeredAbility;
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Assert;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * Shredder, Shadow Master
++ * {3}{B}{B}
++ * Legendary Creature - Human Ninja 5/5
++ * Whenever Shredder attacks a player, for each other opponent, create a token that's a copy of
++ * Shredder tapped and attacking that player, except it isn't legendary. Sacrifice those tokens at
++ * end of combat.
++ * Whenever Shredder deals combat damage to a player, that player loses half their life, rounded up.
++ * <p>
++ * CR 603.7a: the delayed "sacrifice those tokens" ability is created by the resolution whether or
++ * not any token was created. In a two-player game the defending player is the only opponent, so
++ * "for each other opponent" makes no token, but the trigger is still created and resolves at end
++ * of combat sacrificing nothing (CR 603.7c).
++ */
++public class ShredderShadowMasterTest extends CardTestPlayerBase {
++
++    private static final String shredder = "Shredder, Shadow Master";
++
++    @Test
++    public void test_DelayedSacrificeTriggerWithNoToken() {
++        setStrictChooseMode(true);
++
++        addCard(Zone.BATTLEFIELD, playerA, shredder);
++
++        attack(1, playerA, shredder);
++
++        runCode("delayed sacrifice trigger at end of combat", 1, PhaseStep.END_COMBAT, playerA,
++                (info, player, game) -> {
++                    Assert.assertEquals("one delayed ability on the stack", 1, game.getStack().size());
++                    Assert.assertTrue("the delayed sacrifice ability is on the stack",
++                            game.getStack().getFirstOrNull().getStackAbility()
++                                    instanceof AtTheEndOfCombatDelayedTriggeredAbility);
++                });
++
++        setStopAt(1, PhaseStep.END_COMBAT);
++        execute();
++
++        assertPermanentCount(playerA, 1);
++        assertPermanentCount(playerA, shredder, 1);
++    }
++}
