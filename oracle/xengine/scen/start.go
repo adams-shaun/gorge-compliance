@@ -43,13 +43,16 @@ type StartSetup struct {
 
 // StartSeat is one seat's placements, card names; a repeat is a separate copy.
 type StartSeat struct {
-	Hand        []string       `json:"hand,omitempty"`
-	Battlefield []string       `json:"battlefield,omitempty"`
-	Graveyard   []string       `json:"graveyard,omitempty"`
-	Exile       []string       `json:"exile,omitempty"`
-	Library     []string       `json:"library,omitempty"`
-	Tapped      []string       `json:"tapped,omitempty"`
-	Counters    []StartCounter `json:"counters,omitempty"`
+	Hand        []string `json:"hand,omitempty"`
+	Battlefield []string `json:"battlefield,omitempty"`
+	Graveyard   []string `json:"graveyard,omitempty"`
+	Exile       []string `json:"exile,omitempty"`
+	Library     []string `json:"library,omitempty"`
+	Tapped      []string `json:"tapped,omitempty"`
+	// BackFace names battlefield cards that enter on their back face (a
+	// double-faced card's transformed side), as rules.StartSeat.BackFace.
+	BackFace []string       `json:"back_face,omitempty"`
+	Counters []StartCounter `json:"counters,omitempty"`
 	// Attach binds a battlefield Aura of this seat to a bearer of the same
 	// seat (gorge's rules.StartAttach). The Aura is listed in Battlefield too;
 	// placeAttach makes it enter attached, which a start placing a bare Aura

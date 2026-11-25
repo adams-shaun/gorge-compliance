@@ -14,6 +14,7 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
+	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/cov"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
@@ -29,6 +30,12 @@ const startFormat = "xproof-start-1"
 // reasonStartNotExercised is the refusal of a start whose focus seat was never
 // offered the focus play.
 const reasonStartNotExercised = "start-not-exercised"
+
+// reasonStartFaceLost is the refusal of a start that places a card on its back
+// face whose lowered setup no longer does: the card turned to its front before
+// the recorded span (an upkeep "transform this"), so the tape plays the front
+// face and must not credit the back-face key.
+const reasonStartFaceLost = "start-face-lost"
 
 // startDeckSize is the size a seat's deck is filled to with basics.
 const startDeckSize = 40
@@ -61,15 +68,17 @@ type startFile struct {
 
 // startSeat is one seat's position, as card names.
 type startSeat struct {
-	Hand        []string       `json:"hand"`
-	Battlefield []string       `json:"battlefield"`
-	Graveyard   []string       `json:"graveyard"`
-	Exile       []string       `json:"exile"`
-	Library     []string       `json:"library"`
-	Tapped      []string       `json:"tapped"`
-	Counters    []startCounter `json:"counters"`
-	Attach      []startAttach  `json:"attach"`
-	Life        *int32         `json:"life"`
+	Hand        []string `json:"hand"`
+	Battlefield []string `json:"battlefield"`
+	Graveyard   []string `json:"graveyard"`
+	Exile       []string `json:"exile"`
+	Library     []string `json:"library"`
+	Tapped      []string `json:"tapped"`
+	// BackFace names battlefield cards that enter on their back face.
+	BackFace []string       `json:"back_face"`
+	Counters []startCounter `json:"counters"`
+	Attach   []startAttach  `json:"attach"`
+	Life     *int32         `json:"life"`
 }
 
 type startAttach struct {
@@ -276,6 +285,10 @@ func startDeckAt(reg *cards.Registry, name string, seat int, s, other startSeat)
 		attached[a.Card] = true
 	}
 	add := func(names []string, into *[]int, bfZone bool) error {
+		backs := map[string]int{} // BackFace names left to place, by name
+		for _, n := range s.BackFace {
+			backs[n]++
+		}
 		for _, n := range names {
 			c, ok := reg.Lookup(n)
 			if !ok || len(c.Faces) == 0 {
@@ -285,7 +298,12 @@ func startDeckAt(reg *cards.Registry, name string, seat int, s, other startSeat)
 				// gorge and Forge place such a card differently (scen.FieldBlock),
 				// so the setup could never agree: refuse the file. An attached Aura
 				// enters with its bearer, so it is the one exception.
-				if why := scen.FieldBlock(c.Faces[0]); why != "" &&
+				face := c.Faces[0]
+				if backs[n] > 0 && len(c.Faces) > 1 {
+					face = c.Faces[1] // it enters transformed: the back face is the permanent
+					backs[n]--
+				}
+				if why := scen.FieldBlock(face); why != "" &&
 					!(why == "aura-unattached" && attached[n]) {
 					return fmt.Errorf("start %s: %q cannot be listed on the battlefield (%s): list it in hand", name, n, why)
 				}
@@ -295,8 +313,7 @@ func startDeckAt(reg *cards.Registry, name string, seat int, s, other startSeat)
 				bf = append(bf, len(d.Cards))
 			}
 			// the front face: a start naming a double-faced card by its back face
-			// places it front-up, and a transformed focus card stops matching the
-			// focus (BackFace starts are XP11)
+			// places it front-up unless the seat's BackFace lists it (bound below)
 			d.Cards = append(d.Cards, c.Faces[0].Name)
 			frontCost = append(frontCost, c.Faces[0].ManaCost)
 		}
@@ -375,6 +392,17 @@ func startDeckAt(reg *cards.Registry, name string, seat int, s, other startSeat)
 		}
 		ss.Attach = append(ss.Attach, rules.StartAttach{Card: card, ToSeat: seat, To: bearer})
 	}
+	backed := map[int]bool{}
+	for _, n := range s.BackFace {
+		i, err := bind(n, backed)
+		if err != nil {
+			return d, ss, err
+		}
+		if c, _ := reg.Lookup(n); c == nil || len(c.Faces) < 2 {
+			return d, ss, fmt.Errorf("start %s: %q has no back face", name, n)
+		}
+		ss.BackFace = append(ss.BackFace, i)
+	}
 	ss.Life = s.Life
 	// Filler: the colours of the listed cards' front-face costs, WUBRG order,
 	// one basic each round robin; Plains when there is no coloured symbol.
@@ -433,6 +461,25 @@ func spanFile(l lower.Lowered) *game.Tape {
 	t := *l.Against
 	t.Entries = l.Against.Entries[:n:n]
 	return &t
+}
+
+// backFaceLost is the first card the start file places on its back face
+// (either seat's back_face) that the lowered item's setup no longer lists on a
+// back face, or "". The lowering relabels the seats (the active one is p0), so
+// the item's two seats are searched together; it names a card by its front face.
+func backFaceLost(reg *cards.Registry, f *startFile, it oraclegen.Item) string {
+	var kept []string
+	for _, sd := range it.Setup {
+		kept = append(kept, sd.BackFace...)
+	}
+	for _, sd := range []startSeat{f.Setup.P0, f.Setup.P1} {
+		for _, n := range sd.BackFace {
+			if !slices.Contains(kept, canonicalCard(reg, n)) {
+				return n
+			}
+		}
+	}
+	return ""
 }
 
 // playStart plays every start file of paths (see startFiles) and writes the
@@ -499,6 +546,15 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				// timing, an enabler that died): the game exercises nothing of the
 				// key, so the file is refused, not written.
 				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartNotExercised}})
+				if err != nil {
+					return err
+				}
+				lowerLog.Write(b)
+				hist[statusRefused]++
+				continue
+			}
+			if lost := backFaceLost(reg, f, l.Item); lost != "" {
+				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartFaceLost + ":" + lost}})
 				if err != nil {
 					return err
 				}

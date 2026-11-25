@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"os"
 	"path/filepath"
@@ -659,6 +660,71 @@ func TestStartMultiFacedFocusIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartBackFaceIsExercised: a back-face key (scen: no-generator:face until
+// now) is played from the card on the battlefield on its back face, the focus
+// play the back face's own ability: the listed card enters transformed
+// (rules.StartSeat.BackFace) and the focus finds it by its front name.
+func TestStartBackFaceIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Aclazotz, Deepest Betrayal // Temple of the Dead", "f1/a0"},        // a modal back face (a land)
+		{"Shaile, Dean of Radiance // Embrose, Dean of Shadow", "f1/a0"},     // a modal creature's ability
+		{"Waterlogged Hulk // Watertight Gondola", "f1/a0"},                  // a transformed artifact's ability
+		{"Tamiyo, Inquisitive Student // Tamiyo, Seasoned Scholar", "f1/a2"}, // a transformed planeswalker's loyalty ability
+		{"Thousand Moons Smithy // Barracks of the Thousand", "f1/t0"},       // a back-face trigger
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			items := startIsExercised(t, reg, b, c.card, c.key)
+			for _, it := range items { // the lowered item still plays the card on its back face
+				kept := 0
+				for _, sd := range it.Setup {
+					kept += len(sd.BackFace)
+				}
+				if kept == 0 {
+					t.Errorf("%s: item %s has no back_face in its setup: the recorded span plays the front face", c.key, it.ID)
+				}
+			}
+		})
+	}
+}
+
+// TestStartBackFaceLostIsRefused: a back-face start whose card turns to its
+// front before the recorded span (Doric's back face transforms it at the
+// upkeep) is refused as start-face-lost, writes no item and credits nothing:
+// the tape plays the front face, so the back-face key was never exercised.
+func TestStartBackFaceLostIsRefused(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	const card = "Doric, Nature's Warden // Doric, Owlbear Avenger"
+	for _, key := range []string{"combat#1.attack", "combat#1.block"} {
+		t.Run(key, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, card, key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				return // refused by scen: no start, nothing to credit
+			}
+			raw, err := res.Start.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			in, out := t.TempDir(), t.TempDir()
+			if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+				t.Fatal(err)
+			}
+			if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+				t.Fatal(err)
+			}
+			if bs, err := os.ReadFile(filepath.Join(out, "items.jsonl")); err != nil || len(bytes.TrimSpace(bs)) != 0 {
+				t.Errorf("items.jsonl %q (err %v), want none: the back face is lost before the span", bs, err)
+			}
+			if bs, err := os.ReadFile(filepath.Join(out, "exercised.tsv")); err != nil || bytes.Contains(bs, []byte(key)) {
+				t.Errorf("exercised.tsv credits %s (err %v): %s", key, err, bs)
+			}
+		})
+	}
+}
+
 // TestStartGraveyardTargetIsExercised: a focus play that targets a card in a
 // graveyard (TgtZone$ Graveyard, or a ChangeZone from Origin$ Graveyard) was
 // read as met, so the start placed no such card (or only the basics a
@@ -805,5 +871,64 @@ func TestStartFocusCombatantTargetIsExercised(t *testing.T) {
 		"Benalish Missionary", // Creature.blocked: an attacker that was blocked
 	} {
 		t.Run(card, func(t *testing.T) { startCombatIsExercised(t, card, "f0/a0", true) })
+	}
+}
+
+// TestStartAdditionalCostIsExercised: a cast start placed only the lands for
+// the card's mana cost, never what the spell's Cost$ spends beyond it (a
+// creature to sacrifice, creature cards to exile from the graveyard, creatures
+// to tap, "behold or pay {2}", "waterbend {5}"), an {S} cost placed no snow
+// source, and a land's enters trigger was a cast focus a land never offers: the play was never affordable and play refused the start as
+// start-not-exercised (xproof 11250823: 27 of 45 such keys replayed at
+// bc885e54e2).
+func TestStartAdditionalCostIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Costly Plunder", "cast"},           // Sac<1/Artifact;Creature>
+		{"Skaab Goliath", "cast"},            // ExileFromGrave<2/Creature>
+		{"Shared Discovery", "cast"},         // tapXType<4/Creature>
+		{"Silvergill Mentor", "f0/t0"},       // AlternateAdditionalCost: behold a Merfolk or {2}
+		{"Benevolent River Spirit", "f0/t0"}, // RaiseCost Waterbend<5>
+		{"Chilling Shade", "f0/a0"},          // Cost$ S
+		{"Aetherflux Reservoir", "f0/a0"},    // PayLife<50>
+		{"Idyllic Grange", "f0/t0"},          // a land: played, with three other Plains so it enters untapped
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartOpeningHandFocusIsCast: a Leyline's opening-hand "yes" put it on
+// the battlefield before main 1, so its cast was never offered and play
+// refused the start as start-not-exercised. The focus seat now declines it;
+// the lowering then refuses the game for its own reason (opening_hand_effect:
+// a follower's setup would answer that ask too), not as an unexercised start.
+func TestStartOpeningHandFocusIsCast(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	res, err := scen.Generate(reg, b, "Leyline of Vitality", "cast", scen.Options{Prefer: "start"})
+	if err != nil || res.Start == nil {
+		t.Fatalf("scen: %v %q", err, res.Reason)
+	}
+	raw, err := res.Start.Marshal()
+	if err != nil {
+		t.Fatal(err)
+	}
+	in, out := t.TempDir(), t.TempDir()
+	if err := os.WriteFile(filepath.Join(in, "a.start.json"), raw, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if err := playStart(reg, []string{in}, "XP", out, false); err != nil {
+		t.Fatal(err)
+	}
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		var r lowerRow
+		if err := json.Unmarshal(b, &r); err != nil {
+			return err
+		}
+		if slices.Contains(r.Reasons, reasonStartNotExercised) {
+			t.Errorf("%s: %s", r.ID, reasonStartNotExercised)
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
 	}
 }
