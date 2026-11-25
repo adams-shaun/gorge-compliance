@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 857f9a8d-ba77-4afd-922d-994f66e478ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyknite:f0t0:s1,f:xs:XP:pyknite:f0t0:s1	-	-	-	8c0bd19283bb	-	551b5387fb9a	-	-	2026-11-24	xproof
 857f9a8d-ba77-4afd-922d-994f66e478ef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pyknite:f0t0:s1,f:xs:XP:pyknite:f0t0:s1	-	-	-	8c0bd19283bb	-	551b5387fb9a	-	-	2026-11-24	xproof
 857febd9-cdd7-4f8e-a852-d88084b0cfbc	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:underground-river:f0a0:s1,f:xs:XP:underground-river:f0a0:s1	-	-	-	c2272f704fde	-	1df0d3e33fd2	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-857febd9-cdd7-4f8e-a852-d88084b0cfbc	f0/a1	Mana	owed	harness	-	start	0	0	-	-	-	-	b6db453064e8	-	1df0d3e33fd2	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+857febd9-cdd7-4f8e-a852-d88084b0cfbc	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:underground-river:f0a1:s1,f:xs:XP:underground-river:f0a1:s1	-	-	-	9ff3e304d49e	-	1df0d3e33fd2	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 857febd9-cdd7-4f8e-a852-d88084b0cfbc	land	land	agreed	-	FX	start	2	0	x:xs:XP:underground-river:land:s1,f:xs:XP:underground-river:land:s1	-	-	-	25696bf19d5b	-	1df0d3e33fd2	-	-	2026-11-24	xproof
 858067f9-eb1f-4569-9831-30441cba5f90	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:annie-flash-the-veteran:f0t0:s1,f:xs:XP:annie-flash-the-veteran:f0t0:s1	-	-	-	25696bf19d5b	-	53fe7729f9c2	-	-	2026-11-24	xproof
 858067f9-eb1f-4569-9831-30441cba5f90	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:annie-flash-the-veteran:f0t0:s1,f:xs:XP:annie-flash-the-veteran:f0t0:s1	-	-	-	25696bf19d5b	-	53fe7729f9c2	-	-	2026-11-24	xproof
@@ -174,7 +174,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85e18895-d1d2-46c7-afd0-31da410c0438	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rhizome-lurcher:cast:s1,f:xs:XP:rhizome-lurcher:cast:s1	-	-	-	d864b561c9cb	-	565299acca42	-	-	2026-11-24	xproof
 85e2b073-e953-46f9-a1d4-0dfe030b3751	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shimmer-of-possibility:cast:s1,f:xs:XP:shimmer-of-possibility:cast:s1	-	-	-	d864b561c9cb	-	ff4e711a5c6d	-	-	2026-11-24	xproof
 85e797de-da27-4cd5-8fa4-4aef948988b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85e797de-da27-4cd5-8fa4-4aef948988b2	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+85e797de-da27-4cd5-8fa4-4aef948988b2	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 85e797de-da27-4cd5-8fa4-4aef948988b2	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 85eafa00-51df-4070-9b2d-247457ba3364	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85eafa00-51df-4070-9b2d-247457ba3364	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
