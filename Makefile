@@ -469,7 +469,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # xs:XP:hurl-through-hell:cast:s1 request and requires p1's Shield Sphere on the stack (controller p0) at step 7 with no
 # harness row. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-mayplay-cast.
-FORGE_ORACLE_REF ?= 244c590848288b35a4b6a0a2dd0da122a1f5dca9
+# 9a35b501bbb = 244c5908482 + the remove-any-type kind pick left for the amount run: CountersRemoveEffect.removeAnyType
+# asks chooseCounterType and then chooseNumber per type, and gorge logs one counter-kind pick per counter removed (Mabel,
+# Bitter Recluse's "remove up to three counters" from Ajani Resolute carrying two loyalty and one +1/+1). takeCounterKind
+# took the first kind pick, so takeCounterPicks counted one fewer of that type and Forge removed one counter too few,
+# leaving Ajani at 1 loyalty where gorge puts it in the graveyard (CR 122.1, 704.5i). A RemoveCounter ask now peeks the
+# kind pick and the chooseNumber run consumes it; a put or move counter-kind ask still takes its single pick.
+# scripts/forge-oracle-test-counter-any-mixed-kinds.sh (make forge-driver-tests) replays the exported
+# xs:XP:mabel-bitter-recluse:cast:s1 request and requires p1.graveyard [Ajani Resolute] at step 3 with no harness or
+# strict-miss row. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-counter-kind-peek.
+FORGE_ORACLE_REF ?= 9a35b501bbb1c1820e1f0592b1b954e461ba8ba3
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

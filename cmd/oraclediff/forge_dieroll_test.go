@@ -110,7 +110,9 @@ func TestForgeRolledDie(t *testing.T) {
 // 244c5908482 = 528c55d25b4 plus cast_mode "mayplay" (StepMachine.spellForMode/spellFor only); die-roll code unchanged,
 // ForcedDieRollTest and ForcedCoinFlipTest (18 tests) re-run green on it, and scripts/forge-oracle-test-mayplay-cast.sh
 // replays the xproof Hurl Through Hell request.
-const forgeOracleDieRollRef = "244c590848288b35a4b6a0a2dd0da122a1f5dca9"
+// 9a35b501bbb = 244c5908482 plus the remove-any-type counter-kind pick left for the chooseNumber amount run
+// (StepMachine/ScriptedController only); die-roll code unchanged, so ForcedDieRollTest's subject is untouched.
+const forgeOracleDieRollRef = "9a35b501bbb1c1820e1f0592b1b954e461ba8ba3"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
