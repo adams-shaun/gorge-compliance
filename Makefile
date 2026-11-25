@@ -818,7 +818,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # forge-driver-tests passes it; bump FORGE_ORACLE_REF to that join once it is pushed.
 # 2ac6012982e = oracle/fpin-1125-join11: a4380dd47f (the pending-declaration offered rule; above) merged with e45e911953c (the
 # below-min target decline; above), no textual conflicts; driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 2ac6012982ea099449b492f6ede41890d7036820
+# 586a3850332 = oracle/fpin-1125-join13: join11 (2ac6012982e) + the mandatory ChangeTargets regression test 61f44264a28
+# (ChangeTargetsMandatoryTest; the join the note above asks for) + the PayLife<X> announcement below (xproof cluster xpt-b1209a2d).
+# Phyrexian Processor's "pay any amount of life" is AB$ StoreSVar | Cost$ Mandatory PayLife<X>: Forge announces the amount as the cost's X (PlaySpellAbility.announceValuesLikeX), while gorge logs it as a
+# choose_n with pick kind paylife and an "N life" label, 0 included (CR 119.4, 118.3). ScriptedController.announceRequirements took the X
+# only from an x decision, so the pick was a leftover and the AI answered ("Missing x answer at step 6: X for"). It now binds a paylife
+# pick ("N life") to the X announce of an ability whose cost has a CostPayLife with amount X, after the x decision is tried and only
+# for that cost shape. PhyrexianProcessorPayLifeTest (0 life: no harness row, no leftover, life 20; 3 life: life 17; fixture fork
+# fixtures/phyrexian/processor-zero-life.jsonl, the exported xs:XP:phyrexian-processor:cast:s1 request) fails without the change with
+# the exact "Missing x answer at step 6: X for" miss; scripts/forge-oracle-test-phyrexian-processor-paylife.sh (make forge-driver-tests)
+# runs it. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-paylife-x.
+FORGE_ORACLE_REF ?= 586a38503323fbb0533e083d43ed8a1235fa0931
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
