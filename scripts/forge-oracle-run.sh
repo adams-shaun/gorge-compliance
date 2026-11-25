@@ -319,17 +319,26 @@ chunk_number=0
 scope=(systemd-run --user --scope --quiet -p MemoryMax="${FORGE_ORACLE_MEM:-3G}" -p CPUQuota=400% --)
 [ "${XENGINE_SCOPE:-systemd}" != none ] || scope=()
 cd "$tmpdir"
+jvm_env=(env FORGE_RES="$top/forge-gui/res" FORGE_ORACLE_REF="$ref" FORGE_ORACLE_AI_TIMEOUT_S="${FORGE_ORACLE_AI_TIMEOUT_S:-}")
+jvm=("$jdk/bin/java" -Djava.awt.headless=true -Xmx"${FORGE_ORACLE_HEAP:-1536m}" -XX:+UseSerialGC
+  -Djava.io.tmpdir="$tmpdir" -cp "$classes:$cp" "${FORGE_ORACLE_MAIN:-forge.oracle.ScenarioReplay}")
+# ORACLE_WARM=1: replay the whole file on a warm worker (scripts/oracle-warm.py, the driver's --serve mode), one JVM
+# bootstrap for many runs. Exit 3 from it (no warm answer) falls through to the one-shot chunks below.
+if [ "${ORACLE_WARM:-0}" = 1 ] && [ -z "${FORGE_ORACLE_MAIN:-}" ] &&
+   grep -qF 'WarmServer.serve' "$src/src/main/java/forge/oracle/ScenarioReplay.java"; then
+  rc=0
+  python3 "$here/scripts/oracle-warm.py" --engine forge --in "$in" --out "$out" -- "${scope[@]}" "${jvm_env[@]}" "${jvm[@]}" || rc=$?
+  [ "$rc" = 0 ] && exit 0
+  echo "forge-oracle-run: warm worker rc=$rc; one-shot run" >&2
+  : > "$out.log"
+fi
 for chunk in "$run_tmp"/input.*; do
   [ -f "$chunk" ] || continue
   chunk_number=$((chunk_number + 1))
   chunk_name=$(printf 'chunk %d' "$chunk_number")
   chunk_out="$run_tmp/output.$(printf '%08d' "$chunk_number")"
   chunk_log="$run_tmp/log.$(printf '%08d' "$chunk_number")"
-  if ! "${scope[@]}" \
-    env FORGE_RES="$top/forge-gui/res" FORGE_ORACLE_REF="$ref" \
-    "$jdk/bin/java" -Djava.awt.headless=true -Xmx"${FORGE_ORACLE_HEAP:-1536m}" -XX:+UseSerialGC \
-      -Djava.io.tmpdir="$tmpdir" -cp "$classes:$cp" "${FORGE_ORACLE_MAIN:-forge.oracle.ScenarioReplay}" \
-      "$chunk" "$chunk_out" >"$chunk_log" 2>&1; then
+  if ! "${scope[@]}" "${jvm_env[@]}" "${jvm[@]}" "$chunk" "$chunk_out" >"$chunk_log" 2>&1; then
     cat "$chunk_log" >> "$out.log"
     echo "forge-oracle-run: $chunk_name failed (input $(basename "$chunk"))" >&2
     cat "$chunk_log" >&2

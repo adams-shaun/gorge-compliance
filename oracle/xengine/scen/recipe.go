@@ -4,10 +4,12 @@ import (
 	"fmt"
 	"regexp"
 	"slices"
+	"sort"
 	"strconv"
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
@@ -352,6 +354,16 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			}
 		case "DamageDone", "AttackersDeclared":
 			if why := combatStart(reg, b, face, card, trig, f); why != "" {
+				if trig.Mode == "AttackersDeclared" {
+					return refuse(why)
+				}
+				// a combat-damage shape combatStart's one attack does not read
+				if why = combatTrigStart(reg, b, face, card, trig, f); why != "" {
+					return refuse(why)
+				}
+			}
+		case "Blocks", "AttackerBlocked", "AttackerBlockedByCreature", "DamageDoneOnce", "DamageDealtOnce":
+			if why := combatTrigStart(reg, b, face, card, trig, f); why != "" {
 				return refuse(why)
 			}
 		case "BecomesTarget":
@@ -428,7 +440,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			return true
 		case trig == nil:
 			return false
-		case trig.Mode == "DamageDone" || trig.Mode == "DamageDoneOnce":
+		case combatTrigModes[trig.Mode]:
 			return n.Class == certdeck.OppBlockers
 		case trig.Mode == "LifeGained":
 			return n.Class == certdeck.Life && n.Arg == "gain"
@@ -441,6 +453,12 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 	if fam != "static" && fam != "combat" {
 		if why, err := placeNeeds(reg, b, c, card, generic, skip, f); err != nil || why != "" {
 			if err != nil {
+				if trig != nil && combatTrigModes[trig.Mode] {
+					// a card certdeck cannot build (an unsupported script, a
+					// name XMage spells differently): the combat key keeps the
+					// named refusal it had before it had a start
+					return refuse("no-generator:trigger:" + trig.Mode + ":unsupported")
+				}
 				return Result{}, err
 			}
 			return refuse(why)
@@ -510,20 +528,17 @@ func adapts(sa *cards.SA) bool {
 // placeNeeds adds what certdeck.Derive says the card reads (see the forced
 // start above): graveyard fodder; for a lands need, certdeck's two extra
 // lands, tapped, so they add no mana; for opp-burn, the target seat's life
-// lowered; for a counters need, the counters themselves (placeCounters); for
-// every other need, one of certdeck's picks (pickEnabler). A need StartSpec
-// cannot place is a refusal: tokens (rules.StartSeat has no tokens yet) and
-// counters a removal reads from a player, not a permanent (reasonPlayerCounters).
-// skip drops the needs the start's own line meets or must not have.
+// lowered; for a token need, the token itself (tokenScript, minted by
+// rules.StartSeat.Tokens) so no enabler has to be cast to make one; for a
+// counters need, the counters themselves (placeCounters); for every other
+// need, one of certdeck's picks (pickEnabler). A need StartSpec cannot place
+// is a refusal: a counters need a removal reads from a player, not a
+// permanent (reasonPlayerCounters). skip drops the needs the start's own line
+// meets or must not have.
 func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, generic string, skip func(certdeck.Need) bool, f *StartFile) (string, error) {
 	needs := slices.DeleteFunc(certdeck.Derive(c, b.Types()), skip)
 	if len(needs) == 0 {
 		return "", nil
-	}
-	for _, n := range needs {
-		if n.Class == certdeck.Token {
-			return "steps-needed:" + n.Class, nil
-		}
 	}
 	plan, err := b.Build(card, needs)
 	if err != nil {
@@ -542,6 +557,12 @@ func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, g
 				f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, generic)
 				f.Setup.P0.Tapped = append(f.Setup.P0.Tapped, generic)
 			}
+		case n.Class == certdeck.Token:
+			script, ok := tokenScript(reg, n.Arg)
+			if !ok {
+				return "steps-needed:" + n.Class, nil
+			}
+			f.Setup.P0.Tokens = append(f.Setup.P0.Tokens, StartToken{Script: script})
 		case n.Class == certdeck.Counters:
 			if certdeck.CounterPlayer(c) {
 				return reasonPlayerCounters, nil
@@ -580,6 +601,68 @@ func placeNeeds(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, g
 		}
 	}
 	return "", nil
+}
+
+// genericToken is the token a kindless Token need places: the corpus's Servo,
+// an artifact creature token with no abilities (it reads as both a creature
+// token and an artifact token) that XMage's setup token table also maps, so
+// both followers can replay the start. A corpus without it falls back to the
+// most inert artifact creature token.
+const genericToken = "c_1_1_a_servo"
+
+// tokenScript is the token definition a Token need places: the canonical
+// "<kind> Token" script for a predefined artifact kind (Treasure, Food, Clue,
+// Blood, Powerstone, Map, Junk), else genericToken. Only a script XMage's setup
+// token table also maps is placed (lower.SetupTokenScript): a start that named
+// a token only Forge could replay would refuse at lowering time, so a kind the
+// table lacks keeps the clean steps-needed:token refusal. Sorted script keys
+// make the pick deterministic; "" is that refusal.
+func tokenScript(reg *cards.Registry, kind string) (string, bool) {
+	keys := make([]string, 0, len(reg.Tokens))
+	for k := range reg.Tokens {
+		keys = append(keys, k)
+	}
+	sort.Strings(keys)
+	face := func(k string) *cards.Face {
+		c := reg.Tokens[k]
+		if c == nil || len(c.Faces) == 0 {
+			return nil
+		}
+		return c.Faces[0]
+	}
+	if kind != "" {
+		for _, k := range keys {
+			if f := face(k); f != nil && strings.EqualFold(f.Name, kind+" Token") && lower.SetupTokenScript(k) {
+				return k, true
+			}
+		}
+		// A token whose script names the kind (the same test certdeck uses to
+		// pick a maker) when the corpus spells its display name differently.
+		for _, k := range keys {
+			if strings.Contains(strings.ToLower(k), strings.ToLower(kind)) && lower.SetupTokenScript(k) {
+				return k, true
+			}
+		}
+		return "", false
+	}
+	if f := face(genericToken); f != nil && f.IsCreature() && f.IsArtifact() && lower.SetupTokenScript(genericToken) {
+		return genericToken, true
+	}
+	best, bestRank := "", 0
+	for _, k := range keys {
+		f := face(k)
+		if f == nil || !f.IsCreature() || !lower.SetupTokenScript(k) {
+			continue
+		}
+		r := inertRank(f)
+		if !f.IsArtifact() {
+			r += 3 // a creature token still meets "creature token", but not "artifact token"
+		}
+		if best == "" || r < bestRank {
+			best, bestRank = k, r
+		}
+	}
+	return best, best != ""
 }
 
 // placedCounters is how many counters of the needed kind a counters need

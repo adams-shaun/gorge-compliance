@@ -43,12 +43,14 @@ sum=$(sha256sum "$src" | cut -d' ' -f1)
 # concurrent full-replay.sh jobs the only one that compiles. The root is
 # drivers/, not the old flat driver/, because a worktree on an older base
 # still rm -rf's driver/ whenever its stamp differs.
-classes="$root/drivers/${sum:0:12}"
-exec 9>"$root/driver.lock"
+droot=$(realpath -m "${XMAGE_ORACLE_CLASSES:-$root/drivers}")   # compiled-driver root; point it elsewhere when $root is read-only
+mkdir -p "$droot"
+classes="$droot/${sum:0:12}"
+exec 9>"$droot/driver.lock"
 flock 9
 if [ ! -f "$classes/.done" ]; then
   tmp=$classes.tmp.$$
-  mkdir -p "$root/drivers" && rm -rf "$tmp" && mkdir -p "$tmp"
+  rm -rf "$tmp" && mkdir -p "$tmp"
   javac -nowarn -d "$tmp" -cp "$cp" "$src" || { rm -rf "$tmp"; exit 1; }
   touch "$tmp/.done"
   rm -rf "$classes" && mv "$tmp" "$classes"
@@ -63,6 +65,19 @@ heap=${XMAGE_ORACLE_HEAP:-$(( mem_g > 2 ? mem_g - 1 : 1 ))g}
 # refused" once the owning JVM exits). XMAGE_ORACLE_PRIVATE_DB=1 runs the
 # JVM in a scratch cwd beside OUT whose db/ is a private copy (~300 MB) and
 # whose other entries link back to Mage.Tests.
+scope=(systemd-run --user --scope --quiet -p MemoryMax="$mem" --)
+[ "${XENGINE_SCOPE:-systemd}" != none ] || scope=()
+# ORACLE_WARM=1: replay the file on a warm worker (scripts/oracle-warm.py, ScenarioReplay --serve): one card DB load
+# and class scan for many runs, each worker with its own private card DB when XMAGE_ORACLE_PRIVATE_DB=1. Exit 3 from
+# it (no warm answer) falls through to the one-shot run below.
+if [ "${ORACLE_WARM:-0}" = 1 ] && grep -qF 'static void serve(' "$src"; then
+  wcwd=(--cwd "$tests"); [ "${XMAGE_ORACLE_PRIVATE_DB:-0}" = 1 ] && wcwd=(--xmage-tests "$tests")
+  rc=0
+  python3 "$here/scripts/oracle-warm.py" --engine xmage --in "$in" --out "$out" "${wcwd[@]}" -- "${scope[@]}" \
+    java -Xmx"$heap" -Dlog4j.configuration=file:/dev/null -cp "$classes:$cp" org.mage.test.oracle.ScenarioReplay || rc=$?
+  [ "$rc" = 0 ] && exit 0
+  echo "xmage-oracle-run: warm worker rc=$rc; one-shot run" >&2
+fi
 run_dir=$tests
 if [ "${XMAGE_ORACLE_PRIVATE_DB:-0}" = 1 ]; then
   run_dir="$out.cwd"; rm -rf "$run_dir"; mkdir -p "$run_dir/db"
@@ -71,8 +86,6 @@ if [ "${XMAGE_ORACLE_PRIVATE_DB:-0}" = 1 ]; then
   cp --reflink=auto "$tests/db/cards.h2.mv.db" "$run_dir/db/"
 fi
 cd "$run_dir"
-scope=(systemd-run --user --scope --quiet -p MemoryMax="$mem" --)
-[ "${XENGINE_SCOPE:-systemd}" != none ] || scope=()
 "${scope[@]}" \
   java -Xmx"$heap" -Dlog4j.configuration=file:/dev/null -cp "$classes:$cp" \
   org.mage.test.oracle.ScenarioReplay "$in" "$out" >"$out.log" 2>&1

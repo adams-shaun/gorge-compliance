@@ -71,6 +71,17 @@ func (s *focusState) took() {
 	}
 }
 
+// exercised is how many focus actions the game took: the seat's plays, and for
+// a focus with no play (Kind "") the scripted combat it declared (the attack,
+// and the block when the line has one) as the one action. A line whose attack
+// was never offered leaves the key unplayed, the same as a play never offered.
+func (s *focusState) exercised() int {
+	if s.f.Kind == "" && s.hasLine() && s.lineDone() {
+		return max(s.n, 1)
+	}
+	return s.n
+}
+
 // focusSeen, when set (by a test), is handed each Play's focusState as it is
 // made, so the test can read what the Setup hook found and whether the focus
 // acted. It is nil outside tests.
