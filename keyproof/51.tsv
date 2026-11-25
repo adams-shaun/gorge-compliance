@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 511d3de9-076b-4811-bddf-00623f98993f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:auroral-procession:cast:s1,f:xs:XP:auroral-procession:cast:s1	-	-	-	23c4009444b0	-	4bbfd8daf1b4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 511e35cd-2e19-4803-a404-b790af0cea60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 511e35cd-2e19-4803-a404-b790af0cea60	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-511e35cd-2e19-4803-a404-b790af0cea60	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+511e35cd-2e19-4803-a404-b790af0cea60	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 511fa8a3-0a65-47fc-9f3b-57eaef2698cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undergrowth-leopard:cast:s1,f:xs:XP:undergrowth-leopard:cast:s1	-	-	-	23c4009444b0	-	84a7169ea6e4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 511fa8a3-0a65-47fc-9f3b-57eaef2698cd	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:undergrowth-leopard:combat0.attack:s1,f:xs:XP:undergrowth-leopard:combat0.attack:s1	-	-	-	23c4009444b0	-	84a7169ea6e4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 511fa8a3-0a65-47fc-9f3b-57eaef2698cd	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:undergrowth-leopard:combat0.block:s1,f:xs:XP:undergrowth-leopard:combat0.block:s1	-	-	-	23c4009444b0	-	84a7169ea6e4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5182de2d-aceb-450e-bd20-8bc7db124334	f0/a0	Draw	agreed	-	FX	start	4	0	x:xs:XP:mary-read-and-anne-bonny:cast:s1,f:xs:XP:mary-read-and-anne-bonny:cast:s1	-	-	-	ae86f6029288	-	a9bb190ecfc6	-	-	2026-11-24	xproof
 5182de2d-aceb-450e-bd20-8bc7db124334	f0/t0	Discarded	agreed	-	FX	start	2	0	x:xs:XP:mary-read-and-anne-bonny:cast:s2,f:xs:XP:mary-read-and-anne-bonny:cast:s2	-	-	-	ae86f6029288	-	a9bb190ecfc6	-	-	2026-11-24	xproof
 51833cff-6519-4806-8d91-0040e9a02189	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51833cff-6519-4806-8d91-0040e9a02189	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+51833cff-6519-4806-8d91-0040e9a02189	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 518684d9-467a-4936-a3d9-17d23db4622c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5187c0b2-1996-42ea-bd77-3031b3add596	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fear-of-death:f0t0:s1,f:xs:XP:fear-of-death:f0t0:s1	-	-	-	3aa6ded33acb	-	853aae0ef689	-	-	2026-11-25	xproof
 5187c0b2-1996-42ea-bd77-3031b3add596	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fear-of-death:f0t0:s1,f:xs:XP:fear-of-death:f0t0:s1	-	-	-	3aa6ded33acb	-	853aae0ef689	-	-	2026-11-25	xproof
