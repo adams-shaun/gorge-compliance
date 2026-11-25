@@ -887,7 +887,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # ChangeTargetsNoCandidateTest) and 0ca7a220bd0 (the retarget count excludes the current target; review r1, xpt-5b82851f), no
 # textual conflicts (ScriptedController.java: the join16/join17 confirm rule and the no-candidate guard touch different areas).
 # Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 0ca7a220bd062378c47507a604a7e95bfa490e8b
+# 495ed200e9f = 0ca7a220bd0 (join18, above) + setup player_counters (xproof cluster xpt-a32b5388, Demon of Dark Schemes): SetupBuilder
+# read life, speed, the commander fields and the zones but never a seat's player_counters, so a setup ENERGY=4 never reached the
+# player and the {2}{B}, Pay {E}{E}{E}{E} ability was refused ("was not put on the stack (cost unpaid)") while gorge held the energy.
+# SetupBuilder.placePlayerCounters now sets each entry as the COMPLETE count of its kind (ENERGY/POISON/EXPERIENCE/RAD, also 0) as
+# recorded state with no event or trigger, and refuses an unknown, keyword or negative entry. PlayerCountersSetupTest (5 tests, red
+# before) is run by scripts/forge-oracle-test-player-counters.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-player-counters.
+FORGE_ORACLE_REF ?= 495ed200e9f367aa7298908df5f4530c2cc4c8af
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
