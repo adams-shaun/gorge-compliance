@@ -1946,7 +1946,9 @@ func TestStartstaticattached(t *testing.T) {
 // started from the card on the battlefield on its back face (BackFace), the
 // focus play the back face's own; a face gorge cannot place there (flip, meld,
 // specialize, split) is refused by the layout, not by the old catch-all
-// "no-generator:face".
+// "no-generator:face". A Transformed trigger is the exception: a BackFace
+// placement is an enter, not a transform (CR 701.27), so its start stands the
+// card front-up and transforms it on the line (TestStartTransformedTrigger).
 func TestStartfacestarts(t *testing.T) {
 	reg, b := testBuilder(t)
 	const (
@@ -1957,10 +1959,13 @@ func TestStartfacestarts(t *testing.T) {
 	for _, tc := range []struct {
 		card, key, kind string
 		ability         int
+		front           bool
 	}{
-		{aclazotz, "f1/a0", "ability", 0}, // a modal back face (a land)
-		{arlinn, "f1/a1", "ability", 1},   // a transformed planeswalker's loyalty ability
-		{wolfkin, "f1/t0", "", 0},         // a transformed back face's trigger
+		{aclazotz, "f1/a0", "ability", 0, false},         // a modal back face (a land)
+		{arlinn, "f1/a1", "ability", 1, false},           // a transformed planeswalker's loyalty ability
+		{wolfkin, "f1/t0", "", 0, false},                 // a transformed back face's trigger
+		{"Voldaren Pariah", "f1/t0", "ability", 0, true}, // a Transformed trigger: front face, own transform ability
+		{"Kindly Stranger", "f1/t0", "cast", 0, true},    // a Transformed trigger: front face, one-card enabler
 	} {
 		if _, ok := reg.Lookup(tc.card); !ok {
 			t.Fatalf("%s is not in the corpus", tc.card)
@@ -1984,11 +1989,29 @@ func TestStartfacestarts(t *testing.T) {
 				}
 			}
 		}
-		if backed != 1 {
+		if tc.front {
+			if backed != 0 {
+				t.Errorf("%s %s: %d back_face placements, want none on a transformed start", tc.card, tc.key, backed)
+			}
+			if !slices.Contains(f.Setup.P0.Battlefield, tc.card) {
+				t.Errorf("%s %s: p0 battlefield %v, want the card front-up", tc.card, tc.key, f.Setup.P0.Battlefield)
+			}
+		} else if backed != 1 {
 			t.Errorf("%s %s: %d back_face placements, want 1", tc.card, tc.key, backed)
 		}
 		if tc.kind != "" {
-			if f.Focus == nil || f.Focus.Card != tc.card || f.Focus.Kind != tc.kind || f.Focus.Ability != tc.ability {
+			if f.Focus == nil {
+				t.Errorf("%s %s: focus missing, want %s ability %d", tc.card, tc.key, tc.kind, tc.ability)
+			} else if tc.front {
+				// a transformed start's focus is the front face's transform
+				// ability, or the one-card enabler that stands in for it
+				if tc.kind == "ability" && (f.Focus.Card != tc.card || f.Focus.Kind != tc.kind || f.Focus.Ability != tc.ability) {
+					t.Errorf("%s %s: focus %+v, want the front face's transform ability %d", tc.card, tc.key, f.Focus, tc.ability)
+				}
+				if tc.kind == "cast" && f.Focus.Kind != "cast" {
+					t.Errorf("%s %s: focus %+v, want the one-card enabler cast", tc.card, tc.key, f.Focus)
+				}
+			} else if f.Focus.Card != tc.card || f.Focus.Kind != tc.kind || f.Focus.Ability != tc.ability {
 				t.Errorf("%s %s: focus %+v, want %s ability %d on the card", tc.card, tc.key, f.Focus, tc.kind, tc.ability)
 			}
 		}
@@ -2142,5 +2165,75 @@ func TestCombatTrigStartSeatRequired(t *testing.T) {
 	f := &StartFile{}
 	if why := combatTrigStart(reg, b, c.Faces[0], "Grizzly Bears", trig, f); why == "" || f.Focus != nil {
 		t.Errorf("combatTrigStart = %q focus %+v, want a refusal", why, f.Focus)
+	}
+}
+
+// TestStartTransformedTrigger: a back-face "when this transforms into
+// CARDNAME" trigger (Mode Transformed) fires only on the transform INTO that
+// face (CR 701.27), so its start stands the card front-up and transforms it
+// on the line: with the front face's own activated transform ability where
+// it has one, else with a one-card enabler (Moonmist for a Human). It must
+// never list the card as BackFace: that placement is an enter, not a
+// transform, so the trigger never fires. A front face with no placeable cause
+// is refused by a narrower reason: a day/night border (Howlpack Piper), a
+// battlefield upkeep/draw trigger (Huntmaster of the Fells, Afflicted
+// Deserter, Ulrich of the Krallenhorde), an attack or conditional phase
+// trigger, or no cause at all; a front-face Transformed trigger or a watcher
+// is not this recipe's.
+func TestStartTransformedTrigger(t *testing.T) {
+	checkStartRows(t, []startRow{
+		// own activated transform ability
+		{card: "Voldaren Pariah", key: "f1/t0", maxTurns: 1,
+			p0BF:      cat([]string{"Voldaren Pariah"}, rep("Memnite", 3)),
+			focusCard: "Voldaren Pariah", focusKind: "ability"},
+		{card: "Blightreaper Thallid", key: "f1/t0", maxTurns: 1,
+			p0BF:      cat([]string{"Blightreaper Thallid"}, rep("Swamp", 3), []string{"Forest"}),
+			focusCard: "Blightreaper Thallid", focusKind: "ability"},
+		// one-card enabler: Moonmist for a Human, transformed by its resolution
+		{card: "Kindly Stranger", key: "f1/t0", maxTurns: 1,
+			p0Hand: []string{"Moonmist"}, p0BF: []string{"Kindly Stranger", "Forest", "Forest"},
+			p1BF:      []string{"Shield Sphere"},
+			focusCard: "Moonmist", focusKind: "cast"},
+		{card: "Ultimecia, Time Sorceress", key: "f1/t0", maxTurns: 1,
+			p0Hand: []string{"Moonmist"}, p0BF: []string{"Ultimecia, Time Sorceress", "Forest", "Forest"},
+			p1BF:      []string{"Shield Sphere"},
+			focusCard: "Moonmist", focusKind: "cast"},
+		// no placeable one-line cause: refused by name, not as the old catch-all
+		{card: "Thing in the Ice", key: "f1/t0", reason: "no-generator:trigger:Transformed:no-cause"},
+		{card: "Alluring Suitor", key: "f1/t0", reason: "no-generator:trigger:Transformed:attack"},
+		{card: "Archangel Avacyn", key: "f1/t0", reason: "no-generator:trigger:Transformed:no-cause"},
+		// a daybound front cannot be transformed by Moonmist (CR 702.145b)
+		{card: "Howlpack Piper", key: "f1/t1", reason: "no-generator:trigger:Transformed:day-night"},
+		// a battlefield upkeep transform refuses the lowering's cut
+		{card: "Huntmaster of the Fells", key: "f1/t0", reason: "no-generator:trigger:Transformed:condition"},
+		{card: "Afflicted Deserter", key: "f1/t0", reason: "no-generator:trigger:Transformed:condition"},
+		{card: "Ulrich of the Krallenhorde", key: "f1/t0", reason: "no-generator:trigger:Transformed:condition"},
+		{card: "Hawkins National Laboratory", key: "f1/t0", reason: "no-generator:trigger:Transformed:condition"},
+		{card: "Ashling, Rekindled", key: "f1/t0", reason: "no-generator:trigger:Transformed:condition"},
+		{card: "Sidequest: Raise a Chocobo", key: "f1/t0", reason: "no-generator:trigger:Transformed:condition"},
+		// a front-face trigger needs the back face placed and transformed back
+		{card: "Ashling, Rekindled", key: "f0/t1", reason: "no-generator:trigger:Transformed:front"},
+		// a watcher is not this card's transform
+		{card: "Corruption of Towashi", key: "f0/t1", reason: "no-generator:trigger:Transformed:not-self"},
+	})
+	reg, b := testBuilder(t)
+	for _, tc := range []struct{ card, key string }{
+		{"Voldaren Pariah", "f1/t0"},
+		{"Blightreaper Thallid", "f1/t0"},
+		{"Kindly Stranger", "f1/t0"},
+		{"Ultimecia, Time Sorceress", "f1/t0"},
+	} {
+		res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%s %s: %+v %v", tc.card, tc.key, res, err)
+		}
+		f := res.Start
+		backed := len(f.Setup.P0.BackFace) + len(f.Setup.P1.BackFace)
+		if backed != 0 {
+			t.Errorf("%s %s: %d back_face placements, want none: a BackFace enter is not a transform", tc.card, tc.key, backed)
+		}
+		if !slices.Contains(f.Setup.P0.Battlefield, tc.card) {
+			t.Errorf("%s %s: p0 battlefield %v, want the card front-up", tc.card, tc.key, f.Setup.P0.Battlefield)
+		}
 	}
 }

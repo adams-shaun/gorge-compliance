@@ -301,8 +301,14 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			return refuse(why)
 		}
 	case "activate", "trigger":
-		if r, ok := onBF(); ok {
-			return r, nil
+		// A Transformed trigger places the card on its front face and
+		// transforms it there (transformedStart), so the trigger face's
+		// as-enters choice is not the placement's; transformedStart checks
+		// the front face's.
+		if trig == nil || trig.Mode != "Transformed" {
+			if r, ok := onBF(); ok {
+				return r, nil
+			}
 		}
 		idx, _ := strconv.Atoi(m[3])
 		if fam == "activate" {
@@ -381,15 +387,21 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why := eventStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)
 			}
+		case "Transformed":
+			if why := transformedStart(reg, b, c, face, card, generic, trig, f); why != "" {
+				return refuse(why)
+			}
 		default:
 			return refuse("no-generator:trigger:" + trig.Mode)
 		}
 	default:
 		return refuse("no-generator")
 	}
-	if sa == nil && f.Focus != nil && f.Focus.Kind == "ability" && f.Focus.Card == card && f.Focus.Ability < len(face.Abilities) {
+	if sa == nil && (trig == nil || trig.Mode != "Transformed") && f.Focus != nil && f.Focus.Kind == "ability" && f.Focus.Card == card && f.Focus.Ability < len(face.Abilities) {
 		// a trigger start whose event is the card's own ability (it taps, it is
-		// sacrificed): the ability's targets are the focus play's
+		// sacrificed): the ability's targets are the focus play's. A
+		// Transformed trigger's focus ability is the front face's transform
+		// cause, not an ability of the trigger face.
 		sa = face.Abilities[f.Focus.Ability]
 	}
 	if hist != "" {
@@ -397,9 +409,13 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			return refuse(why)
 		}
 	}
-	if fi > 0 {
+	if fi > 0 && (trig == nil || trig.Mode != "Transformed") {
 		// a back-face key is played on the back face of the battlefield card:
-		// the first listed copy enters transformed (rules.StartSeat.BackFace)
+		// the first listed copy enters transformed (rules.StartSeat.BackFace).
+		// A Transformed trigger is the exception: its start stands the card
+		// front-up and transforms it on the line (CR 701.27), so listing the
+		// copy as BackFace would enter it on the trigger face without a
+		// transform event and never fire the trigger.
 		placed := false
 		for _, sd := range []*StartSeat{p0, p1} {
 			if !placed && slices.Contains(sd.Battlefield, card) {
