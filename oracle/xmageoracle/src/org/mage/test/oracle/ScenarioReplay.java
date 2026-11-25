@@ -7796,6 +7796,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
             case "end-combat": return PhaseStep.END_COMBAT;
             case "main2": return PhaseStep.POSTCOMBAT_MAIN;
             case "end": return PhaseStep.END_TURN;
+            // A trigger or state-based action in the cleanup step gives the
+            // players priority there (CR 514.3a), so gorge records passes at it.
+            case "cleanup": return PhaseStep.CLEANUP;
             default: throw new IllegalArgumentException("pass position in unknown step " + step);
         }
     }
