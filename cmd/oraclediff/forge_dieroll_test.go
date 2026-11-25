@@ -161,7 +161,9 @@ func TestForgeRolledDie(t *testing.T) {
 // ScriptedController.chooseCardsForEffect only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
 // 65d8060f39ba = 1da9dc5c96c plus the empty Optional$ Animate confirm (ScriptedController.emptyOptionalAnimateConfirm only);
 // die-roll code unchanged, ForcedDieRollTest re-run green on it.
-const forgeOracleDieRollRef = "65d8060f39ba8a34193c2a9b593ce363d647726e"
+// 85e4e85fde = 2ece06813a (1da9dc5c96c plus the dual-typed land colour filter, StepMachine.abilityFor only) merged with
+// 65d8060f39ba; die-roll code unchanged, ForcedDieRollTest re-run green on it.
+const forgeOracleDieRollRef = "85e4e85fdee1618f55709bceb2a628dda91fb97b"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
