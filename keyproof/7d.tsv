@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d0efc64-151f-45b4-8c0b-c32609f9d862	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-white-orchid:f0t0:s1,f:xs:XP:knight-of-the-white-orchid:f0t0:s1	-	-	-	3aa6ded33acb	-	14489267d810	-	-	2026-11-25	xproof
 7d0efc64-151f-45b4-8c0b-c32609f9d862	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-white-orchid:f0t0:s1,f:xs:XP:knight-of-the-white-orchid:f0t0:s1	-	-	-	3aa6ded33acb	-	14489267d810	-	-	2026-11-25	xproof
 7d10ad59-e90d-4726-bd55-5680d7c21638	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7d178f1c-faf7-4efd-87a6-201a40c55ec8	cast	cast	owed	harness	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+7d178f1c-faf7-4efd-87a6-201a40c55ec8	cast	cast	owed	harness	-	start	0	0	-	-	-	-	30e95cdd1f63	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	efd75d00b34da0fe9d0079dd5c9986f3525d6f67	2026-11-25	xproof
 7d1dbe80-9ad0-41ad-8ba6-e1094f596eaf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d1dbe80-9ad0-41ad-8ba6-e1094f596eaf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d1f5f6f-af3d-4b9b-acaf-debf885f660a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d58b478-a64b-46e9-b62a-08c6c1ca7c13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oathkeeper-takeno-s-daisho:cast:s1,f:xs:XP:oathkeeper-takeno-s-daisho:cast:s1	-	-	-	64a08ba7d913	-	28d57b192876	-	-	2026-11-24	xproof
 7d58b478-a64b-46e9-b62a-08c6c1ca7c13	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:oathkeeper-takeno-s-daisho:f0a0:s1,f:xs:XP:oathkeeper-takeno-s-daisho:f0a0:s1	-	-	-	23c4009444b0	-	28d57b192876	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7d58b478-a64b-46e9-b62a-08c6c1ca7c13	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oathkeeper-takeno-s-daisho:f0t0:s1,f:xs:XP:oathkeeper-takeno-s-daisho:f0t0:s1	-	-	-	6f84be0f34c0	-	28d57b192876	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-7d58b478-a64b-46e9-b62a-08c6c1ca7c13	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+7d58b478-a64b-46e9-b62a-08c6c1ca7c13	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	30e95cdd1f63	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	efd75d00b34da0fe9d0079dd5c9986f3525d6f67	2026-11-25	xproof
 7d592d5b-95cf-4416-9ade-1c23a8ba01d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d5dcf8c-ecda-49ae-980c-c8c9016252d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d5dcf8c-ecda-49ae-980c-c8c9016252d9	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:firja-judge-of-valor:f0t0:s1,f:xs:XP:firja-judge-of-valor:f0t0:s1	-	-	-	6f84be0f34c0	-	b53e70050ffa	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
