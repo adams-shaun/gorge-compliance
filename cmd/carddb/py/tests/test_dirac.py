@@ -118,6 +118,37 @@ class Dirac(Base):
         with self.assertRaises(store_mod.StoreError):
             dirac_mod.run(a, repo=repo, gorge=g)
 
+    def test_other_writers_rows_with_escapes_survive_reruns(self):
+        a = self.machine("a", init=True)
+        a.put("cards", [card(OID_A, "Bolt"), card(OID_B, "Other")], writer="mtgjson")
+        a.put("support", [{"oracle_id": OID_B, "engine": "forge", "status": "failing", "pin": "abc",
+                           "why": "a\\b\tc", "measured": MEASURED}], writer="ci")
+        a.put("evidence", [{"oracle_id": OID_B, "source": "oracle", "ref": "r\\1", "outcome": "agree"}],
+              writer="ci")
+        before = ([r for r in a.rows("support") if r["engine"] == "forge"],
+                  [r for r in a.rows("evidence") if r["source"] == "oracle"])
+        self.assertEqual(before[0][0]["why"], "a\\\\b\\tc")  # stored escaped
+        repo, g = fixture(self.tmp)
+        for _ in range(3):
+            dirac_mod.run(a, repo=repo, gorge=g)
+        self.assertEqual(([r for r in a.rows("support") if r["engine"] == "forge"],
+                          [r for r in a.rows("evidence") if r["source"] == "oracle"]), before)
+
+    def test_cli_stale_snapshot_keeps_rows_and_exits_zero(self):
+        a = self.machine("a", init=True)
+        a.put("cards", [card(OID_A, "Bolt")], writer="mtgjson")
+        repo, g = fixture(self.tmp)
+        self.assertEqual(self.cli(os.path.join(self.tmp, "a"), "dirac", "--repo", repo, "--gorge-dir", g,
+                                  "--measured", MEASURED).returncode, 0)
+        snap = self.snapshot(a.dir)
+        write(os.path.join(repo, dirac_mod.GAPS_REL), "#dirac-gaps gorge-pin " + "0" * 40 + "\n")
+        p = self.cli(os.path.join(self.tmp, "a"), "dirac", "--repo", repo, "--gorge-dir", g,
+                     "--measured", MEASURED)
+        self.assertEqual(p.returncode, 0, p.stderr)
+        self.assertIn("::warning::", p.stderr)
+        self.assertIn("skipped", p.stdout)
+        self.assertEqual(self.snapshot(a.dir), snap)
+
     def test_cli_verb(self):
         a = self.machine("a", init=True)
         a.put("cards", [card(OID_A, "Bolt")], writer="mtgjson")
@@ -130,7 +161,15 @@ class Dirac(Base):
 
     def test_pinned(self):
         """The writer against the pinned gorge: dirac's supported count is support.md's ALL row."""
-        g = dirac_mod.gorge_dir(ROOT)
+        try:
+            g = dirac_mod.gorge_dir(ROOT)
+        except store_mod.StoreError as e:
+            self.skipTest("the pinned gorge module is not available: %s" % e)
+        with open(os.path.join(ROOT, dirac_mod.GAPS_REL), encoding="utf-8") as f:
+            head = f.readline().rstrip("\n")
+        if head != "#dirac-gaps gorge-pin " + dirac_mod.full_pin(ROOT):
+            self.skipTest("dirac-gaps.tsv is at another gorge pin than GORGE_PIN (%s): regenerate it with"
+                          " `go run ./cmd/diracsupport`" % head)
         sup = os.path.join(g, "dirac", "support")
         # one card per gorge name: the corpus the lists and the snapshot name
         with open(os.path.join(ROOT, dirac_mod.GAPS_REL), encoding="utf-8") as f:

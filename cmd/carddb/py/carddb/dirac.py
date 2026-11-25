@@ -12,7 +12,9 @@ and the lowering, which needs the GPL Forge corpus and so cannot run in CI. The
 lowering's result is the committed snapshot oracle/compliance/dirac-gaps.tsv
 (`go run ./cmd/diracsupport`): the corpus cards the two lists cannot place --
 unverified, not lowered, and supported-but-two-seat -- measured at one gorge pin.
-The writer refuses a snapshot whose pin is not GORGE_PIN.
+The writer refuses a snapshot whose pin is not GORGE_PIN (StaleSnapshot, raised before any
+write); the `dirac` CLI verb reports that as a warning and exits 0 with the last rows kept, so a
+GORGE_PIN bump does not stop the carddb publish before the snapshot is regenerated.
 
 A corpus card's status is, first match:
   refused      a refused entry names it (why = the entry's class and why)
@@ -33,6 +35,7 @@ import json
 import os
 import subprocess
 
+from . import shard
 from .norm import norm_name
 from .schema import repo_root
 from .store import StoreError, today
@@ -43,6 +46,12 @@ SOURCE = "dirac-lockstep"
 GAPS_REL = os.path.join("oracle", "compliance", "dirac-gaps.tsv")
 WHY_MAX = 200
 GAP_STATUSES = ("not_lowered", "unverified", "supported")
+
+
+class StaleSnapshot(StoreError):
+    """The gaps snapshot was measured at another gorge pin. GORGE_PIN is bumped by a bot and the
+    snapshot needs the GPL corpus to regenerate, so this is expected, not fatal: the CLI keeps the
+    last dirac rows and warns, and a publish must not depend on the operator's regeneration."""
 
 
 def gorge_dir(repo, explicit=None):
@@ -119,8 +128,8 @@ def load_gaps(path, pin):
         raise StoreError("dirac: %s: %s (regenerate with `go run ./cmd/diracsupport`)" % (path, e))
     want = "#dirac-gaps gorge-pin " + pin
     if not lines or lines[0] != want:
-        raise StoreError("dirac: %s is not at GORGE_PIN %s (header %r): regenerate it with"
-                         " `go run ./cmd/diracsupport`" % (path, pin[:12], lines[0] if lines else ""))
+        raise StaleSnapshot("dirac: %s is not at GORGE_PIN %s (header %r): regenerate it with"
+                            " `go run ./cmd/diracsupport`" % (path, pin[:12], lines[0] if lines else ""))
     out = {}
     for n, line in enumerate(lines[1:], 2):
         if not line:
@@ -163,10 +172,13 @@ def rows_for(cards, status, evidence, pin, measured):
 
 
 def _replace_mine(store, table, rows, mine, writer, version, ran):
-    """put rows and drop this writer's earlier rows the batch no longer names,
-    leaving every row `mine` rejects exactly as it is."""
+    """put rows and drop this writer's earlier rows the batch no longer names, leaving every
+    row `mine` rejects exactly as it is. store.rows() yields cells already in shard form, so
+    the kept rows go back with raw=True (re-escaping would double their backslashes each run)
+    and the new rows are escaped here, once."""
     others = [r for r in store.rows(table) if not mine(r)]
-    return store.put(table, others + rows, writer=writer, version=version, ran=ran, replace=True)
+    cells = [{k: shard.escape_cell(v) for k, v in r.items()} for r in rows]
+    return store.put(table, others + cells, writer=writer, version=version, ran=ran, replace=True, raw=True)
 
 
 def run(store, repo=None, gorge=None, writer="ci", version=None, ran=None):

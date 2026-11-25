@@ -310,6 +310,7 @@ jobs:
             --source ci --measured "$MEASURED" --version "$TOOL_REV"
       # dirac's per-card support from the pinned gorge module's dirac/support lists
       # and the committed lowering snapshot (go run ./cmd/diracsupport); runs after compliance.
+      # A snapshot at another GORGE_PIN is a warning (the last dirac rows stay), not a failed publish.
       - uses: actions/setup-go@v5
         with:
           go-version-file: tool/go.mod
