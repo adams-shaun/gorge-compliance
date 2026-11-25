@@ -5287,8 +5287,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * "suspend" and "foretell" special actions, a graveyard "flashback" cast, and a "mayplay" cast of a card a
      * play-from-exile permission (Reckless Impulse) reaches are wired
      * ("plot_cast", the later cast of a plotted card, is not); so are the
-     * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half, whose
-     * parent card the step names and the cast arm resolves to the half. An
+     * "adventure_alt"/"omen_alt" casts of an Adventure or Omen half and the
+     * "room_alt" cast of a Room's second door, whose parent card the step
+     * names and the cast arm resolves to the half. An
      * absent or empty mode is the ordinary cast. Any other mode is a scenario
      * the driver cannot replay and must reject loudly rather than cast at face
      * value. */
@@ -5328,6 +5329,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // XMage's castSpell takes. A step that already names the half
                 // also replays.
                 || mode.equals("adventure_alt") || mode.equals("omen_alt")
+                // "room_alt": a Room is a split card cast as one of its two
+                // doors (CR 709.3, 709.3a); this is the second (back) door,
+                // whose own name is the half of the whole "A // B" spelling
+                // (CR 709.5). XMage casts a split half through the half's own
+                // SpellAbility, so the cast arm resolves it like an Adventure
+                // half but from the card object's name (altCastHalfName).
+                || mode.equals("room_alt")
                 // "warped": Warp (CR 702.185) is its own SpellAbility on the
                 // card (WarpAbility, "<card> with Warp"), picked by that name
                 // like WarpTest does; the step's mana is the warp cost.
@@ -5698,6 +5706,24 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         String half = ((CardWithSpellOption) c).getSpellCard().getName();
         return half == null || half.isEmpty() || half.equals(name) ? null : half;
+    }
+
+    /** The XMage cast name an "alt" cast mode resolves to, or null when the
+     * mode does not name one of the card's alternate faces. Adventure and
+     * Omen halves are inset spell cards (spellOptionCastName); a Room is a
+     * split card and "room_alt" is its second door, whose own name is the
+     * back half of the whole "A // B" spelling (CR 709.3, 709.5), which is
+     * what XMage's split-half SpellAbility is called. A non-split name has
+     * no back half to name, so it falls through to castSpelling (the step has
+     * to name the ability itself) instead of guessing at a half. */
+    static String altCastHalfName(String mode, String xmageName) {
+        if ("adventure_alt".equals(mode) || "omen_alt".equals(mode)) {
+            return spellOptionCastName(xmageName);
+        }
+        if ("room_alt".equals(mode)) {
+            return xmageName.contains(" // ") ? backHalf(xmageName) : null;
+        }
+        return null;
     }
 
     private String castSpelling(String n) {
@@ -7856,11 +7882,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // Adventure/Omen cast is the other way round: the farm's step
                 // names the parent card (the xengine ref binder keeps the
                 // dealt card's name), so resolve the inset spell half's XMage
-                // name and cast that. A step that already names the half
-                // falls through unchanged.
+                // name and cast that. A Room's "room_alt" is the same shape
+                // for a split card: the step names the parent, and the second
+                // door is the back half's own name (altCastHalfName). A step
+                // that already names the half falls through unchanged.
                 String refCard = refName(str(st, "card"));
-                String halfName = "adventure_alt".equals(mode) || "omen_alt".equals(mode)
-                        ? spellOptionCastName(xmageSpelling(refCard)) : null;
+                String halfName = altCastHalfName(mode, xmageSpelling(refCard));
                 String cardName = halfName != null ? halfName : castSpelling(refCard);
                 if (kickedCast) {
                     String kickedErr = kickedCastShapeError(refCard);
