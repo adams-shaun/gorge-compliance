@@ -55,6 +55,9 @@ public final class ScenarioReplaySameNameChoiceTest {
                         case "getBlocking": return 0;
                         case "canAttack": return !tapped && !attacking;
                         case "getExpansionSetCode": return "TST";
+                        // A plain card is its own main card; the bound-id
+                        // resolver checks that identity for cast DFCs.
+                        case "getMainCard": return proxy;
                         default: throw new AssertionError("unexpected call " + method);
                     }
                 });
