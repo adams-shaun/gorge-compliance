@@ -981,6 +981,85 @@ func TestStartstacktarget(t *testing.T) {
 	}
 }
 
+// TestStartStackTargetTargetingRefused: a stack target with a
+// TargetValidTargeting$ restriction (Keep Safe's "target spell that targets a
+// permanent you control") is not met by any inert bait, because an inert bait
+// has no target of its own. The start generator used to accept the first
+// no-target instant anyway and wrote a start whose focus play was never
+// offered (xengine play refused it as start-not-exercised). Each of these keys
+// must keep the clean start:needs-stack-target refusal instead.
+func TestStartStackTargetTargetingRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Keep Safe", "cast"},          // Permanent.YouCtrl+inRealZoneBattlefield
+		{"Outwit", "cast"},             // Player
+		{"Intervene", "cast"},          // Creature.inRealZoneBattlefield
+		{"Avoid Fate", "cast"},         // Permanent.YouCtrl+inRealZoneBattlefield
+		{"Hindering Light", "cast"},    // Permanent.YouCtrl+inRealZoneBattlefield,You
+		{"Confound", "cast"},           // Creature.inRealZoneBattlefield
+		{"Psychic Rebuttal", "cast"},   // You
+		{"Turn Aside", "cast"},         // Permanent.YouCtrl+inRealZoneBattlefield
+		{"Rebuff the Wicked", "cast"},  // Permanent.YouCtrl+inRealZoneBattlefield
+		{"Not of This World", "cast"},  // Permanent.YouCtrl+inRealZoneBattlefield
+		{"Teferi's Response", "cast"},  // Land.YouCtrl+inRealZoneBattlefield
+		{"Ring of Immortals", "f0/a0"}, // ability: Permanent.YouCtrl+inRealZoneBattlefield
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != reasonNeedsStackTarget {
+				t.Fatalf("path %q reason %q, want refused %q (start %+v)", res.Path, res.Reason, reasonNeedsStackTarget, res.Start)
+			}
+		})
+	}
+}
+
+// TestStartStackTargetUnbaitedCastModeRefused: Wash Away has two cast modes.
+// Its default mode targets a spell "that wasn't cast from its owner's hand",
+// which no bait cast from the hand can be; the cleave mode can be baited, but
+// the start does not script which mode the bot takes. The generator used to
+// pick the cleave mode's bait and write a start the bot then played in the
+// default mode, so the focus play was never offered (start-not-exercised).
+func TestStartStackTargetUnbaitedCastModeRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Wash Away", "cast", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathRefused || res.Reason != reasonNeedsStackTarget {
+		t.Fatalf("path %q reason %q, want refused %q (start %+v)", res.Path, res.Reason, reasonNeedsStackTarget, res.Start)
+	}
+}
+
+// TestStackBaitTiming: the bait is on the stack when the focus play is taken,
+// so only an instant or a flash card can be the focus (CR 117.1a: a sorcery or
+// permanent spell needs an empty stack). The old check keyed off the bait's
+// speed, so an instant bait let a sorcery-speed focus through even though it
+// could never be cast.
+func TestStackBaitTiming(t *testing.T) {
+	reg, _ := testBuilder(t)
+	for _, tc := range []struct {
+		card string
+		want bool
+	}{
+		{"Absorb", true},              // instant
+		{"Bone to Ash", true},         // instant
+		{"Reach Through Mists", true}, // instant
+		{"Ambush Viper", true},        // creature with flash
+		{"Grizzly Bears", false},      // creature, no flash
+	} {
+		c, ok := reg.Lookup(tc.card)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%s is not a card", tc.card)
+		}
+		if got := castableWithBait(c.Faces[0]); got != tc.want {
+			t.Errorf("castableWithBait(%s) = %v, want %v", tc.card, got, tc.want)
+		}
+	}
+}
+
 // TestLandsForSlashlessHybrid: Forge writes hybrid, two-generic hybrid and
 // Phyrexian symbols without a slash; each still takes one basic of its first
 // colour, as the slashed form does.

@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"slices"
+	"sort"
 	"strings"
 	"testing"
 
@@ -414,7 +415,28 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 	if res.Path != scen.PathStart || res.Start == nil {
 		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
 	}
-	raw, err := res.Start.Marshal()
+	items, rows, raw := playStartFile(t, reg, res.Start)
+	var refused []string
+	for _, r := range rows {
+		if slices.Contains(r.Reasons, reasonStartNotExercised) {
+			t.Errorf("%s: %s (start %s)", r.ID, reasonStartNotExercised, raw)
+		}
+		if r.Status != "" {
+			b, _ := json.Marshal(r)
+			refused = append(refused, string(b))
+		}
+	}
+	if len(items) == 0 {
+		t.Errorf("no item written (lowering %v; start %s)", refused, raw)
+	}
+	return items
+}
+
+// playStartFile plays a generated start for both seeds and returns its items,
+// lowering rows and the rendered start. A play error is fatal.
+func playStartFile(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]oraclegen.Item, []lowerRow, []byte) {
+	t.Helper()
+	raw, err := st.Marshal()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -437,26 +459,18 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 	}); err != nil {
 		t.Fatal(err)
 	}
-	var refused []string
+	var rows []lowerRow
 	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
 		var r lowerRow
 		if err := json.Unmarshal(b, &r); err != nil {
 			return err
 		}
-		if slices.Contains(r.Reasons, reasonStartNotExercised) {
-			t.Errorf("%s: %s (start %s)", r.ID, reasonStartNotExercised, raw)
-		}
-		if r.Status != "" {
-			refused = append(refused, string(b))
-		}
+		rows = append(rows, r)
 		return nil
 	}); err != nil {
 		t.Fatal(err)
 	}
-	if len(items) == 0 {
-		t.Errorf("no item written (lowering %v; start %s)", refused, raw)
-	}
-	return items
+	return items, rows, raw
 }
 
 // TestStartManaAbilityIsExercised: a focus that is a mana ability was never
@@ -574,6 +588,99 @@ func TestStartStackTargetIsExercised(t *testing.T) {
 			}
 		})
 	}
+}
+
+// TestStartStackTargetCostIsExercised: an alternate additional cost
+// ("behold a Jace or pay {1}", "tap an artifact or pay {1}") is paid in
+// addition to the mana cost, and the generated start placed only the printed
+// cost's lands. With a bait on the stack the focus cast was never offered and
+// play refused both seeds as start-not-exercised. The mana fallback now gets
+// its lands too.
+func TestStartStackTargetCostIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	for _, card := range []string{
+		"Countersculpt",        // behold a Jace or pay {1}
+		"Disruption Protocol",  // tap an artifact or pay {1}
+		"Louisoix's Sacrifice", // sacrifice a legendary creature or pay {2}
+		"Wild Unraveling",      // blight 2 or pay {1}
+	} {
+		t.Run(card, func(t *testing.T) { _ = startIsExercised(t, reg, b, card, "cast") })
+	}
+}
+
+// TestStartStackTargetCensusIsExercised: every generated stack-target start in
+// the corpus must have its focus play offered on both seeds. This is the guard
+// for the class of regression where the bait was accepted for a spell the
+// focus play could never target (TargetValidTargeting$, a bait cast from the
+// hand against "wasn't cast from hand", a sorcery-speed focus behind the
+// bait): xengine play refused those starts as start-not-exercised, so the key
+// could never be proven even though a start file existed.
+//
+// It walks every card whose script declares a stack target, generates each
+// key, and plays each start that carries a bait. Cards whose start lowers to a
+// different refusal (an unscripted upkeep trigger) are not this class: their
+// focus play was offered, and the census requires only that no seed is refused
+// as start-not-exercised.
+func TestStartStackTargetCensusIsExercised(t *testing.T) {
+	reg, b := certdeckBuilder(t)
+	var cards []string
+	for _, c := range reg.AllCards() {
+		if len(c.Faces) == 0 || !b.Playable(c) {
+			continue
+		}
+		for _, f := range c.Faces {
+			stackTarget := false
+			for _, a := range f.Abilities {
+				if strings.Contains(a.Params["TargetType"], "Spell") || a.Params["TargetValidTargeting"] != "" {
+					stackTarget = true
+				}
+			}
+			for _, v := range f.SVars {
+				if strings.Contains(v, "TargetType$") && strings.Contains(v, "Spell") {
+					stackTarget = true
+				}
+			}
+			if stackTarget {
+				cards = append(cards, f.Name)
+				break
+			}
+		}
+	}
+	sort.Strings(cards)
+	keys, refused, noBait, wrote, exercised := 0, 0, 0, 0, 0
+	for _, card := range cards {
+		c, _ := reg.Lookup(card)
+		for _, key := range scen.Keys(c) {
+			keys++
+			res, err := scen.Generate(reg, b, card, key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Errorf("%s %s: %v", card, key, err)
+				continue
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				refused++
+				continue
+			}
+			if res.Start.Focus == nil || res.Start.Focus.Bait == "" {
+				noBait++ // a start with no bait (an ability target, or no stack target)
+				continue
+			}
+			wrote++
+			_, rows, raw := playStartFile(t, reg, res.Start)
+			bad := false
+			for _, r := range rows {
+				if slices.Contains(r.Reasons, reasonStartNotExercised) {
+					bad = true
+					t.Errorf("%s %s: %s (start %s)", card, key, reasonStartNotExercised, raw)
+				}
+			}
+			if !bad {
+				exercised++
+			}
+		}
+	}
+	t.Logf("stack-target census: cards=%d keys=%d refused=%d no-bait-start=%d wrote-with-bait=%d exercised=%d start-not-exercised=%d",
+		len(cards), keys, refused, noBait, wrote, exercised, wrote-exercised)
 }
 
 // TestStartMultiFacedFocusIsExercised: a start names a multi-faced card as its
