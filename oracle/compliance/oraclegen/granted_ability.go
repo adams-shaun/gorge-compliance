@@ -214,6 +214,28 @@ func grantedCandidates(reg *cards.Registry, it Item, i int, st Step, g rules.Ora
 			})
 		}
 	}
+	// A keyword a RESOLVED effect of another card granted earlier in the
+	// item (Cursecloth Wrappings' Pump KW$ Embalm:CardManaCost) is not on the
+	// recipient's own faces or any static. The source must have been used by
+	// an earlier step, so an unused same-text card in the setup is no
+	// candidate.
+	recMana := ""
+	if rec.card != nil && len(rec.card.Faces) > 0 && rec.card.Faces[0] != nil {
+		recMana = rec.card.Faces[0].ManaCost
+	}
+	for _, pc := range pool {
+		if pc.card == rec.card || !usedBeforeStep(it, i, pc.card) {
+			continue
+		}
+		for _, f := range pc.card.Faces {
+			if f == nil {
+				continue
+			}
+			for _, line := range effectKeywordLines(f) {
+				add(cards.GrantedKeywordAbilityFor(line, recMana))
+			}
+		}
+	}
 	for _, gg := range gains {
 		for _, pc := range pool {
 			if !gg.defined && !zoneAllows(gg.zones, pc.zone) {
@@ -946,6 +968,52 @@ func staticAddKeywordLines(st cards.Static) []string {
 	var out []string
 	out = append(out, splitParamList(st.ParamStr(cards.PKAddKeyword))...)
 	out = append(out, splitParamList(st.ParamStr(cards.PKAddKeywords))...)
+	return out
+}
+
+// usedBeforeStep reports whether a step before step i activated or cast c
+// (matched by front-face name), i.e. its effect may have resolved already.
+func usedBeforeStep(it Item, i int, c *cards.Card) bool {
+	name := cardKey(c)
+	if name == "" {
+		return false
+	}
+	for j := 0; j < i && j < len(it.Steps); j++ {
+		st := it.Steps[j]
+		if (st.Op == "activate" || st.Op == "cast") && st.Card != "" && oraclediffRefName(st.Card) == name {
+			return true
+		}
+	}
+	return false
+}
+
+// effectKeywordLines lists the keyword lines the face's Pump/PumpAll/Animate
+// effects grant (KW$ / Keywords$), through each ability's SubAbility chain
+// and every SVar-named ability.
+func effectKeywordLines(f *cards.Face) []string {
+	var out []string
+	seen := map[*cards.SA]bool{}
+	var walk func(*cards.SA)
+	walk = func(sa *cards.SA) {
+		if sa == nil || seen[sa] {
+			return
+		}
+		seen[sa] = true
+		switch sa.API {
+		case "Pump", "PumpAll":
+			out = append(out, splitParamList(sa.ParamStr(cards.PKKW))...)
+		case "Animate", "AnimateAll":
+			out = append(out, splitParamList(sa.ParamStr(cards.PKKeywords))...)
+		}
+		walk(sa.Sub)
+	}
+	for _, a := range f.Abilities {
+		walk(a)
+	}
+	for _, t := range f.Triggers {
+		walk(t.Effect)
+	}
+	f.EachSVarAbility(walk)
 	return out
 }
 

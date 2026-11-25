@@ -42,3 +42,40 @@ func TestResolveActivatedAbilityEmblemGrant(t *testing.T) {
 		t.Errorf("opponent's Mountain kind = %v, want ActivatedGrantedUnresolved", kind)
 	}
 }
+
+// TestResolveActivatedAbilityPumpKeywordGrant: Cursecloth Wrappings' Pump
+// grants Embalm:CardManaCost to a creature card in the graveyard. A later step
+// activating that granted Embalm on Memnite resolves to the Embalm keyword
+// ability; without the earlier Pump step the same pick stays unresolved.
+func TestResolveActivatedAbilityPumpKeywordGrant(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	const label = "Memnite: Embalm 0"
+	k0, k1 := 0, -1
+	it := Item{Scenario: Scenario{
+		Setup: map[string]Seat{"p0": {Battlefield: []string{"Cursecloth Wrappings"}, Graveyard: []string{"Memnite"}}},
+		Steps: []Step{
+			{Op: "activate", Card: "p0:Cursecloth Wrappings", AbilityIndex: &k0},
+			{Op: "activate", Card: "p0:Memnite", AbilityIndex: &k1, Ability: label},
+		},
+	}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		{Permanents: []rules.OracleSnapPerm{{Ref: "p0:Cursecloth Wrappings", Name: "Cursecloth Wrappings", Controller: 0, Owner: 0, Types: []string{"Artifact"}}}},
+		{Permanents: []rules.OracleSnapPerm{{Ref: "p0:Cursecloth Wrappings", Name: "Cursecloth Wrappings", Controller: 0, Owner: 0, Types: []string{"Artifact"}}}},
+	}}
+	sa, kind := ResolveActivatedAbility(reg, it, 1, it.Steps[1], g)
+	if kind != ActivatedGranted || sa == nil {
+		t.Fatalf("kind = %v, sa = %v; want ActivatedGranted", kind, sa)
+	}
+	if got := GrantedAbilityLabel("Memnite", sa); got != label {
+		t.Errorf("label = %q, want %q", got, label)
+	}
+	if sa.Params["KeywordLine"] != "Embalm:CardManaCost" {
+		t.Errorf("KeywordLine = %q", sa.Params["KeywordLine"])
+	}
+
+	// No earlier use of the Pump source: nothing granted the keyword.
+	it.Steps = it.Steps[1:]
+	if _, kind := ResolveActivatedAbility(reg, it, 0, it.Steps[0], g); kind != ActivatedGrantedUnresolved {
+		t.Errorf("unused source kind = %v, want ActivatedGrantedUnresolved", kind)
+	}
+}
