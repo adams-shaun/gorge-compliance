@@ -511,7 +511,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fixture (xs:XP:mabel-bitter-recluse:cast:s1) fails before it; scripts/forge-oracle-test-counter-any-mixed-kinds.sh runs it.
 # Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
 # afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
-FORGE_ORACLE_REF ?= afe18881c6e6327caf871661968865a495aaf3de
+# cf742d0aefc = afe18881c6e plus a forced remove-counter amount with no counter pick (fork branch
+# fix/xp-forge-driver-remove-counter-forced-amount): Ferropede's combat-damage trigger removes "a counter" of any type and
+# Wall of Stone has one +1/+1 counter, so a lone kind and the card's fixed CounterNum$ 1 leave no choice and gorge logs no
+# counter-kind pick (CR 122.1). CountersRemoveEffect.removeAnyType still asks chooseNumber(1, 1); the RemoveCounter branch
+# defaulted only min == 0 and strict-missed the forced amount. It now answers min when no counter pick is logged and min == max,
+# and keeps the miss for a free min < max range. UnmappedAskTest.removeAnyTypeForcedAmountRemovesTheLoneCounter (fixture
+# counter-remove-forced-amount.jsonl) fails on afe18881c6e and passes after; scripts/forge-oracle-test-counter-any-mixed-kinds.sh
+# (make forge-driver-tests) runs UnmappedAskTest. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
+# (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= cf742d0aefc6d0105f131ad9bb298ce24bf2a8ce
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
