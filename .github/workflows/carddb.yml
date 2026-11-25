@@ -238,6 +238,10 @@ jobs:
               exit 1
             fi
           done
+          # the verb is new: a main checkout that predates it must fail here, not in the publish step
+          grep -q docs-sets cmd/carddb/py/carddb/cli.py || {
+            echo "::error::the writer ref has no docs-sets verb: promote the carddb change to main first"
+            exit 1; }
       - name: Clone the data branch and fix the run's date
         working-directory: tool
         shell: bash
@@ -346,33 +350,46 @@ jobs:
       # orphan commit, so this step fetches the branch first and adds only these three files on top of
       # whatever is there (status files untouched); ci.yml's publish re-adds the three in turn.
       # A dry run publishes nothing. A push that finds nothing changed commits nothing.
+      # Best effort: the docs snippet must never block the nightly release (a ci.yml force-push can
+      # land between this clone and push, or the network can fail), so a failure here only warns.
       - name: Publish the per-set xproof snippet to docs-data
         if: env.DRY_RUN != 'true'
+        continue-on-error: true
         working-directory: tool
         shell: bash
         run: |
-          set -euo pipefail
+          set -uo pipefail
           out="$RUNNER_TEMP/docs-sets"
-          python3 -I cmd/carddb/main.py docs-sets --db "$RUNNER_TEMP/carddb.sqlite" --out "$out"
+          python3 -I cmd/carddb/main.py docs-sets --db "$RUNNER_TEMP/carddb.sqlite" --out "$out" || {
+            echo "::warning::docs-sets failed: the docs-data snippet is not updated"; exit 1; }
           remote="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
           work="$RUNNER_TEMP/docs-data"
-          rm -rf "$work"
-          if git ls-remote --exit-code --heads "$remote" docs-data >/dev/null 2>&1; then
-            git clone -q --depth 1 --branch docs-data "$remote" "$work"
-          else
-            git init -q -b docs-data "$work"
-          fi
-          cp "$out/sets.json" "$out/writers.json" "$out/sets-carddb.md" "$work/"
-          cd "$work"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add sets.json writers.json sets-carddb.md
-          if git diff --cached --quiet; then
-            echo "docs-data: per-set snippet unchanged"
-          else
-            git commit -q -m "docs-data: per-set xproof snippet ${MEASURED}"
-            git push "$remote" docs-data:docs-data
-          fi
+          publish() {
+            rm -rf "$work"
+            rc=0
+            git ls-remote --exit-code --heads "$remote" docs-data >/dev/null 2>&1 || rc=$?
+            if [ "$rc" -eq 0 ]; then
+              git clone -q --depth 1 --branch docs-data "$remote" "$work" || return 1
+            elif [ "$rc" -eq 2 ]; then
+              git init -q -b docs-data "$work" || return 1   # exit 2: the branch does not exist yet
+            else
+              return 1  # the remote could not be read: never init an orphan over an existing branch
+            fi
+            cp "$out/sets.json" "$out/writers.json" "$out/sets-carddb.md" "$work/" || return 1
+            ( cd "$work" &&
+              git config user.name "github-actions[bot]" &&
+              git config user.email "41898283+github-actions[bot]@users.noreply.github.com" &&
+              git add sets.json writers.json sets-carddb.md &&
+              if git diff --cached --quiet; then
+                echo "docs-data: per-set snippet unchanged"
+              else
+                git commit -q -m "docs-data: per-set xproof snippet ${MEASURED}" &&
+                git push "$remote" docs-data:docs-data
+              fi )
+          }
+          # one retry: re-fetch and re-apply the three files if ci.yml's force-push won the race
+          publish || { echo "docs-data push failed, retrying once"; publish; } || {
+            echo "::warning::could not publish the per-set snippet to docs-data; the next run repairs it"; exit 1; }
       - name: Compress the SQLite
         run: |
           set -euo pipefail

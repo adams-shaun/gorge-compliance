@@ -16,6 +16,7 @@ import os
 import re
 import sqlite3
 
+from .query import STATUS_AGREE, _status_value_column
 from .store import StoreError, today
 
 NO_PRINTED = "no printed list"
@@ -239,7 +240,6 @@ def export(db_path, out_dir):
 # ------------------------------------------------------------------ per-set xproof snippet
 
 XPROOF_STATES = ("agreed", "owed", "diagnosed", "diverged", "excluded")
-_VERDICT_AGREE = ("agree", "supported", "pass", "ok")
 
 
 def _has_table(con, name):
@@ -251,8 +251,8 @@ def sets_data(db_path):
 
     xproof counts keyproof rows (abilities) of the cards printed in the set, per state; a card printed in
     several sets counts in each. A set with no keyproof row is ABSENT (never an all-zero entry); a state
-    that is not one of XPROOF_STATES is not counted. `proven_cards` (the cards of the set with an agreeing
-    status row, any level) is present only when the status table has rows, else the key is absent.
+    that is not one of XPROOF_STATES is not counted. `proven_cards` (distinct cards of the set with a status row whose
+    verdict is in query.STATUS_AGREE, any level; NOT query's proven_keys sense) is present only when the status table has rows, else the key is absent.
     `dirac_supported` is absent until a dirac per-set writer exists. writers: [{writer, table, ran}]."""
     con = sqlite3.connect("file:%s?mode=ro" % db_path, uri=True)
     con.row_factory = sqlite3.Row
@@ -270,13 +270,13 @@ def sets_data(db_path):
                 ent = out.setdefault(r["set_code"], {"xproof": {s: 0 for s in XPROOF_STATES}})
                 ent["xproof"][r["state"]] = r["n"]
             if _has_table(con, "status") and con.execute("SELECT 1 FROM status LIMIT 1").fetchone():
-                col = _verdict_column(con)
+                col = _status_value_column(con)
                 proven = {}
                 if col:
                     for r in con.execute(
                             "SELECT p.set_code AS set_code, COUNT(DISTINCT p.oracle_id) AS n FROM printings p "
                             "JOIN status t ON t.oracle_id=p.oracle_id WHERE lower(t.%s) IN (%s) "
-                            "GROUP BY p.set_code" % (col, ",".join("?" * len(_VERDICT_AGREE))), _VERDICT_AGREE):
+                            "GROUP BY p.set_code" % (col, ",".join("?" * len(STATUS_AGREE))), STATUS_AGREE):
                         proven[r["set_code"]] = r["n"]
                 for code, ent in out.items():
                     ent["proven_cards"] = proven.get(code, 0)
@@ -287,14 +287,6 @@ def sets_data(db_path):
     finally:
         con.close()
     return out, names, writers
-
-
-def _verdict_column(con):
-    cols = [r[1] for r in con.execute("PRAGMA table_info(status)")]
-    for name in ("verdict", "status", "outcome"):
-        if name in cols:
-            return name
-    return None
 
 
 def _cell(text):
@@ -326,6 +318,8 @@ def render_sets_md(data, names, writers):
         body.append("| " + " | ".join(row) + " |")
     if not codes:
         body = ["No set has xproof rows yet."]
+    elif have_proven:
+        body += ["", "*Proven: cards of the set with an agreeing status verdict (not every key proven).*"]
     if writers:
         fresh = ["*Data written by: " + "; ".join("%s (%s) %s" % (_cell(w["writer"]), _cell(w["table"]), w["ran"])
                                                   for w in writers) + ".*"]
