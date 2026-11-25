@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83a3897c-c245-4fad-b253-3f8bbe6445fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83a3897c-c245-4fad-b253-3f8bbe6445fb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83a3897c-c245-4fad-b253-3f8bbe6445fb	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83a38c8d-e2f6-404b-83be-9cfce037d6e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:basalt-gargoyle:f0t0:s1,f:xs:XP:basalt-gargoyle:f0t0:s1	-	-	-	23c4009444b0	-	5a9691f00079	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+83a38c8d-e2f6-404b-83be-9cfce037d6e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:basalt-gargoyle:cast:s1,f:xs:XP:basalt-gargoyle:cast:s1	-	-	-	23c4009444b0	-	5a9691f00079	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83a38c8d-e2f6-404b-83be-9cfce037d6e2	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:basalt-gargoyle:f0t0:s1,f:xs:XP:basalt-gargoyle:f0t0:s1	-	-	-	23c4009444b0	-	5a9691f00079	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83a38c8d-e2f6-404b-83be-9cfce037d6e2	f0/t0	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:basalt-gargoyle:f0t0:s1,f:xs:XP:basalt-gargoyle:f0t0:s1	-	-	-	23c4009444b0	-	5a9691f00079	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83a47724-b8d1-4884-9442-b62aa1510dc3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sinkhole-surveyor:cast:s1,f:xs:XP:sinkhole-surveyor:cast:s1	-	-	-	23c4009444b0	-	0fd020fcd1cb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -207,7 +207,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83f1408e-8270-49b4-9d3f-eacfd3645543	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83f1408e-8270-49b4-9d3f-eacfd3645543	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 83f1408e-8270-49b4-9d3f-eacfd3645543	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83f2470e-2114-4cd9-ab1a-21b76e9cdf63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rumble Arena/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+83f2470e-2114-4cd9-ab1a-21b76e9cdf63	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:rumble-arena:land:s2,f:xs:XP:rumble-arena:land:s2	-	-	-	23c4009444b0	-	c3c4b9350de5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83f2470e-2114-4cd9-ab1a-21b76e9cdf63	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Rumble Arena/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83f2470e-2114-4cd9-ab1a-21b76e9cdf63	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rumble-arena:land:s1,f:xs:XP:rumble-arena:land:s1	-	-	-	23c4009444b0	-	c3c4b9350de5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83f2470e-2114-4cd9-ab1a-21b76e9cdf63	land	land	agreed	-	FX	start	2	0	x:xs:XP:rumble-arena:land:s1,f:xs:XP:rumble-arena:land:s1	-	-	-	23c4009444b0	-	c3c4b9350de5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
