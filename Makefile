@@ -971,7 +971,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (SetupBuilder.java and SetupLifeReplacementTest.java only; 102 insertions). SetupLifeReplacementTest runs at this pin via
 # scripts/forge-oracle-test-setup-life-replacement.sh next to the hand-library-placement and untap-election replays (make forge-driver-tests).
 # Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 30cbb3854d2f9433e13216cd61c52869ab686373
+# 52ddaba3075 = 30cbb3854d2 + the keyword-expanded ability identity (xproof cluster xpt-1ea6e65f, Elvish Dreadlord and Rakshasa Debaser):
+# gorge's keyword expansion of Encore is an `AB$ Encore | Keyword$ Encore` line, Forge derives the same graveyard ability from K:Encore as a
+# CopyPermanent SpellAbility with the same keyword and cost (CR 702.141a), and StepMachine.abilityFor's keyword tier needed an equal API, so
+# it fell to api+cost and stopped "ability identity at step N: api+cost 0". The keyword tier now falls back to the SAs derived from the
+# keyword with the same cost when none shares the API. scripts/forge-oracle-test-encore-keyword-identity.sh (make forge-driver-tests)
+# replays the four finds (cmd/oraclediff/testdata/forge/encore-keyword-identity.jsonl) and requires `identity: keyword` with no harness row.
+# Driver-only (StepMachine); die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-encore-keyword-identity.
+FORGE_ORACLE_REF ?= 52ddaba307522af3149b243b31392e8d6730bb1e
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
