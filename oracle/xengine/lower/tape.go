@@ -1341,7 +1341,7 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 	if why := sacrificeTapTrigger(reg, en, mana); why != nil {
 		return nil, nil, nil, nil, why
 	}
-	if len(mana) > len(en.Mana) && !paysAfterAsks(en) {
+	if len(mana) > len(en.Mana) && !paysAfterAsks(en) && !priorityManaTap(en, mana) {
 		// Mana fired while an ask was being answered, for a decision that is
 		// not a cast or activation: nothing to tap it ahead of.
 		return nil, nil, nil, nil, unsupported("ask_mana")
@@ -1567,17 +1567,29 @@ func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.Ma
 		return append(taps, st), nil
 	case "activate":
 		// "Activate <card> for mana": the entry's own mana record is the
-		// ability, which the runner finds by its index.
-		if len(en.Mana) != 1 || en.Mana[0].Obj != pk.Obj {
+		// ability, which the runner finds by its index. A source with several
+		// mana abilities asks which one first, and its record sits on that
+		// ask (isManaAbilityAsk): the group's one record is then the ability.
+		if !priorityManaTap(en, mana) || len(en.Mana) == 0 && colourPicks(reg, mana[0]) != nil {
+			// The runner would answer the ability choice with the colour
+			// (harness: answer "U" not offered for choose).
 			return nil, unsupported("activate")
 		}
-		taps, why := manaTaps(reg, m, en.Mana)
+		taps, why := manaTaps(reg, m, mana)
 		if why != nil {
 			return nil, why
 		}
 		return taps, nil
 	}
 	return nil, unsupported(pk.Kind)
+}
+
+// priorityManaTap reports a priority "activate <source> for mana" decision
+// whose group fired exactly one mana ability, of that source: on the entry
+// itself, or on the ask of which of the source's mana abilities it is.
+func priorityManaTap(en game.Entry, mana []game.ManaRec) bool {
+	return en.Kind == "priority" && len(en.Picks) == 1 && en.Picks[0].Kind == "activate" &&
+		len(mana) == 1 && mana[0].Obj == en.Picks[0].Obj
 }
 
 // manaTaps is one activate step per mana ability the entry fired, in order. A
