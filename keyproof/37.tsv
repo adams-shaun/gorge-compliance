@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37278877-e7d8-47b6-a65f-37c7f85e3a0a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:great-desert-prospector:f0t0:s1,f:xs:XP:great-desert-prospector:f0t0:s1	-	-	-	ae86f6029288	-	48291637dfdc	-	-	2026-11-24	xproof
 372a01f7-6e58-4424-9405-0ee4acbb9346	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 372a01f7-6e58-4424-9405-0ee4acbb9346	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-372a01f7-6e58-4424-9405-0ee4acbb9346	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
-372a01f7-6e58-4424-9405-0ee4acbb9346	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+372a01f7-6e58-4424-9405-0ee4acbb9346	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+372a01f7-6e58-4424-9405-0ee4acbb9346	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 372d7086-b7dc-4b6d-bdf6-e9ed9c995456	cast	cast-resolve	agreed	-	X	scen	1	0	Chief Warg's Company/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 372d7086-b7dc-4b6d-bdf6-e9ed9c995456	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Chief Warg's Company/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 372d7086-b7dc-4b6d-bdf6-e9ed9c995456	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Chief Warg's Company/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37731c49-1238-4e0e-8993-204e36c1f4ee	cast	cast-resolve	agreed	-	FX	scen	2	0	Melancholic Poet/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37731c49-1238-4e0e-8993-204e36c1f4ee	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Melancholic Poet/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37733e29-3ade-4bfd-89c9-efd13b548a53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37733e29-3ade-4bfd-89c9-efd13b548a53	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:worthy-knight:f0t0:s1,f:xs:XP:worthy-knight:f0t0:s1	-	-	-	336eab778104	-	f7cd23394c92	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+37733e29-3ade-4bfd-89c9-efd13b548a53	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:worthy-knight:f0t0:s1,f:xs:XP:worthy-knight:f0t0:s1	-	-	-	b6db453064e8	-	f7cd23394c92	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 3776d11b-18fb-4451-a8f8-bda4c7c23776	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:honden-of-night-s-reach:f0t0:s1,f:xs:XP:honden-of-night-s-reach:f0t0:s1	-	-	-	23c4009444b0	-	f1e8bfaedc30	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3776d11b-18fb-4451-a8f8-bda4c7c23776	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:honden-of-night-s-reach:f0t0:s1,f:xs:XP:honden-of-night-s-reach:f0t0:s1	-	-	-	23c4009444b0	-	f1e8bfaedc30	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3778e06c-62c7-4b8f-90ff-b2fc2d2e213c	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

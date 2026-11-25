@@ -52,8 +52,8 @@ b3329240-c812-45ea-a7f8-4d79cd4ed515	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 b333c194-d285-4dfb-984c-57b7e88393af	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sea-gate-oracle:f0t0:s1	-	-	-	d864b561c9cb	-	ef92449c1f15	-	-	2026-11-24	xproof
 b333c194-d285-4dfb-984c-57b7e88393af	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:sea-gate-oracle:f0t0:s1	-	-	-	d864b561c9cb	-	ef92449c1f15	-	-	2026-11-24	xproof
 b3360259-19df-43c6-95a9-e76770f2fb77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b33656ae-3473-4223-845f-f9147f87678b	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:commercial-district:f0a0:s1,f:xs:XP:commercial-district:f0a0:s1	-	-	-	336eab778104	-	1868bc7771e1	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
-b33656ae-3473-4223-845f-f9147f87678b	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:commercial-district:f0a1:s1,f:xs:XP:commercial-district:f0a1:s1	-	-	-	336eab778104	-	1868bc7771e1	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+b33656ae-3473-4223-845f-f9147f87678b	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:commercial-district:f0a0:s1,f:xs:XP:commercial-district:f0a0:s1	-	-	-	b6db453064e8	-	1868bc7771e1	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+b33656ae-3473-4223-845f-f9147f87678b	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:commercial-district:f0a1:s1,f:xs:XP:commercial-district:f0a1:s1	-	-	-	b6db453064e8	-	1868bc7771e1	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 b33656ae-3473-4223-845f-f9147f87678b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:commercial-district:f0t0:s1,f:xs:XP:commercial-district:f0t0:s1	-	-	-	23b491658465	-	1868bc7771e1	-	-	2026-11-24	xproof
 b33656ae-3473-4223-845f-f9147f87678b	land	land	agreed	-	FX	start	4	0	x:xs:XP:commercial-district:f0t0:s1,f:xs:XP:commercial-district:f0t0:s1	-	-	-	23b491658465	-	1868bc7771e1	-	-	2026-11-24	xproof
 b336d819-f299-4de3-9b23-51f83da59efb	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -126,7 +126,7 @@ b3a80545-9a8a-46b2-9d8c-b0d66fb68a5d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sword
 b3a80545-9a8a-46b2-9d8c-b0d66fb68a5d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Sword of Wealth and Power/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b3a84b75-a6a2-4521-a9f1-92596796c703	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b3aa5889-0d98-4a8c-a8b1-ada1e9b169e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silverclad-ferocidons:cast:s1,f:xs:XP:silverclad-ferocidons:cast:s1	-	-	-	d864b561c9cb	-	aa6882e5a6a9	-	-	2026-11-24	xproof
-b3aa5889-0d98-4a8c-a8b1-ada1e9b169e1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+b3aa5889-0d98-4a8c-a8b1-ada1e9b169e1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 b3ab43f2-4f2b-4439-9254-0110ce443fdb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b3ab43f2-4f2b-4439-9254-0110ce443fdb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 b3ab43f2-4f2b-4439-9254-0110ce443fdb	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
