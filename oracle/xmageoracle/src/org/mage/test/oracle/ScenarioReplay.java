@@ -4408,6 +4408,9 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     pl.increaseSpeed(g);
                 }
             }
+            if (s.has("player_counters")) {
+                putSetupPlayerCounters(pl, s.getAsJsonArray("player_counters"));
+            }
         }
         // Setup state is written without the events the game loop reacts to:
         // addCard's tapped placement and setTapped here flip a tap flag,
@@ -4479,6 +4482,30 @@ public class ScenarioReplay extends CardTestPlayerBase {
         for (Map.Entry<String, JsonElement> byKind : kinds.entrySet()) {
             permanent.getCounters(game).addCounter(
                     xmageCounter(byKind.getKey()).createInstance(byKind.getValue().getAsInt()));
+        }
+    }
+
+    /** Writes a seat's setup "player_counters" as recorded state: straight into
+     * the PlayerImpl counter set, with no ADD_COUNTERS event and no
+     * COUNTER_ADDED trigger (CR 122.1; energy is a player counter, CR 107.14).
+     * The Player interface exposes only addCounters, which fires both, so the
+     * write goes through the delegate's field the same way
+     * clearSetupEntryHistory reaches turnsOnBattlefield. */
+    static void putSetupPlayerCounters(TestPlayer pl, JsonArray counters) {
+        try {
+            java.lang.reflect.Field delegate = TestPlayer.class.getDeclaredField("computerPlayer");
+            delegate.setAccessible(true);
+            Object impl = delegate.get(pl);
+            java.lang.reflect.Field field = mage.players.PlayerImpl.class.getDeclaredField("counters");
+            field.setAccessible(true);
+            mage.counters.Counters cs = (mage.counters.Counters) field.get(impl);
+            for (JsonElement e : counters) {
+                JsonObject pc = e.getAsJsonObject();
+                cs.addCounter(xmageCounter(pc.get("kind").getAsString())
+                        .createInstance(pc.get("n").getAsInt()));
+            }
+        } catch (ReflectiveOperationException e) {
+            throw new IllegalStateException("cannot place setup player counters", e);
         }
     }
 

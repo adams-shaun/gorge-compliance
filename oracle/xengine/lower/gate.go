@@ -10,6 +10,7 @@ import (
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/events"
@@ -114,6 +115,17 @@ const (
 	reasonSetupCounterRepl = "setup_replacement:counter_added"
 )
 
+// reasonFieldPlayerCounters is the refusal of a cut whose seat holds player
+// counters while the pinned gorge oracleSeat has no player_counters setup
+// field. The gate's playerTable classifies the field as placeable, so the
+// refusal is added here, once, from the pin's capability; it disappears with
+// the pin bump that adds the field.
+const reasonFieldPlayerCounters = "field:Player.Counters"
+
+// pinPlayerCounters is pincap.PlayerCounters, a var so a test can exercise the
+// placement branch before the pin carries the runner's player_counters field.
+var pinPlayerCounters = pincap.PlayerCounters
+
 // cut is the live engine at one cut point, reduced to what a window needs: the
 // setup it can be rebuilt from, or why it cannot be. Seats are the live game's.
 type cut struct {
@@ -202,6 +214,23 @@ func capture(e *rules.Engine, entry int, xmage bool) *cut {
 	if len(e.RegisteredContinuous()) > 0 {
 		w.why[reasonContinuous] = true
 	}
+	// A seat's counters are placeable only when the pinned runner's setup has
+	// the player_counters field. Keep the pre-pin refusal until then: a
+	// lowered item that carried the field would fail gorge's strict decoder,
+	// and one that silently dropped it would not reproduce the cut.
+	if !pinPlayerCounters() {
+		for i := range g.Players {
+			for _, pc := range g.Players[i].Counters {
+				if pc.N != 0 {
+					w.why[reasonFieldPlayerCounters] = true
+					break
+				}
+			}
+			if w.why[reasonFieldPlayerCounters] {
+				break
+			}
+		}
+	}
 	if len(w.why) == 0 {
 		w.place(c)
 	}
@@ -264,6 +293,12 @@ func (w *walker) setupTriggers(c *cut) {
 			tapped = true
 		}
 		if len(c.Setup[s].Counters) > 0 {
+			counters = true
+		}
+		// Player counters are PlayerCounterChange events in the setup drive,
+		// not CounterChange: a "whenever you get a counter" trigger still
+		// fires and the schema cannot say it already resolved.
+		if len(c.Setup[s].PlayerCounters) > 0 {
 			counters = true
 		}
 		// A placed token's counters are CounterChange events too
@@ -1097,6 +1132,20 @@ func (w *walker) place(c *cut) {
 		life := g.Players[s].Life
 		seat.Life = &life
 		seat.Speed = g.Players[s].Speed
+		if pinPlayerCounters() {
+			// The runner's player_counters is the COMPLETE count at the
+			// setup checkpoint, so copy the cut's counters as read. Sorted by
+			// kind: no map walk reaches the item bytes.
+			for _, pc := range g.Players[s].Counters {
+				if pc.N > 0 {
+					seat.PlayerCounters = append(seat.PlayerCounters,
+						oraclegen.SetupPlayerCounter{Kind: strings.ToUpper(pc.Kind), N: pc.N})
+				}
+			}
+			sort.SliceStable(seat.PlayerCounters, func(a, b int) bool {
+				return seat.PlayerCounters[a].Kind < seat.PlayerCounters[b].Kind
+			})
+		}
 		c.Setup[s] = seat
 	}
 	w.placeTokens(c, toks)
