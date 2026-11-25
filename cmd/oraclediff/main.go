@@ -80,7 +80,7 @@ func main() {
 		dir := fs.String("cards", ".cards", "corpus dir")
 		manifest := fs.String("manifest", "", "set manifest")
 		out := fs.String("out", "", "scenario JSONL")
-		level := fs.String("level", "A", "A (one level-A scenario per card) or B (the level-A scenario plus every generable level-B one)")
+		level := fs.String("level", "A", "A (one level-A scenario per card), B (the level-A scenario plus every generable level-B one) or declared (the set's level in oracle/compliance/declared.json, A if undeclared)")
 		printed := fs.String("printed", "", "printed-list directory: also generate the set's printed cards XMage's manifest omits or marks unfinished")
 		fs.Parse(os.Args[2:])
 		err = runGen(*dir, *manifest, *out, *level, *printed)
@@ -134,7 +134,7 @@ func main() {
 		fs := flag.NewFlagSet("status", flag.ExitOnError)
 		dir := fs.String("cards", ".cards", "corpus dir")
 		set := fs.String("set", "", "set code")
-		level := fs.String("level", "A", "level")
+		level := fs.String("level", "A", "A, B or declared (the set's level in oracle/compliance/declared.json, A if undeclared)")
 		all := fs.Bool("all", false, "every committed set: format roll-ups and reason buckets")
 		out := fs.String("out", "", "with -all: write the generated dashboard here (never committed)")
 		ratchet := fs.Bool("write-ratchet", false, "with -all: record "+adopt.RatchetFile+" as the sets stand")
@@ -245,9 +245,6 @@ func runGen(dir, manifest, out, level, printed string) error {
 	if manifest == "" || out == "" {
 		return fmt.Errorf("gen needs -manifest and -out")
 	}
-	if level != "A" && level != "B" {
-		return fmt.Errorf("gen -level wants A or B, got %q", level)
-	}
 	raw, err := os.ReadFile(manifest)
 	if err != nil {
 		return err
@@ -255,6 +252,14 @@ func runGen(dir, manifest, out, level, printed string) error {
 	var m compliance.Manifest
 	if err := json.Unmarshal(raw, &m); err != nil {
 		return err
+	}
+	// The manifests sit in oracle/compliance/manifests, beside declared.json.
+	level, err = resolveLevel(level, filepath.Join(filepath.Dir(filepath.Dir(manifest)), "declared.json"), m.Code)
+	if err != nil {
+		return err
+	}
+	if level != "A" && level != "B" {
+		return fmt.Errorf("gen -level wants A, B or declared, got %q", level)
 	}
 	if printed != "" {
 		pr, err := compliance.LoadPrinted(printed, m.Code)
@@ -672,10 +677,32 @@ func firstLine(s string) string {
 	return s
 }
 
+// resolveLevel turns -level declared into the set's declared level
+// (declared.json), A for a set not declared. A pass generating only level-A
+// scenarios for a set the gate checks at level B never plans its level-B rows,
+// so a level-B scenario change stays stale however often the pass runs.
+func resolveLevel(level, declaredPath, set string) (string, error) {
+	if level != "declared" {
+		return level, nil
+	}
+	d, err := compliance.LoadDeclared(declaredPath)
+	if err != nil {
+		return "", err
+	}
+	if lvl, ok := d[set]; ok {
+		return lvl, nil
+	}
+	return "A", nil
+}
+
 // runStatus prints what keeps a set from a level (the CI gate's check).
 func runStatus(dir, set, level string) error {
 	if set == "" {
 		return fmt.Errorf("status needs -set")
+	}
+	level, err := resolveLevel(level, filepath.Join("oracle", "compliance", "declared.json"), set)
+	if err != nil {
+		return err
 	}
 	reg, err := loadReg(dir)
 	if err != nil {
