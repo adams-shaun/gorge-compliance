@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4021b6b4-9b87-4dd5-a5df-79540bedbe87	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4021b6b4-9b87-4dd5-a5df-79540bedbe87	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4022e540-8fa0-4eee-bcf1-df5046289f2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4022e540-8fa0-4eee-bcf1-df5046289f2b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4022e540-8fa0-4eee-bcf1-df5046289f2b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4029e884-8154-42b3-ae29-3cb98374a294	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:messenger-hawk:f0t0:s1,f:xs:XP:messenger-hawk:f0t0:s1	-	-	-	cfde1dc26c40	-	a4818ec920e8	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 4029e884-8154-42b3-ae29-3cb98374a294	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Messenger Hawk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4029e884-8154-42b3-ae29-3cb98374a294	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Messenger Hawk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40999aa6-6424-42e4-9d47-33bee6bbb886	f0/t0	DamageDone/Renown	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-pilgrim-s-road:f0t0:s1,f:xs:XP:knight-of-the-pilgrim-s-road:f0t0:s1	-	-	-	fb9d3088f0bf	-	bd999da0b55b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 409b44fc-fae2-4804-83a7-78cf95038f58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 409b44fc-fae2-4804-83a7-78cf95038f58	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40abba38-533b-4f51-99e9-a2b337d65171	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+40abba38-533b-4f51-99e9-a2b337d65171	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 40abba38-533b-4f51-99e9-a2b337d65171	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 40ac0cb0-bdf7-447d-9875-0eb3cc5d0adc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40b36bc6-c185-4bda-99e7-0118953c2c97	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-coast:f0a0:s1,f:xs:XP:yavimaya-coast:f0a0:s1	-	-	-	c2272f704fde	-	fcd2b94b06a6	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
@@ -185,8 +185,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40eee955-bec6-455a-addf-68cdb84c76b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40f5f8b9-5c2c-41d4-8b83-55a2e51ced64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40f5f8b9-5c2c-41d4-8b83-55a2e51ced64	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:exuberant-wolfbear:f0t0:s1,f:xs:XP:exuberant-wolfbear:f0t0:s1	-	-	-	ae86f6029288	-	06456f71c422	-	-	2026-11-24	xproof
-40f664d8-4c73-44aa-8fb1-d38771a42520	cast	cast-resolve	agreed	-	X	scen	1	0	Mysterio, Master of Illusion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-40f664d8-4c73-44aa-8fb1-d38771a42520	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+40f664d8-4c73-44aa-8fb1-d38771a42520	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mysterio-master-of-illusion:cast:s1,f:xs:XP:mysterio-master-of-illusion:cast:s1	-	-	-	6f84be0f34c0	-	39e633755a67	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+40f664d8-4c73-44aa-8fb1-d38771a42520	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mysterio-master-of-illusion:cast:s1,f:xs:XP:mysterio-master-of-illusion:cast:s1	-	-	-	6f84be0f34c0	-	39e633755a67	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 40f66e21-5b60-4e42-927d-65397e7ad544	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:citadel-siege:cast:s1,f:xs:XP:citadel-siege:cast:s1	-	-	-	d864b561c9cb	-	f87e45560de1	-	-	2026-11-24	xproof
 40f6ea6f-71e1-46bd-8d9a-ccb5f437892c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40fa5656-354f-47f9-ba8d-40291ee5b40e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steel-dromedary:cast:s1,f:xs:XP:steel-dromedary:cast:s1	-	-	-	d864b561c9cb	-	8fe671e0e01d	-	-	2026-11-24	xproof

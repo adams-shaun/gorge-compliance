@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 019d0013-52fd-4261-9cc8-7efcee5a4616	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 019d0013-52fd-4261-9cc8-7efcee5a4616	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01a6f8e6-439b-4de4-9f0a-21a035fd849e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-01a6f8e6-439b-4de4-9f0a-21a035fd849e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+01a6f8e6-439b-4de4-9f0a-21a035fd849e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 01a7e0ce-c98f-4cf2-aba3-360aa0a9b9a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bedlam-reveler:f0t0:s1,f:xs:XP:bedlam-reveler:f0t0:s1	-	-	-	d864b561c9cb	-	74413c5369f7	-	-	2026-11-24	xproof
 01a7e0ce-c98f-4cf2-aba3-360aa0a9b9a7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bedlam-reveler:f0t0:s1,f:xs:XP:bedlam-reveler:f0t0:s1	-	-	-	d864b561c9cb	-	74413c5369f7	-	-	2026-11-24	xproof
 01a7e0ce-c98f-4cf2-aba3-360aa0a9b9a7	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:bedlam-reveler:f0t1:s1,f:xs:XP:bedlam-reveler:f0t1:s1	-	-	-	fb9d3088f0bf	-	74413c5369f7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
@@ -201,9 +201,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01dc15ee-83de-49d5-aa37-e0bdd419887e	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 01dc86f3-5ebb-4b10-bf68-8fc9f232c724	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-of-the-feast:f0t0:s1,f:xs:XP:master-of-the-feast:f0t0:s1	-	-	-	3aa6ded33acb	-	bbbf8247210a	-	-	2026-11-25	xproof
 01dc86f3-5ebb-4b10-bf68-8fc9f232c724	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:master-of-the-feast:f0t0:s1,f:xs:XP:master-of-the-feast:f0t0:s1	-	-	-	3aa6ded33acb	-	bbbf8247210a	-	-	2026-11-25	xproof
-01deabbb-af6a-4998-99a7-35b7cfa9ef77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-01deabbb-af6a-4998-99a7-35b7cfa9ef77	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-01deabbb-af6a-4998-99a7-35b7cfa9ef77	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+01deabbb-af6a-4998-99a7-35b7cfa9ef77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dreadhorde-invasion:f0t0:s1,f:xs:XP:dreadhorde-invasion:f0t0:s1	-	-	-	6f84be0f34c0	-	187c3c6f69eb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+01deabbb-af6a-4998-99a7-35b7cfa9ef77	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dreadhorde-invasion:f0t0:s1,f:xs:XP:dreadhorde-invasion:f0t0:s1	-	-	-	6f84be0f34c0	-	187c3c6f69eb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+01deabbb-af6a-4998-99a7-35b7cfa9ef77	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 01e742ed-660c-43c6-b393-e589a54cbe1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01e742ed-660c-43c6-b393-e589a54cbe1b	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 01e81249-6c45-4fae-86ee-9ef5fbec99ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

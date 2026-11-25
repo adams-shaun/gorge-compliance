@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03008c7d-c738-473d-a968-1922b2899d1a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Roadside Blowout/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0300d8a1-ff4e-4e05-a097-4822f80c47e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0300d8a1-ff4e-4e05-a097-4822f80c47e1	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:smolder-initiate:f0t0:s1,f:xs:XP:smolder-initiate:f0t0:s1	-	-	-	23c4009444b0	-	04eb1ca87d86	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-03025ec0-75fe-439d-b0c1-9bdb0f0ff336	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:makeshift-mauler:cast:s1,f:xs:XP:makeshift-mauler:cast:s1	-	-	-	44e3ec152eea	-	b2a7ab101a08	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+03025ec0-75fe-439d-b0c1-9bdb0f0ff336	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:makeshift-mauler:cast:s1,f:xs:XP:makeshift-mauler:cast:s1	-	-	-	6f84be0f34c0	-	b2a7ab101a08	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 03048844-32bb-45a2-a754-73f75eaa4566	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03048844-32bb-45a2-a754-73f75eaa4566	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 030b5408-f216-43e4-8593-f78d22821876	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wail-of-the-forgotten:cast:s1,f:xs:XP:wail-of-the-forgotten:cast:s1	-	-	-	23b491658465	-	980f5362a612	-	-	2026-11-25	xproof
@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pompous-gadabout:cast:s1,f:xs:XP:pompous-gadabout:cast:s1	-	-	-	8c0bd19283bb	-	9f90386f3abb	-	-	2026-11-24	xproof
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:pompous-gadabout:combat0.attack:s1,f:xs:XP:pompous-gadabout:combat0.attack:s1	-	-	-	3aa6ded33acb	-	9f90386f3abb	-	-	2026-11-25	xproof
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pompous Gadabout/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0361b9b7-9097-4aae-aa06-c63a5fb47a76	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:pompous-gadabout:static0.0:s1,f:xs:XP:pompous-gadabout:static0.0:s1	-	-	-	44e3ec152eea	-	9f90386f3abb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0361b9b7-9097-4aae-aa06-c63a5fb47a76	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:pompous-gadabout:static0.0:s1,f:xs:XP:pompous-gadabout:static0.0:s1	-	-	-	6f84be0f34c0	-	9f90386f3abb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	static#0.1	static#0.1	agreed	-	X	scen	1	0	Pompous Gadabout/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0366c2f6-6e78-4526-808c-fa7bace6006e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0366c2f6-6e78-4526-808c-fa7bace6006e	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:faerie-formation:f0a0:s1,f:xs:XP:faerie-formation:f0a0:s1	-	-	-	ae86f6029288	-	e2f6bdf6206b	-	-	2026-11-24	xproof
@@ -117,9 +117,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0391691f-6708-481a-93a5-6677e6fa2ff3	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:sunflare-shaman:f0a0:s1,f:xs:XP:sunflare-shaman:f0a0:s1	-	-	-	d864b561c9cb	-	aa7e0b88a63d	-	-	2026-11-24	xproof
 03931270-504a-4b0b-af3f-918bf124ea07	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0394846e-bc27-4d67-988e-b08a389690de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:cast:s1,f:xs:XP:rover-blades:cast:s1	-	-	-	23c4009444b0	-	29523231a448	-	-	2026-11-25	xproof
-0394846e-bc27-4d67-988e-b08a389690de	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:static0.0:s1,f:xs:XP:rover-blades:static0.0:s1	-	-	-	44e3ec152eea	-	29523231a448	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0394846e-bc27-4d67-988e-b08a389690de	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:static0.0:s1,f:xs:XP:rover-blades:static0.0:s1	-	-	-	6f84be0f34c0	-	29523231a448	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0394846e-bc27-4d67-988e-b08a389690de	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:f0a1:s1,f:xs:XP:rover-blades:f0a1:s1	-	-	-	23c4009444b0	-	29523231a448	-	-	2026-11-25	xproof
-0394846e-bc27-4d67-988e-b08a389690de	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:static0.0:s1,f:xs:XP:rover-blades:static0.0:s1	-	-	-	44e3ec152eea	-	29523231a448	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0394846e-bc27-4d67-988e-b08a389690de	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:static0.0:s1,f:xs:XP:rover-blades:static0.0:s1	-	-	-	6f84be0f34c0	-	29523231a448	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0396ef40-3774-4684-9971-160aaccf6ac6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0396ef40-3774-4684-9971-160aaccf6ac6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03973bad-1b3c-4488-a23e-232b192c95cc	cast	cast-resolve	agreed	-	FX	scen	2	0	The Duras Sisters/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

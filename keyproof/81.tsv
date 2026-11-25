@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8109aeff-1ba7-46c2-89ab-450d6ff99c28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 810a6cf5-e9f4-48e1-8e06-3e0af85633ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:day-s-undoing:cast:s1,f:xs:XP:day-s-undoing:cast:s1	-	-	-	d864b561c9cb	-	6f879e815042	-	-	2026-11-24	xproof
 8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+8110f092-41b0-4e53-a7d7-f7e3cbc4a52a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8110f15d-82db-4299-a959-09c22475daec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:cast:s1,f:xs:XP:kayla-s-music-box:cast:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
 8110f15d-82db-4299-a959-09c22475daec	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:f0a0:s1,f:xs:XP:kayla-s-music-box:f0a0:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
 8110f15d-82db-4299-a959-09c22475daec	f0/a1	Effect	agreed	-	FX	start	2	0	x:xs:XP:kayla-s-music-box:f0a1:s1,f:xs:XP:kayla-s-music-box:f0a1:s1	-	-	-	8c0bd19283bb	-	62e000a047d2	-	-	2026-11-24	xproof
@@ -45,9 +45,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 814e06c0-9b61-4a64-8c67-73a8eb00a768	cast	cast-resolve	agreed	-	FX	scen	2	0	Ferocification/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 814e06c0-9b61-4a64-8c67-73a8eb00a768	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Ferocification/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 814e321d-16fd-4f7b-a8d8-2b089be76f2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-814f30a1-c0d6-4243-839d-0645d7bcbe4c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roadside-assistance:static0.0:s1,f:xs:XP:roadside-assistance:static0.0:s1	-	-	-	44e3ec152eea	-	da7eed36ea22	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-814f30a1-c0d6-4243-839d-0645d7bcbe4c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roadside-assistance:static0.0:s1,f:xs:XP:roadside-assistance:static0.0:s1	-	-	-	44e3ec152eea	-	da7eed36ea22	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-814f30a1-c0d6-4243-839d-0645d7bcbe4c	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:roadside-assistance:static0.0:s1,f:xs:XP:roadside-assistance:static0.0:s1	-	-	-	44e3ec152eea	-	da7eed36ea22	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+814f30a1-c0d6-4243-839d-0645d7bcbe4c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roadside-assistance:static0.0:s1,f:xs:XP:roadside-assistance:static0.0:s1	-	-	-	6f84be0f34c0	-	da7eed36ea22	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+814f30a1-c0d6-4243-839d-0645d7bcbe4c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roadside-assistance:static0.0:s1,f:xs:XP:roadside-assistance:static0.0:s1	-	-	-	6f84be0f34c0	-	da7eed36ea22	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+814f30a1-c0d6-4243-839d-0645d7bcbe4c	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:roadside-assistance:static0.0:s1,f:xs:XP:roadside-assistance:static0.0:s1	-	-	-	6f84be0f34c0	-	da7eed36ea22	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8150cc84-3f9f-470d-a0f9-ee6d9dab13da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dire-fleet-poisoner:f0t0:s1,f:xs:XP:dire-fleet-poisoner:f0t0:s1	-	-	-	d864b561c9cb	-	93d0a76145ec	-	-	2026-11-24	xproof
 8150cc84-3f9f-470d-a0f9-ee6d9dab13da	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dire-fleet-poisoner:f0t0:s1,f:xs:XP:dire-fleet-poisoner:f0t0:s1	-	-	-	d864b561c9cb	-	93d0a76145ec	-	-	2026-11-24	xproof
 8151668c-6459-41b5-9e57-bb47c3876b81	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:didact-echo:f0t0:s2,f:xs:XP:didact-echo:f0t0:s2	-	-	-	e07cf3a05ba5	-	0c8e6f1a6a11	-	-	2026-11-24	xproof
@@ -202,7 +202,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81f35914-73bf-429f-ba20-32e23ac30159	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:massacre-girl-most-wanted:f0t0:s1,f:xs:XP:massacre-girl-most-wanted:f0t0:s1	-	-	-	fb9d3088f0bf	-	8b05c1637ce7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 81f35914-73bf-429f-ba20-32e23ac30159	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:massacre-girl-most-wanted:f0t0:s1,f:xs:XP:massacre-girl-most-wanted:f0t0:s1	-	-	-	fb9d3088f0bf	-	8b05c1637ce7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 81f5c70f-fbb1-4b3a-a048-1f4602adfa0e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81f5c70f-fbb1-4b3a-a048-1f4602adfa0e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+81f5c70f-fbb1-4b3a-a048-1f4602adfa0e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 81fa8e6a-5fb8-43de-802f-df5b985c6a7d	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 81fdd1c4-d43b-4f8b-8712-7c2bf45a3e0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81fe554a-5257-446c-ad53-ee45bf5edb40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

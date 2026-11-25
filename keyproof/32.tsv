@@ -57,8 +57,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32452ccf-88c7-41d6-93e5-15d31f29726d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3247fca3-7458-47ee-875b-c55f2a3e2962	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 324824cb-f938-401c-b9b5-d8908b431ef0	cast	cast	agreed	-	X	start	2	0	x:xs:XP:snuff-out:cast:s1	-	-	-	8c0bd19283bb	-	3d7fe196ee12	-	-	2026-11-24	xproof
-324a30cc-bddd-463c-9f28-c94c93a26780	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-324a30cc-bddd-463c-9f28-c94c93a26780	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+324a30cc-bddd-463c-9f28-c94c93a26780	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eternal-skylord:f0t0:s1,f:xs:XP:eternal-skylord:f0t0:s1	-	-	-	6f84be0f34c0	-	bbbbac9dd480	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+324a30cc-bddd-463c-9f28-c94c93a26780	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eternal-skylord:f0t0:s1,f:xs:XP:eternal-skylord:f0t0:s1	-	-	-	6f84be0f34c0	-	bbbbac9dd480	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 324d2aa8-6dea-4b0d-898d-1e52ed187565	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:acolyte-of-aclazotz:cast:s1,f:xs:XP:acolyte-of-aclazotz:cast:s1	-	-	-	23b491658465	-	f152db30672a	-	-	2026-11-24	xproof
 324d2aa8-6dea-4b0d-898d-1e52ed187565	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:acolyte-of-aclazotz:f0a0:s1,f:xs:XP:acolyte-of-aclazotz:f0a0:s1	-	-	-	3aa6ded33acb	-	f152db30672a	-	-	2026-11-25	xproof
 325032d5-c452-4454-8976-82f86fee5ab8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32f5f67b-bba3-427c-ab24-13a50acdc611	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carnivorous-moss-beast:cast:s1,f:xs:XP:carnivorous-moss-beast:cast:s1	-	-	-	d864b561c9cb	-	fa61654925ac	-	-	2026-11-24	xproof
 32f5f67b-bba3-427c-ab24-13a50acdc611	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:carnivorous-moss-beast:f0a0:s1,f:xs:XP:carnivorous-moss-beast:f0a0:s1	-	-	-	d864b561c9cb	-	fa61654925ac	-	-	2026-11-24	xproof
 32fad8d3-5351-49ce-a453-53dee403b5ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32fad8d3-5351-49ce-a453-53dee403b5ff	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+32fad8d3-5351-49ce-a453-53dee403b5ff	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:tenth-district-legionnaire:f0t0:s1,f:xs:XP:tenth-district-legionnaire:f0t0:s1	-	-	-	6f84be0f34c0	-	4d4e2babc620	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 32fb0096-546c-4633-b6e3-ba3f2d9fa49c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32fb0096-546c-4633-b6e3-ba3f2d9fa49c	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32fb0096-546c-4633-b6e3-ba3f2d9fa49c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
