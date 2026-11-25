@@ -19,8 +19,11 @@ import (
 //
 // The slots a step left empty are read off gorge's own target decisions
 // (oraclegen.LoweredTargetSkips), so the item is run once; a window whose
-// casts all name every slot of their card never pays for that run. A step the
-// plan cannot vouch for gets no entry and the driver keeps its own handling.
+// casts all name every slot of their card never pays for that run. A window
+// that does qualify pays one full RunOracleScenarioJSON on top of the
+// SelfCheck and sameOutcome replays: it runs before CheckWindow exists, so
+// there is no Check.Result to reuse here. A step the plan cannot vouch for
+// gets no entry and the driver keeps its own handling.
 func (l *Lowered) planTargetSkips(reg *cards.Registry) {
 	var casts []int
 	faces := map[int]*cards.Face{}

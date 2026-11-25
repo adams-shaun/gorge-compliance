@@ -60,6 +60,11 @@ func TestLoweredTargetSkipsLaterSlot(t *testing.T) {
 // TestFilterRejects: only a certain rejection prunes a slot.
 func TestFilterRejects(t *testing.T) {
 	reg := testutil.CorpusRegistry(t)
+	for _, n := range []string{"Fire", "Delver of Secrets", "Grizzly Bears"} {
+		if c, ok := reg.Lookup(n); !ok || (n != "Grizzly Bears" && len(c.Faces) < 2) {
+			t.Fatalf("%s is not in the corpus as expected (found %v)", n, ok)
+		}
+	}
 	for _, c := range []struct {
 		filter, ref string
 		want        bool
@@ -67,9 +72,20 @@ func TestFilterRejects(t *testing.T) {
 		{"Artifact.YouOwn@Graveyard", "p0:Forest#7", true},
 		{"Land.YouOwn@Graveyard", "p0:Forest#7", false},
 		{"Enchantment.nonAura+YouOwn@Graveyard", "p0:Forest#7", true},
-		{"Creature,Land", "p0:Forest#7", false},
-		{"Artifact,Enchantment", "p0:Forest#7", true},
-		{"Land.nonBasic", "p0:Forest#7", true},
+		{"Creature,Land@Graveyard", "p0:Forest#7", false},
+		{"Artifact,Enchantment@Graveyard", "p0:Forest#7", true},
+		{"Land.nonBasic@Graveyard", "p0:Forest#7", true},
+		// No off-battlefield zone: a permanent's current types may differ from
+		// the printed ones (Mycosynth Lattice makes a Grizzly Bears an artifact).
+		{"Artifact", "p0:Grizzly Bears", false},
+		{"Artifact.YouCtrl", "p0:Grizzly Bears", false},
+		{"Artifact@Battlefield", "p0:Grizzly Bears", false},
+		{"Artifact@Graveyard", "p0:Grizzly Bears", true},
+		{"Artifact@Hand", "p0:Grizzly Bears", true},
+		{"Artifact@Graveyard,Battlefield", "p0:Grizzly Bears", false},
+		// A split card's combined types, a double-faced card's other face.
+		{"Creature@Graveyard", "p0:Fire", false},
+		{"Land@Graveyard", "p0:Delver of Secrets", false},
 		{"Artifact.YouOwn", "p0:token:Soldier", false},
 		{"Artifact.YouOwn", "p1", false},
 		{"Artifact.YouOwn", "p0:No Such Card#2", false},
@@ -77,5 +93,28 @@ func TestFilterRejects(t *testing.T) {
 		if got := filterRejects(reg, c.filter, c.ref); got != c.want {
 			t.Errorf("filterRejects(%q, %q) = %v, want %v", c.filter, c.ref, got, c.want)
 		}
+	}
+}
+
+// TestLoweredTargetSkipsBattlefieldTypes: Explosive Entry's slots (artifact,
+// creature) name battlefield permanents, whose current types a printed card's
+// do not decide: with Mycosynth Lattice out a Grizzly Bears is a legal
+// artifact target. A cast whose only ask offered the Bears fits both slots, so
+// no plan is derived and the driver keeps its own handling, rather than a plan
+// that skips the artifact slot and puts the counter on the Bears.
+func TestLoweredTargetSkipsBattlefieldTypes(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	c, ok := reg.Lookup("Explosive Entry")
+	if !ok {
+		t.Fatal("Explosive Entry is not in the corpus")
+	}
+	f := c.Faces[0]
+	if n := len(SlotSpecs(f)); n != 2 {
+		t.Fatalf("Explosive Entry has %d slots, want 2", n)
+	}
+	sc := Scenario{Steps: []Step{{Op: "cast", Seat: 0, Card: "p0:Explosive Entry", Targets: []string{"p1:Grizzly Bears"}}, {Op: "resolve"}}}
+	d := []rules.OracleDecision{reliveDecision(0, []string{"p1:Grizzly Bears", "p1:Mycosynth Lattice"}, "p1:Grizzly Bears")}
+	if got := LoweredTargetSkips(reg, f, sc, d, 0); got != nil {
+		t.Fatalf("battlefield slots derived a plan from printed types: %v", got)
 	}
 }

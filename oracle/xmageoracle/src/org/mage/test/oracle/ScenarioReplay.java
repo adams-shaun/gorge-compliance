@@ -7706,11 +7706,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     String spell = castSpelling(refName(tg.get(0)));
                     castSpell(turn, phase, p, castObject, spell, spell);
                 } else if (tg.size() == 1 && loneTargetNeedsQueue(castAbility)) {
-                    // One target for a spell with several independent "up to"
-                    // objects (Relive the Past's artifact, land and non-Aura
-                    // enchantment): the inline string form sets the ref on the
-                    // FIRST object, which rejects a ref only a later object
-                    // accepts ("Can't find ability to activate command").
+                    // One card or permanent target (a lone player ref and a
+                    // spell on the stack took their own routes above) for a
+                    // spell with several independent "up to" objects (Relive
+                    // the Past's artifact, land and non-Aura enchantment): the
+                    // inline string form sets the ref on the FIRST object,
+                    // which rejects a ref only a later object accepts ("Can't
+                    // find ability to activate command").
                     // Queue it instead; an object with no candidate is
                     // declined at ask time (unscriptableEmptyAsk) and one that
                     // is posed again is closed by closeCastAskedAgain.

@@ -129,29 +129,40 @@ var loweredTypeWords = map[string]bool{
 	"kindred": true, "land": true, "planeswalker": true, "sorcery": true,
 }
 
+// offBattlefieldZones are the @zone suffixes whose cards carry only their
+// printed characteristics: no continuous effect (Mycosynth Lattice, a crewed
+// Vehicle, Animate Artifact) changes a card's types there, so the printed
+// types decide whether a filter accepts it.
+var offBattlefieldZones = map[string]bool{"graveyard": true, "hand": true, "library": true, "exile": true}
+
 // filterRejects reports whether a Forge ValidTgts filter (with its @zone
 // suffix) certainly rules out the card a scenario ref names: every
 // alternative's head type is not one of the card's types, or an alternative's
 // "non<Word>" qualifier names a type or subtype the card has. It never
-// guesses: a ref that names no registry card (a player, a token, an ability)
-// and any qualifier it does not read are not rejections.
+// guesses: a ref that names no registry card (a player, a token, an ability),
+// a card of several faces (a split card's combined types, a double-faced
+// card's current face are not the printed front), a filter with no
+// off-battlefield zone (a permanent's current types may differ from the
+// printed ones) and any qualifier it does not read are not rejections.
 func filterRejects(reg *cards.Registry, filter, ref string) bool {
 	name, ok := refCardName(ref)
 	if !ok {
 		return false
 	}
 	c, ok := reg.Lookup(name)
-	if !ok || len(c.Faces) == 0 {
+	if !ok || len(c.Faces) != 1 {
 		return false
 	}
 	f := c.Faces[0]
-	for _, cand := range c.Faces {
-		if cand.Name == name {
-			f = cand
-			break
+	filter, zone, hasZone := strings.Cut(filter, "@")
+	if !hasZone {
+		return false
+	}
+	for _, z := range strings.Split(zone, ",") {
+		if !offBattlefieldZones[strings.ToLower(strings.TrimSpace(z))] {
+			return false
 		}
 	}
-	filter, _, _ = strings.Cut(filter, "@")
 	for _, alt := range strings.Split(filter, ",") {
 		if !altRejects(alt, f) {
 			return false
