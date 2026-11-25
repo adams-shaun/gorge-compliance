@@ -120,6 +120,13 @@ func TestXAnswersQueueRoutingShapes(t *testing.T) {
 			want: []XAnswer{{0, "choice", "X=0"}},
 		},
 		{
+			// "Pay any amount of life" (Phyrexian Processor) is
+			// TestPlayer.getAmount too: X=<n>, not the engine's "0 life" label.
+			name: "pay any amount of life: X=n on the choice queue",
+			d:    rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose", Options: 21, Max: 1, Picks: []string{"0 life"}, PickRefs: []string{"0"}, PickIdx: []int{0}, PickKinds: []string{"paylife"}, Resume: "etb"},
+			want: []XAnswer{{0, "choice", "X=0"}},
+		},
+		{
 			// "Look at an opponent's hand" is a TargetOpponent: the target
 			// queue, even when the engine offered one legal option.
 			name: "choose_n forced player target: target queue",
