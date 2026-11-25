@@ -218,7 +218,10 @@ func TestForgeRolledDie(t *testing.T) {
 // 0aee1572747 = oracle/fpin-1125-join14 (ad4cd3ba0f8: join12 above merged with the mandatory ChangeTargets test and the
 // paylife X pick) plus the Speedball ChangeTargets regression test (test class and fixture only); die-roll code unchanged,
 // ForcedDieRollTest re-run green on it (make forge-driver-tests).
-const forgeOracleDieRollRef = "0aee1572747b3bc0492c80da26e3a61e5bee0d46"
+// 852c41880dd = oracle/fpin-1125-join16: 9124c696744 (join15 above, the altaddcost tap ability choice) merged with
+// 0aee1572747 (the Speedball ChangeTargets regression test above), no textual conflicts (ChangeTargetsConfirmTest.java
+// auto-merged); die-roll code unchanged, ForcedDieRollTest re-run green on it (make forge-driver-tests).
+const forgeOracleDieRollRef = "852c41880dd817ffbc988a2f3b5fbd9a98252c8f"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
