@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:sorin-solemn-visitor:cast:s1,f:xs:XP:sorin-solemn-visitor:cast:s1	-	-	-	d864b561c9cb	-	a3a1915393b8	-	-	2026-11-24	xproof
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:sorin-solemn-visitor:f0a2:s1,f:xs:XP:sorin-solemn-visitor:f0a2:s1	-	-	-	fb9d3088f0bf	-	a3a1915393b8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 1f21cf59-6390-44b4-ab2e-ef290dfd8c85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nest-of-scarabs:cast:s1,f:xs:XP:nest-of-scarabs:cast:s1	-	-	-	d864b561c9cb	-	ea736c64b59f	-	-	2026-11-24	xproof
-1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
+1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:cast:s1,f:xs:XP:the-millennium-calendar:cast:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/a0	MultiplyCounter	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:f0a0:s1,f:xs:XP:the-millennium-calendar:f0a0:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Millennium Calendar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fc59e37-0dc0-4e24-af71-6bab4a2b56ca	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1fc8b186-bb74-4fe1-a2da-e8ce3074f988	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:grovetender-druids:cast:s1,f:xs:XP:grovetender-druids:cast:s1	-	-	-	d864b561c9cb	-	768c0fa36f00	-	-	2026-11-24	xproof
 1fc8b186-bb74-4fe1-a2da-e8ce3074f988	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grovetender-druids:cast:s1,f:xs:XP:grovetender-druids:cast:s1	-	-	-	d864b561c9cb	-	768c0fa36f00	-	-	2026-11-24	xproof
-1fcec3b2-47ba-4c56-9ce1-a4807e8ad262	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
+1fcec3b2-47ba-4c56-9ce1-a4807e8ad262	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
 1fcf95d7-fd70-474b-be0a-e43502633556	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vengeful-vampire:cast:s1,f:xs:XP:vengeful-vampire:cast:s1	-	-	-	d864b561c9cb	-	c88c542e94b9	-	-	2026-11-24	xproof
 1fcf95d7-fd70-474b-be0a-e43502633556	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:vengeful-vampire:f0t0:s1,f:xs:XP:vengeful-vampire:f0t0:s1	-	-	-	3aa6ded33acb	-	c88c542e94b9	-	-	2026-11-25	xproof
 1fd00656-83ba-4feb-b089-224007936b99	cast	cast-resolve	agreed	-	FX	scen	2	0	Mockingbird, Ace Agent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
