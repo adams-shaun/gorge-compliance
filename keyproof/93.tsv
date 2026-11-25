@@ -50,14 +50,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t1	LandPlayed	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9b4a23ab0997	-	-	2026-11-25	xproof
 9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t2	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9b4a23ab0997	-	-	2026-11-25	xproof
 93491d5c-8579-42ed-a700-e5c6f4238dea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barricade-breaker:cast:s1,f:xs:XP:barricade-breaker:cast:s1	-	-	-	d864b561c9cb	-	707f82d447af	-	-	2026-11-24	xproof
-934c50aa-7d2e-4c9e-b91b-1e8c4055e1c6	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+934c50aa-7d2e-4c9e-b91b-1e8c4055e1c6	cast	cast	agreed	-	F	start	2	0	f:xs:XP:spell-rupture:cast:s1	-	-	-	9087eefec3ee	-	bf847ef1468d	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 934d42b2-5dca-4a29-82d3-6778796178d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 934e2634-4b1c-4d92-b4d6-9241620f3770	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:splitskin-doll:f0t0:s2,f:xs:XP:splitskin-doll:f0t0:s2	-	-	-	e07cf3a05ba5	-	be76c4a2b3cd	-	-	2026-11-24	xproof
 934e2634-4b1c-4d92-b4d6-9241620f3770	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:splitskin-doll:f0t0:s2,f:xs:XP:splitskin-doll:f0t0:s2	-	-	-	e07cf3a05ba5	-	be76c4a2b3cd	-	-	2026-11-24	xproof
 934ef52e-3e97-418a-bbcf-114badbb2c8a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93514874-41e8-49e7-8935-d06e852dd1e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9352e742-9a22-4463-b41f-3117ff1540ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9352e742-9a22-4463-b41f-3117ff1540ed	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+9352e742-9a22-4463-b41f-3117ff1540ed	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:talruum-champion:f0t0:s1,f:xs:XP:talruum-champion:f0t0:s1	-	-	-	9087eefec3ee	-	f175302fd0c0	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 9352e742-9a22-4463-b41f-3117ff1540ed	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:talruum-champion:f0t1:s1,f:xs:XP:talruum-champion:f0t1:s1	-	-	-	9087eefec3ee	-	f175302fd0c0	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 9353f6dd-9a08-4e55-9b07-3e68d7d97ef4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bond-beetle:f0t0:s1,f:xs:XP:bond-beetle:f0t0:s1	-	-	-	d864b561c9cb	-	968ea9e6fa1e	-	-	2026-11-24	xproof
 9353f6dd-9a08-4e55-9b07-3e68d7d97ef4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bond-beetle:f0t0:s1,f:xs:XP:bond-beetle:f0t0:s1	-	-	-	d864b561c9cb	-	968ea9e6fa1e	-	-	2026-11-24	xproof

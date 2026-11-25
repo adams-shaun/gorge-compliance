@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a60dc0f-e387-4d28-8ff0-c3f1883d0c5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a60dc0f-e387-4d28-8ff0-c3f1883d0c5d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:hamlet-captain:f0t0:s1,f:xs:XP:hamlet-captain:f0t0:s1	-	-	-	d864b561c9cb	-	f5b06c8101d2	-	-	2026-11-24	xproof
 1a60dc0f-e387-4d28-8ff0-c3f1883d0c5d	f0/t1	Blocks	agreed	-	FX	start	2	0	x:xs:XP:hamlet-captain:f0t1:s1,f:xs:XP:hamlet-captain:f0t1:s1	-	-	-	6f84be0f34c0	-	f5b06c8101d2	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-1a61929e-14bd-4f21-b173-00818d49743d	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+1a61929e-14bd-4f21-b173-00818d49743d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:memory-drain:cast:s1,f:xs:XP:memory-drain:cast:s1	-	-	-	9087eefec3ee	-	37bb9ba0d971	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 1a62ba93-153c-4bed-9f6a-ff914df360c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a62ba93-153c-4bed-9f6a-ff914df360c1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a668556-da98-4f1e-b1f7-26b7d63357a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a8b7792-e105-40c8-b1b4-ab1a8f3731d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glimmerbell:cast:s1,f:xs:XP:glimmerbell:cast:s1	-	-	-	ae86f6029288	-	4bd4a0dafe1a	-	-	2026-11-24	xproof
 1a8b7792-e105-40c8-b1b4-ab1a8f3731d8	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:glimmerbell:f0a0:s1,f:xs:XP:glimmerbell:f0a0:s1	-	-	-	ae86f6029288	-	4bd4a0dafe1a	-	-	2026-11-24	xproof
 1a8c996d-ca93-4c17-ace5-66ecd6b99317	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1a8c996d-ca93-4c17-ace5-66ecd6b99317	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+1a8c996d-ca93-4c17-ace5-66ecd6b99317	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 1a8d7714-a566-4195-8605-550929584c61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a8d7714-a566-4195-8605-550929584c61	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a9048d6-f3fa-4f3b-9baa-35318177bc6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ab0a315-0d0d-4247-9bb9-107b35b353d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ab592fa-adfb-4879-af6c-0204eab323fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1abcdddd-0022-4dfe-8c15-eb1fa86de614	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
-1abcdddd-0022-4dfe-8c15-eb1fa86de614	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1abcdddd-0022-4dfe-8c15-eb1fa86de614	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 1abcdddd-0022-4dfe-8c15-eb1fa86de614	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 1abcfe8d-4beb-4910-b353-1227e1256329	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:supply-caravan:f0t0:s1,f:xs:XP:supply-caravan:f0t0:s1	-	-	-	3aa6ded33acb	-	41ac8ddbf602	-	-	2026-11-25	xproof
 1abcfe8d-4beb-4910-b353-1227e1256329	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:supply-caravan:f0t0:s1,f:xs:XP:supply-caravan:f0t0:s1	-	-	-	3aa6ded33acb	-	41ac8ddbf602	-	-	2026-11-25	xproof

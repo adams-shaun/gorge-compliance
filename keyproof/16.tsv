@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1612a08f-fc1f-45cf-ae03-5f021a46869d	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:in-the-trenches:f0a0:s1,f:xs:XP:in-the-trenches:f0a0:s1	-	-	-	3aa6ded33acb	-	d41cd191bc54	-	-	2026-11-25	xproof
 16156274-8dc0-439c-94c4-e8c89bbb5687	cast	cast-resolve	agreed	-	FX	scen	2	0	Loading Zone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16182e01-22ff-4786-985d-919b47c4aa4d	cast	cast-resolve	agreed	-	X	scen	1	0	Matzalantli, the Great Door/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-16182e01-22ff-4786-985d-919b47c4aa4d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+16182e01-22ff-4786-985d-919b47c4aa4d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 16182e01-22ff-4786-985d-919b47c4aa4d	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Matzalantli, the Great Door/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16182e01-22ff-4786-985d-919b47c4aa4d	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Matzalantli, the Great Door/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 161b6d06-e6a7-488e-9f9c-d266c1402a3a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mystic-snake:f0t0:s1,f:xs:XP:mystic-snake:f0t0:s1	-	-	-	25696bf19d5b	-	593961bd03e6	-	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1663d54f-4f39-4a03-aac2-e2923cbb7de8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:frost-trickster:f0t0:s1,f:xs:XP:frost-trickster:f0t0:s1	-	-	-	d864b561c9cb	-	4c42e2739bfc	-	-	2026-11-24	xproof
 1665ca9f-176d-40f1-a4e9-42da4f1236e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:circuit-mender:f0t0:s1,f:xs:XP:circuit-mender:f0t0:s1	-	-	-	d864b561c9cb	-	ea153bb878b9	-	-	2026-11-24	xproof
 1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:circuit-mender:f0t0:s1,f:xs:XP:circuit-mender:f0t0:s1	-	-	-	d864b561c9cb	-	ea153bb878b9	-	-	2026-11-24	xproof
-1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 1675476c-25b1-46c2-81ce-fef9a2360bcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t1:s1,f:xs:XP:blaring-captain:f0t1:s1	-	-	-	23c4009444b0	-	0d7032989aba	-	-	2026-11-25	xproof
 1675476c-25b1-46c2-81ce-fef9a2360bcc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t0:s1,f:xs:XP:blaring-captain:f0t0:s1	-	-	-	8c0bd19283bb	-	0d7032989aba	-	-	2026-11-24	xproof
 1675476c-25b1-46c2-81ce-fef9a2360bcc	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t1:s1,f:xs:XP:blaring-captain:f0t1:s1	-	-	-	23c4009444b0	-	0d7032989aba	-	-	2026-11-25	xproof
@@ -94,9 +94,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16856e22-6f9e-4f8e-b4ee-622a7c2ee453	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16856e22-6f9e-4f8e-b4ee-622a7c2ee453	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16856e22-6f9e-4f8e-b4ee-622a7c2ee453	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:mistblade-shinobi:f0t0:s1,f:xs:XP:mistblade-shinobi:f0t0:s1	-	-	-	23c4009444b0	-	30b42d66601b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-168d5711-4459-440f-8de4-aabffd47c44d	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-168d5711-4459-440f-8de4-aabffd47c44d	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-168d5711-4459-440f-8de4-aabffd47c44d	f0/t1	NULL	owed	refused:no-generator:trigger:TokenCreated	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+168d5711-4459-440f-8de4-aabffd47c44d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rosie-cotton-of-south-lane:cast:s1,f:xs:XP:rosie-cotton-of-south-lane:cast:s1	-	-	-	9087eefec3ee	-	ecec013e8061	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+168d5711-4459-440f-8de4-aabffd47c44d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rosie-cotton-of-south-lane:cast:s1,f:xs:XP:rosie-cotton-of-south-lane:cast:s1	-	-	-	9087eefec3ee	-	ecec013e8061	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+168d5711-4459-440f-8de4-aabffd47c44d	f0/t1	TokenCreated	agreed	-	FX	start	4	0	x:xs:XP:rosie-cotton-of-south-lane:cast:s1,f:xs:XP:rosie-cotton-of-south-lane:cast:s1	-	-	-	9087eefec3ee	-	ecec013e8061	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 1690a782-9e54-4231-9a72-abae5ed7050c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1690a782-9e54-4231-9a72-abae5ed7050c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dread-presence:f0t0:s1,f:xs:XP:dread-presence:f0t0:s1	-	-	-	336eab778104	-	b97f898a2997	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 16923d37-bac0-4e6a-bd02-f3aa9360deeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16b723bc-aab9-40f2-8e1b-b9c2bd2af3bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:putrid-leech:cast:s1,f:xs:XP:putrid-leech:cast:s1	-	-	-	8a1b1a193ec0	-	39dce854bda3	-	-	2026-11-24	xproof
 16b723bc-aab9-40f2-8e1b-b9c2bd2af3bc	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:putrid-leech:cast:s1,f:xs:XP:putrid-leech:cast:s1	-	-	-	8a1b1a193ec0	-	39dce854bda3	-	-	2026-11-24	xproof
 16c293c8-bd1d-4db9-b197-da14f2f37cb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16c39265-72d9-4c86-a961-8dd38ff9adcd	cast	counter-spell	diverged	-	-	scen	0	1	-	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+16c39265-72d9-4c86-a961-8dd38ff9adcd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:consign-to-memory:cast:s1,f:xs:XP:consign-to-memory:cast:s1	-	-	-	9087eefec3ee	-	bbeaa1aea9a5	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 16c46eaf-7a31-4957-ab7c-ff07fbbd9ddc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16c46eaf-7a31-4957-ab7c-ff07fbbd9ddc	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:order-of-whiteclay:f0a0:s1,f:xs:XP:order-of-whiteclay:f0a0:s1	-	-	-	336eab778104	-	a59eab2e3a52	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 16c587db-d07b-47ab-8b03-c3b2cc7144f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -155,8 +155,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16cdba97-73cf-44ba-9d64-f27009b829f8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:troublemaker-ouphe:f0t0:s1,f:xs:XP:troublemaker-ouphe:f0t0:s1	-	-	-	3aa6ded33acb	-	643fed0b62da	-	-	2026-11-25	xproof
 16cdba97-73cf-44ba-9d64-f27009b829f8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:troublemaker-ouphe:f0t0:s1,f:xs:XP:troublemaker-ouphe:f0t0:s1	-	-	-	3aa6ded33acb	-	643fed0b62da	-	-	2026-11-25	xproof
 16cf1cf9-6900-406c-a5b4-0e5750f530e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16d0aea2-4ca4-4a9d-8674-2863e085f514	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chaos-lord:cast:s1,f:xs:XP:chaos-lord:cast:s1	-	-	-	9087eefec3ee	-	19c547e54e42	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
-16d0aea2-4ca4-4a9d-8674-2863e085f514	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	19c547e54e42	-	-	2026-11-25	xproof
+16d0aea2-4ca4-4a9d-8674-2863e085f514	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chaos-lord:f0t0:s2,f:xs:XP:chaos-lord:f0t0:s1	-	-	-	9087eefec3ee	-	19c547e54e42	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+16d0aea2-4ca4-4a9d-8674-2863e085f514	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:chaos-lord:f0t0:s2,f:xs:XP:chaos-lord:f0t0:s1	-	-	-	9087eefec3ee	-	19c547e54e42	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 16d1023b-2162-4010-8bf4-218dbe7c99a0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:copper-tablet:f0t0:s1,f:xs:XP:copper-tablet:f0t0:s1	-	-	-	3aa6ded33acb	-	624c0258eaa2	-	-	2026-11-25	xproof
 16d1023b-2162-4010-8bf4-218dbe7c99a0	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:copper-tablet:f0t0:s1,f:xs:XP:copper-tablet:f0t0:s1	-	-	-	3aa6ded33acb	-	624c0258eaa2	-	-	2026-11-25	xproof
 16d8ee99-8ec8-429f-9ba7-818a74b6f910	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gush:cast:s1,f:xs:XP:gush:cast:s1	-	-	-	9087eefec3ee	-	3128de0a9fe6	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof

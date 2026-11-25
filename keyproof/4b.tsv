@@ -17,8 +17,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b11e435-5888-4e3b-a255-db817392163f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mabel-heir-to-cragflame:f0t0:s2,f:xs:XP:mabel-heir-to-cragflame:f0t0:s2	-	-	-	e07cf3a05ba5	-	93231e4e4ab4	-	-	2026-11-24	xproof
 4b11e435-5888-4e3b-a255-db817392163f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mabel-heir-to-cragflame:f0t0:s2,f:xs:XP:mabel-heir-to-cragflame:f0t0:s2	-	-	-	e07cf3a05ba5	-	93231e4e4ab4	-	-	2026-11-24	xproof
 4b11e435-5888-4e3b-a255-db817392163f	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:mabel-heir-to-cragflame:static0.0:s1,f:xs:XP:mabel-heir-to-cragflame:static0.0:s1	-	-	-	6f84be0f34c0	-	93231e4e4ab4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-4b1603f3-a246-449b-a109-99adb49e5ea4	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-4b1603f3-a246-449b-a109-99adb49e5ea4	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+4b1603f3-a246-449b-a109-99adb49e5ea4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:eastfarthing-farmer:cast:s1,f:xs:XP:eastfarthing-farmer:cast:s1	-	-	-	9087eefec3ee	-	ec43044c903d	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+4b1603f3-a246-449b-a109-99adb49e5ea4	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:eastfarthing-farmer:cast:s1,f:xs:XP:eastfarthing-farmer:cast:s1	-	-	-	9087eefec3ee	-	ec43044c903d	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 4b1614fd-2810-4d4d-a0d6-934f27adbe65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1614fd-2810-4d4d-a0d6-934f27adbe65	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1614fd-2810-4d4d-a0d6-934f27adbe65	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:marker-beetles:f0t0:s1,f:xs:XP:marker-beetles:f0t0:s1	-	-	-	5f2128bf97e4	-	2c59bccde9c4	-	-	2026-11-24	xproof
@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b17048f-8c7f-4e29-8f56-16db4c2106e6	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Los Diablos Missile Base/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b17048f-8c7f-4e29-8f56-16db4c2106e6	land	play-land	agreed	-	FX	scen	2	0	Los Diablos Missile Base/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b1874af-4ea5-4e22-a4d4-e718d75fe95e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b1874af-4ea5-4e22-a4d4-e718d75fe95e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4b1874af-4ea5-4e22-a4d4-e718d75fe95e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 4b1874af-4ea5-4e22-a4d4-e718d75fe95e	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 4b1befff-48fa-47a3-832e-bdaf43495c02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ram-through:cast:s1,f:xs:XP:ram-through:cast:s1	-	-	-	44e3ec152eea	-	f4950c28654e	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4b1bf05e-753e-4350-a913-894cf3cecc0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fleshbag-marauder:f0t0:s1,f:xs:XP:fleshbag-marauder:f0t0:s1	-	-	-	8a1b1a193ec0	-	bd8999bfa6d7	-	-	2026-11-24	xproof
@@ -69,8 +69,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b508087-99da-4eb1-8b12-29162f2ec85d	f0/a1	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:altanak-the-thrice-called:cast:s1,f:xs:XP:altanak-the-thrice-called:cast:s1	-	-	-	23c4009444b0	-	6d7bd5ebdc23	-	-	2026-11-25	xproof
 4b508087-99da-4eb1-8b12-29162f2ec85d	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4b515bb0-f275-4400-8032-3173b799ab40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:walking-ballista:cast:s1,f:xs:XP:walking-ballista:cast:s1	-	-	-	d864b561c9cb	-	16260c3ec56a	-	-	2026-11-24	xproof
-4b515bb0-f275-4400-8032-3173b799ab40	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-4b515bb0-f275-4400-8032-3173b799ab40	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4b515bb0-f275-4400-8032-3173b799ab40	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+4b515bb0-f275-4400-8032-3173b799ab40	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 4b51edb1-37cc-4993-a8a5-2eb5f79fa191	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:protection-racket:f0t0:s1,f:xs:XP:protection-racket:f0t0:s1	-	-	-	23c4009444b0	-	4c70c7a4da91	-	-	2026-11-25	xproof
 4b51edb1-37cc-4993-a8a5-2eb5f79fa191	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:protection-racket:f0t0:s1,f:xs:XP:protection-racket:f0t0:s1	-	-	-	23c4009444b0	-	4c70c7a4da91	-	-	2026-11-25	xproof
 4b5b0864-7ddd-497d-a7d6-a31c49bb9c7b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shuttle-ace:cast:s1,f:xs:XP:shuttle-ace:cast:s1	-	-	-	fb9d3088f0bf	-	10e04817cd9f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof

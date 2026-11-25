@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f079a75-899e-467d-b443-3b87ce2fb548	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:boros-reckoner:f0t0:s1,f:xs:XP:boros-reckoner:f0t0:s1	-	-	-	6f84be0f34c0	-	413e094a1c04	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5f08f79e-bbbe-4af0-ade6-9ad006a5a0d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0be4ce-898e-4849-ab8f-a85fb05c3017	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:territorial-kavu:cast:s1,f:xs:XP:territorial-kavu:cast:s1	-	-	-	d864b561c9cb	-	9881f71424e6	-	-	2026-11-24	xproof
-5f0be4ce-898e-4849-ab8f-a85fb05c3017	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5f0be4ce-898e-4849-ab8f-a85fb05c3017	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 5f0c8c60-96f1-4b26-a9f6-386e1cec517d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0e8fd5-9db9-4507-a42f-cb99080b89e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0fa785-37ab-46a8-9ec0-6f8b29576d93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f2628e3-e29a-4d77-bc27-6e1ce240d192	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghoultree:cast:s1,f:xs:XP:ghoultree:cast:s1	-	-	-	d864b561c9cb	-	f275edea24b9	-	-	2026-11-24	xproof
 5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lifecrafter-s-bestiary:f0t0:s1,f:xs:XP:lifecrafter-s-bestiary:f0t0:s1	-	-	-	3aa6ded33acb	-	5bf5227d3e6b	-	-	2026-11-25	xproof
 5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lifecrafter-s-bestiary:f0t0:s1,f:xs:XP:lifecrafter-s-bestiary:f0t0:s1	-	-	-	3aa6ded33acb	-	5bf5227d3e6b	-	-	2026-11-25	xproof
-5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	land	play-land	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f2be3c2-060a-43e1-b63b-9cd3c78ffcb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	static#0.0	static#0.0	agreed	-	X	scen	1	0	Pacifism/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	static#0.1	static#0.1	agreed	-	X	scen	1	0	Pacifism/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f5fe039-4be4-42ae-9fa4-4392328aa665	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:topiary-lecturer:cast:s1,f:xs:XP:topiary-lecturer:cast:s1	-	-	-	23c4009444b0	-	a46157748354	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-5f5fe039-4be4-42ae-9fa4-4392328aa665	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Topiary Lecturer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5f5fe039-4be4-42ae-9fa4-4392328aa665	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:topiary-lecturer:f0a0:s1,f:xs:XP:topiary-lecturer:f0a0:s1	-	-	-	9087eefec3ee	-	a46157748354	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 5f5fe039-4be4-42ae-9fa4-4392328aa665	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Topiary Lecturer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f601f48-d24b-4883-9fde-b3f620e7c9ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-omens:f0t0:s1,f:xs:XP:wall-of-omens:f0t0:s1	-	-	-	d864b561c9cb	-	467c4131dd50	-	-	2026-11-24	xproof
 5f601f48-d24b-4883-9fde-b3f620e7c9ea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wall-of-omens:f0t0:s1,f:xs:XP:wall-of-omens:f0t0:s1	-	-	-	d864b561c9cb	-	467c4131dd50	-	-	2026-11-24	xproof

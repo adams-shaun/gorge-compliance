@@ -52,7 +52,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71393988-ad6f-43fd-9978-c0de15ae8e87	static#0.0	static#0.0	agreed	-	X	scen	1	0	Forgotten Monument/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 713eba2e-d19d-4056-b224-f93857dbdafe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mana-skimmer:cast:s1,f:xs:XP:mana-skimmer:cast:s1	-	-	-	9ee19e8250ce	-	383a3fa051f7	-	-	2026-11-24	xproof
 713eba2e-d19d-4056-b224-f93857dbdafe	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:mana-skimmer:f0t0:s1,f:xs:XP:mana-skimmer:f0t0:s1	-	-	-	6f84be0f34c0	-	383a3fa051f7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-7140d726-0136-43af-84b5-85005a66a186	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7140d726-0136-43af-84b5-85005a66a186	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:metamorphosis:cast:s1,f:xs:XP:metamorphosis:cast:s1	-	-	-	9087eefec3ee	-	2263d4aa312e	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 7140f396-1bfa-4b28-ba28-fa15eba74652	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:ruins-of-oran-rief:f0a0:s1,f:xs:XP:ruins-of-oran-rief:f0a0:s1	-	-	-	d864b561c9cb	-	199d07c49619	-	-	2026-11-24	xproof
 7140f396-1bfa-4b28-ba28-fa15eba74652	f0/a1	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7140f396-1bfa-4b28-ba28-fa15eba74652	land	land	agreed	-	FX	start	2	0	x:xs:XP:ruins-of-oran-rief:land:s1,f:xs:XP:ruins-of-oran-rief:land:s1	-	-	-	d864b561c9cb	-	199d07c49619	-	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7182e6f4-6caf-474a-8759-13c56f391bef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sigil-captain:f0t0:s1,f:xs:XP:sigil-captain:f0t0:s1	-	-	-	23c4009444b0	-	54676a87efe8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7185e345-d8a1-4dd3-a071-f90f265634b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:void-beckoner:cast:s1,f:xs:XP:void-beckoner:cast:s1	-	-	-	ae86f6029288	-	a923841d6b36	-	-	2026-11-24	xproof
 7185e345-d8a1-4dd3-a071-f90f265634b4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7185e345-d8a1-4dd3-a071-f90f265634b4	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+7185e345-d8a1-4dd3-a071-f90f265634b4	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 718d72c4-ad37-49b6-860a-0b921c0de978	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:riptide-chimera:f0t0:s1,f:xs:XP:riptide-chimera:f0t0:s1	-	-	-	3aa6ded33acb	-	187bcb2200c4	-	-	2026-11-25	xproof
 718d72c4-ad37-49b6-860a-0b921c0de978	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:riptide-chimera:f0t0:s1,f:xs:XP:riptide-chimera:f0t0:s1	-	-	-	3aa6ded33acb	-	187bcb2200c4	-	-	2026-11-25	xproof
 7191f765-6e66-4bc4-8aa8-85280ac61d1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

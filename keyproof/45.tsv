@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4507d35a-f7f3-4abe-b06b-90c5331b533a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4507d35a-f7f3-4abe-b06b-90c5331b533a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4507df69-6bf7-43d6-a609-c032b61835d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wight-of-the-reliquary:cast:s1,f:xs:XP:wight-of-the-reliquary:cast:s1	-	-	-	ae86f6029288	-	d77c1987ac36	-	-	2026-11-24	xproof
-4507df69-6bf7-43d6-a609-c032b61835d5	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+4507df69-6bf7-43d6-a609-c032b61835d5	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:wight-of-the-reliquary:f0a0:s1,f:xs:XP:wight-of-the-reliquary:f0a0:s1	-	-	-	9087eefec3ee	-	d77c1987ac36	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 450a9b73-9024-4103-b9f9-216a2f395cff	cast	cast-resolve	agreed	-	FX	scen	2	0	Faerie Fencing/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 450e84c7-afbe-4b30-a3e9-1dff968a5200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 450e84c7-afbe-4b30-a3e9-1dff968a5200	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45aa8bdb-54da-4069-bd6c-c63396154464	cast	cast	agreed	-	F	start	2	0	f:xs:XP:overwhelming-denial:cast:s1	-	-	-	9087eefec3ee	-	5de310b84a68	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 45aeac84-4705-4179-be3f-b31bde844ea0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:azor-s-elocutors:f0t0:s1,f:xs:XP:azor-s-elocutors:f0t0:s1	-	-	-	cfde1dc26c40	-	e6a1c2fd99af	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 45aeac84-4705-4179-be3f-b31bde844ea0	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:azor-s-elocutors:f0t0:s1,f:xs:XP:azor-s-elocutors:f0t0:s1	-	-	-	cfde1dc26c40	-	e6a1c2fd99af	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-45aeac84-4705-4179-be3f-b31bde844ea0	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+45aeac84-4705-4179-be3f-b31bde844ea0	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 45b1a19b-6a0c-4534-9106-99c2e5fc30d6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:khaaaaaaaaaaaannn:cast:s1,f:xs:XP:khaaaaaaaaaaaannn:cast:s1	-	-	-	fb9d3088f0bf	-	ba84cce02b88	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 45b34d33-7d70-4308-8f07-bb044be891bb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:merfolk-wayfinder:cast:s1,f:xs:XP:merfolk-wayfinder:cast:s1	-	-	-	8a1b1a193ec0	-	d66f0752b701	-	-	2026-11-24	xproof
 45b34d33-7d70-4308-8f07-bb044be891bb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:merfolk-wayfinder:cast:s1,f:xs:XP:merfolk-wayfinder:cast:s1	-	-	-	8a1b1a193ec0	-	d66f0752b701	-	-	2026-11-24	xproof

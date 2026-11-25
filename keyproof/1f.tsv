@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:sorin-solemn-visitor:cast:s1,f:xs:XP:sorin-solemn-visitor:cast:s1	-	-	-	d864b561c9cb	-	a3a1915393b8	-	-	2026-11-24	xproof
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:sorin-solemn-visitor:f0a2:s1,f:xs:XP:sorin-solemn-visitor:f0a2:s1	-	-	-	fb9d3088f0bf	-	a3a1915393b8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 1f21cf59-6390-44b4-ab2e-ef290dfd8c85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nest-of-scarabs:cast:s1,f:xs:XP:nest-of-scarabs:cast:s1	-	-	-	d864b561c9cb	-	ea736c64b59f	-	-	2026-11-24	xproof
-1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:cast:s1,f:xs:XP:the-millennium-calendar:cast:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/a0	MultiplyCounter	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:f0a0:s1,f:xs:XP:the-millennium-calendar:f0a0:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Millennium Calendar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f612df3-53b6-4317-9d63-1f903ee3f0c4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f64d70d-ea38-4419-be91-8b68aab3401e	cast	cast	agreed	-	F	start	2	0	f:xs:XP:pollen-lullaby:cast:s1	-	-	-	d864b561c9cb	-	f70bd2007962	-	-	2026-11-24	xproof
 1f696446-30ba-42ab-b4fc-ee9c956b0a62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orc-general:cast:s1,f:xs:XP:orc-general:cast:s1	-	-	-	fc71ca68c5ac	-	01441850dcd4	-	-	2026-11-24	xproof
-1f696446-30ba-42ab-b4fc-ee9c956b0a62	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
+1f696446-30ba-42ab-b4fc-ee9c956b0a62	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:orc-general:f0a0:s1,f:xs:XP:orc-general:f0a0:s1	-	-	-	9087eefec3ee	-	01441850dcd4	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 1f6bff6c-a2f0-4ed7-8169-acb4d31a7187	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mercurial-geists:cast:s1,f:xs:XP:mercurial-geists:cast:s1	-	-	-	d864b561c9cb	-	77c9e02de62c	-	-	2026-11-24	xproof
 1f6bff6c-a2f0-4ed7-8169-acb4d31a7187	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:mercurial-geists:f0t0:s1,f:xs:XP:mercurial-geists:f0t0:s1	-	-	-	fb9d3088f0bf	-	77c9e02de62c	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 1f6fd5d9-d123-4986-a18b-206cc2dfb3f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

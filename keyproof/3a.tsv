@@ -60,12 +60,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a3a1b35-ae4d-49d5-ae09-5a1693ad53ce	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a3cb6fe-24ef-4c09-8ff8-f303fc472a8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malakir-blood-priest:f0t0:s1,f:xs:XP:malakir-blood-priest:f0t0:s1	-	-	-	ae86f6029288	-	2f2a737648da	-	-	2026-11-24	xproof
 3a3cb6fe-24ef-4c09-8ff8-f303fc472a8b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:malakir-blood-priest:f0t0:s1,f:xs:XP:malakir-blood-priest:f0t0:s1	-	-	-	ae86f6029288	-	2f2a737648da	-	-	2026-11-24	xproof
-3a3e8c9b-e458-4661-980d-0a84a4c2452b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-3a3e8c9b-e458-4661-980d-0a84a4c2452b	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+3a3e8c9b-e458-4661-980d-0a84a4c2452b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+3a3e8c9b-e458-4661-980d-0a84a4c2452b	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 3a3f0bf4-7a02-4a57-8a18-ff22f012e0ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a3f0bf4-7a02-4a57-8a18-ff22f012e0ef	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a3fd911-b71c-49eb-aadb-cfa80b9e3a3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a42558c-7432-4c05-9599-95343eb09be1	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3a42558c-7432-4c05-9599-95343eb09be1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:censor:cast:s1,f:xs:XP:censor:cast:s1	-	-	-	9087eefec3ee	-	153ca889c491	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 3a42558c-7432-4c05-9599-95343eb09be1	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:censor:cast:s1,f:xs:XP:censor:cast:s1	-	-	-	23b491658465	-	153ca889c491	-	-	2026-11-25	xproof
 3a429a1e-62c0-4f01-b09e-2bbf63e56a98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a429a1e-62c0-4f01-b09e-2bbf63e56a98	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3aa64915-8b1b-4414-b11e-d2078c1732a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dauthi-trapper:cast:s1,f:xs:XP:dauthi-trapper:cast:s1	-	-	-	5f2128bf97e4	-	2480189d35ac	-	-	2026-11-24	xproof
 3aa64915-8b1b-4414-b11e-d2078c1732a5	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dauthi-trapper:f0a0:s1,f:xs:XP:dauthi-trapper:f0a0:s1	-	-	-	5f2128bf97e4	-	2480189d35ac	-	-	2026-11-24	xproof
 3aa654cb-c0a0-48e7-901a-c690120b1510	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3aa654cb-c0a0-48e7-901a-c690120b1510	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3aa654cb-c0a0-48e7-901a-c690120b1510	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 3aa83ed2-f48b-4ce6-a614-2c54ddf50538	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-one-ring:f0t1:s1,f:xs:XP:the-one-ring:f0t1:s1	-	-	-	23c4009444b0	-	e807c2dd8dc7	-	-	2026-11-25	xproof
 3aa83ed2-f48b-4ce6-a614-2c54ddf50538	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:the-one-ring:f0t1:s1,f:xs:XP:the-one-ring:f0t1:s1	-	-	-	23c4009444b0	-	e807c2dd8dc7	-	-	2026-11-25	xproof
 3aa83ed2-f48b-4ce6-a614-2c54ddf50538	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-one-ring:f0t1:s1,f:xs:XP:the-one-ring:f0t1:s1	-	-	-	23c4009444b0	-	e807c2dd8dc7	-	-	2026-11-25	xproof

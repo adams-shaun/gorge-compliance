@@ -23,9 +23,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 201b8936-18f4-4881-a1d4-c308cf3832bf	f1/a0	activate#1.0	agreed	-	X	scen	1	0	The Legend of Kuruk/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 201b8936-18f4-4881-a1d4-c308cf3832bf	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	The Legend of Kuruk/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 201c8de7-9675-475b-8f9e-7b1935234488	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-202091b2-9e08-47c1-9099-628b21d8ac12	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:electrozoa:f0t0:s1,f:xs:XP:electrozoa:f0t0:s1	-	-	-	ae86f6029288	-	81c74c63a920	-	-	2026-11-24	xproof
-202091b2-9e08-47c1-9099-628b21d8ac12	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:electrozoa:f0t0:s1,f:xs:XP:electrozoa:f0t0:s1	-	-	-	ae86f6029288	-	81c74c63a920	-	-	2026-11-24	xproof
-202091b2-9e08-47c1-9099-628b21d8ac12	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+202091b2-9e08-47c1-9099-628b21d8ac12	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:electrozoa:f0t1:s1,f:xs:XP:electrozoa:f0t1:s1	-	-	-	9087eefec3ee	-	81c74c63a920	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+202091b2-9e08-47c1-9099-628b21d8ac12	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:electrozoa:f0t1:s1,f:xs:XP:electrozoa:f0t1:s1	-	-	-	9087eefec3ee	-	81c74c63a920	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+202091b2-9e08-47c1-9099-628b21d8ac12	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:electrozoa:f0t1:s1,f:xs:XP:electrozoa:f0t1:s1	-	-	-	9087eefec3ee	-	81c74c63a920	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 20283c4a-f1f0-42f0-bc08-6da87474426b	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:breeding-pool:f0a0:s1,f:xs:XP:breeding-pool:f0a0:s1	-	-	-	b6db453064e8	-	9bb7703b7e1a	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 20283c4a-f1f0-42f0-bc08-6da87474426b	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:breeding-pool:f0a1:s1,f:xs:XP:breeding-pool:f0a1:s1	-	-	-	b6db453064e8	-	9bb7703b7e1a	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
 20283c4a-f1f0-42f0-bc08-6da87474426b	land	land	agreed	-	FX	start	2	0	x:xs:XP:breeding-pool:land:s1,f:xs:XP:breeding-pool:land:s1	-	-	-	8c0bd19283bb	-	9bb7703b7e1a	-	-	2026-11-24	xproof

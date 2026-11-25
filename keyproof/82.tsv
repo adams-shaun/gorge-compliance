@@ -68,9 +68,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 824abca7-b5e2-4ddb-ac7d-b7d04758a3c9	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8253fcac-0c07-41e8-afa4-34021f9ef6f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8255a797-ddd3-4db0-a3f5-dd8f38c3b908	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:captain-america-s-shield:cast:s1,f:xs:XP:captain-america-s-shield:cast:s1	-	-	-	23c4009444b0	-	4bf87f6582df	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-8255a797-ddd3-4db0-a3f5-dd8f38c3b908	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:captain-america-s-shield:f0a0:s1,f:xs:XP:captain-america-s-shield:f0a0:s1	-	-	-	23c4009444b0	-	4bf87f6582df	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8255a797-ddd3-4db0-a3f5-dd8f38c3b908	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:captain-america-s-shield:static0.0:s1,f:xs:XP:captain-america-s-shield:static0.0:s1	-	-	-	9087eefec3ee	-	4bf87f6582df	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 8255a797-ddd3-4db0-a3f5-dd8f38c3b908	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Captain America's Shield/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8255a797-ddd3-4db0-a3f5-dd8f38c3b908	static#0.0	static#0.0	agreed	-	X	scen	1	0	Captain America's Shield/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8255a797-ddd3-4db0-a3f5-dd8f38c3b908	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:captain-america-s-shield:static0.0:s1,f:xs:XP:captain-america-s-shield:static0.0:s1	-	-	-	9087eefec3ee	-	4bf87f6582df	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 8255b408-cc8c-453f-982c-f361b5559cec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:atraxa-s-skitterfang:cast:s1,f:xs:XP:atraxa-s-skitterfang:cast:s1	-	-	-	ae86f6029288	-	8296d3376763	-	-	2026-11-24	xproof
 8255b408-cc8c-453f-982c-f361b5559cec	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:atraxa-s-skitterfang:cast:s1,f:xs:XP:atraxa-s-skitterfang:cast:s1	-	-	-	ae86f6029288	-	8296d3376763	-	-	2026-11-24	xproof
 82563a5f-cae4-4ece-876c-0df245d2dc58	cast	cast-resolve	agreed	-	FX	scen	2	0	Raph & Mikey, Troublemakers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82f18e7d-5c42-47c4-8e74-3fccc9b7b1f0	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ancient-stirrings:cast:s1	-	-	-	d864b561c9cb	-	30af090f1896	-	-	2026-11-24	xproof
 82f1e02b-7a1a-4771-b435-e00214a73e07	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	eaf0fb113070	-	-	2026-11-24	xproof
 82f3faa8-39fa-450b-843f-d60a4c36d8f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-82f3faa8-39fa-450b-843f-d60a4c36d8f7	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+82f3faa8-39fa-450b-843f-d60a4c36d8f7	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 82f3faa8-39fa-450b-843f-d60a4c36d8f7	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	cast	cast-resolve	agreed	-	FX	scen	2	0	Formation Breaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:formation-breaker:combat0.attack:s1,f:xs:XP:formation-breaker:combat0.attack:s1	-	-	-	23c4009444b0	-	749f6f2af268	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

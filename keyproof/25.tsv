@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 254f133a-eee5-48b9-b19f-110555e49300	cast	cast-resolve	agreed	-	FX	scen	2	0	Winter, Team Player/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 254f133a-eee5-48b9-b19f-110555e49300	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:winter-team-player:f0t0:s1,f:xs:XP:winter-team-player:f0t0:s1	-	-	-	fb9d3088f0bf	-	eccf4ec68ad2	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 2550099d-b3e2-4eb6-9f36-0fc412828ca6	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:rivendell:f0a1:s2,f:xs:XP:rivendell:f0a1:s2	-	-	-	23b491658465	-	8a8bc587322f	-	-	2026-11-25	xproof
-2550099d-b3e2-4eb6-9f36-0fc412828ca6	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2550099d-b3e2-4eb6-9f36-0fc412828ca6	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 2550099d-b3e2-4eb6-9f36-0fc412828ca6	land	land	agreed	-	FX	start	2	0	x:xs:XP:rivendell:land:s1,f:xs:XP:rivendell:land:s1	-	-	-	ae86f6029288	-	8a8bc587322f	-	-	2026-11-24	xproof
 2550c2ae-834d-46e7-9ab4-d7bf7bfa6a78	cast	cast-resolve	agreed	-	X	scen	1	0	This Town Ain't Big Enough/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2550c2ae-834d-46e7-9ab4-d7bf7bfa6a78	static#0.0	static#0.0	agreed	-	X	scen	1	0	This Town Ain't Big Enough/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2577860a-663a-4b56-880c-05576522e3b7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:vaultbreaker:f0t0:s1,f:xs:XP:vaultbreaker:f0t0:s1	-	-	-	d864b561c9cb	-	2ac3c1786b3f	-	-	2026-11-24	xproof
 2577ef8e-d85e-47af-ac34-629f31992751	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-rift:f0t0:s1,f:xs:XP:aether-rift:f0t0:s1	-	-	-	3aa6ded33acb	-	1c83a0d29d1c	-	-	2026-11-25	xproof
 2577ef8e-d85e-47af-ac34-629f31992751	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:aether-rift:f0t0:s1,f:xs:XP:aether-rift:f0t0:s1	-	-	-	3aa6ded33acb	-	1c83a0d29d1c	-	-	2026-11-25	xproof
-25781dc5-d6ea-4273-9fe3-06a8808b3718	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+25781dc5-d6ea-4273-9fe3-06a8808b3718	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reject-imperfection:cast:s1,f:xs:XP:reject-imperfection:cast:s1	-	-	-	9087eefec3ee	-	ef7e0ad65d02	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 2578e8e4-a93c-4904-9037-92a1529c2c67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2578e8e4-a93c-4904-9037-92a1529c2c67	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2578e8e4-a93c-4904-9037-92a1529c2c67	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:noncreature	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25a63171-a1a0-4c61-ac61-49bb59fe83c1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:thought-stalker-warlock:combat0.block:s1,f:xs:XP:thought-stalker-warlock:combat0.block:s1	-	-	-	23c4009444b0	-	71133f143540	-	-	2026-11-25	xproof
 25a63171-a1a0-4c61-ac61-49bb59fe83c1	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25a73cfc-a40d-47ea-a7b1-61c7b62a9e6c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:eldrazi-ravager:cast:s2,f:xs:XP:eldrazi-ravager:cast:s2	-	-	-	ae86f6029288	-	7ed3ef0a34c7	-	-	2026-11-24	xproof
-25a73cfc-a40d-47ea-a7b1-61c7b62a9e6c	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+25a73cfc-a40d-47ea-a7b1-61c7b62a9e6c	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:eldrazi-ravager:f0a0:s1,f:xs:XP:eldrazi-ravager:f0a0:s1	-	-	-	9087eefec3ee	-	7ed3ef0a34c7	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 25a73cfc-a40d-47ea-a7b1-61c7b62a9e6c	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:eldrazi-ravager:cast:s1,f:xs:XP:eldrazi-ravager:cast:s1	-	-	-	ae86f6029288	-	7ed3ef0a34c7	-	-	2026-11-24	xproof
 25a73cfc-a40d-47ea-a7b1-61c7b62a9e6c	f0/t0	Attacks/Annihilator	agreed	-	FX	start	2	0	x:xs:XP:eldrazi-ravager:f0t0:s1,f:xs:XP:eldrazi-ravager:f0t0:s1	-	-	-	ae86f6029288	-	7ed3ef0a34c7	-	-	2026-11-24	xproof
 25a9c864-59c6-4230-a234-bf78bf1ef24c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malamet-veteran:cast:s1,f:xs:XP:malamet-veteran:cast:s1	-	-	-	23b491658465	-	4dd368ad878d	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25af5e13-ebe8-4bc4-b8fe-8b9aee59579c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stinkdrinker-daredevil:cast:s1,f:xs:XP:stinkdrinker-daredevil:cast:s1	-	-	-	d864b561c9cb	-	34057429906f	-	-	2026-11-24	xproof
 25afddd2-6e48-4742-b34e-e3b5def7c0fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25afddd2-6e48-4742-b34e-e3b5def7c0fd	f0/a0	Protection	owed	harness	-	start	0	0	-	-	-	-	9087eefec3ee	-	9906aa5f8730	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
-25afddd2-6e48-4742-b34e-e3b5def7c0fd	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+25afddd2-6e48-4742-b34e-e3b5def7c0fd	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:pippin-guard-of-the-citadel:f0t0:s1,f:xs:XP:pippin-guard-of-the-citadel:f0t0:s1	-	-	-	9087eefec3ee	-	9906aa5f8730	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 25b0876e-c995-486e-8536-6e68b76b9c86	cast	cast-resolve	agreed	-	FX	scen	2	0	Voracious Tome-Skimmer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 25b0876e-c995-486e-8536-6e68b76b9c86	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:voracious-tome-skimmer:combat0.attack:s1,f:xs:XP:voracious-tome-skimmer:combat0.attack:s1	-	-	-	23c4009444b0	-	99806f86f235	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 25b0876e-c995-486e-8536-6e68b76b9c86	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:voracious-tome-skimmer:combat0.block:s1,f:xs:XP:voracious-tome-skimmer:combat0.block:s1	-	-	-	23c4009444b0	-	99806f86f235	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

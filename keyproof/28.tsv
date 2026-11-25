@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 288da486-393c-4995-ad02-c5093a71970d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Beorn, Reluctant Host/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 288da486-393c-4995-ad02-c5093a71970d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Beorn, Reluctant Host/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 288ea954-a880-4731-8fe7-93d2ff6a043f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-288ea954-a880-4731-8fe7-93d2ff6a043f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+288ea954-a880-4731-8fe7-93d2ff6a043f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:glyph-elemental:f0t0:s1,f:xs:XP:glyph-elemental:f0t0:s1	-	-	-	9087eefec3ee	-	b7b476952f51	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 288fcf5c-f5aa-4f62-9dd8-ba295df48f7a	cast	cast-resolve	agreed	-	FX	scen	2	0	Hotshot Investigators/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 288fcf5c-f5aa-4f62-9dd8-ba295df48f7a	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28914782-92f4-407f-beb6-5e290a49000c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:free-borg-revolutionaries:f0t0:s1,f:xs:XP:free-borg-revolutionaries:f0t0:s1	-	-	-	25696bf19d5b	-	7fbacd60357b	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28ddc23c-5b0b-4747-9a33-6845acf27bec	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:elvish-harbinger:cast:s1,f:xs:XP:elvish-harbinger:cast:s1	-	-	-	d864b561c9cb	-	19e50ecfaf24	-	-	2026-11-24	xproof
 28df85d6-e13a-4178-a361-7015afd316ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28df85d6-e13a-4178-a361-7015afd316ca	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28df85d6-e13a-4178-a361-7015afd316ca	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+28df85d6-e13a-4178-a361-7015afd316ca	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 28e1a613-30ad-4013-be0b-b0365f627201	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28e99c5f-a78a-4323-b5e9-1b43303acaf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28e99c5f-a78a-4323-b5e9-1b43303acaf6	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:illusionary-servant:f0t0:s1,f:xs:XP:illusionary-servant:f0t0:s1	-	-	-	6f84be0f34c0	-	8c45ea4b4684	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

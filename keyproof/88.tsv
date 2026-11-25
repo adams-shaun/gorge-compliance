@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 883a2b57-1075-4479-920b-3f7d5da1f444	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	cast	cast-resolve	agreed	-	X	scen	1	0	Tithing Blade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tithing Blade/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-883a4180-9ede-4249-a4b8-3a29c998fb63	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+883a4180-9ede-4249-a4b8-3a29c998fb63	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Tithing Blade/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 883ad210-917b-40e6-8682-31d6eb3ed12a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 883ad210-917b-40e6-8682-31d6eb3ed12a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:burakos-party-leader:f0t0:s1,f:xs:XP:burakos-party-leader:f0t0:s1	-	-	-	8c0bd19283bb	-	cf87ddc3fe29	-	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8847b057-8896-4c72-a11f-3c183b1cc60e	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 88485575-e491-4ab7-a020-e52dd92ae085	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 884d08bf-7e97-40cc-864e-445ae0bd1646	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-884d08bf-7e97-40cc-864e-445ae0bd1646	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:target	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+884d08bf-7e97-40cc-864e-445ae0bd1646	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:target	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 88522a0f-5377-4522-97f4-4148bef954af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bolg-of-the-north:f0t0:s1,f:xs:XP:bolg-of-the-north:f0t0:s1	-	-	-	25696bf19d5b	-	cbbe5c83c071	-	-	2026-11-24	xproof
 88522a0f-5377-4522-97f4-4148bef954af	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bolg-of-the-north:f0t0:s1,f:xs:XP:bolg-of-the-north:f0t0:s1	-	-	-	25696bf19d5b	-	cbbe5c83c071	-	-	2026-11-24	xproof
 8854222e-590f-4fc0-b5d7-bf3d986b8507	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:momo-rambunctious-rascal:cast:s1,f:xs:XP:momo-rambunctious-rascal:cast:s1	-	-	-	8c0bd19283bb	-	7c27a274a30c	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88b1e06c-5899-4e83-8204-e2c32c0c6aff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:subjugator-angel:f0t0:s1,f:xs:XP:subjugator-angel:f0t0:s1	-	-	-	d864b561c9cb	-	fc4ecc2b6237	-	-	2026-11-24	xproof
 88b1e06c-5899-4e83-8204-e2c32c0c6aff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:subjugator-angel:f0t0:s1,f:xs:XP:subjugator-angel:f0t0:s1	-	-	-	d864b561c9cb	-	fc4ecc2b6237	-	-	2026-11-24	xproof
 88b50194-bc39-47a6-968b-983553d89cf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-88b51e15-6630-4e14-a6b8-db0aa12e34ef	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+88b51e15-6630-4e14-a6b8-db0aa12e34ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disallow:cast:s1,f:xs:XP:disallow:cast:s1	-	-	-	9087eefec3ee	-	ba6a3c287e57	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 88ba283d-2d03-4455-a4a3-a2a5622209bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88ba283d-2d03-4455-a4a3-a2a5622209bd	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 88bb91b5-2ccd-4ce9-8cd4-e54d63c12abf	cast	cast-resolve	agreed	-	FX	scen	2	0	Coruscation Mage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88f34d15-c338-40a7-b56c-c5b650847430	cast	cast-resolve	agreed	-	FX	scen	2	0	Ghost, Spectral Saboteur/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88f34d15-c338-40a7-b56c-c5b650847430	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ghost-spectral-saboteur:combat0.attack:s1,f:xs:XP:ghost-spectral-saboteur:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	4ca35be248db	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 88f34d15-c338-40a7-b56c-c5b650847430	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ghost, Spectral Saboteur/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88f34d15-c338-40a7-b56c-c5b650847430	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ghost, Spectral Saboteur/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+88f34d15-c338-40a7-b56c-c5b650847430	static#0.0	static.cant-block-by-self	agreed	-	FX	start	2	0	x:xs:XP:ghost-spectral-saboteur:static0.0:s1,f:xs:XP:ghost-spectral-saboteur:static0.0:s1	-	-	-	9087eefec3ee	-	4ca35be248db	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 88f5d146-420b-417c-bcf1-fe0e78312a74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88f5d146-420b-417c-bcf1-fe0e78312a74	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:stensia-masquerade:f0t0:s1,f:xs:XP:stensia-masquerade:f0t0:s1	-	-	-	fb9d3088f0bf	-	35be9d49fa4d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 88f8f683-738e-48f3-afff-c8f73f1033a2	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:botanical-sanctum:f0a0:s2,f:xs:XP:botanical-sanctum:f0a0:s2	-	-	-	8c0bd19283bb	-	c093698890b3	-	-	2026-11-24	xproof
