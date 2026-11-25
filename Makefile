@@ -845,7 +845,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fixtures/phyrexian/processor-zero-life.jsonl, the exported xs:XP:phyrexian-processor:cast:s1 request) fails without the change with
 # the exact "Missing x answer at step 6: X for" miss; scripts/forge-oracle-test-phyrexian-processor-paylife.sh (make forge-driver-tests)
 # runs it. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-paylife-x.
-FORGE_ORACLE_REF ?= ad4cd3ba0f8a7fcb5eeccc8c579cf00bf0784858
+# 6095b085edc = ad4cd3ba0f8 (join14; above) plus the face-down cast modes (StepMachine.spellForMode only): gorge's cast_mode
+# "morphed"/"megamorphed"/"disguised" (CR 702.37c, 702.168a, 702.169a) hit the spellForMode default, so the driver cast the
+# card's printed spell and Forge refused it where the printed cost exceeds the mana gorge paid (Belltoll Dragon megamorphed for
+# {3} over three Islands: "step 3 (cast) p0:Belltoll Dragon was not put on the stack", xproof cluster xpt-716677db, 2 cycles /
+# 4 items gorge~forge) and cast face up where it does not (Sleuth Instructor {1}{W}). spellForMode now maps all three modes to
+# the one face-down spell Forge builds per printed keyword (CardFactoryUtil.abilityCastFaceDown, a Spell with
+# setCastFaceDown(true) and Cost {3}; Megamorph builds it with the same Morph key). FaceDownCastModeTest (fixtures/morph/,
+# Belltoll Dragon megamorphed, Weaver of Lies morphed and Sleuth Instructor disguised, each cut after the cast) fails on
+# ad4cd3ba0f8 with the exact "was not put on the stack" harness row (megamorphed, morphed) and the printed-spell note
+# (disguised), passes here; scripts/forge-oracle-test-facedown-cast-mode.sh (make forge-driver-tests) runs it. Driver-only;
+# die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-facedown-cast.
+FORGE_ORACLE_REF ?= 6095b085edc3414d3629fb99ba550a0d83efc647
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
