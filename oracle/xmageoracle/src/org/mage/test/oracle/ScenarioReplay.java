@@ -380,6 +380,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * TestPlayer's own match is the answer) and when zero or several rules
      * match after normalisation. */
     static int triggerKeyMatch(String key, List<String> rules, String sourceName) {
+        return triggerKeyMatch(key, rules, sourceName, true);
+    }
+
+    /** As above; allowContains false skips the containment fallback (a key
+     * TestPlayer will take by source name must not be re-read as wording). */
+    static int triggerKeyMatch(String key, List<String> rules, String sourceName, boolean allowContains) {
         for (String rule : rules) {
             if (rule.startsWith(key)) {
                 return -1;
@@ -403,6 +409,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         if (found >= 0) {
             return found;
+        }
+        // A key that is (or mentions) the source's own name folds to "{this}",
+        // which a different source's rule may carry literally ("put a +1/+1
+        // counter on {this}"): never a wording key, so no containment.
+        if (!allowContains || want.contains("{this}")) {
+            return -1;
         }
         // A delayed trigger's rule text puts the subject first and the timing
         // last ("You draw a card at the beginning of the next turn's
@@ -495,13 +507,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * where XMage prints "Whenever ..." (Hero of Oxid Ridge) and ends the
          * key at a period where XMage's text continues (Nefarox's "sacrifices
          * a creature of their choice."). An unmatched head is a strict
- * "Missing CHOICE def" there. When the head prefix-matches no ability,
- * take the one ability whose normalised rule starts with the normalised
- * key, or -- for a delayed trigger, whose rule text puts the subject first
- * and the timing last (Arcane Denial's key "Draw a card." against XMage's
- * "You draw a card at the beginning of the next turn's upkeep.") -- whose
- * normalised rule contains it (CR 603.3b: the controller's pick); none or
- * several matching keeps TestPlayer's own handling. */
+         * "Missing CHOICE def" there. When the head prefix-matches no ability,
+         * take the one ability whose normalised rule starts with the normalised
+         * key, or -- for a delayed trigger, whose rule text puts the subject first
+         * and the timing last (Arcane Denial's key "Draw a card." against XMage's
+         * "You draw a card at the beginning of the next turn's upkeep.") -- whose
+         * normalised rule contains it (CR 603.3b: the controller's pick); none or
+         * several matching keeps TestPlayer's own handling. A key TestPlayer
+         * takes by source name never reaches the containment read. */
         @Override
         public mage.abilities.TriggeredAbility chooseTriggeredAbility(
                 List<mage.abilities.TriggeredAbility> abilities, Game game) {
@@ -512,7 +525,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     rules.add(ability.toString());
                 }
                 String name = abilities.isEmpty() ? "" : abilities.get(0).getSourceObject(game).getName();
-                int at = triggerKeyMatch(choice, rules, name);
+                // TestPlayer takes a key by source name (startsWith); that
+                // answer wins over a containment read of the same key.
+                boolean byName = false;
+                for (mage.abilities.TriggeredAbility ability : abilities) {
+                    if (ability.getSourceObject(game).getName().startsWith(choice)) {
+                        byName = true;
+                    }
+                }
+                int at = triggerKeyMatch(choice, rules, name, !byName);
                 if (at >= 0) {
                     getChoices().remove(0);
                     return abilities.get(at);

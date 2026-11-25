@@ -60,6 +60,14 @@ public final class ScenarioReplayDelayedTriggerOrderTest {
                 arcane));
         // A key no rule contains stays unmatched (TestPlayer's strict miss).
         equal(-1, ScenarioReplay.triggerKeyMatch("Counterspell.", rules, arcane));
+        // A name-form key (distinct-source order) folds to "{this}"; another
+        // source's rule carrying a literal "{this}" must not be picked by
+        // containment -- TestPlayer's own name match answers it.
+        List<String> pridemate = List.of("Whenever another creature enters, you gain 1 life.",
+                "Whenever you gain life, put a +1/+1 counter on {this}.");
+        equal(-1, ScenarioReplay.triggerKeyMatch("Soul Warden", pridemate, "Soul Warden"));
+        // The driver's by-name flag disables containment outright.
+        equal(-1, ScenarioReplay.triggerKeyMatch("Draw a card.", rules, arcane, false));
         System.out.println("ScenarioReplayDelayedTriggerOrderTest ok");
     }
 }
