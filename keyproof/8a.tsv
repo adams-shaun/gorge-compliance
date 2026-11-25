@@ -122,8 +122,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a8e225b-14e4-464f-bebe-89b4c9be7fe1	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 8a8fe94f-81aa-4725-ace6-ed56a1e1ed91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a922366-ee2a-4ddb-a904-683dcf4f191a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a9525f4-74a6-44f0-a1b1-d57937d7783b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a9525f4-74a6-44f0-a1b1-d57937d7783b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+8a9525f4-74a6-44f0-a1b1-d57937d7783b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temporal-fissure:f0t0:s1,f:xs:XP:temporal-fissure:f0t0:s1	-	-	-	ee9449e32c7a	-	378aea5e2319	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+8a9525f4-74a6-44f0-a1b1-d57937d7783b	f0/t0	SpellCast/Storm	agreed	-	FX	start	2	0	x:xs:XP:temporal-fissure:f0t0:s1,f:xs:XP:temporal-fissure:f0t0:s1	-	-	-	ee9449e32c7a	-	378aea5e2319	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 8a960cc2-3802-42bc-ba28-941bfe9743be	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doorkeeper:cast:s1,f:xs:XP:doorkeeper:cast:s1	-	-	-	d864b561c9cb	-	bcbb84b38659	-	-	2026-11-24	xproof
 8a960cc2-3802-42bc-ba28-941bfe9743be	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:doorkeeper:f0a0:s1,f:xs:XP:doorkeeper:f0a0:s1	-	-	-	d864b561c9cb	-	bcbb84b38659	-	-	2026-11-24	xproof
 8a98ddac-7341-4118-b188-51d8d03afd1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:uncle-iroh:cast:s1,f:xs:XP:uncle-iroh:cast:s1	-	-	-	6f84be0f34c0	-	e6d1db862199	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8a9d6a30-e2c2-4da5-ad3b-d64fb2b5543c	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:flame-jet:cast:s2,f:xs:XP:flame-jet:cast:s2	-	-	-	5f2128bf97e4	-	f0ea40c09676	-	-	2026-11-24	xproof
 8a9e8f60-eb13-4ae8-82df-d4c46da74451	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8a9e8f60-eb13-4ae8-82df-d4c46da74451	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8a9e8f60-eb13-4ae8-82df-d4c46da74451	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+8a9e8f60-eb13-4ae8-82df-d4c46da74451	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:daxos-the-returned:f0t0:s1,f:xs:XP:daxos-the-returned:f0t0:s1	-	-	-	ee9449e32c7a	-	1adb6080b2e0	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 8aa0125c-29fe-4f31-985c-de2da3dbc602	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8aa1bbc9-b047-4d68-93f4-728e40dafc5e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:kitesail-freebooter:cast:s1,f:xs:XP:kitesail-freebooter:cast:s1	-	-	-	d864b561c9cb	-	beb4cd58d777	-	-	2026-11-24	xproof
 8aa1bbc9-b047-4d68-93f4-728e40dafc5e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:kitesail-freebooter:cast:s1,f:xs:XP:kitesail-freebooter:cast:s1	-	-	-	d864b561c9cb	-	beb4cd58d777	-	-	2026-11-24	xproof

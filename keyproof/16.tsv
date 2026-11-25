@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1612a08f-fc1f-45cf-ae03-5f021a46869d	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:in-the-trenches:f0a0:s1,f:xs:XP:in-the-trenches:f0a0:s1	-	-	-	3aa6ded33acb	-	d41cd191bc54	-	-	2026-11-25	xproof
 16156274-8dc0-439c-94c4-e8c89bbb5687	cast	cast-resolve	agreed	-	FX	scen	2	0	Loading Zone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16182e01-22ff-4786-985d-919b47c4aa4d	cast	cast-resolve	agreed	-	X	scen	1	0	Matzalantli, the Great Door/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-16182e01-22ff-4786-985d-919b47c4aa4d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+16182e01-22ff-4786-985d-919b47c4aa4d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 16182e01-22ff-4786-985d-919b47c4aa4d	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Matzalantli, the Great Door/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16182e01-22ff-4786-985d-919b47c4aa4d	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Matzalantli, the Great Door/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 161b6d06-e6a7-488e-9f9c-d266c1402a3a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mystic-snake:f0t0:s1,f:xs:XP:mystic-snake:f0t0:s1	-	-	-	25696bf19d5b	-	593961bd03e6	-	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1663d54f-4f39-4a03-aac2-e2923cbb7de8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:frost-trickster:f0t0:s1,f:xs:XP:frost-trickster:f0t0:s1	-	-	-	d864b561c9cb	-	4c42e2739bfc	-	-	2026-11-24	xproof
 1665ca9f-176d-40f1-a4e9-42da4f1236e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:circuit-mender:f0t0:s1,f:xs:XP:circuit-mender:f0t0:s1	-	-	-	d864b561c9cb	-	ea153bb878b9	-	-	2026-11-24	xproof
 1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:circuit-mender:f0t0:s1,f:xs:XP:circuit-mender:f0t0:s1	-	-	-	d864b561c9cb	-	ea153bb878b9	-	-	2026-11-24	xproof
-1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 1675476c-25b1-46c2-81ce-fef9a2360bcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t1:s1,f:xs:XP:blaring-captain:f0t1:s1	-	-	-	23c4009444b0	-	0d7032989aba	-	-	2026-11-25	xproof
 1675476c-25b1-46c2-81ce-fef9a2360bcc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t0:s1,f:xs:XP:blaring-captain:f0t0:s1	-	-	-	8c0bd19283bb	-	0d7032989aba	-	-	2026-11-24	xproof
 1675476c-25b1-46c2-81ce-fef9a2360bcc	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t1:s1,f:xs:XP:blaring-captain:f0t1:s1	-	-	-	23c4009444b0	-	0d7032989aba	-	-	2026-11-25	xproof
@@ -107,7 +107,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 169705c3-32c1-4628-b108-c37ca5f27e24	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:ruin-ghost:f0a0:s1,f:xs:XP:ruin-ghost:f0a0:s1	-	-	-	8a1b1a193ec0	-	d6f87ad06fa3	-	-	2026-11-24	xproof
 169728d6-7820-4a6d-a815-70714ad3e887	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:perilous-predicament:cast:s1,f:xs:XP:perilous-predicament:cast:s1	-	-	-	d864b561c9cb	-	35da4e78d57e	-	-	2026-11-24	xproof
 16977ebd-6384-4c28-b9c3-448563a07807	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-169a4a77-12ff-4997-9550-bdcd456aa2f7	cast	cast-resolve	agreed	-	X	scen	1	0	The Eagles Are Coming!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+169a4a77-12ff-4997-9550-bdcd456aa2f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-eagles-are-coming:cast:s1,f:xs:XP:the-eagles-are-coming:cast:s1	-	-	-	ee9449e32c7a	-	1804596e431b	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 169c468e-0e17-450b-8954-df47d78ad8f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169c468e-0e17-450b-8954-df47d78ad8f8	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:skyfire-kirin:f0t0:s1,f:xs:XP:skyfire-kirin:f0t0:s1	-	-	-	23c4009444b0	-	e04bfe1cd95f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 169cf74a-07bf-4841-83f3-904df8a0a39b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

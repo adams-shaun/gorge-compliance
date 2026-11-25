@@ -35,13 +35,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8834d3c9-cdb5-423b-bc78-94a94add5e74	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:new-horizons:f0t0:s2,f:xs:XP:new-horizons:f0t0:s2	-	-	-	e07cf3a05ba5	-	607bf6f3092b	-	-	2026-11-24	xproof
 8834d3c9-cdb5-423b-bc78-94a94add5e74	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:new-horizons:f0t0:s2,f:xs:XP:new-horizons:f0t0:s2	-	-	-	e07cf3a05ba5	-	607bf6f3092b	-	-	2026-11-24	xproof
 8834d3c9-cdb5-423b-bc78-94a94add5e74	static#0.0	static#0.0	agreed	-	X	scen	1	0	New Horizons/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88350861-244c-4634-9bc9-e9a79401bd02	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-88350861-244c-4634-9bc9-e9a79401bd02	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+88350861-244c-4634-9bc9-e9a79401bd02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:krosan-warchief:cast:s1,f:xs:XP:krosan-warchief:cast:s1	-	-	-	ee9449e32c7a	-	46d159b18230	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+88350861-244c-4634-9bc9-e9a79401bd02	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:krosan-warchief:f0a0:s1,f:xs:XP:krosan-warchief:f0a0:s1	-	-	-	ee9449e32c7a	-	46d159b18230	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 883a2b57-1075-4479-920b-3f7d5da1f444	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 883a2b57-1075-4479-920b-3f7d5da1f444	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	cast	cast-resolve	agreed	-	X	scen	1	0	Tithing Blade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tithing Blade/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-883a4180-9ede-4249-a4b8-3a29c998fb63	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+883a4180-9ede-4249-a4b8-3a29c998fb63	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Tithing Blade/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 883ad210-917b-40e6-8682-31d6eb3ed12a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 883ad210-917b-40e6-8682-31d6eb3ed12a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:burakos-party-leader:f0t0:s1,f:xs:XP:burakos-party-leader:f0t0:s1	-	-	-	8c0bd19283bb	-	cf87ddc3fe29	-	-	2026-11-24	xproof
@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8847b057-8896-4c72-a11f-3c183b1cc60e	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:dauthi-jackal:f0a0:s1,f:xs:XP:dauthi-jackal:f0a0:s1	-	-	-	baa6f696107c	-	483e1cf626ce	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 88485575-e491-4ab7-a020-e52dd92ae085	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 884d08bf-7e97-40cc-864e-445ae0bd1646	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-884d08bf-7e97-40cc-864e-445ae0bd1646	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:target	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+884d08bf-7e97-40cc-864e-445ae0bd1646	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:target	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 88522a0f-5377-4522-97f4-4148bef954af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bolg-of-the-north:f0t0:s1,f:xs:XP:bolg-of-the-north:f0t0:s1	-	-	-	25696bf19d5b	-	cbbe5c83c071	-	-	2026-11-24	xproof
 88522a0f-5377-4522-97f4-4148bef954af	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bolg-of-the-north:f0t0:s1,f:xs:XP:bolg-of-the-north:f0t0:s1	-	-	-	25696bf19d5b	-	cbbe5c83c071	-	-	2026-11-24	xproof
 8854222e-590f-4fc0-b5d7-bf3d986b8507	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:momo-rambunctious-rascal:cast:s1,f:xs:XP:momo-rambunctious-rascal:cast:s1	-	-	-	8c0bd19283bb	-	7c27a274a30c	-	-	2026-11-24	xproof
@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88cd43ce-b168-45a4-8d29-6cac5ab42857	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:level-up:f0t0:s1,f:xs:XP:level-up:f0t0:s1	-	-	-	8c0bd19283bb	-	db24c9f31fdb	-	-	2026-11-24	xproof
 88ce2017-83a6-4b55-afba-371875bf2172	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88cf4c1a-5863-45fc-b76d-7ad33b175b2b	cast	cast-resolve	agreed	-	FX	scen	2	0	Burgeoning/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-88cf4c1a-5863-45fc-b76d-7ad33b175b2b	f0/t0	NULL	owed	refused:no-generator:trigger:LandPlayed	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+88cf4c1a-5863-45fc-b76d-7ad33b175b2b	f0/t0	NULL	owed	refused:no-generator:trigger:LandPlayed	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 88d49309-e7d7-486d-8696-cd66bec2fe33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88d4c611-3211-41b2-8453-6210f8394a0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88d4c611-3211-41b2-8453-6210f8394a0c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
