@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4940783f-2534-41c1-b614-5dabb0dff405	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 49471b65-be9d-4ded-b2e5-dfc81b306b54	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brimaz-king-of-oreskos:cast:s1,f:xs:XP:brimaz-king-of-oreskos:cast:s1	-	-	-	d864b561c9cb	-	860c4c222d17	-	-	2026-11-24	xproof
 49471b65-be9d-4ded-b2e5-dfc81b306b54	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:brimaz-king-of-oreskos:f0t0:s1,f:xs:XP:brimaz-king-of-oreskos:f0t0:s1	-	-	-	d864b561c9cb	-	860c4c222d17	-	-	2026-11-24	xproof
-49471b65-be9d-4ded-b2e5-dfc81b306b54	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+49471b65-be9d-4ded-b2e5-dfc81b306b54	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 49475268-be95-4670-a5ca-2f2b6c5cf005	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49475268-be95-4670-a5ca-2f2b6c5cf005	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49478593-29ff-4e5a-b1e8-6462c2d6176d	cast	cast	agreed	-	F	start	2	0	f:xs:XP:shauku-endbringer:f0t0:s1	-	-	-	3aa6ded33acb	-	2b2861ea17f0	-	-	2026-11-25	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49b351d8-8b63-4f9e-a323-344ed35fdfff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49b351d8-8b63-4f9e-a323-344ed35fdfff	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:elvish-hunter:f0a0:s1,f:xs:XP:elvish-hunter:f0a0:s1	-	-	-	fc71ca68c5ac	-	658d196e4dc4	-	-	2026-11-24	xproof
 49b689a3-9197-4a04-a62f-218b245d6e23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haazda-shield-mate:f0t0:s1,f:xs:XP:haazda-shield-mate:f0t0:s1	-	-	-	23c4009444b0	-	8474dbf19dfa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-49b689a3-9197-4a04-a62f-218b245d6e23	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+49b689a3-9197-4a04-a62f-218b245d6e23	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 49b689a3-9197-4a04-a62f-218b245d6e23	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:haazda-shield-mate:f0t0:s1,f:xs:XP:haazda-shield-mate:f0t0:s1	-	-	-	23c4009444b0	-	8474dbf19dfa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 49b80368-d38a-4877-b1de-f3b5f3d40d4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-lost-thoughts:f0t0:s1,f:xs:XP:wall-of-lost-thoughts:f0t0:s1	-	-	-	d864b561c9cb	-	c686f9ecb8ea	-	-	2026-11-24	xproof
 49b80368-d38a-4877-b1de-f3b5f3d40d4d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wall-of-lost-thoughts:f0t0:s1,f:xs:XP:wall-of-lost-thoughts:f0t0:s1	-	-	-	d864b561c9cb	-	c686f9ecb8ea	-	-	2026-11-24	xproof

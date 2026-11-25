@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	cast	cast-resolve	agreed	-	X	scen	1	0	Monastery Messenger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:monastery-messenger:combat0.attack:s1,f:xs:XP:monastery-messenger:combat0.attack:s1	-	-	-	23c4009444b0	-	99fe923a9f28	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:monastery-messenger:combat0.block:s1,f:xs:XP:monastery-messenger:combat0.block:s1	-	-	-	23c4009444b0	-	99fe923a9f28	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-325b88e1-ec7f-4d22-887c-a7f18a868bb0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+325b88e1-ec7f-4d22-887c-a7f18a868bb0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 3260bede-d78d-41a6-8fe1-95ce14a2ba8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lava-blister:cast:s1,f:xs:XP:lava-blister:cast:s1	-	-	-	fc71ca68c5ac	-	6b795db96ab9	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 327458f1-d3c4-4e66-8abd-a6533bef63f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 327458f1-d3c4-4e66-8abd-a6533bef63f7	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 327d9679-0049-4401-8dab-e0fb362306bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-327d9679-0049-4401-8dab-e0fb362306bd	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+327d9679-0049-4401-8dab-e0fb362306bd	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 3282c7fb-b43d-4dd6-b5a3-cc7d93e01f19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3284010f-aeb2-493e-9252-3b953a192a94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3284010f-aeb2-493e-9252-3b953a192a94	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32aee76a-e738-4898-985a-801d1cce15ea	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-vision:combat0.block:s1,f:xs:XP:the-vision:combat0.block:s1	-	-	-	fb9d3088f0bf	-	358333722a84	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 32aee76a-e738-4898-985a-801d1cce15ea	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:the-vision:f0t0:s1,f:xs:XP:the-vision:f0t0:s1	-	-	-	fb9d3088f0bf	-	358333722a84	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 32af5f7b-a970-484a-9aff-226749551d32	cast	cast-resolve	agreed	-	FX	scen	2	0	Thousand Moons Smithy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-32af5f7b-a970-484a-9aff-226749551d32	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+32af5f7b-a970-484a-9aff-226749551d32	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Thousand Moons Smithy/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Thousand Moons Smithy/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Thousand Moons Smithy/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
