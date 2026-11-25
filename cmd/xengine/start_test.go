@@ -1239,6 +1239,8 @@ func TestStartFocusTargetIsPlaced(t *testing.T) {
 		{"Remember the Fallen", "cast"},           // Charm choices: creature/artifact card in your graveyard
 		{"Reborn Hope", "cast"},                   // Card.MultiColor+YouCtrl in the graveyard
 		{"Chandra, Acolyte of Flame", "f0/a2"},    // TgtZone$ Graveyard
+		{"Aerial Assault", "cast"},                // Creature.tapped: the target must be placed tapped
+		{"Asphyxiate", "cast"},                    // Creature.untapped: the target must be placed untapped
 	} {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
 	}
