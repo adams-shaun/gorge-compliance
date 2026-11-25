@@ -216,8 +216,7 @@
      }
     }
    ],
-   "xmage": "ExcessDamageTest#testExcessDamageDeathtouch",
-   "known_bug": "XP[excess-damage-ignores-deathtouch-source]: Flame Spill's ExcessDamage$ TargetedController counts excess over the Bears' toughness 2 (2 to the controller) although Pestilent Spirit gives the spell deathtouch, where any damage above 1 is excess (3 to the controller): p0 life 18, want 17. The excess-damage computation in engine/effects damage_deal.go (effDealDamage) does not take the source's deathtouch into account, CR 120.4a, 702.2, verified at gorge c3b957bf36."
+   "xmage": "ExcessDamageTest#testExcessDamageDeathtouch"
   },
   {
    "name": "test-excess-damage-indestructible",
