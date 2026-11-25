@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 132859dd-de66-45c6-8af4-ab5e202a17b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132859dd-de66-45c6-8af4-ab5e202a17b0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 132c8a62-00bc-4b89-b775-099d8909f200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-132ca99a-a3c7-4ed6-b4d0-0edcd7140ca2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+132ca99a-a3c7-4ed6-b4d0-0edcd7140ca2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 132de6c2-4ca2-41da-9c78-caa59838b641	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunstar-lightsmith:cast:s1,f:xs:XP:sunstar-lightsmith:cast:s1	-	-	-	23c4009444b0	-	f4d71bc11d42	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 132de6c2-4ca2-41da-9c78-caa59838b641	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:sunstar-lightsmith:f0t0:s1,f:xs:XP:sunstar-lightsmith:f0t0:s1	-	-	-	23c4009444b0	-	f4d71bc11d42	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 133109c3-a2ca-4231-b3b1-baa700800b07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primordial-ooze:f0t0:s1,f:xs:XP:primordial-ooze:f0t0:s1	-	-	-	3aa6ded33acb	-	efdfaba241bd	-	-	2026-11-25	xproof
@@ -204,7 +204,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13f9a845-d0e9-4790-99e0-b857204ad1da	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:thought-harvester:f0t0:s1,f:xs:XP:thought-harvester:f0t0:s1	-	-	-	fb9d3088f0bf	-	7f8478cee673	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 13fb5413-0057-4022-84da-2c90ce065ed1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13fb5413-0057-4022-84da-2c90ce065ed1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
-13fbd525-c9ee-4bd6-b269-94fb264024b6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gohn, Town of Ruin/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+13fbd525-c9ee-4bd6-b269-94fb264024b6	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:gohn-town-of-ruin:f0a0:s1,f:xs:XP:gohn-town-of-ruin:f0a0:s1	-	-	-	c2272f704fde	-	a77bed13685c	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 13fbd525-c9ee-4bd6-b269-94fb264024b6	land	land	agreed	-	FX	start	2	0	x:xs:XP:gohn-town-of-ruin:land:s1,f:xs:XP:gohn-town-of-ruin:land:s1	-	-	-	23c4009444b0	-	a77bed13685c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13fd7ca6-c278-409f-a9c4-57f16051ffce	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:starling-aerial-ally:f0t0:s2,f:xs:XP:starling-aerial-ally:f0t0:s2	-	-	-	267e485f6204	-	e1bcd026b2d7	-	-	2026-11-24	xproof
 13fd7ca6-c278-409f-a9c4-57f16051ffce	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:starling-aerial-ally:combat0.attack:s1,f:xs:XP:starling-aerial-ally:combat0.attack:s1	-	-	-	23c4009444b0	-	e1bcd026b2d7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

@@ -55,7 +55,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Postmortem Professor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:postmortem-professor:combat0.attack:s1,f:xs:XP:postmortem-professor:combat0.attack:s1	-	-	-	23c4009444b0	-	1268324c7f62	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	static#0.0	static#0.0	agreed	-	X	scen	1	0	Postmortem Professor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-085bc7be-bd44-40af-8e8f-a1a8006fe22c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+085bc7be-bd44-40af-8e8f-a1a8006fe22c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 0863c4bc-1e3e-4ff9-8877-88d4021c85e5	cast	cast-resolve	agreed	-	FX	scen	2	0	Thawbringer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0863c4bc-1e3e-4ff9-8877-88d4021c85e5	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0863c4bc-1e3e-4ff9-8877-88d4021c85e5	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Thawbringer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -164,8 +164,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 08d1a5d1-141d-48e3-ac22-c2529191cb13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reya-dawnbringer:f0t0:s1,f:xs:XP:reya-dawnbringer:f0t0:s1	-	-	-	3aa6ded33acb	-	aa1900f76bfb	-	-	2026-11-25	xproof
 08d1a5d1-141d-48e3-ac22-c2529191cb13	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:reya-dawnbringer:f0t0:s1,f:xs:XP:reya-dawnbringer:f0t0:s1	-	-	-	3aa6ded33acb	-	aa1900f76bfb	-	-	2026-11-25	xproof
 08d27af8-7178-4694-8621-fabac54c8f0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-08d80efc-9542-4ba2-824c-c8615d8d07f2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Undercity Sewers/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-08d80efc-9542-4ba2-824c-c8615d8d07f2	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Undercity Sewers/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+08d80efc-9542-4ba2-824c-c8615d8d07f2	f0/a0	Mana	agreed	-	X	start	2	0	x:xs:XP:undercity-sewers:f0a0:s1	-	-	-	c2272f704fde	-	12b6926d23db	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+08d80efc-9542-4ba2-824c-c8615d8d07f2	f0/a1	Mana	agreed	-	X	start	2	0	x:xs:XP:undercity-sewers:f0a1:s1	-	-	-	c2272f704fde	-	12b6926d23db	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 08d80efc-9542-4ba2-824c-c8615d8d07f2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:undercity-sewers:f0t0:s1,f:xs:XP:undercity-sewers:f0t0:s1	-	-	-	8c0bd19283bb	-	12b6926d23db	-	-	2026-11-24	xproof
 08d80efc-9542-4ba2-824c-c8615d8d07f2	land	land	agreed	-	FX	start	4	0	x:xs:XP:undercity-sewers:f0t0:s1,f:xs:XP:undercity-sewers:f0t0:s1	-	-	-	8c0bd19283bb	-	12b6926d23db	-	-	2026-11-24	xproof
 08dcda8e-704d-444e-a7ca-34586a7f42a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wreck-hunter:f0t0:s1,f:xs:XP:wreck-hunter:f0t0:s1	-	-	-	8c0bd19283bb	-	7c31372ebeee	-	-	2026-11-24	xproof

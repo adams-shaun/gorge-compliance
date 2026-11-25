@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e49ec18-f979-4168-b7df-7728f3fe442e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 0e4d2fbc-1b34-4501-9022-8ea800cb2d24	cast	cast	agreed	-	F	start	2	0	f:xs:XP:talon-of-pain:cast:s1	-	-	-	25696bf19d5b	-	d5a37abf2d96	-	-	2026-11-24	xproof
 0e4d2fbc-1b34-4501-9022-8ea800cb2d24	f0/a0	DealDamage	agreed	-	F	start	2	0	f:xs:XP:talon-of-pain:cast:s1	-	-	-	25696bf19d5b	-	d5a37abf2d96	-	-	2026-11-24	xproof
-0e4d2fbc-1b34-4501-9022-8ea800cb2d24	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+0e4d2fbc-1b34-4501-9022-8ea800cb2d24	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 0e564f52-94fb-4c44-926f-0eebedc7d4c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cached-defenses:cast:s1,f:xs:XP:cached-defenses:cast:s1	-	-	-	d864b561c9cb	-	36dd31abef04	-	-	2026-11-24	xproof
 0e5a5cee-d068-42cf-bf58-8e1360720be0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fireslinger:cast:s1,f:xs:XP:fireslinger:cast:s1	-	-	-	8c0bd19283bb	-	91f685ad30e3	-	-	2026-11-24	xproof
 0e5a5cee-d068-42cf-bf58-8e1360720be0	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:fireslinger:f0a0:s1,f:xs:XP:fireslinger:f0a0:s1	-	-	-	8c0bd19283bb	-	91f685ad30e3	-	-	2026-11-24	xproof
@@ -192,6 +192,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ef74c49-0825-4201-b23b-dc6c6bbadacb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ef74c49-0825-4201-b23b-dc6c6bbadacb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ef760f4-bbec-4735-8d60-fc24d973452a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ef760f4-bbec-4735-8d60-fc24d973452a	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+0ef760f4-bbec-4735-8d60-fc24d973452a	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 0ef80a38-f464-4d1f-9e81-d4087d6ecc9b	cast	cast-resolve	agreed	-	FX	scen	2	0	Violent Urge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0efe1357-bfbb-42c0-9cc9-6a919d686c66	cast	cast-resolve	agreed	-	FX	scen	2	0	Go Nuts!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

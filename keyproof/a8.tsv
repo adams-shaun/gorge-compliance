@@ -21,7 +21,7 @@ a823e880-3d5f-4186-a7da-e710a7db583c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a825bdea-3ea2-46b2-93b9-21586643aab0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:intrepid-stablemaster:cast:s1,f:xs:XP:intrepid-stablemaster:cast:s1	-	-	-	23b491658465	-	7475b45ef2de	-	-	2026-11-25	xproof
 a825bdea-3ea2-46b2-93b9-21586643aab0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:intrepid-stablemaster:combat0.attack:s1,f:xs:XP:intrepid-stablemaster:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7475b45ef2de	-	-	2026-11-25	xproof
 a825bdea-3ea2-46b2-93b9-21586643aab0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:intrepid-stablemaster:combat0.block:s1,f:xs:XP:intrepid-stablemaster:combat0.block:s1	-	-	-	3aa6ded33acb	-	7475b45ef2de	-	-	2026-11-25	xproof
-a825bdea-3ea2-46b2-93b9-21586643aab0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Intrepid Stablemaster/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a825bdea-3ea2-46b2-93b9-21586643aab0	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:intrepid-stablemaster:f0a0:s1,f:xs:XP:intrepid-stablemaster:f0a0:s1	-	-	-	c2272f704fde	-	7475b45ef2de	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 a825bdea-3ea2-46b2-93b9-21586643aab0	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Intrepid Stablemaster/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a82842b8-cc2e-44fa-b869-7bccc16ca74f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tervigon:f0t1:s1,f:xs:XP:tervigon:f0t1:s1	-	-	-	23c4009444b0	-	e95b9942c849	-	-	2026-11-25	xproof
 a82842b8-cc2e-44fa-b869-7bccc16ca74f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ a8ba7a21-b2fe-42fd-87dd-6611c3105096	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a8bac5a8-5a60-4f7a-a4d6-cb922da92472	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drogskol-cavalry:cast:s1,f:xs:XP:drogskol-cavalry:cast:s1	-	-	-	d864b561c9cb	-	b959fa36b43f	-	-	2026-11-24	xproof
 a8bac5a8-5a60-4f7a-a4d6-cb922da92472	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:drogskol-cavalry:f0a0:s1,f:xs:XP:drogskol-cavalry:f0a0:s1	-	-	-	d864b561c9cb	-	b959fa36b43f	-	-	2026-11-24	xproof
 a8bac5a8-5a60-4f7a-a4d6-cb922da92472	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:drogskol-cavalry:f0a0:s1,f:xs:XP:drogskol-cavalry:f0a0:s1	-	-	-	d864b561c9cb	-	b959fa36b43f	-	-	2026-11-24	xproof
-a8bcc930-3efe-4595-b164-f5985e1dc289	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-a8bcc930-3efe-4595-b164-f5985e1dc289	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+a8bcc930-3efe-4595-b164-f5985e1dc289	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:federation-outpost:f0a0:s1,f:xs:XP:federation-outpost:f0a0:s1	-	-	-	c2272f704fde	-	0a080a1c6ae8	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+a8bcc930-3efe-4595-b164-f5985e1dc289	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 a8bcc930-3efe-4595-b164-f5985e1dc289	land	land	agreed	-	FX	start	2	0	x:xs:XP:federation-outpost:f0t0:s1,f:xs:XP:federation-outpost:f0t0:s1	-	-	-	25696bf19d5b	-	0a080a1c6ae8	-	-	2026-11-24	xproof
 a8bf79d2-29fd-4d2f-ac07-2e61d3886bc0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:infernal-tribute:cast:s1,f:xs:XP:infernal-tribute:cast:s1	-	-	-	ea3140b6974b	-	275dd8737dc2	-	-	2026-11-24	xproof
 a8bf79d2-29fd-4d2f-ac07-2e61d3886bc0	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
@@ -204,4 +204,4 @@ a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	combat#0.block	combat.block	agreed	-	FX	sta
 a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:spectral-sailor:f0a0:s1,f:xs:XP:spectral-sailor:f0a0:s1	-	-	-	23b491658465	-	ed8fa1598289	-	-	2026-11-24	xproof
 a8fe6204-9f55-45e5-99b3-43f2761ce8a3	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 a8ffbf6d-44e9-44e4-846c-4f894078130e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a8ffbf6d-44e9-44e4-846c-4f894078130e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+a8ffbf6d-44e9-44e4-846c-4f894078130e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
