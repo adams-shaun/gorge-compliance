@@ -40,7 +40,20 @@ func offeredKeys(offers []rules.OracleSnapOffered) string {
 	return strings.Join(parts, "\n")
 }
 
+// reminderText is a parenthesized reminder: Forge and XMage spell a Station ability
+// "station (tap another creature you control: ...)", reminder and all.
+var reminderText = regexp.MustCompile(`\([^)]*\)`)
+
+// anyColorMana is the lead of every spelling of "add mana of any color": gorge's
+// "Add any color", XMage's and Forge's "Add X mana of any one color, where X is ...",
+// "Add one mana of any color". The colour class is the identity; the amount's
+// spelling and the trailing "where X is ..." clause are not.
+var anyColorMana = regexp.MustCompile(`^add(?:(?:x|one|two|three|\d+)?manaof)?any(?:one)?color`)
+
 func offeredLabel(source, label string) string {
+	// A parenthesized reminder is not ability identity, and its text may hold
+	// the ":" the cost split below looks for.
+	label = reminderText.ReplaceAllString(label, "")
 	// XMage includes the activation cost before the rule text; gorge uses
 	// "<source name>: <description>" for non-mana abilities, and the effect
 	// alone ("Add R") for mana. Neither display prefix is ability identity.
@@ -51,12 +64,21 @@ func offeredLabel(source, label string) string {
 	for _, prefix := range []string{"cast ", "activate ", "play "} {
 		label = strings.TrimPrefix(label, prefix)
 	}
-	return strings.Map(func(r rune) rune {
+	// Gorge labels a Station ability "Station <card name>"; Forge and XMage give
+	// "station" plus the reminder, stripped above. The keyword is the identity.
+	if label == "station" || strings.HasPrefix(label, "station ") {
+		return "station"
+	}
+	label = strings.Map(func(r rune) rune {
 		if r == '{' || r == '}' || unicode.IsSpace(r) {
 			return -1
 		}
 		return r
 	}, label)
+	if anyColorMana.MatchString(label) {
+		return "addanycolor"
+	}
+	return label
 }
 
 // tokenSource is a token's name in a stack field. The engines name tokens differently,
