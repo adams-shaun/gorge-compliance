@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53a0923f-7da8-4e31-a231-9b275916e2a2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oath-of-chandra:f0t0:s1,f:xs:XP:oath-of-chandra:f0t0:s1	-	-	-	3aa6ded33acb	-	990fde6f64e7	-	-	2026-11-25	xproof
 53a0923f-7da8-4e31-a231-9b275916e2a2	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:oath-of-chandra:f0t1:s1,f:xs:XP:oath-of-chandra:f0t1:s1	-	-	-	fb9d3088f0bf	-	990fde6f64e7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 53a17d4f-cdbc-4669-a30e-5d5a334cc3c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53a17d4f-cdbc-4669-a30e-5d5a334cc3c0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+53a17d4f-cdbc-4669-a30e-5d5a334cc3c0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 53a1faa1-ca67-4027-bee8-0f7c4584d62b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53a1faa1-ca67-4027-bee8-0f7c4584d62b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53a40369-0e62-4ad2-a6bd-65a5ff0da65e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:march-of-the-returned:cast:s1,f:xs:XP:march-of-the-returned:cast:s1	-	-	-	d864b561c9cb	-	73046b5f9bdc	-	-	2026-11-24	xproof
@@ -182,7 +182,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53cc4b93-538d-4193-8bbb-5b73d3ce9d79	f0/t0	Phase/Cumulative upkeep	agreed	-	FX	start	2	0	x:xs:XP:elephant-grass:f0t0:s1,f:xs:XP:elephant-grass:f0t0:s1	-	-	-	cb99a158debc	-	0b3a5c33e6ef	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 53cd9d9f-c1a7-404e-9934-4542415e3431	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53d3ef8f-8e0f-4119-8cdc-a0bf076b4e91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:speedball-new-warrior:cast:s1,f:xs:XP:speedball-new-warrior:cast:s1	-	-	-	cb99a158debc	-	87ee6e1864ca	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-53d3ef8f-8e0f-4119-8cdc-a0bf076b4e91	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Speedball, New Warrior/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+53d3ef8f-8e0f-4119-8cdc-a0bf076b4e91	f0/t0	SpellCast	agreed	-	F	start	2	0	f:xs:XP:speedball-new-warrior:f0t0:s1	-	-	-	41149fc165a7	-	87ee6e1864ca	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 53d5d961-d6a3-49b1-b335-2c2b49972008	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:whiptongue-hydra:f0t0:s1,f:xs:XP:whiptongue-hydra:f0t0:s1	-	-	-	8c0bd19283bb	-	fb71dee9f44b	-	-	2026-11-24	xproof
 53d5d961-d6a3-49b1-b335-2c2b49972008	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:whiptongue-hydra:f0t0:s1,f:xs:XP:whiptongue-hydra:f0t0:s1	-	-	-	8c0bd19283bb	-	fb71dee9f44b	-	-	2026-11-24	xproof
 53d6113d-acdb-4754-9641-f7991a96c7b9	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-hollow:f0a0:s2,f:xs:XP:yavimaya-hollow:f0a0:s2	-	-	-	5f2128bf97e4	-	8a2428b84e50	-	-	2026-11-24	xproof

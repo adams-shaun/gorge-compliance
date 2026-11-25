@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-5602c14d-cc22-47d7-a1b0-6491749f00dd	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+5602c14d-cc22-47d7-a1b0-6491749f00dd	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 56035e66-e730-436d-8de2-4ded7fd1b51e	cast	cast-resolve	agreed	-	FX	scen	2	0	Lashwhip Predator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 56035e66-e730-436d-8de2-4ded7fd1b51e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lashwhip-predator:combat0.attack:s1,f:xs:XP:lashwhip-predator:combat0.attack:s1	-	-	-	23c4009444b0	-	36fd097b00fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 56035e66-e730-436d-8de2-4ded7fd1b51e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lashwhip-predator:combat0.block:s1,f:xs:XP:lashwhip-predator:combat0.block:s1	-	-	-	23c4009444b0	-	36fd097b00fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56a8554c-d427-44ca-a01d-9e12c89acd1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56a8554c-d427-44ca-a01d-9e12c89acd1e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56aeaee8-e014-485e-b7ad-e26ade663bcf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:contaminated-bond:cast:s1,f:xs:XP:contaminated-bond:cast:s1	-	-	-	cb99a158debc	-	cba154361073	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-56aeaee8-e014-485e-b7ad-e26ade663bcf	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-56aeaee8-e014-485e-b7ad-e26ade663bcf	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+56aeaee8-e014-485e-b7ad-e26ade663bcf	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:filter	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+56aeaee8-e014-485e-b7ad-e26ade663bcf	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks:filter	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 56aec5bd-a8e8-403f-b339-0fc817426428	cast	cast	agreed	-	F	start	1	0	f:xs:XP:clash-of-wills:cast:s2	-	-	-	9087eefec3ee	-	3650c51c6054	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 56afad48-c5e5-4fbe-8889-15bcab234c31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56afad48-c5e5-4fbe-8889-15bcab234c31	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:careless-celebrant:f0t0:s1,f:xs:XP:careless-celebrant:f0t0:s1	-	-	-	ae86f6029288	-	addca8117fe5	-	-	2026-11-24	xproof
