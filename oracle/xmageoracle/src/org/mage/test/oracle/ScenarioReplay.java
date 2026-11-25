@@ -5630,6 +5630,27 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return true;
     }
 
+    /** Whether every target object of the ability is a card in a graveyard
+     * (Reclaim, Regrowth): none of them can name a spell on the stack, so a
+     * ref whose name an earlier step cast is that spell's card in the
+     * graveyard (countered or fizzled), never a stack object. False for a
+     * null or targetless ability. */
+    static boolean targetsOnlyGraveyardCards(Ability ability) {
+        if (ability == null) {
+            return false;
+        }
+        List<mage.target.Target> objects = ability.getAllSelectedTargets();
+        if (objects.isEmpty()) {
+            return false;
+        }
+        for (mage.target.Target t : objects) {
+            if (!(t instanceof TargetCard) || ((TargetCard) t).getZone() != Zone.GRAVEYARD) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     /** Whether an ability has a divided-amount target (TargetAmount). */
     static boolean targetsDivided(Ability ability) {
         if (ability == null) {
@@ -8615,12 +8636,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     cast.add(cardName);
                     return;
                 } else if (tg.size() == 1 && cast.contains(castSpelling(refName(tg.get(0))))) {
-                    // Targeting a spell cast by an earlier step: wait for it
-                    // on the stack. cast holds cast-command names and the
-                    // target is a scenario ref; the setup alias names the
-                    // card in hand, not the spell, so target by name.
+                    // Targeting a spell cast by an earlier step. cast holds
+                    // cast-command names and the target is a scenario ref;
+                    // the setup alias names the card in hand, not the spell,
+                    // so a stack target is named, not aliased.
                     String spell = castSpelling(refName(tg.get(0)));
-                    castSpell(turn, phase, p, castObject, spell, spell);
+                    if (targetsOnlyGraveyardCards(castAbility)) {
+                        // A spell that can only target a graveyard card
+                        // (Reclaim) names the card of a spell that has left
+                        // the stack (countered, say), which cast cannot see
+                        // (dropLastCast forgets only the stack's top). The
+                        // card is in the graveyard once the spell is gone, so
+                        // hold the cast until then: at the priority before
+                        // that XMage has no legal target and would fail the
+                        // command ("Can't find ability to activate").
+                        castSpell(turn, phase, p, castObject, targetName(tg.get(0)), spell,
+                                StackClause.WHILE_NOT_ON_STACK);
+                    } else {
+                        // Wait for it on the stack.
+                        castSpell(turn, phase, p, castObject, spell, spell);
+                    }
                 } else if (tg.size() == 1 && loneTargetNeedsQueue(castAbility)) {
                     // One card or permanent target (a lone player ref and a
                     // spell on the stack took their own routes above) for a
