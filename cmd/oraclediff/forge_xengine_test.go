@@ -128,9 +128,10 @@ func TestForgeExportDropsNamedManaAbilityChoice(t *testing.T) {
 		t.Fatalf("named mana-ability wheel exported: %+v", got)
 	}
 	// The union wheel flattens an explicit two-colour ability into one option
-	// per colour; its pick still names the ability at ability_index.
-	if got := build(item(activate("p0:Hidden Lair", 1)), wheel("Add B", 2)); len(got) != 0 {
-		t.Fatalf("flattened combo mana-ability wheel exported: %+v", got)
+	// per colour, so its pick is also the colour ask Forge still poses: it
+	// stays (TestForgeKeepsComboColourPick).
+	if got := build(item(activate("p0:Hidden Lair", 1)), wheel("Add B", 2)); len(got) != 1 {
+		t.Fatalf("flattened combo mana-ability colour pick dropped: %+v", got)
 	}
 	// A cast's payment window is a real choice, and the payment array covers it.
 	cast := oraclegen.Step{Op: "cast", Seat: 0, Card: "p0:Grizzly Bears"}
@@ -141,6 +142,44 @@ func TestForgeExportDropsNamedManaAbilityChoice(t *testing.T) {
 	// not the wheel, so it must stay.
 	if got := build(item(activate("p0:Turtle Lair", 1)), wheel("Add W", 5)); len(got) != 1 {
 		t.Fatalf("any-colour colour pick dropped: %+v", got)
+	}
+}
+
+// TestForgeKeepsComboColourPick: a multi-ability source's explicit "Combo U R"
+// ability is flattened into one wheel option per colour, so gorge's one
+// decision ("Add R") is the wheel pick and the colour pick at once. Forge's
+// step line names the ability, so it poses no wheel but still asks the colour:
+// the decision stays to answer it. A non-Combo wheel label is still dropped.
+func TestForgeKeepsComboColourPick(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	build := func(card string, k int, pick string) []rules.OracleDecision {
+		it := oraclegen.Item{ID: "xe:combo", Template: lower.Template, Scenario: oraclegen.Scenario{Steps: []oraclegen.Step{
+			{Op: "activate", Seat: 0, Card: card, AbilityIndex: &k}}}}
+		d := rules.OracleDecision{
+			Step: 0, Seat: 0, Kind: "choose_n", Options: 2, Min: 1, Max: 1,
+			Picks: []string{pick}, PickIdx: []int{0}, PickRefs: []string{pick},
+			PickKinds: []string{"mana"}, GorgeKind: "choose", First: pick, Via: "answer",
+		}
+		return forgeBuildRequest(reg, it, rules.OracleResult{}, []rules.OracleDecision{d}, true).GorgeDecisions
+	}
+	got := build("p0:Shivan Reef", 1, "Add R")
+	if len(got) != 1 || len(got[0].Picks) != 1 || got[0].Picks[0] != "Add R" {
+		t.Fatalf("Shivan Reef colour pick not kept: %+v", got)
+	}
+	if got := build("p0:Overgrown Zealot", 0, "Add any color"); len(got) != 0 {
+		t.Fatalf("Overgrown Zealot wheel exported: %+v", got)
+	}
+	// A filter land's Combo is Amount$ 2: its per-colour label ("Add GG") is
+	// not one colour symbol, the driver cannot read it as the colour, so it
+	// stays dropped as before.
+	for _, c := range []struct {
+		card string
+		k    int
+		pick string
+	}{{"p0:Wooded Bastion", 1, "Pay G/W: Add GG"}, {"p0:Mystic Gate", 1, "Pay W/U: Add WW"}} {
+		if got := build(c.card, c.k, c.pick); len(got) != 0 {
+			t.Fatalf("%s multi-pip label exported: %+v", c.card, got)
+		}
 	}
 }
 
