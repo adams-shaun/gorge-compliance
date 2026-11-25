@@ -12,8 +12,10 @@
 # to TAKE the first kind pick, so the amount ask counted only the one remaining
 # LOYALTY and returned 1; P1P1 was the lone kind and removed its one. Forge
 # removed one loyalty and one +1/+1, Ajani stayed at 1 loyalty, and every pick
-# was consumed so no strict miss fired. A mixed-kind target is the only shape
-# that diverges: a lone kind never reaches takeCounterKind.
+# was consumed so no strict miss fired. At this pin chooseCounterType asks
+# takeCounterKind before the lone-option shortcut, so a lone kind reaches it too
+# (the Done sibling consumes an early stop there). A mixed-kind target is still
+# the shape whose amount run spans two kinds, so this request pins that count.
 #
 # This replays the exported xproof request xs:XP:mabel-bitter-recluse:cast:s1
 # (the find 11250151 b00 shape) at FORGE_ORACLE_REF and requires p1.graveyard
