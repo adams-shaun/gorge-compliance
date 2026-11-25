@@ -7750,14 +7750,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * active, which only hands priority on, is virtual: its checkpoint rides
      * that seat's own queue and consumes nothing. XMage then drains the rest
      * of the queue at that one priority, so a later action of the same seat in
-     * the same step instance fires before the active seat has resolved the
-     * stack's top object and passed again (Helix Pinnacle, Saproling Burst:
-     * p0 activates twice, passes, p1 resolves and passes, p0 activates a
-     * third time with the first ability still on the stack, and the
-     * checkpoints of p1's two passes ran after p0's third activation). The
-     * opponent's pass that follows is what resolves the object, so the pass
-     * is real exactly when the opponent passes next and the seat has an
-     * action still queued in this step instance. */
+     * the same step instance fires before the other seat has had its say
+     * (Helix Pinnacle, Saproling Burst: p0 activates twice, passes, p1
+     * resolves and passes, p0 activates a third time with the first ability
+     * still on the stack, and the checkpoints of p1's two passes ran after
+     * p0's third activation; No More Lies: p1 casts Reach Through Mists and
+     * passes, p0 answers with a counterspell, and p1's later Consider fired
+     * before p0's response). The pass is real exactly when the step that
+     * follows belongs to another seat -- its pass resolves the top object, or
+     * its cast, activation or land play answers the pass (CR 117.3c/117.3d:
+     * after the seat passes, the other seat holds priority and may act) --
+     * and the seat has an action still queued in this step instance. */
     static boolean passHandsOffBeforeLaterAction(JsonArray steps, int index, int activeSeat, int seats) {
         if (!isPassRun(steps, index)) {
             return false;
@@ -7768,7 +7771,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 || passEntersNewStep(steps, index, seats)) {
             return false;
         }
-        if (!isOp(steps, index + 1, "pass") || seatOfStep(steps, index + 1) == seat) {
+        if (index + 1 >= steps.size() || seatOfStep(steps, index + 1) == seat) {
             return false;
         }
         for (int j = index + 1; j < steps.size(); j++) {

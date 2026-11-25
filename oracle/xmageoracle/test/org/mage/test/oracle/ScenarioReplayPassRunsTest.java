@@ -290,6 +290,89 @@ public final class ScenarioReplayPassRunsTest {
         }
     }
 
+    /** No More Lies over Reach Through Mists, replayed end to end: every
+     * recorded step is checkpointed exactly once, in step order, and p1's
+     * later Consider (step 9) is checkpointed after p0's answer was made and
+     * passed (steps 4-7), not at the priority p1's step-3 pass handed on. */
+    private static void replayRespondingOpponentKeepsStepOrder(Path dir) throws Exception {
+        String line = new String(Files.readAllBytes(
+                dir.resolve("responding-opponent-handoff-pass-no-more-lies.jsonl")), StandardCharsets.UTF_8).trim();
+        JsonObject res = replay(JsonParser.parseString(line).getAsJsonObject());
+        noHarness(res, "responding opponent handoff pass");
+        List<String> order = new ArrayList<>();
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        for (int i = 0; i < snaps.size(); i++) {
+            String cp = snaps.get(i).getAsJsonObject().get("checkpoint").getAsString();
+            if (cp.equals("setup")) {
+                continue;
+            }
+            order.add(cp);
+        }
+        List<String> want = new ArrayList<>();
+        for (int i = 0; i < 26; i++) {
+            want.add("step " + i + " (" + Arrays.asList("pass", "activate", "cast", "pass", "activate",
+                    "activate", "cast", "pass", "activate", "cast", "pass", "pass", "pass", "pass", "pass",
+                    "pass", "pass", "pass", "pass", "pass", "pass", "pass", "pass", "pass", "pass", "pass")
+                    .get(i) + ")");
+        }
+        equal(want, order, "one snapshot per step, in step order");
+    }
+
+    /** No More Lies: p1 taps a land, casts Reach Through Mists and passes
+     * (the stack keeps the spell), p0 answers by tapping mana and casting the
+     * counterspell, and only then p1 acts again in the same main phase (its
+     * later Consider). p1's pass must really pass: the opponent's next step
+     * is a response, not a pass, but it is still the seat that takes priority
+     * after the pass (CR 117.3d), and a virtual pass would let XMage drain
+     * p1's queue at one priority, firing the Consider before p0's answer. */
+    private static void respondingOpponentMakesHandoffPassReal() {
+        JsonObject run = item("{steps:[{op:'pass',seat:0},{op:'activate',seat:1,card:'p1:Island'},"
+                + "{op:'cast',seat:1,card:'p1:Reach Through Mists'},{op:'pass',seat:1},"
+                + "{op:'activate',seat:0,card:'p0:Island'},{op:'cast',seat:0,card:'p0:No More Lies'},"
+                + "{op:'pass',seat:0},{op:'cast',seat:1,card:'p1:Consider'}],"
+                + "xmage_pos:[null,null,null,{turn:1,step:'main1',active:0},null,null,null,null]}");
+        JsonArray ts = ScenarioReplay.steps(run);
+        List<Boolean> real = new ArrayList<>();
+        for (int i = 0; i < ts.size(); i++) {
+            real.add(ScenarioReplay.passHandsOffBeforeLaterAction(ts, i, 0, 2));
+        }
+        equal(Arrays.asList(false, false, false, true, false, false, false, false), real,
+                "only p1's pass before p0's response and p1's later cast is a real pass");
+
+        // The same shape with nothing later of the passing seat's in the step:
+        // the virtual pass is still enough, a response alone does not make it real.
+        JsonObject last = item("{steps:[{op:'pass',seat:0},{op:'activate',seat:1,card:'p1:Island'},"
+                + "{op:'cast',seat:1,card:'p1:Reach Through Mists'},{op:'pass',seat:1},"
+                + "{op:'activate',seat:0,card:'p0:Island'},{op:'cast',seat:0,card:'p0:No More Lies'}],"
+                + "xmage_pos:[null,null,null,{turn:1,step:'main1',active:0},null,null]}");
+        JsonArray lastSteps = ScenarioReplay.steps(last);
+        check(!ScenarioReplay.passHandsOffBeforeLaterAction(lastSteps, 3, 0, 2),
+                "a pass with no later action of its seat stays virtual before a response");
+
+        // The exclusions keep holding before a responding opponent: a pass
+        // that resolves the top object is its own real pass by another rule,
+        // a pass that moved the step hands priority inside the new step, and
+        // the seat acting again right after its own pass is not a handoff.
+        JsonObject res = item("{steps:[{op:'pass',seat:0},{op:'activate',seat:1,card:'p1:Island'},"
+                + "{op:'cast',seat:1,card:'p1:Reach Through Mists'},{op:'pass',seat:1},"
+                + "{op:'activate',seat:0,card:'p0:Island'},{op:'cast',seat:1,card:'p1:Consider'}],"
+                + "xmage_pos:[null,null,null,{turn:1,step:'main1',active:0,resolves:true},null,null]}");
+        check(!ScenarioReplay.passHandsOffBeforeLaterAction(ScenarioReplay.steps(res), 3, 0, 2),
+                "a resolving pass is real by CMD_PASS_OWN_PRIORITY, not this rule");
+        JsonObject moved = item("{steps:[{op:'pass',seat:0},{op:'activate',seat:1,card:'p1:Island'},"
+                + "{op:'cast',seat:1,card:'p1:Reach Through Mists'},{op:'pass',seat:1},"
+                + "{op:'activate',seat:0,card:'p0:Island'},{op:'cast',seat:1,card:'p1:Consider'}],"
+                + "xmage_pos:[null,null,null,{turn:2,step:'main1',active:0,moved:true},null,null]}");
+        check(!ScenarioReplay.passHandsOffBeforeLaterAction(ScenarioReplay.steps(moved), 3, 0, 2),
+                "a pass that moved the step has no later action in its instance");
+        JsonObject own = item("{steps:[{op:'pass',seat:0},{op:'activate',seat:1,card:'p1:Island'},"
+                + "{op:'cast',seat:1,card:'p1:Reach Through Mists'},{op:'pass',seat:1},"
+                + "{op:'cast',seat:1,card:'p1:Consider'}],"
+                + "xmage_pos:[null,null,null,{turn:1,step:'main1',active:0},null]}");
+        check(!ScenarioReplay.passHandsOffBeforeLaterAction(ScenarioReplay.steps(own), 3, 0, 2),
+                "the seat's own action right after its pass is no handoff to make real");
+    }
+
     /** Helix Pinnacle / Saproling Burst: the active seat 1's opponent (seat 0)
      * activates twice, passes, seat 1 resolves the top ability and passes
      * again (CR 117.3b), then seat 0 activates with the first ability still
@@ -454,12 +537,14 @@ public final class ScenarioReplayPassRunsTest {
         splitAdditionalEndStepAdvancesOnClosingSeatPass();
         splitFirstStrikeClosesAtRoundEnd();
         roundSizeUsesResolvedSeats();
+        respondingOpponentMakesHandoffPassReal();
         declTiming();
         emptyStackPair();
         declarationStepEnd();
         if (args.length > 0) {
             replayPassPairSplitByOpponentManaAbility(Paths.get(args[0]));
             stackedOtherSeatActivationsKeepResolvingPassCheckpoint(Paths.get(args[0]));
+            replayRespondingOpponentKeepsStepOrder(Paths.get(args[0]));
         }
         System.out.println("ScenarioReplayPassRunsTest ok");
     }
