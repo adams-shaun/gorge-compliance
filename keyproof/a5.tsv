@@ -7,7 +7,7 @@ a503d302-6b12-4d82-9ba6-73efbcb1b1a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:per
 a50be01d-821f-4fdc-b12a-4a1a76432a21	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toils-of-night-and-day:cast:s1,f:xs:XP:toils-of-night-and-day:cast:s1	-	-	-	23c4009444b0	-	c5ca8a0fbe7b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a50c55a7-4e7e-40f6-b76c-1e32598dc9b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mask-of-riddles:cast:s1,f:xs:XP:mask-of-riddles:cast:s1	-	-	-	8a1b1a193ec0	-	454b5c0da4d5	-	-	2026-11-24	xproof
 a50c55a7-4e7e-40f6-b76c-1e32598dc9b6	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:mask-of-riddles:f0a0:s1,f:xs:XP:mask-of-riddles:f0a0:s1	-	-	-	3aa6ded33acb	-	454b5c0da4d5	-	-	2026-11-25	xproof
-a50c55a7-4e7e-40f6-b76c-1e32598dc9b6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+a50c55a7-4e7e-40f6-b76c-1e32598dc9b6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 a50db36c-948b-4132-a5e5-84aab1f42612	cast	cast	agreed	-	F	start	2	0	f:xs:XP:skyskipper-duo:cast:s1	-	-	-	23c4009444b0	-	4083d33c19ef	-	-	2026-11-25	xproof
 a50db36c-948b-4132-a5e5-84aab1f42612	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:skyskipper-duo:combat0.attack:s1,f:xs:XP:skyskipper-duo:combat0.attack:s1	-	-	-	23c4009444b0	-	4083d33c19ef	-	-	2026-11-25	xproof
 a50db36c-948b-4132-a5e5-84aab1f42612	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:skyskipper-duo:combat0.block:s1,f:xs:XP:skyskipper-duo:combat0.block:s1	-	-	-	23c4009444b0	-	4083d33c19ef	-	-	2026-11-25	xproof
@@ -100,8 +100,8 @@ a598e6ce-21ee-49c1-989e-ee864208262f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:
 a59a23f2-158f-4dea-8593-75fe7b31b726	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a59a23f2-158f-4dea-8593-75fe7b31b726	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a59b854c-0e04-4581-b9d3-1516263d7ace	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Borg Cube"	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-a59b854c-0e04-4581-b9d3-1516263d7ace	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Borg Cube"	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
-a59b854c-0e04-4581-b9d3-1516263d7ace	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+a59b854c-0e04-4581-b9d3-1516263d7ace	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Borg Cube"	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+a59b854c-0e04-4581-b9d3-1516263d7ace	f0/t1	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 a59f147b-3e03-4e82-aa34-48c220ea32e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rishadan-footpad:f0t0:s1,f:xs:XP:rishadan-footpad:f0t0:s1	-	-	-	5f2128bf97e4	-	001891f5814b	-	-	2026-11-24	xproof
 a59f147b-3e03-4e82-aa34-48c220ea32e6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rishadan-footpad:f0t0:s1,f:xs:XP:rishadan-footpad:f0t0:s1	-	-	-	5f2128bf97e4	-	001891f5814b	-	-	2026-11-24	xproof
 a59ff932-f758-476e-ba31-0623bd748231	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP
 a5c9b167-5824-4fc8-ba7a-ffa64363c029	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:contract-hero:f0t0:s1,f:xs:XP:contract-hero:f0t0:s1	-	-	-	8c0bd19283bb	-	9b49f2abaccd	-	-	2026-11-24	xproof
 a5c9b167-5824-4fc8-ba7a-ffa64363c029	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:contract-hero:f0t0:s1,f:xs:XP:contract-hero:f0t0:s1	-	-	-	8c0bd19283bb	-	9b49f2abaccd	-	-	2026-11-24	xproof
 a5c9b167-5824-4fc8-ba7a-ffa64363c029	f0/t1	Attacks	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	9b49f2abaccd	-	-	2026-11-24	xproof
-a5ca7bd9-0964-405f-adb9-7c27153595e6	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+a5ca7bd9-0964-405f-adb9-7c27153595e6	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 a5cbd257-c836-493e-bb1a-76242619dea2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a5ce3fb6-9c70-4433-a079-467c911bfd4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drowner-of-secrets:cast:s1,f:xs:XP:drowner-of-secrets:cast:s1	-	-	-	d864b561c9cb	-	9fc2e84d1a08	-	-	2026-11-24	xproof
 a5ce3fb6-9c70-4433-a079-467c911bfd4d	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:drowner-of-secrets:cast:s1,f:xs:XP:drowner-of-secrets:cast:s1	-	-	-	d864b561c9cb	-	9fc2e84d1a08	-	-	2026-11-24	xproof
@@ -176,5 +176,5 @@ a5f5e71e-83a7-468d-829a-6392b764c76e	cast	cast-resolve	agreed	-	FX	scen	2	0	Witn
 a5f5e71e-83a7-468d-829a-6392b764c76e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Witness Protection/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a5f7967e-d357-4ab6-96ac-77262864f280	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a5f7967e-d357-4ab6-96ac-77262864f280	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:celestial-kirin:f0t0:s1,f:xs:XP:celestial-kirin:f0t0:s1	-	-	-	23c4009444b0	-	9e1e58e9e2cf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-a5fdf1b2-da22-4fa6-810a-85c3f7587535	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	b6db453064e8	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	0fe8c90e54982c8b09ba42dbdda594de9e15ae30	2026-11-25	xproof
+a5fdf1b2-da22-4fa6-810a-85c3f7587535	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 a5fed574-6ac3-4318-b0a6-27082e07f3bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
