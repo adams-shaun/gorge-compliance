@@ -93,8 +93,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 228ee6b0-2012-4ef8-8aab-552feece801d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 228f0afa-146b-4564-a380-71595cdf1ef4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 228fbae1-423e-461d-b8c3-55786938a3cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-228fbae1-423e-461d-b8c3-55786938a3cb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-228fbae1-423e-461d-b8c3-55786938a3cb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+228fbae1-423e-461d-b8c3-55786938a3cb	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:thermo-alchemist:f0t0:s1,f:xs:XP:thermo-alchemist:f0t0:s1	-	-	-	fb9d3088f0bf	-	ff64875e26b1	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
+228fbae1-423e-461d-b8c3-55786938a3cb	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:thermo-alchemist:f0t0:s1,f:xs:XP:thermo-alchemist:f0t0:s1	-	-	-	fb9d3088f0bf	-	ff64875e26b1	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 228fe7f0-54ad-411b-bedb-65a1bc2a099b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22936eb4-8712-4ba7-94da-e124487acda8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zephyr-gull:cast:s1,f:xs:XP:zephyr-gull:cast:s1	-	-	-	8c0bd19283bb	-	b0bdbc4aeefa	-	-	2026-11-24	xproof
 2298eb28-425d-4e87-990b-6bc0ef9bcfda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22c3b484-0f96-4051-807c-fc0fcb7cd1a8	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Seven of Nine, Tertiary Adj	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 22c3b484-0f96-4051-807c-fc0fcb7cd1a8	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Seven of Nine, Tertiary Adj	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 22c49415-e8d2-4b4c-b021-57ee54670f86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-22c49415-e8d2-4b4c-b021-57ee54670f86	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+22c49415-e8d2-4b4c-b021-57ee54670f86	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 22c5187b-e3db-4221-a173-e3b83a581fca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stonehorn-chanter:cast:s1,f:xs:XP:stonehorn-chanter:cast:s1	-	-	-	d864b561c9cb	-	92280f76e084	-	-	2026-11-24	xproof
 22c5187b-e3db-4221-a173-e3b83a581fca	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:stonehorn-chanter:f0a0:s1,f:xs:XP:stonehorn-chanter:f0a0:s1	-	-	-	d864b561c9cb	-	92280f76e084	-	-	2026-11-24	xproof
 22c53662-51b9-4a8c-8ec7-e8b456a268b7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:glory-to-the-empire:cast:s1,f:xs:XP:glory-to-the-empire:cast:s1	-	-	-	8c0bd19283bb	-	31c3c6583e80	-	-	2026-11-24	xproof

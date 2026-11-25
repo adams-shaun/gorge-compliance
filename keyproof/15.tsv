@@ -4,7 +4,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15030c1d-7c0a-4273-a022-eb98d6c7a1ce	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loan-shark:f0t0:s1,f:xs:XP:loan-shark:f0t0:s1	-	-	-	3aa6ded33acb	-	d481f0d6aea9	-	-	2026-11-25	xproof
 15039c85-31e2-4a2b-82f8-2f8270ff9a00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:majestic-genesis:cast:s1,f:xs:XP:majestic-genesis:cast:s1	-	-	-	8c0bd19283bb	-	115ee656f76a	-	-	2026-11-24	xproof
 150ab025-5cc3-4468-a724-bbba8838445d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-150ab025-5cc3-4468-a724-bbba8838445d	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+150ab025-5cc3-4468-a724-bbba8838445d	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 150cefd2-061d-43b2-8470-c17be0144021	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 150dd67b-4de2-4fcd-b753-e4096de911a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 150dd67b-4de2-4fcd-b753-e4096de911a2	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:tocasia-s-onulet:f0a0:s1,f:xs:XP:tocasia-s-onulet:f0a0:s1	-	-	-	3aa6ded33acb	-	8a864f49f4c4	-	-	2026-11-25	xproof
@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15af3bd0-022b-472e-b21e-29b925b7692b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mortus-strider:cast:s1,f:xs:XP:mortus-strider:cast:s1	-	-	-	d864b561c9cb	-	bc24790bce48	-	-	2026-11-24	xproof
 15af3bd0-022b-472e-b21e-29b925b7692b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mortus-strider:f0t0:s1,f:xs:XP:mortus-strider:f0t0:s1	-	-	-	d864b561c9cb	-	bc24790bce48	-	-	2026-11-24	xproof
 15afdd88-05fc-4335-8a55-c6ee702f3bef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-15afdd88-05fc-4335-8a55-c6ee702f3bef	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+15afdd88-05fc-4335-8a55-c6ee702f3bef	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 15b618f0-281f-4745-8504-bd70e7b4a267	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15b86440-2040-47ae-ab4e-8445b3e24462	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15b86440-2040-47ae-ab4e-8445b3e24462	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15df3467-c67e-4ae2-9e6f-ffb6ad288a5a	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 15e0250e-a23b-499a-a8d2-24fc13084c28	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:steel-leaf-paladin:cast:s1,f:xs:XP:steel-leaf-paladin:cast:s1	-	-	-	fc71ca68c5ac	-	98b2a9bb7491	-	-	2026-11-24	xproof
 15e0250e-a23b-499a-a8d2-24fc13084c28	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:steel-leaf-paladin:cast:s1,f:xs:XP:steel-leaf-paladin:cast:s1	-	-	-	fc71ca68c5ac	-	98b2a9bb7491	-	-	2026-11-24	xproof
-15e4938d-1cd3-4670-9de5-2dc10abe4c19	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+15e4938d-1cd3-4670-9de5-2dc10abe4c19	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 15e5136e-ed15-49a8-b027-e09436673fb4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15e71226-feb0-4870-a3ea-d8604ca5b3dc	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 15e83068-6253-4c65-8679-7295f3dc2075	cast	cast	agreed	-	F	start	2	0	f:xs:XP:aether-charge:cast:s1	-	-	-	fc71ca68c5ac	-	bb241591740a	-	-	2026-11-24	xproof
