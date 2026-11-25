@@ -510,6 +510,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (StepMachine.peekCounterKind); other asks and the remove-any-counter cost still consume theirs. UnmappedAskTest's mixed-kinds
 # fixture (xs:XP:mabel-bitter-recluse:cast:s1) fails before it; scripts/forge-oracle-test-counter-any-mixed-kinds.sh runs it.
 # Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+# a6227e70a3 = 7d506c5192 plus cast_mode "evoked". StepMachine.spellForMode had no case for it, so the driver took Emptiness's
+# hard-cost spell and Forge refused the {W/B}{W/B} evoke cast (xproof xs:XP:emptiness:f0t0:s1, Catharsis, Emptiness; CR 702.74a);
+# it now picks the AlternativeCost.Evoke spell. scripts/forge-oracle-test-evoked-cast-mode.sh fails before it. Fork branch
+# fix/xp-driver-evoked-cast-mode.
 # afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
 # cf742d0aefc = afe18881c6e plus a forced remove-counter amount with no counter pick (fork branch
 # fix/xp-forge-driver-remove-counter-forced-amount): Ferropede's combat-damage trigger removes "a counter" of any type and

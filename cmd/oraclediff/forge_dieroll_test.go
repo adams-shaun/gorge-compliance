@@ -119,7 +119,9 @@ func TestForgeRolledDie(t *testing.T) {
 // unchanged, and the full driver suite (198 tests, ForcedDieRollTest and ForcedCoinFlipTest among them) is green on it.
 // 7d506c5192 = oracle/fpin-1125: f7b730149a merged with 26b4658101 (chooseCounterType peeks the counter-kind pick for a
 // RemoveCounter ask, driver-only), then with 244c590848 (the mayplay pin above); die-roll code unchanged.
-// afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
+// a6227e70a3 = 7d506c5192 plus cast_mode "evoked" (StepMachine.spellForMode picks the AlternativeCost.Evoke spell,
+// CR 702.74a); afe18881c6 = oracle/fpin-1125: a6227e70a3 joined with 3e6bd830a6 (the discard_may election,
+// ScriptedController.chooseCardsToDiscardFrom only); die-roll code unchanged.
 // cf742d0aefc = afe18881c6e plus the forced remove-counter amount (ScriptedController.chooseNumber's RemoveCounter branch
 // only), die-roll code unchanged, ForcedDieRollTest re-run green on it.
 // 66671165f3 = afe18881c6 plus the up-to remove-any-type Done pick (StepMachine.peekCounterKind and
