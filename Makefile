@@ -908,11 +908,25 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # recorded state with no event or trigger, and refuses an unknown, keyword or negative entry. PlayerCountersSetupTest (5 tests, red
 # before) is run by scripts/forge-oracle-test-player-counters.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-player-counters.
+# 19c49ba7117 = 0ca7a220bd0 + a "pN:ability:Name[#k]" target ref (xproof cluster xpt-1d873918, Azorius Guildmage's "{2}{U}: Counter
+# target activated ability" aimed at Dark Sphere's ability, CR 113.3b / 602.2): StepMachine.targetObject resolved a target ref only to a
+# player or a card, so the stack ability never bound to the TargetType$ Activated slot and the activation was refused ("was not put on
+# the stack"). It now binds the k-th pending non-spell stack instance, oldest first (RefTable.nthPending), activated or triggered by that
+# seat whose source card is the named card, wherever the source is now (Dark Sphere sacrificed itself). AbilityTargetRefTest replays the
+# exported request (fixtures/abilitytarget; red without the branch: "was not put on the stack"), scripts/forge-oracle-test-ability-target-ref.sh
+# (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432),
+# ForcedDieRollTest, RefTableTest, DriverContractTest and ChangeTargetsConfirmTest re-run green. Fork branch fix/xp-forge-driver-ability-target-ref.
+# d38946a0fd9 = oracle/fpin-1125-join-abilitytarget-playercounters: 19c49ba7117 (above) merged with 495ed200e9f (above), each a
+# driver-only commit on 0ca7a220bd0 (RefTable/StepMachine/AbilityTargetRefTest vs SetupBuilder/PlayerCountersSetupTest), no textual
+# conflicts (git merge-tree). AbilityTargetRefTest and PlayerCountersSetupTest run together at this pin; die-roll code, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch oracle/fpin-1125-join-abilitytarget-playercounters.
 # f3065a4da86 = oracle/fpin-1125-join20: 495ed200e9f (above) merged with 53635f189cc (the unbound optional-untap election answered at
 # the ask, CR 502.3/117.3d, xproof clusters xpt-4782660c/xpt-5133dae0, Whip Vine; ScriptedController/StepMachine/SnapshotWriter only), no
 # textual conflicts (all three files auto-merged). UntapElectionTest runs at this pin via scripts/forge-oracle-test-untap-election.sh
 # (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= f3065a4da8667697f1156f95af9c606f7530dfe3
+# NOTE (merge): f3065a4da86 is the untap-election branch's pin but does not contain the ability-target ref (19c49ba7117); the pin stays at
+# d38946a0fd9 until a fork join of 19c49ba7117 + 53635f189cc exists. UntapElectionTest (scripts/forge-oracle-test-untap-election.sh) needs that join.
+FORGE_ORACLE_REF ?= d38946a0fd9b5bafca14d748e775a4e5e9060ab4
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
