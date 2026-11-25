@@ -350,6 +350,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			return refuse(why)
 		}
 	}
+	placeGraveTargets(reg, b, face, card, fam, sa, trig, f)
 	if why, err := focusPlayRefusal(reg, b, sa, card, f); err != nil || why != "" {
 		if err != nil {
 			return Result{}, err
