@@ -316,6 +316,102 @@ func TestForgeDiffCacheDir(t *testing.T) {
 	}
 }
 
+// staticRequestJSON returns the request object beginning at the first
+// `{"id":` on line, or "" when the line has none. A shell script spells a
+// request either as a heredoc line or inside a printf argument, so cut at the
+// balanced closing brace rather than at the end of the line.
+func staticRequestJSON(line string) string {
+	at := strings.Index(line, `{"id":`)
+	if at < 0 {
+		return ""
+	}
+	depth := 0
+	inString, escape := false, false
+	for i := at; i < len(line); i++ {
+		c := line[i]
+		if inString {
+			switch {
+			case escape:
+				escape = false
+			case c == '\\':
+				escape = true
+			case c == '"':
+				inString = false
+			}
+			continue
+		}
+		switch c {
+		case '"':
+			inString = true
+		case '{':
+			depth++
+		case '}':
+			depth--
+			if depth == 0 {
+				return line[at : i+1]
+			}
+		}
+	}
+	return ""
+}
+
+// TestForgeScriptFixturesCarryTheirItemSHA: every hand-authored request in
+// scripts/forge-oracle-test-*.sh carries a scenario_sha, and it is its own
+// item's. A copied request can otherwise keep the scenario it was copied from (the Done fixture
+// did), so two different scenarios share an identity and a consumer keyed by
+// it conflates them. The check is over all such scripts, so a new fixture or a
+// later answers edit is covered without listing the files.
+func TestForgeScriptFixturesCarryTheirItemSHA(t *testing.T) {
+	files, err := filepath.Glob(filepath.Join("..", "..", "scripts", "forge-oracle-test-*.sh"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(files) == 0 {
+		t.Fatal("no Forge driver scripts")
+	}
+	checked := 0
+	for _, path := range files {
+		b, err := os.ReadFile(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for i, line := range strings.Split(string(b), "\n") {
+			// A shell-quoted apostrophe ('"'"') is one apostrophe once the
+			// shell has run; read the request as the driver will.
+			line = strings.ReplaceAll(line, `'"'"'`, `'`)
+			if !strings.Contains(line, `{"id":`) && !strings.Contains(line, `"scenario_sha"`) {
+				continue
+			}
+			raw := staticRequestJSON(line)
+			if raw == "" {
+				t.Errorf("%s:%d: the line holds no one-line {\"id\": request to check", path, i+1)
+				continue
+			}
+			var rq forgeRequest
+			if err := json.Unmarshal([]byte(raw), &rq); err != nil {
+				t.Fatalf("%s:%d: static request is not JSON: %v", path, i+1, err)
+			}
+			if rq.Item.ID == "" {
+				t.Errorf("%s:%d: request %q has no item", path, i+1, rq.ID)
+				continue
+			}
+			if rq.ScenarioSHA == "" {
+				t.Errorf("%s:%d: request %q carries no scenario_sha (want %s)", path, i+1, rq.ID, gate.ItemSHA(rq.Item))
+				continue
+			}
+			checked++
+			// The live-export variants in the odds-or-evens fixture use a
+			// request id with a suffix; the item keeps gorge's id.
+			if got, want := rq.ScenarioSHA, gate.ItemSHA(rq.Item); got != want {
+				t.Errorf("%s:%d: scenario_sha %s is not item %q's %s", path, i+1, got, rq.ID, want)
+			}
+		}
+	}
+	if checked == 0 {
+		t.Fatal("no static Forge request fixture with a scenario_sha was checked")
+	}
+}
+
 // TestFollowerDiffIsForgeDiff: forge-diff is follower-diff -engine forge, byte
 // for byte, and follower-diff refuses a follower whose items are not Forge
 // requests.

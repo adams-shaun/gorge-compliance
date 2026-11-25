@@ -202,6 +202,18 @@ func TestScenariosMapToAudit(t *testing.T) {
 	}
 }
 
+func TestForgeDriverFixtureScriptsMapToOraclediff(t *testing.T) {
+	fsys := fixture(t, map[string]string{"cmd/oraclediff/main.go": "package main\n"})
+	got, err := Packages(fsys, []string{"scripts/forge-oracle-test-counter-any-done.sh"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []string{"./cmd/oraclediff"}
+	if !slices.Equal(got, want) {
+		t.Fatalf("forge driver fixture change selected %v, want %v", got, want)
+	}
+}
+
 func TestPinSelectsEveryPackage(t *testing.T) {
 	fsys := ratchetFixture(t, nil)
 	for _, p := range []string{"go.mod", "go.sum", "GORGE_PIN"} {
