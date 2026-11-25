@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2029954b-6fa7-40d7-bb19-d7534c62be5d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cackling-fiend:cast:s1,f:xs:XP:cackling-fiend:cast:s1	-	-	-	5f2128bf97e4	-	0279438c511e	-	-	2026-11-24	xproof
 202e45d6-8c7a-46db-85fb-634aa77b4097	cast	cast-resolve	agreed	-	FX	scen	2	0	Fatal Fissure/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2031b17c-0536-446f-a9aa-b46fe79b7ea7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2031b17c-0536-446f-a9aa-b46fe79b7ea7	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2031b17c-0536-446f-a9aa-b46fe79b7ea7	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2031b17c-0536-446f-a9aa-b46fe79b7ea7	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2031b17c-0536-446f-a9aa-b46fe79b7ea7	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 203365d4-4793-47af-840e-418bd5569d50	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2091eb7e-2357-4ef8-b15e-1e6f82176340	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:mold-adder:f0t0:s1,f:xs:XP:mold-adder:f0t0:s1	-	-	-	3aa6ded33acb	-	c85997a0fe78	-	-	2026-11-25	xproof
 20932bca-52be-4288-9c7d-4154650c5ec9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20932bca-52be-4288-9c7d-4154650c5ec9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20932bca-52be-4288-9c7d-4154650c5ec9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+20932bca-52be-4288-9c7d-4154650c5ec9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2094fb68-3859-401f-97f2-c8bae64a4822	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:playful-shove:cast:s1,f:xs:XP:playful-shove:cast:s1	-	-	-	3aa6ded33acb	-	d57882d337f8	-	-	2026-11-25	xproof
 20963cad-1c13-44a1-901a-bfc9930089e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2097ac9e-0f9b-4cd0-8537-2518195e4549	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reality-strobe:cast:s1,f:xs:XP:reality-strobe:cast:s1	-	-	-	d864b561c9cb	-	d7b5d6cb61a4	-	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 20b549e9-26db-40a5-8bcc-e8de6c559d32	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20b60c93-124b-42c8-93fb-63bbd1888658	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 20b60c93-124b-42c8-93fb-63bbd1888658	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-20b8911e-6701-485c-ac62-2b3cc79ec288	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+20b8911e-6701-485c-ac62-2b3cc79ec288	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 20b90a18-ff62-4995-b0d6-fbef44dca357	cast	cast-resolve	agreed	-	X	scen	1	0	Karn, Gilded Guardian/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20b90a18-ff62-4995-b0d6-fbef44dca357	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Karn, Gilded Guardian/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 20b90a18-ff62-4995-b0d6-fbef44dca357	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Karn, Gilded Guardian/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

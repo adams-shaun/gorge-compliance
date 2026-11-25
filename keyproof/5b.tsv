@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b8e0913-47e9-4d56-971d-abd91b0f7587	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b8e8ef2-2f04-4485-ae12-08f52dac81a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:culber-and-stamets-star-crossed:f0t0:s1,f:xs:XP:culber-and-stamets-star-crossed:f0t0:s1	-	-	-	23c4009444b0	-	fb884f6c5c6f	-	-	2026-11-25	xproof
 5b8e8ef2-2f04-4485-ae12-08f52dac81a2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:culber-and-stamets-star-crossed:f0t0:s1,f:xs:XP:culber-and-stamets-star-crossed:f0t0:s1	-	-	-	23c4009444b0	-	fb884f6c5c6f	-	-	2026-11-25	xproof
-5b8f0cdf-572d-4025-b930-79291f7c35be	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5b8f0cdf-572d-4025-b930-79291f7c35be	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5b90f8ed-84b2-4306-9dfa-b5654ea0e4cd	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ba482e9-fbb0-4d9f-a3a9-414892bcdfed	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Dancing from Dark to Dawn/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ba6a472-b2f3-4d8e-838c-269aaa5eb2e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ba73182-30a7-4bad-9cb6-c0feecc2db33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5ba7abbc-f6e8-40c2-800b-11efd10cca5b	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+5ba7abbc-f6e8-40c2-800b-11efd10cca5b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5badc2e8-a7d6-48c7-b594-65db953d9d57	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wingmate-roc:f0t0:s1,f:xs:XP:wingmate-roc:f0t0:s1	-	-	-	3aa6ded33acb	-	31b96ff88df6	-	-	2026-11-25	xproof
 5badc2e8-a7d6-48c7-b594-65db953d9d57	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wingmate-roc:f0t0:s1,f:xs:XP:wingmate-roc:f0t0:s1	-	-	-	3aa6ded33acb	-	31b96ff88df6	-	-	2026-11-25	xproof
 5badc2e8-a7d6-48c7-b594-65db953d9d57	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:wingmate-roc:f0t1:s1,f:xs:XP:wingmate-roc:f0t1:s1	-	-	-	d864b561c9cb	-	31b96ff88df6	-	-	2026-11-24	xproof

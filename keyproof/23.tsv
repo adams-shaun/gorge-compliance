@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23820b45-2f3a-4b6e-99ea-d84caccb7e37	cast	cast-resolve	agreed	-	X	scen	1	0	Merchant of Many Hats/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23820b45-2f3a-4b6e-99ea-d84caccb7e37	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Merchant of Many Hats/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2385c8fb-9c38-4ff3-8f61-4e25a8c7d46b	cast	cast-resolve	agreed	-	X	scen	1	0	Krang & Shredder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2385c8fb-9c38-4ff3-8f61-4e25a8c7d46b	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+2385c8fb-9c38-4ff3-8f61-4e25a8c7d46b	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2385c8fb-9c38-4ff3-8f61-4e25a8c7d46b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Krang & Shredder/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2385c8fb-9c38-4ff3-8f61-4e25a8c7d46b	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Krang & Shredder/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 23875679-5c08-44ff-90b3-13a1a758e5f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23b36aef-961f-4a78-9652-8594ad73102e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plow-under:cast:s1,f:xs:XP:plow-under:cast:s1	-	-	-	5f2128bf97e4	-	7ec1fa7d6971	-	-	2026-11-24	xproof
 23b518ab-561f-4551-8270-082cde99b993	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23b7fd18-3129-448f-881f-947ba988f98d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23bbd091-f6ff-4514-97aa-42c08164b4eb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23bbd091-f6ff-4514-97aa-42c08164b4eb	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 23bbd091-f6ff-4514-97aa-42c08164b4eb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23bd166b-d766-4d03-8016-6708481d2195	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 23bd166b-d766-4d03-8016-6708481d2195	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -212,6 +212,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23f86ee2-b1e3-45c2-bfd5-044919033922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23f86ee2-b1e3-45c2-bfd5-044919033922	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 23f93411-f83c-4ed2-abed-99cf905f7d7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-23f93411-f83c-4ed2-abed-99cf905f7d7f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23f93411-f83c-4ed2-abed-99cf905f7d7f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 23f9bee4-ac7e-4828-82c0-576fee0d29b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:singing-tree:cast:s1,f:xs:XP:singing-tree:cast:s1	-	-	-	ae86f6029288	-	df2f93e45a50	-	-	2026-11-24	xproof
 23f9bee4-ac7e-4828-82c0-576fee0d29b7	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof

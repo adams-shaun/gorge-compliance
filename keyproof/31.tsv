@@ -100,12 +100,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3186fddd-23fd-440c-ad61-b4130e00f765	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jeska-warrior-adept:cast:s1,f:xs:XP:jeska-warrior-adept:cast:s1	-	-	-	fc71ca68c5ac	-	6d4597918f93	-	-	2026-11-24	xproof
 3186fddd-23fd-440c-ad61-b4130e00f765	f0/a0	DealDamage	agreed	-	FX	start	4	0	x:xs:XP:jeska-warrior-adept:cast:s1,f:xs:XP:jeska-warrior-adept:cast:s1	-	-	-	fc71ca68c5ac	-	6d4597918f93	-	-	2026-11-24	xproof
 31895957-5fa8-46dc-a76e-37bbdc6072ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31895957-5fa8-46dc-a76e-37bbdc6072ad	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31895957-5fa8-46dc-a76e-37bbdc6072ad	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+31895957-5fa8-46dc-a76e-37bbdc6072ad	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+31895957-5fa8-46dc-a76e-37bbdc6072ad	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 318f7f70-e374-40ef-8afb-3389c10461d8	cast	counter-spell	agreed	-	FX	scen	2	0	Syncopate/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3191c6ca-4d25-4ba3-bfe1-4aeab1295573	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-31932df4-0be8-45c4-8b22-84119d9c20ba	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Georgiou, Terran Emperor"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-31932df4-0be8-45c4-8b22-84119d9c20ba	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Georgiou, Terran Emperor"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+31932df4-0be8-45c4-8b22-84119d9c20ba	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Georgiou, Terran Emperor"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+31932df4-0be8-45c4-8b22-84119d9c20ba	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Georgiou, Terran Emperor"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3194fe3d-57d3-4dab-ab39-3778b75150fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3194fe3d-57d3-4dab-ab39-3778b75150fa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3196e1f4-7f94-4eb6-ae2b-ed11ba392552	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:last-rites:cast:s1,f:xs:XP:last-rites:cast:s1	-	-	-	fc71ca68c5ac	-	dfe32bfc3f44	-	-	2026-11-24	xproof
@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31a0c9a2-c9bd-47f7-872b-a43fb64d873c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Brightspear Zealot/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31a0c9a2-c9bd-47f7-872b-a43fb64d873c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Brightspear Zealot/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31a331a0-3065-4ecb-9e6a-ab11e241833b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:false-mourning:cast:s1,f:xs:XP:false-mourning:cast:s1	-	-	-	5f2128bf97e4	-	ffd28f8ac72a	-	-	2026-11-24	xproof
-31a49fb9-1081-46c3-a352-0444869afdc9	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+31a49fb9-1081-46c3-a352-0444869afdc9	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 31a49fb9-1081-46c3-a352-0444869afdc9	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:essence-fracture:cast:s1,f:xs:XP:essence-fracture:cast:s1	-	-	-	8c0bd19283bb	-	30e40e702ab6	-	-	2026-11-24	xproof
 31af78dd-e962-4d9a-b696-f3048be03486	cast	cast-resolve	agreed	-	X	scen	1	0	Virtue of Strength/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 31b18e10-c74d-4384-a0e2-def0b3ec4799	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31be715f-9ad3-435c-9e52-e108fe96b969	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31be715f-9ad3-435c-9e52-e108fe96b969	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31be715f-9ad3-435c-9e52-e108fe96b969	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-31bf199b-dfb1-428e-96a5-eb25104e2b43	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+31bf199b-dfb1-428e-96a5-eb25104e2b43	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 31bfb6ca-4455-4e3d-8f0f-e82f71990d61	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Hound of Urabrask"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 31bfb6ca-4455-4e3d-8f0f-e82f71990d61	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Hound of Urabrask"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 31c30c4f-12f4-4cbc-b7c1-123f36b8df75	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:runner-s-bane:f0t0:s1,f:xs:XP:runner-s-bane:f0t0:s1	-	-	-	3aa6ded33acb	-	c75dc00f27cb	-	-	2026-11-25	xproof
@@ -184,7 +184,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31f54f88-85a6-43f4-a6de-fb6ef5f0c38d	f0/t0	ChangesZone/Fabricate	agreed	-	FX	start	2	0	x:xs:XP:ambitious-aetherborn:f0t0:s1,f:xs:XP:ambitious-aetherborn:f0t0:s1	-	-	-	3aa6ded33acb	-	96365d4085ff	-	-	2026-11-25	xproof
 31f8dd0d-2495-4c37-a103-96f21164bda8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:wish-good-luck:cast:s1	-	-	-	23b491658465	-	bfc6b162048a	-	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	cast	cast-resolve	agreed	-	X	scen	1	0	Ashling, Rekindled/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 31fc5d8b-94bc-4688-8a84-f15800e717a8	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Ashling, Rekindled/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

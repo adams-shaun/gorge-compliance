@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 050f5733-7c0b-4991-9a6c-7ea12ccf0ca9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Up the Beanstalk/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 051333e4-a826-46e8-a46e-1571078112fc	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Hag of Inner Weakness"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 051333e4-a826-46e8-a46e-1571078112fc	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Hag of Inner Weakness"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
-0517f736-e6eb-4fdb-8288-e0c8a9a44379	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0517f736-e6eb-4fdb-8288-e0c8a9a44379	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 051ff7e0-dd00-4467-8796-a5d1c21934ed	cast	cast-resolve	agreed	-	X	scen	1	0	Bejeweled Warg/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 051ff7e0-dd00-4467-8796-a5d1c21934ed	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bejeweled Warg/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 051ff7e0-dd00-4467-8796-a5d1c21934ed	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bejeweled Warg/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -63,7 +63,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 054c6250-ac96-42f6-931d-925761ab7764	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 054fedbb-062e-491e-9a94-594fda33094f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 054fedbb-062e-491e-9a94-594fda33094f	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-05501e88-d4c3-4474-92a9-c02ab15b107b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05501e88-d4c3-4474-92a9-c02ab15b107b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 05551d91-50c6-46d1-86a4-cd3d177d0923	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anim-pakal-thousandth-moon:cast:s1,f:xs:XP:anim-pakal-thousandth-moon:cast:s1	-	-	-	23b491658465	-	d92310c48666	-	-	2026-11-24	xproof
 05551d91-50c6-46d1-86a4-cd3d177d0923	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:anim-pakal-thousandth-moon:f0t0:s1,f:xs:XP:anim-pakal-thousandth-moon:f0t0:s1	-	-	-	3aa6ded33acb	-	d92310c48666	-	-	2026-11-25	xproof
 05608055-d97a-4c8f-833d-47b3dd1ea255	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05878e49-93ad-4144-9c50-a0bb86126c2e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chart-a-course:cast:s1,f:xs:XP:chart-a-course:cast:s1	-	-	-	3aa6ded33acb	-	7fa0239ec482	-	-	2026-11-25	xproof
 058917c1-21ab-488a-9f9c-591c55f3c596	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:diabolic-edict:cast:s1,f:xs:XP:diabolic-edict:cast:s1	-	-	-	25696bf19d5b	-	0da603682783	-	-	2026-11-24	xproof
 05899372-9784-4bdb-9c28-504c71fed906	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:witch-s-clinic:f0a0:s2,f:xs:XP:witch-s-clinic:f0a0:s2	-	-	-	8c0bd19283bb	-	42c571c83b8a	-	-	2026-11-24	xproof
-05899372-9784-4bdb-9c28-504c71fed906	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05899372-9784-4bdb-9c28-504c71fed906	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 05899372-9784-4bdb-9c28-504c71fed906	land	land	agreed	-	FX	start	2	0	x:xs:XP:witch-s-clinic:land:s1,f:xs:XP:witch-s-clinic:land:s1	-	-	-	8c0bd19283bb	-	42c571c83b8a	-	-	2026-11-24	xproof
 058a5b8b-08bc-4021-8a8b-8e149941e775	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Chekov and McCoy"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 058a5b8b-08bc-4021-8a8b-8e149941e775	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

@@ -39,9 +39,9 @@ c2283655-f6b8-4399-ba1f-68a7107f9485	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 c22b5968-adea-4f74-877d-8ac2ee452769	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c22cb20a-f280-4e47-9556-ca8b465f9b17	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	7f42ad3cdb9e	-	-	2026-11-24	xproof
 c22cb20a-f280-4e47-9556-ca8b465f9b17	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
-c22cc70a-9533-4bfc-b3ce-b2d43a73f0c1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c22cc70a-9533-4bfc-b3ce-b2d43a73f0c1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c22cc70a-9533-4bfc-b3ce-b2d43a73f0c1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c22cc70a-9533-4bfc-b3ce-b2d43a73f0c1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c22cc70a-9533-4bfc-b3ce-b2d43a73f0c1	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c22cc70a-9533-4bfc-b3ce-b2d43a73f0c1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c22e5fc6-9b4e-4197-b472-70d168eb4330	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c22e5fc6-9b4e-4197-b472-70d168eb4330	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c231698b-c584-4047-9668-5322e4b0065b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ c27e2d6f-498c-42d8-aa1a-ac6402bf3f9a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gol
 c2816923-9daf-4277-adf7-20427d14ba4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c281f436-8c77-48f7-b31c-d40cd7f9ed6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c28211c6-a5ee-40c3-bb6a-da3e7e73fd95	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:unholy-grotto:f0a1:s1,f:xs:XP:unholy-grotto:f0a1:s1	-	-	-	23b491658465	-	3b0e1e59f031	-	-	2026-11-24	xproof
-c28211c6-a5ee-40c3-bb6a-da3e7e73fd95	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c28211c6-a5ee-40c3-bb6a-da3e7e73fd95	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c28211c6-a5ee-40c3-bb6a-da3e7e73fd95	land	land	agreed	-	FX	start	2	0	x:xs:XP:unholy-grotto:land:s1,f:xs:XP:unholy-grotto:land:s1	-	-	-	fc71ca68c5ac	-	3b0e1e59f031	-	-	2026-11-24	xproof
 c282581f-3d77-47ce-ac92-ed6217754e38	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kraken-of-the-straits:cast:s1,f:xs:XP:kraken-of-the-straits:cast:s1	-	-	-	d864b561c9cb	-	67dbc37313ef	-	-	2026-11-24	xproof
 c284b1fd-f238-478a-bcf1-c4b8f32f11f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ c2c60973-b4d5-43fa-a0c4-b5688b28df05	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c2c7a9c2-28f8-4cf0-a042-420f6a4ba8bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tamiyo-s-immobilizer:cast:s1,f:xs:XP:tamiyo-s-immobilizer:cast:s1	-	-	-	ae86f6029288	-	e5b0765d7a9c	-	-	2026-11-24	xproof
 c2c7a9c2-28f8-4cf0-a042-420f6a4ba8bd	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:tamiyo-s-immobilizer:cast:s1,f:xs:XP:tamiyo-s-immobilizer:cast:s1	-	-	-	ae86f6029288	-	e5b0765d7a9c	-	-	2026-11-24	xproof
 c2c9dbd0-2062-4ee1-b32e-8eeacd95589c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c2ca3e20-23ca-4d2a-88a1-5e98ff884abb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c2ca3e20-23ca-4d2a-88a1-5e98ff884abb	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c2ca3e20-23ca-4d2a-88a1-5e98ff884abb	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c2ca3e20-23ca-4d2a-88a1-5e98ff884abb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c2cb0afd-781f-4cfa-b680-ed1edfa81868	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

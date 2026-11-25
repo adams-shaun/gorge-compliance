@@ -23,7 +23,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d24c12a-a300-4199-b2a9-3d5ead8df617	cast	cast-resolve	agreed	-	FX	scen	2	0	Reluctant Role Model/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d24c12a-a300-4199-b2a9-3d5ead8df617	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Reluctant Role Model/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8d24c12a-a300-4199-b2a9-3d5ead8df617	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:reluctant-role-model:f0t1:s1,f:xs:XP:reluctant-role-model:f0t1:s1	-	-	-	23c4009444b0	-	60e2da2bee53	-	-	2026-11-25	xproof
-8d24e181-74c1-4913-a18a-59378ec7d9e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d24e181-74c1-4913-a18a-59378ec7d9e7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8d2b2675-19df-4f40-9e8e-196ec097b91c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d2b2675-19df-4f40-9e8e-196ec097b91c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d35c7c8-1342-40b7-82ec-2f7973ee8af8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-wasp-janet-van-dyne:f0t0:s1,f:xs:XP:the-wasp-janet-van-dyne:f0t0:s1	-	-	-	8c0bd19283bb	-	9c65350a2469	-	-	2026-11-24	xproof
@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8d4dcab0-86e5-4ff8-a90f-78a062664e16	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d4dcab0-86e5-4ff8-a90f-78a062664e16	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d4de785-20e9-430e-8df1-f39dac0ef07d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8d4de785-20e9-430e-8df1-f39dac0ef07d	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8d4de785-20e9-430e-8df1-f39dac0ef07d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8d4ef98d-228e-41ff-9133-53f0987e58d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d51d448-14a6-4125-aa80-159ed6afbd03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8d579f04-b494-41a1-ba7c-b9779f75b818	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

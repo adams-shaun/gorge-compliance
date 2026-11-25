@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 342df67f-44d8-4b0a-b1d7-4241966d0598	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kingpin's Enforcers/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 342df67f-44d8-4b0a-b1d7-4241966d0598	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kingpin's Enforcers/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 342df67f-44d8-4b0a-b1d7-4241966d0598	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kingpin's Enforcers/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-342e08f9-d4d0-4408-8621-66e087058616	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+342e08f9-d4d0-4408-8621-66e087058616	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 342e08f9-d4d0-4408-8621-66e087058616	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 34312179-f3f9-47ca-bdf4-5abbd493876e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34312179-f3f9-47ca-bdf4-5abbd493876e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34a1eb04-08f6-49d8-a1d1-b987a76bd8b1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34a1eb04-08f6-49d8-a1d1-b987a76bd8b1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34a1eb04-08f6-49d8-a1d1-b987a76bd8b1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-34a39862-c18b-4c1b-8920-207627c40934	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+34a39862-c18b-4c1b-8920-207627c40934	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 34a39862-c18b-4c1b-8920-207627c40934	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:gray-and-adira-forever-joined:f0t0:s1	-	-	-	23c4009444b0	-	ffd08b0a6596	-	-	2026-11-25	xproof
 34a7026f-c6ca-4d89-8364-fd60fb613634	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:patch-up:cast:s1,f:xs:XP:patch-up:cast:s1	-	-	-	d864b561c9cb	-	f6ca147cb529	-	-	2026-11-24	xproof
 34a85d7f-d4ea-4a0f-aa4c-bf0b0f4987bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34d5f249-df46-49d1-a692-da2348fbc51e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hunter-of-eyeblights:f0t0:s1,f:xs:XP:hunter-of-eyeblights:f0t0:s1	-	-	-	d864b561c9cb	-	bf364c57ec62	-	-	2026-11-24	xproof
 34d5f249-df46-49d1-a692-da2348fbc51e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34d5f249-df46-49d1-a692-da2348fbc51e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hunter-of-eyeblights:f0t0:s1,f:xs:XP:hunter-of-eyeblights:f0t0:s1	-	-	-	d864b561c9cb	-	bf364c57ec62	-	-	2026-11-24	xproof
-34da0b06-565f-4964-b8bc-dd106278e086	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+34da0b06-565f-4964-b8bc-dd106278e086	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 34da0b06-565f-4964-b8bc-dd106278e086	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 34dd789c-4d80-4ccc-a4f7-2e5388a9689d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angelic-arbiter:cast:s1,f:xs:XP:angelic-arbiter:cast:s1	-	-	-	d864b561c9cb	-	fdebc6dd26ea	-	-	2026-11-24	xproof
 34e05dc1-35af-402d-96ae-e249b3738493	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

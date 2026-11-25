@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4405db13-7b36-4dc2-9a5d-1d31d568abf5	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 44074791-da32-498b-879f-22192b94a9b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44074791-da32-498b-879f-22192b94a9b0	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-440881ad-48cf-4b82-8bb5-f506d1a51755	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+440881ad-48cf-4b82-8bb5-f506d1a51755	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 440ab324-205f-4f53-a8cc-994f30aefd74	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44154004-e50e-45d1-bde0-ba6e3354067c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44154004-e50e-45d1-bde0-ba6e3354067c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
+4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44240b1e-c104-4eb4-8ab9-0d56607ba241	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swiftblade-vindicator:cast:s1,f:xs:XP:swiftblade-vindicator:cast:s1	-	-	-	3aa6ded33acb	-	c776007bd144	-	-	2026-11-25	xproof
 44240b1e-c104-4eb4-8ab9-0d56607ba241	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:swiftblade-vindicator:combat0.attack:s1,f:xs:XP:swiftblade-vindicator:combat0.attack:s1	-	-	-	3aa6ded33acb	-	c776007bd144	-	-	2026-11-25	xproof
@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/a1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-44443716-8356-40cd-a879-35264b29108c	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+44443716-8356-40cd-a879-35264b29108c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 44443716-8356-40cd-a879-35264b29108c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scheming Silvertongue/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

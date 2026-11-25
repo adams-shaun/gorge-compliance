@@ -29,7 +29,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	cast	cast-resolve	agreed	-	X	scen	1	0	Valkyrie Aerial Unit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Valkyrie Aerial Unit/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Valkyrie Aerial Unit/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1333d690-a6dc-4ef8-8c57-2ba16727c0a5	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+1333d690-a6dc-4ef8-8c57-2ba16727c0a5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Valkyrie Aerial Unit/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13358b1d-0a35-48ed-a7fb-70359fa3998f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1337d89e-a883-4568-a14f-9ca3305cc3df	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hell's Kitchen/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 137e0ad2-e10a-4327-86a3-5ac7bc7fc469	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raging-spirit:cast:s1,f:xs:XP:raging-spirit:cast:s1	-	-	-	ea3140b6974b	-	19d386627b06	-	-	2026-11-24	xproof
 137e0ad2-e10a-4327-86a3-5ac7bc7fc469	f0/a0	Animate	agreed	-	F	start	2	0	f:xs:XP:raging-spirit:f0a0:s1	-	-	-	8c0bd19283bb	-	19d386627b06	-	-	2026-11-24	xproof
 137e3974-74e1-4941-8597-10aeba6cac37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-137e3974-74e1-4941-8597-10aeba6cac37	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+137e3974-74e1-4941-8597-10aeba6cac37	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1380f0cc-e875-46ec-a802-c6684bf3965c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1385679f-bdcd-4d7e-8266-1df0e36cc2da	cast	cast-resolve	agreed	-	X	scen	1	0	Tricorder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1385679f-bdcd-4d7e-8266-1df0e36cc2da	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:tricorder:f0a0:s1,f:xs:XP:tricorder:f0a0:s1	-	-	-	23c4009444b0	-	5513e13845f7	-	-	2026-11-25	xproof
@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13bf8103-3db3-4ee6-a6bb-441aabfd9e41	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Warden of the Grove/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13bf8103-3db3-4ee6-a6bb-441aabfd9e41	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Warden of the Grove/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13bfc51f-d079-40ef-a4ba-47d06d3150a3	cast	cast-resolve	agreed	-	X	scen	1	0	Command the Stage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-13bfc51f-d079-40ef-a4ba-47d06d3150a3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+13bfc51f-d079-40ef-a4ba-47d06d3150a3	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13c1ca1e-cd17-49ef-bc31-97bff99ec1e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13c4437e-48a9-4c51-9b76-9e83e3ec362f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13c4437e-48a9-4c51-9b76-9e83e3ec362f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

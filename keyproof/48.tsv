@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 482006a0-bb2a-4533-891b-2195da5e0f01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 482006a0-bb2a-4533-891b-2195da5e0f01	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 48207d1c-448a-4e1b-974a-642dfea75933	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48220e6c-5752-46e0-9b7f-f0eef274d929	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48220e6c-5752-46e0-9b7f-f0eef274d929	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 48252207-d345-455c-b655-c2027664e6a6	cast	cast-resolve	agreed	-	X	scen	1	0	Rabaroo Troop/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 48252207-d345-455c-b655-c2027664e6a6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rabaroo Troop/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 48252207-d345-455c-b655-c2027664e6a6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rabaroo Troop/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -126,9 +126,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48a773d0-c433-4463-b50f-b6d4604a042c	cast	cast-resolve	agreed	-	FX	scen	2	0	Abigale, Eloquent First-Year/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 48a773d0-c433-4463-b50f-b6d4604a042c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Abigale, Eloquent First-Year/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 48a773d0-c433-4463-b50f-b6d4604a042c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Abigale, Eloquent First-Year/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-48a773d0-c433-4463-b50f-b6d4604a042c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+48a773d0-c433-4463-b50f-b6d4604a042c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 48a830f1-8965-4f97-b3d8-ca98eab1ba33	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-48a830f1-8965-4f97-b3d8-ca98eab1ba33	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48a830f1-8965-4f97-b3d8-ca98eab1ba33	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 48a830f1-8965-4f97-b3d8-ca98eab1ba33	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48a909b6-e6ee-4148-8b50-b35f11bc065f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mizzium-meddler:f0t0:s1,f:xs:XP:mizzium-meddler:f0t0:s1	-	-	-	d864b561c9cb	-	ff7a88e18315	-	-	2026-11-24	xproof
 48a909b6-e6ee-4148-8b50-b35f11bc065f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mizzium-meddler:f0t0:s1,f:xs:XP:mizzium-meddler:f0t0:s1	-	-	-	d864b561c9cb	-	ff7a88e18315	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48c2dc82-7bed-4730-8b8b-1970b743414f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tenacious-tosk:cast:s1,f:xs:XP:tenacious-tosk:cast:s1	-	-	-	8c0bd19283bb	-	ffce3b65314e	-	-	2026-11-24	xproof
 48c2dc82-7bed-4730-8b8b-1970b743414f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 48c641df-d511-4e35-b623-9d1fdb5240da	cast	cast-resolve	agreed	-	X	scen	1	0	Eclipsed Flamekin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-48c641df-d511-4e35-b623-9d1fdb5240da	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+48c641df-d511-4e35-b623-9d1fdb5240da	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 48c97aeb-6591-4175-a24b-d3488bf3ab0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48c97aeb-6591-4175-a24b-d3488bf3ab0b	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 48cc79b8-f7a5-474b-bd88-7cd6ae673086	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

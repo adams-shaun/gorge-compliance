@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 425fea06-76ec-4cd9-bd3b-750504fd7fd2	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4262a726-d1da-4bdc-ab14-73212aa83f9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42641a05-a6b6-4856-a72c-54181b97c190	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42641a05-a6b6-4856-a72c-54181b97c190	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42641a05-a6b6-4856-a72c-54181b97c190	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 426569c7-d868-4af1-bc83-5b5200532d17	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:searchlight-companion:f0t0:s1,f:xs:XP:searchlight-companion:f0t0:s1	-	-	-	d864b561c9cb	-	b93af27b81a9	-	-	2026-11-24	xproof
 426569c7-d868-4af1-bc83-5b5200532d17	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:searchlight-companion:f0t0:s1,f:xs:XP:searchlight-companion:f0t0:s1	-	-	-	d864b561c9cb	-	b93af27b81a9	-	-	2026-11-24	xproof
 426bfd00-e727-49f4-be2d-df5289d2cc61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4289f2d4-3db2-4dd1-9c18-af3f78309844	cast	cast-resolve	agreed	-	X	scen	1	0	Earth Kingdom Soldier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4289f2d4-3db2-4dd1-9c18-af3f78309844	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Earth Kingdom Soldier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4289f2d4-3db2-4dd1-9c18-af3f78309844	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Earth Kingdom Soldier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4289f2d4-3db2-4dd1-9c18-af3f78309844	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+4289f2d4-3db2-4dd1-9c18-af3f78309844	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 428c18aa-b195-4cf2-a1a9-09723b26eb0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 428cc1cb-a491-4cc4-9436-28ee8acc37d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 428d131c-b0fa-4e96-9c02-e2e6714357b9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

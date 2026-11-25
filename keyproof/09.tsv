@@ -44,7 +44,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09342fd7-3dad-431e-8b87-de8a9287e757	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fractal-harness:f0t0:s1,f:xs:XP:fractal-harness:f0t0:s1	-	-	-	8c0bd19283bb	-	e8844a85e6eb	-	-	2026-11-24	xproof
 09342fd7-3dad-431e-8b87-de8a9287e757	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:fractal-harness:f0a0:s1,f:xs:XP:fractal-harness:f0a0:s1	-	-	-	8c0bd19283bb	-	e8844a85e6eb	-	-	2026-11-24	xproof
 09342fd7-3dad-431e-8b87-de8a9287e757	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fractal-harness:f0t0:s1,f:xs:XP:fractal-harness:f0t0:s1	-	-	-	8c0bd19283bb	-	e8844a85e6eb	-	-	2026-11-24	xproof
-09342fd7-3dad-431e-8b87-de8a9287e757	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09342fd7-3dad-431e-8b87-de8a9287e757	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0935377b-384f-4e4c-9fbb-8d2a7d5dc280	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0935377b-384f-4e4c-9fbb-8d2a7d5dc280	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:dwarven-miner:f0a0:s1,f:xs:XP:dwarven-miner:f0a0:s1	-	-	-	ea3140b6974b	-	bdd05751dc28	-	-	2026-11-24	xproof
 0935faa2-fb90-48db-8a92-906ba0f374c7	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:restless-vinestalk:f0a0:s1,f:xs:XP:restless-vinestalk:f0a0:s1	-	-	-	23b491658465	-	f6b884ac86ca	-	-	2026-11-24	xproof
@@ -133,7 +133,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 099b8d2c-b482-48dd-b6bc-dedf546d66c5	cast	cast-resolve	agreed	-	FX	scen	2	0	Marang River Regent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 099b8d2c-b482-48dd-b6bc-dedf546d66c5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Marang River Regent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 099b8d2c-b482-48dd-b6bc-dedf546d66c5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Marang River Regent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-099b8d2c-b482-48dd-b6bc-dedf546d66c5	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+099b8d2c-b482-48dd-b6bc-dedf546d66c5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 099fd4b3-92fd-4b5f-bb4f-eefa6f09700c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 099fd4b3-92fd-4b5f-bb4f-eefa6f09700c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09a1ab1b-d9f0-4a2a-a448-3190f85006e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

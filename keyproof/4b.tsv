@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b1f68a2-b606-4c64-bd44-a9714808316d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1f68a2-b606-4c64-bd44-a9714808316d	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1f68a2-b606-4c64-bd44-a9714808316d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b1fee86-360d-41d8-9238-eff216376732	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b1fee86-360d-41d8-9238-eff216376732	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b1fee86-360d-41d8-9238-eff216376732	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:expunge:cast:s1,f:xs:XP:expunge:cast:s1	-	-	-	23b491658465	-	8e0274795401	-	-	2026-11-24	xproof
 4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b22be3a-8ce1-47d1-b82e-6c3ccfb0548b	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ba60296-5612-41ed-bf53-a061783ed3b9	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4ba60296-5612-41ed-bf53-a061783ed3b9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4ba661d7-1cb8-4fec-bfaa-5f2797235fcf	cast	cast-resolve	agreed	-	X	scen	1	0	Jiang Yanggu, Never Alone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4ba661d7-1cb8-4fec-bfaa-5f2797235fcf	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+4ba661d7-1cb8-4fec-bfaa-5f2797235fcf	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4ba661d7-1cb8-4fec-bfaa-5f2797235fcf	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Jiang Yanggu, Never Alone/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ba75d9e-e3f1-424a-95ca-37784b8d9479	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ba75d9e-e3f1-424a-95ca-37784b8d9479	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4bc79fb3-81bb-42ed-9bbb-93f8cede3094	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4bc91d7d-37aa-475c-8fe9-763975d51add	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cff3a3bdd333	-	-	2026-11-25	xproof
 4bc91d7d-37aa-475c-8fe9-763975d51add	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cff3a3bdd333	-	-	2026-11-25	xproof
-4bc91d7d-37aa-475c-8fe9-763975d51add	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4bc91d7d-37aa-475c-8fe9-763975d51add	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4bc91d7d-37aa-475c-8fe9-763975d51add	f0/t2	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cff3a3bdd333	-	-	2026-11-25	xproof
 4bcc54d1-8ab6-4ad3-91b6-97fb02b88cc0	cast	cast	agreed	-	X	start	2	0	x:xs:XP:die-young:cast:s1	-	-	-	d864b561c9cb	-	1c598bc1e601	-	-	2026-11-24	xproof
 4bccfa67-0c6f-42a1-b8d4-0842a8230d1e	cast	cast-resolve	agreed	-	X	scen	1	0	Rick Jones, Destined Sidekick/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

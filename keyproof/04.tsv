@@ -28,8 +28,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04260930-ff38-4b35-9ec4-e89196a4f2c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zegana-utopian-speaker:f0t0:s1,f:xs:XP:zegana-utopian-speaker:f0t0:s1	-	-	-	d864b561c9cb	-	581a77c0cee8	-	-	2026-11-24	xproof
 04260930-ff38-4b35-9ec4-e89196a4f2c7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04260930-ff38-4b35-9ec4-e89196a4f2c7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:zegana-utopian-speaker:f0t0:s1,f:xs:XP:zegana-utopian-speaker:f0t0:s1	-	-	-	d864b561c9cb	-	581a77c0cee8	-	-	2026-11-24	xproof
-0429d146-332f-4fb0-8273-c73679ca6d47	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0429d146-332f-4fb0-8273-c73679ca6d47	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0429d146-332f-4fb0-8273-c73679ca6d47	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0429d146-332f-4fb0-8273-c73679ca6d47	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 042a665d-2f63-4f7e-ac89-0d560da68085	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 042c01ec-9f1f-432b-bea9-d64d822cd91e	cast	cast-resolve	agreed	-	X	scen	1	0	The Emperor of Palamecia/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 042c01ec-9f1f-432b-bea9-d64d822cd91e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Emperor of Palamecia/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 045b2b84-96bd-46fb-8aae-a33968e741c7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mudbutton-torchrunner:f0t0:s1,f:xs:XP:mudbutton-torchrunner:f0t0:s1	-	-	-	d864b561c9cb	-	3aa251306595	-	-	2026-11-24	xproof
 045ece1e-23aa-4122-8726-86b2af4345ba	cast	cast-resolve	agreed	-	FX	scen	2	0	Thirst for Identity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 04624f75-5981-4607-aa8f-706554f826e1	cast	cast-resolve	agreed	-	X	scen	1	0	Captain Jean-Luc Picard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-04624f75-5981-4607-aa8f-706554f826e1	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+04624f75-5981-4607-aa8f-706554f826e1	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04624f75-5981-4607-aa8f-706554f826e1	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:captain-jean-luc-picard:f0t0:s1,f:xs:XP:captain-jean-luc-picard:f0t0:s1	-	-	-	23c4009444b0	-	0978100475d3	-	-	2026-11-25	xproof
 04633ecd-eac0-426a-83a5-8e88262fca30	cast	cast-resolve	agreed	-	X	scen	1	0	Macabre Reconstruction/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04633ecd-eac0-426a-83a5-8e88262fca30	static#0.0	static#0.0	agreed	-	X	scen	1	0	Macabre Reconstruction/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -191,7 +191,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 04d8615c-3883-4251-9790-1d8a4a40e142	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eternal-dragon:cast:s1,f:xs:XP:eternal-dragon:cast:s1	-	-	-	8c0bd19283bb	-	b7d8c9ba5eef	-	-	2026-11-24	xproof
-04d8615c-3883-4251-9790-1d8a4a40e142	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04d8615c-3883-4251-9790-1d8a4a40e142	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04d8615c-3883-4251-9790-1d8a4a40e142	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 04da8c46-9703-47f2-974b-c144464ec380	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04dc2e9c-312c-4af8-950c-6a7ed859c9be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -205,7 +205,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04e2afbe-0c08-42bc-93e6-662066a958bf	static#0.0	static#0.0	agreed	-	X	scen	1	0	Deadly Cover-Up/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04e3d36f-5dec-422c-a371-15e135fdface	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04e53f36-9f16-4678-9caf-9afda85f76b4	cast	cast-resolve	agreed	-	FX	scen	2	0	Spider-Woman, Secret Agent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-04e53f36-9f16-4678-9caf-9afda85f76b4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+04e53f36-9f16-4678-9caf-9afda85f76b4	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04e575d1-f843-4330-972f-e77b264073e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04e575d1-f843-4330-972f-e77b264073e0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ozox-the-clattering-king:f0t0:s1,f:xs:XP:ozox-the-clattering-king:f0t0:s1	-	-	-	8c0bd19283bb	-	3f1508b1e2ca	-	-	2026-11-24	xproof
 04e5e84f-8fd4-43ab-8f9d-5b24646f7ae5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Raucous Theater/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -225,7 +225,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04ea21b3-084b-4746-9b49-99b6ef4f0885	static#0.1	static#0.1	agreed	-	X	scen	1	0	Thrumming Hivepool/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04ea7e88-7ea5-4b4c-9a7c-2a6ac0bc0682	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:absorb-vis:cast:s1,f:xs:XP:absorb-vis:cast:s1	-	-	-	8a1b1a193ec0	-	61e67ba3b538	-	-	2026-11-24	xproof
 04ea7e88-7ea5-4b4c-9a7c-2a6ac0bc0682	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:absorb-vis:cast:s2,f:xs:XP:absorb-vis:cast:s2	-	-	-	8a1b1a193ec0	-	61e67ba3b538	-	-	2026-11-24	xproof
-04eb4fc0-0cc5-44f1-af5a-44579125d5c2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+04eb4fc0-0cc5-44f1-af5a-44579125d5c2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04eeb9ad-5c59-411b-8809-db8349838588	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04eeb9ad-5c59-411b-8809-db8349838588	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04eeb9ad-5c59-411b-8809-db8349838588	f0/a2	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

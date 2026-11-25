@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 21613fac-d959-44ba-9bcb-0a30b5e6545e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:storm-god-s-oracle:f0a0:s1,f:xs:XP:storm-god-s-oracle:f0a0:s1	-	-	-	d864b561c9cb	-	440d61aeb822	-	-	2026-11-24	xproof
 21613fac-d959-44ba-9bcb-0a30b5e6545e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:storm-god-s-oracle:f0t0:s1,f:xs:XP:storm-god-s-oracle:f0t0:s1	-	-	-	d864b561c9cb	-	440d61aeb822	-	-	2026-11-24	xproof
 21645448-ecbd-4036-b9ed-47cd903079e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2167ac25-d042-4b48-b770-8b94acc1a965	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2167ac25-d042-4b48-b770-8b94acc1a965	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 21695c70-f746-4d77-b6d3-e2713a5c929e	cast	cast-resolve	agreed	-	X	scen	1	0	Bogslither's Embrace/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 216a2a92-9ca3-4ca3-8af7-686c13b04290	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Shadowy Backstreet/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 216a2a92-9ca3-4ca3-8af7-686c13b04290	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Shadowy Backstreet/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2188c03f-11b6-4651-914a-b4fdd59127e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arcane-adaptation:cast:s1,f:xs:XP:arcane-adaptation:cast:s1	-	-	-	d864b561c9cb	-	1bf2e6822250	-	-	2026-11-24	xproof
 218d9277-c179-4de3-9c7f-79b5a6d4fa38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 218f835b-4195-4ee8-a4ef-e5ba58fa5374	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-218f835b-4195-4ee8-a4ef-e5ba58fa5374	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+218f835b-4195-4ee8-a4ef-e5ba58fa5374	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 21989fad-9672-46d4-b7d5-101906e7aed2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rona-s-vortex:cast:s1,f:xs:XP:rona-s-vortex:cast:s1	-	-	-	ae86f6029288	-	56720847406c	-	-	2026-11-24	xproof
 219cf182-0942-4569-91e9-9bc9bb1d06d0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 219cf182-0942-4569-91e9-9bc9bb1d06d0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blood-petal-celebrant:f0t0:s1,f:xs:XP:blood-petal-celebrant:f0t0:s1	-	-	-	d864b561c9cb	-	ebcb4ed08ef9	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 21b8192e-46a2-4a6a-abd5-3a074efa30a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 21b8192e-46a2-4a6a-abd5-3a074efa30a9	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 21b8d59f-a90d-44ff-a2e3-9f439ac3e14a	cast	cast-resolve	agreed	-	X	scen	1	0	Semester Foreseer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-21b8d59f-a90d-44ff-a2e3-9f439ac3e14a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+21b8d59f-a90d-44ff-a2e3-9f439ac3e14a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 21c66372-8ae8-447c-92df-b56c9ffebd43	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Locus Cobra"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 21c66372-8ae8-447c-92df-b56c9ffebd43	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 21c768fa-4f1a-4a1a-abb9-e69e17426233	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shimmerwing-chimera:f0t0:s1,f:xs:XP:shimmerwing-chimera:f0t0:s1	-	-	-	3aa6ded33acb	-	453210181ed2	-	-	2026-11-25	xproof

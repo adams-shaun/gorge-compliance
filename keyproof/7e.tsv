@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e52e91b-70e6-4f26-a5d4-b8e33d1debbf	cast	cast-resolve	agreed	-	FX	scen	2	0	Pathbreaker Ibex/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7e52e91b-70e6-4f26-a5d4-b8e33d1debbf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pathbreaker Ibex/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 7e52f151-d1f6-4fcb-9b21-1baecae27da6	cast	cast-resolve	agreed	-	FX	scen	2	0	Loyal Tutor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e550295-eaf4-4962-bc52-261d7c2d71ae	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+7e550295-eaf4-4962-bc52-261d7c2d71ae	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7e550295-eaf4-4962-bc52-261d7c2d71ae	f0/a1	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:artificial-anomaly:f0a1:s1,f:xs:XP:artificial-anomaly:f0a1:s1	-	-	-	23c4009444b0	-	1a60c09045c2	-	-	2026-11-25	xproof
 7e550295-eaf4-4962-bc52-261d7c2d71ae	land	play-land	agreed	-	X	scen	1	0	Artificial Anomaly/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e5d2801-873f-4318-9c23-9a73e00e31a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ef3f240-05a5-4fc9-a977-a729010a53c2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:blitz-hellion:cast:s1,f:xs:XP:blitz-hellion:cast:s1	-	-	-	8a1b1a193ec0	-	28de511453de	-	-	2026-11-24	xproof
 7ef45067-74bd-4df8-9f95-621761a0b4a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ef45067-74bd-4df8-9f95-621761a0b4a0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7ef5c812-ad7d-4d6c-8ee5-68561e7e4bd7	cast	cast-resolve	agreed	-	X	scen	1	0	Saved by the Shell/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ef5c812-ad7d-4d6c-8ee5-68561e7e4bd7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Saved by the Shell/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ef67bae-4af3-47b9-95d2-08f3c5a0b39d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

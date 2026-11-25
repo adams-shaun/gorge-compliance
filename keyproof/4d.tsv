@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4dcd0583-cee0-46a6-ba43-93bca5eb0428	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:astrologian-s-planisphere:f0t0:s2,f:xs:XP:astrologian-s-planisphere:f0t0:s2	-	-	-	267e485f6204	-	52da31d6cc06	-	-	2026-11-24	xproof
 4dcd0583-cee0-46a6-ba43-93bca5eb0428	static#0.0	static#0.0	agreed	-	X	scen	1	0	Astrologian's Planisphere/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4dcd7b78-ce5a-43eb-a16d-3b9ea411795d	cast	cast-resolve	agreed	-	FX	scen	2	0	Guru Pathik/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4dcd7b78-ce5a-43eb-a16d-3b9ea411795d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+4dcd7b78-ce5a-43eb-a16d-3b9ea411795d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4dcd7b78-ce5a-43eb-a16d-3b9ea411795d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Guru Pathik/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4dce1f49-ddad-4748-893a-e10d831ee7d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4dce1f49-ddad-4748-893a-e10d831ee7d7	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

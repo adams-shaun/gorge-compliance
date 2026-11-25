@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8305d576-21d8-4ce7-8eda-a7cd9793aca5	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8307bfb0-3ab2-467f-b13c-ad4acadf319c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8307bfb0-3ab2-467f-b13c-ad4acadf319c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83094dd2-b8e9-4753-a8a0-657b446def60	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83094dd2-b8e9-4753-a8a0-657b446def60	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83101ba8-a569-4827-8c53-9ca0dfcd59a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 831273d4-ced3-4659-b1f6-d5a0aeed3421	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83133f51-bfbd-4db5-9be0-f660e3b66435	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 831487cf-a377-4c9b-920d-c5bc68f17f24	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	421400546c4b	-	-	2026-11-25	xproof
 83157972-3a0b-40e2-a80a-7bfb2a8627ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:raving-visionary:f0a1:s1,f:xs:XP:raving-visionary:f0a1:s1	-	-	-	23b491658465	-	e55bcefe3305	-	-	2026-11-25	xproof
-83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8315aa34-08b8-403e-a2e6-796a2d6978ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stern-lesson:cast:s1,f:xs:XP:stern-lesson:cast:s1	-	-	-	ae86f6029288	-	ec208267fe06	-	-	2026-11-24	xproof
 83161d59-2520-4741-9328-e2a4a8b5d5bc	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Evendo, Waking Haven/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83161d59-2520-4741-9328-e2a4a8b5d5bc	land	play-land	agreed	-	FX	scen	2	0	Evendo, Waking Haven/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83d2ff7f-4d6e-4cc0-b8a9-3c5b3236eea0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83d2ff7f-4d6e-4cc0-b8a9-3c5b3236eea0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83d8e98d-ab97-40b1-820a-2d193a5ed261	cast	cast-resolve	agreed	-	X	scen	1	0	Hemmer, Fixing What Is Broken/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83d8e98d-ab97-40b1-820a-2d193a5ed261	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+83d8e98d-ab97-40b1-820a-2d193a5ed261	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83d8eda7-b8d2-479a-b1ec-de56833a3182	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:praetor-s-counsel:cast:s1,f:xs:XP:praetor-s-counsel:cast:s1	-	-	-	d864b561c9cb	-	c86cecc52409	-	-	2026-11-24	xproof
 83dcfac0-6efd-4e37-9402-15f9889e84e1	cast	cast-resolve	agreed	-	FX	scen	2	0	The Great Goblin/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83dcfac0-6efd-4e37-9402-15f9889e84e1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Great Goblin/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

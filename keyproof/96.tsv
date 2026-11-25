@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 967e8b3f-8266-4d9a-a38b-d0e10184e1e4	static#0.0	static#0.0	agreed	-	X	scen	1	0	Akroma's Memorial/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 967eca77-d273-4fc6-97d1-df7d8cc6ff59	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mystic-might:cast:s1,f:xs:XP:mystic-might:cast:s1	-	-	-	8c0bd19283bb	-	67a20802d734	-	-	2026-11-24	xproof
 967eca77-d273-4fc6-97d1-df7d8cc6ff59	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
-967f0c23-7af2-4e86-9ebc-dc2f8856c7c5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+967f0c23-7af2-4e86-9ebc-dc2f8856c7c5	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 96818698-c104-48f4-b73f-c8722d1d1be4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:darling-of-the-masses:cast:s1,f:xs:XP:darling-of-the-masses:cast:s1	-	-	-	d864b561c9cb	-	9cd4e3cc8559	-	-	2026-11-24	xproof
 96818698-c104-48f4-b73f-c8722d1d1be4	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:darling-of-the-masses:f0t0:s1,f:xs:XP:darling-of-the-masses:f0t0:s1	-	-	-	d864b561c9cb	-	9cd4e3cc8559	-	-	2026-11-24	xproof
 9684447a-5955-4bc7-8ad0-8bb8b316873b	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -123,8 +123,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96a6a8d4-6077-470f-984e-b576a24557a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:decree-of-savagery:cast:s1,f:xs:XP:decree-of-savagery:cast:s1	-	-	-	8c0bd19283bb	-	7a1d210ec970	-	-	2026-11-24	xproof
 96a6a8d4-6077-470f-984e-b576a24557a2	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 96a6a8d4-6077-470f-984e-b576a24557a2	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-96aab05a-49bc-418a-9980-f3322955de1e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96aab05a-49bc-418a-9980-f3322955de1e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+96aab05a-49bc-418a-9980-f3322955de1e	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+96aab05a-49bc-418a-9980-f3322955de1e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 96b3c4ff-b5f7-4315-9b39-2e2146ef10d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodland-druid:cast:s1,f:xs:XP:woodland-druid:cast:s1	-	-	-	fc71ca68c5ac	-	d1383c20104a	-	-	2026-11-24	xproof
 96b611e9-38cc-4326-bb38-73084e99e6f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96b87445-6362-4a17-91b2-cbf203fd03fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aang, at the Crossroads/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Aang, at the Crossroads/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Aang, at the Crossroads/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-96e5d4a1-e59f-4140-823f-a17e15ee5d8d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+96e5d4a1-e59f-4140-823f-a17e15ee5d8d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aang, at the Crossroads/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Aang, at the Crossroads/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	static#1.0	static#1.0	agreed	-	X	scen	1	0	Aang, at the Crossroads/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

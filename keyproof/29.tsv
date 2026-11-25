@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2901948c-2a5a-4135-9135-27406e9d8652	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raffine-s-silencer:f0t0:s1,f:xs:XP:raffine-s-silencer:f0t0:s1	-	-	-	d864b561c9cb	-	eba4d222c795	-	-	2026-11-24	xproof
 2901948c-2a5a-4135-9135-27406e9d8652	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:raffine-s-silencer:f0t0:s1,f:xs:XP:raffine-s-silencer:f0t0:s1	-	-	-	d864b561c9cb	-	eba4d222c795	-	-	2026-11-24	xproof
 2901948c-2a5a-4135-9135-27406e9d8652	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:raffine-s-silencer:f0t1:s1,f:xs:XP:raffine-s-silencer:f0t1:s1	-	-	-	d864b561c9cb	-	eba4d222c795	-	-	2026-11-24	xproof
-290323d7-d8cb-4706-87d9-b920a4e2f680	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+290323d7-d8cb-4706-87d9-b920a4e2f680	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 290323d7-d8cb-4706-87d9-b920a4e2f680	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 290323d7-d8cb-4706-87d9-b920a4e2f680	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 29062094-594d-4557-9496-11a15d7e3bb0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:time-bomb:f0t0:s1,f:xs:XP:time-bomb:f0t0:s1	-	-	-	3aa6ded33acb	-	957cae51cfb2	-	-	2026-11-25	xproof
@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2950a304-0c2d-4dcd-b8c7-d77a00f9e091	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	0382ad501408	-	-	2026-11-24	xproof
 2951671b-ac01-4e65-857f-0b7b7c7478ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2951671b-ac01-4e65-857f-0b7b7c7478ce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2951671b-ac01-4e65-857f-0b7b7c7478ce	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2951671b-ac01-4e65-857f-0b7b7c7478ce	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 295a831c-490e-42ba-afc1-dab3524a4f0c	cast	cast-resolve	agreed	-	X	scen	1	0	Glacierwood Siege/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 295a831c-490e-42ba-afc1-dab3524a4f0c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Glacierwood Siege/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 295a831c-490e-42ba-afc1-dab3524a4f0c	static#0.1	static#0.1	agreed	-	X	scen	1	0	Glacierwood Siege/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

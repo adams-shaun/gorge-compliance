@@ -25,7 +25,7 @@ da1dd850-9118-42b9-8846-e6bd5042775c	f0/t0	NULL	owed	refused:no-generator:trigge
 da1e019c-2ffb-412d-90d7-f2e5e5c44c4b	cast	cast-resolve	agreed	-	X	scen	1	0	Bloomvine Regent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 da1e019c-2ffb-412d-90d7-f2e5e5c44c4b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bloomvine Regent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 da1e019c-2ffb-412d-90d7-f2e5e5c44c4b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bloomvine Regent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-da1e019c-2ffb-412d-90d7-f2e5e5c44c4b	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+da1e019c-2ffb-412d-90d7-f2e5e5c44c4b	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 da1ec215-eb37-4b80-99aa-79a1f02dea2a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	5ca52d83a14a	-	-	2026-11-24	xproof
 da1ec215-eb37-4b80-99aa-79a1f02dea2a	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	5ca52d83a14a	-	-	2026-11-24	xproof
 da21c21c-88d8-4a93-b2b4-6d7bb28959c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dread-specter:cast:s1,f:xs:XP:dread-specter:cast:s1	-	-	-	ea3140b6974b	-	58f5301d5bf5	-	-	2026-11-24	xproof
@@ -38,7 +38,7 @@ da2ac9fa-52c2-4896-a596-89f287406641	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 da2d27f7-cced-4118-bddc-41712e37e916	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plundering-barbarian:f0t0:s1,f:xs:XP:plundering-barbarian:f0t0:s1	-	-	-	3aa6ded33acb	-	ebfa470ad6df	-	-	2026-11-25	xproof
 da2d27f7-cced-4118-bddc-41712e37e916	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:plundering-barbarian:f0t0:s1,f:xs:XP:plundering-barbarian:f0t0:s1	-	-	-	3aa6ded33acb	-	ebfa470ad6df	-	-	2026-11-25	xproof
 da307ea2-4df7-4d6b-be0f-9dc6ac93db61	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:basilisk-gate:f0a1:s1,f:xs:XP:basilisk-gate:f0a1:s1	-	-	-	23c4009444b0	-	b9420abeb74b	-	-	2026-11-25	xproof
-da307ea2-4df7-4d6b-be0f-9dc6ac93db61	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+da307ea2-4df7-4d6b-be0f-9dc6ac93db61	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 da307ea2-4df7-4d6b-be0f-9dc6ac93db61	land	land	agreed	-	FX	start	2	0	x:xs:XP:baldur-s-gate:land:s1,f:xs:XP:baldur-s-gate:land:s1	-	-	-	8c0bd19283bb	-	b9420abeb74b	-	-	2026-11-24	xproof
 da344e46-6bdf-4032-8590-bac850d5713d	cast	cast-resolve	agreed	-	FX	scen	2	0	Groundchuck & Dirtbag/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 da344e46-6bdf-4032-8590-bac850d5713d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Groundchuck & Dirtbag/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -158,7 +158,7 @@ dac33359-0317-4b11-9078-fccfd2321e53	combat#0.block	combat.block	agreed	-	FX	sta
 dac33359-0317-4b11-9078-fccfd2321e53	static#0.0	static#0.0	agreed	-	X	scen	1	0	Memory Guardian/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dac3a263-cc02-446a-88ec-882a21096b6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-spear-of-leonidas:cast:s1,f:xs:XP:the-spear-of-leonidas:cast:s1	-	-	-	ae86f6029288	-	62ab80d1e34c	-	-	2026-11-24	xproof
 dac3a263-cc02-446a-88ec-882a21096b6c	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:the-spear-of-leonidas:f0a0:s1,f:xs:XP:the-spear-of-leonidas:f0a0:s1	-	-	-	3aa6ded33acb	-	62ab80d1e34c	-	-	2026-11-25	xproof
-dac3a263-cc02-446a-88ec-882a21096b6c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dac3a263-cc02-446a-88ec-882a21096b6c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dac85722-d741-4584-8b98-8ac220958a38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dac85722-d741-4584-8b98-8ac220958a38	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dac9bbfc-62e9-42a9-8ad6-2530ba47b990	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ dae20bcd-dc24-4f9d-9400-a6f013b49f14	cast	cast-resolve	agreed	-	FX	scen	2	0	Agen
 dae20bcd-dc24-4f9d-9400-a6f013b49f14	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Agent Phil Coulson/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dae20bcd-dc24-4f9d-9400-a6f013b49f14	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Agent Phil Coulson/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dae20bcd-dc24-4f9d-9400-a6f013b49f14	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Agent Phil Coulson/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dae81b1b-28dd-4f7f-9bcb-65e72eaa37e2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dae81b1b-28dd-4f7f-9bcb-65e72eaa37e2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dae8dc90-8047-434c-9e3a-a2eaa6aba575	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 daed1b38-510b-4698-95c3-05c09f5fabe9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hidden-footblade:f0t0:s1,f:xs:XP:hidden-footblade:f0t0:s1	-	-	-	ae86f6029288	-	84f96bb27abf	-	-	2026-11-24	xproof
 daed1b38-510b-4698-95c3-05c09f5fabe9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

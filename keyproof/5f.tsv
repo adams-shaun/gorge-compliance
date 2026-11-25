@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f143d87-35fb-40e3-94ae-f85cfff9adb5	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Gwen Stacy/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f143d87-35fb-40e3-94ae-f85cfff9adb5	f1/t1	trigger#1.1	agreed	-	X	scen	1	0	Gwen Stacy/trigger#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f15125e-ae89-471e-b055-226a783bc7c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f15125e-ae89-471e-b055-226a783bc7c1	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f15125e-ae89-471e-b055-226a783bc7c1	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5f15125e-ae89-471e-b055-226a783bc7c1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5f1e8aa2-6b85-4e2e-92e4-876470447d6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f1f49dd-b7ce-494a-9b4b-ac702d3664c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -198,7 +198,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5fed5377-07cf-4ad9-86fd-1efe1f182088	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5feedfb0-30e6-400d-9e28-d541ea1aa14e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plague-spitter:f0t0:s1,f:xs:XP:plague-spitter:f0t0:s1	-	-	-	3aa6ded33acb	-	985a179f76aa	-	-	2026-11-25	xproof
 5feedfb0-30e6-400d-9e28-d541ea1aa14e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:plague-spitter:f0t0:s1,f:xs:XP:plague-spitter:f0t0:s1	-	-	-	3aa6ded33acb	-	985a179f76aa	-	-	2026-11-25	xproof
-5feedfb0-30e6-400d-9e28-d541ea1aa14e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5feedfb0-30e6-400d-9e28-d541ea1aa14e	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5ff647e4-730a-498f-8f2c-5bd64d5a9780	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:cathedral-of-war:f0t0:s1,f:xs:XP:cathedral-of-war:f0t0:s1	-	-	-	23b491658465	-	cf08e0688caf	-	-	2026-11-25	xproof
 5ff647e4-730a-498f-8f2c-5bd64d5a9780	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ff647e4-730a-498f-8f2c-5bd64d5a9780	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:unstoppable-slasher:combat0.attack:s1,f:xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
 6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:unstoppable-slasher:f0t1:s1,f:xs:XP:unstoppable-slasher:f0t1:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
 66630640-9605-44da-afdf-eb9d458d056f	cast	cast-resolve	agreed	-	X	scen	1	0	Mirkwood Nurturer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-66630640-9605-44da-afdf-eb9d458d056f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+66630640-9605-44da-afdf-eb9d458d056f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6665bfe2-942c-4b3d-a976-776fe00c99f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6665bfe2-942c-4b3d-a976-776fe00c99f4	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fang-roku-s-companion:f0t0:s1,f:xs:XP:fang-roku-s-companion:f0t0:s1	-	-	-	8c0bd19283bb	-	0278f37cd959	-	-	2026-11-24	xproof
 6665bfe2-942c-4b3d-a976-776fe00c99f4	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fang-roku-s-companion:f0t1:s1,f:xs:XP:fang-roku-s-companion:f0t1:s1	-	-	-	8c0bd19283bb	-	0278f37cd959	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:fifty-feet-of-rope:f0a1:s1,f:xs:XP:fifty-feet-of-rope:f0a1:s1	-	-	-	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	xproof
 66aa6905-86f9-4800-988d-ffebafd4a9dc	f0/a2	Venture	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	bd6276ca8e73	-	-	2026-11-24	xproof
 66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+66ae2562-68e9-4c77-ba0a-57f8ff37f656	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 66ae2562-68e9-4c77-ba0a-57f8ff37f656	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66ae3349-ad37-47da-8ccc-3e1cdddb32a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arctic-nishoba:cast:s1,f:xs:XP:arctic-nishoba:cast:s1	-	-	-	64a08ba7d913	-	8026556fc8ac	-	-	2026-11-24	xproof
 66ae3349-ad37-47da-8ccc-3e1cdddb32a9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof

@@ -32,8 +32,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5820d760-8ed7-4abf-a959-c06ed86a3730	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58214e60-3258-4159-bf5a-b4069d80186d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skyshroud-vampire:cast:s1,f:xs:XP:skyshroud-vampire:cast:s1	-	-	-	8c0bd19283bb	-	c90ac9ae77a7	-	-	2026-11-24	xproof
 58214e60-3258-4159-bf5a-b4069d80186d	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
-58232c49-f880-41ef-b808-62a6e804c715	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-58232c49-f880-41ef-b808-62a6e804c715	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+58232c49-f880-41ef-b808-62a6e804c715	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+58232c49-f880-41ef-b808-62a6e804c715	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 58232c49-f880-41ef-b808-62a6e804c715	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 58254569-0ba6-4ac1-9403-dc21a1b5c2e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:taunting-arbormage:f0t0:s1,f:xs:XP:taunting-arbormage:f0t0:s1	-	-	-	ae86f6029288	-	cd4bb1c2d5d6	-	-	2026-11-24	xproof
 58254569-0ba6-4ac1-9403-dc21a1b5c2e8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:taunting-arbormage:f0t0:s1,f:xs:XP:taunting-arbormage:f0t0:s1	-	-	-	ae86f6029288	-	cd4bb1c2d5d6	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 58b771d4-dfaf-4189-a5f6-4bc0fb4c0fa3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Spider-Rex, Daring Dino/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58b771d4-dfaf-4189-a5f6-4bc0fb4c0fa3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Spider-Rex, Daring Dino/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 58b771d4-dfaf-4189-a5f6-4bc0fb4c0fa3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spider-Rex, Daring Dino/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-58b9f933-7b13-4335-996c-4722ab9e08b2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+58b9f933-7b13-4335-996c-4722ab9e08b2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 58b9f933-7b13-4335-996c-4722ab9e08b2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 58bbd316-e22c-4c23-8024-364122d1e9a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:screeching-harpy:cast:s1,f:xs:XP:screeching-harpy:cast:s1	-	-	-	8c0bd19283bb	-	1b30e1a8625b	-	-	2026-11-24	xproof
 58bbd316-e22c-4c23-8024-364122d1e9a2	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:screeching-harpy:f0a0:s1,f:xs:XP:screeching-harpy:f0a0:s1	-	-	-	8c0bd19283bb	-	1b30e1a8625b	-	-	2026-11-24	xproof

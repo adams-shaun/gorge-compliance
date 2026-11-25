@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0390a3dc-386c-402f-a89c-b94867bfb0a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0391691f-6708-481a-93a5-6677e6fa2ff3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunflare-shaman:cast:s1,f:xs:XP:sunflare-shaman:cast:s1	-	-	-	d864b561c9cb	-	aa7e0b88a63d	-	-	2026-11-24	xproof
 0391691f-6708-481a-93a5-6677e6fa2ff3	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:sunflare-shaman:f0a0:s1,f:xs:XP:sunflare-shaman:f0a0:s1	-	-	-	d864b561c9cb	-	aa7e0b88a63d	-	-	2026-11-24	xproof
-03931270-504a-4b0b-af3f-918bf124ea07	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+03931270-504a-4b0b-af3f-918bf124ea07	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0394846e-bc27-4d67-988e-b08a389690de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:cast:s1,f:xs:XP:rover-blades:cast:s1	-	-	-	23c4009444b0	-	29523231a448	-	-	2026-11-25	xproof
 0394846e-bc27-4d67-988e-b08a389690de	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:f0a0:s1,f:xs:XP:rover-blades:f0a0:s1	-	-	-	23c4009444b0	-	29523231a448	-	-	2026-11-25	xproof
 0394846e-bc27-4d67-988e-b08a389690de	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:rover-blades:f0a1:s1,f:xs:XP:rover-blades:f0a1:s1	-	-	-	23c4009444b0	-	29523231a448	-	-	2026-11-25	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03c141ca-11e4-4927-a6bd-980ee1203c73	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Appa, Steadfast Guardian/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03c141ca-11e4-4927-a6bd-980ee1203c73	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03c141ca-11e4-4927-a6bd-980ee1203c73	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Appa, Steadfast Guardian/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-03c1e376-1410-4321-90fe-a6997e8db85a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+03c1e376-1410-4321-90fe-a6997e8db85a	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 03c35670-84ac-4825-b395-cefb76ceb89a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:baffling-end:cast:s1,f:xs:XP:baffling-end:cast:s1	-	-	-	d864b561c9cb	-	b316189d3f20	-	-	2026-11-24	xproof
 03c35670-84ac-4825-b395-cefb76ceb89a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:baffling-end:cast:s1,f:xs:XP:baffling-end:cast:s1	-	-	-	d864b561c9cb	-	b316189d3f20	-	-	2026-11-24	xproof
 03c35670-84ac-4825-b395-cefb76ceb89a	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

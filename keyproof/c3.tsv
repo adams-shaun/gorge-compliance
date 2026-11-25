@@ -90,7 +90,7 @@ c38cc5fe-936a-4d61-a816-9be773ae1d02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c38cc5fe-936a-4d61-a816-9be773ae1d02	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c38db10f-c0b7-4391-b49a-77079a4d087c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c38db10f-c0b7-4391-b49a-77079a4d087c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c38db10f-c0b7-4391-b49a-77079a4d087c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c38db10f-c0b7-4391-b49a-77079a4d087c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c38db10f-c0b7-4391-b49a-77079a4d087c	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c38f7447-e646-438d-81bd-fe2a71c8a79c	cast	cast-resolve	agreed	-	X	scen	1	0	Ninja of the Hand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c38f7447-e646-438d-81bd-fe2a71c8a79c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ninja of the Hand/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -98,9 +98,9 @@ c38f7447-e646-438d-81bd-fe2a71c8a79c	combat#0.block	combat#0.block	agreed	-	X	sc
 c38f7447-e646-438d-81bd-fe2a71c8a79c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ninja of the Hand/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c39112ab-ee1f-4f00-b18b-692b5fe32b80	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c39112ab-ee1f-4f00-b18b-692b5fe32b80	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
-c3936db3-d3b6-4a92-9773-6f3c52dc419d	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Seasoned Cryomancer"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-c3936db3-d3b6-4a92-9773-6f3c52dc419d	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Seasoned Cryomancer"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-c3936db3-d3b6-4a92-9773-6f3c52dc419d	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Seasoned Cryomancer"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+c3936db3-d3b6-4a92-9773-6f3c52dc419d	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Seasoned Cryomancer"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c3936db3-d3b6-4a92-9773-6f3c52dc419d	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Seasoned Cryomancer"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c3936db3-d3b6-4a92-9773-6f3c52dc419d	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Seasoned Cryomancer"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c394b767-620c-4310-b78f-ece312259e46	cast	cast-resolve	agreed	-	X	scen	1	0	Misty Mountains Raider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c394b767-620c-4310-b78f-ece312259e46	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Misty Mountains Raider/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c394d4b6-cfb8-4639-90cb-a322a25c0a2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dropkick-bomber:cast:s1,f:xs:XP:dropkick-bomber:cast:s1	-	-	-	23c4009444b0	-	bbd4fc1e60f8	-	-	2026-11-25	xproof
@@ -118,7 +118,7 @@ c3974ec7-7af0-4b65-baf6-4c1c4fe8a5c4	f0/a1	NULL	owed	refused:steps-needed:cost:S
 c3974ec7-7af0-4b65-baf6-4c1c4fe8a5c4	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c39c1604-3bae-454d-9985-85101e51ec6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c39e2046-173a-44b6-8e93-b22ede35485d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-s-stoneglare:cast:s1,f:xs:XP:vraska-s-stoneglare:cast:s1	-	-	-	3aa6ded33acb	-	4fa01baf3048	-	-	2026-11-25	xproof
-c39e5fb0-6de3-4105-ad3c-0ecb8951a1d5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c39e5fb0-6de3-4105-ad3c-0ecb8951a1d5	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c39ea5f9-6ec0-4697-897b-779e326754a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mahamoti-djinn:cast:s1,f:xs:XP:mahamoti-djinn:cast:s1	-	-	-	ae86f6029288	-	93090b62a081	-	-	2026-11-24	xproof
 c3a1bb65-556a-4016-a06a-3894710cb190	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:totem-guide-hartebeest:f0t0:s1,f:xs:XP:totem-guide-hartebeest:f0t0:s1	-	-	-	d864b561c9cb	-	6cf54f2bf534	-	-	2026-11-24	xproof
 c3a1bb65-556a-4016-a06a-3894710cb190	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:totem-guide-hartebeest:f0t0:s1,f:xs:XP:totem-guide-hartebeest:f0t0:s1	-	-	-	d864b561c9cb	-	6cf54f2bf534	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ c3b1b7bd-cff8-4275-b6d3-868f4e4b2cc0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c3b46bd6-b3ef-452d-a916-995c44f1da07	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:wanderwine-hub:f0a0:s1,f:xs:XP:wanderwine-hub:f0a0:s1	-	-	-	d864b561c9cb	-	ef8c0cd6527a	-	-	2026-11-24	xproof
 c3b46bd6-b3ef-452d-a916-995c44f1da07	land	land	agreed	-	F	start	2	0	f:xs:XP:wanderwine-hub:land:s1	-	-	-	d864b561c9cb	-	ef8c0cd6527a	-	-	2026-11-24	xproof
 c3b6e114-7bc8-4890-97d9-edbeea1f425f	cast	cast	agreed	-	F	start	2	0	f:xs:XP:assault-suit:f0t0:s1	-	-	-	3aa6ded33acb	-	893b1e6f347d	-	-	2026-11-25	xproof
-c3b6e114-7bc8-4890-97d9-edbeea1f425f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c3b6e114-7bc8-4890-97d9-edbeea1f425f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c3b6e114-7bc8-4890-97d9-edbeea1f425f	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:assault-suit:f0t0:s1	-	-	-	3aa6ded33acb	-	893b1e6f347d	-	-	2026-11-25	xproof
 c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:feral-deceiver:cast:s1,f:xs:XP:feral-deceiver:cast:s1	-	-	-	25696bf19d5b	-	ff7b95614550	-	-	2026-11-24	xproof
 c3b8ea58-d84f-4c60-9f72-e4ec389eb93c	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9837287b-d821-4655-8f01-93fc6c7f0ecc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9837287b-d821-4655-8f01-93fc6c7f0ecc	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 983739cd-0b36-40d9-9a03-7b6aa7ffd0df	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-983739cd-0b36-40d9-9a03-7b6aa7ffd0df	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+983739cd-0b36-40d9-9a03-7b6aa7ffd0df	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 983739cd-0b36-40d9-9a03-7b6aa7ffd0df	land	land	agreed	-	FX	start	2	0	x:xs:XP:rimewood-falls:land:s1,f:xs:XP:rimewood-falls:land:s1	-	-	-	d864b561c9cb	-	806923dcc530	-	-	2026-11-24	xproof
 98388eba-31ab-4302-be9e-ea67ea2b8c1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98388eba-31ab-4302-be9e-ea67ea2b8c1a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	cast	cast-resolve	agreed	-	X	scen	1	0	Exdeath, Void Warlock/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Exdeath, Void Warlock/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Exdeath, Void Warlock/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98c9d798-8c48-4a2d-a076-ce17d31df6f5	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+98c9d798-8c48-4a2d-a076-ce17d31df6f5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Exdeath, Void Warlock/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	static#1.0	static#1.0	agreed	-	X	scen	1	0	Exdeath, Void Warlock/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98cbac1d-7896-4c63-a265-03bc5d670fa6	cast	cast-resolve	agreed	-	X	scen	1	0	Relentless Drednok/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

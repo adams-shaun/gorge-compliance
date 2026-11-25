@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 870185fc-7b05-47d3-95ff-97fbf12796d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-870185fc-7b05-47d3-95ff-97fbf12796d4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+870185fc-7b05-47d3-95ff-97fbf12796d4	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 870185fc-7b05-47d3-95ff-97fbf12796d4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 87038d1b-0fa9-4604-b119-1de56db30144	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyromancer-s-assault:cast:s1,f:xs:XP:pyromancer-s-assault:cast:s1	-	-	-	d864b561c9cb	-	09493a05f7ce	-	-	2026-11-24	xproof
 87038d1b-0fa9-4604-b119-1de56db30144	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -180,9 +180,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87bafa97-38fd-41a2-8b1d-315e88d9d0bf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87bc6be7-4734-4a11-806e-e9e4f5616fe0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carrion-ants:cast:s1,f:xs:XP:carrion-ants:cast:s1	-	-	-	ae86f6029288	-	8003b5d3dc68	-	-	2026-11-24	xproof
 87bc6be7-4734-4a11-806e-e9e4f5616fe0	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:carrion-ants:f0a0:s1,f:xs:XP:carrion-ants:f0a0:s1	-	-	-	ae86f6029288	-	8003b5d3dc68	-	-	2026-11-24	xproof
-87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Blastoneuron"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Blastoneuron"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Blastoneuron"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Blastoneuron"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+87bcc935-e7e7-4e98-a23c-01c5a9b7cfcd	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 87bd0fdb-c5b9-46ea-9858-1a870960351f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87bedc9b-b4d2-41b6-b9f1-e1aeb8e75ec3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rootrider-faun:cast:s1,f:xs:XP:rootrider-faun:cast:s1	-	-	-	23b491658465	-	49fc9009d343	-	-	2026-11-24	xproof
 87bedc9b-b4d2-41b6-b9f1-e1aeb8e75ec3	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:rootrider-faun:f0a0:s1,f:xs:XP:rootrider-faun:f0a0:s1	-	-	-	23b491658465	-	49fc9009d343	-	-	2026-11-24	xproof

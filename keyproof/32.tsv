@@ -77,7 +77,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	cast	cast-resolve	agreed	-	X	scen	1	0	Monastery Messenger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Monastery Messenger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b88e1-ec7f-4d22-887c-a7f18a868bb0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Monastery Messenger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-325b88e1-ec7f-4d22-887c-a7f18a868bb0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+325b88e1-ec7f-4d22-887c-a7f18a868bb0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3260bede-d78d-41a6-8fe1-95ce14a2ba8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lava-blister:cast:s1,f:xs:XP:lava-blister:cast:s1	-	-	-	fc71ca68c5ac	-	6b795db96ab9	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32638d03-c101-42f0-8a4b-8c6290257a28	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -144,8 +144,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32af5f7b-a970-484a-9aff-226749551d32	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Thousand Moons Smithy/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32af5f7b-a970-484a-9aff-226749551d32	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Thousand Moons Smithy/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 32b03b48-06da-4a74-a7ac-e5ae39a4f428	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-32b03b48-06da-4a74-a7ac-e5ae39a4f428	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32b03b48-06da-4a74-a7ac-e5ae39a4f428	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32b03b48-06da-4a74-a7ac-e5ae39a4f428	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+32b03b48-06da-4a74-a7ac-e5ae39a4f428	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32b03b48-06da-4a74-a7ac-e5ae39a4f428	land	land	agreed	-	FX	start	2	0	x:xs:XP:fetid-pools:land:s1,f:xs:XP:fetid-pools:land:s1	-	-	-	d864b561c9cb	-	c4d0c969f944	-	-	2026-11-24	xproof
 32b0fc43-b5ce-4869-a780-946289305e5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32b401e9-163f-4917-a728-fc63b25ef602	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32bb6d53-3b9e-4f13-a17e-46b564afd366	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 32c10a3e-85b0-49af-9b23-81d0b7e407df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32c84176-cf11-4010-b1cc-ed570a8c3e54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32c91719-f3dd-4cc7-9e32-7d5ccf18f07c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32c91719-f3dd-4cc7-9e32-7d5ccf18f07c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32c91719-f3dd-4cc7-9e32-7d5ccf18f07c	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32c91719-f3dd-4cc7-9e32-7d5ccf18f07c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32c9ce8c-a19d-49e4-bc6d-c7182fa00b51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,11 +175,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32e5339e-9e4f-46f8-b305-f9d6d3ba8bb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e5339e-9e4f-46f8-b305-f9d6d3ba8bb5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32e5a4ac-69c7-4de0-8b9f-dd86682f2ffd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nimbleclaw-adept:cast:s1,f:xs:XP:nimbleclaw-adept:cast:s1	-	-	-	8c0bd19283bb	-	3aee7562686b	-	-	2026-11-24	xproof
-32e5a4ac-69c7-4de0-8b9f-dd86682f2ffd	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32e5a4ac-69c7-4de0-8b9f-dd86682f2ffd	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32e60fb4-e841-4f82-9c83-5e63766e8e6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spellstutter-sprite:f0t0:s1,f:xs:XP:spellstutter-sprite:f0t0:s1	-	-	-	d864b561c9cb	-	a0819022ae20	-	-	2026-11-24	xproof
 32e60fb4-e841-4f82-9c83-5e63766e8e6f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spellstutter-sprite:f0t0:s1,f:xs:XP:spellstutter-sprite:f0t0:s1	-	-	-	d864b561c9cb	-	a0819022ae20	-	-	2026-11-24	xproof
 32e66ea0-5f35-4df8-8d00-580403c51bb5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lotus-blossom:f0t0:s1,f:xs:XP:lotus-blossom:f0t0:s1	-	-	-	3aa6ded33acb	-	3068f3fe3314	-	-	2026-11-25	xproof
-32e66ea0-5f35-4df8-8d00-580403c51bb5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32e66ea0-5f35-4df8-8d00-580403c51bb5	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32e66ea0-5f35-4df8-8d00-580403c51bb5	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lotus-blossom:f0t0:s1,f:xs:XP:lotus-blossom:f0t0:s1	-	-	-	3aa6ded33acb	-	3068f3fe3314	-	-	2026-11-25	xproof
 32e7385e-525e-4925-8cfd-bfea21fcd1bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:asari-captain:cast:s1,f:xs:XP:asari-captain:cast:s1	-	-	-	d864b561c9cb	-	d9131db61ed1	-	-	2026-11-24	xproof
 32e7385e-525e-4925-8cfd-bfea21fcd1bf	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:asari-captain:f0t0:s1,f:xs:XP:asari-captain:f0t0:s1	-	-	-	3aa6ded33acb	-	d9131db61ed1	-	-	2026-11-25	xproof
@@ -197,7 +197,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32f5f67b-bba3-427c-ab24-13a50acdc611	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:carnivorous-moss-beast:f0a0:s1,f:xs:XP:carnivorous-moss-beast:f0a0:s1	-	-	-	d864b561c9cb	-	fa61654925ac	-	-	2026-11-24	xproof
 32fad8d3-5351-49ce-a453-53dee403b5ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32fad8d3-5351-49ce-a453-53dee403b5ff	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-32fb0096-546c-4633-b6e3-ba3f2d9fa49c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+32fb0096-546c-4633-b6e3-ba3f2d9fa49c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 32fb0096-546c-4633-b6e3-ba3f2d9fa49c	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32fb0096-546c-4633-b6e3-ba3f2d9fa49c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32fc8fa7-7e0a-4d4e-85cf-2f98b3fc6ecf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-companion:cast:s1,f:xs:XP:garruk-s-companion:cast:s1	-	-	-	d864b561c9cb	-	db9f5b973fe0	-	-	2026-11-24	xproof

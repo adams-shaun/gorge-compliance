@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b6625cb-4177-45bd-ba99-2af43dfd6f46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b6625cb-4177-45bd-ba99-2af43dfd6f46	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 0b67c4e2-f88b-4e01-85a1-9d5f5b8db13b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0b67c4e2-f88b-4e01-85a1-9d5f5b8db13b	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0b67c4e2-f88b-4e01-85a1-9d5f5b8db13b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0b67c4e2-f88b-4e01-85a1-9d5f5b8db13b	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:commander-s-sphere:f0a0:s1,f:xs:XP:commander-s-sphere:f0a0:s1	-	-	-	23b491658465	-	047ba807f6b1	-	-	2026-11-24	xproof
 0b67dff0-5bb7-44fe-a72b-d3b1a6c0ee72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b683611-e46f-4105-b336-014d1556c8de	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haunt-of-the-dead-marshes:f0t0:s1,f:xs:XP:haunt-of-the-dead-marshes:f0t0:s1	-	-	-	ae86f6029288	-	d0de2eba7a98	-	-	2026-11-24	xproof
@@ -156,14 +156,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0bb860c5-41af-494e-9b0f-d05d6fa8255c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-pathcutter:cast:s1,f:xs:XP:elvish-pathcutter:cast:s1	-	-	-	fc71ca68c5ac	-	4cd74349f791	-	-	2026-11-24	xproof
 0bb860c5-41af-494e-9b0f-d05d6fa8255c	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:elvish-pathcutter:f0a0:s1,f:xs:XP:elvish-pathcutter:f0a0:s1	-	-	-	fc71ca68c5ac	-	4cd74349f791	-	-	2026-11-24	xproof
 0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:hall-of-oracles:f0a1:s1,f:xs:XP:hall-of-oracles:f0a1:s1	-	-	-	23b491658465	-	cfb15ca03292	-	-	2026-11-25	xproof
-0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0bb896ba-e15e-43a9-9120-e674d7ba003c	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0bb896ba-e15e-43a9-9120-e674d7ba003c	land	land	agreed	-	FX	start	2	0	x:xs:XP:hall-of-oracles:land:s1,f:xs:XP:hall-of-oracles:land:s1	-	-	-	d864b561c9cb	-	cfb15ca03292	-	-	2026-11-24	xproof
 0bbab99f-2ff6-4d48-b7c1-1ab0500c9422	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bbcb563-09b3-499d-a9cc-3a6d7501dd81	cast	cast-resolve	agreed	-	X	scen	1	0	Collected Company/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-0bbceb51-1fb8-44d7-8afc-b4746d292262	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Political Triumph"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-0bbceb51-1fb8-44d7-8afc-b4746d292262	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Political Triumph"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-0bbceb51-1fb8-44d7-8afc-b4746d292262	f0/t1	NULL	owed	refused:no-generator:trigger:CounterAdded	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+0bbceb51-1fb8-44d7-8afc-b4746d292262	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Political Triumph"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0bbceb51-1fb8-44d7-8afc-b4746d292262	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Political Triumph"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0bbceb51-1fb8-44d7-8afc-b4746d292262	f0/t1	NULL	owed	refused:no-generator:trigger:CounterAdded	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0bbd5a04-c281-4afb-98a1-657b4eca102c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:subterranean-hangar:f0a0:s1,f:xs:XP:subterranean-hangar:f0a0:s1	-	-	-	5f2128bf97e4	-	4d5d48b13d0a	-	-	2026-11-24	xproof
 0bbd5a04-c281-4afb-98a1-657b4eca102c	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 0bbd5a04-c281-4afb-98a1-657b4eca102c	land	land	agreed	-	FX	start	2	0	x:xs:XP:subterranean-hangar:land:s1,f:xs:XP:subterranean-hangar:land:s1	-	-	-	5f2128bf97e4	-	4d5d48b13d0a	-	-	2026-11-24	xproof
@@ -199,7 +199,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0be907b2-54f9-4c8c-b6af-7c0093892e42	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0bf1f2c1-2148-4302-a6e7-d509a005a85f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bf299da-1854-4153-baea-3cee2eb01ee8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0bf299da-1854-4153-baea-3cee2eb01ee8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0bf299da-1854-4153-baea-3cee2eb01ee8	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0bf299da-1854-4153-baea-3cee2eb01ee8	f0/a1	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 0bf299da-1854-4153-baea-3cee2eb01ee8	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0bf4c01d-3cb0-47be-b84a-6a399bc2d3fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

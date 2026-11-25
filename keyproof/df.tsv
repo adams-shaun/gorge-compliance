@@ -16,7 +16,7 @@ df197279-ddb2-4237-8bb1-8df41d3bed9e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	
 df1a8846-b4da-4e9b-8cf3-ee687e4c606b	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:servant-of-the-conduit:cast:s1,f:xs:XP:servant-of-the-conduit:cast:s1	-	-	-	d864b561c9cb	-	4bc97e969a37	-	-	2026-11-24	xproof
 df1a8846-b4da-4e9b-8cf3-ee687e4c606b	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 df1a8846-b4da-4e9b-8cf3-ee687e4c606b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:servant-of-the-conduit:cast:s1,f:xs:XP:servant-of-the-conduit:cast:s1	-	-	-	d864b561c9cb	-	4bc97e969a37	-	-	2026-11-24	xproof
-df1c0d06-2109-4297-9271-8a003fc892bc	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+df1c0d06-2109-4297-9271-8a003fc892bc	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 df1c0d06-2109-4297-9271-8a003fc892bc	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Kirol, History Buff/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 df206fb3-2d98-439e-9f1a-161bdbdc47b2	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hunters-feast:cast:s1	-	-	-	d864b561c9cb	-	69c5e1857375	-	-	2026-11-24	xproof
 df20f85b-5f81-4ee4-8487-55d90109ac36	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:restless-reef:f0a0:s2,f:xs:XP:restless-reef:f0a0:s2	-	-	-	8c0bd19283bb	-	0e49d95f649f	-	-	2026-11-24	xproof
@@ -100,8 +100,8 @@ df7e296d-96de-4280-a4d8-49189544b9e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 df7e296d-96de-4280-a4d8-49189544b9e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df7f697e-6886-4897-a024-61ae225c1b34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df82b67f-f685-4278-a108-f3689a3a121b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df8a0737-5841-4c17-b567-e9296541c3c9	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dr. McCoy, Surly Surgeon"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-df8a0737-5841-4c17-b567-e9296541c3c9	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dr. McCoy, Surly Surgeon"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+df8a0737-5841-4c17-b567-e9296541c3c9	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dr. McCoy, Surly Surgeon"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+df8a0737-5841-4c17-b567-e9296541c3c9	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dr. McCoy, Surly Surgeon"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 df8fe368-00eb-42fa-89d6-794fc61f8f8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df8fe368-00eb-42fa-89d6-794fc61f8f8c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 df9409e6-bd6d-4b5b-b807-fcf347ee940a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glarb-calamity-s-augur:cast:s1,f:xs:XP:glarb-calamity-s-augur:cast:s1	-	-	-	23b491658465	-	99a44163f73f	-	-	2026-11-24	xproof
@@ -192,7 +192,7 @@ dfeaec62-ca77-46dc-8eae-f627a5e1c02a	f0/t0	NULL	owed	refused:no-generator:trigge
 dfeb239b-8904-4ef0-9a91-edc901b0c49a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dfeb239b-8904-4ef0-9a91-edc901b0c49a	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 dfec65a0-6fb6-463d-aa62-e84a427db217	cast	cast-resolve	agreed	-	X	scen	1	0	Arahbo, the First Fang/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dfec65a0-6fb6-463d-aa62-e84a427db217	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+dfec65a0-6fb6-463d-aa62-e84a427db217	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dfec65a0-6fb6-463d-aa62-e84a427db217	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:arahbo-the-first-fang:static0.0:s1,f:xs:XP:arahbo-the-first-fang:static0.0:s1	-	-	-	23c4009444b0	-	f4fad41a409c	-	-	2026-11-25	xproof
 dfed42b8-b35e-4c70-9e75-25a4da158e76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dfed42b8-b35e-4c70-9e75-25a4da158e76	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
