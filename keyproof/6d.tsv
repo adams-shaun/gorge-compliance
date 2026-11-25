@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d3ca5cb-781d-4608-b7f1-38c020536376	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Kefka, Court Mage/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d3ca5cb-781d-4608-b7f1-38c020536376	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Kefka, Court Mage/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d3ca5cb-781d-4608-b7f1-38c020536376	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kefka, Court Mage/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6d3ca5cb-781d-4608-b7f1-38c020536376	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+6d3ca5cb-781d-4608-b7f1-38c020536376	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 6d3ca5cb-781d-4608-b7f1-38c020536376	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Kefka, Court Mage/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d3ca5cb-781d-4608-b7f1-38c020536376	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Kefka, Court Mage/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d42dff5-97ec-4768-b112-84a3584d0b87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6dc0150d-7145-41e2-bd3d-2564d9d32301	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6dc0150d-7145-41e2-bd3d-2564d9d32301	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6dc1305a-d6ca-4280-ba5d-5ed91f78ced0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6dc1305a-d6ca-4280-ba5d-5ed91f78ced0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+6dc1305a-d6ca-4280-ba5d-5ed91f78ced0	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:viashino-cutthroat:f0t0:s1,f:xs:XP:viashino-cutthroat:f0t0:s1	-	-	-	21b2cceac526	-	ca14cbdd52b5	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 6dc534e8-e22b-4e3c-aa30-c6e4c84f698c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frilled-sea-serpent:cast:s1,f:xs:XP:frilled-sea-serpent:cast:s1	-	-	-	d864b561c9cb	-	767970820faa	-	-	2026-11-24	xproof
 6dc534e8-e22b-4e3c-aa30-c6e4c84f698c	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:frilled-sea-serpent:f0a0:s1,f:xs:XP:frilled-sea-serpent:f0a0:s1	-	-	-	d864b561c9cb	-	767970820faa	-	-	2026-11-24	xproof
 6dc98143-7c4c-4b75-9bbb-5226d800b1d6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragon-roost:cast:s1,f:xs:XP:dragon-roost:cast:s1	-	-	-	25696bf19d5b	-	7a75697d4331	-	-	2026-11-24	xproof

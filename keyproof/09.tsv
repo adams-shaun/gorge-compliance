@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0990e57f-279e-4348-a049-e06187cc38d4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Summon: Anima/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0990e57f-279e-4348-a049-e06187cc38d4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Summon: Anima/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0993c5f1-1e8f-4871-9904-6c5a00405f36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0993c5f1-1e8f-4871-9904-6c5a00405f36	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+0993c5f1-1e8f-4871-9904-6c5a00405f36	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:flint-golem:f0t0:s1,f:xs:XP:flint-golem:f0t0:s1	-	-	-	21b2cceac526	-	8094da17b417	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 09947592-1730-4c1c-bfa5-be53a68d6919	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deputized-protester:cast:s1,f:xs:XP:deputized-protester:cast:s1	-	-	-	8c0bd19283bb	-	9bc3cf7ecb57	-	-	2026-11-24	xproof
 09947592-1730-4c1c-bfa5-be53a68d6919	f0/t0	Attacks/Melee	agreed	-	FX	start	2	0	x:xs:XP:deputized-protester:f0t0:s1,f:xs:XP:deputized-protester:f0t0:s1	-	-	-	8c0bd19283bb	-	9bc3cf7ecb57	-	-	2026-11-24	xproof
 0994d596-0b15-4156-8e94-5b566dcad6cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 09aeea91-b1dc-443f-a509-4758f052c0a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09aeea91-b1dc-443f-a509-4758f052c0a7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09b41783-0583-4486-99e8-3f8a11ae37fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chime-of-night:cast:s1,f:xs:XP:chime-of-night:cast:s1	-	-	-	5f2128bf97e4	-	ac4c0ca7d3c7	-	-	2026-11-24	xproof
-09b41783-0583-4486-99e8-3f8a11ae37fd	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+09b41783-0583-4486-99e8-3f8a11ae37fd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chime-of-night:f0t0:s1,f:xs:XP:chime-of-night:f0t0:s1	-	-	-	21b2cceac526	-	ac4c0ca7d3c7	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 09b4fba6-d943-49e4-9f9e-a74fcbabe83f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09b4fba6-d943-49e4-9f9e-a74fcbabe83f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09b4fba6-d943-49e4-9f9e-a74fcbabe83f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:battle-plan:f0t0:s1,f:xs:XP:battle-plan:f0t0:s1	-	-	-	6f84be0f34c0	-	7c2bd155fd92	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

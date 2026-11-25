@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 c3006be3-a796-4238-95dd-1e8e47c063b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c304777a-39a9-4a2a-8cec-8116afb34c5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thalakos-deceiver:cast:s1,f:xs:XP:thalakos-deceiver:cast:s1	-	-	-	5f2128bf97e4	-	548d1f71d197	-	-	2026-11-24	xproof
-c304777a-39a9-4a2a-8cec-8116afb34c5b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+c304777a-39a9-4a2a-8cec-8116afb34c5b	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 c30e89fa-8993-468d-b2ee-093c3950f520	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c30e8efb-d097-4388-8d5c-1037ccc29fba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c30e8efb-d097-4388-8d5c-1037ccc29fba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ c3974ec7-7af0-4b65-baf6-4c1c4fe8a5c4	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:a
 c3974ec7-7af0-4b65-baf6-4c1c4fe8a5c4	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c39c1604-3bae-454d-9985-85101e51ec6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c39e2046-173a-44b6-8e93-b22ede35485d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-s-stoneglare:cast:s1,f:xs:XP:vraska-s-stoneglare:cast:s1	-	-	-	3aa6ded33acb	-	4fa01baf3048	-	-	2026-11-25	xproof
-c39e5fb0-6de3-4105-ad3c-0ecb8951a1d5	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c39e5fb0-6de3-4105-ad3c-0ecb8951a1d5	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 c39ea5f9-6ec0-4697-897b-779e326754a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mahamoti-djinn:cast:s1,f:xs:XP:mahamoti-djinn:cast:s1	-	-	-	ae86f6029288	-	93090b62a081	-	-	2026-11-24	xproof
 c3a1bb65-556a-4016-a06a-3894710cb190	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:totem-guide-hartebeest:f0t0:s1,f:xs:XP:totem-guide-hartebeest:f0t0:s1	-	-	-	d864b561c9cb	-	6cf54f2bf534	-	-	2026-11-24	xproof
 c3a1bb65-556a-4016-a06a-3894710cb190	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:totem-guide-hartebeest:f0t0:s1,f:xs:XP:totem-guide-hartebeest:f0t0:s1	-	-	-	d864b561c9cb	-	6cf54f2bf534	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ c3ead850-3f22-4edb-ac96-40abbdf27905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c3ead850-3f22-4edb-ac96-40abbdf27905	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c3f83115-398f-4738-9bf2-b37bd363e9f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c3f841c4-6e12-46fc-802a-3025182e7ff4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c3f841c4-6e12-46fc-802a-3025182e7ff4	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+c3f841c4-6e12-46fc-802a-3025182e7ff4	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:close-quarters:f0t0:s1,f:xs:XP:close-quarters:f0t0:s1	-	-	-	21b2cceac526	-	c20db6a5a47d	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 c3fb2829-64f2-4795-b815-edcc5bbbc360	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-the-halls:cast:s1,f:xs:XP:guardian-of-the-halls:cast:s1	-	-	-	fb9d3088f0bf	-	569436b1554b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 c3fb2829-64f2-4795-b815-edcc5bbbc360	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-the-halls:combat0.attack:s1,f:xs:XP:guardian-of-the-halls:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	569436b1554b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 c3fb2829-64f2-4795-b815-edcc5bbbc360	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-the-halls:combat0.block:s1,f:xs:XP:guardian-of-the-halls:combat0.block:s1	-	-	-	fb9d3088f0bf	-	569436b1554b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
@@ -189,4 +189,4 @@ c3fda16e-fd56-434e-91ac-561ae0482f43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c3fda16e-fd56-434e-91ac-561ae0482f43	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:staff-of-the-death-magus:f0t0:s1,f:xs:XP:staff-of-the-death-magus:f0t0:s1	-	-	-	fb9d3088f0bf	-	ea76aada0727	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 c3fda16e-fd56-434e-91ac-561ae0482f43	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:staff-of-the-death-magus:f0t1:s1,f:xs:XP:staff-of-the-death-magus:f0t1:s1	-	-	-	fb9d3088f0bf	-	ea76aada0727	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 c3fdfb94-2d10-4743-864c-a59fdd57d8b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c3fdfb94-2d10-4743-864c-a59fdd57d8b7	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+c3fdfb94-2d10-4743-864c-a59fdd57d8b7	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof

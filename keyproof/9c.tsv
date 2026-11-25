@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c39bc53-52d3-4610-920e-5607a625b01f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c3be33b-0be9-49ec-8160-898cbcab8814	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toxic-stench:cast:s1,f:xs:XP:toxic-stench:cast:s1	-	-	-	fc71ca68c5ac	-	08060fed0fc5	-	-	2026-11-24	xproof
 9c3c9a22-e092-4845-b661-047590746498	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c3c9a22-e092-4845-b661-047590746498	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+9c3c9a22-e092-4845-b661-047590746498	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:saber-ants:f0t0:s1,f:xs:XP:saber-ants:f0t0:s1	-	-	-	21b2cceac526	-	d32d687087c1	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 9c3d2e1f-a5da-47f4-aea8-5861ef7e1b90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c3d2e1f-a5da-47f4-aea8-5861ef7e1b90	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 9c3e4bd4-2e1e-4103-adc3-f9ccc259dcdf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:precognition-field:cast:s1,f:xs:XP:precognition-field:cast:s1	-	-	-	d864b561c9cb	-	bfa19724da89	-	-	2026-11-24	xproof
@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:plaza-of-heroes:f0a2:s1,f:xs:XP:plaza-of-heroes:f0a2:s1	-	-	-	054d9f516953	-	0b1b3700bc53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:plaza-of-heroes:f0a1:s1,f:xs:XP:plaza-of-heroes:f0a1:s1	-	-	-	054d9f516953	-	0b1b3700bc53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a2	ManaReflected	agreed	-	FX	start	2	0	x:xs:XP:plaza-of-heroes:f0a2:s1,f:xs:XP:plaza-of-heroes:f0a2:s1	-	-	-	054d9f516953	-	0b1b3700bc53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a3	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a3	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c5a3407-e3e6-4f5f-9c24-6f24c19e1a2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c5a3407-e3e6-4f5f-9c24-6f24c19e1a2e	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c84c681-40c1-4ff3-86e6-48b4ab7491e5	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:black-waltz-no-3:f0t0:s1,f:xs:XP:black-waltz-no-3:f0t0:s1	-	-	-	23c4009444b0	-	bea6ad87fde8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9c8f1abb-bd08-41e0-91ed-56ff25d7f9f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c93acf3-d3da-4b4b-947f-ec8fc99d0d34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grakmaw-skyclave-ravager:cast:s1,f:xs:XP:grakmaw-skyclave-ravager:cast:s1	-	-	-	ae86f6029288	-	129c3c6c8ebd	-	-	2026-11-24	xproof
-9c93acf3-d3da-4b4b-947f-ec8fc99d0d34	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+9c93acf3-d3da-4b4b-947f-ec8fc99d0d34	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 9c93acf3-d3da-4b4b-947f-ec8fc99d0d34	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grakmaw-skyclave-ravager:f0t1:s1,f:xs:XP:grakmaw-skyclave-ravager:f0t1:s1	-	-	-	ae86f6029288	-	129c3c6c8ebd	-	-	2026-11-24	xproof
 9c9579c5-7edf-41ca-8595-713ca9245576	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c9579c5-7edf-41ca-8595-713ca9245576	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -133,7 +133,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9caa490e-dc28-4069-9ffb-4b1afd8fdd54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9caa490e-dc28-4069-9ffb-4b1afd8fdd54	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	7ce532247cf7	-	-	2026-11-24	xproof
 9cac23a1-a0b3-490c-aea2-dc2928f6dc9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9cb7f23f-322d-4a87-b6c6-15b9d446aef3	cast	cast-resolve	agreed	-	X	scen	1	0	Champions of the Perfect/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+9cb7f23f-322d-4a87-b6c6-15b9d446aef3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:champions-of-the-perfect:cast:s1,f:xs:XP:champions-of-the-perfect:cast:s1	-	-	-	21b2cceac526	-	36ef22329386	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 9cb7f23f-322d-4a87-b6c6-15b9d446aef3	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:champions-of-the-perfect:f0t0:s1,f:xs:XP:champions-of-the-perfect:f0t0:s1	-	-	-	23c4009444b0	-	36ef22329386	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9cb7f23f-322d-4a87-b6c6-15b9d446aef3	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:champions-of-the-perfect:f0t1:s1,f:xs:XP:champions-of-the-perfect:f0t1:s1	-	-	-	23c4009444b0	-	36ef22329386	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9cb7f23f-322d-4a87-b6c6-15b9d446aef3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Champions of the Perfect/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -150,9 +150,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9cc3b91b-ad70-4b01-b718-fda3819f84d0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eclipsed-boggart:f0t0:s1,f:xs:XP:eclipsed-boggart:f0t0:s1	-	-	-	cfde1dc26c40	-	a6af8cdfe200	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 9cc3b91b-ad70-4b01-b718-fda3819f84d0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eclipsed-boggart:f0t0:s1,f:xs:XP:eclipsed-boggart:f0t0:s1	-	-	-	cfde1dc26c40	-	a6af8cdfe200	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 9cc52afb-9788-46f6-9f9b-347513f8a64f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dwarven-shortsword:f0t0:s1,f:xs:XP:dwarven-shortsword:f0t0:s1	-	-	-	25696bf19d5b	-	5123621dfa8e	-	-	2026-11-24	xproof
-9cc52afb-9788-46f6-9f9b-347513f8a64f	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:dwarven-shortsword:f0a0:s1,f:xs:XP:dwarven-shortsword:f0a0:s1	-	-	-	fb9d3088f0bf	-	5123621dfa8e	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+9cc52afb-9788-46f6-9f9b-347513f8a64f	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:dwarven-shortsword:static0.0:s1,f:xs:XP:dwarven-shortsword:static0.0:s1	-	-	-	21b2cceac526	-	5123621dfa8e	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 9cc52afb-9788-46f6-9f9b-347513f8a64f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dwarven-shortsword:f0t0:s1,f:xs:XP:dwarven-shortsword:f0t0:s1	-	-	-	25696bf19d5b	-	5123621dfa8e	-	-	2026-11-24	xproof
-9cc52afb-9788-46f6-9f9b-347513f8a64f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dwarven Shortsword/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9cc52afb-9788-46f6-9f9b-347513f8a64f	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:dwarven-shortsword:static0.0:s1,f:xs:XP:dwarven-shortsword:static0.0:s1	-	-	-	21b2cceac526	-	5123621dfa8e	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	cast	cast-resolve	agreed	-	FX	scen	2	0	Sygg, Wanderwine Wisdom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sygg, Wanderwine Wisdom/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sygg, Wanderwine Wisdom/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

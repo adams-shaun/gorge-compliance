@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2659cc53-d20d-476f-bc64-4b35a4288d0e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:stalking-drone:f0a0:s1,f:xs:XP:stalking-drone:f0a0:s1	-	-	-	d864b561c9cb	-	9e4d032366d5	-	-	2026-11-24	xproof
 265f461e-d076-4119-8ea4-96360305f3a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 265f461e-d076-4119-8ea4-96360305f3a0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phalanx-vanguard:f0t0:s1,f:xs:XP:phalanx-vanguard:f0t0:s1	-	-	-	054d9f516953	-	eb8c20eb992b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-26640648-6400-4b80-a78b-f519ab9cd09e	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+26640648-6400-4b80-a78b-f519ab9cd09e	cast	cast	agreed	-	F	start	2	0	f:xs:XP:flameshot:cast:s1	-	-	-	21b2cceac526	-	98b64f709816	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 266561cc-d014-48cc-ba5d-fa72f3a91736	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stay-hidden-stay-silent:f0t0:s2,f:xs:XP:stay-hidden-stay-silent:f0t0:s2	-	-	-	5437c1394672	-	b013ec3314c7	-	-	2026-11-24	xproof
 266561cc-d014-48cc-ba5d-fa72f3a91736	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stay Hidden, Stay Silent/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 266561cc-d014-48cc-ba5d-fa72f3a91736	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stay-hidden-stay-silent:f0t0:s2,f:xs:XP:stay-hidden-stay-silent:f0t0:s2	-	-	-	5437c1394672	-	b013ec3314c7	-	-	2026-11-24	xproof
@@ -90,7 +90,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 26957a44-6155-4688-a850-a3b49b011a9f	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:ghost-hounds:f0t1:s1,f:xs:XP:ghost-hounds:f0t1:s1	-	-	-	baa6f696107c	-	5b63220ff401	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 26966ecb-15d3-47e5-ab63-e38510c87ecc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2699005b-a471-429f-a9d8-fbf2077ee2fd	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
-2699005b-a471-429f-a9d8-fbf2077ee2fd	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+2699005b-a471-429f-a9d8-fbf2077ee2fd	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 2699005b-a471-429f-a9d8-fbf2077ee2fd	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 269a02ca-1425-4b32-81f3-440e1caadb17	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goliath-paladin:f0t0:s1,f:xs:XP:goliath-paladin:f0t0:s1	-	-	-	8c0bd19283bb	-	c593dc6bfed9	-	-	2026-11-24	xproof
 269a02ca-1425-4b32-81f3-440e1caadb17	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goliath-paladin:f0t0:s1,f:xs:XP:goliath-paladin:f0t0:s1	-	-	-	8c0bd19283bb	-	c593dc6bfed9	-	-	2026-11-24	xproof

@@ -106,8 +106,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d873e1d-4fac-42c4-bb31-77e76099e1ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-rack:cast:s1,f:xs:XP:the-rack:cast:s1	-	-	-	25696bf19d5b	-	bb2037dcdd7f	-	-	2026-11-24	xproof
 3d873e1d-4fac-42c4-bb31-77e76099e1ef	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 3d8aae86-266f-4bfd-a058-0fe12b5ea354	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ceremonial-guard:f0t0:s1,f:xs:XP:ceremonial-guard:f0t0:s1	-	-	-	21b2cceac526	-	7c8c473dead3	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t1	Blocks	agreed	-	FX	start	2	0	x:xs:XP:ceremonial-guard:f0t1:s1,f:xs:XP:ceremonial-guard:f0t1:s1	-	-	-	21b2cceac526	-	7c8c473dead3	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 3d8ac41c-0566-48b2-a744-39db2f72272c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d8dfd57-7d26-4a3b-a9c3-33077c85b3db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d8dfd57-7d26-4a3b-a9c3-33077c85b3db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:definitely-not-a-turtle:f0t0:s1,f:xs:XP:definitely-not-a-turtle:f0t0:s1	-	-	-	8c0bd19283bb	-	1190a1391735	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3dc51dfc-7a60-41bf-b944-6afad6b06c22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dc51dfc-7a60-41bf-b944-6afad6b06c22	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goldnight-commander:f0t0:s1,f:xs:XP:goldnight-commander:f0t0:s1	-	-	-	23c4009444b0	-	5073ac6b16ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3dc71e16-b935-4ad7-b3f7-945ac2c179a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chrome-dome:cast:s1,f:xs:XP:chrome-dome:cast:s1	-	-	-	054d9f516953	-	77bb43869a6b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-3dc71e16-b935-4ad7-b3f7-945ac2c179a7	f0/a0	CopyPermanent	owed	harness	-	start	0	0	-	-	-	-	baa6f696107c	-	77bb43869a6b	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+3dc71e16-b935-4ad7-b3f7-945ac2c179a7	f0/a0	CopyPermanent	diverged	-	-	start	0	2	-	183d973368bd	-	-	21b2cceac526	-	77bb43869a6b	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 3dc71e16-b935-4ad7-b3f7-945ac2c179a7	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:chrome-dome:static0.0:s1,f:xs:XP:chrome-dome:static0.0:s1	-	-	-	23c4009444b0	-	77bb43869a6b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3dc73517-0767-46ae-bc8d-ee378237a509	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rooftop-percher:f0t0:s2,f:xs:XP:rooftop-percher:f0t0:s2	-	-	-	267e485f6204	-	635c9e9e63f0	-	-	2026-11-24	xproof
 3dc73517-0767-46ae-bc8d-ee378237a509	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rooftop-percher:combat0.attack:s1,f:xs:XP:rooftop-percher:combat0.attack:s1	-	-	-	23c4009444b0	-	635c9e9e63f0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

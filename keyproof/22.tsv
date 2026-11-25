@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2232c38e-49eb-4823-a325-2342a952db72	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:lava-zombie:f0a0:s1,f:xs:XP:lava-zombie:f0a0:s1	-	-	-	fc71ca68c5ac	-	2b3da60f5b57	-	-	2026-11-24	xproof
 2232c38e-49eb-4823-a325-2342a952db72	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:lava-zombie:cast:s1,f:xs:XP:lava-zombie:cast:s1	-	-	-	fc71ca68c5ac	-	2b3da60f5b57	-	-	2026-11-24	xproof
 2233c079-5ca6-4992-8bd2-84dbf9ed53a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2233c079-5ca6-4992-8bd2-84dbf9ed53a9	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+2233c079-5ca6-4992-8bd2-84dbf9ed53a9	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:citadel-of-pain:f0t0:s1,f:xs:XP:citadel-of-pain:f0t0:s1	-	-	-	21b2cceac526	-	9710fc6e590c	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 22374ec2-61b3-46eb-82ed-93bbb42403c4	cast	cast	agreed	-	F	start	4	0	f:xs:XP:minotaur-explorer:cast:s1	-	-	-	fc71ca68c5ac	-	ee41457f6d6b	-	-	2026-11-24	xproof
 22374ec2-61b3-46eb-82ed-93bbb42403c4	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:minotaur-explorer:cast:s1	-	-	-	fc71ca68c5ac	-	ee41457f6d6b	-	-	2026-11-24	xproof
 223794f2-67a3-4ab5-81c5-046c63307c6c	cast	cast-resolve	agreed	-	FX	scen	2	0	Seeker's Folly/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22a93a6d-fe58-4135-8ac2-6b92e9bb75a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sylvia-brightspear:f0t0:s1,f:xs:XP:sylvia-brightspear:f0t0:s1	-	-	-	23c4009444b0	-	7ae7fca91ecc	-	-	2026-11-25	xproof
 22a93a6d-fe58-4135-8ac2-6b92e9bb75a3	f0/t0	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:sylvia-brightspear:f0t0:s1,f:xs:XP:sylvia-brightspear:f0t0:s1	-	-	-	23c4009444b0	-	7ae7fca91ecc	-	-	2026-11-25	xproof
 22aa8e7f-b30d-49e2-b99e-9232e1a3bcf3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zhao-zilong-tiger-general:cast:s1,f:xs:XP:zhao-zilong-tiger-general:cast:s1	-	-	-	5f2128bf97e4	-	7d8a48492666	-	-	2026-11-24	xproof
-22aa8e7f-b30d-49e2-b99e-9232e1a3bcf3	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+22aa8e7f-b30d-49e2-b99e-9232e1a3bcf3	f0/t0	Blocks	agreed	-	FX	start	2	0	x:xs:XP:zhao-zilong-tiger-general:f0t0:s1,f:xs:XP:zhao-zilong-tiger-general:f0t0:s1	-	-	-	21b2cceac526	-	7d8a48492666	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 22b76ab7-9658-41a3-b8bb-fc02de0631a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22b7975c-37a5-4895-b209-bdeeec0c6aea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22b7975c-37a5-4895-b209-bdeeec0c6aea	f0/a0	Counter	agreed	-	F	start	2	0	f:xs:XP:judge-s-familiar:f0a0:s1	-	-	-	9087eefec3ee	-	33f4a8d1a076	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

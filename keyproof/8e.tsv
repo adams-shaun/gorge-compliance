@@ -46,8 +46,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e3c2f44-c4ca-4555-80c6-316e62c338dd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cinderbones:cast:s1,f:xs:XP:cinderbones:cast:s1	-	-	-	8a1b1a193ec0	-	3f1349936ffd	-	-	2026-11-24	xproof
 8e3c2f44-c4ca-4555-80c6-316e62c338dd	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:cinderbones:f0a0:s1,f:xs:XP:cinderbones:f0a0:s1	-	-	-	8a1b1a193ec0	-	3f1349936ffd	-	-	2026-11-24	xproof
 8e3e5264-d472-41ce-ad65-a53f8b24fc40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e3e5264-d472-41ce-ad65-a53f8b24fc40	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-8e3e5264-d472-41ce-ad65-a53f8b24fc40	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+8e3e5264-d472-41ce-ad65-a53f8b24fc40	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:venomous-dragonfly:f0t0:s1,f:xs:XP:venomous-dragonfly:f0t0:s1	-	-	-	21b2cceac526	-	9cf2e992a127	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+8e3e5264-d472-41ce-ad65-a53f8b24fc40	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:venomous-dragonfly:f0t1:s1,f:xs:XP:venomous-dragonfly:f0t1:s1	-	-	-	21b2cceac526	-	9cf2e992a127	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 8e3eafd7-5823-4cc1-bdb8-c456580e395a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myojin-of-life-s-web:cast:s1,f:xs:XP:myojin-of-life-s-web:cast:s1	-	-	-	64a08ba7d913	-	91473dd1b33a	-	-	2026-11-24	xproof
 8e3eafd7-5823-4cc1-bdb8-c456580e395a	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:myojin-of-life-s-web:cast:s1,f:xs:XP:myojin-of-life-s-web:cast:s1	-	-	-	64a08ba7d913	-	91473dd1b33a	-	-	2026-11-24	xproof
 8e3f4987-6f31-4bc5-8bcd-6adb0440ee7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghitu-lavarunner:cast:s1,f:xs:XP:ghitu-lavarunner:cast:s1	-	-	-	8c0bd19283bb	-	114308efb12e	-	-	2026-11-24	xproof
@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e69b322-4e66-4d5b-ab46-f002c40a913f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:goblin-dirigible:f0t0:s1,f:xs:XP:goblin-dirigible:f0t0:s1	-	-	-	3aa6ded33acb	-	b6410329bf79	-	-	2026-11-25	xproof
 8e6ae6ed-065c-47bd-a3c6-69b2608e7ddc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hive-mind-coprocessor:cast:s1,f:xs:XP:hive-mind-coprocessor:cast:s1	-	-	-	fb9d3088f0bf	-	9b7b1bcccab5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 8e720216-a980-4a34-8aef-62ac3ef15a6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e720216-a980-4a34-8aef-62ac3ef15a6e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+8e720216-a980-4a34-8aef-62ac3ef15a6e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 8e720216-a980-4a34-8aef-62ac3ef15a6e	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 8e7641e1-e814-4d5a-9cb3-71ad2f4ceee8	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:rugged-prairie:f0a1:s1,f:xs:XP:rugged-prairie:f0a1:s1	-	-	-	336eab778104	-	ee8b1c21e39f	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 8e7641e1-e814-4d5a-9cb3-71ad2f4ceee8	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:rugged-prairie:f0a1:s1,f:xs:XP:rugged-prairie:f0a1:s1	-	-	-	336eab778104	-	ee8b1c21e39f	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof

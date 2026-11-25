@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8042ade2-f589-4c3e-a461-a4c284a67ee4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tolarian-emissary:f0t0:s1,f:xs:XP:tolarian-emissary:f0t0:s1	-	-	-	fc71ca68c5ac	-	8d190d843421	-	-	2026-11-24	xproof
 8042ade2-f589-4c3e-a461-a4c284a67ee4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tolarian-emissary:f0t0:s1,f:xs:XP:tolarian-emissary:f0t0:s1	-	-	-	fc71ca68c5ac	-	8d190d843421	-	-	2026-11-24	xproof
 80433c2c-5196-42e0-b9fa-d7b12783f5fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:giant-s-boulder:f0t0:s1,f:xs:XP:giant-s-boulder:f0t0:s1	-	-	-	25696bf19d5b	-	e9b70f12aa21	-	-	2026-11-24	xproof
-80433c2c-5196-42e0-b9fa-d7b12783f5fd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Giant's Boulder/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+80433c2c-5196-42e0-b9fa-d7b12783f5fd	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:giant-s-boulder:f0a0:s1,f:xs:XP:giant-s-boulder:f0a0:s1	-	-	-	21b2cceac526	-	e9b70f12aa21	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 80433c2c-5196-42e0-b9fa-d7b12783f5fd	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:giant-s-boulder:f0a1:s1,f:xs:XP:giant-s-boulder:f0a1:s1	-	-	-	fb9d3088f0bf	-	e9b70f12aa21	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 80433c2c-5196-42e0-b9fa-d7b12783f5fd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:giant-s-boulder:f0t0:s1,f:xs:XP:giant-s-boulder:f0t0:s1	-	-	-	25696bf19d5b	-	e9b70f12aa21	-	-	2026-11-24	xproof
 8046981c-d68c-4fbb-a133-8037996c9d10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 80686908-abb5-4728-a5f6-71baca27f467	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8068f80f-88ee-4c0b-a0fb-3a6337f83f22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:johann-apprentice-sorcerer:cast:s1,f:xs:XP:johann-apprentice-sorcerer:cast:s1	-	-	-	23b491658465	-	26be06a94d3a	-	-	2026-11-24	xproof
 8068f80f-88ee-4c0b-a0fb-3a6337f83f22	static#0.0	static#0.0	agreed	-	X	scen	1	0	Johann, Apprentice Sorcerer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8068f80f-88ee-4c0b-a0fb-3a6337f83f22	static#0.1	static.continuous	diverged	-	-	start	0	2	-	d99e783ecede	-	-	baa6f696107c	-	26be06a94d3a	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+8068f80f-88ee-4c0b-a0fb-3a6337f83f22	static#0.1	static.continuous	diverged	-	-	start	0	2	-	d99e783ecede	-	-	21b2cceac526	-	26be06a94d3a	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 806b4f0c-f577-4d7f-b826-09e4479c314e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 806fc324-a17a-4e65-a9b6-d739c471c7f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 806fc324-a17a-4e65-a9b6-d739c471c7f8	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:sanctifier-of-souls:f0a0:s1,f:xs:XP:sanctifier-of-souls:f0a0:s1	-	-	-	fb9d3088f0bf	-	07ad194f79d5	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
@@ -76,8 +76,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 80788290-1569-4c7f-b263-b4da7b31a9d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 80788290-1569-4c7f-b263-b4da7b31a9d1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8079007c-a07a-4d71-bb08-e1dd215297de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-80875914-df4c-4b05-8c4d-658ff477c956	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-80875914-df4c-4b05-8c4d-658ff477c956	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+80875914-df4c-4b05-8c4d-658ff477c956	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:momentum:f0t0:s1,f:xs:XP:momentum:f0t0:s1	-	-	-	21b2cceac526	-	4284033e1a40	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+80875914-df4c-4b05-8c4d-658ff477c956	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:momentum:f0t0:s1,f:xs:XP:momentum:f0t0:s1	-	-	-	21b2cceac526	-	4284033e1a40	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 8088d110-2314-45c3-b6ee-3f55d1f388e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 808a8491-2966-4388-8590-a46ba147f65a	cast	cast	agreed	-	FX	start	6	0	x:xs:XP:prison-realm:cast:s1,f:xs:XP:prison-realm:cast:s1	-	-	-	d864b561c9cb	-	dd7aee13d5d8	-	-	2026-11-24	xproof
 808a8491-2966-4388-8590-a46ba147f65a	f0/t0	ChangesZone	agreed	-	FX	start	6	0	x:xs:XP:prison-realm:cast:s1,f:xs:XP:prison-realm:cast:s1	-	-	-	d864b561c9cb	-	dd7aee13d5d8	-	-	2026-11-24	xproof

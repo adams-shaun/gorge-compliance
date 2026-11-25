@@ -19,7 +19,7 @@ e310ab58-180e-4840-bc8d-9f9b06f1b478	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hallo
 e310c3ab-a729-404d-944f-9b477258495c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e310c3ab-a729-404d-944f-9b477258495c	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:safeguard:f0a0:s1,f:xs:XP:safeguard:f0a0:s1	-	-	-	8c0bd19283bb	-	96de32b96a55	-	-	2026-11-24	xproof
 e31510d5-b74e-4a8d-94e8-8bd098cac3c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e31510d5-b74e-4a8d-94e8-8bd098cac3c7	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+e31510d5-b74e-4a8d-94e8-8bd098cac3c7	f0/t0	Blocks	agreed	-	FX	start	2	0	x:xs:XP:royal-trooper:f0t0:s1,f:xs:XP:royal-trooper:f0t0:s1	-	-	-	21b2cceac526	-	6472e382d73c	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 e3172ac0-213c-4da4-8b7a-8f84bc237cde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mending-touch:cast:s1,f:xs:XP:mending-touch:cast:s1	-	-	-	d864b561c9cb	-	b41e0311f70d	-	-	2026-11-24	xproof
 e3179dd6-5558-4385-8883-f78f9d1b1c4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:immersturm-raider:f0t0:s1,f:xs:XP:immersturm-raider:f0t0:s1	-	-	-	d864b561c9cb	-	a88f61facb24	-	-	2026-11-24	xproof
 e3179dd6-5558-4385-8883-f78f9d1b1c4f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:immersturm-raider:f0t0:s1,f:xs:XP:immersturm-raider:f0t0:s1	-	-	-	d864b561c9cb	-	a88f61facb24	-	-	2026-11-24	xproof
@@ -94,10 +94,10 @@ e365699a-bd77-473f-86b0-4e1ba0371cdc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e366afb3-c447-4bde-b358-41c8568142d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sword-of-vengeance:cast:s1,f:xs:XP:sword-of-vengeance:cast:s1	-	-	-	8c0bd19283bb	-	ccde077ad076	-	-	2026-11-24	xproof
 e366afb3-c447-4bde-b358-41c8568142d5	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sword-of-vengeance:static0.0:s1,f:xs:XP:sword-of-vengeance:static0.0:s1	-	-	-	44e3ec152eea	-	ccde077ad076	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e366afb3-c447-4bde-b358-41c8568142d5	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:sword-of-vengeance:static0.0:s1,f:xs:XP:sword-of-vengeance:static0.0:s1	-	-	-	44e3ec152eea	-	ccde077ad076	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-e36a92be-537d-4a63-858a-afaab064fbf7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e36a92be-537d-4a63-858a-afaab064fbf7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e36a92be-537d-4a63-858a-afaab064fbf7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-e36a92be-537d-4a63-858a-afaab064fbf7	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e36a92be-537d-4a63-858a-afaab064fbf7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:parallax-tide:f0t1:s1,f:xs:XP:parallax-tide:f0t1:s1	-	-	-	21b2cceac526	-	c0c1ff822ea2	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+e36a92be-537d-4a63-858a-afaab064fbf7	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:parallax-tide:f0t1:s1,f:xs:XP:parallax-tide:f0t1:s1	-	-	-	21b2cceac526	-	c0c1ff822ea2	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+e36a92be-537d-4a63-858a-afaab064fbf7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:parallax-tide:f0t1:s1,f:xs:XP:parallax-tide:f0t1:s1	-	-	-	21b2cceac526	-	c0c1ff822ea2	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+e36a92be-537d-4a63-858a-afaab064fbf7	f0/t1	Phase/Fading	agreed	-	FX	start	2	0	x:xs:XP:parallax-tide:f0t1:s1,f:xs:XP:parallax-tide:f0t1:s1	-	-	-	21b2cceac526	-	c0c1ff822ea2	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 e36b78ed-4e3e-406d-85b3-fe0deb493418	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ray-of-ruin:cast:s1,f:xs:XP:ray-of-ruin:cast:s1	-	-	-	23b491658465	-	de4d4828109e	-	-	2026-11-25	xproof
 e36f4649-934d-4e8a-bd5f-39f164ea6937	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e373097a-4456-44a5-bcb9-1d2235c73bb6	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Algorithmic Ferocity"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof

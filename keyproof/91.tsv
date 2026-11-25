@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 918d6cd4-76d5-4e21-b92b-1ecf35eb6cff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-faith:cast:s1,f:xs:XP:wall-of-faith:cast:s1	-	-	-	8a1b1a193ec0	-	3bc3a70a2c21	-	-	2026-11-24	xproof
 918d6cd4-76d5-4e21-b92b-1ecf35eb6cff	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:wall-of-faith:f0a0:s1,f:xs:XP:wall-of-faith:f0a0:s1	-	-	-	8a1b1a193ec0	-	3bc3a70a2c21	-	-	2026-11-24	xproof
 91924536-7a2b-44ec-9835-2efa402c83f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91924536-7a2b-44ec-9835-2efa402c83f9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+91924536-7a2b-44ec-9835-2efa402c83f9	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spiritual-asylum:f0t0:s1,f:xs:XP:spiritual-asylum:f0t0:s1	-	-	-	21b2cceac526	-	79a8fe49d002	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 91933f1a-4aad-4f67-8151-a47ab6d0e42c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:humbler-of-mortals:f0t0:s1,f:xs:XP:humbler-of-mortals:f0t0:s1	-	-	-	d864b561c9cb	-	c57811a87f63	-	-	2026-11-24	xproof
 91933f1a-4aad-4f67-8151-a47ab6d0e42c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:humbler-of-mortals:f0t0:s1,f:xs:XP:humbler-of-mortals:f0t0:s1	-	-	-	d864b561c9cb	-	c57811a87f63	-	-	2026-11-24	xproof
 91967284-6711-4ef3-bb9b-5ba873da8bb2	cast	cast-resolve	agreed	-	FX	scen	2	0	Winter's Intervention/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91edef61-2487-405c-a3ec-67a814dfeff2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spiritual-sanctuary:f0t0:s1,f:xs:XP:spiritual-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	7af7a6eefc49	-	-	2026-11-25	xproof
 91edef61-2487-405c-a3ec-67a814dfeff2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:spiritual-sanctuary:f0t0:s1,f:xs:XP:spiritual-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	7af7a6eefc49	-	-	2026-11-25	xproof
 91f36a03-6031-4834-98ee-20b36cdf5569	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jeweled-torque:cast:s1,f:xs:XP:jeweled-torque:cast:s1	-	-	-	5f2128bf97e4	-	0d04ade93875	-	-	2026-11-24	xproof
-91f36a03-6031-4834-98ee-20b36cdf5569	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+91f36a03-6031-4834-98ee-20b36cdf5569	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 91f410c5-4313-462f-8d21-da63988d919f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sutina-speaker-of-the-tajuru:cast:s1,f:xs:XP:sutina-speaker-of-the-tajuru:cast:s1	-	-	-	8c0bd19283bb	-	52f6873c69c9	-	-	2026-11-24	xproof
 91f410c5-4313-462f-8d21-da63988d919f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sutina-speaker-of-the-tajuru:cast:s1,f:xs:XP:sutina-speaker-of-the-tajuru:cast:s1	-	-	-	8c0bd19283bb	-	52f6873c69c9	-	-	2026-11-24	xproof
 91f410c5-4313-462f-8d21-da63988d919f	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sutina-speaker-of-the-tajuru:f0t1:s1,f:xs:XP:sutina-speaker-of-the-tajuru:f0t1:s1	-	-	-	8c0bd19283bb	-	52f6873c69c9	-	-	2026-11-24	xproof

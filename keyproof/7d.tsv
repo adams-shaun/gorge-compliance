@@ -85,9 +85,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d679591-f8ea-4c4c-ab98-7b9e3438cf57	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:primaris-eliminator:f0t0:s1,f:xs:XP:primaris-eliminator:f0t0:s1	-	-	-	23c4009444b0	-	79509be28fa2	-	-	2026-11-25	xproof
 7d6c4290-d46d-4b98-805c-3f537462c4c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+7d6ccd0b-df16-40b2-930b-bcde0b6ef73f	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 7d6e5a88-a7fd-466c-a9f8-5015e3400176	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d6e5a88-a7fd-466c-a9f8-5015e3400176	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d6f6ee4-77c2-4986-91c7-7dee962fc1a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -154,10 +154,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7dd518f9-1ddd-4950-add3-fc21f675f4dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7dd68fd9-f5a7-49ee-aa36-93d646254335	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ddbf891-7f80-44e9-b94c-70c1da0b91ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:getaway-barrel:cast:s1,f:xs:XP:getaway-barrel:cast:s1	-	-	-	fb9d3088f0bf	-	630c6e419d67	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-7ddbf891-7f80-44e9-b94c-70c1da0b91ed	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Getaway Barrel/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7ddbf891-7f80-44e9-b94c-70c1da0b91ed	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:getaway-barrel:f0t0:s1,f:xs:XP:getaway-barrel:f0t0:s1	-	-	-	21b2cceac526	-	630c6e419d67	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 7ddd84d2-1a6d-43f5-a42d-3c66eee5f7e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ddd84d2-1a6d-43f5-a42d-3c66eee5f7e5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7dde4eb6-e9d7-4259-abc2-3af738e0f00f	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+7dde4eb6-e9d7-4259-abc2-3af738e0f00f	cast	cast	agreed	-	F	start	2	0	f:xs:XP:foil:cast:s1	-	-	-	21b2cceac526	-	da2286c2bc38	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 7ddf9c12-8f75-481c-a218-d42f925c6503	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:senate-griffin:f0t0:s1,f:xs:XP:senate-griffin:f0t0:s1	-	-	-	336eab778104	-	69142559386d	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 7ddf9c12-8f75-481c-a218-d42f925c6503	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:senate-griffin:f0t0:s1,f:xs:XP:senate-griffin:f0t0:s1	-	-	-	336eab778104	-	69142559386d	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 7de034a4-a42a-4e60-9ec9-5e9bb9987cfa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:metallic-mastery:cast:s1,f:xs:XP:metallic-mastery:cast:s1	-	-	-	3aa6ded33acb	-	34ce73038c5b	-	-	2026-11-25	xproof

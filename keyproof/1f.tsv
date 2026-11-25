@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:sorin-solemn-visitor:cast:s1,f:xs:XP:sorin-solemn-visitor:cast:s1	-	-	-	d864b561c9cb	-	a3a1915393b8	-	-	2026-11-24	xproof
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:sorin-solemn-visitor:f0a2:s1,f:xs:XP:sorin-solemn-visitor:f0a2:s1	-	-	-	fb9d3088f0bf	-	a3a1915393b8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 1f21cf59-6390-44b4-ab2e-ef290dfd8c85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nest-of-scarabs:cast:s1,f:xs:XP:nest-of-scarabs:cast:s1	-	-	-	d864b561c9cb	-	ea736c64b59f	-	-	2026-11-24	xproof
-1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:cast:s1,f:xs:XP:the-millennium-calendar:cast:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/a0	MultiplyCounter	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:f0a0:s1,f:xs:XP:the-millennium-calendar:f0a0:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Millennium Calendar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f82fe6b-1ec7-400b-a80d-40921b359723	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f861517-ac53-4218-b62e-35e971098b6d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:saprazzan-bailiff:cast:s1,f:xs:XP:saprazzan-bailiff:cast:s1	-	-	-	5f2128bf97e4	-	2321cfc0c3c3	-	-	2026-11-24	xproof
 1f861517-ac53-4218-b62e-35e971098b6d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:saprazzan-bailiff:cast:s1,f:xs:XP:saprazzan-bailiff:cast:s1	-	-	-	5f2128bf97e4	-	2321cfc0c3c3	-	-	2026-11-24	xproof
-1f861517-ac53-4218-b62e-35e971098b6d	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
+1f861517-ac53-4218-b62e-35e971098b6d	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:saprazzan-bailiff:f0t1:s1,f:xs:XP:saprazzan-bailiff:f0t1:s1	-	-	-	21b2cceac526	-	2321cfc0c3c3	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 1f874f7f-b959-4de5-a5db-e65a90ac2f9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f874f7f-b959-4de5-a5db-e65a90ac2f9d	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:leonin-lightbringer:f0t0:s1,f:xs:XP:leonin-lightbringer:f0t0:s1	-	-	-	054d9f516953	-	413097402e72	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1f8d387e-e4bb-4e76-a173-f46f7b107b95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
