@@ -428,12 +428,14 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 	}
 	// The key's own card, placed on the battlefield, must survive to the first
-	// main priority and be able to take the start's line. This is checked
-	// here, before FieldBlock's generic loop, so the refusal names the start
-	// (start:dead-on-arrival, start:upkeep-or-draw, ...) rather than surfacing
-	// later as play's start-not-exercised.
+	// main priority and be able to take the start's line. The checks that
+	// read only the card (focusCardBlock) run here, before FieldBlock's
+	// generic loop, so the refusal names the start (start:dead-on-arrival,
+	// start:echo, ...) rather than surfacing later as play's
+	// start-not-exercised. The one that reads the finished start (a CDA
+	// toughness counting what the needs place) runs after them.
 	if slices.Contains(p0.Battlefield, card) || slices.Contains(p1.Battlefield, card) {
-		if why := focusCardBlock(reg, face, f); why != "" {
+		if why := focusCardBlock(face); why != "" {
 			return refuse(why)
 		}
 	}
@@ -501,6 +503,15 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 	}
 	placeGraveTargets(reg, b, face, card, fam, sa, trig, f)
+	// The start now holds everything its needs placed: only a CDA toughness
+	// still zero over this finished start (Mortivore, an empty graveyard) is
+	// dead on arrival. Eluge's Islands, a Forest for Gaea's Liege, are placed
+	// by the needs above and are counted here.
+	if slices.Contains(p0.Battlefield, card) || slices.Contains(p1.Battlefield, card) {
+		if cdaToughness(face) && cdaToughnessZero(reg, face, f) {
+			return refuse("start:dead-on-arrival")
+		}
+	}
 	if why, err := focusPlayRefusal(reg, b, face, sa, card, f); err != nil || why != "" {
 		if err != nil {
 			return Result{}, err
@@ -518,14 +529,6 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 // the card ends up (gorge left Path to Exile on the battlefield and lost an
 // unattached Aura from the library; Forge put both in hand), so the setup
 // could never agree.
-//
-// A permanent with an upkeep liability is blocked too: the setup drive walks
-// turn 1's upkeep before the cut, so Echo and cumulative upkeep make its
-// controller tap mana (the focus play's own), and an upkeep or draw trigger
-// that sacrifices the permanent or charges a cost does the same or loses the
-// card. The start has no way to guarantee it keeps the permanent and its mana
-// to the first main priority. A lock on casting (spellLock) is blocked for the
-// same reason: the focus cast would never be offered.
 func FieldBlock(face *cards.Face) string {
 	if !face.IsPermanent() {
 		return "not-a-permanent"
@@ -535,17 +538,17 @@ func FieldBlock(face *cards.Face) string {
 			return "aura-unattached"
 		}
 	}
-	if spellLock(face) {
-		return "cant-cast"
-	}
-	return upkeepLiability(face)
+	return ""
 }
 
 // spellLock reports a static on a placed permanent that keeps its controller
-// from casting any spell (Form of the Squirrel's "you can't cast spells"): the
-// focus cast would never be offered, and the enabler need is no reason to hold
-// it. A limit per turn (NumLimitEachTurn) is not a lock, and a self-only
-// "can't cast this" says nothing about the focus play.
+// from casting any spell (Form of the Squirrel's "you can't cast spells"). It
+// is an enabler gate only (pickEnabler's battlefield pick), not part of
+// FieldBlock: with Echo and cumulative-upkeep enablers kept off the
+// battlefield, the next pick for a cast key's enabler need (Goldenhide Ox's
+// enchantment) is such a lock, and the focus cast would never be offered. A
+// limit per turn (NumLimitEachTurn) is not a lock, and a self-only "can't cast
+// this" says nothing about the focus play.
 func spellLock(face *cards.Face) bool {
 	for i := range face.Statics {
 		st := &face.Statics[i]
@@ -564,6 +567,10 @@ func spellLock(face *cards.Face) bool {
 // upkeepLiability is why a permanent cannot be guaranteed to be on the
 // battlefield (and its controller's mana untouched) at turn 1's first main
 // priority, or "": the setup drive plays the game's upkeep before the cut.
+// It is not part of FieldBlock: play's loader of an already-written start
+// calls that gate on every battlefield card, and a card held in hand or
+// placed as the key's own is judged by the callers that know why it is there
+// (pickEnabler's battlefield pick, focusCardBlock).
 // Echo and cumulative upkeep make the controller pay from the same mana the
 // focus play needs; a beginning-of-upkeep or draw trigger that sacrifices the
 // permanent or charges it a cost does the same or loses the card outright.
@@ -579,31 +586,6 @@ func upkeepLiability(face *cards.Face) string {
 		return "upkeep-cost"
 	}
 	return ""
-}
-
-// upkeepMana is the lands that pay a placed enabler's first Echo or
-// cumulative-upkeep cost, or ok false when the card has neither (or its
-// upkeep cost is not mana a basic can pay). An enabler is allowed onto the
-// battlefield with this mana added: the turn-1 upkeep can then take its cost
-// without tapping the focus play's own mana, and a bot that declines to pay
-// sacrifices the enabler while leaving the focus mana untouched.
-func upkeepMana(face *cards.Face) (lands []string, ok bool) {
-	var mana []string
-	for _, kw := range []string{"Echo", "Cumulative upkeep"} {
-		cost, has := face.KeywordParam(kw)
-		if !has {
-			continue
-		}
-		tokens, why := costTokens(cost)
-		if why != "" {
-			return nil, false
-		}
-		mana = append(mana, tokens...)
-	}
-	if len(mana) == 0 {
-		return nil, false
-	}
-	return landsFor(mana, basicFor(face.ManaCost)), true
 }
 
 // upkeepCostsSelf reports a beginning-of-upkeep or draw-step Phase trigger
@@ -948,17 +930,6 @@ func enablerRank(f *cards.Face) int {
 	return r
 }
 
-// upkeepAdmits reports whether FieldBlock refused face only for an Echo or
-// cumulative-upkeep cost that upkeepMana can pay: the enabler may then be
-// placed on the battlefield with that mana.
-func upkeepAdmits(face *cards.Face) bool {
-	if why := FieldBlock(face); why != "echo" && why != "cumulative-upkeep" {
-		return false
-	}
-	_, ok := upkeepMana(face)
-	return ok
-}
-
 // pickEnabler meets one need on seat s from certdeck's picks (in its
 // ranking): the most inert pick FieldBlock admits goes on the battlefield;
 // failing one, a pick goes in hand with the lands for its mana cost on the
@@ -995,18 +966,16 @@ func pickEnabler(reg *cards.Registry, b *certdeck.Builder, s *StartSeat, offTurn
 	// need takes their place.
 	best := -1
 	for i, f := range faces {
-		// An Echo or cumulative-upkeep enabler is admitted when its upkeep
-		// mana can be placed with it (upkeepMana): the added lands pay the
-		// upkeep, so it does not tap the focus play's mana.
-		if (FieldBlock(f) == "" || upkeepAdmits(f)) && !upkeepOrDraw(f) && (best < 0 || enablerRank(f) < enablerRank(faces[best])) {
+		// An Echo or cumulative-upkeep enabler stays off the battlefield too
+		// (upkeepLiability): the turn-1 upkeep would have it tap the focus
+		// play's mana. In hand it is cast with its own lands, and its upkeep
+		// comes after the cut.
+		if FieldBlock(f) == "" && upkeepLiability(f) == "" && !spellLock(f) && !upkeepOrDraw(f) && (best < 0 || enablerRank(f) < enablerRank(faces[best])) {
 			best = i
 		}
 	}
 	if best >= 0 {
 		s.Battlefield = append(s.Battlefield, picks[best])
-		if lands, ok := upkeepMana(faces[best]); ok {
-			s.Battlefield = append(s.Battlefield, lands...)
-		}
 		return nil
 	}
 	pick := 0

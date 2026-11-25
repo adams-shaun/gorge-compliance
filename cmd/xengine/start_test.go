@@ -1884,3 +1884,33 @@ func TestStartSurvivesToMainOne(t *testing.T) {
 		})
 	}
 }
+
+// TestStartKeepsCDAFocusWhoseNeedsPlaceTheCount: a focus card whose
+// characteristic-defining toughness counts a resource the start's own needs
+// place (Eluge's Islands, Gaea's Liege's Forest) lives to the first main
+// priority, so scen must still write a start and play must exercise it. The
+// dead-on-arrival check reads the finished start, not the start before its
+// needs are placed (develop wrote and exercised these; a first cut of the
+// check refused them).
+func TestStartKeepsCDAFocusWhoseNeedsPlaceTheCount(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Eluge, the Shoreless Sea", "f0/t1"},
+		{"Gaea's Liege", "f0/a0"},
+		{"Old Man Willow", "f0/t0"},
+		{"Greensleeves, Maro-Sorcerer", "f0/t0"},
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			t.Logf("%s %s: path %q reason %q", c.card, c.key, res.Path, res.Reason)
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("%s %s: path %q reason %q, want a start", c.card, c.key, res.Path, res.Reason)
+			}
+			_ = startIsExercised(t, reg, b, c.card, c.key)
+		})
+	}
+}

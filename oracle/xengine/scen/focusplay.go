@@ -209,18 +209,18 @@ func startHighestLife(f *StartFile) int32 {
 }
 
 // focusCardBlock is why the key's own face cannot be placed on the battlefield
-// for the start, or "": a creature that dies to state-based actions as placed,
-// a dynamic entry counter the start schema cannot restate, or an upkeep
-// liability (FieldBlock's upkeepLiability) that costs the turn-1 upkeep. The
-// check runs for every key whose card the start puts on the battlefield, not
-// only an ability or combat focus: a dies-trigger key whose card is a 0/0 X
-// creature dies before the focus play can target it (Hooded Hydra for Murder),
-// and a static key whose card is sacrificed at the upkeep proves nothing.
-func focusCardBlock(reg *cards.Registry, face *cards.Face, f *StartFile) string {
+// for the start, or "": a creature whose printed toughness is 0 or less, a
+// dynamic entry counter the start schema cannot restate, or an upkeep
+// liability (upkeepLiability) that costs the turn-1 upkeep. It reads only the
+// card; a CDA toughness depends on the finished start (cdaToughnessZero, run
+// by recipe after the needs are placed). The check runs for every key whose
+// card the start puts on the battlefield, not only an ability or combat
+// focus: a dies-trigger key whose card is a 0/0 X creature dies before the
+// focus play can target it (Hooded Hydra for Murder), and a static key whose
+// card is sacrificed at the upkeep proves nothing.
+func focusCardBlock(face *cards.Face) string {
 	switch {
 	case numericToughnessDead(face):
-		return "start:dead-on-arrival"
-	case cdaToughness(face) && cdaToughnessZero(reg, face, f):
 		return "start:dead-on-arrival"
 	case entryCounterUnrestatable(face):
 		return "start:entry-counter"
