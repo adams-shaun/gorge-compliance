@@ -887,7 +887,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # ChangeTargetsNoCandidateTest) and 0ca7a220bd0 (the retarget count excludes the current target; review r1, xpt-5b82851f), no
 # textual conflicts (ScriptedController.java: the join16/join17 confirm rule and the no-candidate guard touch different areas).
 # Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 0ca7a220bd062378c47507a604a7e95bfa490e8b
+# 19c49ba7117 = 0ca7a220bd0 + a "pN:ability:Name[#k]" target ref (xproof cluster xpt-1d873918, Azorius Guildmage's "{2}{U}: Counter
+# target activated ability" aimed at Dark Sphere's ability, CR 113.3b / 602.2): StepMachine.targetObject resolved a target ref only to a
+# player or a card, so the stack ability never bound to the TargetType$ Activated slot and the activation was refused ("was not put on
+# the stack"). It now binds the k-th pending non-spell stack instance, oldest first (RefTable.nthPending), activated or triggered by that
+# seat whose source card is the named card, wherever the source is now (Dark Sphere sacrificed itself). AbilityTargetRefTest replays the
+# exported request (fixtures/abilitytarget; red without the branch: "was not put on the stack"), scripts/forge-oracle-test-ability-target-ref.sh
+# (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432),
+# ForcedDieRollTest, RefTableTest, DriverContractTest and ChangeTargetsConfirmTest re-run green. Fork branch fix/xp-forge-driver-ability-target-ref.
+FORGE_ORACLE_REF ?= 19c49ba7117f3deded72cab7ef93d2739168c5cd
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
