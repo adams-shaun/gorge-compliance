@@ -251,7 +251,12 @@ func TestScenDeterministic(t *testing.T) {
 		}
 		return raw
 	}
-	for _, k := range append([][2]string{{"Thornvault Forager", "f0/a1"}, {"Banner of Kinship", "static#0.0"}}, fixtureKeys...) {
+	for _, k := range append([][2]string{
+		{"Thornvault Forager", "f0/a1"}, {"Banner of Kinship", "static#0.0"},
+		{"Adagia, Windswept Bastion", "static#0.0"}, {"Adelbert Steiner", "static#0.0"},
+		{"Alien Symbiosis", "static#0.1"}, {"Archmage of Runes", "static#0.0"},
+		{"Omniscience", "static#0.0"}, {"Enigma Drake", "static#0.0"},
+	}, fixtureKeys...) {
 		for _, prefer := range []string{"auto", "start"} {
 			if a, c := gen(k[0], k[1], prefer), gen(k[0], k[1], prefer); !bytes.Equal(a, c) {
 				t.Errorf("%v %s differs between calls", k, prefer)
@@ -695,9 +700,6 @@ func TestStartCombatStaticRefusals(t *testing.T) {
 		{"Magus of the Moat", "combat#0.attack", "no-generator:combat:restricted"},
 		{"Frenetic Raptor", "combat#0.block", "no-generator:combat:restricted"},
 		{"Blazing Archon", "combat#0.block", "no-generator:combat:restricted"},
-		{"Yavimaya Enchantress", "static#0.0", "no-generator:static:computed"},
-		{"Relentless Rats", "static#0.0", "no-generator:static:computed"},
-		{"Riftstone Portal", "static#0.0", "no-generator:static:zone"},
 	} {
 		res, err := Generate(reg, b, r[0], r[1], Options{Prefer: "start"})
 		if err != nil {
@@ -877,6 +879,180 @@ func TestStartFocusIsOffered(t *testing.T) {
 			r.check(t, res.Start)
 		})
 	}
+}
+
+// TestStartstaticother: statics whose effect is observed through a cost
+// reduction, a computed board count, an offered grant, or a zone other than
+// the battlefield get a start that exercises them, instead of a
+// no-generator refusal.
+func TestStartstaticother(t *testing.T) {
+	reg, b := testBuilder(t)
+	gen := func(t *testing.T, card, key string) *StartFile {
+		t.Helper()
+		res, err := Generate(reg, b, card, key, Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != PathStart || res.Start == nil {
+			t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+		}
+		return res.Start
+	}
+	face := func(t *testing.T, name string) *cards.Face {
+		t.Helper()
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%q is not in the corpus", name)
+		}
+		return c.Faces[0]
+	}
+
+	// A gated self grant: the STATION counters make the granted ability live,
+	// the mana and target make it offered, and the offered comparison reads it.
+	t.Run("Adagia, Windswept Bastion", func(t *testing.T) {
+		f := gen(t, "Adagia, Windswept Bastion", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield,
+			[]string{"Adagia, Windswept Bastion", "Plains", "Plains", "Plains", "Plains", "Memnite"})
+		want := []StartCounter{{Card: "Adagia, Windswept Bastion", Kind: "CHARGE", N: 12}}
+		if !reflect.DeepEqual(f.Setup.P0.Counters, want) {
+			t.Errorf("p0 counters %+v, want %+v", f.Setup.P0.Counters, want)
+		}
+		listIs(t, "compare", f.Compare, []string{"offered"})
+	})
+
+	// A computed pump: Count$Valid Equipment.YouCtrl is made non-zero by one
+	// Equipment, so the printed P/T is off its base without extra compare.
+	t.Run("Adelbert Steiner", func(t *testing.T) {
+		f := gen(t, "Adelbert Steiner", "static#0.0")
+		if len(f.Setup.P0.Battlefield) != 2 {
+			t.Fatalf("p0 battlefield %v, want the card and one Equipment", f.Setup.P0.Battlefield)
+		}
+		if !face(t, f.Setup.P0.Battlefield[1]).HasTypeWord("Equipment") {
+			t.Errorf("%q is not an Equipment, so the computed amount stays zero", f.Setup.P0.Battlefield[1])
+		}
+		listIs(t, "compare", f.Compare, nil)
+	})
+
+	// A play permission from the graveyard: the card is placed there and the
+	// focus casts it, with the extra card the Discard RaiseCost needs.
+	t.Run("Alien Symbiosis", func(t *testing.T) {
+		f := gen(t, "Alien Symbiosis", "static#0.1")
+		listIs(t, "p0 graveyard", f.Setup.P0.Graveyard, []string{"Alien Symbiosis"})
+		focusIs(t, f, 0, "Alien Symbiosis", "cast", 0)
+		listIs(t, "compare", f.Compare, []string{"offered"})
+		if len(f.Setup.P0.Hand) != 1 {
+			t.Errorf("p0 hand %v, want one card to discard for RaiseCost", f.Setup.P0.Hand)
+		}
+	})
+
+	// A cost reduction: the focus spell's printed cost is one generic more than
+	// the one land placed, so only the reduction makes it affordable.
+	t.Run("Archmage of Runes", func(t *testing.T) {
+		f := gen(t, "Archmage of Runes", "static#0.0")
+		if len(f.Setup.P0.Hand) != 1 {
+			t.Fatalf("p0 hand %v, want one focus spell", f.Setup.P0.Hand)
+		}
+		spell := f.Setup.P0.Hand[0]
+		sf := face(t, spell)
+		if !sf.IsInstant() && !sf.IsSorcery() {
+			t.Errorf("focus spell %q is not an instant or sorcery", spell)
+		}
+		if genericCount(sf.ManaCost) != 1 || len(f.Setup.P0.Battlefield) != 2 {
+			t.Errorf("focus spell %q cost %q, battlefield %v: want one generic and one land",
+				spell, sf.ManaCost, f.Setup.P0.Battlefield)
+		}
+		focusIs(t, f, 0, spell, "cast", 0)
+		if f.Setup.P0.Battlefield[0] != "Archmage of Runes" {
+			t.Errorf("p0 battlefield %v, want the source first", f.Setup.P0.Battlefield)
+		}
+	})
+
+	// A granted mana ability on another permanent: the carrier's offered
+	// activate option is the effect.
+	t.Run("A Realm Reborn", func(t *testing.T) {
+		f := gen(t, "A Realm Reborn", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"A Realm Reborn", "Memnite"})
+		listIs(t, "compare", f.Compare, []string{"offered"})
+	})
+
+	// A zone static with a granted ability: the source sits in the graveyard,
+	// a land it grants the ability to is on the battlefield.
+	t.Run("Riftstone Portal", func(t *testing.T) {
+		f := gen(t, "Riftstone Portal", "static#0.0")
+		listIs(t, "p0 graveyard", f.Setup.P0.Graveyard, []string{"Riftstone Portal"})
+		if len(f.Setup.P0.Battlefield) != 1 || !face(t, f.Setup.P0.Battlefield[0]).IsLand() {
+			t.Errorf("p0 battlefield %v, want a land the grant applies to", f.Setup.P0.Battlefield)
+		}
+		listIs(t, "compare", f.Compare, []string{"offered"})
+	})
+
+	// A computed pump over a card class: one enchantment makes X one.
+	t.Run("Yavimaya Enchantress", func(t *testing.T) {
+		f := gen(t, "Yavimaya Enchantress", "static#0.0")
+		if len(f.Setup.P0.Battlefield) != 2 || !face(t, f.Setup.P0.Battlefield[1]).IsEnchantment() {
+			t.Errorf("p0 battlefield %v, want the card and one enchantment", f.Setup.P0.Battlefield)
+		}
+	})
+
+	// A computed pump over the card's own name: a second copy makes X one.
+	t.Run("Relentless Rats", func(t *testing.T) {
+		f := gen(t, "Relentless Rats", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Relentless Rats", "Relentless Rats"})
+	})
+
+	// A play permission whose affected cards are in hand: one card is placed
+	// there and the focus casts it, with no mana because the permission also
+	// waives the cost.
+	t.Run("Omniscience", func(t *testing.T) {
+		f := gen(t, "Omniscience", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Omniscience"})
+		if len(f.Setup.P0.Hand) != 1 {
+			t.Fatalf("p0 hand %v, want one card the permission plays", f.Setup.P0.Hand)
+		}
+		focusIs(t, f, 0, f.Setup.P0.Hand[0], "cast", 0)
+		listIs(t, "compare", f.Compare, []string{"offered"})
+	})
+
+	// A computed amount over a graveyard count: one instant or sorcery in the
+	// graveyard makes the characteristic-defining power non-zero.
+	t.Run("Enigma Drake", func(t *testing.T) {
+		f := gen(t, "Enigma Drake", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Enigma Drake"})
+		if len(f.Setup.P0.Graveyard) != 1 {
+			t.Fatalf("p0 graveyard %v, want one instant or sorcery", f.Setup.P0.Graveyard)
+		}
+		gf := face(t, f.Setup.P0.Graveyard[0])
+		if !gf.IsInstant() && !gf.IsSorcery() {
+			t.Errorf("%q in the graveyard is not an instant or sorcery", gf.Name)
+		}
+	})
+
+	// A CantBlockBy static whose card is the attacker it names: the card
+	// attacks and a blocker the static forbids waits on the other seat.
+	t.Run("Amrou Kithkin", func(t *testing.T) {
+		f := gen(t, "Amrou Kithkin", "static#0.0")
+		listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, []string{"Amrou Kithkin"})
+		if len(f.Setup.P1.Battlefield) != 1 {
+			t.Fatalf("p1 battlefield %v, want one blocker", f.Setup.P1.Battlefield)
+		}
+		blocker := face(t, f.Setup.P1.Battlefield[0])
+		if blocker.Power() < 3 {
+			t.Errorf("blocker %q power %d, want one the static forbids (power 3+)", blocker.Name, blocker.Power())
+		}
+		focusIs(t, f, 0, "Amrou Kithkin", "attack", 0)
+	})
+
+	// A grant whose abilities come from cards exiled with the source is a
+	// linkage a start cannot place: the key keeps its named refusal.
+	t.Run("Agatha's Soul Cauldron", func(t *testing.T) {
+		res, err := Generate(reg, b, "Agatha's Soul Cauldron", "static#0.1", Options{Prefer: "start"})
+		if err != nil {
+			t.Fatal(err)
+		}
+		if res.Path != PathRefused || res.Reason != "no-generator:static:unobserved" {
+			t.Errorf("path %q reason %q, want refused no-generator:static:unobserved", res.Path, res.Reason)
+		}
+	})
 }
 
 // TestLandsForSlashlessHybrid: Forge writes hybrid, two-generic hybrid and
