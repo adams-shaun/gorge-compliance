@@ -3515,6 +3515,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     public static void main(String[] args) throws Exception {
+        if (args.length == 4 && "--serve".equals(args[0])) {
+            ScenarioReplay r = new ScenarioReplay();
+            serve(args[1], Long.parseLong(args[2]), Long.parseLong(args[3]), r);
+            System.exit(0);
+        }
         if (args.length != 2) {
             System.err.println("usage: ScenarioReplay <in.jsonl> <out.jsonl>");
             System.exit(2);
@@ -3527,6 +3532,86 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         System.err.println("ScenarioReplay: " + n + " scenarios");
         System.exit(0);
+    }
+
+    /** A warm worker: ScenarioReplay --serve SOCK IDLE_S MAX_ITEMS. One JVM
+     * (one card DB load, one class scan) replays many request files. It
+     * listens on the Unix socket SOCK, one connection at a time: a client
+     * sends IN<TAB>OUT, the worker answers "start" at once (a client tells a
+     * live worker from one busy with an abandoned file by it), replays IN into
+     * OUT through replayLines exactly as main(IN, OUT) does, with stdout and
+     * stderr sent to OUT.log, and answers "ok N" or "err MESSAGE". Serving B
+     * after A is main's run of A then B: every scenario starts from reset()
+     * and reseeds RandomUtil. It exits after IDLE_S seconds without a client
+     * or after MAX_ITEMS rows. scripts/oracle-warm.py is the client; the
+     * same protocol as the Forge driver's forge.oracle.WarmServer. */
+    static void serve(String sock, long idleS, long maxItems, ScenarioReplay r) throws Exception {
+        java.nio.file.Path p = java.nio.file.Paths.get(sock);
+        java.nio.file.Files.deleteIfExists(p);
+        java.io.PrintStream out0 = System.out, err0 = System.err;
+        long served = 0;
+        try (java.nio.channels.ServerSocketChannel ss = java.nio.channels.ServerSocketChannel.open(java.net.StandardProtocolFamily.UNIX);
+             java.nio.channels.Selector sel = java.nio.channels.Selector.open()) {
+            ss.bind(java.net.UnixDomainSocketAddress.of(p));
+            ss.configureBlocking(false);
+            ss.register(sel, java.nio.channels.SelectionKey.OP_ACCEPT);
+            err0.println("WarmServer: listening on " + sock);
+            while (served < maxItems) {
+                if (sel.select(Math.max(1, idleS) * 1000L) == 0) {
+                    err0.println("WarmServer: idle " + idleS + "s; exiting");
+                    break;
+                }
+                sel.selectedKeys().clear();
+                java.nio.channels.SocketChannel c = ss.accept();
+                if (c == null) {
+                    continue;
+                }
+                try (c) {
+                    c.configureBlocking(true);
+                    BufferedReader rd = new BufferedReader(new java.io.InputStreamReader(
+                            java.nio.channels.Channels.newInputStream(c), java.nio.charset.StandardCharsets.UTF_8));
+                    java.io.Writer wr = new java.io.OutputStreamWriter(
+                            java.nio.channels.Channels.newOutputStream(c), java.nio.charset.StandardCharsets.UTF_8);
+                    String line = rd.readLine();
+                    if (line == null) {
+                        continue;
+                    }
+                    wr.write("start\n");
+                    wr.flush();
+                    String[] f = line.split("\t");
+                    if (f.length != 2) {
+                        wr.write("err bad request\n");
+                        wr.flush();
+                        continue;
+                    }
+                    String reply;
+                    try (java.io.PrintStream log = new java.io.PrintStream(new java.io.FileOutputStream(f[1] + ".log"), true, "UTF-8")) {
+                        System.setOut(log);
+                        System.setErr(log);
+                        int n;
+                        try (BufferedReader in = new BufferedReader(new FileReader(f[0]));
+                             PrintWriter out = new PrintWriter(new FileWriter(f[1]))) {
+                            n = replayLines(r, in, out);
+                        }
+                        served += n;
+                        log.println("ScenarioReplay: " + n + " scenarios warm served=" + served);
+                        reply = "ok " + n;
+                    } catch (Throwable t) {
+                        String m = String.valueOf(t).replace('\n', ' ');
+                        reply = "err " + (m.length() > 500 ? m.substring(0, 500) : m);
+                    } finally {
+                        System.setOut(out0);
+                        System.setErr(err0);
+                    }
+                    wr.write(reply + "\n");
+                    wr.flush();
+                } catch (java.io.IOException e) {
+                    err0.println("WarmServer: client: " + e);
+                }
+            }
+        } finally {
+            java.nio.file.Files.deleteIfExists(p);
+        }
     }
 
     /** Replay every scenario line, writing one result row each. ANY throwable
