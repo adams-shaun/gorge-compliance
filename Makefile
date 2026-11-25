@@ -881,7 +881,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # textual conflicts (ScriptedController.java and StepMachine.java touch different areas; merge tree 83e433b219b). FaceDownCastModeTest,
 # TapTypeAbilityChoiceTest and ForcedDieRollTest run together at this pin (11 tests, 0 failures). Driver-only; die-roll code,
 # cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 686e3f827135f1739b173ba77cd861541c8229ee
+# 9b233511947 = 686e3f82713 (join17, above) plus the forced Hand->Library put-back (xproof cluster xpt-83d468df, gorge~forge,
+# Sawtooth Loon): with exactly ChangeNum$ cards eligible gorge poses only the CR 401.4 placement order (an "order" decision of
+# pick kind library_placement, first pick nearest the top), while Forge asks the forced selection one card at a time ("2 options,
+# 1..1 to pick", twice) and places the picks in order; the driver never consumed the order and missed ("Missing zone change answer
+# at step 8"). StepMachine.seedHandLibraryPlacement seeds the per-step carry from the seat's NEXT decision when it is a
+# library_placement order naming exactly the offered cards, so pickObjects answers each ask from it (the export already reverses a
+# top placement for Forge's successive puts). scripts/forge-oracle-test-hand-library-placement.sh (make forge-driver-tests)
+# replays the find and fails on 686e3f82713 with the exact miss. Driver-only; die-roll code, cardsfolder and tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-hand-library-placement.
+FORGE_ORACLE_REF ?= 9b233511947ecded0e40578ea10986dca99da487
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

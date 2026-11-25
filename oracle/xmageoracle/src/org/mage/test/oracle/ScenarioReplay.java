@@ -3599,6 +3599,59 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return null;
         }
 
+        /** The order a forced multi-card hand pick takes its cards in, or null.
+         * A mandatory fixed-count hand ask whose every candidate is required
+         * (Sawtooth Loon's "put two cards from your hand on the bottom of your
+         * library" with exactly the two drawn cards in hand) poses no
+         * selection in gorge, which logs only the CR 401.4 placement order
+         * (an arrange of pick kind library_placement, first pick nearest the
+         * top). The generator queues that order as choices naming the cards,
+         * and the effect calls chooseTarget ONCE for the whole count, so the
+         * one forced pick {@link #handCardChoice} takes would leave the rest
+         * in hand. Here the head {@code needed} choices must name the
+         * candidates exactly once each; the cards then come back in that
+         * order and the caller consumes the choices. Any other shape (more
+         * candidates than picks, a head that names a non-candidate or names
+         * one twice) is not this ask's order and returns null. A queued
+         * target answer naming a candidate (or a skip) is the ask's own and
+         * the base's to read; one naming no candidate belongs to a later ask
+         * in the window (Loon's other trigger's "return a creature" target)
+         * and does not block, since the forced set needs no target answer. */
+        static List<UUID> forcedHandPlacementOrder(List<String> targetQueue, List<String> choices,
+                List<UUID> candidates, int needed, BiPredicate<UUID, String> matches) {
+            if (needed < 2 || candidates.size() != needed || choices.size() < needed) {
+                return null;
+            }
+            if (!targetQueue.isEmpty()) {
+                if (TestPlayer.TARGET_SKIP.equals(targetQueue.get(0))) {
+                    return null;
+                }
+                for (UUID id : candidates) {
+                    if (matches.test(id, targetQueue.get(0))) {
+                        return null;
+                    }
+                }
+            }
+            List<UUID> order = new ArrayList<>();
+            for (String answer : choices.subList(0, needed)) {
+                if (TestPlayer.CHOICE_SKIP.equals(answer)) {
+                    return null;
+                }
+                UUID hit = null;
+                for (UUID id : candidates) {
+                    if (!order.contains(id) && matches.test(id, answer)) {
+                        hit = id;
+                        break;
+                    }
+                }
+                if (hit == null) {
+                    return null;
+                }
+                order.add(hit);
+            }
+            return order;
+        }
+
         /** A cast-time sacrifice ask: the non-targeting TargetSacrifice a
          * paid additional cost poses (Bargain, or an OrCost's sacrifice half).
          * XMage hints it "to sacrifice", which is what the target carries
@@ -3756,6 +3809,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (target.getOriginalTarget() instanceof mage.target.common.TargetCardInHand) {
                 UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
                 List<UUID> candidates = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+                List<UUID> placement = forcedHandPlacementOrder(getTargets(), getChoices(), candidates,
+                        target.getMinNumberOfTargets() - target.getSize(),
+                        (id, answer) -> hasObjectTargetNameOrAlias(game.getCard(id), answer));
+                if (placement != null) {
+                    getChoices().subList(0, placement.size()).clear();
+                    for (UUID id : placement) {
+                        target.addTarget(id, source, game);
+                    }
+                    return true;
+                }
                 UUID chosen = handCardChoice(getTargets(), getChoices(), candidates,
                         target.getMinNumberOfTargets() - target.getSize(),
                         (id, answer) -> hasObjectTargetNameOrAlias(game.getCard(id), answer));
