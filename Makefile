@@ -96,7 +96,11 @@ GO_TEST_FLAGS ?= -p=2
 # 6e1ecefc46 = 27b8bfe661 + Loam Dryad's tap cost uses the singular controlled-creature filter, so its rule
 # text matches the printed Oracle text instead of reading "Tap an untapped creatures you control" (CR 605.1a:
 # the replay's mana-ability text match). LoamDryadTest.testTapUntappedCreatureForMana; card behaviour unchanged.
-XMAGE_REF  ?= 6e1ecefc4692239a06ac1f8dde1a7d8b2c58abbc
+# 98052067d4 = 6e1ecefc46 + Chandra, Acolyte of Flame's 0 registers one delayed sacrifice trigger for both tokens
+# instead of one per token (CR 603.7a: "Sacrifice them" is one instruction). ChandraAcolyteOfFlameTest fails before
+# (Missing CHOICE def ... Triggered list (total 2)) and passes after; the card now matches gorge and Forge at the
+# beginning of the end step (one ability on the stack).
+XMAGE_REF  ?= 98052067d47006cdc887f357dcde286eddc1d5ec
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -689,7 +693,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # it fails at 1da9dc5c96c and 65d8060f39ba with the exact miss and passes here. Driver-only; die-roll code, cardsfolder and
 # tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-dual-colour-on-fpin-65d8.
 # 34f0585c97 = oracle/fpin-1125: 85e4e85fde (dual-land colour; above) joined with e99e48e2b5 (Gitrog lone forced pick; above); driver-only.
+# 7cae17380d = 34f0585c97 plus cast_mode "room_alt" (xproof clusters xpt-34d42446, xpt-ea3ecf04 and xpt-eab5898f: Central
+# Elevator // Promising Stairs and Dazzling Theater // Prop Room). A Room is a split card cast as one of its doors (CR 709.3,
+# 709.3a); gorge pays three mana for the second door (Promising Stairs {2}{U}, Prop Room {2}{W}), whose front door ({3}{U},
+# {3}{W}) is unaffordable. StepMachine.spellForMode had no case for the mode, so spellFor returned the first (front) spell and
+# Forge refused the cast ("was not put on the stack"). It now selects the spell whose CardStateName is RightSplit.
+# scripts/forge-oracle-test-room-alt-cast-mode.sh (make forge-driver-tests) replays the Dazzling Theater find; it fails before
+# with the exact miss and passes here. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF
+# ff076d4432). Fork branch fix/xp-forge-driver-room-alt-cast-mode.
 # 0fe8c90e549 = oracle/fpin-1125-attach: 34f0585c97 (fpin-1125; above) joined with 931d6309cc3 (attach_optional; above); driver-only.
+# d950b048823 = oracle/fpin-1125-room-alt: 0fe8c90e549 (attach_optional; above) joined with 7cae17380d (room_alt; above); driver-only.
 # 1707ccc4018 = 0fe8c90e549 plus K'rrik's "pay 2 life rather than {B}" (xproof cluster xpt-eaa38e91, Muck Rats under K'rrik, Son of Yawgmoth):
 # ScriptedController.payPhyrexianWithLife paid only Phyrexian pips with life, so gorge's pay_life pick on a plain {B} pip was never taken,
 # the cost stayed unpaid and the cast was refused "was not put on the stack". While the player has PayLifeInsteadOf:B (CR 601.2h, 118.9)
@@ -697,7 +710,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # PhyrexianLifePaymentTest.krrikPaysTheBlackPipWithTwoLife (fails on 0fe8c90e549) and a no-pick control, run by
 # scripts/forge-oracle-test-krrik-life-instead-of-b.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts unchanged.
 # Fork branch fix/xp-forge-driver-krrik-life-instead-of-b (PR adams-shaun/forge#12).
-FORGE_ORACLE_REF ?= 1707ccc4018b9131c5bf3322637311f194d8a93e
+# 22d31c3e9d0 = oracle/fpin-1125-room-alt: d950b048823 (room_alt + attach_optional; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
+# e76652fae3 = c5ab80906 (movectr + cantprevent; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
+# a2201414482 = oracle/fpin-1125-room-alt: 22d31c3e9d0 (room_alt + attach_optional + K'rrik; above) joined with e76652fae3 (movectr + cantprevent + K'rrik; above); driver-only.
+FORGE_ORACLE_REF ?= a2201414482ed3bf597656148e7b1cc076191293
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

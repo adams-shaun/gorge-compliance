@@ -168,9 +168,15 @@ func TestForgeRolledDie(t *testing.T) {
 // 85e4e85fde = 2ece06813a (1da9dc5c96c plus the dual-typed land colour filter, StepMachine.abilityFor only) merged with
 // 65d8060f39ba; die-roll code unchanged, ForcedDieRollTest re-run green on it.
 // 34f0585c97 = oracle/fpin-1125: 85e4e85fde (dual-land colour; above) joined with e99e48e2b5 (Gitrog lone forced pick; above); driver-only.
+// 7cae17380d = 34f0585c97 plus the Room second-door cast mode (StepMachine.spellForMode only); die-roll code unchanged,
+// ForcedDieRollTest re-run green on it.
 // 0fe8c90e549 = oracle/fpin-1125-attach: 34f0585c97 (fpin-1125; above) joined with 931d6309cc3 (attach_optional; above); driver-only.
+// d950b048823 = oracle/fpin-1125-room-alt: 0fe8c90e549 (attach_optional; above) joined with 7cae17380d (room_alt; above); driver-only.
 // 1707ccc4018 = 0fe8c90e549 plus K'rrik's pay-2-life-for-{B} payment (ScriptedController); driver-only, die-roll code unchanged.
-const forgeOracleDieRollRef = "1707ccc4018b9131c5bf3322637311f194d8a93e"
+// 22d31c3e9d0 = oracle/fpin-1125-room-alt: d950b048823 (room_alt + attach_optional; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
+// e76652fae3 = c5ab80906 (movectr + cantprevent; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
+// a2201414482 = oracle/fpin-1125-room-alt: 22d31c3e9d0 (room_alt + attach_optional + K'rrik; above) joined with e76652fae3 (movectr + cantprevent + K'rrik; above); driver-only.
+const forgeOracleDieRollRef = "a2201414482ed3bf597656148e7b1cc076191293"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
