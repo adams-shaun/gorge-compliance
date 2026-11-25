@@ -202,8 +202,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23e98711-0b3f-446d-abcc-9b0378178feb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23e98711-0b3f-446d-abcc-9b0378178feb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 23e98711-0b3f-446d-abcc-9b0378178feb	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-23ecb4bb-b295-46f5-9fd8-a4c66ce80c23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:touch-of-the-eternal:cast:s1,f:xs:XP:touch-of-the-eternal:cast:s1	-	-	-	d864b561c9cb	-	ec1616c41dc0	-	-	2026-11-24	xproof
-23ecb4bb-b295-46f5-9fd8-a4c66ce80c23	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23ecb4bb-b295-46f5-9fd8-a4c66ce80c23	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:touch-of-the-eternal:f0t0:s1,f:xs:XP:touch-of-the-eternal:f0t0:s1	-	-	-	3aa6ded33acb	-	ec1616c41dc0	-	-	2026-11-25	xproof
+23ecb4bb-b295-46f5-9fd8-a4c66ce80c23	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:touch-of-the-eternal:f0t0:s1,f:xs:XP:touch-of-the-eternal:f0t0:s1	-	-	-	3aa6ded33acb	-	ec1616c41dc0	-	-	2026-11-25	xproof
 23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:maximus-knight-apparent:cast:s1,f:xs:XP:maximus-knight-apparent:cast:s1	-	-	-	8c0bd19283bb	-	d60374d1f0e5	-	-	2026-11-24	xproof
 23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 23f0d43c-f84d-48cf-8ee7-bfda6e0f7e29	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:maximus-knight-apparent:cast:s1,f:xs:XP:maximus-knight-apparent:cast:s1	-	-	-	8c0bd19283bb	-	d60374d1f0e5	-	-	2026-11-24	xproof
@@ -214,4 +214,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 23f93411-f83c-4ed2-abed-99cf905f7d7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23f93411-f83c-4ed2-abed-99cf905f7d7f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 23f9bee4-ac7e-4828-82c0-576fee0d29b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:singing-tree:cast:s1,f:xs:XP:singing-tree:cast:s1	-	-	-	ae86f6029288	-	df2f93e45a50	-	-	2026-11-24	xproof
-23f9bee4-ac7e-4828-82c0-576fee0d29b7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+23f9bee4-ac7e-4828-82c0-576fee0d29b7	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof

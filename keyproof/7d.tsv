@@ -11,8 +11,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7d09b136-525f-49dd-a3a2-dfaca4e8e9a8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d09b136-525f-49dd-a3a2-dfaca4e8e9a8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:looming-spires:f0t0:s1,f:xs:XP:looming-spires:f0t0:s1	-	-	-	d864b561c9cb	-	66583ab7439f	-	-	2026-11-24	xproof
 7d09b136-525f-49dd-a3a2-dfaca4e8e9a8	land	land	agreed	-	FX	start	2	0	x:xs:XP:looming-spires:f0t0:s1,f:xs:XP:looming-spires:f0t0:s1	-	-	-	d864b561c9cb	-	66583ab7439f	-	-	2026-11-24	xproof
-7d0efc64-151f-45b4-8c0b-c32609f9d862	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-white-orchid:f0t0:s1,f:xs:XP:knight-of-the-white-orchid:f0t0:s1	-	-	-	23b491658465	-	14489267d810	-	-	2026-11-25	xproof
-7d0efc64-151f-45b4-8c0b-c32609f9d862	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7d0efc64-151f-45b4-8c0b-c32609f9d862	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-white-orchid:f0t0:s1,f:xs:XP:knight-of-the-white-orchid:f0t0:s1	-	-	-	3aa6ded33acb	-	14489267d810	-	-	2026-11-25	xproof
+7d0efc64-151f-45b4-8c0b-c32609f9d862	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-white-orchid:f0t0:s1,f:xs:XP:knight-of-the-white-orchid:f0t0:s1	-	-	-	3aa6ded33acb	-	14489267d810	-	-	2026-11-25	xproof
 7d10ad59-e90d-4726-bd55-5680d7c21638	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7d178f1c-faf7-4efd-87a6-201a40c55ec8	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	4ef0367df493	-	-	2026-11-24	xproof
 7d1dbe80-9ad0-41ad-8ba6-e1094f596eaf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,8 +160,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7dde4eb6-e9d7-4259-abc2-3af738e0f00f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ddf9c12-8f75-481c-a218-d42f925c6503	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ddf9c12-8f75-481c-a218-d42f925c6503	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7de034a4-a42a-4e60-9ec9-5e9bb9987cfa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7de04284-dcaa-4b63-a734-fcfe2698f83c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7de034a4-a42a-4e60-9ec9-5e9bb9987cfa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:metallic-mastery:cast:s1,f:xs:XP:metallic-mastery:cast:s1	-	-	-	3aa6ded33acb	-	34ce73038c5b	-	-	2026-11-25	xproof
+7de04284-dcaa-4b63-a734-fcfe2698f83c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dizzy-spell:cast:s1,f:xs:XP:dizzy-spell:cast:s1	-	-	-	3aa6ded33acb	-	c6c507b2e4ff	-	-	2026-11-25	xproof
 7de04284-dcaa-4b63-a734-fcfe2698f83c	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7de464e3-fae3-44cc-8233-776fc727c00a	cast	cast-resolve	agreed	-	FX	scen	2	0	Dazzling Angel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7de464e3-fae3-44cc-8233-776fc727c00a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dazzling Angel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -170,8 +170,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7de66ba3-6e97-4e0a-928e-7ce45dee278b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:farsight-ritual:cast:s1,f:xs:XP:farsight-ritual:cast:s1	-	-	-	23b491658465	-	fb894b8dd361	-	-	2026-11-24	xproof
 7de8ffa5-f6e5-4987-b3f8-6d6fc83f8fa8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:martyr-s-bond:cast:s1,f:xs:XP:martyr-s-bond:cast:s1	-	-	-	8c0bd19283bb	-	9abbeba98ec8	-	-	2026-11-24	xproof
 7de8ffa5-f6e5-4987-b3f8-6d6fc83f8fa8	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7deae378-9291-487e-9f0b-1deaf37218a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inquisitor-exarch:f0t0:s1,f:xs:XP:inquisitor-exarch:f0t0:s1	-	-	-	23b491658465	-	e2d706f09225	-	-	2026-11-25	xproof
-7deae378-9291-487e-9f0b-1deaf37218a8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7deae378-9291-487e-9f0b-1deaf37218a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inquisitor-exarch:f0t0:s1,f:xs:XP:inquisitor-exarch:f0t0:s1	-	-	-	3aa6ded33acb	-	e2d706f09225	-	-	2026-11-25	xproof
+7deae378-9291-487e-9f0b-1deaf37218a8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:inquisitor-exarch:f0t0:s1,f:xs:XP:inquisitor-exarch:f0t0:s1	-	-	-	3aa6ded33acb	-	e2d706f09225	-	-	2026-11-25	xproof
 7def9bfe-6a59-4300-8134-fce7508dca38	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 7df3e379-c217-416e-a1c8-46338608c49e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7df43670-c948-464d-9bb9-db672e755f0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:singer-of-swift-rivers:f0t0:s1,f:xs:XP:singer-of-swift-rivers:f0t0:s1	-	-	-	8c0bd19283bb	-	b4132f82abd4	-	-	2026-11-24	xproof

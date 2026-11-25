@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f3c2b00-0000-4ae1-9650-9553accac52e	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 1f3c2b00-0000-4ae1-9650-9553accac52e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	cast	cast-resolve	agreed	-	FX	scen	2	0	Gearbane Orangutan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gearbane Orangutan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gearbane-orangutan:combat0.attack:s1,f:xs:XP:gearbane-orangutan:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8beaefc89cfb	-	-	2026-11-25	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gearbane-orangutan:combat0.block:s1,f:xs:XP:gearbane-orangutan:combat0.block:s1	-	-	-	3aa6ded33acb	-	8beaefc89cfb	-	-	2026-11-25	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f3f6336-6f99-4181-be3c-1814f7b8ef36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:court-of-garenbrig:f0t0:s1,f:xs:XP:court-of-garenbrig:f0t0:s1	-	-	-	8c0bd19283bb	-	8f782e884184	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fc8b186-bb74-4fe1-a2da-e8ce3074f988	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grovetender-druids:cast:s1,f:xs:XP:grovetender-druids:cast:s1	-	-	-	d864b561c9cb	-	768c0fa36f00	-	-	2026-11-24	xproof
 1fcec3b2-47ba-4c56-9ce1-a4807e8ad262	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fcf95d7-fd70-474b-be0a-e43502633556	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vengeful-vampire:cast:s1,f:xs:XP:vengeful-vampire:cast:s1	-	-	-	d864b561c9cb	-	c88c542e94b9	-	-	2026-11-24	xproof
-1fcf95d7-fd70-474b-be0a-e43502633556	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1fcf95d7-fd70-474b-be0a-e43502633556	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:vengeful-vampire:f0t0:s1,f:xs:XP:vengeful-vampire:f0t0:s1	-	-	-	3aa6ded33acb	-	c88c542e94b9	-	-	2026-11-25	xproof
 1fd00656-83ba-4feb-b089-224007936b99	cast	cast-resolve	agreed	-	FX	scen	2	0	Mockingbird, Ace Agent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fd00656-83ba-4feb-b089-224007936b99	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mockingbird, Ace Agent/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fd00656-83ba-4feb-b089-224007936b99	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mockingbird, Ace Agent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

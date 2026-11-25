@@ -3,9 +3,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05004b4a-2e2c-4a88-a994-8576684fb64a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05004b4a-2e2c-4a88-a994-8576684fb64a	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:slayer-s-plate:f0a0:s1,f:xs:XP:slayer-s-plate:f0a0:s1	-	-	-	d864b561c9cb	-	e72823d0a9df	-	-	2026-11-24	xproof
 05004b4a-2e2c-4a88-a994-8576684fb64a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-0501af1f-c67c-4cb1-aced-4be426c83316	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ebon-praetor:cast:s1,f:xs:XP:ebon-praetor:cast:s1	-	-	-	fc71ca68c5ac	-	3860dcc4cd4f	-	-	2026-11-24	xproof
-0501af1f-c67c-4cb1-aced-4be426c83316	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-0501af1f-c67c-4cb1-aced-4be426c83316	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0501af1f-c67c-4cb1-aced-4be426c83316	cast	cast	agreed	-	X	start	2	0	x:xs:XP:ebon-praetor:f0t0:s1	-	-	-	3aa6ded33acb	-	3860dcc4cd4f	-	-	2026-11-25	xproof
+0501af1f-c67c-4cb1-aced-4be426c83316	f0/a0	RemoveCounter	agreed	-	X	start	1	0	x:xs:XP:ebon-praetor:f0t0:s2	-	-	-	3aa6ded33acb	-	3860dcc4cd4f	-	-	2026-11-25	xproof
+0501af1f-c67c-4cb1-aced-4be426c83316	f0/t0	Phase	agreed	-	X	start	2	0	x:xs:XP:ebon-praetor:f0t0:s1	-	-	-	3aa6ded33acb	-	3860dcc4cd4f	-	-	2026-11-25	xproof
 05058594-608f-4046-bf44-b736a7072f0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05058594-608f-4046-bf44-b736a7072f0a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bishop-of-rebirth:f0t0:s1,f:xs:XP:bishop-of-rebirth:f0t0:s1	-	-	-	d864b561c9cb	-	730a5b80a5fb	-	-	2026-11-24	xproof
 05074b68-6b31-4f9f-b3ec-bffe3e7eab47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 057e1cfc-d528-49e1-a386-9fb1edc1d135	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 057fa60b-10b0-4612-be0d-157076c82241	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:choke:cast:s1,f:xs:XP:choke:cast:s1	-	-	-	25696bf19d5b	-	6e8f28ebdc9b	-	-	2026-11-24	xproof
 058062c7-071b-4b14-903d-ae8d2876b37f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-058062c7-071b-4b14-903d-ae8d2876b37f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+058062c7-071b-4b14-903d-ae8d2876b37f	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:minion-of-the-mighty:f0t0:s1	-	-	-	3aa6ded33acb	-	d897b4d87357	-	-	2026-11-25	xproof
 0581b047-ffa1-42cc-a175-b7bf928e279e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0581b047-ffa1-42cc-a175-b7bf928e279e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0581b047-ffa1-42cc-a175-b7bf928e279e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05899372-9784-4bdb-9c28-504c71fed906	land	land	agreed	-	FX	start	2	0	x:xs:XP:witch-s-clinic:land:s1,f:xs:XP:witch-s-clinic:land:s1	-	-	-	8c0bd19283bb	-	42c571c83b8a	-	-	2026-11-24	xproof
 058a5b8b-08bc-4021-8a8b-8e149941e775	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Chekov and McCoy"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 058a5b8b-08bc-4021-8a8b-8e149941e775	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-058a8475-649f-433a-b258-42bc03bf40ba	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+058a8475-649f-433a-b258-42bc03bf40ba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grotesque-mutation:cast:s1,f:xs:XP:grotesque-mutation:cast:s1	-	-	-	3aa6ded33acb	-	6db9801a6b3a	-	-	2026-11-25	xproof
 058bbc0a-9c09-4c98-8735-83255a71bbca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:river-hoopoe:cast:s1,f:xs:XP:river-hoopoe:cast:s1	-	-	-	d864b561c9cb	-	ad0cd56e5f06	-	-	2026-11-24	xproof
 058bbc0a-9c09-4c98-8735-83255a71bbca	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:river-hoopoe:f0a0:s1,f:xs:XP:river-hoopoe:f0a0:s1	-	-	-	d864b561c9cb	-	ad0cd56e5f06	-	-	2026-11-24	xproof
 058dae67-807e-4542-ae51-f2b1216ffaed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -16,7 +16,7 @@ a70ffefb-840c-48c3-a59d-e12306086bb6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 a7157ec5-9e6a-4771-b3db-6760640d6c6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scale-blessing:cast:s1,f:xs:XP:scale-blessing:cast:s1	-	-	-	d864b561c9cb	-	82447c77897d	-	-	2026-11-24	xproof
 a71b2ffb-6a62-4239-987f-ec82a358927f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a71b2ffb-6a62-4239-987f-ec82a358927f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a71b2ffb-6a62-4239-987f-ec82a358927f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a71b2ffb-6a62-4239-987f-ec82a358927f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 a71e8d07-1a49-47a0-834e-de87d750a200	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Iron Hills/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a71e8d07-1a49-47a0-834e-de87d750a200	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Iron Hills/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a71e8d07-1a49-47a0-834e-de87d750a200	land	play-land	agreed	-	X	scen	1	0	Iron Hills/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -34,7 +34,7 @@ a728685f-8670-4db2-ae02-3cf74eb3c402	combat#0.block	combat#0.block	agreed	-	X	sc
 a728685f-8670-4db2-ae02-3cf74eb3c402	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ran and Shaw/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a728685f-8670-4db2-ae02-3cf74eb3c402	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 a728685f-8670-4db2-ae02-3cf74eb3c402	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ran and Shaw/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a729a684-9171-4ca9-83ad-1d199afad7bb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a729a684-9171-4ca9-83ad-1d199afad7bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:press-into-service:cast:s1,f:xs:XP:press-into-service:cast:s1	-	-	-	3aa6ded33acb	-	3a2753372dc7	-	-	2026-11-25	xproof
 a72f9437-d652-4a64-99df-a307a6dd9a0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7308a1f-ec46-478e-86ea-33b2ebbd995f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-cauldron-of-eternity:cast:s1,f:xs:XP:the-cauldron-of-eternity:cast:s1	-	-	-	ae86f6029288	-	a4b13f96878a	-	-	2026-11-24	xproof
 a7308a1f-ec46-478e-86ea-33b2ebbd995f	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof

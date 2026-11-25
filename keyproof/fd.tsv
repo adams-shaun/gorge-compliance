@@ -10,7 +10,7 @@ fd077d1a-f395-41c2-b1df-dd5e2f723abf	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 fd0980ae-eabf-45da-98e7-23d81bfa185a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:echo-of-dusk:cast:s1,f:xs:XP:echo-of-dusk:cast:s1	-	-	-	23b491658465	-	a98b445452bf	-	-	2026-11-24	xproof
 fd0980ae-eabf-45da-98e7-23d81bfa185a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Echo of Dusk/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fd09875f-71a1-41c2-b404-ff58f4d4cb6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:triad-of-fates:cast:s1,f:xs:XP:triad-of-fates:cast:s1	-	-	-	d864b561c9cb	-	02931237aedd	-	-	2026-11-24	xproof
-fd09875f-71a1-41c2-b404-ff58f4d4cb6c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fd09875f-71a1-41c2-b404-ff58f4d4cb6c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:triad-of-fates:f0a0:s1,f:xs:XP:triad-of-fates:f0a0:s1	-	-	-	3aa6ded33acb	-	02931237aedd	-	-	2026-11-25	xproof
 fd09875f-71a1-41c2-b404-ff58f4d4cb6c	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:triad-of-fates:f0a0:s1,f:xs:XP:triad-of-fates:f0a0:s1	-	-	-	23b491658465	-	02931237aedd	-	-	2026-11-25	xproof
 fd09875f-71a1-41c2-b404-ff58f4d4cb6c	f0/a2	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:triad-of-fates:f0a2:s1,f:xs:XP:triad-of-fates:f0a2:s1	-	-	-	d864b561c9cb	-	02931237aedd	-	-	2026-11-24	xproof
 fd0a27a9-7d7e-4a16-9dd0-0715e6c97b36	cast	cast-resolve	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Restoration Seminar"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
@@ -47,7 +47,7 @@ fd3e37c9-93bf-4f3e-a279-22afbffd8d43	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 fd4236e5-6a2c-45ec-afb3-cd4fc516fbf1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:concerted-effort:cast:s1,f:xs:XP:concerted-effort:cast:s1	-	-	-	64a08ba7d913	-	c1aa39cc0aa3	-	-	2026-11-24	xproof
 fd4236e5-6a2c-45ec-afb3-cd4fc516fbf1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:concerted-effort:cast:s1,f:xs:XP:concerted-effort:cast:s1	-	-	-	64a08ba7d913	-	c1aa39cc0aa3	-	-	2026-11-24	xproof
 fd44986c-cf37-4f6e-b8d6-1795ec794b5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fd44986c-cf37-4f6e-b8d6-1795ec794b5f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fd44986c-cf37-4f6e-b8d6-1795ec794b5f	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:vorapede:f0t0:s1,f:xs:XP:vorapede:f0t0:s1	-	-	-	3aa6ded33acb	-	6991e4cf2abc	-	-	2026-11-25	xproof
 fd45063f-c83c-431c-9104-f139c497ec0d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fd45063f-c83c-431c-9104-f139c497ec0d	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:silent-clearing:f0a1:s1,f:xs:XP:silent-clearing:f0a1:s1	-	-	-	d864b561c9cb	-	3ac294098eb3	-	-	2026-11-24	xproof
 fd45063f-c83c-431c-9104-f139c497ec0d	land	land	agreed	-	FX	start	2	0	x:xs:XP:silent-clearing:land:s1,f:xs:XP:silent-clearing:land:s1	-	-	-	d864b561c9cb	-	3ac294098eb3	-	-	2026-11-24	xproof
@@ -85,14 +85,14 @@ fd666669-ad23-4e41-b78c-1cd7b82eb8b4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 fd666669-ad23-4e41-b78c-1cd7b82eb8b4	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Felothar, Dawn of the Abzan/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fd6afb5e-d99a-44a7-9af4-9f064da95d63	cast	cast-resolve	agreed	-	X	scen	1	0	Starfighter Pilot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fd6afb5e-d99a-44a7-9af4-9f064da95d63	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Starfighter Pilot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fd6ba826-e7b1-4375-8aaf-c3cd3dc7ba07	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fd6ba826-e7b1-4375-8aaf-c3cd3dc7ba07	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 fd6e1967-237a-41f6-bbf4-2c869f9447c8	cast	cast-resolve	agreed	-	FX	scen	2	0	Twitching Doll/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fd6e1967-237a-41f6-bbf4-2c869f9447c8	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Twitching Doll/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fd6e1967-237a-41f6-bbf4-2c869f9447c8	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Twitching Doll/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fd6ffa00-170b-46d2-810a-f255de62b9d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arcbound-lancer:cast:s1,f:xs:XP:arcbound-lancer:cast:s1	-	-	-	25696bf19d5b	-	ee0116b7ca7a	-	-	2026-11-24	xproof
 fd6ffa00-170b-46d2-810a-f255de62b9d7	f0/t0	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-lancer:f0t0:s1,f:xs:XP:arcbound-lancer:f0t0:s1	-	-	-	d864b561c9cb	-	ee0116b7ca7a	-	-	2026-11-24	xproof
 fd74d0f6-bbe5-47f6-af15-a127489ca7f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fd74f8eb-0253-42dd-8277-186d4934da38	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fd74f8eb-0253-42dd-8277-186d4934da38	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dismember:cast:s1,f:xs:XP:dismember:cast:s1	-	-	-	3aa6ded33acb	-	66a2cfe784e1	-	-	2026-11-25	xproof
 fd751ed4-4002-4cae-9d1d-1fe0f1fd4965	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:avatar-kyoshi-earthbender:cast:s1,f:xs:XP:avatar-kyoshi-earthbender:cast:s1	-	-	-	8c0bd19283bb	-	43346978a999	-	-	2026-11-24	xproof
 fd751ed4-4002-4cae-9d1d-1fe0f1fd4965	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:avatar-kyoshi-earthbender:cast:s1,f:xs:XP:avatar-kyoshi-earthbender:cast:s1	-	-	-	8c0bd19283bb	-	43346978a999	-	-	2026-11-24	xproof
 fd755ec1-6727-4165-a7fd-5d9b59754ada	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -122,7 +122,7 @@ fd9dde4c-bacd-48d8-b4c9-a6a04f0b3338	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	
 fd9dde4c-bacd-48d8-b4c9-a6a04f0b3338	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:energy-refractor:f0t0:s1,f:xs:XP:energy-refractor:f0t0:s1	-	-	-	ae86f6029288	-	086c2641a4ce	-	-	2026-11-24	xproof
 fda06d9e-d17f-4bb6-916b-06116e47c8e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rural-recruit:f0t0:s1,f:xs:XP:rural-recruit:f0t0:s1	-	-	-	d864b561c9cb	-	2347c24b93a3	-	-	2026-11-24	xproof
 fda06d9e-d17f-4bb6-916b-06116e47c8e8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rural-recruit:f0t0:s1,f:xs:XP:rural-recruit:f0t0:s1	-	-	-	d864b561c9cb	-	2347c24b93a3	-	-	2026-11-24	xproof
-fda06d9e-d17f-4bb6-916b-06116e47c8e8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fda06d9e-d17f-4bb6-916b-06116e47c8e8	f0/t1	Attacks/Training	agreed	-	FX	start	2	0	x:xs:XP:rural-recruit:f0t1:s1,f:xs:XP:rural-recruit:f0t1:s1	-	-	-	3aa6ded33acb	-	2347c24b93a3	-	-	2026-11-25	xproof
 fda61506-ed79-47fd-badd-639185297913	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fda61506-ed79-47fd-badd-639185297913	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fda61506-ed79-47fd-badd-639185297913	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

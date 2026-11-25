@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5307a61f-2142-4e12-8329-ceb729f6eb79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 530853b4-68a0-4814-b0aa-ffeb5585cd43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 530a5740-041c-42df-8fe0-fcea87258038	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-530f088d-bfa1-4410-b1aa-ade8abdb2b7a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+530f088d-bfa1-4410-b1aa-ade8abdb2b7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phthisis:cast:s1,f:xs:XP:phthisis:cast:s1	-	-	-	3aa6ded33acb	-	60fafc6dec0d	-	-	2026-11-25	xproof
 5314e57b-107c-4478-9cdb-51d1732f9468	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5315ba59-ca80-498e-b21a-ed87e6a4c955	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:restless-dead:cast:s1,f:xs:XP:restless-dead:cast:s1	-	-	-	8c0bd19283bb	-	79a02ab3a47f	-	-	2026-11-24	xproof
 5315ba59-ca80-498e-b21a-ed87e6a4c955	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:restless-dead:f0a0:s1,f:xs:XP:restless-dead:f0a0:s1	-	-	-	ea3140b6974b	-	79a02ab3a47f	-	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 539d7c1a-b5e9-4204-9109-ddb2e8dec168	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 539f5396-d99a-417d-a84c-dff7930b5900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 539f5396-d99a-417d-a84c-dff7930b5900	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53a0923f-7da8-4e31-a231-9b275916e2a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53a0923f-7da8-4e31-a231-9b275916e2a2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+53a0923f-7da8-4e31-a231-9b275916e2a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oath-of-chandra:f0t0:s1,f:xs:XP:oath-of-chandra:f0t0:s1	-	-	-	3aa6ded33acb	-	990fde6f64e7	-	-	2026-11-25	xproof
+53a0923f-7da8-4e31-a231-9b275916e2a2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oath-of-chandra:f0t0:s1,f:xs:XP:oath-of-chandra:f0t0:s1	-	-	-	3aa6ded33acb	-	990fde6f64e7	-	-	2026-11-25	xproof
 53a0923f-7da8-4e31-a231-9b275916e2a2	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 53a17d4f-cdbc-4669-a30e-5d5a334cc3c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53a17d4f-cdbc-4669-a30e-5d5a334cc3c0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

@@ -23,9 +23,9 @@ aa1b7cdd-0296-418c-ac3b-7ad3c51f1760	combat#0.attack	combat.attack	agreed	-	FX	s
 aa1b7cdd-0296-418c-ac3b-7ad3c51f1760	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:hamlet-glutton:combat0.block:s1,f:xs:XP:hamlet-glutton:combat0.block:s1	-	-	-	3aa6ded33acb	-	6fb5c5d3871d	-	-	2026-11-25	xproof
 aa1b7cdd-0296-418c-ac3b-7ad3c51f1760	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aa1b7cdd-0296-418c-ac3b-7ad3c51f1760	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hamlet Glutton/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-aa1c40fb-c230-4e7f-99b1-4e2e8c39a168	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aa1c40fb-c230-4e7f-99b1-4e2e8c39a168	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aa1c40fb-c230-4e7f-99b1-4e2e8c39a168	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+aa1c40fb-c230-4e7f-99b1-4e2e8c39a168	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necroplasm:f0t0:s1,f:xs:XP:necroplasm:f0t0:s1	-	-	-	3aa6ded33acb	-	a24a1bd9fc94	-	-	2026-11-25	xproof
+aa1c40fb-c230-4e7f-99b1-4e2e8c39a168	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:necroplasm:f0t0:s1,f:xs:XP:necroplasm:f0t0:s1	-	-	-	3aa6ded33acb	-	a24a1bd9fc94	-	-	2026-11-25	xproof
+aa1c40fb-c230-4e7f-99b1-4e2e8c39a168	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:necroplasm:f0t0:s1,f:xs:XP:necroplasm:f0t0:s1	-	-	-	3aa6ded33acb	-	a24a1bd9fc94	-	-	2026-11-25	xproof
 aa1d8bfa-729a-4e10-8069-57a1d4f4392b	cast	cast-resolve	agreed	-	FX	scen	2	0	Growing Dread/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 aa1d8bfa-729a-4e10-8069-57a1d4f4392b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aa1d8bfa-729a-4e10-8069-57a1d4f4392b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Growing Dread/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -145,11 +145,11 @@ aaafcd69-6295-4d79-8e67-98df0c9bae88	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Mu Ya
 aaafcd69-6295-4d79-8e67-98df0c9bae88	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mu Yanling, Wind Rider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 aab3774c-4ec3-4946-a09b-af0fab7cacb7	cast	cast-resolve	agreed	-	FX	scen	2	0	Food Coma/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 aab3774c-4ec3-4946-a09b-af0fab7cacb7	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aab463bb-e790-403b-a88d-06ef81c7302b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:abzan-beastmaster:cast:s1,f:xs:XP:abzan-beastmaster:cast:s1	-	-	-	d864b561c9cb	-	6c2afef0f306	-	-	2026-11-24	xproof
-aab463bb-e790-403b-a88d-06ef81c7302b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+aab463bb-e790-403b-a88d-06ef81c7302b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:abzan-beastmaster:f0t0:s1,f:xs:XP:abzan-beastmaster:f0t0:s1	-	-	-	3aa6ded33acb	-	6c2afef0f306	-	-	2026-11-25	xproof
+aab463bb-e790-403b-a88d-06ef81c7302b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:abzan-beastmaster:f0t0:s1,f:xs:XP:abzan-beastmaster:f0t0:s1	-	-	-	3aa6ded33acb	-	6c2afef0f306	-	-	2026-11-25	xproof
 aab55af7-8084-47b6-910f-75a75a6313a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aab5f76b-1eb0-4fbc-ab01-593161083c16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aabea4a2-5107-4abd-a0c7-ac0024d98ae0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+aabea4a2-5107-4abd-a0c7-ac0024d98ae0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liturgy-of-blood:cast:s1,f:xs:XP:liturgy-of-blood:cast:s1	-	-	-	3aa6ded33acb	-	9f7cf88b7bc7	-	-	2026-11-25	xproof
 aac711d1-2fa0-42f9-9eda-a1642f3ff016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:death-s-caress:cast:s1,f:xs:XP:death-s-caress:cast:s1	-	-	-	d864b561c9cb	-	33e8280159c1	-	-	2026-11-24	xproof
 aacec73f-9c60-4c3f-b323-6261eab342af	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aad16b50-a866-4871-843f-ec8813ad5dfd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valley-dasher:cast:s1,f:xs:XP:valley-dasher:cast:s1	-	-	-	d864b561c9cb	-	60e0cf94ac28	-	-	2026-11-24	xproof

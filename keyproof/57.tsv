@@ -105,8 +105,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5791710d-c718-4f64-9c14-3668154716f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57927909-11a9-44ef-989d-1dcca1f6e23f	cast	cast-resolve	agreed	-	X	scen	1	0	Flight-Deck Coordinator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57927909-11a9-44ef-989d-1dcca1f6e23f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Flight-Deck Coordinator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-57947037-91b2-4058-be22-158d3257317e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57947037-91b2-4058-be22-158d3257317e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57947037-91b2-4058-be22-158d3257317e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cache-raiders:f0t0:s1,f:xs:XP:cache-raiders:f0t0:s1	-	-	-	3aa6ded33acb	-	a2852cdc5349	-	-	2026-11-25	xproof
+57947037-91b2-4058-be22-158d3257317e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:cache-raiders:f0t0:s1,f:xs:XP:cache-raiders:f0t0:s1	-	-	-	3aa6ded33acb	-	a2852cdc5349	-	-	2026-11-25	xproof
 57994ace-3dd6-407f-b465-c70b552bd466	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57994ace-3dd6-407f-b465-c70b552bd466	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5799baed-3457-4bf2-adf3-239a41dcc1c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thwart-the-enemy:cast:s1,f:xs:XP:thwart-the-enemy:cast:s1	-	-	-	ae86f6029288	-	580f50861c45	-	-	2026-11-24	xproof

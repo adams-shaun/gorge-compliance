@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e0b605f-2095-4189-8c71-9d1ac93db42e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sudden-insight:cast:s1,f:xs:XP:sudden-insight:cast:s1	-	-	-	d864b561c9cb	-	d7a3b583db5d	-	-	2026-11-24	xproof
 8e0cea9c-3110-4728-9378-76849e33bb90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e0f4e22-0677-4246-a4c5-6fcc74cb54a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e0f4e22-0677-4246-a4c5-6fcc74cb54a3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8e0f4e22-0677-4246-a4c5-6fcc74cb54a3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:eiganjo-exemplar:f0t0:s1,f:xs:XP:eiganjo-exemplar:f0t0:s1	-	-	-	3aa6ded33acb	-	dab7e75ff118	-	-	2026-11-25	xproof
 8e0f93d7-7208-4902-bd92-e7bf66d35fef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e0f93d7-7208-4902-bd92-e7bf66d35fef	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:lightning-rig-crew:f0a0:s1,f:xs:XP:lightning-rig-crew:f0a0:s1	-	-	-	d864b561c9cb	-	6dbc8901eee2	-	-	2026-11-24	xproof
 8e0f93d7-7208-4902-bd92-e7bf66d35fef	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -30,9 +30,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e22495d-a921-4c91-ada3-79098851e5d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deathleaper-terror-weapon:cast:s1,f:xs:XP:deathleaper-terror-weapon:cast:s1	-	-	-	8c0bd19283bb	-	3bbed94cd1fe	-	-	2026-11-24	xproof
 8e22bf51-1b1b-459b-af78-91188b6e3f09	cast	cast-resolve	agreed	-	X	scen	1	0	Jolly Gerbils/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8e22bf51-1b1b-459b-af78-91188b6e3f09	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jolly Gerbils/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8e25e4f5-5676-480f-a52b-43ebb6f31537	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:timbermare:f0t0:s1,f:xs:XP:timbermare:f0t0:s1	-	-	-	d864b561c9cb	-	2b7d4d5966fd	-	-	2026-11-24	xproof
-8e25e4f5-5676-480f-a52b-43ebb6f31537	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:timbermare:f0t0:s1,f:xs:XP:timbermare:f0t0:s1	-	-	-	d864b561c9cb	-	2b7d4d5966fd	-	-	2026-11-24	xproof
-8e25e4f5-5676-480f-a52b-43ebb6f31537	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8e25e4f5-5676-480f-a52b-43ebb6f31537	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2b7d4d5966fd	-	-	2026-11-25	xproof
+8e25e4f5-5676-480f-a52b-43ebb6f31537	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2b7d4d5966fd	-	-	2026-11-25	xproof
+8e25e4f5-5676-480f-a52b-43ebb6f31537	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	2b7d4d5966fd	-	-	2026-11-25	xproof
 8e2b5f90-e405-4b24-a71a-0988c37cf67a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghitu-slinger:f0t0:s1,f:xs:XP:ghitu-slinger:f0t0:s1	-	-	-	5f2128bf97e4	-	2fa15ba0dc38	-	-	2026-11-24	xproof
 8e2b5f90-e405-4b24-a71a-0988c37cf67a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ghitu-slinger:f0t0:s1,f:xs:XP:ghitu-slinger:f0t0:s1	-	-	-	5f2128bf97e4	-	2fa15ba0dc38	-	-	2026-11-24	xproof
 8e2b5f90-e405-4b24-a71a-0988c37cf67a	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -74,8 +74,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8e5d72a1-6ae0-445d-bac7-62da3bd3a8d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e5d72a1-6ae0-445d-bac7-62da3bd3a8d6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8e5e6f1d-4945-4074-a33e-c0e8b6b24a47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8e5e6f1d-4945-4074-a33e-c0e8b6b24a47	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:gryffwing-cavalry:f0t1:s1,f:xs:XP:gryffwing-cavalry:f0t1:s1	-	-	-	23b491658465	-	43aacb71a792	-	-	2026-11-25	xproof
-8e5e6f1d-4945-4074-a33e-c0e8b6b24a47	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8e5e6f1d-4945-4074-a33e-c0e8b6b24a47	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:gryffwing-cavalry:f0t1:s1,f:xs:XP:gryffwing-cavalry:f0t1:s1	-	-	-	3aa6ded33acb	-	43aacb71a792	-	-	2026-11-25	xproof
+8e5e6f1d-4945-4074-a33e-c0e8b6b24a47	f0/t1	Attacks/Training	agreed	-	FX	start	2	0	x:xs:XP:gryffwing-cavalry:f0t1:s1,f:xs:XP:gryffwing-cavalry:f0t1:s1	-	-	-	3aa6ded33acb	-	43aacb71a792	-	-	2026-11-25	xproof
 8e5e8bca-b52a-4178-ab53-bdd0e0e11dc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8e5ea773-a60b-4502-9db5-ce93fa61cc89	cast	cast-resolve	agreed	-	X	scen	1	0	Ghalta the Unstoppable/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8e5ea773-a60b-4502-9db5-ce93fa61cc89	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ghalta the Unstoppable/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ecbc87e-a63e-4afc-b5eb-2fc3dcd685f5	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8ecbc87e-a63e-4afc-b5eb-2fc3dcd685f5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grozoth:cast:s1,f:xs:XP:grozoth:cast:s1	-	-	-	64a08ba7d913	-	b2dfb44024f5	-	-	2026-11-24	xproof
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:nurturing-pixie:f0t0:s2,f:xs:XP:nurturing-pixie:f0t0:s2	-	-	-	267e485f6204	-	f1a203d4f380	-	-	2026-11-24	xproof
-8ecd3743-7c32-41ce-9ac1-c8c855a47302	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nurturing Pixie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8ecd3743-7c32-41ce-9ac1-c8c855a47302	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:nurturing-pixie:combat0.attack:s1,f:xs:XP:nurturing-pixie:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f1a203d4f380	-	-	2026-11-25	xproof
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:nurturing-pixie:combat0.block:s1,f:xs:XP:nurturing-pixie:combat0.block:s1	-	-	-	3aa6ded33acb	-	f1a203d4f380	-	-	2026-11-25	xproof
 8ecd3743-7c32-41ce-9ac1-c8c855a47302	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:nurturing-pixie:f0t0:s2,f:xs:XP:nurturing-pixie:f0t0:s2	-	-	-	267e485f6204	-	f1a203d4f380	-	-	2026-11-24	xproof
 8ed27504-f86b-4ce5-9395-7029825176ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-ambushers:cast:s1,f:xs:XP:fire-nation-ambushers:cast:s1	-	-	-	8c0bd19283bb	-	250a29d673fe	-	-	2026-11-24	xproof

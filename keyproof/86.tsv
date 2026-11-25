@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 861096be-dbb3-429e-820f-d82f6ed2aa24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8613d71b-4ac9-490d-b883-aefe03bcebce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86177c7e-a6eb-448b-baf8-aedd06f0a2f3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-86177c7e-a6eb-448b-baf8-aedd06f0a2f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+86177c7e-a6eb-448b-baf8-aedd06f0a2f3	f0/t0	ChangesZone/Persist	agreed	-	FX	start	2	0	x:xs:XP:rendclaw-trow:f0t0:s1,f:xs:XP:rendclaw-trow:f0t0:s1	-	-	-	3aa6ded33acb	-	a45342180827	-	-	2026-11-25	xproof
 86187aed-77ce-4b2d-aab0-0a8f807a9451	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:river-boa:cast:s1,f:xs:XP:river-boa:cast:s1	-	-	-	25696bf19d5b	-	b0b8c91c7ee0	-	-	2026-11-24	xproof
 86187aed-77ce-4b2d-aab0-0a8f807a9451	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 8618f8e8-fd86-47e3-905d-e6624b599b9b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:the-fair-basilica:f0a0:s1,f:xs:XP:the-fair-basilica:f0a0:s1	-	-	-	ae86f6029288	-	64b581899e1f	-	-	2026-11-24	xproof
@@ -142,8 +142,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 868e6e68-4367-4073-a864-235d5961ae56	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 868f0a0a-ca9e-4baf-8295-6b228aa834e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 868f0a0a-ca9e-4baf-8295-6b228aa834e5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-868f4ab2-a846-4ad0-8720-95fd234dd36b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-868f4ab2-a846-4ad0-8720-95fd234dd36b	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+868f4ab2-a846-4ad0-8720-95fd234dd36b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-world:f0t0:s1,f:xs:XP:storm-world:f0t0:s1	-	-	-	3aa6ded33acb	-	c83a76dacbcf	-	-	2026-11-25	xproof
+868f4ab2-a846-4ad0-8720-95fd234dd36b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:storm-world:f0t0:s1,f:xs:XP:storm-world:f0t0:s1	-	-	-	3aa6ded33acb	-	c83a76dacbcf	-	-	2026-11-25	xproof
 8695c3c1-fb4b-4429-ae33-ec186f68796b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8695c3c1-fb4b-4429-ae33-ec186f68796b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8695c7e2-464e-464c-9d3f-a7cf025f3eb2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elephant-mandrill:f0t0:s1,f:xs:XP:elephant-mandrill:f0t0:s1	-	-	-	8c0bd19283bb	-	78cab818b0be	-	-	2026-11-24	xproof

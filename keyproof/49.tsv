@@ -104,8 +104,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 496ab82e-24a9-4a74-ba4b-992c7309b44a	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 496c852b-ec62-4320-afbb-e19f534954c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haunter-of-nightveil:cast:s1,f:xs:XP:haunter-of-nightveil:cast:s1	-	-	-	d864b561c9cb	-	96c801c8873d	-	-	2026-11-24	xproof
 496c9633-ff17-48df-9b24-1d8cbfd06126	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-496e0fbb-cb01-41d6-9c56-23e3ae2bb4f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myr-prototype:cast:s1,f:xs:XP:myr-prototype:cast:s1	-	-	-	25696bf19d5b	-	77ec5ff586b0	-	-	2026-11-24	xproof
-496e0fbb-cb01-41d6-9c56-23e3ae2bb4f7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+496e0fbb-cb01-41d6-9c56-23e3ae2bb4f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myr-prototype:f0t0:s1,f:xs:XP:myr-prototype:f0t0:s1	-	-	-	3aa6ded33acb	-	77ec5ff586b0	-	-	2026-11-25	xproof
+496e0fbb-cb01-41d6-9c56-23e3ae2bb4f7	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:myr-prototype:f0t0:s1,f:xs:XP:myr-prototype:f0t0:s1	-	-	-	3aa6ded33acb	-	77ec5ff586b0	-	-	2026-11-25	xproof
 49701c15-c6f7-4b72-9e89-d34148e5c675	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49701c15-c6f7-4b72-9e89-d34148e5c675	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4976f08c-6f8e-42e4-9584-f04793518ddb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shield-wall-sentinel:f0t0:s1,f:xs:XP:shield-wall-sentinel:f0t0:s1	-	-	-	ae86f6029288	-	01db2a39587d	-	-	2026-11-24	xproof
@@ -130,8 +130,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 499b4cf9-2aaa-45a0-8362-77b727b7f7cc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Puca's Eye/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 499b4cf9-2aaa-45a0-8362-77b727b7f7cc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:puca-s-eye:f0t0:s2,f:xs:XP:puca-s-eye:f0t0:s2	-	-	-	267e485f6204	-	8b1c69b720c8	-	-	2026-11-24	xproof
 499c7ee3-08a3-4f40-809a-3f7087ab9b24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-499d5801-0c56-40f2-9a46-77025ed6cb87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-499d5801-0c56-40f2-9a46-77025ed6cb87	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+499d5801-0c56-40f2-9a46-77025ed6cb87	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kemba-kha-regent:f0t0:s1,f:xs:XP:kemba-kha-regent:f0t0:s1	-	-	-	3aa6ded33acb	-	4d976c334ad8	-	-	2026-11-25	xproof
+499d5801-0c56-40f2-9a46-77025ed6cb87	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:kemba-kha-regent:f0t0:s1,f:xs:XP:kemba-kha-regent:f0t0:s1	-	-	-	3aa6ded33acb	-	4d976c334ad8	-	-	2026-11-25	xproof
 499d76c1-97ff-4006-922c-be1684a7754c	cast	cast-resolve	agreed	-	X	scen	1	0	Claws Out/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 499d76c1-97ff-4006-922c-be1684a7754c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Claws Out/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 499f1e1e-d96e-481f-a5d9-eb38da927cd7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primordial-sage:cast:s1,f:xs:XP:primordial-sage:cast:s1	-	-	-	77494c1ce129	-	bd1cb4f52391	-	-	2026-11-24	xproof
@@ -152,10 +152,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49b9a3ac-d245-431a-bf40-64d1b8dc2b91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49b9a3ac-d245-431a-bf40-64d1b8dc2b91	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 49b9a3ac-d245-431a-bf40-64d1b8dc2b91	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-49be65fd-3755-410d-b0dc-2e5861ea2552	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49be65fd-3755-410d-b0dc-2e5861ea2552	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-49be65fd-3755-410d-b0dc-2e5861ea2552	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-49bf3805-cc9e-4550-8a01-171282aa49c9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+49be65fd-3755-410d-b0dc-2e5861ea2552	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thopter-spy-network:f0t0:s1,f:xs:XP:thopter-spy-network:f0t0:s1	-	-	-	3aa6ded33acb	-	3158f95cb605	-	-	2026-11-25	xproof
+49be65fd-3755-410d-b0dc-2e5861ea2552	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:thopter-spy-network:f0t0:s1,f:xs:XP:thopter-spy-network:f0t0:s1	-	-	-	3aa6ded33acb	-	3158f95cb605	-	-	2026-11-25	xproof
+49be65fd-3755-410d-b0dc-2e5861ea2552	f0/t1	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:thopter-spy-network:f0t0:s1,f:xs:XP:thopter-spy-network:f0t0:s1	-	-	-	3aa6ded33acb	-	3158f95cb605	-	-	2026-11-25	xproof
+49bf3805-cc9e-4550-8a01-171282aa49c9	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	cast	cast-resolve	agreed	-	X	scen	1	0	Pit Automaton/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pit Automaton/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 49bfecc3-6258-454e-a8fd-fc49098a0898	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pit Automaton/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

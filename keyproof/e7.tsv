@@ -42,7 +42,7 @@ e72ae9ab-7405-4ea7-b075-42d0ddc352db	f0/a0	NULL	owed	refused:scen failed: xengin
 e73131cd-b454-405b-9539-9d777e232b9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e73addfa-d18a-46f7-882e-7bc2f292230b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defenestrated-phantom:cast:s1,f:xs:XP:defenestrated-phantom:cast:s1	-	-	-	23b491658465	-	52a6a5234418	-	-	2026-11-24	xproof
 e73addfa-d18a-46f7-882e-7bc2f292230b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:defenestrated-phantom:combat0.attack:s1,f:xs:XP:defenestrated-phantom:combat0.attack:s1	-	-	-	3aa6ded33acb	-	52a6a5234418	-	-	2026-11-25	xproof
-e73addfa-d18a-46f7-882e-7bc2f292230b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Defenestrated Phantom/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e73addfa-d18a-46f7-882e-7bc2f292230b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:defenestrated-phantom:combat0.block:s1,f:xs:XP:defenestrated-phantom:combat0.block:s1	-	-	-	3aa6ded33acb	-	52a6a5234418	-	-	2026-11-25	xproof
 e73efb04-30ac-4484-b11b-e98f0353b9b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e73efb04-30ac-4484-b11b-e98f0353b9b6	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e740ce2f-2134-473c-afa1-1b6d2d1e38ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -62,7 +62,7 @@ e74a2a4c-ca3c-49e8-9b0f-b4d1bb91fb54	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Garde
 e74a2a4c-ca3c-49e8-9b0f-b4d1bb91fb54	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gardenize/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e74c4001-d958-4d2b-b57d-c3601f01580c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:battle-cry-goblin:cast:s1	-	-	-	d864b561c9cb	-	0541664f7443	-	-	2026-11-24	xproof
 e74c4001-d958-4d2b-b57d-c3601f01580c	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:battle-cry-goblin:f0a0:s1,f:xs:XP:battle-cry-goblin:f0a0:s1	-	-	-	d864b561c9cb	-	0541664f7443	-	-	2026-11-24	xproof
-e74c4001-d958-4d2b-b57d-c3601f01580c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e74c4001-d958-4d2b-b57d-c3601f01580c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:battle-cry-goblin:f0t0:s1,f:xs:XP:battle-cry-goblin:f0t0:s1	-	-	-	3aa6ded33acb	-	0541664f7443	-	-	2026-11-25	xproof
 e74c70be-2b70-4b04-9909-161d6f41a156	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e74efcf2-d77f-4fb5-9027-77e462ec829e	cast	cast-resolve	agreed	-	X	scen	1	0	Kraven's Last Hunt/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e7504407-bb72-4baf-be4a-8152e4198e2b	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -166,8 +166,8 @@ e7bd3882-a0f2-4706-80e7-1d3ec455801f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e7bd3882-a0f2-4706-80e7-1d3ec455801f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e7be5ab3-a11f-4786-9b0b-1daa94f59440	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:krark-clan-grunt:cast:s1,f:xs:XP:krark-clan-grunt:cast:s1	-	-	-	25696bf19d5b	-	f1afb3f0ebe8	-	-	2026-11-24	xproof
 e7be5ab3-a11f-4786-9b0b-1daa94f59440	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-e7bef318-2720-45bc-b663-aafd724bc511	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e7bef318-2720-45bc-b663-aafd724bc511	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e7bef318-2720-45bc-b663-aafd724bc511	cast	cast	agreed	-	F	start	2	0	f:xs:XP:cryptoplasm:f0t0:s1	-	-	-	3aa6ded33acb	-	6b4c78a4734c	-	-	2026-11-25	xproof
+e7bef318-2720-45bc-b663-aafd724bc511	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:cryptoplasm:f0t0:s1	-	-	-	3aa6ded33acb	-	6b4c78a4734c	-	-	2026-11-25	xproof
 e7c0052e-6dda-4fcf-9368-7749aa9b9c5c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7c0052e-6dda-4fcf-9368-7749aa9b9c5c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e7c06af6-8d96-4bfa-8baf-9e80f741e8cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tyrant-of-kher-ridges:f0t0:s1,f:xs:XP:tyrant-of-kher-ridges:f0t0:s1	-	-	-	ae86f6029288	-	17f9b3dc446d	-	-	2026-11-24	xproof
@@ -204,9 +204,9 @@ e7dfe47f-41fc-4071-9ad3-96cd8d9be52e	cast	NULL	owed	refused:steps-needed:token	-
 e7dfe47f-41fc-4071-9ad3-96cd8d9be52e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e7e1b166-9267-426d-897d-24903327b48d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7e1b166-9267-426d-897d-24903327b48d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e7e59437-cdd0-476a-b1ec-231be4139d31	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:obsessive-skinner:f0t0:s1,f:xs:XP:obsessive-skinner:f0t0:s1	-	-	-	d864b561c9cb	-	7cff5dd67164	-	-	2026-11-24	xproof
-e7e59437-cdd0-476a-b1ec-231be4139d31	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:obsessive-skinner:f0t0:s1,f:xs:XP:obsessive-skinner:f0t0:s1	-	-	-	d864b561c9cb	-	7cff5dd67164	-	-	2026-11-24	xproof
-e7e59437-cdd0-476a-b1ec-231be4139d31	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e7e59437-cdd0-476a-b1ec-231be4139d31	cast	cast	agreed	-	F	start	2	0	f:xs:XP:obsessive-skinner:f0t1:s1	-	-	-	3aa6ded33acb	-	7cff5dd67164	-	-	2026-11-25	xproof
+e7e59437-cdd0-476a-b1ec-231be4139d31	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:obsessive-skinner:f0t1:s1	-	-	-	3aa6ded33acb	-	7cff5dd67164	-	-	2026-11-25	xproof
+e7e59437-cdd0-476a-b1ec-231be4139d31	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:obsessive-skinner:f0t1:s1	-	-	-	3aa6ded33acb	-	7cff5dd67164	-	-	2026-11-25	xproof
 e7e65cc5-9ceb-43b6-acde-ae492b71daf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7e69583-8326-417e-8a9a-6b917c8ba4b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e7e69583-8326-417e-8a9a-6b917c8ba4b6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

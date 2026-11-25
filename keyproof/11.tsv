@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 111f3f1c-4387-4e61-8bff-6ebe3b7b9d9f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11284767-7095-4e0e-bc60-c69d58098348	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11284767-7095-4e0e-bc60-c69d58098348	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1128d2ab-0b6e-4912-8735-15521bc314e6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1128d2ab-0b6e-4912-8735-15521bc314e6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:puncturing-blow:cast:s1,f:xs:XP:puncturing-blow:cast:s1	-	-	-	3aa6ded33acb	-	75eca792958e	-	-	2026-11-25	xproof
 11293f96-3263-45e5-89fc-850df6b25a63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:increasing-confusion:cast:s1,f:xs:XP:increasing-confusion:cast:s1	-	-	-	d864b561c9cb	-	c273a4315001	-	-	2026-11-24	xproof
 112aaaf0-3301-4f79-9640-d36c75a0fb30	cast	cast-resolve	agreed	-	FX	scen	2	0	Rescue Skiff/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 112aaaf0-3301-4f79-9640-d36c75a0fb30	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1199a252-3c7c-4ae4-b063-dc132bfbea2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tattered-drake:cast:s1,f:xs:XP:tattered-drake:cast:s1	-	-	-	77494c1ce129	-	5eab01dab6fc	-	-	2026-11-24	xproof
 1199a252-3c7c-4ae4-b063-dc132bfbea2f	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 119af12a-b767-4408-9bb5-72a6d0ec63d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-119af12a-b767-4408-9bb5-72a6d0ec63d1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+119af12a-b767-4408-9bb5-72a6d0ec63d1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ordruun-veteran:f0t0:s1,f:xs:XP:ordruun-veteran:f0t0:s1	-	-	-	3aa6ded33acb	-	1bfb754d0486	-	-	2026-11-25	xproof
 119d719d-e965-45b4-9bc9-ac03211b10c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:survival-of-the-fittest:cast:s1,f:xs:XP:survival-of-the-fittest:cast:s1	-	-	-	5f2128bf97e4	-	ead941687c6b	-	-	2026-11-24	xproof
 119d719d-e965-45b4-9bc9-ac03211b10c2	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 119d9671-61ba-4629-89b1-f94bdec5cb74	cast	cast-resolve	agreed	-	FX	scen	2	0	Chimil, the Inner Sun/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -187,7 +187,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11f21b50-b4b6-449e-a66a-eedd2920ed93	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:squad-commander:cast:s1,f:xs:XP:squad-commander:cast:s1	-	-	-	ae86f6029288	-	e5c11b6738b0	-	-	2026-11-24	xproof
 11f21b50-b4b6-449e-a66a-eedd2920ed93	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:squad-commander:cast:s1,f:xs:XP:squad-commander:cast:s1	-	-	-	ae86f6029288	-	e5c11b6738b0	-	-	2026-11-24	xproof
 11f21b50-b4b6-449e-a66a-eedd2920ed93	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-11f55ec5-b9a3-4670-8afb-31d29478fb59	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11f55ec5-b9a3-4670-8afb-31d29478fb59	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 11f77158-0240-4882-94a4-6bd6b3d94bcc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11f7f6e4-2c39-4478-8c10-4473dbf921a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11fb3fee-ae84-4bf3-b834-63d3b8987df3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:potion-of-healing:f0t0:s1,f:xs:XP:potion-of-healing:f0t0:s1	-	-	-	d864b561c9cb	-	83109f680755	-	-	2026-11-24	xproof

@@ -96,7 +96,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e99efaf-6402-44c5-ae8b-1f5bb1b68333	static#0.0	static#0.0	agreed	-	X	scen	1	0	Red Herring/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	cast	cast	agreed	-	X	start	2	0	x:xs:XP:tolsimir-midnight-s-light:cast:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-midnight-s-light:combat0.attack:s1,f:xs:XP:tolsimir-midnight-s-light:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f2a96a56dfe5	-	-	2026-11-25	xproof
-0e9c7380-7584-43e6-8c31-5d1bb1685fe0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tolsimir, Midnight's Light/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0e9c7380-7584-43e6-8c31-5d1bb1685fe0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-midnight-s-light:combat0.block:s1,f:xs:XP:tolsimir-midnight-s-light:combat0.block:s1	-	-	-	3aa6ded33acb	-	f2a96a56dfe5	-	-	2026-11-25	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	f0/t0	ChangesZone	agreed	-	X	start	2	0	x:xs:XP:tolsimir-midnight-s-light:cast:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-midnight-s-light:f0t1:s1,f:xs:XP:tolsimir-midnight-s-light:f0t1:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
 0e9d8e12-b9da-4452-a758-5caffd8a752e	cast	cast-resolve	agreed	-	FX	scen	2	0	Magitek Armor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -117,8 +117,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ea80bd9-ab7e-4a8f-85b0-167fe7fae43a	cast	cast-resolve	agreed	-	X	scen	1	0	Cathartic Parting/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eabe5e9-cb03-4481-9360-5e79eccd0631	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0eaea4fd-a377-4541-9bdd-14921034a975	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doorkeeper-thrull:cast:s1,f:xs:XP:doorkeeper-thrull:cast:s1	-	-	-	23b491658465	-	1a92f15e2ded	-	-	2026-11-24	xproof
-0eaea4fd-a377-4541-9bdd-14921034a975	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Doorkeeper Thrull/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0eaea4fd-a377-4541-9bdd-14921034a975	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Doorkeeper Thrull/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0eaea4fd-a377-4541-9bdd-14921034a975	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:doorkeeper-thrull:combat0.attack:s1,f:xs:XP:doorkeeper-thrull:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1a92f15e2ded	-	-	2026-11-25	xproof
+0eaea4fd-a377-4541-9bdd-14921034a975	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:doorkeeper-thrull:combat0.block:s1,f:xs:XP:doorkeeper-thrull:combat0.block:s1	-	-	-	3aa6ded33acb	-	1a92f15e2ded	-	-	2026-11-25	xproof
 0eaea4fd-a377-4541-9bdd-14921034a975	static#0.0	static#0.0	agreed	-	X	scen	1	0	Doorkeeper Thrull/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0eaec4ec-0f50-4470-a7bf-acd8c6c52dc2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:long-lost-lances:cast:s1,f:xs:XP:long-lost-lances:cast:s1	-	-	-	8c0bd19283bb	-	a2ba62cbc438	-	-	2026-11-24	xproof
 0eaec4ec-0f50-4470-a7bf-acd8c6c52dc2	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:long-lost-lances:f0a0:s1	-	-	-	8c0bd19283bb	-	a2ba62cbc438	-	-	2026-11-24	xproof

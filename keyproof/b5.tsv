@@ -79,8 +79,8 @@ b55da4d3-2cad-4c89-ad3f-7d8397b64d52	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 b563a578-86ce-41a5-a83e-c70c6a4960e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b563a578-86ce-41a5-a83e-c70c6a4960e2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	cast	cast-resolve	agreed	-	FX	scen	2	0	Kraul Whipcracker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kraul Whipcracker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kraul Whipcracker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kraul-whipcracker:combat0.attack:s1,f:xs:XP:kraul-whipcracker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2b38b07f4e08	-	-	2026-11-25	xproof
+b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kraul-whipcracker:combat0.block:s1,f:xs:XP:kraul-whipcracker:combat0.block:s1	-	-	-	3aa6ded33acb	-	2b38b07f4e08	-	-	2026-11-25	xproof
 b563ae31-338e-4bcc-a05f-d7ed7c3fe46e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 b5641fcf-135e-43e7-a547-344fac61e279	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5641fcf-135e-43e7-a547-344fac61e279	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ b58722c5-84f2-43c2-be7e-3577c2f2a60a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b58737a4-180e-4e2f-95ae-afd6d446d608	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:gloomshrieker:cast:s1,f:xs:XP:gloomshrieker:cast:s1	-	-	-	d864b561c9cb	-	dbf8e5aa131e	-	-	2026-11-24	xproof
 b58737a4-180e-4e2f-95ae-afd6d446d608	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:gloomshrieker:cast:s1,f:xs:XP:gloomshrieker:cast:s1	-	-	-	d864b561c9cb	-	dbf8e5aa131e	-	-	2026-11-24	xproof
 b588df7a-64d8-449e-b573-13badc8cdf56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b58d7a20-4bcd-4c33-8cda-955362525f48	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b58d7a20-4bcd-4c33-8cda-955362525f48	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 b59053d5-b5f2-44aa-a29c-7f3908d86577	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:high-ground:cast:s1,f:xs:XP:high-ground:cast:s1	-	-	-	25696bf19d5b	-	b5db4bad0677	-	-	2026-11-24	xproof
 b5905ef3-6565-462f-a015-2bb5b5b09eff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5918fb0-c33f-4e33-ac6d-8f94723d4296	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:vinelasher-adept:f0t0:s1,f:xs:XP:vinelasher-adept:f0t0:s1	-	-	-	25696bf19d5b	-	9f31a07a8d6d	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ b5944ca8-d54e-4830-9f66-be8fe97d101d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sav
 b597e801-2648-48b9-8a21-02baa13e37af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5991a13-5fcd-4d2d-9db2-d3d5af7259f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5991a13-5fcd-4d2d-9db2-d3d5af7259f5	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-b59c7c62-ce2f-4062-9790-566191aded69	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b59c7c62-ce2f-4062-9790-566191aded69	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 b59da333-e658-447e-a8bd-8c0124d8b905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b59da333-e658-447e-a8bd-8c0124d8b905	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b5a146e6-053f-43ce-8b01-24505a398976	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -211,7 +211,7 @@ b5f9920d-7af5-4876-8823-6efbf2b4d9b9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 b5fa5651-d714-44d6-867b-be0e3224b7ed	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Muraganda Raceway/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5fa5651-d714-44d6-867b-be0e3224b7ed	land	play-land	agreed	-	X	scen	1	0	Muraganda Raceway/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5fa5651-d714-44d6-867b-be0e3224b7ed	static#0.0	static#0.0	agreed	-	X	scen	1	0	Muraganda Raceway/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b5fcfcf5-8af5-4395-b989-427fa92e0dd2	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b5fcfcf5-8af5-4395-b989-427fa92e0dd2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 b5fd82b9-77de-4358-9ce7-915cc809a889	cast	cast-resolve	agreed	-	FX	scen	2	0	Zuko, Conflicted/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5fd82b9-77de-4358-9ce7-915cc809a889	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Zuko, Conflicted/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5fe62f0-d914-4789-afd3-3831dcdbed7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

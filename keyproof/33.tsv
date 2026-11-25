@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 331b44e4-cf08-44f4-8afd-a7374e5dc5ed	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 331b6834-6bb4-40fa-b80b-22d67b34734f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sidar-kondo-of-jamuraa:cast:s1,f:xs:XP:sidar-kondo-of-jamuraa:cast:s1	-	-	-	8c0bd19283bb	-	d558985764e0	-	-	2026-11-24	xproof
 331b6834-6bb4-40fa-b80b-22d67b34734f	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-332ccaac-e3f2-4c49-824b-ebbef8a81447	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+332ccaac-e3f2-4c49-824b-ebbef8a81447	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 3334b218-01e3-47a3-8a28-5cc2decbedea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:woodweaver-s-puzzleknot:f0t0:s1,f:xs:XP:woodweaver-s-puzzleknot:f0t0:s1	-	-	-	d864b561c9cb	-	3b042252cabf	-	-	2026-11-24	xproof
 3334b218-01e3-47a3-8a28-5cc2decbedea	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3334b218-01e3-47a3-8a28-5cc2decbedea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:woodweaver-s-puzzleknot:f0t0:s1,f:xs:XP:woodweaver-s-puzzleknot:f0t0:s1	-	-	-	d864b561c9cb	-	3b042252cabf	-	-	2026-11-24	xproof
@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 339bddf5-a8fb-46d3-877e-b0441ca8a597	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 339c39d9-7e10-458e-b602-4f0550840436	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 339c39d9-7e10-458e-b602-4f0550840436	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:platoon-dispenser:f0a1:s1,f:xs:XP:platoon-dispenser:f0a1:s1	-	-	-	23b491658465	-	e52b8eeaccfb	-	-	2026-11-25	xproof
-339c39d9-7e10-458e-b602-4f0550840436	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+339c39d9-7e10-458e-b602-4f0550840436	f0/a1	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:platoon-dispenser:f0a1:s1,f:xs:XP:platoon-dispenser:f0a1:s1	-	-	-	3aa6ded33acb	-	e52b8eeaccfb	-	-	2026-11-25	xproof
 339c39d9-7e10-458e-b602-4f0550840436	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 339f5334-b65a-445a-a016-20e997e0b4bb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mistrise Village/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 339f5334-b65a-445a-a016-20e997e0b4bb	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Mistrise Village/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

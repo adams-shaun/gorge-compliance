@@ -40,11 +40,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74250f3e-ad88-486f-a10a-90d9a2f0097f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lammastide-weave:cast:s1,f:xs:XP:lammastide-weave:cast:s1	-	-	-	8c0bd19283bb	-	e5fd183152b9	-	-	2026-11-24	xproof
 74255add-2894-4c31-81c1-d38873fa325f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74284bbc-b011-4e16-b8d5-7ddacc77f9d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lady-caleria:cast:s1,f:xs:XP:lady-caleria:cast:s1	-	-	-	fc71ca68c5ac	-	0a9edd827a71	-	-	2026-11-24	xproof
-74284bbc-b011-4e16-b8d5-7ddacc77f9d7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+74284bbc-b011-4e16-b8d5-7ddacc77f9d7	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 742cb752-dd20-4b1f-8d96-7e9a8f864e75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 742cb752-dd20-4b1f-8d96-7e9a8f864e75	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
-742f6478-7c9e-43a4-81c1-09383fe65dad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mournwillow:f0t0:s1,f:xs:XP:mournwillow:f0t0:s1	-	-	-	23b491658465	-	00e223a1fc20	-	-	2026-11-25	xproof
-742f6478-7c9e-43a4-81c1-09383fe65dad	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+742f6478-7c9e-43a4-81c1-09383fe65dad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mournwillow:f0t0:s1,f:xs:XP:mournwillow:f0t0:s1	-	-	-	3aa6ded33acb	-	00e223a1fc20	-	-	2026-11-25	xproof
+742f6478-7c9e-43a4-81c1-09383fe65dad	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mournwillow:f0t0:s1,f:xs:XP:mournwillow:f0t0:s1	-	-	-	3aa6ded33acb	-	00e223a1fc20	-	-	2026-11-25	xproof
 74303ddb-d3b6-433d-a299-e0c4a7267461	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74303ddb-d3b6-433d-a299-e0c4a7267461	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 74315869-46e3-43a2-abc0-d86d0a70d343	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

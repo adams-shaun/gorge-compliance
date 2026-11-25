@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91760bdf-a82a-4f3d-b925-3bc81ffbd41f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 917652c7-ac12-4cd7-ab2d-f2260a620d02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91770dc7-3de3-458f-a240-6540455fe05f	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91770dc7-3de3-458f-a240-6540455fe05f	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 91770dc7-3de3-458f-a240-6540455fe05f	f0/a1	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:d-avenant-healer:f0a0:s1,f:xs:XP:d-avenant-healer:f0a0:s1	-	-	-	23b491658465	-	9ad6fedef5b2	-	-	2026-11-25	xproof
 9178253e-0d89-450d-a93b-ed4765e945db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 917aef2b-0e6d-460e-8745-8da8423d1592	cast	cast-resolve	agreed	-	X	scen	1	0	Riverwheel Sweep/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -139,9 +139,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91b2520e-85b6-4e1f-88cf-a585feeb8e65	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Krenko, Baron of Tin Street/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91b46b22-8062-434b-8432-5ed1062ccaf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91b46b22-8062-434b-8432-5ed1062ccaf9	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-91b5688d-4dd6-477b-998f-bdc7612de37a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91b5688d-4dd6-477b-998f-bdc7612de37a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91b5688d-4dd6-477b-998f-bdc7612de37a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91b5688d-4dd6-477b-998f-bdc7612de37a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	7adddb8df868	-	-	2026-11-25	xproof
+91b5688d-4dd6-477b-998f-bdc7612de37a	f0/a0	Pump	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	7adddb8df868	-	-	2026-11-25	xproof
+91b5688d-4dd6-477b-998f-bdc7612de37a	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	7adddb8df868	-	-	2026-11-25	xproof
 91b89c21-5f35-4aa5-925b-c756ec6969b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91b8c0bc-2599-4423-a23f-5dc95b23cf25	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91babc5f-ebeb-4894-8c35-b0f60249cb80	cast	cast-resolve	agreed	-	FX	scen	2	0	Quintorius Kand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -186,14 +186,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91e71279-c9d2-4873-916a-59da03a65741	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e71279-c9d2-4873-916a-59da03a65741	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91ebedb5-cb5f-4c58-ad30-6c6b0a106aa0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frogtosser-banneret:cast:s1,f:xs:XP:frogtosser-banneret:cast:s1	-	-	-	d864b561c9cb	-	26cac847c7d9	-	-	2026-11-24	xproof
-91edef61-2487-405c-a3ec-67a814dfeff2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-91edef61-2487-405c-a3ec-67a814dfeff2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91edef61-2487-405c-a3ec-67a814dfeff2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spiritual-sanctuary:f0t0:s1,f:xs:XP:spiritual-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	7af7a6eefc49	-	-	2026-11-25	xproof
+91edef61-2487-405c-a3ec-67a814dfeff2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:spiritual-sanctuary:f0t0:s1,f:xs:XP:spiritual-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	7af7a6eefc49	-	-	2026-11-25	xproof
 91f36a03-6031-4834-98ee-20b36cdf5569	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jeweled-torque:cast:s1,f:xs:XP:jeweled-torque:cast:s1	-	-	-	5f2128bf97e4	-	0d04ade93875	-	-	2026-11-24	xproof
 91f36a03-6031-4834-98ee-20b36cdf5569	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 91f410c5-4313-462f-8d21-da63988d919f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sutina-speaker-of-the-tajuru:cast:s1,f:xs:XP:sutina-speaker-of-the-tajuru:cast:s1	-	-	-	8c0bd19283bb	-	52f6873c69c9	-	-	2026-11-24	xproof
 91f410c5-4313-462f-8d21-da63988d919f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sutina-speaker-of-the-tajuru:cast:s1,f:xs:XP:sutina-speaker-of-the-tajuru:cast:s1	-	-	-	8c0bd19283bb	-	52f6873c69c9	-	-	2026-11-24	xproof
 91f410c5-4313-462f-8d21-da63988d919f	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sutina-speaker-of-the-tajuru:f0t1:s1,f:xs:XP:sutina-speaker-of-the-tajuru:f0t1:s1	-	-	-	8c0bd19283bb	-	52f6873c69c9	-	-	2026-11-24	xproof
-91f7672c-3090-48f4-8586-0426341c3159	cast	cast-resolve	agreed	-	X	scen	1	0	Suspicious Detonation/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+91f7672c-3090-48f4-8586-0426341c3159	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suspicious-detonation:cast:s1,f:xs:XP:suspicious-detonation:cast:s1	-	-	-	3aa6ded33acb	-	f00c3e3043c8	-	-	2026-11-25	xproof
 91f7672c-3090-48f4-8586-0426341c3159	static#0.0	static#0.0	agreed	-	X	scen	1	0	Suspicious Detonation/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91f95d83-3637-4cf8-af6c-56bc4e4b2591	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91fbb25b-8521-483f-88b0-77778d25f7fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

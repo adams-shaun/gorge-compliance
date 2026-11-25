@@ -11,9 +11,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b072fbb-5e61-4009-bcb1-d493eb4a1be4	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:quantum-entanglement:cast:s1,f:xs:XP:quantum-entanglement:cast:s1	-	-	-	8c0bd19283bb	-	575e99c82d20	-	-	2026-11-24	xproof
 4b0e5626-0282-42e5-abef-a079b26a8e5f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:poisoner-s-apprentice:f0t0:s2,f:xs:XP:poisoner-s-apprentice:f0t0:s2	-	-	-	5437c1394672	-	2572149f2040	-	-	2026-11-24	xproof
 4b0e5626-0282-42e5-abef-a079b26a8e5f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:poisoner-s-apprentice:f0t0:s2,f:xs:XP:poisoner-s-apprentice:f0t0:s2	-	-	-	5437c1394672	-	2572149f2040	-	-	2026-11-24	xproof
-4b100e6f-6c19-49d2-b9c4-613d63d42151	cast	cast-resolve	agreed	-	X	scen	1	0	Rambling Possum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4b100e6f-6c19-49d2-b9c4-613d63d42151	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rambling Possum/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4b100e6f-6c19-49d2-b9c4-613d63d42151	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rambling Possum/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4b100e6f-6c19-49d2-b9c4-613d63d42151	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rambling-possum:cast:s1,f:xs:XP:rambling-possum:cast:s1	-	-	-	3aa6ded33acb	-	b755b94f55b4	-	-	2026-11-25	xproof
+4b100e6f-6c19-49d2-b9c4-613d63d42151	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:rambling-possum:f0a0:s1,f:xs:XP:rambling-possum:f0a0:s1	-	-	-	3aa6ded33acb	-	b755b94f55b4	-	-	2026-11-25	xproof
+4b100e6f-6c19-49d2-b9c4-613d63d42151	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:rambling-possum:f0a0:s1,f:xs:XP:rambling-possum:f0a0:s1	-	-	-	3aa6ded33acb	-	b755b94f55b4	-	-	2026-11-25	xproof
 4b11e435-5888-4e3b-a255-db817392163f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mabel-heir-to-cragflame:f0t0:s2,f:xs:XP:mabel-heir-to-cragflame:f0t0:s2	-	-	-	e07cf3a05ba5	-	93231e4e4ab4	-	-	2026-11-24	xproof
 4b11e435-5888-4e3b-a255-db817392163f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mabel-heir-to-cragflame:f0t0:s2,f:xs:XP:mabel-heir-to-cragflame:f0t0:s2	-	-	-	e07cf3a05ba5	-	93231e4e4ab4	-	-	2026-11-24	xproof
 4b11e435-5888-4e3b-a255-db817392163f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mabel, Heir to Cragflame/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

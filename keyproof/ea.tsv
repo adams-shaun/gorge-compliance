@@ -29,13 +29,13 @@ ea31c9a4-af4f-4cab-b53c-77ef4241d4a6	f0/t0	NULL	owed	refused:scen failed: xengin
 ea31c9a4-af4f-4cab-b53c-77ef4241d4a6	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 ea31c9a4-af4f-4cab-b53c-77ef4241d4a6	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 ea3401a9-76db-4f38-b973-2b7754087b97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:veteran-adventurer:cast:s1,f:xs:XP:veteran-adventurer:cast:s1	-	-	-	ae86f6029288	-	ecb4874aa8c1	-	-	2026-11-24	xproof
-ea34ec71-2f3b-4119-937d-4629cbf7ac5e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glint-sleeve-siphoner:f0t0:s1,f:xs:XP:glint-sleeve-siphoner:f0t0:s1	-	-	-	d864b561c9cb	-	b6ff9ca18599	-	-	2026-11-24	xproof
-ea34ec71-2f3b-4119-937d-4629cbf7ac5e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:glint-sleeve-siphoner:f0t0:s1,f:xs:XP:glint-sleeve-siphoner:f0t0:s1	-	-	-	d864b561c9cb	-	b6ff9ca18599	-	-	2026-11-24	xproof
-ea34ec71-2f3b-4119-937d-4629cbf7ac5e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ea34ec71-2f3b-4119-937d-4629cbf7ac5e	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ea34ec71-2f3b-4119-937d-4629cbf7ac5e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glint-sleeve-siphoner:f0t2:s1,f:xs:XP:glint-sleeve-siphoner:f0t2:s1	-	-	-	3aa6ded33acb	-	b6ff9ca18599	-	-	2026-11-25	xproof
+ea34ec71-2f3b-4119-937d-4629cbf7ac5e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:glint-sleeve-siphoner:f0t2:s1,f:xs:XP:glint-sleeve-siphoner:f0t2:s1	-	-	-	3aa6ded33acb	-	b6ff9ca18599	-	-	2026-11-25	xproof
+ea34ec71-2f3b-4119-937d-4629cbf7ac5e	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:glint-sleeve-siphoner:f0t2:s1,f:xs:XP:glint-sleeve-siphoner:f0t2:s1	-	-	-	3aa6ded33acb	-	b6ff9ca18599	-	-	2026-11-25	xproof
+ea34ec71-2f3b-4119-937d-4629cbf7ac5e	f0/t2	Phase	agreed	-	FX	start	2	0	x:xs:XP:glint-sleeve-siphoner:f0t2:s1,f:xs:XP:glint-sleeve-siphoner:f0t2:s1	-	-	-	3aa6ded33acb	-	b6ff9ca18599	-	-	2026-11-25	xproof
 ea384b0d-3091-4d50-b15f-1f6763647b7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crusader-of-odric:cast:s1,f:xs:XP:crusader-of-odric:cast:s1	-	-	-	8c0bd19283bb	-	6ebfaf5fae5e	-	-	2026-11-24	xproof
 ea384b0d-3091-4d50-b15f-1f6763647b7c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Crusader of Odric/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ea4052bc-cd37-467c-9fba-3f1ed537b781	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ea4052bc-cd37-467c-9fba-3f1ed537b781	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unchecked-growth:cast:s1,f:xs:XP:unchecked-growth:cast:s1	-	-	-	3aa6ded33acb	-	d8f4e5553360	-	-	2026-11-25	xproof
 ea405cb4-a21b-4a26-98f3-251e65ea2aef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ea405cb4-a21b-4a26-98f3-251e65ea2aef	f0/a0	NULL	owed	refused:steps-needed:cost:GP	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ea405cb4-a21b-4a26-98f3-251e65ea2aef	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -205,8 +205,8 @@ eacfe895-5106-437c-b8c1-2ff03c107744	static#0.0	static#0.0	agreed	-	X	scen	1	0	M
 ead0820e-fc6b-4ab2-9110-048d6d53985d	cast	cast-resolve	agreed	-	FX	scen	2	0	Panther Pounce/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ead1accc-b90e-424a-a55f-2f4771726ce1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shipwreck-looter:f0t0:s1,f:xs:XP:shipwreck-looter:f0t0:s1	-	-	-	3aa6ded33acb	-	46d9a19c7f8b	-	-	2026-11-25	xproof
 ead1accc-b90e-424a-a55f-2f4771726ce1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shipwreck-looter:f0t0:s1,f:xs:XP:shipwreck-looter:f0t0:s1	-	-	-	3aa6ded33acb	-	46d9a19c7f8b	-	-	2026-11-25	xproof
-ead1bcc4-6bf7-4ace-b705-e3095e6a716c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ead1bcc4-6bf7-4ace-b705-e3095e6a716c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ead1bcc4-6bf7-4ace-b705-e3095e6a716c	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cc17e60e97d1	-	-	2026-11-25	xproof
+ead1bcc4-6bf7-4ace-b705-e3095e6a716c	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cc17e60e97d1	-	-	2026-11-25	xproof
 ead1ee6a-e0da-46d5-89e8-31e8c0270bc2	cast	counter-spell	agreed	-	X	scen	1	0	No More Lies/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ead2aee3-4f95-4ff1-8be9-ea9619e2386e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hawkeye-trick-shot:f0t0:s1,f:xs:XP:hawkeye-trick-shot:f0t0:s1	-	-	-	8c0bd19283bb	-	f35428cbbef6	-	-	2026-11-24	xproof
 ead2aee3-4f95-4ff1-8be9-ea9619e2386e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hawkeye-trick-shot:f0t0:s1,f:xs:XP:hawkeye-trick-shot:f0t0:s1	-	-	-	8c0bd19283bb	-	f35428cbbef6	-	-	2026-11-24	xproof

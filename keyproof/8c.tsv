@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c52bd39-0586-48ca-b263-17210cf9feb6	cast	cast-resolve	agreed	-	FX	scen	2	0	Craterhoof Behemoth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8c52bd39-0586-48ca-b263-17210cf9feb6	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c53a177-c8c8-4b9f-a221-f205da67daa5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c53a177-c8c8-4b9f-a221-f205da67daa5	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8c53a177-c8c8-4b9f-a221-f205da67daa5	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:ramosian-greatsword:f0a0:s1	-	-	-	3aa6ded33acb	-	e47992799c39	-	-	2026-11-25	xproof
 8c55039d-1303-420c-8547-ebdffb63bf89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liliana-s-talent:cast:s1,f:xs:XP:liliana-s-talent:cast:s1	-	-	-	8c0bd19283bb	-	a3521227204c	-	-	2026-11-24	xproof
 8c55039d-1303-420c-8547-ebdffb63bf89	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8c5fe985-69e1-4a03-99fc-a6fd2314a9a7	cast	cast-resolve	agreed	-	X	scen	1	0	Professor Dellian Fel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ccd20c7-b7fc-4ab1-a98b-3bbcc2079339	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ccd20c7-b7fc-4ab1-a98b-3bbcc2079339	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cd0fcac-800a-431c-aca9-804998704606	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8cd3815d-92a6-4336-9da7-b18b1afd5460	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+8cd3815d-92a6-4336-9da7-b18b1afd5460	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 8cd45064-2ad9-4247-902e-aefaf3bc1a43	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:their-number-is-legion:cast:s1,f:xs:XP:their-number-is-legion:cast:s1	-	-	-	8c0bd19283bb	-	bc41acc52d55	-	-	2026-11-24	xproof
 8cd88e87-6585-437a-bcad-b494fffc0544	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	e6266fe9dd0c	-	-	2026-11-24	xproof
 8cdda36f-5e82-4c2f-8eaa-75b9bbc93a02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

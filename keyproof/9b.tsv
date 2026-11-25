@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b7870df-6bca-499f-bc6e-e57f2ddfe640	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9b7d037f-3269-4e3b-9744-a977acb69c67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:incinerator-of-the-guilty:cast:s1,f:xs:XP:incinerator-of-the-guilty:cast:s1	-	-	-	23b491658465	-	70793ecca733	-	-	2026-11-24	xproof
 9b7d037f-3269-4e3b-9744-a977acb69c67	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Incinerator of the Guilty/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9b7d037f-3269-4e3b-9744-a977acb69c67	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Incinerator of the Guilty/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9b7d037f-3269-4e3b-9744-a977acb69c67	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:incinerator-of-the-guilty:combat0.block:s1,f:xs:XP:incinerator-of-the-guilty:combat0.block:s1	-	-	-	3aa6ded33acb	-	70793ecca733	-	-	2026-11-25	xproof
 9b7d037f-3269-4e3b-9744-a977acb69c67	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Incinerator of the Guilty/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9b7f1d05-707c-4ed3-9f0e-8ced1232c2ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b81aa32-e0f7-493f-92b8-85c2c46aef91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:icatian-moneychanger:f0t0:s1,f:xs:XP:icatian-moneychanger:f0t0:s1	-	-	-	fc71ca68c5ac	-	5e1183f4ef2d	-	-	2026-11-24	xproof
@@ -126,9 +126,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ba6cec6-97bf-4a83-9ffa-77e187d0945b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:knightly-valor:cast:s1,f:xs:XP:knightly-valor:cast:s1	-	-	-	3aa6ded33acb	-	56d4cf996f02	-	-	2026-11-25	xproof
 9ba89c25-5302-414f-a2ec-436b8981999d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ba89c25-5302-414f-a2ec-436b8981999d	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-9babcd0a-531f-417d-905e-b916a87112bb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cemetery-tampering:cast:s1,f:xs:XP:cemetery-tampering:cast:s1	-	-	-	d864b561c9cb	-	2dfa3566ee0d	-	-	2026-11-24	xproof
-9babcd0a-531f-417d-905e-b916a87112bb	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9babcd0a-531f-417d-905e-b916a87112bb	f0/t1	ChangesZone/Hideaway	agreed	-	FX	start	4	0	x:xs:XP:cemetery-tampering:cast:s1,f:xs:XP:cemetery-tampering:cast:s1	-	-	-	d864b561c9cb	-	2dfa3566ee0d	-	-	2026-11-24	xproof
+9babcd0a-531f-417d-905e-b916a87112bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cemetery-tampering:f0t0:s1,f:xs:XP:cemetery-tampering:f0t0:s1	-	-	-	3aa6ded33acb	-	2dfa3566ee0d	-	-	2026-11-25	xproof
+9babcd0a-531f-417d-905e-b916a87112bb	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:cemetery-tampering:f0t0:s1,f:xs:XP:cemetery-tampering:f0t0:s1	-	-	-	3aa6ded33acb	-	2dfa3566ee0d	-	-	2026-11-25	xproof
+9babcd0a-531f-417d-905e-b916a87112bb	f0/t1	ChangesZone/Hideaway	agreed	-	FX	start	2	0	x:xs:XP:cemetery-tampering:f0t0:s1,f:xs:XP:cemetery-tampering:f0t0:s1	-	-	-	3aa6ded33acb	-	2dfa3566ee0d	-	-	2026-11-25	xproof
 9bb1de3f-b6af-4ee2-b896-a05aae50e238	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9bb66d53-a83c-4313-91c3-4df09c248558	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vigilant-sentry:cast:s1,f:xs:XP:vigilant-sentry:cast:s1	-	-	-	fc71ca68c5ac	-	218b467ebc8d	-	-	2026-11-24	xproof
 9bb82829-05e8-4cdd-91e4-b837a620bfc8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

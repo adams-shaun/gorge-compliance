@@ -34,7 +34,7 @@ ed2e8718-4b20-4310-96ce-05a29a24ef32	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ed2e8718-4b20-4310-96ce-05a29a24ef32	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed2ef95e-8851-4226-9c63-4c19ea323b82	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lead-pipe:cast:s1,f:xs:XP:lead-pipe:cast:s1	-	-	-	23b491658465	-	7308bd510200	-	-	2026-11-24	xproof
 ed2ef95e-8851-4226-9c63-4c19ea323b82	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:lead-pipe:f0a1:s1,f:xs:XP:lead-pipe:f0a1:s1	-	-	-	23b491658465	-	7308bd510200	-	-	2026-11-25	xproof
-ed2ef95e-8851-4226-9c63-4c19ea323b82	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Lead Pipe/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ed2ef95e-8851-4226-9c63-4c19ea323b82	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:lead-pipe:f0a1:s1,f:xs:XP:lead-pipe:f0a1:s1	-	-	-	3aa6ded33acb	-	7308bd510200	-	-	2026-11-25	xproof
 ed2ef95e-8851-4226-9c63-4c19ea323b82	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lead Pipe/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ed2ef95e-8851-4226-9c63-4c19ea323b82	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lead Pipe/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ed2f3339-5c3e-473f-b08e-58288c4ad9c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:niblis-of-frost:cast:s1,f:xs:XP:niblis-of-frost:cast:s1	-	-	-	d864b561c9cb	-	d70be8148fd6	-	-	2026-11-24	xproof
@@ -46,7 +46,7 @@ ed3652da-0127-4c9e-9913-f20becdd0ba9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ed3652da-0127-4c9e-9913-f20becdd0ba9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ed36b1f6-2922-46a9-b48d-b9ebedb9a142	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sifter-wurm:cast:s1,f:xs:XP:sifter-wurm:cast:s1	-	-	-	d864b561c9cb	-	76b091a45ca9	-	-	2026-11-24	xproof
 ed36b1f6-2922-46a9-b48d-b9ebedb9a142	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sifter-wurm:cast:s1,f:xs:XP:sifter-wurm:cast:s1	-	-	-	d864b561c9cb	-	76b091a45ca9	-	-	2026-11-24	xproof
-ed37ce4e-d84e-442a-ac4e-0512f358c138	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ed37ce4e-d84e-442a-ac4e-0512f358c138	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 ed3990cd-fa67-427b-bbe4-a2b1942e9be2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed3990cd-fa67-427b-bbe4-a2b1942e9be2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ed3990cd-fa67-427b-bbe4-a2b1942e9be2	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ eda11077-b2ce-408b-b982-def2da8fe599	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Ojer
 eda11077-b2ce-408b-b982-def2da8fe599	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Ojer Kaslem, Deepest Growth/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eda16b31-33db-4ad2-901a-80fbe6273733	cast	cast-resolve	agreed	-	FX	scen	2	0	Requiting Hex/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 eda16b31-33db-4ad2-901a-80fbe6273733	static#0.0	static#0.0	agreed	-	X	scen	1	0	Requiting Hex/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-eda37caa-d676-460a-804b-3ba9d8a8d044	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-eda37caa-d676-460a-804b-3ba9d8a8d044	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+eda37caa-d676-460a-804b-3ba9d8a8d044	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stratus-walk:f0t0:s1,f:xs:XP:stratus-walk:f0t0:s1	-	-	-	3aa6ded33acb	-	d37cef6b1f34	-	-	2026-11-25	xproof
+eda37caa-d676-460a-804b-3ba9d8a8d044	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stratus-walk:f0t0:s1,f:xs:XP:stratus-walk:f0t0:s1	-	-	-	3aa6ded33acb	-	d37cef6b1f34	-	-	2026-11-25	xproof
 eda60752-d225-4fd0-9f0f-9b99e321b8fa	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eda99a16-6a7c-4f39-8a6b-a284e6afd3fc	cast	cast-resolve	agreed	-	FX	scen	2	0	Goblin Plate Mail/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 eda99a16-6a7c-4f39-8a6b-a284e6afd3fc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Goblin Plate Mail/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -190,8 +190,8 @@ edf304b8-523e-4233-8d77-1d45d33cbb86	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 edf429a8-6a4d-4d2a-b0ca-c0c72a0698a3	cast	cast-resolve	agreed	-	FX	scen	2	0	Grim Reaper, Lethal Legionnaire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 edf429a8-6a4d-4d2a-b0ca-c0c72a0698a3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Grim Reaper, Lethal Legionnaire/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 edf459c0-53e4-47e8-8098-105656f9b49c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:kederekt-leviathan:cast:s1,f:xs:XP:kederekt-leviathan:cast:s1	-	-	-	8a1b1a193ec0	-	562ea8c7142d	-	-	2026-11-24	xproof
-edf459c0-53e4-47e8-8098-105656f9b49c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-edf459c0-53e4-47e8-8098-105656f9b49c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:kederekt-leviathan:cast:s1,f:xs:XP:kederekt-leviathan:cast:s1	-	-	-	8a1b1a193ec0	-	562ea8c7142d	-	-	2026-11-24	xproof
+edf459c0-53e4-47e8-8098-105656f9b49c	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:kederekt-leviathan:f0a0:s1,f:xs:XP:kederekt-leviathan:f0a0:s1	-	-	-	3aa6ded33acb	-	562ea8c7142d	-	-	2026-11-25	xproof
+edf459c0-53e4-47e8-8098-105656f9b49c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kederekt-leviathan:f0a0:s1,f:xs:XP:kederekt-leviathan:f0a0:s1	-	-	-	3aa6ded33acb	-	562ea8c7142d	-	-	2026-11-25	xproof
 edf7c98a-c2ed-4ba2-ac08-e83db0d968cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 edf7c98a-c2ed-4ba2-ac08-e83db0d968cb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 edf7c98a-c2ed-4ba2-ac08-e83db0d968cb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof

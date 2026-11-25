@@ -13,8 +13,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e0cdff3-3ec5-41fc-8053-f072bae156b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:good-fortune-unicorn:cast:s1,f:xs:XP:good-fortune-unicorn:cast:s1	-	-	-	8c0bd19283bb	-	7984f6b3dca7	-	-	2026-11-24	xproof
 1e0cdff3-3ec5-41fc-8053-f072bae156b3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:good-fortune-unicorn:f0t0:s1,f:xs:XP:good-fortune-unicorn:f0t0:s1	-	-	-	3aa6ded33acb	-	7984f6b3dca7	-	-	2026-11-25	xproof
 1e0cf860-6be6-4b4b-9a67-0c19b6018ae1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sword-of-once-and-future:cast:s1,f:xs:XP:sword-of-once-and-future:cast:s1	-	-	-	ae86f6029288	-	f7d001ced261	-	-	2026-11-24	xproof
-1e0cf860-6be6-4b4b-9a67-0c19b6018ae1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e0cf860-6be6-4b4b-9a67-0c19b6018ae1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+1e0cf860-6be6-4b4b-9a67-0c19b6018ae1	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sword-of-once-and-future:f0a0:s1,f:xs:XP:sword-of-once-and-future:f0a0:s1	-	-	-	3aa6ded33acb	-	f7d001ced261	-	-	2026-11-25	xproof
+1e0cf860-6be6-4b4b-9a67-0c19b6018ae1	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:sword-of-once-and-future:f0a0:s1,f:xs:XP:sword-of-once-and-future:f0a0:s1	-	-	-	3aa6ded33acb	-	f7d001ced261	-	-	2026-11-25	xproof
 1e1a787a-2294-472d-908d-d4d72821a7cc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:panoptic-projektor:cast:s1,f:xs:XP:panoptic-projektor:cast:s1	-	-	-	8c0bd19283bb	-	83e7762f1b35	-	-	2026-11-24	xproof
 1e1a787a-2294-472d-908d-d4d72821a7cc	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:panoptic-projektor:cast:s1,f:xs:XP:panoptic-projektor:cast:s1	-	-	-	8c0bd19283bb	-	83e7762f1b35	-	-	2026-11-24	xproof
 1e23457f-1ed9-4597-9f73-6f5b7206f5a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ecb3349-ccb8-4b54-bd81-8d649d6f96f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ecb3349-ccb8-4b54-bd81-8d649d6f96f0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1ecd7248-ff28-4e12-b72a-0cb279ec7561	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ecde43f-e418-437b-8b8f-efe120f96cb3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ecde43f-e418-437b-8b8f-efe120f96cb3	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 1ed24fc6-b1d5-47f8-a1d1-3243372e0c9f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:well-of-ideas:cast:s1,f:xs:XP:well-of-ideas:cast:s1	-	-	-	8c0bd19283bb	-	ac6281ca4be0	-	-	2026-11-24	xproof
 1ed24fc6-b1d5-47f8-a1d1-3243372e0c9f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:well-of-ideas:cast:s1,f:xs:XP:well-of-ideas:cast:s1	-	-	-	8c0bd19283bb	-	ac6281ca4be0	-	-	2026-11-24	xproof
 1ed24fc6-b1d5-47f8-a1d1-3243372e0c9f	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

@@ -7,10 +7,10 @@ af05cc39-725b-4535-919a-ddbcb89c2210	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mol
 af06a811-7a57-4f68-9d87-7903e043f36d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af08dae2-ba32-4a34-b8c1-b49d45ce0b6b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af08dae2-ba32-4a34-b8c1-b49d45ce0b6b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-af0bf083-0624-4ccd-b282-a35937e925fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mycologist:cast:s1,f:xs:XP:mycologist:cast:s1	-	-	-	9ee19e8250ce	-	7820ddf8335d	-	-	2026-11-24	xproof
+af0bf083-0624-4ccd-b282-a35937e925fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mycologist:f0t0:s1,f:xs:XP:mycologist:f0t0:s1	-	-	-	3aa6ded33acb	-	7820ddf8335d	-	-	2026-11-25	xproof
 af0bf083-0624-4ccd-b282-a35937e925fe	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 af0bf083-0624-4ccd-b282-a35937e925fe	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-af0bf083-0624-4ccd-b282-a35937e925fe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+af0bf083-0624-4ccd-b282-a35937e925fe	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:mycologist:f0t0:s1,f:xs:XP:mycologist:f0t0:s1	-	-	-	3aa6ded33acb	-	7820ddf8335d	-	-	2026-11-25	xproof
 af105cda-1f7c-4868-9407-a97c46bd762d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af12758f-4a7b-4156-8942-de4716aa0623	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af12758f-4a7b-4156-8942-de4716aa0623	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:strangleroot-geist:f0t0:s1,f:xs:XP:strangleroot-geist:f0t0:s1	-	-	-	3aa6ded33acb	-	c9aeaca04721	-	-	2026-11-25	xproof
@@ -42,14 +42,14 @@ af27761d-88df-4d4f-a366-d55ed62d1d33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 af27761d-88df-4d4f-a366-d55ed62d1d33	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:goggles-of-night:f0a0:s1,f:xs:XP:goggles-of-night:f0a0:s1	-	-	-	8c0bd19283bb	-	11e577e402d5	-	-	2026-11-24	xproof
 af27761d-88df-4d4f-a366-d55ed62d1d33	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 af294df7-f8a0-4d52-88cb-086678463970	cast	cast-resolve	agreed	-	FX	scen	2	0	Gleaming Geardrake/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-af294df7-f8a0-4d52-88cb-086678463970	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gleaming Geardrake/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+af294df7-f8a0-4d52-88cb-086678463970	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gleaming-geardrake:combat0.attack:s1,f:xs:XP:gleaming-geardrake:combat0.attack:s1	-	-	-	3aa6ded33acb	-	302c5729aae3	-	-	2026-11-25	xproof
 af294df7-f8a0-4d52-88cb-086678463970	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gleaming-geardrake:combat0.block:s1,f:xs:XP:gleaming-geardrake:combat0.block:s1	-	-	-	3aa6ded33acb	-	302c5729aae3	-	-	2026-11-25	xproof
 af294df7-f8a0-4d52-88cb-086678463970	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af294df7-f8a0-4d52-88cb-086678463970	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Gleaming Geardrake/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 af2a951f-7630-48fe-bb37-273b66901eb6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af2b36ee-2945-41d3-a186-8fd28f3cde16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fugitive-codebreaker:cast:s1,f:xs:XP:fugitive-codebreaker:cast:s1	-	-	-	23b491658465	-	84a034d74966	-	-	2026-11-24	xproof
 af2b36ee-2945-41d3-a186-8fd28f3cde16	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fugitive Codebreaker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-af2b36ee-2945-41d3-a186-8fd28f3cde16	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Fugitive Codebreaker/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+af2b36ee-2945-41d3-a186-8fd28f3cde16	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:fugitive-codebreaker:f0t1:s1,f:xs:XP:fugitive-codebreaker:f0t1:s1	-	-	-	3aa6ded33acb	-	84a034d74966	-	-	2026-11-25	xproof
 af31febb-af53-4b48-b930-9e1f9e5d8f26	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af31febb-af53-4b48-b930-9e1f9e5d8f26	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 af32757c-9d3c-4f6c-a6fa-d5729a440382	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:spreading-seas:f0t0:s1,f:xs:XP:spreading-seas:f0t0:s1	-	-	-	3aa6ded33acb	-	b2f3503a0fa2	-	-	2026-11-25	xproof
@@ -164,8 +164,8 @@ afe8fd01-f0c7-46a5-9e9c-e8b9599cd19a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 afeb9de8-7030-4797-a9c8-5a99de3c410f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afedce7b-0e18-40ad-a26a-1933fddb560d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 afedce7b-0e18-40ad-a26a-1933fddb560d	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-afee3422-5490-411b-a36e-82e447c1bd0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-afee3422-5490-411b-a36e-82e447c1bd0f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+afee3422-5490-411b-a36e-82e447c1bd0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:imaginary-pet:f0t0:s1,f:xs:XP:imaginary-pet:f0t0:s1	-	-	-	3aa6ded33acb	-	98f44c8cbb74	-	-	2026-11-25	xproof
+afee3422-5490-411b-a36e-82e447c1bd0f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:imaginary-pet:f0t0:s1,f:xs:XP:imaginary-pet:f0t0:s1	-	-	-	3aa6ded33acb	-	98f44c8cbb74	-	-	2026-11-25	xproof
 aff0740f-51d5-41c7-ac13-97c298cfd743	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:oildeep-gearhulk:f0t0:s2,f:xs:XP:oildeep-gearhulk:f0t0:s2	-	-	-	267e485f6204	-	6b86780e32fa	-	-	2026-11-24	xproof
 aff0740f-51d5-41c7-ac13-97c298cfd743	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Oildeep Gearhulk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 aff0740f-51d5-41c7-ac13-97c298cfd743	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Oildeep Gearhulk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -176,8 +176,8 @@ aff21bd1-87b0-409c-bfad-08f3690ef220	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 aff21bd1-87b0-409c-bfad-08f3690ef220	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:killmonger-ruthless-usurper:f0t0:s1,f:xs:XP:killmonger-ruthless-usurper:f0t0:s1	-	-	-	8c0bd19283bb	-	ec9ae5dffce7	-	-	2026-11-24	xproof
 aff21bd1-87b0-409c-bfad-08f3690ef220	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:killmonger-ruthless-usurper:f0t0:s1,f:xs:XP:killmonger-ruthless-usurper:f0t0:s1	-	-	-	8c0bd19283bb	-	ec9ae5dffce7	-	-	2026-11-24	xproof
 aff223d4-6338-460d-a4d5-d45f522864dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-scorpion-god:cast:s1,f:xs:XP:the-scorpion-god:cast:s1	-	-	-	d864b561c9cb	-	461375f66179	-	-	2026-11-24	xproof
-aff223d4-6338-460d-a4d5-d45f522864dc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-aff223d4-6338-460d-a4d5-d45f522864dc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-scorpion-god:f0t1:s1,f:xs:XP:the-scorpion-god:f0t1:s1	-	-	-	d864b561c9cb	-	461375f66179	-	-	2026-11-24	xproof
+aff223d4-6338-460d-a4d5-d45f522864dc	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:the-scorpion-god:f0a0:s1,f:xs:XP:the-scorpion-god:f0a0:s1	-	-	-	3aa6ded33acb	-	461375f66179	-	-	2026-11-25	xproof
+aff223d4-6338-460d-a4d5-d45f522864dc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-scorpion-god:f0a0:s1,f:xs:XP:the-scorpion-god:f0a0:s1	-	-	-	3aa6ded33acb	-	461375f66179	-	-	2026-11-25	xproof
 aff223d4-6338-460d-a4d5-d45f522864dc	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-scorpion-god:f0t1:s1,f:xs:XP:the-scorpion-god:f0t1:s1	-	-	-	d864b561c9cb	-	461375f66179	-	-	2026-11-24	xproof
 aff34f28-f707-4458-8af3-1bd5b13a6b10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 aff4e43d-cafa-47de-8e39-011f9254a26a	cast	cast-resolve	agreed	-	X	scen	1	0	Marwyn, the Clearcutter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -195,4 +195,4 @@ affced7f-797d-4e50-8a24-2da14de44e43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 affced7f-797d-4e50-8a24-2da14de44e43	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:atzocan-seer:f0a0:s1,f:xs:XP:atzocan-seer:f0a0:s1	-	-	-	8c0bd19283bb	-	c16ef3d48a84	-	-	2026-11-24	xproof
 affced7f-797d-4e50-8a24-2da14de44e43	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 affdf41e-c851-4f5d-bd3a-7ca7ada4416a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-affdf41e-c851-4f5d-bd3a-7ca7ada4416a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+affdf41e-c851-4f5d-bd3a-7ca7ada4416a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:nav-squad-commandos:f0t0:s1,f:xs:XP:nav-squad-commandos:f0t0:s1	-	-	-	3aa6ded33acb	-	e387d066500d	-	-	2026-11-25	xproof

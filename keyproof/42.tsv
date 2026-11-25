@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 423659f1-1b48-4a2b-a1dc-f39fd62c6b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4236851b-5366-43a1-bde4-f525b4fbcbce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 423a1fc2-f623-4b5f-9a3e-7f63b2f3cf5d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-423a1fc2-f623-4b5f-9a3e-7f63b2f3cf5d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+423a1fc2-f623-4b5f-9a3e-7f63b2f3cf5d	f0/t0	ChangesZone/Persist	agreed	-	FX	start	2	0	x:xs:XP:scuzzback-marauders:f0t0:s1,f:xs:XP:scuzzback-marauders:f0t0:s1	-	-	-	3aa6ded33acb	-	0c08a3c1bc80	-	-	2026-11-25	xproof
 423bebcc-8fa0-49c4-aa22-728bf51a535b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 423bebcc-8fa0-49c4-aa22-728bf51a535b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 423c1079-bdba-42fc-8732-59cb83ebafc3	cast	cast	diverged	-	-	start	0	1	-	0a520ded0ebd	-	-	d864b561c9cb	-	3cf1e1c2512f	-	-	2026-11-24	xproof
@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4281a153-665b-44cf-bcff-9cf88c14c2b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4284ff9f-4085-4874-abc7-95467cb759a5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4284ff9f-4085-4874-abc7-95467cb759a5	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:artificer-s-dragon:f0a1:s1,f:xs:XP:artificer-s-dragon:f0a1:s1	-	-	-	23b491658465	-	ec3d2b80d933	-	-	2026-11-25	xproof
-4284ff9f-4085-4874-abc7-95467cb759a5	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4284ff9f-4085-4874-abc7-95467cb759a5	f0/a1	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:artificer-s-dragon:f0a1:s1,f:xs:XP:artificer-s-dragon:f0a1:s1	-	-	-	3aa6ded33acb	-	ec3d2b80d933	-	-	2026-11-25	xproof
 4288ba56-ddd0-4bd9-ba61-daf03e9f2d7f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:shore-lurker:f0t0:s2,f:xs:XP:shore-lurker:f0t0:s2	-	-	-	267e485f6204	-	8c1c7038c684	-	-	2026-11-24	xproof
 4288ba56-ddd0-4bd9-ba61-daf03e9f2d7f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shore Lurker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 4288ba56-ddd0-4bd9-ba61-daf03e9f2d7f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shore Lurker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

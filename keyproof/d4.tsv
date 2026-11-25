@@ -39,9 +39,9 @@ d42ecab7-f6ce-4e50-97de-7aa1ced64ebe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d42ecab7-f6ce-4e50-97de-7aa1ced64ebe	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4327e06-ee89-459c-a43a-dc064e198fef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d432857f-cff6-421e-949b-ce2f65854e1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d4344e5e-148b-4df9-88e4-ca91afcc32e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ring-of-kalonia:cast:s1,f:xs:XP:ring-of-kalonia:cast:s1	-	-	-	d864b561c9cb	-	d2fffc7b6c92	-	-	2026-11-24	xproof
-d4344e5e-148b-4df9-88e4-ca91afcc32e0	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d4344e5e-148b-4df9-88e4-ca91afcc32e0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d4344e5e-148b-4df9-88e4-ca91afcc32e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ring-of-kalonia:f0t0:s1,f:xs:XP:ring-of-kalonia:f0t0:s1	-	-	-	3aa6ded33acb	-	d2fffc7b6c92	-	-	2026-11-25	xproof
+d4344e5e-148b-4df9-88e4-ca91afcc32e0	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:ring-of-kalonia:f0t0:s1,f:xs:XP:ring-of-kalonia:f0t0:s1	-	-	-	3aa6ded33acb	-	d2fffc7b6c92	-	-	2026-11-25	xproof
+d4344e5e-148b-4df9-88e4-ca91afcc32e0	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ring-of-kalonia:f0t0:s1,f:xs:XP:ring-of-kalonia:f0t0:s1	-	-	-	3aa6ded33acb	-	d2fffc7b6c92	-	-	2026-11-25	xproof
 d43463d2-4395-4616-acc3-c4f80ebe3242	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d43463d2-4395-4616-acc3-c4f80ebe3242	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d437ecc2-2fd3-4ad3-b23e-217f55e58dae	cast	cast-resolve	agreed	-	X	scen	1	0	Eaten Alive/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -178,9 +178,9 @@ d4f28a4b-d821-4132-bdec-4c528318f8e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d4f28a4b-d821-4132-bdec-4c528318f8e2	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:hellkite-charger:f0t0:s1,f:xs:XP:hellkite-charger:f0t0:s1	-	-	-	8a1b1a193ec0	-	47ba30ab1bf8	-	-	2026-11-24	xproof
 d4f2e305-bec0-48c8-8040-f85618c71cc9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barbarian-general:cast:s1,f:xs:XP:barbarian-general:cast:s1	-	-	-	5f2128bf97e4	-	2f5965a3a951	-	-	2026-11-24	xproof
 d4f5748f-bb0e-4c48-8802-45a7ad5a80a4	cast	cast-resolve	agreed	-	FX	scen	2	0	Teysa, Opulent Oligarch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d4f5748f-bb0e-4c48-8802-45a7ad5a80a4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Teysa, Opulent Oligarch/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d4f5748f-bb0e-4c48-8802-45a7ad5a80a4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:teysa-opulent-oligarch:combat0.attack:s1,f:xs:XP:teysa-opulent-oligarch:combat0.attack:s1	-	-	-	3aa6ded33acb	-	a2e9ef2353f3	-	-	2026-11-25	xproof
 d4f5748f-bb0e-4c48-8802-45a7ad5a80a4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:teysa-opulent-oligarch:combat0.block:s1,f:xs:XP:teysa-opulent-oligarch:combat0.block:s1	-	-	-	3aa6ded33acb	-	a2e9ef2353f3	-	-	2026-11-25	xproof
-d4f5748f-bb0e-4c48-8802-45a7ad5a80a4	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Teysa, Opulent Oligarch/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d4f5748f-bb0e-4c48-8802-45a7ad5a80a4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:teysa-opulent-oligarch:combat0.attack:s1,f:xs:XP:teysa-opulent-oligarch:combat0.attack:s1	-	-	-	3aa6ded33acb	-	a2e9ef2353f3	-	-	2026-11-25	xproof
 d4f5748f-bb0e-4c48-8802-45a7ad5a80a4	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Teysa, Opulent Oligarch/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d4f659ba-c277-47a2-8b95-ce81ddac34fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4f659ba-c277-47a2-8b95-ce81ddac34fb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

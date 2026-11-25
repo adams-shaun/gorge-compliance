@@ -90,9 +90,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17661062-928c-4e33-a4f3-92ddc9d8c817	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:barrenton-medic:f0a0:s1,f:xs:XP:barrenton-medic:f0a0:s1	-	-	-	8a1b1a193ec0	-	3154975c0132	-	-	2026-11-24	xproof
 17661062-928c-4e33-a4f3-92ddc9d8c817	f0/a1	Untap	agreed	-	FX	start	2	0	x:xs:XP:barrenton-medic:f0a0:s1,f:xs:XP:barrenton-medic:f0a0:s1	-	-	-	8a1b1a193ec0	-	3154975c0132	-	-	2026-11-24	xproof
 1766f1f4-0924-4436-8379-94030adcccc5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flare-of-cultivation:cast:s1,f:xs:XP:flare-of-cultivation:cast:s1	-	-	-	ae86f6029288	-	aaadf82b3323	-	-	2026-11-24	xproof
-17694111-5623-48b3-8c54-c383418e8d2b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-176c0ca2-0ca1-45e2-8412-86de5dbead48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-176c0ca2-0ca1-45e2-8412-86de5dbead48	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17694111-5623-48b3-8c54-c383418e8d2b	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+176c0ca2-0ca1-45e2-8412-86de5dbead48	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-mimeomancer:f0t0:s1,f:xs:XP:aven-mimeomancer:f0t0:s1	-	-	-	3aa6ded33acb	-	f7a9c55fbb36	-	-	2026-11-25	xproof
+176c0ca2-0ca1-45e2-8412-86de5dbead48	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:aven-mimeomancer:f0t0:s1,f:xs:XP:aven-mimeomancer:f0t0:s1	-	-	-	3aa6ded33acb	-	f7a9c55fbb36	-	-	2026-11-25	xproof
 176eeafd-0482-4fa4-9174-10f8b9494d9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 176f5ba8-6e7b-4234-a298-b6164f51656f	cast	cast-resolve	agreed	-	FX	scen	2	0	Inti, Seneschal of the Sun/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 176f5ba8-6e7b-4234-a298-b6164f51656f	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Inti, Seneschal of the Sun/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -123,8 +123,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 177c1f2d-abb9-40ea-afe4-141b08fdeabb	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:visionary-augmenter:f0t0:s1,f:xs:XP:visionary-augmenter:f0t0:s1	-	-	-	3aa6ded33acb	-	5a348390c833	-	-	2026-11-25	xproof
 1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	f0/t0	ChangesZone/Fabricate	agreed	-	FX	start	2	0	x:xs:XP:visionary-augmenter:f0t0:s1,f:xs:XP:visionary-augmenter:f0t0:s1	-	-	-	3aa6ded33acb	-	5a348390c833	-	-	2026-11-25	xproof
-17841133-c526-42a3-a1d2-a874e9bb7138	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17841133-c526-42a3-a1d2-a874e9bb7138	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17841133-c526-42a3-a1d2-a874e9bb7138	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunken-city:f0t0:s1,f:xs:XP:sunken-city:f0t0:s1	-	-	-	3aa6ded33acb	-	5f98a3f52cea	-	-	2026-11-25	xproof
+17841133-c526-42a3-a1d2-a874e9bb7138	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sunken-city:f0t0:s1,f:xs:XP:sunken-city:f0t0:s1	-	-	-	3aa6ded33acb	-	5f98a3f52cea	-	-	2026-11-25	xproof
 1787ac2f-762d-4f3a-b7e5-12db6d3d470d	cast	cast-resolve	agreed	-	FX	scen	2	0	Repurposing Bay/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1787ac2f-762d-4f3a-b7e5-12db6d3d470d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Repurposing Bay/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 178828a5-c202-4503-9755-fc6bb2390209	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

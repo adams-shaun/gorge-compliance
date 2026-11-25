@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e31ef54-b2f2-4f3f-9779-151b74470ce4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Jackdaw Savior/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9e31ef54-b2f2-4f3f-9779-151b74470ce4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jackdaw Savior/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9e32750a-8e5f-4d81-92a8-c3d4ea1477fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e32750a-8e5f-4d81-92a8-c3d4ea1477fd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9e32750a-8e5f-4d81-92a8-c3d4ea1477fd	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:warmind-infantry:f0t0:s1,f:xs:XP:warmind-infantry:f0t0:s1	-	-	-	3aa6ded33acb	-	e8170da11210	-	-	2026-11-25	xproof
 9e3303aa-2484-4832-86ac-f5ae290d02f1	cast	cast-resolve	agreed	-	X	scen	1	0	Catharsis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9e3303aa-2484-4832-86ac-f5ae290d02f1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 9e3303aa-2484-4832-86ac-f5ae290d02f1	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
@@ -133,7 +133,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e9d5242-424d-4f61-b625-806295dbb0c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ea58a77-9b2e-4ae2-8a31-a51804900a3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gravestone-strider:cast:s1,f:xs:XP:gravestone-strider:cast:s1	-	-	-	23b491658465	-	ebf71cb48bb5	-	-	2026-11-24	xproof
 9ea58a77-9b2e-4ae2-8a31-a51804900a3b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Gravestone Strider/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9ea58a77-9b2e-4ae2-8a31-a51804900a3b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gravestone Strider/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9ea58a77-9b2e-4ae2-8a31-a51804900a3b	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:gravestone-strider:f0a1:s1,f:xs:XP:gravestone-strider:f0a1:s1	-	-	-	3aa6ded33acb	-	ebf71cb48bb5	-	-	2026-11-25	xproof
 9ea747cf-5d04-4aa7-bdc3-8145860cd1ba	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Elegant Parlor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ea747cf-5d04-4aa7-bdc3-8145860cd1ba	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Elegant Parlor/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ea747cf-5d04-4aa7-bdc3-8145860cd1ba	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:elegant-parlor:f0t0:s1,f:xs:XP:elegant-parlor:f0t0:s1	-	-	-	23b491658465	-	5b62f9958dc1	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ec2114c-023b-45c3-a44c-6a9f6462bc85	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:unforgiving-one:f0t0:s1,f:xs:XP:unforgiving-one:f0t0:s1	-	-	-	d864b561c9cb	-	8c40958214d5	-	-	2026-11-24	xproof
 9ec43ec6-b625-4be8-8f79-3679e6657dbc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mycosynth-wellspring:f0t0:s1,f:xs:XP:mycosynth-wellspring:f0t0:s1	-	-	-	d864b561c9cb	-	03cbad28ff5d	-	-	2026-11-24	xproof
 9ec43ec6-b625-4be8-8f79-3679e6657dbc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mycosynth-wellspring:f0t0:s1,f:xs:XP:mycosynth-wellspring:f0t0:s1	-	-	-	d864b561c9cb	-	03cbad28ff5d	-	-	2026-11-24	xproof
-9ec43ec6-b625-4be8-8f79-3679e6657dbc	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ec43ec6-b625-4be8-8f79-3679e6657dbc	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:labyrinth-of-skophos:f0a1:s2,f:xs:XP:labyrinth-of-skophos:f0a1:s2	-	-	-	23b491658465	-	c7fb11045592	-	-	2026-11-25	xproof
 9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8	f0/a1	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

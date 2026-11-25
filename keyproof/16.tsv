@@ -11,9 +11,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stomping Ground/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Stomping Ground/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	land	land	agreed	-	FX	start	2	0	x:xs:XP:stomping-ground:land:s1,f:xs:XP:stomping-ground:land:s1	-	-	-	8c0bd19283bb	-	99746182be48	-	-	2026-11-24	xproof
-16069935-4aeb-481f-98f2-46387775540f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:noggle-hedge-mage:f0t0:s1,f:xs:XP:noggle-hedge-mage:f0t0:s1	-	-	-	23b491658465	-	f34be77cea62	-	-	2026-11-25	xproof
-16069935-4aeb-481f-98f2-46387775540f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16069935-4aeb-481f-98f2-46387775540f	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16069935-4aeb-481f-98f2-46387775540f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:noggle-hedge-mage:f0t0:s1,f:xs:XP:noggle-hedge-mage:f0t0:s1	-	-	-	3aa6ded33acb	-	f34be77cea62	-	-	2026-11-25	xproof
+16069935-4aeb-481f-98f2-46387775540f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noggle-hedge-mage:f0t0:s1,f:xs:XP:noggle-hedge-mage:f0t0:s1	-	-	-	3aa6ded33acb	-	f34be77cea62	-	-	2026-11-25	xproof
+16069935-4aeb-481f-98f2-46387775540f	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noggle-hedge-mage:f0t1:s1,f:xs:XP:noggle-hedge-mage:f0t1:s1	-	-	-	3aa6ded33acb	-	f34be77cea62	-	-	2026-11-25	xproof
 16128b90-9b81-476e-8999-3ef498728c39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16128b90-9b81-476e-8999-3ef498728c39	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1612a08f-fc1f-45cf-ae03-5f021a46869d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:in-the-trenches:cast:s1,f:xs:XP:in-the-trenches:cast:s1	-	-	-	ae86f6029288	-	d41cd191bc54	-	-	2026-11-24	xproof
@@ -36,8 +36,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 162bcc9d-6edf-4b3b-83e6-2c933e2a5967	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 162dcfa0-36e4-41cd-8322-08e810ff04d4	cast	cast-resolve	agreed	-	X	scen	1	0	Reluctant Dounguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 162dcfa0-36e4-41cd-8322-08e810ff04d4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Reluctant Dounguard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-162e45f5-edb8-4a13-acdc-8980ce5ba8ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-162e45f5-edb8-4a13-acdc-8980ce5ba8ac	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+162e45f5-edb8-4a13-acdc-8980ce5ba8ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:demonic-taskmaster:f0t0:s1,f:xs:XP:demonic-taskmaster:f0t0:s1	-	-	-	3aa6ded33acb	-	17529562d85c	-	-	2026-11-25	xproof
+162e45f5-edb8-4a13-acdc-8980ce5ba8ac	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:demonic-taskmaster:f0t0:s1,f:xs:XP:demonic-taskmaster:f0t0:s1	-	-	-	3aa6ded33acb	-	17529562d85c	-	-	2026-11-25	xproof
 16345f75-f33e-4a31-adb1-d3563358fcec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:honorable-scout:f0t0:s1,f:xs:XP:honorable-scout:f0t0:s1	-	-	-	fc71ca68c5ac	-	62edd1845296	-	-	2026-11-24	xproof
 16345f75-f33e-4a31-adb1-d3563358fcec	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:honorable-scout:f0t0:s1,f:xs:XP:honorable-scout:f0t0:s1	-	-	-	fc71ca68c5ac	-	62edd1845296	-	-	2026-11-24	xproof
 1636c4d2-f699-4af7-8508-dbce2f0b7b52	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

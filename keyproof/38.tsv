@@ -51,16 +51,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3835cb81-b6e4-4be8-9d49-8307ddc2e1a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3835cb81-b6e4-4be8-9d49-8307ddc2e1a2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3836cf33-bd1d-485d-94a2-85ea210ddf7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38394ee3-6726-4f91-bc25-36bce0c6aab9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38394ee3-6726-4f91-bc25-36bce0c6aab9	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 383f6020-c26d-43e8-bb07-566886626d74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 383f6020-c26d-43e8-bb07-566886626d74	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38405a37-921a-49ab-a95b-28eb8c26474a	cast	cast-resolve	agreed	-	X	scen	1	0	Crash and Burn/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 384611fb-aca2-4e2d-9125-44ea034de08b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38462d26-f252-4055-9f1a-59bc3ab2c75e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:engineered-might:cast:s1,f:xs:XP:engineered-might:cast:s1	-	-	-	d864b561c9cb	-	9e94009c0f15	-	-	2026-11-24	xproof
-384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:psychotrope-thallid:f0t0:s1,f:xs:XP:psychotrope-thallid:f0t0:s1	-	-	-	3aa6ded33acb	-	24d62835e5b2	-	-	2026-11-25	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+384c61f2-17ed-4c7a-8722-e0a05e9dcaf9	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:psychotrope-thallid:f0t0:s1,f:xs:XP:psychotrope-thallid:f0t0:s1	-	-	-	3aa6ded33acb	-	24d62835e5b2	-	-	2026-11-25	xproof
 38503d34-f4f9-4eeb-9b1e-4fec1df921b3	cast	cast-resolve	agreed	-	X	scen	1	0	An Unexpected Party/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 38503d34-f4f9-4eeb-9b1e-4fec1df921b3	static#0.0	static#0.0	agreed	-	X	scen	1	0	An Unexpected Party/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3850479f-1c1e-4a72-ae47-6da2997202e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -120,9 +120,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 389b6d77-47ab-43a3-99d1-dcc762939cc4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 389b6d77-47ab-43a3-99d1-dcc762939cc4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 389d459d-446a-4b84-82b2-a30fe6ced11f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:batterbone:f0t0:s1,f:xs:XP:batterbone:f0t0:s1	-	-	-	d864b561c9cb	-	908a4caad4c1	-	-	2026-11-24	xproof
-389d459d-446a-4b84-82b2-a30fe6ced11f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+389d459d-446a-4b84-82b2-a30fe6ced11f	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:batterbone:f0a0:s1,f:xs:XP:batterbone:f0a0:s1	-	-	-	3aa6ded33acb	-	908a4caad4c1	-	-	2026-11-25	xproof
 389d459d-446a-4b84-82b2-a30fe6ced11f	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:batterbone:f0t0:s1,f:xs:XP:batterbone:f0t0:s1	-	-	-	d864b561c9cb	-	908a4caad4c1	-	-	2026-11-24	xproof
-38a12bd7-4394-44a8-91a0-6a4ff7fa4f71	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+38a12bd7-4394-44a8-91a0-6a4ff7fa4f71	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 38a12bd7-4394-44a8-91a0-6a4ff7fa4f71	land	land	agreed	-	FX	start	2	0	x:xs:XP:maze-of-ith:land:s1,f:xs:XP:maze-of-ith:land:s1	-	-	-	fc71ca68c5ac	-	6f46100d24da	-	-	2026-11-24	xproof
 38a2ded4-77c5-4d2b-b411-7dca8108aa02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:razorfin-abolisher:cast:s1,f:xs:XP:razorfin-abolisher:cast:s1	-	-	-	8a1b1a193ec0	-	01db09b10a27	-	-	2026-11-24	xproof
 38a2ded4-77c5-4d2b-b411-7dca8108aa02	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:razorfin-abolisher:f0a0:s1,f:xs:XP:razorfin-abolisher:f0a0:s1	-	-	-	8a1b1a193ec0	-	01db09b10a27	-	-	2026-11-24	xproof

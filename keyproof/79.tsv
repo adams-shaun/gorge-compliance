@@ -66,9 +66,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 794b9ddf-1660-441f-9cc2-a0f5d4d0cf22	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 7950a7ff-7c2e-40fe-b64a-324f4fbcf528	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7950a7ff-7c2e-40fe-b64a-324f4fbcf528	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79591c18-0065-49bb-a77a-734d4af87a3c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79591c18-0065-49bb-a77a-734d4af87a3c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-79591c18-0065-49bb-a77a-734d4af87a3c	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+79591c18-0065-49bb-a77a-734d4af87a3c	cast	cast	agreed	-	F	start	4	0	f:xs:XP:bloodhall-ooze:f0t0:s1	-	-	-	3aa6ded33acb	-	99ba2b1c4501	-	-	2026-11-25	xproof
+79591c18-0065-49bb-a77a-734d4af87a3c	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:bloodhall-ooze:f0t0:s1	-	-	-	3aa6ded33acb	-	99ba2b1c4501	-	-	2026-11-25	xproof
+79591c18-0065-49bb-a77a-734d4af87a3c	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:bloodhall-ooze:f0t1:s1	-	-	-	3aa6ded33acb	-	99ba2b1c4501	-	-	2026-11-25	xproof
 795a9f45-e4ee-457c-b260-17b9f09c3ba6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 795a9f45-e4ee-457c-b260-17b9f09c3ba6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 795b096a-2bce-4588-a2c9-abc5ea40dc0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79a1783f-ea7e-4cdf-95f5-53b383d38c66	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 79a63064-f25b-4c34-867e-a9d32da97b14	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:krenko-s-buzzcrusher:f0t0:s2,f:xs:XP:krenko-s-buzzcrusher:f0t0:s2	-	-	-	e07cf3a05ba5	-	a23cdcfc7dec	-	-	2026-11-24	xproof
 79a63064-f25b-4c34-867e-a9d32da97b14	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:krenko-s-buzzcrusher:combat0.attack:s1,f:xs:XP:krenko-s-buzzcrusher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	a23cdcfc7dec	-	-	2026-11-25	xproof
-79a63064-f25b-4c34-867e-a9d32da97b14	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Krenko's Buzzcrusher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+79a63064-f25b-4c34-867e-a9d32da97b14	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:krenko-s-buzzcrusher:combat0.block:s1,f:xs:XP:krenko-s-buzzcrusher:combat0.block:s1	-	-	-	3aa6ded33acb	-	a23cdcfc7dec	-	-	2026-11-25	xproof
 79a63064-f25b-4c34-867e-a9d32da97b14	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:krenko-s-buzzcrusher:f0t0:s2,f:xs:XP:krenko-s-buzzcrusher:f0t0:s2	-	-	-	e07cf3a05ba5	-	a23cdcfc7dec	-	-	2026-11-24	xproof
 79a9fc1c-a6a9-483a-9ba7-d09fe41760c3	cast	cast-resolve	agreed	-	X	scen	1	0	Featherbrained Filcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 79a9fc1c-a6a9-483a-9ba7-d09fe41760c3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Featherbrained Filcher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

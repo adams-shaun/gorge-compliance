@@ -64,9 +64,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e5f1088-a5ab-48ec-be27-c88eb164cf63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e5f908a-f4f1-4718-ac39-34176e401756	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e5fd8b4-d81a-4ed6-b389-21445351bb43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e61ae7b-f2e8-421c-870b-a48c08d07503	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6e61ae7b-f2e8-421c-870b-a48c08d07503	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elaborate-firecannon:f0t0:s1,f:xs:XP:elaborate-firecannon:f0t0:s1	-	-	-	3aa6ded33acb	-	9a0c4fb919e8	-	-	2026-11-25	xproof
 6e61ae7b-f2e8-421c-870b-a48c08d07503	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e61ae7b-f2e8-421c-870b-a48c08d07503	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6e61ae7b-f2e8-421c-870b-a48c08d07503	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:elaborate-firecannon:f0t0:s1,f:xs:XP:elaborate-firecannon:f0t0:s1	-	-	-	3aa6ded33acb	-	9a0c4fb919e8	-	-	2026-11-25	xproof
 6e64f1e0-ddd6-4ee7-8797-086e234b02e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:cast:s1,f:xs:XP:steel-hellkite:cast:s1	-	-	-	23b491658465	-	7847c536d169	-	-	2026-11-24	xproof
 6e64f1e0-ddd6-4ee7-8797-086e234b02e8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:combat0.attack:s1,f:xs:XP:steel-hellkite:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7847c536d169	-	-	2026-11-25	xproof
 6e64f1e0-ddd6-4ee7-8797-086e234b02e8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:steel-hellkite:combat0.block:s1,f:xs:XP:steel-hellkite:combat0.block:s1	-	-	-	3aa6ded33acb	-	7847c536d169	-	-	2026-11-25	xproof
@@ -181,7 +181,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6efad3d6-4886-4b62-a4ff-bc0622f9672a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6eff5e17-946b-4433-9f48-88f103844c42	cast	cast-resolve	agreed	-	FX	scen	2	0	Griffnaut Tracker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6eff5e17-946b-4433-9f48-88f103844c42	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:griffnaut-tracker:combat0.attack:s1,f:xs:XP:griffnaut-tracker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7521f36c0e32	-	-	2026-11-25	xproof
-6eff5e17-946b-4433-9f48-88f103844c42	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Griffnaut Tracker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6eff5e17-946b-4433-9f48-88f103844c42	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:griffnaut-tracker:combat0.block:s1,f:xs:XP:griffnaut-tracker:combat0.block:s1	-	-	-	3aa6ded33acb	-	7521f36c0e32	-	-	2026-11-25	xproof
 6eff5e17-946b-4433-9f48-88f103844c42	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6effbf59-3933-4a77-9a6a-fd3bedf45c26	cast	cast-resolve	agreed	-	X	scen	1	0	Borough Backup/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6effbf59-3933-4a77-9a6a-fd3bedf45c26	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Borough Backup/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

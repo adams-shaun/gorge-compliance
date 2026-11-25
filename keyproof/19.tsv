@@ -114,11 +114,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 198b6c6f-a480-4672-9d87-b0cb5d8ed1c0	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:kaseto-orochi-archmage:f0a0:s1,f:xs:XP:kaseto-orochi-archmage:f0a0:s1	-	-	-	8c0bd19283bb	-	628395f0559f	-	-	2026-11-24	xproof
 198d1792-d638-4760-a476-7ec3af495610	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 198d1792-d638-4760-a476-7ec3af495610	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-198fed4c-297e-41c0-a172-e471c7401fbb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+198fed4c-297e-41c0-a172-e471c7401fbb	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 19910a90-d334-4d99-89f2-cd81cea3c824	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19910a90-d334-4d99-89f2-cd81cea3c824	f0/a0	NULL	owed	refused:steps-needed:cost:GU	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 19910a90-d334-4d99-89f2-cd81cea3c824	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19959b6d-eb8f-4273-94c8-65210e1998ab	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19959b6d-eb8f-4273-94c8-65210e1998ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:defensive-stance:cast:s1,f:xs:XP:defensive-stance:cast:s1	-	-	-	3aa6ded33acb	-	311cfcd4d102	-	-	2026-11-25	xproof
 19963c90-e7b2-4935-adcd-d41f0faf401a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1999b5ac-21fb-4d99-ad72-58bf507f9a59	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1999b5ac-21fb-4d99-ad72-58bf507f9a59	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

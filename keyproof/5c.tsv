@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c94b616-8edf-465c-b316-4599df95c52a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stegron the Dinosaur Man/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5c975dbb-aabb-43fe-877c-c3950019a584	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c975dbb-aabb-43fe-877c-c3950019a584	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-5c9a2789-4b8c-4706-a95a-99561cd6d09c	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5c9a2789-4b8c-4706-a95a-99561cd6d09c	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 5c9d814b-4257-47bc-a1df-c3480bc038ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c9f4fde-b96f-41bf-b214-f83511df1f8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c9f4fde-b96f-41bf-b214-f83511df1f8e	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -168,5 +168,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5cf92fd4-7c0b-4d8e-92f1-53dc2e0476fc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cfd73ab-8509-4e4b-9704-68d8dad3b301	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:discontinuity:cast:s1,f:xs:XP:discontinuity:cast:s1	-	-	-	ae86f6029288	-	0f111bdf5277	-	-	2026-11-24	xproof
 5cfdfcac-57fb-4507-a97a-cccbac2d1327	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flayer-husk:f0t0:s1,f:xs:XP:flayer-husk:f0t0:s1	-	-	-	d864b561c9cb	-	78910b35ef9f	-	-	2026-11-24	xproof
-5cfdfcac-57fb-4507-a97a-cccbac2d1327	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5cfdfcac-57fb-4507-a97a-cccbac2d1327	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:flayer-husk:f0a0:s1,f:xs:XP:flayer-husk:f0a0:s1	-	-	-	3aa6ded33acb	-	78910b35ef9f	-	-	2026-11-25	xproof
 5cfdfcac-57fb-4507-a97a-cccbac2d1327	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:flayer-husk:f0t0:s1,f:xs:XP:flayer-husk:f0t0:s1	-	-	-	d864b561c9cb	-	78910b35ef9f	-	-	2026-11-24	xproof

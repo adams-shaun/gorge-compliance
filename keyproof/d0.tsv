@@ -65,7 +65,7 @@ d05aeada-2a9f-464d-8a66-b6e90f43bae3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ref
 d05db2c1-a19a-4803-8e8a-fa2f9b798181	cast	cast-resolve	agreed	-	FX	scen	2	0	Bard, King of Dale/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d05db2c1-a19a-4803-8e8a-fa2f9b798181	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bard, King of Dale/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d05db2c1-a19a-4803-8e8a-fa2f9b798181	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bard, King of Dale/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d061972e-6f4f-41a7-966a-88839f105f19	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d061972e-6f4f-41a7-966a-88839f105f19	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 d0653734-9eb7-48c6-9042-65ffdd50fd2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d0653734-9eb7-48c6-9042-65ffdd50fd2a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d0653734-9eb7-48c6-9042-65ffdd50fd2a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -74,10 +74,10 @@ d06a8026-1657-4404-8dff-64e44f1a14f8	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:ab
 d06a8026-1657-4404-8dff-64e44f1a14f8	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d06a8026-1657-4404-8dff-64e44f1a14f8	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d06a8026-1657-4404-8dff-64e44f1a14f8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d06be0a6-0d45-4e95-b132-88ce80dd7cb6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:subterranean-shambler:cast:s1,f:xs:XP:subterranean-shambler:cast:s1	-	-	-	9ee19e8250ce	-	e90e03b41822	-	-	2026-11-24	xproof
-d06be0a6-0d45-4e95-b132-88ce80dd7cb6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:subterranean-shambler:cast:s1,f:xs:XP:subterranean-shambler:cast:s1	-	-	-	9ee19e8250ce	-	e90e03b41822	-	-	2026-11-24	xproof
+d06be0a6-0d45-4e95-b132-88ce80dd7cb6	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e90e03b41822	-	-	2026-11-25	xproof
+d06be0a6-0d45-4e95-b132-88ce80dd7cb6	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e90e03b41822	-	-	2026-11-25	xproof
 d06be0a6-0d45-4e95-b132-88ce80dd7cb6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-d06be0a6-0d45-4e95-b132-88ce80dd7cb6	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d06be0a6-0d45-4e95-b132-88ce80dd7cb6	f0/t2	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e90e03b41822	-	-	2026-11-25	xproof
 d06d7065-27e5-4119-a226-6f6d990d72c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d06d7065-27e5-4119-a226-6f6d990d72c7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d06f0f7c-0270-44be-991a-a5ebbddb0900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ d09b0648-e324-4a16-b78c-d1849177c04f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d09b0648-e324-4a16-b78c-d1849177c04f	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:sanitarium-skeleton:f0a0:s1,f:xs:XP:sanitarium-skeleton:f0a0:s1	-	-	-	3aa6ded33acb	-	c3824dec2903	-	-	2026-11-25	xproof
 d09c9cba-fdd2-479b-ad5d-d05181c3e3f9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d0a1f39b-cda4-4925-83f8-2161f575edfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d0a1f39b-cda4-4925-83f8-2161f575edfb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d0a1f39b-cda4-4925-83f8-2161f575edfb	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:argentum-armor:f0a0:s1,f:xs:XP:argentum-armor:f0a0:s1	-	-	-	3aa6ded33acb	-	4845a3113521	-	-	2026-11-25	xproof
 d0a1f39b-cda4-4925-83f8-2161f575edfb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d0a31db0-69db-405c-99a3-945617900c54	cast	cast	agreed	-	F	start	2	0	f:xs:XP:obscuring-haze:cast:s1	-	-	-	8c0bd19283bb	-	93727f98de16	-	-	2026-11-24	xproof
 d0a33e9b-dc1e-4643-b179-851f3c71a99d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

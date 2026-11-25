@@ -31,8 +31,8 @@ e81fa87f-80ce-4db6-940e-d30309bc70e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e81fe764-8b26-40b3-8e17-741ab5e231b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e81fe764-8b26-40b3-8e17-741ab5e231b4	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-ogre:f0a0:s1,f:xs:XP:flailing-ogre:f0a0:s1	-	-	-	5f2128bf97e4	-	042410adffc9	-	-	2026-11-24	xproof
 e81fe764-8b26-40b3-8e17-741ab5e231b4	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-ogre:f0a1:s1,f:xs:XP:flailing-ogre:f0a1:s1	-	-	-	5f2128bf97e4	-	042410adffc9	-	-	2026-11-24	xproof
-e820296a-81b0-401f-959c-7aed8abefce1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:entomber-exarch:f0t0:s1,f:xs:XP:entomber-exarch:f0t0:s1	-	-	-	23b491658465	-	6003fd62fe6c	-	-	2026-11-25	xproof
-e820296a-81b0-401f-959c-7aed8abefce1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e820296a-81b0-401f-959c-7aed8abefce1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:entomber-exarch:f0t0:s1,f:xs:XP:entomber-exarch:f0t0:s1	-	-	-	3aa6ded33acb	-	6003fd62fe6c	-	-	2026-11-25	xproof
+e820296a-81b0-401f-959c-7aed8abefce1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:entomber-exarch:f0t0:s1,f:xs:XP:entomber-exarch:f0t0:s1	-	-	-	3aa6ded33acb	-	6003fd62fe6c	-	-	2026-11-25	xproof
 e8210145-a6ac-4f84-a74c-a5799c5e9434	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:obsessive-stitcher:cast:s1,f:xs:XP:obsessive-stitcher:cast:s1	-	-	-	ae86f6029288	-	fdfd0cb5ebe8	-	-	2026-11-24	xproof
 e8210145-a6ac-4f84-a74c-a5799c5e9434	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:obsessive-stitcher:f0a1:s1,f:xs:XP:obsessive-stitcher:f0a1:s1	-	-	-	23b491658465	-	fdfd0cb5ebe8	-	-	2026-11-25	xproof
 e8210145-a6ac-4f84-a74c-a5799c5e9434	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ e86a0b64-fe4a-4ea8-99e8-35860dbac765	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e86bd848-d712-47c5-a82b-8fd5ce1de76a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e86bd848-d712-47c5-a82b-8fd5ce1de76a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e86c965b-ac10-4fff-b682-dddd6d9747c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:judith-carnage-connoisseur:cast:s1,f:xs:XP:judith-carnage-connoisseur:cast:s1	-	-	-	8c0bd19283bb	-	f52db5103f01	-	-	2026-11-24	xproof
-e86c965b-ac10-4fff-b682-dddd6d9747c6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Judith, Carnage Connoisseur/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e86c965b-ac10-4fff-b682-dddd6d9747c6	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:judith-carnage-connoisseur:f0t0:s1,f:xs:XP:judith-carnage-connoisseur:f0t0:s1	-	-	-	3aa6ded33acb	-	f52db5103f01	-	-	2026-11-25	xproof
 e8705df9-6439-4930-91b6-229f818559af	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:simic-guildgate:f0a0:s2,f:xs:XP:simic-guildgate:f0a0:s2	-	-	-	23b491658465	-	acd96332b788	-	-	2026-11-24	xproof
 e8705df9-6439-4930-91b6-229f818559af	land	land	agreed	-	FX	start	2	0	x:xs:XP:simic-guildgate:land:s1,f:xs:XP:simic-guildgate:land:s1	-	-	-	8c0bd19283bb	-	acd96332b788	-	-	2026-11-24	xproof
 e873b9c2-1346-4f36-aa48-da58112792db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ e88a2b71-c90d-4e16-99a3-93d11fe7a968	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:po
 e88b1520-aa9a-41ee-9036-4d4bebd1a0c0	cast	cast-resolve	agreed	-	FX	scen	2	0	Old Hob, Alleycat Blues/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e88b1520-aa9a-41ee-9036-4d4bebd1a0c0	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Old Hob, Alleycat Blues/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e88b1520-aa9a-41ee-9036-4d4bebd1a0c0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Old Hob, Alleycat Blues/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e88de17c-086d-4e2a-b5b2-2f9f57ca7c0f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e88de17c-086d-4e2a-b5b2-2f9f57ca7c0f	cast	cast	agreed	-	F	start	2	0	f:xs:XP:snapback:cast:s1	-	-	-	3aa6ded33acb	-	8b0dded44462	-	-	2026-11-25	xproof
 e8941499-2b31-417b-b2d2-10a144826703	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampiric-dragon:cast:s1,f:xs:XP:vampiric-dragon:cast:s1	-	-	-	fc71ca68c5ac	-	ac3b39e0b939	-	-	2026-11-24	xproof
 e8941499-2b31-417b-b2d2-10a144826703	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:vampiric-dragon:f0a0:s1,f:xs:XP:vampiric-dragon:f0a0:s1	-	-	-	fc71ca68c5ac	-	ac3b39e0b939	-	-	2026-11-24	xproof
 e8941499-2b31-417b-b2d2-10a144826703	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -214,7 +214,7 @@ e8f755f7-ec93-4d2e-bffc-c719984fa13d	cast	cast-resolve	agreed	-	FX	scen	2	0	Stin
 e8f755f7-ec93-4d2e-bffc-c719984fa13d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stingerquill Voxmancer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e8fa9455-92ac-46e0-bb34-4175c3c66fee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geralf-s-mindcrusher:f0t0:s1,f:xs:XP:geralf-s-mindcrusher:f0t0:s1	-	-	-	d864b561c9cb	-	982c4b9f8318	-	-	2026-11-24	xproof
 e8fa9455-92ac-46e0-bb34-4175c3c66fee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:geralf-s-mindcrusher:f0t0:s1,f:xs:XP:geralf-s-mindcrusher:f0t0:s1	-	-	-	d864b561c9cb	-	982c4b9f8318	-	-	2026-11-24	xproof
-e8fa9455-92ac-46e0-bb34-4175c3c66fee	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e8fa9455-92ac-46e0-bb34-4175c3c66fee	f0/t1	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:geralf-s-mindcrusher:f0t1:s1,f:xs:XP:geralf-s-mindcrusher:f0t1:s1	-	-	-	3aa6ded33acb	-	982c4b9f8318	-	-	2026-11-25	xproof
 e8fb2323-3eed-45a6-bfc4-44292c8b3697	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e8fb2323-3eed-45a6-bfc4-44292c8b3697	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e8fbdf4b-ef64-4b82-b67f-ae5568772256	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:expedition-healer:cast:s1,f:xs:XP:expedition-healer:cast:s1	-	-	-	ae86f6029288	-	8e22dc6eece3	-	-	2026-11-24	xproof

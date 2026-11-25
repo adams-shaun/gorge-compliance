@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 b9000917-4f09-42f4-ae85-fc1ac7571d93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9000917-4f09-42f4-ae85-fc1ac7571d93	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9000917-4f09-42f4-ae85-fc1ac7571d93	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-b9019332-2f02-48d9-be0a-a2b41b79e136	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b9019332-2f02-48d9-be0a-a2b41b79e136	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sever-the-bloodline:cast:s1,f:xs:XP:sever-the-bloodline:cast:s1	-	-	-	3aa6ded33acb	-	a6baea635f66	-	-	2026-11-25	xproof
 b9043dcd-234f-4144-80db-1cb903c009ea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:myr-turbine:cast:s1,f:xs:XP:myr-turbine:cast:s1	-	-	-	d864b561c9cb	-	73c9f0463431	-	-	2026-11-24	xproof
 b9043dcd-234f-4144-80db-1cb903c009ea	f0/a0	Token	agreed	-	FX	start	4	0	x:xs:XP:myr-turbine:cast:s1,f:xs:XP:myr-turbine:cast:s1	-	-	-	d864b561c9cb	-	73c9f0463431	-	-	2026-11-24	xproof
 b9043dcd-234f-4144-80db-1cb903c009ea	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -52,7 +52,7 @@ b9243163-b726-432e-830f-86132aa7f34a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 b925c4ed-8767-46b8-a423-a5f094557d94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geist-fueled-scarecrow:cast:s1,f:xs:XP:geist-fueled-scarecrow:cast:s1	-	-	-	d864b561c9cb	-	ddda64ac5113	-	-	2026-11-24	xproof
 b92629c0-1619-4214-929f-4404992fabeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b92629c0-1619-4214-929f-4404992fabeb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b92629c0-1619-4214-929f-4404992fabeb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b92629c0-1619-4214-929f-4404992fabeb	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 b92b4894-0786-49a7-8003-d99393f080d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b92b4894-0786-49a7-8003-d99393f080d4	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:gamma-grotesque:f0a0:s1,f:xs:XP:gamma-grotesque:f0a0:s1	-	-	-	8c0bd19283bb	-	6fa53a349a55	-	-	2026-11-24	xproof
 b92c2da9-eaa4-404b-8114-5527eec6390e	cast	cast-resolve	agreed	-	X	scen	1	0	Roxxon Brutes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -94,15 +94,15 @@ b94c233e-11d3-4556-a1da-bd193e58b663	combat#0.attack	combat.attack	agreed	-	X	st
 b94c233e-11d3-4556-a1da-bd193e58b663	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tempest-djinn:combat0.block:s1,f:xs:XP:tempest-djinn:combat0.block:s1	-	-	-	3aa6ded33acb	-	ee611631cd00	-	-	2026-11-25	xproof
 b94c233e-11d3-4556-a1da-bd193e58b663	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tempest Djinn/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b94fcdd2-7e50-439c-b5eb-aaa9ec7dee08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b9526bd5-ed83-466f-8819-e9a8487bbe77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b9526bd5-ed83-466f-8819-e9a8487bbe77	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-b9526bd5-ed83-466f-8819-e9a8487bbe77	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b9526bd5-ed83-466f-8819-e9a8487bbe77	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	d33daa9d3901	-	-	2026-11-25	xproof
+b9526bd5-ed83-466f-8819-e9a8487bbe77	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	d33daa9d3901	-	-	2026-11-25	xproof
+b9526bd5-ed83-466f-8819-e9a8487bbe77	f0/t1	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	d33daa9d3901	-	-	2026-11-25	xproof
 b9538d53-480b-481a-abbf-83ab17e1a45b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b9538d53-480b-481a-abbf-83ab17e1a45b	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 b95f704d-96b9-437e-8c49-aba874139e12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b960d17b-3679-4dc5-9a5d-c8e7fd81fa9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b96399f9-c0ba-4507-be13-65cf716b7757	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b96399f9-c0ba-4507-be13-65cf716b7757	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b96399f9-c0ba-4507-be13-65cf716b7757	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sphere-of-annihilation:f0t0:s1,f:xs:XP:sphere-of-annihilation:f0t0:s1	-	-	-	3aa6ded33acb	-	897365939f8a	-	-	2026-11-25	xproof
+b96399f9-c0ba-4507-be13-65cf716b7757	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sphere-of-annihilation:f0t0:s1,f:xs:XP:sphere-of-annihilation:f0t0:s1	-	-	-	3aa6ded33acb	-	897365939f8a	-	-	2026-11-25	xproof
 b9650a0e-5795-42ff-84c6-6040e5cf4c90	cast	cast-resolve	agreed	-	X	scen	1	0	Icecave Crasher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b9650a0e-5795-42ff-84c6-6040e5cf4c90	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Icecave Crasher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b9650a0e-5795-42ff-84c6-6040e5cf4c90	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Icecave Crasher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ b9794b16-3ef4-424a-b1ee-e2077f53873d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 b97c4d9a-8ea0-40d0-839a-afcd785e807e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zodiac-snake:cast:s1,f:xs:XP:zodiac-snake:cast:s1	-	-	-	5f2128bf97e4	-	ac67991e9eff	-	-	2026-11-24	xproof
 b97ccb69-e76c-4962-91ca-c7fd857140e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyreheart-wolf:cast:s1,f:xs:XP:pyreheart-wolf:cast:s1	-	-	-	d864b561c9cb	-	c03ce8b1c6a0	-	-	2026-11-24	xproof
 b97ccb69-e76c-4962-91ca-c7fd857140e8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:pyreheart-wolf:f0t0:s1,f:xs:XP:pyreheart-wolf:f0t0:s1	-	-	-	d864b561c9cb	-	c03ce8b1c6a0	-	-	2026-11-24	xproof
-b97ccb69-e76c-4962-91ca-c7fd857140e8	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b97ccb69-e76c-4962-91ca-c7fd857140e8	f0/t1	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:pyreheart-wolf:f0t1:s1,f:xs:XP:pyreheart-wolf:f0t1:s1	-	-	-	3aa6ded33acb	-	c03ce8b1c6a0	-	-	2026-11-25	xproof
 b97d21b4-d730-479f-872f-3e1645b66751	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:release-the-dogs:cast:s1,f:xs:XP:release-the-dogs:cast:s1	-	-	-	23b491658465	-	0420c06a52ab	-	-	2026-11-24	xproof
 b97e6acd-a676-429e-b875-b734759ebea7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b97e6acd-a676-429e-b875-b734759ebea7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

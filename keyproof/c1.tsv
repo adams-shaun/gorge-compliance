@@ -103,7 +103,7 @@ c178953c-3888-4edd-9d0c-265bd82b1d24	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 c178953c-3888-4edd-9d0c-265bd82b1d24	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c1795e9c-31c9-4892-a796-7656e09257b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1795e9c-31c9-4892-a796-7656e09257b3	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-c17b9e5b-58b6-4ccf-8283-945ba77429e7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c17b9e5b-58b6-4ccf-8283-945ba77429e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mutagenic-growth:cast:s1,f:xs:XP:mutagenic-growth:cast:s1	-	-	-	3aa6ded33acb	-	5aebe63e962b	-	-	2026-11-25	xproof
 c17d4818-5825-4bff-8fc5-5fd740cc0c70	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enduring-bondwarden:f0t1:s1,f:xs:XP:enduring-bondwarden:f0t1:s1	-	-	-	ae86f6029288	-	d396623c3b50	-	-	2026-11-24	xproof
 c17d4818-5825-4bff-8fc5-5fd740cc0c70	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enduring-bondwarden:f0t0:s1,f:xs:XP:enduring-bondwarden:f0t0:s1	-	-	-	ae86f6029288	-	d396623c3b50	-	-	2026-11-24	xproof
 c17d4818-5825-4bff-8fc5-5fd740cc0c70	f0/t1	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:enduring-bondwarden:f0t1:s1,f:xs:XP:enduring-bondwarden:f0t1:s1	-	-	-	ae86f6029288	-	d396623c3b50	-	-	2026-11-24	xproof
@@ -176,9 +176,9 @@ c1d8e97b-f34b-4e52-9795-a4433f26725a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c1d8e97b-f34b-4e52-9795-a4433f26725a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c1d9c41a-0941-4b7e-b8a6-890d30386458	cast	cast-resolve	agreed	-	FX	scen	2	0	Hunted Bonebrute/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c1d9c41a-0941-4b7e-b8a6-890d30386458	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:hunted-bonebrute:combat0.attack:s1,f:xs:XP:hunted-bonebrute:combat0.attack:s1	-	-	-	3aa6ded33acb	-	c84ae0c90597	-	-	2026-11-25	xproof
-c1d9c41a-0941-4b7e-b8a6-890d30386458	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hunted Bonebrute/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c1d9c41a-0941-4b7e-b8a6-890d30386458	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:hunted-bonebrute:combat0.block:s1,f:xs:XP:hunted-bonebrute:combat0.block:s1	-	-	-	3aa6ded33acb	-	c84ae0c90597	-	-	2026-11-25	xproof
 c1d9c41a-0941-4b7e-b8a6-890d30386458	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1d9c41a-0941-4b7e-b8a6-890d30386458	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hunted-bonebrute:f0t1:s1,f:xs:XP:hunted-bonebrute:f0t1:s1	-	-	-	8c0bd19283bb	-	c84ae0c90597	-	-	2026-11-24	xproof
+c1d9c41a-0941-4b7e-b8a6-890d30386458	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hunted-bonebrute:combat0.block:s1,f:xs:XP:hunted-bonebrute:combat0.block:s1	-	-	-	3aa6ded33acb	-	c84ae0c90597	-	-	2026-11-25	xproof
 c1df6359-edf4-48cf-b8d1-6240ac291cf7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1e456b6-5d2b-4c42-9464-54a8f9f8f3ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1e456b6-5d2b-4c42-9464-54a8f9f8f3ba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -204,8 +204,8 @@ c1f1babf-13d0-4fc4-b192-127d2d5db7f1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 c1f1ca09-897a-434c-bbb1-e4ad4a1547aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cruel-witness:cast:s1,f:xs:XP:cruel-witness:cast:s1	-	-	-	d864b561c9cb	-	17557963e54a	-	-	2026-11-24	xproof
 c1f1ca09-897a-434c-bbb1-e4ad4a1547aa	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c1f33eac-0f85-4f0f-8562-1737b5f6b23a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1f4a440-638a-4e3e-8a3e-af4a4a73ec91	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1f4a440-638a-4e3e-8a3e-af4a4a73ec91	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c1f4a440-638a-4e3e-8a3e-af4a4a73ec91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dark-favor:f0t0:s1,f:xs:XP:dark-favor:f0t0:s1	-	-	-	3aa6ded33acb	-	faf6e35af1dd	-	-	2026-11-25	xproof
+c1f4a440-638a-4e3e-8a3e-af4a4a73ec91	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dark-favor:f0t0:s1,f:xs:XP:dark-favor:f0t0:s1	-	-	-	3aa6ded33acb	-	faf6e35af1dd	-	-	2026-11-25	xproof
 c1f7d451-ca70-403d-81bf-8822876d1a54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1f7d451-ca70-403d-81bf-8822876d1a54	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c1fafe93-8fd2-44c1-a4a0-5c9ecee550cc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ojutai-s-command:cast:s1,f:xs:XP:ojutai-s-command:cast:s1	-	-	-	d864b561c9cb	-	99fd00832afd	-	-	2026-11-24	xproof

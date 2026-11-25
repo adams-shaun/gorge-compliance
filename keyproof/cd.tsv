@@ -27,7 +27,7 @@ cd1e6225-31b7-4a70-81ab-681abe860328	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:X
 cd1e6225-31b7-4a70-81ab-681abe860328	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:tinker-s-tote:f0t0:s2,f:xs:XP:tinker-s-tote:f0t0:s2	-	-	-	e07cf3a05ba5	-	b898b470ba46	-	-	2026-11-24	xproof
 cd1eda60-53e4-44d0-9b2c-7a57395e291f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:conjurer-s-closet:cast:s1,f:xs:XP:conjurer-s-closet:cast:s1	-	-	-	d864b561c9cb	-	befafdae76fc	-	-	2026-11-24	xproof
 cd1eda60-53e4-44d0-9b2c-7a57395e291f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:conjurer-s-closet:cast:s1,f:xs:XP:conjurer-s-closet:cast:s1	-	-	-	d864b561c9cb	-	befafdae76fc	-	-	2026-11-24	xproof
-cd201ded-cfaf-4a51-9fcc-6a61b3c910b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cd201ded-cfaf-4a51-9fcc-6a61b3c910b0	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 cd20a2a4-5e5e-420d-9420-651bce511f76	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flight-of-fancy:f0t0:s1,f:xs:XP:flight-of-fancy:f0t0:s1	-	-	-	64a08ba7d913	-	fcf93864f728	-	-	2026-11-24	xproof
 cd20a2a4-5e5e-420d-9420-651bce511f76	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:flight-of-fancy:f0t0:s1,f:xs:XP:flight-of-fancy:f0t0:s1	-	-	-	64a08ba7d913	-	fcf93864f728	-	-	2026-11-24	xproof
 cd24de4f-ce88-4fbb-9e8d-93ea7c260b4c	cast	cast-resolve	agreed	-	X	scen	1	0	Test of Priorities/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -122,8 +122,8 @@ cd98a31b-cc7e-43f9-982e-109ad9850908	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ver
 cd98a31b-cc7e-43f9-982e-109ad9850908	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 cd990c63-ba29-46f8-afa5-4cd5fe0b0166	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cda1ac77-3986-4600-9835-b0c0063ecc2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drossclaw:f0t1:s1,f:xs:XP:drossclaw:f0t1:s1	-	-	-	ae86f6029288	-	3d6b745e5532	-	-	2026-11-24	xproof
-cda1ac77-3986-4600-9835-b0c0063ecc2f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cda1ac77-3986-4600-9835-b0c0063ecc2f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cda1ac77-3986-4600-9835-b0c0063ecc2f	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:drossclaw:f0a0:s1,f:xs:XP:drossclaw:f0a0:s1	-	-	-	3aa6ded33acb	-	3d6b745e5532	-	-	2026-11-25	xproof
+cda1ac77-3986-4600-9835-b0c0063ecc2f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:drossclaw:f0a0:s1,f:xs:XP:drossclaw:f0a0:s1	-	-	-	3aa6ded33acb	-	3d6b745e5532	-	-	2026-11-25	xproof
 cda1ac77-3986-4600-9835-b0c0063ecc2f	f0/t1	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:drossclaw:f0t1:s1,f:xs:XP:drossclaw:f0t1:s1	-	-	-	ae86f6029288	-	3d6b745e5532	-	-	2026-11-24	xproof
 cda1e3b5-ea80-4e83-b305-88993d307170	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wizards-of-thay:cast:s1,f:xs:XP:wizards-of-thay:cast:s1	-	-	-	8c0bd19283bb	-	e8241b369c51	-	-	2026-11-24	xproof
 cda1e3b5-ea80-4e83-b305-88993d307170	f0/t0	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:wizards-of-thay:f0t0:s1,f:xs:XP:wizards-of-thay:f0t0:s1	-	-	-	8c0bd19283bb	-	e8241b369c51	-	-	2026-11-24	xproof

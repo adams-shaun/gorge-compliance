@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 488696c2-b0c7-49be-a5a1-e833b6fd8751	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cartouche-of-knowledge:cast:s1,f:xs:XP:cartouche-of-knowledge:cast:s1	-	-	-	d864b561c9cb	-	ab663ee6ac07	-	-	2026-11-24	xproof
 488696c2-b0c7-49be-a5a1-e833b6fd8751	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:cartouche-of-knowledge:cast:s1,f:xs:XP:cartouche-of-knowledge:cast:s1	-	-	-	d864b561c9cb	-	ab663ee6ac07	-	-	2026-11-24	xproof
 4887b9e1-ea84-4543-b272-c106a13a33dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4887b9e1-ea84-4543-b272-c106a13a33dc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4887b9e1-ea84-4543-b272-c106a13a33dc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:palazzo-archers:f0t0:s1,f:xs:XP:palazzo-archers:f0t0:s1	-	-	-	3aa6ded33acb	-	dfdc1385811d	-	-	2026-11-25	xproof
 488ca652-653b-4bb3-891c-874efdd418ff	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:pale-recluse:cast:s1,f:xs:XP:pale-recluse:cast:s1	-	-	-	8a1b1a193ec0	-	de62d566c2c6	-	-	2026-11-24	xproof
 488ca652-653b-4bb3-891c-874efdd418ff	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:pale-recluse:cast:s2,f:xs:XP:pale-recluse:cast:s2	-	-	-	8a1b1a193ec0	-	de62d566c2c6	-	-	2026-11-24	xproof
 488ca652-653b-4bb3-891c-874efdd418ff	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -170,9 +170,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48d1b217-b068-468c-bc6c-4bef9e44cc6e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48d9747f-f9eb-4f71-93c9-e5151a7ff3ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48d9747f-f9eb-4f71-93c9-e5151a7ff3ea	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-48d9f488-4ebb-4fdb-a568-6930fc2f5416	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:staff-of-nin:cast:s1,f:xs:XP:staff-of-nin:cast:s1	-	-	-	d864b561c9cb	-	0134f5e2efb8	-	-	2026-11-24	xproof
-48d9f488-4ebb-4fdb-a568-6930fc2f5416	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:staff-of-nin:cast:s1,f:xs:XP:staff-of-nin:cast:s1	-	-	-	d864b561c9cb	-	0134f5e2efb8	-	-	2026-11-24	xproof
-48d9f488-4ebb-4fdb-a568-6930fc2f5416	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48d9f488-4ebb-4fdb-a568-6930fc2f5416	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:staff-of-nin:f0t0:s1,f:xs:XP:staff-of-nin:f0t0:s1	-	-	-	3aa6ded33acb	-	0134f5e2efb8	-	-	2026-11-25	xproof
+48d9f488-4ebb-4fdb-a568-6930fc2f5416	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:staff-of-nin:f0t0:s1,f:xs:XP:staff-of-nin:f0t0:s1	-	-	-	3aa6ded33acb	-	0134f5e2efb8	-	-	2026-11-25	xproof
+48d9f488-4ebb-4fdb-a568-6930fc2f5416	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:staff-of-nin:f0t0:s1,f:xs:XP:staff-of-nin:f0t0:s1	-	-	-	3aa6ded33acb	-	0134f5e2efb8	-	-	2026-11-25	xproof
 48dab180-4ffd-4b39-9f5a-6bdc017a1eae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tuktuk-rubblefort:cast:s1,f:xs:XP:tuktuk-rubblefort:cast:s1	-	-	-	ae86f6029288	-	823575cfe2ba	-	-	2026-11-24	xproof
 48daee9d-ddaf-410f-8c3a-12fa1064ab56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48daee9d-ddaf-410f-8c3a-12fa1064ab56	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -187,7 +187,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 48e3f6dd-68ab-420a-ad4d-fe7ee39486d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48e3f6dd-68ab-420a-ad4d-fe7ee39486d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 48e3f6dd-68ab-420a-ad4d-fe7ee39486d3	f0/t0	ChangesZone/Modular	agreed	-	FX	start	1	0	x:xs:XP:arcbound-javelineer:f0t0:s2,f:xs:XP:arcbound-javelineer:f0t0:s2	-	-	-	d864b561c9cb	-	bf0a6db83488	-	-	2026-11-24	xproof
-48e603a2-b965-4fbc-ad57-4388bce5ac8b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+48e603a2-b965-4fbc-ad57-4388bce5ac8b	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 48e6d3d8-2f27-4017-acdd-40bce8cdbc02	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:giada-font-of-hope:cast:s1,f:xs:XP:giada-font-of-hope:cast:s1	-	-	-	23b491658465	-	2ef548f9273f	-	-	2026-11-24	xproof
 48e6d3d8-2f27-4017-acdd-40bce8cdbc02	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Giada, Font of Hope/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 48e6d3d8-2f27-4017-acdd-40bce8cdbc02	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Giada, Font of Hope/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

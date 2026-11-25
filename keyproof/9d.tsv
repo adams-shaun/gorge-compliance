@@ -24,8 +24,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d1c3ec1-00a4-4890-93a3-e3cf137ca7e4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hobbling-zombie:f0t0:s1,f:xs:XP:hobbling-zombie:f0t0:s1	-	-	-	d864b561c9cb	-	b7e1fd60cf12	-	-	2026-11-24	xproof
 9d1f232c-e904-46f6-a4b7-24ca2ede711c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loran-disciple-of-history:f0t0:s1,f:xs:XP:loran-disciple-of-history:f0t0:s1	-	-	-	ae86f6029288	-	3e7a3fab24ad	-	-	2026-11-24	xproof
 9d1f232c-e904-46f6-a4b7-24ca2ede711c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loran-disciple-of-history:f0t0:s1,f:xs:XP:loran-disciple-of-history:f0t0:s1	-	-	-	ae86f6029288	-	3e7a3fab24ad	-	-	2026-11-24	xproof
-9d1f9036-a466-46b6-ab7c-2de487876978	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:countless-gears-renegade:f0t0:s1,f:xs:XP:countless-gears-renegade:f0t0:s1	-	-	-	23b491658465	-	90cca20714df	-	-	2026-11-25	xproof
-9d1f9036-a466-46b6-ab7c-2de487876978	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d1f9036-a466-46b6-ab7c-2de487876978	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:countless-gears-renegade:f0t0:s1,f:xs:XP:countless-gears-renegade:f0t0:s1	-	-	-	3aa6ded33acb	-	90cca20714df	-	-	2026-11-25	xproof
+9d1f9036-a466-46b6-ab7c-2de487876978	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:countless-gears-renegade:f0t0:s1,f:xs:XP:countless-gears-renegade:f0t0:s1	-	-	-	3aa6ded33acb	-	90cca20714df	-	-	2026-11-25	xproof
 9d2460c3-8eeb-4f35-b6f6-748c478664c7	cast	cast-resolve	agreed	-	X	scen	1	0	Enduring Curiosity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d2460c3-8eeb-4f35-b6f6-748c478664c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Enduring Curiosity/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d2460c3-8eeb-4f35-b6f6-748c478664c7	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Enduring Curiosity/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -83,11 +83,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d546a53-5beb-40f5-b358-377810c8a75d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d546a53-5beb-40f5-b358-377810c8a75d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d57cda6-9042-44bd-9785-38de9487ff85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9d581188-ce80-494e-bd38-f411e1f4efb5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d581188-ce80-494e-bd38-f411e1f4efb5	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 9d581188-ce80-494e-bd38-f411e1f4efb5	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 9d586c74-b1dd-4fcb-a24a-c703d250fa63	cast	cast-resolve	agreed	-	FX	scen	2	0	Seismic Sense/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d5917d5-4fb3-4f37-9278-e08c1f73aae5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forensic-gadgeteer:cast:s1,f:xs:XP:forensic-gadgeteer:cast:s1	-	-	-	23b491658465	-	87078d147078	-	-	2026-11-24	xproof
-9d5917d5-4fb3-4f37-9278-e08c1f73aae5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Forensic Gadgeteer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9d5917d5-4fb3-4f37-9278-e08c1f73aae5	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:forensic-gadgeteer:f0t0:s1,f:xs:XP:forensic-gadgeteer:f0t0:s1	-	-	-	3aa6ded33acb	-	87078d147078	-	-	2026-11-25	xproof
 9d5917d5-4fb3-4f37-9278-e08c1f73aae5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Forensic Gadgeteer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9d5e82d3-79ac-4dbe-80e8-1db6dd6c8767	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d5f712a-d46c-4d7e-8fea-45fdadb458df	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:hedonist-s-trove:cast:s1,f:xs:XP:hedonist-s-trove:cast:s1	-	-	-	d864b561c9cb	-	b6e193434992	-	-	2026-11-24	xproof
@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9d73a51a-1c8e-40cd-8124-aeff406a0884	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brave-the-elements:cast:s1,f:xs:XP:brave-the-elements:cast:s1	-	-	-	8a1b1a193ec0	-	18293296804d	-	-	2026-11-24	xproof
 9d7624ea-ffff-470b-928b-bbac66ddbd1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:act-of-aggression:cast:s1,f:xs:XP:act-of-aggression:cast:s1	-	-	-	d864b561c9cb	-	acb9a601e15e	-	-	2026-11-24	xproof
 9d835137-584c-46bd-952e-4b2812bba1a3	cast	cast-resolve	agreed	-	FX	scen	2	0	Charge the Sanctum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9d83a1d3-ef0f-4134-a38b-c992d396592b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9d83a1d3-ef0f-4134-a38b-c992d396592b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:roar-of-challenge:cast:s1,f:xs:XP:roar-of-challenge:cast:s1	-	-	-	3aa6ded33acb	-	4e740690d053	-	-	2026-11-25	xproof
 9d86735c-12e5-457a-beb4-057ab220d18b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d8c39f2-ddb5-4b79-861a-e1e25f447c29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9d8c39f2-ddb5-4b79-861a-e1e25f447c29	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shambling-goblin:f0t0:s1,f:xs:XP:shambling-goblin:f0t0:s1	-	-	-	d864b561c9cb	-	f7787ef1f7df	-	-	2026-11-24	xproof
@@ -171,9 +171,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9dd755a5-0bef-4bde-92fa-14ef2a1a1410	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dunland-crebain:f0t0:s1,f:xs:XP:dunland-crebain:f0t0:s1	-	-	-	ae86f6029288	-	f99ffe5c4709	-	-	2026-11-24	xproof
 9dd755a5-0bef-4bde-92fa-14ef2a1a1410	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dunland-crebain:f0t0:s1,f:xs:XP:dunland-crebain:f0t0:s1	-	-	-	ae86f6029288	-	f99ffe5c4709	-	-	2026-11-24	xproof
 9dd7f27a-e862-47d7-9158-034cf4d353b8	cast	cast	agreed	-	X	start	2	0	x:xs:XP:fireblast:cast:s1	-	-	-	ea3140b6974b	-	d742326e49e5	-	-	2026-11-24	xproof
-9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	cast	cast-resolve	agreed	-	X	scen	1	0	Helix Pinnacle/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Helix Pinnacle/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:helix-pinnacle:f0t0:s2,f:xs:XP:helix-pinnacle:f0t0:s1	-	-	-	3aa6ded33acb	-	ab4b223106b0	-	-	2026-11-25	xproof
+9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:helix-pinnacle:f0t0:s2,f:xs:XP:helix-pinnacle:f0t0:s1	-	-	-	3aa6ded33acb	-	ab4b223106b0	-	-	2026-11-25	xproof
+9ddc5a06-b4e1-459a-9e39-7cd1aa994fe1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:helix-pinnacle:f0t0:s2,f:xs:XP:helix-pinnacle:f0t0:s1	-	-	-	3aa6ded33acb	-	ab4b223106b0	-	-	2026-11-25	xproof
 9dddb69a-00a3-448b-8f8b-8e50cdd70d57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9dea848b-d758-46d0-829d-b096061fd460	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9dea848b-d758-46d0-829d-b096061fd460	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

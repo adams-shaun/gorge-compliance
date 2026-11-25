@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b524149-340e-4f94-9520-6a5258fabb00	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Monk's Fist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1b524149-340e-4f94-9520-6a5258fabb00	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:monk-s-fist:f0t0:s2,f:xs:XP:monk-s-fist:f0t0:s2	-	-	-	267e485f6204	-	772736fd7ebf	-	-	2026-11-24	xproof
 1b524149-340e-4f94-9520-6a5258fabb00	static#0.0	static#0.0	agreed	-	X	scen	1	0	Monk's Fist/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b550c27-14b0-45fb-b17e-fcb061dc6ad0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b550c27-14b0-45fb-b17e-fcb061dc6ad0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gimli-s-fury:cast:s1,f:xs:XP:gimli-s-fury:cast:s1	-	-	-	3aa6ded33acb	-	cea24baf358a	-	-	2026-11-25	xproof
 1b553ed4-12eb-4a53-8e1f-d47ec92b1d65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b553ed4-12eb-4a53-8e1f-d47ec92b1d65	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b553ed4-12eb-4a53-8e1f-d47ec92b1d65	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b704798-0c69-4c18-ac7e-42933ce90028	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b70d7fa-ba2c-4945-b8fd-23623b88c036	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b70d7fa-ba2c-4945-b8fd-23623b88c036	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-1b721ad3-d0f6-4eec-9bf0-f57ea9dfa392	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b721ad3-d0f6-4eec-9bf0-f57ea9dfa392	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 1b73639b-2b07-4e82-b990-ca7721074e43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b73639b-2b07-4e82-b990-ca7721074e43	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b759831-abe8-4996-a897-3c6d6d30a1c7	cast	cast-resolve	agreed	-	X	scen	1	0	Broodheart Engine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

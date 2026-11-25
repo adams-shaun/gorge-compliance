@@ -18,7 +18,7 @@ d12cfd46-73c2-4206-9a10-0d2e7d6ac87e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d12e374d-ed09-4d5e-bb7a-6c7d9ea80a1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d12e5ce0-5705-4c35-9a93-b883db52c80c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:batterskull:f0t0:s1,f:xs:XP:batterskull:f0t0:s1	-	-	-	d864b561c9cb	-	cb5971002998	-	-	2026-11-24	xproof
 d12e5ce0-5705-4c35-9a93-b883db52c80c	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:batterskull:f0a1:s1,f:xs:XP:batterskull:f0a1:s1	-	-	-	23b491658465	-	cb5971002998	-	-	2026-11-25	xproof
-d12e5ce0-5705-4c35-9a93-b883db52c80c	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d12e5ce0-5705-4c35-9a93-b883db52c80c	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:batterskull:f0a1:s1,f:xs:XP:batterskull:f0a1:s1	-	-	-	3aa6ded33acb	-	cb5971002998	-	-	2026-11-25	xproof
 d12e5ce0-5705-4c35-9a93-b883db52c80c	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:batterskull:f0t0:s1,f:xs:XP:batterskull:f0t0:s1	-	-	-	d864b561c9cb	-	cb5971002998	-	-	2026-11-24	xproof
 d137586f-83b0-40af-8100-443460b07ac0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d137586f-83b0-40af-8100-443460b07ac0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -86,8 +86,8 @@ d1767573-713d-4f63-a09d-e94150655093	static#0.0	static#0.0	agreed	-	X	scen	1	0	B
 d1767573-713d-4f63-a09d-e94150655093	static#0.1	static#0.1	agreed	-	X	scen	1	0	Burden of Proof/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d1767573-713d-4f63-a09d-e94150655093	static#0.2	static#0.2	agreed	-	X	scen	1	0	Burden of Proof/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d17a1109-3a7f-4a39-b602-155da819235f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d17a9750-a89f-4ad1-9c15-7ccffc554ee5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:propeller-pioneer:f0t0:s1,f:xs:XP:propeller-pioneer:f0t0:s1	-	-	-	23b491658465	-	da40c1ddb514	-	-	2026-11-25	xproof
-d17a9750-a89f-4ad1-9c15-7ccffc554ee5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d17a9750-a89f-4ad1-9c15-7ccffc554ee5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:propeller-pioneer:f0t0:s1,f:xs:XP:propeller-pioneer:f0t0:s1	-	-	-	3aa6ded33acb	-	da40c1ddb514	-	-	2026-11-25	xproof
+d17a9750-a89f-4ad1-9c15-7ccffc554ee5	f0/t0	ChangesZone/Fabricate	agreed	-	FX	start	2	0	x:xs:XP:propeller-pioneer:f0t0:s1,f:xs:XP:propeller-pioneer:f0t0:s1	-	-	-	3aa6ded33acb	-	da40c1ddb514	-	-	2026-11-25	xproof
 d17c3079-372d-4e4f-8214-12a9893088ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:martok-hero-of-the-empire:cast:s1,f:xs:XP:martok-hero-of-the-empire:cast:s1	-	-	-	8c0bd19283bb	-	645851ca00df	-	-	2026-11-24	xproof
 d17c3079-372d-4e4f-8214-12a9893088ff	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d17d085f-aeda-4b23-ab80-729d070ae813	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,9 +176,9 @@ d1edb950-a118-4b4d-a0ef-9a6683d74c9f	cast	cast-resolve	agreed	-	FX	scen	2	0	Purp
 d1edb950-a118-4b4d-a0ef-9a6683d74c9f	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Purple Dragon Punks/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d1efc4fd-2978-4434-8fdf-ddc05484ebb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d1efc4fd-2978-4434-8fdf-ddc05484ebb1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-d1f10cca-8dfa-4ea5-b227-4446cd8514a8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d1f10cca-8dfa-4ea5-b227-4446cd8514a8	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:drannith-ruins:land:s1,f:xs:XP:drannith-ruins:land:s1	-	-	-	3aa6ded33acb	-	d7366d7f49c0	-	-	2026-11-25	xproof
 d1f10cca-8dfa-4ea5-b227-4446cd8514a8	f0/a1	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-d1f10cca-8dfa-4ea5-b227-4446cd8514a8	land	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d1f10cca-8dfa-4ea5-b227-4446cd8514a8	land	land	agreed	-	FX	start	2	0	x:xs:XP:drannith-ruins:land:s1,f:xs:XP:drannith-ruins:land:s1	-	-	-	3aa6ded33acb	-	d7366d7f49c0	-	-	2026-11-25	xproof
 d1f1e48f-f1f4-497f-9112-79159d2f443b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d1f1e48f-f1f4-497f-9112-79159d2f443b	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 d1f1e48f-f1f4-497f-9112-79159d2f443b	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

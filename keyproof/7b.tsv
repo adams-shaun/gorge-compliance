@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b0767b8-b504-456e-93bd-218502f73b3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0767b8-b504-456e-93bd-218502f73b3d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b094a2b-2b69-4a9b-9829-c1aabc53f75e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:solidarity:cast:s1,f:xs:XP:solidarity:cast:s1	-	-	-	25696bf19d5b	-	72beaf0db38a	-	-	2026-11-24	xproof
-7b0b05a0-0be4-498f-be54-8d68b818f90a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b0b05a0-0be4-498f-be54-8d68b818f90a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wing-it:cast:s1,f:xs:XP:wing-it:cast:s1	-	-	-	3aa6ded33acb	-	f529c299dc77	-	-	2026-11-25	xproof
 7b0d7e62-0287-454a-8702-b0bfa7b41245	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:minas-tirith:f0a1:s2,f:xs:XP:minas-tirith:f0a1:s2	-	-	-	23b491658465	-	89fc0748db3c	-	-	2026-11-25	xproof
 7b0d7e62-0287-454a-8702-b0bfa7b41245	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b0d7e62-0287-454a-8702-b0bfa7b41245	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -35,9 +35,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b31ecf8-5266-4376-ace0-8b873706c4ea	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:saproling-burst:cast:s1,f:xs:XP:saproling-burst:cast:s1	-	-	-	5f2128bf97e4	-	48b9d865d3d3	-	-	2026-11-24	xproof
 7b31ecf8-5266-4376-ace0-8b873706c4ea	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 7b31ecf8-5266-4376-ace0-8b873706c4ea	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b389f2b-fddc-46fb-85d5-4470565323f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b389f2b-fddc-46fb-85d5-4470565323f3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b389f2b-fddc-46fb-85d5-4470565323f3	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7b389f2b-fddc-46fb-85d5-4470565323f3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:form-of-the-dragon:f0t0:s1,f:xs:XP:form-of-the-dragon:f0t0:s1	-	-	-	3aa6ded33acb	-	f8cb7927a05d	-	-	2026-11-25	xproof
+7b389f2b-fddc-46fb-85d5-4470565323f3	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:form-of-the-dragon:f0t0:s1,f:xs:XP:form-of-the-dragon:f0t0:s1	-	-	-	3aa6ded33acb	-	f8cb7927a05d	-	-	2026-11-25	xproof
+7b389f2b-fddc-46fb-85d5-4470565323f3	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:form-of-the-dragon:f0t0:s1,f:xs:XP:form-of-the-dragon:f0t0:s1	-	-	-	3aa6ded33acb	-	f8cb7927a05d	-	-	2026-11-25	xproof
 7b3c0d89-55ed-43d7-a00a-7b060857ec4e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b3c0d89-55ed-43d7-a00a-7b060857ec4e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b3c0d89-55ed-43d7-a00a-7b060857ec4e	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b9fafe7-d26a-4ed5-b4c4-ce13763770b5	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b9fafe7-d26a-4ed5-b4c4-ce13763770b5	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7ba31f45-c178-4bac-ab7b-5ba4d050133c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gwafa-hazid-profiteer:cast:s1,f:xs:XP:gwafa-hazid-profiteer:cast:s1	-	-	-	8a1b1a193ec0	-	78f5b09f7421	-	-	2026-11-24	xproof
-7ba31f45-c178-4bac-ab7b-5ba4d050133c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7ba31f45-c178-4bac-ab7b-5ba4d050133c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:gwafa-hazid-profiteer:f0a0:s1,f:xs:XP:gwafa-hazid-profiteer:f0a0:s1	-	-	-	3aa6ded33acb	-	78f5b09f7421	-	-	2026-11-25	xproof
 7ba550a5-81fc-42c2-8df8-ad455d938605	cast	cast	agreed	-	X	start	2	0	x:xs:XP:bonehoard-dracosaur:f0t0:s1	-	-	-	3aa6ded33acb	-	c7dd3f6bd49d	-	-	2026-11-25	xproof
 7ba550a5-81fc-42c2-8df8-ad455d938605	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bonehoard Dracosaur/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7ba550a5-81fc-42c2-8df8-ad455d938605	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bonehoard Dracosaur/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -145,7 +145,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7baffe00-78a4-4675-9c74-29eb3882bd01	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7bb1b48b-aa6b-4064-9355-c43b0f509388	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7bb3c3b8-25b7-4c48-aa41-dcdcebbc3d5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7bb3c3b8-25b7-4c48-aa41-dcdcebbc3d5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7bb3c3b8-25b7-4c48-aa41-dcdcebbc3d5e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:creepy-puppeteer:f0t0:s1,f:xs:XP:creepy-puppeteer:f0t0:s1	-	-	-	3aa6ded33acb	-	3bf682ccc488	-	-	2026-11-25	xproof
 7bb41690-f8ec-462a-ba29-be453eb86fca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7bb51602-60e8-4730-b11c-2870d6b42e20	cast	cast-resolve	agreed	-	X	scen	1	0	Azure Beastbinder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7bb51602-60e8-4730-b11c-2870d6b42e20	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Azure Beastbinder/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

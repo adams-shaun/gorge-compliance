@@ -18,7 +18,7 @@ e10e84a7-d564-487a-ac64-5a001a45ee90	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e10e8d56-bba6-412d-970e-c24969f32b5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e110ee80-37af-4989-a5fb-95d51dc7f102	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1135564-ca93-4c5b-8686-cafdbaf0205e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:etherium-abomination:cast:s1,f:xs:XP:etherium-abomination:cast:s1	-	-	-	8a1b1a193ec0	-	041a31dee0a9	-	-	2026-11-24	xproof
-e1135564-ca93-4c5b-8686-cafdbaf0205e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e1135564-ca93-4c5b-8686-cafdbaf0205e	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:etherium-abomination:f0a0:s1,f:xs:XP:etherium-abomination:f0a0:s1	-	-	-	3aa6ded33acb	-	041a31dee0a9	-	-	2026-11-25	xproof
 e11591ee-7074-488e-8d2f-f8c89e385a55	cast	cast-resolve	agreed	-	FX	scen	2	0	Hog-Monkey/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e11591ee-7074-488e-8d2f-f8c89e385a55	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Hog-Monkey/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e11591ee-7074-488e-8d2f-f8c89e385a55	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Hog-Monkey/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -40,7 +40,7 @@ e11e2dc8-b28e-415d-9a5d-0eb46da8945c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 e11e2dc8-b28e-415d-9a5d-0eb46da8945c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-forge:f0t0:s1,f:xs:XP:omen-of-the-forge:f0t0:s1	-	-	-	ae86f6029288	-	3b5d4c7875b3	-	-	2026-11-24	xproof
 e120f341-4445-4b96-9777-2290471832bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e121f9cb-ed25-4be1-9822-b68cce2f2623	cast	cast-resolve	agreed	-	FX	scen	2	0	Riftburst Hellion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e121f9cb-ed25-4be1-9822-b68cce2f2623	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Riftburst Hellion/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e121f9cb-ed25-4be1-9822-b68cce2f2623	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:riftburst-hellion:combat0.attack:s1,f:xs:XP:riftburst-hellion:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3393db574f60	-	-	2026-11-25	xproof
 e121f9cb-ed25-4be1-9822-b68cce2f2623	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:riftburst-hellion:combat0.block:s1,f:xs:XP:riftburst-hellion:combat0.block:s1	-	-	-	3aa6ded33acb	-	3393db574f60	-	-	2026-11-25	xproof
 e123fd7d-ace9-48a4-9510-eedcc837d8e8	cast	cast-resolve	agreed	-	X	scen	1	0	Iron Spider, Stark Upgrade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e123fd7d-ace9-48a4-9510-eedcc837d8e8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Iron Spider, Stark Upgrade/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -177,8 +177,8 @@ e1c458ca-10f6-4da8-a93d-3adfb86fe97d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pre
 e1c458ca-10f6-4da8-a93d-3adfb86fe97d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:preening-champion:f0t0:s1,f:xs:XP:preening-champion:f0t0:s1	-	-	-	ae86f6029288	-	3d6f9cef255a	-	-	2026-11-24	xproof
 e1c49bdb-cfd1-4ebf-90f7-73bd5009f75e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:looming-hoverguard:f0t0:s1,f:xs:XP:looming-hoverguard:f0t0:s1	-	-	-	25696bf19d5b	-	f38cbe0de1a3	-	-	2026-11-24	xproof
 e1c49bdb-cfd1-4ebf-90f7-73bd5009f75e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:looming-hoverguard:f0t0:s1,f:xs:XP:looming-hoverguard:f0t0:s1	-	-	-	25696bf19d5b	-	f38cbe0de1a3	-	-	2026-11-24	xproof
-e1c5bfae-07cb-4194-8a86-201503e17085	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pit-keeper:f0t0:s1,f:xs:XP:pit-keeper:f0t0:s1	-	-	-	23b491658465	-	7045bb67161d	-	-	2026-11-25	xproof
-e1c5bfae-07cb-4194-8a86-201503e17085	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e1c5bfae-07cb-4194-8a86-201503e17085	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pit-keeper:f0t0:s1,f:xs:XP:pit-keeper:f0t0:s1	-	-	-	3aa6ded33acb	-	7045bb67161d	-	-	2026-11-25	xproof
+e1c5bfae-07cb-4194-8a86-201503e17085	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pit-keeper:f0t0:s1,f:xs:XP:pit-keeper:f0t0:s1	-	-	-	3aa6ded33acb	-	7045bb67161d	-	-	2026-11-25	xproof
 e1c6e606-c4e4-4067-8cb9-46753785dfeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:riptide-chronologist:cast:s1,f:xs:XP:riptide-chronologist:cast:s1	-	-	-	fc71ca68c5ac	-	c0a26f731978	-	-	2026-11-24	xproof
 e1c6e606-c4e4-4067-8cb9-46753785dfeb	f0/a0	ChooseType	agreed	-	FX	start	2	0	x:xs:XP:riptide-chronologist:f0a0:s1,f:xs:XP:riptide-chronologist:f0a0:s1	-	-	-	fc71ca68c5ac	-	c0a26f731978	-	-	2026-11-24	xproof
 e1c9783a-1d1b-40d7-872e-0ca11b229ce6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -176,13 +176,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76d93d50-4fc1-4ed4-a6dc-5fb193286b54	cast	cast-resolve	agreed	-	X	scen	1	0	House Cartographer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76d93d50-4fc1-4ed4-a6dc-5fb193286b54	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	House Cartographer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 76d9c310-9d06-43e8-87a9-fb03318a6cb8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76e6c0e7-593a-4b4a-9eb6-a912f9c3f26f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76e6c0e7-593a-4b4a-9eb6-a912f9c3f26f	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 76ec76b9-da0f-4b9d-ad0a-d734052a5f2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heat-ray:cast:s1,f:xs:XP:heat-ray:cast:s1	-	-	-	25696bf19d5b	-	1db7af104c95	-	-	2026-11-24	xproof
 76ed34d2-e09e-4b53-98bd-d96b367fd315	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steam-spitter:cast:s1,f:xs:XP:steam-spitter:cast:s1	-	-	-	0984227a67dd	-	ab62cfc08664	-	-	2026-11-24	xproof
 76ed34d2-e09e-4b53-98bd-d96b367fd315	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:steam-spitter:f0a0:s1,f:xs:XP:steam-spitter:f0a0:s1	-	-	-	d864b561c9cb	-	ab62cfc08664	-	-	2026-11-24	xproof
-76ee013d-5293-4432-b425-649a2e82bd74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76ee013d-5293-4432-b425-649a2e82bd74	cast	cast	agreed	-	F	start	2	0	f:xs:XP:crop-sigil:f0t0:s1	-	-	-	3aa6ded33acb	-	ac906882bbca	-	-	2026-11-25	xproof
 76ee013d-5293-4432-b425-649a2e82bd74	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76ee013d-5293-4432-b425-649a2e82bd74	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76ee013d-5293-4432-b425-649a2e82bd74	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:crop-sigil:f0t0:s1	-	-	-	3aa6ded33acb	-	ac906882bbca	-	-	2026-11-25	xproof
 76f0f39a-ce1b-4935-a6b8-5c4e1a27ab24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76f0f39a-ce1b-4935-a6b8-5c4e1a27ab24	f0/a0	ClassLevelUp/Class	agreed	-	FX	start	2	0	x:xs:XP:rogue-class:f0a1:s1,f:xs:XP:rogue-class:f0a1:s1	-	-	-	23b491658465	-	f2da5276a2e4	-	-	2026-11-25	xproof
 76f0f39a-ce1b-4935-a6b8-5c4e1a27ab24	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -2,9 +2,9 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 cc0cda37-9fea-48c6-897a-45f6b84e1eae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc0cda37-9fea-48c6-897a-45f6b84e1eae	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-cc11efa2-27ca-4745-8178-31576539512a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cc11efa2-27ca-4745-8178-31576539512a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:priest-of-the-wakening-sun:f0t0:s1	-	-	-	3aa6ded33acb	-	cddac857bb6e	-	-	2026-11-25	xproof
 cc11efa2-27ca-4745-8178-31576539512a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cc11efa2-27ca-4745-8178-31576539512a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cc11efa2-27ca-4745-8178-31576539512a	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:priest-of-the-wakening-sun:f0t0:s1	-	-	-	3aa6ded33acb	-	cddac857bb6e	-	-	2026-11-25	xproof
 cc1203cb-6758-4454-b78b-341930ff4da1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc1203cb-6758-4454-b78b-341930ff4da1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc187110-1148-4090-bbb8-e205694a39f5	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -34,7 +34,7 @@ cc33444e-da8c-4af5-b3ed-552e91b0e656	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swo
 cc33444e-da8c-4af5-b3ed-552e91b0e656	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 cc33444e-da8c-4af5-b3ed-552e91b0e656	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 cc3a6c83-a671-4ce8-b98e-434989fb6778	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanguine-savior:cast:s1,f:xs:XP:sanguine-savior:cast:s1	-	-	-	23b491658465	-	1ff639fc0a51	-	-	2026-11-24	xproof
-cc3a6c83-a671-4ce8-b98e-434989fb6778	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sanguine Savior/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cc3a6c83-a671-4ce8-b98e-434989fb6778	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sanguine-savior:combat0.attack:s1,f:xs:XP:sanguine-savior:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1ff639fc0a51	-	-	2026-11-25	xproof
 cc3a6c83-a671-4ce8-b98e-434989fb6778	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sanguine-savior:combat0.block:s1,f:xs:XP:sanguine-savior:combat0.block:s1	-	-	-	3aa6ded33acb	-	1ff639fc0a51	-	-	2026-11-25	xproof
 cc3a6c83-a671-4ce8-b98e-434989fb6778	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sanguine Savior/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc3abacc-6643-49c5-8df8-5b56ab20fba5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -49,8 +49,8 @@ cc4e8b8e-f615-4842-84c5-d6154986b666	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cc4e8b8e-f615-4842-84c5-d6154986b666	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc4e8b8e-f615-4842-84c5-d6154986b666	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cc5370e0-a0e6-4958-a6f2-093a3868b575	cast	cast-resolve	agreed	-	X	scen	1	0	Curious Cadaver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cc5370e0-a0e6-4958-a6f2-093a3868b575	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Curious Cadaver/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cc5370e0-a0e6-4958-a6f2-093a3868b575	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Curious Cadaver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cc5370e0-a0e6-4958-a6f2-093a3868b575	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:curious-cadaver:combat0.attack:s1,f:xs:XP:curious-cadaver:combat0.attack:s1	-	-	-	3aa6ded33acb	-	84a1a79d69e8	-	-	2026-11-25	xproof
+cc5370e0-a0e6-4958-a6f2-093a3868b575	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:curious-cadaver:combat0.block:s1,f:xs:XP:curious-cadaver:combat0.block:s1	-	-	-	3aa6ded33acb	-	84a1a79d69e8	-	-	2026-11-25	xproof
 cc5370e0-a0e6-4958-a6f2-093a3868b575	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Curious Cadaver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc545c68-829f-4c57-94d2-cd1edf2667a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc545c68-829f-4c57-94d2-cd1edf2667a7	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
