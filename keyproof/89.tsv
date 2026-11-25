@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 898da62e-d29a-4ddc-be69-2ddec54614f5	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:cackling-prowler:f0t1:s1,f:xs:XP:cackling-prowler:f0t1:s1	-	-	-	23c4009444b0	-	01d42725b74d	-	-	2026-11-25	xproof
 898e480d-c44e-4080-910a-f53e4ee471e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dovin-s-acuity:f0t0:s1,f:xs:XP:dovin-s-acuity:f0t0:s1	-	-	-	d864b561c9cb	-	0ca46960a502	-	-	2026-11-24	xproof
 898e480d-c44e-4080-910a-f53e4ee471e1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dovin-s-acuity:f0t0:s1,f:xs:XP:dovin-s-acuity:f0t0:s1	-	-	-	d864b561c9cb	-	0ca46960a502	-	-	2026-11-24	xproof
-898e480d-c44e-4080-910a-f53e4ee471e1	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+898e480d-c44e-4080-910a-f53e4ee471e1	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:dovin-s-acuity:f0t1:s1,f:xs:XP:dovin-s-acuity:f0t1:s1	-	-	-	336eab778104	-	0ca46960a502	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 899007b5-6a07-4491-9104-bb537106b07d	cast	cast-resolve	agreed	-	FX	scen	2	0	Thunderous Velocipede/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 899007b5-6a07-4491-9104-bb537106b07d	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Thunderous Velocipede/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8991b367-6fc1-4de7-a1ee-4edb57c44fc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

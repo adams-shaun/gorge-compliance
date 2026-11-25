@@ -23,8 +23,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 632e2979-d88a-482e-9bb8-57b683c5310f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Secret Tunnel/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 632f1034-d2ad-432a-a79a-4bd1307be24a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:planar-gate:cast:s1,f:xs:XP:planar-gate:cast:s1	-	-	-	fc71ca68c5ac	-	916e05a09fb3	-	-	2026-11-24	xproof
 63324e72-e580-456a-91be-766c9f07b7b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6332d6d3-1d77-486c-b040-02fc7225f245	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-6332d6d3-1d77-486c-b040-02fc7225f245	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+6332d6d3-1d77-486c-b040-02fc7225f245	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nahiri-storm-of-stone:cast:s1,f:xs:XP:nahiri-storm-of-stone:cast:s1	-	-	-	336eab778104	-	b1fd85acce13	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+6332d6d3-1d77-486c-b040-02fc7225f245	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6336401f-4e2d-4ebe-8c5b-24aa6f516abf	cast	cast-resolve	agreed	-	FX	scen	2	0	Fleeting Flight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 633849f6-fad7-49d7-8bf5-2a3a4510965f	cast	cast	agreed	-	X	start	2	0	x:xs:XP:highland-berserker:f0t0:s1	-	-	-	8a1b1a193ec0	-	11aa07aa210f	-	-	2026-11-24	xproof
 633849f6-fad7-49d7-8bf5-2a3a4510965f	f0/t0	ChangesZone	agreed	-	X	start	2	0	x:xs:XP:highland-berserker:f0t0:s1	-	-	-	8a1b1a193ec0	-	11aa07aa210f	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 635cc10e-ca25-49a2-af44-3b064263a254	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 635cc10e-ca25-49a2-af44-3b064263a254	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:elixir-of-vitality:f0a1:s1,f:xs:XP:elixir-of-vitality:f0a1:s1	-	-	-	8c0bd19283bb	-	f00d14477811	-	-	2026-11-24	xproof
 635dda8c-3761-4c87-8723-8cd09878516b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-635dda8c-3761-4c87-8723-8cd09878516b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+635dda8c-3761-4c87-8723-8cd09878516b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kronch-wrangler:f0t0:s1,f:xs:XP:kronch-wrangler:f0t0:s1	-	-	-	336eab778104	-	c04ba2c445a0	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 635fe908-6f58-4c9e-ac55-0775a7c6f278	cast	cast-resolve	agreed	-	FX	scen	2	0	Angel of Vitality/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 635fe908-6f58-4c9e-ac55-0775a7c6f278	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:angel-of-vitality:combat0.attack:s1,f:xs:XP:angel-of-vitality:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8a48adad5be2	-	-	2026-11-25	xproof
 635fe908-6f58-4c9e-ac55-0775a7c6f278	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:angel-of-vitality:combat0.block:s1,f:xs:XP:angel-of-vitality:combat0.block:s1	-	-	-	3aa6ded33acb	-	8a48adad5be2	-	-	2026-11-25	xproof

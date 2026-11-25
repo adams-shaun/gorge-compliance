@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a651557-ce08-46ba-aecd-0e4fbfdef3c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bile-vial-boggart:cast:s1,f:xs:XP:bile-vial-boggart:cast:s1	-	-	-	23c4009444b0	-	1eea019a75d5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5a651557-ce08-46ba-aecd-0e4fbfdef3c0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bile-vial-boggart:f0t0:s1,f:xs:XP:bile-vial-boggart:f0t0:s1	-	-	-	23c4009444b0	-	1eea019a75d5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5a66802a-76f9-4a31-a776-24110dcfca64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a66802a-76f9-4a31-a776-24110dcfca64	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+5a66802a-76f9-4a31-a776-24110dcfca64	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 5a680186-a84d-400f-9452-76f19bdfafa3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:molten-blast:cast:s1,f:xs:XP:molten-blast:cast:s1	-	-	-	ae86f6029288	-	04d14b0d9c67	-	-	2026-11-24	xproof
 5a682ec5-78e6-4238-b5c2-e94b7a8f8066	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a682ec5-78e6-4238-b5c2-e94b7a8f8066	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
@@ -149,8 +149,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5aa12aff-db3c-4be5-822b-3afdf536b33e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5aa3abf1-d56b-4f42-8c84-7e5a2c15ee0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5aa3abf1-d56b-4f42-8c84-7e5a2c15ee0f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5aa3abf1-d56b-4f42-8c84-7e5a2c15ee0f	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-5aa3abf1-d56b-4f42-8c84-7e5a2c15ee0f	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+5aa3abf1-d56b-4f42-8c84-7e5a2c15ee0f	f0/a1	Effect	agreed	-	F	start	2	0	f:xs:XP:nissa-who-shakes-the-world:f0a1:s1	-	-	-	336eab778104	-	7bf0a2142816	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5aa3abf1-d56b-4f42-8c84-7e5a2c15ee0f	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 5aa66cb0-86b9-4e85-9a17-df78416d682d	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 5aa6d553-a144-4c5b-83fa-65e931903899	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viridian-shaman:f0t0:s1,f:xs:XP:viridian-shaman:f0t0:s1	-	-	-	25696bf19d5b	-	e8369f86c551	-	-	2026-11-24	xproof
 5aa6d553-a144-4c5b-83fa-65e931903899	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:viridian-shaman:f0t0:s1,f:xs:XP:viridian-shaman:f0t0:s1	-	-	-	25696bf19d5b	-	e8369f86c551	-	-	2026-11-24	xproof

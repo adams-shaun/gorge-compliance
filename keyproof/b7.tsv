@@ -87,7 +87,7 @@ b75ffa62-a291-44d7-a950-b50c8394e066	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Deepm
 b7618312-6835-4851-9651-b5402001b3b0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:swiftgear-drake:cast:s1,f:xs:XP:swiftgear-drake:cast:s1	-	-	-	ae86f6029288	-	54fe09f7186a	-	-	2026-11-24	xproof
 b7618312-6835-4851-9651-b5402001b3b0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:swiftgear-drake:cast:s1,f:xs:XP:swiftgear-drake:cast:s1	-	-	-	ae86f6029288	-	54fe09f7186a	-	-	2026-11-24	xproof
 b7639d86-4c7c-423f-8b13-fde3086d3cbb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b7639d86-4c7c-423f-8b13-fde3086d3cbb	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b7639d86-4c7c-423f-8b13-fde3086d3cbb	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 b76566a9-f998-4a20-b073-4b60862843c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dismiss-into-dream:cast:s1,f:xs:XP:dismiss-into-dream:cast:s1	-	-	-	d864b561c9cb	-	789bcf546d14	-	-	2026-11-24	xproof
 b767bd0a-a8fe-49d7-a3e7-4f9ac6a3280f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sunblade-samurai:cast:s1,f:xs:XP:sunblade-samurai:cast:s1	-	-	-	d864b561c9cb	-	d1b626a8accc	-	-	2026-11-24	xproof
 b767bd0a-a8fe-49d7-a3e7-4f9ac6a3280f	f0/a0	ChangeZone	agreed	-	FX	start	1	0	x:xs:XP:sunblade-samurai:cast:s2,f:xs:XP:sunblade-samurai:cast:s2	-	-	-	d864b561c9cb	-	d1b626a8accc	-	-	2026-11-24	xproof
@@ -178,9 +178,9 @@ b7d69422-b90b-4149-8c6d-eef636d5c6f5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 b7d7418d-222b-4ae0-b0d9-9ea71d6ad800	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b7d7418d-222b-4ae0-b0d9-9ea71d6ad800	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b7da26c9-78a6-41c5-a5ef-6555e8274d7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ral-storm-conduit:cast:s1,f:xs:XP:ral-storm-conduit:cast:s1	-	-	-	d864b561c9cb	-	3dd02ac9c196	-	-	2026-11-24	xproof
-b7da26c9-78a6-41c5-a5ef-6555e8274d7a	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:ral-storm-conduit:cast:s1,f:xs:XP:ral-storm-conduit:cast:s1	-	-	-	d864b561c9cb	-	3dd02ac9c196	-	-	2026-11-24	xproof
-b7da26c9-78a6-41c5-a5ef-6555e8274d7a	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-b7da26c9-78a6-41c5-a5ef-6555e8274d7a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+b7da26c9-78a6-41c5-a5ef-6555e8274d7a	f0/a0	Scry	agreed	-	FX	start	1	0	x:xs:XP:ral-storm-conduit:f0t0:s1,f:xs:XP:ral-storm-conduit:f0t0:s1	-	-	-	336eab778104	-	3dd02ac9c196	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+b7da26c9-78a6-41c5-a5ef-6555e8274d7a	f0/a1	DelayedTrigger	agreed	-	FX	start	3	0	x:xs:XP:ral-storm-conduit:f0a1:s1,f:xs:XP:ral-storm-conduit:f0a1:s1	-	-	-	336eab778104	-	3dd02ac9c196	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+b7da26c9-78a6-41c5-a5ef-6555e8274d7a	f0/t0	SpellCastOrCopy	agreed	-	FX	start	2	0	x:xs:XP:ral-storm-conduit:f0t0:s1,f:xs:XP:ral-storm-conduit:f0t0:s1	-	-	-	336eab778104	-	3dd02ac9c196	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 b7daa74c-6142-4107-9355-be98af6ccf13	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b7ea2089-abcd-4e60-8201-93801eae5084	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:khan-despot-by-design:f0t0:s1,f:xs:XP:khan-despot-by-design:f0t0:s1	-	-	-	25696bf19d5b	-	ae06a93b7423	-	-	2026-11-24	xproof
 b7ea2089-abcd-4e60-8201-93801eae5084	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:khan-despot-by-design:f0t0:s1,f:xs:XP:khan-despot-by-design:f0t0:s1	-	-	-	25696bf19d5b	-	ae06a93b7423	-	-	2026-11-24	xproof

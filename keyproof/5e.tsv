@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e238e67-00f2-4656-bf69-0115e47321a5	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:crimestopper-sprite:f0t0:s2,f:xs:XP:crimestopper-sprite:f0t0:s2	-	-	-	e07cf3a05ba5	-	eeab9d2f4902	-	-	2026-11-24	xproof
 5e238e67-00f2-4656-bf69-0115e47321a5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Crimestopper Sprite/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5e2736e6-b812-43a4-bd79-6f6095344fe1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saruli-caretaker:cast:s1,f:xs:XP:saruli-caretaker:cast:s1	-	-	-	d864b561c9cb	-	0184cde04f11	-	-	2026-11-24	xproof
-5e2736e6-b812-43a4-bd79-6f6095344fe1	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+5e2736e6-b812-43a4-bd79-6f6095344fe1	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:saruli-caretaker:f0a0:s1,f:xs:XP:saruli-caretaker:f0a0:s1	-	-	-	336eab778104	-	0184cde04f11	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 5e277de5-793a-4364-923a-a55b53c0fa85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e277de5-793a-4364-923a-a55b53c0fa85	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5e2958fd-ede6-4563-babc-4924d3e95754	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:u-s-s-enterprise-a-free-spirit:f0t0:s1,f:xs:XP:u-s-s-enterprise-a-free-spirit:f0t0:s1	-	-	-	25696bf19d5b	-	cd7fa51a4a5e	-	-	2026-11-24	xproof
@@ -86,7 +86,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e715875-28e0-44b4-af25-f6bb8ddec823	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ral-s-outburst:cast:s1,f:xs:XP:ral-s-outburst:cast:s1	-	-	-	d864b561c9cb	-	dd3215427d3e	-	-	2026-11-24	xproof
 5e73c8d2-5cad-4201-b9ef-32be82797e3b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e73c8d2-5cad-4201-b9ef-32be82797e3b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5e73c8d2-5cad-4201-b9ef-32be82797e3b	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5e73c8d2-5cad-4201-b9ef-32be82797e3b	f0/t0	NULL	owed	refused:no-generator:trigger:Attacks:noncreature	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 5e7586dd-d42e-4ac6-adb8-d46b6cdef923	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5e78e6e0-60f0-4c3c-b8dd-bd673f5152b8	cast	cast-resolve	agreed	-	FX	scen	2	0	Viashino Pyromancer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5e78e6e0-60f0-4c3c-b8dd-bd673f5152b8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

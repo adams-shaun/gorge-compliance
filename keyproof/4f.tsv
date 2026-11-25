@@ -92,7 +92,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 4f69d2f9-c16a-4752-9026-794a29d73af8	f0/t1	NULL	owed	refused:no-generator:trigger:CounterAdded	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:orzhov-racketeers:f0t0:s1,f:xs:XP:orzhov-racketeers:f0t0:s1	-	-	-	336eab778104	-	7fe0ff02acb6	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 4f6c9cee-5af7-4b00-a2a4-2770dab0a2dc	f0/t1	ChangesZone/Afterlife	agreed	-	FX	start	2	0	x:xs:XP:orzhov-racketeers:f0t1:s1,f:xs:XP:orzhov-racketeers:f0t1:s1	-	-	-	d864b561c9cb	-	7fe0ff02acb6	-	-	2026-11-24	xproof
 4f6dbd90-f7fe-4adf-a00f-27573c0bd5c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lose-hope:cast:s1,f:xs:XP:lose-hope:cast:s1	-	-	-	23c4009444b0	-	f7cb5f0666af	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4f6e2e47-34df-4bf3-a546-e06b42840167	cast	cast-resolve	agreed	-	FX	scen	2	0	Divine Resilience/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4fbaf052-a8c3-4395-8f40-0cb3a10d5ccd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malakir-cullblade:cast:s1,f:xs:XP:malakir-cullblade:cast:s1	-	-	-	d864b561c9cb	-	e8d48470f919	-	-	2026-11-24	xproof
 4fbaf052-a8c3-4395-8f40-0cb3a10d5ccd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:malakir-cullblade:f0t0:s1,f:xs:XP:malakir-cullblade:f0t0:s1	-	-	-	fb9d3088f0bf	-	e8d48470f919	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 4fbb8e03-22f1-4171-88e9-877244e25613	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4fbb8e03-22f1-4171-88e9-877244e25613	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+4fbb8e03-22f1-4171-88e9-877244e25613	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 4fbe1c02-f5bf-47c7-80de-09a32d01e5db	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:evangel-of-heliod:cast:s1,f:xs:XP:evangel-of-heliod:cast:s1	-	-	-	d864b561c9cb	-	18163c09bf21	-	-	2026-11-24	xproof
 4fbe1c02-f5bf-47c7-80de-09a32d01e5db	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:evangel-of-heliod:cast:s1,f:xs:XP:evangel-of-heliod:cast:s1	-	-	-	d864b561c9cb	-	18163c09bf21	-	-	2026-11-24	xproof
 4fbfc814-df10-4d61-ada9-c96cc8ee8d8c	cast	cast-resolve	agreed	-	FX	scen	2	0	Whirlwing Stormbrood/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
