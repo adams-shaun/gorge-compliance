@@ -220,7 +220,9 @@ func TestForgeRolledDie(t *testing.T) {
 // 6095b085edc = ad4cd3ba0f8 (join14, above) plus the face-down cast modes morphed/megamorphed/disguised
 // (StepMachine.spellForMode only, FaceDownCastModeTest); die-roll code unchanged, ForcedDieRollTest and
 // ForcedCoinFlipTest re-run green on the pin (run-unit-tests.sh, 18 tests).
-const forgeOracleDieRollRef = "6095b085edc3414d3629fb99ba550a0d83efc647"
+// 686e3f82713 = oracle/fpin-1125-join17: join15 (9124c696744, join14 plus the altaddcost tap ability choice) merged with
+// 6095b085edc (above), no textual conflicts; die-roll code unchanged, ForcedDieRollTest re-run green on the pin.
+const forgeOracleDieRollRef = "686e3f827135f1739b173ba77cd861541c8229ee"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
