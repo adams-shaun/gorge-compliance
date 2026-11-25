@@ -16,8 +16,14 @@
 # with a queued yes/no still takes that answer, and one with no answer keeps
 # the strict miss.
 #
+# The trigger-borne half (xproof cluster xpt-c5e9f646) is Speedball, New Warrior's
+# "You may choose new targets for that spell" (ChangeTargets, Defined$
+# TriggeredSpellAbility, Optional$ True) on a Ranger's Guile that targets it:
+# gorge's retarget ask is a choose_n over the old target with a blank pick, and
+# the confirm in front of it must consume it instead of strict-missing.
+#
 # Needs the out-of-tree build at FORGE_ORACLE_REF (make forge-oracle-setup).
-# The wrapper asserts the five named tests passed, not just the exit status.
+# The wrapper asserts the six named tests passed, not just the exit status.
 # Usage: forge-oracle-test-change-targets.sh [OUTDIR]
 set -euo pipefail
 
