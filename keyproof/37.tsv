@@ -7,10 +7,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37042a3e-c377-4282-80f9-068e4955f8a1	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:doombot-harbinger:f0t1:s1,f:xs:XP:doombot-harbinger:f0t1:s1	-	-	-	8c0bd19283bb	-	f5ee1a8b30b0	-	-	2026-11-24	xproof
 37043e1e-4556-45f7-9484-15dd8ed5272b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rat-out:cast:s1,f:xs:XP:rat-out:cast:s1	-	-	-	23b491658465	-	87259be59f39	-	-	2026-11-24	xproof
 37069c66-c17a-40ac-80f4-14ef49d18008	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:machine-over-matter:cast:s2,f:xs:XP:machine-over-matter:cast:s2	-	-	-	ae86f6029288	-	af2655830124	-	-	2026-11-24	xproof
-370aced9-d8bc-4abe-b648-4c62b5aee5ba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:t-45-power-armor:cast:s1,f:xs:XP:t-45-power-armor:cast:s1	-	-	-	65d07beecc37	-	a17155022812	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
-370aced9-d8bc-4abe-b648-4c62b5aee5ba	f0/a0	Attach/Equip	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	a17155022812	-	-	2026-11-25	xproof
-370aced9-d8bc-4abe-b648-4c62b5aee5ba	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:t-45-power-armor:cast:s1,f:xs:XP:t-45-power-armor:cast:s1	-	-	-	65d07beecc37	-	a17155022812	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
-370aced9-d8bc-4abe-b648-4c62b5aee5ba	f0/t1	Phase	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	a17155022812	-	-	2026-11-25	xproof
+370aced9-d8bc-4abe-b648-4c62b5aee5ba	cast	cast	agreed	-	F	start	2	0	f:xs:XP:t-45-power-armor:f0t1:s1	-	-	-	b8f573385218	-	a17155022812	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
+370aced9-d8bc-4abe-b648-4c62b5aee5ba	f0/a0	Attach/Equip	agreed	-	F	start	2	0	f:xs:XP:t-45-power-armor:f0t1:s1	-	-	-	b8f573385218	-	a17155022812	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
+370aced9-d8bc-4abe-b648-4c62b5aee5ba	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:t-45-power-armor:f0t1:s1	-	-	-	b8f573385218	-	a17155022812	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
+370aced9-d8bc-4abe-b648-4c62b5aee5ba	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:t-45-power-armor:f0t1:s1	-	-	-	b8f573385218	-	a17155022812	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
 370c37f7-2484-40e8-8fd9-c10cf6f5d5f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 370c37f7-2484-40e8-8fd9-c10cf6f5d5f2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 370c37f7-2484-40e8-8fd9-c10cf6f5d5f2	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3741206f-8ef5-4b8f-ae4c-df3ab0a17683	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toph-greatest-earthbender:f0t0:s1,f:xs:XP:toph-greatest-earthbender:f0t0:s1	-	-	-	8c0bd19283bb	-	b7db4e7e70f9	-	-	2026-11-24	xproof
 3741206f-8ef5-4b8f-ae4c-df3ab0a17683	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:toph-greatest-earthbender:f0t0:s1,f:xs:XP:toph-greatest-earthbender:f0t0:s1	-	-	-	8c0bd19283bb	-	b7db4e7e70f9	-	-	2026-11-24	xproof
 37420ccd-c6c6-4f15-a696-d8986934afb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37420ccd-c6c6-4f15-a696-d8986934afb5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+37420ccd-c6c6-4f15-a696-d8986934afb5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	6d6b2d485aba6ea3d31b3b67ba0e4af70a1bd6ef	2026-11-25	xproof
 37429f88-e29b-4b1b-90fd-23a04d703c0a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hail-of-arrows:cast:s1,f:xs:XP:hail-of-arrows:cast:s1	-	-	-	64a08ba7d913	-	b78dd8bfed0e	-	-	2026-11-24	xproof
 37445e06-88a1-4e2e-a432-383736c9b977	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 37445e06-88a1-4e2e-a432-383736c9b977	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
