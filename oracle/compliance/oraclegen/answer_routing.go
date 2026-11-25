@@ -71,6 +71,11 @@ type answerRouting struct {
 	// ownBounce marks the steps whose hidden pick is an own-bounce effect
 	// (own_bounce_source.go): XMage reads that pick from the TARGET queue.
 	ownBounce map[int]bool
+	// ownGraveyardExile marks the steps whose mandatory hidden pick is an
+	// own-graveyard exile face (own_graveyard_exile_source.go): XMage's
+	// ExileCardFromOwnGraveyardControllerEffect reads the whole pick as one
+	// TARGET definition, one "^" segment per card.
+	ownGraveyardExile map[int]bool
 	// searchZones maps a search_zones decision index to the XMage ask shape it
 	// answers (search_zone_source.go). An absent index is an unknown effect
 	// shape and stays unscripted rather than answering the wrong prompt.
@@ -758,6 +763,13 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// This pay/decline election was answered with its X announcement
 		// above; emitting it again would leave a stray boolean.
 		return as, true
+	}
+	if as2 := r.ownGraveyardExileTargetAnswers(i); as2 != nil {
+		// A proven own-graveyard exile's mandatory hidden pick: XMage's
+		// ExileCardFromOwnGraveyardControllerEffect asks one target definition
+		// on the TARGET queue, one "^" segment per pick. The generic choose_n
+		// arm joins them into one makeChoose choice no target ask reads.
+		return append(as, as2...), true
 	}
 	switch {
 	case d.Resume == "search_zones":
