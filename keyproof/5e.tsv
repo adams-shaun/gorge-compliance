@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+5e7eca9c-a7b8-4b7b-a0a0-e8937530145a	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 5e7ef7fe-968b-4ada-9fe4-6fda0541aafc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-earth-crystal:cast:s1,f:xs:XP:the-earth-crystal:cast:s1	-	-	-	23c4009444b0	-	2fba595345fd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5e7ef7fe-968b-4ada-9fe4-6fda0541aafc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Earth Crystal/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5e7ef7fe-968b-4ada-9fe4-6fda0541aafc	static#0.0	static.cost	agreed	-	FX	start	2	0	x:xs:XP:the-earth-crystal:static0.0:s1,f:xs:XP:the-earth-crystal:static0.0:s1	-	-	-	6f84be0f34c0	-	2fba595345fd	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -131,8 +131,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ea1d89c-8650-4373-9835-e369587020ef	static#0.0	static#0.0	agreed	-	X	scen	1	0	Pyrrhic Strike/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5ea295af-e117-49cc-836b-da16b5d5bbdf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nullify:cast:s1,f:xs:XP:nullify:cast:s1	-	-	-	9087eefec3ee	-	1c7de249230d	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 5ea3e672-ae14-49a4-badb-f713497dd126	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crystalline-crawler:cast:s1,f:xs:XP:crystalline-crawler:cast:s1	-	-	-	8c0bd19283bb	-	6e23e406ae28	-	-	2026-11-24	xproof
-5ea3e672-ae14-49a4-badb-f713497dd126	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-5ea3e672-ae14-49a4-badb-f713497dd126	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5ea3e672-ae14-49a4-badb-f713497dd126	f0/a0	NULL	owed	refused:start:entry-counter	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+5ea3e672-ae14-49a4-badb-f713497dd126	f0/a1	NULL	owed	refused:start:entry-counter	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 5ea46ccf-5e36-4889-bf64-00d4f327e9b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ea46ccf-5e36-4889-bf64-00d4f327e9b2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ea4d1d7-219b-4842-99ea-291842baca0d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
