@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 994bcde3-4a76-403d-a6e1-88609a13a99c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 994db177-03f5-43dd-bf7b-2994e8d430d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 994de451-14f9-466f-a56e-da052b4666e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-994de451-14f9-466f-a56e-da052b4666e5	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+994de451-14f9-466f-a56e-da052b4666e5	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 994e27e1-0bff-47c9-a1e6-b9e3ae4ffb1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 994e27e1-0bff-47c9-a1e6-b9e3ae4ffb1e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	30e95cdd1f63	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 99545320-b6ad-4caf-b29a-47f637395ef7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -107,8 +107,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 997bdec5-f67b-4822-a3ba-c636e2685e8a	cast	cast-resolve	agreed	-	FX	scen	2	0	Cruel Somnophage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 997bdec5-f67b-4822-a3ba-c636e2685e8a	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:cruel-somnophage-can-t-wake-up:static0.0:s1,f:xs:XP:cruel-somnophage-can-t-wake-up:static0.0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 997d2f38-5a50-451e-bd48-e36dcb24d967	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-997d2f38-5a50-451e-bd48-e36dcb24d967	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	30e95cdd1f63	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	efd75d00b34da0fe9d0079dd5c9986f3525d6f67	2026-11-25	xproof
-997f5a5a-9ee1-4b66-9ffc-d1a2e996e615	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	30e95cdd1f63	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	efd75d00b34da0fe9d0079dd5c9986f3525d6f67	2026-11-25	xproof
+997d2f38-5a50-451e-bd48-e36dcb24d967	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+997f5a5a-9ee1-4b66-9ffc-d1a2e996e615	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	32bfe4888a63	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 998484cc-fefc-4da5-9987-5d6e89599c34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9984d950-29dc-4d6b-8750-8d1bf86ea98f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:red-ghost-intangible-genius:cast:s1,f:xs:XP:red-ghost-intangible-genius:cast:s1	-	-	-	8c0bd19283bb	-	d90dd877806a	-	-	2026-11-24	xproof
 9984d950-29dc-4d6b-8750-8d1bf86ea98f	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:red-ghost-intangible-genius:f0t0:s1,f:xs:XP:red-ghost-intangible-genius:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
