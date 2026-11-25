@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5502741a-e3b9-454e-8121-4360a6db6750	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5502741a-e3b9-454e-8121-4360a6db6750	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 550811ca-0995-4886-aa8c-5cee118aa54f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-550811ca-0995-4886-aa8c-5cee118aa54f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+550811ca-0995-4886-aa8c-5cee118aa54f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:spellgorger-weird:f0t0:s1,f:xs:XP:spellgorger-weird:f0t0:s1	-	-	-	336eab778104	-	4a1c5f1f68f2	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 550921f5-ec65-460d-9ada-f2c5a4c4b2c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 550921f5-ec65-460d-9ada-f2c5a4c4b2c4	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 550abd9b-9aae-4812-9bc0-7f131d6dcde8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:untamed-hunger:cast:s1,f:xs:XP:untamed-hunger:cast:s1	-	-	-	8c0bd19283bb	-	3019443d4439	-	-	2026-11-24	xproof
@@ -128,7 +128,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 55b0518e-9c87-4f0e-81c2-9c984f760be1	cast	cast-resolve	agreed	-	FX	scen	2	0	Twist Reality/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55b12241-2495-45e6-b618-3746d5521291	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alpine-guide:f0t0:s1,f:xs:XP:alpine-guide:f0t0:s1	-	-	-	d864b561c9cb	-	38ba7b37ec80	-	-	2026-11-24	xproof
 55b12241-2495-45e6-b618-3746d5521291	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:alpine-guide:f0t0:s1,f:xs:XP:alpine-guide:f0t0:s1	-	-	-	d864b561c9cb	-	38ba7b37ec80	-	-	2026-11-24	xproof
-55b12241-2495-45e6-b618-3746d5521291	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+55b12241-2495-45e6-b618-3746d5521291	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:alpine-guide:f0t1:s1,f:xs:XP:alpine-guide:f0t1:s1	-	-	-	336eab778104	-	38ba7b37ec80	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 55b88d43-ec45-4435-a316-1c8aee249ff0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55b88d43-ec45-4435-a316-1c8aee249ff0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55bc5d06-7dd1-4403-af32-0e10d8bbe327	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
