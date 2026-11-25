@@ -569,7 +569,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # scripts/forge-oracle-test-foretell-cast-mode.sh and forge-oracle-test-riot-choice.sh replay the finds. Driver-only;
 # die-roll code, cardsfolder and tokenscripts unchanged.
 # c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
-FORGE_ORACLE_REF ?= c9419dd87a36a901c602460432e9731203211e1d
+# 1a2655bbd3 = oracle/fpin-1125 c9419dd87a (above) + fork branch fix/xp-forge-driver-evoke-trigger-label: StepMachine.triggerScore binds
+# gorge's fixed Evoke label "<card>: sacrifice it (evoked)" (CR 702.74a, trigger_queue.go) to the host's Forge trigger whose keyword is
+# Evoke, so orderTriggers no longer misses it beside an ETB trigger (CR 603.3b; Emptiness, Catharsis; xpt-58b75f98, xpt-93baef91).
+# TriggerOrderEvokeLabelTest fails before it. Driver-only; cardsfolder and tokenscripts unchanged.
+FORGE_ORACLE_REF ?= 1a2655bbd3090d5c66433b8964a5cbf8e5082fcd
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
