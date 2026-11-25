@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a42fd1d-a2c3-40c4-8c34-7a3559aa9caf	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 1a44261a-2b6a-45dc-91a4-b2eb219ba6fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a46373a-b48a-4118-92e0-d856ce409690	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1a46373a-b48a-4118-92e0-d856ce409690	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+1a46373a-b48a-4118-92e0-d856ce409690	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1a46373a-b48a-4118-92e0-d856ce409690	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a49ec1c-6150-4b46-b671-b7d6f4e301ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a49ec1c-6150-4b46-b671-b7d6f4e301ae	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -82,10 +82,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a82be68-3b74-4dfc-9068-3abea61db709	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:fell-gravship:static0.0:s1,f:xs:XP:fell-gravship:static0.0:s1	-	-	-	3aa6ded33acb	-	772a3850b942	-	-	2026-11-25	xproof
 1a840210-204d-41cd-afc0-46abf7ea5f87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a840210-204d-41cd-afc0-46abf7ea5f87	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-1a846ad6-15c9-4bf9-9127-612018a557b9	cast	cast-resolve	agreed	-	X	scen	1	0	Judge Magister Gabranth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1a846ad6-15c9-4bf9-9127-612018a557b9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Judge Magister Gabranth/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1a846ad6-15c9-4bf9-9127-612018a557b9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Judge Magister Gabranth/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1a846ad6-15c9-4bf9-9127-612018a557b9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Judge Magister Gabranth/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1a846ad6-15c9-4bf9-9127-612018a557b9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:judge-magister-gabranth:cast:s1,f:xs:XP:judge-magister-gabranth:cast:s1	-	-	-	23c4009444b0	-	e41205c983f4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1a846ad6-15c9-4bf9-9127-612018a557b9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:judge-magister-gabranth:combat0.attack:s1,f:xs:XP:judge-magister-gabranth:combat0.attack:s1	-	-	-	23c4009444b0	-	e41205c983f4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1a846ad6-15c9-4bf9-9127-612018a557b9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:judge-magister-gabranth:combat0.block:s1,f:xs:XP:judge-magister-gabranth:combat0.block:s1	-	-	-	23c4009444b0	-	e41205c983f4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1a846ad6-15c9-4bf9-9127-612018a557b9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:judge-magister-gabranth:f0t0:s1,f:xs:XP:judge-magister-gabranth:f0t0:s1	-	-	-	23c4009444b0	-	e41205c983f4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1a852283-42d4-4197-91b9-5c952c7325ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a852283-42d4-4197-91b9-5c952c7325ca	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a85ba2b-ae10-4917-954a-7709b75a9740	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:tainted-pact:cast:s1,f:xs:XP:tainted-pact:cast:s1	-	-	-	fc71ca68c5ac	-	9d58ed13a13c	-	-	2026-11-24	xproof

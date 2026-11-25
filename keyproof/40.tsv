@@ -173,8 +173,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40eacdae-fae5-46b9-a9e5-9211469f74fc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 40eacdae-fae5-46b9-a9e5-9211469f74fc	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:ezuri-claw-of-progress:cast:s1,f:xs:XP:ezuri-claw-of-progress:cast:s1	-	-	-	8c0bd19283bb	-	331c4bb03878	-	-	2026-11-24	xproof
 40eb7f43-7cee-41a1-a4d1-f34ee125ccd1	cast	cast-resolve	agreed	-	FX	scen	2	0	Skirmish Rhino/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-40eb7f43-7cee-41a1-a4d1-f34ee125ccd1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Skirmish Rhino/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-40eb7f43-7cee-41a1-a4d1-f34ee125ccd1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Skirmish Rhino/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+40eb7f43-7cee-41a1-a4d1-f34ee125ccd1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:skirmish-rhino:combat0.attack:s1,f:xs:XP:skirmish-rhino:combat0.attack:s1	-	-	-	23c4009444b0	-	eb69fdb21abe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+40eb7f43-7cee-41a1-a4d1-f34ee125ccd1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:skirmish-rhino:combat0.block:s1,f:xs:XP:skirmish-rhino:combat0.block:s1	-	-	-	23c4009444b0	-	eb69fdb21abe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 40eb7f43-7cee-41a1-a4d1-f34ee125ccd1	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40eb9904-dea3-47cf-963a-04821f98ba64	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40eb9904-dea3-47cf-963a-04821f98ba64	f0/a1	ChoosePlayer	agreed	-	FX	start	2	0	x:xs:XP:the-black-gate:f0a1:s1,f:xs:XP:the-black-gate:f0a1:s1	-	-	-	8c0bd19283bb	-	ffb51a3e684e	-	-	2026-11-24	xproof

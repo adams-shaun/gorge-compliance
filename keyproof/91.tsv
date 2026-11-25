@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91081181-aec6-47de-b8ef-241a2f4fe880	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 910860ce-d617-48c1-b44d-b1d95cdd006f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:neurok-prodigy:cast:s1,f:xs:XP:neurok-prodigy:cast:s1	-	-	-	25696bf19d5b	-	c969dff50a1c	-	-	2026-11-24	xproof
 910860ce-d617-48c1-b44d-b1d95cdd006f	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:neurok-prodigy:f0a0:s1,f:xs:XP:neurok-prodigy:f0a0:s1	-	-	-	23c4009444b0	-	c969dff50a1c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-9108fffb-90f4-444e-8d3e-46a3d4ff3681	cast	cast-resolve	agreed	-	X	scen	1	0	Commune with Beavers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9108fffb-90f4-444e-8d3e-46a3d4ff3681	cast	cast	agreed	-	F	start	2	0	f:xs:XP:commune-with-beavers:cast:s1	-	-	-	23c4009444b0	-	f76cad0b23ce	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 910ae0ca-257d-4b45-b039-f26e7b2f3d5c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 910e8269-6001-479a-ab2e-5a935569c33c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 910f4339-9125-45b7-929f-57e1adb6ac3c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -43,10 +43,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9132d7e6-7190-45e1-9c57-8fe2e5d0f2f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venom-eddie-brock:cast:s1,f:xs:XP:venom-eddie-brock:cast:s1	-	-	-	8c0bd19283bb	-	625c64a1a918	-	-	2026-11-24	xproof
 9132d7e6-7190-45e1-9c57-8fe2e5d0f2f2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 91363d71-eef0-48e8-9a68-8f363ff2790e	cast	cast-resolve	agreed	-	X	scen	1	0	Tend the Sprigs/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-913672bc-cc88-4964-a331-7dbce40f2bda	cast	cast-resolve	agreed	-	X	scen	1	0	Barret Wallace/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-913672bc-cc88-4964-a331-7dbce40f2bda	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Barret Wallace/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-913672bc-cc88-4964-a331-7dbce40f2bda	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Barret Wallace/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-913672bc-cc88-4964-a331-7dbce40f2bda	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Barret Wallace/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+913672bc-cc88-4964-a331-7dbce40f2bda	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barret-wallace:cast:s1,f:xs:XP:barret-wallace:cast:s1	-	-	-	23c4009444b0	-	01df06e12c26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+913672bc-cc88-4964-a331-7dbce40f2bda	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:barret-wallace:combat0.attack:s1,f:xs:XP:barret-wallace:combat0.attack:s1	-	-	-	23c4009444b0	-	01df06e12c26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+913672bc-cc88-4964-a331-7dbce40f2bda	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:barret-wallace:combat0.block:s1,f:xs:XP:barret-wallace:combat0.block:s1	-	-	-	23c4009444b0	-	01df06e12c26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+913672bc-cc88-4964-a331-7dbce40f2bda	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:barret-wallace:combat0.attack:s1,f:xs:XP:barret-wallace:combat0.attack:s1	-	-	-	23c4009444b0	-	01df06e12c26	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 913aed6d-60c3-4d08-baf8-359e2c41a797	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:boris-devilboon:cast:s1,f:xs:XP:boris-devilboon:cast:s1	-	-	-	ae86f6029288	-	8c51d4bc5403	-	-	2026-11-24	xproof
 913aed6d-60c3-4d08-baf8-359e2c41a797	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:boris-devilboon:f0a0:s1,f:xs:XP:boris-devilboon:f0a0:s1	-	-	-	ae86f6029288	-	8c51d4bc5403	-	-	2026-11-24	xproof
 913bca28-faf9-42e6-a8c0-469cd9bc0208	cast	cast-resolve	agreed	-	X	scen	1	0	Earthen Ally/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 913dbce2-6805-453f-a9c3-64f1cc658627	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dragon-sniper:combat0.attack:s1,f:xs:XP:dragon-sniper:combat0.attack:s1	-	-	-	3aa6ded33acb	-	5323bc70e6f2	-	-	2026-11-25	xproof
 913dbce2-6805-453f-a9c3-64f1cc658627	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dragon-sniper:combat0.block:s1,f:xs:XP:dragon-sniper:combat0.block:s1	-	-	-	3aa6ded33acb	-	5323bc70e6f2	-	-	2026-11-25	xproof
 913dcf97-0804-4b21-8daa-f2b481dc0f2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-913dcf97-0804-4b21-8daa-f2b481dc0f2f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+913dcf97-0804-4b21-8daa-f2b481dc0f2f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:briarknit-kami:f0t0:s1,f:xs:XP:briarknit-kami:f0t0:s1	-	-	-	23c4009444b0	-	eae757363fd1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 913e6ff0-b522-45a3-9a1e-4a87a515cc1d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:stark-s-ingenuity:cast:s1,f:xs:XP:stark-s-ingenuity:cast:s1	-	-	-	8c0bd19283bb	-	54d99ecaae72	-	-	2026-11-24	xproof
 913e6ff0-b522-45a3-9a1e-4a87a515cc1d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:stark-s-ingenuity:cast:s1,f:xs:XP:stark-s-ingenuity:cast:s1	-	-	-	8c0bd19283bb	-	54d99ecaae72	-	-	2026-11-24	xproof
 913e6ff0-b522-45a3-9a1e-4a87a515cc1d	f0/t1	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

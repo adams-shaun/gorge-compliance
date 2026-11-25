@@ -22,10 +22,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 081bfd50-a436-463b-9d2c-5bc8a32b387c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 081bfd50-a436-463b-9d2c-5bc8a32b387c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 081db161-1ad0-4ee7-9d34-c415984080f0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-081db161-1ad0-4ee7-9d34-c415984080f0	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+081db161-1ad0-4ee7-9d34-c415984080f0	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 08261613-1af3-4bd7-9a4d-a366fd508d5f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08261b68-b261-4e47-a085-c489ba394108	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0826cf7d-7ccc-459b-a92f-29dc169628f8	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+0826cf7d-7ccc-459b-a92f-29dc169628f8	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0826cf7d-7ccc-459b-a92f-29dc169628f8	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0828d891-f7c3-4e51-b42e-6ce88d48ac8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:icewrought-sentry:cast:s1,f:xs:XP:icewrought-sentry:cast:s1	-	-	-	23b491658465	-	27d0cfc12c77	-	-	2026-11-24	xproof
 0828d891-f7c3-4e51-b42e-6ce88d48ac8b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:icewrought-sentry:combat0.attack:s1,f:xs:XP:icewrought-sentry:combat0.attack:s1	-	-	-	3aa6ded33acb	-	27d0cfc12c77	-	-	2026-11-25	xproof
@@ -102,9 +102,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 088a1f56-198c-41a1-b244-ec1c7a771041	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:maul-of-the-skyclaves:f0t0:s1,f:xs:XP:maul-of-the-skyclaves:f0t0:s1	-	-	-	ae86f6029288	-	6868723e37ca	-	-	2026-11-24	xproof
 088a63d4-22d2-4061-8aef-2aa3fc348639	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shrieking-mogg:f0t0:s1,f:xs:XP:shrieking-mogg:f0t0:s1	-	-	-	5f2128bf97e4	-	b3992f4c260f	-	-	2026-11-24	xproof
 088a63d4-22d2-4061-8aef-2aa3fc348639	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shrieking-mogg:f0t0:s1,f:xs:XP:shrieking-mogg:f0t0:s1	-	-	-	5f2128bf97e4	-	b3992f4c260f	-	-	2026-11-24	xproof
-088acd15-029b-4091-960a-d5060a364ca9	cast	cast-resolve	agreed	-	X	scen	1	0	Blazing Bomb/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-088acd15-029b-4091-960a-d5060a364ca9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Blazing Bomb/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-088acd15-029b-4091-960a-d5060a364ca9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Blazing Bomb/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+088acd15-029b-4091-960a-d5060a364ca9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blazing-bomb:cast:s1,f:xs:XP:blazing-bomb:cast:s1	-	-	-	23c4009444b0	-	5f5ddf81c876	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+088acd15-029b-4091-960a-d5060a364ca9	f0/a0	DealDamage	agreed	-	FX	start	4	0	x:xs:XP:blazing-bomb:f0a0:s1,f:xs:XP:blazing-bomb:f0a0:s1	-	-	-	23c4009444b0	-	5f5ddf81c876	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+088acd15-029b-4091-960a-d5060a364ca9	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:blazing-bomb:f0t0:s1,f:xs:XP:blazing-bomb:f0t0:s1	-	-	-	23c4009444b0	-	5f5ddf81c876	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 088d63ec-bd5e-4e80-acf9-2af270a9b395	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:incubator-drone:f0t0:s1,f:xs:XP:incubator-drone:f0t0:s1	-	-	-	d864b561c9cb	-	a13883ea73ed	-	-	2026-11-24	xproof
 088d63ec-bd5e-4e80-acf9-2af270a9b395	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:incubator-drone:f0t0:s1,f:xs:XP:incubator-drone:f0t0:s1	-	-	-	d864b561c9cb	-	a13883ea73ed	-	-	2026-11-24	xproof
 088dfd02-c0e0-41d1-9923-efe023fb2ad1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

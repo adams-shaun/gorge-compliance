@@ -6,10 +6,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5707c278-dab9-43bc-b3a3-a6b7923511f4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5707c278-dab9-43bc-b3a3-a6b7923511f4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57085b8e-a85e-4d50-a7d2-9bddfdaf411c	cast	cast-resolve	agreed	-	FX	scen	2	0	Sugar Rush/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-570cb560-c246-4652-b230-ab34f966c78a	cast	cast-resolve	agreed	-	X	scen	1	0	Balthier and Fran/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-570cb560-c246-4652-b230-ab34f966c78a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Balthier and Fran/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-570cb560-c246-4652-b230-ab34f966c78a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Balthier and Fran/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-570cb560-c246-4652-b230-ab34f966c78a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Balthier and Fran/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+570cb560-c246-4652-b230-ab34f966c78a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:balthier-and-fran:cast:s1,f:xs:XP:balthier-and-fran:cast:s1	-	-	-	23c4009444b0	-	7791b8534fcf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+570cb560-c246-4652-b230-ab34f966c78a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:balthier-and-fran:combat0.attack:s1,f:xs:XP:balthier-and-fran:combat0.attack:s1	-	-	-	23c4009444b0	-	7791b8534fcf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+570cb560-c246-4652-b230-ab34f966c78a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:balthier-and-fran:combat0.block:s1,f:xs:XP:balthier-and-fran:combat0.block:s1	-	-	-	23c4009444b0	-	7791b8534fcf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+570cb560-c246-4652-b230-ab34f966c78a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:balthier-and-fran:f0t0:s1,f:xs:XP:balthier-and-fran:f0t0:s1	-	-	-	23c4009444b0	-	7791b8534fcf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 570cb560-c246-4652-b230-ab34f966c78a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Balthier and Fran/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57120486-0316-4591-abca-438ab8283d3f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:cragsmasher-yeti:cast:s1,f:xs:XP:cragsmasher-yeti:cast:s1	-	-	-	ae86f6029288	-	87fb92a7eab9	-	-	2026-11-24	xproof
 57120486-0316-4591-abca-438ab8283d3f	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	4	0	x:xs:XP:cragsmasher-yeti:cast:s1,f:xs:XP:cragsmasher-yeti:cast:s1	-	-	-	d864b561c9cb	-	87fb92a7eab9	-	-	2026-11-24	xproof

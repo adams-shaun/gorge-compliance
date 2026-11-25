@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9833e3bd-6e7f-41b7-bf7e-ffb74ff17844	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 9833e3bd-6e7f-41b7-bf7e-ffb74ff17844	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9837287b-d821-4655-8f01-93fc6c7f0ecc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9837287b-d821-4655-8f01-93fc6c7f0ecc	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+9837287b-d821-4655-8f01-93fc6c7f0ecc	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 983739cd-0b36-40d9-9a03-7b6aa7ffd0df	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 983739cd-0b36-40d9-9a03-7b6aa7ffd0df	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 983739cd-0b36-40d9-9a03-7b6aa7ffd0df	land	land	agreed	-	FX	start	2	0	x:xs:XP:rimewood-falls:land:s1,f:xs:XP:rimewood-falls:land:s1	-	-	-	d864b561c9cb	-	806923dcc530	-	-	2026-11-24	xproof
@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9839f80b-d28b-49c7-a31a-40c245af2edc	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:gurmag-drowner:cast:s1,f:xs:XP:gurmag-drowner:cast:s1	-	-	-	d864b561c9cb	-	a9dc73ffae54	-	-	2026-11-24	xproof
 9839f80b-d28b-49c7-a31a-40c245af2edc	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:gurmag-drowner:cast:s1,f:xs:XP:gurmag-drowner:cast:s1	-	-	-	d864b561c9cb	-	a9dc73ffae54	-	-	2026-11-24	xproof
 9839f80b-d28b-49c7-a31a-40c245af2edc	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:gurmag-drowner:cast:s1,f:xs:XP:gurmag-drowner:cast:s1	-	-	-	d864b561c9cb	-	a9dc73ffae54	-	-	2026-11-24	xproof
-983a2a50-3634-4783-8576-30916c3d0818	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+983a2a50-3634-4783-8576-30916c3d0818	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 983c5c59-806c-4430-adec-c91a099c8d41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 983f4fde-ab04-44f0-a294-c3b472de0b19	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yuriko-hope-from-the-shadows:f0t0:s1,f:xs:XP:yuriko-hope-from-the-shadows:f0t0:s1	-	-	-	23c4009444b0	-	439405f38d8e	-	-	2026-11-25	xproof
 983f4fde-ab04-44f0-a294-c3b472de0b19	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:yuriko-hope-from-the-shadows:f0t0:s1,f:xs:XP:yuriko-hope-from-the-shadows:f0t0:s1	-	-	-	23c4009444b0	-	439405f38d8e	-	-	2026-11-25	xproof

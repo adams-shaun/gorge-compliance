@@ -58,15 +58,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56508ae7-6013-4149-8935-96b8d5091baa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:boggart-harbinger:f0t0:s1,f:xs:XP:boggart-harbinger:f0t0:s1	-	-	-	d864b561c9cb	-	9b8ae68eb371	-	-	2026-11-24	xproof
 56528234-46c0-4fba-972a-0c8011996f8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-mirari-conjecture:cast:s1,f:xs:XP:the-mirari-conjecture:cast:s1	-	-	-	d864b561c9cb	-	0ad7ca441e22	-	-	2026-11-24	xproof
 56551cba-3871-4746-a11f-7ab8aaf46cf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56551cba-3871-4746-a11f-7ab8aaf46cf6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-56551cba-3871-4746-a11f-7ab8aaf46cf6	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+56551cba-3871-4746-a11f-7ab8aaf46cf6	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+56551cba-3871-4746-a11f-7ab8aaf46cf6	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 56568fc4-7133-40e2-833c-29ecc1f953d6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 565922d6-8152-411f-8d4d-dc7c8523a49b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nature-s-spiral:cast:s1,f:xs:XP:nature-s-spiral:cast:s1	-	-	-	8a1b1a193ec0	-	533ddf1e210a	-	-	2026-11-24	xproof
 565ba85c-bad8-4cbd-a2ff-b4384b886308	cast	cast-resolve	agreed	-	FX	scen	2	0	Sudden Setback/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 565cfa73-8c6b-4296-bcb8-388de8c960ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lieutenant-hikaru-sulu:cast:s1,f:xs:XP:lieutenant-hikaru-sulu:cast:s1	-	-	-	8c0bd19283bb	-	5ebb451cd045	-	-	2026-11-24	xproof
 565cfa73-8c6b-4296-bcb8-388de8c960ff	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:lieutenant-hikaru-sulu:f0a0:s1,f:xs:XP:lieutenant-hikaru-sulu:f0a0:s1	-	-	-	8c0bd19283bb	-	5ebb451cd045	-	-	2026-11-24	xproof
 565cfa73-8c6b-4296-bcb8-388de8c960ff	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:lieutenant-hikaru-sulu:f0a0:s1,f:xs:XP:lieutenant-hikaru-sulu:f0a0:s1	-	-	-	8c0bd19283bb	-	5ebb451cd045	-	-	2026-11-24	xproof
-566533af-5e67-463f-ac33-dfcf1ec735c9	cast	cast-resolve	agreed	-	X	scen	1	0	Ether/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+566533af-5e67-463f-ac33-dfcf1ec735c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ether:cast:s1,f:xs:XP:ether:cast:s1	-	-	-	23c4009444b0	-	1ebad17c1502	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 566533af-5e67-463f-ac33-dfcf1ec735c9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ether/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5667376e-e59c-4b17-b096-5d92cdfe3db1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 56697773-8a04-49b6-8327-895e972da7e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:night-revelers:cast:s1,f:xs:XP:night-revelers:cast:s1	-	-	-	d864b561c9cb	-	0b2ab24c7849	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56b69e46-a1e4-4545-99e2-ee4385b7e429	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keening-banshee:f0t0:s1,f:xs:XP:keening-banshee:f0t0:s1	-	-	-	64a08ba7d913	-	0a7c1d8e1ebb	-	-	2026-11-24	xproof
 56b69e46-a1e4-4545-99e2-ee4385b7e429	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keening-banshee:f0t0:s1,f:xs:XP:keening-banshee:f0t0:s1	-	-	-	64a08ba7d913	-	0a7c1d8e1ebb	-	-	2026-11-24	xproof
 56c1a548-c80c-432b-bf92-d4ef6117b298	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56c1a548-c80c-432b-bf92-d4ef6117b298	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+56c1a548-c80c-432b-bf92-d4ef6117b298	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:dimir-cutpurse:f0t0:s1,f:xs:XP:dimir-cutpurse:f0t0:s1	-	-	-	23c4009444b0	-	3f435224aa08	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 56c412be-daab-4461-931f-1e2ea8ecd75d	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Null Summoner"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 56c412be-daab-4461-931f-1e2ea8ecd75d	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Null Summoner"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 56c558f3-535d-49aa-a2de-54e0bb598483	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -158,5 +158,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 56f5ed8d-ef53-4766-9ef3-1e24a10e267b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Buried Treasure/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 56f5ed8d-ef53-4766-9ef3-1e24a10e267b	f0/a1	Discover	agreed	-	FX	start	2	0	x:xs:XP:buried-treasure:f0a1:s1,f:xs:XP:buried-treasure:f0a1:s1	-	-	-	3aa6ded33acb	-	d77d1851a1ea	-	-	2026-11-25	xproof
 56f782b7-d46c-4aa1-ae16-66d6401c72ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-56f782b7-d46c-4aa1-ae16-66d6401c72ae	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-56f782b7-d46c-4aa1-ae16-66d6401c72ae	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+56f782b7-d46c-4aa1-ae16-66d6401c72ae	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+56f782b7-d46c-4aa1-ae16-66d6401c72ae	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:throat-slitter:f0t0:s1,f:xs:XP:throat-slitter:f0t0:s1	-	-	-	23c4009444b0	-	264800faa626	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

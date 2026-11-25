@@ -98,7 +98,7 @@ dd7df06c-9434-46ce-893c-80081fbc2df7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:und
 dd7df06c-9434-46ce-893c-80081fbc2df7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:undead-leotau:f0a0:s1,f:xs:XP:undead-leotau:f0a0:s1	-	-	-	8a1b1a193ec0	-	60ba5f76a2bc	-	-	2026-11-24	xproof
 dd7df06c-9434-46ce-893c-80081fbc2df7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd840d84-bc4a-4420-b8ac-99093a5aa253	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sporesower-thallid:f0t0:s1,f:xs:XP:sporesower-thallid:f0t0:s1	-	-	-	3aa6ded33acb	-	faf984cbb178	-	-	2026-11-25	xproof
-dd840d84-bc4a-4420-b8ac-99093a5aa253	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+dd840d84-bc4a-4420-b8ac-99093a5aa253	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dd840d84-bc4a-4420-b8ac-99093a5aa253	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sporesower-thallid:f0t0:s1,f:xs:XP:sporesower-thallid:f0t0:s1	-	-	-	3aa6ded33acb	-	faf984cbb178	-	-	2026-11-25	xproof
 dd84d291-cb7a-4f44-81cd-9f1181bb5ae5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dd8538e6-cd5f-4a88-aff5-eb5e76ce8ddb	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:dreamroot-cascade:f0a0:s1,f:xs:XP:dreamroot-cascade:f0a0:s1	-	-	-	23b491658465	-	ca9dd04b7d0a	-	-	2026-11-24	xproof
@@ -142,8 +142,8 @@ ddb7e868-8f1d-4d57-9ee2-ebadb17b398a	combat#0.attack	combat.attack	agreed	-	FX	s
 ddb7e868-8f1d-4d57-9ee2-ebadb17b398a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sphinx-of-forgotten-lore:combat0.block:s1,f:xs:XP:sphinx-of-forgotten-lore:combat0.block:s1	-	-	-	23c4009444b0	-	0577991fa6a7	-	-	2026-11-25	xproof
 ddb7e868-8f1d-4d57-9ee2-ebadb17b398a	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:sphinx-of-forgotten-lore:combat0.attack:s1,f:xs:XP:sphinx-of-forgotten-lore:combat0.attack:s1	-	-	-	23c4009444b0	-	0577991fa6a7	-	-	2026-11-25	xproof
 ddbd4d8c-9763-43d7-882f-6edf8efffb0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ddbd4d8c-9763-43d7-882f-6edf8efffb0a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-ddbd4d8c-9763-43d7-882f-6edf8efffb0a	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+ddbd4d8c-9763-43d7-882f-6edf8efffb0a	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ddbd4d8c-9763-43d7-882f-6edf8efffb0a	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ddbe0d17-5cac-417c-afc0-e4aebae83205	cast	cast-resolve	agreed	-	FX	scen	2	0	Restoration Magic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ddc12487-f577-4def-acdb-491f7ba6dc51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ddc12487-f577-4def-acdb-491f7ba6dc51	f0/t0	NULL	owed	refused:no-generator:trigger:Scry	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

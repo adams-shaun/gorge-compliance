@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22600e35-cd8b-4e63-9de1-e96ad66cf719	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Bumbling Pangolin"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 22677153-bd87-4ff8-af92-ced4da2aac6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:atraxa-s-fall:cast:s1,f:xs:XP:atraxa-s-fall:cast:s1	-	-	-	d864b561c9cb	-	5099f8d921ca	-	-	2026-11-24	xproof
 226dca3d-9da3-4c3f-89d0-67264fd19c51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-226dca3d-9da3-4c3f-89d0-67264fd19c51	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+226dca3d-9da3-4c3f-89d0-67264fd19c51	f0/t0	Phase	agreed	-	FX	start	6	0	x:xs:XP:glitterfang:f0t0:s1,f:xs:XP:glitterfang:f0t0:s1	-	-	-	23c4009444b0	-	f8f8d40cf6b4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2279005d-5434-49ce-b16a-212759c5775a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:markov-warlord:f0t0:s1,f:xs:XP:markov-warlord:f0t0:s1	-	-	-	d864b561c9cb	-	7c4dc0f95e06	-	-	2026-11-24	xproof
 2279005d-5434-49ce-b16a-212759c5775a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:markov-warlord:f0t0:s1,f:xs:XP:markov-warlord:f0t0:s1	-	-	-	d864b561c9cb	-	7c4dc0f95e06	-	-	2026-11-24	xproof
 227cbba1-700b-4255-b730-b324ab3dec34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beetleform-mage:cast:s1,f:xs:XP:beetleform-mage:cast:s1	-	-	-	d864b561c9cb	-	e9135e0c51e4	-	-	2026-11-24	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2281ab3f-fad7-4b42-9621-5c35fec4c0f6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2283729c-11db-471c-9f63-46092c97bd00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hex-magic:cast:s1,f:xs:XP:hex-magic:cast:s1	-	-	-	23b491658465	-	64c3fca52cd3	-	-	2026-11-24	xproof
 2283e409-c6c7-4de9-899b-2b3caea5f35e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:instant-ramen:f0t0:s2,f:xs:XP:instant-ramen:f0t0:s2	-	-	-	267e485f6204	-	fbe7d78e8224	-	-	2026-11-24	xproof
-2283e409-c6c7-4de9-899b-2b3caea5f35e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Instant Ramen/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2283e409-c6c7-4de9-899b-2b3caea5f35e	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:instant-ramen:f0a0:s1,f:xs:XP:instant-ramen:f0a0:s1	-	-	-	23c4009444b0	-	fbe7d78e8224	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2283e409-c6c7-4de9-899b-2b3caea5f35e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:instant-ramen:f0t0:s2,f:xs:XP:instant-ramen:f0t0:s2	-	-	-	267e485f6204	-	fbe7d78e8224	-	-	2026-11-24	xproof
 228d3307-69a9-45ce-a610-77754ed50877	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barrensteppe-siege:cast:s1,f:xs:XP:barrensteppe-siege:cast:s1	-	-	-	23c4009444b0	-	0c479948ae0d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 228d3307-69a9-45ce-a610-77754ed50877	static#0.0	static#0.0	agreed	-	X	scen	1	0	Barrensteppe Siege/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

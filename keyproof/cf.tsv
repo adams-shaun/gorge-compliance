@@ -29,7 +29,7 @@ cf188dd3-1927-481b-b8c0-93b1222dbf53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cf18a1ca-1fb5-4c90-b20a-6ae2fb54a9bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf1a4b18-62fa-46f3-baeb-c0f699c9cdde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf1a4b18-62fa-46f3-baeb-c0f699c9cdde	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cf1a4b18-62fa-46f3-baeb-c0f699c9cdde	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+cf1a4b18-62fa-46f3-baeb-c0f699c9cdde	f0/a1	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cf1e1d8d-c02e-4b66-b1db-49ec48fa4b03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wither-and-bloom:cast:s1,f:xs:XP:wither-and-bloom:cast:s1	-	-	-	ae86f6029288	-	c81cff1be9ff	-	-	2026-11-24	xproof
 cf1e1d8d-c02e-4b66-b1db-49ec48fa4b03	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 cf2355f3-11d2-4b03-b663-9fad6b07e4b2	cast	cast-resolve	agreed	-	FX	scen	2	0	Roamer's Routine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -53,11 +53,11 @@ cf32524e-0df9-4af8-9371-84feeb0a86c6	f0/t0	Cycled	agreed	-	FX	start	2	0	x:xs:XP:
 cf336e4c-a0d3-43aa-ad23-b98effb2b751	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nebelgast-herald:f0t0:s1,f:xs:XP:nebelgast-herald:f0t0:s1	-	-	-	d864b561c9cb	-	1c1a60b1da93	-	-	2026-11-24	xproof
 cf336e4c-a0d3-43aa-ad23-b98effb2b751	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nebelgast-herald:f0t0:s1,f:xs:XP:nebelgast-herald:f0t0:s1	-	-	-	d864b561c9cb	-	1c1a60b1da93	-	-	2026-11-24	xproof
 cf35ec1e-11e2-4028-89df-9755fd6772bf	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-cf37426d-b0ad-42c3-81be-79701aa4e0cf	cast	cast-resolve	agreed	-	X	scen	1	0	Stormscale Scion/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cf37426d-b0ad-42c3-81be-79701aa4e0cf	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stormscale Scion/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cf37426d-b0ad-42c3-81be-79701aa4e0cf	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stormscale Scion/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cf37426d-b0ad-42c3-81be-79701aa4e0cf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stormscale Scion/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cf37426d-b0ad-42c3-81be-79701aa4e0cf	static#0.0	static#0.0	agreed	-	X	scen	1	0	Stormscale Scion/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cf37426d-b0ad-42c3-81be-79701aa4e0cf	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:stormscale-scion:cast:s1,f:xs:XP:stormscale-scion:cast:s1	-	-	-	23c4009444b0	-	bfd76c114aa8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+cf37426d-b0ad-42c3-81be-79701aa4e0cf	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stormscale-scion:combat0.attack:s1,f:xs:XP:stormscale-scion:combat0.attack:s1	-	-	-	23c4009444b0	-	bfd76c114aa8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+cf37426d-b0ad-42c3-81be-79701aa4e0cf	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:stormscale-scion:combat0.block:s1,f:xs:XP:stormscale-scion:combat0.block:s1	-	-	-	23c4009444b0	-	bfd76c114aa8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+cf37426d-b0ad-42c3-81be-79701aa4e0cf	f0/t0	SpellCast/Storm	agreed	-	FX	start	4	0	x:xs:XP:stormscale-scion:cast:s1,f:xs:XP:stormscale-scion:cast:s1	-	-	-	23c4009444b0	-	bfd76c114aa8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+cf37426d-b0ad-42c3-81be-79701aa4e0cf	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:stormscale-scion:static0.0:s1,f:xs:XP:stormscale-scion:static0.0:s1	-	-	-	23c4009444b0	-	bfd76c114aa8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cf3b79cc-ce97-48e9-a578-625e323d1b62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mystic-enforcer:cast:s1,f:xs:XP:mystic-enforcer:cast:s1	-	-	-	25696bf19d5b	-	eac18641b099	-	-	2026-11-24	xproof
 cf402270-ebc6-481b-b478-0e3acab7002a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elementalist-adept:cast:s1,f:xs:XP:elementalist-adept:cast:s1	-	-	-	23c4009444b0	-	04b28a982d2a	-	-	2026-11-25	xproof
 cf402270-ebc6-481b-b478-0e3acab7002a	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:elementalist-adept:f0t0:s1,f:xs:XP:elementalist-adept:f0t0:s1	-	-	-	23c4009444b0	-	04b28a982d2a	-	-	2026-11-25	xproof
@@ -175,8 +175,8 @@ cfc58887-859d-4ba5-8507-1fb1aa4d37c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cfc58887-859d-4ba5-8507-1fb1aa4d37c0	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cfc5a284-7238-4c98-9d2f-7e5c3329be7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cfc7cef7-0a95-49f8-970f-abff2cacd82d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cfc7cef7-0a95-49f8-970f-abff2cacd82d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sage of the Skies/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cfc7cef7-0a95-49f8-970f-abff2cacd82d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sage of the Skies/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cfc7cef7-0a95-49f8-970f-abff2cacd82d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sage-of-the-skies:combat0.attack:s1,f:xs:XP:sage-of-the-skies:combat0.attack:s1	-	-	-	23c4009444b0	-	5be3372af42f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+cfc7cef7-0a95-49f8-970f-abff2cacd82d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sage-of-the-skies:combat0.block:s1,f:xs:XP:sage-of-the-skies:combat0.block:s1	-	-	-	23c4009444b0	-	5be3372af42f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cfc7cef7-0a95-49f8-970f-abff2cacd82d	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Sage of the Skies/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cfc8372f-13b6-4628-84c7-066881b287f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cfd00c0e-d034-4b39-a3d3-f8b8842045dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

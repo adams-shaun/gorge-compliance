@@ -24,13 +24,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 231a6f8a-624a-4bff-8648-0b4ef910a6aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 231f8edb-4ea1-44be-8794-b76a31462dfc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2321b4fc-6b73-4d1a-84cc-13524adb0899	cast	cast-resolve	agreed	-	FX	scen	2	0	Yathan Tombguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2321b4fc-6b73-4d1a-84cc-13524adb0899	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Yathan Tombguard/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2321b4fc-6b73-4d1a-84cc-13524adb0899	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Yathan Tombguard/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2321b4fc-6b73-4d1a-84cc-13524adb0899	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:yathan-tombguard:combat0.attack:s1,f:xs:XP:yathan-tombguard:combat0.attack:s1	-	-	-	23c4009444b0	-	a2901a1b4dc8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+2321b4fc-6b73-4d1a-84cc-13524adb0899	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:yathan-tombguard:combat0.block:s1,f:xs:XP:yathan-tombguard:combat0.block:s1	-	-	-	23c4009444b0	-	a2901a1b4dc8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2321b4fc-6b73-4d1a-84cc-13524adb0899	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Yathan Tombguard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 232284f7-c623-4895-9ab9-8b1a39926830	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wonder:cast:s1,f:xs:XP:wonder:cast:s1	-	-	-	25696bf19d5b	-	356e65768a69	-	-	2026-11-24	xproof
-232bd88c-ecdb-43dd-b34a-d381cb3bedf2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Adventurer's Inn/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-232bd88c-ecdb-43dd-b34a-d381cb3bedf2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Adventurer's Inn/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-232bd88c-ecdb-43dd-b34a-d381cb3bedf2	land	play-land	agreed	-	X	scen	1	0	Adventurer's Inn/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+232bd88c-ecdb-43dd-b34a-d381cb3bedf2	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:adventurer-s-inn:land:s1,f:xs:XP:adventurer-s-inn:land:s1	-	-	-	23c4009444b0	-	b8d3fd36f2c0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+232bd88c-ecdb-43dd-b34a-d381cb3bedf2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:adventurer-s-inn:land:s1,f:xs:XP:adventurer-s-inn:land:s1	-	-	-	23c4009444b0	-	b8d3fd36f2c0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+232bd88c-ecdb-43dd-b34a-d381cb3bedf2	land	land	agreed	-	FX	start	2	0	x:xs:XP:adventurer-s-inn:land:s1,f:xs:XP:adventurer-s-inn:land:s1	-	-	-	23c4009444b0	-	b8d3fd36f2c0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 232e16f4-32ae-4f42-a377-6bdebc9a06c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:civil-servant:cast:s1,f:xs:XP:civil-servant:cast:s1	-	-	-	d864b561c9cb	-	36aa0b483eb5	-	-	2026-11-24	xproof
 232e16f4-32ae-4f42-a377-6bdebc9a06c7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:civil-servant:f0t0:s1,f:xs:XP:civil-servant:f0t0:s1	-	-	-	d864b561c9cb	-	36aa0b483eb5	-	-	2026-11-24	xproof
 23320d55-80cb-4da3-a53c-8c75abdc8c8f	cast	cast-resolve	agreed	-	FX	scen	2	0	Ignis Scientia/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

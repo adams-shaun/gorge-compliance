@@ -61,8 +61,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9223488e-5206-4d43-90ef-387189dcee16	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Suki, Kyoshi Warrior/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9223488e-5206-4d43-90ef-387189dcee16	static#0.0	static#0.0	agreed	-	X	scen	1	0	Suki, Kyoshi Warrior/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 92247856-35a4-4c1d-90bc-fa0d28524ecd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9228f04c-506f-4453-a335-e66876b8ce8d	cast	cast-resolve	agreed	-	X	scen	1	0	Smile at Death/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9228f04c-506f-4453-a335-e66876b8ce8d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Smile at Death/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9228f04c-506f-4453-a335-e66876b8ce8d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:smile-at-death:cast:s1,f:xs:XP:smile-at-death:cast:s1	-	-	-	23c4009444b0	-	4fd7851386ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9228f04c-506f-4453-a335-e66876b8ce8d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:smile-at-death:f0t0:s1,f:xs:XP:smile-at-death:f0t0:s1	-	-	-	23c4009444b0	-	4fd7851386ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 922a030c-857b-4c61-93df-b70ebb32abd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 922a030c-857b-4c61-93df-b70ebb32abd3	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 922a8e27-a367-40c6-84df-86ed32f71c7c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:oltec-cloud-guard:f0t0:s2,f:xs:XP:oltec-cloud-guard:f0t0:s2	-	-	-	e07cf3a05ba5	-	f5e427eb138e	-	-	2026-11-24	xproof
@@ -85,9 +85,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92392467-a22f-4dd7-a0eb-393bef956dc0	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 923b2a1b-d7b6-439d-9681-c7ba88165c31	cast	cast-resolve	agreed	-	FX	scen	2	0	Hedge Whisperer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 923b2a1b-d7b6-439d-9681-c7ba88165c31	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Hedge Whisperer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-923b725a-e189-4b61-b01a-c5056f1328ba	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-923b725a-e189-4b61-b01a-c5056f1328ba	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-923b725a-e189-4b61-b01a-c5056f1328ba	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+923b725a-e189-4b61-b01a-c5056f1328ba	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:blessing-of-leeches:cast:s1,f:xs:XP:blessing-of-leeches:cast:s1	-	-	-	23c4009444b0	-	dada98697f63	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+923b725a-e189-4b61-b01a-c5056f1328ba	f0/a0	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:blessing-of-leeches:cast:s1,f:xs:XP:blessing-of-leeches:cast:s1	-	-	-	23c4009444b0	-	dada98697f63	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+923b725a-e189-4b61-b01a-c5056f1328ba	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:blessing-of-leeches:f0t0:s1,f:xs:XP:blessing-of-leeches:f0t0:s1	-	-	-	23c4009444b0	-	dada98697f63	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 92419fbf-7a1b-428f-92d6-e9fd510dbfac	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 9242cd3e-1a71-4700-8182-9c1005616033	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:impact-tremors:cast:s1,f:xs:XP:impact-tremors:cast:s1	-	-	-	8c0bd19283bb	-	13fa2c724872	-	-	2026-11-24	xproof
 9242cd3e-1a71-4700-8182-9c1005616033	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:impact-tremors:f0t0:s1,f:xs:XP:impact-tremors:f0t0:s1	-	-	-	3aa6ded33acb	-	13fa2c724872	-	-	2026-11-25	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9275108c-7eaf-4edd-aa6d-e5263d5ac7fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9277b680-a146-4d4f-9649-39cddafdb585	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9277b680-a146-4d4f-9649-39cddafdb585	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-9277b680-a146-4d4f-9649-39cddafdb585	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+9277b680-a146-4d4f-9649-39cddafdb585	f0/a1	DamageAll	agreed	-	FX	start	1	0	x:xs:XP:arashi-the-sky-asunder:f0a1:s2,f:xs:XP:arashi-the-sky-asunder:f0a1:s2	-	-	-	23c4009444b0	-	86c2c8a35cd6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 927979d7-9b5c-4448-aef0-baf2907a89f1	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Hidden Cataract/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 927979d7-9b5c-4448-aef0-baf2907a89f1	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Hidden Cataract/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 927979d7-9b5c-4448-aef0-baf2907a89f1	land	play-land	agreed	-	FX	scen	2	0	Hidden Cataract/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

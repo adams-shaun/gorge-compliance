@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4aab6794-506f-413c-91e0-d886e0019dce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aae7102-301a-429d-b169-4f462384d55d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aae7102-301a-429d-b169-4f462384d55d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-4ab42daa-8726-4973-947d-1d6c32f0ba61	cast	cast-resolve	agreed	-	X	scen	1	0	Fight On!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4ab42daa-8726-4973-947d-1d6c32f0ba61	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fight-on:cast:s1,f:xs:XP:fight-on:cast:s1	-	-	-	23c4009444b0	-	52e72da7bde5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4abb227a-534e-4300-9009-065a10f10e8a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inquisitive-glimmer:cast:s1,f:xs:XP:inquisitive-glimmer:cast:s1	-	-	-	23c4009444b0	-	943601fa4460	-	-	2026-11-25	xproof
 4abb227a-534e-4300-9009-065a10f10e8a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Inquisitive Glimmer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4abb227a-534e-4300-9009-065a10f10e8a	static#0.1	static#0.1	agreed	-	X	scen	1	0	Inquisitive Glimmer/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4acacdd2-a736-43a2-ad67-891b9bd124f8	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 4acb6612-54e8-428d-acb6-c7259a5ad6a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aceb786-960d-4719-9de8-79dffd491a51	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:bard-s-bow:f0t0:s2,f:xs:XP:bard-s-bow:f0t0:s2	-	-	-	267e485f6204	-	aa9903b69980	-	-	2026-11-24	xproof
-4aceb786-960d-4719-9de8-79dffd491a51	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bard's Bow/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4aceb786-960d-4719-9de8-79dffd491a51	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:bard-s-bow:f0a0:s1,f:xs:XP:bard-s-bow:f0a0:s1	-	-	-	23c4009444b0	-	aa9903b69980	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4aceb786-960d-4719-9de8-79dffd491a51	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:bard-s-bow:f0t0:s2,f:xs:XP:bard-s-bow:f0t0:s2	-	-	-	267e485f6204	-	aa9903b69980	-	-	2026-11-24	xproof
 4aceb786-960d-4719-9de8-79dffd491a51	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bard's Bow/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ad09b75-6d7a-46c7-95a2-d7f90995fdd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

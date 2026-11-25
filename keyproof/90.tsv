@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 90980841-4994-453c-a076-6cdf8d85c809	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 909a10f5-a607-474f-8b8b-0176fd840650	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-the-way:cast:s1,f:xs:XP:master-the-way:cast:s1	-	-	-	d864b561c9cb	-	64ef604ae506	-	-	2026-11-24	xproof
 909b3d90-5762-461b-b49a-004a9e72733d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:black-mage-s-rod:f0t0:s2,f:xs:XP:black-mage-s-rod:f0t0:s2	-	-	-	267e485f6204	-	8c197d4efb81	-	-	2026-11-24	xproof
-909b3d90-5762-461b-b49a-004a9e72733d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Black Mage's Rod/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+909b3d90-5762-461b-b49a-004a9e72733d	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:black-mage-s-rod:f0a0:s1,f:xs:XP:black-mage-s-rod:f0a0:s1	-	-	-	23c4009444b0	-	8c197d4efb81	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 909b3d90-5762-461b-b49a-004a9e72733d	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:black-mage-s-rod:f0t0:s2,f:xs:XP:black-mage-s-rod:f0t0:s2	-	-	-	267e485f6204	-	8c197d4efb81	-	-	2026-11-24	xproof
 909b3d90-5762-461b-b49a-004a9e72733d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Black Mage's Rod/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 909becbc-1d84-4e94-b589-e58438569403	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silkwrap:f0t0:s1,f:xs:XP:silkwrap:f0t0:s1	-	-	-	d864b561c9cb	-	87d9293f06a3	-	-	2026-11-24	xproof
@@ -118,8 +118,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 909ff4a8-8bdd-4478-bd43-ce5175a02d68	f0/a3	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90a2ec9c-2f1c-4ed4-820d-dfdb6b58c0db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90a4c5ed-d268-4216-9b55-0a38406efd74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90a4c5ed-d268-4216-9b55-0a38406efd74	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-90a4c5ed-d268-4216-9b55-0a38406efd74	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+90a4c5ed-d268-4216-9b55-0a38406efd74	f0/a0	Discard	agreed	-	FX	start	2	0	x:xs:XP:ghost-lit-stalker:f0a0:s1,f:xs:XP:ghost-lit-stalker:f0a0:s1	-	-	-	23c4009444b0	-	6f189b8a7f25	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+90a4c5ed-d268-4216-9b55-0a38406efd74	f0/a1	Discard	agreed	-	FX	start	2	0	x:xs:XP:ghost-lit-stalker:f0a1:s1,f:xs:XP:ghost-lit-stalker:f0a1:s1	-	-	-	23c4009444b0	-	6f189b8a7f25	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 90aa9113-5148-486b-a1c6-b4230e6d3e41	cast	cast-resolve	agreed	-	FX	scen	2	0	Unwanted Remake/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 90aacd34-ff76-4e7e-bdb3-9427d431b6e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90aacd34-ff76-4e7e-bdb3-9427d431b6e5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

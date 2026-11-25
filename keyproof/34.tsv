@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 340e1078-5158-4199-ab43-976741780b2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 340e1078-5158-4199-ab43-976741780b2b	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 340ec369-1761-4134-a96d-5537b4e08703	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-340ec369-1761-4134-a96d-5537b4e08703	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+340ec369-1761-4134-a96d-5537b4e08703	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 34143cfa-aa48-481c-af42-1240af174b80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wake-the-past:cast:s1,f:xs:XP:wake-the-past:cast:s1	-	-	-	8c0bd19283bb	-	fe9438b52f4a	-	-	2026-11-24	xproof
 3415a199-05ac-4627-be97-f842eb1415a3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3415a199-05ac-4627-be97-f842eb1415a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:avenging-angel:f0t0:s1,f:xs:XP:avenging-angel:f0t0:s1	-	-	-	8c0bd19283bb	-	b35437309155	-	-	2026-11-24	xproof
@@ -161,17 +161,17 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 34bd39ed-4058-4c65-ba5f-9ac5cf7c166a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rhox-bodyguard:cast:s1,f:xs:XP:rhox-bodyguard:cast:s1	-	-	-	8a1b1a193ec0	-	69625e674911	-	-	2026-11-24	xproof
 34bd39ed-4058-4c65-ba5f-9ac5cf7c166a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rhox-bodyguard:cast:s1,f:xs:XP:rhox-bodyguard:cast:s1	-	-	-	8a1b1a193ec0	-	69625e674911	-	-	2026-11-24	xproof
 34bd39ed-4058-4c65-ba5f-9ac5cf7c166a	f0/t1	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:rhox-bodyguard:f0t1:s1,f:xs:XP:rhox-bodyguard:f0t1:s1	-	-	-	8a1b1a193ec0	-	69625e674911	-	-	2026-11-24	xproof
-34bdeca4-b1e0-4fa3-afe4-bec743a080b8	cast	cast-resolve	agreed	-	X	scen	1	0	Gaelicat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-34bdeca4-b1e0-4fa3-afe4-bec743a080b8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gaelicat/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-34bdeca4-b1e0-4fa3-afe4-bec743a080b8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gaelicat/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+34bdeca4-b1e0-4fa3-afe4-bec743a080b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gaelicat:cast:s1,f:xs:XP:gaelicat:cast:s1	-	-	-	23c4009444b0	-	78ae199991d0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+34bdeca4-b1e0-4fa3-afe4-bec743a080b8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gaelicat:combat0.attack:s1,f:xs:XP:gaelicat:combat0.attack:s1	-	-	-	23c4009444b0	-	78ae199991d0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+34bdeca4-b1e0-4fa3-afe4-bec743a080b8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gaelicat:combat0.block:s1,f:xs:XP:gaelicat:combat0.block:s1	-	-	-	23c4009444b0	-	78ae199991d0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 34bdeca4-b1e0-4fa3-afe4-bec743a080b8	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gaelicat/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34c0f75d-10a9-428d-b202-3defb3949090	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ant-man-s-army:f0t0:s1,f:xs:XP:ant-man-s-army:f0t0:s1	-	-	-	23c4009444b0	-	315e3b68b373	-	-	2026-11-25	xproof
 34c0f75d-10a9-428d-b202-3defb3949090	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ant-man-s-army:f0t0:s1,f:xs:XP:ant-man-s-army:f0t0:s1	-	-	-	23c4009444b0	-	315e3b68b373	-	-	2026-11-25	xproof
 34c572b2-dccf-43d9-a9c4-846653ad22da	cast	cast-resolve	agreed	-	X	scen	1	0	Spirit Mascot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 34c572b2-dccf-43d9-a9c4-846653ad22da	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spirit Mascot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-34c65c7f-33ab-4f91-84ce-d0c8f4fc5832	cast	cast-resolve	agreed	-	X	scen	1	0	Lunatic Pandora/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-34c65c7f-33ab-4f91-84ce-d0c8f4fc5832	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lunatic Pandora/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-34c65c7f-33ab-4f91-84ce-d0c8f4fc5832	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Lunatic Pandora/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+34c65c7f-33ab-4f91-84ce-d0c8f4fc5832	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lunatic-pandora:cast:s1,f:xs:XP:lunatic-pandora:cast:s1	-	-	-	23c4009444b0	-	c92874a1ada8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+34c65c7f-33ab-4f91-84ce-d0c8f4fc5832	f0/a0	Surveil	agreed	-	FX	start	2	0	x:xs:XP:lunatic-pandora:f0a0:s1,f:xs:XP:lunatic-pandora:f0a0:s1	-	-	-	23c4009444b0	-	c92874a1ada8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+34c65c7f-33ab-4f91-84ce-d0c8f4fc5832	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:lunatic-pandora:f0a1:s1,f:xs:XP:lunatic-pandora:f0a1:s1	-	-	-	23c4009444b0	-	c92874a1ada8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 34c66f52-dcbf-4d0a-bf7f-cb294bd93e9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34ceb733-0329-4c1b-8d75-25c34fd4400f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 34d0d070-fcaf-410e-a002-012cbe104fb7	cast	cast-resolve	agreed	-	X	scen	1	0	Moldering Gym/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

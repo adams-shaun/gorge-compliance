@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 373c6cd0-0bf7-4dab-bc18-7ecf5f015e10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rhythmic-water-vortex:cast:s1,f:xs:XP:rhythmic-water-vortex:cast:s1	-	-	-	8c0bd19283bb	-	81459296cbe2	-	-	2026-11-24	xproof
 373e2b58-ccf0-444b-aeb2-0b6e8d4e80e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3740b86d-b0e6-4837-b408-e7f62b95c787	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:underfoot-underdogs:f0t0:s2,f:xs:XP:underfoot-underdogs:f0t0:s2	-	-	-	267e485f6204	-	37c1e253e5b1	-	-	2026-11-24	xproof
-3740b86d-b0e6-4837-b408-e7f62b95c787	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Underfoot Underdogs/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3740b86d-b0e6-4837-b408-e7f62b95c787	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:underfoot-underdogs:f0a0:s1,f:xs:XP:underfoot-underdogs:f0a0:s1	-	-	-	23c4009444b0	-	37c1e253e5b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3740b86d-b0e6-4837-b408-e7f62b95c787	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:underfoot-underdogs:f0t0:s2,f:xs:XP:underfoot-underdogs:f0t0:s2	-	-	-	267e485f6204	-	37c1e253e5b1	-	-	2026-11-24	xproof
 3741206f-8ef5-4b8f-ae4c-df3ab0a17683	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toph-greatest-earthbender:f0t0:s1,f:xs:XP:toph-greatest-earthbender:f0t0:s1	-	-	-	8c0bd19283bb	-	b7db4e7e70f9	-	-	2026-11-24	xproof
 3741206f-8ef5-4b8f-ae4c-df3ab0a17683	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:toph-greatest-earthbender:f0t0:s1,f:xs:XP:toph-greatest-earthbender:f0t0:s1	-	-	-	8c0bd19283bb	-	b7db4e7e70f9	-	-	2026-11-24	xproof
@@ -164,10 +164,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37ce95bb-8ff5-47b9-85e4-21be7a794940	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-tomb-raider:cast:s1,f:xs:XP:goblin-tomb-raider:cast:s1	-	-	-	23b491658465	-	fba8bd588c8a	-	-	2026-11-24	xproof
 37ce95bb-8ff5-47b9-85e4-21be7a794940	static#0.0	static#0.0	agreed	-	X	scen	1	0	Goblin Tomb Raider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37cf4ee6-e146-4354-afc8-6b59b0700e87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-37d1d507-25dc-4cd0-b51e-2f1e9b24832c	cast	cast-resolve	agreed	-	X	scen	1	0	Ahriman/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-37d1d507-25dc-4cd0-b51e-2f1e9b24832c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ahriman/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-37d1d507-25dc-4cd0-b51e-2f1e9b24832c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ahriman/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-37d1d507-25dc-4cd0-b51e-2f1e9b24832c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ahriman/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+37d1d507-25dc-4cd0-b51e-2f1e9b24832c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ahriman:cast:s1,f:xs:XP:ahriman:cast:s1	-	-	-	23c4009444b0	-	8080e7593095	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+37d1d507-25dc-4cd0-b51e-2f1e9b24832c	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ahriman:combat0.attack:s1,f:xs:XP:ahriman:combat0.attack:s1	-	-	-	23c4009444b0	-	8080e7593095	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+37d1d507-25dc-4cd0-b51e-2f1e9b24832c	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ahriman:combat0.block:s1,f:xs:XP:ahriman:combat0.block:s1	-	-	-	23c4009444b0	-	8080e7593095	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+37d1d507-25dc-4cd0-b51e-2f1e9b24832c	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:ahriman:f0a0:s1,f:xs:XP:ahriman:f0a0:s1	-	-	-	23c4009444b0	-	8080e7593095	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 37d2e83d-f5fd-48d2-b091-3c9167522530	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:purple-pentapus:f0t0:s1,f:xs:XP:purple-pentapus:f0t0:s1	-	-	-	8c0bd19283bb	-	0072956cac8b	-	-	2026-11-24	xproof
 37d2e83d-f5fd-48d2-b091-3c9167522530	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 37d2e83d-f5fd-48d2-b091-3c9167522530	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:purple-pentapus:f0t0:s1,f:xs:XP:purple-pentapus:f0t0:s1	-	-	-	8c0bd19283bb	-	0072956cac8b	-	-	2026-11-24	xproof

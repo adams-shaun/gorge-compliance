@@ -87,9 +87,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11809d9b-30f3-49d5-9119-e45b4de044c8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:knight-luminary:f0t0:s2,f:xs:XP:knight-luminary:f0t0:s2	-	-	-	267e485f6204	-	377f6a1d1bd3	-	-	2026-11-24	xproof
 11809d9b-30f3-49d5-9119-e45b4de044c8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:knight-luminary:f0t0:s2,f:xs:XP:knight-luminary:f0t0:s2	-	-	-	267e485f6204	-	377f6a1d1bd3	-	-	2026-11-24	xproof
 11838086-db2f-4588-ae18-4129c9e2b67d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11838086-db2f-4588-ae18-4129c9e2b67d	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-11838086-db2f-4588-ae18-4129c9e2b67d	f0/t1	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-11838086-db2f-4588-ae18-4129c9e2b67d	f0/t2	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+11838086-db2f-4588-ae18-4129c9e2b67d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:toshiro-umezawa:f0t0:s1,f:xs:XP:toshiro-umezawa:f0t0:s1	-	-	-	23c4009444b0	-	12a49ac5f57c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+11838086-db2f-4588-ae18-4129c9e2b67d	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+11838086-db2f-4588-ae18-4129c9e2b67d	f0/t2	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1189b5d5-ca8f-4b4e-a5f1-91122a485cf3	cast	cast-resolve	agreed	-	FX	scen	2	0	Boundary Lands Ranger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1189b5d5-ca8f-4b4e-a5f1-91122a485cf3	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Boundary Lands Ranger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 118c4be1-2204-4133-a80e-990ef96c7e35	cast	cast-resolve	agreed	-	X	scen	1	0	Lithobraking/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11b7ee78-fca6-4b34-93e4-e60492583d50	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:agrus-kos-spirit-of-justice:combat0.attack:s1,f:xs:XP:agrus-kos-spirit-of-justice:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f9385bb19fa7	-	-	2026-11-25	xproof
 11b969f2-ff68-4c9e-b3f3-839736084303	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11b969f2-ff68-4c9e-b3f3-839736084303	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11b969f2-ff68-4c9e-b3f3-839736084303	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+11b969f2-ff68-4c9e-b3f3-839736084303	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ronin-warclub:f0t0:s1,f:xs:XP:ronin-warclub:f0t0:s1	-	-	-	23c4009444b0	-	b80fbbbcd42f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 11ba27f4-decf-4447-9808-0d58844655cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11ba27f4-decf-4447-9808-0d58844655cf	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11bf211c-95a3-4e7f-bd08-13f979d54e73	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reconnaissance-mission:cast:s1,f:xs:XP:reconnaissance-mission:cast:s1	-	-	-	ae86f6029288	-	2d37ebe0e7ce	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11e50e35-bf4b-4089-b0c9-360d9c014584	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11e637b4-6ce0-4514-98d6-02a2d073f73b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:blue-sun-s-twilight:cast:s1	-	-	-	ae86f6029288	-	f4edd1605dc0	-	-	2026-11-24	xproof
 11e84e48-0f18-41b6-9f2a-30c64aecf9a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11e84e48-0f18-41b6-9f2a-30c64aecf9a7	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+11e84e48-0f18-41b6-9f2a-30c64aecf9a7	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 11eb31d9-cbcb-4ec5-abab-dfa646addbba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11eb31d9-cbcb-4ec5-abab-dfa646addbba	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 11ed8209-2184-4416-a8f0-72de00599574	cast	cast-resolve	agreed	-	X	scen	1	0	Glen Elendra's Answer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

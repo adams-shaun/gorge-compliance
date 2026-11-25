@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 5e038a3a-fbab-46c2-8773-1327d953da16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:windreader-sphinx:cast:s1,f:xs:XP:windreader-sphinx:cast:s1	-	-	-	d864b561c9cb	-	73db883e0467	-	-	2026-11-24	xproof
 5e038a3a-fbab-46c2-8773-1327d953da16	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:windreader-sphinx:f0t0:s1,f:xs:XP:windreader-sphinx:f0t0:s1	-	-	-	d864b561c9cb	-	73db883e0467	-	-	2026-11-24	xproof
-5e060d58-4d6e-425c-b7d4-727669fcce5b	cast	cast-resolve	agreed	-	X	scen	1	0	Buster Sword/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5e060d58-4d6e-425c-b7d4-727669fcce5b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Buster Sword/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5e060d58-4d6e-425c-b7d4-727669fcce5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:buster-sword:cast:s1,f:xs:XP:buster-sword:cast:s1	-	-	-	23c4009444b0	-	4a1d2397f80c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5e060d58-4d6e-425c-b7d4-727669fcce5b	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:buster-sword:f0a0:s1,f:xs:XP:buster-sword:f0a0:s1	-	-	-	23c4009444b0	-	4a1d2397f80c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5e060d58-4d6e-425c-b7d4-727669fcce5b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Buster Sword/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5e060d58-4d6e-425c-b7d4-727669fcce5b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Buster Sword/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5e07d314-119f-4918-9105-77543ccae7e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5e99497f-7c73-49ae-88b3-78d5d74ba9ea	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5e99497f-7c73-49ae-88b3-78d5d74ba9ea	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5e99ba3b-dc2b-4c3c-84ce-228d4772cfee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ryusei-the-falling-star:cast:s1,f:xs:XP:ryusei-the-falling-star:cast:s1	-	-	-	64a08ba7d913	-	209c4ad55f8b	-	-	2026-11-24	xproof
-5e99ba3b-dc2b-4c3c-84ce-228d4772cfee	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+5e99ba3b-dc2b-4c3c-84ce-228d4772cfee	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ryusei-the-falling-star:f0t0:s1,f:xs:XP:ryusei-the-falling-star:f0t0:s1	-	-	-	23c4009444b0	-	209c4ad55f8b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5ea0e3a5-9c38-4da4-98a6-41c14be512d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ea1d89c-8650-4373-9835-e369587020ef	cast	cast-resolve	agreed	-	FX	scen	2	0	Pyrrhic Strike/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5ea1d89c-8650-4373-9835-e369587020ef	static#0.0	static#0.0	agreed	-	X	scen	1	0	Pyrrhic Strike/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

@@ -10,8 +10,8 @@ c20635d2-20e9-48f7-88f0-6de0f953bb08	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	st
 c206bdcb-d2c4-4bda-a979-6c0627ef8f73	cast	cast-resolve	agreed	-	FX	scen	2	0	Novice Inspector/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c206bdcb-d2c4-4bda-a979-6c0627ef8f73	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c20728ac-c01c-470f-a43b-de6104836645	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c20728ac-c01c-470f-a43b-de6104836645	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-c20728ac-c01c-470f-a43b-de6104836645	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+c20728ac-c01c-470f-a43b-de6104836645	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c20728ac-c01c-470f-a43b-de6104836645	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c208b959-d0e4-4a9a-8255-2c7cc7596767	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c20a96f7-aa5a-4c15-b8b1-806685c99b27	cast	cast-resolve	agreed	-	X	scen	1	0	Bolt Bend/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c20a96f7-aa5a-4c15-b8b1-806685c99b27	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bolt Bend/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -166,10 +166,10 @@ c2c1e44c-2a19-466f-a6d5-4cb71a940b86	f0/a0	NULL	owed	refused:steps-needed:cost:A
 c2c1e44c-2a19-466f-a6d5-4cb71a940b86	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c2c1e44c-2a19-466f-a6d5-4cb71a940b86	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c2c25406-e84a-47b0-8a46-fe60f9b0cffa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c2c47e13-b581-41a8-a4af-542557a6249a	cast	cast-resolve	agreed	-	X	scen	1	0	Il Mheg Pixie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c2c47e13-b581-41a8-a4af-542557a6249a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Il Mheg Pixie/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c2c47e13-b581-41a8-a4af-542557a6249a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Il Mheg Pixie/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c2c47e13-b581-41a8-a4af-542557a6249a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Il Mheg Pixie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c2c47e13-b581-41a8-a4af-542557a6249a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:il-mheg-pixie:cast:s1,f:xs:XP:il-mheg-pixie:cast:s1	-	-	-	23c4009444b0	-	452eea697f7e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c2c47e13-b581-41a8-a4af-542557a6249a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:il-mheg-pixie:combat0.attack:s1,f:xs:XP:il-mheg-pixie:combat0.attack:s1	-	-	-	23c4009444b0	-	452eea697f7e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c2c47e13-b581-41a8-a4af-542557a6249a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:il-mheg-pixie:combat0.block:s1,f:xs:XP:il-mheg-pixie:combat0.block:s1	-	-	-	23c4009444b0	-	452eea697f7e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c2c47e13-b581-41a8-a4af-542557a6249a	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:il-mheg-pixie:combat0.attack:s1,f:xs:XP:il-mheg-pixie:combat0.attack:s1	-	-	-	23c4009444b0	-	452eea697f7e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c2c60973-b4d5-43fa-a0c4-b5688b28df05	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 c2c60973-b4d5-43fa-a0c4-b5688b28df05	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c2c7a9c2-28f8-4cf0-a042-420f6a4ba8bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tamiyo-s-immobilizer:cast:s1,f:xs:XP:tamiyo-s-immobilizer:cast:s1	-	-	-	ae86f6029288	-	e5b0765d7a9c	-	-	2026-11-24	xproof

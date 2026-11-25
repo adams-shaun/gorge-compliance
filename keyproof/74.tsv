@@ -31,10 +31,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74224cce-c2ce-4456-8a97-3abbbb199385	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rowdy-snowballers:f0t0:s2,f:xs:XP:rowdy-snowballers:f0t0:s2	-	-	-	267e485f6204	-	11962d9e2beb	-	-	2026-11-24	xproof
 7422f43d-0c1e-42cb-864d-1c63f2ec533a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74231a46-7e2d-497f-ae66-b40f8989551c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7423b3b9-56eb-4cf2-8ada-135918219c4b	cast	cast-resolve	agreed	-	X	scen	1	0	Tempest Hawk/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7423b3b9-56eb-4cf2-8ada-135918219c4b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tempest Hawk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7423b3b9-56eb-4cf2-8ada-135918219c4b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tempest Hawk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7423b3b9-56eb-4cf2-8ada-135918219c4b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tempest Hawk/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7423b3b9-56eb-4cf2-8ada-135918219c4b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tempest-hawk:cast:s1,f:xs:XP:tempest-hawk:cast:s1	-	-	-	23c4009444b0	-	05c6886206ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7423b3b9-56eb-4cf2-8ada-135918219c4b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tempest-hawk:combat0.attack:s1,f:xs:XP:tempest-hawk:combat0.attack:s1	-	-	-	23c4009444b0	-	05c6886206ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7423b3b9-56eb-4cf2-8ada-135918219c4b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tempest-hawk:combat0.block:s1,f:xs:XP:tempest-hawk:combat0.block:s1	-	-	-	23c4009444b0	-	05c6886206ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+7423b3b9-56eb-4cf2-8ada-135918219c4b	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:tempest-hawk:combat0.attack:s1,f:xs:XP:tempest-hawk:combat0.attack:s1	-	-	-	23c4009444b0	-	05c6886206ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7424560f-557f-4bc9-a3e7-eb890c73aaa3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:mantle-of-the-ancients:cast:s1,f:xs:XP:mantle-of-the-ancients:cast:s1	-	-	-	23c4009444b0	-	760d9fd797fb	-	-	2026-11-25	xproof
 7424560f-557f-4bc9-a3e7-eb890c73aaa3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:mantle-of-the-ancients:cast:s1,f:xs:XP:mantle-of-the-ancients:cast:s1	-	-	-	23c4009444b0	-	760d9fd797fb	-	-	2026-11-25	xproof
 74250f3e-ad88-486f-a10a-90d9a2f0097f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lammastide-weave:cast:s1,f:xs:XP:lammastide-weave:cast:s1	-	-	-	8c0bd19283bb	-	e5fd183152b9	-	-	2026-11-24	xproof
@@ -60,8 +60,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7445122d-a943-493c-b7b6-3699cc07db0e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:kithkin-zealot:cast:s1,f:xs:XP:kithkin-zealot:cast:s1	-	-	-	8a1b1a193ec0	-	cb2f94e05885	-	-	2026-11-24	xproof
 7445122d-a943-493c-b7b6-3699cc07db0e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:kithkin-zealot:cast:s1,f:xs:XP:kithkin-zealot:cast:s1	-	-	-	8a1b1a193ec0	-	cb2f94e05885	-	-	2026-11-24	xproof
 74466fa6-34d9-42f9-8590-c7f1fa672bf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-74466fa6-34d9-42f9-8590-c7f1fa672bf5	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-74466fa6-34d9-42f9-8590-c7f1fa672bf5	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+74466fa6-34d9-42f9-8590-c7f1fa672bf5	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+74466fa6-34d9-42f9-8590-c7f1fa672bf5	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:skullmane-baku:f0t0:s1,f:xs:XP:skullmane-baku:f0t0:s1	-	-	-	23c4009444b0	-	42339e84e4bd	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 744b7e93-c893-4770-a3bb-6a45b7f8e4f7	cast	cast-resolve	agreed	-	FX	scen	2	0	Expel the Interlopers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 744f79da-240f-4d14-a98c-e2796645ae88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shapers-of-nature:cast:s1,f:xs:XP:shapers-of-nature:cast:s1	-	-	-	d864b561c9cb	-	3442372fabca	-	-	2026-11-24	xproof
 744f79da-240f-4d14-a98c-e2796645ae88	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:shapers-of-nature:f0a0:s1,f:xs:XP:shapers-of-nature:f0a0:s1	-	-	-	d864b561c9cb	-	3442372fabca	-	-	2026-11-24	xproof

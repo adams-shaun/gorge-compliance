@@ -44,9 +44,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2837be10-23ad-49d2-943e-b1e00edbbbd9	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2837be10-23ad-49d2-943e-b1e00edbbbd9	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 283f743f-6e79-49de-b7ed-08e6ffb64cc6	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Clive's Hideaway/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-283f743f-6e79-49de-b7ed-08e6ffb64cc6	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Clive's Hideaway/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-283f743f-6e79-49de-b7ed-08e6ffb64cc6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Clive's Hideaway/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-283f743f-6e79-49de-b7ed-08e6ffb64cc6	land	play-land	agreed	-	X	scen	1	0	Clive's Hideaway/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+283f743f-6e79-49de-b7ed-08e6ffb64cc6	f0/a1	Play	agreed	-	FX	start	2	0	x:xs:XP:clive-s-hideaway:f0a1:s1,f:xs:XP:clive-s-hideaway:f0a1:s1	-	-	-	23c4009444b0	-	197291b6a190	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+283f743f-6e79-49de-b7ed-08e6ffb64cc6	f0/t0	ChangesZone/Hideaway	agreed	-	FX	start	2	0	x:xs:XP:clive-s-hideaway:land:s1,f:xs:XP:clive-s-hideaway:land:s1	-	-	-	23c4009444b0	-	197291b6a190	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+283f743f-6e79-49de-b7ed-08e6ffb64cc6	land	land	agreed	-	FX	start	2	0	x:xs:XP:clive-s-hideaway:land:s1,f:xs:XP:clive-s-hideaway:land:s1	-	-	-	23c4009444b0	-	197291b6a190	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2842217a-173e-4879-8b25-fefe2fc1123f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:thor-god-of-thunder:f0t0:s2,f:xs:XP:thor-god-of-thunder:f0t0:s2	-	-	-	5437c1394672	-	911a7ceb8edb	-	-	2026-11-24	xproof
 2842217a-173e-4879-8b25-fefe2fc1123f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Thor, God of Thunder/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2842217a-173e-4879-8b25-fefe2fc1123f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Thor, God of Thunder/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

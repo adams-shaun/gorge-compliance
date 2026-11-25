@@ -31,8 +31,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 731a70e8-40d6-47b9-b2b3-b16c818e1935	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:call-the-scions:cast:s1,f:xs:XP:call-the-scions:cast:s1	-	-	-	d864b561c9cb	-	01caa99fe374	-	-	2026-11-24	xproof
 7324abaa-48da-439d-9339-b0ea5eea612e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unnatural-growth:cast:s1,f:xs:XP:unnatural-growth:cast:s1	-	-	-	ae86f6029288	-	08355aaf3cbd	-	-	2026-11-24	xproof
 7324abaa-48da-439d-9339-b0ea5eea612e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:unnatural-growth:cast:s1,f:xs:XP:unnatural-growth:cast:s1	-	-	-	ae86f6029288	-	08355aaf3cbd	-	-	2026-11-24	xproof
-732b1314-68bb-4d3d-9f3f-7e66e763caf5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:followed-footsteps:cast:s1,f:xs:XP:followed-footsteps:cast:s1	-	-	-	64a08ba7d913	-	198cde78e23b	-	-	2026-11-24	xproof
-732b1314-68bb-4d3d-9f3f-7e66e763caf5	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+732b1314-68bb-4d3d-9f3f-7e66e763caf5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:followed-footsteps:f0t0:s1,f:xs:XP:followed-footsteps:f0t0:s1	-	-	-	23c4009444b0	-	198cde78e23b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+732b1314-68bb-4d3d-9f3f-7e66e763caf5	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:followed-footsteps:f0t0:s1,f:xs:XP:followed-footsteps:f0t0:s1	-	-	-	23c4009444b0	-	198cde78e23b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7330201a-41ff-44bf-a623-2ed062878c58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73346137-3117-4dc3-b5a4-1aca1da54548	cast	cast-resolve	agreed	-	X	scen	1	0	Large Bear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73346137-3117-4dc3-b5a4-1aca1da54548	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Large Bear/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 736026b2-84d4-4452-ae0d-5d1b0af0a400	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 736168bb-0a5c-4b29-9f82-1319cd112873	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 736168bb-0a5c-4b29-9f82-1319cd112873	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-736168bb-0a5c-4b29-9f82-1319cd112873	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+736168bb-0a5c-4b29-9f82-1319cd112873	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:quillmane-baku:f0t0:s1,f:xs:XP:quillmane-baku:f0t0:s1	-	-	-	23c4009444b0	-	51cd51b7a65a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 73648693-c67f-454b-83e2-1d1787437a2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7366374a-db19-4fb0-9c35-a6e466a9bbc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 736892cb-a34b-4bb9-b56c-e26e3db207a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mana-vault:f0t0:s1,f:xs:XP:mana-vault:f0t0:s1	-	-	-	23c4009444b0	-	c5f99613ae2e	-	-	2026-11-25	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 738d8d1c-4ceb-4115-89e1-1f2149fb4f5f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73905f94-9665-4d82-8927-725d2c4fc4bd	cast	cast-resolve	agreed	-	X	scen	1	0	Dissection Practice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7392c58b-1ba9-4cf3-8449-aa5de3c42130	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fiddlehead-kami:cast:s1,f:xs:XP:fiddlehead-kami:cast:s1	-	-	-	64a08ba7d913	-	e4cca10b80ea	-	-	2026-11-24	xproof
-7392c58b-1ba9-4cf3-8449-aa5de3c42130	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+7392c58b-1ba9-4cf3-8449-aa5de3c42130	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:fiddlehead-kami:f0t0:s1,f:xs:XP:fiddlehead-kami:f0t0:s1	-	-	-	23c4009444b0	-	e4cca10b80ea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 739621e6-e138-4ef9-87e8-c730b5a7f495	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7397036f-8114-47cc-b52f-c532a6845d16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:delirium-skeins:cast:s1,f:xs:XP:delirium-skeins:cast:s1	-	-	-	16ec2936189a	-	0faac9b86bb7	-	-	2026-11-24	xproof
 7398c8b2-373a-41c7-ac6c-7329f5944462	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49479778-c4c0-43ba-a7b7-45f00d067462	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:maze-s-end:f0a1:s1,f:xs:XP:maze-s-end:f0a1:s1	-	-	-	3aa6ded33acb	-	5d0ab392079b	-	-	2026-11-25	xproof
 49479778-c4c0-43ba-a7b7-45f00d067462	land	land	agreed	-	FX	start	2	0	x:xs:XP:maze-s-end:land:s1,f:xs:XP:maze-s-end:land:s1	-	-	-	23b491658465	-	5d0ab392079b	-	-	2026-11-24	xproof
 494895db-3da1-4a19-b7a5-ea47817f4e4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-494895db-3da1-4a19-b7a5-ea47817f4e4f	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PRM.json:	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+494895db-3da1-4a19-b7a5-ea47817f4e4f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 49491601-e272-4603-9348-185a2953bd4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49491601-e272-4603-9348-185a2953bd4b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 494b31b2-27ef-4ca1-ac72-c2fcfc8a23a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -207,8 +207,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49f0b317-6b06-482e-ab64-e02713e6c7e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:battlewing-mystic:f0t0:s1,f:xs:XP:battlewing-mystic:f0t0:s1	-	-	-	d864b561c9cb	-	b156700ed060	-	-	2026-11-24	xproof
 49f0b317-6b06-482e-ab64-e02713e6c7e8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:battlewing-mystic:f0t0:s1,f:xs:XP:battlewing-mystic:f0t0:s1	-	-	-	d864b561c9cb	-	b156700ed060	-	-	2026-11-24	xproof
 49f0da4a-e046-4220-b90e-e105a5f2ef00	cast	cast-resolve	agreed	-	FX	scen	2	0	Incinerating Blast/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-49f2cbc3-bd03-48e6-b1c4-d7f315b8579d	cast	cast-resolve	agreed	-	X	scen	1	0	Taigam, Master Opportunist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-49f2cbc3-bd03-48e6-b1c4-d7f315b8579d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Taigam, Master Opportunist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+49f2cbc3-bd03-48e6-b1c4-d7f315b8579d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:taigam-master-opportunist:cast:s1,f:xs:XP:taigam-master-opportunist:cast:s1	-	-	-	23c4009444b0	-	2d96ea2756e4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+49f2cbc3-bd03-48e6-b1c4-d7f315b8579d	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:taigam-master-opportunist:f0t0:s1,f:xs:XP:taigam-master-opportunist:f0t0:s1	-	-	-	23c4009444b0	-	2d96ea2756e4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 49f3bd5a-9c2a-45b8-aa10-9c6471028a0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:satyr-grovedancer:f0t0:s1,f:xs:XP:satyr-grovedancer:f0t0:s1	-	-	-	d864b561c9cb	-	db4118c9b9c5	-	-	2026-11-24	xproof
 49f3bd5a-9c2a-45b8-aa10-9c6471028a0f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:satyr-grovedancer:f0t0:s1,f:xs:XP:satyr-grovedancer:f0t0:s1	-	-	-	d864b561c9cb	-	db4118c9b9c5	-	-	2026-11-24	xproof
 49f42896-90cd-4a05-bcca-12b19f780446	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

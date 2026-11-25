@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-e3016295-00f7-4daf-91b0-57653733b103	cast	cast-resolve	agreed	-	X	scen	1	0	Adventurer's Airship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e3016295-00f7-4daf-91b0-57653733b103	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Adventurer's Airship/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e3016295-00f7-4daf-91b0-57653733b103	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Adventurer's Airship/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e3016295-00f7-4daf-91b0-57653733b103	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:adventurer-s-airship:cast:s1,f:xs:XP:adventurer-s-airship:cast:s1	-	-	-	23c4009444b0	-	3d527025ac1d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e3016295-00f7-4daf-91b0-57653733b103	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:adventurer-s-airship:f0a0:s1,f:xs:XP:adventurer-s-airship:f0a0:s1	-	-	-	23c4009444b0	-	3d527025ac1d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+e3016295-00f7-4daf-91b0-57653733b103	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:adventurer-s-airship:f0a0:s1,f:xs:XP:adventurer-s-airship:f0a0:s1	-	-	-	23c4009444b0	-	3d527025ac1d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e3056f28-868b-401a-a528-7528d639bdeb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3056f28-868b-401a-a528-7528d639bdeb	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:prismatic-lens:f0a1:s1,f:xs:XP:prismatic-lens:f0a1:s1	-	-	-	23b491658465	-	1019e7e672ec	-	-	2026-11-25	xproof
 e3056f28-868b-401a-a528-7528d639bdeb	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

@@ -62,17 +62,17 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 076865e9-ee10-4a87-9180-4274202d37c1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Starbreach Whale/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 076865e9-ee10-4a87-9180-4274202d37c1	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 076cf4f1-b3d4-4175-b976-938ad851cc0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coliseum-behemoth:f0t0:s1,f:xs:XP:coliseum-behemoth:f0t0:s1	-	-	-	23c4009444b0	-	c81fe9fd381a	-	-	2026-11-25	xproof
-076cf4f1-b3d4-4175-b976-938ad851cc0e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Coliseum Behemoth/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-076cf4f1-b3d4-4175-b976-938ad851cc0e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Coliseum Behemoth/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+076cf4f1-b3d4-4175-b976-938ad851cc0e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:coliseum-behemoth:combat0.attack:s1,f:xs:XP:coliseum-behemoth:combat0.attack:s1	-	-	-	23c4009444b0	-	c81fe9fd381a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+076cf4f1-b3d4-4175-b976-938ad851cc0e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:coliseum-behemoth:combat0.block:s1,f:xs:XP:coliseum-behemoth:combat0.block:s1	-	-	-	23c4009444b0	-	c81fe9fd381a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 076cf4f1-b3d4-4175-b976-938ad851cc0e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:coliseum-behemoth:f0t0:s1,f:xs:XP:coliseum-behemoth:f0t0:s1	-	-	-	23c4009444b0	-	c81fe9fd381a	-	-	2026-11-25	xproof
 0772c5d2-9189-47e2-b0ee-13babd94ea93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:subversion:f0t0:s1,f:xs:XP:subversion:f0t0:s1	-	-	-	3aa6ded33acb	-	81f55a19fcc7	-	-	2026-11-25	xproof
 0772c5d2-9189-47e2-b0ee-13babd94ea93	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:subversion:f0t0:s1,f:xs:XP:subversion:f0t0:s1	-	-	-	3aa6ded33acb	-	81f55a19fcc7	-	-	2026-11-25	xproof
 07792d72-d5db-41b9-871c-e720e12ce659	cast	cast-resolve	agreed	-	X	scen	1	0	Cemetery Recruitment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 077ae62d-ed94-4365-a8b7-97fd99cff028	cast	cast-resolve	agreed	-	X	scen	1	0	Rabid Gnaw/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-077b5ed2-05c2-4a16-b5eb-794884ee1c21	cast	cast-resolve	agreed	-	X	scen	1	0	Demon Wall/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+077b5ed2-05c2-4a16-b5eb-794884ee1c21	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:demon-wall:cast:s1,f:xs:XP:demon-wall:cast:s1	-	-	-	23c4009444b0	-	c1495e0346bf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 077b5ed2-05c2-4a16-b5eb-794884ee1c21	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Demon Wall/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-077b5ed2-05c2-4a16-b5eb-794884ee1c21	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Demon Wall/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-077b5ed2-05c2-4a16-b5eb-794884ee1c21	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Demon Wall/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+077b5ed2-05c2-4a16-b5eb-794884ee1c21	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:demon-wall:combat0.block:s1,f:xs:XP:demon-wall:combat0.block:s1	-	-	-	23c4009444b0	-	c1495e0346bf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+077b5ed2-05c2-4a16-b5eb-794884ee1c21	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:demon-wall:f0a0:s1,f:xs:XP:demon-wall:f0a0:s1	-	-	-	23c4009444b0	-	c1495e0346bf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 077b5ed2-05c2-4a16-b5eb-794884ee1c21	static#0.0	static#0.0	agreed	-	X	scen	1	0	Demon Wall/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0788fdd2-6fab-460c-b054-a736df670f96	cast	cast-resolve	agreed	-	FX	scen	2	0	Colossus of the Blood Age/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0788fdd2-6fab-460c-b054-a736df670f96	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -92,7 +92,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0799df10-b489-4f79-bf98-7a0c500b46a1	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 0799df10-b489-4f79-bf98-7a0c500b46a1	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 079b1f07-6910-491b-83ba-5ec41260f32d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-079d4698-dc11-4d29-91b6-725d78dfb75d	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+079d4698-dc11-4d29-91b6-725d78dfb75d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rend-flesh:cast:s1,f:xs:XP:rend-flesh:cast:s1	-	-	-	23c4009444b0	-	7b0eba22d7ff	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 079f0d7f-57a5-4101-a9e3-c5a57148b3fb	cast	cast-resolve	agreed	-	FX	scen	2	0	Elder Auntie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 079f0d7f-57a5-4101-a9e3-c5a57148b3fb	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 07a0cba9-8768-4fd9-a3d5-b0f83b4bf8e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

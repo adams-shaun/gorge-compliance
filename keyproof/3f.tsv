@@ -93,8 +93,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f6101a5-3038-45b0-8302-b2e4127b9510	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rally the Monastery/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f661b58-e8ca-412c-bdac-af151162de12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f678f76-3863-4ab5-a4fd-9b76a282b1a8	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:balamb-t-rexaur:f0t0:s1,f:xs:XP:balamb-t-rexaur:f0t0:s1	-	-	-	267e485f6204	-	347c1cd866e2	-	-	2026-11-24	xproof
-3f678f76-3863-4ab5-a4fd-9b76a282b1a8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Balamb T-Rexaur/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3f678f76-3863-4ab5-a4fd-9b76a282b1a8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Balamb T-Rexaur/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3f678f76-3863-4ab5-a4fd-9b76a282b1a8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:balamb-t-rexaur:combat0.attack:s1,f:xs:XP:balamb-t-rexaur:combat0.attack:s1	-	-	-	23c4009444b0	-	347c1cd866e2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3f678f76-3863-4ab5-a4fd-9b76a282b1a8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:balamb-t-rexaur:combat0.block:s1,f:xs:XP:balamb-t-rexaur:combat0.block:s1	-	-	-	23c4009444b0	-	347c1cd866e2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3f678f76-3863-4ab5-a4fd-9b76a282b1a8	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:balamb-t-rexaur:f0t0:s2,f:xs:XP:balamb-t-rexaur:f0t0:s2	-	-	-	267e485f6204	-	347c1cd866e2	-	-	2026-11-24	xproof
 3f678f76-3863-4ab5-a4fd-9b76a282b1a8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:balamb-t-rexaur:f0t0:s1,f:xs:XP:balamb-t-rexaur:f0t0:s1	-	-	-	267e485f6204	-	347c1cd866e2	-	-	2026-11-24	xproof
 3f6b2f76-0364-415e-a6a2-e9e5bf31b745	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -128,8 +128,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f9a797b-85e7-474e-aefe-7e2ec08fc5b7	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3f9a797b-85e7-474e-aefe-7e2ec08fc5b7	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3f9ab49b-81fc-487e-8613-e30afcae164d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f9cf871-7df6-49d5-aab3-ad945571b707	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-3f9cf871-7df6-49d5-aab3-ad945571b707	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+3f9cf871-7df6-49d5-aab3-ad945571b707	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3f9cf871-7df6-49d5-aab3-ad945571b707	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3f9e3b79-6ecb-4741-a9f4-fd7d3545d5cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fa11a6a-a760-45db-8341-f83a0f69c17f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alacrian-armory:cast:s1,f:xs:XP:alacrian-armory:cast:s1	-	-	-	23c4009444b0	-	0b5d6f1bd552	-	-	2026-11-25	xproof

@@ -146,8 +146,8 @@ d6b4810f-2bee-4c83-b13d-c46fb7dd8e08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d6b4810f-2bee-4c83-b13d-c46fb7dd8e08	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:ojutai-monument:f0a1:s2,f:xs:XP:ojutai-monument:f0a1:s2	-	-	-	d864b561c9cb	-	33d1563126bb	-	-	2026-11-24	xproof
 d6b4810f-2bee-4c83-b13d-c46fb7dd8e08	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:ojutai-monument:f0a1:s1,f:xs:XP:ojutai-monument:f0a1:s1	-	-	-	d864b561c9cb	-	33d1563126bb	-	-	2026-11-24	xproof
 d6b54f58-7775-4180-b2e5-1b57da65a409	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6b54f58-7775-4180-b2e5-1b57da65a409	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-d6b54f58-7775-4180-b2e5-1b57da65a409	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+d6b54f58-7775-4180-b2e5-1b57da65a409	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d6b54f58-7775-4180-b2e5-1b57da65a409	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:cast:s1,f:xs:XP:akul-the-unrepentant:cast:s1	-	-	-	8c0bd19283bb	-	3be382dd3441	-	-	2026-11-25	xproof
 d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:combat0.attack:s1,f:xs:XP:akul-the-unrepentant:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3be382dd3441	-	-	2026-11-25	xproof
 d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:combat0.block:s1,f:xs:XP:akul-the-unrepentant:combat0.block:s1	-	-	-	3aa6ded33acb	-	3be382dd3441	-	-	2026-11-25	xproof
@@ -198,9 +198,9 @@ d6ea0e58-7b14-425b-9135-57e149c0e47e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:con
 d6ea0e58-7b14-425b-9135-57e149c0e47e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:conciliator-s-duelist:f0t0:s2,f:xs:XP:conciliator-s-duelist:f0t0:s2	-	-	-	5437c1394672	-	a860e3a966eb	-	-	2026-11-24	xproof
 d6ea0e58-7b14-425b-9135-57e149c0e47e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Conciliator's Duelist/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6eabbff-cc0c-4000-8feb-4826e1b6bc66	cast	cast-resolve	agreed	-	X	scen	1	0	Kapow!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d6eb2bfc-1e86-4e36-9d48-12de16955b98	cast	cast-resolve	agreed	-	X	scen	1	0	Sage of the Fang/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d6eb2bfc-1e86-4e36-9d48-12de16955b98	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sage of the Fang/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d6eb2bfc-1e86-4e36-9d48-12de16955b98	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d6eb2bfc-1e86-4e36-9d48-12de16955b98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sage-of-the-fang:cast:s1,f:xs:XP:sage-of-the-fang:cast:s1	-	-	-	23c4009444b0	-	f738566c4862	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d6eb2bfc-1e86-4e36-9d48-12de16955b98	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:sage-of-the-fang:f0a0:s1,f:xs:XP:sage-of-the-fang:f0a0:s1	-	-	-	23c4009444b0	-	f738566c4862	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d6eb2bfc-1e86-4e36-9d48-12de16955b98	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sage-of-the-fang:cast:s1,f:xs:XP:sage-of-the-fang:cast:s1	-	-	-	23c4009444b0	-	f738566c4862	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d6ee6cc1-902d-4f56-afa5-6fa4813bfbbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6ee8bd6-0207-46ee-9892-c1d1b23b934e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blastoderm:f0t0:s1,f:xs:XP:blastoderm:f0t0:s1	-	-	-	3aa6ded33acb	-	cc61c858fcb5	-	-	2026-11-25	xproof
 d6ee8bd6-0207-46ee-9892-c1d1b23b934e	f0/t0	Phase/Fading	agreed	-	FX	start	2	0	x:xs:XP:blastoderm:f0t0:s1,f:xs:XP:blastoderm:f0t0:s1	-	-	-	3aa6ded33acb	-	cc61c858fcb5	-	-	2026-11-25	xproof
@@ -213,8 +213,8 @@ d6f36172-d3ef-49e9-a55f-ce2983bb2439	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 d6f36172-d3ef-49e9-a55f-ce2983bb2439	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d6f8c69f-e603-41f5-8f25-da8a102f7c8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:river-serpent:cast:s1,f:xs:XP:river-serpent:cast:s1	-	-	-	d864b561c9cb	-	9bdaf527328a	-	-	2026-11-24	xproof
 d6f8c69f-e603-41f5-8f25-da8a102f7c8d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6fdfd94-cef5-482c-83ed-11c5ba40abe9	cast	cast-resolve	agreed	-	X	scen	1	0	Zurgo's Vanguard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d6fdfd94-cef5-482c-83ed-11c5ba40abe9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Zurgo's Vanguard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d6fdfd94-cef5-482c-83ed-11c5ba40abe9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zurgo-s-vanguard:cast:s1,f:xs:XP:zurgo-s-vanguard:cast:s1	-	-	-	23c4009444b0	-	fc61c599030b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+d6fdfd94-cef5-482c-83ed-11c5ba40abe9	f0/t0	Attacks/Mobilize	agreed	-	FX	start	2	0	x:xs:XP:zurgo-s-vanguard:f0t0:s1,f:xs:XP:zurgo-s-vanguard:f0t0:s1	-	-	-	23c4009444b0	-	fc61c599030b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d6fdfd94-cef5-482c-83ed-11c5ba40abe9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Zurgo's Vanguard/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6fe945c-b561-4e35-8c8e-7dcaa2ec45ab	cast	cast	agreed	-	X	start	1	0	x:xs:XP:goblin-lore:cast:s1	-	-	-	25696bf19d5b	-	a9dc52b4e793	-	-	2026-11-24	xproof
 d6ffdaf0-ac08-4de9-bbce-2eab2f86bcca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

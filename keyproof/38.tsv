@@ -71,8 +71,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38515f89-348b-4cf3-b7bd-1f6fe4ce2fba	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 38517711-e570-4337-b269-addcf8bfdd74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38530399-d2c9-4445-92ba-14c5cd438055	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38530399-d2c9-4445-92ba-14c5cd438055	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-38530399-d2c9-4445-92ba-14c5cd438055	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+38530399-d2c9-4445-92ba-14c5cd438055	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+38530399-d2c9-4445-92ba-14c5cd438055	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 38538aff-b6f9-4c30-992e-7fd78da3c44a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 38538aff-b6f9-4c30-992e-7fd78da3c44a	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:matter-reshaper:f0t0:s1	-	-	-	d864b561c9cb	-	25fd38f32e72	-	-	2026-11-24	xproof
 38561191-ecd1-4028-a0fd-4bca6a7eab58	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:troi-winging-it:cast:s1,f:xs:XP:troi-winging-it:cast:s1	-	-	-	8c0bd19283bb	-	9015cd3e1db0	-	-	2026-11-24	xproof
@@ -150,8 +150,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 38c83332-2d21-450c-ae97-34109b565f59	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:tyrite-sanctum:f0a1:s1,f:xs:XP:tyrite-sanctum:f0a1:s1	-	-	-	d864b561c9cb	-	d68ad3271123	-	-	2026-11-24	xproof
 38c83332-2d21-450c-ae97-34109b565f59	f0/a2	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:tyrite-sanctum:f0a2:s1,f:xs:XP:tyrite-sanctum:f0a2:s1	-	-	-	d864b561c9cb	-	d68ad3271123	-	-	2026-11-24	xproof
 38c83332-2d21-450c-ae97-34109b565f59	land	land	agreed	-	FX	start	2	0	x:xs:XP:tyrite-sanctum:land:s1,f:xs:XP:tyrite-sanctum:land:s1	-	-	-	d864b561c9cb	-	d68ad3271123	-	-	2026-11-24	xproof
-38cfe4a0-6ead-435b-9f86-928205c0a52c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-38cfe4a0-6ead-435b-9f86-928205c0a52c	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+38cfe4a0-6ead-435b-9f86-928205c0a52c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kami-of-the-crescent-moon:f0t0:s1,f:xs:XP:kami-of-the-crescent-moon:f0t0:s1	-	-	-	23c4009444b0	-	d215760f3713	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+38cfe4a0-6ead-435b-9f86-928205c0a52c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:kami-of-the-crescent-moon:f0t0:s1,f:xs:XP:kami-of-the-crescent-moon:f0t0:s1	-	-	-	23c4009444b0	-	d215760f3713	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 38d2176c-1a1e-4030-9c63-e28ba4a69b6d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dune-mover:cast:s1,f:xs:XP:dune-mover:cast:s1	-	-	-	ae86f6029288	-	34a524f4a790	-	-	2026-11-24	xproof
 38d2176c-1a1e-4030-9c63-e28ba4a69b6d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dune-mover:cast:s1,f:xs:XP:dune-mover:cast:s1	-	-	-	ae86f6029288	-	34a524f4a790	-	-	2026-11-24	xproof
 38d9401e-2840-455d-8478-8c976588d4ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

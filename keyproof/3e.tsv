@@ -57,10 +57,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e5ca524-8dd1-4f7f-a467-5210d768b8a1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rampaging Ferocidon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3e5ca524-8dd1-4f7f-a467-5210d768b8a1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rampaging Ferocidon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3e5ca524-8dd1-4f7f-a467-5210d768b8a1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rampaging Ferocidon/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-3e61d7c4-263f-4077-bdbc-d79020f2a479	cast	cast-resolve	agreed	-	X	scen	1	0	Cactuar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3e61d7c4-263f-4077-bdbc-d79020f2a479	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cactuar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3e61d7c4-263f-4077-bdbc-d79020f2a479	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cactuar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3e61d7c4-263f-4077-bdbc-d79020f2a479	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cactuar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3e61d7c4-263f-4077-bdbc-d79020f2a479	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cactuar:cast:s1,f:xs:XP:cactuar:cast:s1	-	-	-	23c4009444b0	-	7122f8cf4102	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3e61d7c4-263f-4077-bdbc-d79020f2a479	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:cactuar:combat0.attack:s1,f:xs:XP:cactuar:combat0.attack:s1	-	-	-	23c4009444b0	-	7122f8cf4102	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3e61d7c4-263f-4077-bdbc-d79020f2a479	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:cactuar:combat0.block:s1,f:xs:XP:cactuar:combat0.block:s1	-	-	-	23c4009444b0	-	7122f8cf4102	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3e61d7c4-263f-4077-bdbc-d79020f2a479	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:cactuar:combat0.attack:s1,f:xs:XP:cactuar:combat0.attack:s1	-	-	-	23c4009444b0	-	7122f8cf4102	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3e6dad31-6192-4675-81df-09689906c12b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3e6dad31-6192-4675-81df-09689906c12b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3e6e70eb-6638-4aa6-997b-90f5810e12a0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-cavalry:cast:s1,f:xs:XP:llanowar-cavalry:cast:s1	-	-	-	5f2128bf97e4	-	20c255a4da7b	-	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e8d1051-1739-4a10-9cef-78f7333b4979	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	3ecf55e812f8	-	-	2026-11-25	xproof
 3e8d1051-1739-4a10-9cef-78f7333b4979	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	3ecf55e812f8	-	-	2026-11-25	xproof
 3e8d1051-1739-4a10-9cef-78f7333b4979	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	3ecf55e812f8	-	-	2026-11-25	xproof
-3e978db3-77ef-4b93-8f8f-e414e27254bd	cast	cast-resolve	agreed	-	X	scen	1	0	Elixir/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3e978db3-77ef-4b93-8f8f-e414e27254bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elixir:cast:s1,f:xs:XP:elixir:cast:s1	-	-	-	23c4009444b0	-	9e73fbb932d8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3e978db3-77ef-4b93-8f8f-e414e27254bd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Elixir/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ea060d8-449c-4a5e-8883-b45bd7707b5b	cast	cast-resolve	agreed	-	FX	scen	2	0	Season of Gathering/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ea41848-7a11-4608-88c1-7a6e76e812ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disciple-of-the-sun:f0t0:s1,f:xs:XP:disciple-of-the-sun:f0t0:s1	-	-	-	d864b561c9cb	-	a1f65d84856c	-	-	2026-11-24	xproof
@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3eabd27c-bd65-479a-9743-e90e4273c016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3eabd27c-bd65-479a-9743-e90e4273c016	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3eae5419-b686-4321-a89d-cb602c487bfc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3eae5419-b686-4321-a89d-cb602c487bfc	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+3eae5419-b686-4321-a89d-cb602c487bfc	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:nezumi-shadow-watcher:f0a0:s1,f:xs:XP:nezumi-shadow-watcher:f0a0:s1	-	-	-	23c4009444b0	-	9c4e5e107085	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3eaf1e6b-bf4c-4ea8-83ea-6827470fd802	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hungry-for-more:cast:s1,f:xs:XP:hungry-for-more:cast:s1	-	-	-	d864b561c9cb	-	2b196fd4f281	-	-	2026-11-24	xproof
 3eb02993-b2fc-4185-aa67-08c8f133ce42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3eb21641-90e1-4865-b7be-a21d52b7b56b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 931d3dcb-4bbb-4f1a-95e2-7e315faf4158	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:conversion-apparatus:cast:s2,f:xs:XP:conversion-apparatus:cast:s2	-	-	-	8c0bd19283bb	-	fecd6851f941	-	-	2026-11-24	xproof
 931d3dcb-4bbb-4f1a-95e2-7e315faf4158	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:conversion-apparatus:f0a1:s1,f:xs:XP:conversion-apparatus:f0a1:s1	-	-	-	8c0bd19283bb	-	fecd6851f941	-	-	2026-11-24	xproof
 931d3dcb-4bbb-4f1a-95e2-7e315faf4158	f0/a2	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-932177b8-70f8-4908-a48f-fe03204daddc	cast	cast-resolve	agreed	-	X	scen	1	0	Light of Judgment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+932177b8-70f8-4908-a48f-fe03204daddc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:light-of-judgment:cast:s1,f:xs:XP:light-of-judgment:cast:s1	-	-	-	23c4009444b0	-	84c283cdf481	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 932668fa-d6e3-41c0-ad0c-8e0a00e68d11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:decree-of-pain:cast:s1,f:xs:XP:decree-of-pain:cast:s1	-	-	-	8c0bd19283bb	-	4023288d2a36	-	-	2026-11-24	xproof
 932668fa-d6e3-41c0-ad0c-8e0a00e68d11	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 932668fa-d6e3-41c0-ad0c-8e0a00e68d11	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -83,8 +83,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93637599-d9b4-4f7e-a5c0-5a92656e941e	f0/a0	Dig	agreed	-	FX	start	2	0	x:xs:XP:yasmin-khan:f0a0:s1,f:xs:XP:yasmin-khan:f0a0:s1	-	-	-	8c0bd19283bb	-	d9f5abbe6a1c	-	-	2026-11-24	xproof
 9364b5bc-3e78-4b9d-9993-0081bbe2eef6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9364b5bc-3e78-4b9d-9993-0081bbe2eef6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:moriok-rigger:f0t0:s1,f:xs:XP:moriok-rigger:f0t0:s1	-	-	-	23c4009444b0	-	e3e7b96bedb9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-9370f6bf-d6a0-4c5b-828f-7229f563cc07	cast	cast-resolve	agreed	-	X	scen	1	0	Jenova, Ancient Calamity/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9370f6bf-d6a0-4c5b-828f-7229f563cc07	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jenova, Ancient Calamity/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9370f6bf-d6a0-4c5b-828f-7229f563cc07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jenova-ancient-calamity:cast:s1,f:xs:XP:jenova-ancient-calamity:cast:s1	-	-	-	23c4009444b0	-	1849efe56be0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9370f6bf-d6a0-4c5b-828f-7229f563cc07	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:jenova-ancient-calamity:cast:s1,f:xs:XP:jenova-ancient-calamity:cast:s1	-	-	-	23c4009444b0	-	1849efe56be0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9370f6bf-d6a0-4c5b-828f-7229f563cc07	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Jenova, Ancient Calamity/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9373a176-a5e9-4fdc-906b-bc6aef657e5b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-inspector:f0t0:s1,f:xs:XP:aether-inspector:f0t0:s1	-	-	-	d864b561c9cb	-	84560cfc83ba	-	-	2026-11-24	xproof
 9373a176-a5e9-4fdc-906b-bc6aef657e5b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aether-inspector:f0t0:s1,f:xs:XP:aether-inspector:f0t0:s1	-	-	-	d864b561c9cb	-	84560cfc83ba	-	-	2026-11-24	xproof
@@ -183,9 +183,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93e0fd89-8a0d-4d97-aa22-aafe83d53515	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93e1d3a6-e12f-4a0a-be0f-fbf568d89f1a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93e1d3a6-e12f-4a0a-be0f-fbf568d89f1a	f0/t0	NULL	owed	refused:history:kicked:no-kicker	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-93e336e3-2be7-4581-8ab3-9bea422d81c3	cast	cast-resolve	agreed	-	X	scen	1	0	Cargo Ship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-93e336e3-2be7-4581-8ab3-9bea422d81c3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cargo Ship/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-93e336e3-2be7-4581-8ab3-9bea422d81c3	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Cargo Ship/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+93e336e3-2be7-4581-8ab3-9bea422d81c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cargo-ship:cast:s1,f:xs:XP:cargo-ship:cast:s1	-	-	-	23c4009444b0	-	3561aa1a90fe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+93e336e3-2be7-4581-8ab3-9bea422d81c3	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:cargo-ship:cast:s2,f:xs:XP:cargo-ship:cast:s2	-	-	-	23c4009444b0	-	3561aa1a90fe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+93e336e3-2be7-4581-8ab3-9bea422d81c3	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:cargo-ship:f0a1:s1,f:xs:XP:cargo-ship:f0a1:s1	-	-	-	23c4009444b0	-	3561aa1a90fe	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 93e38650-ce22-4ab9-b79d-cc7b6477c075	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Gold Saucer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 93e38650-ce22-4ab9-b79d-cc7b6477c075	f0/a1	activate#0.1	agreed	-	X	scen	1	0	The Gold Saucer/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 93e38650-ce22-4ab9-b79d-cc7b6477c075	f0/a2	activate#0.2	agreed	-	X	scen	1	0	The Gold Saucer/activate#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

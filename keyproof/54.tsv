@@ -7,8 +7,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 540693f3-985c-4a4a-945c-c957c5aad395	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:arbiter-of-woe:combat0.attack:s1,f:xs:XP:arbiter-of-woe:combat0.attack:s1	-	-	-	23c4009444b0	-	ad9da44b49ef	-	-	2026-11-25	xproof
 540693f3-985c-4a4a-945c-c957c5aad395	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:arbiter-of-woe:combat0.block:s1,f:xs:XP:arbiter-of-woe:combat0.block:s1	-	-	-	23c4009444b0	-	ad9da44b49ef	-	-	2026-11-25	xproof
 540693f3-985c-4a4a-945c-c957c5aad395	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-540d1878-7afe-48a5-8b40-3dd1b06a024a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-540d1878-7afe-48a5-8b40-3dd1b06a024a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+540d1878-7afe-48a5-8b40-3dd1b06a024a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-numai:f0t0:s1,f:xs:XP:scourge-of-numai:f0t0:s1	-	-	-	23c4009444b0	-	4e252198e408	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+540d1878-7afe-48a5-8b40-3dd1b06a024a	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-numai:f0t0:s1,f:xs:XP:scourge-of-numai:f0t0:s1	-	-	-	23c4009444b0	-	4e252198e408	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 540e1371-baa9-412f-a17a-22ea833ea3e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541744d9-449d-420a-a5a1-2fffba18450f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541744d9-449d-420a-a5a1-2fffba18450f	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54d65915-3833-4e4d-a066-37ae9507846f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54db986e-cf8a-4d2c-8ce9-13da11b11464	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kemuri-onna:f0t0:s1,f:xs:XP:kemuri-onna:f0t0:s1	-	-	-	64a08ba7d913	-	80d07134f2c4	-	-	2026-11-24	xproof
 54db986e-cf8a-4d2c-8ce9-13da11b11464	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kemuri-onna:f0t0:s1,f:xs:XP:kemuri-onna:f0t0:s1	-	-	-	64a08ba7d913	-	80d07134f2c4	-	-	2026-11-24	xproof
-54db986e-cf8a-4d2c-8ce9-13da11b11464	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+54db986e-cf8a-4d2c-8ce9-13da11b11464	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:kemuri-onna:f0t1:s1,f:xs:XP:kemuri-onna:f0t1:s1	-	-	-	23c4009444b0	-	80d07134f2c4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 54dc1c02-2d71-465b-a285-d6d11113991c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54dc1c02-2d71-465b-a285-d6d11113991c	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 54dc1c02-2d71-465b-a285-d6d11113991c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -187,4 +187,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54f8acb1-58f3-49d1-bff8-c1b578245936	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 54f8acb1-58f3-49d1-bff8-c1b578245936	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 54fc373e-157f-4157-b7dd-74d689f4c0f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54fc373e-157f-4157-b7dd-74d689f4c0f9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+54fc373e-157f-4157-b7dd-74d689f4c0f9	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:seshiro-the-anointed:f0t0:s1,f:xs:XP:seshiro-the-anointed:f0t0:s1	-	-	-	23c4009444b0	-	0368716e6006	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

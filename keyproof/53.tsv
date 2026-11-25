@@ -32,8 +32,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5324192b-6687-41e4-8e56-326b21a5dbf3	f0/a1	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5324192b-6687-41e4-8e56-326b21a5dbf3	land	land	agreed	-	FX	start	2	0	x:xs:XP:moorland-haunt:land:s1,f:xs:XP:moorland-haunt:land:s1	-	-	-	d864b561c9cb	-	1d91682470b6	-	-	2026-11-24	xproof
 5326381e-e5e7-4c3e-9565-4837b3ffaec0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5326381e-e5e7-4c3e-9565-4837b3ffaec0	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-5326381e-e5e7-4c3e-9565-4837b3ffaec0	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+5326381e-e5e7-4c3e-9565-4837b3ffaec0	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+5326381e-e5e7-4c3e-9565-4837b3ffaec0	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:skullsnatcher:f0t0:s1,f:xs:XP:skullsnatcher:f0t0:s1	-	-	-	23c4009444b0	-	dd9037785da1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 53295b03-717d-481d-9d5c-212c5f30bbbf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-hunt:f0t0:s1,f:xs:XP:omen-of-the-hunt:f0t0:s1	-	-	-	ae86f6029288	-	82202abad8d2	-	-	2026-11-24	xproof
 53295b03-717d-481d-9d5c-212c5f30bbbf	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-hunt:f0a0:s1,f:xs:XP:omen-of-the-hunt:f0a0:s1	-	-	-	ae86f6029288	-	82202abad8d2	-	-	2026-11-24	xproof
 53295b03-717d-481d-9d5c-212c5f30bbbf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-hunt:f0t0:s1,f:xs:XP:omen-of-the-hunt:f0t0:s1	-	-	-	ae86f6029288	-	82202abad8d2	-	-	2026-11-24	xproof
@@ -54,9 +54,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 533b107c-fd66-45ef-b74e-e6bd9b75ea8f	cast	cast-resolve	agreed	-	X	scen	1	0	Combustion Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 533b107c-fd66-45ef-b74e-e6bd9b75ea8f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Combustion Man/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 533c4956-87f8-4bae-8924-166fc2e9ec1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-533d5bf9-0912-451f-a3f4-3842b0a75b1d	cast	cast-resolve	agreed	-	X	scen	1	0	Golbez, Crystal Collector/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-533d5bf9-0912-451f-a3f4-3842b0a75b1d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Golbez, Crystal Collector/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-533d5bf9-0912-451f-a3f4-3842b0a75b1d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Golbez, Crystal Collector/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+533d5bf9-0912-451f-a3f4-3842b0a75b1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golbez-crystal-collector:cast:s1,f:xs:XP:golbez-crystal-collector:cast:s1	-	-	-	23c4009444b0	-	67e61d35c3f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+533d5bf9-0912-451f-a3f4-3842b0a75b1d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:golbez-crystal-collector:f0t0:s1,f:xs:XP:golbez-crystal-collector:f0t0:s1	-	-	-	23c4009444b0	-	67e61d35c3f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+533d5bf9-0912-451f-a3f4-3842b0a75b1d	f0/t1	Phase	agreed	-	FX	start	1	0	x:xs:XP:golbez-crystal-collector:f0t1:s2,f:xs:XP:golbez-crystal-collector:f0t1:s2	-	-	-	23c4009444b0	-	67e61d35c3f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 533d6b9f-a145-44c4-9d16-74fcd9c0ae2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 533e41cc-7cae-47f2-886b-8a3ffb82bf81	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	040437efab81	-	-	2026-11-25	xproof
 533e41cc-7cae-47f2-886b-8a3ffb82bf81	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	040437efab81	-	-	2026-11-25	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53a1faa1-ca67-4027-bee8-0f7c4584d62b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53a1faa1-ca67-4027-bee8-0f7c4584d62b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53a40369-0e62-4ad2-a6bd-65a5ff0da65e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:march-of-the-returned:cast:s1,f:xs:XP:march-of-the-returned:cast:s1	-	-	-	d864b561c9cb	-	73046b5f9bdc	-	-	2026-11-24	xproof
-53a4d9ee-6dfa-4a8b-a1e4-7f671a666188	cast	cast-resolve	agreed	-	X	scen	1	0	Auron's Inspiration/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+53a4d9ee-6dfa-4a8b-a1e4-7f671a666188	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:auron-s-inspiration:cast:s1,f:xs:XP:auron-s-inspiration:cast:s1	-	-	-	23c4009444b0	-	284f45f5c189	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 53a59ba9-f4e9-460b-928a-ce6d7ae883f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silken-strength:f0t0:s1,f:xs:XP:silken-strength:f0t0:s1	-	-	-	23c4009444b0	-	ccf34accbce0	-	-	2026-11-25	xproof
 53a59ba9-f4e9-460b-928a-ce6d7ae883f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:silken-strength:f0t0:s1,f:xs:XP:silken-strength:f0t0:s1	-	-	-	23c4009444b0	-	ccf34accbce0	-	-	2026-11-25	xproof
 53a59ba9-f4e9-460b-928a-ce6d7ae883f7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Silken Strength/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

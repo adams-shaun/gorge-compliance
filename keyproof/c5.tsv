@@ -62,7 +62,7 @@ c53f2d1c-5a53-4020-aace-a1d9f75e47c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c53f2d1c-5a53-4020-aace-a1d9f75e47c7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:cliffside-rescuer:f0a0:s1,f:xs:XP:cliffside-rescuer:f0a0:s1	-	-	-	8c0bd19283bb	-	10f9873eea7a	-	-	2026-11-24	xproof
 c546747a-1935-4c59-a45f-cad7da41fe38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c546747a-1935-4c59-a45f-cad7da41fe38	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c546747a-1935-4c59-a45f-cad7da41fe38	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+c546747a-1935-4c59-a45f-cad7da41fe38	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c54879da-0f1d-4ad0-b082-95f0e4d35685	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c54879da-0f1d-4ad0-b082-95f0e4d35685	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 c549b0fd-1e08-4873-952e-a14dc45a0fd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -75,9 +75,9 @@ c552bd73-ce75-40fd-9d80-9e90b6f45274	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Flam
 c554ae68-0201-4958-aa63-8159911acb50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c554ae68-0201-4958-aa63-8159911acb50	f0/a0	NULL	owed	refused:steps-needed:cost:GP	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 c5577514-d2af-4904-9f94-b472228c6e3d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c5577514-d2af-4904-9f94-b472228c6e3d	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-c5577514-d2af-4904-9f94-b472228c6e3d	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-c5577514-d2af-4904-9f94-b472228c6e3d	f0/t1	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+c5577514-d2af-4904-9f94-b472228c6e3d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c5577514-d2af-4904-9f94-b472228c6e3d	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c5577514-d2af-4904-9f94-b472228c6e3d	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c55909d3-1f67-4a4a-9d53-8513d6cf96d8	cast	cast-resolve	agreed	-	X	scen	1	0	Stromkirk Noble/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c55909d3-1f67-4a4a-9d53-8513d6cf96d8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stromkirk-noble:combat0.attack:s1,f:xs:XP:stromkirk-noble:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1e998df21e9d	-	-	2026-11-25	xproof
 c55909d3-1f67-4a4a-9d53-8513d6cf96d8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stromkirk Noble/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -92,10 +92,10 @@ c55a4b25-ccc4-49de-9f98-a829c547a64d	combat#0.block	combat#0.block	agreed	-	X	sc
 c55a4b25-ccc4-49de-9f98-a829c547a64d	static#0.0	static#0.0	agreed	-	X	scen	1	0	White Lotus Reinforcements/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c5648a32-98b0-4625-aae1-ae56e0ef0197	cast	cast-resolve	agreed	-	FX	scen	2	0	Fancy Footwork/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c5661500-c48f-4f6d-bbe7-c8bd7118d862	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c566317e-cd82-46c1-b506-f41256d815f6	cast	cast-resolve	agreed	-	X	scen	1	0	Wingblade Disciple/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c566317e-cd82-46c1-b506-f41256d815f6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wingblade Disciple/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c566317e-cd82-46c1-b506-f41256d815f6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wingblade Disciple/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c566317e-cd82-46c1-b506-f41256d815f6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wingblade Disciple/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c566317e-cd82-46c1-b506-f41256d815f6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wingblade-disciple:cast:s1,f:xs:XP:wingblade-disciple:cast:s1	-	-	-	23c4009444b0	-	aa6b337097fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c566317e-cd82-46c1-b506-f41256d815f6	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:wingblade-disciple:combat0.attack:s1,f:xs:XP:wingblade-disciple:combat0.attack:s1	-	-	-	23c4009444b0	-	aa6b337097fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c566317e-cd82-46c1-b506-f41256d815f6	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:wingblade-disciple:combat0.block:s1,f:xs:XP:wingblade-disciple:combat0.block:s1	-	-	-	23c4009444b0	-	aa6b337097fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+c566317e-cd82-46c1-b506-f41256d815f6	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:wingblade-disciple:f0t0:s1,f:xs:XP:wingblade-disciple:f0t0:s1	-	-	-	23c4009444b0	-	aa6b337097fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c56671e1-28a6-40c3-bad5-b5e617ddb7da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arctic-merfolk:cast:s1,f:xs:XP:arctic-merfolk:cast:s1	-	-	-	fc71ca68c5ac	-	8e631b103d8b	-	-	2026-11-24	xproof
 c56726a6-d424-46a0-b3b3-2b44fbcbc63a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c56726a6-d424-46a0-b3b3-2b44fbcbc63a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ c5c98759-e009-4340-9326-9f5ff70a86bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c5ca2df3-6fd9-478d-9bc6-48695a4600fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5d326a9-c047-4f77-9f0c-b30daf268f15	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5d326a9-c047-4f77-9f0c-b30daf268f15	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-c5da5c31-0cf1-4393-8701-eda7880ecebc	cast	cast-resolve	agreed	-	X	scen	1	0	Unending Whisper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c5da5c31-0cf1-4393-8701-eda7880ecebc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unending-whisper:cast:s1,f:xs:XP:unending-whisper:cast:s1	-	-	-	23c4009444b0	-	f039e5974356	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c5dc5546-e9e5-4b5b-b812-5716d4bdee0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fangren-hunter:cast:s1,f:xs:XP:fangren-hunter:cast:s1	-	-	-	25696bf19d5b	-	558e40e08030	-	-	2026-11-24	xproof
 c5dcab94-f4c0-4e5e-ad99-7b3871be6e89	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5dcab94-f4c0-4e5e-ad99-7b3871be6e89	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:oran-rief-invoker:f0a0:s1,f:xs:XP:oran-rief-invoker:f0a0:s1	-	-	-	d864b561c9cb	-	689eb33e2faf	-	-	2026-11-24	xproof

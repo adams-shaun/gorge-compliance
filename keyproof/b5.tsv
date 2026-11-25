@@ -28,8 +28,8 @@ b51c8659-ec4f-4213-beb1-49a7acd7366c	f0/a1	NULL	owed	refused:start-not-exercised
 b51c8659-ec4f-4213-beb1-49a7acd7366c	land	land	agreed	-	FX	start	2	0	x:xs:XP:turbulent-wetlands:land:s1,f:xs:XP:turbulent-wetlands:land:s1	-	-	-	8c0bd19283bb	-	1bbdf94a9601	-	-	2026-11-24	xproof
 b51d2c70-204b-4321-a589-f00a3e49fab4	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b51d2c70-204b-4321-a589-f00a3e49fab4	f0/a0	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-b51e0ae3-126b-4b7e-9dd1-818a5b8e512a	cast	cast-resolve	agreed	-	X	scen	1	0	Dwarven Castle Guard/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b51e0ae3-126b-4b7e-9dd1-818a5b8e512a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dwarven Castle Guard/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b51e0ae3-126b-4b7e-9dd1-818a5b8e512a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dwarven-castle-guard:cast:s1,f:xs:XP:dwarven-castle-guard:cast:s1	-	-	-	23c4009444b0	-	226c844b52fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+b51e0ae3-126b-4b7e-9dd1-818a5b8e512a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dwarven-castle-guard:f0t0:s1,f:xs:XP:dwarven-castle-guard:f0t0:s1	-	-	-	23c4009444b0	-	226c844b52fb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b5208c2c-b839-42f6-8717-ee4bbaf1385b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:embermouth-sentinel:cast:s1	-	-	-	23c4009444b0	-	ae13b5e2c765	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b5208c2c-b839-42f6-8717-ee4bbaf1385b	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:embermouth-sentinel:cast:s1	-	-	-	23c4009444b0	-	ae13b5e2c765	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b52148c3-fe97-4cc0-a814-a5a0f5d426f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ b5bc4adf-9105-4901-989c-63612314af5c	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Eve
 b5bc4adf-9105-4901-989c-63612314af5c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Evershrike's Gift/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 b5c03abf-4297-4402-9107-539e92d41f2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valiant-knight:cast:s1,f:xs:XP:valiant-knight:cast:s1	-	-	-	d864b561c9cb	-	32f2e197ed21	-	-	2026-11-24	xproof
 b5c03abf-4297-4402-9107-539e92d41f2f	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:valiant-knight:f0a0:s1,f:xs:XP:valiant-knight:f0a0:s1	-	-	-	d864b561c9cb	-	32f2e197ed21	-	-	2026-11-24	xproof
-b5c64331-2ba5-43ad-b77c-979875cc39e3	cast	cast-resolve	agreed	-	X	scen	1	0	Goobbue Gardener/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b5c64331-2ba5-43ad-b77c-979875cc39e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goobbue-gardener:cast:s1,f:xs:XP:goobbue-gardener:cast:s1	-	-	-	23c4009444b0	-	3d30d52f3d8c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 b5c64331-2ba5-43ad-b77c-979875cc39e3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Goobbue Gardener/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5c8e24a-f4d7-42dc-8117-905ad0bad888	cast	cast-resolve	agreed	-	X	scen	1	0	Atlantis Attacks/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b5cd9c55-34ad-4e1f-92b2-527c9babc4d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

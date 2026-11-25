@@ -24,7 +24,7 @@ cc2b6e58-2d6f-495e-95f3-9496105c4cba	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:ja
 cc2b6e58-2d6f-495e-95f3-9496105c4cba	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:jace-beleren:cast:s1,f:xs:XP:jace-beleren:cast:s1	-	-	-	25696bf19d5b	-	5187adf8baec	-	-	2026-11-24	xproof
 cc2b6e58-2d6f-495e-95f3-9496105c4cba	f0/a2	Mill	agreed	-	FX	start	2	0	x:xs:XP:jace-beleren:f0a2:s1,f:xs:XP:jace-beleren:f0a2:s1	-	-	-	23c4009444b0	-	5187adf8baec	-	-	2026-11-25	xproof
 cc2eb3e4-084c-471b-9fe0-72aa9ff2019a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cc2eb3e4-084c-471b-9fe0-72aa9ff2019a	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+cc2eb3e4-084c-471b-9fe0-72aa9ff2019a	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:manriki-gusari:f0a0:s1,f:xs:XP:manriki-gusari:f0a0:s1	-	-	-	23c4009444b0	-	d2ce8b5b78b1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cc2f945f-9048-4978-b61f-49eefb3d94d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wicker-witch:cast:s1,f:xs:XP:wicker-witch:cast:s1	-	-	-	d864b561c9cb	-	840b14275d33	-	-	2026-11-24	xproof
 cc300649-ae50-47e7-ad0f-ffbdffddb989	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc300649-ae50-47e7-ad0f-ffbdffddb989	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:runewing:f0t0:s1,f:xs:XP:runewing:f0t0:s1	-	-	-	d864b561c9cb	-	7e07ef02e57c	-	-	2026-11-24	xproof
@@ -75,7 +75,7 @@ cc6a83c7-e645-4a53-9550-be79b42cd851	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loy
 cc6a83c7-e645-4a53-9550-be79b42cd851	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loyal-warhound:f0t0:s1,f:xs:XP:loyal-warhound:f0t0:s1	-	-	-	3aa6ded33acb	-	471dfca05ba2	-	-	2026-11-25	xproof
 cc6f2b79-8fcd-4542-904b-943c7493b8ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc710da0-5a2e-4bc4-8fdd-d90e7bc1f224	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Baron, Airship Kingdom/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cc710da0-5a2e-4bc4-8fdd-d90e7bc1f224	land	play-land	agreed	-	X	scen	1	0	Baron, Airship Kingdom/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cc710da0-5a2e-4bc4-8fdd-d90e7bc1f224	land	land	agreed	-	FX	start	2	0	x:xs:XP:baron-airship-kingdom:land:s1,f:xs:XP:baron-airship-kingdom:land:s1	-	-	-	23c4009444b0	-	1b5207a8880a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cc71b6c4-09d4-423b-a134-2f2f2fd7b533	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc72ec48-9e8b-4ded-b445-f3a839fd1abe	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tajuru-beastmaster:cast:s1,f:xs:XP:tajuru-beastmaster:cast:s1	-	-	-	d864b561c9cb	-	110eeb30369c	-	-	2026-11-24	xproof
 cc72ec48-9e8b-4ded-b445-f3a839fd1abe	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tajuru-beastmaster:cast:s1,f:xs:XP:tajuru-beastmaster:cast:s1	-	-	-	d864b561c9cb	-	110eeb30369c	-	-	2026-11-24	xproof
@@ -114,14 +114,14 @@ cca3f3e8-15a7-4ad8-893a-d3570178a800	combat#0.attack	combat#0.attack	agreed	-	X	
 cca3f3e8-15a7-4ad8-893a-d3570178a800	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fractal Mascot/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cca3f3e8-15a7-4ad8-893a-d3570178a800	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:fractal-mascot:f0t0:s2,f:xs:XP:fractal-mascot:f0t0:s2	-	-	-	5437c1394672	-	4d9eac192b1b	-	-	2026-11-24	xproof
 cca60afe-b044-4401-8322-170aa015873c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cca698b3-b86f-45a2-aa3f-bab7d5a56e8a	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+cca698b3-b86f-45a2-aa3f-bab7d5a56e8a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rend-spirit:cast:s1,f:xs:XP:rend-spirit:cast:s1	-	-	-	23c4009444b0	-	53d426263f43	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cca94004-fe8e-404d-9391-ad33d0a126fb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stoic-builder:f0t0:s1,f:xs:XP:stoic-builder:f0t0:s1	-	-	-	d864b561c9cb	-	ab6d60c08271	-	-	2026-11-24	xproof
 cca94004-fe8e-404d-9391-ad33d0a126fb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stoic-builder:f0t0:s1,f:xs:XP:stoic-builder:f0t0:s1	-	-	-	d864b561c9cb	-	ab6d60c08271	-	-	2026-11-24	xproof
 ccaa44f2-96be-44e2-884f-c31baa3908d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kindred-dominance:cast:s1,f:xs:XP:kindred-dominance:cast:s1	-	-	-	8c0bd19283bb	-	3f24deeb7e64	-	-	2026-11-24	xproof
 ccaadf8d-22c0-4139-b734-03ac2fcb4494	cast	cast-resolve	agreed	-	FX	scen	2	0	Veteran Ice Climber/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ccaadf8d-22c0-4139-b734-03ac2fcb4494	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Veteran Ice Climber/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ccaadf8d-22c0-4139-b734-03ac2fcb4494	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:veteran-ice-climber:combat0.attack:s1,f:xs:XP:veteran-ice-climber:combat0.attack:s1	-	-	-	23c4009444b0	-	f7e9ab51375b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ccaadf8d-22c0-4139-b734-03ac2fcb4494	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Veteran Ice Climber/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ccaadf8d-22c0-4139-b734-03ac2fcb4494	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Veteran Ice Climber/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ccaadf8d-22c0-4139-b734-03ac2fcb4494	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:veteran-ice-climber:combat0.attack:s1,f:xs:XP:veteran-ice-climber:combat0.attack:s1	-	-	-	23c4009444b0	-	f7e9ab51375b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ccaadf8d-22c0-4139-b734-03ac2fcb4494	static#0.0	static#0.0	agreed	-	X	scen	1	0	Veteran Ice Climber/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ccab4509-f189-4610-9597-547e7f6b0775	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sword-of-sinew-and-steel:cast:s1,f:xs:XP:sword-of-sinew-and-steel:cast:s1	-	-	-	d864b561c9cb	-	7227e9f34251	-	-	2026-11-24	xproof
 ccab4509-f189-4610-9597-547e7f6b0775	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sword-of-sinew-and-steel:f0a0:s1,f:xs:XP:sword-of-sinew-and-steel:f0a0:s1	-	-	-	3aa6ded33acb	-	7227e9f34251	-	-	2026-11-25	xproof

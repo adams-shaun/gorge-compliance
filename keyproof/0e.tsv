@@ -38,8 +38,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e3246ef-e0b4-49bc-a715-b69c4b6be461	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e3246ef-e0b4-49bc-a715-b69c4b6be461	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e3246ef-e0b4-49bc-a715-b69c4b6be461	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-0e381b7e-2d32-4a9a-a327-e9dd1236dc1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eiganjo-free-riders:cast:s1,f:xs:XP:eiganjo-free-riders:cast:s1	-	-	-	64a08ba7d913	-	fea0f9d2e7a7	-	-	2026-11-24	xproof
-0e381b7e-2d32-4a9a-a327-e9dd1236dc1b	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+0e381b7e-2d32-4a9a-a327-e9dd1236dc1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eiganjo-free-riders:f0t0:s1,f:xs:XP:eiganjo-free-riders:f0t0:s1	-	-	-	23c4009444b0	-	fea0f9d2e7a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0e381b7e-2d32-4a9a-a327-e9dd1236dc1b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:eiganjo-free-riders:f0t0:s1,f:xs:XP:eiganjo-free-riders:f0t0:s1	-	-	-	23c4009444b0	-	fea0f9d2e7a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0e3a11f4-c880-4932-bc7e-7aea8a9472bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e3a11f4-c880-4932-bc7e-7aea8a9472bc	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:serpent-generator:f0a0:s1,f:xs:XP:serpent-generator:f0a0:s1	-	-	-	fc71ca68c5ac	-	e72a1f80a682	-	-	2026-11-24	xproof
 0e3ac581-3d78-4879-9afb-3db69c5c47a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archon-of-absolution:cast:s1,f:xs:XP:archon-of-absolution:cast:s1	-	-	-	ae86f6029288	-	2dc5bdeb1a04	-	-	2026-11-24	xproof
@@ -48,7 +48,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e3f9345-d986-4d60-a343-45598ab59aff	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	ea8c6af9cc08	-	-	2026-11-24	xproof
 0e3f9345-d986-4d60-a343-45598ab59aff	f0/t1	Attacks	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	ea8c6af9cc08	-	-	2026-11-24	xproof
 0e412b68-9179-4094-960a-95692428855b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0e412b68-9179-4094-960a-95692428855b	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+0e412b68-9179-4094-960a-95692428855b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:zo-zu-the-punisher:f0t0:s1,f:xs:XP:zo-zu-the-punisher:f0t0:s1	-	-	-	23c4009444b0	-	58690e215920	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0e471b6d-4ba4-46aa-a802-81e401cbfa56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e49ec18-f979-4168-b7df-7728f3fe442e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e49ec18-f979-4168-b7df-7728f3fe442e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

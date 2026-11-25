@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 410acdbc-3a00-49db-a712-ad970d24b363	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:spiteful-bully:f0t0:s1,f:xs:XP:spiteful-bully:f0t0:s1	-	-	-	23c4009444b0	-	e6bd227c21eb	-	-	2026-11-25	xproof
 410ce48e-d907-4bc5-ad90-2067161a0e04	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 411137a5-7054-42bc-a731-88a15e5e6b9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-411137a5-7054-42bc-a731-88a15e5e6b9d	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+411137a5-7054-42bc-a731-88a15e5e6b9d	f0/a0	ChooseType	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	32f3fcc5e437	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 41129dc1-be88-4198-94f9-032817a79bc7	cast	cast-resolve	agreed	-	FX	scen	2	0	Karakyk Guardian/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 41129dc1-be88-4198-94f9-032817a79bc7	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:karakyk-guardian:combat0.attack:s1,f:xs:XP:karakyk-guardian:combat0.attack:s1	-	-	-	23c4009444b0	-	3821b3fccf20	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 41129dc1-be88-4198-94f9-032817a79bc7	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:karakyk-guardian:combat0.block:s1,f:xs:XP:karakyk-guardian:combat0.block:s1	-	-	-	23c4009444b0	-	3821b3fccf20	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 416f49e2-feb1-43e7-befc-b0e02181b202	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Robe of Stars/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 416f49e2-feb1-43e7-befc-b0e02181b202	static#0.0	static#0.0	agreed	-	X	scen	1	0	Robe of Stars/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 417312f8-16ca-47a7-b991-906788691700	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:no-dachi:cast:s1,f:xs:XP:no-dachi:cast:s1	-	-	-	64a08ba7d913	-	ad0ef5098cad	-	-	2026-11-24	xproof
-417312f8-16ca-47a7-b991-906788691700	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+417312f8-16ca-47a7-b991-906788691700	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:no-dachi:f0a0:s1	-	-	-	23c4009444b0	-	ad0ef5098cad	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 41785f7b-3d02-4b7f-86ff-b381f626142e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4178ae56-2449-4617-aff8-f59d8fb96c66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4178ae56-2449-4617-aff8-f59d8fb96c66	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41e250e6-8e38-4cbc-ae66-98800a5feba8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archdemon-of-unx:f0t0:s1,f:xs:XP:archdemon-of-unx:f0t0:s1	-	-	-	3aa6ded33acb	-	ce4a8c27cffc	-	-	2026-11-25	xproof
 41e250e6-8e38-4cbc-ae66-98800a5feba8	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:archdemon-of-unx:f0t0:s1,f:xs:XP:archdemon-of-unx:f0t0:s1	-	-	-	3aa6ded33acb	-	ce4a8c27cffc	-	-	2026-11-25	xproof
 41e4ba67-d038-4d0a-b740-709cb2350192	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-41e4ba67-d038-4d0a-b740-709cb2350192	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+41e4ba67-d038-4d0a-b740-709cb2350192	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:mindmoil:f0t0:s1,f:xs:XP:mindmoil:f0t0:s1	-	-	-	23c4009444b0	-	e912341c46f8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 41ed9b02-5926-4af0-bcee-7f41bbb3fdd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 41ee78ce-a5ef-4f88-b479-2eb6651123f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spiteful-squad:cast:s1,f:xs:XP:spiteful-squad:cast:s1	-	-	-	d864b561c9cb	-	a06e2011efa2	-	-	2026-11-24	xproof
 41ee78ce-a5ef-4f88-b479-2eb6651123f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spiteful-squad:f0t0:s1,f:xs:XP:spiteful-squad:f0t0:s1	-	-	-	d864b561c9cb	-	a06e2011efa2	-	-	2026-11-24	xproof

@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64a9a6b4-26b5-4d23-be86-85c54e9c4727	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 64aa732c-d939-48c7-b1d6-c73fa1eedb40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64aa732c-d939-48c7-b1d6-c73fa1eedb40	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64ab6dfe-ed87-47ec-afd5-a7f2e7e6bbd2	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+64ab6dfe-ed87-47ec-afd5-a7f2e7e6bbd2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 64acb083-a0a3-46ec-9c93-b2ac36878703	cast	cast-resolve	agreed	-	FX	scen	2	0	Water Tribe Rallier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64acb083-a0a3-46ec-9c93-b2ac36878703	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Water Tribe Rallier/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64ad5657-78e9-4f34-8877-18c4f51fff9a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glint-horn-buccaneer:cast:s1,f:xs:XP:glint-horn-buccaneer:cast:s1	-	-	-	d864b561c9cb	-	0470d914624b	-	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64cf5d59-7bcd-4b0b-a160-c8468d4c0f60	cast	cast	agreed	-	X	start	2	0	x:xs:XP:vault-skirge:cast:s1	-	-	-	77494c1ce129	-	be4ceaf1c479	-	-	2026-11-24	xproof
 64d022ab-5222-4a7a-ab8a-89749560f666	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64de050c-7167-4ebd-8584-f064d8be3302	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-64df560a-905f-45d1-bc70-14d99e3112d3	cast	cast-resolve	agreed	-	X	scen	1	0	Windcrag Siege/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+64df560a-905f-45d1-bc70-14d99e3112d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:windcrag-siege:cast:s1,f:xs:XP:windcrag-siege:cast:s1	-	-	-	23c4009444b0	-	450bce50a203	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 64df560a-905f-45d1-bc70-14d99e3112d3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Windcrag Siege/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64df560a-905f-45d1-bc70-14d99e3112d3	static#0.1	static#0.1	agreed	-	X	scen	1	0	Windcrag Siege/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64e0c580-0e55-4f42-8594-11ccb584d633	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64e39ec9-358a-4aa0-a7e9-164e8aa0b236	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:cetacean-ops:f0t0:s1,f:xs:XP:cetacean-ops:f0t0:s1	-	-	-	23c4009444b0	-	7450a0f971bd	-	-	2026-11-25	xproof
 64e39ec9-358a-4aa0-a7e9-164e8aa0b236	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:cetacean-ops:f0t1:s1,f:xs:XP:cetacean-ops:f0t1:s1	-	-	-	23c4009444b0	-	7450a0f971bd	-	-	2026-11-25	xproof
 64e413c9-96e5-43c3-a182-84d53fef4327	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-unspeakable:cast:s1,f:xs:XP:the-unspeakable:cast:s1	-	-	-	64a08ba7d913	-	d20c0d5c8e5d	-	-	2026-11-24	xproof
-64e413c9-96e5-43c3-a182-84d53fef4327	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+64e413c9-96e5-43c3-a182-84d53fef4327	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:the-unspeakable:f0t0:s1,f:xs:XP:the-unspeakable:f0t0:s1	-	-	-	23c4009444b0	-	d20c0d5c8e5d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 64e7ef06-ba30-4b19-9d44-ca77944cc930	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rank-rat:f0t0:s1,f:xs:XP:rank-rat:f0t0:s1	-	-	-	25696bf19d5b	-	0e75fc0dd124	-	-	2026-11-24	xproof
 64e7ef06-ba30-4b19-9d44-ca77944cc930	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rank-rat:f0t0:s1,f:xs:XP:rank-rat:f0t0:s1	-	-	-	25696bf19d5b	-	0e75fc0dd124	-	-	2026-11-24	xproof
 64ed5c35-8185-4e68-8028-b7b632ef5828	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skullport-merchant:f0t0:s1,f:xs:XP:skullport-merchant:f0t0:s1	-	-	-	d864b561c9cb	-	5802db00e194	-	-	2026-11-24	xproof

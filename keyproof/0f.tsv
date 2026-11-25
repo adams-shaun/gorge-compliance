@@ -107,8 +107,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f94d1a7-351f-4d37-8dab-1ebf2e8ee213	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f94d1a7-351f-4d37-8dab-1ebf2e8ee213	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f9672ac-f4fc-46e8-9fe5-93b3e66810a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f9672ac-f4fc-46e8-9fe5-93b3e66810a4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
-0f9672ac-f4fc-46e8-9fe5-93b3e66810a4	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+0f9672ac-f4fc-46e8-9fe5-93b3e66810a4	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+0f9672ac-f4fc-46e8-9fe5-93b3e66810a4	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0f96c48f-aceb-4554-8b06-cca162151a64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scouting-hawk:f0t0:s1,f:xs:XP:scouting-hawk:f0t0:s1	-	-	-	23c4009444b0	-	5dc801cc5f20	-	-	2026-11-25	xproof
 0f96c48f-aceb-4554-8b06-cca162151a64	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scouting-hawk:f0t0:s1,f:xs:XP:scouting-hawk:f0t0:s1	-	-	-	23c4009444b0	-	5dc801cc5f20	-	-	2026-11-25	xproof
 0f99e921-61e7-4fc8-8115-4162712b4737	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:malanthrope:cast:s1,f:xs:XP:malanthrope:cast:s1	-	-	-	8c0bd19283bb	-	c57e2f766d54	-	-	2026-11-24	xproof
@@ -127,7 +127,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fae0474-25ec-474f-8c7f-9e9061835030	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eyes-of-the-beholder:cast:s1,f:xs:XP:eyes-of-the-beholder:cast:s1	-	-	-	3aa6ded33acb	-	7bebf04c430d	-	-	2026-11-25	xproof
 0fae1c73-fd34-433e-8989-fbd80e3b1c70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fb26acd-891d-471d-98d8-73c6f940052b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0fb26acd-891d-471d-98d8-73c6f940052b	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+0fb26acd-891d-471d-98d8-73c6f940052b	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:lifespinner:f0a0:s1,f:xs:XP:lifespinner:f0a0:s1	-	-	-	23c4009444b0	-	5d09ed8efecf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0fb2c61a-9e74-4ee2-810a-b77a3b45f446	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fb2c61a-9e74-4ee2-810a-b77a3b45f446	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0fb90df6-a62b-4a9f-ae79-db71d40466ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grand-warlord-radha:cast:s1,f:xs:XP:grand-warlord-radha:cast:s1	-	-	-	d864b561c9cb	-	7fc5faa30b1c	-	-	2026-11-24	xproof

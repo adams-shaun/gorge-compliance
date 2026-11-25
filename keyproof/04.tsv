@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04aa210a-235f-4e07-87d1-0d28cdf6888b	f0/a0	PutCounter	agreed	-	FX	start	1	0	x:xs:XP:huatli-dinosaur-knight:cast:s2,f:xs:XP:huatli-dinosaur-knight:cast:s2	-	-	-	d864b561c9cb	-	2fdd10fd8207	-	-	2026-11-24	xproof
 04aa210a-235f-4e07-87d1-0d28cdf6888b	f0/a1	Pump	agreed	-	FX	start	1	0	x:xs:XP:huatli-dinosaur-knight:cast:s1,f:xs:XP:huatli-dinosaur-knight:cast:s1	-	-	-	d864b561c9cb	-	2fdd10fd8207	-	-	2026-11-24	xproof
 04aa210a-235f-4e07-87d1-0d28cdf6888b	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-04ac8b2c-95e9-40e9-8cc0-af9b075a94c0	cast	cast-resolve	agreed	-	X	scen	1	0	Fang, Fearless l'Cie/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+04ac8b2c-95e9-40e9-8cc0-af9b075a94c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fang-fearless-l-cie:cast:s1,f:xs:XP:fang-fearless-l-cie:cast:s1	-	-	-	23c4009444b0	-	6bc54d3b5663	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04ac8b2c-95e9-40e9-8cc0-af9b075a94c0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fang, Fearless l'Cie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04b1fb9e-4aef-46d9-b163-f9beff198bad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04b1fb9e-4aef-46d9-b163-f9beff198bad	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -188,8 +188,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04cffc41-05da-45fb-82da-2c4d4108c7e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nightsquad-commando:f0t0:s1,f:xs:XP:nightsquad-commando:f0t0:s1	-	-	-	3aa6ded33acb	-	12bf6fe6ec82	-	-	2026-11-25	xproof
 04cffc41-05da-45fb-82da-2c4d4108c7e1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nightsquad-commando:f0t0:s1,f:xs:XP:nightsquad-commando:f0t0:s1	-	-	-	3aa6ded33acb	-	12bf6fe6ec82	-	-	2026-11-25	xproof
 04d02394-e17f-43cd-932f-f58e8cc56629	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seizan-perverter-of-truth:f0t0:s1,f:xs:XP:seizan-perverter-of-truth:f0t0:s1	-	-	-	23c4009444b0	-	650a8da7c748	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:seizan-perverter-of-truth:f0t0:s1,f:xs:XP:seizan-perverter-of-truth:f0t0:s1	-	-	-	23c4009444b0	-	650a8da7c748	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04d8615c-3883-4251-9790-1d8a4a40e142	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eternal-dragon:cast:s1,f:xs:XP:eternal-dragon:cast:s1	-	-	-	8c0bd19283bb	-	b7d8c9ba5eef	-	-	2026-11-24	xproof
 04d8615c-3883-4251-9790-1d8a4a40e142	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04d8615c-3883-4251-9790-1d8a4a40e142	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -215,9 +215,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04e5ecda-9646-4bc3-addf-cca471553fbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carrion-locust:f0t0:s1,f:xs:XP:carrion-locust:f0t0:s1	-	-	-	ae86f6029288	-	06b084d0d418	-	-	2026-11-24	xproof
 04e5ecda-9646-4bc3-addf-cca471553fbe	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:carrion-locust:f0t0:s1,f:xs:XP:carrion-locust:f0t0:s1	-	-	-	ae86f6029288	-	06b084d0d418	-	-	2026-11-24	xproof
 04e615e6-4088-4170-904c-f2d4bcebed59	cast	cast-resolve	agreed	-	X	scen	1	0	Starry-Eyed Skyrider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-04e615e6-4088-4170-904c-f2d4bcebed59	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Starry-Eyed Skyrider/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-04e615e6-4088-4170-904c-f2d4bcebed59	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Starry-Eyed Skyrider/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-04e615e6-4088-4170-904c-f2d4bcebed59	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Starry-Eyed Skyrider/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+04e615e6-4088-4170-904c-f2d4bcebed59	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:starry-eyed-skyrider:combat0.attack:s1,f:xs:XP:starry-eyed-skyrider:combat0.attack:s1	-	-	-	23c4009444b0	-	eedfbdf39d2b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+04e615e6-4088-4170-904c-f2d4bcebed59	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:starry-eyed-skyrider:combat0.block:s1,f:xs:XP:starry-eyed-skyrider:combat0.block:s1	-	-	-	23c4009444b0	-	eedfbdf39d2b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+04e615e6-4088-4170-904c-f2d4bcebed59	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:starry-eyed-skyrider:combat0.attack:s1,f:xs:XP:starry-eyed-skyrider:combat0.attack:s1	-	-	-	23c4009444b0	-	eedfbdf39d2b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04e615e6-4088-4170-904c-f2d4bcebed59	static#0.0	static#0.0	agreed	-	X	scen	1	0	Starry-Eyed Skyrider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04ea21b3-084b-4746-9b49-99b6ef4f0885	cast	cast-resolve	agreed	-	FX	scen	2	0	Thrumming Hivepool/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 04ea21b3-084b-4746-9b49-99b6ef4f0885	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thrumming Hivepool/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

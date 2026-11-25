@@ -105,10 +105,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c8007ac-4b3d-4444-93e9-f583185e5d81	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 9c8007ac-4b3d-4444-93e9-f583185e5d81	land	land	agreed	-	FX	start	2	0	x:xs:XP:blasted-landscape:land:s1,f:xs:XP:blasted-landscape:land:s1	-	-	-	5f2128bf97e4	-	96b7b2ef4a5b	-	-	2026-11-24	xproof
 9c83979a-b354-4e20-9638-85e8f354da81	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-helix:cast:s1,f:xs:XP:aether-helix:cast:s1	-	-	-	d864b561c9cb	-	f562861fe482	-	-	2026-11-24	xproof
-9c84c681-40c1-4ff3-86e6-48b4ab7491e5	cast	cast-resolve	agreed	-	X	scen	1	0	Black Waltz No. 3/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9c84c681-40c1-4ff3-86e6-48b4ab7491e5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Black Waltz No. 3/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9c84c681-40c1-4ff3-86e6-48b4ab7491e5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Black Waltz No. 3/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9c84c681-40c1-4ff3-86e6-48b4ab7491e5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Black Waltz No. 3/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9c84c681-40c1-4ff3-86e6-48b4ab7491e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:black-waltz-no-3:cast:s1,f:xs:XP:black-waltz-no-3:cast:s1	-	-	-	23c4009444b0	-	bea6ad87fde8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9c84c681-40c1-4ff3-86e6-48b4ab7491e5	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:black-waltz-no-3:combat0.attack:s1,f:xs:XP:black-waltz-no-3:combat0.attack:s1	-	-	-	23c4009444b0	-	bea6ad87fde8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9c84c681-40c1-4ff3-86e6-48b4ab7491e5	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:black-waltz-no-3:combat0.block:s1,f:xs:XP:black-waltz-no-3:combat0.block:s1	-	-	-	23c4009444b0	-	bea6ad87fde8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9c84c681-40c1-4ff3-86e6-48b4ab7491e5	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:black-waltz-no-3:f0t0:s1,f:xs:XP:black-waltz-no-3:f0t0:s1	-	-	-	23c4009444b0	-	bea6ad87fde8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9c8f1abb-bd08-41e0-91ed-56ff25d7f9f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c93acf3-d3da-4b4b-947f-ec8fc99d0d34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grakmaw-skyclave-ravager:cast:s1,f:xs:XP:grakmaw-skyclave-ravager:cast:s1	-	-	-	ae86f6029288	-	129c3c6c8ebd	-	-	2026-11-24	xproof
 9c93acf3-d3da-4b4b-947f-ec8fc99d0d34	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ca539cd-9876-4c13-b220-d553c17f2378	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inspire-awe:cast:s1,f:xs:XP:inspire-awe:cast:s1	-	-	-	ae86f6029288	-	ca04b444719e	-	-	2026-11-24	xproof
 9ca64b8e-e9d2-41b3-b229-6fcdc48a8371	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ca64b8e-e9d2-41b3-b229-6fcdc48a8371	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9ca64b8e-e9d2-41b3-b229-6fcdc48a8371	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+9ca64b8e-e9d2-41b3-b229-6fcdc48a8371	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:blademane-baku:f0t0:s1,f:xs:XP:blademane-baku:f0t0:s1	-	-	-	23c4009444b0	-	fa63170938d4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9ca808c5-9338-4199-a45b-df1a1a20625e	cast	cast-resolve	agreed	-	FX	scen	2	0	Sundial, Dawn Tyrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ca9168f-54cb-4091-b80c-7c264773c1a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawnfluke:f0t0:s1,f:xs:XP:dawnfluke:f0t0:s1	-	-	-	d864b561c9cb	-	3c11de5fd9d1	-	-	2026-11-24	xproof
 9ca9168f-54cb-4091-b80c-7c264773c1a2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dawnfluke:f0t0:s1,f:xs:XP:dawnfluke:f0t0:s1	-	-	-	d864b561c9cb	-	3c11de5fd9d1	-	-	2026-11-24	xproof

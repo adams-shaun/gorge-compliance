@@ -47,7 +47,7 @@ ce35f262-b93f-4409-8b33-26a7ed7abac8	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:x
 ce36a450-68a6-4519-a9f0-0e3b772054eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alania-s-pathmaker:cast:s1,f:xs:XP:alania-s-pathmaker:cast:s1	-	-	-	3aa6ded33acb	-	e3bc6bc420ed	-	-	2026-11-25	xproof
 ce36a450-68a6-4519-a9f0-0e3b772054eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:alania-s-pathmaker:cast:s1,f:xs:XP:alania-s-pathmaker:cast:s1	-	-	-	3aa6ded33acb	-	e3bc6bc420ed	-	-	2026-11-25	xproof
 ce4570eb-f637-45d1-afbc-f11357c09bf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce4570eb-f637-45d1-afbc-f11357c09bf9	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PJ21.json	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+ce4570eb-f637-45d1-afbc-f11357c09bf9	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:scaled-hulk:f0t0:s1,f:xs:XP:scaled-hulk:f0t0:s1	-	-	-	23c4009444b0	-	6598b028b220	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ce45d6bd-74e3-401b-983d-028d3fb942da	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:billowing-shriekmass:f0t0:s2,f:xs:XP:billowing-shriekmass:f0t0:s2	-	-	-	e07cf3a05ba5	-	454b22330431	-	-	2026-11-24	xproof
 ce45d6bd-74e3-401b-983d-028d3fb942da	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:billowing-shriekmass:combat0.attack:s1,f:xs:XP:billowing-shriekmass:combat0.attack:s1	-	-	-	23c4009444b0	-	454b22330431	-	-	2026-11-25	xproof
 ce45d6bd-74e3-401b-983d-028d3fb942da	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:billowing-shriekmass:combat0.block:s1,f:xs:XP:billowing-shriekmass:combat0.block:s1	-	-	-	23c4009444b0	-	454b22330431	-	-	2026-11-25	xproof
@@ -75,7 +75,7 @@ ce657a2e-461b-45fd-ab98-35b5c8512777	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wal
 ce690421-db1d-4177-a2db-338f29aab623	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce690a21-8117-420e-be00-cd6d9923a812	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anzrag-s-rampage:cast:s1,f:xs:XP:anzrag-s-rampage:cast:s1	-	-	-	8c0bd19283bb	-	236a753d1e04	-	-	2026-11-24	xproof
 ce690da4-6d22-4013-aef3-596d331813e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce690da4-6d22-4013-aef3-596d331813e4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+ce690da4-6d22-4013-aef3-596d331813e4	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ce6a85b5-e249-4582-a6be-ce200da5fd53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce6a85b5-e249-4582-a6be-ce200da5fd53	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce6b6869-e4d7-4156-b66d-57fc224e4b20	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:palani-s-hatcher:f0t0:s2,f:xs:XP:palani-s-hatcher:f0t0:s2	-	-	-	e07cf3a05ba5	-	5040dcce2924	-	-	2026-11-24	xproof
@@ -109,9 +109,9 @@ ce8ec966-ecff-425e-944c-36dc8d4aef23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ce8ec966-ecff-425e-944c-36dc8d4aef23	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ce8f4eb4-08b8-404b-9147-1e28c1b14a65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce8fc1bb-5dd0-41b1-909a-bbfe6b165158	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ce8fc1bb-5dd0-41b1-909a-bbfe6b165158	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-ce8fc1bb-5dd0-41b1-909a-bbfe6b165158	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-ce8fc1bb-5dd0-41b1-909a-bbfe6b165158	f0/t2	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
+ce8fc1bb-5dd0-41b1-909a-bbfe6b165158	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ronin-cliffrider:f0t0:s1,f:xs:XP:ronin-cliffrider:f0t0:s1	-	-	-	23c4009444b0	-	ff5ca7a65a05	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ce8fc1bb-5dd0-41b1-909a-bbfe6b165158	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+ce8fc1bb-5dd0-41b1-909a-bbfe6b165158	f0/t2	AttackerBlocked/Bushido	agreed	-	FX	start	2	0	x:xs:XP:ronin-cliffrider:f0t0:s1,f:xs:XP:ronin-cliffrider:f0t0:s1	-	-	-	23c4009444b0	-	ff5ca7a65a05	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 ce916c92-350c-4546-882b-555dc450413d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ce916c92-350c-4546-882b-555dc450413d	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:hammerfist-giant:f0a0:s1,f:xs:XP:hammerfist-giant:f0a0:s1	-	-	-	d864b561c9cb	-	3f378442fb9f	-	-	2026-11-24	xproof
 ce924285-f4c5-44e6-909b-f5f7d302ebaf	cast	cast	agreed	-	F	start	2	0	f:xs:XP:way-of-the-mentor:f0t0:s1	-	-	-	25696bf19d5b	-	56e2cfdc1565	-	-	2026-11-24	xproof

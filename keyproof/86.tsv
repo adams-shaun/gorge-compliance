@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 865a2194-fca0-446e-aae3-ca475cd66e00	land	play-land	agreed	-	FX	scen	2	0	Dismal Backwater/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 865e569b-6999-4a03-ad02-4bfd595d5820	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iname-as-one:cast:s1,f:xs:XP:iname-as-one:cast:s1	-	-	-	64a08ba7d913	-	2e50936b8e80	-	-	2026-11-24	xproof
 865e569b-6999-4a03-ad02-4bfd595d5820	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:iname-as-one:cast:s1,f:xs:XP:iname-as-one:cast:s1	-	-	-	64a08ba7d913	-	2e50936b8e80	-	-	2026-11-24	xproof
-865e569b-6999-4a03-ad02-4bfd595d5820	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+865e569b-6999-4a03-ad02-4bfd595d5820	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:iname-as-one:f0t1:s1,f:xs:XP:iname-as-one:f0t1:s1	-	-	-	23c4009444b0	-	2e50936b8e80	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8661d773-3b92-4fcf-8ffc-aced1ff7be8a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trestle-troll:cast:s1,f:xs:XP:trestle-troll:cast:s1	-	-	-	d864b561c9cb	-	c8a1bba761a4	-	-	2026-11-24	xproof
 8661d773-3b92-4fcf-8ffc-aced1ff7be8a	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:trestle-troll:f0a0:s1,f:xs:XP:trestle-troll:f0a0:s1	-	-	-	d864b561c9cb	-	c8a1bba761a4	-	-	2026-11-24	xproof
 8662c9be-2244-4ea3-bf80-31a117f40a59	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -112,10 +112,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 867379cb-a084-4c84-97ee-557fb60814cd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 86746a84-3e8a-44b4-8494-60cbee9816b5	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:galactic-wayfarer:f0t0:s2,f:xs:XP:galactic-wayfarer:f0t0:s2	-	-	-	267e485f6204	-	ee1dce67414b	-	-	2026-11-24	xproof
 86746a84-3e8a-44b4-8494-60cbee9816b5	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:galactic-wayfarer:f0t0:s2,f:xs:XP:galactic-wayfarer:f0t0:s2	-	-	-	267e485f6204	-	ee1dce67414b	-	-	2026-11-24	xproof
-8676e917-17dd-4047-99c4-402f2e909e16	cast	cast-resolve	agreed	-	X	scen	1	0	Shock Brigade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8676e917-17dd-4047-99c4-402f2e909e16	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shock Brigade/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8676e917-17dd-4047-99c4-402f2e909e16	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shock Brigade/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8676e917-17dd-4047-99c4-402f2e909e16	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Shock Brigade/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8676e917-17dd-4047-99c4-402f2e909e16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shock-brigade:cast:s1,f:xs:XP:shock-brigade:cast:s1	-	-	-	23c4009444b0	-	5f12317cbf8b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8676e917-17dd-4047-99c4-402f2e909e16	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:shock-brigade:combat0.attack:s1,f:xs:XP:shock-brigade:combat0.attack:s1	-	-	-	23c4009444b0	-	5f12317cbf8b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8676e917-17dd-4047-99c4-402f2e909e16	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:shock-brigade:combat0.block:s1,f:xs:XP:shock-brigade:combat0.block:s1	-	-	-	23c4009444b0	-	5f12317cbf8b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+8676e917-17dd-4047-99c4-402f2e909e16	f0/t0	Attacks/Mobilize	agreed	-	FX	start	4	0	x:xs:XP:shock-brigade:combat0.attack:s1,f:xs:XP:shock-brigade:combat0.attack:s1	-	-	-	23c4009444b0	-	5f12317cbf8b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 86783f8d-26c9-4b8c-a697-ab6facafeb67	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 867aa0b7-b814-4d33-a677-f6368c8e93c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aphetto-alchemist:cast:s1,f:xs:XP:aphetto-alchemist:cast:s1	-	-	-	fc71ca68c5ac	-	b99acc452836	-	-	2026-11-24	xproof
 867aa0b7-b814-4d33-a677-f6368c8e93c0	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:aphetto-alchemist:f0a0:s1,f:xs:XP:aphetto-alchemist:f0a0:s1	-	-	-	fc71ca68c5ac	-	b99acc452836	-	-	2026-11-24	xproof

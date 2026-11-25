@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b943c3e-1f18-4997-b6d0-28ef75aed88e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bloodthirsty-adversary:f0t0:s1,f:xs:XP:bloodthirsty-adversary:f0t0:s1	-	-	-	d864b561c9cb	-	6a97c1da5e87	-	-	2026-11-24	xproof
 3b954d5f-3a93-4dd9-9d60-6097594d449c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b96b8c3-b9c8-4712-a3b1-243a67cc013a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meloku-the-clouded-mirror:cast:s1,f:xs:XP:meloku-the-clouded-mirror:cast:s1	-	-	-	64a08ba7d913	-	ef6e8a89f75b	-	-	2026-11-24	xproof
-3b96b8c3-b9c8-4712-a3b1-243a67cc013a	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
+3b96b8c3-b9c8-4712-a3b1-243a67cc013a	f0/a0	Token	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	ef6e8a89f75b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3b97794a-3aaa-45a6-9cad-f1b768615b6d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b97794a-3aaa-45a6-9cad-f1b768615b6d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b97bf8e-d5c4-4eae-a453-73456e0461a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -223,8 +223,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3be3d7e6-7860-438a-b8c8-ef154c18c163	land	land	agreed	-	F	start	2	0	f:xs:XP:arid-archway:f0t0:s1	-	-	-	8c0bd19283bb	-	b210899afdf4	-	-	2026-11-25	xproof
 3be6e78f-f9ec-4bf4-b70f-40ba677aaa48	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fresh-meat:cast:s1,f:xs:XP:fresh-meat:cast:s1	-	-	-	d864b561c9cb	-	cfe4f791b2c1	-	-	2026-11-24	xproof
 3beba02f-4d50-4a93-a13b-78d4595bfbfc	cast	cast-resolve	agreed	-	FX	scen	2	0	Diamond Weapon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3beba02f-4d50-4a93-a13b-78d4595bfbfc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Diamond Weapon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3beba02f-4d50-4a93-a13b-78d4595bfbfc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Diamond Weapon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3beba02f-4d50-4a93-a13b-78d4595bfbfc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:diamond-weapon:combat0.attack:s1,f:xs:XP:diamond-weapon:combat0.attack:s1	-	-	-	23c4009444b0	-	95c2bcc8eab7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+3beba02f-4d50-4a93-a13b-78d4595bfbfc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:diamond-weapon:combat0.block:s1,f:xs:XP:diamond-weapon:combat0.block:s1	-	-	-	23c4009444b0	-	95c2bcc8eab7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3beba02f-4d50-4a93-a13b-78d4595bfbfc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Diamond Weapon/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bed0b60-5944-44bb-9ddd-c82f323e6d20	cast	cast-resolve	agreed	-	FX	scen	2	0	Wilt in the Heat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3bed0b60-5944-44bb-9ddd-c82f323e6d20	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wilt in the Heat/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

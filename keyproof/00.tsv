@@ -174,8 +174,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00cfbea0-e862-468b-90d5-7478eb9847c0	cast	cast-resolve	agreed	-	FX	scen	2	0	End-Blaze Epiphany/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 00d11662-9d10-4915-b80c-c1ad54b4e71b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00d11662-9d10-4915-b80c-c1ad54b4e71b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00d1596a-c3e2-4109-86da-388934a0c652	cast	cast-resolve	agreed	-	X	scen	1	0	Coeurl/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-00d1596a-c3e2-4109-86da-388934a0c652	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Coeurl/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+00d1596a-c3e2-4109-86da-388934a0c652	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:coeurl:cast:s1,f:xs:XP:coeurl:cast:s1	-	-	-	23c4009444b0	-	b1636bcf89b9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+00d1596a-c3e2-4109-86da-388934a0c652	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:coeurl:f0a0:s1,f:xs:XP:coeurl:f0a0:s1	-	-	-	23c4009444b0	-	b1636bcf89b9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 00d3fcdf-6959-4437-9bad-93a8625510a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00d8efa6-a2d9-4249-8da7-b45173675329	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00d8efa6-a2d9-4249-8da7-b45173675329	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -204,8 +204,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00efb113-ba5a-4749-b42b-5693b980f26f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dakmor-lancer:f0t0:s1,f:xs:XP:dakmor-lancer:f0t0:s1	-	-	-	5f2128bf97e4	-	b2c3d4789316	-	-	2026-11-24	xproof
 00efb113-ba5a-4749-b42b-5693b980f26f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dakmor-lancer:f0t0:s1,f:xs:XP:dakmor-lancer:f0t0:s1	-	-	-	5f2128bf97e4	-	b2c3d4789316	-	-	2026-11-24	xproof
 00f1d167-c143-471d-bd52-da2a65d087c4	cast	cast-resolve	agreed	-	FX	scen	2	0	Sagu Pummeler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-00f1d167-c143-471d-bd52-da2a65d087c4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sagu Pummeler/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-00f1d167-c143-471d-bd52-da2a65d087c4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sagu Pummeler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+00f1d167-c143-471d-bd52-da2a65d087c4	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sagu-pummeler:combat0.attack:s1,f:xs:XP:sagu-pummeler:combat0.attack:s1	-	-	-	23c4009444b0	-	6919aa1cafeb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+00f1d167-c143-471d-bd52-da2a65d087c4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sagu-pummeler:combat0.block:s1,f:xs:XP:sagu-pummeler:combat0.block:s1	-	-	-	23c4009444b0	-	6919aa1cafeb	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 00f1d167-c143-471d-bd52-da2a65d087c4	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sagu Pummeler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00f4cab8-b135-4118-8e3a-92097178abb6	cast	cast-resolve	agreed	-	X	scen	1	0	Saurian Explorer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00f4cab8-b135-4118-8e3a-92097178abb6	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:saurian-explorer:f0a0:s1,f:xs:XP:saurian-explorer:f0a0:s1	-	-	-	23c4009444b0	-	af2f2a73b2b7	-	-	2026-11-25	xproof
