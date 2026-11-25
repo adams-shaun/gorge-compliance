@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:valkyrie-aerial-unit:cast:s1,f:xs:XP:valkyrie-aerial-unit:cast:s1	-	-	-	054d9f516953	-	19eb4323cf41	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1333d690-a6dc-4ef8-8c57-2ba16727c0a5	static#0.0	static.cost	agreed	-	FX	start	2	0	x:xs:XP:valkyrie-aerial-unit:static0.0:s1,f:xs:XP:valkyrie-aerial-unit:static0.0:s1	-	-	-	6f84be0f34c0	-	19eb4323cf41	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 13358b1d-0a35-48ed-a7fb-70359fa3998f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1337d89e-a883-4568-a14f-9ca3305cc3df	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hell's Kitchen/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1337d89e-a883-4568-a14f-9ca3305cc3df	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:hell-s-kitchen:f0a0:s1,f:xs:XP:hell-s-kitchen:f0a0:s1	-	-	-	9087eefec3ee	-	6fd5dec68c58	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1337d89e-a883-4568-a14f-9ca3305cc3df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hell-s-kitchen:land:s1,f:xs:XP:hell-s-kitchen:land:s1	-	-	-	fb9d3088f0bf	-	6fd5dec68c58	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 1337d89e-a883-4568-a14f-9ca3305cc3df	land	land	agreed	-	FX	start	2	0	x:xs:XP:hell-s-kitchen:land:s1,f:xs:XP:hell-s-kitchen:land:s1	-	-	-	fb9d3088f0bf	-	6fd5dec68c58	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 133c99c0-3652-410f-8100-68015a47af9f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 137e0ad2-e10a-4327-86a3-5ac7bc7fc469	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raging-spirit:cast:s1,f:xs:XP:raging-spirit:cast:s1	-	-	-	ea3140b6974b	-	19d386627b06	-	-	2026-11-24	xproof
 137e0ad2-e10a-4327-86a3-5ac7bc7fc469	f0/a0	Animate	agreed	-	F	start	2	0	f:xs:XP:raging-spirit:f0a0:s1	-	-	-	8c0bd19283bb	-	19d386627b06	-	-	2026-11-24	xproof
 137e3974-74e1-4941-8597-10aeba6cac37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-137e3974-74e1-4941-8597-10aeba6cac37	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+137e3974-74e1-4941-8597-10aeba6cac37	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:homarid-shaman:f0a0:s1,f:xs:XP:homarid-shaman:f0a0:s1	-	-	-	9087eefec3ee	-	d314101d3d01	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 1380f0cc-e875-46ec-a802-c6684bf3965c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1385679f-bdcd-4d7e-8266-1df0e36cc2da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tricorder:cast:s1,f:xs:XP:tricorder:cast:s1	-	-	-	fb9d3088f0bf	-	5513e13845f7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 1385679f-bdcd-4d7e-8266-1df0e36cc2da	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:tricorder:f0a0:s1,f:xs:XP:tricorder:f0a0:s1	-	-	-	23c4009444b0	-	5513e13845f7	-	-	2026-11-25	xproof
