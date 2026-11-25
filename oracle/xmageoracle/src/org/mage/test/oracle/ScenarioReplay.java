@@ -1286,6 +1286,53 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return true;
         }
 
+        /** Sita Varma, Masked Racer's Exhaust may have "the base power and
+         * toughness of each other creature you control become equal to Sita
+         * Varma's power". With no other creature it changes nothing either
+         * way (CR 608.2d), so gorge records no decision and XMage's
+         * SitaVarmaMaskedRacerMayEffect.apply still calls chooseUse. Decline
+         * an unscripted ask with no affected creature rather than
+         * strict-miss. A queued Yes/No is the generator's own answer and
+         * stays for TestPlayer, and another controlled creature keeps the
+         * ask because the effect does change the board. */
+        static final String EMPTY_ANIMATE_ASK =
+                "Have the base power and toughness of each other creature you control";
+
+        static boolean unanswerableEmptyAnimateAsk(String message, boolean otherCreature, List<String> choices) {
+            if (message == null || otherCreature || !message.startsWith(EMPTY_ANIMATE_ASK)) {
+                return false;
+            }
+            if (!choices.isEmpty()) {
+                String head = choices.get(0);
+                if (head.equals("Yes") || head.equals("No")) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        /** Whether the controller of {@code source} controls a creature other
+         * than the source permanent itself, which is the ask's "each other
+         * creature you control". Walks the active battlefield, so a phased-out
+         * permanent (CR 702.26b: treated as though it does not exist) never
+         * keeps an empty ask. Unknown state keeps the ask rather than guessing
+         * a decline. */
+        static boolean hasOtherControlledCreature(Iterable<Permanent> permanents, Game game, Ability source) {
+            if (permanents == null || game == null || source == null || source.getControllerId() == null) {
+                return true;
+            }
+            UUID controllerId = source.getControllerId();
+            UUID sourceId = source.getSourceId();
+            for (Permanent permanent : permanents) {
+                if (permanent.isCreature(game)
+                        && controllerId.equals(permanent.getControllerId())
+                        && (sourceId == null || !sourceId.equals(permanent.getId()))) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /**
          * The yes/no asks a plain cast step implies. gorge's cast-resolve
          * scenario casts for the mana cost only, so each of these is answered
@@ -1313,6 +1360,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 return false;
             }
             if (unanswerableHandPutAsk(message, getHand().isEmpty(), getChoices())) {
+                return false;
+            }
+            if (message != null && message.startsWith(EMPTY_ANIMATE_ASK)
+                    && unanswerableEmptyAnimateAsk(message,
+                            hasOtherControlledCreature(game.getBattlefield().getAllActivePermanents(), game, source),
+                            getChoices())) {
                 return false;
             }
             if (phyrexianStarved(message, getChoices())) {
