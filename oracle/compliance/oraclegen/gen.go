@@ -3140,13 +3140,69 @@ func bandAnswers(d rules.OracleDecision) ([]XAnswer, bool) {
 			ref = d.PickRefs[k]
 		}
 		if isScenarioRefShaped(ref) {
-			member := disambiguatedObjectChoice(d, k, oraclediffRefName(ref))
+			memberName := bandMemberLiveName(d, k)
+			if memberName == "" {
+				memberName = oraclediffRefName(ref)
+			}
+			// The label's member field is the object's live face by
+			// construction, so it names the pick even when it differs from
+			// the ref's setup name (a transformed DFC): the same-name alias
+			// and the owner-qualified ref must both stay available despite
+			// namesObject comparing against the setup name.
+			member := disambiguatedObjectChoiceNamed(d, k, memberName, true)
 			as = append(as, XAnswer{d.Seat, "choice", "yes"}, XAnswer{d.Seat, "choice", member})
 			continue
 		}
 		as = append(as, XAnswer{d.Seat, "choice", "no"})
 	}
 	return as, true
+}
+
+// bandMemberLiveName returns the accepted member's LIVE name from pick k's
+// label "Band <member> with <leader>", or "" when the label has another shape.
+// The pick's ref keeps the object's setup identity -- a transform DFC's front
+// face -- while the label is built from the object's current face
+// (rules/banding.go askNextBand, CR 712.8). Answering the ref's front name
+// selects nothing once the DFC has transformed (Kessig Prowler // Sinuous
+// Predator: "Band Sinuous Predator with Timber Wolves" over ref
+// p0:Kessig Prowler). The leader's live name comes from option 0's decline
+// label ("No more creatures in <leader>'s band"), so a " with " inside either
+// card name cannot split the member wrongly. Without that label (a synthetic
+// decision) a single " with " is the separator; two or more may belong to the
+// leader's own name ("Dance with Devils"), so the fallback fails closed to "".
+func bandMemberLiveName(d rules.OracleDecision, k int) string {
+	if k < 0 || k >= len(d.Picks) {
+		return ""
+	}
+	member, ok := strings.CutPrefix(d.Picks[k], "Band ")
+	if !ok || member == "" {
+		return ""
+	}
+	if leader := bandLeaderLiveName(d.First); leader != "" {
+		if name, ok := strings.CutSuffix(member, " with "+leader); ok && name != "" {
+			return name
+		}
+	}
+	if strings.Count(member, " with ") == 1 {
+		if i := strings.Index(member, " with "); i > 0 {
+			return member[:i]
+		}
+	}
+	return ""
+}
+
+// bandLeaderLiveName extracts <leader> from a band ask's decline label.
+func bandLeaderLiveName(decline string) string {
+	const prefix, suffix = "No more creatures in ", "'s band"
+	leader, ok := strings.CutPrefix(decline, prefix)
+	if !ok {
+		return ""
+	}
+	leader, ok = strings.CutSuffix(leader, suffix)
+	if !ok {
+		return ""
+	}
+	return leader
 }
 
 // loneTriggerCostDecline is a triggered-cost ask offered with only its
@@ -3987,11 +4043,23 @@ func JoinedChoice(d rules.OracleDecision) string {
 // owner still separates them, else the label with the copy marker appended (no
 // space before the bracket).
 func disambiguatedObjectChoice(d rules.OracleDecision, k int, label string) string {
+	nameIsObject := k < len(d.PickRefs) && namesObject(label, d.PickRefs[k])
+	return disambiguatedObjectChoiceNamed(d, k, label, nameIsObject)
+}
+
+// disambiguatedObjectChoiceNamed is disambiguatedObjectChoice with the
+// object-name test supplied by the caller. A band pick's label spells the
+// member's LIVE face (CR 712.8), so a transformed DFC's name no longer equals
+// oraclediffRefName(ref), the setup front face namesObject compares against.
+// The band label's "Band <member> with <leader>" shape proves the member field
+// is an object name, so bandAnswers passes nameIsObject=true and a transformed
+// pick still gets the exact-ref alias when a same-name sibling is offered.
+func disambiguatedObjectChoiceNamed(d rules.OracleDecision, k int, label string, nameIsObject bool) string {
 	p := ClassifySameName(d, k)
-	if p.Alias != "" && k < len(d.PickRefs) && namesObject(label, d.PickRefs[k]) {
+	if p.Alias != "" && k < len(d.PickRefs) && nameIsObject {
 		return p.Alias
 	}
-	if p.Unanswerable && k < len(d.PickRefs) && namesObject(label, d.PickRefs[k]) {
+	if p.Unanswerable && k < len(d.PickRefs) && nameIsObject {
 		if owner := ownerQualifiedRef(d, k); owner != "" {
 			// "@<ref>", the same spelling as the alias branch: a joined
 			// multi-pick answer binds every segment through the "@" path, and
