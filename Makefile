@@ -432,7 +432,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # so the pinned driver keeps all three fixes. The merge adds no code of its own; the full driver suite (192 tests, including
 # EchoCumulativeUpkeepTest, ForcedCoinFlipTest, FatesealDigOrderTest and ForcedDieRollTest) is green on it; cardsfolder and
 # tokenscripts unchanged. Fork branch fix/xp-forge-driver-echo-cumulative-upkeep.
-FORGE_ORACLE_REF ?= a3c422f79a6b46d723c6bccb1cb6fbfcf22e553e
+# 304ae5ffe0e = a3c422f79a6 plus the whole-cost card pick of an elected unless payment (xproof cluster xpt-4561863a, Ill-Timed Explosion's
+# UnlessCost$ Discard<2/Card> and Ghostly Dancers + Rent Is Due's tap-two): ScriptedController.chooseCardsForCost asked pickObjects for
+# 0..amount whenever Forge passed isOptional, which every UnlessCost$ payment does, so an option list of exactly the amount (the 2-card
+# hand, the 2 untapped creatures) strict-missed "cost card" although gorge logs no pick for a forced one. gorge's unless_pay answer has
+# already elected the payment (payingUnlessCost), and an elected payment pays the whole cost (CR 118.12, 601.2h), so the ask is now
+# amount..amount there: the exact-size list is forced and a logged pick is still consumed first; outside an elected unless payment the
+# 0..amount ask is unchanged. UnlessCostForcedPickTest (3 tests: both finds replayed, plus a 3-card hand that consumes gorge's logged
+# discard pick) fails without the change; the full driver suite (195 tests) is green on it. Driver-only: cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-unless-cost-cards-forced.
+FORGE_ORACLE_REF ?= 304ae5ffe0e0d1a12c76ef25ea80e3e892432bbc
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
