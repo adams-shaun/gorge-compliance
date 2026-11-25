@@ -573,6 +573,26 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (ChooseFromDefinedCards$ Remembered with no nonland card revealed, Alhammarret, High Arbiter; ChooseCardNameAi returns "" and the effect names
 # nothing; gorge logs no decision) instead of a 'Missing card name answer' strict miss (xpt-e750d7a5). ChooseCardNameEmptyFacesTest fails before and
 # passes after. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+# 0b7fde3680d = f1e3e00905c plus the zero-mode Charm driver fix (fork branch
+# fix/xp-forge-driver-zero-mode-charm): Bumi, King of Three Trials's ETB is
+# DB$ Charm | MinCharmNum$ 0 | CharmNum$ X with X = the Lesson cards in your
+# graveyard. With none, CR 700.2 allows no mode and CR 603.3c removes the
+# modal ability from the stack; gorge poses no KModes decision for that ask
+# (engine/effects/charm.go returns before the decision when max < 1), so Forge's
+# ask has exactly one answer, the empty list. chooseModeForAbility used to
+# strict-miss because the offered mode list was not the ask's num. A num == 0
+# ask now returns empty without consuming a mode decision queued for a later
+# ask; every num > 0 ask keeps the strict miss. ZeroModeCharmTest (fixtures
+# zero-mode/) replays Bumi with no Lesson (empty answer, no harness/leftover)
+# and with one Lesson and no decision (num = 1 still strict-misses);
+# scripts/forge-oracle-test-zero-mode-charm.sh runs it and replays the
+# zero-Lesson request through forge-oracle-run.sh. Driver-only; die-roll code,
+# cardsfolder and tokenscripts unchanged.
+# 9f2d35a4679 = the clean merge of c9419dd87a3 (above: foretell, Riot) and 0b7fde3680d (above: zero-mode Charm). Both fork
+# from f1e3e00905 and touch forge-oracle only, so one pin carries every driver fix: Done pick, Mobilize X=0, forced
+# remove-counter amount, foretell cast mode, Riot choice and the zero-mode Charm answer. Die-roll code unchanged;
+# ForcedDieRollTest, ZeroModeCharmTest, ForetellSpecialActionTest and RiotChoiceTest green on it.
+# Fork branch fix/xp-forge-driver-zero-mode-charm.
 # 0558bd00b88 = oracle/fpin-1125: c9419dd87a (foretell, Riot, Done pick, Mobilize, forced remove-counter; above) merged with
 # c332e2b33f5 (the unpinned simultaneous zone order, xproof cluster xpt-34c28f9c): Sorin, Lord of Innistrad's -6 Destroy
 # moves p1's Crimson Kobolds and Tibalt, the Fiend-Blooded to the graveyard, then a ChangeZoneAll returns them in the SAME
@@ -585,16 +605,35 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # both halves; scripts/forge-oracle-test-graveyard-transit-order.sh (make forge-driver-tests) runs them. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-transit-graveyard-order.
+# a1990dd5f833 = the clean merge of 9f2d35a4679 (above: foretell, Riot, Done pick, Mobilize X=0, the forced remove-counter
+# amount and the zero-mode Charm answer) and 0558bd00b88 (above: the unpinned transit Graveyard/Battlefield order). The two
+# sides touch disjoint hunks of StepMachine.java (hasMode vs orderCards/keepsForgeOrderWithoutPin) and separate
+# ScriptedController and test files, so one pin carries every driver fix: the zero-mode charm answer and the transit-order
+# fallback. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork branch
+# fix/xp-forge-driver-zero-mode-charm (advanced with the transit-order pin).
 # eb695169f9 = 2b591baf9c (the empty face list above) merged with 0558bd00b88 (the transit zone order above), so one pin
 # carries both driver fixes: chooseCardName answers an empty face list with "" and orderCards keeps Forge's offered order
 # for an unpinned Graveyard/Battlefield transit. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork
 # branch fix/xp-forge-driver-name-empty-faces.
+# 141e1ff5403 = the clean merge of a1990dd5f833 (above: zero-mode Charm and the transit order) and eb695169f9 (above: the
+# empty-face chooseCardName and the transit order). The two touch separate ScriptedController methods (chooseModeForAbility
+# and StepMachine.hasMode vs chooseCardName) and separate test files, and both carry the same 0558bd00b88 transit-order
+# half, so one pin carries every driver fix: the zero-mode charm answer, the empty-face chooseCardName answer and the
+# transit-order fallback. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork branch
+# fix/xp-forge-driver-zero-mode-charm (advanced with the empty-face chooseCardName pin).
 # 3d8f89a00d = eb695169f9 (above) + fork branch fix/xp-forge-driver-evoke-trigger-label: StepMachine.triggerScore binds gorge's fixed
 # Evoke label "<card>: sacrifice it (evoked)" (CR 702.74a, trigger_queue.go) to the host's Forge trigger whose keyword is Evoke, so
 # orderTriggers no longer misses it beside an ETB trigger (CR 603.3b; Emptiness, Catharsis; xpt-58b75f98, xpt-93baef91);
 # TriggerOrderEvokeLabelTest fails before it (1a2655bbd3 is that commit). Also joins oracle/fpin-1125's 2d4eac3d93 (DigMultiple pick,
 # AlternativeDecider library position). Driver-only; cardsfolder and tokenscripts unchanged.
-FORGE_ORACLE_REF ?= 3d8f89a00dc62d8c909516b13a66373614c87376
+# 68d36f8247a = the clean merge of 141e1ff5403 (above: zero-mode Charm, the empty-face chooseCardName and the transit order) and
+# 3d8f89a00d (above: the Evoke trigger label, the DigMultiple pick and the AltDestination library position). The two touch
+# separate ScriptedController methods (chooseModeForAbility/chooseCardName vs triggerScore/chooseDig/alt-destination) and
+# separate test files; the shared eb695/0558 halves are the same on both sides, so one pin carries every driver fix: the
+# zero-mode charm answer, the empty-face chooseCardName answer, the transit-order fallback, the Evoke trigger label and the
+# DigMultiple/AltDestination picks. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork branch
+# fix/xp-forge-driver-zero-mode-charm (advanced with the evoke/DigMultiple pin).
+FORGE_ORACLE_REF ?= 68d36f8247a3285e0417f9beccf7a66240020297
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
