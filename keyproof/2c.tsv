@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c195485-83f9-424f-854a-50c4f5b04182	static#0.0	static#0.0	agreed	-	X	scen	1	0	Thranduil's Company/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fishing-pole:cast:s1,f:xs:XP:fishing-pole:cast:s1	-	-	-	23c4009444b0	-	ce3ce6d998f8	-	-	2026-11-25	xproof
 2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:fishing-pole:f0a0:s1,f:xs:XP:fishing-pole:f0a0:s1	-	-	-	23c4009444b0	-	ce3ce6d998f8	-	-	2026-11-25	xproof
-2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+2c1d3e9e-213e-492a-ad5a-91139d70bc0f	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps:filter	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:cast:s1,f:xs:XP:flailing-soldier:cast:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:f0a0:s1,f:xs:XP:flailing-soldier:f0a0:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
 2c1dd6f4-2db5-449d-9ed8-579d98cfcfb8	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:flailing-soldier:f0a1:s1,f:xs:XP:flailing-soldier:f0a1:s1	-	-	-	5f2128bf97e4	-	8ee1f023c4da	-	-	2026-11-24	xproof
@@ -189,15 +189,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ce20f43-9357-448f-bb40-7315feb08433	static#0.0	static#0.0	agreed	-	X	scen	1	0	Toph, the Blind Bandit/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2ce2a091-95b6-45e5-9097-77fea411162e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ce2a091-95b6-45e5-9097-77fea411162e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ce2a091-95b6-45e5-9097-77fea411162e	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-2ce2a091-95b6-45e5-9097-77fea411162e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+2ce2a091-95b6-45e5-9097-77fea411162e	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-turret:f0a1:s1,f:xs:XP:fire-nation-turret:f0a1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+2ce2a091-95b6-45e5-9097-77fea411162e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-turret:f0t0:s1,f:xs:XP:fire-nation-turret:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 2ceac1be-32ab-4a04-ade3-852926a5ca45	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:korlessa-scale-singer:cast:s1,f:xs:XP:korlessa-scale-singer:cast:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 2ceb76e2-1692-48fc-ab20-9587d1374172	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archweaver:cast:s1,f:xs:XP:archweaver:cast:s1	-	-	-	d864b561c9cb	-	3769eeccf5c6	-	-	2026-11-24	xproof
 2cee861f-d28c-47e6-baee-2da9b7fa89d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inner-demon:f0t0:s1,f:xs:XP:inner-demon:f0t0:s1	-	-	-	23c4009444b0	-	8f70278990cb	-	-	2026-11-25	xproof
 2cee861f-d28c-47e6-baee-2da9b7fa89d8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:inner-demon:f0t0:s1,f:xs:XP:inner-demon:f0t0:s1	-	-	-	23c4009444b0	-	8f70278990cb	-	-	2026-11-25	xproof
 2cf04076-adc4-4831-a3b8-9120d516f204	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jubilation:f0t0:s1,f:xs:XP:jubilation:f0t0:s1	-	-	-	8c0bd19283bb	-	d2d4ad167d5c	-	-	2026-11-24	xproof
-2cf04076-adc4-4831-a3b8-9120d516f204	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-2cf04076-adc4-4831-a3b8-9120d516f204	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jubilation:f0t0:s1,f:xs:XP:jubilation:f0t0:s1	-	-	-	8c0bd19283bb	-	d2d4ad167d5c	-	-	2026-11-24	xproof
+2cf04076-adc4-4831-a3b8-9120d516f204	f0/a0	Encore/Encore	agreed	-	FX	start	2	0	x:xs:XP:jubilation:f0a0:s1,f:xs:XP:jubilation:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+2cf04076-adc4-4831-a3b8-9120d516f204	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jubilation:f0a0:s1,f:xs:XP:jubilation:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:infernal-medusa:cast:s1,f:xs:XP:infernal-medusa:cast:s1	-	-	-	fc71ca68c5ac	-	d8779b806975	-	-	2026-11-24	xproof
 2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:infernal-medusa:f0t0:s1,f:xs:XP:infernal-medusa:f0t0:s1	-	-	-	9087eefec3ee	-	d8779b806975	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:infernal-medusa:f0t1:s1,f:xs:XP:infernal-medusa:f0t1:s1	-	-	-	9087eefec3ee	-	d8779b806975	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 722ab6e4-a2e0-4aaa-a050-7b6436e22b40	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sp-dr-piloted-by-peni:f0t0:s2,f:xs:XP:sp-dr-piloted-by-peni:f0t0:s2	-	-	-	267e485f6204	-	caf1053077b1	-	-	2026-11-24	xproof
 722ab6e4-a2e0-4aaa-a050-7b6436e22b40	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	SP//dr, Piloted by Peni/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 722e23d5-4f2a-43cd-bbd5-baf56b76e68d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-722e23d5-4f2a-43cd-bbd5-baf56b76e68d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+722e23d5-4f2a-43cd-bbd5-baf56b76e68d	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:parapet-thrasher:f0t0:s1,f:xs:XP:parapet-thrasher:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 722ee05f-6815-41b7-9813-5ec3902c1e9f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aberrant-researcher-perfected-form:f0t0:s1,f:xs:XP:aberrant-researcher-perfected-form:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 722ee05f-6815-41b7-9813-5ec3902c1e9f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:aberrant-researcher-perfected-form:f0t0:s1,f:xs:XP:aberrant-researcher-perfected-form:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 722f2965-a1ec-4b97-a4bd-b99364f58b1e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 728157a3-fcd4-4295-85ff-1162dbb64f8a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tale-of-momo:cast:s1,f:xs:XP:tale-of-momo:cast:s1	-	-	-	8c0bd19283bb	-	78f2a8aca7df	-	-	2026-11-24	xproof
 7282f643-191b-41be-9f6f-82360c915d6d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:abyssal-persecutor:cast:s1,f:xs:XP:abyssal-persecutor:cast:s1	-	-	-	8a1b1a193ec0	-	84aa06397898	-	-	2026-11-24	xproof
 728464a2-9cb6-409a-a6c4-94e796a27995	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-728464a2-9cb6-409a-a6c4-94e796a27995	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+728464a2-9cb6-409a-a6c4-94e796a27995	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 72897780-094d-4a21-8b1c-419a9defd2fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 728d2e30-2f36-4054-81db-29b01e376a82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 728f0a3f-722d-4936-ade8-31883499f56d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

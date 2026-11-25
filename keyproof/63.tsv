@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 633a0919-9ac3-4645-8f0b-3f00c198db79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hellfire-mongrel:f0t0:s1,f:xs:XP:hellfire-mongrel:f0t0:s1	-	-	-	3aa6ded33acb	-	4a6a4281de5c	-	-	2026-11-25	xproof
 633a0919-9ac3-4645-8f0b-3f00c198db79	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:hellfire-mongrel:f0t0:s1,f:xs:XP:hellfire-mongrel:f0t0:s1	-	-	-	3aa6ded33acb	-	4a6a4281de5c	-	-	2026-11-25	xproof
 633a41f0-3889-49a0-b2fc-9baf59f4ddc2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-633a41f0-3889-49a0-b2fc-9baf59f4ddc2	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+633a41f0-3889-49a0-b2fc-9baf59f4ddc2	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:rain-slicked-copse:f0a1:s1,f:xs:XP:rain-slicked-copse:f0a1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 633a41f0-3889-49a0-b2fc-9baf59f4ddc2	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 633a41f0-3889-49a0-b2fc-9baf59f4ddc2	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 633ad9e2-9f55-4a1c-9248-661ad4b0e1dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -158,13 +158,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63dd611e-1c36-4e5d-ba45-87c7f629cd54	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63dd611e-1c36-4e5d-ba45-87c7f629cd54	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63e0f03f-16da-4c09-ad03-8945f660942d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63e0f03f-16da-4c09-ad03-8945f660942d	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:daughter-of-the-deep:f0a0:s1,f:xs:XP:daughter-of-the-deep:f0a0:s1	-	-	-	8c0bd19283bb	-	b823fdafc155	-	-	2026-11-24	xproof
-63e0f03f-16da-4c09-ad03-8945f660942d	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+63e0f03f-16da-4c09-ad03-8945f660942d	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:daughter-of-the-deep:f0t0:s1,f:xs:XP:daughter-of-the-deep:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+63e0f03f-16da-4c09-ad03-8945f660942d	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:daughter-of-the-deep:f0t0:s1,f:xs:XP:daughter-of-the-deep:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 63e17cbd-6dae-42d2-a074-7924db1477bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63e17cbd-6dae-42d2-a074-7924db1477bf	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+63e17cbd-6dae-42d2-a074-7924db1477bf	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:jarvis-earth-s-mightiest-butler:f0t0:s1,f:xs:XP:jarvis-earth-s-mightiest-butler:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 63e2cba7-ec1a-44bf-b915-d2ae75851430	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63e2cba7-ec1a-44bf-b915-d2ae75851430	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-63e2cba7-ec1a-44bf-b915-d2ae75851430	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+63e2cba7-ec1a-44bf-b915-d2ae75851430	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:hermes-overseer-of-elpis:f0t0:s1,f:xs:XP:hermes-overseer-of-elpis:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+63e2cba7-ec1a-44bf-b915-d2ae75851430	f0/t1	AttackersDeclared	agreed	-	FX	start	4	0	x:xs:XP:hermes-overseer-of-elpis:f0t0:s1,f:xs:XP:hermes-overseer-of-elpis:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 63e5180f-16d0-4524-94bf-ecbf3c417814	cast	cast-resolve	agreed	-	FX	scen	2	0	Yuyan Archers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63e5180f-16d0-4524-94bf-ecbf3c417814	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:yuyan-archers:combat0.attack:s1,f:xs:XP:yuyan-archers:combat0.attack:s1	-	-	-	23c4009444b0	-	1011bc915328	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 63e5180f-16d0-4524-94bf-ecbf3c417814	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:yuyan-archers:combat0.block:s1,f:xs:XP:yuyan-archers:combat0.block:s1	-	-	-	23c4009444b0	-	1011bc915328	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

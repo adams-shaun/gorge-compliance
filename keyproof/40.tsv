@@ -42,8 +42,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 404e958b-ead9-4ec7-b786-7b3d65e29967	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 404e958b-ead9-4ec7-b786-7b3d65e29967	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Mouser Foundry/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4050e5b3-07c2-461c-9852-a2c081c0198d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40544d12-0391-4a61-af95-9b8ec01ed8fc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-40544d12-0391-4a61-af95-9b8ec01ed8fc	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+40544d12-0391-4a61-af95-9b8ec01ed8fc	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:vernal-fen:f0a0:s1,f:xs:XP:vernal-fen:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+40544d12-0391-4a61-af95-9b8ec01ed8fc	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:vernal-fen:f0a1:s1,f:xs:XP:vernal-fen:f0a1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 40544d12-0391-4a61-af95-9b8ec01ed8fc	land	land	agreed	-	FX	start	2	0	x:xs:XP:vernal-fen:land:s1,f:xs:XP:vernal-fen:land:s1	-	-	-	8c0bd19283bb	-	d38aa2464b5f	-	-	2026-11-24	xproof
 405674c5-607a-43d3-8b46-8741d2339f80	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40578245-2cb8-4a6a-aeff-2252719c2d1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40601061-1b25-4db8-8b99-33324ce945cf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hatred:cast:s1,f:xs:XP:hatred:cast:s1	-	-	-	23c4009444b0	-	1dc85d3031f4	-	-	2026-11-25	xproof
 4061572b-b7ff-4d06-9f71-9e66e064593d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4061572b-b7ff-4d06-9f71-9e66e064593d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4061572b-b7ff-4d06-9f71-9e66e064593d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+4061572b-b7ff-4d06-9f71-9e66e064593d	f0/t0	ChangesZone/Evolve	agreed	-	FX	start	2	0	x:xs:XP:darwin-adaptive-mutant:f0t0:s1,f:xs:XP:darwin-adaptive-mutant:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 40616029-e1a8-4e7c-bc7b-e381779c57cc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:gowron-eager-for-battle:cast:s1	-	-	-	23c4009444b0	-	27c9ebd032f3	-	-	2026-11-25	xproof
 40616029-e1a8-4e7c-bc7b-e381779c57cc	f0/a0	Pump	agreed	-	F	start	2	0	f:xs:XP:gowron-eager-for-battle:f0a0:s1	-	-	-	23c4009444b0	-	27c9ebd032f3	-	-	2026-11-25	xproof
 40616029-e1a8-4e7c-bc7b-e381779c57cc	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:gowron-eager-for-battle:f0a0:s1	-	-	-	23c4009444b0	-	27c9ebd032f3	-	-	2026-11-25	xproof

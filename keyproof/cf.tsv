@@ -41,7 +41,7 @@ cf27f1f8-2d95-4a00-97f8-72a244837f08	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:ho
 cf27f1f8-2d95-4a00-97f8-72a244837f08	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hot-dog-cart:f0t0:s2,f:xs:XP:hot-dog-cart:f0t0:s2	-	-	-	267e485f6204	-	aa13f72d48a5	-	-	2026-11-24	xproof
 cf2c507a-41b4-457b-bbe8-edcdfcc681ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glitch-interpreter:f0t0:s1,f:xs:XP:glitch-interpreter:f0t0:s1	-	-	-	8c0bd19283bb	-	913520a2c1d6	-	-	2026-11-24	xproof
 cf2c507a-41b4-457b-bbe8-edcdfcc681ac	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:glitch-interpreter:f0t0:s1,f:xs:XP:glitch-interpreter:f0t0:s1	-	-	-	8c0bd19283bb	-	913520a2c1d6	-	-	2026-11-24	xproof
-cf2c507a-41b4-457b-bbe8-edcdfcc681ac	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+cf2c507a-41b4-457b-bbe8-edcdfcc681ac	f0/t1	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:glitch-interpreter:f0t1:s1,f:xs:XP:glitch-interpreter:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 cf307f81-488c-4df5-8b08-ba46e3e7f3d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf3165bf-1d59-4e63-8650-bbda119e6335	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:restore:cast:s1,f:xs:XP:restore:cast:s1	-	-	-	65d07beecc37	-	bc41a352ac5a	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 cf319bc8-2aed-4c2c-8ae0-b669d2cf613e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ cf8a8482-e243-4155-bc21-a1e474c6f1e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 cf8aef54-3f43-413c-9f3f-d4a1b2090904	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf8bc2e3-2f22-45d3-9810-bc039202f41c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:whispers-of-emrakul:cast:s1,f:xs:XP:whispers-of-emrakul:cast:s1	-	-	-	d864b561c9cb	-	6bd0a25db531	-	-	2026-11-24	xproof
 cf9190e0-6f53-44fb-8afa-c16f5bf9829e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cf9190e0-6f53-44fb-8afa-c16f5bf9829e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-cf9190e0-6f53-44fb-8afa-c16f5bf9829e	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+cf9190e0-6f53-44fb-8afa-c16f5bf9829e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:moonstone-eulogist:f0t0:s1,f:xs:XP:moonstone-eulogist:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+cf9190e0-6f53-44fb-8afa-c16f5bf9829e	f0/t1	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:moonstone-eulogist:f0t1:s1,f:xs:XP:moonstone-eulogist:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 cf938a60-23ec-4834-a3cf-391a7b04747e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-etchings:cast:s1,f:xs:XP:phyrexian-etchings:cast:s1	-	-	-	23c4009444b0	-	cbfbf1d513af	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cf938a60-23ec-4834-a3cf-391a7b04747e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-etchings:cast:s1,f:xs:XP:phyrexian-etchings:cast:s1	-	-	-	23c4009444b0	-	cbfbf1d513af	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cf938a60-23ec-4834-a3cf-391a7b04747e	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof

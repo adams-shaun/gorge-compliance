@@ -31,8 +31,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e21ebdf-b97c-494e-a1d5-19db1b7d3016	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:savage-land-dinosaur:combat0.block:s1,f:xs:XP:savage-land-dinosaur:combat0.block:s1	-	-	-	fb9d3088f0bf	-	123ca22bcd82	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 6e21ebdf-b97c-494e-a1d5-19db1b7d3016	f0/a0	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:savage-land-dinosaur:f0a0:s1	-	-	-	fb9d3088f0bf	-	123ca22bcd82	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 6e24a5bd-0ce3-4dc1-98c6-60d527bfdcfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e24a5bd-0ce3-4dc1-98c6-60d527bfdcfd	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-6e24a5bd-0ce3-4dc1-98c6-60d527bfdcfd	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+6e24a5bd-0ce3-4dc1-98c6-60d527bfdcfd	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+6e24a5bd-0ce3-4dc1-98c6-60d527bfdcfd	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:automated-assembly-line:f0t0:s1,f:xs:XP:automated-assembly-line:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 6e26a525-2584-490d-b106-621c1a30e1fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e275711-eb76-4924-ba38-c38a36d9d82a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:troll-negotiations:cast:s1,f:xs:XP:troll-negotiations:cast:s1	-	-	-	65d07beecc37	-	f2ee95aea9af	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 6e27956e-ba2f-41a9-8e39-ec54424591b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:monstrous-vortex:cast:s1,f:xs:XP:monstrous-vortex:cast:s1	-	-	-	ae86f6029288	-	24bd8c04c40e	-	-	2026-11-24	xproof
@@ -80,9 +80,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e6f9269-c72b-4449-9c2d-a720b9bd6f06	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e6f9269-c72b-4449-9c2d-a720b9bd6f06	f1/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:vildin-pack-outcast-dronepack-kindred:f1a0:s1,f:xs:XP:vildin-pack-outcast-dronepack-kindred:f1a0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 6e737c52-cbe0-493f-ae46-7bf068e04882	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e737c52-cbe0-493f-ae46-7bf068e04882	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-6e737c52-cbe0-493f-ae46-7bf068e04882	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-6e737c52-cbe0-493f-ae46-7bf068e04882	f0/t2	Attacks/Firebending	agreed	-	FX	start	2	0	x:xs:XP:zuko-seeking-honor:f0t2:s1,f:xs:XP:zuko-seeking-honor:f0t2:s1	-	-	-	8c0bd19283bb	-	ef6a0841f114	-	-	2026-11-24	xproof
+6e737c52-cbe0-493f-ae46-7bf068e04882	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:zuko-seeking-honor:f0t0:s1,f:xs:XP:zuko-seeking-honor:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+6e737c52-cbe0-493f-ae46-7bf068e04882	f0/t1	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:zuko-seeking-honor:f0t0:s1,f:xs:XP:zuko-seeking-honor:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+6e737c52-cbe0-493f-ae46-7bf068e04882	f0/t2	Attacks/Firebending	agreed	-	FX	start	4	0	x:xs:XP:zuko-seeking-honor:f0t0:s1,f:xs:XP:zuko-seeking-honor:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 6e743fbf-b5b6-4176-a4f2-6933f521f2fe	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e743fbf-b5b6-4176-a4f2-6933f521f2fe	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:new-benalia:f0t0:s1,f:xs:XP:new-benalia:f0t0:s1	-	-	-	d864b561c9cb	-	2abb8e748d8c	-	-	2026-11-24	xproof
 6e743fbf-b5b6-4176-a4f2-6933f521f2fe	land	land	agreed	-	FX	start	2	0	x:xs:XP:new-benalia:f0t0:s1,f:xs:XP:new-benalia:f0t0:s1	-	-	-	d864b561c9cb	-	2abb8e748d8c	-	-	2026-11-24	xproof

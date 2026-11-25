@@ -72,8 +72,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c51893f-9118-4d95-b88a-e264f4cbd7a8	cast	cast-resolve	agreed	-	FX	scen	2	0	Foolish Fate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c51d843-d155-44ed-ab1f-dfa2ff848f53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c54bd34-667d-415c-ad26-82e0eb0ff409	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c54bd34-667d-415c-ad26-82e0eb0ff409	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-9c54bd34-667d-415c-ad26-82e0eb0ff409	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+9c54bd34-667d-415c-ad26-82e0eb0ff409	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:killian-decisive-mentor:f0t0:s1,f:xs:XP:killian-decisive-mentor:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+9c54bd34-667d-415c-ad26-82e0eb0ff409	f0/t1	NULL	owed	refused:no-generator:trigger:AttackersDeclared:filter	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 9c5897cd-f209-4e51-adc2-d791e5671029	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c5897cd-f209-4e51-adc2-d791e5671029	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:plaza-of-heroes:f0a2:s1,f:xs:XP:plaza-of-heroes:f0a2:s1	-	-	-	054d9f516953	-	0b1b3700bc53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c6edb99-2625-4d80-a2e8-1b6039c0a960	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:magma-phoenix:f0a0:s1,f:xs:XP:magma-phoenix:f0a0:s1	-	-	-	3aa6ded33acb	-	6a7796e8ffab	-	-	2026-11-25	xproof
 9c6edb99-2625-4d80-a2e8-1b6039c0a960	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:magma-phoenix:f0t0:s1,f:xs:XP:magma-phoenix:f0t0:s1	-	-	-	8a1b1a193ec0	-	6a7796e8ffab	-	-	2026-11-24	xproof
 9c7073e9-c676-4629-814c-a96e7af905cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c7073e9-c676-4629-814c-a96e7af905cf	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+9c7073e9-c676-4629-814c-a96e7af905cf	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 9c724912-5afd-4813-affb-4dbda64fd4ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c77eb0a-543a-41db-ba1f-aa0163837ae0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-chosen:cast:s1,f:xs:XP:ajani-s-chosen:cast:s1	-	-	-	d864b561c9cb	-	7b8d71408b4c	-	-	2026-11-24	xproof
 9c77eb0a-543a-41db-ba1f-aa0163837ae0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ajani-s-chosen:f0t0:s1,f:xs:XP:ajani-s-chosen:f0t0:s1	-	-	-	fb9d3088f0bf	-	7b8d71408b4c	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
@@ -131,7 +131,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ca9168f-54cb-4091-b80c-7c264773c1a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawnfluke:f0t0:s1,f:xs:XP:dawnfluke:f0t0:s1	-	-	-	d864b561c9cb	-	3c11de5fd9d1	-	-	2026-11-24	xproof
 9ca9168f-54cb-4091-b80c-7c264773c1a2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dawnfluke:f0t0:s1,f:xs:XP:dawnfluke:f0t0:s1	-	-	-	d864b561c9cb	-	3c11de5fd9d1	-	-	2026-11-24	xproof
 9caa490e-dc28-4069-9ffb-4b1afd8fdd54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9caa490e-dc28-4069-9ffb-4b1afd8fdd54	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	7ce532247cf7	-	-	2026-11-24	xproof
+9caa490e-dc28-4069-9ffb-4b1afd8fdd54	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:bob-reluctant-hydra-agent:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 9cac23a1-a0b3-490c-aea2-dc2928f6dc9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9cb7f23f-322d-4a87-b6c6-15b9d446aef3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:champions-of-the-perfect:cast:s1,f:xs:XP:champions-of-the-perfect:cast:s1	-	-	-	21b2cceac526	-	36ef22329386	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 9cb7f23f-322d-4a87-b6c6-15b9d446aef3	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:champions-of-the-perfect:f0t0:s1,f:xs:XP:champions-of-the-perfect:f0t0:s1	-	-	-	23c4009444b0	-	36ef22329386	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

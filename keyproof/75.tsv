@@ -90,7 +90,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75645b1f-0e12-4a05-b47f-0d2e2616c3ca	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:gruul-guildmage:f0a0:s1,f:xs:XP:gruul-guildmage:f0a0:s1	-	-	-	23c4009444b0	-	28db6e39439a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75645b1f-0e12-4a05-b47f-0d2e2616c3ca	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:gruul-guildmage:f0a1:s1,f:xs:XP:gruul-guildmage:f0a1:s1	-	-	-	23c4009444b0	-	28db6e39439a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75701981-b9fc-471f-a97f-e897bb3dfb77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75701981-b9fc-471f-a97f-e897bb3dfb77	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+75701981-b9fc-471f-a97f-e897bb3dfb77	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 75719f87-ce1a-40d6-ac5a-5ebf0c936c84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blitzball:cast:s1,f:xs:XP:blitzball:cast:s1	-	-	-	23c4009444b0	-	533ad915cca5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75719f87-ce1a-40d6-ac5a-5ebf0c936c84	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:blitzball:cast:s2,f:xs:XP:blitzball:cast:s2	-	-	-	23c4009444b0	-	533ad915cca5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75719f87-ce1a-40d6-ac5a-5ebf0c936c84	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Blitzball/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -133,8 +133,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75a49bce-ab48-44d6-906d-6f51a30702ba	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75a4ddf5-1b3c-4dde-a6e4-4346e46cebf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75a4ddf5-1b3c-4dde-a6e4-4346e46cebf1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75a7cad2-782c-4a5b-9193-5ba789bf5326	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-75a7cad2-782c-4a5b-9193-5ba789bf5326	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+75a7cad2-782c-4a5b-9193-5ba789bf5326	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:incriminating-impetus:cast:s1,f:xs:XP:incriminating-impetus:cast:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+75a7cad2-782c-4a5b-9193-5ba789bf5326	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:incriminating-impetus:cast:s1,f:xs:XP:incriminating-impetus:cast:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 75a7fdd4-046a-433b-b16f-a0424a05c904	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75a7fdd4-046a-433b-b16f-a0424a05c904	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75ae9b87-7137-47a0-b3e1-8915ccd0edf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75b39a67-6720-482f-935a-c142ca0f7891	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seed-the-land:cast:s1,f:xs:XP:seed-the-land:cast:s1	-	-	-	64a08ba7d913	-	73a5675b135b	-	-	2026-11-24	xproof
 75b39a67-6720-482f-935a-c142ca0f7891	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:seed-the-land:f0t0:s1,f:xs:XP:seed-the-land:f0t0:s1	-	-	-	23c4009444b0	-	73a5675b135b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75bf0f27-9df1-4ab4-97a8-94bb3223bdf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zimone-mystery-unraveler:cast:s1,f:xs:XP:zimone-mystery-unraveler:cast:s1	-	-	-	8c0bd19283bb	-	ad97d3959b8a	-	-	2026-11-24	xproof
-75bf0f27-9df1-4ab4-97a8-94bb3223bdf9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+75bf0f27-9df1-4ab4-97a8-94bb3223bdf9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:zimone-mystery-unraveler:f0t0:s1,f:xs:XP:zimone-mystery-unraveler:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 75c626fb-9dfc-4a94-b59f-f0e45c7b2f56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dega-sanctuary:f0t0:s1,f:xs:XP:dega-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	6601936f5ce9	-	-	2026-11-25	xproof
 75c626fb-9dfc-4a94-b59f-f0e45c7b2f56	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dega-sanctuary:f0t0:s1,f:xs:XP:dega-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	6601936f5ce9	-	-	2026-11-25	xproof
 75c81ce4-ca1d-464a-bb39-e568f8ebf71f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

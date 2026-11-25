@@ -38,9 +38,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 94357494-4ccc-43d4-b2d4-351581cbf9b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:auton-soldier:cast:s1,f:xs:XP:auton-soldier:cast:s1	-	-	-	8c0bd19283bb	-	844ac582dda8	-	-	2026-11-24	xproof
 94366283-3b28-4d6a-96e7-c04e5aead5a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:impending-doom:cast:s1,f:xs:XP:impending-doom:cast:s1	-	-	-	ae86f6029288	-	1fdbab60c38c	-	-	2026-11-24	xproof
 94366283-3b28-4d6a-96e7-c04e5aead5a6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:impending-doom:f0t0:s1,f:xs:XP:impending-doom:f0t0:s1	-	-	-	6f84be0f34c0	-	1fdbab60c38c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-9436a736-9139-4d8a-9eb0-9dbf706da51c	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Daredevil, Fearless Fighter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-9436a736-9139-4d8a-9eb0-9dbf706da51c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-9436a736-9139-4d8a-9eb0-9dbf706da51c	f0/t1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Daredevil, Fearless Fighter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+9436a736-9139-4d8a-9eb0-9dbf706da51c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:daredevil-fearless-fighter:cast:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+9436a736-9139-4d8a-9eb0-9dbf706da51c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+9436a736-9139-4d8a-9eb0-9dbf706da51c	f0/t1	Attacks	agreed	-	F	start	2	0	f:xs:XP:daredevil-fearless-fighter:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 94399b1f-e66a-422e-ae41-6013fe741e8c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9439dfa0-daf8-4dac-af32-755fc2984126	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9439dfa0-daf8-4dac-af32-755fc2984126	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -60,8 +60,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 944a91ab-c217-4c1d-b920-2e5503c34546	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sunstar-expansionist:f0t1:s1,f:xs:XP:sunstar-expansionist:f0t1:s1	-	-	-	23c4009444b0	-	2c26b0fc23ef	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 94551fbd-a72c-4a1f-be01-7ba1c7c03eed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:baxter-fly-in-the-ointment:f0t0:s1,f:xs:XP:baxter-fly-in-the-ointment:f0t0:s1	-	-	-	8c0bd19283bb	-	569ac5ce15f6	-	-	2026-11-24	xproof
 94551fbd-a72c-4a1f-be01-7ba1c7c03eed	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:baxter-fly-in-the-ointment:f0t0:s1,f:xs:XP:baxter-fly-in-the-ointment:f0t0:s1	-	-	-	8c0bd19283bb	-	569ac5ce15f6	-	-	2026-11-24	xproof
-94551fbd-a72c-4a1f-be01-7ba1c7c03eed	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:baxter-fly-in-the-ointment:f0t1:s1,f:xs:XP:baxter-fly-in-the-ointment:f0t1:s1	-	-	-	8c0bd19283bb	-	569ac5ce15f6	-	-	2026-11-24	xproof
-94551fbd-a72c-4a1f-be01-7ba1c7c03eed	f0/t2	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+94551fbd-a72c-4a1f-be01-7ba1c7c03eed	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:baxter-fly-in-the-ointment:f0t2:s1,f:xs:XP:baxter-fly-in-the-ointment:f0t2:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+94551fbd-a72c-4a1f-be01-7ba1c7c03eed	f0/t2	Drawn	agreed	-	FX	start	2	0	x:xs:XP:baxter-fly-in-the-ointment:f0t2:s1,f:xs:XP:baxter-fly-in-the-ointment:f0t2:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 9456c5b6-946d-403a-8ed0-dff9f921d98c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9457f3c1-a087-46cd-a8be-cf665466b77c	cast	cast-resolve	agreed	-	FX	scen	2	0	Lassoed by the Law/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9457f3c1-a087-46cd-a8be-cf665466b77c	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 947b40a2-e272-4ef6-85fb-3d767a21bc7a	cast	cast-resolve	agreed	-	FX	scen	2	0	Esper Origins/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 94806688-329d-429d-8126-2c9187e71f54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94806688-329d-429d-8126-2c9187e71f54	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:kyscu-drake:f0a0:s1,f:xs:XP:kyscu-drake:f0a0:s1	-	-	-	8c0bd19283bb	-	b92edf9031b9	-	-	2026-11-24	xproof
-94806688-329d-429d-8126-2c9187e71f54	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+94806688-329d-429d-8126-2c9187e71f54	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 9480e142-289a-439d-b6a5-2666fb0e5be3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:exotic-disease:cast:s1,f:xs:XP:exotic-disease:cast:s1	-	-	-	fc71ca68c5ac	-	1618fd3680e0	-	-	2026-11-24	xproof
 948217ac-289e-455f-8c7c-519aa75fa345	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94848b02-757c-456c-a12c-b0be193221d0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rosethorn-halberd:f0t0:s1,f:xs:XP:rosethorn-halberd:f0t0:s1	-	-	-	ae86f6029288	-	de350f0ce414	-	-	2026-11-24	xproof

@@ -44,10 +44,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d3553df-0036-47d9-b0e3-4a3261a0f73c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:synth-infiltrator:cast:s1,f:xs:XP:synth-infiltrator:cast:s1	-	-	-	8c0bd19283bb	-	152af9479dac	-	-	2026-11-24	xproof
 3d39db09-67b7-4a4e-9667-4e1b806f51a5	cast	cast-resolve	agreed	-	FX	scen	2	0	Moment of Glory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d3c5dd5-ad4e-48ca-92b1-91e1f4ad5c3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fungus-elemental:cast:s1,f:xs:XP:fungus-elemental:cast:s1	-	-	-	8c0bd19283bb	-	6a91b2cca8e6	-	-	2026-11-24	xproof
-3d3c5dd5-ad4e-48ca-92b1-91e1f4ad5c3b	f0/a0	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+3d3c5dd5-ad4e-48ca-92b1-91e1f4ad5c3b	f0/a0	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 3d3e6dc0-2aed-4afa-bfa9-59d04ade9bee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ethereal-whiskergill:cast:s1,f:xs:XP:ethereal-whiskergill:cast:s1	-	-	-	d864b561c9cb	-	f66413e20f8f	-	-	2026-11-24	xproof
 3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:taeko-the-patient-avalanche:cast:s1,f:xs:XP:taeko-the-patient-avalanche:cast:s1	-	-	-	8c0bd19283bb	-	7679566751a4	-	-	2026-11-24	xproof
-3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:taeko-the-patient-avalanche:f0t1:s1,f:xs:XP:taeko-the-patient-avalanche:f0t1:s1	-	-	-	8c0bd19283bb	-	7679566751a4	-	-	2026-11-24	xproof
 3d416f83-32b8-4dad-8e4d-3acd182bbe44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d416f83-32b8-4dad-8e4d-3acd182bbe44	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:cunning-bandit-azamuki-treachery-incarnate:f0t0:s1,f:xs:XP:cunning-bandit-azamuki-treachery-incarnate:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d867016-2601-4a37-a73d-308898d3bd37	cast	cast-resolve	agreed	-	X	scen	1	0	Thrasios, Triton Hero/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3d867016-2601-4a37-a73d-308898d3bd37	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thrasios, Triton Hero/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3d873e1d-4fac-42c4-bb31-77e76099e1ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-rack:cast:s1,f:xs:XP:the-rack:cast:s1	-	-	-	25696bf19d5b	-	bb2037dcdd7f	-	-	2026-11-24	xproof
-3d873e1d-4fac-42c4-bb31-77e76099e1ef	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+3d873e1d-4fac-42c4-bb31-77e76099e1ef	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 3d8aae86-266f-4bfd-a058-0fe12b5ea354	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ceremonial-guard:f0t0:s1,f:xs:XP:ceremonial-guard:f0t0:s1	-	-	-	21b2cceac526	-	7c8c473dead3	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t1	Blocks	agreed	-	FX	start	2	0	x:xs:XP:ceremonial-guard:f0t1:s1,f:xs:XP:ceremonial-guard:f0t1:s1	-	-	-	21b2cceac526	-	7c8c473dead3	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof

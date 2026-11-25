@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 479dd04b-0048-446a-9202-a4dc9472e5c3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tishana-voice-of-thunder:cast:s1,f:xs:XP:tishana-voice-of-thunder:cast:s1	-	-	-	d864b561c9cb	-	a8444dcb1ead	-	-	2026-11-24	xproof
 47a0079f-3544-45bc-a32a-bd93844c8c43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47a0079f-3544-45bc-a32a-bd93844c8c43	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:endrek-sahr-master-breeder:f0t0:s1,f:xs:XP:endrek-sahr-master-breeder:f0t0:s1	-	-	-	23c4009444b0	-	e4ca0955233d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-47a0079f-3544-45bc-a32a-bd93844c8c43	f0/t1	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+47a0079f-3544-45bc-a32a-bd93844c8c43	f0/t1	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 47a66451-8a4e-4fc6-8685-96e1feb8f997	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dispersal-technician:f0t0:s1,f:xs:XP:dispersal-technician:f0t0:s1	-	-	-	d864b561c9cb	-	fd65f6b8f6a3	-	-	2026-11-24	xproof
 47a66451-8a4e-4fc6-8685-96e1feb8f997	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dispersal-technician:f0t0:s1,f:xs:XP:dispersal-technician:f0t0:s1	-	-	-	d864b561c9cb	-	fd65f6b8f6a3	-	-	2026-11-24	xproof
 47a785ed-8095-4685-8daa-02c4e2b0ffcd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spellseeker:f0t0:s1,f:xs:XP:spellseeker:f0t0:s1	-	-	-	8c0bd19283bb	-	57d1daf5b032	-	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 47bbb630-2bf7-47a2-93bb-266e491803c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 47bbb630-2bf7-47a2-93bb-266e491803c3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:flanking-troops:f0t0:s1,f:xs:XP:flanking-troops:f0t0:s1	-	-	-	5f2128bf97e4	-	894a6cb8374a	-	-	2026-11-24	xproof
 47bce63e-8edb-43c1-b273-4b86da5c616b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lyse-hext:cast:s1,f:xs:XP:lyse-hext:cast:s1	-	-	-	8c0bd19283bb	-	166efa94c4db	-	-	2026-11-24	xproof
-47bce63e-8edb-43c1-b273-4b86da5c616b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+47bce63e-8edb-43c1-b273-4b86da5c616b	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:lyse-hext:f0t0:s1,f:xs:XP:lyse-hext:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cinder-pyromancer:cast:s1,f:xs:XP:cinder-pyromancer:cast:s1	-	-	-	8a1b1a193ec0	-	5bb66f26b436	-	-	2026-11-24	xproof
 47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:cinder-pyromancer:f0t0:s1,f:xs:XP:cinder-pyromancer:f0t0:s1	-	-	-	23c4009444b0	-	5bb66f26b436	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 47bfee3e-34b4-4b89-aaf8-f74e0c3d3c62	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:cinder-pyromancer:f0t0:s1,f:xs:XP:cinder-pyromancer:f0t0:s1	-	-	-	23c4009444b0	-	5bb66f26b436	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

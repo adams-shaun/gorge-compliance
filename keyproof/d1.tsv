@@ -76,7 +76,7 @@ d16298ac-67bd-4f9d-9979-23c1b7e4b359	f0/a2	LoseLife	agreed	-	FX	start	2	0	x:xs:X
 d16298ac-67bd-4f9d-9979-23c1b7e4b359	land	land	agreed	-	FX	start	2	0	x:xs:XP:starlit-sanctum:land:s1,f:xs:XP:starlit-sanctum:land:s1	-	-	-	fc71ca68c5ac	-	079baf8ed449	-	-	2026-11-24	xproof
 d1663b51-37a1-45a0-b477-2d3e7dd0828e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warg-tactics:cast:s1,f:xs:XP:warg-tactics:cast:s1	-	-	-	fb9d3088f0bf	-	ccc64cb7f269	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 d16783a4-9980-451b-9af0-33866980bc8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alphinaud-leveilleur:f0t1:s1,f:xs:XP:alphinaud-leveilleur:f0t1:s1	-	-	-	23c4009444b0	-	e545f3e790c3	-	-	2026-11-25	xproof
-d16783a4-9980-451b-9af0-33866980bc8d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+d16783a4-9980-451b-9af0-33866980bc8d	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:alphinaud-leveilleur:f0t0:s1,f:xs:XP:alphinaud-leveilleur:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 d16783a4-9980-451b-9af0-33866980bc8d	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:alphinaud-leveilleur:f0t1:s1,f:xs:XP:alphinaud-leveilleur:f0t1:s1	-	-	-	23c4009444b0	-	e545f3e790c3	-	-	2026-11-25	xproof
 d16d2451-1c21-4a6b-8a4a-40ac8cd9fe08	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:apprentice-wizard:cast:s1,f:xs:XP:apprentice-wizard:cast:s1	-	-	-	fc71ca68c5ac	-	72fde918fb49	-	-	2026-11-24	xproof
 d16d2451-1c21-4a6b-8a4a-40ac8cd9fe08	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:apprentice-wizard:f0a0:s1,f:xs:XP:apprentice-wizard:f0a0:s1	-	-	-	9087eefec3ee	-	72fde918fb49	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
@@ -180,10 +180,10 @@ d1f10cca-8dfa-4ea5-b227-4446cd8514a8	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:dr
 d1f10cca-8dfa-4ea5-b227-4446cd8514a8	f0/a1	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 d1f10cca-8dfa-4ea5-b227-4446cd8514a8	land	land	agreed	-	FX	start	2	0	x:xs:XP:drannith-ruins:land:s1,f:xs:XP:drannith-ruins:land:s1	-	-	-	3aa6ded33acb	-	d7366d7f49c0	-	-	2026-11-25	xproof
 d1f1e48f-f1f4-497f-9112-79159d2f443b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d1f1e48f-f1f4-497f-9112-79159d2f443b	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-d1f1e48f-f1f4-497f-9112-79159d2f443b	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+d1f1e48f-f1f4-497f-9112-79159d2f443b	f0/t0	Discarded	agreed	-	FX	start	2	0	x:xs:XP:green-goblin-nemesis:f0t0:s1,f:xs:XP:green-goblin-nemesis:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+d1f1e48f-f1f4-497f-9112-79159d2f443b	f0/t1	Discarded	agreed	-	FX	start	2	0	x:xs:XP:green-goblin-nemesis:f0t1:s1,f:xs:XP:green-goblin-nemesis:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 d1f3d5ca-cb17-400f-8ed9-3b9a4f151b62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steelburr-champion:f0t1:s1,f:xs:XP:steelburr-champion:f0t1:s1	-	-	-	23c4009444b0	-	3c2e6a8145cc	-	-	2026-11-25	xproof
-d1f3d5ca-cb17-400f-8ed9-3b9a4f151b62	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+d1f3d5ca-cb17-400f-8ed9-3b9a4f151b62	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:steelburr-champion:f0t0:s1,f:xs:XP:steelburr-champion:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 d1f3d5ca-cb17-400f-8ed9-3b9a4f151b62	f0/t1	ChangesZone/Offspring	agreed	-	FX	start	2	0	x:xs:XP:steelburr-champion:f0t1:s1,f:xs:XP:steelburr-champion:f0t1:s1	-	-	-	23c4009444b0	-	3c2e6a8145cc	-	-	2026-11-25	xproof
 d1faaa3e-8e99-48e9-bb04-98bd46b7217c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d1faaa3e-8e99-48e9-bb04-98bd46b7217c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:escaped-experiment:f0t0:s1,f:xs:XP:escaped-experiment:f0t0:s1	-	-	-	054d9f516953	-	1cfcff3feecf	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

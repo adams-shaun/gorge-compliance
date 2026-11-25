@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 607a3f5f-4a36-4077-b5cf-40ffd52fa580	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:altar-of-bone:cast:s1,f:xs:XP:altar-of-bone:cast:s1	-	-	-	9087eefec3ee	-	eaa6cc8fff64	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 607f9177-fea0-464c-a15f-65842865546a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 607f9177-fea0-464c-a15f-65842865546a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-60808c8f-5257-451b-a9b6-389ba51598d5	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+60808c8f-5257-451b-a9b6-389ba51598d5	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 60824fae-20ed-4122-82c9-e99a1b679c54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60826714-b9fd-4c89-b9f2-1a3c3229686b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tainted-treats:cast:s1,f:xs:XP:tainted-treats:cast:s1	-	-	-	23c4009444b0	-	cc35fb5cf4bf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 608293f1-34aa-4e55-8389-73f975858de6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,9 +166,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60c60923-ff1b-43f7-8768-731499fcffc9	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:oko-thief-of-crowns:f0a0:s1,f:xs:XP:oko-thief-of-crowns:f0a0:s1	-	-	-	65d07beecc37	-	12b7be3906eb	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 60c60923-ff1b-43f7-8768-731499fcffc9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60c60923-ff1b-43f7-8768-731499fcffc9	f0/a2	Pump	agreed	-	FX	start	2	0	x:xs:XP:oko-thief-of-crowns:f0a2:s1,f:xs:XP:oko-thief-of-crowns:f0a2:s1	-	-	-	65d07beecc37	-	12b7be3906eb	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
-60c77b18-c111-4e16-ad19-2ef32582cd9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-60c77b18-c111-4e16-ad19-2ef32582cd9e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-60c77b18-c111-4e16-ad19-2ef32582cd9e	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+60c77b18-c111-4e16-ad19-2ef32582cd9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angelic-sell-sword:f0t0:s1,f:xs:XP:angelic-sell-sword:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+60c77b18-c111-4e16-ad19-2ef32582cd9e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:angelic-sell-sword:f0t0:s1,f:xs:XP:angelic-sell-sword:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+60c77b18-c111-4e16-ad19-2ef32582cd9e	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:angelic-sell-sword:f0t1:s1,f:xs:XP:angelic-sell-sword:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 60cb885c-5cd3-4963-8a6a-cebf07cc61b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60cb885c-5cd3-4963-8a6a-cebf07cc61b5	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:storm-fleet-negotiator:f0t0:s1,f:xs:XP:storm-fleet-negotiator:f0t0:s1	-	-	-	8c0bd19283bb	-	4c6c3e95a66a	-	-	2026-11-24	xproof
 60d591f6-6d84-45d2-9d78-a2ef07a3e403	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

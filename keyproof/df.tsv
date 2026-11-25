@@ -70,7 +70,7 @@ df5e4100-8c83-42d6-af96-1a1ec84a9210	combat#0.block	combat#0.block	agreed	-	X	sc
 df621822-c811-40fa-99c1-ea9920bcd2e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df621822-c811-40fa-99c1-ea9920bcd2e2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 df63e124-1542-48d6-b255-cf45855f1e93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df63e124-1542-48d6-b255-cf45855f1e93	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+df63e124-1542-48d6-b255-cf45855f1e93	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:woodland-liege:f0t0:s1,f:xs:XP:woodland-liege:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 df67597f-42a8-4fa7-b426-d7db8b384445	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-motivator:cast:s1,f:xs:XP:goblin-motivator:cast:s1	-	-	-	d864b561c9cb	-	ff56219fd4c3	-	-	2026-11-24	xproof
 df67597f-42a8-4fa7-b426-d7db8b384445	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:goblin-motivator:f0a0:s1,f:xs:XP:goblin-motivator:f0a0:s1	-	-	-	d864b561c9cb	-	ff56219fd4c3	-	-	2026-11-24	xproof
 df680ccd-7e76-4a05-9bdf-4f437b4bfbb3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phobian-phantasm:cast:s1,f:xs:XP:phobian-phantasm:cast:s1	-	-	-	23c4009444b0	-	c71e881f3da7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -95,7 +95,7 @@ df7580fb-4c37-4c09-8785-e320cb124621	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 df77cb98-e3c6-4927-99d5-c3380641f356	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df7a3868-4f03-452c-8307-1493977d42ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df7abfb0-21df-4359-be81-0f3c09e1425e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-df7abfb0-21df-4359-be81-0f3c09e1425e	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+df7abfb0-21df-4359-be81-0f3c09e1425e	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:black-widow-agile-avenger:f0t0:s1,f:xs:XP:black-widow-agile-avenger:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 df7e296d-96de-4280-a4d8-49189544b9e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df7e296d-96de-4280-a4d8-49189544b9e3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 df7f697e-6886-4897-a024-61ae225c1b34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,8 +131,8 @@ dfa95c0e-393d-4b22-9de3-45a7efc0ba14	combat#0.attack	combat.attack	agreed	-	FX	s
 dfa95c0e-393d-4b22-9de3-45a7efc0ba14	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:saheeli-consul-of-oversight:combat0.block:s1,f:xs:XP:saheeli-consul-of-oversight:combat0.block:s1	-	-	-	fb9d3088f0bf	-	7966bfbedc3f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 dfa95c0e-393d-4b22-9de3-45a7efc0ba14	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Saheeli, Consul of Oversight/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dfa95c0e-393d-4b22-9de3-45a7efc0ba14	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Saheeli, Consul of Oversight/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dfaa02d4-4f3c-4e5d-b9e5-283a45395a53	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-dfaa02d4-4f3c-4e5d-b9e5-283a45395a53	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+dfaa02d4-4f3c-4e5d-b9e5-283a45395a53	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eccentric-pestfinder-turn-stones:cast:s1,f:xs:XP:eccentric-pestfinder-turn-stones:cast:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+dfaa02d4-4f3c-4e5d-b9e5-283a45395a53	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:eccentric-pestfinder-turn-stones:f0t0:s1,f:xs:XP:eccentric-pestfinder-turn-stones:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 dfac0258-e148-4d7d-8ded-fc2466d9caa6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dfac0258-e148-4d7d-8ded-fc2466d9caa6	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dfac0258-e148-4d7d-8ded-fc2466d9caa6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -207,7 +207,7 @@ dff11626-ad4d-443a-b7db-f508790b5fd2	combat#0.block	combat.block	agreed	-	FX	sta
 dff11626-ad4d-443a-b7db-f508790b5fd2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Namor the Sub-Mariner/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dff11626-ad4d-443a-b7db-f508790b5fd2	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:namor-the-sub-mariner:static0.0:s1,f:xs:XP:namor-the-sub-mariner:static0.0:s1	-	-	-	baa6f696107c	-	198c3cf153ce	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 dff3cfff-69f9-4afd-af28-b75504d30ffa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ulvenwald-observer:cast:s1,f:xs:XP:ulvenwald-observer:cast:s1	-	-	-	d864b561c9cb	-	9aaa7db03a91	-	-	2026-11-24	xproof
-dff3cfff-69f9-4afd-af28-b75504d30ffa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+dff3cfff-69f9-4afd-af28-b75504d30ffa	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 dff3f4c7-f792-4ca3-9b0a-0738e70664d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:old-gnawbone:cast:s1,f:xs:XP:old-gnawbone:cast:s1	-	-	-	ae86f6029288	-	917a43a0c4d5	-	-	2026-11-24	xproof
 dff3f4c7-f792-4ca3-9b0a-0738e70664d9	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:old-gnawbone:f0t0:s1,f:xs:XP:old-gnawbone:f0t0:s1	-	-	-	78568f009138	-	917a43a0c4d5	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 dff72513-b67a-4732-a8fc-269cbf21ae99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

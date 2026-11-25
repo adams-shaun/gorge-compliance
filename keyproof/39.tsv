@@ -9,8 +9,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39050823-ccda-43c0-818d-d5db15d82b99	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:kjeldoran-frostbeast:cast:s1,f:xs:XP:kjeldoran-frostbeast:cast:s1	-	-	-	8c0bd19283bb	-	bb5a3c94696a	-	-	2026-11-24	xproof
 39068bf1-cae4-4ac9-82ef-4e81bf59446e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3909ff79-2103-407c-a812-a5a5a996fce2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fandaniel-telophoroi-ascian:cast:s1,f:xs:XP:fandaniel-telophoroi-ascian:cast:s1	-	-	-	8c0bd19283bb	-	2125befec451	-	-	2026-11-24	xproof
-3909ff79-2103-407c-a812-a5a5a996fce2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-3909ff79-2103-407c-a812-a5a5a996fce2	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3909ff79-2103-407c-a812-a5a5a996fce2	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:fandaniel-telophoroi-ascian:f0t0:s1,f:xs:XP:fandaniel-telophoroi-ascian:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+3909ff79-2103-407c-a812-a5a5a996fce2	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:fandaniel-telophoroi-ascian:f0t0:s1,f:xs:XP:fandaniel-telophoroi-ascian:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 390b862a-2a85-44bd-832c-f5bbd3eb4ea0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 390f1b56-264e-4336-83be-dc1fe79bfdcf	f0/a0	Mana	agreed	-	X	start	2	0	x:xs:XP:smoldering-marsh:f0a0:s1	-	-	-	336eab778104	-	7b39e1f56079	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 390f1b56-264e-4336-83be-dc1fe79bfdcf	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 39bb051f-1ca7-4d9b-b33b-7f559f816e3e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:serra-redeemer:combat0.block:s1,f:xs:XP:serra-redeemer:combat0.block:s1	-	-	-	3aa6ded33acb	-	c411459090f4	-	-	2026-11-25	xproof
 39bb051f-1ca7-4d9b-b33b-7f559f816e3e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:serra-redeemer:f0t0:s1,f:xs:XP:serra-redeemer:f0t0:s1	-	-	-	3aa6ded33acb	-	c411459090f4	-	-	2026-11-25	xproof
 39bf60b2-eeee-48f3-b7b0-6cc2e038afb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-39bf60b2-eeee-48f3-b7b0-6cc2e038afb1	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+39bf60b2-eeee-48f3-b7b0-6cc2e038afb1	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 39bf633c-41a6-496d-8aef-1ab7befb503d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39bfe194-1662-4c0e-a7c6-ea7764d29b65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 39c10798-9dfc-47a2-9da3-b4038509aebe	cast	cast	agreed	-	F	start	2	0	f:xs:XP:underworld-connections:cast:s1	-	-	-	8c0bd19283bb	-	27990bed820e	-	-	2026-11-24	xproof

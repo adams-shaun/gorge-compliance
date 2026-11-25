@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f384f19-7fb4-4120-8001-5b401b4debbd	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:reckless-pangolin:f0t0:s1,f:xs:XP:reckless-pangolin:f0t0:s1	-	-	-	8c0bd19283bb	-	6d1629c55850	-	-	2026-11-24	xproof
 1f3b0b15-2c38-4aaa-b527-afbb540a6715	cast	cast-resolve	agreed	-	FX	scen	2	0	Toxin Analysis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f3c2b00-0000-4ae1-9650-9553accac52e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f3c2b00-0000-4ae1-9650-9553accac52e	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+1f3c2b00-0000-4ae1-9650-9553accac52e	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 1f3c2b00-0000-4ae1-9650-9553accac52e	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:ninja-of-the-deep-hours:f0t0:s1,f:xs:XP:ninja-of-the-deep-hours:f0t0:s1	-	-	-	23c4009444b0	-	e616c9c3b0f8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	cast	cast-resolve	agreed	-	FX	scen	2	0	Gearbane Orangutan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gearbane-orangutan:combat0.attack:s1,f:xs:XP:gearbane-orangutan:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8beaefc89cfb	-	-	2026-11-25	xproof
@@ -152,8 +152,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fbed9e4-86f6-4115-8468-8593e340701f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:krosan-druid:f0t0:s1,f:xs:XP:krosan-druid:f0t0:s1	-	-	-	d864b561c9cb	-	6e3a3d4d4b06	-	-	2026-11-24	xproof
 1fc1b0d7-7f15-4d00-bc8f-e06489afd425	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fc1b0d7-7f15-4d00-bc8f-e06489afd425	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1fc1b0d7-7f15-4d00-bc8f-e06489afd425	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:qala-ajani-s-pridemate:f0t0:s1,f:xs:XP:qala-ajani-s-pridemate:f0t0:s1	-	-	-	8c0bd19283bb	-	b6eac5244e0a	-	-	2026-11-24	xproof
-1fc1b0d7-7f15-4d00-bc8f-e06489afd425	f0/t1	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+1fc1b0d7-7f15-4d00-bc8f-e06489afd425	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:qala-ajani-s-pridemate:f0t1:s1,f:xs:XP:qala-ajani-s-pridemate:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+1fc1b0d7-7f15-4d00-bc8f-e06489afd425	f0/t1	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:qala-ajani-s-pridemate:f0t1:s1,f:xs:XP:qala-ajani-s-pridemate:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 1fc31651-70fe-4a58-9b7e-7359510bba51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:riling-dawnbreaker-signaling-roar:cast:s1,f:xs:XP:riling-dawnbreaker-signaling-roar:cast:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 1fc31651-70fe-4a58-9b7e-7359510bba51	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:riling-dawnbreaker-signaling-roar:combat0.attack:s1,f:xs:XP:riling-dawnbreaker-signaling-roar:combat0.attack:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 1fc31651-70fe-4a58-9b7e-7359510bba51	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:riling-dawnbreaker-signaling-roar:combat0.block:s1,f:xs:XP:riling-dawnbreaker-signaling-roar:combat0.block:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
@@ -201,5 +201,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ff62220-be95-4901-b8d8-812b9a1a1b0a	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:greed:f0a0:s1,f:xs:XP:greed:f0a0:s1	-	-	-	23c4009444b0	-	caf070eee9c1	-	-	2026-11-25	xproof
 1ff91cc1-2233-4ceb-91ba-6a49c7147f32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-wedding-of-river-song:cast:s1,f:xs:XP:the-wedding-of-river-song:cast:s1	-	-	-	8c0bd19283bb	-	a5ba466f532d	-	-	2026-11-24	xproof
 1ff9598a-0dac-4437-9450-fc8134fa3740	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ff9598a-0dac-4437-9450-fc8134fa3740	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-1ff9598a-0dac-4437-9450-fc8134fa3740	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+1ff9598a-0dac-4437-9450-fc8134fa3740	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:piper-wright-publick-reporter:f0t0:s1,f:xs:XP:piper-wright-publick-reporter:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+1ff9598a-0dac-4437-9450-fc8134fa3740	f0/t1	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:piper-wright-publick-reporter:f0t1:s1,f:xs:XP:piper-wright-publick-reporter:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof

@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 594132ac-32a7-41d5-b7f0-3692bbed7f6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prowcatcher-specialist:cast:s1,f:xs:XP:prowcatcher-specialist:cast:s1	-	-	-	23c4009444b0	-	eb2785720497	-	-	2026-11-25	xproof
 594132ac-32a7-41d5-b7f0-3692bbed7f6f	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:prowcatcher-specialist:f0a0:s1,f:xs:XP:prowcatcher-specialist:f0a0:s1	-	-	-	23c4009444b0	-	eb2785720497	-	-	2026-11-25	xproof
 59442ef7-5276-4f38-83c8-9a849388a711	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59442ef7-5276-4f38-83c8-9a849388a711	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+59442ef7-5276-4f38-83c8-9a849388a711	f0/t0	Discarded	agreed	-	FX	start	2	0	x:xs:XP:lady-spider-maybelle-reilly:f0t0:s1,f:xs:XP:lady-spider-maybelle-reilly:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 5944d5c7-65ab-425f-a453-ed5871ca3d73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59483597-4d8c-4cdc-8bb5-226b1eef10f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grayscaled-gharial:cast:s1,f:xs:XP:grayscaled-gharial:cast:s1	-	-	-	64a08ba7d913	-	9e801e60e1d0	-	-	2026-11-24	xproof
 5948381a-419d-4b8b-8ea2-ea623cb0d606	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59a10335-72df-44a5-a514-5bac392cd282	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Professor Zei, Anthropologist/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 59a4c4cf-07b4-4009-bbea-7da7b31f09a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:support-mission:cast:s1,f:xs:XP:support-mission:cast:s1	-	-	-	fb9d3088f0bf	-	362d2b267cb6	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 59a4c4cf-07b4-4009-bbea-7da7b31f09a1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:support-mission:f0t0:s1,f:xs:XP:support-mission:f0t0:s1	-	-	-	23c4009444b0	-	362d2b267cb6	-	-	2026-11-25	xproof
-59a82f57-fe2f-4834-a4ee-4b948eef1e12	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+59a82f57-fe2f-4834-a4ee-4b948eef1e12	f0/a0	ManaReflected	agreed	-	FX	start	2	0	x:xs:XP:horizon-of-progress:f0a0:s1,f:xs:XP:horizon-of-progress:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 59a82f57-fe2f-4834-a4ee-4b948eef1e12	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:horizon-of-progress:f0a1:s1,f:xs:XP:horizon-of-progress:f0a1:s1	-	-	-	8c0bd19283bb	-	b0c1dbc89683	-	-	2026-11-24	xproof
 59a82f57-fe2f-4834-a4ee-4b948eef1e12	f0/a2	Draw	agreed	-	FX	start	2	0	x:xs:XP:horizon-of-progress:f0a0:s1,f:xs:XP:horizon-of-progress:f0a0:s1	-	-	-	8c0bd19283bb	-	b0c1dbc89683	-	-	2026-11-24	xproof
 59a82f57-fe2f-4834-a4ee-4b948eef1e12	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59e8747a-3e3f-48d2-aaee-af94ecee378b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shackle-slinger:cast:s1,f:xs:XP:shackle-slinger:cast:s1	-	-	-	3aa6ded33acb	-	e987b1ba0316	-	-	2026-11-25	xproof
 59e8747a-3e3f-48d2-aaee-af94ecee378b	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:shackle-slinger:f0t0:s1,f:xs:XP:shackle-slinger:f0t0:s1	-	-	-	3aa6ded33acb	-	e987b1ba0316	-	-	2026-11-25	xproof
 59eab251-af80-4091-98de-9ed413c14cdc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-59eab251-af80-4091-98de-9ed413c14cdc	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+59eab251-af80-4091-98de-9ed413c14cdc	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 59edd0e7-37c2-45f9-9f9d-8002be459662	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grizzled-leotau:cast:s1,f:xs:XP:grizzled-leotau:cast:s1	-	-	-	8a1b1a193ec0	-	c4351e2b71a4	-	-	2026-11-24	xproof
 59f10ddb-8287-4d2c-8c60-1080b108fa78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59f10ddb-8287-4d2c-8c60-1080b108fa78	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:requiem-angel:f0t0:s1,f:xs:XP:requiem-angel:f0t0:s1	-	-	-	23c4009444b0	-	6f0f5daa21ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

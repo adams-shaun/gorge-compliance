@@ -9,9 +9,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 610af0f7-b5e3-43fb-9d02-7c59bd99034c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 610d006a-3ceb-4136-b92b-a500c74d06b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frontline-war-rager:cast:s1,f:xs:XP:frontline-war-rager:cast:s1	-	-	-	23c4009444b0	-	1b47e97892c2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 610d006a-3ceb-4136-b92b-a500c74d06b0	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:frontline-war-rager:f0t0:s1,f:xs:XP:frontline-war-rager:f0t0:s1	-	-	-	23c4009444b0	-	1b47e97892c2	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-610e5fda-ff6c-408d-9d58-ba2b02c5101f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+610e5fda-ff6c-408d-9d58-ba2b02c5101f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:hook-swords:cast:s1,f:xs:XP:hook-swords:cast:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 610e5fda-ff6c-408d-9d58-ba2b02c5101f	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:hook-swords:f0a0:s1	-	-	-	8c0bd19283bb	-	d86f42339433	-	-	2026-11-24	xproof
-610e5fda-ff6c-408d-9d58-ba2b02c5101f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+610e5fda-ff6c-408d-9d58-ba2b02c5101f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:hook-swords:cast:s1,f:xs:XP:hook-swords:cast:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 610f25b0-770f-457a-b0eb-6deb832f71d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 610f25b0-770f-457a-b0eb-6deb832f71d4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 61105cb5-d7a1-4021-a006-dd1b947dfa68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -91,8 +91,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 617eae63-b5f8-4014-8269-7c66f4388ac7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 61816f98-9d1a-4b16-9194-cb7249880710	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 61816f98-9d1a-4b16-9194-cb7249880710	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:leitmotif-composer:f0a0:s1,f:xs:XP:leitmotif-composer:f0a0:s1	-	-	-	8c0bd19283bb	-	f0565b933947	-	-	2026-11-24	xproof
-61816f98-9d1a-4b16-9194-cb7249880710	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-61816f98-9d1a-4b16-9194-cb7249880710	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+61816f98-9d1a-4b16-9194-cb7249880710	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:leitmotif-composer:f0t0:s1,f:xs:XP:leitmotif-composer:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+61816f98-9d1a-4b16-9194-cb7249880710	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:leitmotif-composer:f0t1:s1,f:xs:XP:leitmotif-composer:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 61822bbe-0407-4425-b8d7-0263a8c521ec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragonbroods-relic:cast:s1,f:xs:XP:dragonbroods-relic:cast:s1	-	-	-	23c4009444b0	-	6b37e3a31ce7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 61822bbe-0407-4425-b8d7-0263a8c521ec	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:dragonbroods-relic:f0a0:s1,f:xs:XP:dragonbroods-relic:f0a0:s1	-	-	-	336eab778104	-	6b37e3a31ce7	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 61822bbe-0407-4425-b8d7-0263a8c521ec	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:dragonbroods-relic:f0a1:s1,f:xs:XP:dragonbroods-relic:f0a1:s1	-	-	-	23c4009444b0	-	6b37e3a31ce7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
