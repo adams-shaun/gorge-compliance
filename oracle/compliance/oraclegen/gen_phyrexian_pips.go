@@ -65,6 +65,10 @@ type xanswersExtra struct {
 	// election, which XMage's BolsterEffect asks through chooseTarget
 	// (bolster_pick.go).
 	bolster map[int]bool
+	// optionalTriggerSearch marks the declined library-search decisions whose
+	// XMage trigger is optional (chooseUse), so the decline scripts only the
+	// "no" (optionalTriggerSearchDecline).
+	optionalTriggerSearch map[int]bool
 	// craft marks the decisions whose exilecost pick pays a Craft keyword's
 	// material cost. XMage's CraftAbility chooses its material through
 	// chooseTarget, the TARGET queue, unlike every other exile cost's

@@ -1337,6 +1337,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var ownGraveyardExile map[int]bool
 	var tapThenUntap map[int]bool
 	var bolster map[int]bool
+	var optionalTriggerSearch map[int]bool
 	var craft map[int]bool
 	var supports map[int]supportAnswers
 	var snaps []rules.OracleSnapshot
@@ -1370,6 +1371,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if bolster == nil {
 			bolster = ex.bolster
+		}
+		if optionalTriggerSearch == nil {
+			optionalTriggerSearch = ex.optionalTriggerSearch
 		}
 		if craft == nil {
 			craft = ex.craft
@@ -1995,6 +1999,12 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				}
 			}
 			switch {
+			case len(d.Picks) == 0 && optionalTriggerSearch[i]:
+				// A declined search inside a trigger XMage asks as an optional
+				// trigger (chooseUse): the "no" ends it, no search follows, so
+				// an "up to" target skip would be left over (Hexhaven
+				// Invigorator; optionalTriggerSearchDecline).
+				as = append(as, XAnswer{d.Seat, "choice", "no"})
 			case len(d.Picks) == 0:
 				// Declined: XMage may pose it as a yes/no or as an "up to"
 				// pick; script both (measured: Zimone's Experiment agrees
