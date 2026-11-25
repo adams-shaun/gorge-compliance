@@ -28,10 +28,26 @@ import (
 // one step contains two separate simultaneous multi-card moves, the pin lists
 // both groups in the final zone order. Forge's first "order to Graveyard" ask
 // in that step consumes the pin and orders its offered subset by it (extra
-// picks are skipped), so the second ask still has no pin and misses. That is
-// no worse than the previous unconditional miss, but it is not a pin per
-// event; splitting the delta would need event data the runner does not
-// record.
+// picks are skipped), so the second ask still has no pin and keeps Forge's
+// offered order (StepMachine.orderCards), leaving only the first move's order
+// compared. That is no worse than the previous unconditional miss, but it is
+// not a pin per event; splitting the delta would need event data the runner
+// does not record.
+//
+// A card that passes through a graveyard within one resolution is in neither
+// checkpoint, so no pin can exist for its order either: Sorin, Lord of
+// Innistrad's -6 destroys two cards and a ChangeZoneAll returns them to the
+// battlefield in the same step. The order such a move leaves behind is not
+// observable (the cards are gone before the next checkpoint), so
+// StepMachine.orderCards keeps Forge's offered order for an ask with no
+// queued pin instead of reporting a question neither engine recorded. The
+// same resolution also asks "order to Battlefield" for the return, so the
+// driver accepts exactly those two destinations without a pin; every other
+// zone (library arrange/dig, exile, hand, command, stack, sideboard) still
+// misses, so a future order truth there is not silently kept. Every arrival a
+// checkpoint can see still gets its pin above, and the first ask in a step
+// consumes it, so a real ordering difference on a visible move is still
+// caught.
 func forgeGraveyardOrderDecisions(it oraclegen.Item, g rules.OracleResult, ds []rules.OracleDecision) []rules.OracleDecision {
 	if len(g.Snapshots) < len(it.Steps)+1 {
 		return ds
