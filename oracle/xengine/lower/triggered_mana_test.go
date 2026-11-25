@@ -67,7 +67,7 @@ func TestLowerTriggeredManaAbility(t *testing.T) {
 	}
 
 	// An activated mana record the lowering cannot resolve stays refused.
-	steps, bad := manaTaps(reg, seatMap{}, []game.ManaRec{{Name: "Swamp", Ability: -1, Ref: "p0:Swamp"}})
+	steps, bad := manaTaps(reg, seatMap{}, []game.ManaRec{{Name: "Swamp", Ability: -1, Ref: "p0:Swamp"}}, nil)
 	if bad == nil || bad.reason != "unsupported_kind:mana_ability" || steps != nil {
 		t.Errorf("unresolvable activated record: steps %v, why %v, want unsupported_kind:mana_ability", steps, bad)
 	}
