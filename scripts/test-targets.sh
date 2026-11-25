@@ -23,8 +23,19 @@
 # -- scenarios/ selects ./audit, a verdict producer selects the ratchet packages
 # -- cannot drift into a second list here.
 #
+# Two bounded-run rules keep the seat targets from becoming `go test ./...`:
+#   * a pin change (go.mod/go.sum/GORGE_PIN) makes the selector expand to every
+#     package. That is the merge gate's full suite, not a seat's; the mode exits
+#     ENV 3 with the package count instead of running it.
+#   * SLOW_PKGS (default ./oracle/compliance/oraclegen/templates, the one
+#     ~3-minute package) runs only SLOW_RUN, a named test, never the whole
+#     package. The merge gate still runs the package whole.
+# Both rules are re-derived from the selection itself, not a hand-kept copy of
+# cmd/testselect's rules.
+#
 # Overridable for the smoke: TEST_TARGETS_GO (go), TEST_TARGETS_SYSTEMD_RUN
-# (systemd-run), TEST_TARGETS_CARDS (.cards).
+# (systemd-run), TEST_TARGETS_CARDS (.cards), TEST_TARGETS_SLOW_PKGS,
+# TEST_TARGETS_SLOW_RUN.
 set -uo pipefail
 
 mode=${1:-}
@@ -47,6 +58,8 @@ V=${V:-}
 TIMEOUT=${TIMEOUT:-2m}
 TAGS=${TAGS:-}
 BASE=${BASE:-develop}
+SLOW_PKGS=${TEST_TARGETS_SLOW_PKGS:-./oracle/compliance/oraclegen/templates}
+SLOW_RUN=${TEST_TARGETS_SLOW_RUN:-^TestTemplatesAreDistinctAndVersioned$}
 
 t0=$SECONDS
 sha=nogit
@@ -57,6 +70,7 @@ fi
 
 SELECTED=()
 pkgs_label=
+all_selection=0
 
 # verdict STATUS [EXIT|MSG] — print the one verdict line and exit with STATUS's
 # code. A numeric second argument is the legacy explicit exit code; anything
@@ -134,17 +148,43 @@ if [ "$mode" != one ]; then
 		echo "test-targets: note: HEAD is not on top of $BASE; the landing rebases, so a conflict with it is not covered" >&2
 fi
 
-# select_pkgs COMMITTED — fill SELECTED with the packages the diff touches.
-# COMMITTED=1 diffs BASE..HEAD (test-smart checks a commit); 0 also reads the
-# working tree and untracked files (test-targeted's inner loop).
+# selection_is_all — true when SELECTED is exactly `go list ./...`, which is
+# how cmd/testselect reports its All marker (a pin bump) after expanding it.
+# Comparing with go's own list keeps this rule structural: a new pin file in
+# the selector cannot leave a full-suite selection looking like a normal one.
+selection_is_all() {
+	local module all selected imp
+	module=$(cd "$ROOT" && GOWORK=off "$GO" list -m -f '{{.Path}}' 2>/dev/null) || return 1
+	[ -n "$module" ] || return 1
+	all=$(cd "$ROOT" && GOWORK=off "$GO" list ./... 2>/dev/null) || return 1
+	[ -n "$all" ] || return 1
+	all=$(printf '%s\n' "$all" | while IFS= read -r imp; do
+		case $imp in
+		"$module") printf '.\n' ;;
+		"$module"/*) printf './%s\n' "${imp#"$module"/}" ;;
+		esac
+	done | sort)
+	selected=$(printf '%s\n' "${SELECTED[@]}" | sort)
+	[ "$selected" = "$all" ]
+}
+
+# select_pkgs COMMITTED [CHECK_ALL] — fill SELECTED with the packages the diff
+# touches. COMMITTED=1 diffs BASE..HEAD (test-smart checks a commit); 0 also
+# reads the working tree and untracked files (test-targeted's inner loop).
+# CHECK_ALL=1 marks a selection that is every package (a pin bump).
+#
+# --no-renames is load-bearing on every diff: with rename detection on, a
+# producer file moved out of its prefix appears only under the new path, so
+# the ratchet packages the old path selected would be silently dropped.
 select_pkgs() {
-	local committed=$1 files out rc p
+	local committed=$1 check_all=${2:-0} files out rc p
 	if [ "$committed" = 1 ]; then
-		files=$(git -C "$ROOT" diff --name-only "$mb" HEAD)
+		files=$(git -C "$ROOT" diff --name-only --no-renames "$mb" HEAD)
 	else
-		files=$({ git -C "$ROOT" diff --name-only "$mb"; git -C "$ROOT" ls-files -o --exclude-standard; } | sort -u)
+		files=$({ git -C "$ROOT" diff --name-only --no-renames "$mb"; git -C "$ROOT" ls-files -o --exclude-standard; } | sort -u)
 	fi
 	SELECTED=()
+	all_selection=0
 	pkgs_label=-
 	[ -n "$files" ] || return 0
 	# Keep stderr out of the package list: a go warning on stderr would
@@ -162,6 +202,10 @@ select_pkgs() {
 	while IFS= read -r p; do [ -n "$p" ] && SELECTED+=("$p"); done <<<"$out"
 	pkgs_label=$(IFS=,; printf '%s' "${SELECTED[*]-}")
 	[ -n "$pkgs_label" ] || pkgs_label=-
+	if [ "$check_all" = 1 ] && [ "${#SELECTED[@]}" -gt 0 ] && selection_is_all; then
+		all_selection=1
+		pkgs_label='./...'
+	fi
 }
 
 if [ "$mode" = list ]; then
@@ -172,14 +216,20 @@ fi
 
 # check_go_files INCLUDE_UNTRACKED — gofmt and vet the Go files the diff touches.
 check_go_files() {
-	local include=$1 files dirs unfmt vo
+	local include=$1 files dirs unfmt vo grc
 	if [ "$include" = 1 ]; then
-		files=$({ git -C "$ROOT" diff --name-only --diff-filter=d "$mb"; git -C "$ROOT" ls-files -o --exclude-standard; } | /usr/bin/grep -E '\.go$' || true)
+		files=$({ git -C "$ROOT" diff --name-only --no-renames --diff-filter=d "$mb"; git -C "$ROOT" ls-files -o --exclude-standard; } | /usr/bin/grep -E '\.go$' || true)
 	else
-		files=$(git -C "$ROOT" diff --name-only --diff-filter=d "$mb" HEAD -- '*.go')
+		files=$(git -C "$ROOT" diff --name-only --no-renames --diff-filter=d "$mb" HEAD -- '*.go')
 	fi
 	[ -n "$files" ] || return 0
-	unfmt=$(cd "$ROOT" && gofmt -l $files) || verdict ENV "gofmt could not run"
+	command -v gofmt >/dev/null 2>&1 || verdict ENV "gofmt not found on PATH"
+	unfmt=$(cd "$ROOT" && gofmt -l $files)
+	grc=$?
+	if [ "$grc" != 0 ]; then # a syntax error is the changed code's failure, not a missing tool
+		printf '%s\n' "$unfmt" >&2
+		verdict FAIL "gofmt"
+	fi
 	[ -z "$unfmt" ] || { echo "gofmt: $unfmt" >&2; verdict FAIL "gofmt"; }
 	dirs=$(for f in $files; do echo "./$(dirname "$f")"; done | sort -u | sed 's|^\./\.$|.|')
 	vo=$(cd "$ROOT" && "$GO" vet $dirs 2>&1) || {
@@ -188,14 +238,26 @@ check_go_files() {
 	}
 }
 
-# run_pkgs — run every selected package whole, appended to $out; stop at the
-# first failure. No -count: the shared test cache stays on.
+# is_slow_pkg PKG — the packages the whole-run inner loop must not run whole.
+is_slow_pkg() {
+	local p
+	for p in $SLOW_PKGS; do [ "$p" = "$1" ] && return 0; done
+	return 1
+}
+
+# run_pkgs — run the selection, appended to $out; stop at the first failure.
+# A slow package runs only its named guard (SLOW_RUN), never whole. No -count:
+# the shared test cache stays on.
 run_pkgs() {
 	local p args
 	: > "$out"
 	rc=0
 	for p in "${SELECTED[@]}"; do
 		args=(test -json -failfast -timeout "$TIMEOUT")
+		if is_slow_pkg "$p"; then
+			echo "test-targets: $p is slow: running only -run '$SLOW_RUN' (the whole package is the merge gate's)" >&2
+			args+=(-run "$SLOW_RUN")
+		fi
 		[ -n "$TAGS" ] && args+=(-tags "$TAGS")
 		"$GO" "${args[@]}" "$p" >> "$out"
 		rc=$?
@@ -251,11 +313,15 @@ fi
 
 # ---- test-targeted ------------------------------------------------------------
 if [ "$mode" = targeted ]; then
-	select_pkgs 0
+	select_pkgs 0 1
 	check_go_files 1
+	if [ "$all_selection" = 1 ]; then
+		echo "test-targets: $BASE..HEAD changes a pin: the selector expands to every package (${#SELECTED[@]}); the seat target does not run the full suite -- the merge gate does" >&2
+		verdict ENV 3
+	fi
 	if [ "${#SELECTED[@]}" = 0 ]; then
-		echo "test-targets: no packages selected for $BASE..HEAD" >&2
-		verdict PASS 0
+		echo "test-targets: no packages selected for $BASE..HEAD (a non-Go diff; the merge gate still runs the full suite)" >&2
+		verdict EMPTY 4
 	fi
 	out=.oracle-build/test/targeted-${sha%+dirty}.json
 	mkdir -p "$(dirname "$out")"
@@ -270,10 +336,10 @@ fi
 if [ "$mode" = smart ]; then
 	[ -z "$(git -C "$ROOT" status --porcelain --untracked-files=no)" ] ||
 		verdict ENV "commit first: test-smart checks a commit, not a dirty tree"
-	select_pkgs 1
+	select_pkgs 1 1
 	check_go_files 0
 
-	shfiles=$(git -C "$ROOT" diff --name-only --diff-filter=d "$mb" HEAD -- '*.sh')
+	shfiles=$(git -C "$ROOT" diff --name-only --no-renames --diff-filter=d "$mb" HEAD -- '*.sh')
 	for f in $shfiles; do
 		bash -n "$ROOT/$f" || verdict FAIL "shell syntax: $f"
 	done
@@ -303,9 +369,13 @@ if [ "$mode" = smart ]; then
 		verdict FAIL "smoke"
 	fi
 
+	if [ "$all_selection" = 1 ]; then
+		echo "test-targets: $BASE..HEAD changes a pin: the selector expands to every package (${#SELECTED[@]}); the seat target does not run the full suite -- the merge gate does" >&2
+		verdict ENV 3
+	fi
 	if [ "${#SELECTED[@]}" = 0 ]; then
-		echo "test-targets: no packages selected for $BASE..HEAD" >&2
-		verdict PASS 0
+		echo "test-targets: no packages selected for $BASE..HEAD (a non-Go diff; the merge gate still runs the full suite)" >&2
+		verdict EMPTY 4
 	fi
 	out=$logdir/smart-${sha%+dirty}.json
 	run_pkgs

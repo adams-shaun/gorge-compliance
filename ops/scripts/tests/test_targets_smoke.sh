@@ -20,14 +20,17 @@ BIN=$TMP/bin
 mkdir -p "$BIN" "$TMP/cards/cardsfolder" "$TMP/empty/cardsfolder" "$TMP/work"
 touch "$TMP/cards/cardsfolder/a.txt"
 
-# go: `run` prints the selector's output (STUB_SELECT); `vet` prints STUB_VET;
-# every other call prints STUB_EVENTS (a go test -json stream) and exits STUB_RC.
+# go: `run` prints the selector's output (STUB_SELECT) and records its stdin;
+# `list` answers the All-detection calls (STUB_MOD for -m, STUB_LIST for ./...);
+# `vet` prints STUB_VET; every other call prints STUB_EVENTS (a go test -json
+# stream) and exits STUB_RC.
 cat > "$BIN/go" <<'STUB'
 #!/usr/bin/env bash
 echo "go $*" >> "$STUB_LOG"
 case "${1:-}" in
 run)
 	[ -n "${STUB_SELECT+x}" ] && printf '%s\n' "$STUB_SELECT"
+	[ -n "${STUB_SELECT_STDIN:-}" ] && cat > "$STUB_SELECT_STDIN"
 	exit "${STUB_SELECT_RC:-0}"
 	;;
 vet)
@@ -35,12 +38,24 @@ vet)
 	exit "${STUB_VET_RC:-0}"
 	;;
 list)
+	if [[ "$*" == *" -m"* ]]; then
+		printf '%s\n' "${STUB_MOD:-example.com/mod}"
+		exit 0
+	fi
 	printf '%s\n' "${STUB_LIST:-}"
 	exit 0
 	;;
 esac
 [ -n "${STUB_EVENTS:-}" ] && printf '%b\n' "$STUB_EVENTS"
 exit "${STUB_RC:-0}"
+STUB
+# gofmt: prints STUB_GOFMT for -l, exits STUB_GOFMT_RC (2 simulates a file that
+# does not parse).
+cat > "$BIN/gofmt" <<'STUB'
+#!/usr/bin/env bash
+echo "gofmt $*" >> "$STUB_LOG"
+[ -n "${STUB_GOFMT:-}" ] && printf '%s\n' "$STUB_GOFMT"
+exit "${STUB_GOFMT_RC:-0}"
 STUB
 # git: enough of rev-parse/status/merge-base/diff/ls-files for the selector and
 # the gofmt steps. Handles a leading -C DIR. STUB_DIFF_ALL is the no-pathspec
@@ -109,9 +124,11 @@ chmod +x "$BIN"/*
 
 export PATH="$BIN:$PATH" STUB_LOG=$TMP/calls.log
 export TEST_TARGETS_CARDS=$TMP/cards
+export STUB_SELECT_STDIN=$TMP/select.stdin
 unset TEST_TARGETS_SCOPED PKG RUN SKIP V TIMEOUT TAGS STUB_EVENTS STUB_RC STUB_NOSYSTEMD
 unset STUB_SHA STUB_MB STUB_DIRTY STUB_DIFF_ALL STUB_DIFF_GO STUB_DIFF_SH STUB_SELECT STUB_SELECT_RC
-unset STUB_VET STUB_VET_RC STUB_LIST STUB_MAKE_RC STUB_BASE_RC BASE FORGE_ORACLE_REF XMAGE_REF
+unset STUB_VET STUB_VET_RC STUB_LIST STUB_MOD STUB_MAKE_RC STUB_BASE_RC STUB_GOFMT STUB_GOFMT_RC
+unset BASE FORGE_ORACLE_REF XMAGE_REF TEST_TARGETS_SLOW_PKGS TEST_TARGETS_SLOW_RUN
 
 RUNEV='{"Action":"run","Package":"p","Test":"TestA"}'
 PASSEV='{"Action":"pass","Package":"p","Test":"TestA"}'
@@ -178,7 +195,46 @@ check "  ...BASE defaults to develop" $(/usr/bin/grep -q 'merge-base develop HEA
 check "  ...runs the selected package" $(/usr/bin/grep -q '^go test -json -failfast -timeout 2m ./p$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
 check "  ...verdict names the package" $([[ $LAST == *" ./p "* ]] && echo 0 || echo 1) "$LAST"
 
-tm targeted "targeted empty selection" 0 "test-targeted: PASS" STUB_DIFF_ALL=
+tm targeted "targeted Go diff checks gofmt and vet" 0 "test-targeted: PASS" \
+	STUB_DIFF_ALL=scripts/foo.go STUB_SELECT=./p STUB_EVENTS="$RUNEV\n$PASSEV"
+check "  ...gofmt saw the changed file" $(/usr/bin/grep -q '^gofmt -l scripts/foo.go$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+check "  ...vet saw its package" $(/usr/bin/grep -q '^go vet ./scripts$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+
+tm targeted "targeted gofmt reports an unformatted file" 1 "gofmt" \
+	STUB_DIFF_ALL=scripts/foo.go STUB_SELECT=./p STUB_GOFMT=scripts/foo.go
+check "  ...is FAIL, not ENV" $([[ $LAST == *"test-targeted: FAIL"* ]] && echo 0 || echo 1) "$LAST"
+
+tm targeted "targeted gofmt syntax error is FAIL" 1 "gofmt" \
+	STUB_DIFF_ALL=scripts/foo.go STUB_SELECT=./p STUB_GOFMT='scripts/foo.go:2:1: expected declaration, found }' STUB_GOFMT_RC=2
+check "  ...is FAIL, not ENV 3" $([[ $LAST == *"test-targeted: FAIL"* ]] && echo 0 || echo 1) "$LAST"
+
+tm targeted "targeted vet failure" 1 "go vet" \
+	STUB_DIFF_ALL=scripts/foo.go STUB_SELECT=./p STUB_VET='foo.go:3:2: undefined: x' STUB_VET_RC=1
+
+tm targeted "targeted slow package runs one named test" 0 "test-targeted: PASS" \
+	STUB_DIFF_ALL=oracle/compliance/oraclegen/templates/foo.go \
+	STUB_SELECT=./oracle/compliance/oraclegen/templates STUB_EVENTS="$RUNEV\n$PASSEV"
+check "  ...runs only the named guard" $(/usr/bin/grep -q '^go test -json -failfast -timeout 2m -run \^TestTemplatesAreDistinctAndVersioned\$ ./oracle/compliance/oraclegen/templates$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+check "  ...and says why" $([[ $ERR == *" is slow: running only -run "* ]] && echo 0 || echo 1) "$ERR"
+tm targeted "targeted slow and whole packets split" 0 "test-targeted: PASS" \
+	STUB_DIFF_ALL=README.md STUB_SELECT=$'./p\n./oracle/compliance/oraclegen/templates' STUB_EVENTS="$RUNEV\n$PASSEV"
+check "  ...whole package runs whole" $(/usr/bin/grep -q '^go test -json -failfast -timeout 2m ./p$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+check "  ...slow package runs named" $(/usr/bin/grep -q -- '-run \^TestTemplatesAreDistinctAndVersioned\$ ./oracle/compliance/oraclegen/templates$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+
+tm targeted "targeted All selection is ENV, not the full suite" 3 "expands to every package" \
+	STUB_DIFF_ALL=go.mod STUB_SELECT=$'./p\n./q' STUB_LIST=$'example.com/mod/p\nexample.com/mod/q'
+check "  ...runs no package" $(! /usr/bin/grep -q '^go test' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+check "  ...verdict says ./... and ENV" $([[ $LAST == *"test-targeted: ENV abc1234567 ./... "* ]] && echo 0 || echo 1) "$LAST"
+
+tm targeted "targeted rename keeps both sides" 0 "test-targeted: PASS" \
+	STUB_DIFF_ALL=$'oracle/compliance/oraclegen/gen.go\ninternal/foo/gen.go' \
+	STUB_SELECT=$'./internal/foo\n./oracle/compliance/adopt' STUB_EVENTS="$RUNEV\n$PASSEV"
+check "  ...diffs with --no-renames" $(/usr/bin/grep -q '^git .* diff --name-only --no-renames ' "$STUB_LOG" && echo 0 || echo 1) "$(/usr/bin/grep '^git ' "$STUB_LOG")"
+check "  ...feeds the old producer path to the selector" $(/usr/bin/grep -qx 'oracle/compliance/oraclegen/gen.go' "$STUB_SELECT_STDIN" && echo 0 || echo 1) "$(cat "$STUB_SELECT_STDIN")"
+check "  ...feeds the new path to the selector" $(/usr/bin/grep -qx 'internal/foo/gen.go' "$STUB_SELECT_STDIN" && echo 0 || echo 1) "$(cat "$STUB_SELECT_STDIN")"
+check "  ...runs the ratchet package" $(/usr/bin/grep -q '^go test .* ./oracle/compliance/adopt$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+
+tm targeted "targeted empty selection" 4 "test-targeted: EMPTY" STUB_DIFF_ALL=
 check "  ...names no packages" $([[ $LAST == *" - "* ]] && echo 0 || echo 1) "$LAST"
 
 tm targeted "targeted selection failure" 3 "selection failed" \
@@ -197,6 +253,12 @@ tm targeted "targeted killed (143)" 5 "test-targeted: BUDGET" \
 	STUB_DIFF_ALL=README.md STUB_SELECT=./p STUB_RC=143
 
 # ---- smart -------------------------------------------------------------------
+# A real malformed shell file, addressed relative to ROOT, so smart's `bash -n`
+# loop can fail without stubbing bash.
+bad_shell=$TMP/bad.sh
+printf 'if then\n' > "$bad_shell"
+bad_shell_rel=$(python3 -c 'import os,sys; print(os.path.relpath(sys.argv[1], sys.argv[2]))' "$bad_shell" "$ROOT")
+
 tm smart "smart dirty tree" 3 "commit first" STUB_DIRTY=1
 check "  ...never reached make" $(! /usr/bin/grep -q '^make ' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
 
@@ -206,6 +268,21 @@ check "  ...checks the fork pins" $(/usr/bin/grep -q '^gh api repos/adams-shaun/
 check "  ...runs the licence guards" $(/usr/bin/grep -q '^make -C .* boundary$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
 check "  ...runs the script smokes" $(/usr/bin/grep -q '^make -C .* smoke$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
 check "  ...runs the affected package" $(/usr/bin/grep -q '^go test -json -failfast -timeout 2m ./p$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+
+tm smart "smart Go diff checks gofmt and vet" 0 "test-smart: PASS" \
+	STUB_DIFF_ALL=README.md STUB_DIFF_GO=scripts/foo.go STUB_SELECT=./p STUB_EVENTS="$RUNEV\n$PASSEV"
+check "  ...gofmt saw the changed file" $(/usr/bin/grep -q '^gofmt -l scripts/foo.go$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+check "  ...vet saw its package" $(/usr/bin/grep -q '^go vet ./scripts$' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
+
+tm smart "smart vet failure" 1 "go vet" \
+	STUB_DIFF_ALL=README.md STUB_DIFF_GO=scripts/foo.go STUB_SELECT=./p STUB_VET='foo.go:3:2: undefined: x' STUB_VET_RC=1
+
+tm smart "smart shell syntax failure" 1 "shell syntax" \
+	STUB_DIFF_ALL=README.md STUB_DIFF_SH="$bad_shell_rel" STUB_SELECT=./p
+
+tm smart "smart All selection is ENV, not the full suite" 3 "expands to every package" \
+	STUB_DIFF_ALL=go.mod STUB_SELECT=$'./p\n./q' STUB_LIST=$'example.com/mod/p\nexample.com/mod/q'
+check "  ...runs no package" $(! /usr/bin/grep -q '^go test' "$STUB_LOG" && echo 0 || echo 1) "$(cat "$STUB_LOG")"
 
 tm smart "smart boundary failure" 1 "boundary" \
 	STUB_DIFF_ALL=README.md STUB_SELECT=./p STUB_MAKE_RC=1

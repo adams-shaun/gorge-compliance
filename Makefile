@@ -709,10 +709,12 @@ test:
 # land on local develop, not by PR to it.
 #   test-one       PKG=./p RUN=TestX [SKIP= V=1 TIMEOUT=2m TAGS=a,b]: debugging
 #   test-targeted  the packages the diff vs BASE touches (working tree and
-#                  untracked files included), via cmd/testselect: the inner loop
+#                  untracked files included), via cmd/testselect: the inner loop.
+#                  A pin diff (every package) is ENV, not the full suite; the one
+#                  slow package runs a named guard only.
 #   test-smart     the precheck on a committed tree, fail-fast: gofmt/vet, shell
 #                  syntax, fork pins, the licence guards, the script smokes, then
-#                  the affected packages; precheck is an alias
+#                  the affected packages; precheck is an alias; same pin/slow rules
 BASE ?= develop
 export BASE
 .PHONY: test-one test-targeted test-smart precheck test-list

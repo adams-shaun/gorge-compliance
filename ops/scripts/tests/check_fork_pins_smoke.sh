@@ -8,7 +8,8 @@
 # fork network (0), a miss (1 and the exact push-it-first line), a candidate
 # env override, the real Makefile pins (hit and miss; `make precheck` is the
 # full test-smart gate now, so its pin step calls this script with the same
-# env overrides), no gh (2), a missing Makefile pin (2) and a non-40-hex pin (2).
+# env overrides), the precheck alias, no gh (2), a missing Makefile pin (2) and
+# a non-40-hex pin (2).
 #
 #   ops/scripts/tests/check_fork_pins_smoke.sh
 set -uo pipefail
@@ -91,6 +92,11 @@ check "real Makefile: honours both pin overrides (exit 0)" $([ "$rc" = 0 ] && ha
 : > "$LOG"
 out=$(cd "$ROOT" && GH_LOG=$LOG GH_MISS=$MISS FORGE_ORACLE_REF="$MISS" XMAGE_REF="$XMAGE" PATH="$BIN:$PATH" "$BASH_BIN" scripts/check-fork-pins.sh 2>&1); rc=$?
 check "real Makefile: an unpushed pin fails the check" $([ "$rc" != 0 ] && has "$out" "fork pin FORGE_ORACLE_REF $MISS is not on adams-shaun/forge: push it first" && echo 0 || echo 1) "rc=$rc $out"
+
+# 4b. `make precheck` is still one recipe: the test-smart alias. `make -n`
+#     prints it without running the gate.
+out=$(cd "$ROOT" && make -n precheck 2>&1); rc=$?
+check "make precheck: aliases test-smart" $([ "$rc" = 0 ] && has "$out" "bash scripts/test-targets.sh smart" && echo 0 || echo 1) "rc=$rc $out"
 
 # 5. No gh: usage error, not a skip.
 ln -s "$(command -v dirname)" "$TMP/nogh/dirname"
