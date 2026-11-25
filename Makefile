@@ -714,7 +714,12 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # e76652fae3 = c5ab80906 (movectr + cantprevent; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
 # a2201414482 = oracle/fpin-1125-room-alt: 22d31c3e9d0 (room_alt + attach_optional + K'rrik; above) joined with e76652fae3 (movectr + cantprevent + K'rrik; above); driver-only.
 # 793a015fcf = oracle/fpin-1125-join3: a2201414482 (above) joined with 1947f2b322 (ScenarioReplay --serve warm worker + FORGE_ORACLE_AI_TIMEOUT_S; additive, unset keeps the one-shot run); driver-only, die-roll code unchanged.
-FORGE_ORACLE_REF ?= 793a015fcf6e14923245669ec9a2f3469aa53931
+# 15a7c960ab2 = 793a015fcf plus the setup Room convention (xproof cluster xpt-e4b207b7, Greenhouse // Rickety Gazebo): CR 709.5d gives a Room that
+# enters without being cast neither unlocked designation, so it has no name (CR 709.5). SetupBuilder.unlockNamedDoor used to unlock the door the
+# setup name named, so Forge's setup read "Greenhouse" where gorge's fieldName and the XMage driver read "". Setup now places the Room locked and
+# the name only binds the card; scripts/forge-oracle-test-room-setup-locked.sh (make forge-driver-tests) pins it. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-room-locked.
+FORGE_ORACLE_REF ?= 15a7c960ab2a7368349d3b4beaf00b9c87f02088
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
