@@ -6,8 +6,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f052d9f-5a40-4eb9-9d8a-e01dec1db191	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 0f0959ff-4464-4738-9d79-5b06f368f144	cast	cast-resolve	agreed	-	X	scen	1	0	Inkling Mascot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f0959ff-4464-4738-9d79-5b06f368f144	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Inkling Mascot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0f12aec9-5898-4261-bebd-1b545e0aea68	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-unbound:cast:s1,f:xs:XP:mind-unbound:cast:s1	-	-	-	d864b561c9cb	-	d845d5d7e50a	-	-	2026-11-24	xproof
-0f12aec9-5898-4261-bebd-1b545e0aea68	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0f12aec9-5898-4261-bebd-1b545e0aea68	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-unbound:f0t0:s1,f:xs:XP:mind-unbound:f0t0:s1	-	-	-	3aa6ded33acb	-	d845d5d7e50a	-	-	2026-11-25	xproof
+0f12aec9-5898-4261-bebd-1b545e0aea68	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:mind-unbound:f0t0:s1,f:xs:XP:mind-unbound:f0t0:s1	-	-	-	3aa6ded33acb	-	d845d5d7e50a	-	-	2026-11-25	xproof
 0f1ada92-538b-40cb-9bf3-5c415f5325e6	cast	cast-resolve	agreed	-	FX	scen	2	0	Spotcycle Scouter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f1ada92-538b-40cb-9bf3-5c415f5325e6	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Spotcycle Scouter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f1ada92-538b-40cb-9bf3-5c415f5325e6	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0fb9a8a2-4331-4259-9460-a37397554962	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:bringer-of-the-last-gift:combat0.block:s1,f:xs:XP:bringer-of-the-last-gift:combat0.block:s1	-	-	-	3aa6ded33acb	-	ed0782736afa	-	-	2026-11-25	xproof
 0fb9a8a2-4331-4259-9460-a37397554962	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bringer-of-the-last-gift:f0t0:s1,f:xs:XP:bringer-of-the-last-gift:f0t0:s1	-	-	-	25696bf19d5b	-	ed0782736afa	-	-	2026-11-24	xproof
 0fb9a928-9adb-4dc1-9761-857df7e6c643	cast	cast-resolve	agreed	-	FX	scen	2	0	Steamcore Scholar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0fb9a928-9adb-4dc1-9761-857df7e6c643	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Steamcore Scholar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0fb9a928-9adb-4dc1-9761-857df7e6c643	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:steamcore-scholar:combat0.attack:s1,f:xs:XP:steamcore-scholar:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8640fed724c2	-	-	2026-11-25	xproof
 0fb9a928-9adb-4dc1-9761-857df7e6c643	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Steamcore Scholar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0fb9a928-9adb-4dc1-9761-857df7e6c643	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fbe0610-8565-4910-bf35-2c10e38b633a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:glassblower-s-puzzleknot:cast:s1,f:xs:XP:glassblower-s-puzzleknot:cast:s1	-	-	-	d864b561c9cb	-	c1f78385a693	-	-	2026-11-24	xproof

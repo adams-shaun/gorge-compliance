@@ -75,8 +75,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e6fe04f-b20d-4df9-a7ac-edebc3bcc9be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e71fc56-0332-4e5e-8658-9257cc0d8a1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steel-sabotage:cast:s1,f:xs:XP:steel-sabotage:cast:s1	-	-	-	d864b561c9cb	-	9b3d591d9538	-	-	2026-11-24	xproof
 0e7405e3-e9e6-4213-a73f-e0c01a7d6721	cast	cast-resolve	agreed	-	X	scen	1	0	Callous Sell-Sword/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0e741c79-5ea4-457d-a7d3-b11154459246	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:species-gorger:cast:s1,f:xs:XP:species-gorger:cast:s1	-	-	-	d864b561c9cb	-	66d572b93738	-	-	2026-11-24	xproof
-0e741c79-5ea4-457d-a7d3-b11154459246	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0e741c79-5ea4-457d-a7d3-b11154459246	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:species-gorger:f0t0:s1,f:xs:XP:species-gorger:f0t0:s1	-	-	-	3aa6ded33acb	-	66d572b93738	-	-	2026-11-25	xproof
+0e741c79-5ea4-457d-a7d3-b11154459246	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:species-gorger:f0t0:s1,f:xs:XP:species-gorger:f0t0:s1	-	-	-	3aa6ded33acb	-	66d572b93738	-	-	2026-11-25	xproof
 0e768d03-b2a3-4783-9cf5-7470f0203349	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e7b9caf-8285-4386-98bc-9a809827f447	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0e8adf34-0834-4027-9cda-18df69239e2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0e99efaf-6402-44c5-ae8b-1f5bb1b68333	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Red Herring/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e99efaf-6402-44c5-ae8b-1f5bb1b68333	static#0.0	static#0.0	agreed	-	X	scen	1	0	Red Herring/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	cast	cast	agreed	-	X	start	2	0	x:xs:XP:tolsimir-midnight-s-light:cast:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
-0e9c7380-7584-43e6-8c31-5d1bb1685fe0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tolsimir, Midnight's Light/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0e9c7380-7584-43e6-8c31-5d1bb1685fe0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-midnight-s-light:combat0.attack:s1,f:xs:XP:tolsimir-midnight-s-light:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f2a96a56dfe5	-	-	2026-11-25	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tolsimir, Midnight's Light/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	f0/t0	ChangesZone	agreed	-	X	start	2	0	x:xs:XP:tolsimir-midnight-s-light:cast:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
 0e9c7380-7584-43e6-8c31-5d1bb1685fe0	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-midnight-s-light:f0t1:s1,f:xs:XP:tolsimir-midnight-s-light:f0t1:s1	-	-	-	23b491658465	-	f2a96a56dfe5	-	-	2026-11-24	xproof
@@ -192,6 +192,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ef74c49-0825-4201-b23b-dc6c6bbadacb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ef74c49-0825-4201-b23b-dc6c6bbadacb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ef760f4-bbec-4735-8d60-fc24d973452a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0ef760f4-bbec-4735-8d60-fc24d973452a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0ef760f4-bbec-4735-8d60-fc24d973452a	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 0ef80a38-f464-4d1f-9e81-d4087d6ecc9b	cast	cast-resolve	agreed	-	FX	scen	2	0	Violent Urge/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0efe1357-bfbb-42c0-9cc9-6a919d686c66	cast	cast-resolve	agreed	-	FX	scen	2	0	Go Nuts!/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

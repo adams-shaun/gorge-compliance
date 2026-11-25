@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 836bfcad-014a-40cc-ab79-906fcab723a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 836bfcad-014a-40cc-ab79-906fcab723a0	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sickle-dancer:f0t0:s1,f:xs:XP:sickle-dancer:f0t0:s1	-	-	-	8c0bd19283bb	-	c446d7aec32d	-	-	2026-11-24	xproof
 836d074a-8888-42a0-8dce-11ffce00d2f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-836fdd4b-98f8-4615-ae81-9bf63205c37d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+836fdd4b-98f8-4615-ae81-9bf63205c37d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eland-umbra:cast:s1,f:xs:XP:eland-umbra:cast:s1	-	-	-	3aa6ded33acb	-	387c296198ce	-	-	2026-11-25	xproof
 83705258-1f42-41db-a32e-de99ffd759eb	cast	cast-resolve	agreed	-	FX	scen	2	0	Saheeli, Jewel of Avishkar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83705258-1f42-41db-a32e-de99ffd759eb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Saheeli, Jewel of Avishkar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83705258-1f42-41db-a32e-de99ffd759eb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Saheeli, Jewel of Avishkar/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -106,7 +106,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83837ceb-7aae-4257-8545-a6cf34656e3b	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 83856c3a-652e-4afc-9dc0-0072324ac36f	cast	cast-resolve	agreed	-	FX	scen	2	0	Sanctuary Wall/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83856c3a-652e-4afc-9dc0-0072324ac36f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sanctuary Wall/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83856c3a-652e-4afc-9dc0-0072324ac36f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sanctuary Wall/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+83856c3a-652e-4afc-9dc0-0072324ac36f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sanctuary-wall:combat0.block:s1,f:xs:XP:sanctuary-wall:combat0.block:s1	-	-	-	3aa6ded33acb	-	c91c891dccb3	-	-	2026-11-25	xproof
 83856c3a-652e-4afc-9dc0-0072324ac36f	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sanctuary Wall/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83860749-1603-46e9-9065-e98001244193	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treebeard-gracious-host:f0t0:s1,f:xs:XP:treebeard-gracious-host:f0t0:s1	-	-	-	8c0bd19283bb	-	4506cda89091	-	-	2026-11-24	xproof
 83860749-1603-46e9-9065-e98001244193	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:treebeard-gracious-host:f0t0:s1,f:xs:XP:treebeard-gracious-host:f0t0:s1	-	-	-	8c0bd19283bb	-	4506cda89091	-	-	2026-11-24	xproof
@@ -131,9 +131,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83a3897c-c245-4fad-b253-3f8bbe6445fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83a3897c-c245-4fad-b253-3f8bbe6445fb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83a3897c-c245-4fad-b253-3f8bbe6445fb	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83a38c8d-e2f6-404b-83be-9cfce037d6e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83a38c8d-e2f6-404b-83be-9cfce037d6e2	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83a38c8d-e2f6-404b-83be-9cfce037d6e2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83a38c8d-e2f6-404b-83be-9cfce037d6e2	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	5a9691f00079	-	-	2026-11-25	xproof
+83a38c8d-e2f6-404b-83be-9cfce037d6e2	f0/a0	Pump	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	5a9691f00079	-	-	2026-11-25	xproof
+83a38c8d-e2f6-404b-83be-9cfce037d6e2	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	5a9691f00079	-	-	2026-11-25	xproof
 83a47724-b8d1-4884-9442-b62aa1510dc3	cast	cast-resolve	agreed	-	X	scen	1	0	Sinkhole Surveyor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83a47724-b8d1-4884-9442-b62aa1510dc3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sinkhole Surveyor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83a47724-b8d1-4884-9442-b62aa1510dc3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sinkhole Surveyor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

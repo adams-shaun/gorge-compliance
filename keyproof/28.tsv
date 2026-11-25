@@ -21,8 +21,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28225bae-2d96-4352-b256-0c2ff4ef65e9	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:syr-vondam-the-lucent:f0t0:s2,f:xs:XP:syr-vondam-the-lucent:f0t0:s2	-	-	-	267e485f6204	-	114060f0d3f9	-	-	2026-11-24	xproof
 28225bae-2d96-4352-b256-0c2ff4ef65e9	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Syr Vondam, the Lucent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2825f7b0-21a9-44e2-b81f-542686981107	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:craterize:cast:s1,f:xs:XP:craterize:cast:s1	-	-	-	d864b561c9cb	-	2d2928549d1a	-	-	2026-11-24	xproof
-2825ff5a-5340-4494-bfde-80f6f5bce5a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2825ff5a-5340-4494-bfde-80f6f5bce5a2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2825ff5a-5340-4494-bfde-80f6f5bce5a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lavaborn-muse:f0t0:s1,f:xs:XP:lavaborn-muse:f0t0:s1	-	-	-	3aa6ded33acb	-	cd6baccec444	-	-	2026-11-25	xproof
+2825ff5a-5340-4494-bfde-80f6f5bce5a2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lavaborn-muse:f0t0:s1,f:xs:XP:lavaborn-muse:f0t0:s1	-	-	-	3aa6ded33acb	-	cd6baccec444	-	-	2026-11-25	xproof
 28274c39-19e2-4b4c-bd53-d31d6063c2ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28274c39-19e2-4b4c-bd53-d31d6063c2ba	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2829ae08-9964-4679-80e8-46d5d33d10b9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28c44f88-1d47-4894-86ce-4089bd761360	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:harvester-troll:cast:s1,f:xs:XP:harvester-troll:cast:s1	-	-	-	d864b561c9cb	-	6b218ebadf06	-	-	2026-11-24	xproof
 28c7c816-07e7-42fb-923c-bf149ba28b38	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28c7c816-07e7-42fb-923c-bf149ba28b38	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-28c7f2b6-ba67-4ccf-9e1b-99c89a9d1f72	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angel-of-invention:f0t0:s1,f:xs:XP:angel-of-invention:f0t0:s1	-	-	-	23b491658465	-	63b344477850	-	-	2026-11-25	xproof
-28c7f2b6-ba67-4ccf-9e1b-99c89a9d1f72	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+28c7f2b6-ba67-4ccf-9e1b-99c89a9d1f72	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angel-of-invention:f0t0:s1,f:xs:XP:angel-of-invention:f0t0:s1	-	-	-	3aa6ded33acb	-	63b344477850	-	-	2026-11-25	xproof
+28c7f2b6-ba67-4ccf-9e1b-99c89a9d1f72	f0/t0	ChangesZone/Fabricate	agreed	-	FX	start	2	0	x:xs:XP:angel-of-invention:f0t0:s1,f:xs:XP:angel-of-invention:f0t0:s1	-	-	-	3aa6ded33acb	-	63b344477850	-	-	2026-11-25	xproof
 28caeed4-c175-469f-8d8e-f45bc0a51a1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28caeed4-c175-469f-8d8e-f45bc0a51a1c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28cc015f-1f3e-417a-9762-de25109fee5c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mosscoat-goriak:cast:s1,f:xs:XP:mosscoat-goriak:cast:s1	-	-	-	ae86f6029288	-	60dbbb30085b	-	-	2026-11-24	xproof

@@ -39,10 +39,10 @@ ab3360e5-6a60-4806-bbc2-b7b26c119856	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ab3360e5-6a60-4806-bbc2-b7b26c119856	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ab3b72e3-9a49-4c95-8016-22fa02ad7663	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab3f4455-7329-4145-b9c4-93eef38bf327	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ab41243d-b178-4ebe-a7ac-bea37427be99	cast	cast-resolve	agreed	-	FX	scen	2	0	Wojek Investigator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ab41243d-b178-4ebe-a7ac-bea37427be99	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wojek-investigator:f0t0:s1,f:xs:XP:wojek-investigator:f0t0:s1	-	-	-	3aa6ded33acb	-	f648c1b0a966	-	-	2026-11-25	xproof
 ab41243d-b178-4ebe-a7ac-bea37427be99	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wojek Investigator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ab41243d-b178-4ebe-a7ac-bea37427be99	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wojek Investigator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ab41243d-b178-4ebe-a7ac-bea37427be99	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wojek Investigator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ab41243d-b178-4ebe-a7ac-bea37427be99	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:wojek-investigator:f0t0:s1,f:xs:XP:wojek-investigator:f0t0:s1	-	-	-	3aa6ded33acb	-	f648c1b0a966	-	-	2026-11-25	xproof
 ab42398c-f0a1-4b94-ac5f-b8768e1b4e05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:presence-of-gond:cast:s1,f:xs:XP:presence-of-gond:cast:s1	-	-	-	8c0bd19283bb	-	bb0ca0d883df	-	-	2026-11-24	xproof
 ab42fb8b-c463-45db-b71d-ed847c9abf1f	cast	cast	agreed	-	F	start	2	0	f:xs:XP:lunar-avenger:cast:s1	-	-	-	25696bf19d5b	-	ede5b5a4a8cc	-	-	2026-11-24	xproof
 ab42fb8b-c463-45db-b71d-ed847c9abf1f	f0/a0	Pump	agreed	-	F	start	2	0	f:xs:XP:lunar-avenger:cast:s1	-	-	-	25696bf19d5b	-	ede5b5a4a8cc	-	-	2026-11-24	xproof
@@ -86,13 +86,13 @@ ab5f8b8c-e3f7-4265-bbc6-814bbfd4693a	combat#0.attack	combat#0.attack	agreed	-	X	
 ab5f8b8c-e3f7-4265-bbc6-814bbfd4693a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Crossroads Watcher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ab5f8b8c-e3f7-4265-bbc6-814bbfd4693a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Crossroads Watcher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ab66f8a8-eb3d-4c2d-95e9-26a53c66b237	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ab66f8a8-eb3d-4c2d-95e9-26a53c66b237	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ab66f8a8-eb3d-4c2d-95e9-26a53c66b237	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:mask-of-avacyn:f0a0:s1,f:xs:XP:mask-of-avacyn:f0a0:s1	-	-	-	3aa6ded33acb	-	32e66a40df57	-	-	2026-11-25	xproof
 ab711f51-71a8-4607-9e9b-aba2cb5d72b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab711f51-71a8-4607-9e9b-aba2cb5d72b7	f0/a0	NULL	owed	refused:steps-needed:cost:GW	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 ab71c8ba-c7ac-4ad2-a6db-29d903bbca78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab71c8ba-c7ac-4ad2-a6db-29d903bbca78	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ab735456-f831-4988-84c6-50ca14351990	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadeye-tormentor:f0t0:s1,f:xs:XP:deadeye-tormentor:f0t0:s1	-	-	-	23b491658465	-	e5f60e9c173a	-	-	2026-11-25	xproof
-ab735456-f831-4988-84c6-50ca14351990	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+ab735456-f831-4988-84c6-50ca14351990	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadeye-tormentor:f0t0:s1,f:xs:XP:deadeye-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	e5f60e9c173a	-	-	2026-11-25	xproof
+ab735456-f831-4988-84c6-50ca14351990	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:deadeye-tormentor:f0t0:s1,f:xs:XP:deadeye-tormentor:f0t0:s1	-	-	-	3aa6ded33acb	-	e5f60e9c173a	-	-	2026-11-25	xproof
 ab747483-2aa1-4b25-b2fa-cf7372a1b1dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab747483-2aa1-4b25-b2fa-cf7372a1b1dc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ab74c6b1-2099-4429-94b7-a5656ac04db3	cast	cast	agreed	-	F	start	2	0	f:xs:XP:kinetic-ooze:f0t0:s1	-	-	-	8c0bd19283bb	-	f26a8db832c8	-	-	2026-11-24	xproof

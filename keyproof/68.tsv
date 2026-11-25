@@ -71,7 +71,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68639a3d-2192-4921-8298-c76bb0cd6b02	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6866f0a4-5fe6-40d9-bbfc-6f116f4e415d	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 6866f0a4-5fe6-40d9-bbfc-6f116f4e415d	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-686b44ec-3446-4e1f-a15f-9d8557db6d70	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+686b44ec-3446-4e1f-a15f-9d8557db6d70	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 686cce6e-18ec-45b0-8d2e-74fa353a905e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 686d8449-e132-4478-b4f5-f5cadc8971c8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 686d8449-e132-4478-b4f5-f5cadc8971c8	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -169,8 +169,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68ca91ba-31fb-47e0-9b32-e4f3504cbbca	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68cc5065-0514-4adf-885f-da554e1db00a	cast	cast-resolve	agreed	-	X	scen	1	0	Abyssal Harvester/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 68cc5065-0514-4adf-885f-da554e1db00a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Abyssal Harvester/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-68cce1e6-1043-41b2-abd6-7e27ae0125e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-68cce1e6-1043-41b2-abd6-7e27ae0125e3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+68cce1e6-1043-41b2-abd6-7e27ae0125e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vedalken-infuser:f0t0:s1,f:xs:XP:vedalken-infuser:f0t0:s1	-	-	-	3aa6ded33acb	-	851b66236866	-	-	2026-11-25	xproof
+68cce1e6-1043-41b2-abd6-7e27ae0125e3	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:vedalken-infuser:f0t0:s1,f:xs:XP:vedalken-infuser:f0t0:s1	-	-	-	3aa6ded33acb	-	851b66236866	-	-	2026-11-25	xproof
 68d0b5c0-df6a-4eea-8dea-20358270f916	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kalonian-behemoth:cast:s1,f:xs:XP:kalonian-behemoth:cast:s1	-	-	-	8a1b1a193ec0	-	1c3fd6e7f3c7	-	-	2026-11-24	xproof
 68d25ba4-d710-4090-bceb-5cfbd6bb63a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 68d25ba4-d710-4090-bceb-5cfbd6bb63a1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b4ff283-ab2d-4eb2-8bd3-7398e4da0e95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b513bd0-27df-45f3-a85f-1f0aba3cae48	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:council-of-echoes:f0t0:s2,f:xs:XP:council-of-echoes:f0t0:s2	-	-	-	e07cf3a05ba5	-	e409e5003424	-	-	2026-11-24	xproof
 7b513bd0-27df-45f3-a85f-1f0aba3cae48	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Council of Echoes/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7b513bd0-27df-45f3-a85f-1f0aba3cae48	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Council of Echoes/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7b513bd0-27df-45f3-a85f-1f0aba3cae48	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:council-of-echoes:combat0.block:s1,f:xs:XP:council-of-echoes:combat0.block:s1	-	-	-	3aa6ded33acb	-	e409e5003424	-	-	2026-11-25	xproof
 7b513bd0-27df-45f3-a85f-1f0aba3cae48	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:council-of-echoes:f0t0:s2,f:xs:XP:council-of-echoes:f0t0:s2	-	-	-	e07cf3a05ba5	-	e409e5003424	-	-	2026-11-24	xproof
 7b51a979-47e0-4b98-8ec5-8064c83422e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-of-grace:cast:s1,f:xs:XP:knight-of-grace:cast:s1	-	-	-	8c0bd19283bb	-	eee43577f86d	-	-	2026-11-24	xproof
 7b51a979-47e0-4b98-8ec5-8064c83422e1	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:knight-of-grace:combat0.attack:s1	-	-	-	3aa6ded33acb	-	eee43577f86d	-	-	2026-11-25	xproof
@@ -105,10 +105,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b89b7d2-c724-4d5d-9f0b-7d3302ad1168	cast	cast-resolve	agreed	-	X	scen	1	0	Agate Assault/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b8f1458-c638-4907-9363-f7cc22d04605	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7b8f1458-c638-4907-9363-f7cc22d04605	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:chameleon-colossus:f0a0:s1,f:xs:XP:chameleon-colossus:f0a0:s1	-	-	-	d864b561c9cb	-	46a055dfbf4f	-	-	2026-11-24	xproof
-7b8f4879-578e-40e4-863a-41d0c32c6bdd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mogg-war-marshal:f0t0:s1,f:xs:XP:mogg-war-marshal:f0t0:s1	-	-	-	9ee19e8250ce	-	1003c33b3578	-	-	2026-11-24	xproof
-7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mogg-war-marshal:f0t0:s1,f:xs:XP:mogg-war-marshal:f0t0:s1	-	-	-	9ee19e8250ce	-	1003c33b3578	-	-	2026-11-24	xproof
+7b8f4879-578e-40e4-863a-41d0c32c6bdd	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	1003c33b3578	-	-	2026-11-25	xproof
+7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	1003c33b3578	-	-	2026-11-25	xproof
 7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7b8f4879-578e-40e4-863a-41d0c32c6bdd	f0/t2	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	1003c33b3578	-	-	2026-11-25	xproof
 7b92ac54-3883-48cf-b01e-be9797dc1649	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gnaw-to-the-bone:cast:s1,f:xs:XP:gnaw-to-the-bone:cast:s1	-	-	-	d864b561c9cb	-	b248607214ee	-	-	2026-11-24	xproof
 7b9a574f-6d56-421b-8fbd-94da1e6e3ce1	cast	cast-resolve	agreed	-	X	scen	1	0	Traxos, Academy Guardian/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b9a574f-6d56-421b-8fbd-94da1e6e3ce1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Traxos, Academy Guardian/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

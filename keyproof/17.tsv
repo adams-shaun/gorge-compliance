@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17407b73-0dbe-4a71-84ec-3aaca9651f5b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pygmy-kavu:f0t0:s1,f:xs:XP:pygmy-kavu:f0t0:s1	-	-	-	fc71ca68c5ac	-	76fb0c49ab92	-	-	2026-11-24	xproof
 17415789-159e-43cf-93f8-9926405ee8f1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goliath-spider:cast:s1,f:xs:XP:goliath-spider:cast:s1	-	-	-	64a08ba7d913	-	7a8192482a74	-	-	2026-11-24	xproof
 17425a60-7554-4740-9455-976edd63c106	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hound-of-griselbrand:cast:s1,f:xs:XP:hound-of-griselbrand:cast:s1	-	-	-	d864b561c9cb	-	5b65212075a1	-	-	2026-11-24	xproof
-17425a60-7554-4740-9455-976edd63c106	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+17425a60-7554-4740-9455-976edd63c106	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:hound-of-griselbrand:f0t0:s1,f:xs:XP:hound-of-griselbrand:f0t0:s1	-	-	-	3aa6ded33acb	-	5b65212075a1	-	-	2026-11-25	xproof
 17469f58-286e-4410-b717-5908d24eecdd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17469f58-286e-4410-b717-5908d24eecdd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17492186-9814-4c41-8111-1f000a96c212	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hobbit Hole/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -121,8 +121,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 177b7fe4-8565-4631-b4d9-8b2b4282f3ac	land	play-land	agreed	-	X	scen	1	0	Oakhollow Village/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 177c1f2d-abb9-40ea-afe4-141b08fdeabb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 177c1f2d-abb9-40ea-afe4-141b08fdeabb	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:visionary-augmenter:f0t0:s1,f:xs:XP:visionary-augmenter:f0t0:s1	-	-	-	23b491658465	-	5a348390c833	-	-	2026-11-25	xproof
-1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:visionary-augmenter:f0t0:s1,f:xs:XP:visionary-augmenter:f0t0:s1	-	-	-	3aa6ded33acb	-	5a348390c833	-	-	2026-11-25	xproof
+1782bfd7-7d8f-4ed2-9d45-ba9adb41e996	f0/t0	ChangesZone/Fabricate	agreed	-	FX	start	2	0	x:xs:XP:visionary-augmenter:f0t0:s1,f:xs:XP:visionary-augmenter:f0t0:s1	-	-	-	3aa6ded33acb	-	5a348390c833	-	-	2026-11-25	xproof
 17841133-c526-42a3-a1d2-a874e9bb7138	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17841133-c526-42a3-a1d2-a874e9bb7138	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1787ac2f-762d-4f3a-b7e5-12db6d3d470d	cast	cast-resolve	agreed	-	FX	scen	2	0	Repurposing Bay/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

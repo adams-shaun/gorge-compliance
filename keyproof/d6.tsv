@@ -116,7 +116,7 @@ d69aa624-23d1-406a-b7e0-9140a6f57929	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rou
 d69b1e68-8d8e-460b-9eb4-6a68be886197	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d69b1e68-8d8e-460b-9eb4-6a68be886197	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d69cb63f-98cc-4699-a03d-4f1beeeb7065	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rakish-scoundrel:f0t0:s2,f:xs:XP:rakish-scoundrel:f0t0:s2	-	-	-	e07cf3a05ba5	-	1b246b35edab	-	-	2026-11-24	xproof
-d69cb63f-98cc-4699-a03d-4f1beeeb7065	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rakish Scoundrel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d69cb63f-98cc-4699-a03d-4f1beeeb7065	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rakish-scoundrel:combat0.attack:s1,f:xs:XP:rakish-scoundrel:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1b246b35edab	-	-	2026-11-25	xproof
 d69cb63f-98cc-4699-a03d-4f1beeeb7065	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rakish Scoundrel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d69cb63f-98cc-4699-a03d-4f1beeeb7065	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rakish-scoundrel:f0t0:s2,f:xs:XP:rakish-scoundrel:f0t0:s2	-	-	-	e07cf3a05ba5	-	1b246b35edab	-	-	2026-11-24	xproof
 d69cb63f-98cc-4699-a03d-4f1beeeb7065	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rakish Scoundrel/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -150,7 +150,7 @@ d6b54f58-7775-4180-b2e5-1b57da65a409	f0/t0	NULL	owed	refused:no-generator:trigge
 d6b54f58-7775-4180-b2e5-1b57da65a409	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:cast:s1,f:xs:XP:akul-the-unrepentant:cast:s1	-	-	-	8c0bd19283bb	-	3be382dd3441	-	-	2026-11-25	xproof
 d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Akul the Unrepentant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Akul the Unrepentant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:combat0.block:s1,f:xs:XP:akul-the-unrepentant:combat0.block:s1	-	-	-	3aa6ded33acb	-	3be382dd3441	-	-	2026-11-25	xproof
 d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Akul the Unrepentant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6b67c7e-3b24-4f60-8e3a-c6ca45229d7f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6b67c7e-3b24-4f60-8e3a-c6ca45229d7f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ d6b6c27e-8028-49b1-90c6-ae0907159f85	f0/a3	ChangeZone	agreed	-	FX	start	2	0	x:xs
 d6ba76fa-441c-4a74-bfea-8ae2a2c9e391	cast	cast-resolve	agreed	-	FX	scen	2	0	Skyward Spider/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6ba76fa-441c-4a74-bfea-8ae2a2c9e391	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Skyward Spider/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6ba76fa-441c-4a74-bfea-8ae2a2c9e391	static#0.0	static#0.0	agreed	-	X	scen	1	0	Skyward Spider/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d6bf5e22-8d33-43a9-8824-435068e0a87a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d6bf5e22-8d33-43a9-8824-435068e0a87a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reincarnation:cast:s1,f:xs:XP:reincarnation:cast:s1	-	-	-	3aa6ded33acb	-	f96936ed2592	-	-	2026-11-25	xproof
 d6c7d7a6-2d38-4c06-ab83-bee9cc18de52	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guardian-scalelord:f0t1:s1,f:xs:XP:guardian-scalelord:f0t1:s1	-	-	-	8c0bd19283bb	-	4f82635c37a0	-	-	2026-11-24	xproof
 d6c7d7a6-2d38-4c06-ab83-bee9cc18de52	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:guardian-scalelord:f0t0:s1,f:xs:XP:guardian-scalelord:f0t0:s1	-	-	-	8c0bd19283bb	-	4f82635c37a0	-	-	2026-11-24	xproof
 d6c7d7a6-2d38-4c06-ab83-bee9cc18de52	f0/t1	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:guardian-scalelord:f0t1:s1,f:xs:XP:guardian-scalelord:f0t1:s1	-	-	-	8c0bd19283bb	-	4f82635c37a0	-	-	2026-11-24	xproof

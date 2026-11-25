@@ -18,8 +18,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d0c1301-4fa7-4245-a13f-f613188eb638	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3d0d4ba4-d5aa-4d9f-89ab-46687637fecf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d0d4ba4-d5aa-4d9f-89ab-46687637fecf	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-3d0eb524-15e7-46f2-8f53-db08a07944d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silkweaver-elite:f0t0:s1,f:xs:XP:silkweaver-elite:f0t0:s1	-	-	-	23b491658465	-	5ce114a536db	-	-	2026-11-25	xproof
-3d0eb524-15e7-46f2-8f53-db08a07944d7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d0eb524-15e7-46f2-8f53-db08a07944d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silkweaver-elite:f0t0:s1,f:xs:XP:silkweaver-elite:f0t0:s1	-	-	-	3aa6ded33acb	-	5ce114a536db	-	-	2026-11-25	xproof
+3d0eb524-15e7-46f2-8f53-db08a07944d7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:silkweaver-elite:f0t0:s1,f:xs:XP:silkweaver-elite:f0t0:s1	-	-	-	3aa6ded33acb	-	5ce114a536db	-	-	2026-11-25	xproof
 3d145811-adb2-46a4-b173-bf8152e5de48	cast	cast-resolve	agreed	-	FX	scen	2	0	Unauthorized Exit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d169bb1-e91b-46d8-9280-797192926314	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d18cd9b-6013-48d7-9269-4787e7585a51	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:person-of-interest:f0t0:s2,f:xs:XP:person-of-interest:f0t0:s2	-	-	-	e07cf3a05ba5	-	e0a8b69b5278	-	-	2026-11-24	xproof
@@ -193,7 +193,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ddd58a3-85f6-40ba-812f-057c0c4417a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3de0e14f-c917-4c00-8341-1170ac9b3cbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3de0e14f-c917-4c00-8341-1170ac9b3cbc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3de0e14f-c917-4c00-8341-1170ac9b3cbc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3de0e14f-c917-4c00-8341-1170ac9b3cbc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 3debd5c7-da3c-4130-8ed9-e156e10034b6	cast	cast-resolve	agreed	-	X	scen	1	0	Arnyn, Deathbloom Botanist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3debd5c7-da3c-4130-8ed9-e156e10034b6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Arnyn, Deathbloom Botanist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3debd5c7-da3c-4130-8ed9-e156e10034b6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Arnyn, Deathbloom Botanist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -73,10 +73,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4548d471-e78a-473e-84d4-cd2af64c9d28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4548d471-e78a-473e-84d4-cd2af64c9d28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4548d471-e78a-473e-84d4-cd2af64c9d28	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4548f379-2647-4446-9e56-e7ef0662793a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4548f379-2647-4446-9e56-e7ef0662793a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4548f379-2647-4446-9e56-e7ef0662793a	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4548f379-2647-4446-9e56-e7ef0662793a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4548f379-2647-4446-9e56-e7ef0662793a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ring-of-evos-isle:f0t0:s1,f:xs:XP:ring-of-evos-isle:f0t0:s1	-	-	-	3aa6ded33acb	-	ae5794f12067	-	-	2026-11-25	xproof
+4548f379-2647-4446-9e56-e7ef0662793a	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ring-of-evos-isle:f0t0:s1,f:xs:XP:ring-of-evos-isle:f0t0:s1	-	-	-	3aa6ded33acb	-	ae5794f12067	-	-	2026-11-25	xproof
+4548f379-2647-4446-9e56-e7ef0662793a	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:ring-of-evos-isle:f0t0:s1,f:xs:XP:ring-of-evos-isle:f0t0:s1	-	-	-	3aa6ded33acb	-	ae5794f12067	-	-	2026-11-25	xproof
+4548f379-2647-4446-9e56-e7ef0662793a	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ring-of-evos-isle:f0t0:s1,f:xs:XP:ring-of-evos-isle:f0t0:s1	-	-	-	3aa6ded33acb	-	ae5794f12067	-	-	2026-11-25	xproof
 454a8902-8120-4373-96ee-bbf352b04e8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 454a8902-8120-4373-96ee-bbf352b04e8d	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:hero-of-bladehold:f0t0:s1,f:xs:XP:hero-of-bladehold:f0t0:s1	-	-	-	d864b561c9cb	-	23877bda26b7	-	-	2026-11-24	xproof
 454a8902-8120-4373-96ee-bbf352b04e8d	f0/t1	Attacks/Battle cry	agreed	-	FX	start	4	0	x:xs:XP:hero-of-bladehold:f0t0:s1,f:xs:XP:hero-of-bladehold:f0t0:s1	-	-	-	d864b561c9cb	-	23877bda26b7	-	-	2026-11-24	xproof
@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 454c4e8b-e417-4381-a931-6a11356ef64e	static#0.0	static#0.0	agreed	-	X	scen	1	0	Punishing Punch/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 454cbc6a-b7f0-445e-842c-5db267917a18	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:earthshaker-dreadmaw:f0t0:s2,f:xs:XP:earthshaker-dreadmaw:f0t0:s2	-	-	-	e07cf3a05ba5	-	45ed90be86ef	-	-	2026-11-24	xproof
 454cbc6a-b7f0-445e-842c-5db267917a18	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Earthshaker Dreadmaw/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-454cbc6a-b7f0-445e-842c-5db267917a18	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Earthshaker Dreadmaw/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+454cbc6a-b7f0-445e-842c-5db267917a18	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:earthshaker-dreadmaw:combat0.block:s1,f:xs:XP:earthshaker-dreadmaw:combat0.block:s1	-	-	-	3aa6ded33acb	-	45ed90be86ef	-	-	2026-11-25	xproof
 454cbc6a-b7f0-445e-842c-5db267917a18	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:earthshaker-dreadmaw:f0t0:s2,f:xs:XP:earthshaker-dreadmaw:f0t0:s2	-	-	-	e07cf3a05ba5	-	45ed90be86ef	-	-	2026-11-24	xproof
 454ed336-362d-46d9-96d5-8fcaa8a1c543	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 455138dd-4f76-4b40-9715-f1b1d61f8f23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45a40b4c-1d37-4d87-adf1-abf0ea4c86b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45a40b4c-1d37-4d87-adf1-abf0ea4c86b4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45a60f56-35e4-46e5-838f-8b4407a67cd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-45aa8bdb-54da-4069-bd6c-c63396154464	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+45aa8bdb-54da-4069-bd6c-c63396154464	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 45aeac84-4705-4179-be3f-b31bde844ea0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45aeac84-4705-4179-be3f-b31bde844ea0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45aeac84-4705-4179-be3f-b31bde844ea0	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

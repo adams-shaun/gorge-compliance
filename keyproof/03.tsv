@@ -84,7 +84,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 035f0aae-9c23-4b22-8c87-0d66b84b7962	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:locked-in-the-cemetery:cast:s1,f:xs:XP:locked-in-the-cemetery:cast:s1	-	-	-	d864b561c9cb	-	d4e3d76cdb06	-	-	2026-11-24	xproof
 035f0aae-9c23-4b22-8c87-0d66b84b7962	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:locked-in-the-cemetery:cast:s1,f:xs:XP:locked-in-the-cemetery:cast:s1	-	-	-	d864b561c9cb	-	d4e3d76cdb06	-	-	2026-11-24	xproof
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pompous-gadabout:cast:s1,f:xs:XP:pompous-gadabout:cast:s1	-	-	-	8c0bd19283bb	-	9f90386f3abb	-	-	2026-11-24	xproof
-0361b9b7-9097-4aae-aa06-c63a5fb47a76	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pompous Gadabout/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0361b9b7-9097-4aae-aa06-c63a5fb47a76	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:pompous-gadabout:combat0.attack:s1,f:xs:XP:pompous-gadabout:combat0.attack:s1	-	-	-	3aa6ded33acb	-	9f90386f3abb	-	-	2026-11-25	xproof
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pompous Gadabout/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	static#0.0	static#0.0	agreed	-	X	scen	1	0	Pompous Gadabout/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0361b9b7-9097-4aae-aa06-c63a5fb47a76	static#0.1	static#0.1	agreed	-	X	scen	1	0	Pompous Gadabout/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03ebc100-68ac-4d53-adc2-d537212f7d31	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venom-connoisseur:cast:s1,f:xs:XP:venom-connoisseur:cast:s1	-	-	-	23b491658465	-	4a4bda991285	-	-	2026-11-24	xproof
 03ebc100-68ac-4d53-adc2-d537212f7d31	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venom-connoisseur:f0t0:s1,f:xs:XP:venom-connoisseur:f0t0:s1	-	-	-	3aa6ded33acb	-	4a4bda991285	-	-	2026-11-25	xproof
 03ee49c9-95a3-44f1-b010-f7c4b2f86a7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vito-s-inquisitor:cast:s1,f:xs:XP:vito-s-inquisitor:cast:s1	-	-	-	8c0bd19283bb	-	f85fcb84f300	-	-	2026-11-24	xproof
-03ee49c9-95a3-44f1-b010-f7c4b2f86a7c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Vito's Inquisitor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+03ee49c9-95a3-44f1-b010-f7c4b2f86a7c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:vito-s-inquisitor:f0a0:s1,f:xs:XP:vito-s-inquisitor:f0a0:s1	-	-	-	3aa6ded33acb	-	f85fcb84f300	-	-	2026-11-25	xproof
 03efb4f3-b8e2-4441-824f-886dc40712c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03efb4f3-b8e2-4441-824f-886dc40712c4	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 03f04c2c-1036-497e-8b13-06c61b0b0ba6	cast	cast-resolve	agreed	-	X	scen	1	0	Territorial Bruntar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

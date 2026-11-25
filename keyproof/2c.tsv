@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:threnody-singer:f0t0:s1,f:xs:XP:threnody-singer:f0t0:s1	-	-	-	ae86f6029288	-	44a3c69ad9d4	-	-	2026-11-24	xproof
 2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:threnody-singer:f0t0:s1,f:xs:XP:threnody-singer:f0t0:s1	-	-	-	ae86f6029288	-	44a3c69ad9d4	-	-	2026-11-24	xproof
 2c09ca09-8e62-4fe3-9b3d-61573dd2ffbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c09d296-5d15-449a-9b98-cf5056a17b91	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c09d296-5d15-449a-9b98-cf5056a17b91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ojutai-s-breath:cast:s1,f:xs:XP:ojutai-s-breath:cast:s1	-	-	-	3aa6ded33acb	-	c7c60736ca99	-	-	2026-11-25	xproof
 2c0b8cc3-b1c1-498d-b34c-f317c2c9468f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c0de95f-4269-439c-a1bc-faa11348b185	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c0de95f-4269-439c-a1bc-faa11348b185	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c5044ff-a303-4276-8e23-7caac30a275b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ninja Teen/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c5044ff-a303-4276-8e23-7caac30a275b	static#0.1	static#0.1	agreed	-	X	scen	1	0	Ninja Teen/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c5044ff-a303-4276-8e23-7caac30a275b	static#0.2	static#0.2	agreed	-	X	scen	1	0	Ninja Teen/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2c51e20b-07b2-4c96-8d73-87379aafbc7c	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c51e20b-07b2-4c96-8d73-87379aafbc7c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 2c51e20b-07b2-4c96-8d73-87379aafbc7c	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:countervailing-winds:cast:s1,f:xs:XP:countervailing-winds:cast:s1	-	-	-	23b491658465	-	769c74c4a636	-	-	2026-11-25	xproof
 2c526c61-6cdb-440c-b4c8-b6d1503cef73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c53a913-8a99-4a15-9c47-e79af026dc05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skybeast-tracker:cast:s1,f:xs:XP:skybeast-tracker:cast:s1	-	-	-	23b491658465	-	942ea201c242	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cb37c66-bba4-4f90-9134-6b738462457e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	4a30966f9302	-	-	2026-11-24	xproof
 2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	161171aae5a6	-	-	2026-11-24	xproof
 2cb8ba8e-58a5-4a2b-85c1-4abb388c3293	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-2cb95721-56c8-4008-8055-579a5a97fc8b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2cb95721-56c8-4008-8055-579a5a97fc8b	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 2cb96408-9195-4e41-ad9a-f8c74fbad083	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:torens-fist-of-the-angels:cast:s1,f:xs:XP:torens-fist-of-the-angels:cast:s1	-	-	-	d864b561c9cb	-	71137bf2c991	-	-	2026-11-24	xproof
 2cb96408-9195-4e41-ad9a-f8c74fbad083	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2cb96408-9195-4e41-ad9a-f8c74fbad083	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -4,8 +4,8 @@ f2000fb8-39c6-4ad6-a020-5245faaa1eba	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Fire
 f2000fb8-39c6-4ad6-a020-5245faaa1eba	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Fire Nation Palace/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f2000fb8-39c6-4ad6-a020-5245faaa1eba	land	play-land	agreed	-	X	scen	1	0	Fire Nation Palace/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f2025f2e-c931-48dd-af21-8f0a591befb4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:escape-from-orthanc:cast:s1,f:xs:XP:escape-from-orthanc:cast:s1	-	-	-	ae86f6029288	-	901e72b81fb3	-	-	2026-11-24	xproof
-f202712d-7cd1-47aa-9664-526a884a1be2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arrogant-outlaw:f0t0:s1,f:xs:XP:arrogant-outlaw:f0t0:s1	-	-	-	23b491658465	-	069490988825	-	-	2026-11-25	xproof
-f202712d-7cd1-47aa-9664-526a884a1be2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f202712d-7cd1-47aa-9664-526a884a1be2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arrogant-outlaw:f0t0:s1,f:xs:XP:arrogant-outlaw:f0t0:s1	-	-	-	3aa6ded33acb	-	069490988825	-	-	2026-11-25	xproof
+f202712d-7cd1-47aa-9664-526a884a1be2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arrogant-outlaw:f0t0:s1,f:xs:XP:arrogant-outlaw:f0t0:s1	-	-	-	3aa6ded33acb	-	069490988825	-	-	2026-11-25	xproof
 f203671b-76f7-4be0-80a9-826fbb450fe7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ethereal-champion:cast:s1,f:xs:XP:ethereal-champion:cast:s1	-	-	-	ea3140b6974b	-	17f793c86c3c	-	-	2026-11-24	xproof
 f203671b-76f7-4be0-80a9-826fbb450fe7	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:ethereal-champion:f0a0:s1,f:xs:XP:ethereal-champion:f0a0:s1	-	-	-	8c0bd19283bb	-	17f793c86c3c	-	-	2026-11-24	xproof
 f20640db-c5d4-4e00-9903-a33ff4f7820d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,8 +164,8 @@ f2e1bb32-de4c-4abc-ac15-6e6deaa8fe5f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:he
 f2e22c9d-b0ec-42bb-a520-3c36df546ba0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2e22c9d-b0ec-42bb-a520-3c36df546ba0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f2ef8bda-373d-4387-900d-0f1b6ccf72e9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:trumpeting-carnosaur:f0t0:s1,f:xs:XP:trumpeting-carnosaur:f0t0:s1	-	-	-	e07cf3a05ba5	-	958b412061f3	-	-	2026-11-24	xproof
-f2ef8bda-373d-4387-900d-0f1b6ccf72e9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Trumpeting Carnosaur/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f2ef8bda-373d-4387-900d-0f1b6ccf72e9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Trumpeting Carnosaur/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f2ef8bda-373d-4387-900d-0f1b6ccf72e9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:trumpeting-carnosaur:combat0.attack:s1,f:xs:XP:trumpeting-carnosaur:combat0.attack:s1	-	-	-	3aa6ded33acb	-	958b412061f3	-	-	2026-11-25	xproof
+f2ef8bda-373d-4387-900d-0f1b6ccf72e9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:trumpeting-carnosaur:combat0.block:s1,f:xs:XP:trumpeting-carnosaur:combat0.block:s1	-	-	-	3aa6ded33acb	-	958b412061f3	-	-	2026-11-25	xproof
 f2ef8bda-373d-4387-900d-0f1b6ccf72e9	f0/a0	DealDamage	agreed	-	FX	start	1	0	x:xs:XP:trumpeting-carnosaur:f0t0:s2,f:xs:XP:trumpeting-carnosaur:f0t0:s2	-	-	-	e07cf3a05ba5	-	958b412061f3	-	-	2026-11-24	xproof
 f2ef8bda-373d-4387-900d-0f1b6ccf72e9	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:trumpeting-carnosaur:f0t0:s1,f:xs:XP:trumpeting-carnosaur:f0t0:s1	-	-	-	e07cf3a05ba5	-	958b412061f3	-	-	2026-11-24	xproof
 f2f09757-1931-47c0-a5f0-39280445489d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gilded-goose:f0t0:s1,f:xs:XP:gilded-goose:f0t0:s1	-	-	-	ae86f6029288	-	8417953ec84f	-	-	2026-11-24	xproof

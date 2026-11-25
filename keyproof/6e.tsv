@@ -92,7 +92,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e7bb687-8243-4377-80b5-67ce6b65f9b7	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6e7bb687-8243-4377-80b5-67ce6b65f9b7	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6e7e9685-ebe9-4db2-b52c-f6ce95e37e56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e7f8e25-49a9-49a0-9bf4-129439344550	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6e7f8e25-49a9-49a0-9bf4-129439344550	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:homing-lightning:cast:s1,f:xs:XP:homing-lightning:cast:s1	-	-	-	3aa6ded33acb	-	2c43f4d81d5f	-	-	2026-11-25	xproof
 6e880df6-fc00-43d2-a9c8-f575f40b78c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e901cab-fba9-4581-9f09-90473bbd8e30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e901cab-fba9-4581-9f09-90473bbd8e30	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -146,8 +146,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ed13a89-4284-4c01-8099-75e2d68c8c63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruric-thar-the-unbowed:cast:s1,f:xs:XP:ruric-thar-the-unbowed:cast:s1	-	-	-	d864b561c9cb	-	ce79835183b9	-	-	2026-11-24	xproof
 6ed13a89-4284-4c01-8099-75e2d68c8c63	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6edacc06-9523-4ccf-a4c2-2ac4af386b8a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:needlethorn-drake:cast:s1,f:xs:XP:needlethorn-drake:cast:s1	-	-	-	d864b561c9cb	-	b9ebba3840ba	-	-	2026-11-24	xproof
-6edd2a36-3d65-4bf9-bd82-b6d03a7e8fea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:white-orchid-phantom:f0t0:s1,f:xs:XP:white-orchid-phantom:f0t0:s1	-	-	-	23b491658465	-	b917bb98dcad	-	-	2026-11-25	xproof
-6edd2a36-3d65-4bf9-bd82-b6d03a7e8fea	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6edd2a36-3d65-4bf9-bd82-b6d03a7e8fea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:white-orchid-phantom:f0t0:s1,f:xs:XP:white-orchid-phantom:f0t0:s1	-	-	-	3aa6ded33acb	-	b917bb98dcad	-	-	2026-11-25	xproof
+6edd2a36-3d65-4bf9-bd82-b6d03a7e8fea	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:white-orchid-phantom:f0t0:s1,f:xs:XP:white-orchid-phantom:f0t0:s1	-	-	-	3aa6ded33acb	-	b917bb98dcad	-	-	2026-11-25	xproof
 6edf5767-10d3-40b0-bfce-daa8633888f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6edf5767-10d3-40b0-bfce-daa8633888f6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 6edf5767-10d3-40b0-bfce-daa8633888f6	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

@@ -15,8 +15,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 240f0835-36af-4ad8-9336-d6d3d816d293	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	The Wind Crystal/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 240f0835-36af-4ad8-9336-d6d3d816d293	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Wind Crystal/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 241117a0-8305-48bb-9cb9-9b01e86e08f7	cast	cast-resolve	agreed	-	FX	scen	2	0	Space-Time Anomaly/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2412a8a2-d028-44f1-8979-add9ec953759	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2412a8a2-d028-44f1-8979-add9ec953759	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2412a8a2-d028-44f1-8979-add9ec953759	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-tombstones:f0t0:s1,f:xs:XP:wall-of-tombstones:f0t0:s1	-	-	-	3aa6ded33acb	-	55e8adda4f2e	-	-	2026-11-25	xproof
+2412a8a2-d028-44f1-8979-add9ec953759	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:wall-of-tombstones:f0t0:s1,f:xs:XP:wall-of-tombstones:f0t0:s1	-	-	-	3aa6ded33acb	-	55e8adda4f2e	-	-	2026-11-25	xproof
 241a50c5-f65f-4847-89c7-5c0ef6025dc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 241d00bf-3301-4385-b559-d50565603dcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stonehoof-chieftain:cast:s1,f:xs:XP:stonehoof-chieftain:cast:s1	-	-	-	8c0bd19283bb	-	cbebb6d19057	-	-	2026-11-24	xproof
 241d00bf-3301-4385-b559-d50565603dcc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -48,10 +48,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24472823-d33c-4d96-add1-233116f6f4f7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2450d35b-7d87-4885-b396-f8e1d3ac0b22	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:battleground-geist:cast:s1,f:xs:XP:battleground-geist:cast:s1	-	-	-	d864b561c9cb	-	2796cfade81e	-	-	2026-11-24	xproof
 2452be47-cc23-47f7-a3a1-fec900bb0119	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:kitesail-larcenist:f0t0:s2,f:xs:XP:kitesail-larcenist:f0t0:s2	-	-	-	e07cf3a05ba5	-	60ae3263b3c4	-	-	2026-11-24	xproof
-2452be47-cc23-47f7-a3a1-fec900bb0119	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kitesail Larcenist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2452be47-cc23-47f7-a3a1-fec900bb0119	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kitesail Larcenist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2452be47-cc23-47f7-a3a1-fec900bb0119	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kitesail-larcenist:combat0.attack:s1,f:xs:XP:kitesail-larcenist:combat0.attack:s1	-	-	-	3aa6ded33acb	-	60ae3263b3c4	-	-	2026-11-25	xproof
+2452be47-cc23-47f7-a3a1-fec900bb0119	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kitesail-larcenist:combat0.block:s1,f:xs:XP:kitesail-larcenist:combat0.block:s1	-	-	-	3aa6ded33acb	-	60ae3263b3c4	-	-	2026-11-25	xproof
 2452be47-cc23-47f7-a3a1-fec900bb0119	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:kitesail-larcenist:f0t0:s2,f:xs:XP:kitesail-larcenist:f0t0:s2	-	-	-	e07cf3a05ba5	-	60ae3263b3c4	-	-	2026-11-24	xproof
-2452be47-cc23-47f7-a3a1-fec900bb0119	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Kitesail Larcenist/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2452be47-cc23-47f7-a3a1-fec900bb0119	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:kitesail-larcenist:f0t1:s1,f:xs:XP:kitesail-larcenist:f0t1:s1	-	-	-	3aa6ded33acb	-	60ae3263b3c4	-	-	2026-11-25	xproof
 245469ff-72b6-4846-8a82-a1d29f4d09bb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245469ff-72b6-4846-8a82-a1d29f4d09bb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 24547885-2e2c-4118-9d5e-4058471f289b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:predatory-advantage:cast:s1,f:xs:XP:predatory-advantage:cast:s1	-	-	-	8a1b1a193ec0	-	979c4260d7c1	-	-	2026-11-24	xproof
@@ -97,9 +97,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2480e56e-365c-4656-9364-25408e896ac4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2480e56e-365c-4656-9364-25408e896ac4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 24882fa2-3fe9-4c1b-aa3d-0e6488b9db27	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-248cafe8-cc37-4cf3-8239-ac10e55ced13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:evie-frye:f0t0:s1,f:xs:XP:evie-frye:f0t0:s1	-	-	-	23b491658465	-	cb09648530e0	-	-	2026-11-25	xproof
+248cafe8-cc37-4cf3-8239-ac10e55ced13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:evie-frye:f0t0:s1,f:xs:XP:evie-frye:f0t0:s1	-	-	-	3aa6ded33acb	-	cb09648530e0	-	-	2026-11-25	xproof
 248cafe8-cc37-4cf3-8239-ac10e55ced13	f0/a0	Draw	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	cb09648530e0	-	-	2026-11-24	xproof
-248cafe8-cc37-4cf3-8239-ac10e55ced13	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+248cafe8-cc37-4cf3-8239-ac10e55ced13	f0/t0	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:evie-frye:f0t0:s1,f:xs:XP:evie-frye:f0t0:s1	-	-	-	3aa6ded33acb	-	cb09648530e0	-	-	2026-11-25	xproof
 248d7759-aa73-4430-aa86-d45dc607944b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burning-sun-s-avatar:f0t0:s1,f:xs:XP:burning-sun-s-avatar:f0t0:s1	-	-	-	d864b561c9cb	-	6fdada69db5c	-	-	2026-11-24	xproof
 248d7759-aa73-4430-aa86-d45dc607944b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:burning-sun-s-avatar:f0t0:s1,f:xs:XP:burning-sun-s-avatar:f0t0:s1	-	-	-	d864b561c9cb	-	6fdada69db5c	-	-	2026-11-24	xproof
 248dcf69-b99e-4a71-b9b3-7fd865f873ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

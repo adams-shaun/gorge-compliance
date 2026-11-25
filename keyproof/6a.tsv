@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a077a9b-d725-4b14-957f-1586db2adf59	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dwarven-priest:f0t0:s1,f:xs:XP:dwarven-priest:f0t0:s1	-	-	-	d864b561c9cb	-	60f19a57ed6a	-	-	2026-11-24	xproof
 6a0a7b02-10e6-4dbf-8356-659095519480	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:longhorn-sharpshooter:cast:s1,f:xs:XP:longhorn-sharpshooter:cast:s1	-	-	-	8c0bd19283bb	-	cde1ae7fa8d9	-	-	2026-11-25	xproof
 6a0a7b02-10e6-4dbf-8356-659095519480	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Longhorn Sharpshooter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6a0a7b02-10e6-4dbf-8356-659095519480	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Longhorn Sharpshooter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6a0a7b02-10e6-4dbf-8356-659095519480	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:longhorn-sharpshooter:combat0.block:s1,f:xs:XP:longhorn-sharpshooter:combat0.block:s1	-	-	-	3aa6ded33acb	-	cde1ae7fa8d9	-	-	2026-11-25	xproof
 6a0a7b02-10e6-4dbf-8356-659095519480	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Longhorn Sharpshooter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a0b1b7e-1a93-4c00-be94-8fa56af57468	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a0b78fb-3838-47d9-8d1a-b6b0c0e8927d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haldan-avid-arcanist:f0t0:s1,f:xs:XP:haldan-avid-arcanist:f0t0:s1	-	-	-	23b491658465	-	e2e47df7adf8	-	-	2026-11-24	xproof
@@ -63,7 +63,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a47865c-8fa2-4cb2-aebf-8009c065395f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rakdos-joins-up:f0t0:s2,f:xs:XP:rakdos-joins-up:f0t0:s2	-	-	-	267e485f6204	-	63af6ea7ac08	-	-	2026-11-24	xproof
 6a47865c-8fa2-4cb2-aebf-8009c065395f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:rakdos-joins-up:f0t0:s2,f:xs:XP:rakdos-joins-up:f0t0:s2	-	-	-	267e485f6204	-	63af6ea7ac08	-	-	2026-11-24	xproof
 6a47865c-8fa2-4cb2-aebf-8009c065395f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Rakdos Joins Up/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6a4ace6b-ef3a-4d11-89d7-958f98dcc445	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6a4ace6b-ef3a-4d11-89d7-958f98dcc445	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 6a4ace6b-ef3a-4d11-89d7-958f98dcc445	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 6a4e8d44-e6ee-40f7-8df4-52fa4cb346aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a4e8d44-e6ee-40f7-8df4-52fa4cb346aa	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:cave-people:f0a0:s1,f:xs:XP:cave-people:f0a0:s1	-	-	-	fc71ca68c5ac	-	2fc5302f4183	-	-	2026-11-24	xproof

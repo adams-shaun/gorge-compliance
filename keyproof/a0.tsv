@@ -68,9 +68,9 @@ a0657586-0404-4bb0-a92d-25f040d560c1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aberr
 a066eeb1-61fc-448b-bbab-650d672652ad	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 a066eeb1-61fc-448b-bbab-650d672652ad	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oaken-siren:cast:s1,f:xs:XP:oaken-siren:cast:s1	-	-	-	23b491658465	-	77cac3b757fe	-	-	2026-11-24	xproof
-a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Oaken Siren/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	combat#0.attack	combat.attack	agreed	-	FX	start	1	0	x:xs:XP:oaken-siren:combat0.attack:s1,f:xs:XP:oaken-siren:combat0.attack:s1	-	-	-	3aa6ded33acb	-	77cac3b757fe	-	-	2026-11-25	xproof
 a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Oaken Siren/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:oaken-siren:f0a0:s2,f:xs:XP:oaken-siren:f0a0:s2	-	-	-	23b491658465	-	77cac3b757fe	-	-	2026-11-24	xproof
+a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:oaken-siren:combat0.attack:s1,f:xs:XP:oaken-siren:combat0.attack:s1	-	-	-	3aa6ded33acb	-	77cac3b757fe	-	-	2026-11-25	xproof
 a06c7c1a-8534-40fb-8bb8-59f8f2530567	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a07406b7-faa1-4ed3-ab84-314c40f3f7f1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:beloved-chaplain:cast:s1,f:xs:XP:beloved-chaplain:cast:s1	-	-	-	fc71ca68c5ac	-	f5841213ffa6	-	-	2026-11-24	xproof
 a07483b4-c04f-42a4-b979-8b77c11fa8f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -202,5 +202,5 @@ a0fdc716-31b9-47f6-8639-de8bb7e3629f	f0/t0	NULL	owed	refused:no-generator:trigge
 a0fe91a8-633c-4902-bc75-da0a5aa76992	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:radiant-s-dragoons:f0t0:s1,f:xs:XP:radiant-s-dragoons:f0t0:s1	-	-	-	5f2128bf97e4	-	9ac95c50d193	-	-	2026-11-24	xproof
 a0fe91a8-633c-4902-bc75-da0a5aa76992	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:radiant-s-dragoons:f0t0:s1,f:xs:XP:radiant-s-dragoons:f0t0:s1	-	-	-	5f2128bf97e4	-	9ac95c50d193	-	-	2026-11-24	xproof
 a0fe91a8-633c-4902-bc75-da0a5aa76992	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a0ff742b-f709-43ac-84d2-dc00c723bad6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:krosan-cloudscraper:cast:s1,f:xs:XP:krosan-cloudscraper:cast:s1	-	-	-	25696bf19d5b	-	9f53a6fb6877	-	-	2026-11-24	xproof
-a0ff742b-f709-43ac-84d2-dc00c723bad6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a0ff742b-f709-43ac-84d2-dc00c723bad6	cast	cast	agreed	-	X	start	2	0	x:xs:XP:krosan-cloudscraper:f0t0:s1	-	-	-	3aa6ded33acb	-	9f53a6fb6877	-	-	2026-11-25	xproof
+a0ff742b-f709-43ac-84d2-dc00c723bad6	f0/t0	Phase	agreed	-	X	start	2	0	x:xs:XP:krosan-cloudscraper:f0t0:s1	-	-	-	3aa6ded33acb	-	9f53a6fb6877	-	-	2026-11-25	xproof

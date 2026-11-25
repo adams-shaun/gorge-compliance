@@ -3,8 +3,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 420290d9-7bb9-4e5a-82ec-c777152ccc72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 420290d9-7bb9-4e5a-82ec-c777152ccc72	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 420290d9-7bb9-4e5a-82ec-c777152ccc72	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:urn-of-godfire:f0a1:s1,f:xs:XP:urn-of-godfire:f0a1:s1	-	-	-	ae86f6029288	-	65a88e8fa52a	-	-	2026-11-24	xproof
-42081a57-b521-45c2-928d-0a0a4641818d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-fleet-spy:f0t0:s1,f:xs:XP:storm-fleet-spy:f0t0:s1	-	-	-	23b491658465	-	2f817346b7bf	-	-	2026-11-25	xproof
-42081a57-b521-45c2-928d-0a0a4641818d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+42081a57-b521-45c2-928d-0a0a4641818d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:storm-fleet-spy:f0t0:s1,f:xs:XP:storm-fleet-spy:f0t0:s1	-	-	-	3aa6ded33acb	-	2f817346b7bf	-	-	2026-11-25	xproof
+42081a57-b521-45c2-928d-0a0a4641818d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:storm-fleet-spy:f0t0:s1,f:xs:XP:storm-fleet-spy:f0t0:s1	-	-	-	3aa6ded33acb	-	2f817346b7bf	-	-	2026-11-25	xproof
 420aaa77-f429-4f3d-a73e-91dc25cb38db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tainted-observer:cast:s1,f:xs:XP:tainted-observer:cast:s1	-	-	-	ae86f6029288	-	ea80e9b30369	-	-	2026-11-24	xproof
 420aaa77-f429-4f3d-a73e-91dc25cb38db	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 420c6dcf-966d-4a4c-a0ef-23037ab8b325	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 424683a5-d239-400d-af2b-9c00d1d32d7f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4246b503-0da8-4de7-9343-9dfb3c3672df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4246b503-0da8-4de7-9343-9dfb3c3672df	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4247b667-a0a8-4995-97c7-622d20132f7d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4247b667-a0a8-4995-97c7-622d20132f7d	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 424c6f5e-b386-47e9-b3fe-25b263097d40	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42510758-6167-420b-bb70-65f914b7a259	cast	cast-resolve	agreed	-	X	scen	1	0	Decode Transmissions/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4254c048-7207-4ca0-bd20-ebb418d9ed1a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

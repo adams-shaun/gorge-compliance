@@ -135,8 +135,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b99c32d-1d02-410e-84bf-9db2ca05f576	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:healing-technique:cast:s1,f:xs:XP:healing-technique:cast:s1	-	-	-	8c0bd19283bb	-	0829970e76cd	-	-	2026-11-24	xproof
 1b99c32d-1d02-410e-84bf-9db2ca05f576	f0/t0	SpellCast/Demonstrate	agreed	-	FX	start	2	0	x:xs:XP:healing-technique:cast:s1,f:xs:XP:healing-technique:cast:s1	-	-	-	8c0bd19283bb	-	0829970e76cd	-	-	2026-11-24	xproof
 1b9c9083-62c3-46fd-a2a0-6de7de88a3c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b9df437-6988-4ddc-80c4-893e11076067	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:charmbreaker-devils:cast:s1,f:xs:XP:charmbreaker-devils:cast:s1	-	-	-	d864b561c9cb	-	569d3400ec64	-	-	2026-11-24	xproof
-1b9df437-6988-4ddc-80c4-893e11076067	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1b9df437-6988-4ddc-80c4-893e11076067	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:charmbreaker-devils:f0t0:s1,f:xs:XP:charmbreaker-devils:f0t0:s1	-	-	-	3aa6ded33acb	-	569d3400ec64	-	-	2026-11-25	xproof
+1b9df437-6988-4ddc-80c4-893e11076067	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:charmbreaker-devils:f0t0:s1,f:xs:XP:charmbreaker-devils:f0t0:s1	-	-	-	3aa6ded33acb	-	569d3400ec64	-	-	2026-11-25	xproof
 1b9df437-6988-4ddc-80c4-893e11076067	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1b9ec782-0ba1-41f1-bc39-d3302494ecb3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bake-into-a-pie:cast:s1,f:xs:XP:bake-into-a-pie:cast:s1	-	-	-	23b491658465	-	9fba58e8b503	-	-	2026-11-24	xproof
 1b9f9f5b-8712-4f00-90cb-1b7b9970eccc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1bc701e2-913a-45d5-bc3f-16f87e7e2653	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ash-party-crasher:f0t0:s1,f:xs:XP:ash-party-crasher:f0t0:s1	-	-	-	3aa6ded33acb	-	6042980a7f52	-	-	2026-11-25	xproof
 1bc7c38b-9571-4395-be90-922f92816987	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tracker-s-instincts:cast:s1,f:xs:XP:tracker-s-instincts:cast:s1	-	-	-	d864b561c9cb	-	3940f3b56655	-	-	2026-11-24	xproof
 1bc7d73b-0f54-4807-b13a-3def0c5e5616	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1bc9a89c-7831-4c08-8934-896286d63e7c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1bc9a89c-7831-4c08-8934-896286d63e7c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 1bcac664-835a-4474-8ca4-263801bde08e	cast	cast-resolve	agreed	-	X	scen	1	0	Boggart Prankster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1bcac664-835a-4474-8ca4-263801bde08e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Boggart Prankster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1bcc8ca6-5fd0-4fc9-8f0c-f81d8abf9249	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

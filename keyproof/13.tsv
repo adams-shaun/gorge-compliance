@@ -88,8 +88,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 137594f7-2422-461b-a3ae-7ce3c135e0c7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hill Gigas/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 137594f7-2422-461b-a3ae-7ce3c135e0c7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hill Gigas/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 137b5708-50a9-4f4c-84e6-9043be9f1989	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anathemancer:f0t0:s1,f:xs:XP:anathemancer:f0t0:s1	-	-	-	8a1b1a193ec0	-	dfdd649d0d34	-	-	2026-11-24	xproof
-137b5708-50a9-4f4c-84e6-9043be9f1989	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-137b5708-50a9-4f4c-84e6-9043be9f1989	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anathemancer:f0t0:s1,f:xs:XP:anathemancer:f0t0:s1	-	-	-	8a1b1a193ec0	-	dfdd649d0d34	-	-	2026-11-24	xproof
+137b5708-50a9-4f4c-84e6-9043be9f1989	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:anathemancer:f0a0:s1,f:xs:XP:anathemancer:f0a0:s1	-	-	-	3aa6ded33acb	-	dfdd649d0d34	-	-	2026-11-25	xproof
+137b5708-50a9-4f4c-84e6-9043be9f1989	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:anathemancer:f0a0:s1,f:xs:XP:anathemancer:f0a0:s1	-	-	-	3aa6ded33acb	-	dfdd649d0d34	-	-	2026-11-25	xproof
 137e0ad2-e10a-4327-86a3-5ac7bc7fc469	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raging-spirit:cast:s1,f:xs:XP:raging-spirit:cast:s1	-	-	-	ea3140b6974b	-	19d386627b06	-	-	2026-11-24	xproof
 137e0ad2-e10a-4327-86a3-5ac7bc7fc469	f0/a0	Animate	agreed	-	F	start	2	0	f:xs:XP:raging-spirit:f0a0:s1	-	-	-	8c0bd19283bb	-	19d386627b06	-	-	2026-11-24	xproof
 137e3974-74e1-4941-8597-10aeba6cac37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13c81fc5-dd35-481d-8e32-4d404fb0e4ac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13c81fc5-dd35-481d-8e32-4d404fb0e4ac	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:conclave-evangelist:f0t1:s1,f:xs:XP:conclave-evangelist:f0t1:s1	-	-	-	8c0bd19283bb	-	9e14924620a3	-	-	2026-11-24	xproof
 13c81fc5-dd35-481d-8e32-4d404fb0e4ac	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:conclave-evangelist:f0t1:s1,f:xs:XP:conclave-evangelist:f0t1:s1	-	-	-	8c0bd19283bb	-	9e14924620a3	-	-	2026-11-24	xproof
-13ca3ede-a4c8-463d-b160-99b4071034b0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13ca3ede-a4c8-463d-b160-99b4071034b0	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 13ca49a2-8a78-4be4-976a-b684086864bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shadow-mysterious-assassin:cast:s1,f:xs:XP:shadow-mysterious-assassin:cast:s1	-	-	-	8c0bd19283bb	-	178bb462779c	-	-	2026-11-24	xproof
 13ca49a2-8a78-4be4-976a-b684086864bb	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13f63240-a6bb-4333-a3dd-818725c6fb73	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:abhorrent-overlord:f0t0:s1,f:xs:XP:abhorrent-overlord:f0t0:s1	-	-	-	d864b561c9cb	-	94a35dd9c94e	-	-	2026-11-24	xproof
 13f63240-a6bb-4333-a3dd-818725c6fb73	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:abhorrent-overlord:f0t0:s1,f:xs:XP:abhorrent-overlord:f0t0:s1	-	-	-	d864b561c9cb	-	94a35dd9c94e	-	-	2026-11-24	xproof
 13f63240-a6bb-4333-a3dd-818725c6fb73	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-13f63b98-40b0-499b-bb5d-640b95a6ea1c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13f63b98-40b0-499b-bb5d-640b95a6ea1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:branching-bolt:cast:s1,f:xs:XP:branching-bolt:cast:s1	-	-	-	3aa6ded33acb	-	d55cb7444a04	-	-	2026-11-25	xproof
 13f69c70-dc93-4983-b649-d91b22633eb9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jolt:cast:s1,f:xs:XP:jolt:cast:s1	-	-	-	8c0bd19283bb	-	442ddbcd6b0c	-	-	2026-11-24	xproof
 13f6f960-ef79-4f2c-8874-90fe9e77099e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ground-seal:f0t0:s1,f:xs:XP:ground-seal:f0t0:s1	-	-	-	25696bf19d5b	-	72f9d83d0b05	-	-	2026-11-24	xproof
 13f6f960-ef79-4f2c-8874-90fe9e77099e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ground-seal:f0t0:s1,f:xs:XP:ground-seal:f0t0:s1	-	-	-	25696bf19d5b	-	72f9d83d0b05	-	-	2026-11-24	xproof

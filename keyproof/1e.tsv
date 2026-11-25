@@ -50,8 +50,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e49f33b-84c0-4b68-abd4-e8c00b3ce98f	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1e4cf4a4-50a4-4856-bf7e-20899e8affd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e4cf4a4-50a4-4856-bf7e-20899e8affd1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e4de77b-27cb-4afd-8d4b-1cc89f2a6986	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e4de77b-27cb-4afd-8d4b-1cc89f2a6986	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1e4de77b-27cb-4afd-8d4b-1cc89f2a6986	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lightning-diadem:f0t0:s1,f:xs:XP:lightning-diadem:f0t0:s1	-	-	-	3aa6ded33acb	-	c55ad172a845	-	-	2026-11-25	xproof
+1e4de77b-27cb-4afd-8d4b-1cc89f2a6986	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lightning-diadem:f0t0:s1,f:xs:XP:lightning-diadem:f0t0:s1	-	-	-	3aa6ded33acb	-	c55ad172a845	-	-	2026-11-25	xproof
 1e50af57-e49d-4b94-a370-44846d9f6b33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e50af57-e49d-4b94-a370-44846d9f6b33	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e51fab7-3ca5-4fbb-a1e9-b39c842895e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cyberman-patrol:cast:s1,f:xs:XP:cyberman-patrol:cast:s1	-	-	-	8c0bd19283bb	-	e6c9a238408b	-	-	2026-11-24	xproof
@@ -77,9 +77,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e825298-7c99-40cc-81c9-280cc7ed98d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e825298-7c99-40cc-81c9-280cc7ed98d3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e825298-7c99-40cc-81c9-280cc7ed98d3	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1e8f17ab-4616-44de-adfd-010882cfcd42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e8f17ab-4616-44de-adfd-010882cfcd42	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e8f17ab-4616-44de-adfd-010882cfcd42	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+1e8f17ab-4616-44de-adfd-010882cfcd42	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greater-harvester:f0t0:s1,f:xs:XP:greater-harvester:f0t0:s1	-	-	-	3aa6ded33acb	-	021ca3d6bb03	-	-	2026-11-25	xproof
+1e8f17ab-4616-44de-adfd-010882cfcd42	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:greater-harvester:f0t0:s1,f:xs:XP:greater-harvester:f0t0:s1	-	-	-	3aa6ded33acb	-	021ca3d6bb03	-	-	2026-11-25	xproof
+1e8f17ab-4616-44de-adfd-010882cfcd42	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:greater-harvester:f0t0:s1,f:xs:XP:greater-harvester:f0t0:s1	-	-	-	3aa6ded33acb	-	021ca3d6bb03	-	-	2026-11-25	xproof
 1e9053b5-5cca-486c-9dd8-b198a7b666bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flayer-of-loyalties:cast:s1,f:xs:XP:flayer-of-loyalties:cast:s1	-	-	-	8c0bd19283bb	-	8df73d2751a8	-	-	2026-11-24	xproof
 1e9053b5-5cca-486c-9dd8-b198a7b666bf	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1e9053b5-5cca-486c-9dd8-b198a7b666bf	f0/t1	Attacks/Annihilator	agreed	-	FX	start	2	0	x:xs:XP:flayer-of-loyalties:f0t1:s1,f:xs:XP:flayer-of-loyalties:f0t1:s1	-	-	-	8c0bd19283bb	-	8df73d2751a8	-	-	2026-11-24	xproof

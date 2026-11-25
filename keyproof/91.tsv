@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 916cb70f-3b06-48ed-972d-75f805aa0892	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brineborn-cutthroat:cast:s1,f:xs:XP:brineborn-cutthroat:cast:s1	-	-	-	3aa6ded33acb	-	e6017ae81d5c	-	-	2026-11-25	xproof
 916cb70f-3b06-48ed-972d-75f805aa0892	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Brineborn Cutthroat/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 916d2a0d-1c3e-4102-958d-524b6b4df509	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-916db499-7f0a-45f7-8abe-94818a53e494	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+916db499-7f0a-45f7-8abe-94818a53e494	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:armored-ascension:cast:s1,f:xs:XP:armored-ascension:cast:s1	-	-	-	3aa6ded33acb	-	8d3442f5554c	-	-	2026-11-25	xproof
 9171248e-045e-4ed4-aa06-eea3ae3d8df0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rowan-s-stalwarts:cast:s1,f:xs:XP:rowan-s-stalwarts:cast:s1	-	-	-	ae86f6029288	-	f07275f6ee1c	-	-	2026-11-24	xproof
 9171248e-045e-4ed4-aa06-eea3ae3d8df0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rowan-s-stalwarts:cast:s1,f:xs:XP:rowan-s-stalwarts:cast:s1	-	-	-	ae86f6029288	-	f07275f6ee1c	-	-	2026-11-24	xproof
 91740570-1a97-4513-8af9-b32c363daf15	cast	cast-resolve	agreed	-	FX	scen	2	0	Pillage the Bog/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -112,8 +112,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9180f77f-c288-4a24-a35d-a16270b3d737	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:skyknight-vanguard:f0t0:s1,f:xs:XP:skyknight-vanguard:f0t0:s1	-	-	-	d864b561c9cb	-	0c4b93110edf	-	-	2026-11-24	xproof
 91818ad0-b22a-423c-bed6-a285f2f8c9d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91818ad0-b22a-423c-bed6-a285f2f8c9d4	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-9188031e-1c24-4981-a3d2-461a2bf917b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9188031e-1c24-4981-a3d2-461a2bf917b6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9188031e-1c24-4981-a3d2-461a2bf917b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archfiend-of-the-dross:f0t0:s1,f:xs:XP:archfiend-of-the-dross:f0t0:s1	-	-	-	3aa6ded33acb	-	a252585d8aab	-	-	2026-11-25	xproof
+9188031e-1c24-4981-a3d2-461a2bf917b6	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:archfiend-of-the-dross:f0t0:s1,f:xs:XP:archfiend-of-the-dross:f0t0:s1	-	-	-	3aa6ded33acb	-	a252585d8aab	-	-	2026-11-25	xproof
 9188031e-1c24-4981-a3d2-461a2bf917b6	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 918991a6-7321-419d-8f3d-150fe32d02d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eris-roar-of-the-storm:cast:s1,f:xs:XP:eris-roar-of-the-storm:cast:s1	-	-	-	8c0bd19283bb	-	4e66e96b57b7	-	-	2026-11-24	xproof
 918991a6-7321-419d-8f3d-150fe32d02d2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -179,8 +179,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91e33674-b13a-41de-8998-4b57016ae42f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e3f057-c24f-42b5-8525-74b44bdefc83	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e3f057-c24f-42b5-8525-74b44bdefc83	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-91e49e8e-575f-43c8-9263-a8568697e7f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rictus-robber:f0t0:s1,f:xs:XP:rictus-robber:f0t0:s1	-	-	-	23b491658465	-	fc2a776ff044	-	-	2026-11-25	xproof
-91e49e8e-575f-43c8-9263-a8568697e7f4	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+91e49e8e-575f-43c8-9263-a8568697e7f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rictus-robber:f0t0:s1,f:xs:XP:rictus-robber:f0t0:s1	-	-	-	3aa6ded33acb	-	fc2a776ff044	-	-	2026-11-25	xproof
+91e49e8e-575f-43c8-9263-a8568697e7f4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rictus-robber:f0t0:s1,f:xs:XP:rictus-robber:f0t0:s1	-	-	-	3aa6ded33acb	-	fc2a776ff044	-	-	2026-11-25	xproof
 91e6fb47-59e4-4616-b8dd-3a7e30070074	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e6fb47-59e4-4616-b8dd-3a7e30070074	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91e71279-c9d2-4873-916a-59da03a65741	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -31,9 +31,9 @@ bc416c17-e1f0-4344-8c21-6184cac10205	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bc416c17-e1f0-4344-8c21-6184cac10205	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc42f32d-e4e1-4174-904c-6058e487f963	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc42f32d-e4e1-4174-904c-6058e487f963	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bc483bab-14fb-498d-9310-9c070766c7ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:darksteel-reactor:cast:s1,f:xs:XP:darksteel-reactor:cast:s1	-	-	-	25696bf19d5b	-	e5155f64015a	-	-	2026-11-24	xproof
+bc483bab-14fb-498d-9310-9c070766c7ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:darksteel-reactor:f0t1:s1,f:xs:XP:darksteel-reactor:f0t1:s1	-	-	-	3aa6ded33acb	-	e5155f64015a	-	-	2026-11-25	xproof
 bc483bab-14fb-498d-9310-9c070766c7ae	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-bc483bab-14fb-498d-9310-9c070766c7ae	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bc483bab-14fb-498d-9310-9c070766c7ae	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:darksteel-reactor:f0t1:s1,f:xs:XP:darksteel-reactor:f0t1:s1	-	-	-	3aa6ded33acb	-	e5155f64015a	-	-	2026-11-25	xproof
 bc4c5f33-0f3d-4815-9974-fb12ac725d08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc4c5f33-0f3d-4815-9974-fb12ac725d08	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:mesa-falcon:f0a0:s1,f:xs:XP:mesa-falcon:f0a0:s1	-	-	-	ea3140b6974b	-	e22cc14fe058	-	-	2026-11-24	xproof
 bc509d30-ceca-47ef-a574-62c021812014	cast	cast-resolve	agreed	-	X	scen	1	0	Grasping Longneck/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -48,7 +48,7 @@ bc59977f-b3a7-4bc1-9f20-0a1e36d418ae	f0/t0	NULL	owed	refused:no-generator:trigge
 bc59bf58-373d-4562-9a67-0721fcf2f098	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc5a7015-c13b-4d92-8afe-50b7956c14dd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc5a7015-c13b-4d92-8afe-50b7956c14dd	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-bc5d5084-77de-4dc5-8769-300eafcbfee7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bc5d5084-77de-4dc5-8769-300eafcbfee7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flatten:cast:s1,f:xs:XP:flatten:cast:s1	-	-	-	3aa6ded33acb	-	b8686e42869b	-	-	2026-11-25	xproof
 bc5d9899-1a1c-4779-b9f0-b00f2c233699	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc606d13-6c01-4f22-a514-1d0a16ec4cf6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:serpent-skin:cast:s1,f:xs:XP:serpent-skin:cast:s1	-	-	-	64a08ba7d913	-	95001b7bf579	-	-	2026-11-24	xproof
 bc606d13-6c01-4f22-a514-1d0a16ec4cf6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -77,7 +77,7 @@ bc7b90b1-3517-4e5d-9bd8-68b4d8a259fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bc7b90b1-3517-4e5d-9bd8-68b4d8a259fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc7c3151-ad07-429a-8af8-e4f24b7d9f6b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:syphon-flesh:cast:s1,f:xs:XP:syphon-flesh:cast:s1	-	-	-	8c0bd19283bb	-	c506f9e42adc	-	-	2026-11-24	xproof
 bc7f39e1-97bf-4725-a84a-2a04121530c6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jailbreak-scheme:cast:s1,f:xs:XP:jailbreak-scheme:cast:s1	-	-	-	3aa6ded33acb	-	65d8e47900e4	-	-	2026-11-25	xproof
-bc8213f9-bef7-4077-a919-4347ec373de7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bc8213f9-bef7-4077-a919-4347ec373de7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cyclical-evolution:cast:s1,f:xs:XP:cyclical-evolution:cast:s1	-	-	-	3aa6ded33acb	-	9a48f23d024b	-	-	2026-11-25	xproof
 bc822c9a-633f-4830-9cb3-9af6a80622e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc822c9a-633f-4830-9cb3-9af6a80622e4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bc8427fb-e5ee-4b44-9a4f-6d9f01b4b896	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:flamekin-gildweaver:f0t0:s2,f:xs:XP:flamekin-gildweaver:f0t0:s2	-	-	-	267e485f6204	-	c70645b0ea88	-	-	2026-11-24	xproof

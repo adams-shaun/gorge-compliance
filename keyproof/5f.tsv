@@ -30,8 +30,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f1e8aa2-6b85-4e2e-92e4-876470447d6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f1f49dd-b7ce-494a-9b4b-ac702d3664c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f2628e3-e29a-4d77-bc27-6e1ce240d192	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghoultree:cast:s1,f:xs:XP:ghoultree:cast:s1	-	-	-	d864b561c9cb	-	f275edea24b9	-	-	2026-11-24	xproof
-5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lifecrafter-s-bestiary:cast:s1,f:xs:XP:lifecrafter-s-bestiary:cast:s1	-	-	-	d864b561c9cb	-	5bf5227d3e6b	-	-	2026-11-24	xproof
-5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lifecrafter-s-bestiary:f0t0:s1,f:xs:XP:lifecrafter-s-bestiary:f0t0:s1	-	-	-	3aa6ded33acb	-	5bf5227d3e6b	-	-	2026-11-25	xproof
+5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lifecrafter-s-bestiary:f0t0:s1,f:xs:XP:lifecrafter-s-bestiary:f0t0:s1	-	-	-	3aa6ded33acb	-	5bf5227d3e6b	-	-	2026-11-25	xproof
 5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	land	play-land	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -45,8 +45,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f39accf-62fd-407a-a147-781210569d33	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5f3ef680-90f4-487f-b44b-db25e29e57ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fruition:cast:s1,f:xs:XP:fruition:cast:s1	-	-	-	ea3140b6974b	-	6f7de5d87a24	-	-	2026-11-24	xproof
 5f3f68b5-8c6a-4181-bb8a-9c73967d198a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glen-elendra-archmage:cast:s1,f:xs:XP:glen-elendra-archmage:cast:s1	-	-	-	8a1b1a193ec0	-	3cd3891d53c9	-	-	2026-11-24	xproof
-5f3f68b5-8c6a-4181-bb8a-9c73967d198a	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f3f68b5-8c6a-4181-bb8a-9c73967d198a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5f3f68b5-8c6a-4181-bb8a-9c73967d198a	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+5f3f68b5-8c6a-4181-bb8a-9c73967d198a	f0/t0	ChangesZone/Persist	agreed	-	FX	start	2	0	x:xs:XP:glen-elendra-archmage:f0t0:s1,f:xs:XP:glen-elendra-archmage:f0t0:s1	-	-	-	3aa6ded33acb	-	3cd3891d53c9	-	-	2026-11-25	xproof
 5f3fe679-aff1-41b3-8d75-c78c2c0636f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saheeli-rai:cast:s1,f:xs:XP:saheeli-rai:cast:s1	-	-	-	d864b561c9cb	-	caf09e6172b6	-	-	2026-11-24	xproof
 5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:saheeli-rai:cast:s1,f:xs:XP:saheeli-rai:cast:s1	-	-	-	d864b561c9cb	-	caf09e6172b6	-	-	2026-11-24	xproof
 5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f9ef763-22aa-4d43-b084-ef02465b489c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dynamite Diver/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5fa1b2f0-3ba4-49db-9cb5-b6130e4c255e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fa3cc1a-09ee-4152-8c50-ea719510fc20	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gnarled-effigy:cast:s1,f:xs:XP:gnarled-effigy:cast:s1	-	-	-	8a1b1a193ec0	-	5ad307ebe5a1	-	-	2026-11-24	xproof
-5fa3cc1a-09ee-4152-8c50-ea719510fc20	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5fa3cc1a-09ee-4152-8c50-ea719510fc20	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:gnarled-effigy:f0a0:s1,f:xs:XP:gnarled-effigy:f0a0:s1	-	-	-	3aa6ded33acb	-	5ad307ebe5a1	-	-	2026-11-25	xproof
 5fa4607a-6731-4599-80f3-19d6097b4b28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fa4607a-6731-4599-80f3-19d6097b4b28	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5fa4607a-6731-4599-80f3-19d6097b4b28	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof

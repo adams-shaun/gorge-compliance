@@ -30,7 +30,7 @@ d5277fe0-b707-41bb-9ff9-62f8be249dd2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d5277fe0-b707-41bb-9ff9-62f8be249dd2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d52b72ff-a82d-430e-94c7-675c83b43e50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d52b72ff-a82d-430e-94c7-675c83b43e50	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d52e9255-62e7-479f-8def-e92b96efdb89	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d52e9255-62e7-479f-8def-e92b96efdb89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:common-bond:cast:s1,f:xs:XP:common-bond:cast:s1	-	-	-	3aa6ded33acb	-	a1d01f61f3f2	-	-	2026-11-25	xproof
 d52ecb32-26ed-484b-b1a7-ee47b66f0f94	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d52ecb32-26ed-484b-b1a7-ee47b66f0f94	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 d52ecb32-26ed-484b-b1a7-ee47b66f0f94	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -87,8 +87,8 @@ d56afdf6-51e0-4151-a86c-4c4827a50a0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:umb
 d56f1543-2b2d-4ce3-bcfe-41224a0cece4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d57079ae-7760-4a81-895f-dc8990896ed7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:whiptail-moloch:f0t0:s1,f:xs:XP:whiptail-moloch:f0t0:s1	-	-	-	16ec2936189a	-	147d62ac7ef2	-	-	2026-11-24	xproof
 d57079ae-7760-4a81-895f-dc8990896ed7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:whiptail-moloch:f0t0:s1,f:xs:XP:whiptail-moloch:f0t0:s1	-	-	-	16ec2936189a	-	147d62ac7ef2	-	-	2026-11-24	xproof
-d5726b60-60f6-4481-bc76-759fbb55bb49	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pitiless-horde:cast:s1,f:xs:XP:pitiless-horde:cast:s1	-	-	-	d864b561c9cb	-	c53e650846ed	-	-	2026-11-24	xproof
-d5726b60-60f6-4481-bc76-759fbb55bb49	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d5726b60-60f6-4481-bc76-759fbb55bb49	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pitiless-horde:f0t0:s1,f:xs:XP:pitiless-horde:f0t0:s1	-	-	-	3aa6ded33acb	-	c53e650846ed	-	-	2026-11-25	xproof
+d5726b60-60f6-4481-bc76-759fbb55bb49	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:pitiless-horde:f0t0:s1,f:xs:XP:pitiless-horde:f0t0:s1	-	-	-	3aa6ded33acb	-	c53e650846ed	-	-	2026-11-25	xproof
 d5770b0f-4493-42e9-a2d7-0e74a28da4ba	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:the-earth-king:f0t0:s2,f:xs:XP:the-earth-king:f0t0:s2	-	-	-	267e485f6204	-	e6025971fb6b	-	-	2026-11-24	xproof
 d5770b0f-4493-42e9-a2d7-0e74a28da4ba	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:the-earth-king:f0t0:s2,f:xs:XP:the-earth-king:f0t0:s2	-	-	-	267e485f6204	-	e6025971fb6b	-	-	2026-11-24	xproof
 d5770b0f-4493-42e9-a2d7-0e74a28da4ba	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Earth King/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -142,8 +142,8 @@ d5bd40fc-6138-4752-b3ff-b1e5fa269214	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 d5bd40fc-6138-4752-b3ff-b1e5fa269214	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:lord-skitter-s-blessing:f0t1:s1,f:xs:XP:lord-skitter-s-blessing:f0t1:s1	-	-	-	3aa6ded33acb	-	c1b404e161e3	-	-	2026-11-25	xproof
 d5bd7c0b-c412-47ed-afb8-1a9ba04be77c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d5bd7c0b-c412-47ed-afb8-1a9ba04be77c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d5be0ff6-39d9-4f9f-a028-e62dc38463f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gonti-lord-of-luxury:f0t0:s1,f:xs:XP:gonti-lord-of-luxury:f0t0:s1	-	-	-	23b491658465	-	b239dc8d6c3f	-	-	2026-11-25	xproof
-d5be0ff6-39d9-4f9f-a028-e62dc38463f2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d5be0ff6-39d9-4f9f-a028-e62dc38463f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gonti-lord-of-luxury:f0t0:s1,f:xs:XP:gonti-lord-of-luxury:f0t0:s1	-	-	-	3aa6ded33acb	-	b239dc8d6c3f	-	-	2026-11-25	xproof
+d5be0ff6-39d9-4f9f-a028-e62dc38463f2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gonti-lord-of-luxury:f0t0:s1,f:xs:XP:gonti-lord-of-luxury:f0t0:s1	-	-	-	3aa6ded33acb	-	b239dc8d6c3f	-	-	2026-11-25	xproof
 d5bfb740-8ab2-4160-a8f0-5b70b63c2f3a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d5bfb740-8ab2-4160-a8f0-5b70b63c2f3a	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 d5c4d36c-54b3-4149-906b-a57a670260fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

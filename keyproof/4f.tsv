@@ -46,10 +46,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4f437f42-1ac5-4681-9b16-4eae9f49bb22	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skyshroud-sentinel:f0t0:s1,f:xs:XP:skyshroud-sentinel:f0t0:s1	-	-	-	5f2128bf97e4	-	7eb55bbfd122	-	-	2026-11-24	xproof
 4f452ce7-1166-4810-afed-ea5e156a6f52	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aurelia-s-vindicator:cast:s1,f:xs:XP:aurelia-s-vindicator:cast:s1	-	-	-	8c0bd19283bb	-	bd7c4976d0c9	-	-	2026-11-24	xproof
 4f452ce7-1166-4810-afed-ea5e156a6f52	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aurelia's Vindicator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4f452ce7-1166-4810-afed-ea5e156a6f52	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aurelia's Vindicator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4f452ce7-1166-4810-afed-ea5e156a6f52	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aurelia-s-vindicator:combat0.block:s1,f:xs:XP:aurelia-s-vindicator:combat0.block:s1	-	-	-	3aa6ded33acb	-	bd7c4976d0c9	-	-	2026-11-25	xproof
 4f452ce7-1166-4810-afed-ea5e156a6f52	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aurelia's Vindicator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4f452ce7-1166-4810-afed-ea5e156a6f52	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aurelia's Vindicator/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4f452ce7-1166-4810-afed-ea5e156a6f52	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Aurelia's Vindicator/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4f452ce7-1166-4810-afed-ea5e156a6f52	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:aurelia-s-vindicator:combat0.block:s1,f:xs:XP:aurelia-s-vindicator:combat0.block:s1	-	-	-	3aa6ded33acb	-	bd7c4976d0c9	-	-	2026-11-25	xproof
+4f452ce7-1166-4810-afed-ea5e156a6f52	f0/t2	BecomesTarget/Ward	agreed	-	FX	start	4	0	x:xs:XP:aurelia-s-vindicator:f0t1:s1,f:xs:XP:aurelia-s-vindicator:f0t1:s1	-	-	-	3aa6ded33acb	-	bd7c4976d0c9	-	-	2026-11-25	xproof
 4f484927-0e8e-493d-93bc-ed190965dad9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:transmogrifying-licid:cast:s1,f:xs:XP:transmogrifying-licid:cast:s1	-	-	-	5f2128bf97e4	-	50685c8bc57a	-	-	2026-11-24	xproof
 4f484927-0e8e-493d-93bc-ed190965dad9	f0/a0	Animate	agreed	-	FX	start	2	0	x:xs:XP:transmogrifying-licid:f0a0:s1,f:xs:XP:transmogrifying-licid:f0a0:s1	-	-	-	5f2128bf97e4	-	50685c8bc57a	-	-	2026-11-24	xproof
 4f4a3c9e-80c4-4fa1-940d-2c57065901a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enchanted-carriage:f0t0:s1,f:xs:XP:enchanted-carriage:f0t0:s1	-	-	-	ae86f6029288	-	443fcf4215d1	-	-	2026-11-24	xproof

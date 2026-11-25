@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0828d891-f7c3-4e51-b42e-6ce88d48ac8b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Icewrought Sentry/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 08377424-619e-48ae-bc3c-fb199cd77cf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:llanowar-loamspeaker:cast:s1,f:xs:XP:llanowar-loamspeaker:cast:s1	-	-	-	d864b561c9cb	-	c95aae7d2bb4	-	-	2026-11-24	xproof
 08377424-619e-48ae-bc3c-fb199cd77cf9	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:llanowar-loamspeaker:f0a1:s2,f:xs:XP:llanowar-loamspeaker:f0a1:s2	-	-	-	23b491658465	-	c95aae7d2bb4	-	-	2026-11-25	xproof
-08377424-619e-48ae-bc3c-fb199cd77cf9	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+08377424-619e-48ae-bc3c-fb199cd77cf9	f0/a1	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 083dcc19-3357-48e4-94e8-8da5bbfba210	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 083dcc19-3357-48e4-94e8-8da5bbfba210	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 083dcc19-3357-48e4-94e8-8da5bbfba210	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 088166b8-5b0b-4ba9-9b0d-358ae523f336	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:general-leo-cristophe:f0t0:s1,f:xs:XP:general-leo-cristophe:f0t0:s1	-	-	-	8c0bd19283bb	-	6a9cb11ff7c6	-	-	2026-11-24	xproof
 088166b8-5b0b-4ba9-9b0d-358ae523f336	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:general-leo-cristophe:f0t0:s1,f:xs:XP:general-leo-cristophe:f0t0:s1	-	-	-	8c0bd19283bb	-	6a9cb11ff7c6	-	-	2026-11-24	xproof
 088a1f56-198c-41a1-b244-ec1c7a771041	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maul-of-the-skyclaves:f0t0:s1,f:xs:XP:maul-of-the-skyclaves:f0t0:s1	-	-	-	ae86f6029288	-	6868723e37ca	-	-	2026-11-24	xproof
-088a1f56-198c-41a1-b244-ec1c7a771041	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+088a1f56-198c-41a1-b244-ec1c7a771041	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:maul-of-the-skyclaves:f0a0:s1	-	-	-	3aa6ded33acb	-	6868723e37ca	-	-	2026-11-25	xproof
 088a1f56-198c-41a1-b244-ec1c7a771041	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:maul-of-the-skyclaves:f0t0:s1,f:xs:XP:maul-of-the-skyclaves:f0t0:s1	-	-	-	ae86f6029288	-	6868723e37ca	-	-	2026-11-24	xproof
 088a63d4-22d2-4061-8aef-2aa3fc348639	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shrieking-mogg:f0t0:s1,f:xs:XP:shrieking-mogg:f0t0:s1	-	-	-	5f2128bf97e4	-	b3992f4c260f	-	-	2026-11-24	xproof
 088a63d4-22d2-4061-8aef-2aa3fc348639	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shrieking-mogg:f0t0:s1,f:xs:XP:shrieking-mogg:f0t0:s1	-	-	-	5f2128bf97e4	-	b3992f4c260f	-	-	2026-11-24	xproof

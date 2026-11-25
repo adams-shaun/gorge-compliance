@@ -16,7 +16,7 @@ e90e519d-023e-4d19-85ad-9972a76df3ba	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:tr
 e90e519d-023e-4d19-85ad-9972a76df3ba	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:tramway-station:f0a1:s1,f:xs:XP:tramway-station:f0a1:s1	-	-	-	d864b561c9cb	-	eee0ffb51174	-	-	2026-11-24	xproof
 e90e519d-023e-4d19-85ad-9972a76df3ba	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e90f298f-c54b-4fe8-82db-5b9153a57712	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zoyowa-lava-tongue:cast:s1,f:xs:XP:zoyowa-lava-tongue:cast:s1	-	-	-	23b491658465	-	0d9abf3dc340	-	-	2026-11-25	xproof
-e90f298f-c54b-4fe8-82db-5b9153a57712	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Zoyowa Lava-Tongue/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e90f298f-c54b-4fe8-82db-5b9153a57712	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:zoyowa-lava-tongue:combat0.attack:s1,f:xs:XP:zoyowa-lava-tongue:combat0.attack:s1	-	-	-	3aa6ded33acb	-	0d9abf3dc340	-	-	2026-11-25	xproof
 e90f298f-c54b-4fe8-82db-5b9153a57712	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Zoyowa Lava-Tongue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e90f298f-c54b-4fe8-82db-5b9153a57712	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Zoyowa Lava-Tongue/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e91053ae-682a-4bbe-8394-fd65e626bacc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -28,8 +28,8 @@ e9117015-1050-44dd-a46b-e7ffe2085fae	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ledge
 e91240bc-4a13-4131-9379-5ddac6555f4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e91240bc-4a13-4131-9379-5ddac6555f4a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e91240bc-4a13-4131-9379-5ddac6555f4a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e9162478-0b10-422a-a11c-7b39b00f026e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e9162478-0b10-422a-a11c-7b39b00f026e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e9162478-0b10-422a-a11c-7b39b00f026e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-vatmother:f0t0:s1,f:xs:XP:phyrexian-vatmother:f0t0:s1	-	-	-	3aa6ded33acb	-	d3c55ec06732	-	-	2026-11-25	xproof
+e9162478-0b10-422a-a11c-7b39b00f026e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-vatmother:f0t0:s1,f:xs:XP:phyrexian-vatmother:f0t0:s1	-	-	-	3aa6ded33acb	-	d3c55ec06732	-	-	2026-11-25	xproof
 e917ad3d-df8e-442b-918c-3aa7a10f3cc4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:golgari-cluestone:cast:s1,f:xs:XP:golgari-cluestone:cast:s1	-	-	-	d864b561c9cb	-	d9069965d7f7	-	-	2026-11-24	xproof
 e917ad3d-df8e-442b-918c-3aa7a10f3cc4	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:golgari-cluestone:cast:s1,f:xs:XP:golgari-cluestone:cast:s1	-	-	-	d864b561c9cb	-	d9069965d7f7	-	-	2026-11-24	xproof
 e917ad3d-df8e-442b-918c-3aa7a10f3cc4	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:golgari-cluestone:f0a1:s1,f:xs:XP:golgari-cluestone:f0a1:s1	-	-	-	d864b561c9cb	-	d9069965d7f7	-	-	2026-11-24	xproof
@@ -53,8 +53,8 @@ e929b730-9aa2-49e1-9a65-50afc0fbe3e0	cast	cast-resolve	agreed	-	X	scen	1	0	Atlan
 e929b730-9aa2-49e1-9a65-50afc0fbe3e0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Atlantean Cavalry/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e929b730-9aa2-49e1-9a65-50afc0fbe3e0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Atlantean Cavalry/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e929b730-9aa2-49e1-9a65-50afc0fbe3e0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Atlantean Cavalry/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e93089b1-e790-402b-a994-69a7e422e4f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kuldotha-flamefiend:f0t0:s1,f:xs:XP:kuldotha-flamefiend:f0t0:s1	-	-	-	23b491658465	-	b2716e58bb01	-	-	2026-11-25	xproof
-e93089b1-e790-402b-a994-69a7e422e4f2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e93089b1-e790-402b-a994-69a7e422e4f2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kuldotha-flamefiend:f0t0:s1,f:xs:XP:kuldotha-flamefiend:f0t0:s1	-	-	-	3aa6ded33acb	-	b2716e58bb01	-	-	2026-11-25	xproof
+e93089b1-e790-402b-a994-69a7e422e4f2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kuldotha-flamefiend:f0t0:s1,f:xs:XP:kuldotha-flamefiend:f0t0:s1	-	-	-	3aa6ded33acb	-	b2716e58bb01	-	-	2026-11-25	xproof
 e9319f13-1f2b-429c-9d61-e58a3cbec86a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-anarchomancer:cast:s1,f:xs:XP:goblin-anarchomancer:cast:s1	-	-	-	d864b561c9cb	-	45937168a3be	-	-	2026-11-24	xproof
 e93782e3-1b93-459a-a7de-06c3b6591e6f	cast	cast-resolve	agreed	-	FX	scen	2	0	Turtle-Duck/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e93782e3-1b93-459a-a7de-06c3b6591e6f	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Turtle-Duck/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -131,7 +131,7 @@ e98e8129-3e0e-45cc-b00c-1387cc592023	f1/a0	NULL	owed	refused:no-generator:face	-
 e98e8129-3e0e-45cc-b00c-1387cc592023	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e9903d75-f71d-45d0-ac5f-955c0c227e02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9903d75-f71d-45d0-ac5f-955c0c227e02	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e9958344-13d5-4f7b-acc8-904e5d99b90e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e9958344-13d5-4f7b-acc8-904e5d99b90e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:splendid-agony:cast:s1,f:xs:XP:splendid-agony:cast:s1	-	-	-	3aa6ded33acb	-	5e1797a8947d	-	-	2026-11-25	xproof
 e996cd67-739c-40f4-b276-0042acf26c71	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e996cd67-739c-40f4-b276-0042acf26c71	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9975888-c75f-471e-a70d-17449e92226d	cast	cast-resolve	agreed	-	X	scen	1	0	Pain 101/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -164,8 +164,8 @@ e9bdb194-745d-4abb-9312-a65a68c40a18	cast	NULL	owed	refused:scen failed: xengine
 e9bdb194-745d-4abb-9312-a65a68c40a18	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 e9bee79c-144f-41e4-a53d-17df8381f691	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e9c03ed6-34dd-46f7-ab41-8004348328cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e9c03ed6-34dd-46f7-ab41-8004348328cc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e9c03ed6-34dd-46f7-ab41-8004348328cc	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e9c03ed6-34dd-46f7-ab41-8004348328cc	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:infested-fleshcutter:f0a0:s1,f:xs:XP:infested-fleshcutter:f0a0:s1	-	-	-	3aa6ded33acb	-	1a3b093f1331	-	-	2026-11-25	xproof
+e9c03ed6-34dd-46f7-ab41-8004348328cc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:infested-fleshcutter:f0a0:s1,f:xs:XP:infested-fleshcutter:f0a0:s1	-	-	-	3aa6ded33acb	-	1a3b093f1331	-	-	2026-11-25	xproof
 e9c6e4e6-0c3f-4048-93e6-161a1221ea36	cast	cast-resolve	agreed	-	FX	scen	2	0	Byrke, Long Ear of the Law/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e9c6e4e6-0c3f-4048-93e6-161a1221ea36	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Byrke, Long Ear of the Law/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e9c6e4e6-0c3f-4048-93e6-161a1221ea36	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Byrke, Long Ear of the Law/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

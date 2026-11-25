@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 79301ae1-8c9c-4723-be21-dc27e1646f35	land	land	agreed	-	FX	start	2	0	x:xs:XP:skyline-cascade:f0t0:s1,f:xs:XP:skyline-cascade:f0t0:s1	-	-	-	d864b561c9cb	-	c4e8e338b124	-	-	2026-11-24	xproof
 7932ab35-39dc-4500-aa44-2ad7228f0d2a	cast	cast-resolve	agreed	-	FX	scen	2	0	Malcolm, the Eyes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7932ab35-39dc-4500-aa44-2ad7228f0d2a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Malcolm, the Eyes/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7932ab35-39dc-4500-aa44-2ad7228f0d2a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Malcolm, the Eyes/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7932ab35-39dc-4500-aa44-2ad7228f0d2a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:malcolm-the-eyes:combat0.block:s1,f:xs:XP:malcolm-the-eyes:combat0.block:s1	-	-	-	3aa6ded33acb	-	c11ddf831a12	-	-	2026-11-25	xproof
 7932ab35-39dc-4500-aa44-2ad7228f0d2a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Malcolm, the Eyes/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7932ddef-b274-4f56-be7f-72e82d17fc59	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 7932ddef-b274-4f56-be7f-72e82d17fc59	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

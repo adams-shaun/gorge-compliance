@@ -118,8 +118,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 819e1765-8325-4e6f-89c1-63ea86de369f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 819fc966-434e-470f-91e9-a38df974ad17	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 819fc966-434e-470f-91e9-a38df974ad17	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81a38340-9558-49d3-8de6-d7d01babfd97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81a38340-9558-49d3-8de6-d7d01babfd97	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+81a38340-9558-49d3-8de6-d7d01babfd97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-war-wagon:f0t0:s1,f:xs:XP:goblin-war-wagon:f0t0:s1	-	-	-	3aa6ded33acb	-	4760316c61ec	-	-	2026-11-25	xproof
+81a38340-9558-49d3-8de6-d7d01babfd97	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:goblin-war-wagon:f0t0:s1,f:xs:XP:goblin-war-wagon:f0t0:s1	-	-	-	3aa6ded33acb	-	4760316c61ec	-	-	2026-11-25	xproof
 81a398ee-e534-43b7-88fe-45155d6aba3a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81a47019-1343-4a63-893a-0d8ba5e848d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrull-retainer:cast:s1,f:xs:XP:thrull-retainer:cast:s1	-	-	-	fc71ca68c5ac	-	a0c3948781b8	-	-	2026-11-24	xproof
 81a47019-1343-4a63-893a-0d8ba5e848d5	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:thrull-retainer:cast:s1,f:xs:XP:thrull-retainer:cast:s1	-	-	-	fc71ca68c5ac	-	a0c3948781b8	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81b15ed1-7069-4f8b-96b9-f6d67298afef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:voice-of-the-provinces:f0t0:s1,f:xs:XP:voice-of-the-provinces:f0t0:s1	-	-	-	d864b561c9cb	-	a7afcacfa775	-	-	2026-11-24	xproof
 81b15ed1-7069-4f8b-96b9-f6d67298afef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:voice-of-the-provinces:f0t0:s1,f:xs:XP:voice-of-the-provinces:f0t0:s1	-	-	-	d864b561c9cb	-	a7afcacfa775	-	-	2026-11-24	xproof
 81b2242b-40c9-475a-a198-28dd348235ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-81b2242b-40c9-475a-a198-28dd348235ec	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+81b2242b-40c9-475a-a198-28dd348235ec	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:elvish-scrapper:f0a0:s1,f:xs:XP:elvish-scrapper:f0a0:s1	-	-	-	3aa6ded33acb	-	1cb65fa6d13a	-	-	2026-11-25	xproof
 81b50d34-d778-4606-80de-0e0780610d1f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thousand-winds:cast:s1,f:xs:XP:thousand-winds:cast:s1	-	-	-	d864b561c9cb	-	817f176716a5	-	-	2026-11-24	xproof
 81b50d34-d778-4606-80de-0e0780610d1f	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 81b51bb1-89b9-46a0-ad7a-a43c0d214f11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

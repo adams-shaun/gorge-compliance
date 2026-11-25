@@ -36,9 +36,9 @@ e32c0de7-132d-4a39-85fb-da0ed1132878	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e32c2ed2-be8b-497c-8b94-9c104f203b49	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ogre-s-cleaver:cast:s1,f:xs:XP:ogre-s-cleaver:cast:s1	-	-	-	d864b561c9cb	-	f9a2dc7f22aa	-	-	2026-11-24	xproof
 e32c2ed2-be8b-497c-8b94-9c104f203b49	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e335485a-80fc-40d4-8be6-7eabf2bab571	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:basilica-stalker:cast:s1,f:xs:XP:basilica-stalker:cast:s1	-	-	-	8c0bd19283bb	-	8a0b2277185a	-	-	2026-11-24	xproof
-e335485a-80fc-40d4-8be6-7eabf2bab571	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Basilica Stalker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e335485a-80fc-40d4-8be6-7eabf2bab571	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Basilica Stalker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e335485a-80fc-40d4-8be6-7eabf2bab571	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Basilica Stalker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e335485a-80fc-40d4-8be6-7eabf2bab571	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:basilica-stalker:combat0.attack:s1,f:xs:XP:basilica-stalker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8a0b2277185a	-	-	2026-11-25	xproof
+e335485a-80fc-40d4-8be6-7eabf2bab571	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:basilica-stalker:combat0.block:s1,f:xs:XP:basilica-stalker:combat0.block:s1	-	-	-	3aa6ded33acb	-	8a0b2277185a	-	-	2026-11-25	xproof
+e335485a-80fc-40d4-8be6-7eabf2bab571	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:basilica-stalker:combat0.attack:s1,f:xs:XP:basilica-stalker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8a0b2277185a	-	-	2026-11-25	xproof
 e3367ed8-16a3-4b04-bc6a-e0a3c794e6d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghor-clan-bloodscale:cast:s1,f:xs:XP:ghor-clan-bloodscale:cast:s1	-	-	-	77494c1ce129	-	7d08c6641e24	-	-	2026-11-24	xproof
 e3367ed8-16a3-4b04-bc6a-e0a3c794e6d3	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 e339c6cb-c75d-4dd4-8c1a-78f844983242	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ e3ad5cbc-4245-4e1e-8204-509381fa0c1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e3ad5cbc-4245-4e1e-8204-509381fa0c1c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:reef-worm:f0t0:s1,f:xs:XP:reef-worm:f0t0:s1	-	-	-	d864b561c9cb	-	1a7bd13a615f	-	-	2026-11-24	xproof
 e3afc704-220f-498f-9eaa-0821b17dc24c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sakura-tribe-elder:cast:s1,f:xs:XP:sakura-tribe-elder:cast:s1	-	-	-	25696bf19d5b	-	7ddbe348c81d	-	-	2026-11-24	xproof
 e3afc704-220f-498f-9eaa-0821b17dc24c	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:sakura-tribe-elder:cast:s1,f:xs:XP:sakura-tribe-elder:cast:s1	-	-	-	25696bf19d5b	-	7ddbe348c81d	-	-	2026-11-24	xproof
-e3b40e34-edad-4838-a4d5-c167037d9ff7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e3b40e34-edad-4838-a4d5-c167037d9ff7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:liberating-combustion:cast:s1,f:xs:XP:liberating-combustion:cast:s1	-	-	-	3aa6ded33acb	-	4bbb7ca36834	-	-	2026-11-25	xproof
 e3b4314b-e7a2-449a-af5a-817c8260adf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3b4314b-e7a2-449a-af5a-817c8260adf1	f0/t0	NULL	owed	refused:no-generator:trigger:CounterRemoved	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 e3b67368-1dd6-419b-a95d-7131b1dba23f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,11 +163,11 @@ e3d6d146-47f4-46f9-9a15-2ea649093668	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 e3d7cea4-0d4c-4320-966d-17ef69b5e433	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3d7cea4-0d4c-4320-966d-17ef69b5e433	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e3d82066-d8b9-47bf-8821-1370c506970b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:barbed-servitor:f0t0:s2,f:xs:XP:barbed-servitor:f0t0:s2	-	-	-	e07cf3a05ba5	-	2f18f7453235	-	-	2026-11-24	xproof
-e3d82066-d8b9-47bf-8821-1370c506970b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Barbed Servitor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e3d82066-d8b9-47bf-8821-1370c506970b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Barbed Servitor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e3d82066-d8b9-47bf-8821-1370c506970b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:barbed-servitor:combat0.attack:s1,f:xs:XP:barbed-servitor:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2f18f7453235	-	-	2026-11-25	xproof
+e3d82066-d8b9-47bf-8821-1370c506970b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:barbed-servitor:combat0.block:s1,f:xs:XP:barbed-servitor:combat0.block:s1	-	-	-	3aa6ded33acb	-	2f18f7453235	-	-	2026-11-25	xproof
 e3d82066-d8b9-47bf-8821-1370c506970b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:barbed-servitor:f0t0:s2,f:xs:XP:barbed-servitor:f0t0:s2	-	-	-	e07cf3a05ba5	-	2f18f7453235	-	-	2026-11-24	xproof
-e3d82066-d8b9-47bf-8821-1370c506970b	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Barbed Servitor/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e3d82066-d8b9-47bf-8821-1370c506970b	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Barbed Servitor/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e3d82066-d8b9-47bf-8821-1370c506970b	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:barbed-servitor:f0t1:s1,f:xs:XP:barbed-servitor:f0t1:s1	-	-	-	3aa6ded33acb	-	2f18f7453235	-	-	2026-11-25	xproof
+e3d82066-d8b9-47bf-8821-1370c506970b	f0/t2	DamageDoneOnce	agreed	-	FX	start	4	0	x:xs:XP:barbed-servitor:combat0.attack:s1,f:xs:XP:barbed-servitor:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2f18f7453235	-	-	2026-11-25	xproof
 e3e255e0-ab04-4488-bdc1-bb1542f51e16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3e255e0-ab04-4488-bdc1-bb1542f51e16	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e3e255e0-ab04-4488-bdc1-bb1542f51e16	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

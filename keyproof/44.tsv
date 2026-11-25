@@ -13,9 +13,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4415b65d-5473-4b19-94f7-e5cf4ce64d5e	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4415b65d-5473-4b19-94f7-e5cf4ce64d5e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Cracked Skull/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 441b51b0-ecd0-466d-9ca8-e754eb563aec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-441cdd7d-6c4c-4a91-a118-7eaa35276660	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:priest-of-the-blood-rite:f0t0:s1,f:xs:XP:priest-of-the-blood-rite:f0t0:s1	-	-	-	d864b561c9cb	-	29e8737155c4	-	-	2026-11-24	xproof
-441cdd7d-6c4c-4a91-a118-7eaa35276660	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:priest-of-the-blood-rite:f0t0:s1,f:xs:XP:priest-of-the-blood-rite:f0t0:s1	-	-	-	d864b561c9cb	-	29e8737155c4	-	-	2026-11-24	xproof
-441cdd7d-6c4c-4a91-a118-7eaa35276660	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+441cdd7d-6c4c-4a91-a118-7eaa35276660	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:priest-of-the-blood-rite:f0t1:s1,f:xs:XP:priest-of-the-blood-rite:f0t1:s1	-	-	-	3aa6ded33acb	-	29e8737155c4	-	-	2026-11-25	xproof
+441cdd7d-6c4c-4a91-a118-7eaa35276660	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:priest-of-the-blood-rite:f0t1:s1,f:xs:XP:priest-of-the-blood-rite:f0t1:s1	-	-	-	3aa6ded33acb	-	29e8737155c4	-	-	2026-11-25	xproof
+441cdd7d-6c4c-4a91-a118-7eaa35276660	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:priest-of-the-blood-rite:f0t1:s1,f:xs:XP:priest-of-the-blood-rite:f0t1:s1	-	-	-	3aa6ded33acb	-	29e8737155c4	-	-	2026-11-25	xproof
 441de890-7b9f-42f7-859a-a154b8ed74ac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foresee:cast:s1,f:xs:XP:foresee:cast:s1	-	-	-	d864b561c9cb	-	e87183987130	-	-	2026-11-24	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	cast	cast-resolve	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4433a5fd-2daa-440a-b9cc-4ad028358cbc	f0/a3	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44350127-f6b6-458f-8f2f-e57a78d83303	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 443f2272-6475-4966-8ca2-717d4cf208ee	cast	cast-resolve	agreed	-	FX	scen	2	0	Dinotomaton/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-443f2272-6475-4966-8ca2-717d4cf208ee	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dinotomaton/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+443f2272-6475-4966-8ca2-717d4cf208ee	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dinotomaton:combat0.attack:s1,f:xs:XP:dinotomaton:combat0.attack:s1	-	-	-	3aa6ded33acb	-	078be8028dfe	-	-	2026-11-25	xproof
 443f2272-6475-4966-8ca2-717d4cf208ee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dinotomaton/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 443f2272-6475-4966-8ca2-717d4cf208ee	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 443f8dd1-333d-42c4-a286-302a9496209a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

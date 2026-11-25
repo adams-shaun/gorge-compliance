@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 100771fd-07db-47be-ada3-935dc918fa33	f0/a0	NULL	owed	refused:steps-needed:cost:Waterbend	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1009d2a2-a145-46e1-ba14-7a42735062fc	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 100c877d-4cce-4b96-8f21-a4f8a43e7d84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skinwing:f0t0:s1,f:xs:XP:skinwing:f0t0:s1	-	-	-	d864b561c9cb	-	b4d1c672dcf5	-	-	2026-11-24	xproof
-100c877d-4cce-4b96-8f21-a4f8a43e7d84	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+100c877d-4cce-4b96-8f21-a4f8a43e7d84	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:skinwing:f0a0:s1,f:xs:XP:skinwing:f0a0:s1	-	-	-	3aa6ded33acb	-	b4d1c672dcf5	-	-	2026-11-25	xproof
 100c877d-4cce-4b96-8f21-a4f8a43e7d84	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:skinwing:f0t0:s1,f:xs:XP:skinwing:f0t0:s1	-	-	-	d864b561c9cb	-	b4d1c672dcf5	-	-	2026-11-24	xproof
 101407b4-e7e8-4aff-84a2-a97947358b88	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:liminal-hold:f0t0:s2,f:xs:XP:liminal-hold:f0t0:s2	-	-	-	267e485f6204	-	29ec3e211927	-	-	2026-11-24	xproof
 101407b4-e7e8-4aff-84a2-a97947358b88	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:liminal-hold:f0t0:s2,f:xs:XP:liminal-hold:f0t0:s2	-	-	-	267e485f6204	-	29ec3e211927	-	-	2026-11-24	xproof
@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 104386d9-93b4-4a18-86d5-68718b474f4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 104386d9-93b4-4a18-86d5-68718b474f4a	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 104565b1-2db8-4c01-ae3d-14087768be45	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:concealed-weapon:cast:s1,f:xs:XP:concealed-weapon:cast:s1	-	-	-	23b491658465	-	71ef58fc498c	-	-	2026-11-24	xproof
-104565b1-2db8-4c01-ae3d-14087768be45	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Concealed Weapon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+104565b1-2db8-4c01-ae3d-14087768be45	f0/a0	Attach/Equip	agreed	-	X	start	2	0	x:xs:XP:concealed-weapon:f0a0:s1	-	-	-	3aa6ded33acb	-	71ef58fc498c	-	-	2026-11-25	xproof
 104565b1-2db8-4c01-ae3d-14087768be45	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Concealed Weapon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 104565b1-2db8-4c01-ae3d-14087768be45	static#0.0	static#0.0	agreed	-	X	scen	1	0	Concealed Weapon/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10494ce1-7a38-44ae-9881-a83e44daaf7b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:reaper-of-the-wilds:cast:s1,f:xs:XP:reaper-of-the-wilds:cast:s1	-	-	-	d864b561c9cb	-	b084b615016a	-	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1063822f-47d3-42e9-8a21-f62b12609fe1	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 1063822f-47d3-42e9-8a21-f62b12609fe1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fatehold Chronologist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1063822f-47d3-42e9-8a21-f62b12609fe1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fatehold Chronologist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1065eceb-9150-4ea4-bd6d-acaabda14e00	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1065eceb-9150-4ea4-bd6d-acaabda14e00	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 106ae855-574b-411d-8689-cbb9eeb4f602	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 106ca7bd-6dad-43fe-af58-8667ebddb2eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 106ca7bd-6dad-43fe-af58-8667ebddb2eb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -189,8 +189,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10d1d6ca-95f8-48da-8798-37c8aadb1f1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10d1d6ca-95f8-48da-8798-37c8aadb1f1f	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 10d24900-cd40-4c98-bb1e-b9e66113f703	cast	cast-resolve	agreed	-	FX	scen	2	0	Dog Walker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-10d24900-cd40-4c98-bb1e-b9e66113f703	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dog Walker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-10d24900-cd40-4c98-bb1e-b9e66113f703	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dog Walker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+10d24900-cd40-4c98-bb1e-b9e66113f703	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dog-walker:combat0.attack:s1,f:xs:XP:dog-walker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3c39973397ef	-	-	2026-11-25	xproof
+10d24900-cd40-4c98-bb1e-b9e66113f703	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dog-walker:combat0.block:s1,f:xs:XP:dog-walker:combat0.block:s1	-	-	-	3aa6ded33acb	-	3c39973397ef	-	-	2026-11-25	xproof
 10d24900-cd40-4c98-bb1e-b9e66113f703	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dog Walker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10d33e95-3e5d-447e-ba4a-acd3c33b4045	cast	cast-resolve	agreed	-	FX	scen	2	0	Torch the Tower/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10d366cb-b92f-401c-a88e-60b267bd8ae5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

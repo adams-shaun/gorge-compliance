@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18207fe8-41e4-418d-b5f9-e1239c527e67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:extract-the-truth:cast:s1,f:xs:XP:extract-the-truth:cast:s1	-	-	-	d864b561c9cb	-	0cd90e61b40d	-	-	2026-11-24	xproof
 1820af5c-9cc2-4b77-b4ca-86084442f087	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1820af5c-9cc2-4b77-b4ca-86084442f087	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-1820af5c-9cc2-4b77-b4ca-86084442f087	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1820af5c-9cc2-4b77-b4ca-86084442f087	f0/t1	Phase	diverged	-	-	start	0	2	-	a5067425b0c3	-	-	3aa6ded33acb	-	3a175d4cacbc	-	-	2026-11-25	xproof
 1820b6e9-83fd-40b9-953e-ba1a8ae69614	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunken-hope:cast:s1,f:xs:XP:sunken-hope:cast:s1	-	-	-	25696bf19d5b	-	e5045bc0f143	-	-	2026-11-24	xproof
 1820b6e9-83fd-40b9-953e-ba1a8ae69614	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sunken-hope:cast:s1,f:xs:XP:sunken-hope:cast:s1	-	-	-	25696bf19d5b	-	e5045bc0f143	-	-	2026-11-24	xproof
 1822f924-51ba-4f81-92cc-6c5d741a33f9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ravenloft-adventurer:cast:s1,f:xs:XP:ravenloft-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	50fe6b0e231f	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18b0b583-d17b-4c67-bc67-c4d9aad155c7	land	land	agreed	-	FX	start	2	0	x:xs:XP:waterfront-district:land:s1,f:xs:XP:waterfront-district:land:s1	-	-	-	d864b561c9cb	-	9646a0e31a15	-	-	2026-11-24	xproof
 18ba355d-a25f-4a5d-b734-11739b0b86af	cast	cast-resolve	agreed	-	FX	scen	2	0	Guardian of the Great Door/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18ba355d-a25f-4a5d-b734-11739b0b86af	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Guardian of the Great Door/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-18ba355d-a25f-4a5d-b734-11739b0b86af	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Guardian of the Great Door/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+18ba355d-a25f-4a5d-b734-11739b0b86af	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-the-great-door:combat0.block:s1,f:xs:XP:guardian-of-the-great-door:combat0.block:s1	-	-	-	3aa6ded33acb	-	10ea1f2d3129	-	-	2026-11-25	xproof
 18bb35a8-01ac-414f-9a45-e550060ff905	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cephalid-broker:cast:s1,f:xs:XP:cephalid-broker:cast:s1	-	-	-	fc71ca68c5ac	-	a2c2dd1be967	-	-	2026-11-24	xproof
 18bb35a8-01ac-414f-9a45-e550060ff905	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:cephalid-broker:f0a0:s1,f:xs:XP:cephalid-broker:f0a0:s1	-	-	-	fc71ca68c5ac	-	a2c2dd1be967	-	-	2026-11-24	xproof
 18bcf4c5-7abc-4ca5-b805-4bbebf4e433c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crypt-ripper:cast:s1,f:xs:XP:crypt-ripper:cast:s1	-	-	-	8a1b1a193ec0	-	971d92cd78da	-	-	2026-11-24	xproof

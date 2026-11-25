@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77217a66-4ba8-443f-b915-178cfcc233e1	cast	cast-resolve	agreed	-	X	scen	1	0	Chaos Spewer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 77217a66-4ba8-443f-b915-178cfcc233e1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 77248a76-373c-48fc-939f-aa378ab57f7c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:mortarpod:cast:s1	-	-	-	8c0bd19283bb	-	693432b93556	-	-	2026-11-24	xproof
-77248a76-373c-48fc-939f-aa378ab57f7c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+77248a76-373c-48fc-939f-aa378ab57f7c	f0/a0	Attach/Equip	agreed	-	F	start	2	0	f:xs:XP:mortarpod:f0a0:s1	-	-	-	3aa6ded33acb	-	693432b93556	-	-	2026-11-25	xproof
 77248a76-373c-48fc-939f-aa378ab57f7c	f0/t0	ChangesZone/Living Weapon	agreed	-	F	start	2	0	f:xs:XP:mortarpod:cast:s1	-	-	-	8c0bd19283bb	-	693432b93556	-	-	2026-11-24	xproof
 77275fc5-5f70-4d7f-938e-f32b5c19c532	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rumbling-slum:cast:s1,f:xs:XP:rumbling-slum:cast:s1	-	-	-	77494c1ce129	-	b67bdf5673a7	-	-	2026-11-24	xproof
 77275fc5-5f70-4d7f-938e-f32b5c19c532	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -196,8 +196,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77eb2374-44a0-4383-b229-edc116c7d835	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loxodon-restorer:f0t0:s1,f:xs:XP:loxodon-restorer:f0t0:s1	-	-	-	d864b561c9cb	-	a1ac321b4093	-	-	2026-11-24	xproof
 77eb2374-44a0-4383-b229-edc116c7d835	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loxodon-restorer:f0t0:s1,f:xs:XP:loxodon-restorer:f0t0:s1	-	-	-	d864b561c9cb	-	a1ac321b4093	-	-	2026-11-24	xproof
 77eb44ca-53e9-4924-b19f-31732f14ef14	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:simian-simulacrum:f0t0:s1,f:xs:XP:simian-simulacrum:f0t0:s1	-	-	-	ae86f6029288	-	1fc31ef7595b	-	-	2026-11-24	xproof
-77eb44ca-53e9-4924-b19f-31732f14ef14	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77eb44ca-53e9-4924-b19f-31732f14ef14	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:simian-simulacrum:f0t0:s1,f:xs:XP:simian-simulacrum:f0t0:s1	-	-	-	ae86f6029288	-	1fc31ef7595b	-	-	2026-11-24	xproof
+77eb44ca-53e9-4924-b19f-31732f14ef14	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:simian-simulacrum:f0a0:s1,f:xs:XP:simian-simulacrum:f0a0:s1	-	-	-	3aa6ded33acb	-	1fc31ef7595b	-	-	2026-11-25	xproof
+77eb44ca-53e9-4924-b19f-31732f14ef14	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:simian-simulacrum:f0a0:s1,f:xs:XP:simian-simulacrum:f0a0:s1	-	-	-	3aa6ded33acb	-	1fc31ef7595b	-	-	2026-11-25	xproof
 77eb76cf-a361-44e0-aeee-e8ef4b695799	cast	cast-resolve	agreed	-	X	scen	1	0	Persistent Marshstalker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77eb76cf-a361-44e0-aeee-e8ef4b695799	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Persistent Marshstalker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 77eb76cf-a361-44e0-aeee-e8ef4b695799	static#0.0	static#0.0	agreed	-	X	scen	1	0	Persistent Marshstalker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

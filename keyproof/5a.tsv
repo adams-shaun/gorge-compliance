@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 5a00eb94-6c0f-4f41-8c16-fc4e2f7cb9aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a00eb94-6c0f-4f41-8c16-fc4e2f7cb9aa	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a00eb94-6c0f-4f41-8c16-fc4e2f7cb9aa	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:howlgeist:f0t0:s1,f:xs:XP:howlgeist:f0t0:s1	-	-	-	3aa6ded33acb	-	4eda7384de28	-	-	2026-11-25	xproof
 5a040363-dba5-49d2-9756-e14af61cf818	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a040363-dba5-49d2-9756-e14af61cf818	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 5a040363-dba5-49d2-9756-e14af61cf818	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kangee-s-lieutenant:f0t0:s1,f:xs:XP:kangee-s-lieutenant:f0t0:s1	-	-	-	8c0bd19283bb	-	069c6f73d27f	-	-	2026-11-24	xproof
@@ -28,8 +28,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a1dfc60-645d-4bc0-8883-e06ed9c80706	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a1dfc60-645d-4bc0-8883-e06ed9c80706	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a1dfc60-645d-4bc0-8883-e06ed9c80706	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a20113c-7ea8-4edf-af9f-148ccd326a88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nyx-fleece-ram:cast:s1,f:xs:XP:nyx-fleece-ram:cast:s1	-	-	-	d864b561c9cb	-	89d93e665e97	-	-	2026-11-24	xproof
-5a20113c-7ea8-4edf-af9f-148ccd326a88	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a20113c-7ea8-4edf-af9f-148ccd326a88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nyx-fleece-ram:f0t0:s1,f:xs:XP:nyx-fleece-ram:f0t0:s1	-	-	-	3aa6ded33acb	-	89d93e665e97	-	-	2026-11-25	xproof
+5a20113c-7ea8-4edf-af9f-148ccd326a88	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nyx-fleece-ram:f0t0:s1,f:xs:XP:nyx-fleece-ram:f0t0:s1	-	-	-	3aa6ded33acb	-	89d93e665e97	-	-	2026-11-25	xproof
 5a210b32-6e1f-4578-bd8b-4e481b761159	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:izoni-thousand-eyed:cast:s1,f:xs:XP:izoni-thousand-eyed:cast:s1	-	-	-	d864b561c9cb	-	75d2e62a3353	-	-	2026-11-24	xproof
 5a210b32-6e1f-4578-bd8b-4e481b761159	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5a210b32-6e1f-4578-bd8b-4e481b761159	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:izoni-thousand-eyed:cast:s1,f:xs:XP:izoni-thousand-eyed:cast:s1	-	-	-	d864b561c9cb	-	75d2e62a3353	-	-	2026-11-24	xproof
@@ -193,7 +193,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5acff7a3-bc84-4251-bd37-80231396ac38	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ad0b405-cca4-475e-985c-4d7e3599d87e	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:sundown-pass:f0a0:s1,f:xs:XP:sundown-pass:f0a0:s1	-	-	-	23b491658465	-	f5f2061dd963	-	-	2026-11-24	xproof
 5ad0b405-cca4-475e-985c-4d7e3599d87e	land	land	agreed	-	FX	start	2	0	x:xs:XP:sundown-pass:land:s1,f:xs:XP:sundown-pass:land:s1	-	-	-	23b491658465	-	f5f2061dd963	-	-	2026-11-24	xproof
-5ad33099-0392-4f68-a4c5-7fa3ef2d473e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5ad33099-0392-4f68-a4c5-7fa3ef2d473e	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 5ad3abf3-1ae5-4c4c-9950-ba7bff0d75ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5ad8963b-8091-4787-9147-20a1fe7bf0fb	cast	cast-resolve	agreed	-	FX	scen	2	0	The Wondrous Wasp/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ad8963b-8091-4787-9147-20a1fe7bf0fb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Wondrous Wasp/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

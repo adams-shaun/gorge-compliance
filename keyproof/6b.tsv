@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6b8183bb-20c4-4d45-b944-508a6a874bb3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6b869c33-a77c-4eb7-9df9-9815d70f7444	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sumala-sentry:cast:s1,f:xs:XP:sumala-sentry:cast:s1	-	-	-	8c0bd19283bb	-	875568907aee	-	-	2026-11-24	xproof
 6b869c33-a77c-4eb7-9df9-9815d70f7444	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sumala Sentry/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6b869c33-a77c-4eb7-9df9-9815d70f7444	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sumala Sentry/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6b869c33-a77c-4eb7-9df9-9815d70f7444	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sumala-sentry:combat0.block:s1,f:xs:XP:sumala-sentry:combat0.block:s1	-	-	-	3aa6ded33acb	-	875568907aee	-	-	2026-11-25	xproof
 6b869c33-a77c-4eb7-9df9-9815d70f7444	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sumala Sentry/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6b87a933-b0d2-4120-b4a0-65ab0f3dbe48	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ugin-s-construct:cast:s1,f:xs:XP:ugin-s-construct:cast:s1	-	-	-	d864b561c9cb	-	883f72ee4f1f	-	-	2026-11-24	xproof
 6b87a933-b0d2-4120-b4a0-65ab0f3dbe48	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ugin-s-construct:cast:s1,f:xs:XP:ugin-s-construct:cast:s1	-	-	-	d864b561c9cb	-	883f72ee4f1f	-	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6bd872b2-5c40-4e11-9a7f-0136a51b0642	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:hydroid-krasis:cast:s1,f:xs:XP:hydroid-krasis:cast:s1	-	-	-	d864b561c9cb	-	de1ecf8591e0	-	-	2026-11-24	xproof
 6bda307b-1508-4582-952b-c690db85e045	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hermitic-nautilus:cast:s1,f:xs:XP:hermitic-nautilus:cast:s1	-	-	-	23b491658465	-	b62f593a3105	-	-	2026-11-24	xproof
 6bda307b-1508-4582-952b-c690db85e045	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hermitic Nautilus/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6bda307b-1508-4582-952b-c690db85e045	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hermitic Nautilus/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6bda307b-1508-4582-952b-c690db85e045	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:hermitic-nautilus:combat0.block:s1,f:xs:XP:hermitic-nautilus:combat0.block:s1	-	-	-	3aa6ded33acb	-	b62f593a3105	-	-	2026-11-25	xproof
 6bda307b-1508-4582-952b-c690db85e045	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:hermitic-nautilus:f0a0:s1,f:xs:XP:hermitic-nautilus:f0a0:s1	-	-	-	23b491658465	-	b62f593a3105	-	-	2026-11-24	xproof
 6bdff38d-0a52-42e5-86ea-edd7029b44f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bdff38d-0a52-42e5-86ea-edd7029b44f6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

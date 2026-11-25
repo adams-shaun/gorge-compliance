@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 400c9fd8-c307-4b27-af6a-73e100717881	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 400c9fd8-c307-4b27-af6a-73e100717881	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:shapesharer:f0a0:s1,f:xs:XP:shapesharer:f0a0:s1	-	-	-	d864b561c9cb	-	0a0ddbe6aee4	-	-	2026-11-24	xproof
 400da7e6-43f8-4539-8959-ec60a3cc431b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-400da7e6-43f8-4539-8959-ec60a3cc431b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+400da7e6-43f8-4539-8959-ec60a3cc431b	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:siren-song-lyre:f0a0:s1,f:xs:XP:siren-song-lyre:f0a0:s1	-	-	-	3aa6ded33acb	-	9c44dd1294da	-	-	2026-11-25	xproof
 40155cfb-078a-4359-9551-9c71266d8a1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40216d09-ae4d-4a41-b3f6-1a8035093045	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40216d09-ae4d-4a41-b3f6-1a8035093045	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:battlegrace-angel:f0t0:s1,f:xs:XP:battlegrace-angel:f0t0:s1	-	-	-	8a1b1a193ec0	-	8457f8a1776c	-	-	2026-11-24	xproof
@@ -167,8 +167,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40e5b83e-5f53-4b15-8bfd-c0c0b8355a6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40e5c7fe-4d7a-41c0-8b90-ea0b46a01c9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40e5c7fe-4d7a-41c0-8b90-ea0b46a01c9d	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-40e8ade9-9cec-4983-ab11-d9e6278fb29f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40e8ade9-9cec-4983-ab11-d9e6278fb29f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+40e8ade9-9cec-4983-ab11-d9e6278fb29f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:weed-pruner-poplar:f0t0:s1,f:xs:XP:weed-pruner-poplar:f0t0:s1	-	-	-	3aa6ded33acb	-	a9f22885df32	-	-	2026-11-25	xproof
+40e8ade9-9cec-4983-ab11-d9e6278fb29f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:weed-pruner-poplar:f0t0:s1,f:xs:XP:weed-pruner-poplar:f0t0:s1	-	-	-	3aa6ded33acb	-	a9f22885df32	-	-	2026-11-25	xproof
 40eacdae-fae5-46b9-a9e5-9211469f74fc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ezuri-claw-of-progress:cast:s1,f:xs:XP:ezuri-claw-of-progress:cast:s1	-	-	-	8c0bd19283bb	-	331c4bb03878	-	-	2026-11-24	xproof
 40eacdae-fae5-46b9-a9e5-9211469f74fc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 40eacdae-fae5-46b9-a9e5-9211469f74fc	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:ezuri-claw-of-progress:cast:s1,f:xs:XP:ezuri-claw-of-progress:cast:s1	-	-	-	8c0bd19283bb	-	331c4bb03878	-	-	2026-11-24	xproof

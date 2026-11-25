@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11323af4-b8b8-4ca9-932f-377c7fd77dea	static#0.0	static#0.0	agreed	-	X	scen	1	0	The Eternity Elevator/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11332981-f06a-48c7-a7b4-fce68e629e82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11332981-f06a-48c7-a7b4-fce68e629e82	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1133633a-b717-42cb-b477-4e18584d876f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1133633a-b717-42cb-b477-4e18584d876f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tranquilize:cast:s1,f:xs:XP:tranquilize:cast:s1	-	-	-	3aa6ded33acb	-	b46f7e596721	-	-	2026-11-25	xproof
 1134eea5-e931-4cb2-9e30-64c227386d43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1135ebc3-9537-4341-956b-6e22d8be5f20	cast	cast-resolve	agreed	-	FX	scen	2	0	Troyan, Gutsy Explorer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1135ebc3-9537-4341-956b-6e22d8be5f20	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Troyan, Gutsy Explorer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 11e50e35-bf4b-4089-b0c9-360d9c014584	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11e637b4-6ce0-4514-98d6-02a2d073f73b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:blue-sun-s-twilight:cast:s1	-	-	-	ae86f6029288	-	f4edd1605dc0	-	-	2026-11-24	xproof
 11e84e48-0f18-41b6-9f2a-30c64aecf9a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-11e84e48-0f18-41b6-9f2a-30c64aecf9a7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+11e84e48-0f18-41b6-9f2a-30c64aecf9a7	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 11eb31d9-cbcb-4ec5-abab-dfa646addbba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11eb31d9-cbcb-4ec5-abab-dfa646addbba	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 11ed8209-2184-4416-a8f0-72de00599574	cast	cast-resolve	agreed	-	X	scen	1	0	Glen Elendra's Answer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

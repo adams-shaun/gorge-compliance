@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f67b8e0-fbbd-48ef-989d-690d44b70304	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 7f691e0d-dac5-4d7e-8727-dd2cab9a7863	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f691e0d-dac5-4d7e-8727-dd2cab9a7863	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-7f6ddfa2-31ba-4cb7-83e7-1f099e3e8dc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7f6ddfa2-31ba-4cb7-83e7-1f099e3e8dc3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7f6ddfa2-31ba-4cb7-83e7-1f099e3e8dc3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brass-gnat:f0t0:s1,f:xs:XP:brass-gnat:f0t0:s1	-	-	-	3aa6ded33acb	-	5586e01fa041	-	-	2026-11-25	xproof
+7f6ddfa2-31ba-4cb7-83e7-1f099e3e8dc3	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:brass-gnat:f0t0:s1,f:xs:XP:brass-gnat:f0t0:s1	-	-	-	3aa6ded33acb	-	5586e01fa041	-	-	2026-11-25	xproof
 7f7049e8-49ed-46da-89f7-1e40aefb3b0c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f715f72-5444-4ab3-a6ca-3d5bfd0d4851	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f764d09-bfbf-4222-bd73-46d6cce8b470	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fd61a18-6e4f-40c5-aa00-3d101ec1ec82	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stitcher-s-supplier:f0t1:s1,f:xs:XP:stitcher-s-supplier:f0t1:s1	-	-	-	d864b561c9cb	-	faff65495d39	-	-	2026-11-24	xproof
 7fd7457a-388d-4cca-a7cf-86b4ea922037	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyrogoyf:f0t0:s1,f:xs:XP:pyrogoyf:f0t0:s1	-	-	-	8c0bd19283bb	-	38a51e7f680e	-	-	2026-11-24	xproof
 7fd7457a-388d-4cca-a7cf-86b4ea922037	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pyrogoyf:f0t0:s1,f:xs:XP:pyrogoyf:f0t0:s1	-	-	-	8c0bd19283bb	-	38a51e7f680e	-	-	2026-11-24	xproof
-7fd7d20d-d44c-443c-a2cf-320f39a3bec4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7fd7d20d-d44c-443c-a2cf-320f39a3bec4	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 7fd7d20d-d44c-443c-a2cf-320f39a3bec4	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fdd471f-ec95-4aa7-8f8a-ad8946de5ab4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Meticulous Commons/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7fdd471f-ec95-4aa7-8f8a-ad8946de5ab4	land	play-land	agreed	-	X	scen	1	0	Meticulous Commons/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

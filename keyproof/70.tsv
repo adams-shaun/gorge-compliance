@@ -19,8 +19,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 701912d5-9995-4ac7-9858-188f78b2b8a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angel-of-the-god-pharaoh:cast:s1,f:xs:XP:angel-of-the-god-pharaoh:cast:s1	-	-	-	d864b561c9cb	-	7319fffd5aae	-	-	2026-11-24	xproof
 701912d5-9995-4ac7-9858-188f78b2b8a3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 701c8624-70d8-49df-84b1-d7b2a8e83552	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:child-of-the-volcano:cast:s1,f:xs:XP:child-of-the-volcano:cast:s1	-	-	-	23b491658465	-	4a88678b2f59	-	-	2026-11-24	xproof
-701c8624-70d8-49df-84b1-d7b2a8e83552	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Child of the Volcano/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-701c8624-70d8-49df-84b1-d7b2a8e83552	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Child of the Volcano/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+701c8624-70d8-49df-84b1-d7b2a8e83552	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:child-of-the-volcano:combat0.attack:s1,f:xs:XP:child-of-the-volcano:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4a88678b2f59	-	-	2026-11-25	xproof
+701c8624-70d8-49df-84b1-d7b2a8e83552	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:child-of-the-volcano:combat0.block:s1,f:xs:XP:child-of-the-volcano:combat0.block:s1	-	-	-	3aa6ded33acb	-	4a88678b2f59	-	-	2026-11-25	xproof
 701c8624-70d8-49df-84b1-d7b2a8e83552	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Child of the Volcano/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7020dc51-8271-40a3-9c4c-ebd40c0b08b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7020dc51-8271-40a3-9c4c-ebd40c0b08b2	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70bcec56-1485-4e4e-8fff-940d7b133c5d	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 70bea459-f6e9-411a-bd33-339bf95ea47a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marauding-sphinx:cast:s1,f:xs:XP:marauding-sphinx:cast:s1	-	-	-	23b491658465	-	9eaad6ab04bc	-	-	2026-11-25	xproof
 70bea459-f6e9-411a-bd33-339bf95ea47a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Marauding Sphinx/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-70bea459-f6e9-411a-bd33-339bf95ea47a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Marauding Sphinx/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+70bea459-f6e9-411a-bd33-339bf95ea47a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:marauding-sphinx:combat0.block:s1,f:xs:XP:marauding-sphinx:combat0.block:s1	-	-	-	3aa6ded33acb	-	9eaad6ab04bc	-	-	2026-11-25	xproof
 70bea459-f6e9-411a-bd33-339bf95ea47a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Marauding Sphinx/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70bea459-f6e9-411a-bd33-339bf95ea47a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Marauding Sphinx/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70c92f25-32d6-4cda-b961-cf2680bd59ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -174,8 +174,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70d39ca3-1bbd-47ec-8723-2abe35b6dc51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70d39ca3-1bbd-47ec-8723-2abe35b6dc51	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 70d52457-1867-482c-ba7a-1f7dacc4514f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-princess-takes-flight:cast:s1,f:xs:XP:the-princess-takes-flight:cast:s1	-	-	-	23b491658465	-	7fc915926472	-	-	2026-11-24	xproof
-70d6cd9c-6311-4d8e-b74a-8edc11d1c05e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70d6cd9c-6311-4d8e-b74a-8edc11d1c05e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+70d6cd9c-6311-4d8e-b74a-8edc11d1c05e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:into-the-wilds:f0t0:s1,f:xs:XP:into-the-wilds:f0t0:s1	-	-	-	3aa6ded33acb	-	49743cc68adb	-	-	2026-11-25	xproof
+70d6cd9c-6311-4d8e-b74a-8edc11d1c05e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:into-the-wilds:f0t0:s1,f:xs:XP:into-the-wilds:f0t0:s1	-	-	-	3aa6ded33acb	-	49743cc68adb	-	-	2026-11-25	xproof
 70d9579f-c8a6-4406-afe1-9291fe5ee736	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:thunder-dragon:cast:s1,f:xs:XP:thunder-dragon:cast:s1	-	-	-	5f2128bf97e4	-	9a0beeedb0c0	-	-	2026-11-24	xproof
 70d9579f-c8a6-4406-afe1-9291fe5ee736	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:thunder-dragon:cast:s1,f:xs:XP:thunder-dragon:cast:s1	-	-	-	5f2128bf97e4	-	9a0beeedb0c0	-	-	2026-11-24	xproof
 70dc830e-d05b-4fc7-88dd-879e140b3fbf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

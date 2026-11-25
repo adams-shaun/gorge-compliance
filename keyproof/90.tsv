@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 904b3db5-70bc-4d49-9887-f504aff8666f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emerald-charm:cast:s1,f:xs:XP:emerald-charm:cast:s1	-	-	-	ea3140b6974b	-	290ff1d59820	-	-	2026-11-24	xproof
 904b9056-ad76-4805-b14f-c426e4a57bae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 904b9056-ad76-4805-b14f-c426e4a57bae	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:thunder-wall:f0a0:s1,f:xs:XP:thunder-wall:f0a0:s1	-	-	-	8c0bd19283bb	-	f941d1520261	-	-	2026-11-24	xproof
-904f9e0c-cb7f-4611-8bf7-2e408e8ab237	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+904f9e0c-cb7f-4611-8bf7-2e408e8ab237	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 904f9e0c-cb7f-4611-8bf7-2e408e8ab237	f0/a1	ChangeZone/Transmute	agreed	-	FX	start	2	0	x:xs:XP:perplex:cast:s1,f:xs:XP:perplex:cast:s1	-	-	-	23b491658465	-	3b9b103123bc	-	-	2026-11-25	xproof
 90514aa5-84b6-4be7-b6d0-b05529c97140	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hellcarver-demon:cast:s1,f:xs:XP:hellcarver-demon:cast:s1	-	-	-	d864b561c9cb	-	339843fa611b	-	-	2026-11-24	xproof
 90514aa5-84b6-4be7-b6d0-b05529c97140	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -91,8 +91,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 90865918-2f9a-4ab6-a881-e86f61a527cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9086d8ff-e375-4149-996d-2a88a7596c1c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9087928a-4732-4661-b3ed-d0b1ea06edf6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grixis-slavedriver:cast:s1,f:xs:XP:grixis-slavedriver:cast:s1	-	-	-	8a1b1a193ec0	-	1ae31893fe8d	-	-	2026-11-24	xproof
-9087928a-4732-4661-b3ed-d0b1ea06edf6	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9087928a-4732-4661-b3ed-d0b1ea06edf6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
+9087928a-4732-4661-b3ed-d0b1ea06edf6	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:grixis-slavedriver:f0a0:s1,f:xs:XP:grixis-slavedriver:f0a0:s1	-	-	-	3aa6ded33acb	-	1ae31893fe8d	-	-	2026-11-25	xproof
+9087928a-4732-4661-b3ed-d0b1ea06edf6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grixis-slavedriver:f0a0:s1,f:xs:XP:grixis-slavedriver:f0a0:s1	-	-	-	3aa6ded33acb	-	1ae31893fe8d	-	-	2026-11-25	xproof
 90898c76-21f9-4597-88fe-dc9179911cde	cast	cast-resolve	agreed	-	X	scen	1	0	Vicious Rivalry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 909201e5-5599-442a-9e4f-ff61f187e957	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 909201e5-5599-442a-9e4f-ff61f187e957	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,10 +165,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 90ec956f-b6de-4214-9b5a-895280e542c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90ec956f-b6de-4214-9b5a-895280e542c1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90ec956f-b6de-4214-9b5a-895280e542c1	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90ecd452-333a-43b0-be08-a61f3779b3bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:high-fae-negotiator:f0t0:s1,f:xs:XP:high-fae-negotiator:f0t0:s1	-	-	-	23b491658465	-	0efd6a71c06d	-	-	2026-11-25	xproof
+90ecd452-333a-43b0-be08-a61f3779b3bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:high-fae-negotiator:f0t0:s1,f:xs:XP:high-fae-negotiator:f0t0:s1	-	-	-	3aa6ded33acb	-	0efd6a71c06d	-	-	2026-11-25	xproof
 90ecd452-333a-43b0-be08-a61f3779b3bd	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:high-fae-negotiator:combat0.attack:s1,f:xs:XP:high-fae-negotiator:combat0.attack:s1	-	-	-	3aa6ded33acb	-	0efd6a71c06d	-	-	2026-11-25	xproof
 90ecd452-333a-43b0-be08-a61f3779b3bd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	High Fae Negotiator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-90ecd452-333a-43b0-be08-a61f3779b3bd	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90ecd452-333a-43b0-be08-a61f3779b3bd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:high-fae-negotiator:f0t0:s1,f:xs:XP:high-fae-negotiator:f0t0:s1	-	-	-	3aa6ded33acb	-	0efd6a71c06d	-	-	2026-11-25	xproof
 90edaf33-d0ab-47e0-8f6a-6fba38286e6e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	ae86f6029288	-	a4ebe59248e1	-	-	2026-11-24	xproof
 90f4ec87-d33d-46c1-8cc7-3e7ad3f8ad70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90f4ec87-d33d-46c1-8cc7-3e7ad3f8ad70	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 90f9440a-0bf8-46eb-9cfa-16fb88a217d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90fa1303-ad1c-46da-a4d6-4b29ea49b7ca	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sculpted-perfection:cast:s1,f:xs:XP:sculpted-perfection:cast:s1	-	-	-	ae86f6029288	-	70d04a567506	-	-	2026-11-24	xproof
 90fa1303-ad1c-46da-a4d6-4b29ea49b7ca	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sculpted-perfection:cast:s1,f:xs:XP:sculpted-perfection:cast:s1	-	-	-	ae86f6029288	-	70d04a567506	-	-	2026-11-24	xproof
-90fd82e8-f638-4ba4-a03c-a30d46f93a39	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90fd82e8-f638-4ba4-a03c-a30d46f93a39	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:inspirit:cast:s1,f:xs:XP:inspirit:cast:s1	-	-	-	3aa6ded33acb	-	b2fe78698d5f	-	-	2026-11-25	xproof
 90fdfba8-f29e-44f9-91d2-7bf3c458a9c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90fdfba8-f29e-44f9-91d2-7bf3c458a9c1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 90fdfba8-f29e-44f9-91d2-7bf3c458a9c1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

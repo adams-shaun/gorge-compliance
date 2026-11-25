@@ -35,7 +35,7 @@ cc33444e-da8c-4af5-b3ed-552e91b0e656	f0/a0	NULL	owed	refused:scen failed: xengin
 cc33444e-da8c-4af5-b3ed-552e91b0e656	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 cc3a6c83-a671-4ce8-b98e-434989fb6778	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanguine-savior:cast:s1,f:xs:XP:sanguine-savior:cast:s1	-	-	-	23b491658465	-	1ff639fc0a51	-	-	2026-11-24	xproof
 cc3a6c83-a671-4ce8-b98e-434989fb6778	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sanguine Savior/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cc3a6c83-a671-4ce8-b98e-434989fb6778	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sanguine Savior/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cc3a6c83-a671-4ce8-b98e-434989fb6778	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sanguine-savior:combat0.block:s1,f:xs:XP:sanguine-savior:combat0.block:s1	-	-	-	3aa6ded33acb	-	1ff639fc0a51	-	-	2026-11-25	xproof
 cc3a6c83-a671-4ce8-b98e-434989fb6778	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sanguine Savior/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc3abacc-6643-49c5-8df8-5b56ab20fba5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc3fcd26-c088-4335-9a35-0e11019e3d5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -68,18 +68,18 @@ cc65821a-1893-4087-b461-35cf9fd26c71	cast	cast-resolve	agreed	-	X	scen	1	0	Orcri
 cc65821a-1893-4087-b461-35cf9fd26c71	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Orcrist, Goblin-cleaver/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc65821a-1893-4087-b461-35cf9fd26c71	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Orcrist, Goblin-cleaver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc65821a-1893-4087-b461-35cf9fd26c71	static#0.0	static#0.0	agreed	-	X	scen	1	0	Orcrist, Goblin-cleaver/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cc65a99f-ac7f-4ded-bb00-a5daf51e4bcd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cc65a99f-ac7f-4ded-bb00-a5daf51e4bcd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heal-the-scars:cast:s1,f:xs:XP:heal-the-scars:cast:s1	-	-	-	3aa6ded33acb	-	5bd1c08e44e7	-	-	2026-11-25	xproof
 cc65ac73-5bef-4ecb-ad8e-39199084c027	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc65ac73-5bef-4ecb-ad8e-39199084c027	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-cc6a83c7-e645-4a53-9550-be79b42cd851	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loyal-warhound:f0t0:s1,f:xs:XP:loyal-warhound:f0t0:s1	-	-	-	23b491658465	-	471dfca05ba2	-	-	2026-11-25	xproof
-cc6a83c7-e645-4a53-9550-be79b42cd851	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cc6a83c7-e645-4a53-9550-be79b42cd851	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loyal-warhound:f0t0:s1,f:xs:XP:loyal-warhound:f0t0:s1	-	-	-	3aa6ded33acb	-	471dfca05ba2	-	-	2026-11-25	xproof
+cc6a83c7-e645-4a53-9550-be79b42cd851	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loyal-warhound:f0t0:s1,f:xs:XP:loyal-warhound:f0t0:s1	-	-	-	3aa6ded33acb	-	471dfca05ba2	-	-	2026-11-25	xproof
 cc6f2b79-8fcd-4542-904b-943c7493b8ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc710da0-5a2e-4bc4-8fdd-d90e7bc1f224	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Baron, Airship Kingdom/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc710da0-5a2e-4bc4-8fdd-d90e7bc1f224	land	play-land	agreed	-	X	scen	1	0	Baron, Airship Kingdom/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc71b6c4-09d4-423b-a134-2f2f2fd7b533	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc72ec48-9e8b-4ded-b445-f3a839fd1abe	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:tajuru-beastmaster:cast:s1,f:xs:XP:tajuru-beastmaster:cast:s1	-	-	-	d864b561c9cb	-	110eeb30369c	-	-	2026-11-24	xproof
 cc72ec48-9e8b-4ded-b445-f3a839fd1abe	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tajuru-beastmaster:cast:s1,f:xs:XP:tajuru-beastmaster:cast:s1	-	-	-	d864b561c9cb	-	110eeb30369c	-	-	2026-11-24	xproof
-cc7d902e-c86e-4771-ba66-2f63e847cff1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cc7d902e-c86e-4771-ba66-2f63e847cff1	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 cc7d99e8-f9dc-47d3-b6c0-e9308d33c3c0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:invincible-hymn:cast:s1,f:xs:XP:invincible-hymn:cast:s1	-	-	-	8a1b1a193ec0	-	714417317d98	-	-	2026-11-24	xproof
 cc7dcb89-534b-4e86-abd2-8362855e2f66	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-s-zeal:cast:s1,f:xs:XP:vampire-s-zeal:cast:s1	-	-	-	3aa6ded33acb	-	8f996aef0f2e	-	-	2026-11-25	xproof
 cc7f290f-ca00-4285-9bdb-4b4402444f30	cast	cast-resolve	agreed	-	FX	scen	2	0	Lord of Atlantis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ ccb66cdc-909a-42c1-a10f-3886e9ed1936	f0/a0	NULL	owed	refused:steps-needed:cost:S
 ccbf7141-69c9-407d-b68e-c1c63ddef213	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:faerie-duelist:f0t0:s1,f:xs:XP:faerie-duelist:f0t0:s1	-	-	-	d864b561c9cb	-	116fff391f97	-	-	2026-11-24	xproof
 ccbf7141-69c9-407d-b68e-c1c63ddef213	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:faerie-duelist:f0t0:s1,f:xs:XP:faerie-duelist:f0t0:s1	-	-	-	d864b561c9cb	-	116fff391f97	-	-	2026-11-24	xproof
 ccc2eb6d-21cf-45cf-b4e4-4b2a2517136a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deconstruction-hammer:cast:s1,f:xs:XP:deconstruction-hammer:cast:s1	-	-	-	23b491658465	-	09d8613b31af	-	-	2026-11-24	xproof
-ccc2eb6d-21cf-45cf-b4e4-4b2a2517136a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Deconstruction Hammer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ccc2eb6d-21cf-45cf-b4e4-4b2a2517136a	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:deconstruction-hammer:f0a0:s1,f:xs:XP:deconstruction-hammer:f0a0:s1	-	-	-	3aa6ded33acb	-	09d8613b31af	-	-	2026-11-25	xproof
 ccc2eb6d-21cf-45cf-b4e4-4b2a2517136a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Deconstruction Hammer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ccc4f21f-cf8c-40bb-a6d6-1f624320c5b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ccc4f21f-cf8c-40bb-a6d6-1f624320c5b2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

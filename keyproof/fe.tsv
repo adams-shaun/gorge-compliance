@@ -64,7 +64,7 @@ fe6337dc-df02-4baa-9fe0-b14e8d34186a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fe6337dc-df02-4baa-9fe0-b14e8d34186a	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 fe69d9bd-2a60-4b33-a0d8-1ca18c2b6705	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe71ada0-ac86-4035-9b6b-4c24ae65034c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heavyweight-demolisher:cast:s1,f:xs:XP:heavyweight-demolisher:cast:s1	-	-	-	ae86f6029288	-	d4792e9919c1	-	-	2026-11-24	xproof
-fe71ada0-ac86-4035-9b6b-4c24ae65034c	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fe71ada0-ac86-4035-9b6b-4c24ae65034c	f0/a0	ChangeZone/Unearth	agreed	-	F	start	2	0	f:xs:XP:heavyweight-demolisher:f0a0:s1	-	-	-	3aa6ded33acb	-	d4792e9919c1	-	-	2026-11-25	xproof
 fe71ada0-ac86-4035-9b6b-4c24ae65034c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe742976-ef13-4c25-972f-254b1ed436de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe742976-ef13-4c25-972f-254b1ed436de	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -91,8 +91,8 @@ fe84933e-d98f-4cbc-b272-387a80894e31	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 fe84933e-d98f-4cbc-b272-387a80894e31	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe84933e-d98f-4cbc-b272-387a80894e31	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 fe84966e-0f0c-4df8-b61c-e9693492dfd8	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:archfiend-of-sorrows:cast:s1,f:xs:XP:archfiend-of-sorrows:cast:s1	-	-	-	d864b561c9cb	-	3887e04611a6	-	-	2026-11-24	xproof
-fe84966e-0f0c-4df8-b61c-e9693492dfd8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fe84966e-0f0c-4df8-b61c-e9693492dfd8	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:archfiend-of-sorrows:cast:s1,f:xs:XP:archfiend-of-sorrows:cast:s1	-	-	-	d864b561c9cb	-	3887e04611a6	-	-	2026-11-24	xproof
+fe84966e-0f0c-4df8-b61c-e9693492dfd8	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:archfiend-of-sorrows:f0a0:s1,f:xs:XP:archfiend-of-sorrows:f0a0:s1	-	-	-	3aa6ded33acb	-	3887e04611a6	-	-	2026-11-25	xproof
+fe84966e-0f0c-4df8-b61c-e9693492dfd8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:archfiend-of-sorrows:f0a0:s1,f:xs:XP:archfiend-of-sorrows:f0a0:s1	-	-	-	3aa6ded33acb	-	3887e04611a6	-	-	2026-11-25	xproof
 fe84ce0b-cd25-41ee-82c1-8ab03df5791b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe87e290-8e9d-4269-ad1f-bb31e6eeb7da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fe8d2874-c626-4d4e-a7f5-11c175a2b3bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,6 +187,6 @@ fef67393-9b7b-495d-8b03-865537386d42	cast	cast-resolve	agreed	-	FX	scen	2	0	Fero
 fef67393-9b7b-495d-8b03-865537386d42	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ferocious Werefox/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fef67393-9b7b-495d-8b03-865537386d42	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ferocious Werefox/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fef94125-aa8d-4147-a609-1e990961bde2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brainbite:cast:s1,f:xs:XP:brainbite:cast:s1	-	-	-	8a1b1a193ec0	-	055a074f36d2	-	-	2026-11-24	xproof
-fef9425d-82d5-470b-9cbc-8c03a001099e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fef9425d-82d5-470b-9cbc-8c03a001099e	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 fefef024-3a05-4221-bb74-419ee08716e5	cast	cast-resolve	agreed	-	X	scen	1	0	Pretending Poxbearers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fefef024-3a05-4221-bb74-419ee08716e5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pretending Poxbearers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -7,7 +7,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a04c31c-f5e4-43ff-a5b5-207426b8dca6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frenzied-rage:cast:s1,f:xs:XP:frenzied-rage:cast:s1	-	-	-	d864b561c9cb	-	be486b001e72	-	-	2026-11-24	xproof
 1a04f70c-288d-4010-a6d5-24e9778b9b45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1a04f70c-288d-4010-a6d5-24e9778b9b45	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1a0770e6-b093-4439-baff-6889a50ba12e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1a0770e6-b093-4439-baff-6889a50ba12e	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 1a080b26-c766-4f7c-9198-4974d2133f75	cast	cast-resolve	agreed	-	FX	scen	2	0	Tellah, Great Sage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a080b26-c766-4f7c-9198-4974d2133f75	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tellah, Great Sage/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a128c02-febf-4ce6-b4d1-28274b5c4ff0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fang-Druid Summoner/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fang-Druid Summoner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:fang-druid-summoner:cast:s1,f:xs:XP:fang-druid-summoner:cast:s1	-	-	-	23b491658465	-	018d002084df	-	-	2026-11-24	xproof
-1aa1cf50-ee79-4bef-826b-5f1a9e1aa1a5	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1aa1cf50-ee79-4bef-826b-5f1a9e1aa1a5	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1aa1e34c-b2ff-4750-9e73-5707a8f49bfb	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 1aa5df06-a61d-47e8-b12d-34009854d088	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1abcdddd-0022-4dfe-8c15-eb1fa86de614	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1abcdddd-0022-4dfe-8c15-eb1fa86de614	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1abcdddd-0022-4dfe-8c15-eb1fa86de614	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-1abcfe8d-4beb-4910-b353-1227e1256329	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:supply-caravan:f0t0:s1,f:xs:XP:supply-caravan:f0t0:s1	-	-	-	23b491658465	-	41ac8ddbf602	-	-	2026-11-25	xproof
-1abcfe8d-4beb-4910-b353-1227e1256329	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1abcfe8d-4beb-4910-b353-1227e1256329	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:supply-caravan:f0t0:s1,f:xs:XP:supply-caravan:f0t0:s1	-	-	-	3aa6ded33acb	-	41ac8ddbf602	-	-	2026-11-25	xproof
+1abcfe8d-4beb-4910-b353-1227e1256329	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:supply-caravan:f0t0:s1,f:xs:XP:supply-caravan:f0t0:s1	-	-	-	3aa6ded33acb	-	41ac8ddbf602	-	-	2026-11-25	xproof
 1abe8246-d2f9-407b-8c16-83da0a6b7de3	cast	counter-spell	agreed	-	X	scen	1	0	We Say Thee Nay!/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ac3e4bc-1678-4280-a071-3dbc8ef4a2bf	cast	cast-resolve	agreed	-	FX	scen	2	0	Kaslem's Stonetree/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ac3e4bc-1678-4280-a071-3dbc8ef4a2bf	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Kaslem's Stonetree/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

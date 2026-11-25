@@ -119,17 +119,17 @@ cf7bb5d4-c33f-4879-a793-6d6f2a4d94be	combat#0.block	combat.block	agreed	-	FX	sta
 cf7bb5d4-c33f-4879-a793-6d6f2a4d94be	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Scarecrow Guide/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cf874feb-00fe-4e48-b57a-cf8b9855c057	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf890abd-b282-4dbb-ac86-9e7caec1c1b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skittering-invasion:cast:s1,f:xs:XP:skittering-invasion:cast:s1	-	-	-	d864b561c9cb	-	03d4859c4eff	-	-	2026-11-24	xproof
-cf8a0782-f545-445e-abac-d9063dad696b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cf8a0782-f545-445e-abac-d9063dad696b	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 cf8a8482-e243-4155-bc21-a1e474c6f1e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf8aef54-3f43-413c-9f3f-d4a1b2090904	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf8bc2e3-2f22-45d3-9810-bc039202f41c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:whispers-of-emrakul:cast:s1,f:xs:XP:whispers-of-emrakul:cast:s1	-	-	-	d864b561c9cb	-	6bd0a25db531	-	-	2026-11-24	xproof
 cf9190e0-6f53-44fb-8afa-c16f5bf9829e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf9190e0-6f53-44fb-8afa-c16f5bf9829e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 cf9190e0-6f53-44fb-8afa-c16f5bf9829e	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-cf938a60-23ec-4834-a3cf-391a7b04747e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cf938a60-23ec-4834-a3cf-391a7b04747e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-cf938a60-23ec-4834-a3cf-391a7b04747e	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cf938a60-23ec-4834-a3cf-391a7b04747e	f0/t2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cf938a60-23ec-4834-a3cf-391a7b04747e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cbfbf1d513af	-	-	2026-11-25	xproof
+cf938a60-23ec-4834-a3cf-391a7b04747e	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cbfbf1d513af	-	-	2026-11-25	xproof
+cf938a60-23ec-4834-a3cf-391a7b04747e	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+cf938a60-23ec-4834-a3cf-391a7b04747e	f0/t2	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	cbfbf1d513af	-	-	2026-11-25	xproof
 cf94cafc-527e-4b27-8a28-7807435aaccf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cf9d13e2-bdcc-4c66-95ad-654ef795dbd3	cast	cast	agreed	-	F	start	2	0	f:xs:XP:aurora-awakener:cast:s2	-	-	-	5437c1394672	-	7032ded6ee01	-	-	2026-11-24	xproof
 cf9d13e2-bdcc-4c66-95ad-654ef795dbd3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aurora Awakener/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

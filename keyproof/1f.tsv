@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f266fa4-6667-49db-9d24-dfbabf1449ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f266fa4-6667-49db-9d24-dfbabf1449ca	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1f27aa69-d17e-4f1f-9aba-cee205036f93	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f295f2f-969a-4b82-98d1-7fe307ec83a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f295f2f-969a-4b82-98d1-7fe307ec83a7	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f295f2f-969a-4b82-98d1-7fe307ec83a7	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	acdf7e0b9162	-	-	2026-11-25	xproof
+1f295f2f-969a-4b82-98d1-7fe307ec83a7	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	acdf7e0b9162	-	-	2026-11-25	xproof
 1f2d1de6-42e0-4f45-b43d-ce4980146469	cast	cast-resolve	agreed	-	X	scen	1	0	Dawn's Light Archer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1f2d1de6-42e0-4f45-b43d-ce4980146469	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dawn's Light Archer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 1f2d1de6-42e0-4f45-b43d-ce4980146469	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dawn's Light Archer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -49,8 +49,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f2d6cf4-b8f4-440f-ac08-ca47ada868ac	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1f300320-ad98-4812-b34b-54885a86aee9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ember-shot:cast:s1,f:xs:XP:ember-shot:cast:s1	-	-	-	fc71ca68c5ac	-	f0996cef1a1d	-	-	2026-11-24	xproof
 1f361ae9-98a2-40ff-a579-fa5b9f510df4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rotting-rats:cast:s1,f:xs:XP:rotting-rats:cast:s1	-	-	-	8a1b1a193ec0	-	1f5dbcacec17	-	-	2026-11-24	xproof
-1f361ae9-98a2-40ff-a579-fa5b9f510df4	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f361ae9-98a2-40ff-a579-fa5b9f510df4	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rotting-rats:cast:s1,f:xs:XP:rotting-rats:cast:s1	-	-	-	8a1b1a193ec0	-	1f5dbcacec17	-	-	2026-11-24	xproof
+1f361ae9-98a2-40ff-a579-fa5b9f510df4	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:rotting-rats:f0a0:s1,f:xs:XP:rotting-rats:f0a0:s1	-	-	-	3aa6ded33acb	-	1f5dbcacec17	-	-	2026-11-25	xproof
+1f361ae9-98a2-40ff-a579-fa5b9f510df4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rotting-rats:f0a0:s1,f:xs:XP:rotting-rats:f0a0:s1	-	-	-	3aa6ded33acb	-	1f5dbcacec17	-	-	2026-11-25	xproof
 1f37e3a6-ce3a-472f-ac45-0d9b23a31a11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f37e3a6-ce3a-472f-ac45-0d9b23a31a11	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:pyroclastic-elemental:f0a0:s1,f:xs:XP:pyroclastic-elemental:f0a0:s1	-	-	-	d864b561c9cb	-	ded4cf70ae66	-	-	2026-11-24	xproof
 1f384f19-7fb4-4120-8001-5b401b4debbd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -191,9 +191,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fef13d8-5da2-46a6-91ed-7a31bd46e538	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bumi, Unleashed/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fef13d8-5da2-46a6-91ed-7a31bd46e538	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:bumi-unleashed:f0t0:s2,f:xs:XP:bumi-unleashed:f0t0:s2	-	-	-	5437c1394672	-	c21325cc7667	-	-	2026-11-24	xproof
 1fef13d8-5da2-46a6-91ed-7a31bd46e538	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Bumi, Unleashed/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1ff00f5b-4bf9-4724-8bb5-6b9a9eb0ec7f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:replicating-ring:cast:s1,f:xs:XP:replicating-ring:cast:s1	-	-	-	d864b561c9cb	-	09f27a874efb	-	-	2026-11-24	xproof
-1ff00f5b-4bf9-4724-8bb5-6b9a9eb0ec7f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:replicating-ring:cast:s1,f:xs:XP:replicating-ring:cast:s1	-	-	-	d864b561c9cb	-	09f27a874efb	-	-	2026-11-24	xproof
-1ff00f5b-4bf9-4724-8bb5-6b9a9eb0ec7f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ff00f5b-4bf9-4724-8bb5-6b9a9eb0ec7f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:replicating-ring:f0t0:s1,f:xs:XP:replicating-ring:f0t0:s1	-	-	-	3aa6ded33acb	-	09f27a874efb	-	-	2026-11-25	xproof
+1ff00f5b-4bf9-4724-8bb5-6b9a9eb0ec7f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:replicating-ring:f0t0:s1,f:xs:XP:replicating-ring:f0t0:s1	-	-	-	3aa6ded33acb	-	09f27a874efb	-	-	2026-11-25	xproof
+1ff00f5b-4bf9-4724-8bb5-6b9a9eb0ec7f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:replicating-ring:f0t0:s1,f:xs:XP:replicating-ring:f0t0:s1	-	-	-	3aa6ded33acb	-	09f27a874efb	-	-	2026-11-25	xproof
 1ff25f67-36a7-4cfa-a2b1-2135b5b6fb67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scavenging-ooze:cast:s1,f:xs:XP:scavenging-ooze:cast:s1	-	-	-	23b491658465	-	863e8a6a7190	-	-	2026-11-24	xproof
 1ff25f67-36a7-4cfa-a2b1-2135b5b6fb67	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Scavenging Ooze/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ff55bbd-cde2-4fe9-a129-16790831d665	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hold-the-line:cast:s1,f:xs:XP:hold-the-line:cast:s1	-	-	-	25696bf19d5b	-	b14a09e24684	-	-	2026-11-24	xproof
