@@ -181,6 +181,28 @@ func castLine(face *cards.Face, card, hist, generic string, f *StartFile) string
 	return ""
 }
 
+// abilityFocus is the start of an activated ability: the card where its
+// activation zone has it, the cost met by placed state (planCost), and the
+// focus the ability's activation. "" when built, else the refusal.
+func abilityFocus(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, idx int, sa *cards.SA, f *StartFile) string {
+	plan, why := planCost(reg, b, face, card, sa.Params["Cost"], generic)
+	if why != "" {
+		return why
+	}
+	if plan.zone == zoneBattlefield {
+		switch z := strings.ToLower(sa.Params["ActivationZone"]); z {
+		case "", "battlefield":
+		case zoneHand, zoneGraveyard:
+			plan.zone = z // unearth, channel, ...: the card sits where the ability is activated from
+		default:
+			return "start:activation-zone:" + z
+		}
+	}
+	applyCost(plan, card, generic, f)
+	f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx}
+	return ""
+}
+
 func newStart(card, key string) *StartFile {
 	return &StartFile{Format: StartFormat, Card: card, Key: key, Players: 2, MaxTurns: 1, Filler: "basics", Seeds: 2}
 }
@@ -276,21 +298,9 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		}
 		idx, _ := strconv.Atoi(m[3])
 		if fam == "activate" {
-			plan, why := planCost(reg, b, face, card, sa.Params["Cost"], generic)
-			if why != "" {
+			if why := abilityFocus(reg, b, face, card, generic, idx, sa, f); why != "" {
 				return refuse(why)
 			}
-			if plan.zone == zoneBattlefield {
-				switch z := strings.ToLower(sa.Params["ActivationZone"]); z {
-				case "", "battlefield":
-				case zoneHand, zoneGraveyard:
-					plan.zone = z // unearth, channel, ...: the card sits where the ability is activated from
-				default:
-					return refuse("start:activation-zone:" + z)
-				}
-			}
-			applyCost(plan, card, generic, f)
-			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: idx}
 			break
 		}
 		if band := trig.Params["ClassBand"]; band != "" && band != "1" {
@@ -354,11 +364,20 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			if why := phaseStart(reg, b, face, card, generic, trig, f); why != "" {
 				return refuse(why)
 			}
+		case "Drawn", "Discarded", "Sacrificed", "Taps", "TapsForMana", "Untaps", "CommitCrime", "TurnFaceUp":
+			if why := eventStart(reg, b, face, card, generic, trig, f); why != "" {
+				return refuse(why)
+			}
 		default:
 			return refuse("no-generator:trigger:" + trig.Mode)
 		}
 	default:
 		return refuse("no-generator")
+	}
+	if sa == nil && f.Focus != nil && f.Focus.Kind == "ability" && f.Focus.Card == card && f.Focus.Ability < len(face.Abilities) {
+		// a trigger start whose event is the card's own ability (it taps, it is
+		// sacrificed): the ability's targets are the focus play's
+		sa = face.Abilities[f.Focus.Ability]
 	}
 	if hist != "" {
 		if why := castLine(face, card, hist, generic, f); why != "" {
