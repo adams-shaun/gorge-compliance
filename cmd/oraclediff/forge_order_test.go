@@ -103,6 +103,43 @@ func TestForgeGraveyardOrderOnePinPerStep(t *testing.T) {
 	}
 }
 
+// TestForgeGraveyardOrderTransitCardIsNotPinned: a card that enters and
+// leaves a graveyard between the same two checkpoints is in neither snapshot,
+// so no pin can name it (Sorin, Lord of Innistrad's -6: Destroy, then
+// ChangeZoneAll back to the battlefield in one resolution). The visible
+// arrivals still get their pin, in zone order; the pin derivation must not
+// invent one from the step's selection decision, which names the transit card
+// too. StepMachine.orderCards keeps Forge's offered order for the unpinned
+// ask.
+func TestForgeGraveyardOrderTransitCardIsNotPinned(t *testing.T) {
+	it := orderItems(1)
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		orderSnap(nil, nil),
+		orderSnap(nil, []string{"Stayed A", "Stayed B"}),
+	}}
+	selection := []rules.OracleDecision{{
+		Step: 0, Seat: 1, Kind: "choose_n",
+		Picks: []string{"Transit", "Stayed A", "Stayed B"},
+	}}
+	got := forgeGraveyardOrderDecisions(it, g, selection)
+	if len(got) != 2 {
+		t.Fatalf("%d decisions, want the selection plus one pin for the cards that stayed: %+v", len(got), got)
+	}
+	if !reflect.DeepEqual(got[0], selection[0]) {
+		t.Errorf("the selection decision changed: %+v", got[0])
+	}
+	pin := got[1]
+	if pin.Step != 0 || pin.Seat != 1 || pin.Kind != "order" || pin.GorgeKind != "graveyard_order" ||
+		!reflect.DeepEqual(pin.Picks, []string{"Stayed A", "Stayed B"}) {
+		t.Errorf("pin = %+v, want step 0 seat 1 naming only the visible arrivals", pin)
+	}
+	for _, pick := range pin.Picks {
+		if pick == "Transit" {
+			t.Errorf("pin names the pass-through card: %+v", pin)
+		}
+	}
+}
+
 // TestForgeBuildRequestCarriesGraveyardOrder: the export wires the pin into
 // the request the driver reads, so orderCards can consume it. The same builder
 // without the opt-in (the follower path) must not carry it: a phase/Manabrew

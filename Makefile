@@ -569,7 +569,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # scripts/forge-oracle-test-foretell-cast-mode.sh and forge-oracle-test-riot-choice.sh replay the finds. Driver-only;
 # die-roll code, cardsfolder and tokenscripts unchanged.
 # c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
-FORGE_ORACLE_REF ?= c9419dd87a36a901c602460432e9731203211e1d
+# 0558bd00b88 = oracle/fpin-1125: c9419dd87a (foretell, Riot, Done pick, Mobilize, forced remove-counter; above) merged with
+# c332e2b33f5 (the unpinned simultaneous zone order, xproof cluster xpt-34c28f9c): Sorin, Lord of Innistrad's -6 Destroy
+# moves p1's Crimson Kobolds and Tibalt, the Fiend-Blooded to the graveyard, then a ChangeZoneAll returns them in the SAME
+# resolution. They are in neither checkpoint, so forge_order.go derives no graveyard_order pin, and Forge asks "order to
+# Graveyard" (and the return asks "order to Battlefield"). StepMachine.orderCards keeps Forge's offered order for an
+# unpinned ask at exactly those two destinations; every other zone (library arrange/dig, exile, hand, command, stack,
+# sideboard) still strict-misses, and a visible graveyard arrival still consumes its pin, so a real ordering difference on
+# a move a checkpoint can see is still caught. OrderCardsTest's unpinnedGraveyardOrderKeepsForgeOrder,
+# unpinnedBattlefieldOrderKeepsForgeOrder, unpinnedOtherZoneStillLooseMisses and pinnedGraveyardOrderStillApplies cover
+# both halves; scripts/forge-oracle-test-graveyard-transit-order.sh (make forge-driver-tests) runs them. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-transit-graveyard-order.
+FORGE_ORACLE_REF ?= 0558bd00b880cc1919d5b130ba16937f06210181
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
