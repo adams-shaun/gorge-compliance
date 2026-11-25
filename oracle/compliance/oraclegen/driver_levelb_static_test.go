@@ -12,19 +12,20 @@ import (
 // in the file. The two-argument overload is a one-line delegate to the body
 // that carries the holderAfterStep parameter, so read the latter: the search
 // matches the overload up to holderAfterStep, whatever parameters follow it, and
-// the shorter signature would inspect only the delegate.
+// the shorter signature would inspect only the delegate. The body is
+// brace-matched from that signature, since its nested blocks close at the
+// method's own indent and a first-closing-brace cut would end it early.
 func snapshotBody(t *testing.T, java string) string {
 	t.Helper()
 	i := strings.Index(java, "private JsonObject snapshot(String checkpoint, Game g, UUID holderAfterStep")
 	if i < 0 {
 		t.Fatal("ScenarioReplay.java has no snapshot implementation")
 	}
-	rest := java[i:]
-	j := strings.Index(rest, "\n    }\n")
-	if j < 0 {
-		t.Fatal("snapshot method has no closing brace")
+	snap := braceBlock(java[i:])
+	if !strings.Contains(snap, "holderAfterStep") {
+		t.Fatal("snapshot extraction returned the delegate, not the implementation body")
 	}
-	return rest[:j]
+	return snap
 }
 
 // TestDriverSnapshotEmitsPermanentKeywords pins L12: the XMage snapshot adds a

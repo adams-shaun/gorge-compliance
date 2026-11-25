@@ -54,6 +54,29 @@ func TestDriverActivateCasePinsXMageAbility(t *testing.T) {
 	}
 }
 
+// braceBlock returns the text of the first brace-delimited block in rest,
+// from its opening { through the matching closing }, counting brace depth so
+// nested blocks are included. When rest has no {, it returns rest unchanged.
+func braceBlock(rest string) string {
+	open := strings.IndexByte(rest, '{')
+	if open < 0 {
+		return rest
+	}
+	depth := 0
+	for j := open; j < len(rest); j++ {
+		switch rest[j] {
+		case '{':
+			depth++
+		case '}':
+			depth--
+			if depth == 0 {
+				return rest[:j+1]
+			}
+		}
+	}
+	return rest
+}
+
 // caseBody returns the source of a step-switch `case "name":` from its
 // label through the matching closing brace. It scans brace depth so the
 // case's own blocks (an if, a nested lambda) are included and the next case
@@ -64,24 +87,7 @@ func caseBody(java, name string) (string, bool) {
 	if i < 0 {
 		return "", false
 	}
-	rest := java[i:]
-	open := strings.IndexByte(rest, '{')
-	if open < 0 {
-		return rest, true
-	}
-	depth := 0
-	for j := open; j < len(rest); j++ {
-		switch rest[j] {
-		case '{':
-			depth++
-		case '}':
-			depth--
-			if depth == 0 {
-				return rest[:j+1], true
-			}
-		}
-	}
-	return rest, true
+	return braceBlock(java[i:]), true
 }
 
 // TestDriverStepSwitchCoversLevelBActivateOps builds the activate items for
