@@ -38,10 +38,10 @@ FORGE_ORACLE_DIR=$forge FORGE_ORACLE_JDK=$jdk \
 
 # TestNG can exit zero with no executed test (a pin that predates or renames
 # the class): assert each named test passed, not just the exit status.
-for t in noLegalNewTargetKeepsTheTargetWithoutAMiss; do
+for t in noLegalNewTargetKeepsTheTargetWithoutAMiss legalNewTargetWithNoGorgeDecisionIsStillAMiss; do
   grep -qx "PASS ChangeTargetsNoCandidateTest.$t" "$log" || fail "ChangeTargetsNoCandidateTest.$t did not pass; the pinned driver is missing the mandatory ChangeTargets retarget fix"
 done
-want=1
+want=2
 passes=$(grep -c '^PASS ChangeTargetsNoCandidateTest\.' "$log" || true)
 [ "$passes" -eq "$want" ] || fail "ChangeTargetsNoCandidateTest passed $passes tests, want $want"
 grep -q "Total tests run: $want, Passes: $want, Failures: 0" "$log" || fail "TestNG summary is not $want run / $want passes / 0 failures"
