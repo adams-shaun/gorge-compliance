@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7f61a2a6-2fe2-48ec-8e2e-74d147be0a0a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:risk-factor:cast:s1	-	-	-	d864b561c9cb	-	fab0f5ef1658	-	-	2026-11-24	xproof
 7f6505a1-ab8b-468b-a5de-33451598b464	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f65178e-dd2e-44aa-a68f-f8694e0b250a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quest-for-the-nihil-stone:f0t1:s1,f:xs:XP:quest-for-the-nihil-stone:f0t1:s1	-	-	-	3aa6ded33acb	-	e66c31b5fef3	-	-	2026-11-25	xproof
-7f65178e-dd2e-44aa-a68f-f8694e0b250a	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+7f65178e-dd2e-44aa-a68f-f8694e0b250a	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7f65178e-dd2e-44aa-a68f-f8694e0b250a	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:quest-for-the-nihil-stone:f0t1:s1,f:xs:XP:quest-for-the-nihil-stone:f0t1:s1	-	-	-	3aa6ded33acb	-	e66c31b5fef3	-	-	2026-11-25	xproof
 7f67b8e0-fbbd-48ef-989d-690d44b70304	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7f67b8e0-fbbd-48ef-989d-690d44b70304	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fa5237e-dd79-4646-b935-cb8c6ee803ab	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mister-fantastic-reed-richards:combat0.block:s1,f:xs:XP:mister-fantastic-reed-richards:combat0.block:s1	-	-	-	23c4009444b0	-	2ec205bfe9e0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7fa5237e-dd79-4646-b935-cb8c6ee803ab	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mister Fantastic, Reed Richards/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7fab8d65-af51-47d3-8f10-2676bf6e8ba3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7fab8d65-af51-47d3-8f10-2676bf6e8ba3	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+7fab8d65-af51-47d3-8f10-2676bf6e8ba3	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7fab8d65-af51-47d3-8f10-2676bf6e8ba3	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fb6f960-38f6-45fa-bfec-d43fc174daa7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:font-of-fertility:cast:s1,f:xs:XP:font-of-fertility:cast:s1	-	-	-	d864b561c9cb	-	52d748c5d77b	-	-	2026-11-24	xproof
 7fb6f960-38f6-45fa-bfec-d43fc174daa7	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:font-of-fertility:f0a0:s1,f:xs:XP:font-of-fertility:f0a0:s1	-	-	-	d864b561c9cb	-	52d748c5d77b	-	-	2026-11-24	xproof
@@ -147,7 +147,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fd2beb8-f823-4723-beec-e59b62127490	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Magda, the Hoardmaster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7fd2cac5-cd29-4a47-9e89-9c6be39a0b67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plan-for-all-outcomes:f0t0:s1,f:xs:XP:plan-for-all-outcomes:f0t0:s1	-	-	-	25696bf19d5b	-	e980fbc20b72	-	-	2026-11-24	xproof
 7fd2cac5-cd29-4a47-9e89-9c6be39a0b67	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:plan-for-all-outcomes:f0t0:s1,f:xs:XP:plan-for-all-outcomes:f0t0:s1	-	-	-	25696bf19d5b	-	e980fbc20b72	-	-	2026-11-24	xproof
-7fd2cac5-cd29-4a47-9e89-9c6be39a0b67	f0/t1	SpellCast	agreed	-	F	start	2	0	f:xs:XP:plan-for-all-outcomes:f0t1:s1	-	-	-	fb9d3088f0bf	-	e980fbc20b72	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+7fd2cac5-cd29-4a47-9e89-9c6be39a0b67	f0/t1	SpellCast	agreed	-	F	start	2	0	f:xs:XP:plan-for-all-outcomes:f0t1:s1	-	-	-	fb9d3088f0bf	-	e980fbc20b72	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7fd4c452-07f2-492c-9c78-d1c6362d9eec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fd4c452-07f2-492c-9c78-d1c6362d9eec	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-elder:f0a0:s1,f:xs:XP:yavimaya-elder:f0a0:s1	-	-	-	d864b561c9cb	-	a196b2a5a448	-	-	2026-11-24	xproof
 7fd4c452-07f2-492c-9c78-d1c6362d9eec	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:yavimaya-elder:f0a0:s1,f:xs:XP:yavimaya-elder:f0a0:s1	-	-	-	d864b561c9cb	-	a196b2a5a448	-	-	2026-11-24	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7fd7d20d-d44c-443c-a2cf-320f39a3bec4	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 7fd7d20d-d44c-443c-a2cf-320f39a3bec4	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fdd471f-ec95-4aa7-8f8a-ad8946de5ab4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Meticulous Commons/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7fdd471f-ec95-4aa7-8f8a-ad8946de5ab4	land	land	agreed	-	FX	start	2	0	x:xs:XP:meticulous-commons:land:s1,f:xs:XP:meticulous-commons:land:s1	-	-	-	fb9d3088f0bf	-	aa41b55f0a79	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+7fdd471f-ec95-4aa7-8f8a-ad8946de5ab4	land	land	agreed	-	FX	start	2	0	x:xs:XP:meticulous-commons:land:s1,f:xs:XP:meticulous-commons:land:s1	-	-	-	fb9d3088f0bf	-	aa41b55f0a79	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 7fe21ade-01f1-45ff-9b70-bc6302c3d284	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7fe361ef-a168-4847-92a2-21c1661aac06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thieves-tools:f0t0:s1,f:xs:XP:thieves-tools:f0t0:s1	-	-	-	d864b561c9cb	-	5a96b0113dee	-	-	2026-11-24	xproof
 7fe361ef-a168-4847-92a2-21c1661aac06	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 053dff47-25df-424b-8328-3ee00739b4fd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:grey-host-reinforcements:f0t0:s1,f:xs:XP:grey-host-reinforcements:f0t0:s1	-	-	-	8c0bd19283bb	-	89da59b10354	-	-	2026-11-24	xproof
 053dff47-25df-424b-8328-3ee00739b4fd	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 0540eaca-0e03-4831-955a-192ae2b87d35	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lich-s-relic:f0t0:s1,f:xs:XP:lich-s-relic:f0t0:s1	-	-	-	25696bf19d5b	-	da467f17df1e	-	-	2026-11-24	xproof
-0540eaca-0e03-4831-955a-192ae2b87d35	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:lich-s-relic:f0a0:s1,f:xs:XP:lich-s-relic:f0a0:s1	-	-	-	fb9d3088f0bf	-	da467f17df1e	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+0540eaca-0e03-4831-955a-192ae2b87d35	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:lich-s-relic:f0a0:s1,f:xs:XP:lich-s-relic:f0a0:s1	-	-	-	fb9d3088f0bf	-	da467f17df1e	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0540eaca-0e03-4831-955a-192ae2b87d35	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:lich-s-relic:f0t0:s1,f:xs:XP:lich-s-relic:f0t0:s1	-	-	-	25696bf19d5b	-	da467f17df1e	-	-	2026-11-24	xproof
 0540eaca-0e03-4831-955a-192ae2b87d35	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lich's Relic/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 05425f2f-7228-4bf5-8fe1-6fe99107e8e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05501e88-d4c3-4474-92a9-c02ab15b107b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 05551d91-50c6-46d1-86a4-cd3d177d0923	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anim-pakal-thousandth-moon:cast:s1,f:xs:XP:anim-pakal-thousandth-moon:cast:s1	-	-	-	23b491658465	-	d92310c48666	-	-	2026-11-24	xproof
 05551d91-50c6-46d1-86a4-cd3d177d0923	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:anim-pakal-thousandth-moon:f0t0:s1,f:xs:XP:anim-pakal-thousandth-moon:f0t0:s1	-	-	-	3aa6ded33acb	-	d92310c48666	-	-	2026-11-25	xproof
-05608055-d97a-4c8f-833d-47b3dd1ea255	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-05608055-d97a-4c8f-833d-47b3dd1ea255	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+05608055-d97a-4c8f-833d-47b3dd1ea255	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+05608055-d97a-4c8f-833d-47b3dd1ea255	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof

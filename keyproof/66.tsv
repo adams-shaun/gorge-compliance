@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 667c39bc-92d6-4fee-bced-95f0e1f21455	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 667c5676-7a18-4fa9-b965-b26797538e23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 667c5676-7a18-4fa9-b965-b26797538e23	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-667cffdd-8951-4223-8895-fa46e9f14b96	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+667cffdd-8951-4223-8895-fa46e9f14b96	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 667dae0b-5006-4e38-be80-eae79c2a2a95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 667dae0b-5006-4e38-be80-eae79c2a2a95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 667ece0e-a474-4e11-8ac4-6c8fc354457c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:demonlord-belzenlok:cast:s1,f:xs:XP:demonlord-belzenlok:cast:s1	-	-	-	d864b561c9cb	-	f28ea4ade8bc	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66c227f2-0e74-43e2-ab24-3866d15c5eef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:cast:s1,f:xs:XP:gateway-sneak:cast:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
 66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gateway Sneak/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:f0t1:s1,f:xs:XP:gateway-sneak:f0t1:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
-66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summon-titan:cast:s1,f:xs:XP:summon-titan:cast:s1	-	-	-	23c4009444b0	-	12cd7b1f69ee	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Summon: Titan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66ce0c60-f406-4ece-915f-675da4e8b16d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Summon: Titan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

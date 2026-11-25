@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c14ecbf-0097-4fd8-97a3-a32b532c21e0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:earsplitting-rats:cast:s1,f:xs:XP:earsplitting-rats:cast:s1	-	-	-	fc71ca68c5ac	-	596ea4411f71	-	-	2026-11-24	xproof
 6c14ecbf-0097-4fd8-97a3-a32b532c21e0	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 6c14ecbf-0097-4fd8-97a3-a32b532c21e0	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:earsplitting-rats:cast:s1,f:xs:XP:earsplitting-rats:cast:s1	-	-	-	fc71ca68c5ac	-	596ea4411f71	-	-	2026-11-24	xproof
-6c18f853-684b-42f6-8bc6-e86596131ab1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guidance-failure:cast:s1,f:xs:XP:guidance-failure:cast:s1	-	-	-	fb9d3088f0bf	-	19728b861d89	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+6c18f853-684b-42f6-8bc6-e86596131ab1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guidance-failure:cast:s1,f:xs:XP:guidance-failure:cast:s1	-	-	-	fb9d3088f0bf	-	19728b861d89	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 6c1d22d4-f28e-4041-a9b6-1575e8929b61	cast	cast-resolve	agreed	-	FX	scen	2	0	Nexus of Fate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 6c270e6a-12a7-4323-87ba-6d770986fb48	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 6c29add6-8524-4a33-9f2e-f792032dd6cd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -68,7 +68,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c5d8599-75ca-4479-a02b-1b257b7aea57	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:hazoret-godseeker:f0a0:s1,f:xs:XP:hazoret-godseeker:f0a0:s1	-	-	-	23c4009444b0	-	26ccaf95caa4	-	-	2026-11-25	xproof
 6c5d8599-75ca-4479-a02b-1b257b7aea57	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hazoret, Godseeker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c5d8599-75ca-4479-a02b-1b257b7aea57	static#0.1	static#0.1	agreed	-	X	scen	1	0	Hazoret, Godseeker/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6c5ed756-b999-49f7-9a52-fb8196202f0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:theoretical-necromancer:cast:s1,f:xs:XP:theoretical-necromancer:cast:s1	-	-	-	fb9d3088f0bf	-	e5f14b55c625	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+6c5ed756-b999-49f7-9a52-fb8196202f0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:theoretical-necromancer:cast:s1,f:xs:XP:theoretical-necromancer:cast:s1	-	-	-	fb9d3088f0bf	-	e5f14b55c625	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 6c5ed756-b999-49f7-9a52-fb8196202f0f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Theoretical Necromancer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c728edd-ab67-44ce-b19d-aa98dfce68bb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c728edd-ab67-44ce-b19d-aa98dfce68bb	f0/a0	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:katilda-dawnhart-prime:f0a0:s1,f:xs:XP:katilda-dawnhart-prime:f0a0:s1	-	-	-	d864b561c9cb	-	d618dda9875a	-	-	2026-11-24	xproof
@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6cac6f76-f3c6-4b00-a468-166b07853401	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cac6f76-f3c6-4b00-a468-166b07853401	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cae42b6-8b09-4188-8e79-203eebc77585	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:krovikan-mist:cast:s1,f:xs:XP:krovikan-mist:cast:s1	-	-	-	0984227a67dd	-	4d449b5d116f	-	-	2026-11-24	xproof
-6cb1c3fb-033a-4de5-ad07-69d9ad0ca5ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:test-of-loyalty:cast:s1,f:xs:XP:test-of-loyalty:cast:s1	-	-	-	fb9d3088f0bf	-	f6dfa3e7b75d	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+6cb1c3fb-033a-4de5-ad07-69d9ad0ca5ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:test-of-loyalty:cast:s1,f:xs:XP:test-of-loyalty:cast:s1	-	-	-	fb9d3088f0bf	-	f6dfa3e7b75d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 6cb37ac1-dd11-4a8c-bca5-ef44d828059f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cb37ac1-dd11-4a8c-bca5-ef44d828059f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6cb65b68-91b2-45ba-867b-3b31d6dd5643	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guerrilla-gorilla:cast:s1,f:xs:XP:guerrilla-gorilla:cast:s1	-	-	-	fb9d3088f0bf	-	7f7aa0c0e58c	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof

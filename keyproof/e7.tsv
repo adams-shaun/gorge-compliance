@@ -1,10 +1,10 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-e705b055-14b3-4de0-b4a7-39626839dea8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ghost-of-illyria:cast:s1	-	-	-	fb9d3088f0bf	-	cbf7e9415269	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
-e705b055-14b3-4de0-b4a7-39626839dea8	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:ghost-of-illyria:cast:s1	-	-	-	fb9d3088f0bf	-	cbf7e9415269	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+e705b055-14b3-4de0-b4a7-39626839dea8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-of-illyria:cast:s1,f:xs:XP:ghost-of-illyria:cast:s1	-	-	-	fb9d3088f0bf	-	cbf7e9415269	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
+e705b055-14b3-4de0-b4a7-39626839dea8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ghost-of-illyria:cast:s1,f:xs:XP:ghost-of-illyria:cast:s1	-	-	-	fb9d3088f0bf	-	cbf7e9415269	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 e7079969-8d88-4f18-a872-2661bed6ff74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:noble-templar:cast:s1,f:xs:XP:noble-templar:cast:s1	-	-	-	8c0bd19283bb	-	aedd02a648b0	-	-	2026-11-24	xproof
 e7079969-8d88-4f18-a872-2661bed6ff74	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e70bb7f8-8098-49c5-929c-68f63cd821c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-salt-and-sand:cast:s1,f:xs:XP:kiora-of-salt-and-sand:cast:s1	-	-	-	fb9d3088f0bf	-	2c30e35c2b7d	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+e70bb7f8-8098-49c5-929c-68f63cd821c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-salt-and-sand:cast:s1,f:xs:XP:kiora-of-salt-and-sand:cast:s1	-	-	-	fb9d3088f0bf	-	2c30e35c2b7d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 e70bb7f8-8098-49c5-929c-68f63cd821c5	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:kiora-of-salt-and-sand:f0t0:s1,f:xs:XP:kiora-of-salt-and-sand:f0t0:s1	-	-	-	23c4009444b0	-	2c30e35c2b7d	-	-	2026-11-25	xproof
 e70bb7f8-8098-49c5-929c-68f63cd821c5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Kiora of Salt and Sand/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e70f5520-1b9c-4351-8484-30f0dc692e01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ e7cd87d4-028c-49d9-9416-69f57e7dfec5	combat#0.attack	combat.attack	agreed	-	FX	s
 e7cd87d4-028c-49d9-9416-69f57e7dfec5	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:koya-death-from-above:combat0.block:s1,f:xs:XP:koya-death-from-above:combat0.block:s1	-	-	-	23c4009444b0	-	10878ed5cb29	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e7cd87d4-028c-49d9-9416-69f57e7dfec5	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:koya-death-from-above:cast:s2	-	-	-	5437c1394672	-	10878ed5cb29	-	-	2026-11-24	xproof
 e7d1c762-69d0-401d-8035-6e9744baf9d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e7d22ef6-a926-4964-bfd6-f7345b20e74e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suus-mahna-practitioner:cast:s1,f:xs:XP:suus-mahna-practitioner:cast:s1	-	-	-	fb9d3088f0bf	-	2d8410a1d321	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+e7d22ef6-a926-4964-bfd6-f7345b20e74e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suus-mahna-practitioner:cast:s1,f:xs:XP:suus-mahna-practitioner:cast:s1	-	-	-	fb9d3088f0bf	-	2d8410a1d321	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 e7d22ef6-a926-4964-bfd6-f7345b20e74e	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:suus-mahna-practitioner:f0a0:s1,f:xs:XP:suus-mahna-practitioner:f0a0:s1	-	-	-	23c4009444b0	-	2d8410a1d321	-	-	2026-11-25	xproof
 e7d4e952-d7b9-489d-a9a7-c61d08bf17cc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fuel-the-flames:cast:s1,f:xs:XP:fuel-the-flames:cast:s1	-	-	-	23c4009444b0	-	6b476bf599a4	-	-	2026-11-25	xproof
 e7d4e952-d7b9-489d-a9a7-c61d08bf17cc	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:fuel-the-flames:f0a1:s1,f:xs:XP:fuel-the-flames:f0a1:s1	-	-	-	23c4009444b0	-	6b476bf599a4	-	-	2026-11-25	xproof

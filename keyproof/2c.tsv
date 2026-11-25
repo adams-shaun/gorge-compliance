@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c275a85-5a15-46cd-a6e7-add63f9b853d	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:sterling-grove:f0a0:s1,f:xs:XP:sterling-grove:f0a0:s1	-	-	-	d864b561c9cb	-	662dd5e90f27	-	-	2026-11-24	xproof
 2c2ef1ed-2f93-48c5-bf86-e46318599aeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mechan-assembler:cast:s1,f:xs:XP:mechan-assembler:cast:s1	-	-	-	23c4009444b0	-	c7ae9a16ecb9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c2ef1ed-2f93-48c5-bf86-e46318599aeb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mechan-assembler:f0t0:s1,f:xs:XP:mechan-assembler:f0t0:s1	-	-	-	23c4009444b0	-	c7ae9a16ecb9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-2c2fdeff-a0c6-44cb-9603-4a9865f62985	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:planetary-bombardment:cast:s1,f:xs:XP:planetary-bombardment:cast:s1	-	-	-	fb9d3088f0bf	-	b2acb6614ff2	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+2c2fdeff-a0c6-44cb-9603-4a9865f62985	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:planetary-bombardment:cast:s1,f:xs:XP:planetary-bombardment:cast:s1	-	-	-	fb9d3088f0bf	-	b2acb6614ff2	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 2c378f72-917c-49d4-ba68-51ebaf18d976	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c38f4c7-1b3f-42b4-a175-edab7acd6cc6	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2c38f4c7-1b3f-42b4-a175-edab7acd6cc6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -201,7 +201,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:infernal-medusa:cast:s1,f:xs:XP:infernal-medusa:cast:s1	-	-	-	fc71ca68c5ac	-	d8779b806975	-	-	2026-11-24	xproof
 2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 2cf5ce1f-d5f6-44cd-96e5-87d990d7e770	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
-2cf79dd0-c9db-403e-969d-6c09e7aaa575	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-naked-time:cast:s1	-	-	-	fb9d3088f0bf	-	11754bd2d455	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
+2cf79dd0-c9db-403e-969d-6c09e7aaa575	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-naked-time:cast:s1	-	-	-	fb9d3088f0bf	-	11754bd2d455	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 2cfd5c18-47d0-4549-aacc-2428db21df2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cff1f9e-11a6-460c-8f5f-4c02424357e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2cff1f9e-11a6-460c-8f5f-4c02424357e3	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
