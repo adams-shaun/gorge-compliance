@@ -97,12 +97,14 @@ jobs:
       # develop, not by PR to develop, so the landing config's [[gates]] entry
       # is the primary check; this job covers the develop->main PR. gh reads
       # both public forks with the job token; fail closed if the API cannot
-      # answer.
+      # answer. `make precheck` is now the full test-smart gate and needs the
+      # .cards corpus (the test job fetches it), so this lint job calls the pin
+      # check it wants directly.
       - name: fork pins are pushed
         working-directory: gorge-compliance
         env:
           GH_TOKEN: ${{ github.token }}
-        run: make precheck
+        run: bash scripts/check-fork-pins.sh
 
   test:
     needs: pin
