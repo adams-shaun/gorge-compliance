@@ -7,20 +7,32 @@ import (
 	"testing"
 )
 
-// snapshotBody returns the text of ScenarioReplay.snapshot, so the assertions
-// below cannot be satisfied by a keywords mention elsewhere in the file.
+// snapshotBody returns the text of ScenarioReplay.snapshot's implementation,
+// so the assertions below cannot be satisfied by a keywords mention elsewhere
+// in the file. The driver has more than one snapshot overload (a two-argument
+// wrapper delegates to the one that takes the priority holder), so select the
+// body that builds the permanents array rather than the first signature.
 func snapshotBody(t *testing.T, java string) string {
 	t.Helper()
-	i := strings.Index(java, "private JsonObject snapshot(String checkpoint, Game g) {")
-	if i < 0 {
-		t.Fatal("ScenarioReplay.java has no snapshot method")
+	const sig = "private JsonObject snapshot(String checkpoint, Game g"
+	for i := 0; ; {
+		j := strings.Index(java[i:], sig)
+		if j < 0 {
+			break
+		}
+		j += i
+		rest := java[j:]
+		k := strings.Index(rest, "\n    }\n")
+		if k < 0 {
+			break
+		}
+		if body := rest[:k]; strings.Contains(body, `s.add("permanents", perms)`) {
+			return body
+		}
+		i = j + len(sig)
 	}
-	rest := java[i:]
-	j := strings.Index(rest, "\n    }\n")
-	if j < 0 {
-		t.Fatal("snapshot method has no closing brace")
-	}
-	return rest[:j]
+	t.Fatal("ScenarioReplay.java has no snapshot method that builds permanents")
+	return ""
 }
 
 // TestDriverSnapshotEmitsPermanentKeywords pins L12: the XMage snapshot adds a

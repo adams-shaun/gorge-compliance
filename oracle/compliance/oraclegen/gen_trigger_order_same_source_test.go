@@ -57,6 +57,39 @@ func TestTriggerOrderDuplicatedSourceUsesNames(t *testing.T) {
 	}
 }
 
+// TestTriggerOrderIdenticalTextOnDistinctObjectsKeepsTextForm pins the other
+// side of the interchangeable-group rule: Bartz and Boko plus three distinct
+// Lifecreed Duo objects share one rule text, so a rule-text key would match
+// the first object for every pick and XMage would order the stack itself. The
+// keys cannot tell the picks apart (xmageTriggerOrderKeys returns ok=false),
+// so the span keeps the inert verbatim text form, one answer per pick. The
+// FIN level-B verdict pins the replayed result; this pins the routing.
+func TestTriggerOrderIdenticalTextOnDistinctObjectsKeepsTextForm(t *testing.T) {
+	life := "Whenever another creature you control enters, you gain 1 life."
+	bartz := "When CARDNAME enters, each other Bird you control deals damage equal to its power to target creature an opponent controls."
+	d := rules.OracleDecision{Step: 1, Seat: 0, Kind: "order", GorgeKind: "trigger_order",
+		Options: 4, Min: 4, Max: 4, PickIdx: []int{0, 1, 2, 3}, PickKinds: []string{"trigger", "trigger", "trigger", "trigger"},
+		Picks: []string{
+			"Lifecreed Duo: " + life, "Lifecreed Duo: " + life, "Lifecreed Duo: " + life,
+			"Bartz and Boko: " + bartz,
+		},
+		PickRefs: []string{"p0:Lifecreed Duo", "p0:Lifecreed Duo#2", "p0:Lifecreed Duo#3", "p0:Bartz and Boko"}}
+	if triggerOrderNamesDistinct(d) {
+		t.Fatalf("precondition: %v still names the repeated source", d.PickRefs)
+	}
+	if keys, ok := xmageTriggerOrderKeys(d); ok {
+		t.Fatalf("precondition: identical text on distinct refs keyed as %q", keys)
+	}
+	got := XAnswers([]rules.OracleDecision{d}, 2, nil)
+	want := [][]XAnswer{
+		nil,
+		{{0, "choice", life}, {0, "choice", life}, {0, "choice", life}, {0, "choice", bartz}},
+	}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("XAnswers = %#v, want %#v (unkeyable repeats keep the verbatim text form)", got, want)
+	}
+}
+
 // TestTriggerOrderDistinctSourceNamesSource is the sibling precondition: the
 // same decision with DISTINCT sources still names each source (the Adrenaline
 // Jockey fix). The two decisions differ only in PickRefs, so a regression that

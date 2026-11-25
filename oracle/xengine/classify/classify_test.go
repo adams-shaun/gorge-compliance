@@ -654,6 +654,20 @@ func TestClassifyXMageSameNameTriggerOrder(t *testing.T) {
 	if f := Classify(item, nil, g, diffAt(2), "xmage"); f.Class != ClassHarness || !strings.Contains(f.Msg, "Soul-Scar Mage") {
 		t.Errorf("a repeated ref with different abilities is still harness: %+v", f)
 	}
+	// The recorded decision is only evidence for the pick it records: a ref
+	// spelling or step that differs from the lowered answer must not license
+	// the interchangeable exception, or a retiming change would silently turn
+	// a real ambiguity into a compared order.
+	g.Decisions[0].Picks = []string{"Harmonic Prodigy: Prowess", "Soul-Scar Mage: Prowess", "Soul-Scar Mage: Prowess"}
+	g.Decisions[0].PickRefs = []string{"p0:Harmonic Prodigy", "p0:Soul-Scar Mage", "p0:Soul-Scar Mage#2"}
+	if f := Classify(item, nil, g, diffAt(2), "xmage"); f.Class != ClassHarness || !strings.Contains(f.Msg, "Soul-Scar Mage") {
+		t.Errorf("a decision for different refs cannot show interchangeability: %+v", f)
+	}
+	g.Decisions[0].PickRefs = interchangeable
+	g.Decisions[0].Step = 2
+	if f := Classify(item, nil, g, diffAt(2), "xmage"); f.Class != ClassHarness || !strings.Contains(f.Msg, "Soul-Scar Mage") {
+		t.Errorf("a decision for a different step cannot show interchangeability: %+v", f)
+	}
 }
 
 // TestSameNameTriggerOrderForge: a trigger_order pick that names one ref twice
