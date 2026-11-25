@@ -21,11 +21,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 831487cf-a377-4c9b-920d-c5bc68f17f24	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	421400546c4b	-	-	2026-11-25	xproof
 83157972-3a0b-40e2-a80a-7bfb2a8627ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:raving-visionary:f0a1:s1,f:xs:XP:raving-visionary:f0a1:s1	-	-	-	23b491658465	-	e55bcefe3305	-	-	2026-11-25	xproof
-83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+83157972-3a0b-40e2-a80a-7bfb2a8627ee	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8315aa34-08b8-403e-a2e6-796a2d6978ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stern-lesson:cast:s1,f:xs:XP:stern-lesson:cast:s1	-	-	-	ae86f6029288	-	ec208267fe06	-	-	2026-11-24	xproof
 83161d59-2520-4741-9328-e2a4a8b5d5bc	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Evendo, Waking Haven/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83161d59-2520-4741-9328-e2a4a8b5d5bc	land	play-land	agreed	-	FX	scen	2	0	Evendo, Waking Haven/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83161d59-2520-4741-9328-e2a4a8b5d5bc	static#0.0	static.continuous	diverged	-	-	start	1	1	-	855e24e4a025	-	-	054d9f516953	-	e68a40800c57	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+83161d59-2520-4741-9328-e2a4a8b5d5bc	static#0.0	static.continuous	diverged	-	-	start	0	2	-	855e24e4a025	-	-	9087eefec3ee	-	e68a40800c57	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 831b7dad-ab5a-4980-a52d-65c5633d474a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 831b7dad-ab5a-4980-a52d-65c5633d474a	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:infernal-pet:f0t0:s1,f:xs:XP:infernal-pet:f0t0:s1	-	-	-	6f84be0f34c0	-	d7ac90c5e2d8	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 831bb507-aaf0-4e6a-98d9-f010f96aff96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -101,7 +101,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 837c5d0e-0a33-4f9d-ae25-68a687bdf640	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:chrome-host-seedshark:f0t0:s1,f:xs:XP:chrome-host-seedshark:f0t0:s1	-	-	-	23c4009444b0	-	9c8b58130886	-	-	2026-11-25	xproof
 837f72a9-9522-46e9-a48c-c6ff6d0bbe67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sultai-scavenger:cast:s1,f:xs:XP:sultai-scavenger:cast:s1	-	-	-	fb9d3088f0bf	-	c9fe5f5589d3	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 8381b04a-666b-4e33-b277-6db39fdfe905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8381b04a-666b-4e33-b277-6db39fdfe905	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+8381b04a-666b-4e33-b277-6db39fdfe905	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 83837ceb-7aae-4257-8545-a6cf34656e3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:votary-of-the-conclave:cast:s1,f:xs:XP:votary-of-the-conclave:cast:s1	-	-	-	77494c1ce129	-	2c2c748b6fb4	-	-	2026-11-24	xproof
 83837ceb-7aae-4257-8545-a6cf34656e3b	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:votary-of-the-conclave:f0a0:s1,f:xs:XP:votary-of-the-conclave:f0a0:s1	-	-	-	23c4009444b0	-	2c2c748b6fb4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83856c3a-652e-4afc-9dc0-0072324ac36f	cast	cast-resolve	agreed	-	FX	scen	2	0	Sanctuary Wall/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
