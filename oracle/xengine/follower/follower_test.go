@@ -3,7 +3,9 @@ package follower
 import (
 	"os"
 	"path/filepath"
+	"regexp"
 	"slices"
+	"sort"
 	"testing"
 )
 
@@ -118,6 +120,7 @@ func TestPreH1Behaviour(t *testing.T) {
 	}
 	want := []string{"", "optionalcost",
 		"plot", "suspend", "adventure_alt", "omen_alt", "modal_spell", "warped",
+		"mayplay", "alternative",
 		"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined",
 		"offspring", "replicated", "multikicked"}
 	if !slices.Equal(f.CastModes, want) {
@@ -236,11 +239,57 @@ func TestFollowsCastMode(t *testing.T) {
 			t.Errorf("xmage does not follow %q; a nil CastModes follows every mode", m)
 		}
 	}
-	for m, want := range map[string]bool{"": true, "kicked": true, "plot": true, "suspend": true, "foretell": false, "flashback": false} {
+	for m, want := range map[string]bool{"": true, "kicked": true, "plot": true, "suspend": true, "mayplay": true, "alternative": true, "foretell": false, "flashback": false} {
 		if got := f.FollowsCastMode(m); got != want {
 			t.Errorf("forge FollowsCastMode(%q) = %v, want %v", m, got, want)
 		}
 	}
+	// The registry is kept by hand beside the driver, so a mode the driver
+	// grew can stay missing from it (mayplay and alternative did). Every
+	// mode a Forge driver regression script exercises must be one the
+	// registry follows: a script is the repo's evidence that the driver now
+	// acts on that mode, so the next mode cannot land without this test
+	// naming it.
+	for _, m := range forgeScriptCastModes(t, filepath.Join("..", "..", "..", "scripts")) {
+		if !f.FollowsCastMode(m) {
+			t.Errorf("a Forge driver script exercises cast_mode %q but the registry does not follow it", m)
+		}
+	}
+}
+
+// forgeScriptCastModes returns the cast_mode values the Forge driver
+// regression scripts (scripts/forge-oracle-test-*.sh) name, sorted. The
+// scripts spell a mode as `cast_mode "x"`, `cast_mode x` or JSON's
+// `cast_mode":"x"`.
+func forgeScriptCastModes(t *testing.T, dir string) []string {
+	t.Helper()
+	files, err := filepath.Glob(filepath.Join(dir, "forge-oracle-test-*.sh"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(files) == 0 {
+		t.Fatalf("no Forge driver scripts under %s", dir)
+	}
+	re := regexp.MustCompile(`cast_mode[ \t"':]+([a-z][a-z0-9_]*)`)
+	seen := map[string]bool{}
+	var modes []string
+	for _, path := range files {
+		b, err := os.ReadFile(path)
+		if err != nil {
+			t.Fatal(err)
+		}
+		for _, m := range re.FindAllStringSubmatch(string(b), -1) {
+			if !seen[m[1]] {
+				seen[m[1]] = true
+				modes = append(modes, m[1])
+			}
+		}
+	}
+	if len(modes) == 0 {
+		t.Fatal("no cast_mode in the Forge driver scripts")
+	}
+	sort.Strings(modes)
+	return modes
 }
 
 // TestEnvNames pins the sweep's per-follower variables to the names

@@ -37,7 +37,7 @@ func TestDriverSnapshotEmitsPermanentKeywords(t *testing.T) {
 
 	// The property is added inside the per-permanent loop, not on the
 	// snapshot or a player.
-	loop := strings.Index(snap, "for (Permanent perm : g.getBattlefield().getAllPermanents())")
+	loop := strings.Index(snap, "for (Permanent perm : g.getBattlefield().getAllActivePermanents())")
 	kw := strings.Index(snap, `o.add("keywords"`)
 	end := strings.Index(snap, `s.add("permanents", perms)`)
 	if loop < 0 || end < 0 || kw < 0 || kw < loop || kw > end {

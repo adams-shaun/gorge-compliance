@@ -1334,6 +1334,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var searchZones map[int]searchZoneAsk
 	var forage map[int][]string
 	var ownBounce map[int]bool
+	var ownGraveyardExile map[int]bool
 	var tapThenUntap map[int]bool
 	var bolster map[int]bool
 	var craft map[int]bool
@@ -1344,6 +1345,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var allPlayerUnless map[int]bool
 	var seats int
 	var chooseUseOrders map[int][]XAnswer
+	var removeCounterCosts []removeCounterCostAsk
 	for _, ex := range extras {
 		if sources == nil {
 			sources = ex.sources
@@ -1359,6 +1361,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if ownBounce == nil {
 			ownBounce = ex.ownBounce
+		}
+		if ownGraveyardExile == nil {
+			ownGraveyardExile = ex.ownGraveyardExile
 		}
 		if tapThenUntap == nil {
 			tapThenUntap = ex.tapThenUntap
@@ -1395,6 +1400,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if searchZones == nil {
 			searchZones = ex.searchZones
+		}
+		if removeCounterCosts == nil {
+			removeCounterCosts = ex.removeCounterCosts
 		}
 	}
 	// A hand_move/library_placement goes top-first (reverse the answers for
@@ -1439,6 +1447,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	if ownBounce != nil {
 		routing.ownBounce = ownBounce
 	}
+	if ownGraveyardExile != nil {
+		routing.ownGraveyardExile = ownGraveyardExile
+	}
 	routing.tapThenUntap = tapThenUntap
 	if searchZones != nil {
 		routing.searchZones = searchZones
@@ -1453,6 +1464,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	// run into one "X=<n>" amount per kind message before the generic choice
 	// route scripts the raw kind labels (remove_counter_answers.go).
 	counterAnswers, counterOwned := foldRemoveCounterKindAnswers(ds, snaps)
+	// A "Remove a counter from {this}" activation cost is XMage's other
+	// multi-amount: RemoveCountersSourceCost always messages every counter kind
+	// on the source, even when gorge picked the lone kind unasked. Script the
+	// step's amount answers and own the counter-kind picks the engine recorded
+	// for that cost (remove_counter_answers.go).
+	costAnswers, costOwned := foldRemoveCounterCostAnswers(ds, snaps, removeCounterCosts)
+	costEmitted := map[int]bool{}
 	// Trigger-order name answers are demoted back to the inert text form when
 	// the step also scripts other asks (see the trigger_order case).
 	var trigSpans []*trigSpan
@@ -1568,6 +1586,16 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			// pick precedes it, so the runner records it Via "cast fallback").
 			// A copy's new-target election is never a cast step's targets even
 			// if it shares the step, so it is scripted below regardless.
+			continue
+		}
+		if costOwned[i] {
+			// Emit the cost's whole amount run once, at the position of its
+			// first counter-kind pick; the rest of the run is owned silently.
+			if as := costAnswers[d.Step]; len(as) > 0 && !costEmitted[d.Step] {
+				out[d.Step] = append(out[d.Step], as...)
+				costEmitted[d.Step] = true
+				any = true
+			}
 			continue
 		}
 		if counterOwned[i] {
@@ -2155,6 +2183,19 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				pendingTrig = nil
 			}
 			out[d.Step] = append(out[d.Step], as...)
+			any = true
+		}
+	}
+	// A cost ask on a source with a single counter kind poses no engine
+	// decision, so it has no loop position to ride: its amount messages follow
+	// the step's recorded answers (XMage chooses targets before it pays costs).
+	// Ascending step order keeps the output independent of map iteration.
+	for step := 0; step < steps; step++ {
+		if costEmitted[step] {
+			continue
+		}
+		if as := costAnswers[step]; len(as) > 0 {
+			out[step] = append(out[step], as...)
 			any = true
 		}
 	}
@@ -3099,13 +3140,69 @@ func bandAnswers(d rules.OracleDecision) ([]XAnswer, bool) {
 			ref = d.PickRefs[k]
 		}
 		if isScenarioRefShaped(ref) {
-			member := disambiguatedObjectChoice(d, k, oraclediffRefName(ref))
+			memberName := bandMemberLiveName(d, k)
+			if memberName == "" {
+				memberName = oraclediffRefName(ref)
+			}
+			// The label's member field is the object's live face by
+			// construction, so it names the pick even when it differs from
+			// the ref's setup name (a transformed DFC): the same-name alias
+			// and the owner-qualified ref must both stay available despite
+			// namesObject comparing against the setup name.
+			member := disambiguatedObjectChoiceNamed(d, k, memberName, true)
 			as = append(as, XAnswer{d.Seat, "choice", "yes"}, XAnswer{d.Seat, "choice", member})
 			continue
 		}
 		as = append(as, XAnswer{d.Seat, "choice", "no"})
 	}
 	return as, true
+}
+
+// bandMemberLiveName returns the accepted member's LIVE name from pick k's
+// label "Band <member> with <leader>", or "" when the label has another shape.
+// The pick's ref keeps the object's setup identity -- a transform DFC's front
+// face -- while the label is built from the object's current face
+// (rules/banding.go askNextBand, CR 712.8). Answering the ref's front name
+// selects nothing once the DFC has transformed (Kessig Prowler // Sinuous
+// Predator: "Band Sinuous Predator with Timber Wolves" over ref
+// p0:Kessig Prowler). The leader's live name comes from option 0's decline
+// label ("No more creatures in <leader>'s band"), so a " with " inside either
+// card name cannot split the member wrongly. Without that label (a synthetic
+// decision) a single " with " is the separator; two or more may belong to the
+// leader's own name ("Dance with Devils"), so the fallback fails closed to "".
+func bandMemberLiveName(d rules.OracleDecision, k int) string {
+	if k < 0 || k >= len(d.Picks) {
+		return ""
+	}
+	member, ok := strings.CutPrefix(d.Picks[k], "Band ")
+	if !ok || member == "" {
+		return ""
+	}
+	if leader := bandLeaderLiveName(d.First); leader != "" {
+		if name, ok := strings.CutSuffix(member, " with "+leader); ok && name != "" {
+			return name
+		}
+	}
+	if strings.Count(member, " with ") == 1 {
+		if i := strings.Index(member, " with "); i > 0 {
+			return member[:i]
+		}
+	}
+	return ""
+}
+
+// bandLeaderLiveName extracts <leader> from a band ask's decline label.
+func bandLeaderLiveName(decline string) string {
+	const prefix, suffix = "No more creatures in ", "'s band"
+	leader, ok := strings.CutPrefix(decline, prefix)
+	if !ok {
+		return ""
+	}
+	leader, ok = strings.CutSuffix(leader, suffix)
+	if !ok {
+		return ""
+	}
+	return leader
 }
 
 // loneTriggerCostDecline is a triggered-cost ask offered with only its
@@ -3946,11 +4043,23 @@ func JoinedChoice(d rules.OracleDecision) string {
 // owner still separates them, else the label with the copy marker appended (no
 // space before the bracket).
 func disambiguatedObjectChoice(d rules.OracleDecision, k int, label string) string {
+	nameIsObject := k < len(d.PickRefs) && namesObject(label, d.PickRefs[k])
+	return disambiguatedObjectChoiceNamed(d, k, label, nameIsObject)
+}
+
+// disambiguatedObjectChoiceNamed is disambiguatedObjectChoice with the
+// object-name test supplied by the caller. A band pick's label spells the
+// member's LIVE face (CR 712.8), so a transformed DFC's name no longer equals
+// oraclediffRefName(ref), the setup front face namesObject compares against.
+// The band label's "Band <member> with <leader>" shape proves the member field
+// is an object name, so bandAnswers passes nameIsObject=true and a transformed
+// pick still gets the exact-ref alias when a same-name sibling is offered.
+func disambiguatedObjectChoiceNamed(d rules.OracleDecision, k int, label string, nameIsObject bool) string {
 	p := ClassifySameName(d, k)
-	if p.Alias != "" && k < len(d.PickRefs) && namesObject(label, d.PickRefs[k]) {
+	if p.Alias != "" && k < len(d.PickRefs) && nameIsObject {
 		return p.Alias
 	}
-	if p.Unanswerable && k < len(d.PickRefs) && namesObject(label, d.PickRefs[k]) {
+	if p.Unanswerable && k < len(d.PickRefs) && nameIsObject {
 		if owner := ownerQualifiedRef(d, k); owner != "" {
 			// "@<ref>", the same spelling as the alias branch: a joined
 			// multi-pick answer binds every segment through the "@" path, and
