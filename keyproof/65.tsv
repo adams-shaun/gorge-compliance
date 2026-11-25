@@ -93,8 +93,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6560517d-41c0-4c9c-b9d5-3ecfcb2b99fd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:viashino-sandsprinter:f0t0:s1,f:xs:XP:viashino-sandsprinter:f0t0:s1	-	-	-	336eab778104	-	4e8650cc8276	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 656513cf-1bf0-431e-8d3a-2d1ec79d0bec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65681a2a-8395-4390-845f-9be974994dcb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:octavia-living-thesis:cast:s1,f:xs:XP:octavia-living-thesis:cast:s1	-	-	-	8c0bd19283bb	-	7ed1e3077248	-	-	2026-11-24	xproof
-65681a2a-8395-4390-845f-9be974994dcb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCastOrCopy	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-65681a2a-8395-4390-845f-9be974994dcb	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+65681a2a-8395-4390-845f-9be974994dcb	f0/t0	SpellCastOrCopy	agreed	-	FX	start	2	0	x:xs:XP:octavia-living-thesis:f0t0:s1,f:xs:XP:octavia-living-thesis:f0t0:s1	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+65681a2a-8395-4390-845f-9be974994dcb	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:octavia-living-thesis:f0t1:s1,f:xs:XP:octavia-living-thesis:f0t1:s1	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 6568859d-b96d-4015-84da-1a8960752737	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6568859d-b96d-4015-84da-1a8960752737	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 656afde2-cdf3-4907-a0fc-7ac93f5d3e03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mind-over-matter:cast:s1,f:xs:XP:mind-over-matter:cast:s1	-	-	-	5f2128bf97e4	-	9e3aadaa9ccd	-	-	2026-11-24	xproof
@@ -167,7 +167,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65b8bb9b-91f9-44e2-aa6e-e82e3760a4d9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65c0ab05-e740-4380-b39c-8bae9662f885	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65c0d59b-3a94-49af-94cd-2ab4820a51f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-65c0d59b-3a94-49af-94cd-2ab4820a51f3	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
+65c0d59b-3a94-49af-94cd-2ab4820a51f3	f0/t0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 65c1cac7-87d1-4687-86ba-f7c63c4f8549	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65c1cac7-87d1-4687-86ba-f7c63c4f8549	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 65d63518-3261-40b5-87b8-19c152b29ee3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -197,7 +197,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 65e19aec-e8ea-412f-a239-bd8d1b78249c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:inspiring-cleric:f0t0:s1,f:xs:XP:inspiring-cleric:f0t0:s1	-	-	-	d864b561c9cb	-	0f941f742169	-	-	2026-11-24	xproof
 65e4fbd1-4935-495e-9897-bad5a0cfd935	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jolrael-voice-of-zhalfir:cast:s1,f:xs:XP:jolrael-voice-of-zhalfir:cast:s1	-	-	-	ae86f6029288	-	bd987d244975	-	-	2026-11-24	xproof
 65e4fbd1-4935-495e-9897-bad5a0cfd935	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:jolrael-voice-of-zhalfir:cast:s1,f:xs:XP:jolrael-voice-of-zhalfir:cast:s1	-	-	-	ae86f6029288	-	bd987d244975	-	-	2026-11-24	xproof
-65e4fbd1-4935-495e-9897-bad5a0cfd935	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
+65e4fbd1-4935-495e-9897-bad5a0cfd935	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 65e64c50-4757-4e8e-8043-bc61a5f21750	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:full-steam-ahead:cast:s1,f:xs:XP:full-steam-ahead:cast:s1	-	-	-	23b491658465	-	05967682620d	-	-	2026-11-25	xproof
 65e65eab-bc3f-4eae-8361-7f0a65fc1673	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 65e65eab-bc3f-4eae-8361-7f0a65fc1673	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

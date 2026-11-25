@@ -14,8 +14,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f1afedd-c60f-454f-b84a-c8117aec0128	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f1afedd-c60f-454f-b84a-c8117aec0128	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 0f1b5cea-2035-444c-9f63-87dcb9782c74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
+0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:gyome-master-chef:f0t0:s1,f:xs:XP:gyome-master-chef:f0t0:s1	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 0f208cd3-7673-4380-9cb8-5b6f09966ebd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lake-town-toymaker:cast:s1,f:xs:XP:lake-town-toymaker:cast:s1	-	-	-	fb9d3088f0bf	-	b7ade4294288	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0f208cd3-7673-4380-9cb8-5b6f09966ebd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lake-town-toymaker:f0t0:s1,f:xs:XP:lake-town-toymaker:f0t0:s1	-	-	-	fb9d3088f0bf	-	b7ade4294288	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 0f222f3d-f02b-42b9-aedf-fb7ed92d4889	cast	cast-resolve	agreed	-	FX	scen	2	0	Two-Headed Hunter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -56,12 +56,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f5a3a09-2f07-4774-9e0f-e99d9a444166	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:aurelia-the-warleader:combat0.attack:s1,f:xs:XP:aurelia-the-warleader:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2ba47e901726	-	-	2026-11-25	xproof
 0f5a3a09-2f07-4774-9e0f-e99d9a444166	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aurelia-the-warleader:combat0.block:s1,f:xs:XP:aurelia-the-warleader:combat0.block:s1	-	-	-	3aa6ded33acb	-	2ba47e901726	-	-	2026-11-25	xproof
 0f5a3a09-2f07-4774-9e0f-e99d9a444166	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:aurelia-the-warleader:combat0.attack:s1,f:xs:XP:aurelia-the-warleader:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2ba47e901726	-	-	2026-11-25	xproof
-0f5ac364-447b-4c43-9aed-6098dc0bab82	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
+0f5ac364-447b-4c43-9aed-6098dc0bab82	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 0f5b0c77-1e3d-46a1-ae0e-03ed79196cd9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f5b0c77-1e3d-46a1-ae0e-03ed79196cd9	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:al-abara-s-carpet:f0a0:s1,f:xs:XP:al-abara-s-carpet:f0a0:s1	-	-	-	ae86f6029288	-	6140c92964f9	-	-	2026-11-24	xproof
 0f5b79ca-9f80-420b-a6c5-bb2a9a95c7e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f5da28f-b97c-45d5-87d4-b8ba8638ca8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f5da28f-b97c-45d5-87d4-b8ba8638ca8f	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
+0f5da28f-b97c-45d5-87d4-b8ba8638ca8f	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 0f5f6f3e-1b3c-43e2-b11d-bd454366845c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bronzebeak-foragers:f0t0:s1,f:xs:XP:bronzebeak-foragers:f0t0:s1	-	-	-	8c0bd19283bb	-	056f8d899fd7	-	-	2026-11-24	xproof
 0f5f6f3e-1b3c-43e2-b11d-bd454366845c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0f5f6f3e-1b3c-43e2-b11d-bd454366845c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bronzebeak-foragers:f0t0:s1,f:xs:XP:bronzebeak-foragers:f0t0:s1	-	-	-	8c0bd19283bb	-	056f8d899fd7	-	-	2026-11-24	xproof
