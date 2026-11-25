@@ -275,7 +275,7 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 		r.markReanswered(e)
 	}
 	if fst != nil && opt.FocusTook != nil {
-		*opt.FocusTook = fst.n
+		*opt.FocusTook = fst.exercised()
 	}
 	t.Outcome = Outcome{Turns: o.Turns, Intents: o.Intents, Stall: o.StallOn, Diag: o.Livelock}
 	if o.StallOn == "panic" {
