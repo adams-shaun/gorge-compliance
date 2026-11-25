@@ -123,3 +123,59 @@ func TestXAnswersXOnlyTriggerCostPay(t *testing.T) {
 		}
 	}
 }
+
+// A trigger-cost sacrifice the engine folded into its pay election still
+// needs the sacrificed creature's name on XMage's CHOICE queue. The Gitrog,
+// Ravenous Ride's "you may sacrifice a creature that saddled it this turn"
+// has one legal candidate (Memnite), so gorge logs only the pay pick and the
+// checkpoint's battlefield->graveyard move; XMage's card-specific effect
+// folds the "you may" into a TargetSacrifice(0, 1), whose makeChoose reads
+// the same CHOICE queue. Without the name the effect's own hand pick (the
+// land) is consumed by the sacrifice ask: "Found wrong choice command
+// (invalid target or miss skip command): Swamp" (xpt-77cb30f4/xpt-cfdb102c).
+// The alias must lead the land answer, as the forage branch's graveyard names
+// do.
+func TestTriggerCostSacrificeLonePickScriptsAlias(t *testing.T) {
+	pay := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Options: 2, Min: 1, Max: 1, Picks: []string{"Sacrifice creature that saddled it this turn"},
+		PickRefs: []string{"p0:The Gitrog, Ravenous Ride"}, PickKinds: []string{"trigger_cost_pay"},
+		ObjectPicks: []string{"p0:The Gitrog, Ravenous Ride"}, Via: "answer"}
+	land := rules.OracleDecision{Step: 1, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Min: 0, Max: 1, Picks: []string{"Swamp"}, PickIdx: []int{0},
+		PickRefs: []string{"p0:Swamp"}, PickKinds: []string{"hand_move"}, Resume: "hand_move",
+		ObjectPicks: []string{"p0:Swamp"}, Via: "answer"}
+	snaps := []rules.OracleSnapshot{
+		{},
+		{Players: []rules.OracleSnapPlayer{{Seat: 0}, {Seat: 1}},
+			Permanents: []rules.OracleSnapPerm{
+				{Name: "The Gitrog, Ravenous Ride", Controller: 0},
+				{Name: "Memnite", Controller: 0},
+			}},
+		{Players: []rules.OracleSnapPlayer{{Seat: 0, Graveyard: []string{"Memnite"}}, {Seat: 1}}},
+	}
+	got := XAnswersWithSnapshots([]rules.OracleDecision{pay, land}, 2, nil, snaps)
+	want := [][]XAnswer{nil, {{0, "choice", "yes"}, {0, "choice", "Memnite"}, {0, "choice", "Swamp"}}}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("xanswers = %#v, want %#v", got, want)
+	}
+
+	// The checkpoint must prove ONE battlefield->graveyard move. A step where
+	// two creatures died is not a folded lone pick, and the generator must not
+	// guess which one the payer sacrificed (two scripted names would both be
+	// consumed by XMage's single TargetSacrifice slot).
+	ambiguous := []rules.OracleSnapshot{
+		{},
+		{Players: []rules.OracleSnapPlayer{{Seat: 0}, {Seat: 1}},
+			Permanents: []rules.OracleSnapPerm{
+				{Name: "The Gitrog, Ravenous Ride", Controller: 0},
+				{Name: "Memnite", Controller: 0},
+				{Name: "Ornithopter", Controller: 0},
+			}},
+		{Players: []rules.OracleSnapPlayer{{Seat: 0, Graveyard: []string{"Memnite", "Ornithopter"}}, {Seat: 1}}},
+	}
+	got = XAnswersWithSnapshots([]rules.OracleDecision{pay, land}, 2, nil, ambiguous)
+	want = [][]XAnswer{nil, {{0, "choice", "yes"}, {0, "choice", "Swamp"}}}
+	if !reflect.DeepEqual(got, want) {
+		t.Fatalf("ambiguous xanswers = %#v, want %#v (no guessed sacrifice name)", got, want)
+	}
+}

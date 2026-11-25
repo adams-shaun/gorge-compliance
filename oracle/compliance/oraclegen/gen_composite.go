@@ -467,6 +467,74 @@ func forageExiles(ds []rules.OracleDecision, snaps []rules.OracleSnapshot) map[i
 	return out
 }
 
+// loneTriggerCostSacrifice maps an accepted trigger-cost pay whose label is a
+// sacrifice (The Gitrog, Ravenous Ride: "Sacrifice creature that saddled it
+// this turn") and whose sacrifice the engine folded -- one legal candidate, so
+// gorge records no pick for it -- to that candidate's name. The checkpoint is
+// the only record: the pay decision's ObjectPicks name the source, not the
+// sacrificed creature, and gorge poses no pick when the choice is forced.
+//
+// XMage's card-specific effect folds the "you may" into a TargetSacrifice(0, 1)
+// whose makeChoose reads the CHOICE queue, so without the name the effect's
+// own hand pick (the land) is consumed by the sacrifice ask: "Found wrong
+// choice command (invalid target or miss skip command): Swamp" (xpt-77cb30f4,
+// xpt-cfdb102c). Emitting the checkpoint's move instead -- the same evidence
+// forageExiles uses -- covers every sacrifice trigger cost whose lone pick the
+// engine folded, not just this card.
+//
+// A step that also records an explicit sacrifice pick is left to that pick's
+// own routing, and anything but one battlefield->graveyard move by the payer
+// (a token, a simultaneous wipe, an unclear before-checkpoint) is left
+// unscripted rather than guessed.
+func loneTriggerCostSacrifice(ds []rules.OracleDecision, snaps []rules.OracleSnapshot) map[int][]string {
+	posed := map[[2]int]bool{}
+	for _, e := range ds {
+		for _, k := range e.PickKinds {
+			if k == "sacrifice" {
+				posed[[2]int{e.Step, e.Seat}] = true
+			}
+		}
+	}
+	var out map[int][]string
+	for i, d := range ds {
+		if len(d.Picks) != 1 || pickKind(d, 0) != "trigger_cost_pay" ||
+			!strings.Contains(strings.ToLower(strings.TrimSpace(d.Picks[0])), "sacrifice") {
+			continue
+		}
+		if d.Step < 0 || d.Step+1 >= len(snaps) || posed[[2]int{d.Step, d.Seat}] {
+			continue
+		}
+		before, after := snaps[d.Step], snaps[d.Step+1]
+		if d.Seat < 0 || d.Seat >= len(before.Players) || d.Seat >= len(after.Players) {
+			continue
+		}
+		moved := addedNames(before.Players[d.Seat].Graveyard, after.Players[d.Seat].Graveyard)
+		if len(moved) != 1 {
+			continue
+		}
+		name := moved[0]
+		if !controlsPermanent(before.Permanents, d.Seat, name) || controlsPermanent(after.Permanents, d.Seat, name) {
+			continue
+		}
+		if out == nil {
+			out = map[int][]string{}
+		}
+		out[i] = []string{name}
+	}
+	return out
+}
+
+// controlsPermanent reports whether seat controls a permanent of that name in
+// the checkpoint.
+func controlsPermanent(perms []rules.OracleSnapPerm, seat int, name string) bool {
+	for _, p := range perms {
+		if p.Controller == seat && p.Name == name {
+			return true
+		}
+	}
+	return false
+}
+
 // addedNames is the multiset difference next - old, in next's order.
 func addedNames(old, next []string) []string {
 	counts := map[string]int{}
