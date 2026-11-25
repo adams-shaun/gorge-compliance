@@ -663,9 +663,10 @@ func digTakeShape(d rules.OracleDecision) bool {
 // disagree (Memories Returning: Library, none, Library, Hand) is XMage's own
 // multi-step effect whose picks read the CHOICE queue, so a target answer there
 // is the wrong command ("wrong choice command", HARNESS); a step with no
-// resolved source is unknown, and a fixed-size look of three or more is not yet
-// re-measured. Those keep only the historical two-card complement (the
-// shape-only fallback the unthreaded XAnswers callers rely on).
+// resolved source is unknown, and a fixed-size look of three or more whose rest
+// is neither graveyard nor library bottom is not yet re-measured. Those keep
+// only the historical two-card complement (the shape-only fallback the
+// unthreaded XAnswers callers rely on).
 func (r *answerRouting) digTargetAnswer(i int) string {
 	d := r.ds[i]
 	if a := r.digGraveyardTakeAnswer(i); a != "" {
@@ -696,10 +697,19 @@ func (r *answerRouting) digTargetAnswer(i int) string {
 	}
 }
 
+// digRestTargetQueue reports whether a fixed-size look's second destination is
+// one whose take XMage asks on the TARGET queue: the graveyard, or the library
+// bottom (Lone Revenant, Dragonlord Ojutai: PutCards.HAND, PutCards.BOTTOM_ANY,
+// "Missing TARGET def" when answered on the choice queue). The N-1 bottom-order
+// choices that follow stay on the choice queue (gen.go's dig_bottom arm).
+func digRestTargetQueue(second string) bool {
+	return strings.EqualFold(second, "Graveyard") || strings.EqualFold(second, "Library")
+}
+
 // digGraveyardTakeAnswer is the target-queue answer for the take of a
-// fixed-size look of three or more whose rest goes to the graveyard, or ""
-// for any other decision. The step's source must resolve to Digs that agree on
-// a Graveyard second destination (digSource.known). XMage's
+// fixed-size look of three or more whose rest goes to the graveyard or the
+// library bottom, or "" for any other decision. The step's source must resolve to Digs that agree on
+// a Graveyard or Library second destination (digSource.known). XMage's
 // LookLibraryAndPickControllerEffect selects the taken cards (its first
 // destination, gorge's pick) through chooseTarget over a TargetCard, the
 // TARGET queue, however many it takes: measured on Sage of Days (look at
@@ -718,7 +728,7 @@ func (r *answerRouting) digGraveyardTakeAnswer(i int) string {
 		}
 	}
 	src, ok := r.digSources[d.Step]
-	if !ok || !src.known || src.dynamic || !strings.EqualFold(src.second, "Graveyard") {
+	if !ok || !src.known || src.dynamic || !digRestTargetQueue(src.second) {
 		return ""
 	}
 	return strings.Join(d.Picks, "^")
