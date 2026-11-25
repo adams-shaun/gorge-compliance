@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 577725ae-290f-4081-8352-3317521a096f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vanille-cheerful-l-cie:f0t1:s1,f:xs:XP:vanille-cheerful-l-cie:f0t1:s1	-	-	-	23c4009444b0	-	4b562d06dc43	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 577725ae-290f-4081-8352-3317521a096f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vanille-cheerful-l-cie:f0t1:s1,f:xs:XP:vanille-cheerful-l-cie:f0t1:s1	-	-	-	23c4009444b0	-	4b562d06dc43	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 577725ae-290f-4081-8352-3317521a096f	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:vanille-cheerful-l-cie:f0t1:s1,f:xs:XP:vanille-cheerful-l-cie:f0t1:s1	-	-	-	23c4009444b0	-	4b562d06dc43	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-577725ae-290f-4081-8352-3317521a096f	f1/t0	NULL	owed	refused:no-generator:face:meld	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+577725ae-290f-4081-8352-3317521a096f	f1/t0	NULL	owed	refused:no-generator:face:meld	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 5779d9b2-4de1-4aa4-a56d-0da05146743a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 577d027a-96c3-46fe-880b-f8b5dd3f3a3d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sever-soul:cast:s1,f:xs:XP:sever-soul:cast:s1	-	-	-	3aa6ded33acb	-	9750401d2549	-	-	2026-11-25	xproof
 577eb51d-7979-4f97-a8b1-e31242720611	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57b4da3f-361a-4cbe-b77f-190ec33eefd8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57b75be4-9229-4a48-a59e-a0f812f38637	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:diplomatic-relations:cast:s1,f:xs:XP:diplomatic-relations:cast:s1	-	-	-	336eab778104	-	9877678948ba	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 57b86d5c-3269-44bc-a838-3c5439d820d9	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:mirrorpool:f0a1:s1,f:xs:XP:mirrorpool:f0a1:s1	-	-	-	23b491658465	-	4c974fd0f9dc	-	-	2026-11-25	xproof
-57b86d5c-3269-44bc-a838-3c5439d820d9	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+57b86d5c-3269-44bc-a838-3c5439d820d9	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 57b86d5c-3269-44bc-a838-3c5439d820d9	f0/a2	CopyPermanent	agreed	-	FX	start	2	0	x:xs:XP:mirrorpool:f0a2:s1,f:xs:XP:mirrorpool:f0a2:s1	-	-	-	336eab778104	-	4c974fd0f9dc	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 57b86d5c-3269-44bc-a838-3c5439d820d9	land	land	agreed	-	FX	start	2	0	x:xs:XP:mirrorpool:land:s1,f:xs:XP:mirrorpool:land:s1	-	-	-	d864b561c9cb	-	4c974fd0f9dc	-	-	2026-11-24	xproof
 57bbd80b-290f-461e-8dc6-26ba4d673fa9	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dawnhand-eulogist:f0t0:s2,f:xs:XP:dawnhand-eulogist:f0t0:s2	-	-	-	267e485f6204	-	4933acb99ef5	-	-	2026-11-24	xproof

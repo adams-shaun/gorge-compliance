@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0848bb49-5758-41d6-a3e8-0c62e1768f52	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treasure-mage:f0t0:s1,f:xs:XP:treasure-mage:f0t0:s1	-	-	-	77494c1ce129	-	bb576b82c9f7	-	-	2026-11-24	xproof
 0848bb49-5758-41d6-a3e8-0c62e1768f52	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:treasure-mage:f0t0:s1,f:xs:XP:treasure-mage:f0t0:s1	-	-	-	77494c1ce129	-	bb576b82c9f7	-	-	2026-11-24	xproof
 08574d1b-4b76-42dd-884b-29c5a61cfdda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-08574d1b-4b76-42dd-884b-29c5a61cfdda	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+08574d1b-4b76-42dd-884b-29c5a61cfdda	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 08574d1b-4b76-42dd-884b-29c5a61cfdda	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:postmortem-professor:cast:s1,f:xs:XP:postmortem-professor:cast:s1	-	-	-	23c4009444b0	-	1268324c7f62	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 0859d16e-2a1f-4b48-8687-99af8a8bdb38	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:postmortem-professor:combat0.attack:s1,f:xs:XP:postmortem-professor:combat0.attack:s1	-	-	-	23c4009444b0	-	1268324c7f62	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -140,12 +140,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 08b13e1f-27ca-40a8-b5ed-88ac933d24bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08b13e1f-27ca-40a8-b5ed-88ac933d24bf	f0/t0	NULL	owed	refused:no-generator:trigger:SearchedLibrary	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 08b3328c-1d96-4a05-ae8b-f1b654084faa	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-08b3328c-1d96-4a05-ae8b-f1b654084faa	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+08b3328c-1d96-4a05-ae8b-f1b654084faa	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 08b3328c-1d96-4a05-ae8b-f1b654084faa	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 08b3328c-1d96-4a05-ae8b-f1b654084faa	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 08bb1f33-b232-4382-a268-4804d4e72d29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08bb1f33-b232-4382-a268-4804d4e72d29	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-08bb1f33-b232-4382-a268-4804d4e72d29	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+08bb1f33-b232-4382-a268-4804d4e72d29	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 08bc10fd-8901-4836-ad4d-a867e1bcba77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:epic-experiment:cast:s1,f:xs:XP:epic-experiment:cast:s1	-	-	-	d864b561c9cb	-	0c673bfaabdd	-	-	2026-11-24	xproof
 08becc07-28bc-4a2f-a6b0-28a2998d2f50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 08c595da-9305-42a9-b72f-5ccc546edc01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
