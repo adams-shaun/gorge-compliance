@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5b0cb089-087d-4b91-9e63-8186dc737a00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tahngarth-s-rage:cast:s1,f:xs:XP:tahngarth-s-rage:cast:s1	-	-	-	8c0bd19283bb	-	4e47b974e263	-	-	2026-11-24	xproof
 5b0dcf09-df51-4ad3-848e-c0ffb25824f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nimblewright-schematic:f0t0:s1,f:xs:XP:nimblewright-schematic:f0t0:s1	-	-	-	8c0bd19283bb	-	cd0be01f71f3	-	-	2026-11-24	xproof
 5b0dcf09-df51-4ad3-848e-c0ffb25824f9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nimblewright-schematic:f0t0:s1,f:xs:XP:nimblewright-schematic:f0t0:s1	-	-	-	8c0bd19283bb	-	cd0be01f71f3	-	-	2026-11-24	xproof
-5b0dcf09-df51-4ad3-848e-c0ffb25824f9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+5b0dcf09-df51-4ad3-848e-c0ffb25824f9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 5b147eab-39dd-4c2a-8f59-d778037788aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5b147eab-39dd-4c2a-8f59-d778037788aa	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 5b147eab-39dd-4c2a-8f59-d778037788aa	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5ba1595a-6578-459d-96fe-fdfb84ac34d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silt-crawler:f0t0:s1,f:xs:XP:silt-crawler:f0t0:s1	-	-	-	5f2128bf97e4	-	1fe3fb2a1d94	-	-	2026-11-24	xproof
 5ba1595a-6578-459d-96fe-fdfb84ac34d5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:silt-crawler:f0t0:s1,f:xs:XP:silt-crawler:f0t0:s1	-	-	-	5f2128bf97e4	-	1fe3fb2a1d94	-	-	2026-11-24	xproof
 5ba19dbe-9dbb-4cc9-81a3-18c26f27bd0f	cast	cast-resolve	agreed	-	FX	scen	2	0	Teapot Slinger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5ba19dbe-9dbb-4cc9-81a3-18c26f27bd0f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:teapot-slinger:combat0.attack:s1,f:xs:XP:teapot-slinger:combat0.attack:s1	-	-	-	3aa6ded33acb	-	dffde208b94c	-	-	2026-11-25	xproof
-5ba19dbe-9dbb-4cc9-81a3-18c26f27bd0f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:teapot-slinger:combat0.block:s1,f:xs:XP:teapot-slinger:combat0.block:s1	-	-	-	3aa6ded33acb	-	dffde208b94c	-	-	2026-11-25	xproof
+5ba19dbe-9dbb-4cc9-81a3-18c26f27bd0f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:teapot-slinger:combat0.attack:s1,f:xs:XP:teapot-slinger:combat0.attack:s1	-	-	-	23c4009444b0	-	dffde208b94c	-	-	2026-11-25	xproof
+5ba19dbe-9dbb-4cc9-81a3-18c26f27bd0f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:teapot-slinger:combat0.block:s1,f:xs:XP:teapot-slinger:combat0.block:s1	-	-	-	23c4009444b0	-	dffde208b94c	-	-	2026-11-25	xproof
 5ba19dbe-9dbb-4cc9-81a3-18c26f27bd0f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Teapot Slinger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ba482e9-fbb0-4d9f-a3a9-414892bcdfed	cast	cast-resolve	agreed	-	FX	scen	2	0	Dancing from Dark to Dawn/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5ba482e9-fbb0-4d9f-a3a9-414892bcdfed	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dancing from Dark to Dawn/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -179,9 +179,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5bf49f39-b3d5-4148-8dc2-b5b5011769d2	cast	cast	agreed	-	F	start	2	0	f:xs:XP:adventurous-impulse:cast:s1	-	-	-	d864b561c9cb	-	a4651c237967	-	-	2026-11-24	xproof
 5bf4d8d9-a2b2-4dba-ac05-9d4470a89db2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:read-the-bones:cast:s1,f:xs:XP:read-the-bones:cast:s1	-	-	-	d864b561c9cb	-	1aca73ca724e	-	-	2026-11-24	xproof
 5bf5739a-6322-4e6e-b41e-e7bdbb11b1ce	cast	cast-resolve	agreed	-	X	scen	1	0	Treetop Sentries/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5bf5739a-6322-4e6e-b41e-e7bdbb11b1ce	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:treetop-sentries:combat0.attack:s1,f:xs:XP:treetop-sentries:combat0.attack:s1	-	-	-	3aa6ded33acb	-	6064b09d173d	-	-	2026-11-25	xproof
-5bf5739a-6322-4e6e-b41e-e7bdbb11b1ce	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:treetop-sentries:combat0.block:s1,f:xs:XP:treetop-sentries:combat0.block:s1	-	-	-	3aa6ded33acb	-	6064b09d173d	-	-	2026-11-25	xproof
-5bf5739a-6322-4e6e-b41e-e7bdbb11b1ce	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	6064b09d173d	-	-	2026-11-25	xproof
+5bf5739a-6322-4e6e-b41e-e7bdbb11b1ce	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:treetop-sentries:combat0.attack:s1,f:xs:XP:treetop-sentries:combat0.attack:s1	-	-	-	23c4009444b0	-	6064b09d173d	-	-	2026-11-25	xproof
+5bf5739a-6322-4e6e-b41e-e7bdbb11b1ce	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:treetop-sentries:combat0.block:s1,f:xs:XP:treetop-sentries:combat0.block:s1	-	-	-	23c4009444b0	-	6064b09d173d	-	-	2026-11-25	xproof
+5bf5739a-6322-4e6e-b41e-e7bdbb11b1ce	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	6064b09d173d	-	-	2026-11-25	xproof
 5bf93d4f-be59-4aa7-83d5-7c35d1f07fae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5bf93d4f-be59-4aa7-83d5-7c35d1f07fae	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5bf9f397-0216-4ec9-a57b-406758dcc233	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undead-servant:f0t0:s1,f:xs:XP:undead-servant:f0t0:s1	-	-	-	d864b561c9cb	-	ab55c54366ea	-	-	2026-11-24	xproof

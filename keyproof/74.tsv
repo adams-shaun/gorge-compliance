@@ -35,8 +35,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7423b3b9-56eb-4cf2-8ada-135918219c4b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tempest Hawk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7423b3b9-56eb-4cf2-8ada-135918219c4b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tempest Hawk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7423b3b9-56eb-4cf2-8ada-135918219c4b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tempest Hawk/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7424560f-557f-4bc9-a3e7-eb890c73aaa3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:mantle-of-the-ancients:cast:s1,f:xs:XP:mantle-of-the-ancients:cast:s1	-	-	-	3aa6ded33acb	-	760d9fd797fb	-	-	2026-11-25	xproof
-7424560f-557f-4bc9-a3e7-eb890c73aaa3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:mantle-of-the-ancients:cast:s1,f:xs:XP:mantle-of-the-ancients:cast:s1	-	-	-	3aa6ded33acb	-	760d9fd797fb	-	-	2026-11-25	xproof
+7424560f-557f-4bc9-a3e7-eb890c73aaa3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:mantle-of-the-ancients:cast:s1,f:xs:XP:mantle-of-the-ancients:cast:s1	-	-	-	23c4009444b0	-	760d9fd797fb	-	-	2026-11-25	xproof
+7424560f-557f-4bc9-a3e7-eb890c73aaa3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:mantle-of-the-ancients:cast:s1,f:xs:XP:mantle-of-the-ancients:cast:s1	-	-	-	23c4009444b0	-	760d9fd797fb	-	-	2026-11-25	xproof
 74250f3e-ad88-486f-a10a-90d9a2f0097f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lammastide-weave:cast:s1,f:xs:XP:lammastide-weave:cast:s1	-	-	-	8c0bd19283bb	-	e5fd183152b9	-	-	2026-11-24	xproof
 74255add-2894-4c31-81c1-d38873fa325f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 74284bbc-b011-4e16-b8d5-7ddacc77f9d7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lady-caleria:cast:s1,f:xs:XP:lady-caleria:cast:s1	-	-	-	fc71ca68c5ac	-	0a9edd827a71	-	-	2026-11-24	xproof
@@ -111,9 +111,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7485cf25-eb41-4397-be13-7f0b8c10c70a	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:ball-lightning:combat0.attack:s1	-	-	-	3aa6ded33acb	-	27e7d1435757	-	-	2026-11-25	xproof
 7485cf25-eb41-4397-be13-7f0b8c10c70a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ball-lightning:combat0.block:s1,f:xs:XP:ball-lightning:combat0.block:s1	-	-	-	3aa6ded33acb	-	27e7d1435757	-	-	2026-11-25	xproof
 7485cf25-eb41-4397-be13-7f0b8c10c70a	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Ball Lightning/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-74868bc0-6081-4f46-a2c6-9521cd5465aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tender-wildguide:cast:s1,f:xs:XP:tender-wildguide:cast:s1	-	-	-	3aa6ded33acb	-	0c36216e4485	-	-	2026-11-25	xproof
+74868bc0-6081-4f46-a2c6-9521cd5465aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tender-wildguide:cast:s1,f:xs:XP:tender-wildguide:cast:s1	-	-	-	23c4009444b0	-	0c36216e4485	-	-	2026-11-25	xproof
 74868bc0-6081-4f46-a2c6-9521cd5465aa	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tender Wildguide/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-74868bc0-6081-4f46-a2c6-9521cd5465aa	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:tender-wildguide:f0a1:s1,f:xs:XP:tender-wildguide:f0a1:s1	-	-	-	3aa6ded33acb	-	0c36216e4485	-	-	2026-11-25	xproof
+74868bc0-6081-4f46-a2c6-9521cd5465aa	f0/a1	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:tender-wildguide:f0a1:s1,f:xs:XP:tender-wildguide:f0a1:s1	-	-	-	23c4009444b0	-	0c36216e4485	-	-	2026-11-25	xproof
 74868bc0-6081-4f46-a2c6-9521cd5465aa	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 748729bf-bfa0-4cbf-b643-ed5d7d007081	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eddytrail-hawk:f0t0:s1,f:xs:XP:eddytrail-hawk:f0t0:s1	-	-	-	d864b561c9cb	-	28a423b4822d	-	-	2026-11-24	xproof
 748729bf-bfa0-4cbf-b643-ed5d7d007081	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:eddytrail-hawk:f0t0:s1,f:xs:XP:eddytrail-hawk:f0t0:s1	-	-	-	d864b561c9cb	-	28a423b4822d	-	-	2026-11-24	xproof
@@ -122,8 +122,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7488ce54-37c6-475c-b327-59f52f2b1424	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Haru, Hidden Talent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 748c2723-dc59-4aa7-9667-d4679448c8b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 748c2723-dc59-4aa7-9667-d4679448c8b6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-748d5353-b66c-4d7a-8c55-0d28fefb1e2a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e7b8e3fdd349	-	-	2026-11-25	xproof
-748d5353-b66c-4d7a-8c55-0d28fefb1e2a	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e7b8e3fdd349	-	-	2026-11-25	xproof
+748d5353-b66c-4d7a-8c55-0d28fefb1e2a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	e7b8e3fdd349	-	-	2026-11-25	xproof
+748d5353-b66c-4d7a-8c55-0d28fefb1e2a	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	e7b8e3fdd349	-	-	2026-11-25	xproof
 748fd75b-c61b-4e02-889d-b7dab23319ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 748fd75b-c61b-4e02-889d-b7dab23319ef	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:heavy-arbalest:f0a0:s1,f:xs:XP:heavy-arbalest:f0a0:s1	-	-	-	3aa6ded33acb	-	cbddad497fec	-	-	2026-11-25	xproof
 74900080-80a6-4fd8-9557-5f773c0e4bec	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

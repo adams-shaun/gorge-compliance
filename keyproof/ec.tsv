@@ -17,7 +17,7 @@ ec187304-4c05-44da-8ad5-7c56f6b05212	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ec187304-4c05-44da-8ad5-7c56f6b05212	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec19a9bc-6fc1-4150-976b-37a47b165016	cast	cast-resolve	agreed	-	X	scen	1	0	Sandstorm Salvager/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ec19a9bc-6fc1-4150-976b-37a47b165016	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sandstorm Salvager/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-ec19a9bc-6fc1-4150-976b-37a47b165016	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+ec19a9bc-6fc1-4150-976b-37a47b165016	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 ec1ac4df-b031-43b4-a2de-ca58a1599053	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec1ac4df-b031-43b4-a2de-ca58a1599053	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 ec1f6188-2516-46ac-8a03-7b7285b23a62	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -90,10 +90,10 @@ ec7eb7d8-92b2-4442-856e-a9790301c3b3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 ec83f398-31af-484d-b6d2-8c7add142260	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec84201d-757f-4a7a-b3a2-85ccd5ee81ae	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:corrupt-court-official:f0t0:s2,f:xs:XP:corrupt-court-official:f0t0:s2	-	-	-	e07cf3a05ba5	-	7ee996e1d8b0	-	-	2026-11-24	xproof
 ec84201d-757f-4a7a-b3a2-85ccd5ee81ae	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:corrupt-court-official:f0t0:s2,f:xs:XP:corrupt-court-official:f0t0:s2	-	-	-	e07cf3a05ba5	-	7ee996e1d8b0	-	-	2026-11-24	xproof
-ec86a45f-046c-4aab-9b82-422c6f39142e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghostly-keybearer:cast:s1,f:xs:XP:ghostly-keybearer:cast:s1	-	-	-	3aa6ded33acb	-	d685f03ab225	-	-	2026-11-25	xproof
-ec86a45f-046c-4aab-9b82-422c6f39142e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ghostly-keybearer:combat0.attack:s1,f:xs:XP:ghostly-keybearer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d685f03ab225	-	-	2026-11-25	xproof
-ec86a45f-046c-4aab-9b82-422c6f39142e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ghostly-keybearer:combat0.block:s1,f:xs:XP:ghostly-keybearer:combat0.block:s1	-	-	-	3aa6ded33acb	-	d685f03ab225	-	-	2026-11-25	xproof
-ec86a45f-046c-4aab-9b82-422c6f39142e	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:ghostly-keybearer:combat0.attack:s1,f:xs:XP:ghostly-keybearer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d685f03ab225	-	-	2026-11-25	xproof
+ec86a45f-046c-4aab-9b82-422c6f39142e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghostly-keybearer:cast:s1,f:xs:XP:ghostly-keybearer:cast:s1	-	-	-	23c4009444b0	-	d685f03ab225	-	-	2026-11-25	xproof
+ec86a45f-046c-4aab-9b82-422c6f39142e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ghostly-keybearer:combat0.attack:s1,f:xs:XP:ghostly-keybearer:combat0.attack:s1	-	-	-	23c4009444b0	-	d685f03ab225	-	-	2026-11-25	xproof
+ec86a45f-046c-4aab-9b82-422c6f39142e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:ghostly-keybearer:combat0.block:s1,f:xs:XP:ghostly-keybearer:combat0.block:s1	-	-	-	23c4009444b0	-	d685f03ab225	-	-	2026-11-25	xproof
+ec86a45f-046c-4aab-9b82-422c6f39142e	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:ghostly-keybearer:combat0.attack:s1,f:xs:XP:ghostly-keybearer:combat0.attack:s1	-	-	-	23c4009444b0	-	d685f03ab225	-	-	2026-11-25	xproof
 ec8a14d4-6ca0-43b1-abf6-0c129daf8350	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:grasping-thrull:cast:s1,f:xs:XP:grasping-thrull:cast:s1	-	-	-	d864b561c9cb	-	893b580e33f1	-	-	2026-11-24	xproof
 ec8a14d4-6ca0-43b1-abf6-0c129daf8350	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grasping-thrull:cast:s1,f:xs:XP:grasping-thrull:cast:s1	-	-	-	d864b561c9cb	-	893b580e33f1	-	-	2026-11-24	xproof
 ec8bf245-4b2c-432b-9b2a-8d7b9224258c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:staunch-defenders:f0t0:s1,f:xs:XP:staunch-defenders:f0t0:s1	-	-	-	25696bf19d5b	-	9218990fdea1	-	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ ecf574a5-6410-466d-a726-732134f904b2	cast	cast-resolve	agreed	-	X	scen	1	0	Asser
 ecf808fd-4828-497e-b84b-1cb018a9924b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecf808fd-4828-497e-b84b-1cb018a9924b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:siani-eye-of-the-storm:f0t0:s1,f:xs:XP:siani-eye-of-the-storm:f0t0:s1	-	-	-	8c0bd19283bb	-	de9136c7f581	-	-	2026-11-24	xproof
 ecfabd06-c059-4f3d-9e5f-587364033cac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ecfabd06-c059-4f3d-9e5f-587364033cac	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kami-of-celebration:f0t0:s1,f:xs:XP:kami-of-celebration:f0t0:s1	-	-	-	3aa6ded33acb	-	af1c2e1e3534	-	-	2026-11-25	xproof
+ecfabd06-c059-4f3d-9e5f-587364033cac	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kami-of-celebration:f0t0:s1,f:xs:XP:kami-of-celebration:f0t0:s1	-	-	-	23c4009444b0	-	af1c2e1e3534	-	-	2026-11-25	xproof
 ecfabd06-c059-4f3d-9e5f-587364033cac	f0/t1	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 ecfc81df-1271-47ca-9184-49bf5798e195	cast	cast	agreed	-	F	start	2	0	f:xs:XP:war-dance:f0t0:s1	-	-	-	3aa6ded33acb	-	d001f560cd15	-	-	2026-11-25	xproof
 ecfc81df-1271-47ca-9184-49bf5798e195	f0/a0	Pump	agreed	-	F	start	2	0	f:xs:XP:war-dance:f0t0:s1	-	-	-	3aa6ded33acb	-	d001f560cd15	-	-	2026-11-25	xproof

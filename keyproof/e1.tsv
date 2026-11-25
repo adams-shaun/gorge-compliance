@@ -88,7 +88,7 @@ e1626880-0fa3-441a-9978-b293fc87c418	combat#0.attack	combat.attack	agreed	-	FX	s
 e1626880-0fa3-441a-9978-b293fc87c418	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lightning-security-sergeant:combat0.block:s1,f:xs:XP:lightning-security-sergeant:combat0.block:s1	-	-	-	3aa6ded33acb	-	1bdcce75f31d	-	-	2026-11-25	xproof
 e1626880-0fa3-441a-9978-b293fc87c418	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:lightning-security-sergeant:combat0.attack:s1,f:xs:XP:lightning-security-sergeant:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1bdcce75f31d	-	-	2026-11-25	xproof
 e1635acd-ed1e-4038-a11a-6518df285253	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:call-of-the-conclave:cast:s1,f:xs:XP:call-of-the-conclave:cast:s1	-	-	-	d864b561c9cb	-	65af75ebeeb9	-	-	2026-11-24	xproof
-e16cbcbd-b03a-404c-8d1e-0a05848181d9	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+e16cbcbd-b03a-404c-8d1e-0a05848181d9	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 e16cec8b-e0ac-44ee-91cf-658e204ca120	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e16cec8b-e0ac-44ee-91cf-658e204ca120	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e16e2199-d821-49fd-94a0-30ecebd8bd4c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:flood-the-engine:f0t0:s2,f:xs:XP:flood-the-engine:f0t0:s2	-	-	-	267e485f6204	-	168c3b242b9c	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ e18d8326-c3c3-43c2-ac13-6861c0ef3888	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e1905321-180b-41d2-b7ef-0974ab90f188	cast	cast-resolve	agreed	-	X	scen	1	0	Felonious Rage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e195f2f8-2db7-46b8-948c-c3c27f2e5825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e195f2f8-2db7-46b8-948c-c3c27f2e5825	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-e197104f-5382-4cb2-8afe-5ca0594629c2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+e197104f-5382-4cb2-8afe-5ca0594629c2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 e1976b6c-7e43-4f4a-b082-f95495a1b260	cast	cast-resolve	agreed	-	X	scen	1	0	Singularity Rupture/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e198126a-f280-47f7-8bd0-3dc9f5ff05a0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Windurst, Federation Center/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e198126a-f280-47f7-8bd0-3dc9f5ff05a0	land	play-land	agreed	-	X	scen	1	0	Windurst, Federation Center/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -135,9 +135,9 @@ e1a13723-a6b1-4160-8eb5-f7a4860898a3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 e1a13723-a6b1-4160-8eb5-f7a4860898a3	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e1a22f41-0543-4e85-8fb8-93c018b461aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1a22f41-0543-4e85-8fb8-93c018b461aa	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-e1a2bd31-b800-47cd-8866-1b849a601b09	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:agate-instigator:f0t1:s1,f:xs:XP:agate-instigator:f0t1:s1	-	-	-	3aa6ded33acb	-	5ffcfba3619f	-	-	2026-11-25	xproof
+e1a2bd31-b800-47cd-8866-1b849a601b09	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:agate-instigator:f0t1:s1,f:xs:XP:agate-instigator:f0t1:s1	-	-	-	23c4009444b0	-	5ffcfba3619f	-	-	2026-11-25	xproof
 e1a2bd31-b800-47cd-8866-1b849a601b09	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-e1a2bd31-b800-47cd-8866-1b849a601b09	f0/t1	ChangesZone/Offspring	agreed	-	FX	start	2	0	x:xs:XP:agate-instigator:f0t1:s1,f:xs:XP:agate-instigator:f0t1:s1	-	-	-	3aa6ded33acb	-	5ffcfba3619f	-	-	2026-11-25	xproof
+e1a2bd31-b800-47cd-8866-1b849a601b09	f0/t1	ChangesZone/Offspring	agreed	-	FX	start	2	0	x:xs:XP:agate-instigator:f0t1:s1,f:xs:XP:agate-instigator:f0t1:s1	-	-	-	23c4009444b0	-	5ffcfba3619f	-	-	2026-11-25	xproof
 e1a41091-6ff1-42bb-b248-90040107efe1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e1a41091-6ff1-42bb-b248-90040107efe1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kuldotha-cackler:f0t0:s1,f:xs:XP:kuldotha-cackler:f0t0:s1	-	-	-	ae86f6029288	-	1ab1b5619933	-	-	2026-11-24	xproof
 e1a48505-acbe-4eb4-8e83-3c76cf7a8829	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jhovall-queen:cast:s1,f:xs:XP:jhovall-queen:cast:s1	-	-	-	5f2128bf97e4	-	21e82a589779	-	-	2026-11-24	xproof

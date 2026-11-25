@@ -21,9 +21,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 751f22bc-bcea-4213-a37b-b5f72448a4c4	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7522f7fd-6fda-4ed3-9131-21bf91616a73	cast	cast-resolve	agreed	-	X	scen	1	0	Chocobo Racetrack/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7522f7fd-6fda-4ed3-9131-21bf91616a73	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Chocobo Racetrack/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-75237b2c-232b-479a-ab3a-e1566c8a9fe7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steampath-charger:f0t1:s1,f:xs:XP:steampath-charger:f0t1:s1	-	-	-	3aa6ded33acb	-	c9ea21c517fe	-	-	2026-11-25	xproof
+75237b2c-232b-479a-ab3a-e1566c8a9fe7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steampath-charger:f0t1:s1,f:xs:XP:steampath-charger:f0t1:s1	-	-	-	23c4009444b0	-	c9ea21c517fe	-	-	2026-11-25	xproof
 75237b2c-232b-479a-ab3a-e1566c8a9fe7	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Steampath Charger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-75237b2c-232b-479a-ab3a-e1566c8a9fe7	f0/t1	ChangesZone/Offspring	agreed	-	FX	start	2	0	x:xs:XP:steampath-charger:f0t1:s1,f:xs:XP:steampath-charger:f0t1:s1	-	-	-	3aa6ded33acb	-	c9ea21c517fe	-	-	2026-11-25	xproof
+75237b2c-232b-479a-ab3a-e1566c8a9fe7	f0/t1	ChangesZone/Offspring	agreed	-	FX	start	2	0	x:xs:XP:steampath-charger:f0t1:s1,f:xs:XP:steampath-charger:f0t1:s1	-	-	-	23c4009444b0	-	c9ea21c517fe	-	-	2026-11-25	xproof
 75269a31-3819-4410-8bb7-10de16810a5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75269a31-3819-4410-8bb7-10de16810a5e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:howling-golem:f0t0:s1,f:xs:XP:howling-golem:f0t0:s1	-	-	-	d864b561c9cb	-	f849ec06e0f8	-	-	2026-11-24	xproof
 75269a31-3819-4410-8bb7-10de16810a5e	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -117,17 +117,17 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7596fe49-c9cf-4415-ac1b-156cbbf9604e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 759774d2-abcf-4fc6-8433-5f251e80c70e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 759774d2-abcf-4fc6-8433-5f251e80c70e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7599fe9a-b6a5-491b-a308-aef3bf1e9daf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shabraz-the-skyshark:f0t1:s1,f:xs:XP:shabraz-the-skyshark:f0t1:s1	-	-	-	3aa6ded33acb	-	3aa2c23ebaaf	-	-	2026-11-25	xproof
+7599fe9a-b6a5-491b-a308-aef3bf1e9daf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shabraz-the-skyshark:f0t1:s1,f:xs:XP:shabraz-the-skyshark:f0t1:s1	-	-	-	23c4009444b0	-	3aa2c23ebaaf	-	-	2026-11-25	xproof
 7599fe9a-b6a5-491b-a308-aef3bf1e9daf	f0/a0	NULL	owed	refused:steps-needed:cost:WU	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 7599fe9a-b6a5-491b-a308-aef3bf1e9daf	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-7599fe9a-b6a5-491b-a308-aef3bf1e9daf	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:shabraz-the-skyshark:f0t1:s1,f:xs:XP:shabraz-the-skyshark:f0t1:s1	-	-	-	3aa6ded33acb	-	3aa2c23ebaaf	-	-	2026-11-25	xproof
+7599fe9a-b6a5-491b-a308-aef3bf1e9daf	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:shabraz-the-skyshark:f0t1:s1,f:xs:XP:shabraz-the-skyshark:f0t1:s1	-	-	-	23c4009444b0	-	3aa2c23ebaaf	-	-	2026-11-25	xproof
 759af941-f6a3-4726-91f2-9b1e4e55ea71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 759af941-f6a3-4726-91f2-9b1e4e55ea71	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 759e454e-ee8c-4b0e-9503-26e4c0a2a8f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 759e454e-ee8c-4b0e-9503-26e4c0a2a8f9	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-759e7e44-a082-419f-abd3-aabc45c47334	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gargantos-the-endbringer:f0t0:s1,f:xs:XP:gargantos-the-endbringer:f0t0:s1	-	-	-	3aa6ded33acb	-	e34cbc59c49b	-	-	2026-11-25	xproof
-759e7e44-a082-419f-abd3-aabc45c47334	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:gargantos-the-endbringer:f0t0:s1,f:xs:XP:gargantos-the-endbringer:f0t0:s1	-	-	-	3aa6ded33acb	-	e34cbc59c49b	-	-	2026-11-25	xproof
-759e7e44-a082-419f-abd3-aabc45c47334	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:gargantos-the-endbringer:f0t0:s1,f:xs:XP:gargantos-the-endbringer:f0t0:s1	-	-	-	3aa6ded33acb	-	e34cbc59c49b	-	-	2026-11-25	xproof
+759e7e44-a082-419f-abd3-aabc45c47334	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gargantos-the-endbringer:f0t0:s1,f:xs:XP:gargantos-the-endbringer:f0t0:s1	-	-	-	23c4009444b0	-	e34cbc59c49b	-	-	2026-11-25	xproof
+759e7e44-a082-419f-abd3-aabc45c47334	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:gargantos-the-endbringer:f0t0:s1,f:xs:XP:gargantos-the-endbringer:f0t0:s1	-	-	-	23c4009444b0	-	e34cbc59c49b	-	-	2026-11-25	xproof
+759e7e44-a082-419f-abd3-aabc45c47334	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:gargantos-the-endbringer:f0t0:s1,f:xs:XP:gargantos-the-endbringer:f0t0:s1	-	-	-	23c4009444b0	-	e34cbc59c49b	-	-	2026-11-25	xproof
 75a20db5-5ce8-4e5d-a815-e69bc3dd8d4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75a49bce-ab48-44d6-906d-6f51a30702ba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75a49bce-ab48-44d6-906d-6f51a30702ba	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

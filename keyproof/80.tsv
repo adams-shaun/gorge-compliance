@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 8003ca2d-0c1d-47c1-bcd1-4609615c7a82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 800c258a-cfc4-4a54-a667-065ea8dea69e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lightning-helix:cast:s1,f:xs:XP:lightning-helix:cast:s1	-	-	-	23b491658465	-	3d0aea6d28c9	-	-	2026-11-24	xproof
-800cfd70-6a97-40eb-8dc0-40b762e4db76	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+800cfd70-6a97-40eb-8dc0-40b762e4db76	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 800d0f33-31c9-43da-a649-8860646eca1f	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 800d0f33-31c9-43da-a649-8860646eca1f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 800d0f33-31c9-43da-a649-8860646eca1f	land	land	agreed	-	FX	start	2	0	x:xs:XP:quark-s-bar:f0t0:s1,f:xs:XP:quark-s-bar:f0t0:s1	-	-	-	25696bf19d5b	-	beea51c8fb2a	-	-	2026-11-24	xproof
@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8054092a-1940-4f4b-991d-81f4d384cdb1	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hardlight-containment:f0t0:s2,f:xs:XP:hardlight-containment:f0t0:s2	-	-	-	267e485f6204	-	260c5235ac63	-	-	2026-11-24	xproof
 8054092a-1940-4f4b-991d-81f4d384cdb1	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hardlight-containment:f0t0:s2,f:xs:XP:hardlight-containment:f0t0:s2	-	-	-	267e485f6204	-	260c5235ac63	-	-	2026-11-24	xproof
 8054092a-1940-4f4b-991d-81f4d384cdb1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hardlight Containment/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-80559618-9dd9-4987-b3bc-1a1b5537bbc5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tunnel:cast:s1,f:xs:XP:tunnel:cast:s1	-	-	-	3aa6ded33acb	-	363ab1bb1683	-	-	2026-11-25	xproof
+80559618-9dd9-4987-b3bc-1a1b5537bbc5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tunnel:cast:s1,f:xs:XP:tunnel:cast:s1	-	-	-	23c4009444b0	-	363ab1bb1683	-	-	2026-11-25	xproof
 805d1f48-dd91-4034-b42c-3f1f1cb75cc9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ephara-s-warden:cast:s1,f:xs:XP:ephara-s-warden:cast:s1	-	-	-	d864b561c9cb	-	e97065c1a0db	-	-	2026-11-24	xproof
 805d1f48-dd91-4034-b42c-3f1f1cb75cc9	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:ephara-s-warden:f0a0:s1,f:xs:XP:ephara-s-warden:f0a0:s1	-	-	-	d864b561c9cb	-	e97065c1a0db	-	-	2026-11-24	xproof
 8060d231-7477-441d-b249-8e75aa1d7791	cast	cast-resolve	agreed	-	X	scen	1	0	Ravening Warg/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

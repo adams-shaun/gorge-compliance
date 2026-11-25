@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 113fc13a-6df9-4eed-b9d4-002a85a036a1	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 1141a12a-2ebd-4e7b-8c8c-c7a1f160244c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rime-tender:cast:s1,f:xs:XP:rime-tender:cast:s1	-	-	-	d864b561c9cb	-	c5cceae63a69	-	-	2026-11-24	xproof
 1141a12a-2ebd-4e7b-8c8c-c7a1f160244c	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:rime-tender:f0a0:s1,f:xs:XP:rime-tender:f0a0:s1	-	-	-	d864b561c9cb	-	c5cceae63a69	-	-	2026-11-24	xproof
-114725ef-ac81-4d13-9153-0a303c3ce9c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:innocuous-rat:cast:s1,f:xs:XP:innocuous-rat:cast:s1	-	-	-	3aa6ded33acb	-	eaa9f051d859	-	-	2026-11-25	xproof
-114725ef-ac81-4d13-9153-0a303c3ce9c4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:innocuous-rat:f0t0:s1,f:xs:XP:innocuous-rat:f0t0:s1	-	-	-	3aa6ded33acb	-	eaa9f051d859	-	-	2026-11-25	xproof
+114725ef-ac81-4d13-9153-0a303c3ce9c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:innocuous-rat:cast:s1,f:xs:XP:innocuous-rat:cast:s1	-	-	-	23c4009444b0	-	eaa9f051d859	-	-	2026-11-25	xproof
+114725ef-ac81-4d13-9153-0a303c3ce9c4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:innocuous-rat:f0t0:s1,f:xs:XP:innocuous-rat:f0t0:s1	-	-	-	23c4009444b0	-	eaa9f051d859	-	-	2026-11-25	xproof
 1149e5ac-554a-41b1-84ae-bac42579c1aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thrun-the-last-troll:cast:s1,f:xs:XP:thrun-the-last-troll:cast:s1	-	-	-	d864b561c9cb	-	7bc048569bbd	-	-	2026-11-24	xproof
 1149e5ac-554a-41b1-84ae-bac42579c1aa	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:thrun-the-last-troll:f0a0:s1,f:xs:XP:thrun-the-last-troll:f0a0:s1	-	-	-	d864b561c9cb	-	7bc048569bbd	-	-	2026-11-24	xproof
 114dd40d-5ad8-4913-a08f-572b9521eb5b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -73,7 +73,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1175d482-d8a2-467f-bc50-2f4b241966bb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Arashin Sunshield/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1175d482-d8a2-467f-bc50-2f4b241966bb	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 11765eaf-87a1-48bd-90c1-7a5f21be5918	cast	cast-resolve	agreed	-	FX	scen	2	0	Roxanne, Starfall Savant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Roxanne, Starfall Savant/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11765eaf-87a1-48bd-90c1-7a5f21be5918	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Roxanne, Starfall Savant/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 11776f73-f504-4f19-b5b6-2f58279f8b15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sibsig-host:f0t0:s1,f:xs:XP:sibsig-host:f0t0:s1	-	-	-	d864b561c9cb	-	4bb379754090	-	-	2026-11-24	xproof
