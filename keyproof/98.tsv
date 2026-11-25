@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9839f80b-d28b-49c7-a31a-40c245af2edc	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:gurmag-drowner:cast:s1,f:xs:XP:gurmag-drowner:cast:s1	-	-	-	d864b561c9cb	-	a9dc73ffae54	-	-	2026-11-24	xproof
 9839f80b-d28b-49c7-a31a-40c245af2edc	f0/t0	Exploited	agreed	-	FX	start	4	0	x:xs:XP:gurmag-drowner:cast:s1,f:xs:XP:gurmag-drowner:cast:s1	-	-	-	d864b561c9cb	-	a9dc73ffae54	-	-	2026-11-24	xproof
 9839f80b-d28b-49c7-a31a-40c245af2edc	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:gurmag-drowner:cast:s1,f:xs:XP:gurmag-drowner:cast:s1	-	-	-	d864b561c9cb	-	a9dc73ffae54	-	-	2026-11-24	xproof
-983a2a50-3634-4783-8576-30916c3d0818	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+983a2a50-3634-4783-8576-30916c3d0818	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 983c5c59-806c-4430-adec-c91a099c8d41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 983f4fde-ab04-44f0-a294-c3b472de0b19	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yuriko-hope-from-the-shadows:f0t0:s1,f:xs:XP:yuriko-hope-from-the-shadows:f0t0:s1	-	-	-	23c4009444b0	-	439405f38d8e	-	-	2026-11-25	xproof
 983f4fde-ab04-44f0-a294-c3b472de0b19	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:yuriko-hope-from-the-shadows:f0t0:s1,f:xs:XP:yuriko-hope-from-the-shadows:f0t0:s1	-	-	-	23c4009444b0	-	439405f38d8e	-	-	2026-11-25	xproof
@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 984336a7-85bd-4549-9771-03a0c2367db0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98441834-7da0-4d9f-88a4-a342a9b2a4c3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:crawling-sensation:cast:s1,f:xs:XP:crawling-sensation:cast:s1	-	-	-	6f84be0f34c0	-	58cc70b0c991	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 98441834-7da0-4d9f-88a4-a342a9b2a4c3	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:crawling-sensation:f0t0:s1,f:xs:XP:crawling-sensation:f0t0:s1	-	-	-	6f84be0f34c0	-	58cc70b0c991	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-98441834-7da0-4d9f-88a4-a342a9b2a4c3	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+98441834-7da0-4d9f-88a4-a342a9b2a4c3	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9845fb27-3a1e-4cad-b30b-2c7a9dbb6209	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thaumatog:cast:s1,f:xs:XP:thaumatog:cast:s1	-	-	-	fc71ca68c5ac	-	8333da9d2066	-	-	2026-11-24	xproof
 9845fb27-3a1e-4cad-b30b-2c7a9dbb6209	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 9845fb27-3a1e-4cad-b30b-2c7a9dbb6209	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:thaumatog:cast:s1,f:xs:XP:thaumatog:cast:s1	-	-	-	fc71ca68c5ac	-	8333da9d2066	-	-	2026-11-24	xproof
