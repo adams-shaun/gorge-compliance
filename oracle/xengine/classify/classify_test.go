@@ -670,6 +670,48 @@ func TestClassifyXMageSameNameTriggerOrder(t *testing.T) {
 	}
 }
 
+// TestSameRefTriggerReadingEventNotInterchangeable: Abomination's "put that
+// many +1/+1 counters" trigger fires once per damaging Gamma or Villain, each
+// with its own damage amount. gorge's pick [p0:Abomination x3] carries one ref
+// and one rule text three times, but the instances resolve differently, so
+// their order is observable and the pick does not say it. XMage orders them
+// itself (and asks for a choice the lowering cannot give): a counters
+// difference after the order is the harness's, not a decision_shape or a
+// diverge. A trigger that does not read its event (Prowess) stays
+// interchangeable and its difference is still compared.
+func TestSameRefTriggerReadingEventNotInterchangeable(t *testing.T) {
+	ref := "p0:Abomination, Irradiated Brute"
+	pick := []string{ref, ref, ref}
+	item := lower.Lowered{Item: oraclegen.Item{ID: "xe:T:0:0:w1", Template: lower.WindowTemplate, Scenario: oraclegen.Scenario{
+		Steps: []oraclegen.Step{{Op: "pass"}, {Op: "pass", Answers: []oraclegen.Answer{
+			{Kind: "trigger_order", Pick: pick},
+		}}, {Op: "pass"}},
+	}}}
+	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{
+		snap("setup"), snap("step 0 (pass)"), snap("step 1 (pass)"), snap("step 2 (pass)"),
+	}}
+	text := "Abomination, Irradiated Brute: Whenever a Gamma or Villain you control deals combat damage to a player, put that many +1/+1 counters on CARDNAME."
+	g.Decisions = []rules.OracleDecision{{Step: 1, Seat: 0, Kind: "order", GorgeKind: "trigger_order",
+		Picks: []string{text, text, text}, PickRefs: pick}}
+	diff := follower(g, func(x *oraclediff.XResult) {
+		x.Snapshots[3].Players[0].Exile = []string{"Cunning Coyote"}
+		x.StrictMiss = "AssertionError: Missing CHOICE def for turn 1, step COMBAT_DAMAGE, PlayerA"
+	})
+	for _, engine := range []string{"xmage", "forge"} {
+		f := Classify(item, nil, g, diff, engine)
+		if f.Class != ClassHarness || !strings.Contains(f.Msg, "Abomination") {
+			t.Errorf("%s: event-reading repeat of one ref: %+v", engine, f)
+		}
+	}
+
+	// Prowess reads nothing: same ref, same text stays interchangeable.
+	prowess := "Soul-Scar Mage: Prowess"
+	g.Decisions[0].Picks = []string{prowess, prowess, prowess}
+	if f := Classify(item, nil, g, diff, "xmage"); f.Class == ClassHarness {
+		t.Errorf("a keyword repeat is interchangeable and compared: %+v", f)
+	}
+}
+
 // TestSameNameTriggerOrderForge: a trigger_order pick that names one ref twice
 // (two Norin triggers, one per blocked creature) does not say which trigger
 // goes first, so Forge orders them itself; a difference at or after it is the

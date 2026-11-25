@@ -3505,6 +3505,11 @@ func triggerOrderNamesDistinct(d rules.OracleDecision) bool {
 		}
 		ref := d.PickRefs[k]
 		key := ref + "\x00" + strings.TrimSpace(triggerRule(d.Picks[k]))
+		if TriggerReadsEvent(d.Picks[k]) {
+			// Not interchangeable: each instance reads its own event (Abomination's
+			// "that many"), so the repeat is a pick the name cannot order.
+			key += "\x00" + strconv.Itoa(k)
+		}
 		if groups[key] {
 			continue
 		}

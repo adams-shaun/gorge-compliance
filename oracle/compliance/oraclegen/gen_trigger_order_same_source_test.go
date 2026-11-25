@@ -105,3 +105,22 @@ func TestTriggerOrderDistinctSourceNamesSource(t *testing.T) {
 		t.Fatalf("XAnswers = %#v, want %#v (distinct sources named, last pick dropped)", got, want)
 	}
 }
+
+// TestTriggerOrderEventReadingRepeatNotCollapsed: Abomination's "put that many
+// counters" trigger reads its event, so a source named twice is not one
+// interchangeable group: collapsing [Hulk, Abomination x2] to two distinct
+// names would let XMage auto-push an instance whose damage amount gorge ordered
+// elsewhere. A keyword repeat (Prowess) still collapses.
+func TestTriggerOrderEventReadingRepeatNotCollapsed(t *testing.T) {
+	text := "Whenever a Gamma or Villain you control deals combat damage to a player, put that many +1/+1 counters on CARDNAME."
+	d := rules.OracleDecision{Step: 1, Seat: 0, Kind: "order", GorgeKind: "trigger_order",
+		Picks:    []string{"Hulk: Rampage", "Abomination: " + text, "Abomination: " + text},
+		PickRefs: []string{"p0:Hulk", "p0:Abomination", "p0:Abomination"}}
+	if triggerOrderNamesDistinct(d) {
+		t.Errorf("event-reading repeat of one ref must not collapse to distinct names")
+	}
+	d.Picks = []string{"Hulk: Rampage", "Abomination: Prowess", "Abomination: Prowess"}
+	if !triggerOrderNamesDistinct(d) {
+		t.Errorf("a keyword repeat stays one interchangeable group")
+	}
+}
