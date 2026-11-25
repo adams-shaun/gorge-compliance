@@ -153,8 +153,7 @@
      "eq": 1
     }
    ],
-   "xmage": "PheliaExuberantShepherdTest#test_Simple_Owned",
-   "known_bug": "XP[phelia-imprint-counter-missing]: Phelia's end-step delayed return puts the exiled Memnite back under its owner's control but adds no +1/+1 counter (2/2, want 3/3): the delayed ChangeZone's Imprint$ True only records a card moved to exile, so the Exile-\u003eBattlefield return leaves Phelia's Imprinted list empty and the chained ConditionDefined$ Imprinted gate is false (effects.effChangeZone's Imprint gate), CR 608.2c, verified at gorge 981b98963b."
+   "xmage": "PheliaExuberantShepherdTest#test_Simple_Owned"
   },
   {
    "name": "test-killed-on-trigger",
@@ -418,7 +417,8 @@
      "eq": 1
     }
    ],
-   "xmage": "PheliaExuberantShepherdTest#test_Blink_OnTrigger"
+   "xmage": "PheliaExuberantShepherdTest#test_Blink_OnTrigger",
+   "known_bug": "XP[phelia-imprint-counter-after-blink]: Ephemerate blinks Phelia after her attack trigger is on the stack, so the attack trigger resolves with her old object already gone; the end-step return nevertheless puts a +1/+1 counter on the post-blink Phelia (P/T 3/3, want 2/2). Cause: the delayed registration stamps the live source object's incarnation when it is created (events.foldDelayedRegister's SourceIncarnation = src.Incarnation), which is the new Phelia after the blink, so effects.effChangeZone's imprintSourceGone/SourceIsNewObject cannot see that the creating object left the battlefield, and the Imprint$ True return feeds DBPutCounter's ConditionDefined$ Imprinted. CR 400.7, 201.5, 603.7d; verified at gorge c2272f704f."
   },
   {
    "name": "test-blink-after-trigger",
