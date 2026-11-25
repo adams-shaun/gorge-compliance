@@ -839,9 +839,11 @@ func TestStartStackTargetCostIsExercised(t *testing.T) {
 // spell), Admiral's Order and Aerial Assault (the brief's needs-target
 // refusals), the alternate-additional-cost cards, and the residual bait forms:
 // an activated-ability target (Bind, Squelch, Interdict), a
-// Spell.singleTarget target (Divert, Deflection, Misdirection), and a
+// Spell.singleTarget target (Divert, Deflection, Misdirection), a
 // you-control stack target the focus seat meets with its own held pre-cast
-// (Double Major, Increasing Vengeance).
+// (Double Major, Increasing Vengeance), and a focus-seat ability target whose
+// bait's lands must not consume the focus ability's colour (Weaver of
+// Harmony).
 var stackTargetHardCards = []string{
 	"Remove Soul", "Meddle", "Admiral's Order", "Aerial Assault",
 	"Keep Safe", "Outwit", "Intervene", "Avoid Fate", "Hindering Light", "Confound",
@@ -851,6 +853,7 @@ var stackTargetHardCards = []string{
 	"Bind", "Squelch", "Interdict",
 	"Divert", "Deflection", "Misdirection",
 	"Double Major", "Increasing Vengeance",
+	"Weaver of Harmony",
 }
 
 // stackTargetUpkeepCards are stack-target cards whose bait start lowers to no
@@ -861,24 +864,79 @@ var stackTargetUpkeepCards = map[string]bool{"Wizard's Retort": true, "Lilting R
 // stackTargetCards is every playable card with a face whose script declares a
 // stack target, sorted.
 func stackTargetCards(reg *cards.Registry, b *certdeck.Builder) []string {
+	return cardsWithStackTarget(reg, b, func(spell, ability bool) bool { return spell || ability })
+}
+
+// stackAbilityTargetCards is every playable card with a face whose script
+// declares an activated or triggered ability on the stack. It is the census
+// for the ability-target bait class (Bind, Squelch, Lithoform Engine, Weaver of
+// Harmony): a predicate that only looked for "Spell" left every one of them
+// outside the whole-corpus run.
+func stackAbilityTargetCards(reg *cards.Registry, b *certdeck.Builder) []string {
+	return cardsWithStackTarget(reg, b, func(_, ability bool) bool { return ability })
+}
+
+// stackTargetKinds reads a Forge TargetType value into whether it names a
+// spell (Spell/SpellAbility) or an ability (Activated/Triggered). A suffix on
+// the kind (Activated.singleTarget, Spell.Colorless) does not change the kind.
+func stackTargetKinds(tt string) (spell, ability bool) {
+	for _, tok := range strings.Split(tt, ",") {
+		head, _, _ := strings.Cut(strings.TrimSpace(tok), ".")
+		switch head {
+		case "Spell", "SpellAbility":
+			spell = true
+		case "Activated", "Triggered":
+			ability = true
+		}
+	}
+	return spell, ability
+}
+
+// svarTargetKinds reads one SubAbility$ line for the stack kinds its
+// TargetType or TargetValidTargeting names.
+func svarTargetKinds(v string) (spell, ability bool) {
+	for _, field := range strings.Split(v, "|") {
+		k, val, ok := strings.Cut(field, "$")
+		if !ok {
+			continue
+		}
+		switch strings.TrimSpace(k) {
+		case "TargetType":
+			s, a := stackTargetKinds(val)
+			spell, ability = spell || s, ability || a
+		case "TargetValidTargeting":
+			if strings.TrimSpace(val) != "" {
+				spell = true
+			}
+		}
+	}
+	return spell, ability
+}
+
+// cardsWithStackTarget is every playable card whose abilities or SubAbility
+// lines name a stack target the keep predicate admits, sorted. Both the direct
+// ability Params and the named SVars are read, so an ability reached only by
+// SubAbility$ is not missed.
+func cardsWithStackTarget(reg *cards.Registry, b *certdeck.Builder, keep func(spell, ability bool) bool) []string {
 	var names []string
 	for _, c := range reg.AllCards() {
 		if len(c.Faces) == 0 || !b.Playable(c) {
 			continue
 		}
 		for _, f := range c.Faces {
-			stackTarget := false
+			spell, ability := false, false
 			for _, a := range f.Abilities {
-				if strings.Contains(a.Params["TargetType"], "Spell") || a.Params["TargetValidTargeting"] != "" {
-					stackTarget = true
+				s, ab := stackTargetKinds(a.Params["TargetType"])
+				if a.Params["TargetValidTargeting"] != "" {
+					s = true
 				}
+				spell, ability = spell || s, ability || ab
 			}
 			for _, v := range f.SVars {
-				if strings.Contains(v, "TargetType$") && strings.Contains(v, "Spell") {
-					stackTarget = true
-				}
+				s, ab := svarTargetKinds(v)
+				spell, ability = spell || s, ability || ab
 			}
-			if stackTarget {
+			if keep(spell, ability) {
 				names = append(names, f.Name)
 				break
 			}
@@ -950,6 +1008,18 @@ func TestStartStackTargetHardCardsAreExercised(t *testing.T) {
 	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	stackTargetCensus(t, reg, b, stackTargetHardCards)
+}
+
+// TestStartAbilityTargetCensusIsExercised is the default-run census for the
+// ability-target bait class: every playable card whose script names an
+// Activated or Triggered stack target. The "Spell"-only predicate left this
+// class out of the whole-corpus run, so a generated ability bait that the
+// replay refused (Weaver of Harmony's self-activated bait ate the focus
+// ability's colour) was never gated.
+func TestStartAbilityTargetCensusIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	stackTargetCensus(t, reg, b, stackAbilityTargetCards(reg, b))
 }
 
 // TestStartStackTargetCensusIsExercised is the same census over every

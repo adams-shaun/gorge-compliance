@@ -909,14 +909,14 @@ func targetedCastCarrier(f *cards.Face) bool {
 // focus seat's for an OppCtrl one. Only a filter parseFilter reads is placed:
 // an unknown restriction could make the bait's own target illegal in the
 // engine, and a start that cannot place it keeps the refusal.
-func baitTgtFor(reg *cards.Registry, b *certdeck.Builder, card string, sa *cards.SA) (name string, ownSide bool) {
+func baitTgtFor(reg *cards.Registry, b *certdeck.Builder, card string, sa *cards.SA) (name string, onBaitSeat bool) {
 	for _, raw := range strings.Split(sa.Params["ValidTgts"], ",") {
 		raw = strings.TrimSpace(raw)
 		if raw == "" {
 			continue
 		}
 		n := parseAlt(strings.ToLower(raw))
-		if n.combat || n.side == -1 || !permTypes[n.typ] {
+		if n.combat || !permTypes[n.typ] {
 			continue
 		}
 		known := true
@@ -934,7 +934,9 @@ func baitTgtFor(reg *cards.Registry, b *certdeck.Builder, card string, sa *cards
 			return faceIs(n, f) && FieldBlock(f) == "" && !deadOnArrival(f) && (test == nil || test(f))
 		})
 		if pick != "" {
-			return pick, true
+			// n.side -1 is "the opponent's" from the bait's own view: the
+			// focus seat, where the target is placed
+			return pick, n.side != -1
 		}
 	}
 	return "", false

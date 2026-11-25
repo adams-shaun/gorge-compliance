@@ -1502,8 +1502,9 @@ func TestStartstacktarget(t *testing.T) {
 				if !slices.Contains(f.Setup.P1.Hand, f.Focus.Bait) {
 					t.Errorf("p1 hand %v does not list the bait %q", f.Setup.P1.Hand, f.Focus.Bait)
 				}
-				if !slices.Contains(f.Setup.P1.Battlefield, f.Focus.BaitTarget) {
-					t.Errorf("p1 battlefield %v does not list the bait's target %q", f.Setup.P1.Battlefield, f.Focus.BaitTarget)
+				if !slices.Contains(f.Setup.P1.Battlefield, f.Focus.BaitTarget) &&
+					!slices.Contains(f.Setup.P0.Battlefield, f.Focus.BaitTarget) {
+					t.Errorf("battlefields %v / %v do not list the bait's target %q", f.Setup.P0.Battlefield, f.Setup.P1.Battlefield, f.Focus.BaitTarget)
 				}
 			case "self":
 				if f.Focus.BaitSelf == "" || f.Focus.Bait != "" || f.Focus.BaitAbility != "" || f.Focus.BaitTarget != "" {
@@ -1891,6 +1892,31 @@ func TestStartStackTargetTargetingRefused(t *testing.T) {
 		{"Not of This World", "cast"},  // Permanent.YouCtrl+inRealZoneBattlefield
 		{"Teferi's Response", "cast"},  // Land.YouCtrl+inRealZoneBattlefield
 		{"Ring of Immortals", "f0/a0"}, // ability: Permanent.YouCtrl+inRealZoneBattlefield
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != reasonNeedsStackTarget {
+				t.Fatalf("path %q reason %q, want refused %q (start %+v)", res.Path, res.Reason, reasonNeedsStackTarget, res.Start)
+			}
+		})
+	}
+}
+
+// TestStartStackTargetAbilityRefused: an ability-target bait activation is not
+// any activated ability. Reroute asks for an activated ability with a single
+// target (Activated.singleTarget), which an inert activation never is, and
+// Rimewind Cryomancer's focus ability is gated on four snow permanents, which
+// the start does not place. Both used to be written as starts by accepting the
+// first activation bait and were refused by the replay as start-not-exercised;
+// they must keep the clean start:needs-stack-target refusal.
+func TestStartStackTargetAbilityRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Reroute", "cast"},              // Activated.singleTarget
+		{"Rimewind Cryomancer", "f0/a0"}, // Activated, gated on IsPresent snow
 	} {
 		t.Run(c.card, func(t *testing.T) {
 			res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})

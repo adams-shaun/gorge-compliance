@@ -3,8 +3,6 @@ package game
 import (
 	"context"
 	"errors"
-	"fmt"
-	"os"
 	"slices"
 
 	"github.com/adams-shaun/gorge/bots/botpolicy"
@@ -643,9 +641,6 @@ func (s *focusState) line(d decision.Decision, in decision.Intent) (decision.Int
 // before main 1 and leave the forced line unaffordable.
 func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decision.Intent, error) {
 	st := b.st
-	if os.Getenv("FOCUS_DEBUG") != "" {
-		os.Stderr.WriteString(fmt.Sprintf("ACT kind=%s player=%d done=%v\n", d.Kind, d.Player, st.done))
-	}
 	if err != nil {
 		return in, err
 	}

@@ -145,8 +145,9 @@ type StartFocus struct {
 	// BaitTarget names the permanent the bait spell targets at its cast, when
 	// the bait spell itself has a target (a Spell.singleTarget focus play:
 	// "target spell with a single target" is met only by a targeted bait).
-	// The start places it on the bait seat's battlefield, and the bait seat
-	// names it as the bait spell's target.
+	// The start places it on the bait seat's battlefield, or on the focus
+	// seat's when the bait's filter names an opponent-controlled permanent,
+	// and the bait seat names it as the bait spell's target.
 	BaitTarget string `json:"baitTarget,omitempty"`
 	// Attack and Block are the scripted combat the focus play waits for: the
 	// active seat attacks with exactly Attack, the defending seat blocks it
