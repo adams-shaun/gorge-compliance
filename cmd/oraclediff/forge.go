@@ -129,7 +129,7 @@ const defaultForgeOracleDir = ".oracle-build/forge"
 //     triggered ability's cost; gift_decline declines a gift (gift_promise
 //     names the opponent in its label).
 //   - A cast step's cast_mode names a non-default cast option the driver
-//     must select: the plot or suspend special action, an Adventure or Omen half, a
+//     must select: the plot, suspend or foretell special action, an Adventure or Omen half, a
 //     modal back face, a warp cast, a may-play cast of a card outside its
 //     owner's hand ("mayplay"), the first alternative cost ("alternative"),
 //     an optional cost paid at cast time
