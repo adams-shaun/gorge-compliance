@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t1	LandPlayed	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9b4a23ab0997	-	-	2026-11-25	xproof
 9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t2	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9b4a23ab0997	-	-	2026-11-25	xproof
 93491d5c-8579-42ed-a700-e5c6f4238dea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barricade-breaker:cast:s1,f:xs:XP:barricade-breaker:cast:s1	-	-	-	d864b561c9cb	-	707f82d447af	-	-	2026-11-24	xproof
-934c50aa-7d2e-4c9e-b91b-1e8c4055e1c6	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+934c50aa-7d2e-4c9e-b91b-1e8c4055e1c6	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 934d42b2-5dca-4a29-82d3-6778796178d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 934e2634-4b1c-4d92-b4d6-9241620f3770	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:splitskin-doll:f0t0:s2,f:xs:XP:splitskin-doll:f0t0:s2	-	-	-	e07cf3a05ba5	-	be76c4a2b3cd	-	-	2026-11-24	xproof
 934e2634-4b1c-4d92-b4d6-9241620f3770	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:splitskin-doll:f0t0:s2,f:xs:XP:splitskin-doll:f0t0:s2	-	-	-	e07cf3a05ba5	-	be76c4a2b3cd	-	-	2026-11-24	xproof
@@ -141,9 +141,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93b6a170-a816-4556-aa27-a729231715e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flailing-drake:cast:s1,f:xs:XP:flailing-drake:cast:s1	-	-	-	8c0bd19283bb	-	7242ff08b6d6	-	-	2026-11-24	xproof
 93b6a170-a816-4556-aa27-a729231715e7	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 93b6a170-a816-4556-aa27-a729231715e7	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
-93b91d18-6acf-42e5-9a31-bc6e01f90c1f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+93b91d18-6acf-42e5-9a31-bc6e01f90c1f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 93b91d18-6acf-42e5-9a31-bc6e01f90c1f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-93b91d18-6acf-42e5-9a31-bc6e01f90c1f	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+93b91d18-6acf-42e5-9a31-bc6e01f90c1f	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 93b91d18-6acf-42e5-9a31-bc6e01f90c1f	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 93bfb762-e69e-4d8e-a5b7-e13dd12cd42a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93bfb762-e69e-4d8e-a5b7-e13dd12cd42a	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

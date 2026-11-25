@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6640c234-8863-4670-a61f-ba6f59b60d69	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dawnwing-marshal:combat0.block:s1,f:xs:XP:dawnwing-marshal:combat0.block:s1	-	-	-	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	xproof
 6640c234-8863-4670-a61f-ba6f59b60d69	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:dawnwing-marshal:f0a0:s1,f:xs:XP:dawnwing-marshal:f0a0:s1	-	-	-	23c4009444b0	-	53fc3c994e1d	-	-	2026-11-25	xproof
 66412a7a-4ec0-41f0-80ad-eb483213ff81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66412a7a-4ec0-41f0-80ad-eb483213ff81	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+66412a7a-4ec0-41f0-80ad-eb483213ff81	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 66418c65-a15f-489e-8a2d-6cee1b5d977c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6643fc8e-548e-48db-9f67-ffbca9e57016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6643fc8e-548e-48db-9f67-ffbca9e57016	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -70,9 +70,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 664c1219-acfa-41da-b811-503a63fc8d84	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 664d982a-5cd8-4289-afb8-fa2e083042c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66553485-4e9d-4049-9e80-3ac903f8127a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66553485-4e9d-4049-9e80-3ac903f8127a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+66553485-4e9d-4049-9e80-3ac903f8127a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 66578806-9148-479d-80e1-6c3e3b67e452	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elite-skirmisher:cast:s1,f:xs:XP:elite-skirmisher:cast:s1	-	-	-	d864b561c9cb	-	c976b2e8c443	-	-	2026-11-24	xproof
-66578806-9148-479d-80e1-6c3e3b67e452	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+66578806-9148-479d-80e1-6c3e3b67e452	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 665b8bbf-c30b-4875-a5c2-fc3b9767ecac	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:silvos-rogue-elemental:cast:s1,f:xs:XP:silvos-rogue-elemental:cast:s1	-	-	-	fc71ca68c5ac	-	65adbecec25c	-	-	2026-11-24	xproof
 665b8bbf-c30b-4875-a5c2-fc3b9767ecac	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:silvos-rogue-elemental:f0a0:s1,f:xs:XP:silvos-rogue-elemental:f0a0:s1	-	-	-	fc71ca68c5ac	-	65adbecec25c	-	-	2026-11-24	xproof
 665e52f1-901b-49a1-bfbd-ee38bdee8983	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

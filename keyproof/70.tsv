@@ -76,7 +76,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70616a8c-9b6c-408e-8f3e-2c348ec136d8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:memory-trap:f0t0:s1,f:xs:XP:memory-trap:f0t0:s1	-	-	-	25696bf19d5b	-	5539955f2352	-	-	2026-11-24	xproof
 70623348-7eda-4c68-89cd-2356b0896b79	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7063abe1-87dd-4526-9867-f7ce255b2cf0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7063abe1-87dd-4526-9867-f7ce255b2cf0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+7063abe1-87dd-4526-9867-f7ce255b2cf0	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7063eb2b-81a4-4599-b1db-edf861e39bfb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mek-leth-berserker:cast:s1,f:xs:XP:mek-leth-berserker:cast:s1	-	-	-	8c0bd19283bb	-	1ba7b5b6f353	-	-	2026-11-24	xproof
 706833f7-af50-45bf-8f1d-d3a5a31cf2c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glistening-deluge:cast:s1,f:xs:XP:glistening-deluge:cast:s1	-	-	-	ae86f6029288	-	b00d6b3b7107	-	-	2026-11-24	xproof
 7068637c-b025-41a5-be31-df1850f33b68	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -90,7 +90,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70773879-b773-4e81-99ca-8f4bba478962	cast	cast-resolve	agreed	-	X	scen	1	0	Ultimecia, Time Sorceress/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70773879-b773-4e81-99ca-8f4bba478962	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Ultimecia, Time Sorceress/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70773879-b773-4e81-99ca-8f4bba478962	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Ultimecia, Time Sorceress/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-70773879-b773-4e81-99ca-8f4bba478962	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+70773879-b773-4e81-99ca-8f4bba478962	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 70773879-b773-4e81-99ca-8f4bba478962	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ultimecia, Time Sorceress/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70773879-b773-4e81-99ca-8f4bba478962	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Ultimecia, Time Sorceress/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70773879-b773-4e81-99ca-8f4bba478962	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Ultimecia, Time Sorceress/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70d9579f-c8a6-4406-afe1-9291fe5ee736	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:thunder-dragon:cast:s1,f:xs:XP:thunder-dragon:cast:s1	-	-	-	5f2128bf97e4	-	9a0beeedb0c0	-	-	2026-11-24	xproof
 70dc830e-d05b-4fc7-88dd-879e140b3fbf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70de24d9-c585-4bf6-ac2c-c5b4b7aa298c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-70de24d9-c585-4bf6-ac2c-c5b4b7aa298c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+70de24d9-c585-4bf6-ac2c-c5b4b7aa298c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 70e0b676-61a2-4dcf-8f61-d9281467ed43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 70e10cb9-ae27-4dba-9a0d-34a78f924774	cast	cast-resolve	agreed	-	FX	scen	2	0	Aziza, Mage Tower Captain/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70e10cb9-ae27-4dba-9a0d-34a78f924774	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:aziza-mage-tower-captain:f0t0:s1,f:xs:XP:aziza-mage-tower-captain:f0t0:s1	-	-	-	23c4009444b0	-	61b71a22b30b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

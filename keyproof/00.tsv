@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 002100cd-1ab1-44da-93a0-1269d47a712a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:waterknot:cast:s1,f:xs:XP:waterknot:cast:s1	-	-	-	d864b561c9cb	-	efb07e2379fb	-	-	2026-11-24	xproof
 00225c40-27ff-410f-a591-5c788c6a2bd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00225c40-27ff-410f-a591-5c788c6a2bd6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00225c40-27ff-410f-a591-5c788c6a2bd6	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+00225c40-27ff-410f-a591-5c788c6a2bd6	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0023888e-7bec-43e0-8dee-d1a4eb94b372	cast	cast	agreed	-	F	start	4	0	f:xs:XP:palinchron:cast:s1	-	-	-	5f2128bf97e4	-	fb42d107447b	-	-	2026-11-24	xproof
 0023888e-7bec-43e0-8dee-d1a4eb94b372	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:palinchron:f0a0:s1,f:xs:XP:palinchron:f0a0:s1	-	-	-	5f2128bf97e4	-	fb42d107447b	-	-	2026-11-24	xproof
 0023888e-7bec-43e0-8dee-d1a4eb94b372	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:palinchron:cast:s1	-	-	-	5f2128bf97e4	-	fb42d107447b	-	-	2026-11-24	xproof
@@ -75,7 +75,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00602959-e9a1-4706-a1cb-70156a6fc713	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00602959-e9a1-4706-a1cb-70156a6fc713	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00605b83-faf6-4779-be9d-6a2c8f0ea722	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00605b83-faf6-4779-be9d-6a2c8f0ea722	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+00605b83-faf6-4779-be9d-6a2c8f0ea722	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 00606d5e-a134-4363-9ee6-05e03d58f234	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:strength-of-unity:cast:s1,f:xs:XP:strength-of-unity:cast:s1	-	-	-	3aa6ded33acb	-	98faebb45b9d	-	-	2026-11-25	xproof
 0068f8c1-d1a2-4f7b-b39f-963acb2c023b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vault-guardsman:f0t0:s1,f:xs:XP:vault-guardsman:f0t0:s1	-	-	-	8c0bd19283bb	-	1513851fb633	-	-	2026-11-24	xproof
 0068f8c1-d1a2-4f7b-b39f-963acb2c023b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vault-guardsman:f0t0:s1,f:xs:XP:vault-guardsman:f0t0:s1	-	-	-	8c0bd19283bb	-	1513851fb633	-	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00c1788d-c52f-4839-9cd8-11fb86c418b6	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Stormchaser's Talent/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00c1788d-c52f-4839-9cd8-11fb86c418b6	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Stormchaser's Talent/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00cb93a8-5d33-4c6a-9e2a-4b3560f76f3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00cb93a8-5d33-4c6a-9e2a-4b3560f76f3f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+00cb93a8-5d33-4c6a-9e2a-4b3560f76f3f	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 00cfbea0-e862-468b-90d5-7478eb9847c0	cast	cast-resolve	agreed	-	FX	scen	2	0	End-Blaze Epiphany/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 00d11662-9d10-4915-b80c-c1ad54b4e71b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00d11662-9d10-4915-b80c-c1ad54b4e71b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -216,8 +216,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00fc773a-72aa-4b58-a17c-8ac0f17c4c85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00fc773a-72aa-4b58-a17c-8ac0f17c4c85	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00fdcc19-88ed-46c3-91f0-095806228105	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00fdcc19-88ed-46c3-91f0-095806228105	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+00fdcc19-88ed-46c3-91f0-095806228105	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 00fdcc19-88ed-46c3-91f0-095806228105	f0/t1	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-00fdcc19-88ed-46c3-91f0-095806228105	f0/t2	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+00fdcc19-88ed-46c3-91f0-095806228105	f0/t2	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 00ff5598-2f7f-4e28-8b63-5ae1ce18f0c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unscrupulous-contractor:cast:s2,f:xs:XP:unscrupulous-contractor:cast:s2	-	-	-	5437c1394672	-	47b40185b834	-	-	2026-11-24	xproof
 00ff5598-2f7f-4e28-8b63-5ae1ce18f0c5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:unscrupulous-contractor:cast:s2,f:xs:XP:unscrupulous-contractor:cast:s2	-	-	-	5437c1394672	-	47b40185b834	-	-	2026-11-24	xproof
