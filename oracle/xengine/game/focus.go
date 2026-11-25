@@ -30,6 +30,13 @@ type Focus struct {
 	// Times is how many times the seat takes the action (0: once), each at its
 	// first chance after the last.
 	Times int
+	// Attack and Block are the scripted combat the focus play waits for (the
+	// line of a play that targets a creature in combat, "target attacking
+	// creature"): the active seat attacks with exactly Attack, the defending
+	// seat blocks it with exactly Block (no blocks when "" while Attack is
+	// set), and the focus seat takes its play at its first chance after the
+	// last of them is declared. Front-face names; "" for none.
+	Attack, Block string
 }
 
 // focusState is what every seat's focusBot shares with the Setup hook: the
@@ -39,8 +46,13 @@ type focusState struct {
 	f    Focus
 	e    *rules.Engine
 	objs map[state.ObjID]bool
-	done bool
-	n    int // actions taken
+	// attackObjs and blockObjs are the objects, of any seat, of the line's
+	// Attack and Block cards; attacked and blocked whether the line has
+	// declared each.
+	attackObjs, blockObjs map[state.ObjID]bool
+	attacked, blocked     bool
+	done                  bool
+	n                     int // actions taken
 	// manaPick is the mana ability a focus "activate" answer chose, while
 	// the engine may still ask which of the source's mana abilities it
 	// activates (manaChoice); nil otherwise.
@@ -70,6 +82,23 @@ var focusSeen func(*focusState)
 func (s *focusState) read(e *rules.Engine) {
 	s.e = e
 	s.objs = map[state.ObjID]bool{}
+	s.attackObjs, s.blockObjs = map[state.ObjID]bool{}, map[state.ObjID]bool{}
+	for _, l := range []struct {
+		name string
+		objs map[state.ObjID]bool
+	}{{s.f.Attack, s.attackObjs}, {s.f.Block, s.blockObjs}} {
+		if l.name == "" {
+			continue
+		}
+		want := cards.NormalizeName(l.name)
+		for p := range e.G.Players {
+			for _, id := range e.G.Zone(state.ZBattlefield, state.PlayerID(p)) {
+				if o := e.G.Obj(id); o != nil && o.Face() != nil && cards.NormalizeName(o.Face().Name) == want {
+					l.objs[id] = true
+				}
+			}
+		}
+	}
 	if s.f.Seat < 0 || s.f.Seat >= len(e.G.Players) {
 		return
 	}
@@ -213,6 +242,64 @@ func (s *focusState) open() bool {
 	return s.e != nil && (s.e.G.Turn > 1 || s.e.G.Turn == 1 && s.e.G.Step >= state.StepMain1)
 }
 
+// hasLine reports whether the focus waits for a scripted combat (Attack,
+// Block).
+func (s *focusState) hasLine() bool { return s.f.Attack != "" || s.f.Block != "" }
+
+// lineDone reports whether the scripted combat has been declared: the attack,
+// and the block when the line has one.
+func (s *focusState) lineDone() bool {
+	return (s.f.Attack == "" || s.attacked) && (s.f.Block == "" || s.blocked)
+}
+
+// line answers the attack and block declarations of a scripted combat: the
+// active seat attacks with exactly one Attack object (its first option), and
+// the defending seat blocks an Attack object with exactly one Block object,
+// or declares no blocks when the line has none, so the creature the focus
+// play targets is in combat as the play needs and no other creature is (a
+// focus creature that taps for its play stays home). ok is false for any
+// other decision, and once the line is declared.
+func (s *focusState) line(d decision.Decision, in decision.Intent) (decision.Intent, bool) {
+	if !s.hasLine() || !s.open() {
+		return in, false
+	}
+	switch {
+	case d.Kind == decision.KAttackers && s.f.Attack != "" && !s.attacked:
+		for i, o := range d.Options {
+			if s.attackObjs[o.Obj] {
+				s.attacked = true
+				in.Choices, in.Payment = []int{i}, nil
+				return in, true
+			}
+		}
+	case d.Kind == decision.KBlockers && s.attacked && !s.blocked:
+		if s.f.Block == "" {
+			s.blocked = true
+			in.Choices, in.Payment = nil, nil
+			return in, true
+		}
+		pick := -1 // the first option blocking an Attack object, else the first of a Block object
+		for i, o := range d.Options {
+			if !s.blockObjs[o.Obj] {
+				continue
+			}
+			if s.attackObjs[o.Attacker] {
+				pick = i
+				break
+			}
+			if pick < 0 {
+				pick = i
+			}
+		}
+		if pick >= 0 {
+			s.blocked = true
+			in.Choices, in.Payment = []int{pick}, nil
+			return in, true
+		}
+	}
+	return in, false
+}
+
 // act replaces the bot's answer with the focus action when d offers it.
 // Before turn 1's first precombat main phase the focus seat passes priority
 // instead (holdPass): a land it tapped for mana in the upkeep would empty
@@ -229,13 +316,21 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 			return in, nil
 		}
 	}
+	if out, ok := st.line(d, in); ok {
+		// the scripted combat is declared whether or not the focus has acted
+		// (a play in the declare attackers step comes before the blocks)
+		return out, nil
+	}
 	if st.done || st.f.Kind == "" {
 		return in, err
 	}
 	if st.f.Kind == "block" {
 		return st.block(d, in), nil
 	}
-	if !st.open() {
+	if !st.open() || st.hasLine() && !st.lineDone() {
+		// before main 1, or before the scripted combat the play waits for
+		// (its target is not in combat yet, and mana tapped for it in main 1
+		// would empty before combat)
 		return st.holdPass(d, in), nil
 	}
 	switch d.Kind {

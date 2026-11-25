@@ -541,3 +541,61 @@ func lifeStart(reg *cards.Registry, b *certdeck.Builder, card string, trig *card
 	f.Focus = &StartFocus{Seat: seatPtr(0), Card: spell, Kind: "cast"}
 	return ""
 }
+
+// attacksStart is "whenever <a creature> attacks" (Attacks): the card on the
+// battlefield since the turn began (no summoning sickness, CR 302.6) and the
+// attacker attacks, the focus (focus attack). The attacker is the card when
+// the trigger reads the card itself (Card.Self), else the most inert carrier
+// creature the ValidCard filter takes (attackCarrier): "whenever a creature
+// you control with power 2 or less attacks" is a Memnite attacking beside an
+// enchantment that could never attack itself. "Whenever a creature attacks
+// you" (Attacked You) is the opponent's carrier attacking on its turn.
+func attacksStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:Attacks"
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return none
+	}
+	filter := strings.TrimSpace(trig.Params["ValidCard"])
+	f.Setup.P0.Battlefield = []string{card}
+	if selfCard(trig) || filter == "Creature.Self" || filter == "" {
+		if !face.IsCreature() {
+			return none + ":noncreature" // a Vehicle, or an artifact that animates first
+		}
+		f.Focus = &StartFocus{Seat: seatPtr(0), Card: card, Kind: "attack"}
+		return ""
+	}
+	for _, a := range parseFilter(filter) {
+		if a.self || !a.known {
+			// equipped or enchanted creature, an unread property: the card
+			// itself attacks, when it can
+			if !face.IsCreature() {
+				return none + ":filter"
+			}
+			f.Focus = &StartFocus{Seat: seatPtr(0), Card: card, Kind: "attack"}
+			return ""
+		}
+	}
+	switch att := trig.Params["Attacked"]; {
+	case att == "":
+	case strings.HasPrefix(att, "You"):
+		// the opponent attacks the card's controller
+		name, s := filterCarrier(reg, b, card, filter, func(c *cards.Face) bool {
+			return c.IsCreature() && !c.HasKeyword("Defender") && !deadOnArrival(c)
+		})
+		if name == "" || s != 0 {
+			return none + ":filter"
+		}
+		f.Setup.P1.Battlefield = append(f.Setup.P1.Battlefield, name)
+		f.Active = 1
+		f.Focus = &StartFocus{Seat: seatPtr(1), Card: name, Kind: "attack"}
+		return ""
+	default:
+		return none + ":attacked"
+	}
+	attacker := attackCarrier(reg, b, face, card, filter, f)
+	if attacker == "" {
+		return none + ":filter"
+	}
+	f.Focus = &StartFocus{Seat: seatPtr(0), Card: attacker, Kind: "attack"}
+	return ""
+}
