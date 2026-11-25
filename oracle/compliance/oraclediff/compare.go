@@ -651,9 +651,18 @@ func pairedStackKeys(g, x rules.OracleSnapshot) (gv, xv string) {
 
 func stackKeysLabelled(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm, left map[int]bool) string {
 	current := map[string]string{}
+	cardNames, tokenNames := map[string]bool{}, map[string]bool{}
 	for _, p := range perms {
 		if p.Ref != "" && p.Name != "" && !p.Token {
 			current[p.Ref] = p.Name
+		}
+		if p.Name == "" {
+			continue
+		}
+		if p.Token {
+			tokenNames[p.Name] = true
+		} else {
+			cardNames[p.Name] = true
 		}
 	}
 	parts := make([]string, 0, len(st))
@@ -663,6 +672,12 @@ func stackKeysLabelled(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm,
 			src = n
 		}
 		src = effectIDLabel.ReplaceAllString(src, "")
+		// A token's name is its engine's spelling (Forge "Jace Token", XMage "Jace",
+		// CR 111.4); a source that names a token and no card on the battlefield is a
+		// token source, which fieldEqual compares by kind.
+		if s.Kind == "ability" && tokenNames[src] && !cardNames[src] {
+			src = "Token"
+		}
 		if s.Kind == "ability" && sourcelessTriggerNames[src] {
 			src = ""
 		}
