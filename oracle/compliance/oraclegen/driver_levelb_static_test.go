@@ -10,11 +10,11 @@ import (
 // snapshotBody returns the text of ScenarioReplay's snapshot implementation,
 // so the assertions below cannot be satisfied by a keywords mention elsewhere
 // in the file. The two-argument overload is a one-line delegate to the body
-// that carries the checkpoint/holderAfterStep parameter, so read the latter:
+// that carries the checkpoint/holderAfterStep/declarationPending parameters, so read the latter:
 // matching the shorter signature would inspect only the delegate.
 func snapshotBody(t *testing.T, java string) string {
 	t.Helper()
-	i := strings.Index(java, "private JsonObject snapshot(String checkpoint, Game g, UUID holderAfterStep) {")
+	i := strings.Index(java, "private JsonObject snapshot(String checkpoint, Game g, UUID holderAfterStep, boolean declarationPending) {")
 	if i < 0 {
 		t.Fatal("ScenarioReplay.java has no snapshot implementation")
 	}

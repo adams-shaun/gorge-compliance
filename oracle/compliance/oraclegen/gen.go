@@ -3138,7 +3138,10 @@ func modeNumbers(f *cards.Face) map[string]int {
 // yesNo recognises a bare two-way boolean choice. The engine's option kind
 // and exact label/ref identity must both agree; composed choices such as
 // "Yes — discard" are ordinary makeChoose picks, not boolean answers. Older
-// snapshots without PickKinds use the same exact-label/ref rule.
+// snapshots without PickKinds use the same exact-label/ref rule. The one
+// composed exception is the unless-discard election (kind "unless" "Yes —
+// discard one <spec>" / kind "ordinary" "No — discard normally"): XMage
+// models it as DoIfCostPaid, so it is a chooseUse yes/no.
 func yesNo(d rules.OracleDecision) (string, bool) {
 	if (d.Options != 2 && !loneTriggerCostDecline(d)) || len(d.Picks) != 1 || len(d.PickRefs) != 1 {
 		return "", false

@@ -629,4 +629,8 @@ func TestUnlessDiscardDeclineIsChooseUseNo(t *testing.T) {
 	if yn, ok := yesNo(d); !ok || yn != "no" {
 		t.Fatalf("yesNo(ordinary decline) = %q, %v; want no", yn, ok)
 	}
+	want := [][]XAnswer{{{0, "choice", "no"}}}
+	if got := XAnswers([]rules.OracleDecision{d}, 1, nil); !reflect.DeepEqual(got, want) {
+		t.Fatalf("XAnswers = %#v, want %#v", got, want)
+	}
 }
