@@ -1550,3 +1550,51 @@ func TestStartCombatLineNeverDeclaredIsRefused(t *testing.T) {
 		t.Errorf("a start whose attacker never attacks was not refused as %s", reasonStartNotExercised)
 	}
 }
+
+// TestPlayStartPlayerCountersPinRefusesPerID: at a pin without
+// rules.StartSeat.PlayerCounters, the start that names energy is refused per
+// id in the lowering log and the other starts of the directory still play.
+func TestPlayStartPlayerCountersPinRefusesPerID(t *testing.T) {
+	if pincap.PlayerCounters() {
+		t.Skip("the pin now has rules.StartSeat.PlayerCounters; there is nothing to refuse")
+	}
+	reg := testutil.CorpusRegistry(t)
+	dir := t.TempDir()
+	good, err := os.ReadFile("testdata/start/thornvault-forager-f0a2.json")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := os.WriteFile(filepath.Join(dir, "b-good.json"), good, 0o644); err != nil {
+		t.Fatal(err)
+	}
+	energy := `{"format":"xproof-start-1","card":"Aethersquall Ancient","key":"f0/a0","players":2,"active":0,"max_turns":1,` +
+		`"setup":{"p0":{"battlefield":["Aethersquall Ancient"],"player_counters":[{"kind":"ENERGY","n":8}]},"p1":{}},` +
+		`"filler":"basics","seeds":2}`
+	// Sorts first, so a hard error here would lose b-good.json.
+	if err := os.WriteFile(filepath.Join(dir, "a-energy.json"), []byte(energy), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	out := t.TempDir()
+	if err := playStart(reg, []string{dir}, "XP", out, false); err != nil {
+		t.Fatalf("one pre-pin start aborted the batch: %v", err)
+	}
+	refused := 0
+	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
+		if bytes.Contains(b, []byte(reasonStartPlayerCountersPin)) {
+			refused++
+		}
+		return nil
+	}); err != nil {
+		t.Fatal(err)
+	}
+	if refused != 2 {
+		t.Errorf("%d refused rows with %q, want 2 (one per seed)", refused, reasonStartPlayerCountersPin)
+	}
+	items := 0
+	if err := readLines(filepath.Join(out, "items.jsonl"), func([]byte) error { items++; return nil }); err != nil {
+		t.Fatal(err)
+	}
+	if items == 0 {
+		t.Error("the other start of the directory wrote no item")
+	}
+}

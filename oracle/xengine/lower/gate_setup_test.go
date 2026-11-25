@@ -693,6 +693,16 @@ func TestGateSetupPlayerCounters(t *testing.T) {
 		t.Errorf("item JSON does not name the player counters:\n%s", raw)
 	}
 
+	// A spent kind keeps a zero entry on the live player; the checkpoint is the
+	// complete count, so the zero is restated (a follower whose setup game
+	// produced the kind moves down to it).
+	e.G.Players[1].AddCounter("ENERGY", 2)
+	e.G.Players[1].AddCounter("ENERGY", -2)
+	wantZero := []oraclegen.SetupPlayerCounter{{Kind: "ENERGY", N: 0}, {Kind: "EXPERIENCE", N: 3}}
+	if got := capture(e, at, true).Setup[1].PlayerCounters; !slices.Equal(got, wantZero) {
+		t.Fatalf("seat 1 after a spend: player counters %+v, want %+v (zero kept)", got, wantZero)
+	}
+
 	// The pin this branch is written against has no field yet: the placement
 	// capability turns off and the gate restores the exact refusal the item
 	// decoder would otherwise earn.

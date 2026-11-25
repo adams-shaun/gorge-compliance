@@ -4416,9 +4416,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     pl.increaseSpeed(g);
                 }
             }
-            if (s.has("player_counters")) {
-                putSetupPlayerCounters(pl, s.getAsJsonArray("player_counters"));
-            }
+            putSeatSetupPlayerCounters(pl, s);
         }
         // Setup state is written without the events the game loop reacts to:
         // addCard's tapped placement and setTapped here flip a tap flag,
@@ -4493,12 +4491,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
     }
 
-    /** Writes a seat's setup "player_counters" as recorded state: straight into
+    /** Writes a seat's setup "player_counters" as recorded state (each entry is
+     * the COMPLETE count for its kind, applied as a delta): straight into
      * the PlayerImpl counter set, with no ADD_COUNTERS event and no
      * COUNTER_ADDED trigger (CR 122.1; energy is a player counter, CR 107.14).
      * The Player interface exposes only addCounters, which fires both, so the
      * write goes through the delegate's field the same way
      * clearSetupEntryHistory reaches turnsOnBattlefield. */
+    static void putSeatSetupPlayerCounters(TestPlayer pl, JsonObject seat) {
+        if (seat.has("player_counters")) {
+            putSetupPlayerCounters(pl, seat.getAsJsonArray("player_counters"));
+        }
+    }
+
     static void putSetupPlayerCounters(TestPlayer pl, JsonArray counters) {
         try {
             java.lang.reflect.Field delegate = TestPlayer.class.getDeclaredField("computerPlayer");
@@ -4509,8 +4514,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
             mage.counters.Counters cs = (mage.counters.Counters) field.get(impl);
             for (JsonElement e : counters) {
                 JsonObject pc = e.getAsJsonObject();
-                cs.addCounter(xmageCounter(pc.get("kind").getAsString())
-                        .createInstance(pc.get("n").getAsInt()));
+                CounterType type = xmageCounter(pc.get("kind").getAsString());
+                // "n" is the COMPLETE count at the setup checkpoint (also 0),
+                // so move the seat to it: a counter the game already produced
+                // before the cut's main must not be added twice.
+                int delta = pc.get("n").getAsInt() - cs.getCount(type);
+                if (delta > 0) {
+                    cs.addCounter(type.createInstance(delta));
+                } else if (delta < 0) {
+                    cs.removeCounter(type, -delta);
+                }
             }
         } catch (ReflectiveOperationException e) {
             throw new IllegalStateException("cannot place setup player counters", e);

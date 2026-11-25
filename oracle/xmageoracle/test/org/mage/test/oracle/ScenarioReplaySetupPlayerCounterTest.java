@@ -70,6 +70,15 @@ public final class ScenarioReplaySetupPlayerCounterTest {
         method.invoke(null, pl, counters);
     }
 
+    /** Runs the call site's seat-level entry point (the "player_counters" key
+     * check the setup hook goes through). */
+    private static void putSeatSetupPlayerCounters(TestPlayer pl, JsonObject seat) throws Exception {
+        Method method = ScenarioReplay.class.getDeclaredMethod(
+                "putSeatSetupPlayerCounters", TestPlayer.class, JsonObject.class);
+        method.setAccessible(true);
+        method.invoke(null, pl, seat);
+    }
+
     public static void main(String[] args) throws Exception {
         TestPlayer p0 = player(UUID.randomUUID());
         TestPlayer p1 = player(UUID.randomUUID());
@@ -100,5 +109,35 @@ public final class ScenarioReplaySetupPlayerCounterTest {
         }
         equal(0, p1.getCountersTotalCount());
         System.out.println("PASS an unknown player counter kind fails loudly");
+
+        // "n" is the COMPLETE count at the checkpoint: a seat that already
+        // holds counters is moved to it, never added to (up, down and to 0).
+        TestPlayer p2 = player(UUID.randomUUID());
+        JsonArray seed = new JsonArray();
+        seed.add(counter("ENERGY", 3));
+        seed.add(counter("POISON", 4));
+        seed.add(counter("EXPERIENCE", 1));
+        putSetupPlayerCounters(p2, seed);
+        JsonArray complete = new JsonArray();
+        complete.add(counter("ENERGY", 3));
+        complete.add(counter("POISON", 1));
+        complete.add(counter("EXPERIENCE", 5));
+        JsonObject seat = new JsonObject();
+        seat.add("player_counters", complete);
+        putSeatSetupPlayerCounters(p2, seat);
+        equal(3, p2.getCountersCount(CounterType.ENERGY));
+        equal(1, p2.getCountersCount(CounterType.POISON));
+        equal(5, p2.getCountersCount(CounterType.EXPERIENCE));
+        JsonArray zero = new JsonArray();
+        zero.add(counter("ENERGY", 0));
+        JsonObject zeroSeat = new JsonObject();
+        zeroSeat.add("player_counters", zero);
+        putSeatSetupPlayerCounters(p2, zeroSeat);
+        equal(0, p2.getCountersCount(CounterType.ENERGY));
+        equal(1, p2.getCountersCount(CounterType.POISON));
+        // A seat with no player_counters key is left alone.
+        putSeatSetupPlayerCounters(p2, new JsonObject());
+        equal(1, p2.getCountersCount(CounterType.POISON));
+        System.out.println("PASS complete player_counters set the seat, not add to it");
     }
 }

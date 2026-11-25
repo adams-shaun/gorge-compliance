@@ -21,7 +21,7 @@ type Counter struct {
 
 // counterElem reports the pinned rules.StartSeat.PlayerCounters element type
 // when the field exists AND has the shape this package can write: a slice of
-// structs with Kind string and N int32. A field that exists with another shape
+// structs with exported Kind string and N int32 fields. A field that exists with another shape
 // is reported as absent, so SetStartPlayerCounters can never silently return
 // false at a caller that only checked PlayerCounters.
 func counterElem() (reflect.Type, bool) {
@@ -30,15 +30,25 @@ func counterElem() (reflect.Type, bool) {
 		return nil, false
 	}
 	elem := f.Type.Elem()
-	if elem.Kind() != reflect.Struct {
-		return nil, false
-	}
-	kind, okKind := elem.FieldByName("Kind")
-	n, okN := elem.FieldByName("N")
-	if !okKind || kind.Type.Kind() != reflect.String || !okN || n.Type.Kind() != reflect.Int32 {
+	if !counterShape(elem) {
 		return nil, false
 	}
 	return elem, true
+}
+
+// counterShape reports whether elem is a struct with exported Kind string and
+// N int32 fields, the only element this package writes.
+func counterShape(elem reflect.Type) bool {
+	if elem.Kind() != reflect.Struct {
+		return false
+	}
+	kind, okKind := elem.FieldByName("Kind")
+	n, okN := elem.FieldByName("N")
+	if !okKind || kind.Type.Kind() != reflect.String || !kind.IsExported() ||
+		!okN || n.Type.Kind() != reflect.Int32 || !n.IsExported() {
+		return false
+	}
+	return true
 }
 
 // PlayerCounters reports whether the pinned rules.StartSeat carries the

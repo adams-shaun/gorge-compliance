@@ -1134,13 +1134,13 @@ func (w *walker) place(c *cut) {
 		seat.Speed = g.Players[s].Speed
 		if pinPlayerCounters() {
 			// The runner's player_counters is the COMPLETE count at the
-			// setup checkpoint, so copy the cut's counters as read. Sorted by
-			// kind: no map walk reaches the item bytes.
+			// setup checkpoint, so copy the cut's counters as read, a spent
+			// kind's retained zero entry included (a follower whose setup game
+			// produced the kind moves down to it). Sorted by kind: no map walk
+			// reaches the item bytes.
 			for _, pc := range g.Players[s].Counters {
-				if pc.N > 0 {
-					seat.PlayerCounters = append(seat.PlayerCounters,
-						oraclegen.SetupPlayerCounter{Kind: strings.ToUpper(pc.Kind), N: pc.N})
-				}
+				seat.PlayerCounters = append(seat.PlayerCounters,
+					oraclegen.SetupPlayerCounter{Kind: strings.ToUpper(pc.Kind), N: pc.N})
 			}
 			sort.SliceStable(seat.PlayerCounters, func(a, b int) bool {
 				return seat.PlayerCounters[a].Kind < seat.PlayerCounters[b].Kind

@@ -38,6 +38,16 @@ const reasonStartNotExercised = "start-not-exercised"
 // face and must not credit the back-face key.
 const reasonStartFaceLost = "start-face-lost"
 
+// reasonStartPlayerCountersPin is the refusal of a start whose seat holds
+// player counters on a pin whose rules.StartSeat has no PlayerCounters field.
+// The file is refused per id (its other starts in the directory still play);
+// it clears when the gorge pin bump lands.
+const reasonStartPlayerCountersPin = "start-player-counters-pin"
+
+// errPlayerCountersPin marks the start that needs a field the pinned gorge
+// does not have, so playStart can refuse its ids instead of aborting the batch.
+var errPlayerCountersPin = errors.New("player counters need rules.StartSeat.PlayerCounters, which the pinned gorge does not have yet (blocked on the gorge pin bump)")
+
 // startDeckSize is the size a seat's deck is filled to with basics.
 const startDeckSize = 40
 
@@ -551,7 +561,7 @@ func applyStartPlayerCounters(ss *rules.StartSeat, cs []pincap.Counter) error {
 		return nil
 	}
 	if !setStartPlayerCounters(ss, cs) {
-		return fmt.Errorf("player counters need rules.StartSeat.PlayerCounters, which the pinned gorge does not have yet (blocked on the gorge pin bump)")
+		return errPlayerCountersPin
 	}
 	return nil
 }
@@ -623,10 +633,25 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 			return fmt.Errorf("%s: %w", path, err)
 		}
 		d0, s0, err := startDeckAt(reg, "start-p0", 0, f.Setup.P0, f.Setup.P1)
-		if err != nil {
-			return fmt.Errorf("%s: %w", path, err)
+		var d1 decks.Deck
+		var s1 rules.StartSeat
+		if err == nil {
+			d1, s1, err = startDeckAt(reg, "start-p1", 1, f.Setup.P1, f.Setup.P0)
 		}
-		d1, s1, err := startDeckAt(reg, "start-p1", 1, f.Setup.P1, f.Setup.P0)
+		if errors.Is(err, errPlayerCountersPin) {
+			// One start the pin cannot hold must not lose the rest of the
+			// directory: refuse each of its ids and play on.
+			for s := 1; s <= f.Seeds; s++ {
+				games++
+				b, jerr := jsonl(lowerRow{ID: scen.StartID(set, f.Card, f.Key, s), Status: statusRefused, Step: -1, Reasons: []string{reasonStartPlayerCountersPin}})
+				if jerr != nil {
+					return jerr
+				}
+				lowerLog.Write(b)
+				hist[statusRefused]++
+			}
+			continue
+		}
 		if err != nil {
 			return fmt.Errorf("%s: %w", path, err)
 		}
