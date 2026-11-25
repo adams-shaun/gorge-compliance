@@ -133,7 +133,9 @@ func TestForgeRolledDie(t *testing.T) {
 // only), die-roll code unchanged, ForcedDieRollTest re-run green on it.
 // f1e3e00905c = the merge of 149a03bbbec4 and cf742d0aefc (UnmappedAskTest keeps both cases): one pin carries the Done
 // pick, the Mobilize X=0 fix and the forced remove-counter amount; die-roll code unchanged, ForcedDieRollTest re-run green on it.
-const forgeOracleDieRollRef = "f1e3e00905ccad97af9c566144c83f81c8400b41"
+// 0b7fde3680d = f1e3e00905c plus the zero-mode Charm fix (ScriptedController.chooseModeForAbility and StepMachine.hasMode
+// only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
+const forgeOracleDieRollRef = "0b7fde3680d3ed4cd9f14b169bae8fd0be12f7dd"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

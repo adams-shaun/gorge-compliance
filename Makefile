@@ -549,7 +549,22 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # and cf742d0aefc. Die-roll code unchanged; ForcedDieRollTest, MobilizeZeroTokensStillSchedulesSacrificeTest and every
 # UnmappedAskTest case green on it (make forge-driver-tests runs the UnmappedAskTest cases). Fork branch
 # fix/xp-forge-driver-remove-counter-forced-amount.
-FORGE_ORACLE_REF ?= f1e3e00905ccad97af9c566144c83f81c8400b41
+# 0b7fde3680d = f1e3e00905c plus the zero-mode Charm driver fix (fork branch
+# fix/xp-forge-driver-zero-mode-charm): Bumi, King of Three Trials's ETB is
+# DB$ Charm | MinCharmNum$ 0 | CharmNum$ X with X = the Lesson cards in your
+# graveyard. With none, CR 700.2 allows no mode and CR 603.3c removes the
+# modal ability from the stack; gorge poses no KModes decision for that ask
+# (engine/effects/charm.go returns before the decision when max < 1), so Forge's
+# ask has exactly one answer, the empty list. chooseModeForAbility used to
+# strict-miss because the offered mode list was not the ask's num. A num == 0
+# ask now returns empty without consuming a mode decision queued for a later
+# ask; every num > 0 ask keeps the strict miss. ZeroModeCharmTest (fixtures
+# zero-mode/) replays Bumi with no Lesson (empty answer, no harness/leftover)
+# and with one Lesson and no decision (num = 1 still strict-misses);
+# scripts/forge-oracle-test-zero-mode-charm.sh runs it and replays the
+# zero-Lesson request through forge-oracle-run.sh. Driver-only; die-roll code,
+# cardsfolder and tokenscripts unchanged.
+FORGE_ORACLE_REF ?= 0b7fde3680d3ed4cd9f14b169bae8fd0be12f7dd
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
