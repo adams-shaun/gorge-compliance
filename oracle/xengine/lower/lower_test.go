@@ -336,7 +336,7 @@ func TestTruncationReasons(t *testing.T) {
 	}
 	// An object with no ref is never given an invented one.
 	noRef := game.Entry{Kind: "priority", Picks: []game.Pick{{Kind: "play_land"}}}
-	if _, why := lowerPriority(nil, m, noRef, nil); why == nil || why.reason != ReasonUnbindableRef {
+	if _, why := lowerPriority(nil, m, noRef, nil, nil); why == nil || why.reason != ReasonUnbindableRef {
 		t.Errorf("land with no ref: %v", why)
 	}
 	// An ask after a pass is only answerable when the pass left a resolution
@@ -1099,6 +1099,97 @@ func TestColourPicksSubAbilityMana(t *testing.T) {
 		if got := colourPicks(reg, game.ManaRec{Name: c.name, Ability: 0, Produced: c.produced}); !reflect.DeepEqual(got, c.want) {
 			t.Errorf("colourPicks(%s, %q) = %v, want %v", c.name, c.produced, got, c.want)
 		}
+	}
+}
+
+// TestColourPicksManaReflected: a ManaReflected ability has no Produced$, so
+// its colour is the live activation's recorded mana. Covers the corpus
+// carriers (Mox Amber, Reflecting Pool, Exotic Orchard, Fellwar Stone,
+// Incubation Druid) and the answer gate: a reflection whose live game posed
+// the colour ask carries the pick, a single-colour reflection stays
+// answer-free or the runner reports an unconsumed answer.
+func TestColourPicksManaReflected(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	for _, c := range []struct {
+		name     string
+		ability  int
+		produced string
+		want     []string
+	}{
+		{"Mox Amber", 0, "R", []string{"R"}},
+		{"Mox Amber", 0, "", nil}, // live colour unknown
+		{"Reflecting Pool", 0, "G", []string{"G"}},
+		{"Exotic Orchard", 0, "U", []string{"U"}},
+		{"Fellwar Stone", 0, "B", []string{"B"}},
+		{"Incubation Druid", 1, "GGG", []string{"G"}},
+		{"Incubation Druid", 0, "G", nil}, // the Adapt ability asks no colour
+	} {
+		if got := colourPicks(reg, game.ManaRec{Name: c.name, Ability: c.ability, Produced: c.produced}); !reflect.DeepEqual(got, c.want) {
+			t.Errorf("colourPicks(%s ability %d, %q) = %v, want %v", c.name, c.ability, c.produced, got, c.want)
+		}
+	}
+	rec := game.ManaRec{Obj: 7, Name: "Mox Amber", Ability: 0, Ref: "p0:Mox Amber", Produced: "R"}
+	single, why := manaTaps(reg, seatMap{}, []game.ManaRec{rec}, nil)
+	if why != nil || len(single) != 1 || len(single[0].Answers) != 0 {
+		t.Fatalf("single-colour reflection = %+v, %v, want an answer-free tap", single, why)
+	}
+	asked, why := manaTaps(reg, seatMap{}, []game.ManaRec{rec}, map[manaAbilityKey]bool{{7, 0}: true})
+	want := []oraclegen.Answer{{Kind: "choose", Pick: []string{"R"}}}
+	if why != nil || len(asked) != 1 || !reflect.DeepEqual(asked[0].Answers, want) {
+		t.Fatalf("asked reflection = %+v, %v, want answer %+v", asked, why, want)
+	}
+	// The real tape shape: the activation's record closes before the colour
+	// answer, so it has no Produced and only the following "Add R" pick
+	// supplies it. colourProduced folds it in and the choose answer lands on
+	// the activation's own tap step, never a later step's answer queue.
+	actRec := rec
+	actRec.Produced = ""
+	act := game.Entry{Kind: "priority", Mana: []game.ManaRec{actRec},
+		Picks: []game.Pick{{Kind: "activate", Obj: 7, Ref: "p0:Mox Amber"}}}
+	col := game.Entry{Kind: "choose", Picks: []game.Pick{{Kind: "mana", Obj: 7, Label: "Add R"}}}
+	steps, _, _, answers, why := lowerGroup(reg, seatMap{}, []game.Entry{act, col})
+	if why != nil || len(steps) != 1 || !reflect.DeepEqual(steps[0].Answers, want) || len(answers) != 0 {
+		t.Fatalf("lowerGroup = %+v, answers %+v, %v; want the tap's choose answer", steps, answers, why)
+	}
+	// A second mana ability makes the source pose its stage-1 ability wheel
+	// before the activation. Those options are kind "mana" too, but they name
+	// the ability, not a colour; a single-colour reflection then resolves with
+	// no ask and must stay answer-free (Pit of Offerings: {T}: Add {C}, then a
+	// reflected colour).
+	pit := game.ManaRec{Obj: 8, Name: "Pit of Offerings", Ability: 1,
+		Ref: "p0:Pit of Offerings", Produced: "R"}
+	wheel := game.Entry{Kind: "choose", Mana: []game.ManaRec{pit},
+		Picks: []game.Pick{{Kind: "mana", Obj: 8, Ability: 1, Label: "Add "}}}
+	pitAct := game.Entry{Kind: "priority",
+		Picks: []game.Pick{{Kind: "activate", Obj: 8, Ref: "p0:Pit of Offerings"}}}
+	steps, _, _, answers, why = lowerGroup(reg, seatMap{}, []game.Entry{pitAct, wheel})
+	if why != nil || len(steps) != 1 || len(steps[0].Answers) != 0 || len(answers) != 0 {
+		t.Fatalf("multi-ability reflection = %+v, answers %+v, %v; want an answer-free tap", steps, answers, why)
+	}
+	// The same wheel inside a cast group: its tap still stays answer-free.
+	cast := game.Entry{Kind: "priority",
+		Picks: []game.Pick{{Kind: "cast", Obj: 9, Ref: "p0:Thorin Oakenshield"}}}
+	steps, _, _, answers, why = lowerGroup(reg, seatMap{}, []game.Entry{cast, wheel})
+	if why != nil || len(steps) != 2 || len(steps[0].Answers) != 0 || len(answers) != 0 {
+		t.Fatalf("multi-ability reflection in a cast = %+v, answers %+v, %v; want an answer-free tap", steps, answers, why)
+	}
+	// A multi-colour reflection in the same shape still answers the colour:
+	// its record closes with no Produced and the following pick names R.
+	pitAsked := pit
+	pitAsked.Produced = ""
+	wheelAsked := game.Entry{Kind: "choose", Mana: []game.ManaRec{pitAsked},
+		Picks: []game.Pick{{Kind: "mana", Obj: 8, Ability: 1, Label: "Add "}}}
+	pitCol := game.Entry{Kind: "choose",
+		Picks: []game.Pick{{Kind: "mana", Obj: 8, Label: "Add R"}}}
+	// The priority form is still refused by the pre-existing ability-wheel guard
+	// (one activate step cannot answer both the wheel and the colour); what this
+	// case pins is that the colour answer is still *derived* for the tap, not
+	// suppressed by the wheel pick. The cast form can carry it.
+	castAsked := game.Entry{Kind: "priority",
+		Picks: []game.Pick{{Kind: "cast", Obj: 9, Ref: "p0:Thorin Oakenshield"}}}
+	steps, _, _, answers, why = lowerGroup(reg, seatMap{}, []game.Entry{castAsked, wheelAsked, pitCol})
+	if why != nil || len(steps) != 2 || !reflect.DeepEqual(steps[0].Answers, want) || len(answers) != 0 {
+		t.Fatalf("asked multi-ability reflection in a cast = %+v, answers %+v, %v; want the tap's choose answer", steps, answers, why)
 	}
 }
 
