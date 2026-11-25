@@ -44,6 +44,13 @@ gorge range in its subject (`gorge pin: <old>..<new> (gorge origin/main, ...)`);
      set whose scenarios moved, as the [runbook](../oracle/validation/oracle/README.md) describes.
      Then run `make compliance-status` and update `ratchet.json`.
 
+The pin follows gorge main by itself: `.github/workflows/gorge-pin-follow.yml`
+runs every 15 minutes and does steps 1 and 2 with `scripts/gorge-pin-follow.sh`
+(which calls `scripts/gorge-pin.sh bump`, also `make gorge-pin-bump`) on the bot
+branch `auto/gorge-pin`, keeping one PR from it to develop open for Mergify.
+Its CI does the rest; a red bump is triaged on that PR or replaced there by a
+newer gorge main.
+
 ## Drift reporting
 
 CI's nightly `drift` job builds and tests this repository against gorge
