@@ -39,44 +39,27 @@ out=$(cd "$out" && pwd)
 
 fail() { echo "forge-oracle-test-declare-attackers-offered: FAIL: $*" >&2; exit 1; }
 
-python3 -I - "$out" <<'PY'
-import json, sys
-
-def lib(card):
-    return [card] * 10
-
-def row(rid, p0, p1, steps):
-    item = {"id": rid, "card": "Memnite", "template": "xproof-start", "compare": ["offered"],
-            "name": rid, "turn": 1, "cr": [], "why": "declare-attackers offered pin",
-            "setup": {"p0": dict(p0, library_top=lib("Forest"), life=20),
-                      "p1": dict(p1, library_top=lib("Plains"), life=20)},
-            "steps": steps}
-    return {"id": rid, "scenario_sha": "0" * 64, "item": item, "gorge_decisions": [], "abilities": {}}
-
-passes = [{"op": "pass", "seat": s} for s in (0, 1, 0, 1)]
-to_blockers = [{"op": "pass", "seat": 0}, {"op": "pass", "seat": 1},
-               {"op": "attack", "seat": 0, "attackers": ["p0:Memnite"], "defender": "p1"},
-               {"op": "pass", "seat": 0}, {"op": "pass", "seat": 1}]
-rows = {
-    "blocker": row("t:offered-declare-blockers", {"battlefield": ["Memnite", "Forest"]},
-                   {"battlefield": ["Memnite"]}, to_blockers),
-    "no-blocker": row("t:offered-declare-blockers-none", {"battlefield": ["Memnite", "Forest"]}, {}, to_blockers),
-    "empty-block": row("t:offered-declare-blockers-empty", {"battlefield": ["Memnite", "Forest"]},
-                       {"battlefield": ["Memnite"]},
-                       [{"op": "attack", "seat": 0, "attackers": ["p0:Memnite"], "defender": "p1"},
-                        {"op": "pass_to", "decision": "blockers"},
-                        {"op": "block", "seat": 1, "blocks": []},
-                        {"op": "pass_to", "step": "main2"}]),
-    "empty-attack": row("t:offered-declare-attackers-empty", {"battlefield": ["Memnite", "Forest"]}, {},
-                        [{"op": "pass_to", "decision": "attackers"},
-                         {"op": "attack", "seat": 0, "attackers": [], "defender": "p1"},
-                         {"op": "pass_to", "step": "main2"}]),
-    "attacker": row("t:offered-declare-attackers", {"battlefield": ["Memnite", "Forest"]}, {}, passes),
-    "no-attacker": row("t:offered-declare-attackers-none", {"battlefield": ["Forest"]}, {}, passes),
-}
-for name, r in rows.items():
-    open("%s/request-%s.jsonl" % (sys.argv[1], name), "w").write(json.dumps(r, separators=(",", ":")) + "\n")
-PY
+# The six requests are static one-line fixtures, each with its own item's
+# scenario_sha (TestForgeScriptFixturesCarryTheirItemSHA checks every
+# forge-oracle-test-*.sh line that names a request).
+cat > "$out/request-attacker.jsonl" <<'JSON'
+{"id":"t:offered-declare-attackers","scenario_sha":"927bad3132e1e3d7661dd92b59adf9e058280e38c3b3baa874c2f6831102f4b2","item":{"id":"t:offered-declare-attackers","card":"Memnite","template":"xproof-start","compare":["offered"],"name":"t:offered-declare-attackers","turn":1,"cr":[],"why":"declare-attackers offered pin","setup":{"p0":{"battlefield":["Memnite","Forest"],"library_top":["Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest"],"life":20},"p1":{"library_top":["Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains"],"life":20}},"steps":[{"op":"pass","seat":0},{"op":"pass","seat":1},{"op":"pass","seat":0},{"op":"pass","seat":1}]},"gorge_decisions":[],"abilities":{}}
+JSON
+cat > "$out/request-no-attacker.jsonl" <<'JSON'
+{"id":"t:offered-declare-attackers-none","scenario_sha":"bd61b1e6618e696e372ae058e2dca15fbb2ba22db30935a86bb5315822be241d","item":{"id":"t:offered-declare-attackers-none","card":"Memnite","template":"xproof-start","compare":["offered"],"name":"t:offered-declare-attackers-none","turn":1,"cr":[],"why":"declare-attackers offered pin","setup":{"p0":{"battlefield":["Forest"],"library_top":["Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest"],"life":20},"p1":{"library_top":["Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains"],"life":20}},"steps":[{"op":"pass","seat":0},{"op":"pass","seat":1},{"op":"pass","seat":0},{"op":"pass","seat":1}]},"gorge_decisions":[],"abilities":{}}
+JSON
+cat > "$out/request-blocker.jsonl" <<'JSON'
+{"id":"t:offered-declare-blockers","scenario_sha":"ec8b6f78785a678eb2b60cd944c233bde6515171be293aa85ac8c3df3250d522","item":{"id":"t:offered-declare-blockers","card":"Memnite","template":"xproof-start","compare":["offered"],"name":"t:offered-declare-blockers","turn":1,"cr":[],"why":"declare-attackers offered pin","setup":{"p0":{"battlefield":["Memnite","Forest"],"library_top":["Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest"],"life":20},"p1":{"battlefield":["Memnite"],"library_top":["Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains"],"life":20}},"steps":[{"op":"pass","seat":0},{"op":"pass","seat":1},{"op":"attack","seat":0,"attackers":["p0:Memnite"],"defender":"p1"},{"op":"pass","seat":0},{"op":"pass","seat":1}]},"gorge_decisions":[],"abilities":{}}
+JSON
+cat > "$out/request-no-blocker.jsonl" <<'JSON'
+{"id":"t:offered-declare-blockers-none","scenario_sha":"478649109801cb50e374b26a6e4785ff35df33c8b57bf25f205ca16d46279880","item":{"id":"t:offered-declare-blockers-none","card":"Memnite","template":"xproof-start","compare":["offered"],"name":"t:offered-declare-blockers-none","turn":1,"cr":[],"why":"declare-attackers offered pin","setup":{"p0":{"battlefield":["Memnite","Forest"],"library_top":["Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest"],"life":20},"p1":{"library_top":["Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains"],"life":20}},"steps":[{"op":"pass","seat":0},{"op":"pass","seat":1},{"op":"attack","seat":0,"attackers":["p0:Memnite"],"defender":"p1"},{"op":"pass","seat":0},{"op":"pass","seat":1}]},"gorge_decisions":[],"abilities":{}}
+JSON
+cat > "$out/request-empty-block.jsonl" <<'JSON'
+{"id":"t:offered-declare-blockers-empty","scenario_sha":"9fca882d4d68b835f1e7e6088aa489540f62828b6bcf772237d793280ec6e78d","item":{"id":"t:offered-declare-blockers-empty","card":"Memnite","template":"xproof-start","compare":["offered"],"name":"t:offered-declare-blockers-empty","turn":1,"cr":[],"why":"declare-attackers offered pin","setup":{"p0":{"battlefield":["Memnite","Forest"],"library_top":["Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest"],"life":20},"p1":{"battlefield":["Memnite"],"library_top":["Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains"],"life":20}},"steps":[{"op":"attack","seat":0,"attackers":["p0:Memnite"],"defender":"p1"},{"op":"pass_to","decision":"blockers"},{"op":"block","seat":1,"blocks":[]},{"op":"pass_to","step":"main2"}]},"gorge_decisions":[],"abilities":{}}
+JSON
+cat > "$out/request-empty-attack.jsonl" <<'JSON'
+{"id":"t:offered-declare-attackers-empty","scenario_sha":"fd16ed3d53cf883c6c45ee0cd8cb24d4631f9da6290f77b2872e5988acf7967a","item":{"id":"t:offered-declare-attackers-empty","card":"Memnite","template":"xproof-start","compare":["offered"],"name":"t:offered-declare-attackers-empty","turn":1,"cr":[],"why":"declare-attackers offered pin","setup":{"p0":{"battlefield":["Memnite","Forest"],"library_top":["Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest","Forest"],"life":20},"p1":{"library_top":["Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains","Plains"],"life":20}},"steps":[{"op":"pass_to","decision":"attackers"},{"op":"attack","seat":0,"attackers":[],"defender":"p1"},{"op":"pass_to","step":"main2"}]},"gorge_decisions":[],"abilities":{}}
+JSON
 
 for k in attacker no-attacker blocker no-blocker empty-block empty-attack; do
   "$here/scripts/forge-oracle-run.sh" "$out/request-$k.jsonl" "$out/rows-$k.jsonl" \
