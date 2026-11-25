@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 134430b7-d566-485a-bd5c-7db8a285f4ca	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Leader's Talent/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 13459bf3-fcdc-4838-9669-918f97113054	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13459bf3-fcdc-4838-9669-918f97113054	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1347224f-421e-4270-8e50-cf25c875909c	cast	cast-resolve	agreed	-	X	scen	1	0	Acrobatic Leap/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1347224f-421e-4270-8e50-cf25c875909c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:acrobatic-leap:cast:s1,f:xs:XP:acrobatic-leap:cast:s1	-	-	-	3aa6ded33acb	-	ffb0a1bdb8b5	-	-	2026-11-25	xproof
 134a9877-5cfb-4a2a-a0f0-930dce45f58b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:prophetic-prism:f0t0:s2,f:xs:XP:prophetic-prism:f0t0:s2	-	-	-	e07cf3a05ba5	-	ab75cdf31ce3	-	-	2026-11-24	xproof
 134a9877-5cfb-4a2a-a0f0-930dce45f58b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Prophetic Prism/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 134a9877-5cfb-4a2a-a0f0-930dce45f58b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:prophetic-prism:f0t0:s2,f:xs:XP:prophetic-prism:f0t0:s2	-	-	-	e07cf3a05ba5	-	ab75cdf31ce3	-	-	2026-11-24	xproof
@@ -55,8 +55,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 134d5b82-7940-4b33-a922-7f9d1f403e50	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:lotus-field:f0t0:s1,f:xs:XP:lotus-field:f0t0:s1	-	-	-	d864b561c9cb	-	c0562af9fcac	-	-	2026-11-24	xproof
 134d5b82-7940-4b33-a922-7f9d1f403e50	land	land	agreed	-	FX	start	4	0	x:xs:XP:lotus-field:f0t0:s1,f:xs:XP:lotus-field:f0t0:s1	-	-	-	d864b561c9cb	-	c0562af9fcac	-	-	2026-11-24	xproof
 134dfb35-0c32-4143-aa63-7701f406b59e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:unmarked-grave:cast:s1,f:xs:XP:unmarked-grave:cast:s1	-	-	-	d864b561c9cb	-	74b991025bf6	-	-	2026-11-24	xproof
-1355424e-9909-41dc-8d43-b8d21b0919bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadeye-rig-hauler:f0t0:s1,f:xs:XP:deadeye-rig-hauler:f0t0:s1	-	-	-	23b491658465	-	e6eca7780781	-	-	2026-11-24	xproof
-1355424e-9909-41dc-8d43-b8d21b0919bf	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1355424e-9909-41dc-8d43-b8d21b0919bf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadeye-rig-hauler:f0t0:s1,f:xs:XP:deadeye-rig-hauler:f0t0:s1	-	-	-	3aa6ded33acb	-	e6eca7780781	-	-	2026-11-25	xproof
+1355424e-9909-41dc-8d43-b8d21b0919bf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:deadeye-rig-hauler:f0t0:s1,f:xs:XP:deadeye-rig-hauler:f0t0:s1	-	-	-	3aa6ded33acb	-	e6eca7780781	-	-	2026-11-25	xproof
 13575cf9-65c1-4861-b21e-eb2155e07766	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sensei-s-divining-top:cast:s1,f:xs:XP:sensei-s-divining-top:cast:s1	-	-	-	8c0bd19283bb	-	e3c7d2b333ed	-	-	2026-11-24	xproof
 13575cf9-65c1-4861-b21e-eb2155e07766	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13575cf9-65c1-4861-b21e-eb2155e07766	f0/a1	Draw	agreed	-	FX	start	4	0	x:xs:XP:sensei-s-divining-top:cast:s1,f:xs:XP:sensei-s-divining-top:cast:s1	-	-	-	8c0bd19283bb	-	e3c7d2b333ed	-	-	2026-11-24	xproof

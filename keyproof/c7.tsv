@@ -50,9 +50,9 @@ c73c1d91-0163-49c6-832a-b9327e7a2c9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c73c1d91-0163-49c6-832a-b9327e7a2c9b	f0/t0	NULL	owed	refused:no-generator:trigger:LifeLost	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c73df59d-60e5-4541-81d9-5481cf2343bd	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c744b5f4-fbcf-48b8-9d60-5e9c6ac297e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trygon-predator:cast:s1,f:xs:XP:trygon-predator:cast:s1	-	-	-	8c0bd19283bb	-	8e029fd887fa	-	-	2026-11-24	xproof
-c744b5f4-fbcf-48b8-9d60-5e9c6ac297e0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Trygon Predator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c744b5f4-fbcf-48b8-9d60-5e9c6ac297e0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:trygon-predator:combat0.attack:s1,f:xs:XP:trygon-predator:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8e029fd887fa	-	-	2026-11-25	xproof
 c744b5f4-fbcf-48b8-9d60-5e9c6ac297e0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Trygon Predator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c744b5f4-fbcf-48b8-9d60-5e9c6ac297e0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Trygon Predator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c744b5f4-fbcf-48b8-9d60-5e9c6ac297e0	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:trygon-predator:combat0.attack:s1,f:xs:XP:trygon-predator:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8e029fd887fa	-	-	2026-11-25	xproof
 c749f23c-40c0-4159-b84c-a70cbb062c14	cast	cast-resolve	agreed	-	FX	scen	2	0	Grand Abolisher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 c749f23c-40c0-4159-b84c-a70cbb062c14	static#0.0	static#0.0	agreed	-	X	scen	1	0	Grand Abolisher/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 c749f23c-40c0-4159-b84c-a70cbb062c14	static#0.1	static#0.1	agreed	-	X	scen	1	0	Grand Abolisher/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -153,9 +153,9 @@ c7c1352a-0332-4495-a384-8d6fed01f91b	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:ge
 c7c1352a-0332-4495-a384-8d6fed01f91b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:geology-enthusiast:f0a0:s1,f:xs:XP:geology-enthusiast:f0a0:s1	-	-	-	ae86f6029288	-	f3968ca2fc2e	-	-	2026-11-24	xproof
 c7c1e7cf-0be2-4129-9bdf-0862be2fba7f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:illuminate-history:cast:s1,f:xs:XP:illuminate-history:cast:s1	-	-	-	d864b561c9cb	-	61219a929d7d	-	-	2026-11-24	xproof
 c7c241f2-d3cc-4032-a9da-149de73c2539	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c7c35dd9-8c3b-4be5-b310-61db5e73ed6c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c7c35dd9-8c3b-4be5-b310-61db5e73ed6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:charnel-troll:f0t0:s1,f:xs:XP:charnel-troll:f0t0:s1	-	-	-	3aa6ded33acb	-	bfba60d141e3	-	-	2026-11-25	xproof
 c7c35dd9-8c3b-4be5-b310-61db5e73ed6c	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-c7c35dd9-8c3b-4be5-b310-61db5e73ed6c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c7c35dd9-8c3b-4be5-b310-61db5e73ed6c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:charnel-troll:f0t0:s1,f:xs:XP:charnel-troll:f0t0:s1	-	-	-	3aa6ded33acb	-	bfba60d141e3	-	-	2026-11-25	xproof
 c7c37369-47f8-4027-a016-a2055307dd24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c7c37369-47f8-4027-a016-a2055307dd24	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 c7c4c67e-c4db-416b-b2e8-f0e59aa80bba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

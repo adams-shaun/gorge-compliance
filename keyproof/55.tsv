@@ -72,7 +72,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 556c4dad-002e-41a8-8ba3-8b4eda70232f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 556dd333-4066-41f7-98f6-41794754de71	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:vile-entomber:f0t0:s2,f:xs:XP:vile-entomber:f0t0:s2	-	-	-	e07cf3a05ba5	-	536a09a62da3	-	-	2026-11-24	xproof
 556dd333-4066-41f7-98f6-41794754de71	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vile Entomber/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-556dd333-4066-41f7-98f6-41794754de71	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vile Entomber/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+556dd333-4066-41f7-98f6-41794754de71	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:vile-entomber:combat0.block:s1,f:xs:XP:vile-entomber:combat0.block:s1	-	-	-	3aa6ded33acb	-	536a09a62da3	-	-	2026-11-25	xproof
 556dd333-4066-41f7-98f6-41794754de71	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:vile-entomber:f0t0:s2,f:xs:XP:vile-entomber:f0t0:s2	-	-	-	e07cf3a05ba5	-	536a09a62da3	-	-	2026-11-24	xproof
 556f127f-6131-4171-b1ed-11420c21d345	cast	cast-resolve	agreed	-	FX	scen	2	0	Serpent Specialist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 556f127f-6131-4171-b1ed-11420c21d345	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Serpent Specialist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 55cc14d0-11ed-444d-884a-cfb692ba632b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55cc14d0-11ed-444d-884a-cfb692ba632b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 55cec4bc-3de6-4c0d-a4cc-c5a30849fbda	cast	cast-resolve	agreed	-	FX	scen	2	0	Wildborn Preserver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-55cec4bc-3de6-4c0d-a4cc-c5a30849fbda	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Wildborn Preserver/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+55cec4bc-3de6-4c0d-a4cc-c5a30849fbda	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:wildborn-preserver:combat0.attack:s1,f:xs:XP:wildborn-preserver:combat0.attack:s1	-	-	-	3aa6ded33acb	-	00bbfecf83b9	-	-	2026-11-25	xproof
 55cec4bc-3de6-4c0d-a4cc-c5a30849fbda	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Wildborn Preserver/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55cec4bc-3de6-4c0d-a4cc-c5a30849fbda	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Wildborn Preserver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 55d01851-2669-4552-b580-088e445ac30c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:vengeful-dreams:cast:s1	-	-	-	fc71ca68c5ac	-	8326ad899585	-	-	2026-11-24	xproof

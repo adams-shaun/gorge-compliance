@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35069cdb-e5bd-4224-a1a8-b329054e003b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rejuvenate:cast:s1,f:xs:XP:rejuvenate:cast:s1	-	-	-	5f2128bf97e4	-	a0f70ef6a759	-	-	2026-11-24	xproof
 35069cdb-e5bd-4224-a1a8-b329054e003b	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:rejuvenate:cast:s2,f:xs:XP:rejuvenate:cast:s2	-	-	-	5f2128bf97e4	-	a0f70ef6a759	-	-	2026-11-24	xproof
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	cast	cast-resolve	agreed	-	FX	scen	2	0	Hulk, Gamma Goliath/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3508fd7d-ca02-47f9-8b0a-525f7bde4f57	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hulk, Gamma Goliath/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3508fd7d-ca02-47f9-8b0a-525f7bde4f57	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:hulk-gamma-goliath:combat0.attack:s1,f:xs:XP:hulk-gamma-goliath:combat0.attack:s1	-	-	-	3aa6ded33acb	-	596c86cb65a2	-	-	2026-11-25	xproof
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hulk, Gamma Goliath/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Hulk, Gamma Goliath/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3508fd7d-ca02-47f9-8b0a-525f7bde4f57	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hulk, Gamma Goliath/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -78,8 +78,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3567c3c8-b3c7-45b7-935b-b1fdbc973720	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vandalblast:cast:s1,f:xs:XP:vandalblast:cast:s1	-	-	-	d864b561c9cb	-	557adf8d5df3	-	-	2026-11-24	xproof
 356a85d9-2570-448c-a455-f4ce915a604f	cast	cast-resolve	agreed	-	FX	scen	2	0	Lady of Laughter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 356a85d9-2570-448c-a455-f4ce915a604f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lady of Laughter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-356a85d9-2570-448c-a455-f4ce915a604f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lady of Laughter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-356a85d9-2570-448c-a455-f4ce915a604f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Lady of Laughter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+356a85d9-2570-448c-a455-f4ce915a604f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lady-of-laughter:combat0.block:s1,f:xs:XP:lady-of-laughter:combat0.block:s1	-	-	-	3aa6ded33acb	-	b9072ea208b4	-	-	2026-11-25	xproof
+356a85d9-2570-448c-a455-f4ce915a604f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lady-of-laughter:f0t0:s1,f:xs:XP:lady-of-laughter:f0t0:s1	-	-	-	3aa6ded33acb	-	b9072ea208b4	-	-	2026-11-25	xproof
 356e2df2-2b41-4d9d-8723-3e6a17a090e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 356edd68-7dd5-4ab6-a738-6cb0eb2d4e56	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35734003-0c94-4a0c-9441-ab989e73bb11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iwamori-of-the-open-fist:f0t0:s1,f:xs:XP:iwamori-of-the-open-fist:f0t0:s1	-	-	-	64a08ba7d913	-	bec6690d2488	-	-	2026-11-24	xproof

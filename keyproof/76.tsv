@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7635fb35-7ac8-4e61-8a52-6b0c14cd88b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lodestone-myr:cast:s1,f:xs:XP:lodestone-myr:cast:s1	-	-	-	25696bf19d5b	-	c5a054d09d0c	-	-	2026-11-24	xproof
 7635fb35-7ac8-4e61-8a52-6b0c14cd88b8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:lodestone-myr:cast:s1,f:xs:XP:lodestone-myr:cast:s1	-	-	-	25696bf19d5b	-	c5a054d09d0c	-	-	2026-11-24	xproof
 76372327-41ec-4516-abff-3b612e073629	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kona-rescue-beastie:cast:s1,f:xs:XP:kona-rescue-beastie:cast:s1	-	-	-	23b491658465	-	8931b47f47b3	-	-	2026-11-24	xproof
-76372327-41ec-4516-abff-3b612e073629	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kona, Rescue Beastie/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+76372327-41ec-4516-abff-3b612e073629	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:kona-rescue-beastie:f0t0:s1,f:xs:XP:kona-rescue-beastie:f0t0:s1	-	-	-	3aa6ded33acb	-	8931b47f47b3	-	-	2026-11-25	xproof
 763882f9-a7ad-4fb1-bdf4-c9a158d4b68e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 763a2d27-52a8-43d9-b649-0f6c0cf87a07	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 763d60ea-a0ad-4f13-b8a7-aa1515283266	cast	cast-resolve	agreed	-	FX	scen	2	0	Shifting Grift/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -60,7 +60,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 764e8e6e-0ace-4fc8-8ca5-468a10ae3b73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 764e8e6e-0ace-4fc8-8ca5-468a10ae3b73	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 764f6412-c4ff-4eec-9a9d-870661f97f8b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fblthp-lost-on-the-range:cast:s1,f:xs:XP:fblthp-lost-on-the-range:cast:s1	-	-	-	8c0bd19283bb	-	e957ce6fa97c	-	-	2026-11-25	xproof
-764f6412-c4ff-4eec-9a9d-870661f97f8b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fblthp, Lost on the Range/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+764f6412-c4ff-4eec-9a9d-870661f97f8b	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:fblthp-lost-on-the-range:f0t0:s1,f:xs:XP:fblthp-lost-on-the-range:f0t0:s1	-	-	-	3aa6ded33acb	-	e957ce6fa97c	-	-	2026-11-25	xproof
 764f6412-c4ff-4eec-9a9d-870661f97f8b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Fblthp, Lost on the Range/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 764f6412-c4ff-4eec-9a9d-870661f97f8b	static#0.1	static#0.1	agreed	-	X	scen	1	0	Fblthp, Lost on the Range/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 764f6412-c4ff-4eec-9a9d-870661f97f8b	static#0.2	static#0.2	agreed	-	X	scen	1	0	Fblthp, Lost on the Range/static#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7685ff3f-6d61-4b1d-a381-49bc6274aa01	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7685ff3f-6d61-4b1d-a381-49bc6274aa01	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 768c78f3-f09c-4b77-974d-514925e8df5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76905904-b3e4-44ee-bfcb-e518f0815af5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76905904-b3e4-44ee-bfcb-e518f0815af5	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+76905904-b3e4-44ee-bfcb-e518f0815af5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iroas-s-blessing:f0t0:s1,f:xs:XP:iroas-s-blessing:f0t0:s1	-	-	-	3aa6ded33acb	-	923a58f2dd58	-	-	2026-11-25	xproof
+76905904-b3e4-44ee-bfcb-e518f0815af5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:iroas-s-blessing:f0t0:s1,f:xs:XP:iroas-s-blessing:f0t0:s1	-	-	-	3aa6ded33acb	-	923a58f2dd58	-	-	2026-11-25	xproof
 7694887a-2f3b-4ef1-b598-f3323f018ef4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grafted-skullcap:cast:s1,f:xs:XP:grafted-skullcap:cast:s1	-	-	-	5f2128bf97e4	-	59e5ec3c29f0	-	-	2026-11-24	xproof
 7694887a-2f3b-4ef1-b598-f3323f018ef4	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 7694887a-2f3b-4ef1-b598-f3323f018ef4	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:grafted-skullcap:cast:s1,f:xs:XP:grafted-skullcap:cast:s1	-	-	-	5f2128bf97e4	-	59e5ec3c29f0	-	-	2026-11-24	xproof

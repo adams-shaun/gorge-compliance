@@ -35,9 +35,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03259ab0-caa8-4620-b070-127e2c712252	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wedgelight-rammer:f0t0:s1,f:xs:XP:wedgelight-rammer:f0t0:s1	-	-	-	25696bf19d5b	-	813adbb794fe	-	-	2026-11-24	xproof
 03259ab0-caa8-4620-b070-127e2c712252	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wedgelight-rammer:f0t0:s1,f:xs:XP:wedgelight-rammer:f0t0:s1	-	-	-	25696bf19d5b	-	813adbb794fe	-	-	2026-11-24	xproof
 03259ab0-caa8-4620-b070-127e2c712252	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wedgelight Rammer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-032b5fc4-5aca-41b6-9bf6-2c1ed0018968	cast	cast-resolve	agreed	-	X	scen	1	0	Aggressive Mammoth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+032b5fc4-5aca-41b6-9bf6-2c1ed0018968	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aggressive-mammoth:cast:s1,f:xs:XP:aggressive-mammoth:cast:s1	-	-	-	3aa6ded33acb	-	a1a552c3371d	-	-	2026-11-25	xproof
 032b5fc4-5aca-41b6-9bf6-2c1ed0018968	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aggressive Mammoth/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-032b5fc4-5aca-41b6-9bf6-2c1ed0018968	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aggressive Mammoth/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+032b5fc4-5aca-41b6-9bf6-2c1ed0018968	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aggressive-mammoth:combat0.block:s1,f:xs:XP:aggressive-mammoth:combat0.block:s1	-	-	-	3aa6ded33acb	-	a1a552c3371d	-	-	2026-11-25	xproof
 032b5fc4-5aca-41b6-9bf6-2c1ed0018968	static#0.0	static#0.0	agreed	-	X	scen	1	0	Aggressive Mammoth/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 032b8a0d-491a-4a12-ab9f-689010054d5b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Prismatic Vista/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 032b8a0d-491a-4a12-ab9f-689010054d5b	land	play-land	agreed	-	FX	scen	2	0	Prismatic Vista/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 03e356ae-f1e8-4730-8d2b-b9e2f32db915	cast	cast-resolve	agreed	-	X	scen	1	0	Mind Spiral/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03e59169-d8f8-40da-b5f7-645d16365e7b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 03ebc100-68ac-4d53-adc2-d537212f7d31	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venom-connoisseur:cast:s1,f:xs:XP:venom-connoisseur:cast:s1	-	-	-	23b491658465	-	4a4bda991285	-	-	2026-11-24	xproof
-03ebc100-68ac-4d53-adc2-d537212f7d31	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Venom Connoisseur/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+03ebc100-68ac-4d53-adc2-d537212f7d31	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venom-connoisseur:f0t0:s1,f:xs:XP:venom-connoisseur:f0t0:s1	-	-	-	3aa6ded33acb	-	4a4bda991285	-	-	2026-11-25	xproof
 03ee49c9-95a3-44f1-b010-f7c4b2f86a7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vito-s-inquisitor:cast:s1,f:xs:XP:vito-s-inquisitor:cast:s1	-	-	-	8c0bd19283bb	-	f85fcb84f300	-	-	2026-11-24	xproof
 03ee49c9-95a3-44f1-b010-f7c4b2f86a7c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Vito's Inquisitor/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 03efb4f3-b8e2-4441-824f-886dc40712c4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

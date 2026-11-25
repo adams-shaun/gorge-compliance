@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a19a959-ea83-404b-89f7-e5dbf4cb7995	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:waker-of-waves:cast:s1,f:xs:XP:waker-of-waves:cast:s1	-	-	-	ae86f6029288	-	3199cb2b1458	-	-	2026-11-24	xproof
 3a19a959-ea83-404b-89f7-e5dbf4cb7995	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a1efa7e-21d5-47a1-bcd8-7d4616be0d58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a1efa7e-21d5-47a1-bcd8-7d4616be0d58	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3a1efa7e-21d5-47a1-bcd8-7d4616be0d58	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:haazda-marshal:f0t0:s1,f:xs:XP:haazda-marshal:f0t0:s1	-	-	-	3aa6ded33acb	-	7e3f5d4902e0	-	-	2026-11-25	xproof
 3a21a6ae-b2f2-4f0c-acfd-5f3e8d63fd2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-roots:cast:s1,f:xs:XP:wall-of-roots:cast:s1	-	-	-	25696bf19d5b	-	bc8ca42c198e	-	-	2026-11-24	xproof
 3a21a6ae-b2f2-4f0c-acfd-5f3e8d63fd2f	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 3a225d39-c1f8-4ab0-98ec-dad63bf268db	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:repopulate:cast:s1,f:xs:XP:repopulate:cast:s1	-	-	-	5f2128bf97e4	-	197d37f069f2	-	-	2026-11-24	xproof
@@ -95,15 +95,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a620d92-ec92-4733-8c05-7fa1b956bab6	f0/t0	NULL	owed	refused:no-generator:trigger:Always	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 3a635b73-692f-4345-9628-cb4f9f0cddad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a635b73-692f-4345-9628-cb4f9f0cddad	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:springjaw-trap:f0a0:s1,f:xs:XP:springjaw-trap:f0a0:s1	-	-	-	ae86f6029288	-	915be64a8bba	-	-	2026-11-24	xproof
-3a646245-b8b7-4f91-a312-d5eea9a9e49a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:extravagant-replication:cast:s1,f:xs:XP:extravagant-replication:cast:s1	-	-	-	23b491658465	-	a32b948d70b7	-	-	2026-11-24	xproof
-3a646245-b8b7-4f91-a312-d5eea9a9e49a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Extravagant Replication/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3a646245-b8b7-4f91-a312-d5eea9a9e49a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:extravagant-replication:f0t0:s1,f:xs:XP:extravagant-replication:f0t0:s1	-	-	-	3aa6ded33acb	-	a32b948d70b7	-	-	2026-11-25	xproof
+3a646245-b8b7-4f91-a312-d5eea9a9e49a	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:extravagant-replication:f0t0:s1,f:xs:XP:extravagant-replication:f0t0:s1	-	-	-	3aa6ded33acb	-	a32b948d70b7	-	-	2026-11-25	xproof
 3a68915d-3e8b-4ede-bdd9-6c138ca63220	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:regal-sliver:cast:s1,f:xs:XP:regal-sliver:cast:s1	-	-	-	8c0bd19283bb	-	145df8213452	-	-	2026-11-24	xproof
 3a6f886b-2043-47e9-9c0f-f7913a6fa67d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a6f886b-2043-47e9-9c0f-f7913a6fa67d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3a721a4c-696b-44d1-858d-20040bd01909	cast	cast-resolve	agreed	-	FX	scen	2	0	Talion's Messenger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3a721a4c-696b-44d1-858d-20040bd01909	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Talion's Messenger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3a721a4c-696b-44d1-858d-20040bd01909	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Talion's Messenger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3a721a4c-696b-44d1-858d-20040bd01909	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Talion's Messenger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3a721a4c-696b-44d1-858d-20040bd01909	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:talion-s-messenger:combat0.attack:s1,f:xs:XP:talion-s-messenger:combat0.attack:s1	-	-	-	3aa6ded33acb	-	524eba320dd0	-	-	2026-11-25	xproof
+3a721a4c-696b-44d1-858d-20040bd01909	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:talion-s-messenger:combat0.block:s1,f:xs:XP:talion-s-messenger:combat0.block:s1	-	-	-	3aa6ded33acb	-	524eba320dd0	-	-	2026-11-25	xproof
+3a721a4c-696b-44d1-858d-20040bd01909	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:talion-s-messenger:combat0.attack:s1,f:xs:XP:talion-s-messenger:combat0.attack:s1	-	-	-	3aa6ded33acb	-	524eba320dd0	-	-	2026-11-25	xproof
 3a726e40-829c-47ec-81a7-58a04164fc3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a726e40-829c-47ec-81a7-58a04164fc3f	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:myth-realized:f0a0:s1,f:xs:XP:myth-realized:f0a0:s1	-	-	-	d864b561c9cb	-	7147a9799b90	-	-	2026-11-24	xproof
 3a726e40-829c-47ec-81a7-58a04164fc3f	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

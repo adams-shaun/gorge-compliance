@@ -18,7 +18,7 @@ ad0db433-a406-4ef0-8ffa-416af610c4e7	combat#0.block	combat#0.block	agreed	-	X	sc
 ad0db433-a406-4ef0-8ffa-416af610c4e7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:doomsday-excruciator:f0t0:s1,f:xs:XP:doomsday-excruciator:f0t0:s1	-	-	-	25696bf19d5b	-	dabfe8865fa7	-	-	2026-11-24	xproof
 ad0db433-a406-4ef0-8ffa-416af610c4e7	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Doomsday Excruciator/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ad0e6b12-a6bd-4860-9eac-68b2492d9567	cast	cast-resolve	agreed	-	FX	scen	2	0	Charmed Clothier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ad0e6b12-a6bd-4860-9eac-68b2492d9567	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Charmed Clothier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ad0e6b12-a6bd-4860-9eac-68b2492d9567	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:charmed-clothier:combat0.attack:s1,f:xs:XP:charmed-clothier:combat0.attack:s1	-	-	-	3aa6ded33acb	-	72cb4fdd2775	-	-	2026-11-25	xproof
 ad0e6b12-a6bd-4860-9eac-68b2492d9567	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Charmed Clothier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ad0e6b12-a6bd-4860-9eac-68b2492d9567	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ad0f50d5-7b40-4fd8-8d13-4a0493398f53	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deathpact-angel:cast:s1,f:xs:XP:deathpact-angel:cast:s1	-	-	-	d864b561c9cb	-	c3f9aa1a98dd	-	-	2026-11-24	xproof
@@ -129,11 +129,11 @@ ada2f380-bca7-4d64-9587-bab11c776ba8	f0/a3	NULL	owed	refused:battlefield:aura-un
 ada3c285-3449-4037-8b44-42e128456a65	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:genju-of-the-cedars:cast:s1,f:xs:XP:genju-of-the-cedars:cast:s1	-	-	-	64a08ba7d913	-	6bb3f0fd294a	-	-	2026-11-24	xproof
 ada3c285-3449-4037-8b44-42e128456a65	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 ada3c285-3449-4037-8b44-42e128456a65	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
-ada48353-4c86-44d6-83a5-e7e3c703b948	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:redcap-gutter-dweller:f0t0:s2,f:xs:XP:redcap-gutter-dweller:f0t0:s2	-	-	-	e07cf3a05ba5	-	bd123c407af6	-	-	2026-11-24	xproof
+ada48353-4c86-44d6-83a5-e7e3c703b948	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:redcap-gutter-dweller:f0t1:s1,f:xs:XP:redcap-gutter-dweller:f0t1:s1	-	-	-	3aa6ded33acb	-	bd123c407af6	-	-	2026-11-25	xproof
 ada48353-4c86-44d6-83a5-e7e3c703b948	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Redcap Gutter-Dweller/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ada48353-4c86-44d6-83a5-e7e3c703b948	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Redcap Gutter-Dweller/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ada48353-4c86-44d6-83a5-e7e3c703b948	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:redcap-gutter-dweller:f0t0:s2,f:xs:XP:redcap-gutter-dweller:f0t0:s2	-	-	-	e07cf3a05ba5	-	bd123c407af6	-	-	2026-11-24	xproof
-ada48353-4c86-44d6-83a5-e7e3c703b948	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Redcap Gutter-Dweller/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ada48353-4c86-44d6-83a5-e7e3c703b948	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:redcap-gutter-dweller:f0t1:s1,f:xs:XP:redcap-gutter-dweller:f0t1:s1	-	-	-	3aa6ded33acb	-	bd123c407af6	-	-	2026-11-25	xproof
+ada48353-4c86-44d6-83a5-e7e3c703b948	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:redcap-gutter-dweller:f0t1:s1,f:xs:XP:redcap-gutter-dweller:f0t1:s1	-	-	-	3aa6ded33acb	-	bd123c407af6	-	-	2026-11-25	xproof
 ada82f93-dc93-4a95-a13f-42b5942b3413	cast	cast-resolve	agreed	-	FX	scen	2	0	Magic Damper/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 adac526d-1a85-431a-a302-0a4b8f4a0c44	cast	cast-resolve	agreed	-	FX	scen	2	0	Elvish Regrower/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 adac526d-1a85-431a-a302-0a4b8f4a0c44	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

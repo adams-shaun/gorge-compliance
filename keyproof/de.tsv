@@ -106,7 +106,7 @@ de8c0e2d-3207-4bc6-83ef-91e33b26a981	static#0.0	static#0.0	agreed	-	X	scen	1	0	A
 de8cdbd4-d8f7-4ce8-a69b-6d2020beff63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 de8cdbd4-d8f7-4ce8-a69b-6d2020beff63	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 de8d7cad-02c7-43f1-896e-eaa73f016ada	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:desperate-bloodseeker:f0t0:s2,f:xs:XP:desperate-bloodseeker:f0t0:s2	-	-	-	267e485f6204	-	4740013ba80b	-	-	2026-11-24	xproof
-de8d7cad-02c7-43f1-896e-eaa73f016ada	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Desperate Bloodseeker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+de8d7cad-02c7-43f1-896e-eaa73f016ada	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:desperate-bloodseeker:combat0.attack:s1,f:xs:XP:desperate-bloodseeker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4740013ba80b	-	-	2026-11-25	xproof
 de8d7cad-02c7-43f1-896e-eaa73f016ada	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Desperate Bloodseeker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 de8d7cad-02c7-43f1-896e-eaa73f016ada	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:desperate-bloodseeker:f0t0:s2,f:xs:XP:desperate-bloodseeker:f0t0:s2	-	-	-	267e485f6204	-	4740013ba80b	-	-	2026-11-24	xproof
 de8ebe4b-d86d-478b-946e-f83e1409b63f	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -131,12 +131,12 @@ debbbdd8-c8e2-4384-bcac-dbdfb18b54fa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 debce64a-18bd-42f5-9e85-158c2242e9e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deepglow-skate:f0t0:s1,f:xs:XP:deepglow-skate:f0t0:s1	-	-	-	8c0bd19283bb	-	c67ef24c4028	-	-	2026-11-24	xproof
 debce64a-18bd-42f5-9e85-158c2242e9e9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:deepglow-skate:f0t0:s1,f:xs:XP:deepglow-skate:f0t0:s1	-	-	-	8c0bd19283bb	-	c67ef24c4028	-	-	2026-11-24	xproof
 debdfab7-454f-4fec-9ee8-aa5b570ea7fb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:agatha-s-champion:f0t0:s1,f:xs:XP:agatha-s-champion:f0t0:s1	-	-	-	23b491658465	-	5db4a540f8b9	-	-	2026-11-25	xproof
-debdfab7-454f-4fec-9ee8-aa5b570ea7fb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Agatha's Champion/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+debdfab7-454f-4fec-9ee8-aa5b570ea7fb	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:agatha-s-champion:combat0.attack:s1,f:xs:XP:agatha-s-champion:combat0.attack:s1	-	-	-	3aa6ded33acb	-	5db4a540f8b9	-	-	2026-11-25	xproof
 debdfab7-454f-4fec-9ee8-aa5b570ea7fb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Agatha's Champion/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 debdfab7-454f-4fec-9ee8-aa5b570ea7fb	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dec20b18-afe6-405e-b47d-a757a5645c63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clarion-spirit:cast:s1,f:xs:XP:clarion-spirit:cast:s1	-	-	-	d864b561c9cb	-	cd0225ab1539	-	-	2026-11-24	xproof
 dec20b18-afe6-405e-b47d-a757a5645c63	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-dec281b4-e6d6-4b78-b755-358e07eb7c06	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dec281b4-e6d6-4b78-b755-358e07eb7c06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:will-of-the-all-hunter:cast:s1,f:xs:XP:will-of-the-all-hunter:cast:s1	-	-	-	3aa6ded33acb	-	25853bbfa436	-	-	2026-11-25	xproof
 dec281b4-e6d6-4b78-b755-358e07eb7c06	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:will-of-the-all-hunter:cast:s1,f:xs:XP:will-of-the-all-hunter:cast:s1	-	-	-	23b491658465	-	25853bbfa436	-	-	2026-11-25	xproof
 dec4cf13-8ac9-4eda-adae-f851b01180fe	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dec4cf13-8ac9-4eda-adae-f851b01180fe	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

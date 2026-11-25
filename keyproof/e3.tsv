@@ -44,9 +44,9 @@ e3367ed8-16a3-4b04-bc6a-e0a3c794e6d3	f0/a0	NULL	owed	refused:scen failed: xengin
 e339c6cb-c75d-4dd4-8c1a-78f844983242	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e339c6cb-c75d-4dd4-8c1a-78f844983242	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 e33c1744-843f-438f-a8c3-2d9f60120776	cast	cast-resolve	agreed	-	FX	scen	2	0	Rotisserie Elemental/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e33c1744-843f-438f-a8c3-2d9f60120776	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rotisserie Elemental/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e33c1744-843f-438f-a8c3-2d9f60120776	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rotisserie Elemental/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e33c1744-843f-438f-a8c3-2d9f60120776	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Rotisserie Elemental/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e33c1744-843f-438f-a8c3-2d9f60120776	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:rotisserie-elemental:combat0.attack:s1	-	-	-	3aa6ded33acb	-	cee83e8d4216	-	-	2026-11-25	xproof
+e33c1744-843f-438f-a8c3-2d9f60120776	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:rotisserie-elemental:combat0.block:s1,f:xs:XP:rotisserie-elemental:combat0.block:s1	-	-	-	3aa6ded33acb	-	cee83e8d4216	-	-	2026-11-25	xproof
+e33c1744-843f-438f-a8c3-2d9f60120776	f0/t0	DamageDone	agreed	-	F	start	2	0	f:xs:XP:rotisserie-elemental:combat0.attack:s1	-	-	-	3aa6ded33acb	-	cee83e8d4216	-	-	2026-11-25	xproof
 e33dec01-c114-436a-befc-dab4e806c10b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e33dec01-c114-436a-befc-dab4e806c10b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e341478e-c3f8-45d9-9430-abe3a58fa2fc	cast	cast-resolve	agreed	-	FX	scen	2	0	Deadly Riposte/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ e376702a-f56e-4e47-aa8c-3f80384d12a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e380e37d-926b-4a4b-a275-7844bf4956d5	cast	cast-resolve	agreed	-	X	scen	1	0	Titania, Rugged Rumbler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e380e37d-926b-4a4b-a275-7844bf4956d5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Titania, Rugged Rumbler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e3886fe8-9b76-4613-8891-4ec74657c087	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e38b8ecb-e7ae-474d-b6a4-29cc1aa8ccd9	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e38b8ecb-e7ae-474d-b6a4-29cc1aa8ccd9	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 e38e3723-05f5-4a51-8364-1cda19f9cc49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e38e3723-05f5-4a51-8364-1cda19f9cc49	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 e3955573-3db5-490e-903e-65e0172a9202	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hammer-of-nazahn:f0t0:s1,f:xs:XP:hammer-of-nazahn:f0t0:s1	-	-	-	8c0bd19283bb	-	83936f731744	-	-	2026-11-24	xproof

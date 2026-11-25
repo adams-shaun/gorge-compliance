@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7215b1d9-eb8b-41bc-a7e2-1930d9cd5365	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fleeting-aven:cast:s1,f:xs:XP:fleeting-aven:cast:s1	-	-	-	fc71ca68c5ac	-	e8bfd7406cea	-	-	2026-11-24	xproof
 7215b1d9-eb8b-41bc-a7e2-1930d9cd5365	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 7215ca87-bbff-4c14-a1f5-de5ddd97c875	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spitfire-lagac:cast:s1,f:xs:XP:spitfire-lagac:cast:s1	-	-	-	23b491658465	-	318bc9cf852e	-	-	2026-11-24	xproof
-7215ca87-bbff-4c14-a1f5-de5ddd97c875	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Spitfire Lagac/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7215ca87-bbff-4c14-a1f5-de5ddd97c875	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spitfire-lagac:f0t0:s1,f:xs:XP:spitfire-lagac:f0t0:s1	-	-	-	3aa6ded33acb	-	318bc9cf852e	-	-	2026-11-25	xproof
 7216f974-3c84-40ef-b904-82019900c204	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7216f974-3c84-40ef-b904-82019900c204	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 72177c93-ed1f-47bd-99a6-ad229a292d46	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -174,7 +174,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 72cecab3-519e-4a23-9623-b423a5c5a251	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72d793e8-1d19-4ca1-894c-8851a2ebecde	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 72dc807b-35fb-4d69-ae4c-04eed0646170	cast	cast-resolve	agreed	-	FX	scen	2	0	Battle-Rattle Shaman/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-72dc807b-35fb-4d69-ae4c-04eed0646170	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Battle-Rattle Shaman/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+72dc807b-35fb-4d69-ae4c-04eed0646170	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:battle-rattle-shaman:f0t0:s1,f:xs:XP:battle-rattle-shaman:f0t0:s1	-	-	-	3aa6ded33acb	-	8a904f353797	-	-	2026-11-25	xproof
 72ddbc9b-f584-433f-9d2d-6e4c374129c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jade-bearer:f0t0:s1,f:xs:XP:jade-bearer:f0t0:s1	-	-	-	d864b561c9cb	-	e38116865a91	-	-	2026-11-24	xproof
 72ddbc9b-f584-433f-9d2d-6e4c374129c4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jade-bearer:f0t0:s1,f:xs:XP:jade-bearer:f0t0:s1	-	-	-	d864b561c9cb	-	e38116865a91	-	-	2026-11-24	xproof
 72deedab-7c17-4505-aeca-4bc8596d80a5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tribute-to-the-world-tree:cast:s1,f:xs:XP:tribute-to-the-world-tree:cast:s1	-	-	-	ae86f6029288	-	28d61c707555	-	-	2026-11-24	xproof

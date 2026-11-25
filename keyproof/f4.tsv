@@ -77,8 +77,8 @@ f44a8a72-2c51-429e-8447-7bd8155b6f72	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x
 f44bde8b-43e9-4719-ac60-b8f0cee8df9b	cast	cast-resolve	agreed	-	X	scen	1	0	Training Regimen/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f44bde8b-43e9-4719-ac60-b8f0cee8df9b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Training Regimen/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f44bde8b-43e9-4719-ac60-b8f0cee8df9b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Training Regimen/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f44dc71d-d08a-45ed-ac7c-f6d1ef811d96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f44dc71d-d08a-45ed-ac7c-f6d1ef811d96	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f44dc71d-d08a-45ed-ac7c-f6d1ef811d96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:paladin-of-atonement:f0t0:s1,f:xs:XP:paladin-of-atonement:f0t0:s1	-	-	-	3aa6ded33acb	-	bff3072e1ddb	-	-	2026-11-25	xproof
+f44dc71d-d08a-45ed-ac7c-f6d1ef811d96	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:paladin-of-atonement:f0t0:s1,f:xs:XP:paladin-of-atonement:f0t0:s1	-	-	-	3aa6ded33acb	-	bff3072e1ddb	-	-	2026-11-25	xproof
 f44dc71d-d08a-45ed-ac7c-f6d1ef811d96	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f44eab45-8ff9-40eb-9919-28fe5203fc48	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barreling-attack:cast:s1,f:xs:XP:barreling-attack:cast:s1	-	-	-	ea3140b6974b	-	2d0db7dabe1a	-	-	2026-11-24	xproof
 f44fb61a-9aa5-4178-b958-5115d62a7f50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -127,7 +127,7 @@ f47659b5-d834-4153-b9fc-6a0702c503d9	f0/t0	NULL	owed	refused:no-generator:trigge
 f4770345-f15e-4e31-b6ef-4c2608df9644	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f4770345-f15e-4e31-b6ef-4c2608df9644	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 f47e4c56-0a0b-422d-bf3d-7a20ee289f15	cast	cast	agreed	-	F	start	2	0	f:xs:XP:bartolom-del-presidio:cast:s1	-	-	-	23b491658465	-	a4e6dac4d04e	-	-	2026-11-24	xproof
-f47e4c56-0a0b-422d-bf3d-7a20ee289f15	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bartolomé del Presidio/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f47e4c56-0a0b-422d-bf3d-7a20ee289f15	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:bartolom-del-presidio:f0a0:s1,f:xs:XP:bartolom-del-presidio:f0a0:s1	-	-	-	3aa6ded33acb	-	a4e6dac4d04e	-	-	2026-11-25	xproof
 f47f1c96-0b09-4277-8d61-cffa56d81be7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f47f1c96-0b09-4277-8d61-cffa56d81be7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dwarven-pony:f0a0:s1,f:xs:XP:dwarven-pony:f0a0:s1	-	-	-	ea3140b6974b	-	20cb689008d1	-	-	2026-11-24	xproof
 f4819061-b0b5-48ab-af7b-6525c3d2eab7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

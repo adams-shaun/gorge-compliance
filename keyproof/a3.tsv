@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-a30159ae-f6a6-4e29-bca2-769d3657d310	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a30159ae-f6a6-4e29-bca2-769d3657d310	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necrotic-wound:cast:s1,f:xs:XP:necrotic-wound:cast:s1	-	-	-	3aa6ded33acb	-	24be3494bdf5	-	-	2026-11-25	xproof
 a3023de2-61e7-4f46-aa4a-09d08ee7d939	cast	cast-resolve	agreed	-	FX	scen	2	0	Valor's Flagship/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a3023de2-61e7-4f46-aa4a-09d08ee7d939	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Valor's Flagship/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a3023de2-61e7-4f46-aa4a-09d08ee7d939	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Valor's Flagship/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -25,9 +25,9 @@ a30dee74-86e3-4888-980e-b22437fbbb66	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07c
 a3112971-3af4-46e8-b2d6-a8759b39d0d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ganax-astral-hunter:f0t0:s1,f:xs:XP:ganax-astral-hunter:f0t0:s1	-	-	-	8c0bd19283bb	-	474d643551f8	-	-	2026-11-24	xproof
 a3112971-3af4-46e8-b2d6-a8759b39d0d1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ganax-astral-hunter:f0t0:s1,f:xs:XP:ganax-astral-hunter:f0t0:s1	-	-	-	8c0bd19283bb	-	474d643551f8	-	-	2026-11-24	xproof
 a311daab-40dc-4433-9ed8-feab7c558bbf	cast	cast-resolve	agreed	-	FX	scen	2	0	Gishath, Sun's Avatar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a311daab-40dc-4433-9ed8-feab7c558bbf	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gishath, Sun's Avatar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a311daab-40dc-4433-9ed8-feab7c558bbf	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gishath, Sun's Avatar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a311daab-40dc-4433-9ed8-feab7c558bbf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gishath, Sun's Avatar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a311daab-40dc-4433-9ed8-feab7c558bbf	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gishath-sun-s-avatar:combat0.attack:s1,f:xs:XP:gishath-sun-s-avatar:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ba2f8feb04f2	-	-	2026-11-25	xproof
+a311daab-40dc-4433-9ed8-feab7c558bbf	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gishath-sun-s-avatar:combat0.block:s1,f:xs:XP:gishath-sun-s-avatar:combat0.block:s1	-	-	-	3aa6ded33acb	-	ba2f8feb04f2	-	-	2026-11-25	xproof
+a311daab-40dc-4433-9ed8-feab7c558bbf	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:gishath-sun-s-avatar:combat0.attack:s1,f:xs:XP:gishath-sun-s-avatar:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ba2f8feb04f2	-	-	2026-11-25	xproof
 a3122c6a-20be-4bb3-ab2f-928143378ea6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dross-prowler:cast:s1,f:xs:XP:dross-prowler:cast:s1	-	-	-	25696bf19d5b	-	862bca528095	-	-	2026-11-24	xproof
 a3169d1a-fd8d-474e-9e9f-1bd7db510e8b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a3169d1a-fd8d-474e-9e9f-1bd7db510e8b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flowstone-thopter:f0a0:s1,f:xs:XP:flowstone-thopter:f0a0:s1	-	-	-	5f2128bf97e4	-	559600cf6541	-	-	2026-11-24	xproof
@@ -135,7 +135,7 @@ a37624f9-8763-444b-95f2-f3a8dc63152b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	
 a37624f9-8763-444b-95f2-f3a8dc63152b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 a37adc18-ea11-4972-8d04-936cf3fe2613	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lost-in-the-spirit-world:cast:s1,f:xs:XP:lost-in-the-spirit-world:cast:s1	-	-	-	8c0bd19283bb	-	c8cda2735582	-	-	2026-11-24	xproof
 a37c9b13-dc45-4b55-a63d-5314abde7aab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a3805bb3-544c-4142-a6df-c60fa38d625a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a3805bb3-544c-4142-a6df-c60fa38d625a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chain-to-memory:cast:s1,f:xs:XP:chain-to-memory:cast:s1	-	-	-	3aa6ded33acb	-	d1fc285c7ce6	-	-	2026-11-25	xproof
 a382165d-d715-4836-b1ce-9e5d8dc56fb4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a383ef16-1af8-4b3a-956c-c10a93768617	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a383ef16-1af8-4b3a-956c-c10a93768617	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -177,8 +177,8 @@ a3add0d7-2610-4b4e-9d43-3f04a5cd8259	f0/a0	NULL	owed	refused:steps-needed:cost:D
 a3ae6694-6314-42e2-bc12-d0e32d49b347	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bestial-bloodline:cast:s1,f:xs:XP:bestial-bloodline:cast:s1	-	-	-	23b491658465	-	4ab2b6d02182	-	-	2026-11-24	xproof
 a3ae6694-6314-42e2-bc12-d0e32d49b347	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bestial Bloodline/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a3ae6694-6314-42e2-bc12-d0e32d49b347	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bestial Bloodline/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a3afd8b9-d499-40f7-be41-f8fee6636a1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twilight-prophet:cast:s1,f:xs:XP:twilight-prophet:cast:s1	-	-	-	d864b561c9cb	-	b967b8a48902	-	-	2026-11-24	xproof
-a3afd8b9-d499-40f7-be41-f8fee6636a1d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a3afd8b9-d499-40f7-be41-f8fee6636a1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twilight-prophet:f0t0:s1,f:xs:XP:twilight-prophet:f0t0:s1	-	-	-	3aa6ded33acb	-	b967b8a48902	-	-	2026-11-25	xproof
+a3afd8b9-d499-40f7-be41-f8fee6636a1d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:twilight-prophet:f0t0:s1,f:xs:XP:twilight-prophet:f0t0:s1	-	-	-	3aa6ded33acb	-	b967b8a48902	-	-	2026-11-25	xproof
 a3b226b9-f149-4578-882b-77447608380a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a3b2e0a2-f4ad-457b-ae70-7732bc3479ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a3b66180-ee08-4bef-90aa-7859dc77cb10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

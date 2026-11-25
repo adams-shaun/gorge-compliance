@@ -26,7 +26,7 @@ c51da69b-7fd7-43a3-be29-c44fc0c36130	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Cult 
 c51ed6e3-813b-49c4-b1de-7f92a77f8f6e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:galvanic-iteration:cast:s1,f:xs:XP:galvanic-iteration:cast:s1	-	-	-	d864b561c9cb	-	23315c0d84d6	-	-	2026-11-24	xproof
 c51fc4f2-76a6-4337-ab8f-1b3e84f82019	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c5229c17-b7be-4b05-b683-f2277edc4849	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c52cfb41-18f3-4e73-b5e7-d75baf74e578	cast	cast-resolve	agreed	-	X	scen	1	0	River's Rebuke/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c52cfb41-18f3-4e73-b5e7-d75baf74e578	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:river-s-rebuke:cast:s1,f:xs:XP:river-s-rebuke:cast:s1	-	-	-	3aa6ded33acb	-	08a83980017b	-	-	2026-11-25	xproof
 c52e4704-6edb-477f-b80c-ea8146d4385f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c52e4704-6edb-477f-b80c-ea8146d4385f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c52eaa87-9251-4a47-83fd-04e582ade612	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Willowrush Verge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -79,7 +79,7 @@ c5577514-d2af-4904-9f94-b472228c6e3d	f0/a0	NULL	owed	refused:scen failed: xengin
 c5577514-d2af-4904-9f94-b472228c6e3d	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 c5577514-d2af-4904-9f94-b472228c6e3d	f0/t1	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/CSP.json:	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 c55909d3-1f67-4a4a-9d53-8513d6cf96d8	cast	cast-resolve	agreed	-	X	scen	1	0	Stromkirk Noble/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c55909d3-1f67-4a4a-9d53-8513d6cf96d8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stromkirk Noble/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c55909d3-1f67-4a4a-9d53-8513d6cf96d8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stromkirk-noble:combat0.attack:s1,f:xs:XP:stromkirk-noble:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1e998df21e9d	-	-	2026-11-25	xproof
 c55909d3-1f67-4a4a-9d53-8513d6cf96d8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stromkirk Noble/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c55909d3-1f67-4a4a-9d53-8513d6cf96d8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stromkirk Noble/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c55909d3-1f67-4a4a-9d53-8513d6cf96d8	static#0.0	static#0.0	agreed	-	X	scen	1	0	Stromkirk Noble/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

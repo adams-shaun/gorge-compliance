@@ -5,9 +5,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f008b57-6471-4785-9571-3b90193da7e2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ashroot Animist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f008b57-6471-4785-9571-3b90193da7e2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ashroot Animist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f01c327-ba50-4fc3-a930-fa1fb02e34b9	cast	cast-resolve	agreed	-	FX	scen	2	0	Tangled Colony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3f01c327-ba50-4fc3-a930-fa1fb02e34b9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tangled Colony/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3f01c327-ba50-4fc3-a930-fa1fb02e34b9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tangled-colony:combat0.attack:s1,f:xs:XP:tangled-colony:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8dd1e15e383d	-	-	2026-11-25	xproof
 3f01c327-ba50-4fc3-a930-fa1fb02e34b9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tangled Colony/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3f01c327-ba50-4fc3-a930-fa1fb02e34b9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tangled-colony:f0t0:s1,f:xs:XP:tangled-colony:f0t0:s1	-	-	-	23b491658465	-	8dd1e15e383d	-	-	2026-11-24	xproof
+3f01c327-ba50-4fc3-a930-fa1fb02e34b9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tangled-colony:combat0.attack:s1,f:xs:XP:tangled-colony:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8dd1e15e383d	-	-	2026-11-25	xproof
 3f01c327-ba50-4fc3-a930-fa1fb02e34b9	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tangled Colony/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f03c834-2cb3-4c54-bee6-c64f3a5fce47	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nurturing-presence:f0t0:s1,f:xs:XP:nurturing-presence:f0t0:s1	-	-	-	d864b561c9cb	-	d95e34880761	-	-	2026-11-24	xproof
 3f03c834-2cb3-4c54-bee6-c64f3a5fce47	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nurturing-presence:f0t0:s1,f:xs:XP:nurturing-presence:f0t0:s1	-	-	-	d864b561c9cb	-	d95e34880761	-	-	2026-11-24	xproof
@@ -27,8 +27,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f166376-2739-411c-8f42-96f2ef28ef86	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f166376-2739-411c-8f42-96f2ef28ef86	static#0.0	static#0.0	agreed	-	X	scen	1	0	April O'Neil, Kunoichi Trainee/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f16dc14-3d3f-4ffa-90bc-9abc67db75cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f17c60e-923a-4392-9da8-87d9ded009b7	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:inspiring-vantage:f0a0:s2,f:xs:XP:inspiring-vantage:f0a0:s2	-	-	-	8c0bd19283bb	-	b65f5012ec1f	-	-	2026-11-24	xproof
-3f17c60e-923a-4392-9da8-87d9ded009b7	land	play-land	agreed	-	X	scen	1	0	Inspiring Vantage/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3f17c60e-923a-4392-9da8-87d9ded009b7	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:inspiring-vantage:land:s1,f:xs:XP:inspiring-vantage:land:s1	-	-	-	3aa6ded33acb	-	b65f5012ec1f	-	-	2026-11-25	xproof
+3f17c60e-923a-4392-9da8-87d9ded009b7	land	land	agreed	-	FX	start	2	0	x:xs:XP:inspiring-vantage:land:s1,f:xs:XP:inspiring-vantage:land:s1	-	-	-	3aa6ded33acb	-	b65f5012ec1f	-	-	2026-11-25	xproof
 3f1f27ca-15e6-4ac6-8bd3-1e6b3ca00857	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f21c1c6-7992-4036-ad3e-b599153e54fe	cast	cast-resolve	agreed	-	X	scen	1	0	Dredger's Insight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f21c1c6-7992-4036-ad3e-b599153e54fe	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dredger's Insight/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3fa67c92-6328-4d0a-95e3-656d447ab20e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fa71348-fa4d-4f39-a451-cf1570591991	cast	cast-resolve	agreed	-	X	scen	1	0	Imperious Perfect/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3fa71348-fa4d-4f39-a451-cf1570591991	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Imperious Perfect/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3fa71348-fa4d-4f39-a451-cf1570591991	static#0.0	static#0.0	agreed	-	X	scen	1	0	Imperious Perfect/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3fa71348-fa4d-4f39-a451-cf1570591991	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:imperious-perfect:static0.0:s1,f:xs:XP:imperious-perfect:static0.0:s1	-	-	-	3aa6ded33acb	-	8b3ec265211c	-	-	2026-11-25	xproof
 3faab84f-7055-4554-b948-181928d8d4e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kindly-customer:f0t0:s1,f:xs:XP:kindly-customer:f0t0:s1	-	-	-	8c0bd19283bb	-	87834a4d7bda	-	-	2026-11-24	xproof
 3faab84f-7055-4554-b948-181928d8d4e2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kindly-customer:f0t0:s1,f:xs:XP:kindly-customer:f0t0:s1	-	-	-	8c0bd19283bb	-	87834a4d7bda	-	-	2026-11-24	xproof
 3fafb6b2-5cae-45b6-8550-3ff8daa02802	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3fb3d4b3-1034-449c-864b-633e7f39d73f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-fogbringer:f0t0:s1,f:xs:XP:aven-fogbringer:f0t0:s1	-	-	-	fc71ca68c5ac	-	9ed6a3da728f	-	-	2026-11-24	xproof
 3fb3d4b3-1034-449c-864b-633e7f39d73f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aven-fogbringer:f0t0:s1,f:xs:XP:aven-fogbringer:f0t0:s1	-	-	-	fc71ca68c5ac	-	9ed6a3da728f	-	-	2026-11-24	xproof
 3fb83218-e18d-405d-91c8-46b5e4e672a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:garna-bloodfist-of-keld:cast:s1,f:xs:XP:garna-bloodfist-of-keld:cast:s1	-	-	-	23b491658465	-	f0f5d3accc59	-	-	2026-11-24	xproof
-3fb83218-e18d-405d-91c8-46b5e4e672a9	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Garna, Bloodfist of Keld/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3fb83218-e18d-405d-91c8-46b5e4e672a9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:garna-bloodfist-of-keld:f0t0:s1,f:xs:XP:garna-bloodfist-of-keld:f0t0:s1	-	-	-	3aa6ded33acb	-	f0f5d3accc59	-	-	2026-11-25	xproof
 3fb9f0d9-6514-4005-b65a-7929f7c4df06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scour-all-possibilities:cast:s1,f:xs:XP:scour-all-possibilities:cast:s1	-	-	-	d864b561c9cb	-	757a5d41f28a	-	-	2026-11-24	xproof
 3fbe46fa-88da-439a-994e-c8f1791332a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undergrowth-recon:cast:s1,f:xs:XP:undergrowth-recon:cast:s1	-	-	-	8c0bd19283bb	-	40d400ecfea2	-	-	2026-11-24	xproof
 3fbe46fa-88da-439a-994e-c8f1791332a8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Undergrowth Recon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

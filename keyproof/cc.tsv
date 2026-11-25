@@ -81,7 +81,7 @@ cc72ec48-9e8b-4ded-b445-f3a839fd1abe	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:taj
 cc72ec48-9e8b-4ded-b445-f3a839fd1abe	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:tajuru-beastmaster:cast:s1,f:xs:XP:tajuru-beastmaster:cast:s1	-	-	-	d864b561c9cb	-	110eeb30369c	-	-	2026-11-24	xproof
 cc7d902e-c86e-4771-ba66-2f63e847cff1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cc7d99e8-f9dc-47d3-b6c0-e9308d33c3c0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:invincible-hymn:cast:s1,f:xs:XP:invincible-hymn:cast:s1	-	-	-	8a1b1a193ec0	-	714417317d98	-	-	2026-11-24	xproof
-cc7dcb89-534b-4e86-abd2-8362855e2f66	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cc7dcb89-534b-4e86-abd2-8362855e2f66	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampire-s-zeal:cast:s1,f:xs:XP:vampire-s-zeal:cast:s1	-	-	-	3aa6ded33acb	-	8f996aef0f2e	-	-	2026-11-25	xproof
 cc7f290f-ca00-4285-9bdb-4b4402444f30	cast	cast-resolve	agreed	-	FX	scen	2	0	Lord of Atlantis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 cc7f290f-ca00-4285-9bdb-4b4402444f30	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lord of Atlantis/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 cc803d43-cbbe-4964-8077-ba405a741047	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ ccaadf8d-22c0-4139-b734-03ac2fcb4494	combat#0.block	combat#0.block	agreed	-	X	sc
 ccaadf8d-22c0-4139-b734-03ac2fcb4494	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Veteran Ice Climber/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ccaadf8d-22c0-4139-b734-03ac2fcb4494	static#0.0	static#0.0	agreed	-	X	scen	1	0	Veteran Ice Climber/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ccab4509-f189-4610-9597-547e7f6b0775	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sword-of-sinew-and-steel:cast:s1,f:xs:XP:sword-of-sinew-and-steel:cast:s1	-	-	-	d864b561c9cb	-	7227e9f34251	-	-	2026-11-24	xproof
-ccab4509-f189-4610-9597-547e7f6b0775	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ccab4509-f189-4610-9597-547e7f6b0775	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ccab4509-f189-4610-9597-547e7f6b0775	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sword-of-sinew-and-steel:f0a0:s1,f:xs:XP:sword-of-sinew-and-steel:f0a0:s1	-	-	-	3aa6ded33acb	-	7227e9f34251	-	-	2026-11-25	xproof
+ccab4509-f189-4610-9597-547e7f6b0775	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:sword-of-sinew-and-steel:f0a0:s1,f:xs:XP:sword-of-sinew-and-steel:f0a0:s1	-	-	-	3aa6ded33acb	-	7227e9f34251	-	-	2026-11-25	xproof
 ccaea194-4b21-4485-ba08-d8d030c9418d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ccaea194-4b21-4485-ba08-d8d030c9418d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ccaea194-4b21-4485-ba08-d8d030c9418d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ ccb2f92e-69c0-415c-81cd-52c384b3b233	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 ccb2f92e-69c0-415c-81cd-52c384b3b233	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 ccb2f92e-69c0-415c-81cd-52c384b3b233	land	land	agreed	-	FX	start	2	0	x:xs:XP:rushwood-grove:land:s1,f:xs:XP:rushwood-grove:land:s1	-	-	-	5f2128bf97e4	-	e31d84bb58af	-	-	2026-11-24	xproof
 ccb39f4a-2684-4eb7-9066-aad81ae08962	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:massacre-girl-known-killer:cast:s1,f:xs:XP:massacre-girl-known-killer:cast:s1	-	-	-	23b491658465	-	db3ff7e6e8db	-	-	2026-11-24	xproof
-ccb39f4a-2684-4eb7-9066-aad81ae08962	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Massacre Girl, Known Killer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ccb39f4a-2684-4eb7-9066-aad81ae08962	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:massacre-girl-known-killer:combat0.attack:s1,f:xs:XP:massacre-girl-known-killer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	db3ff7e6e8db	-	-	2026-11-25	xproof
 ccb39f4a-2684-4eb7-9066-aad81ae08962	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Massacre Girl, Known Killer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ccb39f4a-2684-4eb7-9066-aad81ae08962	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Massacre Girl, Known Killer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ccb39f4a-2684-4eb7-9066-aad81ae08962	static#0.0	static#0.0	agreed	-	X	scen	1	0	Massacre Girl, Known Killer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

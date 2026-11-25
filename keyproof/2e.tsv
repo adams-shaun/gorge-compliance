@@ -129,12 +129,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2e82520a-9da3-49ae-b5c8-37e7ac8853fe	cast	cast-resolve	agreed	-	X	scen	1	0	Split Up/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2e8433a2-ad71-4d30-84fe-12b709197824	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skewer-slinger:cast:s1,f:xs:XP:skewer-slinger:cast:s1	-	-	-	23b491658465	-	6daaffedadfb	-	-	2026-11-24	xproof
 2e8433a2-ad71-4d30-84fe-12b709197824	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Skewer Slinger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2e8433a2-ad71-4d30-84fe-12b709197824	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Skewer Slinger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2e8433a2-ad71-4d30-84fe-12b709197824	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Skewer Slinger/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2e8433a2-ad71-4d30-84fe-12b709197824	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:skewer-slinger:combat0.block:s1,f:xs:XP:skewer-slinger:combat0.block:s1	-	-	-	3aa6ded33acb	-	6daaffedadfb	-	-	2026-11-25	xproof
+2e8433a2-ad71-4d30-84fe-12b709197824	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:skewer-slinger:combat0.block:s1,f:xs:XP:skewer-slinger:combat0.block:s1	-	-	-	3aa6ded33acb	-	6daaffedadfb	-	-	2026-11-25	xproof
 2e8433a2-ad71-4d30-84fe-12b709197824	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Skewer Slinger/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2e88f39d-6177-42d9-b756-144219dc0961	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2e9289d6-dbc6-456d-88cf-d1f534e731d6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:firebrand-archer:cast:s1,f:xs:XP:firebrand-archer:cast:s1	-	-	-	8c0bd19283bb	-	560cf97fb164	-	-	2026-11-24	xproof
-2e9289d6-dbc6-456d-88cf-d1f534e731d6	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Firebrand Archer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2e9289d6-dbc6-456d-88cf-d1f534e731d6	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:firebrand-archer:f0t0:s1,f:xs:XP:firebrand-archer:f0t0:s1	-	-	-	3aa6ded33acb	-	560cf97fb164	-	-	2026-11-25	xproof
 2ea2ac09-690d-4cd2-8e3a-fc01ecd7c132	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ea2ac09-690d-4cd2-8e3a-fc01ecd7c132	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ea2ac09-690d-4cd2-8e3a-fc01ecd7c132	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

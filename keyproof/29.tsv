@@ -12,8 +12,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 290cd0b1-55d6-4b30-962d-075a6f75d562	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 290faa28-450e-4797-9a8f-642d8af3f82a	cast	cast-resolve	agreed	-	FX	scen	2	0	Run Away Together/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 290fe09e-04ab-48d1-a60e-db47ea8c4d00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drover-grizzly:cast:s1,f:xs:XP:drover-grizzly:cast:s1	-	-	-	23b491658465	-	5a891f24c769	-	-	2026-11-25	xproof
-290fe09e-04ab-48d1-a60e-db47ea8c4d00	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Drover Grizzly/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-290fe09e-04ab-48d1-a60e-db47ea8c4d00	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Drover Grizzly/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+290fe09e-04ab-48d1-a60e-db47ea8c4d00	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:drover-grizzly:f0a0:s1,f:xs:XP:drover-grizzly:f0a0:s1	-	-	-	3aa6ded33acb	-	5a891f24c769	-	-	2026-11-25	xproof
+290fe09e-04ab-48d1-a60e-db47ea8c4d00	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:drover-grizzly:f0a0:s1,f:xs:XP:drover-grizzly:f0a0:s1	-	-	-	3aa6ded33acb	-	5a891f24c769	-	-	2026-11-25	xproof
 2911d52f-7faf-455a-acdf-77269c9ee8ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2911d52f-7faf-455a-acdf-77269c9ee8ce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29169659-309f-4e1c-86ba-1d36420ed41e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29f27482-724d-4c15-b177-13337246d007	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:daru-encampment:f0a1:s1,f:xs:XP:daru-encampment:f0a1:s1	-	-	-	fc71ca68c5ac	-	c6420b0fa410	-	-	2026-11-24	xproof
 29f27482-724d-4c15-b177-13337246d007	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 29f34e18-2102-4ded-912f-4ac3e9e6744c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29f34e18-2102-4ded-912f-4ac3e9e6744c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+29f34e18-2102-4ded-912f-4ac3e9e6744c	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 29f4c69a-ca59-4e9f-a808-87ba85b34f2f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dark-privilege:cast:s1,f:xs:XP:dark-privilege:cast:s1	-	-	-	ea3140b6974b	-	62d715858a2d	-	-	2026-11-24	xproof
 29f4c69a-ca59-4e9f-a808-87ba85b34f2f	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 29f61caf-1aba-40cd-aff6-c3685a0997d7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:riddlemaster-sphinx:cast:s1,f:xs:XP:riddlemaster-sphinx:cast:s1	-	-	-	d864b561c9cb	-	4df35c05c722	-	-	2026-11-24	xproof

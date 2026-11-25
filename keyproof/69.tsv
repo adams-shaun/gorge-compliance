@@ -57,8 +57,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 695eea46-1535-48c5-bbb6-0b8379e77bfc	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 696363c9-e8a7-4c65-b65c-4a94891ec43d	cast	cast-resolve	agreed	-	FX	scen	2	0	Gisa, the Hellraiser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 696363c9-e8a7-4c65-b65c-4a94891ec43d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gisa, the Hellraiser/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-696363c9-e8a7-4c65-b65c-4a94891ec43d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gisa, the Hellraiser/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-696363c9-e8a7-4c65-b65c-4a94891ec43d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gisa, the Hellraiser/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+696363c9-e8a7-4c65-b65c-4a94891ec43d	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:gisa-the-hellraiser:f0t1:s1,f:xs:XP:gisa-the-hellraiser:f0t1:s1	-	-	-	3aa6ded33acb	-	de4fee40550f	-	-	2026-11-25	xproof
+696363c9-e8a7-4c65-b65c-4a94891ec43d	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:gisa-the-hellraiser:static0.0:s1,f:xs:XP:gisa-the-hellraiser:static0.0:s1	-	-	-	3aa6ded33acb	-	de4fee40550f	-	-	2026-11-25	xproof
 69658c2c-2c46-4d62-945e-1a5176869b05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 69658c2c-2c46-4d62-945e-1a5176869b05	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
 696e7ddb-bdc7-40ee-bc5c-59e98f4a7401	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:restless-vents:f0t0:s2,f:xs:XP:restless-vents:f0t0:s2	-	-	-	23b491658465	-	ca4fd7f8d222	-	-	2026-11-25	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 69757aaf-182e-41a0-a5b4-4404e4c81c45	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-rites:cast:s1,f:xs:XP:blood-rites:cast:s1	-	-	-	25696bf19d5b	-	d94fa1f23275	-	-	2026-11-24	xproof
 69757aaf-182e-41a0-a5b4-4404e4c81c45	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 697ac261-263b-4879-bf45-6d10d23312ae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-697ac261-263b-4879-bf45-6d10d23312ae	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+697ac261-263b-4879-bf45-6d10d23312ae	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ao-the-dawn-sky:f0t0:s1,f:xs:XP:ao-the-dawn-sky:f0t0:s1	-	-	-	3aa6ded33acb	-	5b5868c3d222	-	-	2026-11-25	xproof
 697b14c6-fe6a-4880-9cf2-b6602a52ca0b	cast	cast-resolve	agreed	-	X	scen	1	0	Summoned Dromedary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 697b14c6-fe6a-4880-9cf2-b6602a52ca0b	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Summoned Dromedary/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 697b14c6-fe6a-4880-9cf2-b6602a52ca0b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Summoned Dromedary/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

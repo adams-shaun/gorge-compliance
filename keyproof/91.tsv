@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9167998d-5cac-47d7-99f2-f38122f7b8e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91693cad-3233-440a-b2f0-fe4d8b17ed42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 916bd025-c44f-49c9-8d76-4b7b2f9a8ba3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:night-of-souls-betrayal:cast:s1,f:xs:XP:night-of-souls-betrayal:cast:s1	-	-	-	64a08ba7d913	-	e0a7554306ad	-	-	2026-11-24	xproof
-916cb70f-3b06-48ed-972d-75f805aa0892	cast	cast-resolve	agreed	-	X	scen	1	0	Brineborn Cutthroat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+916cb70f-3b06-48ed-972d-75f805aa0892	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brineborn-cutthroat:cast:s1,f:xs:XP:brineborn-cutthroat:cast:s1	-	-	-	3aa6ded33acb	-	e6017ae81d5c	-	-	2026-11-25	xproof
 916cb70f-3b06-48ed-972d-75f805aa0892	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Brineborn Cutthroat/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 916d2a0d-1c3e-4102-958d-524b6b4df509	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 916db499-7f0a-45f7-8abe-94818a53e494	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -165,7 +165,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 91c9dbd8-a8d8-4a4e-8408-3ad92e974d11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:niambi-esteemed-speaker:f0t0:s1,f:xs:XP:niambi-esteemed-speaker:f0t0:s1	-	-	-	ae86f6029288	-	2519df10a46f	-	-	2026-11-24	xproof
 91cac048-90ca-41bc-9177-56c78453c4a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 91d01119-9b3e-4629-8cf0-bbca2c19a7cc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rampaging-ceratops:cast:s1,f:xs:XP:rampaging-ceratops:cast:s1	-	-	-	8c0bd19283bb	-	1d31f208628c	-	-	2026-11-24	xproof
-91d01119-9b3e-4629-8cf0-bbca2c19a7cc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Rampaging Ceratops/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+91d01119-9b3e-4629-8cf0-bbca2c19a7cc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rampaging-ceratops:combat0.attack:s1,f:xs:XP:rampaging-ceratops:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1d31f208628c	-	-	2026-11-25	xproof
 91d01119-9b3e-4629-8cf0-bbca2c19a7cc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Rampaging Ceratops/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91d01119-9b3e-4629-8cf0-bbca2c19a7cc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Rampaging Ceratops/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 91d0a557-7a80-46d5-b823-392a84a6be44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

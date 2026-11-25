@@ -67,7 +67,7 @@ fb5e8b8c-bad2-45bb-abb4-2ed454525749	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fb5e8b8c-bad2-45bb-abb4-2ed454525749	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 fb5fea4a-1b04-45c6-a207-e2e8493ea968	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:xun-yu-wei-advisor:cast:s1,f:xs:XP:xun-yu-wei-advisor:cast:s1	-	-	-	5f2128bf97e4	-	16a3b16434b3	-	-	2026-11-24	xproof
 fb5fea4a-1b04-45c6-a207-e2e8493ea968	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:xun-yu-wei-advisor:f0a0:s1,f:xs:XP:xun-yu-wei-advisor:f0a0:s1	-	-	-	5f2128bf97e4	-	16a3b16434b3	-	-	2026-11-24	xproof
-fb60739e-1dc3-481d-a056-ad72e665c680	cast	cast-resolve	agreed	-	X	scen	1	0	Rite of Replication/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+fb60739e-1dc3-481d-a056-ad72e665c680	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rite-of-replication:cast:s1,f:xs:XP:rite-of-replication:cast:s1	-	-	-	3aa6ded33acb	-	15548b53206b	-	-	2026-11-25	xproof
 fb683e18-50b8-4821-9a1a-86c6dea63ac9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:temur-war-shaman:f0t0:s1,f:xs:XP:temur-war-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	505e521988b5	-	-	2026-11-24	xproof
 fb683e18-50b8-4821-9a1a-86c6dea63ac9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:temur-war-shaman:f0t0:s1,f:xs:XP:temur-war-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	505e521988b5	-	-	2026-11-24	xproof
 fb683e18-50b8-4821-9a1a-86c6dea63ac9	f0/t1	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -107,7 +107,7 @@ fb8e43f2-41d5-4ffb-a61e-940477749e00	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07
 fb8e43f2-41d5-4ffb-a61e-940477749e00	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 fb8efd6e-b8f8-4da8-ac65-5b745c02d2bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jolene-plundering-pugilist:cast:s1,f:xs:XP:jolene-plundering-pugilist:cast:s1	-	-	-	8c0bd19283bb	-	c3b10684933f	-	-	2026-11-25	xproof
 fb8efd6e-b8f8-4da8-ac65-5b745c02d2bb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Jolene, Plundering Pugilist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-fb8efd6e-b8f8-4da8-ac65-5b745c02d2bb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Jolene, Plundering Pugilist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+fb8efd6e-b8f8-4da8-ac65-5b745c02d2bb	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:jolene-plundering-pugilist:f0t0:s1,f:xs:XP:jolene-plundering-pugilist:f0t0:s1	-	-	-	3aa6ded33acb	-	c3b10684933f	-	-	2026-11-25	xproof
 fb8f7047-280b-464f-aca2-6add3e21df8f	cast	cast-resolve	agreed	-	FX	scen	2	0	Harnesser of Storms/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fb8f7047-280b-464f-aca2-6add3e21df8f	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Harnesser of Storms/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 fb8fae53-3b06-41d8-baa0-638820a4b550	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:earth-surge:cast:s1,f:xs:XP:earth-surge:cast:s1	-	-	-	77494c1ce129	-	13caec7cb4b0	-	-	2026-11-24	xproof
@@ -170,8 +170,8 @@ fbdd3ba9-d799-476b-87bc-a689d8e3cff9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 fbdd3ba9-d799-476b-87bc-a689d8e3cff9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbde72f6-a8b2-4864-ad6d-b91aa03d290e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-off:cast:s1,f:xs:XP:wall-off:cast:s1	-	-	-	8c0bd19283bb	-	cb12dc18754b	-	-	2026-11-24	xproof
 fbdec63e-0679-47e9-b82a-daa56df50481	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fbdff913-8f86-4fcb-87c3-de2011fd036d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-fbdff913-8f86-4fcb-87c3-de2011fd036d	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+fbdff913-8f86-4fcb-87c3-de2011fd036d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:victory-s-envoy:f0t0:s1,f:xs:XP:victory-s-envoy:f0t0:s1	-	-	-	3aa6ded33acb	-	1c79fad8cc9b	-	-	2026-11-25	xproof
+fbdff913-8f86-4fcb-87c3-de2011fd036d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:victory-s-envoy:f0t0:s1,f:xs:XP:victory-s-envoy:f0t0:s1	-	-	-	3aa6ded33acb	-	1c79fad8cc9b	-	-	2026-11-25	xproof
 fbdffef0-9119-4650-9f92-58e8a664db6f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 fbdffef0-9119-4650-9f92-58e8a664db6f	f0/t0	Attacks	agreed	-	FX	start	1	0	x:xs:XP:goblin-traprunner:f0t0:s1,f:xs:XP:goblin-traprunner:f0t0:s1	-	-	-	d864b561c9cb	-	39a442ad0670	-	-	2026-11-24	xproof
 fbe190eb-fd4b-40e7-9a17-48c96b60f653	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

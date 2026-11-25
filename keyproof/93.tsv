@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93056597-b964-421f-be2f-e92abef1c2a4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Emeritus of Woe/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 93088b0c-d158-473a-9c06-aa2f344a9868	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodtithe-collector:f0t0:s1,f:xs:XP:bloodtithe-collector:f0t0:s1	-	-	-	23b491658465	-	507300222adc	-	-	2026-11-25	xproof
 93088b0c-d158-473a-9c06-aa2f344a9868	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bloodtithe Collector/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-93088b0c-d158-473a-9c06-aa2f344a9868	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bloodtithe Collector/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+93088b0c-d158-473a-9c06-aa2f344a9868	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:bloodtithe-collector:combat0.block:s1,f:xs:XP:bloodtithe-collector:combat0.block:s1	-	-	-	3aa6ded33acb	-	507300222adc	-	-	2026-11-25	xproof
 93088b0c-d158-473a-9c06-aa2f344a9868	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 930b48b8-dbd1-4109-9eaa-7d7e9a04fa5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 931c0cd3-06fb-42da-86f2-476d08a238f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -195,7 +195,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93e4308e-e701-440e-861a-a30324654095	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93e9b0d6-97a8-4357-bcd4-f82d81bad232	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 93e9b0d6-97a8-4357-bcd4-f82d81bad232	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-93ee2ea1-4f9b-47dd-b7d4-b0ed5a26d719	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+93ee2ea1-4f9b-47dd-b7d4-b0ed5a26d719	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:applied-biomancy:cast:s1,f:xs:XP:applied-biomancy:cast:s1	-	-	-	3aa6ded33acb	-	0cc0eea5e538	-	-	2026-11-25	xproof
 93ef3098-d1c0-4b05-9d28-1afa133bfc4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:daxos-s-torment:f0t0:s1,f:xs:XP:daxos-s-torment:f0t0:s1	-	-	-	8c0bd19283bb	-	3de052239213	-	-	2026-11-24	xproof
 93ef3098-d1c0-4b05-9d28-1afa133bfc4f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:daxos-s-torment:f0t0:s1,f:xs:XP:daxos-s-torment:f0t0:s1	-	-	-	8c0bd19283bb	-	3de052239213	-	-	2026-11-24	xproof
 93f37df7-e1c4-457b-bc22-00c49b0c4f79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necrogen-scudder:f0t0:s1,f:xs:XP:necrogen-scudder:f0t0:s1	-	-	-	d864b561c9cb	-	caac11e97b37	-	-	2026-11-24	xproof

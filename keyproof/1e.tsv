@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e0b9767-8e51-4021-a8fb-22259e2f5347	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:fang-guardian:f0t0:s2,f:xs:XP:fang-guardian:f0t0:s2	-	-	-	267e485f6204	-	7985987ac388	-	-	2026-11-24	xproof
 1e0bb57a-f5c7-45e9-b5b9-5bb3ec930108	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e0cdff3-3ec5-41fc-8053-f072bae156b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:good-fortune-unicorn:cast:s1,f:xs:XP:good-fortune-unicorn:cast:s1	-	-	-	8c0bd19283bb	-	7984f6b3dca7	-	-	2026-11-24	xproof
-1e0cdff3-3ec5-41fc-8053-f072bae156b3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Good-Fortune Unicorn/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1e0cdff3-3ec5-41fc-8053-f072bae156b3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:good-fortune-unicorn:f0t0:s1,f:xs:XP:good-fortune-unicorn:f0t0:s1	-	-	-	3aa6ded33acb	-	7984f6b3dca7	-	-	2026-11-25	xproof
 1e0cf860-6be6-4b4b-9a67-0c19b6018ae1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sword-of-once-and-future:cast:s1,f:xs:XP:sword-of-once-and-future:cast:s1	-	-	-	ae86f6029288	-	f7d001ced261	-	-	2026-11-24	xproof
 1e0cf860-6be6-4b4b-9a67-0c19b6018ae1	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e0cf860-6be6-4b4b-9a67-0c19b6018ae1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -39,8 +39,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e4146d2-cfa0-4f5e-9761-3c83519b90c3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e4146d2-cfa0-4f5e-9761-3c83519b90c3	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e414a4f-6e76-4cbe-9c69-d52852cd5bc0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heartfire-immolator:cast:s1,f:xs:XP:heartfire-immolator:cast:s1	-	-	-	23b491658465	-	14322a380f80	-	-	2026-11-24	xproof
-1e414a4f-6e76-4cbe-9c69-d52852cd5bc0	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:heartfire-immolator:f0a0:s1,f:xs:XP:heartfire-immolator:f0a0:s1	-	-	-	23b491658465	-	14322a380f80	-	-	2026-11-24	xproof
-1e414a4f-6e76-4cbe-9c69-d52852cd5bc0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Heartfire Immolator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1e414a4f-6e76-4cbe-9c69-d52852cd5bc0	f0/a0	DealDamage	agreed	-	FX	start	1	0	x:xs:XP:heartfire-immolator:f0t0:s1,f:xs:XP:heartfire-immolator:f0t0:s1	-	-	-	3aa6ded33acb	-	14322a380f80	-	-	2026-11-25	xproof
+1e414a4f-6e76-4cbe-9c69-d52852cd5bc0	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:heartfire-immolator:f0t0:s1,f:xs:XP:heartfire-immolator:f0t0:s1	-	-	-	3aa6ded33acb	-	14322a380f80	-	-	2026-11-25	xproof
 1e462ce2-15d3-473c-8f48-9c9363fc65eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burning-prophet:cast:s1,f:xs:XP:burning-prophet:cast:s1	-	-	-	d864b561c9cb	-	1ff0de355189	-	-	2026-11-24	xproof
 1e462ce2-15d3-473c-8f48-9c9363fc65eb	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1e46c709-5278-44f3-9f0e-f71bd9558339	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1eb89059-b691-431d-bcda-ab8aa14c67c8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:veteran-cathar:f0a0:s1,f:xs:XP:veteran-cathar:f0a0:s1	-	-	-	d864b561c9cb	-	b9d2cb0f4a1f	-	-	2026-11-24	xproof
 1eb9e401-8975-447b-839d-f7cd23897465	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gleaming-barrier:cast:s1,f:xs:XP:gleaming-barrier:cast:s1	-	-	-	8c0bd19283bb	-	3e448048d1c1	-	-	2026-11-24	xproof
 1eb9e401-8975-447b-839d-f7cd23897465	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gleaming Barrier/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1eb9e401-8975-447b-839d-f7cd23897465	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gleaming Barrier/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1eb9e401-8975-447b-839d-f7cd23897465	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gleaming-barrier:combat0.block:s1,f:xs:XP:gleaming-barrier:combat0.block:s1	-	-	-	3aa6ded33acb	-	3e448048d1c1	-	-	2026-11-25	xproof
 1eb9e401-8975-447b-839d-f7cd23897465	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gleaming-barrier:f0t0:s1,f:xs:XP:gleaming-barrier:f0t0:s1	-	-	-	8c0bd19283bb	-	3e448048d1c1	-	-	2026-11-24	xproof
 1ebafd78-269a-4974-88d2-e75b44b744c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ebafd78-269a-4974-88d2-e75b44b744c2	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -182,8 +182,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1edd4f50-05ee-43e0-a288-c26666910c8b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ardent-elementalist:f0t0:s1,f:xs:XP:ardent-elementalist:f0t0:s1	-	-	-	d864b561c9cb	-	cc7746c924f8	-	-	2026-11-24	xproof
 1ee811fb-c25d-4cf5-b396-539c36e8f90f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:emrakul-s-hatcher:cast:s1,f:xs:XP:emrakul-s-hatcher:cast:s1	-	-	-	d864b561c9cb	-	b2941ecf5188	-	-	2026-11-24	xproof
 1ee811fb-c25d-4cf5-b396-539c36e8f90f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:emrakul-s-hatcher:cast:s1,f:xs:XP:emrakul-s-hatcher:cast:s1	-	-	-	d864b561c9cb	-	b2941ecf5188	-	-	2026-11-24	xproof
-1eebc02a-9a64-49b0-8322-c5ce671457ce	cast	cast-resolve	agreed	-	X	scen	1	0	Graveshifter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-1eebc02a-9a64-49b0-8322-c5ce671457ce	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1eebc02a-9a64-49b0-8322-c5ce671457ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:graveshifter:cast:s1,f:xs:XP:graveshifter:cast:s1	-	-	-	3aa6ded33acb	-	d537ecbf19f2	-	-	2026-11-25	xproof
+1eebc02a-9a64-49b0-8322-c5ce671457ce	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:graveshifter:cast:s1,f:xs:XP:graveshifter:cast:s1	-	-	-	3aa6ded33acb	-	d537ecbf19f2	-	-	2026-11-25	xproof
 1ef49064-eb2a-49ae-917e-3d441ba14bf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tel-jilad-lifebreather:cast:s1,f:xs:XP:tel-jilad-lifebreather:cast:s1	-	-	-	25696bf19d5b	-	5ad1aad9cfde	-	-	2026-11-24	xproof
 1ef49064-eb2a-49ae-917e-3d441ba14bf9	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 1ef5003c-f540-4cdc-913f-7d5280ad9f62	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

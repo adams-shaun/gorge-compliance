@@ -21,7 +21,7 @@ a5196310-f449-4d5e-8ea8-901a83bad6ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a5196310-f449-4d5e-8ea8-901a83bad6ff	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a51ec70d-1356-4403-a858-b99445bac54a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:predator-ooze:cast:s1,f:xs:XP:predator-ooze:cast:s1	-	-	-	23b491658465	-	0d5522e7c8fe	-	-	2026-11-24	xproof
 a51ec70d-1356-4403-a858-b99445bac54a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Predator Ooze/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a51ec70d-1356-4403-a858-b99445bac54a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Predator Ooze/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a51ec70d-1356-4403-a858-b99445bac54a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:predator-ooze:combat0.block:s1,f:xs:XP:predator-ooze:combat0.block:s1	-	-	-	3aa6ded33acb	-	0d5522e7c8fe	-	-	2026-11-25	xproof
 a51ec70d-1356-4403-a858-b99445bac54a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Predator Ooze/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a51ec70d-1356-4403-a858-b99445bac54a	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:predator-ooze:f0t1:s1,f:xs:XP:predator-ooze:f0t1:s1	-	-	-	23b491658465	-	0d5522e7c8fe	-	-	2026-11-24	xproof
 a52037df-0be1-4c99-b9eb-b033157af203	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -128,10 +128,10 @@ a5ba544f-b223-47c8-a408-b00512772107	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a5ba544f-b223-47c8-a408-b00512772107	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a5ba544f-b223-47c8-a408-b00512772107	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sentinel-of-the-nameless-city:f0t0:s2,f:xs:XP:sentinel-of-the-nameless-city:f0t0:s2	-	-	-	e07cf3a05ba5	-	ba10ae624068	-	-	2026-11-24	xproof
-a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sentinel of the Nameless City/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-the-nameless-city:combat0.attack:s1,f:xs:XP:sentinel-of-the-nameless-city:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ba10ae624068	-	-	2026-11-25	xproof
 a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sentinel of the Nameless City/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sentinel-of-the-nameless-city:f0t0:s2,f:xs:XP:sentinel-of-the-nameless-city:f0t0:s2	-	-	-	e07cf3a05ba5	-	ba10ae624068	-	-	2026-11-24	xproof
-a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-the-nameless-city:f0t1:s1,f:xs:XP:sentinel-of-the-nameless-city:f0t1:s1	-	-	-	23b491658465	-	ba10ae624068	-	-	2026-11-25	xproof
+a5bbfe32-2fb9-48a0-bc8a-e9899aac1fda	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:sentinel-of-the-nameless-city:combat0.attack:s1,f:xs:XP:sentinel-of-the-nameless-city:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ba10ae624068	-	-	2026-11-25	xproof
 a5c9b167-5824-4fc8-ba7a-ffa64363c029	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:contract-hero:f0t0:s1,f:xs:XP:contract-hero:f0t0:s1	-	-	-	8c0bd19283bb	-	9b49f2abaccd	-	-	2026-11-24	xproof
 a5c9b167-5824-4fc8-ba7a-ffa64363c029	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:contract-hero:f0t0:s1,f:xs:XP:contract-hero:f0t0:s1	-	-	-	8c0bd19283bb	-	9b49f2abaccd	-	-	2026-11-24	xproof
 a5c9b167-5824-4fc8-ba7a-ffa64363c029	f0/t1	Attacks	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	9b49f2abaccd	-	-	2026-11-24	xproof

@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3e41648f-c5a9-4b26-b97e-8176fe5e9c85	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 3e44226b-51a2-4099-aff8-a5befab720cb	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:bristlebud-farmer:f0t0:s2,f:xs:XP:bristlebud-farmer:f0t0:s2	-	-	-	267e485f6204	-	b0896b129968	-	-	2026-11-24	xproof
 3e44226b-51a2-4099-aff8-a5befab720cb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bristlebud Farmer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-3e44226b-51a2-4099-aff8-a5befab720cb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bristlebud Farmer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
+3e44226b-51a2-4099-aff8-a5befab720cb	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:bristlebud-farmer:combat0.block:s1,f:xs:XP:bristlebud-farmer:combat0.block:s1	-	-	-	3aa6ded33acb	-	b0896b129968	-	-	2026-11-25	xproof
 3e44226b-51a2-4099-aff8-a5befab720cb	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:bristlebud-farmer:f0t0:s2,f:xs:XP:bristlebud-farmer:f0t0:s2	-	-	-	267e485f6204	-	b0896b129968	-	-	2026-11-24	xproof
 3e44226b-51a2-4099-aff8-a5befab720cb	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bristlebud-farmer:f0t1:s1,f:xs:XP:bristlebud-farmer:f0t1:s1	-	-	-	23b491658465	-	b0896b129968	-	-	2026-11-24	xproof
 3e4cb1b2-e2cc-4925-a226-6c6f1501d9c1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -139,7 +139,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ecaefc8-ead2-47a3-a7ea-b030faab65a7	f0/a0	Untap	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	5706bcc90bfc	-	-	2026-11-24	xproof
 3ece897d-5b52-4fca-9f97-d7e864134c0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ed41d2d-211b-4013-8562-8c64d54cc43a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ramos-dragon-engine:cast:s1,f:xs:XP:ramos-dragon-engine:cast:s1	-	-	-	8c0bd19283bb	-	2ffff32232e8	-	-	2026-11-24	xproof
-3ed41d2d-211b-4013-8562-8c64d54cc43a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Ramos, Dragon Engine/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3ed41d2d-211b-4013-8562-8c64d54cc43a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:ramos-dragon-engine:combat0.attack:s1,f:xs:XP:ramos-dragon-engine:combat0.attack:s1	-	-	-	3aa6ded33acb	-	2ffff32232e8	-	-	2026-11-25	xproof
 3ed41d2d-211b-4013-8562-8c64d54cc43a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Ramos, Dragon Engine/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ed41d2d-211b-4013-8562-8c64d54cc43a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ramos, Dragon Engine/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3ed41d2d-211b-4013-8562-8c64d54cc43a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Ramos, Dragon Engine/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -161,9 +161,9 @@ cdcfc66d-3d3a-4311-b864-937e7b624d61	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mid
 cdcfc66d-3d3a-4311-b864-937e7b624d61	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cdcfc66d-3d3a-4311-b864-937e7b624d61	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:midnight-angel-armor:f0t0:s1,f:xs:XP:midnight-angel-armor:f0t0:s1	-	-	-	8c0bd19283bb	-	88b6f99e29a0	-	-	2026-11-24	xproof
 cdd1a043-bd47-4197-be26-e2f7d3f1d209	cast	cast-resolve	agreed	-	FX	scen	2	0	Dalkovan Packbeasts/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cdd1a043-bd47-4197-be26-e2f7d3f1d209	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dalkovan Packbeasts/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cdd1a043-bd47-4197-be26-e2f7d3f1d209	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dalkovan Packbeasts/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cdd1a043-bd47-4197-be26-e2f7d3f1d209	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Dalkovan Packbeasts/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cdd1a043-bd47-4197-be26-e2f7d3f1d209	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dalkovan-packbeasts:combat0.attack:s1,f:xs:XP:dalkovan-packbeasts:combat0.attack:s1	-	-	-	3aa6ded33acb	-	bc34b1724765	-	-	2026-11-25	xproof
+cdd1a043-bd47-4197-be26-e2f7d3f1d209	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dalkovan-packbeasts:combat0.block:s1,f:xs:XP:dalkovan-packbeasts:combat0.block:s1	-	-	-	3aa6ded33acb	-	bc34b1724765	-	-	2026-11-25	xproof
+cdd1a043-bd47-4197-be26-e2f7d3f1d209	f0/t0	Attacks/Mobilize	agreed	-	FX	start	2	0	x:xs:XP:dalkovan-packbeasts:combat0.attack:s1,f:xs:XP:dalkovan-packbeasts:combat0.attack:s1	-	-	-	3aa6ded33acb	-	bc34b1724765	-	-	2026-11-25	xproof
 cdd227fc-0809-45d6-bed0-e85c0c0b6c94	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:soul-snuffers:cast:s1,f:xs:XP:soul-snuffers:cast:s1	-	-	-	8a1b1a193ec0	-	57494ed297dc	-	-	2026-11-24	xproof
 cdd227fc-0809-45d6-bed0-e85c0c0b6c94	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:soul-snuffers:cast:s1,f:xs:XP:soul-snuffers:cast:s1	-	-	-	8a1b1a193ec0	-	57494ed297dc	-	-	2026-11-24	xproof
 cdd37bbf-09db-4c1f-9947-312de48a0f4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -172,8 +172,8 @@ cdda2f04-d59e-4ef8-a26d-964d80750940	cast	cast-resolve	agreed	-	X	scen	1	0	Termi
 cddb3ec4-01a2-4f4d-a690-3486c73c3df8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cddb3ec4-01a2-4f4d-a690-3486c73c3df8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cddbd819-4895-4712-b44b-d6b51f3d8646	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archive-dragon:cast:s2,f:xs:XP:archive-dragon:cast:s2	-	-	-	5437c1394672	-	764ec4b007bf	-	-	2026-11-24	xproof
-cddbd819-4895-4712-b44b-d6b51f3d8646	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Archive Dragon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cddbd819-4895-4712-b44b-d6b51f3d8646	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Archive Dragon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cddbd819-4895-4712-b44b-d6b51f3d8646	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:archive-dragon:combat0.attack:s1,f:xs:XP:archive-dragon:combat0.attack:s1	-	-	-	3aa6ded33acb	-	764ec4b007bf	-	-	2026-11-25	xproof
+cddbd819-4895-4712-b44b-d6b51f3d8646	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:archive-dragon:combat0.block:s1,f:xs:XP:archive-dragon:combat0.block:s1	-	-	-	3aa6ded33acb	-	764ec4b007bf	-	-	2026-11-25	xproof
 cddbd819-4895-4712-b44b-d6b51f3d8646	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:archive-dragon:cast:s2,f:xs:XP:archive-dragon:cast:s2	-	-	-	5437c1394672	-	764ec4b007bf	-	-	2026-11-24	xproof
 cddbd819-4895-4712-b44b-d6b51f3d8646	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Archive Dragon/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cddccc2a-a76e-48b3-b4dd-dfeab89e1619	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cosmic-intervention:cast:s1,f:xs:XP:cosmic-intervention:cast:s1	-	-	-	8c0bd19283bb	-	720aa94a5ef8	-	-	2026-11-24	xproof

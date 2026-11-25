@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8148eaa4-6fde-41f2-9b87-ccfc4d8e822f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shield-wall:cast:s1,f:xs:XP:shield-wall:cast:s1	-	-	-	fc71ca68c5ac	-	1a13fbaf89b8	-	-	2026-11-24	xproof
 814a30dc-14e4-45cb-9320-b043e686b8ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 814b87fe-2a75-4ff2-8637-7e69e3fb285b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marauding-blight-priest:cast:s1,f:xs:XP:marauding-blight-priest:cast:s1	-	-	-	23b491658465	-	a1c04a07ec5b	-	-	2026-11-24	xproof
-814b87fe-2a75-4ff2-8637-7e69e3fb285b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Marauding Blight-Priest/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+814b87fe-2a75-4ff2-8637-7e69e3fb285b	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:marauding-blight-priest:f0t0:s1,f:xs:XP:marauding-blight-priest:f0t0:s1	-	-	-	3aa6ded33acb	-	a1c04a07ec5b	-	-	2026-11-25	xproof
 814e06c0-9b61-4a64-8c67-73a8eb00a768	cast	cast-resolve	agreed	-	FX	scen	2	0	Ferocification/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 814e06c0-9b61-4a64-8c67-73a8eb00a768	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Ferocification/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 814e321d-16fd-4f7b-a8d8-2b089be76f2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -179,7 +179,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 81c515b7-9174-4b34-ad07-4144e3dbaaac	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81c515b7-9174-4b34-ad07-4144e3dbaaac	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81c70ae7-3c18-4c9b-8505-e4db9e0e6518	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wishclaw-talisman:cast:s1,f:xs:XP:wishclaw-talisman:cast:s1	-	-	-	23b491658465	-	6439b8e1a5b6	-	-	2026-11-24	xproof
-81c70ae7-3c18-4c9b-8505-e4db9e0e6518	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Wishclaw Talisman/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+81c70ae7-3c18-4c9b-8505-e4db9e0e6518	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:wishclaw-talisman:f0a0:s1,f:xs:XP:wishclaw-talisman:f0a0:s1	-	-	-	3aa6ded33acb	-	6439b8e1a5b6	-	-	2026-11-25	xproof
 81cb888c-c4d3-45a2-a03e-bfd91a2af2be	cast	cast-resolve	agreed	-	X	scen	1	0	Mirrorform/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 81d62f0a-b2ba-4e87-9003-e5472bd1101f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 81d72511-88b4-45ec-a5a9-e722caf55577	cast	cast-resolve	agreed	-	FX	scen	2	0	Mystical Teachings/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

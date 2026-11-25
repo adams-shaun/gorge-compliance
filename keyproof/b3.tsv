@@ -70,9 +70,9 @@ b34449d1-eab2-4be1-8351-568dc5ced7c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hol
 b34449d1-eab2-4be1-8351-568dc5ced7c3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hollowhenge-spirit:f0t0:s1,f:xs:XP:hollowhenge-spirit:f0t0:s1	-	-	-	d864b561c9cb	-	86c7f6642296	-	-	2026-11-24	xproof
 b34601d2-2aeb-4649-9d73-d0895611bd69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b347be2d-9aa1-42a9-b652-8fb032832f09	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:halana-and-alena-partners:cast:s1,f:xs:XP:halana-and-alena-partners:cast:s1	-	-	-	23b491658465	-	b3f32c1cee49	-	-	2026-11-24	xproof
-b347be2d-9aa1-42a9-b652-8fb032832f09	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Halana and Alena, Partners/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b347be2d-9aa1-42a9-b652-8fb032832f09	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:halana-and-alena-partners:combat0.attack:s1	-	-	-	3aa6ded33acb	-	b3f32c1cee49	-	-	2026-11-25	xproof
 b347be2d-9aa1-42a9-b652-8fb032832f09	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Halana and Alena, Partners/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b347be2d-9aa1-42a9-b652-8fb032832f09	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:halana-and-alena-partners:cast:s1,f:xs:XP:halana-and-alena-partners:cast:s1	-	-	-	23b491658465	-	b3f32c1cee49	-	-	2026-11-24	xproof
+b347be2d-9aa1-42a9-b652-8fb032832f09	f0/t0	Phase	agreed	-	X	start	2	0	x:xs:XP:halana-and-alena-partners:combat0.attack:s1	-	-	-	3aa6ded33acb	-	b3f32c1cee49	-	-	2026-11-25	xproof
 b349f018-c20b-48b0-9e65-d5fd56b24b88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:entreat-the-angels:cast:s1,f:xs:XP:entreat-the-angels:cast:s1	-	-	-	d864b561c9cb	-	ea379c4f25b7	-	-	2026-11-24	xproof
 b34a7a9e-d740-4ddc-9b3c-8c49555ee2aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b34a7a9e-d740-4ddc-9b3c-8c49555ee2aa	f0/t0	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:ethercaste-knight:f0t0:s1,f:xs:XP:ethercaste-knight:f0t0:s1	-	-	-	8a1b1a193ec0	-	f201d80698f8	-	-	2026-11-24	xproof
@@ -110,9 +110,9 @@ b38d1811-64d7-4a35-a86c-3291eecd8391	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Summo
 b38fcf9a-464a-432a-b13c-9a206d52dcd9	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 b38fcf9a-464a-432a-b13c-9a206d52dcd9	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 b38fcf9a-464a-432a-b13c-9a206d52dcd9	land	land	agreed	-	FX	start	2	0	x:xs:XP:the-unicomplex:f0t0:s1,f:xs:XP:the-unicomplex:f0t0:s1	-	-	-	25696bf19d5b	-	876e0f3a96a6	-	-	2026-11-24	xproof
-b391a4ce-52ce-4a8c-bbe5-6053951ee1d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b391a4ce-52ce-4a8c-bbe5-6053951ee1d4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-b391a4ce-52ce-4a8c-bbe5-6053951ee1d4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+b391a4ce-52ce-4a8c-bbe5-6053951ee1d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:theater-of-horrors:f0t0:s1,f:xs:XP:theater-of-horrors:f0t0:s1	-	-	-	3aa6ded33acb	-	4a7a00b76552	-	-	2026-11-25	xproof
+b391a4ce-52ce-4a8c-bbe5-6053951ee1d4	f0/a0	DealDamage	agreed	-	FX	start	1	0	x:xs:XP:theater-of-horrors:f0t0:s2,f:xs:XP:theater-of-horrors:f0t0:s2	-	-	-	3aa6ded33acb	-	4a7a00b76552	-	-	2026-11-25	xproof
+b391a4ce-52ce-4a8c-bbe5-6053951ee1d4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:theater-of-horrors:f0t0:s1,f:xs:XP:theater-of-horrors:f0t0:s1	-	-	-	3aa6ded33acb	-	4a7a00b76552	-	-	2026-11-25	xproof
 b395925b-2456-454e-9262-3b55c9f2799a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:biomechan-engineer:f0t0:s2,f:xs:XP:biomechan-engineer:f0t0:s2	-	-	-	e07cf3a05ba5	-	fd0f3d5e00ca	-	-	2026-11-24	xproof
 b395925b-2456-454e-9262-3b55c9f2799a	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:biomechan-engineer:f0a0:s1,f:xs:XP:biomechan-engineer:f0a0:s1	-	-	-	23b491658465	-	fd0f3d5e00ca	-	-	2026-11-24	xproof
 b395925b-2456-454e-9262-3b55c9f2799a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:biomechan-engineer:f0t0:s2,f:xs:XP:biomechan-engineer:f0t0:s2	-	-	-	e07cf3a05ba5	-	fd0f3d5e00ca	-	-	2026-11-24	xproof

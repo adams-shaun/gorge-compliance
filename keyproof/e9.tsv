@@ -82,7 +82,7 @@ e9566303-15cf-4444-a044-fc19540f21b6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	
 e958144e-01bc-46ff-8f56-ddf2eb098630	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thundermaw-hellkite:f0t0:s1,f:xs:XP:thundermaw-hellkite:f0t0:s1	-	-	-	d864b561c9cb	-	b0d3abc912d0	-	-	2026-11-24	xproof
 e958144e-01bc-46ff-8f56-ddf2eb098630	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thundermaw-hellkite:f0t0:s1,f:xs:XP:thundermaw-hellkite:f0t0:s1	-	-	-	d864b561c9cb	-	b0d3abc912d0	-	-	2026-11-24	xproof
 e958b3c5-0666-4a99-a933-e5cb8b0da9da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cranial-ram:f0t0:s1,f:xs:XP:cranial-ram:f0t0:s1	-	-	-	ae86f6029288	-	51fb88403781	-	-	2026-11-24	xproof
-e958b3c5-0666-4a99-a933-e5cb8b0da9da	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+e958b3c5-0666-4a99-a933-e5cb8b0da9da	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:cranial-ram:f0a0:s1,f:xs:XP:cranial-ram:f0a0:s1	-	-	-	3aa6ded33acb	-	51fb88403781	-	-	2026-11-25	xproof
 e958b3c5-0666-4a99-a933-e5cb8b0da9da	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:cranial-ram:f0t0:s1,f:xs:XP:cranial-ram:f0t0:s1	-	-	-	ae86f6029288	-	51fb88403781	-	-	2026-11-24	xproof
 e958f7bf-3011-4175-b467-ca225a9b7ad2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:triskelavus:cast:s1,f:xs:XP:triskelavus:cast:s1	-	-	-	9ee19e8250ce	-	76b7fefe16ca	-	-	2026-11-24	xproof
 e958f7bf-3011-4175-b467-ca225a9b7ad2	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ e9774695-b2f1-4014-8504-04b2339be568	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mol
 e97870a3-855a-4701-8344-91a90095f70a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vagrant-plowbeasts:cast:s1,f:xs:XP:vagrant-plowbeasts:cast:s1	-	-	-	8a1b1a193ec0	-	e7ded369b972	-	-	2026-11-24	xproof
 e97870a3-855a-4701-8344-91a90095f70a	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:vagrant-plowbeasts:f0a0:s1,f:xs:XP:vagrant-plowbeasts:f0a0:s1	-	-	-	8a1b1a193ec0	-	e7ded369b972	-	-	2026-11-24	xproof
 e97f9c2b-b41e-4f36-9245-77c0ac125647	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodghast:cast:s1,f:xs:XP:bloodghast:cast:s1	-	-	-	23b491658465	-	680e4ad4ce28	-	-	2026-11-24	xproof
-e97f9c2b-b41e-4f36-9245-77c0ac125647	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Bloodghast/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e97f9c2b-b41e-4f36-9245-77c0ac125647	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:bloodghast:combat0.attack:s1,f:xs:XP:bloodghast:combat0.attack:s1	-	-	-	3aa6ded33acb	-	680e4ad4ce28	-	-	2026-11-25	xproof
 e97f9c2b-b41e-4f36-9245-77c0ac125647	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Bloodghast/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e97f9c2b-b41e-4f36-9245-77c0ac125647	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bloodghast/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e97f9c2b-b41e-4f36-9245-77c0ac125647	static#0.0	static#0.0	agreed	-	X	scen	1	0	Bloodghast/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

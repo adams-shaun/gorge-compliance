@@ -186,7 +186,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73ec7a0b-274a-4a10-a173-ff1625d62fce	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	1722e22f83da	-	-	2026-11-24	xproof
 73f44500-fe83-40fa-b6f2-ed5673d0edcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:karlov-watchdog:cast:s1,f:xs:XP:karlov-watchdog:cast:s1	-	-	-	23b491658465	-	c88c81e1e3e7	-	-	2026-11-24	xproof
 73f44500-fe83-40fa-b6f2-ed5673d0edcc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Karlov Watchdog/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-73f44500-fe83-40fa-b6f2-ed5673d0edcc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Karlov Watchdog/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+73f44500-fe83-40fa-b6f2-ed5673d0edcc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:karlov-watchdog:combat0.block:s1,f:xs:XP:karlov-watchdog:combat0.block:s1	-	-	-	3aa6ded33acb	-	c88c81e1e3e7	-	-	2026-11-25	xproof
 73f44500-fe83-40fa-b6f2-ed5673d0edcc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Karlov Watchdog/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73f6619c-9d92-434e-9f06-52e0ff15cb5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73f6619c-9d92-434e-9f06-52e0ff15cb5e	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

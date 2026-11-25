@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f3c2b00-0000-4ae1-9650-9553accac52e	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	cast	cast-resolve	agreed	-	FX	scen	2	0	Gearbane Orangutan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Gearbane Orangutan/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Gearbane Orangutan/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gearbane-orangutan:combat0.block:s1,f:xs:XP:gearbane-orangutan:combat0.block:s1	-	-	-	3aa6ded33acb	-	8beaefc89cfb	-	-	2026-11-25	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f3f6336-6f99-4181-be3c-1814f7b8ef36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:court-of-garenbrig:f0t0:s1,f:xs:XP:court-of-garenbrig:f0t0:s1	-	-	-	8c0bd19283bb	-	8f782e884184	-	-	2026-11-24	xproof
 1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:court-of-garenbrig:f0t0:s1,f:xs:XP:court-of-garenbrig:f0t0:s1	-	-	-	8c0bd19283bb	-	8f782e884184	-	-	2026-11-24	xproof
@@ -129,7 +129,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f8d387e-e4bb-4e76-a173-f46f7b107b95	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1f8d4d5f-e82f-45f3-823e-1bb6b536eb18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grand-arbiter-augustin-iv:cast:s1,f:xs:XP:grand-arbiter-augustin-iv:cast:s1	-	-	-	16ec2936189a	-	6714b31fec21	-	-	2026-11-24	xproof
 1f91297a-ec2b-4ea8-9198-aa1daac20ff8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f938353-9081-4dc1-b8e7-d18ece038bd4	cast	cast-resolve	agreed	-	X	scen	1	0	Valorous Stance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1f938353-9081-4dc1-b8e7-d18ece038bd4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valorous-stance:cast:s1,f:xs:XP:valorous-stance:cast:s1	-	-	-	3aa6ded33acb	-	95b87fd7f175	-	-	2026-11-25	xproof
 1f9797e2-7ebb-41f9-9199-e9ee575eefd3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f9797e2-7ebb-41f9-9199-e9ee575eefd3	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:inspiring-unicorn:f0t0:s1,f:xs:XP:inspiring-unicorn:f0t0:s1	-	-	-	d864b561c9cb	-	ad33e17f87f9	-	-	2026-11-24	xproof
 1f9efad1-9f51-47aa-a5a7-9c8103435a01	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fd00656-83ba-4feb-b089-224007936b99	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mockingbird, Ace Agent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fd00656-83ba-4feb-b089-224007936b99	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mockingbird, Ace Agent/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1fd04d9e-cf89-49ba-a932-5d278f65bf77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirran-bardiche:f0t0:s1,f:xs:XP:mirran-bardiche:f0t0:s1	-	-	-	ae86f6029288	-	70b23bf38a28	-	-	2026-11-24	xproof
-1fd04d9e-cf89-49ba-a932-5d278f65bf77	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1fd04d9e-cf89-49ba-a932-5d278f65bf77	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:mirran-bardiche:f0a0:s1,f:xs:XP:mirran-bardiche:f0a0:s1	-	-	-	3aa6ded33acb	-	70b23bf38a28	-	-	2026-11-25	xproof
 1fd04d9e-cf89-49ba-a932-5d278f65bf77	f0/t0	ChangesZone/For Mirrodin	agreed	-	FX	start	2	0	x:xs:XP:mirran-bardiche:f0t0:s1,f:xs:XP:mirran-bardiche:f0t0:s1	-	-	-	ae86f6029288	-	70b23bf38a28	-	-	2026-11-24	xproof
 1fd729f6-27ea-4b07-81f0-885f2c0c00eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1fd754fd-c053-4638-b379-46d903357b01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -5,7 +5,7 @@ c107e271-5741-4a84-bfc4-3bc322972d0d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Coura
 c10fd7a6-360f-43d6-a4ef-d990c97cb2f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1111228-ef88-4b64-91e0-66ee32a1f5e4	cast	cast	agreed	-	F	start	2	0	f:xs:XP:nullpriest-of-oblivion:f0t0:s1	-	-	-	25696bf19d5b	-	df4c7d15dfdf	-	-	2026-11-24	xproof
 c1111228-ef88-4b64-91e0-66ee32a1f5e4	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Nullpriest of Oblivion/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c1111228-ef88-4b64-91e0-66ee32a1f5e4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Nullpriest of Oblivion/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c1111228-ef88-4b64-91e0-66ee32a1f5e4	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:nullpriest-of-oblivion:combat0.block:s1,f:xs:XP:nullpriest-of-oblivion:combat0.block:s1	-	-	-	3aa6ded33acb	-	df4c7d15dfdf	-	-	2026-11-25	xproof
 c1111228-ef88-4b64-91e0-66ee32a1f5e4	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:nullpriest-of-oblivion:f0t0:s1	-	-	-	25696bf19d5b	-	df4c7d15dfdf	-	-	2026-11-24	xproof
 c111703f-e37a-4eaf-b6e1-708a448e61aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c111703f-e37a-4eaf-b6e1-708a448e61aa	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	9ee19e8250ce	-	-	-	-	2026-11-24	xproof
@@ -71,9 +71,9 @@ c15bb7eb-aaaa-4468-9641-8f706d6137e8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c15c13d2-8db9-4801-a1f0-f087f2551c92	cast	cast	agreed	-	F	start	2	0	f:xs:XP:scroll-of-fate:cast:s1	-	-	-	8c0bd19283bb	-	6fae08c37dac	-	-	2026-11-24	xproof
 c15c13d2-8db9-4801-a1f0-f087f2551c92	f0/a0	Manifest	agreed	-	F	start	4	0	f:xs:XP:scroll-of-fate:cast:s1	-	-	-	8c0bd19283bb	-	6fae08c37dac	-	-	2026-11-24	xproof
 c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shoreline-looter:cast:s1,f:xs:XP:shoreline-looter:cast:s1	-	-	-	23b491658465	-	72ea77afa67b	-	-	2026-11-24	xproof
-c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Shoreline Looter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:shoreline-looter:combat0.attack:s1,f:xs:XP:shoreline-looter:combat0.attack:s1	-	-	-	3aa6ded33acb	-	72ea77afa67b	-	-	2026-11-25	xproof
 c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Shoreline Looter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Shoreline Looter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:shoreline-looter:combat0.attack:s1,f:xs:XP:shoreline-looter:combat0.attack:s1	-	-	-	3aa6ded33acb	-	72ea77afa67b	-	-	2026-11-25	xproof
 c15cad77-e70f-42cc-a9f5-50e1fd8c9c96	static#0.0	static#0.0	agreed	-	X	scen	1	0	Shoreline Looter/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c15e5cb8-b94c-4157-9327-410e66606b82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c15e5e93-2eff-407d-ae75-437e36ef85ba	cast	cast-resolve	agreed	-	FX	scen	2	0	Allies at Last/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ c1d6cce8-085f-42cb-8b0c-b6fbbf88b16a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 c1d8e97b-f34b-4e52-9795-a4433f26725a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1d8e97b-f34b-4e52-9795-a4433f26725a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 c1d9c41a-0941-4b7e-b8a6-890d30386458	cast	cast-resolve	agreed	-	FX	scen	2	0	Hunted Bonebrute/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c1d9c41a-0941-4b7e-b8a6-890d30386458	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Hunted Bonebrute/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c1d9c41a-0941-4b7e-b8a6-890d30386458	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:hunted-bonebrute:combat0.attack:s1,f:xs:XP:hunted-bonebrute:combat0.attack:s1	-	-	-	3aa6ded33acb	-	c84ae0c90597	-	-	2026-11-25	xproof
 c1d9c41a-0941-4b7e-b8a6-890d30386458	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Hunted Bonebrute/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c1d9c41a-0941-4b7e-b8a6-890d30386458	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1d9c41a-0941-4b7e-b8a6-890d30386458	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hunted-bonebrute:f0t1:s1,f:xs:XP:hunted-bonebrute:f0t1:s1	-	-	-	8c0bd19283bb	-	c84ae0c90597	-	-	2026-11-24	xproof
@@ -183,9 +183,9 @@ c1df6359-edf4-48cf-b8d1-6240ac291cf7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c1e456b6-5d2b-4c42-9464-54a8f9f8f3ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1e456b6-5d2b-4c42-9464-54a8f9f8f3ba	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c1e456b6-5d2b-4c42-9464-54a8f9f8f3ba	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c1eb530c-dd36-40ae-8617-6bb6969565e1	cast	cast-resolve	agreed	-	X	scen	1	0	Cultivator's Caravan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-c1eb530c-dd36-40ae-8617-6bb6969565e1	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:cultivator-s-caravan:f0a0:s2,f:xs:XP:cultivator-s-caravan:f0a0:s2	-	-	-	8c0bd19283bb	-	0f920b625e94	-	-	2026-11-24	xproof
-c1eb530c-dd36-40ae-8617-6bb6969565e1	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Cultivator's Caravan/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c1eb530c-dd36-40ae-8617-6bb6969565e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cultivator-s-caravan:cast:s1,f:xs:XP:cultivator-s-caravan:cast:s1	-	-	-	3aa6ded33acb	-	0f920b625e94	-	-	2026-11-25	xproof
+c1eb530c-dd36-40ae-8617-6bb6969565e1	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:cultivator-s-caravan:cast:s1,f:xs:XP:cultivator-s-caravan:cast:s1	-	-	-	3aa6ded33acb	-	0f920b625e94	-	-	2026-11-25	xproof
+c1eb530c-dd36-40ae-8617-6bb6969565e1	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:cultivator-s-caravan:f0a1:s1,f:xs:XP:cultivator-s-caravan:f0a1:s1	-	-	-	3aa6ded33acb	-	0f920b625e94	-	-	2026-11-25	xproof
 c1ebbe89-8976-4ed7-a68a-8b08aac4616c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drownyard-explorers:f0t0:s1,f:xs:XP:drownyard-explorers:f0t0:s1	-	-	-	d864b561c9cb	-	0b6f92314257	-	-	2026-11-24	xproof
 c1ebbe89-8976-4ed7-a68a-8b08aac4616c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:drownyard-explorers:f0t0:s1,f:xs:XP:drownyard-explorers:f0t0:s1	-	-	-	d864b561c9cb	-	0b6f92314257	-	-	2026-11-24	xproof
 c1ebe189-db71-47cd-a763-8cb8c305383a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -6,7 +6,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 660d44a2-391a-416c-b46c-ddcc3739f527	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Valgavoth's Lair/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 660d44a2-391a-416c-b46c-ddcc3739f527	land	play-land	agreed	-	X	scen	1	0	Valgavoth's Lair/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 660de988-b6fb-4f36-8006-42af3e7f908d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampiric-rites:cast:s1,f:xs:XP:vampiric-rites:cast:s1	-	-	-	8c0bd19283bb	-	5d5918adc555	-	-	2026-11-24	xproof
-660de988-b6fb-4f36-8006-42af3e7f908d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Vampiric Rites/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+660de988-b6fb-4f36-8006-42af3e7f908d	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:vampiric-rites:f0a0:s1,f:xs:XP:vampiric-rites:f0a0:s1	-	-	-	3aa6ded33acb	-	5d5918adc555	-	-	2026-11-25	xproof
 660ef596-8a2d-4c66-a9d5-264401980244	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	23a07bff4095	-	-	2026-11-24	xproof
 660ef596-8a2d-4c66-a9d5-264401980244	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 660ef596-8a2d-4c66-a9d5-264401980244	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	23a07bff4095	-	-	2026-11-24	xproof
@@ -81,9 +81,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 665f3e52-c536-481b-8b29-fe68f08d1fdf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crypt-angel:f0t0:s1,f:xs:XP:crypt-angel:f0t0:s1	-	-	-	5f2128bf97e4	-	7e64a17937a2	-	-	2026-11-24	xproof
 665f3e52-c536-481b-8b29-fe68f08d1fdf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:crypt-angel:f0t0:s1,f:xs:XP:crypt-angel:f0t0:s1	-	-	-	5f2128bf97e4	-	7e64a17937a2	-	-	2026-11-24	xproof
 6662968e-ca9e-454c-be44-24ad10e43d3e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:unstoppable-slasher:cast:s1,f:xs:XP:unstoppable-slasher:cast:s1	-	-	-	23b491658465	-	3d2ffb4319cc	-	-	2026-11-24	xproof
-6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Unstoppable Slasher/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Unstoppable Slasher/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Unstoppable Slasher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:unstoppable-slasher:combat0.attack:s1,f:xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:unstoppable-slasher:combat0.block:s1,f:xs:XP:unstoppable-slasher:combat0.block:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
+6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:unstoppable-slasher:combat0.attack:s1,f:xs:XP:unstoppable-slasher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	3d2ffb4319cc	-	-	2026-11-25	xproof
 6662968e-ca9e-454c-be44-24ad10e43d3e	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Unstoppable Slasher/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66630640-9605-44da-afdf-eb9d458d056f	cast	cast-resolve	agreed	-	X	scen	1	0	Mirkwood Nurturer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66630640-9605-44da-afdf-eb9d458d056f	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66bd5999-742a-43e0-827c-ecb8ec7db242	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-warden:cast:s1,f:xs:XP:ghost-warden:cast:s1	-	-	-	77494c1ce129	-	1e158ef92b5a	-	-	2026-11-24	xproof
 66bd5999-742a-43e0-827c-ecb8ec7db242	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 66bee79a-7e47-4fc4-ba07-323cd2de6261	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-66c227f2-0e74-43e2-ab24-3866d15c5eef	cast	cast-resolve	agreed	-	X	scen	1	0	Gateway Sneak/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+66c227f2-0e74-43e2-ab24-3866d15c5eef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gateway-sneak:cast:s1,f:xs:XP:gateway-sneak:cast:s1	-	-	-	3aa6ded33acb	-	57e562d4e8ab	-	-	2026-11-25	xproof
 66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Gateway Sneak/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66c227f2-0e74-43e2-ab24-3866d15c5eef	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Gateway Sneak/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66ce0ae5-7000-4e4a-891f-f571f0e58cd7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -199,8 +199,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66ee56b9-aca8-4efa-b9b5-50717e0784a7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Honorbound Page/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourgemark:f0t0:s1,f:xs:XP:scourgemark:f0t0:s1	-	-	-	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	xproof
 66efb37f-9eab-4ff4-a1d4-65fe9ca7332b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scourgemark:f0t0:s1,f:xs:XP:scourgemark:f0t0:s1	-	-	-	d864b561c9cb	-	c9d7d014ba27	-	-	2026-11-24	xproof
-66fa2326-1b5d-41fb-b919-83bf9f383577	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:blooming-marsh:f0a0:s2,f:xs:XP:blooming-marsh:f0a0:s2	-	-	-	8c0bd19283bb	-	15ef00561c64	-	-	2026-11-24	xproof
-66fa2326-1b5d-41fb-b919-83bf9f383577	land	play-land	agreed	-	X	scen	1	0	Blooming Marsh/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+66fa2326-1b5d-41fb-b919-83bf9f383577	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:blooming-marsh:land:s1,f:xs:XP:blooming-marsh:land:s1	-	-	-	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	xproof
+66fa2326-1b5d-41fb-b919-83bf9f383577	land	land	agreed	-	FX	start	2	0	x:xs:XP:blooming-marsh:land:s1,f:xs:XP:blooming-marsh:land:s1	-	-	-	3aa6ded33acb	-	15ef00561c64	-	-	2026-11-25	xproof
 66fa528f-0e3a-450f-9035-1ba5a8a921e6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66fb4764-d309-4c30-a2a4-474f9030dc87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 66fb4764-d309-4c30-a2a4-474f9030dc87	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:festering-goblin:f0t0:s1,f:xs:XP:festering-goblin:f0t0:s1	-	-	-	d864b561c9cb	-	190d5cb46db5	-	-	2026-11-24	xproof

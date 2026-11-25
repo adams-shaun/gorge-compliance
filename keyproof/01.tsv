@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 013bcab8-e527-4700-82c9-4cb9cb8a4807	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 013c42a4-d555-46c9-9d57-b50d6b59ae9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 013ca531-1ff7-4efc-a280-4bc3ab574072	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mocking-sprite:cast:s1,f:xs:XP:mocking-sprite:cast:s1	-	-	-	23b491658465	-	44faa628979f	-	-	2026-11-24	xproof
-013ca531-1ff7-4efc-a280-4bc3ab574072	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mocking Sprite/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+013ca531-1ff7-4efc-a280-4bc3ab574072	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:mocking-sprite:combat0.attack:s1,f:xs:XP:mocking-sprite:combat0.attack:s1	-	-	-	3aa6ded33acb	-	44faa628979f	-	-	2026-11-25	xproof
 013ca531-1ff7-4efc-a280-4bc3ab574072	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mocking Sprite/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 013ca531-1ff7-4efc-a280-4bc3ab574072	static#0.0	static#0.0	agreed	-	X	scen	1	0	Mocking Sprite/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 013e4281-4e3e-47c2-ac9a-f570668bcb16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -194,7 +194,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01d4c859-8b15-4567-a2c4-70a30c709999	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01d4c859-8b15-4567-a2c4-70a30c709999	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01d70534-7c26-4a54-9eca-d0ebbefc2159	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-01da67a5-e3dc-44f4-8a93-513bfa4d8fbc	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+01da67a5-e3dc-44f4-8a93-513bfa4d8fbc	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 01dbf1bc-ca62-4fb6-959c-ef7c0dc03bb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01dbf1bc-ca62-4fb6-959c-ef7c0dc03bb0	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 01dc15ee-83de-49d5-aa37-e0bdd419887e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

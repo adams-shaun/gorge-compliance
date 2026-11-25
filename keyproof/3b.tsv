@@ -91,9 +91,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b601721-90ca-45d3-9a3a-19c719799bfa	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b61b6da-44ed-4766-8134-fca37afd3f2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b66d2c2-be7a-4296-9888-f0cfb2975e89	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seismic-monstrosaur:cast:s1,f:xs:XP:seismic-monstrosaur:cast:s1	-	-	-	23b491658465	-	d9bcd622114e	-	-	2026-11-25	xproof
-3b66d2c2-be7a-4296-9888-f0cfb2975e89	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Seismic Monstrosaur/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b66d2c2-be7a-4296-9888-f0cfb2975e89	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Seismic Monstrosaur/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b66d2c2-be7a-4296-9888-f0cfb2975e89	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Seismic Monstrosaur/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3b66d2c2-be7a-4296-9888-f0cfb2975e89	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:seismic-monstrosaur:combat0.attack:s1,f:xs:XP:seismic-monstrosaur:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d9bcd622114e	-	-	2026-11-25	xproof
+3b66d2c2-be7a-4296-9888-f0cfb2975e89	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:seismic-monstrosaur:combat0.block:s1,f:xs:XP:seismic-monstrosaur:combat0.block:s1	-	-	-	3aa6ded33acb	-	d9bcd622114e	-	-	2026-11-25	xproof
+3b66d2c2-be7a-4296-9888-f0cfb2975e89	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:seismic-monstrosaur:f0a0:s1,f:xs:XP:seismic-monstrosaur:f0a0:s1	-	-	-	3aa6ded33acb	-	d9bcd622114e	-	-	2026-11-25	xproof
 3b66d2c2-be7a-4296-9888-f0cfb2975e89	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Seismic Monstrosaur/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:caller-of-the-pack:cast:s1,f:xs:XP:caller-of-the-pack:cast:s1	-	-	-	8c0bd19283bb	-	ecc1a65d29c4	-	-	2026-11-24	xproof
 3b6cbd2a-02ba-4afb-a081-0f25d830a8ee	f0/t0	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:caller-of-the-pack:f0t0:s1,f:xs:XP:caller-of-the-pack:f0t0:s1	-	-	-	8c0bd19283bb	-	ecc1a65d29c4	-	-	2026-11-24	xproof

@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a848c1f-d11a-42fb-b9ce-663901fc9555	cast	cast-resolve	agreed	-	FX	scen	2	0	Revival of the Ancestors/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a851367-1c4a-4cc9-a9c3-3d2775986b4c	cast	cast-resolve	agreed	-	X	scen	1	0	Blossoming Defense/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 5a8630a8-804e-4789-b9a3-96d9ede5e188	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5a8630a8-804e-4789-b9a3-96d9ede5e188	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5a8630a8-804e-4789-b9a3-96d9ede5e188	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:brass-knuckles:f0a0:s1,f:xs:XP:brass-knuckles:f0a0:s1	-	-	-	3aa6ded33acb	-	20787cba2e1b	-	-	2026-11-25	xproof
 5a8630a8-804e-4789-b9a3-96d9ede5e188	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a88f616-986d-4e97-9457-26c783489123	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barbarian-bully:cast:s1,f:xs:XP:barbarian-bully:cast:s1	-	-	-	fc71ca68c5ac	-	cc87b50ca482	-	-	2026-11-24	xproof
 5a88f616-986d-4e97-9457-26c783489123	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5a8dd1b7-b63e-4997-9fe8-5e8816bc051b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tempt-with-glory:cast:s1,f:xs:XP:tempt-with-glory:cast:s1	-	-	-	8c0bd19283bb	-	90e344e9644d	-	-	2026-11-24	xproof
 5a8e7e35-e9ea-4808-8aa7-7580a23b9d9d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:ultimecia-temporal-threat:f0t0:s2,f:xs:XP:ultimecia-temporal-threat:f0t0:s2	-	-	-	e07cf3a05ba5	-	db9dc02307e2	-	-	2026-11-24	xproof
 5a8e7e35-e9ea-4808-8aa7-7580a23b9d9d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:ultimecia-temporal-threat:f0t0:s2,f:xs:XP:ultimecia-temporal-threat:f0t0:s2	-	-	-	e07cf3a05ba5	-	db9dc02307e2	-	-	2026-11-24	xproof
-5a8e7e35-e9ea-4808-8aa7-7580a23b9d9d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ultimecia, Temporal Threat/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5a8e7e35-e9ea-4808-8aa7-7580a23b9d9d	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:ultimecia-temporal-threat:f0t1:s1,f:xs:XP:ultimecia-temporal-threat:f0t1:s1	-	-	-	3aa6ded33acb	-	db9dc02307e2	-	-	2026-11-25	xproof
 5a938371-8428-48e3-85ed-6a84a39b29c6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5a96b93b-bae6-48fb-87f5-05f3ffcf7ba9	cast	cast-resolve	agreed	-	X	scen	1	0	Defibrillating Current/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5a98decb-30ba-4c34-a88a-424b7f4e03bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akki-avalanchers:cast:s1,f:xs:XP:akki-avalanchers:cast:s1	-	-	-	25696bf19d5b	-	a1ad5e0e72d4	-	-	2026-11-24	xproof

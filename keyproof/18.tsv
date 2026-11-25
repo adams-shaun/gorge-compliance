@@ -27,7 +27,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 180eda7c-fca2-403b-85cd-8ffebaf9f408	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180efbd4-0f77-41cc-8ae2-2e6ccf853d10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:archon-of-the-wild-rose:cast:s1,f:xs:XP:archon-of-the-wild-rose:cast:s1	-	-	-	23b491658465	-	530e5baea7fa	-	-	2026-11-24	xproof
 180efbd4-0f77-41cc-8ae2-2e6ccf853d10	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Archon of the Wild Rose/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-180efbd4-0f77-41cc-8ae2-2e6ccf853d10	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Archon of the Wild Rose/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+180efbd4-0f77-41cc-8ae2-2e6ccf853d10	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:archon-of-the-wild-rose:combat0.block:s1,f:xs:XP:archon-of-the-wild-rose:combat0.block:s1	-	-	-	3aa6ded33acb	-	530e5baea7fa	-	-	2026-11-25	xproof
 180efbd4-0f77-41cc-8ae2-2e6ccf853d10	static#0.0	static#0.0	agreed	-	X	scen	1	0	Archon of the Wild Rose/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1816b87c-73ba-4bfc-a51e-c982381c067d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1816eede-c5bd-49df-958f-a3af64cb2932	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omnath-locus-of-rage:cast:s1,f:xs:XP:omnath-locus-of-rage:cast:s1	-	-	-	d864b561c9cb	-	8fcee017a642	-	-	2026-11-24	xproof
@@ -213,8 +213,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18ed0c8a-db8f-4247-87c4-544b833f01bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ed0c8a-db8f-4247-87c4-544b833f01bd	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:claim-jumper:f0t0:s1,f:xs:XP:claim-jumper:f0t0:s1	-	-	-	23b491658465	-	4ee96b570d60	-	-	2026-11-25	xproof
-18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Claim Jumper/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Claim Jumper/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:claim-jumper:combat0.attack:s1,f:xs:XP:claim-jumper:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4ee96b570d60	-	-	2026-11-25	xproof
+18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:claim-jumper:combat0.block:s1,f:xs:XP:claim-jumper:combat0.block:s1	-	-	-	3aa6ded33acb	-	4ee96b570d60	-	-	2026-11-25	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18f22960-87ec-43cd-82ea-ec5cabf49ad3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18f22cc4-e10b-4af0-9c1f-d7d15dbcce63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malicious-affliction:cast:s1,f:xs:XP:malicious-affliction:cast:s1	-	-	-	8c0bd19283bb	-	cd01e8c334e5	-	-	2026-11-24	xproof

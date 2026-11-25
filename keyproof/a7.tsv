@@ -6,11 +6,11 @@ a7043fbd-1dfd-42cf-be4b-cc343d0949e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a7043fbd-1dfd-42cf-be4b-cc343d0949e5	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 a7043fbd-1dfd-42cf-be4b-cc343d0949e5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sanguine-evangelist:f0t0:s2,f:xs:XP:sanguine-evangelist:f0t0:s2	-	-	-	e07cf3a05ba5	-	e427fcd2e86d	-	-	2026-11-24	xproof
-a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sanguine Evangelist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sanguine-evangelist:combat0.attack:s1,f:xs:XP:sanguine-evangelist:combat0.attack:s1	-	-	-	3aa6ded33acb	-	e427fcd2e86d	-	-	2026-11-25	xproof
 a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sanguine Evangelist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:sanguine-evangelist:f0t0:s2,f:xs:XP:sanguine-evangelist:f0t0:s2	-	-	-	e07cf3a05ba5	-	e427fcd2e86d	-	-	2026-11-24	xproof
 a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sanguine-evangelist:f0t1:s1,f:xs:XP:sanguine-evangelist:f0t1:s1	-	-	-	23b491658465	-	e427fcd2e86d	-	-	2026-11-25	xproof
-a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	f0/t2	Attacks/Battle cry	agreed	-	FX	start	2	0	x:xs:XP:sanguine-evangelist:f0t2:s1,f:xs:XP:sanguine-evangelist:f0t2:s1	-	-	-	8c0bd19283bb	-	e427fcd2e86d	-	-	2026-11-24	xproof
+a70d9645-7c25-4fcb-9d16-fb73ce8b55e2	f0/t2	Attacks/Battle cry	agreed	-	FX	start	2	0	x:xs:XP:sanguine-evangelist:combat0.attack:s1,f:xs:XP:sanguine-evangelist:combat0.attack:s1	-	-	-	3aa6ded33acb	-	e427fcd2e86d	-	-	2026-11-25	xproof
 a70ffefb-840c-48c3-a59d-e12306086bb6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:nezumi-informant:cast:s1,f:xs:XP:nezumi-informant:cast:s1	-	-	-	ae86f6029288	-	0290460ba7f4	-	-	2026-11-24	xproof
 a70ffefb-840c-48c3-a59d-e12306086bb6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:nezumi-informant:cast:s1,f:xs:XP:nezumi-informant:cast:s1	-	-	-	ae86f6029288	-	0290460ba7f4	-	-	2026-11-24	xproof
 a7157ec5-9e6a-4771-b3db-6760640d6c6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scale-blessing:cast:s1,f:xs:XP:scale-blessing:cast:s1	-	-	-	d864b561c9cb	-	82447c77897d	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ a7726d8c-7539-43bc-9614-418fa12c0912	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a7726d8c-7539-43bc-9614-418fa12c0912	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7736614-cdd3-43bd-ab3e-461e3e24ed40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warehouse-tabby:cast:s1,f:xs:XP:warehouse-tabby:cast:s1	-	-	-	23b491658465	-	b3f2a66ccdcb	-	-	2026-11-24	xproof
 a7736614-cdd3-43bd-ab3e-461e3e24ed40	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:warehouse-tabby:f0a0:s1,f:xs:XP:warehouse-tabby:f0a0:s1	-	-	-	23b491658465	-	b3f2a66ccdcb	-	-	2026-11-24	xproof
-a7736614-cdd3-43bd-ab3e-461e3e24ed40	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Warehouse Tabby/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a7736614-cdd3-43bd-ab3e-461e3e24ed40	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:warehouse-tabby:f0t0:s1,f:xs:XP:warehouse-tabby:f0t0:s1	-	-	-	3aa6ded33acb	-	b3f2a66ccdcb	-	-	2026-11-25	xproof
 a7756bc2-26ce-4044-a322-a898af8a393d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7756bc2-26ce-4044-a322-a898af8a393d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7796af7-d41c-42a6-9033-a4d79dee84d6	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ a78f981a-bf8a-42a4-b171-d655cc2cc1a2	static#0.0	static#0.0	agreed	-	X	scen	1	0	R
 a7950edb-5670-46fd-a30e-0fe888a5a32b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-dreadnought:f0t0:s1,f:xs:XP:phyrexian-dreadnought:f0t0:s1	-	-	-	8c0bd19283bb	-	a0fd58e23f0b	-	-	2026-11-24	xproof
 a7950edb-5670-46fd-a30e-0fe888a5a32b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-dreadnought:f0t0:s1,f:xs:XP:phyrexian-dreadnought:f0t0:s1	-	-	-	8c0bd19283bb	-	a0fd58e23f0b	-	-	2026-11-24	xproof
 a7955f10-f502-4893-88ad-f36e7ff0af4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:armguard-familiar:cast:s1,f:xs:XP:armguard-familiar:cast:s1	-	-	-	d864b561c9cb	-	da8a3741b817	-	-	2026-11-24	xproof
-a7955f10-f502-4893-88ad-f36e7ff0af4f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+a7955f10-f502-4893-88ad-f36e7ff0af4f	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:armguard-familiar:f0a0:s1	-	-	-	3aa6ded33acb	-	da8a3741b817	-	-	2026-11-25	xproof
 a7955f10-f502-4893-88ad-f36e7ff0af4f	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a7955f10-f502-4893-88ad-f36e7ff0af4f	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 a79d2fc8-467f-464d-9e73-2dae4b059628	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ a7e7be75-646d-4c99-8388-15bb422c8e25	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:x
 a7e97fa9-4b72-4548-b854-5be5f18a6f1a	cast	cast-resolve	agreed	-	FX	scen	2	0	Disenchant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a7ec13c6-7ade-433a-b5a2-047854eef486	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:corsair-captain:f0t0:s2,f:xs:XP:corsair-captain:f0t0:s2	-	-	-	e07cf3a05ba5	-	f9f8bd146301	-	-	2026-11-24	xproof
 a7ec13c6-7ade-433a-b5a2-047854eef486	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:corsair-captain:f0t0:s2,f:xs:XP:corsair-captain:f0t0:s2	-	-	-	e07cf3a05ba5	-	f9f8bd146301	-	-	2026-11-24	xproof
-a7ec13c6-7ade-433a-b5a2-047854eef486	static#0.0	static#0.0	agreed	-	X	scen	1	0	Corsair Captain/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a7ec13c6-7ade-433a-b5a2-047854eef486	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:corsair-captain:static0.0:s1,f:xs:XP:corsair-captain:static0.0:s1	-	-	-	3aa6ded33acb	-	f9f8bd146301	-	-	2026-11-25	xproof
 a7eef84a-0b56-41d5-a298-dc3cf199e125	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:joraga-bard:f0t0:s1,f:xs:XP:joraga-bard:f0t0:s1	-	-	-	8a1b1a193ec0	-	ddc45dffd3e6	-	-	2026-11-24	xproof
 a7eef84a-0b56-41d5-a298-dc3cf199e125	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:joraga-bard:f0t0:s1,f:xs:XP:joraga-bard:f0t0:s1	-	-	-	8a1b1a193ec0	-	ddc45dffd3e6	-	-	2026-11-24	xproof
 a7f266b5-7258-4eaa-b447-66460ec38505	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

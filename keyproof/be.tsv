@@ -57,7 +57,7 @@ be31fa46-d5ac-4c85-9c19-3f0e2b1f223b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 be37ef9d-955a-417e-bde8-bb9e0bdf3612	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be3c138b-045b-4b08-a12f-a5679d972051	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be3c138b-045b-4b08-a12f-a5679d972051	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:ominous-parcel:f0a1:s1,f:xs:XP:ominous-parcel:f0a1:s1	-	-	-	23b491658465	-	e09c38cd3662	-	-	2026-11-25	xproof
-be3c138b-045b-4b08-a12f-a5679d972051	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+be3c138b-045b-4b08-a12f-a5679d972051	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:ominous-parcel:f0a1:s1,f:xs:XP:ominous-parcel:f0a1:s1	-	-	-	3aa6ded33acb	-	e09c38cd3662	-	-	2026-11-25	xproof
 be3c7e4c-81fd-49e7-8fb5-5eb83994dafd	cast	cast-resolve	agreed	-	FX	scen	2	0	Bonecache Overseer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be3c7e4c-81fd-49e7-8fb5-5eb83994dafd	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Bonecache Overseer/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 be3dd0c8-32c2-4a56-9290-1fc9e366bae2	cast	cast-resolve	agreed	-	X	scen	1	0	Primary Unimatrix Adjunct/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -102,8 +102,8 @@ be700da5-123e-461e-8192-88f9d86925b9	f0/t0	NULL	owed	refused:no-generator:trigge
 be70c6e8-6f9f-49fb-ab40-c6ce0ec2077c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oboro-envoy:cast:s1,f:xs:XP:oboro-envoy:cast:s1	-	-	-	64a08ba7d913	-	7f18db08ec78	-	-	2026-11-24	xproof
 be70c6e8-6f9f-49fb-ab40-c6ce0ec2077c	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	64a08ba7d913	-	-	-	-	2026-11-24	xproof
 be738992-77fe-498d-b219-e5da4ce5bf07	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-be74a4c1-d569-4203-b28a-3e2ac6a82990	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dictate-of-kruphix:cast:s1,f:xs:XP:dictate-of-kruphix:cast:s1	-	-	-	8c0bd19283bb	-	192a6dcb8785	-	-	2026-11-24	xproof
-be74a4c1-d569-4203-b28a-3e2ac6a82990	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dictate of Kruphix/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+be74a4c1-d569-4203-b28a-3e2ac6a82990	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dictate-of-kruphix:f0t0:s1,f:xs:XP:dictate-of-kruphix:f0t0:s1	-	-	-	3aa6ded33acb	-	192a6dcb8785	-	-	2026-11-25	xproof
+be74a4c1-d569-4203-b28a-3e2ac6a82990	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dictate-of-kruphix:f0t0:s1,f:xs:XP:dictate-of-kruphix:f0t0:s1	-	-	-	3aa6ded33acb	-	192a6dcb8785	-	-	2026-11-25	xproof
 be77e3f8-76a3-4d03-a8be-ad4b0b72f929	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 be78a76c-e126-4f09-9e8e-b773a437cfeb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:strength-of-the-pack:cast:s1,f:xs:XP:strength-of-the-pack:cast:s1	-	-	-	d864b561c9cb	-	2b80267904de	-	-	2026-11-24	xproof
 be78d7ca-b904-452f-b9eb-34792e588986	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grim-discovery:cast:s1,f:xs:XP:grim-discovery:cast:s1	-	-	-	8a1b1a193ec0	-	815dc6aa150c	-	-	2026-11-24	xproof

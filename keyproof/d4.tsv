@@ -29,8 +29,8 @@ d4212d44-d6a0-4c5b-9c54-bc90f36828dd	f0/t1	NULL	owed	refused:no-generator:trigge
 d4220231-e9ac-4390-8c7b-979549b26d33	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4220231-e9ac-4390-8c7b-979549b26d33	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4246e4d-390d-4925-a5a8-89cd096a237c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sphinx-of-the-final-word:cast:s1,f:xs:XP:sphinx-of-the-final-word:cast:s1	-	-	-	23b491658465	-	d1353322266f	-	-	2026-11-24	xproof
-d4246e4d-390d-4925-a5a8-89cd096a237c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sphinx of the Final Word/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d4246e4d-390d-4925-a5a8-89cd096a237c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sphinx of the Final Word/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d4246e4d-390d-4925-a5a8-89cd096a237c	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sphinx-of-the-final-word:combat0.attack:s1,f:xs:XP:sphinx-of-the-final-word:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d1353322266f	-	-	2026-11-25	xproof
+d4246e4d-390d-4925-a5a8-89cd096a237c	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sphinx-of-the-final-word:combat0.block:s1,f:xs:XP:sphinx-of-the-final-word:combat0.block:s1	-	-	-	3aa6ded33acb	-	d1353322266f	-	-	2026-11-25	xproof
 d424cab6-84be-4e55-8f4e-af11b1c50ede	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d424cab6-84be-4e55-8f4e-af11b1c50ede	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d427e61d-5b30-4d2a-bad2-2e7f016036ca	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -72,7 +72,7 @@ d45c6c3f-6079-40c1-9083-06f2f2431bcc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d4607026-80b2-4fa6-99d5-694cd3b43868	cast	cast-resolve	agreed	-	X	scen	1	0	Great Gilded Boat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d4607026-80b2-4fa6-99d5-694cd3b43868	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Great Gilded Boat/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d4607026-80b2-4fa6-99d5-694cd3b43868	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Great Gilded Boat/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d463de75-8d3c-4077-a2cc-c304a63acc69	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d463de75-8d3c-4077-a2cc-c304a63acc69	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 d4647f16-b287-46a2-9c38-93881c290f76	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nether-horror:cast:s1,f:xs:XP:nether-horror:cast:s1	-	-	-	d864b561c9cb	-	84e33226107c	-	-	2026-11-24	xproof
 d464b54c-3b02-4c4e-99ef-1ad75f336c65	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-assault-team:cast:s1,f:xs:XP:goblin-assault-team:cast:s1	-	-	-	d864b561c9cb	-	19689d45bea5	-	-	2026-11-24	xproof
 d464b54c-3b02-4c4e-99ef-1ad75f336c65	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-assault-team:f0t0:s1,f:xs:XP:goblin-assault-team:f0t0:s1	-	-	-	d864b561c9cb	-	19689d45bea5	-	-	2026-11-24	xproof
@@ -87,8 +87,8 @@ d473b507-8c33-4118-bc10-b0a268776074	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d47fc902-51f7-4ad1-8ee4-c973e32192b8	cast	cast	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	4fa7675da0fa	-	-	2026-11-24	xproof
 d47fc902-51f7-4ad1-8ee4-c973e32192b8	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	25696bf19d5b	-	4fa7675da0fa	-	-	2026-11-24	xproof
 d481630c-83c4-47d2-a770-db331154d2b9	cast	cast-resolve	agreed	-	FX	scen	2	0	Skyraker Giant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d481630c-83c4-47d2-a770-db331154d2b9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Skyraker Giant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d481630c-83c4-47d2-a770-db331154d2b9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Skyraker Giant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d481630c-83c4-47d2-a770-db331154d2b9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:skyraker-giant:combat0.attack:s1,f:xs:XP:skyraker-giant:combat0.attack:s1	-	-	-	3aa6ded33acb	-	95e5d82f6368	-	-	2026-11-25	xproof
+d481630c-83c4-47d2-a770-db331154d2b9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:skyraker-giant:combat0.block:s1,f:xs:XP:skyraker-giant:combat0.block:s1	-	-	-	3aa6ded33acb	-	95e5d82f6368	-	-	2026-11-25	xproof
 d4838305-5392-42b2-81d1-9b9da71b20b1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d4838305-5392-42b2-81d1-9b9da71b20b1	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d4838305-5392-42b2-81d1-9b9da71b20b1	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

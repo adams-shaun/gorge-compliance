@@ -15,9 +15,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 060d109f-2969-4f9e-a723-535d662a571a	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 060d109f-2969-4f9e-a723-535d662a571a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 060deaff-44d6-4f03-9568-bcb7add80255	cast	cast-resolve	agreed	-	FX	scen	2	0	Drakuseth, Maw of Flames/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-060deaff-44d6-4f03-9568-bcb7add80255	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Drakuseth, Maw of Flames/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-060deaff-44d6-4f03-9568-bcb7add80255	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Drakuseth, Maw of Flames/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-060deaff-44d6-4f03-9568-bcb7add80255	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:drakuseth-maw-of-flames:f0t0:s1,f:xs:XP:drakuseth-maw-of-flames:f0t0:s1	-	-	-	23b491658465	-	d7e7fbbd5dcb	-	-	2026-11-24	xproof
+060deaff-44d6-4f03-9568-bcb7add80255	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:drakuseth-maw-of-flames:combat0.attack:s1,f:xs:XP:drakuseth-maw-of-flames:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d7e7fbbd5dcb	-	-	2026-11-25	xproof
+060deaff-44d6-4f03-9568-bcb7add80255	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:drakuseth-maw-of-flames:combat0.block:s1,f:xs:XP:drakuseth-maw-of-flames:combat0.block:s1	-	-	-	3aa6ded33acb	-	d7e7fbbd5dcb	-	-	2026-11-25	xproof
+060deaff-44d6-4f03-9568-bcb7add80255	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:drakuseth-maw-of-flames:combat0.attack:s1,f:xs:XP:drakuseth-maw-of-flames:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d7e7fbbd5dcb	-	-	2026-11-25	xproof
 060e0378-e335-4b3d-82aa-ae36639339f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 060e0378-e335-4b3d-82aa-ae36639339f6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 060e7187-0c7d-4022-9a1f-36a6f75314ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goatnap:cast:s1,f:xs:XP:goatnap:cast:s1	-	-	-	8c0bd19283bb	-	4bedff07af21	-	-	2026-11-24	xproof
@@ -112,7 +112,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0677f49e-f8bf-4349-af52-2ccde9287c2e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mox-jet:cast:s1,f:xs:XP:mox-jet:cast:s1	-	-	-	ae86f6029288	-	104ab9e986c2	-	-	2026-11-24	xproof
 0677f49e-f8bf-4349-af52-2ccde9287c2e	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:mox-jet:cast:s2,f:xs:XP:mox-jet:cast:s2	-	-	-	ae86f6029288	-	104ab9e986c2	-	-	2026-11-24	xproof
 0679dcef-e1c3-4739-a769-18a4ffdcfde7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akawalli-the-seething-tower:cast:s1,f:xs:XP:akawalli-the-seething-tower:cast:s1	-	-	-	23b491658465	-	f1fa6f1bcdde	-	-	2026-11-24	xproof
-0679dcef-e1c3-4739-a769-18a4ffdcfde7	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Akawalli, the Seething Tower/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0679dcef-e1c3-4739-a769-18a4ffdcfde7	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:akawalli-the-seething-tower:combat0.attack:s1,f:xs:XP:akawalli-the-seething-tower:combat0.attack:s1	-	-	-	3aa6ded33acb	-	f1fa6f1bcdde	-	-	2026-11-25	xproof
 0679dcef-e1c3-4739-a769-18a4ffdcfde7	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Akawalli, the Seething Tower/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0679dcef-e1c3-4739-a769-18a4ffdcfde7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Akawalli, the Seething Tower/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0679dcef-e1c3-4739-a769-18a4ffdcfde7	static#0.1	static#0.1	agreed	-	X	scen	1	0	Akawalli, the Seething Tower/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -143,11 +143,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06a2a50d-f54f-4eb7-9cf8-ce37d802794a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trusty-retriever:f0t0:s1,f:xs:XP:trusty-retriever:f0t0:s1	-	-	-	23b491658465	-	8e331fbf2547	-	-	2026-11-24	xproof
 06a2a50d-f54f-4eb7-9cf8-ce37d802794a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06a37f16-c929-4b89-bf18-1b3f8f472eef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leering-onlooker:cast:s1,f:xs:XP:leering-onlooker:cast:s1	-	-	-	8c0bd19283bb	-	b20270971f52	-	-	2026-11-24	xproof
-06a37f16-c929-4b89-bf18-1b3f8f472eef	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Leering Onlooker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+06a37f16-c929-4b89-bf18-1b3f8f472eef	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:leering-onlooker:combat0.attack:s1,f:xs:XP:leering-onlooker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	b20270971f52	-	-	2026-11-25	xproof
 06a37f16-c929-4b89-bf18-1b3f8f472eef	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Leering Onlooker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-06a37f16-c929-4b89-bf18-1b3f8f472eef	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Leering Onlooker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+06a37f16-c929-4b89-bf18-1b3f8f472eef	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:leering-onlooker:f0a0:s1,f:xs:XP:leering-onlooker:f0a0:s1	-	-	-	3aa6ded33acb	-	b20270971f52	-	-	2026-11-25	xproof
 06a3fe24-7e1f-4f98-ba2f-dbb5d38f4b9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06a6130f-f27b-4db0-915d-decd9a7d3c15	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+06a6130f-f27b-4db0-915d-decd9a7d3c15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crystal-carapace:cast:s1,f:xs:XP:crystal-carapace:cast:s1	-	-	-	3aa6ded33acb	-	3e3d38c3a67b	-	-	2026-11-25	xproof
 06a6130f-f27b-4db0-915d-decd9a7d3c15	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:crystal-carapace:cast:s1,f:xs:XP:crystal-carapace:cast:s1	-	-	-	23b491658465	-	3e3d38c3a67b	-	-	2026-11-25	xproof
 06a94ea3-6cda-42fe-ba3b-40a0e9044f8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06a94ea3-6cda-42fe-ba3b-40a0e9044f8e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

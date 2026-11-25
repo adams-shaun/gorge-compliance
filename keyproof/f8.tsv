@@ -66,7 +66,7 @@ f84850bc-6348-449e-bd82-bb39e2119bec	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 f84c30e7-2ea8-43ff-9356-1f907558cfd9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aegis-turtle:cast:s1,f:xs:XP:aegis-turtle:cast:s1	-	-	-	23b491658465	-	2b3b4c034c1c	-	-	2026-11-24	xproof
 f84d1291-1f82-4b67-a26e-b79624b4ce1d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cloudblazer:f0t0:s2,f:xs:XP:cloudblazer:f0t0:s2	-	-	-	e07cf3a05ba5	-	40bf93532cd0	-	-	2026-11-24	xproof
 f84d1291-1f82-4b67-a26e-b79624b4ce1d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cloudblazer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f84d1291-1f82-4b67-a26e-b79624b4ce1d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cloudblazer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f84d1291-1f82-4b67-a26e-b79624b4ce1d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:cloudblazer:combat0.block:s1,f:xs:XP:cloudblazer:combat0.block:s1	-	-	-	3aa6ded33acb	-	40bf93532cd0	-	-	2026-11-25	xproof
 f84d1291-1f82-4b67-a26e-b79624b4ce1d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cloudblazer:f0t0:s2,f:xs:XP:cloudblazer:f0t0:s2	-	-	-	e07cf3a05ba5	-	40bf93532cd0	-	-	2026-11-24	xproof
 f8506acb-3fc5-4fdf-8304-586843db6cfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8506acb-3fc5-4fdf-8304-586843db6cfd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -105,8 +105,8 @@ f888f3ba-8316-4c10-bf97-873731f7d364	f0/t0	NULL	owed	refused:no-generator:trigge
 f88a096e-7497-4297-ab65-f18769b1cc47	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f88a096e-7497-4297-ab65-f18769b1cc47	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f88db161-3d00-4f45-b2a4-cbdc4f8e5312	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:willow-elf:cast:s1,f:xs:XP:willow-elf:cast:s1	-	-	-	5f2128bf97e4	-	2dc9f23c89bc	-	-	2026-11-24	xproof
-f88e1616-a7c7-4122-b626-bfa799cccaa4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oracle-of-tragedy:f0t0:s1,f:xs:XP:oracle-of-tragedy:f0t0:s1	-	-	-	23b491658465	-	287bc5bccf6d	-	-	2026-11-25	xproof
-f88e1616-a7c7-4122-b626-bfa799cccaa4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+f88e1616-a7c7-4122-b626-bfa799cccaa4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oracle-of-tragedy:f0t0:s1,f:xs:XP:oracle-of-tragedy:f0t0:s1	-	-	-	3aa6ded33acb	-	287bc5bccf6d	-	-	2026-11-25	xproof
+f88e1616-a7c7-4122-b626-bfa799cccaa4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oracle-of-tragedy:f0t0:s1,f:xs:XP:oracle-of-tragedy:f0t0:s1	-	-	-	3aa6ded33acb	-	287bc5bccf6d	-	-	2026-11-25	xproof
 f88e1616-a7c7-4122-b626-bfa799cccaa4	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f88e7647-49dc-4d55-99f6-2f153854e5c0	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f88eeb04-4b8e-4c76-a8c6-90887b94d518	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,9 +183,9 @@ f8d5a65c-382b-4277-9c08-5dec9e395b02	f0/t0	NULL	owed	refused:no-generator:trigge
 f8d64a8e-1bff-4960-bc36-1fbb4fc18c8f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:returned-phalanx:cast:s1,f:xs:XP:returned-phalanx:cast:s1	-	-	-	d864b561c9cb	-	eda0d76fc706	-	-	2026-11-24	xproof
 f8d64a8e-1bff-4960-bc36-1fbb4fc18c8f	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:returned-phalanx:f0a0:s1,f:xs:XP:returned-phalanx:f0a0:s1	-	-	-	d864b561c9cb	-	eda0d76fc706	-	-	2026-11-24	xproof
 f8d7bcbd-9a1d-4fc6-abdd-88a7e01b9411	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ornery-tumblewagg:cast:s1,f:xs:XP:ornery-tumblewagg:cast:s1	-	-	-	23b491658465	-	8b53027fc1de	-	-	2026-11-25	xproof
-f8d7bcbd-9a1d-4fc6-abdd-88a7e01b9411	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ornery Tumblewagg/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f8d7bcbd-9a1d-4fc6-abdd-88a7e01b9411	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ornery-tumblewagg:cast:s1,f:xs:XP:ornery-tumblewagg:cast:s1	-	-	-	23b491658465	-	8b53027fc1de	-	-	2026-11-25	xproof
-f8d7bcbd-9a1d-4fc6-abdd-88a7e01b9411	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Ornery Tumblewagg/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f8d7bcbd-9a1d-4fc6-abdd-88a7e01b9411	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:ornery-tumblewagg:f0a0:s1,f:xs:XP:ornery-tumblewagg:f0a0:s1	-	-	-	3aa6ded33acb	-	8b53027fc1de	-	-	2026-11-25	xproof
+f8d7bcbd-9a1d-4fc6-abdd-88a7e01b9411	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:ornery-tumblewagg:f0a0:s1,f:xs:XP:ornery-tumblewagg:f0a0:s1	-	-	-	3aa6ded33acb	-	8b53027fc1de	-	-	2026-11-25	xproof
+f8d7bcbd-9a1d-4fc6-abdd-88a7e01b9411	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ornery-tumblewagg:f0t1:s1,f:xs:XP:ornery-tumblewagg:f0t1:s1	-	-	-	3aa6ded33acb	-	8b53027fc1de	-	-	2026-11-25	xproof
 f8d82a00-c10e-4b9e-9642-d05706900a97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-brambles:cast:s1,f:xs:XP:wall-of-brambles:cast:s1	-	-	-	ae86f6029288	-	316ed00ce681	-	-	2026-11-24	xproof
 f8d82a00-c10e-4b9e-9642-d05706900a97	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:wall-of-brambles:f0a0:s1,f:xs:XP:wall-of-brambles:f0a0:s1	-	-	-	ae86f6029288	-	316ed00ce681	-	-	2026-11-24	xproof
 f8dab16e-1d50-443e-9431-8b6f1cf61c9c	cast	cast-resolve	agreed	-	X	scen	1	0	Notion Thief/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -195,7 +195,7 @@ f8df23ed-e239-435a-a4a9-cf10da6df28f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hel
 f8e17f4f-080d-4bba-bd05-ca27e94ccecc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:terror-of-the-peaks:cast:s1,f:xs:XP:terror-of-the-peaks:cast:s1	-	-	-	23b491658465	-	3504da1a4b33	-	-	2026-11-24	xproof
 f8e17f4f-080d-4bba-bd05-ca27e94ccecc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Terror of the Peaks/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f8e17f4f-080d-4bba-bd05-ca27e94ccecc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Terror of the Peaks/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f8e17f4f-080d-4bba-bd05-ca27e94ccecc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Terror of the Peaks/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f8e17f4f-080d-4bba-bd05-ca27e94ccecc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:terror-of-the-peaks:f0t0:s1,f:xs:XP:terror-of-the-peaks:f0t0:s1	-	-	-	3aa6ded33acb	-	3504da1a4b33	-	-	2026-11-25	xproof
 f8e17f4f-080d-4bba-bd05-ca27e94ccecc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Terror of the Peaks/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f8e1b38a-2a77-4cf1-8bef-31acb61ede10	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f8e8cdc6-5685-4986-a14b-20bb9e31d9cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

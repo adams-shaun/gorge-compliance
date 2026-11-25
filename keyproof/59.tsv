@@ -38,9 +38,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 592689f2-f17c-40d6-b880-431f4b6a6b0c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Bristlebane Battler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 592689f2-f17c-40d6-b880-431f4b6a6b0c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Bristlebane Battler/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 592c91fc-6430-4c76-9460-65f047350f67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lyra-dawnbringer:cast:s1,f:xs:XP:lyra-dawnbringer:cast:s1	-	-	-	8c0bd19283bb	-	ff54f0c5a851	-	-	2026-11-24	xproof
-592c91fc-6430-4c76-9460-65f047350f67	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Lyra Dawnbringer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+592c91fc-6430-4c76-9460-65f047350f67	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:lyra-dawnbringer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ff54f0c5a851	-	-	2026-11-25	xproof
 592c91fc-6430-4c76-9460-65f047350f67	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Lyra Dawnbringer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-592c91fc-6430-4c76-9460-65f047350f67	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lyra Dawnbringer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+592c91fc-6430-4c76-9460-65f047350f67	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:lyra-dawnbringer:static0.0:s1,f:xs:XP:lyra-dawnbringer:static0.0:s1	-	-	-	3aa6ded33acb	-	ff54f0c5a851	-	-	2026-11-25	xproof
 59322432-591a-4e8d-aff5-12ca1feb1028	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:magmatic-galleon:f0t0:s2,f:xs:XP:magmatic-galleon:f0t0:s2	-	-	-	e07cf3a05ba5	-	d3111a638556	-	-	2026-11-24	xproof
 59322432-591a-4e8d-aff5-12ca1feb1028	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Magmatic Galleon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 59322432-591a-4e8d-aff5-12ca1feb1028	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:magmatic-galleon:f0t0:s2,f:xs:XP:magmatic-galleon:f0t0:s2	-	-	-	e07cf3a05ba5	-	d3111a638556	-	-	2026-11-24	xproof

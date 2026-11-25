@@ -22,7 +22,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 41129dc1-be88-4198-94f9-032817a79bc7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Karakyk Guardian/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 411484ac-a87d-49e8-a7ef-0cd055a872b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 411b9158-e427-4099-bd30-3fbb22edb553	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geyser-drake:cast:s1,f:xs:XP:geyser-drake:cast:s1	-	-	-	23b491658465	-	bef8e97fc0e2	-	-	2026-11-25	xproof
-411b9158-e427-4099-bd30-3fbb22edb553	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Geyser Drake/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+411b9158-e427-4099-bd30-3fbb22edb553	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:geyser-drake:combat0.attack:s1,f:xs:XP:geyser-drake:combat0.attack:s1	-	-	-	3aa6ded33acb	-	bef8e97fc0e2	-	-	2026-11-25	xproof
 411b9158-e427-4099-bd30-3fbb22edb553	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Geyser Drake/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 411b9158-e427-4099-bd30-3fbb22edb553	static#0.0	static#0.0	agreed	-	X	scen	1	0	Geyser Drake/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 411ba1a2-30bb-4618-b874-6be0d996f07d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -50,9 +50,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4127794b-84d1-4efb-b0e9-543a02b07fa8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 41283a82-ce3f-41a6-995e-bc30d8ab5cf9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 412eb5ec-bf13-45fb-94b3-c41e62b19d1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savior-of-the-sleeping:cast:s1,f:xs:XP:savior-of-the-sleeping:cast:s1	-	-	-	23b491658465	-	23bca34b3b89	-	-	2026-11-24	xproof
-412eb5ec-bf13-45fb-94b3-c41e62b19d1d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Savior of the Sleeping/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+412eb5ec-bf13-45fb-94b3-c41e62b19d1d	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:savior-of-the-sleeping:combat0.attack:s1,f:xs:XP:savior-of-the-sleeping:combat0.attack:s1	-	-	-	3aa6ded33acb	-	23bca34b3b89	-	-	2026-11-25	xproof
 412eb5ec-bf13-45fb-94b3-c41e62b19d1d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Savior of the Sleeping/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-412eb5ec-bf13-45fb-94b3-c41e62b19d1d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Savior of the Sleeping/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+412eb5ec-bf13-45fb-94b3-c41e62b19d1d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:savior-of-the-sleeping:f0t0:s1,f:xs:XP:savior-of-the-sleeping:f0t0:s1	-	-	-	3aa6ded33acb	-	23bca34b3b89	-	-	2026-11-25	xproof
 412f57e8-76af-4636-bab0-e0940300ee2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 412f57e8-76af-4636-bab0-e0940300ee2e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 412f57e8-76af-4636-bab0-e0940300ee2e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4162e60f-9d70-4b8c-a838-df57b83c208d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:obyra-dreaming-duelist:cast:s1,f:xs:XP:obyra-dreaming-duelist:cast:s1	-	-	-	23b491658465	-	ef4e406a6bc6	-	-	2026-11-24	xproof
 4162e60f-9d70-4b8c-a838-df57b83c208d	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Obyra, Dreaming Duelist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4162e60f-9d70-4b8c-a838-df57b83c208d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Obyra, Dreaming Duelist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4162e60f-9d70-4b8c-a838-df57b83c208d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Obyra, Dreaming Duelist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4162e60f-9d70-4b8c-a838-df57b83c208d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:obyra-dreaming-duelist:f0t0:s1,f:xs:XP:obyra-dreaming-duelist:f0t0:s1	-	-	-	3aa6ded33acb	-	ef4e406a6bc6	-	-	2026-11-25	xproof
 4163aa30-7e3d-424f-b003-f4a300f0071e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4163aa30-7e3d-424f-b003-f4a300f0071e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 4164034a-5e59-4e40-a150-2c1000b0bd0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:extraction-specialist:f0t0:s1,f:xs:XP:extraction-specialist:f0t0:s1	-	-	-	d864b561c9cb	-	4c703e31d1eb	-	-	2026-11-24	xproof

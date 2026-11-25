@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 054fedbb-062e-491e-9a94-594fda33094f	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 05501e88-d4c3-4474-92a9-c02ab15b107b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05551d91-50c6-46d1-86a4-cd3d177d0923	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anim-pakal-thousandth-moon:cast:s1,f:xs:XP:anim-pakal-thousandth-moon:cast:s1	-	-	-	23b491658465	-	d92310c48666	-	-	2026-11-24	xproof
-05551d91-50c6-46d1-86a4-cd3d177d0923	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Anim Pakal, Thousandth Moon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+05551d91-50c6-46d1-86a4-cd3d177d0923	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:anim-pakal-thousandth-moon:f0t0:s1,f:xs:XP:anim-pakal-thousandth-moon:f0t0:s1	-	-	-	3aa6ded33acb	-	d92310c48666	-	-	2026-11-25	xproof
 05608055-d97a-4c8f-833d-47b3dd1ea255	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05608055-d97a-4c8f-833d-47b3dd1ea255	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0585ea6a-ef78-4386-a22c-6b8d8fc6c03c	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05861ff2-ec85-43d1-b641-c5d2da819c03	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05861ff2-ec85-43d1-b641-c5d2da819c03	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-05878e49-93ad-4144-9c50-a0bb86126c2e	cast	cast-resolve	agreed	-	X	scen	1	0	Chart a Course/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+05878e49-93ad-4144-9c50-a0bb86126c2e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chart-a-course:cast:s1,f:xs:XP:chart-a-course:cast:s1	-	-	-	3aa6ded33acb	-	7fa0239ec482	-	-	2026-11-25	xproof
 058917c1-21ab-488a-9f9c-591c55f3c596	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:diabolic-edict:cast:s1,f:xs:XP:diabolic-edict:cast:s1	-	-	-	25696bf19d5b	-	0da603682783	-	-	2026-11-24	xproof
 05899372-9784-4bdb-9c28-504c71fed906	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:witch-s-clinic:f0a0:s2,f:xs:XP:witch-s-clinic:f0a0:s2	-	-	-	8c0bd19283bb	-	42c571c83b8a	-	-	2026-11-24	xproof
 05899372-9784-4bdb-9c28-504c71fed906	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,8 +132,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05a6a571-643e-429e-8e5c-1c3f8b0dc746	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:utvara-hellkite:f0t0:s1,f:xs:XP:utvara-hellkite:f0t0:s1	-	-	-	d864b561c9cb	-	fa52dbfc2202	-	-	2026-11-24	xproof
 05a7ca83-e820-433f-b9e9-151e817d3708	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05a7ca83-e820-433f-b9e9-151e817d3708	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-05abc57a-839d-4376-986c-8e3855e34239	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:irreverent-revelers:f0t0:s1,f:xs:XP:irreverent-revelers:f0t0:s1	-	-	-	23b491658465	-	1aa11d5b21a6	-	-	2026-11-25	xproof
-05abc57a-839d-4376-986c-8e3855e34239	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+05abc57a-839d-4376-986c-8e3855e34239	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:irreverent-revelers:f0t0:s1,f:xs:XP:irreverent-revelers:f0t0:s1	-	-	-	3aa6ded33acb	-	1aa11d5b21a6	-	-	2026-11-25	xproof
+05abc57a-839d-4376-986c-8e3855e34239	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:irreverent-revelers:f0t0:s1,f:xs:XP:irreverent-revelers:f0t0:s1	-	-	-	3aa6ded33acb	-	1aa11d5b21a6	-	-	2026-11-25	xproof
 05ac6e5c-b773-45ed-9c74-3cd4b05bc287	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05ac6e5c-b773-45ed-9c74-3cd4b05bc287	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05ac6e5c-b773-45ed-9c74-3cd4b05bc287	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -182,10 +182,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05e910aa-cf84-468c-8a48-256588cbbf08	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 05eccdee-84f8-42d5-b79c-36d081656915	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05f15b7b-28bf-4b63-a4ca-b57712a1a66a	cast	cast-resolve	agreed	-	FX	scen	2	0	Cactusfolk Sureshot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-05f15b7b-28bf-4b63-a4ca-b57712a1a66a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cactusfolk Sureshot/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+05f15b7b-28bf-4b63-a4ca-b57712a1a66a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:cactusfolk-sureshot:combat0.attack:s1,f:xs:XP:cactusfolk-sureshot:combat0.attack:s1	-	-	-	3aa6ded33acb	-	bca0f36c7d7d	-	-	2026-11-25	xproof
 05f15b7b-28bf-4b63-a4ca-b57712a1a66a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cactusfolk Sureshot/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-05f15b7b-28bf-4b63-a4ca-b57712a1a66a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cactusfolk Sureshot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-05f15b7b-28bf-4b63-a4ca-b57712a1a66a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Cactusfolk Sureshot/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+05f15b7b-28bf-4b63-a4ca-b57712a1a66a	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:cactusfolk-sureshot:combat0.attack:s1,f:xs:XP:cactusfolk-sureshot:combat0.attack:s1	-	-	-	3aa6ded33acb	-	bca0f36c7d7d	-	-	2026-11-25	xproof
+05f15b7b-28bf-4b63-a4ca-b57712a1a66a	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:cactusfolk-sureshot:f0t1:s1,f:xs:XP:cactusfolk-sureshot:f0t1:s1	-	-	-	3aa6ded33acb	-	bca0f36c7d7d	-	-	2026-11-25	xproof
 05f3638f-3c66-47bb-8a82-ad173e152573	cast	cast-resolve	agreed	-	FX	scen	2	0	Merfolk Coralsmith/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 05f3638f-3c66-47bb-8a82-ad173e152573	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Merfolk Coralsmith/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 05f3638f-3c66-47bb-8a82-ad173e152573	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Merfolk Coralsmith/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7b513bd0-27df-45f3-a85f-1f0aba3cae48	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Council of Echoes/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b513bd0-27df-45f3-a85f-1f0aba3cae48	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:council-of-echoes:f0t0:s2,f:xs:XP:council-of-echoes:f0t0:s2	-	-	-	e07cf3a05ba5	-	e409e5003424	-	-	2026-11-24	xproof
 7b51a979-47e0-4b98-8ec5-8064c83422e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:knight-of-grace:cast:s1,f:xs:XP:knight-of-grace:cast:s1	-	-	-	8c0bd19283bb	-	eee43577f86d	-	-	2026-11-24	xproof
-7b51a979-47e0-4b98-8ec5-8064c83422e1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Knight of Grace/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7b51a979-47e0-4b98-8ec5-8064c83422e1	combat#0.attack	combat.attack	agreed	-	X	start	2	0	x:xs:XP:knight-of-grace:combat0.attack:s1	-	-	-	3aa6ded33acb	-	eee43577f86d	-	-	2026-11-25	xproof
 7b51a979-47e0-4b98-8ec5-8064c83422e1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Knight of Grace/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b51a979-47e0-4b98-8ec5-8064c83422e1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Knight of Grace/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7b587921-00d3-42c0-b295-b62310173390	f0/a0	Animate	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	ad7470968a13	-	-	2026-11-24	xproof
@@ -161,9 +161,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7bbede9a-8981-4435-9854-af61a18c6166	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Silver Deputy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7bbede9a-8981-4435-9854-af61a18c6166	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:silver-deputy:f0t0:s2,f:xs:XP:silver-deputy:f0t0:s2	-	-	-	267e485f6204	-	44a620efa0b2	-	-	2026-11-24	xproof
 7bc4c7e2-6758-4a85-84e7-03ab93981106	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tinybones-the-pickpocket:cast:s1,f:xs:XP:tinybones-the-pickpocket:cast:s1	-	-	-	23b491658465	-	4df880811733	-	-	2026-11-24	xproof
-7bc4c7e2-6758-4a85-84e7-03ab93981106	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tinybones, the Pickpocket/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7bc4c7e2-6758-4a85-84e7-03ab93981106	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tinybones-the-pickpocket:combat0.attack:s1,f:xs:XP:tinybones-the-pickpocket:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4df880811733	-	-	2026-11-25	xproof
 7bc4c7e2-6758-4a85-84e7-03ab93981106	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tinybones, the Pickpocket/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7bc4c7e2-6758-4a85-84e7-03ab93981106	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tinybones, the Pickpocket/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7bc4c7e2-6758-4a85-84e7-03ab93981106	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:tinybones-the-pickpocket:combat0.attack:s1,f:xs:XP:tinybones-the-pickpocket:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4df880811733	-	-	2026-11-25	xproof
 7bc53740-86e7-4e9d-aab6-b5ae62a42133	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7bca544e-08d8-4e83-aa30-c7201a649a66	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nosy-goblin:cast:s1,f:xs:XP:nosy-goblin:cast:s1	-	-	-	fc71ca68c5ac	-	5dc8520d74c5	-	-	2026-11-24	xproof
 7bca544e-08d8-4e83-aa30-c7201a649a66	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
