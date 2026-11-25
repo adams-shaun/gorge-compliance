@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 1f00edd6-4321-48a1-9053-77c77b922aeb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:brinelin-the-moon-kraken:cast:s1,f:xs:XP:brinelin-the-moon-kraken:cast:s1	-	-	-	8c0bd19283bb	-	11881289577e	-	-	2026-11-24	xproof
 1f00edd6-4321-48a1-9053-77c77b922aeb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:brinelin-the-moon-kraken:cast:s1,f:xs:XP:brinelin-the-moon-kraken:cast:s1	-	-	-	8c0bd19283bb	-	11881289577e	-	-	2026-11-24	xproof
-1f00edd6-4321-48a1-9053-77c77b922aeb	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+1f00edd6-4321-48a1-9053-77c77b922aeb	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:brinelin-the-moon-kraken:f0t1:s1,f:xs:XP:brinelin-the-moon-kraken:f0t1:s1	-	-	-	b8f573385218	-	11881289577e	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
 1f018a8c-6ceb-4d03-94a7-8713467c9cf5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-navy-trebuchet:cast:s1,f:xs:XP:fire-navy-trebuchet:cast:s1	-	-	-	23c4009444b0	-	ecf227d1201c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1f018a8c-6ceb-4d03-94a7-8713467c9cf5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fire Navy Trebuchet/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1f018a8c-6ceb-4d03-94a7-8713467c9cf5	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:fire-navy-trebuchet:combat0.block:s1,f:xs:XP:fire-navy-trebuchet:combat0.block:s1	-	-	-	23c4009444b0	-	ecf227d1201c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:sorin-solemn-visitor:cast:s1,f:xs:XP:sorin-solemn-visitor:cast:s1	-	-	-	d864b561c9cb	-	a3a1915393b8	-	-	2026-11-24	xproof
 1f1f1ae7-dd00-4825-832e-3a049cf8ce73	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:sorin-solemn-visitor:f0a2:s1,f:xs:XP:sorin-solemn-visitor:f0a2:s1	-	-	-	fb9d3088f0bf	-	a3a1915393b8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 1f21cf59-6390-44b4-ab2e-ef290dfd8c85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nest-of-scarabs:cast:s1,f:xs:XP:nest-of-scarabs:cast:s1	-	-	-	d864b561c9cb	-	ea736c64b59f	-	-	2026-11-24	xproof
-1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+1f21cf59-6390-44b4-ab2e-ef290dfd8c85	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedOnce	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:cast:s1,f:xs:XP:the-millennium-calendar:cast:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/a0	MultiplyCounter	agreed	-	FX	start	2	0	x:xs:XP:the-millennium-calendar:f0a0:s1,f:xs:XP:the-millennium-calendar:f0a0:s1	-	-	-	8c0bd19283bb	-	6ffac9c1600d	-	-	2026-11-24	xproof
 1f250443-8d5e-46c9-920e-8e9373780e32	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Millennium Calendar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -63,9 +63,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gearbane-orangutan:combat0.attack:s1,f:xs:XP:gearbane-orangutan:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8beaefc89cfb	-	-	2026-11-25	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gearbane-orangutan:combat0.block:s1,f:xs:XP:gearbane-orangutan:combat0.block:s1	-	-	-	3aa6ded33acb	-	8beaefc89cfb	-	-	2026-11-25	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f3f6336-6f99-4181-be3c-1814f7b8ef36	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	8f782e884184	-	-	2026-11-25	xproof
-1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	8f782e884184	-	-	2026-11-25	xproof
-1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t1	Phase	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	8f782e884184	-	-	2026-11-25	xproof
+1f3f6336-6f99-4181-be3c-1814f7b8ef36	cast	cast	agreed	-	FX	start	5	0	x:xs:XP:court-of-garenbrig:cast:s1,f:xs:XP:court-of-garenbrig:cast:s1	-	-	-	b8f573385218	-	8f782e884184	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
+1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t0	ChangesZone	agreed	-	FX	start	5	0	x:xs:XP:court-of-garenbrig:cast:s1,f:xs:XP:court-of-garenbrig:cast:s1	-	-	-	b8f573385218	-	8f782e884184	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
+1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t1	Phase	agreed	-	FX	start	1	0	x:xs:XP:court-of-garenbrig:f0t1:s2,f:xs:XP:court-of-garenbrig:f0t1:s2	-	-	-	b8f573385218	-	8f782e884184	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
 1f3fb367-60b5-4b36-9604-3064afdac0d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f3fb367-60b5-4b36-9604-3064afdac0d9	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:avenging-druid:f0t0:s1,f:xs:XP:avenging-druid:f0t0:s1	-	-	-	baa6f696107c	-	739b5a5bf71f	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 1f438b8f-fe23-4f3b-ab2e-f6c33676c462	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:opposition-agent:cast:s1,f:xs:XP:opposition-agent:cast:s1	-	-	-	8c0bd19283bb	-	d99b9635dd10	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1fc59e37-0dc0-4e24-af71-6bab4a2b56ca	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1fc8b186-bb74-4fe1-a2da-e8ce3074f988	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:grovetender-druids:cast:s1,f:xs:XP:grovetender-druids:cast:s1	-	-	-	d864b561c9cb	-	768c0fa36f00	-	-	2026-11-24	xproof
 1fc8b186-bb74-4fe1-a2da-e8ce3074f988	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:grovetender-druids:cast:s1,f:xs:XP:grovetender-druids:cast:s1	-	-	-	d864b561c9cb	-	768c0fa36f00	-	-	2026-11-24	xproof
-1fcec3b2-47ba-4c56-9ce1-a4807e8ad262	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+1fcec3b2-47ba-4c56-9ce1-a4807e8ad262	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b8f573385218	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	9124c696744f88779c0bc976be2f403c8b239174	2026-11-25	xproof
 1fcf95d7-fd70-474b-be0a-e43502633556	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vengeful-vampire:cast:s1,f:xs:XP:vengeful-vampire:cast:s1	-	-	-	d864b561c9cb	-	c88c542e94b9	-	-	2026-11-24	xproof
 1fcf95d7-fd70-474b-be0a-e43502633556	f0/t0	ChangesZone/Undying	agreed	-	FX	start	2	0	x:xs:XP:vengeful-vampire:f0t0:s1,f:xs:XP:vengeful-vampire:f0t0:s1	-	-	-	3aa6ded33acb	-	c88c542e94b9	-	-	2026-11-25	xproof
 1fd00656-83ba-4feb-b089-224007936b99	cast	cast-resolve	agreed	-	FX	scen	2	0	Mockingbird, Ace Agent/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
