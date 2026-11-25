@@ -372,7 +372,7 @@ func TestClassifyForgeCastMode(t *testing.T) {
 	if f := Classify(item, nil, g, diffAt(2), "xmage"); f.Class == ClassHarness {
 		t.Errorf("another engine: %+v", f)
 	}
-	for _, mode := range []string{"optionalcost", "plot", "suspend", "adventure_alt", "offspring", "kicked"} {
+	for _, mode := range []string{"optionalcost", "plot", "suspend", "mayplay", "alternative", "adventure_alt", "offspring", "kicked"} {
 		item.Item.Steps[1].CastMode = mode
 		if f := Classify(item, nil, g, diffAt(2), "forge"); f.Class != ClassDiverge {
 			t.Errorf("cast_mode %q is one the driver follows: %+v", mode, f)

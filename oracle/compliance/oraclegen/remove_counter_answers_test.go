@@ -264,3 +264,144 @@ func assertChoice(t *testing.T, out [][]XAnswer, want string) {
 	}
 	t.Fatalf("no %q choice answer in %+v", want, out)
 }
+
+// TestRemoveCounterCostMultiAmount pins a "Remove a counter from {this}"
+// ACTIVATION COST, the other XMage multi-amount. XMage's
+// RemoveCountersSourceCost always messages every counter kind on the source
+// (even one), while gorge picks a lone kind unasked, so the scripted answers
+// have to come from the source's checkpoint delta, not from a decision. A
+// source with more than one kind DOES pose a SubCounter pick (option kind
+// "subcounter", no ResumeKind, label "<source> (<kind> counter)"), which must
+// be owned by the fold rather than scripted raw on the choice queue.
+// Loch Mare is the measured card (xproof xs:XP:spawning-kraken:cast:s2).
+func TestRemoveCounterCostMultiAmount(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	idx := 0
+	for _, tc := range []struct {
+		name   string
+		before map[string]int32
+		after  map[string]int32
+		want   []XAnswer
+	}{
+		{
+			// Loch Mare has entered with three -1/-1 counters; the cost
+			// removes one, which XMage still asks as its own multi-amount
+			// message.
+			name:   "one kind",
+			before: map[string]int32{"M1M1": 3},
+			after:  map[string]int32{"M1M1": 2},
+			want:   []XAnswer{{0, "amount", "1"}},
+		},
+		{
+			// The second ability ("Remove two counters") has the same single
+			// message; the delta, not the text, supplies the amount.
+			name:   "one kind two counters",
+			before: map[string]int32{"M1M1": 3},
+			after:  map[string]int32{"M1M1": 1},
+			want:   []XAnswer{{0, "amount", "2"}},
+		},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			sc := Scenario{Steps: []Step{{
+				Op: "activate", Seat: 0, Card: "p0:Loch Mare", AbilityIndex: &idx,
+			}}}
+			res := rules.OracleResult{
+				Snapshots: []rules.OracleSnapshot{
+					{Permanents: []rules.OracleSnapPerm{{
+						Ref: "p0:Loch Mare", Name: "Loch Mare", Controller: 0, Counters: tc.before,
+					}}},
+					{Permanents: []rules.OracleSnapPerm{{
+						Ref: "p0:Loch Mare", Name: "Loch Mare", Controller: 0, Counters: tc.after,
+					}}},
+				},
+			}
+			out := XAnswersForScenario(reg, res, sc, nil, nil)
+			if len(out) != 1 {
+				t.Fatalf("answers cover %d steps, want 1", len(out))
+			}
+			var amounts []XAnswer
+			for _, a := range out[0] {
+				if a.Kind == "choice" {
+					t.Fatalf("unexpected choice answer at step 0: %+v", out[0])
+				}
+				if a.Kind == "amount" {
+					amounts = append(amounts, a)
+				}
+			}
+			if !reflect.DeepEqual(amounts, tc.want) {
+				t.Fatalf("amount answers = %+v, want %+v (step answers %+v)", amounts, tc.want, out[0])
+			}
+		})
+	}
+
+	// Two counter kinds on the source: the engine poses the cost pick, and the
+	// fold must own it. This goes through the real runner so the decision shape
+	// is the engine's ("subcounter"), never a hand-built stand-in for it.
+	t.Run("two kinds", func(t *testing.T) {
+		sc := Scenario{
+			Name: "Loch Mare two counter kinds",
+			Setup: map[string]Seat{
+				"p0": {
+					Battlefield: []string{"Island", "Island", "Loch Mare"},
+					Counters:    map[string]map[string]int32{"Loch Mare": {"CHARGE": 1}},
+					LibraryTop:  []string{"Island", "Island", "Island", "Island", "Island"},
+				},
+				"p1": {LibraryTop: []string{"Plains", "Plains", "Plains", "Plains", "Plains"}},
+			},
+			Steps: []Step{{
+				Op: "activate", Seat: 0, Card: "p0:Loch Mare", AbilityIndex: &idx,
+				Answers: []Answer{{Kind: "choose", Pick: []string{"M1M1"}}},
+			}},
+		}
+		raw, err := json.Marshal(sc)
+		if err != nil {
+			t.Fatal(err)
+		}
+		res, err := rules.RunOracleScenarioJSON(reg, raw)
+		if err != nil {
+			t.Fatalf("run scenario: %v", err)
+		}
+		if len(res.Fails) > 0 {
+			t.Fatalf("gorge fails: %v", res.Fails)
+		}
+		// Precondition: exactly one engine cost pick, in the wildcard
+		// SubCounter shape (not the effect fold's counter_kind resume role),
+		// and it chose a -1/-1 counter.
+		var costPicks int
+		for _, d := range res.Decisions {
+			if d.Step != 0 || pickKind(d, 0) != "subcounter" {
+				continue
+			}
+			costPicks++
+			if len(d.PickKinds) != 1 || d.PickKinds[0] != "subcounter" {
+				t.Fatalf("precondition: cost pick kinds = %v, want [subcounter]: %+v", d.PickKinds, d)
+			}
+			if len(d.Picks) != 1 || canonicalCounterKind(d.Picks[0]) != "M1M1" {
+				t.Fatalf("precondition: cost pick = %v, want a -1/-1 counter: %+v", d.Picks, d)
+			}
+		}
+		if costPicks != 1 {
+			t.Fatalf("precondition: %d subcounter cost picks at step 0, want 1: %+v", costPicks, res.Decisions)
+		}
+		out := XAnswersForScenario(reg, res, sc, nil, nil)
+		if len(out) != 1 {
+			t.Fatalf("answers cover %d steps, want 1", len(out))
+		}
+		var amounts []XAnswer
+		for _, a := range out[0] {
+			if a.Kind == "choice" {
+				t.Fatalf("raw cost pick still scripted at step 0: %+v", out[0])
+			}
+			if a.Kind == "amount" {
+				amounts = append(amounts, a)
+			}
+		}
+		// -1/-1 hashes to HashMap bucket 14 and charge to bucket 3, so XMage
+		// messages charge first; the charge counter was not removed (X=0) and
+		// the cost took one -1/-1 counter (X=1).
+		want := []XAnswer{{0, "amount", "0"}, {0, "amount", "1"}}
+		if !reflect.DeepEqual(amounts, want) {
+			t.Fatalf("amount answers = %+v, want %+v (step answers %+v)", amounts, want, out[0])
+		}
+	})
+}

@@ -99,7 +99,25 @@ func TestForgeRolledDie(t *testing.T) {
 // driver suite (185 tests, including ForcedDieRollTest and CostReturnPickTest) re-run green on it.
 // 752947823d = d0f16bee2e plus the forge-game PhaseHandler second-combat-damage-step priority fix; die-roll and driver
 // code unchanged.
-const forgeOracleDieRollRef = "f7b730149a5b24faedd221ede64bdc8367c7f88d"
+// 70b77c0ff08 = the clean merge of 9b17c1fc83 (the coin-force fix) and 24a3344b81 (the fateseal Dig order); the two
+// touch disjoint files (ForcedDieRandom vs ScriptedController/StepMachine), so the pin keeps both, die-roll code unchanged.
+// 9b17c1fc83 = d0f16bee2e0 plus the removal of ForcedDieRandom's unbounded nextInt() flip fallback (an unrelated unbounded draw spent the
+// armed coin flip); die-roll code (the bounded nextInt) unchanged, ForcedDieRollTest and ForcedCoinFlipTest re-run green on it.
+// 24a3344b81 = d0f16bee2e0 plus the Dig order-to-Library answer from gorge's dig pick (ScriptedController/StepMachine
+// only), die-roll code unchanged.
+// 9d7baedf34 = d0f16bee2e plus the echo/cumulative-upkeep pay-or-sacrifice answer (ScriptedController only), die-roll
+// code unchanged, the full driver suite (188 tests, including ForcedDieRollTest and EchoCumulativeUpkeepTest) re-run green on it.
+// a3c422f79a6 = the clean merge of 9d7baedf34 and 70b77c0ff08 (echo/cumulative upkeep, coin force and fateseal Dig order;
+// disjoint driver files), die-roll code unchanged, the full driver suite (192 tests, including ForcedDieRollTest,
+// EchoCumulativeUpkeepTest, ForcedCoinFlipTest and FatesealDigOrderTest) re-run green on it.
+// 528c55d25b4 = the clean merge of 8f537eddcbb (cast_mode "alternative", StepMachine.spellForMode only) and 304ae5ffe0e
+// (the elected unless payment's whole-cost card pick, ScriptedController.chooseCardsForCost only); die-roll code unchanged.
+// 244c5908482 = 528c55d25b4 plus cast_mode "mayplay" (StepMachine.spellForMode/spellFor only); die-roll code unchanged,
+// ForcedDieRollTest and ForcedCoinFlipTest (18 tests) re-run green on it, and scripts/forge-oracle-test-mayplay-cast.sh
+// replays the xproof Hurl Through Hell request.
+// 7d506c5192 = oracle/fpin-1125: f7b730149a merged with 26b4658101 (chooseCounterType peeks the counter-kind pick for a
+// RemoveCounter ask, driver-only), then with 244c590848 (the mayplay pin above); die-roll code unchanged.
+const forgeOracleDieRollRef = "7d506c5192e8bcf75b1f191f5a5e28d5a8219e20"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
