@@ -96,7 +96,11 @@ GO_TEST_FLAGS ?= -p=2
 # 6e1ecefc46 = 27b8bfe661 + Loam Dryad's tap cost uses the singular controlled-creature filter, so its rule
 # text matches the printed Oracle text instead of reading "Tap an untapped creatures you control" (CR 605.1a:
 # the replay's mana-ability text match). LoamDryadTest.testTapUntappedCreatureForMana; card behaviour unchanged.
-XMAGE_REF  ?= 6e1ecefc4692239a06ac1f8dde1a7d8b2c58abbc
+# 98052067d4 = 6e1ecefc46 + Chandra, Acolyte of Flame's 0 registers one delayed sacrifice trigger for both tokens
+# instead of one per token (CR 603.7a: "Sacrifice them" is one instruction). ChandraAcolyteOfFlameTest fails before
+# (Missing CHOICE def ... Triggered list (total 2)) and passes after; the card now matches gorge and Forge at the
+# beginning of the end step (one ability on the stack).
+XMAGE_REF  ?= 98052067d47006cdc887f357dcde286eddc1d5ec
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
