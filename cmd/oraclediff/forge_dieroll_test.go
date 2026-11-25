@@ -94,9 +94,18 @@ func TestForgeRolledDie(t *testing.T) {
 // die-roll code unchanged), the full driver suite (177 tests, including ForcedDieRollTest) re-run green on it.
 // fef74c5308f = the clean merge of 0c4ca7afb3d and a445a858b2: the two fixes touch disjoint files (forge-oracle driver vs
 // forge-game), so the pin keeps both; die-roll and driver code are unchanged from 0c4ca7afb3d.
+// 70b77c0ff08 = the clean merge of 9b17c1fc83 (the coin-force fix) and 24a3344b81 (the fateseal Dig order); the two
+// touch disjoint files (ForcedDieRandom vs ScriptedController/StepMachine), so the pin keeps both, die-roll code unchanged.
+// 9b17c1fc83 = d0f16bee2e0 plus the removal of ForcedDieRandom's unbounded nextInt() flip fallback (an unrelated unbounded draw spent the
+// armed coin flip); die-roll code (the bounded nextInt) unchanged, ForcedDieRollTest and ForcedCoinFlipTest re-run green on it.
+// 24a3344b81 = d0f16bee2e0 plus the Dig order-to-Library answer from gorge's dig pick (ScriptedController/StepMachine
+// only), die-roll code unchanged.
 // 9d7baedf34 = d0f16bee2e plus the echo/cumulative-upkeep pay-or-sacrifice answer (ScriptedController only), die-roll
 // code unchanged, the full driver suite (188 tests, including ForcedDieRollTest and EchoCumulativeUpkeepTest) re-run green on it.
-const forgeOracleDieRollRef = "9d7baedf342926a7a00aabd30572393e1a7754eb"
+// a3c422f79a6 = the clean merge of 9d7baedf34 and 70b77c0ff08 (echo/cumulative upkeep, coin force and fateseal Dig order;
+// disjoint driver files), die-roll code unchanged, the full driver suite (192 tests, including ForcedDieRollTest,
+// EchoCumulativeUpkeepTest, ForcedCoinFlipTest and FatesealDigOrderTest) re-run green on it.
+const forgeOracleDieRollRef = "a3c422f79a6b46d723c6bccb1cb6fbfcf22e553e"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

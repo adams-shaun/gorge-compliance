@@ -307,6 +307,37 @@ func TestForgeLibraryTopOrder(t *testing.T) {
 		}
 	})
 
+	t.Run("fateseal dig pick to the bottom unchanged", func(t *testing.T) {
+		// Spin into Myth's fateseal 2 (xproof cluster xpt-be0cfba7): one
+		// choose_n[dig] names the cards that go to the bottom, in pick order,
+		// and gorge poses no order decision. The driver answers Forge's own
+		// order ask from this pick as it stands (first pick moved first, so
+		// it ends highest), so no rewrite may reverse it, whatever the
+		// checkpoint shows at the picker's library top.
+		fateseal := rules.OracleDecision{
+			Step: 7, Seat: 0, Kind: "choose_n", Options: 2,
+			Picks:           []string{"Ornithopter", "Plains"},
+			PickIdx:         []int{0, 1},
+			PickRefs:        []string{"p1:Ornithopter", "p1:Plains"},
+			PickRefsInexact: []bool{false, true},
+			OptionRefs:      []string{"p1:Ornithopter", "p1:Plains"},
+			ObjectPicks:     []string{"p1:Ornithopter", "p1:Plains"},
+			PickKinds:       []string{"dig", "dig"},
+			Resume:          "dig", Via: "answer", GorgeKind: "choose",
+			First: "Ornithopter", Min: 0, Max: 2,
+		}
+		ds := []rules.OracleDecision{fateseal}
+		for name, snaps := range map[string][]rules.OracleSnapshot{
+			"no checkpoint":     nil,
+			"picks on the top":  libraryTopSnapshot([]string{"Ornithopter", "Plains"}),
+			"picks off the top": libraryTopSnapshot([]string{"Island", "Island"}),
+		} {
+			if got := forgeLibraryTopOrder(ds, snaps); !reflect.DeepEqual(got, ds) {
+				t.Errorf("%s: fateseal dig pick changed: %+v", name, got)
+			}
+		}
+	})
+
 	t.Run("each batch takes the next alternative", func(t *testing.T) {
 		// Two hand -> library moves in one step (a second Dream Cache) pair
 		// with their own alternatives in runner-log order: the first batch
