@@ -46,4 +46,11 @@ func TestManaAbilityColourAsk(t *testing.T) {
 	if ans, _ := answersOf(seatMap{}, []game.Entry{act, eff}); len(ans) != 1 {
 		t.Fatalf("a mana effect's pick was dropped: %v", ans)
 	}
+	// A cost prefix names the activation's cost in front of the same colour
+	// wheel ("Pay 1 life: Add G"), so the label is still the colour ask; an
+	// exact bare "Add G" match would drop every costed carrier.
+	pref := ask("choose", 9, game.Pick{Kind: "mana", Obj: 78, Label: "Pay 1 life: Add G"})
+	if pg := colourProduced([]game.Entry{act, pref}); pg[0].Mana[0].Produced != "G" {
+		t.Fatalf("prefixed produced = %q, want G", pg[0].Mana[0].Produced)
+	}
 }
