@@ -190,7 +190,7 @@ func fields(s rules.OracleSnapshot, xmage bool, compare []string) []field {
 		field{"stack", stackKeysOf(s.Stack, s.Permanents)},
 	)
 	if wantsCompare(compare, CompareOffered) {
-		out = append(out, field{"offered", offeredKeys(s.Offered)})
+		out = append(out, field{"offered", offeredKeys(s.Offered, s.Permanents)})
 	}
 	return out
 }
@@ -651,13 +651,36 @@ func pairedStackKeys(g, x rules.OracleSnapshot) (gv, xv string) {
 	return stackKeysLabelled(g.Stack, g.Permanents, left), stackKeysLabelled(x.Stack, x.Permanents, left)
 }
 
-func stackKeysLabelled(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm, left map[int]bool) string {
+// currentPermNames maps a non-token permanent's scenario ref to its current
+// name: a copy or a permanent whose name was changed shows its new name. Both
+// stackKeysLabelled and offeredKeys label a ref that names a permanent in the
+// same snapshot by that map.
+func currentPermNames(perms []rules.OracleSnapPerm) map[string]string {
 	current := map[string]string{}
-	cardNames, tokenNames := map[string]bool{}, map[string]bool{}
 	for _, p := range perms {
 		if p.Ref != "" && p.Name != "" && !p.Token {
 			current[p.Ref] = p.Name
 		}
+	}
+	return current
+}
+
+// refPrefix keeps a scenario ref's controller prefix ("p1:Wall of Stone" ->
+// "p1:"); refs without one name an object directly and relabel to the name
+// alone.
+func refPrefix(ref string) string {
+	if name, ok := strings.CutPrefix(ref, "p"); ok {
+		if i := strings.IndexByte(name, ':'); i >= 0 {
+			return ref[:len(ref)-len(name)+i+1]
+		}
+	}
+	return ""
+}
+
+func stackKeysLabelled(st []rules.OracleSnapStack, perms []rules.OracleSnapPerm, left map[int]bool) string {
+	current := currentPermNames(perms)
+	cardNames, tokenNames := map[string]bool{}, map[string]bool{}
+	for _, p := range perms {
 		if p.Name == "" {
 			continue
 		}

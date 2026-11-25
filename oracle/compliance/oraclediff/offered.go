@@ -12,9 +12,24 @@ import (
 // offeredKeys is shared by comparison, canonical output and frozen views.
 // Source/kind is load-bearing. A singleton needs no label; multiple abilities
 // retain normalized labels to distinguish, for example, Add B from Add R.
-func offeredKeys(offers []rules.OracleSnapOffered) string {
+//
+// An offer's source ref names the permanent by its setup ref ("p1:Wall of
+// Stone"); a follower names the same permanent by its current name
+// ("p1:Humble Merchant", the name Honest Work gave it). A source that names a
+// non-token permanent in the same snapshot is relabelled by that permanent's
+// current name only when the ref's own name is stale (a rename or a copy), as
+// stackKeysLabelled does for the stack. A ref that already carries the current
+// name is kept byte-identical -- a duplicate "#n" suffix is part of the ref
+// and relabelling would drop it.
+func offeredKeys(offers []rules.OracleSnapOffered, perms []rules.OracleSnapPerm) string {
 	entries := append([]rules.OracleSnapOffered(nil), offers...)
+	current := currentPermNames(perms)
 	for i := range entries {
+		if ref := entries[i].Source; ref != "" {
+			if n, ok := current[ref]; ok && n != RefName(ref) {
+				entries[i].Source = refPrefix(ref) + n
+			}
+		}
 		entries[i].Label = offeredLabel(entries[i].Source, entries[i].Label)
 	}
 	sort.Slice(entries, func(i, j int) bool {
