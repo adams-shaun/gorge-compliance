@@ -573,7 +573,23 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (ChooseFromDefinedCards$ Remembered with no nonland card revealed, Alhammarret, High Arbiter; ChooseCardNameAi returns "" and the effect names
 # nothing; gorge logs no decision) instead of a 'Missing card name answer' strict miss (xpt-e750d7a5). ChooseCardNameEmptyFacesTest fails before and
 # passes after. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
-FORGE_ORACLE_REF ?= 2b591baf9cdfc1f41711fbe5241d51a6f73a9250
+# 0558bd00b88 = oracle/fpin-1125: c9419dd87a (foretell, Riot, Done pick, Mobilize, forced remove-counter; above) merged with
+# c332e2b33f5 (the unpinned simultaneous zone order, xproof cluster xpt-34c28f9c): Sorin, Lord of Innistrad's -6 Destroy
+# moves p1's Crimson Kobolds and Tibalt, the Fiend-Blooded to the graveyard, then a ChangeZoneAll returns them in the SAME
+# resolution. They are in neither checkpoint, so forge_order.go derives no graveyard_order pin, and Forge asks "order to
+# Graveyard" (and the return asks "order to Battlefield"). StepMachine.orderCards keeps Forge's offered order for an
+# unpinned ask at exactly those two destinations; every other zone (library arrange/dig, exile, hand, command, stack,
+# sideboard) still strict-misses, and a visible graveyard arrival still consumes its pin, so a real ordering difference on
+# a move a checkpoint can see is still caught. OrderCardsTest's unpinnedGraveyardOrderKeepsForgeOrder,
+# unpinnedBattlefieldOrderKeepsForgeOrder, unpinnedOtherZoneStillLooseMisses and pinnedGraveyardOrderStillApplies cover
+# both halves; scripts/forge-oracle-test-graveyard-transit-order.sh (make forge-driver-tests) runs them. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-transit-graveyard-order.
+# eb695169f9 = 2b591baf9c (the empty face list above) merged with 0558bd00b88 (the transit zone order above), so one pin
+# carries both driver fixes: chooseCardName answers an empty face list with "" and orderCards keeps Forge's offered order
+# for an unpinned Graveyard/Battlefield transit. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork
+# branch fix/xp-forge-driver-name-empty-faces.
+FORGE_ORACLE_REF ?= eb695169f95926cfa5484a78154cfa20c56f7b09
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
