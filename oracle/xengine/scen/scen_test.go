@@ -997,6 +997,37 @@ func TestStartstaticattached(t *testing.T) {
 			{card: "Multiclass Baldric", key: "static#0.0", reason: "no-generator:static:bearer"},
 		})
 	})
+	// counted permanents are copies of one carrier, which the legend rule would
+	// thin out if it were legendary: no seat has two of one legendary name
+	t.Run("no legendary copies", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		for _, r := range []struct{ card, key, reason string }{
+			// three legendary creatures, and no carrier that is not legendary
+			{"Kolvori, God of Kinship", "static#0.0", "no-generator:static:conditional"},
+			{"Temur Runemark", "static#0.1", ""},
+		} {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if r.reason != "" {
+				if err != nil || res.Start != nil || res.Reason != r.reason {
+					t.Errorf("%s: %v path %q reason %q, want refused %q", r.card, err, res.Path, res.Reason, r.reason)
+				}
+				continue
+			}
+			if err != nil || res.Start == nil {
+				t.Fatalf("%s: %v path %q reason %q, want a start", r.card, err, res.Path, res.Reason)
+			}
+			for _, bf := range [][]string{res.Start.Setup.P0.Battlefield, res.Start.Setup.P1.Battlefield} {
+				seen := map[string]bool{}
+				for _, n := range bf {
+					c, ok := reg.Lookup(n)
+					if ok && c.Faces[0].IsLegendary() && n != r.card && seen[n] {
+						t.Errorf("%s: %s is placed twice on one battlefield %v", r.card, n, bf)
+					}
+					seen[n] = true
+				}
+			}
+		}
+	})
 	// the same for an unattached static: the carrier it affects shows the effect
 	t.Run("carrier shows", func(t *testing.T) {
 		checkStartRows(t, []startRow{

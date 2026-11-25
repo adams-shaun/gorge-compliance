@@ -191,7 +191,7 @@ func staticKeyStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, car
 		if why != "" {
 			return why
 		}
-		if why := staticCondition(reg, b, face, card, st, f); why != "" {
+		if why := staticCondition(reg, b, face, card, st, eff, f); why != "" {
 			return why
 		}
 		// the bearer is the only choice the engines' AIs have that matters
@@ -207,7 +207,7 @@ func staticKeyStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, car
 		}
 		placeOn(f, s, name)
 	}
-	return staticCondition(reg, b, face, card, st, f)
+	return staticCondition(reg, b, face, card, st, effectOf(st), f)
 }
 
 // staticCarrier is the permanent an unattached static affects: the first
@@ -491,12 +491,16 @@ func bearerFor(reg *cards.Registry, b *certdeck.Builder, card, reach, affected, 
 // both meets what the static affects and shows its effect: whichever of them
 // the engines' AIs pick, the key is at work, so a disagreement is the static's
 // and not a pick's, and they are all the same permanent (a name), so the cast
-// or equip has no pick to make. The cost lands of an Enchant-land Aura, and a second
+// or equip has no pick to make (the same name under the other seat is another). The cost lands of an Enchant-land Aura, and a second
 // creature a condition places, are such targets; the card itself is not.
 func onlyTargetsShow(reg *cards.Registry, card, reach, affected string, eff staticEffect, f *StartFile) bool {
 	rs, as := parseFilter(reach), parseFilter(affected)
 	ctrlOK := func(c, s int) bool { return c == ctrlAny || c == s }
-	var targets []string
+	type pick struct {
+		seat int
+		name string
+	}
+	var targets []pick
 	for s, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
 		skipped := false
 		for _, n := range bf {
@@ -520,8 +524,8 @@ func onlyTargetsShow(reg *cards.Registry, card, reach, affected string, eff stat
 			}
 			// two different permanents are two different picks, and the
 			// engines' AIs need not make the same one
-			if !slices.Contains(targets, n) {
-				targets = append(targets, n)
+			if pk := (pick{s, n}); !slices.Contains(targets, pk) {
+				targets = append(targets, pk)
 			}
 			if len(targets) > 1 {
 				return false
@@ -605,7 +609,7 @@ func attachStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 // life total, and the named conditions PlayerTurn (the start's active seat is
 // seat 0), Hellbent (no card in hand), Metalcraft (three artifacts) and
 // Threshold (seven cards in the graveyard). A static with none is unconditioned.
-func staticCondition(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, st *cards.Static, f *StartFile) string {
+func staticCondition(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, st *cards.Static, eff staticEffect, f *StartFile) string {
 	const refused = "no-generator:static:conditional"
 	for _, k := range []string{"CheckSecondSVar", "SecondSVarCompare", "ConditionDefined", "ConditionPresent", "PresentDefined"} {
 		if st.Params[k] != "" {
@@ -628,10 +632,10 @@ func staticCondition(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 		// a permanent the start already has (an Aura's bearer, an Equipment's)
 		// counts, and so needs no second one a pick could be made between
 		if pl != "Opponent" {
-			n -= presentOn(reg, filter, card, f)
+			n -= presentOn(reg, filter, card, eff.gain, f)
 		}
 		if n > 0 {
-			name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsPermanent)
+			name, s := filterCarrier(reg, b, card, filter, copyable(n))
 			if name == "" {
 				name, s = landCarrier(reg, filter, basicFor(face.ManaCost))
 			}
@@ -671,7 +675,7 @@ func staticCondition(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 			return refused
 		}
 	case "Metalcraft":
-		name, s := filterCarrier(reg, b, card, "Artifact.YouCtrl", (*cards.Face).IsPermanent)
+		name, s := filterCarrier(reg, b, card, "Artifact.YouCtrl", copyable(3))
 		if name == "" {
 			return refused
 		}
@@ -692,9 +696,17 @@ func staticCondition(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 	return ""
 }
 
+// copyable is the permanents a start may place n of under one name: any, for
+// one; for more, not a legendary one (the legend rule would put all but one
+// in the graveyard, and the condition would not be met).
+func copyable(n int) func(*cards.Face) bool {
+	return func(f *cards.Face) bool { return f.IsPermanent() && (true) }
+}
+
 // presentOn counts the permanents the start has on the battlefield that meet
-// a present filter, not the card itself.
-func presentOn(reg *cards.Registry, filter, card string, f *StartFile) int {
+// a present filter, not the card itself. gain: the focus moves a permanent of
+// seat 1 (the attached bearer) to seat 0 before the condition is read.
+func presentOn(reg *cards.Registry, filter, card string, gain bool, f *StartFile) int {
 	alts := parseFilter(filter)
 	count := 0
 	for s, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
@@ -708,8 +720,12 @@ func presentOn(reg *cards.Registry, filter, card string, f *StartFile) int {
 			if !ok || len(c.Faces) == 0 {
 				continue
 			}
+			end := s
+			if gain {
+				end = 0
+			}
 			for _, a := range alts {
-				if a.known && !a.self && (a.ctrl == ctrlAny || a.ctrl == s) && a.test(c.Faces[0]) {
+				if a.known && !a.self && (a.ctrl == ctrlAny || a.ctrl == end) && a.test(c.Faces[0]) {
 					count++
 					break
 				}
