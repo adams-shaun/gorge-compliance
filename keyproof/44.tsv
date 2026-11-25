@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/a1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-44443716-8356-40cd-a879-35264b29108c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+44443716-8356-40cd-a879-35264b29108c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 44443716-8356-40cd-a879-35264b29108c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scheming Silvertongue/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -126,7 +126,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 448da389-81db-4931-9cf7-3fde0ce9392f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 448e0cf2-c97c-4dc0-96ef-91f1eb75d97c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 448e0cf2-c97c-4dc0-96ef-91f1eb75d97c	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-448e0cf2-c97c-4dc0-96ef-91f1eb75d97c	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+448e0cf2-c97c-4dc0-96ef-91f1eb75d97c	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 448f5c55-7334-4fa4-9d90-0e57bae19444	cast	cast	agreed	-	F	start	2	0	f:xs:XP:mist-dragon:cast:s1	-	-	-	8c0bd19283bb	-	fa9c58ae2430	-	-	2026-11-24	xproof
 448f5c55-7334-4fa4-9d90-0e57bae19444	f0/a0	Pump	agreed	-	F	start	4	0	f:xs:XP:mist-dragon:cast:s1	-	-	-	8c0bd19283bb	-	fa9c58ae2430	-	-	2026-11-24	xproof
 448f5c55-7334-4fa4-9d90-0e57bae19444	f0/a1	Debuff	agreed	-	F	start	4	0	f:xs:XP:mist-dragon:cast:s1	-	-	-	8c0bd19283bb	-	fa9c58ae2430	-	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 44e1946d-01b5-45db-abdc-2f6d6480cf60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44e855a4-95f9-4515-a868-a8ad7a2db751	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 44e8d51e-0885-49df-a77c-cf4a88e41bc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-44e8d51e-0885-49df-a77c-cf4a88e41bc1	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+44e8d51e-0885-49df-a77c-cf4a88e41bc1	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 44e9030d-dd49-46b4-a0eb-75a49b6638a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:maw-of-the-mire:cast:s1,f:xs:XP:maw-of-the-mire:cast:s1	-	-	-	d864b561c9cb	-	c30bae0d5a79	-	-	2026-11-24	xproof
 44ed4c0c-a012-4895-a547-b04150553bba	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-eldest-reborn:cast:s1,f:xs:XP:the-eldest-reborn:cast:s1	-	-	-	d864b561c9cb	-	1faffbccbd9f	-	-	2026-11-24	xproof
 44ee7def-6de3-473a-a0ae-6cac1b00dab4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:duty-bound-dead:cast:s1,f:xs:XP:duty-bound-dead:cast:s1	-	-	-	d864b561c9cb	-	2c62da39f2f4	-	-	2026-11-24	xproof
