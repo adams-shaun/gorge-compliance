@@ -189,6 +189,15 @@ func applyCost(p costPlan, card, generic string, f *StartFile) {
 	default:
 		s.Battlefield = append(s.Battlefield, card)
 	}
+	applyCostSupport(p, generic, f)
+}
+
+// applyCostSupport places the state a cost plan needs around the card that pays
+// it, without placing the card itself: applyCost uses it for an ability the
+// card activates, and a granted ability uses it for the carrier the ability was
+// granted to (already on the battlefield).
+func applyCostSupport(p costPlan, generic string, f *StartFile) {
+	s := &f.Setup.P0
 	s.Battlefield = append(s.Battlefield, landsFor(p.mana, generic)...)
 	p.applyExtras(s)
 }
