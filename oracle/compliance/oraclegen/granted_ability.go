@@ -214,6 +214,30 @@ func grantedCandidates(reg *cards.Registry, it Item, i int, st Step, g rules.Ora
 			})
 		}
 	}
+	// A keyword a RESOLVED Pump/Animate effect granted (Cursecloth Wrappings'
+	// activated Pump KW$ Embalm:CardManaCost, Highway Reaver's trigger, a
+	// permanent animating itself with Equip:2) is on no face of the recipient
+	// and in no static. The source may be the recipient itself and may have
+	// resolved from a trigger, so no step history gates it; the exact engine
+	// label already pins the keyword line plus the recipient's mana cost, and
+	// a source still in hand or library cannot have resolved anything.
+	recMana := ""
+	if rec.card != nil && len(rec.card.Faces) > 0 && rec.card.Faces[0] != nil {
+		recMana = rec.card.Faces[0].ManaCost
+	}
+	for _, pc := range pool {
+		if pc.zone == state.ZHand || pc.zone == state.ZLibrary {
+			continue
+		}
+		for _, f := range pc.card.Faces {
+			if f == nil {
+				continue
+			}
+			for _, line := range effectKeywordLines(f) {
+				add(cards.GrantedKeywordAbilityFor(line, recMana))
+			}
+		}
+	}
 	for _, gg := range gains {
 		for _, pc := range pool {
 			if !gg.defined && !zoneAllows(gg.zones, pc.zone) {
@@ -944,8 +968,38 @@ func staticAddAbilityNames(st cards.Static) []string {
 // grants.
 func staticAddKeywordLines(st cards.Static) []string {
 	var out []string
-	out = append(out, splitParamList(st.ParamStr(cards.PKAddKeyword))...)
-	out = append(out, splitParamList(st.ParamStr(cards.PKAddKeywords))...)
+	out = append(out, cards.SplitKeywordList(st.ParamStr(cards.PKAddKeyword))...)
+	out = append(out, cards.SplitKeywordList(st.ParamStr(cards.PKAddKeywords))...)
+	return out
+}
+
+// effectKeywordLines lists the keyword lines the face's Pump/PumpAll/Animate
+// effects grant (KW$ / Keywords$), through each ability's SubAbility chain
+// and every SVar-named ability.
+func effectKeywordLines(f *cards.Face) []string {
+	var out []string
+	seen := map[*cards.SA]bool{}
+	var walk func(*cards.SA)
+	walk = func(sa *cards.SA) {
+		if sa == nil || seen[sa] {
+			return
+		}
+		seen[sa] = true
+		switch sa.API {
+		case "Pump", "PumpAll":
+			out = append(out, cards.SplitKeywordList(sa.ParamStr(cards.PKKW))...)
+		case "Animate", "AnimateAll":
+			out = append(out, cards.SplitKeywordList(sa.ParamStr(cards.PKKeywords))...)
+		}
+		walk(sa.Sub)
+	}
+	for _, a := range f.Abilities {
+		walk(a)
+	}
+	for _, t := range f.Triggers {
+		walk(t.Effect)
+	}
+	f.EachSVarAbility(walk)
 	return out
 }
 
