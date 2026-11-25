@@ -14,13 +14,28 @@ import (
 // basicOf maps a colour letter to its basic land; C is Wastes.
 var basicOf = map[string]string{"W": "Plains", "U": "Island", "B": "Swamp", "R": "Mountain", "G": "Forest", "C": "Wastes"}
 
-var manaTokenRE = regexp.MustCompile(`^([0-9]+|[XWUBRGCS]|[WUBRGC2]/[WUBRGCP])$`)
+// manaTokenRE is one mana symbol of a Forge cost. A card script writes a
+// hybrid, two-generic hybrid or Phyrexian symbol without a slash (ManaCost:2
+// WB WB, 2W, UP, RWP); a few write it with one (2/R).
+var manaTokenRE = regexp.MustCompile(`^([0-9]+|[XWUBRGCS]|[WUBRGC2]/?[WUBRGCP]|[WUBRG]/?[WUBRG]/?P)$`)
+
+// shardParts is a mana symbol's parts: "WB", "W/B" -> W B; "2W" -> 2 W;
+// "RWP" -> R W P; a number or a one-letter symbol is itself.
+func shardParts(tok string) []string {
+	if strings.Contains(tok, "/") {
+		return strings.Split(tok, "/")
+	}
+	if _, err := strconv.Atoi(tok); err == nil || len(tok) < 2 || !manaTokenRE.MatchString(tok) {
+		return []string{tok}
+	}
+	return strings.Split(tok, "")
+}
 
 // firstColour is the first coloured symbol of a mana cost, in cost order
 // (hybrid: its first colour); "" for a colourless cost.
 func firstColour(cost string) string {
 	for _, tok := range strings.Fields(cost) {
-		for _, part := range strings.Split(tok, "/") {
+		for _, part := range shardParts(tok) {
 			if _, ok := basicOf[part]; ok && part != "C" {
 				return part
 			}
@@ -51,7 +66,7 @@ func landsFor(manaTokens []string, generic string) []string {
 		if tok == "X" || tok == "S" {
 			continue
 		}
-		parts := strings.Split(tok, "/")
+		parts := shardParts(tok)
 		if parts[0] == "2" && len(parts) == 2 { // {2/W}: pay the colour
 			parts = parts[1:]
 		}
