@@ -759,7 +759,19 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
 # 6fcacdc21814 = oracle/fpin-1125-join9: 1b593040f66 (empty hidden-origin search + order to Hand + setup Room locked + offered; above) joined with
 # a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
-FORGE_ORACLE_REF ?= 6fcacdc21814855e7cec9a02e58db563ec77beab
+# b0ddb8556a = d6e26fd04306 plus the empty Optional$ ChangeTargets confirm (xproof cluster xpt-bf9a34cd: Redirect on Reach
+# Through Mists, a targetless spell, still makes Forge ask "Do you want to change targets?" while gorge's effChangeTargets
+# skips a declaration with no old targets and logs no decision, CR 115.7): ScriptedController.emptyChangeTargetsConfirm
+# answers no, noted as "empty change targets confirm", only when no yes/no is queued and no subject spell or subability holds
+# a target; a targeted subject still takes the queued answer and keeps the strict miss when none was logged.
+# 019d50429f = b0ddb8556a plus the targeted ChangeTargets retarget pick (CR 115.7): a subject that DOES hold a target logs a
+# gorge choose_n marked retarget, so DecisionQueue.Decision reads the marker, ScriptedController.retargetConfirm answers the
+# optional confirm from it (an empty pick declines and is consumed; picks answer yes and stay for the new-target ask), and
+# StepMachine.retargetTargets applies the pick to the declaration. ChangeTargetsConfirmTest (fixtures/changetargets) fails
+# before it with the exact miss; scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) runs it. Driver-only.
+# 53059b9bbf2 = oracle/fpin-1125-join10: 6fcacdc21814 (join9; above) joined with 019d50429f (the ChangeTargets accept/retarget
+# fix; above); driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 53059b9bbf2d85b11f810f54699145b731665a8b
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
