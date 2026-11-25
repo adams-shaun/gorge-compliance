@@ -13,6 +13,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/engine/rules/pay"
 	"github.com/adams-shaun/gorge/engine/state"
 )
 
@@ -1570,14 +1571,23 @@ func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.Ma
 		// ability, which the runner finds by its index. A source with several
 		// mana abilities asks which one first, and its record sits on that
 		// ask (isManaAbilityAsk): the group's one record is then the ability.
-		if !priorityManaTap(en, mana) || len(en.Mana) == 0 && colourPicks(reg, mana[0]) != nil {
-			// The runner would answer the ability choice with the colour
-			// (harness: answer "U" not offered for choose).
+		if !priorityManaTap(en, mana) {
 			return nil, unsupported("activate")
 		}
 		taps, why := manaTaps(reg, m, mana)
 		if why != nil {
 			return nil, why
+		}
+		if len(en.Mana) == 0 && len(taps) == 1 && len(taps[0].Answers) > 0 {
+			// The record sits on the ability ask and the ability asks a
+			// colour too. A queued "choose" answer owns every KChoose of the
+			// source (the runner's oracleAnswerManaStage leaves the wheel to
+			// it), so the answers must follow the asks the runner poses.
+			pre, why := wheelAnswers(reg, mana[0])
+			if why != nil {
+				return nil, why
+			}
+			taps[0].Answers = append(pre, taps[0].Answers...)
 		}
 		return taps, nil
 	}
@@ -1618,6 +1628,54 @@ func manaTaps(reg *cards.Registry, m seatMap, mana []game.ManaRec) ([]oraclegen.
 		out = append(out, st)
 	}
 	return out, nil
+}
+
+// wheelAnswers is the answer, ahead of the colour pick, that selects mr's
+// ability on the engine's choice among its source's mana abilities. gorge
+// flattens an explicit "Produced$ Combo <colours>" ability into one wheel
+// option per colour (pay.ManaAbilityComboColours), so the colour pick alone
+// selects it, provided no other ability of the source offers that colour (the
+// runner takes the first option of a colour). Any other colour ask (Any, Combo
+// Any) is one wheel option, labelled pay.ManaAbilityLabel, which the runner
+// matches as it matches any pick (a substring test): it is answered first, and
+// refused when another ability's label contains it. A source whose wheel the
+// answers cannot tell apart is refused as unsupported, never answered wrongly.
+func wheelAnswers(reg *cards.Registry, mr game.ManaRec) ([]oraclegen.Answer, *truncation) {
+	sa := manaSA(reg, mr)
+	c, ok := reg.Lookup(mr.Name)
+	if sa == nil || !ok {
+		return nil, unsupported("activate")
+	}
+	var others []*cards.SA
+	for _, f := range c.Faces {
+		if f.Name != mr.Name {
+			continue
+		}
+		for i, o := range f.Abilities {
+			if i != mr.Ability && cards.IsManaAbilitySA(o) {
+				others = append(others, o)
+			}
+		}
+	}
+	if cols, flat := pay.ManaAbilityComboColours(sa, ""); flat {
+		for _, o := range others {
+			if oc, f := pay.ManaAbilityComboColours(o, ""); f {
+				for _, x := range oc {
+					if slices.Contains(cols, x) {
+						return nil, unsupported("activate")
+					}
+				}
+			}
+		}
+		return nil, nil
+	}
+	label := pay.ManaAbilityLabel(sa, "")
+	for _, o := range others {
+		if strings.Contains(strings.ToLower(pay.ManaAbilityLabel(o, "")), strings.ToLower(label)) {
+			return nil, unsupported("activate")
+		}
+	}
+	return []oraclegen.Answer{{Kind: "choose", Pick: []string{label}}}, nil
 }
 
 // colourPicks is the colours to answer a mana ability's colour ask with, nil

@@ -474,6 +474,11 @@ func TestStartManaAbilityIsExercised(t *testing.T) {
 		{"Bog Initiate", "f0/a0", 0},       // 1: Add {B}
 		{"Cabal Coffers", "f0/a0", 0},      // 2, T: Add {B} for each Swamp you control
 		{"Bayou", "f0/a1", 1},              // T: Add {G}, the second of Bayou's two
+		{"Shivan Reef", "f0/a1", 1},        // T: Add {U} or {R}, 1 damage: asks the wheel, then the colour
+		{"Talisman of Dominance", "f0/a1", 1},
+		{"Karplusan Forest", "f0/a1", 1},
+		{"Sliver Hive", "f0/a1", 1}, // Add one mana of any color: a wheel option, then the colour ask
+		{"Grove of the Burnwillows", "f0/a1", 1},
 	} {
 		t.Run(c.card, func(t *testing.T) {
 			for _, it := range startIsExercised(t, reg, b, c.card, c.key) {
