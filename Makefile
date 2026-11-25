@@ -664,9 +664,11 @@ help:
 	@echo "  make cards [GORGE_ROOT=../gorge] — link a gorge checkout's .cards corpus here (run gorge's make fetch-cards compile-cards first)"
 	@echo "  make test           — go test ./... (capped like gorge's)"
 	@echo "  make test-one PKG=./p RUN=TestX — one capped, corpus-checked test run with one verdict line"
+	@echo "  make test-targeted [BASE=develop] — the packages the diff touches (including uncommitted work); the inner loop"
+	@echo "  make test-smart [BASE=develop] — the precheck on a committed tree: pins, licence guards, smokes, affected tests"
+	@echo "  make precheck       — an alias for test-smart"
 	@echo "  make test-select BASE=ref — print the Go test packages the touched-package gate selects for BASE..HEAD"
 	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
-	@echo "  make precheck       — the merge precheck: FORGE_ORACLE_REF/XMAGE_REF are pushed to our forks"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make carddb-test    — the carddb tool's Python tests (cmd/carddb/py/tests; git + python3 only, no network)"
 	@echo "  make oracle-audit   — the hand Oracle-text audit + XMage ports (audit/; ORACLE_RUN=<Card> to filter)"
@@ -701,9 +703,19 @@ cards:
 test:
 	go test $(GO_TEST_FLAGS) ./...
 
-# test-one: PKG=./path RUN='^TestX$' [SKIP=re] [V=1] [TIMEOUT=2m] [TAGS=a,b]
-# (scripts/test-targets.sh one; the last stdout line is the verdict).
-.PHONY: test-one
+# The test targets (scripts/test-targets.sh) replace a raw `go test`: capped,
+# corpus-checked, one verdict line `test-<mode>: PASS|FAIL|ENV|EMPTY|BUDGET
+# <sha> <pkgs> <seconds>`. BASE is the ref the change merges into here: tickets
+# land on local develop, not by PR to it.
+#   test-one       PKG=./p RUN=TestX [SKIP= V=1 TIMEOUT=2m TAGS=a,b]: debugging
+#   test-targeted  the packages the diff vs BASE touches (working tree and
+#                  untracked files included), via cmd/testselect: the inner loop
+#   test-smart     the precheck on a committed tree, fail-fast: gofmt/vet, shell
+#                  syntax, fork pins, the licence guards, the script smokes, then
+#                  the affected packages; precheck is an alias
+BASE ?= develop
+export BASE
+.PHONY: test-one test-targeted test-smart precheck test-list
 test-one: export PKG := $(PKG)
 # RUN/SKIP go to the recipe through $(value ...), verbatim: a command-line RUN re-expands on export and make eats
 # `$|` / `$)` in it (gorge 8117b8ec09; '^TestA$|^TestB$' became '^TestA^TestB$' and matched nothing).
@@ -712,6 +724,19 @@ test-one: export TIMEOUT := $(TIMEOUT)
 test-one: export TAGS := $(TAGS)
 test-one:
 	@RUN='$(value RUN)' SKIP='$(value SKIP)' bash scripts/test-targets.sh one
+
+test-targeted:
+	@bash scripts/test-targets.sh targeted
+
+test-smart:
+	@bash scripts/test-targets.sh smart
+
+# test-list prints test-targeted's selection; useful when a diff seems to select
+# the wrong packages.
+test-list:
+	@bash scripts/test-targets.sh list
+
+precheck: test-smart
 
 # test-select: BASE=ref [HEAD=ref] — the touched-package gate's package list
 # (scripts/test-select.sh, internal/testselect; the last stdout line is a package).
@@ -755,19 +780,15 @@ phase-preflight:
 	RUST_MIN_STACK=16777216 $(PHASE_ORACLE_DIR)/target/follower/phase-follower --preflight $$names --card-data $(PHASE_ORACLE_DIR)/card-data-$(shell cut -d' ' -f2 followers/phase/PHASE_PIN).json > $$out && \
 	cat $$out && echo "refused $$(wc -l < $$out) of $$(wc -l < $$names)"
 
-# precheck is the cheap merge gate: every pin a kit build fetches from one of
-# our forks must already be pushed there. A seat-local commit that never
-# reached adams-shaun/forge or adams-shaun/mage breaks every kit build with
-# "upload-pack: not our ref". Tickets land on local develop, so the landing
-# config (.agentctl/config.toml, operator-owned and untracked) must gate merges
-# on this target; CI's lint job runs it on the develop->main PR as the second
-# line of defence. The pins are passed explicitly because make does not export
-# its variables; a FORGE_ORACLE_REF=... on the command line wins over the ?=
-# default.
-.PHONY: precheck
-precheck:
-	FORGE_ORACLE_REF='$(FORGE_ORACLE_REF)' XMAGE_REF='$(XMAGE_REF)' bash scripts/check-fork-pins.sh
-
+# precheck is the seat/merge precheck and an alias for test-smart: the fork
+# pins (every pin a kit build fetches from adams-shaun/forge or adams-shaun/mage
+# must already be pushed there), the licence guards, the script smokes, and the
+# affected packages, fail-fast on a committed tree. CI's lint job calls
+# scripts/check-fork-pins.sh directly because it has no .cards corpus; the test
+# job is what runs the full `go test` gate.
+#
+# boundary is the licence guard on its own (the same step test-smart runs).
+.PHONY: boundary
 boundary:
 	GORGE_TEST_WRAPPER=1 go test -count=1 ./internal/boundary/
 
