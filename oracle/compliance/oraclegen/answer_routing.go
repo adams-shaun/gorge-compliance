@@ -839,7 +839,9 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// The non-mana echo/cumulative payment's sacrifice (Skizzik
 		// Surger's two lands, Polar Kraken's land): XMage's
 		// SacrificeTargetCost picks through TargetSacrifice, the TARGET
-		// queue, not makeChoose.
+		// queue, not makeChoose. Echo pays one cost (one joined target
+		// record); cumulative upkeep pays one cost copy per age counter
+		// (one target answer per pick).
 		return append(as, echoCumulativeActionAnswers(d)...), true
 	case waterbendHelperDeclined(d):
 		// The waterbend tap-helpers ask: XMage pays the ability's waterbend

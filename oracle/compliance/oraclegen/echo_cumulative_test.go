@@ -96,20 +96,71 @@ func TestEchoCumulativeNonManaPayChooseUseThenTargets(t *testing.T) {
 	if got := XAnswersForScenario(nil, rules.OracleResult{Decisions: []rules.OracleDecision{discardPay, discardPick}}, sc, nil, nil); !reflect.DeepEqual(got, wantDiscard) {
 		t.Fatalf("echo discard answers = %+v, want %+v", got, wantDiscard)
 	}
+
+	// A one-pick echo answer is the bare ref, not "@ref": the driver binds a
+	// ref-shaped target answer before targetName resolves it, while an "@ref"
+	// is passed through and an object that entered after setup has no alias
+	// yet. OptionRefs make the pick same-name ambiguous, so the generator
+	// names the exact ref rather than the bare name.
+	postElection := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Options: 2, Min: 1, Max: 1, Picks: []string{"Sacrifice a land"},
+		PickRefs: []string{"p0:Forest#3"}, PickKinds: []string{"echo_pay"}}
+	postPick := rules.OracleDecision{Step: 0, Seat: 0, Kind: "choose_n", GorgeKind: "choose",
+		Options: 3, Min: 1, Max: 1, Picks: []string{"Forest"},
+		PickRefs:   []string{"p0:Forest#3"},
+		OptionRefs: []string{"p0:Forest#1", "p0:Forest#2", "p0:Forest#3"},
+		PickKinds:  []string{"echo_action_pick"}}
+	wantPost := [][]XAnswer{{{Seat: 0, Kind: "choice", Value: "yes"}, {Seat: 0, Kind: "target", Value: "p0:Forest#3"}}}
+	if got := XAnswersForScenario(nil, rules.OracleResult{Decisions: []rules.OracleDecision{postElection, postPick}}, sc, nil, nil); !reflect.DeepEqual(got, wantPost) {
+		t.Fatalf("post-setup echo answer = %+v, want the bare ref %+v", got, wantPost)
+	}
 }
 
 // TestCumulativeUpkeepSacLandPayChooseUse pins the Polar Kraken find:
 // CumulativeUpkeepEffect asks chooseUse("Sacrifice 1 land per age (1 age
 // counter(s))?") and its SacrificeTargetCost then takes the TARGET queue for
-// the one Island.
+// the one Island. At age >= 2 XMage pays one copy of the cost per age counter,
+// and each copy's SacrificeTargetCost asks its own TargetSacrifice, so the two
+// picks must be two target answers: one joined record answers only the first
+// ask (the second has no scripted answer).
 func TestCumulativeUpkeepSacLandPayChooseUse(t *testing.T) {
 	got, ds := xproofEchoScenario(t, "polar-kraken")
 	step := findElection(t, ds, "cumulative_pay")
 	want := []XAnswer{
 		{Seat: 0, Kind: "choice", Value: "yes"},
-		{Seat: 0, Kind: "target", Value: "@p0:Island"},
+		{Seat: 0, Kind: "target", Value: "p0:Island"},
 	}
 	if step >= len(got) || !reflect.DeepEqual(got[step], want) {
 		t.Fatalf("Polar Kraken xmage_answers[%d] = %+v, want %+v", step, got[step], want)
 	}
+
+	got2, ds2 := xproofEchoScenario(t, "polar-kraken-age2")
+	step2 := findNthElection(t, ds2, "cumulative_pay", 2)
+	want2 := []XAnswer{
+		{Seat: 0, Kind: "choice", Value: "yes"},
+		{Seat: 0, Kind: "target", Value: "p0:Island#2"},
+		{Seat: 0, Kind: "target", Value: "p0:Island#3"},
+	}
+	if step2 >= len(got2) || !reflect.DeepEqual(got2[step2], want2) {
+		t.Fatalf("Polar Kraken age 2 xmage_answers[%d] = %+v, want %+v", step2, got2[step2], want2)
+	}
+}
+
+// findNthElection returns the step of the n-th (1-based) decision whose single
+// pick kind is want. The age-2 fixture reaches Polar Kraken's second upkeep, so
+// it holds the age-1 election first and the age-2 election second.
+func findNthElection(t *testing.T, ds []rules.OracleDecision, want string, n int) int {
+	t.Helper()
+	wantN := n
+	for _, d := range ds {
+		if len(d.PickKinds) != 1 || d.PickKinds[0] != want {
+			continue
+		}
+		n--
+		if n == 0 {
+			return d.Step
+		}
+	}
+	t.Fatalf("no %s election #%d in %+v", want, wantN, ds)
+	return -1
 }

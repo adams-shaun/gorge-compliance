@@ -96,20 +96,47 @@ func (r *answerRouting) echoCumulativeActionPick(i int) bool {
 	return sac
 }
 
-// echoCumulativeActionAnswers spells the action's picks as ONE "^"-joined
-// target answer, the way XMage's TargetSacrifice consumes them: its
-// SacrificeTargetCost chooses one Target object whose TestPlayer selection
-// splits the record into every target. Emitting one answer per pick leaves the
-// later ones on the target queue (measured leftover "(Targets of PlayerA)
-// Count are not equal (found [@p0:Mountain#2])"). Each part keeps the same-name
-// alias the driver binds.
+// echoCumulativeActionAnswers spells the action's picks for XMage's TARGET
+// queue. The two keywords consume the queue differently:
+//
+//   - Echo pays its cost once. EchoEffect's one SacrificeTargetCost chooses a
+//     single Target object whose TestPlayer selection splits a "^"-joined
+//     record into every target, so the picks stay joined (one answer per pick
+//     leaves the later ones on the queue: measured leftover "(Targets of
+//     PlayerA) Count are not equal (found [@p0:Mountain#2])").
+//   - Cumulative upkeep pays one copy of the cost per age counter
+//     (CumulativeUpkeepEffect builds a CostsImpl holding a copy per age and
+//     CostsImpl.pay pays each separately). Each copy's SacrificeTargetCost
+//     asks its own TargetSacrifice, max 1 for the printed "sacrifice a
+//     land/creature/artifact" costs, while gorge's continueCumulativeAction
+//     asks all a.n * actionRemaining picks in ONE decision. A joined record
+//     then answers only the first ask: makeChoose takes one target out of the
+//     split record and removes the whole entry, so the second ask at age >= 2
+//     has no answer (xpt-bcbe2139: Polar Kraken's second upkeep). One answer
+//     per pick matches one ask per per-age cost copy for the current n=1 cost
+//     vocabulary.
+//
+// A one-part answer is a bare ref, not "@ref": the driver binds a ref-shaped
+// target answer (ScenarioReplay.scripted's bindAnswerAlias), but targetName
+// only resolves a ref it has bound, and an "@"-prefixed value is passed
+// through before that binding. A joined record keeps "@" on each part so
+// TestPlayer's split matches the aliases; the driver binds every segment.
 func echoCumulativeActionAnswers(d rules.OracleDecision) []XAnswer {
+	cumulative := len(d.Picks) > 0 && pickKind(d, 0) == "cumulative_action_sac"
+	if cumulative {
+		as := make([]XAnswer, 0, len(d.Picks))
+		for k, label := range d.Picks {
+			as = append(as, XAnswer{d.Seat, "target", targetPickValue(d, k, label)})
+		}
+		return as
+	}
+	// Echo's one ask takes a joined record only when it selects more than one
+	// object; a one-pick answer stays the bare ref the driver binds.
+	joined := len(d.Picks) > 1
 	parts := make([]string, 0, len(d.Picks))
 	for k, label := range d.Picks {
 		v := targetPickValue(d, k, label)
-		if isScenarioRefShaped(v) {
-			// The joined record bypasses the single-ref targetName lookup,
-			// so each part carries the driver's "@<ref>" alias form itself.
+		if joined && isScenarioRefShaped(v) {
 			v = "@" + v
 		}
 		parts = append(parts, v)
