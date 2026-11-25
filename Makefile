@@ -401,7 +401,10 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # other unbounded draw. Aggregates.random over a Set draws nextInt() per item and Goblin Kaboomist's Land Mine token art pick does, on
 # the resolution that holds its flip, so the recorded lost flip was spent first and Forge flipped from its seeded stream (xproof rng
 # xs:XP:goblin-kaboomist:f0t0:s2, step 37, xpt-825fefd2). The override is gone; the fork's ForcedCoinFlipTest pins the Set pick leaving
-# the flip armed and replays the find as a win/lose pair (fixtures/coin; one row fails on any build that does not force the flip).
+# the flip armed (anUnrelatedUnboundedDrawDoesNotSpendTheArmedFlip is the structural guard; its fixtures/coin win/lose rows carry
+# different ids, so they are not by themselves a guarantee that an unforced build fails one). scripts/forge-oracle-test-coinflip.sh
+# (make forge-driver-tests) replays the find twice under ONE id, flip lost then won, so an unforced build gives the same game both
+# times and fails exactly one; scripts/forge-oracle-run.sh refuses a ForcedDieRandom that declares the unbounded nextInt().
 # Driver-only: forge-game, cardsfolder and tokenscripts unchanged from d0f16bee2e0. Fork branch fix/xp-forge-driver-kaboomist-coinflip-step.
 FORGE_ORACLE_REF ?= 9b17c1fc83642808ce8c3e5306bafc245e1a2e67
 FORGE_ORACLE_DIR ?= .oracle-build/forge

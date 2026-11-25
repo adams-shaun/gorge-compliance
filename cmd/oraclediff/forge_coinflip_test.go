@@ -3,12 +3,17 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
+	"os"
 	"reflect"
 	"testing"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/engine/state"
+	"github.com/adams-shaun/gorge/testkit/testutil"
 )
 
 // TestForgeFlippedCoin: the Forge request carries every coin flip the lowered
@@ -53,43 +58,44 @@ func TestForgeFlippedCoin(t *testing.T) {
 	}
 }
 
-// TestForgeFlippedCoinAfterManaActivations: a trigger's flip resolves on the
-// pass that lets it resolve, after the mana activations spent in the same
-// priority window (xproof rng xs:XP:goblin-kaboomist:f0t0:s2: Goblin
-// Kaboomist's upkeep FlipCoin | LoseSubAbility$ DmgSelf, activations at steps
-// 34-35, the passes at 36-37, the lost flip on step 37). The request must keep
-// the flip on that last pass, at the same index the step list has it, and the
-// rewrites around activations must not move it: the driver arms the flip by
-// that step index, and a flip armed on any other step is Forge's own
-// (Kaboomist survives a flip gorge lost).
-func TestForgeFlippedCoinAfterManaActivations(t *testing.T) {
-	flips := []oraclegen.CoinFlip{{Step: 4, Seat: 0, Win: false, Draws: 1}}
-	it := oraclegen.Item{
-		ID:        "xs:XP:goblin-kaboomist:coin",
-		Template:  lower.Template,
-		CoinFlips: flips,
-		Scenario: oraclegen.Scenario{Steps: []oraclegen.Step{
-			{Op: "pass", Seat: 1},
-			{Op: "activate", Seat: 0, Card: "p0:Mountain"},
-			{Op: "activate", Seat: 0, Card: "p0:Mountain#2"},
-			{Op: "pass", Seat: 0},
-			{Op: "pass", Seat: 1},
-		}},
+// forgeOpsOf lists the step ops of a request, for failure messages.
+func forgeOpsOf(rq forgeRequest) []string {
+	var out []string
+	for _, s := range rq.Item.Steps {
+		out = append(out, fmt.Sprintf("%s/p%d", s.Op, s.Seat))
 	}
-	rq := forgeBuildRequest(nil, it, rules.OracleResult{}, nil, true)
-	if !reflect.DeepEqual(rq.Item.CoinFlips, flips) {
-		t.Fatalf("request coin flips %+v, want %+v", rq.Item.CoinFlips, flips)
+	return out
+}
+
+// wantUpkeepFlipStep fails unless the request's only flip is the lost flip on
+// the resolving seat-1 pass that follows two mana activations and the seat-0
+// pass in the same priority window (xproof rng xs:XP:goblin-kaboomist:f0t0:s2:
+// Goblin Kaboomist's upkeep FlipCoin | LoseSubAbility$ DmgSelf, activations at
+// steps 34-35, the passes at 36-37, the lost flip on step 37). The driver arms
+// a flip by step index, so a flip on any other step is Forge's own to make.
+func wantUpkeepFlipStep(t *testing.T, rq forgeRequest, wantStep int) {
+	t.Helper()
+	if len(rq.Item.CoinFlips) != 1 {
+		t.Fatalf("request coin flips %+v, want the one lost flip", rq.Item.CoinFlips)
 	}
 	f := rq.Item.CoinFlips[0]
-	if f.Step < 0 || f.Step >= len(rq.Item.Steps) {
-		t.Fatalf("flip names step %d of %d", f.Step, len(rq.Item.Steps))
+	if f.Step != wantStep {
+		t.Fatalf("flip names step %d, want %d (steps %v)", f.Step, wantStep, forgeOpsOf(rq))
 	}
-	if st := rq.Item.Steps[f.Step]; st.Op != "pass" || st.Seat != 1 {
-		t.Fatalf("flip step %d is %+v, want the resolving seat-1 pass after the activations", f.Step, st)
+	if f.Win || f.Seat != 0 || f.Draws != 1 {
+		t.Fatalf("flip %+v, want a lost one-draw flip of seat 0", f)
 	}
-	for i, want := range []string{"pass", "activate", "activate", "pass", "pass"} {
-		if got := rq.Item.Steps[i].Op; got != want {
-			t.Fatalf("step %d is %q after the rewrites, want %q: the driver arms the flip by index", i, got, want)
+	steps := rq.Item.Steps
+	if f.Step < 3 || f.Step >= len(steps) {
+		t.Fatalf("flip step %d of %d", f.Step, len(steps))
+	}
+	for k, want := range []struct {
+		op   string
+		seat int
+	}{{"activate", 0}, {"activate", 0}, {"pass", 0}, {"pass", 1}} {
+		if st := steps[f.Step-3+k]; st.Op != want.op || st.Seat != want.seat {
+			t.Fatalf("step %d is %s/p%d, want %s/p%d: the flip rides the resolving pass after two activations (steps %v)",
+				f.Step-3+k, st.Op, st.Seat, want.op, want.seat, forgeOpsOf(rq))
 		}
 	}
 	if len(rq.GorgeDecisions) != 0 {
@@ -99,8 +105,83 @@ func TestForgeFlippedCoinAfterManaActivations(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	const want = `"coin_flips":[{"step":4,"seat":0,"win":false,"draws":1}]`
+	want := fmt.Sprintf(`"coin_flips":[{"step":%d,"seat":0,"win":false,"draws":1}]`, wantStep)
 	if !bytes.Contains(b, []byte(want)) {
-		t.Fatalf("request JSON lost the lost flip:\n%s", b)
+		t.Fatalf("request JSON lost the lost flip, want %s:\n%s", want, b)
 	}
+}
+
+// TestForgeFlippedCoinOnTriggerResolutionAfterManaActivations lowers a tape
+// shaped like Goblin Kaboomist's upkeep (two mana activations, then the pass
+// pair that resolves the trigger, the flip recorded on the second pass) and
+// follows it through the exporter: the flip must stay on the resolving pass,
+// at the step index the request's step list has it, after the rewrites that
+// run around activations. This is the Go half of the find: lower.markCoinFlips
+// stamps the step and forgeBuildRequest must not move it.
+func TestForgeFlippedCoinOnTriggerResolutionAfterManaActivations(t *testing.T) {
+	// Every entry carries its own digest (the library count differs), so the
+	// lowering sees each activation change the state and keeps it as a step.
+	dg := func(n int) game.Digest {
+		return game.Digest{Turn: 1, Step: "main1", Players: []game.PlayerDigest{{Seat: 0, LibraryCount: n}}}
+	}
+	pass := func(seat, n int, top state.ObjID) game.Entry {
+		return game.Entry{Kind: "priority", Seat: seat, Turn: 1, Step: "main1", Digest: dg(n), StackTop: top,
+			Picks: []game.Pick{{Kind: "pass", Player: seat}}}
+	}
+	mana := func(n int, obj state.ObjID, ref string) game.Entry {
+		return game.Entry{Kind: "priority", Seat: 0, Turn: 1, Step: "main1", Digest: dg(n),
+			Picks: []game.Pick{{Kind: "ability", Player: 0, Obj: obj, Ref: ref, Ability: 0, Label: "{T}: Add {R}."}}}
+	}
+	const trig = state.ObjID(77)
+	resolve := pass(1, 5, trig)
+	resolve.RNG = 1
+	resolve.Flips = []game.Flip{{Seat: 0, Win: false, Draws: 1}}
+	tp := &game.Tape{
+		Format: game.TapeFormat, Starter: 0,
+		Entries: []game.Entry{
+			pass(0, 1, 0),
+			mana(2, 10, "p0:Mountain"),
+			mana(3, 11, "p0:Mountain#2"),
+			pass(0, 4, trig),
+			resolve,
+			pass(0, 6, 0),
+		},
+	}
+	l, err := lower.Tape(nil, tp)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if l.Truncated != "" {
+		t.Fatalf("truncated %q at %d", l.Truncated, l.TruncatedAt)
+	}
+	rq := forgeBuildRequest(testutil.CorpusRegistry(t), l.Item, rules.OracleResult{}, nil, true)
+	// The lowered steps: pass, activate, activate, pass (p0), pass (p1, the flip), pass.
+	wantUpkeepFlipStep(t, rq, 4)
+	if want := l.Item.CoinFlips[0].Step; rq.Item.CoinFlips[0].Step != want {
+		t.Fatalf("exporter moved the lowered flip from step %d to %d", want, rq.Item.CoinFlips[0].Step)
+	}
+}
+
+// TestForgeFlippedCoinKaboomistUpkeepFind is the recorded find itself
+// (testdata/forge/goblin-kaboomist-upkeep-flip.jsonl is its scenario.json
+// verbatim: 38 steps, the lost flip on step 37, activations at 34-35). The
+// request keeps the flip on step 37, the seat-1 pass that resolves the upkeep
+// trigger, with the two activations and the seat-0 pass in front of it.
+func TestForgeFlippedCoinKaboomistUpkeepFind(t *testing.T) {
+	raw, err := os.ReadFile("testdata/forge/goblin-kaboomist-upkeep-flip.jsonl")
+	if err != nil {
+		t.Fatal(err)
+	}
+	var it oraclegen.Item
+	if err := json.Unmarshal(bytes.TrimSpace(raw), &it); err != nil {
+		t.Fatal(err)
+	}
+	if it.Card != "Goblin Kaboomist" || len(it.Steps) != 38 {
+		t.Fatalf("fixture is %q with %d steps, want Goblin Kaboomist with 38", it.Card, len(it.Steps))
+	}
+	rq := forgeBuildRequest(testutil.CorpusRegistry(t), it, rules.OracleResult{}, nil, true)
+	if len(rq.Item.Steps) != 38 {
+		t.Fatalf("the rewrites changed the step count to %d: the driver arms the flip by index", len(rq.Item.Steps))
+	}
+	wantUpkeepFlipStep(t, rq, 37)
 }

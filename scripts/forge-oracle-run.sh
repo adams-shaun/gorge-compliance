@@ -268,6 +268,17 @@ for f in "$src/src/main/java/forge/oracle/ForcedDieRandom.java:req.coinFlips(ste
   fi
 done
 
+# The negative half: the flip is armed on the step and taken by nextBoolean
+# alone. A no-argument nextInt() override on ForcedDieRandom (the old
+# next(bits)-routing fallback) lets any unbounded draw that runs first spend the
+# armed result: Aggregates.random over a Set draws it per item, so Goblin
+# Kaboomist's token art pick took the recorded lost flip before FlipCoinEffect
+# asked and Forge flipped (and won) from its own stream. That driver still has
+# every marker above, so refuse it by what it must not declare.
+if grep -Eq 'int[[:space:]]+nextInt[[:space:]]*\([[:space:]]*\)' "$fdr"; then
+  die "$ref's ForcedDieRandom overrides the unbounded nextInt() ($fdr): an unrelated draw spends the armed coin flip; FORGE_ORACLE_REF predates the nextBoolean-only coin force"
+fi
+
 [ -s "$root/cp.txt" ] || die "no $root/cp.txt; run make forge-oracle-setup"
 [ -x "$jdk/bin/javac" ] || die "no JDK at $jdk"
 
