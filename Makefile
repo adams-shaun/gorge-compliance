@@ -84,7 +84,15 @@ GO_TEST_FLAGS ?= -p=2
 # Reconfiguration removes the creature subtypes with the creature type, keeping artifact subtypes. FowlPlayTest,
 # ReprobationTest, SwiftReconfigurationTest. Card behaviour change only for those cards and the
 # ExileReturnBattlefieldNextEndStepTargetEffect users, so the manifests are unchanged. Pin line oracle/xpin-1125.
-XMAGE_REF  ?= 43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae
+# 1b6d284d10 = 43e83011cb + fork commits fbfdc22a15 and 990132654b (both on oracle/xpin-1125). fbfdc22a15: token-copy
+# effects create their delayed sacrifice/exile trigger even when no token is made (CR 603.7a/603.7c): Foggy Swamp Visions
+# and Devastating Onslaught with X = 0, Shredder, Shadow Master, Nacatl War-Pride with no defending creature and Phantom
+# Steed with nothing exiled (the two docs/upstream-patches token-copy patches, now on the fork). FoggySwampVisionsTest,
+# DevastatingOnslaughtTest, ShredderShadowMasterTest, NacatlWarPrideTest, PhantomSteedTest. 990132654b: Molten Man,
+# Inferno Incarnate's leaves-the-battlefield "sacrifice a land" uses SacrificeControllerEffect (SacrificeEffect had no
+# target pointer, so nobody sacrificed; CR 603.10a). MoltenManInfernoIncarnateTest. Each test fails before and passes
+# after. Card behaviour change only for those cards, so the manifests are unchanged.
+XMAGE_REF  ?= 1b6d284d103ec532cf0f3d4c22477e03756ff613
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -549,6 +557,18 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # and cf742d0aefc. Die-roll code unchanged; ForcedDieRollTest, MobilizeZeroTokensStillSchedulesSacrificeTest and every
 # UnmappedAskTest case green on it (make forge-driver-tests runs the UnmappedAskTest cases). Fork branch
 # fix/xp-forge-driver-remove-counter-forced-amount.
+# 149a03bbbec4 = the clean merge of 66671165f31 and 3bb8f906e3 (the Mobilize X=0 AtEOT fix above): the two touch disjoint
+# files (forge-oracle's up-to remove-any-type Done pick vs forge-game's TokenEffect), so the pin keeps both and the merge adds
+# no code of its own. Driver and die-roll code unchanged from 66671165f31; cardsfolder/tokenscripts unchanged (same as FORGE_REF
+# ff076d4432). Fork branch oracle/fpin-1125-mobilize-zero.
+# bfdb3a8051 = oracle/fpin-1125: 149a03bbbec4 (above) merged with 46203751a5 (fork branch fix/xp-forge-driver-foretell-riot):
+# cast_mode "foretell" takes the K:Foretell special action (StepMachine.spellForMode; checkActed accepts it with no stack once
+# the card is exiled foretold, CR 702.143a/116.2h; Sozin's Comet, xpt-42b07d82), and Riot's UnlessCost$ AddCounter<1/P1P1>
+# reads gorge's choose_n[riot] pick (ScriptedController.payCostToPreventEffect: the counter pick pays, "Gain haste" declines,
+# CR 702.136a; Spider-Punk, xpt-cbd8207b). ForetellSpecialActionTest and RiotChoiceTest fail before it;
+# scripts/forge-oracle-test-foretell-cast-mode.sh and forge-oracle-test-riot-choice.sh replay the finds. Driver-only;
+# die-roll code, cardsfolder and tokenscripts unchanged.
+# c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
 # 0b7fde3680d = f1e3e00905c plus the zero-mode Charm driver fix (fork branch
 # fix/xp-forge-driver-zero-mode-charm): Bumi, King of Three Trials's ETB is
 # DB$ Charm | MinCharmNum$ 0 | CharmNum$ X with X = the Lesson cards in your
@@ -564,7 +584,12 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # scripts/forge-oracle-test-zero-mode-charm.sh runs it and replays the
 # zero-Lesson request through forge-oracle-run.sh. Driver-only; die-roll code,
 # cardsfolder and tokenscripts unchanged.
-FORGE_ORACLE_REF ?= 0b7fde3680d3ed4cd9f14b169bae8fd0be12f7dd
+# 9f2d35a4679 = the clean merge of c9419dd87a3 (above: foretell, Riot) and 0b7fde3680d (above: zero-mode Charm). Both fork
+# from f1e3e00905 and touch forge-oracle only, so one pin carries every driver fix: Done pick, Mobilize X=0, forced
+# remove-counter amount, foretell cast mode, Riot choice and the zero-mode Charm answer. Die-roll code unchanged;
+# ForcedDieRollTest, ZeroModeCharmTest, ForetellSpecialActionTest and RiotChoiceTest green on it.
+# Fork branch fix/xp-forge-driver-zero-mode-charm.
+FORGE_ORACLE_REF ?= 9f2d35a467960fdd7fdadfab70f3430338f54598
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

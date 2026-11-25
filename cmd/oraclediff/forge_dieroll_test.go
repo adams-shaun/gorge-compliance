@@ -133,9 +133,15 @@ func TestForgeRolledDie(t *testing.T) {
 // only), die-roll code unchanged, ForcedDieRollTest re-run green on it.
 // f1e3e00905c = the merge of 149a03bbbec4 and cf742d0aefc (UnmappedAskTest keeps both cases): one pin carries the Done
 // pick, the Mobilize X=0 fix and the forced remove-counter amount; die-roll code unchanged, ForcedDieRollTest re-run green on it.
+// bfdb3a8051 = 149a03bbbec4 merged with 46203751a5 (foretell cast mode, Riot choice; StepMachine/ScriptedController only);
+// die-roll code unchanged.
+// c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
 // 0b7fde3680d = f1e3e00905c plus the zero-mode Charm fix (ScriptedController.chooseModeForAbility and StepMachine.hasMode
 // only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
-const forgeOracleDieRollRef = "0b7fde3680d3ed4cd9f14b169bae8fd0be12f7dd"
+// 9f2d35a4679 = the clean merge of c9419dd87a3 (foretell, Riot) and 0b7fde3680d (zero-mode Charm); both fork from f1e3e00905
+// and touch forge-oracle only. Die-roll code unchanged; ForcedDieRollTest, ZeroModeCharmTest, ForetellSpecialActionTest and
+// RiotChoiceTest re-run green on it.
+const forgeOracleDieRollRef = "9f2d35a467960fdd7fdadfab70f3430338f54598"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

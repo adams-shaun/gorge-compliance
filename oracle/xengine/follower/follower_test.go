@@ -119,7 +119,7 @@ func TestPreH1Behaviour(t *testing.T) {
 		}
 	}
 	want := []string{"", "optionalcost",
-		"plot", "suspend", "adventure_alt", "omen_alt", "modal_spell", "warped",
+		"plot", "suspend", "foretell", "adventure_alt", "omen_alt", "modal_spell", "warped",
 		"mayplay", "alternative", "evoked",
 		"kicked", "kicked1", "kicked2", "kickedboth", "buyback", "entwined",
 		"offspring", "replicated", "multikicked"}
@@ -239,7 +239,7 @@ func TestFollowsCastMode(t *testing.T) {
 			t.Errorf("xmage does not follow %q; a nil CastModes follows every mode", m)
 		}
 	}
-	for m, want := range map[string]bool{"": true, "kicked": true, "plot": true, "suspend": true, "mayplay": true, "alternative": true, "evoked": true, "foretell": false, "flashback": false} {
+	for m, want := range map[string]bool{"": true, "kicked": true, "plot": true, "suspend": true, "mayplay": true, "alternative": true, "evoked": true, "foretell": true, "flashback": false} {
 		if got := f.FollowsCastMode(m); got != want {
 			t.Errorf("forge FollowsCastMode(%q) = %v, want %v", m, got, want)
 		}
