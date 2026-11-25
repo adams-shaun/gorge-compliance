@@ -84,7 +84,15 @@ GO_TEST_FLAGS ?= -p=2
 # Reconfiguration removes the creature subtypes with the creature type, keeping artifact subtypes. FowlPlayTest,
 # ReprobationTest, SwiftReconfigurationTest. Card behaviour change only for those cards and the
 # ExileReturnBattlefieldNextEndStepTargetEffect users, so the manifests are unchanged. Pin line oracle/xpin-1125.
-XMAGE_REF  ?= 43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae
+# 1b6d284d10 = 43e83011cb + fork commits fbfdc22a15 and 990132654b (both on oracle/xpin-1125). fbfdc22a15: token-copy
+# effects create their delayed sacrifice/exile trigger even when no token is made (CR 603.7a/603.7c): Foggy Swamp Visions
+# and Devastating Onslaught with X = 0, Shredder, Shadow Master, Nacatl War-Pride with no defending creature and Phantom
+# Steed with nothing exiled (the two docs/upstream-patches token-copy patches, now on the fork). FoggySwampVisionsTest,
+# DevastatingOnslaughtTest, ShredderShadowMasterTest, NacatlWarPrideTest, PhantomSteedTest. 990132654b: Molten Man,
+# Inferno Incarnate's leaves-the-battlefield "sacrifice a land" uses SacrificeControllerEffect (SacrificeEffect had no
+# target pointer, so nobody sacrificed; CR 603.10a). MoltenManInfernoIncarnateTest. Each test fails before and passes
+# after. Card behaviour change only for those cards, so the manifests are unchanged.
+XMAGE_REF  ?= 1b6d284d103ec532cf0f3d4c22477e03756ff613
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
