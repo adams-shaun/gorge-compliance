@@ -511,7 +511,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fixture (xs:XP:mabel-bitter-recluse:cast:s1) fails before it; scripts/forge-oracle-test-counter-any-mixed-kinds.sh runs it.
 # Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
 # afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
-FORGE_ORACLE_REF ?= afe18881c6e6327caf871661968865a495aaf3de
+# 3bb8f906e3 = afe18881c6 plus TokenEffect.resolve registering the AtEOT delayed trigger when the token amount is below 1 (Mobilize X
+# with X = 0 on Avenger of the Fallen, and the Firecat Blitz / Valduk / Lightning Coils X = 0 class): CR 702.181a's "Sacrifice them at
+# the beginning of the next end step" is unconditional, so CR 603.7a creates the delayed trigger at resolution and it does nothing
+# (CR 603.7c); the early `return` before makeTokenTable skipped the only registration point. A script with AtEOTNeedsCard$ True
+# (Myriad, CR 702.116a) is still dropped by registerDelayedTrigger over the empty set. xproof clusters
+# gorge-suspect:avenger-of-the-fallen:f0t0:stack and :combat0.attack:stack (triage xpt-09b99e96, xpt-c1665aee).
+# MobilizeZeroTokensStillSchedulesSacrificeTest fails on afe18881c6 ("expected [true] but found [false]") and passes after;
+# MyriadNoTokensCreatesNoDelayedTriggerTest and MordorOnTheMarchNothingExiledTest stay green. Driver, cardsfolder and tokenscripts
+# unchanged. Fork branch fix/xp-mobilize-zero-delayed-trigger.
+FORGE_ORACLE_REF ?= 3bb8f906e3d3317fc18fc0ff01dd0163d3d776f5
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

@@ -120,7 +120,9 @@ func TestForgeRolledDie(t *testing.T) {
 // 7d506c5192 = oracle/fpin-1125: f7b730149a merged with 26b4658101 (chooseCounterType peeks the counter-kind pick for a
 // RemoveCounter ask, driver-only), then with 244c590848 (the mayplay pin above); die-roll code unchanged.
 // afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
-const forgeOracleDieRollRef = "afe18881c6e6327caf871661968865a495aaf3de"
+// 3bb8f906e3 = afe18881c6 plus TokenEffect.resolve registering the AtEOT delayed trigger on a zero token amount (forge-game only);
+// driver and die-roll code unchanged.
+const forgeOracleDieRollRef = "3bb8f906e3d3317fc18fc0ff01dd0163d3d776f5"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
