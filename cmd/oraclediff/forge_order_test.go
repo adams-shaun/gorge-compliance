@@ -49,7 +49,7 @@ func TestForgeGraveyardOrderDecisions(t *testing.T) {
 	}}
 	ds := []rules.OracleDecision{{Step: 1, Seat: 0, Kind: "choose_n", Picks: []string{"A", "C"}}}
 
-	got := forgeGraveyardOrderDecisions(it, g, ds)
+	got, ends := forgeGraveyardOrderDecisions(it, g, ds)
 	if len(got) != 2 {
 		t.Fatalf("%d decisions, want the selection plus one order: %+v", len(got), got)
 	}
@@ -63,12 +63,15 @@ func TestForgeGraveyardOrderDecisions(t *testing.T) {
 	if !reflect.DeepEqual(got[0], ds[0]) {
 		t.Errorf("the selection decision moved: %+v", got[0])
 	}
+	if want := map[string][]string{"1:0": {"A", "C", "A"}}; !reflect.DeepEqual(ends, want) {
+		t.Errorf("graveyard_ends = %v, want the step-end graveyard under 1:0", ends)
+	}
 
 	// A pin that already reached the decisions is not added twice, and an
 	// order for a single card (or copies of one) is not a pin at all.
 	have := append(append([]rules.OracleDecision(nil), ds...), o)
-	if again := forgeGraveyardOrderDecisions(it, g, have); len(again) != len(have) {
-		t.Errorf("order decision duplicated: %+v", again)
+	if again, againEnds := forgeGraveyardOrderDecisions(it, g, have); len(again) != len(have) || againEnds != nil {
+		t.Errorf("order decision duplicated or ends for an unpinned step: %+v %v", again, againEnds)
 	}
 }
 
@@ -78,8 +81,8 @@ func TestForgeGraveyardOrderNeedsFullCheckpoints(t *testing.T) {
 	it := orderItems(2)
 	g := rules.OracleResult{Snapshots: []rules.OracleSnapshot{orderSnap(nil, nil)}}
 	ds := []rules.OracleDecision{{Step: 0, Kind: "target"}}
-	if got := forgeGraveyardOrderDecisions(it, g, ds); !reflect.DeepEqual(got, ds) {
-		t.Errorf("truncated snapshots changed the decisions: %+v", got)
+	if got, ends := forgeGraveyardOrderDecisions(it, g, ds); !reflect.DeepEqual(got, ds) || ends != nil {
+		t.Errorf("truncated snapshots changed the decisions: %+v %v", got, ends)
 	}
 }
 
@@ -94,7 +97,7 @@ func TestForgeGraveyardOrderOnePinPerStep(t *testing.T) {
 		orderSnap(nil, nil),
 		orderSnap([]string{"A", "B", "C", "D"}, nil),
 	}}
-	got := forgeGraveyardOrderDecisions(it, g, nil)
+	got, _ := forgeGraveyardOrderDecisions(it, g, nil)
 	if len(got) != 1 {
 		t.Fatalf("%d order decisions, want one per step/seat: %+v", len(got), got)
 	}
@@ -121,7 +124,7 @@ func TestForgeGraveyardOrderTransitCardIsNotPinned(t *testing.T) {
 		Step: 0, Seat: 1, Kind: "choose_n",
 		Picks: []string{"Transit", "Stayed A", "Stayed B"},
 	}}
-	got := forgeGraveyardOrderDecisions(it, g, selection)
+	got, ends := forgeGraveyardOrderDecisions(it, g, selection)
 	if len(got) != 2 {
 		t.Fatalf("%d decisions, want the selection plus one pin for the cards that stayed: %+v", len(got), got)
 	}
@@ -132,6 +135,9 @@ func TestForgeGraveyardOrderTransitCardIsNotPinned(t *testing.T) {
 	if pin.Step != 0 || pin.Seat != 1 || pin.Kind != "order" || pin.GorgeKind != "graveyard_order" ||
 		!reflect.DeepEqual(pin.Picks, []string{"Stayed A", "Stayed B"}) {
 		t.Errorf("pin = %+v, want step 0 seat 1 naming only the visible arrivals", pin)
+	}
+	if want := map[string][]string{"0:1": {"Stayed A", "Stayed B"}}; !reflect.DeepEqual(ends, want) {
+		t.Errorf("graveyard_ends = %v, want the step-end graveyard under 0:1", ends)
 	}
 	for _, pick := range pin.Picks {
 		if pick == "Transit" {
@@ -158,6 +164,9 @@ func TestForgeBuildRequestCarriesGraveyardOrder(t *testing.T) {
 	if d.Kind != "order" || d.GorgeKind != "graveyard_order" || d.Step != 0 || d.Seat != 1 ||
 		!reflect.DeepEqual(d.Picks, []string{"Akal Pakal, First Among Equals", "Poison Dart Frog"}) {
 		t.Errorf("request order = %+v", d)
+	}
+	if want := map[string][]string{"0:1": {"Akal Pakal, First Among Equals", "Poison Dart Frog"}}; !reflect.DeepEqual(rq.GraveyardEnds, want) {
+		t.Errorf("request graveyard_ends = %v, want the step-end graveyard under 0:1", rq.GraveyardEnds)
 	}
 
 	// Without the opt-in (the follower path) the role is stripped, even one

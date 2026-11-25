@@ -48,9 +48,27 @@ import (
 // checkpoint can see still gets its pin above, and the first ask in a step
 // consumes it, so a real ordering difference on a visible move is still
 // caught.
-func forgeGraveyardOrderDecisions(it oraclegen.Item, g rules.OracleResult, ds []rules.OracleDecision) []rules.OracleDecision {
+//
+// A pinned ask can still offer a card the pin does not name, when only SOME
+// of Forge's offered cards stay (Seed of Hope's mill: Island and Forest are
+// milled together, Island returns to the hand within the step, Forest and
+// Seed of Hope stay, so the pin is [Forest, Seed of Hope] while Forge's ask
+// offers the milled pair). forgeGraveyardOrderDecisions therefore also
+// returns, per pinned step and seat, the names in that seat's graveyard at
+// the END of the step (the request's graveyard_ends, keyed "<step>:<seat>"):
+// StepMachine.orderGraveyardPin orders the named cards by the pin and keeps
+// Forge's offered order after them for an unnamed card whose name is absent
+// from the end graveyard -- its position is not observable at the next
+// checkpoint, so no gorge answer can exist for it -- with a note. A name the
+// end graveyard DOES contain is an arrival the checkpoints see, so a pin that
+// does not name it is still the strict miss it was (the transit tolerance
+// cannot hide an ordering difference on a visible card). The end list is a
+// name set, not an identity: an older copy of the transit card's name still
+// in the graveyard makes the name look observable and the ask misses again,
+// which is the safe direction.
+func forgeGraveyardOrderDecisions(it oraclegen.Item, g rules.OracleResult, ds []rules.OracleDecision) ([]rules.OracleDecision, map[string][]string) {
 	if len(g.Snapshots) < len(it.Steps)+1 {
-		return ds
+		return ds, nil
 	}
 	have := make(map[[2]int]bool, len(ds))
 	for _, d := range ds {
@@ -59,6 +77,7 @@ func forgeGraveyardOrderDecisions(it oraclegen.Item, g rules.OracleResult, ds []
 		}
 	}
 	out := ds
+	var ends map[string][]string
 	for step := 0; step < len(it.Steps); step++ {
 		from, to := g.Snapshots[step].Players, g.Snapshots[step+1].Players
 		for seat := 0; seat < len(from) && seat < len(to); seat++ {
@@ -75,6 +94,13 @@ func forgeGraveyardOrderDecisions(it oraclegen.Item, g rules.OracleResult, ds []
 			if len(added) < 2 || len(distinct) < 2 {
 				continue
 			}
+			if ends == nil {
+				ends = make(map[string][]string)
+			}
+			ends[fmt.Sprintf("%d:%d", step, seat)] = append([]string(nil), to[seat].Graveyard...)
+			if have[[2]int{step, seat}] {
+				continue
+			}
 			refs := make([]string, len(added))
 			for i, name := range added {
 				refs[i] = fmt.Sprintf("p%d:%s", seat, name)
@@ -84,9 +110,13 @@ func forgeGraveyardOrderDecisions(it oraclegen.Item, g rules.OracleResult, ds []
 				Options: len(added), Picks: added, PickRefs: refs,
 				Min: len(added), Max: len(added),
 			})
+			if ends == nil {
+				ends = make(map[string][]string)
+			}
+			ends[fmt.Sprintf("%d:%d", step, seat)] = append([]string(nil), to[seat].Graveyard...)
 		}
 	}
-	return out
+	return out, ends
 }
 
 // forgeDropGraveyardOrderDecisions removes the Forge-only role from decisions,

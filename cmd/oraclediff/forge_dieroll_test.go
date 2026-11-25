@@ -200,7 +200,13 @@ func TestForgeRolledDie(t *testing.T) {
 // die-roll code unchanged, ForcedDieRollTest re-run green on it (make forge-driver-tests).
 // 53059b9bbf2 = oracle/fpin-1125-join10: 6fcacdc21814 (join9; above) joined with 019d50429f (the ChangeTargets fix; above);
 // die-roll code unchanged, ForcedDieRollTest re-run green on it (make forge-driver-tests).
-const forgeOracleDieRollRef = "53059b9bbf2d85b11f810f54699145b731665a8b"
+// e45e911953c = 53059b9bbf2 (join10; above) plus the target ask whose candidates cannot reach min (TargetsBelowMinTest
+// and fixtures targets-below-min/); die-roll code unchanged. Its pin bump left this constant stale and the TestForge
+// suite red on develop; the re-run below is on the pin's descendant, which contains it.
+// 8b89eabc655 = e45e911953c plus the PINNED transit graveyard order (forge-oracle only: Request.java parses
+// graveyard_ends, StepMachine.orderGraveyardPin, OrderCardsTest's three pinned-transit tests); die-roll code unchanged,
+// ForcedDieRollTest re-run green on it (forge-oracle/run-unit-tests.sh, 7 tests).
+const forgeOracleDieRollRef = "8b89eabc655b78acf86ee9321a87adbebde283d3"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

@@ -791,7 +791,20 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # TargetsBelowMinTest (fork fixtures targets-below-min/) fails on 53059b9bbf2 with the exact miss and passes here;
 # scripts/forge-oracle-test-targets-below-min.sh (make forge-driver-tests) runs it. Driver-only; die-roll code,
 # cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-targets-below-min.
-FORGE_ORACLE_REF ?= e45e911953c94991e63335d3ea14d0c881ba283a
+# 8b89eabc655 = e45e911953c (above) with the PINNED half of the transit graveyard order (xproof cluster xpt-18625cef,
+# Thassa's Rebuff): Seed of Hope's mill moves Island and Forest together, Island returns to the hand within the step, so
+# forge_order.go's checkpoint delta pins only [Forest, Seed of Hope] while Forge's "order to Graveyard" ask offers the
+# milled pair, and StepMachine.orderByNames strict-missed whenever an offered card was not named by the pin. forge-export
+# now writes graveyard_ends ("<step>:<seat>" to the names in that seat's graveyard at the step's end) and
+# StepMachine.orderGraveyardPin orders the named cards by the pin and keeps Forge's offered order after them for an
+# unnamed card whose name is absent from the end graveyard (its position is not observable at the next checkpoint, so no
+# gorge answer can exist), with a note; a name the end graveyard DOES contain is an arrival the checkpoints see, so an
+# unnamed one still misses, and an absent end list still misses too. OrderCardsTest's
+# pinnedGraveyardOrderKeepsATransitOfferedCard (red on e45e911953c), pinnedGraveyardOrderStillMissesAnUnnamedCardTheCheckpointsSee
+# and pinnedGraveyardOrderWithoutEndNamesStillMisses cover both halves; scripts/forge-oracle-test-graveyard-transit-order.sh
+# (make forge-driver-tests) pins the 17-test count. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged
+# (same as FORGE_REF ff076d4432). Fork branch driver-transit-pin.
+FORGE_ORACLE_REF ?= 8b89eabc655b78acf86ee9321a87adbebde283d3
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
