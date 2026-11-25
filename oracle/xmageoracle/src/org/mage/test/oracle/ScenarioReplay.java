@@ -3650,6 +3650,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
             activeSeat = (TURN - 1) % 2;
             attackAdvancedTurn = false;
             resetOccurrences();
+            seedNaturalStepsBeforeStart(TURN);
             enterQueuedStep(TURN, MAIN, false);
             queueSetupChoices(sc);
             build(sc);
@@ -3717,6 +3718,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                     snaps.add(snap);
                 });
+                if (passHandsOffBeforeLaterAction(steps, i, activeSeat, seats)) {
+                    // After the checkpoint, so the snapshot still sees the
+                    // priority the seat holds; before the seat's later actions.
+                    runCode("pass hands priority on before the seat's next action", turn, phase,
+                            seat(seatOfStep(steps, i)), (info, pl, g) -> pl.pass(g));
+                }
                 if (!payment.isEmpty()) {
                     TestPlayer payer = seat(st.has("seat") ? st.get("seat").getAsInt() : 0);
                     queuePaymentEnd(payer);
@@ -3855,12 +3862,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
      *    it reached; any other recorded pass checkpoints on the seat that
      *    passed, which still holds priority.
      *
-     * Every other op keeps seat 0, which acts last on the turn it is on. That
-     * includes the declarations: XMage makes attack and block in the step's
-     * beginStep on the declaring seat, not as a queued action of that seat, so
-     * a checkpoint on the declaring seat would run only after the active
-     * seat's next pass moved the game on. attach is likewise queued on
-     * playerA.
+     *  - a declaration (attack, block) checkpoints on the ACTIVE seat. XMage
+     *    makes the declaration in the step's beginStep, and the step's first
+     *    priority then goes to the active seat: on seat 1's turn that is
+     *    playerB, so a checkpoint left on playerA runs only after playerB's
+     *    next pass has moved the game on, and the two snapshots cross (the
+     *    pass lands at the declaration's index). On seat 0's turn this is
+     *    playerA, unchanged.
+     *
+     * Every other op keeps the seat-0 fallback, which acts last on the turn it
+     * is on; attach is likewise queued on playerA.
      */
     private TestPlayer checkpointSeat(String op, JsonObject st, int stepIdx) {
         if (op.equals("pass") && isPassRun(steps(sc0), stepIdx)) {
@@ -3882,6 +3893,16 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // second checkpoint must follow that wait there.
             return seat(activeSeat);
         }
+        if (op.equals("attack") || op.equals("block")) {
+            // The declaration itself is beginStep work on the declaring seat,
+            // not a queued action of that seat; the checkpoint after it must
+            // ride the queue that holds the step's first priority, which is
+            // the active seat's. Registering it there also keeps it ahead of
+            // the active seat's following pass checkpoint, so the snapshots
+            // stay in step order. Checked before the recorded-action rule:
+            // attack and block are never actions of a seat's queue.
+            return seat(activeSeat);
+        }
         if (sc0 != null && opensOnOtherSeat(steps(sc0), stepIdx, activeSeat)) {
             // A recorded game's action of the seat that is not active runs on
             // that seat's queue, and so must its checkpoint: a checkpoint on
@@ -3898,11 +3919,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
         if (sc0 != null && isRecordedAction(steps(sc0), stepIdx)) {
             // A recorded cast, activation or land play is queued on the seat
             // that takes it, and that seat's queue carries its checkpoint
-            // between its other actions. A declaration (attack, block) is
-            // beginStep work on the declaring seat, not an action of its
-            // queue, and attach is queued on playerA; those keep seat 0,
-            // which acts last on the turn it is on and so snapshots after the
-            // declaration has happened.
+            // between its other actions. attach is queued on playerA and
+            // keeps the fallback below.
             return seat(seatOfStep(steps(sc0), stepIdx));
         }
         return playerA;
@@ -6903,6 +6921,43 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return cmds;
     }
 
+    /** Whether the recorded pass at {@code index} must be a real pass of its
+     * seat, queued right after its checkpoint. A pass of the seat that is not
+     * active, which only hands priority on, is virtual: its checkpoint rides
+     * that seat's own queue and consumes nothing. XMage then drains the rest
+     * of the queue at that one priority, so a later action of the same seat in
+     * the same step instance fires before the active seat has resolved the
+     * stack's top object and passed again (Helix Pinnacle, Saproling Burst:
+     * p0 activates twice, passes, p1 resolves and passes, p0 activates a
+     * third time with the first ability still on the stack, and the
+     * checkpoints of p1's two passes ran after p0's third activation). The
+     * opponent's pass that follows is what resolves the object, so the pass
+     * is real exactly when the opponent passes next and the seat has an
+     * action still queued in this step instance. */
+    static boolean passHandsOffBeforeLaterAction(JsonArray steps, int index, int activeSeat, int seats) {
+        if (!isPassRun(steps, index)) {
+            return false;
+        }
+        int seat = seatOfStep(steps, index);
+        JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+        if (seat == activeSeat || posFlag(pos, "moved") || posFlag(pos, "resolves")
+                || passEntersNewStep(steps, index, seats)) {
+            return false;
+        }
+        if (!isOp(steps, index + 1, "pass") || seatOfStep(steps, index + 1) == seat) {
+            return false;
+        }
+        for (int j = index + 1; j < steps.size(); j++) {
+            if (isPassRun(steps, j) && passEntersNewStep(steps, j, seats)) {
+                return false;
+            }
+            if (isRecordedAction(steps, j) && seatOfStep(steps, j) == seat) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /** gorge's step name as the XMage step its priority falls in. */
     static PhaseStep phaseOfGorgeStep(String step) {
         switch (step) {
@@ -6948,6 +7003,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
         runtimeOccTurn = 0;
         runtimeStepCounts.clear();
         runtimeStepOccurrence.clear();
+    }
+
+    /** The replay starts in the scenario turn's main 1, but the game runs
+     * that turn's natural upkeep and draw before it: the runtime side counts
+     * them. Count them on the queued side too, so an additional upkeep or
+     * draw step after the start (CR 500.8) is occurrence 2 in both. The draw
+     * is counted only when it runs: a two-player game's starting player skips
+     * the draw step of turn 1 (TwoPlayerDuel's one-shot TurnMod), so there
+     * the runtime never sees a natural draw and an additional one is
+     * occurrence 1. A three-seat FreeForAll has no such skip. */
+    private void seedNaturalStepsBeforeStart(int turnNum) {
+        EnumMap<PhaseStep, Integer> counts = queuedOccurrences.computeIfAbsent(
+                turnNum, key -> new EnumMap<>(PhaseStep.class));
+        counts.put(PhaseStep.UPKEEP, 1);
+        if (!(seats == 2 && turnNum == 1)) {
+            counts.put(PhaseStep.DRAW, 1);
+        }
     }
 
     /** Record a position the queued replay enters. A pass that moved within
@@ -7987,12 +8059,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
                         bindAnswerAlias(parts[0]);
                         addTarget(p, amountTargetName(parts[0]) + "^X=" + parts[1]);
                     } else {
-                        if (isScenarioRef(v)) {
-                            // A same-name target the generator names by its
-                            // exact ref: bind its @alias if it entered after
-                            // setup, so targetName resolves it.
-                            bindAnswerAlias(v);
-                        }
+                        // Bind every ref the answer names before targetName:
+                        // a bare ref, an "@ref" spelling, or a "^"-joined
+                        // multi-part record (echo's single SacrificeTargetCost
+                        // selects all its lands from one record). A target
+                        // that entered after setup has no @alias yet, and
+                        // targetName passes an "@..." value through unchanged,
+                        // so binding only a bare isScenarioRef(v) value left
+                        // those targets unmatched. bindAnswerAlias splits on
+                        // "^" and strips "@", so this one call covers every
+                        // shape and is a no-op for labels and skip tokens.
+                        bindAnswerAlias(v);
                         addTarget(p, v.equals("[target_skip]") ? TestPlayer.TARGET_SKIP : targetName(v));
                     }
                     break;
@@ -9111,7 +9188,14 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         s.add("players", players);
         JsonArray perms = new JsonArray();
-        for (Permanent perm : g.getBattlefield().getAllPermanents()) {
+        // CR 702.26b: a phased-out permanent is treated as though it does not
+        // exist. XMage keeps it on the battlefield so phasing can return it,
+        // and getAllPermanents() lists it; the snapshot must walk the active
+        // list, as gorge's oracle snapshot and Forge's battlefield do. Every
+        // perms field -- counters, attached_to and the rest -- is written from
+        // this one loop, so none of a phased-out permanent reaches the
+        // snapshot.
+        for (Permanent perm : g.getBattlefield().getAllActivePermanents()) {
             JsonObject o = new JsonObject();
             o.addProperty("name", perm.getName());
             o.addProperty("controller", seatIndex(g, perm.getControllerId()));

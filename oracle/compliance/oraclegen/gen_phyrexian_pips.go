@@ -41,6 +41,11 @@ type xanswersExtra struct {
 	// its own X (Ludevic, Necrogenius's ExileXFromYourGraveCost) adds another.
 	// A counter-removal cost that reuses the mana X (Talon of Pain) does not.
 	activates map[int]int
+	// removeCounterCosts names the activate steps whose cost is an
+	// any-counter "Remove ... from {this}" (RemoveCountersSourceCost), which
+	// XMage always asks as a multi-amount over every counter kind on the
+	// source (remove_counter_answers.go).
+	removeCounterCosts []removeCounterCostAsk
 	// searchZones maps a search_zones decision index to the resolved XMage ask
 	// shape (search_zone_source.go). Absent means an unproven effect shape,
 	// which stays unscripted.
@@ -50,6 +55,9 @@ type xanswersExtra struct {
 	forage map[int][]string
 	// ownBounce marks the steps that pose an own-bounce hidden pick.
 	ownBounce map[int]bool
+	// ownGraveyardExile marks the steps that pose a proven own-graveyard
+	// exile's mandatory hidden pick (own_graveyard_exile_source.go).
+	ownGraveyardExile map[int]bool
 	// tapThenUntap marks the steps whose TapOrUntap election is a
 	// tap-then-untap face's (tapThenUntapStep).
 	tapThenUntap map[int]bool

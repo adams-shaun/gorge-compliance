@@ -71,6 +71,11 @@ type answerRouting struct {
 	// ownBounce marks the steps whose hidden pick is an own-bounce effect
 	// (own_bounce_source.go): XMage reads that pick from the TARGET queue.
 	ownBounce map[int]bool
+	// ownGraveyardExile marks the steps whose mandatory hidden pick is an
+	// own-graveyard exile face (own_graveyard_exile_source.go): XMage's
+	// ExileCardFromOwnGraveyardControllerEffect reads the whole pick as one
+	// TARGET definition, one "^" segment per card.
+	ownGraveyardExile map[int]bool
 	// searchZones maps a search_zones decision index to the XMage ask shape it
 	// answers (search_zone_source.go). An absent index is an unknown effect
 	// shape and stays unscripted rather than answering the wrong prompt.
@@ -759,6 +764,13 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// above; emitting it again would leave a stray boolean.
 		return as, true
 	}
+	if as2 := r.ownGraveyardExileTargetAnswers(i); as2 != nil {
+		// A proven own-graveyard exile's mandatory hidden pick: XMage's
+		// ExileCardFromOwnGraveyardControllerEffect asks one target definition
+		// on the TARGET queue, one "^" segment per pick. The generic choose_n
+		// arm joins them into one makeChoose choice no target ask reads.
+		return append(as, as2...), true
+	}
 	switch {
 	case d.Resume == "search_zones":
 		// gorge's CR 701.23 "and/or" election over the zones a search may
@@ -816,6 +828,21 @@ func (r *answerRouting) route(i int) (as []XAnswer, owned bool) {
 		// answer, never the gorge label (measured strict miss: "Missing
 		// CHOICE def ... Pay {B} and transform Grub, Notorious Auntie?").
 		return append(as, XAnswer{d.Seat, "choice", triggerCostAnswer(d)}), true
+	case echoCumulativeElectionAnswer(d) != "":
+		// Echo and cumulative upkeep pose the same pay/decline chooseUse.
+		// Gorge's label ("Sacrifice 2 land", "Pay {2}{W}{W}") is not a
+		// boolean; the generic choose_n arm would leave it on the choice
+		// queue and the replay would stop at the next cost target
+		// (xpt-bcbe2139: Skizzik Surger, Polar Kraken).
+		return append(as, XAnswer{d.Seat, "choice", echoCumulativeElectionAnswer(d)}), true
+	case r.echoCumulativeActionPick(i):
+		// The non-mana echo/cumulative payment's sacrifice (Skizzik
+		// Surger's two lands, Polar Kraken's land): XMage's
+		// SacrificeTargetCost picks through TargetSacrifice, the TARGET
+		// queue, not makeChoose. Echo pays one cost (one joined target
+		// record); cumulative upkeep pays one cost copy per age counter
+		// (one target answer per pick).
+		return append(as, echoCumulativeActionAnswers(d)...), true
 	case waterbendHelperDeclined(d):
 		// The waterbend tap-helpers ask: XMage pays the ability's waterbend
 		// generic from the prefilled mana pool and never poses the ask, so

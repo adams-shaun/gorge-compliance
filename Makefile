@@ -67,7 +67,24 @@ GO_TEST_FLAGS ?= -p=2
 # creatures investigates" counts a player with no creatures as zero, so with nobody controlling a creature every player is
 # tied for the most and each investigates, CR 608.2; the effect returned early on an empty creature map so nobody did).
 # NoWitnessesTest. Card behaviour change only for that card, so the manifests are unchanged.
-XMAGE_REF  ?= fdbae29b12162fce8204b80f4bb7d56ceb253b41
+# 30c62e641b = fdbae29b12 + fork branch fix/leaves-graveyard-self-enter (CardsLeaveGraveyardTriggeredAbility.checkTrigger returns
+# false when the batch holds the source's own non-battlefield-to-battlefield move, CR 603.10a: a leaves-the-graveyard
+# ability looks back to the state before the event, where Skeleton Crew / Rot Farm Mortipede sat in the graveyard and
+# their battlefield-only trigger did not function, so returning themselves from it triggered nothing; XMage checked the
+# batch after the move and stacked the trigger). RotFarmMortipedeTest and SkeletonCrewTest.test_ReturnItself_NoTrigger
+# (the fork carried it @Ignore'd). Card behaviour change only for the CardsLeaveGraveyardTriggeredAbility cards, so the
+# manifests are unchanged.
+# 63c40e5be5 = 30c62e641b merged with fork commit 0777660 (adams-shaun/mage#1, branch fix/ghost-of-illyria-delayed-trigger):
+# ExileReturnBattlefieldNextEndStepTargetEffect creates the "return it at the beginning of the next end step" delayed
+# ability even when nothing was exiled (CR 603.7a), so Skyskipper Duo, Ghost of Illyria, Ennis, Debate Moderator,
+# S.H.I.E.L.D. Flying Car and Eerie Interlude with zero targets stack it at the end step as gorge and Forge do; it
+# returned before adding the delayed ability. SkyskipperDuoTest (zero targets fails before, passes after; one target).
+# 43e83011cb = 63c40e5be5 plus the CR 205.1a type-setting fix: Fowl Play and Reprobation set the card type
+# (LoseType.ALL_BUT_COLOR, so an artifact creature stops being an artifact and loses its other subtypes), and Swift
+# Reconfiguration removes the creature subtypes with the creature type, keeping artifact subtypes. FowlPlayTest,
+# ReprobationTest, SwiftReconfigurationTest. Card behaviour change only for those cards and the
+# ExileReturnBattlefieldNextEndStepTargetEffect users, so the manifests are unchanged. Pin line oracle/xpin-1125.
+XMAGE_REF  ?= 43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -410,7 +427,81 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # triage xpt-c647818a: Akroma, Angel of Wrath and Goblin Striker). SecondCombatDamageStepPriorityTest fails on d0f16bee2e and
 # passes after. Driver and die-roll code unchanged; cardsfolder/tokenscripts unchanged. Fork branch
 # fix/xp-forge-oracle-damage-step-priority.
-FORGE_ORACLE_REF ?= f7b730149a5b24faedd221ede64bdc8367c7f88d
+# 70b77c0ff08 = the clean merge of 9b17c1fc83 (the coin force no longer spent by an unrelated unbounded draw) and 24a3344b81
+# (the Dig order-to-Library answer for Spin into Myth's fateseal): they touch disjoint files (ForcedDieRandom vs
+# ScriptedController/StepMachine), so the pin keeps both; die-roll code unchanged.
+# 9b17c1fc83 = d0f16bee2e0 plus the coin force no longer spent by an unrelated unbounded draw: ForcedDieRandom.nextInt() polled the armed
+# flips for a next(bits)-routing MyRandom, which the pin's MyRandom (nextBoolean forwarded) made dead for the flip and live for every
+# other unbounded draw. Aggregates.random over a Set draws nextInt() per item and Goblin Kaboomist's Land Mine token art pick does, on
+# the resolution that holds its flip, so the recorded lost flip was spent first and Forge flipped from its seeded stream (xproof rng
+# xs:XP:goblin-kaboomist:f0t0:s2, step 37, xpt-825fefd2). The override is gone; the fork's ForcedCoinFlipTest pins the Set pick leaving
+# the flip armed (anUnrelatedUnboundedDrawDoesNotSpendTheArmedFlip is the structural guard; its fixtures/coin win/lose rows carry
+# different ids, so they are not by themselves a guarantee that an unforced build fails one). scripts/forge-oracle-test-coinflip.sh
+# (make forge-driver-tests) replays the find twice under ONE id, flip lost then won, so an unforced build gives the same game both
+# times and fails exactly one; scripts/forge-oracle-run.sh refuses a ForcedDieRandom that declares the unbounded nextInt().
+# Driver-only: forge-game, cardsfolder and tokenscripts unchanged from d0f16bee2e0. Fork branch fix/xp-forge-driver-kaboomist-coinflip-step.
+# 24a3344b81 = d0f16bee2e0 plus Spin into Myth's fateseal (xproof cluster xpt-be0cfba7): Forge's DigEffect asks
+# orderMoveToZoneList for the cards a Dig sent to the library bottom (to their OWNER's controller), but gorge logs only its
+# one choose_n[dig] pick and no order decision. StepMachine.pickObjects remembers the consumed dig pick and orderCards answers
+# a Dig LibraryPosition$ -1 order ask from it (first pick moved first, so it ends highest; CR 401.4), matched by name multiset
+# at the same step, seat not compared. Test FatesealDigOrderTest (fixtures/unmapped/fateseal-dig-order.jsonl), run by
+# scripts/forge-oracle-test-fateseal-dig-order.sh. Driver-only (ScriptedController/StepMachine), die-roll code unchanged;
+# cardsfolder/tokenscripts unchanged. Fork branch fix/xp-forge-driver-fateseal-dig-order.
+# 9d7baedf34 = d0f16bee2e plus the echo and cumulative upkeep pay-or-sacrifice answer: Forge builds both keywords as an
+# upkeep trigger whose DB$ Sacrifice asks payCostToPreventEffect for Echo$/CumulativeUpkeep$, but the driver only took an
+# unless_pay decision there, so gorge's one-pick election became a strict miss plus a leftover. payCostToPreventEffect
+# now also takes that decision by pick kind: echo_pay/echo_pay_manual/cumulative_pay/cumulative_pay_manual pay through
+# payCostDuringAbilityResolve with payingUnlessCost set, and echo_sac/cumulative_sac decline (Forge sacrifices the source).
+# The payment's own cost choose consumes the follow-up echo_action_pick / cumulative_action_sac / discard pick through
+# ScriptedCostDecision and the sacrifice/discard overrides. EchoCumulativeUpkeepTest (5 tests: echo pay, echo sacrifice,
+# cumulative pay, cumulative pay with a creature sacrifice, a non-mana echo cost) and the full driver suite (188 tests)
+# are green on it. Driver-only change; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# Fork branch fix/xp-forge-driver-echo-cumulative-upkeep.
+# a3c422f79a6 = the clean merge of 9d7baedf34 (the echo/cumulative-upkeep answer above) and 70b77c0ff08 (the coin-force and
+# Dig order-to-Library driver above): the echo election touches ScriptedController.payCostToPreventEffect while the coin force
+# touches ForcedDieRandom and the Dig path ScriptedController.orderMoveToZoneList/StepMachine, disjoint enough to merge cleanly,
+# so the pinned driver keeps all three fixes. The merge adds no code of its own; the full driver suite (192 tests, including
+# EchoCumulativeUpkeepTest, ForcedCoinFlipTest, FatesealDigOrderTest and ForcedDieRollTest) is green on it; cardsfolder and
+# tokenscripts unchanged. Fork branch fix/xp-forge-driver-echo-cumulative-upkeep.
+# 528c55d25b4 = the clean merge of 8f537eddcbb (cast_mode "alternative", StepMachine.spellForMode only) and 304ae5ffe0e
+# (the elected unless payment's whole-cost card pick, ScriptedController.chooseCardsForCost only): the two fixes touch disjoint
+# driver files, so the pinned driver keeps both; the merge adds no code of its own. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-alternative-cast-mode.
+# 8f537eddcbb = a3c422f79a6 plus cast_mode "alternative": StaticAbilityAlternativeCost builds a static's alternative-cost
+# cast as a non-basic copy of the spell with AlternativeCost unset (that field is only for the keyword alternatives such as
+# Warp and Escape), while the plain cast stays basic; spellForMode now takes the first such spell. Submerge's free cast
+# (CR 118.9) and a granted or may-play alternative (Leyline of Mutation, Warped Space) no longer fall through to the plain
+# cast and fail "was not put on the stack". scripts/forge-oracle-test-alternative-cast-mode.sh (make forge-driver-tests)
+# replays the exported xs:XP:submerge:cast:s1 request and requires Submerge on the stack at step 0 with no harness row;
+# make forge-driver-tests is green on it. Driver-only; cardsfolder/tokenscripts unchanged.
+# 304ae5ffe0e = a3c422f79a6 plus the whole-cost card pick of an elected unless payment (xproof cluster xpt-4561863a, Ill-Timed Explosion's
+# UnlessCost$ Discard<2/Card> and Ghostly Dancers + Rent Is Due's tap-two): ScriptedController.chooseCardsForCost asked pickObjects for
+# 0..amount whenever Forge passed isOptional, which every UnlessCost$ payment does, so an option list of exactly the amount (the 2-card
+# hand, the 2 untapped creatures) strict-missed "cost card" although gorge logs no pick for a forced one. gorge's unless_pay answer has
+# already elected the payment (payingUnlessCost), and an elected payment pays the whole cost (CR 118.12, 601.2h), so the ask is now
+# amount..amount there: the exact-size list is forced and a logged pick is still consumed first; outside an elected unless payment the
+# 0..amount ask is unchanged. UnlessCostForcedPickTest (3 tests: both finds replayed, plus a 3-card hand that consumes gorge's logged
+# discard pick) fails without the change; the full driver suite (195 tests) is green on it. Driver-only: cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-unless-cost-cards-forced.
+# 244c5908482 = 528c55d25b4 + cast_mode "mayplay": a cast from exile under a MayPlay static (Hurl Through Hell's "you may
+# cast that card") is the MayPlay-bound copy c.getAllPossibleAbilities offers with getMayPlay() set, not the card's own
+# hand-restricted spell, which SpellAbilityRestriction.checkZoneRestrictions refuses ("was not put on the stack", CR
+# 601.2a). spellForMode takes that copy for the mode, and spellFor does the same for any cast whose card is outside the
+# hand and not in the command zone; a basic copy is preferred as commandZoneSpell does, and Forge granting none is a loud
+# HarnessError. The command-zone pick now uses the same helper, so one selector covers every MayPlay cast.
+# scripts/forge-oracle-test-mayplay-cast.sh (make forge-driver-tests) replays the exported
+# xs:XP:hurl-through-hell:cast:s1 request and requires p1's Shield Sphere on the stack (controller p0) at step 7 with no
+# harness row. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-mayplay-cast.
+# 7d506c5192 = oracle/fpin-1125: the merge of 26b4658101 into f7b730149a (d0f25fff70), then 244c590848 (the mayplay pin
+# above). 26b4658101 = f7b730149a plus remove-any-type's counter-kind pick left for the amount ask: CountersRemoveEffect
+# .removeAnyType asks chooseCounterType then chooseNumber, and gorge logs one counter-kind pick per counter removed, so with two
+# kinds offered chooseCounterType took the first pick and the amount came up one short (Mabel, Bitter Recluse removed one loyalty
+# from Ajani Resolute instead of two; CR 122.1, 704.5i). For a RemoveCounter ask chooseCounterType now peeks the kind pick
+# (StepMachine.peekCounterKind); other asks and the remove-any-counter cost still consume theirs. UnmappedAskTest's mixed-kinds
+# fixture (xs:XP:mabel-bitter-recluse:cast:s1) fails before it; scripts/forge-oracle-test-counter-any-mixed-kinds.sh runs it.
+# Driver-only; die-roll code, cardsfolder and tokenscripts unchanged.
+FORGE_ORACLE_REF ?= 7d506c5192e8bcf75b1f191f5a5e28d5a8219e20
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
