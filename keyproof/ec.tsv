@@ -54,9 +54,9 @@ ec528198-a38a-4ef7-9804-78a25c94ecc1	static#0.0	static#0.0	agreed	-	X	scen	1	0	W
 ec57dcb8-127f-4922-a9f9-5227db1751a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec57dcb8-127f-4922-a9f9-5227db1751a9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec57dcb8-127f-4922-a9f9-5227db1751a9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-ec5a9dde-b89d-4c54-8563-4a7170f5cefd	cast	cast-resolve	agreed	-	X	scen	1	0	Vash, Freelance Archaeologist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ec5a9dde-b89d-4c54-8563-4a7170f5cefd	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-ec5a9dde-b89d-4c54-8563-4a7170f5cefd	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+ec5a9dde-b89d-4c54-8563-4a7170f5cefd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vash-freelance-archaeologist:f0t0:s1,f:xs:XP:vash-freelance-archaeologist:f0t0:s1	-	-	-	23c4009444b0	-	415fb19d8f4b	-	-	2026-11-25	xproof
+ec5a9dde-b89d-4c54-8563-4a7170f5cefd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:vash-freelance-archaeologist:f0t0:s1,f:xs:XP:vash-freelance-archaeologist:f0t0:s1	-	-	-	23c4009444b0	-	415fb19d8f4b	-	-	2026-11-25	xproof
+ec5a9dde-b89d-4c54-8563-4a7170f5cefd	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 ec6a09d2-d90a-4c3b-940b-659e471baf88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec6a09d2-d90a-4c3b-940b-659e471baf88	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ec6ccd8f-cc75-4a50-8639-f4ec31a280aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -180,7 +180,7 @@ ecef9e3d-dce8-405f-bba3-14732444258f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ligh
 ecf09f2d-a886-4ec8-8ff6-fe15d87b1375	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecf09f2d-a886-4ec8-8ff6-fe15d87b1375	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:scrapyard-recombiner:f0t0:s1,f:xs:XP:scrapyard-recombiner:f0t0:s1	-	-	-	d864b561c9cb	-	f672eb5f7f97	-	-	2026-11-24	xproof
 ecf09f2d-a886-4ec8-8ff6-fe15d87b1375	f0/t0	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:scrapyard-recombiner:f0t0:s1,f:xs:XP:scrapyard-recombiner:f0t0:s1	-	-	-	d864b561c9cb	-	f672eb5f7f97	-	-	2026-11-24	xproof
-ecf28b5d-a719-47d4-8ad9-d24b6297ebde	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+ecf28b5d-a719-47d4-8ad9-d24b6297ebde	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Holodeck"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 ecf574a5-6410-466d-a726-732134f904b2	cast	cast-resolve	agreed	-	X	scen	1	0	Assert Perfection/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ecf808fd-4828-497e-b84b-1cb018a9924b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ecf808fd-4828-497e-b84b-1cb018a9924b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:siani-eye-of-the-storm:f0t0:s1,f:xs:XP:siani-eye-of-the-storm:f0t0:s1	-	-	-	8c0bd19283bb	-	de9136c7f581	-	-	2026-11-24	xproof

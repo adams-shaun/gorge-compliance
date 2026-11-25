@@ -75,16 +75,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0156bfbc-26bc-4699-a7ff-437f7c043716	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0156bfbc-26bc-4699-a7ff-437f7c043716	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:brawl-bash-ogre:f0t0:s1,f:xs:XP:brawl-bash-ogre:f0t0:s1	-	-	-	d864b561c9cb	-	37c70d690c83	-	-	2026-11-24	xproof
 0156c94b-e64c-49de-a46c-a203c5e05e98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kykar-zephyr-awakener:cast:s1,f:xs:XP:kykar-zephyr-awakener:cast:s1	-	-	-	23c4009444b0	-	710365022e1e	-	-	2026-11-25	xproof
-0156c94b-e64c-49de-a46c-a203c5e05e98	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kykar, Zephyr Awakener/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0156c94b-e64c-49de-a46c-a203c5e05e98	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kykar, Zephyr Awakener/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0156c94b-e64c-49de-a46c-a203c5e05e98	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kykar, Zephyr Awakener/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0156c94b-e64c-49de-a46c-a203c5e05e98	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kykar-zephyr-awakener:combat0.attack:s1,f:xs:XP:kykar-zephyr-awakener:combat0.attack:s1	-	-	-	23c4009444b0	-	710365022e1e	-	-	2026-11-25	xproof
+0156c94b-e64c-49de-a46c-a203c5e05e98	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kykar-zephyr-awakener:combat0.block:s1,f:xs:XP:kykar-zephyr-awakener:combat0.block:s1	-	-	-	23c4009444b0	-	710365022e1e	-	-	2026-11-25	xproof
+0156c94b-e64c-49de-a46c-a203c5e05e98	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:kykar-zephyr-awakener:f0t0:s1,f:xs:XP:kykar-zephyr-awakener:f0t0:s1	-	-	-	23c4009444b0	-	710365022e1e	-	-	2026-11-25	xproof
 0157faee-f307-43c0-b308-bbf36ce02e32	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dr. Leonard \"Bones\" McCoy	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 0157faee-f307-43c0-b308-bbf36ce02e32	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Dr. Leonard \"Bones\" McCoy	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 015b1006-decb-4d94-940e-bca550e0ad5b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01635d21-aeda-4754-9d94-68fcd0cd6556	cast	cast-resolve	agreed	-	FX	scen	2	0	Quilled Greatwurm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-01635d21-aeda-4754-9d94-68fcd0cd6556	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Quilled Greatwurm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-01635d21-aeda-4754-9d94-68fcd0cd6556	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Quilled Greatwurm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-01635d21-aeda-4754-9d94-68fcd0cd6556	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Quilled Greatwurm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+01635d21-aeda-4754-9d94-68fcd0cd6556	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:quilled-greatwurm:combat0.attack:s1,f:xs:XP:quilled-greatwurm:combat0.attack:s1	-	-	-	23c4009444b0	-	dd212b19e101	-	-	2026-11-25	xproof
+01635d21-aeda-4754-9d94-68fcd0cd6556	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:quilled-greatwurm:combat0.block:s1,f:xs:XP:quilled-greatwurm:combat0.block:s1	-	-	-	23c4009444b0	-	dd212b19e101	-	-	2026-11-25	xproof
+01635d21-aeda-4754-9d94-68fcd0cd6556	f0/t0	DamageDealtOnce	agreed	-	FX	start	2	0	x:xs:XP:quilled-greatwurm:combat0.attack:s1,f:xs:XP:quilled-greatwurm:combat0.attack:s1	-	-	-	23c4009444b0	-	dd212b19e101	-	-	2026-11-25	xproof
 0166996d-941f-49fe-bf4f-64b6fd4b69e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0166996d-941f-49fe-bf4f-64b6fd4b69e9	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ragefire-hellkite:f0t0:s1,f:xs:XP:ragefire-hellkite:f0t0:s1	-	-	-	ae86f6029288	-	d6133a741b44	-	-	2026-11-24	xproof
 016718df-2eb5-499f-adea-18231c0375b3	cast	counter-spell	agreed	-	X	scen	1	0	Hurl into History/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -29,8 +29,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c326102-005d-463c-b9f7-14b034b66baa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5c367b7d-3cb4-45db-b836-dad953efce15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nettle-sentinel:cast:s1,f:xs:XP:nettle-sentinel:cast:s1	-	-	-	8a1b1a193ec0	-	9fc29f5da161	-	-	2026-11-24	xproof
 5c367b7d-3cb4-45db-b836-dad953efce15	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:nissa-revane:cast:s1,f:xs:XP:nissa-revane:cast:s1	-	-	-	8a1b1a193ec0	-	9fc29f5da161	-	-	2026-11-24	xproof
-5c3cbb08-cbe1-42f5-9ac7-e558b85648bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wesley-crusher-starfleet-cadet:f0t0:s1,f:xs:XP:wesley-crusher-starfleet-cadet:f0t0:s1	-	-	-	25696bf19d5b	-	5c002898d7a9	-	-	2026-11-24	xproof
-5c3cbb08-cbe1-42f5-9ac7-e558b85648bb	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+5c3cbb08-cbe1-42f5-9ac7-e558b85648bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wesley-crusher-starfleet-cadet:f0t0:s1,f:xs:XP:wesley-crusher-starfleet-cadet:f0t0:s1	-	-	-	23c4009444b0	-	5c002898d7a9	-	-	2026-11-25	xproof
+5c3cbb08-cbe1-42f5-9ac7-e558b85648bb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wesley-crusher-starfleet-cadet:f0t0:s1,f:xs:XP:wesley-crusher-starfleet-cadet:f0t0:s1	-	-	-	23c4009444b0	-	5c002898d7a9	-	-	2026-11-25	xproof
 5c3f45cb-d2f0-4dac-b124-18e8f6d7e2dc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:escarpment-fortress:cast:s1,f:xs:XP:escarpment-fortress:cast:s1	-	-	-	ae86f6029288	-	fdb9f1277a03	-	-	2026-11-24	xproof
 5c3f45cb-d2f0-4dac-b124-18e8f6d7e2dc	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 5c40a8d4-6969-4d71-aba5-5c7e4109b7d5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quintorius-history-chaser:cast:s1,f:xs:XP:quintorius-history-chaser:cast:s1	-	-	-	8c0bd19283bb	-	961399739baa	-	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5c9f4fde-b96f-41bf-b214-f83511df1f8e	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 5ca0f4f3-6133-4f53-9124-f63942796a07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:soaring-show-off:f0t0:s1,f:xs:XP:soaring-show-off:f0t0:s1	-	-	-	8c0bd19283bb	-	633106e622ed	-	-	2026-11-24	xproof
 5ca0f4f3-6133-4f53-9124-f63942796a07	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:soaring-show-off:f0t0:s1,f:xs:XP:soaring-show-off:f0t0:s1	-	-	-	8c0bd19283bb	-	633106e622ed	-	-	2026-11-24	xproof
-5ca4e8c4-8358-49be-bafb-85849bf9bd01	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+5ca4e8c4-8358-49be-bafb-85849bf9bd01	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Those Old Scientists"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 5ca8d756-a55a-4b36-b0a6-562a39484952	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5cafdf77-5500-4471-a848-89863eea2a35	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oakgnarl-warrior:cast:s1,f:xs:XP:oakgnarl-warrior:cast:s1	-	-	-	d864b561c9cb	-	29603a37ed93	-	-	2026-11-24	xproof
 5cb2e859-7737-4b25-a6be-b72e7b5bfada	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

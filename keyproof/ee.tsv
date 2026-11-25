@@ -64,8 +64,8 @@ ee414d20-b18e-4bed-97fc-3c7535089ec1	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x
 ee45b588-b424-49d3-9e37-270f2ae9490d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee45b588-b424-49d3-9e37-270f2ae9490d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 ee45b588-b424-49d3-9e37-270f2ae9490d	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-ee45c80c-699c-4e37-97e6-1859c6601c99	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ee45c80c-699c-4e37-97e6-1859c6601c99	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+ee45c80c-699c-4e37-97e6-1859c6601c99	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:scoria-wurm:f0t0:s1,f:xs:XP:scoria-wurm:f0t0:s1	-	-	-	23c4009444b0	-	10eb65ac1e77	-	-	2026-11-25	xproof
+ee45c80c-699c-4e37-97e6-1859c6601c99	f0/t0	Phase	agreed	-	FX	start	1	0	x:xs:XP:scoria-wurm:f0t0:s1,f:xs:XP:scoria-wurm:f0t0:s1	-	-	-	23c4009444b0	-	10eb65ac1e77	-	-	2026-11-25	xproof
 ee496b34-d8e0-482a-a2c2-3122ea376da0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ee496b34-d8e0-482a-a2c2-3122ea376da0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 ee496b34-d8e0-482a-a2c2-3122ea376da0	f0/t1	ChangesZone/Modular	agreed	-	FX	start	2	0	x:xs:XP:arcbound-crusher:f0t1:s1,f:xs:XP:arcbound-crusher:f0t1:s1	-	-	-	d864b561c9cb	-	d9a30f0f1bb8	-	-	2026-11-24	xproof
@@ -202,11 +202,11 @@ eed2606b-9a27-4af3-8120-c45a1d6b5c00	f0/t0	NULL	owed	refused:no-generator:trigge
 eed353a6-757d-47f6-a118-b951ccf95600	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eed353a6-757d-47f6-a118-b951ccf95600	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eed4651b-4c45-4136-9e3d-44471031368f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grotesque-demise:cast:s1,f:xs:XP:grotesque-demise:cast:s1	-	-	-	d864b561c9cb	-	0f266bbdf717	-	-	2026-11-24	xproof
-eed5e0cc-8f88-4779-bf10-6a823c72df7f	cast	cast-resolve	agreed	-	X	scen	1	0	Spectacular Spider-Man/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-eed5e0cc-8f88-4779-bf10-6a823c72df7f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Spectacular Spider-Man/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-eed5e0cc-8f88-4779-bf10-6a823c72df7f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Spectacular Spider-Man/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-eed9c168-1c78-43c6-a814-9b80054d1373	cast	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-eed9c168-1c78-43c6-a814-9b80054d1373	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+eed5e0cc-8f88-4779-bf10-6a823c72df7f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spectacular-spider-man:cast:s1,f:xs:XP:spectacular-spider-man:cast:s1	-	-	-	23c4009444b0	-	f253d9aeb9cb	-	-	2026-11-25	xproof
+eed5e0cc-8f88-4779-bf10-6a823c72df7f	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:spectacular-spider-man:f0a0:s1,f:xs:XP:spectacular-spider-man:f0a0:s1	-	-	-	23c4009444b0	-	f253d9aeb9cb	-	-	2026-11-25	xproof
+eed5e0cc-8f88-4779-bf10-6a823c72df7f	f0/a1	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:spectacular-spider-man:f0a1:s1,f:xs:XP:spectacular-spider-man:f0a1:s1	-	-	-	23c4009444b0	-	f253d9aeb9cb	-	-	2026-11-25	xproof
+eed9c168-1c78-43c6-a814-9b80054d1373	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spined-sliver:cast:s1,f:xs:XP:spined-sliver:cast:s1	-	-	-	23c4009444b0	-	8d5d09872579	-	-	2026-11-25	xproof
+eed9c168-1c78-43c6-a814-9b80054d1373	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 eedaf405-4aa2-426a-af82-b0f92de7b6c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eedaf405-4aa2-426a-af82-b0f92de7b6c3	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 eedb1527-548a-435a-a3e1-8ad7d9d6d8a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:intrude-on-the-mind:cast:s1,f:xs:XP:intrude-on-the-mind:cast:s1	-	-	-	8c0bd19283bb	-	23ec97c59272	-	-	2026-11-24	xproof

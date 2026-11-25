@@ -1,10 +1,10 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 c9046281-dedb-4246-8e5d-7786fe0c41c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c9046281-dedb-4246-8e5d-7786fe0c41c7	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
-c9048d35-aff7-45ae-ae97-db89397b3e74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:avalanche-riders:f0t0:s1,f:xs:XP:avalanche-riders:f0t0:s1	-	-	-	25696bf19d5b	-	c897435b770f	-	-	2026-11-24	xproof
-c9048d35-aff7-45ae-ae97-db89397b3e74	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:avalanche-riders:f0t0:s1,f:xs:XP:avalanche-riders:f0t0:s1	-	-	-	25696bf19d5b	-	c897435b770f	-	-	2026-11-24	xproof
-c9048d35-aff7-45ae-ae97-db89397b3e74	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+c9046281-dedb-4246-8e5d-7786fe0c41c7	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+c9048d35-aff7-45ae-ae97-db89397b3e74	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	c897435b770f	-	-	2026-11-25	xproof
+c9048d35-aff7-45ae-ae97-db89397b3e74	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	c897435b770f	-	-	2026-11-25	xproof
+c9048d35-aff7-45ae-ae97-db89397b3e74	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	c897435b770f	-	-	2026-11-25	xproof
 c90da077-de8c-4402-abfc-b63dd15853da	cast	cast-resolve	agreed	-	X	scen	1	0	Broodguard Elite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c90da077-de8c-4402-abfc-b63dd15853da	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Broodguard Elite/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c90ea9d5-82f7-4b92-8cb1-10d0a7378e8c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sky-eel-school:f0t0:s1,f:xs:XP:sky-eel-school:f0t0:s1	-	-	-	d864b561c9cb	-	e255c5fe1367	-	-	2026-11-24	xproof

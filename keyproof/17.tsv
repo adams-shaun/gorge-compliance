@@ -32,8 +32,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1729317d-ccfb-4f27-84c6-20b36b2826c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1729317d-ccfb-4f27-84c6-20b36b2826c9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sun-blessed-healer:f0t0:s1	-	-	-	25696bf19d5b	-	29d09d0ebeb2	-	-	2026-11-24	xproof
-1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sun-Blessed Healer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sun-Blessed Healer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:sun-blessed-healer:combat0.attack:s1,f:xs:XP:sun-blessed-healer:combat0.attack:s1	-	-	-	23c4009444b0	-	29d09d0ebeb2	-	-	2026-11-25	xproof
+1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:sun-blessed-healer:combat0.block:s1,f:xs:XP:sun-blessed-healer:combat0.block:s1	-	-	-	23c4009444b0	-	29d09d0ebeb2	-	-	2026-11-25	xproof
 1729c6f2-2452-4fbc-a1bc-3e625f2ad8e1	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:sun-blessed-healer:f0t0:s1	-	-	-	25696bf19d5b	-	29d09d0ebeb2	-	-	2026-11-24	xproof
 172a8f58-c420-4497-b962-c5853f923667	cast	cast	agreed	-	F	start	2	0	f:xs:XP:aerid-konstrari:f0t0:s1	-	-	-	25696bf19d5b	-	1f1a1d527028	-	-	2026-11-24	xproof
 172a8f58-c420-4497-b962-c5853f923667	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aerid Konstrari/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1758e102-22da-4cb3-98d5-76f7501d026d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gale-swooper:f0t0:s1,f:xs:XP:gale-swooper:f0t0:s1	-	-	-	ae86f6029288	-	7b17f47b90f2	-	-	2026-11-24	xproof
 1758e102-22da-4cb3-98d5-76f7501d026d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gale-swooper:f0t0:s1,f:xs:XP:gale-swooper:f0t0:s1	-	-	-	ae86f6029288	-	7b17f47b90f2	-	-	2026-11-24	xproof
 1759547a-52b3-4bae-817a-658a6fd047e3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vhati-il-dal:cast:s1,f:xs:XP:vhati-il-dal:cast:s1	-	-	-	25696bf19d5b	-	96ee8acca929	-	-	2026-11-24	xproof
-1759547a-52b3-4bae-817a-658a6fd047e3	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+1759547a-52b3-4bae-817a-658a6fd047e3	f0/a0	GenericChoice	agreed	-	F	start	2	0	f:xs:XP:vhati-il-dal:f0a0:s1	-	-	-	23c4009444b0	-	96ee8acca929	-	-	2026-11-25	xproof
 175c76c8-f36c-4948-aaa8-0208eac5f0d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 175db9f1-0188-4640-9b54-6b461c5440aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prowling-geistcatcher:cast:s1,f:xs:XP:prowling-geistcatcher:cast:s1	-	-	-	8c0bd19283bb	-	01969418c7d7	-	-	2026-11-24	xproof
 175db9f1-0188-4640-9b54-6b461c5440aa	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

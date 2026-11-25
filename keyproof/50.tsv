@@ -70,7 +70,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50477dc8-9a2a-41eb-984d-c9e1e78e08a2	cast	cast-resolve	agreed	-	X	scen	1	0	Silk, Web Weaver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50477dc8-9a2a-41eb-984d-c9e1e78e08a2	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Silk, Web Weaver/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50477dc8-9a2a-41eb-984d-c9e1e78e08a2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Silk, Web Weaver/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5049da27-f38b-4fe6-a387-51510bd1f44e	cast	cast-resolve	agreed	-	X	scen	1	0	Nine-Lives Familiar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5049da27-f38b-4fe6-a387-51510bd1f44e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nine-lives-familiar:cast:s1,f:xs:XP:nine-lives-familiar:cast:s1	-	-	-	23c4009444b0	-	73215a065105	-	-	2026-11-25	xproof
 5049da27-f38b-4fe6-a387-51510bd1f44e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nine-Lives Familiar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 504cc26d-3fd5-4391-9d30-f0614e5c8bbc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dream-pillager:cast:s1,f:xs:XP:dream-pillager:cast:s1	-	-	-	8c0bd19283bb	-	f395627dc1d3	-	-	2026-11-24	xproof
 504cc26d-3fd5-4391-9d30-f0614e5c8bbc	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 508fdfb1-87d6-4342-a05a-01158f253896	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5093df46-92cb-4f79-a5cf-4351c1fcf36d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nimana-sell-sword:f0t0:s1,f:xs:XP:nimana-sell-sword:f0t0:s1	-	-	-	8a1b1a193ec0	-	ced7af71eac7	-	-	2026-11-24	xproof
 5093df46-92cb-4f79-a5cf-4351c1fcf36d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nimana-sell-sword:f0t0:s1,f:xs:XP:nimana-sell-sword:f0t0:s1	-	-	-	8a1b1a193ec0	-	ced7af71eac7	-	-	2026-11-24	xproof
-5097f4e6-50af-4641-909f-db44abf0ce32	cast	cast-resolve	agreed	-	X	scen	1	0	Rite of the Dragoncaller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5097f4e6-50af-4641-909f-db44abf0ce32	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rite of the Dragoncaller/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5097f4e6-50af-4641-909f-db44abf0ce32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rite-of-the-dragoncaller:cast:s1,f:xs:XP:rite-of-the-dragoncaller:cast:s1	-	-	-	23c4009444b0	-	e170b3ff294f	-	-	2026-11-25	xproof
+5097f4e6-50af-4641-909f-db44abf0ce32	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:rite-of-the-dragoncaller:f0t0:s1,f:xs:XP:rite-of-the-dragoncaller:f0t0:s1	-	-	-	23c4009444b0	-	e170b3ff294f	-	-	2026-11-25	xproof
 50994df7-300d-4e30-897a-0974dc0820ee	cast	cast-resolve	agreed	-	X	scen	1	0	Relentless X-ATM092/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50994df7-300d-4e30-897a-0974dc0820ee	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Relentless X-ATM092/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50994df7-300d-4e30-897a-0974dc0820ee	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Relentless X-ATM092/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

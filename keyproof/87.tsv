@@ -61,9 +61,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 873fa095-5662-407a-bd24-9a1c4712a428	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Ruric Thar, Biomagus/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8740b9be-3ab4-4bd1-8a89-a59397c59e82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8740b9be-3ab4-4bd1-8a89-a59397c59e82	f0/t0	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:servant-of-nefarox:f0t0:s1,f:xs:XP:servant-of-nefarox:f0t0:s1	-	-	-	d864b561c9cb	-	0f8f1eed4690	-	-	2026-11-24	xproof
-87424e20-00ab-4f6d-a905-1955897b358e	cast	cast-resolve	agreed	-	X	scen	1	0	Ravenous Amulet/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-87424e20-00ab-4f6d-a905-1955897b358e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ravenous Amulet/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-87424e20-00ab-4f6d-a905-1955897b358e	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ravenous Amulet/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+87424e20-00ab-4f6d-a905-1955897b358e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravenous-amulet:cast:s1,f:xs:XP:ravenous-amulet:cast:s1	-	-	-	23c4009444b0	-	881440faf454	-	-	2026-11-25	xproof
+87424e20-00ab-4f6d-a905-1955897b358e	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:ravenous-amulet:f0a0:s1,f:xs:XP:ravenous-amulet:f0a0:s1	-	-	-	23c4009444b0	-	881440faf454	-	-	2026-11-25	xproof
+87424e20-00ab-4f6d-a905-1955897b358e	f0/a1	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:ravenous-amulet:f0a1:s1,f:xs:XP:ravenous-amulet:f0a1:s1	-	-	-	23c4009444b0	-	881440faf454	-	-	2026-11-25	xproof
 87449f64-9500-4967-a073-cde19824e087	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8745b061-d5c6-46c1-a3fc-4d71d717f19e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8747ca90-ac1d-45fd-89fe-aac385cd66b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:startling-development:cast:s1,f:xs:XP:startling-development:cast:s1	-	-	-	3aa6ded33acb	-	923bd1fd0a39	-	-	2026-11-25	xproof
@@ -92,9 +92,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8773c2ea-ef41-4403-bb52-07f0d70d9bbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clay-golem:cast:s1,f:xs:XP:clay-golem:cast:s1	-	-	-	8c0bd19283bb	-	596944c34acc	-	-	2026-11-24	xproof
 8773c2ea-ef41-4403-bb52-07f0d70d9bbe	f0/a0	NULL	owed	refused:steps-needed:cost:RollDice	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8773c2ea-ef41-4403-bb52-07f0d70d9bbe	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-8776d14f-a5a2-4ef3-98d0-e1148e579e4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8776d14f-a5a2-4ef3-98d0-e1148e579e4d	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-8776d14f-a5a2-4ef3-98d0-e1148e579e4d	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+8776d14f-a5a2-4ef3-98d0-e1148e579e4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sacred-mesa:f0t0:s1,f:xs:XP:sacred-mesa:f0t0:s1	-	-	-	23c4009444b0	-	a7d5060bed5c	-	-	2026-11-25	xproof
+8776d14f-a5a2-4ef3-98d0-e1148e579e4d	f0/a0	Token	agreed	-	FX	start	1	0	x:xs:XP:sacred-mesa:f0t0:s1,f:xs:XP:sacred-mesa:f0t0:s1	-	-	-	23c4009444b0	-	a7d5060bed5c	-	-	2026-11-25	xproof
+8776d14f-a5a2-4ef3-98d0-e1148e579e4d	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sacred-mesa:f0t0:s1,f:xs:XP:sacred-mesa:f0t0:s1	-	-	-	23c4009444b0	-	a7d5060bed5c	-	-	2026-11-25	xproof
 877ab494-da90-4c26-a184-c6ba64ec30b5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 877bfa3f-6e30-4cb3-831e-d56849b01334	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 877bfa3f-6e30-4cb3-831e-d56849b01334	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8783533d-dd98-4b80-b348-29051e1b5c28	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87837a94-05db-48fe-b810-26d8f92cfc58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8783a94a-d0b2-4291-a550-dbcf8e16bf4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8783a94a-d0b2-4291-a550-dbcf8e16bf4b	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+8783a94a-d0b2-4291-a550-dbcf8e16bf4b	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:jester-s-cap:f0a0:s1,f:xs:XP:jester-s-cap:f0a0:s1	-	-	-	23c4009444b0	-	9231b9465529	-	-	2026-11-25	xproof
 8785f42f-87b9-4a0a-89ce-ea423649ba9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8785f9b4-eea2-4b45-9ae4-194b9a715702	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87864421-505c-4bdb-b1e3-3e44e05f2beb	cast	cast-resolve	agreed	-	FX	scen	2	0	From Father to Son/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -113,10 +113,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87890f04-b831-4869-a7de-72789a466c71	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 878b6808-48af-4047-ac35-bfc58bf92e7d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:goblin-bushwhacker:f0t0:s1,f:xs:XP:goblin-bushwhacker:f0t0:s1	-	-	-	8a1b1a193ec0	-	d4b9df9beb2a	-	-	2026-11-24	xproof
 878b6808-48af-4047-ac35-bfc58bf92e7d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goblin-bushwhacker:f0t0:s1,f:xs:XP:goblin-bushwhacker:f0t0:s1	-	-	-	8a1b1a193ec0	-	d4b9df9beb2a	-	-	2026-11-24	xproof
-878df304-9d6d-4ce9-b65b-1439c251f3e0	cast	cast-resolve	agreed	-	X	scen	1	0	Tifa Lockhart/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-878df304-9d6d-4ce9-b65b-1439c251f3e0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Tifa Lockhart/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-878df304-9d6d-4ce9-b65b-1439c251f3e0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Tifa Lockhart/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-878df304-9d6d-4ce9-b65b-1439c251f3e0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tifa Lockhart/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+878df304-9d6d-4ce9-b65b-1439c251f3e0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tifa-lockhart:cast:s1,f:xs:XP:tifa-lockhart:cast:s1	-	-	-	23c4009444b0	-	f70ef561a76d	-	-	2026-11-25	xproof
+878df304-9d6d-4ce9-b65b-1439c251f3e0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tifa-lockhart:combat0.attack:s1,f:xs:XP:tifa-lockhart:combat0.attack:s1	-	-	-	23c4009444b0	-	f70ef561a76d	-	-	2026-11-25	xproof
+878df304-9d6d-4ce9-b65b-1439c251f3e0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tifa-lockhart:combat0.block:s1,f:xs:XP:tifa-lockhart:combat0.block:s1	-	-	-	23c4009444b0	-	f70ef561a76d	-	-	2026-11-25	xproof
+878df304-9d6d-4ce9-b65b-1439c251f3e0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tifa-lockhart:f0t0:s1,f:xs:XP:tifa-lockhart:f0t0:s1	-	-	-	23c4009444b0	-	f70ef561a76d	-	-	2026-11-25	xproof
 878e4e3b-c546-4174-906e-6fe8e64d9d41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 878e4e3b-c546-4174-906e-6fe8e64d9d41	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 878e5e0d-beb9-4f8d-a640-62140c907e52	cast	cast-resolve	agreed	-	FX	scen	2	0	Fanatic of the Harrowing/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

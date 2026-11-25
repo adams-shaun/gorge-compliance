@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78bac92f-333f-4c43-bccf-03c3772ee99b	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:corpses-of-the-lost:static0.0:s1,f:xs:XP:corpses-of-the-lost:static0.0:s1	-	-	-	3aa6ded33acb	-	c6a299252737	-	-	2026-11-25	xproof
 78bbd213-e8f4-40da-aef5-853244e95756	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78bc8b7c-ca94-485c-b7bf-53c3724b7339	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-78bed291-0ec7-466f-bc7a-9dae7d0b56ae	cast	cast-resolve	agreed	-	X	scen	1	0	Riddles in the Dark/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+78bed291-0ec7-466f-bc7a-9dae7d0b56ae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:riddles-in-the-dark:cast:s1,f:xs:XP:riddles-in-the-dark:cast:s1	-	-	-	23c4009444b0	-	57c953de1c97	-	-	2026-11-25	xproof
 78c1d6fe-38e4-40c4-9252-87ff272247ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78c1d6fe-38e4-40c4-9252-87ff272247ad	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noble-benefactor:f0t0:s1,f:xs:XP:noble-benefactor:f0t0:s1	-	-	-	ea3140b6974b	-	169a53fb3210	-	-	2026-11-24	xproof
 78c423ad-1f8b-4262-b64f-a98899da9372	cast	cast-resolve	agreed	-	X	scen	1	0	Encounter the Unknown/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -185,7 +185,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78ee8cd8-de12-440f-8890-a78ab40b6be4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78ee8cd8-de12-440f-8890-a78ab40b6be4	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 78f50668-36fc-4911-84f7-93667436b0c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormbind:cast:s1,f:xs:XP:stormbind:cast:s1	-	-	-	25696bf19d5b	-	2b8cf786924f	-	-	2026-11-24	xproof
-78f50668-36fc-4911-84f7-93667436b0c7	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+78f50668-36fc-4911-84f7-93667436b0c7	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 78f9c223-9982-4282-a496-a6f892f0a5bf	cast	cast-resolve	agreed	-	X	scen	1	0	Mind Twist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 78f9ec0f-6015-4024-aca6-9a14cba373fa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyrotechnic-performer:cast:s1,f:xs:XP:pyrotechnic-performer:cast:s1	-	-	-	23b491658465	-	beaca7d1571b	-	-	2026-11-24	xproof
 78f9ec0f-6015-4024-aca6-9a14cba373fa	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pyrotechnic Performer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

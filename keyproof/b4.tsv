@@ -70,8 +70,8 @@ b46647a1-0c91-451b-8c0b-be8fe02faee2	cast	cast-resolve	agreed	-	FX	scen	2	0	Elek
 b46647a1-0c91-451b-8c0b-be8fe02faee2	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b46adfcd-fd7a-40c5-85f4-1cfee43a4c48	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b46adfcd-fd7a-40c5-85f4-1cfee43a4c48	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:witness-of-tomorrows:f0a0:s1,f:xs:XP:witness-of-tomorrows:f0a0:s1	-	-	-	ae86f6029288	-	01e4f4e411f1	-	-	2026-11-24	xproof
-b46bac37-5b45-4be5-93d0-76e48dbd9f74	cast	cast-resolve	agreed	-	X	scen	1	0	Camera Launcher/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-b46bac37-5b45-4be5-93d0-76e48dbd9f74	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Camera Launcher/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b46bac37-5b45-4be5-93d0-76e48dbd9f74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:camera-launcher:cast:s1,f:xs:XP:camera-launcher:cast:s1	-	-	-	23c4009444b0	-	b349b6fe0eb7	-	-	2026-11-25	xproof
+b46bac37-5b45-4be5-93d0-76e48dbd9f74	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:camera-launcher:f0a0:s1,f:xs:XP:camera-launcher:f0a0:s1	-	-	-	23c4009444b0	-	b349b6fe0eb7	-	-	2026-11-25	xproof
 b46ddf4b-7ed8-49c4-8828-f0fbbc023c1f	cast	cast-resolve	agreed	-	FX	scen	2	0	Scream Puff/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b46ddf4b-7ed8-49c4-8828-f0fbbc023c1f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:scream-puff:combat0.attack:s1,f:xs:XP:scream-puff:combat0.attack:s1	-	-	-	3aa6ded33acb	-	1379ce233272	-	-	2026-11-25	xproof
 b46ddf4b-7ed8-49c4-8828-f0fbbc023c1f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:scream-puff:combat0.block:s1,f:xs:XP:scream-puff:combat0.block:s1	-	-	-	3aa6ded33acb	-	1379ce233272	-	-	2026-11-25	xproof
@@ -134,7 +134,7 @@ b4d19e3a-c2f8-4503-bcfa-1b46bde972e5	cast	cast-resolve	agreed	-	FX	scen	2	0	Afte
 b4d19e3a-c2f8-4503-bcfa-1b46bde972e5	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Afterburner Expert/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b4d19e3a-c2f8-4503-bcfa-1b46bde972e5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Afterburner Expert/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b4d6747c-3516-4e71-be30-af007c6b1dc4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:apex-devastator:cast:s1,f:xs:XP:apex-devastator:cast:s1	-	-	-	8c0bd19283bb	-	d57e886f465b	-	-	2026-11-24	xproof
-b4d970ed-f332-440c-8c2f-8a8a0191410b	cast	cast-resolve	agreed	-	X	scen	1	0	Endrider Catalyzer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+b4d970ed-f332-440c-8c2f-8a8a0191410b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:endrider-catalyzer:cast:s1,f:xs:XP:endrider-catalyzer:cast:s1	-	-	-	23c4009444b0	-	0fdb25a8a536	-	-	2026-11-25	xproof
 b4d970ed-f332-440c-8c2f-8a8a0191410b	static#0.0	static#0.0	agreed	-	X	scen	1	0	Endrider Catalyzer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 b4de9edd-4a5b-4858-8454-38381df8b9a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 b4eafd12-5f3e-43e6-aa0a-6bb5f4f5782b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

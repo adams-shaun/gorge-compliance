@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 981138d0-bf61-406a-85be-68cc5e58796c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Tapestry Warden/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 981138d0-bf61-406a-85be-68cc5e58796c	static#0.1	static#0.1	agreed	-	X	scen	1	0	Tapestry Warden/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98116aec-2ab1-4bee-b727-9feff6274825	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-98116aec-2ab1-4bee-b727-9feff6274825	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+98116aec-2ab1-4bee-b727-9feff6274825	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rukh-egg:f0t0:s1,f:xs:XP:rukh-egg:f0t0:s1	-	-	-	23c4009444b0	-	52c676fbf773	-	-	2026-11-25	xproof
 9811d1fa-1398-49a2-bcbe-0e40d9779ef1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9811d1fa-1398-49a2-bcbe-0e40d9779ef1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9812bdf9-98b6-4b4d-8381-a7bbb25069d8	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,9 +135,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98a389f4-2905-47f3-b60e-3d4afb3e5cb0	f0/t1	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:enduring-innocence:combat0.block:s1,f:xs:XP:enduring-innocence:combat0.block:s1	-	-	-	23c4009444b0	-	f669b349be3c	-	-	2026-11-25	xproof
 98a60a97-3a43-4544-8ea3-40d0bad79caf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gulf-squid:f0t0:s1,f:xs:XP:gulf-squid:f0t0:s1	-	-	-	5f2128bf97e4	-	791cbddd49b8	-	-	2026-11-24	xproof
 98a60a97-3a43-4544-8ea3-40d0bad79caf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gulf-squid:f0t0:s1,f:xs:XP:gulf-squid:f0t0:s1	-	-	-	5f2128bf97e4	-	791cbddd49b8	-	-	2026-11-24	xproof
-98a61659-9882-417c-9c16-16ebb26f9037	cast	cast-resolve	agreed	-	X	scen	1	0	Carrion Cruiser/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98a61659-9882-417c-9c16-16ebb26f9037	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Carrion Cruiser/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98a61659-9882-417c-9c16-16ebb26f9037	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+98a61659-9882-417c-9c16-16ebb26f9037	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carrion-cruiser:cast:s1,f:xs:XP:carrion-cruiser:cast:s1	-	-	-	23c4009444b0	-	03c8b8c1e011	-	-	2026-11-25	xproof
+98a61659-9882-417c-9c16-16ebb26f9037	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:carrion-cruiser:f0a0:s1,f:xs:XP:carrion-cruiser:f0a0:s1	-	-	-	23c4009444b0	-	03c8b8c1e011	-	-	2026-11-25	xproof
+98a61659-9882-417c-9c16-16ebb26f9037	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:carrion-cruiser:cast:s1,f:xs:XP:carrion-cruiser:cast:s1	-	-	-	23c4009444b0	-	03c8b8c1e011	-	-	2026-11-25	xproof
 98a752ff-f041-4032-9f3f-c6c4007f10f1	cast	cast-resolve	agreed	-	X	scen	1	0	Amok Time/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98b19afc-7696-46b9-96f0-7f7c60003e1c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavalier-of-flame:f0t0:s1,f:xs:XP:cavalier-of-flame:f0t0:s1	-	-	-	d864b561c9cb	-	89fcf5226c7d	-	-	2026-11-24	xproof
 98b19afc-7696-46b9-96f0-7f7c60003e1c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Exdeath, Void Warlock/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	static#1.0	static#1.0	agreed	-	X	scen	1	0	Exdeath, Void Warlock/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98cbac1d-7896-4c63-a265-03bc5d670fa6	cast	cast-resolve	agreed	-	X	scen	1	0	Relentless Drednok/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98cbac1d-7896-4c63-a265-03bc5d670fa6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+98cbac1d-7896-4c63-a265-03bc5d670fa6	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:relentless-drednok:f0a0:s1,f:xs:XP:relentless-drednok:f0a0:s1	-	-	-	23c4009444b0	-	be77ce68f262	-	-	2026-11-25	xproof
 98cc734d-16d5-4c3c-98ca-a45efad27127	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 98cc734d-16d5-4c3c-98ca-a45efad27127	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 98d20908-6d68-4d31-b719-207f93c9b402	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Goblin-town/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

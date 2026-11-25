@@ -35,12 +35,12 @@ cb2d222c-df42-41a7-a517-0a41e47a4280	combat#0.block	combat.block	agreed	-	FX	sta
 cb2d222c-df42-41a7-a517-0a41e47a4280	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Knightfisher/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cb33edaf-b604-48b8-8b9c-d6e462a8bebb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:charmed-sleep:cast:s1,f:xs:XP:charmed-sleep:cast:s1	-	-	-	3aa6ded33acb	-	4c251da0be2e	-	-	2026-11-25	xproof
 cb33edaf-b604-48b8-8b9c-d6e462a8bebb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:charmed-sleep:cast:s1,f:xs:XP:charmed-sleep:cast:s1	-	-	-	3aa6ded33acb	-	4c251da0be2e	-	-	2026-11-25	xproof
-cb3b4cfe-fd8d-4a26-905e-8ccd30f033a3	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+cb3b4cfe-fd8d-4a26-905e-8ccd30f033a3	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Lt. Cmdr. Geordi La Forge"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 cb3dd50b-ce78-4727-b174-06f99fc5ec74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:doctor-doom-unrivaled:cast:s1,f:xs:XP:doctor-doom-unrivaled:cast:s1	-	-	-	8c0bd19283bb	-	e06f72868f7b	-	-	2026-11-24	xproof
 cb3dd50b-ce78-4727-b174-06f99fc5ec74	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:doctor-doom-unrivaled:f0a0:s1,f:xs:XP:doctor-doom-unrivaled:f0a0:s1	-	-	-	8c0bd19283bb	-	e06f72868f7b	-	-	2026-11-24	xproof
 cb3edb86-ddd5-461c-98b5-ffb4df437a39	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:boommobile:f0t0:s2,f:xs:XP:boommobile:f0t0:s2	-	-	-	e07cf3a05ba5	-	99c1ec28c673	-	-	2026-11-24	xproof
 cb3edb86-ddd5-461c-98b5-ffb4df437a39	f0/a0	DealDamage	agreed	-	FX	start	1	0	x:xs:XP:boommobile:f0t0:s2,f:xs:XP:boommobile:f0t0:s2	-	-	-	e07cf3a05ba5	-	99c1ec28c673	-	-	2026-11-24	xproof
-cb3edb86-ddd5-461c-98b5-ffb4df437a39	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Boommobile/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+cb3edb86-ddd5-461c-98b5-ffb4df437a39	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:boommobile:f0a1:s1,f:xs:XP:boommobile:f0a1:s1	-	-	-	23c4009444b0	-	99c1ec28c673	-	-	2026-11-25	xproof
 cb3edb86-ddd5-461c-98b5-ffb4df437a39	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:boommobile:f0t0:s2,f:xs:XP:boommobile:f0t0:s2	-	-	-	e07cf3a05ba5	-	99c1ec28c673	-	-	2026-11-24	xproof
 cb4414a6-27d0-4922-938b-391283535f24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thran-forge:cast:s1,f:xs:XP:thran-forge:cast:s1	-	-	-	ea3140b6974b	-	06dc4f8ec53c	-	-	2026-11-24	xproof
 cb4414a6-27d0-4922-938b-391283535f24	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -204,4 +204,4 @@ cbf68ddd-596f-4b2d-b93c-3b7976ba4d37	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fum
 cbf743a5-123f-4747-826d-7f8bb929a52c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbf767d4-9be4-417a-bbf7-0c72ede727b4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbfccfc0-3117-4ca0-b7ce-8e2d67ec49ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cbfccfc0-3117-4ca0-b7ce-8e2d67ec49ab	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+cbfccfc0-3117-4ca0-b7ce-8e2d67ec49ab	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:viashino-sandstalker:f0t0:s1,f:xs:XP:viashino-sandstalker:f0t0:s1	-	-	-	23c4009444b0	-	24301fca4b97	-	-	2026-11-25	xproof

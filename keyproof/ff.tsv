@@ -78,7 +78,7 @@ ff6427f6-d2b1-4e33-984d-c06bd15d7c2c	cast	cast	owed	harness	-	start	0	0	-	-	-	-	
 ff6427f6-d2b1-4e33-984d-c06bd15d7c2c	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	4671d222f9f1	-	-	2026-11-24	xproof
 ff6b52b7-ae3c-465b-b10e-901160e5230e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff6b52b7-ae3c-465b-b10e-901160e5230e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-ff6bc9f5-5a83-42d9-b1a4-f0979aed28ad	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+ff6bc9f5-5a83-42d9-b1a4-f0979aed28ad	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Live Long and Prosper"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 ff6e4346-463c-445d-8f72-11cb35dd99ee	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:red-dragon:cast:s1,f:xs:XP:red-dragon:cast:s1	-	-	-	d864b561c9cb	-	08adb116e6a1	-	-	2026-11-24	xproof
 ff6e4346-463c-445d-8f72-11cb35dd99ee	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:red-dragon:cast:s1,f:xs:XP:red-dragon:cast:s1	-	-	-	d864b561c9cb	-	08adb116e6a1	-	-	2026-11-24	xproof
 ff72b900-ce3c-4cc4-a50e-e501e17631ca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ ff9f3d23-a12f-428b-8001-90dafac0c6d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ff9f3d23-a12f-428b-8001-90dafac0c6d7	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:giant-space-amoeba:f0t0:s1,f:xs:XP:giant-space-amoeba:f0t0:s1	-	-	-	8c0bd19283bb	-	423e1dd95343	-	-	2026-11-24	xproof
 ff9f4bfe-1585-4eaa-943c-1e85ed79a820	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ff9f5bbb-43c4-481e-9bd7-db9f246355ae	cast	cast-resolve	agreed	-	X	scen	1	0	Kira Nerys, Firebrand/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-ff9f5bbb-43c4-481e-9bd7-db9f246355ae	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+ff9f5bbb-43c4-481e-9bd7-db9f246355ae	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kira-nerys-firebrand:f0t0:s1,f:xs:XP:kira-nerys-firebrand:f0t0:s1	-	-	-	23c4009444b0	-	7adb2ed198b8	-	-	2026-11-25	xproof
 ffa23c3a-76a8-414f-aa3b-fc09aabd78c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pummeler-for-hire:f0t0:s1,f:xs:XP:pummeler-for-hire:f0t0:s1	-	-	-	64a08ba7d913	-	55c1f5985081	-	-	2026-11-24	xproof
 ffa23c3a-76a8-414f-aa3b-fc09aabd78c5	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Pummeler for Hire/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 ffa23c3a-76a8-414f-aa3b-fc09aabd78c5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Pummeler for Hire/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ ffa3b20b-d77b-43d5-86ac-6a591df1877f	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 ffa3b20b-d77b-43d5-86ac-6a591df1877f	static#0.0	static#0.0	agreed	-	X	scen	1	0	Auxiliary Boosters/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 ffa40f10-4efb-48d8-b16e-8a5711fcfad1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:living-terrain:cast:s1,f:xs:XP:living-terrain:cast:s1	-	-	-	25696bf19d5b	-	e0101634104e	-	-	2026-11-24	xproof
 ffa64ac6-fe55-48b8-b015-849982cd7ad8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ffa64ac6-fe55-48b8-b015-849982cd7ad8	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+ffa64ac6-fe55-48b8-b015-849982cd7ad8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fecundity:f0t0:s1,f:xs:XP:fecundity:f0t0:s1	-	-	-	23c4009444b0	-	c3d2d26673b6	-	-	2026-11-25	xproof
 ffa93a79-7a10-4331-91de-eabbc4fee17e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ffa93a79-7a10-4331-91de-eabbc4fee17e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:barishi:f0t0:s1,f:xs:XP:barishi:f0t0:s1	-	-	-	8c0bd19283bb	-	52dbdca14601	-	-	2026-11-24	xproof
 ffaa2776-f61d-4eaa-8949-a0407f85214f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

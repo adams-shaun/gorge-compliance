@@ -132,7 +132,7 @@ cab96aa8-13e3-4dd4-9d44-9e298f807388	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 cabb0cf3-124a-4f5f-9ca7-2d45a72159ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:despoiler-of-souls:cast:s1,f:xs:XP:despoiler-of-souls:cast:s1	-	-	-	d864b561c9cb	-	08a4e26cc471	-	-	2026-11-24	xproof
 cabb0cf3-124a-4f5f-9ca7-2d45a72159ca	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cabcc2b7-0cdb-4ec2-b6a3-47644335abff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cabcc2b7-0cdb-4ec2-b6a3-47644335abff	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+cabcc2b7-0cdb-4ec2-b6a3-47644335abff	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:eron-the-relentless:f0a0:s1,f:xs:XP:eron-the-relentless:f0a0:s1	-	-	-	23c4009444b0	-	42aebfdc8859	-	-	2026-11-25	xproof
 cabf7953-0fac-4dbb-b3ae-05e85e02b3fc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cabf7953-0fac-4dbb-b3ae-05e85e02b3fc	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cabf7953-0fac-4dbb-b3ae-05e85e02b3fc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,11 +175,11 @@ caeaad5e-2d68-481c-9a35-c2c3b345963d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ove
 caeb39ee-f0bb-4305-9e8b-b30ba0a74c78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arixmethes-slumbering-isle:cast:s1,f:xs:XP:arixmethes-slumbering-isle:cast:s1	-	-	-	8c0bd19283bb	-	18e90681f9bd	-	-	2026-11-24	xproof
 caeb39ee-f0bb-4305-9e8b-b30ba0a74c78	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:arixmethes-slumbering-isle:f0a0:s1,f:xs:XP:arixmethes-slumbering-isle:f0a0:s1	-	-	-	8c0bd19283bb	-	18e90681f9bd	-	-	2026-11-24	xproof
 caeb39ee-f0bb-4305-9e8b-b30ba0a74c78	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39	cast	cast-resolve	agreed	-	X	scen	1	0	Alacrian Jaguar/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Alacrian Jaguar/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Alacrian Jaguar/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Alacrian Jaguar/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Alacrian Jaguar/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alacrian-jaguar:cast:s1,f:xs:XP:alacrian-jaguar:cast:s1	-	-	-	23c4009444b0	-	aac82b8f1c84	-	-	2026-11-25	xproof
+caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:alacrian-jaguar:combat0.attack:s1,f:xs:XP:alacrian-jaguar:combat0.attack:s1	-	-	-	23c4009444b0	-	aac82b8f1c84	-	-	2026-11-25	xproof
+caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:alacrian-jaguar:combat0.block:s1,f:xs:XP:alacrian-jaguar:combat0.block:s1	-	-	-	23c4009444b0	-	aac82b8f1c84	-	-	2026-11-25	xproof
+caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:alacrian-jaguar:f0a0:s1,f:xs:XP:alacrian-jaguar:f0a0:s1	-	-	-	23c4009444b0	-	aac82b8f1c84	-	-	2026-11-25	xproof
+caeb4ec1-a8ba-4ac4-ad32-edbc671e5a39	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:alacrian-jaguar:f0a0:s1,f:xs:XP:alacrian-jaguar:f0a0:s1	-	-	-	23c4009444b0	-	aac82b8f1c84	-	-	2026-11-25	xproof
 caeb508a-c1fd-45b5-a14e-e0ac7321c9a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 caed9999-74b8-43e3-a319-fa505c04c71c	cast	cast-resolve	agreed	-	X	scen	1	0	Magic Pot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 caed9999-74b8-43e3-a319-fa505c04c71c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Magic Pot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -35,10 +35,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06296d4d-a1b3-4e9a-a2fd-a0183bb892a1	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Crowd of True Believers/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0629747e-8dd8-4150-95ee-9d860264ccb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0629747e-8dd8-4150-95ee-9d860264ccb0	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-062c8e40-dea7-4df7-bcaa-f1d696fe61c3	cast	cast-resolve	agreed	-	X	scen	1	0	Aetherjacket/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-062c8e40-dea7-4df7-bcaa-f1d696fe61c3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aetherjacket/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-062c8e40-dea7-4df7-bcaa-f1d696fe61c3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aetherjacket/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-062c8e40-dea7-4df7-bcaa-f1d696fe61c3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Aetherjacket/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+062c8e40-dea7-4df7-bcaa-f1d696fe61c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aetherjacket:cast:s1,f:xs:XP:aetherjacket:cast:s1	-	-	-	23c4009444b0	-	696d9401677a	-	-	2026-11-25	xproof
+062c8e40-dea7-4df7-bcaa-f1d696fe61c3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:aetherjacket:combat0.attack:s1,f:xs:XP:aetherjacket:combat0.attack:s1	-	-	-	23c4009444b0	-	696d9401677a	-	-	2026-11-25	xproof
+062c8e40-dea7-4df7-bcaa-f1d696fe61c3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:aetherjacket:combat0.block:s1,f:xs:XP:aetherjacket:combat0.block:s1	-	-	-	23c4009444b0	-	696d9401677a	-	-	2026-11-25	xproof
+062c8e40-dea7-4df7-bcaa-f1d696fe61c3	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:aetherjacket:f0a0:s1,f:xs:XP:aetherjacket:f0a0:s1	-	-	-	23c4009444b0	-	696d9401677a	-	-	2026-11-25	xproof
 0632f0f9-8d4f-4e94-8b53-1275b7f21a57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0632f0f9-8d4f-4e94-8b53-1275b7f21a57	f0/t0	Attacks	agreed	-	F	start	4	0	f:xs:XP:nefarox-overlord-of-grixis:f0t0:s1	-	-	-	d864b561c9cb	-	f3ebca6368fc	-	-	2026-11-24	xproof
 0632f0f9-8d4f-4e94-8b53-1275b7f21a57	f0/t1	Attacks/Exalted	agreed	-	F	start	4	0	f:xs:XP:nefarox-overlord-of-grixis:f0t0:s1	-	-	-	d864b561c9cb	-	f3ebca6368fc	-	-	2026-11-24	xproof

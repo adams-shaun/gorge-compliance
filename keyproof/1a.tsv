@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961	f0/a1	Discover	agreed	-	FX	start	2	0	x:xs:XP:hidden-nursery:f0a1:s1,f:xs:XP:hidden-nursery:f0a1:s1	-	-	-	23b491658465	-	92d7fd8f19c1	-	-	2026-11-24	xproof
 1a26e2d6-6bfc-4cdc-9bd6-8b37a9be2961	land	land	agreed	-	FX	start	2	0	x:xs:XP:hidden-nursery:land:s1,f:xs:XP:hidden-nursery:land:s1	-	-	-	23b491658465	-	92d7fd8f19c1	-	-	2026-11-24	xproof
 1a28a83a-de27-4aaa-b35f-1e7075fc1e43	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-1a28a83a-de27-4aaa-b35f-1e7075fc1e43	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+1a28a83a-de27-4aaa-b35f-1e7075fc1e43	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:subspace-anomaly:f0a1:s1,f:xs:XP:subspace-anomaly:f0a1:s1	-	-	-	23c4009444b0	-	6c5cd08f711a	-	-	2026-11-25	xproof
 1a28a83a-de27-4aaa-b35f-1e7075fc1e43	land	play-land	agreed	-	X	scen	1	0	Subspace Anomaly/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a2a74b8-0689-4959-9348-02cc832194cf	cast	cast-resolve	agreed	-	X	scen	1	0	Narset, Jeskai Waymaster/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a2a74b8-0689-4959-9348-02cc832194cf	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Narset, Jeskai Waymaster/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -106,11 +106,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1a947e4d-8a14-45f1-bb80-760a317b1ed0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Morbius the Living Vampire/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a947e4d-8a14-45f1-bb80-760a317b1ed0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Morbius the Living Vampire/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a947e4d-8a14-45f1-bb80-760a317b1ed0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Morbius the Living Vampire/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1a9607a2-58cb-4bb8-b454-4813528221f8	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-1a9607a2-58cb-4bb8-b454-4813528221f8	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-1a9607a2-58cb-4bb8-b454-4813528221f8	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+1a9607a2-58cb-4bb8-b454-4813528221f8	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Tasha Yar, Out of Time"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+1a9607a2-58cb-4bb8-b454-4813528221f8	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Tasha Yar, Out of Time"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+1a9607a2-58cb-4bb8-b454-4813528221f8	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Tasha Yar, Out of Time"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:fang-druid-summoner:cast:s1,f:xs:XP:fang-druid-summoner:cast:s1	-	-	-	23b491658465	-	018d002084df	-	-	2026-11-24	xproof
-1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fang-Druid Summoner/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:fang-druid-summoner:combat0.attack:s1,f:xs:XP:fang-druid-summoner:combat0.attack:s1	-	-	-	23c4009444b0	-	018d002084df	-	-	2026-11-25	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fang-Druid Summoner/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1a9bfe76-6c74-4393-b04e-461422a29ddb	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:fang-druid-summoner:cast:s1,f:xs:XP:fang-druid-summoner:cast:s1	-	-	-	23b491658465	-	018d002084df	-	-	2026-11-24	xproof
 1aa1cf50-ee79-4bef-826b-5f1a9e1aa1a5	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
@@ -155,11 +155,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ad3be51-f68b-46d6-b58e-400b50e384f1	cast	cast-resolve	agreed	-	X	scen	1	0	Firebending Student/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ad3be51-f68b-46d6-b58e-400b50e384f1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Firebending Student/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1ad3be51-f68b-46d6-b58e-400b50e384f1	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Firebending Student/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1ad5766b-9ae3-437b-bd91-c4c988a8b095	cast	cast-resolve	agreed	-	X	scen	1	0	Agonasaur Rex/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1ad5766b-9ae3-437b-bd91-c4c988a8b095	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Agonasaur Rex/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1ad5766b-9ae3-437b-bd91-c4c988a8b095	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Agonasaur Rex/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1ad5766b-9ae3-437b-bd91-c4c988a8b095	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Agonasaur Rex/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1ad5766b-9ae3-437b-bd91-c4c988a8b095	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Agonasaur Rex/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1ad5766b-9ae3-437b-bd91-c4c988a8b095	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:agonasaur-rex:cast:s1,f:xs:XP:agonasaur-rex:cast:s1	-	-	-	23c4009444b0	-	7cd8e56f780d	-	-	2026-11-25	xproof
+1ad5766b-9ae3-437b-bd91-c4c988a8b095	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:agonasaur-rex:combat0.attack:s1,f:xs:XP:agonasaur-rex:combat0.attack:s1	-	-	-	23c4009444b0	-	7cd8e56f780d	-	-	2026-11-25	xproof
+1ad5766b-9ae3-437b-bd91-c4c988a8b095	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:agonasaur-rex:combat0.block:s1,f:xs:XP:agonasaur-rex:combat0.block:s1	-	-	-	23c4009444b0	-	7cd8e56f780d	-	-	2026-11-25	xproof
+1ad5766b-9ae3-437b-bd91-c4c988a8b095	f0/a0	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:agonasaur-rex:f0a0:s1,f:xs:XP:agonasaur-rex:f0a0:s1	-	-	-	23c4009444b0	-	7cd8e56f780d	-	-	2026-11-25	xproof
+1ad5766b-9ae3-437b-bd91-c4c988a8b095	f0/t0	Cycled	agreed	-	FX	start	2	0	x:xs:XP:agonasaur-rex:f0a0:s1,f:xs:XP:agonasaur-rex:f0a0:s1	-	-	-	23c4009444b0	-	7cd8e56f780d	-	-	2026-11-25	xproof
 1ad604ed-c645-4f94-8c5f-8e0ce66a85ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ad6339d-6206-49bf-bf97-05e6d3bcaab7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1ad78038-44f9-4599-84db-fc1a87d9ed45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

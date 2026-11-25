@@ -40,8 +40,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-uprising:f0t0:s1,f:xs:XP:garruk-s-uprising:f0t0:s1	-	-	-	3aa6ded33acb	-	c4ae9db808ee	-	-	2026-11-25	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-uprising:f0t1:s1,f:xs:XP:garruk-s-uprising:f0t1:s1	-	-	-	3aa6ded33acb	-	c4ae9db808ee	-	-	2026-11-25	xproof
 3127ae9b-a7a7-43ec-89d7-688f8445b33d	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:garruk-s-uprising:static0.0:s1,f:xs:XP:garruk-s-uprising:static0.0:s1	-	-	-	3aa6ded33acb	-	c4ae9db808ee	-	-	2026-11-25	xproof
-31284a0b-9bd5-4186-bd27-6b16a3597e27	cast	cast-resolve	agreed	-	X	scen	1	0	Deathless Pilot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-31284a0b-9bd5-4186-bd27-6b16a3597e27	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Deathless Pilot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+31284a0b-9bd5-4186-bd27-6b16a3597e27	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deathless-pilot:cast:s1,f:xs:XP:deathless-pilot:cast:s1	-	-	-	23c4009444b0	-	c6cc461b47f4	-	-	2026-11-25	xproof
+31284a0b-9bd5-4186-bd27-6b16a3597e27	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:deathless-pilot:f0a0:s1,f:xs:XP:deathless-pilot:f0a0:s1	-	-	-	23c4009444b0	-	c6cc461b47f4	-	-	2026-11-25	xproof
 31284a0b-9bd5-4186-bd27-6b16a3597e27	static#0.0	static#0.0	agreed	-	X	scen	1	0	Deathless Pilot/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 312a831a-5da9-4a22-9974-f2d90ae3eb75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 312be209-dba5-4e6c-938e-1287642f67d4	cast	cast-resolve	agreed	-	FX	scen	2	0	Hivespine Wolverine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -142,8 +142,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31bfb6ca-4455-4e3d-8f0f-e82f71990d61	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Hound of Urabrask"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 31c30c4f-12f4-4cbc-b7c1-123f36b8df75	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:runner-s-bane:f0t0:s1,f:xs:XP:runner-s-bane:f0t0:s1	-	-	-	3aa6ded33acb	-	c75dc00f27cb	-	-	2026-11-25	xproof
 31c30c4f-12f4-4cbc-b7c1-123f36b8df75	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:runner-s-bane:f0t0:s1,f:xs:XP:runner-s-bane:f0t0:s1	-	-	-	3aa6ded33acb	-	c75dc00f27cb	-	-	2026-11-25	xproof
-31c7453e-33b8-4eb6-abac-28cdb35fb993	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-31c7453e-33b8-4eb6-abac-28cdb35fb993	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+31c7453e-33b8-4eb6-abac-28cdb35fb993	cast	cast	agreed	-	F	start	4	0	f:xs:XP:salt-vampire:cast:s1	-	-	-	23c4009444b0	-	407e7bfb3cf2	-	-	2026-11-25	xproof
+31c7453e-33b8-4eb6-abac-28cdb35fb993	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:salt-vampire:cast:s1	-	-	-	23c4009444b0	-	407e7bfb3cf2	-	-	2026-11-25	xproof
 31c77036-8627-476a-996b-2a6b005c9e12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31c77036-8627-476a-996b-2a6b005c9e12	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 31ca9e12-8ad0-472e-8b2a-b7df26370d8c	cast	cast-resolve	agreed	-	X	scen	1	0	Minwu, White Mage/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -165,9 +165,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 31d8c2c4-3309-4eee-a704-f760f381f080	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 31d9a771-09ae-4cd4-bd19-6012f839a9e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stone-retrieval-unit:f0t0:s1,f:xs:XP:stone-retrieval-unit:f0t0:s1	-	-	-	ae86f6029288	-	4b1e93cd1bae	-	-	2026-11-24	xproof
 31d9a771-09ae-4cd4-bd19-6012f839a9e8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stone-retrieval-unit:f0t0:s1,f:xs:XP:stone-retrieval-unit:f0t0:s1	-	-	-	ae86f6029288	-	4b1e93cd1bae	-	-	2026-11-24	xproof
-31e3f39f-8b18-4316-984f-4d57d2d480ca	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-31e3f39f-8b18-4316-984f-4d57d2d480ca	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-31e3f39f-8b18-4316-984f-4d57d2d480ca	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+31e3f39f-8b18-4316-984f-4d57d2d480ca	cast	cast	agreed	-	F	start	4	0	f:xs:XP:miles-o-brien-transporter-ops:cast:s1	-	-	-	23c4009444b0	-	84b1f1ea8ead	-	-	2026-11-25	xproof
+31e3f39f-8b18-4316-984f-4d57d2d480ca	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:miles-o-brien-transporter-ops:cast:s1	-	-	-	23c4009444b0	-	84b1f1ea8ead	-	-	2026-11-25	xproof
+31e3f39f-8b18-4316-984f-4d57d2d480ca	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:miles-o-brien-transporter-ops:f0t1:s1	-	-	-	23c4009444b0	-	84b1f1ea8ead	-	-	2026-11-25	xproof
 31e8c1e1-520a-4e64-a221-203afc819fcf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:journey-to-oblivion:f0t0:s1,f:xs:XP:journey-to-oblivion:f0t0:s1	-	-	-	ae86f6029288	-	b13abf07e8b5	-	-	2026-11-24	xproof
 31e8c1e1-520a-4e64-a221-203afc819fcf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:journey-to-oblivion:f0t0:s1,f:xs:XP:journey-to-oblivion:f0t0:s1	-	-	-	ae86f6029288	-	b13abf07e8b5	-	-	2026-11-24	xproof
 31e99241-592d-4be4-9ef3-6dde522b1885	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	fd8dc6c8e3ef	-	-	2026-11-24	xproof

@@ -14,10 +14,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 32116127-cf96-4a1b-8896-a1ebc087b597	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 32116127-cf96-4a1b-8896-a1ebc087b597	land	land	agreed	-	FX	start	2	0	x:xs:XP:llanowar-wastes:land:s1,f:xs:XP:llanowar-wastes:land:s1	-	-	-	25696bf19d5b	-	dd6dbde74348	-	-	2026-11-24	xproof
 3212e47a-5492-4c50-9d4a-6ea562f1a6e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3212e47a-5492-4c50-9d4a-6ea562f1a6e1	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-321b5cc6-8df6-4292-97a0-a6a3a22f3b55	cast	cast-resolve	agreed	-	X	scen	1	0	Twinflame Tyrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-321b5cc6-8df6-4292-97a0-a6a3a22f3b55	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Twinflame Tyrant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-321b5cc6-8df6-4292-97a0-a6a3a22f3b55	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Twinflame Tyrant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3212e47a-5492-4c50-9d4a-6ea562f1a6e1	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:millstone:f0a0:s1,f:xs:XP:millstone:f0a0:s1	-	-	-	23c4009444b0	-	637e173db8fe	-	-	2026-11-25	xproof
+321b5cc6-8df6-4292-97a0-a6a3a22f3b55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twinflame-tyrant:cast:s1,f:xs:XP:twinflame-tyrant:cast:s1	-	-	-	23c4009444b0	-	7cf506ade9b8	-	-	2026-11-25	xproof
+321b5cc6-8df6-4292-97a0-a6a3a22f3b55	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:twinflame-tyrant:combat0.attack:s1,f:xs:XP:twinflame-tyrant:combat0.attack:s1	-	-	-	23c4009444b0	-	7cf506ade9b8	-	-	2026-11-25	xproof
+321b5cc6-8df6-4292-97a0-a6a3a22f3b55	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:twinflame-tyrant:combat0.block:s1,f:xs:XP:twinflame-tyrant:combat0.block:s1	-	-	-	23c4009444b0	-	7cf506ade9b8	-	-	2026-11-25	xproof
 321c4586-d27e-45ae-ba1f-3efea334a697	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancestral-vengeance:f0t0:s1,f:xs:XP:ancestral-vengeance:f0t0:s1	-	-	-	d864b561c9cb	-	a6465c9914b8	-	-	2026-11-24	xproof
 321c4586-d27e-45ae-ba1f-3efea334a697	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ancestral-vengeance:f0t0:s1,f:xs:XP:ancestral-vengeance:f0t0:s1	-	-	-	d864b561c9cb	-	a6465c9914b8	-	-	2026-11-24	xproof
 321e101c-a426-4d18-be0b-c26c5348b70d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -62,15 +62,15 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 324d2aa8-6dea-4b0d-898d-1e52ed187565	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:acolyte-of-aclazotz:cast:s1,f:xs:XP:acolyte-of-aclazotz:cast:s1	-	-	-	23b491658465	-	f152db30672a	-	-	2026-11-24	xproof
 324d2aa8-6dea-4b0d-898d-1e52ed187565	f0/a0	LoseLife	agreed	-	FX	start	2	0	x:xs:XP:acolyte-of-aclazotz:f0a0:s1,f:xs:XP:acolyte-of-aclazotz:f0a0:s1	-	-	-	3aa6ded33acb	-	f152db30672a	-	-	2026-11-25	xproof
 325032d5-c452-4454-8976-82f86fee5ab8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3250466f-82a4-45e1-9722-ff247ddf8c15	cast	cast-resolve	agreed	-	X	scen	1	0	Vanguard Seraph/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3250466f-82a4-45e1-9722-ff247ddf8c15	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Vanguard Seraph/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3250466f-82a4-45e1-9722-ff247ddf8c15	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Vanguard Seraph/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3250466f-82a4-45e1-9722-ff247ddf8c15	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Vanguard Seraph/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3250466f-82a4-45e1-9722-ff247ddf8c15	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vanguard-seraph:cast:s1,f:xs:XP:vanguard-seraph:cast:s1	-	-	-	23c4009444b0	-	aa6bbcd99a22	-	-	2026-11-25	xproof
+3250466f-82a4-45e1-9722-ff247ddf8c15	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:vanguard-seraph:combat0.attack:s1,f:xs:XP:vanguard-seraph:combat0.attack:s1	-	-	-	23c4009444b0	-	aa6bbcd99a22	-	-	2026-11-25	xproof
+3250466f-82a4-45e1-9722-ff247ddf8c15	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:vanguard-seraph:combat0.block:s1,f:xs:XP:vanguard-seraph:combat0.block:s1	-	-	-	23c4009444b0	-	aa6bbcd99a22	-	-	2026-11-25	xproof
+3250466f-82a4-45e1-9722-ff247ddf8c15	f0/t0	LifeGained	agreed	-	FX	start	4	0	x:xs:XP:vanguard-seraph:cast:s1,f:xs:XP:vanguard-seraph:cast:s1	-	-	-	23c4009444b0	-	aa6bbcd99a22	-	-	2026-11-25	xproof
 3256029f-6558-4fcc-9fa1-74ceba3e5c92	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:harbinger-of-the-hunt:cast:s1,f:xs:XP:harbinger-of-the-hunt:cast:s1	-	-	-	d864b561c9cb	-	82441c99f9f1	-	-	2026-11-24	xproof
 3256029f-6558-4fcc-9fa1-74ceba3e5c92	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:harbinger-of-the-hunt:f0a0:s1,f:xs:XP:harbinger-of-the-hunt:f0a0:s1	-	-	-	d864b561c9cb	-	82441c99f9f1	-	-	2026-11-24	xproof
 3256029f-6558-4fcc-9fa1-74ceba3e5c92	f0/a1	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:harbinger-of-the-hunt:f0a1:s1,f:xs:XP:harbinger-of-the-hunt:f0a1:s1	-	-	-	d864b561c9cb	-	82441c99f9f1	-	-	2026-11-24	xproof
 32599d7c-243b-447b-9d5d-e8e29830ac61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-32599d7c-243b-447b-9d5d-e8e29830ac61	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+32599d7c-243b-447b-9d5d-e8e29830ac61	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 325b4288-fe1b-4e29-ae13-72924b4db3dd	cast	cast-resolve	agreed	-	X	scen	1	0	Iron Giant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b4288-fe1b-4e29-ae13-72924b4db3dd	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Iron Giant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 325b4288-fe1b-4e29-ae13-72924b4db3dd	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Iron Giant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

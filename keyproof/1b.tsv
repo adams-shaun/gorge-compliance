@@ -2,9 +2,9 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 1b01dcff-0639-4ed0-bd9e-f28429cb803d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nurgle-s-rot:cast:s1,f:xs:XP:nurgle-s-rot:cast:s1	-	-	-	8c0bd19283bb	-	5386769c8bdb	-	-	2026-11-24	xproof
 1b01dcff-0639-4ed0-bd9e-f28429cb803d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-1b05e355-38a5-4307-9d8b-e99ec30f8ed3	cast	cast-resolve	agreed	-	X	scen	1	0	Brightfield Mustang/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b05e355-38a5-4307-9d8b-e99ec30f8ed3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Brightfield Mustang/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b05e355-38a5-4307-9d8b-e99ec30f8ed3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Brightfield Mustang/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1b05e355-38a5-4307-9d8b-e99ec30f8ed3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brightfield-mustang:cast:s1,f:xs:XP:brightfield-mustang:cast:s1	-	-	-	23c4009444b0	-	66c509a95dc3	-	-	2026-11-25	xproof
+1b05e355-38a5-4307-9d8b-e99ec30f8ed3	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:brightfield-mustang:f0a0:s1,f:xs:XP:brightfield-mustang:f0a0:s1	-	-	-	23c4009444b0	-	66c509a95dc3	-	-	2026-11-25	xproof
+1b05e355-38a5-4307-9d8b-e99ec30f8ed3	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:brightfield-mustang:f0a0:s1,f:xs:XP:brightfield-mustang:f0a0:s1	-	-	-	23c4009444b0	-	66c509a95dc3	-	-	2026-11-25	xproof
 1b065a17-14a4-433f-a6c8-2c8212f505c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b065a17-14a4-433f-a6c8-2c8212f505c7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 1b09d0cf-403c-4a15-aeee-602a1bdaf0c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:darksteel-colossus:cast:s1,f:xs:XP:darksteel-colossus:cast:s1	-	-	-	23b491658465	-	b8d95f7a1017	-	-	2026-11-24	xproof
@@ -14,10 +14,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b115051-a3c8-4c5f-9ad2-82b5a6897c51	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b115051-a3c8-4c5f-9ad2-82b5a6897c51	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b1214e9-1581-4008-b3d4-8b7af6b092fd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	cast	cast-resolve	agreed	-	X	scen	1	0	Burnout Bashtronaut/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Burnout Bashtronaut/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Burnout Bashtronaut/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Burnout Bashtronaut/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:burnout-bashtronaut:cast:s1,f:xs:XP:burnout-bashtronaut:cast:s1	-	-	-	23c4009444b0	-	8b2ce0581e60	-	-	2026-11-25	xproof
+1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:burnout-bashtronaut:combat0.attack:s1,f:xs:XP:burnout-bashtronaut:combat0.attack:s1	-	-	-	23c4009444b0	-	8b2ce0581e60	-	-	2026-11-25	xproof
+1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:burnout-bashtronaut:combat0.block:s1,f:xs:XP:burnout-bashtronaut:combat0.block:s1	-	-	-	23c4009444b0	-	8b2ce0581e60	-	-	2026-11-25	xproof
+1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:burnout-bashtronaut:f0a0:s1,f:xs:XP:burnout-bashtronaut:f0a0:s1	-	-	-	23c4009444b0	-	8b2ce0581e60	-	-	2026-11-25	xproof
 1b122fbb-c2e1-42d1-bfc5-fcacacdfa0bc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Burnout Bashtronaut/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1b1a0f35-3126-4b88-90aa-c56e67850a9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b1a0f35-3126-4b88-90aa-c56e67850a9d	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -96,9 +96,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1b721ad3-d0f6-4eec-9bf0-f57ea9dfa392	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 1b73639b-2b07-4e82-b990-ca7721074e43	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1b73639b-2b07-4e82-b990-ca7721074e43	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1b759831-abe8-4996-a897-3c6d6d30a1c7	cast	cast-resolve	agreed	-	X	scen	1	0	Broodheart Engine/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1b759831-abe8-4996-a897-3c6d6d30a1c7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:broodheart-engine:cast:s1,f:xs:XP:broodheart-engine:cast:s1	-	-	-	23c4009444b0	-	ee10dfa16537	-	-	2026-11-25	xproof
 1b759831-abe8-4996-a897-3c6d6d30a1c7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Broodheart Engine/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1b759831-abe8-4996-a897-3c6d6d30a1c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Broodheart Engine/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1b759831-abe8-4996-a897-3c6d6d30a1c7	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:broodheart-engine:f0t0:s1	-	-	-	23c4009444b0	-	ee10dfa16537	-	-	2026-11-25	xproof
 1b76a54d-5a9f-4b1b-a075-4b4c4de8ba0a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:erinis-gloom-stalker:cast:s1,f:xs:XP:erinis-gloom-stalker:cast:s1	-	-	-	8c0bd19283bb	-	37abb8542b9a	-	-	2026-11-24	xproof
 1b76a54d-5a9f-4b1b-a075-4b4c4de8ba0a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:erinis-gloom-stalker:f0t0:s1,f:xs:XP:erinis-gloom-stalker:f0t0:s1	-	-	-	8c0bd19283bb	-	37abb8542b9a	-	-	2026-11-24	xproof
 1b788680-28e3-4378-9607-bd42acb4fbad	cast	cast-resolve	agreed	-	X	scen	1	0	Sabotage Strategist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

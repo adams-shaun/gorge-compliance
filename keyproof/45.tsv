@@ -135,11 +135,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 457cf958-8129-4bf6-b4d5-211eb8c58763	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 457cf958-8129-4bf6-b4d5-211eb8c58763	land	land	agreed	-	FX	start	2	0	x:xs:XP:q-continuum:f0t0:s1,f:xs:XP:q-continuum:f0t0:s1	-	-	-	25696bf19d5b	-	7eecc473ac4b	-	-	2026-11-24	xproof
 457dc141-bc72-42ad-b482-c78183462e34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forced-march:cast:s1,f:xs:XP:forced-march:cast:s1	-	-	-	5f2128bf97e4	-	24ca71f7ed17	-	-	2026-11-24	xproof
-457e3218-b2ef-4280-931a-5320987b9657	cast	cast-resolve	agreed	-	X	scen	1	0	Dracosaur Auxiliary/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-457e3218-b2ef-4280-931a-5320987b9657	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dracosaur Auxiliary/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-457e3218-b2ef-4280-931a-5320987b9657	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Dracosaur Auxiliary/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-457e3218-b2ef-4280-931a-5320987b9657	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dracosaur Auxiliary/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-457e3218-b2ef-4280-931a-5320987b9657	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dracosaur Auxiliary/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+457e3218-b2ef-4280-931a-5320987b9657	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dracosaur-auxiliary:cast:s1,f:xs:XP:dracosaur-auxiliary:cast:s1	-	-	-	23c4009444b0	-	590a9411c837	-	-	2026-11-25	xproof
+457e3218-b2ef-4280-931a-5320987b9657	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dracosaur-auxiliary:combat0.attack:s1,f:xs:XP:dracosaur-auxiliary:combat0.attack:s1	-	-	-	23c4009444b0	-	590a9411c837	-	-	2026-11-25	xproof
+457e3218-b2ef-4280-931a-5320987b9657	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dracosaur-auxiliary:combat0.block:s1,f:xs:XP:dracosaur-auxiliary:combat0.block:s1	-	-	-	23c4009444b0	-	590a9411c837	-	-	2026-11-25	xproof
+457e3218-b2ef-4280-931a-5320987b9657	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:dracosaur-auxiliary:f0a0:s1,f:xs:XP:dracosaur-auxiliary:f0a0:s1	-	-	-	23c4009444b0	-	590a9411c837	-	-	2026-11-25	xproof
+457e3218-b2ef-4280-931a-5320987b9657	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:dracosaur-auxiliary:f0a0:s1,f:xs:XP:dracosaur-auxiliary:f0a0:s1	-	-	-	23c4009444b0	-	590a9411c837	-	-	2026-11-25	xproof
 457e4a49-c8fe-4e1d-a4b4-7a880a47f58d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cold-water-snapper:cast:s1,f:xs:XP:cold-water-snapper:cast:s1	-	-	-	d864b561c9cb	-	aeee6591a13a	-	-	2026-11-24	xproof
 45866598-4ee4-46b6-ade2-ffcdbe98e58f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:necron-deathmark:f0t0:s1,f:xs:XP:necron-deathmark:f0t0:s1	-	-	-	8c0bd19283bb	-	f5ec78944cdc	-	-	2026-11-24	xproof
 45866598-4ee4-46b6-ade2-ffcdbe98e58f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:necron-deathmark:f0t0:s1,f:xs:XP:necron-deathmark:f0t0:s1	-	-	-	8c0bd19283bb	-	f5ec78944cdc	-	-	2026-11-24	xproof

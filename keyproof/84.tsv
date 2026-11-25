@@ -20,10 +20,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 84100106-1f97-4859-aadd-a35796ee000f	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:aura-extraction:cast:s2,f:xs:XP:aura-extraction:cast:s2	-	-	-	fc71ca68c5ac	-	17db15128d91	-	-	2026-11-24	xproof
 84100106-1f97-4859-aadd-a35796ee000f	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:aura-extraction:cast:s1,f:xs:XP:aura-extraction:cast:s1	-	-	-	fc71ca68c5ac	-	17db15128d91	-	-	2026-11-24	xproof
 84122d1e-7657-42fa-8724-c4a3a19729a6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-84122d81-9634-4d3f-85a5-f6cf4303691a	cast	cast-resolve	agreed	-	X	scen	1	0	Mossborn Hydra/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-84122d81-9634-4d3f-85a5-f6cf4303691a	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mossborn Hydra/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-84122d81-9634-4d3f-85a5-f6cf4303691a	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Mossborn Hydra/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-84122d81-9634-4d3f-85a5-f6cf4303691a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mossborn Hydra/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+84122d81-9634-4d3f-85a5-f6cf4303691a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mossborn-hydra:cast:s1,f:xs:XP:mossborn-hydra:cast:s1	-	-	-	23c4009444b0	-	7a7c0005f58b	-	-	2026-11-25	xproof
+84122d81-9634-4d3f-85a5-f6cf4303691a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:mossborn-hydra:combat0.attack:s1,f:xs:XP:mossborn-hydra:combat0.attack:s1	-	-	-	23c4009444b0	-	7a7c0005f58b	-	-	2026-11-25	xproof
+84122d81-9634-4d3f-85a5-f6cf4303691a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mossborn-hydra:combat0.block:s1,f:xs:XP:mossborn-hydra:combat0.block:s1	-	-	-	23c4009444b0	-	7a7c0005f58b	-	-	2026-11-25	xproof
+84122d81-9634-4d3f-85a5-f6cf4303691a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mossborn-hydra:f0t0:s1,f:xs:XP:mossborn-hydra:f0t0:s1	-	-	-	23c4009444b0	-	7a7c0005f58b	-	-	2026-11-25	xproof
 8415a482-3957-4c00-9015-99defc049877	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8417f2d5-93c9-474a-a143-5c4e17097a88	f0/a0	activate#0.0	agreed	-	X	scen	1	0	A.I.M. Labs/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8417f2d5-93c9-474a-a143-5c4e17097a88	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	A.I.M. Labs/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2219e636-74d0-4f82-8704-e6d66c5f7f09	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rocketeer Boostbuggy/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2219e636-74d0-4f82-8704-e6d66c5f7f09	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Rocketeer Boostbuggy/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2219e636-74d0-4f82-8704-e6d66c5f7f09	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Rocketeer Boostbuggy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-22249955-0741-470e-bc2b-f32d4510849b	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+22249955-0741-470e-bc2b-f32d4510849b	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Wrath of Khan"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 2224b6e0-c5ff-45d0-84e3-83758c5fc99f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sky-diamond:cast:s1,f:xs:XP:sky-diamond:cast:s1	-	-	-	8c0bd19283bb	-	9332adb428dc	-	-	2026-11-24	xproof
 2224b6e0-c5ff-45d0-84e3-83758c5fc99f	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:sky-diamond:f0a0:s2,f:xs:XP:sky-diamond:f0a0:s2	-	-	-	8c0bd19283bb	-	9332adb428dc	-	-	2026-11-24	xproof
 22252186-15d0-468f-8cab-c74db9b71439	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 223db021-979f-4312-8cb5-169ae4bf17bc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:fall-to-earth:cast:s1,f:xs:XP:fall-to-earth:cast:s1	-	-	-	8c0bd19283bb	-	7170f02ee4a6	-	-	2026-11-24	xproof
 223db021-979f-4312-8cb5-169ae4bf17bc	f0/a1	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:fall-to-earth:cast:s2,f:xs:XP:fall-to-earth:cast:s2	-	-	-	8c0bd19283bb	-	7170f02ee4a6	-	-	2026-11-24	xproof
 223fa044-d387-4884-bf4e-75f1b61c6a46	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-223fa044-d387-4884-bf4e-75f1b61c6a46	f0/t0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+223fa044-d387-4884-bf4e-75f1b61c6a46	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 223fefa3-64a7-457f-90a2-89973640f554	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2241ef7d-3e9d-44ee-88ac-e8ad6fb2444e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22446354-e5c3-4f19-9731-79a4562639d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 22b7975c-37a5-4895-b209-bdeeec0c6aea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22b7975c-37a5-4895-b209-bdeeec0c6aea	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 22b86863-c992-405b-949a-bdf8859884ef	cast	cast-resolve	agreed	-	FX	scen	2	0	Sarcophagus, Ship of the Dead/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-22b86863-c992-405b-949a-bdf8859884ef	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+22b86863-c992-405b-949a-bdf8859884ef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sarcophagus-ship-of-the-dead:f0t0:s1,f:xs:XP:sarcophagus-ship-of-the-dead:f0t0:s1	-	-	-	23c4009444b0	-	f611d0d8f0d7	-	-	2026-11-25	xproof
 22c044ad-77d7-4c93-953d-e2daa9686ff7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kiora-s-follower:cast:s1,f:xs:XP:kiora-s-follower:cast:s1	-	-	-	d864b561c9cb	-	7b1a56016e3d	-	-	2026-11-24	xproof
 22c044ad-77d7-4c93-953d-e2daa9686ff7	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 22c2e66d-a2a1-46db-a70a-dff5ad5d6c14	cast	cast-resolve	agreed	-	FX	scen	2	0	Liliana the Faultless/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

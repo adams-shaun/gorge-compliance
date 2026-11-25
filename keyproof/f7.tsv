@@ -68,7 +68,7 @@ f746612a-fbed-44ca-b2cc-5928e10cf4bb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 f746612a-fbed-44ca-b2cc-5928e10cf4bb	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f746612a-fbed-44ca-b2cc-5928e10cf4bb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7467fce-61e4-401a-8a3d-b0a2bc347088	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cloudspire-skycycle:f0t0:s2,f:xs:XP:cloudspire-skycycle:f0t0:s2	-	-	-	e07cf3a05ba5	-	7a1116d229be	-	-	2026-11-24	xproof
-f7467fce-61e4-401a-8a3d-b0a2bc347088	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cloudspire Skycycle/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+f7467fce-61e4-401a-8a3d-b0a2bc347088	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:cloudspire-skycycle:f0a0:s1,f:xs:XP:cloudspire-skycycle:f0a0:s1	-	-	-	23c4009444b0	-	7a1116d229be	-	-	2026-11-25	xproof
 f7467fce-61e4-401a-8a3d-b0a2bc347088	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:cloudspire-skycycle:f0t0:s2,f:xs:XP:cloudspire-skycycle:f0t0:s2	-	-	-	e07cf3a05ba5	-	7a1116d229be	-	-	2026-11-24	xproof
 f7493bcf-5c17-4562-a759-37082ec49ff8	cast	cast-resolve	agreed	-	X	scen	1	0	Bumi, King of Three Trials/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f7493bcf-5c17-4562-a759-37082ec49ff8	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,9 +135,9 @@ f772e767-a931-4891-94eb-d92a8ca7f8c1	f0/t0	NULL	owed	refused:no-generator:trigge
 f7730e2e-aa62-40e7-836d-e6ddb6893816	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 f7730e2e-aa62-40e7-836d-e6ddb6893816	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 f778bf66-e823-4b4c-8586-97e1d519efd8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f77ea393-4142-4c06-8bb3-589ca74a7338	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-f77ea393-4142-4c06-8bb3-589ca74a7338	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-f77ea393-4142-4c06-8bb3-589ca74a7338	f0/t1	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+f77ea393-4142-4c06-8bb3-589ca74a7338	cast	cast	agreed	-	F	start	2	0	f:xs:XP:the-caretaker:cast:s1	-	-	-	23c4009444b0	-	27cb57000941	-	-	2026-11-25	xproof
+f77ea393-4142-4c06-8bb3-589ca74a7338	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:the-caretaker:f0t0:s1	-	-	-	23c4009444b0	-	27cb57000941	-	-	2026-11-25	xproof
+f77ea393-4142-4c06-8bb3-589ca74a7338	f0/t1	BecomesTarget/Ward	agreed	-	F	start	2	0	f:xs:XP:the-caretaker:f0t1:s1	-	-	-	23c4009444b0	-	27cb57000941	-	-	2026-11-25	xproof
 f780d6f6-540b-4773-8a48-e56e95c2d39e	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lasyd-prowler:f0t0:s2,f:xs:XP:lasyd-prowler:f0t0:s2	-	-	-	267e485f6204	-	121dac8d0f72	-	-	2026-11-24	xproof
 f780d6f6-540b-4773-8a48-e56e95c2d39e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lasyd Prowler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f780d6f6-540b-4773-8a48-e56e95c2d39e	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lasyd-prowler:f0t0:s2,f:xs:XP:lasyd-prowler:f0t0:s2	-	-	-	267e485f6204	-	121dac8d0f72	-	-	2026-11-24	xproof
@@ -221,7 +221,7 @@ f7f435bc-1716-4412-9505-a1f2f2d83d08	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP
 f7f4ddc9-cea0-42f9-bbca-2ad87a24bfc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:underworld-hermit:f0t0:s1,f:xs:XP:underworld-hermit:f0t0:s1	-	-	-	d864b561c9cb	-	78a400e53757	-	-	2026-11-24	xproof
 f7f4ddc9-cea0-42f9-bbca-2ad87a24bfc8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:underworld-hermit:f0t0:s1,f:xs:XP:underworld-hermit:f0t0:s1	-	-	-	d864b561c9cb	-	78a400e53757	-	-	2026-11-24	xproof
 f7f76abc-8656-4e97-9b7f-7f89ca3e6d93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:angelic-page:cast:s1,f:xs:XP:angelic-page:cast:s1	-	-	-	25696bf19d5b	-	4e2c978a379d	-	-	2026-11-24	xproof
-f7f76abc-8656-4e97-9b7f-7f89ca3e6d93	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+f7f76abc-8656-4e97-9b7f-7f89ca3e6d93	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 f7f78825-10d6-441a-ae26-51b77cc271cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hexplate-wallbreaker:f0t1:s1,f:xs:XP:hexplate-wallbreaker:f0t1:s1	-	-	-	8c0bd19283bb	-	3017e747e1ec	-	-	2026-11-24	xproof
 f7f78825-10d6-441a-ae26-51b77cc271cd	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:hexplate-wallbreaker:f0a0:s1,f:xs:XP:hexplate-wallbreaker:f0a0:s1	-	-	-	8c0bd19283bb	-	3017e747e1ec	-	-	2026-11-24	xproof
 f7f78825-10d6-441a-ae26-51b77cc271cd	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:hexplate-wallbreaker:f0a0:s1,f:xs:XP:hexplate-wallbreaker:f0a0:s1	-	-	-	8c0bd19283bb	-	3017e747e1ec	-	-	2026-11-24	xproof

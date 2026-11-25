@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b154d55-37dd-4e5f-aa99-d4bc547cdec0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b154d55-37dd-4e5f-aa99-d4bc547cdec0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b15d571-2f90-44f7-9153-20ed51253045	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:debris-beetle:f0t0:s2,f:xs:XP:debris-beetle:f0t0:s2	-	-	-	e07cf3a05ba5	-	8a640d5f669a	-	-	2026-11-24	xproof
-2b15d571-2f90-44f7-9153-20ed51253045	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Debris Beetle/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2b15d571-2f90-44f7-9153-20ed51253045	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:debris-beetle:f0a0:s1,f:xs:XP:debris-beetle:f0a0:s1	-	-	-	23c4009444b0	-	8a640d5f669a	-	-	2026-11-25	xproof
 2b15d571-2f90-44f7-9153-20ed51253045	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:debris-beetle:f0t0:s2,f:xs:XP:debris-beetle:f0t0:s2	-	-	-	e07cf3a05ba5	-	8a640d5f669a	-	-	2026-11-24	xproof
 2b166d97-c2c1-4642-b151-9bb1ad32e362	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b1bec38-5aaf-4ca0-9a04-fb4367c59c1e	cast	cast-resolve	agreed	-	FX	scen	2	0	Run Over/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -94,14 +94,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b761ce6-4fb1-4f22-b51c-d9f25f62b39a	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:thorn-lieutenant:f0a0:s1,f:xs:XP:thorn-lieutenant:f0a0:s1	-	-	-	d864b561c9cb	-	c9de4f43b56f	-	-	2026-11-24	xproof
 2b761ce6-4fb1-4f22-b51c-d9f25f62b39a	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2b76f9e9-cd28-4eaf-8674-215c34263f96	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2b7ac3e8-0a7d-4b8a-a6a6-4cacc9b4f9de	cast	cast-resolve	agreed	-	X	scen	1	0	Kobayashi Maru Scenario/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2b7ac3e8-0a7d-4b8a-a6a6-4cacc9b4f9de	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+2b7ac3e8-0a7d-4b8a-a6a6-4cacc9b4f9de	cast	cast	agreed	-	F	start	2	0	f:xs:XP:kobayashi-maru-scenario:f0t0:s1	-	-	-	23c4009444b0	-	66d8d183e9b6	-	-	2026-11-25	xproof
+2b7ac3e8-0a7d-4b8a-a6a6-4cacc9b4f9de	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:kobayashi-maru-scenario:f0t0:s1	-	-	-	23c4009444b0	-	66d8d183e9b6	-	-	2026-11-25	xproof
 2b7c4dab-e432-4b34-b058-3cec5c0d72df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b80faaf-92fd-4fa0-a3f6-8bb263e7ff1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akroma-angel-of-fury:cast:s1,f:xs:XP:akroma-angel-of-fury:cast:s1	-	-	-	9ee19e8250ce	-	2942aa8564df	-	-	2026-11-24	xproof
 2b80faaf-92fd-4fa0-a3f6-8bb263e7ff1d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:akroma-angel-of-fury:f0a0:s1,f:xs:XP:akroma-angel-of-fury:f0a0:s1	-	-	-	d864b561c9cb	-	2942aa8564df	-	-	2026-11-24	xproof
 2b8144a0-08d2-4c28-9fd7-5d90f90105e4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bleachbone Verge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2b8144a0-08d2-4c28-9fd7-5d90f90105e4	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Bleachbone Verge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2b8144a0-08d2-4c28-9fd7-5d90f90105e4	land	play-land	agreed	-	X	scen	1	0	Bleachbone Verge/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2b8144a0-08d2-4c28-9fd7-5d90f90105e4	land	land	agreed	-	FX	start	2	0	x:xs:XP:bleachbone-verge:land:s1,f:xs:XP:bleachbone-verge:land:s1	-	-	-	23c4009444b0	-	691886f12f9a	-	-	2026-11-25	xproof
 2b84a10e-4c5c-407f-8b5b-a23d402f0529	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b84a10e-4c5c-407f-8b5b-a23d402f0529	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 2b856a43-ca6b-4f08-b610-9794ee6d7fcf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -148,8 +148,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2bd81743-84c8-43ec-86f5-68230036827b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2bd91ce8-1797-4dd7-8150-0d4caa7dad61	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2bda1fb1-528c-4e66-89f1-bb1a85e9181e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2bdd0bcb-6cfb-48e7-972e-355ff46621a4	cast	cast-resolve	agreed	-	X	scen	1	0	Cryptcaller Chariot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2bdd0bcb-6cfb-48e7-972e-355ff46621a4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cryptcaller Chariot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2bdd0bcb-6cfb-48e7-972e-355ff46621a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cryptcaller-chariot:cast:s1,f:xs:XP:cryptcaller-chariot:cast:s1	-	-	-	23c4009444b0	-	8e4dbaceab68	-	-	2026-11-25	xproof
+2bdd0bcb-6cfb-48e7-972e-355ff46621a4	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:cryptcaller-chariot:f0a0:s1,f:xs:XP:cryptcaller-chariot:f0a0:s1	-	-	-	23c4009444b0	-	8e4dbaceab68	-	-	2026-11-25	xproof
 2bdd0bcb-6cfb-48e7-972e-355ff46621a4	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cryptcaller Chariot/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2bdd82e7-cbbf-4f12-bcb7-b276df021351	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pygmy-razorback:cast:s1,f:xs:XP:pygmy-razorback:cast:s1	-	-	-	5f2128bf97e4	-	4e1585665f6c	-	-	2026-11-24	xproof
 2bdd9ca3-542a-43c0-9831-c6add23890d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

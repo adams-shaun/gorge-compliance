@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f03c834-2cb3-4c54-bee6-c64f3a5fce47	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:nurturing-presence:f0t0:s1,f:xs:XP:nurturing-presence:f0t0:s1	-	-	-	d864b561c9cb	-	d95e34880761	-	-	2026-11-24	xproof
 3f04c38b-d6bd-405f-b69c-009df87801dd	cast	cast-resolve	agreed	-	FX	scen	2	0	Malfunctioning Holodeck/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f04c38b-d6bd-405f-b69c-009df87801dd	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f04c38b-d6bd-405f-b69c-009df87801dd	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+3f04c38b-d6bd-405f-b69c-009df87801dd	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 3f086b72-6e7c-40d4-b995-d5f94c494462	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f0a0a15-613a-4864-9309-a340dc4cf94d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rally-the-peasants:cast:s1,f:xs:XP:rally-the-peasants:cast:s1	-	-	-	d864b561c9cb	-	515dee882328	-	-	2026-11-24	xproof
 3f0c9466-5ab9-4205-a84f-b4b27b5a678e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodbraid-elf:cast:s1,f:xs:XP:bloodbraid-elf:cast:s1	-	-	-	8a1b1a193ec0	-	b4e70f0df248	-	-	2026-11-24	xproof
@@ -30,9 +30,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f17c60e-923a-4392-9da8-87d9ded009b7	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:inspiring-vantage:land:s1,f:xs:XP:inspiring-vantage:land:s1	-	-	-	3aa6ded33acb	-	b65f5012ec1f	-	-	2026-11-25	xproof
 3f17c60e-923a-4392-9da8-87d9ded009b7	land	land	agreed	-	FX	start	2	0	x:xs:XP:inspiring-vantage:land:s1,f:xs:XP:inspiring-vantage:land:s1	-	-	-	3aa6ded33acb	-	b65f5012ec1f	-	-	2026-11-25	xproof
 3f1f27ca-15e6-4ac6-8bd3-1e6b3ca00857	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3f21c1c6-7992-4036-ad3e-b599153e54fe	cast	cast-resolve	agreed	-	X	scen	1	0	Dredger's Insight/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3f21c1c6-7992-4036-ad3e-b599153e54fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dredger-s-insight:cast:s1,f:xs:XP:dredger-s-insight:cast:s1	-	-	-	23c4009444b0	-	8ecb9d1ed10d	-	-	2026-11-25	xproof
 3f21c1c6-7992-4036-ad3e-b599153e54fe	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dredger's Insight/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3f21c1c6-7992-4036-ad3e-b599153e54fe	f0/t1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3f21c1c6-7992-4036-ad3e-b599153e54fe	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dredger-s-insight:cast:s1,f:xs:XP:dredger-s-insight:cast:s1	-	-	-	23c4009444b0	-	8ecb9d1ed10d	-	-	2026-11-25	xproof
 3f23d7d3-28c6-4388-afb5-8f101b973083	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f23d7d3-28c6-4388-afb5-8f101b973083	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3f244320-3e74-4eff-ba4e-a345700c40c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:javelin-of-lightning:f0t0:s1,f:xs:XP:javelin-of-lightning:f0t0:s1	-	-	-	8c0bd19283bb	-	777094787aea	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f678f76-3863-4ab5-a4fd-9b76a282b1a8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Balamb T-Rexaur/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3f678f76-3863-4ab5-a4fd-9b76a282b1a8	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:balamb-t-rexaur:f0t0:s2,f:xs:XP:balamb-t-rexaur:f0t0:s2	-	-	-	267e485f6204	-	347c1cd866e2	-	-	2026-11-24	xproof
 3f678f76-3863-4ab5-a4fd-9b76a282b1a8	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:balamb-t-rexaur:f0t0:s1,f:xs:XP:balamb-t-rexaur:f0t0:s1	-	-	-	267e485f6204	-	347c1cd866e2	-	-	2026-11-24	xproof
-3f6b2f76-0364-415e-a6a2-e9e5bf31b745	cast	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+3f6b2f76-0364-415e-a6a2-e9e5bf31b745	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 3f6df152-a0b9-441a-a8aa-8bb77f70d491	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jedit-s-dragoons:f0t0:s1,f:xs:XP:jedit-s-dragoons:f0t0:s1	-	-	-	64a08ba7d913	-	56452d810244	-	-	2026-11-24	xproof
 3f6df152-a0b9-441a-a8aa-8bb77f70d491	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jedit-s-dragoons:f0t0:s1,f:xs:XP:jedit-s-dragoons:f0t0:s1	-	-	-	64a08ba7d913	-	56452d810244	-	-	2026-11-24	xproof
 3f6f4c98-ed7e-4fb1-8bfe-4210a39f77f2	cast	cast-resolve	agreed	-	X	scen	1	0	Unstoppable Plan/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -132,9 +132,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3f9cf871-7df6-49d5-aab3-ad945571b707	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 3f9e3b79-6ecb-4741-a9f4-fd7d3545d5cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fa11a6a-a760-45db-8341-f83a0f69c17f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	cast	cast-resolve	agreed	-	X	scen	1	0	Alacrian Armory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Alacrian Armory/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Alacrian Armory/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alacrian-armory:cast:s1,f:xs:XP:alacrian-armory:cast:s1	-	-	-	23c4009444b0	-	0b5d6f1bd552	-	-	2026-11-25	xproof
+3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	f0/t0	Phase	agreed	-	FX	start	6	0	x:xs:XP:alacrian-armory:cast:s1,f:xs:XP:alacrian-armory:cast:s1	-	-	-	23c4009444b0	-	0b5d6f1bd552	-	-	2026-11-25	xproof
+3fa2d51c-d549-4287-ac3b-76bc72bcd8bc	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:alacrian-armory:static0.0:s1,f:xs:XP:alacrian-armory:static0.0:s1	-	-	-	23c4009444b0	-	0b5d6f1bd552	-	-	2026-11-25	xproof
 3fa5e109-4a67-4523-8183-90e48a906400	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fa5e109-4a67-4523-8183-90e48a906400	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3fa67c92-6328-4d0a-95e3-656d447ab20e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zealots-en-dal:f0t0:s1,f:xs:XP:zealots-en-dal:f0t0:s1	-	-	-	3aa6ded33acb	-	fd4a014de3fe	-	-	2026-11-25	xproof

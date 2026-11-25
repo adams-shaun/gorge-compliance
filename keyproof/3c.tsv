@@ -9,8 +9,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-3c037865-d38c-48da-aee9-308975e12638	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+3c037865-d38c-48da-aee9-308975e12638	cast	cast	agreed	-	F	start	2	0	f:xs:XP:seven-of-nine:cast:s1	-	-	-	23c4009444b0	-	352b9ef612a9	-	-	2026-11-25	xproof
+3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herald-of-torment:f0t0:s1,f:xs:XP:herald-of-torment:f0t0:s1	-	-	-	3aa6ded33acb	-	dd74058759d6	-	-	2026-11-25	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:herald-of-torment:f0t0:s1,f:xs:XP:herald-of-torment:f0t0:s1	-	-	-	3aa6ded33acb	-	dd74058759d6	-	-	2026-11-25	xproof
 3c067370-1e3d-4262-b7d6-f2bb2656b1d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -22,9 +22,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c075bb6-1831-4521-bd8d-4ed2825ae796	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:world-shaper:f0t1:s1,f:xs:XP:world-shaper:f0t1:s1	-	-	-	d864b561c9cb	-	e5820567d430	-	-	2026-11-24	xproof
 3c0be888-0d66-4bad-84f4-90c3934915d7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:falkenrath-celebrants:cast:s1,f:xs:XP:falkenrath-celebrants:cast:s1	-	-	-	d864b561c9cb	-	469241c6b39b	-	-	2026-11-24	xproof
 3c0be888-0d66-4bad-84f4-90c3934915d7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:falkenrath-celebrants:cast:s1,f:xs:XP:falkenrath-celebrants:cast:s1	-	-	-	d864b561c9cb	-	469241c6b39b	-	-	2026-11-24	xproof
-3c0f99b8-0222-4fac-932a-eb5d77826564	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Soulstone Sanctuary/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3c0f99b8-0222-4fac-932a-eb5d77826564	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Soulstone Sanctuary/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3c0f99b8-0222-4fac-932a-eb5d77826564	land	play-land	agreed	-	X	scen	1	0	Soulstone Sanctuary/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3c0f99b8-0222-4fac-932a-eb5d77826564	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:soulstone-sanctuary:f0a1:s1,f:xs:XP:soulstone-sanctuary:f0a1:s1	-	-	-	23c4009444b0	-	f0f1bd04a59e	-	-	2026-11-25	xproof
+3c0f99b8-0222-4fac-932a-eb5d77826564	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:soulstone-sanctuary:f0a1:s1,f:xs:XP:soulstone-sanctuary:f0a1:s1	-	-	-	23c4009444b0	-	f0f1bd04a59e	-	-	2026-11-25	xproof
+3c0f99b8-0222-4fac-932a-eb5d77826564	land	land	agreed	-	FX	start	2	0	x:xs:XP:soulstone-sanctuary:land:s1,f:xs:XP:soulstone-sanctuary:land:s1	-	-	-	23c4009444b0	-	f0f1bd04a59e	-	-	2026-11-25	xproof
 3c0fe71c-bee1-41d3-aeb5-1723028eedde	cast	cast-resolve	agreed	-	X	scen	1	0	Face Yourself/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3c1619bd-db5e-4df6-a196-0a9d62374f6d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:hare-apparent:f0t0:s2,f:xs:XP:hare-apparent:f0t0:s2	-	-	-	e07cf3a05ba5	-	5df2ef1f57e0	-	-	2026-11-24	xproof
 3c1619bd-db5e-4df6-a196-0a9d62374f6d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:hare-apparent:f0t0:s2,f:xs:XP:hare-apparent:f0t0:s2	-	-	-	e07cf3a05ba5	-	5df2ef1f57e0	-	-	2026-11-24	xproof

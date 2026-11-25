@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0527fc47-2bfc-4d02-90fa-5a1284f89a0a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 052838cb-dcf0-46f5-82b1-c3ed863b42b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devastation:cast:s1,f:xs:XP:devastation:cast:s1	-	-	-	8c0bd19283bb	-	914dc4a0c4ea	-	-	2026-11-24	xproof
 0529c6fa-a35f-4d33-b274-93446ce68419	cast	cast-resolve	agreed	-	FX	scen	2	0	Una Chin-Riley, Number One/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0529c6fa-a35f-4d33-b274-93446ce68419	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+0529c6fa-a35f-4d33-b274-93446ce68419	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:una-chin-riley-number-one:f0t0:s1,f:xs:XP:una-chin-riley-number-one:f0t0:s1	-	-	-	23c4009444b0	-	70c683a853d7	-	-	2026-11-25	xproof
 052e8e1c-d006-4c9f-90da-deafbbf7fed3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rankle-s-prank:cast:s1,f:xs:XP:rankle-s-prank:cast:s1	-	-	-	23b491658465	-	9df385bbae96	-	-	2026-11-24	xproof
 0534a514-2847-4dbc-8178-6a2886c75bf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0534e20d-8352-4d9f-a617-378070602673	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:pileated-provisioner:f0t0:s2,f:xs:XP:pileated-provisioner:f0t0:s2	-	-	-	e07cf3a05ba5	-	4dace8718d1f	-	-	2026-11-24	xproof
@@ -68,9 +68,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05551d91-50c6-46d1-86a4-cd3d177d0923	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:anim-pakal-thousandth-moon:f0t0:s1,f:xs:XP:anim-pakal-thousandth-moon:f0t0:s1	-	-	-	3aa6ded33acb	-	d92310c48666	-	-	2026-11-25	xproof
 05608055-d97a-4c8f-833d-47b3dd1ea255	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05608055-d97a-4c8f-833d-47b3dd1ea255	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
-0561043a-3896-4bb1-8ff5-ee674ddfea2a	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+0561043a-3896-4bb1-8ff5-ee674ddfea2a	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 0566ab5d-c804-4ac0-add2-87fc352b4c7e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:phyrexian-awakening:cast:s1,f:xs:XP:phyrexian-awakening:cast:s1	-	-	-	ae86f6029288	-	7698a2d8833b	-	-	2026-11-24	xproof
 0566ab5d-c804-4ac0-add2-87fc352b4c7e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:phyrexian-awakening:cast:s1,f:xs:XP:phyrexian-awakening:cast:s1	-	-	-	ae86f6029288	-	7698a2d8833b	-	-	2026-11-24	xproof
 056770e2-8ab7-424d-a2d8-7be6d6cc73f1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stingerfling-spider:f0t0:s1,f:xs:XP:stingerfling-spider:f0t0:s1	-	-	-	d864b561c9cb	-	915591ade579	-	-	2026-11-24	xproof

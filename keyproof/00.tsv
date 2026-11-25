@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00771a33-7443-43f9-a61e-1737b62b1f81	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:pharika-s-mender:f0t0:s1,f:xs:XP:pharika-s-mender:f0t0:s1	-	-	-	d864b561c9cb	-	6bfc5f3d3e88	-	-	2026-11-24	xproof
 007c110d-4364-41e5-a8bc-6ac05ecbbd00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thopter-assembly:f0t0:s1,f:xs:XP:thopter-assembly:f0t0:s1	-	-	-	3aa6ded33acb	-	83f80da0e9a1	-	-	2026-11-25	xproof
 007c110d-4364-41e5-a8bc-6ac05ecbbd00	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:thopter-assembly:f0t0:s1,f:xs:XP:thopter-assembly:f0t0:s1	-	-	-	3aa6ded33acb	-	83f80da0e9a1	-	-	2026-11-25	xproof
-007d08e8-4db2-47d1-ba39-8bb8efa491a1	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+007d08e8-4db2-47d1-ba39-8bb8efa491a1	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Mirror Universe Intrusion"	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 007f3b20-d58b-4986-8de8-9e419af88628	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vivisection-evangelist:f0t0:s1,f:xs:XP:vivisection-evangelist:f0t0:s1	-	-	-	3aa6ded33acb	-	e641db72b8b9	-	-	2026-11-25	xproof
 007f3b20-d58b-4986-8de8-9e419af88628	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vivisection-evangelist:f0t0:s1,f:xs:XP:vivisection-evangelist:f0t0:s1	-	-	-	3aa6ded33acb	-	e641db72b8b9	-	-	2026-11-25	xproof
 008011e2-7b82-4962-af6e-be627112f37f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -133,7 +133,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00ab9841-934f-4a66-a98d-68d01661b1c9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:squadron-hawk:f0t0:s1,f:xs:XP:squadron-hawk:f0t0:s1	-	-	-	d864b561c9cb	-	b9490648dd17	-	-	2026-11-24	xproof
 00abb43b-550f-42d2-9049-61ac56ff5d8d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00ad27a1-9162-408d-ac75-970e45d7e06c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:patchwork-gnomes:cast:s1,f:xs:XP:patchwork-gnomes:cast:s1	-	-	-	25696bf19d5b	-	583a2075e2ea	-	-	2026-11-24	xproof
-00ad27a1-9162-408d-ac75-970e45d7e06c	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+00ad27a1-9162-408d-ac75-970e45d7e06c	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:patchwork-gnomes:f0a0:s1,f:xs:XP:patchwork-gnomes:f0a0:s1	-	-	-	23c4009444b0	-	583a2075e2ea	-	-	2026-11-25	xproof
 00ad5200-5179-4d1b-8bb3-a09e1b31be58	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Theorix Annex/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00ad5200-5179-4d1b-8bb3-a09e1b31be58	land	play-land	agreed	-	X	scen	1	0	Theorix Annex/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00af96af-5eae-4044-a2f7-a08cd0699d1e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ogre-arsonist:f0t0:s1,f:xs:XP:ogre-arsonist:f0t0:s1	-	-	-	5f2128bf97e4	-	1f373adc750b	-	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00b3971b-5bf7-4a3f-9607-6265f9af9098	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00b50215-e832-417f-9c80-2bc3050b6ebb	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Ham, Peter Porker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00b50215-e832-417f-9c80-2bc3050b6ebb	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00b50215-e832-417f-9c80-2bc3050b6ebb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Spider-Ham, Peter Porker/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+00b50215-e832-417f-9c80-2bc3050b6ebb	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:spider-ham-peter-porker:static0.0:s1,f:xs:XP:spider-ham-peter-porker:static0.0:s1	-	-	-	23c4009444b0	-	26045f2b6f9c	-	-	2026-11-25	xproof
 00b9d3a3-fd64-4757-9159-b3af06b5f5b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sauron-the-lidless-eye:f0t0:s1,f:xs:XP:sauron-the-lidless-eye:f0t0:s1	-	-	-	ae86f6029288	-	b37e70b2fb51	-	-	2026-11-24	xproof
 00b9d3a3-fd64-4757-9159-b3af06b5f5b1	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:sauron-the-lidless-eye:f0a0:s1,f:xs:XP:sauron-the-lidless-eye:f0a0:s1	-	-	-	ae86f6029288	-	b37e70b2fb51	-	-	2026-11-24	xproof
 00b9d3a3-fd64-4757-9159-b3af06b5f5b1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sauron-the-lidless-eye:f0t0:s1,f:xs:XP:sauron-the-lidless-eye:f0t0:s1	-	-	-	ae86f6029288	-	b37e70b2fb51	-	-	2026-11-24	xproof
@@ -208,8 +208,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00f1d167-c143-471d-bd52-da2a65d087c4	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sagu Pummeler/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00f1d167-c143-471d-bd52-da2a65d087c4	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Sagu Pummeler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 00f4cab8-b135-4118-8e3a-92097178abb6	cast	cast-resolve	agreed	-	X	scen	1	0	Saurian Explorer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-00f4cab8-b135-4118-8e3a-92097178abb6	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-00f4cab8-b135-4118-8e3a-92097178abb6	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+00f4cab8-b135-4118-8e3a-92097178abb6	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:saurian-explorer:f0a0:s1,f:xs:XP:saurian-explorer:f0a0:s1	-	-	-	23c4009444b0	-	af2f2a73b2b7	-	-	2026-11-25	xproof
+00f4cab8-b135-4118-8e3a-92097178abb6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:saurian-explorer:f0a0:s1,f:xs:XP:saurian-explorer:f0a0:s1	-	-	-	23c4009444b0	-	af2f2a73b2b7	-	-	2026-11-25	xproof
 00f579f4-2d18-4c7c-91b2-34726b384535	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00f579f4-2d18-4c7c-91b2-34726b384535	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00f82f84-81a5-45e5-9c35-9d627a180950	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:collective-voyage:cast:s1,f:xs:XP:collective-voyage:cast:s1	-	-	-	8c0bd19283bb	-	2c9acd71271b	-	-	2026-11-24	xproof

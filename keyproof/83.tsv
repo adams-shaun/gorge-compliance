@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83798eb8-b14f-4620-bce2-1a6804a24dc7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hawkeye's Bow/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83798eb8-b14f-4620-bce2-1a6804a24dc7	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hawkeye's Bow/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 837c5d0e-0a33-4f9d-ae25-68a687bdf640	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-837c5d0e-0a33-4f9d-ae25-68a687bdf640	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+837c5d0e-0a33-4f9d-ae25-68a687bdf640	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:chrome-host-seedshark:f0t0:s1,f:xs:XP:chrome-host-seedshark:f0t0:s1	-	-	-	23c4009444b0	-	9c8b58130886	-	-	2026-11-25	xproof
 837f72a9-9522-46e9-a48c-c6ff6d0bbe67	cast	cast	diverged	-	-	start	0	2	-	0a520ded0ebd	-	-	d864b561c9cb	-	c9fe5f5589d3	-	-	2026-11-24	xproof
 8381b04a-666b-4e33-b277-6db39fdfe905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8381b04a-666b-4e33-b277-6db39fdfe905	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -138,8 +138,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83a47724-b8d1-4884-9442-b62aa1510dc3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Sinkhole Surveyor/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83a47724-b8d1-4884-9442-b62aa1510dc3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sinkhole Surveyor/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83a47724-b8d1-4884-9442-b62aa1510dc3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sinkhole Surveyor/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83a76601-ef59-4888-af70-5088dd1f504c	cast	cast-resolve	agreed	-	X	scen	1	0	Regal Imperiosaur/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-83a76601-ef59-4888-af70-5088dd1f504c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Regal Imperiosaur/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+83a76601-ef59-4888-af70-5088dd1f504c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:regal-imperiosaur:cast:s1,f:xs:XP:regal-imperiosaur:cast:s1	-	-	-	23c4009444b0	-	ab253b57bf56	-	-	2026-11-25	xproof
+83a76601-ef59-4888-af70-5088dd1f504c	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:regal-imperiosaur:static0.0:s1,f:xs:XP:regal-imperiosaur:static0.0:s1	-	-	-	23c4009444b0	-	ab253b57bf56	-	-	2026-11-25	xproof
 83a81308-4a15-49cd-b2f6-51431cca79e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83abf1d0-04e4-49e5-bf63-59f77829ffd1	cast	cast-resolve	agreed	-	X	scen	1	0	Dragonfly Swarm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83abf1d0-04e4-49e5-bf63-59f77829ffd1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Dragonfly Swarm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

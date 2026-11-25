@@ -39,8 +39,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e26f0b7-20e6-46d5-8130-d98c14d6aa29	land	land	agreed	-	FX	start	2	0	x:xs:XP:temple-of-mystery:f0t0:s1,f:xs:XP:temple-of-mystery:f0t0:s1	-	-	-	8c0bd19283bb	-	139689672cef	-	-	2026-11-24	xproof
 7e280770-9a8f-4445-84d2-3b9cac659136	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e29aae9-815a-4999-ace6-7bc860acde32	cast	cast-resolve	agreed	-	FX	scen	2	0	Engine Rat/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e29aae9-815a-4999-ace6-7bc860acde32	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Engine Rat/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e29aae9-815a-4999-ace6-7bc860acde32	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Engine Rat/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7e29aae9-815a-4999-ace6-7bc860acde32	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:engine-rat:combat0.attack:s1,f:xs:XP:engine-rat:combat0.attack:s1	-	-	-	23c4009444b0	-	7a636c7f2dd0	-	-	2026-11-25	xproof
+7e29aae9-815a-4999-ace6-7bc860acde32	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:engine-rat:combat0.block:s1,f:xs:XP:engine-rat:combat0.block:s1	-	-	-	23c4009444b0	-	7a636c7f2dd0	-	-	2026-11-25	xproof
 7e29aae9-815a-4999-ace6-7bc860acde32	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Engine Rat/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7e2cacae-2934-4ff5-81c6-dfce7a2820ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e2cacae-2934-4ff5-81c6-dfce7a2820ef	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -62,9 +62,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e484372-a052-4df6-a6b2-2c6accccabef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e484372-a052-4df6-a6b2-2c6accccabef	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wretched-throng:f0t0:s1,f:xs:XP:wretched-throng:f0t0:s1	-	-	-	d864b561c9cb	-	d246e1d6128d	-	-	2026-11-24	xproof
 7e4931f4-f518-4200-aad4-4ac8acf202e5	cast	cast-resolve	agreed	-	X	scen	1	0	Knockout Maneuver/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e497f6b-69e1-4fab-bb04-f687c99a8310	cast	cast-resolve	agreed	-	X	scen	1	0	Skyknight Squire/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e497f6b-69e1-4fab-bb04-f687c99a8310	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Skyknight Squire/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7e497f6b-69e1-4fab-bb04-f687c99a8310	static#0.0	static#0.0	agreed	-	X	scen	1	0	Skyknight Squire/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7e497f6b-69e1-4fab-bb04-f687c99a8310	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skyknight-squire:cast:s1,f:xs:XP:skyknight-squire:cast:s1	-	-	-	23c4009444b0	-	f693f2eb32e0	-	-	2026-11-25	xproof
+7e497f6b-69e1-4fab-bb04-f687c99a8310	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skyknight-squire:f0t0:s1,f:xs:XP:skyknight-squire:f0t0:s1	-	-	-	23c4009444b0	-	f693f2eb32e0	-	-	2026-11-25	xproof
+7e497f6b-69e1-4fab-bb04-f687c99a8310	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:skyknight-squire:static0.0:s1,f:xs:XP:skyknight-squire:static0.0:s1	-	-	-	23c4009444b0	-	f693f2eb32e0	-	-	2026-11-25	xproof
 7e4d1ce3-92f0-4acc-962b-8073d41d3673	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e4d1ce3-92f0-4acc-962b-8073d41d3673	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e523d42-c7d8-47d1-8874-230920f03345	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:hearthcage-giant:cast:s1,f:xs:XP:hearthcage-giant:cast:s1	-	-	-	d864b561c9cb	-	ebc47e6a0458	-	-	2026-11-24	xproof

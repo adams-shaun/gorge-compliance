@@ -65,8 +65,8 @@ a0657586-0404-4bb0-a92d-25f040d560c1	cast	cast-resolve	agreed	-	X	scen	1	0	Aberr
 a0657586-0404-4bb0-a92d-25f040d560c1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Aberrant Manawurm/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a0657586-0404-4bb0-a92d-25f040d560c1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aberrant Manawurm/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a0657586-0404-4bb0-a92d-25f040d560c1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Aberrant Manawurm/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a066eeb1-61fc-448b-bbab-650d672652ad	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-a066eeb1-61fc-448b-bbab-650d672652ad	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+a066eeb1-61fc-448b-bbab-650d672652ad	cast	cast	agreed	-	F	start	2	0	f:xs:XP:targ-wrangler:cast:s1	-	-	-	23c4009444b0	-	233e0ad57c8c	-	-	2026-11-25	xproof
+a066eeb1-61fc-448b-bbab-650d672652ad	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:targ-wrangler:f0t0:s1	-	-	-	23c4009444b0	-	233e0ad57c8c	-	-	2026-11-25	xproof
 a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oaken-siren:cast:s1,f:xs:XP:oaken-siren:cast:s1	-	-	-	23b491658465	-	77cac3b757fe	-	-	2026-11-24	xproof
 a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	combat#0.attack	combat.attack	agreed	-	FX	start	1	0	x:xs:XP:oaken-siren:combat0.attack:s1,f:xs:XP:oaken-siren:combat0.attack:s1	-	-	-	3aa6ded33acb	-	77cac3b757fe	-	-	2026-11-25	xproof
 a06a35a9-a23e-4a0a-90bc-84e7a52d2cef	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:oaken-siren:combat0.block:s1,f:xs:XP:oaken-siren:combat0.block:s1	-	-	-	3aa6ded33acb	-	77cac3b757fe	-	-	2026-11-25	xproof
@@ -86,8 +86,8 @@ a0802918-e18a-4716-befb-96ae6667f2f3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a0802918-e18a-4716-befb-96ae6667f2f3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a0802918-e18a-4716-befb-96ae6667f2f3	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a08189f2-1643-496a-8a91-74864528b4db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a08189f2-1643-496a-8a91-74864528b4db	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-a08189f2-1643-496a-8a91-74864528b4db	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+a08189f2-1643-496a-8a91-74864528b4db	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+a08189f2-1643-496a-8a91-74864528b4db	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
 a08475a6-1fac-4a3f-b343-aed16a61bc16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jhoira-s-toolbox:cast:s1,f:xs:XP:jhoira-s-toolbox:cast:s1	-	-	-	5f2128bf97e4	-	35e30688c176	-	-	2026-11-24	xproof
 a08475a6-1fac-4a3f-b343-aed16a61bc16	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:jhoira-s-toolbox:f0a0:s1,f:xs:XP:jhoira-s-toolbox:f0a0:s1	-	-	-	5f2128bf97e4	-	35e30688c176	-	-	2026-11-24	xproof
 a084b37a-bfb2-4dde-9faa-4c55ad894300	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

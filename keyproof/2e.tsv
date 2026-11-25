@@ -156,16 +156,16 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2eb8397a-ba8b-497d-b1f5-a1b09c686597	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2eb8397a-ba8b-497d-b1f5-a1b09c686597	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2ebe4c68-87eb-474d-a4c4-0468835b4900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2ec1860b-89cc-4529-8b8c-fb47f79f2b4b	cast	cast-resolve	agreed	-	X	scen	1	0	Sower of Chaos/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2ec1860b-89cc-4529-8b8c-fb47f79f2b4b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sower of Chaos/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2ec1860b-89cc-4529-8b8c-fb47f79f2b4b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sower-of-chaos:cast:s1,f:xs:XP:sower-of-chaos:cast:s1	-	-	-	23c4009444b0	-	bbe3f40abcb6	-	-	2026-11-25	xproof
+2ec1860b-89cc-4529-8b8c-fb47f79f2b4b	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:sower-of-chaos:f0a0:s1,f:xs:XP:sower-of-chaos:f0a0:s1	-	-	-	23c4009444b0	-	bbe3f40abcb6	-	-	2026-11-25	xproof
 2ec4288e-34c6-4831-a2c0-ba1ca1d9d1dc	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ec4288e-34c6-4831-a2c0-ba1ca1d9d1dc	f0/a1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	0984227a67dd	-	-	-	-	2026-11-24	xproof
 2ec4288e-34c6-4831-a2c0-ba1ca1d9d1dc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ec8c540-73bf-4412-a53a-499e9b9fd213	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ec8c540-73bf-4412-a53a-499e9b9fd213	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ecda53d-ac24-4b28-aed8-2a5fb1449f85	cast	cast-resolve	agreed	-	X	scen	1	0	Worf, Honor-Bound Warrior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2ecda53d-ac24-4b28-aed8-2a5fb1449f85	f0/a0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-2ecda53d-ac24-4b28-aed8-2a5fb1449f85	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+2ecda53d-ac24-4b28-aed8-2a5fb1449f85	f0/a0	PutCounter	agreed	-	F	start	2	0	f:xs:XP:worf-honor-bound-warrior:f0a0:s1	-	-	-	23c4009444b0	-	ae7a4dd9c3fc	-	-	2026-11-25	xproof
+2ecda53d-ac24-4b28-aed8-2a5fb1449f85	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:worf-honor-bound-warrior:f0t0:s1,f:xs:XP:worf-honor-bound-warrior:f0t0:s1	-	-	-	23c4009444b0	-	ae7a4dd9c3fc	-	-	2026-11-25	xproof
 2ecda58d-9aa9-4857-bdc5-b6b7b70a79c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ecf7771-8061-4710-ad2e-80b092ae0b4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2ed1879a-83b8-48df-a6d2-fe28e912b4c5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slagstorm:cast:s1,f:xs:XP:slagstorm:cast:s1	-	-	-	8c0bd19283bb	-	3476b3ea6147	-	-	2026-11-24	xproof

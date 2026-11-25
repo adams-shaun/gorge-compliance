@@ -69,8 +69,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 594c6b1f-ff0e-4122-8b29-852632a22a79	cast	cast-resolve	agreed	-	X	scen	1	0	Michelangelo, Game Master/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 594c6b1f-ff0e-4122-8b29-852632a22a79	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Michelangelo, Game Master/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5951f734-05d3-41ad-94ee-19bd310077d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skyship-buccaneer:f0t0:s1,f:xs:XP:skyship-buccaneer:f0t0:s1	-	-	-	23c4009444b0	-	5a9874d74a2b	-	-	2026-11-25	xproof
-5951f734-05d3-41ad-94ee-19bd310077d2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Skyship Buccaneer/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5951f734-05d3-41ad-94ee-19bd310077d2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Skyship Buccaneer/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5951f734-05d3-41ad-94ee-19bd310077d2	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:skyship-buccaneer:combat0.attack:s1,f:xs:XP:skyship-buccaneer:combat0.attack:s1	-	-	-	23c4009444b0	-	5a9874d74a2b	-	-	2026-11-25	xproof
+5951f734-05d3-41ad-94ee-19bd310077d2	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:skyship-buccaneer:combat0.block:s1,f:xs:XP:skyship-buccaneer:combat0.block:s1	-	-	-	23c4009444b0	-	5a9874d74a2b	-	-	2026-11-25	xproof
 5951f734-05d3-41ad-94ee-19bd310077d2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skyship-buccaneer:f0t0:s1,f:xs:XP:skyship-buccaneer:f0t0:s1	-	-	-	23c4009444b0	-	5a9874d74a2b	-	-	2026-11-25	xproof
 595ae6f1-e66a-4774-943a-9d5368f4a3b4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hornet-cannon:cast:s1,f:xs:XP:hornet-cannon:cast:s1	-	-	-	5f2128bf97e4	-	3c19037e26da	-	-	2026-11-24	xproof
 595ae6f1-e66a-4774-943a-9d5368f4a3b4	f0/a0	Token	agreed	-	F	start	2	0	f:xs:XP:hornet-cannon:f0a0:s1	-	-	-	5f2128bf97e4	-	3c19037e26da	-	-	2026-11-24	xproof
@@ -87,7 +87,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 596237da-3d51-4052-a8ca-2218efc1afb3	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 5963e0ef-e0bc-4611-ad4f-813a4c0eacfb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5963e0ef-e0bc-4611-ad4f-813a4c0eacfb	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5963e0ef-e0bc-4611-ad4f-813a4c0eacfb	f0/a2	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+5963e0ef-e0bc-4611-ad4f-813a4c0eacfb	f0/a2	Pump	agreed	-	FX	start	2	0	x:xs:XP:mishra-s-factory:f0a2:s1,f:xs:XP:mishra-s-factory:f0a2:s1	-	-	-	23c4009444b0	-	39a21b84655f	-	-	2026-11-25	xproof
 5963e0ef-e0bc-4611-ad4f-813a4c0eacfb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5963eef1-1022-42b1-8a0c-fc9850bfc2a3	cast	cast-resolve	agreed	-	X	scen	1	0	Emeritus of Conflict/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5963eef1-1022-42b1-8a0c-fc9850bfc2a3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Emeritus of Conflict/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -133,7 +133,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 59a10335-72df-44a5-a514-5bac392cd282	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Professor Zei, Anthropologist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 59a10335-72df-44a5-a514-5bac392cd282	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Professor Zei, Anthropologist/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 59a4c4cf-07b4-4009-bbea-7da7b31f09a1	cast	cast-resolve	agreed	-	X	scen	1	0	Support Mission/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-59a4c4cf-07b4-4009-bbea-7da7b31f09a1	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+59a4c4cf-07b4-4009-bbea-7da7b31f09a1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:support-mission:f0t0:s1,f:xs:XP:support-mission:f0t0:s1	-	-	-	23c4009444b0	-	362d2b267cb6	-	-	2026-11-25	xproof
 59a82f57-fe2f-4834-a4ee-4b948eef1e12	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59a82f57-fe2f-4834-a4ee-4b948eef1e12	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:horizon-of-progress:f0a1:s1,f:xs:XP:horizon-of-progress:f0a1:s1	-	-	-	8c0bd19283bb	-	b0c1dbc89683	-	-	2026-11-24	xproof
 59a82f57-fe2f-4834-a4ee-4b948eef1e12	f0/a2	Draw	agreed	-	FX	start	2	0	x:xs:XP:horizon-of-progress:f0a0:s1,f:xs:XP:horizon-of-progress:f0a0:s1	-	-	-	8c0bd19283bb	-	b0c1dbc89683	-	-	2026-11-24	xproof

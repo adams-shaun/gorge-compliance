@@ -29,8 +29,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9b183d76-1dee-4ecf-9226-e1aa600b1247	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9b1ae6d8-0cf3-4a67-9241-37f4bc5ddbdd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venser-fervent-forger:f0t0:s1,f:xs:XP:venser-fervent-forger:f0t0:s1	-	-	-	23c4009444b0	-	c6e848f5d57e	-	-	2026-11-25	xproof
 9b1ae6d8-0cf3-4a67-9241-37f4bc5ddbdd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venser-fervent-forger:f0t0:s1,f:xs:XP:venser-fervent-forger:f0t0:s1	-	-	-	23c4009444b0	-	c6e848f5d57e	-	-	2026-11-25	xproof
-9b1d79b7-a812-4f48-9be0-789294da3b56	cast	cast-resolve	agreed	-	X	scen	1	0	Daring Mechanic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9b1d79b7-a812-4f48-9be0-789294da3b56	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Daring Mechanic/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9b1d79b7-a812-4f48-9be0-789294da3b56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:daring-mechanic:cast:s1,f:xs:XP:daring-mechanic:cast:s1	-	-	-	23c4009444b0	-	e88a689c8754	-	-	2026-11-25	xproof
+9b1d79b7-a812-4f48-9be0-789294da3b56	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:daring-mechanic:f0a0:s1,f:xs:XP:daring-mechanic:f0a0:s1	-	-	-	23c4009444b0	-	e88a689c8754	-	-	2026-11-25	xproof
 9b1f0780-072a-4fe6-91d8-e546a8aaea20	cast	cast	agreed	-	F	start	2	0	f:xs:XP:rampaging-aetherhood:f0t0:s1	-	-	-	23c4009444b0	-	5d61a008e60c	-	-	2026-11-25	xproof
 9b1f0780-072a-4fe6-91d8-e546a8aaea20	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:rampaging-aetherhood:f0t0:s1	-	-	-	23c4009444b0	-	5d61a008e60c	-	-	2026-11-25	xproof
 9b1f0780-072a-4fe6-91d8-e546a8aaea20	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

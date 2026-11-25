@@ -144,8 +144,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8aab0b55-2779-43c7-a3ee-151b8e5c72f3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aether-chaser:f0t0:s1,f:xs:XP:aether-chaser:f0t0:s1	-	-	-	d864b561c9cb	-	d591c0673c05	-	-	2026-11-24	xproof
 8aab0b55-2779-43c7-a3ee-151b8e5c72f3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aether-chaser:f0t0:s1,f:xs:XP:aether-chaser:f0t0:s1	-	-	-	d864b561c9cb	-	d591c0673c05	-	-	2026-11-24	xproof
 8aab0b55-2779-43c7-a3ee-151b8e5c72f3	f0/t1	Attacks	agreed	-	X	start	2	0	x:xs:XP:aether-chaser:f0t1:s1	-	-	-	d864b561c9cb	-	d591c0673c05	-	-	2026-11-24	xproof
-8aab9181-c306-471a-8061-9a7a7654dab5	cast	cast-resolve	agreed	-	X	scen	1	0	Thopter Fabricator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8aab9181-c306-471a-8061-9a7a7654dab5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thopter Fabricator/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8aab9181-c306-471a-8061-9a7a7654dab5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thopter-fabricator:cast:s1,f:xs:XP:thopter-fabricator:cast:s1	-	-	-	23c4009444b0	-	da8fd0acd720	-	-	2026-11-25	xproof
+8aab9181-c306-471a-8061-9a7a7654dab5	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:thopter-fabricator:f0a0:s1,f:xs:XP:thopter-fabricator:f0a0:s1	-	-	-	23c4009444b0	-	da8fd0acd720	-	-	2026-11-25	xproof
 8aab9181-c306-471a-8061-9a7a7654dab5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Thopter Fabricator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8aac06d0-c353-4af9-a243-feb59b9d0c54	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8aae3a28-dcf3-460e-89f9-4b0c96d6f55e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -183,7 +183,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ad2ecd5-2d50-4a54-a672-335d7e636a5a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8ad2ecd5-2d50-4a54-a672-335d7e636a5a	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:chakram-retriever:f0t1:s1,f:xs:XP:chakram-retriever:f0t1:s1	-	-	-	23c4009444b0	-	44a69457314d	-	-	2026-11-25	xproof
 8ad4f2fe-6d98-4279-a331-3817d40ae46d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seismic-assault:cast:s1,f:xs:XP:seismic-assault:cast:s1	-	-	-	25696bf19d5b	-	7a3999045d87	-	-	2026-11-24	xproof
-8ad4f2fe-6d98-4279-a331-3817d40ae46d	f0/a0	NULL	owed	refused:scen failed: xengine: parse XMage manifest oracle/compliance/manifests/PIP.json:	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+8ad4f2fe-6d98-4279-a331-3817d40ae46d	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:seismic-assault:f0a0:s1,f:xs:XP:seismic-assault:f0a0:s1	-	-	-	23c4009444b0	-	7a3999045d87	-	-	2026-11-25	xproof
 8ad7fdd2-bff5-4434-a3f9-1f5ce0ed573b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ad7fdd2-bff5-4434-a3f9-1f5ce0ed573b	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:urza-powerstone-prodigy:f0a0:s1,f:xs:XP:urza-powerstone-prodigy:f0a0:s1	-	-	-	ae86f6029288	-	036fbfcf9fe4	-	-	2026-11-24	xproof
 8ad7fdd2-bff5-4434-a3f9-1f5ce0ed573b	f0/t0	NULL	owed	refused:no-generator:trigger:DiscardedAll	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -213,7 +213,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8af6646a-10ba-448b-bd5e-48feb70de5e5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:merfolk-traders:f0t0:s1,f:xs:XP:merfolk-traders:f0t0:s1	-	-	-	8c0bd19283bb	-	7bd5715b3d5d	-	-	2026-11-24	xproof
 8af9d623-efa3-4cbc-a903-aaec32d78b0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8afc00d4-a1c6-4329-af2c-a7f58a0c33e7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruin-crab:cast:s1,f:xs:XP:ruin-crab:cast:s1	-	-	-	25696bf19d5b	-	035948a252f3	-	-	2026-11-24	xproof
-8afc00d4-a1c6-4329-af2c-a7f58a0c33e7	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
+8afc00d4-a1c6-4329-af2c-a7f58a0c33e7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ruin-crab:f0t0:s1,f:xs:XP:ruin-crab:f0t0:s1	-	-	-	23c4009444b0	-	035948a252f3	-	-	2026-11-25	xproof
 8afc6147-80b4-4296-a5aa-ce892cefb1a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:orchard-warden:cast:s1,f:xs:XP:orchard-warden:cast:s1	-	-	-	d864b561c9cb	-	e2c75338ff88	-	-	2026-11-24	xproof
 8afc6147-80b4-4296-a5aa-ce892cefb1a7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 8afe3d28-be3e-416c-9457-8a2af85b2eec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ritual-of-hope:cast:s1,f:xs:XP:ritual-of-hope:cast:s1	-	-	-	d864b561c9cb	-	d62a9bd196d3	-	-	2026-11-24	xproof
