@@ -46,8 +46,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 633fd158-19d0-4d97-a076-2ad897bbed19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 633fd158-19d0-4d97-a076-2ad897bbed19	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:auriok-champion:f0t0:s1,f:xs:XP:auriok-champion:f0t0:s1	-	-	-	23c4009444b0	-	c7d5b18dea2a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6344c96a-efa5-4125-8219-d333228391cf	cast	cast-resolve	agreed	-	FX	scen	2	0	Blazing Crescendo/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6349eecb-dabd-4dcb-a8fb-c8ee66f61461	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Gabriel Lorca, Mirror Menac	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
-6349eecb-dabd-4dcb-a8fb-c8ee66f61461	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+6349eecb-dabd-4dcb-a8fb-c8ee66f61461	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Gabriel Lorca, Mirror Menac	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+6349eecb-dabd-4dcb-a8fb-c8ee66f61461	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 634d5009-cbf3-44cb-8c15-7057f501a210	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trailblazer-s-boots:cast:s1,f:xs:XP:trailblazer-s-boots:cast:s1	-	-	-	8a1b1a193ec0	-	22715c7ad697	-	-	2026-11-24	xproof
 634d5009-cbf3-44cb-8c15-7057f501a210	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:trailblazer-s-boots:f0a0:s1,f:xs:XP:trailblazer-s-boots:f0a0:s1	-	-	-	3aa6ded33acb	-	22715c7ad697	-	-	2026-11-25	xproof
 634d6357-af76-4e25-8c63-81522bc726f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -114,7 +114,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63908256-a8a4-494f-b5b1-4b92c064af1d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6397c046-4c59-4f0b-9b44-2a804eb95edf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 639a8804-8513-4ba4-8683-ea1e2e5a9530	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-639a8804-8513-4ba4-8683-ea1e2e5a9530	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+639a8804-8513-4ba4-8683-ea1e2e5a9530	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 63a0f0a2-bafc-4cd0-a4ed-42ce58cd3e9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 63a0f0a2-bafc-4cd0-a4ed-42ce58cd3e9b	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 63a19c7c-49d7-4b75-aac8-d0ff36c45fb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sowing-mycospawn:cast:s1,f:xs:XP:sowing-mycospawn:cast:s1	-	-	-	ae86f6029288	-	650db50d193b	-	-	2026-11-24	xproof
@@ -193,4 +193,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 63f67baa-3f37-41b8-9ee6-3c37f828917d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Prudent Fateseer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63f67baa-3f37-41b8-9ee6-3c37f828917d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Prudent Fateseer/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 63fd2a57-7a47-4e07-947c-f4e9da7ee538	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-63fd2a57-7a47-4e07-947c-f4e9da7ee538	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+63fd2a57-7a47-4e07-947c-f4e9da7ee538	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof

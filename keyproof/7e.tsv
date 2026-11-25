@@ -23,7 +23,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7e10c141-dfb0-409b-b8c9-cdfe93b42a06	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wreck-and-rebuild:cast:s1,f:xs:XP:wreck-and-rebuild:cast:s1	-	-	-	8c0bd19283bb	-	c5e57ae05344	-	-	2026-11-24	xproof
 7e162cc1-9482-4812-8897-209ec2927ec0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7e162cc1-9482-4812-8897-209ec2927ec0	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:lesser-gargadon:f0t0:s1,f:xs:XP:lesser-gargadon:f0t0:s1	-	-	-	d864b561c9cb	-	a8153ac352a8	-	-	2026-11-24	xproof
-7e162cc1-9482-4812-8897-209ec2927ec0	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+7e162cc1-9482-4812-8897-209ec2927ec0	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 7e16595f-bdeb-422e-b99a-bfc0ed52e9f8	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:restless-cottage:f0a0:s1,f:xs:XP:restless-cottage:f0a0:s1	-	-	-	23b491658465	-	31f3e77644f1	-	-	2026-11-24	xproof
 7e16595f-bdeb-422e-b99a-bfc0ed52e9f8	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:restless-cottage:f0a1:s1,f:xs:XP:restless-cottage:f0a1:s1	-	-	-	23b491658465	-	31f3e77644f1	-	-	2026-11-24	xproof
 7e16595f-bdeb-422e-b99a-bfc0ed52e9f8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:restless-cottage:f0a1:s1,f:xs:XP:restless-cottage:f0a1:s1	-	-	-	23b491658465	-	31f3e77644f1	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7ece47b1-0b4b-40ac-a90f-4573a8e3b8bd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:seismic-tutelage:f0t0:s1,f:xs:XP:seismic-tutelage:f0t0:s1	-	-	-	8c0bd19283bb	-	7e58bfb7043c	-	-	2026-11-24	xproof
 7ece47b1-0b4b-40ac-a90f-4573a8e3b8bd	f0/t1	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 7ecfa47e-1165-46a6-884c-290b1c14d020	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:etched-oracle:cast:s1,f:xs:XP:etched-oracle:cast:s1	-	-	-	25696bf19d5b	-	a804c3de1b42	-	-	2026-11-24	xproof
-7ecfa47e-1165-46a6-884c-290b1c14d020	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+7ecfa47e-1165-46a6-884c-290b1c14d020	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 7ed3918d-509a-4fe6-a32d-5899df8f9046	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 7ed4afc9-959a-4868-8f4a-2221bea1ba32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:intrepid-rabbit:f0t1:s1,f:xs:XP:intrepid-rabbit:f0t1:s1	-	-	-	23c4009444b0	-	5103cd45c297	-	-	2026-11-25	xproof
 7ed4afc9-959a-4868-8f4a-2221bea1ba32	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:intrepid-rabbit:f0t1:s1,f:xs:XP:intrepid-rabbit:f0t1:s1	-	-	-	23c4009444b0	-	5103cd45c297	-	-	2026-11-25	xproof

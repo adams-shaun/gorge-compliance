@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 3501a839-eef5-44e4-8637-b5754780454e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3501ed98-473c-4a17-8b5f-1e0c00ee75da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 3501ed98-473c-4a17-8b5f-1e0c00ee75da	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:salvaging-station:f0t0:s1,f:xs:XP:salvaging-station:f0t0:s1	-	-	-	23c4009444b0	-	0d7821a03a78	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 35023c04-ae62-47bf-80a0-faa2d7a67788	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haazda-officer:f0t0:s1,f:xs:XP:haazda-officer:f0t0:s1	-	-	-	d864b561c9cb	-	d1779b887a80	-	-	2026-11-24	xproof
 35023c04-ae62-47bf-80a0-faa2d7a67788	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:haazda-officer:f0t0:s1,f:xs:XP:haazda-officer:f0t0:s1	-	-	-	d864b561c9cb	-	d1779b887a80	-	-	2026-11-24	xproof
@@ -117,7 +117,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3589bcfc-42b0-414a-adce-bc690dc631c8	land	land	agreed	-	FX	start	4	0	x:xs:XP:windbrisk-heights:f0t0:s1,f:xs:XP:windbrisk-heights:f0t0:s1	-	-	-	d864b561c9cb	-	a2bf1e40e73f	-	-	2026-11-24	xproof
 358cfcf3-8ad0-4877-a59a-76ee269169fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35906166-71d1-4089-bbe4-4055edb81fb0	cast	cast-resolve	agreed	-	X	scen	1	0	Conquest Mission/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-35906166-71d1-4089-bbe4-4055edb81fb0	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+35906166-71d1-4089-bbe4-4055edb81fb0	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 35922a30-6b84-44dd-a2f0-306554a1ae90	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:smelt-ward-gatekeepers:f0t0:s1,f:xs:XP:smelt-ward-gatekeepers:f0t0:s1	-	-	-	23b491658465	-	c8f2fb5e5fc3	-	-	2026-11-24	xproof
 35922a30-6b84-44dd-a2f0-306554a1ae90	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 35922a30-6b84-44dd-a2f0-306554a1ae90	f0/a2	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -183,4 +183,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35f09a11-1d9b-4dfd-9695-b809c871f10d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35f63c60-b0a1-459d-bf51-a8549fb06930	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35f63c60-b0a1-459d-bf51-a8549fb06930	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35f63c60-b0a1-459d-bf51-a8549fb06930	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+35f63c60-b0a1-459d-bf51-a8549fb06930	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
