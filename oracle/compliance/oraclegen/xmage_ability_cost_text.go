@@ -98,11 +98,12 @@ var (
 
 // xmageCostText rewrites the cost portion of an ability line (the text before
 // its first ": ", already {this}-rewritten by selfRef) into XMage's rule text.
-// The short-name rewrite applies after the header split, so an ability word
-// that names the card ("Calim's Breath — ") keeps its printed spelling.
-func xmageCostText(cost, sourceName string) string {
+// shortName is the face's short form (faceShortName), rewritten only inside
+// the cost, after the header split, so an ability word that names the card
+// ("Calim's Breath — ") keeps its printed spelling.
+func xmageCostText(cost, sourceName, shortName string) string {
 	header, rest, keywordHeader := splitDashHeader(cost)
-	rest = shortSelfRef(rest, sourceName)
+	rest = shortSelfRef(rest, sourceName, shortName)
 	rest = tightCommaRE.ReplaceAllString(rest, "$1, $2")
 	if xmageSeparateExileItCards[sourceName] {
 		rest = strings.Replace(rest, " and exile it", ", Exile it", 1)
@@ -161,37 +162,37 @@ func xmageCostPart(part string) string {
 
 // xmageRuleLine is selfRef followed by xmageCostText on the text before the
 // line's first ": ".
-func xmageRuleLine(line, sourceName string) string {
+func xmageRuleLine(line, sourceName, shortName string) string {
 	line = selfRef(line, sourceName)
 	i := strings.Index(line, ": ")
 	if i < 0 {
 		return line
 	}
-	return xmageCostText(strings.TrimSpace(line[:i]), sourceName) + line[i:]
+	return xmageCostText(strings.TrimSpace(line[:i]), sourceName, shortName) + line[i:]
 }
 
-// shortSelfRef rewrites a comma-named card's short name ("Ramos" for
-// "Ramos, Dragon Engine") to {this} in the COST portion of a line only. The
-// Oracle names the card by its short name where XMage's cost text has {this}:
-// RemoveCountersSourceCost renders "remove five +1/+1 counters from {this}"
-// and SacrificeSourceCost "sacrifice {this}", so "Remove five +1/+1 counters
-// from Ramos" selects nothing in XMage. Rule text after the colon is left
-// alone: an extension through it still fails closed (namesShortName), since
-// the effect's own spelling is not derivable here.
-func shortSelfRef(cost, sourceName string) string {
-	short, _, ok := strings.Cut(sourceName, ",")
-	short = strings.TrimSpace(short)
-	if !ok || short == "" {
+// shortSelfRef rewrites the face's short name (shortName) to {this} in the
+// COST portion of a line only. The Oracle names the card by its short form
+// where XMage's cost text has {this}: RemoveCountersSourceCost renders
+// "remove five +1/+1 counters from {this}", SacrificeSourceCost "sacrifice
+// {this}" (KingDarienXLVIII.java's SacrificeSourceCost), so "Remove five
+// +1/+1 counters from Ramos" or "Sacrifice King Darien" selects nothing in
+// XMage. Rule text after the colon is left alone: an extension through it
+// still fails closed (namesShortName), since the effect's own spelling is not
+// derivable here.
+func shortSelfRef(cost, sourceName, shortName string) string {
+	shortName = strings.TrimSpace(shortName)
+	if shortName == "" || strings.EqualFold(shortName, sourceName) {
 		return cost
 	}
 	var out strings.Builder
 	for {
-		i := strings.Index(cost, short)
+		i := strings.Index(cost, shortName)
 		if i < 0 {
 			out.WriteString(cost)
 			return out.String()
 		}
-		end := i + len(short)
+		end := i + len(shortName)
 		// "Tocasia, Digsite Mentor" is the full name spelled differently
 		// from Forge's, not a short-name reference; leave it alone.
 		if wordByte(cost, i-1) || wordByte(cost, end) || strings.HasPrefix(cost[end:], ", ") {

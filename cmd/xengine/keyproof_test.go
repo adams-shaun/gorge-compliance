@@ -230,6 +230,7 @@ func (fx *kpFixture) stepUsesAt(t *testing.T, id string, step int) map[classify.
 var hex12 = regexp.MustCompile(`^[0-9a-f]{12}$`)
 
 func TestKeyproofAgreeAndDiverge(t *testing.T) {
+	t.Parallel()
 	fx := newKpFixture(t)
 	out := filepath.Join(fx.tmp, "out")
 	if err := keyproof(fx.reg, fx.args(out, "")); err != nil {
@@ -348,6 +349,7 @@ func TestKeyproofAgreeAndDiverge(t *testing.T) {
 }
 
 func TestKeyproofClassClears(t *testing.T) {
+	t.Parallel()
 	fx := newKpFixture(t)
 	first := filepath.Join(fx.tmp, "first")
 	if err := keyproof(fx.reg, fx.args(first, "")); err != nil {
@@ -394,6 +396,7 @@ func TestKeyproofClassClears(t *testing.T) {
 }
 
 func TestKeyproofCostWords(t *testing.T) {
+	t.Parallel()
 	for cost, want := range map[string]string{
 		"T":                       "T",
 		"2 G T":                   "T",
@@ -412,6 +415,7 @@ func TestKeyproofCostWords(t *testing.T) {
 // adjudicate -classes: a row matching the diverging item's signature labels
 // the finding and its row; no rows change nothing.
 func TestAdjudicateDiagnoses(t *testing.T) {
+	t.Parallel()
 	fx := newKpFixture(t)
 	in, err := adjudicate.Load(fx.play, fx.xd, fx.fd, fx.xrows, fx.frows)
 	if err != nil {
@@ -471,6 +475,7 @@ func (fx *kpFixture) onlySecond(t *testing.T) []classify.Use {
 // Forge leads (operator 11-24): XMage alone differing leaves the key agreed with
 // refs F, and its signature is still handed off as a follower-only (GF|X, P2) row.
 func TestKeyproofXMageOnlyDiffersCreditsForge(t *testing.T) {
+	t.Parallel()
 	fx := newKpFixtureMode(t, kpXMageOnly)
 	byKey, hand := fx.keyRows(t, filepath.Join(fx.tmp, "out"))
 	for _, u := range fx.onlySecond(t) {
@@ -492,6 +497,7 @@ func TestKeyproofXMageOnlyDiffersCreditsForge(t *testing.T) {
 // Forge differing is a gorge-suspect divergence even when XMage agrees with
 // gorge: never credited, handed off at P1.
 func TestKeyproofForgeOnlyDiffersDiverges(t *testing.T) {
+	t.Parallel()
 	fx := newKpFixtureMode(t, kpForgeOnly)
 	byKey, hand := fx.keyRows(t, filepath.Join(fx.tmp, "out"))
 	for u := range fx.stepUses(t) {
@@ -522,6 +528,7 @@ func TestKeyproofForgeOnlyDiffersDiverges(t *testing.T) {
 // XMage with no answer (harness, not_sent, decision_shape ...) and Forge
 // agreeing credits the key with refs F; both agreeing stays FX.
 func TestKeyproofXMageQuietCreditsForge(t *testing.T) {
+	t.Parallel()
 	fx := newKpFixtureMode(t, kpXMageQuiet)
 	byKey, hand := fx.keyRows(t, filepath.Join(fx.tmp, "out"))
 	second := fx.full(t, fx.ids[1])

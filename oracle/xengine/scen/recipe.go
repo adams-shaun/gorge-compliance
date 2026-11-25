@@ -815,6 +815,26 @@ func inertRank(f *cards.Face) int {
 	return 0
 }
 
+// enablerRank is inertRank plus a penalty for every battlefield-entry
+// replacement effect the placed card brings. The setup placement re-runs a
+// Moved replacement (K:ETBReplacement and the printed R:Event$ Moved lines),
+// and a body that asks an as-enters choice (Realmwright's basic land type)
+// leaves state the scenario cannot restate, so the cut refuses the start.
+// Ranking a replacement-bearing card behind one without keeps Wizard's Retort
+// off Realmwright. Only entry replacements are penalized: an ordinary trigger
+// or static (Shield Sphere's block trigger, Lunarch Veteran's life trigger) is
+// not a shape the gate refuses, and penalizing it would reorder enabler picks
+// outside that shape.
+func enablerRank(f *cards.Face) int {
+	r := inertRank(f)
+	for i := range f.Repls {
+		if f.Repls[i].Event == "Moved" {
+			r += 3
+		}
+	}
+	return r
+}
+
 // pickEnabler meets one need on seat s from certdeck's picks (in its
 // ranking): the most inert pick FieldBlock admits goes on the battlefield;
 // failing one, a pick goes in hand with the lands for its mana cost on the
@@ -842,9 +862,16 @@ func pickEnabler(reg *cards.Registry, b *certdeck.Builder, s *StartSeat, offTurn
 	if len(picks) == 0 {
 		return nil
 	}
+	// A battlefield pick must have no beginning-of-upkeep or draw trigger. The
+	// span can only decline an optional one whose probe asks a plain
+	// trigger_optional yes/no; an enabler's trigger is incidental, and if it
+	// asks anything else (Drifter il-Dal's "sacrifice unless you pay {U}" is a
+	// choose_n ask) the placement refuses the span. Skip such picks for the
+	// battlefield (they can still go in hand below); the next enabler of the
+	// need takes their place.
 	best := -1
 	for i, f := range faces {
-		if FieldBlock(f) == "" && (best < 0 || inertRank(f) < inertRank(faces[best])) {
+		if FieldBlock(f) == "" && !upkeepOrDraw(f) && (best < 0 || enablerRank(f) < enablerRank(faces[best])) {
 			best = i
 		}
 	}

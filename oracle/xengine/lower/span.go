@@ -1,6 +1,8 @@
 package lower
 
 import (
+	"slices"
+
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -29,7 +31,7 @@ func Span(reg *cards.Registry, pair []decks.Deck, seed uint64, opt game.Options,
 			if r := seatRefusal(len(pair)); r != nil {
 				first = &cut{Entry: entry, Turn: e.G.Turn, Reasons: r}
 			} else {
-				first = capture(e, entry, xmage)
+				first = captureStart(e, entry, xmage)
 			}
 		}
 		if user != nil {
@@ -55,7 +57,19 @@ func Span(reg *cards.Registry, pair []decks.Deck, seed uint64, opt game.Options,
 		return Lowered{}, nil, t, err
 	}
 	if why := setupAnswerReasons(reg, l.Item); len(why) > 0 {
-		return Lowered{}, why, t, nil
+		// The drive walks turn 1's upkeep, so a placed permanent's optional
+		// upkeep trigger asks again after the cut already carries its result.
+		// Decline it (the trigger's state is in the setup); only a probe that
+		// then has no fallback left accepts the span.
+		if slices.Contains(why, reasonSetupAnswer+"yesno") {
+			if ans := startPhaseTriggerDeclines(reg, l.Item); len(ans) > 0 {
+				l.Item.Scenario.SetupAnswers = append(l.Item.Scenario.SetupAnswers, ans...)
+				why = setupAnswerReasons(reg, l.Item)
+			}
+		}
+		if len(why) > 0 {
+			return Lowered{}, why, t, nil
+		}
 	}
 	return l, nil, t, nil
 }

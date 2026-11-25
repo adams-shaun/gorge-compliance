@@ -1271,10 +1271,10 @@ func TestStartStaticObserved(t *testing.T) {
 // refused by name. A 0/0 creature with an enters-with-counters replacement (Endless
 // One, Ugin's Conjurant, Phyrexian Marauder) dies to SBA when a start places it, so
 // it is never an enabler or a bearer: Branching Bolt and Cloak of Confusion get a
-// creature that lives. Bone to Ash targets a spell on the stack, which a start
-// cannot have at main 1; Burning Oil's attacking or blocking creature is a
-// scripted attack (StartFocus.Attack), and Maze of Shadows' attacking creature
-// with shadow one no carrier meets.
+// creature that lives. Bone to Ash targets a creature spell, so it gets a scripted
+// bait cast (StartFocus.Bait, TestStartstacktarget); Burning Oil's attacking or
+// blocking creature is a scripted attack (StartFocus.Attack), and Maze of Shadows'
+// attacking creature with shadow one no carrier meets.
 func TestStartFocusIsOffered(t *testing.T) {
 	reg, b := testBuilder(t)
 	creature := func(names []string) bool {
@@ -1295,7 +1295,11 @@ func TestStartFocusIsOffered(t *testing.T) {
 				t.Error("p1 has no permanent for the you-don't-control target")
 			}
 		}},
-		{card: "Bone to Ash", key: "cast", reason: "start:needs-stack-target"},
+		{card: "Bone to Ash", key: "cast", check: func(t *testing.T, f *StartFile) {
+			if f.Focus.Bait == "" || !slices.Contains(f.Setup.P1.Hand, f.Focus.Bait) {
+				t.Errorf("focus %+v p1 hand %v, want a bait spell the opponent casts", f.Focus, f.Setup.P1.Hand)
+			}
+		}},
 		{card: "Burning Oil", key: "cast", check: func(t *testing.T, f *StartFile) {
 			// the attacking target is a carrier of p0's that attacks first
 			if f.Focus.Attack == "" || f.Focus.Block != "" || f.Active != 0 || !slices.Contains(f.Setup.P0.Battlefield, f.Focus.Attack) {
@@ -1353,6 +1357,65 @@ func TestStartFocusIsOffered(t *testing.T) {
 				}
 			}
 			r.check(t, res.Start)
+		})
+	}
+}
+
+// TestStartstacktarget: a focus play that targets a plain spell needs a spell
+// on the stack, and a start holds at main 1 with an empty one, so the 304
+// corpus cast keys whose ability has an exact TargetType$ Spell were refused as
+// start:needs-stack-target (Absorb, Bone to Ash, ...). The start now scripts
+// the opponent's bait cast (Focus.Bait): the most inert spell of the kind the
+// target filter takes, in the opponent's hand with its lands, so the focus play
+// has a legal target (CR 115.1a).
+func TestStartstacktarget(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct {
+		card string
+		// creature is whether the key's target must be a creature spell
+		// (Bone to Ash's "Counter target creature spell").
+		creature bool
+	}{
+		{card: "Absorb"},                      // Counter target spell
+		{card: "Admiral's Order"},             // Counter target spell
+		{card: "Assert Authority"},            // Counter target spell, exile instead
+		{card: "Condescend"},                  // Counter target spell unless its controller pays {X}
+		{card: "Bone to Ash", creature: true}, // Counter target creature spell
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := Generate(reg, b, c.card, "cast", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Focus == nil || f.Focus.Bait == "" {
+				t.Fatalf("focus %+v, want a scripted bait cast", f.Focus)
+			}
+			if !slices.Contains(f.Setup.P1.Hand, f.Focus.Bait) {
+				t.Errorf("p1 hand %v does not list the bait %q", f.Setup.P1.Hand, f.Focus.Bait)
+			}
+			bc, ok := reg.Lookup(f.Focus.Bait)
+			if !ok || len(bc.Faces) == 0 {
+				t.Fatalf("bait %q is not a card", f.Focus.Bait)
+			}
+			bait := bc.Faces[0]
+			if bait.IsLand() {
+				t.Errorf("bait %q is a land, which is not a spell", f.Focus.Bait)
+			}
+			if c.creature && !bait.IsCreature() {
+				t.Errorf("bait %q is not a creature spell for a creature-spell target", f.Focus.Bait)
+			}
+			if c.creature && f.Active != 1 {
+				// a creature spell can only be cast on its controller's main
+				// phase, so the bait seat is the active one
+				t.Errorf("active %d, want the bait seat 1", f.Active)
+			}
+			if col := firstColour(bait.ManaCost); col != "" && !slices.Contains(f.Setup.P1.Battlefield, basicOf[col]) {
+				t.Errorf("p1 battlefield %v has no %s to pay the bait", f.Setup.P1.Battlefield, basicOf[col])
+			}
 		})
 	}
 }
@@ -1690,6 +1753,127 @@ func TestStarttokensteps(t *testing.T) {
 			}
 			if !reflect.DeepEqual(back, res.Start) {
 				t.Errorf("%s %s: token start round trip differs:\n%+v\n%+v", tc.card, tc.key, back, res.Start)
+			}
+		})
+	}
+}
+
+// TestStartStackTargetTargetingRefused: a stack target with a
+// TargetValidTargeting$ restriction (Keep Safe's "target spell that targets a
+// permanent you control") is not met by any inert bait, because an inert bait
+// has no target of its own. The start generator used to accept the first
+// no-target instant anyway and wrote a start whose focus play was never
+// offered (xengine play refused it as start-not-exercised). Each of these keys
+// must keep the clean start:needs-stack-target refusal instead.
+func TestStartStackTargetTargetingRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Keep Safe", "cast"},          // Permanent.YouCtrl+inRealZoneBattlefield
+		{"Outwit", "cast"},             // Player
+		{"Intervene", "cast"},          // Creature.inRealZoneBattlefield
+		{"Avoid Fate", "cast"},         // Permanent.YouCtrl+inRealZoneBattlefield
+		{"Hindering Light", "cast"},    // Permanent.YouCtrl+inRealZoneBattlefield,You
+		{"Confound", "cast"},           // Creature.inRealZoneBattlefield
+		{"Psychic Rebuttal", "cast"},   // You
+		{"Turn Aside", "cast"},         // Permanent.YouCtrl+inRealZoneBattlefield
+		{"Rebuff the Wicked", "cast"},  // Permanent.YouCtrl+inRealZoneBattlefield
+		{"Not of This World", "cast"},  // Permanent.YouCtrl+inRealZoneBattlefield
+		{"Teferi's Response", "cast"},  // Land.YouCtrl+inRealZoneBattlefield
+		{"Ring of Immortals", "f0/a0"}, // ability: Permanent.YouCtrl+inRealZoneBattlefield
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := Generate(reg, b, c.card, c.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathRefused || res.Reason != reasonNeedsStackTarget {
+				t.Fatalf("path %q reason %q, want refused %q (start %+v)", res.Path, res.Reason, reasonNeedsStackTarget, res.Start)
+			}
+		})
+	}
+}
+
+// TestStartStackTargetUnbaitedCastModeRefused: Wash Away has two cast modes.
+// Its default mode targets a spell "that wasn't cast from its owner's hand",
+// which no bait cast from the hand can be; the cleave mode can be baited, but
+// the start does not script which mode the bot takes. The generator used to
+// pick the cleave mode's bait and write a start the bot then played in the
+// default mode, so the focus play was never offered (start-not-exercised).
+func TestStartStackTargetUnbaitedCastModeRefused(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Wash Away", "cast", Options{Prefer: "start"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Path != PathRefused || res.Reason != reasonNeedsStackTarget {
+		t.Fatalf("path %q reason %q, want refused %q (start %+v)", res.Path, res.Reason, reasonNeedsStackTarget, res.Start)
+	}
+}
+
+// TestStackBaitTiming: the bait is on the stack when the focus play is taken,
+// so only an instant or a flash card can be the focus (CR 117.1a: a sorcery or
+// permanent spell needs an empty stack). The old check keyed off the bait's
+// speed, so an instant bait let a sorcery-speed focus through even though it
+// could never be cast.
+func TestStackBaitTiming(t *testing.T) {
+	reg, _ := testBuilder(t)
+	for _, tc := range []struct {
+		card string
+		want bool
+	}{
+		{"Absorb", true},              // instant
+		{"Bone to Ash", true},         // instant
+		{"Reach Through Mists", true}, // instant
+		{"Ambush Viper", true},        // creature with flash
+		{"Grizzly Bears", false},      // creature, no flash
+	} {
+		c, ok := reg.Lookup(tc.card)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%s is not a card", tc.card)
+		}
+		if got := castableWithBait(c.Faces[0]); got != tc.want {
+			t.Errorf("castableWithBait(%s) = %v, want %v", tc.card, got, tc.want)
+		}
+	}
+}
+
+// TestStackBaitTimingAtCallSite drives the timing guard through
+// focusPlayRefusal, not castableWithBait alone: the same counterspell as an
+// instant is offered a bait, as a sorcery or a non-flash permanent spell it
+// keeps the refusal (CR 117.1a: it cannot be cast with the bait on the stack),
+// and with Flash it is offered one again. No corpus card is a non-instant that
+// needs a stack target, so the face is built from Absorb's abilities.
+func TestStackBaitTimingAtCallSite(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Absorb", "cast", Options{Prefer: "start"})
+	if err != nil || res.Path != PathStart || res.Start == nil {
+		t.Fatalf("Absorb: %+v, %v, want a start file", res, err)
+	}
+	c, ok := reg.Lookup("Absorb")
+	if !ok || len(c.Faces) == 0 {
+		t.Fatal("Absorb is not a card")
+	}
+	base := c.Faces[0]
+	for _, tc := range []struct {
+		name     string
+		types    []string
+		keywords []string
+		want     string
+	}{
+		{"instant", []string{"Instant"}, nil, ""},
+		{"sorcery", []string{"Sorcery"}, nil, reasonNeedsStackTarget},
+		{"creature", []string{"Creature"}, nil, reasonNeedsStackTarget},
+		{"flash creature", []string{"Creature"}, []string{"Flash"}, ""},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			face := &cards.Face{Name: base.Name, ManaCost: base.ManaCost, Types: tc.types,
+				Keywords: tc.keywords, Abilities: base.Abilities, SVars: base.SVars}
+			got, err := focusPlayRefusal(reg, b, face, nil, "Absorb", res.Start)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if got != tc.want {
+				t.Errorf("focusPlayRefusal(%s Absorb) = %q, want %q", tc.name, got, tc.want)
 			}
 		})
 	}
@@ -2235,5 +2419,61 @@ func TestStartTransformedTrigger(t *testing.T) {
 		if !slices.Contains(f.Setup.P0.Battlefield, tc.card) {
 			t.Errorf("%s %s: p0 battlefield %v, want the card front-up", tc.card, tc.key, f.Setup.P0.Battlefield)
 		}
+	}
+}
+
+// TestStarttappedtarget: a target whose filter names a battlefield state, not
+// a face property ("target tapped creature", Aerial Assault's
+// ValidTgts$ Creature.tapped), was read as unknown: the start refused as
+// start:needs-target. Placing the carrier without recording its state would
+// write a file whose focus play the game never offers (start-not-exercised),
+// so the placed target must also be listed in the seat's Tapped. The untapped
+// form of the same filter (Asphyxiate) must place an untapped target.
+func TestStarttappedtarget(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, tc := range []struct {
+		card   string
+		tapped bool
+	}{
+		{"Aerial Assault", true}, // ValidTgts$ Creature.tapped
+		{"Vengeance", true},      // ValidTgts$ Creature.tapped
+		{"Asphyxiate", false},    // ValidTgts$ Creature.untapped
+	} {
+		t.Run(tc.card, func(t *testing.T) {
+			res, err := Generate(reg, b, tc.card, "cast", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			var creatures []string
+			for _, name := range f.Setup.P1.Battlefield {
+				c, ok := reg.Lookup(name)
+				if ok && len(c.Faces) > 0 && c.Faces[0].IsCreature() {
+					creatures = append(creatures, name)
+				}
+			}
+			if len(creatures) == 0 {
+				t.Fatalf("p1 battlefield %v holds no target creature", f.Setup.P1.Battlefield)
+			}
+			if tc.tapped {
+				if len(f.Setup.P1.Tapped) == 0 {
+					t.Errorf("p1 tapped %v is empty, want a tapped target (%v)", f.Setup.P1.Tapped, creatures)
+				}
+				for _, name := range f.Setup.P1.Tapped {
+					if !slices.Contains(creatures, name) {
+						t.Errorf("p1 tapped %v names %q, not a target creature (%v)", f.Setup.P1.Tapped, name, creatures)
+					}
+				}
+			} else {
+				for _, name := range creatures {
+					if slices.Contains(f.Setup.P1.Tapped, name) {
+						t.Errorf("%s is tapped, want an untapped target", name)
+					}
+				}
+			}
+		})
 	}
 }

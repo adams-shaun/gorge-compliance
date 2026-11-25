@@ -37,6 +37,14 @@ const reasonStartNotExercised = "start-not-exercised"
 // face and must not credit the back-face key.
 const reasonStartFaceLost = "start-face-lost"
 
+// reasonStartRoomLocked is the refusal of a start that places a Room on the
+// battlefield and focuses a door's ability: a Room that enters without being
+// cast as a door gets neither unlocked designation (CR 709.5d), so it has no
+// name and none of that door's rules text (CR 709.5). The CR 709.5e unlock
+// special action is an explicit step that no scenario op drives through all
+// three runners, so the start would exercise nothing of the key.
+const reasonStartRoomLocked = "start-room-locked"
+
 // startDeckSize is the size a seat's deck is filled to with basics.
 const startDeckSize = 40
 
@@ -111,6 +119,9 @@ type startFocus struct {
 	Ability int    `json:"ability"`
 	Mode    string `json:"mode"`
 	Times   int    `json:"times"`
+	// Bait is the spell the focus seat's opponent casts before the focus play
+	// (game.Focus.Bait).
+	Bait string `json:"bait"`
 	// Targets are the permanents the focus play must target, in the order the
 	// play asks for them (game.Focus.Targets).
 	Targets []string `json:"targets"`
@@ -253,6 +264,7 @@ func (f *startFile) focusOf() (game.Focus, error) {
 			out.Kind, out.Ability, out.Mode, out.Times = o.Kind, o.Ability, o.Mode, o.Times
 		}
 		out.Attack, out.Block = o.Attack, o.Block
+		out.Bait = o.Bait
 		out.Targets = o.Targets
 	}
 	if out.Seat < 0 || out.Seat > 1 {
@@ -501,6 +513,34 @@ func backFaceLost(reg *cards.Registry, f *startFile, it oraclegen.Item) string {
 	return ""
 }
 
+// roomDoorLocked reports the Room, by the start's spelling, that setup places
+// on a battlefield while the start's focus is a door's ability, or "". A Room
+// placed by setup was not cast as a door, so it enters with neither unlocked
+// designation (CR 709.5d) and none of either door's rules text is live
+// (CR 709.5); the key's static, trigger or activation would never be
+// exercised. A "cast" focus is the one shape that unlocks the door it casts
+// (CR 709.5d), so it stays a valid start. The test is role-based (the card's
+// Room type), not a list of key spellings: every key family of a setup Room
+// is covered, and a new one cannot slip through.
+func roomDoorLocked(reg *cards.Registry, f *startFile, focus game.Focus) string {
+	if focus.Kind == "cast" {
+		return ""
+	}
+	c, ok := reg.Lookup(focus.Card)
+	if !ok || len(c.Faces) == 0 || !c.Faces[0].IsRoom() {
+		return ""
+	}
+	want := canonicalCard(reg, focus.Card)
+	for _, sd := range []startSeat{f.Setup.P0, f.Setup.P1} {
+		for _, n := range sd.Battlefield {
+			if canonicalCard(reg, n) == want {
+				return focus.Card
+			}
+		}
+	}
+	return ""
+}
+
 // playStart plays every start file of paths (see startFiles) and writes the
 // items, gorge rows, lowering log, exercised ledger and tapes of the games into
 // out, as play does. set names the item ids; xmage says XMage replays them.
@@ -543,6 +583,15 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 		for s := 1; s <= f.Seeds; s++ {
 			games++
 			id := scen.StartID(set, f.Card, f.Key, s)
+			if locked := roomDoorLocked(reg, f, focus); locked != "" {
+				b, err := jsonl(lowerRow{ID: id, Status: statusRefused, Step: -1, Reasons: []string{reasonStartRoomLocked + ":" + locked}})
+				if err != nil {
+					return err
+				}
+				lowerLog.Write(b)
+				hist[statusRefused]++
+				continue
+			}
 			name := fmt.Sprintf("xproof start %s %s seed %d", f.Card, f.Key, s)
 			took := -1
 			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus, FocusTook: &took}

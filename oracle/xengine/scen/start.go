@@ -81,6 +81,25 @@ func (s *StartSeat) Attached(name string) bool {
 	return false
 }
 
+// TappedCopies reports, for each Battlefield entry in order, whether that copy
+// is tapped. Tapped names bind to the first copy of the name not bound yet, as
+// the start file's lowering does (cmd/xengine's startDeck): a repeated name
+// (four Mountains, one tapped to sacrifice) marks one copy, not all of them.
+// A name with no battlefield copy is ignored here; the lowering refuses it.
+func (s *StartSeat) TappedCopies() []bool {
+	flags := make([]bool, len(s.Battlefield))
+	used := make([]bool, len(s.Battlefield))
+	for _, name := range s.Tapped {
+		for i, card := range s.Battlefield {
+			if !used[i] && card == name {
+				used[i], flags[i] = true, true
+				break
+			}
+		}
+	}
+	return flags
+}
+
 // StartCounter puts N counters of Kind on the first battlefield copy of Card
 // not yet bound.
 type StartCounter struct {
@@ -116,6 +135,13 @@ type StartFocus struct {
 	// Times is how many times the focus takes its action (0 or absent: once):
 	// "whenever you cast your second spell each turn" is two casts.
 	Times int `json:"times,omitempty"`
+	// Bait, for a play that targets a spell, names the spell the focus seat's
+	// opponent casts at turn 1's first main-phase priority before the focus
+	// play, so the play's target is on the stack (CR 115.1a). The start places
+	// it in the opponent's hand with the lands its cost takes, and the opponent
+	// is the active seat when the bait is no instant (a creature spell is cast
+	// on its controller's main phase).
+	Bait string `json:"bait,omitempty"`
 	// Attack and Block are the scripted combat the focus play waits for: the
 	// active seat attacks with exactly Attack, the defending seat blocks it
 	// with exactly Block (no blocks when "" while Attack is set), and only

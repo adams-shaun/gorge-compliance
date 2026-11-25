@@ -5,15 +5,21 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /** Executable check of the driver's cast-mode acceptance list and of the
- * Adventure/Omen cast path. The acceptance checks are pure (cast_mode decides
- * whether a cast step is replayed at all); the Adventure/Omen and alternative
- * cost cases replay a real one-step game, so the script gives XMage's H2 card
- * DB a private copy. "mayplay" is the cast from exile under Reckless Impulse's
- * play permission; it must be accepted, while the modes the driver still
- * cannot replay ("plot_cast", and the per-kicker "kicked1"/"kicked2"/
- * "kickedboth"/"multikicked") must stay rejected; "kicked" pays the single
- * Kicker ask (Gatekeeper of Malakir). Run scripts/xmage-oracle-test-cast-mode.sh. */
+ * Adventure/Omen, Room and modal-DFC cast paths. The acceptance checks are
+ * pure (cast_mode decides whether a cast step is replayed at all); the
+ * Adventure/Omen, Room, modal and alternative cost cases replay a real
+ * one-step game, so the script gives XMage's H2 card DB a private copy.
+ * "mayplay" is the cast from exile under Reckless Impulse's play permission;
+ * it must be accepted, while the modes the driver still cannot replay
+ * ("plot_cast", and the per-kicker "kicked1"/"kicked2"/"kickedboth"/
+ * "multikicked") must stay rejected; "kicked" pays the single Kicker ask
+ * (Gatekeeper of Malakir). Run scripts/xmage-oracle-test-cast-mode.sh. */
 public final class ScenarioReplayCastModeTest {
     private static String castModeSupported(String mode) throws Exception {
         Class<?> replay = ScenarioReplay.class;
@@ -316,6 +322,69 @@ public final class ScenarioReplayCastModeTest {
         System.out.println("PASS a mayplay cast of the exiled copy leaves the same-name hand copy in hand");
     }
 
+    /** Azula, Cunning Usurper: target opponent exiles a nontoken creature they
+     * control, then during the controller's turn the controller may cast it
+     * (CR 601.2a: a card cast under a permission is cast by the permission's
+     * controller). The card is owned by p1, so @p1:Shield Sphere is the ref the
+     * cast names; the cast has to be in TestPlayer's playable set, which needs
+     * the static permission's source zcc (Azula's permanent, not the pre-game
+     * 0 XMage registered the ability with). The fixture is the xproof find:
+     * p0 casts Azula on turn 1 with p1 holding only Shield Sphere, p1's ETB
+     * choose exiles it, and p0 then casts it for {0}. */
+    private static void mayplayOpponentOwnedExile(String fixtures) throws Exception {
+        Path fixture = Paths.get(fixtures).resolve("azula-opponent-exile.jsonl");
+        String line = Files.readString(fixture, StandardCharsets.UTF_8).trim();
+        JsonObject sc = JsonParser.parseString(line).getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("Azula mayplay replay failed: " + res);
+        }
+        // The fixture's step 7 carries only seat 0's target ("target [p1]").
+        // gorge's opponent (p1) choose is recorded in the scenario but is not
+        // lowered into the seat-1 queue, so XMage answers the ETB's PlayerB
+        // pick itself and the scripted PlayerA target stays queued to the end
+        // of the replay. Pin that exact decision shape: a lowering that
+        // stopped emitting the step-7 target would drop this leftover (or
+        // move it to another queue) and fail here, not just in the final
+        // board. oraclediff.Compare ignores leftover, so the cluster would
+        // otherwise still clear after such a regression.
+        equal("AssertionError: (Targets of PlayerA) Count are not equal (found [targetPlayer=PlayerB])."
+                + " Make sure you use target.chooseXXX instead player.choose. Also some inner choose dialogs"
+                + " can be set up only in strict mode. expected:<0> but was:<1>",
+                res.has("leftover") ? res.get("leftover").getAsString() : "",
+                "the step-7 target shape (target p1 with p1's choose unscripted)");
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        JsonObject afterEtb = null;
+        for (JsonElement e : snaps) {
+            JsonObject snap = e.getAsJsonObject();
+            if (snap.get("checkpoint").getAsString().startsWith("step 7 ")) {
+                afterEtb = snap;
+                break;
+            }
+        }
+        if (afterEtb == null || !afterEtb.getAsJsonArray("players").get(1).getAsJsonObject()
+                .getAsJsonArray("exile").toString().contains("Shield Sphere")) {
+            throw new AssertionError("step 7 did not exile Shield Sphere, so the cast has nothing to find: "
+                    + afterEtb);
+        }
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        boolean underP0 = false;
+        boolean ownerP1 = false;
+        for (JsonElement e : last.getAsJsonArray("permanents")) {
+            JsonObject p = e.getAsJsonObject();
+            if ("Shield Sphere".equals(p.get("name").getAsString())) {
+                underP0 |= p.get("controller").getAsInt() == 0;
+                ownerP1 |= p.get("owner").getAsInt() == 1;
+            }
+        }
+        if (!underP0 || !ownerP1) {
+            throw new AssertionError("p1's exiled Shield Sphere is not on the battlefield under p0's control: "
+                    + last);
+        }
+        System.out.println("PASS mayplayOpponentOwnedExile: p0 casts p1's exiled Shield Sphere"
+                + " under Azula's permission");
+    }
+
     /** CR 702.62a / 116.2f: Suspend from hand is a special action, not a cast.
      * gorge records it as a cast step with cast_mode "suspend"; XMage's
      * SuspendAbility pays the suspend cost ({0} for Lotus Bloom) and exiles the
@@ -470,13 +539,62 @@ public final class ScenarioReplayCastModeTest {
                 + " with that door unlocked");
     }
 
+    /** CR 712.12: a modal double-faced card may be cast with its back face
+     * up. gorge records that cast as cast_mode "modal_spell" and names the
+     * parent card ("p0:Egon, God of Death"), the farm's shape for an alternate
+     * face; XMage casts the right half's own SpellAbility, which is named
+     * "Cast Throne of Death". The back-face artifact must be the spell and
+     * then the permanent -- not the front creature -- and {B} pays Throne of
+     * Death's cost. */
+    private static void modalSpellCastsBackFace() throws Exception {
+        equal("true", castModeSupported("modal_spell"), "modal_spell cast_mode");
+        JsonObject sc = JsonParser.parseString("{name:'Egon, God of Death // Throne of Death',"
+                + "card:'Egon, God of Death',"
+                + "setup:{p0:{hand:['Egon, God of Death']}},"
+                + "steps:[{op:'cast',seat:0,card:'p0:Egon, God of Death',cast_mode:'modal_spell',mana:'B'},"
+                + "{op:'resolve',seat:0}]}").getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("modal_spell replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        boolean onStack = false;
+        boolean frontOnStack = false;
+        for (JsonElement e : snaps) {
+            for (JsonElement s : e.getAsJsonObject().getAsJsonArray("stack")) {
+                String source = s.getAsJsonObject().get("source").getAsString();
+                onStack |= "Throne of Death".equals(source);
+                frontOnStack |= "Egon, God of Death".equals(source);
+            }
+        }
+        if (!onStack) {
+            throw new AssertionError("Throne of Death was never cast: " + res);
+        }
+        if (frontOnStack) {
+            throw new AssertionError("Egon, God of Death was cast instead of its back face: " + res);
+        }
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        java.util.List<String> names = permanentNames(last);
+        if (!names.contains("Throne of Death")) {
+            throw new AssertionError("Throne of Death is not on the battlefield: " + last);
+        }
+        if (names.contains("Egon, God of Death")) {
+            throw new AssertionError("the front face entered instead of Throne of Death: " + last);
+        }
+        System.out.println("PASS modalSpellCastsBackFace: Throne of Death is cast for {B} and enters the battlefield");
+    }
+
     public static void main(String[] args) throws Exception {
+        String fixtures = args.length > 0 ? args[0]
+                : "oracle/xmageoracle/test/org/mage/test/oracle/fixtures";
+        modalSpellCastsBackFace();
         roomAltCastsSecondDoor();
         evokedCastPaysEvokeCost();
         foretellFromHandExilesFaceDown();
         suspendFromHandExilesWithTimeCounters();
         warpedCast();
         mayplayPicksTheNamedCopy();
+        mayplayOpponentOwnedExile(fixtures);
         // Regression: the driver rejected "mayplay" by name before the replay
         // ever reached the cast, so every Reckless Impulse window was a
         // harness row. The card is in exile under a play-from-exile
