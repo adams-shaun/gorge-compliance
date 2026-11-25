@@ -3898,12 +3898,20 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // field's later value cannot describe this checkpoint.
                 final boolean settleHere = settleCheckpoint;
                 settleCheckpoint = false;
+                // A pass that only hands priority on runs its checkpoint before
+                // XMage moves the priority (TestPlayer's pass returns first), so
+                // the snapshot must name the seat that receives priority
+                // (CR 117.3d), not the passer the game still reports. Captured
+                // here: `i` and the step array are only final for this step.
+                final int passSeat = seatOfStep(steps, i);
+                final boolean handsPriorityOn = passHandsPriorityOn(steps, i, activeSeat, seats);
                 runCode(cp, turn, phase, checkpointSeat(op, st, i), (info, p, g) -> {
                     if (settleHere) {
                         g.checkStateAndTriggered();
                     }
                     applyDeclarationStepEnd(reportAs, g);
-                    JsonObject snap = snapshot(info, g);
+                    JsonObject snap = snapshot(info, g,
+                            handsPriorityOn ? nextPriorityPlayer(g, passSeat) : null);
                     if (reportAs != null) {
                         snap.addProperty("step", reportAs.name());
                     }
@@ -6948,6 +6956,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
         throw new IllegalArgumentException("unsupported pass pattern at step " + index);
     }
 
+    /** Whether the checkpoint of the pass at {@code index} is taken before
+     * XMage has handed the priority on (CR 117.3d). A pass that resolves the
+     * top object hands priority back to the active player and a pass that
+     * enters a step hands it to that step's first player; their checkpoints
+     * already run at that priority. Every other pass only hands priority to
+     * the next seat, which is the holder the post-pass snapshot must name. */
+    static boolean passHandsPriorityOn(JsonArray steps, int index, int activeSeat, int seats) {
+        if (!isOp(steps, index, "pass")) {
+            return false;
+        }
+        if (isPassRun(steps, index)) {
+            JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+            return !posFlag(pos, "resolves") && !passEntersNewStep(steps, index, seats);
+        }
+        // A pair's second pass resolves the top object (or, as the scenario's
+        // opening pair, advances the step); every other legacy pass is a
+        // handoff to the other seat.
+        return passAction(steps, index, activeSeat) != PASS_PAIR_SECOND;
+    }
+
     /** Whether step {@code index} is a pass of a recorded game: a pass that
      * carries the "xpos" position gorge reached after it. The hand-authored
      * and ported scenarios never carry one, so they keep the shapes above. */
@@ -9455,6 +9483,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return id.equals(playerA.getId()) ? 0 : id.equals(playerB.getId()) ? 1 : -1;
     }
 
+    /** The player who receives priority after {@code seat} passes: the next
+     * in-game seat in the game's own turn order (CR 117.3d), derived from
+     * GameState's player list so a reversed turn order and a leaver are
+     * handled the way the engine handles them. Null when nobody is left. */
+    private UUID nextPriorityPlayer(Game g, int seat) {
+        Player next = g.getState().getPlayerList(seat(seat).getId()).getNext(g, false);
+        return next == null ? null : next.getId();
+    }
+
     /** The permanent's keyword names, sorted and de-duplicated. Spec H5
      * (confirmed against the XMage source): a keyword ability's getRule() is
      * its lower-case name ("flying", "first strike"), which the comparator
@@ -9485,13 +9522,23 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     private JsonObject snapshot(String checkpoint, Game g) {
+        return snapshot(checkpoint, g, null);
+    }
+
+    /** The checkpoint's snapshot. {@code holderAfterStep}, when a pass
+     * checkpoint is captured before XMage moves the priority, names the seat
+     * that receives it (CR 117.3d); every other snapshot reads the game's
+     * current holder. Both fields that report the holder -- priority and
+     * offered -- read this one value, so they cannot disagree. */
+    private JsonObject snapshot(String checkpoint, Game g, UUID holderAfterStep) {
         lastCheckpointStack = stackNames(g);
+        UUID holder = holderAfterStep != null && !g.hasEnded() ? holderAfterStep : g.getPriorityPlayerId();
         JsonObject s = new JsonObject();
         s.addProperty("checkpoint", checkpoint);
         s.addProperty("turn", g.getTurnNum());
         s.addProperty("step", g.getTurnStepType() == null ? "" : g.getTurnStepType().name());
         s.addProperty("active", seatIndex(g, g.getActivePlayerId()));
-        s.addProperty("priority", seatIndex(g, g.getPriorityPlayerId()));
+        s.addProperty("priority", seatIndex(g, holder));
         s.addProperty("over", g.hasEnded());
         JsonArray players = new JsonArray();
         for (int i = 0; i < seats; i++) {
@@ -9622,7 +9669,7 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         s.add("stack", stack);
         if (wantsOffered()) {
-            s.add("offered", offered(g));
+            s.add("offered", offered(g, holder));
         }
         return (JsonObject) gorgeSpellings(s);
     }
@@ -9643,18 +9690,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
     }
 
     /**
-     * What the player holding priority may play, in gorge's snapshot
-     * vocabulary (rules.OracleSnapOffered): the source's scenario ref, the
-     * kind ("cast", "play" for a land, otherwise "activate" -- mana abilities
-     * included, CR 605.3a: a mana ability is activatable whenever its
-     * controller has priority), and the ability's rule text. The comparer
-     * strips the display prefixes. No priority player (the game ended, or the
-     * checkpoint is a skipped-step label recorded after the turn) offers
-     * nothing.
+     * What the player holding priority -- or, at a pass checkpoint XMage has
+     * not yet handed on, the seat that receives it -- may play, in gorge's
+     * snapshot vocabulary (rules.OracleSnapOffered): the source's scenario
+     * ref, the kind ("cast", "play" for a land, otherwise "activate" -- mana
+     * abilities included, CR 605.3a: a mana ability is activatable whenever
+     * its controller has priority), and the ability's rule text. The comparer
+     * strips the display prefixes. {@code holder} is the snapshot's one
+     * priority-holder value; null (the game ended, or the checkpoint is a
+     * skipped-step label recorded after the turn) offers nothing.
      */
-    private JsonArray offered(Game g) {
+    private JsonArray offered(Game g, UUID holder) {
         JsonArray out = new JsonArray();
-        UUID holder = g.getPriorityPlayerId();
         if (holder == null || g.hasEnded()) {
             return out;
         }
