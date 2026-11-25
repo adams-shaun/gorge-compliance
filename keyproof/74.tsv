@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7409906d-7111-48fa-bfea-8b95e0fdb7dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7409906d-7111-48fa-bfea-8b95e0fdb7dc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rot-wolf:f0t0:s1,f:xs:XP:rot-wolf:f0t0:s1	-	-	-	6f84be0f34c0	-	5e66d815afef	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 740aa9d9-91a9-431e-8bf9-1344e5273e27	cast	cast-resolve	agreed	-	X	scen	1	0	Twists and Turns/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-740aa9d9-91a9-431e-8bf9-1344e5273e27	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+740aa9d9-91a9-431e-8bf9-1344e5273e27	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 740aa9d9-91a9-431e-8bf9-1344e5273e27	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Twists and Turns/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 740aa9d9-91a9-431e-8bf9-1344e5273e27	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Twists and Turns/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 740aa9d9-91a9-431e-8bf9-1344e5273e27	f1/a1	activate#1.1	agreed	-	X	scen	1	0	Twists and Turns/activate#1.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 74947e47-c4ff-4f47-9845-befa7403cbde	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:preacher-of-the-schism:combat0.block:s1,f:xs:XP:preacher-of-the-schism:combat0.block:s1	-	-	-	3aa6ded33acb	-	d4e1ada72dfa	-	-	2026-11-25	xproof
 74947e47-c4ff-4f47-9845-befa7403cbde	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:preacher-of-the-schism:combat0.attack:s1,f:xs:XP:preacher-of-the-schism:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d4e1ada72dfa	-	-	2026-11-25	xproof
 74947e47-c4ff-4f47-9845-befa7403cbde	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:preacher-of-the-schism:combat0.attack:s1,f:xs:XP:preacher-of-the-schism:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d4e1ada72dfa	-	-	2026-11-25	xproof
-749683c9-8cc0-4e8e-8d90-adda5e5f4e93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hidetsugu-s-second-rite:cast:s1,f:xs:XP:hidetsugu-s-second-rite:cast:s1	-	-	-	baa6f696107c	-	2883114987c3	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+749683c9-8cc0-4e8e-8d90-adda5e5f4e93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hidetsugu-s-second-rite:cast:s1,f:xs:XP:hidetsugu-s-second-rite:cast:s1	-	-	-	21b2cceac526	-	2883114987c3	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 749c2c8e-9588-4e83-b07f-3c37eb63338b	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:snowfield-sinkhole:f0a0:s1,f:xs:XP:snowfield-sinkhole:f0a0:s1	-	-	-	6f84be0f34c0	-	4584d0a2b207	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 749c2c8e-9588-4e83-b07f-3c37eb63338b	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:snowfield-sinkhole:f0a1:s1,f:xs:XP:snowfield-sinkhole:f0a1:s1	-	-	-	6f84be0f34c0	-	4584d0a2b207	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 749c2c8e-9588-4e83-b07f-3c37eb63338b	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

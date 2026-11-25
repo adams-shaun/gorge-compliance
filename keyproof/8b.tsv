@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b27326f-e7b8-4a4d-b589-df459246d19a	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:shadowspear:f0a1:s1,f:xs:XP:shadowspear:f0a1:s1	-	-	-	ae86f6029288	-	e6b4e648fff4	-	-	2026-11-24	xproof
 8b2ba6f8-1060-4167-9941-3ab7bd4e0ca8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8b2ba6f8-1060-4167-9941-3ab7bd4e0ca8	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+8b2ba6f8-1060-4167-9941-3ab7bd4e0ca8	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 8b34d1df-4024-497d-bd28-a7caa8c3fa24	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sunblast-angel:cast:s1,f:xs:XP:sunblast-angel:cast:s1	-	-	-	d864b561c9cb	-	eb12e5fb142a	-	-	2026-11-24	xproof
 8b34d1df-4024-497d-bd28-a7caa8c3fa24	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sunblast-angel:cast:s1,f:xs:XP:sunblast-angel:cast:s1	-	-	-	d864b561c9cb	-	eb12e5fb142a	-	-	2026-11-24	xproof
 8b3526c4-efc8-42be-a0ab-de10c4cc986d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8b641cd3-bb08-4f2e-9dad-24f58a9c32e1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b69da01-3ba5-4a61-9e26-e879b6d8b63e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b6d37a7-a88e-45dd-b45e-642a44caaf05	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:resurrected-cultist:cast:s1,f:xs:XP:resurrected-cultist:cast:s1	-	-	-	23c4009444b0	-	f3180dd80826	-	-	2026-11-25	xproof
-8b6d37a7-a88e-45dd-b45e-642a44caaf05	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Resurrected Cultist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8b6d37a7-a88e-45dd-b45e-642a44caaf05	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:resurrected-cultist:f0a0:s1,f:xs:XP:resurrected-cultist:f0a0:s1	-	-	-	21b2cceac526	-	f3180dd80826	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 8b6e2feb-9e8f-4912-ada0-1614502d9813	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8b6e2feb-9e8f-4912-ada0-1614502d9813	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:makeshift-battalion:f0t0:s1,f:xs:XP:makeshift-battalion:f0t0:s1	-	-	-	3aa6ded33acb	-	c2231b28145f	-	-	2026-11-25	xproof
 8b70aad1-bcb1-4359-b27e-ba8b40ef2752	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8bbc9f21-2b4d-4d03-aef1-f5bf0b79257c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bbe3f0d-41d0-4c58-ad65-6675a234cad3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8bc17c50-f4c9-46dd-9294-3036ed46de91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:escaped-null:cast:s1,f:xs:XP:escaped-null:cast:s1	-	-	-	cb99a158debc	-	d886b93d1396	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-8bc17c50-f4c9-46dd-9294-3036ed46de91	f0/t0	Blocks	agreed	-	FX	start	2	0	x:xs:XP:escaped-null:f0t0:s1,f:xs:XP:escaped-null:f0t0:s1	-	-	-	baa6f696107c	-	d886b93d1396	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+8bc17c50-f4c9-46dd-9294-3036ed46de91	f0/t0	Blocks	agreed	-	FX	start	2	0	x:xs:XP:escaped-null:f0t0:s1,f:xs:XP:escaped-null:f0t0:s1	-	-	-	21b2cceac526	-	d886b93d1396	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 8bc17c50-f4c9-46dd-9294-3036ed46de91	f0/t1	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:escaped-null:f0t1:s1,f:xs:XP:escaped-null:f0t1:s1	-	-	-	cb99a158debc	-	d886b93d1396	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 8bc30bd5-554e-4fcf-9dec-c7634921858a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:smelted-chargebug:f0t0:s1,f:xs:XP:smelted-chargebug:f0t0:s1	-	-	-	ae86f6029288	-	5dc4306dd496	-	-	2026-11-24	xproof
 8bc30bd5-554e-4fcf-9dec-c7634921858a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:smelted-chargebug:f0t0:s1,f:xs:XP:smelted-chargebug:f0t0:s1	-	-	-	ae86f6029288	-	5dc4306dd496	-	-	2026-11-24	xproof

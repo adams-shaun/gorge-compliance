@@ -24,7 +24,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53231b31-fb3c-4b30-bfe9-0ee8e754247b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53231b31-fb3c-4b30-bfe9-0ee8e754247b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:chandra-hope-s-beacon:f0t0:s1,f:xs:XP:chandra-hope-s-beacon:f0t0:s1	-	-	-	054d9f516953	-	ff8d5ac98149	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 53231b31-fb3c-4b30-bfe9-0ee8e754247b	f0/a1	Dig	agreed	-	FX	start	2	0	x:xs:XP:chandra-hope-s-beacon:f0a1:s1,f:xs:XP:chandra-hope-s-beacon:f0a1:s1	-	-	-	054d9f516953	-	ff8d5ac98149	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-53231b31-fb3c-4b30-bfe9-0ee8e754247b	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+53231b31-fb3c-4b30-bfe9-0ee8e754247b	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 53231b31-fb3c-4b30-bfe9-0ee8e754247b	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:chandra-hope-s-beacon:f0t0:s1,f:xs:XP:chandra-hope-s-beacon:f0t0:s1	-	-	-	054d9f516953	-	ff8d5ac98149	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 53236dd7-845a-444c-96d5-f41ed7325d8f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53236dd7-845a-444c-96d5-f41ed7325d8f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5324192b-6687-41e4-8e56-326b21a5dbf3	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:moorland-haunt:f0a1:s1,f:xs:XP:moorland-haunt:f0a1:s1	-	-	-	23c4009444b0	-	1d91682470b6	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5324192b-6687-41e4-8e56-326b21a5dbf3	land	land	agreed	-	FX	start	2	0	x:xs:XP:moorland-haunt:land:s1,f:xs:XP:moorland-haunt:land:s1	-	-	-	d864b561c9cb	-	1d91682470b6	-	-	2026-11-24	xproof
 5326381e-e5e7-4c3e-9565-4837b3ffaec0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5326381e-e5e7-4c3e-9565-4837b3ffaec0	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+5326381e-e5e7-4c3e-9565-4837b3ffaec0	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 5326381e-e5e7-4c3e-9565-4837b3ffaec0	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:skullsnatcher:f0t0:s1,f:xs:XP:skullsnatcher:f0t0:s1	-	-	-	23c4009444b0	-	dd9037785da1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 53295b03-717d-481d-9d5c-212c5f30bbbf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-hunt:f0t0:s1,f:xs:XP:omen-of-the-hunt:f0t0:s1	-	-	-	ae86f6029288	-	82202abad8d2	-	-	2026-11-24	xproof
 53295b03-717d-481d-9d5c-212c5f30bbbf	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:omen-of-the-hunt:f0a0:s1,f:xs:XP:omen-of-the-hunt:f0a0:s1	-	-	-	ae86f6029288	-	82202abad8d2	-	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 536c1112-694f-42f8-a7b1-604389e54a95	f0/a2	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:chandra-the-firebrand:f0a2:s1,f:xs:XP:chandra-the-firebrand:f0a2:s1	-	-	-	23c4009444b0	-	c7aadc9b6b52	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 536c36d9-5ef4-441c-a6c8-5806644d805c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 536f7c92-2f1e-49e7-98de-47382a9488f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-536f7c92-2f1e-49e7-98de-47382a9488f1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+536f7c92-2f1e-49e7-98de-47382a9488f1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	cast	cast-resolve	agreed	-	FX	scen	2	0	Breaching Dragonstorm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:breaching-dragonstorm:f0t1:s1,f:xs:XP:breaching-dragonstorm:f0t1:s1	-	-	-	23c4009444b0	-	40e5756ba354	-	-	2026-11-25	xproof
@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 539c5bb8-d5d0-4901-a45b-594514948be6	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Great Juggernaut"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 539c5bb8-d5d0-4901-a45b-594514948be6	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Great Juggernaut"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 539c5bb8-d5d0-4901-a45b-594514948be6	f0/t1	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "The Great Juggernaut"	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
-539d7c1a-b5e9-4204-9109-ddb2e8dec168	cast	cast	agreed	-	F	start	2	0	f:xs:XP:pox:cast:s1	-	-	-	baa6f696107c	-	303e7e570c93	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+539d7c1a-b5e9-4204-9109-ddb2e8dec168	cast	cast	agreed	-	F	start	2	0	f:xs:XP:pox:cast:s1	-	-	-	21b2cceac526	-	303e7e570c93	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 539f5396-d99a-417d-a84c-dff7930b5900	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 539f5396-d99a-417d-a84c-dff7930b5900	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53a0923f-7da8-4e31-a231-9b275916e2a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oath-of-chandra:f0t0:s1,f:xs:XP:oath-of-chandra:f0t0:s1	-	-	-	3aa6ded33acb	-	990fde6f64e7	-	-	2026-11-25	xproof

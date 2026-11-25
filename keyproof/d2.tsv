@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 d2043685-f091-444f-9c35-d238afa24d7b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d2075f58-b0e9-4e85-b7e6-0523a27a1d5b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-d2075f58-b0e9-4e85-b7e6-0523a27a1d5b	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+d2075f58-b0e9-4e85-b7e6-0523a27a1d5b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+d2075f58-b0e9-4e85-b7e6-0523a27a1d5b	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 d2084a6b-3248-4ed4-8fb5-d9c439d1ee72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2084a6b-3248-4ed4-8fb5-d9c439d1ee72	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:captain-america-steve-rogers:f0t0:s1,f:xs:XP:captain-america-steve-rogers:f0t0:s1	-	-	-	8c0bd19283bb	-	8c9d87bd1fb8	-	-	2026-11-24	xproof
 d20b62fc-e248-4c84-87ac-7319b92531d4	cast	cast	agreed	-	X	start	2	0	x:xs:XP:saprazzan-legate:cast:s1	-	-	-	5f2128bf97e4	-	dadb9955465f	-	-	2026-11-24	xproof
@@ -23,7 +23,7 @@ d21a89eb-7c5b-459a-acc7-12b20b13bf79	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d21a89eb-7c5b-459a-acc7-12b20b13bf79	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d21c3c8f-d105-4ba9-bf69-e5f26f0f8ec5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d21d7557-9702-46c1-8277-42a3442084c2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spiders-man-heroic-horde:cast:s1,f:xs:XP:spiders-man-heroic-horde:cast:s1	-	-	-	23c4009444b0	-	8a0fd36a7980	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-d21d7557-9702-46c1-8277-42a3442084c2	f0/t0	NULL	owed	refused:history:websling	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+d21d7557-9702-46c1-8277-42a3442084c2	f0/t0	NULL	owed	refused:history:websling	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 d21facb6-27c2-49cb-9f13-7d6079096eda	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d22196b5-b111-45ce-ae51-a06ca02533b6	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wildfire-awakener:cast:s1,f:xs:XP:wildfire-awakener:cast:s1	-	-	-	8c0bd19283bb	-	c416d3b8183f	-	-	2026-11-24	xproof
 d22196b5-b111-45ce-ae51-a06ca02533b6	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wildfire-awakener:cast:s1,f:xs:XP:wildfire-awakener:cast:s1	-	-	-	8c0bd19283bb	-	c416d3b8183f	-	-	2026-11-24	xproof
@@ -172,9 +172,9 @@ d2d41f12-18d8-473b-9308-3f02d7d791f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hum
 d2d477a5-f055-4d47-a852-26e8239f2a01	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d2d5f9b8-7caf-42c8-934b-3f4b81468914	cast	cast	agreed	-	F	start	2	0	f:xs:XP:skyclave-plunder:cast:s1	-	-	-	ae86f6029288	-	557e4875682c	-	-	2026-11-24	xproof
 d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:biogenic-ooze:f0t0:s1,f:xs:XP:biogenic-ooze:f0t0:s1	-	-	-	baa6f696107c	-	1cb5f1ca8960	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:biogenic-ooze:f0a0:s1,f:xs:XP:biogenic-ooze:f0a0:s1	-	-	-	baa6f696107c	-	1cb5f1ca8960	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:biogenic-ooze:f0a0:s1,f:xs:XP:biogenic-ooze:f0a0:s1	-	-	-	21b2cceac526	-	1cb5f1ca8960	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:biogenic-ooze:f0t0:s1,f:xs:XP:biogenic-ooze:f0t0:s1	-	-	-	baa6f696107c	-	1cb5f1ca8960	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	f0/t1	Phase	agreed	-	FX	start	4	0	x:xs:XP:biogenic-ooze:f0a0:s1,f:xs:XP:biogenic-ooze:f0a0:s1	-	-	-	baa6f696107c	-	1cb5f1ca8960	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+d2d84ba5-0d20-4ce3-8f1f-93cd9ef94f5f	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:biogenic-ooze:f0a0:s1,f:xs:XP:biogenic-ooze:f0a0:s1	-	-	-	21b2cceac526	-	1cb5f1ca8960	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 d2d9ecea-7925-420e-98b9-2f87f41f387c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:land-tax:f0t0:s1,f:xs:XP:land-tax:f0t0:s1	-	-	-	3aa6ded33acb	-	a8d0e98d2aec	-	-	2026-11-25	xproof
 d2d9ecea-7925-420e-98b9-2f87f41f387c	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:land-tax:f0t0:s1,f:xs:XP:land-tax:f0t0:s1	-	-	-	3aa6ded33acb	-	a8d0e98d2aec	-	-	2026-11-25	xproof
 d2da26d6-b0f7-4af0-9ce8-fb8d82fe2d85	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sunfire-torch:cast:s1,f:xs:XP:sunfire-torch:cast:s1	-	-	-	23b491658465	-	a51a66df1f00	-	-	2026-11-25	xproof
