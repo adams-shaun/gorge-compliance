@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 002100cd-1ab1-44da-93a0-1269d47a712a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:waterknot:cast:s1,f:xs:XP:waterknot:cast:s1	-	-	-	d864b561c9cb	-	efb07e2379fb	-	-	2026-11-24	xproof
 00225c40-27ff-410f-a591-5c788c6a2bd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00225c40-27ff-410f-a591-5c788c6a2bd6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00225c40-27ff-410f-a591-5c788c6a2bd6	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+00225c40-27ff-410f-a591-5c788c6a2bd6	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 0023888e-7bec-43e0-8dee-d1a4eb94b372	cast	cast	agreed	-	F	start	4	0	f:xs:XP:palinchron:cast:s1	-	-	-	5f2128bf97e4	-	fb42d107447b	-	-	2026-11-24	xproof
 0023888e-7bec-43e0-8dee-d1a4eb94b372	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:palinchron:f0a0:s1,f:xs:XP:palinchron:f0a0:s1	-	-	-	5f2128bf97e4	-	fb42d107447b	-	-	2026-11-24	xproof
 0023888e-7bec-43e0-8dee-d1a4eb94b372	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:palinchron:cast:s1	-	-	-	5f2128bf97e4	-	fb42d107447b	-	-	2026-11-24	xproof
@@ -192,7 +192,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00e35322-1a9a-41e3-9ce1-359c8eaa3bc7	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:talisman-of-progress:f0a1:s1,f:xs:XP:talisman-of-progress:f0a1:s1	-	-	-	9ff3e304d49e	-	8b594c8932bd	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 00e6808c-1f9e-4b6a-807c-83f433b81a41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00e6808c-1f9e-4b6a-807c-83f433b81a41	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00e6808c-1f9e-4b6a-807c-83f433b81a41	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+00e6808c-1f9e-4b6a-807c-83f433b81a41	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:krovikan-sorcerer:f0a1:s1,f:xs:XP:krovikan-sorcerer:f0a1:s1	-	-	-	9087eefec3ee	-	3c9c2b0f63f6	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 00e75a6b-699e-4824-86e5-66d45245cd9b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oracle-s-restoration:cast:s1,f:xs:XP:oracle-s-restoration:cast:s1	-	-	-	054d9f516953	-	a611db565106	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 00e94b75-ad31-4e1f-b3be-eed7cd3e4d76	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stand-up-for-yourself:cast:s1,f:xs:XP:stand-up-for-yourself:cast:s1	-	-	-	9087eefec3ee	-	1b9f12683fef	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 00e9957a-5684-4a07-954e-8161925fefe4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bond-of-discipline:cast:s1,f:xs:XP:bond-of-discipline:cast:s1	-	-	-	d864b561c9cb	-	0251b9224c46	-	-	2026-11-24	xproof

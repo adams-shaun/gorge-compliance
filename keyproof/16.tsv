@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16069935-4aeb-481f-98f2-46387775540f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noggle-hedge-mage:f0t0:s1,f:xs:XP:noggle-hedge-mage:f0t0:s1	-	-	-	3aa6ded33acb	-	f34be77cea62	-	-	2026-11-25	xproof
 16069935-4aeb-481f-98f2-46387775540f	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noggle-hedge-mage:f0t1:s1,f:xs:XP:noggle-hedge-mage:f0t1:s1	-	-	-	3aa6ded33acb	-	f34be77cea62	-	-	2026-11-25	xproof
 16128b90-9b81-476e-8999-3ef498728c39	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16128b90-9b81-476e-8999-3ef498728c39	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+16128b90-9b81-476e-8999-3ef498728c39	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 1612a08f-fc1f-45cf-ae03-5f021a46869d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:in-the-trenches:cast:s1,f:xs:XP:in-the-trenches:cast:s1	-	-	-	ae86f6029288	-	d41cd191bc54	-	-	2026-11-24	xproof
 1612a08f-fc1f-45cf-ae03-5f021a46869d	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:in-the-trenches:f0a0:s1,f:xs:XP:in-the-trenches:f0a0:s1	-	-	-	3aa6ded33acb	-	d41cd191bc54	-	-	2026-11-25	xproof
 16156274-8dc0-439c-94c4-e8c89bbb5687	cast	cast-resolve	agreed	-	FX	scen	2	0	Loading Zone/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -118,7 +118,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	23c4009444b0	-	67f5e9a6bb1a	-	-	2026-11-25	xproof
 16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	23c4009444b0	-	67f5e9a6bb1a	-	-	2026-11-25	xproof
 16a5ed42-ee86-4dcb-b8ea-239ac2b13d67	cast	cast	agreed	-	F	start	2	0	f:xs:XP:kai-winn-faithless-leader:cast:s1	-	-	-	23c4009444b0	-	85ae0a0b2fb0	-	-	2026-11-25	xproof
-16a5ed42-ee86-4dcb-b8ea-239ac2b13d67	f0/t0	NULL	owed	refused:no-generator:trigger:SpellAbilityCast	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+16a5ed42-ee86-4dcb-b8ea-239ac2b13d67	f0/t0	NULL	owed	refused:no-generator:trigger:SpellAbilityCast	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 16a66bbe-90f6-4c29-a69d-6ff254082956	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormcaller-of-keranos:cast:s1,f:xs:XP:stormcaller-of-keranos:cast:s1	-	-	-	d864b561c9cb	-	558d605c12d9	-	-	2026-11-24	xproof
 16a66bbe-90f6-4c29-a69d-6ff254082956	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:stormcaller-of-keranos:f0a0:s1,f:xs:XP:stormcaller-of-keranos:f0a0:s1	-	-	-	d864b561c9cb	-	558d605c12d9	-	-	2026-11-24	xproof
 16a7895a-ca23-4112-a91f-4b1528e75cea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -182,7 +182,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16f3a09f-e29b-4fb5-95ed-d76ad550c2ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f61f69-cdde-4b6c-b855-c74db9038ceb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f61f69-cdde-4b6c-b855-c74db9038ceb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16f61f69-cdde-4b6c-b855-c74db9038ceb	f0/a1	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+16f61f69-cdde-4b6c-b855-c74db9038ceb	f0/a1	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 16f6438d-2a29-41cb-bf0c-4d02bd66112b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f6438d-2a29-41cb-bf0c-4d02bd66112b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f75a65-d067-4f79-81b9-833c373cf4d2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
