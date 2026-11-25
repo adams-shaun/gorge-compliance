@@ -71,8 +71,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 306549ad-84c7-4983-840b-9663799e9f40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rousing-read:f0t0:s1,f:xs:XP:rousing-read:f0t0:s1	-	-	-	3aa6ded33acb	-	da7713f3c8c9	-	-	2026-11-25	xproof
 306549ad-84c7-4983-840b-9663799e9f40	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rousing-read:f0t0:s1,f:xs:XP:rousing-read:f0t0:s1	-	-	-	3aa6ded33acb	-	da7713f3c8c9	-	-	2026-11-25	xproof
 306593b0-6ea8-476f-a3f2-e17876c1bab4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ancient-grudge:cast:s1,f:xs:XP:ancient-grudge:cast:s1	-	-	-	3aa6ded33acb	-	7fff8613cc30	-	-	2026-11-25	xproof
-306652a8-9a9c-4b33-96d7-b59234d148e9	cast	cast-resolve	agreed	-	X	scen	1	0	Foot Ninjas/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-306652a8-9a9c-4b33-96d7-b59234d148e9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+306652a8-9a9c-4b33-96d7-b59234d148e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:foot-ninjas:f0t0:s1,f:xs:XP:foot-ninjas:f0t0:s1	-	-	-	cfde1dc26c40	-	ae480a0389cd	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+306652a8-9a9c-4b33-96d7-b59234d148e9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:foot-ninjas:f0t0:s1,f:xs:XP:foot-ninjas:f0t0:s1	-	-	-	cfde1dc26c40	-	ae480a0389cd	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 3067c653-ac29-4f1d-822f-7e2e5bb38a62	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kazarov-sengir-pureblood:cast:s1,f:xs:XP:kazarov-sengir-pureblood:cast:s1	-	-	-	d864b561c9cb	-	7d612bd04b8f	-	-	2026-11-24	xproof
 3067c653-ac29-4f1d-822f-7e2e5bb38a62	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:kazarov-sengir-pureblood:f0a0:s1,f:xs:XP:kazarov-sengir-pureblood:f0a0:s1	-	-	-	d864b561c9cb	-	7d612bd04b8f	-	-	2026-11-24	xproof
 3067c653-ac29-4f1d-822f-7e2e5bb38a62	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
