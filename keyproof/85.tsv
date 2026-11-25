@@ -31,7 +31,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 852621bf-9ab7-4027-89fb-b438e4080684	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sage-of-the-falls:cast:s1,f:xs:XP:sage-of-the-falls:cast:s1	-	-	-	ae86f6029288	-	81a7057ec04a	-	-	2026-11-24	xproof
 852621bf-9ab7-4027-89fb-b438e4080684	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sage-of-the-falls:cast:s1,f:xs:XP:sage-of-the-falls:cast:s1	-	-	-	ae86f6029288	-	81a7057ec04a	-	-	2026-11-24	xproof
 852657c0-18a4-4b28-b9ae-7728acdb5044	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirari-s-wake:cast:s1,f:xs:XP:mirari-s-wake:cast:s1	-	-	-	25696bf19d5b	-	c7d4d75ce64a	-	-	2026-11-24	xproof
-852657c0-18a4-4b28-b9ae-7728acdb5044	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+852657c0-18a4-4b28-b9ae-7728acdb5044	f0/t0	TapsForMana	agreed	-	FX	start	2	0	x:xs:XP:mirari-s-wake:f0t0:s1,f:xs:XP:mirari-s-wake:f0t0:s1	-	-	-	4b8018a80bf0	-	c7d4d75ce64a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 85292bfb-32d7-449e-9ebb-5be828e8ecf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85292bfb-32d7-449e-9ebb-5be828e8ecf6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 852b6e19-4594-41ea-9267-0911df643af5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ekundu-griffin:cast:s1,f:xs:XP:ekundu-griffin:cast:s1	-	-	-	8c0bd19283bb	-	5a989d70e7fa	-	-	2026-11-24	xproof
@@ -113,7 +113,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 857febd9-cdd7-4f8e-a852-d88084b0cfbc	land	land	agreed	-	FX	start	2	0	x:xs:XP:underground-river:land:s1,f:xs:XP:underground-river:land:s1	-	-	-	25696bf19d5b	-	1df0d3e33fd2	-	-	2026-11-24	xproof
 858067f9-eb1f-4569-9831-30441cba5f90	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:annie-flash-the-veteran:f0t0:s1,f:xs:XP:annie-flash-the-veteran:f0t0:s1	-	-	-	25696bf19d5b	-	53fe7729f9c2	-	-	2026-11-24	xproof
 858067f9-eb1f-4569-9831-30441cba5f90	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:annie-flash-the-veteran:f0t0:s1,f:xs:XP:annie-flash-the-veteran:f0t0:s1	-	-	-	25696bf19d5b	-	53fe7729f9c2	-	-	2026-11-24	xproof
-858067f9-eb1f-4569-9831-30441cba5f90	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Annie Flash, the Veteran/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+858067f9-eb1f-4569-9831-30441cba5f90	f0/t1	Taps	agreed	-	FX	start	2	0	x:xs:XP:annie-flash-the-veteran:f0t1:s1,f:xs:XP:annie-flash-the-veteran:f0t1:s1	-	-	-	4b8018a80bf0	-	53fe7729f9c2	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8584e96f-a3e7-475c-bfd1-2c9a72bee774	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 858e12e9-3eaa-40cf-9e22-f9ccdfe485b3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 858f53ef-3fec-4aa0-867d-b7f040614b3c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
