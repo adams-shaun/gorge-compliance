@@ -12,6 +12,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/gate"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclediff"
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 	"github.com/adams-shaun/gorge/testkit/testutil"
@@ -103,6 +104,57 @@ func TestForgeExportByteStable(t *testing.T) {
 	}
 	if len(reqs[2].Abilities) != 1 {
 		t.Errorf("Cage abilities = %v, want only step 0", reqs[2].Abilities)
+	}
+}
+
+// TestForgeExportScenarioSHAMatchesWrittenItem: the scenario_sha is the SHA of
+// the Item bytes the request actually carries, for every recorded template
+// forgeDeclarations rewrites. A script fixture is pasted from an export and
+// TestForgeScriptFixturesCarryTheirItemSHA recomputes gate.ItemSHA on the
+// pasted request's own item, so a sha computed before the rewrite is stale the
+// moment a declaration is exported and the paste fails.
+func TestForgeExportScenarioSHAMatchesWrittenItem(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	steps := []oraclegen.Step{
+		{Op: "pass_to", Step: "main1"},
+		{Op: "attack", Seat: 0, Defender: "p1", Attackers: []string{}},
+		{Op: "pass", Seat: 1},
+		{Op: "attack", Seat: 0, Defender: "p1", Attackers: []string{"p0:Bear"}},
+	}
+	var scen bytes.Buffer
+	for _, tmpl := range []string{lower.Template, lower.WindowTemplate, lower.SpanTemplate} {
+		it := oraclegen.Item{ID: "xe:" + tmpl, Template: tmpl, Scenario: oraclegen.Scenario{Steps: steps}}
+		b, err := json.Marshal(it)
+		if err != nil {
+			t.Fatal(err)
+		}
+		scen.Write(append(b, '\n'))
+	}
+	dir := t.TempDir()
+	scenPath, out := filepath.Join(dir, "items.jsonl"), filepath.Join(dir, "req.jsonl")
+	if err := os.WriteFile(scenPath, scen.Bytes(), 0o644); err != nil {
+		t.Fatal(err)
+	}
+	if _, err := forgeExport(reg, scenPath, out); err != nil {
+		t.Fatal(err)
+	}
+	raw, err := os.ReadFile(out)
+	if err != nil {
+		t.Fatal(err)
+	}
+	reqs := decodeRequests(t, raw)
+	if len(reqs) != 3 {
+		t.Fatalf("exported %d requests, want 3", len(reqs))
+	}
+	for i, rq := range reqs {
+		// The empty attack at step 1 is rewritten to a pass_to, so the
+		// sha assertion is not vacuous.
+		if len(rq.Item.Steps) != len(steps) || rq.Item.Steps[1].Op != "pass_to" {
+			t.Errorf("request %d (%s): exported steps %+v, want step 1 rewritten", i, rq.ID, rq.Item.Steps)
+		}
+		if got, want := rq.ScenarioSHA, gate.ItemSHA(rq.Item); got != want {
+			t.Errorf("request %d (%s): scenario_sha %s is not its written item's %s", i, rq.ID, got, want)
+		}
 	}
 }
 
