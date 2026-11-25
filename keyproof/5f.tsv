@@ -49,8 +49,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f3f68b5-8c6a-4181-bb8a-9c73967d198a	f0/t0	ChangesZone/Persist	agreed	-	FX	start	2	0	x:xs:XP:glen-elendra-archmage:f0t0:s1,f:xs:XP:glen-elendra-archmage:f0t0:s1	-	-	-	3aa6ded33acb	-	3cd3891d53c9	-	-	2026-11-25	xproof
 5f3fe679-aff1-41b3-8d75-c78c2c0636f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saheeli-rai:cast:s1,f:xs:XP:saheeli-rai:cast:s1	-	-	-	d864b561c9cb	-	caf09e6172b6	-	-	2026-11-24	xproof
 5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a0	Scry	agreed	-	FX	start	2	0	x:xs:XP:saheeli-rai:cast:s1,f:xs:XP:saheeli-rai:cast:s1	-	-	-	d864b561c9cb	-	caf09e6172b6	-	-	2026-11-24	xproof
-5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a1	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+5f3fe679-aff1-41b3-8d75-c78c2c0636f0	f0/a2	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:saheeli-rai:f0a2:s1,f:xs:XP:saheeli-rai:f0a2:s1	-	-	-	c2272f704fde	-	caf09e6172b6	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 5f4138e9-5471-467f-a15e-89e9e7929f0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-pioneer:f0t0:s1,f:xs:XP:elvish-pioneer:f0t0:s1	-	-	-	25696bf19d5b	-	fe8d46d7e284	-	-	2026-11-24	xproof
 5f4138e9-5471-467f-a15e-89e9e7929f0c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elvish-pioneer:f0t0:s1,f:xs:XP:elvish-pioneer:f0t0:s1	-	-	-	25696bf19d5b	-	fe8d46d7e284	-	-	2026-11-24	xproof
 5f42b67f-87fd-4f98-a0e8-0c8313f4bbc8	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:shipwreck-marsh:f0a0:s1,f:xs:XP:shipwreck-marsh:f0a0:s1	-	-	-	23b491658465	-	57329f2ad618	-	-	2026-11-24	xproof

@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97159138-c34b-416e-b079-5c952383a243	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97159138-c34b-416e-b079-5c952383a243	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 971b30a8-4ab4-4e96-9d50-597da4d52994	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:danitha-new-benalia-s-light:cast:s1,f:xs:XP:danitha-new-benalia-s-light:cast:s1	-	-	-	ae86f6029288	-	2d9988612680	-	-	2026-11-24	xproof
-971f7b30-0088-4e12-bc1a-262acc7f5f90	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+971f7b30-0088-4e12-bc1a-262acc7f5f90	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:sage-s-nouliths:f0t0:s2,f:xs:XP:sage-s-nouliths:f0t0:s2	-	-	-	267e485f6204	-	83d7e70d4ba0	-	-	2026-11-24	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sage-s-nouliths:f0a0:s1,f:xs:XP:sage-s-nouliths:f0a0:s1	-	-	-	23c4009444b0	-	83d7e70d4ba0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 97248734-6e99-42a2-8f11-f3337b25f8ab	f0/t0	ChangesZone/Job select	agreed	-	FX	start	1	0	x:xs:XP:sage-s-nouliths:f0t0:s2,f:xs:XP:sage-s-nouliths:f0t0:s2	-	-	-	267e485f6204	-	83d7e70d4ba0	-	-	2026-11-24	xproof
@@ -83,8 +83,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9779f32c-b1a2-42a3-8e78-14c28c3ad254	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sting-bilbo-s-sword:f0t0:s1,f:xs:XP:sting-bilbo-s-sword:f0t0:s1	-	-	-	25696bf19d5b	-	2ca837a8b30f	-	-	2026-11-24	xproof
 9779f32c-b1a2-42a3-8e78-14c28c3ad254	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:sting-bilbo-s-sword:f0a0:s1,f:xs:XP:sting-bilbo-s-sword:f0a0:s1	-	-	-	fb9d3088f0bf	-	2ca837a8b30f	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 9779f32c-b1a2-42a3-8e78-14c28c3ad254	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sting-bilbo-s-sword:f0t0:s1,f:xs:XP:sting-bilbo-s-sword:f0t0:s1	-	-	-	25696bf19d5b	-	2ca837a8b30f	-	-	2026-11-24	xproof
-977c2f33-b622-4172-9efb-7f523becd32b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Blazemire Verge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-977c2f33-b622-4172-9efb-7f523becd32b	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Blazemire Verge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+977c2f33-b622-4172-9efb-7f523becd32b	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:blazemire-verge:f0a0:s1,f:xs:XP:blazemire-verge:f0a0:s1	-	-	-	c2272f704fde	-	538749f548bf	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+977c2f33-b622-4172-9efb-7f523becd32b	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:blazemire-verge:f0a1:s1,f:xs:XP:blazemire-verge:f0a1:s1	-	-	-	c2272f704fde	-	538749f548bf	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 977c2f33-b622-4172-9efb-7f523becd32b	land	land	agreed	-	FX	start	2	0	x:xs:XP:blazemire-verge:land:s1,f:xs:XP:blazemire-verge:land:s1	-	-	-	23c4009444b0	-	538749f548bf	-	-	2026-11-25	xproof
 977f9390-e01d-4e9d-8e9c-e543b1266972	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zimone-infinite-analyst:cast:s1,f:xs:XP:zimone-infinite-analyst:cast:s1	-	-	-	8c0bd19283bb	-	76aa60ec7b95	-	-	2026-11-24	xproof
 977f9390-e01d-4e9d-8e9c-e543b1266972	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
