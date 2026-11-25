@@ -106,3 +106,34 @@ func TestXanswersScriptsResolveTargetsOnly(t *testing.T) {
 		t.Fatalf("resolve step 1 answers = %v, want the Serena Angel target scripted", got[1])
 	}
 }
+
+// TestChooseTargetsKeepsCastTriggerModalTarget: a non-modal spell's cast
+// trigger (Ojutai Exemplars) takes its mode and target on the cast step
+// (CR 603.3c). Those are the trigger's, so the trigger's target must not be
+// folded into the spell's own Targets and the step must stay out of castSteps.
+func TestChooseTargetsKeepsCastTriggerModalTarget(t *testing.T) {
+	sc := Scenario{
+		Steps: []Step{
+			{Op: "cast", Seat: 0, Card: "p0:Reach Through Mists", Mana: "UU", Targets: []string{"p1:Shield Sphere"}},
+			{Op: "resolve"},
+		},
+	}
+	ds := []rules.OracleDecision{
+		{Step: 0, Kind: "mode", Resume: "modes", Picks: []string{"Tap target creature."}},
+		{Step: 0, Kind: "target", Via: "cast fallback", PickRefs: []string{"p1:Shield Sphere"}},
+	}
+	got, castSteps := chooseTargets(sc, ds)
+	if castSteps[0] {
+		t.Fatalf("cast step 0 marked as carrying its own targets: %v", castSteps)
+	}
+	if len(got.Steps[0].Targets) != 0 {
+		t.Fatalf("cast targets = %v, want none (the trigger's target is not the spell's)", got.Steps[0].Targets)
+	}
+
+	// The spell's own modal announcement still folds its fallback target.
+	ds[0].Resume = "cast_modes"
+	got, castSteps = chooseTargets(sc, ds)
+	if !castSteps[0] || len(got.Steps[0].Targets) != 1 {
+		t.Fatalf("a modal spell's own target no longer folds: %v %v", castSteps, got.Steps[0].Targets)
+	}
+}
