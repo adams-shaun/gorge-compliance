@@ -18,17 +18,25 @@ type supportAnswers struct {
 // and the announcement step they belong on, or ok=false when the decision is
 // not a Support pick this route can place.
 //
-// gorge asks Support$ N at RESOLUTION as a KChoose with ResumeKind
-// "counter_pick" (engine/effects/counters_put.go's putCounterSupport), but
-// XMage declares it as a target on the source itself: SupportEffect adds a
-// TargetCreaturePermanent(0, N) to the instant/sorcery's spell ability
-// (SupportEffect.java:25) and SupportAbility adds a TargetPermanent(0, N) to
-// the enters-the-battlefield triggered ability (SupportAbility.java:37). The
-// ask therefore happens when the object is ANNOUNCED -- the cast step of a
-// spell, the step a permanent's trigger is put on the stack, the activate
-// step of an activated ability -- and TestPlayer reads it from the TARGET
-// queue. A "choice" on the resolution step is never consumed (Unity of
-// Purpose, Nissa's Judgment).
+// gorge asks a PERMANENT's Support$ N at RESOLUTION as a KChoose with
+// ResumeKind "counter_pick" (engine/effects/counters_put.go's
+// putCounterSupport), but XMage declares it as a target on the source itself:
+// SupportAbility adds a TargetPermanent(0, N) to the enters-the-battlefield
+// triggered ability (SupportAbility.java:37), and an activated ability
+// declares its target on activation. The ask therefore happens when the
+// object is ANNOUNCED -- the step a permanent's trigger is put on the stack,
+// the activate step of an activated ability -- and TestPlayer reads it from
+// the TARGET queue. A "choice" on the resolution step is never consumed.
+//
+// An instant or sorcery is deliberately absent from that route: since gorge
+// 5326ad5128 its Support is announced while casting (supportTargetSA /
+// supportAnnounced, CR 601.2c; engine/rules/support_targets.go), so it records
+// an ordinary cast target decision instead of a counter_pick. Where the cast
+// step presets Step.Targets (a hand-authored scenario) ChooseTargets folds the
+// decision into them and XMage's castSpell consumes it; a generated item
+// records it via="answer" and scripts it as a cast-step TARGET answer. Either
+// way the ask is already at cast: there is nothing to retime and the old
+// resolution "choice" is gone.
 //
 // The source is resolved by counterPickSource (counter_pick_source.go): the
 // stack snapshot at the decision's own step is the authority, with the step's
@@ -36,9 +44,9 @@ type supportAnswers struct {
 // chain must carry PutCounter's Support$ parameter. The announcement step is
 // then read from the same snapshots: the first checkpoint at which the source
 // stack object is present, minus one, is the step that announced it. That is
-// structural, not card- or timing-table-based, so a spell, an ETB trigger, an
-// attack trigger and an activated support all land on the step their own
-// object first reached the stack. A trigger announced AND
+// structural, not card- or timing-table-based, so an ETB trigger, an attack
+// trigger and an activated support all land on the step their own object
+// first reached the stack. A trigger announced AND
 // resolved inside the decision's own step never shows in a checkpoint (the
 // generated cast-resolve shape): only its permanent spell does, and the answers
 // stay on that step (supportSpellTrigger).
