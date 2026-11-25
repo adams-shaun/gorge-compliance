@@ -62,9 +62,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97607bf5-ca7b-4b1b-963e-390faf6e413e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enterprising-scallywag:cast:s1,f:xs:XP:enterprising-scallywag:cast:s1	-	-	-	23b491658465	-	190a11f404c7	-	-	2026-11-24	xproof
 97607bf5-ca7b-4b1b-963e-390faf6e413e	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Enterprising Scallywag/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9760c396-fc7d-41bc-8f03-5ee359eaec00	cast	cast-resolve	agreed	-	FX	scen	2	0	Welcome to Sweettooth/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-97652492-7906-4d79-983c-fa1dc1239eba	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-97652492-7906-4d79-983c-fa1dc1239eba	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-97652492-7906-4d79-983c-fa1dc1239eba	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+97652492-7906-4d79-983c-fa1dc1239eba	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+97652492-7906-4d79-983c-fa1dc1239eba	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+97652492-7906-4d79-983c-fa1dc1239eba	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 97671aac-7322-44ae-8908-d573734db3af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97671aac-7322-44ae-8908-d573734db3af	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9768d43b-8b3f-4d03-ac1b-e603af832875	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vito-fanatic-of-aclazotz:cast:s1,f:xs:XP:vito-fanatic-of-aclazotz:cast:s1	-	-	-	23b491658465	-	77f193b0b92a	-	-	2026-11-25	xproof
@@ -159,8 +159,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 97dfc025-afc2-42d8-a20a-f29d60754a2e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 97e088a3-65eb-42f5-85b8-6aeb770a3f56	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:relief-captain:f0t0:s1,f:xs:XP:relief-captain:f0t0:s1	-	-	-	d864b561c9cb	-	106489c2f9ea	-	-	2026-11-24	xproof
 97e088a3-65eb-42f5-85b8-6aeb770a3f56	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:relief-captain:f0t0:s1,f:xs:XP:relief-captain:f0t0:s1	-	-	-	d864b561c9cb	-	106489c2f9ea	-	-	2026-11-24	xproof
-97e1fcdf-04e8-40cf-b04a-8505d9b7cecc	cast	cast-resolve	agreed	-	X	scen	1	0	Ennis, Debate Moderator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-97e1fcdf-04e8-40cf-b04a-8505d9b7cecc	f0/t0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+97e1fcdf-04e8-40cf-b04a-8505d9b7cecc	cast	cast	agreed	-	F	start	2	0	f:xs:XP:ennis-debate-moderator:cast:s1	-	-	-	054d9f516953	-	bc77289160cd	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+97e1fcdf-04e8-40cf-b04a-8505d9b7cecc	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:ennis-debate-moderator:cast:s1	-	-	-	054d9f516953	-	bc77289160cd	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 97e1fcdf-04e8-40cf-b04a-8505d9b7cecc	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:ennis-debate-moderator:f0t1:s1,f:xs:XP:ennis-debate-moderator:f0t1:s1	-	-	-	054d9f516953	-	bc77289160cd	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 97e260c9-3e78-402b-8d97-af4b515b278b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hammers-of-moradin:cast:s1,f:xs:XP:hammers-of-moradin:cast:s1	-	-	-	8c0bd19283bb	-	f8eda5143493	-	-	2026-11-24	xproof
 97e260c9-3e78-402b-8d97-af4b515b278b	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:hammers-of-moradin:f0t0:s1,f:xs:XP:hammers-of-moradin:f0t0:s1	-	-	-	8c0bd19283bb	-	f8eda5143493	-	-	2026-11-24	xproof
