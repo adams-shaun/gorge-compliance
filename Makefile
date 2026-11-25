@@ -396,7 +396,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
 # 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
 # Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
-FORGE_ORACLE_REF ?= d0f16bee2e018d35874a0a8838491c1af1b02b82
+# 24a3344b81 = d0f16bee2e0 plus Spin into Myth's fateseal (xproof cluster xpt-be0cfba7): Forge's DigEffect asks
+# orderMoveToZoneList for the cards a Dig sent to the library bottom (to their OWNER's controller), but gorge logs only its
+# one choose_n[dig] pick and no order decision. StepMachine.pickObjects remembers the consumed dig pick and orderCards answers
+# a Dig LibraryPosition$ -1 order ask from it (first pick moved first, so it ends highest; CR 401.4), matched by name multiset
+# at the same step, seat not compared. Test FatesealDigOrderTest (fixtures/unmapped/fateseal-dig-order.jsonl), run by
+# scripts/forge-oracle-test-fateseal-dig-order.sh. Driver-only (ScriptedController/StepMachine), die-roll code unchanged;
+# cardsfolder/tokenscripts unchanged. Fork branch fix/xp-forge-driver-fateseal-dig-order.
+FORGE_ORACLE_REF ?= 24a3344b81151365c63c3dc9ed4b292a9e57724b
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
