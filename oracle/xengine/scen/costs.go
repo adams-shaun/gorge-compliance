@@ -172,6 +172,36 @@ func planCost(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, 
 			if need > 0 {
 				p.counters = append(p.counters, StartCounter{Card: card, Kind: kind, N: need})
 			}
+		case head == "Waterbend" && len(args) == 1:
+			// "waterbend {N}": N more basics — landsFor expands the bare
+			// number token into that many lands of the start's colour
+			if _, err := strconv.Atoi(args[0]); err != nil {
+				return p, refusal
+			}
+			p.mana = append(p.mana, args[0])
+		case (head == "Behold" || head == "BeholdExile") && len(args) >= 2:
+			// "behold a <Spec>": the revealed cards stay in the caster's hand
+			// (the engine's beheldCostAsk takes hand candidates too; a
+			// BeholdExile's ThenExile mark does not move the ask)
+			spec := strings.Join(args[1:], "/")
+			var test func(*cards.Face) bool
+			known := false
+			for _, a := range parseFilter(spec) {
+				if a.known && !a.self && a.ctrl != ctrlOpp {
+					test, known = a.test, true
+					break
+				}
+			}
+			if !known {
+				return p, refusal // a spec the engine's filter matches nothing of
+			}
+			name := pickZoneFixture(reg, b, card, test, nil, true)
+			if name == "" {
+				return p, refusal
+			}
+			for range n {
+				p.hand = append(p.hand, name)
+			}
 		case head == "AddCounter" && len(args) == 2:
 		default:
 			return p, refusal
@@ -333,20 +363,51 @@ func castStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card,
 			return why
 		}
 	}
-	// "As an additional cost to cast this spell, waterbend {N}" (a RaiseCost
-	// of the card itself): N more lands
+	// "As an additional cost to cast this spell, ..." (a RaiseCost of the
+	// card itself): the additional cost's plan — the lands its mana takes
+	// (a Waterbend's {N} rides in as mana tokens) and whatever else planCost
+	// places (a Behold's revealed cards)
 	for _, st := range face.Statics {
 		if st.Mode != "RaiseCost" || st.Params["ValidCard"] != "Card.Self" || st.Params["Type"] != "Spell" ||
 			!strings.HasPrefix(st.Params["Description"], "As an additional cost") {
 			continue
 		}
-		head, args := costArgs(strings.TrimSpace(st.Params["Cost"]))
-		if head != "Waterbend" || len(args) != 1 {
-			continue
+		cost := strings.TrimSpace(st.Params["Cost"])
+		if !raiseCostModelled(cost) {
+			continue // an optional or X cost (waterbend {X}, a "you may" exile): the bot may decline it
 		}
-		if n, err := strconv.Atoi(args[0]); err == nil {
-			p0.Battlefield = append(p0.Battlefield, landsFor([]string{strconv.Itoa(n)}, generic)...)
+		plan, why := planCost(reg, b, face, card, cost, generic)
+		if why != "" {
+			return why
 		}
+		p0.Battlefield = append(p0.Battlefield, landsFor(plan.mana, generic)...)
+		plan.applyExtras(p0)
 	}
 	return ""
+}
+
+// raiseCostModelled reports whether an additional-cost RaiseCost is one
+// planCost's mandatory arms plan: every non-mana token is a Waterbend of a
+// literal N or a Behold/BeholdExile. Any other token (an X cost, a "you may"
+// exile or discard, a tap or sacrifice) is left to the cast the way it was
+// before additional costs were planned, not refused.
+func raiseCostModelled(cost string) bool {
+	modelled := false
+	for _, tok := range splitCost(cost) {
+		if manaTokenRE.MatchString(tok) {
+			continue
+		}
+		head, args := costArgs(tok)
+		switch {
+		case head == "Waterbend" && len(args) == 1:
+			if _, err := strconv.Atoi(args[0]); err != nil {
+				return false
+			}
+		case (head == "Behold" || head == "BeholdExile") && len(args) >= 2:
+		default:
+			return false
+		}
+		modelled = true
+	}
+	return modelled
 }
