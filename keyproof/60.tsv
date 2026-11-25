@@ -24,8 +24,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60206d4e-4301-4d7a-a68e-46a2ad9fc407	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:gangly-stompling:combat0.attack:s1	-	-	-	23c4009444b0	-	3922099465e9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 60206d4e-4301-4d7a-a68e-46a2ad9fc407	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gangly-stompling:combat0.block:s1,f:xs:XP:gangly-stompling:combat0.block:s1	-	-	-	23c4009444b0	-	3922099465e9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 602132c2-8ee8-41f8-bfac-cb17d32203f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-602132c2-8ee8-41f8-bfac-cb17d32203f5	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
-602132c2-8ee8-41f8-bfac-cb17d32203f5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+602132c2-8ee8-41f8-bfac-cb17d32203f5	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+602132c2-8ee8-41f8-bfac-cb17d32203f5	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:savvy-hunter:f0t0:s1,f:xs:XP:savvy-hunter:f0t0:s1	-	-	-	cb99a158debc	-	bce03ab1fa2e	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 602132c2-8ee8-41f8-bfac-cb17d32203f5	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 6021c2d6-d098-4de2-9c7e-4c571f9238f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6021c2d6-d098-4de2-9c7e-4c571f9238f6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

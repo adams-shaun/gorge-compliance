@@ -136,7 +136,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6bac1495-16cf-4e1e-9126-482f85322c78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6badc583-fabb-4d63-b70c-e7380acafc23	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:roiling-dragonstorm:f0t0:s1,f:xs:XP:roiling-dragonstorm:f0t0:s1	-	-	-	e07cf3a05ba5	-	9de1feff2afd	-	-	2026-11-24	xproof
 6badc583-fabb-4d63-b70c-e7380acafc23	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:roiling-dragonstorm:f0t0:s1,f:xs:XP:roiling-dragonstorm:f0t0:s1	-	-	-	e07cf3a05ba5	-	9de1feff2afd	-	-	2026-11-24	xproof
-6badc583-fabb-4d63-b70c-e7380acafc23	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Roiling Dragonstorm/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6badc583-fabb-4d63-b70c-e7380acafc23	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:roiling-dragonstorm:f0t1:s1,f:xs:XP:roiling-dragonstorm:f0t1:s1	-	-	-	cb99a158debc	-	9de1feff2afd	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6bb00a28-8b5a-4049-93b7-3db02de88aeb	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:forsaken-city:land:s1,f:xs:XP:forsaken-city:land:s1	-	-	-	fc71ca68c5ac	-	262e4f328393	-	-	2026-11-24	xproof
 6bb00a28-8b5a-4049-93b7-3db02de88aeb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6bb00a28-8b5a-4049-93b7-3db02de88aeb	land	land	agreed	-	FX	start	2	0	x:xs:XP:forsaken-city:land:s1,f:xs:XP:forsaken-city:land:s1	-	-	-	fc71ca68c5ac	-	262e4f328393	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6bb7d0df-7a9f-4e17-8c31-7628c4b12356	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
-6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 6bb7d0df-7a9f-4e17-8c31-7628c4b12356	f1/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 6bb7d985-b033-46a2-9bbb-6f7ee62aaaff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herald-of-the-fair:f0t0:s1,f:xs:XP:herald-of-the-fair:f0t0:s1	-	-	-	d864b561c9cb	-	cdf956587444	-	-	2026-11-24	xproof

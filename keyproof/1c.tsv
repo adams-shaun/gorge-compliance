@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c6a0d19-c7dd-4353-95ad-dfdef2d5d2d9	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1c6a0d19-c7dd-4353-95ad-dfdef2d5d2d9	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1c6da9a9-6395-460b-8150-ea46d7299dc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c6f95fd-f8d0-4d22-aa21-29e5c70b2f85	cast	cast	owed	harness	-	start	0	0	-	-	-	-	9087eefec3ee	-	4bd50c04ccc4	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+1c6f95fd-f8d0-4d22-aa21-29e5c70b2f85	cast	cast	owed	harness	-	start	0	0	-	-	-	-	cb99a158debc	-	4bd50c04ccc4	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 1c747fe2-289e-492a-a846-aa77707e2dc3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:abrupt-decay:cast:s1,f:xs:XP:abrupt-decay:cast:s1	-	-	-	da6bc3fe8458	-	866dc37ef60e	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 1c751201-24ba-4e5c-bf44-71c3e4693a92	cast	cast-resolve	agreed	-	FX	scen	2	0	Conceited Witch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1c751201-24ba-4e5c-bf44-71c3e4693a92	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Conceited Witch/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1c859c97-74df-4360-baf8-0f79eae97c45	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:forced-adaptation:f0t0:s1,f:xs:XP:forced-adaptation:f0t0:s1	-	-	-	fb9d3088f0bf	-	287b5991aa45	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 1c859c97-74df-4360-baf8-0f79eae97c45	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:forced-adaptation:f0t0:s1,f:xs:XP:forced-adaptation:f0t0:s1	-	-	-	fb9d3088f0bf	-	287b5991aa45	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 1c8ef715-3c3c-4d04-9f30-941b870b11d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1c8ef715-3c3c-4d04-9f30-941b870b11d3	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+1c8ef715-3c3c-4d04-9f30-941b870b11d3	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 1c95b7cf-be4d-4961-9073-3e39487492c8	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:plagon-lord-of-the-beach:cast:s1,f:xs:XP:plagon-lord-of-the-beach:cast:s1	-	-	-	8c0bd19283bb	-	2d9f8ffd4aa3	-	-	2026-11-24	xproof
 1c95b7cf-be4d-4961-9073-3e39487492c8	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:plagon-lord-of-the-beach:cast:s2,f:xs:XP:plagon-lord-of-the-beach:cast:s2	-	-	-	8c0bd19283bb	-	2d9f8ffd4aa3	-	-	2026-11-24	xproof
 1c95b7cf-be4d-4961-9073-3e39487492c8	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:plagon-lord-of-the-beach:cast:s1,f:xs:XP:plagon-lord-of-the-beach:cast:s1	-	-	-	8c0bd19283bb	-	2d9f8ffd4aa3	-	-	2026-11-24	xproof

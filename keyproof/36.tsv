@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36282c29-a44b-4156-9441-03aa4bf386a8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36282c29-a44b-4156-9441-03aa4bf386a8	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 362b7838-3b70-4a00-8c26-1c8b8a3b6acf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawn-s-reflection:cast:s1,f:xs:XP:dawn-s-reflection:cast:s1	-	-	-	25696bf19d5b	-	1b89bbcc4875	-	-	2026-11-24	xproof
-362b7838-3b70-4a00-8c26-1c8b8a3b6acf	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana:filter	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+362b7838-3b70-4a00-8c26-1c8b8a3b6acf	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana:filter	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 362fc643-ab76-4160-a73e-73397464db40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deliberate:cast:s1,f:xs:XP:deliberate:cast:s1	-	-	-	ae86f6029288	-	50a7ef775b5f	-	-	2026-11-24	xproof
 36330947-5ef9-4bff-b541-bfbddd9715a3	cast	cast-resolve	agreed	-	FX	scen	2	0	Murdock's Crusade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 363b0504-27bf-40df-96ec-9e3cb1e47588	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -129,7 +129,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36a8ceb1-148b-41e0-a7bf-ceb879bf08e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36a9de4c-8073-475d-8679-e50844eef09e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:halo-fountain:cast:s1,f:xs:XP:halo-fountain:cast:s1	-	-	-	ae86f6029288	-	d8e95399694a	-	-	2026-11-24	xproof
 36a9de4c-8073-475d-8679-e50844eef09e	f0/a0	NULL	owed	refused:steps-needed:cost:untapYType	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
-36a9de4c-8073-475d-8679-e50844eef09e	f0/a1	NULL	owed	refused:steps-needed:cost:untapYType	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+36a9de4c-8073-475d-8679-e50844eef09e	f0/a1	NULL	owed	refused:steps-needed:cost:untapYType	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 36a9de4c-8073-475d-8679-e50844eef09e	f0/a2	NULL	owed	refused:steps-needed:cost:untapYType	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 36ab41b7-bcfb-4618-bbfb-70d608dba15a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stratosoarer:f0t0:s1,f:xs:XP:stratosoarer:f0t0:s1	-	-	-	267e485f6204	-	31de770f4fec	-	-	2026-11-24	xproof
 36ab41b7-bcfb-4618-bbfb-70d608dba15a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stratosoarer:combat0.attack:s1,f:xs:XP:stratosoarer:combat0.attack:s1	-	-	-	23c4009444b0	-	31de770f4fec	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

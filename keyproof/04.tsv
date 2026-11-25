@@ -75,7 +75,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 045488b3-0206-4dcd-91ab-59ec542f06c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guidelight-optimizer:cast:s1,f:xs:XP:guidelight-optimizer:cast:s1	-	-	-	23c4009444b0	-	ab2d97b93b42	-	-	2026-11-25	xproof
 045488b3-0206-4dcd-91ab-59ec542f06c0	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:guidelight-optimizer:f0a0:s1,f:xs:XP:guidelight-optimizer:f0a0:s1	-	-	-	da6bc3fe8458	-	ab2d97b93b42	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 04559759-1afd-4785-badc-c3416041f016	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hallar-the-firefletcher:cast:s1,f:xs:XP:hallar-the-firefletcher:cast:s1	-	-	-	d864b561c9cb	-	3e845bb19eb0	-	-	2026-11-24	xproof
-04559759-1afd-4785-badc-c3416041f016	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+04559759-1afd-4785-badc-c3416041f016	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 0456ec64-2c81-4763-a352-8ff64a4c3d6b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:deadly-rollick:cast:s1	-	-	-	23c4009444b0	-	f23a14ffb740	-	-	2026-11-25	xproof
 04576b4d-2977-4cdf-b4a5-b0b47995e962	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-barbarian:cast:s1,f:xs:XP:yavimaya-barbarian:cast:s1	-	-	-	fc71ca68c5ac	-	4174c5b415b6	-	-	2026-11-24	xproof
 045a9d3d-c20d-427f-a77b-0bffc6f55526	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -228,11 +228,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04eb4fc0-0cc5-44f1-af5a-44579125d5c2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04eeb9ad-5c59-411b-8809-db8349838588	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04eeb9ad-5c59-411b-8809-db8349838588	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04eeb9ad-5c59-411b-8809-db8349838588	f0/a2	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+04eeb9ad-5c59-411b-8809-db8349838588	f0/a2	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 04eeb9ad-5c59-411b-8809-db8349838588	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04f0c489-3d1e-4ee4-a0ab-7983ae643ecb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chaos-maw:f0t0:s1,f:xs:XP:chaos-maw:f0t0:s1	-	-	-	d864b561c9cb	-	3567627bbe1e	-	-	2026-11-24	xproof
 04f0c489-3d1e-4ee4-a0ab-7983ae643ecb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chaos-maw:f0t0:s1,f:xs:XP:chaos-maw:f0t0:s1	-	-	-	d864b561c9cb	-	3567627bbe1e	-	-	2026-11-24	xproof
 04f2c320-dfcc-440a-9e24-3c2083d74e7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jiang-yanggu-wildcrafter:cast:s1,f:xs:XP:jiang-yanggu-wildcrafter:cast:s1	-	-	-	d864b561c9cb	-	f662e5dd8095	-	-	2026-11-24	xproof
 04f2c320-dfcc-440a-9e24-3c2083d74e7c	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:jiang-yanggu-wildcrafter:cast:s1,f:xs:XP:jiang-yanggu-wildcrafter:cast:s1	-	-	-	d864b561c9cb	-	f662e5dd8095	-	-	2026-11-24	xproof
-04fbb7aa-0dd4-4ac6-837d-822227fb6356	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+04fbb7aa-0dd4-4ac6-837d-822227fb6356	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 04fd8c1f-80e5-4b3d-b63e-7af6ccafbbaa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wildfire-howl:cast:s1,f:xs:XP:wildfire-howl:cast:s1	-	-	-	23c4009444b0	-	1ddc5d262916	-	-	2026-11-25	xproof
