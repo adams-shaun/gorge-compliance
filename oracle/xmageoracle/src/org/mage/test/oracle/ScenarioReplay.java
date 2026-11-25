@@ -493,17 +493,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
 
-        /** The occurrence to keep visible, or 0 for a helper test double. The
-         * Step is always counted, even at a step this player has nothing
-         * queued for: the runtime count of a step name must include its
-         * natural occurrence (turn 1's upkeep and draw before the replay's
-         * main 1 start), or an additional step of that name (Obeka's extra
-         * upkeeps, CR 500.8) would be counted as occurrence 1. */
+        /** The occurrence to keep visible, or 0 when this player holds no
+         * positioned action (a helper test double). Asking the game for its
+         * Step is only needed when some action can actually be filtered. */
         private int currentOccurrence(Game game) {
             if (owner.actionOccurrences == null) {
                 return 0;
             }
-            return owner.runtimeOccurrence(game);
+            for (PlayerAction action : getActions()) {
+                if (owner.actionOccurrences.containsKey(action)) {
+                    return owner.runtimeOccurrence(game);
+                }
+            }
+            return 0;
         }
 
         /** Remove the actions of every other occurrence of the current step,
@@ -6963,12 +6965,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
     /** The replay starts in the scenario turn's main 1, but the game runs
      * that turn's natural upkeep and draw before it: the runtime side counts
      * them. Count them on the queued side too, so an additional upkeep or
-     * draw step after the start (CR 500.8) is occurrence 2 in both. */
+     * draw step after the start (CR 500.8) is occurrence 2 in both. The draw
+     * is counted only when it runs: a two-player game's starting player skips
+     * the draw step of turn 1 (TwoPlayerDuel's one-shot TurnMod), so there
+     * the runtime never sees a natural draw and an additional one is
+     * occurrence 1. A three-seat FreeForAll has no such skip. */
     private void seedNaturalStepsBeforeStart(int turnNum) {
         EnumMap<PhaseStep, Integer> counts = queuedOccurrences.computeIfAbsent(
                 turnNum, key -> new EnumMap<>(PhaseStep.class));
         counts.put(PhaseStep.UPKEEP, 1);
-        counts.put(PhaseStep.DRAW, 1);
+        if (!(seats == 2 && turnNum == 1)) {
+            counts.put(PhaseStep.DRAW, 1);
+        }
     }
 
     /** Record a position the queued replay enters. A pass that moved within

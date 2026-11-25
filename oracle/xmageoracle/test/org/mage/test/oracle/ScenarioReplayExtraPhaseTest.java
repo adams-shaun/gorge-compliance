@@ -154,6 +154,47 @@ public final class ScenarioReplayExtraPhaseTest {
                 + cutActual.size() + " checkpoints, last " + cutActual.get(cutActual.size() - 1));
 
         additionalUpkeepAfterCombatOnStartTurn(dir);
+        additionalUpkeepAfterCombatOnTurnTwoStart(dir);
+        additionalDrawAfterMainTwoOnStartTurn(dir);
+    }
+
+    /** The same Obeka game replayed from turn 2's main 1 (seat 1 active):
+     * the turn's natural upkeep runs before the start with nothing queued
+     * there, so only the runtime count keeps the extra upkeeps at occurrence
+     * 2 (no "setup entry history" action sits at the natural upkeep). */
+    private static void additionalUpkeepAfterCombatOnTurnTwoStart(Path dir) throws Exception {
+        String name = "extra-upkeep-start-turn2-obeka.jsonl";
+        JsonObject sc = JsonParser.parseString(
+                new String(Files.readAllBytes(dir.resolve(name)), StandardCharsets.UTF_8).trim()).getAsJsonObject();
+        List<String> expected = expectedSteps(sc);
+        JsonObject res = replay(sc);
+        noHarness(res, name);
+        List<String> actual = snapshotSteps(res);
+        equal(expected, actual, "turn 2 start snapshot steps");
+        equal("PRECOMBAT_MAIN", actual.get(0), "first snapshot");
+        if (actual.indexOf("UPKEEP") < actual.indexOf("END_COMBAT")) {
+            throw new AssertionError("an upkeep checkpoint precedes end of combat: " + actual);
+        }
+        System.out.println("PASS additional upkeeps after combat on a turn 2 start: "
+                + actual.size() + " checkpoints, " + count(actual, "UPKEEP") + " upkeep checkpoints");
+    }
+
+    /** Sphinx of the Second Sun on turn 1: an additional beginning phase
+     * after main 2 (CR 500.8) adds an upkeep and a draw step. The two-player
+     * starting player skips turn 1's natural draw, so that draw is the first
+     * draw occurrence and its queued passes must run. */
+    private static void additionalDrawAfterMainTwoOnStartTurn(Path dir) throws Exception {
+        String name = "extra-draw-start-turn-sphinx.jsonl";
+        JsonObject sc = JsonParser.parseString(
+                new String(Files.readAllBytes(dir.resolve(name)), StandardCharsets.UTF_8).trim()).getAsJsonObject();
+        List<String> expected = expectedSteps(sc);
+        JsonObject res = replay(sc);
+        noHarness(res, name);
+        List<String> actual = snapshotSteps(res);
+        equal(expected, actual, "extra draw snapshot steps");
+        equal(2, count(actual, "DRAW"), "draw checkpoints");
+        System.out.println("PASS an additional draw on the start turn: " + actual.size()
+                + " checkpoints, " + count(actual, "DRAW") + " draw checkpoints");
     }
 
     /** Obeka, Splitter of Seconds: a replay from turn 1 main 1 whose combat
