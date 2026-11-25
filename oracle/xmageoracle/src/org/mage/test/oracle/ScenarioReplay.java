@@ -1906,13 +1906,31 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                 }
             }
-            if (!forcedPick(target.getMinNumberOfTargets() - target.getSize(), candidates.size(), head, headNamesCandidate)) {
+            int needed = target.getMinNumberOfTargets() - target.getSize();
+            // The whole replay's answers share one FIFO queue, built before
+            // any step runs, so a head that names the lone candidate may be a
+            // LATER step's pick (the discard cost of Borborygmos Enraged's
+            // first activation, a one-card hand, taking the Mountain scripted
+            // for its third). A lone-candidate discard cost is never scripted:
+            // gorge records no decision for it.
+            boolean headIsOurs = headNamesCandidate
+                    && !loneDiscardCostCandidate(askedByName("DiscardTargetCost", "pay"), needed, candidates.size());
+            if (!forcedPick(needed, candidates.size(), head, headIsOurs)) {
                 return false;
             }
             for (UUID id : candidates) {
                 target.add(id, game);
             }
             return true;
+        }
+
+        /** Whether a choose ask is a discard COST's one forced card: the cost
+         * (DiscardTargetCost.pay) still needs a card and exactly one is
+         * legal. gorge drops that ask as a forced one-option pick, so no
+         * answer is scripted for it and a queue head naming the card belongs
+         * to a later ask. */
+        static boolean loneDiscardCostCandidate(boolean discardCost, int needed, int candidates) {
+            return discardCost && needed > 0 && candidates == 1;
         }
 
         /** Whether a choose ask is forced: it still needs picks, every
