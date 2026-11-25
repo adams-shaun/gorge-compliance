@@ -10,8 +10,15 @@
 # can check a candidate before bumping:
 #   FORGE_ORACLE_REF=<sha> bash scripts/check-fork-pins.sh
 #
-# Exit: 0 every pin is on its fork; 1 a pin is missing (or the API returned a
-# different commit); 2 usage/environment (no gh, no pin, not a full SHA).
+# The API answers for any commit in the fork *network*, which is exactly what a
+# kit's `git fetch <fork-url> <sha>` needs. It does not prove the commit is on a
+# branch of the named fork: scripts/forge-oracle-setup.sh and
+# scripts/xmage-oracle-setup.sh fetch refs only, so a network-only commit would
+# still fail those setups. The success line therefore says "fork network".
+#
+# Exit: 0 every pin is in its fork network; 1 a pin is missing (or the API
+# returned a different commit); 2 usage/environment (no gh, no pin, not a full
+# SHA).
 set -euo pipefail
 
 here=$(cd "$(dirname "$0")/.." && pwd)
@@ -49,7 +56,7 @@ for entry in "${pins[@]}"; do
 	[[ $sha =~ ^[0-9a-f]{40}$ ]] || die "pin $name is not a full commit sha: '$sha'"
 
 	if got=$(gh api "repos/$fork/commits/$sha" --jq .sha) && [ "$got" = "$sha" ]; then
-		echo "fork pin $name $sha is on $fork"
+		echo "fork pin $name $sha is in the $fork fork network (fetchable by SHA)"
 	else
 		echo "fork pin $name $sha is not on $fork: push it first" >&2
 		failed=1

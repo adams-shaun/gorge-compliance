@@ -593,9 +593,12 @@ phase-preflight:
 # precheck is the cheap merge gate: every pin a kit build fetches from one of
 # our forks must already be pushed there. A seat-local commit that never
 # reached adams-shaun/forge or adams-shaun/mage breaks every kit build with
-# "upload-pack: not our ref", so CI's lint job runs this on every PR. The pins
-# are passed explicitly because make does not export its variables; a
-# FORGE_ORACLE_REF=... on the command line wins over the ?= default.
+# "upload-pack: not our ref". Tickets land on local develop, so the landing
+# config (.agentctl/config.toml, operator-owned and untracked) must gate merges
+# on this target; CI's lint job runs it on the develop->main PR as the second
+# line of defence. The pins are passed explicitly because make does not export
+# its variables; a FORGE_ORACLE_REF=... on the command line wins over the ?=
+# default.
 .PHONY: precheck
 precheck:
 	FORGE_ORACLE_REF='$(FORGE_ORACLE_REF)' XMAGE_REF='$(XMAGE_REF)' bash scripts/check-fork-pins.sh
@@ -621,6 +624,7 @@ smoke:
 	bash ops/scripts/tests/make_cards_smoke.sh
 	bash ops/scripts/tests/forge_pass_smoke.sh
 	bash ops/scripts/tests/forge_oracle_pin_smoke.sh
+	bash ops/scripts/tests/check_fork_pins_smoke.sh
 	bash ops/scripts/tests/forge_sbv2_smoke.sh
 	bash ops/scripts/tests/xmage_sbv2_smoke.sh
 	bash ops/scripts/tests/phase_oracle_pin_smoke.sh
