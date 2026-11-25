@@ -697,7 +697,7 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # PhyrexianLifePaymentTest.krrikPaysTheBlackPipWithTwoLife (fails on 0fe8c90e549) and a no-pick control, run by
 # scripts/forge-oracle-test-krrik-life-instead-of-b.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts unchanged.
 # Fork branch fix/xp-forge-driver-krrik-life-instead-of-b (PR adams-shaun/forge#12).
-FORGE_ORACLE_REF ?= 1707ccc4018b9131c5bf3322637311f194d8a93e
+FORGE_ORACLE_REF ?= e76652fae3982b8cb60eace055cabfe08610f5da
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
