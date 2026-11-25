@@ -15,7 +15,8 @@ import (
 // draw, a discard, a sacrifice, a tap, an untap, mana tapped for a mana, a
 // crime. Each mode names the event it needs and the fixture that causes it,
 // from one table (eventFixtures) the modes share: the draw spell, the discard
-// spell, the targeting spell, the sacrifice and tap carriers. The card itself
+// spell, the targeting spell, the sacrifice and tap carriers (sacCarrier,
+// tapPool, ranked pools of the corpus's own cards). The card itself
 // is the causer when it can be ("Whenever CARDNAME becomes tapped" is its own
 // {T} ability or its attack); otherwise a fixture on the seat the trigger's
 // filter names is, and the focus play is that fixture's one play, on the seat
@@ -30,18 +31,20 @@ import (
 var eventFixtures = struct {
 	// Draw is the instant a seat casts to draw one card.
 	Draw string
-	// Discard is the sorcery a seat casts to make the other discard two cards.
+	// Discard is the sorcery a seat casts to make the other discard a card.
+	// It targets an opponent and nothing else ("target opponent"), so the
+	// bot has no other target to choose: the forced line is one line.
 	Discard string
-	// Crime is the instant that targets a creature: cast at an opposing
-	// creature it is a crime (CR 700.13).
+	// Crime is a spell whose only legal target is an opponent: casting it
+	// is a crime (CR 700.13) with no other target for the bot to pick.
 	Crime string
 	// Targeters are the spells that target a permanent, one per kind of
 	// permanent, tried in order (targetStart).
 	Targeters []targeter
 }{
 	Draw:    "Reach Through Mists",
-	Discard: "Mind Rot",
-	Crime:   "Murder",
+	Discard: "Coercion",
+	Crime:   "Coercion",
 	Targeters: []targeter{
 		{name: "Murder", takes: (*cards.Face).IsCreature},
 		{name: "Disenchant", takes: func(f *cards.Face) bool { return f.HasTypeWord("Artifact") || f.HasTypeWord("Enchantment") }},
@@ -248,8 +251,8 @@ func drawStart(reg *cards.Registry, b *certdeck.Builder, card string, trig *card
 
 // discardStart is "whenever a player discards a card": the discard fixture, a
 // sorcery cast by the seat on its own turn at the other, whose hand is exactly
-// the cards that match the trigger's filter (so whatever the discarder picks
-// is the card the filter takes). "When you discard this card" is the card
+// one card that matches the trigger's filter (so the card discarded is the
+// card the filter takes). "When you discard this card" is the card
 // itself in that hand.
 func discardStart(reg *cards.Registry, b *certdeck.Builder, card, generic string, trig *cards.Trigger, f *StartFile) string {
 	none := "no-generator:trigger:Discarded"
@@ -281,7 +284,7 @@ func discardStart(reg *cards.Registry, b *certdeck.Builder, card, generic string
 		if name == "" {
 			return none + ":filter"
 		}
-		victim, hand = s, []string{name, name}
+		victim, hand = s, []string{name}
 		if vp := trig.Params["ValidPlayer"]; vp != "" {
 			s, _, ok := playerRef(vp)
 			if !ok {
@@ -462,7 +465,7 @@ func ownTap(face *cards.Face, mana bool) (ability int, ok bool) {
 	}
 	pred := func(sa *cards.SA) bool { return costHas(sa, "T") }
 	if mana {
-		pred = cards.IsManaAbilitySA
+		pred = func(sa *cards.SA) bool { return cards.IsManaAbilitySA(sa) && costHas(sa, "T") }
 	}
 	if i := selfAbility(face, pred); i >= 0 {
 		return i, true
@@ -532,7 +535,7 @@ func untapStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 	if !face.IsPermanent() {
 		return none + ":noncreature"
 	}
-	filter := strings.TrimSuffix(trig.Params["ValidCard"], "+ActivePlayerCtrl")
+	filter := trig.Params["ValidCard"]
 	ok := filter == "Card.Self"
 	for _, a := range parseFilter(filter) {
 		ok = ok || a.known && !a.other && !a.self && a.ctrl != ctrlOpp && a.test(face)
@@ -549,8 +552,8 @@ func untapStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 // crimeStart is "whenever you commit a crime" (CommitCrime): a crime is
 // targeting an opponent, a permanent they control or a card in their
 // graveyard (CR 700.13). The player the trigger names casts the crime
-// fixture, a spell that targets a creature, with an inert creature on the
-// other seat for it to target.
+// fixture, a spell whose only legal target is an opponent, so the one target
+// the bot can choose is the crime.
 func crimeStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
 	none := "no-generator:trigger:CommitCrime"
 	if why := eventParamsOK(trig, "CommitCrime", "ValidPlayer"); why != "" {
@@ -564,13 +567,8 @@ func crimeStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 	if !spell(reg, b, eventFixtures.Crime) {
 		return none + ":fixture"
 	}
-	bearer, err := inertCounterBearer(reg, b)
-	if err != nil {
-		return none + ":fixture"
-	}
 	seats := seatsOf(f)
 	f.Setup.P0.Battlefield = []string{card}
-	seats[1-seat].Battlefield = append(seats[1-seat].Battlefield, bearer)
 	castCarrier(reg, seats[seat], eventFixtures.Crime)
 	act(f, seat, false, eventFixtures.Crime, "cast", 0)
 	return ""

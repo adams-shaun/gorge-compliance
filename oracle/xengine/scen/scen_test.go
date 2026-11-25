@@ -636,15 +636,16 @@ func TestStartSpellCastTriggers(t *testing.T) {
 
 // TestStartmisctriggers: the event modes (eventStart, eventFixtures): the
 // start causes the event the trigger reads with one fixture play on the seat
-// that makes it. A discard is Mind Rot cast at the seat whose hand is exactly
-// the cards the filter takes (Abyssal Nocturnus: the opponent's two Swamps,
-// Aclazotz: lands; Ajani's Last Stand: the card itself, discarded by the
-// opponent's Mind Rot, with the Plains its IsPresent reads); a draw is
+// that makes it. A discard is Coercion cast at the seat whose hand is exactly
+// the card the filter takes (Abyssal Nocturnus: the opponent's Swamp,
+// Aclazotz: a land; Ajani's Last Stand: the card itself, discarded by the
+// opponent's Coercion, with the Plains its IsPresent reads); Coercion's only
+// target is an opponent, so the bot has no other target to choose; a draw is
 // Reach Through Mists cast as often as the trigger's Number says (Zimone and
 // Dina's second card) by the seat the filter names (Sheoldred: the opponent);
 // a sacrifice is a carrier sacrificing itself; a tap is the card's own {T}
 // ability or its attack (Zhur-Taa Druid taps itself for mana, Zar Ojanen
-// attacks); a crime is Murder cast at an opposing creature (Vadmir); an
+// attacks); a crime is Coercion cast at the opponent (Vadmir); an
 // untap is the card placed tapped through the other seat's turn 1 to its own
 // untap step; a target is the opponent's Murder, Disenchant (an enchantment)
 // or the card's controller's trick. A turned-face-up trigger is refused by
@@ -652,12 +653,12 @@ func TestStartSpellCastTriggers(t *testing.T) {
 // play. A trigger whose condition the start does not model is refused by name.
 func TestStartmisctriggers(t *testing.T) {
 	checkStartRows(t, []startRow{
-		{card: "Abyssal Nocturnus", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Mind Rot"},
-			p0BF: cat([]string{"Abyssal Nocturnus"}, rep("Swamp", 3)), p1Hand: rep("Swamp", 2),
-			focusCard: "Mind Rot", focusKind: "cast"},
+		{card: "Abyssal Nocturnus", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Coercion"},
+			p0BF: cat([]string{"Abyssal Nocturnus"}, rep("Swamp", 3)), p1Hand: rep("Swamp", 1),
+			focusCard: "Coercion", focusKind: "cast"},
 		{card: "Ajani's Last Stand", key: "f0/t1", active: 1, maxTurns: 1, p0Hand: []string{"Ajani's Last Stand"},
-			p0BF: rep("Plains", 2), p1Hand: []string{"Mind Rot"}, p1BF: rep("Swamp", 3),
-			focusSeat: 1, focusCard: "Mind Rot", focusKind: "cast"},
+			p0BF: rep("Plains", 2), p1Hand: []string{"Coercion"}, p1BF: rep("Swamp", 3),
+			focusSeat: 1, focusCard: "Coercion", focusKind: "cast"},
 		{card: "Zimone and Dina", key: "f0/t0", maxTurns: 1, p0Hand: rep("Reach Through Mists", 2),
 			p0BF: cat([]string{"Zimone and Dina"}, rep("Island", 2)), focusCard: "Reach Through Mists", focusKind: "cast", focusTime: 2},
 		{card: "Sheoldred, the Apocalypse", key: "f0/t1", active: 1, maxTurns: 1, p0BF: []string{"Sheoldred, the Apocalypse"},
@@ -668,9 +669,9 @@ func TestStartmisctriggers(t *testing.T) {
 			focusCard: "Zar Ojanen, Scion of Efrava", focusKind: "attack"},
 		{card: "Zhur-Taa Druid", key: "f0/t0", maxTurns: 1, p0BF: []string{"Zhur-Taa Druid"},
 			focusCard: "Zhur-Taa Druid", focusKind: "ability"},
-		{card: "Vadmir, New Blood", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Murder"},
-			p0BF: cat([]string{"Vadmir, New Blood"}, rep("Swamp", 3)), p1BF: []string{"Wall of Stone"},
-			focusCard: "Murder", focusKind: "cast"},
+		{card: "Vadmir, New Blood", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Coercion"},
+			p0BF:      cat([]string{"Vadmir, New Blood"}, rep("Swamp", 3)),
+			focusCard: "Coercion", focusKind: "cast"},
 		{card: "Wild Defiance", key: "f0/t0", active: 1, maxTurns: 1, p0BF: []string{"Wild Defiance", "Memnite"},
 			p1Hand: []string{"Murder"}, p1BF: rep("Swamp", 3), focusSeat: 1, focusCard: "Murder", focusKind: "cast"},
 		{card: "Treacherous Blessing", key: "f0/t2", active: 1, maxTurns: 1, p0BF: []string{"Treacherous Blessing"},
@@ -680,6 +681,14 @@ func TestStartmisctriggers(t *testing.T) {
 		{card: "Xyris, the Writhing Storm", key: "f0/t0", reason: "no-generator:trigger:Drawn:condition"},
 	})
 	reg, b := testBuilder(t)
+	// the discard and crime fixtures take no target but an opponent: the bot
+	// has no other target to choose, so the focus play is the forced line
+	for _, name := range []string{eventFixtures.Discard, eventFixtures.Crime} {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces[0].Abilities) == 0 || c.Faces[0].Abilities[0].Params["ValidTgts"] != "Opponent" {
+			t.Errorf("fixture %s: want a spell whose one target is an opponent", name)
+		}
+	}
 	// an untap: the card placed tapped, the game run to its own untap step
 	// (the other seat's turn 1, then turn 2), with no focus play
 	res, err := Generate(reg, b, "Aerie Worshippers", "f0/t0", Options{Prefer: "start"})

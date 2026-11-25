@@ -483,8 +483,6 @@ func combatStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 // creature, Disenchant for an artifact or enchantment, ...), and the first of
 // ownTargeters the corpus plays is its controller's: "target creature you
 // control", so a creature a need placed for the opponent is never the target.
-const oppTargeter = "Murder"
-
 var ownTargeters = []string{"Ranger's Guile", "Blossoming Defense"}
 
 // sourceCaster is the seat that casts the spell a "becomes the target of"
@@ -550,7 +548,9 @@ func sourceCaster(trig *cards.Trigger) (caster int, accepts func(*cards.Face) bo
 // the opponent on its turn, or by the card's controller (Ranger's Guile:
 // target creature you control). A permanent that could be another spell's
 // target (a creature beside the card that the filter does not take) is
-// refused, so the bot's one legal target is the one the key reads.
+// refused when the target is another permanent. When the target is the card
+// itself, a permanent that placeNeeds adds beside it later can also be a legal
+// target and is not checked here (the start-not-exercised lane reads it).
 func targetStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
 	none := "no-generator:trigger:BecomesTarget"
 	if why := eventParamsOK(trig, "BecomesTarget", "ValidTarget", "ValidSource", "Ward", "Keyword", "KeywordLine", "FirstTime", "Valiant"); why != "" {
