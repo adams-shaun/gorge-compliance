@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5779d9b2-4de1-4aa4-a56d-0da05146743a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 577d027a-96c3-46fe-880b-f8b5dd3f3a3d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sever-soul:cast:s1,f:xs:XP:sever-soul:cast:s1	-	-	-	3aa6ded33acb	-	9750401d2549	-	-	2026-11-25	xproof
 577eb51d-7979-4f97-a8b1-e31242720611	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-577eb51d-7979-4f97-a8b1-e31242720611	f0/a0	RemoveCounter	owed	harness	-	start	0	0	-	-	-	-	be173c120256	-	691424638ef1	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+577eb51d-7979-4f97-a8b1-e31242720611	f0/a0	RemoveCounter	agreed	-	FX	start	2	0	x:xs:XP:thrull-parasite:f0a0:s1,f:xs:XP:thrull-parasite:f0a0:s1	-	-	-	ac103c32f3f2	-	691424638ef1	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 577eb51d-7979-4f97-a8b1-e31242720611	f0/t0	SpellCast/Extort	owed	harness	-	start	0	0	-	-	-	-	be173c120256	-	691424638ef1	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 57828973-df3d-4288-988d-147a3016120e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57831c07-6915-4579-b3e1-de93a3664444	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-surveyor:f0t0:s1,f:xs:XP:aven-surveyor:f0t0:s1	-	-	-	3aa6ded33acb	-	93275a7448b6	-	-	2026-11-25	xproof
@@ -158,7 +158,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57d02dc8-e22e-4874-9f02-490a2528a28f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Mighty Thor, Jane Foster/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 57d411c6-68d8-441d-885f-17412f6503c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57d411c6-68d8-441d-885f-17412f6503c2	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:tephraderm:f0t0:s1,f:xs:XP:tephraderm:f0t0:s1	-	-	-	5b42d43d5d80	-	6d1d1c47dd71	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-57d411c6-68d8-441d-885f-17412f6503c2	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	720af1749791	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+57d411c6-68d8-441d-885f-17412f6503c2	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	ac103c32f3f2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 57d8d656-ccbd-4deb-abf1-a7fde4e7d691	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57d93683-8739-49ef-856a-5a70f92d8763	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:urborg-drake:cast:s1,f:xs:XP:urborg-drake:cast:s1	-	-	-	fc71ca68c5ac	-	3c1fd8db4d44	-	-	2026-11-24	xproof
 57de8fe7-3d1b-41cd-8354-38aff3d2d052	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vine-trellis:cast:s1,f:xs:XP:vine-trellis:cast:s1	-	-	-	25696bf19d5b	-	7ded36462d33	-	-	2026-11-24	xproof
