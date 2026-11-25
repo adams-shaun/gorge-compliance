@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4021b6b4-9b87-4dd5-a5df-79540bedbe87	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4021b6b4-9b87-4dd5-a5df-79540bedbe87	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4022e540-8fa0-4eee-bcf1-df5046289f2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4022e540-8fa0-4eee-bcf1-df5046289f2b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4022e540-8fa0-4eee-bcf1-df5046289f2b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4029e884-8154-42b3-ae29-3cb98374a294	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:messenger-hawk:f0t0:s1,f:xs:XP:messenger-hawk:f0t0:s1	-	-	-	cfde1dc26c40	-	a4818ec920e8	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 4029e884-8154-42b3-ae29-3cb98374a294	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Messenger Hawk/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4029e884-8154-42b3-ae29-3cb98374a294	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Messenger Hawk/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -50,8 +50,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40578245-2cb8-4a6a-aeff-2252719c2d1c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 405a2cf9-62a0-460c-bf2a-ce4c351b61ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 405a54b3-fb9f-4503-a4fc-3ba6a5e58205	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prodigy-s-prototype:cast:s1,f:xs:XP:prodigy-s-prototype:cast:s1	-	-	-	d864b561c9cb	-	c971531cd0af	-	-	2026-11-24	xproof
-405a54b3-fb9f-4503-a4fc-3ba6a5e58205	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:prodigy-s-prototype:f0a0:s1,f:xs:XP:prodigy-s-prototype:f0a0:s1	-	-	-	6f84be0f34c0	-	c971531cd0af	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-405a54b3-fb9f-4503-a4fc-3ba6a5e58205	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:prodigy-s-prototype:f0a0:s1,f:xs:XP:prodigy-s-prototype:f0a0:s1	-	-	-	6f84be0f34c0	-	c971531cd0af	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+405a54b3-fb9f-4503-a4fc-3ba6a5e58205	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:prodigy-s-prototype:f0a0:s1,f:xs:XP:prodigy-s-prototype:f0a0:s1	-	-	-	054d9f516953	-	c971531cd0af	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+405a54b3-fb9f-4503-a4fc-3ba6a5e58205	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:prodigy-s-prototype:f0a0:s1,f:xs:XP:prodigy-s-prototype:f0a0:s1	-	-	-	054d9f516953	-	c971531cd0af	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 405c4a7b-dbb3-48a1-9205-7dbe6e2ad363	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:aatchik-emerald-radian:f0t0:s2,f:xs:XP:aatchik-emerald-radian:f0t0:s2	-	-	-	e07cf3a05ba5	-	c7d39de3b8d7	-	-	2026-11-24	xproof
 405c4a7b-dbb3-48a1-9205-7dbe6e2ad363	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:aatchik-emerald-radian:f0t0:s2,f:xs:XP:aatchik-emerald-radian:f0t0:s2	-	-	-	e07cf3a05ba5	-	c7d39de3b8d7	-	-	2026-11-24	xproof
 405c4a7b-dbb3-48a1-9205-7dbe6e2ad363	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aatchik, Emerald Radian/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -123,8 +123,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 40999aa6-6424-42e4-9d47-33bee6bbb886	f0/t0	DamageDone/Renown	agreed	-	FX	start	2	0	x:xs:XP:knight-of-the-pilgrim-s-road:f0t0:s1,f:xs:XP:knight-of-the-pilgrim-s-road:f0t0:s1	-	-	-	fb9d3088f0bf	-	bd999da0b55b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 409b44fc-fae2-4804-83a7-78cf95038f58	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 409b44fc-fae2-4804-83a7-78cf95038f58	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-40abba38-533b-4f51-99e9-a2b337d65171	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadeye-quartermaster:f0t0:s1,f:xs:XP:deadeye-quartermaster:f0t0:s1	-	-	-	054d9f516953	-	ef9f3e2a74b3	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-40abba38-533b-4f51-99e9-a2b337d65171	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:deadeye-quartermaster:f0t0:s1,f:xs:XP:deadeye-quartermaster:f0t0:s1	-	-	-	054d9f516953	-	ef9f3e2a74b3	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+40abba38-533b-4f51-99e9-a2b337d65171	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deadeye-quartermaster:cast:s1,f:xs:XP:deadeye-quartermaster:cast:s1	-	-	-	054d9f516953	-	ef9f3e2a74b3	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+40abba38-533b-4f51-99e9-a2b337d65171	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:deadeye-quartermaster:cast:s1,f:xs:XP:deadeye-quartermaster:cast:s1	-	-	-	054d9f516953	-	ef9f3e2a74b3	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 40ac0cb0-bdf7-447d-9875-0eb3cc5d0adc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 40b36bc6-c185-4bda-99e7-0118953c2c97	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-coast:f0a0:s1,f:xs:XP:yavimaya-coast:f0a0:s1	-	-	-	c2272f704fde	-	fcd2b94b06a6	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 40b36bc6-c185-4bda-99e7-0118953c2c97	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-coast:f0a1:s1,f:xs:XP:yavimaya-coast:f0a1:s1	-	-	-	9ff3e304d49e	-	fcd2b94b06a6	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof

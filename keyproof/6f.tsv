@@ -7,7 +7,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f0b814b-94e6-48f2-9ccf-c376ca03bba3	cast	cast-resolve	agreed	-	X	scen	1	0	Antagonist Incorporator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6f0c6876-dcae-46e5-8c62-6929733c3525	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f0c6876-dcae-46e5-8c62-6929733c3525	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-6f0c6876-dcae-46e5-8c62-6929733c3525	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6f0c6876-dcae-46e5-8c62-6929733c3525	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6f0d8900-8460-4b31-8b67-eb4e470c3317	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:winged-hive-tyrant:cast:s1,f:xs:XP:winged-hive-tyrant:cast:s1	-	-	-	8c0bd19283bb	-	b645547bfc96	-	-	2026-11-24	xproof
 6f0d94d9-64bb-4175-83bc-301e8f79f54f	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:temple-of-triumph:f0a0:s2,f:xs:XP:temple-of-triumph:f0a0:s2	-	-	-	23b491658465	-	8d603e288803	-	-	2026-11-24	xproof
 6f0d94d9-64bb-4175-83bc-301e8f79f54f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:temple-of-triumph:f0t0:s1,f:xs:XP:temple-of-triumph:f0t0:s1	-	-	-	8c0bd19283bb	-	8d603e288803	-	-	2026-11-24	xproof
@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f10f6bf-f889-4c3d-a6cf-04cf74f1b4bd	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6f10f6bf-f889-4c3d-a6cf-04cf74f1b4bd	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6f143c8f-cb5c-4abc-a01b-b6813f5a524c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6f143c8f-cb5c-4abc-a01b-b6813f5a524c	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	6f84be0f34c0	-	6d5ab77eb67d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6f143c8f-cb5c-4abc-a01b-b6813f5a524c	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	054d9f516953	-	6d5ab77eb67d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6f16c3ac-a9b8-47e6-b18b-ae37c74d44a0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f16c3ac-a9b8-47e6-b18b-ae37c74d44a0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6f18f41e-df8d-4b59-87cc-ea167823fbda	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pygmy-troll:cast:s1,f:xs:XP:pygmy-troll:cast:s1	-	-	-	5f2128bf97e4	-	d15b20672323	-	-	2026-11-24	xproof
@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6f6cbcd4-7a4b-4a38-bf29-995e82e658ce	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f6cbcd4-7a4b-4a38-bf29-995e82e658ce	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6f6e0abb-18d0-4a15-9b21-0a72542998ac	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:azra-smokeshaper:cast:s1,f:xs:XP:azra-smokeshaper:cast:s1	-	-	-	d864b561c9cb	-	ed5ac9a48ced	-	-	2026-11-24	xproof
-6f6e0abb-18d0-4a15-9b21-0a72542998ac	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6f6e0abb-18d0-4a15-9b21-0a72542998ac	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6f6e0abb-18d0-4a15-9b21-0a72542998ac	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:azra-smokeshaper:cast:s1,f:xs:XP:azra-smokeshaper:cast:s1	-	-	-	d864b561c9cb	-	ed5ac9a48ced	-	-	2026-11-24	xproof
 6f705338-b00b-4a6d-924f-443e7c5670b7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:death-mutation:cast:s1,f:xs:XP:death-mutation:cast:s1	-	-	-	3aa6ded33acb	-	d8b2418e6ba7	-	-	2026-11-25	xproof
 6f76fec2-6fd0-4d33-b39a-f1684922d478	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blisterstick-shaman:f0t0:s1,f:xs:XP:blisterstick-shaman:f0t0:s1	-	-	-	d864b561c9cb	-	bbacc772a4ad	-	-	2026-11-24	xproof

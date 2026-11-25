@@ -23,9 +23,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d3010d5-5c21-4342-ad79-a737b6731230	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scavenged-weaponry:f0t0:s1,f:xs:XP:scavenged-weaponry:f0t0:s1	-	-	-	3aa6ded33acb	-	a10e014af5f3	-	-	2026-11-25	xproof
 2d30a634-43c6-4e78-ba10-7ef7ee17ac40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carrier-pigeons:f0t0:s1,f:xs:XP:carrier-pigeons:f0t0:s1	-	-	-	ea3140b6974b	-	5047c4fd8ab3	-	-	2026-11-24	xproof
 2d30a634-43c6-4e78-ba10-7ef7ee17ac40	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:carrier-pigeons:f0t0:s1,f:xs:XP:carrier-pigeons:f0t0:s1	-	-	-	ea3140b6974b	-	5047c4fd8ab3	-	-	2026-11-24	xproof
-2d338aa5-22bc-4cc4-a1e0-cc5018ce001e	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-2d338aa5-22bc-4cc4-a1e0-cc5018ce001e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-2d338aa5-22bc-4cc4-a1e0-cc5018ce001e	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2d338aa5-22bc-4cc4-a1e0-cc5018ce001e	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2d338aa5-22bc-4cc4-a1e0-cc5018ce001e	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2d338aa5-22bc-4cc4-a1e0-cc5018ce001e	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2d37c437-0d5c-400d-88ce-10d173b28eda	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	759e74985765	-	-	2026-11-25	xproof
 2d37c437-0d5c-400d-88ce-10d173b28eda	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	759e74985765	-	-	2026-11-25	xproof
 2d37c437-0d5c-400d-88ce-10d173b28eda	f0/t1	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	759e74985765	-	-	2026-11-25	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2db4c197-982b-4c23-88e7-6ddf17378bb4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2db5e0cd-c991-4fda-9001-9e4f10e8a805	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2db73fff-1a89-4006-945d-a244ff2f0bef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2db73fff-1a89-4006-945d-a244ff2f0bef	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2db73fff-1a89-4006-945d-a244ff2f0bef	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2db73fff-1a89-4006-945d-a244ff2f0bef	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2db77e35-a54a-4e9c-8081-c97822515879	cast	cast-resolve	agreed	-	FX	scen	2	0	Lord Dregg, Insect Invader/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2db77e35-a54a-4e9c-8081-c97822515879	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lord-dregg-insect-invader:combat0.attack:s1,f:xs:XP:lord-dregg-insect-invader:combat0.attack:s1	-	-	-	23c4009444b0	-	705b4699b479	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

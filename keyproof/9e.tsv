@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 9e00188a-0743-4a39-9229-977a0a115659	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e00188a-0743-4a39-9229-977a0a115659	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+9e00188a-0743-4a39-9229-977a0a115659	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9e006a4b-8dde-4416-8cb4-8401562d0fd5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e006a4b-8dde-4416-8cb4-8401562d0fd5	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:tendo-ice-bridge:f0a1:s1,f:xs:XP:tendo-ice-bridge:f0a1:s1	-	-	-	c2272f704fde	-	3e402ae91e7b	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 9e006a4b-8dde-4416-8cb4-8401562d0fd5	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -122,8 +122,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e8e5ad4-05a3-4757-8797-c37bf49506d5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e8ffb63-1a7b-4ebe-839d-d5192522db65	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9e8ffb63-1a7b-4ebe-839d-d5192522db65	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-9e9164be-3534-4445-bfad-00d16a50575c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-9e9164be-3534-4445-bfad-00d16a50575c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+9e9164be-3534-4445-bfad-00d16a50575c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:workshop-elders:cast:s1,f:xs:XP:workshop-elders:cast:s1	-	-	-	054d9f516953	-	f61c77c96d28	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+9e9164be-3534-4445-bfad-00d16a50575c	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:workshop-elders:cast:s1,f:xs:XP:workshop-elders:cast:s1	-	-	-	054d9f516953	-	f61c77c96d28	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9e9189d9-3b25-476b-b096-bb540398c1d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e9189d9-3b25-476b-b096-bb540398c1d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e96d12b-8381-4706-8089-3521aa2b5422	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hundred-battle-veteran:cast:s1,f:xs:XP:hundred-battle-veteran:cast:s1	-	-	-	23c4009444b0	-	87ce67a0a12c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Hundred-Battle Veteran/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	static#0.0	static#0.0	agreed	-	X	scen	1	0	Hundred-Battle Veteran/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	static#0.1	static.continuous	diverged	-	-	start	0	2	-	4842c88ac5cc	-	-	6f84be0f34c0	-	87ce67a0a12c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+9ed6aa5b-4369-42f7-9853-aae1ac9b17e2	static#0.1	static.continuous	diverged	-	-	start	0	2	-	4842c88ac5cc	-	-	054d9f516953	-	87ce67a0a12c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9ed6f28f-a3db-48c5-9ab0-b90a7fba5f57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ed6f28f-a3db-48c5-9ab0-b90a7fba5f57	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ed9accb-9f0c-40fa-aeea-2d1e1c9d1bd1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

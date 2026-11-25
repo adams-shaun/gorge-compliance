@@ -23,7 +23,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b102ccc-7629-457c-aba6-e9b00fd50c85	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3b102ccc-7629-457c-aba6-e9b00fd50c85	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3b102ccc-7629-457c-aba6-e9b00fd50c85	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3b102ccc-7629-457c-aba6-e9b00fd50c85	static#1.0	static#1.0	agreed	-	X	scen	1	0	Emet-Selch, Unsundered/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:littjara-mirrorlake:f0a1:s2,f:xs:XP:littjara-mirrorlake:f0a1:s2	-	-	-	23b491658465	-	327b80782d82	-	-	2026-11-25	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	f0/a1	CopyPermanent	agreed	-	FX	start	2	0	x:xs:XP:littjara-mirrorlake:f0a1:s1,f:xs:XP:littjara-mirrorlake:f0a1:s1	-	-	-	6f84be0f34c0	-	327b80782d82	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3b577179-10d0-43f1-ac17-9dd2d12c965d	land	land	agreed	-	FX	start	2	0	x:xs:XP:littjara-mirrorlake:land:s1,f:xs:XP:littjara-mirrorlake:land:s1	-	-	-	d864b561c9cb	-	327b80782d82	-	-	2026-11-24	xproof
-3b583358-d0d5-4f53-b06c-c6439156e684	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3b583358-d0d5-4f53-b06c-c6439156e684	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:release-the-gremlins:cast:s1,f:xs:XP:release-the-gremlins:cast:s1	-	-	-	054d9f516953	-	50df4c4a76b3	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3b5b87da-5a00-449a-97ef-fa1e2c1c4b4b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3b5ff623-c44e-4f2d-8ab7-ee6b11f1deee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:outcaster-trailblazer:cast:s1,f:xs:XP:outcaster-trailblazer:cast:s1	-	-	-	3aa6ded33acb	-	06a2cac6ce6a	-	-	2026-11-25	xproof

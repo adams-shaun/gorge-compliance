@@ -29,8 +29,8 @@ e01c8122-9159-4f28-ac6c-338bd889650e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sli
 e01fe9e9-a76c-4909-924c-a0cba403f975	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	82b75486c429	-	-	2026-11-25	xproof
 e01fe9e9-a76c-4909-924c-a0cba403f975	f0/a0	Tap	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	82b75486c429	-	-	2026-11-25	xproof
 e01fe9e9-a76c-4909-924c-a0cba403f975	f0/t0	Phase/Echo	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	82b75486c429	-	-	2026-11-25	xproof
-e0206af2-8034-4351-a797-a1d996f080b5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stop-cold:f0t0:s1,f:xs:XP:stop-cold:f0t0:s1	-	-	-	054d9f516953	-	8395f540049a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-e0206af2-8034-4351-a797-a1d996f080b5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stop-cold:f0t0:s1,f:xs:XP:stop-cold:f0t0:s1	-	-	-	054d9f516953	-	8395f540049a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+e0206af2-8034-4351-a797-a1d996f080b5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stop-cold:cast:s1,f:xs:XP:stop-cold:cast:s1	-	-	-	054d9f516953	-	8395f540049a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+e0206af2-8034-4351-a797-a1d996f080b5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:stop-cold:cast:s1,f:xs:XP:stop-cold:cast:s1	-	-	-	054d9f516953	-	8395f540049a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e0206af2-8034-4351-a797-a1d996f080b5	static#0.0	static#0.0	agreed	-	X	scen	1	0	Stop Cold/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e0209690-71f1-41f3-860a-a0737edaf1f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormcloud-djinn:cast:s1,f:xs:XP:stormcloud-djinn:cast:s1	-	-	-	9ee19e8250ce	-	769102fa48f5	-	-	2026-11-24	xproof
 e0209690-71f1-41f3-860a-a0737edaf1f9	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:stormcloud-djinn:f0a0:s1,f:xs:XP:stormcloud-djinn:f0a0:s1	-	-	-	d864b561c9cb	-	769102fa48f5	-	-	2026-11-24	xproof
@@ -65,7 +65,7 @@ e04560ea-f2bd-4cb7-8f65-3aa0dd58fbdf	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:li
 e04560ea-f2bd-4cb7-8f65-3aa0dd58fbdf	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Likeness Looter/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e0462a2c-fb88-495f-813b-6476ee3e62bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:totally-lost:cast:s1,f:xs:XP:totally-lost:cast:s1	-	-	-	da6bc3fe8458	-	42b4e651625b	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 e049eb22-a01a-463e-8de9-705d6eaf84e2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e049eb22-a01a-463e-8de9-705d6eaf84e2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elegant-entourage:f0t0:s1,f:xs:XP:elegant-entourage:f0t0:s1	-	-	-	6f84be0f34c0	-	bfe42d2e412f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+e049eb22-a01a-463e-8de9-705d6eaf84e2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:elegant-entourage:f0t0:s1,f:xs:XP:elegant-entourage:f0t0:s1	-	-	-	054d9f516953	-	bfe42d2e412f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e04ca2dc-873e-4d80-b1d7-4873ffdb3af5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e04f151a-66bb-4bc3-a625-91cd23cb1b18	cast	cast	agreed	-	F	start	2	0	f:xs:XP:plow-through-reito:cast:s1	-	-	-	23c4009444b0	-	74ac5c4fefa1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 e04fa58e-be7a-4c9c-98d0-48241742a41b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -110,7 +110,7 @@ e08157e6-a5a3-4b1e-80e0-32702288d8ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 e0828e8d-f01f-4088-9123-6d923ddb3242	cast	cast-resolve	agreed	-	FX	scen	2	0	Ancestral Anger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e08722b3-0f79-4c82-b298-603e04a37857	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:death-s-shadow:cast:s1,f:xs:XP:death-s-shadow:cast:s1	-	-	-	8a1b1a193ec0	-	ccdfba1eb488	-	-	2026-11-24	xproof
 e08b19ca-f9d7-4c33-b37a-a77b37aabf1b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hamato-guardian-stance:cast:s1,f:xs:XP:hamato-guardian-stance:cast:s1	-	-	-	23c4009444b0	-	639814034632	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-e08c71aa-d35c-4c20-b4db-ae9d36ee3169	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+e08c71aa-d35c-4c20-b4db-ae9d36ee3169	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e08d264d-5731-4e2a-ae6d-5a74ef648575	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magus-of-the-bazaar:cast:s1,f:xs:XP:magus-of-the-bazaar:cast:s1	-	-	-	9ee19e8250ce	-	a1e33421717c	-	-	2026-11-24	xproof
 e08d264d-5731-4e2a-ae6d-5a74ef648575	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:magus-of-the-bazaar:f0a0:s1,f:xs:XP:magus-of-the-bazaar:f0a0:s1	-	-	-	d864b561c9cb	-	a1e33421717c	-	-	2026-11-24	xproof
 e08debdc-2db5-4562-8a02-4158bfc0db88	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:poised-practitioner:cast:s1,f:xs:XP:poised-practitioner:cast:s1	-	-	-	23c4009444b0	-	f2ecf1a70229	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
