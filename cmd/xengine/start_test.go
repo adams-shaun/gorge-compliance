@@ -1810,3 +1810,75 @@ func TestPlayStartPlayerCountersPinRefusesPerID(t *testing.T) {
 		t.Error("the other start of the directory wrote no item")
 	}
 }
+
+// TestStartSurvivesToMainOne: a start's focus card must still be on the
+// battlefield, with the mana its play needs, at turn 1's first main priority.
+// The setup drive passes through the upkeep, so a focus card that dies to
+// state-based actions as placed (an X creature's unplaced counters, a
+// characteristic-defining toughness of 0), a focus card whose upkeep makes it
+// sacrifice itself, an enabler whose Echo or cumulative upkeep taps the focus'
+// mana, and an attack focus that cannot attack (tapped, Defender) all lose the
+// key before it can be exercised (xproof cycles 11250904/07/09). scen must
+// either refuse the start by a named start: reason or write one play refuses
+// as start-not-exercised.
+func TestStartSurvivesToMainOne(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Molten-Tail Masticore", "f0/a1"}, // upkeep sacrifice, empty hand
+		{"Mortivore", "f0/a0"},             // CDA */* with an empty graveyard
+		{"Walking Ballista", "f0/a0"},      // X counters never placed
+		{"Biogenic Ooze", "cast"},          // Mwonvuli Ooze's cumulative upkeep taps the mana
+		{"Munitions Expert", "f0/t0"},      // Goblin Patrol's Echo taps the only Mountain
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path == scen.PathRefused {
+				if !strings.HasPrefix(res.Reason, "start:") {
+					t.Fatalf("%s: refused %q, want a named start: reason or an exercised start", c.card, res.Reason)
+				}
+				return
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("%s: path %q reason %q, want a start or a start: refusal", c.card, res.Path, res.Reason)
+			}
+			_ = startIsExercised(t, reg, b, c.card, c.key)
+		})
+	}
+	// The rest of the report's keys are the same class: a CDA or X focus or
+	// target, an upkeep-sacrifice focus, an Echo or cumulative-upkeep enabler,
+	// and an attack focus that cannot attack. A key the generator already
+	// could not build keeps its named no-generator refusal; any start it does
+	// write must play and exercise.
+	for _, c := range []struct{ card, key string }{
+		{"Soramaro, First to Dream", "f0/a0"}, // CDA */* with an empty hand
+		{"Savageborn Hydra", "f0/a0"},         // X counters never placed
+		{"Hooded Hydra", "f0/t0"},             // 0/0 target of Murder's cast
+		{"Bloodthirsty Ogre", "f0/a1"},        // Scourge of the Skyclaves' CDA enabler
+		{"Charnel Troll", "f0/a0"},            // upkeep exile a creature card
+		{"Haazda Shield Mate", "f0/a0"},       // upkeep pay {W}{W}
+		{"Goldenhide Ox", "cast"},             // Elephant Grass' cumulative upkeep
+		{"Grimgrin, Corpse-Born", "f0/t0"},    // enters tapped and does not untap
+		{"Guardians of Akrasa", "f0/t0"},      // Defender
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			res, err := scen.Generate(reg, b, c.card, c.key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path == scen.PathRefused {
+				if res.Reason == "" {
+					t.Fatalf("%s: refused without a reason, want a named refusal or an exercised start", c.card)
+				}
+				return
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				t.Fatalf("%s: path %q reason %q, want a start or a named refusal", c.card, res.Path, res.Reason)
+			}
+			_ = startIsExercised(t, reg, b, c.card, c.key)
+		})
+	}
+}
