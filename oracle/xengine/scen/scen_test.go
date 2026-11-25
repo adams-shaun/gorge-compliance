@@ -729,7 +729,9 @@ func TestStartCombatStaticRefusals(t *testing.T) {
 	for _, r := range [][3]string{
 		{"Karn, Argent Defender", "static#0.0", "no-generator:static:DisableTriggers"},
 		{"Academy Wall", "combat#0.attack", "no-generator:combat:defender"},
-		{"Holy Strength", "static#0.0", "no-generator:static:attached"},
+		{"Aether Syphon", "static#0.0", "no-generator:static:unobserved"}, // a granted trigger is not seen
+		{"Armory Mice", "static#0.0", "no-generator:static:conditional"},  // a this-turn count
+		{"Aettir and Priwen", "static#0.0", "no-generator:static:computed"},
 		// the attack/block is not offered, or the effect is not seen
 		{"Magus of the Moat", "combat#0.attack", "no-generator:combat:restricted"},
 		{"Frenetic Raptor", "combat#0.block", "no-generator:combat:restricted"},
@@ -941,6 +943,154 @@ func TestLandsForSlashlessHybrid(t *testing.T) {
 	if !hasShard("2 WB WB", 'B') || hasShard("2 WB WB", 'U') {
 		t.Error("hasShard misreads a slashless hybrid")
 	}
+}
+
+// TestStartstaticattached: a static whose effect reads the bearer of an Aura or
+// Equipment, or a condition the start can place, is a start and not a refusal:
+// the Aura is cast on a bearer, the Equipment is equipped to one, and a life
+// total or counted permanents meet the condition.
+func TestStartstaticattached(t *testing.T) {
+	t.Run("start", func(t *testing.T) {
+		checkStartRows(t, []startRow{
+			{card: "Airtight Alibi", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Airtight Alibi"},
+				p0BF: []string{"Forest", "Forest", "Forest", "Wall of Stone"}, focusCard: "Airtight Alibi", focusKind: "cast"},
+			{card: "Alien Symbiosis", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Alien Symbiosis"},
+				p0BF: []string{"Swamp", "Swamp", "Wall of Stone"}, focusCard: "Alien Symbiosis", focusKind: "cast"},
+			{card: "Holy Strength", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Holy Strength"},
+				p0BF: []string{"Plains", "Wall of Stone"}, focusCard: "Holy Strength", focusKind: "cast"},
+			// an Equipment is on the battlefield with its bearer and the lands of its equip cost
+			{card: "Bonesplitter", key: "static#0.0", maxTurns: 1,
+				p0BF: []string{"Bonesplitter", "Plains", "Wall of Stone"}, focusCard: "Bonesplitter", focusKind: "ability"},
+			// the bearer is the permanent the condition counts: no second legal target
+			{card: "Temur Runemark", key: "static#0.1", maxTurns: 1, p0Hand: []string{"Temur Runemark"},
+				p0BF: []string{"Forest", "Forest", "Forest", "Wall of Stone"}, focusCard: "Temur Runemark", focusKind: "cast"},
+			// a life-total condition is the placed life; no action is forced
+			{card: "Angel of Vitality", key: "static#0.0", maxTurns: 1, p0BF: []string{"Angel of Vitality"}},
+			// an effect that changes the bearer shows on it: a control Aura's bearer is the
+			// other seat's, as the caster's own is theirs already
+			{card: "Control Magic", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Control Magic"},
+				p0BF: rep("Island", 4), p1BF: []string{"Wall of Stone"}, focusCard: "Control Magic", focusKind: "cast"},
+			{card: "Mind Control", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Mind Control"},
+				p0BF: rep("Island", 5), p1BF: []string{"Wall of Stone"}, focusCard: "Mind Control", focusKind: "cast"},
+			// a land Aura whose cost lands are also what it can enchant: they show the effect too
+			{card: "Consecrate Land", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Consecrate Land"},
+				p0BF: rep("Plains", 2), focusCard: "Consecrate Land", focusKind: "cast"},
+		})
+	})
+	// an effect that does not show on the bearer, or that the cast could put
+	// on a permanent it does not show on, is refused and not credited unplayed
+	t.Run("unseen", func(t *testing.T) {
+		checkStartRows(t, []startRow{
+			// the land types are set to Island/Swamp: the cost lands already are those
+			{card: "Spreading Seas", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Lingering Mirage", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Evil Presence", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Contaminated Ground", key: "static#0.0", reason: "no-generator:static:bearer"},
+			// control of a land: the cost lands are the caster's own already
+			{card: "Annex", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Conquer", key: "static#0.0", reason: "no-generator:static:bearer"},
+			// the card types are replaced: a cost land that is a Land already shows nothing
+			{card: "Song of the Dryads", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Imprisoned in the Moon", key: "static#0.0", reason: "no-generator:static:bearer"},
+			// the IsPresent permanent is a second creature the cast could target
+			{card: "Abzan Runemark", key: "static#0.1", reason: "no-generator:static:bearer"},
+			{card: "Multiclass Baldric", key: "static#0.0", reason: "no-generator:static:bearer"},
+		})
+	})
+	// counted permanents are copies of one carrier, which the legend rule would
+	// thin out if it were legendary: no seat has two of one legendary name
+	t.Run("no legendary copies", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		for _, r := range []struct{ card, key, reason string }{
+			// three legendary creatures, and no carrier that is not legendary
+			{"Kolvori, God of Kinship", "static#0.0", "no-generator:static:conditional"},
+			{"Temur Runemark", "static#0.1", ""},
+		} {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if r.reason != "" {
+				if err != nil || res.Start != nil || res.Reason != r.reason {
+					t.Errorf("%s: %v path %q reason %q, want refused %q", r.card, err, res.Path, res.Reason, r.reason)
+				}
+				continue
+			}
+			if err != nil || res.Start == nil {
+				t.Fatalf("%s: %v path %q reason %q, want a start", r.card, err, res.Path, res.Reason)
+			}
+			for _, bf := range [][]string{res.Start.Setup.P0.Battlefield, res.Start.Setup.P1.Battlefield} {
+				seen := map[string]bool{}
+				for _, n := range bf {
+					c, ok := reg.Lookup(n)
+					if ok && c.Faces[0].IsLegendary() && n != r.card && seen[n] {
+						t.Errorf("%s: %s is placed twice on one battlefield %v", r.card, n, bf)
+					}
+					seen[n] = true
+				}
+			}
+		}
+	})
+	// the same for an unattached static: the carrier it affects shows the effect
+	t.Run("carrier shows", func(t *testing.T) {
+		checkStartRows(t, []startRow{
+			// "each land is a Swamp" is set on a Plains, not on a Swamp; a creature
+			// that loses a keyword has it
+			{card: "Blanket of Night", key: "static#0.0", maxTurns: 1, p0BF: []string{"Blanket of Night", "Plains"}},
+			{card: "Archetype of Courage", key: "static#0.1", maxTurns: 1,
+				p0BF: []string{"Archetype of Courage"}, p1BF: []string{"Boros Recruit"}},
+		})
+	})
+	// the bearer meets the static's Affected filter, not only what the Aura
+	// enchants or the equip targets; a static no bearer can meet, or whose
+	// attachment is negated or qualified, is refused and never a false start
+	t.Run("affected", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		for _, r := range []struct {
+			card, key, bearerType string
+		}{
+			{"Equestrian Skill", "static#0.1", "Human"},
+			{"Bladed Bracers", "static#0.1", ""},
+		} {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil || res.Start == nil {
+				t.Fatalf("%s: %v path %q reason %q", r.card, err, res.Path, res.Reason)
+			}
+			var bearer string
+			for _, n := range append(res.Start.Setup.P0.Battlefield, res.Start.Setup.P1.Battlefield...) {
+				if c, ok := reg.Lookup(n); ok && n != r.card && c.Faces[0].IsCreature() {
+					bearer = n
+				}
+			}
+			c, _ := reg.Lookup(bearer)
+			if bearer == "" || r.bearerType == "" && !(c.Faces[0].HasTypeWord("Human") || c.Faces[0].HasTypeWord("Angel")) ||
+				r.bearerType != "" && !c.Faces[0].HasTypeWord(r.bearerType) {
+				t.Errorf("%s: bearer %q does not meet the static's Affected filter (%v)", r.card, bearer, res.Start.Setup)
+			}
+		}
+	})
+	t.Run("refused", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		for _, r := range []struct{ card, key string }{
+			{"Vampirism", "static#0.1"},        // Creature.YouCtrl+!EnchantedBy: the bearer is excluded
+			{"Face of Divinity", "static#0.1"}, // Creature.EnchantedBy Aura.Other: one Aura only
+		} {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start != nil || res.Path != PathRefused {
+				t.Errorf("%s %s: path %q reason %q, want a refusal", r.card, r.key, res.Path, res.Reason)
+			}
+		}
+	})
+	t.Run("life", func(t *testing.T) {
+		reg, b := testBuilder(t)
+		res, err := Generate(reg, b, "Angel of Vitality", "static#0.0", Options{Prefer: "start"})
+		if err != nil || res.Start == nil {
+			t.Fatalf("%v path %q reason %q", err, res.Path, res.Reason)
+		}
+		if l := res.Start.Setup.P0.Life; l == nil || *l != 25 {
+			t.Errorf("p0 life %v, want 25", l)
+		}
+	})
 }
 
 // TestStartfacestarts: a key of a double-faced or modal card's back face is
