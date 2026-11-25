@@ -136,11 +136,30 @@ func TestForgeRolledDie(t *testing.T) {
 // bfdb3a8051 = 149a03bbbec4 merged with 46203751a5 (foretell cast mode, Riot choice; StepMachine/ScriptedController only);
 // die-roll code unchanged.
 // c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
+// 0b7fde3680d = f1e3e00905c plus the zero-mode Charm fix (ScriptedController.chooseModeForAbility and StepMachine.hasMode
+// only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
+// 9f2d35a4679 = the clean merge of c9419dd87a3 (foretell, Riot) and 0b7fde3680d (zero-mode Charm); both fork from f1e3e00905
+// and touch forge-oracle only. Die-roll code unchanged; ForcedDieRollTest, ZeroModeCharmTest, ForetellSpecialActionTest and
+// RiotChoiceTest re-run green on it.
+// 2b591baf9c = c9419dd87a + ScriptedController.chooseCardName (empty face list) only; die-roll code unchanged.
 // 0558bd00b88 = c9419dd87a merged with c332e2b33f5 (the unpinned transit Graveyard/Battlefield order, StepMachine.orderCards
 // and OrderCardsTest only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
-// 722b3142c45 = 0558bd00b88 plus the one-card TwoPiles split (StepMachine.loneTwoPilesSplit and
+// a1990dd5f833 = the clean merge of 9f2d35a4679 (zero-mode Charm) and 0558bd00b88 (the unpinned transit
+// Graveyard/Battlefield order); the two touch disjoint hunks of StepMachine (hasMode vs orderCards) and separate
+// ScriptedController/test files. Die-roll code unchanged.
+// eb695169f9 = 2b591baf9c merged with 0558bd00b88 (the empty-face chooseCardName and the unpinned transit order); die-roll
+// code unchanged.
+// 141e1ff5403 = the clean merge of a1990dd5f833 (zero-mode Charm and the transit order) and eb695169f9 (the empty-face
+// chooseCardName and the transit order); both carry the same 0558bd00b88 transit-order half and touch separate
+// ScriptedController methods and test files. Die-roll code unchanged.
+// 3d8f89a00d = eb695169f9 merged with 1a2655bbd3 (the Evoke sacrifice label binding, StepMachine.triggerScore only) and 2d4eac3d93 (the DigMultiple
+// pick and AlternativeDecider position answers); die-roll code unchanged, ForcedDieRollTest re-run green on it (7 of 7).
+// 68d36f8247a = the clean merge of 141e1ff5403 (zero-mode Charm, the empty-face chooseCardName and the transit order) and
+// 3d8f89a00d (the Evoke trigger label, the DigMultiple pick and the AltDestination library position); both carry the same
+// eb695/0558 halves and touch separate ScriptedController methods and test files. Die-roll code unchanged.
+// 1da9dc5c96c = 68d36f8247a plus the one-card TwoPiles split (StepMachine.loneTwoPilesSplit and
 // ScriptedController.chooseCardsForEffect only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
-const forgeOracleDieRollRef = "722b3142c45fc2e6ac7b2dd4c1dfc0a6aca1255c"
+const forgeOracleDieRollRef = "1da9dc5c96c3789a60eb068c8ac6d973e4329752"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
