@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 05004b4a-2e2c-4a88-a994-8576684fb64a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 05004b4a-2e2c-4a88-a994-8576684fb64a	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:slayer-s-plate:f0a0:s1,f:xs:XP:slayer-s-plate:f0a0:s1	-	-	-	d864b561c9cb	-	e72823d0a9df	-	-	2026-11-24	xproof
-05004b4a-2e2c-4a88-a994-8576684fb64a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+05004b4a-2e2c-4a88-a994-8576684fb64a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 0501af1f-c67c-4cb1-aced-4be426c83316	cast	cast	agreed	-	X	start	2	0	x:xs:XP:ebon-praetor:f0t0:s1	-	-	-	3aa6ded33acb	-	3860dcc4cd4f	-	-	2026-11-25	xproof
 0501af1f-c67c-4cb1-aced-4be426c83316	f0/a0	RemoveCounter	agreed	-	X	start	1	0	x:xs:XP:ebon-praetor:f0t0:s2	-	-	-	3aa6ded33acb	-	3860dcc4cd4f	-	-	2026-11-25	xproof
 0501af1f-c67c-4cb1-aced-4be426c83316	f0/t0	Phase	agreed	-	X	start	2	0	x:xs:XP:ebon-praetor:f0t0:s1	-	-	-	3aa6ded33acb	-	3860dcc4cd4f	-	-	2026-11-25	xproof
@@ -66,8 +66,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 05501e88-d4c3-4474-92a9-c02ab15b107b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 05551d91-50c6-46d1-86a4-cd3d177d0923	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anim-pakal-thousandth-moon:cast:s1,f:xs:XP:anim-pakal-thousandth-moon:cast:s1	-	-	-	23b491658465	-	d92310c48666	-	-	2026-11-24	xproof
 05551d91-50c6-46d1-86a4-cd3d177d0923	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:anim-pakal-thousandth-moon:f0t0:s1,f:xs:XP:anim-pakal-thousandth-moon:f0t0:s1	-	-	-	3aa6ded33acb	-	d92310c48666	-	-	2026-11-25	xproof
-05608055-d97a-4c8f-833d-47b3dd1ea255	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
-05608055-d97a-4c8f-833d-47b3dd1ea255	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+05608055-d97a-4c8f-833d-47b3dd1ea255	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+05608055-d97a-4c8f-833d-47b3dd1ea255	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 0561043a-3896-4bb1-8ff5-ee674ddfea2a	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof

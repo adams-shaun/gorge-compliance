@@ -34,7 +34,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 073169f2-da3a-4a93-8c01-b3fd8558d225	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 073169f2-da3a-4a93-8c01-b3fd8558d225	land	land	agreed	-	FX	start	2	0	x:xs:XP:interplanar-beacon:land:s1,f:xs:XP:interplanar-beacon:land:s1	-	-	-	d864b561c9cb	-	ecb30a63b0a7	-	-	2026-11-24	xproof
 0734272d-5cce-476d-a663-fbf0bd7cd3a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0734272d-5cce-476d-a663-fbf0bd7cd3a7	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+0734272d-5cce-476d-a663-fbf0bd7cd3a7	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 073f12d1-eaa1-4d08-bc1d-b216a3dc0c67	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gargantuan-leech:cast:s1,f:xs:XP:gargantuan-leech:cast:s1	-	-	-	23b491658465	-	86b91b812734	-	-	2026-11-24	xproof
 073f12d1-eaa1-4d08-bc1d-b216a3dc0c67	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gargantuan-leech:combat0.attack:s1,f:xs:XP:gargantuan-leech:combat0.attack:s1	-	-	-	3aa6ded33acb	-	86b91b812734	-	-	2026-11-25	xproof
 073f12d1-eaa1-4d08-bc1d-b216a3dc0c67	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gargantuan-leech:combat0.block:s1,f:xs:XP:gargantuan-leech:combat0.block:s1	-	-	-	3aa6ded33acb	-	86b91b812734	-	-	2026-11-25	xproof
@@ -80,7 +80,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 078def07-ae5d-4591-8db6-d156834aab97	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:etali-primal-storm:cast:s1,f:xs:XP:etali-primal-storm:cast:s1	-	-	-	8c0bd19283bb	-	76f5c6abb0ca	-	-	2026-11-24	xproof
 078def07-ae5d-4591-8db6-d156834aab97	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:etali-primal-storm:f0t0:s1,f:xs:XP:etali-primal-storm:f0t0:s1	-	-	-	8c0bd19283bb	-	76f5c6abb0ca	-	-	2026-11-24	xproof
 0790c8bd-a094-49b5-8843-e8b02cba145b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0790c8bd-a094-49b5-8843-e8b02cba145b	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+0790c8bd-a094-49b5-8843-e8b02cba145b	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 07947d01-ebb1-46b7-9bdd-ea00e034805b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-elemental:f0t0:s1,f:xs:XP:war-elemental:f0t0:s1	-	-	-	25696bf19d5b	-	04d069420c7d	-	-	2026-11-24	xproof
 07947d01-ebb1-46b7-9bdd-ea00e034805b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:war-elemental:f0t0:s1,f:xs:XP:war-elemental:f0t0:s1	-	-	-	25696bf19d5b	-	04d069420c7d	-	-	2026-11-24	xproof
 07947d01-ebb1-46b7-9bdd-ea00e034805b	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof

@@ -61,7 +61,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 245934d9-c7b7-4a97-9c56-7760d934ef27	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 245aa786-d607-414f-ab55-b003b2b9faf4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245aa786-d607-414f-ab55-b003b2b9faf4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-245aa786-d607-414f-ab55-b003b2b9faf4	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+245aa786-d607-414f-ab55-b003b2b9faf4	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 245b62a8-b606-4106-87c3-a60ce3e16906	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 245b62a8-b606-4106-87c3-a60ce3e16906	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 245c3681-fc47-47fe-b6e5-34c96315c135	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -202,6 +202,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 24fd1f47-bb15-45c6-a7b1-ba8eb3bb8b1d	cast	cast-resolve	agreed	-	FX	scen	2	0	Vaan, Street Thief/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 24fd1f47-bb15-45c6-a7b1-ba8eb3bb8b1d	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Vaan, Street Thief/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 24fd1f47-bb15-45c6-a7b1-ba8eb3bb8b1d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Vaan, Street Thief/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-24fe8bc3-7e3a-435b-a232-7f80787aba1f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+24fe8bc3-7e3a-435b-a232-7f80787aba1f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fable-of-wolf-and-owl:cast:s1,f:xs:XP:fable-of-wolf-and-owl:cast:s1	-	-	-	cfde1dc26c40	-	86862e094164	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 24fe8bc3-7e3a-435b-a232-7f80787aba1f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:fable-of-wolf-and-owl:f0t0:s1,f:xs:XP:fable-of-wolf-and-owl:f0t0:s1	-	-	-	23c4009444b0	-	86862e094164	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 24fe8bc3-7e3a-435b-a232-7f80787aba1f	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:fable-of-wolf-and-owl:f0t1:s1,f:xs:XP:fable-of-wolf-and-owl:f0t1:s1	-	-	-	23c4009444b0	-	86862e094164	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

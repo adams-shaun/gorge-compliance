@@ -2,8 +2,8 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 4500131b-7417-4f30-a1b0-97d51b2e6458	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4502b24f-604b-4e36-9168-31c1a1ab4dab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4503d0fb-842d-49f1-9769-8509ff0f2ce1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4503d0fb-842d-49f1-9769-8509ff0f2ce1	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+4503d0fb-842d-49f1-9769-8509ff0f2ce1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wistful-selkie:f0t0:s1,f:xs:XP:wistful-selkie:f0t0:s1	-	-	-	cfde1dc26c40	-	1d86fd3032eb	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+4503d0fb-842d-49f1-9769-8509ff0f2ce1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:wistful-selkie:f0t0:s1,f:xs:XP:wistful-selkie:f0t0:s1	-	-	-	cfde1dc26c40	-	1d86fd3032eb	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 4505ff9f-97f1-45d1-aea9-5590fefb4a4d	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:prayer-of-binding:f0t0:s2,f:xs:XP:prayer-of-binding:f0t0:s2	-	-	-	e07cf3a05ba5	-	542a4dda6fe4	-	-	2026-11-24	xproof
 4505ff9f-97f1-45d1-aea9-5590fefb4a4d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:prayer-of-binding:f0t0:s2,f:xs:XP:prayer-of-binding:f0t0:s2	-	-	-	e07cf3a05ba5	-	542a4dda6fe4	-	-	2026-11-24	xproof
 4507d35a-f7f3-4abe-b06b-90c5331b533a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45a40b4c-1d37-4d87-adf1-abf0ea4c86b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45a40b4c-1d37-4d87-adf1-abf0ea4c86b4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45a60f56-35e4-46e5-838f-8b4407a67cd6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-45aa8bdb-54da-4069-bd6c-c63396154464	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+45aa8bdb-54da-4069-bd6c-c63396154464	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 45aeac84-4705-4179-be3f-b31bde844ea0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 45aeac84-4705-4179-be3f-b31bde844ea0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 45aeac84-4705-4179-be3f-b31bde844ea0	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
@@ -207,7 +207,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 45ddfa35-7b3c-4916-b231-dc721b7b56d9	cast	cast-resolve	agreed	-	FX	scen	2	0	Bold Biochemist/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45ddfa35-7b3c-4916-b231-dc721b7b56d9	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Bold Biochemist/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 45de1caf-46c2-4acc-8be2-08e1840a3b98	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sidisi-s-faithful:cast:s1,f:xs:XP:sidisi-s-faithful:cast:s1	-	-	-	d864b561c9cb	-	ba643f0f17cb	-	-	2026-11-24	xproof
-45de1caf-46c2-4acc-8be2-08e1840a3b98	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+45de1caf-46c2-4acc-8be2-08e1840a3b98	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 45de1caf-46c2-4acc-8be2-08e1840a3b98	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:sidisi-s-faithful:cast:s1,f:xs:XP:sidisi-s-faithful:cast:s1	-	-	-	d864b561c9cb	-	ba643f0f17cb	-	-	2026-11-24	xproof
 45dfb358-cd16-468e-bc89-ff17c6e244c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:war-report:cast:s1,f:xs:XP:war-report:cast:s1	-	-	-	d864b561c9cb	-	ca0c55a8bfc8	-	-	2026-11-24	xproof
 45e5135b-274c-46b4-8249-7e05e37aaff7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:heroes-for-hire:cast:s1,f:xs:XP:heroes-for-hire:cast:s1	-	-	-	8c0bd19283bb	-	3de12a8fa35e	-	-	2026-11-24	xproof
