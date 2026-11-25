@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 762d864b-69bc-43ac-af2f-e18186010169	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sliver Overlord/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 762d864b-69bc-43ac-af2f-e18186010169	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Sliver Overlord/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 762e01d8-c16a-44b8-8ba0-052d1a2f312f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76347258-71d5-4874-adde-ff7aa932b808	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+76347258-71d5-4874-adde-ff7aa932b808	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disrupt:cast:s1,f:xs:XP:disrupt:cast:s1	-	-	-	cb99a158debc	-	540b6932be6a	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 7635fb35-7ac8-4e61-8a52-6b0c14cd88b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lodestone-myr:cast:s1,f:xs:XP:lodestone-myr:cast:s1	-	-	-	25696bf19d5b	-	c5a054d09d0c	-	-	2026-11-24	xproof
 7635fb35-7ac8-4e61-8a52-6b0c14cd88b8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:lodestone-myr:cast:s1,f:xs:XP:lodestone-myr:cast:s1	-	-	-	25696bf19d5b	-	c5a054d09d0c	-	-	2026-11-24	xproof
 76372327-41ec-4516-abff-3b612e073629	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kona-rescue-beastie:cast:s1,f:xs:XP:kona-rescue-beastie:cast:s1	-	-	-	23b491658465	-	8931b47f47b3	-	-	2026-11-24	xproof
@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 766c2c67-d1ee-44ff-b9bb-355361646ef1	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 766c2c67-d1ee-44ff-b9bb-355361646ef1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:warlock-class:f0t0:s1,f:xs:XP:warlock-class:f0t0:s1	-	-	-	6f84be0f34c0	-	3cb33f2a8f4a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 766c2c67-d1ee-44ff-b9bb-355361646ef1	f0/t1	ClassLevelGained/Class	agreed	-	FX	start	2	0	x:xs:XP:warlock-class:f0a1:s1,f:xs:XP:warlock-class:f0a1:s1	-	-	-	23b491658465	-	3cb33f2a8f4a	-	-	2026-11-25	xproof
-766c2c67-d1ee-44ff-b9bb-355361646ef1	f0/t2	NULL	owed	refused:steps-needed:class-level	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+766c2c67-d1ee-44ff-b9bb-355361646ef1	f0/t2	NULL	owed	refused:steps-needed:class-level	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 766c3528-2c5c-4e92-aa85-b1e0e115d491	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:venomous-brutalizer:f0t0:s1,f:xs:XP:venomous-brutalizer:f0t0:s1	-	-	-	ae86f6029288	-	e5af5a9dfa67	-	-	2026-11-24	xproof
 766c3528-2c5c-4e92-aa85-b1e0e115d491	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:venomous-brutalizer:f0t0:s1,f:xs:XP:venomous-brutalizer:f0t0:s1	-	-	-	ae86f6029288	-	e5af5a9dfa67	-	-	2026-11-24	xproof
 766c8a68-9c51-44ea-903c-1f5cb30941d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

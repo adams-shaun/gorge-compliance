@@ -44,11 +44,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 93409d98-93c8-4742-a635-2a4408e66c32	cast	cast-resolve	agreed	-	FX	scen	2	0	Changeling Wayfinder/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 93409d98-93c8-4742-a635-2a4408e66c32	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9342fbb8-ab35-4895-946d-951ba6a2b067	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9344ae2e-cb2e-400d-9157-e8158ce31813	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9b4a23ab0997	-	-	2026-11-25	xproof
-9344ae2e-cb2e-400d-9157-e8158ce31813	f0/a0	GainLife	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9b4a23ab0997	-	-	2026-11-25	xproof
-9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
-9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t1	LandPlayed	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9b4a23ab0997	-	-	2026-11-25	xproof
-9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t2	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	9b4a23ab0997	-	-	2026-11-25	xproof
+9344ae2e-cb2e-400d-9157-e8158ce31813	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:juju-bubble:cast:s1,f:xs:XP:juju-bubble:cast:s1	-	-	-	cb99a158debc	-	9b4a23ab0997	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+9344ae2e-cb2e-400d-9157-e8158ce31813	f0/a0	GainLife	agreed	-	FX	start	4	0	x:xs:XP:juju-bubble:cast:s1,f:xs:XP:juju-bubble:cast:s1	-	-	-	cb99a158debc	-	9b4a23ab0997	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t1	LandPlayed	agreed	-	FX	start	2	0	x:xs:XP:juju-bubble:f0t2:s1,f:xs:XP:juju-bubble:f0t2:s1	-	-	-	cb99a158debc	-	9b4a23ab0997	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+9344ae2e-cb2e-400d-9157-e8158ce31813	f0/t2	Phase/Cumulative upkeep	agreed	-	FX	start	2	0	x:xs:XP:juju-bubble:f0t2:s1,f:xs:XP:juju-bubble:f0t2:s1	-	-	-	cb99a158debc	-	9b4a23ab0997	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 93491d5c-8579-42ed-a700-e5c6f4238dea	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:barricade-breaker:cast:s1,f:xs:XP:barricade-breaker:cast:s1	-	-	-	d864b561c9cb	-	707f82d447af	-	-	2026-11-24	xproof
 934c50aa-7d2e-4c9e-b91b-1e8c4055e1c6	cast	cast	agreed	-	F	start	2	0	f:xs:XP:spell-rupture:cast:s1	-	-	-	9087eefec3ee	-	bf847ef1468d	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 934d42b2-5dca-4a29-82d3-6778796178d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

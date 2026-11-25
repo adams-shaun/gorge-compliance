@@ -36,7 +36,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 29326487-6d95-40a8-9bcc-f94ada4e27c3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:slavering-branchsnapper:combat0.block:s1,f:xs:XP:slavering-branchsnapper:combat0.block:s1	-	-	-	23c4009444b0	-	3fb91814cf27	-	-	2026-11-25	xproof
 29326487-6d95-40a8-9bcc-f94ada4e27c3	f0/a0	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:slavering-branchsnapper:f0a0:s1	-	-	-	23c4009444b0	-	3fb91814cf27	-	-	2026-11-25	xproof
 29328bcb-e991-4095-9439-f493c8fa3f82	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29328bcb-e991-4095-9439-f493c8fa3f82	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+29328bcb-e991-4095-9439-f493c8fa3f82	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 2932baae-bdf1-455a-9ac4-23ba1f83e7e1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:adarkar-valkyrie:cast:s1,f:xs:XP:adarkar-valkyrie:cast:s1	-	-	-	16ec2936189a	-	ab5522d8d625	-	-	2026-11-24	xproof
 2932baae-bdf1-455a-9ac4-23ba1f83e7e1	f0/a0	DelayedTrigger	agreed	-	FX	start	2	0	x:xs:XP:adarkar-valkyrie:f0a0:s1,f:xs:XP:adarkar-valkyrie:f0a0:s1	-	-	-	9087eefec3ee	-	ab5522d8d625	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 2934233a-b90c-45df-b604-ce462480bbb7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 298a7e1a-b254-442e-bc1d-2a3e5296d849	f0/a2	Token	agreed	-	FX	start	2	0	x:xs:XP:garruk-primal-hunter:f0a2:s1,f:xs:XP:garruk-primal-hunter:f0a2:s1	-	-	-	23c4009444b0	-	eb5b140a03f5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 29925297-b6d4-4fc8-a585-1425c1482ec6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sanctuary-smasher:cast:s1,f:xs:XP:sanctuary-smasher:cast:s1	-	-	-	ae86f6029288	-	350ec236519d	-	-	2026-11-24	xproof
 29925297-b6d4-4fc8-a585-1425c1482ec6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-29925297-b6d4-4fc8-a585-1425c1482ec6	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+29925297-b6d4-4fc8-a585-1425c1482ec6	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 29933a32-3738-4ec5-aa6d-ce3684e2e5a3	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:horizon-scholar:cast:s1,f:xs:XP:horizon-scholar:cast:s1	-	-	-	d864b561c9cb	-	74db4a70c256	-	-	2026-11-24	xproof
 29933a32-3738-4ec5-aa6d-ce3684e2e5a3	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:horizon-scholar:cast:s1,f:xs:XP:horizon-scholar:cast:s1	-	-	-	d864b561c9cb	-	74db4a70c256	-	-	2026-11-24	xproof
 2993dc7d-723d-4a9b-94bd-4bb02a9f7243	cast	cast	agreed	-	F	start	2	0	f:xs:XP:tishana-s-tidebinder:cast:s2	-	-	-	5437c1394672	-	3be77435f99a	-	-	2026-11-24	xproof

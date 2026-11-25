@@ -58,8 +58,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 533d5bf9-0912-451f-a3f4-3842b0a75b1d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:golbez-crystal-collector:f0t0:s1,f:xs:XP:golbez-crystal-collector:f0t0:s1	-	-	-	23c4009444b0	-	67e61d35c3f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 533d5bf9-0912-451f-a3f4-3842b0a75b1d	f0/t1	Phase	agreed	-	FX	start	1	0	x:xs:XP:golbez-crystal-collector:f0t1:s2,f:xs:XP:golbez-crystal-collector:f0t1:s2	-	-	-	23c4009444b0	-	67e61d35c3f7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 533d6b9f-a145-44c4-9d16-74fcd9c0ae2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-533e41cc-7cae-47f2-886b-8a3ffb82bf81	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	040437efab81	-	-	2026-11-25	xproof
-533e41cc-7cae-47f2-886b-8a3ffb82bf81	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	040437efab81	-	-	2026-11-25	xproof
+533e41cc-7cae-47f2-886b-8a3ffb82bf81	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:firestorm-hellkite:cast:s1,f:xs:XP:firestorm-hellkite:cast:s1	-	-	-	cb99a158debc	-	040437efab81	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+533e41cc-7cae-47f2-886b-8a3ffb82bf81	f0/t0	Phase/Cumulative upkeep	agreed	-	FX	start	2	0	x:xs:XP:firestorm-hellkite:f0t0:s1,f:xs:XP:firestorm-hellkite:f0t0:s1	-	-	-	cb99a158debc	-	040437efab81	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 53463d3d-fa97-46fb-a73b-35bb0e0dac72	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53463d3d-fa97-46fb-a73b-35bb0e0dac72	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 534ce8e2-53a1-407c-9881-d3b5347d43c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53b9a2cf-2e6e-4ce0-bb9f-f33fb27b7b5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 53b9a2cf-2e6e-4ce0-bb9f-f33fb27b7b5e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skyswimmer-koi:f0t0:s1,f:xs:XP:skyswimmer-koi:f0t0:s1	-	-	-	054d9f516953	-	037ce383803d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 53bab610-1d27-4897-a4ad-cfecca82b811	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53bab610-1d27-4897-a4ad-cfecca82b811	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+53bab610-1d27-4897-a4ad-cfecca82b811	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 53bfe54e-9b97-4113-97d9-3c5dbc85e7cf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akal-pakal-first-among-equals:cast:s1,f:xs:XP:akal-pakal-first-among-equals:cast:s1	-	-	-	23b491658465	-	6a9956165af7	-	-	2026-11-24	xproof
 53bfe54e-9b97-4113-97d9-3c5dbc85e7cf	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:akal-pakal-first-among-equals:f0t0:s1,f:xs:XP:akal-pakal-first-among-equals:f0t0:s1	-	-	-	3aa6ded33acb	-	6a9956165af7	-	-	2026-11-25	xproof
 53bfffae-b99e-44bd-8954-6cf236f93f26	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:mnemonic-sphere:cast:s1,f:xs:XP:mnemonic-sphere:cast:s1	-	-	-	d864b561c9cb	-	e74d6db4e141	-	-	2026-11-24	xproof
@@ -178,10 +178,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 53c730c6-2f8c-4af8-b400-b9d573a71e60	static#0.0	static#0.0	agreed	-	X	scen	1	0	Adaptive Automaton/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53c730c6-2f8c-4af8-b400-b9d573a71e60	static#0.1	static#0.1	agreed	-	X	scen	1	0	Adaptive Automaton/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53cbc12d-e182-4cde-8967-9b2664daa817	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:demonic-collusion:cast:s1,f:xs:XP:demonic-collusion:cast:s1	-	-	-	9ee19e8250ce	-	81a775bdc47b	-	-	2026-11-24	xproof
-53cc4b93-538d-4193-8bbb-5b73d3ce9d79	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	0b3a5c33e6ef	-	-	2026-11-25	xproof
-53cc4b93-538d-4193-8bbb-5b73d3ce9d79	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	0b3a5c33e6ef	-	-	2026-11-25	xproof
+53cc4b93-538d-4193-8bbb-5b73d3ce9d79	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:elephant-grass:cast:s1,f:xs:XP:elephant-grass:cast:s1	-	-	-	cb99a158debc	-	0b3a5c33e6ef	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+53cc4b93-538d-4193-8bbb-5b73d3ce9d79	f0/t0	Phase/Cumulative upkeep	agreed	-	FX	start	2	0	x:xs:XP:elephant-grass:f0t0:s1,f:xs:XP:elephant-grass:f0t0:s1	-	-	-	cb99a158debc	-	0b3a5c33e6ef	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 53cd9d9f-c1a7-404e-9934-4542415e3431	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-53d3ef8f-8e0f-4119-8cdc-a0bf076b4e91	cast	cast-resolve	agreed	-	X	scen	1	0	Speedball, New Warrior/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+53d3ef8f-8e0f-4119-8cdc-a0bf076b4e91	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:speedball-new-warrior:cast:s1,f:xs:XP:speedball-new-warrior:cast:s1	-	-	-	cb99a158debc	-	87ee6e1864ca	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 53d3ef8f-8e0f-4119-8cdc-a0bf076b4e91	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Speedball, New Warrior/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 53d5d961-d6a3-49b1-b335-2c2b49972008	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:whiptongue-hydra:f0t0:s1,f:xs:XP:whiptongue-hydra:f0t0:s1	-	-	-	8c0bd19283bb	-	fb71dee9f44b	-	-	2026-11-24	xproof
 53d5d961-d6a3-49b1-b335-2c2b49972008	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:whiptongue-hydra:f0t0:s1,f:xs:XP:whiptongue-hydra:f0t0:s1	-	-	-	8c0bd19283bb	-	fb71dee9f44b	-	-	2026-11-24	xproof

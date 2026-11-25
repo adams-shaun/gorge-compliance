@@ -121,8 +121,8 @@ f1a76cca-829a-4576-a560-f1af34b80b87	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:al
 f1ac4e0e-5633-46e4-9a21-d3924e481d13	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:borrowed-time:f0t0:s1,f:xs:XP:borrowed-time:f0t0:s1	-	-	-	d864b561c9cb	-	3b27aebddc9e	-	-	2026-11-24	xproof
 f1ac4e0e-5633-46e4-9a21-d3924e481d13	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:borrowed-time:f0t0:s1,f:xs:XP:borrowed-time:f0t0:s1	-	-	-	d864b561c9cb	-	3b27aebddc9e	-	-	2026-11-24	xproof
 f1acb469-9d02-44e6-8c09-8b4157551b2c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-f1acb469-9d02-44e6-8c09-8b4157551b2c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
-f1acb469-9d02-44e6-8c09-8b4157551b2c	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+f1acb469-9d02-44e6-8c09-8b4157551b2c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+f1acb469-9d02-44e6-8c09-8b4157551b2c	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 f1b1cf99-b44c-4bcc-b0ed-98f69e66c54a	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 f1b1cf99-b44c-4bcc-b0ed-98f69e66c54a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
 f1b1cf99-b44c-4bcc-b0ed-98f69e66c54a	f1/t0	NULL	owed	refused:no-generator:face:flip	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
@@ -136,7 +136,7 @@ f1b7488c-c675-42e9-818a-24a50347ec2c	cast	cast-resolve	agreed	-	X	scen	1	0	Peter
 f1b7488c-c675-42e9-818a-24a50347ec2c	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Peter Parker/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f1b7488c-c675-42e9-818a-24a50347ec2c	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Peter Parker/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f1b7488c-c675-42e9-818a-24a50347ec2c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Peter Parker/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-f1b7488c-c675-42e9-818a-24a50347ec2c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+f1b7488c-c675-42e9-818a-24a50347ec2c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 f1b7488c-c675-42e9-818a-24a50347ec2c	static#1.0	static#1.0	agreed	-	X	scen	1	0	Peter Parker/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 f1ba56e3-3d09-4610-88e7-8681b5736105	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:combust:cast:s1,f:xs:XP:combust:cast:s1	-	-	-	da6bc3fe8458	-	a1a61e1ecd43	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 f1ba6053-14e0-46b0-b760-b72e4fa0c5f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

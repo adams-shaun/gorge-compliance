@@ -54,7 +54,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d3ca5cb-781d-4608-b7f1-38c020536376	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Kefka, Court Mage/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d3ca5cb-781d-4608-b7f1-38c020536376	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Kefka, Court Mage/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d3ca5cb-781d-4608-b7f1-38c020536376	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Kefka, Court Mage/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6d3ca5cb-781d-4608-b7f1-38c020536376	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+6d3ca5cb-781d-4608-b7f1-38c020536376	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6d3ca5cb-781d-4608-b7f1-38c020536376	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Kefka, Court Mage/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d3ca5cb-781d-4608-b7f1-38c020536376	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Kefka, Court Mage/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6d42dff5-97ec-4768-b112-84a3584d0b87	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:zookeeper-mechan:f0a0:s1,f:xs:XP:zookeeper-mechan:f0a0:s1	-	-	-	336eab778104	-	10878bd699d4	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 6d4d98a8-a5a3-4cc1-9277-c45dafe40ea0	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:zookeeper-mechan:f0a1:s1,f:xs:XP:zookeeper-mechan:f0a1:s1	-	-	-	23c4009444b0	-	10878bd699d4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6d4daf9c-e2f4-4d0e-b2e4-ded04d644b11	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6d4daf9c-e2f4-4d0e-b2e4-ded04d644b11	f0/a0	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+6d4daf9c-e2f4-4d0e-b2e4-ded04d644b11	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:triangle-of-war:f0a0:s1,f:xs:XP:triangle-of-war:f0a0:s1	-	-	-	cb99a158debc	-	0a72f403c20f	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6d4e558e-9109-4918-a082-fdcbaffd516b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d4e7943-1fdf-4085-8af0-658badbd0cb8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6d4e7943-1fdf-4085-8af0-658badbd0cb8	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

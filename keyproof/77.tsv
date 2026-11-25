@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7731217e-cdbb-4c38-a9c1-083c96f51931	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:boon-of-the-spirit-realm:cast:s1,f:xs:XP:boon-of-the-spirit-realm:cast:s1	-	-	-	8c0bd19283bb	-	77e339900b77	-	-	2026-11-24	xproof
 7734ee04-1d99-4807-be68-b889e75a7551	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7735eeba-693b-47e2-bd51-414379cf1016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7737ccdc-49f2-463e-8ffd-43ab98d11f45	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+7737ccdc-49f2-463e-8ffd-43ab98d11f45	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 7739311a-682b-48a6-8db2-c07f44141751	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:cast:s1,f:xs:XP:the-gitrog-ravenous-ride:cast:s1	-	-	-	23b491658465	-	44934fd44d14	-	-	2026-11-24	xproof
 7739311a-682b-48a6-8db2-c07f44141751	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:combat0.attack:s1,f:xs:XP:the-gitrog-ravenous-ride:combat0.attack:s1	-	-	-	3aa6ded33acb	-	44934fd44d14	-	-	2026-11-25	xproof
 7739311a-682b-48a6-8db2-c07f44141751	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:combat0.block:s1,f:xs:XP:the-gitrog-ravenous-ride:combat0.block:s1	-	-	-	3aa6ded33acb	-	44934fd44d14	-	-	2026-11-25	xproof
@@ -94,7 +94,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77828ebf-58d2-4aca-ae6f-0efa50d5d640	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fathom-fleet-swordjack:f0t0:s1,f:xs:XP:fathom-fleet-swordjack:f0t0:s1	-	-	-	8c0bd19283bb	-	33392f78b5bc	-	-	2026-11-24	xproof
 77849657-c872-4d54-9149-a08bbe90f787	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77849657-c872-4d54-9149-a08bbe90f787	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77849657-c872-4d54-9149-a08bbe90f787	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+77849657-c872-4d54-9149-a08bbe90f787	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 7785ffd4-f169-475d-9558-ce4877b3378a	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:gleaming-bastion:f0a0:s1,f:xs:XP:gleaming-bastion:f0a0:s1	-	-	-	9087eefec3ee	-	f5d6ac2a00c5	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 7785ffd4-f169-475d-9558-ce4877b3378a	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Gleaming Bastion/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 7785ffd4-f169-475d-9558-ce4877b3378a	land	land	agreed	-	FX	start	2	0	x:xs:XP:gleaming-bastion:land:s1,f:xs:XP:gleaming-bastion:land:s1	-	-	-	fb9d3088f0bf	-	f5d6ac2a00c5	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
@@ -178,7 +178,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77cf536e-246e-4c18-8e04-c904fcad3f40	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77d016e3-f652-4827-b49a-8044f6d2d45b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77d5d435-d794-46c0-b630-a460973cf75a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-77d5d435-d794-46c0-b630-a460973cf75a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+77d5d435-d794-46c0-b630-a460973cf75a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 77d5f298-06b4-49d1-9b33-f1f176665ba2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 77db8db4-9fe4-478e-b919-5348b0b87b0d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dominate:cast:s1,f:xs:XP:dominate:cast:s1	-	-	-	3aa6ded33acb	-	5f0e49b247c2	-	-	2026-11-25	xproof
 77dd6ce0-91fc-4e71-99ff-47cdf3359067	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yuna-s-decision:cast:s1,f:xs:XP:yuna-s-decision:cast:s1	-	-	-	8c0bd19283bb	-	cef15f8f9741	-	-	2026-11-24	xproof

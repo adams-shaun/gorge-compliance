@@ -74,15 +74,15 @@ dc65cf70-c3aa-4e3c-82c6-260cbdf5f522	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	
 dc665ddc-4326-4860-94ba-c40ced8b0af6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc66dbed-f979-4ad1-b5f9-08538886167f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc66dbed-f979-4ad1-b5f9-08538886167f	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-dc69a130-967a-4d9f-992f-db7fad2fcd6d	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
-dc69a130-967a-4d9f-992f-db7fad2fcd6d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+dc69a130-967a-4d9f-992f-db7fad2fcd6d	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+dc69a130-967a-4d9f-992f-db7fad2fcd6d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 dc788b66-d03d-4066-be35-481be96ed2f7	cast	cast	agreed	-	F	start	2	0	f:xs:XP:boughside-wanderers:f0t0:s1	-	-	-	25696bf19d5b	-	5adc61b0dec6	-	-	2026-11-24	xproof
 dc788b66-d03d-4066-be35-481be96ed2f7	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:boughside-wanderers:f0t0:s1	-	-	-	25696bf19d5b	-	5adc61b0dec6	-	-	2026-11-24	xproof
 dc788b66-d03d-4066-be35-481be96ed2f7	f0/t1	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:boughside-wanderers:f0t0:s1	-	-	-	25696bf19d5b	-	5adc61b0dec6	-	-	2026-11-24	xproof
 dc7929cb-50a9-4662-a106-c415fc03a1a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc7929cb-50a9-4662-a106-c415fc03a1a9	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 dc7e259a-d965-4e25-8145-81ab3087f718	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:warchanter-skald:cast:s1,f:xs:XP:warchanter-skald:cast:s1	-	-	-	d864b561c9cb	-	293abd76e77b	-	-	2026-11-24	xproof
-dc7e259a-d965-4e25-8145-81ab3087f718	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:condition	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+dc7e259a-d965-4e25-8145-81ab3087f718	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:condition	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 dc7f0c33-80ea-453e-a237-473f077f038e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arrogant-wurm:cast:s1,f:xs:XP:arrogant-wurm:cast:s1	-	-	-	fc71ca68c5ac	-	a0516a3e1db3	-	-	2026-11-24	xproof
 dc81069b-b2cf-44b3-98fc-45bb24b815cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc81069b-b2cf-44b3-98fc-45bb24b815cb	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:sindbad:f0a0:s1,f:xs:XP:sindbad:f0a0:s1	-	-	-	23c4009444b0	-	a0351b73dd4c	-	-	2026-11-25	xproof
@@ -127,7 +127,7 @@ dcb9c2a7-ae54-4ddc-a567-640bf4bf4366	combat#0.block	combat#0.block	agreed	-	X	sc
 dcb9c2a7-ae54-4ddc-a567-640bf4bf4366	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:solitude:f0t0:s1	-	-	-	ae86f6029288	-	79fcff57b80a	-	-	2026-11-24	xproof
 dcbb6b0e-2219-4ba4-9720-3e58b59b4328	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dcbd8b15-e5fd-4f0d-ba2d-06f018b64fb3	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
-dcbd8b15-e5fd-4f0d-ba2d-06f018b64fb3	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+dcbd8b15-e5fd-4f0d-ba2d-06f018b64fb3	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 dcbf8d72-3367-43e1-9a71-e674e0ed52d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:taj-nar-swordsmith:f0t0:s1,f:xs:XP:taj-nar-swordsmith:f0t0:s1	-	-	-	25696bf19d5b	-	e9c76cc00801	-	-	2026-11-24	xproof
 dcbf8d72-3367-43e1-9a71-e674e0ed52d9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:taj-nar-swordsmith:f0t0:s1,f:xs:XP:taj-nar-swordsmith:f0t0:s1	-	-	-	25696bf19d5b	-	e9c76cc00801	-	-	2026-11-24	xproof
 dcc29e59-341c-4175-aa54-f535e2c3e355	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -162,7 +162,7 @@ dcebce37-02eb-4b5d-86be-42b4a0287624	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 dcebce37-02eb-4b5d-86be-42b4a0287624	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:bloodmist-infiltrator:f0t0:s1,f:xs:XP:bloodmist-infiltrator:f0t0:s1	-	-	-	d864b561c9cb	-	6bebebaeb3d6	-	-	2026-11-24	xproof
 dced5cab-1438-4264-b44c-54dc37ec73d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grapple-with-death:cast:s1,f:xs:XP:grapple-with-death:cast:s1	-	-	-	23c4009444b0	-	b6ad974afbaa	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 dcf07f38-422f-46c3-aee9-50540b9c9115	cast	cast-resolve	agreed	-	X	scen	1	0	Silvergill Mentor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-dcf07f38-422f-46c3-aee9-50540b9c9115	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	9087eefec3ee	-	b8f108d00e9e	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+dcf07f38-422f-46c3-aee9-50540b9c9115	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	cb99a158debc	-	b8f108d00e9e	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 dcf105c1-d37b-4e92-a420-9872a2187764	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dcf3cd72-3c3d-4847-83be-105966b0cd6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dcf438a7-adc4-4658-b75a-2dd633f595a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

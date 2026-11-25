@@ -20,7 +20,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 952300de-766e-4ceb-bd36-e0b721bebc17	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:greasewrench-goblin:cast:s1,f:xs:XP:greasewrench-goblin:cast:s1	-	-	-	23c4009444b0	-	64373ac5738a	-	-	2026-11-25	xproof
 952300de-766e-4ceb-bd36-e0b721bebc17	f0/a0	Discard	agreed	-	FX	start	2	0	x:xs:XP:greasewrench-goblin:f0a0:s1,f:xs:XP:greasewrench-goblin:f0a0:s1	-	-	-	23c4009444b0	-	64373ac5738a	-	-	2026-11-25	xproof
 9527d2dc-d2e2-4259-aefe-2342ea07bc63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-952ab8fe-f7d3-4673-89de-8c6d3f8a081f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Cavernous Maw/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+952ab8fe-f7d3-4673-89de-8c6d3f8a081f	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:cavernous-maw:f0a0:s1,f:xs:XP:cavernous-maw:f0a0:s1	-	-	-	cb99a158debc	-	390112fb9800	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 952ab8fe-f7d3-4673-89de-8c6d3f8a081f	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Cavernous Maw/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 952ab8fe-f7d3-4673-89de-8c6d3f8a081f	land	play-land	agreed	-	X	scen	1	0	Cavernous Maw/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 952ef791-5c89-4965-9f34-0228acb18bc4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -33,13 +33,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 953a2bd3-5bca-41fc-8785-66b2d7fa381a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:mai-scornful-striker:combat0.block:s1,f:xs:XP:mai-scornful-striker:combat0.block:s1	-	-	-	6f84be0f34c0	-	3fd092e0b388	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 953a2bd3-5bca-41fc-8785-66b2d7fa381a	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Mai, Scornful Striker/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 953bdefa-4639-4524-af5c-5055d1289f40	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-953bdefa-4639-4524-af5c-5055d1289f40	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
+953bdefa-4639-4524-af5c-5055d1289f40	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 9542bd7f-bb99-4b59-a4e3-b88ed9f798bf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9542bd7f-bb99-4b59-a4e3-b88ed9f798bf	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	703eaea90aaa	-	-	2026-11-24	xproof
+9542bd7f-bb99-4b59-a4e3-b88ed9f798bf	f0/t0	Attacks	owed	harness	-	start	0	0	-	-	-	-	cb99a158debc	-	703eaea90aaa	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 9545f126-062f-4410-a362-e16255a128d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9545f126-062f-4410-a362-e16255a128d6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9545f126-062f-4410-a362-e16255a128d6	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
-9545f126-062f-4410-a362-e16255a128d6	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
+9545f126-062f-4410-a362-e16255a128d6	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+9545f126-062f-4410-a362-e16255a128d6	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cb99a158debc	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 954836f8-c225-450a-bb51-f2adb6923ef5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 954b30b2-b88c-4558-b06c-4518b49d7b20	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 954b30b2-b88c-4558-b06c-4518b49d7b20	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 95c3976c-33f3-490b-bfd3-7f1af2fe0416	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 95c3976c-33f3-490b-bfd3-7f1af2fe0416	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:chromatic-orrery:f0a0:s1,f:xs:XP:chromatic-orrery:f0a0:s1	-	-	-	ae86f6029288	-	d3626c38556e	-	-	2026-11-24	xproof
 95c3976c-33f3-490b-bfd3-7f1af2fe0416	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:chromatic-orrery:f0a1:s1,f:xs:XP:chromatic-orrery:f0a1:s1	-	-	-	ae86f6029288	-	d3626c38556e	-	-	2026-11-24	xproof
-95c44f28-f7fa-4785-83b9-0d81be0db0c8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Volatile Fault/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+95c44f28-f7fa-4785-83b9-0d81be0db0c8	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:cavernous-maw:f0a0:s1,f:xs:XP:cavernous-maw:f0a0:s1	-	-	-	cb99a158debc	-	545613fceac6	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 95c44f28-f7fa-4785-83b9-0d81be0db0c8	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Volatile Fault/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95c44f28-f7fa-4785-83b9-0d81be0db0c8	land	play-land	agreed	-	X	scen	1	0	Volatile Fault/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 95c76175-e3a6-4bf4-a8da-d1179851efe5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
