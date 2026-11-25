@@ -939,12 +939,39 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # driver-only commit on 0ca7a220bd0 (RefTable/StepMachine/AbilityTargetRefTest vs SetupBuilder/PlayerCountersSetupTest), no textual
 # conflicts (git merge-tree). AbilityTargetRefTest and PlayerCountersSetupTest run together at this pin; die-roll code, cardsfolder and
 # tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch oracle/fpin-1125-join-abilitytarget-playercounters.
+# f3065a4da86 = oracle/fpin-1125-join20: 495ed200e9f (above) merged with 53635f189cc (the unbound optional-untap election answered at
+# the ask, CR 502.3/117.3d, xproof clusters xpt-4782660c/xpt-5133dae0, Whip Vine; ScriptedController/StepMachine/SnapshotWriter only), no
+# textual conflicts (all three files auto-merged). UntapElectionTest runs at this pin via scripts/forge-oracle-test-untap-election.sh
+# (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# NOTE (merge): f3065a4da86 is the untap-election branch's pin but does not contain the ability-target ref (19c49ba7117); the pin stays at
+# d38946a0fd9 until a fork join of 19c49ba7117 + 53635f189cc exists. UntapElectionTest (scripts/forge-oracle-test-untap-election.sh) needs that join.
+# af167fe93c3 = 495ed200e9f (above) + the setup life is a state (xproof cluster xpt-57a0a28c, Angel of Vitality): SetupBuilder wrote a
+# seat's life with Player.setLife after the battlefield was placed, and Forge turns a raise into gainLife and a drop into loseLife
+# (CR 119.5), so Angel of Vitality's "if you would gain life, you gain that much life plus 1 instead" (CR 614) made a setup life of 25
+# read 26 while gorge and XMage held 25. SetupBuilder.placeLife now writes every seat's life before the first permanent is placed,
+# while no replacement effect or trigger exists. SetupLifeReplacementTest (4 tests, 3 red before) is run by
+# scripts/forge-oracle-test-setup-life-replacement.sh (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-life-state.
+# 18e28a7af59 = oracle/fpin-1125-join-setup-life: d38946a0fd9 (above) merged with af167fe93c3 (the setup life is a state, xproof cluster
+# xpt-57a0a28c, Angel of Vitality; SetupBuilder.placeLife writes every seat's life before the first permanent exists), no textual conflicts
+# (the two sides touch disjoint files except SetupBuilder, which auto-merged). SetupLifeReplacementTest runs at this pin via
+# scripts/forge-oracle-test-setup-life-replacement.sh (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch oracle/fpin-1125-join-setup-life.
+# 64be1e6a7fe = oracle/fpin-1125-join-setup-life-untap: 18e28a7af59 (above) merged with f3065a4da86 (the unbound optional-untap election answered at
+# the ask, 53635f189cc), closing the NOTE above: one pin now carries the ability-target ref, setup player_counters, the setup-life fix and the
+# untap election, so every scripts/forge-oracle-test-*.sh (UntapElectionTest included) runs green in make forge-driver-tests. No textual
+# conflicts beyond an auto-merge of StepMachine; driver-only, die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
 # 8765c682b2f = oracle/fpin-1125-join22: d38946a0fd9 (above) merged with a8da5c69719 (oracle/fpin-1125-join21 = join20 f3065a4da86,
 # i.e. 495ed200e9f + the optional-untap election answer 53635f189c, merged with 9b233511947, the forced Hand->Library put-back),
 # no textual conflicts (StepMachine/DecisionQueue/ScriptedController Hand->Library vs RefTable/SetupBuilder/StepMachine target ref;
 # merge tree 027db51c983). ForcedDieRollTest, PlayerCountersSetupTest, AbilityTargetRefTest and the hand-library-placement replay run
 # together at this pin. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 8765c682b2f8086fe9d5612aff7187ff193e6a66
+# 30cbb3854d2 = oracle/fpin-1125-join-setup-life-handlib: 8765c682b2f (above, join22 incl. the untap election and the Hand->Library put-back)
+# merged with af167fe93c3 (the setup life is a state, SetupBuilder.placeLife; xproof cluster xpt-57a0a28c, Angel of Vitality), no textual conflicts
+# (SetupBuilder.java and SetupLifeReplacementTest.java only; 102 insertions). SetupLifeReplacementTest runs at this pin via
+# scripts/forge-oracle-test-setup-life-replacement.sh next to the hand-library-placement and untap-election replays (make forge-driver-tests).
+# Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 30cbb3854d2f9433e13216cd61c52869ab686373
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
