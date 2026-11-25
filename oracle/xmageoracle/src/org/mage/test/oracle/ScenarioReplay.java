@@ -1905,13 +1905,31 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                 }
             }
-            if (!forcedPick(target.getMinNumberOfTargets() - target.getSize(), candidates.size(), head, headNamesCandidate)) {
+            int needed = target.getMinNumberOfTargets() - target.getSize();
+            // The whole replay's answers share one FIFO queue, built before
+            // any step runs, so a head that names the lone candidate may be a
+            // LATER step's pick (the discard cost of Borborygmos Enraged's
+            // first activation, a one-card hand, taking the Mountain scripted
+            // for its third). A lone-candidate discard cost is never scripted:
+            // gorge records no decision for it.
+            boolean headIsOurs = headNamesCandidate
+                    && !loneDiscardCostCandidate(askedByName("DiscardTargetCost", "pay"), needed, candidates.size());
+            if (!forcedPick(needed, candidates.size(), head, headIsOurs)) {
                 return false;
             }
             for (UUID id : candidates) {
                 target.add(id, game);
             }
             return true;
+        }
+
+        /** Whether a choose ask is a discard COST's one forced card: the cost
+         * (DiscardTargetCost.pay) still needs a card and exactly one is
+         * legal. gorge drops that ask as a forced one-option pick, so no
+         * answer is scripted for it and a queue head naming the card belongs
+         * to a later ask. */
+        static boolean loneDiscardCostCandidate(boolean discardCost, int needed, int candidates) {
+            return discardCost && needed > 0 && candidates == 1;
         }
 
         /** Whether a choose ask is forced: it still needs picks, every
@@ -6303,15 +6321,26 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * the ref ranked before it was drawn) -- is moved onto the new permanent,
      * so a later tap, target or pick of the ref resolves through
      * scenarioObjectId instead of the by-name fallback, which would take a
-     * setup land of the same name (CR 305.1, 605.3a). A ref already bound to
-     * a live permanent is left alone.
+     * setup land of the same name (CR 305.1, 605.3a). A ref bound to the
+     * permanent this play created is left alone.
+     *
+     * A ref whose alias names a permanent that was ALREADY on the battlefield
+     * before the play is stale: a land cannot be played from the battlefield,
+     * so the ref's card is the one the play entered. XMage answers an effect's
+     * by-name pick ("put a land card from your hand onto the battlefield":
+     * Embrace the Paradox; "return target land": Slinza's bounce) with any
+     * same-named card, so it can move the sibling of the card gorge moved.
+     * The two refs then trade objects: the played ref takes the entered
+     * permanent and the ref that named it takes the permanent the played ref
+     * stood on, so every same-named ref still names one distinct object and
+     * a later tap of the played ref reaches the untapped land.
      */
     private void bindEnteredLand(TestPlayer p, String playRef, java.util.Set<UUID> before) {
         String front = xmageSpelling(refName(playRef));
         String live = battlefieldName(playRef);
         runCode("bind entered " + playRef, turn, phase, p, (info, pl, g) -> {
             UUID current = scenarioObjectId(g, p, playRef);
-            if (current != null && g.getPermanent(current) != null) {
+            if (current != null && g.getPermanent(current) != null && !before.contains(current)) {
                 return;
             }
             Permanent entered = null;
@@ -6333,8 +6362,22 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (entered == null) {
                 return;
             }
+            // The refs that named the entered permanent (the sibling a
+            // mis-picked effect moved) take the object the played ref leaves.
+            List<String> siblings = new ArrayList<>();
+            if (current != null && !current.equals(entered.getId())) {
+                for (java.util.Map.Entry<String, UUID> a : p.getAliases().entrySet()) {
+                    if (entered.getId().equals(a.getValue()) && !a.getKey().equals(playRef)
+                            && isScenarioRef(a.getKey())) {
+                        siblings.add(a.getKey());
+                    }
+                }
+            }
             for (int j = 0; j < seats; j++) {
                 seat(j).getAliases().put(playRef, entered.getId());
+                for (String sibling : siblings) {
+                    seat(j).getAliases().put(sibling, current);
+                }
             }
         });
     }
