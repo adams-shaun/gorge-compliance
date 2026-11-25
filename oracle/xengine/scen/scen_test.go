@@ -669,6 +669,8 @@ func TestStartspellcasttriggers(t *testing.T) {
 			p0BF: []string{"Basilica Guards"}, focusCard: "Memnite", focusKind: "cast"},
 		// a second cast gate: the bare carrier does not meet it, so the
 		// start refuses rather than writing an event the trigger rejects.
+		// ValidCard$ Card.Party: the pin does not evaluate Party (fails closed), so no start can fire it
+		{card: "Angel of Unity", key: "f0/t1", reason: "no-generator:trigger:SpellCast:filter"},
 		{card: "Riku of Many Paths", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},         // ValidSA$ Spell.Modal
 		{card: "Voracious Bibliophile", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},      // ValidSA$ Spell.numTargets GE1
 		{card: "Verazol, the Split Current", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"}, // ValidSA$ Spell.Kicked
@@ -776,15 +778,32 @@ func TestFilterProps(t *testing.T) {
 		{"Card.MultiColor", "Memnite", false},
 		{"Card.Outlaw", "Ragavan, Nimble Pilferer", true}, // Pirate (CR 700.12)
 		{"Card.Outlaw", "Anax and Cymede", false},
-		{"Card.Party", "Angel of Unity", true}, // Cleric (CR 700.8)
-		{"Card.Party", "Ragavan, Nimble Pilferer", false},
-		{"Card.nonHistoric", "Reach Through Mists", true},
-		{"Card.nonHistoric", "Memnite", false},
+		{"Card.nonOutlaw", "Anax and Cymede", true},
+		{"Card.nonOutlaw", "Ragavan, Nimble Pilferer", false},
+		{"Card.nonColorless", "Anax and Cymede", true},
+		{"Card.nonColorless", "Memnite", false},
 		{"Card.Colorless", "Memnite", true},
 		{"Card.Colorless", "Anax and Cymede", false},
 	} {
 		if got := takes(tc.filter, tc.card); got != tc.want {
 			t.Errorf("%s on %s = %v, want %v", tc.filter, tc.card, got, tc.want)
+		}
+	}
+	// The pin fails an unrecognised predicate closed, so a start built on one
+	// could never fire: each stays an unknown alternative (a refusal) until the
+	// pin learns it. This is the known-unsupported set at the current pin; a
+	// bump that learns one fails here and the entry is deleted.
+	unsupported := []string{"Party", "nonParty", "Multicolor", "nonMulticolor", "nonMultiColor", "nonHistoric"}
+	for p := range filterProps {
+		for _, q := range []string{p, "non" + p} {
+			if supported, listed := pinMatches(q), slices.Contains(unsupported, q); supported == listed {
+				t.Errorf("Card.%s: pin evaluates it = %v, but known-unsupported = %v", q, supported, listed)
+			}
+		}
+	}
+	for _, q := range unsupported {
+		if alts := parseFilter("Card." + q); len(alts) != 1 || alts[0].known {
+			t.Errorf("Card.%s: %+v, want one unknown alternative", q, alts)
 		}
 	}
 	if alts := parseFilter("Card.!wasCastFromYourHand"); len(alts) != 1 || alts[0].known {

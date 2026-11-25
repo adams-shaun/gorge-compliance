@@ -9,6 +9,7 @@ import (
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/effects"
 )
 
 // A carrier is the card a forced start moves to make a trigger's event happen:
@@ -262,6 +263,16 @@ var filterProps = map[string]func(*cards.Face) bool{
 	"Party": typeWordAny("Cleric", "Rogue", "Warrior", "Wizard"),
 }
 
+// pinMatches reports whether the pinned gorge can evaluate the filter
+// predicate p. The engine fails an unrecognised predicate closed, so a start
+// built around one (Card.Party, Card.nonHistoric at the current pin) would be
+// a trigger that can never fire: the alternative stays unknown and the key
+// refuses instead. The gate reads the engine's own census, so a pin bump that
+// learns a predicate turns its row on without an edit here.
+func pinMatches(p string) bool {
+	return len(effects.UnknownPredicates("Card."+p)) == 0
+}
+
 // parseFilter reads a ValidCard filter into its alternatives.
 func parseFilter(s string) []filterAlt {
 	var out []filterAlt
@@ -303,6 +314,9 @@ func parseFilter(s string) []filterAlt {
 					continue // every carrier is a card
 				}
 				if test, ok := filterProps[p]; ok {
+					if !pinMatches(p) {
+						a.known = false // never read a named property as a type word
+					}
 					tests = append(tests, test)
 					continue
 				}
@@ -326,6 +340,9 @@ func parseFilter(s string) []filterAlt {
 						continue
 					}
 					if test, ok := filterProps[w]; ok {
+						if !pinMatches(p) {
+							a.known = false
+						}
 						tests = append(tests, func(f *cards.Face) bool { return !test(f) })
 						continue
 					}
