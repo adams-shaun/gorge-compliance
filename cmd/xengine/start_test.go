@@ -579,8 +579,8 @@ func TestStartHybridCostIsExercised(t *testing.T) {
 }
 
 // startIsExercised generates the start file for card's key, plays it, and
-// fails when play refuses it as start-not-exercised or writes no item; it
-// returns the items written.
+// fails when play refuses it as start-not-exercised or writes fewer items than
+// the start's seeds; it returns the items written.
 func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, card, key string) []oraclegen.Item {
 	t.Helper()
 	res, err := scen.Generate(reg, b, card, key, scen.Options{Prefer: "start"})
@@ -601,8 +601,10 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 			refused = append(refused, string(b))
 		}
 	}
-	if len(items) == 0 {
-		t.Errorf("no item written (lowering %v; start %s)", refused, raw)
+	// One item per seed is the generator's contract: a seed that lowers to no
+	// item leaves the key unproven there even when the other seed writes one.
+	if len(items) != res.Start.Seeds {
+		t.Errorf("%d item(s), want %d (one per seed): lowering %v (start %s)", len(items), res.Start.Seeds, refused, raw)
 	}
 	return items
 }
@@ -1000,9 +1002,9 @@ func stackTargetCensus(t *testing.T, reg *cards.Registry, b *certdeck.Builder, n
 					t.Errorf("%s %s: %s (start %s)", card, key, reasonStartNotExercised, raw)
 				}
 			}
-			if len(items) == 0 {
+			if len(items) != res.Start.Seeds {
 				bad = true
-				t.Errorf("%s %s: a bait start lowered to no item (start %s)", card, key, raw)
+				t.Errorf("%s %s: a bait start wrote %d item(s), want %d (one per seed) (start %s)", card, key, len(items), res.Start.Seeds, raw)
 			}
 			if !bad {
 				exercised++

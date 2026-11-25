@@ -815,15 +815,23 @@ func inertRank(f *cards.Face) int {
 	return 0
 }
 
-// enablerRank is inertRank plus a penalty for every trigger, static and
-// replacement the placed card brings: those are the faces whose setup drive can
-// ask a question or refuse the cut (lower.PhaseTriggeredFace, an as-enters
-// choice, an entry counter). A need is met by the least busy card certdeck
-// offers, so the incidental trigger bug's next sibling (a Wizard whose choice
-// replacement is not restatable) ranks behind a vanilla enabler too.
+// enablerRank is inertRank plus a penalty for every battlefield-entry
+// replacement effect the placed card brings. The setup placement re-runs a
+// Moved replacement (K:ETBReplacement and the printed R:Event$ Moved lines),
+// and a body that asks an as-enters choice (Realmwright's basic land type)
+// leaves state the scenario cannot restate, so the cut refuses the start.
+// Ranking a replacement-bearing card behind one without keeps Wizard's Retort
+// off Realmwright. Only entry replacements are penalized: an ordinary trigger
+// or static (Shield Sphere's block trigger, Lunarch Veteran's life trigger) is
+// not a shape the gate refuses, and penalizing it would reorder enabler picks
+// outside that shape.
 func enablerRank(f *cards.Face) int {
 	r := inertRank(f)
-	r += 3 * (len(f.Triggers) + len(f.Statics) + len(f.Repls))
+	for i := range f.Repls {
+		if f.Repls[i].Event == "Moved" {
+			r += 3
+		}
+	}
 	return r
 }
 
@@ -854,11 +862,13 @@ func pickEnabler(reg *cards.Registry, b *certdeck.Builder, s *StartSeat, offTurn
 	if len(picks) == 0 {
 		return nil
 	}
-	// A battlefield pick must have no beginning-of-upkeep or draw trigger: the
-	// lowering refuses a start whose cut carries one (lower.PhaseTriggeredFace),
-	// so placing it would generate a start file that can never be lowered. Skip
-	// such picks for the battlefield (they can still go in hand below); the next
-	// enabler of the need takes their place.
+	// A battlefield pick must have no beginning-of-upkeep or draw trigger. The
+	// span can only decline an optional one whose probe asks a plain
+	// trigger_optional yes/no; an enabler's trigger is incidental, and if it
+	// asks anything else (Drifter il-Dal's "sacrifice unless you pay {U}" is a
+	// choose_n ask) the placement refuses the span. Skip such picks for the
+	// battlefield (they can still go in hand below); the next enabler of the
+	// need takes their place.
 	best := -1
 	for i, f := range faces {
 		if FieldBlock(f) == "" && !upkeepOrDraw(f) && (best < 0 || enablerRank(f) < enablerRank(faces[best])) {
