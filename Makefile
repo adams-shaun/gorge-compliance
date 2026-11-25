@@ -654,6 +654,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # EmptyOptionalAnimateConfirmTest (fixtures/animate: the find, and the same request with a Grizzly Bears) fails before it with the exact
 # miss; scripts/forge-oracle-test-empty-optional-animate.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder
 # and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-empty-optional-animate.
+# e99e48e2b50f = 65d8060f39ba plus the forced-pick leaves a queued pick for the later ask (xproof clusters xpt-5e60af5c and
+# xpt-f2f006f3, The Gitrog, Ravenous Ride: Memnite saddles it and it hits, and at the trigger's resolution Forge's Sacrifice cost
+# offers the one saddler, so the pick is forced and gorge logs none; the queued p0:Swamp/p0:Forest pick answers the LATER "put up to
+# X land cards from your hand onto the battlefield" ask of the same step, but StepMachine.pickObjects took the queued pick before it
+# checked the forced case, gave it to the Sacrifice cost and strict-missed "gorge pick p0:Swamp is not among Forge's 1 options").
+# pickObjects now returns the options of a forced ask (opts.size() <= min) without consuming a queued pick whose refs are not among
+# them (queuedPickBelongsToLaterAsk), noted as "forced, queued pick left for a later ask"; a queued pick naming an option is taken
+# as before. LoneForcedCostPickTest (fixtures/gitrog: the f0a0_s1 find) fails before it with the exact miss;
+# scripts/forge-oracle-test-lone-forced-cost-pick.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder
+# and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-lone-forced-cost-pick.
 # 85e4e85fde = 2ece06813a merged with 65d8060f39ba. 2ece06813a (on 1da9dc5c96c) is the dual-typed land colour (xproof cluster
 # xpt-079c8ffe, 102 items: shock, battle, cycling and surveil duals): a land with two basic land types (CR 305.6) has two
 # intrinsic Secondary$ mana abilities, gorge's choice between them is dropped from the request (the step names the ability by
@@ -662,7 +672,8 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # unchanged. scripts/forge-oracle-test-dual-land-colour.sh (make forge-driver-tests) replays Underground Sea's U and B abilities;
 # it fails at 1da9dc5c96c and 65d8060f39ba with the exact miss and passes here. Driver-only; die-roll code, cardsfolder and
 # tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-dual-colour-on-fpin-65d8.
-FORGE_ORACLE_REF ?= 85e4e85fdee1618f55709bceb2a628dda91fb97b
+# 34f0585c97 = oracle/fpin-1125: 85e4e85fde (dual-land colour; above) joined with e99e48e2b5 (Gitrog lone forced pick; above); driver-only.
+FORGE_ORACLE_REF ?= 34f0585c97b5ea0e9bde19c20b6122473c24deee
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

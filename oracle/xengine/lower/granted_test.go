@@ -40,7 +40,7 @@ func TestLowerGrantedAbilityIdentity(t *testing.T) {
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
-			steps, why := lowerPriority(nil, seatMap{}, prio(tc.pick), nil)
+			steps, why := lowerPriority(nil, seatMap{}, prio(tc.pick), nil, nil)
 			if why != nil {
 				t.Fatalf("lowerPriority: %s", why.reason)
 			}

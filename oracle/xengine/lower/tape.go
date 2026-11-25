@@ -569,7 +569,13 @@ func (l *Lowered) fundingTaps(reg *cards.Registry, m seatMap, entries []game.Ent
 		spent string
 	}
 	var spends []fundSpend
-	for _, e := range entries[i:end] {
+	// The slice may hold a mana colour pick for a funding activation that asked
+	// one: fold it into the record's Produced the same way lowerGroup does for
+	// its own group. Read the unanswered records first: colourProduced erases
+	// the "the activation stopped for a colour decision" signal.
+	asked := colourAskedSources(entries[i:end])
+	scan := colourProduced(entries[i:end])
+	for _, e := range scan {
 		if !isResolvePay(e) {
 			continue
 		}
@@ -599,7 +605,7 @@ func (l *Lowered) fundingTaps(reg *cards.Registry, m seatMap, entries []game.Ent
 			return fail
 		}
 	}
-	taps, why := manaTaps(reg, m, mana)
+	taps, why := manaTaps(reg, m, mana, asked)
 	if why != nil {
 		return fail
 	}
@@ -1145,7 +1151,11 @@ func isManaAbilityAsk(a game.Entry, fired map[state.ObjID]bool) bool {
 	return false
 }
 
-var addColour = regexp.MustCompile(`^Add ([WUBRGC])$`)
+// addColour is the colour-wheel label shape: a bare "Add R", or the same
+// production behind the ability's cost prefix ("Pay 1 life: Add G"). The
+// prefix is named on the colour options too (gorge's askManaColor), so an
+// exact bare match dropped every costed carrier.
+var addColour = regexp.MustCompile(`^(?:.*: )?Add ([WUBRGC])$`)
 
 // colourProduced fills in the colour of a mana record that has none from the
 // colour pick that chose it. The recorder closes a record when the next
@@ -1305,6 +1315,9 @@ func resolveEmptyPass(m seatMap, entries []game.Entry, i, j int) (*oraclegen.Ste
 // indices (-1 for the taps; the caller fills the last), and the asks as
 // answers, in tape order.
 func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Step, []int, []string, []oraclegen.Answer, *truncation) {
+	// Read which activation stopped for a colour ask before colourProduced
+	// fills its Produced from the pick that answered it.
+	asked := colourAskedSources(g)
 	g = colourProduced(g)
 	en := g[0]
 	var steps []oraclegen.Step
@@ -1327,7 +1340,7 @@ func lowerGroup(reg *cards.Registry, m seatMap, g []game.Entry) ([]oraclegen.Ste
 	}
 	switch en.Kind {
 	case "priority":
-		steps, why = lowerPriority(reg, m, en, mana)
+		steps, why = lowerPriority(reg, m, en, mana, asked)
 	case "attackers":
 		steps, why = lowerAttack(m, en)
 	case "blockers":
@@ -1522,7 +1535,7 @@ func paysAfterAsks(en game.Entry) bool {
 	return en.Kind == "priority" && len(en.Picks) == 1 && (en.Picks[0].Kind == "cast" || en.Picks[0].Kind == "ability")
 }
 
-func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.ManaRec) ([]oraclegen.Step, *truncation) {
+func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.ManaRec, asked map[manaAbilityKey]bool) ([]oraclegen.Step, *truncation) {
 	if len(en.Picks) != 1 {
 		return nil, unsupported("priority_picks")
 	}
@@ -1537,7 +1550,7 @@ func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.Ma
 		}
 		return []oraclegen.Step{{Op: "play", Seat: seat, Card: m.ref(pk.Ref)}}, nil
 	case "cast", "ability":
-		taps, why := manaTaps(reg, m, mana)
+		taps, why := manaTaps(reg, m, mana, asked)
 		if why != nil {
 			return nil, why
 		}
@@ -1574,7 +1587,7 @@ func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.Ma
 		if !priorityManaTap(en, mana) {
 			return nil, unsupported("activate")
 		}
-		taps, why := manaTaps(reg, m, mana)
+		taps, why := manaTaps(reg, m, mana, asked)
 		if why != nil {
 			return nil, why
 		}
@@ -1603,10 +1616,13 @@ func priorityManaTap(en game.Entry, mana []game.ManaRec) bool {
 }
 
 // manaTaps is one activate step per mana ability the entry fired, in order. A
-// source whose ability asks which colour it makes (Produced$ Any or Combo) gets
-// the colour the live game made as a "choose" answer, which the runner's mana
-// stage reads instead of taking the first colour.
-func manaTaps(reg *cards.Registry, m seatMap, mana []game.ManaRec) ([]oraclegen.Step, *truncation) {
+// source whose ability asks which colour it makes (Produced$ Any, Combo or a
+// ManaReflected set with more than one colour) gets the colour the live game
+// made as a "choose" answer, which the runner's mana stage reads instead of
+// taking the first colour. asked is the group's colour-asked sources (see
+// colourAskedSources): a single-colour reflection asks nothing and stays
+// answer-free.
+func manaTaps(reg *cards.Registry, m seatMap, mana []game.ManaRec, asked map[manaAbilityKey]bool) ([]oraclegen.Step, *truncation) {
 	var out []oraclegen.Step
 	for _, mr := range mana {
 		if mr.Triggered {
@@ -1622,12 +1638,56 @@ func manaTaps(reg *cards.Registry, m seatMap, mana []game.ManaRec) ([]oraclegen.
 		}
 		k := mr.Ability
 		st := oraclegen.Step{Op: "activate", Seat: m.seat(mr.Player), Card: m.ref(mr.Ref), AbilityIndex: &k}
-		if picks := colourPicks(reg, mr); picks != nil {
+		if picks := colourPicks(reg, mr); picks != nil && colourAskPosed(reg, mr, asked) {
 			st.Answers = []oraclegen.Answer{{Kind: "choose", Pick: picks}}
 		}
 		out = append(out, st)
 	}
 	return out, nil
+}
+
+// manaAbilityKey identifies one mana activation record: the source and the
+// index into its face's Abilities. The ability index is part of the key so a
+// multi-ability source's wheel-selected plain ability cannot stand in for a
+// reflected ability of the same object.
+type manaAbilityKey struct {
+	obj     state.ObjID
+	ability int
+}
+
+// colourAskedSources is the mana activations that stopped for a colour
+// decision: the recorder closed their record before the colour was added, so
+// it carries no Produced. That is the live game's own evidence that it posed
+// the ask; a reflection whose reflected set has one colour adds its mana in the
+// activation's commit and records Produced, and an ability wheel's "mana" pick
+// precedes the record and names the ability, not a produced colour. g must be
+// the group before colourProduced fills the record from the following pick.
+func colourAskedSources(g []game.Entry) map[manaAbilityKey]bool {
+	var out map[manaAbilityKey]bool
+	for _, e := range g {
+		for _, mr := range e.Mana {
+			if mr.Produced != "" {
+				continue
+			}
+			if out == nil {
+				out = map[manaAbilityKey]bool{}
+			}
+			out[manaAbilityKey{mr.Obj, mr.Ability}] = true
+		}
+	}
+	return out
+}
+
+// colourAskPosed reports whether the runner will pose this activation's colour
+// ask. Produced$ Any and Combo abilities always pose one when colourPicks has
+// an answer; a ManaReflected ability poses one only when the live game did
+// (its record closed with no Produced), which colourAskedSources reads.
+func colourAskPosed(reg *cards.Registry, mr game.ManaRec, asked map[manaAbilityKey]bool) bool {
+	sa := manaSA(reg, mr)
+	if sa == nil || sa.API != "ManaReflected" {
+		return true
+	}
+	return asked[manaAbilityKey{mr.Obj, mr.Ability}]
 }
 
 // wheelAnswers is the answer, ahead of the colour pick, that selects mr's
@@ -1680,7 +1740,8 @@ func wheelAnswers(reg *cards.Registry, mr game.ManaRec) ([]oraclegen.Answer, *tr
 
 // colourPicks is the colours to answer a mana ability's colour ask with, nil
 // when the ability asks none (a fixed colour) or the live activation's
-// colours are unknown. "Any" is one pick; a "Combo" ask takes one per unit.
+// colours are unknown. "Any" is one pick; a "Combo" ask takes one per unit;
+// a ManaReflected set is one colour (Amount$ repeats it).
 func colourPicks(reg *cards.Registry, mr game.ManaRec) []string {
 	if mr.Produced == "" {
 		return nil
@@ -1696,6 +1757,13 @@ func colourPicks(reg *cards.Registry, mr game.ManaRec) []string {
 		if sub := cards.ManaChainProduction(sa); sub != nil {
 			sa = sub
 		}
+	}
+	// A ManaReflected ability has no Produced$: the colour is the one the
+	// reflected permanent offered, and the live activation recorded it as the
+	// mana it added. One pick answers the one colour decision; Amount$ then
+	// adds that colour once per unit.
+	if sa.API == "ManaReflected" {
+		return []string{mr.Produced[:1]}
 	}
 	produced := effects.ManaOf(sa).Produced
 	if _, combo := effects.ComboColours(produced); combo {
