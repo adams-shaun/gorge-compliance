@@ -70,6 +70,7 @@ public final class ScenarioReplayDriverAsksTest {
         multiCandidateSearch();
         phyrexianLife();
         wishDeclined();
+        emptyOptionalAnimate();
         optionalMultiCandidateTarget();
         mandatoryChoosePickOnTargetQueue();
         cardOrderPick();
@@ -77,7 +78,7 @@ public final class ScenarioReplayDriverAsksTest {
                 + " face-down attacker, manifested face-down target, declined dig, look-at/exile same-name choice,"
                 + " alternative cast, promised gift, replacement order,"
                 + " lone forced target, divided amount, multi-candidate search, phyrexian life, wish decline,"
-                + " optional multi-candidate target, mandatory choose pick on the target queue,"
+                + " empty optional animate, optional multi-candidate target, mandatory choose pick on the target queue,"
                 + " same-name card order");
     }
 
@@ -241,6 +242,100 @@ public final class ScenarioReplayDriverAsksTest {
         int call = text.indexOf("unanswerableWishAsk(", override);
         check(call >= 0 && call < override + 600,
                 "ScriptedChoicePlayer.chooseUse must call unanswerableWishAsk");
+    }
+
+    /** Sita Varma, Masked Racer's Exhaust: with no other creature, "you may
+     * have the base power and toughness of each other creature you control
+     * become equal to Sita Varma's power" changes nothing either way (CR
+     * 608.2d), so gorge logs no ask while XMage asks anyway. The driver
+     * declines an unscripted ask, keeps it when another controlled creature
+     * exists, and leaves a queued Yes/No for TestPlayer. */
+    private static void emptyOptionalAnimate() throws Exception {
+        String ask = "Have the base power and toughness of each other creature you control"
+                + " become equal to Sita Varma's power until end of turn?";
+        Class<?>[] types = {String.class, boolean.class, List.class};
+        check((Boolean) adapter("unanswerableEmptyAnimateAsk", types, ask, false, new ArrayList<String>()),
+                "an unscripted empty animate ask must be declined");
+        check(!(Boolean) adapter("unanswerableEmptyAnimateAsk", types, ask, true, new ArrayList<String>()),
+                "another controlled creature keeps the ask");
+        check(!(Boolean) adapter("unanswerableEmptyAnimateAsk", types, ask, false,
+                        new ArrayList<>(Collections.singletonList("No"))),
+                "a queued no is the generator's answer and stays queued");
+        check(!(Boolean) adapter("unanswerableEmptyAnimateAsk", types, ask, false,
+                        new ArrayList<>(Collections.singletonList("Yes"))),
+                "a queued yes is the generator's answer and stays queued");
+        check(!(Boolean) adapter("unanswerableEmptyAnimateAsk", types, "Draw a card?", false, new ArrayList<String>()),
+                "another chooseUse is untouched");
+
+        // The battlefield scan counts only the controller's other creatures:
+        // Sita herself, a land, and an opponent's creature are not "each other
+        // creature you control", while p0's second creature is.
+        UUID p0 = UUID.fromString("00000000-0000-0000-0000-0000000000a0");
+        UUID p1 = UUID.fromString("00000000-0000-0000-0000-0000000000a1");
+        UUID sita = UUID.fromString("00000000-0000-0000-0000-0000000000b0");
+        UUID land = UUID.fromString("00000000-0000-0000-0000-0000000000b1");
+        UUID bears = UUID.fromString("00000000-0000-0000-0000-0000000000b2");
+        Game game = (Game) Proxy.newProxyInstance(Game.class.getClassLoader(),
+                new Class<?>[]{Game.class}, (proxy, method, args) -> null);
+        Ability ability = (Ability) Proxy.newProxyInstance(Ability.class.getClassLoader(),
+                new Class<?>[]{Ability.class}, (proxy, method, args) -> {
+                    if (method.getName().equals("getControllerId")) {
+                        return p0;
+                    }
+                    if (method.getName().equals("getSourceId")) {
+                        return sita;
+                    }
+                    return null;
+                });
+        Class<?>[] fieldTypes = {Iterable.class, Game.class, Ability.class};
+        check(!(Boolean) adapter("hasOtherControlledCreature", fieldTypes,
+                        Arrays.asList(permanent(sita, p0, true), permanent(land, p0, false)), game, ability),
+                "Sita Varma herself and a land are not another creature");
+        check((Boolean) adapter("hasOtherControlledCreature", fieldTypes,
+                        Arrays.asList(permanent(sita, p0, true), permanent(bears, p0, true)), game, ability),
+                "a second creature controlled by the same player keeps the ask");
+        check(!(Boolean) adapter("hasOtherControlledCreature", fieldTypes,
+                        Arrays.asList(permanent(sita, p0, true), permanent(bears, p1, true)), game, ability),
+                "an opponent's creature is not one you control");
+        check(!(Boolean) adapter("hasOtherControlledCreature", fieldTypes,
+                        Collections.singletonList(permanent(sita, p0, true)), game, ability),
+                "the source permanent alone is no other creature");
+
+        // The helper alone is not the fix: pin that chooseUse calls it with
+        // the battlefield scan. Dropping the call would leave every check
+        // above passing while the strict replay fails again.
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        int override = text.indexOf("public boolean chooseUse(Outcome outcome");
+        check(override >= 0, "ScriptedChoicePlayer must override chooseUse");
+        int call = text.indexOf("unanswerableEmptyAnimateAsk(message,", override);
+        int scan = text.indexOf("hasOtherControlledCreature(game.getBattlefield().getAllActivePermanents(), game, source)", override);
+        check(call >= 0 && call < override + 900 && scan > call,
+                "ScriptedChoicePlayer.chooseUse must call unanswerableEmptyAnimateAsk with"
+                        + " hasOtherControlledCreature over the active battlefield");
+    }
+
+    private static Permanent permanent(UUID id, UUID controller, boolean creature) {
+        return (Permanent) Proxy.newProxyInstance(Permanent.class.getClassLoader(),
+                new Class<?>[]{Permanent.class}, (proxy, method, args) -> {
+                    switch (method.getName()) {
+                        case "getId":
+                            return id;
+                        case "getControllerId":
+                            return controller;
+                        case "isCreature":
+                            return creature;
+                        case "hashCode":
+                            return System.identityHashCode(proxy);
+                        case "equals":
+                            return proxy == args[0];
+                        case "toString":
+                            return "permanent " + id;
+                        default:
+                            throw new UnsupportedOperationException(method.getName());
+                    }
+                });
     }
 
     private static void activeSeatOnePair() {

@@ -84,13 +84,43 @@ func TestXMageOptionalTargetSkipsRoundTrip(t *testing.T) {
 	if len(strict.DieRolls) != 1 || strict.DieRolls[0].Natural != 17 {
 		t.Errorf("decoded die rolls = %+v", strict.DieRolls)
 	}
+
+	// Raw carries the recorded coin flips too, in the runner's shape: an
+	// ordinary flip has no draws, a forced flip (a FlipCoinMod static, CR
+	// 705.1) has draws 0 so the runner's forced-flip queue skips it, and a
+	// doubler has 2. The follower-side forced marker stays out: the runner
+	// decodes with DisallowUnknownFields.
+	flipped := plain
+	flipped.CoinFlips = []CoinFlip{
+		{Step: 1, Seat: 0, Win: true},
+		{Step: 1, Seat: 1, Win: true, Forced: true},
+		{Step: 1, Seat: 0, Win: false, Draws: 2},
+	}
+	wantFlips := `"coin_flips":[{"step":1,"seat":0,"win":true},{"step":1,"seat":1,"win":true,"draws":0},{"step":1,"seat":0,"win":false,"draws":2}]`
+	if raw := string(flipped.Raw()); !strings.Contains(raw, wantFlips) {
+		t.Errorf("Raw does not carry the recorded flips in the runner's shape: %s", raw)
+	}
+	if raw := string(flipped.Raw()); strings.Contains(raw, `"forced"`) {
+		t.Errorf("Raw leaks the follower-side forced mark: %s", raw)
+	}
+	strict = runnerScenario{}
+	if err := decodeRunnerScenario(flipped.Raw(), &strict); err != nil {
+		t.Errorf("Raw with flips is not a clean runner scenario: %v", err)
+	}
+	if len(strict.CoinFlips) != 3 || strict.CoinFlips[0].Draws != nil ||
+		strict.CoinFlips[1].Draws == nil || *strict.CoinFlips[1].Draws != 0 ||
+		strict.CoinFlips[2].Draws == nil || *strict.CoinFlips[2].Draws != 2 {
+		t.Errorf("decoded coin flips = %+v", strict.CoinFlips)
+	}
 }
 
 // runnerScenario mirrors the shape gorge's oracle runner decodes: the scenario
-// plus its optional top-level die_rolls tape (engine/rules/oracle_run.go).
+// plus its optional top-level die_rolls and coin_flips tapes
+// (engine/rules/oracle_run.go).
 type runnerScenario struct {
 	Scenario
-	DieRolls []DieRoll `json:"die_rolls,omitempty"`
+	DieRolls  []DieRoll        `json:"die_rolls,omitempty"`
+	CoinFlips []runnerCoinFlip `json:"coin_flips,omitempty"`
 }
 
 func mustJSON(t *testing.T, v any) []byte {
