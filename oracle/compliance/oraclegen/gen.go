@@ -1344,6 +1344,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	var allPlayerUnless map[int]bool
 	var seats int
 	var chooseUseOrders map[int][]XAnswer
+	var removeCounterCosts []removeCounterCostAsk
 	for _, ex := range extras {
 		if sources == nil {
 			sources = ex.sources
@@ -1395,6 +1396,9 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 		}
 		if searchZones == nil {
 			searchZones = ex.searchZones
+		}
+		if removeCounterCosts == nil {
+			removeCounterCosts = ex.removeCounterCosts
 		}
 	}
 	// A hand_move/library_placement goes top-first (reverse the answers for
@@ -1453,6 +1457,13 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 	// run into one "X=<n>" amount per kind message before the generic choice
 	// route scripts the raw kind labels (remove_counter_answers.go).
 	counterAnswers, counterOwned := foldRemoveCounterKindAnswers(ds, snaps)
+	// A "Remove a counter from {this}" activation cost is XMage's other
+	// multi-amount: RemoveCountersSourceCost always messages every counter kind
+	// on the source, even when gorge picked the lone kind unasked. Script the
+	// step's amount answers and own the counter-kind picks the engine recorded
+	// for that cost (remove_counter_answers.go).
+	costAnswers, costOwned := foldRemoveCounterCostAnswers(ds, snaps, removeCounterCosts)
+	costEmitted := map[int]bool{}
 	// Trigger-order name answers are demoted back to the inert text form when
 	// the step also scripts other asks (see the trigger_order case).
 	var trigSpans []*trigSpan
@@ -1568,6 +1579,16 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			// pick precedes it, so the runner records it Via "cast fallback").
 			// A copy's new-target election is never a cast step's targets even
 			// if it shares the step, so it is scripted below regardless.
+			continue
+		}
+		if costOwned[i] {
+			// Emit the cost's whole amount run once, at the position of its
+			// first counter-kind pick; the rest of the run is owned silently.
+			if as := costAnswers[d.Step]; len(as) > 0 && !costEmitted[d.Step] {
+				out[d.Step] = append(out[d.Step], as...)
+				costEmitted[d.Step] = true
+				any = true
+			}
 			continue
 		}
 		if counterOwned[i] {
@@ -2155,6 +2176,19 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				pendingTrig = nil
 			}
 			out[d.Step] = append(out[d.Step], as...)
+			any = true
+		}
+	}
+	// A cost ask on a source with a single counter kind poses no engine
+	// decision, so it has no loop position to ride: its amount messages follow
+	// the step's recorded answers (XMage chooses targets before it pays costs).
+	// Ascending step order keeps the output independent of map iteration.
+	for step := 0; step < steps; step++ {
+		if costEmitted[step] {
+			continue
+		}
+		if as := costAnswers[step]; len(as) > 0 {
+			out[step] = append(out[step], as...)
 			any = true
 		}
 	}

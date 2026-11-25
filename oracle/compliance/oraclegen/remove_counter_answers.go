@@ -5,6 +5,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/rules"
 )
 
@@ -59,6 +60,172 @@ import (
 // requires the remove-up-to shape before it scripts amounts.
 func removeCounterKindDecision(d rules.OracleDecision) bool {
 	return d.Kind == "choose_n" && d.Resume == "counter_kind"
+}
+
+// A "Remove a counter from {this}" / "Remove <N> counters from {this}"
+// ACTIVATION COST is the other XMage multi-amount: RemoveCountersSourceCost's
+// any-counter arm (Mage .../costs/common/RemoveCountersSourceCost.java pay())
+// always calls player.getMultiAmount(..., toChoose, 0, amount, amount,
+// REMOVE_COUNTERS, game) over every counter kind on the source, even a single
+// one. gorge poses the same choice as a KChoose per removed counter only when
+// the source carries more than one kind; with one kind it picks it unasked,
+// so there is no decision to fold (CR 118.3, 122.8: the payer still chose the
+// counters). The amount per kind is the source's checkpoint delta across the
+// activate step: costs are paid before the ability resolves, so the activate
+// step itself carries exactly the counters the cost removed.
+
+// removeCounterCostAsk names one activate step whose XMage rule text prices an
+// any-counter source-removal cost. Ref is the source permanent's scenario ref
+// (the activate step's Card).
+type removeCounterCostAsk struct {
+	Step int
+	Seat int
+	Ref  string
+}
+
+// removeCounterCostAsks finds every activate step whose printed ability's
+// XMage rule-text prefix is an any-counter source-removal cost. The prefix is
+// re-derived through XMageAbility, the same mapping the activate template and
+// xprep write to Item.XAbility, so every XAnswersForScenario caller gets the
+// routing without threading a new parameter through its 100+ call sites. Only
+// a printed ability qualifies: a granted or keyword-granted alias, and a face
+// whose text is ambiguous, fail closed.
+func removeCounterCostAsks(reg *cards.Registry, sc Scenario, g rules.OracleResult) []removeCounterCostAsk {
+	if reg == nil || len(g.Snapshots) == 0 {
+		return nil
+	}
+	it := Item{Scenario: Scenario{Setup: sc.Setup}}
+	var out []removeCounterCostAsk
+	for i, st := range sc.Steps {
+		if st.Op != "activate" || st.AbilityIndex == nil || st.Card == "" {
+			continue
+		}
+		if _, kind := ResolveActivatedAbility(reg, it, i, st, g); kind != ActivatedPrinted {
+			continue
+		}
+		face, ok := printedStepFace(reg, it, i, st, g)
+		if !ok {
+			continue
+		}
+		prefixes, why := XMageAbility(face)
+		if why != "" {
+			continue
+		}
+		prefix, ok := prefixes[*st.AbilityIndex]
+		if !ok || !removeCounterCostPrefix(prefix) {
+			continue
+		}
+		out = append(out, removeCounterCostAsk{Step: i, Seat: st.Seat, Ref: st.Card})
+	}
+	return out
+}
+
+// removeCounterCostPrefix reports whether an XMage ability prefix contains an
+// any-counter source-removal cost. RemoveCountersSourceCost's any arm prints
+// "remove " + CardUtil.numberToText(n, "a") + " counter(s) from {this}" and
+// asks the multi-amount dialog; its Counter overload instead names the kind
+// ("remove two +1/+1 counters from {this}") and removes without a dialog.
+// Requiring exactly "<amount> counter(s)" therefore selects the dialog arm by
+// its printed role, not by a card list: a new counter kind or amount needs no
+// new case (the amount is not read from the text anyway, the checkpoint delta
+// is), while a kind-named or variable ("X time counters") cost cannot match.
+func removeCounterCostPrefix(prefix string) bool {
+	for _, part := range strings.Split(prefix, ", ") {
+		rest, ok := strings.CutPrefix(part, "Remove ")
+		if !ok {
+			continue
+		}
+		rest, ok = strings.CutSuffix(rest, " from {this}")
+		if !ok {
+			continue
+		}
+		words := strings.Fields(rest)
+		if len(words) != 2 || (words[1] != "counter" && words[1] != "counters") {
+			continue
+		}
+		if counterCostAmountWord(words[0]) {
+			return true
+		}
+	}
+	return false
+}
+
+// counterCostAmountWord reports whether w is an amount XMage's
+// CardUtil.numberToText emits: "a" for one, the words for 2..20, or digits
+// above 20.
+func counterCostAmountWord(w string) bool {
+	switch w {
+	case "a", "an", "one", "two", "three", "four", "five", "six", "seven",
+		"eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
+		"fifteen", "sixteen", "seventeen", "eighteen", "nineteen", "twenty":
+		return true
+	}
+	if w == "" {
+		return false
+	}
+	for _, r := range w {
+		if r < '0' || r > '9' {
+			return false
+		}
+	}
+	return true
+}
+
+// foldRemoveCounterCostAnswers returns, per activate step, the amount answers
+// XMage's RemoveCountersSourceCost multi-amount reads, and the set of
+// counter-kind decision indices it owns. The amounts are the source's counter
+// delta across the step (a kind left at zero still gets its explicit X=0); the
+// message order is XMage's HashMap order (counterKindMessageOrder), using the
+// step's counter-kind picks to recover the engine's counter order for
+// same-bucket ties.
+func foldRemoveCounterCostAnswers(ds []rules.OracleDecision, snaps []rules.OracleSnapshot, costs []removeCounterCostAsk) (map[int][]XAnswer, map[int]bool) {
+	answers := map[int][]XAnswer{}
+	owned := map[int]bool{}
+	for _, c := range costs {
+		if c.Step < 0 || c.Step >= len(snaps) {
+			continue
+		}
+		before, beforeCounts, ok := counterSnapshotKinds(&snaps[c.Step], c.Ref)
+		if !ok || len(before) == 0 {
+			continue
+		}
+		var afterSnap *rules.OracleSnapshot
+		if c.Step+1 < len(snaps) {
+			afterSnap = &snaps[c.Step+1]
+		}
+		_, afterCounts, _ := counterSnapshotKinds(afterSnap, c.Ref)
+		removed := make(map[string]int, len(before))
+		total := 0
+		for _, kind := range before {
+			if n := int(beforeCounts[kind] - afterCounts[kind]); n > 0 {
+				removed[kind] = n
+				total += n
+			}
+		}
+		if total == 0 {
+			// No counters left the source across this step, so no cost was
+			// paid and XMage would not pose the dialog: leave every decision
+			// on the generic route.
+			continue
+		}
+		var run []rules.OracleDecision
+		var picked []int
+		for i, d := range ds {
+			if d.Step == c.Step && d.Seat == c.Seat && removeCounterKindDecision(d) {
+				run = append(run, d)
+				picked = append(picked, i)
+			}
+		}
+		var as []XAnswer
+		for _, kind := range counterKindMessageOrder(before, run) {
+			as = append(as, XAnswer{c.Seat, "amount", strconv.Itoa(removed[kind])})
+		}
+		answers[c.Step] = as
+		for _, i := range picked {
+			owned[i] = true
+		}
+	}
+	return answers, owned
 }
 
 // removeCounterDonePicked reports a pick of the remove-up-to "Done" option.
