@@ -22,21 +22,24 @@ type supportAnswers struct {
 // ResumeKind "counter_pick" (engine/effects/counters_put.go's
 // putCounterSupport), but XMage declares it as a target on the source itself:
 // SupportAbility adds a TargetPermanent(0, N) to the enters-the-battlefield
-// triggered ability (SupportAbility.java:37), and an activated ability
-// declares its target on activation. The ask therefore happens when the
-// object is ANNOUNCED -- the step a permanent's trigger is put on the stack,
-// the activate step of an activated ability -- and TestPlayer reads it from
+// triggered ability (SupportAbility.java:37). The ask therefore happens when
+// the trigger is ANNOUNCED -- the step it is put on the stack -- and
+// TestPlayer reads it from
 // the TARGET queue. A "choice" on the resolution step is never consumed.
 //
-// An instant or sorcery is deliberately absent from that route: since gorge
-// 5326ad5128 its Support is announced while casting (supportTargetSA /
-// supportAnnounced, CR 601.2c; engine/rules/support_targets.go), so it records
-// an ordinary cast target decision instead of a counter_pick. Where the cast
-// step presets Step.Targets (a hand-authored scenario) ChooseTargets folds the
-// decision into them and XMage's castSpell consumes it; a generated item
+// A spell ability or an activated ability is deliberately absent from that
+// route: since gorge 5326ad5128 a spell's Support is announced while casting
+// (supportTargetSA / supportAnnounced, CR 601.2c) and since gorge 22c9d3aaa2
+// an activated ability's at activation (CR 602.2b: the rest of activating an
+// ability is the casting process; engine/rules/support_targets.go), so both
+// record
+// ordinary cast/activate target decisions instead of a counter_pick. Where
+// the step presets Step.Targets (a hand-authored scenario) ChooseTargets
+// folds the decision into them and XMage's castSpell/activateAbility consumes
+// it; a generated item
 // records it via="answer" and scripts it as a cast-step TARGET answer. Either
-// way the ask is already at cast: there is nothing to retime and the old
-// resolution "choice" is gone.
+// way the ask is already at cast/activation: there is nothing to retime and
+// the old resolution "choice" is gone.
 //
 // The source is resolved by counterPickSource (counter_pick_source.go): the
 // stack snapshot at the decision's own step is the authority, with the step's

@@ -89,13 +89,16 @@ func xanswersForScenario(reg *cards.Registry, res rules.OracleResult, sc Scenari
 	}
 	collapseRoomLock(ds)
 	unposeCollectEvidenceDeclines(reg, ds)
-	// A permanent's Support (its enters-the-battlefield trigger or an
-	// activated ability) is a counter_pick in gorge but a TARGET on XMage's
-	// SupportAbility/activated ability, declared when the object is announced,
+	// A permanent's Support (its enters-the-battlefield trigger) is a
+	// counter_pick in gorge but a TARGET on XMage's SupportAbility, declared
+	// when the trigger is announced,
 	// so its answers belong on the announcement step rather than the
-	// resolution step (support_pick.go). An instant or sorcery's Support is
-	// not in this loop: since gorge 5326ad5128 it is a cast target decision.
-	// Activate steps (and cast steps of a permanent whose trigger is announced
+	// resolution step (support_pick.go). A spell ability's or an activated
+	// ability's Support is
+	// not in this loop: since gorge 5326ad5128 a spell's Support is a cast
+	// target decision and since gorge 22c9d3aaa2 an activated ability's is an
+	// activate target decision. Activate steps (and cast steps of a permanent
+	// whose trigger is announced
 	// by the cast) can carry a Step.Targets preset that would fill the
 	// support slot, the ability's FIRST target, and make XMage skip its own
 	// "up to" ask entirely; clear the preset and let every target of the
