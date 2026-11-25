@@ -141,7 +141,12 @@ func TestForgeRolledDie(t *testing.T) {
 // 9f2d35a4679 = the clean merge of c9419dd87a3 (foretell, Riot) and 0b7fde3680d (zero-mode Charm); both fork from f1e3e00905
 // and touch forge-oracle only. Die-roll code unchanged; ForcedDieRollTest, ZeroModeCharmTest, ForetellSpecialActionTest and
 // RiotChoiceTest re-run green on it.
-const forgeOracleDieRollRef = "9f2d35a467960fdd7fdadfab70f3430338f54598"
+// 0558bd00b88 = c9419dd87a merged with c332e2b33f5 (the unpinned transit Graveyard/Battlefield order, StepMachine.orderCards
+// and OrderCardsTest only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
+// a1990dd5f833 = the clean merge of 9f2d35a4679 (zero-mode Charm) and 0558bd00b88 (the unpinned transit
+// Graveyard/Battlefield order); the two touch disjoint hunks of StepMachine (hasMode vs orderCards) and separate
+// ScriptedController/test files. Die-roll code unchanged.
+const forgeOracleDieRollRef = "a1990dd5f833a8d908f93f5002416d8141fac444"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

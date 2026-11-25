@@ -589,7 +589,25 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # remove-counter amount, foretell cast mode, Riot choice and the zero-mode Charm answer. Die-roll code unchanged;
 # ForcedDieRollTest, ZeroModeCharmTest, ForetellSpecialActionTest and RiotChoiceTest green on it.
 # Fork branch fix/xp-forge-driver-zero-mode-charm.
-FORGE_ORACLE_REF ?= 9f2d35a467960fdd7fdadfab70f3430338f54598
+# 0558bd00b88 = oracle/fpin-1125: c9419dd87a (foretell, Riot, Done pick, Mobilize, forced remove-counter; above) merged with
+# c332e2b33f5 (the unpinned simultaneous zone order, xproof cluster xpt-34c28f9c): Sorin, Lord of Innistrad's -6 Destroy
+# moves p1's Crimson Kobolds and Tibalt, the Fiend-Blooded to the graveyard, then a ChangeZoneAll returns them in the SAME
+# resolution. They are in neither checkpoint, so forge_order.go derives no graveyard_order pin, and Forge asks "order to
+# Graveyard" (and the return asks "order to Battlefield"). StepMachine.orderCards keeps Forge's offered order for an
+# unpinned ask at exactly those two destinations; every other zone (library arrange/dig, exile, hand, command, stack,
+# sideboard) still strict-misses, and a visible graveyard arrival still consumes its pin, so a real ordering difference on
+# a move a checkpoint can see is still caught. OrderCardsTest's unpinnedGraveyardOrderKeepsForgeOrder,
+# unpinnedBattlefieldOrderKeepsForgeOrder, unpinnedOtherZoneStillLooseMisses and pinnedGraveyardOrderStillApplies cover
+# both halves; scripts/forge-oracle-test-graveyard-transit-order.sh (make forge-driver-tests) runs them. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-transit-graveyard-order.
+# a1990dd5f833 = the clean merge of 9f2d35a4679 (above: foretell, Riot, Done pick, Mobilize X=0, the forced remove-counter
+# amount and the zero-mode Charm answer) and 0558bd00b88 (above: the unpinned transit Graveyard/Battlefield order). The two
+# sides touch disjoint hunks of StepMachine.java (hasMode vs orderCards/keepsForgeOrderWithoutPin) and separate
+# ScriptedController and test files, so one pin carries every driver fix: the zero-mode charm answer and the transit-order
+# fallback. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged. Fork branch
+# fix/xp-forge-driver-zero-mode-charm (advanced with the transit-order pin).
+FORGE_ORACLE_REF ?= a1990dd5f833a8d908f93f5002416d8141fac444
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
