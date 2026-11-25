@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6416dae0-0d40-4d88-b30b-e1a0c8380e78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spire-mangler:f0t0:s1,f:xs:XP:spire-mangler:f0t0:s1	-	-	-	d864b561c9cb	-	d952edd8b1c9	-	-	2026-11-24	xproof
 6416dae0-0d40-4d88-b30b-e1a0c8380e78	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spire-mangler:f0t0:s1,f:xs:XP:spire-mangler:f0t0:s1	-	-	-	d864b561c9cb	-	d952edd8b1c9	-	-	2026-11-24	xproof
 641db975-cf94-44c6-a391-f540a952e0d8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savra-queen-of-the-golgari:cast:s1,f:xs:XP:savra-queen-of-the-golgari:cast:s1	-	-	-	77494c1ce129	-	4a670f36fb3e	-	-	2026-11-24	xproof
-641db975-cf94-44c6-a391-f540a952e0d8	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+641db975-cf94-44c6-a391-f540a952e0d8	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed:filter	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 641db975-cf94-44c6-a391-f540a952e0d8	f0/t1	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:savra-queen-of-the-golgari:f0t1:s1,f:xs:XP:savra-queen-of-the-golgari:f0t1:s1	-	-	-	6f84be0f34c0	-	4a670f36fb3e	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6420e8a0-3ef4-4f95-bb6a-12409eef4d48	cast	cast-resolve	agreed	-	FX	scen	2	0	Skullcap Snail/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6420e8a0-3ef4-4f95-bb6a-12409eef4d48	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -64,7 +64,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 645571f1-a775-4834-8b79-8852d38c9587	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 645a4dee-a4e0-4850-a781-522aa718827f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glistening-oil:f0t0:s1,f:xs:XP:glistening-oil:f0t0:s1	-	-	-	23c4009444b0	-	fdf72ade4fbf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 645a4dee-a4e0-4850-a781-522aa718827f	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:glistening-oil:f0t0:s1,f:xs:XP:glistening-oil:f0t0:s1	-	-	-	23c4009444b0	-	fdf72ade4fbf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-645a4dee-a4e0-4850-a781-522aa718827f	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+645a4dee-a4e0-4850-a781-522aa718827f	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 645a5619-d0b2-4153-aae0-ca2adc6f5e3d	cast	cast	agreed	-	F	start	4	0	f:xs:XP:species-8472:cast:s1	-	-	-	4b8018a80bf0	-	76be18b990bf	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 645a5619-d0b2-4153-aae0-ca2adc6f5e3d	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:species-8472:cast:s1	-	-	-	4b8018a80bf0	-	76be18b990bf	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 645ab3c7-ee1d-4dd0-811f-2dc7f7c7e792	cast	cast-resolve	agreed	-	FX	scen	2	0	Grow from the Ashes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 645fb11b-d684-4bec-8532-8fa97e8f7b28	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 645fb11b-d684-4bec-8532-8fa97e8f7b28	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64611260-c9f7-4375-b67a-f88fee6d3bff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:joel-resolute-survivor:cast:s1,f:xs:XP:joel-resolute-survivor:cast:s1	-	-	-	65d07beecc37	-	5dadecc9584a	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
-64611260-c9f7-4375-b67a-f88fee6d3bff	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+64611260-c9f7-4375-b67a-f88fee6d3bff	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 6465f93d-e6bf-4a7b-86f3-5a2376f8b127	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:keldon-strike-team:f0t0:s1,f:xs:XP:keldon-strike-team:f0t0:s1	-	-	-	d864b561c9cb	-	f26ec7c1a0a8	-	-	2026-11-24	xproof
 6465f93d-e6bf-4a7b-86f3-5a2376f8b127	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:keldon-strike-team:f0t0:s1,f:xs:XP:keldon-strike-team:f0t0:s1	-	-	-	d864b561c9cb	-	f26ec7c1a0a8	-	-	2026-11-24	xproof
 64687880-03f9-4f38-985b-1027c797e33f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -200,6 +200,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64fe83b1-5aae-4433-82c3-a11c8c83137e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:four-knocks:f0t1:s1,f:xs:XP:four-knocks:f0t1:s1	-	-	-	23c4009444b0	-	48dfee344509	-	-	2026-11-25	xproof
 64fe83b1-5aae-4433-82c3-a11c8c83137e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:four-knocks:f0t1:s1,f:xs:XP:four-knocks:f0t1:s1	-	-	-	23c4009444b0	-	48dfee344509	-	-	2026-11-25	xproof
 64fe83b1-5aae-4433-82c3-a11c8c83137e	f0/t1	Phase/Vanishing	agreed	-	FX	start	2	0	x:xs:XP:four-knocks:f0t1:s1,f:xs:XP:four-knocks:f0t1:s1	-	-	-	23c4009444b0	-	48dfee344509	-	-	2026-11-25	xproof
-64fe83b1-5aae-4433-82c3-a11c8c83137e	f0/t2	NULL	owed	refused:no-generator:trigger:CounterRemoved	-	start	0	0	-	-	-	-	5b1ace97d2c2	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
+64fe83b1-5aae-4433-82c3-a11c8c83137e	f0/t2	NULL	owed	refused:no-generator:trigger:CounterRemoved	-	start	0	0	-	-	-	-	be173c120256	-	-	bec665044ecd9134639047e1156af2c70c1da7e5	71fd77c15c0e42d9357a53896dbac05812480ff5	2026-11-25	xproof
 64ffe529-ba53-48ec-8af1-b046fbd1f0cc	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 64ffe529-ba53-48ec-8af1-b046fbd1f0cc	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
