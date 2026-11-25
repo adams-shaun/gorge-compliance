@@ -11,6 +11,7 @@ import (
 	"github.com/adams-shaun/gorge-compliance/oracle/compliance/oraclegen"
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/game"
 	"github.com/adams-shaun/gorge/engine/cards"
+	"github.com/adams-shaun/gorge/engine/decision"
 	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/events"
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -141,6 +142,92 @@ type cut struct {
 // capture reads the live engine at a cut point. It only reads. xmage says the
 // window is replayed by XMage, which narrows the placeable setup tokens.
 func capture(e *rules.Engine, entry int, xmage bool) *cut {
+	return captureAt(e, entry, xmage, false)
+}
+
+// captureStart is capture at the cut of a scripted start (lower.Span): the
+// game's genesis applied a rules.StartSpec, so the cut is turn 1's first main
+// and the scenario replay applies the same position at genesis and drives
+// through the same upkeep. A beginning-of-upkeep/draw trigger on a placed
+// permanent therefore fires at exactly the step the live game fired it, not a
+// second time as a later window's setup drive would. The trigger's own state
+// change is already in the cut (and so in the setup), which the lowering's
+// self-check still holds to the tape.
+func captureStart(e *rules.Engine, entry int, xmage bool) *cut {
+	return captureAt(e, entry, xmage, true)
+}
+
+// startPhaseTriggerDeclines is one setup answer per battlefield card, back
+// face or setup token whose optional upkeep or draw trigger will ask again
+// while the scenario drive reaches turn 1's first main. The cut already carries the state that trigger
+// left (a verse counter, a life payment), so the answer declines it: accepting
+// would apply the effect twice. A start whose probe asks a fallback yes/no and
+// has no such card gets no answer, so Span keeps its refusal.
+func startPhaseTriggerDeclines(reg *cards.Registry, it oraclegen.Item) []oraclegen.Answer {
+	seats := make([]string, 0, len(it.Scenario.Setup))
+	for k := range it.Scenario.Setup {
+		seats = append(seats, k)
+	}
+	sort.Strings(seats)
+	var out []oraclegen.Answer
+	for _, k := range seats {
+		seat := it.Scenario.Setup[k]
+		for _, name := range seat.Battlefield {
+			c, ok := reg.Lookup(name)
+			if !ok || len(c.Faces) == 0 {
+				continue
+			}
+			face := c.Faces[0]
+			if slices.Contains(seat.BackFace, name) && len(c.Faces) > 1 {
+				face = c.Faces[1]
+			}
+			if optionalPhaseTriggered(face) {
+				out = append(out, oraclegen.Answer{Kind: string(decision.KTriggerOptional), Pick: []string{"no"}})
+			}
+		}
+		// A setup token is a battlefield permanent too: its optional upkeep
+		// trigger asks on the drive exactly like a card's.
+		for _, tok := range seat.Tokens {
+			if c, ok := reg.Token(tok.Script); ok && c != nil && len(c.Faces) > 0 && optionalPhaseTriggered(c.Faces[0]) {
+				out = append(out, oraclegen.Answer{Kind: string(decision.KTriggerOptional), Pick: []string{"no"}})
+			}
+		}
+	}
+	return out
+}
+
+// optionalPhaseTriggered is phaseTriggered narrowed to a trigger its controller
+// may decline: only such a trigger poses a setup-drive yes/no the start can
+// answer, and only optional ones are scripted off in Span.
+func optionalPhaseTriggered(f *cards.Face) bool {
+	if f == nil {
+		return false
+	}
+	for _, t := range f.Triggers {
+		if !strings.EqualFold(t.Mode, "Phase") {
+			continue
+		}
+		ph := strings.ToLower(t.Params["Phase"])
+		if !strings.Contains(ph, "upkeep") && !strings.Contains(ph, "draw") {
+			continue
+		}
+		if t.Params["OptionalDecider"] != "" || strings.EqualFold(t.Params["Optional"], "True") {
+			return true
+		}
+		// The may-ask can live on the Execute SVar's body instead of the
+		// trigger line (gorge's mayAskFromSVar); either spelling asks the
+		// same trigger_optional question on the setup drive.
+		if body := f.SVars[t.Params["Execute"]]; body != "" &&
+			(strings.Contains(body, "Optional$") || strings.Contains(body, "OptionalDecider$")) {
+			return true
+		}
+	}
+	return false
+}
+
+// captureAt is capture with the scripted-start distinction: start is true when
+// the cut is the genesis position of a rules.StartSpec.
+func captureAt(e *rules.Engine, entry int, xmage, start bool) *cut {
 	g := e.G
 	c := &cut{Entry: entry, Turn: g.Turn, Active: int(g.Active), Refs: map[state.ObjID]string{}, MaxID: state.ObjID(len(g.Objs))}
 	w := &walker{g: g, why: map[string]bool{}, auras: map[state.ObjID]bool{}, xmage: xmage}
@@ -173,7 +260,7 @@ func capture(e *rules.Engine, entry int, xmage bool) *cut {
 		if o.Zone == state.ZBattlefield && o.IsToken {
 			w.checkToken(o)
 		}
-		if o.Zone == state.ZBattlefield && phaseTriggered(o) {
+		if o.Zone == state.ZBattlefield && !start && phaseTriggered(o) {
 			w.why[reasonPhaseTrig] = true
 		}
 		if o.Zone == state.ZBattlefield && slices.Contains(e.Derived(o.ID).Types, "Aura") {
@@ -229,6 +316,14 @@ func phaseTriggered(o *state.Object) bool {
 	if f == nil {
 		return false
 	}
+	return PhaseTriggeredFace(f)
+}
+
+// PhaseTriggeredFace is phaseTriggered for a card face: a Phase trigger in the
+// upkeep or draw step. It is the one predicate the start generator and the
+// lowering gate both read, so an enabler the generator places and a permanent
+// the gate refuses cannot disagree on what "incidental upkeep trigger" means.
+func PhaseTriggeredFace(f *cards.Face) bool {
 	for _, t := range f.Triggers {
 		if !strings.EqualFold(t.Mode, "Phase") {
 			continue

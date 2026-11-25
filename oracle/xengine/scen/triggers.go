@@ -8,6 +8,7 @@ import (
 	"sync"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/lower"
 	"github.com/adams-shaun/gorge/engine/cards"
 )
 
@@ -306,20 +307,11 @@ func selfOrYourCreature(trig *cards.Trigger) bool {
 	return p == "Creature.YouCtrl+tapped" || p == "Creature.tapped+YouCtrl"
 }
 
-// upkeepOrDraw reports a beginning-of-upkeep or draw-step trigger on face (the
-// lowering's phaseTriggered, read from the card).
-func upkeepOrDraw(face *cards.Face) bool {
-	for _, t := range face.Triggers {
-		if !strings.EqualFold(t.Mode, "Phase") {
-			continue
-		}
-		ph := strings.ToLower(t.Params["Phase"])
-		if strings.Contains(ph, "upkeep") || strings.Contains(ph, "draw") {
-			return true
-		}
-	}
-	return false
-}
+// upkeepOrDraw reports a beginning-of-upkeep or draw-step trigger on face. It
+// is lower.PhaseTriggeredFace, the lowering gate's own predicate, so the
+// generator cannot place a permanent the gate would refuse for a reason the
+// two disagree about.
+func upkeepOrDraw(face *cards.Face) bool { return lower.PhaseTriggeredFace(face) }
 
 func seatPtr(n int) *int { return &n }
 

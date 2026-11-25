@@ -868,6 +868,24 @@ func TestStartStackTargetIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartStackTargetIncidentalUpkeepIsExercised: a bait start still lowers
+// when the only beginning-of-upkeep trigger is incidental to the focus play.
+// Wizard's Retort needs a Wizard, and certdeck's first pick (Drifter il-Dal)
+// has an upkeep trigger, so the generator must skip it for the battlefield;
+// Lilting Refrain is the focus card itself, and the scenario replay walks the
+// same turn-1 upkeep the live start did, so its optional trigger does not
+// refuse the span.
+func TestStartStackTargetIncidentalUpkeepIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Wizard's Retort", "cast"},
+		{"Lilting Refrain", "f0/a0"},
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
 // TestStartStackTargetCostIsExercised: an alternate additional cost
 // ("behold a Jace or pay {1}", "tap an artifact or pay {1}") is paid in
 // addition to the mana cost, and the generated start placed only the printed
@@ -900,12 +918,15 @@ var stackTargetHardCards = []string{
 	"Psychic Rebuttal", "Turn Aside", "Rebuff the Wicked", "Not of This World",
 	"Teferi's Response", "Ring of Immortals",
 	"Countersculpt", "Disruption Protocol", "Louisoix's Sacrifice", "Wild Unraveling",
+	"Wizard's Retort", "Lilting Refrain", // incidental upkeep triggers on a placed enabler / the focus card
 }
 
-// stackTargetUpkeepCards are stack-target cards whose bait start lowers to no
-// item: an unscripted upkeep trigger refuses the start after its focus play was
-// offered, so they are exempt from the "wrote an item" check below only.
-var stackTargetUpkeepCards = map[string]bool{"Wizard's Retort": true, "Lilting Refrain": true}
+// stackTargetWatchedCards are the stack-target cards whose incidental upkeep
+// trigger once made every bait start lower to no item (Wizard's Retort's
+// certdeck Wizard was Drifter il-Dal, and Lilting Refrain is the focus card).
+// They are no longer exempt: the census requires an item from every bait start
+// and logs each of these keys, so a regression names the card and key.
+var stackTargetWatchedCards = map[string]bool{"Wizard's Retort": true, "Lilting Refrain": true}
 
 // stackTargetCards is every playable card with a face whose script declares a
 // stack target, sorted.
@@ -939,8 +960,8 @@ func stackTargetCards(reg *cards.Registry, b *certdeck.Builder) []string {
 
 // stackTargetCensus generates every key of each card and plays each start that
 // carries a bait: the focus play must be offered on both seeds (no
-// start-not-exercised row), and a bait start must lower to at least one item
-// unless the card is a known upkeep refusal. This is the guard for the class of
+// start-not-exercised row), and a bait start must lower to at least one item.
+// This is the guard for the class of
 // regression where the bait was accepted for a spell the focus play could never
 // target (TargetValidTargeting, a bait cast from the hand against "wasn't cast
 // from hand", a sorcery-speed focus behind the bait): xengine play refused
@@ -979,12 +1000,15 @@ func stackTargetCensus(t *testing.T, reg *cards.Registry, b *certdeck.Builder, n
 					t.Errorf("%s %s: %s (start %s)", card, key, reasonStartNotExercised, raw)
 				}
 			}
-			if len(items) == 0 && !stackTargetUpkeepCards[card] {
+			if len(items) == 0 {
 				bad = true
 				t.Errorf("%s %s: a bait start lowered to no item (start %s)", card, key, raw)
 			}
 			if !bad {
 				exercised++
+				if stackTargetWatchedCards[card] {
+					t.Logf("stack-target census: %s %s exercised (%d item(s))", card, key, len(items))
+				}
 			}
 		}
 	}
