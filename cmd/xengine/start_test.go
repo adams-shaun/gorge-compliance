@@ -1132,6 +1132,36 @@ func TestStartGraveyardTargetIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartFocusTargetIsPlaced: the static target check read a target as met
+// when only the focus card itself met it (Adarkar Valkyrie's "target creature
+// other than CARDNAME"), when its type was not one a hand list placed
+// (Equipment, Vehicle), or when the target was a card in a graveyard a Charm
+// choice names (Aid the Fallen) or TgtZone names (Chandra, Acolyte of Flame).
+// The start placed no such target, the play was never offered, and play refused
+// the start as start-not-exercised. A minimal legal target now goes on the
+// right side or zone.
+func TestStartFocusTargetIsPlaced(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Adarkar Valkyrie", "f0/a0"},             // Creature.Other
+		{"Vizier of Tumbling Sands", "f0/a0"},     // Permanent.Other
+		{"Lwaxana Troi, Charming Guest", "f0/a0"}, // Creature.Other+YouCtrl
+		{"Paragon of Eternal Wilds", "f0/a0"},     // Creature.Green+Other+YouCtrl
+		{"Peacewalker Colossus", "f0/a0"},         // Vehicle.Other+YouCtrl
+		{"Auriok Windwalker", "f0/a0"},            // Equipment.YouCtrl
+		{"Kazuul's Toll Collector", "f0/a0"},      // Equipment.YouCtrl
+		{"Saving Grasp", "cast"},                  // Creature.YouOwn
+		{"Aid the Fallen", "cast"},                // Charm choice: creature card in your graveyard
+		{"Fortuitous Find", "cast"},               // Charm choices: artifact/creature card in your graveyard
+		{"Remember the Fallen", "cast"},           // Charm choices: creature/artifact card in your graveyard
+		{"Reborn Hope", "cast"},                   // Card.MultiColor+YouCtrl in the graveyard
+		{"Chandra, Acolyte of Flame", "f0/a2"},    // TgtZone$ Graveyard
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
 // TestStartTwoTargetsIsExercised: a play that names two targets was met by one
 // permanent (Switcheroo's "two target creatures", Peace and Quiet's two target
 // enchantments), and a target only the focus seat's own permanent meets (a
