@@ -166,6 +166,18 @@ func upkeepOrDraw(face *cards.Face) bool {
 
 func seatPtr(n int) *int { return &n }
 
+// triggerFilter is a zone-change trigger's moved-card filter: ValidCard, or
+// ValidCards for the one-or-more copy (ChangesZoneAll). One reader so the
+// carrier recipe and the token-need skip cannot disagree on the filter.
+func triggerFilter(trig *cards.Trigger) string {
+	if trig.Mode == "ChangesZoneAll" {
+		if filter := trig.Params["ValidCards"]; filter != "" {
+			return filter
+		}
+	}
+	return trig.Params["ValidCard"]
+}
+
 // zoneStart is a ChangesZone trigger on another card, the card on the
 // battlefield (TriggerZones Battlefield):
 //
@@ -189,7 +201,7 @@ func zoneStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card 
 	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" || selfCard(trig) {
 		return none
 	}
-	filter := trig.Params["ValidCard"]
+	filter := triggerFilter(trig)
 	origin, dest := trig.Params["Origin"], trig.Params["Destination"]
 	if filterHasProp(filter, "DamagedBy") {
 		return damageStart(reg, b, face, card, f)
@@ -299,6 +311,9 @@ func attachedByStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 		if !murderFocus(reg, b, p1, f, 1) {
 			return none + ":filter"
 		}
+		// The bearer is the key object's attached creature: name it so Murder
+		// cannot be aimed at another creature a need places.
+		f.Focus.Targets = []string{bearer}
 	case face.HasTypeWord("Equipment"):
 		bearer := endStepSacrificeBearer(reg, b, card)
 		if bearer == "" {
@@ -309,7 +324,9 @@ func attachedByStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 			return none + ":attached-equipment"
 		}
 		f.Active = 0
-		f.Focus = &StartFocus{Seat: seatPtr(0), Card: "Magnetic Theft", Kind: "cast"}
+		// Magnetic Theft asks for the Equipment, then the creature: name the
+		// key Equipment and the bearer it must attach to, not a need's body.
+		f.Focus = &StartFocus{Seat: seatPtr(0), Card: "Magnetic Theft", Kind: "cast", Targets: []string{card, bearer}}
 	default:
 		return none + ":attached"
 	}
@@ -800,6 +817,9 @@ func selfDiesStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, c
 		if !murderFocus(reg, b, p1, f, 1) {
 			return none + ":filter"
 		}
+		// The key card is the creature that must die: name it so no need's
+		// enabler is Murdered instead.
+		f.Focus.Targets = []string{card}
 		return ""
 	}
 	if FieldBlock(face) == "aura-unattached" {
@@ -815,7 +835,9 @@ func selfDiesStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, c
 		return none + ":noncreature-self"
 	}
 	f.Active = 1
-	f.Focus = &StartFocus{Seat: seatPtr(1), Card: name, Kind: "cast"}
+	// The key card is the permanent that must die: a destroy spell's other
+	// legal targets (the Aura's bearer, an artifact enabler) must not take it.
+	f.Focus = &StartFocus{Seat: seatPtr(1), Card: name, Kind: "cast", Targets: []string{card}}
 	return ""
 }
 
@@ -852,10 +874,7 @@ func zoneAllStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, ca
 	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" || selfCard(trig) {
 		return none
 	}
-	filter := trig.Params["ValidCards"]
-	if filter == "" {
-		filter = trig.Params["ValidCard"]
-	}
+	filter := triggerFilter(trig)
 	origin, dest := trig.Params["Origin"], trig.Params["Destination"]
 	f.Setup.P0.Battlefield = []string{card}
 	seats := [2]*StartSeat{&f.Setup.P0, &f.Setup.P1}

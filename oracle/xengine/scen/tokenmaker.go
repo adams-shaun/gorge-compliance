@@ -89,22 +89,16 @@ func tokenMakerPool(reg *cards.Registry, b *certdeck.Builder) []tokenMaker {
 	return out
 }
 
-// focusCastsToken reports whether the start's focus is a spell that makes a
-// token: a token need Derive reads off the card is then met by that cast.
-func focusCastsToken(reg *cards.Registry, f *StartFile) bool {
+// focusCastsToken reports whether the start's focus is the token maker the
+// trigger's own filter chose (tokenCarrier): a token need Derive reads off the
+// card is then met by that cast. Any other token spell is not the selected
+// maker, and skipping its need would drop a real placement.
+func focusCastsToken(reg *cards.Registry, b *certdeck.Builder, f *StartFile, card, filter string) bool {
 	if f.Focus == nil || f.Focus.Kind != "cast" {
 		return false
 	}
-	c, ok := reg.Lookup(f.Focus.Card)
-	if !ok || len(c.Faces) == 0 {
-		return false
-	}
-	for _, a := range c.Faces[0].Abilities {
-		if a.Kind == "SP" && a.API == "Token" {
-			return true
-		}
-	}
-	return false
+	name, _ := tokenCarrier(reg, b, card, filter)
+	return name != "" && name == f.Focus.Card
 }
 
 // tokenCarrier is the first one-token maker whose token the filter takes, and

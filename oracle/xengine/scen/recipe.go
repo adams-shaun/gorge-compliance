@@ -334,7 +334,16 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			return n.Class == certdeck.OppBlockers
 		case trig.Mode == "LifeGained":
 			return n.Class == certdeck.Life && n.Arg == "gain"
-		case n.Class == certdeck.Token && focusCastsToken(reg, f):
+		case f.Focus != nil && len(f.Focus.Targets) > 0 &&
+			n.Class != certdeck.Graveyard && n.Class != certdeck.Life && n.Class != certdeck.OppBurn:
+			// A destruction or attach focus names the key object it must
+			// target. A need's enabler that the play could target too (a
+			// body, an opp-target, an extra land) makes the ask ambiguous or
+			// lets the bot aim elsewhere, so the focus line places no
+			// permanent enabler; graveyard fodder and life totals are not
+			// targets and stay.
+			return true
+		case n.Class == certdeck.Token && focusCastsToken(reg, b, f, card, triggerFilter(trig)):
 			// The trigger's own token filter chose a token-maker focus; the
 			// token enters as that cast, so no placed token is needed (and a
 			// start cannot place one).

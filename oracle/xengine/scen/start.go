@@ -92,6 +92,12 @@ type StartFocus struct {
 	// Mode, for a cast focus, is the cast option's payment kind ("kicked"):
 	// a key reading "if it was kicked" is reached by the kicked cast itself.
 	Mode string `json:"mode,omitempty"`
+	// Targets are the permanents the focus play must target, in the order the
+	// play asks for them (a removal spell's one target, Magnetic Theft's
+	// Equipment then creature). A forced start names them because its other
+	// placed cards can be legal alternatives, and the bot's own pick would
+	// then aim the destruction at an enabler instead of the key object.
+	Targets []string `json:"targets,omitempty"`
 	// Times is how many times the focus takes its action (0 or absent: once):
 	// "whenever you cast your second spell each turn" is two casts.
 	Times int `json:"times,omitempty"`

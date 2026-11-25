@@ -610,11 +610,13 @@ func TestStartZoneTriggers(t *testing.T) {
 
 // TestStartzonetriggers is the dispatch's repro spelling. It covers the
 // ChangesZone/ChangesZoneAll causes the plain carrier recipes missed: a token
-// entering (Anointer Priest, Sprout cast), an Aura attached and destroyed
-// (Aspect of Mongoose, Banewasp Affliction), a creature damaged by the card
-// and then dying (Abattoir Ghoul), a card leaving a graveyard (Attuned
-// Hunter, Regrowth), and an Equipment attached then losing its bearer
+// entering (Anointer Priest, Advent of the Wurm cast), an Aura attached and
+// destroyed (Aspect of Mongoose, Banewasp Affliction), a creature damaged by
+// the card and then dying (Abattoir Ghoul), a card leaving a graveyard
+// (Attuned Hunter, Regrowth), and an Equipment attached then losing its bearer
 // (Avarice Amulet, Magnetic Theft and Ball Lightning's end-step sacrifice).
+// The destruction focuses name their target: the key Aura or creature, its
+// bearer, or (Magnetic Theft) the Equipment and the sacrificial bearer.
 func TestStartzonetriggers(t *testing.T) {
 	reg, b := testBuilder(t)
 	rows := []struct {
@@ -651,6 +653,9 @@ func TestStartzonetriggers(t *testing.T) {
 		{"Aspect of Mongoose", "f0/t0", func(t *testing.T, f *StartFile) {
 			focusIs(t, f, 1, "Naturalize", "cast", 0)
 			attached(t, f, "Aspect of Mongoose")
+			if !slices.Equal(f.Focus.Targets, []string{"Aspect of Mongoose"}) {
+				t.Errorf("focus targets %v, want the Aura itself", f.Focus.Targets)
+			}
 		}},
 		{"Avarice Amulet", "f0/t0", func(t *testing.T, f *StartFile) {
 			focusIs(t, f, 0, "Magnetic Theft", "cast", 0)
@@ -658,10 +663,16 @@ func TestStartzonetriggers(t *testing.T) {
 				!slices.Contains(f.Setup.P0.Battlefield, "Ball Lightning") {
 				t.Errorf("p0 battlefield %v, want Avarice Amulet and Ball Lightning", f.Setup.P0.Battlefield)
 			}
+			if !slices.Equal(f.Focus.Targets, []string{"Avarice Amulet", "Ball Lightning"}) {
+				t.Errorf("focus targets %v, want the Equipment then Ball Lightning", f.Focus.Targets)
+			}
 		}},
 		{"Banewasp Affliction", "f0/t0", func(t *testing.T, f *StartFile) {
 			focusIs(t, f, 1, "Murder", "cast", 0)
 			attached(t, f, "Banewasp Affliction")
+			if want := attachBearerOf(t, f, "Banewasp Affliction"); !slices.Equal(f.Focus.Targets, []string{want}) {
+				t.Errorf("focus targets %v, want the attached bearer %q", f.Focus.Targets, want)
+			}
 		}},
 	}
 	for _, r := range rows {
@@ -694,6 +705,49 @@ func attached(t *testing.T, f *StartFile, card string) {
 		}
 	}
 	t.Errorf("p0 attach %+v battlefield %v, want %q attached to a placed bearer", f.Setup.P0.Attach, f.Setup.P0.Battlefield, card)
+}
+
+// attachBearerOf is the bearer card is attached to, or "".
+func attachBearerOf(t *testing.T, f *StartFile, card string) string {
+	t.Helper()
+	for _, a := range f.Setup.P0.Attach {
+		if a.Card == card {
+			return a.To
+		}
+	}
+	return ""
+}
+
+// TestStartSelfDiesKeepsGraveTarget: a dies trigger whose effect returns or
+// exiles a card from the graveyard still needs its own target placed. The
+// focus play (Murder) names no graveyard target, so an override that read only
+// the focus card dropped Myr Retriever's artifact and the other self-dies
+// triggers' targets; placeGraveTargets now places both the key's and the
+// focus play's.
+func TestStartSelfDiesKeepsGraveTarget(t *testing.T) {
+	reg, b := testBuilder(t)
+	for _, card := range []string{"Myr Retriever", "Vesperlark", "Junk Diver", "Workshop Assistant"} {
+		t.Run(card, func(t *testing.T) {
+			res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Path != PathStart || res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Focus == nil || f.Focus.Card != "Murder" || !slices.Equal(f.Focus.Targets, []string{card}) {
+				t.Fatalf("focus %+v, want Murder targeting %s", f.Focus, card)
+			}
+			for _, n := range f.Setup.P0.Graveyard {
+				c, ok := reg.Lookup(n)
+				if ok && len(c.Faces) > 0 && !c.Faces[0].IsBasic() {
+					return
+				}
+			}
+			t.Errorf("p0 graveyard %v holds only basics, want the trigger's nonbasic target", f.Setup.P0.Graveyard)
+		})
+	}
 }
 
 // TestStartSpellCastTriggers: a cast trigger is a carrier spell the filter
