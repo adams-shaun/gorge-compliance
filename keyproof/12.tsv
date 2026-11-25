@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undercellar-myconid:f0t0:s1,f:xs:XP:undercellar-myconid:f0t0:s1	-	-	-	8c0bd19283bb	-	c3dc62873597	-	-	2026-11-24	xproof
 127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undercellar-myconid:f0t1:s1,f:xs:XP:undercellar-myconid:f0t1:s1	-	-	-	8c0bd19283bb	-	c3dc62873597	-	-	2026-11-24	xproof
 127f6985-c1f4-487f-b5ee-c84524cd6c55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shuri-s-fabricator:f0t0:s1,f:xs:XP:shuri-s-fabricator:f0t0:s1	-	-	-	8c0bd19283bb	-	918b6649d773	-	-	2026-11-24	xproof
-127f6985-c1f4-487f-b5ee-c84524cd6c55	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+127f6985-c1f4-487f-b5ee-c84524cd6c55	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:shuri-s-fabricator:f0a0:s1,f:xs:XP:shuri-s-fabricator:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 127f6985-c1f4-487f-b5ee-c84524cd6c55	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shuri-s-fabricator:f0t0:s1,f:xs:XP:shuri-s-fabricator:f0t0:s1	-	-	-	8c0bd19283bb	-	918b6649d773	-	-	2026-11-24	xproof
 128170ed-c86a-4f02-9244-28197be90c10	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frost-bite:cast:s1,f:xs:XP:frost-bite:cast:s1	-	-	-	d864b561c9cb	-	a29ebd85ce9b	-	-	2026-11-24	xproof
 12827076-450d-42b1-98ca-9f9279a539fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 129b41cf-8327-42f0-b186-1111b42c08ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:artifist-acumen:cast:s1,f:xs:XP:artifist-acumen:cast:s1	-	-	-	fb9d3088f0bf	-	e7ed8473b021	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 129ec223-e76d-491d-b299-07ac91168d31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 129ee7d6-e3df-40ef-9502-7aad10183031	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-129ee7d6-e3df-40ef-9502-7aad10183031	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+129ee7d6-e3df-40ef-9502-7aad10183031	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 12a165c4-229b-458b-8fc7-c1b7cba35a8e	cast	cast-resolve	agreed	-	FX	scen	2	0	Starseer Mentor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 12a165c4-229b-458b-8fc7-c1b7cba35a8e	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:starseer-mentor:combat0.attack:s1,f:xs:XP:starseer-mentor:combat0.attack:s1	-	-	-	23c4009444b0	-	3440dff36a7c	-	-	2026-11-25	xproof
 12a165c4-229b-458b-8fc7-c1b7cba35a8e	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:starseer-mentor:combat0.block:s1,f:xs:XP:starseer-mentor:combat0.block:s1	-	-	-	23c4009444b0	-	3440dff36a7c	-	-	2026-11-25	xproof
@@ -230,7 +230,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 12e4d2bd-83e9-4120-a2e8-0645c0ed2387	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ebon-dragon:f0t0:s1,f:xs:XP:ebon-dragon:f0t0:s1	-	-	-	ea3140b6974b	-	c26d259e79ad	-	-	2026-11-24	xproof
 12e4d2bd-83e9-4120-a2e8-0645c0ed2387	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ebon-dragon:f0t0:s1,f:xs:XP:ebon-dragon:f0t0:s1	-	-	-	ea3140b6974b	-	c26d259e79ad	-	-	2026-11-24	xproof
 12e4e6b6-e684-49df-9373-d1e057664272	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-12e4e6b6-e684-49df-9373-d1e057664272	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+12e4e6b6-e684-49df-9373-d1e057664272	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:shuttlecraft-galileo:f0t0:s1,f:xs:XP:shuttlecraft-galileo:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 12eeabe1-a02c-42a3-aa87-6774c4de7093	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12eeabe1-a02c-42a3-aa87-6774c4de7093	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:malakir-familiar:f0t0:s1,f:xs:XP:malakir-familiar:f0t0:s1	-	-	-	fb9d3088f0bf	-	28fb0ed6d9a0	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 12ef651c-5a86-49c4-a512-292e9d135a76	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

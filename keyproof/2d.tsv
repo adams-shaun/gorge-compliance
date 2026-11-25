@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2d1a15dc-3123-4425-b036-a3b5a83fcdf8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spider-islanders:cast:s1,f:xs:XP:spider-islanders:cast:s1	-	-	-	23c4009444b0	-	038338d4735e	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2d1bbeda-2e81-4aaa-9494-094ec3dd6c3b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:suplex:cast:s1,f:xs:XP:suplex:cast:s1	-	-	-	23c4009444b0	-	1ddd9a3f70da	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2d29c40a-4e13-4d99-bb5a-e991e385b8c2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2d29c40a-4e13-4d99-bb5a-e991e385b8c2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+2d29c40a-4e13-4d99-bb5a-e991e385b8c2	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:grandmother-goby:f0t0:s1,f:xs:XP:grandmother-goby:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 2d3010d5-5c21-4342-ad79-a737b6731230	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scavenged-weaponry:f0t0:s1,f:xs:XP:scavenged-weaponry:f0t0:s1	-	-	-	3aa6ded33acb	-	a10e014af5f3	-	-	2026-11-25	xproof
 2d3010d5-5c21-4342-ad79-a737b6731230	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:scavenged-weaponry:f0t0:s1,f:xs:XP:scavenged-weaponry:f0t0:s1	-	-	-	3aa6ded33acb	-	a10e014af5f3	-	-	2026-11-25	xproof
 2d30a634-43c6-4e78-ba10-7ef7ee17ac40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:carrier-pigeons:f0t0:s1,f:xs:XP:carrier-pigeons:f0t0:s1	-	-	-	ea3140b6974b	-	5047c4fd8ab3	-	-	2026-11-24	xproof
@@ -137,7 +137,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2ddd33e1-b48e-42e2-a60a-f09f151d3c1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2de138b0-3159-4a0c-a474-a4e5600b2e51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:festival-of-embers:cast:s1,f:xs:XP:festival-of-embers:cast:s1	-	-	-	3aa6ded33acb	-	0a0cfdb07771	-	-	2026-11-25	xproof
 2de138b0-3159-4a0c-a474-a4e5600b2e51	f0/a0	Sacrifice	agreed	-	FX	start	2	0	x:xs:XP:festival-of-embers:f0a0:s1,f:xs:XP:festival-of-embers:f0a0:s1	-	-	-	3aa6ded33acb	-	0a0cfdb07771	-	-	2026-11-25	xproof
-2de138b0-3159-4a0c-a474-a4e5600b2e51	static#0.0	static.continuous	diverged	-	-	start	0	2	-	d99e783ecede	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+2de138b0-3159-4a0c-a474-a4e5600b2e51	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:festival-of-embers:static0.0:s1,f:xs:XP:festival-of-embers:static0.0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 2de6c3d9-1759-40a2-99c6-8cbe17b4bcdd	cast	cast	agreed	-	F	start	2	0	f:xs:XP:entreat-the-dead:cast:s1	-	-	-	8c0bd19283bb	-	76a5975acdfd	-	-	2026-11-24	xproof
 2de7367b-a5a4-43f4-8f8f-b931ea28150d	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:slayers-stronghold:f0a0:s2,f:xs:XP:slayers-stronghold:f0a0:s2	-	-	-	d864b561c9cb	-	5d38ff381775	-	-	2026-11-24	xproof
 2de7367b-a5a4-43f4-8f8f-b931ea28150d	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:slayers-stronghold:f0a1:s1,f:xs:XP:slayers-stronghold:f0a1:s1	-	-	-	d864b561c9cb	-	5d38ff381775	-	-	2026-11-24	xproof

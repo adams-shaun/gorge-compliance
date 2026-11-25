@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3001f971-c4db-4176-89b5-e7f4a8890c0f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vorel-of-the-hull-clade:cast:s1,f:xs:XP:vorel-of-the-hull-clade:cast:s1	-	-	-	d864b561c9cb	-	930b31e7b3b7	-	-	2026-11-24	xproof
 3001f971-c4db-4176-89b5-e7f4a8890c0f	f0/a0	MultiplyCounter	agreed	-	FX	start	2	0	x:xs:XP:vorel-of-the-hull-clade:f0a0:s1,f:xs:XP:vorel-of-the-hull-clade:f0a0:s1	-	-	-	d864b561c9cb	-	930b31e7b3b7	-	-	2026-11-24	xproof
 3003e19e-ae60-4e10-b688-d0cac2a63cb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-30062dd0-c049-4872-8011-8b4810a3fa26	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+30062dd0-c049-4872-8011-8b4810a3fa26	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:envelop:cast:s1,f:xs:XP:envelop:cast:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 3006d992-2714-4264-a4c3-953b67dc7347	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 300ad0f7-92a7-450d-a9de-b658836fe3cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 300ad0f7-92a7-450d-a9de-b658836fe3cb	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
@@ -115,8 +115,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3095f2cf-05c3-4381-929f-c526b6fc30a7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:atog:f0a0:s1,f:xs:XP:atog:f0a0:s1	-	-	-	23c4009444b0	-	d0ed47e7e8f8	-	-	2026-11-25	xproof
 30997b43-fc13-41d3-8064-1ccc2cb6fd2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 309a57cb-cc08-4892-bc63-c424ca9c5b43	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savage-thallid:f0t0:s1,f:xs:XP:savage-thallid:f0t0:s1	-	-	-	23c4009444b0	-	4737578c4110	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-309a57cb-cc08-4892-bc63-c424ca9c5b43	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-309a57cb-cc08-4892-bc63-c424ca9c5b43	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+309a57cb-cc08-4892-bc63-c424ca9c5b43	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+309a57cb-cc08-4892-bc63-c424ca9c5b43	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 309a57cb-cc08-4892-bc63-c424ca9c5b43	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:savage-thallid:f0t0:s1,f:xs:XP:savage-thallid:f0t0:s1	-	-	-	23c4009444b0	-	4737578c4110	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 309e61f5-1fc7-4481-8d3a-9b35d335c99f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dawn-of-the-dead:f0t0:s1,f:xs:XP:dawn-of-the-dead:f0t0:s1	-	-	-	3aa6ded33acb	-	617e4b73d807	-	-	2026-11-25	xproof
 309e61f5-1fc7-4481-8d3a-9b35d335c99f	f0/t0	Phase	agreed	-	FX	start	4	0	x:xs:XP:dawn-of-the-dead:f0t0:s1,f:xs:XP:dawn-of-the-dead:f0t0:s1	-	-	-	3aa6ded33acb	-	617e4b73d807	-	-	2026-11-25	xproof

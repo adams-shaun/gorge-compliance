@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85308fb8-e5a1-4ff1-8606-283cf2056895	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85308fb8-e5a1-4ff1-8606-283cf2056895	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:patagia-golem:f0a0:s1,f:xs:XP:patagia-golem:f0a0:s1	-	-	-	23c4009444b0	-	4265cdd85e52	-	-	2026-11-25	xproof
 853587be-9709-43a4-81c9-5b6dabe523cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-853587be-9709-43a4-81c9-5b6dabe523cf	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+853587be-9709-43a4-81c9-5b6dabe523cf	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:machine-man-model-x-51:f0t0:s1,f:xs:XP:machine-man-model-x-51:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 85364398-923c-4ee9-8519-576fce1c26f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skittering-surveyor:f0t0:s1,f:xs:XP:skittering-surveyor:f0t0:s1	-	-	-	d864b561c9cb	-	250af314ce8b	-	-	2026-11-24	xproof
 85364398-923c-4ee9-8519-576fce1c26f7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skittering-surveyor:f0t0:s1,f:xs:XP:skittering-surveyor:f0t0:s1	-	-	-	d864b561c9cb	-	250af314ce8b	-	-	2026-11-24	xproof
 8537fc2c-c027-4440-bff4-d046fc198428	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -170,7 +170,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85df3564-5134-4dc2-9021-40ec84ee6d08	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:captain-jonathan-archer:f0t0:s1,f:xs:XP:captain-jonathan-archer:f0t0:s1	-	-	-	25696bf19d5b	-	c4198f37d977	-	-	2026-11-24	xproof
 85e1556d-c4da-4979-a5db-4ce3842c7797	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gathering-of-darkness:cast:s1,f:xs:XP:gathering-of-darkness:cast:s1	-	-	-	fb9d3088f0bf	-	086fabd3e239	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 85e1791f-f9a0-4e82-baf6-33cff2dcf60b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85e1791f-f9a0-4e82-baf6-33cff2dcf60b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+85e1791f-f9a0-4e82-baf6-33cff2dcf60b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 85e18895-d1d2-46c7-afd0-31da410c0438	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rhizome-lurcher:cast:s1,f:xs:XP:rhizome-lurcher:cast:s1	-	-	-	d864b561c9cb	-	565299acca42	-	-	2026-11-24	xproof
 85e2b073-e953-46f9-a1d4-0dfe030b3751	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shimmer-of-possibility:cast:s1,f:xs:XP:shimmer-of-possibility:cast:s1	-	-	-	d864b561c9cb	-	ff4e711a5c6d	-	-	2026-11-24	xproof
 85e797de-da27-4cd5-8fa4-4aef948988b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 602132c2-8ee8-41f8-bfac-cb17d32203f5	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:savvy-hunter:f0t0:s1,f:xs:XP:savvy-hunter:f0t0:s1	-	-	-	cb99a158debc	-	bce03ab1fa2e	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 602132c2-8ee8-41f8-bfac-cb17d32203f5	f0/t1	Blocks	agreed	-	FX	start	2	0	x:xs:XP:savvy-hunter:f0t1:s1,f:xs:XP:savvy-hunter:f0t1:s1	-	-	-	cb99a158debc	-	bce03ab1fa2e	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 6021c2d6-d098-4de2-9c7e-4c571f9238f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6021c2d6-d098-4de2-9c7e-4c571f9238f6	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+6021c2d6-d098-4de2-9c7e-4c571f9238f6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:soul-net:f0t0:s1,f:xs:XP:soul-net:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 6021f2e3-f915-428c-8289-2aa675b5bc78	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:polygoyf:cast:s1,f:xs:XP:polygoyf:cast:s1	-	-	-	8c0bd19283bb	-	2a868ea63025	-	-	2026-11-24	xproof
 6021f2e3-f915-428c-8289-2aa675b5bc78	f0/t0	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:polygoyf:f0t0:s1,f:xs:XP:polygoyf:f0t0:s1	-	-	-	8c0bd19283bb	-	2a868ea63025	-	-	2026-11-24	xproof
 6022608a-6cf2-45bd-adec-63211710a5ed	cast	cast-resolve	agreed	-	FX	scen	2	0	White Auracite/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -99,7 +99,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 606fbf99-d3e3-4131-b991-3cb71c003834	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shoreline-ranger:cast:s1,f:xs:XP:shoreline-ranger:cast:s1	-	-	-	8c0bd19283bb	-	6ed9d6410c4f	-	-	2026-11-24	xproof
 606fbf99-d3e3-4131-b991-3cb71c003834	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60733a3a-dfc9-429a-af2d-f0ce9a58d533	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mysterio-s-mirage:cast:s1,f:xs:XP:mysterio-s-mirage:cast:s1	-	-	-	8c0bd19283bb	-	b2429cb66b66	-	-	2026-11-24	xproof
-60733a3a-dfc9-429a-af2d-f0ce9a58d533	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+60733a3a-dfc9-429a-af2d-f0ce9a58d533	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:mysterio-s-mirage:f0t0:s1,f:xs:XP:mysterio-s-mirage:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 607425ac-9e90-4c9e-88bf-72f8a76cce97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6074632b-4520-4ae8-bcdc-26b1eff71af9	cast	cast-resolve	agreed	-	FX	scen	2	0	Savanti Romero, Time's Exile/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6074632b-4520-4ae8-bcdc-26b1eff71af9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:savanti-romero-time-s-exile:combat0.attack:s1,f:xs:XP:savanti-romero-time-s-exile:combat0.attack:s1	-	-	-	23c4009444b0	-	11112f224a15	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

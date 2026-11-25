@@ -22,9 +22,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2519ccc0-c206-41fb-aa15-2ef88025ff96	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Prehistoric Pet/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2519ccc0-c206-41fb-aa15-2ef88025ff96	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:prehistoric-pet:f0a0:s1,f:xs:XP:prehistoric-pet:f0a0:s1	-	-	-	9087eefec3ee	-	eeabd18140dc	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 2519ccc0-c206-41fb-aa15-2ef88025ff96	static#0.0	static#0.0	agreed	-	X	scen	1	0	Prehistoric Pet/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2522a9dd-bcf3-4b84-abff-52b9e6dbde34	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2522a9dd-bcf3-4b84-abff-52b9e6dbde34	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2522a9dd-bcf3-4b84-abff-52b9e6dbde34	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+2522a9dd-bcf3-4b84-abff-52b9e6dbde34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bag-end-banquet:f0t0:s1,f:xs:XP:bag-end-banquet:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+2522a9dd-bcf3-4b84-abff-52b9e6dbde34	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:bag-end-banquet:f0t0:s1,f:xs:XP:bag-end-banquet:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+2522a9dd-bcf3-4b84-abff-52b9e6dbde34	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bag-end-banquet:f0t0:s1,f:xs:XP:bag-end-banquet:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 252330b1-67cf-4d9e-a413-917ba61e731f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 252d9183-16eb-4345-8d15-56218b33abdd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2531eb1a-ae24-450a-b8e8-dbbd65eaad64	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25794033-bd17-4056-b116-68d3acf52569	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25794033-bd17-4056-b116-68d3acf52569	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:myr-sire:f0t0:s1,f:xs:XP:myr-sire:f0t0:s1	-	-	-	d864b561c9cb	-	7d856d29eeca	-	-	2026-11-24	xproof
 2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+2579e9e0-b00f-4a1b-8fce-15d06bb7fe5a	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 257cc8e9-55b4-4510-9d1f-5df8c1ae2061	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 257cc8e9-55b4-4510-9d1f-5df8c1ae2061	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:house-guildmage:f0a0:s1,f:xs:XP:house-guildmage:f0a0:s1	-	-	-	d864b561c9cb	-	f124f974d8e6	-	-	2026-11-24	xproof
 257cc8e9-55b4-4510-9d1f-5df8c1ae2061	f0/a1	Surveil	agreed	-	FX	start	2	0	x:xs:XP:house-guildmage:f0a1:s1,f:xs:XP:house-guildmage:f0a1:s1	-	-	-	d864b561c9cb	-	f124f974d8e6	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2586a59d-8501-4c22-9d69-f4bf91de7024	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:necra-sanctuary:f0t0:s1,f:xs:XP:necra-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	6b8b8b454070	-	-	2026-11-25	xproof
 25877c41-39a4-4cc3-ac4b-8f3dd06d579b	cast	cast-resolve	agreed	-	FX	scen	2	0	Exsanguinate/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 25895c28-23c1-439e-858b-5cb31fdc31de	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25895c28-23c1-439e-858b-5cb31fdc31de	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+25895c28-23c1-439e-858b-5cb31fdc31de	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 258a78cc-a9f3-459a-9837-93a9856f72db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blacklance-paragon:f0t0:s1,f:xs:XP:blacklance-paragon:f0t0:s1	-	-	-	ae86f6029288	-	75b0144c5160	-	-	2026-11-24	xproof
 258a78cc-a9f3-459a-9837-93a9856f72db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:blacklance-paragon:f0t0:s1,f:xs:XP:blacklance-paragon:f0t0:s1	-	-	-	ae86f6029288	-	75b0144c5160	-	-	2026-11-24	xproof
 258e4da4-e7fd-4049-92df-e5433b9f0ce9	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	bacb0dd7de42	-	-	2026-11-24	xproof
@@ -201,13 +201,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25dce517-ac0a-4577-89ed-04296c7c4069	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:sedgemoor-witch:f0t1:s1,f:xs:XP:sedgemoor-witch:f0t1:s1	-	-	-	6f84be0f34c0	-	1fbd6c168920	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 25ec6309-0ccb-4f27-80f1-ec6dcc6461fa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seismic-spike:cast:s1,f:xs:XP:seismic-spike:cast:s1	-	-	-	77494c1ce129	-	89eedbe8ea2d	-	-	2026-11-24	xproof
 25ecd09e-d8bf-4929-96e2-e5132ea4f718	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:data-professor-of-humanities:cast:s1,f:xs:XP:data-professor-of-humanities:cast:s1	-	-	-	8c0bd19283bb	-	d14c177995cb	-	-	2026-11-24	xproof
-25ecd09e-d8bf-4929-96e2-e5132ea4f718	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+25ecd09e-d8bf-4929-96e2-e5132ea4f718	f0/t0	Drawn	agreed	-	FX	start	2	0	x:xs:XP:data-professor-of-humanities:f0t0:s1,f:xs:XP:data-professor-of-humanities:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 25edeff3-7727-4b80-9459-2bb6b8587fb9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25f0527c-1340-4218-970f-9e4f84ef96e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:severed-strands:cast:s1,f:xs:XP:severed-strands:cast:s1	-	-	-	44e3ec152eea	-	af9e64a50d8b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 25fb0396-7355-4ff1-8ad3-d5a82adf6cc1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25fb2a67-fd7f-4a06-bd59-118d82c86d6e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25fc274f-d5af-4174-b8e8-c2e65bb4c13f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25fc274f-d5af-4174-b8e8-c2e65bb4c13f	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:airdrop-condor:f0a0:s1,f:xs:XP:airdrop-condor:f0a0:s1	-	-	-	5b42d43d5d80	-	a17dfc6f08b3	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-25fe4df1-abf7-4f17-9e0d-57e414697400	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+25fe4df1-abf7-4f17-9e0d-57e414697400	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spot-felis-catus:f0t0:s1,f:xs:XP:spot-felis-catus:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 25fe4df1-abf7-4f17-9e0d-57e414697400	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25fe4df1-abf7-4f17-9e0d-57e414697400	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+25fe4df1-abf7-4f17-9e0d-57e414697400	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spot-felis-catus:f0t0:s1,f:xs:XP:spot-felis-catus:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof

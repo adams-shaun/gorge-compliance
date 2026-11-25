@@ -111,12 +111,12 @@ db961314-fe78-4362-902f-aa0dbf6c487d	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs
 db98ee99-d4e5-4623-8446-5cce5d11dca0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db98ee99-d4e5-4623-8446-5cce5d11dca0	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:impaler-shrike:f0t0:s1,f:xs:XP:impaler-shrike:f0t0:s1	-	-	-	23c4009444b0	-	afc404973dd4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 db99d52b-bbe6-4a48-8f2c-bf77912dc0a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-db99d52b-bbe6-4a48-8f2c-bf77912dc0a9	f0/a0	NULL	owed	refused:steps-needed:cost:GW	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+db99d52b-bbe6-4a48-8f2c-bf77912dc0a9	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:she-hulk-attorney-at-law:f0a0:s1,f:xs:XP:she-hulk-attorney-at-law:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 db9c155f-b342-41bb-9e1a-50358fb9f40e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db9c155f-b342-41bb-9e1a-50358fb9f40e	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 db9c155f-b342-41bb-9e1a-50358fb9f40e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dba16032-66c1-4ccb-9d65-d41ac550d182	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dba16032-66c1-4ccb-9d65-d41ac550d182	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+dba16032-66c1-4ccb-9d65-d41ac550d182	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 dba1d231-6b03-44ad-ab8c-be0c8fe1b6db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lake-town-mariners-gone-fishing:cast:s1,f:xs:XP:lake-town-mariners-gone-fishing:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 dba1d231-6b03-44ad-ab8c-be0c8fe1b6db	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lake-town-mariners-gone-fishing:combat0.attack:s1,f:xs:XP:lake-town-mariners-gone-fishing:combat0.attack:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 dba1d231-6b03-44ad-ab8c-be0c8fe1b6db	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lake-town-mariners-gone-fishing:combat0.block:s1,f:xs:XP:lake-town-mariners-gone-fishing:combat0.block:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
@@ -146,10 +146,10 @@ dbb8a3d9-6b1b-4ad1-b8b9-f92ead03d1d9	f0/t0	NULL	owed	refused:no-generator:trigge
 dbba75f5-2404-4bd5-982b-f6c4effa5316	cast	cast-resolve	agreed	-	FX	scen	2	0	Ethereal Armor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dbba75f5-2404-4bd5-982b-f6c4effa5316	static#0.0	static#0.0	agreed	-	X	scen	1	0	Ethereal Armor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 dbbf6379-01b4-400d-a277-5887e6be1d0f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dbbf6379-01b4-400d-a277-5887e6be1d0f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+dbbf6379-01b4-400d-a277-5887e6be1d0f	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:seluma-light-of-aysen:f0t0:s1,f:xs:XP:seluma-light-of-aysen:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 dbc2b0f9-73e8-41b7-9d64-07f86fbc5d6c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dbc2b0f9-73e8-41b7-9d64-07f86fbc5d6c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dbc2b0f9-73e8-41b7-9d64-07f86fbc5d6c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+dbc2b0f9-73e8-41b7-9d64-07f86fbc5d6c	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 dbc34afa-16bc-41f2-b74d-29bf2bfe24a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghoulsteed:cast:s1,f:xs:XP:ghoulsteed:cast:s1	-	-	-	d864b561c9cb	-	0710c7d6f548	-	-	2026-11-24	xproof
 dbc34afa-16bc-41f2-b74d-29bf2bfe24a9	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:ghoulsteed:f0a0:s1,f:xs:XP:ghoulsteed:f0a0:s1	-	-	-	fb9d3088f0bf	-	0710c7d6f548	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 dbc56f3b-83b3-41c8-a8ae-d3774fe6ee01	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:linden-the-steadfast-queen:cast:s1,f:xs:XP:linden-the-steadfast-queen:cast:s1	-	-	-	23b491658465	-	e4a24cb769c5	-	-	2026-11-24	xproof

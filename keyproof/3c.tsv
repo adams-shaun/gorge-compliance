@@ -10,11 +10,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a2	SetLife	agreed	-	FX	start	2	0	x:xs:XP:vraska-relic-seeker:f0a2:s1,f:xs:XP:vraska-relic-seeker:f0a2:s1	-	-	-	336eab778104	-	46246a7288d4	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 3c037865-d38c-48da-aee9-308975e12638	cast	cast	agreed	-	F	start	2	0	f:xs:XP:seven-of-nine:cast:s1	-	-	-	23c4009444b0	-	352b9ef612a9	-	-	2026-11-25	xproof
-3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herald-of-torment:f0t0:s1,f:xs:XP:herald-of-torment:f0t0:s1	-	-	-	3aa6ded33acb	-	dd74058759d6	-	-	2026-11-25	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:herald-of-torment:f0t0:s1,f:xs:XP:herald-of-torment:f0t0:s1	-	-	-	3aa6ded33acb	-	dd74058759d6	-	-	2026-11-25	xproof
 3c067370-1e3d-4262-b7d6-f2bb2656b1d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c067370-1e3d-4262-b7d6-f2bb2656b1d8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3c067370-1e3d-4262-b7d6-f2bb2656b1d8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thanos-death-s-consort:f0t0:s1,f:xs:XP:thanos-death-s-consort:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 3c067dbb-934b-4ebb-a656-8541349a4b2a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c067dbb-934b-4ebb-a656-8541349a4b2a	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:reflective-golem:f0t0:s1,f:xs:XP:reflective-golem:f0t0:s1	-	-	-	6f84be0f34c0	-	cdf5b1967df7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3c075bb6-1831-4521-bd8d-4ed2825ae796	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -74,7 +74,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c4d5392-27cf-492e-9ae1-dee330b82223	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:moldgraf-monstrosity:f0t0:s1,f:xs:XP:moldgraf-monstrosity:f0t0:s1	-	-	-	d864b561c9cb	-	b43e41d4e2c1	-	-	2026-11-24	xproof
 3c4da169-1e50-4790-abdc-214e7b8a2ad5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thorin-s-last-stand:cast:s1,f:xs:XP:thorin-s-last-stand:cast:s1	-	-	-	fb9d3088f0bf	-	b306f6cac4d7	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 3c516327-00a3-4d03-87a3-73b4a90719d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trelane-squire-of-gothos:cast:s1,f:xs:XP:trelane-squire-of-gothos:cast:s1	-	-	-	8c0bd19283bb	-	872f2f635514	-	-	2026-11-24	xproof
-3c516327-00a3-4d03-87a3-73b4a90719d3	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3c516327-00a3-4d03-87a3-73b4a90719d3	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:trelane-squire-of-gothos:f0t0:s1,f:xs:XP:trelane-squire-of-gothos:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 3c59ab03-8744-4148-be06-eb1b0147f2cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c59ab03-8744-4148-be06-eb1b0147f2cc	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:eyes-of-the-wisent:f0t0:s1,f:xs:XP:eyes-of-the-wisent:f0t0:s1	-	-	-	23c4009444b0	-	a938625ba413	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3c5c227a-335b-4995-9821-d4269a0a233a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hugs-grisly-guardian:cast:s2	-	-	-	5437c1394672	-	f2728a82599e	-	-	2026-11-24	xproof

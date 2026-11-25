@@ -68,8 +68,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a42558c-7432-4c05-9599-95343eb09be1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:censor:cast:s1,f:xs:XP:censor:cast:s1	-	-	-	9087eefec3ee	-	153ca889c491	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
 3a42558c-7432-4c05-9599-95343eb09be1	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:censor:cast:s1,f:xs:XP:censor:cast:s1	-	-	-	23b491658465	-	153ca889c491	-	-	2026-11-25	xproof
 3a429a1e-62c0-4f01-b09e-2bbf63e56a98	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3a429a1e-62c0-4f01-b09e-2bbf63e56a98	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-3a429a1e-62c0-4f01-b09e-2bbf63e56a98	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3a429a1e-62c0-4f01-b09e-2bbf63e56a98	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:lucky-the-pizza-dog:f0t0:s1,f:xs:XP:lucky-the-pizza-dog:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+3a429a1e-62c0-4f01-b09e-2bbf63e56a98	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:lucky-the-pizza-dog:f0t1:s1,f:xs:XP:lucky-the-pizza-dog:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 3a46d85b-ce1a-4842-a342-92a5bddb1053	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scrounging-skyray:cast:s1,f:xs:XP:scrounging-skyray:cast:s1	-	-	-	23c4009444b0	-	428fee989fd7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3a46d85b-ce1a-4842-a342-92a5bddb1053	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:scrounging-skyray:combat0.attack:s1,f:xs:XP:scrounging-skyray:combat0.attack:s1	-	-	-	23c4009444b0	-	428fee989fd7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3a46d85b-ce1a-4842-a342-92a5bddb1053	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:scrounging-skyray:combat0.block:s1,f:xs:XP:scrounging-skyray:combat0.block:s1	-	-	-	23c4009444b0	-	428fee989fd7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -81,7 +81,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3a487f20-6b1d-4be3-b51f-0c8f0a611601	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sisay-s-ingenuity:f0t0:s1,f:xs:XP:sisay-s-ingenuity:f0t0:s1	-	-	-	fc71ca68c5ac	-	ff6d0df7b017	-	-	2026-11-24	xproof
 3a49b518-61c8-4dea-8008-c5edf8384581	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ob-nixilis-the-ascended:f0t0:s1,f:xs:XP:ob-nixilis-the-ascended:f0t0:s1	-	-	-	8c0bd19283bb	-	88b61cd38814	-	-	2026-11-24	xproof
 3a49b518-61c8-4dea-8008-c5edf8384581	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ob-nixilis-the-ascended:f0t0:s1,f:xs:XP:ob-nixilis-the-ascended:f0t0:s1	-	-	-	8c0bd19283bb	-	88b61cd38814	-	-	2026-11-24	xproof
-3a49b518-61c8-4dea-8008-c5edf8384581	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+3a49b518-61c8-4dea-8008-c5edf8384581	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:ob-nixilis-the-ascended:f0t1:s1,f:xs:XP:ob-nixilis-the-ascended:f0t1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 3a51485b-31b2-4fa5-824a-a919f9d28ca8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3a532c2b-a08c-46ab-86f7-c6dee0d6985f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scent-of-jasmine:cast:s1,f:xs:XP:scent-of-jasmine:cast:s1	-	-	-	5f2128bf97e4	-	1a3d5d749db8	-	-	2026-11-24	xproof
 3a536065-d62a-44c9-886b-84209b6bce57	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

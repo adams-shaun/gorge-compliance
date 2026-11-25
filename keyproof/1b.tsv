@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 1b01dcff-0639-4ed0-bd9e-f28429cb803d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nurgle-s-rot:cast:s1,f:xs:XP:nurgle-s-rot:cast:s1	-	-	-	8c0bd19283bb	-	5386769c8bdb	-	-	2026-11-24	xproof
-1b01dcff-0639-4ed0-bd9e-f28429cb803d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+1b01dcff-0639-4ed0-bd9e-f28429cb803d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 1b05e355-38a5-4307-9d8b-e99ec30f8ed3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:brightfield-mustang:cast:s1,f:xs:XP:brightfield-mustang:cast:s1	-	-	-	23c4009444b0	-	66c509a95dc3	-	-	2026-11-25	xproof
 1b05e355-38a5-4307-9d8b-e99ec30f8ed3	f0/a0	AlterAttribute/Saddle	agreed	-	FX	start	2	0	x:xs:XP:brightfield-mustang:f0a0:s1,f:xs:XP:brightfield-mustang:f0a0:s1	-	-	-	23c4009444b0	-	66c509a95dc3	-	-	2026-11-25	xproof
 1b05e355-38a5-4307-9d8b-e99ec30f8ed3	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:brightfield-mustang:f0a0:s1,f:xs:XP:brightfield-mustang:f0a0:s1	-	-	-	23c4009444b0	-	66c509a95dc3	-	-	2026-11-25	xproof
@@ -200,9 +200,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1be58157-186e-48e4-b375-dc5f10d785ac	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:dormant-grove-gnarled-grovestrider:f0t0:s1,f:xs:XP:dormant-grove-gnarled-grovestrider:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 1bea6d02-186e-46d8-b788-d4cc37dbb480	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:vibranium-mining-mech:cast:s1,f:xs:XP:vibranium-mining-mech:cast:s1	-	-	-	8c0bd19283bb	-	2aa991ee05a4	-	-	2026-11-24	xproof
 1bea6d02-186e-46d8-b788-d4cc37dbb480	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:vibranium-mining-mech:f0a0:s1,f:xs:XP:vibranium-mining-mech:f0a0:s1	-	-	-	8c0bd19283bb	-	2aa991ee05a4	-	-	2026-11-24	xproof
-1bea6d02-186e-46d8-b788-d4cc37dbb480	f0/a1	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+1bea6d02-186e-46d8-b788-d4cc37dbb480	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:vibranium-mining-mech:f0a1:s1,f:xs:XP:vibranium-mining-mech:f0a1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 1bea6d02-186e-46d8-b788-d4cc37dbb480	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:vibranium-mining-mech:cast:s1,f:xs:XP:vibranium-mining-mech:cast:s1	-	-	-	8c0bd19283bb	-	2aa991ee05a4	-	-	2026-11-24	xproof
-1bea6d02-186e-46d8-b788-d4cc37dbb480	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1bea6d02-186e-46d8-b788-d4cc37dbb480	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:vibranium-mining-mech:f0a1:s1,f:xs:XP:vibranium-mining-mech:f0a1:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 1bf04a2a-7f96-412c-9d91-034bef26e1b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1bf06342-0d76-433b-9912-8af03b7e3bc3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1bf505a7-292e-4642-83b6-8ff41ebe5d51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blazing-firesinger-seething-song:cast:s1,f:xs:XP:blazing-firesinger-seething-song:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof

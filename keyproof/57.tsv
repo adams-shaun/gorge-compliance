@@ -83,7 +83,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5779d9b2-4de1-4aa4-a56d-0da05146743a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 577d027a-96c3-46fe-880b-f8b5dd3f3a3d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sever-soul:cast:s1,f:xs:XP:sever-soul:cast:s1	-	-	-	3aa6ded33acb	-	9750401d2549	-	-	2026-11-25	xproof
 577eb51d-7979-4f97-a8b1-e31242720611	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-577eb51d-7979-4f97-a8b1-e31242720611	f0/a0	RemoveCounter	owed	harness	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+577eb51d-7979-4f97-a8b1-e31242720611	f0/a0	RemoveCounter	agreed	-	FX	start	2	0	x:xs:XP:thrull-parasite:f0a0:s1,f:xs:XP:thrull-parasite:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 577eb51d-7979-4f97-a8b1-e31242720611	f0/t0	SpellCast/Extort	owed	harness	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 57828973-df3d-4288-988d-147a3016120e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57831c07-6915-4579-b3e1-de93a3664444	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aven-surveyor:f0t0:s1,f:xs:XP:aven-surveyor:f0t0:s1	-	-	-	3aa6ded33acb	-	93275a7448b6	-	-	2026-11-25	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57947037-91b2-4058-be22-158d3257317e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cache-raiders:f0t0:s1,f:xs:XP:cache-raiders:f0t0:s1	-	-	-	3aa6ded33acb	-	a2852cdc5349	-	-	2026-11-25	xproof
 57947037-91b2-4058-be22-158d3257317e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:cache-raiders:f0t0:s1,f:xs:XP:cache-raiders:f0t0:s1	-	-	-	3aa6ded33acb	-	a2852cdc5349	-	-	2026-11-25	xproof
 57994ace-3dd6-407f-b465-c70b552bd466	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57994ace-3dd6-407f-b465-c70b552bd466	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+57994ace-3dd6-407f-b465-c70b552bd466	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:meatsqueak-hoard-lord:f0t0:s1,f:xs:XP:meatsqueak-hoard-lord:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 5799baed-3457-4bf2-adf3-239a41dcc1c8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thwart-the-enemy:cast:s1,f:xs:XP:thwart-the-enemy:cast:s1	-	-	-	ae86f6029288	-	580f50861c45	-	-	2026-11-24	xproof
 579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:black-widow-super-spy:cast:s1,f:xs:XP:black-widow-super-spy:cast:s1	-	-	-	23c4009444b0	-	d2313a277274	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 579f9a86-a1af-4c2a-a7e5-8fea0bd0eb61	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:black-widow-super-spy:combat0.attack:s1,f:xs:XP:black-widow-super-spy:combat0.attack:s1	-	-	-	23c4009444b0	-	d2313a277274	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -186,8 +186,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57f58d52-0014-4cac-94fc-668063cc147a	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:shattered-acolyte:combat0.attack:s1,f:xs:XP:shattered-acolyte:combat0.attack:s1	-	-	-	23c4009444b0	-	97d133081e3a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 57f58d52-0014-4cac-94fc-668063cc147a	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:shattered-acolyte:combat0.block:s1,f:xs:XP:shattered-acolyte:combat0.block:s1	-	-	-	23c4009444b0	-	97d133081e3a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 57f58d52-0014-4cac-94fc-668063cc147a	f0/a0	Destroy	agreed	-	FX	start	2	0	x:xs:XP:shattered-acolyte:f0a0:s1,f:xs:XP:shattered-acolyte:f0a0:s1	-	-	-	9087eefec3ee	-	97d133081e3a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-57f6a8c2-9d84-4640-9b92-8b8611e05773	cast	cast	diverged	-	-	start	0	2	-	892a2ec46781	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
-57f6a8c2-9d84-4640-9b92-8b8611e05773	f0/t0	ChangesZone	diverged	-	-	start	0	2	-	10e9ee15f412	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+57f6a8c2-9d84-4640-9b92-8b8611e05773	cast	cast	diverged	-	-	start	0	2	-	892a2ec46781	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+57f6a8c2-9d84-4640-9b92-8b8611e05773	f0/t0	ChangesZone	diverged	-	-	start	0	2	-	10e9ee15f412	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 57f6a8c2-9d84-4640-9b92-8b8611e05773	f0/t1	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:rilsa-rael-kingpin:f0t1:s1,f:xs:XP:rilsa-rael-kingpin:f0t1:s1	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 57f90b30-bcb0-447e-8788-5c5ded187207	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:natural-selection:cast:s1,f:xs:XP:natural-selection:cast:s1	-	-	-	ae86f6029288	-	e7e87d40402f	-	-	2026-11-24	xproof
 57f94fcb-a224-410b-a38e-3ed8cca7d0c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

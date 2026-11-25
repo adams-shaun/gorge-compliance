@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f1ada92-538b-40cb-9bf3-5c415f5325e6	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Spotcycle Scouter/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0f1ada92-538b-40cb-9bf3-5c415f5325e6	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f1afedd-c60f-454f-b84a-c8117aec0128	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f1afedd-c60f-454f-b84a-c8117aec0128	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+0f1afedd-c60f-454f-b84a-c8117aec0128	f0/t0	TapsForMana	agreed	-	FX	start	2	0	x:xs:XP:manabarbs:f0t0:s1,f:xs:XP:manabarbs:f0t0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 0f1b5cea-2035-444c-9f63-87dcb9782c74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 0f1b5cea-2035-444c-9f63-87dcb9782c74	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:gyome-master-chef:f0t0:s1,f:xs:XP:gyome-master-chef:f0t0:s1	-	-	-	b9fb7f91430d	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
@@ -28,7 +28,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f2504b0-bd5a-4b61-b8bb-c8b20aa1e26e	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:rabid-rats:f0a0:s1,f:xs:XP:rabid-rats:f0a0:s1	-	-	-	baa6f696107c	-	cbf84e2209d8	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 0f264e5b-264e-4e97-9a8d-8ae1d6a286ce	cast	cast-resolve	agreed	-	X	scen	1	0	Drown in the Loch/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 0f26be86-eab1-45fd-8b69-5ecff2565c60	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0f26be86-eab1-45fd-8b69-5ecff2565c60	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+0f26be86-eab1-45fd-8b69-5ecff2565c60	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 0f26c04a-9bf7-4cbd-a95f-73ee4a3b1af1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f2d038e-6dab-4352-9ba7-ed9e063bb304	cast	cast	agreed	-	F	start	2	0	f:xs:XP:force-of-despair:cast:s1	-	-	-	d864b561c9cb	-	e8aa12f66944	-	-	2026-11-24	xproof
 0f30f32f-3c4c-4f73-8b2a-82045a40bda9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:killer-service:cast:s1,f:xs:XP:killer-service:cast:s1	-	-	-	8c0bd19283bb	-	646eadf7d89f	-	-	2026-11-24	xproof
@@ -116,7 +116,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0f9b78ca-1556-4157-a91c-55276fd78127	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0f9b78ca-1556-4157-a91c-55276fd78127	f0/t0	Discarded	agreed	-	FX	start	2	0	x:xs:XP:sand-golem:f0t0:s1,f:xs:XP:sand-golem:f0t0:s1	-	-	-	baa6f696107c	-	03f356d303df	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 0fa01155-638d-44ed-8963-46b202b0e720	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:white-tiger-amulet-keeper:cast:s1,f:xs:XP:white-tiger-amulet-keeper:cast:s1	-	-	-	8c0bd19283bb	-	9e83988544c7	-	-	2026-11-24	xproof
-0fa01155-638d-44ed-8963-46b202b0e720	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+0fa01155-638d-44ed-8963-46b202b0e720	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:white-tiger-amulet-keeper:f0a0:s1,f:xs:XP:white-tiger-amulet-keeper:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 0fa0f562-e66f-4630-890a-9a4ae24fd6c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0fa886c2-9b58-4368-b2d0-e619c62a554f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:wandering-mind:cast:s1,f:xs:XP:wandering-mind:cast:s1	-	-	-	d864b561c9cb	-	59d57fa50fef	-	-	2026-11-24	xproof
 0fa886c2-9b58-4368-b2d0-e619c62a554f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:wandering-mind:cast:s1,f:xs:XP:wandering-mind:cast:s1	-	-	-	d864b561c9cb	-	59d57fa50fef	-	-	2026-11-24	xproof

@@ -74,9 +74,9 @@ e5868cf5-9fdc-442d-95cb-3bc5e2727981	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:to
 e58a5631-dd00-4b1b-a2aa-2558bb0ff62f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e58a5631-dd00-4b1b-a2aa-2558bb0ff62f	f0/t0	BecomesTarget	agreed	-	FX	start	2	0	x:xs:XP:daru-spiritualist:f0t0:s1,f:xs:XP:daru-spiritualist:f0t0:s1	-	-	-	65d07beecc37	-	f68ad0a2a1ce	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 e58e94dc-9602-48db-9dd9-9d3051c33a76	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:the-thanos-copter:cast:s1,f:xs:XP:the-thanos-copter:cast:s1	-	-	-	8c0bd19283bb	-	d0bc8db399a0	-	-	2026-11-24	xproof
-e58e94dc-9602-48db-9dd9-9d3051c33a76	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
+e58e94dc-9602-48db-9dd9-9d3051c33a76	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:the-thanos-copter:f0a0:s1,f:xs:XP:the-thanos-copter:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 e58e94dc-9602-48db-9dd9-9d3051c33a76	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:the-thanos-copter:cast:s1,f:xs:XP:the-thanos-copter:cast:s1	-	-	-	8c0bd19283bb	-	d0bc8db399a0	-	-	2026-11-24	xproof
-e58e94dc-9602-48db-9dd9-9d3051c33a76	f0/t1	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:the-thanos-copter:cast:s1,f:xs:XP:the-thanos-copter:cast:s1	-	-	-	8c0bd19283bb	-	d0bc8db399a0	-	-	2026-11-24	xproof
+e58e94dc-9602-48db-9dd9-9d3051c33a76	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:the-thanos-copter:f0a0:s1,f:xs:XP:the-thanos-copter:f0a0:s1	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 e5926e14-d30a-4f81-803c-f36542df2db3	cast	cast-resolve	agreed	-	FX	scen	2	0	Three Blind Mice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e597d8a1-3bbc-4001-b642-f4421447970f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:extract-from-darkness:cast:s1,f:xs:XP:extract-from-darkness:cast:s1	-	-	-	8c0bd19283bb	-	9979d5cb1162	-	-	2026-11-24	xproof
 e59c07ab-08fd-4d5b-978e-1594604ba410	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -89,7 +89,7 @@ e5aa32b6-2eaf-4b48-81cc-cd3db976513d	combat#0.block	combat.block	agreed	-	FX	sta
 e5aa32b6-2eaf-4b48-81cc-cd3db976513d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:mineshaft-spider:f0t0:s2,f:xs:XP:mineshaft-spider:f0t0:s2	-	-	-	e07cf3a05ba5	-	40cc4a721d88	-	-	2026-11-24	xproof
 e5afa88a-8bde-47fe-a890-3759f807360f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5afa88a-8bde-47fe-a890-3759f807360f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e5afa88a-8bde-47fe-a890-3759f807360f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:noncreature	-	start	0	0	-	-	-	-	eaac364ee2fd	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
+e5afa88a-8bde-47fe-a890-3759f807360f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:noncreature	-	start	0	0	-	-	-	-	cef47b1dc3ff	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	52ddaba307522af3149b243b31392e8d6730bb1e	2026-11-25	xproof
 e5b11e43-fc7c-4cea-a44a-8af3f124e29e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5b35b54-77d9-4cb0-86a1-efc8e49aea09	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e5b35b54-77d9-4cb0-86a1-efc8e49aea09	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
