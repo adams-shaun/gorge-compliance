@@ -94,6 +94,11 @@ func TestForgeRolledDie(t *testing.T) {
 // die-roll code unchanged), the full driver suite (177 tests, including ForcedDieRollTest) re-run green on it.
 // fef74c5308f = the clean merge of 0c4ca7afb3d and a445a858b2: the two fixes touch disjoint files (forge-oracle driver vs
 // forge-game), so the pin keeps both; die-roll and driver code are unchanged from 0c4ca7afb3d.
+// f7b730149a = oracle/pin-1125: the merge of the two fixes below (both built on d0f16bee2e).
+// a1bcd1166a = d0f16bee2e0 plus the cost-choice census (ScriptedCostDecision only), die-roll code unchanged, the full
+// driver suite (185 tests, including ForcedDieRollTest and CostReturnPickTest) re-run green on it.
+// 752947823d = d0f16bee2e plus the forge-game PhaseHandler second-combat-damage-step priority fix; die-roll and driver
+// code unchanged.
 // 70b77c0ff08 = the clean merge of 9b17c1fc83 (the coin-force fix) and 24a3344b81 (the fateseal Dig order); the two
 // touch disjoint files (ForcedDieRandom vs ScriptedController/StepMachine), so the pin keeps both, die-roll code unchanged.
 // 9b17c1fc83 = d0f16bee2e0 plus the removal of ForcedDieRandom's unbounded nextInt() flip fallback (an unrelated unbounded draw spent the
@@ -112,7 +117,10 @@ func TestForgeRolledDie(t *testing.T) {
 // replays the xproof Hurl Through Hell request.
 // 3e6bd830a6f = 244c5908482 plus the discard_may election (ScriptedController.chooseCardsToDiscardFrom only); die-roll code
 // unchanged, and the full driver suite (198 tests, ForcedDieRollTest and ForcedCoinFlipTest among them) is green on it.
-const forgeOracleDieRollRef = "3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84"
+// 7d506c5192 = oracle/fpin-1125: f7b730149a merged with 26b4658101 (chooseCounterType peeks the counter-kind pick for a
+// RemoveCounter ask, driver-only), then with 244c590848 (the mayplay pin above); die-roll code unchanged.
+// afe18881c6 = oracle/fpin-1125: 7d506c5192 (above) + evoked cast_mode a6227e70a3 + discard_may 3e6bd830a6 (above); driver-only.
+const forgeOracleDieRollRef = "afe18881c6e6327caf871661968865a495aaf3de"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
