@@ -112,7 +112,13 @@ GO_TEST_FLAGS ?= -p=2
 # siblings on 98052067d4 and touch only their own card and test, so the join carries both fork heads (it adds no
 # code of its own). Card behaviour changes only for Wild Shape and at Extraordinary Journey's X = 0, so the
 # manifests are unchanged. Fork branch fix/join-wild-shape-extraordinary-journey.
-XMAGE_REF  ?= 11940683b903024a728751604bc5b1573a00e86a
+# 5cc61aaba0b = 11940683b90 (above) + Thought Collapse and Didn't Say Please counter the spell before its controller
+# mills (CR 608.2c, 701.6a): both milled first, so the countered spell was last in the graveyard.
+# CounterTargetThenMillEffect reads the target's controller, counters, then mills; CounterThenMillOrderTest fails
+# before (countered spell last) and passes after, and the driver replay of xs:XP:thought-collapse:cast:s1/s2 now
+# matches gorge and Forge. Fork branch fix/thought-collapse-counter-first (5566c5c1f4 cherry-picked onto
+# 11940683b90, so the Wild Shape fix stays in the pin).
+XMAGE_REF  ?= 5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
@@ -771,7 +777,32 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # before it with the exact miss; scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) runs it. Driver-only.
 # 53059b9bbf2 = oracle/fpin-1125-join10: 6fcacdc21814 (join9; above) joined with 019d50429f (the ChangeTargets accept/retarget
 # fix; above); driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 53059b9bbf2d85b11f810f54699145b731665a8b
+# 99e8228cba = 53059b9bbf2 plus the pending-declaration offered rule (xproof cluster setup:offered, a-realm-reborn, muldrotha, icetill-explorer,
+# mm-menon-the-right-hand): SnapshotWriter.offered is empty at the declare-attackers/declare-blockers step before anything is declared while the
+# active player has a legal attacker / the defender a legal blocker (CR 508.1, 509.1, 117.3a: the turn-based declaration precedes priority, and gorge's
+# checkpoint is that pending decision). Forge hands the seat priority once its callback returns without a declaration and used to list the seat's mana
+# abilities. scripts/forge-oracle-test-declare-attackers-offered.sh (make forge-driver-tests) fails on 53059b9bbf2 and passes here. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-offered-declaration.
+# a4380dd47f = 99e8228cba, narrowed: only a pass that ENTERS the declaration step offers nothing (StepMachine passes enteredStep to
+# SnapshotWriter.offered); an explicit empty attack/block is answered, so the priority after it still offers the holder's options.
+# The test script gains empty-attack/empty-block rows (red on 99e8228cba). Driver-only, die-roll code unchanged.
+# e45e911953c = 53059b9bbf2 plus the below-min target decline (xproof cluster xpt-6e2fff25, Kitsune, Dragon's Daughter
+# with p1's lone Grizzly Bears): the trigger's "exchange control of two other target creatures controlled by different
+# players" needs exactly two targets (TargetMin$ 2 | TargetMax$ 2 | TargetsWithDifferentControllers) and only one other
+# creature exists, so the required number of targets cannot be chosen and the ability is removed without going on the
+# stack (CR 603.3d with 601.2c); gorge logs no target ask. Forge's TargetRestrictions.hasCandidates is true with one
+# candidate, so Forge asked for targets gorge never posed and StepMachine.targets ended in "Missing target answer at
+# step 9" (Forge's own TargetSelection would also fail to reach min and drop the trigger). targets now mirrors
+# TargetSelection's gate right before the miss: when no pending decision has unused refs and even the largest legal set
+# cannot reach min (getAllCandidates already filters TargetUnique and already-chosen through canTarget; the distinct
+# controller count is mirrored for TargetsWithDifferentControllers/ForEachPlayer), it notes "fewer candidates than min,
+# ability not put on the stack" and returns false without a miss; enough candidates plus no gorge answer keeps the miss.
+# TargetsBelowMinTest (fork fixtures targets-below-min/) fails on 53059b9bbf2 with the exact miss and passes here;
+# scripts/forge-oracle-test-targets-below-min.sh (make forge-driver-tests) runs it. Driver-only; die-roll code,
+# cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-targets-below-min.
+# 2ac6012982e = oracle/fpin-1125-join11: a4380dd47f (the pending-declaration offered rule; above) merged with e45e911953c (the
+# below-min target decline; above), no textual conflicts; driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 2ac6012982ea099449b492f6ede41890d7036820
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

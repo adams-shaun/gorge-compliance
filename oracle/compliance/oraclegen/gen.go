@@ -3138,7 +3138,10 @@ func modeNumbers(f *cards.Face) map[string]int {
 // yesNo recognises a bare two-way boolean choice. The engine's option kind
 // and exact label/ref identity must both agree; composed choices such as
 // "Yes — discard" are ordinary makeChoose picks, not boolean answers. Older
-// snapshots without PickKinds use the same exact-label/ref rule.
+// snapshots without PickKinds use the same exact-label/ref rule. The one
+// composed exception is the unless-discard election (kind "unless" "Yes —
+// discard one <spec>" / kind "ordinary" "No — discard normally"): XMage
+// models it as DoIfCostPaid, so it is a chooseUse yes/no.
 func yesNo(d rules.OracleDecision) (string, bool) {
 	if (d.Options != 2 && !loneTriggerCostDecline(d)) || len(d.Picks) != 1 || len(d.PickRefs) != 1 {
 		return "", false
@@ -3160,6 +3163,17 @@ func yesNo(d rules.OracleDecision) (string, bool) {
 		return "yes", true
 	case "gift_decline":
 		return "no", true
+	case "unless":
+		// "Discard one <spec> instead" (Thirst for Discovery): XMage's
+		// DoIfCostPaid chooseUse before the DiscardCardCost target, so the
+		// elected side is chooseUse yes and the card pick follows as the
+		// cost's own choice. The label is never a literal choice.
+		return "yes", true
+	case "ordinary":
+		// The same ask's decline side ("No — discard normally"): chooseUse no.
+		if d.Picks[0] == "No — discard normally" {
+			return "no", true
+		}
 	case "endure_counters":
 		// Endure is XMage's chooseUse "Put N +1/+1 counters on
 		// <it> or create a N/N Spirit token?" (EndureSourceEffect.doEndure,

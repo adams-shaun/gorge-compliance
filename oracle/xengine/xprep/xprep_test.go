@@ -1819,3 +1819,39 @@ func TestPrefixesGrantedAbilityOnLand(t *testing.T) {
 		t.Fatalf("granted Island step prefix = %q, want a prefix of \"{T}: Draw a card.\" that is not a prefix of %q", p, mana)
 	}
 }
+
+// TestPrepareModalSpellBackFaceAbility: a permanent cast back face up
+// (cast_mode "modal_spell", CR 712.12) has only the back face's
+// characteristics (CR 712.8e), so a later activate step naming the front
+// face's ref reads the back face's XMage ability text. Kolvori's ability 0 is
+// "{1}{G}, {T}" (Dig); The Ringhart Crest's is its "{T}: Add {G}." mana
+// ability. A later cast without modal_spell is the front face again.
+func TestPrepareModalSpellBackFaceAbility(t *testing.T) {
+	reg := testutil.CorpusRegistry(t)
+	zero := 0
+	it := oraclegen.Item{
+		ID: "xe:test:modal-spell-back-face",
+		Scenario: oraclegen.Scenario{
+			Steps: []oraclegen.Step{
+				{Op: "cast", Seat: 0, Card: "p0:Kolvori, God of Kinship", CastMode: "modal_spell"},
+				{Op: "activate", Seat: 0, Card: "p0:Kolvori, God of Kinship", AbilityIndex: &zero},
+				{Op: "cast", Seat: 0, Card: "p0:Kolvori, God of Kinship"},
+				{Op: "activate", Seat: 0, Card: "p0:Kolvori, God of Kinship", AbilityIndex: &zero},
+			},
+		},
+	}
+	got, ref := prefixes(reg, it, rules.OracleResult{})
+	if ref != nil {
+		t.Fatalf("prefixes refused: %+v", ref)
+	}
+	if len(got) != 4 {
+		t.Fatalf("prefixes = %q, want 4 entries", got)
+	}
+	front, back := got[3], got[1]
+	if front == back || strings.Contains(back, "{1}{G}") {
+		t.Fatalf("back-face activate prefix = %q, front-face = %q: the back face must read The Ringhart Crest's mana ability", back, front)
+	}
+	if !strings.Contains(front, "{1}{G}") {
+		t.Errorf("front-face activate prefix = %q, want Kolvori's {1}{G}, {T} Dig ability", front)
+	}
+}
