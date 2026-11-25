@@ -24,6 +24,7 @@ Forge drafts carry no Forge source or script text (GPL boundary): file:line, the
 | XMage | Illumination | 1 | still-open | [xmage-illumination-lki-spell.md](xmage-illumination-lki-spell.md) | `adams-shaun/mage:upstream/illumination-lki-spell` |
 | XMage | Hellfire | 1 | still-open | [xmage-hellfire-zero-x-damage.md](xmage-hellfire-zero-x-damage.md) | `adams-shaun/mage:upstream/hellfire-zero-x-damage` |
 | XMage | Grand Nagus Zek (also Battle-Scarred Survivalist, Morbid Opportunist) | 1 | still-open | [xmage-trigger-limit-lki-zcc.md](xmage-trigger-limit-lki-zcc.md) | `adams-shaun/mage:upstream/trigger-limit-lki-zcc` |
+| XMage | Azula, Cunning Usurper (static cast permission reads the zcc-0 exile zone) | 1 | still-open, no mirror branch yet (draft unverified: fix and test not compiled) | [xmage-azula-static-exile-zone-zcc.md](xmage-azula-static-exile-zone-zcc.md) | none |
 | Forge | Wakanda Forever! (`Shuffle$ False` read as true) | 1 | still-open | [forge-wakanda-forever.md](forge-wakanda-forever.md) | `adams-shaun/forge:upstream/changezoneall-shuffle-false` (push pending) |
 | Forge | Parker Luck (row attributed to Sinister Hideout) | 1 | still-open | [forge-parker-luck.md](forge-parker-luck.md) | `adams-shaun/forge:upstream/peekandreveal-clamp` (push pending) |
 | Forge | Emrakul's Messenger (Devoid under ability loss) | 1 | still-open | [forge-emrakuls-messenger.md](forge-emrakuls-messenger.md) | `adams-shaun/forge:upstream/devoid-colour-kept-under-ability-loss` (push pending; stacked on the Changeling commit) |

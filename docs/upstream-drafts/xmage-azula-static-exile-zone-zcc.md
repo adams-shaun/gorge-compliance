@@ -41,10 +41,11 @@ Test (`Mage.Tests/src/test/java/org/mage/test/cards/single/tla/AzulaCunningUsurp
 public void testCastOpponentOwnedExiledCard() {
     addCard(Zone.HAND, playerA, "Azula, Cunning Usurper");
     addCard(Zone.BATTLEFIELD, playerA, "Island", 1);
-    addCard(Zone.BATTLEFIELD, playerA, "Swamp", 5);
+    addCard(Zone.BATTLEFIELD, playerA, "Swamp", 6);
     addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
 
     castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, "Azula, Cunning Usurper");
+    addTarget(playerA, playerB); // the ETB's TargetOpponent; strict choose mode does not pick it
     setChoice(playerB, "Grizzly Bears");
     waitStackResolved(1, PhaseStep.PRECOMBAT_MAIN);
     castSpell(1, PhaseStep.POSTCOMBAT_MAIN, playerA, "Grizzly Bears");
@@ -58,6 +59,10 @@ public void testCastOpponentOwnedExiledCard() {
     assertPermanentCount(playerB, "Grizzly Bears", 0);
 }
 ```
+
+Land budget: Azula costs {2}{U}{B}{B} (5 mana), the Bears {1}{G} (2), so the test supplies 7 lands (1 Island, 6 Swamps). The Bears
+are paid with Swamp mana on purpose: there is no green source, so the cast only succeeds if the Mana effect's `applies` also
+sees the exile zone, which makes the test cover the Cast and Mana `applies` changes (the Flash effect is not exercised: the cast is at sorcery timing). Azula does not add mana; it only lets any type pay.
 
 Needs a check that the choice prompt order matches (nontoken creature first; the graveyard is empty so no second prompt).
 
