@@ -130,8 +130,8 @@ e6a35729-edee-4a8c-9aa1-041114d66c69	combat#0.block	combat.block	agreed	-	FX	sta
 e6a35729-edee-4a8c-9aa1-041114d66c69	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:ayli-eternal-pilgrim:f0a0:s1,f:xs:XP:ayli-eternal-pilgrim:f0a0:s1	-	-	-	3aa6ded33acb	-	b9dd382f4ef5	-	-	2026-11-25	xproof
 e6a35729-edee-4a8c-9aa1-041114d66c69	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ayli, Eternal Pilgrim/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e6a93240-8578-479e-b5e7-73f51b141cc8	cast	cast-resolve	agreed	-	FX	scen	2	0	Friendly Ghost/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e6a93240-8578-479e-b5e7-73f51b141cc8	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Friendly Ghost/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-e6a93240-8578-479e-b5e7-73f51b141cc8	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Friendly Ghost/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+e6a93240-8578-479e-b5e7-73f51b141cc8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:friendly-ghost:combat0.attack:s1,f:xs:XP:friendly-ghost:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4b87c58390d3	-	-	2026-11-25	xproof
+e6a93240-8578-479e-b5e7-73f51b141cc8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:friendly-ghost:combat0.block:s1,f:xs:XP:friendly-ghost:combat0.block:s1	-	-	-	3aa6ded33acb	-	4b87c58390d3	-	-	2026-11-25	xproof
 e6a93240-8578-479e-b5e7-73f51b141cc8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6ab8a04-e225-4ff0-bb8b-c80d0e6ce50c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6ab8a04-e225-4ff0-bb8b-c80d0e6ce50c	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerUnblocked	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof

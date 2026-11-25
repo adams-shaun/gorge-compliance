@@ -13,8 +13,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a0a7b02-10e6-4dbf-8356-659095519480	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:longhorn-sharpshooter:combat0.block:s1,f:xs:XP:longhorn-sharpshooter:combat0.block:s1	-	-	-	3aa6ded33acb	-	cde1ae7fa8d9	-	-	2026-11-25	xproof
 6a0a7b02-10e6-4dbf-8356-659095519480	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Longhorn Sharpshooter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a0b1b7e-1a93-4c00-be94-8fa56af57468	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6a0b78fb-3838-47d9-8d1a-b6b0c0e8927d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haldan-avid-arcanist:f0t0:s1,f:xs:XP:haldan-avid-arcanist:f0t0:s1	-	-	-	23b491658465	-	e2e47df7adf8	-	-	2026-11-24	xproof
-6a0b78fb-3838-47d9-8d1a-b6b0c0e8927d	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6a0b78fb-3838-47d9-8d1a-b6b0c0e8927d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:haldan-avid-arcanist:f0t0:s1,f:xs:XP:haldan-avid-arcanist:f0t0:s1	-	-	-	3aa6ded33acb	-	e2e47df7adf8	-	-	2026-11-25	xproof
+6a0b78fb-3838-47d9-8d1a-b6b0c0e8927d	f0/t0	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:haldan-avid-arcanist:f0t0:s1,f:xs:XP:haldan-avid-arcanist:f0t0:s1	-	-	-	3aa6ded33acb	-	e2e47df7adf8	-	-	2026-11-25	xproof
 6a0da9f3-cb06-42b1-ae73-b142c0eedaff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6a0da9f3-cb06-42b1-ae73-b142c0eedaff	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 6a125750-2b8c-4f9d-8173-ac8d14c91ddb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -44,10 +44,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6a344d2e-fbd7-4ff9-9e2a-97ae69d60c66	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kangee-sky-warden:cast:s1,f:xs:XP:kangee-sky-warden:cast:s1	-	-	-	8c0bd19283bb	-	ccd20a470ad2	-	-	2026-11-24	xproof
 6a344d2e-fbd7-4ff9-9e2a-97ae69d60c66	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kangee-sky-warden:f0t0:s1,f:xs:XP:kangee-sky-warden:f0t0:s1	-	-	-	8c0bd19283bb	-	ccd20a470ad2	-	-	2026-11-24	xproof
 6a344d2e-fbd7-4ff9-9e2a-97ae69d60c66	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-6a381121-9134-489c-8c7e-44be1936b0e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:apothecary-stomper:f0t0:s1,f:xs:XP:apothecary-stomper:f0t0:s1	-	-	-	23b491658465	-	aecdb149cc55	-	-	2026-11-24	xproof
+6a381121-9134-489c-8c7e-44be1936b0e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:apothecary-stomper:f0t0:s1,f:xs:XP:apothecary-stomper:f0t0:s1	-	-	-	3aa6ded33acb	-	aecdb149cc55	-	-	2026-11-25	xproof
 6a381121-9134-489c-8c7e-44be1936b0e2	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Apothecary Stomper/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6a381121-9134-489c-8c7e-44be1936b0e2	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Apothecary Stomper/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-6a381121-9134-489c-8c7e-44be1936b0e2	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+6a381121-9134-489c-8c7e-44be1936b0e2	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:apothecary-stomper:f0t0:s1,f:xs:XP:apothecary-stomper:f0t0:s1	-	-	-	3aa6ded33acb	-	aecdb149cc55	-	-	2026-11-25	xproof
 6a381297-ebce-403c-b1dc-b7405fa6902c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:disturbed-slumber:cast:s1,f:xs:XP:disturbed-slumber:cast:s1	-	-	-	23b491658465	-	3e6cca977f8d	-	-	2026-11-24	xproof
 6a3862f0-8dfc-4ac9-8eb9-faefcad685d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dark-matter-manipulator:f0t0:s1,f:xs:XP:dark-matter-manipulator:f0t0:s1	-	-	-	25696bf19d5b	-	0164ebedb1bc	-	-	2026-11-24	xproof
 6a3862f0-8dfc-4ac9-8eb9-faefcad685d4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dark-matter-manipulator:f0t0:s1,f:xs:XP:dark-matter-manipulator:f0t0:s1	-	-	-	25696bf19d5b	-	0164ebedb1bc	-	-	2026-11-24	xproof

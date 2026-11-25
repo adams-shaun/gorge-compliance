@@ -167,10 +167,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3aa64915-8b1b-4414-b11e-d2078c1732a5	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dauthi-trapper:f0a0:s1,f:xs:XP:dauthi-trapper:f0a0:s1	-	-	-	5f2128bf97e4	-	2480189d35ac	-	-	2026-11-24	xproof
 3aa654cb-c0a0-48e7-901a-c690120b1510	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aa654cb-c0a0-48e7-901a-c690120b1510	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3aa83ed2-f48b-4ce6-a614-2c54ddf50538	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-one-ring:f0t0:s1,f:xs:XP:the-one-ring:f0t0:s1	-	-	-	8c0bd19283bb	-	e807c2dd8dc7	-	-	2026-11-24	xproof
-3aa83ed2-f48b-4ce6-a614-2c54ddf50538	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:the-one-ring:f0t0:s1,f:xs:XP:the-one-ring:f0t0:s1	-	-	-	8c0bd19283bb	-	e807c2dd8dc7	-	-	2026-11-24	xproof
-3aa83ed2-f48b-4ce6-a614-2c54ddf50538	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-one-ring:f0t0:s1,f:xs:XP:the-one-ring:f0t0:s1	-	-	-	8c0bd19283bb	-	e807c2dd8dc7	-	-	2026-11-24	xproof
-3aa83ed2-f48b-4ce6-a614-2c54ddf50538	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3aa83ed2-f48b-4ce6-a614-2c54ddf50538	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-one-ring:f0t1:s1,f:xs:XP:the-one-ring:f0t1:s1	-	-	-	3aa6ded33acb	-	e807c2dd8dc7	-	-	2026-11-25	xproof
+3aa83ed2-f48b-4ce6-a614-2c54ddf50538	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:the-one-ring:f0t1:s1,f:xs:XP:the-one-ring:f0t1:s1	-	-	-	3aa6ded33acb	-	e807c2dd8dc7	-	-	2026-11-25	xproof
+3aa83ed2-f48b-4ce6-a614-2c54ddf50538	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-one-ring:f0t1:s1,f:xs:XP:the-one-ring:f0t1:s1	-	-	-	3aa6ded33acb	-	e807c2dd8dc7	-	-	2026-11-25	xproof
+3aa83ed2-f48b-4ce6-a614-2c54ddf50538	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:the-one-ring:f0t1:s1,f:xs:XP:the-one-ring:f0t1:s1	-	-	-	3aa6ded33acb	-	e807c2dd8dc7	-	-	2026-11-25	xproof
 3aab67bb-f287-4aa6-a3c5-e850b22dfff6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3aab67bb-f287-4aa6-a3c5-e850b22dfff6	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3aab84f2-731c-4079-9623-0b0c433442c3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

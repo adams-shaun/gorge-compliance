@@ -166,8 +166,8 @@ d8c70f2f-985c-4982-97eb-99da3810e048	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 d8c7cd66-d8bf-4a99-add5-1d5651d4e025	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tajuru-pathwarden:cast:s1,f:xs:XP:tajuru-pathwarden:cast:s1	-	-	-	23b491658465	-	d5011d5d165c	-	-	2026-11-24	xproof
 d8c7cd66-d8bf-4a99-add5-1d5651d4e025	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tajuru-pathwarden:combat0.attack:s1,f:xs:XP:tajuru-pathwarden:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d5011d5d165c	-	-	2026-11-25	xproof
 d8c7cd66-d8bf-4a99-add5-1d5651d4e025	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tajuru-pathwarden:combat0.block:s1,f:xs:XP:tajuru-pathwarden:combat0.block:s1	-	-	-	3aa6ded33acb	-	d5011d5d165c	-	-	2026-11-25	xproof
-d8ce3f18-26fe-47e8-be8b-0d89d7de7038	cast	cast-resolve	agreed	-	X	scen	1	0	Acrobatic Cheerleader/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-d8ce3f18-26fe-47e8-be8b-0d89d7de7038	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Acrobatic Cheerleader/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d8ce3f18-26fe-47e8-be8b-0d89d7de7038	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:acrobatic-cheerleader:cast:s1,f:xs:XP:acrobatic-cheerleader:cast:s1	-	-	-	3aa6ded33acb	-	d45a89a20ee7	-	-	2026-11-25	xproof
+d8ce3f18-26fe-47e8-be8b-0d89d7de7038	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:acrobatic-cheerleader:f0t0:s1,f:xs:XP:acrobatic-cheerleader:f0t0:s1	-	-	-	3aa6ded33acb	-	d45a89a20ee7	-	-	2026-11-25	xproof
 d8cfa20a-343e-4661-9f5a-a8265f6917a8	cast	cast-resolve	agreed	-	X	scen	1	0	Stadium Headliner/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8cfa20a-343e-4661-9f5a-a8265f6917a8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stadium Headliner/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d8cfa20a-343e-4661-9f5a-a8265f6917a8	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stadium Headliner/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -189,8 +189,8 @@ d8e2efe0-33a4-4303-9e83-ac42ea5df8cb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 d8e2efe0-33a4-4303-9e83-ac42ea5df8cb	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 d8e2efe0-33a4-4303-9e83-ac42ea5df8cb	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d8e585c5-1de3-4558-8a2f-0d9fb07edad6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d8e585c5-1de3-4558-8a2f-0d9fb07edad6	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:storm-queen-of-wakanda:f0t0:s1,f:xs:XP:storm-queen-of-wakanda:f0t0:s1	-	-	-	8c0bd19283bb	-	3353da0e411d	-	-	2026-11-24	xproof
-d8e585c5-1de3-4558-8a2f-0d9fb07edad6	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d8e585c5-1de3-4558-8a2f-0d9fb07edad6	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:storm-queen-of-wakanda:f0t1:s1,f:xs:XP:storm-queen-of-wakanda:f0t1:s1	-	-	-	3aa6ded33acb	-	3353da0e411d	-	-	2026-11-25	xproof
+d8e585c5-1de3-4558-8a2f-0d9fb07edad6	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:storm-queen-of-wakanda:f0t1:s1,f:xs:XP:storm-queen-of-wakanda:f0t1:s1	-	-	-	3aa6ded33acb	-	3353da0e411d	-	-	2026-11-25	xproof
 d8e63065-9ebc-419d-b7af-5867fd81edff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d8eed5f7-8724-45c7-b6fc-dcfcc400f09a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wave-elemental:cast:s1,f:xs:XP:wave-elemental:cast:s1	-	-	-	8c0bd19283bb	-	20a82a04a1ff	-	-	2026-11-24	xproof
 d8eed5f7-8724-45c7-b6fc-dcfcc400f09a	f0/a0	Tap	agreed	-	FX	start	2	0	x:xs:XP:wave-elemental:f0a0:s1,f:xs:XP:wave-elemental:f0a0:s1	-	-	-	8c0bd19283bb	-	20a82a04a1ff	-	-	2026-11-24	xproof

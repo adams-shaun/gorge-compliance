@@ -120,9 +120,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ed55e9c-84ea-42a3-a32f-469da56b3eb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ed9bccf-c655-426e-8192-65beab830fcd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ed9bccf-c655-426e-8192-65beab830fcd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:owen-grady-raptor-trainer:cast:s1,f:xs:XP:owen-grady-raptor-trainer:cast:s1	-	-	-	8c0bd19283bb	-	ffc167bd7326	-	-	2026-11-24	xproof
+4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:owen-grady-raptor-trainer:f0t0:s1,f:xs:XP:owen-grady-raptor-trainer:f0t0:s1	-	-	-	3aa6ded33acb	-	ffc167bd7326	-	-	2026-11-25	xproof
 4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:owen-grady-raptor-trainer:f0a0:s1,f:xs:XP:owen-grady-raptor-trainer:f0a0:s1	-	-	-	8c0bd19283bb	-	ffc167bd7326	-	-	2026-11-24	xproof
-4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4eda40a2-39e5-4b0e-ba6d-8a6f89d6f55f	f0/t0	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:owen-grady-raptor-trainer:f0t0:s1,f:xs:XP:owen-grady-raptor-trainer:f0t0:s1	-	-	-	3aa6ded33acb	-	ffc167bd7326	-	-	2026-11-25	xproof
 4edbaac4-dcb3-40b4-abd7-ff2683bd366d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:champion-of-stray-souls:cast:s1,f:xs:XP:champion-of-stray-souls:cast:s1	-	-	-	d864b561c9cb	-	e2513d0ae5d9	-	-	2026-11-24	xproof
 4edbaac4-dcb3-40b4-abd7-ff2683bd366d	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:champion-of-stray-souls:f0a1:s1	-	-	-	23b491658465	-	e2513d0ae5d9	-	-	2026-11-25	xproof
 4edbaac4-dcb3-40b4-abd7-ff2683bd366d	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:champion-of-stray-souls:f0a1:s1,f:xs:XP:champion-of-stray-souls:f0a1:s1	-	-	-	3aa6ded33acb	-	e2513d0ae5d9	-	-	2026-11-25	xproof
@@ -133,9 +133,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4ef07e5a-3dc3-41dd-a3a9-e8812b4d40d3	cast	cast-resolve	agreed	-	X	scen	1	0	Trial of Agony/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4ef4b4f9-47cd-4862-8cbb-b6e624d6e6fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4ef4b4f9-47cd-4862-8cbb-b6e624d6e6fc	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-4ef583ab-e0a0-4e4b-bd65-af766038b1fd	cast	cast-resolve	agreed	-	X	scen	1	0	Ghost Vacuum/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4ef583ab-e0a0-4e4b-bd65-af766038b1fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghost-vacuum:cast:s1,f:xs:XP:ghost-vacuum:cast:s1	-	-	-	3aa6ded33acb	-	5455aa283eaf	-	-	2026-11-25	xproof
 4ef583ab-e0a0-4e4b-bd65-af766038b1fd	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Ghost Vacuum/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4ef583ab-e0a0-4e4b-bd65-af766038b1fd	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Ghost Vacuum/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4ef583ab-e0a0-4e4b-bd65-af766038b1fd	f0/a1	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:ghost-vacuum:f0a1:s1,f:xs:XP:ghost-vacuum:f0a1:s1	-	-	-	3aa6ded33acb	-	5455aa283eaf	-	-	2026-11-25	xproof
 4ef6ec4a-bbd2-487f-98c2-c0e78aebb550	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:claws-of-wirewood:cast:s1,f:xs:XP:claws-of-wirewood:cast:s1	-	-	-	8c0bd19283bb	-	8b1d1e2c9175	-	-	2026-11-24	xproof
 4ef6ec4a-bbd2-487f-98c2-c0e78aebb550	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4efa1654-c822-4477-ad24-f379ed7ecb11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:emissary-of-despair:cast:s1,f:xs:XP:emissary-of-despair:cast:s1	-	-	-	25696bf19d5b	-	a9542a05e04b	-	-	2026-11-24	xproof

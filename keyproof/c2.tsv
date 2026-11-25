@@ -67,7 +67,7 @@ c2398875-0912-4210-90bd-b2d568a580cf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hob
 c2398875-0912-4210-90bd-b2d568a580cf	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hobble:f0t0:s1,f:xs:XP:hobble:f0t0:s1	-	-	-	3aa6ded33acb	-	c5140e9969c2	-	-	2026-11-25	xproof
 c23e5b80-08d2-4e24-9908-fe2aa4f30f6f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c23e5b80-08d2-4e24-9908-fe2aa4f30f6f	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c23f2546-bf9e-4390-b6f7-c616920e04ca	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c23f2546-bf9e-4390-b6f7-c616920e04ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:creeping-crystal-coating:cast:s1,f:xs:XP:creeping-crystal-coating:cast:s1	-	-	-	3aa6ded33acb	-	3366e1b90b95	-	-	2026-11-25	xproof
 c23f260b-b7d3-4c25-a08a-dabdb99e1791	cast	cast-resolve	agreed	-	X	scen	1	0	United Front/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c2459c41-82b4-4ca2-b634-11b55ddb63d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:electropotence:cast:s1,f:xs:XP:electropotence:cast:s1	-	-	-	8a1b1a193ec0	-	d8f15985f94a	-	-	2026-11-24	xproof
 c2459c41-82b4-4ca2-b634-11b55ddb63d9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -126,8 +126,8 @@ c2898bbd-82a4-4d26-b6ee-169b0ebe71b4	cast	cast-resolve	agreed	-	X	scen	1	0	Into 
 c28a7641-49e3-43b1-a366-8d6e9c8dab9c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c28a7641-49e3-43b1-a366-8d6e9c8dab9c	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 c28d4caf-9b7c-40b1-9cbe-275ca9dae06a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c28fcb1c-3234-4a2a-b43c-737b81219dc8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hag-of-twisted-visions:cast:s1	-	-	-	23b491658465	-	79e05bae2e18	-	-	2026-11-24	xproof
-c28fcb1c-3234-4a2a-b43c-737b81219dc8	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c28fcb1c-3234-4a2a-b43c-737b81219dc8	cast	cast	agreed	-	F	start	2	0	f:xs:XP:hag-of-twisted-visions:f0t0:s1	-	-	-	3aa6ded33acb	-	79e05bae2e18	-	-	2026-11-25	xproof
+c28fcb1c-3234-4a2a-b43c-737b81219dc8	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:hag-of-twisted-visions:f0t0:s1	-	-	-	3aa6ded33acb	-	79e05bae2e18	-	-	2026-11-25	xproof
 c2905e12-8af1-46f4-b888-be272a9b9748	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c293f1c0-93de-4a73-aaf6-4e9f01e557ec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:innocent-bystander:cast:s1,f:xs:XP:innocent-bystander:cast:s1	-	-	-	8c0bd19283bb	-	ce0f79caafd8	-	-	2026-11-24	xproof
 c293f1c0-93de-4a73-aaf6-4e9f01e557ec	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Innocent Bystander/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -155,9 +155,9 @@ c2b659ef-68f6-452c-94b5-2872f4e7b069	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ear
 c2b659ef-68f6-452c-94b5-2872f4e7b069	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:earth-origin-yak:f0t0:s1,f:xs:XP:earth-origin-yak:f0t0:s1	-	-	-	8c0bd19283bb	-	174fdae7aa15	-	-	2026-11-24	xproof
 c2ba1c3b-08c7-4835-81f4-2f98843fb7b8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c2ba1c3b-08c7-4835-81f4-2f98843fb7b8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c2bd0c24-3973-48bc-a591-3779e3640c5d	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c2bd0c24-3973-48bc-a591-3779e3640c5d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-c2bd0c24-3973-48bc-a591-3779e3640c5d	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+c2bd0c24-3973-48bc-a591-3779e3640c5d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:battle-angels-of-tyr:cast:s1,f:xs:XP:battle-angels-of-tyr:cast:s1	-	-	-	3aa6ded33acb	-	2259665a6e1f	-	-	2026-11-25	xproof
+c2bd0c24-3973-48bc-a591-3779e3640c5d	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:battle-angels-of-tyr:f0t1:s1,f:xs:XP:battle-angels-of-tyr:f0t1:s1	-	-	-	3aa6ded33acb	-	2259665a6e1f	-	-	2026-11-25	xproof
+c2bd0c24-3973-48bc-a591-3779e3640c5d	f0/t1	Attacks/Myriad	agreed	-	FX	start	2	0	x:xs:XP:battle-angels-of-tyr:f0t1:s1,f:xs:XP:battle-angels-of-tyr:f0t1:s1	-	-	-	3aa6ded33acb	-	2259665a6e1f	-	-	2026-11-25	xproof
 c2bfb230-6949-4d5e-8cac-9d7dafdc5e9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c2c09308-988b-4d71-83c8-e2a2dc19a0d9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tivadar-of-thorn:f0t0:s1,f:xs:XP:tivadar-of-thorn:f0t0:s1	-	-	-	9ee19e8250ce	-	aeb1da49c386	-	-	2026-11-24	xproof
 c2c09308-988b-4d71-83c8-e2a2dc19a0d9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tivadar-of-thorn:f0t0:s1,f:xs:XP:tivadar-of-thorn:f0t0:s1	-	-	-	9ee19e8250ce	-	aeb1da49c386	-	-	2026-11-24	xproof
@@ -190,7 +190,7 @@ c2cfbc1a-ae73-409c-b73a-5c8625365905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c2cfbc1a-ae73-409c-b73a-5c8625365905	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c2db05e0-879b-43e4-9009-37a95fd848dc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-boilerbilges:f0t0:s2,f:xs:XP:overlord-of-the-boilerbilges:f0t0:s2	-	-	-	e07cf3a05ba5	-	cb5dae5fe2a4	-	-	2026-11-24	xproof
 c2db05e0-879b-43e4-9009-37a95fd848dc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:overlord-of-the-boilerbilges:f0t0:s2,f:xs:XP:overlord-of-the-boilerbilges:f0t0:s2	-	-	-	e07cf3a05ba5	-	cb5dae5fe2a4	-	-	2026-11-24	xproof
-c2db05e0-879b-43e4-9009-37a95fd848dc	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Overlord of the Boilerbilges/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+c2db05e0-879b-43e4-9009-37a95fd848dc	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:overlord-of-the-boilerbilges:f0t1:s1,f:xs:XP:overlord-of-the-boilerbilges:f0t1:s1	-	-	-	3aa6ded33acb	-	cb5dae5fe2a4	-	-	2026-11-25	xproof
 c2df54f1-a2db-4de3-bc96-5c07f4594752	cast	cast-resolve	agreed	-	X	scen	1	0	The Cave of Two Lovers/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c2e2f21a-0338-44d7-96a5-5a277f0ec419	cast	cast	agreed	-	X	start	1	0	x:xs:XP:moseo-vein-s-new-dean:f0t0:s2	-	-	-	5437c1394672	-	2efce13dc079	-	-	2026-11-24	xproof
 c2e2f21a-0338-44d7-96a5-5a277f0ec419	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Moseo, Vein's New Dean/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

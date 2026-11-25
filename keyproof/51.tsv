@@ -51,7 +51,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 513a2fca-fea4-434e-9b25-b0c0d7f322b2	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sun Warriors/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 513ad32a-2887-4825-adad-86a87cf1d2cb	cast	cast	owed	harness	-	start	0	0	-	-	-	-	5f2128bf97e4	-	82ab05a343ac	-	-	2026-11-24	xproof
 513dbf8a-a250-4fd9-a5ae-2fb9c4810ecc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:conductive-machete:f0t0:s2,f:xs:XP:conductive-machete:f0t0:s2	-	-	-	e07cf3a05ba5	-	6c380dd03895	-	-	2026-11-24	xproof
-513dbf8a-a250-4fd9-a5ae-2fb9c4810ecc	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Conductive Machete/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+513dbf8a-a250-4fd9-a5ae-2fb9c4810ecc	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:conductive-machete:f0a0:s1,f:xs:XP:conductive-machete:f0a0:s1	-	-	-	3aa6ded33acb	-	6c380dd03895	-	-	2026-11-25	xproof
 513dbf8a-a250-4fd9-a5ae-2fb9c4810ecc	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:conductive-machete:f0t0:s2,f:xs:XP:conductive-machete:f0t0:s2	-	-	-	e07cf3a05ba5	-	6c380dd03895	-	-	2026-11-24	xproof
 513dbf8a-a250-4fd9-a5ae-2fb9c4810ecc	static#0.0	static#0.0	agreed	-	X	scen	1	0	Conductive Machete/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 513fd896-ab78-44fb-b136-f7c93288dc63	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5140cd2f-af30-4405-b5e4-996ef6349f59	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5146ae31-9578-46e3-be78-eb90e4ba48cd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undercity-scavenger:f0t0:s1,f:xs:XP:undercity-scavenger:f0t0:s1	-	-	-	d864b561c9cb	-	c7d804d34f22	-	-	2026-11-24	xproof
 5146ae31-9578-46e3-be78-eb90e4ba48cd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:undercity-scavenger:f0t0:s1,f:xs:XP:undercity-scavenger:f0t0:s1	-	-	-	d864b561c9cb	-	c7d804d34f22	-	-	2026-11-24	xproof
-5146b291-1170-481f-a4b9-709dd5c4b09c	cast	cast-resolve	agreed	-	X	scen	1	0	Overgrown Zealot/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+5146b291-1170-481f-a4b9-709dd5c4b09c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:overgrown-zealot:cast:s1,f:xs:XP:overgrown-zealot:cast:s1	-	-	-	3aa6ded33acb	-	89742d8b925a	-	-	2026-11-25	xproof
 5146b291-1170-481f-a4b9-709dd5c4b09c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Overgrown Zealot/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5146b291-1170-481f-a4b9-709dd5c4b09c	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Overgrown Zealot/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5146ba3f-2c5f-4a86-95d7-a34ce1e842b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -181,9 +181,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 51e76d8f-95c6-428f-9030-3f8718139f93	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:bearer-of-memory:f0a0:s1,f:xs:XP:bearer-of-memory:f0a0:s1	-	-	-	d864b561c9cb	-	51d674201c24	-	-	2026-11-24	xproof
 51e9af95-745b-45b9-b870-7f768578fa4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 51e9af95-745b-45b9-b870-7f768578fa4f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-51f091a7-9b0b-4362-8e9c-c174752f369b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:white-plume-adventurer:cast:s1,f:xs:XP:white-plume-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	1ef17f95300f	-	-	2026-11-24	xproof
-51f091a7-9b0b-4362-8e9c-c174752f369b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:white-plume-adventurer:cast:s1,f:xs:XP:white-plume-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	1ef17f95300f	-	-	2026-11-24	xproof
-51f091a7-9b0b-4362-8e9c-c174752f369b	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+51f091a7-9b0b-4362-8e9c-c174752f369b	cast	cast	agreed	-	F	start	2	0	f:xs:XP:white-plume-adventurer:f0t1:s1	-	-	-	3aa6ded33acb	-	1ef17f95300f	-	-	2026-11-25	xproof
+51f091a7-9b0b-4362-8e9c-c174752f369b	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:white-plume-adventurer:f0t1:s1	-	-	-	3aa6ded33acb	-	1ef17f95300f	-	-	2026-11-25	xproof
+51f091a7-9b0b-4362-8e9c-c174752f369b	f0/t1	Phase	agreed	-	F	start	2	0	f:xs:XP:white-plume-adventurer:f0t1:s1	-	-	-	3aa6ded33acb	-	1ef17f95300f	-	-	2026-11-25	xproof
 51f17fe1-1cf7-4362-b9a2-8ec225d41b03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ana-sanctuary:f0t0:s1,f:xs:XP:ana-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	9c10c1b1dc77	-	-	2026-11-25	xproof
 51f17fe1-1cf7-4362-b9a2-8ec225d41b03	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ana-sanctuary:f0t0:s1,f:xs:XP:ana-sanctuary:f0t0:s1	-	-	-	3aa6ded33acb	-	9c10c1b1dc77	-	-	2026-11-25	xproof
 51f1ceb9-2305-4a4e-b422-7dd7f8deef98	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

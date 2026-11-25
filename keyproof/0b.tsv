@@ -72,9 +72,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b5d49ce-7e02-4de6-8a65-bfc88ac0cf72	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	07dccfca2016	-	-	2026-11-24	xproof
 0b5f7a1b-fbb9-4659-8fcb-7822dc0263bc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b5f7a1b-fbb9-4659-8fcb-7822dc0263bc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-0b620775-70a5-4423-8453-e403a5b79554	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kamber-the-plunderer:f0t1:s1,f:xs:XP:kamber-the-plunderer:f0t1:s1	-	-	-	23b491658465	-	e3769a375b33	-	-	2026-11-24	xproof
+0b620775-70a5-4423-8453-e403a5b79554	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kamber-the-plunderer:f0t1:s1,f:xs:XP:kamber-the-plunderer:f0t1:s1	-	-	-	3aa6ded33acb	-	e3769a375b33	-	-	2026-11-25	xproof
 0b620775-70a5-4423-8453-e403a5b79554	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-0b620775-70a5-4423-8453-e403a5b79554	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+0b620775-70a5-4423-8453-e403a5b79554	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:kamber-the-plunderer:f0t1:s1,f:xs:XP:kamber-the-plunderer:f0t1:s1	-	-	-	3aa6ded33acb	-	e3769a375b33	-	-	2026-11-25	xproof
 0b633017-bfdf-47cd-a60f-c93816b47e9c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arcane-teachings:cast:s1,f:xs:XP:arcane-teachings:cast:s1	-	-	-	ea3140b6974b	-	8cc49fe765ff	-	-	2026-11-24	xproof
 0b65050d-a9cd-4b6c-9114-af89bfa6682f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:simic-cluestone:cast:s1,f:xs:XP:simic-cluestone:cast:s1	-	-	-	d864b561c9cb	-	12cd5399a394	-	-	2026-11-24	xproof
 0b65050d-a9cd-4b6c-9114-af89bfa6682f	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:simic-cluestone:cast:s1,f:xs:XP:simic-cluestone:cast:s1	-	-	-	d864b561c9cb	-	12cd5399a394	-	-	2026-11-24	xproof
@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0b768f8f-2213-45b9-bced-8fb1bbb441c3	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:tibalt-rakish-instigator:cast:s1,f:xs:XP:tibalt-rakish-instigator:cast:s1	-	-	-	d864b561c9cb	-	0fc858b117b0	-	-	2026-11-24	xproof
 0b76bb3b-1ada-4c78-bd13-3464371d4fa0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0b786547-67ed-49fa-9981-35c4c2175f62	cast	cast-resolve	agreed	-	X	scen	1	0	Ember Island Production/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0b7e950a-89e1-4ec4-94af-5af2f1252b12	cast	cast-resolve	agreed	-	X	scen	1	0	Patched Plaything/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+0b7e950a-89e1-4ec4-94af-5af2f1252b12	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:patched-plaything:cast:s1,f:xs:XP:patched-plaything:cast:s1	-	-	-	3aa6ded33acb	-	9f565d3dbea6	-	-	2026-11-25	xproof
 0b7e950a-89e1-4ec4-94af-5af2f1252b12	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Patched Plaything/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0b7e950a-89e1-4ec4-94af-5af2f1252b12	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Patched Plaything/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0b7fabe8-bc44-47b1-93bb-b895a1bd0aa9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

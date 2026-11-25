@@ -60,10 +60,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52401cb4-1bce-4191-9220-0d93ea4108b8	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Stark Industries/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 52401cb4-1bce-4191-9220-0d93ea4108b8	land	play-land	agreed	-	FX	scen	2	0	Stark Industries/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 524249cd-68d9-472a-89cd-5872641ca6de	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	2ffa45b396e5	-	-	2026-11-24	xproof
-52478437-bb6c-48bb-855d-54a8a4d42d18	cast	cast-resolve	agreed	-	X	scen	1	0	Fear of Surveillance/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-52478437-bb6c-48bb-855d-54a8a4d42d18	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fear of Surveillance/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-52478437-bb6c-48bb-855d-54a8a4d42d18	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fear of Surveillance/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-52478437-bb6c-48bb-855d-54a8a4d42d18	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fear of Surveillance/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+52478437-bb6c-48bb-855d-54a8a4d42d18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fear-of-surveillance:cast:s1,f:xs:XP:fear-of-surveillance:cast:s1	-	-	-	3aa6ded33acb	-	07b7addd8e75	-	-	2026-11-25	xproof
+52478437-bb6c-48bb-855d-54a8a4d42d18	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:fear-of-surveillance:combat0.attack:s1,f:xs:XP:fear-of-surveillance:combat0.attack:s1	-	-	-	3aa6ded33acb	-	07b7addd8e75	-	-	2026-11-25	xproof
+52478437-bb6c-48bb-855d-54a8a4d42d18	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:fear-of-surveillance:combat0.block:s1,f:xs:XP:fear-of-surveillance:combat0.block:s1	-	-	-	3aa6ded33acb	-	07b7addd8e75	-	-	2026-11-25	xproof
+52478437-bb6c-48bb-855d-54a8a4d42d18	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:fear-of-surveillance:combat0.attack:s1,f:xs:XP:fear-of-surveillance:combat0.attack:s1	-	-	-	3aa6ded33acb	-	07b7addd8e75	-	-	2026-11-25	xproof
 5249dd0d-3bda-452e-ac6e-774c0ebc2e41	cast	cast-resolve	agreed	-	X	scen	1	0	Haste Magic/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5249df56-7571-46c0-882e-cf88e452fb4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5249df56-7571-46c0-882e-cf88e452fb4d	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -85,9 +85,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5261ba70-b641-461d-9d9f-fce17764ad67	f0/t1	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 52630eaf-995e-4d08-be99-888a38b598b2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fireblade-artist:f0t0:s1,f:xs:XP:fireblade-artist:f0t0:s1	-	-	-	3aa6ded33acb	-	15622d6909dd	-	-	2026-11-25	xproof
 52630eaf-995e-4d08-be99-888a38b598b2	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:fireblade-artist:f0t0:s1,f:xs:XP:fireblade-artist:f0t0:s1	-	-	-	3aa6ded33acb	-	15622d6909dd	-	-	2026-11-25	xproof
-52680471-a407-418b-9e74-c32308322772	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gallifrey-stands:f0t0:s1,f:xs:XP:gallifrey-stands:f0t0:s1	-	-	-	8c0bd19283bb	-	e67dafc8d37f	-	-	2026-11-24	xproof
-52680471-a407-418b-9e74-c32308322772	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gallifrey-stands:f0t0:s1,f:xs:XP:gallifrey-stands:f0t0:s1	-	-	-	8c0bd19283bb	-	e67dafc8d37f	-	-	2026-11-24	xproof
-52680471-a407-418b-9e74-c32308322772	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52680471-a407-418b-9e74-c32308322772	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gallifrey-stands:f0t1:s1,f:xs:XP:gallifrey-stands:f0t1:s1	-	-	-	3aa6ded33acb	-	e67dafc8d37f	-	-	2026-11-25	xproof
+52680471-a407-418b-9e74-c32308322772	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gallifrey-stands:f0t1:s1,f:xs:XP:gallifrey-stands:f0t1:s1	-	-	-	3aa6ded33acb	-	e67dafc8d37f	-	-	2026-11-25	xproof
+52680471-a407-418b-9e74-c32308322772	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:gallifrey-stands:f0t1:s1,f:xs:XP:gallifrey-stands:f0t1:s1	-	-	-	3aa6ded33acb	-	e67dafc8d37f	-	-	2026-11-25	xproof
 5268518e-7631-4149-8eea-c2475b9b14df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:savage-twister:cast:s1,f:xs:XP:savage-twister:cast:s1	-	-	-	25696bf19d5b	-	fbefe687dcef	-	-	2026-11-24	xproof
 5268f772-5b42-4b5b-9e57-c32c662a42f3	cast	cast-resolve	agreed	-	FX	scen	2	0	Warden of the Inner Sky/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5268f772-5b42-4b5b-9e57-c32c662a42f3	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Warden of the Inner Sky/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -149,9 +149,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 52a768eb-16eb-4643-b8be-7a4b5b32f28b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52a98d1c-602b-4893-870c-190317294181	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52a98d1c-602b-4893-870c-190317294181	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-52aa5a79-db0e-4eaa-b2df-e41674c47794	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:triarch-praetorian:f0t0:s1,f:xs:XP:triarch-praetorian:f0t0:s1	-	-	-	8c0bd19283bb	-	89a3b15c8029	-	-	2026-11-24	xproof
-52aa5a79-db0e-4eaa-b2df-e41674c47794	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-52aa5a79-db0e-4eaa-b2df-e41674c47794	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+52aa5a79-db0e-4eaa-b2df-e41674c47794	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:triarch-praetorian:f0t0:s1,f:xs:XP:triarch-praetorian:f0t0:s1	-	-	-	3aa6ded33acb	-	89a3b15c8029	-	-	2026-11-25	xproof
+52aa5a79-db0e-4eaa-b2df-e41674c47794	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:triarch-praetorian:f0a0:s1,f:xs:XP:triarch-praetorian:f0a0:s1	-	-	-	3aa6ded33acb	-	89a3b15c8029	-	-	2026-11-25	xproof
+52aa5a79-db0e-4eaa-b2df-e41674c47794	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:triarch-praetorian:f0a0:s1,f:xs:XP:triarch-praetorian:f0a0:s1	-	-	-	3aa6ded33acb	-	89a3b15c8029	-	-	2026-11-25	xproof
 52ad1a31-3ad8-4ead-ba77-675cad7e4a14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52bd4331-67b6-4eb8-9566-e00359889fc6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 52bd4331-67b6-4eb8-9566-e00359889fc6	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

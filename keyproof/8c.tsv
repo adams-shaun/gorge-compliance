@@ -53,10 +53,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c42883d-8b70-4691-a1e7-4659e7954b88	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c4545f8-10b6-4a62-9bce-8c9ffa8b8471	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c4545f8-10b6-4a62-9bce-8c9ffa8b8471	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
-8c45bf9d-a017-43bf-9e32-67810a8a217b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:talon-gates-of-madara:f0a1:s2,f:xs:XP:talon-gates-of-madara:f0a1:s2	-	-	-	8c0bd19283bb	-	86b7cf485cbb	-	-	2026-11-24	xproof
+8c45bf9d-a017-43bf-9e32-67810a8a217b	f0/a0	Mana	agreed	-	F	start	1	0	f:xs:XP:talon-gates-of-madara:f0a2:s1	-	-	-	3aa6ded33acb	-	86b7cf485cbb	-	-	2026-11-25	xproof
 8c45bf9d-a017-43bf-9e32-67810a8a217b	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c45bf9d-a017-43bf-9e32-67810a8a217b	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8c45bf9d-a017-43bf-9e32-67810a8a217b	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:talon-gates-of-madara:f0t0:s1	-	-	-	8c0bd19283bb	-	86b7cf485cbb	-	-	2026-11-24	xproof
+8c45bf9d-a017-43bf-9e32-67810a8a217b	f0/a2	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:talon-gates-of-madara:f0a2:s1	-	-	-	3aa6ded33acb	-	86b7cf485cbb	-	-	2026-11-25	xproof
+8c45bf9d-a017-43bf-9e32-67810a8a217b	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:talon-gates-of-madara:f0a2:s1	-	-	-	3aa6ded33acb	-	86b7cf485cbb	-	-	2026-11-25	xproof
 8c45bf9d-a017-43bf-9e32-67810a8a217b	land	land	agreed	-	F	start	2	0	f:xs:XP:talon-gates-of-madara:f0t0:s1	-	-	-	8c0bd19283bb	-	86b7cf485cbb	-	-	2026-11-24	xproof
 8c4aba38-7fbd-463e-8454-21037090c71e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:furyborn-hellkite:cast:s1,f:xs:XP:furyborn-hellkite:cast:s1	-	-	-	d864b561c9cb	-	411c2c8ccf31	-	-	2026-11-24	xproof
 8c4b1ab2-01d9-486a-a9db-ac7c72500d30	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8cbc0fa4-4f62-47e1-90dc-c21d2682a493	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cbc0fa4-4f62-47e1-90dc-c21d2682a493	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cbc0fa4-4f62-47e1-90dc-c21d2682a493	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8cbe71d3-b77b-49a7-9c51-ed308011b8b0	cast	cast-resolve	agreed	-	X	scen	1	0	Paranormal Analyst/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+8cbe71d3-b77b-49a7-9c51-ed308011b8b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:paranormal-analyst:cast:s1,f:xs:XP:paranormal-analyst:cast:s1	-	-	-	3aa6ded33acb	-	e222745ca35b	-	-	2026-11-25	xproof
 8cbe71d3-b77b-49a7-9c51-ed308011b8b0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Paranormal Analyst/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8cbf0173-2349-4205-b720-378643c347a4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cc7e418-cc5e-4aef-9757-874223fccd74	cast	cast-resolve	agreed	-	X	scen	1	0	Phoenix Down/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

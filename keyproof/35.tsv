@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 352b64d2-2ae5-44ee-a64f-94932ef545d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 353db389-b829-4e66-85d5-6018bc87c3e0	cast	cast-resolve	agreed	-	X	scen	1	0	Mirrormind Crown/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 353db389-b829-4e66-85d5-6018bc87c3e0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mirrormind Crown/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-353dd446-2ea6-41c9-a10f-5a03e4de19b4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+353dd446-2ea6-41c9-a10f-5a03e4de19b4	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 35426427-4268-4c8f-9fe1-270f2ce43d97	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35426427-4268-4c8f-9fe1-270f2ce43d97	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 35453c9e-e1ae-4fe9-926d-75724deb0555	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -90,14 +90,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35754a21-9fba-4370-a254-292918a777ba	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 35754a21-9fba-4370-a254-292918a777ba	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 35754a21-9fba-4370-a254-292918a777ba	f1/a2	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-3577c47e-76d3-4659-b922-31c4b74be3a0	cast	cast-resolve	agreed	-	X	scen	1	0	Enduring Vitality/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3577c47e-76d3-4659-b922-31c4b74be3a0	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Enduring Vitality/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3577c47e-76d3-4659-b922-31c4b74be3a0	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Enduring Vitality/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3577c47e-76d3-4659-b922-31c4b74be3a0	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Enduring Vitality/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3577c47e-76d3-4659-b922-31c4b74be3a0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enduring-vitality:cast:s1,f:xs:XP:enduring-vitality:cast:s1	-	-	-	3aa6ded33acb	-	9de47fe2c0d5	-	-	2026-11-25	xproof
+3577c47e-76d3-4659-b922-31c4b74be3a0	combat#0.attack	combat.attack	agreed	-	FX	start	1	0	x:xs:XP:enduring-vitality:combat0.attack:s2,f:xs:XP:enduring-vitality:combat0.attack:s2	-	-	-	3aa6ded33acb	-	9de47fe2c0d5	-	-	2026-11-25	xproof
+3577c47e-76d3-4659-b922-31c4b74be3a0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:enduring-vitality:combat0.block:s1,f:xs:XP:enduring-vitality:combat0.block:s1	-	-	-	3aa6ded33acb	-	9de47fe2c0d5	-	-	2026-11-25	xproof
+3577c47e-76d3-4659-b922-31c4b74be3a0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:enduring-vitality:f0t0:s1,f:xs:XP:enduring-vitality:f0t0:s1	-	-	-	3aa6ded33acb	-	9de47fe2c0d5	-	-	2026-11-25	xproof
 3577c47e-76d3-4659-b922-31c4b74be3a0	static#0.0	static#0.0	agreed	-	X	scen	1	0	Enduring Vitality/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3579e40c-6ec5-4927-8252-5a188db400ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rhoda-geist-avenger:f0t1:s1,f:xs:XP:rhoda-geist-avenger:f0t1:s1	-	-	-	23b491658465	-	5db6d560fb94	-	-	2026-11-24	xproof
+3579e40c-6ec5-4927-8252-5a188db400ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rhoda-geist-avenger:f0t1:s1,f:xs:XP:rhoda-geist-avenger:f0t1:s1	-	-	-	3aa6ded33acb	-	5db6d560fb94	-	-	2026-11-25	xproof
 3579e40c-6ec5-4927-8252-5a188db400ab	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-3579e40c-6ec5-4927-8252-5a188db400ab	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3579e40c-6ec5-4927-8252-5a188db400ab	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:rhoda-geist-avenger:f0t1:s1,f:xs:XP:rhoda-geist-avenger:f0t1:s1	-	-	-	3aa6ded33acb	-	5db6d560fb94	-	-	2026-11-25	xproof
 357ed28b-899f-404b-94ff-6fb2ef81d87b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:alchemist-s-refuge:f0a0:s2,f:xs:XP:alchemist-s-refuge:f0a0:s2	-	-	-	d864b561c9cb	-	f73ba1d13442	-	-	2026-11-24	xproof
 357ed28b-899f-404b-94ff-6fb2ef81d87b	f0/a1	Effect	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-refuge:f0a1:s1,f:xs:XP:alchemist-s-refuge:f0a1:s1	-	-	-	d864b561c9cb	-	f73ba1d13442	-	-	2026-11-24	xproof
 357ed28b-899f-404b-94ff-6fb2ef81d87b	land	land	agreed	-	FX	start	2	0	x:xs:XP:alchemist-s-refuge:land:s1,f:xs:XP:alchemist-s-refuge:land:s1	-	-	-	d864b561c9cb	-	f73ba1d13442	-	-	2026-11-24	xproof
@@ -124,8 +124,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35922a30-6b84-44dd-a2f0-306554a1ae90	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 359332d6-c42a-4dfa-b148-3296d7e74661	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-falcon-sam-wilson:f0t0:s1,f:xs:XP:the-falcon-sam-wilson:f0t0:s1	-	-	-	8c0bd19283bb	-	aff79a3a0a0e	-	-	2026-11-24	xproof
 359332d6-c42a-4dfa-b148-3296d7e74661	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-falcon-sam-wilson:f0t0:s1,f:xs:XP:the-falcon-sam-wilson:f0t0:s1	-	-	-	8c0bd19283bb	-	aff79a3a0a0e	-	-	2026-11-24	xproof
-3593754d-df62-4ee0-80df-0c3fb057816a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	e1bf0853e016	-	-	2026-11-24	xproof
-3593754d-df62-4ee0-80df-0c3fb057816a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3593754d-df62-4ee0-80df-0c3fb057816a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e1bf0853e016	-	-	2026-11-25	xproof
+3593754d-df62-4ee0-80df-0c3fb057816a	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e1bf0853e016	-	-	2026-11-25	xproof
 359a570e-92a7-4954-9a05-89cc75df57e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 359a570e-92a7-4954-9a05-89cc75df57e7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 359c6272-fcb5-4d3f-a4b5-4209e354a044	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,8 +169,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35d458fb-dfdb-41e4-92e3-f0fd392e1c69	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:masterwork-of-ingenuity:cast:s1,f:xs:XP:masterwork-of-ingenuity:cast:s1	-	-	-	8c0bd19283bb	-	efccc69b6ad9	-	-	2026-11-24	xproof
 35d4e500-28c8-44c9-990f-3aa25ed5dd14	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35d4e500-28c8-44c9-990f-3aa25ed5dd14	f0/a0	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-35daea08-655d-4588-8430-b078769d22b6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35daea08-655d-4588-8430-b078769d22b6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+35daea08-655d-4588-8430-b078769d22b6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hulk-strongest-there-is:f0t0:s1,f:xs:XP:hulk-strongest-there-is:f0t0:s1	-	-	-	3aa6ded33acb	-	f1ac5e845758	-	-	2026-11-25	xproof
+35daea08-655d-4588-8430-b078769d22b6	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:hulk-strongest-there-is:f0t0:s1,f:xs:XP:hulk-strongest-there-is:f0t0:s1	-	-	-	3aa6ded33acb	-	f1ac5e845758	-	-	2026-11-25	xproof
 35dead9a-20ab-45e9-be3e-36857c928ab9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35df179a-c0e6-4ac1-a861-e6e9b4d1614d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:acclaimed-contender:f0t0:s1,f:xs:XP:acclaimed-contender:f0t0:s1	-	-	-	ae86f6029288	-	78ec3c461953	-	-	2026-11-24	xproof
 35df179a-c0e6-4ac1-a861-e6e9b4d1614d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:acclaimed-contender:f0t0:s1,f:xs:XP:acclaimed-contender:f0t0:s1	-	-	-	ae86f6029288	-	78ec3c461953	-	-	2026-11-24	xproof

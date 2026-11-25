@@ -63,9 +63,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:gearbane-orangutan:combat0.attack:s1,f:xs:XP:gearbane-orangutan:combat0.attack:s1	-	-	-	3aa6ded33acb	-	8beaefc89cfb	-	-	2026-11-25	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:gearbane-orangutan:combat0.block:s1,f:xs:XP:gearbane-orangutan:combat0.block:s1	-	-	-	3aa6ded33acb	-	8beaefc89cfb	-	-	2026-11-25	xproof
 1f3e7420-86aa-4847-bc2d-21f6bae470c8	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1f3f6336-6f99-4181-be3c-1814f7b8ef36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:court-of-garenbrig:f0t0:s1,f:xs:XP:court-of-garenbrig:f0t0:s1	-	-	-	8c0bd19283bb	-	8f782e884184	-	-	2026-11-24	xproof
-1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:court-of-garenbrig:f0t0:s1,f:xs:XP:court-of-garenbrig:f0t0:s1	-	-	-	8c0bd19283bb	-	8f782e884184	-	-	2026-11-24	xproof
-1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f3f6336-6f99-4181-be3c-1814f7b8ef36	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:court-of-garenbrig:f0t1:s1,f:xs:XP:court-of-garenbrig:f0t1:s1	-	-	-	3aa6ded33acb	-	8f782e884184	-	-	2026-11-25	xproof
+1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:court-of-garenbrig:f0t1:s1,f:xs:XP:court-of-garenbrig:f0t1:s1	-	-	-	3aa6ded33acb	-	8f782e884184	-	-	2026-11-25	xproof
+1f3f6336-6f99-4181-be3c-1814f7b8ef36	f0/t1	Phase	agreed	-	FX	start	1	0	x:xs:XP:court-of-garenbrig:f0t1:s1,f:xs:XP:court-of-garenbrig:f0t1:s1	-	-	-	3aa6ded33acb	-	8f782e884184	-	-	2026-11-25	xproof
 1f3fb367-60b5-4b36-9604-3064afdac0d9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1f3fb367-60b5-4b36-9604-3064afdac0d9	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 1f438b8f-fe23-4f3b-ab2e-f6c33676c462	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:opposition-agent:cast:s1,f:xs:XP:opposition-agent:cast:s1	-	-	-	8c0bd19283bb	-	d99b9635dd10	-	-	2026-11-24	xproof
@@ -111,8 +111,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1f789fcf-3df6-45a6-a732-9f43e33718d6	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:hunted-troll:f0t0:s1,f:xs:XP:hunted-troll:f0t0:s1	-	-	-	64a08ba7d913	-	bdb1b5e74feb	-	-	2026-11-24	xproof
 1f79de2a-6cef-4285-b008-5b5527c406ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bioessence-hydra:cast:s1,f:xs:XP:bioessence-hydra:cast:s1	-	-	-	d864b561c9cb	-	e055fc9e15e1	-	-	2026-11-24	xproof
 1f79de2a-6cef-4285-b008-5b5527c406ab	f0/t0	NULL	owed	refused:no-generator:trigger:CounterAddedAll	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1f7e85cf-afee-4041-9436-1fb69b4ec292	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:noise-marine:f0t0:s1,f:xs:XP:noise-marine:f0t0:s1	-	-	-	8c0bd19283bb	-	b881bc83b9a5	-	-	2026-11-24	xproof
-1f7e85cf-afee-4041-9436-1fb69b4ec292	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1f7e85cf-afee-4041-9436-1fb69b4ec292	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:noise-marine:f0t0:s1,f:xs:XP:noise-marine:f0t0:s1	-	-	-	3aa6ded33acb	-	b881bc83b9a5	-	-	2026-11-25	xproof
+1f7e85cf-afee-4041-9436-1fb69b4ec292	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noise-marine:f0t0:s1,f:xs:XP:noise-marine:f0t0:s1	-	-	-	3aa6ded33acb	-	b881bc83b9a5	-	-	2026-11-25	xproof
 1f7f7765-aeb9-4e47-a6b9-ce823bb29e33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:transcendent-message:cast:s1,f:xs:XP:transcendent-message:cast:s1	-	-	-	d864b561c9cb	-	773e996d14fe	-	-	2026-11-24	xproof
 1f82e4b9-e67f-4f34-ac4c-57b0b300ee42	cast	cast	agreed	-	F	start	1	0	f:xs:XP:mardu-siegebreaker:f0t0:s2	-	-	-	5437c1394672	-	f50679058a1b	-	-	2026-11-24	xproof
 1f82e4b9-e67f-4f34-ac4c-57b0b300ee42	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Mardu Siegebreaker/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

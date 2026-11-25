@@ -119,8 +119,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 899d58dc-60b2-4013-9f91-c1888c585d66	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:niv-mizzet-dracogenius:f0a0:s1,f:xs:XP:niv-mizzet-dracogenius:f0a0:s1	-	-	-	d864b561c9cb	-	d1a7615017d1	-	-	2026-11-24	xproof
 899d58dc-60b2-4013-9f91-c1888c585d66	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:niv-mizzet-dracogenius:f0a0:s1,f:xs:XP:niv-mizzet-dracogenius:f0a0:s1	-	-	-	d864b561c9cb	-	d1a7615017d1	-	-	2026-11-24	xproof
 899f0931-4e9b-4fa8-9f6d-d13a7de05334	cast	cast-resolve	agreed	-	FX	scen	2	0	Stickytongue Sentinel/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-899f0931-4e9b-4fa8-9f6d-d13a7de05334	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Stickytongue Sentinel/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-899f0931-4e9b-4fa8-9f6d-d13a7de05334	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Stickytongue Sentinel/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+899f0931-4e9b-4fa8-9f6d-d13a7de05334	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:stickytongue-sentinel:combat0.attack:s1,f:xs:XP:stickytongue-sentinel:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4cf74faafc72	-	-	2026-11-25	xproof
+899f0931-4e9b-4fa8-9f6d-d13a7de05334	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:stickytongue-sentinel:combat0.block:s1,f:xs:XP:stickytongue-sentinel:combat0.block:s1	-	-	-	3aa6ded33acb	-	4cf74faafc72	-	-	2026-11-25	xproof
 899f0931-4e9b-4fa8-9f6d-d13a7de05334	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 899f3758-bb06-4f9c-81eb-7a9002f03245	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aspect-of-manticore:f0t0:s1,f:xs:XP:aspect-of-manticore:f0t0:s1	-	-	-	ae86f6029288	-	6acaf388aae0	-	-	2026-11-24	xproof
 899f3758-bb06-4f9c-81eb-7a9002f03245	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:aspect-of-manticore:f0t0:s1,f:xs:XP:aspect-of-manticore:f0t0:s1	-	-	-	ae86f6029288	-	6acaf388aae0	-	-	2026-11-24	xproof

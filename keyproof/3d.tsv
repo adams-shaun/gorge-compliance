@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d038f7c-95fa-4b71-8f74-b9b4dd45cde0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ertai-resurrected:f0t0:s1,f:xs:XP:ertai-resurrected:f0t0:s1	-	-	-	3aa6ded33acb	-	29a57db910e9	-	-	2026-11-25	xproof
 3d038f7c-95fa-4b71-8f74-b9b4dd45cde0	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:ertai-resurrected:f0t0:s1,f:xs:XP:ertai-resurrected:f0t0:s1	-	-	-	3aa6ded33acb	-	29a57db910e9	-	-	2026-11-25	xproof
 3d04aa8c-7bff-42c6-bed3-0b18d2cb1529	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d04aa8c-7bff-42c6-bed3-0b18d2cb1529	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3d04aa8c-7bff-42c6-bed3-0b18d2cb1529	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:nogi-draco-zealot:f0t0:s1,f:xs:XP:nogi-draco-zealot:f0t0:s1	-	-	-	3aa6ded33acb	-	b359501af146	-	-	2026-11-25	xproof
 3d081701-514b-4611-b5a1-239b8f335fb6	cast	cast-resolve	agreed	-	FX	scen	2	0	Insectoid Exterminator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d081701-514b-4611-b5a1-239b8f335fb6	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Insectoid Exterminator/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3d081701-514b-4611-b5a1-239b8f335fb6	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Insectoid Exterminator/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3db1ac09-e35a-4f50-97c4-f65dbc28daef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:selenia-dark-angel:cast:s1,f:xs:XP:selenia-dark-angel:cast:s1	-	-	-	ea3140b6974b	-	e2e69826b119	-	-	2026-11-24	xproof
 3db1ac09-e35a-4f50-97c4-f65dbc28daef	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:selenia-dark-angel:f0a0:s1,f:xs:XP:selenia-dark-angel:f0a0:s1	-	-	-	8c0bd19283bb	-	e2e69826b119	-	-	2026-11-24	xproof
 3db40361-5f55-417e-a7cd-7e360cc91b4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chainsaw:f0t0:s1,f:xs:XP:chainsaw:f0t0:s1	-	-	-	25696bf19d5b	-	0496bf62bc3e	-	-	2026-11-24	xproof
-3db40361-5f55-417e-a7cd-7e360cc91b4d	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Chainsaw/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3db40361-5f55-417e-a7cd-7e360cc91b4d	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:chainsaw:f0a0:s1,f:xs:XP:chainsaw:f0a0:s1	-	-	-	3aa6ded33acb	-	0496bf62bc3e	-	-	2026-11-25	xproof
 3db40361-5f55-417e-a7cd-7e360cc91b4d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chainsaw:f0t0:s1,f:xs:XP:chainsaw:f0t0:s1	-	-	-	25696bf19d5b	-	0496bf62bc3e	-	-	2026-11-24	xproof
 3db40361-5f55-417e-a7cd-7e360cc91b4d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Chainsaw/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3db40361-5f55-417e-a7cd-7e360cc91b4d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Chainsaw/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

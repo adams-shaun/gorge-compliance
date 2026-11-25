@@ -94,9 +94,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5783facf-d26e-4aae-a753-b9dc553361c1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mosswood Dreadknight/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 578c5b92-9f7e-4645-9624-f2c1a16b6aaf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 578ddb51-e128-43e5-a115-471f0cae1222	cast	cast-resolve	agreed	-	FX	scen	2	0	Star Charter/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-578ddb51-e128-43e5-a115-471f0cae1222	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Star Charter/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-578ddb51-e128-43e5-a115-471f0cae1222	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Star Charter/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-578ddb51-e128-43e5-a115-471f0cae1222	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Star Charter/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+578ddb51-e128-43e5-a115-471f0cae1222	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:star-charter:combat0.attack:s1,f:xs:XP:star-charter:combat0.attack:s1	-	-	-	3aa6ded33acb	-	dcc2831bda92	-	-	2026-11-25	xproof
+578ddb51-e128-43e5-a115-471f0cae1222	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:star-charter:combat0.block:s1,f:xs:XP:star-charter:combat0.block:s1	-	-	-	3aa6ded33acb	-	dcc2831bda92	-	-	2026-11-25	xproof
+578ddb51-e128-43e5-a115-471f0cae1222	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:star-charter:f0t0:s1,f:xs:XP:star-charter:f0t0:s1	-	-	-	3aa6ded33acb	-	dcc2831bda92	-	-	2026-11-25	xproof
 578e0577-0ad8-4bfb-a317-9684c508770a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 578e0577-0ad8-4bfb-a317-9684c508770a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 578e0577-0ad8-4bfb-a317-9684c508770a	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -191,11 +191,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 57f90b30-bcb0-447e-8788-5c5ded187207	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:natural-selection:cast:s1,f:xs:XP:natural-selection:cast:s1	-	-	-	ae86f6029288	-	e7e87d40402f	-	-	2026-11-24	xproof
 57f94fcb-a224-410b-a38e-3ed8cca7d0c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57f94fcb-a224-410b-a38e-3ed8cca7d0c7	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-57fd34d3-3e30-4467-bace-3f4dc2a85c80	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57fd34d3-3e30-4467-bace-3f4dc2a85c80	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:parting-thoughts:cast:s1,f:xs:XP:parting-thoughts:cast:s1	-	-	-	3aa6ded33acb	-	13c1cd69f9e4	-	-	2026-11-25	xproof
 57fdf496-c31e-4a3b-a8a6-4f053b808267	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twisted-reflection:cast:s1,f:xs:XP:twisted-reflection:cast:s1	-	-	-	d864b561c9cb	-	9bd9f9b62696	-	-	2026-11-24	xproof
 57fe5c94-ee93-45c6-bf7e-89d177d0fe70	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57fe5c94-ee93-45c6-bf7e-89d177d0fe70	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 57fe5c94-ee93-45c6-bf7e-89d177d0fe70	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 57fe941c-a830-4570-afe2-18f93c7a7b84	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:obliterating-bolt:cast:s1,f:xs:XP:obliterating-bolt:cast:s1	-	-	-	23b491658465	-	10c01adc2c3f	-	-	2026-11-24	xproof
 57ffb558-3a1c-43ea-a79c-bcfacad22ca4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-57ffb558-3a1c-43ea-a79c-bcfacad22ca4	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+57ffb558-3a1c-43ea-a79c-bcfacad22ca4	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:general-thunderbolt-ross:f0t0:s1	-	-	-	3aa6ded33acb	-	b526ad39cf0c	-	-	2026-11-25	xproof

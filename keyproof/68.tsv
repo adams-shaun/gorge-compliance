@@ -5,8 +5,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6804e329-800b-4aa4-9a00-b9a1f4b9537b	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:malboro:f0t0:s1,f:xs:XP:malboro:f0t0:s1	-	-	-	267e485f6204	-	f17ff7afee6a	-	-	2026-11-24	xproof
 6804e329-800b-4aa4-9a00-b9a1f4b9537b	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	1	0	x:xs:XP:malboro:f0t0:s2,f:xs:XP:malboro:f0t0:s2	-	-	-	267e485f6204	-	f17ff7afee6a	-	-	2026-11-24	xproof
 6804e329-800b-4aa4-9a00-b9a1f4b9537b	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:malboro:f0t0:s1,f:xs:XP:malboro:f0t0:s1	-	-	-	267e485f6204	-	f17ff7afee6a	-	-	2026-11-24	xproof
-6807167a-e290-4259-940e-3cbbfa75d0a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6807167a-e290-4259-940e-3cbbfa75d0a1	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6807167a-e290-4259-940e-3cbbfa75d0a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stolen-strategy:f0t0:s1,f:xs:XP:stolen-strategy:f0t0:s1	-	-	-	3aa6ded33acb	-	b39d36cbf8ce	-	-	2026-11-25	xproof
+6807167a-e290-4259-940e-3cbbfa75d0a1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:stolen-strategy:f0t0:s1,f:xs:XP:stolen-strategy:f0t0:s1	-	-	-	3aa6ded33acb	-	b39d36cbf8ce	-	-	2026-11-25	xproof
 680a8e14-053f-4cde-a060-e1b36873cf14	cast	cast-resolve	agreed	-	X	scen	1	0	Rediscover the Way/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 680da572-6cd5-482a-b01d-32944566d8c4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:contraband-kingpin:cast:s1,f:xs:XP:contraband-kingpin:cast:s1	-	-	-	d864b561c9cb	-	c4bd63bcc7cd	-	-	2026-11-24	xproof
 680da572-6cd5-482a-b01d-32944566d8c4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 681d07e6-234f-4544-a2ea-bfbefe6b0b36	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:hateflayer:f0a0:s1,f:xs:XP:hateflayer:f0a0:s1	-	-	-	8a1b1a193ec0	-	197076a5626d	-	-	2026-11-24	xproof
 681fc668-cb26-4ba4-a915-48ddfa2b9520	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:prized-statue:f0t0:s1,f:xs:XP:prized-statue:f0t0:s1	-	-	-	8c0bd19283bb	-	c1146f70ef95	-	-	2026-11-24	xproof
 681fc668-cb26-4ba4-a915-48ddfa2b9520	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:prized-statue:f0t0:s1,f:xs:XP:prized-statue:f0t0:s1	-	-	-	8c0bd19283bb	-	c1146f70ef95	-	-	2026-11-24	xproof
-681fc668-cb26-4ba4-a915-48ddfa2b9520	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+681fc668-cb26-4ba4-a915-48ddfa2b9520	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 68227832-2916-49b9-92bb-c09b8a0c13f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ongoing-investigation:cast:s1,f:xs:XP:ongoing-investigation:cast:s1	-	-	-	d864b561c9cb	-	ba2c26a2f4aa	-	-	2026-11-24	xproof
 68227832-2916-49b9-92bb-c09b8a0c13f5	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 68227832-2916-49b9-92bb-c09b8a0c13f5	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -63,8 +63,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 685181dd-0124-4c76-9270-f9dd17e6a221	cast	cast-resolve	agreed	-	X	scen	1	0	Colleen Wing, Street Samurai/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 685181dd-0124-4c76-9270-f9dd17e6a221	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Colleen Wing, Street Samurai/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 685a7f67-6809-4386-990f-c52d1846a584	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rude-awakening:cast:s1,f:xs:XP:rude-awakening:cast:s1	-	-	-	25696bf19d5b	-	233f6bdc1b1a	-	-	2026-11-24	xproof
-685c1f37-2519-4fe5-908d-27d359cb5ad9	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	e54f253a64d8	-	-	2026-11-24	xproof
-685c1f37-2519-4fe5-908d-27d359cb5ad9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+685c1f37-2519-4fe5-908d-27d359cb5ad9	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e54f253a64d8	-	-	2026-11-25	xproof
+685c1f37-2519-4fe5-908d-27d359cb5ad9	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	e54f253a64d8	-	-	2026-11-25	xproof
 6860cde7-ee8e-4a4d-baed-9dc4a1220e36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glaze-fiend:cast:s1,f:xs:XP:glaze-fiend:cast:s1	-	-	-	8a1b1a193ec0	-	a87f364b9c56	-	-	2026-11-24	xproof
 6860cde7-ee8e-4a4d-baed-9dc4a1220e36	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 68639a3d-2192-4921-8298-c76bb0cd6b02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -122,8 +122,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 68954295-54e3-4303-a6bc-fc4547a4e3a3	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:llanowar-elves:f0a0:s2,f:xs:XP:llanowar-elves:f0a0:s2	-	-	-	23b491658465	-	f8eab9c6d1b3	-	-	2026-11-24	xproof
 68957dca-df5c-4051-af22-407cb7e47200	cast	cast	agreed	-	F	start	2	0	f:xs:XP:meathook-massacre-ii:cast:s2	-	-	-	5437c1394672	-	ebb1d2576fee	-	-	2026-11-24	xproof
 68957dca-df5c-4051-af22-407cb7e47200	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:meathook-massacre-ii:cast:s2	-	-	-	5437c1394672	-	ebb1d2576fee	-	-	2026-11-24	xproof
-68957dca-df5c-4051-af22-407cb7e47200	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Meathook Massacre II/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-68957dca-df5c-4051-af22-407cb7e47200	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Meathook Massacre II/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+68957dca-df5c-4051-af22-407cb7e47200	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:meathook-massacre-ii:f0t1:s1,f:xs:XP:meathook-massacre-ii:f0t1:s1	-	-	-	3aa6ded33acb	-	ebb1d2576fee	-	-	2026-11-25	xproof
+68957dca-df5c-4051-af22-407cb7e47200	f0/t2	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:meathook-massacre-ii:f0t2:s1,f:xs:XP:meathook-massacre-ii:f0t2:s1	-	-	-	3aa6ded33acb	-	ebb1d2576fee	-	-	2026-11-25	xproof
 6895d7a2-264b-4731-9294-c02e1e220384	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6895d7a2-264b-4731-9294-c02e1e220384	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:miara-thorn-of-the-glade:f0t0:s1,f:xs:XP:miara-thorn-of-the-glade:f0t0:s1	-	-	-	8c0bd19283bb	-	bd217497a52a	-	-	2026-11-24	xproof
 68979160-b5ce-4787-8a1e-1f40e614c3b0	cast	cast-resolve	agreed	-	X	scen	1	0	Spirit Water Revival/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

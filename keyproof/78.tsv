@@ -84,8 +84,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78780f37-f215-4ae1-adce-6255b0146873	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 787935ab-26a6-4b4a-9c14-e106160e951d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 787b494b-731b-4e99-8e46-157bc86f6eea	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
-7880576b-8ad9-4382-97c5-7a631106a35e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7880576b-8ad9-4382-97c5-7a631106a35e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7880576b-8ad9-4382-97c5-7a631106a35e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ravos-soultender:f0t0:s1,f:xs:XP:ravos-soultender:f0t0:s1	-	-	-	3aa6ded33acb	-	f6f366b1446c	-	-	2026-11-25	xproof
+7880576b-8ad9-4382-97c5-7a631106a35e	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:ravos-soultender:f0t0:s1,f:xs:XP:ravos-soultender:f0t0:s1	-	-	-	3aa6ded33acb	-	f6f366b1446c	-	-	2026-11-25	xproof
 78826359-fe63-44ad-adc4-a17ffcd710e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7887f060-3024-4dc4-aeb5-fb5546db6b48	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:relic-s-roar:cast:s1,f:xs:XP:relic-s-roar:cast:s1	-	-	-	23b491658465	-	10a8fea72a7c	-	-	2026-11-25	xproof
 788897f5-d49d-4294-8006-0009a3124ad0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -169,8 +169,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 78d9faff-2ad9-4cf9-a239-27c50435d007	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 78db3190-59bc-4033-95bc-32d8ed872b6a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78db3190-59bc-4033-95bc-32d8ed872b6a	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-78dbbc15-9304-4178-b9b2-1db6c64ca11a	cast	cast-resolve	agreed	-	X	scen	1	0	Wishing Well/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-78dbbc15-9304-4178-b9b2-1db6c64ca11a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Wishing Well/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+78dbbc15-9304-4178-b9b2-1db6c64ca11a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wishing-well:cast:s1,f:xs:XP:wishing-well:cast:s1	-	-	-	3aa6ded33acb	-	236c3a3275a5	-	-	2026-11-25	xproof
+78dbbc15-9304-4178-b9b2-1db6c64ca11a	f0/a0	PutCounter	agreed	-	FX	start	4	0	x:xs:XP:wishing-well:cast:s1,f:xs:XP:wishing-well:cast:s1	-	-	-	3aa6ded33acb	-	236c3a3275a5	-	-	2026-11-25	xproof
 78dbcc18-291c-4b2c-9576-f8dc93914936	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 78dbcc18-291c-4b2c-9576-f8dc93914936	f0/a0	NULL	owed	refused:steps-needed:cost:ExileFromGrave	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 78de77ef-c325-4342-869f-042921229577	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:biotech-specialist:f0t0:s2,f:xs:XP:biotech-specialist:f0t0:s2	-	-	-	267e485f6204	-	be9fd7df08e8	-	-	2026-11-24	xproof

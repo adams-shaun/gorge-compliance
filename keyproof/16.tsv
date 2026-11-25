@@ -86,9 +86,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1665ca9f-176d-40f1-a4e9-42da4f1236e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:circuit-mender:f0t0:s1,f:xs:XP:circuit-mender:f0t0:s1	-	-	-	d864b561c9cb	-	ea153bb878b9	-	-	2026-11-24	xproof
 1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:circuit-mender:f0t0:s1,f:xs:XP:circuit-mender:f0t0:s1	-	-	-	d864b561c9cb	-	ea153bb878b9	-	-	2026-11-24	xproof
 1665ca9f-176d-40f1-a4e9-42da4f1236e9	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-1675476c-25b1-46c2-81ce-fef9a2360bcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t1:s1,f:xs:XP:blaring-captain:f0t1:s1	-	-	-	8c0bd19283bb	-	0d7032989aba	-	-	2026-11-24	xproof
+1675476c-25b1-46c2-81ce-fef9a2360bcc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t1:s1,f:xs:XP:blaring-captain:f0t1:s1	-	-	-	3aa6ded33acb	-	0d7032989aba	-	-	2026-11-25	xproof
 1675476c-25b1-46c2-81ce-fef9a2360bcc	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t0:s1,f:xs:XP:blaring-captain:f0t0:s1	-	-	-	8c0bd19283bb	-	0d7032989aba	-	-	2026-11-24	xproof
-1675476c-25b1-46c2-81ce-fef9a2360bcc	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1675476c-25b1-46c2-81ce-fef9a2360bcc	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:blaring-captain:f0t1:s1,f:xs:XP:blaring-captain:f0t1:s1	-	-	-	3aa6ded33acb	-	0d7032989aba	-	-	2026-11-25	xproof
 16774611-c004-4383-b4e1-4a43a9b1f4aa	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1682cf24-17a3-49ad-8b6f-9b7f13ebf53c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raised-by-giants:cast:s1,f:xs:XP:raised-by-giants:cast:s1	-	-	-	8c0bd19283bb	-	7ec29aa930f9	-	-	2026-11-24	xproof
 16856e22-6f9e-4f8e-b4ee-622a7c2ee453	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -114,9 +114,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 169d24f3-a308-4a2e-ae25-85dae448994e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 169d24f3-a308-4a2e-ae25-85dae448994e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 169e415a-9ff6-43bb-bb68-fc49e69f95a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vaporkin:cast:s1,f:xs:XP:vaporkin:cast:s1	-	-	-	d864b561c9cb	-	fd570a8ead52	-	-	2026-11-24	xproof
-16a44586-ea1d-45f1-b9de-da1c11f729df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	8c0bd19283bb	-	67f5e9a6bb1a	-	-	2026-11-24	xproof
-16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	8c0bd19283bb	-	67f5e9a6bb1a	-	-	2026-11-24	xproof
-16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+16a44586-ea1d-45f1-b9de-da1c11f729df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	3aa6ded33acb	-	67f5e9a6bb1a	-	-	2026-11-25	xproof
+16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	3aa6ded33acb	-	67f5e9a6bb1a	-	-	2026-11-25	xproof
+16a44586-ea1d-45f1-b9de-da1c11f729df	f0/t1	ChangesZone/Partner with	agreed	-	FX	start	2	0	x:xs:XP:rory-williams:f0t1:s1,f:xs:XP:rory-williams:f0t1:s1	-	-	-	3aa6ded33acb	-	67f5e9a6bb1a	-	-	2026-11-25	xproof
 16a5ed42-ee86-4dcb-b8ea-239ac2b13d67	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 16a5ed42-ee86-4dcb-b8ea-239ac2b13d67	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 16a66bbe-90f6-4c29-a69d-6ff254082956	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stormcaller-of-keranos:cast:s1,f:xs:XP:stormcaller-of-keranos:cast:s1	-	-	-	d864b561c9cb	-	558d605c12d9	-	-	2026-11-24	xproof
@@ -173,8 +173,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16e6bd4b-fbf1-4bbe-9271-a74f59320e0d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16e6bd4b-fbf1-4bbe-9271-a74f59320e0d	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16e9c452-6288-4da8-813d-2eb6b7a538c3	cast	cast-resolve	agreed	-	FX	scen	2	0	Valley Mightcaller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-16e9c452-6288-4da8-813d-2eb6b7a538c3	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Valley Mightcaller/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-16e9c452-6288-4da8-813d-2eb6b7a538c3	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Valley Mightcaller/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+16e9c452-6288-4da8-813d-2eb6b7a538c3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:valley-mightcaller:combat0.attack:s1,f:xs:XP:valley-mightcaller:combat0.attack:s1	-	-	-	3aa6ded33acb	-	e5259ecb3a0e	-	-	2026-11-25	xproof
+16e9c452-6288-4da8-813d-2eb6b7a538c3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:valley-mightcaller:combat0.block:s1,f:xs:XP:valley-mightcaller:combat0.block:s1	-	-	-	3aa6ded33acb	-	e5259ecb3a0e	-	-	2026-11-25	xproof
 16e9c452-6288-4da8-813d-2eb6b7a538c3	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Valley Mightcaller/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 16ef24ea-4d84-43e5-bd4f-b6efadc87616	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16f03175-9c57-4058-9c9d-9c4936e4c324	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

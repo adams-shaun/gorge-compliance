@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 606092eb-8fe3-4ef7-aaf1-2d3b2687d27a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Super Suit/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 606092eb-8fe3-4ef7-aaf1-2d3b2687d27a	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:super-suit:f0t0:s2,f:xs:XP:super-suit:f0t0:s2	-	-	-	5437c1394672	-	157df72416db	-	-	2026-11-24	xproof
 606092eb-8fe3-4ef7-aaf1-2d3b2687d27a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Super Suit/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-60654004-7d9a-47ac-a70d-b246dd1728d3	cast	cast-resolve	agreed	-	X	scen	1	0	Valley Flamecaller/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+60654004-7d9a-47ac-a70d-b246dd1728d3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valley-flamecaller:cast:s1,f:xs:XP:valley-flamecaller:cast:s1	-	-	-	3aa6ded33acb	-	f1b2bf8a333a	-	-	2026-11-25	xproof
 60662463-6050-46c6-84ab-64e203b67b4d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jungleborn-pioneer:f0t0:s1,f:xs:XP:jungleborn-pioneer:f0t0:s1	-	-	-	d864b561c9cb	-	513c3bf1260c	-	-	2026-11-24	xproof
 60662463-6050-46c6-84ab-64e203b67b4d	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:jungleborn-pioneer:f0t0:s1,f:xs:XP:jungleborn-pioneer:f0t0:s1	-	-	-	d864b561c9cb	-	513c3bf1260c	-	-	2026-11-24	xproof
 60674ef7-f8e2-41e8-bab3-0100cfc9fbe9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60a3345c-3234-4f4b-baab-df12dad6b44b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60a3345c-3234-4f4b-baab-df12dad6b44b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:poison-blade-mentor:f0t0:s1,f:xs:XP:poison-blade-mentor:f0t0:s1	-	-	-	3aa6ded33acb	-	d735fee03fce	-	-	2026-11-25	xproof
 60ac490c-b489-4ad2-bcc2-3babaabf8ccb	cast	cast-resolve	agreed	-	X	scen	1	0	Tempest Angler/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-60ac490c-b489-4ad2-bcc2-3babaabf8ccb	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Tempest Angler/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+60ac490c-b489-4ad2-bcc2-3babaabf8ccb	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:tempest-angler:f0t0:s1,f:xs:XP:tempest-angler:f0t0:s1	-	-	-	3aa6ded33acb	-	fd4a2af1a0df	-	-	2026-11-25	xproof
 60ad7aaa-8ce6-4449-8e8d-4ccf925010db	cast	cast-resolve	agreed	-	X	scen	1	0	Sizzling Changeling/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 60ad7aaa-8ce6-4449-8e8d-4ccf925010db	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sizzling Changeling/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 60b03a44-a7bd-48fa-8c8f-1704aed02cd7	cast	cast-resolve	agreed	-	FX	scen	2	0	Ancestor Dragon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -192,7 +192,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 60f20f32-b6db-4ee7-a0aa-535647e6fcd5	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Marshals' Pathcruiser/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 60f20f32-b6db-4ee7-a0aa-535647e6fcd5	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Marshals' Pathcruiser/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 60f412bb-27e9-4883-8862-96eae96dfee3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-60fa9f5f-2360-4d5e-b291-1318803e3c9f	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+60fa9f5f-2360-4d5e-b291-1318803e3c9f	cast	cast	diverged	-	-	start	0	2	-	892a2ec46781	-	-	3aa6ded33acb	-	15a7b747a04a	-	-	2026-11-25	xproof
 60fa9f5f-2360-4d5e-b291-1318803e3c9f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 60fc5eb0-95d6-49b0-a538-945ef599e484	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 60fc89a1-cc6f-4a32-84c3-09abf7a4a1df	cast	cast-resolve	agreed	-	X	scen	1	0	Brigid, Clachan's Heart/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof

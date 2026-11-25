@@ -34,7 +34,7 @@ dc3073fc-dc23-426e-b867-fee5dd99fe25	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:x
 dc3073fc-dc23-426e-b867-fee5dd99fe25	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:shipwreck-dowser:f0t1:s1,f:xs:XP:shipwreck-dowser:f0t1:s1	-	-	-	3aa6ded33acb	-	c75dfba23ef3	-	-	2026-11-25	xproof
 dc31a6f8-6228-4a25-b937-5d8d78514333	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:obscura-storefront:f0t0:s1,f:xs:XP:obscura-storefront:f0t0:s1	-	-	-	d864b561c9cb	-	8657548260c6	-	-	2026-11-24	xproof
 dc31a6f8-6228-4a25-b937-5d8d78514333	land	land	agreed	-	FX	start	2	0	x:xs:XP:obscura-storefront:f0t0:s1,f:xs:XP:obscura-storefront:f0t0:s1	-	-	-	d864b561c9cb	-	8657548260c6	-	-	2026-11-24	xproof
-dc367b23-d1f4-4c5c-b300-a44a726e3f74	cast	cast-resolve	agreed	-	X	scen	1	0	Live or Die/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+dc367b23-d1f4-4c5c-b300-a44a726e3f74	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:live-or-die:cast:s1,f:xs:XP:live-or-die:cast:s1	-	-	-	3aa6ded33acb	-	efb75f681eb3	-	-	2026-11-25	xproof
 dc39c52b-9bee-4cec-a970-1867314944ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc39c52b-9bee-4cec-a970-1867314944ef	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc430e1b-d57f-4035-b518-9bc2e26a6c04	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -65,12 +65,12 @@ dc5dd7f7-375e-4d51-85cb-1abf16ca3854	cast	cast-resolve	agreed	-	X	scen	1	0	Empti
 dc5dd7f7-375e-4d51-85cb-1abf16ca3854	f0/t0	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 dc5dd7f7-375e-4d51-85cb-1abf16ca3854	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
 dc600c06-8239-409e-b53d-20f813a3f5e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-dc638413-c4f8-4f6a-a003-5ce8a10a8f94	cast	cast-resolve	agreed	-	X	scen	1	0	Daggermaw Megalodon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dc638413-c4f8-4f6a-a003-5ce8a10a8f94	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Daggermaw Megalodon/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dc638413-c4f8-4f6a-a003-5ce8a10a8f94	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Daggermaw Megalodon/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dc638413-c4f8-4f6a-a003-5ce8a10a8f94	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Daggermaw Megalodon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-dc65cf70-c3aa-4e3c-82c6-260cbdf5f522	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	d89b401762cc	-	-	2026-11-24	xproof
-dc65cf70-c3aa-4e3c-82c6-260cbdf5f522	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+dc638413-c4f8-4f6a-a003-5ce8a10a8f94	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:daggermaw-megalodon:cast:s1,f:xs:XP:daggermaw-megalodon:cast:s1	-	-	-	3aa6ded33acb	-	4568d119d130	-	-	2026-11-25	xproof
+dc638413-c4f8-4f6a-a003-5ce8a10a8f94	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:daggermaw-megalodon:combat0.attack:s1,f:xs:XP:daggermaw-megalodon:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4568d119d130	-	-	2026-11-25	xproof
+dc638413-c4f8-4f6a-a003-5ce8a10a8f94	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:daggermaw-megalodon:combat0.block:s1,f:xs:XP:daggermaw-megalodon:combat0.block:s1	-	-	-	3aa6ded33acb	-	4568d119d130	-	-	2026-11-25	xproof
+dc638413-c4f8-4f6a-a003-5ce8a10a8f94	f0/a0	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:daggermaw-megalodon:f0a0:s1	-	-	-	3aa6ded33acb	-	4568d119d130	-	-	2026-11-25	xproof
+dc65cf70-c3aa-4e3c-82c6-260cbdf5f522	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	d89b401762cc	-	-	2026-11-25	xproof
+dc65cf70-c3aa-4e3c-82c6-260cbdf5f522	f0/t0	Phase	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	d89b401762cc	-	-	2026-11-25	xproof
 dc665ddc-4326-4860-94ba-c40ced8b0af6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc66dbed-f979-4ad1-b5f9-08538886167f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 dc66dbed-f979-4ad1-b5f9-08538886167f	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

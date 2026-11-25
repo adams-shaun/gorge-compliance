@@ -136,8 +136,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 927fa223-69a3-4563-80b1-b578f3d031f1	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Central Elevator/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 927fb139-0493-48be-8cc4-2c7d854d6a55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:radha-heart-of-keld:cast:s1,f:xs:XP:radha-heart-of-keld:cast:s1	-	-	-	ae86f6029288	-	c53aabd89598	-	-	2026-11-24	xproof
 927fb139-0493-48be-8cc4-2c7d854d6a55	f0/a0	Pump	agreed	-	X	start	2	0	x:xs:XP:radha-heart-of-keld:f0a0:s1	-	-	-	ae86f6029288	-	c53aabd89598	-	-	2026-11-24	xproof
-9285cdf1-ad25-4aee-a865-1bf0cc905183	cast	cast-resolve	agreed	-	X	scen	1	0	Fear of the Dark/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9285cdf1-ad25-4aee-a865-1bf0cc905183	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fear of the Dark/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+9285cdf1-ad25-4aee-a865-1bf0cc905183	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fear-of-the-dark:cast:s1,f:xs:XP:fear-of-the-dark:cast:s1	-	-	-	3aa6ded33acb	-	d5837b746d80	-	-	2026-11-25	xproof
+9285cdf1-ad25-4aee-a865-1bf0cc905183	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fear-of-the-dark:f0t0:s1,f:xs:XP:fear-of-the-dark:f0t0:s1	-	-	-	3aa6ded33acb	-	d5837b746d80	-	-	2026-11-25	xproof
 9286ddc5-8151-4129-aaf6-2a2abe7047e5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 928a7fbc-ba34-42a9-947e-0f3bf1cba152	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 928a7fbc-ba34-42a9-947e-0f3bf1cba152	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -163,7 +163,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 92acb789-0e42-465c-ac16-40fefec48805	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92acb789-0e42-465c-ac16-40fefec48805	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 92acb789-0e42-465c-ac16-40fefec48805	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-92b617f9-6e6b-42a0-9c45-6ff5f6193051	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+92b617f9-6e6b-42a0-9c45-6ff5f6193051	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 92b91910-9b65-4421-8eef-a33793161089	cast	cast-resolve	agreed	-	X	scen	1	0	Molten Duplication/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 92bac34e-2045-4331-842f-185711c1ac56	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 92bac34e-2045-4331-842f-185711c1ac56	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

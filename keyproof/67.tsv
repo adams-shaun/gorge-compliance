@@ -1,6 +1,6 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-670cf656-5c72-4d28-b5e6-dc77781dc001	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+670cf656-5c72-4d28-b5e6-dc77781dc001	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 67114cbb-cbf4-4250-a5e9-e1c4bc5841f6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67114cbb-cbf4-4250-a5e9-e1c4bc5841f6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 671209d5-8b56-4ce7-94a0-d770d698c0df	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:donatello-rad-scientist:f0t0:s1,f:xs:XP:donatello-rad-scientist:f0t0:s1	-	-	-	8c0bd19283bb	-	aee73f367ba0	-	-	2026-11-24	xproof
@@ -55,7 +55,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6754753d-790e-4a95-a150-76741c4a02d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rms-titanic:cast:s1,f:xs:XP:rms-titanic:cast:s1	-	-	-	8c0bd19283bb	-	84154c6b95c7	-	-	2026-11-24	xproof
 6754753d-790e-4a95-a150-76741c4a02d4	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6754753d-790e-4a95-a150-76741c4a02d4	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-67554654-e751-4679-9e92-f3588525ae4f	cast	cast-resolve	agreed	-	X	scen	1	0	Enter the Enigma/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+67554654-e751-4679-9e92-f3588525ae4f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enter-the-enigma:cast:s1,f:xs:XP:enter-the-enigma:cast:s1	-	-	-	3aa6ded33acb	-	6c766e48a193	-	-	2026-11-25	xproof
 6755a7af-5b55-4245-a777-27e69979479b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6755a7af-5b55-4245-a777-27e69979479b	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:lattice-blade-mantis:f0t0:s1,f:xs:XP:lattice-blade-mantis:f0t0:s1	-	-	-	ae86f6029288	-	ab5af6bb4a2d	-	-	2026-11-24	xproof
 675a0eff-4da0-45cd-9371-fca96c313f4c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -98,11 +98,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6781f8ae-2a86-4e3d-bc43-48809c9d6c26	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:gatekeeper-of-malakir:f0t0:s1	-	-	-	25696bf19d5b	-	a8f2c5c8d1c3	-	-	2026-11-24	xproof
 67821712-e58f-4fee-81af-021059ac72ea	cast	cast-resolve	agreed	-	FX	scen	2	0	Gravblade Heavy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67821712-e58f-4fee-81af-021059ac72ea	static#0.0	static#0.0	agreed	-	X	scen	1	0	Gravblade Heavy/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-67876214-3777-41b1-935e-75dd5075fa53	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+67876214-3777-41b1-935e-75dd5075fa53	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	090e86e1a25d	-	-	2026-11-25	xproof
 6789a170-f2c5-4fc0-8a45-2b2361e67410	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chord-of-calling:cast:s1,f:xs:XP:chord-of-calling:cast:s1	-	-	-	64a08ba7d913	-	904f8fc95cea	-	-	2026-11-24	xproof
-678b3fb5-aa9f-4268-9433-2a89dd37b927	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:canoptek-tomb-sentinel:f0t0:s1,f:xs:XP:canoptek-tomb-sentinel:f0t0:s1	-	-	-	8c0bd19283bb	-	47025e712aaa	-	-	2026-11-24	xproof
-678b3fb5-aa9f-4268-9433-2a89dd37b927	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-678b3fb5-aa9f-4268-9433-2a89dd37b927	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+678b3fb5-aa9f-4268-9433-2a89dd37b927	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:canoptek-tomb-sentinel:f0t0:s1,f:xs:XP:canoptek-tomb-sentinel:f0t0:s1	-	-	-	3aa6ded33acb	-	47025e712aaa	-	-	2026-11-25	xproof
+678b3fb5-aa9f-4268-9433-2a89dd37b927	f0/a0	ChangeZone/Unearth	agreed	-	FX	start	2	0	x:xs:XP:canoptek-tomb-sentinel:f0a0:s1,f:xs:XP:canoptek-tomb-sentinel:f0a0:s1	-	-	-	3aa6ded33acb	-	47025e712aaa	-	-	2026-11-25	xproof
+678b3fb5-aa9f-4268-9433-2a89dd37b927	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:canoptek-tomb-sentinel:f0a0:s1,f:xs:XP:canoptek-tomb-sentinel:f0a0:s1	-	-	-	3aa6ded33acb	-	47025e712aaa	-	-	2026-11-25	xproof
 678c76bf-fc31-47e4-8c19-712e15bba9e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 678eee7a-549d-4f40-a81c-70d036fc299d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 678ef5e4-800d-4d3a-8761-2abaad70e0c9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -159,11 +159,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 67ca79d7-9064-4605-8625-b1cfe5cb1b45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67cf6ba1-55ad-4008-ba1f-96c363a96b16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67d12a5a-9e0c-4550-86ad-cd1e173fea8f	cast	cast	agreed	-	F	start	2	0	f:xs:XP:reign-of-terror:cast:s1	-	-	-	ea3140b6974b	-	fafb35c18857	-	-	2026-11-24	xproof
-67d2a021-a042-4e5f-b6e4-39cb35514794	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:darkstar-augur:f0t0:s1,f:xs:XP:darkstar-augur:f0t0:s1	-	-	-	3aa6ded33acb	-	7c471c258ec1	-	-	2026-11-25	xproof
+67d2a021-a042-4e5f-b6e4-39cb35514794	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:darkstar-augur:f0t1:s1,f:xs:XP:darkstar-augur:f0t1:s1	-	-	-	3aa6ded33acb	-	7c471c258ec1	-	-	2026-11-25	xproof
 67d2a021-a042-4e5f-b6e4-39cb35514794	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Darkstar Augur/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67d2a021-a042-4e5f-b6e4-39cb35514794	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Darkstar Augur/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 67d2a021-a042-4e5f-b6e4-39cb35514794	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:darkstar-augur:f0t0:s1,f:xs:XP:darkstar-augur:f0t0:s1	-	-	-	3aa6ded33acb	-	7c471c258ec1	-	-	2026-11-25	xproof
-67d2a021-a042-4e5f-b6e4-39cb35514794	f0/t1	NULL	owed	refused:scen failed: xengine: no XMage manifests found in oracle/compliance/manifests	-	start	0	0	-	-	-	-	82dba84688fb	-	-	-	-	2026-11-24	xproof
+67d2a021-a042-4e5f-b6e4-39cb35514794	f0/t1	ChangesZone/Offspring	agreed	-	FX	start	2	0	x:xs:XP:darkstar-augur:f0t1:s1,f:xs:XP:darkstar-augur:f0t1:s1	-	-	-	3aa6ded33acb	-	7c471c258ec1	-	-	2026-11-25	xproof
 67d55b4f-944e-4376-93ed-1a240bca1eae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67d55b4f-944e-4376-93ed-1a240bca1eae	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 67d55b4f-944e-4376-93ed-1a240bca1eae	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

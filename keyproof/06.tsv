@@ -121,7 +121,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 067b54e4-18f3-48e3-b824-3aba7fcf2408	f0/a0	PreventDamage	agreed	-	FX	start	2	0	x:xs:XP:master-apothecary:cast:s1,f:xs:XP:master-apothecary:cast:s1	-	-	-	fc71ca68c5ac	-	ceb6f2e9afec	-	-	2026-11-24	xproof
 0684771f-46ea-40a3-b021-e98a7d7cd79d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:towering-gibbon:cast:s1,f:xs:XP:towering-gibbon:cast:s1	-	-	-	8c0bd19283bb	-	a4b5519e73ea	-	-	2026-11-24	xproof
 068b3692-411b-44d4-a7e9-005262760cfc	cast	cast-resolve	agreed	-	FX	scen	2	0	Sacrifice/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-068b370f-a358-4244-8050-6c81680c55c7	cast	cast-resolve	agreed	-	X	scen	1	0	Stocking the Pantry/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+068b370f-a358-4244-8050-6c81680c55c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stocking-the-pantry:cast:s1,f:xs:XP:stocking-the-pantry:cast:s1	-	-	-	3aa6ded33acb	-	27cd3818050b	-	-	2026-11-25	xproof
 068b370f-a358-4244-8050-6c81680c55c7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stocking the Pantry/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 068b370f-a358-4244-8050-6c81680c55c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stocking the Pantry/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 068b9586-53e3-4791-a26c-a6b38d038f66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -134,14 +134,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 069862f9-f051-40cc-84f2-c0208873a34c	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 069be6a0-9545-4fdc-ad40-957fe307db7a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shivan-hellkite:cast:s1,f:xs:XP:shivan-hellkite:cast:s1	-	-	-	25696bf19d5b	-	5cf6b8687e8f	-	-	2026-11-24	xproof
 069be6a0-9545-4fdc-ad40-957fe307db7a	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:shivan-hellkite:f0a0:s1,f:xs:XP:shivan-hellkite:f0a0:s1	-	-	-	d864b561c9cb	-	5cf6b8687e8f	-	-	2026-11-24	xproof
-069c3c87-81a8-4d2a-ad2f-8d3243d0e3db	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+069c3c87-81a8-4d2a-ad2f-8d3243d0e3db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:indomitable-might:cast:s1,f:xs:XP:indomitable-might:cast:s1	-	-	-	3aa6ded33acb	-	587b377c201a	-	-	2026-11-25	xproof
 069c8fa1-fa04-4620-9356-a618158dad3e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 069f6530-e65c-4d52-85f3-e0a2acd148c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 069f6530-e65c-4d52-85f3-e0a2acd148c5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06a158c6-7e36-49f8-a8e0-a7b7df5fd7ed	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06a158c6-7e36-49f8-a8e0-a7b7df5fd7ed	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-06a2a50d-f54f-4eb7-9cf8-ce37d802794a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trusty-retriever:f0t0:s1,f:xs:XP:trusty-retriever:f0t0:s1	-	-	-	23b491658465	-	8e331fbf2547	-	-	2026-11-24	xproof
-06a2a50d-f54f-4eb7-9cf8-ce37d802794a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+06a158c6-7e36-49f8-a8e0-a7b7df5fd7ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phantasmal-forces:f0t0:s1,f:xs:XP:phantasmal-forces:f0t0:s1	-	-	-	3aa6ded33acb	-	1e77e812f49c	-	-	2026-11-25	xproof
+06a158c6-7e36-49f8-a8e0-a7b7df5fd7ed	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:phantasmal-forces:f0t0:s1,f:xs:XP:phantasmal-forces:f0t0:s1	-	-	-	3aa6ded33acb	-	1e77e812f49c	-	-	2026-11-25	xproof
+06a2a50d-f54f-4eb7-9cf8-ce37d802794a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trusty-retriever:f0t0:s1,f:xs:XP:trusty-retriever:f0t0:s1	-	-	-	3aa6ded33acb	-	8e331fbf2547	-	-	2026-11-25	xproof
+06a2a50d-f54f-4eb7-9cf8-ce37d802794a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:trusty-retriever:f0t0:s1,f:xs:XP:trusty-retriever:f0t0:s1	-	-	-	3aa6ded33acb	-	8e331fbf2547	-	-	2026-11-25	xproof
 06a37f16-c929-4b89-bf18-1b3f8f472eef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:leering-onlooker:cast:s1,f:xs:XP:leering-onlooker:cast:s1	-	-	-	8c0bd19283bb	-	b20270971f52	-	-	2026-11-24	xproof
 06a37f16-c929-4b89-bf18-1b3f8f472eef	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:leering-onlooker:combat0.attack:s1,f:xs:XP:leering-onlooker:combat0.attack:s1	-	-	-	3aa6ded33acb	-	b20270971f52	-	-	2026-11-25	xproof
 06a37f16-c929-4b89-bf18-1b3f8f472eef	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:leering-onlooker:combat0.block:s1,f:xs:XP:leering-onlooker:combat0.block:s1	-	-	-	3aa6ded33acb	-	b20270971f52	-	-	2026-11-25	xproof

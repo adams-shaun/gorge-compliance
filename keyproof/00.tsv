@@ -141,7 +141,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00afc724-be09-4e92-a50c-88011bd10ccd	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 00b34fab-5a80-4a4d-b6cf-72479197677a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00b34fab-5a80-4a4d-b6cf-72479197677a	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-00b36996-43c6-42a5-892c-c7c8864cf973	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+00b36996-43c6-42a5-892c-c7c8864cf973	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 00b3971b-5bf7-4a3f-9607-6265f9af9098	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00b3971b-5bf7-4a3f-9607-6265f9af9098	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 00b50215-e832-417f-9c80-2bc3050b6ebb	cast	cast-resolve	agreed	-	X	scen	1	0	Spider-Ham, Peter Porker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -151,9 +151,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 00b9d3a3-fd64-4757-9159-b3af06b5f5b1	f0/a0	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:sauron-the-lidless-eye:f0a0:s1,f:xs:XP:sauron-the-lidless-eye:f0a0:s1	-	-	-	ae86f6029288	-	b37e70b2fb51	-	-	2026-11-24	xproof
 00b9d3a3-fd64-4757-9159-b3af06b5f5b1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sauron-the-lidless-eye:f0t0:s1,f:xs:XP:sauron-the-lidless-eye:f0t0:s1	-	-	-	ae86f6029288	-	b37e70b2fb51	-	-	2026-11-24	xproof
 00ba96e0-42a7-432a-a500-5e607d75a358	cast	cast-resolve	agreed	-	FX	scen	2	0	Fear of Falling/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-00ba96e0-42a7-432a-a500-5e607d75a358	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fear of Falling/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-00ba96e0-42a7-432a-a500-5e607d75a358	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fear of Falling/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-00ba96e0-42a7-432a-a500-5e607d75a358	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Fear of Falling/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+00ba96e0-42a7-432a-a500-5e607d75a358	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:fear-of-falling:combat0.attack:s1,f:xs:XP:fear-of-falling:combat0.attack:s1	-	-	-	3aa6ded33acb	-	240e1798efe8	-	-	2026-11-25	xproof
+00ba96e0-42a7-432a-a500-5e607d75a358	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:fear-of-falling:combat0.block:s1,f:xs:XP:fear-of-falling:combat0.block:s1	-	-	-	3aa6ded33acb	-	240e1798efe8	-	-	2026-11-25	xproof
+00ba96e0-42a7-432a-a500-5e607d75a358	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fear-of-falling:combat0.attack:s1,f:xs:XP:fear-of-falling:combat0.attack:s1	-	-	-	3aa6ded33acb	-	240e1798efe8	-	-	2026-11-25	xproof
 00bcada7-9028-4919-8de2-ddb74c1c7ef8	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	e074487f7adc	-	-	2026-11-24	xproof
 00bcada7-9028-4919-8de2-ddb74c1c7ef8	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	e074487f7adc	-	-	2026-11-24	xproof
 00bcbeb5-196a-4a54-ac8d-dec708e68d01	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devoted-paladin:f0t0:s1,f:xs:XP:devoted-paladin:f0t0:s1	-	-	-	d864b561c9cb	-	8c45418d6550	-	-	2026-11-24	xproof

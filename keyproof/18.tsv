@@ -52,7 +52,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1820b6e9-83fd-40b9-953e-ba1a8ae69614	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sunken-hope:cast:s1,f:xs:XP:sunken-hope:cast:s1	-	-	-	25696bf19d5b	-	e5045bc0f143	-	-	2026-11-24	xproof
 1822f924-51ba-4f81-92cc-6c5d741a33f9	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ravenloft-adventurer:cast:s1,f:xs:XP:ravenloft-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	50fe6b0e231f	-	-	2026-11-24	xproof
 1822f924-51ba-4f81-92cc-6c5d741a33f9	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ravenloft-adventurer:cast:s1,f:xs:XP:ravenloft-adventurer:cast:s1	-	-	-	8c0bd19283bb	-	50fe6b0e231f	-	-	2026-11-24	xproof
-1822f924-51ba-4f81-92cc-6c5d741a33f9	f0/t1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1822f924-51ba-4f81-92cc-6c5d741a33f9	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ravenloft-adventurer:f0t1:s1,f:xs:XP:ravenloft-adventurer:f0t1:s1	-	-	-	3aa6ded33acb	-	50fe6b0e231f	-	-	2026-11-25	xproof
 18279733-5568-427c-b0a2-044bca28f688	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18279733-5568-427c-b0a2-044bca28f688	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18290c4b-cff6-4ee5-a487-fe0d5706d3de	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Urban Retreat/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -210,8 +210,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18e7ba0d-88a5-466b-9228-d3f5aae8f83e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:basal-sliver:cast:s1,f:xs:XP:basal-sliver:cast:s1	-	-	-	0984227a67dd	-	7bd313183b0c	-	-	2026-11-24	xproof
 18e96674-6fd8-4046-a3fe-7ba80138d85d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18ec721f-c1ac-4581-a61d-2f0b09d6bf92	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:plague-wind:cast:s1,f:xs:XP:plague-wind:cast:s1	-	-	-	25696bf19d5b	-	b2656da432f1	-	-	2026-11-24	xproof
-18ed0c8a-db8f-4247-87c4-544b833f01bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-18ed0c8a-db8f-4247-87c4-544b833f01bd	f0/t0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+18ed0c8a-db8f-4247-87c4-544b833f01bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:master-of-ceremonies:f0t0:s1,f:xs:XP:master-of-ceremonies:f0t0:s1	-	-	-	3aa6ded33acb	-	ff6157f939c5	-	-	2026-11-25	xproof
+18ed0c8a-db8f-4247-87c4-544b833f01bd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:master-of-ceremonies:f0t0:s1,f:xs:XP:master-of-ceremonies:f0t0:s1	-	-	-	3aa6ded33acb	-	ff6157f939c5	-	-	2026-11-25	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:claim-jumper:f0t0:s1,f:xs:XP:claim-jumper:f0t0:s1	-	-	-	3aa6ded33acb	-	4ee96b570d60	-	-	2026-11-25	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:claim-jumper:combat0.attack:s1,f:xs:XP:claim-jumper:combat0.attack:s1	-	-	-	3aa6ded33acb	-	4ee96b570d60	-	-	2026-11-25	xproof
 18f0cd0b-3e4f-4637-a62e-75dd1b2f3fce	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:claim-jumper:combat0.block:s1,f:xs:XP:claim-jumper:combat0.block:s1	-	-	-	3aa6ded33acb	-	4ee96b570d60	-	-	2026-11-25	xproof

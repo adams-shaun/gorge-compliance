@@ -33,7 +33,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25328cab-c7c0-4c55-99bb-a4149f6c511a	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:bramble-armor:f0a0:s1,f:xs:XP:bramble-armor:f0a0:s1	-	-	-	3aa6ded33acb	-	383042c55eec	-	-	2026-11-25	xproof
 25328cab-c7c0-4c55-99bb-a4149f6c511a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:bramble-armor:cast:s1,f:xs:XP:bramble-armor:cast:s1	-	-	-	d864b561c9cb	-	383042c55eec	-	-	2026-11-24	xproof
 2536750c-3c4f-4e00-b517-680ad4fd2ecc	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:skeleton-crew:cast:s1,f:xs:XP:skeleton-crew:cast:s1	-	-	-	8c0bd19283bb	-	42a5dc1c8d87	-	-	2026-11-24	xproof
-2536750c-3c4f-4e00-b517-680ad4fd2ecc	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2536750c-3c4f-4e00-b517-680ad4fd2ecc	f0/a0	ChangeZone	agreed	-	F	start	2	0	f:xs:XP:skeleton-crew:f0a0:s1	-	-	-	3aa6ded33acb	-	42a5dc1c8d87	-	-	2026-11-25	xproof
 2536750c-3c4f-4e00-b517-680ad4fd2ecc	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 253bec96-108c-4880-9c04-8bc99ceafa64	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heart-piercer-manticore:f0t0:s1,f:xs:XP:heart-piercer-manticore:f0t0:s1	-	-	-	d864b561c9cb	-	f9cd44fd56ec	-	-	2026-11-24	xproof
 253bec96-108c-4880-9c04-8bc99ceafa64	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -155,8 +155,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25a20f94-1703-4bcd-862d-f2db7014ba90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25a2f4c8-cdab-49a5-80fd-a75230829f3f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25a63171-a1a0-4c61-ac61-49bb59fe83c1	cast	cast-resolve	agreed	-	FX	scen	2	0	Thought-Stalker Warlock/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-25a63171-a1a0-4c61-ac61-49bb59fe83c1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Thought-Stalker Warlock/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-25a63171-a1a0-4c61-ac61-49bb59fe83c1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Thought-Stalker Warlock/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+25a63171-a1a0-4c61-ac61-49bb59fe83c1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:thought-stalker-warlock:combat0.attack:s1,f:xs:XP:thought-stalker-warlock:combat0.attack:s1	-	-	-	3aa6ded33acb	-	71133f143540	-	-	2026-11-25	xproof
+25a63171-a1a0-4c61-ac61-49bb59fe83c1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:thought-stalker-warlock:combat0.block:s1,f:xs:XP:thought-stalker-warlock:combat0.block:s1	-	-	-	3aa6ded33acb	-	71133f143540	-	-	2026-11-25	xproof
 25a63171-a1a0-4c61-ac61-49bb59fe83c1	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25a73cfc-a40d-47ea-a7b1-61c7b62a9e6c	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:eldrazi-ravager:cast:s2,f:xs:XP:eldrazi-ravager:cast:s2	-	-	-	ae86f6029288	-	7ed3ef0a34c7	-	-	2026-11-24	xproof
 25a73cfc-a40d-47ea-a7b1-61c7b62a9e6c	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
