@@ -362,6 +362,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # form's entity pick (the lone Equipment the lone-forced shortcut consumes) is remembered as that attachment's yes. Test
 # UnmappedAsksJoinDirectionAttachTest (5 tests, five fixtures/unmapped requests); full driver suite 177 tests. Driver-only;
 # cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-number-direction-attach.
+# a1bcd1166a = d0f16bee2e0 plus the cost-choice census (xproof cluster xpt-5b85ea4e): every card-choosing cost that fell
+# to ScriptedCostDecision.choice()'s strict miss (CostReturn on Quirion Ranger, CostUntapType, CostReveal, CostPutCardToLib,
+# CostGainControl, CostExiledMoveToGrave, CostBehold/BeholdExile, CostCollectEvidence, CostExert, CostEnlist,
+# CostPromiseGift, CostExile's All/FromTopGrave/total-mana-value forms, CostRemoveAnyCounter per-counter picks) now takes
+# gorge's logged pick, forced when exact; CostChooseColor/CreatureType/RevealChosen keep the parent's answer. Only
+# RemoveAnyCounter of any kind over several permanents stays on choice(). Test CostReturnPickTest (2 tests,
+# fixtures/costreturn); full driver suite 185 tests. Driver-only. Fork branch fix/xp-forge-driver-cost-choice-census.
 # d0f16bee2e0 = the merge of a4fa8d45a56 and fef74c5308f, carrying all three fixes (the OddsOrEvens binary,
 # the repeated-mode/NICKNAME/zero-option driver work and the Myriad-only AtEOT guard).
 # a4fa8d45a56 = the merge of 65c6664d90 and a445a858b2, carrying both fixes.
@@ -396,7 +403,7 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # forge-game Myriad-only AtEOT guard touch disjoint files, so the pin keeps both. Driver and die-roll code are unchanged from
 # 0c4ca7afb3d; MordorOnTheMarchNothingExiledTest and MyriadNoTokensCreatesNoDelayedTriggerTest keep the a445a858b2 evidence.
 # Fork branch fix/xp-forge-driver-repeat-modes-nickname-zeropick-merge.
-FORGE_ORACLE_REF ?= d0f16bee2e018d35874a0a8838491c1af1b02b82
+FORGE_ORACLE_REF ?= a1bcd1166a3a2dcddf631c6a5fd78b4c2b6d987f
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
