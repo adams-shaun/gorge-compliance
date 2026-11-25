@@ -55,7 +55,7 @@ a85197ab-dc94-4b72-9716-8dbdbbe90ff8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a85197ab-dc94-4b72-9716-8dbdbbe90ff8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:butcher-of-malakir:f0t0:s1,f:xs:XP:butcher-of-malakir:f0t0:s1	-	-	-	8a1b1a193ec0	-	0da72b759843	-	-	2026-11-24	xproof
 a853e48b-1e15-4492-a5b4-9924b1a4cf9a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a853e48b-1e15-4492-a5b4-9924b1a4cf9a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-a853e48b-1e15-4492-a5b4-9924b1a4cf9a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+a853e48b-1e15-4492-a5b4-9924b1a4cf9a	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 a85e893c-6027-42eb-8d05-14c745cc8c95	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:viashino-skeleton:cast:s1,f:xs:XP:viashino-skeleton:cast:s1	-	-	-	8a1b1a193ec0	-	0e2c2d1dbd54	-	-	2026-11-24	xproof
 a85e893c-6027-42eb-8d05-14c745cc8c95	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:viashino-skeleton:f0a0:s1,f:xs:XP:viashino-skeleton:f0a0:s1	-	-	-	23c4009444b0	-	0e2c2d1dbd54	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 a85ee0cf-39ce-49f2-874a-f6f54ca1775f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -74,7 +74,7 @@ a866cc05-69b0-45f2-8829-b6ef08193ed1	cast	NULL	owed	refused:start:needs-target	-
 a866fb67-6614-45e6-928e-b4b59d95335f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a867be6f-46ce-4a12-a827-9429bd94243f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a867be6f-46ce-4a12-a827-9429bd94243f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-a86f9b53-ff44-4b08-a8e9-beef73595de1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+a86f9b53-ff44-4b08-a8e9-beef73595de1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 a871b03e-0218-4c15-8ad8-c8284b5be45f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a871dfbf-1fb9-4d1c-81bb-e4f0b131a11b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:valgavoth-s-faithful:cast:s1,f:xs:XP:valgavoth-s-faithful:cast:s1	-	-	-	23c4009444b0	-	c52c46df17e2	-	-	2026-11-25	xproof
 a871dfbf-1fb9-4d1c-81bb-e4f0b131a11b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Valgavoth's Faithful/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -202,6 +202,6 @@ a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spe
 a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:spectral-sailor:combat0.attack:s1,f:xs:XP:spectral-sailor:combat0.attack:s1	-	-	-	3aa6ded33acb	-	ed8fa1598289	-	-	2026-11-25	xproof
 a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:spectral-sailor:combat0.block:s1,f:xs:XP:spectral-sailor:combat0.block:s1	-	-	-	3aa6ded33acb	-	ed8fa1598289	-	-	2026-11-25	xproof
 a8fdbcdf-479d-4582-9ad5-9fbd4c740c29	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:spectral-sailor:f0a0:s1,f:xs:XP:spectral-sailor:f0a0:s1	-	-	-	23b491658465	-	ed8fa1598289	-	-	2026-11-24	xproof
-a8fe6204-9f55-45e5-99b3-43f2761ce8a3	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
+a8fe6204-9f55-45e5-99b3-43f2761ce8a3	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 a8ffbf6d-44e9-44e4-846c-4f894078130e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a8ffbf6d-44e9-44e4-846c-4f894078130e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
