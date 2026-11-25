@@ -13,6 +13,7 @@ import (
 	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/effects"
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/engine/rules/pay"
 	"github.com/adams-shaun/gorge/engine/state"
 )
 
@@ -1570,9 +1571,7 @@ func lowerPriority(reg *cards.Registry, m seatMap, en game.Entry, mana []game.Ma
 		// ability, which the runner finds by its index. A source with several
 		// mana abilities asks which one first, and its record sits on that
 		// ask (isManaAbilityAsk): the group's one record is then the ability.
-		if !priorityManaTap(en, mana) || len(en.Mana) == 0 && colourPicks(reg, mana[0]) != nil {
-			// The runner would answer the ability choice with the colour
-			// (harness: answer "U" not offered for choose).
+		if !priorityManaTap(en, mana) || len(en.Mana) == 0 && wheelAsksColour(reg, mana[0]) {
 			return nil, unsupported("activate")
 		}
 		taps, why := manaTaps(reg, m, mana)
@@ -1618,6 +1617,23 @@ func manaTaps(reg *cards.Registry, m seatMap, mana []game.ManaRec) ([]oraclegen.
 		out = append(out, st)
 	}
 	return out, nil
+}
+
+// wheelAsksColour reports a mana ability, picked on the engine's choice among
+// its source's mana abilities, that asks its colour after that choice. The
+// gorge runner at the pin gives the step's queued colour answer to the choice
+// itself, where the colour is not offered (answer "U" not offered for choose:
+// "Add C", "Add any color"), so such a tap is refused until the pin carries
+// gorge's fix. An explicit multi-colour combo (pain lands, Talismans, Grove of
+// the Burnwillows: Produced$ Combo U R) asks nothing after it: the choice
+// offers one option per colour ("Add U", "Add R"), which the colour answer
+// picks.
+func wheelAsksColour(reg *cards.Registry, mr game.ManaRec) bool {
+	if colourPicks(reg, mr) == nil {
+		return false
+	}
+	_, flat := pay.ManaAbilityComboColours(manaSA(reg, mr), "")
+	return !flat
 }
 
 // colourPicks is the colours to answer a mana ability's colour ask with, nil
