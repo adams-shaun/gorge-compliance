@@ -40,9 +40,10 @@ func offeredKeys(offers []rules.OracleSnapOffered) string {
 	return strings.Join(parts, "\n")
 }
 
-// reminderText is a parenthesized reminder: Forge and XMage spell a Station ability
-// "station (tap another creature you control: ...)", reminder and all.
-var reminderText = regexp.MustCompile(`\([^)]*\)`)
+// reminderText is a parenthesized reminder, in XMage wrapped in <i> markup: the
+// engines spell a Station ability "station (tap another creature you control:
+// ...)" and "station<i>(tap ...)</i>", reminder and all.
+var reminderText = regexp.MustCompile(`\([^)]*\)|</?[a-z]+>`)
 
 // anyColorMana is the lead of every spelling of "add mana of any color": gorge's
 // "Add any color", XMage's and Forge's "Add X mana of any one color, where X is ...",

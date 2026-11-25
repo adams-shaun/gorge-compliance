@@ -777,7 +777,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # before it with the exact miss; scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) runs it. Driver-only.
 # 53059b9bbf2 = oracle/fpin-1125-join10: 6fcacdc21814 (join9; above) joined with 019d50429f (the ChangeTargets accept/retarget
 # fix; above); driver-only, die-roll code unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 53059b9bbf2d85b11f810f54699145b731665a8b
+# 99e8228cba = 53059b9bbf2 plus the pending-declaration offered rule (xproof cluster setup:offered, a-realm-reborn, muldrotha, icetill-explorer,
+# mm-menon-the-right-hand): SnapshotWriter.offered is empty at the declare-attackers/declare-blockers step before anything is declared while the
+# active player has a legal attacker / the defender a legal blocker (CR 508.1, 509.1, 117.3a: the turn-based declaration precedes priority, and gorge's
+# checkpoint is that pending decision). Forge hands the seat priority once its callback returns without a declaration and used to list the seat's mana
+# abilities. scripts/forge-oracle-test-declare-attackers-offered.sh (make forge-driver-tests) fails on 53059b9bbf2 and passes here. Driver-only;
+# cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-offered-declaration.
+FORGE_ORACLE_REF ?= 99e8228cbae8ea0763a9710408ee543e22ec860d
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
