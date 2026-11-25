@@ -2046,7 +2046,7 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = append(as, XAnswer{d.Seat, "choice", yn})
 				break
 			}
-			if d.Resume == "sacrifice"&& d.Min == 0 && len(d.Picks) > 0 {
+			if d.Resume == "sacrifice" && d.Min == 0 && len(d.Picks) > 0 {
 				// An accepted optional sacrifice ("any opponent may sacrifice
 				// a creature"): XMage asks chooseUse before the pick
 				// (DesecrationDemon.java:77, DoIfCostPaid), so the pick needs
