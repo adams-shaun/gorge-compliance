@@ -136,9 +136,14 @@ func TestForgeRolledDie(t *testing.T) {
 // bfdb3a8051 = 149a03bbbec4 merged with 46203751a5 (foretell cast mode, Riot choice; StepMachine/ScriptedController only);
 // die-roll code unchanged.
 // c9419dd87a = oracle/fpin-1125: bfdb3a8051 (foretell, Riot; above) joined with f1e3e00905 (Done pick, Mobilize, forced remove-counter amount; above); driver-only.
-// 1a2655bbd3 = c9419dd87a plus the Evoke sacrifice label binding (StepMachine.triggerScore only); die-roll code unchanged,
-// ForcedDieRollTest re-run green on it (7 of 7).
-const forgeOracleDieRollRef = "1a2655bbd3090d5c66433b8964a5cbf8e5082fcd"
+// 2b591baf9c = c9419dd87a + ScriptedController.chooseCardName (empty face list) only; die-roll code unchanged.
+// 0558bd00b88 = c9419dd87a merged with c332e2b33f5 (the unpinned transit Graveyard/Battlefield order, StepMachine.orderCards
+// and OrderCardsTest only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
+// eb695169f9 = 2b591baf9c merged with 0558bd00b88 (the empty-face chooseCardName and the unpinned transit order); die-roll
+// code unchanged.
+// 3d8f89a00d = eb695169f9 merged with 1a2655bbd3 (the Evoke sacrifice label binding, StepMachine.triggerScore only) and 2d4eac3d93 (the DigMultiple
+// pick and AlternativeDecider position answers); die-roll code unchanged, ForcedDieRollTest re-run green on it (7 of 7).
+const forgeOracleDieRollRef = "3d8f89a00dc62d8c909516b13a66373614c87376"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
