@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9635d79e-62ec-4d80-ae37-2793489cc13b	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:nova-hellkite:combat0.block:s1,f:xs:XP:nova-hellkite:combat0.block:s1	-	-	-	23c4009444b0	-	d374098d06af	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9635d79e-62ec-4d80-ae37-2793489cc13b	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9636073e-e361-4d2a-92f6-5fe049e5eb23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9636073e-e361-4d2a-92f6-5fe049e5eb23	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+9636073e-e361-4d2a-92f6-5fe049e5eb23	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 963834c8-42df-4ee6-9b45-b9de88ce2eac	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 963834c8-42df-4ee6-9b45-b9de88ce2eac	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 963947d5-5fe4-49cd-be0c-0bdb5f7bcbb6	cast	cast-resolve	agreed	-	FX	scen	2	0	Bearer of Glory/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -111,8 +111,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 968f0edb-b81f-465a-84b2-f077af61e51b	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 969233f8-a644-4297-a2bf-b1ca7a58bb0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9696ad3d-2e17-4ab7-88ee-3c56a632b7a8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shrine-of-loyal-legions:f0t1:s1,f:xs:XP:shrine-of-loyal-legions:f0t1:s1	-	-	-	3aa6ded33acb	-	9d732379bde9	-	-	2026-11-25	xproof
-9696ad3d-2e17-4ab7-88ee-3c56a632b7a8	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-9696ad3d-2e17-4ab7-88ee-3c56a632b7a8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+9696ad3d-2e17-4ab7-88ee-3c56a632b7a8	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+9696ad3d-2e17-4ab7-88ee-3c56a632b7a8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 9696ad3d-2e17-4ab7-88ee-3c56a632b7a8	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:shrine-of-loyal-legions:f0t1:s1,f:xs:XP:shrine-of-loyal-legions:f0t1:s1	-	-	-	3aa6ded33acb	-	9d732379bde9	-	-	2026-11-25	xproof
 9697cd05-474e-46f3-8bcc-d4b6fb2059a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eyes-in-the-skies:cast:s1,f:xs:XP:eyes-in-the-skies:cast:s1	-	-	-	d864b561c9cb	-	3b2c971d0d48	-	-	2026-11-24	xproof
 969fa9b9-161f-461e-8878-9ebcff5a2669	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96cf2810-35b8-437e-b609-f9765604b8cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96cf3320-c730-4618-8768-28a179f4d9c0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96cf3320-c730-4618-8768-28a179f4d9c0	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-96cf3c10-733d-4110-9dab-43d0cd4e6629	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+96cf3c10-733d-4110-9dab-43d0cd4e6629	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 96d0e4dd-6cc2-4349-ac44-785b50f8dd90	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 96d1bfc1-b80f-466f-b07d-df1ab361e8e0	cast	cast-resolve	agreed	-	FX	scen	2	0	Summon: G.F. Ifrit/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96d508a6-ecd2-4a97-8802-df099a372084	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Aang, at the Crossroads/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Aang, at the Crossroads/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Aang, at the Crossroads/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-96e5d4a1-e59f-4140-823f-a17e15ee5d8d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+96e5d4a1-e59f-4140-823f-a17e15ee5d8d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Aang, at the Crossroads/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Aang, at the Crossroads/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 96e5d4a1-e59f-4140-823f-a17e15ee5d8d	static#1.0	static#1.0	agreed	-	X	scen	1	0	Aang, at the Crossroads/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

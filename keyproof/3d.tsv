@@ -154,14 +154,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3db407ec-da4b-4b25-b613-e45c164ffe86	f0/t0	Attacks	agreed	-	F	start	2	0	f:xs:XP:cho-arrim-bruiser:f0t0:s1	-	-	-	5f2128bf97e4	-	a64613357150	-	-	2026-11-24	xproof
 3db8466c-864f-48ba-b617-f2c863dfdcbd	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	0c0b1126a75f	-	-	2026-11-24	xproof
 3dc225a2-61b6-4ac9-a86b-df0c2b0b3898	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3dc225a2-61b6-4ac9-a86b-df0c2b0b3898	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3dc225a2-61b6-4ac9-a86b-df0c2b0b3898	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3dc364f3-3094-4660-80ca-9418588c7fde	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:mithril-coat:cast:s1,f:xs:XP:mithril-coat:cast:s1	-	-	-	ae86f6029288	-	c39e5e36907d	-	-	2026-11-24	xproof
 3dc364f3-3094-4660-80ca-9418588c7fde	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:mithril-coat:f0a0:s1,f:xs:XP:mithril-coat:f0a0:s1	-	-	-	3aa6ded33acb	-	c39e5e36907d	-	-	2026-11-25	xproof
 3dc364f3-3094-4660-80ca-9418588c7fde	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:mithril-coat:cast:s1,f:xs:XP:mithril-coat:cast:s1	-	-	-	ae86f6029288	-	c39e5e36907d	-	-	2026-11-24	xproof
 3dc51dfc-7a60-41bf-b944-6afad6b06c22	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3dc51dfc-7a60-41bf-b944-6afad6b06c22	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:goldnight-commander:f0t0:s1,f:xs:XP:goldnight-commander:f0t0:s1	-	-	-	23c4009444b0	-	5073ac6b16ab	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-3dc71e16-b935-4ad7-b3f7-945ac2c179a7	cast	cast-resolve	agreed	-	X	scen	1	0	Chrome Dome/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-3dc71e16-b935-4ad7-b3f7-945ac2c179a7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Chrome Dome/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+3dc71e16-b935-4ad7-b3f7-945ac2c179a7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chrome-dome:cast:s1,f:xs:XP:chrome-dome:cast:s1	-	-	-	054d9f516953	-	77bb43869a6b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+3dc71e16-b935-4ad7-b3f7-945ac2c179a7	f0/a0	CopyPermanent	diverged	-	-	start	0	2	-	183d973368bd	-	-	054d9f516953	-	77bb43869a6b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3dc71e16-b935-4ad7-b3f7-945ac2c179a7	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:chrome-dome:static0.0:s1,f:xs:XP:chrome-dome:static0.0:s1	-	-	-	23c4009444b0	-	77bb43869a6b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3dc73517-0767-46ae-bc8d-ee378237a509	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:rooftop-percher:f0t0:s2,f:xs:XP:rooftop-percher:f0t0:s2	-	-	-	267e485f6204	-	635c9e9e63f0	-	-	2026-11-24	xproof
 3dc73517-0767-46ae-bc8d-ee378237a509	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:rooftop-percher:combat0.attack:s1,f:xs:XP:rooftop-percher:combat0.attack:s1	-	-	-	23c4009444b0	-	635c9e9e63f0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

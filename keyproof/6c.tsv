@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c0b07c4-bb7c-4100-81e5-b0ee95d18625	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:shipwreck-moray:cast:s1,f:xs:XP:shipwreck-moray:cast:s1	-	-	-	d864b561c9cb	-	ff63caba3d41	-	-	2026-11-24	xproof
 6c0b07c4-bb7c-4100-81e5-b0ee95d18625	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:shipwreck-moray:cast:s1,f:xs:XP:shipwreck-moray:cast:s1	-	-	-	d864b561c9cb	-	ff63caba3d41	-	-	2026-11-24	xproof
 6c0f6673-bc24-4c84-b4e7-736283ffd60e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wanderwine-distracter:cast:s1,f:xs:XP:wanderwine-distracter:cast:s1	-	-	-	23c4009444b0	-	6a3d0b8db21a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-6c0f6673-bc24-4c84-b4e7-736283ffd60e	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:wanderwine-distracter:f0t0:s1,f:xs:XP:wanderwine-distracter:f0t0:s1	-	-	-	6f84be0f34c0	-	6a3d0b8db21a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6c0f6673-bc24-4c84-b4e7-736283ffd60e	f0/t0	Taps	agreed	-	FX	start	2	0	x:xs:XP:wanderwine-distracter:f0t0:s1,f:xs:XP:wanderwine-distracter:f0t0:s1	-	-	-	054d9f516953	-	6a3d0b8db21a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6c12cd05-b673-453c-9f6b-f3aa022467c1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crush-of-wurms:cast:s1,f:xs:XP:crush-of-wurms:cast:s1	-	-	-	fc71ca68c5ac	-	fdea8f33d357	-	-	2026-11-24	xproof
 6c14ecbf-0097-4fd8-97a3-a32b532c21e0	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:earsplitting-rats:cast:s1,f:xs:XP:earsplitting-rats:cast:s1	-	-	-	fc71ca68c5ac	-	596ea4411f71	-	-	2026-11-24	xproof
 6c14ecbf-0097-4fd8-97a3-a32b532c21e0	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -82,7 +82,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c7e4e51-099a-4398-a4b7-e2f0ddd36429	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	The Astonishing Ant-Man/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c7e4e51-099a-4398-a4b7-e2f0ddd36429	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Astonishing Ant-Man/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c85271c-c711-49b0-a72e-9e576c33714d	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sculpting-steel:cast:s1	-	-	-	25696bf19d5b	-	a270d34d5e81	-	-	2026-11-24	xproof
-6c853b95-3d98-44fd-b05a-02d05d5eb0b8	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6c853b95-3d98-44fd-b05a-02d05d5eb0b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tel-jilad-justice:cast:s1,f:xs:XP:tel-jilad-justice:cast:s1	-	-	-	054d9f516953	-	48fcdf931414	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6c87c261-00a8-46f2-92c8-42009a0a2faf	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6c87c261-00a8-46f2-92c8-42009a0a2faf	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 6c8a8a7a-ee4f-4005-b6a2-fc418e396748	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
