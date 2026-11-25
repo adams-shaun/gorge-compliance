@@ -155,6 +155,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
     private final Map<PhaseStep, Integer> runtimeStepCounts = new EnumMap<>(PhaseStep.class);
     private final Map<Step, Integer> runtimeStepOccurrence = new IdentityHashMap<>();
 
+    // Where the scenario's LAST step queued its checkpoint: the pass cut's
+    // position. The untap step grants no priority (CR 500.4), so a cut whose
+    // position is (turn, UNTAP) takes its checkpoint at the pending
+    // optional-untap ask there (CR 502.3) -- chooseUse's untap-election
+    // branch flushes the queued runCode actions and pauses the game, the
+    // row complete. Both stay null/0 when the last step is not an untap cut.
+    private PhaseStep cutCheckpointPhase;
+    private int cutCheckpointTurn;
+
     // The stack object names seen at the last checkpoint, for the empty-stack
     // diagnostic: what a pass pair expected to resolve and no longer can.
     private List<String> lastCheckpointStack = new ArrayList<>();
@@ -1487,6 +1496,39 @@ public class ScenarioReplay extends CardTestPlayerBase {
                             hasOtherControlledCreature(game.getBattlefield().getAllActivePermanents(), game, source),
                             getChoices())) {
                 return false;
+            }
+            if (source == null && isUntapElectionAsk(message)) {
+                // The CR 502.3 optional-untap ask: it fires in the untap
+                // step's beginStep, a phase with no priority (CR 500.4), so
+                // the runCode actions queued at the cut position (turn,
+                // UNTAP) -- the pass cut's checkpoint among them -- would
+                // never run. Flush them here, before the answer: the
+                // snapshot must see the choice still pending, the permanent
+                // still tapped, as gorge's cut snapshot does. Then answer:
+                // the scripted election when one is queued, else leave
+                // tapped, the pending choice's state. A flushed cut
+                // checkpoint pauses the game here, the row complete.
+                boolean cutCheckpoint = owner.flushUntapAskRunCodes(game);
+                String head = getChoices().isEmpty() ? null : getChoices().get(0);
+                if ("Untap".equals(head) || "Keep tapped".equals(head)) {
+                    // A bound election: gorge recorded the ask's answer as its
+                    // own label (choose_n, pick kinds untap/keep_tapped), so
+                    // it is the choice head; TestPlayer's Yes/No handling
+                    // would never match it. Consume the label and map it.
+                    getChoices().remove(0);
+                    if (cutCheckpoint) {
+                        game.pause();
+                    }
+                    return head.equals("Untap");
+                }
+                boolean scripted = scriptedYesNoNext();
+                boolean answer = scripted
+                        ? super.chooseUse(outcome, message, secondMessage, trueText, falseText, source, game)
+                        : false;
+                if (cutCheckpoint) {
+                    game.pause();
+                }
+                return answer;
             }
             if (phyrexianStarved(message, getChoices())) {
                 return false;
@@ -4258,6 +4300,13 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // here: `i` and the step array are only final for this step.
                 final int passSeat = seatOfStep(steps, i);
                 final boolean handsPriorityOn = passHandsPriorityOn(steps, i, activeSeat, seats);
+                if (i == steps.size() - 1) {
+                    // The last step's checkpoint is the run's cut; remember
+                    // where it was queued so an untap ask there (CR 502.3)
+                    // can flush it and pause the row complete.
+                    cutCheckpointPhase = phase;
+                    cutCheckpointTurn = turn;
+                }
                 runCode(cp, turn, phase, checkpointSeat(op, st, i), (info, p, g) -> {
                     if (settleHere) {
                         g.checkStateAndTriggered();
@@ -4313,6 +4362,18 @@ public class ScenarioReplay extends CardTestPlayerBase {
                             (info, p, g) -> g.pause());
                     tagQueuedActions(0, 0);
                     setStopAt(turn + 1, PhaseStep.UNTAP);
+                } else if (phase == PhaseStep.UNTAP) {
+                    // A pass cut at the next turn's untap step: the untap
+                    // step grants no priority (CR 500.4), so
+                    // checkStopOnTurnOption would pause at the turn's very
+                    // start and the CR 502.3 optional-untap ask that holds
+                    // the cut checkpoint would never fire. The ask itself
+                    // pauses the game (chooseUse's untap-election branch,
+                    // after flushUntapAskRunCodes); the turn's upkeep is the
+                    // fallback boundary, which no checkpoint queues actions
+                    // for -- an engine gap that never reaches the ask shows
+                    // as an unused action there.
+                    setStopAt(turn, PhaseStep.UPKEEP);
                 } else {
                     setStopAt(turn, phase);
                 }
@@ -7823,6 +7884,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
             // A trigger or state-based action in the cleanup step gives the
             // players priority there (CR 514.3a), so gorge records passes at it.
             case "cleanup": return PhaseStep.CLEANUP;
+            // A pass that ends a turn sits at the next turn's untap step
+            // while that turn's optional-untap choice (CR 502.3) is pending:
+            // the untap step grants no priority (CR 500.4), so the position
+            // has no priority of its own, only the ask the controller takes
+            // the checkpoint at (see flushUntapAskRunCodes).
+            case "untap": return PhaseStep.UNTAP;
             default: throw new IllegalArgumentException("pass position in unknown step " + step);
         }
     }
@@ -7937,6 +8004,77 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
             actionOccurrences.put(action, queuedOccurrence(action.getTurnNum(), action.getStep()));
         }
+    }
+
+    /** Whether a message is the CR 502.3 optional-untap ask ("Untap
+     * Whip Vine?"): SkipUntapOptionalSourceEffect poses it from the untap
+     * step's beginStep with no ability as source, and no other engine ask
+     * shares the shape (MayTapOrUntapTargetEffect's "Untap that permanent?"
+     * carries its ability's source). */
+    static boolean isUntapElectionAsk(String message) {
+        return message != null && message.startsWith("Untap ") && message.endsWith("?");
+    }
+
+    /** Run the runCode actions queued at the running game's current untap
+     * occurrence, earliest queued first across both seats, and report
+     * whether the cut checkpoint (the scenario's last step, at the same
+     * position) was among them. The untap step grants no priority (CR
+     * 500.4), so TestPlayer never runs them: the CR 502.3 optional-untap
+     * ask is the only event there, and the pass cut at it holds the row's
+     * last checkpoint. Only runCode actions run -- the flusher must never
+     * act or pass. */
+    boolean flushUntapAskRunCodes(Game game) {
+        int turnNum = game.getTurnNum();
+        boolean positioned = false;
+        for (TestPlayer p : new TestPlayer[]{playerA, playerB}) {
+            for (PlayerAction action : p.getActions()) {
+                if (action.getTurnNum() == turnNum && action.getStep() == PhaseStep.UNTAP
+                        && action.getAction().startsWith(RUN_PREFIX)
+                        && action.getAction().endsWith(RUN_COMMAND_CODE)) {
+                    positioned = true;
+                    break;
+                }
+            }
+            if (positioned) {
+                break;
+            }
+        }
+        if (!positioned) {
+            return false;
+        }
+        // The occurrence of the Step instance the ask runs in: the ask is
+        // inside its playStep, so the lazy count sees and registers it.
+        int occurrence = runtimeOccurrence(game);
+        int flushed = 0;
+        while (true) {
+            ScriptedChoicePlayer best = null;
+            int bestIndex = -1;
+            PlayerAction bestAction = null;
+            for (TestPlayer tp : new TestPlayer[]{playerA, playerB}) {
+                ScriptedChoicePlayer p = (ScriptedChoicePlayer) tp;
+                List<PlayerAction> actions = p.getActions();
+                for (int i = 0; i < actions.size(); i++) {
+                    PlayerAction action = actions.get(i);
+                    Integer at = actionOccurrences.get(action);
+                    if (action.getTurnNum() == turnNum && action.getStep() == PhaseStep.UNTAP
+                            && action.getAction().startsWith(RUN_PREFIX)
+                            && action.getAction().endsWith(RUN_COMMAND_CODE)
+                            && at != null && at == occurrence
+                            && (best == null || i < bestIndex)) {
+                        best = p;
+                        bestIndex = i;
+                        bestAction = action;
+                    }
+                }
+            }
+            if (best == null) {
+                break;
+            }
+            best.getActions().remove(bestAction);
+            bestAction.getCodePayload().run(bestAction.getActionName(), best.getComputerPlayer(), game);
+            flushed++;
+        }
+        return flushed > 0 && cutCheckpointPhase == PhaseStep.UNTAP && cutCheckpointTurn == turnNum;
     }
 
     /** The commands step {@code index} queues before its own actions and

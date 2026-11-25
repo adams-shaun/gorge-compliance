@@ -908,7 +908,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # recorded state with no event or trigger, and refuses an unknown, keyword or negative entry. PlayerCountersSetupTest (5 tests, red
 # before) is run by scripts/forge-oracle-test-player-counters.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-player-counters.
-FORGE_ORACLE_REF ?= 495ed200e9f367aa7298908df5f4530c2cc4c8af
+# f3065a4da86 = oracle/fpin-1125-join20: 495ed200e9f (above) merged with 53635f189cc (the unbound optional-untap election answered at
+# the ask, CR 502.3/117.3d, xproof clusters xpt-4782660c/xpt-5133dae0, Whip Vine; ScriptedController/StepMachine/SnapshotWriter only), no
+# textual conflicts (all three files auto-merged). UntapElectionTest runs at this pin via scripts/forge-oracle-test-untap-election.sh
+# (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= f3065a4da8667697f1156f95af9c606f7530dfe3
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
