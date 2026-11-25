@@ -38,7 +38,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3518e273-bd92-46bc-b361-da52c670dfe1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:sunseed-nurturer:f0t0:s1,f:xs:XP:sunseed-nurturer:f0t0:s1	-	-	-	23c4009444b0	-	8a14b158ebda	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 351c4f85-8792-4710-8cc9-d3e36657f6db	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 351c4f85-8792-4710-8cc9-d3e36657f6db	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-351c4f85-8792-4710-8cc9-d3e36657f6db	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+351c4f85-8792-4710-8cc9-d3e36657f6db	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 3525e263-e29a-49bf-a29f-fb3ce43bbd33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heraldic-banner:cast:s1,f:xs:XP:heraldic-banner:cast:s1	-	-	-	23b491658465	-	167b44d6a92e	-	-	2026-11-24	xproof
 3525e263-e29a-49bf-a29f-fb3ce43bbd33	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:heraldic-banner:cast:s1,f:xs:XP:heraldic-banner:cast:s1	-	-	-	23b491658465	-	167b44d6a92e	-	-	2026-11-24	xproof
 352844c5-2160-4787-97f1-9cd0fed060eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35553c2a-0150-49e4-81da-f356c6a17253	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 35553c2a-0150-49e4-81da-f356c6a17253	f0/t1	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 355603d1-f62d-407a-8fa9-74e7dca8ecf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:era-of-innovation:cast:s1,f:xs:XP:era-of-innovation:cast:s1	-	-	-	d864b561c9cb	-	83fb970077de	-	-	2026-11-24	xproof
-355603d1-f62d-407a-8fa9-74e7dca8ecf9	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+355603d1-f62d-407a-8fa9-74e7dca8ecf9	f0/a0	NULL	owed	refused:steps-needed:cost:PayEnergy	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 355603d1-f62d-407a-8fa9-74e7dca8ecf9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:era-of-innovation:f0t0:s1,f:xs:XP:era-of-innovation:f0t0:s1	-	-	-	fb9d3088f0bf	-	83fb970077de	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 355bbe9b-59bf-470f-8600-410af4c7fe18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fear:cast:s1,f:xs:XP:fear:cast:s1	-	-	-	ae86f6029288	-	1a0edb130207	-	-	2026-11-24	xproof
 355c2840-2cb8-431a-bcdc-f4b8824a1f5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -85,11 +85,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35734003-0c94-4a0c-9441-ab989e73bb11	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:iwamori-of-the-open-fist:f0t0:s1,f:xs:XP:iwamori-of-the-open-fist:f0t0:s1	-	-	-	64a08ba7d913	-	bec6690d2488	-	-	2026-11-24	xproof
 35734003-0c94-4a0c-9441-ab989e73bb11	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:iwamori-of-the-open-fist:f0t0:s1,f:xs:XP:iwamori-of-the-open-fist:f0t0:s1	-	-	-	64a08ba7d913	-	bec6690d2488	-	-	2026-11-24	xproof
 35754a21-9fba-4370-a254-292918a777ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-35754a21-9fba-4370-a254-292918a777ba	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-35754a21-9fba-4370-a254-292918a777ba	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-35754a21-9fba-4370-a254-292918a777ba	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+35754a21-9fba-4370-a254-292918a777ba	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+35754a21-9fba-4370-a254-292918a777ba	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+35754a21-9fba-4370-a254-292918a777ba	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 35754a21-9fba-4370-a254-292918a777ba	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-35754a21-9fba-4370-a254-292918a777ba	f1/a2	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+35754a21-9fba-4370-a254-292918a777ba	f1/a2	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 3577c47e-76d3-4659-b922-31c4b74be3a0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enduring-vitality:cast:s1,f:xs:XP:enduring-vitality:cast:s1	-	-	-	23c4009444b0	-	9de47fe2c0d5	-	-	2026-11-25	xproof
 3577c47e-76d3-4659-b922-31c4b74be3a0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:enduring-vitality:combat0.attack:s1,f:xs:XP:enduring-vitality:combat0.attack:s1	-	-	-	23c4009444b0	-	9de47fe2c0d5	-	-	2026-11-25	xproof
 3577c47e-76d3-4659-b922-31c4b74be3a0	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:enduring-vitality:combat0.block:s1,f:xs:XP:enduring-vitality:combat0.block:s1	-	-	-	23c4009444b0	-	9de47fe2c0d5	-	-	2026-11-25	xproof

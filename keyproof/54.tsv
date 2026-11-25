@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 541c6564-ec39-4b14-8c02-dd6a5d122ed3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 541f13aa-a1ed-453a-b719-82daef1be607	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:manipulate-fate:cast:s1,f:xs:XP:manipulate-fate:cast:s1	-	-	-	5f2128bf97e4	-	c5cc29567650	-	-	2026-11-24	xproof
 54216953-c575-4e08-9bee-384721c0bc4d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54216953-c575-4e08-9bee-384721c0bc4d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+54216953-c575-4e08-9bee-384721c0bc4d	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 542423cb-fbfb-4a2f-9f6d-87b273a95e96	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ajani-valiant-protector:cast:s1,f:xs:XP:ajani-valiant-protector:cast:s1	-	-	-	d864b561c9cb	-	c5261e925f8d	-	-	2026-11-24	xproof
 542423cb-fbfb-4a2f-9f6d-87b273a95e96	f0/a0	PutCounter	agreed	-	FX	start	1	0	x:xs:XP:ajani-valiant-protector:cast:s2,f:xs:XP:ajani-valiant-protector:cast:s2	-	-	-	d864b561c9cb	-	c5261e925f8d	-	-	2026-11-24	xproof
 542423cb-fbfb-4a2f-9f6d-87b273a95e96	f0/a1	DigUntil	agreed	-	FX	start	1	0	x:xs:XP:ajani-valiant-protector:cast:s1,f:xs:XP:ajani-valiant-protector:cast:s1	-	-	-	d864b561c9cb	-	c5261e925f8d	-	-	2026-11-24	xproof
@@ -92,7 +92,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 546201d0-3fa5-44e4-a526-ab0945711e49	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5462cb38-7cd7-46e8-a273-35d0d1af45b4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54634ef2-cb7a-4203-8e48-2733f8c3911b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-54634ef2-cb7a-4203-8e48-2733f8c3911b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	9ff3e304d49e	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+54634ef2-cb7a-4203-8e48-2733f8c3911b	f0/t0	NULL	owed	refused:no-generator:trigger:Untaps	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:temur-monument:f0t0:s2,f:xs:XP:temur-monument:f0t0:s2	-	-	-	267e485f6204	-	1e8a1ad31d3a	-	-	2026-11-24	xproof
 5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Temur Monument/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5464d5ae-5be5-4e52-b9d0-ddce48fd93b3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:temur-monument:f0t0:s2,f:xs:XP:temur-monument:f0t0:s2	-	-	-	267e485f6204	-	1e8a1ad31d3a	-	-	2026-11-24	xproof
