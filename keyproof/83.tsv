@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8305d576-21d8-4ce7-8eda-a7cd9793aca5	f0/t0	SpellCastOrCopy	agreed	-	FX	start	2	0	x:xs:XP:archmage-emeritus:f0t0:s1,f:xs:XP:archmage-emeritus:f0t0:s1	-	-	-	6f84be0f34c0	-	5c43283cea30	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8307bfb0-3ab2-467f-b13c-ad4acadf319c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8307bfb0-3ab2-467f-b13c-ad4acadf319c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83094dd2-b8e9-4753-a8a0-657b446def60	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+83094dd2-b8e9-4753-a8a0-657b446def60	cast	cast	agreed	-	X	start	2	0	x:xs:XP:fierce-retribution:cast:s1	-	-	-	6f84be0f34c0	-	50161eeb14c9	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 83101ba8-a569-4827-8c53-9ca0dfcd59a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 831273d4-ced3-4659-b1f6-d5a0aeed3421	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83133f51-bfbd-4db5-9be0-f660e3b66435	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -142,7 +142,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83a76601-ef59-4888-af70-5088dd1f504c	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:regal-imperiosaur:static0.0:s1,f:xs:XP:regal-imperiosaur:static0.0:s1	-	-	-	23c4009444b0	-	ab253b57bf56	-	-	2026-11-25	xproof
 83a81308-4a15-49cd-b2f6-51431cca79e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83abf1d0-04e4-49e5-bf63-59f77829ffd1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dragonfly-swarm:cast:s1,f:xs:XP:dragonfly-swarm:cast:s1	-	-	-	23c4009444b0	-	92a5786bd343	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-83abf1d0-04e4-49e5-bf63-59f77829ffd1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dragonfly-swarm:combat0.attack:s1,f:xs:XP:dragonfly-swarm:combat0.attack:s1	-	-	-	44e3ec152eea	-	92a5786bd343	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+83abf1d0-04e4-49e5-bf63-59f77829ffd1	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dragonfly-swarm:combat0.attack:s1,f:xs:XP:dragonfly-swarm:combat0.attack:s1	-	-	-	6f84be0f34c0	-	92a5786bd343	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 83abf1d0-04e4-49e5-bf63-59f77829ffd1	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:dragonfly-swarm:combat0.block:s1,f:xs:XP:dragonfly-swarm:combat0.block:s1	-	-	-	23c4009444b0	-	92a5786bd343	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83abf1d0-04e4-49e5-bf63-59f77829ffd1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dragonfly-swarm:f0t0:s1,f:xs:XP:dragonfly-swarm:f0t0:s1	-	-	-	23c4009444b0	-	92a5786bd343	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83abf1d0-04e4-49e5-bf63-59f77829ffd1	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	4	0	x:xs:XP:dragonfly-swarm:f0t0:s1,f:xs:XP:dragonfly-swarm:f0t0:s1	-	-	-	23c4009444b0	-	92a5786bd343	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -207,8 +207,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83f1408e-8270-49b4-9d3f-eacfd3645543	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83f1408e-8270-49b4-9d3f-eacfd3645543	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZoneAll	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 83f1408e-8270-49b4-9d3f-eacfd3645543	f0/t1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83f2470e-2114-4cd9-ab1a-21b76e9cdf63	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:rumble-arena:land:s2,f:xs:XP:rumble-arena:land:s2	-	-	-	23c4009444b0	-	c3c4b9350de5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-83f2470e-2114-4cd9-ab1a-21b76e9cdf63	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Rumble Arena/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+83f2470e-2114-4cd9-ab1a-21b76e9cdf63	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:rumble-arena:f0a1:s1,f:xs:XP:rumble-arena:f0a1:s1	-	-	-	6f84be0f34c0	-	c3c4b9350de5	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+83f2470e-2114-4cd9-ab1a-21b76e9cdf63	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:rumble-arena:f0a1:s1,f:xs:XP:rumble-arena:f0a1:s1	-	-	-	6f84be0f34c0	-	c3c4b9350de5	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 83f2470e-2114-4cd9-ab1a-21b76e9cdf63	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rumble-arena:land:s1,f:xs:XP:rumble-arena:land:s1	-	-	-	23c4009444b0	-	c3c4b9350de5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83f2470e-2114-4cd9-ab1a-21b76e9cdf63	land	land	agreed	-	FX	start	2	0	x:xs:XP:rumble-arena:land:s1,f:xs:XP:rumble-arena:land:s1	-	-	-	23c4009444b0	-	c3c4b9350de5	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83f35293-39e9-4c78-9c9f-25a1fc905676	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

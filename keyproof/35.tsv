@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3525e263-e29a-49bf-a29f-fb3ce43bbd33	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:heraldic-banner:cast:s1,f:xs:XP:heraldic-banner:cast:s1	-	-	-	23b491658465	-	167b44d6a92e	-	-	2026-11-24	xproof
 352844c5-2160-4787-97f1-9cd0fed060eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 352844c5-2160-4787-97f1-9cd0fed060eb	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:mardu-blazebringer:f0t0:s1,f:xs:XP:mardu-blazebringer:f0t0:s1	-	-	-	d864b561c9cb	-	b29a9165b0ed	-	-	2026-11-24	xproof
-352844c5-2160-4787-97f1-9cd0fed060eb	f0/t1	Blocks	agreed	-	FX	start	2	0	x:xs:XP:mardu-blazebringer:f0t1:s1,f:xs:XP:mardu-blazebringer:f0t1:s1	-	-	-	44e3ec152eea	-	b29a9165b0ed	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+352844c5-2160-4787-97f1-9cd0fed060eb	f0/t1	Blocks	agreed	-	FX	start	2	0	x:xs:XP:mardu-blazebringer:f0t1:s1,f:xs:XP:mardu-blazebringer:f0t1:s1	-	-	-	6f84be0f34c0	-	b29a9165b0ed	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 352b64d2-2ae5-44ee-a64f-94932ef545d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 353db389-b829-4e66-85d5-6018bc87c3e0	cast	cast-resolve	agreed	-	X	scen	1	0	Mirrormind Crown/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 353db389-b829-4e66-85d5-6018bc87c3e0	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Mirrormind Crown/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35754a21-9fba-4370-a254-292918a777ba	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 35754a21-9fba-4370-a254-292918a777ba	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 35754a21-9fba-4370-a254-292918a777ba	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-35754a21-9fba-4370-a254-292918a777ba	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+35754a21-9fba-4370-a254-292918a777ba	f1/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 35754a21-9fba-4370-a254-292918a777ba	f1/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3577c47e-76d3-4659-b922-31c4b74be3a0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:enduring-vitality:cast:s1,f:xs:XP:enduring-vitality:cast:s1	-	-	-	23c4009444b0	-	9de47fe2c0d5	-	-	2026-11-25	xproof
 3577c47e-76d3-4659-b922-31c4b74be3a0	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:enduring-vitality:combat0.attack:s1,f:xs:XP:enduring-vitality:combat0.attack:s1	-	-	-	23c4009444b0	-	9de47fe2c0d5	-	-	2026-11-25	xproof
@@ -155,7 +155,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 35bef4d3-4473-4265-86b0-f1393c82fd1d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 35bef4d3-4473-4265-86b0-f1393c82fd1d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:wyleth-soul-of-steel:f0t0:s1,f:xs:XP:wyleth-soul-of-steel:f0t0:s1	-	-	-	8c0bd19283bb	-	867ca14ac4ca	-	-	2026-11-24	xproof
 35bf67e0-8141-4664-b762-2c613353e1eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:acolyte-of-the-inferno:cast:s1,f:xs:XP:acolyte-of-the-inferno:cast:s1	-	-	-	d864b561c9cb	-	37dde21f9d6b	-	-	2026-11-24	xproof
-35bf67e0-8141-4664-b762-2c613353e1eb	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:acolyte-of-the-inferno:f0t0:s1,f:xs:XP:acolyte-of-the-inferno:f0t0:s1	-	-	-	44e3ec152eea	-	37dde21f9d6b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+35bf67e0-8141-4664-b762-2c613353e1eb	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:acolyte-of-the-inferno:f0t0:s1,f:xs:XP:acolyte-of-the-inferno:f0t0:s1	-	-	-	6f84be0f34c0	-	37dde21f9d6b	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 35bf67e0-8141-4664-b762-2c613353e1eb	f0/t1	DamageDone/Renown	agreed	-	FX	start	2	0	x:xs:XP:acolyte-of-the-inferno:f0t1:s1,f:xs:XP:acolyte-of-the-inferno:f0t1:s1	-	-	-	fb9d3088f0bf	-	37dde21f9d6b	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 35c027cd-f754-4e41-9242-8a9d0481171c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dimir-house-guard:cast:s1,f:xs:XP:dimir-house-guard:cast:s1	-	-	-	64a08ba7d913	-	cb2809edb224	-	-	2026-11-24	xproof
 35c027cd-f754-4e41-9242-8a9d0481171c	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:dimir-house-guard:cast:s1,f:xs:XP:dimir-house-guard:cast:s1	-	-	-	64a08ba7d913	-	cb2809edb224	-	-	2026-11-24	xproof

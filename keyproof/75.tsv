@@ -18,7 +18,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 751da0fa-0ab1-4b8c-81bb-d86a0a280ac4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 751f22bc-bcea-4213-a37b-b5f72448a4c4	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 751f22bc-bcea-4213-a37b-b5f72448a4c4	f0/a0	Attach/Reconfigure	agreed	-	F	start	2	0	f:xs:XP:the-reality-chip:f0a1:s1	-	-	-	23b491658465	-	22c251a0eb5a	-	-	2026-11-25	xproof
-751f22bc-bcea-4213-a37b-b5f72448a4c4	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+751f22bc-bcea-4213-a37b-b5f72448a4c4	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 7522f7fd-6fda-4ed3-9131-21bf91616a73	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:chocobo-racetrack:cast:s1,f:xs:XP:chocobo-racetrack:cast:s1	-	-	-	23c4009444b0	-	7d3789809f2a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7522f7fd-6fda-4ed3-9131-21bf91616a73	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:chocobo-racetrack:f0t0:s1,f:xs:XP:chocobo-racetrack:f0t0:s1	-	-	-	23c4009444b0	-	7d3789809f2a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75237b2c-232b-479a-ab3a-e1566c8a9fe7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:steampath-charger:f0t1:s1,f:xs:XP:steampath-charger:f0t1:s1	-	-	-	23c4009444b0	-	c9ea21c517fe	-	-	2026-11-25	xproof
@@ -85,7 +85,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 755bd5d8-67f1-4f24-a4e8-d98edf2f2e03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:finale-of-revelation:cast:s1,f:xs:XP:finale-of-revelation:cast:s1	-	-	-	8c0bd19283bb	-	203a0ed7333b	-	-	2026-11-24	xproof
 755dbf29-7484-444f-b5df-29ec4b4bbc82	cast	cast	agreed	-	F	start	2	0	f:xs:XP:elven-rite:cast:s1	-	-	-	5f2128bf97e4	-	545b63bb5f1e	-	-	2026-11-24	xproof
 756042c5-e444-45d7-8dc6-ae7c83c98438	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghalta-and-mavren:cast:s1,f:xs:XP:ghalta-and-mavren:cast:s1	-	-	-	d864b561c9cb	-	29625f20302f	-	-	2026-11-24	xproof
-756042c5-e444-45d7-8dc6-ae7c83c98438	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+756042c5-e444-45d7-8dc6-ae7c83c98438	f0/t0	AttackersDeclared	agreed	-	FX	start	2	0	x:xs:XP:ghalta-and-mavren:f0t0:s1,f:xs:XP:ghalta-and-mavren:f0t0:s1	-	-	-	6f84be0f34c0	-	29625f20302f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 75645b1f-0e12-4a05-b47f-0d2e2616c3ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gruul-guildmage:cast:s1,f:xs:XP:gruul-guildmage:cast:s1	-	-	-	c2272f704fde	-	28db6e39439a	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 75645b1f-0e12-4a05-b47f-0d2e2616c3ca	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:gruul-guildmage:f0a0:s1,f:xs:XP:gruul-guildmage:f0a0:s1	-	-	-	23c4009444b0	-	28db6e39439a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75645b1f-0e12-4a05-b47f-0d2e2616c3ca	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:gruul-guildmage:f0a1:s1,f:xs:XP:gruul-guildmage:f0a1:s1	-	-	-	23c4009444b0	-	28db6e39439a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -138,7 +138,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75a7fdd4-046a-433b-b16f-a0424a05c904	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75a7fdd4-046a-433b-b16f-a0424a05c904	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75ae9b87-7137-47a0-b3e1-8915ccd0edf1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75ae9b87-7137-47a0-b3e1-8915ccd0edf1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fearless-fledgling:f0t0:s1,f:xs:XP:fearless-fledgling:f0t0:s1	-	-	-	44e3ec152eea	-	02a2969876df	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+75ae9b87-7137-47a0-b3e1-8915ccd0edf1	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fearless-fledgling:f0t0:s1,f:xs:XP:fearless-fledgling:f0t0:s1	-	-	-	6f84be0f34c0	-	02a2969876df	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 75af4154-d873-45d0-9ff2-c977169012a3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:collective-override:cast:s1,f:xs:XP:collective-override:cast:s1	-	-	-	8c0bd19283bb	-	2c772ac14076	-	-	2026-11-24	xproof
 75b235d3-595a-4859-be45-9559d8445db5	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:selesnya-guildgate:f0a0:s2,f:xs:XP:selesnya-guildgate:f0a0:s2	-	-	-	8c0bd19283bb	-	e0251a42b8f8	-	-	2026-11-24	xproof
 75b235d3-595a-4859-be45-9559d8445db5	land	land	agreed	-	FX	start	2	0	x:xs:XP:selesnya-guildgate:land:s1,f:xs:XP:selesnya-guildgate:land:s1	-	-	-	8c0bd19283bb	-	e0251a42b8f8	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75c81ce4-ca1d-464a-bb39-e568f8ebf71f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75c81ce4-ca1d-464a-bb39-e568f8ebf71f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDealtOnce:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 75d38954-6148-4d95-bf4b-cb82efcbe8df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-75d38954-6148-4d95-bf4b-cb82efcbe8df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:territorial-scythecat:f0t0:s1,f:xs:XP:territorial-scythecat:f0t0:s1	-	-	-	44e3ec152eea	-	2abcd926688f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+75d38954-6148-4d95-bf4b-cb82efcbe8df	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:territorial-scythecat:f0t0:s1,f:xs:XP:territorial-scythecat:f0t0:s1	-	-	-	6f84be0f34c0	-	2abcd926688f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 75d4f61a-8276-43ad-99e6-0d756a597e4b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75d667ec-86f4-4850-a3b6-e7a9fc7053b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:army-of-the-damned:cast:s1,f:xs:XP:army-of-the-damned:cast:s1	-	-	-	d864b561c9cb	-	8b2492e6f178	-	-	2026-11-24	xproof
 75d7f864-1240-43f5-8dd5-a5f7577bfa5b	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Miss Highwater"	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

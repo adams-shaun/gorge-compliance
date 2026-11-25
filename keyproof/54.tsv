@@ -53,7 +53,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5432bd43-e92c-464b-9ad2-3515f3042799	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sentinel-totem:f0t0:s1,f:xs:XP:sentinel-totem:f0t0:s1	-	-	-	d864b561c9cb	-	b5a4c8626e78	-	-	2026-11-24	xproof
 5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	cast	cast	owed	harness	-	start	0	0	-	-	-	-	6f84be0f34c0	-	4da4cfd16ff3	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	6f84be0f34c0	-	4da4cfd16ff3	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t1	ChangesZone/Offspring	owed	harness	-	start	0	0	-	-	-	-	44e3ec152eea	-	4da4cfd16ff3	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5436bb0d-b5c7-43a9-8b3f-67cdc0dd0381	f0/t1	ChangesZone/Offspring	owed	harness	-	start	0	0	-	-	-	-	6f84be0f34c0	-	4da4cfd16ff3	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5437f560-7f61-4326-be8e-15d74bf4e6ec	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:gloomfang-mauler:cast:s1,f:xs:XP:gloomfang-mauler:cast:s1	-	-	-	ae86f6029288	-	3024cb56266f	-	-	2026-11-24	xproof
 5437f560-7f61-4326-be8e-15d74bf4e6ec	f0/a0	ChangeZone/TypeCycling	agreed	-	FX	start	4	0	x:xs:XP:gloomfang-mauler:cast:s1,f:xs:XP:gloomfang-mauler:cast:s1	-	-	-	d864b561c9cb	-	3024cb56266f	-	-	2026-11-24	xproof
 5437f560-7f61-4326-be8e-15d74bf4e6ec	f0/t0	ChangesZone/Backup	agreed	-	FX	start	4	0	x:xs:XP:gloomfang-mauler:cast:s1,f:xs:XP:gloomfang-mauler:cast:s1	-	-	-	ae86f6029288	-	3024cb56266f	-	-	2026-11-24	xproof
@@ -127,7 +127,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54884040-b426-43da-9bb1-016621e1446d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54884040-b426-43da-9bb1-016621e1446d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dragon-whisperer:f0a2:s1,f:xs:XP:dragon-whisperer:f0a2:s1	-	-	-	23b491658465	-	5d02657e08a2	-	-	2026-11-25	xproof
 54884040-b426-43da-9bb1-016621e1446d	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:dragon-whisperer:f0a2:s1,f:xs:XP:dragon-whisperer:f0a2:s1	-	-	-	23b491658465	-	5d02657e08a2	-	-	2026-11-25	xproof
-54884040-b426-43da-9bb1-016621e1446d	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+54884040-b426-43da-9bb1-016621e1446d	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 54917578-9493-499e-b200-51d5cf7978ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rescue-pepper-potts:f0t0:s1,f:xs:XP:rescue-pepper-potts:f0t0:s1	-	-	-	8c0bd19283bb	-	a57b1bfcd99c	-	-	2026-11-24	xproof
 54917578-9493-499e-b200-51d5cf7978ff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rescue-pepper-potts:f0t0:s1,f:xs:XP:rescue-pepper-potts:f0t0:s1	-	-	-	8c0bd19283bb	-	a57b1bfcd99c	-	-	2026-11-24	xproof
 54970935-b3d3-4f65-a262-c4975f2787e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devoted-retainer:cast:s1,f:xs:XP:devoted-retainer:cast:s1	-	-	-	23c4009444b0	-	abf22dca3504	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

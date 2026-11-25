@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 250f8642-9754-48fd-8f09-70ed13d7a42c	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 25143290-2dd5-4def-a857-a1db6d3ed2eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/t0	NULL	owed	refused:no-generator:trigger:Unattached	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+25143290-2dd5-4def-a857-a1db6d3ed2eb	f0/t0	NULL	owed	refused:no-generator:trigger:Unattached	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eardrum-rattler:cast:s1,f:xs:XP:eardrum-rattler:cast:s1	-	-	-	fb9d3088f0bf	-	bf3b5139ebd8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 25151d18-8e73-4b0d-a8d2-e5fa291e5729	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Eardrum Rattler/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2516949d-75bb-4aea-a41d-0298bb129471	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:slip-through-space:cast:s1,f:xs:XP:slip-through-space:cast:s1	-	-	-	d864b561c9cb	-	44a5c0e15e85	-	-	2026-11-24	xproof
@@ -58,7 +58,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2549bc57-9ffb-4053-9f10-f2a5f792b845	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:myriad-landscape:f0a1:s1,f:xs:XP:myriad-landscape:f0a1:s1	-	-	-	8c0bd19283bb	-	fb9a54e6865a	-	-	2026-11-24	xproof
 2549bc57-9ffb-4053-9f10-f2a5f792b845	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 254d4918-de40-4ac4-b542-f5c67a5e21eb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-254d4918-de40-4ac4-b542-f5c67a5e21eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:canyon-jerboa:f0t0:s1,f:xs:XP:canyon-jerboa:f0t0:s1	-	-	-	44e3ec152eea	-	00a9c45d0882	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+254d4918-de40-4ac4-b542-f5c67a5e21eb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:canyon-jerboa:f0t0:s1,f:xs:XP:canyon-jerboa:f0t0:s1	-	-	-	6f84be0f34c0	-	00a9c45d0882	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 254f133a-eee5-48b9-b19f-110555e49300	cast	cast-resolve	agreed	-	FX	scen	2	0	Winter, Team Player/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 254f133a-eee5-48b9-b19f-110555e49300	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:winter-team-player:f0t0:s1,f:xs:XP:winter-team-player:f0t0:s1	-	-	-	fb9d3088f0bf	-	eccf4ec68ad2	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 2550099d-b3e2-4eb6-9f36-0fc412828ca6	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:rivendell:f0a1:s2,f:xs:XP:rivendell:f0a1:s2	-	-	-	23b491658465	-	8a8bc587322f	-	-	2026-11-25	xproof
@@ -198,7 +198,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 25d955e3-2b98-4a75-bb51-6072000111be	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:ayula-s-influence:f0a0:s1,f:xs:XP:ayula-s-influence:f0a0:s1	-	-	-	336eab778104	-	e2e0f6fd6586	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 25dce517-ac0a-4577-89ed-04296c7c4069	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 25dce517-ac0a-4577-89ed-04296c7c4069	f0/t0	SpellCastOrCopy	agreed	-	FX	start	2	0	x:xs:XP:sedgemoor-witch:f0t0:s1,f:xs:XP:sedgemoor-witch:f0t0:s1	-	-	-	6f84be0f34c0	-	1fbd6c168920	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-25dce517-ac0a-4577-89ed-04296c7c4069	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+25dce517-ac0a-4577-89ed-04296c7c4069	f0/t1	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:sedgemoor-witch:f0t1:s1,f:xs:XP:sedgemoor-witch:f0t1:s1	-	-	-	6f84be0f34c0	-	1fbd6c168920	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 25ec6309-0ccb-4f27-80f1-ec6dcc6461fa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seismic-spike:cast:s1,f:xs:XP:seismic-spike:cast:s1	-	-	-	77494c1ce129	-	89eedbe8ea2d	-	-	2026-11-24	xproof
 25ecd09e-d8bf-4929-96e2-e5132ea4f718	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:data-professor-of-humanities:cast:s1,f:xs:XP:data-professor-of-humanities:cast:s1	-	-	-	8c0bd19283bb	-	d14c177995cb	-	-	2026-11-24	xproof
 25ecd09e-d8bf-4929-96e2-e5132ea4f718	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

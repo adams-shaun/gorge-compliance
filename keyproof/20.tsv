@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 20370c3b-231f-4d9d-8b6e-f1eb25fa4b5d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2037659f-2efe-4321-afaf-961bbec35e9e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2038138e-2e52-41e4-90fc-443fa054c5c0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shoot-the-sheriff:cast:s1,f:xs:XP:shoot-the-sheriff:cast:s1	-	-	-	23b491658465	-	e4ee4590de4c	-	-	2026-11-24	xproof
-20393369-fdee-45ea-8584-451f38b1c002	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+20393369-fdee-45ea-8584-451f38b1c002	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 203b72d2-a273-49cc-bd10-2fbc07ed2fc8	cast	cast-resolve	agreed	-	FX	scen	2	0	Agents of S.H.I.E.L.D./cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 203b72d2-a273-49cc-bd10-2fbc07ed2fc8	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Agents of S.H.I.E.L.D./trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 203eb24c-f135-44e2-bdae-80b7b3d0fb15	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
@@ -123,10 +123,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 209de43d-0cdd-4075-9f41-88e3d2ff90df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 209de43d-0cdd-4075-9f41-88e3d2ff90df	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 209de43d-0cdd-4075-9f41-88e3d2ff90df	f1/t0	NULL	owed	refused:start:no-mana-cost	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	459629e846f7	-	-	2026-11-24	xproof
-20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a0	NULL	owed	refused:steps-needed:cost:AddCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a1	Token	agreed	-	FX	start	2	0	x:xs:XP:the-eternal-wanderer:f0a1:s1,f:xs:XP:the-eternal-wanderer:f0a1:s1	-	-	-	6f84be0f34c0	-	459629e846f7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a2	RepeatEach	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	459629e846f7	-	-	2026-11-24	xproof
+20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-eternal-wanderer:cast:s2,f:xs:XP:the-eternal-wanderer:cast:s1	-	-	-	6f84be0f34c0	-	459629e846f7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:the-eternal-wanderer:f0a0:s1,f:xs:XP:the-eternal-wanderer:f0a0:s1	-	-	-	6f84be0f34c0	-	459629e846f7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a1	Token	agreed	-	FX	start	1	0	x:xs:XP:the-eternal-wanderer:cast:s2,f:xs:XP:the-eternal-wanderer:cast:s2	-	-	-	6f84be0f34c0	-	459629e846f7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+20a1671d-e8a4-4cf1-87a7-f2f6319f4b9e	f0/a2	RepeatEach	agreed	-	F	start	3	0	f:xs:XP:the-eternal-wanderer:cast:s1	-	-	-	6f84be0f34c0	-	459629e846f7	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 20acb8df-2ea0-48b0-8dcf-54dd0e1f8db8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:huatli-s-final-strike:cast:s1,f:xs:XP:huatli-s-final-strike:cast:s1	-	-	-	336eab778104	-	2ce309666416	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 20ae75a7-14ca-4366-af0a-3f3f02159f3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deathgrip:cast:s1,f:xs:XP:deathgrip:cast:s1	-	-	-	ae86f6029288	-	4500be888879	-	-	2026-11-24	xproof
 20ae75a7-14ca-4366-af0a-3f3f02159f3f	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof

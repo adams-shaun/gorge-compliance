@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8916b3d4-6a9a-420a-8ee7-be67b2f47201	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 891c6ca5-d238-4ac2-8df4-c6dc9a807562	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mega-flare:cast:s1,f:xs:XP:mega-flare:cast:s1	-	-	-	8c0bd19283bb	-	97df8e36c896	-	-	2026-11-24	xproof
 891d2690-7144-4f87-b6ef-96f2469780a9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-891d2690-7144-4f87-b6ef-96f2469780a9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+891d2690-7144-4f87-b6ef-96f2469780a9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:righteous-valkyrie:f0t0:s1,f:xs:XP:righteous-valkyrie:f0t0:s1	-	-	-	6f84be0f34c0	-	0976285578c9	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 891d5c5e-3d4d-4183-b9fd-ab694639d1c3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:uproot:cast:s1,f:xs:XP:uproot:cast:s1	-	-	-	64a08ba7d913	-	bd63bcce4fb8	-	-	2026-11-24	xproof
 8922a91e-3d15-4351-8d77-e0d6bc4de82e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8922a91e-3d15-4351-8d77-e0d6bc4de82e	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:olivia-crimson-bride:f0t0:s1,f:xs:XP:olivia-crimson-bride:f0t0:s1	-	-	-	d864b561c9cb	-	ff0ead1ae454	-	-	2026-11-24	xproof
@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8940f503-fc6d-4fae-be74-22c660cae1a7	cast	cast-resolve	agreed	-	X	scen	1	0	Pyre Rhymer/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8940f503-fc6d-4fae-be74-22c660cae1a7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Pyre Rhymer/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8940f80b-9c8d-48c0-97c0-c18d77797911	cast	cast	agreed	-	F	start	2	0	f:xs:XP:vitaspore-thallid:f0t0:s1	-	-	-	3aa6ded33acb	-	e64e41610667	-	-	2026-11-25	xproof
-8940f80b-9c8d-48c0-97c0-c18d77797911	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+8940f80b-9c8d-48c0-97c0-c18d77797911	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8940f80b-9c8d-48c0-97c0-c18d77797911	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8940f80b-9c8d-48c0-97c0-c18d77797911	f0/t0	Phase	agreed	-	F	start	2	0	f:xs:XP:vitaspore-thallid:f0t0:s1	-	-	-	3aa6ded33acb	-	e64e41610667	-	-	2026-11-25	xproof
 894176e3-af9c-41ef-9f35-59dfdda3c17f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

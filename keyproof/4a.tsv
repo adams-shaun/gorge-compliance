@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a4dc133-541f-456b-a95f-3d707e1c95e9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a4dc133-541f-456b-a95f-3d707e1c95e9	f0/a2	Draw	agreed	-	FX	start	2	0	x:xs:XP:jace-memory-adept:f0a2:s1,f:xs:XP:jace-memory-adept:f0a2:s1	-	-	-	23c4009444b0	-	56883c34a1e1	-	-	2026-11-25	xproof
 4a4f6e85-df16-49a4-8fc6-149a28c2cb42	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a4f6e85-df16-49a4-8fc6-149a28c2cb42	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4a4f6e85-df16-49a4-8fc6-149a28c2cb42	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:vanguard-of-brimaz:f0t0:s1,f:xs:XP:vanguard-of-brimaz:f0t0:s1	-	-	-	6f84be0f34c0	-	9a305d468a2d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4a574140-0657-4f49-b497-331447f17b29	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a574140-0657-4f49-b497-331447f17b29	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 4a58954a-1d20-48b8-847c-3615de67e122	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:warbriar-blessing:cast:s1,f:xs:XP:warbriar-blessing:cast:s1	-	-	-	ae86f6029288	-	663174100080	-	-	2026-11-24	xproof
@@ -108,8 +108,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a85cd7e-625b-4043-b7f1-999def26eb36	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8b3316-a01a-4206-bbed-d7aac6c834bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8b3316-a01a-4206-bbed-d7aac6c834bd	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:ringwarden-owl:f0t0:s1,f:xs:XP:ringwarden-owl:f0t0:s1	-	-	-	fb9d3088f0bf	-	ad60ba57cf51	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
-4a8d41fe-e04d-484b-a7d1-19be311e6ca7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-4a8d41fe-e04d-484b-a7d1-19be311e6ca7	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4a8d41fe-e04d-484b-a7d1-19be311e6ca7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4a8d41fe-e04d-484b-a7d1-19be311e6ca7	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	cast	cast	agreed	-	X	start	2	0	x:xs:XP:hostage-taker:f0t0:s1	-	-	-	d864b561c9cb	-	9f33c905e38a	-	-	2026-11-24	xproof
 4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:herbal-poultice:f0a0:s1,f:xs:XP:herbal-poultice:f0a0:s1	-	-	-	d864b561c9cb	-	9f33c905e38a	-	-	2026-11-24	xproof
 4a8f2104-57ec-4b23-9857-f26afa5cbcfe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twins-of-discord:cast:s1,f:xs:XP:twins-of-discord:cast:s1	-	-	-	8c0bd19283bb	-	1a00e0d9161a	-	-	2026-11-24	xproof

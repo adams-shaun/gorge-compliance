@@ -35,10 +35,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0a1d817d-dce8-4e83-a380-909f7c9eee46	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a1d817d-dce8-4e83-a380-909f7c9eee46	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a2075b5-9609-433d-bcd2-e0a637456cf8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a2075b5-9609-433d-bcd2-e0a637456cf8	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0a2075b5-9609-433d-bcd2-e0a637456cf8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:maja-bretagard-protector:f0t0:s1,f:xs:XP:maja-bretagard-protector:f0t0:s1	-	-	-	6f84be0f34c0	-	835b0a7f7a32	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0a25a72e-5603-4b50-ac20-36b286cc1a2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wildest-dreams:cast:s1,f:xs:XP:wildest-dreams:cast:s1	-	-	-	d864b561c9cb	-	312a23f1b43b	-	-	2026-11-24	xproof
 0a27bd77-ec13-4e8d-acad-9aa9c66b3b73	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0a27bd77-ec13-4e8d-acad-9aa9c66b3b73	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+0a27bd77-ec13-4e8d-acad-9aa9c66b3b73	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:metastatic-evangel:f0t0:s1,f:xs:XP:metastatic-evangel:f0t0:s1	-	-	-	6f84be0f34c0	-	5b1a4e67b8df	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0a28dff0-2bd6-4105-b73a-b6c4735833fd	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a28dff0-2bd6-4105-b73a-b6c4735833fd	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0a2e2d97-1348-4fa6-ad94-4da23ad8f43b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:living-totem:f0t0:s1,f:xs:XP:living-totem:f0t0:s1	-	-	-	d864b561c9cb	-	f241e69981b2	-	-	2026-11-24	xproof
@@ -156,7 +156,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0ac5c149-f6af-46b6-974e-14689e9a583d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0ac723bf-ce86-4028-a693-0ef498e4c82d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0acadb47-17b2-47d8-9aad-5436931bc38c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-0acadb47-17b2-47d8-9aad-5436931bc38c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+0acadb47-17b2-47d8-9aad-5436931bc38c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0acadb47-17b2-47d8-9aad-5436931bc38c	f0/t1	Blocks	agreed	-	FX	start	2	0	x:xs:XP:wicker-warcrawler:f0t1:s1,f:xs:XP:wicker-warcrawler:f0t1:s1	-	-	-	6f84be0f34c0	-	b551d1cbd180	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0acb070b-6e81-4e0e-925d-14da9b931355	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0acbc9a6-0de0-4096-b35c-1a586a1312ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

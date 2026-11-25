@@ -66,7 +66,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 123bfa86-4265-448f-97cd-2c0614212862	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:flame-spirit:cast:s1,f:xs:XP:flame-spirit:cast:s1	-	-	-	ea3140b6974b	-	7565b291d7aa	-	-	2026-11-24	xproof
 123bfa86-4265-448f-97cd-2c0614212862	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flame-spirit:f0a0:s1,f:xs:XP:flame-spirit:f0a0:s1	-	-	-	8c0bd19283bb	-	7565b291d7aa	-	-	2026-11-24	xproof
 123d2b6e-114e-4767-860d-50790382ca4a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-123d2b6e-114e-4767-860d-50790382ca4a	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:hornet-nest:f0t0:s1,f:xs:XP:hornet-nest:f0t0:s1	-	-	-	44e3ec152eea	-	55d0d273cf52	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+123d2b6e-114e-4767-860d-50790382ca4a	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:hornet-nest:f0t0:s1,f:xs:XP:hornet-nest:f0t0:s1	-	-	-	6f84be0f34c0	-	55d0d273cf52	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 12401ad1-b5c9-43dc-9389-04aaf5db8b26	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 12401ad1-b5c9-43dc-9389-04aaf5db8b26	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 1244902e-1a4e-4d3c-9a55-9be4602e3d2d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:colossal-dreadmask:f0t0:s1,f:xs:XP:colossal-dreadmask:f0t0:s1	-	-	-	ae86f6029288	-	34cf271b3422	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 127ce189-2758-4789-9e02-4aa71d013431	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 127de52b-df75-4342-95a0-20d84c5bf916	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:the-meathook-massacre:cast:s1,f:xs:XP:the-meathook-massacre:cast:s1	-	-	-	d864b561c9cb	-	e0664e64db47	-	-	2026-11-24	xproof
 127de52b-df75-4342-95a0-20d84c5bf916	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:the-meathook-massacre:cast:s1,f:xs:XP:the-meathook-massacre:cast:s1	-	-	-	d864b561c9cb	-	e0664e64db47	-	-	2026-11-24	xproof
-127de52b-df75-4342-95a0-20d84c5bf916	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+127de52b-df75-4342-95a0-20d84c5bf916	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-meathook-massacre:f0t1:s1,f:xs:XP:the-meathook-massacre:f0t1:s1	-	-	-	6f84be0f34c0	-	e0664e64db47	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 127de52b-df75-4342-95a0-20d84c5bf916	f0/t2	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:the-meathook-massacre:f0t2:s1,f:xs:XP:the-meathook-massacre:f0t2:s1	-	-	-	6f84be0f34c0	-	e0664e64db47	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undercellar-myconid:f0t0:s1,f:xs:XP:undercellar-myconid:f0t0:s1	-	-	-	8c0bd19283bb	-	c3dc62873597	-	-	2026-11-24	xproof
 127f5b7e-79bc-4fe0-b9d4-1a267a6a4d46	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -150,9 +150,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 129476ae-9dab-4e04-8e8e-f249afd56ff9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:maha-its-feathers-night:combat0.block:s1,f:xs:XP:maha-its-feathers-night:combat0.block:s1	-	-	-	3aa6ded33acb	-	6ca6ccbcdb22	-	-	2026-11-25	xproof
 129476ae-9dab-4e04-8e8e-f249afd56ff9	f0/t0	BecomesTarget/Ward	agreed	-	F	start	2	0	f:xs:XP:maha-its-feathers-night:f0t0:s1	-	-	-	3aa6ded33acb	-	6ca6ccbcdb22	-	-	2026-11-25	xproof
 129476ae-9dab-4e04-8e8e-f249afd56ff9	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:maha-its-feathers-night:static0.0:s1,f:xs:XP:maha-its-feathers-night:static0.0:s1	-	-	-	3aa6ded33acb	-	6ca6ccbcdb22	-	-	2026-11-25	xproof
-12956c07-e679-471b-8dcb-2a2d15b0be55	cast	cast	agreed	-	F	start	2	0	f:xs:XP:honest-work:f0t0:s1	-	-	-	25696bf19d5b	-	1cb30b2aef07	-	-	2026-11-24	xproof
-12956c07-e679-471b-8dcb-2a2d15b0be55	f0/t0	ChangesZone	agreed	-	F	start	2	0	f:xs:XP:honest-work:f0t0:s1	-	-	-	25696bf19d5b	-	1cb30b2aef07	-	-	2026-11-24	xproof
-12956c07-e679-471b-8dcb-2a2d15b0be55	static#0.0	static#0.0	agreed	-	X	scen	1	0	Honest Work/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+12956c07-e679-471b-8dcb-2a2d15b0be55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:honest-work:static0.0:s1,f:xs:XP:honest-work:static0.0:s1	-	-	-	6f84be0f34c0	-	1cb30b2aef07	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+12956c07-e679-471b-8dcb-2a2d15b0be55	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:honest-work:static0.0:s1,f:xs:XP:honest-work:static0.0:s1	-	-	-	6f84be0f34c0	-	1cb30b2aef07	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+12956c07-e679-471b-8dcb-2a2d15b0be55	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:honest-work:static0.0:s1,f:xs:XP:honest-work:static0.0:s1	-	-	-	6f84be0f34c0	-	1cb30b2aef07	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 129b41cf-8327-42f0-b186-1111b42c08ab	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:artifist-acumen:cast:s1,f:xs:XP:artifist-acumen:cast:s1	-	-	-	fb9d3088f0bf	-	e7ed8473b021	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 129ec223-e76d-491d-b299-07ac91168d31	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 129ee7d6-e3df-40ef-9502-7aad10183031	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

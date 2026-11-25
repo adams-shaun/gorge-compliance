@@ -75,7 +75,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06432957-decc-4ba2-95b1-cc9536a576d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06432957-decc-4ba2-95b1-cc9536a576d4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:guardian-of-tazeem:f0t0:s1,f:xs:XP:guardian-of-tazeem:f0t0:s1	-	-	-	fb9d3088f0bf	-	dadde240252d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 06494c26-3822-43ee-bedf-611c9ec7cc6b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:puppet-conjurer:f0t0:s1,f:xs:XP:puppet-conjurer:f0t0:s1	-	-	-	3aa6ded33acb	-	846af6adfe5c	-	-	2026-11-25	xproof
-06494c26-3822-43ee-bedf-611c9ec7cc6b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+06494c26-3822-43ee-bedf-611c9ec7cc6b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 06494c26-3822-43ee-bedf-611c9ec7cc6b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:puppet-conjurer:f0t0:s1,f:xs:XP:puppet-conjurer:f0t0:s1	-	-	-	3aa6ded33acb	-	846af6adfe5c	-	-	2026-11-25	xproof
 06496a05-7f1a-402c-9594-304cd82bfefd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-the-throne:cast:s1,f:xs:XP:scourge-of-the-throne:cast:s1	-	-	-	8c0bd19283bb	-	dd70cebc821c	-	-	2026-11-24	xproof
 06496a05-7f1a-402c-9594-304cd82bfefd	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:scourge-of-the-throne:f0t0:s1,f:xs:XP:scourge-of-the-throne:f0t0:s1	-	-	-	8c0bd19283bb	-	dd70cebc821c	-	-	2026-11-24	xproof
@@ -161,7 +161,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06bea0b2-1d0f-4d64-a13e-723d08042e83	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:arbalest-engineers:f0t0:s1,f:xs:XP:arbalest-engineers:f0t0:s1	-	-	-	3aa6ded33acb	-	2618e309c43b	-	-	2026-11-25	xproof
 06bea0b2-1d0f-4d64-a13e-723d08042e83	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:arbalest-engineers:f0t0:s1,f:xs:XP:arbalest-engineers:f0t0:s1	-	-	-	3aa6ded33acb	-	2618e309c43b	-	-	2026-11-25	xproof
 06c12fcc-1c08-40a0-a0da-e139c42f083f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:druid-of-horns:cast:s1,f:xs:XP:druid-of-horns:cast:s1	-	-	-	d864b561c9cb	-	1e723437ecf8	-	-	2026-11-24	xproof
-06c12fcc-1c08-40a0-a0da-e139c42f083f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+06c12fcc-1c08-40a0-a0da-e139c42f083f	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:druid-of-horns:f0t0:s1,f:xs:XP:druid-of-horns:f0t0:s1	-	-	-	6f84be0f34c0	-	1e723437ecf8	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 06c1f8a4-4948-435b-ae98-b1276b57e958	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:traumatic-critique:cast:s1,f:xs:XP:traumatic-critique:cast:s1	-	-	-	23c4009444b0	-	c7160e466dea	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 06c39c1c-0e34-4ef0-bd06-23245cb9cc59	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sister-hospitaller:cast:s1,f:xs:XP:sister-hospitaller:cast:s1	-	-	-	8c0bd19283bb	-	bca2efcd61bd	-	-	2026-11-24	xproof
 06c39c1c-0e34-4ef0-bd06-23245cb9cc59	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sister-hospitaller:cast:s1,f:xs:XP:sister-hospitaller:cast:s1	-	-	-	8c0bd19283bb	-	bca2efcd61bd	-	-	2026-11-24	xproof

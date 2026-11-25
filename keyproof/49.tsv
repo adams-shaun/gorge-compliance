@@ -5,7 +5,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49039519-62db-4605-b600-cef6f34c893f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:rampage-of-the-valkyries:cast:s1,f:xs:XP:rampage-of-the-valkyries:cast:s1	-	-	-	d864b561c9cb	-	e7b5017cbf3c	-	-	2026-11-24	xproof
 49039519-62db-4605-b600-cef6f34c893f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:rampage-of-the-valkyries:cast:s1,f:xs:XP:rampage-of-the-valkyries:cast:s1	-	-	-	d864b561c9cb	-	e7b5017cbf3c	-	-	2026-11-24	xproof
 49039519-62db-4605-b600-cef6f34c893f	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-490ac985-79b5-438d-a2e7-f47683b29683	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+490ac985-79b5-438d-a2e7-f47683b29683	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 490ac985-79b5-438d-a2e7-f47683b29683	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 490ac985-79b5-438d-a2e7-f47683b29683	f1/a0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 490df3b5-ece2-45bb-af38-fcd7f83e37b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -41,8 +41,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 49325445-0825-405e-be86-2a814699ce03	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 49330aaf-c005-4e07-ae3a-2579bea3c326	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/a0	NULL	owed	refused:battlefield:aura-unattached	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4933c2a9-0ef7-4b59-8c55-faa1cb3abbc2	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 493acba2-92b0-43a4-9f4b-d49a91ca77f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 493acba2-92b0-43a4-9f4b-d49a91ca77f5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 493ecd11-e980-42da-a79e-cddd9a94cc7a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
