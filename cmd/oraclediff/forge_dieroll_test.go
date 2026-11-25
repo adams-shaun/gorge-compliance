@@ -177,8 +177,13 @@ func TestForgeRolledDie(t *testing.T) {
 // e76652fae3 = c5ab80906 (movectr + cantprevent; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
 // a2201414482 = oracle/fpin-1125-room-alt: 22d31c3e9d0 (room_alt + attach_optional + K'rrik; above) joined with e76652fae3 (movectr + cantprevent + K'rrik; above); driver-only.
 // 793a015fcf = oracle/fpin-1125-join3: a2201414482 (above) joined with 1947f2b322 (ScenarioReplay --serve warm worker; additive); driver-only, die-roll code unchanged.
+// 15a7c960ab2 = 793a015fcf plus the setup Room locked convention (SetupBuilder only); die-roll code unchanged.
+// d6e26fd043 = 793a015fcf plus the checkpoint snapshot's offered (SnapshotWriter, RefTable.refOf, BridgeController.offer's withMana); die-roll code unchanged,
+// ForcedDieRollTest and ForcedCoinFlipTest re-run green on it.
+// 9cc07f0d340 = oracle/fpin-1125-join4: 15a7c960ab2 (setup Room locked) joined with d6e26fd043 (offered); die-roll code unchanged.
 // a862cd8abc = 793a015fcf plus the empty hidden-origin search fix (ScriptedController only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
-const forgeOracleDieRollRef = "a862cd8abc946f411744de28c2e924f4ca3cca7d"
+// 0218db82d91 = oracle/fpin-1125-join6: 9cc07f0d340 (setup Room locked + offered) joined with a862cd8abc (empty hidden search); die-roll code unchanged.
+const forgeOracleDieRollRef = "0218db82d91a96fc3a324da828572e63b6fd5191"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

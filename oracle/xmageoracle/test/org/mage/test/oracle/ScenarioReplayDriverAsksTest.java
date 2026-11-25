@@ -75,12 +75,35 @@ public final class ScenarioReplayDriverAsksTest {
         mandatoryChoosePickOnTargetQueue();
         perZoneAttachPick();
         cardOrderPick();
+        mayplayRepairsStaticSourceZCC();
         System.out.println("PASS driver asks: active p1 pair, battlefield move, game over, mixed must-attack,"
                 + " face-down attacker, manifested face-down target, declined dig, look-at/exile same-name choice,"
                 + " alternative cast, promised gift, replacement order,"
                 + " lone forced target, divided amount, multi-candidate search, phyrexian life, wish decline,"
                 + " empty optional animate, optional multi-candidate target, mandatory choose pick on the target queue,"
-                + " same-name card order");
+                + " same-name card order, mayplay static-permission zcc repair");
+    }
+
+    /** Azula, Cunning Usurper / every play-from-exile static permission: XMage
+     * registers a card's static abilities before the permanent exists
+     * (GameState.addAbility -> ContinuousEffects.addEffect), so their
+     * getStackMomentSourceZCC() stays 0. A permission that keys its exile zone
+     * on that counter (CardUtil.getExileZoneId(game, source) in applies())
+     * then reads the pre-game zone, and TestPlayer.getPlayable never lists the
+     * exiled card's cast. The mayplay arm must re-derive those counters from
+     * the permanent at the cast's priority, before it queues the activate
+     * command; the real replay lives in ScenarioReplayCastModeTest. */
+    private static void mayplayRepairsStaticSourceZCC() throws Exception {
+        String src = System.getProperty("scenarioReplay.source");
+        check(src != null, "scenarioReplay.source must name ScenarioReplay.java (run the driver-asks script)");
+        String text = Files.readString(Path.of(src), StandardCharsets.UTF_8);
+        check(text.contains("static void repairStaticSourceZCC(Game game)"),
+                "repairStaticSourceZCC must exist");
+        int mayplay = text.indexOf("if (\"mayplay\".equals(mode))");
+        int repair = text.indexOf("repairStaticSourceZCC(g)", mayplay);
+        int cast = text.indexOf("castObjectSpell(turn, phase, p, castObject)", repair);
+        check(mayplay >= 0 && repair > mayplay && cast > repair,
+                "a mayplay cast must repair registered static abilities' source zcc before castObjectSpell");
     }
 
     /** (a) FIN Zidane / TLA Wan Shi Tong trigger#0.1: seat 1 casts on its
