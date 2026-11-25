@@ -700,7 +700,7 @@ func staticCondition(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 // one; for more, not a legendary one (the legend rule would put all but one
 // in the graveyard, and the condition would not be met).
 func copyable(n int) func(*cards.Face) bool {
-	return func(f *cards.Face) bool { return f.IsPermanent() && (true) }
+	return func(f *cards.Face) bool { return f.IsPermanent() && (n <= 1 || !f.IsLegendary()) }
 }
 
 // presentOn counts the permanents the start has on the battlefield that meet
