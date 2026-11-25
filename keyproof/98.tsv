@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9808c424-0d74-45b8-a092-fd296c6833d2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9808c424-0d74-45b8-a092-fd296c6833d2	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:orzhov-keyrune:f0a1:s1,f:xs:XP:orzhov-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	d79a3909c7b5	-	-	2026-11-24	xproof
 980939db-d867-4c16-a288-52f6528f2376	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-980939db-d867-4c16-a288-52f6528f2376	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
+980939db-d867-4c16-a288-52f6528f2376	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 9809d975-7ef8-4946-9041-607c4e954b13	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:polluted-mire:f0a0:s2,f:xs:XP:polluted-mire:f0a0:s2	-	-	-	5f2128bf97e4	-	35e7029e5303	-	-	2026-11-24	xproof
 9809d975-7ef8-4946-9041-607c4e954b13	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9809d975-7ef8-4946-9041-607c4e954b13	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -171,7 +171,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	cast	cast-resolve	agreed	-	X	scen	1	0	Exdeath, Void Warlock/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Exdeath, Void Warlock/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Exdeath, Void Warlock/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-98c9d798-8c48-4a2d-a076-ce17d31df6f5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	686e3f827135f1739b173ba77cd861541c8229ee	2026-11-25	xproof
+98c9d798-8c48-4a2d-a076-ce17d31df6f5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	d607930fa548	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	495ed200e9f367aa7298908df5f4530c2cc4c8af	2026-11-25	xproof
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Exdeath, Void Warlock/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98c9d798-8c48-4a2d-a076-ce17d31df6f5	static#1.0	static#1.0	agreed	-	X	scen	1	0	Exdeath, Void Warlock/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 98cbac1d-7896-4c63-a265-03bc5d670fa6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:relentless-drednok:cast:s1,f:xs:XP:relentless-drednok:cast:s1	-	-	-	fb9d3088f0bf	-	be77ce68f262	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
