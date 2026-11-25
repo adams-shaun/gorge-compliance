@@ -57,7 +57,7 @@ cc545c68-829f-4c57-94d2-cd1edf2667a7	f0/t0	NULL	owed	refused:no-generator:trigge
 cc59e28a-eda3-468c-a31b-73e4b615f953	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloodfire-colossus:cast:s1,f:xs:XP:bloodfire-colossus:cast:s1	-	-	-	25696bf19d5b	-	0439a28ac57c	-	-	2026-11-24	xproof
 cc59e28a-eda3-468c-a31b-73e4b615f953	f0/a0	DamageAll	agreed	-	FX	start	2	0	x:xs:XP:bloodfire-colossus:f0a0:s1,f:xs:XP:bloodfire-colossus:f0a0:s1	-	-	-	d864b561c9cb	-	0439a28ac57c	-	-	2026-11-24	xproof
 cc5b1276-d13e-4392-988d-1315bc90a9b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:veteran-survivor:cast:s1,f:xs:XP:veteran-survivor:cast:s1	-	-	-	23c4009444b0	-	e79a145a074a	-	-	2026-11-25	xproof
-cc5b1276-d13e-4392-988d-1315bc90a9b1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:veteran-survivor:f0t0:s1,f:xs:XP:veteran-survivor:f0t0:s1	-	-	-	23c4009444b0	-	e79a145a074a	-	-	2026-11-25	xproof
+cc5b1276-d13e-4392-988d-1315bc90a9b1	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:general-kudro-of-drannith:f0a0:s1,f:xs:XP:general-kudro-of-drannith:f0a0:s1	-	-	-	4b8018a80bf0	-	e79a145a074a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 cc5b1276-d13e-4392-988d-1315bc90a9b1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Veteran Survivor/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cc5e3a21-4911-49f8-8e3c-ab23812c4004	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vulpine-harvester:cast:s1,f:xs:XP:vulpine-harvester:cast:s1	-	-	-	8c0bd19283bb	-	ed28fa38ec02	-	-	2026-11-24	xproof
 cc5e3a21-4911-49f8-8e3c-ab23812c4004	f0/t0	NULL	owed	refused:no-generator:trigger:AttackersDeclared	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -149,8 +149,8 @@ ccb66cdc-909a-42c1-a10f-3886e9ed1936	f0/a0	NULL	owed	refused:steps-needed:cost:S
 ccbf7141-69c9-407d-b68e-c1c63ddef213	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:faerie-duelist:f0t0:s1,f:xs:XP:faerie-duelist:f0t0:s1	-	-	-	d864b561c9cb	-	116fff391f97	-	-	2026-11-24	xproof
 ccbf7141-69c9-407d-b68e-c1c63ddef213	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:faerie-duelist:f0t0:s1,f:xs:XP:faerie-duelist:f0t0:s1	-	-	-	d864b561c9cb	-	116fff391f97	-	-	2026-11-24	xproof
 ccc2eb6d-21cf-45cf-b4e4-4b2a2517136a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:deconstruction-hammer:cast:s1,f:xs:XP:deconstruction-hammer:cast:s1	-	-	-	23b491658465	-	09d8613b31af	-	-	2026-11-24	xproof
-ccc2eb6d-21cf-45cf-b4e4-4b2a2517136a	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:deconstruction-hammer:f0a0:s1,f:xs:XP:deconstruction-hammer:f0a0:s1	-	-	-	3aa6ded33acb	-	09d8613b31af	-	-	2026-11-25	xproof
-ccc2eb6d-21cf-45cf-b4e4-4b2a2517136a	static#0.0	static#0.0	agreed	-	X	scen	1	0	Deconstruction Hammer/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+ccc2eb6d-21cf-45cf-b4e4-4b2a2517136a	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:deconstruction-hammer:static0.0:s1,f:xs:XP:deconstruction-hammer:static0.0:s1	-	-	-	4b8018a80bf0	-	09d8613b31af	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+ccc2eb6d-21cf-45cf-b4e4-4b2a2517136a	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:deconstruction-hammer:static0.0:s1,f:xs:XP:deconstruction-hammer:static0.0:s1	-	-	-	4b8018a80bf0	-	09d8613b31af	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ccc4f21f-cf8c-40bb-a6d6-1f624320c5b2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ccc4f21f-cf8c-40bb-a6d6-1f624320c5b2	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 ccc7de36-aafc-4d87-80f7-fc2effc976eb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:frogmyr-enforcer:cast:s1,f:xs:XP:frogmyr-enforcer:cast:s1	-	-	-	ae86f6029288	-	5016be56b097	-	-	2026-11-24	xproof

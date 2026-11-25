@@ -212,14 +212,14 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 17ed18cf-33e5-4861-8a36-8f7bb91971f9	f0/a0	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:valakut-invoker:f0a0:s1,f:xs:XP:valakut-invoker:f0a0:s1	-	-	-	d864b561c9cb	-	72e995fec39d	-	-	2026-11-24	xproof
 17f573c4-3ed4-453e-bfbe-4e42d54633e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treacherous-blessing:f0t0:s1,f:xs:XP:treacherous-blessing:f0t0:s1	-	-	-	ae86f6029288	-	fa2fdb213350	-	-	2026-11-24	xproof
 17f573c4-3ed4-453e-bfbe-4e42d54633e5	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:treacherous-blessing:f0t0:s1,f:xs:XP:treacherous-blessing:f0t0:s1	-	-	-	ae86f6029288	-	fa2fdb213350	-	-	2026-11-24	xproof
-17f573c4-3ed4-453e-bfbe-4e42d54633e5	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-17f573c4-3ed4-453e-bfbe-4e42d54633e5	f0/t2	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+17f573c4-3ed4-453e-bfbe-4e42d54633e5	f0/t1	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:treacherous-blessing:f0t1:s1,f:xs:XP:treacherous-blessing:f0t1:s1	-	-	-	4b8018a80bf0	-	fa2fdb213350	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+17f573c4-3ed4-453e-bfbe-4e42d54633e5	f0/t2	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 17f78719-d86a-4a00-b83f-7a06bec844f7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pulsating-illusion:cast:s1,f:xs:XP:pulsating-illusion:cast:s1	-	-	-	fc71ca68c5ac	-	e0a500035575	-	-	2026-11-24	xproof
 17f78719-d86a-4a00-b83f-7a06bec844f7	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 17f8e8cb-cd1b-4d94-9efa-ce268e8e7096	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:water-wings:cast:s1,f:xs:XP:water-wings:cast:s1	-	-	-	336eab778104	-	7e19d9813068	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 17f930a9-64ee-46f9-8a7c-8877e532c94f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-17fae94e-558f-449a-b30c-e3c37a068b79	cast	cast-resolve	agreed	-	FX	scen	2	0	Lightwheel Enhancements/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-17fae94e-558f-449a-b30c-e3c37a068b79	static#0.0	static#0.0	agreed	-	X	scen	1	0	Lightwheel Enhancements/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+17fae94e-558f-449a-b30c-e3c37a068b79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lightwheel-enhancements:static0.0:s1,f:xs:XP:lightwheel-enhancements:static0.0:s1	-	-	-	4b8018a80bf0	-	4278702f881c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+17fae94e-558f-449a-b30c-e3c37a068b79	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:lightwheel-enhancements:static0.0:s1,f:xs:XP:lightwheel-enhancements:static0.0:s1	-	-	-	4b8018a80bf0	-	4278702f881c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 17fae94e-558f-449a-b30c-e3c37a068b79	static#0.1	static#0.1	agreed	-	X	scen	1	0	Lightwheel Enhancements/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 17ff0155-0006-464a-a65f-b8e1b9aeba0b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 17ff0155-0006-464a-a65f-b8e1b9aeba0b	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

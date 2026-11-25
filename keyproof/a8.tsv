@@ -62,9 +62,9 @@ a85ee0cf-39ce-49f2-874a-f6f54ca1775f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a85ee0cf-39ce-49f2-874a-f6f54ca1775f	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
 a86117c1-b83d-4350-9a10-a23b7e67e1bd	cast	cast-resolve	agreed	-	FX	scen	2	0	Mikey & Leo, Chaos & Order/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 a86117c1-b83d-4350-9a10-a23b7e67e1bd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Mikey & Leo, Chaos & Order/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a861ee41-a2c6-4530-9974-82f55ce712b1	cast	cast-resolve	agreed	-	FX	scen	2	0	Demonic Ruckus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a861ee41-a2c6-4530-9974-82f55ce712b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:demonic-ruckus:static0.0:s1,f:xs:XP:demonic-ruckus:static0.0:s1	-	-	-	4b8018a80bf0	-	b6e45d55edaa	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 a861ee41-a2c6-4530-9974-82f55ce712b1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Demonic Ruckus/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-a861ee41-a2c6-4530-9974-82f55ce712b1	static#0.0	static#0.0	agreed	-	X	scen	1	0	Demonic Ruckus/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+a861ee41-a2c6-4530-9974-82f55ce712b1	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:demonic-ruckus:static0.0:s1,f:xs:XP:demonic-ruckus:static0.0:s1	-	-	-	4b8018a80bf0	-	b6e45d55edaa	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 a8631e87-bfc3-463b-bdd1-974ea1d79ae4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 a864b032-6e1a-4211-ad6e-54a5a5c7321b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:byway-barterer:cast:s1,f:xs:XP:byway-barterer:cast:s1	-	-	-	3aa6ded33acb	-	25807fbaaef7	-	-	2026-11-25	xproof
 a864b032-6e1a-4211-ad6e-54a5a5c7321b	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:byway-barterer:combat0.attack:s1,f:xs:XP:byway-barterer:combat0.attack:s1	-	-	-	3aa6ded33acb	-	25807fbaaef7	-	-	2026-11-25	xproof
@@ -148,9 +148,9 @@ a8ba7a21-b2fe-42fd-87dd-6611c3105096	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 a8bac5a8-5a60-4f7a-a4d6-cb922da92472	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:drogskol-cavalry:cast:s1,f:xs:XP:drogskol-cavalry:cast:s1	-	-	-	d864b561c9cb	-	b959fa36b43f	-	-	2026-11-24	xproof
 a8bac5a8-5a60-4f7a-a4d6-cb922da92472	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:drogskol-cavalry:f0a0:s1,f:xs:XP:drogskol-cavalry:f0a0:s1	-	-	-	d864b561c9cb	-	b959fa36b43f	-	-	2026-11-24	xproof
 a8bac5a8-5a60-4f7a-a4d6-cb922da92472	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:drogskol-cavalry:f0a0:s1,f:xs:XP:drogskol-cavalry:f0a0:s1	-	-	-	d864b561c9cb	-	b959fa36b43f	-	-	2026-11-24	xproof
-a8bcc930-3efe-4595-b164-f5985e1dc289	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:federation-outpost:f0a0:s1,f:xs:XP:federation-outpost:f0a0:s1	-	-	-	c2272f704fde	-	0a080a1c6ae8	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-a8bcc930-3efe-4595-b164-f5985e1dc289	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-a8bcc930-3efe-4595-b164-f5985e1dc289	land	land	agreed	-	FX	start	2	0	x:xs:XP:federation-outpost:f0t0:s1,f:xs:XP:federation-outpost:f0t0:s1	-	-	-	25696bf19d5b	-	0a080a1c6ae8	-	-	2026-11-24	xproof
+a8bcc930-3efe-4595-b164-f5985e1dc289	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:federation-outpost:f0t0:s1,f:xs:XP:federation-outpost:f0t0:s1	-	-	-	4b8018a80bf0	-	0a080a1c6ae8	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+a8bcc930-3efe-4595-b164-f5985e1dc289	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:federation-outpost:f0t0:s1,f:xs:XP:federation-outpost:f0t0:s1	-	-	-	4b8018a80bf0	-	0a080a1c6ae8	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+a8bcc930-3efe-4595-b164-f5985e1dc289	land	land	agreed	-	FX	start	2	0	x:xs:XP:federation-outpost:f0t0:s1,f:xs:XP:federation-outpost:f0t0:s1	-	-	-	4b8018a80bf0	-	0a080a1c6ae8	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 a8bf79d2-29fd-4d2f-ac07-2e61d3886bc0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:infernal-tribute:cast:s1,f:xs:XP:infernal-tribute:cast:s1	-	-	-	ea3140b6974b	-	275dd8737dc2	-	-	2026-11-24	xproof
 a8bf79d2-29fd-4d2f-ac07-2e61d3886bc0	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 a8bf8ff8-d924-4fd2-b5ed-05b38f55325a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
