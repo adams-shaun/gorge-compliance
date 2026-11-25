@@ -14,6 +14,7 @@ tests="$root/mage/Mage.Tests"
 cp="$tests/target/test-classes:$tests/target/classes:$(< "$root/tests.cp")"
 mkdir -p "$out"
 out=$(cd "$out" && pwd)
+fixtures="$here/oracle/xmageoracle/test/org/mage/test/oracle/fixtures"
 javac -J-Xmx512m -nowarn -d "$out" -cp "$cp" \
   "$here/oracle/xmageoracle/src/org/mage/test/oracle/ScenarioReplay.java" \
   "$here/oracle/xmageoracle/test/org/mage/test/oracle/ScenarioReplayCastModeTest.java"
@@ -26,4 +27,4 @@ done
 cp "$tests/db/cards.h2.mv.db" "$run/db/"
 cd "$run"
 java -Xmx1g -XX:ActiveProcessorCount=2 -Dlog4j.configuration=file:/dev/null -cp "$out:$cp" \
-  org.mage.test.oracle.ScenarioReplayCastModeTest
+  org.mage.test.oracle.ScenarioReplayCastModeTest "$fixtures"
