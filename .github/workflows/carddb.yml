@@ -168,7 +168,9 @@ jobs:
         run: |
           set -euo pipefail
           now=$(date -u +%s)
-          if [ -n "$PUSHED_AT" ]; then
+          if [[ "$PUSHED_AT" =~ ^[0-9]+$ ]]; then
+            start=$PUSHED_AT  # a push payload sends pushed_at as epoch seconds; date -d refused it (11-25)
+          elif [ -n "$PUSHED_AT" ]; then
             start=$(date -u -d "$PUSHED_AT" +%s)
           else
             start=$now  # no push time in the payload: wait from now

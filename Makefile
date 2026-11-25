@@ -1012,6 +1012,12 @@ CARGO ?= $(HOME)/.cargo/bin/cargo
 # phase.rs follower: pinned build + card data (followers/phase/PHASE_PIN), out of tree.
 PHASE_ORACLE_DIR ?= $(FOLLOWERS_CACHE)/phase
 
+# The gorge pin (docs/PINNING.md): move GORGE_PIN and go.mod to REV (default gorge main).
+# .github/workflows/gorge-pin-follow.yml runs the same script every 15 minutes.
+.PHONY: gorge-pin-bump
+gorge-pin-bump:
+	scripts/gorge-pin.sh bump $(or $(REV),main)
+
 .PHONY: help
 help:
 	@echo "gorge-compliance targets:"
@@ -1023,6 +1029,7 @@ help:
 	@echo "  make precheck       — an alias for test-smart"
 	@echo "  make test-select BASE=ref — print the Go test packages the touched-package gate selects for BASE..HEAD"
 	@echo "  make pr [PR_BASE=main] [DRY=1] — open/refresh a GitHub PR with a generated change overview"
+	@echo "  make gorge-pin-bump [REV=main] — move GORGE_PIN and go.mod to a pushed gorge commit (docs/PINNING.md)"
 	@echo "  make boundary       — the licence guards (no Forge content is committed)"
 	@echo "  make carddb-test    — the carddb tool's Python tests (cmd/carddb/py/tests; git + python3 only, no network)"
 	@echo "  make oracle-audit   — the hand Oracle-text audit + XMage ports (audit/; ORACLE_RUN=<Card> to filter)"
