@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d19c68d-6eb8-4b34-9f31-c26931e59670	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d19c68d-6eb8-4b34-9f31-c26931e59670	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5d19c68d-6eb8-4b34-9f31-c26931e59670	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d19c68d-6eb8-4b34-9f31-c26931e59670	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5d19c68d-6eb8-4b34-9f31-c26931e59670	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5d1b0eee-3a7a-4f22-a40d-7658a368962a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruby-daring-tracker:cast:s1,f:xs:XP:ruby-daring-tracker:cast:s1	-	-	-	23b491658465	-	acd43a401ea7	-	-	2026-11-24	xproof
 5d1b0eee-3a7a-4f22-a40d-7658a368962a	f0/a0	Mana	agreed	-	FX	start	6	0	x:xs:XP:ruby-daring-tracker:cast:s1,f:xs:XP:ruby-daring-tracker:cast:s1	-	-	-	23b491658465	-	acd43a401ea7	-	-	2026-11-24	xproof
 5d1b0eee-3a7a-4f22-a40d-7658a368962a	f0/t0	Attacks	agreed	-	FX	start	1	0	x:xs:XP:ruby-daring-tracker:f0t0:s2,f:xs:XP:ruby-daring-tracker:f0t0:s2	-	-	-	3aa6ded33acb	-	acd43a401ea7	-	-	2026-11-25	xproof
@@ -130,7 +130,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5d96840e-f9b3-4c86-8f59-f12e5736318f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:voracious-greatshark:cast:s1,f:xs:XP:voracious-greatshark:cast:s1	-	-	-	23b491658465	-	0bb1a2700d20	-	-	2026-11-24	xproof
 5d96840e-f9b3-4c86-8f59-f12e5736318f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:voracious-greatshark:cast:s1,f:xs:XP:voracious-greatshark:cast:s1	-	-	-	23b491658465	-	0bb1a2700d20	-	-	2026-11-24	xproof
 5d998c09-7d89-4265-ada4-6d80cbf56dae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5d998c09-7d89-4265-ada4-6d80cbf56dae	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5d998c09-7d89-4265-ada4-6d80cbf56dae	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:cast:s1,f:xs:XP:syr-alin-the-lion-s-claw:cast:s1	-	-	-	23b491658465	-	d4670641a491	-	-	2026-11-24	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:combat0.attack:s1,f:xs:XP:syr-alin-the-lion-s-claw:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	d4670641a491	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 5d9a4905-4a26-410e-936c-56de849e9ca3	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:syr-alin-the-lion-s-claw:combat0.block:s1,f:xs:XP:syr-alin-the-lion-s-claw:combat0.block:s1	-	-	-	fb9d3088f0bf	-	d4670641a491	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof

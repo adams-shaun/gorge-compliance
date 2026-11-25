@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 8802b7f0-1ed1-4872-9939-182afb8441ca	cast	cast-resolve	agreed	-	X	scen	1	0	Academy Instructor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-8802b7f0-1ed1-4872-9939-182afb8441ca	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+8802b7f0-1ed1-4872-9939-182afb8441ca	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 880367e4-50b9-49d0-b596-d462d9b42855	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 880367e4-50b9-49d0-b596-d462d9b42855	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8806ee05-10d5-4492-b672-2f6bcab94be0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -41,7 +41,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 883a2b57-1075-4479-920b-3f7d5da1f444	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	cast	cast-resolve	agreed	-	X	scen	1	0	Tithing Blade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tithing Blade/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-883a4180-9ede-4249-a4b8-3a29c998fb63	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+883a4180-9ede-4249-a4b8-3a29c998fb63	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 883a4180-9ede-4249-a4b8-3a29c998fb63	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Tithing Blade/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 883ad210-917b-40e6-8682-31d6eb3ed12a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 883ad210-917b-40e6-8682-31d6eb3ed12a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:burakos-party-leader:f0t0:s1,f:xs:XP:burakos-party-leader:f0t0:s1	-	-	-	8c0bd19283bb	-	cf87ddc3fe29	-	-	2026-11-24	xproof
@@ -90,7 +90,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 88923ca1-a793-42f0-b9f8-ed9ff9c1185d	cast	cast-resolve	agreed	-	FX	scen	2	0	Super Speed/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 88923ca1-a793-42f0-b9f8-ed9ff9c1185d	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 88923ca1-a793-42f0-b9f8-ed9ff9c1185d	static#0.0	static#0.0	agreed	-	X	scen	1	0	Super Speed/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-88929ea9-900f-4dbb-b16c-cf3bad4e410c	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+88929ea9-900f-4dbb-b16c-cf3bad4e410c	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 88939cb3-5f61-4857-95cb-9446c6c1f1aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alpine-houndmaster:f0t0:s1,f:xs:XP:alpine-houndmaster:f0t0:s1	-	-	-	ae86f6029288	-	f91feeef65b0	-	-	2026-11-24	xproof
 88939cb3-5f61-4857-95cb-9446c6c1f1aa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:alpine-houndmaster:f0t0:s1,f:xs:XP:alpine-houndmaster:f0t0:s1	-	-	-	ae86f6029288	-	f91feeef65b0	-	-	2026-11-24	xproof
 88939cb3-5f61-4857-95cb-9446c6c1f1aa	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:alpine-houndmaster:f0t1:s1,f:xs:XP:alpine-houndmaster:f0t1:s1	-	-	-	ae86f6029288	-	f91feeef65b0	-	-	2026-11-24	xproof

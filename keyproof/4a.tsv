@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Dion, Bahamut's Dominant/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Dion, Bahamut's Dominant/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Dion, Bahamut's Dominant/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	static#0.0	static#0.0	agreed	-	X	scen	1	0	Dion, Bahamut's Dominant/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a1126a3-f8ce-4790-aa51-1e3f4b63eb18	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-the-nobilis:cast:s1,f:xs:XP:scourge-of-the-nobilis:cast:s1	-	-	-	da6bc3fe8458	-	4568c3699e63	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 4a1b8db2-8814-45b3-ab8a-a1c8522d7fa1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cavern-thoctar:cast:s1,f:xs:XP:cavern-thoctar:cast:s1	-	-	-	8a1b1a193ec0	-	dfd061446cb2	-	-	2026-11-24	xproof
@@ -48,7 +48,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a3acbf7-0699-4d7c-b4fa-aa15c7cde189	f0/t0	ChangesZone/Afterlife	agreed	-	FX	start	2	0	x:xs:XP:seraph-of-the-scales:f0t0:s1,f:xs:XP:seraph-of-the-scales:f0t0:s1	-	-	-	d864b561c9cb	-	762587b0e416	-	-	2026-11-24	xproof
 4a3c6d0e-6d77-4434-95f4-737879de026f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a3cc4f6-037f-461d-a3b7-9f9e24c4b8cf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4a3fba0c-50b1-4139-834e-c8fc8e1315bb	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4a3fba0c-50b1-4139-834e-c8fc8e1315bb	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4a40cee1-fc09-4f97-aef8-440778d8c0ca	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twisted-image:cast:s1,f:xs:XP:twisted-image:cast:s1	-	-	-	3aa6ded33acb	-	4802f58b452b	-	-	2026-11-25	xproof
 4a4418fa-7574-4027-aa09-4ca789be15ba	cast	cast	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	5af4a07124d5	-	-	2026-11-25	xproof
 4a4418fa-7574-4027-aa09-4ca789be15ba	f0/t0	Phase/Cumulative upkeep	owed	harness	-	start	0	0	-	-	-	-	3aa6ded33acb	-	5af4a07124d5	-	-	2026-11-25	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4aeaf1cd-7346-4492-847d-1c4dad14fafd	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:font-of-fortunes:f0a0:s1,f:xs:XP:font-of-fortunes:f0a0:s1	-	-	-	d864b561c9cb	-	726f10112aec	-	-	2026-11-24	xproof
 4aeafdf3-7828-4114-8c74-3bd46357caec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aebea34-a05b-4626-97bc-f15fa177ef05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aec7624-e406-45a4-b2b6-2e8d29f6268a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

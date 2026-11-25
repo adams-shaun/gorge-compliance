@@ -88,7 +88,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 876affb5-155d-4268-9e46-4437a9fbccc7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 876c9620-216c-45dd-b8a6-b9e0cba63e3d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:contested-game-ball:cast:s1,f:xs:XP:contested-game-ball:cast:s1	-	-	-	23b491658465	-	95f2cf204d12	-	-	2026-11-24	xproof
 876c9620-216c-45dd-b8a6-b9e0cba63e3d	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:contested-game-ball:f0a0:s1,f:xs:XP:contested-game-ball:f0a0:s1	-	-	-	23b491658465	-	95f2cf204d12	-	-	2026-11-24	xproof
-876c9620-216c-45dd-b8a6-b9e0cba63e3d	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Contested Game Ball/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+876c9620-216c-45dd-b8a6-b9e0cba63e3d	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:contested-game-ball:f0t0:s1,f:xs:XP:contested-game-ball:f0t0:s1	-	-	-	44e3ec152eea	-	95f2cf204d12	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 8773c2ea-ef41-4403-bb52-07f0d70d9bbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clay-golem:cast:s1,f:xs:XP:clay-golem:cast:s1	-	-	-	8c0bd19283bb	-	596944c34acc	-	-	2026-11-24	xproof
 8773c2ea-ef41-4403-bb52-07f0d70d9bbe	f0/a0	NULL	owed	refused:steps-needed:cost:RollDice	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 8773c2ea-ef41-4403-bb52-07f0d70d9bbe	f0/t0	NULL	owed	refused:no-generator:trigger:BecomeMonstrous	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -149,7 +149,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87a0e0b9-6c2d-47a4-a3ed-7e0ae62fbffc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87a44a87-a2a5-4193-a163-e4846e5b8387	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nath-of-the-gilt-leaf:f0t0:s1,f:xs:XP:nath-of-the-gilt-leaf:f0t0:s1	-	-	-	3aa6ded33acb	-	334cef8e295b	-	-	2026-11-25	xproof
 87a44a87-a2a5-4193-a163-e4846e5b8387	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:nath-of-the-gilt-leaf:f0t0:s1,f:xs:XP:nath-of-the-gilt-leaf:f0t0:s1	-	-	-	3aa6ded33acb	-	334cef8e295b	-	-	2026-11-25	xproof
-87a44a87-a2a5-4193-a163-e4846e5b8387	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+87a44a87-a2a5-4193-a163-e4846e5b8387	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 87a4caa4-cb08-4a0c-b57a-d6d8474b1f5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 87a4caa4-cb08-4a0c-b57a-d6d8474b1f5e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:vigil-for-the-lost:f0t0:s1,f:xs:XP:vigil-for-the-lost:f0t0:s1	-	-	-	23c4009444b0	-	daa30b5b0bf0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 87a72c3d-e787-4dd8-b934-4fff4573af6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:freejam-regent:cast:s1,f:xs:XP:freejam-regent:cast:s1	-	-	-	d864b561c9cb	-	f743a9981394	-	-	2026-11-24	xproof

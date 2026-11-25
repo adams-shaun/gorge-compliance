@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2db5e0cd-c991-4fda-9001-9e4f10e8a805	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2db73fff-1a89-4006-945d-a244ff2f0bef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2db73fff-1a89-4006-945d-a244ff2f0bef	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-2db73fff-1a89-4006-945d-a244ff2f0bef	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2db73fff-1a89-4006-945d-a244ff2f0bef	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2db77e35-a54a-4e9c-8081-c97822515879	cast	cast-resolve	agreed	-	FX	scen	2	0	Lord Dregg, Insect Invader/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2db77e35-a54a-4e9c-8081-c97822515879	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:lord-dregg-insect-invader:combat0.attack:s1,f:xs:XP:lord-dregg-insect-invader:combat0.attack:s1	-	-	-	23c4009444b0	-	705b4699b479	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2db77e35-a54a-4e9c-8081-c97822515879	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:lord-dregg-insect-invader:combat0.block:s1,f:xs:XP:lord-dregg-insect-invader:combat0.block:s1	-	-	-	23c4009444b0	-	705b4699b479	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -160,5 +160,5 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2dfafd63-83fb-4783-8e12-30018680a905	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2dfdd358-e3cd-4bf5-871b-37689b7951e9	cast	cast-resolve	agreed	-	X	scen	1	0	Master's Guide-Mural/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2dfdd358-e3cd-4bf5-871b-37689b7951e9	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Master's Guide-Mural/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2dfdd358-e3cd-4bf5-871b-37689b7951e9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+2dfdd358-e3cd-4bf5-871b-37689b7951e9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 2dfdd358-e3cd-4bf5-871b-37689b7951e9	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Master's Guide-Mural/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
