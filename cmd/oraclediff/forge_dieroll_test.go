@@ -227,9 +227,14 @@ func TestForgeRolledDie(t *testing.T) {
 // retarget-count fix, ChangeTargetsNoCandidateTest), no textual conflicts; die-roll code unchanged, ForcedDieRollTest
 // re-run green on the pin (run-unit-tests.sh).
 // 495ed200e9f = 0ca7a220bd0 (join18, above) plus setup player_counters (SetupBuilder.placePlayerCounters, PlayerCountersSetupTest);
+// die-roll code unchanged, ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
 // 19c49ba7117 = 0ca7a220bd0 plus the "pN:ability:Name" stack-ability target ref (xpt-1d873918); die-roll code unchanged.
 // d38946a0fd9 = 19c49ba7117 merged with 495ed200e9f, no textual conflicts (the two sides touch disjoint files); die-roll
 // code unchanged.
+// f3065a4da86 = oracle/fpin-1125-join20: 495ed200e9f (above) merged with 53635f189cc (the unbound optional-untap election
+// answered at the ask; ScriptedController/StepMachine/SnapshotWriter only), no textual conflicts; die-roll code unchanged,
+// ForcedDieRollTest run on the pin (run-unit-tests.sh).
+// (merge) the pin stays at d38946a0fd9: f3065a4da86 lacks the ability-target ref; a fork join of both is pending.
 const forgeOracleDieRollRef = "d38946a0fd9b5bafca14d748e775a4e5e9060ab4"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
