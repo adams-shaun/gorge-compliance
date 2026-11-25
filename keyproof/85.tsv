@@ -1,8 +1,8 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 8505f9a6-a510-43f9-a96d-b840b353e144	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8505f9a6-a510-43f9-a96d-b840b353e144	f0/a0	Pump	agreed	-	FX	start	1	0	x:xs:XP:goblin-rimerunner:f0a1:s1,f:xs:XP:goblin-rimerunner:f0a1:s1	-	-	-	4b8018a80bf0	-	2ebb98b5bb53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-8505f9a6-a510-43f9-a96d-b840b353e144	f0/a1	Pump	agreed	-	FX	start	1	0	x:xs:XP:goblin-rimerunner:f0a1:s1,f:xs:XP:goblin-rimerunner:f0a1:s1	-	-	-	4b8018a80bf0	-	2ebb98b5bb53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+8505f9a6-a510-43f9-a96d-b840b353e144	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:goblin-rimerunner:f0a1:s1,f:xs:XP:goblin-rimerunner:f0a1:s1	-	-	-	44e3ec152eea	-	2ebb98b5bb53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+8505f9a6-a510-43f9-a96d-b840b353e144	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:goblin-rimerunner:f0a1:s1,f:xs:XP:goblin-rimerunner:f0a1:s1	-	-	-	44e3ec152eea	-	2ebb98b5bb53	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 850a8369-94ab-43b6-8cfe-286e3623b19d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 850bb6f7-48d3-4d65-9220-b0bec5ee6b64	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:fogwell-s-gym:f0a0:s1,f:xs:XP:fogwell-s-gym:f0a0:s1	-	-	-	8c0bd19283bb	-	122e557bccde	-	-	2026-11-24	xproof
 850bb6f7-48d3-4d65-9220-b0bec5ee6b64	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -37,7 +37,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 852b6e19-4594-41ea-9267-0911df643af5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ekundu-griffin:cast:s1,f:xs:XP:ekundu-griffin:cast:s1	-	-	-	8c0bd19283bb	-	5a989d70e7fa	-	-	2026-11-24	xproof
 852bd598-6e48-43c8-9211-740ae9e0c42e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 852c38fe-8bfa-420b-b961-7b91af9b38d1	cast	cast	agreed	-	F	start	4	0	f:xs:XP:gwyndala-the-progeny:cast:s1	-	-	-	23c4009444b0	-	379043df7264	-	-	2026-11-25	xproof
-852c38fe-8bfa-420b-b961-7b91af9b38d1	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+852c38fe-8bfa-420b-b961-7b91af9b38d1	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 852c38fe-8bfa-420b-b961-7b91af9b38d1	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:gwyndala-the-progeny:cast:s1	-	-	-	23c4009444b0	-	379043df7264	-	-	2026-11-25	xproof
 852c6520-d148-4923-a312-05a9af821f24	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:eroded-canyon:f0a0:s1,f:xs:XP:eroded-canyon:f0a0:s1	-	-	-	23b491658465	-	0622f163c062	-	-	2026-11-25	xproof
 852c6520-d148-4923-a312-05a9af821f24	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:eroded-canyon:f0t0:s1,f:xs:XP:eroded-canyon:f0t0:s1	-	-	-	23b491658465	-	0622f163c062	-	-	2026-11-25	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85e797de-da27-4cd5-8fa4-4aef948988b2	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 85e797de-da27-4cd5-8fa4-4aef948988b2	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 85eafa00-51df-4070-9b2d-247457ba3364	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-85eafa00-51df-4070-9b2d-247457ba3364	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+85eafa00-51df-4070-9b2d-247457ba3364	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:relic-robber:f0t0:s1,f:xs:XP:relic-robber:f0t0:s1	-	-	-	44e3ec152eea	-	c5f5899d4f5d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 85eb890e-a5e1-48f8-b813-e8424d18b28a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:migloz-maze-crusher:cast:s1,f:xs:XP:migloz-maze-crusher:cast:s1	-	-	-	ae86f6029288	-	d10a341b3ea8	-	-	2026-11-24	xproof
 85eb890e-a5e1-48f8-b813-e8424d18b28a	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 85eb890e-a5e1-48f8-b813-e8424d18b28a	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -200,6 +200,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 85fd04e9-b39c-4ce0-97a1-58f9670a298f	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85fdfa3c-4912-496a-bbcb-1ae13a34e917	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:krovod-haunch:cast:s1,f:xs:XP:krovod-haunch:cast:s1	-	-	-	23b491658465	-	bc18c0331f3f	-	-	2026-11-24	xproof
 85fdfa3c-4912-496a-bbcb-1ae13a34e917	f0/a0	GainLife	agreed	-	FX	start	2	0	x:xs:XP:krovod-haunch:f0a1:s1,f:xs:XP:krovod-haunch:f0a1:s1	-	-	-	23b491658465	-	bc18c0331f3f	-	-	2026-11-25	xproof
-85fdfa3c-4912-496a-bbcb-1ae13a34e917	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:krovod-haunch:static0.0:s1,f:xs:XP:krovod-haunch:static0.0:s1	-	-	-	4b8018a80bf0	-	bc18c0331f3f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+85fdfa3c-4912-496a-bbcb-1ae13a34e917	f0/a1	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:krovod-haunch:static0.0:s1,f:xs:XP:krovod-haunch:static0.0:s1	-	-	-	44e3ec152eea	-	bc18c0331f3f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 85fdfa3c-4912-496a-bbcb-1ae13a34e917	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:krovod-haunch:f0a1:s1,f:xs:XP:krovod-haunch:f0a1:s1	-	-	-	23b491658465	-	bc18c0331f3f	-	-	2026-11-25	xproof
-85fdfa3c-4912-496a-bbcb-1ae13a34e917	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:krovod-haunch:static0.0:s1,f:xs:XP:krovod-haunch:static0.0:s1	-	-	-	4b8018a80bf0	-	bc18c0331f3f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+85fdfa3c-4912-496a-bbcb-1ae13a34e917	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:krovod-haunch:static0.0:s1,f:xs:XP:krovod-haunch:static0.0:s1	-	-	-	44e3ec152eea	-	bc18c0331f3f	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

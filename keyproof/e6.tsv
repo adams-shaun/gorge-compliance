@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 e600afe3-8d5b-46ab-b98c-f0bacb58ab2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rotted-hystrix:cast:s1,f:xs:XP:rotted-hystrix:cast:s1	-	-	-	d864b561c9cb	-	609912ce42bf	-	-	2026-11-24	xproof
 e602f06e-64ff-4d1b-813c-6612ee514ea6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kashi-tribe-reaver:cast:s1,f:xs:XP:kashi-tribe-reaver:cast:s1	-	-	-	25696bf19d5b	-	3aec4b09ecf8	-	-	2026-11-24	xproof
 e602f06e-64ff-4d1b-813c-6612ee514ea6	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:kashi-tribe-reaver:f0a0:s1,f:xs:XP:kashi-tribe-reaver:f0a0:s1	-	-	-	23c4009444b0	-	3aec4b09ecf8	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-e602f06e-64ff-4d1b-813c-6612ee514ea6	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+e602f06e-64ff-4d1b-813c-6612ee514ea6	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:kashi-tribe-reaver:f0t0:s1,f:xs:XP:kashi-tribe-reaver:f0t0:s1	-	-	-	44e3ec152eea	-	3aec4b09ecf8	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e606cba7-7e3c-4834-b2cd-56e51cedccb7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ohran-yeti:cast:s1,f:xs:XP:ohran-yeti:cast:s1	-	-	-	0984227a67dd	-	614e70914d2c	-	-	2026-11-24	xproof
 e606cba7-7e3c-4834-b2cd-56e51cedccb7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:ohran-yeti:f0a0:s1,f:xs:XP:ohran-yeti:f0a0:s1	-	-	-	44e3ec152eea	-	614e70914d2c	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e6088c23-a660-4d2c-b633-1c6cb1a59ebe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -15,8 +15,8 @@ e60b23ba-2258-4da1-b873-452ee215846b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:x
 e60b6b71-eea8-42b3-81e2-c8fb1af5e218	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e60b6b71-eea8-42b3-81e2-c8fb1af5e218	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:nested-ghoul:f0t0:s1,f:xs:XP:nested-ghoul:f0t0:s1	-	-	-	44e3ec152eea	-	222aa9479675	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e6108735-8370-4611-ad59-d7da7fd0323f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sure-footed-infiltrator:cast:s1,f:xs:XP:sure-footed-infiltrator:cast:s1	-	-	-	ae86f6029288	-	0afe62b0e6ee	-	-	2026-11-24	xproof
-e6108735-8370-4611-ad59-d7da7fd0323f	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-e6108735-8370-4611-ad59-d7da7fd0323f	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+e6108735-8370-4611-ad59-d7da7fd0323f	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:sure-footed-infiltrator:f0a0:s1,f:xs:XP:sure-footed-infiltrator:f0a0:s1	-	-	-	44e3ec152eea	-	0afe62b0e6ee	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+e6108735-8370-4611-ad59-d7da7fd0323f	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:sure-footed-infiltrator:f0a0:s1,f:xs:XP:sure-footed-infiltrator:f0a0:s1	-	-	-	44e3ec152eea	-	0afe62b0e6ee	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e610bfd4-d064-410b-929c-1d9dd82828b1	cast	cast-resolve	agreed	-	FX	scen	2	0	Baxter Stockman/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e610bfd4-d064-410b-929c-1d9dd82828b1	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e610bfd4-d064-410b-929c-1d9dd82828b1	f0/t1	trigger#0.1	agreed	-	FX	scen	2	0	Baxter Stockman/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ e6c181f1-f4f7-4a96-b50c-717cf2a02098	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:
 e6c41473-2398-4888-9f0c-467dce7c39a4	cast	cast-resolve	agreed	-	X	scen	1	0	Emeritus of Truce/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 e6c41473-2398-4888-9f0c-467dce7c39a4	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e6c9a699-0468-42f8-aad5-b9d45a3c1d37	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-e6c9a699-0468-42f8-aad5-b9d45a3c1d37	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+e6c9a699-0468-42f8-aad5-b9d45a3c1d37	f0/t0	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:gorgon-recluse:f0t0:s1,f:xs:XP:gorgon-recluse:f0t0:s1	-	-	-	44e3ec152eea	-	198afde875fc	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e6c9a699-0468-42f8-aad5-b9d45a3c1d37	f0/t1	AttackerBlockedByCreature	agreed	-	FX	start	2	0	x:xs:XP:gorgon-recluse:f0t1:s1,f:xs:XP:gorgon-recluse:f0t1:s1	-	-	-	44e3ec152eea	-	198afde875fc	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 e6ccebf4-f4f0-404f-a634-4d751ef9c8aa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 e6ccebf4-f4f0-404f-a634-4d751ef9c8aa	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana:filter	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof

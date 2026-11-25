@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 70113003-be5e-406a-9aec-cb480468c36d	cast	cast-resolve	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70113003-be5e-406a-9aec-cb480468c36d	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70113003-be5e-406a-9aec-cb480468c36d	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-70113003-be5e-406a-9aec-cb480468c36d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+70113003-be5e-406a-9aec-cb480468c36d	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 70113003-be5e-406a-9aec-cb480468c36d	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70113003-be5e-406a-9aec-cb480468c36d	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 70113003-be5e-406a-9aec-cb480468c36d	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Sephiroth, Fabled SOLDIER/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -107,13 +107,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 708b0321-7de9-4ffd-9d7a-9f4813dd542e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 708b0321-7de9-4ffd-9d7a-9f4813dd542e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 708b13ef-f297-4176-9d09-e633c4d600da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vedalken-ghoul:cast:s1,f:xs:XP:vedalken-ghoul:cast:s1	-	-	-	8a1b1a193ec0	-	e2cb0707f2aa	-	-	2026-11-24	xproof
-708b13ef-f297-4176-9d09-e633c4d600da	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+708b13ef-f297-4176-9d09-e633c4d600da	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:vedalken-ghoul:f0t0:s1,f:xs:XP:vedalken-ghoul:f0t0:s1	-	-	-	44e3ec152eea	-	e2cb0707f2aa	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 708bf989-dd8d-4066-a463-96cc5eadbb06	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 708bf989-dd8d-4066-a463-96cc5eadbb06	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:meadowboon:f0t0:s1,f:xs:XP:meadowboon:f0t0:s1	-	-	-	23c4009444b0	-	44a45dac2f5f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 708d4567-a5a3-437f-bae4-ae10f1537aa9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tetsuko-umezawa-pursuer:cast:s1,f:xs:XP:tetsuko-umezawa-pursuer:cast:s1	-	-	-	fb9d3088f0bf	-	d9628b95b7eb	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 708d4567-a5a3-437f-bae4-ae10f1537aa9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:tetsuko-umezawa-pursuer:combat0.attack:s1,f:xs:XP:tetsuko-umezawa-pursuer:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	d9628b95b7eb	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 708d4567-a5a3-437f-bae4-ae10f1537aa9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:tetsuko-umezawa-pursuer:combat0.block:s1,f:xs:XP:tetsuko-umezawa-pursuer:combat0.block:s1	-	-	-	fb9d3088f0bf	-	d9628b95b7eb	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
-708d4567-a5a3-437f-bae4-ae10f1537aa9	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+708d4567-a5a3-437f-bae4-ae10f1537aa9	f0/t0	Blocks	agreed	-	FX	start	2	0	x:xs:XP:tetsuko-umezawa-pursuer:f0t0:s1,f:xs:XP:tetsuko-umezawa-pursuer:f0t0:s1	-	-	-	44e3ec152eea	-	d9628b95b7eb	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 708d4567-a5a3-437f-bae4-ae10f1537aa9	f0/t1	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:tetsuko-umezawa-pursuer:f0t1:s1,f:xs:XP:tetsuko-umezawa-pursuer:f0t1:s1	-	-	-	fb9d3088f0bf	-	d9628b95b7eb	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 708df587-3b13-42cb-8341-f476ab4cbe45	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 708df587-3b13-42cb-8341-f476ab4cbe45	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

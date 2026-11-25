@@ -11,7 +11,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 420d09b5-aced-4f71-914c-90d19f7476dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 420d09b5-aced-4f71-914c-90d19f7476dc	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 42176320-ee7f-44c9-916e-5ee4a6108be3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42176320-ee7f-44c9-916e-5ee4a6108be3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+42176320-ee7f-44c9-916e-5ee4a6108be3	f0/t0	AttackerBlocked	agreed	-	FX	start	2	0	x:xs:XP:frostweb-spider:f0t0:s1,f:xs:XP:frostweb-spider:f0t0:s1	-	-	-	44e3ec152eea	-	09674a5d0132	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 421c661a-24d9-4797-b538-2a4243825628	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42208fea-8c24-451f-861d-6d70c0a7a502	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42226b87-0746-4ebf-9fd0-108d508462af	cast	cast	agreed	-	F	start	2	0	f:xs:XP:clone:cast:s1	-	-	-	25696bf19d5b	-	9473363c4d09	-	-	2026-11-24	xproof
@@ -159,7 +159,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42d121a2-5266-483a-ab16-e0a8073cd6a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:halimar-depths:f0t0:s1,f:xs:XP:halimar-depths:f0t0:s1	-	-	-	8a1b1a193ec0	-	62fe9f20a42f	-	-	2026-11-24	xproof
 42d121a2-5266-483a-ab16-e0a8073cd6a3	land	land	agreed	-	FX	start	2	0	x:xs:XP:halimar-depths:f0t0:s1,f:xs:XP:halimar-depths:f0t0:s1	-	-	-	8a1b1a193ec0	-	62fe9f20a42f	-	-	2026-11-24	xproof
 42d7ec93-0943-43e2-9b65-b7edc3349410	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42d7ec93-0943-43e2-9b65-b7edc3349410	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+42d7ec93-0943-43e2-9b65-b7edc3349410	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 42d86827-6459-42fc-86b6-6eb055604c36	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:edge-of-autumn:cast:s2,f:xs:XP:edge-of-autumn:cast:s2	-	-	-	d864b561c9cb	-	43f8f5ce3dff	-	-	2026-11-24	xproof
 42d86827-6459-42fc-86b6-6eb055604c36	f0/a1	Draw/Cycling	agreed	-	FX	start	1	0	x:xs:XP:edge-of-autumn:cast:s1,f:xs:XP:edge-of-autumn:cast:s1	-	-	-	d864b561c9cb	-	43f8f5ce3dff	-	-	2026-11-24	xproof
 42d8ab49-703a-4fd3-84d0-0a3ac1eafca8	cast	counter-spell	agreed	-	FX	scen	2	0	Louisoix's Sacrifice/counter-spell/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

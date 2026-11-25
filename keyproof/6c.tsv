@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6c05b882-51d9-43d8-93b8-c3317590f76a	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Mm'menon, Uthros Exile/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 6c076776-f497-4abf-ab06-f551768cffae	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6c076776-f497-4abf-ab06-f551768cffae	f0/t0	Blocks/Bushido	agreed	-	FX	start	2	0	x:xs:XP:konda-s-hatamoto:f0t0:s1,f:xs:XP:konda-s-hatamoto:f0t0:s1	-	-	-	44e3ec152eea	-	f7945449229a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-6c076776-f497-4abf-ab06-f551768cffae	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+6c076776-f497-4abf-ab06-f551768cffae	f0/t1	AttackerBlocked/Bushido	agreed	-	FX	start	2	0	x:xs:XP:konda-s-hatamoto:f0t1:s1,f:xs:XP:konda-s-hatamoto:f0t1:s1	-	-	-	44e3ec152eea	-	f7945449229a	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6c0b07c4-bb7c-4100-81e5-b0ee95d18625	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:shipwreck-moray:cast:s1,f:xs:XP:shipwreck-moray:cast:s1	-	-	-	d864b561c9cb	-	ff63caba3d41	-	-	2026-11-24	xproof
 6c0b07c4-bb7c-4100-81e5-b0ee95d18625	f0/a0	Pump	agreed	-	FX	start	4	0	x:xs:XP:shipwreck-moray:cast:s1,f:xs:XP:shipwreck-moray:cast:s1	-	-	-	d864b561c9cb	-	ff63caba3d41	-	-	2026-11-24	xproof
 6c0b07c4-bb7c-4100-81e5-b0ee95d18625	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:shipwreck-moray:cast:s1,f:xs:XP:shipwreck-moray:cast:s1	-	-	-	d864b561c9cb	-	ff63caba3d41	-	-	2026-11-24	xproof
@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6ca2a89e-7032-4864-b4e9-66f3178f90ab	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:essence-warden:f0t0:s1,f:xs:XP:essence-warden:f0t0:s1	-	-	-	23c4009444b0	-	68fca9a0ff5a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6ca90451-861d-4aa8-93e7-3f3e02385530	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6ca999d7-48c9-4517-8e63-82ddccdb430e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6caabc45-4644-4941-a2f3-f04ee7b50a89	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Boiling Rock Prison/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+6caabc45-4644-4941-a2f3-f04ee7b50a89	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:boiling-rock-prison:f0a0:s1,f:xs:XP:boiling-rock-prison:f0a0:s1	-	-	-	44e3ec152eea	-	56cab264703d	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6caabc45-4644-4941-a2f3-f04ee7b50a89	f0/a1	Draw	agreed	-	FX	start	2	0	x:xs:XP:boiling-rock-prison:f0a1:s1,f:xs:XP:boiling-rock-prison:f0a1:s1	-	-	-	23c4009444b0	-	56cab264703d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6caabc45-4644-4941-a2f3-f04ee7b50a89	land	land	agreed	-	FX	start	2	0	x:xs:XP:boiling-rock-prison:land:s1,f:xs:XP:boiling-rock-prison:land:s1	-	-	-	23c4009444b0	-	56cab264703d	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6cac6f76-f3c6-4b00-a468-166b07853401	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

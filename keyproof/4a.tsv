@@ -7,7 +7,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a01db2e-cd43-4b1a-a480-169018f82501	f0/a0	Surveil	agreed	-	FX	start	4	0	x:xs:XP:doom-whisperer:cast:s1,f:xs:XP:doom-whisperer:cast:s1	-	-	-	d864b561c9cb	-	8c89c9134cad	-	-	2026-11-24	xproof
 4a080242-412d-4968-ad57-2667dab977f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a09536e-dfc1-4b15-adc1-07ef866ebda0	cast	cast-resolve	agreed	-	X	scen	1	0	Wall Crawl/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4a09536e-dfc1-4b15-adc1-07ef866ebda0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4a09536e-dfc1-4b15-adc1-07ef866ebda0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4a09536e-dfc1-4b15-adc1-07ef866ebda0	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:wall-crawl:static0.0:s1,f:xs:XP:wall-crawl:static0.0:s1	-	-	-	23c4009444b0	-	cc1141a338a0	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4a09536e-dfc1-4b15-adc1-07ef866ebda0	static#0.1	static#0.1	agreed	-	X	scen	1	0	Wall Crawl/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a0cc2a2-3711-473a-b2c5-b1e52b34e4fb	cast	cast-resolve	agreed	-	X	scen	1	0	Dion, Bahamut's Dominant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -108,8 +108,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a85cd7e-625b-4043-b7f1-999def26eb36	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8b3316-a01a-4206-bbed-d7aac6c834bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a8b3316-a01a-4206-bbed-d7aac6c834bd	f0/t0	SpellCast/Prowess	agreed	-	FX	start	2	0	x:xs:XP:ringwarden-owl:f0t0:s1,f:xs:XP:ringwarden-owl:f0t0:s1	-	-	-	fb9d3088f0bf	-	ad60ba57cf51	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
-4a8d41fe-e04d-484b-a7d1-19be311e6ca7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-4a8d41fe-e04d-484b-a7d1-19be311e6ca7	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+4a8d41fe-e04d-484b-a7d1-19be311e6ca7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+4a8d41fe-e04d-484b-a7d1-19be311e6ca7	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	cast	cast	agreed	-	X	start	2	0	x:xs:XP:hostage-taker:f0t0:s1	-	-	-	d864b561c9cb	-	9f33c905e38a	-	-	2026-11-24	xproof
 4a8e1f8e-3740-4ff3-b7fa-390ea278fb95	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:herbal-poultice:f0a0:s1,f:xs:XP:herbal-poultice:f0a0:s1	-	-	-	d864b561c9cb	-	9f33c905e38a	-	-	2026-11-24	xproof
 4a8f2104-57ec-4b23-9857-f26afa5cbcfe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:twins-of-discord:cast:s1,f:xs:XP:twins-of-discord:cast:s1	-	-	-	8c0bd19283bb	-	1a00e0d9161a	-	-	2026-11-24	xproof

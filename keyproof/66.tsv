@@ -43,7 +43,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 66290104-ac65-4eb5-bf00-89b944249e07	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:neriv-heart-of-the-storm:combat0.attack:s1,f:xs:XP:neriv-heart-of-the-storm:combat0.attack:s1	-	-	-	23c4009444b0	-	18773eff1794	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 66290104-ac65-4eb5-bf00-89b944249e07	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:neriv-heart-of-the-storm:combat0.block:s1,f:xs:XP:neriv-heart-of-the-storm:combat0.block:s1	-	-	-	23c4009444b0	-	18773eff1794	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6629a48b-be9a-4636-8add-69d096a1ca7e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6629a48b-be9a-4636-8add-69d096a1ca7e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+6629a48b-be9a-4636-8add-69d096a1ca7e	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:double-vision:f0t0:s1,f:xs:XP:double-vision:f0t0:s1	-	-	-	44e3ec152eea	-	2b4d0313dcc4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 6629e5f3-ac59-48f8-b09c-3b98f59b9922	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6629e5f3-ac59-48f8-b09c-3b98f59b9922	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 662a2158-4176-4b4a-be6a-13f4501d22f9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -108,7 +108,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 667c39bc-92d6-4fee-bced-95f0e1f21455	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 667c5676-7a18-4fa9-b965-b26797538e23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 667c5676-7a18-4fa9-b965-b26797538e23	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-667cffdd-8951-4223-8895-fa46e9f14b96	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+667cffdd-8951-4223-8895-fa46e9f14b96	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 667dae0b-5006-4e38-be80-eae79c2a2a95	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 667dae0b-5006-4e38-be80-eae79c2a2a95	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 667ece0e-a474-4e11-8ac4-6c8fc354457c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:demonlord-belzenlok:cast:s1,f:xs:XP:demonlord-belzenlok:cast:s1	-	-	-	d864b561c9cb	-	f28ea4ade8bc	-	-	2026-11-24	xproof

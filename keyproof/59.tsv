@@ -23,11 +23,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5914d4d5-51b8-49c2-9459-bf5579df4990	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:juniper-order-rootweaver:f0t0:s1,f:xs:XP:juniper-order-rootweaver:f0t0:s1	-	-	-	d864b561c9cb	-	0c96a2283b03	-	-	2026-11-24	xproof
 5915039b-3dbd-4a49-8bd3-23ff0fd9c90a	cast	cast-resolve	agreed	-	FX	scen	2	0	Intimidation Campaign/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5915039b-3dbd-4a49-8bd3-23ff0fd9c90a	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5915039b-3dbd-4a49-8bd3-23ff0fd9c90a	f0/t1	CommitCrime	agreed	-	FX	start	2	0	x:xs:XP:intimidation-campaign:f0t1:s1,f:xs:XP:intimidation-campaign:f0t1:s1	-	-	-	4b8018a80bf0	-	b191993a7a74	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5915039b-3dbd-4a49-8bd3-23ff0fd9c90a	f0/t1	CommitCrime	agreed	-	FX	start	2	0	x:xs:XP:intimidation-campaign:f0t1:s1,f:xs:XP:intimidation-campaign:f0t1:s1	-	-	-	44e3ec152eea	-	b191993a7a74	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5917216f-5b42-41fa-8976-401bdbeb782e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59180e94-ccdf-4d9f-9a4a-fe55497d0d63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:creeping-mold:cast:s1,f:xs:XP:creeping-mold:cast:s1	-	-	-	25696bf19d5b	-	fe24656b83aa	-	-	2026-11-24	xproof
 591ce7dc-8407-43ed-acfc-e3d8fd547125	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-591ce7dc-8407-43ed-acfc-e3d8fd547125	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+591ce7dc-8407-43ed-acfc-e3d8fd547125	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 591fe685-767e-4e6e-905e-cc8b423caa19	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 59238ba1-fde4-4e43-9f24-b24125e59de0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lu-su-wu-advisor:cast:s1,f:xs:XP:lu-su-wu-advisor:cast:s1	-	-	-	5f2128bf97e4	-	e24e6ebc251a	-	-	2026-11-24	xproof
 59238ba1-fde4-4e43-9f24-b24125e59de0	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:lu-su-wu-advisor:f0a0:s1,f:xs:XP:lu-su-wu-advisor:f0a0:s1	-	-	-	5f2128bf97e4	-	e24e6ebc251a	-	-	2026-11-24	xproof
@@ -79,7 +79,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 595f0eb5-f521-4174-9c48-b89e85ea907c	f0/a1	Surveil	agreed	-	FX	start	2	0	x:xs:XP:titan-s-grave:f0a1:s1,f:xs:XP:titan-s-grave:f0a1:s1	-	-	-	23c4009444b0	-	daeca9d07598	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 595f0eb5-f521-4174-9c48-b89e85ea907c	land	land	agreed	-	FX	start	2	0	x:xs:XP:titan-s-grave:land:s1,f:xs:XP:titan-s-grave:land:s1	-	-	-	23c4009444b0	-	daeca9d07598	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 595f1dee-8c3b-44a6-9e71-a4bb4334b309	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-595f1dee-8c3b-44a6-9e71-a4bb4334b309	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
+595f1dee-8c3b-44a6-9e71-a4bb4334b309	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:liliana-s-scrounger:f0t0:s1,f:xs:XP:liliana-s-scrounger:f0t0:s1	-	-	-	44e3ec152eea	-	56637fc7a92e	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5960dd01-6797-4c73-b48a-f637b9c288cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 596237da-3d51-4052-a8ca-2218efc1afb3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dovin-grand-arbiter:cast:s1,f:xs:XP:dovin-grand-arbiter:cast:s1	-	-	-	d864b561c9cb	-	97a5d40a9d85	-	-	2026-11-24	xproof
 596237da-3d51-4052-a8ca-2218efc1afb3	f0/a0	Effect	agreed	-	FX	start	2	0	x:xs:XP:dovin-grand-arbiter:cast:s1,f:xs:XP:dovin-grand-arbiter:cast:s1	-	-	-	d864b561c9cb	-	97a5d40a9d85	-	-	2026-11-24	xproof
@@ -106,8 +106,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 597bce51-af89-4d13-9a97-667b4f4f4694	f0/t0	Attacks/Annihilator	agreed	-	FX	start	2	0	x:xs:XP:ulamog-s-crusher:f0t0:s1,f:xs:XP:ulamog-s-crusher:f0t0:s1	-	-	-	d864b561c9cb	-	7d30be2a6e5c	-	-	2026-11-24	xproof
 597bd341-c5a0-47a3-9864-1fccab8a2a00	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tangle-spider:cast:s1,f:xs:XP:tangle-spider:cast:s1	-	-	-	25696bf19d5b	-	dee7f44a90b1	-	-	2026-11-24	xproof
 598283f3-ae29-43b9-8743-6c065136dcad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5987ce77-10ad-4871-900a-5a005fcf4955	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-5987ce77-10ad-4871-900a-5a005fcf4955	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	4b8018a80bf0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5987ce77-10ad-4871-900a-5a005fcf4955	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5987ce77-10ad-4871-900a-5a005fcf4955	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	44e3ec152eea	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 598a7347-b772-4839-a02f-b930076c1354	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 598a7347-b772-4839-a02f-b930076c1354	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 598a7410-35e8-4d62-9bf1-d44ee7717040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -119,7 +119,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 599402d9-2ea6-4709-b010-b35636be8c8c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 599402d9-2ea6-4709-b010-b35636be8c8c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:sky-cycle:f0t0:s1,f:xs:XP:sky-cycle:f0t0:s1	-	-	-	8c0bd19283bb	-	8f9f8f02d396	-	-	2026-11-24	xproof
 5996b1d0-7fe3-4fec-8730-9db901d887b1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:crime-novelist:cast:s1,f:xs:XP:crime-novelist:cast:s1	-	-	-	23b491658465	-	aa55b036cc42	-	-	2026-11-24	xproof
-5996b1d0-7fe3-4fec-8730-9db901d887b1	f0/t0	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:crime-novelist:f0t0:s1,f:xs:XP:crime-novelist:f0t0:s1	-	-	-	4b8018a80bf0	-	aa55b036cc42	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+5996b1d0-7fe3-4fec-8730-9db901d887b1	f0/t0	Sacrificed	agreed	-	FX	start	2	0	x:xs:XP:crime-novelist:f0t0:s1,f:xs:XP:crime-novelist:f0t0:s1	-	-	-	44e3ec152eea	-	aa55b036cc42	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 5998f07e-01f9-4d02-94dd-867c7166463f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:jackal-genius-geneticist:cast:s1,f:xs:XP:jackal-genius-geneticist:cast:s1	-	-	-	23c4009444b0	-	9d2e3f934be9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5998f07e-01f9-4d02-94dd-867c7166463f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:jackal-genius-geneticist:combat0.attack:s1,f:xs:XP:jackal-genius-geneticist:combat0.attack:s1	-	-	-	23c4009444b0	-	9d2e3f934be9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5998f07e-01f9-4d02-94dd-867c7166463f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:jackal-genius-geneticist:combat0.block:s1,f:xs:XP:jackal-genius-geneticist:combat0.block:s1	-	-	-	23c4009444b0	-	9d2e3f934be9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
