@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
-c2022f95-2c26-4a2a-b83b-60efa937cdde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bat-colony:cast:s1,f:xs:XP:bat-colony:cast:s1	-	-	-	cb99a158debc	-	1670b025c7e6	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
-c2022f95-2c26-4a2a-b83b-60efa937cdde	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bat-colony:cast:s1,f:xs:XP:bat-colony:cast:s1	-	-	-	cb99a158debc	-	1670b025c7e6	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+c2022f95-2c26-4a2a-b83b-60efa937cdde	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bat-colony:f0t0:s1,f:xs:XP:bat-colony:f0t0:s1	-	-	-	baa6f696107c	-	1670b025c7e6	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
+c2022f95-2c26-4a2a-b83b-60efa937cdde	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:bat-colony:f0t0:s1,f:xs:XP:bat-colony:f0t0:s1	-	-	-	baa6f696107c	-	1670b025c7e6	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 c2022f95-2c26-4a2a-b83b-60efa937cdde	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Bat Colony/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 c202f124-4283-48f6-aef1-470ad9ded22b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:marhault-elsdragon:cast:s1,f:xs:XP:marhault-elsdragon:cast:s1	-	-	-	fc71ca68c5ac	-	b14b290117bc	-	-	2026-11-24	xproof
 c202f124-4283-48f6-aef1-470ad9ded22b	f0/t0	AttackerBlocked/Rampage	agreed	-	FX	start	2	0	x:xs:XP:marhault-elsdragon:f0t0:s1,f:xs:XP:marhault-elsdragon:f0t0:s1	-	-	-	9087eefec3ee	-	b14b290117bc	98052067d47006cdc887f357dcde286eddc1d5ec	d6e26fd04306b7800a532f38cbd2f16a8e715a6a	2026-11-25	xproof
@@ -55,7 +55,7 @@ c235015e-a7a9-4f8d-bf4a-cf68b3847f83	cast	cast-resolve	agreed	-	X	scen	1	0	Scape
 c23543b7-f637-4a7c-9b72-ec411cd5488e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c23543b7-f637-4a7c-9b72-ec411cd5488e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c235fda2-1a8d-4ac7-9a23-784529a520f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nihilith:cast:s1,f:xs:XP:nihilith:cast:s1	-	-	-	6f84be0f34c0	-	122c9e67feb4	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-c235fda2-1a8d-4ac7-9a23-784529a520f0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+c235fda2-1a8d-4ac7-9a23-784529a520f0	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 c23617c9-53f9-4063-8241-b504e9b80cbe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bolrac-clan-basher:cast:s1,f:xs:XP:bolrac-clan-basher:cast:s1	-	-	-	23b491658465	-	7d7c7878c600	-	-	2026-11-25	xproof
 c23617c9-53f9-4063-8241-b504e9b80cbe	combat#0.attack	combat.attack	agreed	-	F	start	2	0	f:xs:XP:bolrac-clan-basher:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7d7c7878c600	-	-	2026-11-25	xproof
 c23617c9-53f9-4063-8241-b504e9b80cbe	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:bolrac-clan-basher:combat0.block:s1,f:xs:XP:bolrac-clan-basher:combat0.block:s1	-	-	-	fb9d3088f0bf	-	7d7c7878c600	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof

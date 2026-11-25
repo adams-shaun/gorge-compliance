@@ -29,7 +29,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c201f79-9eca-48c8-88ba-a20fa6918a07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:anowon-the-ruin-sage:f0t0:s1,f:xs:XP:anowon-the-ruin-sage:f0t0:s1	-	-	-	3aa6ded33acb	-	1da9df2debf2	-	-	2026-11-25	xproof
 0c201f79-9eca-48c8-88ba-a20fa6918a07	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:anowon-the-ruin-sage:f0t0:s1,f:xs:XP:anowon-the-ruin-sage:f0t0:s1	-	-	-	3aa6ded33acb	-	1da9df2debf2	-	-	2026-11-25	xproof
 0c2095b0-478d-45b4-a34d-b19eb77cea4c	cast	cast-resolve	agreed	-	X	scen	1	0	Sidequest: Card Collection/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-0c2095b0-478d-45b4-a34d-b19eb77cea4c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+0c2095b0-478d-45b4-a34d-b19eb77cea4c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 0c2095b0-478d-45b4-a34d-b19eb77cea4c	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sidequest: Card Collection/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c2095b0-478d-45b4-a34d-b19eb77cea4c	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Sidequest: Card Collection/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 0c23fefe-9891-4dd8-9bb1-eebdb3274e31	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bloom-tender:cast:s1,f:xs:XP:bloom-tender:cast:s1	-	-	-	8c0bd19283bb	-	52a5b72a0540	-	-	2026-11-24	xproof
@@ -124,7 +124,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0c8cb2ec-5b58-497c-a6e7-2d25512d5a44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c936582-d4c0-4da8-bc7e-49da5a433939	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 0c93c418-e10b-4a6d-bddb-3b786bb6a928	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-0c93c418-e10b-4a6d-bddb-3b786bb6a928	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-war-beast:f0t0:s1,f:xs:XP:phyrexian-war-beast:f0t0:s1	-	-	-	9087eefec3ee	-	e010cdde8e1e	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+0c93c418-e10b-4a6d-bddb-3b786bb6a928	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:phyrexian-war-beast:f0t0:s1,f:xs:XP:phyrexian-war-beast:f0t0:s1	-	-	-	baa6f696107c	-	e010cdde8e1e	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 0c952586-e522-4982-bebd-96f1db73053d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tourach-dread-cantor:f0t1:s1,f:xs:XP:tourach-dread-cantor:f0t1:s1	-	-	-	d864b561c9cb	-	207fa265a1ee	-	-	2026-11-24	xproof
 0c952586-e522-4982-bebd-96f1db73053d	f0/t0	Discarded	agreed	-	FX	start	2	0	x:xs:XP:tourach-dread-cantor:f0t0:s1,f:xs:XP:tourach-dread-cantor:f0t0:s1	-	-	-	6f84be0f34c0	-	207fa265a1ee	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 0c952586-e522-4982-bebd-96f1db73053d	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tourach-dread-cantor:f0t1:s1,f:xs:XP:tourach-dread-cantor:f0t1:s1	-	-	-	d864b561c9cb	-	207fa265a1ee	-	-	2026-11-24	xproof

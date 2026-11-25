@@ -17,7 +17,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 941a0e8d-c407-476b-9d0e-cffc1f8c6003	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 941a0e8d-c407-476b-9d0e-cffc1f8c6003	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 941a4b14-ea2a-4bd0-8cc2-d609f80df32c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-941a4b14-ea2a-4bd0-8cc2-d609f80df32c	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+941a4b14-ea2a-4bd0-8cc2-d609f80df32c	f1/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 941b0dd1-0df2-48ee-8829-615e9c3177a7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 941b0dd1-0df2-48ee-8829-615e9c3177a7	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 942216f7-6803-4ab3-9239-463002590f6f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:infused-arrows:cast:s1,f:xs:XP:infused-arrows:cast:s1	-	-	-	25696bf19d5b	-	c40082d97121	-	-	2026-11-24	xproof
@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 943ab696-470b-488f-9567-c8cd89ec06e3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 943ab696-470b-488f-9567-c8cd89ec06e3	f0/a0	Untap	agreed	-	FX	start	2	0	x:xs:XP:juniper-order-druid:f0a0:s1,f:xs:XP:juniper-order-druid:f0a0:s1	-	-	-	8c0bd19283bb	-	e2c60dd652ec	-	-	2026-11-24	xproof
 9442a18b-9093-4a10-ab61-6962f5af3bb6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9442a18b-9093-4a10-ab61-6962f5af3bb6	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+9442a18b-9093-4a10-ab61-6962f5af3bb6	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:attended-healer:f0a0:s1,f:xs:XP:attended-healer:f0a0:s1	-	-	-	baa6f696107c	-	37faa8efd631	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 9442a18b-9093-4a10-ab61-6962f5af3bb6	f0/t0	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:attended-healer:f0t0:s1,f:xs:XP:attended-healer:f0t0:s1	-	-	-	6f84be0f34c0	-	37faa8efd631	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 94431642-cfcf-48f4-9e0b-fcddc5b051ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 94431642-cfcf-48f4-9e0b-fcddc5b051ef	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:creeping-trailblazer:f0a0:s1,f:xs:XP:creeping-trailblazer:f0a0:s1	-	-	-	054d9f516953	-	4a01743a9261	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 945a4a4d-fdfd-4c39-9975-5b22d17a4e70	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sting-slinger:cast:s1,f:xs:XP:sting-slinger:cast:s1	-	-	-	23b491658465	-	189c4970a36d	-	-	2026-11-24	xproof
 945a4a4d-fdfd-4c39-9975-5b22d17a4e70	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Sting-Slinger/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 945d5351-ce7d-488c-bc63-269ad82b74cb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-945d5351-ce7d-488c-bc63-269ad82b74cb	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	9087eefec3ee	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	032ce65c73b890dfdbc506b4e7e804701ea1755d	2026-11-25	xproof
+945d5351-ce7d-488c-bc63-269ad82b74cb	f0/a0	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	baa6f696107c	-	-	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 945e56b9-709f-4bb3-8a6b-0a04d9202a03	cast	cast-resolve	agreed	-	FX	scen	2	0	Sorceress's Schemes/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 945e8443-9647-4eab-b091-ee8e7bc347f5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:machinesmith-automaton:cast:s1,f:xs:XP:machinesmith-automaton:cast:s1	-	-	-	fb9d3088f0bf	-	e4c810d79871	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 945e8443-9647-4eab-b091-ee8e7bc347f5	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:machinesmith-automaton:combat0.attack:s1,f:xs:XP:machinesmith-automaton:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	e4c810d79871	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
