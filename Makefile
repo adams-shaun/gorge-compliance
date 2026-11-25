@@ -93,7 +93,10 @@ GO_TEST_FLAGS ?= -p=2
 # target pointer, so nobody sacrificed; CR 603.10a). MoltenManInfernoIncarnateTest. Each test fails before and passes
 # after. Card behaviour change only for those cards, so the manifests are unchanged.
 # 27b8bfe661 = oracle/xpin-1125: 1b6d284d10 + Necromaster Dragon's mill inside DoIfCostPaid (#557, CR 608.2c); re-applied 11-25: a develop merge resolved it back to 1b6d284d10.
-XMAGE_REF  ?= 27b8bfe66159db22002db3b7ae25f3f531b7ef8d
+# 6e1ecefc46 = 27b8bfe661 + Loam Dryad's tap cost uses the singular controlled-creature filter, so its rule
+# text matches the printed Oracle text instead of reading "Tap an untapped creatures you control" (CR 605.1a:
+# the replay's mana-ability text match). LoamDryadTest.testTapUntappedCreatureForMana; card behaviour unchanged.
+XMAGE_REF  ?= 6e1ecefc4692239a06ac1f8dde1a7d8b2c58abbc
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
