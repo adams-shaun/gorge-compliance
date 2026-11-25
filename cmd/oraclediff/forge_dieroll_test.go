@@ -172,7 +172,9 @@ func TestForgeRolledDie(t *testing.T) {
 // ForcedDieRollTest re-run green on it.
 // 0fe8c90e549 = oracle/fpin-1125-attach: 34f0585c97 (fpin-1125; above) joined with 931d6309cc3 (attach_optional; above); driver-only.
 // d950b048823 = oracle/fpin-1125-room-alt: 0fe8c90e549 (attach_optional; above) joined with 7cae17380d (room_alt; above); driver-only.
-const forgeOracleDieRollRef = "d950b0488233fcfe871f31ea040788a39eb375a1"
+// 1707ccc4018 = 0fe8c90e549 plus K'rrik's pay-2-life-for-{B} payment (ScriptedController); driver-only, die-roll code unchanged.
+// 22d31c3e9d0 = oracle/fpin-1125-room-alt: d950b048823 (room_alt + attach_optional; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
+const forgeOracleDieRollRef = "22d31c3e9d0b4e2f605ec368b36bf4db784d52c3"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
