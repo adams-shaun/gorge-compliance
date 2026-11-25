@@ -14,7 +14,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e0ebf3b-9295-43a9-9b5c-4ffac6a6b630	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9e0fd3bf-f47a-4f06-8ff1-73f6bf5d1e03	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shared-roots:cast:s1,f:xs:XP:shared-roots:cast:s1	-	-	-	23b491658465	-	588566895588	-	-	2026-11-24	xproof
 9e104718-1f74-4414-977a-82def93b5a8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e104718-1f74-4414-977a-82def93b5a8e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+9e104718-1f74-4414-977a-82def93b5a8e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 9e107382-f683-44ed-ada1-775d3ac79dd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:clattering-skeletons:cast:s1,f:xs:XP:clattering-skeletons:cast:s1	-	-	-	d864b561c9cb	-	567e039aff8e	-	-	2026-11-24	xproof
 9e107382-f683-44ed-ada1-775d3ac79dd0	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	567e039aff8e	-	-	2026-11-24	xproof
 9e112393-962b-461e-a605-9f8d6a1ebaa4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -160,7 +160,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ec2114c-023b-45c3-a44c-6a9f6462bc85	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:unforgiving-one:f0t0:s1,f:xs:XP:unforgiving-one:f0t0:s1	-	-	-	d864b561c9cb	-	8c40958214d5	-	-	2026-11-24	xproof
 9ec43ec6-b625-4be8-8f79-3679e6657dbc	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mycosynth-wellspring:f0t0:s1,f:xs:XP:mycosynth-wellspring:f0t0:s1	-	-	-	d864b561c9cb	-	03cbad28ff5d	-	-	2026-11-24	xproof
 9ec43ec6-b625-4be8-8f79-3679e6657dbc	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mycosynth-wellspring:f0t0:s1,f:xs:XP:mycosynth-wellspring:f0t0:s1	-	-	-	d864b561c9cb	-	03cbad28ff5d	-	-	2026-11-24	xproof
-9ec43ec6-b625-4be8-8f79-3679e6657dbc	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+9ec43ec6-b625-4be8-8f79-3679e6657dbc	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:labyrinth-of-skophos:f0a1:s2,f:xs:XP:labyrinth-of-skophos:f0a1:s2	-	-	-	23b491658465	-	c7fb11045592	-	-	2026-11-25	xproof
 9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8	f0/a1	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 9ec5a487-d8ed-459a-8f58-56f6e9a2dfe8	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -198,7 +198,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9ef24a79-fade-4c38-b63c-22983206b4ad	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:herald-of-the-pantheon:f0t0:s1,f:xs:XP:herald-of-the-pantheon:f0t0:s1	-	-	-	fb9d3088f0bf	-	f650f4603264	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
 9ef2a604-4053-4ce0-bc08-43d9cc0b15cc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9ef676f0-53c5-4efe-9341-e960d00dbc69	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:consuming-ashes:cast:s1,f:xs:XP:consuming-ashes:cast:s1	-	-	-	3aa6ded33acb	-	1a29e2c597da	-	-	2026-11-25	xproof
-9efb3aa4-0023-4e0e-8bd4-f4dff1b3be66	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Galion, Elvenking's Butler"	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-9efb3aa4-0023-4e0e-8bd4-f4dff1b3be66	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Galion, Elvenking's Butler"	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+9efb3aa4-0023-4e0e-8bd4-f4dff1b3be66	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Galion, Elvenking's Butler"	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+9efb3aa4-0023-4e0e-8bd4-f4dff1b3be66	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Galion, Elvenking's Butler"	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 9eff1ce5-41e4-4ae6-9480-2b549c8546bd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:guul-draz-overseer:cast:s1,f:xs:XP:guul-draz-overseer:cast:s1	-	-	-	d864b561c9cb	-	de9b6c4e5db8	-	-	2026-11-24	xproof
 9eff1ce5-41e4-4ae6-9480-2b549c8546bd	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:guul-draz-overseer:f0t0:s1,f:xs:XP:guul-draz-overseer:f0t0:s1	-	-	-	fb9d3088f0bf	-	de9b6c4e5db8	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof

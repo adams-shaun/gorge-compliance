@@ -2,7 +2,7 @@
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 5f079a75-899e-467d-b443-3b87ce2fb548	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f079a75-899e-467d-b443-3b87ce2fb548	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f079a75-899e-467d-b443-3b87ce2fb548	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5f079a75-899e-467d-b443-3b87ce2fb548	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 5f08f79e-bbbe-4af0-ade6-9ad006a5a0d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f0be4ce-898e-4849-ab8f-a85fb05c3017	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:territorial-kavu:cast:s1,f:xs:XP:territorial-kavu:cast:s1	-	-	-	d864b561c9cb	-	9881f71424e6	-	-	2026-11-24	xproof
 5f0be4ce-898e-4849-ab8f-a85fb05c3017	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -32,7 +32,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f2628e3-e29a-4d77-bc27-6e1ce240d192	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ghoultree:cast:s1,f:xs:XP:ghoultree:cast:s1	-	-	-	d864b561c9cb	-	f275edea24b9	-	-	2026-11-24	xproof
 5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lifecrafter-s-bestiary:f0t0:s1,f:xs:XP:lifecrafter-s-bestiary:f0t0:s1	-	-	-	3aa6ded33acb	-	5bf5227d3e6b	-	-	2026-11-25	xproof
 5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:lifecrafter-s-bestiary:f0t0:s1,f:xs:XP:lifecrafter-s-bestiary:f0t0:s1	-	-	-	3aa6ded33acb	-	5bf5227d3e6b	-	-	2026-11-25	xproof
-5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5f2a3797-28aa-4c7a-ba2b-fd243a1747fd	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f2b3ea8-99ee-47a4-8a1c-4b27478d524c	land	play-land	agreed	-	X	scen	1	0	Zanarkand, Ancient Metropolis/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f2be3c2-060a-43e1-b63b-9cd3c78ffcb0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -41,8 +41,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f31a2d6-649a-40f4-89ce-95c635340e9e	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:atraxi-warden:f0t0:s1,f:xs:XP:atraxi-warden:f0t0:s1	-	-	-	8c0bd19283bb	-	7f9fa94ecb9d	-	-	2026-11-24	xproof
 5f39accf-62fd-407a-a147-781210569d33	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling-celestial-wind:cast:s1,f:xs:XP:mu-yanling-celestial-wind:cast:s1	-	-	-	d864b561c9cb	-	9983e653a5a9	-	-	2026-11-24	xproof
 5f39accf-62fd-407a-a147-781210569d33	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling-celestial-wind:cast:s1,f:xs:XP:mu-yanling-celestial-wind:cast:s1	-	-	-	d864b561c9cb	-	9983e653a5a9	-	-	2026-11-24	xproof
-5f39accf-62fd-407a-a147-781210569d33	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling-celestial-wind:f0a1:s1,f:xs:XP:mu-yanling-celestial-wind:f0a1:s1	-	-	-	336eab778104	-	9983e653a5a9	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-5f39accf-62fd-407a-a147-781210569d33	f0/a2	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling-celestial-wind:f0a2:s1,f:xs:XP:mu-yanling-celestial-wind:f0a2:s1	-	-	-	336eab778104	-	9983e653a5a9	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5f39accf-62fd-407a-a147-781210569d33	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling-celestial-wind:f0a1:s1,f:xs:XP:mu-yanling-celestial-wind:f0a1:s1	-	-	-	336eab778104	-	9983e653a5a9	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+5f39accf-62fd-407a-a147-781210569d33	f0/a2	PumpAll	agreed	-	FX	start	2	0	x:xs:XP:mu-yanling-celestial-wind:f0a2:s1,f:xs:XP:mu-yanling-celestial-wind:f0a2:s1	-	-	-	336eab778104	-	9983e653a5a9	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 5f3ef680-90f4-487f-b44b-db25e29e57ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fruition:cast:s1,f:xs:XP:fruition:cast:s1	-	-	-	ea3140b6974b	-	6f7de5d87a24	-	-	2026-11-24	xproof
 5f3f68b5-8c6a-4181-bb8a-9c73967d198a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glen-elendra-archmage:cast:s1,f:xs:XP:glen-elendra-archmage:cast:s1	-	-	-	8a1b1a193ec0	-	3cd3891d53c9	-	-	2026-11-24	xproof
 5f3f68b5-8c6a-4181-bb8a-9c73967d198a	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
@@ -76,7 +76,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f55d41a-ef93-4d4f-ab55-13ea887e7af2	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:unquenchable-thirst:cast:s1,f:xs:XP:unquenchable-thirst:cast:s1	-	-	-	3aa6ded33acb	-	8e581571ad8e	-	-	2026-11-25	xproof
 5f56a303-b3da-41df-a959-7823a87ee60c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mathemagics:cast:s1,f:xs:XP:mathemagics:cast:s1	-	-	-	23c4009444b0	-	34e083261f7b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5f5c5f59-1cc0-4a72-863c-c26db411f114	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f5c5f59-1cc0-4a72-863c-c26db411f114	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5f5c5f59-1cc0-4a72-863c-c26db411f114	f0/t0	NULL	owed	refused:no-generator:trigger:Taps	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pacifism:cast:s1,f:xs:XP:pacifism:cast:s1	-	-	-	8c0bd19283bb	-	a830bfb5a863	-	-	2026-11-24	xproof
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	static#0.0	static#0.0	agreed	-	X	scen	1	0	Pacifism/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5f5e0b10-c8cf-450c-bfd3-bcb0528ec330	static#0.1	static#0.1	agreed	-	X	scen	1	0	Pacifism/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -115,7 +115,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 5f815e69-fdd6-4186-9317-25f5c7e0b08e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f815e69-fdd6-4186-9317-25f5c7e0b08e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f815e69-fdd6-4186-9317-25f5c7e0b08e	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5f815e69-fdd6-4186-9317-25f5c7e0b08e	f0/a2	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+5f815e69-fdd6-4186-9317-25f5c7e0b08e	f0/a2	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 5f83fd2f-c4cb-4bcf-a4db-0238df251740	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5f84a140-577f-4a1e-a900-793664332fd6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:murasa-brute:cast:s1,f:xs:XP:murasa-brute:cast:s1	-	-	-	ae86f6029288	-	718513ecf73f	-	-	2026-11-24	xproof
 5f8941d8-f8f7-4ec3-86c3-88af8829080b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:loki-s-scepter:f0t0:s1,f:xs:XP:loki-s-scepter:f0t0:s1	-	-	-	8c0bd19283bb	-	70c7bc3d0cb7	-	-	2026-11-24	xproof

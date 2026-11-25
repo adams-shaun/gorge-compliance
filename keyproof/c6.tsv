@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 c604fda4-164c-4966-94f8-1e3a96d5ef9d	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:angel-of-renewal:cast:s1,f:xs:XP:angel-of-renewal:cast:s1	-	-	-	d864b561c9cb	-	edab7bf9e6d6	-	-	2026-11-24	xproof
 c604fda4-164c-4966-94f8-1e3a96d5ef9d	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:angel-of-renewal:cast:s1,f:xs:XP:angel-of-renewal:cast:s1	-	-	-	d864b561c9cb	-	edab7bf9e6d6	-	-	2026-11-24	xproof
 c6064c08-e4e0-49f4-9f0b-55cdecf443af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skirsdag-high-priest:cast:s1,f:xs:XP:skirsdag-high-priest:cast:s1	-	-	-	d864b561c9cb	-	ad34036114d5	-	-	2026-11-24	xproof
-c6064c08-e4e0-49f4-9f0b-55cdecf443af	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+c6064c08-e4e0-49f4-9f0b-55cdecf443af	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 c60b8edd-aa3f-48ea-b202-d10599f91d9d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6106021-08ae-49c8-b32c-fdc7397522e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6106021-08ae-49c8-b32c-fdc7397522e7	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -41,7 +41,7 @@ c638957f-88bf-40c2-834c-2be39d73bf41	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 c63a17b8-d183-48c7-bb04-edbfffba1e03	cast	cast	agreed	-	F	start	4	0	f:xs:XP:greenbelt-rampager:cast:s1	-	-	-	d864b561c9cb	-	3c3c0cc6800b	-	-	2026-11-24	xproof
 c63a17b8-d183-48c7-bb04-edbfffba1e03	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:greenbelt-rampager:cast:s1	-	-	-	d864b561c9cb	-	3c3c0cc6800b	-	-	2026-11-24	xproof
 c63a9a3d-13df-4a94-a8e1-18071c351a8d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:summit-prowler:cast:s1,f:xs:XP:summit-prowler:cast:s1	-	-	-	d864b561c9cb	-	93901b10ae66	-	-	2026-11-24	xproof
-c63b3511-d597-4c6e-9094-eabdeaa8a394	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+c63b3511-d597-4c6e-9094-eabdeaa8a394	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 c63b3511-d597-4c6e-9094-eabdeaa8a394	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c640350b-16a5-4227-87fa-8b24fdb367c7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c640350b-16a5-4227-87fa-8b24fdb367c7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -176,7 +176,7 @@ c6d39445-dfc2-42c3-afd2-016fdf008f0e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sla
 c6d39445-dfc2-42c3-afd2-016fdf008f0e	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:slavering-nulls:f0t0:s1,f:xs:XP:slavering-nulls:f0t0:s1	-	-	-	23c4009444b0	-	a3b4c263825f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c6d89c4a-351f-4d63-ba57-b978a695191e	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seedship-impact:cast:s1,f:xs:XP:seedship-impact:cast:s1	-	-	-	23c4009444b0	-	0b387a8d845f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 c6dc70de-4fa5-466b-af28-0ced885d4e12	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-c6dc70de-4fa5-466b-af28-0ced885d4e12	f0/a0	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+c6dc70de-4fa5-466b-af28-0ced885d4e12	f0/a0	NULL	owed	refused:history:thisturnentered	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 c6de0ee9-785d-4cd8-8a7f-5bb715763131	f0/a0	Mana	agreed	-	FX	start	3	0	x:xs:XP:nantuko-monastery:f0a0:s1,f:xs:XP:nantuko-monastery:f0a0:s1	-	-	-	fc71ca68c5ac	-	2a7b2a24c14f	-	-	2026-11-24	xproof
 c6de0ee9-785d-4cd8-8a7f-5bb715763131	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:nantuko-monastery:f0a1:s1,f:xs:XP:nantuko-monastery:f0a1:s1	-	-	-	fc71ca68c5ac	-	2a7b2a24c14f	-	-	2026-11-24	xproof
 c6de0ee9-785d-4cd8-8a7f-5bb715763131	land	land	agreed	-	FX	start	2	0	x:xs:XP:nantuko-monastery:land:s1,f:xs:XP:nantuko-monastery:land:s1	-	-	-	fc71ca68c5ac	-	2a7b2a24c14f	-	-	2026-11-24	xproof
@@ -199,7 +199,7 @@ c6eb2814-0021-4308-ad44-6c8cc59b0d1c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3
 c6eb2814-0021-4308-ad44-6c8cc59b0d1c	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6eb2814-0021-4308-ad44-6c8cc59b0d1c	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6f2c767-3c8e-4113-b271-ea7c19583e6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tezzeret-s-touch:cast:s1,f:xs:XP:tezzeret-s-touch:cast:s1	-	-	-	d864b561c9cb	-	bf9b3e6b8481	-	-	2026-11-24	xproof
-c6f2c767-3c8e-4113-b271-ea7c19583e6c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+c6f2c767-3c8e-4113-b271-ea7c19583e6c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 c6f68e4b-af2b-43d5-8052-104defe7f3ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6f68e4b-af2b-43d5-8052-104defe7f3ec	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 c6f68e4b-af2b-43d5-8052-104defe7f3ec	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:loathsome-catoblepas:f0t0:s1,f:xs:XP:loathsome-catoblepas:f0t0:s1	-	-	-	d864b561c9cb	-	d88b47c7e6cc	-	-	2026-11-24	xproof

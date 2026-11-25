@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2856844d-f727-48aa-8387-cb6079afb40c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2856844d-f727-48aa-8387-cb6079afb40c	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 285ba9af-bdb8-4b31-b0c5-59aa40d4e3e9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-285ba9af-bdb8-4b31-b0c5-59aa40d4e3e9	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+285ba9af-bdb8-4b31-b0c5-59aa40d4e3e9	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 285c9f49-4aeb-468c-bb41-f5ccb5257e2b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:yavimaya-kavu:cast:s1,f:xs:XP:yavimaya-kavu:cast:s1	-	-	-	fc71ca68c5ac	-	4ca4e7f6a638	-	-	2026-11-24	xproof
 285fecb7-f872-454d-ac2f-bc5615c70cd8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 286213a8-ae53-4f97-9f81-e13bed462d0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -85,13 +85,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 286be139-1ddf-4b04-86b2-cf17a06c262a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 286be139-1ddf-4b04-86b2-cf17a06c262a	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:tiger-shark-abyssal-hunter:f0t1:s1,f:xs:XP:tiger-shark-abyssal-hunter:f0t1:s1	-	-	-	8c0bd19283bb	-	9a8f17240f33	-	-	2026-11-24	xproof
 2876e74f-a242-4995-9702-0b737a1ab67a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2876e74f-a242-4995-9702-0b737a1ab67a	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+2876e74f-a242-4995-9702-0b737a1ab67a	f0/t0	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 28778958-a1f9-4fea-b551-c193d1257f18	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28778958-a1f9-4fea-b551-c193d1257f18	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 287aae84-b098-456e-b9cb-8eac51c36360	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 287cb63c-d52d-4871-83d1-792a41ae7adc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-287cb63c-d52d-4871-83d1-792a41ae7adc	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-287cb63c-d52d-4871-83d1-792a41ae7adc	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+287cb63c-d52d-4871-83d1-792a41ae7adc	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+287cb63c-d52d-4871-83d1-792a41ae7adc	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlockedByCreature	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 287f60a6-e83b-487b-add9-2048a06dcca1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2884e332-707c-4a97-adc1-e1317a513ff4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2884e332-707c-4a97-adc1-e1317a513ff4	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -164,10 +164,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28ddc23c-5b0b-4747-9a33-6845acf27bec	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:elvish-harbinger:cast:s1,f:xs:XP:elvish-harbinger:cast:s1	-	-	-	d864b561c9cb	-	19e50ecfaf24	-	-	2026-11-24	xproof
 28df85d6-e13a-4178-a361-7015afd316ca	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28df85d6-e13a-4178-a361-7015afd316ca	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28df85d6-e13a-4178-a361-7015afd316ca	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+28df85d6-e13a-4178-a361-7015afd316ca	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 28e1a613-30ad-4013-be0b-b0365f627201	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28e99c5f-a78a-4323-b5e9-1b43303acaf6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28e99c5f-a78a-4323-b5e9-1b43303acaf6	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+28e99c5f-a78a-4323-b5e9-1b43303acaf6	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget:source	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 28ea1f58-3310-4cf1-a834-40f2cc3b6898	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28ea78dc-7ad6-4006-aaf8-4b25057ec019	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 28ea78dc-7ad6-4006-aaf8-4b25057ec019	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
@@ -184,6 +184,6 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 28f55673-7aa0-497e-8434-aa70df1b5e04	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:annihilate:cast:s1,f:xs:XP:annihilate:cast:s1	-	-	-	5f2128bf97e4	-	fb0313f56795	-	-	2026-11-24	xproof
 28fa9211-96bb-4fef-81bf-8f58114a8df7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 28fe909b-06e0-424c-9f75-c824a25f5865	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-28ffddca-a3c4-467d-a2dc-2c5e62393e11	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Woodland Weavemaster"	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-28ffddca-a3c4-467d-a2dc-2c5e62393e11	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Woodland Weavemaster"	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-28ffddca-a3c4-467d-a2dc-2c5e62393e11	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Woodland Weavemaster"	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+28ffddca-a3c4-467d-a2dc-2c5e62393e11	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Woodland Weavemaster"	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+28ffddca-a3c4-467d-a2dc-2c5e62393e11	f0/a0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Woodland Weavemaster"	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+28ffddca-a3c4-467d-a2dc-2c5e62393e11	f0/t0	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Woodland Weavemaster"	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof

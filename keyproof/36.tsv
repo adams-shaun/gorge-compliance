@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36593200-e53c-46e4-a04e-8deec8273c65	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36593200-e53c-46e4-a04e-8deec8273c65	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:calcite-snapper:f0t0:s1,f:xs:XP:calcite-snapper:f0t0:s1	-	-	-	23c4009444b0	-	e840e8db3ca9	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 365a4644-74f4-4af9-81ab-0d328ca5edce	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:risa:f0a0:s1,f:xs:XP:risa:f0a0:s1	-	-	-	c2272f704fde	-	86116d4523ba	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-365a4644-74f4-4af9-81ab-0d328ca5edce	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+365a4644-74f4-4af9-81ab-0d328ca5edce	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 365a4644-74f4-4af9-81ab-0d328ca5edce	land	land	agreed	-	FX	start	2	0	x:xs:XP:risa:land:s1,f:xs:XP:risa:land:s1	-	-	-	fb9d3088f0bf	-	86116d4523ba	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 36633b43-855b-4620-8afb-70c39fc07280	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dark-hatchling:f0t0:s1,f:xs:XP:dark-hatchling:f0t0:s1	-	-	-	5f2128bf97e4	-	e1737680443b	-	-	2026-11-24	xproof
 36633b43-855b-4620-8afb-70c39fc07280	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dark-hatchling:f0t0:s1,f:xs:XP:dark-hatchling:f0t0:s1	-	-	-	5f2128bf97e4	-	e1737680443b	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 36a247d6-0d40-4f61-935c-60f42aa98562	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36a247d6-0d40-4f61-935c-60f42aa98562	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:halcyon-glaze:f0t0:s1,f:xs:XP:halcyon-glaze:f0t0:s1	-	-	-	23c4009444b0	-	0cece38ca467	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 36a3c910-95b8-45a2-9f84-5681336d868c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-36a3c910-95b8-45a2-9f84-5681336d868c	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+36a3c910-95b8-45a2-9f84-5681336d868c	f0/a0	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 36a3c910-95b8-45a2-9f84-5681336d868c	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:frontline-medic:f0t0:s1,f:xs:XP:frontline-medic:f0t0:s1	-	-	-	3aa6ded33acb	-	7f577773f48e	-	-	2026-11-25	xproof
 36a600fe-91b4-46a0-97ee-0cea2b63ec8e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 36a8ceb1-148b-41e0-a7bf-ceb879bf08e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

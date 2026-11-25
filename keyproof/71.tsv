@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7121b877-d262-4627-acd8-a159f8a779b1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71220cc2-5f3d-4c97-ae66-05b1b79adef1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71220cc2-5f3d-4c97-ae66-05b1b79adef1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-71220cc2-5f3d-4c97-ae66-05b1b79adef1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+71220cc2-5f3d-4c97-ae66-05b1b79adef1	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 7126772a-d586-4859-81ec-46bbe9d1a678	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rumbling-sentry:f0t0:s1,f:xs:XP:rumbling-sentry:f0t0:s1	-	-	-	ae86f6029288	-	ef007227827e	-	-	2026-11-24	xproof
 7126772a-d586-4859-81ec-46bbe9d1a678	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rumbling-sentry:f0t0:s1,f:xs:XP:rumbling-sentry:f0t0:s1	-	-	-	ae86f6029288	-	ef007227827e	-	-	2026-11-24	xproof
 7127fc35-600c-4397-8c01-5327d3c4944b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -40,7 +40,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7131cdb6-15d0-407e-a7e2-b2a0deef9363	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 713332c1-5bd8-400f-bfff-c1ca0697a043	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:opt:cast:s1,f:xs:XP:opt:cast:s1	-	-	-	23b491658465	-	589e7822d532	-	-	2026-11-24	xproof
 71355b51-e70e-47b0-8460-933af3567141	cast	cast-resolve	agreed	-	FX	scen	2	0	Craterclaw Colossus/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-71355b51-e70e-47b0-8460-933af3567141	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+71355b51-e70e-47b0-8460-933af3567141	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 71362163-2ac3-4f8b-86b9-34fe083e2095	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 713641c4-544e-4c25-ab11-10894be2cb53	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71366469-04ea-4526-bf24-7abc02fdc5ab	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -146,7 +146,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 71b5fdf2-4475-4102-85eb-9be164a9ae29	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 71b7d5c4-c16c-4c6b-8e2e-e9b5cc128e1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 71b81f3f-6092-4819-8529-e27bccfcf088	cast	cast-resolve	agreed	-	X	scen	1	0	Ragamuffin Raptor/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-71b81f3f-6092-4819-8529-e27bccfcf088	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+71b81f3f-6092-4819-8529-e27bccfcf088	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 71ba6f1b-2fa6-4d4c-8778-f0765b1a5d8e	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:maverick-thopterist:cast:s1,f:xs:XP:maverick-thopterist:cast:s1	-	-	-	d864b561c9cb	-	da419bd981d6	-	-	2026-11-24	xproof
 71ba6f1b-2fa6-4d4c-8778-f0765b1a5d8e	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:maverick-thopterist:cast:s1,f:xs:XP:maverick-thopterist:cast:s1	-	-	-	d864b561c9cb	-	da419bd981d6	-	-	2026-11-24	xproof
 71bc69a5-7cec-4abd-b97d-13f8e1f9afac	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:baxter-building:f0a1:s1,f:xs:XP:baxter-building:f0a1:s1	-	-	-	336eab778104	-	105a963b3a79	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof

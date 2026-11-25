@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 870185fc-7b05-47d3-95ff-97fbf12796d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-870185fc-7b05-47d3-95ff-97fbf12796d4	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+870185fc-7b05-47d3-95ff-97fbf12796d4	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 870185fc-7b05-47d3-95ff-97fbf12796d4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:underhanded-designs:f0t0:s1,f:xs:XP:underhanded-designs:f0t0:s1	-	-	-	c2272f704fde	-	1a93c5acb577	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 87038d1b-0fa9-4604-b119-1de56db30144	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:pyromancer-s-assault:cast:s1,f:xs:XP:pyromancer-s-assault:cast:s1	-	-	-	d864b561c9cb	-	09493a05f7ce	-	-	2026-11-24	xproof
 87038d1b-0fa9-4604-b119-1de56db30144	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:pyromancer-s-assault:f0t0:s1,f:xs:XP:pyromancer-s-assault:f0t0:s1	-	-	-	fb9d3088f0bf	-	09493a05f7ce	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	f1e3e00905ccad97af9c566144c83f81c8400b41	2026-11-25	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 87972de1-c1d7-408e-8d56-995590f639b8	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:beetle-legacy-criminal:combat0.attack:s1,f:xs:XP:beetle-legacy-criminal:combat0.attack:s1	-	-	-	23c4009444b0	-	17f41bff09d4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 87972de1-c1d7-408e-8d56-995590f639b8	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:beetle-legacy-criminal:combat0.block:s1,f:xs:XP:beetle-legacy-criminal:combat0.block:s1	-	-	-	23c4009444b0	-	17f41bff09d4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 87972de1-c1d7-408e-8d56-995590f639b8	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:beetle-legacy-criminal:f0a0:s1,f:xs:XP:beetle-legacy-criminal:f0a0:s1	-	-	-	23c4009444b0	-	17f41bff09d4	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-879c8663-5058-4998-9a59-f2e9ea8914dc	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+879c8663-5058-4998-9a59-f2e9ea8914dc	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 87a0e0b9-6c2d-47a4-a3ed-7e0ae62fbffc	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 87a0e0b9-6c2d-47a4-a3ed-7e0ae62fbffc	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 87a0e0b9-6c2d-47a4-a3ed-7e0ae62fbffc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:emrakul-the-exigent-doom:combat0.attack:s1,f:xs:XP:emrakul-the-exigent-doom:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	c1f43e3a040d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:emrakul-the-exigent-doom:combat0.block:s1,f:xs:XP:emrakul-the-exigent-doom:combat0.block:s1	-	-	-	fb9d3088f0bf	-	c1f43e3a040d	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 4421ab7d-6d9b-4edd-b5a0-53a8ed84da6f	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Emrakul, the Exigent Doom/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44240b1e-c104-4eb4-8ab9-0d56607ba241	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swiftblade-vindicator:cast:s1,f:xs:XP:swiftblade-vindicator:cast:s1	-	-	-	3aa6ded33acb	-	c776007bd144	-	-	2026-11-25	xproof
 44240b1e-c104-4eb4-8ab9-0d56607ba241	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:swiftblade-vindicator:combat0.attack:s1,f:xs:XP:swiftblade-vindicator:combat0.attack:s1	-	-	-	3aa6ded33acb	-	c776007bd144	-	-	2026-11-25	xproof
@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/a1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 4443345d-a292-4394-97dd-0e6f4d9aedf7	f0/t0	NULL	owed	refused:no-generator:trigger:Sacrificed	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-44443716-8356-40cd-a879-35264b29108c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+44443716-8356-40cd-a879-35264b29108c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 44443716-8356-40cd-a879-35264b29108c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Scheming Silvertongue/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 44443716-8356-40cd-a879-35264b29108c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Scheming Silvertongue/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

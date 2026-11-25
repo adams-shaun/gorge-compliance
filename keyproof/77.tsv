@@ -38,12 +38,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7731217e-cdbb-4c38-a9c1-083c96f51931	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:boon-of-the-spirit-realm:cast:s1,f:xs:XP:boon-of-the-spirit-realm:cast:s1	-	-	-	8c0bd19283bb	-	77e339900b77	-	-	2026-11-24	xproof
 7734ee04-1d99-4807-be68-b889e75a7551	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7735eeba-693b-47e2-bd51-414379cf1016	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7737ccdc-49f2-463e-8ffd-43ab98d11f45	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+7737ccdc-49f2-463e-8ffd-43ab98d11f45	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 7739311a-682b-48a6-8db2-c07f44141751	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:cast:s1,f:xs:XP:the-gitrog-ravenous-ride:cast:s1	-	-	-	23b491658465	-	44934fd44d14	-	-	2026-11-24	xproof
 7739311a-682b-48a6-8db2-c07f44141751	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:combat0.attack:s1,f:xs:XP:the-gitrog-ravenous-ride:combat0.attack:s1	-	-	-	3aa6ded33acb	-	44934fd44d14	-	-	2026-11-25	xproof
 7739311a-682b-48a6-8db2-c07f44141751	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:combat0.block:s1,f:xs:XP:the-gitrog-ravenous-ride:combat0.block:s1	-	-	-	3aa6ded33acb	-	44934fd44d14	-	-	2026-11-25	xproof
 7739311a-682b-48a6-8db2-c07f44141751	f0/a0	AlterAttribute/Saddle	agreed	-	F	start	2	0	f:xs:XP:the-gitrog-ravenous-ride:f0a0:s1	-	-	-	336eab778104	-	44934fd44d14	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
-7739311a-682b-48a6-8db2-c07f44141751	f0/t0	DamageDone	agreed	-	F	start	2	0	f:xs:XP:the-gitrog-ravenous-ride:f0a0:s1	-	-	-	336eab778104	-	44934fd44d14	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
+7739311a-682b-48a6-8db2-c07f44141751	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:the-gitrog-ravenous-ride:f0t0:s1,f:xs:XP:the-gitrog-ravenous-ride:f0t0:s1	-	-	-	336eab778104	-	44934fd44d14	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 77398866-eebb-4091-b566-7726f8194a59	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:realmbreaker-the-invasion-tree:cast:s1,f:xs:XP:realmbreaker-the-invasion-tree:cast:s1	-	-	-	d864b561c9cb	-	4933aa2150ca	-	-	2026-11-24	xproof
 77398866-eebb-4091-b566-7726f8194a59	f0/a0	Mill	agreed	-	FX	start	2	0	x:xs:XP:realmbreaker-the-invasion-tree:f0a0:s1,f:xs:XP:realmbreaker-the-invasion-tree:f0a0:s1	-	-	-	d864b561c9cb	-	4933aa2150ca	-	-	2026-11-24	xproof
 77398866-eebb-4091-b566-7726f8194a59	f0/a1	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:realmbreaker-the-invasion-tree:f0a1:s1,f:xs:XP:realmbreaker-the-invasion-tree:f0a1:s1	-	-	-	d864b561c9cb	-	4933aa2150ca	-	-	2026-11-24	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 778fb830-2d2b-4f81-a193-e6b652981695	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:disciple-of-kangee:f0a0:s1,f:xs:XP:disciple-of-kangee:f0a0:s1	-	-	-	fc71ca68c5ac	-	1b925610af86	-	-	2026-11-24	xproof
 7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fortress-cyclops:f0t0:s1,f:xs:XP:fortress-cyclops:f0t0:s1	-	-	-	d864b561c9cb	-	1943caf7283a	-	-	2026-11-24	xproof
-7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+7790bd6c-75e2-4abd-87ab-e1c15f1d53ab	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 779269f9-78c1-4e65-bafe-b6dea40a2b24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 779269f9-78c1-4e65-bafe-b6dea40a2b24	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7792d3af-5c64-4d0a-a2b3-b903d787b0ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

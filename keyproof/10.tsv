@@ -78,7 +78,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 105aea98-8eb9-4fb2-a0cb-7c7513317c5b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Twining Twins/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 105aea98-8eb9-4fb2-a0cb-7c7513317c5b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Twining Twins/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 105cea6e-18e9-4dec-a533-0dca4d41320b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1063822f-47d3-42e9-8a21-f62b12609fe1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+1063822f-47d3-42e9-8a21-f62b12609fe1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 1063822f-47d3-42e9-8a21-f62b12609fe1	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Fatehold Chronologist/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1063822f-47d3-42e9-8a21-f62b12609fe1	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Fatehold Chronologist/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 1065eceb-9150-4ea4-bd6d-acaabda14e00	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
@@ -123,8 +123,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10891656-070f-49f4-80e0-78061b773f17	f0/a1	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	e99e48e2b50f66a049d438fd96790293c89b9672	2026-11-25	xproof
 108ae90a-50fa-4cfd-b751-d630e41425fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wrenn-and-six:cast:s1,f:xs:XP:wrenn-and-six:cast:s1	-	-	-	d864b561c9cb	-	53ea956d1032	-	-	2026-11-24	xproof
 108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:wrenn-and-six:cast:s1,f:xs:XP:wrenn-and-six:cast:s1	-	-	-	d864b561c9cb	-	53ea956d1032	-	-	2026-11-24	xproof
-108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:wrenn-and-six:f0a1:s1,f:xs:XP:wrenn-and-six:f0a1:s1	-	-	-	336eab778104	-	53ea956d1032	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:wrenn-and-six:f0a2:s1,f:xs:XP:wrenn-and-six:f0a2:s1	-	-	-	336eab778104	-	53ea956d1032	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:wrenn-and-six:f0a1:s1,f:xs:XP:wrenn-and-six:f0a1:s1	-	-	-	336eab778104	-	53ea956d1032	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+108ae90a-50fa-4cfd-b751-d630e41425fe	f0/a2	Effect	agreed	-	FX	start	2	0	x:xs:XP:wrenn-and-six:f0a2:s1,f:xs:XP:wrenn-and-six:f0a2:s1	-	-	-	336eab778104	-	53ea956d1032	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 10916f33-aaa6-43a1-9835-b60fd061161f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:a-i-m-synthoids:cast:s1,f:xs:XP:a-i-m-synthoids:cast:s1	-	-	-	23c4009444b0	-	cd7d8af00667	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10916f33-aaa6-43a1-9835-b60fd061161f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:a-i-m-synthoids:cast:s1,f:xs:XP:a-i-m-synthoids:cast:s1	-	-	-	23c4009444b0	-	cd7d8af00667	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1091c83a-a4b9-457f-a69a-9a44a7e10759	cast	cast-resolve	agreed	-	FX	scen	2	0	Echo, Perceptive Prodigy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -220,7 +220,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 10fc2009-4212-47c6-8a97-ab0f45c1f91b	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Avengers Hangar/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10fc2009-4212-47c6-8a97-ab0f45c1f91b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:avengers-hangar:land:s1,f:xs:XP:avengers-hangar:land:s1	-	-	-	23c4009444b0	-	8302cd40d3a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 10fc2009-4212-47c6-8a97-ab0f45c1f91b	land	land	agreed	-	FX	start	2	0	x:xs:XP:avengers-hangar:land:s1,f:xs:XP:avengers-hangar:land:s1	-	-	-	23c4009444b0	-	8302cd40d3a7	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-10fd868f-45b3-4e2f-89d9-5c0b8a92f9fe	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+10fd868f-45b3-4e2f-89d9-5c0b8a92f9fe	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 10fe402e-8d6f-4058-9f42-86f229055359	cast	cast-resolve	agreed	-	FX	scen	2	0	Friendly Neighborhood/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 10fe402e-8d6f-4058-9f42-86f229055359	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 10fe402e-8d6f-4058-9f42-86f229055359	static#0.0	static#0.0	agreed	-	X	scen	1	0	Friendly Neighborhood/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

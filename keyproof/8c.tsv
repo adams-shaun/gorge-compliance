@@ -45,8 +45,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8c31fec9-e4b3-4761-990e-7be38eb05604	f0/t1	Phase/Echo	agreed	-	FX	start	2	0	x:xs:XP:karmic-guide:f0t1:s1,f:xs:XP:karmic-guide:f0t1:s1	-	-	-	23c4009444b0	-	2c7a2e9f0e62	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8c3495bf-02e7-4ad9-949d-92eb3d2b662a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8c34b089-aad1-476e-958a-3077bf1bbb51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:talisman-of-curiosity:cast:s1,f:xs:XP:talisman-of-curiosity:cast:s1	-	-	-	d864b561c9cb	-	5913588cbede	-	-	2026-11-24	xproof
-8c34b089-aad1-476e-958a-3077bf1bbb51	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:talisman-of-curiosity:f0a0:s1,f:xs:XP:talisman-of-curiosity:f0a0:s1	-	-	-	336eab778104	-	5913588cbede	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
-8c34b089-aad1-476e-958a-3077bf1bbb51	f0/a1	Mana	owed	harness	-	start	0	0	-	-	-	-	336eab778104	-	5913588cbede	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+8c34b089-aad1-476e-958a-3077bf1bbb51	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:talisman-of-curiosity:f0a0:s1,f:xs:XP:talisman-of-curiosity:f0a0:s1	-	-	-	336eab778104	-	5913588cbede	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
+8c34b089-aad1-476e-958a-3077bf1bbb51	f0/a1	Mana	owed	harness	-	start	0	0	-	-	-	-	336eab778104	-	5913588cbede	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 8c411f4e-a091-447c-9450-d895b10b4985	cast	cast-resolve	agreed	-	FX	scen	2	0	Carnage Tyrant/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8c411f4e-a091-447c-9450-d895b10b4985	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Carnage Tyrant/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 8c411f4e-a091-447c-9450-d895b10b4985	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Carnage Tyrant/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 8ccd20c7-b7fc-4ab1-a98b-3bbcc2079339	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8ccd20c7-b7fc-4ab1-a98b-3bbcc2079339	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 8cd0fcac-800a-431c-aca9-804998704606	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8cd3815d-92a6-4336-9da7-b18b1afd5460	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+8cd3815d-92a6-4336-9da7-b18b1afd5460	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	27b8bfe66159db22002db3b7ae25f3f531b7ef8d	34f0585c97b5ea0e9bde19c20b6122473c24deee	2026-11-25	xproof
 8cd45064-2ad9-4247-902e-aefaf3bc1a43	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:their-number-is-legion:cast:s1,f:xs:XP:their-number-is-legion:cast:s1	-	-	-	8c0bd19283bb	-	bc41acc52d55	-	-	2026-11-24	xproof
 8cd88e87-6585-437a-bcad-b494fffc0544	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	e6266fe9dd0c	-	-	2026-11-24	xproof
 8cdda36f-5e82-4c2f-8eaa-75b9bbc93a02	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
