@@ -30,8 +30,9 @@ import (
 // regresses), and every ask posed on a cast or activate step is left alone:
 // the cast's own root ask is told apart from a trigger's only by its step, so a
 // trigger whose ask lands on such a step (an ETB trigger of the permanent just
-// cast) stays unmarked rather than risk marking the cast's ask. Only decisions the Forge contract never sees are touched: the Forge
-// callers pass xmage false and never reach this.
+// cast) stays unmarked rather than risk marking the cast's ask. Only decisions
+// the Forge contract never sees are touched: the Forge callers pass xmage false
+// and never reach this.
 func markPlacedTriggerDivisions(reg *cards.Registry, sc Scenario, res rules.OracleResult, ds []rules.OracleDecision) []rules.OracleDecision {
 	if reg == nil {
 		return ds
@@ -48,7 +49,7 @@ func markPlacedTriggerDivisions(reg *cards.Registry, sc Scenario, res rules.Orac
 		if op := sc.Steps[d.Step].Op; op == "cast" || op == "activate" {
 			continue
 		}
-		total, ok := placedTriggerTotal(reg, res.Snapshots[d.Step+1], ds, i)
+		total, ok := placedTriggerTotal(reg, res.Snapshots[d.Step], res.Snapshots[d.Step+1], ds, i)
 		if !ok || total < len(d.PickRefs) {
 			continue
 		}
@@ -65,23 +66,21 @@ func markPlacedTriggerDivisions(reg *cards.Registry, sc Scenario, res rules.Orac
 
 // placedTriggerTotal is the divided total of the trigger whose root target ask
 // is ds[i], read against snap (the checkpoint after the ask's step, where the
-// trigger sits on the stack). ok is false unless exactly one triggered ability
-// is on the stack and it is a divided targeted trigger: the decision log does
-// not name the source of a root ask, so with a second trigger (divided or not)
-// beside it the ask could be either one's, and a divided total must never be
-// lent to another trigger's ordinary target (XMage's chooseTarget reads a
-// "^X=<n>" segment as a second target name).
-func placedTriggerTotal(reg *cards.Registry, snap rules.OracleSnapshot, ds []rules.OracleDecision, i int) (int, bool) {
+// trigger sits on the stack; before is the checkpoint ahead of that step). ok is
+// false unless exactly one ability of any kind is on the stack (a printed
+// trigger, but equally a granted, delayed or emblem trigger, whose Trigger
+// index gorge leaves empty, or an activated ability), it was put there by this
+// step (the stack was free of abilities before it), and it is a divided
+// targeted trigger: the decision log does not name the source of a root ask, so
+// with a second ability (divided or not) beside it the ask could be either
+// one's, and a divided total must never be lent to another trigger's ordinary
+// target (XMage's chooseTarget reads a "^X=<n>" segment as a second target
+// name).
+func placedTriggerTotal(reg *cards.Registry, before, snap rules.OracleSnapshot, ds []rules.OracleDecision, i int) (int, bool) {
 	var sa *cards.SA
 	var face *cards.Face
 	var src string
-	triggers := 0
-	for _, o := range snap.Stack {
-		if o.Kind == "ability" && o.Trigger != "" {
-			triggers++
-		}
-	}
-	if triggers != 1 {
+	if abilityCount(snap) != 1 || abilityCount(before) != 0 {
 		return 0, false
 	}
 	for _, o := range snap.Stack {
@@ -125,6 +124,17 @@ func placedTriggerTotal(reg *cards.Registry, snap rules.OracleSnapshot, ds []rul
 		return lit, true
 	}
 	return svarTotal(face, strings.TrimSpace(sa.Params["DividedAsYouChoose"]), snap, src)
+}
+
+// abilityCount is the number of ability objects of any kind on snap's stack.
+func abilityCount(snap rules.OracleSnapshot) int {
+	n := 0
+	for _, o := range snap.Stack {
+		if o.Kind == "ability" {
+			n++
+		}
+	}
+	return n
 }
 
 // dividedTrigger reports a trigger effect that divides among targets.

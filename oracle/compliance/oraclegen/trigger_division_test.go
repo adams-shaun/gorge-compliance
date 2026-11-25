@@ -136,6 +136,8 @@ func TestDividedTriggerBesideAnotherTriggerLeavesAskBare(t *testing.T) {
 	for name, other := range map[string]rules.OracleSnapStack{
 		"ordinary trigger": {Kind: "ability", Source: "p0:Prodigal Pyromancer", Trigger: "0"},
 		"divided trigger":  {Kind: "ability", Source: "p0:Magmatic Core", Trigger: "0"},
+		"granted or delayed trigger (no printed index)": {Kind: "ability", Source: "p1:Prodigal Pyromancer", Trigger: ""},
+		"untracked trigger of a creature":               {Kind: "ability", Source: "p0:Grizzly Bears", Trigger: ""},
 	} {
 		if got, want := twoTriggerRun(t, other), []string{"Grizzly Bears"}; !reflect.DeepEqual(got, want) {
 			t.Errorf("%s: got %v want %v", name, got, want)
@@ -158,6 +160,24 @@ func TestDividedTriggerDoesNotMarkCastStepAsk(t *testing.T) {
 	for _, d := range markPlacedTriggerDivisions(reg, sc, res, res.Decisions) {
 		if d.Divided != 0 {
 			t.Fatalf("cast-step ask marked: %+v", d)
+		}
+	}
+}
+
+// A Core trigger already on the stack before the ask's step is not the one that
+// step placed: it lends its total to no later ask.
+func TestDividedTriggerLeftOnStackFromEarlierStepLeavesAskBare(t *testing.T) {
+	reg := twinBoltRegistry(t)
+	sc := Scenario{Steps: []Step{{Op: "resolve", Seat: 0}}}
+	ask := rules.OracleDecision{Step: 0, Seat: 1, Kind: "target", Via: "answer", GorgeKind: "target",
+		Options: 2, Min: 1, Max: 1, PickRefs: []string{"p0:Grizzly Bears"}, Picks: []string{"Grizzly Bears"}, PickIdx: []int{0}}
+	core := rules.OracleSnapPerm{Ref: "p0:Magmatic Core", Name: "Magmatic Core", Counters: map[string]int32{"AGE": 3}}
+	snap := rules.OracleSnapshot{Permanents: []rules.OracleSnapPerm{core}, Stack: []rules.OracleSnapStack{
+		{Kind: "ability", Source: "p0:Magmatic Core", Trigger: "0"}}}
+	res := rules.OracleResult{Decisions: []rules.OracleDecision{ask}, Snapshots: []rules.OracleSnapshot{snap, snap}}
+	for _, d := range markPlacedTriggerDivisions(reg, sc, res, res.Decisions) {
+		if d.Divided != 0 {
+			t.Fatalf("stale trigger lent its total: %+v", d)
 		}
 	}
 }
