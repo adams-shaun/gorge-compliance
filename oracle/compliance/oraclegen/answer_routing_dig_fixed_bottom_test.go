@@ -81,6 +81,28 @@ func TestDigFixedLookTopRestStaysOnChoiceQueue(t *testing.T) {
 	}
 }
 
+// TestDigFilteredBottomRestStaysOnChoiceQueue: a filtered or optional look
+// whose rest goes to the library bottom is often a custom XMage effect that
+// picks with player.choose (the choice queue; Winota, Joiner of Forces, Vivien's
+// Invocation, Knight-Errant of Eos), not LookLibraryAndPickControllerEffect's
+// chooseTarget. Only the plain one-card hand take moves to the target queue.
+func TestDigFilteredBottomRestStaysOnChoiceQueue(t *testing.T) {
+	for name, params := range map[string]map[string]string{
+		"Winota (explicit library rest, filtered battlefield)": {"DigNum": "6", "ChangeNum": "1", "Optional": "True",
+			"ChangeValid": "Creature.Human", "DestinationZone": "Battlefield", "DestinationZone2": "Library",
+			"LibraryPosition": "-1", "RestRandomOrder": "True"},
+		"filtered optional hand take": {"DigNum": "3", "ChangeNum": "1", "Optional": "True",
+			"ChangeValid": "Creature", "DestinationZone": "Hand"},
+		"two cards to hand": {"DigNum": "4", "ChangeNum": "2", "DestinationZone": "Hand"},
+	} {
+		reg, res, sc := digBottomFixture("Winota, Joiner of Forces", params)
+		got := xanswersForScenario(reg, res, sc, nil, nil)
+		if len(got) != 2 || len(got[1]) == 0 || got[1][0].Kind == "target" {
+			t.Errorf("%s: routed = %#v, want the take on the choice queue", name, got)
+		}
+	}
+}
+
 // TestDigFixedLookBottomRestOnRealCorpus runs the two cards the ticket names
 // through the registry cmd/xengine uses, not a hand-built IR.
 func TestDigFixedLookBottomRestOnRealCorpus(t *testing.T) {
@@ -88,7 +110,12 @@ func TestDigFixedLookBottomRestOnRealCorpus(t *testing.T) {
 		t.Skip("needs the corpus (make fetch-cards compile-cards)")
 	}
 	reg := censusRegistry(t)
-	for _, card := range []string{"Lone Revenant", "Dragonlord Ojutai"} {
+	for _, card := range []string{"Winota, Joiner of Forces", "Vivien's Invocation", "Knight-Errant of Eos"} {
+		if src, ok := digSourceOnCard(reg, card); ok && digRestTargetQueue(src) {
+			t.Errorf("%s: digSource = %+v routes to the target queue, but XMage picks on the choice queue", card, src)
+		}
+	}
+	for _, card := range []string{"Lone Revenant", "Dragonlord Ojutai", "Impulse", "Anticipate", "Zurgo and Ojutai"} {
 		c, ok := reg.Lookup(card)
 		if !ok {
 			t.Fatalf("%s is not in the corpus", card)
