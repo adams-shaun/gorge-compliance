@@ -27,3 +27,6 @@ oracle/compliance/status.md
 followers/**/target/
 # Stray `go build ./cmd/xengine` output at the repo root.
 /xengine
+
+# Stray H2 card database a driver test creates when run from the repo root.
+/db/
