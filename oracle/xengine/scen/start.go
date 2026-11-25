@@ -58,7 +58,8 @@ type StartSeat struct {
 	// before the focus play (PayEnergy<N> and the energy the start holds), in
 	// a sorted slice so the output never depends on a map walk. The pinned
 	// gorge rules.StartSeat gains the same field in the commit xproof's
-	// PayEnergy starts need; cmd/xengine seeds it through pincap.
+	// PayEnergy starts need; cmd/xengine maps it through pincap and refuses the
+	// start until that pin carries the field.
 	PlayerCounters []StartCounter `json:"player_counters,omitempty"`
 	// Attach binds a battlefield Aura of this seat to a bearer of the same
 	// seat (gorge's rules.StartAttach). The Aura is listed in Battlefield too;

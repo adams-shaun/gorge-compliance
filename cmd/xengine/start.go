@@ -79,9 +79,10 @@ type startSeat struct {
 	BackFace []string       `json:"back_face"`
 	Counters []startCounter `json:"counters"`
 	// PlayerCounters seed counters on the seat itself, not a permanent
-	// (startCounter.Card empty): the energy a PayEnergy<N> cost spends. The
-	// field is passed to rules.StartSeat when the pin has it, else seeded
-	// through the engine's public Emit at setup (pincap).
+	// (startCounter.Card empty): the energy a PayEnergy<N> cost spends. They
+	// ride rules.StartSeat.PlayerCounters when the pinned gorge has that field;
+	// a pin without it rejects a start that names them (there is no fallback
+	// seed).
 	PlayerCounters []startCounter `json:"player_counters"`
 	Attach         []startAttach  `json:"attach"`
 	Tokens         []startToken   `json:"tokens"`
@@ -444,13 +445,16 @@ func startDeckAt(reg *cards.Registry, name string, seat int, s, other startSeat)
 		ss.Tokens = append(ss.Tokens, rules.StartToken{Script: t.Script, Tapped: t.Tapped})
 	}
 	ss.Life = s.Life
-	// Player counters ride rules.StartSeat when the pinned gorge has the
-	// field; pincap reports that once. Without it, playStart seeds them through
-	// the engine's Emit at setup (game.Options.PlayerCounters).
-	if cs, err := playerCountersOf(s.PlayerCounters); err != nil {
+	// Player counters ride rules.StartSeat.PlayerCounters. A pin without the
+	// field is an explicit error, not a silent drop: the focus ability would
+	// otherwise run unaffordable and be refused as start-not-exercised far from
+	// the cause.
+	cs, err := playerCountersOf(s.PlayerCounters)
+	if err != nil {
 		return d, ss, fmt.Errorf("start %s: %w", name, err)
-	} else {
-		pincap.SetStartPlayerCounters(&ss, cs)
+	}
+	if err := applyStartPlayerCounters(&ss, cs); err != nil {
+		return d, ss, fmt.Errorf("start %s: %w", name, err)
 	}
 	// Filler: the colours of the listed cards' front-face costs, WUBRG order,
 	// one basic each round robin; Plains when there is no coloured symbol.
@@ -530,17 +534,22 @@ func playerCountersOf(cs []startCounter) ([]pincap.Counter, error) {
 	return folded, nil
 }
 
-// playerCounterSeats is both seats' player counters, in seat order.
-func (f *startFile) playerCounterSeats() ([2][]pincap.Counter, error) {
-	var out [2][]pincap.Counter
-	for i, s := range [2]startSeat{f.Setup.P0, f.Setup.P1} {
-		cs, err := playerCountersOf(s.PlayerCounters)
-		if err != nil {
-			return out, err
-		}
-		out[i] = cs
+// setStartPlayerCounters is pincap.SetStartPlayerCounters, a var so a test can
+// prove a start's counters reach the pinned field even while the pin has none.
+var setStartPlayerCounters = pincap.SetStartPlayerCounters
+
+// applyStartPlayerCounters writes cs into ss.PlayerCounters through the pin
+// capability. A start that names counters on a pin without the field is an
+// explicit error: the alternative is a game with no energy, refused much later
+// as start-not-exercised, which hides the missing gorge feature.
+func applyStartPlayerCounters(ss *rules.StartSeat, cs []pincap.Counter) error {
+	if len(cs) == 0 {
+		return nil
 	}
-	return out, nil
+	if !setStartPlayerCounters(ss, cs) {
+		return fmt.Errorf("player counters need rules.StartSeat.PlayerCounters, which the pinned gorge does not have yet (blocked on the gorge pin bump)")
+	}
+	return nil
 }
 
 // hasShardLetter reports whether the Forge mana cost has a shard with the
@@ -625,22 +634,13 @@ func playStart(reg *cards.Registry, paths []string, set, out string, xmage bool)
 				}
 			}
 		}
-		// The pin's own StartSeat carries the counters when pincap says so;
-		// otherwise the live game seeds them at setup, before the focus play.
-		var fallback [2][]pincap.Counter
-		if !pincap.PlayerCounters() {
-			fallback, err = f.playerCounterSeats()
-			if err != nil {
-				return fmt.Errorf("%s: %w", path, err)
-			}
-		}
 		seeds := f.gameSeeds()
 		for s := 1; s <= f.Seeds; s++ {
 			games++
 			id := scen.StartID(set, f.Card, f.Key, s)
 			name := fmt.Sprintf("xproof start %s %s seed %d", f.Card, f.Key, s)
 			took := -1
-			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus, FocusTook: &took, PlayerCounters: fallback}
+			opt := game.Options{Set: set, Start: &rules.StartSpec{Seats: []rules.StartSeat{s0, s1}}, Focus: &focus, FocusTook: &took}
 			if f.MaxTurns > 0 {
 				// max_turns is the turns played: the engine's watchdog stalls
 				// the game as the turn after them begins.

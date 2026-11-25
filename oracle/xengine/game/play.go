@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/adams-shaun/gorge-compliance/oracle/xengine/decks"
-	"github.com/adams-shaun/gorge-compliance/oracle/xengine/pincap"
 	"github.com/adams-shaun/gorge/bots/botpolicy"
 	"github.com/adams-shaun/gorge/bots/heuristic"
 	"github.com/adams-shaun/gorge/engine/cards"
@@ -48,16 +47,6 @@ type Options struct {
 	// Start, when non-nil, is a scripted start: gorge's rules.Config.Start,
 	// which genesis applies before turn 1 (indices into the seat's deck).
 	Start *rules.StartSpec
-	// PlayerCounters, when non-empty, seeds each seat's player counters
-	// (ENERGY, POISON, EXPERIENCE) through the engine's public Emit in the
-	// setup hook, after genesis and before the focus play. It is the
-	// compatibility path for a pin whose rules.StartSeat has no
-	// PlayerCounters field (pincap); on a pin that has it the caller puts the
-	// counters in Start and leaves this nil, so they are not doubled. A seed
-	// queues no replacement (a counter is not a permanent) but may queue a
-	// "whenever you get a counter" trigger, which the first priority resolves
-	// instead of dropping; the native field is the setup-state spelling.
-	PlayerCounters [2][]pincap.Counter
 	// Focus, when non-nil, makes one seat take the focus action once, on its
 	// first chance (focus.go).
 	Focus *Focus
@@ -274,9 +263,6 @@ func Play(reg *cards.Registry, pair []decks.Deck, seed uint64, opt Options) (*Ta
 		o, e, err = bench.PlayGame(cfg, seats, maxTurns, maxIntents, bench.Hooks{
 			Setup: func(e *rules.Engine) {
 				r.setup(e)
-				if !pincap.PlayerCounters() {
-					SeedPlayerCounters(e, opt.PlayerCounters)
-				}
 				if fst != nil {
 					fst.read(e)
 				}
