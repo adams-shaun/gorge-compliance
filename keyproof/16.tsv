@@ -8,8 +8,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1601e553-31c2-4e04-9f0c-bc17e49eeff7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1601e553-31c2-4e04-9f0c-bc17e49eeff7	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1602f8c7-fe00-4bc9-b4fc-b26b7223ac75	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stomping Ground/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Stomping Ground/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a0	Mana	agreed	-	X	start	2	0	x:xs:XP:stomping-ground:f0a0:s1	-	-	-	da6bc3fe8458	-	99746182be48	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+16052b52-ade1-406f-a06b-ce7ea607fb63	f0/a1	Mana	agreed	-	X	start	2	0	x:xs:XP:stomping-ground:f0a1:s1	-	-	-	da6bc3fe8458	-	99746182be48	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 16052b52-ade1-406f-a06b-ce7ea607fb63	land	land	agreed	-	FX	start	2	0	x:xs:XP:stomping-ground:land:s1,f:xs:XP:stomping-ground:land:s1	-	-	-	8c0bd19283bb	-	99746182be48	-	-	2026-11-24	xproof
 16069935-4aeb-481f-98f2-46387775540f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:noggle-hedge-mage:f0t0:s1,f:xs:XP:noggle-hedge-mage:f0t0:s1	-	-	-	3aa6ded33acb	-	f34be77cea62	-	-	2026-11-25	xproof
 16069935-4aeb-481f-98f2-46387775540f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:noggle-hedge-mage:f0t0:s1,f:xs:XP:noggle-hedge-mage:f0t0:s1	-	-	-	3aa6ded33acb	-	f34be77cea62	-	-	2026-11-25	xproof
@@ -143,7 +143,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 16c293c8-bd1d-4db9-b197-da14f2f37cb1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16c39265-72d9-4c86-a961-8dd38ff9adcd	cast	counter-spell	diverged	-	-	scen	0	1	-	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 16c46eaf-7a31-4957-ab7c-ff07fbbd9ddc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-16c46eaf-7a31-4957-ab7c-ff07fbbd9ddc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+16c46eaf-7a31-4957-ab7c-ff07fbbd9ddc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 16c587db-d07b-47ab-8b03-c3b2cc7144f5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16c587db-d07b-47ab-8b03-c3b2cc7144f5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 16c99713-f19e-4b25-9b03-6a8d8203adfe	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

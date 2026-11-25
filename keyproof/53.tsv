@@ -45,7 +45,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 532cac99-e3cf-4869-a19f-cba67a2a6fd0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:ogre-chitterlord:f0t0:s2,f:xs:XP:ogre-chitterlord:f0t0:s2	-	-	-	e07cf3a05ba5	-	7bb4dc57bdd3	-	-	2026-11-24	xproof
 532cac99-e3cf-4869-a19f-cba67a2a6fd0	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ogre-chitterlord:combat0.attack:s1,f:xs:XP:ogre-chitterlord:combat0.attack:s1	-	-	-	3aa6ded33acb	-	7bb4dc57bdd3	-	-	2026-11-25	xproof
 532ee9c3-391c-44db-8ed5-a1d28fd7f876	cast	cast-resolve	agreed	-	FX	scen	2	0	Splinter's Technique/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-5330e24a-8568-446e-840a-594cd08bd1bc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+5330e24a-8568-446e-840a-594cd08bd1bc	f0/a0	Mana	agreed	-	X	start	2	0	x:xs:XP:prairie-stream:f0a0:s1	-	-	-	da6bc3fe8458	-	c923fd511acb	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 5330e24a-8568-446e-840a-594cd08bd1bc	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5330e24a-8568-446e-840a-594cd08bd1bc	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5334dc24-040e-4094-80f4-8d1b9de01230	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 536c1112-694f-42f8-a7b1-604389e54a95	f0/a2	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:chandra-the-firebrand:f0a2:s1,f:xs:XP:chandra-the-firebrand:f0a2:s1	-	-	-	23c4009444b0	-	c7aadc9b6b52	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 536c36d9-5ef4-441c-a6c8-5806644d805c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 536f7c92-2f1e-49e7-98de-47382a9488f1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-536f7c92-2f1e-49e7-98de-47382a9488f1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+536f7c92-2f1e-49e7-98de-47382a9488f1	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	cast	cast-resolve	agreed	-	FX	scen	2	0	Breaching Dragonstorm/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 5370ee80-0354-454f-a16e-ec133e432ecb	f0/t1	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:breaching-dragonstorm:f0t1:s1,f:xs:XP:breaching-dragonstorm:f0t1:s1	-	-	-	23c4009444b0	-	40e5756ba354	-	-	2026-11-25	xproof

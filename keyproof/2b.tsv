@@ -99,8 +99,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2b7c4dab-e432-4b34-b058-3cec5c0d72df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b80faaf-92fd-4fa0-a3f6-8bb263e7ff1d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akroma-angel-of-fury:cast:s1,f:xs:XP:akroma-angel-of-fury:cast:s1	-	-	-	9ee19e8250ce	-	2942aa8564df	-	-	2026-11-24	xproof
 2b80faaf-92fd-4fa0-a3f6-8bb263e7ff1d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:akroma-angel-of-fury:f0a0:s1,f:xs:XP:akroma-angel-of-fury:f0a0:s1	-	-	-	d864b561c9cb	-	2942aa8564df	-	-	2026-11-24	xproof
-2b8144a0-08d2-4c28-9fd7-5d90f90105e4	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Bleachbone Verge/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2b8144a0-08d2-4c28-9fd7-5d90f90105e4	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Bleachbone Verge/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2b8144a0-08d2-4c28-9fd7-5d90f90105e4	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:bleachbone-verge:f0a0:s1,f:xs:XP:bleachbone-verge:f0a0:s1	-	-	-	da6bc3fe8458	-	691886f12f9a	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+2b8144a0-08d2-4c28-9fd7-5d90f90105e4	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:bleachbone-verge:f0a1:s1,f:xs:XP:bleachbone-verge:f0a1:s1	-	-	-	da6bc3fe8458	-	691886f12f9a	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2b8144a0-08d2-4c28-9fd7-5d90f90105e4	land	land	agreed	-	FX	start	2	0	x:xs:XP:bleachbone-verge:land:s1,f:xs:XP:bleachbone-verge:land:s1	-	-	-	23c4009444b0	-	691886f12f9a	-	-	2026-11-25	xproof
 2b84a10e-4c5c-407f-8b5b-a23d402f0529	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2b84a10e-4c5c-407f-8b5b-a23d402f0529	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -175,7 +175,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2bf84938-6049-4d03-b09e-85bd0763a187	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rootwater-alligator:cast:s1,f:xs:XP:rootwater-alligator:cast:s1	-	-	-	5f2128bf97e4	-	1c2be39a1cab	-	-	2026-11-24	xproof
 2bf84938-6049-4d03-b09e-85bd0763a187	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:rootwater-alligator:cast:s1,f:xs:XP:rootwater-alligator:cast:s1	-	-	-	5f2128bf97e4	-	1c2be39a1cab	-	-	2026-11-24	xproof
 2bfc7467-1316-43d3-9ca6-ff36cc2de607	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2bfc7467-1316-43d3-9ca6-ff36cc2de607	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+2bfc7467-1316-43d3-9ca6-ff36cc2de607	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	da6bc3fe8458	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:journey-to-nowhere:f0t0:s1,f:xs:XP:journey-to-nowhere:f0t0:s1	-	-	-	8a1b1a193ec0	-	b9ab01314d70	-	-	2026-11-24	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:journey-to-nowhere:f0t0:s1,f:xs:XP:journey-to-nowhere:f0t0:s1	-	-	-	8a1b1a193ec0	-	b9ab01314d70	-	-	2026-11-24	xproof
 2bfec482-be0d-4768-84e7-1c2c74ea1373	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone:noncreature-self	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
