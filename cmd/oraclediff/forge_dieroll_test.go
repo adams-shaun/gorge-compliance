@@ -94,9 +94,13 @@ func TestForgeRolledDie(t *testing.T) {
 // die-roll code unchanged), the full driver suite (177 tests, including ForcedDieRollTest) re-run green on it.
 // fef74c5308f = the clean merge of 0c4ca7afb3d and a445a858b2: the two fixes touch disjoint files (forge-oracle driver vs
 // forge-game), so the pin keeps both; die-roll and driver code are unchanged from 0c4ca7afb3d.
+// 70b77c0ff08 = the clean merge of 9b17c1fc83 (the coin-force fix) and 24a3344b81 (the fateseal Dig order); the two
+// touch disjoint files (ForcedDieRandom vs ScriptedController/StepMachine), so the pin keeps both, die-roll code unchanged.
 // 9b17c1fc83 = d0f16bee2e0 plus the removal of ForcedDieRandom's unbounded nextInt() flip fallback (an unrelated unbounded draw spent the
 // armed coin flip); die-roll code (the bounded nextInt) unchanged, ForcedDieRollTest and ForcedCoinFlipTest re-run green on it.
-const forgeOracleDieRollRef = "9b17c1fc83642808ce8c3e5306bafc245e1a2e67"
+// 24a3344b81 = d0f16bee2e0 plus the Dig order-to-Library answer from gorge's dig pick (ScriptedController/StepMachine
+// only), die-roll code unchanged.
+const forgeOracleDieRollRef = "70b77c0ff083dad4a4ebf669840baffb33bed996"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
