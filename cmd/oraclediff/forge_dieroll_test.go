@@ -177,6 +177,8 @@ func TestForgeRolledDie(t *testing.T) {
 // e76652fae3 = c5ab80906 (movectr + cantprevent; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
 // a2201414482 = oracle/fpin-1125-room-alt: 22d31c3e9d0 (room_alt + attach_optional + K'rrik; above) joined with e76652fae3 (movectr + cantprevent + K'rrik; above); driver-only.
 // 793a015fcf = oracle/fpin-1125-join3: a2201414482 (above) joined with 1947f2b322 (ScenarioReplay --serve warm worker; additive); driver-only, die-roll code unchanged.
+// a8512930733 = 793a015fcf plus the unaffordable UnlessCost$ decline (ScriptedController.payCostToPreventEffect and
+// UnlessCostUnaffordableTest); driver-only, die-roll code unchanged.
 // 846c4191e6 = 793a015fcf (above) plus the unpinned order to Hand (StepMachine.keepsForgeOrderWithoutPin only);
 // die-roll code unchanged, ForcedDieRollTest re-run green on it (7 of 7).
 // 15a7c960ab2 = 793a015fcf plus the setup Room locked convention (SetupBuilder only); die-roll code unchanged.
@@ -188,7 +190,11 @@ func TestForgeRolledDie(t *testing.T) {
 // a862cd8abc = 793a015fcf plus the empty hidden-origin search fix (ScriptedController only); die-roll code unchanged, ForcedDieRollTest re-run green on it.
 // 0218db82d91 = oracle/fpin-1125-join6: 9cc07f0d340 (setup Room locked + offered) joined with a862cd8abc (empty hidden search); die-roll code unchanged.
 // 1b593040f66 = oracle/fpin-1125-join7: 032ce65c73b (order to Hand + setup Room locked + offered) joined with a862cd8abc (empty hidden search); die-roll code unchanged.
-const forgeOracleDieRollRef = "1b593040f668ffd03c81ddb896e6a8f9b918487e"
+// 926004bb5396 = oracle/fpin-1125-join8: 032ce65c73b (order to Hand + setup Room locked + offered) joined with a8512930733
+// (unaffordable UnlessCost$ decline); die-roll code unchanged.
+// 6fcacdc21814 = oracle/fpin-1125-join9: 1b593040f66 (empty hidden search + order to Hand + setup Room locked + offered) joined with
+// a8512930733 (unaffordable UnlessCost$ decline); die-roll code unchanged.
+const forgeOracleDieRollRef = "6fcacdc21814855e7cec9a02e58db563ec77beab"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

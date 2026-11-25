@@ -15,6 +15,11 @@
 //     keyword line's text ("Equip {2}"), found by the keyword's printed name.
 //   - A loyalty cost prints as XMage does ("+1", "-3", "0", "-X"), without
 //     the Oracle brackets.
+//   - A cost that names the source by the short form the Oracle prints
+//     ("Sacrifice King Darien") spells it "{this}" in the cost portion,
+//     because XMage's cost classes render the placeholder literally. The short
+//     form is Forge's NICKNAME: the comma/colon title, else the name an
+//     activated Oracle line uses on a face whose script carries the token.
 //   - Loyalty, shared-cost and line-less intrinsic mappings must select
 //     uniquely under startsWith: conflicting prefixes extend a word at a
 //     time in {this}-rewritten text ("+1: Exile" vs "+1: Add", "-1:").
@@ -56,6 +61,10 @@ func XMageAbility(f *cards.Face) (map[int]string, string) {
 	if !ok {
 		return nil, "activate xmage text ambiguous"
 	}
+	// The short form the Oracle prints for the source, when the script marks
+	// one with Forge's NICKNAME token; "" when the name is always printed in
+	// full.
+	short, _ := faceShortName(f)
 	out := make(map[int]string, len(f.Abilities))
 	full := make([]string, len(pairs))
 	base := make([]string, len(pairs))
@@ -68,8 +77,8 @@ func XMageAbility(f *cards.Face) (map[int]string, string) {
 		// shared self-referential cost ("{T}, Sacrifice {this}") is seen as
 		// shared and an extension into the rule text never copies the printed
 		// name.
-		full[k] = xmageRuleLine(lines[k], f.Name)
-		base[k] = linePrefix(lines[k], f.Name)
+		full[k] = xmageRuleLine(lines[k], f.Name, short)
+		base[k] = linePrefix(lines[k], f.Name, short)
 		if loyalty := loyaltyCost(f.Abilities[i].ParamStr(cards.PKCost)); loyalty != "" {
 			colon := strings.Index(full[k], ": ")
 			if colon < 0 {
@@ -114,7 +123,7 @@ func XMageAbility(f *cards.Face) (map[int]string, string) {
 	seen := make(map[string]bool, len(nonKeyword))
 	for k, i := range nonKeyword {
 		prefix := extendPrefix(base[k], full, k)
-		if conflictsWithOtherLine(prefix, k, full) || namesShortName(prefix[len(base[k]):], f.Name) {
+		if conflictsWithOtherLine(prefix, k, full) || namesShortName(prefix[len(base[k]):], short) {
 			return nil, "activate xmage text ambiguous"
 		}
 		if prefix == "" || seen[prefix] || out[i] != "" {
@@ -833,13 +842,112 @@ func conflictsWithOtherLine(prefix string, own int, lines []string) bool {
 	return false
 }
 
-// namesShortName reports whether text mentions the short name of a comma-
-// named card ("Chandra" for "Chandra, Torch of Defiance"). The Oracle prints
-// it where XMage's rule text has {this}, so an extension through it could not
-// match and the mapping fails closed.
-func namesShortName(text, name string) bool {
-	short, _, ok := strings.Cut(name, ",")
-	return ok && short != "" && strings.Contains(strings.ToLower(text), strings.ToLower(short))
+// namesShortName reports whether text mentions the source's short name ("King
+// Darien" for King Darien XLVIII, "Chandra" for "Chandra, Torch of Defiance").
+// The Oracle prints it where XMage's rule text has {this}, so an extension
+// through it could not match and the mapping fails closed.
+func namesShortName(text, short string) bool {
+	return short != "" && strings.Contains(strings.ToLower(text), strings.ToLower(short))
+}
+
+// faceShortName returns the short form of f's name that the Oracle text uses
+// where the Forge script spells NICKNAME: the title before a comma or colon
+// ("Jirina" for "Jirina, Dauntless General"), else, only on a face that uses
+// the NICKNAME token, the longest word-prefix of the name an activated Oracle
+// line prints as a whole phrase ("King Darien" for King Darien XLVIII,
+// "Catti-brie" for "Catti-brie of Mithral Hall"). ok is false when the Oracle
+// never uses a short form. The marker gate is what keeps a name that merely
+// starts with a type or common word ("Goblin Sledder"'s "Goblin") from
+// treating that word as a self-reference.
+func faceShortName(f *cards.Face) (string, bool) {
+	if short := titleShortName(f.Name); short != "" {
+		return short, true
+	}
+	if !faceUsesNickname(f) {
+		return "", false
+	}
+	lines := abilityLines(f.Oracle)
+	fields := strings.Fields(f.Name)
+	for n := len(fields) - 1; n >= 1; n-- {
+		short := strings.Join(fields[:n], " ")
+		for _, line := range lines {
+			if namesWholeWord(line, short) {
+				return short, true
+			}
+		}
+	}
+	return "", false
+}
+
+// titleShortName returns the part of a titled card name before its comma or
+// colon -- Forge's NICKNAME for "Chandra, Torch of Defiance" /
+// "Circle of Protection: Red" -- or "" when the name has no separator.
+func titleShortName(name string) string {
+	for _, sep := range []string{",", ":"} {
+		short, _, ok := strings.Cut(name, sep)
+		if ok && strings.TrimSpace(short) != "" {
+			return strings.TrimSpace(short)
+		}
+	}
+	return ""
+}
+
+// faceUsesNickname reports whether any of f's ability params carries Forge's
+// NICKNAME token. It scans every param of every ability, trigger, static and
+// replacement (and the triggers' resolved effects) rather than a hand-picked
+// field list, so a future field that spells the source short cannot slip past.
+func faceUsesNickname(f *cards.Face) bool {
+	params := func(m map[string]string) bool {
+		for _, v := range m {
+			if strings.Contains(v, "NICKNAME") {
+				return true
+			}
+		}
+		return false
+	}
+	for _, sa := range f.Abilities {
+		if params(sa.Params) {
+			return true
+		}
+	}
+	for _, t := range f.Triggers {
+		if params(t.Params) || (t.Effect != nil && params(t.Effect.Params)) {
+			return true
+		}
+	}
+	for _, s := range f.Statics {
+		if params(s.Params) {
+			return true
+		}
+	}
+	for _, r := range f.Repls {
+		if params(r.Params) || (r.With != nil && params(r.With.Params)) {
+			return true
+		}
+	}
+	return false
+}
+
+// namesWholeWord reports whether text contains phrase as a whole phrase,
+// ignoring case: a letter or digit on either side is not a match, so a short
+// name never matches inside a longer word. It matches in the lowered text so
+// a case fold that changes byte length cannot misplace the boundary check.
+func namesWholeWord(text, phrase string) bool {
+	if phrase == "" {
+		return false
+	}
+	lowerText, lowerPhrase := strings.ToLower(text), strings.ToLower(phrase)
+	for from := 0; ; {
+		rel := strings.Index(lowerText[from:], lowerPhrase)
+		if rel < 0 {
+			return false
+		}
+		start := from + rel
+		if !wordByte(lowerText, start-1) && !wordByte(lowerText, start+len(lowerPhrase)) {
+			return true
+		}
+		from = start + 1
+	}
 }
 
 // nonKeywordAbilities lists the indices of f's activated ABs that are not
@@ -951,14 +1059,14 @@ func stripReminder(line string) string {
 }
 
 // linePrefix returns the text before the line's first ": ", the cost prefix
-// XMage matches on, with the card's name rewritten by selfRef and the cost spelled as XMage
-// renders it (xmageCostText).
-func linePrefix(line, sourceName string) string {
+// XMage matches on, with the card's full name and short name rewritten to
+// {this} and the cost spelled as XMage renders it (xmageCostText).
+func linePrefix(line, sourceName, shortName string) string {
 	i := strings.Index(line, ": ")
 	if i < 0 {
 		return ""
 	}
-	return xmageCostText(selfRef(strings.TrimSpace(line[:i]), sourceName), sourceName)
+	return xmageCostText(selfRef(strings.TrimSpace(line[:i]), sourceName), sourceName, shortName)
 }
 
 // selfRef rewrites every mention of the card's name in text to {this}:

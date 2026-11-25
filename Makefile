@@ -714,6 +714,9 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # e76652fae3 = c5ab80906 (movectr + cantprevent; above) joined with 1707ccc4018 (K'rrik pay life; above); driver-only.
 # a2201414482 = oracle/fpin-1125-room-alt: 22d31c3e9d0 (room_alt + attach_optional + K'rrik; above) joined with e76652fae3 (movectr + cantprevent + K'rrik; above); driver-only.
 # 793a015fcf = oracle/fpin-1125-join3: a2201414482 (above) joined with 1947f2b322 (ScenarioReplay --serve warm worker + FORGE_ORACLE_AI_TIMEOUT_S; additive, unset keeps the one-shot run); driver-only, die-roll code unchanged.
+# a8512930733 = 793a015fcf plus the unaffordable UnlessCost$ decline (ScriptedController.payCostToPreventEffect notes
+# "unless-pay step N: unaffordable, declined" and returns false; UnlessCostUnaffordableTest covers it and the affordable
+# control that still misses); driver-only, die-roll code unchanged.
 # 846c4191e6 = 793a015fcf (above) + StepMachine.keepsForgeOrderWithoutPin keeps Forge's order for an unpinned multi-name
 # "order to Hand": the snapshot sorts a hand's names, so gorge records no order for Wrenn and Seven's -8 returning the
 # planeswalker and seven Forests, and the ask strict-missed with an empty leftover. OrderCardsTest.unpinnedHandOrderKeepsForgeOrder,
@@ -740,7 +743,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # driver-only, die-roll code unchanged.
 # 1b593040f66 = oracle/fpin-1125-join7: 032ce65c73b (order to Hand + setup Room locked + offered; above) joined with a862cd8abc (empty hidden-origin search; above);
 # driver-only, die-roll code unchanged.
-FORGE_ORACLE_REF ?= 1b593040f668ffd03c81ddb896e6a8f9b918487e
+# 926004bb5396 = oracle/fpin-1125-join8: 032ce65c73b (order to Hand + setup Room locked + offered; above) joined with
+# a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
+# 6fcacdc21814 = oracle/fpin-1125-join9: 1b593040f66 (empty hidden-origin search + order to Hand + setup Room locked + offered; above) joined with
+# a8512930733 (unaffordable UnlessCost$ decline; above); driver-only, die-roll code unchanged.
+FORGE_ORACLE_REF ?= 6fcacdc21814855e7cec9a02e58db563ec77beab
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
