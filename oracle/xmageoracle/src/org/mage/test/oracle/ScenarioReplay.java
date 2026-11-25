@@ -94,6 +94,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.UUID;
 import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 /**
  * Replays gorge oracle scenarios (the oracle-scenario schema of gorge's runner, scenarios/oracle) in XMage and
@@ -1291,6 +1292,41 @@ public class ScenarioReplay extends CardTestPlayerBase {
             return !getChoices().isEmpty() && (getChoices().get(0).equals("Yes") || getChoices().get(0).equals("No"));
         }
 
+        /** Whether the ask is UntapLandsEffect's up-to untap shortcut. XMage
+         * offers it before the target ask when every tapped land fits under
+         * the effect's cap: "Include your tapped lands to untap?". Its
+         * chooseUse does not accept aliases, while the target.choose that
+         * follows is makeChoose and does, so the shortcut must not eat
+         * gorge's picks. */
+        static boolean includeTappedLandsAsk(String message) {
+            return "Include your tapped lands to untap?".equals(message);
+        }
+
+        /** Whether {@code answer} names a land the shortcut could untap:
+         * {@code tappedOnly} restricts it to the effect's candidates (tapped
+         * lands the source's controller controls), otherwise any land on the
+         * battlefield, so an already-untapped or foreign pick is recognised
+         * as the no-op it is. */
+        private boolean untapIncludeNames(Game game, Ability source, String answer, boolean tappedOnly) {
+            if (answer == null || game == null) {
+                return false;
+            }
+            UUID controllerId = source != null ? source.getControllerId() : getId();
+            for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+                if (!permanent.isLand(game)) {
+                    continue;
+                }
+                if (tappedOnly && (!permanent.isTapped()
+                        || controllerId == null || !controllerId.equals(permanent.getControllerId()))) {
+                    continue;
+                }
+                if (answerNamesCandidate(game, permanent.getId(), answer)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         /** XMage's Phyrexian cost prompts: AbilityImpl.handlePhyrexianCosts
          * ("... (phyrexian cost)?" at CR 601.2b), ManaCostsImpl
          * .handlePhyrexianManaCosts ("...?" while a cost is paid) and
@@ -1519,6 +1555,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // target queue when handOffCardPick has still to move it --
                 // else no, without consuming either queue.
                 return zonePickQueued(message, game);
+            }
+            if (includeTappedLandsAsk(message) && !scriptedYesNoNext()) {
+                // UntapLandsEffect's "Include your tapped lands to untap?"
+                // shortcut (CR 608.2d's up-to untap choice). Answering it here
+                // keeps the alias off the ask's choice dialog, which refuses
+                // them; the effect's own target.choose (makeChoose) accepts
+                // them and consumes gorge's picks and skip.
+                Boolean answer = untapIncludeAnswer(getChoices(),
+                        pick -> untapIncludeNames(game, source, pick, true),
+                        pick -> untapIncludeNames(game, source, pick, false));
+                if (answer != null) {
+                    return answer;
+                }
             }
             Boolean folded = foldedOptionalAnswer(source instanceof mage.abilities.TriggeredAbility
                     && askedBy(mage.abilities.TriggeredAbilityImpl.class, "resolve"), getChoices(), getTargets());
@@ -1955,6 +2004,55 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 askTarget = previousTarget;
                 askSource = previousSource;
             }
+        }
+
+        /**
+         * The answer to UntapLandsEffect's "Include your tapped lands to
+         * untap?" shortcut, or null when a scripted Yes/No heads the choice
+         * queue and TestPlayer must consume it itself. TRUE takes the shortcut
+         * (untap every tapped land, no target ask); FALSE leaves the target
+         * ask to read the choice queue, which is where gorge's up-to picks and
+         * its closing [choice_skip] sit.
+         * <p>
+         * The shortcut is declined whenever the queue already holds this ask's
+         * answer: a [choice_skip], a pick naming a tapped land of the
+         * controller's (a real untap), or -- after pruning it -- a pick naming
+         * a land that is not a candidate (already untapped, or not the
+         * controller's). Such a pick is a no-op, never an invitation to untap
+         * something else (the Peregrine Drake rule), so it is consumed here and
+         * the ask is closed with a skip. With no pick queued for the ask the
+         * shortcut is the rules' only outcome and is taken, leaving the queue
+         * untouched for later asks.
+         */
+        static Boolean untapIncludeAnswer(List<String> choices,
+                Predicate<String> namesTappedLand, Predicate<String> namesLand) {
+            if (choices.isEmpty()) {
+                return Boolean.TRUE;
+            }
+            String head = choices.get(0);
+            if (head.equals("Yes") || head.equals("No")) {
+                return null;
+            }
+            boolean prunedNoop = false;
+            while (!choices.isEmpty()) {
+                String pick = choices.get(0);
+                if (TestPlayer.CHOICE_SKIP.equals(pick) || namesTappedLand.test(pick)) {
+                    return Boolean.FALSE;
+                }
+                if (!namesLand.test(pick)) {
+                    break;
+                }
+                // A land the effect cannot untap: gorge recorded the no-op
+                // pick, so consume it instead of letting the target ask fail
+                // on a non-candidate or the shortcut untap other lands.
+                choices.remove(0);
+                prunedNoop = true;
+            }
+            if (prunedNoop) {
+                choices.add(0, TestPlayer.CHOICE_SKIP);
+                return Boolean.FALSE;
+            }
+            return Boolean.TRUE;
         }
 
         /**
