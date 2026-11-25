@@ -196,6 +196,146 @@ public final class ScenarioReplayCastModeTest {
         return out;
     }
 
+    /** CR 601.2b/118.9: Zaffai and the Tempests grants one free cast from
+     * hand each turn. XMage models the grant as an AsThough approving object
+     * and, for an owned hand card, also offers its regular-cast approver, so
+     * PlayerImpl.chooseApprovingObject asks "Choose the permitting object".
+     * The real menu names each approver's source: the grant's entry names the
+     * permanent and the regular entry names the spell card (with its own rule
+     * text, not "Cast normally"). The keys come from a HashMap, so the pick
+     * must be by source role, never by key number. */
+    private static void permittingObjectKeyPicksByRole() throws Exception {
+        mage.choices.ChoiceImpl menu = new mage.choices.ChoiceImpl(false);
+        menu.setMessage("Choose the permitting object");
+        java.util.Map<String, String> keys = new java.util.LinkedHashMap<>();
+        keys.put("0", "Zaffai and the Tempests [abc]: once during each of your turns ...");
+        keys.put("1", "Reach Through Mists: Cast normally");
+        menu.setKeyChoices(keys);
+        java.lang.reflect.Method pick = Class.forName("org.mage.test.oracle.ScenarioReplay$ScriptedChoicePlayer")
+                .getDeclaredMethod("permittingObjectKey", mage.choices.Choice.class,
+                        java.util.List.class, boolean.class, java.util.Set.class, java.util.Set.class);
+        pick.setAccessible(true);
+        java.util.Set<String> granting = new java.util.HashSet<>(
+                java.util.Arrays.asList("Zaffai and the Tempests [abc]"));
+        java.util.Set<String> regular = new java.util.HashSet<>(
+                java.util.Arrays.asList("Reach Through Mists"));
+        java.util.List<String> queued = new java.util.ArrayList<>();
+        equal(true, pick.invoke(null, menu, queued, true, granting, regular),
+                "a grant cast answers the permitting menu");
+        equal(java.util.Arrays.asList("0"), queued, "the granting permanent's key is elected");
+        queued.clear();
+        equal(true, pick.invoke(null, menu, queued, false, granting, regular),
+                "a plain cast answers the permitting menu too");
+        equal(java.util.Arrays.asList("1"), queued, "the Cast normally key is elected");
+        // The real menu's key numbers vary with the entries' HashMap order.
+        // Swap them and the role must still decide, never key "0" or "1".
+        keys.clear();
+        keys.put("0", "Reach Through Mists: Cast normally");
+        keys.put("1", "Zaffai and the Tempests [abc]: once during each of your turns ...");
+        menu.setKeyChoices(keys);
+        queued.clear();
+        equal(true, pick.invoke(null, menu, queued, true, granting, regular),
+                "a grant cast finds key 1's granting entry");
+        equal(java.util.Arrays.asList("1"), queued, "the granting key, now key 1");
+        queued.clear();
+        equal(true, pick.invoke(null, menu, queued, false, granting, regular),
+                "a plain cast finds key 0's Cast normally entry");
+        equal(java.util.Arrays.asList("0"), queued, "the Cast normally key, now key 0");
+        // The find's real menu: the grant carries MageIdentifier's additional
+        // text and the regular entry carries the spell's rule text, so the
+        // "Cast normally" suffix alone would classify both as grants.
+        keys.clear();
+        keys.put("0", "Without paying manacost: Zaffai and the Tempests [abc]: once during each of"
+                + " your turns, you may cast an instant or sorcery spell from your hand without"
+                + " paying its mana cost.");
+        keys.put("1", "Reach Through Mists [abc]: draw a card.");
+        menu.setKeyChoices(keys);
+        granting.clear();
+        granting.add("Zaffai and the Tempests [abc]");
+        regular.clear();
+        regular.add("Reach Through Mists [abc]");
+        queued.clear();
+        equal(true, pick.invoke(null, menu, queued, true, granting, regular),
+                "the real-shaped menu answers a grant cast");
+        equal(java.util.Arrays.asList("0"), queued, "the grant's source names the permanent");
+        queued.clear();
+        equal(true, pick.invoke(null, menu, queued, false, granting, regular),
+                "the real-shaped menu answers a plain cast");
+        equal(java.util.Arrays.asList("1"), queued, "the regular entry's source names the spell card");
+        System.out.println("PASS the permitting-object picker chooses by source role, not by key number");
+    }
+
+    /** The find: p0 has Zaffai and the Tempests and no lands; Reach Through
+     * Mists ({U}) in hand is cast for free through Zaffai's permission. The
+     * spell must reach the stack and resolve (drawing a card); an unanswered
+     * permitting-object menu takes the regular approver instead, {U} cannot be
+     * paid with no lands and TestPlayer asserts "Can't find ability to
+     * activate command: Cast Reach Through Mists". */
+    private static void zaffaiFreeCast() throws Exception {
+        equal("true", castModeSupported("alternative"), "alternative cast_mode");
+        JsonObject sc = JsonParser.parseString("{name:'Zaffai free cast',card:'Reach Through Mists',"
+                + "setup:{p0:{battlefield:['Zaffai and the Tempests'],hand:['Reach Through Mists'],"
+                + "library_top:['Island','Island']}},"
+                + "steps:[{op:'cast',seat:0,card:'p0:Reach Through Mists',cast_mode:'alternative'},"
+                + "{op:'pass',seat:0},{op:'pass',seat:1}]}").getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, true);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("Zaffai free cast replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        boolean onStack = false;
+        for (JsonElement e : snaps) {
+            for (JsonElement s : e.getAsJsonObject().getAsJsonArray("stack")) {
+                onStack |= "Reach Through Mists".equals(s.getAsJsonObject().get("source").getAsString());
+            }
+        }
+        if (!onStack) {
+            throw new AssertionError("Reach Through Mists never reached the stack: " + res);
+        }
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        JsonObject p0 = last.getAsJsonArray("players").get(0).getAsJsonObject();
+        equal(1, count(p0, "graveyard", "Reach Through Mists"),
+                "Reach Through Mists resolved into the graveyard: " + last);
+        equal(1, count(p0, "hand", "Island"), "Reach Through Mists drew a card: " + last);
+        System.out.println("PASS zaffaiFreeCast: Reach Through Mists is cast for free and draws a card");
+    }
+
+    /** The same board's plain cast (no cast_mode) paid gorge's {U} from an
+     * Island. The permitting menu must take the regular-cast approver, not
+     * Zaffai's grant, so a paid cast is not silently converted into a free
+     * one: the Island must be tapped and Zaffai's once-a-turn permission
+     * must stay unused. */
+    private static void zaffaiPaidCastStaysPaid() throws Exception {
+        JsonObject sc = JsonParser.parseString("{name:'Zaffai paid cast',card:'Reach Through Mists',"
+                + "setup:{p0:{battlefield:['Zaffai and the Tempests','Island'],"
+                + "hand:['Reach Through Mists'],library_top:['Island','Island']}},"
+                + "steps:[{op:'cast',seat:0,card:'p0:Reach Through Mists'},"
+                + "{op:'pass',seat:0},{op:'pass',seat:1}]}").getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, true);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("Zaffai paid cast replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        JsonObject p0 = last.getAsJsonArray("players").get(0).getAsJsonObject();
+        equal(1, count(p0, "graveyard", "Reach Through Mists"),
+                "the paid Reach Through Mists resolved: " + last);
+        equal(1, count(p0, "hand", "Island"), "the paid cast drew a card: " + last);
+        boolean tapped = false;
+        for (JsonElement e : last.getAsJsonArray("permanents")) {
+            JsonObject o = e.getAsJsonObject();
+            if ("Island".equals(o.get("name").getAsString())
+                    && o.has("tapped") && o.get("tapped").getAsBoolean()) {
+                tapped = true;
+            }
+        }
+        if (!tapped) {
+            throw new AssertionError("the plain cast did not pay {U} from the Island;"
+                    + " it seems to have used Zaffai's free cast: " + last);
+        }
+        System.out.println("PASS zaffaiPaidCastStaysPaid: a plain cast pays {U} and leaves Zaffai's grant unused");
+    }
+
     /** A plain cast whose cast_mode is "alternative": the mode is the election,
      * so the driver picks XMage's first alternative-cost key even when the
      * generator queued no answer. Land Grant ({1}{G}) offers "reveal your
@@ -631,6 +771,14 @@ public final class ScenarioReplayCastModeTest {
         // cast_mode "alternative" on the card's own cost: the generator queues
         // no answer, so the driver must elect XMage's first alternative itself.
         landGrantAlternativeCost();
+        // ... and when the alternative is a hand-zone free-cast grant, XMage
+        // asks which approving object permits it; the grant, not the regular
+        // cast, must be elected so the {U} cost is never charged.
+        permittingObjectKeyPicksByRole();
+        zaffaiFreeCast();
+        // A plain cast of the same hand card must take the regular approver,
+        // not the free-cast grant, and pay its own cost.
+        zaffaiPaidCastStaysPaid();
         // ... and when the elected alternative cost has its own scripted pick
         // (Mine Collapse sacrifices a Mountain), the key election must not
         // overwrite that pick.
