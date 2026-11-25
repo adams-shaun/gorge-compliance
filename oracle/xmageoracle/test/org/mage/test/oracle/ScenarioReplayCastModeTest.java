@@ -426,7 +426,52 @@ public final class ScenarioReplayCastModeTest {
         System.out.println("PASS evokedCastPaysEvokeCost: Emptiness is on the stack for {W/B}{W/B}, two Plains untapped");
     }
 
+    /** CR 709.3/709.3a: a Room is a split card cast as one of its doors.
+     * cast_mode "room_alt" is the second door; the farm's step names the
+     * parent card ("p0:Central Elevator"), as it does for an Adventure half,
+     * and three Islands pay Promising Stairs's {2}{U}. The front door
+     * ({3}{U}) is unaffordable, so a driver that casts the whole card or the
+     * front half fails here. The resolved Room must enter with the back door
+     * unlocked (CR 709.5 names it for that door). */
+    private static void roomAltCastsSecondDoor() throws Exception {
+        equal("true", castModeSupported("room_alt"), "room_alt cast_mode");
+        JsonObject sc = JsonParser.parseString("{name:'Central Elevator',card:'Central Elevator',"
+                + "xmage_name:'Central Elevator // Promising Stairs',"
+                + "setup:{p0:{battlefield:['Island','Island','Island'],hand:['Central Elevator']}},"
+                + "steps:[{op:'activate',seat:0,card:'p0:Island',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Island#2',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Island#3',ability_index:0},"
+                + "{op:'cast',seat:0,card:'p0:Central Elevator',cast_mode:'room_alt'},"
+                + "{op:'resolve',seat:0}],"
+                + "xmage_ability:['{T}: Add {U}.','{T}: Add {U}.','{T}: Add {U}.','','']}").getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("room_alt replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        boolean onStack = false;
+        for (JsonElement e : snaps) {
+            for (JsonElement s : e.getAsJsonObject().getAsJsonArray("stack")) {
+                onStack |= "Promising Stairs".equals(s.getAsJsonObject().get("source").getAsString());
+            }
+        }
+        if (!onStack) {
+            throw new AssertionError("Promising Stairs was never on the stack: " + res);
+        }
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        boolean unlocked = false;
+        for (JsonElement e : last.getAsJsonArray("permanents")) {
+            unlocked |= "Promising Stairs".equals(e.getAsJsonObject().get("name").getAsString());
+        }
+        if (!unlocked) {
+            throw new AssertionError("the Room did not resolve with Promising Stairs unlocked: " + last);
+        }
+        System.out.println("PASS roomAltCastsSecondDoor: Promising Stairs is cast for {2}{U} and the Room enters"
+                + " with that door unlocked");
+    }
+
     public static void main(String[] args) throws Exception {
+        roomAltCastsSecondDoor();
         evokedCastPaysEvokeCost();
         foretellFromHandExilesFaceDown();
         suspendFromHandExilesWithTimeCounters();
