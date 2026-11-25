@@ -15,7 +15,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1803850e-9499-4bf7-a4d9-6bf655cbe87d	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 180919a5-67b2-473a-9b90-a828bdc2477c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 180919a5-67b2-473a-9b90-a828bdc2477c	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-180ba940-2b11-4953-b7ce-74847e1aebfd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:assemble-the-players:cast:s1,f:xs:XP:assemble-the-players:cast:s1	-	-	-	23b491658465	-	e49728272835	-	-	2026-11-24	xproof
+180ba940-2b11-4953-b7ce-74847e1aebfd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:assemble-the-players:cast:s1,f:xs:XP:assemble-the-players:cast:s1	-	-	-	23b491658465	-	e49728272835	-	-	2026-11-25	xproof
 180ba940-2b11-4953-b7ce-74847e1aebfd	static#0.0	static#0.0	agreed	-	X	scen	1	0	Assemble the Players/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 180ba940-2b11-4953-b7ce-74847e1aebfd	static#0.1	static#0.1	agreed	-	X	scen	1	0	Assemble the Players/static#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 180d9c48-6d6c-4d20-965a-0ee2ad57f99b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 18a45b81-1946-4be6-8f2c-8c21d11c86f8	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:flowstone-embrace:cast:s1,f:xs:XP:flowstone-embrace:cast:s1	-	-	-	d864b561c9cb	-	bd8c65cf7632	-	-	2026-11-24	xproof
 18a5e71e-eb75-4ac7-bedd-2220aaa24f78	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 18a5e71e-eb75-4ac7-bedd-2220aaa24f78	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-18a5fe34-0c97-486c-b09a-80535a99e982	cast	cast-resolve	agreed	-	X	scen	1	0	Cactarantula/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+18a5fe34-0c97-486c-b09a-80535a99e982	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cactarantula:cast:s1,f:xs:XP:cactarantula:cast:s1	-	-	-	23b491658465	-	f87ea8b6ef24	-	-	2026-11-25	xproof
 18a5fe34-0c97-486c-b09a-80535a99e982	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Cactarantula/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18a5fe34-0c97-486c-b09a-80535a99e982	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Cactarantula/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 18a5fe34-0c97-486c-b09a-80535a99e982	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Cactarantula/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

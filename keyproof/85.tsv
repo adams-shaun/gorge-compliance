@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 8505f9a6-a510-43f9-a96d-b840b353e144	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-8505f9a6-a510-43f9-a96d-b840b353e144	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:goblin-rimerunner:f0a1:s1,f:xs:XP:goblin-rimerunner:f0a1:s1	-	-	-	23b491658465	-	2ebb98b5bb53	-	-	2026-11-24	xproof
+8505f9a6-a510-43f9-a96d-b840b353e144	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:goblin-rimerunner:f0a1:s1,f:xs:XP:goblin-rimerunner:f0a1:s1	-	-	-	23b491658465	-	2ebb98b5bb53	-	-	2026-11-25	xproof
 8505f9a6-a510-43f9-a96d-b840b353e144	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 850a8369-94ab-43b6-8cfe-286e3623b19d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 850bb6f7-48d3-4d65-9220-b0bec5ee6b64	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:fogwell-s-gym:f0a0:s1,f:xs:XP:fogwell-s-gym:f0a0:s1	-	-	-	8c0bd19283bb	-	122e557bccde	-	-	2026-11-24	xproof
@@ -39,9 +39,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 852c38fe-8bfa-420b-b961-7b91af9b38d1	cast	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 852c38fe-8bfa-420b-b961-7b91af9b38d1	f0/a0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
 852c38fe-8bfa-420b-b961-7b91af9b38d1	f0/t0	NULL	owed	refused:not-sent	-	start	0	0	-	-	-	-	25696bf19d5b	-	-	-	-	2026-11-24	xproof
-852c6520-d148-4923-a312-05a9af821f24	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Eroded Canyon/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-852c6520-d148-4923-a312-05a9af821f24	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Eroded Canyon/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-852c6520-d148-4923-a312-05a9af821f24	land	play-land	agreed	-	X	scen	1	0	Eroded Canyon/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+852c6520-d148-4923-a312-05a9af821f24	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:eroded-canyon:f0a0:s1,f:xs:XP:eroded-canyon:f0a0:s1	-	-	-	23b491658465	-	0622f163c062	-	-	2026-11-25	xproof
+852c6520-d148-4923-a312-05a9af821f24	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:eroded-canyon:f0t0:s1,f:xs:XP:eroded-canyon:f0t0:s1	-	-	-	23b491658465	-	0622f163c062	-	-	2026-11-25	xproof
+852c6520-d148-4923-a312-05a9af821f24	land	land	agreed	-	FX	start	4	0	x:xs:XP:eroded-canyon:f0t0:s1,f:xs:XP:eroded-canyon:f0t0:s1	-	-	-	23b491658465	-	0622f163c062	-	-	2026-11-25	xproof
 852d4dc3-404d-4565-99e9-1eac8f6eca5e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 852d4dc3-404d-4565-99e9-1eac8f6eca5e	f0/a1	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 852d4dc3-404d-4565-99e9-1eac8f6eca5e	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -122,7 +122,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 859cbe11-e1e6-4309-94da-8725db1b3fc2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:radiant-archangel:cast:s1,f:xs:XP:radiant-archangel:cast:s1	-	-	-	5f2128bf97e4	-	5949de3bb9bd	-	-	2026-11-24	xproof
 85a59833-b661-4599-a5d1-042dee033617	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:intrusive-packbeast:f0t0:s1,f:xs:XP:intrusive-packbeast:f0t0:s1	-	-	-	d864b561c9cb	-	d749e2bb8f53	-	-	2026-11-24	xproof
 85a59833-b661-4599-a5d1-042dee033617	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:intrusive-packbeast:f0t0:s1,f:xs:XP:intrusive-packbeast:f0t0:s1	-	-	-	d864b561c9cb	-	d749e2bb8f53	-	-	2026-11-24	xproof
-85ac3efc-5e19-4661-b52f-116f57e39581	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:behind-the-mask:cast:s1,f:xs:XP:behind-the-mask:cast:s1	-	-	-	23b491658465	-	9645280aabe0	-	-	2026-11-24	xproof
+85ac3efc-5e19-4661-b52f-116f57e39581	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:behind-the-mask:cast:s1,f:xs:XP:behind-the-mask:cast:s1	-	-	-	23b491658465	-	9645280aabe0	-	-	2026-11-25	xproof
 85ac3efc-5e19-4661-b52f-116f57e39581	static#0.0	static#0.0	agreed	-	X	scen	1	0	Behind the Mask/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 85aedc9f-df35-49bc-88c8-23efda9a4b1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 85aedc9f-df35-49bc-88c8-23efda9a4b1b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37449c93-4d32-4f1a-982f-8f3416214368	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Marchesa, Dealer of Death/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3745aea4-4455-4859-9772-bcfd14e4067b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 374e54d8-8e73-4268-9dde-c28c77bbbf32	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:aftermath-analyst:f0t0:s2,f:xs:XP:aftermath-analyst:f0t0:s2	-	-	-	e07cf3a05ba5	-	b957c415a573	-	-	2026-11-24	xproof
-374e54d8-8e73-4268-9dde-c28c77bbbf32	f0/a0	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:aftermath-analyst:f0a0:s1,f:xs:XP:aftermath-analyst:f0a0:s1	-	-	-	23b491658465	-	b957c415a573	-	-	2026-11-24	xproof
+374e54d8-8e73-4268-9dde-c28c77bbbf32	f0/a0	ChangeZoneAll	agreed	-	FX	start	2	0	x:xs:XP:aftermath-analyst:f0a0:s1,f:xs:XP:aftermath-analyst:f0a0:s1	-	-	-	23b491658465	-	b957c415a573	-	-	2026-11-25	xproof
 374e54d8-8e73-4268-9dde-c28c77bbbf32	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:aftermath-analyst:f0t0:s2,f:xs:XP:aftermath-analyst:f0t0:s2	-	-	-	e07cf3a05ba5	-	b957c415a573	-	-	2026-11-24	xproof
 374e6c1b-5a9a-4d3f-8bff-2f6bc0419391	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 374e6c1b-5a9a-4d3f-8bff-2f6bc0419391	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -203,10 +203,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 37f82ad8-4f0b-4b17-abcc-03f43d4fdf1c	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Great Fierce Bee/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37f82ad8-4f0b-4b17-abcc-03f43d4fdf1c	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Great Fierce Bee/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 37f82ad8-4f0b-4b17-abcc-03f43d4fdf1c	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Great Fierce Bee/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-37f924e1-7c25-4f06-88bb-054693a21e5a	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Conduit Pylons/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+37f924e1-7c25-4f06-88bb-054693a21e5a	f0/a0	Mana	agreed	-	FX	start	6	0	x:xs:XP:conduit-pylons:f0a0:s1,f:xs:XP:conduit-pylons:f0a0:s1	-	-	-	23b491658465	-	90baf198a821	-	-	2026-11-25	xproof
 37f924e1-7c25-4f06-88bb-054693a21e5a	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Conduit Pylons/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-37f924e1-7c25-4f06-88bb-054693a21e5a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Conduit Pylons/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-37f924e1-7c25-4f06-88bb-054693a21e5a	land	play-land	agreed	-	X	scen	1	0	Conduit Pylons/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+37f924e1-7c25-4f06-88bb-054693a21e5a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:conduit-pylons:f0t0:s1,f:xs:XP:conduit-pylons:f0t0:s1	-	-	-	23b491658465	-	90baf198a821	-	-	2026-11-25	xproof
+37f924e1-7c25-4f06-88bb-054693a21e5a	land	land	agreed	-	FX	start	4	0	x:xs:XP:conduit-pylons:f0t0:s1,f:xs:XP:conduit-pylons:f0t0:s1	-	-	-	23b491658465	-	90baf198a821	-	-	2026-11-25	xproof
 37fd3a9d-74fe-4180-805a-b865e7228a77	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:star-pupil:cast:s1,f:xs:XP:star-pupil:cast:s1	-	-	-	d864b561c9cb	-	7981548a8568	-	-	2026-11-24	xproof
 37fd3a9d-74fe-4180-805a-b865e7228a77	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:star-pupil:f0t0:s1,f:xs:XP:star-pupil:f0t0:s1	-	-	-	d864b561c9cb	-	7981548a8568	-	-	2026-11-24	xproof
 37feb05b-1f69-4d0d-837c-592461a431e0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
