@@ -68,7 +68,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 0772c5d2-9189-47e2-b0ee-13babd94ea93	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:subversion:f0t0:s1,f:xs:XP:subversion:f0t0:s1	-	-	-	3aa6ded33acb	-	81f55a19fcc7	-	-	2026-11-25	xproof
 0772c5d2-9189-47e2-b0ee-13babd94ea93	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:subversion:f0t0:s1,f:xs:XP:subversion:f0t0:s1	-	-	-	3aa6ded33acb	-	81f55a19fcc7	-	-	2026-11-25	xproof
 07792d72-d5db-41b9-871c-e720e12ce659	cast	cast-resolve	agreed	-	X	scen	1	0	Cemetery Recruitment/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-077ae62d-ed94-4365-a8b7-97fd99cff028	cast	cast-resolve	agreed	-	X	scen	1	0	Rabid Gnaw/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+077ae62d-ed94-4365-a8b7-97fd99cff028	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rabid-gnaw:cast:s1,f:xs:XP:rabid-gnaw:cast:s1	-	-	-	336eab778104	-	7b5060205834	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 077b5ed2-05c2-4a16-b5eb-794884ee1c21	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:demon-wall:cast:s1,f:xs:XP:demon-wall:cast:s1	-	-	-	23c4009444b0	-	c1495e0346bf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 077b5ed2-05c2-4a16-b5eb-794884ee1c21	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Demon Wall/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 077b5ed2-05c2-4a16-b5eb-794884ee1c21	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:demon-wall:combat0.block:s1,f:xs:XP:demon-wall:combat0.block:s1	-	-	-	23c4009444b0	-	c1495e0346bf	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 07c3e91c-3593-4797-b7be-ef4fb2913cef	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Dream Spoilers/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 07c7193e-f591-4aee-a3cc-3a2c52a38f9b	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	01f20403a929	-	-	2026-11-24	xproof
 07c7193e-f591-4aee-a3cc-3a2c52a38f9b	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	01f20403a929	-	-	2026-11-24	xproof
-07c7e4d4-6452-437b-9f17-b0ec1fd9f702	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+07c7e4d4-6452-437b-9f17-b0ec1fd9f702	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 07c82cde-f00d-4454-9df4-9286e344c9bb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:muxus-goblin-grandee:f0t0:s1,f:xs:XP:muxus-goblin-grandee:f0t0:s1	-	-	-	8c0bd19283bb	-	b6e37c1884cb	-	-	2026-11-24	xproof
 07c82cde-f00d-4454-9df4-9286e344c9bb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:muxus-goblin-grandee:f0t0:s1,f:xs:XP:muxus-goblin-grandee:f0t0:s1	-	-	-	8c0bd19283bb	-	b6e37c1884cb	-	-	2026-11-24	xproof
 07c82cde-f00d-4454-9df4-9286e344c9bb	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:muxus-goblin-grandee:f0t1:s1,f:xs:XP:muxus-goblin-grandee:f0t1:s1	-	-	-	8c0bd19283bb	-	b6e37c1884cb	-	-	2026-11-24	xproof

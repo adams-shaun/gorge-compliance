@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 779269f9-78c1-4e65-bafe-b6dea40a2b24	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 779269f9-78c1-4e65-bafe-b6dea40a2b24	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7792d3af-5c64-4d0a-a2b3-b903d787b0ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7792d3af-5c64-4d0a-a2b3-b903d787b0ab	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+7792d3af-5c64-4d0a-a2b3-b903d787b0ab	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 77953b7a-813e-45f5-ad7f-ab72a79a0112	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7799413d-e313-4a05-ad28-f4c926c26d28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-s-final-mercy:cast:s1,f:xs:XP:vraska-s-final-mercy:cast:s1	-	-	-	fb9d3088f0bf	-	181e0cf47e37	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 779d3e58-de06-44be-98f8-f05f7711ecb2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -135,8 +135,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 77ae7caa-e180-4efb-9348-ab389364b186	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:sphinx-summoner:cast:s1,f:xs:XP:sphinx-summoner:cast:s1	-	-	-	8a1b1a193ec0	-	f48be1c7b0eb	-	-	2026-11-24	xproof
 77ae7caa-e180-4efb-9348-ab389364b186	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:sphinx-summoner:cast:s1,f:xs:XP:sphinx-summoner:cast:s1	-	-	-	8a1b1a193ec0	-	f48be1c7b0eb	-	-	2026-11-24	xproof
 77af5e31-ac4d-4112-9138-e12abb5ce144	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spitting-slug:cast:s1,f:xs:XP:spitting-slug:cast:s1	-	-	-	25696bf19d5b	-	1cf45732f9b4	-	-	2026-11-24	xproof
-77af5e31-ac4d-4112-9138-e12abb5ce144	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-77af5e31-ac4d-4112-9138-e12abb5ce144	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+77af5e31-ac4d-4112-9138-e12abb5ce144	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+77af5e31-ac4d-4112-9138-e12abb5ce144	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 77b48b3c-c780-4c5b-90e6-33c5fd940c16	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:toadstool-admirer:cast:s1,f:xs:XP:toadstool-admirer:cast:s1	-	-	-	23b491658465	-	a02396fccefc	-	-	2026-11-24	xproof
 77b48b3c-c780-4c5b-90e6-33c5fd940c16	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:toadstool-admirer:f0a0:s1,f:xs:XP:toadstool-admirer:f0a0:s1	-	-	-	23b491658465	-	a02396fccefc	-	-	2026-11-24	xproof
 77b48b3c-c780-4c5b-90e6-33c5fd940c16	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:toadstool-admirer:f0t0:s1,f:xs:XP:toadstool-admirer:f0t0:s1	-	-	-	3aa6ded33acb	-	a02396fccefc	-	-	2026-11-25	xproof

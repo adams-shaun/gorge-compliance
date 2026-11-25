@@ -19,7 +19,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01160cb5-6d83-4317-9522-74083b3a83bb	cast	cast	owed	harness	-	start	0	0	-	-	-	-	8c0bd19283bb	-	e74fa41d0243	-	-	2026-11-24	xproof
 01197456-62f1-4bc0-9f2f-127f97f9b05d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 01197456-62f1-4bc0-9f2f-127f97f9b05d	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-01197456-62f1-4bc0-9f2f-127f97f9b05d	f0/a1	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+01197456-62f1-4bc0-9f2f-127f97f9b05d	f0/a1	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 01197456-62f1-4bc0-9f2f-127f97f9b05d	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:higure-the-still-wind:f0t0:s1,f:xs:XP:higure-the-still-wind:f0t0:s1	-	-	-	23c4009444b0	-	aca36de6120a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 011af4c1-e8ed-44bf-b7b5-dfdc18524cd0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heartwarming-redemption:cast:s1,f:xs:XP:heartwarming-redemption:cast:s1	-	-	-	d864b561c9cb	-	379285a94125	-	-	2026-11-24	xproof
 011b2243-b8be-471f-9d8f-824a40e599df	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -55,7 +55,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01432542-2ea7-45bc-bc90-151516faee0e	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 01432542-2ea7-45bc-bc90-151516faee0e	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 01443d75-3f86-45c0-81fa-fbf1b3175d4f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-01443d75-3f86-45c0-81fa-fbf1b3175d4f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+01443d75-3f86-45c0-81fa-fbf1b3175d4f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 0146de73-29bf-415a-b450-11074553f715	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 0146f430-da82-48d3-a576-c2b05101797f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dawnbringer-cleric:f0t0:s1,f:xs:XP:dawnbringer-cleric:f0t0:s1	-	-	-	3aa6ded33acb	-	480f3b440f03	-	-	2026-11-25	xproof
 0146f430-da82-48d3-a576-c2b05101797f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dawnbringer-cleric:f0t0:s1,f:xs:XP:dawnbringer-cleric:f0t0:s1	-	-	-	3aa6ded33acb	-	480f3b440f03	-	-	2026-11-25	xproof
@@ -177,7 +177,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 01c8d29f-4924-4d55-80bc-0c0c06bcb733	f0/a0	Protection	agreed	-	FX	start	2	0	x:xs:XP:eight-and-a-half-tails:f0a0:s1,f:xs:XP:eight-and-a-half-tails:f0a0:s1	-	-	-	23c4009444b0	-	c561a7b8db94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 01c8d29f-4924-4d55-80bc-0c0c06bcb733	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:eight-and-a-half-tails:f0a1:s1,f:xs:XP:eight-and-a-half-tails:f0a1:s1	-	-	-	23c4009444b0	-	c561a7b8db94	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 01cb56d7-f859-46fd-b6c9-40d2c4965b69	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-01cb56d7-f859-46fd-b6c9-40d2c4965b69	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	c2272f704fde	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
+01cb56d7-f859-46fd-b6c9-40d2c4965b69	f0/t0	NULL	owed	refused:no-generator:trigger:TapsForMana	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 01cd52f9-7fac-4396-bec7-d06bf683e011	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:akki-rockspeaker:f0t0:s1,f:xs:XP:akki-rockspeaker:f0t0:s1	-	-	-	25696bf19d5b	-	fb621188fe25	-	-	2026-11-24	xproof
 01cd52f9-7fac-4396-bec7-d06bf683e011	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:akki-rockspeaker:f0t0:s1,f:xs:XP:akki-rockspeaker:f0t0:s1	-	-	-	25696bf19d5b	-	fb621188fe25	-	-	2026-11-24	xproof
 01cdaf69-f53a-4735-92f2-ef149de4d5c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:snow-villiers:cast:s1,f:xs:XP:snow-villiers:cast:s1	-	-	-	23c4009444b0	-	6472be0c570c	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
