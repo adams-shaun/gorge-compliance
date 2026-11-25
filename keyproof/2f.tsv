@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f0bad22-a3f5-4b2b-96bf-ff1473e2262d	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f0bad22-a3f5-4b2b-96bf-ff1473e2262d	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:korok-liberated-rage:f0t0:s1,f:xs:XP:korok-liberated-rage:f0t0:s1	-	-	-	8c0bd19283bb	-	2f5b115426fc	-	-	2026-11-24	xproof
 2f0d797e-d897-453d-92b6-a90e1a548dc5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2f0d797e-d897-453d-92b6-a90e1a548dc5	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
+2f0d797e-d897-453d-92b6-a90e1a548dc5	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t0	NULL	owed	refused:no-generator:trigger:Exploited	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 2f0dec6c-797f-4dc3-9994-066c00cbf1a4	f0/t1	ChangesZone/Exploit	agreed	-	FX	start	4	0	x:xs:XP:infernal-captor:cast:s1,f:xs:XP:infernal-captor:cast:s1	-	-	-	ae86f6029288	-	c6be95e1128d	-	-	2026-11-24	xproof
@@ -49,8 +49,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f2a3588-b9a6-4c1a-89f8-b11339851b8f	f0/a0	DestroyAll	agreed	-	FX	start	2	0	x:xs:XP:tranquil-grove:f0a0:s1,f:xs:XP:tranquil-grove:f0a0:s1	-	-	-	8c0bd19283bb	-	ee8cb3db1161	-	-	2026-11-24	xproof
 2f2d75a0-d751-4c74-b357-8f92a992447f	cast	cast-resolve	agreed	-	FX	scen	2	0	Kellan, Inquisitive Prodigy/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2f2d75a0-d751-4c74-b357-8f92a992447f	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Kellan, Inquisitive Prodigy/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f2d75a0-d751-4c74-b357-8f92a992447f	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Kellan, Inquisitive Prodigy/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-2f2d75a0-d751-4c74-b357-8f92a992447f	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Kellan, Inquisitive Prodigy/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+2f2d75a0-d751-4c74-b357-8f92a992447f	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kellan-inquisitive-prodigy-tail-the-suspect:combat0.block:s1,f:xs:XP:kellan-inquisitive-prodigy-tail-the-suspect:combat0.block:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+2f2d75a0-d751-4c74-b357-8f92a992447f	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:kellan-inquisitive-prodigy-tail-the-suspect:f0t0:s1,f:xs:XP:kellan-inquisitive-prodigy-tail-the-suspect:f0t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 2f30ffd2-9910-4fbd-96f9-d66f1da506e9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:heroes-remembered:cast:s1,f:xs:XP:heroes-remembered:cast:s1	-	-	-	9ee19e8250ce	-	9c64550a41bf	-	-	2026-11-24	xproof
 2f3237fe-9e07-4aad-8bc8-7ef4b510dd36	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f328e05-5edf-4b21-9c2a-50dcf1e7b3ec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -90,7 +90,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2f503ee5-9180-438e-8af5-2af7f8f08a3a	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f541bf9-1e5b-4d16-8558-a5cfce7e93ad	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2f554218-2072-4d9b-b4d4-34f161f1f2a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mortivore:cast:s1,f:xs:XP:mortivore:cast:s1	-	-	-	25696bf19d5b	-	4a03e6c15850	-	-	2026-11-24	xproof
-2f554218-2072-4d9b-b4d4-34f161f1f2a9	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
+2f554218-2072-4d9b-b4d4-34f161f1f2a9	f0/a0	NULL	owed	refused:start:dead-on-arrival	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 2f56de72-80d7-48c6-9b57-84fbd252c699	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rose-tyler:cast:s1,f:xs:XP:rose-tyler:cast:s1	-	-	-	8c0bd19283bb	-	2a9980a4aa41	-	-	2026-11-24	xproof
 2f56de72-80d7-48c6-9b57-84fbd252c699	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:rose-tyler:f0t0:s1,f:xs:XP:rose-tyler:f0t0:s1	-	-	-	8c0bd19283bb	-	2a9980a4aa41	-	-	2026-11-24	xproof
 2f578020-9b39-4c61-8b0b-6d29187e022a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

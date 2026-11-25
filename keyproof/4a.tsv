@@ -57,7 +57,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4a46ea59-6c5d-4bed-9951-b5590f9a1bdb	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Tony Stark/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a46ea59-6c5d-4bed-9951-b5590f9a1bdb	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Tony Stark/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4a46ea59-6c5d-4bed-9951-b5590f9a1bdb	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Tony Stark/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4a46ea59-6c5d-4bed-9951-b5590f9a1bdb	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Tony Stark/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+4a46ea59-6c5d-4bed-9951-b5590f9a1bdb	f1/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:tony-stark-the-invincible-iron-man:f1t0:s1,f:xs:XP:tony-stark-the-invincible-iron-man:f1t0:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 4a4a061d-bc4e-49da-8d20-90fcb571b025	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:imperial-oath:cast:s1,f:xs:XP:imperial-oath:cast:s1	-	-	-	d864b561c9cb	-	3b8fbbb6b84a	-	-	2026-11-24	xproof
 4a4c187e-e10b-4fd2-b70b-6401bb0595c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4a4c187e-e10b-4fd2-b70b-6401bb0595c5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4aeaf1cd-7346-4492-847d-1c4dad14fafd	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:font-of-fortunes:f0a0:s1,f:xs:XP:font-of-fortunes:f0a0:s1	-	-	-	d864b561c9cb	-	726f10112aec	-	-	2026-11-24	xproof
 4aeafdf3-7828-4114-8c74-3bd46357caec	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
+4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 4aeafdf3-7828-4114-8c74-3bd46357caec	f0/a2	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aebea34-a05b-4626-97bc-f15fa177ef05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4aec7624-e406-45a4-b2b6-2e8d29f6268a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

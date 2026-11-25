@@ -25,7 +25,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9207facd-fbf9-4faa-ac44-6c0bcac81551	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:goliath-daydreamer:f0t1:s1,f:xs:XP:goliath-daydreamer:f0t1:s1	-	-	-	23c4009444b0	-	ed7b51ac91d1	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 920c1dd4-c3f6-4020-a6f0-2e8acad2c212	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 920c4df3-9517-44cd-8304-28b1ef69d60e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-920c4df3-9517-44cd-8304-28b1ef69d60e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
+920c4df3-9517-44cd-8304-28b1ef69d60e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 920c4df3-9517-44cd-8304-28b1ef69d60e	f0/t1	Phase	agreed	-	FX	start	2	0	x:xs:XP:colfenor-s-urn:f0t1:s1,f:xs:XP:colfenor-s-urn:f0t1:s1	-	-	-	23c4009444b0	-	8706a1deb754	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 920cc1a7-ac6b-44c0-ade7-347f05bba0f2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 920e21c4-0116-416e-a375-bb887cb7b44a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -132,7 +132,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 927979d7-9b5c-4448-aef0-baf2907a89f1	f0/a1	activate#0.1	agreed	-	FX	scen	2	0	Hidden Cataract/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 927979d7-9b5c-4448-aef0-baf2907a89f1	land	play-land	agreed	-	FX	scen	2	0	Hidden Cataract/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 927d74c4-afe0-4856-9a02-c3fca9535c2f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-927fa223-69a3-4563-80b1-b578f3d031f1	cast	cast-resolve	agreed	-	X	scen	1	0	Central Elevator/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+927fa223-69a3-4563-80b1-b578f3d031f1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:central-elevator-promising-stairs:cast:s1,f:xs:XP:central-elevator-promising-stairs:cast:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 927fa223-69a3-4563-80b1-b578f3d031f1	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Central Elevator/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 927fa223-69a3-4563-80b1-b578f3d031f1	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Central Elevator/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 927fb139-0493-48be-8cc4-2c7d854d6a55	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:radha-heart-of-keld:cast:s1,f:xs:XP:radha-heart-of-keld:cast:s1	-	-	-	ae86f6029288	-	c53aabd89598	-	-	2026-11-24	xproof

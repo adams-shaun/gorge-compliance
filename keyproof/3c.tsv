@@ -10,7 +10,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c037103-5af0-40a8-bbbe-7f3f5958b6e9	f0/a2	SetLife	agreed	-	FX	start	2	0	x:xs:XP:vraska-relic-seeker:f0a2:s1,f:xs:XP:vraska-relic-seeker:f0a2:s1	-	-	-	336eab778104	-	46246a7288d4	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 3c037865-d38c-48da-aee9-308975e12638	cast	cast	agreed	-	F	start	2	0	f:xs:XP:seven-of-nine:cast:s1	-	-	-	23c4009444b0	-	352b9ef612a9	-	-	2026-11-25	xproof
-3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
+3c037865-d38c-48da-aee9-308975e12638	f0/t0	NULL	owed	refused:no-generator:trigger:FacesDilemma	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:herald-of-torment:f0t0:s1,f:xs:XP:herald-of-torment:f0t0:s1	-	-	-	3aa6ded33acb	-	dd74058759d6	-	-	2026-11-25	xproof
 3c04aeda-ae09-4162-ab51-983e29d21225	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:herald-of-torment:f0t0:s1,f:xs:XP:herald-of-torment:f0t0:s1	-	-	-	3aa6ded33acb	-	dd74058759d6	-	-	2026-11-25	xproof
 3c067370-1e3d-4262-b7d6-f2bb2656b1d8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -35,7 +35,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c1fe86a-3696-4634-bc26-cd45846529ec	land	land	agreed	-	FX	start	2	0	x:xs:XP:crumbling-vestige:f0t0:s1,f:xs:XP:crumbling-vestige:f0t0:s1	-	-	-	d864b561c9cb	-	588deb17ed58	-	-	2026-11-24	xproof
 3c22e031-4804-4c31-bd3c-c3f29d456b34	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fiery-confluence:cast:s1,f:xs:XP:fiery-confluence:cast:s1	-	-	-	8c0bd19283bb	-	8058058c3372	-	-	2026-11-24	xproof
 3c2aec69-ffd9-4a34-888c-58adbbb99bb5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3c2aec69-ffd9-4a34-888c-58adbbb99bb5	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
+3c2aec69-ffd9-4a34-888c-58adbbb99bb5	f0/t0	NULL	owed	refused:history:castfrom	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 3c2b9bb2-8201-47e8-84d5-f3518cac03cb	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kree-sentinel:cast:s1,f:xs:XP:kree-sentinel:cast:s1	-	-	-	fb9d3088f0bf	-	9f3ef333d0dc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3c2b9bb2-8201-47e8-84d5-f3518cac03cb	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:kree-sentinel:combat0.attack:s1,f:xs:XP:kree-sentinel:combat0.attack:s1	-	-	-	fb9d3088f0bf	-	9f3ef333d0dc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 3c2b9bb2-8201-47e8-84d5-f3518cac03cb	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:kree-sentinel:combat0.block:s1,f:xs:XP:kree-sentinel:combat0.block:s1	-	-	-	fb9d3088f0bf	-	9f3ef333d0dc	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
@@ -105,7 +105,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3c7dd86d-25eb-4b24-9358-98b951248e04	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:tome-of-the-guildpact:f0t0:s2,f:xs:XP:tome-of-the-guildpact:f0t0:s2	-	-	-	6f84be0f34c0	-	ebef68b19390	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3c7dd86d-25eb-4b24-9358-98b951248e04	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:tome-of-the-guildpact:f0t0:s1,f:xs:XP:tome-of-the-guildpact:f0t0:s1	-	-	-	6f84be0f34c0	-	ebef68b19390	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3c7ea603-c985-4107-806b-a467b5fcca36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scholar-of-new-horizons:cast:s1,f:xs:XP:scholar-of-new-horizons:cast:s1	-	-	-	8c0bd19283bb	-	c641dbf4a68d	-	-	2026-11-24	xproof
-3c7ea603-c985-4107-806b-a467b5fcca36	f0/a0	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
+3c7ea603-c985-4107-806b-a467b5fcca36	f0/a0	NULL	owed	refused:steps-needed:cost:RemoveAnyCounter	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 3c7ea8d0-d866-4c02-bdfc-13bbc87c094a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3c7f7a67-6a71-4f40-8554-2e724e6916a6	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:saradoc-master-of-buckland:f0t0:s1,f:xs:XP:saradoc-master-of-buckland:f0t0:s1	-	-	-	9087eefec3ee	-	40e2440adccf	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 3c7f7a67-6a71-4f40-8554-2e724e6916a6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

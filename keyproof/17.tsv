@@ -12,7 +12,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 170ab932-9d50-4ce7-9a42-08e1edce7e7c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:michelangelo-weirdness-to-11:f0t0:s1,f:xs:XP:michelangelo-weirdness-to-11:f0t0:s1	-	-	-	25696bf19d5b	-	11645e4c74bb	-	-	2026-11-24	xproof
 170ab932-9d50-4ce7-9a42-08e1edce7e7c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:michelangelo-weirdness-to-11:f0t0:s1,f:xs:XP:michelangelo-weirdness-to-11:f0t0:s1	-	-	-	25696bf19d5b	-	11645e4c74bb	-	-	2026-11-24	xproof
 170adfe9-ffbe-40b1-b665-e756e7eb0302	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-170adfe9-ffbe-40b1-b665-e756e7eb0302	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
+170adfe9-ffbe-40b1-b665-e756e7eb0302	f0/t0	NULL	owed	refused:no-generator:trigger:TurnFaceUp:face-down	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 170ee399-d3cd-40ef-a340-193c0f0f6002	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:trickster-s-stratagem:cast:s1,f:xs:XP:trickster-s-stratagem:cast:s1	-	-	-	baa6f696107c	-	4f2cd8194af4	8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 171150fb-dbe1-4a07-a7ac-5f45762a26b0	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:stockpiling-celebrant:f0t0:s2,f:xs:XP:stockpiling-celebrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	477c4539b285	-	-	2026-11-24	xproof
 171150fb-dbe1-4a07-a7ac-5f45762a26b0	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:stockpiling-celebrant:f0t0:s2,f:xs:XP:stockpiling-celebrant:f0t0:s2	-	-	-	e07cf3a05ba5	-	477c4539b285	-	-	2026-11-24	xproof
@@ -22,8 +22,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1720d38a-c3c1-4294-85c1-a91fc7179d6f	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1722d6d0-b435-4d4a-af33-21aab2199f6c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1722f814-2d4e-4d59-9b74-10ef8e89def9	cast	cast-resolve	agreed	-	FX	scen	2	0	Feral Deathgorger/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1722f814-2d4e-4d59-9b74-10ef8e89def9	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Feral Deathgorger/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-1722f814-2d4e-4d59-9b74-10ef8e89def9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Feral Deathgorger/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+1722f814-2d4e-4d59-9b74-10ef8e89def9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:feral-deathgorger-dusk-sight:combat0.attack:s1,f:xs:XP:feral-deathgorger-dusk-sight:combat0.attack:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
+1722f814-2d4e-4d59-9b74-10ef8e89def9	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:feral-deathgorger-dusk-sight:combat0.block:s1,f:xs:XP:feral-deathgorger-dusk-sight:combat0.block:s1	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 1722f814-2d4e-4d59-9b74-10ef8e89def9	f0/t0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1726f9cd-6f18-4509-b95b-bca82ba795a4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:champion-of-the-weird:cast:s1,f:xs:XP:champion-of-the-weird:cast:s1	-	-	-	21b2cceac526	-	84ec53f44c03	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 1726f9cd-6f18-4509-b95b-bca82ba795a4	f0/a0	Blight	agreed	-	FX	start	2	0	x:xs:XP:champion-of-the-weird:cast:s1,f:xs:XP:champion-of-the-weird:cast:s1	-	-	-	21b2cceac526	-	84ec53f44c03	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
@@ -135,7 +135,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 178b3fdf-dbee-4245-a811-b21ff8a24f66	cast	cast	agreed	-	X	start	2	0	x:xs:XP:samut-vizier-of-naktamun:cast:s1	-	-	-	ae86f6029288	-	a82d2f52ba8e	-	-	2026-11-24	xproof
 178b3fdf-dbee-4245-a811-b21ff8a24f66	f0/t0	DamageDone	agreed	-	X	start	2	0	x:xs:XP:samut-vizier-of-naktamun:cast:s1	-	-	-	ae86f6029288	-	a82d2f52ba8e	-	-	2026-11-24	xproof
 178e73f9-fc6e-4425-870e-45f96644010a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lurking-chupacabra:cast:s1,f:xs:XP:lurking-chupacabra:cast:s1	-	-	-	d864b561c9cb	-	acfe7fb985ae	-	-	2026-11-24	xproof
-178e73f9-fc6e-4425-870e-45f96644010a	f0/t0	NULL	owed	refused:no-generator:trigger:Explores	-	start	0	0	-	-	-	-	f7f74a19a438	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	8765c682b2f8086fe9d5612aff7187ff193e6a66	2026-11-25	xproof
+178e73f9-fc6e-4425-870e-45f96644010a	f0/t0	NULL	owed	refused:no-generator:trigger:Explores	-	start	0	0	-	-	-	-	22c9d3aaa262	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	30cbb3854d2f9433e13216cd61c52869ab686373	2026-11-25	xproof
 17916cf9-1e6c-41bd-96ce-2b050d828838	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:cursed-courtier:f0t0:s2,f:xs:XP:cursed-courtier:f0t0:s2	-	-	-	e07cf3a05ba5	-	a9940b40be12	-	-	2026-11-24	xproof
 17916cf9-1e6c-41bd-96ce-2b050d828838	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:cursed-courtier:combat0.attack:s1,f:xs:XP:cursed-courtier:combat0.attack:s1	-	-	-	3aa6ded33acb	-	a9940b40be12	-	-	2026-11-25	xproof
 17916cf9-1e6c-41bd-96ce-2b050d828838	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:cursed-courtier:combat0.block:s1,f:xs:XP:cursed-courtier:combat0.block:s1	-	-	-	3aa6ded33acb	-	a9940b40be12	-	-	2026-11-25	xproof
