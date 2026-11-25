@@ -331,12 +331,68 @@ func sacLands(reg *cards.Registry, name string) []string {
 	return landsFor(mana, basicFor(f.ManaCost))
 }
 
+// targetCarriers are the safe spells a "whenever you cast a spell that
+// targets this" (heroic) start casts: the first inert own-targeters, then an
+// Aura for a filter that names one. They all target a creature its
+// controller controls, so the card itself is a legal target.
+var targetCarriers = append(slices.Clone(ownTargeters), "Rancor")
+
+// targetSelf reports whether the trigger's TargetsValid names the card itself
+// ("whenever you cast a spell that targets this": heroic).
+func targetSelf(t *cards.Trigger) bool {
+	for _, a := range parseFilter(t.Params["TargetsValid"]) {
+		if a.known && a.self {
+			return true
+		}
+	}
+	return false
+}
+
+// filterTakes reports whether an understood, non-Self alternative of filter
+// takes f, and whether any alternative was understood at all.
+func filterTakes(filter string, f *cards.Face) (takes, known bool) {
+	for _, a := range parseFilter(filter) {
+		if !a.known || a.self || a.ctrl == ctrlOpp {
+			continue
+		}
+		known = true
+		if a.test(f) {
+			takes = true
+		}
+	}
+	return takes, known
+}
+
+// targetCarrier is the first targetCarrier keep accepts and the ValidCard
+// filter takes, or "".
+func targetCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string, keep func(*cards.Face) bool) string {
+	for _, name := range targetCarriers {
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			continue
+		}
+		cf := c.Faces[0]
+		if cf.Name == card || !b.Playable(c) || !keep(cf) {
+			continue
+		}
+		if filter != "" {
+			if takes, known := filterTakes(filter, cf); !known || !takes {
+				continue
+			}
+		}
+		return name
+	}
+	return ""
+}
+
 // spellStart is a SpellCast (or SpellCastOrCopy) trigger. "When you cast
 // this spell" (Card.Self, TriggerZones Stack or none) is the card cast from
 // hand. Otherwise the card is on the battlefield and the seat that
 // ValidActivatingPlayer names casts a carrier (carrierPool) that ValidCard
 // takes, with exactly its mana: on its own turn, or, for a NonActive caster,
-// an instant on the other seat's turn.
+// an instant on the other seat's turn. A trigger with no ValidCard takes any
+// spell; one whose TargetsValid is the card itself (heroic) casts a carrier
+// that targets it (targetCarrier).
 func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
 	none := "no-generator:trigger:" + trig.Mode
 	p0 := &f.Setup.P0
@@ -390,7 +446,22 @@ func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 		// every cast takes its own lands: a free carrier keeps them few
 		keep = func(cf *cards.Face) bool { return (!offTurn || cf.IsInstant()) && cf.Cmc() == 0 }
 	}
-	name, _ := filterCarrier(reg, b, card, trig.Params["ValidCard"], keep)
+	filter := trig.Params["ValidCard"]
+	var name string
+	switch {
+	case trig.Params["TargetsValid"] != "":
+		// "whenever you cast a spell that targets this": the caster's own
+		// targeter is the carrier and the card is its target.
+		if !targetSelf(trig) || caster != 0 || !face.IsCreature() {
+			return none + ":filter"
+		}
+		name = targetCarrier(reg, b, card, filter, keep)
+	case strings.TrimSpace(filter) == "":
+		// no ValidCard: any spell casts, so the first carrier does.
+		name = pickCarrier(reg, b, card, keep)
+	default:
+		name, _ = filterCarrier(reg, b, card, filter, keep)
+	}
 	if name == "" {
 		return none + ":filter"
 	}

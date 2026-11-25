@@ -230,6 +230,38 @@ func typeWord(w string) bool {
 	return true
 }
 
+// typeWordAny is a filter test any of the given type words (or creature
+// types) satisfies.
+func typeWordAny(words ...string) func(*cards.Face) bool {
+	return func(f *cards.Face) bool {
+		for _, w := range words {
+			if f.HasTypeWord(w) {
+				return true
+			}
+		}
+		return false
+	}
+}
+
+// filterProps are the named card properties a Forge filter tests that are
+// neither a type word nor a keyword, keyed by the spelling the scripts use.
+// The property and its "non" negation both read this map, so one row covers
+// both forms; an unknown property still refuses rather than matching too
+// little (a start is a claim about one exact event).
+var filterProps = map[string]func(*cards.Face) bool{
+	"Colorless":  func(f *cards.Face) bool { return faceColours(f) == "" },
+	"Multicolor": func(f *cards.Face) bool { return len(faceColours(f)) > 1 },
+	"MultiColor": func(f *cards.Face) bool { return len(faceColours(f)) > 1 }, // Forge's spelling
+	// CR 700.6: a card is historic if it is legendary, an artifact, or a Saga.
+	"Historic": func(f *cards.Face) bool {
+		return f.IsLegendary() || f.IsArtifact() || f.HasTypeWord("Saga")
+	},
+	// CR 700.12: an outlaw has one of these creature types.
+	"Outlaw": typeWordAny("Assassin", "Mercenary", "Pirate", "Rogue", "Warlock"),
+	// CR 700.8: a party card is a Cleric, Rogue, Warrior, or Wizard.
+	"Party": typeWordAny("Cleric", "Rogue", "Warrior", "Wizard"),
+}
+
 // parseFilter reads a ValidCard filter into its alternatives.
 func parseFilter(s string) []filterAlt {
 	var out []filterAlt
@@ -269,11 +301,9 @@ func parseFilter(s string) []filterAlt {
 					continue
 				case "!token", "nonToken":
 					continue // every carrier is a card
-				case "Colorless":
-					tests = append(tests, func(f *cards.Face) bool { return faceColours(f) == "" })
-					continue
-				case "Multicolor":
-					tests = append(tests, func(f *cards.Face) bool { return len(faceColours(f)) > 1 })
+				}
+				if test, ok := filterProps[p]; ok {
+					tests = append(tests, test)
 					continue
 				}
 				if kw, ok := strings.CutPrefix(p, "with"); ok && evergreenKeywords[kw] {
@@ -290,13 +320,19 @@ func parseFilter(s string) []filterAlt {
 					tests = append(tests, func(f *cards.Face) bool { return hasShard(f.ManaCost, l) })
 					continue
 				}
-				if w, ok := strings.CutPrefix(p, "non"); ok && typeWord(w) {
+				if w, ok := strings.CutPrefix(p, "non"); ok {
 					if l, ok := colourWord[w]; ok {
 						tests = append(tests, func(f *cards.Face) bool { return !hasShard(f.ManaCost, l) })
-					} else {
-						tests = append(tests, func(f *cards.Face) bool { return !f.HasTypeWord(w) })
+						continue
 					}
-					continue
+					if test, ok := filterProps[w]; ok {
+						tests = append(tests, func(f *cards.Face) bool { return !test(f) })
+						continue
+					}
+					if typeWord(w) {
+						tests = append(tests, func(f *cards.Face) bool { return !f.HasTypeWord(w) })
+						continue
+					}
 				}
 				if stat, cmp, ok := compare(p); ok {
 					tests = append(tests, func(f *cards.Face) bool {

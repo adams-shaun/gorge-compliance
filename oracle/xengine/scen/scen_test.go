@@ -595,6 +595,86 @@ func TestStartSpellCastTriggers(t *testing.T) {
 	}
 }
 
+// TestStartspellcasttriggers: the SpellCast:filter refusal class. A cast
+// trigger with no ValidCard and TargetsValid$ Card.Self (heroic) is the card
+// on the battlefield and a carrier spell that targets it, cast by its
+// controller; a filter property the resolver knows (Card.Historic) is a
+// carrier the property takes. These cards refused "no-generator:trigger:
+// SpellCast:filter" at current develop.
+func TestStartspellcasttriggers(t *testing.T) {
+	checkStartRows(t, []startRow{
+		// heroic: the card on the battlefield, Ranger's Guile cast at it
+		{card: "Akroan Crusader", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Akroan Crusader", "Forest"}, focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Akroan Line Breaker", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Akroan Line Breaker", "Forest"}, focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Akroan Skyguard", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Akroan Skyguard", "Forest"}, focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Anax and Cymede", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Anax and Cymede", "Forest"}, focusCard: "Ranger's Guile", focusKind: "cast"},
+		{card: "Artisan of Forms", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Ranger's Guile"},
+			p0BF: []string{"Artisan of Forms", "Forest"}, p1BF: []string{"Phyrexian Walker"},
+			focusCard: "Ranger's Guile", focusKind: "cast"},
+		// an Aura filter: Rancor is the Aura that targets the card
+		{card: "Druid of Horns", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Rancor", "Web"},
+			p0BF: []string{"Druid of Horns", "Forest", "Forest", "Wall of Stone"}, focusCard: "Rancor", focusKind: "cast"},
+		// a filter property the resolver knows: Memnite is historic
+		{card: "Artificer's Assistant", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Memnite"},
+			p0BF: []string{"Artificer's Assistant"}, focusCard: "Memnite", focusKind: "cast"},
+		// no ValidCard at all (Extort's "whenever you cast a spell"): any
+		// carrier is a spell, so the first one casts
+		{card: "Basilica Guards", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Memnite"},
+			p0BF: []string{"Basilica Guards"}, focusCard: "Memnite", focusKind: "cast"},
+	})
+}
+
+// TestFilterProps: the named-property table parseFilter reads, including its
+// "non" form, and the conservative default for a property it does not know.
+func TestFilterProps(t *testing.T) {
+	reg, _ := testBuilder(t)
+	face := func(name string) *cards.Face {
+		t.Helper()
+		c, ok := reg.Lookup(name)
+		if !ok || len(c.Faces) == 0 {
+			t.Fatalf("%s is not in the corpus", name)
+		}
+		return c.Faces[0]
+	}
+	takes := func(filter, name string) bool {
+		t.Helper()
+		alts := parseFilter(filter)
+		if len(alts) != 1 {
+			t.Fatalf("%s: %d alternatives, want 1", filter, len(alts))
+		}
+		return alts[0].test(face(name))
+	}
+	for _, tc := range []struct {
+		filter, card string
+		want         bool
+	}{
+		{"Card.Historic", "Memnite", true},              // artifact
+		{"Card.Historic", "Anax and Cymede", true},      // legendary
+		{"Card.Historic", "Reach Through Mists", false}, // neither
+		{"Card.MultiColor", "Anax and Cymede", true},
+		{"Card.MultiColor", "Memnite", false},
+		{"Card.Outlaw", "Ragavan, Nimble Pilferer", true}, // Pirate (CR 700.12)
+		{"Card.Outlaw", "Anax and Cymede", false},
+		{"Card.Party", "Angel of Unity", true}, // Cleric (CR 700.8)
+		{"Card.Party", "Ragavan, Nimble Pilferer", false},
+		{"Card.nonHistoric", "Reach Through Mists", true},
+		{"Card.nonHistoric", "Memnite", false},
+		{"Card.Colorless", "Memnite", true},
+		{"Card.Colorless", "Anax and Cymede", false},
+	} {
+		if got := takes(tc.filter, tc.card); got != tc.want {
+			t.Errorf("%s on %s = %v, want %v", tc.filter, tc.card, got, tc.want)
+		}
+	}
+	if alts := parseFilter("Card.!wasCastFromYourHand"); len(alts) != 1 || alts[0].known {
+		t.Errorf("Card.!wasCastFromYourHand: %+v, want one unknown alternative", alts)
+	}
+}
+
 // TestStartCosts: an activated ability's non-mana cost is met by start
 // state (planCost), never by a play: Memnite to sacrifice for "another
 // creature" (Agency Coroner), a basic placed tapped for a land (Ripchain
