@@ -1,0 +1,111 @@
+# Keep GORGE_PIN on gorge main with no person and no orchestrator tick.
+#
+# Every 15 minutes (and on a `gorge-main` repository_dispatch, or by hand) this
+# compares develop's GORGE_PIN with gorge main's head (`git ls-remote`; gorge is
+# public). When the pin is behind, scripts/gorge-pin-follow.sh rebuilds the bump
+# from develop with the repo's own bump (scripts/gorge-pin.sh bump, what `make
+# gorge-pin-bump` runs: GORGE_PIN, go.mod and go.sum; the corpus and targets
+# are the PR's CI and triage, docs/PINNING.md),
+# commits "gorge pin: A..B (gorge origin/main)" and force-pushes the bot's own
+# branch auto/gorge-pin, the only branch anything here force-pushes. One PR
+# from that branch to develop stays open; Mergify queues it once ci-ok is green.
+#
+# A red bump never blocks the next: a newer gorge main (or a moved develop)
+# rebuilds the branch and the PR picks it up. A bump that is current on
+# auto/gorge-pin is left alone, so a red one is not re-run every 15 minutes.
+#
+# Token: a push or PR made with the job's GITHUB_TOKEN starts no workflows, so
+# without the optional secret GORGE_PIN_TOKEN (a fine-grained PAT, Contents and
+# Pull requests read/write on this repository) the job dispatches ci.yml on
+# auto/gorge-pin itself; its check runs (ci-ok) attach to the PR's head commit,
+# as promote.yml's do. A dispatched ci also runs the compliance and drift jobs,
+# and ci-ok then needs compliance green. With the secret set, the push and PR
+# use it and the PR's own pull_request run gives ci-ok. The token only reaches git and gh through
+# the environment; nothing echoes it.
+#
+# Schedules and dispatches run the default branch's copy of this file: it acts
+# once it reaches main.
+name: gorge-pin-follow
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+  repository_dispatch:
+    types: [gorge-main]
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: gorge-pin-follow
+  cancel-in-progress: true
+
+jobs:
+  follow:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GOWORK: 'off'
+      PIN_TOKEN: ${{ secrets.GORGE_PIN_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: develop
+          fetch-depth: 0
+          token: ${{ secrets.GORGE_PIN_TOKEN || github.token }}
+      - name: Fetch the bot branch
+        run: git fetch -q origin +refs/heads/auto/gorge-pin:refs/remotes/origin/auto/gorge-pin || echo "no auto/gorge-pin yet"
+      - name: Plan
+        id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -o pipefail
+          scripts/gorge-pin-follow.sh plan | tee -a "$GITHUB_OUTPUT"
+      - uses: actions/setup-go@v5
+        if: steps.plan.outputs.action == 'bump'
+        with:
+          go-version-file: go.mod
+          cache: false
+      - name: Bump and push auto/gorge-pin
+        if: steps.plan.outputs.action == 'bump'
+        env:
+          CUR: ${{ steps.plan.outputs.cur }}
+          MAIN: ${{ steps.plan.outputs.main }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          scripts/gorge-pin-follow.sh commit "$CUR" "$MAIN"
+          git push --force origin HEAD:refs/heads/auto/gorge-pin
+      - name: Open the PR, or retitle the open one
+        if: steps.plan.outputs.action == 'bump' || steps.plan.outputs.action == 'proposed'
+        env:
+          GH_TOKEN: ${{ secrets.GORGE_PIN_TOKEN || github.token }}
+          MSG: ${{ steps.plan.outputs.msg }}
+          MAIN: ${{ steps.plan.outputs.main }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          n=$(gh pr list --head auto/gorge-pin --base develop --state open --json number -q '.[0].number')
+          if [ -n "$n" ]; then
+            gh pr edit "$n" --title "$MSG"
+            echo "PR #$n follows auto/gorge-pin"
+            exit 0
+          fi
+          body=$(printf '%s\n\nMoves GORGE_PIN and the go.mod require to gorge main %s. Opened by gorge-pin-follow (%s); a newer gorge main force-pushes auto/gorge-pin and this PR follows it, so a red bump is superseded, never blocking. Mergify queues it once ci-ok is green.\n\nThis Robot (gorge agentctl swarm) Shan'"'"'t Be Blamed For Stupid Humans' "$MSG" "$MAIN" "$RUN_URL")
+          gh pr create --base develop --head auto/gorge-pin --title "$MSG" --body "$body"
+      - name: Start ci on the bump (a GITHUB_TOKEN push starts none)
+        if: steps.plan.outputs.action == 'bump' && env.PIN_TOKEN == ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run ci.yml --ref auto/gorge-pin
+      - name: Close a stale bot PR
+        if: steps.plan.outputs.action == 'current'
+        env:
+          GH_TOKEN: ${{ secrets.GORGE_PIN_TOKEN || github.token }}
+          WHY: ${{ steps.plan.outputs.why }}
+        run: |
+          n=$(gh pr list --head auto/gorge-pin --base develop --state open --json number -q '.[0].number')
+          [ -z "$n" ] || gh pr close "$n" --comment "Superseded: $WHY."
