@@ -380,6 +380,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * TestPlayer's own match is the answer) and when zero or several rules
      * match after normalisation. */
     static int triggerKeyMatch(String key, List<String> rules, String sourceName) {
+        return triggerKeyMatch(key, rules, sourceName, true);
+    }
+
+    /** As above; allowContains false skips the containment fallback (a key
+     * TestPlayer will take by source name must not be re-read as wording). */
+    static int triggerKeyMatch(String key, List<String> rules, String sourceName, boolean allowContains) {
         for (String rule : rules) {
             if (rule.startsWith(key)) {
                 return -1;
@@ -401,18 +407,52 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 found = i;
             }
         }
-        return found;
+        if (found >= 0) {
+            return found;
+        }
+        // A key that is (or mentions) the source's own name folds to "{this}",
+        // which a different source's rule may carry literally ("put a +1/+1
+        // counter on {this}"): never a wording key, so no containment.
+        if (!allowContains || want.contains("{this}")) {
+            return -1;
+        }
+        // A delayed trigger's rule text puts the subject first and the timing
+        // last ("You draw a card at the beginning of the next turn's
+        // upkeep.", Arcane Denial's caster draw), so the generator's key
+        // ("Draw a card.") prefixes no rule. Fall back to containment: take
+        // the one ability whose normalised rule contains the normalised key
+        // -- only when exactly one does. Two identical copies are
+        // interchangeable (either would satisfy the same ask), so two of the
+        // same text still take the first; any other several-match keeps
+        // TestPlayer's own handling, the same strict miss as before.
+        int hit = -1;
+        for (int i = 0; i < rules.size(); i++) {
+            String rule = triggerKeyForm(rules.get(i), sourceName);
+            if (!rule.contains(want)) {
+                continue;
+            }
+            if (hit >= 0 && !rule.equals(triggerKeyForm(rules.get(hit), sourceName))) {
+                return -1;
+            }
+            if (hit < 0) {
+                hit = i;
+            }
+        }
+        return hit;
     }
 
     /** Rule text folded for a wording-tolerant prefix match: markup dropped,
-     * lower case, the source's name as "{this}", whitespace collapsed, and a
-     * leading "when " / "whenever " as one token. */
+     * lower case, the source's name as "{this}", whitespace collapsed, XMage's
+     * mid-sentence " of their choice" elided (Smokestack: "sacrifices a
+     * permanent of their choice for each soot counter", Forge's wording
+     * omits it), and a leading "when " / "whenever " as one token. */
     static String triggerKeyForm(String text, String sourceName) {
         String t = text.replaceAll("<[^<>]*>", "").toLowerCase(java.util.Locale.ROOT);
         if (sourceName != null && !sourceName.isEmpty()) {
             t = t.replace(sourceName.toLowerCase(java.util.Locale.ROOT), "{this}");
         }
         t = t.replaceAll("\\s+", " ").trim();
+        t = t.replace(" of their choice", "");
         if (t.startsWith("whenever ")) {
             t = "when " + t.substring("whenever ".length());
         }
@@ -469,11 +509,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
          * Forge's TriggerDescription$, which words the same trigger "When ..."
          * where XMage prints "Whenever ..." (Hero of Oxid Ridge) and ends the
          * key at a period where XMage's text continues (Nefarox's "sacrifices
-         * a creature of their choice."). An unmatched head is a strict
+         * a creature of their choice.") and omits XMage's mid-sentence "of their
+         * choice" (Smokestack's "sacrifices a permanent of their choice for each
+         * soot counter"; triggerKeyForm elides it). An unmatched head is a strict
          * "Missing CHOICE def" there. When the head prefix-matches no ability,
-         * take the one ability whose normalised rule starts with the
-         * normalised key (CR 603.3b: the controller's pick); none or several
-         * matching keeps TestPlayer's own handling. */
+         * take the one ability whose normalised rule starts with the normalised
+         * key, or -- for a delayed trigger, whose rule text puts the subject first
+         * and the timing last (Arcane Denial's key "Draw a card." against XMage's
+         * "You draw a card at the beginning of the next turn's upkeep.") -- whose
+         * normalised rule contains it (CR 603.3b: the controller's pick); none or
+         * several matching keeps TestPlayer's own handling. A key TestPlayer
+         * takes by source name never reaches the containment read. */
         @Override
         public mage.abilities.TriggeredAbility chooseTriggeredAbility(
                 List<mage.abilities.TriggeredAbility> abilities, Game game) {
@@ -484,7 +530,15 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     rules.add(ability.toString());
                 }
                 String name = abilities.isEmpty() ? "" : abilities.get(0).getSourceObject(game).getName();
-                int at = triggerKeyMatch(choice, rules, name);
+                // TestPlayer takes a key by source name (startsWith); that
+                // answer wins over a containment read of the same key.
+                boolean byName = false;
+                for (mage.abilities.TriggeredAbility ability : abilities) {
+                    if (ability.getSourceObject(game).getName().startsWith(choice)) {
+                        byName = true;
+                    }
+                }
+                int at = triggerKeyMatch(choice, rules, name, !byName);
                 if (at >= 0) {
                     getChoices().remove(0);
                     return abilities.get(at);
@@ -1168,6 +1222,58 @@ public class ScenarioReplay extends CardTestPlayerBase {
                             && f.getDeclaringClass().getSimpleName().equals(simpleName)));
         }
 
+        private static Mode getModeOf(Ability source) {
+            return source == null || source.getModes() == null ? null : source.getModes().getMode();
+        }
+
+        /** Whether the current ask is posed straight from the named method of a
+         * class of the given type: the first frame outside the player classes
+         * (TestPlayer, this wrapper) is that method. askedBy matches any frame, so
+         * it also matches an ask the effect resolving inside that method poses. */
+        private static boolean askedDirectlyBy(Class<?> type, String method) {
+            return StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE).walk(frames ->
+                    frames.filter(f -> !Player.class.isAssignableFrom(f.getDeclaringClass()))
+                            .findFirst()
+                            .map(f -> f.getMethodName().equals(method) && type.isAssignableFrom(f.getDeclaringClass()))
+                            .orElse(false));
+        }
+
+        /**
+         * The trigger-level "use this ability?" ask XMage poses only because
+         * setDoOnlyOnceEachTurn made the trigger optional, while the Oracle
+         * "may" belongs to the effect (its own text carries one): the trigger
+         * ask posed straight from TriggeredAbilityImpl.resolve, on an ability
+         * limited to once each turn whose effects already say "may".
+         */
+        static boolean onceEachTurnSyntheticUseAsk(Ability source, Mode mode) {
+            if (!(source instanceof mage.abilities.TriggeredAbilityImpl) || mode == null
+                    || !askedDirectlyBy(mage.abilities.TriggeredAbilityImpl.class, "resolve")
+                    || !doesOnlyOnceEachTurn((mage.abilities.TriggeredAbilityImpl) source)) {
+                return false;
+            }
+            for (mage.abilities.effects.Effect e : source.getEffects()) {
+                String text = e.getText(mode);
+                if (text != null && MAY_WORD.matcher(text).find()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private static final java.util.regex.Pattern MAY_WORD =
+                java.util.regex.Pattern.compile("\\bmay\\b", java.util.regex.Pattern.CASE_INSENSITIVE);
+
+        /** TriggeredAbilityImpl keeps its once-each-turn flag private, with no getter. */
+        private static boolean doesOnlyOnceEachTurn(mage.abilities.TriggeredAbilityImpl ability) {
+            try {
+                java.lang.reflect.Field f = mage.abilities.TriggeredAbilityImpl.class.getDeclaredField("doOnlyOnceEachTurn");
+                f.setAccessible(true);
+                return f.getBoolean(ability);
+            } catch (ReflectiveOperationException e) {
+                throw new IllegalStateException("TriggeredAbilityImpl.doOnlyOnceEachTurn is gone: " + e, e);
+            }
+        }
+
         /**
          * The answer to a yes/no a trigger poses while it resolves, when the
          * step queued no Yes/No for it: gorge folded the may into the body's
@@ -1610,6 +1716,17 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 if (answer != null) {
                     return answer;
                 }
+            }
+            if (onceEachTurnSyntheticUseAsk(source, getModeOf(source))) {
+                // XMage's setDoOnlyOnceEachTurn also makes the trigger optional,
+                // so TriggeredAbilityImpl.resolve asks "use this ability?" before
+                // the effect's own "you may" ask (Planetarium of Wan Shi Tong's
+                // "look at the top card. You may cast that card ... Do this only
+                // once each turn"). The Oracle text has no trigger-level may and
+                // gorge records no decision for it; the scripted Yes/No is the
+                // effect's own and stays queued for it. Declining here (the
+                // folded-optional default below) skips the whole trigger.
+                return true;
             }
             Boolean folded = foldedOptionalAnswer(source instanceof mage.abilities.TriggeredAbility
                     && askedBy(mage.abilities.TriggeredAbilityImpl.class, "resolve"), getChoices(), getTargets());
@@ -3936,6 +4053,19 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 closeCastAskedAgain(getTargets(), source,
                         target.getMinNumberOfTargets(), target.getMaxNumberOfTargets(), target.getSize());
             }
+            // An "up to" (or any-number) ask whose minimum is met and that
+            // already chose at least one scripted target has its list closed
+            // by the script: gorge poses ONE decision for the whole selection
+            // (CR 601.2c), so a further ask is XMage's iteration of the same
+            // ask, not a new decision, and nothing more is scripted for it.
+            // Closing it keeps the lone-candidate rule below (and the base's
+            // AI) from picking on: Riverchurn Monument's "{1}, {T}: Any
+            // number of target players each mill two" scripted p1, and the
+            // re-ask's lone candidate p0 is not gorge's choice (gorge milled
+            // p1 only, XMage both players).
+            if (closeScriptedTargetList(target, source, game)) {
+                return target.getSize() > 0 && target.isChosen(game);
+            }
             if (target.getSize() < target.getMaxNumberOfTargets()) {
                 // A lone legal candidate is not a choice: gorge settles it
                 // without a decision, so no answer is scripted and strict mode
@@ -3949,6 +4079,42 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 }
             }
             return super.chooseTarget(outcome, target, source, game);
+        }
+
+        /**
+         * Whether an "up to" target ask that already chose at least one
+         * scripted target of its own and reads none of its own answers from
+         * the queue is XMage's re-ask of the same selection, and must close
+         * with what it has: the minimum is met (a skip could close it), every
+         * recorded pick is chosen, and no queue entry names a candidate still
+         * open, so nothing the script holds belongs to this ask. An ask that
+         * never chose (size 0) keeps the unscripted rules: a lone candidate is
+         * gorge's silent election and an empty legal set is unscriptable. An
+         * ask with a queued answer of its own -- its next pick, or a closing
+         * skip -- belongs to the base. */
+        private boolean closeScriptedTargetList(mage.target.Target target, Ability source, Game game) {
+            if (target.getMaxNumberOfTargets() <= target.getMinNumberOfTargets()
+                    || target.getSize() == 0
+                    || target.getSize() < target.getMinNumberOfTargets()) {
+                return false;
+            }
+            UUID abilityControllerId = target.getAffectedAbilityControllerId(this.getId());
+            java.util.Collection<UUID> possible = target.possibleTargets(abilityControllerId, source, game);
+            if (possible.isEmpty()) {
+                // With no candidate left the ask can add nothing. An optional
+                // ask whose queue front is a skip was NOT declined by the
+                // unscriptable-empty rule (the skip is its own answer) and the
+                // ordinary path must consume it, so leave that one open.
+                return !(!getTargets().isEmpty() && TestPlayer.TARGET_SKIP.equals(getTargets().get(0)));
+            }
+            List<UUID> unchosen = unchosenCandidates(target, possible);
+            if (unchosen.isEmpty()) {
+                // Every candidate is chosen: a queued skip may be this ask's
+                // own closing skip, which the ordinary path honours.
+                return false;
+            }
+            return unscriptedChoice(getTargets(), unchosen, skipCanCloseAsk(target),
+                    (id, answer) -> answerNamesCandidate(game, id, answer));
         }
 
         /** The stack object in the target's own legal set that a queued
@@ -5631,6 +5797,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
      * clears, then adds one copy of the blueprint per player or opponent): Mass
      * Mutiny's inline target was wiped and its "up to one" per-opponent copy,
      * min 0, was closed with nothing picked, so the spell resolved untargeted.
+     * A {@code TargetsCountAdjuster} (every {@code XTargetsCountAdjuster}
+     * "up to X target" spell: Crashing Wave) does the same, resizing a fresh
+     * copy of the blueprint to the announced count: the inline target sat on
+     * the unadjusted blueprint, the adjuster wiped it, and the chooser's
+     * second ask found nothing scripted, so the spell resolved untargeted.
      */
     static boolean replacesCastTargets(Ability ability) {
         if (ability == null) {
@@ -5638,7 +5809,8 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
         mage.target.targetadjustment.TargetAdjuster adjuster = ability.getTargetAdjuster();
         return adjuster instanceof mage.target.targetadjustment.ConditionalTargetAdjuster
-                || adjuster instanceof mage.target.targetadjustment.ForEachPlayerTargetsAdjuster;
+                || adjuster instanceof mage.target.targetadjustment.ForEachPlayerTargetsAdjuster
+                || adjuster instanceof mage.target.targetadjustment.TargetsCountAdjuster;
     }
 
     /** The named face's spell ability, or null when the name does not

@@ -247,6 +247,16 @@ public final class ScenarioReplaySplitRoomTest {
         equal(false, mutiny.getSpellAbility().getAllSelectedTargets().isEmpty());
         equal(true, ScenarioReplay.replacesCastTargets(mutiny.getSpellAbility()));
         equal(true, ScenarioReplay.needsQueuedCastTargets(mutiny.getSpellAbility()));
+        // A TargetsCountAdjuster ("up to X target creatures", Crashing Wave's
+        // waterbend X) also clear()s and rebuilds its blueprint at the announced
+        // count: the inline target on the base slot was wiped and the second
+        // ask went unanswered, so Grizzly Bears was never tapped. The queue
+        // route is what a lone-candidate auto-take had masked.
+        mage.cards.c.CrashingWave wave = new mage.cards.c.CrashingWave(UUID.randomUUID(),
+                new CardSetInfo("Crashing Wave", "TLA", "1", Rarity.UNCOMMON));
+        equal(false, wave.getSpellAbility().getAllSelectedTargets().isEmpty());
+        equal(true, ScenarioReplay.replacesCastTargets(wave.getSpellAbility()));
+        equal(true, ScenarioReplay.needsQueuedCastTargets(wave.getSpellAbility()));
         mage.cards.l.LongRiversPull pull = new mage.cards.l.LongRiversPull(UUID.randomUUID(),
                 new CardSetInfo("Long River's Pull", "BLB", "1", Rarity.RARE));
         equal(true, ScenarioReplay.needsQueuedCastTargets(pull.getSpellAbility()));

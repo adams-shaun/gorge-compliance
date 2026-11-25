@@ -168,7 +168,9 @@ jobs:
         run: |
           set -euo pipefail
           now=$(date -u +%s)
-          if [ -n "$PUSHED_AT" ]; then
+          if [[ "$PUSHED_AT" =~ ^[0-9]+$ ]]; then
+            start=$PUSHED_AT  # a push payload sends pushed_at as epoch seconds; date -d refused it (11-25)
+          elif [ -n "$PUSHED_AT" ]; then
             start=$(date -u -d "$PUSHED_AT" +%s)
           else
             start=$now  # no push time in the payload: wait from now
@@ -227,6 +229,7 @@ jobs:
         run: |
           set -euo pipefail
           for f in cmd/carddb/main.py cmd/carddb/py/carddb/compliance.py \
+                   cmd/carddb/py/carddb/dirac.py cmd/carddb/py/carddb/docsstatus.py oracle/compliance/dirac-gaps.tsv GORGE_PIN go.mod \
                    cmd/carddb/py/carddb/release.py cmd/carddb/py/parquet_export.py \
                    carddb/schema/v1/_meta/size.tsv \
                    oracle/compliance/manifests Makefile; do
@@ -235,6 +238,10 @@ jobs:
               exit 1
             fi
           done
+          # the verb is new: a main checkout that predates it must fail here, not in the publish step
+          grep -q docs-sets cmd/carddb/py/carddb/cli.py || {
+            echo "::error::the writer ref has no docs-sets verb: promote the carddb change to main first"
+            exit 1; }
       - name: Clone the data branch and fix the run's date
         working-directory: tool
         shell: bash
@@ -305,6 +312,25 @@ jobs:
           set -euo pipefail
           python3 -I cmd/carddb/main.py compliance --repo "$GITHUB_WORKSPACE/tool" \
             --source ci --measured "$MEASURED" --version "$TOOL_REV"
+      # dirac's per-card support from the pinned gorge module's dirac/support lists
+      # and the committed lowering snapshot (go run ./cmd/diracsupport); runs after compliance.
+      # A snapshot at another GORGE_PIN is a warning (the last dirac rows stay), not a failed publish.
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: tool/go.mod
+          cache: false
+      - name: Dirac support and evidence writer
+        continue-on-error: true
+        working-directory: tool
+        run: |
+          set -euo pipefail
+          # a cold runner has no module cache: fetch gorge first (go list prints an empty Dir
+          # and exits 0 otherwise). A failed fetch leaves the dir empty and the verb warns
+          # and keeps the last dirac rows, so the rest of the publish still goes out.
+          go mod download github.com/adams-shaun/gorge || echo "::warning::go mod download of gorge failed"
+          CARDDB_GORGE_DIR=$(go list -m -f '{{.Dir}}' github.com/adams-shaun/gorge || true) \
+            python3 -I cmd/carddb/main.py dirac --repo "$GITHUB_WORKSPACE/tool" \
+            --source dirac --measured "$MEASURED" --version "$TOOL_REV"
       - name: Report the packed size into _meta/size
         working-directory: tool
         run: |
@@ -319,6 +345,51 @@ jobs:
         run: |
           set -euo pipefail
           python3 -I cmd/carddb/main.py build --out "$RUNNER_TEMP/carddb.sqlite"
+      # The docs site's per-set xproof snippet (sets.json, writers.json, sets-carddb.md) rides the
+      # docs-data branch next to status-A/B.jsonl and meta.json. ci.yml force-pushes that branch as an
+      # orphan commit, so this step fetches the branch first and adds only these three files on top of
+      # whatever is there (status files untouched); ci.yml's publish re-adds the three in turn.
+      # A dry run publishes nothing. A push that finds nothing changed commits nothing.
+      # Best effort: the docs snippet must never block the nightly release (a ci.yml force-push can
+      # land between this clone and push, or the network can fail), so a failure here only warns.
+      - name: Publish the per-set xproof snippet to docs-data
+        if: env.DRY_RUN != 'true'
+        continue-on-error: true
+        working-directory: tool
+        shell: bash
+        run: |
+          set -uo pipefail
+          out="$RUNNER_TEMP/docs-sets"
+          python3 -I cmd/carddb/main.py docs-sets --db "$RUNNER_TEMP/carddb.sqlite" --out "$out" || {
+            echo "::warning::docs-sets failed: the docs-data snippet is not updated"; exit 1; }
+          remote="https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git"
+          work="$RUNNER_TEMP/docs-data"
+          publish() {
+            rm -rf "$work"
+            rc=0
+            git ls-remote --exit-code --heads "$remote" docs-data >/dev/null 2>&1 || rc=$?
+            if [ "$rc" -eq 0 ]; then
+              git clone -q --depth 1 --branch docs-data "$remote" "$work" || return 1
+            elif [ "$rc" -eq 2 ]; then
+              git init -q -b docs-data "$work" || return 1   # exit 2: the branch does not exist yet
+            else
+              return 1  # the remote could not be read: never init an orphan over an existing branch
+            fi
+            cp "$out/sets.json" "$out/writers.json" "$out/sets-carddb.md" "$work/" || return 1
+            ( cd "$work" &&
+              git config user.name "github-actions[bot]" &&
+              git config user.email "41898283+github-actions[bot]@users.noreply.github.com" &&
+              git add sets.json writers.json sets-carddb.md &&
+              if git diff --cached --quiet; then
+                echo "docs-data: per-set snippet unchanged"
+              else
+                git commit -q -m "docs-data: per-set xproof snippet ${MEASURED}" &&
+                git push "$remote" docs-data:docs-data
+              fi )
+          }
+          # one retry: re-fetch and re-apply the three files if ci.yml's force-push won the race
+          publish || { echo "docs-data push failed, retrying once"; publish; } || {
+            echo "::warning::could not publish the per-set snippet to docs-data; the next run repairs it"; exit 1; }
       - name: Compress the SQLite
         run: |
           set -euo pipefail

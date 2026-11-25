@@ -115,6 +115,16 @@ func Generate(reg *cards.Registry, b *certdeck.Builder, card, key string, opt Op
 	if !known {
 		return Result{}, fmt.Errorf("scen: %q has no key %q", card, key)
 	}
+	// A Forge main face whose Oracle is the `<Unsupported Variant>` placeholder
+	// (Un-cards such as Garbage Elemental: the real card is one of the Variant:
+	// faces gorge never parses) is an empty shell gorge plays as a 0/0 that
+	// dies to state-based actions, while Forge lacks the card and XMage plays a
+	// variant: no engine comparison is meaningful. Refuse rather than generate.
+	for _, f := range c.Faces {
+		if strings.Contains(f.Oracle, "<Unsupported Variant>") {
+			return refuse("variant_only")
+		}
+	}
 	// A card XMage does not list is still generated: Forge is the reference
 	// oracle (operator 11-24), the XMage leg marks the item not_sent, and
 	// keyproof credits a Forge agreement with XMage silent (refs F). Refusing

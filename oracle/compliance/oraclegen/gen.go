@@ -1737,6 +1737,23 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			// std-pass note that XMage picks it unasked no longer holds).
 			as = targetDecisionAnswers(routing, i)
 		case "mode":
+			if d.Resume == "cipher" {
+				// Cipher's encode (CR 702.99a) is one KModes decision in gorge:
+				// no pick declines, one pick names the creature. XMage asks a
+				// boolean chooseUse, then (when encoding) the creature target;
+				// the numeric mode queue never sees it.
+				if len(d.PickRefs) == 0 {
+					as = append(as, XAnswer{d.Seat, "choice", "no"})
+					break
+				}
+				as = append(as, XAnswer{d.Seat, "choice", "yes"})
+				for k, ref := range d.PickRefs {
+					// The pick's label is "Encode on <name>"; the target
+					// queue matches the creature's own name.
+					as = append(as, XAnswer{d.Seat, "target", targetPickValue(d, k, oraclediffRefName(ref))})
+				}
+				break
+			}
 			if d.Resume == "play" {
 				// Optional Play effects (Discover, Cascade, and other carriers)
 				// are XMage chooseUse asks, not numeric mode choices. Gorge's
@@ -1858,6 +1875,15 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 			}
 			as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[yes]})
 		case "choose_n":
+			if die, _, ok := DieResultPick(d); ok {
+				// "Roll two d6 and choose one result" (Valiant Endeavor): XMage
+				// asks one chooseUse over the two results, true keeping the
+				// first die's. gorge's "die k: result r" label is no choice
+				// text, so it is left over, unconsumed. (XMage poses nothing
+				// when the dice tie; xprep drops that decision beforehand.)
+				as = append(as, XAnswer{d.Seat, "choice", map[bool]string{true: "yes", false: "no"}[die == 1]})
+				break
+			}
 			if d.Resume == "changezone_dest_alt" {
 				// gorge's DestinationAlternative ask (Dina's Guidance's "put it
 				// into your hand or graveyard"). XMage asks it as a boolean
@@ -1932,6 +1958,19 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				as = manaAllocationAnswers(d)
 				break
 			}
+			if d.Options == 1 && d.Min == 1 && d.Max == 1 && len(d.Picks) == 1 && pickKind(d, 0) == "trigger_cost_tap" {
+				// A triggered optional tap over ONE candidate (Spider-Man, To
+				// the Rescue's "you may tap it", the tap window's part.N == 1):
+				// XMage's card effect poses chooseUse(Outcome.Tap) and taps
+				// the source itself, so the boolean "yes" is the whole answer
+				// -- forwarding the pick's object label would desync the
+				// queue. hasCostPick keeps the ask out of the forced-fold; a
+				// decline keeps the driver's foldedOptionalAnswer FALSE
+				// default. A multi-candidate tap cost (Options > 1) or a Min-0
+				// dyn-tap election keeps its ordinary routing.
+				as = append(as, XAnswer{d.Seat, "choice", "yes"})
+				break
+			}
 			if pickKind(d, 0) == "trigger_cost_pay" && len(d.Picks) == 1 && nonManaTriggerCostPay(d) {
 				// The pay side of a triggered optional cost XMage poses as a
 				// chooseUse. Gorge elected the cost, so answer XMage's
@@ -2001,6 +2040,21 @@ func xanswersSetup(ds []rules.OracleDecision, steps int, modes map[string]int, c
 				// Hybrid/phyrexian halves are payment UI; XMage pays from
 				// the pool without asking.
 				continue
+			}
+			if staged, ok := stagedManaAllocationAnswers(d); ok {
+				// A cost-staged "any combination of colors" allocation
+				// (Conversion Apparatus's "Pay 3 energy: Add three mana in
+				// any combination of colors"): the cost stage poses the ask
+				// as a plain choose (no "mana_color" resume), so the
+				// allocation arms above never see it, and the pick labels
+				// carry the cost prefix. XMage's AddManaInAnyCombinationEffect
+				// poses the same "Distribute mana among colors" multi-amount
+				// for it as for a bare-resume allocation, and its AI answer
+				// distributes wherever it likes (xproof 11251811: gorge WWU,
+				// xmage WUB) -- so it takes the same WUBRG amount answers,
+				// zeroes included.
+				as = staged
+				break
 			}
 			if n := colourPickCount(d); n > 1 && n == len(d.Picks) {
 				// A multi-unit "any combination of colors" mana ability
@@ -2429,13 +2483,14 @@ func forcedSingleOption(d rules.OracleDecision) bool {
 }
 
 // hasCostPick reports whether any pick pays a cost through a chooser XMage
-// poses even when the choice is forced: a tap (Crew/Saddle), sacrifice or
-// exile cost. These picks name object identities, so they can never be the
+// poses even when the choice is forced: a tap (Crew/Saddle), a triggered
+// optional tap (Spider-Man, To the Rescue's "you may tap it"), a sacrifice or
+// an exile cost. These picks name object identities, so they can never be the
 // lone-label ask forcedSingleOption drops.
 func hasCostPick(d rules.OracleDecision) bool {
 	for _, k := range d.PickKinds {
 		switch k {
-		case "tapcost", "sacrifice", "exilecost":
+		case "tapcost", "trigger_cost_tap", "sacrifice", "exilecost":
 			return true
 		}
 	}
@@ -3464,6 +3519,11 @@ func triggerOrderNamesDistinct(d rules.OracleDecision) bool {
 		}
 		ref := d.PickRefs[k]
 		key := ref + "\x00" + strings.TrimSpace(triggerRule(d.Picks[k]))
+		if TriggerReadsEvent(d.Picks[k]) {
+			// Not interchangeable: each instance reads its own event (Abomination's
+			// "that many"), so the repeat is a pick the name cannot order.
+			key += "\x00" + strconv.Itoa(k)
+		}
 		if groups[key] {
 			continue
 		}
@@ -3551,7 +3611,8 @@ func triggerOrderTextAnswers(d rules.OracleDecision) []XAnswer {
 // to on a step that scripts other asks too: XMage's rule-text keys
 // (xmageTriggerOrderKeys) when the picks key apart, else the inert text form.
 // A key is consumed only by the trigger ask it steers (TestPlayer's
-// chooseTriggeredAbility matches getRule() by prefix) and names no object, so
+// chooseTriggeredAbility matches getRule() by prefix, or by containment for
+// a delayed trigger's timing-last rule text) and names no object, so
 // no other makeChoose takes it, which is the reason names are demoted at all.
 // The verbatim text form is not inert in strict mode: the order ask finds no
 // match and stops the replay at "Missing CHOICE def ... Triggered list"
