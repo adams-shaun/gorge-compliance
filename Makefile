@@ -872,6 +872,7 @@ smoke:
 	bash ops/scripts/tests/phase_sbv2_smoke.sh
 	bash ops/scripts/tests/manabrew_oracle_pin_smoke.sh
 	bash ops/scripts/tests/manabrew_oracle_run_smoke.sh
+	bash ops/scripts/tests/oracle_warm_smoke.sh
 	bash ops/scripts/tests/xengine_sweep_smoke.sh
 	bash ops/scripts/tests/xengine_random_smoke.sh
 	bash ops/scripts/tests/follower_check_smoke.sh
