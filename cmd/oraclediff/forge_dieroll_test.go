@@ -117,7 +117,10 @@ func TestForgeRolledDie(t *testing.T) {
 // replays the xproof Hurl Through Hell request.
 // 7d506c5192 = oracle/fpin-1125: f7b730149a merged with 26b4658101 (chooseCounterType peeks the counter-kind pick for a
 // RemoveCounter ask, driver-only), then with 244c590848 (the mayplay pin above); die-roll code unchanged.
-const forgeOracleDieRollRef = "7d506c5192e8bcf75b1f191f5a5e28d5a8219e20"
+// a6227e70a3 = 7d506c5192 plus cast_mode "evoked" (StepMachine.spellForMode picks the AlternativeCost.Evoke spell,
+// CR 702.74a); afe18881c6 = oracle/fpin-1125: a6227e70a3 joined with 3e6bd830a6 (the discard_may election,
+// ScriptedController.chooseCardsToDiscardFrom only); die-roll code unchanged.
+const forgeOracleDieRollRef = "afe18881c6e6327caf871661968865a495aaf3de"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads
