@@ -302,6 +302,12 @@ func continuousStaticKeyStart(reg *cards.Registry, b *certdeck.Builder, face *ca
 			return "no-generator:static:zone"
 		}
 	}
+	if zone == "Battlefield" && upkeepOrDraw(face) {
+		// The lowering refuses a battlefield card whose own upkeep or draw
+		// trigger would fire at the cut (lower.phaseTriggered), so the start
+		// would never be played: the key keeps a named refusal.
+		return "no-generator:static:upkeep-card"
+	}
 	placeCard(f, zone, card)
 	if len(plan.selfCounters) > 0 && zone != "Battlefield" {
 		return "no-generator:static:computed"
@@ -310,10 +316,10 @@ func continuousStaticKeyStart(reg *cards.Registry, b *certdeck.Builder, face *ca
 	if len(gates) > 0 && zone != "Battlefield" {
 		return "no-generator:static:computed"
 	}
-	f.Setup.P0.Counters = append(f.Setup.P0.Counters, plan.selfCounters...)
-	f.Setup.P0.Counters = append(f.Setup.P0.Counters, gates...)
+	f.Setup.P0.Counters = addSelfCounters(f.Setup.P0.Counters, plan.selfCounters)
+	f.Setup.P0.Counters = addSelfCounters(f.Setup.P0.Counters, gates)
 	for _, need := range plan.counts {
-		if placeCount(reg, b, card, need, f) == "" {
+		if n, _ := placeCount(reg, b, card, need, f); n == "" {
 			return "no-generator:static:computed"
 		}
 	}
@@ -674,6 +680,9 @@ func reduceCostKeyStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Fa
 		if !face.IsPermanent() {
 			return "no-generator:static:ReduceCost"
 		}
+		if upkeepOrDraw(face) {
+			return "no-generator:static:upkeep-card"
+		}
 		f.Setup.P0.Battlefield = []string{card}
 		name, sf, why := reduceCostSpell(reg, b, card, st, plan.amount)
 		if why != "" {
@@ -681,18 +690,26 @@ func reduceCostKeyStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Fa
 		}
 		spell, spellFace = name, sf
 	}
-	lands, ok := reducedLands(spellFace.ManaCost, plan.amount)
+	f.Setup.P0.Counters = addSelfCounters(f.Setup.P0.Counters, plan.selfCounters)
+	// A counted land the focus seat controls taps for mana too, which would
+	// pay for the spell without the reduction and leave the effect unread: the
+	// mana base drops one generic land per such object.
+	counted := 0
+	for _, need := range plan.counts {
+		n, s := placeCount(reg, b, spell, need, f)
+		if n == "" {
+			return "no-generator:static:computed"
+		}
+		if c, ok := reg.Lookup(n); ok && s == 0 && len(c.Faces) > 0 && c.Faces[0].IsLand() {
+			counted++
+		}
+	}
+	lands, ok := reducedLands(spellFace.ManaCost, plan.amount+counted)
 	if !ok {
 		return "no-generator:static:computed"
 	}
 	f.Setup.P0.Hand = []string{spell}
 	f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, lands...)
-	f.Setup.P0.Counters = append(f.Setup.P0.Counters, plan.selfCounters...)
-	for _, need := range plan.counts {
-		if placeCount(reg, b, spell, need, f) == "" {
-			return "no-generator:static:computed"
-		}
-	}
 	f.Focus = &StartFocus{Seat: seat(0), Card: spell, Kind: "cast"}
 	if spellFace.HasTypeWord("Aura") {
 		f.Setup.P0.Battlefield = append(f.Setup.P0.Battlefield, combatFixture)
@@ -796,7 +813,7 @@ func reduceCostPlan(face *cards.Face, st *cards.Static) (reducePlan, string) {
 		p.counts = append(p.counts, need)
 	}
 	if counter != "" {
-		p.selfCounters = append(p.selfCounters, StartCounter{Card: face.Name, Kind: counter, N: 1})
+		p.selfCounters = addSelfCounter(p.selfCounters, StartCounter{Card: face.Name, Kind: counter, N: 1})
 	}
 	return p, ""
 }
@@ -905,19 +922,62 @@ func addCount(c []countNeed, need countNeed) []countNeed {
 }
 
 // placeCount places one object of need's filter in need's zone and returns its
-// name, or "" when no fixture matches. The amount then reads one instead of
-// zero, which is all the start needs for the effect to show.
-func placeCount(reg *cards.Registry, b *certdeck.Builder, card string, need countNeed, f *StartFile) string {
+// name and the seat that holds it, or "" when no fixture matches. The amount
+// then reads one instead of zero, which is all the start needs for the effect
+// to show. A counter gate in the filter ("counters_GE1_OIL") is met by placing
+// the counters on the fixture; counters only persist on the battlefield, so a
+// gated count in another zone has no fixture.
+func placeCount(reg *cards.Registry, b *certdeck.Builder, card string, need countNeed, f *StartFile) (string, int) {
 	zone := need.zone
 	if zone == "" {
 		zone = "Battlefield"
 	}
-	name, s := countFixture(reg, b, card, need.filter, zone)
-	if name == "" {
-		return ""
+	name, s, gates := countFixture(reg, b, card, need.filter, zone)
+	if name == "" || len(gates) > 0 && zone != "Battlefield" {
+		return "", 0
 	}
 	placeInZone(f, s, zone, name)
-	return name
+	seat := &f.Setup.P0
+	if s == 1 {
+		seat = &f.Setup.P1
+	}
+	for _, g := range gates {
+		seat.Counters = addSelfCounter(seat.Counters, StartCounter{Card: name, Kind: g.kind, N: g.n})
+	}
+	return name, s
+}
+
+// addSelfCounter appends c unless the same permanent already carries that kind
+// of counter, keeping the larger amount. A start binds every counter row to a
+// distinct copy, so two rows for one card and kind would need two copies.
+func addSelfCounter(list []StartCounter, c StartCounter) []StartCounter {
+	for i, x := range list {
+		if x.Card == c.Card && strings.EqualFold(x.Kind, c.Kind) {
+			if c.N > x.N {
+				list[i].N = c.N
+			}
+			return list
+		}
+	}
+	return append(list, c)
+}
+
+// placeableCounterKind reports whether kind names one counter kind a start can
+// place; the wildcards a count may read ("ALL", "Any") name none.
+func placeableCounterKind(kind string) bool {
+	switch strings.ToLower(strings.TrimSpace(kind)) {
+	case "", "all", "any", "eachfromsource", "existingcounter":
+		return false
+	}
+	return true
+}
+
+// addSelfCounters is addSelfCounter for each of add.
+func addSelfCounters(list, add []StartCounter) []StartCounter {
+	for _, c := range add {
+		list = addSelfCounter(list, c)
+	}
+	return list
 }
 
 // addCompare appends field unless it is already listed.
@@ -961,7 +1021,7 @@ func staticObserved(st *cards.Static, face *cards.Face) (staticObserve, string) 
 			out.counts = addCount(out.counts, need)
 		}
 		if counter != "" {
-			out.selfCounters = append(out.selfCounters, StartCounter{Card: face.Name, Kind: counter, N: 1})
+			out.selfCounters = addSelfCounter(out.selfCounters, StartCounter{Card: face.Name, Kind: counter, N: 1})
 		}
 		observed = true
 	}
@@ -1022,7 +1082,7 @@ func countSource(v string, face *cards.Face) (need countNeed, counter string, ok
 		expr = rest
 	} else if rest, found := strings.CutPrefix(expr, "Count$CardCounters."); found {
 		rest = strings.TrimSpace(rest)
-		if rest == "" || strings.Contains(rest, "/") {
+		if !placeableCounterKind(rest) || strings.Contains(rest, "/") {
 			return countNeed{}, "", false
 		}
 		return countNeed{}, rest, true

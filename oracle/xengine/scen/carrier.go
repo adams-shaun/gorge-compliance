@@ -472,7 +472,13 @@ func zoneFixtureCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter s
 }
 
 func fixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter string, extra func(*cards.Face) bool, onBattlefield bool) (name string, seat int) {
-	if n, s := filterCarrier(reg, b, card, filter, extra); n != "" {
+	// Both passes refuse a FieldBlock card on the battlefield: the inert
+	// carrier pool is not filtered for it, and an unattached Aura or a
+	// non-permanent listed there aborts the whole start file.
+	first := func(f *cards.Face) bool {
+		return (!onBattlefield || FieldBlock(f) == "") && (extra == nil || extra(f))
+	}
+	if n, s := filterCarrier(reg, b, card, filter, first); n != "" {
 		return n, s
 	}
 	for _, a := range parseFilterStatic(filter) {
@@ -502,7 +508,10 @@ func fixtureCarrierIn(reg *cards.Registry, b *certdeck.Builder, card, filter str
 // show, so one fixture is placed. zone is where the counted object will be
 // placed; a battlefield count may not choose a FieldBlock card (an unattached
 // Aura would make the whole start file unplayable).
-func countFixture(reg *cards.Registry, b *certdeck.Builder, card, filter, zone string) (name string, seat int) {
+//
+// gates are the counters the chosen alternative requires ("counters_GE1_OIL"):
+// the fixture must carry them for the count to read it.
+func countFixture(reg *cards.Registry, b *certdeck.Builder, card, filter, zone string) (name string, seat int, gates []counterGate) {
 	onBattlefield := zone == "" || zone == "Battlefield"
 	for _, a := range parseFilterStatic(filter) {
 		if !a.known || a.self {
@@ -516,15 +525,15 @@ func countFixture(reg *cards.Registry, b *certdeck.Builder, card, filter, zone s
 		}
 		if n != "" {
 			if a.ctrl == ctrlOpp {
-				return n, 1
+				return n, 1, a.counters
 			}
-			return n, 0
+			return n, 0, a.counters
 		}
 	}
-	if n := landFixture(reg, b, filter); n != "" {
-		return n, 0
+	if n, g := landFixtureGated(reg, b, filter); n != "" {
+		return n, 0, g
 	}
-	return "", 0
+	return "", 0, nil
 }
 
 // landFixture is a land some non-Self, non-opponent alternative of filter
@@ -532,6 +541,13 @@ func countFixture(reg *cards.Registry, b *certdeck.Builder, card, filter, zone s
 // falling back to the least busy nonbasic land for a subtype a basic does not
 // have (a Gate, a Desert).
 func landFixture(reg *cards.Registry, b *certdeck.Builder, filter string) string {
+	n, _ := landFixtureGated(reg, b, filter)
+	return n
+}
+
+// landFixtureGated is landFixture and the counters the matching alternative
+// requires of the land.
+func landFixtureGated(reg *cards.Registry, b *certdeck.Builder, filter string) (string, []counterGate) {
 	for _, a := range parseFilterStatic(filter) {
 		if !a.known || a.self || a.ctrl == ctrlOpp {
 			continue
@@ -541,13 +557,13 @@ func landFixture(reg *cards.Registry, b *certdeck.Builder, filter string) string
 			if !ok || len(c.Faces) == 0 || !a.test(c.Faces[0]) {
 				continue
 			}
-			return basic
+			return basic, a.counters
 		}
 		if n := pickLandFixture(reg, b, a.test); n != "" {
-			return n
+			return n, a.counters
 		}
 	}
-	return ""
+	return "", nil
 }
 
 // pickLandFixture is the least busy playable nonbasic land keep accepts. The

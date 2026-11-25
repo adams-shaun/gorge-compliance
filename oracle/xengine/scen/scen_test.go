@@ -1146,20 +1146,58 @@ func TestStartstaticother(t *testing.T) {
 		}
 	})
 
-	// A grant whose activation cost removes spore counters: the carrier gets
-	// them, so the ability can be paid.
+	// A grant whose source has its own upkeep trigger: the lowering refuses a
+	// battlefield card whose upkeep trigger fires at the cut (playing the start
+	// gave exercised=0), so the key keeps a named refusal rather than a start
+	// that is never exercised.
 	t.Run("Sporoloth Ancient", func(t *testing.T) {
-		f := gen(t, "Sporoloth Ancient", "static#0.0")
-		found := false
+		refused(t, "Sporoloth Ancient", "static#0.0", "no-generator:static:upkeep-card")
+	})
+
+	// A computed amount over the source's own counters reads one counter kind
+	// once: two fields (AddPower, AddToughness) naming the same count place one
+	// counter row, since a start binds each row to a distinct copy.
+	t.Run("Boon of the Spirit Realm", func(t *testing.T) {
+		f := gen(t, "Boon of the Spirit Realm", "static#0.0")
+		seen := map[string]int{}
 		for _, c := range f.Setup.P0.Counters {
-			if c.Card != "Sporoloth Ancient" && c.Kind == "SPORE" && c.N >= 2 {
-				found = true
+			seen[c.Card+"/"+c.Kind]++
+		}
+		for k, n := range seen {
+			if n > 1 {
+				t.Errorf("counter row %s appears %d times in %+v", k, n, f.Setup.P0.Counters)
 			}
 		}
-		if !found {
-			t.Errorf("p0 counters %+v, want two SPORE counters on the granted carrier", f.Setup.P0.Counters)
+		if len(seen) == 0 {
+			t.Errorf("p0 counters empty, want a counter on the source")
 		}
 	})
+
+	// A wildcard counter kind is no counter a start can place.
+	t.Run("Hancock, Ghoulish Mayor", func(t *testing.T) {
+		refused(t, "Hancock, Ghoulish Mayor", "static#0.0", "no-generator:static:computed")
+	})
+
+	// A counted filter that carries a counter gate gets the counters on its
+	// fixture: without them the count reads zero and the cost is not reduced.
+	for _, c := range []struct{ card, key, kind string }{
+		{"Cinderslash Ravager", "static#0.0", "OIL"},
+		{"Hamza, Guardian of Arashin", "static#0.0", "P1P1"},
+		{"Eluge, the Shoreless Sea", "static#0.1", "FLOOD"},
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			f := gen(t, c.card, c.key)
+			found := false
+			for _, k := range f.Setup.P0.Counters {
+				if k.Card != c.card && k.Kind == c.kind && k.N >= 1 {
+					found = true
+				}
+			}
+			if !found {
+				t.Errorf("p0 counters %+v, want a %s counter on the counted fixture", f.Setup.P0.Counters, c.kind)
+			}
+		})
+	}
 
 	// A grant whose activation cost discards a card: the start holds fodder.
 	t.Run("Hollowhead Sliver", func(t *testing.T) {
