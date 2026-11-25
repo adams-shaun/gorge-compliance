@@ -238,7 +238,8 @@ func TestForgeRolledDie(t *testing.T) {
 // af167fe93c3 = 495ed200e9f plus the setup life written before any permanent exists (SetupBuilder.placeLife, SetupLifeReplacementTest);
 // die-roll code unchanged, ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
 // 18e28a7af59 = oracle/fpin-1125-join-setup-life: d38946a0fd9 merged with af167fe93c3, no textual conflicts; die-roll code unchanged.
-const forgeOracleDieRollRef = "18e28a7af594ff52b3afb24599668b21fef7306f"
+// 64be1e6a7fe = oracle/fpin-1125-join-setup-life-untap: 18e28a7af59 merged with f3065a4da86 (untap election); die-roll code unchanged.
+const forgeOracleDieRollRef = "64be1e6a7fe9e89c230cd66c6480f45b8091c9f5"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

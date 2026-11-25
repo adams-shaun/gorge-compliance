@@ -938,7 +938,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # (the two sides touch disjoint files except SetupBuilder, which auto-merged). SetupLifeReplacementTest runs at this pin via
 # scripts/forge-oracle-test-setup-life-replacement.sh (make forge-driver-tests). Driver-only; die-roll code, cardsfolder and tokenscripts
 # unchanged (same as FORGE_REF ff076d4432). Fork branch oracle/fpin-1125-join-setup-life.
-FORGE_ORACLE_REF ?= 18e28a7af594ff52b3afb24599668b21fef7306f
+# 64be1e6a7fe = oracle/fpin-1125-join-setup-life-untap: 18e28a7af59 (above) merged with f3065a4da86 (the unbound optional-untap election answered at
+# the ask, 53635f189cc), closing the NOTE above: one pin now carries the ability-target ref, setup player_counters, the setup-life fix and the
+# untap election, so every scripts/forge-oracle-test-*.sh (UntapElectionTest included) runs green in make forge-driver-tests. No textual
+# conflicts beyond an auto-merge of StepMachine; driver-only, die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 64be1e6a7fe9e89c230cd66c6480f45b8091c9f5
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
