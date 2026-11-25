@@ -174,7 +174,11 @@ func rankKey(target, name string) uint64 {
 }
 
 // Build is the two decks that certify target (a card name), for needs (nil:
-// Derive's).
+// Derive's). The target need not be one XMage lists: Forge is the reference
+// oracle, and a scenario for a card the XMage fork predates is still generated
+// (xprep marks its XMage leg not_sent from the manifests). Every enabler and
+// filler card must still be listed (playable), so the deck XMage does receive
+// is playable there.
 func (b *Builder) Build(target string, needs []Need) (*Plan, error) {
 	tc, ok := b.Reg.Lookup(target)
 	if !ok || len(tc.Faces) == 0 {
@@ -184,9 +188,7 @@ func (b *Builder) Build(target string, needs []Need) (*Plan, error) {
 	if u := b.Reg.Unsupported(tc, b.sup); len(u) > 0 {
 		return nil, fmt.Errorf("certdeck: gorge does not fully support %q: %v", name, u)
 	}
-	if xm, ok := b.Sp.XMage(b.Reg, name); !ok {
-		return nil, fmt.Errorf("certdeck: XMage lists no card %q", name)
-	} else if xm != name {
+	if xm, ok := b.Sp.XMage(b.Reg, name); ok && xm != name {
 		// A split, adventure or Room card: XMage lists it under every face
 		// ("Cut // Ribbons") and `play -decks -xmage` skips a deck that names
 		// the front face alone, so no deck can seat it there.
