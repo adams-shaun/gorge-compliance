@@ -222,7 +222,11 @@ func TestForgeRolledDie(t *testing.T) {
 // ForcedCoinFlipTest re-run green on the pin (run-unit-tests.sh, 18 tests).
 // 686e3f82713 = oracle/fpin-1125-join17: join15 (9124c696744, join14 plus the altaddcost tap ability choice) merged with
 // 6095b085edc (above), no textual conflicts; die-roll code unchanged, ForcedDieRollTest re-run green on the pin.
-const forgeOracleDieRollRef = "686e3f827135f1739b173ba77cd861541c8229ee"
+// 0ca7a220bd0 = oracle/fpin-1125-join18 tip: join17 (above) merged with join16 (852c41880dd, the Speedball optional
+// ChangeTargets confirm regression test) and a2954de67aa / 0ca7a220bd0 (the no-legal-new-target guard and its review r1
+// retarget-count fix, ChangeTargetsNoCandidateTest), no textual conflicts; die-roll code unchanged, ForcedDieRollTest
+// re-run green on the pin (run-unit-tests.sh).
+const forgeOracleDieRollRef = "0ca7a220bd062378c47507a604a7e95bfa490e8b"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

@@ -881,7 +881,13 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # textual conflicts (ScriptedController.java and StepMachine.java touch different areas; merge tree 83e433b219b). FaceDownCastModeTest,
 # TapTypeAbilityChoiceTest and ForcedDieRollTest run together at this pin (11 tests, 0 failures). Driver-only; die-roll code,
 # cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 686e3f827135f1739b173ba77cd861541c8229ee
+# 0ca7a220bd0 = oracle/fpin-1125-join18 tip: 3405b168dc3 (join17 above merged with join16 852c41880dd, which is 0aee1572747's
+# Speedball optional ChangeTargets confirm regression test: ChangeTargetsConfirmTest runs six tests at this pin, the sixth
+# speedballTriggerChangeTargetsConfirmConsumesTheRetargetPick) merged with a2954de67aa (no legal new target keeps the targets,
+# ChangeTargetsNoCandidateTest) and 0ca7a220bd0 (the retarget count excludes the current target; review r1, xpt-5b82851f), no
+# textual conflicts (ScriptedController.java: the join16/join17 confirm rule and the no-candidate guard touch different areas).
+# Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 0ca7a220bd062378c47507a604a7e95bfa490e8b
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
