@@ -876,12 +876,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-change-targets-no-candidate.
 # 61ff36086c = oracle/fpin-1125-join18: join17 (686e3f82713, join15 + the face-down cast modes 6095b085edc) merged with
 # join16 (852c41880dd, join15 + the Speedball optional ChangeTargets confirm 0aee1572747, review of cli-20261125T132000Z-b46ca2c9)
-# and with a2954de67aa (the no-legal-new-target answer above, with the r1 review follow-up 61ff36086c: the candidate count
-# excludes the declaration's current targets, and a second fixture, deflection-volley-second-flyer-still-miss.jsonl, pins that a
-# legal new target with no gorge decision is still a miss), no textual conflicts (ScriptedController.java auto-merged). The
+# and with a2954de67aa (the no-legal-new-target answer above), no textual conflicts (ScriptedController.java auto-merged). The
 # ChangeTargets tests, TapTypeAbilityChoiceTest and the join14/15 driver tests run together at this pin. Driver-only; die-roll
 # code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-FORGE_ORACLE_REF ?= 61ff36086cd756e0b49d28d5b774dd61c9792d3f
+# 0ca7a220bd = 61ff36086c + the r1 review follow-up: the candidate count excludes the declaration's current targets (Forge's
+# own selection clears them first, PlayerControllerHuman.chooseNewTargetsFor, so it does not; but re-picking the old target
+# leaves the game unchanged), and a second fixture, deflection-volley-second-flyer-still-miss.jsonl, pins that a legal new
+# target with no gorge decision is still a miss (ChangeTargetsNoCandidateTest.legalNewTargetWithNoGorgeDecisionIsStillAMiss,
+# 2 tests now). Driver-only; cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 0ca7a220bd062378c47507a604a7e95bfa490e8b
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

@@ -42,10 +42,10 @@ FORGE_ORACLE_DIR=$forge FORGE_ORACLE_JDK=$jdk \
 
 # TestNG can exit zero with no executed test (a pin that predates or renames
 # the class): assert each named test passed, not just the exit status.
-for t in targetlessSpellDeclinesTheConfirm targetedSpellConsumesTheRetargetDecision targetedSpellAppliesTheRetargetPick targetedSpellConsumesTheQueuedYesNo targetedSpellWithoutAnAnswerStaysStrictMiss; do
+for t in targetlessSpellDeclinesTheConfirm targetedSpellConsumesTheRetargetDecision targetedSpellAppliesTheRetargetPick targetedSpellConsumesTheQueuedYesNo targetedSpellWithoutAnAnswerStaysStrictMiss speedballTriggerChangeTargetsConfirmConsumesTheRetargetPick; do
   grep -qx "PASS ChangeTargetsConfirmTest\.$t" "$log" || fail "ChangeTargetsConfirmTest.$t did not pass; the pinned driver is missing the empty Optional\$ ChangeTargets confirm fix"
 done
-want=5
+want=6
 passes=$(grep -c '^PASS ChangeTargetsConfirmTest\.' "$log" || true)
 [ "$passes" -eq "$want" ] || fail "ChangeTargetsConfirmTest passed $passes tests, want $want"
 grep -q "Total tests run: $want, Passes: $want, Failures: 0" "$log" || fail "TestNG summary is not $want run / $want passes / 0 failures"
