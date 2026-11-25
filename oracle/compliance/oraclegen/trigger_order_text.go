@@ -1,6 +1,7 @@
 package oraclegen
 
 import (
+	"regexp"
 	"strings"
 
 	"github.com/adams-shaun/gorge/engine/rules"
@@ -128,4 +129,29 @@ func xmageTriggerRuleText(text, source string) string {
 		text = flavorHeader(text[:i+len(" — ")]) + text[i+len(" — "):]
 	}
 	return text
+}
+
+// eventReference names the words of a trigger's EFFECT that point back at the
+// event that triggered it ("put that many counters", "return it", "its
+// controller", "them"). A trigger whose resolution reads its event resolves
+// differently per instance (Abomination's three combat-damage triggers each
+// carry a different damage amount), so two picks of one ref and one rule text
+// are NOT interchangeable: the pick says nothing of which instance goes first.
+var eventReference = regexp.MustCompile(`(?i)\b(that|those|it|its|them|their|he|she|his|her)\b`)
+
+// TriggerReadsEvent reports whether the trigger labelled label (gorge's
+// "<Source>: <rule text>") reads its triggering event. The condition (up to
+// the first ", ") is excluded -- "a spell you cast" is the event being
+// described, not read -- and only the effect is searched. A keyword label
+// ("Prowess") has no effect text and reads nothing. Conservative: a false
+// positive keeps the harness excuse for a repeated pick, a false negative
+// compares an order the follower chose itself.
+func TriggerReadsEvent(label string) bool {
+	text := strings.TrimSpace(triggerRule(label))
+	if i := strings.Index(text, ", "); i >= 0 {
+		text = text[i+2:]
+	} else {
+		return false
+	}
+	return eventReference.MatchString(text)
 }

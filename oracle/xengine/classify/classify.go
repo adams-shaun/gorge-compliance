@@ -184,7 +184,8 @@ func Classify(item lower.Lowered, t *game.Tape, g rules.OracleResult, x oracledi
 			who = engine // CompareOpts names the follower "xmage" whichever it is
 		}
 		f.Class, f.Msg = ClassHarness, who+": "+v.Msg
-	case (x.StrictMiss != "" || x.Leftover != "") && !trailingMiss(x, len(item.Item.Steps), fl):
+	case (x.StrictMiss != "" || x.Leftover != "") && !trailingMiss(x, len(item.Item.Steps), fl) &&
+		sameNameTriggerOrder(item, g, v, f.Step, fl) == "":
 		f.Class = ClassDecisionShape
 		f.Msg = strings.TrimSpace("strict_miss: " + x.StrictMiss + " leftover: " + x.Leftover)
 	case v.Status == oraclediff.Agree:
@@ -594,7 +595,13 @@ func triggerOrderInterchangeable(picks, texts []string, j, k int) bool {
 	if j >= len(picks) || k >= len(picks) || picks[j] != picks[k] {
 		return false
 	}
-	return texts != nil && j < len(texts) && k < len(texts) && texts[j] == texts[k]
+	if texts == nil || j >= len(texts) || k >= len(texts) || texts[j] != texts[k] {
+		return false
+	}
+	// Unobservable only while each instance resolves alike. A trigger that reads
+	// its event (Abomination's "that many") resolves differently per instance,
+	// and the pick cannot say which instance goes first.
+	return !oraclegen.TriggerReadsEvent(texts[j])
 }
 
 // paymentChoice reports a pool-only difference on the paying seat at or right
