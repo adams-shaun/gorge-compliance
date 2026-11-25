@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1d95b5c0-d193-4a03-9954-23861ac1c762	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ghost-spider-gwen-stacy:f0t0:s1,f:xs:XP:ghost-spider-gwen-stacy:f0t0:s1	-	-	-	8c0bd19283bb	-	2cd9d5a6e235	-	-	2026-11-24	xproof
 1d9aeaaa-66f6-41cb-9bac-162d6fd8662c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:talisman-of-indulgence:cast:s1,f:xs:XP:talisman-of-indulgence:cast:s1	-	-	-	25696bf19d5b	-	a79f88f524db	-	-	2026-11-24	xproof
 1d9aeaaa-66f6-41cb-9bac-162d6fd8662c	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:talisman-of-indulgence:f0a0:s1,f:xs:XP:talisman-of-indulgence:f0a0:s1	-	-	-	c2272f704fde	-	a79f88f524db	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
-1d9aeaaa-66f6-41cb-9bac-162d6fd8662c	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+1d9aeaaa-66f6-41cb-9bac-162d6fd8662c	f0/a1	Mana	owed	harness	-	start	0	0	-	-	-	-	336eab778104	-	a79f88f524db	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 1d9b94af-3bfa-4257-8347-675468f0b0e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shenanigans:cast:s1,f:xs:XP:shenanigans:cast:s1	-	-	-	d864b561c9cb	-	899c2a8ca262	-	-	2026-11-24	xproof
 1d9bd0a5-3ba0-44e5-9cb3-966f6b9dc14a	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:ravenous-baboons:cast:s1,f:xs:XP:ravenous-baboons:cast:s1	-	-	-	5f2128bf97e4	-	2b1f688ebb24	-	-	2026-11-24	xproof
 1d9bd0a5-3ba0-44e5-9cb3-966f6b9dc14a	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:ravenous-baboons:cast:s1,f:xs:XP:ravenous-baboons:cast:s1	-	-	-	5f2128bf97e4	-	2b1f688ebb24	-	-	2026-11-24	xproof
@@ -164,7 +164,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1dce1f39-eacb-4d29-899b-55569284c7ed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dd336b0-9b13-4180-b80a-e8ba5d63d04f	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:disinformation-campaign:cast:s1,f:xs:XP:disinformation-campaign:cast:s1	-	-	-	d864b561c9cb	-	ca7fb1e92843	-	-	2026-11-24	xproof
 1dd336b0-9b13-4180-b80a-e8ba5d63d04f	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:disinformation-campaign:cast:s1,f:xs:XP:disinformation-campaign:cast:s1	-	-	-	d864b561c9cb	-	ca7fb1e92843	-	-	2026-11-24	xproof
-1dd336b0-9b13-4180-b80a-e8ba5d63d04f	f0/t1	NULL	owed	refused:no-generator:trigger:Surveil	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+1dd336b0-9b13-4180-b80a-e8ba5d63d04f	f0/t1	NULL	owed	refused:no-generator:trigger:Surveil	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 1dd64972-5713-4c25-b7a5-a35a56886ef4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dd6df3f-eac4-4f30-b832-4a3f3a97632f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1dd6df3f-eac4-4f30-b832-4a3f3a97632f	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof

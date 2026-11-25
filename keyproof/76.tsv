@@ -22,8 +22,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7616dacf-44e2-4b03-b120-875cc2e50ea5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7616e834-4852-40c8-9de6-d89f96119f12	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vraska-regal-gorgon:cast:s1,f:xs:XP:vraska-regal-gorgon:cast:s1	-	-	-	d864b561c9cb	-	3335a89245ae	-	-	2026-11-24	xproof
 7616e834-4852-40c8-9de6-d89f96119f12	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:vraska-regal-gorgon:cast:s1,f:xs:XP:vraska-regal-gorgon:cast:s1	-	-	-	d864b561c9cb	-	3335a89245ae	-	-	2026-11-24	xproof
-7616e834-4852-40c8-9de6-d89f96119f12	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-7616e834-4852-40c8-9de6-d89f96119f12	f0/a2	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+7616e834-4852-40c8-9de6-d89f96119f12	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:vraska-regal-gorgon:f0a1:s1,f:xs:XP:vraska-regal-gorgon:f0a1:s1	-	-	-	336eab778104	-	3335a89245ae	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
+7616e834-4852-40c8-9de6-d89f96119f12	f0/a2	PutCounterAll	agreed	-	FX	start	2	0	x:xs:XP:vraska-regal-gorgon:f0a2:s1,f:xs:XP:vraska-regal-gorgon:f0a2:s1	-	-	-	336eab778104	-	3335a89245ae	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 761bb894-d3f9-4248-af76-1559c502e342	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 761bb894-d3f9-4248-af76-1559c502e342	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 761bb894-d3f9-4248-af76-1559c502e342	f0/a1	GainLife	agreed	-	FX	start	2	0	x:xs:XP:teferi-timebender:f0a1:s1,f:xs:XP:teferi-timebender:f0a1:s1	-	-	-	336eab778104	-	539ff62cf5bc	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
@@ -144,7 +144,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 76b003e0-15af-4f22-bdf2-1ade5430964a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zulaport-cutthroat:cast:s1,f:xs:XP:zulaport-cutthroat:cast:s1	-	-	-	d864b561c9cb	-	336c8ee32a68	-	-	2026-11-24	xproof
 76b003e0-15af-4f22-bdf2-1ade5430964a	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:zulaport-cutthroat:f0t0:s1,f:xs:XP:zulaport-cutthroat:f0t0:s1	-	-	-	d864b561c9cb	-	336c8ee32a68	-	-	2026-11-24	xproof
 76b65b2a-9905-4857-806a-6dbcf195fc81	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-76b709ae-5765-4b7a-99c9-89eade7c8cb8	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
+76b709ae-5765-4b7a-99c9-89eade7c8cb8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quasiduplicate:cast:s1,f:xs:XP:quasiduplicate:cast:s1	-	-	-	336eab778104	-	ebd724fb5381	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 76b7e1ee-43f0-4b56-822a-71b064c9201b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dathon-and-picard-at-el-adrel:cast:s1,f:xs:XP:dathon-and-picard-at-el-adrel:cast:s1	-	-	-	fb9d3088f0bf	-	82ed6baf85ff	43e83011cb41f46b9a9d742fb579ff0e9ec0e2ae	66671165f315fd9166baa92751ec18cf2ec89319	2026-11-25	xproof
 76bbd280-dcbc-43b3-a8a1-603443b2ccaa	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 76bbd280-dcbc-43b3-a8a1-603443b2ccaa	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

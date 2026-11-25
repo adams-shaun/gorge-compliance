@@ -100,7 +100,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 507c2921-7070-482d-8754-dc667e3315bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 507c2921-7070-482d-8754-dc667e3315bd	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:deeproot-champion:f0t0:s1,f:xs:XP:deeproot-champion:f0t0:s1	-	-	-	336eab778104	-	1bf9e0a33053	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 507d2f27-08a9-4938-b191-5734cda42ef2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-507d2f27-08a9-4938-b191-5734cda42ef2	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+507d2f27-08a9-4938-b191-5734cda42ef2	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:angelic-exaltation:f0t0:s1,f:xs:XP:angelic-exaltation:f0t0:s1	-	-	-	336eab778104	-	42fb92bbe3fe	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 507fc71d-0dfc-4bfe-bc71-de88162c39a1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 507fc71d-0dfc-4bfe-bc71-de88162c39a1	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:iron-man-modern-marvel:f0t0:s1,f:xs:XP:iron-man-modern-marvel:f0t0:s1	-	-	-	23c4009444b0	-	2a761e1a9737	-	-	2026-11-25	xproof
 507ffc26-6c45-4167-9e0d-3c88b065720a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -187,7 +187,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 50d0d870-fe3d-44a2-ad6e-93307a1fb468	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:ace-fearless-rebel:f0t0:s1,f:xs:XP:ace-fearless-rebel:f0t0:s1	-	-	-	8c0bd19283bb	-	51f0e50eb4ba	-	-	2026-11-24	xproof
 50d33663-5d83-4e3c-9ed7-074fe29a9fc8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:cartographer:f0t0:s1,f:xs:XP:cartographer:f0t0:s1	-	-	-	5f2128bf97e4	-	08de24661129	-	-	2026-11-24	xproof
 50d33663-5d83-4e3c-9ed7-074fe29a9fc8	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cartographer:f0t0:s1,f:xs:XP:cartographer:f0t0:s1	-	-	-	5f2128bf97e4	-	08de24661129	-	-	2026-11-24	xproof
-50d6cadc-07e4-479e-90f4-e3a20f769bab	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Susur Secundi, Void Altar/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+50d6cadc-07e4-479e-90f4-e3a20f769bab	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:susur-secundi-void-altar:f0a0:s1,f:xs:XP:susur-secundi-void-altar:f0a0:s1	-	-	-	336eab778104	-	3f27bd14445b	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 50d6cadc-07e4-479e-90f4-e3a20f769bab	land	land	agreed	-	FX	start	2	0	x:xs:XP:susur-secundi-void-altar:land:s1,f:xs:XP:susur-secundi-void-altar:land:s1	-	-	-	23c4009444b0	-	3f27bd14445b	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 50d6cadc-07e4-479e-90f4-e3a20f769bab	static#0.0	static#0.0	agreed	-	X	scen	1	0	Susur Secundi, Void Altar/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 50d6fd91-23d3-4d32-804f-6233e4386904	cast	cast-resolve	agreed	-	FX	scen	2	0	Ouroboroid/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

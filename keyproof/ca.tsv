@@ -13,9 +13,9 @@ ca130ba1-a4a8-4225-9799-75d56bac6fb3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 ca130ba1-a4a8-4225-9799-75d56bac6fb3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:watchful-blisterzoa:f0t0:s1,f:xs:XP:watchful-blisterzoa:f0t0:s1	-	-	-	ae86f6029288	-	2cc699121d69	-	-	2026-11-24	xproof
 ca13dda2-fbb0-4b6b-9126-3c8df04dee2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 ca13dda2-fbb0-4b6b-9126-3c8df04dee2b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ca13dda2-fbb0-4b6b-9126-3c8df04dee2b	f0/a1	NULL	owed	refused:steps-needed:cost:WU	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ca13dda2-fbb0-4b6b-9126-3c8df04dee2b	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 ca14f1b6-e8c2-4ea5-9375-5ed63f355052	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-ca14f1b6-e8c2-4ea5-9375-5ed63f355052	f0/t0	NULL	owed	refused:no-generator:trigger:Surveil	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+ca14f1b6-e8c2-4ea5-9375-5ed63f355052	f0/t0	NULL	owed	refused:no-generator:trigger:Surveil	-	start	0	0	-	-	-	-	336eab778104	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 ca16b735-26c7-4d0b-959b-b031f6cb376e	cast	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ca16b735-26c7-4d0b-959b-b031f6cb376e	f0/a0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 ca16b735-26c7-4d0b-959b-b031f6cb376e	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -121,7 +121,7 @@ cab2bc93-f38b-4301-ac42-05765615586b	cast	cast-resolve	agreed	-	FX	scen	2	0	Edga
 cab2bc93-f38b-4301-ac42-05765615586b	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Edgar, Ancient Bloodlord/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cab2bc93-f38b-4301-ac42-05765615586b	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Edgar, Ancient Bloodlord/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cab305d9-27fb-4a41-adf1-892e15167cb9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cab305d9-27fb-4a41-adf1-892e15167cb9	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+cab305d9-27fb-4a41-adf1-892e15167cb9	f0/t0	SpellCast	agreed	-	FX	start	2	0	x:xs:XP:drowned-secrets:f0t0:s1,f:xs:XP:drowned-secrets:f0t0:s1	-	-	-	336eab778104	-	8eca1921029f	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 cab67380-4e1a-4210-a98b-d2a21022b4b7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cab67380-4e1a-4210-a98b-d2a21022b4b7	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cab718af-8e6f-4766-856e-3a61ba98f94d	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:qo-nos:f0a0:s1,f:xs:XP:qo-nos:f0a0:s1	-	-	-	c2272f704fde	-	d0c05bf2b6d5	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
