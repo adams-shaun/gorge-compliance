@@ -690,7 +690,14 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-dual-colour-on-fpin-65d8.
 # 34f0585c97 = oracle/fpin-1125: 85e4e85fde (dual-land colour; above) joined with e99e48e2b5 (Gitrog lone forced pick; above); driver-only.
 # 0fe8c90e549 = oracle/fpin-1125-attach: 34f0585c97 (fpin-1125; above) joined with 931d6309cc3 (attach_optional; above); driver-only.
-FORGE_ORACLE_REF ?= 0fe8c90e54982c8b09ba42dbdda594de9e15ae30
+# 1707ccc4018 = 0fe8c90e549 plus K'rrik's "pay 2 life rather than {B}" (xproof cluster xpt-eaa38e91, Muck Rats under K'rrik, Son of Yawgmoth):
+# ScriptedController.payPhyrexianWithLife paid only Phyrexian pips with life, so gorge's pay_life pick on a plain {B} pip was never taken,
+# the cost stayed unpaid and the cast was refused "was not put on the stack". While the player has PayLifeInsteadOf:B (CR 601.2h, 118.9)
+# the pick now drops one black shard and pays 2 life, as Forge's ComputerUtilMana and InputPayManaOfCostPayment do; no pick, no life.
+# PhyrexianLifePaymentTest.krrikPaysTheBlackPipWithTwoLife (fails on 0fe8c90e549) and a no-pick control, run by
+# scripts/forge-oracle-test-krrik-life-instead-of-b.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts unchanged.
+# Fork branch fix/xp-forge-driver-krrik-life-instead-of-b (PR adams-shaun/forge#12).
+FORGE_ORACLE_REF ?= 1707ccc4018b9131c5bf3322637311f194d8a93e
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

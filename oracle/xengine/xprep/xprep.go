@@ -1230,7 +1230,17 @@ func prefixes(reg *cards.Registry, it oraclegen.Item, g rules.OracleResult) ([]s
 		}
 		switch sa, kind := oraclegen.ResolveActivatedAbility(reg, it, i, st, g); kind {
 		case oraclegen.ActivatedGranted:
-			p, ok := oraclegen.XMageGrantedAbilityPrefix(sa, abilitySourceName(st))
+			// The recipient's own texts decide whether the cost alone selects
+			// the granted ability: "{T}" also starts an Island's "{T}: Add {U}.".
+			var recipient *cards.Face
+			if c, face, ok := stepCard(reg, it, st); ok {
+				recipient = c.Faces[face]
+			} else if isTokenRef(st.Card) {
+				if tf, ok := oraclegen.TokenStepFace(reg, it, i, st, g); ok {
+					recipient = tf
+				}
+			}
+			p, ok := oraclegen.XMageGrantedAbilityPrefix(sa, abilitySourceName(st), recipient)
 			if !ok {
 				return nil, refuse(it.ID, ReasonAbilityUnknown, "step %d activates %q by granted-ability label %q, whose XMage rule text is unknown", i, st.Card, st.Ability)
 			}

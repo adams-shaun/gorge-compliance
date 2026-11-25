@@ -1779,3 +1779,43 @@ func TestPrepareKeepsLoweredTargetSkips(t *testing.T) {
 		t.Fatalf("a retargeted cast kept the stale plan %v", it.XTargetSkips[0])
 	}
 }
+
+// TestPrefixesGrantedAbilityOnLand: Mu Yanling, Sky Dancer's -8 emblem gives
+// Islands "{T}: Draw a card.", and the follow-up step activates the Island by
+// that granted label (xproof cluster follower-only:xmage:mu-yanling-sky-dancer
+// :f0a2:p0.pool). The granted cost "{T}" alone is also the start of the
+// Island's own "{T}: Add {U}.", which XMage's startsWith selection would tap
+// for mana, so the prefix must not be a prefix of that mana text.
+func TestPrefixesGrantedAbilityOnLand(t *testing.T) {
+	const card = "Mu Yanling, Sky Dancer"
+	reg := testutil.CorpusRegistry(t)
+	two, zero := 2, 0
+	it := oraclegen.Item{
+		ID: "xe:test:mu-yanling-emblem-island",
+		Scenario: oraclegen.Scenario{
+			Setup: map[string]oraclegen.Seat{"p0": {
+				Battlefield: []string{card, "Island"},
+				Counters:    map[string]map[string]int32{card: {"LOYALTY": 6}},
+				Library:     []string{"Island", "Island", "Island", "Island", "Island"},
+			}},
+			Steps: []oraclegen.Step{
+				{Op: "activate", Seat: 0, Card: "p0:" + card, AbilityIndex: &two},
+				{Op: "pass", Seat: 0},
+				{Op: "pass", Seat: 1},
+				{Op: "activate", Seat: 0, Card: "p0:Island", AbilityIndex: &zero, Ability: "Island: Draw a card."},
+			},
+		},
+	}
+	g, err := rules.RunOracleScenarioJSON(reg, it.Raw())
+	if err != nil || len(g.Fails) != 0 {
+		t.Fatalf("gorge replay: err %v fails %v", err, g.Fails)
+	}
+	got, ref := prefixes(reg, it, g)
+	if ref != nil {
+		t.Fatalf("prefixes refused the granted Island step: %+v", ref)
+	}
+	const mana = "{T}: Add {U}."
+	if p := got[3]; p == "" || strings.HasPrefix(mana, p) || !strings.HasPrefix("{T}: Draw a card.", p) {
+		t.Fatalf("granted Island step prefix = %q, want a prefix of \"{T}: Draw a card.\" that is not a prefix of %q", p, mana)
+	}
+}
