@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c158405-d3ef-4c10-a504-7b061ef71a74	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c158405-d3ef-4c10-a504-7b061ef71a74	f0/a0	Phases	agreed	-	F	start	2	0	f:xs:XP:rainbow-efreet:f0a0:s1	-	-	-	ea3140b6974b	-	dda1652dd28b	-	-	2026-11-24	xproof
 7c179e54-3beb-4761-bddf-41fa98b082db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:driver-of-the-dead:cast:s1,f:xs:XP:driver-of-the-dead:cast:s1	-	-	-	8c0bd19283bb	-	13edcad9a7a6	-	-	2026-11-24	xproof
-7c179e54-3beb-4761-bddf-41fa98b082db	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Driver of the Dead/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7c179e54-3beb-4761-bddf-41fa98b082db	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:driver-of-the-dead:f0t0:s1,f:xs:XP:driver-of-the-dead:f0t0:s1	-	-	-	23b491658465	-	13edcad9a7a6	-	-	2026-11-24	xproof
 7c1890cf-36db-4720-a472-9158bdc0d8aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:isolation-zone:f0t0:s1,f:xs:XP:isolation-zone:f0t0:s1	-	-	-	d864b561c9cb	-	2af8f07f8300	-	-	2026-11-24	xproof
 7c1890cf-36db-4720-a472-9158bdc0d8aa	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:isolation-zone:f0t0:s1,f:xs:XP:isolation-zone:f0t0:s1	-	-	-	d864b561c9cb	-	2af8f07f8300	-	-	2026-11-24	xproof
 7c1eb874-97f3-463f-bf4e-4d82dcc16e69	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:case-of-the-burning-masks:f0t0:s2,f:xs:XP:case-of-the-burning-masks:f0t0:s2	-	-	-	e07cf3a05ba5	-	845f72216f74	-	-	2026-11-24	xproof
@@ -53,8 +53,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c427c3d-ecd8-45ef-bebd-8f10f4a311db	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c427c3d-ecd8-45ef-bebd-8f10f4a311db	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c439c18-31dc-41fe-b03d-3fca06e6fc0b	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:temple-of-malice:f0a0:s2,f:xs:XP:temple-of-malice:f0a0:s2	-	-	-	8c0bd19283bb	-	36983525766e	-	-	2026-11-24	xproof
-7c439c18-31dc-41fe-b03d-3fca06e6fc0b	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Temple of Malice/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-7c439c18-31dc-41fe-b03d-3fca06e6fc0b	land	play-land	agreed	-	X	scen	1	0	Temple of Malice/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7c439c18-31dc-41fe-b03d-3fca06e6fc0b	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:temple-of-malice:f0t0:s1,f:xs:XP:temple-of-malice:f0t0:s1	-	-	-	23b491658465	-	36983525766e	-	-	2026-11-24	xproof
+7c439c18-31dc-41fe-b03d-3fca06e6fc0b	land	land	agreed	-	FX	start	4	0	x:xs:XP:temple-of-malice:f0t0:s1,f:xs:XP:temple-of-malice:f0t0:s1	-	-	-	23b491658465	-	36983525766e	-	-	2026-11-24	xproof
 7c4408eb-b3e2-407f-9018-197787edeae7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c4408eb-b3e2-407f-9018-197787edeae7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:igneous-golem:f0a0:s1,f:xs:XP:igneous-golem:f0a0:s1	-	-	-	ea3140b6974b	-	ad3945f8c208	-	-	2026-11-24	xproof
 7c48aa73-4576-4a21-ba0f-d5253128ee7c	cast	cast	agreed	-	F	start	4	0	f:xs:XP:ethrimik-imagined-fiend:cast:s1	-	-	-	23b491658465	-	0a0aec36652b	-	-	2026-11-24	xproof
@@ -97,7 +97,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 7c72df45-c3bd-4fb9-8365-5a5639566742	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c777a41-e40a-4b40-96bf-8ddd5c12924c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dictate-of-erebos:cast:s1,f:xs:XP:dictate-of-erebos:cast:s1	-	-	-	d864b561c9cb	-	d46939f4c652	-	-	2026-11-24	xproof
 7c777a41-e40a-4b40-96bf-8ddd5c12924c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-7c779721-cd1b-4696-9ae9-68ccc284ed2a	cast	cast-resolve	agreed	-	X	scen	1	0	Aetherize/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+7c779721-cd1b-4696-9ae9-68ccc284ed2a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:aetherize:cast:s1,f:xs:XP:aetherize:cast:s1	-	-	-	23b491658465	-	20c86f77370d	-	-	2026-11-24	xproof
 7c83fb45-03af-4f1a-b7e3-2c4f47511658	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c83fb45-03af-4f1a-b7e3-2c4f47511658	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 7c852dfe-8238-461e-814e-9667807f2cf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
