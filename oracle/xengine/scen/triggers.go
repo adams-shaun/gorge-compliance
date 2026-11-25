@@ -385,14 +385,53 @@ func targetCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string
 	return ""
 }
 
+// bareCastParams are the SpellCast trigger params a start accounts for
+// directly: presentation, when the cast happens (spellStart reads
+// TriggerZones, ValidActivatingPlayer, OpponentTurn and
+// ActivatorThisTurnCast), or the target shape the heroic arm reads
+// (TargetsValid). Every other param narrows the cast, its target or a
+// fire-time condition -- ValidSA/ValidSAonCard/Increment, IsSingleTarget,
+// CheckSVar/SVarCompare, IsPresent/PresentCompare, a spend gate -- and the
+// inert carrier (Memnite) does not meet it. This is deliberately a whitelist:
+// a gate param added to the corpus (or a new keyword expansion's marker) is
+// refused by default instead of writing a start whose trigger can never fire.
+var bareCastParams = map[string]bool{
+	"Mode": true, "TriggerDescription": true, "Execute": true,
+	"TriggerZones": true, "ValidCard": true,
+	"ValidActivatingPlayer": true, "ActivatorThisTurnCast": true,
+	"OpponentTurn": true, "TargetsValid": true,
+	"OptionalDecider": true, "ActivationLimit": true, "ResolvedLimit": true,
+	"GameActivationLimit": true, "OrderDuplicates": true,
+	"Secondary": true, "Static": true, "NoResolvingCheck": true,
+	// Keyword expansion provenance (addKeywordTrigger): the expansion's
+	// marker is the param that gates it (Increment, not in this map).
+	"Keyword": true, "KeywordLine": true,
+}
+
+// bareCast reports whether a SpellCast trigger asks nothing more of the cast
+// than that it is a spell. selfTarget allows TargetsValid$ Card.Self, which
+// the heroic arm meets with targetCarrier; any other TargetsValid (or any
+// param outside bareCastParams) is a gate the bare carrier does not satisfy.
+func bareCast(t *cards.Trigger, selfTarget bool) bool {
+	for p := range t.Params {
+		if p == "TargetsValid" && !selfTarget {
+			return false
+		}
+		if !bareCastParams[p] {
+			return false
+		}
+	}
+	return true
+}
+
 // spellStart is a SpellCast (or SpellCastOrCopy) trigger. "When you cast
 // this spell" (Card.Self, TriggerZones Stack or none) is the card cast from
 // hand. Otherwise the card is on the battlefield and the seat that
 // ValidActivatingPlayer names casts a carrier (carrierPool) that ValidCard
 // takes, with exactly its mana: on its own turn, or, for a NonActive caster,
-// an instant on the other seat's turn. A trigger with no ValidCard takes any
-// spell; one whose TargetsValid is the card itself (heroic) casts a carrier
-// that targets it (targetCarrier).
+// an instant on the other seat's turn. A trigger with no ValidCard and no
+// other cast gate takes any spell; one whose TargetsValid is the card itself
+// (heroic) casts a carrier that targets it (targetCarrier).
 func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, generic string, trig *cards.Trigger, f *StartFile) string {
 	none := "no-generator:trigger:" + trig.Mode
 	p0 := &f.Setup.P0
@@ -449,17 +488,26 @@ func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 	filter := trig.Params["ValidCard"]
 	var name string
 	switch {
-	case trig.Params["TargetsValid"] != "":
+	case targetSelf(trig):
 		// "whenever you cast a spell that targets this": the caster's own
-		// targeter is the carrier and the card is its target.
-		if !targetSelf(trig) || caster != 0 || !face.IsCreature() {
+		// targeter is the carrier and the card is its target. A second
+		// spell-shape gate would still have to be met by that carrier.
+		if caster != 0 || !face.IsCreature() || !bareCast(trig, true) {
 			return none + ":filter"
 		}
 		name = targetCarrier(reg, b, card, filter, keep)
 	case strings.TrimSpace(filter) == "":
-		// no ValidCard: any spell casts, so the first carrier does.
+		// No ValidCard: any spell satisfies the cast, but only a trigger
+		// with no other gate does. A trigger that narrows the spell
+		// (ValidSA, Increment, a target shape, a condition) refuses here
+		// instead of being handed a carrier its own matcher rejects.
+		if !bareCast(trig, false) {
+			return none + ":filter"
+		}
 		name = pickCarrier(reg, b, card, keep)
 	default:
+		// A ValidCard filter, including the non-Self TargetsValid shapes
+		// (the start-not-exercised lane): keep the established carrier path.
 		name, _ = filterCarrier(reg, b, card, filter, keep)
 	}
 	if name == "" {

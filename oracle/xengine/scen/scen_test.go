@@ -664,7 +664,70 @@ func TestStartspellcasttriggers(t *testing.T) {
 		// carrier is a spell, so the first one casts
 		{card: "Basilica Guards", key: "f0/t0", maxTurns: 1, p0Hand: []string{"Memnite"},
 			p0BF: []string{"Basilica Guards"}, focusCard: "Memnite", focusKind: "cast"},
+		// a second cast gate: the bare carrier does not meet it, so the
+		// start refuses rather than writing an event the trigger rejects.
+		{card: "Riku of Many Paths", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},         // ValidSA$ Spell.Modal
+		{card: "Voracious Bibliophile", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},      // ValidSA$ Spell.numTargets GE1
+		{card: "Verazol, the Split Current", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"}, // ValidSA$ Spell.Kicked
+		{card: "Virtual Assistant", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},          // ValidSA$ Spell.Teamwork
+		{card: "Dragonlord Kolaghan", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},        // ValidSAonCard$
+		{card: "Erayo, Soratami Ascendant", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},  // CheckSVar/SVarCompare
+		{card: "Ivy, Gleeful Spellthief", key: "f0/t0", reason: "no-generator:trigger:SpellCast:filter"},    // IsSingleTarget + non-Self TargetsValid
+		{card: "Ambitious Augmenter", key: "f0/t1", reason: "no-generator:trigger:SpellCast:filter"},        // Increment$
 	})
+	// A non-Self TargetsValid ("a spell that targets a creature you
+	// control") is the other lane's start-not-exercised shape, not this
+	// ticket's. The self branch must leave those keys alone: they generated
+	// a start at develop and still must.
+	reg, b := testBuilder(t)
+	for _, card := range []string{"Feather, the Redeemed", "Leyline of Resonance", "Orvar, the All-Form"} {
+		res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
+		if err != nil {
+			t.Errorf("%s: %v", card, err)
+			continue
+		}
+		if res.Path != PathStart || res.Start == nil {
+			t.Errorf("%s: path %q reason %q, want the pre-existing start", card, res.Path, res.Reason)
+		}
+	}
+}
+
+// TestBareCastGateWhitelist: the no-filter carrier is safe only when the
+// trigger asks nothing more of the cast. A param outside the accounted set
+// -- a known gate or a future one -- refuses, and the self-target arm keeps
+// the one target shape it meets.
+func TestBareCastGateWhitelist(t *testing.T) {
+	trig := func(params map[string]string) *cards.Trigger {
+		return &cards.Trigger{Mode: "SpellCast", Params: params}
+	}
+	base := map[string]string{"Mode": "SpellCast", "TriggerZones": "Battlefield",
+		"Execute": "X", "TriggerDescription": "x"}
+	if !bareCast(trig(base), false) {
+		t.Error("a bare SpellCast trigger was refused")
+	}
+	for _, tc := range []struct {
+		name   string
+		params map[string]string
+		self   bool
+	}{
+		{"ValidSA", map[string]string{"Mode": "SpellCast", "ValidSA": "Spell.Modal"}, false},
+		{"Increment", map[string]string{"Mode": "SpellCast", "Increment": "True"}, false},
+		{"CheckSVar", map[string]string{"Mode": "SpellCast", "CheckSVar": "NumCast", "SVarCompare": "EQ4"}, false},
+		{"unknown gate", map[string]string{"Mode": "SpellCast", "FutureGate": "True"}, false},
+		{"non-Self TargetsValid", map[string]string{"Mode": "SpellCast", "TargetsValid": "Creature.YouCtrl"}, false},
+		{"self-target in the no-filter arm", map[string]string{"Mode": "SpellCast", "TargetsValid": "Card.Self"}, false},
+	} {
+		if bareCast(trig(tc.params), tc.self) {
+			t.Errorf("%s accepted, want refused", tc.name)
+		}
+	}
+	self := map[string]string{"Mode": "SpellCast", "TargetsValid": "Card.Self", "Execute": "X"}
+	if !bareCast(trig(self), true) {
+		t.Error("a heroic self-target trigger was refused")
+	}
+	if bareCast(trig(self), false) {
+		t.Error("a self-target trigger was accepted by the no-filter arm")
+	}
 }
 
 // TestFilterProps: the named-property table parseFilter reads, including its
