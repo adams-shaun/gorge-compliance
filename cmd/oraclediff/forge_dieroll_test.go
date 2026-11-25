@@ -226,9 +226,11 @@ func TestForgeRolledDie(t *testing.T) {
 // ChangeTargets confirm regression test) and a2954de67aa / 0ca7a220bd0 (the no-legal-new-target guard and its review r1
 // retarget-count fix, ChangeTargetsNoCandidateTest), no textual conflicts; die-roll code unchanged, ForcedDieRollTest
 // re-run green on the pin (run-unit-tests.sh).
-// 19c49ba7117 = 0ca7a220bd0 plus the "pN:ability:Name" stack-ability target ref (xpt-1d873918); die-roll code unchanged,
-// ForcedDieRollTest re-run green on the pin (run-unit-tests.sh).
-const forgeOracleDieRollRef = "19c49ba7117f3deded72cab7ef93d2739168c5cd"
+// 495ed200e9f = 0ca7a220bd0 (join18, above) plus setup player_counters (SetupBuilder.placePlayerCounters, PlayerCountersSetupTest);
+// 19c49ba7117 = 0ca7a220bd0 plus the "pN:ability:Name" stack-ability target ref (xpt-1d873918); die-roll code unchanged.
+// d38946a0fd9 = 19c49ba7117 merged with 495ed200e9f, no textual conflicts (the two sides touch disjoint files); die-roll
+// code unchanged.
+const forgeOracleDieRollRef = "d38946a0fd9b5bafca14d748e775a4e5e9060ab4"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

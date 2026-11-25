@@ -881,12 +881,33 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # textual conflicts (ScriptedController.java and StepMachine.java touch different areas; merge tree 83e433b219b). FaceDownCastModeTest,
 # TapTypeAbilityChoiceTest and ForcedDieRollTest run together at this pin (11 tests, 0 failures). Driver-only; die-roll code,
 # cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-# 0ca7a220bd0 = oracle/fpin-1125-join18 tip: 3405b168dc3 (join17 above merged with join16 852c41880dd, which is 0aee1572747's
-# Speedball optional ChangeTargets confirm regression test: ChangeTargetsConfirmTest runs six tests at this pin, the sixth
-# speedballTriggerChangeTargetsConfirmConsumesTheRetargetPick) merged with a2954de67aa (no legal new target keeps the targets,
-# ChangeTargetsNoCandidateTest) and 0ca7a220bd0 (the retarget count excludes the current target; review r1, xpt-5b82851f), no
-# textual conflicts (ScriptedController.java: the join16/join17 confirm rule and the no-candidate guard touch different areas).
-# Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# a2954de67aa = ad4cd3ba0f8 (join14) + the no-legal-new-target answer (xproof cluster xpt-5b82851f, Deflection, Shunt and Swerve): Forge's
+# mandatory ChangeTargets effect asks chooseNewTargetsFor even when no new target is legal, and gorge poses no decision then (the target
+# stays, CR 115.7a), so the ask was a strict miss ("Missing new targets answer at step 15") once Aerial Volley's only creature with flying
+# left the battlefield. ScriptedController.chooseNewTargetsFor now counts the candidates Forge's TargetSelection would offer (the ability's
+# target restrictions plus the effect's filter, targets cleared and restored as Forge does) and, with fewer than the declaration's targets,
+# keeps them with a note; a legal candidate and no gorge decision is still the miss. ChangeTargetsNoCandidateTest (fixtures/changetargets/
+# deflection-aerial-volley-no-candidate.jsonl, the exported xs:XP:deflection:cast:s1 request) fails without the change with the exact miss;
+# scripts/forge-oracle-test-change-targets-no-candidate.sh (make forge-driver-tests) runs it. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-change-targets-no-candidate.
+# 3405b168dc = oracle/fpin-1125-join18: join17 (686e3f82713, join15 + the face-down cast modes 6095b085edc) merged with
+# join16 (852c41880dd, join15 + the Speedball optional ChangeTargets confirm 0aee1572747, review of cli-20261125T132000Z-b46ca2c9),
+# no textual conflicts (ScriptedController.java auto-merged).
+# 5c66bb14fa = 3405b168dc merged with a2954de67aa (the no-legal-new-target answer above), no textual conflicts
+# (ScriptedController.java auto-merged). The ChangeTargets tests, TapTypeAbilityChoiceTest and the join14/15 driver tests run
+# together at this pin. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# 0ca7a220bd = 5c66bb14fa + the r1 review follow-up: the candidate count excludes the declaration's current targets (Forge's
+# own selection clears them first, PlayerControllerHuman.chooseNewTargetsFor, so it does not; but re-picking the old target
+# leaves the game unchanged), and a second fixture, deflection-volley-second-flyer-still-miss.jsonl, pins that a legal new
+# target with no gorge decision is still a miss (ChangeTargetsNoCandidateTest.legalNewTargetWithNoGorgeDecisionIsStillAMiss,
+# 2 tests now). Driver-only; cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+# 495ed200e9f = 0ca7a220bd0 (join18, above) + setup player_counters (xproof cluster xpt-a32b5388, Demon of Dark Schemes): SetupBuilder
+# read life, speed, the commander fields and the zones but never a seat's player_counters, so a setup ENERGY=4 never reached the
+# player and the {2}{B}, Pay {E}{E}{E}{E} ability was refused ("was not put on the stack (cost unpaid)") while gorge held the energy.
+# SetupBuilder.placePlayerCounters now sets each entry as the COMPLETE count of its kind (ENERGY/POISON/EXPERIENCE/RAD, also 0) as
+# recorded state with no event or trigger, and refuses an unknown, keyword or negative entry. PlayerCountersSetupTest (5 tests, red
+# before) is run by scripts/forge-oracle-test-player-counters.sh (make forge-driver-tests). Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-setup-player-counters.
 # 19c49ba7117 = 0ca7a220bd0 + a "pN:ability:Name[#k]" target ref (xproof cluster xpt-1d873918, Azorius Guildmage's "{2}{U}: Counter
 # target activated ability" aimed at Dark Sphere's ability, CR 113.3b / 602.2): StepMachine.targetObject resolved a target ref only to a
 # player or a card, so the stack ability never bound to the TargetType$ Activated slot and the activation was refused ("was not put on
@@ -895,7 +916,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # exported request (fixtures/abilitytarget; red without the branch: "was not put on the stack"), scripts/forge-oracle-test-ability-target-ref.sh
 # (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432),
 # ForcedDieRollTest, RefTableTest, DriverContractTest and ChangeTargetsConfirmTest re-run green. Fork branch fix/xp-forge-driver-ability-target-ref.
-FORGE_ORACLE_REF ?= 19c49ba7117f3deded72cab7ef93d2739168c5cd
+# d38946a0fd9 = oracle/fpin-1125-join-abilitytarget-playercounters: 19c49ba7117 (above) merged with 495ed200e9f (above), each a
+# driver-only commit on 0ca7a220bd0 (RefTable/StepMachine/AbilityTargetRefTest vs SetupBuilder/PlayerCountersSetupTest), no textual
+# conflicts (git merge-tree). AbilityTargetRefTest and PlayerCountersSetupTest run together at this pin; die-roll code, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch oracle/fpin-1125-join-abilitytarget-playercounters.
+FORGE_ORACLE_REF ?= d38946a0fd9b5bafca14d748e775a4e5e9060ab4
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
