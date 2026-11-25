@@ -653,7 +653,15 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # EmptyOptionalAnimateConfirmTest (fixtures/animate: the find, and the same request with a Grizzly Bears) fails before it with the exact
 # miss; scripts/forge-oracle-test-empty-optional-animate.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder
 # and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-empty-optional-animate.
-FORGE_ORACLE_REF ?= 65d8060f39ba8a34193c2a9b593ce363d647726e
+# 85e4e85fde = 2ece06813a merged with 65d8060f39ba. 2ece06813a (on 1da9dc5c96c) is the dual-typed land colour (xproof cluster
+# xpt-079c8ffe, 102 items: shock, battle, cycling and surveil duals): a land with two basic land types (CR 305.6) has two
+# intrinsic Secondary$ mana abilities, gorge's choice between them is dropped from the request (the step names the ability by
+# index), and StepMachine.abilityFor's basic-land tier kept both and threw "ability identity ... candidates: Mana T; Mana T".
+# forge-export now sends "intrinsic: basic land mana <C>" for such a land and the tier filters by that colour; a bare line is
+# unchanged. scripts/forge-oracle-test-dual-land-colour.sh (make forge-driver-tests) replays Underground Sea's U and B abilities;
+# it fails at 1da9dc5c96c and 65d8060f39ba with the exact miss and passes here. Driver-only; die-roll code, cardsfolder and
+# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-dual-colour-on-fpin-65d8.
+FORGE_ORACLE_REF ?= 85e4e85fdee1618f55709bceb2a628dda91fb97b
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
