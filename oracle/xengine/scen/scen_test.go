@@ -903,3 +903,65 @@ func TestLandsForSlashlessHybrid(t *testing.T) {
 		t.Error("hasShard misreads a slashless hybrid")
 	}
 }
+
+// TestStartcombattriggers: a combat trigger (blocks, becomes blocked, combat
+// damage dealt or taken) is one scripted combat with no forced play: the active
+// seat attacks with exactly Attack, the other blocks with exactly Block (or not
+// at all), the card beside them. A trigger on an Aura's or Equipment's bearer
+// has no start file to attach with, and stays refused.
+func TestStartcombattriggers(t *testing.T) {
+	reg, b := testBuilder(t)
+	rows := []struct {
+		card, key     string
+		active        int
+		p0BF, p1BF    []string
+		attack, block string
+	}{
+		// the card attacks and is blocked by the fixture
+		{card: "Acolyte of the Inferno", key: "f0/t0", p0BF: []string{"Acolyte of the Inferno"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Acolyte of the Inferno", block: "Grizzly Bears"},
+		{card: "Ammit Eternal", key: "f0/t2", p0BF: []string{"Ammit Eternal"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Ammit Eternal", block: "Grizzly Bears"},
+		// the card blocks the fixture's attack
+		{card: "Aether Membrane", key: "f0/t0", active: 1, p0BF: []string{"Aether Membrane"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Grizzly Bears", block: "Aether Membrane"},
+		// the card connects: nothing blocks
+		{card: "Akki Lavarunner // Tok-Tok, Volcano Born", key: "f0/t0", p0BF: []string{"Akki Lavarunner // Tok-Tok, Volcano Born"},
+			attack: "Akki Lavarunner // Tok-Tok, Volcano Born"},
+		// the card is dealt the damage
+		{card: "Pious Warrior", key: "f0/t0", active: 1, p0BF: []string{"Pious Warrior"}, p1BF: []string{"Grizzly Bears"},
+			attack: "Grizzly Bears", block: "Pious Warrior"},
+	}
+	for _, r := range rows {
+		t.Run(r.card+"/"+r.key, func(t *testing.T) {
+			res, err := Generate(reg, b, r.card, r.key, Options{Prefer: "start"})
+			if err != nil {
+				t.Fatal(err)
+			}
+			if res.Start == nil {
+				t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
+			}
+			f := res.Start
+			if f.Active != r.active {
+				t.Errorf("active %d, want %d", f.Active, r.active)
+			}
+			listIs(t, "p0 battlefield", f.Setup.P0.Battlefield, r.p0BF)
+			listIs(t, "p1 battlefield", f.Setup.P1.Battlefield, r.p1BF)
+			fo := f.Focus
+			if fo == nil || fo.Kind != "" || fo.Attack != r.attack || fo.Block != r.block {
+				t.Errorf("focus %+v, want kind \"\" attack %q block %q", fo, r.attack, r.block)
+			}
+			raw, err := f.Marshal()
+			if err != nil {
+				t.Fatal(err)
+			}
+			if _, err := DecodeStartFile(raw); err != nil {
+				t.Errorf("start file does not decode: %v", err)
+			}
+		})
+	}
+	res, err := Generate(reg, b, "Aqueous Form", "f0/t0", Options{Prefer: "start"})
+	if err != nil || res.Path != PathRefused || res.Reason != "no-generator:trigger:Attacks:filter" {
+		t.Errorf("Aqueous Form: %+v %v, want refused no-generator:trigger:Attacks:filter", res, err)
+	}
+}

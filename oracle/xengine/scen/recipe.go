@@ -287,6 +287,16 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 			}
 		case "DamageDone", "AttackersDeclared":
 			if why := combatStart(reg, b, face, card, trig, f); why != "" {
+				if trig.Mode == "AttackersDeclared" {
+					return refuse(why)
+				}
+				// a combat-damage shape combatStart's one attack does not read
+				if why = combatTrigStart(reg, b, face, card, trig, f); why != "" {
+					return refuse(why)
+				}
+			}
+		case "Blocks", "AttackerBlocked", "AttackerBlockedByCreature", "DamageDoneOnce", "DamageDealtOnce":
+			if why := combatTrigStart(reg, b, face, card, trig, f); why != "" {
 				return refuse(why)
 			}
 		case "BecomesTarget":
@@ -333,7 +343,7 @@ func recipe(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, card, key, 
 		switch {
 		case trig == nil:
 			return false
-		case trig.Mode == "DamageDone" || trig.Mode == "DamageDoneOnce":
+		case combatTrigModes[trig.Mode]:
 			return n.Class == certdeck.OppBlockers
 		case trig.Mode == "LifeGained":
 			return n.Class == certdeck.Life && n.Arg == "gain"

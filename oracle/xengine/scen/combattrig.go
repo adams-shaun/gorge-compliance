@@ -1,0 +1,260 @@
+package scen
+
+import (
+	"strings"
+
+	"github.com/adams-shaun/gorge-compliance/oracle/xengine/certdeck"
+	"github.com/adams-shaun/gorge/engine/cards"
+)
+
+// The combat-step start: a trigger that fires in combat (a creature blocks, an
+// attacker is blocked, combat damage is dealt) is one scripted combat
+// (StartFocus.Attack, Block; game/focus.go) with no forced play (focus kind ""):
+// the active seat attacks with exactly the Attack creature, the defending seat
+// blocks it with exactly the Block creature, or with none when Block is "",
+// whatever the bots would choose. Every combatant is placed on the battlefield,
+// so it has been under its controller's control since the turn began and may
+// attack (CR 302.6). The card is on seat 0's battlefield; it is the attacker,
+// the blocker, or neither (an enchantment that reads some other creature), and
+// the other combatant is Grizzly Bears (combatFixture) or the most inert
+// carrier the trigger's filter takes (pickCarrier).
+//
+// Every combat trigger mode reads its two combatants (and, for damage, who is
+// hurt) into the same pair of party specs, then goes through combatLine, so a
+// mode added later is one more case in combatParties.
+
+// combatTrigModes are the trigger modes combatTrigStart reads: the scripted
+// combat gives the blocks, so a start drops the opp-blockers need.
+var combatTrigModes = map[string]bool{"Blocks": true, "AttackerBlocked": true, "AttackerBlockedByCreature": true,
+	"DamageDone": true, "DamageDoneOnce": true, "DamageDealtOnce": true}
+
+// party is one combatant the trigger names: the card itself, or a creature a
+// filter takes ("" takes any).
+type party struct {
+	self   bool
+	filter string
+}
+
+// selfFilter reports whether some alternative of a filter reads the card
+// itself ("Card.Self", "Creature.Self+kicked").
+func selfFilter(s string) bool {
+	for _, alt := range strings.Split(s, ",") {
+		_, props, _ := strings.Cut(strings.TrimSpace(alt), ".")
+		for _, p := range strings.Split(props, "+") {
+			if p == "Self" {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func partyOf(filter string) party {
+	return party{self: selfFilter(filter), filter: strings.TrimSpace(filter)}
+}
+
+// combatParties reads a combat trigger into the attacker, the blocker (nil: no
+// blocks), and the seat the attacker must be on (-1: either), or the reason it
+// is refused.
+func combatParties(face *cards.Face, trig *cards.Trigger) (att party, blk *party, seat int, why string) {
+	none := "no-generator:trigger:" + trig.Mode
+	p := trig.Params
+	seat = -1
+	switch trig.Mode {
+	case "Blocks":
+		// ValidCard is the blocker, ValidBlocked the attacker it blocks
+		b := partyOf(p["ValidCard"])
+		return partyOf(p["ValidBlocked"]), &b, -1, ""
+	case "AttackerBlocked", "AttackerBlockedByCreature":
+		if p["ValidBlockerAmount"] != "" {
+			return att, nil, 0, none + ":amount"
+		}
+		b := partyOf(p["ValidBlocker"])
+		return partyOf(p["ValidCard"]), &b, -1, ""
+	}
+	// the damage modes: ValidSource deals the damage, ValidTarget takes it
+	if p["CombatDamage"] == "False" {
+		return att, nil, 0, none + ":noncombat"
+	}
+	src, tgt := partyOf(p["ValidSource"]), strings.TrimSpace(p["ValidTarget"])
+	hurtsPlayer := tgt == ""
+	for _, alt := range strings.Split(tgt, ",") {
+		if h, _, _ := strings.Cut(strings.TrimSpace(alt), "."); h == "Player" || h == "Opponent" {
+			hurtsPlayer = true
+		}
+	}
+	switch {
+	case hurtsPlayer:
+		return src, nil, 0, "" // unblocked, on the card's controller's turn
+	case tgt == "You":
+		return src, nil, 1, "" // the other seat's creature connects with the card's controller
+	case selfFilter(tgt):
+		// the card is hurt: it blocks the attacker (the source's filter)
+		return src, &party{self: true}, 1, ""
+	case strings.HasPrefix(tgt, "Creature"):
+		return src, &party{filter: tgt}, 0, ""
+	}
+	return att, nil, 0, none + ":target"
+}
+
+// blockable reports whether blk can block att at all (CR 509.1b, 702.9, 702.28,
+// 702.36): the evasion keywords the fixture and the carriers do not meet.
+func blockable(att, blk *cards.Face) bool {
+	for _, k := range []string{"Shadow", "Horsemanship", "Fear", "Intimidate", "Unblockable", "Skulk"} {
+		if att.HasKeyword(k) {
+			return false
+		}
+	}
+	if blk.HasKeyword("Shadow") {
+		return false
+	}
+	return !att.HasKeyword("Flying") || blk.HasKeyword("Flying") || blk.HasKeyword("Reach")
+}
+
+// combatTrigStart is a combat trigger as a start (see the block comment above).
+func combatTrigStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card string, trig *cards.Trigger, f *StartFile) string {
+	none := "no-generator:trigger:" + trig.Mode
+	if tz := trig.Params["TriggerZones"]; tz != "" && tz != "Battlefield" {
+		return none
+	}
+	att, blk, seat, why := combatParties(face, trig)
+	if why != "" {
+		return why
+	}
+	if blk != nil && att.self && blk.self {
+		return none + ":filter"
+	}
+	switch {
+	case att.self:
+		seat = 0
+	case blk != nil && blk.self:
+		seat = 1
+	}
+	fix, ok := reg.Lookup(combatFixture)
+	if !ok || len(fix.Faces) == 0 || !fix.Faces[0].IsCreature() {
+		return none + ":fixture"
+	}
+	seats := []int{seat}
+	if seat < 0 {
+		seats = []int{0, 1}
+	}
+	why = none + ":filter"
+	for _, s := range seats {
+		g := *f
+		g.Setup.P0 = StartSeat{Battlefield: []string{card}}
+		g.Setup.P1 = StartSeat{}
+		w := combatLine(reg, b, face, fix.Faces[0], card, att, blk, s, &g, none)
+		if w == "" {
+			*f = g
+			return ""
+		}
+		why = w
+	}
+	return why
+}
+
+// combatLine places the attacker on attackSeat's battlefield and the blocker on
+// the other's and scripts the combat. It reports the refusal, or "".
+func combatLine(reg *cards.Registry, b *certdeck.Builder, face, fix *cards.Face, card string, att party, blk *party, attackSeat int, f *StartFile, none string) string {
+	seats := [2]*StartSeat{&f.Setup.P0, &f.Setup.P1}
+	faceOf := func(name string) *cards.Face {
+		if name == card {
+			return face
+		}
+		c, _ := reg.Lookup(name)
+		return c.Faces[0]
+	}
+	// choose is the creature a party is: the card, the fixture or a carrier its
+	// filter takes, on seat's battlefield; ok reports blockable against the
+	// opposing creature other (nil: none chosen yet).
+	choose := func(p party, seat int, attacker bool, other *cards.Face) (string, string) {
+		pairOK := func(c *cards.Face) bool {
+			switch {
+			case other == nil:
+				return true
+			case attacker:
+				return blockable(c, other)
+			}
+			return blockable(other, c)
+		}
+		if p.self {
+			switch {
+			case seat != 0:
+				return "", none + ":filter"
+			case !face.IsCreature():
+				return "", none + ":noncreature"
+			case attacker && face.HasKeyword("Defender"):
+				return "", "no-generator:combat:defender"
+			case !pairOK(face):
+				return "", none + ":evasion"
+			}
+			return card, ""
+		}
+		alts := parseFilter(p.filter)
+		fits := func(c *cards.Face) bool {
+			if !c.IsCreature() || !pairOK(c) || attacker && c.HasKeyword("Defender") {
+				return false
+			}
+			if p.filter == "" {
+				return true
+			}
+			for _, a := range alts {
+				if a.known && !a.self && (a.ctrl == ctrlAny || a.ctrl == seat) && a.test(c) {
+					return true
+				}
+			}
+			return false
+		}
+		name := ""
+		if fits(fix) {
+			name = combatFixture
+		} else if p.filter != "" {
+			name = pickCarrier(reg, b, card, func(c *cards.Face) bool {
+				return fits(c) && FieldBlock(c) == "" && !deadOnArrival(c)
+			})
+		}
+		if name == "" {
+			return "", none + ":filter"
+		}
+		seats[seat].Battlefield = append(seats[seat].Battlefield, name)
+		return name, ""
+	}
+	// the party that is the card goes first: the other one is chosen against it
+	var attacker, blocker string
+	var why string
+	switch {
+	case blk == nil:
+		attacker, why = choose(att, attackSeat, true, nil)
+	case att.self:
+		attacker, why = choose(att, attackSeat, true, nil)
+		if why == "" {
+			blocker, why = choose(*blk, 1-attackSeat, false, faceOf(attacker))
+		}
+	default:
+		blocker, why = choose(*blk, 1-attackSeat, false, nil)
+		if why == "" {
+			attacker, why = choose(att, attackSeat, true, faceOf(blocker))
+		}
+	}
+	if why != "" {
+		return why
+	}
+	// a restriction on the card keeps its attack or its block from being taken
+	other := fix
+	switch card {
+	case attacker:
+		if blocker != "" {
+			other = faceOf(blocker)
+		}
+		if restrictingStatic(face, other, true) != nil || blocker != "" && restrictingStatic(face, other, false) != nil {
+			return none + ":restricted"
+		}
+	case blocker:
+		if restrictingStatic(face, faceOf(attacker), false) != nil {
+			return none + ":restricted"
+		}
+	}
+	f.Active = attackSeat
+	f.Focus = &StartFocus{Seat: seatPtr(0), Card: card, Attack: attacker, Block: blocker}
+	return ""
+}

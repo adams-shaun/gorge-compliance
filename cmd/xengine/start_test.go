@@ -708,3 +708,22 @@ func TestStartFocusCombatantTargetIsExercised(t *testing.T) {
 		t.Run(card, func(t *testing.T) { startCombatIsExercised(t, card, "f0/a0", true) })
 	}
 }
+
+// TestStartCombatTriggerIsExercised: a combat trigger (blocks, becomes blocked,
+// combat damage) had no start (no-generator:trigger:<Mode>), so no engine ever
+// played the key. The start now scripts the combat (StartFocus.Attack, Block):
+// every item has the attack step, and the block step when the trigger reads one.
+func TestStartCombatTriggerIsExercised(t *testing.T) {
+	for _, c := range []struct {
+		card, key string
+		block     bool
+	}{
+		{"Acolyte of the Inferno", "f0/t0", true},                    // AttackerBlockedByCreature, the card attacks
+		{"Ammit Eternal", "f0/t2", true},                             // AttackerBlocked (afflict), the card attacks
+		{"Aether Membrane", "f0/t0", true},                           // AttackerBlocked, the card blocks
+		{"Pious Warrior", "f0/t0", true},                             // DamageDoneOnce, the card is dealt damage
+		{"Akki Lavarunner // Tok-Tok, Volcano Born", "f0/t0", false}, // DamageDone, unblocked
+	} {
+		t.Run(c.card, func(t *testing.T) { startCombatIsExercised(t, c.card, c.key, c.block) })
+	}
+}
