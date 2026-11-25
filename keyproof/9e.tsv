@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9e737a22-a352-411d-8412-96770c7f6cce	f0/a0	Mana	agreed	-	FX	start	4	0	x:xs:XP:simic-keyrune:cast:s1,f:xs:XP:simic-keyrune:cast:s1	-	-	-	d864b561c9cb	-	8da3a83e02f0	-	-	2026-11-24	xproof
 9e737a22-a352-411d-8412-96770c7f6cce	f0/a1	Animate	agreed	-	FX	start	2	0	x:xs:XP:simic-keyrune:f0a1:s1,f:xs:XP:simic-keyrune:f0a1:s1	-	-	-	d864b561c9cb	-	8da3a83e02f0	-	-	2026-11-24	xproof
 9e767d44-feff-449a-bed9-0866c7bce846	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9e767d44-feff-449a-bed9-0866c7bce846	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9e767d44-feff-449a-bed9-0866c7bce846	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9e76d56a-67b6-4bd9-8f2d-3328d18a2880	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-salvagers:f0t0:s1,f:xs:XP:fire-nation-salvagers:f0t0:s1	-	-	-	8c0bd19283bb	-	dc6f52283699	-	-	2026-11-24	xproof
 9e76d56a-67b6-4bd9-8f2d-3328d18a2880	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fire-nation-salvagers:f0t0:s1,f:xs:XP:fire-nation-salvagers:f0t0:s1	-	-	-	8c0bd19283bb	-	dc6f52283699	-	-	2026-11-24	xproof
 9e76d56a-67b6-4bd9-8f2d-3328d18a2880	f0/t1	NULL	owed	refused:no-generator:trigger:DamageDoneOnce	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof

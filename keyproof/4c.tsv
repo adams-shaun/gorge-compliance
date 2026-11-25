@@ -16,7 +16,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c08b7e3-ebac-485d-9e79-fcc2599e219b	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:lithatog:cast:s1,f:xs:XP:lithatog:cast:s1	-	-	-	fc71ca68c5ac	-	6dc5a2c4bafc	-	-	2026-11-24	xproof
 4c0a0448-b9d6-43a0-8549-64066dac63f0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:talisman-of-dominance:cast:s1,f:xs:XP:talisman-of-dominance:cast:s1	-	-	-	25696bf19d5b	-	b484b6210d59	-	-	2026-11-24	xproof
 4c0a0448-b9d6-43a0-8549-64066dac63f0	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-4c0a0448-b9d6-43a0-8549-64066dac63f0	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c0a0448-b9d6-43a0-8549-64066dac63f0	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4c0a8eed-f2e2-4821-8011-6e6ad2081936	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:solitary-sanctuary:f0t0:s2,f:xs:XP:solitary-sanctuary:f0t0:s2	-	-	-	e07cf3a05ba5	-	ae160073b4f1	-	-	2026-11-24	xproof
 4c0a8eed-f2e2-4821-8011-6e6ad2081936	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:solitary-sanctuary:f0t0:s2,f:xs:XP:solitary-sanctuary:f0t0:s2	-	-	-	e07cf3a05ba5	-	ae160073b4f1	-	-	2026-11-24	xproof
 4c0a8eed-f2e2-4821-8011-6e6ad2081936	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Solitary Sanctuary/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -93,7 +93,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4c67359d-5590-4eb0-827e-b411967ee238	cast	cast	agreed	-	F	start	2	0	f:xs:XP:uncover-the-moon-letters:cast:s1	-	-	-	23b491658465	-	fa77190f2541	-	-	2026-11-24	xproof
 4c67359d-5590-4eb0-827e-b411967ee238	f0/t0	SpellCast	agreed	-	F	start	2	0	f:xs:XP:uncover-the-moon-letters:f0t0:s1	-	-	-	23c4009444b0	-	fa77190f2541	-	-	2026-11-25	xproof
 4c6870f3-4b70-4050-bf22-b1f348f89360	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4c6870f3-4b70-4050-bf22-b1f348f89360	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4c6870f3-4b70-4050-bf22-b1f348f89360	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4c71074b-b8bf-47f4-87e4-67c275abdbc5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c71074b-b8bf-47f4-87e4-67c275abdbc5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4c71074b-b8bf-47f4-87e4-67c275abdbc5	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof

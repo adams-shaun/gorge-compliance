@@ -166,7 +166,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3ee78cfc-0e9e-4737-a7e2-b42f94228040	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3ee78cfc-0e9e-4737-a7e2-b42f94228040	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cruel-celebrant:f0t0:s1,f:xs:XP:cruel-celebrant:f0t0:s1	-	-	-	d864b561c9cb	-	d32cfffcd12e	-	-	2026-11-24	xproof
 3eec0ca6-e461-4583-9989-e4f6b15a53f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3eec0ca6-e461-4583-9989-e4f6b15a53f8	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3eec0ca6-e461-4583-9989-e4f6b15a53f8	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3eeeb159-aa45-4a9b-9618-8542604b9830	cast	cast-resolve	agreed	-	X	scen	1	0	The Kingpin of Crime/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3eeeb159-aa45-4a9b-9618-8542604b9830	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	The Kingpin of Crime/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3eeeb159-aa45-4a9b-9618-8542604b9830	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	The Kingpin of Crime/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -184,4 +184,4 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3eff03f1-2c5f-4c59-b465-a8c4cd05e1ba	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3eff8f21-9a1b-4afc-8a7b-75a740d0a4ea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3eff8f21-9a1b-4afc-8a7b-75a740d0a4ea	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:clockwork-condor:f0t0:s1,f:xs:XP:clockwork-condor:f0t0:s1	-	-	-	d864b561c9cb	-	a141f0edec7e	-	-	2026-11-24	xproof
-3eff8f21-9a1b-4afc-8a7b-75a740d0a4ea	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+3eff8f21-9a1b-4afc-8a7b-75a740d0a4ea	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

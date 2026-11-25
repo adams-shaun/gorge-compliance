@@ -47,7 +47,7 @@ bb50b4f4-f0da-4283-821b-6d74bd20752f	combat#0.block	combat.block	agreed	-	FX	sta
 bb50b4f4-f0da-4283-821b-6d74bd20752f	f0/t0	DamageDone	agreed	-	FX	start	4	0	x:xs:XP:jeskai-shrinekeeper:combat0.attack:s1,f:xs:XP:jeskai-shrinekeeper:combat0.attack:s1	-	-	-	23c4009444b0	-	28e2126aef2a	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bb52b3c3-09f0-4506-b7c0-250ab0b91866	cast	cast-resolve	agreed	-	FX	scen	2	0	Troop of Ponies/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bb52b3c3-09f0-4506-b7c0-250ab0b91866	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	Troop of Ponies/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bb5c1817-ac22-4779-9005-251bc354f181	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bb5c1817-ac22-4779-9005-251bc354f181	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bb5c1817-ac22-4779-9005-251bc354f181	f0/a1	Mana	agreed	-	FX	start	2	0	x:xs:XP:mistveil-plains:f0a0:s1,f:xs:XP:mistveil-plains:f0a0:s1	-	-	-	23b491658465	-	8cea55659c9f	-	-	2026-11-25	xproof
 bb5c1817-ac22-4779-9005-251bc354f181	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb67d0a4-864e-4f46-8538-fdd920bf0197	cast	cast-resolve	agreed	-	FX	scen	2	0	Ragged Short Spear/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -58,7 +58,7 @@ bb6aef0d-052b-44e6-b4cd-2d2eafd84969	cast	cast-resolve	agreed	-	FX	scen	2	0	Dona
 bb6aef0d-052b-44e6-b4cd-2d2eafd84969	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Donatello, Gadget Master/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bb6bda0d-ddb8-47fa-be07-bbcd73a52830	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb6bda0d-ddb8-47fa-be07-bbcd73a52830	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bb7389fa-ab01-4ca2-bd18-03cf5b4cedf6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bb7389fa-ab01-4ca2-bd18-03cf5b4cedf6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bb7389fa-ab01-4ca2-bd18-03cf5b4cedf6	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 bb7638ce-3802-4198-89d2-6f5b647bd8fb	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bb7638ce-3802-4198-89d2-6f5b647bd8fb	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:moon-boy-dino-rider:f0t0:s1,f:xs:XP:moon-boy-dino-rider:f0t0:s1	-	-	-	8c0bd19283bb	-	f316f7c26dc9	-	-	2026-11-24	xproof
@@ -108,8 +108,8 @@ bba6075b-8bbb-4496-80a9-bfa7f003d1e8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kin
 bbb005de-bbba-458e-87c1-912a004e80da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bbb005de-bbba-458e-87c1-912a004e80da	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 bbb16f23-fdb1-444b-bef8-ce3e177c2678	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bbb16f23-fdb1-444b-bef8-ce3e177c2678	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
-bbb16f23-fdb1-444b-bef8-ce3e177c2678	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+bbb16f23-fdb1-444b-bef8-ce3e177c2678	f0/t0	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+bbb16f23-fdb1-444b-bef8-ce3e177c2678	f0/t1	NULL	owed	refused:steps-needed:token	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bbb4643a-4bc6-4860-95e5-6f69cd1aebbe	cast	NULL	owed	refused:scen failed: xengine: certdeck: XMage lists no card "Where We're Going . . ."	-	start	0	0	-	-	-	-	23b491658465	-	-	-	-	2026-11-24	xproof
 bbb50cf5-cd07-4ae8-bfa8-d747e44fb1ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magnetic-mine:cast:s1,f:xs:XP:magnetic-mine:cast:s1	-	-	-	d864b561c9cb	-	fedb8ab246ec	-	-	2026-11-24	xproof
 bbb50cf5-cd07-4ae8-bfa8-d747e44fb1ef	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -134,7 +134,7 @@ bbd0a2a4-f81b-4a6b-bc4d-d7e53dc51333	f0/a0	activate#0.0	agreed	-	X	scen	1	0	She-
 bbd30183-524c-4b93-b953-90853ec3f39f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:phantom-monster:cast:s1,f:xs:XP:phantom-monster:cast:s1	-	-	-	ae86f6029288	-	e622faaa9847	-	-	2026-11-24	xproof
 bbd340ce-cf06-43df-a060-be80bc46e985	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gathering-throng:f0t0:s1,f:xs:XP:gathering-throng:f0t0:s1	-	-	-	d864b561c9cb	-	020ad31e1998	-	-	2026-11-24	xproof
 bbd340ce-cf06-43df-a060-be80bc46e985	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:gathering-throng:f0t0:s1,f:xs:XP:gathering-throng:f0t0:s1	-	-	-	d864b561c9cb	-	020ad31e1998	-	-	2026-11-24	xproof
-bbd569cc-bc21-46df-b8eb-5b5bcd8fe762	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bbd569cc-bc21-46df-b8eb-5b5bcd8fe762	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bbd569cc-bc21-46df-b8eb-5b5bcd8fe762	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 bbd7b756-bbee-451e-9446-06019791cb36	cast	cast-resolve	agreed	-	FX	scen	2	0	The Pride of Hull Clade/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bbd7b756-bbee-451e-9446-06019791cb36	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	The Pride of Hull Clade/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

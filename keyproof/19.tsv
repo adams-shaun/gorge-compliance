@@ -62,7 +62,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 194af2be-50c7-484b-bdd3-402bad70335b	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Donatello, Way with Machines/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 194af2be-50c7-484b-bdd3-402bad70335b	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Donatello, Way with Machines/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 194e2563-c0bf-4151-bbb0-0d626130b055	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-194e2563-c0bf-4151-bbb0-0d626130b055	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+194e2563-c0bf-4151-bbb0-0d626130b055	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1950067a-cc57-42a8-b1ee-f03e1b50591b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1950067a-cc57-42a8-b1ee-f03e1b50591b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19504e19-2886-4d28-a813-b798a9a446a2	cast	cast-resolve	agreed	-	X	scen	1	0	Alien Symbiosis/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -196,7 +196,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a3	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f233b2-8be6-4172-abf9-b132fc3393d9	f0/a4	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19f23d9e-0c05-4028-9c64-60b9a20020f9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gleam-of-battle:cast:s1,f:xs:XP:gleam-of-battle:cast:s1	-	-	-	d864b561c9cb	-	5b7d0401b4da	-	-	2026-11-24	xproof
-19f23d9e-0c05-4028-9c64-60b9a20020f9	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+19f23d9e-0c05-4028-9c64-60b9a20020f9	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 19f2c2c1-cd29-4e66-b5d9-e85e1979d843	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t0:s1,f:xs:XP:spitting-dilophosaurus:f0t0:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof
 19f2c2c1-cd29-4e66-b5d9-e85e1979d843	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t0:s1,f:xs:XP:spitting-dilophosaurus:f0t0:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof
 19f2c2c1-cd29-4e66-b5d9-e85e1979d843	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:spitting-dilophosaurus:f0t1:s1,f:xs:XP:spitting-dilophosaurus:f0t1:s1	-	-	-	8c0bd19283bb	-	731c81d531df	-	-	2026-11-24	xproof

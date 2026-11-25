@@ -43,7 +43,7 @@ cb3edb86-ddd5-461c-98b5-ffb4df437a39	f0/a0	DealDamage	agreed	-	FX	start	1	0	x:xs
 cb3edb86-ddd5-461c-98b5-ffb4df437a39	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:boommobile:f0a1:s1,f:xs:XP:boommobile:f0a1:s1	-	-	-	23c4009444b0	-	99c1ec28c673	-	-	2026-11-25	xproof
 cb3edb86-ddd5-461c-98b5-ffb4df437a39	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:boommobile:f0t0:s2,f:xs:XP:boommobile:f0t0:s2	-	-	-	e07cf3a05ba5	-	99c1ec28c673	-	-	2026-11-24	xproof
 cb4414a6-27d0-4922-938b-391283535f24	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thran-forge:cast:s1,f:xs:XP:thran-forge:cast:s1	-	-	-	ea3140b6974b	-	06dc4f8ec53c	-	-	2026-11-24	xproof
-cb4414a6-27d0-4922-938b-391283535f24	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cb4414a6-27d0-4922-938b-391283535f24	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cb45860a-1937-4803-b6d8-331a35be39fd	cast	cast-resolve	agreed	-	X	scen	1	0	Fractal Tender/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cb45860a-1937-4803-b6d8-331a35be39fd	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Fractal Tender/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cb45860a-1937-4803-b6d8-331a35be39fd	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Fractal Tender/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -130,7 +130,7 @@ cba9d6a2-1772-42dc-9bfb-c933a092be19	f0/a0	activate#0.0	agreed	-	FX	scen	2	0	See
 cbaf8e87-da5b-4120-afec-8fe2db55b835	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:kalonian-twingrove:f0t0:s1,f:xs:XP:kalonian-twingrove:f0t0:s1	-	-	-	d864b561c9cb	-	27deeb3abdba	-	-	2026-11-24	xproof
 cbaf8e87-da5b-4120-afec-8fe2db55b835	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:kalonian-twingrove:f0t0:s1,f:xs:XP:kalonian-twingrove:f0t0:s1	-	-	-	d864b561c9cb	-	27deeb3abdba	-	-	2026-11-24	xproof
 cbb030aa-ba4f-4d9e-920d-001a40982f5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cbb030aa-ba4f-4d9e-920d-001a40982f5e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cbb030aa-ba4f-4d9e-920d-001a40982f5e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cbb39e5c-e31a-44e9-be0c-2003c8bce599	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lucky-offering:cast:s1,f:xs:XP:lucky-offering:cast:s1	-	-	-	3aa6ded33acb	-	8352f779b297	-	-	2026-11-25	xproof
 cbb5526b-3aa1-43d9-acdb-bd230ce3fe63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:glimmer-seeker:cast:s1,f:xs:XP:glimmer-seeker:cast:s1	-	-	-	23c4009444b0	-	3b7de5f40dc9	-	-	2026-11-25	xproof
 cbb5526b-3aa1-43d9-acdb-bd230ce3fe63	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:glimmer-seeker:f0t0:s1,f:xs:XP:glimmer-seeker:f0t0:s1	-	-	-	23c4009444b0	-	3b7de5f40dc9	-	-	2026-11-25	xproof
@@ -195,13 +195,13 @@ cbf09050-39d0-463b-96db-9e22011ae0d8	combat#1.block	combat#1.block	agreed	-	X	sc
 cbf09050-39d0-463b-96db-9e22011ae0d8	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Aang, Swift Savior/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cbf09050-39d0-463b-96db-9e22011ae0d8	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cbf09050-39d0-463b-96db-9e22011ae0d8	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Aang, Swift Savior/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-cbf2b19e-32a3-489f-9979-ba2748c52845	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cbf2b19e-32a3-489f-9979-ba2748c52845	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cbf2b19e-32a3-489f-9979-ba2748c52845	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 cbf5bd0a-20ef-4dce-9f70-13339d438ff7	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:eerie-gravestone:f0t0:s2,f:xs:XP:eerie-gravestone:f0t0:s2	-	-	-	267e485f6204	-	b188e46d53b6	-	-	2026-11-24	xproof
 cbf5bd0a-20ef-4dce-9f70-13339d438ff7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Eerie Gravestone/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 cbf5bd0a-20ef-4dce-9f70-13339d438ff7	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:eerie-gravestone:f0t0:s2,f:xs:XP:eerie-gravestone:f0t0:s2	-	-	-	267e485f6204	-	b188e46d53b6	-	-	2026-11-24	xproof
 cbf68ddd-596f-4b2d-b93c-3b7976ba4d37	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fumble:cast:s1,f:xs:XP:fumble:cast:s1	-	-	-	8c0bd19283bb	-	3e5b0eeac8eb	-	-	2026-11-24	xproof
 cbf743a5-123f-4747-826d-7f8bb929a52c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-cbf767d4-9be4-417a-bbf7-0c72ede727b4	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+cbf767d4-9be4-417a-bbf7-0c72ede727b4	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 cbfccfc0-3117-4ca0-b7ce-8e2d67ec49ab	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 cbfccfc0-3117-4ca0-b7ce-8e2d67ec49ab	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:viashino-sandstalker:f0t0:s1,f:xs:XP:viashino-sandstalker:f0t0:s1	-	-	-	23c4009444b0	-	24301fca4b97	-	-	2026-11-25	xproof

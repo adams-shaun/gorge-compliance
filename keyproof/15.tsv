@@ -47,7 +47,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 153a4c11-e75f-46d7-b684-17d500ea13e6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 153bb46f-ee8a-4da3-aab4-ae884f6ff403	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 153bb46f-ee8a-4da3-aab4-ae884f6ff403	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-153cd93c-7bba-4482-893c-55a602c4439b	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+153cd93c-7bba-4482-893c-55a602c4439b	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 153cd93c-7bba-4482-893c-55a602c4439b	f0/a0	NULL	owed	refused:steps-needed:cost:UR	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 154104b7-4125-4276-8bc7-9a6edfe48cb9	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 154104b7-4125-4276-8bc7-9a6edfe48cb9	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -103,7 +103,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15af3bd0-022b-472e-b21e-29b925b7692b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mortus-strider:cast:s1,f:xs:XP:mortus-strider:cast:s1	-	-	-	d864b561c9cb	-	bc24790bce48	-	-	2026-11-24	xproof
 15af3bd0-022b-472e-b21e-29b925b7692b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mortus-strider:f0t0:s1,f:xs:XP:mortus-strider:f0t0:s1	-	-	-	d864b561c9cb	-	bc24790bce48	-	-	2026-11-24	xproof
 15afdd88-05fc-4335-8a55-c6ee702f3bef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-15afdd88-05fc-4335-8a55-c6ee702f3bef	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+15afdd88-05fc-4335-8a55-c6ee702f3bef	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 15b618f0-281f-4745-8504-bd70e7b4a267	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15b86440-2040-47ae-ab4e-8445b3e24462	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15b86440-2040-47ae-ab4e-8445b3e24462	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
@@ -129,10 +129,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 15d8f129-2518-45f4-9f34-a4fcd4d859af	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15dca6a7-8367-4b86-a86c-e44f10fb3c53	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nervous-gardener:cast:s1,f:xs:XP:nervous-gardener:cast:s1	-	-	-	8c0bd19283bb	-	1a39ff88ce0d	-	-	2026-11-24	xproof
 15dca6a7-8367-4b86-a86c-e44f10fb3c53	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Nervous Gardener/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-15df3467-c67e-4ae2-9e6f-ffb6ad288a5a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+15df3467-c67e-4ae2-9e6f-ffb6ad288a5a	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 15e0250e-a23b-499a-a8d2-24fc13084c28	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:steel-leaf-paladin:cast:s1,f:xs:XP:steel-leaf-paladin:cast:s1	-	-	-	fc71ca68c5ac	-	98b2a9bb7491	-	-	2026-11-24	xproof
 15e0250e-a23b-499a-a8d2-24fc13084c28	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:steel-leaf-paladin:cast:s1,f:xs:XP:steel-leaf-paladin:cast:s1	-	-	-	fc71ca68c5ac	-	98b2a9bb7491	-	-	2026-11-24	xproof
-15e4938d-1cd3-4670-9de5-2dc10abe4c19	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+15e4938d-1cd3-4670-9de5-2dc10abe4c19	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 15e5136e-ed15-49a8-b027-e09436673fb4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 15e71226-feb0-4870-a3ea-d8604ca5b3dc	cast	NULL	owed	refused:start:needs-combat	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 15e83068-6253-4c65-8679-7295f3dc2075	cast	cast	agreed	-	F	start	2	0	f:xs:XP:aether-charge:cast:s1	-	-	-	fc71ca68c5ac	-	bb241591740a	-	-	2026-11-24	xproof

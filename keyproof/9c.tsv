@@ -13,8 +13,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c0255ff-6579-4ce4-810d-01df9922ab33	f1/a0	activate#1.0	agreed	-	X	scen	1	0	Sidequest: Play Blitzball/activate#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c0255ff-6579-4ce4-810d-01df9922ab33	static#1.0	static#1.0	agreed	-	X	scen	1	0	Sidequest: Play Blitzball/static#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9c055ef0-1164-4a9f-80de-23405423aed5	cast	cast-resolve	agreed	-	FX	scen	2	0	Chase Inspiration/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-9c0a8412-af9f-4a22-b462-e9b2d9bd04c6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c0a8412-af9f-4a22-b462-e9b2d9bd04c6	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9c0a8412-af9f-4a22-b462-e9b2d9bd04c6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9c0a8412-af9f-4a22-b462-e9b2d9bd04c6	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9c0aba12-4460-4150-b74f-93f5f8006cf5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c0aba12-4460-4150-b74f-93f5f8006cf5	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c0fd5ad-fbba-4598-80cf-6540888378cb	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:spellgorger-barbarian:cast:s1,f:xs:XP:spellgorger-barbarian:cast:s1	-	-	-	fc71ca68c5ac	-	f502b5c927f0	-	-	2026-11-24	xproof
@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c41b4ad-a73f-4274-9b71-9c9834910e05	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c4219db-1a7a-4d61-bb8b-7998cfed1faf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c4219db-1a7a-4d61-bb8b-7998cfed1faf	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-9c430b5a-83b6-4f4f-b1d3-5737e1f61947	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9c430b5a-83b6-4f4f-b1d3-5737e1f61947	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9c430b5a-83b6-4f4f-b1d3-5737e1f61947	f0/a0	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 9c430b5a-83b6-4f4f-b1d3-5737e1f61947	f0/a1	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 9c430b5a-83b6-4f4f-b1d3-5737e1f61947	f0/a2	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
@@ -77,8 +77,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c5897cd-f209-4e51-adc2-d791e5671029	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c5897cd-f209-4e51-adc2-d791e5671029	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a1	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	f0/a3	NULL	owed	refused:steps-needed:cost:Exile	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 9c58d241-4d9f-4b46-b8ee-f4587f9acfd6	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c5a3407-e3e6-4f5f-9c24-6f24c19e1a2e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

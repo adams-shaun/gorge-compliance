@@ -110,7 +110,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 30929713-47dc-40f0-883c-4bd41aa399d5	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:nimble-innovator:cast:s1,f:xs:XP:nimble-innovator:cast:s1	-	-	-	d864b561c9cb	-	0996f97340a7	-	-	2026-11-24	xproof
 30929713-47dc-40f0-883c-4bd41aa399d5	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:nimble-innovator:cast:s1,f:xs:XP:nimble-innovator:cast:s1	-	-	-	d864b561c9cb	-	0996f97340a7	-	-	2026-11-24	xproof
 3094f214-5aa8-4003-8a1e-035485dfb978	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3094f214-5aa8-4003-8a1e-035485dfb978	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+3094f214-5aa8-4003-8a1e-035485dfb978	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3095f2cf-05c3-4381-929f-c526b6fc30a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3095f2cf-05c3-4381-929f-c526b6fc30a7	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:atog:f0a0:s1,f:xs:XP:atog:f0a0:s1	-	-	-	23c4009444b0	-	d0ed47e7e8f8	-	-	2026-11-25	xproof
 30997b43-fc13-41d3-8064-1ccc2cb6fd2b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -181,7 +181,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 30ec09e4-82bf-4a6b-b6c8-ff267447e0a9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:thriving-grubs:f0t0:s1,f:xs:XP:thriving-grubs:f0t0:s1	-	-	-	d864b561c9cb	-	22c75eac8eba	-	-	2026-11-24	xproof
 30ec09e4-82bf-4a6b-b6c8-ff267447e0a9	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:thriving-grubs:f0t0:s1,f:xs:XP:thriving-grubs:f0t0:s1	-	-	-	d864b561c9cb	-	22c75eac8eba	-	-	2026-11-24	xproof
 30ec09e4-82bf-4a6b-b6c8-ff267447e0a9	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:thriving-grubs:f0t1:s1,f:xs:XP:thriving-grubs:f0t1:s1	-	-	-	d864b561c9cb	-	22c75eac8eba	-	-	2026-11-24	xproof
-30ec73ad-c7a1-4527-8dc6-44bdd65b9ba6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+30ec73ad-c7a1-4527-8dc6-44bdd65b9ba6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 30ee2790-1f5d-4073-aae7-5e7ae30421d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-wolfblood:cast:s1,f:xs:XP:tolsimir-wolfblood:cast:s1	-	-	-	64a08ba7d913	-	b21fc9eb4a80	-	-	2026-11-24	xproof
 30ee2790-1f5d-4073-aae7-5e7ae30421d2	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:tolsimir-wolfblood:f0a0:s1,f:xs:XP:tolsimir-wolfblood:f0a0:s1	-	-	-	d864b561c9cb	-	b21fc9eb4a80	-	-	2026-11-24	xproof
 30f058f8-5777-4c25-b881-8f1d0ce17d3a	cast	cast-resolve	agreed	-	X	scen	1	0	Sarkhan's Resolve/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

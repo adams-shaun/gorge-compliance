@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 44240b1e-c104-4eb4-8ab9-0d56607ba241	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:swiftblade-vindicator:cast:s1,f:xs:XP:swiftblade-vindicator:cast:s1	-	-	-	3aa6ded33acb	-	c776007bd144	-	-	2026-11-25	xproof
 44240b1e-c104-4eb4-8ab9-0d56607ba241	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:swiftblade-vindicator:combat0.attack:s1,f:xs:XP:swiftblade-vindicator:combat0.attack:s1	-	-	-	3aa6ded33acb	-	c776007bd144	-	-	2026-11-25	xproof
 44240b1e-c104-4eb4-8ab9-0d56607ba241	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:swiftblade-vindicator:combat0.block:s1,f:xs:XP:swiftblade-vindicator:combat0.block:s1	-	-	-	3aa6ded33acb	-	c776007bd144	-	-	2026-11-25	xproof
-44295009-9f85-4022-a685-a96079ba3e26	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+44295009-9f85-4022-a685-a96079ba3e26	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 44295009-9f85-4022-a685-a96079ba3e26	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 44295009-9f85-4022-a685-a96079ba3e26	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 4429a30e-17f1-4bcc-92f0-55ab1315adff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:panic-spellbomb:cast:s1,f:xs:XP:panic-spellbomb:cast:s1	-	-	-	d864b561c9cb	-	3859355b1b70	-	-	2026-11-24	xproof
@@ -36,10 +36,10 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4429e14f-a5f7-42e9-a8c3-b59428f92047	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:senate-courier:f0a0:s1,f:xs:XP:senate-courier:f0a0:s1	-	-	-	d864b561c9cb	-	45a76d05a26e	-	-	2026-11-24	xproof
 4431ec11-9bd7-4750-8bc7-378beba06201	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4433a5fd-2daa-440a-b9cc-4ad028358cbc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4433a5fd-2daa-440a-b9cc-4ad028358cbc	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4433a5fd-2daa-440a-b9cc-4ad028358cbc	f0/a1	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4433a5fd-2daa-440a-b9cc-4ad028358cbc	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4433a5fd-2daa-440a-b9cc-4ad028358cbc	f0/a3	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4433a5fd-2daa-440a-b9cc-4ad028358cbc	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4433a5fd-2daa-440a-b9cc-4ad028358cbc	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4433a5fd-2daa-440a-b9cc-4ad028358cbc	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+4433a5fd-2daa-440a-b9cc-4ad028358cbc	f0/a3	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 44350127-f6b6-458f-8f2f-e57a78d83303	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 443f2272-6475-4966-8ca2-717d4cf208ee	cast	cast-resolve	agreed	-	FX	scen	2	0	Dinotomaton/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 443f2272-6475-4966-8ca2-717d4cf208ee	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:dinotomaton:combat0.attack:s1,f:xs:XP:dinotomaton:combat0.attack:s1	-	-	-	3aa6ded33acb	-	078be8028dfe	-	-	2026-11-25	xproof

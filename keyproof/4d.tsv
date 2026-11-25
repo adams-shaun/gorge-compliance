@@ -42,7 +42,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d472308-5bc7-4a3c-81b5-0a757f00d9e2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:consuming-aetherborn:f0t0:s1,f:xs:XP:consuming-aetherborn:f0t0:s1	-	-	-	ae86f6029288	-	e0082680af07	-	-	2026-11-24	xproof
 4d472308-5bc7-4a3c-81b5-0a757f00d9e2	f0/t0	ChangesZone/Backup	agreed	-	FX	start	2	0	x:xs:XP:consuming-aetherborn:f0t0:s1,f:xs:XP:consuming-aetherborn:f0t0:s1	-	-	-	ae86f6029288	-	e0082680af07	-	-	2026-11-24	xproof
 4d47e598-690e-4850-97e4-7136bc7b497e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4d47e598-690e-4850-97e4-7136bc7b497e	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4d47e598-690e-4850-97e4-7136bc7b497e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4d4fbb16-0421-4e9c-af9e-e2c12a11c4ed	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:stench-of-decay:cast:s1,f:xs:XP:stench-of-decay:cast:s1	-	-	-	ea3140b6974b	-	8789807f46b5	-	-	2026-11-24	xproof
 4d4fc571-a859-4460-a3c7-3f76a671ab1b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d4fc571-a859-4460-a3c7-3f76a671ab1b	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
@@ -69,7 +69,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d6a1391-817a-4ddc-840d-886b138eeb3f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:imperial-recruiter:f0t0:s1,f:xs:XP:imperial-recruiter:f0t0:s1	-	-	-	25696bf19d5b	-	e3a6eff0e624	-	-	2026-11-24	xproof
 4d6a1391-817a-4ddc-840d-886b138eeb3f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:imperial-recruiter:f0t0:s1,f:xs:XP:imperial-recruiter:f0t0:s1	-	-	-	25696bf19d5b	-	e3a6eff0e624	-	-	2026-11-24	xproof
 4d6d3e6d-f958-4c17-b117-960fb8033601	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4d6d3e6d-f958-4c17-b117-960fb8033601	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4d6d3e6d-f958-4c17-b117-960fb8033601	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4d6d3e6d-f958-4c17-b117-960fb8033601	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4d6da25d-7b62-4a64-bbaa-ae8edab1dd51	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:supply-runners:f0t0:s1,f:xs:XP:supply-runners:f0t0:s1	-	-	-	8c0bd19283bb	-	a9a8a5303643	-	-	2026-11-24	xproof
 4d6da25d-7b62-4a64-bbaa-ae8edab1dd51	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:supply-runners:f0t0:s1,f:xs:XP:supply-runners:f0t0:s1	-	-	-	8c0bd19283bb	-	a9a8a5303643	-	-	2026-11-24	xproof
@@ -123,7 +123,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4d97b9d1-1138-40da-b593-8065ea6ed7b3	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:grievous-wound:cast:s1,f:xs:XP:grievous-wound:cast:s1	-	-	-	23c4009444b0	-	9774596a3ab8	-	-	2026-11-25	xproof
 4d97b9d1-1138-40da-b593-8065ea6ed7b3	f0/t0	DamageDoneOnce	agreed	-	FX	start	2	0	x:xs:XP:grievous-wound:cast:s1,f:xs:XP:grievous-wound:cast:s1	-	-	-	23c4009444b0	-	9774596a3ab8	-	-	2026-11-25	xproof
 4d97b9d1-1138-40da-b593-8065ea6ed7b3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Grievous Wound/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-4d98aea2-b4ff-4903-ba28-a53fbfaad6b1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4d98aea2-b4ff-4903-ba28-a53fbfaad6b1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4d99e786-585d-4026-9253-19741fb357de	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4da17e9e-df3e-4c46-a0cf-baafbe67186f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4da17e9e-df3e-4c46-a0cf-baafbe67186f	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

@@ -56,7 +56,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6e51a0b2-e07f-4c9d-b055-dd1dcd2e29d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skilled-animator:f0t0:s1,f:xs:XP:skilled-animator:f0t0:s1	-	-	-	d864b561c9cb	-	f354c9fd0087	-	-	2026-11-24	xproof
 6e51a0b2-e07f-4c9d-b055-dd1dcd2e29d4	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:skilled-animator:f0t0:s1,f:xs:XP:skilled-animator:f0t0:s1	-	-	-	d864b561c9cb	-	f354c9fd0087	-	-	2026-11-24	xproof
 6e52e48f-b7a0-4195-8fff-8baed7b7d3fc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6e52e48f-b7a0-4195-8fff-8baed7b7d3fc	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+6e52e48f-b7a0-4195-8fff-8baed7b7d3fc	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6e52e48f-b7a0-4195-8fff-8baed7b7d3fc	f0/t1	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:slith-strider:f0t1:s1,f:xs:XP:slith-strider:f0t1:s1	-	-	-	23c4009444b0	-	0ef5e970c8e4	-	-	2026-11-25	xproof
 6e5d4bbd-4999-4acd-8775-25e02d901035	f0/a0	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6e5d4bbd-4999-4acd-8775-25e02d901035	f0/a1	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 6eca2ac9-16ba-4a11-b6ee-3caf2d7d8254	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6eca2ac9-16ba-4a11-b6ee-3caf2d7d8254	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:tablet-of-compleation:f0a2:s1,f:xs:XP:tablet-of-compleation:f0a2:s1	-	-	-	23b491658465	-	6469bdc8882b	-	-	2026-11-25	xproof
 6eca2ac9-16ba-4a11-b6ee-3caf2d7d8254	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6eca2ac9-16ba-4a11-b6ee-3caf2d7d8254	f0/a2	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6eca2ac9-16ba-4a11-b6ee-3caf2d7d8254	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 6ecc61ff-719a-405d-b02a-01607729d05c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:horned-troll:cast:s1,f:xs:XP:horned-troll:cast:s1	-	-	-	25696bf19d5b	-	e477a340c774	-	-	2026-11-24	xproof
 6ecc61ff-719a-405d-b02a-01607729d05c	f0/a0	Regenerate	agreed	-	FX	start	2	0	x:xs:XP:horned-troll:f0a0:s1,f:xs:XP:horned-troll:f0a0:s1	-	-	-	d864b561c9cb	-	e477a340c774	-	-	2026-11-24	xproof
 6ed13a89-4284-4c01-8099-75e2d68c8c63	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ruric-thar-the-unbowed:cast:s1,f:xs:XP:ruric-thar-the-unbowed:cast:s1	-	-	-	d864b561c9cb	-	ce79835183b9	-	-	2026-11-24	xproof

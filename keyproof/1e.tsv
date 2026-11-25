@@ -58,8 +58,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1e53032e-fe14-4424-86ee-f69336f049fe	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:douser-of-lights:cast:s1,f:xs:XP:douser-of-lights:cast:s1	-	-	-	d864b561c9cb	-	0a325c11a902	-	-	2026-11-24	xproof
 1e575a82-e128-4637-87cd-f075654bc41b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e575a82-e128-4637-87cd-f075654bc41b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e5a5a7d-2c34-4e56-96e9-ebcf7745a03c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1e5a5a7d-2c34-4e56-96e9-ebcf7745a03c	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1e5a5a7d-2c34-4e56-96e9-ebcf7745a03c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1e5a5a7d-2c34-4e56-96e9-ebcf7745a03c	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1e5a5a7d-2c34-4e56-96e9-ebcf7745a03c	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1e640846-8f50-4a94-b7aa-f228124290d3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1e640846-8f50-4a94-b7aa-f228124290d3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -172,8 +172,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1ed63322-f877-4f1c-90bd-e1adb3668d6d	f0/a0	Tap	agreed	-	F	start	2	0	f:xs:XP:vectis-dominator:f0a0:s1	-	-	-	8a1b1a193ec0	-	26133765b586	-	-	2026-11-24	xproof
 1ed662d7-65b9-4024-a892-c4559fb6aaf9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:talas-researcher:cast:s1,f:xs:XP:talas-researcher:cast:s1	-	-	-	5f2128bf97e4	-	6a5e583d08ea	-	-	2026-11-24	xproof
 1ed662d7-65b9-4024-a892-c4559fb6aaf9	f0/a0	Draw	agreed	-	FX	start	2	0	x:xs:XP:talas-researcher:f0a0:s1,f:xs:XP:talas-researcher:f0a0:s1	-	-	-	5f2128bf97e4	-	6a5e583d08ea	-	-	2026-11-24	xproof
-1ed9e351-0000-4b75-8ecb-d15bd88df68a	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1ed9e351-0000-4b75-8ecb-d15bd88df68a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1ed9e351-0000-4b75-8ecb-d15bd88df68a	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+1ed9e351-0000-4b75-8ecb-d15bd88df68a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1ed9e351-0000-4b75-8ecb-d15bd88df68a	f0/t1	NULL	owed	refused:no-generator:trigger:Drawn	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1ed9e351-0000-4b75-8ecb-d15bd88df68a	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 1ed9e351-0000-4b75-8ecb-d15bd88df68a	f1/a1	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

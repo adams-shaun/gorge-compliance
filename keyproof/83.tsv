@@ -91,7 +91,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 837182db-1bf3-4a2c-bd01-1af9d9873561	cast	cast-resolve	agreed	-	FX	scen	2	0	Unsummon/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 8371dee1-5f4a-410a-8b7c-e4110cdbe9bd	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:dauntless-survivor:cast:s1,f:xs:XP:dauntless-survivor:cast:s1	-	-	-	ae86f6029288	-	c0ef7bd5d11b	-	-	2026-11-24	xproof
 8371dee1-5f4a-410a-8b7c-e4110cdbe9bd	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:dauntless-survivor:cast:s1,f:xs:XP:dauntless-survivor:cast:s1	-	-	-	ae86f6029288	-	c0ef7bd5d11b	-	-	2026-11-24	xproof
-83734824-1cad-4649-87ae-a5c338771c4c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83734824-1cad-4649-87ae-a5c338771c4c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 837417d8-8260-486d-a3ed-3b5711eaf34a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83798eb8-b14f-4620-bce2-1a6804a24dc7	cast	cast-resolve	agreed	-	X	scen	1	0	Hawkeye's Bow/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 83798eb8-b14f-4620-bce2-1a6804a24dc7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hawkeye's Bow/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -152,7 +152,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 83b43aba-bf9c-4da2-967d-9daa632e97d2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83b43aba-bf9c-4da2-967d-9daa632e97d2	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 83b4acd0-751d-4882-a32d-6c089bc652ee	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-83b4acd0-751d-4882-a32d-6c089bc652ee	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+83b4acd0-751d-4882-a32d-6c089bc652ee	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 83b9a734-ee92-44c8-bf47-ca69b6d6405e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83b9a734-ee92-44c8-bf47-ca69b6d6405e	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 83bf5610-a798-4508-88d2-c60d96f60d23	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

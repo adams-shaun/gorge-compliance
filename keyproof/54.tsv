@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54702a84-3125-41a7-a875-fe2ec870836d	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:war-squeak:f0t0:s2,f:xs:XP:war-squeak:f0t0:s2	-	-	-	e07cf3a05ba5	-	79cd5b91fdff	-	-	2026-11-24	xproof
 54702a84-3125-41a7-a875-fe2ec870836d	static#0.0	static#0.0	agreed	-	X	scen	1	0	War Squeak/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 5470dcfa-4eff-43da-abf7-19922841f719	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-5470dcfa-4eff-43da-abf7-19922841f719	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+5470dcfa-4eff-43da-abf7-19922841f719	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 5470dcfa-4eff-43da-abf7-19922841f719	f0/t1	ChangesZone/Persist	agreed	-	FX	start	2	0	x:xs:XP:kitchen-finks:f0t1:s1,f:xs:XP:kitchen-finks:f0t1:s1	-	-	-	3aa6ded33acb	-	e2187fa2ba38	-	-	2026-11-25	xproof
 54731e3f-a84a-4fc9-8c02-2f769133c71c	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:diregraf-scavenger:cast:s1,f:xs:XP:diregraf-scavenger:cast:s1	-	-	-	d864b561c9cb	-	e2495c713158	-	-	2026-11-24	xproof
 54731e3f-a84a-4fc9-8c02-2f769133c71c	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:diregraf-scavenger:cast:s1,f:xs:XP:diregraf-scavenger:cast:s1	-	-	-	d864b561c9cb	-	e2495c713158	-	-	2026-11-24	xproof
@@ -127,7 +127,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 54884040-b426-43da-9bb1-016621e1446d	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 54884040-b426-43da-9bb1-016621e1446d	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:dragon-whisperer:f0a2:s1,f:xs:XP:dragon-whisperer:f0a2:s1	-	-	-	23b491658465	-	5d02657e08a2	-	-	2026-11-25	xproof
 54884040-b426-43da-9bb1-016621e1446d	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:dragon-whisperer:f0a2:s1,f:xs:XP:dragon-whisperer:f0a2:s1	-	-	-	23b491658465	-	5d02657e08a2	-	-	2026-11-25	xproof
-54884040-b426-43da-9bb1-016621e1446d	f0/a2	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+54884040-b426-43da-9bb1-016621e1446d	f0/a2	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 54917578-9493-499e-b200-51d5cf7978ff	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rescue-pepper-potts:f0t0:s1,f:xs:XP:rescue-pepper-potts:f0t0:s1	-	-	-	8c0bd19283bb	-	a57b1bfcd99c	-	-	2026-11-24	xproof
 54917578-9493-499e-b200-51d5cf7978ff	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:rescue-pepper-potts:f0t0:s1,f:xs:XP:rescue-pepper-potts:f0t0:s1	-	-	-	8c0bd19283bb	-	a57b1bfcd99c	-	-	2026-11-24	xproof
 54970935-b3d3-4f65-a262-c4975f2787e5	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:devoted-retainer:cast:s1,f:xs:XP:devoted-retainer:cast:s1	-	-	-	23c4009444b0	-	abf22dca3504	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof

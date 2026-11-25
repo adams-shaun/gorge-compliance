@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 90076bf5-aa9a-4a6e-9035-9aa97fd5561e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90076bf5-aa9a-4a6e-9035-9aa97fd5561e	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90076bf5-aa9a-4a6e-9035-9aa97fd5561e	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 90076bf5-aa9a-4a6e-9035-9aa97fd5561e	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8a1b1a193ec0	-	-	-	-	2026-11-24	xproof
 900ae045-0160-4e85-b283-e35399c2acec	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bastion-inventor:cast:s1,f:xs:XP:bastion-inventor:cast:s1	-	-	-	d864b561c9cb	-	74e48665c8fb	-	-	2026-11-24	xproof
 900b9409-9c16-414d-8674-2ea42c2415a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:magmakin-artillerist:cast:s1,f:xs:XP:magmakin-artillerist:cast:s1	-	-	-	23c4009444b0	-	cc1dc24bc20e	-	-	2026-11-25	xproof
@@ -42,8 +42,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 902e7d4b-7ab4-40b5-b3a5-c83ef604989a	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:primal-boost:cast:s1,f:xs:XP:primal-boost:cast:s1	-	-	-	23b491658465	-	6c2f6563afa7	-	-	2026-11-24	xproof
 902e7d4b-7ab4-40b5-b3a5-c83ef604989a	f0/t0	Cycled	agreed	-	FX	start	2	0	x:xs:XP:primal-boost:cast:s1,f:xs:XP:primal-boost:cast:s1	-	-	-	23b491658465	-	6c2f6563afa7	-	-	2026-11-24	xproof
 902eb71f-62b3-40cb-816b-f6b7e92e91e7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90379825-1894-4b79-bf72-445175e97ffb	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-90379825-1894-4b79-bf72-445175e97ffb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+90379825-1894-4b79-bf72-445175e97ffb	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+90379825-1894-4b79-bf72-445175e97ffb	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 9038a457-ce01-4f6d-9e2b-5220f08b4290	cast	cast-resolve	agreed	-	X	scen	1	0	Call a Surprise Witness/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9039f59a-915b-4b16-a5c4-1a5fbfb0b639	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9039f59a-915b-4b16-a5c4-1a5fbfb0b639	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

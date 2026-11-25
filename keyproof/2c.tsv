@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c02c8e3-943a-4c20-9dad-1408793a825e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c02c8e3-943a-4c20-9dad-1408793a825e	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 2c02c8e3-943a-4c20-9dad-1408793a825e	f0/t1	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
-2c04371a-af69-4e42-8cda-096cf8312b5e	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c04371a-af69-4e42-8cda-096cf8312b5e	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c04371a-af69-4e42-8cda-096cf8312b5e	f0/t0	NULL	owed	refused:no-generator:trigger:Discarded	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:threnody-singer:f0t0:s1,f:xs:XP:threnody-singer:f0t0:s1	-	-	-	ae86f6029288	-	44a3c69ad9d4	-	-	2026-11-24	xproof
 2c0816bd-8ce2-4ddf-845a-bcdaf929fe28	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:threnody-singer:f0t0:s1,f:xs:XP:threnody-singer:f0t0:s1	-	-	-	ae86f6029288	-	44a3c69ad9d4	-	-	2026-11-24	xproof
@@ -109,7 +109,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 2c89cf19-8dc6-422e-bbf8-4dd5a399c630	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 2c89cf19-8dc6-422e-bbf8-4dd5a399c630	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c90b7fa-d5bf-4c46-92d5-3014ea1bec50	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-2c91c236-34d7-4454-a55a-784db7f68bde	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+2c91c236-34d7-4454-a55a-784db7f68bde	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 2c964157-d414-4d4e-822b-12ce61e882ff	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 2c96ab90-155b-4bf4-acc9-65a2f0cd3189	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Capital City/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 2c96ab90-155b-4bf4-acc9-65a2f0cd3189	f0/a1	activate#0.1	agreed	-	X	scen	1	0	Capital City/activate#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof

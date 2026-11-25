@@ -28,12 +28,12 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b17048f-8c7f-4e29-8f56-16db4c2106e6	f0/t0	trigger#0.0	agreed	-	FX	scen	2	0	Los Diablos Missile Base/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b17048f-8c7f-4e29-8f56-16db4c2106e6	land	play-land	agreed	-	FX	scen	2	0	Los Diablos Missile Base/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4b1874af-4ea5-4e22-a4d4-e718d75fe95e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b1874af-4ea5-4e22-a4d4-e718d75fe95e	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b1874af-4ea5-4e22-a4d4-e718d75fe95e	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b1874af-4ea5-4e22-a4d4-e718d75fe95e	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 4b1befff-48fa-47a3-832e-bdaf43495c02	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 4b1bf05e-753e-4350-a913-894cf3cecc0c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:fleshbag-marauder:f0t0:s1,f:xs:XP:fleshbag-marauder:f0t0:s1	-	-	-	8a1b1a193ec0	-	bd8999bfa6d7	-	-	2026-11-24	xproof
 4b1bf05e-753e-4350-a913-894cf3cecc0c	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:fleshbag-marauder:f0t0:s1,f:xs:XP:fleshbag-marauder:f0t0:s1	-	-	-	8a1b1a193ec0	-	bd8999bfa6d7	-	-	2026-11-24	xproof
-4b1f68a2-b606-4c64-bd44-a9714808316d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b1f68a2-b606-4c64-bd44-a9714808316d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b1f68a2-b606-4c64-bd44-a9714808316d	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1f68a2-b606-4c64-bd44-a9714808316d	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 4b1fee86-360d-41d8-9238-eff216376732	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -65,7 +65,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b4f268d-34ae-416d-a412-66f4fe37659c	cast	cast	agreed	-	F	start	4	0	f:xs:XP:sphinx-of-uthuun:cast:s1	-	-	-	d864b561c9cb	-	5b3b193a967a	-	-	2026-11-24	xproof
 4b4f268d-34ae-416d-a412-66f4fe37659c	f0/t0	ChangesZone	agreed	-	F	start	4	0	f:xs:XP:sphinx-of-uthuun:cast:s1	-	-	-	d864b561c9cb	-	5b3b193a967a	-	-	2026-11-24	xproof
 4b505a4c-ccc3-4461-bbc4-ad5d39f9b879	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b508087-99da-4eb1-8b12-29162f2ec85d	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b508087-99da-4eb1-8b12-29162f2ec85d	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b508087-99da-4eb1-8b12-29162f2ec85d	f0/a1	Regenerate	agreed	-	FX	start	4	0	x:xs:XP:altanak-the-thrice-called:cast:s1,f:xs:XP:altanak-the-thrice-called:cast:s1	-	-	-	23c4009444b0	-	6d7bd5ebdc23	-	-	2026-11-25	xproof
 4b508087-99da-4eb1-8b12-29162f2ec85d	land	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4b515bb0-f275-4400-8032-3173b799ab40	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:walking-ballista:cast:s1,f:xs:XP:walking-ballista:cast:s1	-	-	-	d864b561c9cb	-	16260c3ec56a	-	-	2026-11-24	xproof
@@ -133,7 +133,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4b9e529c-4fbd-4944-828d-7fbc8f26c991	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:sphinx-bone-wand:cast:s1,f:xs:XP:sphinx-bone-wand:cast:s1	-	-	-	d864b561c9cb	-	f6819b4c3f88	-	-	2026-11-24	xproof
 4b9e529c-4fbd-4944-828d-7fbc8f26c991	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 4b9f6a6e-c168-4732-b454-2272d56636da	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-4b9f6a6e-c168-4732-b454-2272d56636da	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+4b9f6a6e-c168-4732-b454-2272d56636da	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4ba1f2c5-6456-4809-a563-fd5bd311869a	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23c4009444b0	-	a045ddf3b34d	-	-	2026-11-25	xproof
 4ba4cb4b-f421-4abd-8fcf-a01174447790	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:selfcraft-mechan:cast:s2,f:xs:XP:selfcraft-mechan:cast:s2	-	-	-	5437c1394672	-	82e9204f823e	-	-	2026-11-24	xproof
 4ba4cb4b-f421-4abd-8fcf-a01174447790	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:selfcraft-mechan:cast:s2,f:xs:XP:selfcraft-mechan:cast:s2	-	-	-	5437c1394672	-	82e9204f823e	-	-	2026-11-24	xproof

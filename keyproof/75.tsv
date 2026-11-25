@@ -11,9 +11,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75132177-0881-4158-9d65-73f5ba9d4402	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 751321ac-af07-4b7e-976f-5bf4e4281470	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 751321ac-af07-4b7e-976f-5bf4e4281470	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-7514e401-7aa1-405d-9f7a-312b4e630cc2	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7514e401-7aa1-405d-9f7a-312b4e630cc2	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7514e401-7aa1-405d-9f7a-312b4e630cc2	f0/a0	NULL	owed	refused:steps-needed:cost:GP	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
-7514e401-7aa1-405d-9f7a-312b4e630cc2	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+7514e401-7aa1-405d-9f7a-312b4e630cc2	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 7514e401-7aa1-405d-9f7a-312b4e630cc2	f1/t0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 751da0fa-0ab1-4b8c-81bb-d86a0a280ac4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 751f22bc-bcea-4213-a37b-b5f72448a4c4	cast	-	diagnosed	-	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -188,7 +188,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 75f269df-ee49-44db-b256-4d005e3022fb	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:leonin-snarecaster:f0t0:s1,f:xs:XP:leonin-snarecaster:f0t0:s1	-	-	-	d864b561c9cb	-	3a61ed18dc9e	-	-	2026-11-24	xproof
 75f28e54-17ce-49f9-85b2-9f9a04e1d86f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 75f381a6-49f9-4caf-a96a-91c75640b9b0	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:raking-canopy:cast:s1,f:xs:XP:raking-canopy:cast:s1	-	-	-	8a1b1a193ec0	-	b49991363625	-	-	2026-11-24	xproof
-75f381a6-49f9-4caf-a96a-91c75640b9b0	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+75f381a6-49f9-4caf-a96a-91c75640b9b0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 75f5d372-4ff9-430c-8302-72472439e0d2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blood-money:cast:s1,f:xs:XP:blood-money:cast:s1	-	-	-	8c0bd19283bb	-	50e1b99cbc7b	-	-	2026-11-24	xproof
 75f7d9c7-5d52-4bfe-a730-62fef187b8b8	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:hoarder-s-overflow:f0t0:s1,f:xs:XP:hoarder-s-overflow:f0t0:s1	-	-	-	25696bf19d5b	-	83fc86ac1290	-	-	2026-11-24	xproof
 75f7d9c7-5d52-4bfe-a730-62fef187b8b8	f0/a0	Discard	agreed	-	FX	start	2	0	x:xs:XP:hoarder-s-overflow:f0a0:s1,f:xs:XP:hoarder-s-overflow:f0a0:s1	-	-	-	3aa6ded33acb	-	83fc86ac1290	-	-	2026-11-25	xproof

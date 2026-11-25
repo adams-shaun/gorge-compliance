@@ -102,7 +102,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 096eac52-00c2-4439-b2f3-ff555d15ec88	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Marina Vendrell's Grimoire/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 096eac52-00c2-4439-b2f3-ff555d15ec88	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Marina Vendrell's Grimoire/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 096eac52-00c2-4439-b2f3-ff555d15ec88	static#0.0	static#0.0	agreed	-	X	scen	1	0	Marina Vendrell's Grimoire/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-096fbb51-be73-4edc-a051-770a12c09005	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+096fbb51-be73-4edc-a051-770a12c09005	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 09726c3d-f700-4bf4-a9e7-326fe41b0a4a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:skybox-ferry:cast:s1,f:xs:XP:skybox-ferry:cast:s1	-	-	-	23c4009444b0	-	4ef42d212d18	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 09726c3d-f700-4bf4-a9e7-326fe41b0a4a	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:skybox-ferry:f0a0:s1,f:xs:XP:skybox-ferry:f0a0:s1	-	-	-	23c4009444b0	-	4ef42d212d18	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 09726c3d-f700-4bf4-a9e7-326fe41b0a4a	f0/a1	Draw/Cycling	agreed	-	FX	start	2	0	x:xs:XP:skybox-ferry:f0a1:s1,f:xs:XP:skybox-ferry:f0a1:s1	-	-	-	23c4009444b0	-	4ef42d212d18	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -135,11 +135,11 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 099b8d2c-b482-48dd-b6bc-dedf546d66c5	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Marang River Regent/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 099b8d2c-b482-48dd-b6bc-dedf546d66c5	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 099fd4b3-92fd-4b5f-bb4f-eefa6f09700c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-099fd4b3-92fd-4b5f-bb4f-eefa6f09700c	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+099fd4b3-92fd-4b5f-bb4f-eefa6f09700c	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 09a1ab1b-d9f0-4a2a-a448-3190f85006e4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09a400bd-83f1-4fac-a218-64c9f041874f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 09a688c1-21f6-4c7d-a6bd-aedc0d76a671	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-09a70ae8-3859-4a09-901d-dce063fa3b5f	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+09a70ae8-3859-4a09-901d-dce063fa3b5f	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 09a70ae8-3859-4a09-901d-dce063fa3b5f	f0/a1	Destroy	agreed	-	FX	start	2	0	x:xs:XP:wasteland:f0a0:s1,f:xs:XP:wasteland:f0a0:s1	-	-	-	8c0bd19283bb	-	60c558303c1f	-	-	2026-11-24	xproof
 09a70ae8-3859-4a09-901d-dce063fa3b5f	land	land	agreed	-	FX	start	2	0	x:xs:XP:wasteland:land:s1,f:xs:XP:wasteland:land:s1	-	-	-	5f2128bf97e4	-	60c558303c1f	-	-	2026-11-24	xproof
 09aeea91-b1dc-443f-a509-4758f052c0a7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

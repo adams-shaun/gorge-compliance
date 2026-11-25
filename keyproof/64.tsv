@@ -44,13 +44,13 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 64399663-2c1e-447e-a3ed-c49ebd9f2231	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:hoverstone-pilgrim:combat0.block:s1,f:xs:XP:hoverstone-pilgrim:combat0.block:s1	-	-	-	3aa6ded33acb	-	c7b4147c0b76	-	-	2026-11-25	xproof
 64399663-2c1e-447e-a3ed-c49ebd9f2231	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Hoverstone Pilgrim/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64399663-2c1e-447e-a3ed-c49ebd9f2231	f0/t0	BecomesTarget/Ward	agreed	-	FX	start	2	0	x:xs:XP:hoverstone-pilgrim:f0t0:s1,f:xs:XP:hoverstone-pilgrim:f0t0:s1	-	-	-	3aa6ded33acb	-	c7b4147c0b76	-	-	2026-11-25	xproof
-643c1ee3-a653-4a6c-b705-a61f3b67e38c	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+643c1ee3-a653-4a6c-b705-a61f3b67e38c	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 643ddf81-bbd3-4398-b5a7-1169c6e2b081	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 643ddf81-bbd3-4398-b5a7-1169c6e2b081	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 643ddf81-bbd3-4398-b5a7-1169c6e2b081	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 6441456a-cc20-48bb-95e9-c981fea8ea98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:triclopean-sight:f0t0:s1,f:xs:XP:triclopean-sight:f0t0:s1	-	-	-	d864b561c9cb	-	52c71febb529	-	-	2026-11-24	xproof
 6441456a-cc20-48bb-95e9-c981fea8ea98	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:triclopean-sight:f0t0:s1,f:xs:XP:triclopean-sight:f0t0:s1	-	-	-	d864b561c9cb	-	52c71febb529	-	-	2026-11-24	xproof
-64418e1f-4fb1-4029-a31e-135b2d2c0ab9	cast	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+64418e1f-4fb1-4029-a31e-135b2d2c0ab9	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 644379e7-782e-48e1-9b47-c4dc62e62d85	cast	cast-resolve	agreed	-	X	scen	1	0	Fractal Anomaly/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 64446130-46d0-4129-a718-ed6a04218100	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 644a8946-4890-4c2b-978f-02eedc95b5ad	cast	cast	agreed	-	F	start	2	0	f:xs:XP:book-burning:cast:s1	-	-	-	fc71ca68c5ac	-	a6cfec388b96	-	-	2026-11-24	xproof
@@ -111,7 +111,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 647d7988-9a5d-4700-9238-938d0d5fae12	f0/a0	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 647d7988-9a5d-4700-9238-938d0d5fae12	f0/t0	NULL	owed	refused:no-generator:trigger:LifeGained	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 647e5639-6339-48af-af96-e48729e1cad3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-6480ab32-3a29-4449-8ff7-c8e43c320ed3	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+6480ab32-3a29-4449-8ff7-c8e43c320ed3	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 64824ae5-efab-4b55-9d3c-b9c690bad857	cast	NULL	owed	refused:start:needs-target	-	start	0	0	-	-	-	-	3aa6ded33acb	-	-	-	-	2026-11-25	xproof
 6487fc1b-5c83-4d09-94d3-175725bcb922	cast	cast-resolve	agreed	-	FX	scen	2	0	Brigid's Command/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 64883ef2-c536-42e2-b52f-cfd1984fcdfd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

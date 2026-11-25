@@ -19,7 +19,7 @@ d608a3fa-faee-44a4-9ab6-be701d3b7a49	static#0.0	static#0.0	agreed	-	X	scen	1	0	S
 d60c8cfe-435c-419e-a44b-b47d49d1afef	cast	cast	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	5d727db55ead	-	-	2026-11-24	xproof
 d60c8cfe-435c-419e-a44b-b47d49d1afef	f0/t0	ChangesZone	owed	harness	-	start	0	0	-	-	-	-	d864b561c9cb	-	5d727db55ead	-	-	2026-11-24	xproof
 d60cbdf0-f20f-4306-be6b-eed90d2a2f77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d60cbdf0-f20f-4306-be6b-eed90d2a2f77	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d60cbdf0-f20f-4306-be6b-eed90d2a2f77	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d60e14b4-f750-40cc-85b5-17c87ae8a584	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6158860-ada8-4e39-8156-23dee2f68f79	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ugin-s-mastery:cast:s1,f:xs:XP:ugin-s-mastery:cast:s1	-	-	-	8c0bd19283bb	-	d084445dd541	-	-	2026-11-24	xproof
 d6158860-ada8-4e39-8156-23dee2f68f79	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
@@ -140,7 +140,7 @@ d6b0198a-c1f2-4142-b5e2-8205adf14d0a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Zhao,
 d6b0198a-c1f2-4142-b5e2-8205adf14d0a	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Zhao, Ruthless Admiral/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6b2c998-a226-426c-a40d-6e6007041bfe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6b2c998-a226-426c-a40d-6e6007041bfe	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-d6b2c998-a226-426c-a40d-6e6007041bfe	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+d6b2c998-a226-426c-a40d-6e6007041bfe	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone:filter	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d6b478d1-5015-49ba-b1aa-cbc2b08107a6	cast	cast-resolve	agreed	-	FX	scen	2	0	Vindictive Triumph/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 d6b4810f-2bee-4c83-b13d-c46fb7dd8e08	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6b4810f-2bee-4c83-b13d-c46fb7dd8e08	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:ojutai-monument:f0a1:s2,f:xs:XP:ojutai-monument:f0a1:s2	-	-	-	d864b561c9cb	-	33d1563126bb	-	-	2026-11-24	xproof
@@ -153,7 +153,7 @@ d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	combat#0.attack	combat.attack	agreed	-	FX	s
 d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:combat0.block:s1,f:xs:XP:akul-the-unrepentant:combat0.block:s1	-	-	-	3aa6ded33acb	-	3be382dd3441	-	-	2026-11-25	xproof
 d6b56d6d-e2f6-47f5-a9d1-cd0e17f94a0d	f0/a0	ChangeZone	agreed	-	FX	start	2	0	x:xs:XP:akul-the-unrepentant:f0a0:s1,f:xs:XP:akul-the-unrepentant:f0a0:s1	-	-	-	3aa6ded33acb	-	3be382dd3441	-	-	2026-11-25	xproof
 d6b67c7e-3b24-4f60-8e3a-c6ca45229d7f	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-d6b67c7e-3b24-4f60-8e3a-c6ca45229d7f	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+d6b67c7e-3b24-4f60-8e3a-c6ca45229d7f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 d6b6c27e-8028-49b1-90c6-ae0907159f85	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d6b6c27e-8028-49b1-90c6-ae0907159f85	f0/a0	Pump	agreed	-	FX	start	2	0	x:xs:XP:windreaver:f0a0:s1,f:xs:XP:windreaver:f0a0:s1	-	-	-	d864b561c9cb	-	a4d02fd6da9b	-	-	2026-11-24	xproof
 d6b6c27e-8028-49b1-90c6-ae0907159f85	f0/a1	Pump	agreed	-	FX	start	2	0	x:xs:XP:windreaver:f0a1:s1,f:xs:XP:windreaver:f0a1:s1	-	-	-	d864b561c9cb	-	a4d02fd6da9b	-	-	2026-11-24	xproof

@@ -13,7 +13,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 060c7999-ab81-4e37-af65-7cd219b693c8	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:fiend-binder:f0t0:s1,f:xs:XP:fiend-binder:f0t0:s1	-	-	-	d864b561c9cb	-	37d7e1395001	-	-	2026-11-24	xproof
 060d109f-2969-4f9e-a723-535d662a571a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mukotai-soulripper:cast:s1,f:xs:XP:mukotai-soulripper:cast:s1	-	-	-	d864b561c9cb	-	381a74e5a8f6	-	-	2026-11-24	xproof
 060d109f-2969-4f9e-a723-535d662a571a	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-060d109f-2969-4f9e-a723-535d662a571a	f0/t0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+060d109f-2969-4f9e-a723-535d662a571a	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 060deaff-44d6-4f03-9568-bcb7add80255	cast	cast-resolve	agreed	-	FX	scen	2	0	Drakuseth, Maw of Flames/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 060deaff-44d6-4f03-9568-bcb7add80255	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:drakuseth-maw-of-flames:combat0.attack:s1,f:xs:XP:drakuseth-maw-of-flames:combat0.attack:s1	-	-	-	3aa6ded33acb	-	d7e7fbbd5dcb	-	-	2026-11-25	xproof
 060deaff-44d6-4f03-9568-bcb7add80255	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:drakuseth-maw-of-flames:combat0.block:s1,f:xs:XP:drakuseth-maw-of-flames:combat0.block:s1	-	-	-	3aa6ded33acb	-	d7e7fbbd5dcb	-	-	2026-11-25	xproof
@@ -75,7 +75,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 06432957-decc-4ba2-95b1-cc9536a576d4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06432957-decc-4ba2-95b1-cc9536a576d4	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 06494c26-3822-43ee-bedf-611c9ec7cc6b	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:puppet-conjurer:f0t0:s1,f:xs:XP:puppet-conjurer:f0t0:s1	-	-	-	3aa6ded33acb	-	846af6adfe5c	-	-	2026-11-25	xproof
-06494c26-3822-43ee-bedf-611c9ec7cc6b	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+06494c26-3822-43ee-bedf-611c9ec7cc6b	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 06494c26-3822-43ee-bedf-611c9ec7cc6b	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:puppet-conjurer:f0t0:s1,f:xs:XP:puppet-conjurer:f0t0:s1	-	-	-	3aa6ded33acb	-	846af6adfe5c	-	-	2026-11-25	xproof
 06496a05-7f1a-402c-9594-304cd82bfefd	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:scourge-of-the-throne:cast:s1,f:xs:XP:scourge-of-the-throne:cast:s1	-	-	-	8c0bd19283bb	-	dd70cebc821c	-	-	2026-11-24	xproof
 06496a05-7f1a-402c-9594-304cd82bfefd	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:scourge-of-the-throne:f0t0:s1,f:xs:XP:scourge-of-the-throne:f0t0:s1	-	-	-	8c0bd19283bb	-	dd70cebc821c	-	-	2026-11-24	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 068b370f-a358-4244-8050-6c81680c55c7	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Stocking the Pantry/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 068b370f-a358-4244-8050-6c81680c55c7	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Stocking the Pantry/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 068b9586-53e3-4791-a26c-a6b38d038f66	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-068b9586-53e3-4791-a26c-a6b38d038f66	f0/a0	-	owed	no-generator	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+068b9586-53e3-4791-a26c-a6b38d038f66	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 068b9586-53e3-4791-a26c-a6b38d038f66	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
 068cbbe3-43c3-425e-80ec-d1ce5c02ea9b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 06905dfb-b2df-4849-8848-fd3c964aa8c9	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:malamet-brawler:cast:s1,f:xs:XP:malamet-brawler:cast:s1	-	-	-	23b491658465	-	f5de13864b46	-	-	2026-11-24	xproof

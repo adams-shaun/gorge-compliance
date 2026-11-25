@@ -46,8 +46,8 @@ bd388ad9-a47b-4b0b-b94a-8e4343cd3de5	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Unhol
 bd388ad9-a47b-4b0b-b94a-8e4343cd3de5	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Unholy Annex/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd39e333-b0b8-4a85-8645-d77f4a3941db	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Rabanastre, Royal City/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd39e333-b0b8-4a85-8645-d77f4a3941db	land	play-land	agreed	-	X	scen	1	0	Rabanastre, Royal City/play-land/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
-bd3ce6a2-9efc-4dab-a357-9f2aa0a4c0c6	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bd3e55cf-ffca-402c-91ea-2420035a9dd1	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bd3ce6a2-9efc-4dab-a357-9f2aa0a4c0c6	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
+bd3e55cf-ffca-402c-91ea-2420035a9dd1	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bd4151cc-743a-40f0-9e51-1f67555d9ab3	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:lion-heart:f0t0:s2,f:xs:XP:lion-heart:f0t0:s2	-	-	-	267e485f6204	-	25052c5b75f0	-	-	2026-11-24	xproof
 bd4151cc-743a-40f0-9e51-1f67555d9ab3	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Lion Heart/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bd4151cc-743a-40f0-9e51-1f67555d9ab3	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:lion-heart:f0t0:s2,f:xs:XP:lion-heart:f0t0:s2	-	-	-	267e485f6204	-	25052c5b75f0	-	-	2026-11-24	xproof
@@ -197,7 +197,7 @@ bdcb7aed-3595-4c7e-b9da-543e92de919a	combat#0.block	combat#0.block	agreed	-	X	sc
 bdcb7aed-3595-4c7e-b9da-543e92de919a	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Locke Cole/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bdce1af0-3643-4e77-88f9-320206a191d4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zombie-infestation:cast:s1,f:xs:XP:zombie-infestation:cast:s1	-	-	-	25696bf19d5b	-	a355845893db	-	-	2026-11-24	xproof
 bdce1af0-3643-4e77-88f9-320206a191d4	f0/a0	Token	agreed	-	FX	start	2	0	x:xs:XP:zombie-infestation:f0a0:s1,f:xs:XP:zombie-infestation:f0a0:s1	-	-	-	23c4009444b0	-	a355845893db	-	-	2026-11-25	xproof
-bdcf0af3-3976-400d-a8b7-15e959e2b255	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bdcf0af3-3976-400d-a8b7-15e959e2b255	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bdd0d01d-b9f2-4c3f-9b3b-04e122013de5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bdd41af0-bbd1-4ecd-a699-99f006f5e5ce	cast	cast-resolve	agreed	-	X	scen	1	0	Thorin Oakenshield/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 bdd41af0-bbd1-4ecd-a699-99f006f5e5ce	combat#0.attack	combat#0.attack	agreed	-	X	scen	1	0	Thorin Oakenshield/combat#0.attack/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -237,7 +237,7 @@ bdecf59c-f8bd-4003-9058-685b70c08837	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a
 bdecf59c-f8bd-4003-9058-685b70c08837	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bdf28770-0962-4317-822f-c187bc6706d1	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 bdf28770-0962-4317-822f-c187bc6706d1	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-bdf476e5-1d57-4b17-b45b-d52fd75aadeb	f0/a0	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+bdf476e5-1d57-4b17-b45b-d52fd75aadeb	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 bdf476e5-1d57-4b17-b45b-d52fd75aadeb	f0/a1	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ea3140b6974b	-	-	-	-	2026-11-24	xproof
 bdf476e5-1d57-4b17-b45b-d52fd75aadeb	land	land	agreed	-	X	start	2	0	x:xs:XP:lake-of-the-dead:land:s1	-	-	-	ea3140b6974b	-	2b1c12116ab5	-	-	2026-11-24	xproof
 bdf497b5-166f-46a7-8e18-ae0b8f97768c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof

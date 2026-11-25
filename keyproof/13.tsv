@@ -3,7 +3,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1300dc30-a089-41f5-b1a7-e4779ebb73ef	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1300dc30-a089-41f5-b1a7-e4779ebb73ef	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13044ca1-76a3-43b2-a8e4-3bbc692c30c5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-1306c72f-fc6b-470b-a95e-0364e0e30ac7	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+1306c72f-fc6b-470b-a95e-0364e0e30ac7	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 1306c72f-fc6b-470b-a95e-0364e0e30ac7	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:sparkhunter-masticore:f0a1:s1,f:xs:XP:sparkhunter-masticore:f0a1:s1	-	-	-	ae86f6029288	-	dd06b3ad646d	-	-	2026-11-24	xproof
 1306c72f-fc6b-470b-a95e-0364e0e30ac7	f0/a2	Pump	agreed	-	FX	start	2	0	x:xs:XP:sparkhunter-masticore:f0a2:s1,f:xs:XP:sparkhunter-masticore:f0a2:s1	-	-	-	ae86f6029288	-	dd06b3ad646d	-	-	2026-11-24	xproof
 1313da2f-92bb-4862-9153-373972cc1520	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:descent-into-avernus:f0t0:s1,f:xs:XP:descent-into-avernus:f0t0:s1	-	-	-	23c4009444b0	-	47bdc77f985a	-	-	2026-11-25	xproof
@@ -21,7 +21,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 132859dd-de66-45c6-8af4-ab5e202a17b0	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 132859dd-de66-45c6-8af4-ab5e202a17b0	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 132c8a62-00bc-4b89-b775-099d8909f200	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-132ca99a-a3c7-4ed6-b4d0-0edcd7140ca2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	-	-	2026-11-25	xproof
+132ca99a-a3c7-4ed6-b4d0-0edcd7140ca2	cast	NULL	owed	refused:start:needs-stack-target	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 132de6c2-4ca2-41da-9c78-caa59838b641	cast	cast-resolve	agreed	-	X	scen	1	0	Sunstar Lightsmith/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 132de6c2-4ca2-41da-9c78-caa59838b641	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Sunstar Lightsmith/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 133109c3-a2ca-4231-b3b1-baa700800b07	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:primordial-ooze:f0t0:s1,f:xs:XP:primordial-ooze:f0t0:s1	-	-	-	3aa6ded33acb	-	efdfaba241bd	-	-	2026-11-25	xproof
@@ -157,7 +157,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 13ca49a2-8a78-4be4-976a-b684086864bb	f0/t0	NULL	owed	refused:no-generator:trigger:DamageDone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13ca7c14-5db2-4d17-912a-fdeabcdcd9f8	f0/t0	NULL	owed	refused:no-generator:trigger:BecomesTarget	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
-13cb7d87-ff12-4742-8f54-f3175536db40	cast	-	owed	harness	-	game	0	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
+13cb7d87-ff12-4742-8f54-f3175536db40	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	f0/t0	NULL	owed	refused:no-generator:trigger:Phase	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 13cb958f-1e66-4219-901a-ff58275c8475	f0/t1	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
