@@ -1,0 +1,81 @@
+diff --git a/Mage.Sets/src/mage/cards/e/ExtraordinaryJourney.java b/Mage.Sets/src/mage/cards/e/ExtraordinaryJourney.java
+index a737d745df9..3478e619e25 100644
+--- a/Mage.Sets/src/mage/cards/e/ExtraordinaryJourney.java
++++ b/Mage.Sets/src/mage/cards/e/ExtraordinaryJourney.java
+@@ -80,6 +80,11 @@ class ExtraordinaryJourneyEffect extends OneShotEffect {
+ 
+     @Override
+     public boolean apply(Game game, Ability source) {
++        // "up to X target creatures" with X = 0 has no targets at all (XTargetsCountAdjuster clears the
++        // blueprint target), so there is nothing to exile and no card to play (CR 601.2c, 115.6)
++        if (source.getTargets().isEmpty()) {
++            return true;
++        }
+         List<Permanent> permanents = source
+                 .getTargets().get(0).getTargets()
+                 .stream()
+diff --git a/Mage.Tests/src/test/java/org/mage/test/cards/single/woe/ExtraordinaryJourneyTest.java b/Mage.Tests/src/test/java/org/mage/test/cards/single/woe/ExtraordinaryJourneyTest.java
+new file mode 100644
+index 00000000000..2dc12538bcf
+--- /dev/null
++++ b/Mage.Tests/src/test/java/org/mage/test/cards/single/woe/ExtraordinaryJourneyTest.java
+@@ -0,0 +1,59 @@
++package org.mage.test.cards.single.woe;
++
++import mage.constants.PhaseStep;
++import mage.constants.Zone;
++import org.junit.Test;
++import org.mage.test.serverside.base.CardTestPlayerBase;
++
++/**
++ * Extraordinary Journey {X}{X}{U}{U}
++ * Enchantment
++ * When Extraordinary Journey enters the battlefield, exile up to X target creatures. For each of
++ * those cards, its owner may play it for as long as it remains exiled.
++ * <p>
++ * "Up to X" with X = 0 is up to zero targets (CR 601.2c, 115.6): the ability goes on the stack with
++ * no targets and its effect does nothing.
++ */
++public class ExtraordinaryJourneyTest extends CardTestPlayerBase {
++
++    private static final String journey = "Extraordinary Journey";
++
++    @Test
++    public void testXZeroResolvesWithNoTargets() {
++        setStrictChooseMode(true);
++
++        addCard(Zone.BATTLEFIELD, playerA, "Island", 2);
++        addCard(Zone.HAND, playerA, journey);
++        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, journey);
++        setChoice(playerA, "X=0");
++
++        setStopAt(1, PhaseStep.BEGIN_COMBAT);
++        execute();
++
++        assertPermanentCount(playerA, journey, 1);
++        assertPermanentCount(playerB, "Grizzly Bears", 1);
++        assertExileCount(playerB, 0);
++    }
++
++    @Test
++    public void testXOneStillExilesATarget() {
++        setStrictChooseMode(true);
++
++        addCard(Zone.BATTLEFIELD, playerA, "Island", 4);
++        addCard(Zone.HAND, playerA, journey);
++        addCard(Zone.BATTLEFIELD, playerB, "Grizzly Bears");
++
++        castSpell(1, PhaseStep.PRECOMBAT_MAIN, playerA, journey);
++        setChoice(playerA, "X=1");
++        addTarget(playerA, "Grizzly Bears");
++
++        setStopAt(1, PhaseStep.BEGIN_COMBAT);
++        execute();
++
++        assertPermanentCount(playerA, journey, 1);
++        assertPermanentCount(playerB, "Grizzly Bears", 0);
++        assertExileCount(playerB, "Grizzly Bears", 1);
++    }
++}

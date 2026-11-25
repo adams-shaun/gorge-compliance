@@ -104,7 +104,15 @@ GO_TEST_FLAGS ?= -p=2
 # instead of the hardcoded Human, so the target becomes that creature type and loses its printed creature types
 # (CR 205.1a, 613.1d). WildShapeTest checks all three modes; card behaviour changes only for Wild Shape, so the
 # manifests are unchanged.
-XMAGE_REF  ?= 5144fc1304fbde4945e53ec97bd14f73cfe1c3f0
+# 8ddb51df0c = 98052067d4 + Extraordinary Journey resolves with no targets when X is 0 ("exile up to X target
+# creatures", CR 601.2c, 115.6): XTargetsCountAdjuster leaves the ability's target list empty and the effect read
+# getTargets().get(0), throwing IndexOutOfBoundsException. ExtraordinaryJourneyTest.testXZeroResolvesWithNoTargets
+# fails before (Index 0 out of bounds for length 0) and passes after; card behaviour changes only at X = 0.
+# 11940683b90 = 8ddb51df0c (above) joined with 5144fc1304f (Wild Shape; above): 5144fc1304f and 8ddb51df0c are
+# siblings on 98052067d4 and touch only their own card and test, so the join carries both fork heads (it adds no
+# code of its own). Card behaviour changes only for Wild Shape and at Extraordinary Journey's X = 0, so the
+# manifests are unchanged. Fork branch fix/join-wild-shape-extraordinary-journey.
+XMAGE_REF  ?= 11940683b903024a728751604bc5b1573a00e86a
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
