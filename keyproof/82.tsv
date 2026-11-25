@@ -30,7 +30,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82259c84-773d-4670-9b09-d73f5a3be7ea	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 8226f31d-6f51-49c3-87f7-0c68f7f4f9ce	cast	cast-resolve	agreed	-	FX	scen	2	0	Make Your Move/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82284fe4-ecb3-4b27-bb03-27290ad15b17	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:tempting-witch:f0t0:s1,f:xs:XP:tempting-witch:f0t0:s1	-	-	-	ae86f6029288	-	6ee20b13e91b	-	-	2026-11-24	xproof
-82284fe4-ecb3-4b27-bb03-27290ad15b17	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+82284fe4-ecb3-4b27-bb03-27290ad15b17	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 82284fe4-ecb3-4b27-bb03-27290ad15b17	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:tempting-witch:f0t0:s1,f:xs:XP:tempting-witch:f0t0:s1	-	-	-	ae86f6029288	-	6ee20b13e91b	-	-	2026-11-24	xproof
 8229954b-e1ef-4503-8443-2356e2a87663	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:meanders-guide:cast:s1,f:xs:XP:meanders-guide:cast:s1	-	-	-	23c4009444b0	-	b957080f8635	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 8229954b-e1ef-4503-8443-2356e2a87663	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:meanders-guide:f0t0:s1,f:xs:XP:meanders-guide:f0t0:s1	-	-	-	23c4009444b0	-	b957080f8635	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -125,7 +125,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82959ca2-cd96-4cca-9ce0-afb8db209860	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82959ca2-cd96-4cca-9ce0-afb8db209860	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 82959ca2-cd96-4cca-9ce0-afb8db209860	f1/t0	NULL	owed	refused:no-generator:face:flip	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-82959ca2-cd96-4cca-9ce0-afb8db209860	f1/t1	NULL	owed	refused:no-generator:face:flip	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+82959ca2-cd96-4cca-9ce0-afb8db209860	f1/t1	NULL	owed	refused:no-generator:face:flip	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 829d2e11-192f-4093-99f8-e13767b321a2	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 829d2e11-192f-4093-99f8-e13767b321a2	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 829d2e11-192f-4093-99f8-e13767b321a2	f0/a1	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -186,7 +186,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 82f1e02b-7a1a-4771-b435-e00214a73e07	cast	cast	owed	harness	-	start	0	0	-	-	-	-	23b491658465	-	eaf0fb113070	-	-	2026-11-24	xproof
 82f3faa8-39fa-450b-843f-d60a4c36d8f7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 82f3faa8-39fa-450b-843f-d60a4c36d8f7	f0/a0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-82f3faa8-39fa-450b-843f-d60a4c36d8f7	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	5b42d43d5d80	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+82f3faa8-39fa-450b-843f-d60a4c36d8f7	f0/a1	NULL	owed	refused:steps-needed:cost:SubCounter	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	cast	cast-resolve	agreed	-	FX	scen	2	0	Formation Breaker/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:formation-breaker:combat0.attack:s1,f:xs:XP:formation-breaker:combat0.attack:s1	-	-	-	23c4009444b0	-	749f6f2af268	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 82f59ac4-bf94-4fa2-9457-f0bec8360bd9	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Formation Breaker/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
