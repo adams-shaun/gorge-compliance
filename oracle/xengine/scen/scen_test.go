@@ -462,6 +462,45 @@ func TestScenUnlistedByXMageIsGenerated(t *testing.T) {
 	}
 }
 
+// TestStartxmagemissing is the xproof repro: every example card no XMage
+// manifest lists must still get a start file. A card with needs (Azog's
+// trigger, a cast that reads the graveyard) used to refuse in certdeck.Build
+// before a start was written, so Forge, XMage and gorge never played the key;
+// the XMage leg is already marked not_sent downstream (xprep's unlisted) and
+// keyproof credits a Forge agreement refs F. Brazen Bluff is not here: its
+// focus targets a spell on the stack, which no start can hold, so it refuses
+// with start:needs-stack-target whatever XMage lists.
+func TestStartxmagemissing(t *testing.T) {
+	reg, b := testBuilder(t)
+	examples := []struct{ card, key string }{
+		{"Azog, Moria's Ruin", "f0/t0"},
+		{"Blastoneuron", "cast"},
+		{"Borg Cube", "cast"},
+		{"Brad Boimler, Eager Ensign", "cast"},
+		{"Branching Timeline", "cast"},
+	}
+	absent, starts := 0, 0
+	for _, tc := range examples {
+		if _, ok := b.Sp.XMage(reg, tc.card); ok {
+			continue // XMage lists the card now: the XMage leg is no longer inapplicable
+		}
+		absent++
+		res, err := Generate(reg, b, tc.card, tc.key, Options{Prefer: "start"})
+		if err != nil {
+			t.Errorf("%s %s: %v", tc.card, tc.key, err)
+			continue
+		}
+		if res.Path != PathStart || res.Start == nil {
+			t.Errorf("%s %s path %q reason %q, want a start file", tc.card, tc.key, res.Path, res.Reason)
+			continue
+		}
+		starts++
+	}
+	if absent < 2 || starts < 2 {
+		t.Fatalf("only %d example cards are unlisted and %d got a start; the repro needs at least two of each", absent, starts)
+	}
+}
+
 // startRow is one forced-line start: the placements it must make and the
 // focus that makes the key's event happen.
 type startRow struct {
