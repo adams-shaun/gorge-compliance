@@ -1,7 +1,7 @@
 #carddb keyproof v1
 oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	cite	ticket	gorge_sha	corpus_pin	script_sha	xmage_ref	forge_ref	measured	writer
 d7035db0-4bde-4ba3-9028-dd14191c8126	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:elvish-archivist:cast:s1,f:xs:XP:elvish-archivist:cast:s1	-	-	-	23b491658465	-	44b6a2736d15	-	-	2026-11-24	xproof
-d7035db0-4bde-4ba3-9028-dd14191c8126	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Elvish Archivist/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+d7035db0-4bde-4ba3-9028-dd14191c8126	f0/t0	ChangesZoneAll	agreed	-	FX	start	2	0	x:xs:XP:elvish-archivist:f0t0:s1,f:xs:XP:elvish-archivist:f0t0:s1	-	-	-	6f84be0f34c0	-	44b6a2736d15	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 d7035db0-4bde-4ba3-9028-dd14191c8126	f0/t1	ChangesZoneAll	agreed	-	FX	start	2	0	x:xs:XP:elvish-archivist:f0t1:s1,f:xs:XP:elvish-archivist:f0t1:s1	-	-	-	6f84be0f34c0	-	44b6a2736d15	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 d7081ec5-0070-4bc1-97c4-544ac08581ee	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:schismotivate:cast:s1,f:xs:XP:schismotivate:cast:s1	-	-	-	336eab778104	-	bfb3d428523a	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 d709f396-021f-49eb-adb5-374aa790eaae	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:merrow-skyswimmer:f0t0:s1,f:xs:XP:merrow-skyswimmer:f0t0:s1	-	-	-	cfde1dc26c40	-	c37d89250d5b	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
@@ -88,7 +88,7 @@ d767463b-0fc9-43fc-a85f-e60f030f9b96	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:x
 d76fc3aa-3962-4d64-a082-765e09bcdf25	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d7721c5e-b3c5-45c8-b757-935603dfe44b	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d7721c5e-b3c5-45c8-b757-935603dfe44b	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:cleric-of-life-s-bond:f0t0:s1,f:xs:XP:cleric-of-life-s-bond:f0t0:s1	-	-	-	6f84be0f34c0	-	d33466ff3e40	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-d7721c5e-b3c5-45c8-b757-935603dfe44b	f0/t1	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:cleric-of-life-s-bond:f0t1:s1,f:xs:XP:cleric-of-life-s-bond:f0t1:s1	-	-	-	6f84be0f34c0	-	d33466ff3e40	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+d7721c5e-b3c5-45c8-b757-935603dfe44b	f0/t1	LifeGained	agreed	-	FX	start	2	0	x:xs:XP:cleric-of-life-s-bond:f0t0:s1,f:xs:XP:cleric-of-life-s-bond:f0t0:s1	-	-	-	6f84be0f34c0	-	d33466ff3e40	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 d772b16b-31db-48aa-8bb6-da32f45eebe4	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 d777e428-cc50-40b1-a241-41576d2575d1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:quirion-beastcaller:cast:s1,f:xs:XP:quirion-beastcaller:cast:s1	-	-	-	d864b561c9cb	-	cc3165674ca5	-	-	2026-11-24	xproof
 d777e428-cc50-40b1-a241-41576d2575d1	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof

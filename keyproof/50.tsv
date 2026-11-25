@@ -36,9 +36,9 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 502230fb-3a7a-439c-adfa-f7820deacf87	f0/t0	Attacks	agreed	-	X	start	2	0	x:xs:XP:momentum-rumbler:f0t1:s1	-	-	-	3aa6ded33acb	-	df07b40545e6	-	-	2026-11-25	xproof
 502230fb-3a7a-439c-adfa-f7820deacf87	f0/t1	Attacks	agreed	-	X	start	2	0	x:xs:XP:momentum-rumbler:f0t1:s1	-	-	-	3aa6ded33acb	-	df07b40545e6	-	-	2026-11-25	xproof
 502575f4-7c56-44bc-a77f-ae28d66c8e1f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-50261b9d-48f2-4bad-a35b-14f13b3cdd32	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:salt-road-packbeast:f0t0:s2,f:xs:XP:salt-road-packbeast:f0t0:s2	-	-	-	267e485f6204	-	5a6a01122d10	-	-	2026-11-24	xproof
-50261b9d-48f2-4bad-a35b-14f13b3cdd32	f0/t0	ChangesZone	agreed	-	FX	start	1	0	x:xs:XP:salt-road-packbeast:f0t0:s2,f:xs:XP:salt-road-packbeast:f0t0:s2	-	-	-	267e485f6204	-	5a6a01122d10	-	-	2026-11-24	xproof
-50261b9d-48f2-4bad-a35b-14f13b3cdd32	static#0.0	static#0.0	agreed	-	X	scen	1	0	Salt Road Packbeast/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
+50261b9d-48f2-4bad-a35b-14f13b3cdd32	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:salt-road-packbeast:static0.0:s1,f:xs:XP:salt-road-packbeast:static0.0:s1	-	-	-	6f84be0f34c0	-	5a6a01122d10	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+50261b9d-48f2-4bad-a35b-14f13b3cdd32	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:salt-road-packbeast:static0.0:s1,f:xs:XP:salt-road-packbeast:static0.0:s1	-	-	-	6f84be0f34c0	-	5a6a01122d10	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+50261b9d-48f2-4bad-a35b-14f13b3cdd32	static#0.0	static.cost	agreed	-	FX	start	2	0	x:xs:XP:salt-road-packbeast:static0.0:s1,f:xs:XP:salt-road-packbeast:static0.0:s1	-	-	-	6f84be0f34c0	-	5a6a01122d10	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 50261dca-bfeb-40b3-95b6-9057491ef3ad	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:bubble-matrix:cast:s1,f:xs:XP:bubble-matrix:cast:s1	-	-	-	8c0bd19283bb	-	c6d7385b8077	-	-	2026-11-24	xproof
 5028dfe8-c505-4643-b493-760b1f19d47f	f0/a0	Mana	agreed	-	FX	start	1	0	x:xs:XP:school-of-the-unseen:f0a1:s2,f:xs:XP:school-of-the-unseen:f0a1:s2	-	-	-	8c0bd19283bb	-	f28b81fd0432	-	-	2026-11-24	xproof
 5028dfe8-c505-4643-b493-760b1f19d47f	f0/a1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
