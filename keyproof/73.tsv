@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73094bde-5466-41a4-88f9-a98e67f5ed2e	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 730be0d6-2612-44d6-9d36-e1fc6510c6bd	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 730be0d6-2612-44d6-9d36-e1fc6510c6bd	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-730be0d6-2612-44d6-9d36-e1fc6510c6bd	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+730be0d6-2612-44d6-9d36-e1fc6510c6bd	f1/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 730d02c7-2f8a-47d3-99f0-e4ada7f6255c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wickerfolk-indomitable:cast:s1,f:xs:XP:wickerfolk-indomitable:cast:s1	-	-	-	23c4009444b0	-	5aa17d5c783f	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 730d02c7-2f8a-47d3-99f0-e4ada7f6255c	static#0.0	static#0.0	agreed	-	X	scen	1	0	Wickerfolk Indomitable/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 730e39e6-c61d-48b5-8827-bfd952bf1be7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:omniscience:cast:s1,f:xs:XP:omniscience:cast:s1	-	-	-	8c0bd19283bb	-	c7ca89116eba	-	-	2026-11-24	xproof
@@ -168,7 +168,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73d71731-f694-471c-b2ad-a36854bb06a1	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:lose-calm:cast:s1,f:xs:XP:lose-calm:cast:s1	-	-	-	3aa6ded33acb	-	abfb70a6e0bb	-	-	2026-11-25	xproof
 73d8c33d-916a-4220-96ae-9622aad36210	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73da9297-4c7c-4388-820f-1189b5aa0b98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gilded-assault-cart:cast:s1,f:xs:XP:gilded-assault-cart:cast:s1	-	-	-	d864b561c9cb	-	909071a6c8b5	-	-	2026-11-24	xproof
-73da9297-4c7c-4388-820f-1189b5aa0b98	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+73da9297-4c7c-4388-820f-1189b5aa0b98	f0/a0	NULL	owed	refused:steps-needed:cost:Sac	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 73da9297-4c7c-4388-820f-1189b5aa0b98	f0/a1	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:gilded-assault-cart:f0a1:s1,f:xs:XP:gilded-assault-cart:f0a1:s1	-	-	-	6f84be0f34c0	-	909071a6c8b5	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 73dad679-1edb-41c9-9d43-56dc93c3e9fe	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 73dad679-1edb-41c9-9d43-56dc93c3e9fe	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -189,7 +189,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 73f44500-fe83-40fa-b6f2-ed5673d0edcc	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:karlov-watchdog:combat0.block:s1,f:xs:XP:karlov-watchdog:combat0.block:s1	-	-	-	3aa6ded33acb	-	c88c81e1e3e7	-	-	2026-11-25	xproof
 73f44500-fe83-40fa-b6f2-ed5673d0edcc	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Karlov Watchdog/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 73f6619c-9d92-434e-9f06-52e0ff15cb5e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-73f6619c-9d92-434e-9f06-52e0ff15cb5e	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	6f84be0f34c0	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
+73f6619c-9d92-434e-9f06-52e0ff15cb5e	f0/t0	NULL	owed	refused:no-generator:trigger:Cycled	-	start	0	0	-	-	-	-	054d9f516953	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 73f6da1e-b8ce-4b5a-9da0-84ca67adaf1c	cast	cast	agreed	-	F	start	2	0	f:xs:XP:sygg-river-guide:cast:s1	-	-	-	d864b561c9cb	-	5874c37a4391	-	-	2026-11-24	xproof
 73f6da1e-b8ce-4b5a-9da0-84ca67adaf1c	f0/a0	Protection	agreed	-	FX	start	2	0	x:xs:XP:sygg-river-guide:f0a0:s1,f:xs:XP:sygg-river-guide:f0a0:s1	-	-	-	d864b561c9cb	-	5874c37a4391	-	-	2026-11-24	xproof
 73f808f0-3d56-46c9-967b-d452bb3611af	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gargadon:cast:s1,f:xs:XP:gargadon:cast:s1	-	-	-	d864b561c9cb	-	df277fa941a9	-	-	2026-11-24	xproof
