@@ -2,6 +2,7 @@ package scen
 
 import (
 	"regexp"
+	"slices"
 	"strconv"
 	"strings"
 
@@ -185,21 +186,65 @@ func staticKeyStart(reg *cards.Registry, b *certdeck.Builder, c *cards.Card, car
 	case attached:
 		// an Aura's or Equipment's bearer (gorge folds AffectedDefined into the
 		// Affected filter as EnchantedBy/EquippedBy): the start attaches it
-		if why := attachStart(reg, b, face, card, enchanted, equipped, f); why != "" {
+		eff := effectOf(st)
+		reach, affected, why := attachStart(reg, b, face, card, enchanted, equipped, eff, f)
+		if why != "" {
 			return why
 		}
+		if why := staticCondition(reg, b, face, card, st, f); why != "" {
+			return why
+		}
+		// the bearer is the only choice the engines' AIs have that matters
+		if !onlyTargetsShow(reg, card, reach, affected, eff, f) {
+			return "no-generator:static:bearer"
+		}
+		return ""
 	case selfStatic(st):
 	default:
-		name, s := filterCarrier(reg, b, card, aff, (*cards.Face).IsPermanent)
-		if name == "" {
-			name, s = landCarrier(reg, aff, basicFor(face.ManaCost))
-		}
+		name, s := staticCarrier(reg, b, card, aff, basicFor(face.ManaCost), effectOf(st))
 		if name == "" {
 			return "no-generator:static:affected"
 		}
 		placeOn(f, s, name)
 	}
 	return staticCondition(reg, b, face, card, st, f)
+}
+
+// staticCarrier is the permanent an unattached static affects: the first
+// carrier (else basic land) that meets an alternative of the Affected filter
+// and on which the static's effect shows (a creature already 1/1 is not shown a
+// 1/1 set, a Swamp is not shown "is a Swamp"), with the seat that controls it:
+// the filter's, else seat 1 for a control effect (the caster's own is theirs)
+// and seat 0 otherwise. "" when none.
+func staticCarrier(reg *cards.Registry, b *certdeck.Builder, card, aff, generic string, eff staticEffect) (string, int) {
+	alts := parseFilter(aff)
+	seatOf := func(a filterAlt) int {
+		if a.ctrl == ctrlOpp || a.ctrl == ctrlAny && eff.gain {
+			return 1
+		}
+		return 0
+	}
+	for _, a := range alts {
+		if !a.known || a.self {
+			continue
+		}
+		s := seatOf(a)
+		if n := pickCarrier(reg, b, card, func(f *cards.Face) bool { return f.IsPermanent() && a.test(f) && eff.shows(f, s) }); n != "" {
+			return n, s
+		}
+	}
+	for _, a := range alts {
+		if !a.known || a.self {
+			continue
+		}
+		s := seatOf(a)
+		for _, basic := range append([]string{generic}, "Plains", "Island", "Swamp", "Mountain", "Forest") {
+			if c, ok := reg.Lookup(basic); ok && len(c.Faces) > 0 && a.test(c.Faces[0]) && eff.shows(c.Faces[0], s) {
+				return basic, s
+			}
+		}
+	}
+	return "", 0
 }
 
 // placeOn adds a permanent to seat s's battlefield.
@@ -253,14 +298,137 @@ func attachedAffected(aff string) (enchanted, equipped string) {
 	return strings.Join(enc, ","), strings.Join(eq, ",")
 }
 
+// staticEffect is what a Continuous static visibly does to the object it
+// affects, in what the start's comparison reads: it takes control (GainControl$
+// You: seen only on a permanent the other seat controls, as the caster's own
+// already is theirs), or changes the object's own characteristics (face: its
+// power or toughness, a type it lacks or has, its colour, a keyword the
+// comparison reads). A param it cannot show on a placed permanent (a computed
+// amount, a chosen type or colour, a ControlGain that is not You's) adds nothing,
+// so a static none of whose params it can show has no bearer to prove it on.
+type staticEffect struct {
+	gain  bool
+	faces []func(*cards.Face) bool
+}
+
+// shows reports whether the static visibly changes a permanent of face f that
+// seat s controls.
+func (e staticEffect) shows(f *cards.Face, s int) bool {
+	if e.gain && s == 1 {
+		return true
+	}
+	for _, t := range e.faces {
+		if t(f) {
+			return true
+		}
+	}
+	return false
+}
+
+// basicLandTypes are the basic land types.
+var basicLandTypes = map[string]bool{"Plains": true, "Island": true, "Swamp": true, "Mountain": true, "Forest": true}
+
+// effectOf reads the effect of st, the params staticObserved counts.
+func effectOf(st *cards.Static) staticEffect {
+	var e staticEffect
+	add := func(t func(*cards.Face) bool) { e.faces = append(e.faces, t) }
+	e.gain = strings.TrimSpace(st.Params["GainControl"]) == "You"
+	if n, err := strconv.Atoi(strings.TrimSpace(st.Params["AddPower"])); err == nil && n != 0 {
+		add((*cards.Face).IsCreature)
+	}
+	if n, err := strconv.Atoi(strings.TrimSpace(st.Params["AddToughness"])); err == nil && n != 0 {
+		add((*cards.Face).IsCreature)
+	}
+	if n, err := strconv.Atoi(strings.TrimSpace(st.Params["SetPower"])); err == nil {
+		add(func(f *cards.Face) bool { return f.IsCreature() && f.Power() != n })
+	}
+	if n, err := strconv.Atoi(strings.TrimSpace(st.Params["SetToughness"])); err == nil {
+		add(func(f *cards.Face) bool { return f.IsCreature() && f.Toughness() != n })
+	}
+	// RemoveLandTypes with an added basic type sets the land types: a land
+	// shows it only when its basic types are not exactly the added ones (an
+	// Island made "an Island" is unchanged), so those words are read together
+	var landTypes []string
+	setLand := st.Params["RemoveLandTypes"] == "True"
+	for _, t := range strings.Split(st.Params["AddType"], " & ") {
+		switch t = strings.TrimSpace(t); {
+		case t == "" || t == "ChosenType" || !typeWord(t):
+		case setLand && basicLandTypes[t]:
+			landTypes = append(landTypes, t)
+		default:
+			add(func(f *cards.Face) bool { return !f.HasTypeWord(t) })
+		}
+	}
+	for _, t := range strings.Split(st.Params["RemoveType"], " & ") {
+		if t = strings.TrimSpace(t); t != "" && typeWord(t) {
+			add(func(f *cards.Face) bool { return f.HasTypeWord(t) })
+		}
+	}
+	if st.Params["RemoveCardTypes"] == "True" {
+		add(func(f *cards.Face) bool { return true })
+	}
+	if st.Params["RemoveCreatureTypes"] == "True" {
+		add((*cards.Face).IsCreature)
+	}
+	if setLand {
+		add(func(f *cards.Face) bool {
+			for t := range basicLandTypes {
+				if f.HasTypeWord(t) != slices.Contains(landTypes, t) {
+					return true
+				}
+			}
+			return false
+		})
+	}
+	if v := st.Params["SetColor"]; v != "" {
+		want, ok := "", true
+		for _, w := range strings.Split(v, " & ") {
+			if l, found := colourWord[strings.TrimSpace(w)]; found {
+				want += string(l)
+			} else if strings.TrimSpace(w) != "Colorless" {
+				ok = false
+			}
+		}
+		if ok {
+			sorted := ""
+			for _, l := range "WUBRG" {
+				if strings.ContainsRune(want, l) {
+					sorted += string(l)
+				}
+			}
+			add(func(f *cards.Face) bool { return faceColours(f) != sorted })
+		}
+	}
+	var kws []string
+	for _, k := range []string{"AddKeyword", "RemoveKeyword"} {
+		if v := st.Params[k]; v != "" {
+			kws = append(kws, strings.Split(v, " & ")...)
+		}
+	}
+	named := oraclediff.ComparedKeywords(kws, false) == ""
+	for _, k := range strings.Split(st.Params["AddKeyword"], " & ") {
+		if k = strings.TrimSpace(k); k != "" && oraclediff.ComparedKeywords([]string{k}, named) != "" {
+			add(func(f *cards.Face) bool { return !f.HasKeyword(k) })
+		}
+	}
+	for _, k := range strings.Split(st.Params["RemoveKeyword"], " & ") {
+		if k = strings.TrimSpace(k); k != "" && oraclediff.ComparedKeywords([]string{k}, named) != "" {
+			add(func(f *cards.Face) bool { return f.HasKeyword(k) })
+		}
+	}
+	return e
+}
+
 // bearerFor is the most inert permanent that meets both what an Aura enchants
 // or an Equipment equips (reach) and what the static affects (affected, the
-// attached property removed), so the static's effect lands on it: the walls
-// first (bearers), else a carrier, else a basic land. It also returns the seat
-// that controls it; "" when none. An alternative holding a property the filter
+// attached property removed) and on which the static's effect (eff) shows, so
+// the start's comparison sees the key at work: the walls first (bearers), else
+// a carrier, else a basic land. It also returns the seat that controls it;
+// "" when none. A control effect puts the bearer on seat 1 (the caster's own
+// permanent is theirs already). An alternative holding a property the filter
 // code does not read is skipped, so such a static is refused rather than given
 // a bearer it may not affect.
-func bearerFor(reg *cards.Registry, b *certdeck.Builder, card, reach, affected, generic string) (string, int) {
+func bearerFor(reg *cards.Registry, b *certdeck.Builder, card, reach, affected, generic string, eff staticEffect) (string, int) {
 	type pair struct {
 		test func(*cards.Face) bool
 		seat int
@@ -272,11 +440,14 @@ func bearerFor(reg *cards.Registry, b *certdeck.Builder, card, reach, affected, 
 				continue
 			}
 			seat := 0
-			if r.ctrl == ctrlOpp || a.ctrl == ctrlOpp {
+			switch {
+			case r.ctrl == ctrlOpp || a.ctrl == ctrlOpp:
+				seat = 1
+			case r.ctrl == ctrlAny && a.ctrl == ctrlAny && eff.gain:
 				seat = 1
 			}
-			r, a := r, a
-			pairs = append(pairs, pair{func(f *cards.Face) bool { return r.test(f) && a.test(f) }, seat})
+			r, a, seat := r, a, seat
+			pairs = append(pairs, pair{func(f *cards.Face) bool { return r.test(f) && a.test(f) && eff.shows(f, seat) }, seat})
 		}
 	}
 	for _, p := range pairs {
@@ -301,6 +472,50 @@ func bearerFor(reg *cards.Registry, b *certdeck.Builder, card, reach, affected, 
 	return "", 0
 }
 
+// onlyTargetsShow reports whether every permanent the start has on the
+// battlefield that the Aura could enchant or the equip could target (reach)
+// both meets what the static affects and shows its effect: whichever of them
+// the engines' AIs pick, the key is at work, so a disagreement is the static's
+// and not a pick's. The cost lands of an Enchant-land Aura, and a second
+// creature a condition places, are such targets; the card itself is not.
+func onlyTargetsShow(reg *cards.Registry, card, reach, affected string, eff staticEffect, f *StartFile) bool {
+	rs, as := parseFilter(reach), parseFilter(affected)
+	ctrlOK := func(c, s int) bool { return c == ctrlAny || c == s }
+	for s, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
+		skipped := false
+		for _, n := range bf {
+			if n == card && s == 0 && !skipped {
+				skipped = true
+				continue
+			}
+			c, ok := reg.Lookup(n)
+			if !ok || len(c.Faces) == 0 {
+				return false
+			}
+			face := c.Faces[0]
+			legal := false
+			for _, r := range rs {
+				if !r.known || ctrlOK(r.ctrl, s) && r.test(face) {
+					legal = true
+				}
+			}
+			if !legal {
+				continue
+			}
+			affects := false
+			for _, a := range as {
+				if a.known && !a.self && ctrlOK(a.ctrl, s) && a.test(face) {
+					affects = true
+				}
+			}
+			if !affects || !eff.shows(face, s) {
+				return false
+			}
+		}
+	}
+	return true
+}
+
 // attachStart sets up the bearer of an attached static. An Aura is cast from
 // hand (with exactly the lands its cost takes) on the bearer already on the
 // battlefield: the focus is the cast, whose one legal target is the bearer. An
@@ -309,29 +524,31 @@ func bearerFor(reg *cards.Registry, b *certdeck.Builder, card, reach, affected, 
 // static's Affected filter as well as the Aura's or equip's target (enchanted
 // and equipped are that filter, the attached property removed). Anything else
 // attached (a Fortify, a Reconfigure, a Bestow) is refused.
-func attachStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, enchanted, equipped string, f *StartFile) string {
+func attachStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, enchanted, equipped string, eff staticEffect, f *StartFile) (reach, affected, why string) {
+	const attached, noBearer = "no-generator:static:attached", "no-generator:static:bearer"
 	generic := basicFor(face.ManaCost)
 	p0 := &f.Setup.P0
 	switch {
 	case enchanted != "" && FieldBlock(face) == "aura-unattached":
 		er, ok := enchantReq(face)
 		if !ok {
-			return "no-generator:static:attached"
+			return "", "", attached
 		}
 		for _, tok := range splitCost(face.ManaCost) {
 			if !manaTokenRE.MatchString(tok) || tok == "X" || tok == "S" {
-				return "no-generator:static:attached"
+				return "", "", attached
 			}
 		}
-		bearer, s := bearerFor(reg, b, card, strings.Join(er.raw, ","), enchanted, generic)
+		reach = strings.Join(er.raw, ",")
+		bearer, s := bearerFor(reg, b, card, reach, enchanted, generic, eff)
 		if bearer == "" {
-			return "no-generator:static:bearer"
+			return "", "", noBearer
 		}
 		p0.Battlefield = landsFor(splitCost(face.ManaCost), generic)
 		p0.Hand = []string{card}
 		placeOn(f, s, bearer)
 		f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "cast"}
-		return ""
+		return reach, enchanted, ""
 	case equipped != "":
 		for i, sa := range face.Abilities {
 			if sa.Params["Keyword"] != "Equip" {
@@ -339,23 +556,23 @@ func attachStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, car
 			}
 			plan, why := planCost(reg, b, face, card, sa.Params["Cost"], generic)
 			if why != "" {
-				return why
+				return "", "", why
 			}
 			if plan.zone != zoneBattlefield {
-				return "no-generator:static:attached"
+				return "", "", attached
 			}
-			bearer, s := bearerFor(reg, b, card, sa.Params["ValidTgts"], equipped, generic)
+			bearer, s := bearerFor(reg, b, card, sa.Params["ValidTgts"], equipped, generic, eff)
 			if bearer == "" {
-				return "no-generator:static:bearer"
+				return "", "", noBearer
 			}
 			p0.Battlefield = nil
 			applyCost(plan, card, generic, f)
 			placeOn(f, s, bearer)
 			f.Focus = &StartFocus{Seat: seat(0), Card: card, Kind: "ability", Ability: i}
-			return ""
+			return sa.Params["ValidTgts"], equipped, ""
 		}
 	}
-	return "no-generator:static:attached"
+	return "", "", attached
 }
 
 // staticCondition places what a static's condition reads, or refuses it as

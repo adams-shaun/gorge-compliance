@@ -963,6 +963,39 @@ func TestStartstaticattached(t *testing.T) {
 				p0BF: []string{"Bonesplitter", "Plains", "Wall of Stone"}, focusCard: "Bonesplitter", focusKind: "ability"},
 			// a life-total condition is the placed life; no action is forced
 			{card: "Angel of Vitality", key: "static#0.0", maxTurns: 1, p0BF: []string{"Angel of Vitality"}},
+			// an effect that changes the bearer shows on it: a control Aura's bearer is the
+			// other seat's, as the caster's own is theirs already
+			{card: "Control Magic", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Control Magic"},
+				p0BF: rep("Island", 4), p1BF: []string{"Wall of Stone"}, focusCard: "Control Magic", focusKind: "cast"},
+			{card: "Mind Control", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Mind Control"},
+				p0BF: rep("Island", 5), p1BF: []string{"Wall of Stone"}, focusCard: "Mind Control", focusKind: "cast"},
+			// a land Aura whose cost lands are also what it can enchant: they show the effect too
+			{card: "Consecrate Land", key: "static#0.0", maxTurns: 1, p0Hand: []string{"Consecrate Land"},
+				p0BF: rep("Plains", 2), focusCard: "Consecrate Land", focusKind: "cast"},
+		})
+	})
+	// an effect that does not show on the bearer, or that the cast could put
+	// on a permanent it does not show on, is refused and not credited unplayed
+	t.Run("unseen", func(t *testing.T) {
+		checkStartRows(t, []startRow{
+			// the land types are set to Island/Swamp: the cost lands already are those
+			{card: "Spreading Seas", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Lingering Mirage", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Evil Presence", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Contaminated Ground", key: "static#0.0", reason: "no-generator:static:bearer"},
+			// control of a land: the cost lands are the caster's own already
+			{card: "Annex", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Conquer", key: "static#0.0", reason: "no-generator:static:bearer"},
+		})
+	})
+	// the same for an unattached static: the carrier it affects shows the effect
+	t.Run("carrier shows", func(t *testing.T) {
+		checkStartRows(t, []startRow{
+			// "each land is a Swamp" is set on a Plains, not on a Swamp; a creature
+			// that loses a keyword has it
+			{card: "Blanket of Night", key: "static#0.0", maxTurns: 1, p0BF: []string{"Blanket of Night", "Plains"}},
+			{card: "Archetype of Courage", key: "static#0.1", maxTurns: 1,
+				p0BF: []string{"Archetype of Courage"}, p1BF: []string{"Boros Recruit"}},
 		})
 	})
 	// the bearer meets the static's Affected filter, not only what the Aura
