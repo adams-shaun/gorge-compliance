@@ -328,6 +328,9 @@ func (e staticEffect) shows(f *cards.Face, s int) bool {
 // basicLandTypes are the basic land types.
 var basicLandTypes = map[string]bool{"Plains": true, "Island": true, "Swamp": true, "Mountain": true, "Forest": true}
 
+// cardTypeWords are the card types a RemoveCardTypes static removes.
+var cardTypeWords = []string{"Artifact", "Battle", "Creature", "Enchantment", "Land", "Planeswalker", "Instant", "Sorcery", "Kindred"}
+
 // effectOf reads the effect of st, the params staticObserved counts.
 func effectOf(st *cards.Static) staticEffect {
 	var e staticEffect
@@ -364,8 +367,19 @@ func effectOf(st *cards.Static) staticEffect {
 			add(func(f *cards.Face) bool { return f.HasTypeWord(t) })
 		}
 	}
+	// the card types are replaced by the added ones: a permanent shows it only
+	// when it has a card type the static does not add back (a Forest made "a
+	// Land & Forest" keeps its type, and so does an Island made "a Land")
 	if st.Params["RemoveCardTypes"] == "True" {
-		add(func(f *cards.Face) bool { return true })
+		added := strings.Split(st.Params["AddType"], " & ")
+		add(func(f *cards.Face) bool {
+			for _, t := range cardTypeWords {
+				if f.HasTypeWord(t) && !slices.Contains(added, t) {
+					return true
+				}
+			}
+			return false
+		})
 	}
 	if st.Params["RemoveCreatureTypes"] == "True" {
 		add((*cards.Face).IsCreature)
@@ -476,11 +490,13 @@ func bearerFor(reg *cards.Registry, b *certdeck.Builder, card, reach, affected, 
 // battlefield that the Aura could enchant or the equip could target (reach)
 // both meets what the static affects and shows its effect: whichever of them
 // the engines' AIs pick, the key is at work, so a disagreement is the static's
-// and not a pick's. The cost lands of an Enchant-land Aura, and a second
+// and not a pick's, and they are all the same permanent (a name), so the cast
+// or equip has no pick to make. The cost lands of an Enchant-land Aura, and a second
 // creature a condition places, are such targets; the card itself is not.
 func onlyTargetsShow(reg *cards.Registry, card, reach, affected string, eff staticEffect, f *StartFile) bool {
 	rs, as := parseFilter(reach), parseFilter(affected)
 	ctrlOK := func(c, s int) bool { return c == ctrlAny || c == s }
+	var targets []string
 	for s, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
 		skipped := false
 		for _, n := range bf {
@@ -501,6 +517,14 @@ func onlyTargetsShow(reg *cards.Registry, card, reach, affected string, eff stat
 			}
 			if !legal {
 				continue
+			}
+			// two different permanents are two different picks, and the
+			// engines' AIs need not make the same one
+			if !slices.Contains(targets, n) {
+				targets = append(targets, n)
+			}
+			if len(targets) > 1 {
+				return false
 			}
 			affects := false
 			for _, a := range as {
@@ -597,20 +621,29 @@ func staticCondition(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 		if !ok || n > 7 {
 			return refused
 		}
-		name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsPermanent)
-		if name == "" {
-			name, s = landCarrier(reg, filter, basicFor(face.ManaCost))
-		}
-		if name == "" {
+		pl := st.Params["PresentPlayer"]
+		if pl != "" && pl != "You" && pl != "Any" && pl != "Opponent" {
 			return refused
 		}
-		if pl := st.Params["PresentPlayer"]; pl == "Opponent" {
-			s = 1
-		} else if pl != "" && pl != "You" && pl != "Any" {
-			return refused
+		// a permanent the start already has (an Aura's bearer, an Equipment's)
+		// counts, and so needs no second one a pick could be made between
+		if pl != "Opponent" {
+			n -= presentOn(reg, filter, card, f)
 		}
-		for i := 0; i < n; i++ {
-			placeOn(f, s, name)
+		if n > 0 {
+			name, s := filterCarrier(reg, b, card, filter, (*cards.Face).IsPermanent)
+			if name == "" {
+				name, s = landCarrier(reg, filter, basicFor(face.ManaCost))
+			}
+			if name == "" {
+				return refused
+			}
+			if pl == "Opponent" {
+				s = 1
+			}
+			for i := 0; i < n; i++ {
+				placeOn(f, s, name)
+			}
 		}
 	} else if st.Params["PresentZone"] != "" || st.Params["PresentCompare"] != "" {
 		return refused
@@ -657,6 +690,33 @@ func staticCondition(reg *cards.Registry, b *certdeck.Builder, face *cards.Face,
 		return refused
 	}
 	return ""
+}
+
+// presentOn counts the permanents the start has on the battlefield that meet
+// a present filter, not the card itself.
+func presentOn(reg *cards.Registry, filter, card string, f *StartFile) int {
+	alts := parseFilter(filter)
+	count := 0
+	for s, bf := range [][]string{f.Setup.P0.Battlefield, f.Setup.P1.Battlefield} {
+		skipped := false
+		for _, n := range bf {
+			if n == card && s == 0 && !skipped {
+				skipped = true
+				continue
+			}
+			c, ok := reg.Lookup(n)
+			if !ok || len(c.Faces) == 0 {
+				continue
+			}
+			for _, a := range alts {
+				if a.known && !a.self && (a.ctrl == ctrlAny || a.ctrl == s) && a.test(c.Faces[0]) {
+					count++
+					break
+				}
+			}
+		}
+	}
+	return count
 }
 
 // atLeast is the count a PresentCompare ("" is GE1, "GE2", "GT1") asks for.

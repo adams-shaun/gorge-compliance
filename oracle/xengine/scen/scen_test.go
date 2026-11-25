@@ -961,6 +961,9 @@ func TestStartstaticattached(t *testing.T) {
 			// an Equipment is on the battlefield with its bearer and the lands of its equip cost
 			{card: "Bonesplitter", key: "static#0.0", maxTurns: 1,
 				p0BF: []string{"Bonesplitter", "Plains", "Wall of Stone"}, focusCard: "Bonesplitter", focusKind: "ability"},
+			// the bearer is the permanent the condition counts: no second legal target
+			{card: "Temur Runemark", key: "static#0.1", maxTurns: 1, p0Hand: []string{"Temur Runemark"},
+				p0BF: []string{"Forest", "Forest", "Forest", "Wall of Stone"}, focusCard: "Temur Runemark", focusKind: "cast"},
 			// a life-total condition is the placed life; no action is forced
 			{card: "Angel of Vitality", key: "static#0.0", maxTurns: 1, p0BF: []string{"Angel of Vitality"}},
 			// an effect that changes the bearer shows on it: a control Aura's bearer is the
@@ -986,6 +989,12 @@ func TestStartstaticattached(t *testing.T) {
 			// control of a land: the cost lands are the caster's own already
 			{card: "Annex", key: "static#0.0", reason: "no-generator:static:bearer"},
 			{card: "Conquer", key: "static#0.0", reason: "no-generator:static:bearer"},
+			// the card types are replaced: a cost land that is a Land already shows nothing
+			{card: "Song of the Dryads", key: "static#0.0", reason: "no-generator:static:bearer"},
+			{card: "Imprisoned in the Moon", key: "static#0.0", reason: "no-generator:static:bearer"},
+			// the IsPresent permanent is a second creature the cast could target
+			{card: "Abzan Runemark", key: "static#0.1", reason: "no-generator:static:bearer"},
+			{card: "Multiclass Baldric", key: "static#0.0", reason: "no-generator:static:bearer"},
 		})
 	})
 	// the same for an unattached static: the carrier it affects shows the effect
