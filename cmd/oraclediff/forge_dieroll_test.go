@@ -215,13 +215,14 @@ func TestForgeRolledDie(t *testing.T) {
 // 6d6b2d485ab = oracle/fpin-1125-join12: 2ac6012982e (join11, above) merged with 8b89eabc655 (the pinned transit
 // graveyard order, above), no textual conflicts; die-roll code unchanged, ForcedDieRollTest re-run green on it
 // (make forge-driver-tests). r0's 1656bcb2a73 was described here but never pushed to the fork; this is the pushed merge.
-// 0aee1572747 = oracle/fpin-1125-join14 (ad4cd3ba0f8: join12 above merged with the mandatory ChangeTargets test and the
-// paylife X pick) plus the Speedball ChangeTargets regression test (test class and fixture only); die-roll code unchanged,
-// ForcedDieRollTest re-run green on it (make forge-driver-tests).
-// 852c41880dd = oracle/fpin-1125-join16: 9124c696744 (join15 above, the altaddcost tap ability choice) merged with
-// 0aee1572747 (the Speedball ChangeTargets regression test above), no textual conflicts (ChangeTargetsConfirmTest.java
-// auto-merged); die-roll code unchanged, ForcedDieRollTest re-run green on it (make forge-driver-tests).
-const forgeOracleDieRollRef = "852c41880dd817ffbc988a2f3b5fbd9a98252c8f"
+// ad4cd3ba0f8 = oracle/fpin-1125-join14: 6d6b2d485ab (join12, above) merged with 892f8bd63b6 (the PayLife<X>
+// paylife announcement, ScriptedCostDecision/ScriptedController only), no textual conflicts; die-roll code unchanged.
+// 6095b085edc = ad4cd3ba0f8 (join14, above) plus the face-down cast modes morphed/megamorphed/disguised
+// (StepMachine.spellForMode only, FaceDownCastModeTest); die-roll code unchanged, ForcedDieRollTest and
+// ForcedCoinFlipTest re-run green on the pin (run-unit-tests.sh, 18 tests).
+// 686e3f82713 = oracle/fpin-1125-join17: join15 (9124c696744, join14 plus the altaddcost tap ability choice) merged with
+// 6095b085edc (above), no textual conflicts; die-roll code unchanged, ForcedDieRollTest re-run green on the pin.
+const forgeOracleDieRollRef = "686e3f827135f1739b173ba77cd861541c8229ee"
 
 // TestForgeOracleRefPinsForcedDieRoll fails when the Makefile's default driver
 // pin moves off the commit whose forced-die behaviour was verified. It reads

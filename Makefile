@@ -845,16 +845,18 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # fixtures/phyrexian/processor-zero-life.jsonl, the exported xs:XP:phyrexian-processor:cast:s1 request) fails without the change with
 # the exact "Missing x answer at step 6: X for" miss; scripts/forge-oracle-test-phyrexian-processor-paylife.sh (make forge-driver-tests)
 # runs it. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-paylife-x.
-# 0aee1572747 = join14 (ad4cd3ba0f8, above) + the Speedball regression test (xproof cluster xpt-c5e9f646, Speedball, New Warrior /
-# Ranger's Guile, gorge~forge): p0's Ranger's Guile targets Speedball, whose SpellCast trigger resolves "You may choose new
-# targets for that spell" through an Optional$ ChangeTargets (Defined$ TriggeredSpellAbility) and gorge logs the retarget ask as a
-# choose_n over Speedball itself with a blank pick. The retarget confirm of the 019d50429f path already answers it (the find
-# replays clean at 6d6b2d485ab; it missed only at the older 793a015fcf6, which has no ChangeTargets confirm rule), so this pin
-# adds no driver code: only ChangeTargetsConfirmTest.speedballTriggerChangeTargetsConfirmConsumesTheRetargetPick and its fixture
-# (fork fixtures/changetargets/speedball-ranger-guile.jsonl). The test fails with the exact "Missing yesno answer at step 3:
-# confirm null: Do you want to change targets of Ranger's Guile (3)?" miss when retargetConfirm is neutralized;
-# scripts/forge-oracle-test-change-targets.sh (make forge-driver-tests) now pins six tests. Driver tests only; cardsfolder and
-# tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-change-targets-confirm.
+# 6095b085edc = ad4cd3ba0f8 (join14; above) plus the face-down cast modes (StepMachine.spellForMode only): gorge's cast_mode
+# "morphed"/"megamorphed"/"disguised" (CR 702.37c, 702.168a, 702.169a) hit the spellForMode default, so the driver cast the
+# card's printed spell and Forge refused it where the printed cost exceeds the mana gorge paid (Belltoll Dragon megamorphed for
+# {3} over three Islands: "step 3 (cast) p0:Belltoll Dragon was not put on the stack", xproof cluster xpt-716677db, 2 cycles /
+# 4 items gorge~forge) and cast face up where it does not (Sleuth Instructor {1}{W}). spellForMode now maps all three modes to
+# the one face-down spell Forge builds per printed keyword (CardFactoryUtil.abilityCastFaceDown, a Spell with
+# setCastFaceDown(true) and Cost {3}; Megamorph builds it with the same Morph key). FaceDownCastModeTest (fixtures/morph/,
+# Belltoll Dragon megamorphed, Weaver of Lies morphed and Sleuth Instructor disguised, each cut after the cast) fails on
+# ad4cd3ba0f8 with the exact "was not put on the stack" harness row (megamorphed, morphed) and the printed-spell note
+# (disguised), passes here; scripts/forge-oracle-test-facedown-cast-mode.sh (make forge-driver-tests) runs it. Driver-only;
+# die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
+# fix/xp-forge-driver-facedown-cast.
 # dcbac6a957 = 2ac6012982e plus the altaddcost tap ability choice (xproof cluster xpt-bf618006, Disruption Protocol,
 # gorge~forge): p0 casts Disruption Protocol choosing gorge's altaddcost pick "Tap 1 artifact" (Memnite), and Forge offers
 # two SAs (tap an artifact / pay {1}). gorge is right (CR 601.2b: either additional cost). getAbilityToPlay bound the pick
@@ -875,11 +877,11 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # choice above, plus the ChangeTargets test join14 already carries), no textual conflicts (ScriptedController.java auto-merged); the
 # merge tree is 173000f9b6f. TapTypeAbilityChoiceTest and the join14 driver tests run together at this pin. Driver-only; die-roll code,
 # cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
-# 852c41880dd = oracle/fpin-1125-join16: join15 (9124c696744, above) merged with 0aee1572747 (the Speedball ChangeTargets regression
-# test above), no textual conflicts (ChangeTargetsConfirmTest.java auto-merged, the speedball test and fixture are the only 0aee-side
-# changes). TapTypeAbilityChoiceTest, the six-test change-targets script and the join14 driver tests run together at this pin.
-# Driver-only; die-roll code, cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch oracle/fpin-1125-join16.
-FORGE_ORACLE_REF ?= 852c41880dd817ffbc988a2f3b5fbd9a98252c8f
+# 686e3f82713 = oracle/fpin-1125-join17: join15 (9124c696744, below) merged with 6095b085edc (the face-down cast modes above), no
+# textual conflicts (ScriptedController.java and StepMachine.java touch different areas; merge tree 83e433b219b). FaceDownCastModeTest,
+# TapTypeAbilityChoiceTest and ForcedDieRollTest run together at this pin (11 tests, 0 failures). Driver-only; die-roll code,
+# cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432).
+FORGE_ORACLE_REF ?= 686e3f827135f1739b173ba77cd861541c8229ee
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
