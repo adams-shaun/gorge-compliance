@@ -6,14 +6,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 /** Executable check of the driver's cast-mode acceptance list and of the
- * Adventure/Omen cast path. The acceptance checks are pure (cast_mode decides
- * whether a cast step is replayed at all); the Adventure/Omen and alternative
- * cost cases replay a real one-step game, so the script gives XMage's H2 card
- * DB a private copy. "mayplay" is the cast from exile under Reckless Impulse's
- * play permission; it must be accepted, while the modes the driver still
- * cannot replay ("plot_cast", and the per-kicker "kicked1"/"kicked2"/
- * "kickedboth"/"multikicked") must stay rejected; "kicked" pays the single
- * Kicker ask (Gatekeeper of Malakir). Run scripts/xmage-oracle-test-cast-mode.sh. */
+ * Adventure/Omen, Room and modal-DFC cast paths. The acceptance checks are
+ * pure (cast_mode decides whether a cast step is replayed at all); the
+ * Adventure/Omen, Room, modal and alternative cost cases replay a real
+ * one-step game, so the script gives XMage's H2 card DB a private copy.
+ * "mayplay" is the cast from exile under Reckless Impulse's play permission;
+ * it must be accepted, while the modes the driver still cannot replay
+ * ("plot_cast", and the per-kicker "kicked1"/"kicked2"/"kickedboth"/
+ * "multikicked") must stay rejected; "kicked" pays the single Kicker ask
+ * (Gatekeeper of Malakir). Run scripts/xmage-oracle-test-cast-mode.sh. */
 public final class ScenarioReplayCastModeTest {
     private static String castModeSupported(String mode) throws Exception {
         Class<?> replay = ScenarioReplay.class;
@@ -470,7 +471,53 @@ public final class ScenarioReplayCastModeTest {
                 + " with that door unlocked");
     }
 
+    /** CR 712.12: a modal double-faced card may be cast with its back face
+     * up. gorge records that cast as cast_mode "modal_spell" and names the
+     * parent card ("p0:Egon, God of Death"), the farm's shape for an alternate
+     * face; XMage casts the right half's own SpellAbility, which is named
+     * "Cast Throne of Death". The back-face artifact must be the spell and
+     * then the permanent -- not the front creature -- and {B} pays Throne of
+     * Death's cost. */
+    private static void modalSpellCastsBackFace() throws Exception {
+        equal("true", castModeSupported("modal_spell"), "modal_spell cast_mode");
+        JsonObject sc = JsonParser.parseString("{name:'Egon, God of Death // Throne of Death',"
+                + "card:'Egon, God of Death',"
+                + "setup:{p0:{hand:['Egon, God of Death']}},"
+                + "steps:[{op:'cast',seat:0,card:'p0:Egon, God of Death',cast_mode:'modal_spell',mana:'B'},"
+                + "{op:'resolve',seat:0}]}").getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, false);
+        if (res.has("harness") || res.has("error")) {
+            throw new AssertionError("modal_spell replay failed: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        boolean onStack = false;
+        boolean frontOnStack = false;
+        for (JsonElement e : snaps) {
+            for (JsonElement s : e.getAsJsonObject().getAsJsonArray("stack")) {
+                String source = s.getAsJsonObject().get("source").getAsString();
+                onStack |= "Throne of Death".equals(source);
+                frontOnStack |= "Egon, God of Death".equals(source);
+            }
+        }
+        if (!onStack) {
+            throw new AssertionError("Throne of Death was never cast: " + res);
+        }
+        if (frontOnStack) {
+            throw new AssertionError("Egon, God of Death was cast instead of its back face: " + res);
+        }
+        JsonObject last = snaps.get(snaps.size() - 1).getAsJsonObject();
+        java.util.List<String> names = permanentNames(last);
+        if (!names.contains("Throne of Death")) {
+            throw new AssertionError("Throne of Death is not on the battlefield: " + last);
+        }
+        if (names.contains("Egon, God of Death")) {
+            throw new AssertionError("the front face entered instead of Throne of Death: " + last);
+        }
+        System.out.println("PASS modalSpellCastsBackFace: Throne of Death is cast for {B} and enters the battlefield");
+    }
+
     public static void main(String[] args) throws Exception {
+        modalSpellCastsBackFace();
         roomAltCastsSecondDoor();
         evokedCastPaysEvokeCost();
         foretellFromHandExilesFaceDown();

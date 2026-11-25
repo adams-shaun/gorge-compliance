@@ -34,9 +34,11 @@ func graveZone(p map[string]string) bool {
 	return strings.Contains(z, "Graveyard") && !strings.Contains(z, "Battlefield")
 }
 
-// chainGraveTgts is the required graveyard targets of the ability chain
-// starting at line p (api is the line's API, which a Params map does not
-// hold for the chain's head), following SubAbility$ as chainReqs does.
+// chainGraveTgts is the graveyard targets of the ability chain starting at
+// line p (api is the line's API, which a Params map does not hold for the
+// chain's head), following SubAbility$ as chainReqs does. An optional target
+// still gets a card when one fits, so the play's effect is exercised, but it
+// is no refusal when none does (placeGraveTargets only places).
 func chainGraveTgts(api string, p map[string]string, svars map[string]string, sub *cards.SA) []graveTgt {
 	var out []graveTgt
 	for depth := 0; depth < 8 && p != nil; depth++ {
@@ -47,7 +49,7 @@ func chainGraveTgts(api string, p map[string]string, svars map[string]string, su
 				q[k] = v
 			}
 		}
-		if v := q["ValidTgts"]; v != "" && q["TargetMin"] != "0" && q["Optional"] == "" && graveZone(q) {
+		if v := q["ValidTgts"]; v != "" && q["TargetMin"] != "0" && graveZone(q) {
 			n, err := strconv.Atoi(q["TargetMin"])
 			if err != nil || n < 1 {
 				n = 1
@@ -80,20 +82,32 @@ func svarAPI(line string) string {
 
 // focusGraveTgts is the graveyard targets of the focus play of a start key:
 // the spell's abilities for a cast, the activated ability, or the trigger's
-// effect.
+// effect. A Charm's choices each name a target of their own (Aid the Fallen,
+// Fortuitous Find, Remember the Fallen), so each is followed like a
+// SubAbility$ chain.
 func focusGraveTgts(face *cards.Face, fam string, sa *cards.SA, trig *cards.Trigger) []graveTgt {
 	var out []graveTgt
+	add := func(api string, p map[string]string, sub *cards.SA) {
+		if api == "Charm" {
+			for _, name := range strings.Split(p["Choices"], ",") {
+				line := face.SVars[strings.TrimSpace(name)]
+				out = append(out, chainGraveTgts(svarAPI(line), parseSVar(line), face.SVars, nil)...)
+			}
+			return
+		}
+		out = append(out, chainGraveTgts(api, p, face.SVars, sub)...)
+	}
 	switch {
 	case fam == "cast":
 		for _, a := range face.Abilities {
-			if a.Kind == "SP" && a.API != "Charm" {
-				out = append(out, chainGraveTgts(a.API, a.Params, face.SVars, a.Sub)...)
+			if a.Kind == "SP" {
+				add(a.API, a.Params, a.Sub)
 			}
 		}
-	case sa != nil && sa.API != "Charm":
-		out = chainGraveTgts(sa.API, sa.Params, face.SVars, sa.Sub)
-	case trig != nil && trig.Effect != nil && trig.Effect.API != "Charm":
-		out = chainGraveTgts(trig.Effect.API, trig.Effect.Params, face.SVars, trig.Effect.Sub)
+	case sa != nil:
+		add(sa.API, sa.Params, sa.Sub)
+	case trig != nil && trig.Effect != nil:
+		add(trig.Effect.API, trig.Effect.Params, trig.Effect.Sub)
 	}
 	return out
 }
@@ -101,9 +115,10 @@ func focusGraveTgts(face *cards.Face, fam string, sa *cards.SA, trig *cards.Trig
 // placeGraveTargets meets each graveyard target of the focus play and of the
 // key's own trigger effect: a card already in the graveyard the filter names
 // counts, else the most inert carrier (carrierPool) that meets the filter goes
-// there, the opponent's for an OppOwn/OppCtrl filter and the card's
-// controller's (seat 0) otherwise. A filter no carrier meets places nothing,
-// and play refuses the start as before.
+// there, else the corpus's least busy matching card (a multicoloured card, or
+// a planeswalker, no inert carrier is). The opponent's graveyard is used for an
+// OppOwn/OppCtrl filter and the card's controller's (seat 0) otherwise. A
+// filter no card meets places nothing, and play refuses the start as before.
 func placeGraveTargets(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card, fam string, sa *cards.SA, trig *cards.Trigger, f *StartFile) {
 	// Both lists, not one instead of the other: a carrier focus (Regrowth for
 	// a ChangesZoneAll leaves-your-graveyard trigger) names a graveyard
@@ -176,7 +191,24 @@ func placeGraveTarget(reg *cards.Registry, b *certdeck.Builder, card, filter str
 		if !a.known || a.self {
 			continue
 		}
-		name := pickCarrier(reg, b, card, a.test)
+		keep := func(f *cards.Face) bool { return a.matches(f, false) }
+		name := pickCarrier(reg, b, card, keep)
+		if name == "" {
+			name = pickZoneFixture(reg, b, card, keep, nil, true)
+		}
+		if name == "" {
+			// the carrier and zone pools hold no lands: a graveyard target
+			// may still be a land card (Life from the Loam)
+			for _, basic := range []string{"Plains", "Island", "Swamp", "Mountain", "Forest", "Wastes"} {
+				if c, ok := reg.Lookup(basic); ok && len(c.Faces) > 0 && keep(c.Faces[0]) {
+					name = basic
+					break
+				}
+			}
+		}
+		if name == "" {
+			name = pickLandFixture(reg, b, keep)
+		}
 		if name == "" {
 			continue
 		}

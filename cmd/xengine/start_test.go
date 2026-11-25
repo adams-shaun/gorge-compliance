@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"reflect"
 	"slices"
+	"sort"
 	"strings"
 	"testing"
 
@@ -22,6 +23,7 @@ import (
 )
 
 func TestPlayStartThornvault(t *testing.T) {
+	t.Parallel()
 	reg := testutil.CorpusRegistry(t)
 	out := t.TempDir()
 	if err := playStart(reg, []string{"testdata/start"}, "BLB", out, false); err != nil {
@@ -86,6 +88,7 @@ func TestPlayStartThornvault(t *testing.T) {
 }
 
 func TestPlayStartFlagsExclusive(t *testing.T) {
+	t.Parallel()
 	for _, f := range []string{"-windows", "-random=BLB", "-pool=x", "-decks=x", "-dirac", "-tape-turns=1", "-format=commander", "-forge-only=x"} {
 		err := runPlay([]string{"-set", "BLB", "-start", "testdata/start", "-out", t.TempDir(), f})
 		if err == nil || !strings.Contains(err.Error(), "-start") {
@@ -103,6 +106,7 @@ func TestPlayStartFlagsExclusive(t *testing.T) {
 // each seat's hand as listed, 40 cards in all, and the lowering agrees with
 // gorge's own runner.
 func TestPlayStartBezaSetup(t *testing.T) {
+	t.Parallel()
 	reg := testutil.CorpusRegistry(t)
 	out := t.TempDir()
 	if err := playStart(reg, []string{"testdata/start-beza"}, "XP", out, false); err != nil {
@@ -153,6 +157,7 @@ func TestPlayStartBezaSetup(t *testing.T) {
 // sorcery or an Aura on the battlefield is refused (scen.FieldBlock), since
 // gorge and Forge place it differently and the setup could never agree.
 func TestStartDeckRefusesFieldBlocked(t *testing.T) {
+	t.Parallel()
 	reg := testutil.CorpusRegistry(t)
 	for _, n := range []string{"Path to Exile", "Taste of Blood", "Strange Augmentation"} {
 		_, _, err := startDeck(reg, "start-p0", startSeat{Battlefield: []string{"Plains", n}})
@@ -169,6 +174,7 @@ func TestStartDeckRefusesFieldBlocked(t *testing.T) {
 // (rules.StartSeat.Tokens), and an unknown script is refused rather than
 // starting without the token the key needs.
 func TestStartToken(t *testing.T) {
+	t.Parallel()
 	reg := testutil.CorpusRegistry(t)
 	const script = "c_a_treasure_sac"
 	_, ss, err := startDeck(reg, "start-p0", startSeat{Tokens: []startToken{{Script: script, Tapped: true}}})
@@ -190,6 +196,7 @@ func TestStartToken(t *testing.T) {
 // and a triggered key, and each lowered item's setup carries the token: the
 // token is a real scripted battlefield object, not only a field in the file.
 func TestStartTokenIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, tc := range []struct{ card, key string }{
 		{"Abyssal Harvester", "cast"},
@@ -375,6 +382,7 @@ func TestStartPlayerCounter(t *testing.T) {
 // starts, so a retried key plays new games; absent, the games are those of
 // seed_base 1, as before the field.
 func TestStartSeedBase(t *testing.T) {
+	t.Parallel()
 	dir := t.TempDir()
 	write := func(name, extra string) *startFile {
 		t.Helper()
@@ -415,6 +423,7 @@ func TestStartSeedBase(t *testing.T) {
 // literal All/Any the followers refuse, and sit on the opponent's creature or
 // planeswalker.
 func TestStartCounterBearer(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, tc := range []struct {
 		card, key string
@@ -464,6 +473,7 @@ func TestStartCounterBearer(t *testing.T) {
 // ("All", "Any") is refused at validation, so the class of bug Honest Work
 // exposed cannot come back silently through a hand-written start.
 func TestStartCounterKindRefused(t *testing.T) {
+	t.Parallel()
 	reg := testutil.CorpusRegistry(t)
 	for _, kind := range []string{"All", "Any", "", "EachFromSource"} {
 		_, _, err := startDeck(reg, "start-p0", startSeat{
@@ -485,6 +495,7 @@ func TestStartCounterKindRefused(t *testing.T) {
 // TestStartFocusTimes: a start file's focus times reaches the game's focus
 // ("your second spell each turn": two casts), and absent it is zero (once).
 func TestStartFocusTimes(t *testing.T) {
+	t.Parallel()
 	dir := t.TempDir()
 	for _, tc := range []struct {
 		extra string
@@ -517,6 +528,7 @@ func TestStartFocusTimes(t *testing.T) {
 // at any priority; Shock off the same lands is offered and cast, and its games
 // are written.
 func TestStartRefusesUnofferedFocus(t *testing.T) {
+	t.Parallel()
 	reg := testutil.CorpusRegistry(t)
 	for _, c := range []struct {
 		card    string
@@ -565,6 +577,7 @@ func TestStartRefusesUnofferedFocus(t *testing.T) {
 // counter bearer by its joined name "A // B" while startDeck deals its front
 // face, so binding a tapped/counter entry must resolve the name the same way.
 func TestStartTransformingDFC(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, tc := range []struct{ card, key string }{
 		{"Treasure Map // Treasure Cove", "f0/a0"}, // counter bearer
@@ -602,6 +615,7 @@ func TestStartTransformingDFC(t *testing.T) {
 // affordable and play refused every such start as start-not-exercised (xproof
 // 11250507: 234 of the 1661 start-not-exercised keys had a hybrid cost).
 func TestStartHybridCostIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, card := range []string{
 		"Lydia Frye",          // 2 UB: three lands, one an Island or a Swamp
@@ -625,7 +639,28 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 	if res.Path != scen.PathStart || res.Start == nil {
 		t.Fatalf("path %q reason %q, want a start file", res.Path, res.Reason)
 	}
-	raw, err := res.Start.Marshal()
+	items, rows, raw := playStartFile(t, reg, res.Start)
+	var refused []string
+	for _, r := range rows {
+		if slices.Contains(r.Reasons, reasonStartNotExercised) {
+			t.Errorf("%s: %s (start %s)", r.ID, reasonStartNotExercised, raw)
+		}
+		if r.Status != "" {
+			b, _ := json.Marshal(r)
+			refused = append(refused, string(b))
+		}
+	}
+	if len(items) == 0 {
+		t.Errorf("no item written (lowering %v; start %s)", refused, raw)
+	}
+	return items
+}
+
+// playStartFile plays a generated start for both seeds and returns its items,
+// lowering rows and the rendered start. A play error is fatal.
+func playStartFile(t *testing.T, reg *cards.Registry, st *scen.StartFile) ([]oraclegen.Item, []lowerRow, []byte) {
+	t.Helper()
+	raw, err := st.Marshal()
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -648,26 +683,18 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 	}); err != nil {
 		t.Fatal(err)
 	}
-	var refused []string
+	var rows []lowerRow
 	if err := readLines(filepath.Join(out, "lower.jsonl"), func(b []byte) error {
 		var r lowerRow
 		if err := json.Unmarshal(b, &r); err != nil {
 			return err
 		}
-		if slices.Contains(r.Reasons, reasonStartNotExercised) {
-			t.Errorf("%s: %s (start %s)", r.ID, reasonStartNotExercised, raw)
-		}
-		if r.Status != "" {
-			refused = append(refused, string(b))
-		}
+		rows = append(rows, r)
 		return nil
 	}); err != nil {
 		t.Fatal(err)
 	}
-	if len(items) == 0 {
-		t.Errorf("no item written (lowering %v; start %s)", refused, raw)
-	}
-	return items
+	return items, rows, raw
 }
 
 // TestStartChangesZoneTriggersAreExercised: the ChangesZone/ChangesZoneAll
@@ -684,6 +711,7 @@ func startIsExercised(t *testing.T, reg *cards.Registry, b *certdeck.Builder, ca
 // focus's named key object (the Aura, its bearer, the Equipment and the
 // sacrificial bearer), which is what makes the zone change and the trigger.
 func TestStartChangesZoneTriggersAreExercised(t *testing.T) {
+	t.Parallel()
 	keys := [][2]string{
 		{"Abattoir Ghoul", "f0/t0"},
 		{"Anointer Priest", "f0/t0"},
@@ -774,6 +802,7 @@ func TestStartChangesZoneKeysCreditedByTape(t *testing.T) {
 // seat waited for an option that never came and play refused every such start
 // as start-not-exercised.
 func TestStartManaAbilityIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct {
 		card, key string
@@ -814,6 +843,7 @@ func TestStartManaAbilityIsExercised(t *testing.T) {
 // it as unsupported_kind:activate. That choice offers an explicit combo's
 // colours as options of their own, so the step's colour answer picks it.
 func TestStartManaWheelColourIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, card := range []string{"Caves of Koilos", "Talisman of Progress", "Grove of the Burnwillows"} {
 		t.Run(card, func(t *testing.T) {
@@ -840,6 +870,7 @@ func TestStartManaWheelColourIsExercised(t *testing.T) {
 // Ornithopter: the planted target was illegal, the play was never offered,
 // and play refused the start as start-not-exercised.
 func TestStartTargetRestrictionIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct{ card, key string }{
 		{"Aerial Volley", "cast"},   // Creature.withFlying
@@ -851,6 +882,186 @@ func TestStartTargetRestrictionIsExercised(t *testing.T) {
 	}
 }
 
+// TestStartStackTargetIsExercised: a focus play that targets a spell was
+// refused as start:needs-stack-target, because a start holds at main 1 with an
+// empty stack. The start now scripts the opponent's bait cast (Focus.Bait): the
+// opponent casts it at main 1, then the focus seat casts its counterspell with
+// the bait as its target.
+func TestStartStackTargetIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Absorb", "cast"},           // Counter target spell
+		{"Bone to Ash", "cast"},      // Counter target creature spell
+		{"Assert Authority", "cast"}, // Counter target spell, exile instead
+		{"Condescend", "cast"},       // Counter target spell unless its controller pays {X}
+	} {
+		t.Run(c.card, func(t *testing.T) {
+			items := startIsExercised(t, reg, b, c.card, c.key)
+			for _, it := range items {
+				var casts []string
+				for _, s := range it.Steps {
+					if s.Op == "cast" {
+						casts = append(casts, s.Card)
+					}
+				}
+				// the bait is cast first, then the focus card (the lowered
+				// item relabels the active seat p0, so the seat prefix says
+				// which is which only after the swap)
+				if len(casts) < 2 || !strings.HasSuffix(casts[1], ":"+c.card) ||
+					casts[0] == casts[1] {
+					t.Errorf("%s: casts %v, want the opponent's bait then %s", it.ID, casts, c.card)
+				}
+			}
+		})
+	}
+}
+
+// TestStartStackTargetCostIsExercised: an alternate additional cost
+// ("behold a Jace or pay {1}", "tap an artifact or pay {1}") is paid in
+// addition to the mana cost, and the generated start placed only the printed
+// cost's lands. With a bait on the stack the focus cast was never offered and
+// play refused both seeds as start-not-exercised. The mana fallback now gets
+// its lands too.
+func TestStartStackTargetCostIsExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, card := range []string{
+		"Countersculpt",        // behold a Jace or pay {1}
+		"Disruption Protocol",  // tap an artifact or pay {1}
+		"Louisoix's Sacrifice", // sacrifice a legendary creature or pay {2}
+		"Wild Unraveling",      // blight 2 or pay {1}
+	} {
+		t.Run(card, func(t *testing.T) { _ = startIsExercised(t, reg, b, card, "cast") })
+	}
+}
+
+// stackTargetHardCards are the stack-target cards the generator has got wrong
+// before, played on every default run: Remove Soul, Meddle (a creature-spell
+// filter), the eleven cards whose stack target must itself target something
+// (TargetValidTargeting: the first bait was an inert Reach Through Mists no
+// such spell can be cast against), Ring of Immortals (an ability that targets a
+// spell), Admiral's Order and Aerial Assault (the brief's needs-target
+// refusals), and the alternate-additional-cost cards.
+var stackTargetHardCards = []string{
+	"Remove Soul", "Meddle", "Admiral's Order", "Aerial Assault",
+	"Keep Safe", "Outwit", "Intervene", "Avoid Fate", "Hindering Light", "Confound",
+	"Psychic Rebuttal", "Turn Aside", "Rebuff the Wicked", "Not of This World",
+	"Teferi's Response", "Ring of Immortals",
+	"Countersculpt", "Disruption Protocol", "Louisoix's Sacrifice", "Wild Unraveling",
+}
+
+// stackTargetUpkeepCards are stack-target cards whose bait start lowers to no
+// item: an unscripted upkeep trigger refuses the start after its focus play was
+// offered, so they are exempt from the "wrote an item" check below only.
+var stackTargetUpkeepCards = map[string]bool{"Wizard's Retort": true, "Lilting Refrain": true}
+
+// stackTargetCards is every playable card with a face whose script declares a
+// stack target, sorted.
+func stackTargetCards(reg *cards.Registry, b *certdeck.Builder) []string {
+	var names []string
+	for _, c := range reg.AllCards() {
+		if len(c.Faces) == 0 || !b.Playable(c) {
+			continue
+		}
+		for _, f := range c.Faces {
+			stackTarget := false
+			for _, a := range f.Abilities {
+				if strings.Contains(a.Params["TargetType"], "Spell") || a.Params["TargetValidTargeting"] != "" {
+					stackTarget = true
+				}
+			}
+			for _, v := range f.SVars {
+				if strings.Contains(v, "TargetType$") && strings.Contains(v, "Spell") {
+					stackTarget = true
+				}
+			}
+			if stackTarget {
+				names = append(names, f.Name)
+				break
+			}
+		}
+	}
+	sort.Strings(names)
+	return names
+}
+
+// stackTargetCensus generates every key of each card and plays each start that
+// carries a bait: the focus play must be offered on both seeds (no
+// start-not-exercised row), and a bait start must lower to at least one item
+// unless the card is a known upkeep refusal. This is the guard for the class of
+// regression where the bait was accepted for a spell the focus play could never
+// target (TargetValidTargeting, a bait cast from the hand against "wasn't cast
+// from hand", a sorcery-speed focus behind the bait): xengine play refused
+// those starts as start-not-exercised, so the key could never be proven even
+// though a start file existed.
+func stackTargetCensus(t *testing.T, reg *cards.Registry, b *certdeck.Builder, names []string) {
+	t.Helper()
+	keys, refused, noBait, wrote, exercised := 0, 0, 0, 0, 0
+	for _, card := range names {
+		c, ok := reg.Lookup(card)
+		if !ok {
+			t.Errorf("%s is not in the corpus", card)
+			continue
+		}
+		for _, key := range scen.Keys(c) {
+			keys++
+			res, err := scen.Generate(reg, b, card, key, scen.Options{Prefer: "start"})
+			if err != nil {
+				t.Errorf("%s %s: %v", card, key, err)
+				continue
+			}
+			if res.Path != scen.PathStart || res.Start == nil {
+				refused++
+				continue
+			}
+			if res.Start.Focus == nil || res.Start.Focus.Bait == "" {
+				noBait++ // a start with no bait (an ability target, or no stack target)
+				continue
+			}
+			wrote++
+			items, rows, raw := playStartFile(t, reg, res.Start)
+			bad := false
+			for _, r := range rows {
+				if slices.Contains(r.Reasons, reasonStartNotExercised) {
+					bad = true
+					t.Errorf("%s %s: %s (start %s)", card, key, reasonStartNotExercised, raw)
+				}
+			}
+			if len(items) == 0 && !stackTargetUpkeepCards[card] {
+				bad = true
+				t.Errorf("%s %s: a bait start lowered to no item (start %s)", card, key, raw)
+			}
+			if !bad {
+				exercised++
+			}
+		}
+	}
+	t.Logf("stack-target census: cards=%d keys=%d refused=%d no-bait-start=%d wrote-with-bait=%d exercised=%d bad=%d",
+		len(names), keys, refused, noBait, wrote, exercised, wrote-exercised)
+}
+
+// TestStartStackTargetHardCardsAreExercised is the default-run census: the
+// known-hard stack-target cards (stackTargetHardCards), every key.
+func TestStartStackTargetHardCardsAreExercised(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	stackTargetCensus(t, reg, b, stackTargetHardCards)
+}
+
+// TestStartStackTargetCensusIsExercised is the same census over every
+// stack-target card in the corpus. It takes about 50s on its own, which with
+// the rest of the package overruns the merge gate's 2m cap, so it runs only
+// with XENGINE_STACK_TARGET_CENSUS=1 (a separate, non-gate run).
+func TestStartStackTargetCensusIsExercised(t *testing.T) {
+	t.Parallel()
+	if os.Getenv("XENGINE_STACK_TARGET_CENSUS") == "" {
+		t.Skip("set XENGINE_STACK_TARGET_CENSUS=1 to run the whole-corpus census")
+	}
+	reg, b := certdeckBuilder(t)
+	stackTargetCensus(t, reg, b, stackTargetCards(reg, b))
+}
+
 // TestStartMultiFacedFocusIsExercised: a start names a multi-faced card as its
 // card file does ("Akoum Warrior // Akoum Teeth") while the game object's face
 // carries the front name alone, and the focus seat compared the two as
@@ -858,6 +1069,7 @@ func TestStartTargetRestrictionIsExercised(t *testing.T) {
 // transforming, modal and adventure card went untaken and play refused the
 // start as start-not-exercised (259 of the 792 such keys at bf707e46b1).
 func TestStartMultiFacedFocusIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct{ card, key string }{
 		{"Akoum Warrior // Akoum Teeth", "cast"},                   // modal DFC
@@ -874,6 +1086,7 @@ func TestStartMultiFacedFocusIsExercised(t *testing.T) {
 // play the back face's own ability: the listed card enters transformed
 // (rules.StartSeat.BackFace) and the focus finds it by its front name.
 func TestStartBackFaceIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct{ card, key string }{
 		{"Aclazotz, Deepest Betrayal // Temple of the Dead", "f1/a0"},        // a modal back face (a land)
@@ -941,6 +1154,7 @@ func startExercisesKey(t *testing.T, reg *cards.Registry, b *certdeck.Builder, c
 // is refused by its narrow reason instead of being built into a start that
 // lower.gate refuses (CR 702.145b for Daybound/Nightbound).
 func TestStartTransformedTriggerIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct{ card, key string }{
 		{"Voldaren Pariah", "f1/t0"}, // own activated transform ability
@@ -971,6 +1185,7 @@ func TestStartTransformedTriggerIsExercised(t *testing.T) {
 // upkeep) is refused as start-face-lost, writes no item and credits nothing:
 // the tape plays the front face, so the back-face key was never exercised.
 func TestStartBackFaceLostIsRefused(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	const card = "Doric, Nature's Warden // Doric, Owlbear Avenger"
 	for _, key := range []string{"combat#1.attack", "combat#1.block"} {
@@ -1010,12 +1225,43 @@ func TestStartBackFaceLostIsRefused(t *testing.T) {
 // start as start-not-exercised. The most inert card that meets the target now
 // goes to the graveyard the filter names.
 func TestStartGraveyardTargetIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct{ card, key string }{
 		{"Necromantic Summons", "cast"},    // target creature card in a graveyard
 		{"Relearn", "cast"},                // instant or sorcery card from your graveyard
 		{"Scribe of the Mindful", "f0/a0"}, // Instant.YouCtrl,Sorcery.YouCtrl
 		{"Protomatter Powder", "f0/a0"},    // Artifact.YouCtrl
+	} {
+		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
+	}
+}
+
+// TestStartFocusTargetIsPlaced: the static target check read a target as met
+// when only the focus card itself met it (Adarkar Valkyrie's "target creature
+// other than CARDNAME"), when its type was not one a hand list placed
+// (Equipment, Vehicle), or when the target was a card in a graveyard a Charm
+// choice names (Aid the Fallen) or TgtZone names (Chandra, Acolyte of Flame).
+// The start placed no such target, the play was never offered, and play refused
+// the start as start-not-exercised. A minimal legal target now goes on the
+// right side or zone.
+func TestStartFocusTargetIsPlaced(t *testing.T) {
+	t.Parallel()
+	reg, b := certdeckBuilder(t)
+	for _, c := range []struct{ card, key string }{
+		{"Adarkar Valkyrie", "f0/a0"},             // Creature.Other
+		{"Vizier of Tumbling Sands", "f0/a0"},     // Permanent.Other
+		{"Lwaxana Troi, Charming Guest", "f0/a0"}, // Creature.Other+YouCtrl
+		{"Paragon of Eternal Wilds", "f0/a0"},     // Creature.Green+Other+YouCtrl
+		{"Peacewalker Colossus", "f0/a0"},         // Vehicle.Other+YouCtrl
+		{"Auriok Windwalker", "f0/a0"},            // Equipment.YouCtrl
+		{"Kazuul's Toll Collector", "f0/a0"},      // Equipment.YouCtrl
+		{"Saving Grasp", "cast"},                  // Creature.YouOwn
+		{"Aid the Fallen", "cast"},                // Charm choice: creature card in your graveyard
+		{"Fortuitous Find", "cast"},               // Charm choices: artifact/creature card in your graveyard
+		{"Remember the Fallen", "cast"},           // Charm choices: creature/artifact card in your graveyard
+		{"Reborn Hope", "cast"},                   // Card.MultiColor+YouCtrl in the graveyard
+		{"Chandra, Acolyte of Flame", "f0/a2"},    // TgtZone$ Graveyard
 	} {
 		t.Run(c.card, func(t *testing.T) { _ = startIsExercised(t, reg, b, c.card, c.key) })
 	}
@@ -1030,6 +1276,7 @@ func TestStartGraveyardTargetIsExercised(t *testing.T) {
 // the most inert carrier of an own-side target's type goes on the focus seat's
 // side.
 func TestStartTwoTargetsIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct{ card, key string }{
 		{"Switcheroo", "cast"},      // TargetMin$ 2
@@ -1090,6 +1337,7 @@ func startCombatIsExercised(t *testing.T, card, key string, block bool) {
 // attacker is now the most inert carrier creature the filter takes, the
 // opponent's for "whenever a creature attacks you".
 func TestStartAttackTriggerIsExercised(t *testing.T) {
+	t.Parallel()
 	for _, card := range []string{
 		"Raid Bombardment",      // Creature.powerLE2+YouCtrl
 		"Righteous Cause",       // Creature
@@ -1107,6 +1355,7 @@ func TestStartAttackTriggerIsExercised(t *testing.T) {
 // scripts the attack (StartFocus.Attack): a carrier the filter takes, on the
 // battlefield since the turn began, attacks, and the play waits for it.
 func TestStartAttackingTargetIsExercised(t *testing.T) {
+	t.Parallel()
 	for _, c := range []struct{ card, key string }{
 		{"Gravel Slinger", "f0/a0"},   // T: attacking or blocking creature; the Slinger stays home
 		{"Rubblehulk", "f0/a0"},       // bloodrush from hand
@@ -1124,6 +1373,7 @@ func TestStartAttackingTargetIsExercised(t *testing.T) {
 // makes the focus seat the defender, the opponent attacking with Grizzly
 // Bears and the focus seat blocking it with a carrier (StartFocus.Block).
 func TestStartBlockingTargetIsExercised(t *testing.T) {
+	t.Parallel()
 	for _, c := range []struct{ card, key string }{
 		{"Kithkin Shielddare", "f0/a0"}, // W, T: target blocking creature gets +2/+2
 		{"Rabid Rats", "f0/a0"},         // T: target blocking creature gets -1/-1
@@ -1142,6 +1392,7 @@ func TestStartBlockingTargetIsExercised(t *testing.T) {
 // combat, and the target is its opposite number; a {T} play (Steadfast
 // Armasaur) takes the blocking side, as an attack would tap it.
 func TestStartFocusCombatantTargetIsExercised(t *testing.T) {
+	t.Parallel()
 	for _, card := range []string{
 		"Knight of Dusk",      // Creature.blockingSource: the Knight attacks
 		"Wall of Corpses",     // Creature.blockedBySourceLKI: the Wall blocks
@@ -1160,6 +1411,7 @@ func TestStartFocusCombatantTargetIsExercised(t *testing.T) {
 // start-not-exercised (xproof 11250823: 27 of 45 such keys replayed at
 // bc885e54e2).
 func TestStartAdditionalCostIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct{ card, key string }{
 		{"Costly Plunder", "cast"},           // Sac<1/Artifact;Creature>
@@ -1181,6 +1433,7 @@ func TestStartAdditionalCostIsExercised(t *testing.T) {
 // the lowering then refuses the game for its own reason (opening_hand_effect:
 // a follower's setup would answer that ask too), not as an unexercised start.
 func TestStartOpeningHandFocusIsCast(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	res, err := scen.Generate(reg, b, "Leyline of Vitality", "cast", scen.Options{Prefer: "start"})
 	if err != nil || res.Start == nil {
@@ -1222,6 +1475,7 @@ func TestStartOpeningHandFocusIsCast(t *testing.T) {
 // the ability's own cost taps it (Vitu-Ghazi, the City-Tree: its {T} is the
 // cost, its mana ability only a source for the rest).
 func TestStartAbilityManaFocusIsExercised(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	for _, c := range []struct{ card, key string }{
 		{"Growth-Chamber Guardian", "f0/a0"},   // {2}{G}: Adapt 2
@@ -1239,6 +1493,7 @@ func TestStartAbilityManaFocusIsExercised(t *testing.T) {
 // played the key. The start now scripts the combat (StartFocus.Attack, Block):
 // every item has the attack step, and the block step when the trigger reads one.
 func TestStartCombatTriggerIsExercised(t *testing.T) {
+	t.Parallel()
 	for _, c := range []struct {
 		card, key string
 		block     bool
@@ -1260,6 +1515,7 @@ func TestStartCombatTriggerIsExercised(t *testing.T) {
 // is never offered (a defender cannot attack, CR 702.3b) exercises nothing of
 // the key and is refused as start-not-exercised, not written.
 func TestStartCombatLineNeverDeclaredIsRefused(t *testing.T) {
+	t.Parallel()
 	reg, b := certdeckBuilder(t)
 	res, err := scen.Generate(reg, b, "Acolyte of the Inferno", "f0/t0", scen.Options{Prefer: "start"})
 	if err != nil || res.Start == nil || res.Start.Focus == nil {
