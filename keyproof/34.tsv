@@ -26,7 +26,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3415a199-05ac-4627-be97-f842eb1415a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:avenging-angel:f0t0:s1,f:xs:XP:avenging-angel:f0t0:s1	-	-	-	8c0bd19283bb	-	b35437309155	-	-	2026-11-24	xproof
 34161ec4-5d99-45e6-b43c-c8d28958660a	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:treasury-thrull:cast:s1,f:xs:XP:treasury-thrull:cast:s1	-	-	-	d864b561c9cb	-	3c652934d957	-	-	2026-11-24	xproof
 34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t0	Attacks	agreed	-	FX	start	2	0	x:xs:XP:treasury-thrull:f0t0:s1,f:xs:XP:treasury-thrull:f0t0:s1	-	-	-	d864b561c9cb	-	3c652934d957	-	-	2026-11-24	xproof
-34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+34161ec4-5d99-45e6-b43c-c8d28958660a	f0/t1	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 341680e2-12a8-484f-be09-24dae9dbfaea	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3416ac84-c5ef-44be-894f-ab3b89e592ce	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:undead-sprinter:cast:s1,f:xs:XP:undead-sprinter:cast:s1	-	-	-	23c4009444b0	-	bf74602dff1b	-	-	2026-11-25	xproof
 3416ac84-c5ef-44be-894f-ab3b89e592ce	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:undead-sprinter:combat0.attack:s1,f:xs:XP:undead-sprinter:combat0.attack:s1	-	-	-	23c4009444b0	-	bf74602dff1b	-	-	2026-11-25	xproof
@@ -89,7 +89,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 345964ea-12b6-44be-b1a6-50178768b8f4	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:geist-of-the-archives:f0t0:s1,f:xs:XP:geist-of-the-archives:f0t0:s1	-	-	-	3aa6ded33acb	-	e4dc96a8efd5	-	-	2026-11-25	xproof
 345964ea-12b6-44be-b1a6-50178768b8f4	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:geist-of-the-archives:f0t0:s1,f:xs:XP:geist-of-the-archives:f0t0:s1	-	-	-	3aa6ded33acb	-	e4dc96a8efd5	-	-	2026-11-25	xproof
 345de988-4d26-4400-8202-225968db370f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:ovalchase-dragster:cast:s1,f:xs:XP:ovalchase-dragster:cast:s1	-	-	-	d864b561c9cb	-	a3343ad48305	-	-	2026-11-24	xproof
-345de988-4d26-4400-8202-225968db370f	f0/a0	NULL	owed	refused:steps-needed:cost:tapXType	-	start	0	0	-	-	-	-	d864b561c9cb	-	-	-	-	2026-11-24	xproof
+345de988-4d26-4400-8202-225968db370f	f0/a0	Animate/Crew	agreed	-	FX	start	2	0	x:xs:XP:ovalchase-dragster:f0a0:s1,f:xs:XP:ovalchase-dragster:f0a0:s1	-	-	-	cfde1dc26c40	-	a3343ad48305	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 3460e86f-c182-4ca9-bd90-7949b0759c98	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:mirror-golem:f0t0:s1,f:xs:XP:mirror-golem:f0t0:s1	-	-	-	25696bf19d5b	-	c07dd745f7c0	-	-	2026-11-24	xproof
 3460e86f-c182-4ca9-bd90-7949b0759c98	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:mirror-golem:f0t0:s1,f:xs:XP:mirror-golem:f0t0:s1	-	-	-	25696bf19d5b	-	c07dd745f7c0	-	-	2026-11-24	xproof
 3466e0be-3e59-4f5e-812e-3250c8bf19aa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:shackles-of-treachery:cast:s1,f:xs:XP:shackles-of-treachery:cast:s1	-	-	-	3aa6ded33acb	-	18ee5888f5dd	-	-	2026-11-25	xproof

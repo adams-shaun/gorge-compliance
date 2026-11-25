@@ -9,7 +9,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 420aaa77-f429-4f3d-a73e-91dc25cb38db	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	ae86f6029288	-	-	-	-	2026-11-24	xproof
 420c6dcf-966d-4a4c-a0ef-23037ab8b325	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 420d09b5-aced-4f71-914c-90d19f7476dc	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-420d09b5-aced-4f71-914c-90d19f7476dc	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+420d09b5-aced-4f71-914c-90d19f7476dc	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 42176320-ee7f-44c9-916e-5ee4a6108be3	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42176320-ee7f-44c9-916e-5ee4a6108be3	f0/t0	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
 421c661a-24d9-4797-b538-2a4243825628	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -95,7 +95,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 4289f2d4-3db2-4dd1-9c18-af3f78309844	cast	cast-resolve	agreed	-	X	scen	1	0	Earth Kingdom Soldier/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 4289f2d4-3db2-4dd1-9c18-af3f78309844	combat#0.attack	combat.attack	agreed	-	FX	start	2	0	x:xs:XP:earth-kingdom-soldier:combat0.attack:s1,f:xs:XP:earth-kingdom-soldier:combat0.attack:s1	-	-	-	23c4009444b0	-	6dd5c7225c32	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 4289f2d4-3db2-4dd1-9c18-af3f78309844	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:earth-kingdom-soldier:combat0.block:s1,f:xs:XP:earth-kingdom-soldier:combat0.block:s1	-	-	-	23c4009444b0	-	6dd5c7225c32	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
-4289f2d4-3db2-4dd1-9c18-af3f78309844	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+4289f2d4-3db2-4dd1-9c18-af3f78309844	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 428c18aa-b195-4cf2-a1a9-09723b26eb0a	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 428cc1cb-a491-4cc4-9436-28ee8acc37d6	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 428d131c-b0fa-4e96-9c02-e2e6714357b9	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
@@ -154,7 +154,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 42c7e933-f169-444b-917d-b4dca918d989	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42c7e933-f169-444b-917d-b4dca918d989	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	fc71ca68c5ac	-	-	-	-	2026-11-24	xproof
 42ca56c5-a9c4-4a2c-ae05-bce47aa6e16c	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-42ca56c5-a9c4-4a2c-ae05-bce47aa6e16c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+42ca56c5-a9c4-4a2c-ae05-bce47aa6e16c	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 42d121a2-5266-483a-ab16-e0a8073cd6a3	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 42d121a2-5266-483a-ab16-e0a8073cd6a3	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:halimar-depths:f0t0:s1,f:xs:XP:halimar-depths:f0t0:s1	-	-	-	8a1b1a193ec0	-	62fe9f20a42f	-	-	2026-11-24	xproof
 42d121a2-5266-483a-ab16-e0a8073cd6a3	land	land	agreed	-	FX	start	2	0	x:xs:XP:halimar-depths:f0t0:s1,f:xs:XP:halimar-depths:f0t0:s1	-	-	-	8a1b1a193ec0	-	62fe9f20a42f	-	-	2026-11-24	xproof

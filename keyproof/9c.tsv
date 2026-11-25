@@ -49,7 +49,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c41b4ad-a73f-4274-9b71-9c9834910e05	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c41b4ad-a73f-4274-9b71-9c9834910e05	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c4219db-1a7a-4d61-bb8b-7998cfed1faf	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c4219db-1a7a-4d61-bb8b-7998cfed1faf	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+9c4219db-1a7a-4d61-bb8b-7998cfed1faf	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 9c430b5a-83b6-4f4f-b1d3-5737e1f61947	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
 9c430b5a-83b6-4f4f-b1d3-5737e1f61947	f0/a0	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
 9c430b5a-83b6-4f4f-b1d3-5737e1f61947	f0/a1	NULL	owed	refused:steps-needed:cost:WB	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	68d36f8247a3285e0417f9beccf7a66240020297	2026-11-25	xproof
@@ -59,7 +59,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9c462cd8-36f9-4e39-adf3-310ad4d76051	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c462cd8-36f9-4e39-adf3-310ad4d76051	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9c46adaa-ab39-4c0a-99bd-935b6c4f732f	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-9c46adaa-ab39-4c0a-99bd-935b6c4f732f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+9c46adaa-ab39-4c0a-99bd-935b6c4f732f	f0/t0	NULL	owed	refused:no-generator:trigger:SpellCast:filter	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 9c47888b-28a5-4c43-9ee4-a9059e3c367d	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:rolling-thunder:cast:s1,f:xs:XP:rolling-thunder:cast:s1	-	-	-	25696bf19d5b	-	d87a30c79ecc	-	-	2026-11-24	xproof
 9c4c478c-6f0c-430a-91eb-4125a73d03a7	cast	cast	agreed	-	FX	start	4	0	x:xs:XP:invasive-species:cast:s1,f:xs:XP:invasive-species:cast:s1	-	-	-	d864b561c9cb	-	764c5a9ce59b	-	-	2026-11-24	xproof
 9c4c478c-6f0c-430a-91eb-4125a73d03a7	f0/t0	ChangesZone	agreed	-	FX	start	4	0	x:xs:XP:invasive-species:cast:s1,f:xs:XP:invasive-species:cast:s1	-	-	-	d864b561c9cb	-	764c5a9ce59b	-	-	2026-11-24	xproof
@@ -148,7 +148,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9cc02c16-8cf9-4ac7-9475-231c27121968	land	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 9cc092f9-e8f0-40ea-847d-813b70f889db	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:wall-of-denial:cast:s1,f:xs:XP:wall-of-denial:cast:s1	-	-	-	8a1b1a193ec0	-	a20ee04b5cc6	-	-	2026-11-24	xproof
 9cc3b91b-ad70-4b01-b718-fda3819f84d0	cast	cast-resolve	agreed	-	X	scen	1	0	Eclipsed Boggart/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-9cc3b91b-ad70-4b01-b718-fda3819f84d0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+9cc3b91b-ad70-4b01-b718-fda3819f84d0	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 9cc52afb-9788-46f6-9f9b-347513f8a64f	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:dwarven-shortsword:f0t0:s1,f:xs:XP:dwarven-shortsword:f0t0:s1	-	-	-	25696bf19d5b	-	5123621dfa8e	-	-	2026-11-24	xproof
 9cc52afb-9788-46f6-9f9b-347513f8a64f	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:dwarven-shortsword:f0a0:s1,f:xs:XP:dwarven-shortsword:f0a0:s1	-	-	-	fb9d3088f0bf	-	5123621dfa8e	30c62e641b379a0a888f04412ffa59b8ebe0a618	3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84	2026-11-25	xproof
 9cc52afb-9788-46f6-9f9b-347513f8a64f	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:dwarven-shortsword:f0t0:s1,f:xs:XP:dwarven-shortsword:f0t0:s1	-	-	-	25696bf19d5b	-	5123621dfa8e	-	-	2026-11-24	xproof
@@ -158,7 +158,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	combat#0.block	combat#0.block	agreed	-	X	scen	1	0	Sygg, Wanderwine Wisdom/combat#0.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	combat#1.attack	combat#1.attack	agreed	-	X	scen	1	0	Sygg, Wanderwine Wisdom/combat#1.attack/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	combat#1.block	combat#1.block	agreed	-	X	scen	1	0	Sygg, Wanderwine Wisdom/combat#1.block/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
-9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	fb9d3088f0bf	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	c9419dd87a36a901c602460432e9731203211e1d	2026-11-25	xproof
+9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	cfde1dc26c40	-	-	1b6d284d103ec532cf0f3d4c22477e03756ff613	1da9dc5c96c3789a60eb068c8ac6d973e4329752	2026-11-25	xproof
 9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	f0/t1	trigger#0.1	agreed	-	X	scen	1	0	Sygg, Wanderwine Wisdom/trigger#0.1/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	f0/t2	trigger#0.2	agreed	-	X	scen	1	0	Sygg, Wanderwine Wisdom/trigger#0.2/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 9cc91ac5-6f2b-4fc0-b810-cdc92eebe6de	f1/t0	trigger#1.0	agreed	-	X	scen	1	0	Sygg, Wanderwine Wisdom/trigger#1.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
