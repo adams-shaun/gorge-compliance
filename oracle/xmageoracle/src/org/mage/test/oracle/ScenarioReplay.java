@@ -3718,6 +3718,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                     }
                     snaps.add(snap);
                 });
+                if (passHandsOffBeforeLaterAction(steps, i, activeSeat, seats)) {
+                    // After the checkpoint, so the snapshot still sees the
+                    // priority the seat holds; before the seat's later actions.
+                    runCode("pass hands priority on before the seat's next action", turn, phase,
+                            seat(seatOfStep(steps, i)), (info, pl, g) -> pl.pass(g));
+                }
                 if (!payment.isEmpty()) {
                     TestPlayer payer = seat(st.has("seat") ? st.get("seat").getAsInt() : 0);
                     queuePaymentEnd(payer);
@@ -6913,6 +6919,43 @@ public class ScenarioReplay extends CardTestPlayerBase {
             }
         }
         return cmds;
+    }
+
+    /** Whether the recorded pass at {@code index} must be a real pass of its
+     * seat, queued right after its checkpoint. A pass of the seat that is not
+     * active, which only hands priority on, is virtual: its checkpoint rides
+     * that seat's own queue and consumes nothing. XMage then drains the rest
+     * of the queue at that one priority, so a later action of the same seat in
+     * the same step instance fires before the active seat has resolved the
+     * stack's top object and passed again (Helix Pinnacle, Saproling Burst:
+     * p0 activates twice, passes, p1 resolves and passes, p0 activates a
+     * third time with the first ability still on the stack, and the
+     * checkpoints of p1's two passes ran after p0's third activation). The
+     * opponent's pass that follows is what resolves the object, so the pass
+     * is real exactly when the opponent passes next and the seat has an
+     * action still queued in this step instance. */
+    static boolean passHandsOffBeforeLaterAction(JsonArray steps, int index, int activeSeat, int seats) {
+        if (!isPassRun(steps, index)) {
+            return false;
+        }
+        int seat = seatOfStep(steps, index);
+        JsonObject pos = steps.get(index).getAsJsonObject().getAsJsonObject("xpos");
+        if (seat == activeSeat || posFlag(pos, "moved") || posFlag(pos, "resolves")
+                || passEntersNewStep(steps, index, seats)) {
+            return false;
+        }
+        if (!isOp(steps, index + 1, "pass") || seatOfStep(steps, index + 1) == seat) {
+            return false;
+        }
+        for (int j = index + 1; j < steps.size(); j++) {
+            if (isPassRun(steps, j) && passEntersNewStep(steps, j, seats)) {
+                return false;
+            }
+            if (isRecordedAction(steps, j) && seatOfStep(steps, j) == seat) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** gorge's step name as the XMage step its priority falls in. */

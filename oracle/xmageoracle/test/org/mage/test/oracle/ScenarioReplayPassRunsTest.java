@@ -290,6 +290,60 @@ public final class ScenarioReplayPassRunsTest {
         }
     }
 
+    /** Helix Pinnacle / Saproling Burst: the active seat 1's opponent (seat 0)
+     * activates twice, passes, seat 1 resolves the top ability and passes
+     * again (CR 117.3b), then seat 0 activates with the first ability still
+     * on the stack. Seat 0's pass must really pass: otherwise its queued third
+     * activation fires at the same priority and seat 1's two checkpoints run
+     * after it. */
+    private static void stackedOtherSeatActivationsKeepResolvingPassCheckpoint(Path dir) throws Exception {
+        JsonObject two = item("{steps:[{op:'pass',seat:1},{op:'activate',seat:0,card:'p0:X'},{op:'activate',seat:0,card:'p0:X'},"
+                + "{op:'pass',seat:0},{op:'pass',seat:1},{op:'pass',seat:1},{op:'activate',seat:0,card:'p0:X'}],"
+                + "xmage_pos:[{turn:2,step:'main1',active:1},null,null,{turn:2,step:'main1',active:1},"
+                + "{turn:2,step:'main1',active:1,resolves:true},{turn:2,step:'main1',active:1},null]}");
+        JsonArray ts = ScenarioReplay.steps(two);
+        List<Boolean> real = new ArrayList<>();
+        for (int i = 0; i < ts.size(); i++) {
+            real.add(ScenarioReplay.passHandsOffBeforeLaterAction(ts, i, 1, 2));
+        }
+        equal(Arrays.asList(false, false, false, true, false, false, false), real,
+                "only seat 0's pass before its later activation is a real pass");
+        // No later action of seat 0 in the step: its virtual pass is enough.
+        JsonObject single = item("{steps:[{op:'activate',seat:0,card:'p0:X'},{op:'pass',seat:0},{op:'pass',seat:1},{op:'pass',seat:1}],"
+                + "xmage_pos:[null,{turn:2,step:'main1',active:1},{turn:2,step:'main1',active:1,resolves:true},"
+                + "{turn:2,step:'main1',active:1}]}");
+        for (int i = 0; i < 4; i++) {
+            check(!ScenarioReplay.passHandsOffBeforeLaterAction(ScenarioReplay.steps(single), i, 1, 2),
+                    "a single activation keeps its virtual pass (step " + i + ")");
+        }
+        // The seat's later action is in a later step: the pass between enters it.
+        JsonObject later = item("{steps:[{op:'activate',seat:0,card:'p0:X'},{op:'pass',seat:0},{op:'pass',seat:1},{op:'activate',seat:0,card:'p0:X'}],"
+                + "xmage_pos:[null,{turn:2,step:'main1',active:1},{turn:2,step:'begin-combat',active:1,moved:true},null]}");
+        check(!ScenarioReplay.passHandsOffBeforeLaterAction(ScenarioReplay.steps(later), 1, 1, 2),
+                "an action after the step moved on is not in this step's priority");
+
+        String line = new String(Files.readAllBytes(
+                dir.resolve("stacked-other-seat-activations-helix-pinnacle.jsonl")), StandardCharsets.UTF_8).trim();
+        JsonObject res = replay(JsonParser.parseString(line).getAsJsonObject());
+        noHarness(res, "stacked other-seat activations");
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        List<String> order = new ArrayList<>();
+        List<Integer> stack = new ArrayList<>();
+        for (int i = 0; i < snaps.size(); i++) {
+            JsonObject snap = snaps.get(i).getAsJsonObject();
+            String cp = snap.get("checkpoint").getAsString();
+            if (cp.equals("setup")) {
+                continue;
+            }
+            order.add(cp);
+            stack.add(snap.has("stack") ? snap.getAsJsonArray("stack").size() : 0);
+        }
+        equal(Arrays.asList("step 0 (pass)", "step 1 (activate)", "step 2 (activate)", "step 3 (pass)",
+                "step 4 (pass)", "step 5 (pass)", "step 6 (activate)"), order, "one snapshot per step, in step order");
+        equal(Arrays.asList(0, 1, 2, 2, 1, 1, 2), stack,
+                "the resolving pass sees one ability left, and the third activation stacks on it");
+    }
+
     /** A declaration-ahead checkpoint stands after a step end, which empties
      * every mana pool through XMage's own emptyManaPools; an ordinary
      * checkpoint keeps the pool XMage shows. */
@@ -402,6 +456,7 @@ public final class ScenarioReplayPassRunsTest {
         declarationStepEnd();
         if (args.length > 0) {
             replayPassPairSplitByOpponentManaAbility(Paths.get(args[0]));
+            stackedOtherSeatActivationsKeepResolvingPassCheckpoint(Paths.get(args[0]));
         }
         System.out.println("ScenarioReplayPassRunsTest ok");
     }
