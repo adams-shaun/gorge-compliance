@@ -28,8 +28,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04260930-ff38-4b35-9ec4-e89196a4f2c7	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:zegana-utopian-speaker:f0t0:s1,f:xs:XP:zegana-utopian-speaker:f0t0:s1	-	-	-	d864b561c9cb	-	581a77c0cee8	-	-	2026-11-24	xproof
 04260930-ff38-4b35-9ec4-e89196a4f2c7	f0/a0	PutCounter	agreed	-	FX	start	2	0	x:xs:XP:zegana-utopian-speaker:f0a0:s1,f:xs:XP:zegana-utopian-speaker:f0a0:s1	-	-	-	054d9f516953	-	581a77c0cee8	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 04260930-ff38-4b35-9ec4-e89196a4f2c7	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:zegana-utopian-speaker:f0t0:s1,f:xs:XP:zegana-utopian-speaker:f0t0:s1	-	-	-	d864b561c9cb	-	581a77c0cee8	-	-	2026-11-24	xproof
-0429d146-332f-4fb0-8273-c73679ca6d47	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-0429d146-332f-4fb0-8273-c73679ca6d47	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+0429d146-332f-4fb0-8273-c73679ca6d47	cast	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+0429d146-332f-4fb0-8273-c73679ca6d47	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 042a665d-2f63-4f7e-ac89-0d560da68085	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 042c01ec-9f1f-432b-bea9-d64d822cd91e	cast	cast-resolve	agreed	-	X	scen	1	0	The Emperor of Palamecia/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 042c01ec-9f1f-432b-bea9-d64d822cd91e	f0/a0	activate#0.0	agreed	-	X	scen	1	0	The Emperor of Palamecia/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 043dd2e5-21e4-49b9-90b2-831e587b2238	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:containment-breach:cast:s1,f:xs:XP:containment-breach:cast:s1	-	-	-	3aa6ded33acb	-	fed4bf0cc1ec	-	-	2026-11-25	xproof
 043ded41-2506-4dab-91c4-142d9287e7d7	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 043ded41-2506-4dab-91c4-142d9287e7d7	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-043ded41-2506-4dab-91c4-142d9287e7d7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+043ded41-2506-4dab-91c4-142d9287e7d7	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone:filter	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 043f869d-b11c-4c0d-9591-2bf0df7bde55	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 043fa53c-8a46-4fbd-836f-2403c62e0121	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:oran-rief-recluse:f0t0:s1,f:xs:XP:oran-rief-recluse:f0t0:s1	-	-	-	8a1b1a193ec0	-	2dc7816d24db	-	-	2026-11-24	xproof
 043fa53c-8a46-4fbd-836f-2403c62e0121	f0/t0	ChangesZone	agreed	-	FX	start	2	0	x:xs:XP:oran-rief-recluse:f0t0:s1,f:xs:XP:oran-rief-recluse:f0t0:s1	-	-	-	8a1b1a193ec0	-	2dc7816d24db	-	-	2026-11-24	xproof
@@ -172,7 +172,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04c4250e-014a-4067-80e8-4134069354f7	combat#0.block	combat.block	agreed	-	FX	start	2	0	x:xs:XP:flesh-burrower:combat0.block:s1,f:xs:XP:flesh-burrower:combat0.block:s1	-	-	-	23c4009444b0	-	3687452a0f1d	-	-	2026-11-25	xproof
 04c4250e-014a-4067-80e8-4134069354f7	f0/t0	Attacks	agreed	-	FX	start	4	0	x:xs:XP:flesh-burrower:combat0.attack:s1,f:xs:XP:flesh-burrower:combat0.attack:s1	-	-	-	23c4009444b0	-	3687452a0f1d	-	-	2026-11-25	xproof
 04c7bb20-6e40-4e79-a0ec-ced920d3491e	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-04c7bb20-6e40-4e79-a0ec-ced920d3491e	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+04c7bb20-6e40-4e79-a0ec-ced920d3491e	f0/a0	NULL	owed	refused:steps-needed:cost:Discard	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 04c7f4fe-2098-4311-866d-6733c08d5178	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:nettlecyst:f0t0:s1,f:xs:XP:nettlecyst:f0t0:s1	-	-	-	cb99a158debc	-	1d1899bddbd4	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 04c7f4fe-2098-4311-866d-6733c08d5178	f0/a0	Attach/Equip	agreed	-	FX	start	2	0	x:xs:XP:nettlecyst:f0a0:s1,f:xs:XP:nettlecyst:f0a0:s1	-	-	-	cb99a158debc	-	1d1899bddbd4	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
 04c7f4fe-2098-4311-866d-6733c08d5178	f0/t0	ChangesZone/Living Weapon	agreed	-	FX	start	2	0	x:xs:XP:nettlecyst:f0t0:s1,f:xs:XP:nettlecyst:f0t0:s1	-	-	-	cb99a158debc	-	1d1899bddbd4	98052067d47006cdc887f357dcde286eddc1d5ec	6fcacdc21814855e7cec9a02e58db563ec77beab	2026-11-25	xproof
@@ -191,8 +191,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:seizan-perverter-of-truth:f0t0:s1,f:xs:XP:seizan-perverter-of-truth:f0t0:s1	-	-	-	23c4009444b0	-	650a8da7c748	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04d0d20f-720e-4cb6-a3ad-ea2b57bb7efa	f0/t0	Phase	agreed	-	FX	start	2	0	x:xs:XP:seizan-perverter-of-truth:f0t0:s1,f:xs:XP:seizan-perverter-of-truth:f0t0:s1	-	-	-	23c4009444b0	-	650a8da7c748	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 04d8615c-3883-4251-9790-1d8a4a40e142	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:eternal-dragon:cast:s1,f:xs:XP:eternal-dragon:cast:s1	-	-	-	8c0bd19283bb	-	b7d8c9ba5eef	-	-	2026-11-24	xproof
-04d8615c-3883-4251-9790-1d8a4a40e142	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	ee9449e32c7a	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
-04d8615c-3883-4251-9790-1d8a4a40e142	f0/a1	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:eternal-dragon:f0a1:s1	-	-	-	ee9449e32c7a	-	b7d8c9ba5eef	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	e45e911953c94991e63335d3ea14d0c881ba283a	2026-11-25	xproof
+04d8615c-3883-4251-9790-1d8a4a40e142	f0/a0	NULL	owed	refused:start:upkeep-only	-	start	0	0	-	-	-	-	65d07beecc37	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
+04d8615c-3883-4251-9790-1d8a4a40e142	f0/a1	ChangeZone/TypeCycling	agreed	-	F	start	2	0	f:xs:XP:eternal-dragon:f0a1:s1	-	-	-	65d07beecc37	-	b7d8c9ba5eef	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	2ac6012982ea099449b492f6ede41890d7036820	2026-11-25	xproof
 04da8c46-9703-47f2-974b-c144464ec380	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04dc2e9c-312c-4af8-950c-6a7ed859c9be	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 04dcda3b-3401-4523-8b97-b700a14feb36	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:gallant-strike:cast:s1,f:xs:XP:gallant-strike:cast:s1	-	-	-	da6bc3fe8458	-	379573fb9396	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
