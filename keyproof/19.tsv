@@ -8,7 +8,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19055292-1a79-413e-8056-7d4aec9839ed	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19055292-1a79-413e-8056-7d4aec9839ed	f0/t0	Attacks/Exalted	agreed	-	FX	start	2	0	x:xs:XP:dawnray-archer:f0t0:s1,f:xs:XP:dawnray-archer:f0t0:s1	-	-	-	8a1b1a193ec0	-	52956f233d91	-	-	2026-11-24	xproof
 19066c43-eccd-461b-9695-c3fad95dc1da	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:blight:cast:s1,f:xs:XP:blight:cast:s1	-	-	-	ae86f6029288	-	d73879902534	-	-	2026-11-24	xproof
-19066c43-eccd-461b-9695-c3fad95dc1da	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+19066c43-eccd-461b-9695-c3fad95dc1da	f0/t0	NULL	owed	refused:no-generator:trigger:Taps:filter	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 190cdc23-fa05-475f-b853-471ca0f21b71	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 190cdc23-fa05-475f-b853-471ca0f21b71	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 190e664b-9875-4335-af46-353886ed18ff	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
@@ -67,7 +67,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 1950067a-cc57-42a8-b1ee-f03e1b50591b	f0/a0	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 19504e19-2886-4d28-a813-b798a9a446a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:alien-symbiosis:static0.0:s1,f:xs:XP:alien-symbiosis:static0.0:s1	-	-	-	6f84be0f34c0	-	1ac01b6a83b2	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 19504e19-2886-4d28-a813-b798a9a446a2	static#0.0	static.continuous	agreed	-	FX	start	2	0	x:xs:XP:alien-symbiosis:static0.0:s1,f:xs:XP:alien-symbiosis:static0.0:s1	-	-	-	6f84be0f34c0	-	1ac01b6a83b2	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
-19504e19-2886-4d28-a813-b798a9a446a2	static#0.1	static.continuous	diverged	-	-	start	0	2	-	4842c88ac5cc	-	-	21b2cceac526	-	1ac01b6a83b2	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+19504e19-2886-4d28-a813-b798a9a446a2	static#0.1	static.continuous	diverged	-	-	start	0	2	-	4842c88ac5cc	-	-	41149fc165a7	-	1ac01b6a83b2	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 195107ad-879d-4b02-a44a-a3ba70fedf88	f0/a0	Mana	agreed	-	FX	start	2	0	x:xs:XP:desert:f0a1:s1,f:xs:XP:desert:f0a1:s1	-	-	-	25696bf19d5b	-	609d96e91c41	-	-	2026-11-24	xproof
 195107ad-879d-4b02-a44a-a3ba70fedf88	f0/a1	DealDamage	agreed	-	FX	start	2	0	x:xs:XP:desert:f0a1:s1,f:xs:XP:desert:f0a1:s1	-	-	-	336eab778104	-	609d96e91c41	1b6d284d103ec532cf0f3d4c22477e03756ff613	65d8060f39ba8a34193c2a9b593ce363d647726e	2026-11-25	xproof
 195107ad-879d-4b02-a44a-a3ba70fedf88	land	play-land	agreed	-	FX	scen	2	0	Desert/play-land/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
@@ -98,7 +98,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 19788405-7141-475e-94ee-d0c89488f50f	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 19788405-7141-475e-94ee-d0c89488f50f	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 19797dd6-6f48-47bc-a9ac-84d4acad3fa5	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-19797dd6-6f48-47bc-a9ac-84d4acad3fa5	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	21b2cceac526	-	-	11940683b903024a728751604bc5b1573a00e86a	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
+19797dd6-6f48-47bc-a9ac-84d4acad3fa5	f0/a0	NULL	owed	refused:steps-needed:cost:Return	-	start	0	0	-	-	-	-	41149fc165a7	-	-	5cc61aaba0b0059451c2c74c6a0f77b6f1789fc8	53059b9bbf2d85b11f810f54699145b731665a8b	2026-11-25	xproof
 19797dd6-6f48-47bc-a9ac-84d4acad3fa5	f0/t0	DamageDone	agreed	-	FX	start	2	0	x:xs:XP:spring-leaf-avenger:f0t0:s1,f:xs:XP:spring-leaf-avenger:f0t0:s1	-	-	-	054d9f516953	-	994aa4ea11a6	98052067d47006cdc887f357dcde286eddc1d5ec	793a015fcf6e14923245669ec9a2f3469aa53931	2026-11-25	xproof
 197fd850-0a08-4e82-9249-a8d719436f77	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 1980ca2e-a415-4de1-ac30-7055507e82a2	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:vampiric-feast:cast:s1,f:xs:XP:vampiric-feast:cast:s1	-	-	-	8c0bd19283bb	-	f2491d54bdcb	-	-	2026-11-24	xproof
