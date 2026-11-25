@@ -50,7 +50,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t0	NULL	owed	refused:no-generator:trigger:ChangesZone	-	start	0	0	-	-	-	-	8c0bd19283bb	-	-	-	-	2026-11-24	xproof
 3d3eb043-8ce6-461a-b8bc-67f0ba6cd580	f0/t1	Attacks	agreed	-	FX	start	2	0	x:xs:XP:taeko-the-patient-avalanche:f0t1:s1,f:xs:XP:taeko-the-patient-avalanche:f0t1:s1	-	-	-	8c0bd19283bb	-	7679566751a4	-	-	2026-11-24	xproof
 3d416f83-32b8-4dad-8e4d-3acd182bbe44	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3d416f83-32b8-4dad-8e4d-3acd182bbe44	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+3d416f83-32b8-4dad-8e4d-3acd182bbe44	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 3d416f83-32b8-4dad-8e4d-3acd182bbe44	f0/t1	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 3d416f83-32b8-4dad-8e4d-3acd182bbe44	f1/a0	NULL	owed	refused:no-generator:face	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 3d4a7dd3-9258-4bd1-adc4-08f0205e196a	cast	cast	agreed	-	FX	start	1	0	x:xs:XP:dwynen-s-elite:f0t0:s2,f:xs:XP:dwynen-s-elite:f0t0:s2	-	-	-	e07cf3a05ba5	-	3071cbc0d02e	-	-	2026-11-24	xproof
@@ -104,7 +104,7 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3d867016-2601-4a37-a73d-308898d3bd37	cast	cast-resolve	agreed	-	X	scen	1	0	Thrasios, Triton Hero/cast-resolve/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3d867016-2601-4a37-a73d-308898d3bd37	f0/a0	activate#0.0	agreed	-	X	scen	1	0	Thrasios, Triton Hero/activate#0.0/v1	-	-	-	e07cf3a05ba5	-	-	6b602a1c85e8	-	2026-11-24	xproof
 3d873e1d-4fac-42c4-bb31-77e76099e1ef	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:the-rack:cast:s1,f:xs:XP:the-rack:cast:s1	-	-	-	25696bf19d5b	-	bb2037dcdd7f	-	-	2026-11-24	xproof
-3d873e1d-4fac-42c4-bb31-77e76099e1ef	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+3d873e1d-4fac-42c4-bb31-77e76099e1ef	f0/t0	NULL	owed	refused:as-enters	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 3d8aae86-266f-4bfd-a058-0fe12b5ea354	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
 3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t0	NULL	owed	refused:start-not-exercised	-	start	0	0	-	-	-	-	23c4009444b0	-	-	fdbae29b12162fce8204b80f4bb7d56ceb253b41	528c55d25b46d1a38a4fe5cbf4b6c3a6f2be918c	2026-11-25	xproof
 3d8aae86-266f-4bfd-a058-0fe12b5ea354	f0/t1	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	5f2128bf97e4	-	-	-	-	2026-11-24	xproof
@@ -205,8 +205,8 @@ oracle_id	key	desc	state	reason	refs	source	agree_items	diff_items	witness	sig	c
 3dee768a-612c-4960-bad2-2fe5b83a70c3	f0/t0	trigger#0.0	agreed	-	X	scen	1	0	Yuna, Hope of Spira/trigger#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3dee768a-612c-4960-bad2-2fe5b83a70c3	static#0.0	static#0.0	agreed	-	X	scen	1	0	Yuna, Hope of Spira/static#0.0/v1	-	-	-	e07cf3a05ba5	-	-	4142596fb72b	-	2026-11-24	xproof
 3df0a392-bcc1-4456-bd6e-d044bcc83a16	cast	-	agreed	-	FX	game	1	0	-	-	-	-	e07cf3a05ba5	-	-	-	-	2026-11-24	xproof
-3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
-3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	78568f009138	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t0	NULL	owed	refused:no-generator:trigger:Blocks	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
+3df0a392-bcc1-4456-bd6e-d044bcc83a16	f0/t1	NULL	owed	refused:no-generator:trigger:AttackerBlocked	-	start	0	0	-	-	-	-	b48d0082b7c4	-	-	98052067d47006cdc887f357dcde286eddc1d5ec	a2201414482ed3bf597656148e7b1cc076191293	2026-11-25	xproof
 3df11e5c-19aa-441c-a889-6b40eb3fdabf	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:xander-s-pact:cast:s1,f:xs:XP:xander-s-pact:cast:s1	-	-	-	8c0bd19283bb	-	9d7205bc0a9c	-	-	2026-11-24	xproof
 3df49c4d-a285-4826-824e-b742b0deed3a	cast	cast	agreed	-	F	start	2	0	f:xs:XP:confounding-riddle:cast:s1	-	-	-	23b491658465	-	95dfcccda773	-	-	2026-11-24	xproof
 3df4eb80-e8dd-4a9e-bd8a-b4b23fb9de6c	cast	cast	agreed	-	FX	start	2	0	x:xs:XP:psychic-whorl:cast:s1,f:xs:XP:psychic-whorl:cast:s1	-	-	-	3aa6ded33acb	-	b01453fa3d67	-	-	2026-11-25	xproof
