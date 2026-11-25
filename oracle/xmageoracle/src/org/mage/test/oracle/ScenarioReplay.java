@@ -1232,26 +1232,53 @@ public class ScenarioReplay extends CardTestPlayerBase {
         }
 
         private boolean zonePickQueued(String message, Game game) {
-            if (getTargets().isEmpty() || TestPlayer.TARGET_SKIP.equals(getTargets().get(0))) {
+            Zone zone = zoneOfPickAsk(message);
+            if (zone == null) {
                 return false;
             }
-            String head = getTargets().get(0);
-            Zone zone = zoneOfPickAsk(message);
-            if (zone == Zone.BATTLEFIELD) {
-                for (mage.game.permanent.Permanent p : game.getBattlefield().getAllActivePermanents()) {
-                    if (answerNamesCandidate(game, p.getId(), head)) {
+            return zonePickQueued(zone, getChoices(), getTargets(), (askedZone, answer) -> {
+                if (askedZone == Zone.BATTLEFIELD) {
+                    for (mage.game.permanent.Permanent p : game.getBattlefield().getAllActivePermanents()) {
+                        if (answerNamesCandidate(game, p.getId(), answer)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
+                Cards cards = askedZone == Zone.HAND ? getHand() : getGraveyard();
+                for (UUID id : cards) {
+                    if (answerNamesCandidate(game, id, answer)) {
                         return true;
                     }
                 }
                 return false;
+            });
+        }
+
+        /** Whether a per-zone pick may is scripted to go ahead: either queue's
+         * head may name a candidate of the ask's zone. choose(Cards,
+         * TargetCard) reads the CHOICE queue, while the generator may have
+         * scripted the pick on the TARGET queue, which handOffCardPick moves
+         * to the choice queue only when the Cards ask comes, so both are
+         * consulted and neither queue is consumed. A head that is a skip or
+         * a scripted Yes/No is no pick. */
+        static boolean zonePickQueued(Zone zone, List<String> choices, List<String> targets,
+                BiPredicate<Zone, String> namesCandidateInZone) {
+            return zonePickHeadQueued(zone, choices, namesCandidateInZone)
+                    || zonePickHeadQueued(zone, targets, namesCandidateInZone);
+        }
+
+        private static boolean zonePickHeadQueued(Zone zone, List<String> queue,
+                BiPredicate<Zone, String> namesCandidateInZone) {
+            if (queue.isEmpty()) {
+                return false;
             }
-            Cards cards = zone == Zone.HAND ? getHand() : getGraveyard();
-            for (UUID id : cards) {
-                if (answerNamesCandidate(game, id, head)) {
-                    return true;
-                }
+            String head = queue.get(0);
+            if (head.equals("Yes") || head.equals("No")
+                    || TestPlayer.CHOICE_SKIP.equals(head) || TestPlayer.TARGET_SKIP.equals(head)) {
+                return false;
             }
-            return false;
+            return namesCandidateInZone.test(zone, head);
         }
 
         private boolean scriptedYesNoNext() {
@@ -1480,10 +1507,11 @@ public class ScenarioReplay extends CardTestPlayerBase {
             if (zonePickAsk(message) && !scriptedYesNoNext()) {
                 // A per-zone "Attach an Aura from your hand?" (Bruna, Light of
                 // Alabaster) asks a may per pick; gorge recorded ONE yes for the
-                // whole effect and the pick itself, scripted on the target
-                // queue. Yes when the next queued pick lies in the named zone
-                // (choose(Cards, TargetCard) then reads it from the choice
-                // queue), else no, without consuming either queue.
+                // whole effect and the pick itself. Yes when a queued pick lies
+                // in the named zone -- the choice queue when the generator
+                // scripted it there (choose(Cards, TargetCard) reads it), the
+                // target queue when handOffCardPick has still to move it --
+                // else no, without consuming either queue.
                 return zonePickQueued(message, game);
             }
             Boolean folded = foldedOptionalAnswer(source instanceof mage.abilities.TriggeredAbility

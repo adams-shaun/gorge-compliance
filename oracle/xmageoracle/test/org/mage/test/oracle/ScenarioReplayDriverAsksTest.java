@@ -197,19 +197,44 @@ public final class ScenarioReplayDriverAsksTest {
 
     /** Bruna, Light of Alabaster: XMage asks a per-zone "Attach an Aura from your hand?" may and
      * then choose(Cards, TargetCard), which reads the CHOICE queue; gorge recorded one yes and the
-     * pick, scripted on the TARGET queue. The zone ask is recognised by role, and the Cards pick
-     * hands the target-queue name to the choice queue before forcedChooseCards. */
+     * pick, which the generator may script on the TARGET or the CHOICE queue. The zone ask is
+     * recognised by role, answered from a queued pick in that zone, and the Cards pick hands a
+     * target-queue name to the choice queue before forcedChooseCards. */
     private static void perZoneAttachPick() throws Exception {
         Class<?>[] one = {String.class};
         for (String zone : new String[] {"your hand", "your graveyard", "the battlefield"}) {
             check((Boolean) adapter("zonePickAsk", one, "Attach an Aura from " + zone + "?"),
                     "the per-zone attach ask for " + zone + " must be recognised");
         }
+        check(adapter("zoneOfPickAsk", one, "Attach an Aura from your hand?").equals(Zone.HAND)
+                        && adapter("zoneOfPickAsk", one, "Attach an Aura from your graveyard?").equals(Zone.GRAVEYARD)
+                        && adapter("zoneOfPickAsk", one, "Attach an Aura from the battlefield?").equals(Zone.BATTLEFIELD),
+                "the zone ask maps to its zone");
         check(!(Boolean) adapter("zonePickAsk", one, "Put a land card from your hand onto the battlefield?"),
                 "a put ask is not a per-zone attach ask");
         check(!(Boolean) adapter("zonePickAsk", one, "Cast a spell from your hand?"),
                 "another per-zone may keeps its own scripted boolean");
         check(!(Boolean) adapter("zonePickAsk", one, (Object) null), "no message is no ask");
+        Class<?>[] zoneTypes = {Zone.class, List.class, List.class, java.util.function.BiPredicate.class};
+        java.util.function.BiPredicate<Zone, String> handAura =
+                (zone, name) -> zone == Zone.HAND && name.equals("Cowed by Wisdom");
+        List<String> empty = new ArrayList<>();
+        List<String> pickOnChoices = new ArrayList<>(Arrays.asList("Cowed by Wisdom"));
+        List<String> pickOnTargets = new ArrayList<>(Arrays.asList("Cowed by Wisdom"));
+        check((Boolean) adapter("zonePickQueued", zoneTypes, Zone.HAND, pickOnChoices, empty, handAura),
+                "a pick scripted on the choice queue answers the per-zone ask for its zone");
+        check((Boolean) adapter("zonePickQueued", zoneTypes, Zone.HAND, empty, pickOnTargets, handAura),
+                "a pick scripted on the target queue answers the per-zone ask for its zone");
+        check(!(Boolean) adapter("zonePickQueued", zoneTypes, Zone.GRAVEYARD, pickOnChoices, empty, handAura),
+                "a hand pick does not answer the graveyard ask");
+        check(!(Boolean) adapter("zonePickQueued", zoneTypes, Zone.HAND,
+                        new ArrayList<>(Arrays.asList("Yes")), empty, handAura),
+                "a scripted boolean is not a per-zone pick");
+        check(!(Boolean) adapter("zonePickQueued", zoneTypes, Zone.HAND,
+                        new ArrayList<>(Arrays.asList(TestPlayer.CHOICE_SKIP)), empty, handAura),
+                "a skip is not a per-zone pick");
+        check(pickOnChoices.size() == 1 && pickOnTargets.size() == 1,
+                "the zone ask must not consume the queued pick");
         Class<?>[] types = {List.class, List.class, boolean.class, java.util.function.Predicate.class};
         java.util.function.Predicate<String> aura = a -> a.equals("Cowed by Wisdom");
         List<String> choices = new ArrayList<>();
