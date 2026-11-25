@@ -21,7 +21,6 @@ Forge drafts carry no Forge source or script text (GPL boundary): file:line, the
 | XMage | Pain 101 (AddContinuousEffectToGame target zcc) | 2 | still-open | [xmage-continuous-effect-copied-target-zcc.md](xmage-continuous-effect-copied-target-zcc.md) | `adams-shaun/mage:upstream/continuous-effect-copied-target-zcc` |
 | Forge | Nihil Spellbomb (also Declaration in Stone) | 2 | still-open | [forge-nihil-spellbomb.md](forge-nihil-spellbomb.md) | `adams-shaun/forge:upstream/nihil-spellbomb-stray-shuffle` (push pending) |
 | Forge | Barkform Harvester (Changeling under ability loss) | 2 | still-open | [forge-barkform-harvester.md](forge-barkform-harvester.md) | `adams-shaun/forge:upstream/changeling-kept-under-ability-loss` (push pending) |
-| XMage | Chandra, Acolyte of Flame (also Firecat Blitz, Force of Rage, Thatcher Revolt, Waylay: same per-token delayed trigger, unfixed) | 4 xproof items | not yet re-verified against upstream HEAD; fixed on our fork pin | [xmage-chandra-acolyte-one-delayed.md](xmage-chandra-acolyte-one-delayed.md) | `adams-shaun/mage:fix/chandra-acolyte-one-delayed` (fork branch, not an upstream-HEAD mirror) |
 | XMage | Illumination | 1 | still-open | [xmage-illumination-lki-spell.md](xmage-illumination-lki-spell.md) | `adams-shaun/mage:upstream/illumination-lki-spell` |
 | XMage | Hellfire | 1 | still-open | [xmage-hellfire-zero-x-damage.md](xmage-hellfire-zero-x-damage.md) | `adams-shaun/mage:upstream/hellfire-zero-x-damage` |
 | XMage | Grand Nagus Zek (also Battle-Scarred Survivalist, Morbid Opportunist) | 1 | still-open | [xmage-trigger-limit-lki-zcc.md](xmage-trigger-limit-lki-zcc.md) | `adams-shaun/mage:upstream/trigger-limit-lki-zcc` |
@@ -30,6 +29,7 @@ Forge drafts carry no Forge source or script text (GPL boundary): file:line, the
 | Forge | Emrakul's Messenger (Devoid under ability loss) | 1 | still-open | [forge-emrakuls-messenger.md](forge-emrakuls-messenger.md) | `adams-shaun/forge:upstream/devoid-colour-kept-under-ability-loss` (push pending; stacked on the Changeling commit) |
 | Forge | Settle the Wreckage (combat damage step priority) | 1 | already reported: Card-Forge/forge#12590 and PR #12722, both open; still reproduces at `9a91120cac` | none | none |
 | Forge | Homesickness | 1 | fixed upstream at `1c9b258b93` (#12725); already in FORGE_REF `ff076d4432` | none | none |
+| XMage | Chandra, Acolyte of Flame (also Firecat Blitz: same per-token delayed trigger, unfixed) | 0 (fixed on the oracle pin; it explained 4 xproof items) | not yet re-verified against upstream HEAD; fixed on our fork pin | [xmage-chandra-acolyte-one-delayed.md](xmage-chandra-acolyte-one-delayed.md) | `adams-shaun/mage:fix/chandra-acolyte-one-delayed` (fork branch, not an upstream-HEAD mirror) |
 | Forge | Vivien Reid (also Sigarda, Champion of Light; Sarkhan's Dragonfire); cardc ledger | cardc | still-open | [forge-vivien-reid.md](forge-vivien-reid.md) | `adams-shaun/forge:upstream/dig-rest-random-order` (push pending) |
 
 "Push pending": the Forge mirror branches are committed in `~/projects/forge-oracle` but not on GitHub. Upstream

@@ -10,9 +10,11 @@ Chandra, Acolyte of Flame, second 0:
 
 ## Comprehensive Rules
 
-> 603.7a Delayed triggered abilities are created by the resolution of a spell or ability. ... A delayed triggered ability that refers to a particular object still affects it even if the object changes characteristics, but not if it has left the zone it was in. 
+> 603.7a Delayed triggered abilities are created during the resolution of spells or abilities, as the result of a replacement effect being applied, or as a result of a static ability that allows a player to take an action.
 
-One resolving instruction ("Sacrifice them ...") creates one delayed triggered ability, which sacrifices both tokens when it resolves.
+> 603.7c A delayed triggered ability that refers to a particular object still affects it even if the object changes characteristics. However, if that object is no longer in the zone it's expected to be in at the time the delayed triggered ability resolves, the ability won't affect it.
+
+One resolving instruction ("Sacrifice them ...") creates one delayed triggered ability (603.7a), which sacrifices both tokens when it resolves (603.7c: it refers to the two particular tokens).
 
 ## What happens
 
@@ -22,9 +24,10 @@ One resolving instruction ("Sacrifice them ...") creates one delayed triggered a
 end step two triggers go on the stack and the controller is asked to order them. `CreateTokenEffect.removeTokensCreatedAt`
 already builds the right shape: one `SacrificeTargetEffect` over `FixedTargets` of every created token.
 
-Same pattern, other cards (a `getLastAddedTokenIds` loop that registers a delayed trigger per token for an instruction
-that created several): Firecat Blitz (X tokens), Force of Rage (two, at your next upkeep), Thatcher Revolt (three),
-Waylay (three, next cleanup step). Not fixed here.
+Same pattern, other cards: a census of `getLastAddedTokenIds` loops that call `addDelayedTriggeredAbility` finds Firecat
+Blitz (X tokens, "Exile them at the beginning of the next end step") as the only other card that splits one multi-token
+instruction per token. Not fixed here. Force of Rage, Thatcher Revolt and Waylay already register one delayed ability over
+`FixedTargets` of every created token, the shape this fix uses.
 
 ## Repro
 
