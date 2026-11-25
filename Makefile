@@ -100,7 +100,11 @@ GO_TEST_FLAGS ?= -p=2
 # instead of one per token (CR 603.7a: "Sacrifice them" is one instruction). ChandraAcolyteOfFlameTest fails before
 # (Missing CHOICE def ... Triggered list (total 2)) and passes after; the card now matches gorge and Forge at the
 # beginning of the end step (one ability on the stack).
-XMAGE_REF  ?= 98052067d47006cdc887f357dcde286eddc1d5ec
+# 8ddb51df0c = 98052067d4 + Extraordinary Journey resolves with no targets when X is 0 ("exile up to X target
+# creatures", CR 601.2c, 115.6): XTargetsCountAdjuster leaves the ability's target list empty and the effect read
+# getTargets().get(0), throwing IndexOutOfBoundsException. ExtraordinaryJourneyTest.testXZeroResolvesWithNoTargets
+# fails before (Index 0 out of bounds for length 0) and passes after; card behaviour changes only at X = 0.
+XMAGE_REF  ?= 8ddb51df0c8640cf6e0c3e4089f27fbb83661c4d
 # The out-of-tree oracle builds default to gitignored directories here. They run
 # to several GB, so point these at a shared disk to reuse one build across clones.
 XMAGE_ORACLE_DIR ?= .oracle-build/xmage
