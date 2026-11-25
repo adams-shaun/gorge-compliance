@@ -469,7 +469,16 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # xs:XP:hurl-through-hell:cast:s1 request and requires p1's Shield Sphere on the stack (controller p0) at step 7 with no
 # harness row. Driver-only; cardsfolder/tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch
 # fix/xp-forge-driver-mayplay-cast.
-FORGE_ORACLE_REF ?= 244c590848288b35a4b6a0a2dd0da122a1f5dca9
+# 3e6bd830a6f = 244c5908482 + gorge's discard_may election (xproof cluster xpt-e4d29b48, Evie Frye and Glacial Dragonhunt's
+# DB$ Discard | Mode$ TgtChoose | Optional$ True | NumCards$ 1): Forge asks chooseCardsToDiscardFrom for 0..1, gorge poses a yes/no
+# election (effDiscardTgtChoose, resume discard_may) and then the card pick, skipped when forced. ScriptedController.chooseCardsToDiscardFrom
+# took only the card pick, so the yes was a leftover and the AI discarded ("Missing discard answer ... 0..1 to pick"). It now
+# takes a queued discard_may yes/no for a min 0 ask first: no is an empty pick, yes is the 1..max pick (a lone card is forced,
+# otherwise gorge's logged discard pick); AnyNumber$ has no election and is unchanged. DiscardMayElectionTest (yes with a lone
+# card, no, yes then gorge's card pick) fails without the change and the full driver suite (198 tests) is green on it;
+# scripts/forge-oracle-test-discard-may-election.sh (make forge-driver-tests) runs it. Driver-only; cardsfolder/tokenscripts
+# unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-discard-may-election.
+FORGE_ORACLE_REF ?= 3e6bd830a6ff707aaee2a7eb321f4f86ac4d8f84
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.
