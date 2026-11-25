@@ -149,3 +149,102 @@ class DocsStatus(Base):
         r = self.cli(home, "ingest", "status", "--meta", fm)
         self.assertNotEqual(r.returncode, 0)
         self.assertEqual(self.cli(home, "validate").returncode, 0)
+
+
+class DocsSets(Base):
+    """export_sets: sets.json, writers.json and the finished sets-carddb.md snippet from keyproof."""
+
+    def fixture(self, with_status=True):
+        from .test_query import keyproof_row, OID_A, OID_B, OID_C
+        a = self.machine("a", init=True)
+        a.put("sets", [{"set_code": "lea", "name": "Limited Edition Alpha", "release_date": "1993-08-05", "set_type": "core"},
+                       {"set_code": "2ed", "name": "Unlimited | Edition", "release_date": "1993-12-01", "set_type": "core"},
+                       {"set_code": "3ed", "name": "Revised", "release_date": "1994-04-01", "set_type": "core"}],
+              writer="mtgjson")
+        a.put("printings", [
+            {"printing_id": "p1", "oracle_id": OID_A, "set_code": "lea", "collector_number": "1", "rarity": "common"},
+            {"printing_id": "p1b", "oracle_id": OID_A, "set_code": "lea", "collector_number": "1b", "rarity": "common"},
+            {"printing_id": "p2", "oracle_id": OID_A, "set_code": "2ed", "collector_number": "1", "rarity": "common"},
+            {"printing_id": "p3", "oracle_id": OID_B, "set_code": "lea", "collector_number": "2", "rarity": "common"},
+            {"printing_id": "p4", "oracle_id": OID_C, "set_code": "2ed", "collector_number": "3", "rarity": "common"},
+            {"printing_id": "p5", "oracle_id": OID_C, "set_code": "3ed", "collector_number": "3", "rarity": "common"},
+        ], writer="catalogue")
+        a.put("keyproof", [
+            keyproof_row(OID_A, "cast", "agreed"), keyproof_row(OID_A, "f0/a0", "agreed"),
+            keyproof_row(OID_B, "cast", "owed", reason="no-generator"),
+            keyproof_row(OID_B, "f0/a0", "diagnosed", sig="a1b2c3d4e5f6", cite="CR 702.4b"),
+            keyproof_row(OID_C, "cast", "diverged", diff_items=1),
+        ], writer="xproof")
+        if with_status:
+            a.put("status", [{"oracle_id": OID_A, "level": "A", "verdict": "agree", "gorge_pin": "8f7095353a64",
+                              "measured": "2026-11-19", "writer": "loop"},
+                             {"oracle_id": OID_C, "level": "B", "verdict": "diverge", "gorge_pin": "8f7095353a64",
+                              "measured": "2026-11-19", "writer": "loop"}], writer="loop")
+        db = os.path.join(self.tmp, "sets.sqlite")
+        build_mod.build(db, self.schema, a.dir, None, {})
+        return db
+
+    def test_sets_json_counts_abilities_per_set_and_a_set_without_rows_is_absent(self):
+        db = self.fixture()
+        out = os.path.join(self.tmp, "o")
+        self.assertEqual(docsstatus.export_sets(db, out), 3)
+        got = json.loads(read(os.path.join(out, "sets.json")))
+        self.assertEqual(list(got), ["2ed", "3ed", "lea"])  # sorted
+        z = {"agreed": 0, "owed": 0, "diagnosed": 0, "diverged": 0, "excluded": 0}
+        # lea: card A twice printed there counts once; 2ed: A's two keys plus C's diverged one
+        self.assertEqual(got["lea"], {"xproof": dict(z, agreed=2, owed=1, diagnosed=1), "proven_cards": 1})
+        self.assertEqual(got["2ed"], {"xproof": dict(z, agreed=2, diverged=1), "proven_cards": 1})
+        self.assertEqual(got["3ed"], {"xproof": dict(z, diverged=1), "proven_cards": 0})
+        self.assertNotIn("dirac_supported", got["lea"])
+        # a set with no keyproof row at all is absent, never all zero
+        a = self.machine("a")
+        a.put("sets", [{"set_code": "alch", "name": "Alchemy", "release_date": "2020-01-01", "set_type": "alchemy"}],
+              writer="mtgjson")
+        db2 = os.path.join(self.tmp, "more.sqlite")
+        build_mod.build(db2, self.schema, a.dir, None, {})
+        docsstatus.export_sets(db2, out + "2")
+        self.assertNotIn("alch", json.loads(read(os.path.join(out + "2", "sets.json"))))
+
+    def test_proven_cards_is_omitted_when_the_status_table_has_no_rows(self):
+        out = os.path.join(self.tmp, "o")
+        docsstatus.export_sets(self.fixture(with_status=False), out)
+        got = json.loads(read(os.path.join(out, "sets.json")))
+        for code, ent in got.items():
+            self.assertNotIn("proven_cards", ent, code)
+        md = read(os.path.join(out, "sets-carddb.md"))
+        self.assertNotIn("Proven", md)
+
+    def test_writers_json_and_the_markdown_snippet_sections(self):
+        db = self.fixture()
+        out = os.path.join(self.tmp, "o")
+        docsstatus.export_sets(db, out)
+        writers = json.loads(read(os.path.join(out, "writers.json")))
+        self.assertTrue(writers)
+        self.assertEqual(writers, sorted(writers, key=lambda w: (w["writer"], w["table"])))
+        self.assertIn({"writer": "xproof", "table": "keyproof", "ran": "2026-11-19"}, writers)
+        for w in writers:
+            self.assertEqual(set(w), {"writer", "table", "ran"})
+        md = read(os.path.join(out, "sets-carddb.md"))
+        for name in ("headline", "sets", "freshness"):
+            self.assertEqual(md.count("<!-- --8<-- [start:%s] -->\n" % name), 1, name)
+            self.assertLess(md.index("[start:%s]" % name), md.index("[end:%s]" % name))
+        self.assertIn("| `lea` | Limited Edition Alpha | 2 | 1 | 0 | 1 |", md)
+        self.assertIn("| `2ed` | Unlimited \\| Edition | 2 | 0 | 1 | 1 |", md)
+        self.assertIn("| Agreed | 4 |", md)
+        self.assertIn("xproof (keyproof) 2026-11-19", md)
+
+    def test_rerun_over_unchanged_inputs_changes_no_byte(self):
+        db = self.fixture()
+        a, b = os.path.join(self.tmp, "r1"), os.path.join(self.tmp, "r2")
+        docsstatus.export_sets(db, a)
+        docsstatus.export_sets(db, b)
+        docsstatus.export_sets(db, a)
+        for n in ("sets.json", "writers.json", "sets-carddb.md"):
+            self.assertEqual(read(os.path.join(a, n)), read(os.path.join(b, n)), n)
+
+    def test_cli_verb(self):
+        db = self.fixture()
+        out = os.path.join(self.tmp, "cli")
+        r = self.cli(os.path.join(self.tmp, "h"), "docs-sets", "--db", db, "--out", out)
+        self.assertEqual(r.returncode, 0, r.stderr)
+        self.assertTrue(os.path.exists(os.path.join(out, "sets-carddb.md")))

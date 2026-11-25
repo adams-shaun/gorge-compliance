@@ -181,6 +181,11 @@ def _status_column(conn, key):
     raise QueryError("search: status has no column %r in this build" % key)
 
 
+# status verdict values that count as the engine agreeing; shared with docsstatus (per-set proven cards)
+STATUS_AGREE = ("agree", "supported", "pass", "ok")
+_STATUS_AGREE_SQL = "(" + ",".join("'%s'" % v for v in STATUS_AGREE) + ")"
+
+
 def _status_value_column(conn):
     """The column that holds a status verdict: v1 calls it verdict, later writers may call it
     status or outcome. Every caller goes through this one name so a schema addition cannot be
@@ -317,7 +322,7 @@ def run_blockers(conn, args, out):
                     where.append("(NOT EXISTS (SELECT 1 FROM status s WHERE s.oracle_id=c.oracle_id "
                                  "AND s.engine=?) OR EXISTS (SELECT 1 FROM status s WHERE "
                                  "s.oracle_id=c.oracle_id AND s.engine=? AND lower(s.%s) NOT IN "
-                                 "('agree','supported','pass','ok')))" % q(value))
+                                 "%s))" % (q(value), _STATUS_AGREE_SQL))
                     params += [engine, engine]
             elif value is None:
                 # no status rows to judge by: every card is an unmeasured blocker
@@ -326,7 +331,7 @@ def run_blockers(conn, args, out):
                 # v1 status has no engine column: a card with no agreeing status row is a blocker.
                 where.append("(NOT EXISTS (SELECT 1 FROM status s WHERE s.oracle_id=c.oracle_id) "
                              "OR EXISTS (SELECT 1 FROM status s WHERE s.oracle_id=c.oracle_id "
-                             "AND lower(s.%s) NOT IN ('agree','supported','pass','ok')))" % q(value))
+                             "AND lower(s.%s) NOT IN %s))" % (q(value), _STATUS_AGREE_SQL))
         else:
             raise QueryError("blockers: --engine wants dirac, gorge, proven or cert:<level>, got %r" % engine)
     by = args.by or ("decks" if _has_table(conn, "decks") else "printings")
