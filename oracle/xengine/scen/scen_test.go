@@ -679,11 +679,13 @@ func TestStartspellcasttriggers(t *testing.T) {
 		{card: "Ambitious Augmenter", key: "f0/t1", reason: "no-generator:trigger:SpellCast:filter"},        // Increment$
 	})
 	// A non-Self TargetsValid ("a spell that targets a creature you
-	// control") is the other lane's start-not-exercised shape, not this
-	// ticket's. The self branch must leave those keys alone: they generated
-	// a start at develop and still must.
+	// control") and a self-target shape the heroic arm cannot meet
+	// (Beamsplitter Mage's CanTargetOtherCondition) are the other lane's
+	// start-not-exercised class, not this ticket's. The heroic arm must
+	// leave those keys alone: they generated a start at develop and still
+	// must, rather than becoming a new :filter refusal.
 	reg, b := testBuilder(t)
-	for _, card := range []string{"Feather, the Redeemed", "Leyline of Resonance", "Orvar, the All-Form"} {
+	for _, card := range []string{"Feather, the Redeemed", "Leyline of Resonance", "Orvar, the All-Form", "Beamsplitter Mage"} {
 		res, err := Generate(reg, b, card, "f0/t0", Options{Prefer: "start"})
 		if err != nil {
 			t.Errorf("%s: %v", card, err)

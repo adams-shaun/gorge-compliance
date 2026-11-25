@@ -388,9 +388,9 @@ func targetCarrier(reg *cards.Registry, b *certdeck.Builder, card, filter string
 // bareCastParams are the SpellCast trigger params a start accounts for
 // directly: presentation, when the cast happens (spellStart reads
 // TriggerZones, ValidActivatingPlayer, OpponentTurn and
-// ActivatorThisTurnCast), or the target shape the heroic arm reads
-// (TargetsValid). Every other param narrows the cast, its target or a
-// fire-time condition -- ValidSA/ValidSAonCard/Increment, IsSingleTarget,
+// ActivatorThisTurnCast), or the target shapes the heroic arm reads
+// (TargetsValid, IsSingleTarget). Every other param narrows the cast, its
+// target or a fire-time condition -- ValidSA/ValidSAonCard/Increment,
 // CheckSVar/SVarCompare, IsPresent/PresentCompare, a spend gate -- and the
 // inert carrier (Memnite) does not meet it. This is deliberately a whitelist:
 // a gate param added to the corpus (or a new keyword expansion's marker) is
@@ -490,11 +490,10 @@ func spellStart(reg *cards.Registry, b *certdeck.Builder, face *cards.Face, card
 	filter := trig.Params["ValidCard"]
 	var name string
 	switch {
-	case targetSelf(trig):
+	case targetSelf(trig) && bareCast(trig, true):
 		// "whenever you cast a spell that targets this": the caster's own
-		// targeter is the carrier and the card is its target. A second
-		// spell-shape gate would still have to be met by that carrier.
-		if caster != 0 || !face.IsCreature() || !bareCast(trig, true) {
+		// targeter is the carrier and the card is its target.
+		if caster != 0 || !face.IsCreature() {
 			return none + ":filter"
 		}
 		name = targetCarrier(reg, b, card, filter, keep)
