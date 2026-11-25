@@ -1837,6 +1837,48 @@ func TestStackBaitTiming(t *testing.T) {
 	}
 }
 
+// TestStackBaitTimingAtCallSite drives the timing guard through
+// focusPlayRefusal, not castableWithBait alone: the same counterspell as an
+// instant is offered a bait, as a sorcery or a non-flash permanent spell it
+// keeps the refusal (CR 117.1a: it cannot be cast with the bait on the stack),
+// and with Flash it is offered one again. No corpus card is a non-instant that
+// needs a stack target, so the face is built from Absorb's abilities.
+func TestStackBaitTimingAtCallSite(t *testing.T) {
+	reg, b := testBuilder(t)
+	res, err := Generate(reg, b, "Absorb", "cast", Options{Prefer: "start"})
+	if err != nil || res.Path != PathStart || res.Start == nil {
+		t.Fatalf("Absorb: %+v, %v, want a start file", res, err)
+	}
+	c, ok := reg.Lookup("Absorb")
+	if !ok || len(c.Faces) == 0 {
+		t.Fatal("Absorb is not a card")
+	}
+	base := c.Faces[0]
+	for _, tc := range []struct {
+		name     string
+		types    []string
+		keywords []string
+		want     string
+	}{
+		{"instant", []string{"Instant"}, nil, ""},
+		{"sorcery", []string{"Sorcery"}, nil, reasonNeedsStackTarget},
+		{"creature", []string{"Creature"}, nil, reasonNeedsStackTarget},
+		{"flash creature", []string{"Creature"}, []string{"Flash"}, ""},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			face := &cards.Face{Name: base.Name, ManaCost: base.ManaCost, Types: tc.types,
+				Keywords: tc.keywords, Abilities: base.Abilities, SVars: base.SVars}
+			got, err := focusPlayRefusal(reg, b, face, nil, "Absorb", res.Start)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if got != tc.want {
+				t.Errorf("focusPlayRefusal(%s Absorb) = %q, want %q", tc.name, got, tc.want)
+			}
+		})
+	}
+}
+
 // TestTokenStartRefusesUnmappedKind: a token kind XMage's setup token table
 // cannot place is refused at generation with the clean steps-needed:token
 // refusal, not written as a start that lowers to token_unmapped under -xmage.
