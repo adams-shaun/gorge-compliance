@@ -679,6 +679,51 @@ public final class ScenarioReplayCastModeTest {
                 + " with that door unlocked");
     }
 
+    /** xproof xpt-ab0afb50: gorge casts Thranduil's Silvan Rally ({1}{G/U}{G/U})
+     * from a GGG pool, but XMage's Thranduil class implements no Adventure
+     * half. The driver used to cast the creature front ({2}{G/U}{G/U}), which
+     * the pool cannot cover, so XMage auto-tapped a fourth Forest gorge left
+     * untapped. The step must be a loud harness error, never that cast, and
+     * the mode keeps replaying the cards that do carry their half. */
+    private static void adventureAltWithoutImplementedHalfIsRejected() throws Exception {
+        equal("null", String.valueOf(ScenarioReplay.missingSpellHalfError("adventure_alt", "Bonecrusher Giant")),
+                "an implemented Adventure half replays");
+        equal("null", String.valueOf(ScenarioReplay.missingSpellHalfError("omen_alt", "Purging Stormbrood")),
+                "an implemented Omen half replays");
+        equal("null", String.valueOf(ScenarioReplay.missingSpellHalfError("adventure_alt", "Stomp")),
+                "a step naming the half itself replays");
+        equal("null", String.valueOf(ScenarioReplay.missingSpellHalfError("", "Thranduil, Sindarin Liege")),
+                "a plain cast is never rejected");
+        String err = ScenarioReplay.missingSpellHalfError("adventure_alt", "Thranduil, Sindarin Liege");
+        if (err == null || !err.contains("implements no Adventure/Omen spell half")) {
+            throw new AssertionError("Thranduil's missing half was not rejected: " + err);
+        }
+        JsonObject sc = JsonParser.parseString("{name:'Silvan Rally',card:'Thranduil, Sindarin Liege',"
+                + "setup:{p0:{battlefield:['Forest','Forest','Forest','Forest'],hand:['Thranduil, Sindarin Liege']}},"
+                + "steps:[{op:'activate',seat:0,card:'p0:Forest',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Forest#2',ability_index:0},"
+                + "{op:'activate',seat:0,card:'p0:Forest#3',ability_index:0},"
+                + "{op:'cast',seat:0,card:'p0:Thranduil, Sindarin Liege',cast_mode:'adventure_alt',"
+                + "answers:[{kind:'choose',pick:['Pay G']},{kind:'choose',pick:['Pay G']}]}],"
+                + "xmage_ability:['{T}: Add {G}.','{T}: Add {G}.','{T}: Add {G}.',''],"
+                + "payment:['','','','GGG']}").getAsJsonObject();
+        JsonObject res = new ScenarioReplay().replayOnce(sc, false);
+        String harness = res.has("harness") ? res.get("harness").getAsString() : "";
+        if (!harness.contains("implements no Adventure/Omen spell half")) {
+            throw new AssertionError("the Silvan Rally cast was not a harness error: " + res);
+        }
+        JsonArray snaps = res.getAsJsonArray("snapshots");
+        for (JsonElement e : snaps) {
+            for (JsonElement s : e.getAsJsonObject().getAsJsonArray("stack")) {
+                if ("Thranduil, Sindarin Liege".equals(s.getAsJsonObject().get("source").getAsString())) {
+                    throw new AssertionError("the creature front was cast at face value: " + res);
+                }
+            }
+        }
+        System.out.println("PASS adventure_alt on a card whose XMage class lacks the half is a harness error,"
+                + " not a front-face cast that auto-taps a fourth Forest");
+    }
+
     /** CR 712.12: a modal double-faced card may be cast with its back face
      * up. gorge records that cast as cast_mode "modal_spell" and names the
      * parent card ("p0:Egon, God of Death"), the farm's shape for an alternate
@@ -727,6 +772,7 @@ public final class ScenarioReplayCastModeTest {
     public static void main(String[] args) throws Exception {
         String fixtures = args.length > 0 ? args[0]
                 : "oracle/xmageoracle/test/org/mage/test/oracle/fixtures";
+        adventureAltWithoutImplementedHalfIsRejected();
         modalSpellCastsBackFace();
         roomAltCastsSecondDoor();
         evokedCastPaysEvokeCost();

@@ -6403,6 +6403,28 @@ public class ScenarioReplay extends CardTestPlayerBase {
         return half == null || half.isEmpty() || half.equals(name) ? null : half;
     }
 
+    /** Why an "adventure_alt"/"omen_alt" step cannot be replayed, or null when
+     * it can. The mode casts the card's inset spell half; an XMage card class
+     * that does not implement that half (The Hobbit's Thranduil, Sindarin
+     * Liege has no Silvan Rally) has nothing to cast but the creature front,
+     * at the front's own cost. Casting it anyway paid a larger cost than
+     * gorge's spell half, fell back to auto-payment once the recorded pool
+     * was spent and tapped a land gorge left untapped: a divergence the
+     * harness invented, not an engine difference. A step that already names
+     * the half (the name is no whole card in the repository) still replays. */
+    static String missingSpellHalfError(String mode, String xmageName) {
+        if (!"adventure_alt".equals(mode) && !"omen_alt".equals(mode)) {
+            return null;
+        }
+        CardInfo info = CardRepository.instance.findCard(xmageName, true);
+        Card c = info == null ? null : info.createCard();
+        if (c == null || c instanceof CardWithSpellOption) {
+            return null;
+        }
+        return "cast_mode " + mode + ": XMage's " + xmageName
+                + " implements no Adventure/Omen spell half to cast";
+    }
+
     /** The XMage cast name an "alt" cast mode resolves to, or null when the
      * mode does not name one of the card's alternate faces. Adventure and
      * Omen halves are inset spell cards (spellOptionCastName); a Room is a
@@ -8794,6 +8816,12 @@ public class ScenarioReplay extends CardTestPlayerBase {
                 // that already names the half falls through unchanged.
                 String refCard = refName(str(st, "card"));
                 String halfName = altCastHalfName(mode, xmageSpelling(refCard));
+                if (halfName == null) {
+                    String halfErr = missingSpellHalfError(mode, xmageSpelling(refCard));
+                    if (halfErr != null) {
+                        throw new IllegalArgumentException(halfErr);
+                    }
+                }
                 String cardName = halfName != null ? halfName : castSpelling(refCard);
                 if (kickedCast) {
                     String kickedErr = kickedCastShapeError(refCard);
