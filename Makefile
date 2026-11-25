@@ -643,7 +643,17 @@ FORGE_REF  ?= $(shell awk '/^FORGE_REF/ {print $$3}' $(GORGE_MODULE_DIR)/Makefil
 # scripts/forge-oracle-test-twopiles-one-card-split.sh (make forge-driver-tests) runs it. Driver-only; die-roll code,
 # cardsfolder and tokenscripts unchanged (same as FORGE_REF ff076d4432). The empty-face chooseCardName fix (2b591baf9c) is
 # carried: ChooseCardNameEmptyFacesTest, OrderCardsTest, TriggerOrderEvokeLabelTest and ForcedDieRollTest are green on it.
-FORGE_ORACLE_REF ?= 1da9dc5c96c3789a60eb068c8ac6d973e4329752
+# 65d8060f39ba = 1da9dc5c96c plus the empty Optional$ Animate confirm (xproof cluster xpt-fc2992c4, Sita Varma, Masked Racer's Exhaust
+# with X = 0 and no other creature): "you may have the base power and toughness of each other creature you control become ..." with no
+# other creature is an election with no board effect either way (CR 608.2d), so gorge logs no ask, while Forge's AnimateEffect still
+# calls confirmAction("It has base power and toughness N/N until end of turn.") and the driver strict-missed with nothing queued.
+# ScriptedController.emptyOptionalAnimateConfirm answers no, noted as "empty animate confirm", when the ability is an Optional$ Animate,
+# no yes/no is queued for the seat and none of the cards AnimateEffect would animate (its targets, else Defined$, plus
+# ThisDefinedAndTgts$) is on the battlefield and not phased out; a target spell or any such card keeps the strict miss.
+# EmptyOptionalAnimateConfirmTest (fixtures/animate: the find, and the same request with a Grizzly Bears) fails before it with the exact
+# miss; scripts/forge-oracle-test-empty-optional-animate.sh (make forge-driver-tests) runs it. Driver-only; die-roll code, cardsfolder
+# and tokenscripts unchanged (same as FORGE_REF ff076d4432). Fork branch fix/xp-forge-driver-empty-optional-animate.
+FORGE_ORACLE_REF ?= 65d8060f39ba8a34193c2a9b593ce363d647726e
 FORGE_ORACLE_DIR ?= .oracle-build/forge
 
 # Out-of-tree follower builds (Manabrew, ...) live under one cache directory.

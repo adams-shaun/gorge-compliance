@@ -7,8 +7,10 @@ import (
 
 	"github.com/adams-shaun/gorge/bots/botpolicy"
 	"github.com/adams-shaun/gorge/bots/heuristic"
+	"github.com/adams-shaun/gorge/engine/cards"
 	"github.com/adams-shaun/gorge/engine/decision"
 	"github.com/adams-shaun/gorge/engine/rules"
+	"github.com/adams-shaun/gorge/engine/rules/pay"
 	"github.com/adams-shaun/gorge/engine/state"
 	"github.com/adams-shaun/gorge/engine/view"
 )
@@ -39,6 +41,10 @@ type focusState struct {
 	objs map[state.ObjID]bool
 	done bool
 	n    int // actions taken
+	// manaPick is the mana ability a focus "activate" answer chose, while
+	// the engine may still ask which of the source's mana abilities it
+	// activates (manaChoice); nil otherwise.
+	manaPick *cards.SA
 }
 
 // took records one focus action, done once the seat has taken Times of them.
@@ -144,6 +150,56 @@ func (s *focusState) manaFor(d decision.Decision) int {
 	return -1
 }
 
+// manaAbility is the focus ability of obj when it is a mana ability, else
+// nil. gorge offers a mana ability at priority as the source's one
+// "activate" option (CR 605.3a), never as an "ability" option carrying the
+// ability's index, so an "ability" focus whose ability is a mana ability is
+// taken through that option, and manaChoice answers the follow-up choice of
+// which of the source's mana abilities it is.
+func (s *focusState) manaAbility(obj state.ObjID) *cards.SA {
+	if s.f.Kind != "ability" || s.e == nil {
+		return nil
+	}
+	o := s.e.G.Obj(obj)
+	if o == nil || o.Face() == nil || s.f.Ability < 0 || s.f.Ability >= len(o.Face().Abilities) {
+		return nil
+	}
+	if ma := o.Face().Abilities[s.f.Ability]; cards.IsManaAbilitySA(ma) {
+		return ma
+	}
+	return nil
+}
+
+// manaChoice is, for the engine's choice among a focus source's mana
+// abilities (a KChoose of "mana" options), the option of ma: the one whose
+// label is ma's, else the one whose index is ma's ordinal among the face's
+// mana abilities; -1 when d is no such choice.
+func (s *focusState) manaChoice(d decision.Decision, ma *cards.SA) int {
+	if d.Kind != decision.KChoose || int(d.Player) != s.f.Seat || !s.objs[d.Source] {
+		return -1
+	}
+	label := pay.ManaAbilityLabel(ma, pay.ChosenProducedColour(s.e.G, d.Source))
+	for i, o := range d.Options {
+		if o.Kind == "mana" && o.Label == label {
+			return i
+		}
+	}
+	ord := 0
+	if o := s.e.G.Obj(d.Source); o != nil && o.Face() != nil {
+		for _, a := range o.Face().Abilities[:s.f.Ability] {
+			if cards.IsManaAbilitySA(a) {
+				ord++
+			}
+		}
+	}
+	for i, o := range d.Options {
+		if o.Kind == "mana" && o.Ability == ord {
+			return i
+		}
+	}
+	return -1
+}
+
 // open reports whether the game has reached turn 1's first precombat main
 // phase: the span a start item replays begins there, so an action taken
 // earlier (an upkeep activation) would be missing from it.
@@ -157,7 +213,17 @@ func (s *focusState) open() bool {
 // before main 1 and leave the forced line unaffordable.
 func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decision.Intent, error) {
 	st := b.st
-	if err != nil || st.done || st.f.Kind == "" {
+	if err != nil {
+		return in, err
+	}
+	if ma := st.manaPick; ma != nil {
+		st.manaPick = nil
+		if i := st.manaChoice(d, ma); i >= 0 {
+			in.Choices, in.Payment = []int{i}, nil
+			return in, nil
+		}
+	}
+	if st.done || st.f.Kind == "" {
 		return in, err
 	}
 	if st.f.Kind == "block" {
@@ -176,6 +242,10 @@ func (b focusBot) act(d decision.Decision, in decision.Intent, err error) (decis
 			switch st.f.Kind {
 			case "ability":
 				ok = o.Kind == "ability" && o.Ability == st.f.Ability
+				if ma := st.manaAbility(o.Obj); ma != nil && o.Kind == "activate" {
+					ok = true
+					st.manaPick = ma
+				}
 			case "cast":
 				ok = o.Kind == "cast" && (st.f.Mode == "" || o.Mode == st.f.Mode)
 			case "land":

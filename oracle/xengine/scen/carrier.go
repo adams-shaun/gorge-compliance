@@ -276,6 +276,11 @@ func parseFilter(s string) []filterAlt {
 					tests = append(tests, func(f *cards.Face) bool { return len(faceColours(f)) > 1 })
 					continue
 				}
+				if kw, ok := strings.CutPrefix(p, "with"); ok && evergreenKeywords[kw] {
+					// withFlying, withDefender: carriers hold only evergreen keywords
+					tests = append(tests, func(f *cards.Face) bool { return f.HasKeyword(kw) })
+					continue
+				}
 				if l, ok := colourWord[p]; ok {
 					tests = append(tests, func(f *cards.Face) bool { return hasShard(f.ManaCost, l) })
 					continue
